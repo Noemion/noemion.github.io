@@ -4,27 +4,23 @@ title: "当前项目阶段 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 当前项目阶段"
 permalink: "/development/current-stage.html"
+timeline_data: "project_timeline"
 ---
+{% assign timeline = site.data[page.timeline_data] %}
+{% assign current_stage_matches = timeline.items | where: "id", timeline.current_stage_id %}
+{% assign current_stage = current_stage_matches | first %}
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发</a><span aria-hidden="true">/</span><span>当前项目阶段</span></nav>
   <div class="hero"><h1>当前项目阶段</h1><p>说明 Noemion 现在处于哪里、哪些边界已经确认，以及进入下一阶段前还必须取得什么证据。</p><div class="badges"><span class="badge">Current Stage</span><span class="badge">Design</span><span class="badge">Evidence Gated</span></div></div>
   <section>
     <div class="current-stage-panel">
-      <div class="current-stage-state"><span>CURRENT</span><strong>规范与安全二进制核心设计</strong></div>
-      <p>Noemion 当前仍处于设计阶段。工作重点是收敛 GSIR、GOBJ、SSO 的最小规范边界，并为安全 Reader/Writer、验证器、合法样本和畸形语料定义可以实现和测试的契约；尚未发布可执行工具、稳定 ABI 或正式规范制品。</p>
-      <dl><div><dt>当前性质</dt><dd>规范与核心设计</dd></div><div><dt>当前焦点</dt><dd>可测试条款与拒绝路径</dd></div><div><dt>发布结论</dt><dd>尚无稳定制品</dd></div></dl>
+      <div class="current-stage-state"><span>CURRENT</span><strong>{{ current_stage.title | escape }}</strong></div>
+      <p>{{ timeline.current.summary | escape }}</p>
+      <dl>{% for fact in timeline.current.facts %}<div><dt>{{ fact.label | escape }}</dt><dd>{{ fact.value | escape }}</dd></div>{% endfor %}</dl>
     </div>
   </section>
   <section>
-    <h2>项目进度时间线</h2>
-    <p class="callout"><strong>时间线不是完成百分比：</strong>阶段只在进入条件和退出证据可以核对时改变。当前没有足够依据承诺具体日期，因此不展示虚构进度或发布日期。</p>
-    <ol class="project-timeline" aria-label="Noemion 项目进度时间线">
-      <li data-stage-state="confirmed"><div class="timeline-marker" aria-hidden="true"></div><div class="timeline-copy"><span>已确认</span><h3>问题、范围与信任原则</h3><p>项目定位、Strict 无模型边界、模型输出不可信、对象输入不可信、歧义优先保留等原则已经进入公开项目定义。</p></div></li>
-      <li data-stage-state="current"><div class="timeline-marker" aria-hidden="true"></div><div class="timeline-copy"><span>当前阶段</span><h3>规范与安全二进制核心设计</h3><p>正在收敛对象语义、格式边界、错误语义、资源限制、checked arithmetic、不变量以及合法与畸形样本的最低集合。</p></div></li>
-      <li data-stage-state="next"><div class="timeline-marker" aria-hidden="true"></div><div class="timeline-copy"><span>下一阶段</span><h3>安全二进制核心实现与验证</h3><p>在规范条款和 ADR 足够稳定后，实现 Checked Reader/Writer、结构验证器、Round-trip、Malformed 与 Fuzz 拒绝路径。</p></div></li>
-      <li data-stage-state="future"><div class="timeline-marker" aria-hidden="true"></div><div class="timeline-copy"><span>未来阶段</span><h3>文本 IR、Strict 编译与链接</h3><p>逐步进入规范化文本往返、确定性 Compiler Core、符号解析、重定位、归档、依赖闭包和链接一致性。</p></div></li>
-      <li data-stage-state="future"><div class="timeline-marker" aria-hidden="true"></div><div class="timeline-copy"><span>未来阶段</span><h3>可信装载、发布与模型辅助</h3><p>只有前序安全核心和一致性门通过后，才评估签名装载、最小 Runtime、SSO 发布以及提交不可信候选的 Assisted 前端。</p></div></li>
-    </ol>
+    {% include project-timeline.html timeline=timeline %}
   </section>
   <section>
     <h2>当前阶段的进入条件</h2>

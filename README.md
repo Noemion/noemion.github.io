@@ -13,10 +13,12 @@
 
 - `_layouts/default.html`：全站 HTML 外壳，负责语言、标题、共享 CSS/JavaScript、页面角色和正文插槽。
 - `_layouts/manual.html`：手册布局，负责面包屑、Hero、正文容器、动态索引和上下页导航，并继承默认外壳。
-- `_includes/site-header.html`：品牌入口与空目录容器；具体目录由 `assets/directory.js` 按当前路由生成。
+- `_includes/site-header.html`：品牌入口与空目录容器；具体目录由 `assets/directory.js` 按当前路由生成，项目阶段入口从统一时间线配置读取。
+- `_includes/project-timeline.html`：通用项目时间线渲染器，接收页面指定的数据对象并生成阶段列表。
 - `_includes/manual-directory-data.html`：构建时扫描所有带 `manual_id` 的页面，并向目录引擎提供动态清单。
 - `_includes/site-footer.html`：根据页面 Front Matter 生成模块化页脚。
 - `_data/manuals.yml`：登记手册级名称、根路由、上级入口、面包屑和分组，不逐页复制目录链接。
+- `_data/project_timeline.yml`：项目阶段、当前状态摘要和页头阶段入口的唯一人工配置源。
 - 普通正式 `.html` 使用 `layout: default` 并编写职责对应的 `<main>`；手册 `.md` 使用 `layout: manual` 并只编写 Markdown 正文，公开文件名由 `permalink` 确定。
 - `assets/`：继续维护现有视觉、目录引擎、动画和图形资源；Jekyll 不改变其内容。
 
@@ -55,6 +57,12 @@ badges: ["Documentation"]
 新建一套手册时，先在 `_data/manuals.yml` 登记手册级信息与允许的分组；已有手册新增专题不修改该数据文件。`manual_order` 在同一手册内必须唯一，`manual_group` 必须对应已登记分组。手册首页使用 `manual_is_index: true`，术语索引入口使用 `manual_index_entry: true`。
 
 源码检查运行 `python3 tests/site_quality_test.py`。完整发布检查先运行 `bundle exec jekyll build`，再运行 `python3 tests/site_quality_test.py _site`；GitHub Actions 按同一顺序验证并部署。
+
+### 项目时间线配置与嵌入
+
+项目进度只编辑 `_data/project_timeline.yml`，不在页面或 JavaScript 中重复填写阶段节点。`current_stage_id` 必须对应 `items` 中唯一一个 `state: current` 的条目；可用状态为 `confirmed`、`current`、`next` 和 `future`。`header` 控制全站页头的阶段标签、简短值和目标页面，`current` 控制当前阶段摘要与事实栏，`items` 按书写顺序生成时间线。
+
+需要嵌入时间线的普通 HTML 页面在 Front Matter 中声明 `timeline_data: "project_timeline"`，正文先通过 `site.data[page.timeline_data]` 取得配置，再调用 `{% raw %}{% include project-timeline.html timeline=timeline %}{% endraw %}`。Jekyll 会在每次本地构建和 `main` 分支 Pages 构建时自动生成最终 HTML；不需要手工维护构建产物。新增另一套时间线时可在 `_data/` 新建同结构 YAML，并把页面的 `timeline_data` 改为对应文件名。
 
 ## 站点结构
 

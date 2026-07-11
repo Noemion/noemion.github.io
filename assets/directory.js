@@ -517,9 +517,6 @@
     globalNav.replaceChildren(...globalItems);
   }
 
-  const portalStage = document.querySelector("[data-portal-stage]");
-  if (portalStage) portalStage.href = new URL("development/current-stage.html", siteRoot).href;
-
   const docsRail = document.querySelector("[data-docs-rail]");
   if (docsRail) {
     const railHeader = document.createElement("div");

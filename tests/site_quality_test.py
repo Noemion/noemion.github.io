@@ -507,9 +507,10 @@ def validate_jekyll_sources():
             "<span>导航</span>",
             "global-stage-label",
             "global-stage-value",
-            "<small>当前阶段</small>",
-            "当前项目阶段：规范与安全二进制核心设计",
-            "development/current-stage.html",
+            "site.data.project_timeline",
+            "project_timeline.current_stage_id",
+            "project_timeline.header.href",
+            "current_stage.title",
         ):
             if token not in header_text:
                 errors.append(f"site header missing global navigation contract: {token}")
@@ -652,16 +653,55 @@ def validate_jekyll_sources():
         if len(configured_cover_entries) != 22 or configured_covers != expected_nav_covers:
             errors.append("global navigation entries must route to unique project covers")
 
+    timeline_config = SOURCE_ROOT / "_data/project_timeline.yml"
+    timeline_include = SOURCE_ROOT / "_includes/project-timeline.html"
+    if not timeline_config.exists():
+        errors.append("missing _data/project_timeline.yml")
+    else:
+        timeline_text = timeline_config.read_text()
+        current_id_match = re.search(r"^current_stage_id:\s*([^\s]+)\s*$", timeline_text, re.MULTILINE)
+        item_ids = re.findall(r"^  - id:\s*([^\s]+)\s*$", timeline_text, re.MULTILINE)
+        item_states = re.findall(r"^    state:\s*([^\s]+)\s*$", timeline_text, re.MULTILINE)
+        if current_id_match is None or current_id_match.group(1) not in item_ids:
+            errors.append("project timeline current_stage_id must reference an item")
+        elif not re.search(
+            rf"^  - id:\s*{re.escape(current_id_match.group(1))}\s*$\n    state:\s*current\s*$",
+            timeline_text,
+            re.MULTILINE,
+        ):
+            errors.append("project timeline current_stage_id must reference the current item")
+        if len(item_ids) != len(set(item_ids)):
+            errors.append("project timeline item ids must be unique")
+        if len(item_ids) != len(item_states) or item_states.count("current") != 1:
+            errors.append("project timeline must define exactly one current state")
+        if not set(item_states) <= {"confirmed", "current", "next", "future"}:
+            errors.append("project timeline contains an unsupported state")
+        if "href: /development/current-stage.html" not in timeline_text:
+            errors.append("project timeline header must route to the current stage page")
+    if not timeline_include.exists():
+        errors.append("missing _includes/project-timeline.html")
+    else:
+        timeline_include_text = timeline_include.read_text()
+        for token in (
+            "include.timeline",
+            "timeline.items",
+            'data-stage-id="{{ item.id | escape }}"',
+            'data-stage-state="{{ item.state | escape }}"',
+        ):
+            if token not in timeline_include_text:
+                errors.append(f"project timeline include missing contract: {token}")
+
     current_stage = SOURCE_ROOT / "development/current-stage.html"
     if not current_stage.exists():
         errors.append("missing development/current-stage.html")
     else:
         current_stage_text = current_stage.read_text()
         for token in (
-            "规范与安全二进制核心设计",
+            'timeline_data: "project_timeline"',
+            "site.data[page.timeline_data]",
+            "current_stage.title",
             'class="current-stage-panel"',
-            'class="project-timeline"',
-            'data-stage-state="current"',
+            "include project-timeline.html timeline=timeline",
             "尚未满足的退出证据",
             "进入下一阶段的判断",
         ):
@@ -992,6 +1032,32 @@ def main():
             errors.append("downloads page contains a fake or empty download link")
         if 'data-resource-state="unreleased"' not in text:
             errors.append("downloads page must expose an explicit unreleased state")
+
+    current_stage_output = ROOT / "development/current-stage.html"
+    if current_stage_output.exists():
+        current_stage_output_text = current_stage_output.read_text()
+        rendered_stages = re.findall(
+            r'<li data-stage-id="([^"]+)" data-stage-state="([^"]+)">.*?<h3>([^<]+)</h3>',
+            current_stage_output_text,
+            re.DOTALL,
+        )
+        timeline_source_text = (SOURCE_ROOT / "_data/project_timeline.yml").read_text()
+        configured_stages = re.findall(
+            r"^  - id:\s*([^\s]+)\s*$\n    state:\s*([^\s]+)\s*$\n    label:.*$\n    title:\s*(.+?)\s*$",
+            timeline_source_text,
+            re.MULTILINE,
+        )
+        if rendered_stages != configured_stages:
+            errors.append("current stage output must match configured timeline order, states, and titles")
+        configured_current = [stage for stage in configured_stages if stage[1] == "current"]
+        current_title = configured_current[0][2] if len(configured_current) == 1 else ""
+        for token in (
+            'data-timeline-id="noemion-project-progress"',
+            f'aria-label="当前阶段：{current_title}"',
+            'href="/development/current-stage.html"',
+        ):
+            if token not in current_stage_output_text:
+                errors.append(f"current stage output missing configured value: {token}")
 
     directory_script = ROOT / "assets/directory.js"
     favicon = ROOT / "assets/favicon.svg"

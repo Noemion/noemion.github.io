@@ -1,8 +1,11 @@
+{% assign project_timeline = site.data.project_timeline %}
+{% assign current_stage_matches = project_timeline.items | where: "id", project_timeline.current_stage_id %}
+{% assign current_stage = current_stage_matches | first %}
 <header class="site-header portal-header global-header">
   <div class="header-inner portal-header-inner global-header-inner">
     <a class="brand portal-brand global-brand" data-site-root href="{{ '/index.html' | relative_url }}"><span class="portal-brand-mark" aria-hidden="true">N</span><span>Noemion</span></a>
     <nav class="portal-primary-nav global-primary-nav" data-global-nav aria-label="主要导航"></nav>
-    <a class="portal-stage-link global-stage-link" data-portal-stage href="{{ '/development/current-stage.html' | relative_url }}" aria-label="当前项目阶段：规范与安全二进制核心设计" title="查看当前项目阶段与进度时间线"><span class="global-stage-label"><span class="global-stage-dot" aria-hidden="true"></span><small>当前阶段</small></span><strong class="global-stage-value">设计</strong></a>
+    <a class="portal-stage-link global-stage-link" data-portal-stage href="{{ project_timeline.header.href | relative_url }}" aria-label="{{ project_timeline.header.label | escape }}：{{ current_stage.title | escape }}" title="{{ project_timeline.header.title | escape }}"><span class="global-stage-label"><span class="global-stage-dot" aria-hidden="true"></span><small>{{ project_timeline.header.label | escape }}</small></span><strong class="global-stage-value">{{ project_timeline.header.value | escape }}</strong></a>
     <details class="directory-panel portal-directory-panel global-directory-panel">
       <summary><span>导航</span><span class="portal-menu-icon" aria-hidden="true"></span></summary>
       <nav data-directory aria-label="项目目录"></nav>

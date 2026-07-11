@@ -1,0 +1,10 @@
+{% assign timeline = include.timeline %}
+<div class="project-timeline-block" data-timeline-id="{{ timeline.id | escape }}">
+  <h2>{{ timeline.title | escape }}</h2>
+  <p class="callout"><strong>{{ timeline.notice.title | escape }}</strong>{{ timeline.notice.text | escape }}</p>
+  <ol class="project-timeline" aria-label="{{ timeline.aria_label | escape }}">
+    {% for item in timeline.items %}
+      <li data-stage-id="{{ item.id | escape }}" data-stage-state="{{ item.state | escape }}"><div class="timeline-marker" aria-hidden="true"></div><div class="timeline-copy"><span>{{ item.label | escape }}</span><h3>{{ item.title | escape }}</h3><p>{{ item.description | escape }}</p></div></li>
+    {% endfor %}
+  </ol>
+</div>
