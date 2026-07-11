@@ -500,7 +500,15 @@ def validate_jekyll_sources():
 
     if header.exists():
         header_text = header.read_text()
-        for token in ("data-global-nav", "global-directory-panel", "data-portal-stage", "<span>导航</span>"):
+        for token in (
+            "data-global-nav",
+            "global-directory-panel",
+            "data-portal-stage",
+            "<span>导航</span>",
+            "global-stage-copy",
+            "<small>当前阶段</small><strong>设计</strong>",
+            "当前项目阶段：规范与安全核心设计",
+        ):
             if token not in header_text:
                 errors.append(f"site header missing global navigation contract: {token}")
 

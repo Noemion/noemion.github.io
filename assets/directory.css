@@ -205,7 +205,7 @@ body[data-page-role="portal"] .portal-stage-link{
 body[data-page-role="portal"] .portal-stage-link:visited{color:var(--heading)}
 body[data-page-role="portal"] .portal-stage-link:hover{background:var(--paper-subtle)}
 body[data-page-role="portal"] .portal-stage-link:active{transform:scale(.96)}
-body[data-page-role="portal"] .portal-stage-link>span{
+body[data-page-role="portal"] .portal-stage-link>.global-stage-dot{
   width:8px;height:8px;border-radius:50%;background:#f04b23;
   box-shadow:0 0 0 4px color-mix(in srgb,#f04b23 14%,transparent)
 }
@@ -260,8 +260,8 @@ body[data-page-role="portal"] .portal-directory-panel{display:none}
 @media(max-width:520px){
   body[data-page-role="portal"] .portal-brand{padding-inline:12px}
   body[data-page-role="portal"] .portal-brand-mark{width:28px;height:28px}
-  body[data-page-role="portal"] .portal-stage-link{font-size:0;padding:0 14px}
-  body[data-page-role="portal"] .portal-stage-link::after{content:"阶段";font-size:12px}
+  body[data-page-role="portal"] .portal-stage-link{padding:0 12px}
+  body[data-page-role="portal"] .global-stage-copy small{display:none}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -387,10 +387,17 @@ body .global-stage-link{
   display:flex;align-items:center;gap:8px;align-self:stretch;padding:0 20px;color:var(--heading);
   border-left:1px solid var(--rule);font-size:13px;font-weight:700;text-decoration:none
 }
-body .global-stage-link>span{
+body .global-stage-link>.global-stage-dot{
+  flex:0 0 auto;
   width:8px;height:8px;border-radius:50%;background:#f04b23;
   box-shadow:0 0 0 4px color-mix(in srgb,#f04b23 14%,transparent)
 }
+.global-stage-copy{display:grid;gap:2px;line-height:1}
+.global-stage-copy small{
+  color:var(--nav-muted);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:8px;font-weight:650;letter-spacing:.08em
+}
+.global-stage-copy strong{color:var(--heading);font-size:12px;font-weight:760}
 body .global-directory-panel{display:none}
 
 /* Persistent manual documentation rail. */
@@ -490,8 +497,8 @@ body .global-directory-panel{display:none}
 
 @media(max-width:520px){
   body .global-brand{padding-inline:12px}
-  body .global-stage-link{font-size:0;padding:0 14px}
-  body .global-stage-link::after{content:"阶段";font-size:12px}
+  body .global-stage-link{padding:0 12px}
+  body .global-stage-copy small{display:none}
 }
 
 @media(prefers-color-scheme:dark){
