@@ -14,6 +14,7 @@
 | 架构、规范和普通专题 | `page_role: content` 且没有 `manual_id` | [`content.md`](content.md) |
 | 工具项目入口 | `page_role: tool-project`、`tools/<tool>/index.html` | [`tool-project.md`](tool-project.md) 与 [`internal-tools.md`](internal-tools.md) 中当前工具条目 |
 | 手册与指南 | `layout: manual` 或存在 `manual_id` | [`manual.md`](manual.md) |
+| 技术长文、工具说明与手册正文可读性 | 修改正文宽度、字号、行高、固定信息栏或长内容节奏 | [`readability.md`](readability.md)，并继续读取所属页面角色文档 |
 | 卡片、按钮、表格、Callout、流程、动效 | 修改共享视觉组件或状态反馈 | [`components-motion.md`](components-motion.md) |
 | 图片、照片、生成式视觉、裁切与图片动效 | 新增或替换 `assets/images/`，或修改页面中的 `<img>` / 图片背景 | [`images.md`](images.md)，并继续读取所属页面角色文档 |
 
