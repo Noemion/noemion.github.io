@@ -100,14 +100,14 @@ DOC_GUIDE_HEADINGS = {
     ],
 }
 HOME_HEADINGS = [
-    "意义还没有成为工程对象。",
-    "把一次性上下文，变成可验证对象。",
+    "意义还没有成为工程对象",
+    "把一次性上下文变成可验证对象",
     "当前设计焦点",
-    "从理解行为，到可信装载。",
-    "先理解边界，再阅读对象。",
-    "证据优先于主张。",
-    "Noemion 是什么，也不是什么。",
-    "只有证据通过，能力才进入下一阶段。",
+    "从理解行为到可信装载",
+    "先理解边界再阅读对象",
+    "证据优先于主张",
+    "Noemion 是什么也不是什么",
+    "只有证据通过能力才进入下一阶段",
     "选择下一步",
 ]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
@@ -1026,12 +1026,16 @@ def main():
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
         home_source = home.read_text()
+        if home_source.count('class="portal-chapter-title"') != len(HOME_HEADINGS):
+            errors.append("index.html: every homepage chapter heading must use the shared symbolic title treatment")
         for token in (
             "DATAFLOW / ACTIVE",
             "dataflow-lane-source",
             "dataflow-lane-bind",
             "dataflow-lane-reloc",
             "dataflow-lane-verify",
+            "portal-arrow-ring",
+            "arrow-ring-progress",
         ):
             if token not in home_source:
                 errors.append(f"index.html: homepage dataflow visual missing {token}")
