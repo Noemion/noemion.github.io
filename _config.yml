@@ -18,6 +18,7 @@ exclude:
   - content-quality-audit.md
   - homepage-design.md
   - sitewide-design-system.md
+  - sitemap.md
   - tests
   - Gemfile
   - Gemfile.lock

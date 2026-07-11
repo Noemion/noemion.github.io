@@ -13,6 +13,7 @@ SOURCE_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_ONLY = len(sys.argv) == 1 or sys.argv[1] == "--source-only"
 ROOT = SOURCE_ROOT if SOURCE_ONLY else Path(sys.argv[1]).resolve()
 README = SOURCE_ROOT / "README.md"
+SOURCE_SITEMAP = SOURCE_ROOT / "sitemap.md"
 DIRECTORY_CSS = ROOT / "assets" / "directory.css"
 SOURCE_HTML_FILES = sorted(
     path
@@ -33,8 +34,8 @@ EXTERNAL_ANCHOR = re.compile(
 )
 HTML_TAG = re.compile(r"<[^>]+>")
 FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
-ROUTE_ROW = re.compile(
-    r"^\| `([^`]+\.html)` \| (portal|section|content|tool|docs|topic) \| `([^`]*)` \| ([0-9]+) \| ([^|]+) \|$",
+SITEMAP_ROUTE_ENTRY = re.compile(
+    r"^- \[([^\]]+)\]\(https://noemion\.github\.io/([A-Za-z0-9_./-]+\.html)\) — (.+)$",
     re.MULTILINE,
 )
 NUMBERED_NAME = re.compile(r"(^|/)[0-9]+[-_]")
@@ -319,14 +320,44 @@ def parse(path):
 
 def read_route_rows():
     rows = []
-    for route, kind, parent, order, purpose in ROUTE_ROW.findall(README.read_text()):
+    sibling_orders = defaultdict(int)
+    for label, route, purpose in SITEMAP_ROUTE_ENTRY.findall(SOURCE_SITEMAP.read_text()):
+        if route == "index.html":
+            kind = "portal"
+            parent = ""
+            order = 0
+        elif route in PORTAL_ROUTES[1:]:
+            kind = "section"
+            parent = "index.html"
+            sibling_orders[parent] += 1
+            order = sibling_orders[parent]
+        elif route == "tools/noemld/docs/index.html":
+            kind = "docs"
+            parent = "tools/noemld/index.html"
+            order = 0
+        elif route.startswith("tools/noemld/docs/"):
+            kind = "topic"
+            parent = "tools/noemld/docs/index.html"
+            sibling_orders[parent] += 1
+            order = sibling_orders[parent]
+        elif route.startswith("tools/") and route.endswith("/index.html"):
+            kind = "tool"
+            parent = "tools/index.html"
+            sibling_orders[parent] += 1
+            order = sibling_orders[parent]
+        else:
+            kind = "content"
+            parent = f"{route.rsplit('/', 1)[0]}/index.html"
+            sibling_orders[parent] += 1
+            order = sibling_orders[parent]
         rows.append(
             {
                 "route": route,
                 "kind": kind,
                 "parent": parent,
-                "order": int(order),
+                "order": order,
                 "purpose": purpose.strip(),
+                "label": label.strip(),
             }
         )
     return rows
@@ -437,9 +468,9 @@ def validate_jekyll_sources():
     source_routes = sorted(route for route, _ in source_entries)
 
     if len(route_rows) != len(registry):
-        errors.append("README contains duplicate HTML routes")
+        errors.append("sitemap.md contains duplicate HTML routes")
     if registered != source_routes:
-        errors.append("README routes do not exactly match Jekyll source pages")
+        errors.append("sitemap.md routes do not exactly match Jekyll source pages")
     if len(source_routes) < 65:
         errors.append(f"expected at least 65 Jekyll source pages, found {len(source_routes)}")
 
@@ -998,18 +1029,35 @@ def main():
     actual_routes = [path.relative_to(ROOT).as_posix() for path in HTML_FILES]
 
     if not route_rows:
-        errors.append("README has no formal HTML route rows")
+        errors.append("sitemap.md has no formal HTML route entries")
     if len(registered_rows) != len(set(registered_rows)):
-        errors.append("README contains duplicate HTML routes")
+        errors.append("sitemap.md contains duplicate HTML routes")
     if sorted(registered) != sorted(actual_routes):
-        errors.append("README routes do not exactly match HTML files")
+        errors.append("sitemap.md routes do not exactly match HTML files")
+
+    sitemap = ROOT / "sitemap.md"
+    if not sitemap.exists():
+        errors.append("missing public sitemap.md discovery index")
+    else:
+        sitemap_text = sitemap.read_text()
+        if FRONT_MATTER.match(sitemap_text):
+            errors.append("sitemap.md must remain a static Markdown file without Front Matter")
+        sitemap_routes = set(
+            re.findall(r"https://noemion\.github\.io/([A-Za-z0-9_./-]+\.html)", sitemap_text)
+        )
+        if sitemap_routes != set(registered):
+            missing = sorted(set(registered) - sitemap_routes)
+            extra = sorted(sitemap_routes - set(registered))
+            errors.append(f"sitemap.md route mismatch: missing={missing}, extra={extra}")
+        if not SOURCE_ONLY and sitemap_text != SOURCE_SITEMAP.read_text():
+            errors.append("the Pages build must copy sitemap.md without Markdown-to-HTML conversion")
 
     if [row["route"] for row in route_rows if row["kind"] == "portal"] != ["index.html"]:
-        errors.append("README must register index.html as the only portal")
+        errors.append("sitemap.md must register index.html as the only portal")
 
     section_routes = [row["route"] for row in route_rows if row["kind"] == "section"]
     if sorted(section_routes) != sorted(PORTAL_ROUTES[1:]):
-        errors.append("README section routes do not match the approved portal architecture")
+        errors.append("sitemap.md section routes do not match the approved portal architecture")
 
     home = ROOT / "index.html"
     if home.exists():

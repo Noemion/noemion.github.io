@@ -5,7 +5,7 @@
 ## Jekyll 与发布
 
 - `_config.yml` 定义账户站点 URL、仓库身份、语言、Markdown 处理器和构建排除项；账户站点的 `baseurl` 必须保持为空。
-- `.github/workflows/pages.yml` 在 `main` 分支推送时先运行路由测试，再通过 GitHub 官方 Jekyll Pages Actions 构建和部署 `_site`。
+- `.github/workflows/pages.yml` 在 `main` 分支推送时先运行路由测试，再通过 GitHub 官方 Jekyll Pages Actions 构建 `_site`、原样加入公开 `sitemap.md` 并部署。
 - 当前 66 个正式页面由 Jekyll 处理：46 个普通页面使用 HTML 正文源，20 个手册/指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。
 - 本地可在安装兼容 Ruby 与 Bundler 后运行 `bundle install` 和 `bundle exec jekyll serve`；当前工作区自带的系统 Ruby 不作为发布环境基线。
 
@@ -21,6 +21,7 @@
 - `_data/project_timeline.yml`：项目阶段、当前状态摘要和页头阶段入口的唯一人工配置源。
 - 普通正式 `.html` 使用 `layout: default` 并编写职责对应的 `<main>`；手册 `.md` 使用 `layout: manual` 并只编写 Markdown 正文，公开文件名由 `permalink` 确定。
 - `assets/`：继续维护现有视觉、目录引擎、动画和图形资源；`assets/catalog.js` 为大型聚合页提供渐进增强的搜索与分组筛选，关闭脚本时保留完整内容；`assets/images/` 保存经过裁切和压缩的站点图片，Jekyll 不改变其内容。
+- `sitemap.md`：不带 Front Matter 的公开 Markdown 发现索引，也是唯一正式路由注册表；它不进入 Markdown 转换，由 Pages 工作流在 Jekyll 构建后原样加入 `/sitemap.md`，供读者和自动化工具按内容家族读取全部正式 HTML 路由、顺序和职责。README 不再复制路由表，质量测试直接以该文件核对源码与构建产物。
 
 ### 手册内容源与生成
 
@@ -152,78 +153,9 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 
 逐页审查状态与剩余缺口维护在 [`content-quality-audit.md`](content-quality-audit.md)。该清单用于规划内容工作，不是对页面成熟度的自我认证。
 
-## 正式 HTML 路由
+## 正式路由注册表
 
-本 README 是固定站点结构、页面角色、既有正式路由和维护规则的登记来源；不要在项目级 `AGENTS.md` 中复制路由表或页面级维护细节。下表登记当前正式 HTML 路由；新增手册 Markdown 的 `permalink` 会被质量测试和 Jekyll 自动纳入，不要求同步复制 JavaScript 目录链接。
-
-| 路由 | 类型 | 上级入口 | 顺序 | 职责 |
-| --- | --- | --- | ---: | --- |
-| `index.html` | portal | `` | 0 | Noemion 项目门户 |
-| `about/index.html` | section | `index.html` | 1 | 项目背景入口 |
-| `architecture/index.html` | section | `index.html` | 2 | 架构入口 |
-| `specifications/index.html` | section | `index.html` | 3 | 规范与成熟度入口 |
-| `components/index.html` | section | `index.html` | 4 | 系统组件入口 |
-| `tools/index.html` | section | `index.html` | 5 | 工具项目分类目录 |
-| `docs/index.html` | section | `index.html` | 6 | 跨项目文档中心 |
-| `downloads/index.html` | section | `index.html` | 7 | 下载与资源状态入口 |
-| `faq/index.html` | section | `index.html` | 8 | 站点级常见问题 |
-| `development/index.html` | section | `index.html` | 9 | 开发与贡献入口 |
-| `news/index.html` | section | `index.html` | 10 | 新闻与进展入口 |
-| `about/background.html` | content | `about/index.html` | 1 | 项目动机、范围与边界 |
-| `about/intellectual-foundations.html` | content | `about/index.html` | 2 | 分析哲学、语言哲学与工程采用边界 |
-| `architecture/object-lifecycle.html` | content | `architecture/index.html` | 1 | 对象生命周期与信任边界 |
-| `architecture/open-questions.html` | content | `architecture/index.html` | 2 | 设备条件与开放问题 |
-| `specifications/gsir.html` | content | `specifications/index.html` | 1 | GSIR 语义与状态 |
-| `specifications/gobj.html` | content | `specifications/index.html` | 2 | GOBJ 对象格式与状态 |
-| `specifications/sso.html` | content | `specifications/index.html` | 3 | SSO 与渐进式披露 |
-| `components/compiler-core.html` | content | `components/index.html` | 1 | 确定性 Compiler Core |
-| `components/linker-loader.html` | content | `components/index.html` | 2 | Linker、Loader 与 Runtime |
-| `components/nsfe.html` | content | `components/index.html` | 3 | NSFE 架构与模型工程状态 |
-| `development/current-stage.html` | content | `development/index.html` | 1 | 当前项目阶段、证据门与进度时间线 |
-| `development/implementation-roadmap.html` | content | `development/index.html` | 2 | 实施阶段、工具职责与完成标准 |
-| `development/testing.html` | content | `development/index.html` | 3 | 测试、Fuzz 与验证策略 |
-| `docs/getting-started.html` | content | `docs/index.html` | 1 | 项目入门、核心对象与推荐阅读路径 |
-| `docs/installation-and-usage.html` | content | `docs/index.html` | 2 | 当前可用性、未来使用流程与发布原则 |
-| `docs/architecture-guide.html` | content | `docs/index.html` | 3 | 系统分层、对象生命周期与信任边界指南 |
-| `docs/development-guide.html` | content | `docs/index.html` | 4 | 第一阶段、规范先行、测试与贡献指南 |
-| `docs/tools-reference.html` | content | `docs/index.html` | 5 | 23 个工具职责、阶段与文档状态参考 |
-| `docs/specifications-reference.html` | content | `docs/index.html` | 6 | 规范权威性、成熟度与对象参考入口 |
-| `tools/noemconform/index.html` | tool | `tools/index.html` | 1 | noemconform 工具项目页 |
-| `tools/noemobj/index.html` | tool | `tools/index.html` | 2 | noemobj 工具项目页 |
-| `tools/noemverify/index.html` | tool | `tools/index.html` | 3 | noemverify 工具项目页 |
-| `tools/noemcopy/index.html` | tool | `tools/index.html` | 4 | noemcopy 工具项目页 |
-| `tools/noemsize/index.html` | tool | `tools/index.html` | 5 | noemsize 工具项目页 |
-| `tools/noemas/index.html` | tool | `tools/index.html` | 6 | noemas 工具项目页 |
-| `tools/noemdis/index.html` | tool | `tools/index.html` | 7 | noemdis 工具项目页 |
-| `tools/noemfmt/index.html` | tool | `tools/index.html` | 8 | noemfmt 工具项目页 |
-| `tools/noemdiff/index.html` | tool | `tools/index.html` | 9 | noemdiff 工具项目页 |
-| `tools/noemc/index.html` | tool | `tools/index.html` | 10 | noemc 工具项目页 |
-| `tools/noemlint/index.html` | tool | `tools/index.html` | 11 | noemlint 工具项目页 |
-| `tools/noemar/index.html` | tool | `tools/index.html` | 12 | noemar 工具项目页 |
-| `tools/noemnm/index.html` | tool | `tools/index.html` | 13 | noemnm 工具项目页 |
-| `tools/noemld/index.html` | tool | `tools/index.html` | 14 | noemld 工具项目页 |
-| `tools/noemstrip/index.html` | tool | `tools/index.html` | 15 | noemstrip 工具项目页 |
-| `tools/noemcov/index.html` | tool | `tools/index.html` | 16 | noemcov 工具项目页 |
-| `tools/noempack/index.html` | tool | `tools/index.html` | 17 | noempack 工具项目页 |
-| `tools/noemrun/index.html` | tool | `tools/index.html` | 18 | noemrun 工具项目页 |
-| `tools/noemtrace/index.html` | tool | `tools/index.html` | 19 | noemtrace 工具项目页 |
-| `tools/noemdata/index.html` | tool | `tools/index.html` | 20 | noemdata 工具项目页 |
-| `tools/noemtrain/index.html` | tool | `tools/index.html` | 21 | noemtrain 工具项目页 |
-| `tools/noemeval/index.html` | tool | `tools/index.html` | 22 | noemeval 工具项目页 |
-| `tools/noemquant/index.html` | tool | `tools/index.html` | 23 | noemquant 工具项目页 |
-| `tools/noemld/docs/index.html` | docs | `tools/noemld/index.html` | 0 | noemld 文档中心 |
-| `tools/noemld/docs/contract.html` | topic | `tools/noemld/docs/index.html` | 1 | noemld 职责与稳定契约 |
-| `tools/noemld/docs/inputs-outputs.html` | topic | `tools/noemld/docs/index.html` | 2 | noemld 输入输出对象 |
-| `tools/noemld/docs/invocation.html` | topic | `tools/noemld/docs/index.html` | 3 | noemld 命令行调用 |
-| `tools/noemld/docs/pipeline.html` | topic | `tools/noemld/docs/index.html` | 4 | noemld 端到端处理流程 |
-| `tools/noemld/docs/symbol-resolution.html` | topic | `tools/noemld/docs/index.html` | 5 | noemld 符号解析 |
-| `tools/noemld/docs/relocations.html` | topic | `tools/noemld/docs/index.html` | 6 | noemld 重定位与 ID 重映射 |
-| `tools/noemld/docs/sso-linking.html` | topic | `tools/noemld/docs/index.html` | 7 | noemld SSO 链接与披露闭包 |
-| `tools/noemld/docs/loader-security.html` | topic | `tools/noemld/docs/index.html` | 8 | noemld 装载完整性与安全 |
-| `tools/noemld/docs/diagnostics.html` | topic | `tools/noemld/docs/index.html` | 9 | noemld 诊断与失败边界 |
-| `tools/noemld/docs/testing.html` | topic | `tools/noemld/docs/index.html` | 10 | noemld 测试与验收 |
-| `tools/noemld/docs/dependencies.html` | topic | `tools/noemld/docs/index.html` | 11 | noemld 上下游依赖 |
-| `tools/noemld/docs/reference-index.html` | topic | `tools/noemld/docs/index.html` | 12 | noemld 命令术语与对象索引 |
+公开且权威的正式路由注册表维护在 [`sitemap.md`](sitemap.md)。该文件按内容家族登记全部正式 HTML URL、阅读顺序与职责，并由质量测试直接核对 Jekyll 源文件和构建产物；README 不再复制第二份路由表。
 
 ## 许可证
 
@@ -235,10 +167,10 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 2. 全局 HTML 外壳只编辑 `_layouts/default.html`，站点头部和页脚只编辑 `_includes/`；全局颜色和正文排版只编辑 `assets/style.css`，目录样式只编辑 `assets/directory.css`。禁止页面复制公共外壳、页面级 CSS、内联 `<style>` 或 `style=`。
 3. `assets/directory.js` 维护目录渲染和全部模块配置；模块目录可以拥有不同的内容与分组，但必须覆盖注册表中的全部 HTML 路由，并为每个页面选择正确的模块目录。新增模块目录时继续使用同一共享引擎，不在页面源码或 include 中复制目录链接。
 4. 每个工具的全部 HTML 页面只保存在 `tools/<tool>/`。工具 `index.html` 是项目页；只有存在实质专题文档时才创建 `docs/index.html` 与语义命名的专题页，不为空目录制造文档树。
-5. 新增、删除、移动或改名页面时，同步本注册表、`assets/directory.js`（仅当全局落地页变化）、受影响的模块目录、对应入口、顺序导航和全部交叉链接；每个非门户页面必须保留可用的上级或指定目录返回入口。
+5. 新增、删除、移动或改名页面时，同步 `sitemap.md`、`assets/directory.js`（仅当全局落地页变化）、受影响的模块目录、对应入口、顺序导航和全部交叉链接；每个非门户页面必须保留可用的上级或指定目录返回入口。
 6. 路由、目录和命名直接采用当前规范；不保留旧入口、旧路径、旧别名、重定向或兼容垫片。
-7. 每次路由或页面角色变更先运行 `python3 tests/site_quality_test.py` 检查 Jekyll 源码，再构建并运行 `python3 tests/site_quality_test.py _site`，确认最终 HTML、README 注册表、全局目录和页面角色一致。
-8. 新增工具时创建 `tools/<tool>/index.html`，并同步 `tools/index.html`、本注册表和全局目录的对应工具分类。
+7. 每次路由或页面角色变更先运行 `python3 tests/site_quality_test.py` 检查 Jekyll 源码；完整本地发布检查在构建后执行 `cp sitemap.md _site/sitemap.md`，再运行 `python3 tests/site_quality_test.py _site`，确认最终 HTML、正式路由注册表、全局目录和页面角色一致。GitHub Pages 工作流自动执行同一复制步骤。
+8. 新增工具时创建 `tools/<tool>/index.html`，并同步 `tools/index.html`、`sitemap.md` 和全局目录的对应工具分类。
 9. 正式技术规范逐步迁移为 Markdown；HTML 保留为导航和设计总览。
 10. `docs/index.html` 的六个入口必须指向 `docs/` 下实际存在的任务型 HTML；这些页面负责解释和阅读路径，不替代权威规范。
 11. 网页改动完成并通过源码、Jekyll 构建、构建产物和浏览器验收后，默认继续提交、推送并确认 GitHub Pages 部署，再提供在线地址；只有用户明确要求不发布时才停留在本地。
