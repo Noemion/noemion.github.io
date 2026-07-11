@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ asset_version | escape }}">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   <script src="{{ '/assets/directory.js' | relative_url }}?v={{ asset_version | escape }}" defer></script>
+  {% if page.permalink == '/tools/index.html' %}<script src="{{ '/assets/catalog.js' | relative_url }}?v={{ asset_version | escape }}" defer></script>{% endif %}
 </head>
 <body data-page-role="{{ page.page_role }}"{% if page_tool_id %} data-tool-id="{{ page_tool_id }}"{% endif %}{% if page.manual_id or page.permalink contains '/docs/' %} data-docs-layout="true"{% endif %}>
 <a class="skip-link" href="#main-content">跳到正文</a>

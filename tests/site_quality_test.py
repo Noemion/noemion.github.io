@@ -555,6 +555,7 @@ def validate_jekyll_sources():
             'data-tool-id="{{ page_tool_id }}"',
             "{{ '/assets/style.css' | relative_url }}",
             "{{ '/assets/directory.js' | relative_url }}",
+            "{{ '/assets/catalog.js' | relative_url }}",
             "site.github.build_revision",
             "?v={{ asset_version | escape }}",
             'data-page-role="{{ page.page_role }}"',
@@ -1294,9 +1295,12 @@ def main():
                 errors.append(f"current stage output exposes internal workflow copy: {forbidden}")
 
     directory_script = ROOT / "assets/directory.js"
+    catalog_script = ROOT / "assets/catalog.js"
     favicon = ROOT / "assets/favicon.svg"
     if not directory_script.exists():
         errors.append("missing assets/directory.js")
+    if not catalog_script.exists():
+        errors.append("missing assets/catalog.js")
     if not favicon.exists():
         errors.append("missing assets/favicon.svg")
 
@@ -1321,13 +1325,18 @@ def main():
             errors.append(f"{rel}: expected exactly one stylesheet")
         elif not urlsplit(parser.stylesheets[0]).query:
             errors.append(f"{rel}: shared stylesheet must include a build cache key")
-        if (
-            len(parser.scripts) != 1
-            or not urlsplit(parser.scripts[0]).path.endswith("assets/directory.js")
-        ):
+        directory_scripts = [
+            script
+            for script in parser.scripts
+            if urlsplit(script).path.endswith("assets/directory.js")
+        ]
+        if len(directory_scripts) != 1:
             errors.append(f"{rel}: missing shared directory script")
-        elif not urlsplit(parser.scripts[0]).query:
+        elif not urlsplit(directory_scripts[0]).query:
             errors.append(f"{rel}: shared directory script must include a build cache key")
+        for script in parser.scripts:
+            if not urlsplit(script).query:
+                errors.append(f"{rel}: shared script must include a build cache key: {script}")
         if len(parser.icons) != 1:
             errors.append(f"{rel}: missing unique favicon reference")
         else:

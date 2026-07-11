@@ -20,7 +20,7 @@
 - `_data/manuals.yml`：登记手册级名称、根路由、上级入口、面包屑和分组，不逐页复制目录链接。
 - `_data/project_timeline.yml`：项目阶段、当前状态摘要和页头阶段入口的唯一人工配置源。
 - 普通正式 `.html` 使用 `layout: default` 并编写职责对应的 `<main>`；手册 `.md` 使用 `layout: manual` 并只编写 Markdown 正文，公开文件名由 `permalink` 确定。
-- `assets/`：继续维护现有视觉、目录引擎、动画和图形资源；`assets/images/` 保存经过裁切和压缩的站点图片，Jekyll 不改变其内容。
+- `assets/`：继续维护现有视觉、目录引擎、动画和图形资源；`assets/catalog.js` 为大型聚合页提供渐进增强的搜索与分组筛选，关闭脚本时保留完整内容；`assets/images/` 保存经过裁切和压缩的站点图片，Jekyll 不改变其内容。
 
 ### 手册内容源与生成
 

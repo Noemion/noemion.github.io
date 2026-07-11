@@ -9,21 +9,34 @@ permalink: "/news/index.html"
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>新闻与进展</span></nav>
   <div class="hero"><h1>新闻与进展</h1><p>汇总可核验的公告、里程碑、规范变更和发布状态，并为每项进展保留证据入口。</p><div class="badges"><span class="badge">Development</span><span class="badge">No Release Yet</span></div></div>
   <section>
-    <h2>公告状态</h2>
-    <p class="callout warning">目前没有正式版本公告，也没有可报告的发行版本号或发布日期。</p>
+    <h2>发布状态</h2>
+    <p class="callout warning">目前没有正式版本公告，也没有可报告的发行版本号或发布日期。这里仅汇总能够从项目页面核验的设计和开发进展。</p>
+    <nav class="catalog-controls" aria-label="进展分类">
+      <a class="catalog-filter" href="#project-progress">项目进展</a>
+      <a class="catalog-filter" href="#spec-progress">规范进展</a>
+      <a class="catalog-filter" href="#verification-progress">验证进展</a>
+    </nav>
   </section>
   <section>
-    <h2>当前进展</h2>
-    <p>Noemion 当前处于规范与安全二进制核心阶段，尚未发布可安装软件。现阶段优先确定对象边界、安全解析、不变量和一致性证据；阶段目标、完成条件和后续顺序以<a href="../development/implementation-roadmap.html">实施路线图</a>为准。</p>
-  </section>
-  <section>
-    <h2>近期里程碑</h2>
-    <ul>
-      <li>已完成项目定位、非目标和信任原则的公开设计。</li>
-      <li>已完成核心对象与 Compiler、Linker/Loader、Runtime 的职责划分。</li>
-      <li>正在收敛 GSIR、GOBJ、SSO 的最小规范和安全二进制核心设计。</li>
-    </ul>
-    <p><a href="../development/current-stage.html">查看完整项目进度与后续计划</a>。</p>
+    <h2>进展记录</h2>
+    <p>Noemion 当前处于规范与安全二进制核心设计阶段。以下入口分别说明已经完成的工作、正在推进的内容和下一步计划。</p>
+    <div class="news-ledger">
+      <a class="news-record" id="project-progress" href="../development/current-stage.html">
+        <span class="news-record-art" aria-hidden="true"><b>PROJECT / STATUS</b></span>
+        <span class="news-record-copy"><small>CURRENT DEVELOPMENT</small><strong>项目阶段与实际进度</strong><span>查看已经完成的设计、正在推进的安全核心工作和后续项目计划。</span></span>
+        <span class="news-record-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="news-record" id="spec-progress" href="../specifications/index.html">
+        <span class="news-record-art" aria-hidden="true"><b>GSIR / GOBJ / SSO</b></span>
+        <span class="news-record-copy"><small>SPECIFICATION STATUS</small><strong>对象规范与成熟度</strong><span>核对 GSIR、GOBJ 和 SSO 的当前权威状态、开放问题与后续收敛方向。</span></span>
+        <span class="news-record-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="news-record" id="verification-progress" href="../development/testing.html">
+        <span class="news-record-art" aria-hidden="true"><b>TEST / VERIFY</b></span>
+        <span class="news-record-copy"><small>VERIFICATION PLAN</small><strong>测试、安全与一致性工作</strong><span>查看确定性测试、Malformed 输入、Fuzz、安全拒绝路径和跨工具一致性计划。</span></span>
+        <span class="news-record-arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
   </section>
   <section>
     <h2>研究与公开披露边界</h2>

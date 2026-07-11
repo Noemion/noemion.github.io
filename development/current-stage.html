@@ -9,7 +9,7 @@ timeline_data: "project_timeline"
 {% assign timeline = site.data[page.timeline_data] %}
 {% assign current_stage_matches = timeline.items | where: "id", timeline.current_stage_id %}
 {% assign current_stage = current_stage_matches | first %}
-<main id="main-content" tabindex="-1">
+<main id="main-content" class="current-stage-page" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发</a><span aria-hidden="true">/</span><span>当前项目阶段</span></nav>
   <div class="hero"><h1>当前项目阶段</h1><p>汇总已经完成的设计工作、当前正在推进的核心任务，以及后续计划开发的项目能力。</p><div class="badges"><span class="badge">Completed Work</span><span class="badge">In Progress</span><span class="badge">Roadmap</span></div></div>
   <div class="current-stage-feature">
