@@ -8,6 +8,7 @@ permalink: "/tools/noemc/index.html"
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemc</span></nav>
   <div class="hero"><h1>noemc · 确定性语义编译器</h1><p>统一驱动 Strict、Assisted 与 Generate-Strict 前端；只有确定性 Compiler Core 能完成语义绑定、覆盖审计和 GOBJ 写入。</p><div class="badges"><span class="badge">Phase 3 / Phase 7</span><span class="badge">Compiler &amp; Link</span><span class="badge">GSL / 自然语言 → GOBJ</span><span class="badge">Design Stage</span></div></div>
+  <div class="tool-project-body">
   <section><h2>工具简介</h2><p><code>noemc</code> 统一驱动 Strict、Assisted 与 Generate-Strict 前端；只有确定性 Compiler Core 能完成语义绑定、覆盖审计和 GOBJ 写入。</p><p><strong>问题背景：</strong>模型候选、受控 DSL 和对象写入如果处于同一信任层，系统无法证明布局与约束由规范决定。noemc 将多种前端统一收敛到同一个无模型、确定性 Compiler Core。</p>
 </section>
   <section>
@@ -19,6 +20,7 @@ permalink: "/tools/noemc/index.html"
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>GSL Source</td><td>Strict 模式的受控声明式源</td></tr><tr><td>输入</td><td>Natural Language Package</td><td>Assisted 模式的文件、资源、目录和策略</td></tr><tr><td>输入</td><td>Compiler Profile</td><td>规范版本、模式、ontology、限制和目标 ABI</td></tr><tr><td>输出</td><td>Relocatable GOBJ</td><td>多层 GSIR、符号、重定位、Artifact 与调试 Section</td></tr><tr><td>输出</td><td>Coverage Ledger</td><td>每个 Source Unit 的结构化、精确保留、丢弃或阻断状态</td></tr><tr><td>输出</td><td>Build Manifest</td><td>输入哈希、工具/模型指纹、依赖与可复现构建字段</td></tr></tbody></table></div></section>
   <section><h2>处理边界</h2><ul><li>模型输出不能直接成为 GSIR/GOBJ</li><li>不在覆盖缺口存在时静默发布</li><li>不把低置信候选自动升级为唯一语义</li><li>不承担跨对象符号解析和最终链接</li></ul><p>所有源、候选、资源和对象输入均视为不可信；编译必须记录规范版本、Profile、依赖与工具/模型指纹。模型质量或置信度不能替代类型、覆盖、权限和安全证明。</p>
 </section>
+  </div>
   <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GSIR、GOBJ 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性编译、文本 IR 与对象生成边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div>
 </section>
 </main>

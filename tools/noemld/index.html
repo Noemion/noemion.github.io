@@ -8,6 +8,7 @@ permalink: "/tools/noemld/index.html"
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemld</span></nav>
   <div class="hero"><h1>noemld</h1><p>Noemion Linker：面向 GOBJ、归档与 SSO 的确定性链接工具项目。</p><div class="badges"><span class="badge">Phase 4 / Phase 5</span><span class="badge">Compiler &amp; Link</span><span class="badge">Design Stage</span></div></div>
+  <div class="tool-project-body">
   <section>
     <h2>工具简介</h2>
     <p><code>noemld</code> 负责解析符号、重映射对象内部 ID、应用类型化重定位，并按语义规则组合约束、权限和依赖闭包。它不调用模型解决冲突，也不承担 Runtime 求解。</p>
@@ -43,6 +44,7 @@ permalink: "/tools/noemld/index.html"
     <p>所有对象输入均视为不可信；偏移、长度、计数、索引和对齐计算必须使用 checked arithmetic。</p>
     <p>链接采用先计划、后提交的事务边界；任一强制检查失败时不得输出看似可用的部分链接对象，也不得调用模型猜测冲突选择。</p>
   </section>
+  </div>
   <section>
     <h2>相关资源</h2>
     <div class="page-links">

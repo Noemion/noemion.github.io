@@ -630,6 +630,8 @@ def validate_jekyll_sources():
             errors.append("shared styles must not use transition: all")
         if re.search(r'\.page-links\s*\{[^}]*background\s*:\s*var\(--portal-line\)', shared_css):
             errors.append("page-link grids must not expose the separator color in empty cells")
+        if not re.search(r'body\[data-page-role="tool-project"\]\s+main\s*\{[^}]*overflow\s*:\s*clip', shared_css):
+            errors.append("tool project main must preserve the sticky status panel scroll range")
         if "margin-left:300px" in shared_css:
             errors.append("content pages must not reserve a meaningless fixed 300px left gap")
         for legacy_selector in (
@@ -888,6 +890,9 @@ def validate_jekyll_sources():
     for tool_id in TOOL_IDS:
         if (SOURCE_ROOT / "tools" / tool_id / "index.md").exists():
             errors.append(f"tools/{tool_id}/index.md is forbidden; tool project pages remain HTML")
+        tool_source = SOURCE_ROOT / "tools" / tool_id / "index.html"
+        if tool_source.read_text().count('class="tool-project-body"') != 1:
+            errors.append(f"tool project {tool_id} must define one bounded sticky body")
         if f'body[data-tool-id="{tool_id}"]' not in style_text:
             errors.append(f"missing custom visual signature for tool {tool_id}")
         if f"### {tool_id}" not in tool_design_text:
@@ -1076,6 +1081,8 @@ def main():
             errors.append(f"{row['route']}: must expose 项目 / 工具 / 当前工具 breadcrumbs")
         if parser.tool_id != tool:
             errors.append(f"{row['route']}: body data-tool-id must be {tool!r}")
+        if parser.class_counts["tool-project-body"] != 1:
+            errors.append(f"{row['route']}: must preserve one bounded sticky tool body")
         status_sections = [section for section in parser.sections if section["heading"] == "当前状态"]
         status_texts = ["".join(section["text"]) for section in status_sections]
         contract_errors = validate_tool_project_contract(

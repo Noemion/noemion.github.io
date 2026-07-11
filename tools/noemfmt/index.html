@@ -8,6 +8,7 @@ permalink: "/tools/noemfmt/index.html"
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemfmt</span></nav>
   <div class="hero"><h1>noemfmt · 规范格式化工具</h1><p>对 GSL 和文本 GSIR 做纯表现层规范化，提供稳定格式作为评审、缓存和差异比较基础。</p><div class="badges"><span class="badge">Phase 2 / Phase 3</span><span class="badge">Text IR</span><span class="badge">GSL / 文本 GSIR 规范形式</span><span class="badge">Design Stage</span></div></div>
+  <div class="tool-project-body">
   <section><h2>工具简介</h2><p><code>noemfmt</code> 对 GSL 和文本 GSIR 做纯表现层规范化，提供稳定格式作为评审、缓存和差异比较基础。</p><p><strong>问题背景：</strong>无关的空白、顺序和字面量形式会制造评审噪声并破坏缓存与复现；但格式化器如果改变约束作用域或声明顺序，也会产生隐蔽语义变化。noemfmt 必须证明只改变表现层。</p>
 </section>
   <section>
@@ -19,6 +20,7 @@ permalink: "/tools/noemfmt/index.html"
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Source Text</td><td>GSL 或文本 GSIR</td></tr><tr><td>输入</td><td>Format Profile</td><td>行宽、规范版本和允许的语法扩展</td></tr><tr><td>输入</td><td>Mode</td><td>check/write/diff/stdout</td></tr><tr><td>输出</td><td>Formatted Text</td><td>语义等价的规范表现</td></tr><tr><td>输出</td><td>Format Diff</td><td>check 失败时的最小文本差异</td></tr><tr><td>输出</td><td>Syntax Diagnostics</td><td>阻止安全格式化的解析错误</td></tr></tbody></table></div></section>
   <section><h2>处理边界</h2><ul><li>不重命名符号或改变绑定</li><li>不删除看似冗余的约束</li><li>不修复类型错误或补全缺失字段</li><li>不把格式化成功解释为语义有效</li></ul><p>源文本、include 和配置均视为不可信并受大小与深度限制。无法建立完整语法树时应报告诊断，不以局部重排覆盖错误区域。</p>
 </section>
+  </div>
   <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GSIR、GOBJ 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性编译、文本 IR 与对象生成边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div>
 </section>
 </main>

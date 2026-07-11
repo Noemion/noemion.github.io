@@ -8,6 +8,7 @@ permalink: "/tools/noemdiff/index.html"
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemdiff</span></nav>
   <div class="hero"><h1>noemdiff · 语义差异工具</h1><p>比较两个对象或文本 IR，并把差异分类为布局、调试、运行语义、依赖、权限和信任元数据变化。</p><div class="badges"><span class="badge">Phase 2 / Phase 5</span><span class="badge">Text IR</span><span class="badge">对象与 IR 的分类差异</span><span class="badge">Design Stage</span></div></div>
+  <div class="tool-project-body">
   <section><h2>工具简介</h2><p><code>noemdiff</code> 比较两个对象或文本 IR，并把差异分类为布局、调试、运行语义、依赖、权限和信任元数据变化。</p><p><strong>问题背景：</strong>字节不同不一定意味着运行语义变化，字节相近也不能证明权限、依赖或约束等价。发布、复现和研究实验需要一个明确区分“相同、改变、未知”的语义差异工具。</p>
 </section>
   <section>
@@ -19,6 +20,7 @@ permalink: "/tools/noemdiff/index.html"
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Left/Right Artifact</td><td>文本或二进制对象，可为不同封装</td></tr><tr><td>输入</td><td>Diff Profile</td><td>关注层、允许差异、规范版本和资源限制</td></tr><tr><td>输入</td><td>Symbol Hints</td><td>可选的重命名映射或链接 map</td></tr><tr><td>输出</td><td>Classified Diff</td><td>带路径、旧值、新值和严重度的差异</td></tr><tr><td>输出</td><td>Semantic Verdict</td><td>equivalent/changed/unknown</td></tr><tr><td>输出</td><td>Machine Report</td><td>供 CI、noemstrip 与发布审计消费</td></tr></tbody></table></div></section>
   <section><h2>处理边界</h2><ul><li>不把未证明等价报告为等价</li><li>不忽略硬约束、权限或依赖变化</li><li>不自动合并冲突对象</li><li>不以文本 diff 替代语义比较</li></ul><p>所有对象输入均视为不可信；图匹配、递归和候选映射必须有资源上限。无法在 Profile 允许范围内证明等价时输出 unknown，而不是以超时或启发式相似度替代结论。</p>
 </section>
+  </div>
   <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GSIR、GOBJ 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性编译、文本 IR 与对象生成边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div>
 </section>
 </main>
