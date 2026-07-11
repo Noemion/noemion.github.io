@@ -492,7 +492,7 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
 .arrow-ring-track{stroke:rgba(0,0,0,.34);stroke-width:2.25;transition-property:stroke;transition-duration:180ms;transition-timing-function:var(--ease)}
 .arrow-ring-progress{
   stroke:#fff;stroke-width:3.25;stroke-linecap:round;stroke-dasharray:126;stroke-dashoffset:126;opacity:0;
-  transition-property:stroke-dashoffset,opacity;transition-duration:1100ms,160ms;transition-timing-function:linear,var(--ease)
+  transition-property:stroke-dashoffset,opacity;transition-duration:550ms,160ms;transition-timing-function:linear,var(--ease)
 }
 .portal-arrow i{position:relative;z-index:1;grid-area:1/1;font-style:normal;transition-property:opacity,filter,transform;transition-duration:300ms;transition-timing-function:var(--ease)}
 .portal-arrow .arrow-base{opacity:1;filter:blur(0);transform:scale(1)}
@@ -1307,16 +1307,19 @@ body[data-docs-layout="true"] .hero p{font-size:17px;line-height:1.72}
 .manual-article table{font-size:15px;line-height:1.65}
 
 /* Noemion spectrum trace: an interruptible, content-safe hover frame. */
+@property --spectrum-angle{
+  syntax:"<angle>";inherits:false;initial-value:0deg
+}
 .portal-feature-row{position:relative;isolation:isolate}
 .portal-feature-row::before,
 body:not([data-page-role="portal"]) .page-link::before{
-  content:"";display:block;position:absolute;inset:0;z-index:3;padding:3px;pointer-events:none;opacity:0;
-  background:linear-gradient(105deg,var(--portal-mint),var(--portal-blue),var(--portal-coral),var(--portal-amber),var(--portal-mint));
-  background-size:220% 100%;
+  content:"";display:block;position:absolute;inset:0;z-index:3;padding:2px;pointer-events:none;opacity:0;
+  background:conic-gradient(from var(--spectrum-angle),var(--portal-mint) 0%,var(--portal-blue) 25%,var(--portal-coral) 50%,var(--portal-amber) 75%,var(--portal-mint) 100%);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;mask-composite:exclude;
   transition-property:opacity;transition-duration:180ms;transition-timing-function:var(--ease)
 }
+.portal-feature-row::before{padding:5px}
 .portal-feature-row:hover::before,
 .portal-feature-row:focus-visible::before,
 body:not([data-page-role="portal"]) .page-link:hover::before,
@@ -1337,7 +1340,7 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
 .portal-feature-row:focus-visible .arrow-base{opacity:0;filter:blur(4px);transform:scale(.25)}
 .portal-feature-row:focus-visible .arrow-active{opacity:1;filter:blur(0);transform:scale(1)}
 
-@keyframes spectrum-trace{to{background-position:-220% 0}}
+@keyframes spectrum-trace{to{--spectrum-angle:360deg}}
 
 /* Catalog controls and media-led progress rows. */
 .catalog-controls{

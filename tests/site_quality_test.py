@@ -1570,6 +1570,11 @@ def main():
         "@keyframes page-reveal",
         "@keyframes portal-datafield-shift",
         "@keyframes portal-data-packet",
+        "@property --spectrum-angle",
+        "conic-gradient(from var(--spectrum-angle)",
+        "@keyframes spectrum-trace{to{--spectrum-angle:360deg}}",
+        ".portal-feature-row::before{padding:5px}",
+        "transition-duration:550ms,160ms",
         ".dataflow-field",
         ".site-header,main",
         "animation:page-reveal 110ms",
@@ -1579,6 +1584,8 @@ def main():
     ):
         if token not in style:
             errors.append(f"style.css missing animation contract: {token}")
+    if "background-position:-220% 0" in style:
+        errors.append("style.css must not reset the spectrum frame with a discontinuous background position")
 
     if errors:
         print("\n".join(errors))
