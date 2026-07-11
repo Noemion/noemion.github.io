@@ -1022,6 +1022,16 @@ def main():
         for term in ("提示词工程", "Noesis", "Noema", "分析哲学", "工程类比"):
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
+        home_source = home.read_text()
+        for token in (
+            "DATAFLOW / ACTIVE",
+            "dataflow-lane-source",
+            "dataflow-lane-bind",
+            "dataflow-lane-reloc",
+            "dataflow-lane-verify",
+        ):
+            if token not in home_source:
+                errors.append(f"index.html: homepage dataflow visual missing {token}")
 
     foundations = ROOT / "about/intellectual-foundations.html"
     if foundations.exists():
@@ -1503,6 +1513,9 @@ def main():
     style = (ROOT / "assets/style.css").read_text()
     for token in (
         "@keyframes page-reveal",
+        "@keyframes portal-datafield-shift",
+        "@keyframes portal-data-packet",
+        ".dataflow-field",
         ".site-header,main",
         "animation:page-reveal 110ms",
         "opacity:.96",
