@@ -1,14 +1,14 @@
 ---
 layout: "manual"
-title: "测试与放行门 · noemld 文档 · Noemion"
+title: "测试与验收 · noemld 文档 · Noemion"
 page_role: "docs-topic"
 footer_text: "Noemion · noemld documentation"
 permalink: "/tools/noemld/docs/testing.html"
 manual_id: "noemld"
 manual_group: "security"
 manual_order: 10
-nav_title: "测试与放行门"
-hero_title: "测试与放行门"
+nav_title: "测试与验收"
+hero_title: "测试与验收"
 hero_description: "确定性、Golden Cases 与冲突矩阵"
 summary: "确定性、Golden Cases 与冲突矩阵"
 badges: ["noemld", "Phase 4 / Phase 5"]
@@ -26,7 +26,7 @@ badges: ["noemld", "Phase 4 / Phase 5"]
 | 安全与鲁棒性 | 恶意或超限输入是否安全、快速、原子地失败。 | 模糊测试、变异语料、资源上限和故障注入。 |
 | 复现与互操作 | 不同环境和实现是否产生规范等价结果。 | 跨平台重复构建、独立实现和版本矩阵。 |
 
-## 放行门
+## 发布验收标准
 
 - 链接顺序不改变规范允许之外的结果。
 - 全部强依赖解析且弱依赖缺失行为明确。
@@ -47,6 +47,6 @@ badges: ["noemld", "Phase 4 / Phase 5"]
 
 论文实验应预先声明假设、基线、数据生成器、规范版本、硬件环境和统计方法，并公开失败案例。专利材料要区分新颖机制与 ELF/传统链接器已有策略；软件著作权材料不能替代原创性或正确性证明。进入行业标准候选前，还需要规范测试套件版本化、独立实现结果和跨组织互操作报告。
 
-## 放行记录
+## 验证记录
 
-每次阶段门应保存测试套件摘要、输入语料版本、通过与失败清单、覆盖的规范条款、未覆盖风险和批准人。覆盖率只能说明被执行的结构，不能独立证明语义完整或安全。
+每次正式验收都应保存测试套件摘要、输入语料版本、通过与失败清单、覆盖的规范条款、未覆盖风险和确认人。覆盖率只能说明被执行的结构，不能独立证明语义完整或安全。

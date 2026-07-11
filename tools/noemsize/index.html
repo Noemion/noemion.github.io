@@ -12,8 +12,8 @@ permalink: "/tools/noemsize/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>依赖对象布局、Segment 映射、Disclosure Graph 和包格式。进入验证前需用合成对象与真实纵向切片校准每种口径，并与 Loader/Runtime 实测区分估算误差。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发计划：</strong>先完成对象布局、Segment 映射、Disclosure Graph 和包格式；随后用合成对象与真实纵向切片校准每种计量口径，并与 Loader 和 Runtime 实测结果比较估算误差。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">选择计量口径</div><div class="step">解析对象与闭包</div><div class="step">归属字节和预算</div><div class="step">比较基线</div><div class="step">报告主要贡献者</div></div><ul><li>统计文件、Section、Segment、归档成员和包组件尺寸</li><li>区分运行闭包、调试信息、精确 Artifact 和模型资产</li><li>估算装载峰值、映射内存与披露预算</li><li>比较链接、strip、量化和打包前后变化</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Artifact</td><td>GOBJ、archive、SSO 或 noempkg</td></tr><tr><td>输入</td><td>Accounting Profile</td><td>disk/load/runtime/debug/model/disclosure 口径</td></tr><tr><td>输入</td><td>Baseline</td><td>可选的历史报告或预算文件</td></tr><tr><td>输出</td><td>Size Table</td><td>组件字节、占比、对齐浪费与归属</td></tr><tr><td>输出</td><td>Budget Verdict</td><td>预算通过、超限和主要贡献者</td></tr><tr><td>输出</td><td>Delta Report</td><td>相对 baseline 的新增、减少与迁移</td></tr></tbody></table></div></section>

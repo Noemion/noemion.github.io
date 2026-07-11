@@ -7,7 +7,7 @@ permalink: "/development/implementation-roadmap.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发</a><span aria-hidden="true">/</span><span>实施路线图</span></nav>
-  <div class="hero"><h1>实施路线图</h1><p>从最小规范和恶意语料开始，逐步进入确定性编译、链接、可信装载与模型辅助。</p><div class="badges"><span class="badge">Phases</span><span class="badge">Release Gates</span><span class="badge">Reproducible</span></div></div>
+  <div class="hero"><h1>实施路线图</h1><p>从最小规范和恶意语料开始，逐步进入确定性编译、链接、可信装载与模型辅助。</p><div class="badges"><span class="badge">Phases</span><span class="badge">Completion Criteria</span><span class="badge">Reproducible</span></div></div>
   <section>
     <h2>已确认原则：实施纪律</h2>
     <div class="status-grid">
@@ -18,8 +18,8 @@ permalink: "/development/implementation-roadmap.html"
     </div>
   </section>
   <section>
-    <h2>设计提案：阶段与放行门</h2>
-    <div class="table-wrap"><table><thead><tr><th>阶段</th><th>主要产物</th><th>放行条件</th></tr></thead><tbody>
+    <h2>设计提案：开发阶段与完成标准</h2>
+    <div class="table-wrap"><table><thead><tr><th>阶段</th><th>主要产物</th><th>完成标准</th></tr></thead><tbody>
       <tr><td>Phase 0<br>规范与样本</td><td>格式、schema registry、错误码、限制值、ADR、合法和畸形语料</td><td>每个字段、索引、长度与演进规则都有条款和正反样本。</td></tr>
       <tr><td>Phase 1<br>安全二进制核心</td><td>Checked Reader/Writer、Header、Section、字符串与符号表</td><td>畸形对象不能越界、溢出、无限递归或形成部分可信结果。</td></tr>
       <tr><td>Phase 2<br>文本 IR 往返</td><td>规范化文本 GSIR、汇编、反汇编和语义差异</td><td>规范化 Round-trip 一致，对象字节可复现。</td></tr>
@@ -51,8 +51,8 @@ permalink: "/development/implementation-roadmap.html"
     <p>模型数据、训练、蒸馏和量化属于 Phase 7；跨平台认证与性能预算属于 Phase 8。两者都不进入第一阶段。</p>
   </section>
   <section>
-    <h2>IPD 映射与可追溯交付</h2>
-    <p>Phase 0–8 是技术能力顺序，不等同于 IPD 管理阶段。概念阶段可以覆盖多个技术 Phase 的问题与候选；计划、开发和验证阶段应对每个纵向切片重复执行；发布与生命周期阶段只适用于已经通过对应放行门的制品。</p>
+    <h2>交付物追溯</h2>
+    <p>Phase 0–8 表示技术能力的开发顺序。每个实现任务都要关联对应规范、设计决定和测试结果；只有完成当前阶段标准的制品才进入后续开发或发布准备。</p>
     <div class="table-wrap"><table><thead><tr><th>追溯对象</th><th>必须链接到</th><th>评审问题</th></tr></thead><tbody>
       <tr><td>研究问题或需求</td><td>用例、现有技术、风险、规范范围</td><td>问题是否真实且可证伪或验收</td></tr>
       <tr><td>规范条款</td><td>设计决定、正反样例、一致性测试</td><td>是否无歧义、可实现、可测试</td></tr>

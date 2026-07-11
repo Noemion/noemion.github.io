@@ -12,8 +12,8 @@ permalink: "/tools/noemobj/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>需先冻结最小 Header/Section/Symbol Schema 和安全 Reader 契约；开发退出证据包括畸形对象下的有界输出、字段级 Golden 视图和结构化输出 Schema 一致性。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发计划：</strong>先确定最小 Header、Section、Symbol Schema 和安全 Reader 契约；随后验证畸形对象下的有界输出、字段级 Golden 视图和结构化输出 Schema 一致性。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">受限读取</div><div class="step">选择视图</div><div class="step">解析引用</div><div class="step">限制深度与预算</div><div class="step">稳定输出</div></div><ul><li>显示 Header、Section、Segment、String、Symbol、Relocation 和 Note</li><li>按 H/C/E/B-GSIR 层查看节点、边、约束与 Artifact Contract</li><li>显示 SSO 依赖闭包、Disclosure Graph、模型与策略指纹</li><li>支持稳定文本、JSON 和限定深度的图输出</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>GOBJ/SSO/Package</td><td>本地文件、stdin 或包内具名成员</td></tr><tr><td>输入</td><td>View Selection</td><td>header/sections/symbols/relocs/gsir/coverage/disclosure</td></tr><tr><td>输入</td><td>Resource Limits</td><td>最大节点数、递归深度、字符串与输出预算</td></tr><tr><td>输出</td><td>Text View</td><td>面向开发者的稳定字段与偏移视图</td></tr><tr><td>输出</td><td>Structured View</td><td>JSON/CBOR 结构数据，字段名与 schema 对齐</td></tr><tr><td>输出</td><td>Graph Extract</td><td>受限 DOT 或节点边清单</td></tr></tbody></table></div></section>

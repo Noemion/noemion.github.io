@@ -20,16 +20,16 @@ manual_index_heading: "文档目录"
 
 `noemld` 位于“多个局部对象”成为“一个可装载整体”的信任转换点。符号选择、ID 重映射、约束合并、权限收敛或依赖闭包中的任何隐式规则，都会影响产物语义、安全边界和复现结果。因此它不是普通文件拼接器，每项决定都必须形成可规范、可测试、可诊断的契约。
 
-当前内容属于设计契约而非已发布产品手册。规范性定义以 [对象规范](../../../specifications/index.html)、经批准的 ADR 和一致性测试为准；命令示例只帮助理解调用模型，不承诺稳定接口。
+`noemld` 尚未发布可执行版本。当前文档记录已确认的职责和设计契约，规范性定义以 [对象规范](../../../specifications/index.html)、经批准的 ADR 和一致性测试为准；CLI 与命令示例展示预期使用流程，实际接口仍在设计中。
 
 ## 建议阅读路径
 
 | 读者任务 | 先读 | 需要回答的问题 |
 | --- | --- | --- |
 | 理解边界 | [工具契约](contract.html)、[输入与输出](inputs-outputs.html) | 哪些决定属于链接器，输入满足什么条件，输出承诺什么。 |
-| 评审算法 | [处理流程](pipeline.html)、[符号解析](symbol-resolution.html)、[重定位](relocations.html) | 结果如何保持确定、冲突何时失败、ID 如何安全变换。 |
-| 评审语义与安全 | [SSO 链接](sso-linking.html)、[装载与安全](loader-security.html) | 约束与权限怎样合并，链接产物如何进入运行时信任域。 |
-| 建立验证证据 | [诊断](diagnostics.html)、[测试与放行门](testing.html) | 失败如何定位，哪些证据足以支撑实现放行和研究结论。 |
+| 检查算法设计 | [处理流程](pipeline.html)、[符号解析](symbol-resolution.html)、[重定位](relocations.html) | 结果如何保持确定、冲突何时失败、ID 如何安全变换。 |
+| 检查语义与安全 | [SSO 链接](sso-linking.html)、[装载与安全](loader-security.html) | 约束与权限怎样合并，链接产物如何进入运行时信任域。 |
+| 验证实现 | [诊断](diagnostics.html)、[测试与验收](testing.html) | 失败如何定位，哪些测试足以支持发布或研究结论。 |
 
 ## 成熟度与证据边界
 

@@ -12,8 +12,8 @@ permalink: "/tools/noemverify/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>Phase 1 先形成结构层与资源限制；语义和覆盖层依赖 GSIR/GOBJ 条款；信任层依赖签名、Merkle、撤销和 Profile 规范。只有请求层全部实现并通过对抗测试后，才能产生 Verified Handle。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发顺序：</strong>Phase 1 先实现结构检查与资源限制；语义和覆盖检查依赖 GSIR/GOBJ 条款；信任检查依赖签名、Merkle、撤销和 Profile 规范。全部检查实现并通过对抗测试后，才会生成 Verified Handle。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">结构</div><div class="step">语义</div><div class="step">覆盖</div><div class="step">信任</div><div class="step">不可变句柄</div></div><ul><li>struct 层验证范围、对齐、索引、重叠、循环与资源限制</li><li>semantic 层验证类型、符号、模态、约束和 Artifact Contract</li><li>coverage 层验证 Source Unit 分类与发布覆盖证明</li><li>trust 层验证哈希、Merkle、签名、撤销、依赖和策略</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Object</td><td>GOBJ、SSO 或 noempkg</td></tr><tr><td>输入</td><td>Verification Profile</td><td>请求层、限制值、目标 ABI 和允许能力</td></tr><tr><td>输入</td><td>Trust Material</td><td>离线信任库、撤销状态、策略和锁文件</td></tr><tr><td>输出</td><td>Layered Verdict</td><td>每层 PASS/FAIL/NOT-RUN 与稳定错误码</td></tr><tr><td>输出</td><td>Evidence Map</td><td>失败字节、节点、Source Unit、签名与依赖证据</td></tr><tr><td>输出</td><td>Verified Handle</td><td>仅在所需层全部通过后供 Loader 使用的不可变句柄</td></tr></tbody></table></div></section>

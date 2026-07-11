@@ -117,7 +117,7 @@ INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "《逻辑哲学论》的第一批检查点",
     "对 GSIR 的设计提案",
     "核心书目与资源状态",
-    "进入规范前的证据门",
+    "思想采用的验证要求",
 ]
 ROLE_BY_KIND = {
     "portal": "portal",
@@ -136,7 +136,7 @@ TOOL_PROJECT_SECTIONS = [
     "相关资源",
 ]
 TOOL_PROJECT_STATUS_DECLARATION = (
-    "设计阶段：当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。"
+    "当前状态：尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。"
 )
 PUBLIC_META_PHRASES = (
     "本轮",
@@ -157,6 +157,14 @@ PUBLIC_META_PHRASES = (
     "只完成页面",
     "后续文档将",
     "页面不得提前",
+    "本页",
+    "当前内容属于",
+    "已确认内容限于",
+    "阶段门",
+    "证据门",
+    "退出证据",
+    "放行",
+    "IPD",
     "Codex",
     "ChatGPT",
     "subagent",
@@ -793,7 +801,7 @@ def tool_project_validator_self_test():
         ],
         "reversed release wording": [
             TOOL_PROJECT_SECTIONS,
-            ["设计阶段：当前已发布可执行程序；命令行接口、参数和文件扩展名已经冻结。"],
+            ["当前状态：已经发布可执行版本，命令行界面、参数和文件扩展名已经确定。"],
         ],
     }
     for name, (headings, statuses) in negative_cases.items():
@@ -883,7 +891,7 @@ def main():
             " ".join("".join(section["text"]) for section in parser.sections)
         )
         for term in (
-            "不得直接推出", "进入规范前的证据门", "Source Expression",
+            "不得直接推出", "思想采用的验证要求", "Source Expression",
             "对象语言", "言语行为", "会话含义",
         ):
             if term not in visible_text:

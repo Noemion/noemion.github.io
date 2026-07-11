@@ -54,7 +54,7 @@ badges: ["Getting Started", "Design Stage", "No Release Yet"]
 
 ## 下一步
 
-**未来阶段：**规范、安全 Reader/Writer、验证器和确定性 Compiler Core 达到放行门后，项目才会进入可安装工具和 Runtime 的发布准备。
+**未来阶段：**规范、安全 Reader/Writer、验证器和确定性 Compiler Core 完成实现与验证后，项目才会准备可安装工具和 Runtime。
 
 - [继续阅读架构指南](architecture-guide.html)：了解对象如何编译、链接、装载和执行。
 - [查看使用与获取状态](installation-and-usage.html)：了解当前能获取什么，以及正式发布前不能做什么。

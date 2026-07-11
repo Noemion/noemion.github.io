@@ -12,8 +12,8 @@ permalink: "/tools/noemdiff/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>依赖规范化文本、语义哈希、稳定符号和差异分类规则；验证需覆盖 ID 重排、等价布局、真实语义变化、权限扩大、未知扩展和资源受限图匹配。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发计划：</strong>先完成规范化文本、语义哈希、稳定符号和差异分类规则；随后验证 ID 重排、等价布局、真实语义变化、权限扩大、未知扩展和资源受限图匹配。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">识别输入层次</div><div class="step">规范化稳定标识</div><div class="step">匹配图与依赖</div><div class="step">分类差异</div><div class="step">给出等价/改变/未知</div></div><ul><li>比较 GSL、文本 GSIR、GOBJ、SSO 与发布包</li><li>通过稳定符号和图同构消除 ID、顺序和偏移噪声</li><li>输出 layout/debug/runtime/trust 分类差异</li><li>提供发布门使用的允许差异策略</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Left/Right Artifact</td><td>文本或二进制对象，可为不同封装</td></tr><tr><td>输入</td><td>Diff Profile</td><td>关注层、允许差异、规范版本和资源限制</td></tr><tr><td>输入</td><td>Symbol Hints</td><td>可选的重命名映射或链接 map</td></tr><tr><td>输出</td><td>Classified Diff</td><td>带路径、旧值、新值和严重度的差异</td></tr><tr><td>输出</td><td>Semantic Verdict</td><td>equivalent/changed/unknown</td></tr><tr><td>输出</td><td>Machine Report</td><td>供 CI、noemstrip 与发布审计消费</td></tr></tbody></table></div></section>

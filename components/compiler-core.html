@@ -45,7 +45,7 @@ permalink: "/components/compiler-core.html"
   <section>
     <h2>详细设计入口与验证证据</h2>
     <p>尚未冻结的核心契约包括规范化上下文、符号与类型环境、约束求解接口、歧义状态机、Coverage Ledger、Pass 管理、确定性 Writer 和诊断模型。每个 Pass 必须声明输入不变量、输出不变量、是否允许产生未决状态、复杂度或资源上限以及失败后是否可继续。</p>
-    <p>Compiler Core 的放行证据包括：相同输入的字节级复现、规范化 Round-trip、类型与约束负例、歧义保持、Source Unit 覆盖、精确载荷保护、跨 Pass 属性测试和关闭模型后的完整 Strict 流程。性能数据不能替代语义和安全正确性。</p>
+    <p>Compiler Core 的验收需要覆盖相同输入的字节级复现、规范化 Round-trip、类型与约束负例、歧义保持、Source Unit 覆盖、精确载荷保护、跨 Pass 属性测试和关闭模型后的完整 Strict 流程。性能数据不能替代语义和安全正确性。</p>
   </section>
   <div class="next-prev"><a href="../specifications/sso.html">← SSO</a><a href="linker-loader.html">Linker、Loader 与 Runtime →</a></div>
 </main>

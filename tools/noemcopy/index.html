@@ -12,8 +12,8 @@ permalink: "/tools/noemcopy/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>需要先稳定 Section/引用规则、语义哈希和 Writer；开发放行要求每种变换具有前置条件、影响分析、原子提交、Round-trip 和失败不产出部分对象的测试。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发计划：</strong>先稳定 Section/引用规则、语义哈希和 Writer；每种变换都将验证前置条件、影响分析、原子提交、Round-trip，以及失败时不产生部分对象。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">验证源对象</div><div class="step">解析变换计划</div><div class="step">计算影响闭包</div><div class="step">重建对象</div><div class="step">验证与报告</div></div><ul><li>复制完整对象或选定 Section 到新对象</li><li>抽取调试、来源、Artifact 或模型元数据为补充对象</li><li>重命名允许重命名的 Section 与局部符号</li><li>规范化对齐、排序、内容寻址和构建元数据</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Source Object</td><td>已通过结构验证的 GOBJ/SSO</td></tr><tr><td>输入</td><td>Transform Plan</td><td>copy/extract/rename/remove/normalize 操作及顺序</td></tr><tr><td>输入</td><td>Target Profile</td><td>对象版本、字节序、对齐和发布/开发封装</td></tr><tr><td>输出</td><td>Transformed Object</td><td>重建目录、索引、引用和哈希的新对象</td></tr><tr><td>输出</td><td>Change Manifest</td><td>操作、受影响引用、签名状态和语义哈希比较</td></tr><tr><td>输出</td><td>Supplement Object</td><td>可选的调试或来源补充对象</td></tr></tbody></table></div></section>

@@ -12,8 +12,8 @@ permalink: "/tools/noemar/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>依赖对象符号模型、归档格式和 noemld 成员选择规则；放行需证明成员顺序与元数据规范化、索引重建、损坏归档拒绝和双构建字节复现。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发计划：</strong>先完成对象符号模型、归档格式和 noemld 成员选择规则；随后验证成员顺序与元数据规范化、索引重建、损坏归档拒绝和双构建字节复现。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">验证成员</div><div class="step">规范化名称与顺序</div><div class="step">构建符号索引</div><div class="step">写入哈希与元数据</div><div class="step">复验归档</div></div><ul><li>创建和更新 GOBJ 静态归档</li><li>维护成员内容哈希、稳定顺序和符号索引</li><li>支持列出、抽取、删除与验证成员</li><li>生成薄归档或完整归档的明确封装</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>GOBJ Members</td><td>结构验证通过的可重定位对象</td></tr><tr><td>输入</td><td>Archive Operation</td><td>create/replace/delete/list/extract/index</td></tr><tr><td>输入</td><td>Archive Profile</td><td>deterministic、thin/full、重复成员策略</td></tr><tr><td>输出</td><td>Noemion Archive</td><td>成员目录、符号索引、哈希和规范元数据</td></tr><tr><td>输出</td><td>Member Listing</td><td>稳定名称、尺寸、哈希、导出符号摘要</td></tr><tr><td>输出</td><td>Operation Report</td><td>新增、替换、删除和索引变化</td></tr></tbody></table></div></section>

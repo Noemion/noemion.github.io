@@ -12,8 +12,8 @@ permalink: "/tools/noemc/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>Phase 3 只放行 Strict 前端、类型/约束/覆盖检查和确定性 Writer；Assisted 与 Generate-Strict 必须等待 Strict 拒绝行为稳定，并证明关闭模型后对象格式、核心语义和测试仍不变。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发顺序：</strong>Phase 3 先实现 Strict 前端、类型/约束/覆盖检查和确定性 Writer。Assisted 与 Generate-Strict 将在 Strict 拒绝行为稳定后开发，并验证关闭模型时对象格式、核心语义和测试保持不变。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">选择受信任前端模式</div><div class="step">构造候选与来源</div><div class="step">确定性绑定和检查</div><div class="step">覆盖与契约审计</div><div class="step">写入可重定位对象</div></div><ul><li>Strict 模式解析 GSL 并确定性生成多层 GSIR</li><li>Assisted 模式接收 NSFE 封闭候选并逐项验证或拒绝</li><li>Generate-Strict 模式检查外部模型生成的 GSL</li><li>构建 Source Graph、Coverage Ledger、Artifact Contract 与可重定位 GOBJ</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>GSL Source</td><td>Strict 模式的受控声明式源</td></tr><tr><td>输入</td><td>Natural Language Package</td><td>Assisted 模式的文件、资源、目录和策略</td></tr><tr><td>输入</td><td>Compiler Profile</td><td>规范版本、模式、ontology、限制和目标 ABI</td></tr><tr><td>输出</td><td>Relocatable GOBJ</td><td>多层 GSIR、符号、重定位、Artifact 与调试 Section</td></tr><tr><td>输出</td><td>Coverage Ledger</td><td>每个 Source Unit 的结构化、精确保留、丢弃或阻断状态</td></tr><tr><td>输出</td><td>Build Manifest</td><td>输入哈希、工具/模型指纹、依赖与可复现构建字段</td></tr></tbody></table></div></section>

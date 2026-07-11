@@ -12,8 +12,8 @@ permalink: "/tools/noemrun/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>需要稳定 Loader、Run Profile、披露 ABI、能力授权、状态哈希与 Runtime 契约；放行需通过篡改、回滚、越权披露、预算耗尽、状态漂移和模型/能力失败测试。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发计划：</strong>先稳定 Loader、Run Profile、披露 ABI、能力授权、状态哈希与 Runtime 契约；随后测试篡改、回滚、越权披露、预算耗尽、状态漂移和模型或外部能力失败。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">验证发布包</div><div class="step">建立装载与权限映射</div><div class="step">绑定模型和外部能力</div><div class="step">受控披露与求解</div><div class="step">验收结果并记录证据</div></div><ul><li>验证包签名、Manifest、Section 摘要和依赖闭包</li><li>按 Segment 与权限建立只读、可执行和私有运行映射</li><li>执行渐进式披露，维护预算、来源和会话状态</li><li>调用 Runtime 求解并记录结构化结果</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Signed SSO Package</td><td>由 noempack 生成且可完整验证的发布包</td></tr><tr><td>输入</td><td>Run Profile</td><td>能力、预算、目标环境、披露与审计策略</td></tr><tr><td>输入</td><td>Runtime Context</td><td>显式传入的任务上下文和允许访问的 Artifact</td></tr><tr><td>输出</td><td>Run Result</td><td>结构化状态、结果对象和失败分类</td></tr><tr><td>输出</td><td>Session State</td><td>披露游标、预算消耗、绑定符号和派生产物引用</td></tr><tr><td>输出</td><td>Run Report</td><td>验证链、装载映射、策略决定和运行摘要</td></tr></tbody></table></div></section>

@@ -10,7 +10,7 @@ permalink: "/components/nsfe.html"
   <div class="hero"><h1>NSFE</h1><p>Neural Semantic Frontend 的封闭候选接口、Source Graph 架构与模型工程状态。</p><div class="badges"><span class="badge">Untrusted Candidates</span><span class="badge">Source Graph</span><span class="badge">OOD</span></div></div>
   <section>
     <h2>已确认原则：架构与边界</h2>
-    <p class="lead">NSFE 采用预训练双向语言底座，加自研层级 Source Graph 聚合、知识检索路由、稀疏语义图和封闭任务头；从头预训练语言底座必须通过独立证据门槛。</p>
+    <p class="lead">NSFE 采用预训练双向语言底座，加自研层级 Source Graph 聚合、知识检索路由、稀疏语义图和封闭任务头；只有独立实验确认现有底座无法满足需求时，才考虑从头预训练语言底座。</p>
     <ul>
       <li>允许输出有限概念 ID、Span、Relation、Modality、Scope、置信度、Ambiguity 与 NIL/OOD 候选。</li>
       <li>禁止自由文本 Decoder、聊天、网络、Shell、工具调用和文件写入。</li>
@@ -42,21 +42,21 @@ permalink: "/components/nsfe.html"
   </section>
   <section>
     <h2>未来阶段：训练阶梯与模型包</h2>
-    <p>未来按规则基线、局部语言基线、Noemion 结构层、证据驱动的领域继续预训练、蒸馏压缩、校准/OOD 与导出量化逐级放行。模型包需要覆盖权重、词表、ontology、架构与任务头 schema、量化配置、评测、校准、血缘和签名，并作为不可信输入验证。</p>
+    <p>未来按规则基线、局部语言基线、Noemion 结构层、领域继续预训练、蒸馏压缩、校准/OOD 与导出量化依次推进。模型包需要覆盖权重、词表、ontology、架构与任务头 schema、量化配置、评测、校准、血缘和签名，并作为不可信输入验证。</p>
   </section>
   <section>
     <h2>开放问题：何时从头预训练</h2>
     <p>只有现有底座在合理微调和领域适配后仍系统性失败、消融定位到底座瓶颈、拥有许可清晰的大规模语料与长期盲测集、预算允许多次完整实验，且收益显著高于维护成本时，才进入立项评审。</p>
   </section>
   <section>
-    <h2>研究假设、基线与放行证据</h2>
+    <h2>研究假设、基线与验证要求</h2>
     <ul>
       <li><strong>层级聚合假设：</strong>相较仅做局部窗口编码，Source Graph 与层级聚合能提高跨章节关系和硬约束召回；需用相同底座、数据和任务头做消融。</li>
       <li><strong>封闭任务头假设：</strong>受限输出空间能降低错误确定与不可审计生成；需与生成式抽取和规则基线比较准确率、校准、OOD 与失败可解释性。</li>
       <li><strong>检索路由假设：</strong>知识路由能在固定预算下降低无关上下文并保持必需证据；需测试遗漏、安全条款召回和延迟成本。</li>
       <li><strong>模型底座假设：</strong>现有预训练双向底座足以支撑任务；只有系统性残差由底座导致时才考虑从头预训练。</li>
     </ul>
-    <p>放行报告必须公开数据许可与血缘、切分隔离、基线、消融、置信区间、失败切片、校准、OOD、量化退化、目标设备资源和模型指纹。单一综合分数不足以支持研究或产品结论。</p>
+    <p>验证报告必须说明数据许可与血缘、切分隔离、基线、消融、置信区间、失败切片、校准、OOD、量化退化、目标设备资源和模型指纹。单一综合分数不足以支持研究或产品结论。</p>
   </section>
   <div class="next-prev"><a href="linker-loader.html">← Linker、Loader 与 Runtime</a><a href="../development/implementation-roadmap.html">实施路线图 →</a></div>
 </main>

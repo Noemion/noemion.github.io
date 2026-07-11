@@ -12,8 +12,8 @@ permalink: "/tools/noemnm/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>必须与 GOBJ 和 noemld 共用符号 Schema、版本比较与可见性规则；放行证据包括对象/归档/SSO 的稳定排序、未知扩展、损坏索引和 ABI Snapshot 回归。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发计划：</strong>与 GOBJ 和 noemld 共用符号 Schema、版本比较与可见性规则；随后验证对象、归档和 SSO 的稳定排序、未知扩展、损坏索引和 ABI Snapshot 回归。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">读取对象或归档</div><div class="step">解析符号与版本</div><div class="step">关联类型/契约/权限</div><div class="step">筛选和稳定排序</div><div class="step">输出清单与快照</div></div><ul><li>读取 GOBJ、SSO、归档与发布包的符号</li><li>显示定义/未定义、local/global、weak/strong 和版本</li><li>关联符号的类型、Section、Contract、权限与依赖</li><li>提供稳定文本、POSIX-like 和 JSON 输出</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Artifact</td><td>GOBJ、archive、SSO 或 noempkg</td></tr><tr><td>输入</td><td>Selection</td><td>defined/undefined/exports/imports/versions/contracts</td></tr><tr><td>输入</td><td>Display Profile</td><td>排序、demangle、radix 和格式</td></tr><tr><td>输出</td><td>Symbol Listing</td><td>稳定排序的符号与属性</td></tr><tr><td>输出</td><td>Undefined Summary</td><td>未解析引用及来源成员</td></tr><tr><td>输出</td><td>ABI Snapshot</td><td>导出表、版本和 Contract 哈希</td></tr></tbody></table></div></section>

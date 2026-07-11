@@ -12,8 +12,8 @@ permalink: "/tools/noemtrace/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>依赖稳定事件 Schema、对象身份、时钟/序号模型、Debug Companion 和脱敏策略；验证需覆盖并发排序、事件丢失、状态关联、敏感字段和低开销采集。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发计划：</strong>先稳定事件 Schema、对象身份、时钟与序号模型、Debug Companion 和脱敏策略；随后验证并发排序、事件丢失、状态关联、敏感字段和低开销采集。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">采集结构化事件</div><div class="step">规范化时间与身份</div><div class="step">关联对象/节点/来源</div><div class="step">应用脱敏策略</div><div class="step">重建因果与诊断</div></div><ul><li>定义稳定、版本化、机器可解析的追踪事件</li><li>关联对象、Section、符号、GSIR 节点和 Source Unit</li><li>重建披露链、约束决定与失败因果</li><li>按策略脱敏敏感 Artifact 和自然语言片段</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Trace Stream</td><td>带序号、时钟域、对象身份和事件 schema 的记录</td></tr><tr><td>输入</td><td>Debug Companion</td><td>独立保存的源映射、符号名和开发调试 Section</td></tr><tr><td>输入</td><td>Redaction Policy</td><td>字段级保留、哈希、隐藏和导出规则</td></tr><tr><td>输出</td><td>Diagnostic Report</td><td>按事件、对象、源单元或因果链组织的报告</td></tr><tr><td>输出</td><td>Normalized Trace</td><td>可供比较、测试和回放分析的稳定事件序列</td></tr></tbody></table></div></section>

@@ -12,14 +12,14 @@ permalink: "/tools/noemeval/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<h3>评估放行门</h3><p>任何候选进入正式评估前，必须冻结 Evaluation Suite、指标定义、切片、阈值、基线与统计方法，并把盲测数据与训练调参隔离。放行报告只能回答预先声明的问题；探索性分析产生的新假设必须进入下一轮独立实验。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<h3>正式评估准备</h3><p>正式评估前需要固定 Evaluation Suite、指标定义、数据切片、阈值、基线与统计方法，并把盲测数据与训练调参隔离。评估报告只回答预先声明的问题；探索分析产生的新假设需要通过新的独立实验验证。</p>
 </section>
   <section><h2>主要能力</h2><ul><li>评估跨度、关系、模态、歧义、路由和封闭任务头，并保留逐样本证据</li><li>测量错误确定、拒绝质量、校准和覆盖账本影响，而非只统计命中率</li><li>执行长度、领域、语言、结构和风险切片，暴露总体指标下的局部退化</li><li>在相同协议下比较基座、消融、教师、量化与部署后端</li></ul><h3>概要处理流</h3><ol class="process"><li><strong>核验候选：</strong>确认模型、数据、配方、环境和评测套件的不可变指纹。</li><li><strong>冻结执行：</strong>在隔离环境生成逐样本预测和运行记录。</li><li><strong>分层计量：</strong>计算切片指标、校准、拒绝质量、置信区间与资源表现。</li><li><strong>对照分析：</strong>与批准基线和预声明消融比较，定位差异来源。</li><li><strong>形成决策：</strong>输出通过、拒绝或人工复核结论，并精确列出失败门和受影响切片。</li></ol></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Model Candidate</td><td>checkpoint 或量化模型及其完整 Manifest</td></tr><tr><td>输入</td><td>Evaluation Suite</td><td>冻结数据、切片、指标、阈值和执行后端</td></tr><tr><td>输入</td><td>Baseline Registry</td><td>已批准基线、历史版本和可比条件</td></tr><tr><td>输出</td><td>Evaluation Bundle</td><td>逐样本预测、指标、置信区间与环境指纹</td></tr><tr><td>输出</td><td>Gate Decision</td><td>通过、拒绝或需复核及精确失败切片</td></tr><tr><td>输出</td><td>Regression Report</td><td>相对基线的质量、性能和校准变化</td></tr></tbody></table></div></section>
-  <section><h2>处理边界</h2><ul><li>不以平均准确率掩盖高风险切片退化，不省略样本规模和不确定区间</li><li>不在评测集上调参后继续把同一结果作为盲测结论</li><li>不把模型指标等同于 Compiler Core、GOBJ 或 Runtime 的正确性证明</li><li>不允许缺少数据血缘、许可、版本或污染检查的基准进入放行门</li><li>不把统计显著性自动解释为工程价值、原创性或标准化成熟度</li></ul><p>模型输出和模型包一律视为不可信；它们不能决定二进制布局，也不能直接生成 GOBJ。评估结论只在指定数据、阈值、后端和环境范围内成立，外推必须另行验证。</p>
+  <section><h2>处理边界</h2><ul><li>不以平均准确率掩盖高风险切片退化，不省略样本规模和不确定区间</li><li>不在评测集上调参后继续把同一结果作为盲测结论</li><li>不把模型指标等同于 Compiler Core、GOBJ 或 Runtime 的正确性证明</li><li>缺少数据血缘、许可、版本或污染检查的基准不能用于正式验收</li><li>不把统计显著性自动解释为工程价值、原创性或标准化成熟度</li></ul><p>模型输出和模型包一律视为不可信；它们不能决定二进制布局，也不能直接生成 GOBJ。评估结论只在指定数据、阈值、后端和环境范围内成立，外推必须另行验证。</p>
 <h3>尚未冻结的评估契约</h3>
-<p>指标与校准、数据分区、统计置信、回归门和结果解释仍需分别规范，并明确哪些指标只能支持探索分析，哪些可以用于工程放行或标准一致性判断。</p>
+<p>指标与校准、数据分区、统计置信、回归标准和结果解释仍需分别规范，并明确哪些指标只能支持探索分析，哪些可以用于工程验收或标准一致性判断。</p>
 </section>
-  <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../components/nsfe.html"><strong>NSFE 组件</strong><span>查看语言底座、Source Graph 聚合和封闭任务头设计。</span></a><a class="page-link" href="../../development/implementation-roadmap.html"><strong>实施路线</strong><span>查看模型工程的证据门和阶段边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看模型工程与工具链上下游。</span></a></div></section>
+  <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../components/nsfe.html"><strong>NSFE 组件</strong><span>查看语言底座、Source Graph 聚合和封闭任务头设计。</span></a><a class="page-link" href="../../development/implementation-roadmap.html"><strong>实施路线</strong><span>查看模型工程的开发顺序和验证要求。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看模型工程与工具链上下游。</span></a></div></section>
 </main>

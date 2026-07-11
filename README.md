@@ -118,6 +118,7 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 8. 正式 HTML 面向开发者、普通用户和潜在使用者，只解释项目、产品、规范、使用场景与真实状态；不得出现用户指令、内容生成、内部 review、补写过程、页面制作或测试驱动文案等幕后信息。
 9. 网站作为后续设计、实现和互操作工作的标准与规范入口，采用“直白解释 + 精确定义”双层表达；解释可以增加，但不得弱化规范术语、约束强度、不变量、失败语义、成熟度标记和权威来源。
 10. 外部书目、论文、规范、下载和其他资源链接必须显示原始 URL，不能只保留概括性标题；资源说明和可复制链接分开书写。站内导航继续使用明确的目标名称。
+11. 所有公开界面使用产品化语言，直接说明现状、能力、限制、开发计划和验证结果；不出现“本页”“阶段门”“证据门”“放行”“退出证据”或未解释的 IPD 等内部制作与管理术语。规范、安全和学术内容可以保留必要专业词，但首次出现要给出直白解释。
 
 ### 模块化内容规范
 
@@ -167,7 +168,7 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 | `components/linker-loader.html` | content | `components/index.html` | 2 | Linker、Loader 与 Runtime |
 | `components/nsfe.html` | content | `components/index.html` | 3 | NSFE 架构与模型工程状态 |
 | `development/current-stage.html` | content | `development/index.html` | 1 | 当前项目阶段、证据门与进度时间线 |
-| `development/implementation-roadmap.html` | content | `development/index.html` | 2 | 实施阶段、工具职责与放行门 |
+| `development/implementation-roadmap.html` | content | `development/index.html` | 2 | 实施阶段、工具职责与完成标准 |
 | `development/testing.html` | content | `development/index.html` | 3 | 测试、Fuzz 与验证策略 |
 | `docs/getting-started.html` | content | `docs/index.html` | 1 | 项目入门、核心对象与推荐阅读路径 |
 | `docs/installation-and-usage.html` | content | `docs/index.html` | 2 | 当前可用性、未来使用流程与发布原则 |
@@ -208,7 +209,7 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 | `tools/noemld/docs/sso-linking.html` | topic | `tools/noemld/docs/index.html` | 7 | noemld SSO 链接与披露闭包 |
 | `tools/noemld/docs/loader-security.html` | topic | `tools/noemld/docs/index.html` | 8 | noemld 装载完整性与安全 |
 | `tools/noemld/docs/diagnostics.html` | topic | `tools/noemld/docs/index.html` | 9 | noemld 诊断与失败边界 |
-| `tools/noemld/docs/testing.html` | topic | `tools/noemld/docs/index.html` | 10 | noemld 测试与放行门 |
+| `tools/noemld/docs/testing.html` | topic | `tools/noemld/docs/index.html` | 10 | noemld 测试与验收 |
 | `tools/noemld/docs/dependencies.html` | topic | `tools/noemld/docs/index.html` | 11 | noemld 上下游依赖 |
 | `tools/noemld/docs/reference-index.html` | topic | `tools/noemld/docs/index.html` | 12 | noemld 命令术语与对象索引 |
 

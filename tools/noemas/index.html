@@ -12,8 +12,8 @@ permalink: "/tools/noemas/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>需先确定文本 GSIR 语法、规范化规则、最小对象 Schema 和重定位类别；开发退出证据包括文本—对象—文本规范化 Round-trip、确定性字节和完整负例语料。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发计划：</strong>先确定文本 GSIR 语法、规范化规则、最小对象 Schema 和重定位类别；随后验证文本—对象—文本规范化 Round-trip、确定性字节和完整负例语料。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">解析规范文本</div><div class="step">绑定局部符号</div><div class="step">检查类型与限制</div><div class="step">生成重定位</div><div class="step">确定性写入对象</div></div><ul><li>解析文本 GSIR 的层、节点、边、约束、符号和 Artifact 声明</li><li>解析局部符号并为外部符号生成重定位</li><li>生成字符串、符号、GSIR、重定位和调试映射 Section</li><li>执行语法、类型、范围和限制检查</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Text GSIR</td><td>UTF-8 规范文本及 include 的受控源</td></tr><tr><td>输入</td><td>Assembly Profile</td><td>对象版本、命名空间、目标 ABI 和限制</td></tr><tr><td>输入</td><td>Debug Options</td><td>源位置、注释和构建注记保留策略</td></tr><tr><td>输出</td><td>Relocatable GOBJ</td><td>带符号、重定位和可选调试信息的对象</td></tr><tr><td>输出</td><td>Dependency File</td><td>读取的 include、schema 和 ontology 依赖</td></tr><tr><td>输出</td><td>Diagnostics</td><td>稳定错误码、源范围和修复提示</td></tr></tbody></table></div></section>

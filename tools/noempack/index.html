@@ -12,8 +12,8 @@ permalink: "/tools/noempack/index.html"
 </section>
   <section>
 <h2>当前状态</h2>
-<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
-<p><strong>阶段门：</strong>依赖 SSO 闭包、锁文件、模型包、SBOM 和签名范围规范；发布验证需覆盖离线重建、依赖替换、路径穿越、压缩炸弹、许可证缺失和签名清单篡改。</p>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发计划：</strong>先确定 SSO 闭包、锁文件、模型包、SBOM 和签名范围规范；发布验证将覆盖离线重建、依赖替换、路径穿越、压缩炸弹、许可证缺失和签名清单篡改。</p>
 </section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">验证主对象</div><div class="step">解析锁定闭包</div><div class="step">收集组件与许可</div><div class="step">构建清单和签名范围</div><div class="step">离线复验发布包</div></div><ul><li>收集主对象和锁定强依赖闭包</li><li>嵌入或内容寻址关联模型、词表、ontology 与策略</li><li>生成 manifest、SBOM、签名清单和可复现构建元数据</li><li>支持 create/list/extract/verify 与增量内容存储</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Primary Object</td><td>已 strip 并通过语义/覆盖验证的 SSO/可执行对象</td></tr><tr><td>输入</td><td>Dependency Lock</td><td>内容哈希、角色、可选性和来源</td></tr><tr><td>输入</td><td>Package Profile</td><td>平台、嵌入策略、压缩、签名和预算</td></tr><tr><td>输出</td><td>Noemion Package</td><td>自描述目录、内容对象和主入口</td></tr><tr><td>输出</td><td>Package Manifest/SBOM</td><td>组件、哈希、许可证、构建与关系</td></tr><tr><td>输出</td><td>Signing Request</td><td>确定签名范围、算法和待签哈希</td></tr></tbody></table></div></section>
