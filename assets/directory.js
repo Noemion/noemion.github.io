@@ -531,8 +531,7 @@
     const railGroups = directory.groups.map((group, groupIndex) => {
       const details = document.createElement("details");
       details.className = "docs-rail-group";
-      const containsCurrent = group.items.some((entry) => canonical(new URL(entry.href, siteRoot).href) === current);
-      details.open = containsCurrent || groupIndex === 0;
+      details.open = true;
 
       const summary = document.createElement("summary");
       summary.innerHTML = `<small>${String(groupIndex + 1).padStart(2, "0")}</small><strong>${group.label}</strong><span>${group.items.length}</span>`;

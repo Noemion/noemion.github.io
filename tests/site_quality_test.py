@@ -747,6 +747,7 @@ def validate_jekyll_sources():
             "readManualDirectory",
             "payload.pages",
             "manualDirectory?.directory",
+            "details.open = true;",
             'trigger.setAttribute("aria-expanded", "false")',
             'item.addEventListener("mouseenter"',
             'intro.innerHTML = `<small>${group.kicker}</small>',
@@ -759,6 +760,8 @@ def validate_jekyll_sources():
         ):
             if token not in directory_text:
                 errors.append(f"directory.js missing dynamic manual contract: {token}")
+        if "details.open = containsCurrent || groupIndex === 0;" in directory_text:
+            errors.append("desktop documentation rail must not hide non-current groups by default")
         if "item.dataset.navGroup" in directory_text or "link.dataset.navItem" in directory_text:
             errors.append("global navigation must not expose decorative title numbers")
         if "portal-nav-link" in directory_text:
