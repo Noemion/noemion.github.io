@@ -15,6 +15,7 @@
 | 工具项目入口 | `page_role: tool-project`、`tools/<tool>/index.html` | [`tool-project.md`](tool-project.md) 与 [`internal-tools.md`](internal-tools.md) 中当前工具条目 |
 | 手册与指南 | `layout: manual` 或存在 `manual_id` | [`manual.md`](manual.md) |
 | 卡片、按钮、表格、Callout、流程、动效 | 修改共享视觉组件或状态反馈 | [`components-motion.md`](components-motion.md) |
+| 图片、照片、生成式视觉、裁切与图片动效 | 新增或替换 `assets/images/`，或修改页面中的 `<img>` / 图片背景 | [`images.md`](images.md)，并继续读取所属页面角色文档 |
 
 工具页按路径中的 `<tool>` 路由。例如修改 `tools/noemobj/index.html` 时，先读 `tool-project.md`，再读 `internal-tools.md#noemobj`；修改 `tools/noemld/docs/*.md` 时读 `manual.md`，并继承 `internal-tools.md#noemld` 的工具视觉签名。
 

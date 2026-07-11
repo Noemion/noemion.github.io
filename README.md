@@ -20,7 +20,7 @@
 - `_data/manuals.yml`：登记手册级名称、根路由、上级入口、面包屑和分组，不逐页复制目录链接。
 - `_data/project_timeline.yml`：项目阶段、当前状态摘要和页头阶段入口的唯一人工配置源。
 - 普通正式 `.html` 使用 `layout: default` 并编写职责对应的 `<main>`；手册 `.md` 使用 `layout: manual` 并只编写 Markdown 正文，公开文件名由 `permalink` 确定。
-- `assets/`：继续维护现有视觉、目录引擎、动画和图形资源；Jekyll 不改变其内容。
+- `assets/`：继续维护现有视觉、目录引擎、动画和图形资源；`assets/images/` 保存经过裁切和压缩的站点图片，Jekyll 不改变其内容。
 
 ### 手册内容源与生成
 
@@ -91,6 +91,8 @@ badges: ["Documentation"]
 页面角色采用同一设计语言下的不同页面范式：`portal` 使用首页叙事；`section` 使用分组列表；`content` 使用编辑式文章；`tool-project` 使用主内容与状态面板；所有 `/docs/` 路由及 `docs-index`、`docs-topic` 使用固定文档栏和阅读区。所有顶部一级入口必须支持悬停与键盘聚焦展开，卡片标题、圆形箭头和表面提供一致反馈；按压缩放为 0.96，进入与状态切换支持减少动态效果。完整规则见 [`sitewide-design-system.md`](sitewide-design-system.md)，首页内容蓝图见 [`homepage-design.md`](homepage-design.md)。
 
 修改页面前从 [`design-system/README.md`](design-system/README.md) 进入设计路由，并按页面角色读取门户、目录、专题、工具项目、手册或共享组件对应文档。设计文档目录被 Jekyll 排除，不会生成公开站点页面。
+
+图片只在能增强概念解释、页面辨识或内容氛围时使用。选择顺序为许可清晰的素材库、经授权的项目素材、项目定制生成图；素材必须下载到仓库并压缩，不能依赖第三方热链。来源、许可、裁切焦点、替代文本和生成提示记录在 [`design-system/images.md`](design-system/images.md)，公开页面不暴露设计参考或模仿关系。
 
 23 个内部工具分别拥有独立视觉签名，详见 [`design-system/internal-tools.md`](design-system/internal-tools.md)。默认布局根据 `tools/<tool>/...` 路径自动写入 `data-tool-id`，共享 CSS 再应用对应的配色、对象面板签名、网格角度和强调状态；工具项目页不维护页面级 CSS。工具帮助手册继承工具强调色，但正文、目录和分页继续遵循统一手册规范。
 

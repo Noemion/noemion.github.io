@@ -564,6 +564,7 @@ def validate_jekyll_sources():
         "manual": "manual.md",
         "global": "global-shell.md",
         "components": "components-motion.md",
+        "images": "images.md",
         "internal-tools": "internal-tools.md",
     }
     design_root = SOURCE_ROOT / "design-system"
@@ -722,6 +723,9 @@ def validate_jekyll_sources():
             "site.data[page.timeline_data]",
             "current_stage.title",
             'class="current-stage-feature"',
+            'class="current-stage-visual"',
+            'src="../assets/images/secure-object-core.jpg"',
+            'width="1440" height="960"',
             'class="current-stage-panel"',
             'class="project-progress-section"',
             "include project-timeline.html timeline=timeline",
@@ -736,6 +740,20 @@ def validate_jekyll_sources():
         ):
             if forbidden in current_stage_text:
                 errors.append(f"current stage page exposes internal workflow copy: {forbidden}")
+
+    image_contracts = {
+        "assets/images/semantic-identity.jpg": (400_000, 'src="assets/images/semantic-identity.jpg"'),
+        "assets/images/secure-object-core.jpg": (400_000, 'src="../assets/images/secure-object-core.jpg"'),
+    }
+    image_consumers = (SOURCE_ROOT / "index.html").read_text() + (SOURCE_ROOT / "development/current-stage.html").read_text()
+    for image_route, (maximum_bytes, source_token) in image_contracts.items():
+        image_path = SOURCE_ROOT / image_route
+        if not image_path.exists():
+            errors.append(f"missing optimized site image: {image_route}")
+        elif image_path.stat().st_size > maximum_bytes:
+            errors.append(f"site image exceeds {maximum_bytes} bytes: {image_route}")
+        if source_token not in image_consumers:
+            errors.append(f"site image is not connected to its intended page: {image_route}")
 
     tool_design = design_root / "internal-tools.md"
     style_text = style.read_text() if style.exists() else ""
