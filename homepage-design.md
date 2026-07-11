@@ -68,7 +68,7 @@
 4. `规范` 指向 `specifications/index.html`。
 5. `工具` 指向 `tools/index.html`。
 6. `文档` 指向 `docs/index.html`。
-7. 右侧状态入口显示“设计阶段”，指向 `development/index.html`。
+7. 右侧状态入口只显示当前阶段的 3–4 字短值，以卡片内部动画表达正在进行，并指向 `development/current-stage.html`。
 
 移动端只保留品牌、状态短标和菜单按钮。菜单展开后显示同一组入口，不复制另一套链接数据；键盘焦点必须被清晰看见，关闭后焦点回到菜单按钮。
 

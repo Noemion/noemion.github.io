@@ -5,7 +5,7 @@
   <div class="header-inner global-header-inner">
     <a class="brand global-brand" data-site-root href="{{ '/index.html' | relative_url }}"><span class="portal-brand-mark" aria-hidden="true">N</span><span>Noemion</span></a>
     <nav class="global-primary-nav" data-global-nav aria-label="主要导航"></nav>
-    <a class="global-stage-link" data-portal-stage href="{{ project_timeline.header.href | relative_url }}" aria-label="{{ project_timeline.header.label | escape }}：{{ current_stage.title | escape }}" title="{{ project_timeline.header.title | escape }}"><span class="global-stage-label"><span class="global-stage-dot" aria-hidden="true"></span><small>{{ project_timeline.header.label | escape }}</small></span><span class="global-stage-divider" aria-hidden="true"></span><strong class="global-stage-value" data-stage-value="{{ project_timeline.header.value | escape }}">{{ project_timeline.header.value | escape }}</strong></a>
+    <a class="global-stage-link" data-portal-stage href="{{ project_timeline.header.href | relative_url }}" aria-label="{{ project_timeline.header.label | escape }}：{{ current_stage.title | escape }}" title="{{ project_timeline.header.title | escape }}"><strong class="global-stage-value" data-stage-value="{{ project_timeline.header.value | escape }}"><span class="global-stage-progress" aria-hidden="true"></span><span class="global-stage-text">{{ project_timeline.header.value | escape }}</span></strong></a>
     <details class="directory-panel global-directory-panel">
       <summary><span>导航</span><span class="portal-menu-icon" aria-hidden="true"></span></summary>
       <nav data-directory aria-label="项目目录"></nav>
