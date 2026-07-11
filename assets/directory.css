@@ -141,9 +141,17 @@ section[id]{scroll-margin-top:20px}
   .site-header .directory-panel nav{
     position:absolute;top:100%;right:0;left:0;display:block;
     max-height:calc(100vh - 57px);padding:14px 16px 18px;overflow-x:hidden;overflow-y:auto;
-    background:var(--nav-bg);border-bottom:1px solid var(--rule-strong);box-shadow:0 4px 0 color-mix(in srgb,var(--text) 8%,transparent)
+    background:var(--nav-bg);border-bottom:1px solid var(--rule-strong);box-shadow:0 4px 0 color-mix(in srgb,var(--text) 8%,transparent);
+    opacity:1;filter:blur(0);transform:translateY(0);visibility:visible;pointer-events:auto;
+    transition-property:opacity,filter,transform,visibility;transition-duration:180ms;transition-timing-function:cubic-bezier(.2,0,0,1);transition-delay:0s
   }
-  .site-header .directory-panel:not([open]) nav{display:none}
+  .site-header .directory-panel:not([open]) nav{
+    display:block;opacity:0;filter:blur(4px);transform:translateY(-12px);visibility:hidden;pointer-events:none;
+    transition-delay:0s,0s,0s,180ms
+  }
+  .site-header .directory-panel.is-closing nav{
+    opacity:0;filter:blur(4px);transform:translateY(-12px);visibility:visible;pointer-events:none;transition-delay:0s
+  }
   .site-header .directory-panel .directory-context{margin-bottom:5px}
   section[id]{scroll-margin-top:72px}
 }
@@ -503,6 +511,25 @@ body .global-directory-panel{display:none}
   .docs-rail{display:none}
 }
 
+@media(max-width:839px){
+  body:not([data-page-role="portal"]) .global-header-inner{grid-template-columns:minmax(0,1fr) auto}
+  body:not([data-page-role="portal"]) .global-directory-panel{
+    position:absolute;top:64px;right:0;z-index:4;display:block;width:84px;height:48px
+  }
+  body:not([data-page-role="portal"]) .global-directory-panel>summary{
+    width:84px;height:48px;background:color-mix(in srgb,var(--paper) 94%,transparent);
+    border-bottom:1px solid var(--rule-strong);border-left:1px solid var(--rule);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)
+  }
+  body:not([data-page-role="portal"]) .global-directory-panel nav{
+    top:48px;right:0;left:auto;width:min(390px,calc(100vw - 16px));max-height:calc(100dvh - 120px)
+  }
+  body:not([data-page-role="portal"]) main{padding-top:48px}
+  body:not([data-page-role="portal"]) .breadcrumbs{
+    position:fixed;top:64px;right:8px;left:8px;z-index:8;width:auto;padding-right:102px;background:color-mix(in srgb,var(--paper-subtle) 94%,transparent);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)
+  }
+}
+
 @media(min-width:840px) and (max-width:999px){
   body .global-header-inner,
   body[data-page-role="portal"] .portal-header-inner{grid-template-columns:auto minmax(0,1fr) auto}
@@ -530,5 +557,5 @@ body .global-directory-panel{display:none}
 @media(prefers-reduced-motion:reduce){
   body .global-nav-trigger,.global-nav-caret,.global-nav-menu,.global-nav-card,.global-nav-card::after,
   .global-nav-visual svg,.global-nav-card i,body .global-stage-link,.global-stage-value,
-  .docs-rail-links a{transition-duration:0s!important}
+  .docs-rail-links a,.site-header .directory-panel nav{transition-duration:0s!important;transition-delay:0s!important}
 }

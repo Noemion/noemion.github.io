@@ -667,8 +667,62 @@
 
   const panel = nav.closest(".directory-panel");
   const media = window.matchMedia("(max-width: 999px)");
+  const interactiveMobileMenu = window.matchMedia("(max-width: 839px)");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let closeTimer = 0;
+
+  const finishPanelClose = () => {
+    if (!panel) return;
+    window.clearTimeout(closeTimer);
+    panel.open = false;
+    panel.classList.remove("is-closing");
+  };
+
+  const closePanel = () => {
+    if (!panel?.open || panel.classList.contains("is-closing")) return;
+    panel.classList.add("is-closing");
+    if (reducedMotion.matches) {
+      finishPanelClose();
+      return;
+    }
+    closeTimer = window.setTimeout(finishPanelClose, 180);
+  };
+
+  const summary = panel?.querySelector(":scope > summary");
+  summary?.addEventListener("click", (event) => {
+    if (!interactiveMobileMenu.matches) return;
+    event.preventDefault();
+    if (panel.open) {
+      closePanel();
+      return;
+    }
+    window.clearTimeout(closeTimer);
+    panel.classList.remove("is-closing");
+    panel.open = true;
+  });
+
+  document.addEventListener("pointerdown", (event) => {
+    if (interactiveMobileMenu.matches && panel?.open && !panel.contains(event.target)) closePanel();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && interactiveMobileMenu.matches && panel?.open) {
+      closePanel();
+      summary?.focus();
+    }
+  });
+
+  let previousScrollY = window.scrollY;
+  window.addEventListener("scroll", () => {
+    const nextScrollY = window.scrollY;
+    if (interactiveMobileMenu.matches && panel?.open && nextScrollY > previousScrollY + 8) closePanel();
+    previousScrollY = nextScrollY;
+  }, { passive: true });
+
   const syncPanel = (event) => {
-    if (panel) panel.open = !event.matches;
+    if (!panel) return;
+    window.clearTimeout(closeTimer);
+    panel.classList.remove("is-closing");
+    panel.open = !event.matches;
   };
 
   syncPanel(media);

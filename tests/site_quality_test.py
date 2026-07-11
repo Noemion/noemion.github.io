@@ -541,11 +541,20 @@ def validate_jekyll_sources():
             ".global-stage-value::after",
             "-webkit-text-fill-color:transparent",
             "background:#fff",
+            'main>section:not(.project-progress-section):nth-of-type(even)',
+            'main>section:not(.project-progress-section):has(>details)',
+            'main>section:has(>.table-wrap)',
+            'ul:has(>li:nth-child(4))',
+            '@media(max-width:839px)',
+            'body:not([data-page-role="portal"]) .global-directory-panel',
+            '.site-header .directory-panel.is-closing nav',
         ):
             if token not in shared_css:
                 errors.append(f"shared styles missing site-wide design contract: {token}")
         if re.search(r"transition\s*:\s*all\b", shared_css):
             errors.append("shared styles must not use transition: all")
+        if "margin-left:300px" in shared_css:
+            errors.append("content pages must not reserve a meaningless fixed 300px left gap")
 
     directory_script = SOURCE_ROOT / "assets/directory.js"
     if directory_script.exists():
@@ -639,6 +648,10 @@ def validate_jekyll_sources():
             'trigger.setAttribute("aria-expanded", "false")',
             'item.addEventListener("mouseenter"',
             'intro.innerHTML = `<small>${group.kicker}</small>',
+            'document.addEventListener("pointerdown"',
+            'event.key === "Escape"',
+            'nextScrollY > previousScrollY + 8',
+            'window.setTimeout(finishPanelClose, 180)',
         ):
             if token not in directory_text:
                 errors.append(f"directory.js missing dynamic manual contract: {token}")
@@ -746,7 +759,6 @@ def validate_jekyll_sources():
                 errors.append(f"current stage page exposes internal workflow copy: {forbidden}")
 
     image_contracts = {
-        "assets/images/semantic-identity.jpg": (400_000, 'src="assets/images/semantic-identity.jpg"'),
         "assets/images/secure-object-core.jpg": (400_000, 'src="../assets/images/secure-object-core.jpg"'),
     }
     image_consumers = (SOURCE_ROOT / "index.html").read_text() + (SOURCE_ROOT / "development/current-stage.html").read_text()
