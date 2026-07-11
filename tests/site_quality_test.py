@@ -614,6 +614,7 @@ def validate_jekyll_sources():
             ".content-wide",
             ".content-grid{",
             ".content-rows",
+            'body:not([data-page-role="portal"]) .page-link:nth-child(2n)',
             'a:visited:not(.portal-button)',
             ".portal-button-primary:visited",
             ".portal-button-secondary:visited",
@@ -627,6 +628,8 @@ def validate_jekyll_sources():
                 errors.append(f"shared styles missing site-wide design contract: {token}")
         if re.search(r"transition\s*:\s*all\b", shared_css):
             errors.append("shared styles must not use transition: all")
+        if re.search(r'\.page-links\s*\{[^}]*background\s*:\s*var\(--portal-line\)', shared_css):
+            errors.append("page-link grids must not expose the separator color in empty cells")
         if "margin-left:300px" in shared_css:
             errors.append("content pages must not reserve a meaningless fixed 300px left gap")
         for legacy_selector in (
