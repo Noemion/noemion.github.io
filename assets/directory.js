@@ -208,6 +208,7 @@
           label: "开发",
           items: [
             { href: "development/index.html", label: "开发入口" },
+            { href: "development/current-stage.html", label: "当前项目阶段" },
             { href: "development/implementation-roadmap.html", label: "实施路线图" },
             { href: "development/testing.html", label: "测试策略" }
           ]
@@ -418,6 +419,7 @@
       kicker: "以证据推进",
       description: "查看阶段门、验证策略、公开进展和可下载资源状态。",
       items: [
+        { href: "development/current-stage.html", label: "当前项目阶段", description: "当前设计位置、未满足证据与下一阶段", cover: "current-stage", coverLabel: "ACTIVE GATE" },
         { href: "development/implementation-roadmap.html", label: "实施路线", description: "阶段、工具职责与放行证据", cover: "roadmap", coverLabel: "RELEASE GATES" },
         { href: "development/testing.html", label: "测试策略", description: "确定性、Fuzz、威胁与一致性验证", cover: "testing", coverLabel: "REJECT MATRIX" },
         { href: "news/index.html", label: "新闻与进展", description: "只登记可核对的项目进展", cover: "news", coverLabel: "VERIFIED SIGNAL" },
@@ -516,7 +518,7 @@
   }
 
   const portalStage = document.querySelector("[data-portal-stage]");
-  if (portalStage) portalStage.href = new URL("development/index.html", siteRoot).href;
+  if (portalStage) portalStage.href = new URL("development/current-stage.html", siteRoot).href;
 
   const docsRail = document.querySelector("[data-docs-rail]");
   if (docsRail) {

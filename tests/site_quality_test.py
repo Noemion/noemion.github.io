@@ -505,9 +505,11 @@ def validate_jekyll_sources():
             "global-directory-panel",
             "data-portal-stage",
             "<span>导航</span>",
-            "global-stage-copy",
-            "<small>当前阶段</small><strong>设计</strong>",
-            "当前项目阶段：规范与安全核心设计",
+            "global-stage-label",
+            "global-stage-value",
+            "<small>当前阶段</small>",
+            "当前项目阶段：规范与安全二进制核心设计",
+            "development/current-stage.html",
         ):
             if token not in header_text:
                 errors.append(f"site header missing global navigation contract: {token}")
@@ -633,7 +635,7 @@ def validate_jekyll_sources():
             "gsir", "gobj", "sso", "components",
             "conform", "inspect", "compile", "link",
             "getting-started", "architecture-guide", "tools-reference",
-            "spec-reference", "noemld-manual", "roadmap", "testing",
+            "spec-reference", "noemld-manual", "current-stage", "roadmap", "testing",
             "news", "downloads",
         }
         nav_cover_asset = SOURCE_ROOT / "assets/nav-covers.svg"
@@ -644,11 +646,27 @@ def validate_jekyll_sources():
                 r'id="nav-cover-([^"]+)"', nav_cover_asset.read_text()
             ))
             if cover_ids != expected_nav_covers:
-                errors.append("navigation cover sprite must define 21 unique project covers")
+                errors.append("navigation cover sprite must define 22 unique project covers")
         configured_cover_entries = re.findall(r'cover: "([^"]+)"', directory_text)
         configured_covers = set(configured_cover_entries)
-        if len(configured_cover_entries) != 21 or configured_covers != expected_nav_covers:
+        if len(configured_cover_entries) != 22 or configured_covers != expected_nav_covers:
             errors.append("global navigation entries must route to unique project covers")
+
+    current_stage = SOURCE_ROOT / "development/current-stage.html"
+    if not current_stage.exists():
+        errors.append("missing development/current-stage.html")
+    else:
+        current_stage_text = current_stage.read_text()
+        for token in (
+            "规范与安全二进制核心设计",
+            'class="current-stage-panel"',
+            'class="project-timeline"',
+            'data-stage-state="current"',
+            "尚未满足的退出证据",
+            "进入下一阶段的判断",
+        ):
+            if token not in current_stage_text:
+                errors.append(f"current stage page missing contract: {token}")
 
     tool_design = design_root / "internal-tools.md"
     style_text = style.read_text() if style.exists() else ""

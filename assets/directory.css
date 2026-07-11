@@ -198,17 +198,14 @@ body[data-page-role="portal"] .portal-nav-link:visited{color:var(--nav-text)}
 body[data-page-role="portal"] .portal-nav-link:hover{color:var(--heading);background:var(--paper-subtle)}
 body[data-page-role="portal"] .portal-nav-link:active{transform:scale(.96)}
 body[data-page-role="portal"] .portal-stage-link{
-  display:flex;align-items:center;gap:8px;align-self:stretch;padding:0 20px;color:var(--heading);
+  display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto 1fr;align-items:center;gap:0 10px;
+  min-width:126px;align-self:stretch;padding:8px 16px;color:var(--heading);
   border-left:1px solid var(--rule);font-size:13px;font-weight:700;text-decoration:none;
   transition-property:background-color,color,transform;transition-duration:150ms;transition-timing-function:var(--ease)
 }
 body[data-page-role="portal"] .portal-stage-link:visited{color:var(--heading)}
 body[data-page-role="portal"] .portal-stage-link:hover{background:var(--paper-subtle)}
 body[data-page-role="portal"] .portal-stage-link:active{transform:scale(.96)}
-body[data-page-role="portal"] .portal-stage-link>.global-stage-dot{
-  width:8px;height:8px;border-radius:50%;background:#f04b23;
-  box-shadow:0 0 0 4px color-mix(in srgb,#f04b23 14%,transparent)
-}
 body[data-page-role="portal"] .portal-directory-panel{display:none}
 
 @media(min-width:1000px){
@@ -260,8 +257,9 @@ body[data-page-role="portal"] .portal-directory-panel{display:none}
 @media(max-width:520px){
   body[data-page-role="portal"] .portal-brand{padding-inline:12px}
   body[data-page-role="portal"] .portal-brand-mark{width:28px;height:28px}
-  body[data-page-role="portal"] .portal-stage-link{padding:0 12px}
-  body[data-page-role="portal"] .global-stage-copy small{display:none}
+  body[data-page-role="portal"] .portal-stage-link{grid-template-columns:8px auto;gap:8px;min-width:66px;padding:0 12px}
+  body[data-page-role="portal"] .global-stage-label small{display:none}
+  body[data-page-role="portal"] .global-stage-value{padding-left:0;border-left:0}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -384,20 +382,27 @@ body .global-nav-trigger:hover,
 }
 .global-nav-card:hover i{opacity:1;filter:blur(0);transform:translateX(4px) scale(1)}
 body .global-stage-link{
-  display:flex;align-items:center;gap:8px;align-self:stretch;padding:0 20px;color:var(--heading);
+  display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto 1fr;align-items:center;gap:0 10px;
+  min-width:126px;align-self:stretch;padding:8px 16px;color:var(--heading);
   border-left:1px solid var(--rule);font-size:13px;font-weight:700;text-decoration:none
 }
-body .global-stage-link>.global-stage-dot{
+.global-stage-label{
+  grid-column:1;grid-row:1;align-self:start;display:flex;align-items:center;gap:6px;white-space:nowrap;line-height:1
+}
+.global-stage-label>.global-stage-dot{
   flex:0 0 auto;
   width:8px;height:8px;border-radius:50%;background:#f04b23;
   box-shadow:0 0 0 4px color-mix(in srgb,#f04b23 14%,transparent)
 }
-.global-stage-copy{display:grid;gap:2px;line-height:1}
-.global-stage-copy small{
+.global-stage-label small{
   color:var(--nav-muted);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   font-size:8px;font-weight:650;letter-spacing:.08em
 }
-.global-stage-copy strong{color:var(--heading);font-size:12px;font-weight:760}
+.global-stage-value{
+  grid-column:2;grid-row:1/3;align-self:center;justify-self:stretch;display:grid;place-items:center;
+  min-height:30px;padding-left:10px;color:var(--heading);border-left:1px solid var(--rule);
+  font-size:13px;font-weight:780;line-height:1
+}
 body .global-directory-panel{display:none}
 
 /* Persistent manual documentation rail. */
@@ -497,8 +502,9 @@ body .global-directory-panel{display:none}
 
 @media(max-width:520px){
   body .global-brand{padding-inline:12px}
-  body .global-stage-link{padding:0 12px}
-  body .global-stage-copy small{display:none}
+  body .global-stage-link{grid-template-columns:8px auto;gap:8px;min-width:66px;padding:0 12px}
+  body .global-stage-label small{display:none}
+  body .global-stage-value{padding-left:0;border-left:0}
 }
 
 @media(prefers-color-scheme:dark){

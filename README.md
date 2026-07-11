@@ -6,7 +6,7 @@
 
 - `_config.yml` 定义账户站点 URL、仓库身份、语言、Markdown 处理器和构建排除项；账户站点的 `baseurl` 必须保持为空。
 - `.github/workflows/pages.yml` 在 `main` 分支推送时先运行路由测试，再通过 GitHub 官方 Jekyll Pages Actions 构建和部署 `_site`。
-- 当前 65 个正式页面由 Jekyll 处理：45 个普通页面使用 HTML 正文源，20 个手册/指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。
+- 当前 66 个正式页面由 Jekyll 处理：46 个普通页面使用 HTML 正文源，20 个手册/指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。
 - 本地可在安装兼容 Ruby 与 Bundler 后运行 `bundle install` 和 `bundle exec jekyll serve`；当前工作区自带的系统 Ruby 不作为发布环境基线。
 
 ## Jekyll 源码模型
@@ -90,7 +90,7 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 
 全站统一品牌、字体、颜色、基础间距、面包屑和目录引擎；具体目录分组、正文结构、表格、清单、手册分页和状态展示由模块职责决定。模块可以共享布局组件，但不得为了视觉对称强行增加不适用的章节。
 
-运行测试前必须安装可从命令行调用的 Node.js。源码阶段验证 65 个页面的 Front Matter、固定路由、共享布局和目录注册；Jekyll 构建后，质量测试会直接检查 `_site` 中的最终 HTML，并加载同一份生产 `assets/directory.js`，验证模块覆盖、页面类型、工具文档高亮以及模块不会向全局对象暴露 API。
+运行测试前必须安装可从命令行调用的 Node.js。源码阶段验证 66 个页面的 Front Matter、固定路由、共享布局和目录注册；Jekyll 构建后，质量测试会直接检查 `_site` 中的最终 HTML，并加载同一份生产 `assets/directory.js`，验证模块覆盖、页面类型、工具文档高亮以及模块不会向全局对象暴露 API。
 
 每个 `kind=tool` / `data-page-role=tool-project` 页面都是项目入口而非手册：必须包含“项目 / 工具 / 当前工具”面包屑，以及“工具简介”“当前状态”“主要能力”“输入与产物”“处理边界”“相关资源”六个语义章节。当前状态必须明确处于设计阶段、当前未发布可执行程序，并说明命令行接口、参数和文件扩展名尚未冻结；只有实际存在实质内容时才链接或创建工具 `docs/`。
 
@@ -158,8 +158,9 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 | `components/compiler-core.html` | content | `components/index.html` | 1 | 确定性 Compiler Core |
 | `components/linker-loader.html` | content | `components/index.html` | 2 | Linker、Loader 与 Runtime |
 | `components/nsfe.html` | content | `components/index.html` | 3 | NSFE 架构与模型工程状态 |
-| `development/implementation-roadmap.html` | content | `development/index.html` | 1 | 实施阶段、工具职责与放行门 |
-| `development/testing.html` | content | `development/index.html` | 2 | 测试、Fuzz 与验证策略 |
+| `development/current-stage.html` | content | `development/index.html` | 1 | 当前项目阶段、证据门与进度时间线 |
+| `development/implementation-roadmap.html` | content | `development/index.html` | 2 | 实施阶段、工具职责与放行门 |
+| `development/testing.html` | content | `development/index.html` | 3 | 测试、Fuzz 与验证策略 |
 | `docs/getting-started.html` | content | `docs/index.html` | 1 | 项目入门、核心对象与推荐阅读路径 |
 | `docs/installation-and-usage.html` | content | `docs/index.html` | 2 | 当前可用性、未来使用流程与发布原则 |
 | `docs/architecture-guide.html` | content | `docs/index.html` | 3 | 系统分层、对象生命周期与信任边界指南 |
