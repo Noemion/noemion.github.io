@@ -19,6 +19,11 @@ SOURCE_HTML_FILES = sorted(
     for path in SOURCE_ROOT.rglob("*.html")
     if "_site" not in path.parts and not any(part.startswith("_") for part in path.parts)
 )
+MANUAL_MARKDOWN_FILES = sorted(
+    [*SOURCE_ROOT.glob("docs/*.md"), *SOURCE_ROOT.glob("tools/*/docs/*.md")]
+)
+SOURCE_PAGE_FILES = sorted([*SOURCE_HTML_FILES, *MANUAL_MARKDOWN_FILES])
+TOOL_IDS = sorted(path.parent.name for path in SOURCE_ROOT.glob("tools/*/index.html"))
 HTML_FILES = SOURCE_HTML_FILES if SOURCE_ONLY else sorted(ROOT.rglob("*.html"))
 RAW_AMP = re.compile(r"&(?![A-Za-z][A-Za-z0-9]+;|#[0-9]+;|#x[0-9A-Fa-f]+;)")
 HREF_LITERAL = re.compile(r'href:\s*"([^"]+)"')
@@ -181,9 +186,11 @@ class PageParser(HTMLParser):
         self.breadcrumb_text = []
         self.h2_texts = []
         self.sections = []
+        self.manual_article_text = []
         self.active_section = None
         self.active_h2 = None
         self.page_role = None
+        self.tool_id = None
         self.stack = []
 
     def handle_starttag(self, tag, attrs):
@@ -196,6 +203,7 @@ class PageParser(HTMLParser):
             self.ids.append(data["id"])
         if tag == "body" and data.get("data-page-role"):
             self.page_role = data["data-page-role"]
+            self.tool_id = data.get("data-tool-id")
         if tag == "a" and "href" in data:
             href = data["href"]
             self.links.append(href)
@@ -203,7 +211,7 @@ class PageParser(HTMLParser):
                 self.breadcrumb_links.append(href)
             if href == "#main-content" and "skip-link" in classes:
                 self.skip_links += 1
-            for scope in ("manual-toc", "manual-nav-top", "manual-nav-bottom"):
+            for scope in ("manual-toc", "manual-index-links", "manual-nav-top", "manual-nav-bottom"):
                 if scope in ancestor_classes:
                     self.scoped_links[scope].append(href)
                     role = data.get("data-manual-role")
@@ -253,6 +261,8 @@ class PageParser(HTMLParser):
         if self.active_section is not None:
             self.active_section["text"].append(data)
         ancestor_classes = set().union(*(item[1] for item in self.stack), set())
+        if "manual-article" in ancestor_classes:
+            self.manual_article_text.append(data)
         if "breadcrumbs" in ancestor_classes:
             self.breadcrumb_text.append(data)
 
@@ -296,12 +306,12 @@ def resolved_routes(path, hrefs):
 
 def expected_manual_roles(index):
     roles = {
-        "previous": Path(NOEMLD_DOC_ORDER[index - 1]).name,
-        "up": "index.html",
-        "index": "reference-index.html",
+        "previous": "/" + NOEMLD_DOC_ORDER[index - 1],
+        "up": "/tools/noemld/docs/index.html",
+        "index": "/tools/noemld/docs/reference-index.html",
     }
     if index + 1 < len(NOEMLD_DOC_ORDER):
-        roles["next"] = Path(NOEMLD_DOC_ORDER[index + 1]).name
+        roles["next"] = "/" + NOEMLD_DOC_ORDER[index + 1]
     return roles
 
 
@@ -333,26 +343,70 @@ def front_matter_value(block, key):
     return value
 
 
+def read_manual_source_routes():
+    routes = []
+    for path in MANUAL_MARKDOWN_FILES:
+        match = FRONT_MATTER.match(path.read_text())
+        if match is None:
+            continue
+        permalink = front_matter_value(match.group(1), "permalink")
+        if permalink:
+            routes.append(permalink.lstrip("/"))
+    return sorted(routes)
+
+
+def read_manual_source_entries(manual_id):
+    entries = []
+    for path in MANUAL_MARKDOWN_FILES:
+        match = FRONT_MATTER.match(path.read_text())
+        if match is None:
+            continue
+        metadata = match.group(1)
+        if front_matter_value(metadata, "manual_id") != manual_id:
+            continue
+        permalink = front_matter_value(metadata, "permalink")
+        entries.append({
+            "route": permalink.lstrip("/"),
+            "order": int(front_matter_value(metadata, "manual_order")),
+            "is_index": front_matter_value(metadata, "manual_is_index") == "true",
+        })
+    return sorted(entries, key=lambda entry: entry["order"])
+
+
 def validate_jekyll_sources():
     errors = []
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
-    registered = sorted(registry)
-    source_routes = sorted(path.relative_to(SOURCE_ROOT).as_posix() for path in SOURCE_HTML_FILES)
+    registered = sorted(set(registry) | set(read_manual_source_routes()))
+    source_entries = []
+    for path in SOURCE_PAGE_FILES:
+        source_text = path.read_text()
+        source_match = FRONT_MATTER.match(source_text)
+        if source_match is None:
+            continue
+        if path.suffix == ".md":
+            permalink = front_matter_value(source_match.group(1), "permalink")
+            route = permalink.lstrip("/") if permalink else path.relative_to(SOURCE_ROOT).as_posix()
+        else:
+            route = path.relative_to(SOURCE_ROOT).as_posix()
+        source_entries.append((route, path))
+    source_routes = sorted(route for route, _ in source_entries)
 
     if len(route_rows) != len(registry):
         errors.append("README contains duplicate HTML routes")
     if registered != source_routes:
         errors.append("README routes do not exactly match Jekyll source pages")
-    if len(source_routes) != 65:
-        errors.append(f"expected 65 Jekyll source pages, found {len(source_routes)}")
+    if len(source_routes) < 65:
+        errors.append(f"expected at least 65 Jekyll source pages, found {len(source_routes)}")
 
     forbidden_shell = re.compile(
         r"<!doctype|<html\b|<head\b|<body\b|class=\"site-header\"|<footer\b",
         re.IGNORECASE,
     )
-    for path in SOURCE_HTML_FILES:
-        route = path.relative_to(SOURCE_ROOT).as_posix()
+    if len(source_routes) != len(set(source_routes)):
+        errors.append("multiple source files generate the same formal route")
+
+    for route, path in source_entries:
         text = path.read_text()
         match = FRONT_MATTER.match(text)
         if match is None:
@@ -360,9 +414,14 @@ def validate_jekyll_sources():
             continue
         metadata = match.group(1)
         row = registry.get(route)
-        expected_role = ROLE_BY_KIND.get(row["kind"]) if row else None
+        expected_role = (
+            ROLE_BY_KIND.get(row["kind"])
+            if row
+            else front_matter_value(metadata, "page_role")
+        )
+        is_manual_markdown = path.suffix == ".md"
         expected = {
-            "layout": "default",
+            "layout": "manual" if is_manual_markdown else "default",
             "page_role": expected_role,
             "permalink": "/" + route,
         }
@@ -374,12 +433,46 @@ def validate_jekyll_sources():
             if not front_matter_value(metadata, key):
                 errors.append(f"{route}: front matter requires {key}")
         body = text[match.end():]
-        errors.extend(validate_public_html(route, body))
+        if not is_manual_markdown:
+            errors.extend(validate_public_html(route, body))
         if forbidden_shell.search(body):
             errors.append(f"{route}: page shell must come from the Jekyll layout")
-        parser = parse(path)
-        if parser.main_targets != 1:
-            errors.append(f"{route}: source must retain one main content target")
+        if is_manual_markdown:
+            for key in ("manual_id", "manual_group", "manual_order", "nav_title", "hero_title", "hero_description"):
+                if front_matter_value(metadata, key) is None:
+                    errors.append(f"{route}: Markdown manual requires {key}")
+            body_without_autolinks = re.sub(
+                r"<(?:https?://|mailto:)[^>]+>", "", body, flags=re.IGNORECASE
+            )
+            if re.search(r"</?[A-Za-z][^>]*>", body_without_autolinks):
+                errors.append(f"{route}: Markdown body must not contain raw HTML")
+            if re.search(r"^\s*\{:", body, re.MULTILINE):
+                errors.append(f"{route}: Markdown body must not use Kramdown attributes")
+            headings = re.findall(r"^##\s+(.+?)\s*$", body, re.MULTILINE)
+            if route in DOC_GUIDE_HEADINGS and headings != DOC_GUIDE_HEADINGS[route]:
+                errors.append(
+                    f"{route}: Markdown h2 sequence must be {DOC_GUIDE_HEADINGS[route]}, got {headings}"
+                )
+        else:
+            parser = parse(path)
+            if parser.main_targets != 1:
+                errors.append(f"{route}: source must retain one main content target")
+
+    homepage_source = SOURCE_ROOT / "index.html"
+    if homepage_source.exists():
+        expression_visual_match = re.search(
+            r'<span class="feature-visual feature-visual-expression".*?</span>',
+            homepage_source.read_text(),
+            re.DOTALL,
+        )
+        if expression_visual_match is None:
+            errors.append("index.html: missing expression feature visual")
+        else:
+            visible_expression_text = HTML_TAG.sub(" ", expression_visual_match.group(0))
+            if re.search(r"[\u3400-\u9fff]", visible_expression_text):
+                errors.append(
+                    "index.html: expression feature visual labels must use English only"
+                )
 
     layout = SOURCE_ROOT / "_layouts/default.html"
     header = SOURCE_ROOT / "_includes/site-header.html"
@@ -393,6 +486,9 @@ def validate_jekyll_sources():
             "{{ content }}",
             "{% include site-header.html %}",
             "{% include site-footer.html %}",
+            "data-docs-rail",
+            "page.permalink contains '/docs/'",
+            'data-tool-id="{{ page_tool_id }}"',
             "{{ '/assets/style.css' | relative_url }}",
             "{{ '/assets/directory.js' | relative_url }}",
             'data-page-role="{{ page.page_role }}"',
@@ -400,13 +496,158 @@ def validate_jekyll_sources():
             if token not in layout_text:
                 errors.append(f"default layout missing contract: {token}")
 
+    if header.exists():
+        header_text = header.read_text()
+        for token in ("data-global-nav", "global-directory-panel", "data-portal-stage"):
+            if token not in header_text:
+                errors.append(f"site header missing global navigation contract: {token}")
+
+    style = SOURCE_ROOT / "assets/style.css"
+    directory_style = SOURCE_ROOT / "assets/directory.css"
+    if style.exists() and directory_style.exists():
+        shared_css = style.read_text() + directory_style.read_text()
+        for token in (
+            'body[data-page-role="tool-project"]',
+            'body[data-docs-layout="true"]',
+            ".global-nav-menu",
+            ".global-nav-visual",
+            "calc(var(--nav-order) * 45ms)",
+            "prefers-reduced-motion:reduce",
+            "body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}",
+        ):
+            if token not in shared_css:
+                errors.append(f"shared styles missing site-wide design contract: {token}")
+        if re.search(r"transition\s*:\s*all\b", shared_css):
+            errors.append("shared styles must not use transition: all")
+
     directory_script = SOURCE_ROOT / "assets/directory.js"
     if directory_script.exists():
-        declared = sorted(set(HREF_LITERAL.findall(directory_script.read_text())))
-        if declared != registered:
-            errors.append("directory.js module entries do not cover every registered route")
+        declared = set(HREF_LITERAL.findall(directory_script.read_text()))
+        registered_set = set(registered)
+        manual_routes = {route for route, path in source_entries if path.suffix == ".md"}
+        if not declared <= registered_set:
+            errors.append("directory.js contains links outside the formal route registry")
+        missing_static = sorted((registered_set - manual_routes) - declared)
+        if missing_static:
+            errors.append(f"directory.js does not cover non-manual routes: {missing_static}")
     else:
         errors.append("missing assets/directory.js")
+
+    design_routes = {
+        "portal": "portal.md",
+        "section": "section.md",
+        "content": "content.md",
+        "tool-project": "tool-project.md",
+        "manual": "manual.md",
+        "global": "global-shell.md",
+        "components": "components-motion.md",
+        "internal-tools": "internal-tools.md",
+    }
+    design_root = SOURCE_ROOT / "design-system"
+    design_index = design_root / "README.md"
+    if not design_index.exists():
+        errors.append("missing design-system/README.md routing index")
+    else:
+        design_index_text = design_index.read_text()
+        for role, filename in design_routes.items():
+            if not (design_root / filename).exists():
+                errors.append(f"missing design guidance for {role}: design-system/{filename}")
+            if filename not in design_index_text:
+                errors.append(f"design routing index does not route {role} to {filename}")
+
+    manual_config = SOURCE_ROOT / "_data/manuals.yml"
+    manual_layout = SOURCE_ROOT / "_layouts/manual.html"
+    if not manual_config.exists():
+        errors.append("missing _data/manuals.yml")
+    if not manual_layout.exists():
+        errors.append("missing _layouts/manual.html")
+    else:
+        manual_layout_text = manual_layout.read_text()
+        for token in (
+            'where: "manual_id", page.manual_id',
+            'sort: "manual_order"',
+            "manual-generated-index",
+            'data-manual-role="previous"',
+            'data-manual-role="next"',
+        ):
+            if token not in manual_layout_text:
+                errors.append(f"manual layout missing dynamic contract: {token}")
+
+    manual_records = []
+    for path in MANUAL_MARKDOWN_FILES:
+        match = FRONT_MATTER.match(path.read_text())
+        if match is None:
+            continue
+        metadata = match.group(1)
+        manual_records.append({
+            "path": path,
+            "manual_id": front_matter_value(metadata, "manual_id"),
+            "group": front_matter_value(metadata, "manual_group"),
+            "order": front_matter_value(metadata, "manual_order"),
+            "is_index": front_matter_value(metadata, "manual_is_index") == "true",
+        })
+    for manual_id in sorted(set(record["manual_id"] for record in manual_records)):
+        records = [record for record in manual_records if record["manual_id"] == manual_id]
+        orders = [record["order"] for record in records]
+        if len(orders) != len(set(orders)):
+            errors.append(f"manual {manual_id}: manual_order values must be unique")
+        if sum(record["is_index"] for record in records) != 1:
+            errors.append(f"manual {manual_id}: expected exactly one manual_is_index page")
+        if manual_config.exists():
+            config_text = manual_config.read_text()
+            if not re.search(rf"^{re.escape(manual_id)}:\s*$", config_text, re.MULTILINE):
+                errors.append(f"manual {manual_id}: missing _data/manuals.yml entry")
+            for group in set(record["group"] for record in records):
+                if f"    {group}:" not in config_text:
+                    errors.append(f"manual {manual_id}: unknown configured group {group}")
+
+    if directory_script.exists():
+        directory_text = directory_script.read_text()
+        for token in (
+            "data-manual-directory-source",
+            "readManualDirectory",
+            "payload.pages",
+            "manualDirectory?.directory",
+            'trigger.setAttribute("aria-expanded", "false")',
+            'item.addEventListener("mouseenter"',
+        ):
+            if token not in directory_text:
+                errors.append(f"directory.js missing dynamic manual contract: {token}")
+
+        expected_nav_covers = {
+            "background", "architecture", "foundations", "faq",
+            "gsir", "gobj", "sso", "components",
+            "conform", "inspect", "compile", "link",
+            "getting-started", "architecture-guide", "tools-reference",
+            "spec-reference", "noemld-manual", "roadmap", "testing",
+            "news", "downloads",
+        }
+        nav_cover_asset = SOURCE_ROOT / "assets/nav-covers.svg"
+        if not nav_cover_asset.exists():
+            errors.append("missing assets/nav-covers.svg")
+        else:
+            cover_ids = set(re.findall(
+                r'id="nav-cover-([^"]+)"', nav_cover_asset.read_text()
+            ))
+            if cover_ids != expected_nav_covers:
+                errors.append("navigation cover sprite must define 21 unique project covers")
+        configured_cover_entries = re.findall(r'cover: "([^"]+)"', directory_text)
+        configured_covers = set(configured_cover_entries)
+        if len(configured_cover_entries) != 21 or configured_covers != expected_nav_covers:
+            errors.append("global navigation entries must route to unique project covers")
+
+    tool_design = design_root / "internal-tools.md"
+    style_text = style.read_text() if style.exists() else ""
+    tool_design_text = tool_design.read_text() if tool_design.exists() else ""
+    if len(TOOL_IDS) != 23:
+        errors.append(f"expected 23 HTML tool project pages, found {len(TOOL_IDS)}")
+    for tool_id in TOOL_IDS:
+        if (SOURCE_ROOT / "tools" / tool_id / "index.md").exists():
+            errors.append(f"tools/{tool_id}/index.md is forbidden; tool project pages remain HTML")
+        if f'body[data-tool-id="{tool_id}"]' not in style_text:
+            errors.append(f"missing custom visual signature for tool {tool_id}")
+        if f"### {tool_id}" not in tool_design_text:
+            errors.append(f"missing design guidance for tool {tool_id}")
 
     if errors:
         print("\n".join(errors))
@@ -493,12 +734,15 @@ def main():
             errors.append(f"directory.css missing modular navigation contract: {token}")
 
     route_rows = read_route_rows()
-    registered = [row["route"] for row in route_rows]
+    registered_rows = [row["route"] for row in route_rows]
+    registered = sorted(
+        set(registered_rows) | set(read_manual_source_routes())
+    )
     actual_routes = [path.relative_to(ROOT).as_posix() for path in HTML_FILES]
 
     if not route_rows:
         errors.append("README has no formal HTML route rows")
-    if len(registered) != len(set(registered)):
+    if len(registered_rows) != len(set(registered_rows)):
         errors.append("README contains duplicate HTML routes")
     if sorted(registered) != sorted(actual_routes):
         errors.append("README routes do not exactly match HTML files")
@@ -586,6 +830,8 @@ def main():
             or not all(label in breadcrumb for label in ("项目", "工具", tool))
         ):
             errors.append(f"{row['route']}: must expose 项目 / 工具 / 当前工具 breadcrumbs")
+        if parser.tool_id != tool:
+            errors.append(f"{row['route']}: body data-tool-id must be {tool!r}")
         status_sections = [section for section in parser.sections if section["heading"] == "当前状态"]
         status_texts = ["".join(section["text"]) for section in status_sections]
         contract_errors = validate_tool_project_contract(
@@ -620,10 +866,14 @@ def main():
         parser = parse(docs_index)
         guide_links = resolved_routes(
             docs_index,
-            parser.scoped_links["doc-guide-links"],
+            parser.scoped_links["manual-index-links"],
         )
-        if guide_links != DOC_GUIDE_ORDER:
-            errors.append("docs index cards must link the six HTML guides in order")
+        expected_guides = [
+            entry["route"] for entry in read_manual_source_entries("docs")
+            if not entry["is_index"]
+        ]
+        if guide_links != expected_guides:
+            errors.append("docs index cards must match Markdown guide order")
 
     for route in DOC_GUIDE_ORDER:
         path = ROOT / route
@@ -646,7 +896,10 @@ def main():
                 f"got {parser.h2_texts}"
             )
         visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
+            " ".join([
+                "".join(parser.manual_article_text),
+                *("".join(section["text"]) for section in parser.sections),
+            ])
         )
         if "已确认原则" not in visible_text or not any(
             marker in visible_text for marker in ("设计提案", "开放问题", "未来阶段")
@@ -695,8 +948,10 @@ def main():
     if numbered_routes:
         errors.append(f"numbered HTML routes are forbidden: {numbered_routes}")
 
-    if len(actual_routes) != 65:
-        errors.append(f"expected 65 final HTML routes, found {len(actual_routes)}")
+    if len(actual_routes) != len(registered):
+        errors.append(
+            f"expected {len(registered)} final HTML routes, found {len(actual_routes)}"
+        )
 
     downloads = ROOT / "downloads/index.html"
     if downloads.exists():
@@ -756,9 +1011,17 @@ def main():
 
     if directory_script.exists() and route_rows:
         directory_source = directory_script.read_text()
-        declared = sorted(set(HREF_LITERAL.findall(directory_source)))
-        if declared != sorted(registered):
-            errors.append("directory.js module entries do not cover every registered route")
+        declared = set(HREF_LITERAL.findall(directory_source))
+        registered_set = set(registered)
+        manual_routes = {
+            route for route in registered
+            if route.startswith("docs/") or re.match(r"^tools/[^/]+/docs/", route)
+        }
+        if not declared <= registered_set:
+            errors.append("directory.js contains links outside the formal route registry")
+        missing_static = sorted((registered_set - manual_routes) - declared)
+        if missing_static:
+            errors.append(f"directory.js does not cover non-manual routes: {missing_static}")
         for token in (
             "DIRECTORY_MODULES",
             "resolveDirectoryModule",
@@ -804,13 +1067,19 @@ def main():
                 "if (globalThis.NoemionDirectory !== undefined) "
                 "throw new Error('directory module must not expose a global API');"
                 "if (!Object.isFrozen(api)) throw new Error('directory module API must be frozen');"
-                "const { isDirectoryItemActive, resolveDirectoryModule } = api;"
+                "const { isDirectoryItemActive, resolveDirectoryModule, createManualDirectory } = api;"
                 "const cases = JSON.parse(process.argv[2]);"
                 "const active = cases.map(([itemHref, target, current]) => "
                 "isDirectoryItemActive(itemHref, target, current));"
                 "const moduleCases = JSON.parse(process.argv[3]);"
                 "const modules = moduleCases.map(([route]) => resolveDirectoryModule(route));"
-                "process.stdout.write(JSON.stringify({active, modules}));"
+                "const manual = createManualDirectory({"
+                "manuals:{demo:{kicker:'Docs',title:'Demo',root:'/docs/index.html',"
+                "parent_url:'/index.html',parent_label:'Home',groups:{start:{label:'Start',order:1}}}},"
+                "pages:[{manualId:'demo',group:'start',order:2,route:'docs/new.html',label:'New'},"
+                "{manualId:'demo',group:'start',order:0,route:'docs/index.html',label:'Home'}]},"
+                "'docs/new.html');"
+                "process.stdout.write(JSON.stringify({active, modules, manual}));"
             )
             completed = subprocess.run(
                 [
@@ -843,18 +1112,22 @@ def main():
                         "directory module routing mismatch: "
                         f"expected {expected_modules}, got {actual['modules']}"
                     )
+                manual_items = actual["manual"]["directory"]["groups"][0]["items"]
+                if actual["manual"]["moduleKey"] != "manual-demo" or [
+                    item["href"] for item in manual_items
+                ] != ["docs/index.html", "docs/new.html"]:
+                    errors.append("dynamic manual directory does not sort new Markdown pages")
 
     noemld_index = ROOT / NOEMLD_DOC_ORDER[0]
     if noemld_index.exists():
         parser = parse(noemld_index)
-        toc_routes = resolved_routes(noemld_index, parser.scoped_links["manual-toc"])
-        if toc_routes != NOEMLD_DOC_ORDER[1:]:
-            errors.append("noemld index manual TOC does not match registered topic order")
-        toc_markup = re.search(
-            r'<ol class="manual-toc">(.*?)</ol>', noemld_index.read_text(), re.S
-        )
-        if toc_markup and re.search(r"<a[^>]*>\s*[0-9]+\.", toc_markup.group(1)):
-            errors.append("noemld manual TOC must not duplicate ordered-list numbers")
+        toc_routes = resolved_routes(noemld_index, parser.scoped_links["manual-index-links"])
+        expected_topics = [
+            entry["route"] for entry in read_manual_source_entries("noemld")
+            if not entry["is_index"]
+        ]
+        if toc_routes != expected_topics:
+            errors.append("noemld index manual TOC does not match Markdown topic order")
 
     for index, route in enumerate(NOEMLD_DOC_ORDER[1:], start=1):
         path = ROOT / route
@@ -864,6 +1137,8 @@ def main():
         if NUMBERED_NAME.search(route):
             errors.append(f"{route}: numbered topic filename is forbidden")
         parser = parse(path)
+        if parser.tool_id != "noemld":
+            errors.append(f"{route}: tool manual must inherit data-tool-id='noemld'")
         for class_name in ("breadcrumbs", "manual-nav-top", "manual-nav-bottom"):
             if parser.class_counts[class_name] != 1:
                 errors.append(f"{route}: expected one {class_name}")

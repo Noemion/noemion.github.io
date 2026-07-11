@@ -12,10 +12,12 @@ markdown: kramdown
 highlighter: rouge
 
 exclude:
+  - design-system
   - AGENTS.md
   - README.md
   - content-quality-audit.md
-  - homepage-aihero-design.md
+  - homepage-design.md
+  - sitewide-design-system.md
   - tests
   - Gemfile
   - Gemfile.lock

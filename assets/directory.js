@@ -25,9 +25,41 @@
     return "project";
   };
 
+  const createManualDirectory = (payload, route) => {
+    const currentPage = payload.pages.find((page) => page.route === route);
+    const manual = currentPage && payload.manuals[currentPage.manualId];
+    if (!currentPage || !manual) return null;
+
+    const groups = Object.entries(manual.groups)
+      .sort(([, left], [, right]) => left.order - right.order)
+      .map(([groupKey, group]) => ({
+        label: group.label,
+        items: payload.pages
+          .filter((page) => page.manualId === currentPage.manualId && page.group === groupKey)
+          .sort((left, right) => left.order - right.order)
+          .map((page) => ({ href: page.route, label: page.label }))
+      }))
+      .filter((group) => group.items.length > 0);
+
+    return {
+      moduleKey: `manual-${currentPage.manualId}`,
+      directory: {
+        kicker: manual.kicker,
+        title: manual.title,
+        root: { href: manual.root.replace(/^\//, ""), label: manual.title },
+        parent: {
+          href: manual.parent_url.replace(/^\//, ""),
+          label: manual.parent_label
+        },
+        groups
+      }
+    };
+  };
+
   const directoryApi = Object.freeze({
     isDirectoryItemActive,
-    resolveDirectoryModule
+    resolveDirectoryModule,
+    createManualDirectory
   });
 
   if (
@@ -330,12 +362,68 @@
     }
   });
 
-  const PORTAL_NAV_ITEMS = Object.freeze([
-    { href: "about/background.html", label: "为什么" },
-    { href: "architecture/object-lifecycle.html", label: "如何工作" },
-    { href: "specifications/index.html", label: "规范" },
-    { href: "tools/index.html", label: "工具" },
-    { href: "docs/index.html", label: "文档" }
+  const GLOBAL_NAV_GROUPS = Object.freeze([
+    {
+      href: "about/index.html",
+      label: "了解",
+      kicker: "建立共同语境",
+      description: "从问题、架构和方法边界理解 Noemion 为什么存在。",
+      items: [
+        { href: "about/background.html", label: "背景与边界", description: "为什么目标语义需要成为工程对象", cover: "background", coverLabel: "EXPRESSION ≠ IDENTITY" },
+        { href: "architecture/index.html", label: "系统架构", description: "从编译、链接到可信装载的职责分层", cover: "architecture", coverLabel: "TRUST PIPELINE" },
+        { href: "about/intellectual-foundations.html", label: "思想与方法", description: "哲学启发、反例与进入规范前的证据门", cover: "foundations", coverLabel: "NOESIS / NOEMA" },
+        { href: "faq/index.html", label: "常见问题", description: "直接回答项目范围、状态与非目标", cover: "faq", coverLabel: "SCOPE CHECK" }
+      ]
+    },
+    {
+      href: "specifications/index.html",
+      label: "规范",
+      kicker: "定义权威边界",
+      description: "查看机器语义、对象格式、共享对象和组件契约。",
+      items: [
+        { href: "specifications/gsir.html", label: "GSIR", description: "目标、约束、歧义、证据与验收语义", cover: "gsir", coverLabel: "GOAL GRAPH" },
+        { href: "specifications/gobj.html", label: "GOBJ", description: "Section、符号、重定位与完整性边界", cover: "gobj", coverLabel: "SECTION MAP" },
+        { href: "specifications/sso.html", label: "SSO", description: "依赖闭包、共享对象与渐进式披露", cover: "sso", coverLabel: "DEPENDENCY CLOSURE" },
+        { href: "components/index.html", label: "系统组件", description: "确定性核心、链接装载、Runtime 与 NSFE", cover: "components", coverLabel: "SYSTEM LAYERS" }
+      ]
+    },
+    {
+      href: "tools/index.html",
+      label: "工具",
+      kicker: "执行对象工程",
+      description: "按验证、检查、编译和链接任务进入确定性工具链。",
+      items: [
+        { href: "tools/noemconform/index.html", label: "规范合规", description: "执行 Golden、Malformed 与一致性套件", cover: "conform", coverLabel: "CONFORMANCE" },
+        { href: "tools/noemobj/index.html", label: "对象检查", description: "安全查看对象、符号与披露结构", cover: "inspect", coverLabel: "OBJECT INSPECT" },
+        { href: "tools/noemc/index.html", label: "编译", description: "驱动前端并调用确定性 Compiler Core", cover: "compile", coverLabel: "SOURCE → OBJECT" },
+        { href: "tools/noemld/index.html", label: "链接", description: "解析符号、应用重定位并形成闭包", cover: "link", coverLabel: "SYMBOL LINK" }
+      ]
+    },
+    {
+      href: "docs/index.html",
+      label: "文档",
+      kicker: "选择阅读路径",
+      description: "按学习、架构、工具、规范和链接器专题进入权威内容。",
+      items: [
+        { href: "docs/getting-started.html", label: "入门指南", description: "从问题背景和核心对象开始", cover: "getting-started", coverLabel: "START PATH" },
+        { href: "docs/architecture-guide.html", label: "架构指南", description: "理解生命周期、边界与失败路径", cover: "architecture-guide", coverLabel: "BOUNDARY GUIDE" },
+        { href: "docs/tools-reference.html", label: "工具参考", description: "按生命周期定位 23 个工具", cover: "tools-reference", coverLabel: "TOOL MATRIX" },
+        { href: "docs/specifications-reference.html", label: "规范参考", description: "权威来源、成熟度与 ADR 阅读顺序", cover: "spec-reference", coverLabel: "SPEC AUTHORITY" },
+        { href: "tools/noemld/docs/index.html", label: "noemld 手册", description: "链接器契约、流程、安全与测试专题", cover: "noemld-manual", coverLabel: "LINKER MANUAL" }
+      ]
+    },
+    {
+      href: "development/index.html",
+      label: "开发",
+      kicker: "以证据推进",
+      description: "查看阶段门、验证策略、公开进展和可下载资源状态。",
+      items: [
+        { href: "development/implementation-roadmap.html", label: "实施路线", description: "阶段、工具职责与放行证据", cover: "roadmap", coverLabel: "RELEASE GATES" },
+        { href: "development/testing.html", label: "测试策略", description: "确定性、Fuzz、威胁与一致性验证", cover: "testing", coverLabel: "REJECT MATRIX" },
+        { href: "news/index.html", label: "新闻与进展", description: "只登记可核对的项目进展", cover: "news", coverLabel: "VERIFIED SIGNAL" },
+        { href: "downloads/index.html", label: "资源状态", description: "版本、签名和发布资源的真实状态", cover: "downloads", coverLabel: "SIGNED PACKAGE" }
+      ]
+    }
   ]);
 
   const script = document.currentScript;
@@ -362,24 +450,112 @@
     return route;
   })();
 
-  const moduleKey = resolveDirectoryModule(currentRoute);
-  const directory = DIRECTORY_MODULES[moduleKey];
+  const readManualDirectory = () => {
+    const source = document.querySelector("[data-manual-directory-source]");
+    if (!source) return null;
+
+    try {
+      const payload = JSON.parse(source.textContent);
+      return createManualDirectory(payload, currentRoute);
+    } catch (error) {
+      console.warn("Manual directory data could not be read.", error);
+      return null;
+    }
+  };
+
+  const manualDirectory = readManualDirectory();
+  const moduleKey = manualDirectory?.moduleKey || resolveDirectoryModule(currentRoute);
+  const directory = manualDirectory?.directory || DIRECTORY_MODULES[moduleKey];
   const current = canonical(window.location.href);
 
-  const portalNav = document.querySelector("[data-portal-nav]");
-  if (portalNav) {
-    const portalLinks = PORTAL_NAV_ITEMS.map((item) => {
-      const link = document.createElement("a");
-      link.className = "portal-nav-link";
-      link.href = new URL(item.href, siteRoot).href;
-      link.textContent = item.label;
-      return link;
+  const globalNav = document.querySelector("[data-global-nav]");
+  if (globalNav) {
+    const globalItems = GLOBAL_NAV_GROUPS.map((group, groupIndex) => {
+      const item = document.createElement("div");
+      item.className = "global-nav-item";
+      item.dataset.navGroup = String(groupIndex + 1);
+
+      const trigger = document.createElement("a");
+      trigger.className = "portal-nav-link global-nav-trigger";
+      trigger.href = new URL(group.href, siteRoot).href;
+      trigger.innerHTML = `<span>${group.label}</span><span class="global-nav-caret" aria-hidden="true">⌄</span>`;
+      trigger.setAttribute("aria-haspopup", "true");
+      trigger.setAttribute("aria-expanded", "false");
+
+      const menu = document.createElement("div");
+      menu.className = "global-nav-menu";
+      menu.setAttribute("aria-label", `${group.label}导航`);
+
+      const intro = document.createElement("div");
+      intro.className = "global-nav-menu-intro";
+      intro.innerHTML = `<small>0${groupIndex + 1} · ${group.kicker}</small><strong>${group.description}</strong>`;
+      menu.append(intro);
+
+      group.items.forEach((entry, entryIndex) => {
+        const link = document.createElement("a");
+        link.className = "global-nav-card";
+        link.href = new URL(entry.href, siteRoot).href;
+        link.dataset.navItem = String(entryIndex + 1);
+        link.style.setProperty("--nav-order", entryIndex);
+        const coverHref = new URL(`assets/nav-covers.svg#nav-cover-${entry.cover}`, siteRoot).href;
+        link.innerHTML = `<span class="global-nav-visual" data-nav-cover="${entry.cover}" aria-hidden="true"><svg viewBox="0 0 116 82" focusable="false"><use href="${coverHref}"></use></svg><small>${String(groupIndex + 1).padStart(2, "0")}.${entryIndex + 1}</small><em>${entry.coverLabel}</em></span><span class="global-nav-card-copy"><strong>${entry.label}</strong><span>${entry.description}</span></span><i aria-hidden="true">↗</i>`;
+        if (canonical(link.href) === current) link.setAttribute("aria-current", "page");
+        menu.append(link);
+      });
+
+      const setExpanded = (expanded) => trigger.setAttribute("aria-expanded", String(expanded));
+      item.addEventListener("mouseenter", () => setExpanded(true));
+      item.addEventListener("mouseleave", () => setExpanded(false));
+      item.addEventListener("focusin", () => setExpanded(true));
+      item.addEventListener("focusout", () => {
+        window.requestAnimationFrame(() => setExpanded(item.contains(document.activeElement)));
+      });
+
+      item.append(trigger, menu);
+      return item;
     });
-    portalNav.replaceChildren(...portalLinks);
+    globalNav.replaceChildren(...globalItems);
   }
 
   const portalStage = document.querySelector("[data-portal-stage]");
   if (portalStage) portalStage.href = new URL("development/index.html", siteRoot).href;
+
+  const docsRail = document.querySelector("[data-docs-rail]");
+  if (docsRail) {
+    const railHeader = document.createElement("div");
+    railHeader.className = "docs-rail-header";
+    const railKicker = document.createElement("span");
+    railKicker.textContent = directory.kicker;
+    const railTitle = document.createElement("a");
+    railTitle.href = new URL(directory.root.href, siteRoot).href;
+    railTitle.textContent = directory.title;
+    railHeader.append(railKicker, railTitle);
+
+    const railGroups = directory.groups.map((group, groupIndex) => {
+      const details = document.createElement("details");
+      details.className = "docs-rail-group";
+      const containsCurrent = group.items.some((entry) => canonical(new URL(entry.href, siteRoot).href) === current);
+      details.open = containsCurrent || groupIndex === 0;
+
+      const summary = document.createElement("summary");
+      summary.innerHTML = `<small>${String(groupIndex + 1).padStart(2, "0")}</small><strong>${group.label}</strong><span>${group.items.length}</span>`;
+      const links = document.createElement("div");
+      links.className = "docs-rail-links";
+      group.items.forEach((entry) => {
+        const link = document.createElement("a");
+        link.href = new URL(entry.href, siteRoot).href;
+        link.textContent = entry.label;
+        if (canonical(link.href) === current) {
+          link.classList.add("active");
+          link.setAttribute("aria-current", "page");
+        }
+        links.append(link);
+      });
+      details.append(summary, links);
+      return details;
+    });
+    docsRail.replaceChildren(railHeader, ...railGroups);
+  }
 
   nav.dataset.directoryModule = moduleKey;
   nav.setAttribute("aria-label", `${directory.title}目录`);

@@ -1,0 +1,19 @@
+{% assign manual_pages = site.pages | where_exp: "item", "item.manual_id != nil" | sort: "manual_order" %}
+<script type="application/json" data-manual-directory-source>
+{
+  "manuals": {{ site.data.manuals | jsonify }},
+  "pages": [
+    {% for manual_page in manual_pages %}
+    {
+      "manualId": {{ manual_page.manual_id | jsonify }},
+      "group": {{ manual_page.manual_group | jsonify }},
+      "order": {{ manual_page.manual_order | jsonify }},
+      "route": {{ manual_page.permalink | remove_first: '/' | jsonify }},
+      "label": {{ manual_page.nav_title | default: manual_page.hero_title | jsonify }},
+      "description": {{ manual_page.summary | default: manual_page.hero_description | jsonify }},
+      "isIndex": {{ manual_page.manual_is_index | default: false | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>

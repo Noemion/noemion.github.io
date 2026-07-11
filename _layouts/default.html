@@ -1,4 +1,7 @@
 <!doctype html>
+{% assign permalink_parts = page.permalink | split: '/' %}
+{% assign page_tool_id = nil %}
+{% if permalink_parts[1] == 'tools' and permalink_parts.size > 3 %}{% assign page_tool_id = permalink_parts[2] %}{% endif %}
 <html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
 <head>
   <meta charset="utf-8">
@@ -8,9 +11,13 @@
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   <script src="{{ '/assets/directory.js' | relative_url }}" defer></script>
 </head>
-<body data-page-role="{{ page.page_role }}">
+<body data-page-role="{{ page.page_role }}"{% if page_tool_id %} data-tool-id="{{ page_tool_id }}"{% endif %}{% if page.manual_id or page.permalink contains '/docs/' %} data-docs-layout="true"{% endif %}>
 <a class="skip-link" href="#main-content">跳到正文</a>
 {% include site-header.html %}
+{% if page.manual_id %}{% include manual-directory-data.html %}{% endif %}
+{% if page.manual_id or page.permalink contains '/docs/' %}
+<aside class="docs-rail" aria-label="文档章节导航"><nav data-docs-rail></nav></aside>
+{% endif %}
 {{ content }}
 {% include site-footer.html %}
 </body>

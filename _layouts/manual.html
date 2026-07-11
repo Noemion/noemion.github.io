@@ -1,0 +1,73 @@
+---
+layout: default
+---
+{% assign manual = site.data.manuals[page.manual_id] %}
+{% assign manual_pages = site.pages | where: "manual_id", page.manual_id | sort: "manual_order" %}
+{% assign current_index = 0 %}
+{% for manual_page in manual_pages %}
+  {% if manual_page.url == page.url %}{% assign current_index = forloop.index0 %}{% endif %}
+{% endfor %}
+{% assign previous_index = current_index | minus: 1 %}
+{% assign next_index = current_index | plus: 1 %}
+{% if previous_index >= 0 %}{% assign previous_page = manual_pages[previous_index] %}{% endif %}
+{% if next_index < manual_pages.size %}{% assign next_page = manual_pages[next_index] %}{% endif %}
+{% assign index_pages = manual_pages | where: "manual_index_entry", true %}
+{% assign index_page = index_pages | first %}
+{% assign up_url = manual.root %}
+{% if page.manual_is_index %}{% assign up_url = manual.parent_url %}{% endif %}
+
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑">
+    {% for breadcrumb in manual.breadcrumbs %}
+      <a href="{{ breadcrumb.url | relative_url }}">{{ breadcrumb.label }}</a><span aria-hidden="true">/</span>
+    {% endfor %}
+    {% unless page.manual_is_index %}<a href="{{ manual.root | relative_url }}">{{ manual.title }}</a><span aria-hidden="true">/</span>{% endunless %}
+    <span aria-current="page">{{ page.nav_title | default: page.hero_title }}</span>
+  </nav>
+
+  <nav class="manual-nav manual-nav-top" aria-label="手册分页">
+    {% if previous_page %}<a data-manual-role="previous" href="{{ previous_page.url | relative_url }}">← 上一页</a>{% else %}<span aria-hidden="true"></span>{% endif %}
+    <a data-manual-role="up" href="{{ up_url | relative_url }}">上级</a>
+    <a href="{{ manual.root | relative_url }}">目录</a>
+    {% if next_page %}<a data-manual-role="next" href="{{ next_page.url | relative_url }}">下一页 →</a>{% else %}<span aria-hidden="true"></span>{% endif %}
+    <a data-manual-role="index" href="{{ index_page.url | default: manual.root | relative_url }}">索引</a>
+  </nav>
+
+  <div class="hero">
+    <h1>{{ page.hero_title | default: page.nav_title }}</h1>
+    <p>{{ page.hero_description }}</p>
+    {% if page.badges %}<div class="badges">{% for badge in page.badges %}<span class="badge">{{ badge }}</span>{% endfor %}</div>{% endif %}
+  </div>
+
+  <article class="manual-article">
+    {{ content }}
+  </article>
+
+  {% if page.manual_is_index %}
+  <section class="manual-generated-index" aria-labelledby="manual-generated-index-title">
+    <h2 id="manual-generated-index-title">{{ page.manual_index_heading | default: "手册目录" }}</h2>
+    {% for group_pair in manual.groups %}
+      {% assign group_key = group_pair[0] %}
+      {% assign group = group_pair[1] %}
+      <div class="manual-index-group">
+        <h3><span>{{ group.order | prepend: "0" | slice: -2, 2 }}</span>{{ group.label }}</h3>
+        <div class="page-links manual-index-links">
+          {% for manual_page in manual_pages %}
+            {% if manual_page.manual_group == group_key and manual_page.manual_is_index != true %}
+            <a class="page-link" href="{{ manual_page.url | relative_url }}"><strong>{{ manual_page.nav_title | default: manual_page.hero_title }}</strong><span>{{ manual_page.summary | default: manual_page.hero_description }}</span></a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <nav class="manual-nav manual-nav-bottom" aria-label="手册分页">
+    {% if previous_page %}<a data-manual-role="previous" href="{{ previous_page.url | relative_url }}">← 上一页</a>{% else %}<span aria-hidden="true"></span>{% endif %}
+    <a data-manual-role="up" href="{{ up_url | relative_url }}">上级</a>
+    <a href="{{ manual.root | relative_url }}">目录</a>
+    {% if next_page %}<a data-manual-role="next" href="{{ next_page.url | relative_url }}">下一页 →</a>{% else %}<span aria-hidden="true"></span>{% endif %}
+    <a data-manual-role="index" href="{{ index_page.url | default: manual.root | relative_url }}">索引</a>
+  </nav>
+</main>

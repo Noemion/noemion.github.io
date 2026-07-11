@@ -1,0 +1,46 @@
+docs:
+  kicker: Documentation
+  title: 文档中心
+  root: /docs/index.html
+  parent_url: /index.html
+  parent_label: 返回项目目录
+  breadcrumbs:
+    - label: 项目
+      url: /index.html
+  groups:
+    start:
+      label: 开始
+      order: 1
+    guides:
+      label: 指南
+      order: 2
+    reference:
+      label: 参考
+      order: 3
+
+noemld:
+  kicker: Tool Documentation
+  title: noemld 文档
+  root: /tools/noemld/docs/index.html
+  parent_url: /tools/noemld/index.html
+  parent_label: 返回 noemld 项目页
+  breadcrumbs:
+    - label: 项目
+      url: /index.html
+    - label: 工具
+      url: /tools/index.html
+    - label: noemld
+      url: /tools/noemld/index.html
+  groups:
+    start:
+      label: 开始
+      order: 1
+    linking:
+      label: 链接流程
+      order: 2
+    security:
+      label: 安全与质量
+      order: 3
+    reference:
+      label: 参考
+      order: 4
