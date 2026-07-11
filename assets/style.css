@@ -276,7 +276,7 @@ body[data-page-role="portal"] .portal-main{
 }
 body[data-page-role="portal"] .portal-main::before,
 body[data-page-role="portal"] .portal-main::after{display:none}
-body[data-page-role="portal"] .portal-main a:visited{color:inherit}
+body[data-page-role="portal"] .portal-main a:visited:not(.portal-button){color:inherit}
 body[data-page-role="portal"] .portal-main>section{
   margin:0;padding:0;background:transparent;border:0;border-bottom:1px solid var(--portal-line);box-shadow:none
 }

@@ -14,6 +14,7 @@
 - 外部书目、论文、规范、下载和其他资源链接必须在正文中保留可见的原始 URL，不得只用概括性标题替代链接本身；解释与 URL 分开书写。内部路由仍使用能说明目标内容的链接文字。
 - 工具项目页与工具文档分离；只有存在实质专题时才建立 `tools/<tool>/docs/`。
 - 每个 `tools/<tool>/index.html` 工具项目页必须保持 HTML 源，并按 `design-system/internal-tools.md` 使用该工具独立的色彩、签名文字、图形母题和内容强调点；只有对应的 `tools/<tool>/docs/*.md` 帮助手册使用纯通用 Markdown 正文。工具个性不得改变六章项目页契约，手册统一布局也不得抹去所属工具的强调色。
+- 工具页“相关资源”章节只放置可点击资源入口，不得在卡片之后追加“尚未冻结的接口包括……”等孤立尾段。接口状态、开发顺序或候选契约必须放在“当前状态”或“处理边界”的明确上下文中，且不能与全站未发布声明重复。
 - 手册与指南正文的权威源文件必须使用 Markdown；Jekyll 负责把 Markdown 转换为正式 `.html` 路由。正文只允许通用 Markdown 语法，不得包含原始 HTML 或 Kramdown 专有属性。不得把构建生成的 HTML 当作正文维护入口，也不得同时保留内容重复的 `.md` 与手写 `.html` 两套权威源。新增页面只通过 Markdown Front Matter 加入手册，目录、索引和分页必须根据 `manual_id`、分组与顺序动态生成。
 - 全站样式只在 `assets/style.css` 和 `assets/directory.css` 维护，目录数据与渲染只在 `assets/directory.js` 维护；禁止页面级 CSS 和复制目录链接。
 - 全站顶部一级入口在悬停与键盘聚焦时展开分组面板；卡片标题、箭头和表面必须提供一致悬停反馈，并支持 `prefers-reduced-motion`。页面类型映射、视觉元素和验收细则维护在 `sitewide-design-system.md`，README 只保留公开层面的概要。

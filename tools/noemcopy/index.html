@@ -20,6 +20,5 @@ permalink: "/tools/noemcopy/index.html"
   <section><h2>处理边界</h2><ul><li>不做语义级 strip 决策</li><li>不直接修补任意偏移或原始字节</li><li>不保留已被变换破坏的旧签名为有效状态</li><li>不允许删除运行闭包必需 Section</li></ul><p>所有对象输入均视为不可信；偏移、长度、计数、索引和对齐计算必须使用 checked arithmetic。变换必须先形成新对象并完成验证，再原子交付；失败时保留原对象不变。</p>
 </section>
   <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GOBJ、GSIR 与 SSO 的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性对象处理与安全边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div>
-<p>尚未冻结的接口包括变换代数、操作顺序、冲突规则、Change Manifest、签名状态转换与安全回滚。</p>
 </section>
 </main>

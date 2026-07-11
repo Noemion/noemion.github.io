@@ -671,11 +671,16 @@
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let closeTimer = 0;
 
+  const setPageScrollLock = (locked) => {
+    document.documentElement.classList.toggle("mobile-directory-open", locked && interactiveMobileMenu.matches);
+  };
+
   const finishPanelClose = () => {
     if (!panel) return;
     window.clearTimeout(closeTimer);
     panel.open = false;
     panel.classList.remove("is-closing");
+    setPageScrollLock(false);
   };
 
   const closePanel = () => {
@@ -699,6 +704,7 @@
     window.clearTimeout(closeTimer);
     panel.classList.remove("is-closing");
     panel.open = true;
+    setPageScrollLock(true);
   });
 
   document.addEventListener("pointerdown", (event) => {
@@ -723,6 +729,7 @@
     window.clearTimeout(closeTimer);
     panel.classList.remove("is-closing");
     panel.open = !event.matches;
+    setPageScrollLock(false);
   };
 
   syncPanel(media);

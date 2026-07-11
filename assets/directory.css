@@ -523,6 +523,10 @@ body .global-directory-panel{display:none}
   body:not([data-page-role="portal"]) .global-directory-panel nav{
     top:48px;right:0;left:auto;width:min(390px,calc(100vw - 16px));max-height:calc(100dvh - 120px)
   }
+  html.mobile-directory-open,html.mobile-directory-open body{overflow:hidden;overscroll-behavior:none}
+  html.mobile-directory-open .global-directory-panel nav{
+    overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch
+  }
   body:not([data-page-role="portal"]) main{padding-top:48px}
   body:not([data-page-role="portal"]) .breadcrumbs{
     position:fixed;top:64px;right:8px;left:8px;z-index:8;width:auto;padding-right:102px;background:color-mix(in srgb,var(--paper-subtle) 94%,transparent);

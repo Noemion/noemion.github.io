@@ -160,6 +160,7 @@ PUBLIC_META_PHRASES = (
     "本页",
     "当前内容属于",
     "已确认内容限于",
+    "尚未冻结的接口包括",
     "阶段门",
     "证据门",
     "退出证据",
@@ -545,9 +546,12 @@ def validate_jekyll_sources():
             'main>section:not(.project-progress-section):has(>details)',
             'main>section:has(>.table-wrap)',
             'ul:has(>li:nth-child(4))',
+            'a:visited:not(.portal-button)',
             '@media(max-width:839px)',
             'body:not([data-page-role="portal"]) .global-directory-panel',
             '.site-header .directory-panel.is-closing nav',
+            'html.mobile-directory-open,html.mobile-directory-open body',
+            'overscroll-behavior:contain',
         ):
             if token not in shared_css:
                 errors.append(f"shared styles missing site-wide design contract: {token}")
@@ -652,6 +656,8 @@ def validate_jekyll_sources():
             'event.key === "Escape"',
             'nextScrollY > previousScrollY + 8',
             'window.setTimeout(finishPanelClose, 180)',
+            'document.documentElement.classList.toggle("mobile-directory-open"',
+            'setPageScrollLock(true)',
         ):
             if token not in directory_text:
                 errors.append(f"directory.js missing dynamic manual contract: {token}")
