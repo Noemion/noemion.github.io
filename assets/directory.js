@@ -470,10 +470,9 @@
 
   const globalNav = document.querySelector("[data-global-nav]");
   if (globalNav) {
-    const globalItems = GLOBAL_NAV_GROUPS.map((group, groupIndex) => {
+    const globalItems = GLOBAL_NAV_GROUPS.map((group) => {
       const item = document.createElement("div");
       item.className = "global-nav-item";
-      item.dataset.navGroup = String(groupIndex + 1);
 
       const trigger = document.createElement("a");
       trigger.className = "portal-nav-link global-nav-trigger";
@@ -488,17 +487,16 @@
 
       const intro = document.createElement("div");
       intro.className = "global-nav-menu-intro";
-      intro.innerHTML = `<small>0${groupIndex + 1} · ${group.kicker}</small><strong>${group.description}</strong>`;
+      intro.innerHTML = `<small>${group.kicker}</small><strong>${group.description}</strong>`;
       menu.append(intro);
 
       group.items.forEach((entry, entryIndex) => {
         const link = document.createElement("a");
         link.className = "global-nav-card";
         link.href = new URL(entry.href, siteRoot).href;
-        link.dataset.navItem = String(entryIndex + 1);
         link.style.setProperty("--nav-order", entryIndex);
         const coverHref = new URL(`assets/nav-covers.svg#nav-cover-${entry.cover}`, siteRoot).href;
-        link.innerHTML = `<span class="global-nav-visual" data-nav-cover="${entry.cover}" aria-hidden="true"><svg viewBox="0 0 116 82" focusable="false"><use href="${coverHref}"></use></svg><small>${String(groupIndex + 1).padStart(2, "0")}.${entryIndex + 1}</small><em>${entry.coverLabel}</em></span><span class="global-nav-card-copy"><strong>${entry.label}</strong><span>${entry.description}</span></span><i aria-hidden="true">↗</i>`;
+        link.innerHTML = `<span class="global-nav-visual" data-nav-cover="${entry.cover}" aria-hidden="true"><svg viewBox="0 0 116 82" focusable="false"><use href="${coverHref}"></use></svg><em>${entry.coverLabel}</em></span><span class="global-nav-card-copy"><strong>${entry.label}</strong><span>${entry.description}</span></span><i aria-hidden="true">↗</i>`;
         if (canonical(link.href) === current) link.setAttribute("aria-current", "page");
         menu.append(link);
       });

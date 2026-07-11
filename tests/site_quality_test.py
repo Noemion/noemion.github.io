@@ -613,9 +613,12 @@ def validate_jekyll_sources():
             "manualDirectory?.directory",
             'trigger.setAttribute("aria-expanded", "false")',
             'item.addEventListener("mouseenter"',
+            'intro.innerHTML = `<small>${group.kicker}</small>',
         ):
             if token not in directory_text:
                 errors.append(f"directory.js missing dynamic manual contract: {token}")
+        if "item.dataset.navGroup" in directory_text or "link.dataset.navItem" in directory_text:
+            errors.append("global navigation must not expose decorative title numbers")
 
         expected_nav_covers = {
             "background", "architecture", "foundations", "faq",
