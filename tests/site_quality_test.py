@@ -89,6 +89,16 @@ DOC_GUIDE_HEADINGS = {
         "如何判断权威性", "成熟度标记", "GSIR", "GOBJ", "SSO", "开放问题与 ADR",
     ],
 }
+HOME_HEADINGS = [
+    "从提示词工程开始",
+    "真正的缺口：意义还没有成为工程对象",
+    "思想来源：从“思考的行为”到“被思考的对象”",
+    "工程转译：把意义送入确定性工具链",
+    "Noemion 实际要建设什么",
+    "边界：我们不在做什么",
+    "当前状态",
+    "按你的问题继续阅读",
+]
 ROLE_BY_KIND = {
     "portal": "portal",
     "section": "section",
@@ -441,6 +451,21 @@ def main():
     section_routes = [row["route"] for row in route_rows if row["kind"] == "section"]
     if sorted(section_routes) != sorted(PORTAL_ROUTES[1:]):
         errors.append("README section routes do not match the approved portal architecture")
+
+    home = ROOT / "index.html"
+    if home.exists():
+        parser = parse(home)
+        if parser.h2_texts != HOME_HEADINGS:
+            errors.append(
+                f"index.html: homepage reasoning sequence must be {HOME_HEADINGS}, "
+                f"got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in ("提示词工程", "Noesis", "Noema", "分析哲学", "工程类比"):
+            if term not in visible_text:
+                errors.append(f"index.html: homepage must explain {term}")
 
     for row in route_rows:
         path = ROOT / row["route"]

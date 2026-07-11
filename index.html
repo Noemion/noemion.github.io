@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Noemion · 生成式表征对象工具链"
+title: "Noemion · 从人类意图到机器表征对象"
 page_role: "portal"
 footer_text: "Noemion · 生成式表征对象工具链"
 permalink: "/index.html"
@@ -8,53 +8,104 @@ permalink: "/index.html"
 <main id="main-content" tabindex="-1">
   <div class="hero">
     <h1>Noemion</h1>
-    <p>面向生成式计算的、可机器分析、验证、重定位和执行的目标与约束表征对象体系。</p>
-    <div class="badges"><span class="badge">GSIR</span><span class="badge">GOBJ / SSO</span><span class="badge">Deterministic Core</span></div>
+    <p>把人类意图从一次性的提示词上下文，编译为可分析、验证、重定位、链接和安全装载的机器表征对象。</p>
+    <div class="badges"><span class="badge">Intent Objects</span><span class="badge">Deterministic Core</span><span class="badge">Generative Runtime</span></div>
   </div>
+
   <section>
-    <h2>为什么需要 Noemion</h2>
-    <p class="lead">生成式任务不能只依赖不可验证的文本提示。Noemion 旨在把目标、约束、歧义、证据和验收条件组织为可由工具链处理的语义对象。</p>
-    <p>当前生成式系统常把任务意图、执行权限、外部知识、评价标准和运行记录混合在一次性上下文中，导致目标难以静态检查、依赖难以重定位、失败难以复现、产物难以长期治理。Noemion 的核心研究命题是：生成式计算是否能够像传统对象工程一样，拥有独立于具体模型与提示表达的可验证中间对象和可信装载边界。</p>
-    <p><a href="about/">了解项目背景、适用范围与非目标</a>。</p>
+    <h2>从提示词工程开始</h2>
+    <p class="lead">今天，引导大语言模型（LLM）的主要方式仍是向模型提供 Prompt 和上下文。提示词工程把角色、目标、限制、示例、工具说明、输出格式与验收要求组织成自然语言，让模型更可能生成符合预期的结果。</p>
+    <div class="flow" aria-label="当前常见的大语言模型使用流程">
+      <div class="step"><strong>人的意图</strong><br>想解决什么</div>
+      <div class="step"><strong>Prompt</strong><br>如何说给模型</div>
+      <div class="step"><strong>上下文</strong><br>补充知识与约束</div>
+      <div class="step"><strong>LLM</strong><br>概率生成</div>
+      <div class="step"><strong>响应</strong><br>检查与修改</div>
+    </div>
+    <p>这种方式直观、灵活，也不会因为 Noemion 出现而消失。问题在于：当任务变得复杂、长期或高风险时，目标、权限、证据和验收条件仍然埋在文本中，只能由模型临时解释，难以被独立工具检查和复用。</p>
   </section>
+
   <section>
-    <h2>核心能力</h2>
+    <h2>真正的缺口：意义还没有成为工程对象</h2>
+    <p class="lead">提示词解决“怎样向模型表达”，Noemion 进一步追问“被表达的目标和意义，能否脱离某次对话，成为可验证、可组合和可治理的计算对象”。</p>
     <div class="status-grid">
-      <article class="status-item"><h3>目标与约束表征</h3><p>GSIR 表达目标、解空间、硬约束、软偏好、歧义和验收条件。</p></article>
-      <article class="status-item"><h3>对象化工程</h3><p>GOBJ 与 SSO 面向组织、链接、重定位、完整性验证和受控装载。</p></article>
-      <article class="status-item"><h3>确定性核心</h3><p>Strict 模式无模型、确定且可复现；只有 Compiler Core 能生成 GSIR/GOBJ。</p></article>
-      <article class="status-item"><h3>不可信输入边界</h3><p>模型输出与对象输入均不可信，Runtime 和对象工具承担验证与安全执行职责。</p></article>
+      <article class="status-item"><h3>目标与措辞绑定</h3><p>同一意图可以有多种说法，但现有系统往往把具体文字当作目标本身，难以区分表达方式与真正要满足的条件。</p></article>
+      <article class="status-item"><h3>约束不能独立检查</h3><p>“必须做到什么”和“绝不能发生什么”常与背景文字混在一起，无法在运行前由确定性工具完整验证。</p></article>
+      <article class="status-item"><h3>依赖不能稳定链接</h3><p>知识、工具、权限和子任务通过上下文临时拼接，缺少明确符号、类型化引用、版本关系和重定位机制。</p></article>
+      <article class="status-item"><h3>结果难以复现与治理</h3><p>模型、上下文或调用顺序变化后，失败原因难以定位，也难回答执行时究竟采用了哪些目标、证据与权限。</p></article>
+    </div>
+    <p class="callout"><strong>Noemion 的出发点：</strong>不替代 Prompt，而是把需要长期保存和严格处理的语义，从一次性文本上下文中提取出来，交给确定性工具链管理。</p>
+  </section>
+
+  <section>
+    <h2>思想来源：从“思考的行为”到“被思考的对象”</h2>
+    <p>Noemion 不是生硬缩写，而是从哲学术语 <em>Noema</em> 衍生出的独立名称。以下思想用于解释问题和建立设计视角，不等于把某套哲学理论直接编码成技术规范。</p>
+    <div class="grid3">
+      <article class="card">
+        <h3>现象学：Noesis 与 Noema</h3>
+        <p>在胡塞尔的意向性分析中，<em>Noesis</em> 指理解、判断或思考的行为，<em>Noema</em> 指与该行为相关的意义内容或对象。Noemion 借此区分“形成理解的过程”和“形成后可被处理的表征对象”。</p>
+      </article>
+      <article class="card">
+        <h3>分析哲学：表达不等于所指</h3>
+        <p>弗雷格关于意义与指称的区分提醒我们：一段表达、它呈现意义的方式，以及它所指向的对象不能简单混为一体。工程上，这启发我们把 Prompt 的表面措辞与任务的语义身份分开。</p>
+      </article>
+      <article class="card">
+        <h3>形式语义：说明满足条件</h3>
+        <p>目标不能只依赖“读起来像什么”，还需要说明什么状态算成功、哪些约束不可违反、证据如何支持结论，以及仍有哪些歧义尚未解决。</p>
+      </article>
+    </div>
+    <p class="small">概念背景可参见 Stanford Encyclopedia of Philosophy 的 <a href="https://plato.stanford.edu/entries/husserl/">Edmund Husserl</a>、<a href="https://plato.stanford.edu/entries/intentionality/">Intentionality</a> 与 <a href="https://plato.stanford.edu/entries/frege/">Gottlob Frege</a> 条目。Noemion 对这些概念的使用属于工程类比，而不是哲学解释的定论。</p>
+  </section>
+
+  <section>
+    <h2>工程转译：把意义送入确定性工具链</h2>
+    <p class="lead">传统编译器把源程序转化为中间表示和对象文件，再经过链接、装载和执行。Noemion 借鉴这条工程路径，但处理的不是传统机器指令，而是生成式任务的目标、约束、证据、权限、歧义和验收条件。</p>
+    <div class="flow" aria-label="Noemion 设想的对象生命周期">
+      <div class="step"><strong>人类需求</strong><br>自然语言与资料</div>
+      <div class="step"><strong>确定性编译</strong><br>分析与保留歧义</div>
+      <div class="step"><strong>GSIR</strong><br>目标与约束语义</div>
+      <div class="step"><strong>GOBJ / SSO</strong><br>可链接对象</div>
+      <div class="step"><strong>Runtime</strong><br>受约束生成执行</div>
+    </div>
+    <p>在这个对应关系中，编译过程类似形成理解的 <em>Noesis</em>，GSIR/GOBJ 类似形成后可被分析和组合的 <em>Noema</em>。这只是帮助理解的映射；真正的行为由规范、数据结构、不变量和测试定义。</p>
+  </section>
+
+  <section>
+    <h2>Noemion 实际要建设什么</h2>
+    <div class="status-grid">
+      <article class="status-item"><h3>GSIR：目标语义</h3><p>表达目标、解空间、硬约束、软偏好、歧义、证据要求、权限和验收条件，回答“什么结果才算满足要求”。</p></article>
+      <article class="status-item"><h3>GOBJ 与 SSO：对象工程</h3><p>组织语义记录、符号、类型化引用、重定位、依赖闭包与完整性信息，使对象能够被链接、分发和受控装载。</p></article>
+      <article class="status-item"><h3>确定性工具链</h3><p>建设 Compiler Core、链接器、验证器、对象检查工具和安全 Reader/Writer；Strict 模式不调用模型并保持可复现。</p></article>
+      <article class="status-item"><h3>受约束 Runtime</h3><p>Runtime 在已验证对象规定的边界内调用生成式能力并执行 Lowering；模型可以提出候选，但不能决定对象布局或绕过约束。</p></article>
     </div>
   </section>
+
   <section>
-    <h2>研究与标准化愿景</h2>
-    <div class="status-grid">
-      <article class="status-item"><h3>科学问题</h3><p>研究目标、约束、歧义、证据与验收条件如何形成可分析、可组合且可证伪的计算对象。</p></article>
-      <article class="status-item"><h3>工程问题</h3><p>建立确定性编译、对象格式、链接装载、安全验证和运行追溯之间的完整工具链。</p></article>
-      <article class="status-item"><h3>知识产权</h3><p>逐步识别可申请专利或登记软著的创新点候选，但在检索、权属和公开披露审查完成前不作成果声明。</p></article>
-      <article class="status-item"><h3>行业规范</h3><p>只有术语稳定、条款可测试、对象可互操作且安全证据充分后，才把设计提案推进为标准化候选。</p></article>
-    </div>
+    <h2>边界：我们不在做什么</h2>
+    <ul>
+      <li><strong>不是提示词二进制化：</strong>把 Prompt、文本或 Skill 包换一种编码，不会自动获得类型、约束、链接和验证语义。</li>
+      <li><strong>不是取代大语言模型：</strong>模型仍负责擅长的生成式求解，但其输出始终是不可信候选。</li>
+      <li><strong>不是让模型生成对象格式：</strong>只有确定性的 Compiler Core 能生成 GSIR/GOBJ，模型不得决定二进制布局。</li>
+      <li><strong>不是已经完成的标准：</strong>当前名称、字段、ABI、命令行和扩展名仍需规范、ADR、原型和一致性测试逐步冻结。</li>
+    </ul>
+    <p><a href="about/background.html">继续阅读项目范围、非目标与可证伪条件</a>。</p>
   </section>
+
   <section>
     <h2>当前状态</h2>
-    <p class="callout warning"><strong>开发阶段：</strong>项目目前处于规范与安全二进制核心开发阶段，尚未发布可供使用的编译器或 Runtime。</p>
-    <p>第一阶段聚焦规范、确定性 Compiler Core、安全 Reader/Writer、验证与测试基础，不引入模型、LLVM、MLIR 或大型框架。</p>
-    <p><strong>当前证据边界：</strong>已有内容主要是问题定义、架构约束、对象与工具职责设计，尚不足以证明性能、互操作性、模型无关性或产业适用性。相关结论必须等待规范条款、原型、测试矩阵和可复现实验逐步形成。</p>
+    <p class="callout warning"><strong>设计与安全核心阶段：</strong>目前没有可供安装的编译器、Runtime 或正式规范版本。网站展示的是问题定义、设计约束和证据路线，不是已完成能力。</p>
+    <p>第一阶段只推进规范、确定性 Compiler Core、安全 Reader/Writer、验证器和测试基础，不引入模型、LLVM、MLIR 或大型框架。性能、跨模型等价、互操作性和产业价值必须等待可复现的实现与实验验证。</p>
   </section>
+
   <section>
-    <h2>开始探索</h2>
+    <h2>按你的问题继续阅读</h2>
     <div class="page-links">
-      <a class="page-link" href="about/"><strong>项目背景</strong><span>了解问题、范围、原则与路线图语境。</span></a>
-      <a class="page-link" href="specifications/"><strong>规范</strong><span>查看 GSIR、GOBJ、SSO、Runtime 与安全规则的权威状态。</span></a>
-      <a class="page-link" href="tools/"><strong>工具</strong><span>进入 23 个工具各自的项目页。</span></a>
-      <a class="page-link" href="docs/"><strong>文档</strong><span>按入门、使用、架构、开发和参考任务查找资料。</span></a>
-      <a class="page-link" href="downloads/"><strong>下载</strong><span>查看版本、源码、规范与测试资源的发布状态。</span></a>
-      <a class="page-link" href="development/"><strong>参与开发</strong><span>了解实现路线、测试、贡献与报告边界。</span></a>
+      <a class="page-link" href="about/"><strong>为什么值得做</strong><span>了解项目动机、适用范围、非目标与研究命题。</span></a>
+      <a class="page-link" href="architecture/"><strong>系统如何组织</strong><span>查看从需求到对象、链接、装载和运行的职责边界。</span></a>
+      <a class="page-link" href="specifications/"><strong>哪些内容具有规范性</strong><span>区分已确认原则、设计提案、开放问题与未来条款。</span></a>
+      <a class="page-link" href="docs/"><strong>第一次从哪里开始</strong><span>按入门、使用、架构、开发和参考任务阅读文档。</span></a>
+      <a class="page-link" href="tools/"><strong>工具链如何分工</strong><span>浏览 23 个工具的职责、输入输出、边界和当前状态。</span></a>
+      <a class="page-link" href="development/"><strong>如何验证并推进</strong><span>了解阶段门、测试、安全、贡献与证据要求。</span></a>
     </div>
-  </section>
-  <section>
-    <h2>近期进展</h2>
-    <p>当前工作集中在项目门户、规范路由与安全二进制核心的边界整理；尚无正式版本公告。</p>
-    <p><a href="news/">查看新闻与进展说明</a>。</p>
   </section>
 </main>
