@@ -679,6 +679,12 @@ def validate_jekyll_sources():
             errors.append("project timeline contains an unsupported state")
         if "href: /development/current-stage.html" not in timeline_text:
             errors.append("project timeline header must route to the current stage page")
+        for overview_key in (
+            "completed_label", "active_label", "planned_label",
+            "current_label", "roadmap_label", "roadmap_href",
+        ):
+            if not re.search(rf"^  {overview_key}:\s*.+$", timeline_text, re.MULTILINE):
+                errors.append(f"project timeline overview requires {overview_key}")
         header_value_match = re.search(r"^  value:\s*(.+?)\s*$", timeline_text, re.MULTILINE)
         if header_value_match is None or not 3 <= len(header_value_match.group(1)) <= 4:
             errors.append("project timeline header value must contain three or four characters")
@@ -689,6 +695,9 @@ def validate_jekyll_sources():
         for token in (
             "include.timeline",
             "timeline.items",
+            "completed_stages.size",
+            "planned_stages.size",
+            'class="project-progress-summary"',
             'data-stage-id="{{ item.id | escape }}"',
             'data-stage-state="{{ item.state | escape }}"',
         ):
@@ -704,13 +713,21 @@ def validate_jekyll_sources():
             'timeline_data: "project_timeline"',
             "site.data[page.timeline_data]",
             "current_stage.title",
+            'class="current-stage-feature"',
             'class="current-stage-panel"',
+            'class="project-progress-section"',
             "include project-timeline.html timeline=timeline",
-            "尚未满足的退出证据",
-            "进入下一阶段的判断",
         ):
             if token not in current_stage_text:
                 errors.append(f"current stage page missing contract: {token}")
+        for forbidden in (
+            "当前阶段的进入条件",
+            "尚未满足的退出证据",
+            "进入下一阶段的判断",
+            "时间线不是完成百分比",
+        ):
+            if forbidden in current_stage_text:
+                errors.append(f"current stage page exposes internal workflow copy: {forbidden}")
 
     tool_design = design_root / "internal-tools.md"
     style_text = style.read_text() if style.exists() else ""
@@ -1053,6 +1070,23 @@ def main():
         )
         if rendered_stages != configured_stages:
             errors.append("current stage output must match configured timeline order, states, and titles")
+        rendered_counts_match = re.search(
+            r'<dl class="progress-counts">(.*?)</dl>',
+            current_stage_output_text,
+            re.DOTALL,
+        )
+        rendered_counts = (
+            [int(value) for value in re.findall(r"<dd>(\d+)</dd>", rendered_counts_match.group(1))]
+            if rendered_counts_match is not None
+            else []
+        )
+        expected_counts = [
+            sum(state == "confirmed" for _, state, _ in configured_stages),
+            sum(state == "current" for _, state, _ in configured_stages),
+            sum(state in {"next", "future"} for _, state, _ in configured_stages),
+        ]
+        if rendered_counts != expected_counts:
+            errors.append("current stage overview counts must match configured timeline states")
         configured_current = [stage for stage in configured_stages if stage[1] == "current"]
         current_title = configured_current[0][2] if len(configured_current) == 1 else ""
         configured_header_value_match = re.search(
@@ -1069,9 +1103,22 @@ def main():
             'href="/development/current-stage.html"',
             '<span class="global-stage-divider" aria-hidden="true"></span>',
             f'<strong class="global-stage-value">{configured_header_value}</strong>',
+            'class="project-progress-summary"',
+            'class="progress-counts"',
+            "项目状态概览",
+            "正在进行",
+            "后续规划",
         ):
             if token not in current_stage_output_text:
                 errors.append(f"current stage output missing configured value: {token}")
+        for forbidden in (
+            "当前阶段的进入条件",
+            "尚未满足的退出证据",
+            "进入下一阶段的判断",
+            "时间线不是完成百分比",
+        ):
+            if forbidden in current_stage_output_text:
+                errors.append(f"current stage output exposes internal workflow copy: {forbidden}")
 
     directory_script = ROOT / "assets/directory.js"
     favicon = ROOT / "assets/favicon.svg"

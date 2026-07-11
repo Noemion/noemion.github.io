@@ -11,37 +11,16 @@ timeline_data: "project_timeline"
 {% assign current_stage = current_stage_matches | first %}
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发</a><span aria-hidden="true">/</span><span>当前项目阶段</span></nav>
-  <div class="hero"><h1>当前项目阶段</h1><p>说明 Noemion 现在处于哪里、哪些边界已经确认，以及进入下一阶段前还必须取得什么证据。</p><div class="badges"><span class="badge">Current Stage</span><span class="badge">Design</span><span class="badge">Evidence Gated</span></div></div>
-  <section>
+  <div class="hero"><h1>当前项目阶段</h1><p>汇总已经完成的设计工作、当前正在推进的核心任务，以及后续计划开发的项目能力。</p><div class="badges"><span class="badge">Completed Work</span><span class="badge">In Progress</span><span class="badge">Roadmap</span></div></div>
+  <div class="current-stage-feature">
     <div class="current-stage-panel">
       <div class="current-stage-state"><span>CURRENT</span><strong>{{ current_stage.title | escape }}</strong></div>
       <p>{{ timeline.current.summary | escape }}</p>
       <dl>{% for fact in timeline.current.facts %}<div><dt>{{ fact.label | escape }}</dt><dd>{{ fact.value | escape }}</dd></div>{% endfor %}</dl>
     </div>
-  </section>
-  <section>
+  </div>
+  <section class="project-progress-section">
     {% include project-timeline.html timeline=timeline %}
-  </section>
-  <section>
-    <h2>当前阶段的进入条件</h2>
-    <ul>
-      <li>项目问题、非目标、信任边界和第一阶段范围已经公开说明。</li>
-      <li>GSIR、GOBJ、SSO、Compiler Core、Linker/Loader 与工具职责已有可继续评审的设计入口。</li>
-      <li>规范先行、安全核心先行、模型最后接入和失败关闭已成为项目级约束。</li>
-    </ul>
-  </section>
-  <section>
-    <h2>尚未满足的退出证据</h2>
-    <ul>
-      <li>最小对象布局、类型边界、错误语义、限制值和演进规则尚未形成稳定规范与 ADR 集合。</li>
-      <li>合法、边界、冲突和恶意对象语料尚未达到可以约束独立实现的覆盖程度。</li>
-      <li>安全 Reader/Writer、验证器、字节级复现、Round-trip 与持续 Fuzz 尚无已发布实现和结果。</li>
-      <li>因此当前不能宣称 Phase 0 或安全二进制核心已经完成，也不能给出稳定 ABI、版本或发布日期。</li>
-    </ul>
-  </section>
-  <section>
-    <h2>进入下一阶段的判断</h2>
-    <p>当最小规范条款能够被正反样例和一致性测试约束，关键安全决定已经进入 ADR，且 Reader/Writer 的实现边界不再依赖未决语义时，项目才进入“安全二进制核心实现与验证”。详细阶段定义见<a href="implementation-roadmap.html">实施路线图</a>，证据要求见<a href="testing.html">测试、Fuzz 与验证策略</a>。</p>
   </section>
   <div class="next-prev"><a href="index.html">← 开发</a><a href="implementation-roadmap.html">实施路线图 →</a></div>
 </main>

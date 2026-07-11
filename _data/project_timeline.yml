@@ -9,43 +9,54 @@ header:
   href: /development/current-stage.html
   title: 查看当前项目阶段与进度时间线
 
-notice:
-  title: 时间线不是完成百分比：
-  text: 阶段只在进入条件和退出证据可以核对时改变。当前没有足够依据承诺具体日期，因此不展示虚构进度或发布日期。
+overview:
+  kicker: PROJECT / PROGRESS
+  title: 项目状态概览
+  completed_label: 已完成
+  active_label: 正在进行
+  planned_label: 后续规划
+  current_label: 当前工作
+  roadmap_label: 查看完整实施路线图
+  roadmap_href: /development/implementation-roadmap.html
 
 current:
-  summary: Noemion 当前仍处于设计阶段。工作重点是收敛 GSIR、GOBJ、SSO 的最小规范边界，并为安全 Reader/Writer、验证器、合法样本和畸形语料定义可以实现和测试的契约；尚未发布可执行工具、稳定 ABI 或正式规范制品。
+  summary: 项目范围、非目标与信任原则的设计已经完成并公开。当前正在收敛 GSIR、GOBJ 与 SSO 的最小规范，以及安全 Reader/Writer 和验证器的实现契约；下一项工作是安全二进制核心的实现与验证。
   facts:
-    - label: 当前性质
-      value: 规范与核心设计
-    - label: 当前焦点
-      value: 可测试条款与拒绝路径
-    - label: 发布结论
-      value: 尚无稳定制品
+    - label: 已完成
+      value: 项目范围与信任原则设计
+    - label: 正在进行
+      value: 对象规范与安全核心设计
+    - label: 后续工作
+      value: Reader/Writer 与验证器实现
 
 items:
   - id: scope-and-trust
     state: confirmed
-    label: 已确认
-    title: 问题、范围与信任原则
-    description: 项目定位、Strict 无模型边界、模型输出不可信、对象输入不可信、歧义优先保留等原则已经进入公开项目定义。
+    label: 已完成
+    title: 项目定位与信任原则设计
+    description: 已完成项目定位、非目标、Strict 无模型边界、模型输出不可信、对象输入不可信和歧义保留原则的公开设计。
+  - id: object-and-toolchain-boundaries
+    state: confirmed
+    label: 已完成
+    title: 核心对象与工具链职责划分
+    description: 已完成 GSIR、GOBJ、SSO、Compiler Core、Linker/Loader 与 Runtime 的职责边界和公开架构入口设计。
   - id: specification-binary-core-design
     state: current
-    label: 当前阶段
-    title: 规范与安全二进制核心设计
-    description: 正在收敛对象语义、格式边界、错误语义、资源限制、checked arithmetic、不变量以及合法与畸形样本的最低集合。
+    label: 正在进行
+    title: 最小规范与安全二进制核心设计
+    description: 正在收敛对象语义、格式边界、错误语义、资源限制、checked arithmetic、不变量，以及合法与畸形样本的最低集合。
   - id: secure-binary-core-validation
     state: next
-    label: 下一阶段
+    label: 计划开发
     title: 安全二进制核心实现与验证
-    description: 在规范条款和 ADR 足够稳定后，实现 Checked Reader/Writer、结构验证器、Round-trip、Malformed 与 Fuzz 拒绝路径。
+    description: 计划实现 Checked Reader/Writer、结构验证器、Round-trip、Malformed 与 Fuzz 拒绝路径，并形成可重复验证结果。
   - id: strict-compile-and-link
     state: future
-    label: 未来阶段
+    label: 后续规划
     title: 文本 IR、Strict 编译与链接
-    description: 逐步进入规范化文本往返、确定性 Compiler Core、符号解析、重定位、归档、依赖闭包和链接一致性。
+    description: 规划规范化文本往返、确定性 Compiler Core、符号解析、重定位、归档、依赖闭包和链接一致性工作。
   - id: trusted-load-and-assisted
     state: future
-    label: 未来阶段
+    label: 后续规划
     title: 可信装载、发布与模型辅助
-    description: 只有前序安全核心和一致性门通过后，才评估签名装载、最小 Runtime、SSO 发布以及提交不可信候选的 Assisted 前端。
+    description: 规划签名装载、最小 Runtime、SSO 发布，以及只提交不可信候选的 Assisted 前端能力。
