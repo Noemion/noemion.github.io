@@ -503,12 +503,40 @@
         menu.append(link);
       });
 
-      const setExpanded = (expanded) => trigger.setAttribute("aria-expanded", String(expanded));
-      item.addEventListener("mouseenter", () => setExpanded(true));
-      item.addEventListener("mouseleave", () => setExpanded(false));
-      item.addEventListener("focusin", () => setExpanded(true));
+      let openTimer = 0;
+      let closeTimer = 0;
+      const setExpanded = (expanded) => {
+        if (expanded) {
+          globalNav.querySelectorAll(".global-nav-item.is-menu-open").forEach((openItem) => {
+            if (openItem === item) return;
+            openItem.classList.remove("is-menu-open");
+            openItem.querySelector(".global-nav-trigger")?.setAttribute("aria-expanded", "false");
+          });
+        }
+        item.classList.toggle("is-menu-open", expanded);
+        trigger.setAttribute("aria-expanded", String(expanded));
+      };
+      const scheduleOpen = () => {
+        window.clearTimeout(closeTimer);
+        window.clearTimeout(openTimer);
+        openTimer = window.setTimeout(() => setExpanded(true), 40);
+      };
+      const scheduleClose = () => {
+        window.clearTimeout(openTimer);
+        window.clearTimeout(closeTimer);
+        closeTimer = window.setTimeout(() => setExpanded(false), 120);
+      };
+      item.addEventListener("mouseenter", scheduleOpen);
+      item.addEventListener("mouseleave", scheduleClose);
+      item.addEventListener("focusin", () => {
+        window.clearTimeout(openTimer);
+        window.clearTimeout(closeTimer);
+        setExpanded(true);
+      });
       item.addEventListener("focusout", () => {
-        window.requestAnimationFrame(() => setExpanded(item.contains(document.activeElement)));
+        window.requestAnimationFrame(() => {
+          if (!item.contains(document.activeElement)) setExpanded(false);
+        });
       });
 
       item.append(trigger, menu);
