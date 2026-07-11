@@ -231,8 +231,8 @@ body[data-page-role="portal"] .portal-directory-panel{display:none}
     display:block;grid-column:3;align-self:stretch;margin:0;padding:0;border:0;background:transparent
   }
   body[data-page-role="portal"] .portal-directory-panel>summary{
-    display:flex;align-items:center;justify-content:center;width:58px;height:100%;min-height:0;padding:0;
-    color:var(--heading);font-size:0
+    display:flex;align-items:center;justify-content:center;gap:8px;width:84px;height:100%;min-height:0;padding:0 12px;
+    color:var(--heading);font-size:12px;font-weight:680
   }
   body[data-page-role="portal"] .portal-directory-panel>summary::after{display:none}
   body[data-page-role="portal"] .portal-menu-icon,
@@ -451,8 +451,8 @@ body .global-directory-panel{display:none}
     display:block;grid-column:3;align-self:stretch;margin:0;padding:0;border:0;background:transparent
   }
   body .global-directory-panel>summary{
-    display:flex;align-items:center;justify-content:center;width:58px;height:100%;min-height:0;padding:0;
-    color:var(--heading);font-size:0
+    display:flex;align-items:center;justify-content:center;gap:8px;width:84px;height:100%;min-height:0;padding:0 12px;
+    color:var(--heading);font-size:12px;font-weight:680
   }
   body .global-directory-panel>summary::after{display:none}
   body .global-directory-panel .portal-menu-icon,
@@ -475,6 +475,21 @@ body .global-directory-panel{display:none}
     border:1px solid var(--rule);border-top:0;box-shadow:0 18px 36px color-mix(in srgb,var(--text) 14%,transparent)
   }
   .docs-rail{display:none}
+}
+
+@media(min-width:840px) and (max-width:999px){
+  body .global-header-inner,
+  body[data-page-role="portal"] .portal-header-inner{grid-template-columns:auto minmax(0,1fr) auto}
+  body .global-brand,
+  body[data-page-role="portal"] .portal-brand{grid-column:auto;padding:0 16px;border-right:1px solid var(--rule)}
+  body .global-primary-nav,
+  body[data-page-role="portal"] .portal-primary-nav{display:flex}
+  .global-nav-menu{width:480px}
+  .global-nav-item:nth-last-child(-n+2) .global-nav-menu{right:0;left:auto;transform-origin:top right}
+  body .global-stage-link,
+  body[data-page-role="portal"] .portal-stage-link{grid-column:auto;border-right:0}
+  body .global-directory-panel,
+  body[data-page-role="portal"] .portal-directory-panel{display:none}
 }
 
 @media(max-width:520px){

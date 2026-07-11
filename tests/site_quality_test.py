@@ -498,7 +498,7 @@ def validate_jekyll_sources():
 
     if header.exists():
         header_text = header.read_text()
-        for token in ("data-global-nav", "global-directory-panel", "data-portal-stage"):
+        for token in ("data-global-nav", "global-directory-panel", "data-portal-stage", "<span>导航</span>"):
             if token not in header_text:
                 errors.append(f"site header missing global navigation contract: {token}")
 
@@ -512,6 +512,7 @@ def validate_jekyll_sources():
             ".global-nav-menu",
             ".global-nav-visual",
             "calc(var(--nav-order) * 45ms)",
+            "@media(min-width:840px) and (max-width:999px)",
             "prefers-reduced-motion:reduce",
             "body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}",
         ):
