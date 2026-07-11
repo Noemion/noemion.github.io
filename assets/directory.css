@@ -406,9 +406,20 @@ body .global-stage-link:active{transform:scale(.96)}
   background:var(--rule)
 }
 .global-stage-value{
-  grid-column:1;grid-row:3;align-self:stretch;justify-self:stretch;display:grid;place-items:center;
-  min-height:20px;margin-left:15px;color:var(--heading);
-  font-size:12px;font-weight:780;letter-spacing:.08em;line-height:1;white-space:nowrap
+  position:relative;isolation:isolate;grid-column:1;grid-row:3;align-self:stretch;justify-self:stretch;
+  display:grid;place-items:center;min-height:24px;margin-left:15px;padding:3px 8px;
+  color:transparent;background:#fff;-webkit-text-fill-color:transparent;
+  box-shadow:0 0 0 1px rgba(0,0,0,.12),0 2px 7px rgba(0,0,0,.07);
+  font-size:12px;font-weight:820;letter-spacing:.1em;line-height:1;white-space:nowrap;
+  transition-property:box-shadow,transform;transition-duration:150ms;transition-timing-function:var(--ease)
+}
+.global-stage-value::after{
+  content:attr(data-stage-value);position:absolute;inset:0;display:grid;place-items:center;
+  color:transparent;background-image:linear-gradient(118deg,#10261e 0 34%,#3158ff 58%,#f04b23 86%);
+  background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent
+}
+body .global-stage-link:hover .global-stage-value{
+  box-shadow:0 0 0 1px rgba(0,0,0,.18),0 4px 12px rgba(0,0,0,.1);transform:translateY(-1px)
 }
 body .global-directory-panel{display:none}
 
@@ -518,6 +529,6 @@ body .global-directory-panel{display:none}
 
 @media(prefers-reduced-motion:reduce){
   body .global-nav-trigger,.global-nav-caret,.global-nav-menu,.global-nav-card,.global-nav-card::after,
-  .global-nav-visual svg,.global-nav-card i,body .global-stage-link,
+  .global-nav-visual svg,.global-nav-card i,body .global-stage-link,.global-stage-value,
   .docs-rail-links a{transition-duration:0s!important}
 }

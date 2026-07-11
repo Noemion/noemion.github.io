@@ -516,6 +516,7 @@ def validate_jekyll_sources():
             "global-stage-label",
             "global-stage-divider",
             "global-stage-value",
+            "data-stage-value",
             "site.data.project_timeline",
             "project_timeline.current_stage_id",
             "project_timeline.header.href",
@@ -537,6 +538,9 @@ def validate_jekyll_sources():
             "@media(min-width:840px) and (max-width:999px)",
             "prefers-reduced-motion:reduce",
             "body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}",
+            ".global-stage-value::after",
+            "-webkit-text-fill-color:transparent",
+            "background:#fff",
         ):
             if token not in shared_css:
                 errors.append(f"shared styles missing site-wide design contract: {token}")
@@ -1128,7 +1132,7 @@ def main():
             f'aria-label="当前阶段：{current_title}"',
             'href="/development/current-stage.html"',
             '<span class="global-stage-divider" aria-hidden="true"></span>',
-            f'<strong class="global-stage-value">{configured_header_value}</strong>',
+            f'<strong class="global-stage-value" data-stage-value="{configured_header_value}">{configured_header_value}</strong>',
             'class="project-progress-summary"',
             'class="progress-counts"',
             "项目状态概览",
