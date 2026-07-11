@@ -615,6 +615,8 @@ def validate_jekyll_sources():
             ".content-grid{",
             ".content-rows",
             'a:visited:not(.portal-button)',
+            ".portal-button-primary:visited",
+            ".portal-button-secondary:visited",
             '@media(max-width:839px)',
             'body:not([data-page-role="portal"]) .global-directory-panel',
             '.site-header .directory-panel.is-closing nav',
