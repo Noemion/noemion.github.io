@@ -5,7 +5,7 @@ current_stage_id: specification-binary-core-design
 
 header:
   label: 当前阶段
-  value: 设计
+  value: 规范设计
   href: /development/current-stage.html
   title: 查看当前项目阶段与进度时间线
 

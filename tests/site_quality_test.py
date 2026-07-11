@@ -506,6 +506,7 @@ def validate_jekyll_sources():
             "data-portal-stage",
             "<span>导航</span>",
             "global-stage-label",
+            "global-stage-divider",
             "global-stage-value",
             "site.data.project_timeline",
             "project_timeline.current_stage_id",
@@ -678,6 +679,9 @@ def validate_jekyll_sources():
             errors.append("project timeline contains an unsupported state")
         if "href: /development/current-stage.html" not in timeline_text:
             errors.append("project timeline header must route to the current stage page")
+        header_value_match = re.search(r"^  value:\s*(.+?)\s*$", timeline_text, re.MULTILINE)
+        if header_value_match is None or not 3 <= len(header_value_match.group(1)) <= 4:
+            errors.append("project timeline header value must contain three or four characters")
     if not timeline_include.exists():
         errors.append("missing _includes/project-timeline.html")
     else:
@@ -1051,10 +1055,20 @@ def main():
             errors.append("current stage output must match configured timeline order, states, and titles")
         configured_current = [stage for stage in configured_stages if stage[1] == "current"]
         current_title = configured_current[0][2] if len(configured_current) == 1 else ""
+        configured_header_value_match = re.search(
+            r"^  value:\s*(.+?)\s*$", timeline_source_text, re.MULTILINE
+        )
+        configured_header_value = (
+            configured_header_value_match.group(1)
+            if configured_header_value_match is not None
+            else ""
+        )
         for token in (
             'data-timeline-id="noemion-project-progress"',
             f'aria-label="当前阶段：{current_title}"',
             'href="/development/current-stage.html"',
+            '<span class="global-stage-divider" aria-hidden="true"></span>',
+            f'<strong class="global-stage-value">{configured_header_value}</strong>',
         ):
             if token not in current_stage_output_text:
                 errors.append(f"current stage output missing configured value: {token}")
