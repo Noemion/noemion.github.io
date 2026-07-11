@@ -627,6 +627,8 @@ def validate_jekyll_sources():
 
     if footer.exists():
         footer_text = footer.read_text()
+        if "site-footer-meta" in footer_text:
+            errors.append("site footer retains obsolete trailing status band")
         for token in (
             "site-footer-grid",
             "site-footer-bottom",
