@@ -31,6 +31,17 @@ permalink: "/specifications/gsir.html"
     <p>实现必须能表达已知、未指定、可推断、歧义、冲突、未解决和 ontology 外等状态。硬约束与软偏好分离，推断权限至少区分允许推断、禁止推断和需要确认。证据不足不能被模型置信度替换为唯一结论。</p>
   </section>
   <section>
+    <h2>设计提案：语义身份、来源与满足环境</h2>
+    <p>根据<a href="../about/intellectual-foundations.html">思想与方法基础</a>提出的分析框架，当前研究提议把经常混用的四类身份分开。此处只登记待验证的结构，不构成已冻结字段或编码。</p>
+    <div class="table-wrap"><table><thead><tr><th>层次</th><th>回答的问题</th><th>需要保留的证据</th></tr></thead><tbody>
+      <tr><td>Source Expression</td><td>用户、规范或工具实际给出了什么表达？</td><td>来源、跨度、版本、许可和原始上下文。</td></tr>
+      <tr><td>Compiled Meaning</td><td>Compiler Core 接受了什么规范化语义？</td><td>类型、规范化规则、歧义分支和编译诊断。</td></tr>
+      <tr><td>Reference Binding</td><td>符号此刻绑定到哪个对象、版本或能力？</td><td>作用域、解析路径、重定位和稳定标识。</td></tr>
+      <tr><td>Satisfaction Contract</td><td>什么可观察证据使目标或约束被判为满足？</td><td>评价环境、变量绑定、阈值、验证器和失败语义。</td></tr>
+    </tbody></table></div>
+    <p>语义来源还应区分明示内容、结构蕴涵、可撤销的语境推论、工具推导和模型候选。它们不能共享同一确认权限；满足判断也只能读取 Profile 明确登记的证据、版本、能力和背景假设。</p>
+  </section>
+  <section>
     <h2>设计提案：混合语义与分层 IR</h2>
     <p>当前提案以符号语义图和带权约束承担边界与验证，以语义原型或连续残差表达难以完全离散化的要求。H-GSIR、C-GSIR、E-GSIR、B-GSIR 与可选模型原生表示是 Lowering 视图候选；各层精确定义尚须规范化。</p>
   </section>

@@ -99,6 +99,15 @@ HOME_HEADINGS = [
     "当前状态",
     "按你的问题继续阅读",
 ]
+INTELLECTUAL_FOUNDATIONS_HEADINGS = [
+    "为什么阅读这些著作",
+    "阅读与采用方法",
+    "核心思想与工程问题",
+    "《逻辑哲学论》的第一批检查点",
+    "对 GSIR 的设计提案",
+    "核心书目与资源状态",
+    "进入规范前的证据门",
+]
 ROLE_BY_KIND = {
     "portal": "portal",
     "section": "section",
@@ -287,8 +296,8 @@ def validate_jekyll_sources():
         errors.append("README contains duplicate HTML routes")
     if registered != source_routes:
         errors.append("README routes do not exactly match Jekyll source pages")
-    if len(source_routes) != 64:
-        errors.append(f"expected 64 Jekyll source pages, found {len(source_routes)}")
+    if len(source_routes) != 65:
+        errors.append(f"expected 65 Jekyll source pages, found {len(source_routes)}")
 
     forbidden_shell = re.compile(
         r"<!doctype|<html\b|<head\b|<body\b|class=\"site-header\"|<footer\b",
@@ -467,6 +476,33 @@ def main():
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
 
+    foundations = ROOT / "about/intellectual-foundations.html"
+    if foundations.exists():
+        parser = parse(foundations)
+        breadcrumb = normalize_visible_text("".join(parser.breadcrumb_text))
+        breadcrumb_routes = resolved_routes(foundations, parser.breadcrumb_links)
+        if (
+            parser.page_role != "content"
+            or parser.class_counts["breadcrumbs"] != 1
+            or breadcrumb_routes != ["index.html", "about/index.html"]
+            or not all(label in breadcrumb for label in ("项目", "项目背景", "思想与方法基础"))
+        ):
+            errors.append("about/intellectual-foundations.html: invalid project / about / current breadcrumbs")
+        if parser.h2_texts != INTELLECTUAL_FOUNDATIONS_HEADINGS:
+            errors.append(
+                "about/intellectual-foundations.html: reasoning sequence must be "
+                f"{INTELLECTUAL_FOUNDATIONS_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in (
+            "不得直接推出", "进入规范前的证据门", "Source Expression",
+            "对象语言", "言语行为", "会话含义",
+        ):
+            if term not in visible_text:
+                errors.append(f"about/intellectual-foundations.html: must preserve {term}")
+
     for row in route_rows:
         path = ROOT / row["route"]
         if path.exists() and parse(path).page_role != ROLE_BY_KIND[row["kind"]]:
@@ -597,8 +633,8 @@ def main():
     if numbered_routes:
         errors.append(f"numbered HTML routes are forbidden: {numbered_routes}")
 
-    if len(actual_routes) != 64:
-        errors.append(f"expected 64 final HTML routes, found {len(actual_routes)}")
+    if len(actual_routes) != 65:
+        errors.append(f"expected 65 final HTML routes, found {len(actual_routes)}")
 
     downloads = ROOT / "downloads/index.html"
     if downloads.exists():
@@ -681,6 +717,7 @@ def main():
             module_cases = [
                 ["index.html", "project"],
                 ["about/background.html", "project"],
+                ["about/intellectual-foundations.html", "project"],
                 ["architecture/object-lifecycle.html", "architecture"],
                 ["specifications/gsir.html", "architecture"],
                 ["components/nsfe.html", "architecture"],

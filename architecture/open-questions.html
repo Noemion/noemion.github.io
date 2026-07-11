@@ -14,12 +14,15 @@ permalink: "/architecture/open-questions.html"
     <details><summary>GSIR 最小核心类型集是什么？</summary><p>需要用真实语料和实现原型确定最小集合；“约 20～30 种”只是规划估计。</p></details>
     <details><summary>连续语义残差如何标准化？</summary><p>Encoder 指纹、维度、码本、量化、相似度与跨模型稳定性仍需证据和互操作测试。</p></details>
     <details><summary>评价器如何成为可链接对象？</summary><p>确定性、模型与外部评价器的接口、权限和失败边界尚待设计。</p></details>
+    <details><summary>四层语义身份是否足够且正交？</summary><p>Source Expression、Compiled Meaning、Reference Binding 与 Satisfaction Contract 是研究提案；需要以同义改写、跨版本绑定、语境推论和复合验收反例检验是否遗漏或重复。</p></details>
+    <details><summary>语义来源和满足环境如何进入对象？</summary><p>明示内容、结构蕴涵、语境推论、工具推导与模型候选的确认权限尚未定型；评价环境的证据、能力和背景假设也须决定是对象数据、可链接依赖还是 Runtime Profile。</p></details>
   </section>
   <section>
     <h2>开放问题：语言、ABI 与工具面</h2>
     <details><summary>GSL 采用何种表面语法？</summary><p>严格声明式 DSL 是当前优先方向，自然语言化语法糖仍是后续候选。</p></details>
     <details><summary>披露与 Runtime ABI 如何定型？</summary><p>状态哈希、预算单位、继续句柄、检查点、Prompt Renderer 槽位和消费者确认协议均未冻结。</p></details>
     <details><summary>CLI 与重定位标识是什么？</summary><p>旧蓝图中的命令示例和 <code>R_GSIR_*</code> 名称仅用于阐明职责，不构成稳定 CLI 或规范标识。</p></details>
+    <details><summary>行为请求需要哪些最小字段？</summary><p>询问、承诺、授权与执行是否属于核心行为类型，以及行动者、权限、前置条件、效果和撤销边界怎样跨 Compiler、Linker 与 Runtime 保持一致，仍需威胁模型和 ADR。</p></details>
   </section>
   <section>
     <h2>开放问题：实现与模型</h2>

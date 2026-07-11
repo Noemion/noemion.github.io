@@ -50,7 +50,8 @@
           items: [
             { href: "index.html", label: "项目首页" },
             { href: "about/index.html", label: "项目背景" },
-            { href: "about/background.html", label: "背景与边界" }
+            { href: "about/background.html", label: "背景与边界" },
+            { href: "about/intellectual-foundations.html", label: "思想与方法基础" }
           ]
         },
         {

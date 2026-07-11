@@ -36,6 +36,16 @@ permalink: "/architecture/object-lifecycle.html"
     <p>当前设计借鉴 ELF 的 Section/Segment 双视图：Section 服务链接、调试与对象工具，Segment 服务验证和装载。具体 Header、记录布局和签名结构仍须由正式格式规范与 ADR 固化。</p>
   </section>
   <section>
+    <h2>设计提案：对象语言、元语言与行为边界</h2>
+    <p><a href="../about/intellectual-foundations.html">思想与方法基础</a>提示我们区分被执行或评价的对象数据，以及描述其类型、验证规则和环境的元层。当前提议要求 GSIR/GOBJ 不得把 Profile、验证器规则或 Runtime 私有假设伪装成对象自身事实；跨层引用必须有显式版本和信任来源。</p>
+    <ul>
+      <li>如果目标要求询问、承诺、授权或执行，候选行为对象应携带行为类型、行动者、权限、前置条件、预期效果和失败语义，而不只是命题内容。</li>
+      <li>来自字面内容、结构规则、语境推论、工具和模型的结论应保留不同来源等级；可撤销推论不能静默升级为硬约束。</li>
+      <li>目标满足由明确的评价环境决定，环境包含变量绑定、证据版本、可用能力和 Runtime Profile；未登记背景知识不得参与确定性验证。</li>
+    </ul>
+    <p>这些结构仍须用反例语料、竞争设计、ADR 和一致性测试证明，尚不是对象格式字段。</p>
+  </section>
+  <section>
     <h2>开放问题：消费端 ABI</h2>
     <p>Prompt Renderer 与直接 Runtime Lowering 的结构化槽位、状态同步、预算单位和消费者确认协议尚未定型，见<a href="open-questions.html">开放问题</a>。</p>
   </section>
@@ -49,5 +59,5 @@ permalink: "/architecture/object-lifecycle.html"
       <tr><td>Loaded State → Runtime Result</td><td>Lowering、披露、外部能力和停止条件遵守对象契约</td><td>受控失败或未满足结果</td><td>运行事件、评价记录和输出验收报告</td></tr>
     </tbody></table></div>
   </section>
-  <div class="next-prev"><a href="../about/background.html">← 背景与边界</a><a href="open-questions.html">开放问题 →</a></div>
+  <div class="next-prev"><a href="../about/intellectual-foundations.html">← 思想与方法基础</a><a href="open-questions.html">开放问题 →</a></div>
 </main>
