@@ -2,14 +2,19 @@
 {% assign permalink_parts = page.permalink | split: '/' %}
 {% assign page_tool_id = nil %}
 {% if permalink_parts[1] == 'tools' and permalink_parts.size > 3 %}{% assign page_tool_id = permalink_parts[2] %}{% endif %}
+{% if site.github.build_revision %}
+  {% assign asset_version = site.github.build_revision %}
+{% else %}
+  {% assign asset_version = site.time | date: '%s' %}
+{% endif %}
 <html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ page.title | escape }}</title>
-  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ asset_version | escape }}">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
-  <script src="{{ '/assets/directory.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/directory.js' | relative_url }}?v={{ asset_version | escape }}" defer></script>
 </head>
 <body data-page-role="{{ page.page_role }}"{% if page_tool_id %} data-tool-id="{{ page_tool_id }}"{% endif %}{% if page.manual_id or page.permalink contains '/docs/' %} data-docs-layout="true"{% endif %}>
 <a class="skip-link" href="#main-content">跳到正文</a>

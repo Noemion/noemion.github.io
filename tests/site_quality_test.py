@@ -491,6 +491,8 @@ def validate_jekyll_sources():
             'data-tool-id="{{ page_tool_id }}"',
             "{{ '/assets/style.css' | relative_url }}",
             "{{ '/assets/directory.js' | relative_url }}",
+            "site.github.build_revision",
+            "?v={{ asset_version | escape }}",
             'data-page-role="{{ page.page_role }}"',
         ):
             if token not in layout_text:
@@ -988,8 +990,15 @@ def main():
             errors.append(f"{rel}: missing unique skip link or main target")
         if len(parser.stylesheets) != 1:
             errors.append(f"{rel}: expected exactly one stylesheet")
-        if len(parser.scripts) != 1 or not parser.scripts[0].endswith("assets/directory.js"):
+        elif not urlsplit(parser.stylesheets[0]).query:
+            errors.append(f"{rel}: shared stylesheet must include a build cache key")
+        if (
+            len(parser.scripts) != 1
+            or not urlsplit(parser.scripts[0]).path.endswith("assets/directory.js")
+        ):
             errors.append(f"{rel}: missing shared directory script")
+        elif not urlsplit(parser.scripts[0]).query:
+            errors.append(f"{rel}: shared directory script must include a build cache key")
         if len(parser.icons) != 1:
             errors.append(f"{rel}: missing unique favicon reference")
         else:
