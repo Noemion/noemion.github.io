@@ -12,6 +12,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ page.title | escape }}</title>
+  <script src="{{ '/assets/theme.js' | relative_url }}?v={{ asset_version | escape }}"></script>
   <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ asset_version | escape }}">
   <link rel="stylesheet" href="{{ '/assets/directory.css' | relative_url }}?v={{ asset_version | escape }}">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">

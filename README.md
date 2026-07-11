@@ -20,7 +20,7 @@
 - `_data/manuals.yml`：登记手册级名称、根路由、上级入口、面包屑和分组，不逐页复制目录链接。
 - `_data/project_timeline.yml`：项目阶段、当前状态摘要和页头阶段入口的唯一人工配置源。
 - 普通正式 `.html` 使用 `layout: default` 并编写职责对应的 `<main>`；手册 `.md` 使用 `layout: manual` 并只编写 Markdown 正文，公开文件名由 `permalink` 确定。
-- `assets/`：继续维护现有视觉、目录引擎、动画和图形资源；`assets/catalog.js` 为大型聚合页提供渐进增强的搜索与分组筛选，关闭脚本时保留完整内容；`assets/images/` 保存经过裁切和压缩的站点图片，Jekyll 不改变其内容。
+- `assets/`：继续维护现有视觉、目录引擎、动画和图形资源；`assets/theme.js` 在 CSS 加载前恢复全站 `Light / Dark / System` 选择，并负责持久化、系统主题监听和页脚菜单交互；`assets/catalog.js` 为大型聚合页提供渐进增强的搜索与分组筛选，关闭脚本时保留完整内容；`assets/images/` 保存经过裁切和压缩的站点图片，Jekyll 不改变其内容。
 - `sitemap.md`：不带 Front Matter 的公开 Markdown 发现索引，也是唯一正式路由注册表；它不进入 Markdown 转换，由 Pages 工作流在 Jekyll 构建后原样加入 `/sitemap.md`，供读者和自动化工具按内容家族读取全部正式 HTML 路由、顺序和职责。README 不再复制路由表，质量测试直接以该文件核对源码与构建产物。
 
 ### 手册内容源与生成

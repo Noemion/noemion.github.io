@@ -586,6 +586,7 @@ def validate_jekyll_sources():
             'data-tool-id="{{ page_tool_id }}"',
             "{{ '/assets/style.css' | relative_url }}",
             "{{ '/assets/directory.css' | relative_url }}",
+            "{{ '/assets/theme.js' | relative_url }}",
             "{{ '/assets/directory.js' | relative_url }}",
             "{{ '/assets/catalog.js' | relative_url }}",
             "site.github.build_revision",
@@ -624,6 +625,45 @@ def validate_jekyll_sources():
             if legacy_class in header_text:
                 errors.append(f"site header retains obsolete portal alias: {legacy_class}")
 
+    if footer.exists():
+        footer_text = footer.read_text()
+        for token in (
+            "site-footer-grid",
+            "site-footer-bottom",
+            "site-footer-links",
+            "data-theme-picker",
+            "data-theme-trigger",
+            "data-theme-menu",
+            'data-theme-option="light"',
+            'data-theme-option="dark"',
+            'data-theme-option="system"',
+            "sitemap.md",
+            "Browse All",
+            "Documentation",
+            "Development",
+        ):
+            if token not in footer_text:
+                errors.append(f"site footer missing global discovery/theme contract: {token}")
+
+    theme_script = SOURCE_ROOT / "assets/theme.js"
+    if not theme_script.exists():
+        errors.append("missing assets/theme.js")
+    else:
+        theme_text = theme_script.read_text()
+        for token in (
+            'const STORAGE_KEY = "noemion-theme"',
+            'window.localStorage.setItem(STORAGE_KEY, selected)',
+            'window.localStorage.getItem(STORAGE_KEY)',
+            'window.matchMedia("(prefers-color-scheme: dark)")',
+            'root.dataset.resolvedTheme = resolved',
+            'root.style.colorScheme = resolved',
+            'role="menuitemradio"',
+            'event.key === "Escape"',
+            'event.key === "ArrowDown"',
+        ):
+            if token not in theme_text and token not in footer.read_text():
+                errors.append(f"theme picker missing behavior contract: {token}")
+
     style = SOURCE_ROOT / "assets/style.css"
     directory_style = SOURCE_ROOT / "assets/directory.css"
     if style.exists() and directory_style.exists():
@@ -659,6 +699,12 @@ def validate_jekyll_sources():
             '.site-header .directory-panel.is-closing nav',
             'html.mobile-directory-open,html.mobile-directory-open body',
             'overscroll-behavior:contain',
+            ':root[data-resolved-theme="dark"]',
+            ".site-footer-grid",
+            ".site-theme-trigger",
+            '.site-theme-menu[data-state="open"]',
+            ".theme-icon-sun",
+            ".theme-icon-moon",
         ):
             if token not in shared_css:
                 errors.append(f"shared styles missing site-wide design contract: {token}")
@@ -1364,11 +1410,14 @@ def main():
 
     directory_script = ROOT / "assets/directory.js"
     catalog_script = ROOT / "assets/catalog.js"
+    theme_script = ROOT / "assets/theme.js"
     favicon = ROOT / "assets/favicon.svg"
     if not directory_script.exists():
         errors.append("missing assets/directory.js")
     if not catalog_script.exists():
         errors.append("missing assets/catalog.js")
+    if not theme_script.exists():
+        errors.append("missing assets/theme.js")
     if not favicon.exists():
         errors.append("missing assets/favicon.svg")
 

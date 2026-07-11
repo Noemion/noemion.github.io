@@ -453,9 +453,7 @@ body .global-directory-panel{display:none}
   .global-stage-value{min-width:96px;padding-inline:12px}
 }
 
-@media(prefers-color-scheme:dark){
-  body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}
-}
+:root[data-resolved-theme="dark"] body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}
 
 @media(prefers-reduced-motion:reduce){
   body .global-brand,body .global-nav-trigger,.global-nav-caret,.global-nav-menu,.global-nav-card,.global-nav-card::after,
