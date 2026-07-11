@@ -32,6 +32,7 @@ permalink: "/tools/noemld/docs/dependencies.html"
 <span class="badge">Phase 4 / Phase 5</span>
 </div>
 </div>
+<p class="callout"><strong>使用者判断：</strong>一次链接只有在所有强依赖都能按内容身份和版本离线解析时才具备可复现条件；文件名相同、镜像可访问或签名存在都不能替代依赖闭包证明。</p>
 <section>
 <h2>依赖边界</h2>
 <p><code>noemld</code> 处在对象生产、归档、验证、裁剪、打包和装载之间。工具名称上的相邻关系不构成契约；每条边都必须说明对象类型、版本、内容身份、失败责任和权威规范。Strict 链接不得通过隐式网络访问补齐依赖。</p>

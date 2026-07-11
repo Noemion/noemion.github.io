@@ -21,6 +21,7 @@ permalink: "/architecture/index.html"
   <section>
     <h2>系统关系</h2>
     <div class="flow"><div class="step">源语言 / 语义候选</div><div class="step">Compiler Core</div><div class="step">GSIR / GOBJ</div><div class="step">Linker / Loader</div><div class="step">Runtime</div></div>
+    <p>可以把这条链理解为“提出要求—形成受检对象—组合依赖—验证装载—受约束执行”。前一阶段只能把明确产物交给后一阶段，任何组件都不得越过自己的信任边界替下游做隐式决定。</p>
     <p>各职责单元的入口见<a href="../components/">组件目录</a>，格式与执行约束见<a href="../specifications/">规范登记页</a>。</p>
   </section>
   <section>

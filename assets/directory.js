@@ -330,6 +330,14 @@
     }
   });
 
+  const PORTAL_NAV_ITEMS = Object.freeze([
+    { href: "about/background.html", label: "为什么" },
+    { href: "architecture/object-lifecycle.html", label: "如何工作" },
+    { href: "specifications/index.html", label: "规范" },
+    { href: "tools/index.html", label: "工具" },
+    { href: "docs/index.html", label: "文档" }
+  ]);
+
   const script = document.currentScript;
   if (!script) return;
 
@@ -357,6 +365,22 @@
   const moduleKey = resolveDirectoryModule(currentRoute);
   const directory = DIRECTORY_MODULES[moduleKey];
   const current = canonical(window.location.href);
+
+  const portalNav = document.querySelector("[data-portal-nav]");
+  if (portalNav) {
+    const portalLinks = PORTAL_NAV_ITEMS.map((item) => {
+      const link = document.createElement("a");
+      link.className = "portal-nav-link";
+      link.href = new URL(item.href, siteRoot).href;
+      link.textContent = item.label;
+      return link;
+    });
+    portalNav.replaceChildren(...portalLinks);
+  }
+
+  const portalStage = document.querySelector("[data-portal-stage]");
+  if (portalStage) portalStage.href = new URL("development/index.html", siteRoot).href;
+
   nav.dataset.directoryModule = moduleKey;
   nav.setAttribute("aria-label", `${directory.title}目录`);
 

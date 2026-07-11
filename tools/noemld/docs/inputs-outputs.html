@@ -32,6 +32,7 @@ permalink: "/tools/noemld/docs/inputs-outputs.html"
 <span class="badge">Phase 4 / Phase 5</span>
 </div>
 </div>
+<p class="callout"><strong>使用者判断：</strong>输入“可读取”不等于“可链接”，输出“已写入”也不等于“可装载”。准入条件、原子提交、验证状态和下游消费者必须分别记录。</p>
 <section>
 <h2>输入信任模型</h2>
 <p>每个对象、归档、锁文件和链接脚本都按不可信输入处理。来源可信或签名有效只说明身份与完整性，不证明结构安全或语义兼容。解析器必须先完成长度、偏移、计数、对齐、索引、编码和资源上限验证，再允许内容进入符号与图合并阶段。</p>

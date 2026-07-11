@@ -32,6 +32,7 @@ permalink: "/tools/noemld/docs/pipeline.html"
 <span class="badge">Phase 4 / Phase 5</span>
 </div>
 </div>
+<p class="callout"><strong>使用者判断：</strong>链接过程先形成不可变计划，全部检查通过后才提交产物；任何中途失败都不得留下可被下游误认为完整对象的部分输出。</p>
 <section>
 <h2>流程设计原则</h2>
 <p>链接采用“验证—规划—提交”事务模型。前置阶段只读取和建立不可变中间表示；所有会影响最终对象的选择都写入 Link Plan；只有全局验证通过后才序列化并原子提交产物。这样可以使失败可回滚、决策可审计，并避免半成品进入下游。</p>

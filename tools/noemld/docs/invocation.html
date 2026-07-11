@@ -32,6 +32,7 @@ permalink: "/tools/noemld/docs/invocation.html"
 <span class="badge">Phase 4 / Phase 5</span>
 </div>
 </div>
+<p class="callout"><strong>使用者判断：</strong>示例展示链接意图，不承诺命令名、参数、扩展名或退出码。稳定调用必须由版本化 Link Request 与 CLI 规范定义，并能记录所有影响结果的输入。</p>
 <section>
 <h2>调用模型</h2>
 <p>CLI 只是链接契约的一种前端。无论未来由命令行、构建系统还是库接口调用，都必须解析为同一个显式 Link Request：有序输入声明、内容身份、Link Profile、Dependency Lock、输出意图和诊断策略。环境变量、当前目录或网络状态不得暗中改变 Strict 模式结果。</p>

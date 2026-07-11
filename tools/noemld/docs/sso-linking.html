@@ -32,6 +32,7 @@ permalink: "/tools/noemld/docs/sso-linking.html"
 <span class="badge">Phase 4 / Phase 5</span>
 </div>
 </div>
+<p class="callout"><strong>使用者判断：</strong>多个 SSO 能被同时读取不代表能够安全组合。硬约束、权限、披露条件和强依赖必须存在共同满足的闭包，否则链接器应输出冲突而不是选择覆盖顺序。</p>
 <section>
 <h2>组合问题</h2>
 <p>SSO 把可共享语义资产与每次运行的私有状态分离。链接时必须证明多个 SSO 的 Contract、权限、披露条件和依赖能够共同成立，而不是简单拼接或覆盖。越靠后的输入不能天然拥有更高优先级，模型也不能替代确定性的合并规则。</p>

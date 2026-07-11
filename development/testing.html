@@ -10,6 +10,7 @@ permalink: "/development/testing.html"
   <div class="hero"><h1>测试、Fuzz 与验证</h1><p>覆盖对象安全、确定性编译、语义保真、链接、披露、信任与模型候选的测试矩阵。</p><div class="badges"><span class="badge">Malformed</span><span class="badge">Round-trip</span><span class="badge">Fuzz</span></div></div>
   <section>
     <h2>已确认原则：安全与拒绝路径</h2>
+    <p class="callout"><strong>读懂测试结论：</strong>“合法样例通过”只证明一条成功路径；安全核心还必须证明畸形、冲突、越权、超限和不完整输入能够稳定、快速且无部分产物地失败。</p>
     <ul>
       <li>对象解析测试覆盖非法偏移、长度、计数、索引、对齐、重叠、整数溢出、循环引用、超深图和恶意大计数。</li>
       <li>签名与完整性测试覆盖错误范围、错误 Merkle Proof、篡改、回滚和撤销。</li>

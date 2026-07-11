@@ -32,6 +32,7 @@ permalink: "/tools/noemld/docs/relocations.html"
 <span class="badge">Phase 4 / Phase 5</span>
 </div>
 </div>
+<p class="callout"><strong>使用者判断：</strong>重定位不是任意改写数字，而是带来源类型、目标类型和允许操作的受检转换。目标缺失、类型不符、溢出或权限不允许时必须失败。</p>
 <section>
 <h2>为什么使用类型化重定位</h2>
 <p>GSIR/GOBJ 中的引用不只是字节地址，也可能指向符号、资源、策略、评价器、模型、schema 或能力。若所有引用都退化为无类型整数，链接器就无法验证目标类别、权限和生命周期。类型化重定位让每次修正都携带“来源位置、期望目标和允许变换”，从而可以在写入前验证。</p>

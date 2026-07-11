@@ -8,10 +8,18 @@ permalink: "/tools/noemas/index.html"
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemas</span></nav>
   <div class="hero"><h1>noemas · GSIR 汇编器</h1><p>把规范化文本 GSIR 编码为可重定位 GOBJ，严格解析显式语义而不补全缺失意图。</p><div class="badges"><span class="badge">Phase 2</span><span class="badge">Text IR</span><span class="badge">文本 GSIR → GOBJ</span><span class="badge">Design Stage</span></div></div>
-  <section><h2>工具简介</h2><p><code>noemas</code> 把规范化文本 GSIR 编码为可重定位 GOBJ，严格解析显式语义而不补全缺失意图。</p><p><strong>问题背景：</strong>文本 IR 是规范评审、Golden 测试和对象复现的可读桥梁；若汇编器自行推断缺失意图，文本将无法作为确定性对象的权威输入。noemas 只编码显式声明并报告缺口。</p></section>
-  <section><h2>当前状态</h2><p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。页面仅说明已经确认的工具定位、预期输入与产物以及安全边界。</p><p><strong>阶段门：</strong>需先确定文本 GSIR 语法、规范化规则、最小对象 Schema 和重定位类别；开发退出证据包括文本—对象—文本规范化 Round-trip、确定性字节和完整负例语料。</p></section>
+  <section><h2>工具简介</h2><p><code>noemas</code> 把规范化文本 GSIR 编码为可重定位 GOBJ，严格解析显式语义而不补全缺失意图。</p><p><strong>问题背景：</strong>文本 IR 是规范评审、Golden 测试和对象复现的可读桥梁；若汇编器自行推断缺失意图，文本将无法作为确定性对象的权威输入。noemas 只编码显式声明并报告缺口。</p>
+</section>
+  <section>
+<h2>当前状态</h2>
+<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
+<p><strong>阶段门：</strong>需先确定文本 GSIR 语法、规范化规则、最小对象 Schema 和重定位类别；开发退出证据包括文本—对象—文本规范化 Round-trip、确定性字节和完整负例语料。</p>
+</section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">解析规范文本</div><div class="step">绑定局部符号</div><div class="step">检查类型与限制</div><div class="step">生成重定位</div><div class="step">确定性写入对象</div></div><ul><li>解析文本 GSIR 的层、节点、边、约束、符号和 Artifact 声明</li><li>解析局部符号并为外部符号生成重定位</li><li>生成字符串、符号、GSIR、重定位和调试映射 Section</li><li>执行语法、类型、范围和限制检查</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Text GSIR</td><td>UTF-8 规范文本及 include 的受控源</td></tr><tr><td>输入</td><td>Assembly Profile</td><td>对象版本、命名空间、目标 ABI 和限制</td></tr><tr><td>输入</td><td>Debug Options</td><td>源位置、注释和构建注记保留策略</td></tr><tr><td>输出</td><td>Relocatable GOBJ</td><td>带符号、重定位和可选调试信息的对象</td></tr><tr><td>输出</td><td>Dependency File</td><td>读取的 include、schema 和 ontology 依赖</td></tr><tr><td>输出</td><td>Diagnostics</td><td>稳定错误码、源范围和修复提示</td></tr></tbody></table></div></section>
-  <section><h2>处理边界</h2><ul><li>不从自然语言推断节点或关系</li><li>不自动选择唯一歧义解释</li><li>不链接外部定义</li><li>不产生绕过规范 writer 的手工二进制布局</li></ul><p>所有源依赖和生成对象均视为不可信；include 必须受根目录、内容摘要和循环/深度限制约束，偏移、长度、计数、索引和对齐计算必须使用 checked arithmetic。</p></section>
-  <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GSIR、GOBJ 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性编译、文本 IR 与对象生成边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div><p>专题文档应在语法与对象 Schema 稳定后覆盖调用契约、诊断、重定位生成、依赖文件和 Round-trip 规范。</p></section>
+  <section><h2>处理边界</h2><ul><li>不从自然语言推断节点或关系</li><li>不自动选择唯一歧义解释</li><li>不链接外部定义</li><li>不产生绕过规范 writer 的手工二进制布局</li></ul><p>所有源依赖和生成对象均视为不可信；include 必须受根目录、内容摘要和循环/深度限制约束，偏移、长度、计数、索引和对齐计算必须使用 checked arithmetic。</p>
+</section>
+  <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GSIR、GOBJ 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性编译、文本 IR 与对象生成边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div>
+<p>尚未冻结的接口包括调用契约、诊断结构、重定位生成、依赖文件和文本—对象 Round-trip 规则。</p>
+</section>
 </main>

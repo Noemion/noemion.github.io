@@ -11,12 +11,14 @@ permalink: "/specifications/gsir.html"
   <section>
     <h2>已确认原则：GSIR 的本质</h2>
     <p class="lead">GSIR 描述什么结果满足任务，以及生成式求解在什么边界内进行；它不是二进制化 Prompt、文本、Skill 包或普通序列化容器。</p>
+    <p class="callout"><strong>直白解释：</strong>Prompt 说明“怎样表达请求”，GSIR 则保存“最终必须实现什么、哪些条件绝不能违反、哪些信息仍不确定、用什么证据验收”。措辞可以变化，但经过规范化的目标身份和硬约束不能因此漂移。</p>
     <pre><code>y* = argmax U(y | G, C, E, P)
 同时满足 H(y) = true</code></pre>
     <p>其中 G 为目标，C 为上下文，E 为证据，P 为软偏好，H 为不可违反的硬约束。</p>
   </section>
   <section>
     <h2>已确认原则：核心语义</h2>
+    <p>下列结构名称描述语义职责，不等同于已冻结的二进制 Section 或字段。实现必须先满足职责与不变量，再由 GOBJ 规范决定具体编码。</p>
     <table><thead><tr><th>结构</th><th>职责</th></tr></thead><tbody>
       <tr><td>Goal Graph</td><td>目标、目标状态、优先级和完成条件。</td></tr>
       <tr><td>Semantic Context Graph</td><td>实体、概念、资源、作用域与来源。</td></tr>

@@ -8,10 +8,18 @@ permalink: "/tools/noemtrain/index.html"
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemtrain</span></nav>
   <div class="hero"><h1>noemtrain · NSFE 训练编排</h1><p>围绕预训练双向语言底座、层级 Source Graph 聚合、知识路由、稀疏语义图和封闭任务头组织可复现训练与教师蒸馏实验。</p><div class="badges"><span class="badge">Phase 7</span><span class="badge">Model Engineering</span><span class="badge">Dataset + Base → Checkpoint</span><span class="badge">Design Stage</span></div></div>
-  <section><h2>工具简介</h2><h3>为什么训练必须可证伪</h3><p>训练系统若只产出 checkpoint，而不能回答“使用了什么、为何这样训练、失败过什么、能否复现”，其结果就难以作为科研证据或工程基线。NSFE 还承担歧义保留、知识路由和封闭任务头等特定目标，不能仅用通用语言模型损失证明有效。</p><p><code>noemtrain</code> 围绕预训练双向语言底座、层级 Source Graph 聚合、知识路由、稀疏语义图和封闭任务头组织可复现训练与教师蒸馏实验。它的核心产物是可复查的实验谱系，checkpoint 只是该谱系中的一个候选结果。</p></section>
-  <section><h2>当前状态</h2><p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。页面仅说明已经确认的工具定位、预期输入与产物以及安全边界。</p><h3>进入实验前的阶段门</h3><p>训练实验必须先绑定已批准的数据快照、基线模型、任务假设、评估计划、资源预算和停止条件。语言底座从头预训练只有在现有底座无法满足已量化研究问题且独立评审通过证据门时才可立项，不能把“自主训练”本身当作研究贡献。</p></section>
+  <section><h2>工具简介</h2><h3>为什么训练必须可证伪</h3><p>训练系统若只产出 checkpoint，而不能回答“使用了什么、为何这样训练、失败过什么、能否复现”，其结果就难以作为科研证据或工程基线。NSFE 还承担歧义保留、知识路由和封闭任务头等特定目标，不能仅用通用语言模型损失证明有效。</p><p><code>noemtrain</code> 围绕预训练双向语言底座、层级 Source Graph 聚合、知识路由、稀疏语义图和封闭任务头组织可复现训练与教师蒸馏实验。它的核心产物是可复查的实验谱系，checkpoint 只是该谱系中的一个候选结果。</p>
+</section>
+  <section>
+<h2>当前状态</h2>
+<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
+<h3>进入实验前的阶段门</h3><p>训练实验必须先绑定已批准的数据快照、基线模型、任务假设、评估计划、资源预算和停止条件。语言底座从头预训练只有在现有底座无法满足已量化研究问题且独立评审通过证据门时才可立项，不能把“自主训练”本身当作研究贡献。</p>
+</section>
   <section><h2>主要能力</h2><ul><li>验证底座、数据、结构配置、任务头和 tokenizer 的契约兼容性</li><li>编排 DAPT/TAPT、监督微调、多任务与蒸馏阶段，并支持独立消融</li><li>控制冻结、解冻、采样权重和优化器状态，记录所有影响复现的随机源</li><li>记录完整谱系、指标、资源、异常和失败状态，避免只保留成功实验</li></ul><h3>概要处理流</h3><ol class="process"><li><strong>验证输入：</strong>核对配方、数据、基座、许可和评估计划的指纹与兼容性。</li><li><strong>建立基线：</strong>先运行可比较基线，确认任务和度量链路有效。</li><li><strong>分阶段训练：</strong>按预声明顺序训练、蒸馏或消融，并在阶段门保存状态。</li><li><strong>记录谱系：</strong>持续记录代码、环境、随机性、资源、异常和人工决策。</li><li><strong>提交候选：</strong>仅把满足停止条件的 checkpoint 连同完整 Manifest 交给独立评估。</li></ol></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Training Recipe</td><td>架构、阶段、损失、超参数、种子和停止条件</td></tr><tr><td>输入</td><td>Dataset Snapshot</td><td>由 noemdata 冻结且通过许可与泄漏审计</td></tr><tr><td>输入</td><td>Base Model / Teacher</td><td>版本、许可、tokenizer、结构和输出协议明确</td></tr><tr><td>输出</td><td>Checkpoint Set</td><td>权重、优化器状态、tokenizer 和结构配置</td></tr><tr><td>输出</td><td>Training Manifest</td><td>输入指纹、代码版本、环境、随机性和资源记录</td></tr><tr><td>输出</td><td>Experiment Record</td><td>分阶段曲线、异常、消融和候选选择证据</td></tr></tbody></table></div></section>
-  <section><h2>处理边界</h2><ul><li>不自动决定从头预训练，也不在缺少独立证据门时扩大模型规模</li><li>不使用盲测集反复调参，不以单一总体分数替代分层评估</li><li>不允许训练产物直接生成 GOBJ，或绕过确定性的 Compiler Core</li><li>不隐藏教师数据、教师行为、基座许可或外部服务依赖</li><li>不删除失败、异常终止和负面消融记录；这些同样属于研究证据</li></ul><p>模型输出和模型包一律视为不可信；它们不能决定二进制布局，也不能直接生成 GOBJ。训练可复现性也不等同于模型正确性，候选仍须接受冻结评测与下游安全验证。</p><h3>专题文档拆分条件</h3><p>当训练契约进入评审时，应拆分配方 schema、复现实验、蒸馏协议、故障恢复与资源核算专题；页面不得提前把候选超参数或训练阶段写成冻结规范。</p></section>
+  <section><h2>处理边界</h2><ul><li>不自动决定从头预训练，也不在缺少独立证据门时扩大模型规模</li><li>不使用盲测集反复调参，不以单一总体分数替代分层评估</li><li>不允许训练产物直接生成 GOBJ，或绕过确定性的 Compiler Core</li><li>不隐藏教师数据、教师行为、基座许可或外部服务依赖</li><li>不删除失败、异常终止和负面消融记录；这些同样属于研究证据</li></ul><p>模型输出和模型包一律视为不可信；它们不能决定二进制布局，也不能直接生成 GOBJ。训练可复现性也不等同于模型正确性，候选仍须接受冻结评测与下游安全验证。</p>
+<h3>尚未冻结的训练契约</h3>
+<p>配方 Schema、复现实验、蒸馏协议、故障恢复和资源核算仍需规范化。候选超参数、阶段顺序和默认训练策略不得在缺少对照实验与 ADR 时成为兼容性要求。</p>
+</section>
   <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../components/nsfe.html"><strong>NSFE 组件</strong><span>查看语言底座、Source Graph 聚合和封闭任务头设计。</span></a><a class="page-link" href="../../development/implementation-roadmap.html"><strong>实施路线</strong><span>查看模型工程的证据门和阶段边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看模型工程与工具链上下游。</span></a></div></section>
 </main>

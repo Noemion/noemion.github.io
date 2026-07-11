@@ -2,110 +2,215 @@
 layout: default
 title: "Noemion · 从人类意图到机器表征对象"
 page_role: "portal"
-footer_text: "Noemion · 生成式表征对象工具链"
+footer_text: "Noemion · 设计与安全核心阶段 · 当前无可安装程序"
 permalink: "/index.html"
 ---
-<main id="main-content" tabindex="-1">
-  <div class="hero">
-    <h1>Noemion</h1>
-    <p>把人类意图从一次性的提示词上下文，编译为可分析、验证、重定位、链接和安全装载的机器表征对象。</p>
-    <div class="badges"><span class="badge">Intent Objects</span><span class="badge">Deterministic Core</span><span class="badge">Generative Runtime</span></div>
-  </div>
-
-  <section>
-    <h2>从提示词工程开始</h2>
-    <p class="lead">今天，引导大语言模型（LLM）的主要方式仍是向模型提供 Prompt 和上下文。提示词工程把角色、目标、限制、示例、工具说明、输出格式与验收要求组织成自然语言，让模型更可能生成符合预期的结果。</p>
-    <div class="flow" aria-label="当前常见的大语言模型使用流程">
-      <div class="step"><strong>人的意图</strong><br>想解决什么</div>
-      <div class="step"><strong>Prompt</strong><br>如何说给模型</div>
-      <div class="step"><strong>上下文</strong><br>补充知识与约束</div>
-      <div class="step"><strong>LLM</strong><br>概率生成</div>
-      <div class="step"><strong>响应</strong><br>检查与修改</div>
+<main id="main-content" class="portal-main" tabindex="-1">
+  <header class="portal-hero" aria-labelledby="portal-title">
+    <div class="portal-hero-copy">
+      <p class="portal-eyebrow">Generative Representation Object Toolchain</p>
+      <h1 id="portal-title"><span>从人类意图，</span><strong>到机器表征对象。</strong></h1>
+      <p class="portal-hero-summary">把一次性的提示词上下文，编译为可分析、验证、重定位、链接和安全装载的目标与约束。</p>
+      <div class="portal-actions">
+        <a class="portal-button portal-button-primary" href="docs/getting-started.html"><span>从这里理解 Noemion</span><span aria-hidden="true">↗</span></a>
+        <a class="portal-button portal-button-secondary" href="architecture/object-lifecycle.html"><span>查看对象生命周期</span><span aria-hidden="true">→</span></a>
+      </div>
+      <div class="portal-hero-meta" aria-label="项目当前边界">
+        <span><i aria-hidden="true"></i>设计与安全核心阶段</span>
+        <span>Strict · Deterministic · Verifiable</span>
+      </div>
     </div>
-    <p>这种方式直观、灵活，也不会因为 Noemion 出现而消失。问题在于：当任务变得复杂、长期或高风险时，目标、权限、证据和验收条件仍然埋在文本中，只能由模型临时解释，难以被独立工具检查和复用。</p>
-  </section>
 
-  <section>
-    <h2>真正的缺口：意义还没有成为工程对象</h2>
-    <p class="lead">提示词解决“怎样向模型表达”，Noemion 进一步追问“被表达的目标和意义，能否脱离某次对话，成为可验证、可组合和可治理的计算对象”。</p>
-    <div class="status-grid">
-      <article class="status-item"><h3>目标与措辞绑定</h3><p>同一意图可以有多种说法，但现有系统往往把具体文字当作目标本身，难以区分表达方式与真正要满足的条件。</p></article>
-      <article class="status-item"><h3>约束不能独立检查</h3><p>“必须做到什么”和“绝不能发生什么”常与背景文字混在一起，无法在运行前由确定性工具完整验证。</p></article>
-      <article class="status-item"><h3>依赖不能稳定链接</h3><p>知识、工具、权限和子任务通过上下文临时拼接，缺少明确符号、类型化引用、版本关系和重定位机制。</p></article>
-      <article class="status-item"><h3>结果难以复现与治理</h3><p>模型、上下文或调用顺序变化后，失败原因难以定位，也难回答执行时究竟采用了哪些目标、证据与权限。</p></article>
+    <div class="portal-hero-visual" role="img" aria-label="自然语言目标经过确定性 Compiler Core，形成带符号、重定位与完整性信息的 GSIR 和 GOBJ 对象">
+      <div class="semantic-spectrum" aria-hidden="true"></div>
+      <div class="source-cluster" aria-hidden="true">
+        <span class="source-chip source-chip-goal"><b>GOAL</b> 可满足结果</span>
+        <span class="source-chip source-chip-context"><b>CONTEXT</b> 证据与依赖</span>
+        <span class="source-chip source-chip-ambiguity"><b>AMBIGUITY</b> 保留未决</span>
+      </div>
+      <div class="compiler-bridge" aria-hidden="true">
+        <span>STRICT CORE</span>
+        <i></i>
+      </div>
+      <div class="gobj-object" aria-hidden="true">
+        <div class="gobj-title"><span>GOBJ</span><small>RELOCATABLE</small></div>
+        <div class="gobj-record"><b>01</b><span>.goals</span><i></i></div>
+        <div class="gobj-record"><b>02</b><span>.constraints</span><i></i></div>
+        <div class="gobj-record"><b>03</b><span>.symbols</span><i></i></div>
+        <div class="gobj-record"><b>04</b><span>.relocations</span><i></i></div>
+        <div class="gobj-footer"><span>CHECKED</span><span>LINKABLE</span><span>VERIFIABLE</span></div>
+      </div>
+      <div class="object-orbit object-orbit-one" aria-hidden="true"></div>
+      <div class="object-orbit object-orbit-two" aria-hidden="true"></div>
     </div>
-    <p class="callout"><strong>Noemion 的出发点：</strong>不替代 Prompt，而是把需要长期保存和严格处理的语义，从一次性文本上下文中提取出来，交给确定性工具链管理。</p>
-  </section>
+  </header>
 
-  <section>
-    <h2>思想来源：从“思考的行为”到“被思考的对象”</h2>
-    <p>Noemion 不是生硬缩写，而是从哲学术语 <em>Noema</em> 衍生出的独立名称。以下思想用于解释问题和建立设计视角，不等于把某套哲学理论直接编码成技术规范。</p>
-    <div class="grid3">
-      <article class="card">
-        <h3>现象学：Noesis 与 Noema</h3>
-        <p>在胡塞尔的意向性分析中，<em>Noesis</em> 指理解、判断或思考的行为，<em>Noema</em> 指与该行为相关的意义内容或对象。Noemion 借此区分“形成理解的过程”和“形成后可被处理的表征对象”。</p>
-      </article>
-      <article class="card">
-        <h3>分析哲学：表达不等于所指</h3>
-        <p>弗雷格关于意义与指称的区分提醒我们：一段表达、它呈现意义的方式，以及它所指向的对象不能简单混为一体。工程上，这启发我们把 Prompt 的表面措辞与任务的语义身份分开。</p>
-      </article>
-      <article class="card">
-        <h3>形式语义：说明满足条件</h3>
-        <p>目标不能只依赖“读起来像什么”，还需要说明什么状态算成功、哪些约束不可违反、证据如何支持结论，以及仍有哪些歧义尚未解决。</p>
-      </article>
+  <section class="portal-thesis portal-reveal">
+    <div class="portal-thesis-title">
+      <p class="portal-section-index">01 · THE GAP</p>
+      <h2>意义还没有成为工程对象。</h2>
     </div>
-    <p class="small">概念背景可参见 Stanford Encyclopedia of Philosophy 的 <a href="https://plato.stanford.edu/entries/husserl/">Edmund Husserl</a>、<a href="https://plato.stanford.edu/entries/intentionality/">Intentionality</a> 与 <a href="https://plato.stanford.edu/entries/frege/">Gottlob Frege</a> 条目。Noemion 对这些概念的使用属于工程类比，而不是哲学解释的定论。完整书目、反例与采用边界见<a href="about/intellectual-foundations.html">思想与方法基础</a>。</p>
-  </section>
-
-  <section>
-    <h2>工程转译：把意义送入确定性工具链</h2>
-    <p class="lead">传统编译器把源程序转化为中间表示和对象文件，再经过链接、装载和执行。Noemion 借鉴这条工程路径，但处理的不是传统机器指令，而是生成式任务的目标、约束、证据、权限、歧义和验收条件。</p>
-    <div class="flow" aria-label="Noemion 设想的对象生命周期">
-      <div class="step"><strong>人类需求</strong><br>自然语言与资料</div>
-      <div class="step"><strong>确定性编译</strong><br>分析与保留歧义</div>
-      <div class="step"><strong>GSIR</strong><br>目标与约束语义</div>
-      <div class="step"><strong>GOBJ / SSO</strong><br>可链接对象</div>
-      <div class="step"><strong>Runtime</strong><br>受约束生成执行</div>
-    </div>
-    <p>在这个对应关系中，编译过程类似形成理解的 <em>Noesis</em>，GSIR/GOBJ 类似形成后可被分析和组合的 <em>Noema</em>。这只是帮助理解的映射；真正的行为由规范、数据结构、不变量和测试定义。</p>
-  </section>
-
-  <section>
-    <h2>Noemion 实际要建设什么</h2>
-    <div class="status-grid">
-      <article class="status-item"><h3>GSIR：目标语义</h3><p>表达目标、解空间、硬约束、软偏好、歧义、证据要求、权限和验收条件，回答“什么结果才算满足要求”。</p></article>
-      <article class="status-item"><h3>GOBJ 与 SSO：对象工程</h3><p>组织语义记录、符号、类型化引用、重定位、依赖闭包与完整性信息，使对象能够被链接、分发和受控装载。</p></article>
-      <article class="status-item"><h3>确定性工具链</h3><p>建设 Compiler Core、链接器、验证器、对象检查工具和安全 Reader/Writer；Strict 模式不调用模型并保持可复现。</p></article>
-      <article class="status-item"><h3>受约束 Runtime</h3><p>Runtime 在已验证对象规定的边界内调用生成式能力并执行 Lowering；模型可以提出候选，但不能决定对象布局或绕过约束。</p></article>
+    <div class="portal-thesis-copy">
+      <p class="portal-lead">提示词工程擅长“怎样向模型表达”，但目标、硬约束、证据、权限和验收条件仍埋在文本里。</p>
+      <p>同一意图可以有许多措辞，现有系统却常把具体文字当作目标本身。表达一变，语义身份、依赖和验收关系就需要模型重新猜测。</p>
+      <p>复杂任务中的“必须做到”与“绝不能发生”很难被独立工具完整检查；知识、工具和子任务也缺少稳定符号、类型化引用与重定位机制。</p>
+      <p>模型、上下文或调用顺序变化后，失败原因难以定位，也难回答执行时采用了哪些目标、证据和权限。Noemion 从这里开始。</p>
     </div>
   </section>
 
-  <section>
-    <h2>边界：我们不在做什么</h2>
-    <ul>
-      <li><strong>不是提示词二进制化：</strong>把 Prompt、文本或 Skill 包换一种编码，不会自动获得类型、约束、链接和验证语义。</li>
-      <li><strong>不是取代大语言模型：</strong>模型仍负责擅长的生成式求解，但其输出始终是不可信候选。</li>
-      <li><strong>不是让模型生成对象格式：</strong>只有确定性的 Compiler Core 能生成 GSIR/GOBJ，模型不得决定二进制布局。</li>
-      <li><strong>不是已经完成的标准：</strong>当前名称、字段、ABI、命令行和扩展名仍需规范、ADR、原型和一致性测试逐步冻结。</li>
-    </ul>
-    <p><a href="about/background.html">继续阅读项目范围、非目标与可证伪条件</a>。</p>
+  <section class="portal-paths portal-reveal">
+    <div class="portal-section-heading">
+      <p class="portal-section-index">02 · OBJECTS, NOT PROMPTS</p>
+      <h2>把一次性上下文，<br>变成可验证对象。</h2>
+      <p>不替代 Prompt，也不让模型决定对象布局。把需要长期保存和严格处理的语义，交给确定性工具链。</p>
+    </div>
+
+    <div class="portal-feature-list">
+      <a class="portal-feature-row" href="about/background.html">
+        <span class="feature-visual feature-visual-expression" aria-hidden="true">
+          <i>“生成报告”</i><i>“写一份分析”</i><b>同一目标身份</b>
+        </span>
+        <span class="feature-copy"><small>START HERE · 背景与边界</small><strong>表达方式，不等于语义身份</strong><span>理解 Prompt 为什么仍然重要，以及目标、约束和验收为何需要独立成为工程对象。</span></span>
+        <span class="portal-arrow" aria-hidden="true"><i class="arrow-base">→</i><i class="arrow-active">↗</i></span>
+      </a>
+      <a class="portal-feature-row" href="architecture/object-lifecycle.html">
+        <span class="feature-visual feature-visual-lifecycle" aria-hidden="true">
+          <i>SOURCE</i><i>CORE</i><i>OBJECT</i><i>RUNTIME</i>
+        </span>
+        <span class="feature-copy"><small>ARCHITECTURE · 对象生命周期</small><strong>让每一道信任边界都能被看见</strong><span>从源输入、确定性编译、链接与装载，一直到受约束 Runtime，分清谁可以决定什么。</span></span>
+        <span class="portal-arrow" aria-hidden="true"><i class="arrow-base">→</i><i class="arrow-active">↗</i></span>
+      </a>
+      <a class="portal-feature-row" href="specifications/index.html">
+        <span class="feature-visual feature-visual-object" aria-hidden="true">
+          <i>GSIR</i><b>⇄</b><i>GOBJ</i>
+          <span>GOALS · SYMBOLS · RELOCS</span>
+        </span>
+        <span class="feature-copy"><small>SPECIFICATIONS · GSIR / GOBJ</small><strong>语义层与对象格式，各自负责自己的边界</strong><span>GSIR 表达什么结果满足任务；GOBJ 负责组织、链接、装载和完整性。</span></span>
+        <span class="portal-arrow" aria-hidden="true"><i class="arrow-base">→</i><i class="arrow-active">↗</i></span>
+      </a>
+      <a class="portal-feature-row" href="components/compiler-core.html">
+        <span class="feature-visual feature-visual-strict" aria-hidden="true">
+          <span><i>INPUT A</i><b>7F2A</b></span>
+          <span><i>INPUT A</i><b>7F2A</b></span>
+          <em>MODEL PATH ISOLATED</em>
+        </span>
+        <span class="feature-copy"><small>COMPONENT · STRICT COMPILER CORE</small><strong>相同受控输入，产生可复现对象</strong><span>Strict 模式无模型、确定且可复现；模型只能提出不可信候选，不能直接生成 GOBJ。</span></span>
+        <span class="portal-arrow" aria-hidden="true"><i class="arrow-base">→</i><i class="arrow-active">↗</i></span>
+      </a>
+    </div>
   </section>
 
-  <section>
-    <h2>当前状态</h2>
-    <p class="callout warning"><strong>设计与安全核心阶段：</strong>目前没有可供安装的编译器、Runtime 或正式规范版本。网站展示的是问题定义、设计约束和证据路线，不是已完成能力。</p>
-    <p>第一阶段只推进规范、确定性 Compiler Core、安全 Reader/Writer、验证器和测试基础，不引入模型、LLVM、MLIR 或大型框架。性能、跨模型等价、互操作性和产业价值必须等待可复现的实现与实验验证。</p>
+  <section class="portal-focus portal-reveal">
+    <div class="portal-section-heading">
+      <p class="portal-section-index">03 · NOW IN DESIGN</p>
+      <h2>当前设计焦点</h2>
+      <p>这里展示的是待规范、ADR 与验证路线约束的设计工作，不是已经发布的产品能力。</p>
+    </div>
+    <div class="portal-focus-grid">
+      <a class="portal-focus-card focus-card-gsir" href="specifications/gsir.html">
+        <span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>GOAL GRAPH</b></span>
+        <span class="focus-card-copy"><small>设计提案</small><strong>GSIR 目标语义</strong><span>目标、约束、偏好、歧义、证据与验收条件。</span></span>
+      </a>
+      <a class="portal-focus-card focus-card-gobj" href="specifications/gobj.html">
+        <span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>OBJECT MAP</b></span>
+        <span class="focus-card-copy"><small>设计提案</small><strong>GOBJ / SSO 对象工程</strong><span>Section、符号、重定位、依赖闭包与完整性。</span></span>
+      </a>
+      <a class="portal-focus-card focus-card-core" href="development/implementation-roadmap.html">
+        <span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>SAFE CORE</b></span>
+        <span class="focus-card-copy"><small>第一阶段</small><strong>安全二进制核心</strong><span>规范、Reader/Writer、验证器、Malformed/Fuzz 与一致性测试。</span></span>
+      </a>
+    </div>
   </section>
 
-  <section>
-    <h2>按你的问题继续阅读</h2>
-    <div class="page-links">
-      <a class="page-link" href="about/"><strong>为什么值得做</strong><span>了解项目动机、适用范围、非目标与研究命题。</span></a>
-      <a class="page-link" href="architecture/"><strong>系统如何组织</strong><span>查看从需求到对象、链接、装载和运行的职责边界。</span></a>
-      <a class="page-link" href="specifications/"><strong>哪些内容具有规范性</strong><span>区分已确认原则、设计提案、开放问题与未来条款。</span></a>
-      <a class="page-link" href="docs/"><strong>第一次从哪里开始</strong><span>按入门、使用、架构、开发和参考任务阅读文档。</span></a>
-      <a class="page-link" href="tools/"><strong>工具链如何分工</strong><span>浏览 23 个工具的职责、输入输出、边界和当前状态。</span></a>
-      <a class="page-link" href="development/"><strong>如何验证并推进</strong><span>了解阶段门、测试、安全、贡献与证据要求。</span></a>
+  <section class="portal-lifecycle portal-reveal">
+    <div class="portal-section-heading">
+      <p class="portal-section-index">04 · LIFECYCLE</p>
+      <h2>从理解行为，<br>到可信装载。</h2>
+      <p>Noesis 对应形成理解与编译的行为；Noema 对应形成后可分析、组合和装载的机器表征对象。这是工程类比，真正行为由规范和测试定义。</p>
+    </div>
+    <div class="portal-lifecycle-list">
+      <a href="specifications/gsir.html">
+        <span class="lifecycle-number">01</span>
+        <span class="lifecycle-copy"><strong>Source → GSIR</strong><span>保留原始表达、语义来源和未决歧义，由确定性核心完成绑定、类型与约束检查。</span></span>
+        <span class="lifecycle-state">COMPILE</span>
+      </a>
+      <a href="tools/noemld/index.html">
+        <span class="lifecycle-number">02</span>
+        <span class="lifecycle-copy"><strong>GOBJ → Linked Object</strong><span>解析符号、应用类型化重定位、合并依赖闭包；硬约束或权限冲突必须失败。</span></span>
+        <span class="lifecycle-state">LINK</span>
+      </a>
+      <a href="components/linker-loader.html">
+        <span class="lifecycle-number">03</span>
+        <span class="lifecycle-copy"><strong>Verified Object → Runtime</strong><span>Loader 验证结构、完整性与策略，再把已验证对象交给受约束生成式求解和 Lowering。</span></span>
+        <span class="lifecycle-state">LOAD</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="portal-start portal-reveal">
+    <p class="portal-section-index">05 · START WITH THE BOUNDARY</p>
+    <h2>先理解边界，<br>再阅读对象。</h2>
+    <p>当前没有可安装的编译器、Runtime 或正式规范版本。最好的开始，是先理解项目试图解决的问题和哪些内容仍未冻结。</p>
+    <div class="portal-actions portal-actions-center">
+      <a class="portal-button portal-button-primary" href="docs/getting-started.html"><span>打开入门指南</span><span aria-hidden="true">↗</span></a>
+      <a class="portal-button portal-button-secondary" href="specifications/index.html"><span>查看规范成熟度</span><span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="portal-evidence portal-reveal">
+    <p class="portal-section-index">06 · EVIDENCE OVER CLAIMS</p>
+    <h2>证据优先于主张。</h2>
+    <blockquote><p>“规范条款必须可测试，安全主张必须对应拒绝路径；论文、专利、软著或标准化意图，不能替代真实证据。”</p></blockquote>
+    <a href="development/testing.html">查看测试、Fuzz 与验证策略 <span aria-hidden="true">→</span></a>
+  </section>
+
+  <section class="portal-identity portal-reveal">
+    <div class="identity-art" aria-hidden="true">
+      <div class="identity-spectrum"></div>
+      <div class="identity-word">NOEMA</div>
+      <div class="identity-object">
+        <span>MEANING</span><span>OBJECT</span><span>CONTRACT</span>
+      </div>
+    </div>
+    <div class="identity-copy">
+      <p class="portal-section-index">07 · NAME &amp; METHOD</p>
+      <h2>Noemion 是什么，<br>也不是什么。</h2>
+      <p>Noemion 不是缩写，而是从哲学术语 <em>Noema</em> 衍生的独立名称。<em>Noesis</em> 指理解与编译行为，<em>Noema</em> 对应 GSIR/GOBJ 一类形成后可处理的对象。</p>
+      <p>分析哲学、语言哲学和现象学只提供问题框架与工程类比。它们帮助区分表达、意义、指称、行为和满足条件，却不能直接生成规范条款。</p>
+      <p>提示词工程仍然重要；Noemion 只把需要长期保存、独立检查和可信装载的语义，从一次性上下文中提取出来。</p>
+      <a href="about/intellectual-foundations.html">阅读思想与方法基础 <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="portal-gates portal-reveal">
+    <div class="portal-section-heading">
+      <p class="portal-section-index">08 · RELEASE GATES</p>
+      <h2>只有证据通过，<br>能力才进入下一阶段。</h2>
+      <p>这些是治理要求和验证门，不是对当前成果的自我认证。</p>
+    </div>
+    <div class="gate-grid" aria-label="Noemion 验证与治理门">
+      <a href="specifications/index.html"><span>01</span><strong>规范</strong><small>可测试条款</small></a>
+      <a href="docs/specifications-reference.html"><span>02</span><strong>ADR</strong><small>决定与后果</small></a>
+      <a href="development/testing.html"><span>03</span><strong>一致性</strong><small>跨实现证据</small></a>
+      <a href="development/testing.html"><span>04</span><strong>Fuzz</strong><small>拒绝畸形输入</small></a>
+      <a href="architecture/object-lifecycle.html"><span>05</span><strong>Checked</strong><small>算术与边界</small></a>
+      <a href="components/compiler-core.html"><span>06</span><strong>可复现</strong><small>Strict 路径</small></a>
+    </div>
+  </section>
+
+  <section class="portal-next portal-reveal">
+    <div class="portal-section-heading">
+      <p class="portal-section-index">09 · CONTINUE</p>
+      <h2>选择下一步</h2>
+      <p>按你现在的问题进入对应入口，不需要先理解完整工具链。</p>
+    </div>
+    <div class="portal-next-grid">
+      <a href="architecture/index.html"><small>01</small><strong>架构</strong><span>系统怎样分层</span></a>
+      <a href="specifications/index.html"><small>02</small><strong>规范</strong><span>哪些内容具有权威性</span></a>
+      <a href="tools/index.html"><small>03</small><strong>工具</strong><span>23 个工具怎样分工</span></a>
+      <a href="docs/index.html"><small>04</small><strong>文档</strong><span>按任务开始阅读</span></a>
+      <a href="development/index.html"><small>05</small><strong>开发</strong><span>阶段门与证据路线</span></a>
+      <a href="faq/index.html"><small>06</small><strong>FAQ</strong><span>直接回答常见问题</span></a>
     </div>
   </section>
 </main>

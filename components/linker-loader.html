@@ -10,6 +10,7 @@ permalink: "/components/linker-loader.html"
   <div class="hero"><h1>Linker、Loader 与 Runtime</h1><p>对象组合、可信装载、完整性验证和生成式执行的职责边界。</p><div class="badges"><span class="badge">Link</span><span class="badge">Verify</span><span class="badge">Load</span><span class="badge">Runtime</span></div></div>
   <section>
     <h2>已确认原则：Linker 职责</h2>
+    <p class="callout"><strong>直白解释：</strong>Linker 决定多个局部对象能否安全组成整体；Loader 决定这个整体能否进入当前环境；Runtime 只在两道边界都通过后执行受约束求解。三者的成功条件不能合并为一个“可运行”状态。</p>
     <ul>
       <li>合并可兼容的 Section、字符串、符号、语义节点与依赖。</li>
       <li>解析导入导出，重新编号对象内部 ID，并应用资源、策略、评价器、模型、Schema、原型和能力等引用类别的重定位。</li>

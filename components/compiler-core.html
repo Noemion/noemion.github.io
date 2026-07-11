@@ -20,7 +20,8 @@ permalink: "/components/compiler-core.html"
       <tr><td>Assisted</td><td>NSFE 只提交带来源、证据、置信度和歧义状态的封闭候选；Core 决定采纳或拒绝。</td></tr>
       <tr><td>Generate-Strict</td><td>外部生成式模型只生成候选 GSL，随后由 Strict 路径检查；模型输出仍是不可信源码。</td></tr>
     </tbody></table>
-    <p>具体命令行选项属于工具接口设计，不由本页冻结。</p>
+
+<p>具体命令行选项属于工具接口，不由组件职责定义冻结；只有 CLI 规范、版本策略和对应一致性测试获批后才形成兼容承诺。</p>
   </section>
   <section>
     <h2>设计提案：编译 Pass</h2>
@@ -43,7 +44,7 @@ permalink: "/components/compiler-core.html"
   </section>
   <section>
     <h2>详细设计入口与验证证据</h2>
-    <p>后续详细设计至少需要分别定义规范化上下文、符号与类型环境、约束求解接口、歧义状态机、Coverage Ledger、Pass 管理、确定性 Writer 和诊断模型。每个 Pass 必须声明输入不变量、输出不变量、是否允许产生未决状态、复杂度或资源上限以及失败后是否可继续。</p>
+    <p>尚未冻结的核心契约包括规范化上下文、符号与类型环境、约束求解接口、歧义状态机、Coverage Ledger、Pass 管理、确定性 Writer 和诊断模型。每个 Pass 必须声明输入不变量、输出不变量、是否允许产生未决状态、复杂度或资源上限以及失败后是否可继续。</p>
     <p>Compiler Core 的放行证据包括：相同输入的字节级复现、规范化 Round-trip、类型与约束负例、歧义保持、Source Unit 覆盖、精确载荷保护、跨 Pass 属性测试和关闭模型后的完整 Strict 流程。性能数据不能替代语义和安全正确性。</p>
   </section>
   <div class="next-prev"><a href="../specifications/sso.html">← SSO</a><a href="linker-loader.html">Linker、Loader 与 Runtime →</a></div>

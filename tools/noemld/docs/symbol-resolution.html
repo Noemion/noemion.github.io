@@ -32,6 +32,7 @@ permalink: "/tools/noemld/docs/symbol-resolution.html"
 <span class="badge">Phase 4 / Phase 5</span>
 </div>
 </div>
+<p class="callout"><strong>使用者判断：</strong>符号名称相同不代表定义等价。解析必须同时考虑命名空间、类型、版本、可见性和绑定强度，并把选择理由写入 Link Map。</p>
 <section>
 <h2>设计目标</h2>
 <p>符号解析负责把“谁引用了什么”转化为唯一、可解释的定义选择。名称相同并不代表语义相同；版本、命名空间、类型、可见性和绑定强度都属于解析键。任何未写进规则的输入顺序偏好都会破坏复现，也会让攻击者通过排列对象影响最终行为。</p>

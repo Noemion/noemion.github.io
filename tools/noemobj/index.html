@@ -8,10 +8,18 @@ permalink: "/tools/noemobj/index.html"
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemobj</span></nav>
   <div class="hero"><h1>noemobj · 对象检查器</h1><p>以只读方式检查对象的链接视图、装载视图、GSIR 图、覆盖与披露元数据，承担 Noemion 的 readelf/objdump 角色。</p><div class="badges"><span class="badge">Phase 1</span><span class="badge">Object Tools</span><span class="badge">GOBJ / SSO 结构视图</span><span class="badge">Design Stage</span></div></div>
-  <section><h2>工具简介</h2><p><code>noemobj</code> 以只读方式检查对象的链接视图、装载视图、GSIR 图、覆盖与披露元数据，承担 Noemion 的 readelf/objdump 角色。</p><p><strong>问题背景：</strong>二进制对象如果只能由编译器和 Runtime 解释，开发者、安全评审者和研究者无法核对布局、引用、来源和策略。noemobj 提供稳定、受限且不执行对象的观测面。</p></section>
-  <section><h2>当前状态</h2><p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。页面仅说明已经确认的工具定位、预期输入与产物以及安全边界。</p><p><strong>阶段门：</strong>需先冻结最小 Header/Section/Symbol Schema 和安全 Reader 契约；开发退出证据包括畸形对象下的有界输出、字段级 Golden 视图和结构化输出 Schema 一致性。</p></section>
+  <section><h2>工具简介</h2><p><code>noemobj</code> 以只读方式检查对象的链接视图、装载视图、GSIR 图、覆盖与披露元数据，承担 Noemion 的 readelf/objdump 角色。</p><p><strong>问题背景：</strong>二进制对象如果只能由编译器和 Runtime 解释，开发者、安全评审者和研究者无法核对布局、引用、来源和策略。noemobj 提供稳定、受限且不执行对象的观测面。</p>
+</section>
+  <section>
+<h2>当前状态</h2>
+<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
+<p><strong>阶段门：</strong>需先冻结最小 Header/Section/Symbol Schema 和安全 Reader 契约；开发退出证据包括畸形对象下的有界输出、字段级 Golden 视图和结构化输出 Schema 一致性。</p>
+</section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">受限读取</div><div class="step">选择视图</div><div class="step">解析引用</div><div class="step">限制深度与预算</div><div class="step">稳定输出</div></div><ul><li>显示 Header、Section、Segment、String、Symbol、Relocation 和 Note</li><li>按 H/C/E/B-GSIR 层查看节点、边、约束与 Artifact Contract</li><li>显示 SSO 依赖闭包、Disclosure Graph、模型与策略指纹</li><li>支持稳定文本、JSON 和限定深度的图输出</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>GOBJ/SSO/Package</td><td>本地文件、stdin 或包内具名成员</td></tr><tr><td>输入</td><td>View Selection</td><td>header/sections/symbols/relocs/gsir/coverage/disclosure</td></tr><tr><td>输入</td><td>Resource Limits</td><td>最大节点数、递归深度、字符串与输出预算</td></tr><tr><td>输出</td><td>Text View</td><td>面向开发者的稳定字段与偏移视图</td></tr><tr><td>输出</td><td>Structured View</td><td>JSON/CBOR 结构数据，字段名与 schema 对齐</td></tr><tr><td>输出</td><td>Graph Extract</td><td>受限 DOT 或节点边清单</td></tr></tbody></table></div></section>
-  <section><h2>处理边界</h2><ul><li>默认不执行、装载或修复对象</li><li>不把可解析等同于验证通过</li><li>不绕过 noemverify 给出信任结论</li><li>不在损坏计数驱动下进行无界内存分配</li></ul><p>所有对象输入均视为不可信；偏移、长度、计数、索引和对齐计算必须使用 checked arithmetic。输出必须区分“原始声明”“解析推导”和“验证结论”，避免查看工具无意中为损坏对象背书。</p></section>
-  <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GOBJ、GSIR 与 SSO 的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性对象处理与安全边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div><p>专题文档应在对象 Schema 稳定后拆分为视图契约、结构化输出、资源限制与安全显示策略。</p></section>
+  <section><h2>处理边界</h2><ul><li>默认不执行、装载或修复对象</li><li>不把可解析等同于验证通过</li><li>不绕过 noemverify 给出信任结论</li><li>不在损坏计数驱动下进行无界内存分配</li></ul><p>所有对象输入均视为不可信；偏移、长度、计数、索引和对齐计算必须使用 checked arithmetic。输出必须区分“原始声明”“解析推导”和“验证结论”，避免查看工具无意中为损坏对象背书。</p>
+</section>
+  <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GOBJ、GSIR 与 SSO 的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性对象处理与安全边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div>
+<p>尚未冻结的接口包括对象视图契约、结构化输出、资源限制和安全显示策略。</p>
+</section>
 </main>

@@ -12,6 +12,7 @@ permalink: "/architecture/object-lifecycle.html"
     <h2>已确认原则：生命周期</h2>
     <div class="flow"><div class="step">自然语言 / GSL / 资源</div><div class="step">前端候选或 Strict 解析</div><div class="step">Compiler Core</div><div class="step">GSIR / GOBJ</div><div class="step">Linker / Loader</div><div class="step">Runtime</div></div>
     <p>前端负责产生受限候选或解析受控源语言；Compiler Core 负责绑定、类型与约束检查、覆盖审计和确定性对象生成；链接与装载组件负责对象组合、验证和安全映射；Runtime 才负责生成式求解与 Lowering。</p>
+    <p>例如，一个“生成报告”的请求只有在目标受众、必需章节、禁止披露内容、证据来源和验收条件都进入受检语义后，才适合成为对象；Runtime 可以选择怎样形成报告，但不能删除硬约束或扩大访问权限。</p>
   </section>
   <section>
     <h2>已确认原则：编译边界</h2>

@@ -29,7 +29,7 @@ permalink: "/components/index.html"
     <h2>概要设计与依赖方向</h2>
     <div class="flow"><div class="step">规范与 Profile</div><div class="step">Compiler Core</div><div class="step">对象与链接器</div><div class="step">验证与 Loader</div><div class="step">Runtime / NSFE</div></div>
     <p>依赖方向必须从候选语义走向确定性对象，再走向已验证的运行绑定。Runtime 可以消费对象声明，但不得回写对象布局；NSFE 可以产生候选、聚合与路由信号，但其输出必须经过确定性边界才能进入对象或策略。</p>
-    <p>详细设计应在各组件专题中说明输入输出、内部状态、关键算法或数据结构、失败条件、资源上限、可观测事件和验证策略。尚未形成这些内容的组件仍处于设计阶段。</p>
+    <p>每个组件的权威说明必须定义输入输出、内部状态、关键算法或数据结构、失败条件、资源上限、可观测事件和验证策略。缺少其中任何一项时，只能视为职责级设计，不能推定接口或实现已经稳定。</p>
   </section>
   <section>
     <h2>工具入口</h2>

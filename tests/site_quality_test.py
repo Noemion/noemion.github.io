@@ -22,6 +22,11 @@ SOURCE_HTML_FILES = sorted(
 HTML_FILES = SOURCE_HTML_FILES if SOURCE_ONLY else sorted(ROOT.rglob("*.html"))
 RAW_AMP = re.compile(r"&(?![A-Za-z][A-Za-z0-9]+;|#[0-9]+;|#x[0-9A-Fa-f]+;)")
 HREF_LITERAL = re.compile(r'href:\s*"([^"]+)"')
+EXTERNAL_ANCHOR = re.compile(
+    r'<a\s+[^>]*href="(https?://[^"]+)"[^>]*>(.*?)</a>',
+    re.IGNORECASE | re.DOTALL,
+)
+HTML_TAG = re.compile(r"<[^>]+>")
 FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 ROUTE_ROW = re.compile(
     r"^\| `([^`]+\.html)` \| (portal|section|content|tool|docs|topic) \| `([^`]*)` \| ([0-9]+) \| ([^|]+) \|$",
@@ -90,14 +95,15 @@ DOC_GUIDE_HEADINGS = {
     ],
 }
 HOME_HEADINGS = [
-    "从提示词工程开始",
-    "真正的缺口：意义还没有成为工程对象",
-    "思想来源：从“思考的行为”到“被思考的对象”",
-    "工程转译：把意义送入确定性工具链",
-    "Noemion 实际要建设什么",
-    "边界：我们不在做什么",
-    "当前状态",
-    "按你的问题继续阅读",
+    "意义还没有成为工程对象。",
+    "把一次性上下文，变成可验证对象。",
+    "当前设计焦点",
+    "从理解行为，到可信装载。",
+    "先理解边界，再阅读对象。",
+    "证据优先于主张。",
+    "Noemion 是什么，也不是什么。",
+    "只有证据通过，能力才进入下一阶段。",
+    "选择下一步",
 ]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "为什么阅读这些著作",
@@ -126,6 +132,34 @@ TOOL_PROJECT_SECTIONS = [
 ]
 TOOL_PROJECT_STATUS_DECLARATION = (
     "设计阶段：当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。"
+)
+PUBLIC_META_PHRASES = (
+    "本轮",
+    "用户提供版本",
+    "逐一 review",
+    "页面仅说明",
+    "专题文档拆分条件",
+    "专题文档应",
+    "本页不虚构",
+    "本页只定义项目边界",
+    "项目设计说明",
+    "用于设计评审",
+    "评审输入",
+    "旧蓝图",
+    "当前蓝图",
+    "工程蓝图",
+    "蓝图示例",
+    "只完成页面",
+    "后续文档将",
+    "页面不得提前",
+    "Codex",
+    "ChatGPT",
+    "subagent",
+)
+NORMATIVE_ROUTES = (
+    "specifications/gsir.html",
+    "specifications/gobj.html",
+    "specifications/sso.html",
 )
 
 
@@ -275,6 +309,20 @@ def normalize_visible_text(text):
     return " ".join(text.split())
 
 
+def validate_public_html(route, text):
+    errors = []
+    for phrase in PUBLIC_META_PHRASES:
+        if phrase in text:
+            errors.append(f"{route}: public HTML exposes internal production phrase {phrase!r}")
+    for href, label_markup in EXTERNAL_ANCHOR.findall(text):
+        label = normalize_visible_text(HTML_TAG.sub("", label_markup))
+        if label != href:
+            errors.append(
+                f"{route}: external resource link must display its original URL {href!r}"
+            )
+    return errors
+
+
 def front_matter_value(block, key):
     match = re.search(rf"^{re.escape(key)}:\s*(.+)$", block, re.MULTILINE)
     if match is None:
@@ -326,6 +374,7 @@ def validate_jekyll_sources():
             if not front_matter_value(metadata, key):
                 errors.append(f"{route}: front matter requires {key}")
         body = text[match.end():]
+        errors.extend(validate_public_html(route, body))
         if forbidden_shell.search(body):
             errors.append(f"{route}: page shell must come from the Jekyll layout")
         parser = parse(path)
@@ -508,6 +557,19 @@ def main():
         if path.exists() and parse(path).page_role != ROLE_BY_KIND[row["kind"]]:
             errors.append(f"{row['route']}: page role does not match registry kind")
 
+    for route in NORMATIVE_ROUTES:
+        path = ROOT / route
+        if not path.exists():
+            errors.append(f"missing normative page {route}")
+            continue
+        parser = parse(path)
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in ("直白解释", "已确认原则", "设计提案", "开放问题", "必须", "不得"):
+            if term not in visible_text:
+                errors.append(f"{route}: normative page must preserve {term}")
+
     for row in route_rows:
         if row["kind"] != "tool":
             continue
@@ -655,10 +717,17 @@ def main():
         text = path.read_text()
         parser = parse(path)
         rel = path.relative_to(ROOT).as_posix()
+        errors.extend(validate_public_html(rel, text))
         if RAW_AMP.search(text):
             errors.append(f"{rel}: contains an unescaped ampersand")
         if parser.directory_containers != 1:
             errors.append(f"{rel}: expected one data-directory nav")
+        for section in parser.sections:
+            section_text = normalize_visible_text("".join(section["text"]))
+            if section["heading"] and len(section_text) < 24:
+                errors.append(
+                    f"{rel}: section {section['heading']!r} is too thin for public documentation"
+                )
         if parser.skip_links != 1 or parser.main_targets != 1:
             errors.append(f"{rel}: missing unique skip link or main target")
         if len(parser.stylesheets) != 1:

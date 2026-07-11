@@ -160,3 +160,116 @@ section[id]{scroll-margin-top:20px}
 @media print{
   .skip-link,.site-header{display:none}
 }
+
+/* The portal uses AIHero's horizontal navigation rhythm while inner pages keep the
+   GNU/sourceware directory. Link data still comes from directory.js. */
+body[data-page-role="portal"] .portal-header{
+  position:sticky;top:0;right:auto;bottom:auto;left:auto;
+  width:min(1200px,calc(100% - 36px));height:64px;margin:0 auto;
+  overflow:visible;background:color-mix(in srgb,var(--paper) 94%,transparent);
+  border:1px solid var(--rule);border-top:0;border-radius:0;
+  box-shadow:0 1px 0 color-mix(in srgb,var(--text) 5%,transparent);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)
+}
+body[data-page-role="portal"] .portal-header-inner{
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;
+  max-width:none;height:100%;margin:0;padding:0
+}
+body[data-page-role="portal"] .portal-brand{
+  display:flex;align-items:center;gap:10px;height:100%;margin:0;padding:0 20px;
+  border-right:1px solid var(--rule);font-family:inherit;font-size:18px;font-weight:750;
+  letter-spacing:-.02em;
+  transition-property:background-color,color;transition-duration:150ms;transition-timing-function:var(--ease)
+}
+body[data-page-role="portal"] .portal-brand:hover{color:var(--heading);background:var(--paper-subtle)}
+body[data-page-role="portal"] .portal-brand-mark{
+  display:grid;place-items:center;width:30px;height:30px;color:#f7fbf9;background:var(--heading);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;font-weight:800;
+  clip-path:polygon(50% 0,64% 21%,88% 12%,79% 36%,100% 50%,79% 64%,88% 88%,64% 79%,50% 100%,36% 79%,12% 88%,21% 64%,0 50%,21% 36%,12% 12%,36% 21%)
+}
+body[data-page-role="portal"] .portal-primary-nav{
+  display:flex;align-items:stretch;justify-content:flex-start;height:100%
+}
+body[data-page-role="portal"] .portal-nav-link{
+  display:flex;align-items:center;justify-content:center;min-width:92px;height:100%;padding:0 16px;
+  color:var(--nav-text);font-size:14px;font-weight:570;text-decoration:none;border-right:1px solid var(--rule);
+  transition-property:background-color,color;transition-duration:150ms;transition-timing-function:var(--ease)
+}
+body[data-page-role="portal"] .portal-nav-link:visited{color:var(--nav-text)}
+body[data-page-role="portal"] .portal-nav-link:hover{color:var(--heading);background:var(--paper-subtle)}
+body[data-page-role="portal"] .portal-nav-link:active{transform:scale(.96)}
+body[data-page-role="portal"] .portal-stage-link{
+  display:flex;align-items:center;gap:8px;align-self:stretch;padding:0 20px;color:var(--heading);
+  border-left:1px solid var(--rule);font-size:13px;font-weight:700;text-decoration:none;
+  transition-property:background-color,color,transform;transition-duration:150ms;transition-timing-function:var(--ease)
+}
+body[data-page-role="portal"] .portal-stage-link:visited{color:var(--heading)}
+body[data-page-role="portal"] .portal-stage-link:hover{background:var(--paper-subtle)}
+body[data-page-role="portal"] .portal-stage-link:active{transform:scale(.96)}
+body[data-page-role="portal"] .portal-stage-link>span{
+  width:8px;height:8px;border-radius:50%;background:#f04b23;
+  box-shadow:0 0 0 4px color-mix(in srgb,#f04b23 14%,transparent)
+}
+body[data-page-role="portal"] .portal-directory-panel{display:none}
+
+@media(min-width:1000px){
+  body[data-page-role="portal"]{padding-right:0;padding-left:0}
+}
+
+@media(max-width:999px){
+  body[data-page-role="portal"] .portal-header{
+    width:calc(100% - 16px);height:64px;margin:0 8px;border-top:0
+  }
+  body[data-page-role="portal"] .portal-header-inner{
+    grid-template-columns:minmax(0,1fr) auto auto;padding:0
+  }
+  body[data-page-role="portal"] .portal-brand{grid-column:1;padding:0 14px;border-right:0}
+  body[data-page-role="portal"] .portal-primary-nav{display:none}
+  body[data-page-role="portal"] .portal-stage-link{
+    grid-column:2;padding:0 13px;border-right:1px solid var(--rule);border-left:1px solid var(--rule)
+  }
+  body[data-page-role="portal"] .portal-directory-panel{
+    display:block;grid-column:3;align-self:stretch;margin:0;padding:0;border:0;background:transparent
+  }
+  body[data-page-role="portal"] .portal-directory-panel>summary{
+    display:flex;align-items:center;justify-content:center;width:58px;height:100%;min-height:0;padding:0;
+    color:var(--heading);font-size:0
+  }
+  body[data-page-role="portal"] .portal-directory-panel>summary::after{display:none}
+  body[data-page-role="portal"] .portal-menu-icon,
+  body[data-page-role="portal"] .portal-menu-icon::before,
+  body[data-page-role="portal"] .portal-menu-icon::after{
+    display:block;width:18px;height:1.5px;background:currentColor;
+    transition-property:transform,opacity;transition-duration:180ms;transition-timing-function:var(--ease)
+  }
+  body[data-page-role="portal"] .portal-menu-icon{position:relative}
+  body[data-page-role="portal"] .portal-menu-icon::before,
+  body[data-page-role="portal"] .portal-menu-icon::after{content:"";position:absolute;left:0}
+  body[data-page-role="portal"] .portal-menu-icon::before{top:-6px}
+  body[data-page-role="portal"] .portal-menu-icon::after{top:6px}
+  body[data-page-role="portal"] .portal-directory-panel[open] .portal-menu-icon{background:transparent}
+  body[data-page-role="portal"] .portal-directory-panel[open] .portal-menu-icon::before{top:0;transform:rotate(45deg)}
+  body[data-page-role="portal"] .portal-directory-panel[open] .portal-menu-icon::after{top:0;transform:rotate(-45deg)}
+  body[data-page-role="portal"] .portal-directory-panel nav{
+    top:64px;right:-1px;left:auto;width:min(390px,calc(100vw - 16px));
+    max-height:calc(100vh - 72px);padding:14px 16px 18px;
+    background:var(--paper);border:1px solid var(--rule);border-top:0;
+    box-shadow:0 18px 36px color-mix(in srgb,var(--text) 14%,transparent)
+  }
+}
+
+@media(max-width:520px){
+  body[data-page-role="portal"] .portal-brand{padding-inline:12px}
+  body[data-page-role="portal"] .portal-brand-mark{width:28px;height:28px}
+  body[data-page-role="portal"] .portal-stage-link{font-size:0;padding:0 14px}
+  body[data-page-role="portal"] .portal-stage-link::after{content:"阶段";font-size:12px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  body[data-page-role="portal"] .portal-brand,
+  body[data-page-role="portal"] .portal-nav-link,
+  body[data-page-role="portal"] .portal-stage-link,
+  body[data-page-role="portal"] .portal-menu-icon,
+  body[data-page-role="portal"] .portal-menu-icon::before,
+  body[data-page-role="portal"] .portal-menu-icon::after{transition-duration:0s!important}
+}

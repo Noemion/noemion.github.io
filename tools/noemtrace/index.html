@@ -8,10 +8,18 @@ permalink: "/tools/noemtrace/index.html"
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemtrace</span></nav>
   <div class="hero"><h1>noemtrace · 运行追踪与调试映射</h1><p>采集装载、符号绑定、披露、约束求解和 Artifact 访问事件，并通过保留的调试信息映射回源单元与 GSIR 节点。</p><div class="badges"><span class="badge">Phase 6</span><span class="badge">Release &amp; Runtime</span><span class="badge">Trace Stream → Diagnostic Report</span><span class="badge">Design Stage</span></div></div>
-  <section><h2>工具简介</h2><p><code>noemtrace</code> 采集装载、符号绑定、披露、约束求解和 Artifact 访问事件，并通过保留的调试信息映射回源单元与 GSIR 节点。</p><p><strong>问题背景：</strong>生成式运行包含模型、披露、评价和外部能力等非单一路径，普通日志难以重建因果且可能泄露敏感内容。noemtrace 用版本化事件与受控源映射提供可审计观测面。</p></section>
-  <section><h2>当前状态</h2><p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。页面仅说明已经确认的工具定位、预期输入与产物以及安全边界。</p><p><strong>阶段门：</strong>依赖稳定事件 Schema、对象身份、时钟/序号模型、Debug Companion 和脱敏策略；验证需覆盖并发排序、事件丢失、状态关联、敏感字段和低开销采集。</p></section>
+  <section><h2>工具简介</h2><p><code>noemtrace</code> 采集装载、符号绑定、披露、约束求解和 Artifact 访问事件，并通过保留的调试信息映射回源单元与 GSIR 节点。</p><p><strong>问题背景：</strong>生成式运行包含模型、披露、评价和外部能力等非单一路径，普通日志难以重建因果且可能泄露敏感内容。noemtrace 用版本化事件与受控源映射提供可审计观测面。</p>
+</section>
+  <section>
+<h2>当前状态</h2>
+<p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。已确认内容限于工具职责、预期输入输出、安全边界和阶段门；具体调用方式以未来正式版本为准。</p>
+<p><strong>阶段门：</strong>依赖稳定事件 Schema、对象身份、时钟/序号模型、Debug Companion 和脱敏策略；验证需覆盖并发排序、事件丢失、状态关联、敏感字段和低开销采集。</p>
+</section>
   <section><h2>主要能力</h2><div class="flow"><div class="step">采集结构化事件</div><div class="step">规范化时间与身份</div><div class="step">关联对象/节点/来源</div><div class="step">应用脱敏策略</div><div class="step">重建因果与诊断</div></div><ul><li>定义稳定、版本化、机器可解析的追踪事件</li><li>关联对象、Section、符号、GSIR 节点和 Source Unit</li><li>重建披露链、约束决定与失败因果</li><li>按策略脱敏敏感 Artifact 和自然语言片段</li></ul></section>
   <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Trace Stream</td><td>带序号、时钟域、对象身份和事件 schema 的记录</td></tr><tr><td>输入</td><td>Debug Companion</td><td>独立保存的源映射、符号名和开发调试 Section</td></tr><tr><td>输入</td><td>Redaction Policy</td><td>字段级保留、哈希、隐藏和导出规则</td></tr><tr><td>输出</td><td>Diagnostic Report</td><td>按事件、对象、源单元或因果链组织的报告</td></tr><tr><td>输出</td><td>Normalized Trace</td><td>可供比较、测试和回放分析的稳定事件序列</td></tr></tbody></table></div></section>
-  <section><h2>处理边界</h2><ul><li>不改变 Runtime 决策或重放时注入新语义</li><li>不要求发布包保留全部开发调试信息</li><li>不把日志文本作为正式事件协议</li><li>不绕过访问策略读取被剥离内容</li></ul><p>追踪不是确定性重放证明；事件丢失、采样、时钟不确定和脱敏必须显式记录。导出报告不得恢复被策略隐藏的 Artifact 或自然语言内容。</p></section>
-  <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GOBJ、SSO 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/linker-loader.html"><strong>组件边界</strong><span>查看链接、装载、Runtime 与安全边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div><p>专题文档应定义事件 Schema、身份与排序、因果关联、脱敏、采样和 Debug Companion 映射。</p></section>
+  <section><h2>处理边界</h2><ul><li>不改变 Runtime 决策或重放时注入新语义</li><li>不要求发布包保留全部开发调试信息</li><li>不把日志文本作为正式事件协议</li><li>不绕过访问策略读取被剥离内容</li></ul><p>追踪不是确定性重放证明；事件丢失、采样、时钟不确定和脱敏必须显式记录。导出报告不得恢复被策略隐藏的 Artifact 或自然语言内容。</p>
+</section>
+  <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GOBJ、SSO 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/linker-loader.html"><strong>组件边界</strong><span>查看链接、装载、Runtime 与安全边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div>
+<p>尚未冻结的接口包括事件 Schema、身份与排序、因果关联、脱敏、采样和 Debug Companion 映射。</p>
+</section>
 </main>
