@@ -28,7 +28,7 @@ jobs:
           source: ./
           destination: ./_site
       - name: Publish Markdown discovery index
-        run: cp sitemap.md _site/sitemap.md
+        run: sudo install -m 0644 sitemap.md _site/sitemap.md
       - name: Validate rendered site
         run: python3 tests/site_quality_test.py _site
       - name: Upload GitHub Pages artifact
