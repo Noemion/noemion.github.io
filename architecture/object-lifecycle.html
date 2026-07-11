@@ -8,13 +8,13 @@ permalink: "/architecture/object-lifecycle.html"
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构</a><span aria-hidden="true">/</span><span>对象生命周期</span></nav>
   <div class="hero"><h1>对象生命周期与信任边界</h1><p>从源输入到 GSIR、GOBJ、链接对象与 Runtime 执行的职责分离。</p><div class="badges"><span class="badge">Lifecycle</span><span class="badge">Trust Boundary</span><span class="badge">Deterministic Core</span></div></div>
-  <section>
+  <section class="content-wide">
     <h2>已确认原则：生命周期</h2>
     <div class="flow"><div class="step">自然语言 / GSL / 资源</div><div class="step">前端候选或 Strict 解析</div><div class="step">Compiler Core</div><div class="step">GSIR / GOBJ</div><div class="step">Linker / Loader</div><div class="step">Runtime</div></div>
     <p>前端负责产生受限候选或解析受控源语言；Compiler Core 负责绑定、类型与约束检查、覆盖审计和确定性对象生成；链接与装载组件负责对象组合、验证和安全映射；Runtime 才负责生成式求解与 Lowering。</p>
     <p>例如，一个“生成报告”的请求只有在目标受众、必需章节、禁止披露内容、证据来源和验收条件都进入受检语义后，才适合成为对象；Runtime 可以选择怎样形成报告，但不能删除硬约束或扩大访问权限。</p>
   </section>
-  <section>
+  <section class="content-rows">
     <h2>已确认原则：编译边界</h2>
     <ul>
       <li>Strict 输入通过无模型路径进入确定性 Compiler Core。</li>
@@ -23,7 +23,7 @@ permalink: "/architecture/object-lifecycle.html"
       <li>相同受控输入、工具版本和规范化环境应产生可复现的对象结果。</li>
     </ul>
   </section>
-  <section>
+  <section class="content-rows">
     <h2>已确认原则：对象与装载边界</h2>
     <ul>
       <li>一切对象输入均不可信；偏移、长度、计数、索引和对齐计算使用 checked arithmetic。</li>
@@ -32,11 +32,11 @@ permalink: "/architecture/object-lifecycle.html"
       <li>重定位完成后，关键符号绑定、入口、策略与权限应被冻结，避免装载后提权。</li>
     </ul>
   </section>
-  <section>
+  <section class="content-band">
     <h2>设计提案：对象视图</h2>
     <p>当前设计借鉴 ELF 的 Section/Segment 双视图：Section 服务链接、调试与对象工具，Segment 服务验证和装载。具体 Header、记录布局和签名结构仍须由正式格式规范与 ADR 固化。</p>
   </section>
-  <section>
+  <section class="content-split">
     <h2>设计提案：对象语言、元语言与行为边界</h2>
     <p><a href="../about/intellectual-foundations.html">思想与方法基础</a>提示我们区分被执行或评价的对象数据，以及描述其类型、验证规则和环境的元层。当前提议要求 GSIR/GOBJ 不得把 Profile、验证器规则或 Runtime 私有假设伪装成对象自身事实；跨层引用必须有显式版本和信任来源。</p>
     <ul>
@@ -46,11 +46,11 @@ permalink: "/architecture/object-lifecycle.html"
     </ul>
     <p>这些结构仍须用反例语料、竞争设计、ADR 和一致性测试证明，尚不是对象格式字段。</p>
   </section>
-  <section>
+  <section class="content-band">
     <h2>开放问题：消费端 ABI</h2>
     <p>Prompt Renderer 与直接 Runtime Lowering 的结构化槽位、状态同步、预算单位和消费者确认协议尚未定型，见<a href="open-questions.html">开放问题</a>。</p>
   </section>
-  <section>
+  <section class="content-wide">
     <h2>生命周期检查点与证据</h2>
     <div class="table-wrap"><table><thead><tr><th>检查点</th><th>必须确认</th><th>失败产物</th><th>可审计证据</th></tr></thead><tbody>
       <tr><td>Source → Candidate</td><td>来源、跨度、许可、歧义和未分类内容未丢失</td><td>来源或候选诊断</td><td>Source Unit 映射与覆盖账本</td></tr>

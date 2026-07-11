@@ -175,6 +175,28 @@ NORMATIVE_ROUTES = (
     "specifications/gobj.html",
     "specifications/sso.html",
 )
+CONTENT_LAYOUT_ROUTES = (
+    "about/background.html",
+    "about/intellectual-foundations.html",
+    "architecture/object-lifecycle.html",
+    "architecture/open-questions.html",
+    "components/compiler-core.html",
+    "components/linker-loader.html",
+    "components/nsfe.html",
+    "development/implementation-roadmap.html",
+    "development/testing.html",
+    "specifications/gobj.html",
+    "specifications/gsir.html",
+    "specifications/sso.html",
+)
+CONTENT_LAYOUT_CLASSES = {
+    "content-split",
+    "content-stack",
+    "content-band",
+    "content-wide",
+    "content-grid",
+    "content-rows",
+}
 
 
 class PageParser(HTMLParser):
@@ -206,6 +228,12 @@ class PageParser(HTMLParser):
         data = dict(attrs)
         classes = set(data.get("class", "").split())
         ancestor_classes = set().union(*(item[1] for item in self.stack), set())
+        if (
+            self.active_section is not None
+            and self.stack
+            and self.stack[-1][0] == "section"
+        ):
+            self.active_section["direct_children"].append((tag, classes))
         for name in classes:
             self.class_counts[name] += 1
         if "id" in data:
@@ -243,7 +271,14 @@ class PageParser(HTMLParser):
         if tag == "script" and data.get("src"):
             self.scripts.append(data["src"])
         if tag == "section":
-            self.active_section = {"heading": [], "text": []}
+            ancestor_tags = [item[0] for item in self.stack]
+            self.active_section = {
+                "heading": [],
+                "text": [],
+                "classes": classes,
+                "direct_children": [],
+                "direct_main_child": bool(ancestor_tags and ancestor_tags[-1] == "main"),
+            }
             self.sections.append(self.active_section)
         if tag == "h2":
             self.active_h2 = []
@@ -466,6 +501,26 @@ def validate_jekyll_sources():
             parser = parse(path)
             if parser.main_targets != 1:
                 errors.append(f"{route}: source must retain one main content target")
+            if route in CONTENT_LAYOUT_ROUTES:
+                direct_sections = [
+                    section for section in parser.sections if section["direct_main_child"]
+                ]
+                if not direct_sections:
+                    errors.append(f"{route}: content page must contain direct sections")
+                for index, section in enumerate(direct_sections, start=1):
+                    layout_classes = section["classes"] & CONTENT_LAYOUT_CLASSES
+                    if len(layout_classes) != 1:
+                        errors.append(
+                            f"{route}: section {index} must declare exactly one content layout, "
+                            f"got {sorted(layout_classes)}"
+                        )
+                    if (
+                        "content-split-reverse" in section["classes"]
+                        and "content-split" not in layout_classes
+                    ):
+                        errors.append(
+                            f"{route}: section {index} uses content-split-reverse without content-split"
+                        )
 
     homepage_source = SOURCE_ROOT / "index.html"
     if homepage_source.exists():
@@ -525,6 +580,16 @@ def validate_jekyll_sources():
         ):
             if token not in header_text:
                 errors.append(f"site header missing global navigation contract: {token}")
+        for legacy_class in (
+            "portal-header",
+            "portal-header-inner",
+            "portal-brand global-brand",
+            "portal-primary-nav",
+            "portal-stage-link",
+            "portal-directory-panel",
+        ):
+            if legacy_class in header_text:
+                errors.append(f"site header retains obsolete portal alias: {legacy_class}")
 
     style = SOURCE_ROOT / "assets/style.css"
     directory_style = SOURCE_ROOT / "assets/directory.css"
@@ -542,10 +607,13 @@ def validate_jekyll_sources():
             ".global-stage-value::after",
             "-webkit-text-fill-color:transparent",
             "background:#fff",
-            'main>section:not(.project-progress-section):nth-of-type(even)',
-            'main>section:not(.project-progress-section):has(>details)',
-            'main>section:has(>.table-wrap)',
-            'ul:has(>li:nth-child(4))',
+            ".content-split{",
+            ".content-split-reverse{",
+            ".content-stack",
+            ".content-band{",
+            ".content-wide",
+            ".content-grid{",
+            ".content-rows",
             'a:visited:not(.portal-button)',
             '@media(max-width:839px)',
             'body:not([data-page-role="portal"]) .global-directory-panel',
@@ -559,6 +627,26 @@ def validate_jekyll_sources():
             errors.append("shared styles must not use transition: all")
         if "margin-left:300px" in shared_css:
             errors.append("content pages must not reserve a meaningless fixed 300px left gap")
+        for legacy_selector in (
+            ".portal-header",
+            ".portal-header-inner",
+            ".portal-brand{",
+            ".portal-primary-nav",
+            ".portal-nav-link",
+            ".portal-stage-link",
+            ".portal-directory-panel",
+        ):
+            if legacy_selector in shared_css:
+                errors.append(f"shared styles retain obsolete portal alias: {legacy_selector}")
+        for selector in (
+            "main>section:not(.project-progress-section):nth-of-type(even)",
+            "main>section:has(",
+            "ul:has(>li:nth-child(4))",
+        ):
+            if selector in shared_css:
+                errors.append(
+                    f"content layout must be explicit instead of inferred by selector: {selector}"
+                )
 
     directory_script = SOURCE_ROOT / "assets/directory.js"
     if directory_script.exists():
@@ -644,6 +732,11 @@ def validate_jekyll_sources():
 
     if directory_script.exists():
         directory_text = directory_script.read_text()
+        for phrase in PUBLIC_META_PHRASES:
+            if phrase in directory_text:
+                errors.append(
+                    f"directory.js exposes internal production phrase {phrase!r} in visible navigation copy"
+                )
         for token in (
             "data-manual-directory-source",
             "readManualDirectory",
@@ -663,6 +756,8 @@ def validate_jekyll_sources():
                 errors.append(f"directory.js missing dynamic manual contract: {token}")
         if "item.dataset.navGroup" in directory_text or "link.dataset.navItem" in directory_text:
             errors.append("global navigation must not expose decorative title numbers")
+        if "portal-nav-link" in directory_text:
+            errors.append("global navigation must not emit the obsolete portal-nav-link alias")
 
         expected_nav_covers = {
             "background", "architecture", "foundations", "faq",
@@ -981,6 +1076,21 @@ def main():
             parser.class_counts,
         )
         errors.extend(f"{row['route']}: {error}" for error in contract_errors)
+        resource_sections = [
+            section for section in parser.sections if section["heading"] == "相关资源"
+        ]
+        if len(resource_sections) == 1:
+            resource_children = resource_sections[0]["direct_children"]
+            if (
+                len(resource_children) != 2
+                or resource_children[0][0] != "h2"
+                or resource_children[1][0] != "div"
+                or "page-links" not in resource_children[1][1]
+            ):
+                errors.append(
+                    f"{row['route']}: related resources must end with the page-links group "
+                    "and must not contain an orphan trailing paragraph"
+                )
 
     global_rows = [
         row["route"]

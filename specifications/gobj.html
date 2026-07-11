@@ -8,7 +8,7 @@ permalink: "/specifications/gobj.html"
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范</a><span aria-hidden="true">/</span><span>GOBJ</span></nav>
   <div class="hero"><h1>GOBJ</h1><p>可重定位生成式对象的组织、链接、装载与完整性边界。</p><div class="badges"><span class="badge">Object</span><span class="badge">Sections</span><span class="badge">Checked Arithmetic</span></div></div>
-  <section>
+  <section class="content-stack">
     <h2>已确认原则：对象职责</h2>
     <p class="callout"><strong>直白解释：</strong>GOBJ 类似传统工具链中的可重定位对象：它把已经检查过的语义、符号和待解析引用装进统一边界，使查看器、链接器和装载器能够在不重新猜测自然语言的前提下处理任务。</p>
     <ul>
@@ -18,12 +18,12 @@ permalink: "/specifications/gobj.html"
       <li>自然语言原文只能作为可选来源或调试信息，不能成为核心执行载荷。</li>
     </ul>
   </section>
-  <section>
+  <section class="content-split content-split-reverse">
     <h2>已确认原则：安全解析</h2>
     <p>所有对象输入均不可信。Reader、Verifier、Linker 与 Loader 必须对偏移、长度、计数、索引、对齐、重叠、递归深度和引用闭环执行 checked arithmetic 与显式限制；不能产生部分可信结果。</p>
     <p>“签名有效”只证明签名范围内字节来自相应密钥持有者且未被篡改，不证明记录边界安全、语义兼容或权限合理；结构、语义与信任验证必须分层执行，不得用任一层的通过替代其他层。</p>
   </section>
-  <section>
+  <section class="content-wide">
     <h2>设计提案：Section / Segment 双视图</h2>
     <p>对象布局拟包含 Header、Program Header Table、Section Header Table、Section Data 以及可选的签名与 Merkle 数据。Section 服务链接和对象工具，Segment 服务装载与权限映射。</p>
     <table><thead><tr><th>Section 家族提案</th><th>职责</th></tr></thead><tbody>
@@ -33,15 +33,15 @@ permalink: "/specifications/gobj.html"
       <tr><td>调试与来源</td><td>Source Map、覆盖详情、诊断与可选原文，可在发布时 strip。</td></tr>
     </tbody></table>
   </section>
-  <section>
+  <section class="content-band">
     <h2>设计提案：记录与完整性</h2>
     <p>节点和边记录需要稳定 ID、类型、标志、引用、模态、权重和来源关系。具体字段宽度、编码、对齐、版本演进、Section 名称、签名覆盖和 Merkle 层级尚须正式格式规范与样本共同确定。</p>
   </section>
-  <section>
+  <section class="content-band">
     <h2>开放问题：名称、布局与重定位</h2>
     <p>AELF 等总体格式名称、GOBJ 最终名称、ABI 字段和 <code>R_GSIR_*</code> 等重定位标识均未冻结；尚未规范化的名称只表示需要覆盖的引用类别，不能作为实现接口。参见<a href="../architecture/open-questions.html">开放问题</a>。</p>
   </section>
-  <section>
+  <section class="content-wide">
     <h2>概要设计：对象不变量与一致性测试</h2>
     <div class="table-wrap"><table><thead><tr><th>不变量</th><th>必须拒绝的反例</th><th>主要验证方式</th></tr></thead><tbody>
       <tr><td>边界与算术安全</td><td>溢出、越界、重叠、错误对齐、递归或计数放大</td><td>Malformed 语料、属性测试和覆盖引导 Fuzz</td></tr>

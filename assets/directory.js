@@ -349,7 +349,7 @@
           items: [
             { href: "tools/noemld/docs/loader-security.html", label: "装载与安全" },
             { href: "tools/noemld/docs/diagnostics.html", label: "诊断与失败边界" },
-            { href: "tools/noemld/docs/testing.html", label: "测试与放行门" }
+            { href: "tools/noemld/docs/testing.html", label: "测试与验收" }
           ]
         },
         {
@@ -372,7 +372,7 @@
       items: [
         { href: "about/background.html", label: "背景与边界", description: "为什么目标语义需要成为工程对象", cover: "background", coverLabel: "EXPRESSION ≠ IDENTITY" },
         { href: "architecture/index.html", label: "系统架构", description: "从编译、链接到可信装载的职责分层", cover: "architecture", coverLabel: "TRUST PIPELINE" },
-        { href: "about/intellectual-foundations.html", label: "思想与方法", description: "哲学启发、反例与进入规范前的证据门", cover: "foundations", coverLabel: "NOESIS / NOEMA" },
+        { href: "about/intellectual-foundations.html", label: "思想与方法", description: "区分哲学启发、工程类比与可验证结论", cover: "foundations", coverLabel: "NOESIS / NOEMA" },
         { href: "faq/index.html", label: "常见问题", description: "直接回答项目范围、状态与非目标", cover: "faq", coverLabel: "SCOPE CHECK" }
       ]
     },
@@ -417,10 +417,10 @@
       href: "development/index.html",
       label: "开发",
       kicker: "以证据推进",
-      description: "查看阶段门、验证策略、公开进展和可下载资源状态。",
+      description: "查看当前进展、验证策略、后续规划和可下载资源状态。",
       items: [
-        { href: "development/current-stage.html", label: "当前项目阶段", description: "当前设计位置、未满足证据与下一阶段", cover: "current-stage", coverLabel: "ACTIVE GATE" },
-        { href: "development/implementation-roadmap.html", label: "实施路线", description: "阶段、工具职责与放行证据", cover: "roadmap", coverLabel: "RELEASE GATES" },
+        { href: "development/current-stage.html", label: "当前项目阶段", description: "已完成工作、正在推进内容与后续规划", cover: "current-stage", coverLabel: "ACTIVE WORK" },
+        { href: "development/implementation-roadmap.html", label: "实施路线", description: "阶段安排、工具职责与完成标准", cover: "roadmap", coverLabel: "DELIVERY PATH" },
         { href: "development/testing.html", label: "测试策略", description: "确定性、Fuzz、威胁与一致性验证", cover: "testing", coverLabel: "REJECT MATRIX" },
         { href: "news/index.html", label: "新闻与进展", description: "只登记可核对的项目进展", cover: "news", coverLabel: "VERIFIED SIGNAL" },
         { href: "downloads/index.html", label: "资源状态", description: "版本、签名和发布资源的真实状态", cover: "downloads", coverLabel: "SIGNED PACKAGE" }
@@ -477,7 +477,7 @@
       item.className = "global-nav-item";
 
       const trigger = document.createElement("a");
-      trigger.className = "portal-nav-link global-nav-trigger";
+      trigger.className = "global-nav-trigger";
       trigger.href = new URL(group.href, siteRoot).href;
       trigger.innerHTML = `<span>${group.label}</span><span class="global-nav-caret" aria-hidden="true">⌄</span>`;
       trigger.setAttribute("aria-haspopup", "true");
