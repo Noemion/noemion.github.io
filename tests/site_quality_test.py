@@ -57,20 +57,20 @@ PORTAL_ROUTES = [
     "development/index.html",
     "news/index.html",
 ]
-NOEMLD_DOC_ORDER = [
-    "tools/noemld/docs/index.html",
-    "tools/noemld/docs/contract.html",
-    "tools/noemld/docs/inputs-outputs.html",
-    "tools/noemld/docs/invocation.html",
-    "tools/noemld/docs/pipeline.html",
-    "tools/noemld/docs/symbol-resolution.html",
-    "tools/noemld/docs/relocations.html",
-    "tools/noemld/docs/sso-linking.html",
-    "tools/noemld/docs/loader-security.html",
-    "tools/noemld/docs/diagnostics.html",
-    "tools/noemld/docs/testing.html",
-    "tools/noemld/docs/dependencies.html",
-    "tools/noemld/docs/reference-index.html",
+NOEMLINK_DOC_ORDER = [
+    "tools/noemlink/docs/index.html",
+    "tools/noemlink/docs/contract.html",
+    "tools/noemlink/docs/inputs-outputs.html",
+    "tools/noemlink/docs/invocation.html",
+    "tools/noemlink/docs/pipeline.html",
+    "tools/noemlink/docs/symbol-resolution.html",
+    "tools/noemlink/docs/relocations.html",
+    "tools/noemlink/docs/horizon-linking.html",
+    "tools/noemlink/docs/loader-security.html",
+    "tools/noemlink/docs/diagnostics.html",
+    "tools/noemlink/docs/testing.html",
+    "tools/noemlink/docs/dependencies.html",
+    "tools/noemlink/docs/reference-index.html",
 ]
 DOC_GUIDE_ORDER = [
     "docs/getting-started.html",
@@ -85,19 +85,19 @@ DOC_GUIDE_HEADINGS = {
         "从这里开始", "核心对象", "信任与确定性", "推荐阅读路径", "当前项目状态", "下一步",
     ],
     "docs/installation-and-usage.html": [
-        "当前可用性", "未来使用流程", "输入与产物边界", "安装与发布原则", "安全检查", "开放问题",
+        "当前可用性", "计划中的使用流程", "输入与产物边界", "安装与发布原则", "安全检查", "尚待确定的发布接口",
     ],
     "docs/architecture-guide.html": [
-        "系统分层", "对象生命周期", "编译与链接边界", "装载与运行边界", "信任边界", "开放问题",
+        "系统分层", "对象生命周期", "编译与链接边界", "装载与运行边界", "信任边界", "尚待确定的接口",
     ],
     "docs/development-guide.html": [
-        "第一阶段范围", "规范与 ADR 先行", "实现工作流", "测试与 Fuzz", "贡献与报告", "未来阶段",
+        "第一阶段范围", "规范与 ADR 先行", "实现工作流", "测试与模糊测试", "贡献与报告", "后续开发顺序",
     ],
     "docs/tools-reference.html": [
         "工具链总览", "规范与对象工具", "编译与链接", "发布与运行", "模型工程", "文档状态",
     ],
     "docs/specifications-reference.html": [
-        "如何判断权威性", "成熟度标记", "GSIR", "GOBJ", "SSO", "开放问题与 ADR",
+        "如何判断权威性", "成熟度标记", "Noema IR", "Noema Object", "Horizon Object", "开放问题与 ADR",
     ],
 }
 HOME_HEADINGS = [
@@ -108,15 +108,16 @@ HOME_HEADINGS = [
     "先理解边界再阅读对象",
     "证据优先于主张",
     "Noemion 是什么也不是什么",
-    "只有证据通过能力才进入下一阶段",
+    "从规范条款到可复现结果",
     "选择下一步",
 ]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "为什么阅读这些著作",
     "阅读与采用方法",
     "核心思想与工程问题",
+    "Noemion 名称怎样形成",
     "《逻辑哲学论》的第一批检查点",
-    "对 GSIR 的设计提案",
+    "对 Noema IR 的待验证设计",
     "核心书目与资源状态",
     "思想采用的验证要求",
 ]
@@ -129,12 +130,12 @@ ROLE_BY_KIND = {
     "topic": "docs-topic",
 }
 TOOL_PROJECT_SECTIONS = [
-    "工具简介",
+    "它解决什么问题",
     "当前状态",
-    "主要能力",
-    "输入与产物",
-    "处理边界",
-    "相关资源",
+    "它怎样工作",
+    "它读取什么，产生什么",
+    "它不会做什么",
+    "继续阅读",
 ]
 TOOL_PROJECT_STATUS_DECLARATION = (
     "当前状态：尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。"
@@ -171,24 +172,31 @@ PUBLIC_META_PHRASES = (
     "ChatGPT",
     "subagent",
 )
+LEGACY_PUBLIC_TERMS = re.compile(
+    r"\b(?:GSIR|GOBJ|SSO|NSFE|GSL|noemconform|noemobj|noemverify|noemcopy|"
+    r"noemsize|noemas|noemdis|noemfmt|noemdiff|noemc|noemlint|noemar|"
+    r"noemnm|noemld|noemstrip|noemcov|noempack|noemrun|noemtrace|"
+    r"noemdata|noemeval|noemquant)\b|Compiler Core|"
+    r"(?:compiler-core|linker-loader|nsfe|gsir|gobj|sso)\.html"
+)
 NORMATIVE_ROUTES = (
-    "specifications/gsir.html",
-    "specifications/gobj.html",
-    "specifications/sso.html",
+    "specifications/noema-ir.html",
+    "specifications/noema-object.html",
+    "specifications/horizon-object.html",
 )
 CONTENT_LAYOUT_ROUTES = (
     "about/background.html",
     "about/intellectual-foundations.html",
-    "architecture/object-lifecycle.html",
+    "architecture/noema-lifecycle.html",
     "architecture/open-questions.html",
-    "components/compiler-core.html",
-    "components/linker-loader.html",
-    "components/nsfe.html",
+    "components/noesis-core.html",
+    "components/noema-object-system.html",
+    "components/horizon-engine.html",
     "development/implementation-roadmap.html",
     "development/testing.html",
-    "specifications/gobj.html",
-    "specifications/gsir.html",
-    "specifications/sso.html",
+    "specifications/noema-object.html",
+    "specifications/noema-ir.html",
+    "specifications/horizon-object.html",
 )
 CONTENT_LAYOUT_CLASSES = {
     "content-split",
@@ -331,13 +339,13 @@ def read_route_rows():
             parent = "index.html"
             sibling_orders[parent] += 1
             order = sibling_orders[parent]
-        elif route == "tools/noemld/docs/index.html":
+        elif route == "tools/noemlink/docs/index.html":
             kind = "docs"
-            parent = "tools/noemld/index.html"
+            parent = "tools/noemlink/index.html"
             order = 0
-        elif route.startswith("tools/noemld/docs/"):
+        elif route.startswith("tools/noemlink/docs/"):
             kind = "topic"
-            parent = "tools/noemld/docs/index.html"
+            parent = "tools/noemlink/docs/index.html"
             sibling_orders[parent] += 1
             order = sibling_orders[parent]
         elif route.startswith("tools/") and route.endswith("/index.html"):
@@ -381,12 +389,12 @@ def resolved_routes(path, hrefs):
 
 def expected_manual_roles(index):
     roles = {
-        "previous": "/" + NOEMLD_DOC_ORDER[index - 1],
-        "up": "/tools/noemld/docs/index.html",
-        "index": "/tools/noemld/docs/reference-index.html",
+        "previous": "/" + NOEMLINK_DOC_ORDER[index - 1],
+        "up": "/tools/noemlink/docs/index.html",
+        "index": "/tools/noemlink/docs/reference-index.html",
     }
-    if index + 1 < len(NOEMLD_DOC_ORDER):
-        roles["next"] = "/" + NOEMLD_DOC_ORDER[index + 1]
+    if index + 1 < len(NOEMLINK_DOC_ORDER):
+        roles["next"] = "/" + NOEMLINK_DOC_ORDER[index + 1]
     return roles
 
 
@@ -508,6 +516,18 @@ def validate_jekyll_sources():
             if not front_matter_value(metadata, key):
                 errors.append(f"{route}: front matter requires {key}")
         body = text[match.end():]
+        legacy_match = LEGACY_PUBLIC_TERMS.search(body)
+        if legacy_match:
+            errors.append(f"{route}: retains obsolete public name {legacy_match.group(0)!r}")
+        if re.search(r"[\u4e00-\u9fff] +[\u4e00-\u9fff]", body):
+            errors.append(f"{route}: contains broken spacing inside Chinese prose")
+        if "****" in body:
+            errors.append(f"{route}: contains an empty emphasis marker")
+        for obsolete_phrase in ("设计提案", "未来阶段", "阶段门", "证据门", "退出证据", "放行"):
+            if obsolete_phrase in body:
+                errors.append(f"{route}: retains internal or obsolete status wording {obsolete_phrase!r}")
+        if re.search(r"供[^。；<\n]{0,40}消费", body):
+            errors.append(f"{route}: uses mechanical '供...消费' wording instead of naming the reader")
         if not is_manual_markdown:
             errors.extend(validate_public_html(route, body))
         if forbidden_shell.search(body):
@@ -858,10 +878,10 @@ def validate_jekyll_sources():
 
         expected_nav_covers = {
             "background", "architecture", "foundations", "faq",
-            "gsir", "gobj", "sso", "components",
+            "noema-ir", "noema-object", "horizon-object", "components",
             "conform", "inspect", "compile", "link",
             "getting-started", "architecture-guide", "tools-reference",
-            "spec-reference", "noemld-manual", "current-stage", "roadmap", "testing",
+            "spec-reference", "noemlink-manual", "current-stage", "roadmap", "testing",
             "news", "downloads",
         }
         nav_cover_asset = SOURCE_ROOT / "assets/nav-covers.svg"
@@ -1177,9 +1197,13 @@ def main():
         visible_text = normalize_visible_text(
             " ".join("".join(section["text"]) for section in parser.sections)
         )
-        for term in ("直白解释", "已确认原则", "设计提案", "开放问题", "必须", "不得"):
+        for term in ("直白解释", "必须", "不得"):
             if term not in visible_text:
                 errors.append(f"{route}: normative page must preserve {term}")
+        if "当前设计" not in visible_text and "待验证设计" not in visible_text:
+            errors.append(f"{route}: normative page must distinguish current or testable design")
+        if "尚待确定" not in visible_text and "开放问题" not in visible_text:
+            errors.append(f"{route}: normative page must preserve unresolved boundaries")
 
     for row in route_rows:
         if row["kind"] != "tool":
@@ -1210,7 +1234,7 @@ def main():
         )
         errors.extend(f"{row['route']}: {error}" for error in contract_errors)
         resource_sections = [
-            section for section in parser.sections if section["heading"] == "相关资源"
+            section for section in parser.sections if section["heading"] == "继续阅读"
         ]
         if len(resource_sections) == 1:
             resource_children = resource_sections[0]["direct_children"]
@@ -1285,43 +1309,43 @@ def main():
                 *("".join(section["text"]) for section in parser.sections),
             ])
         )
-        if "已确认原则" not in visible_text or not any(
-            marker in visible_text for marker in ("设计提案", "开放问题", "未来阶段")
+        if not any(marker in visible_text for marker in ("现行设计", "当前设计", "已经明确", "当前", "必须", "负责")) or not any(
+            marker in visible_text for marker in ("待验证", "尚待确定", "后续计划", "尚未")
         ):
-            errors.append(f"{route}: guide must distinguish confirmed and non-final content")
+            errors.append(f"{route}: guide must distinguish current design from unfinished work")
 
-    noemld_tool = route_registry.get("tools/noemld/index.html")
-    if noemld_tool is None or noemld_tool["kind"] != "tool":
-        errors.append("tools/noemld/index.html must be registered as kind tool")
-    noemld_docs = route_registry.get(NOEMLD_DOC_ORDER[0])
-    if noemld_docs is None or noemld_docs["kind"] != "docs":
-        errors.append("tools/noemld/docs/index.html must be registered as kind docs")
+    noemlink_tool = route_registry.get("tools/noemlink/index.html")
+    if noemlink_tool is None or noemlink_tool["kind"] != "tool":
+        errors.append("tools/noemlink/index.html must be registered as kind tool")
+    noemlink_docs = route_registry.get(NOEMLINK_DOC_ORDER[0])
+    if noemlink_docs is None or noemlink_docs["kind"] != "docs":
+        errors.append("tools/noemlink/docs/index.html must be registered as kind docs")
 
-    noemld_rows = [row for row in route_rows if row["route"] in NOEMLD_DOC_ORDER]
+    noemlink_rows = [row for row in route_rows if row["route"] in NOEMLINK_DOC_ORDER]
     if route_rows:
-        ordered_noemld = [
-            row["route"] for row in sorted(noemld_rows, key=lambda row: row["order"])
+        ordered_noemlink = [
+            row["route"] for row in sorted(noemlink_rows, key=lambda row: row["order"])
         ]
-        if ordered_noemld != NOEMLD_DOC_ORDER:
-            errors.append("README noemld routes do not match the manual order")
+        if ordered_noemlink != NOEMLINK_DOC_ORDER:
+            errors.append("README noemlink routes do not match the manual order")
 
-    for route in NOEMLD_DOC_ORDER[1:]:
+    for route in NOEMLINK_DOC_ORDER[1:]:
         row = route_registry.get(route)
         if (
             row is None
             or row["kind"] != "topic"
-            or row["parent"] != "tools/noemld/docs/index.html"
+            or row["parent"] != "tools/noemlink/docs/index.html"
         ):
-            errors.append(f"{route}: invalid noemld topic registry metadata")
+            errors.append(f"{route}: invalid noemlink topic registry metadata")
 
-    legacy_noemld_routes = [
-        (Path("tools/noemld") / Path(route).name).as_posix()
-        for route in NOEMLD_DOC_ORDER[1:]
-        if (ROOT / "tools/noemld" / Path(route).name).exists()
+    legacy_noemlink_routes = [
+        (Path("tools/noemlink") / Path(route).name).as_posix()
+        for route in NOEMLINK_DOC_ORDER[1:]
+        if (ROOT / "tools/noemlink" / Path(route).name).exists()
     ]
-    if legacy_noemld_routes:
+    if legacy_noemlink_routes:
         errors.append(
-            f"legacy noemld topic routes are forbidden: {legacy_noemld_routes}"
+            f"legacy noemlink topic routes are forbidden: {legacy_noemlink_routes}"
         )
 
     numbered_routes = [
@@ -1505,31 +1529,31 @@ def main():
             errors.append("node is required to execute directory active-item behavior tests")
         else:
             active_cases = [
-                ["tools/noemld/index.html", "https://site.test/tools/noemld", "https://site.test/tools/noemld/docs", True],
-                ["tools/noemld/index.html", "https://site.test/tools/noemld", "https://site.test/tools/noemld/docs/topic.html", True],
-                ["tools/noemld/index.html", "https://site.test/tools/noemld", "https://site.test/tools/noemld/docsfoo", False],
-                ["tools/noemld/index.html", "https://site.test/tools/noemld", "https://site.test/tools/noemld/docs-old/x", False],
-                ["tools/noemld/index.html", "https://site.test/tools/noemld", "https://site.test/tools/noemldx/docs", False],
+                ["tools/noemlink/index.html", "https://site.test/tools/noemlink", "https://site.test/tools/noemlink/docs", True],
+                ["tools/noemlink/index.html", "https://site.test/tools/noemlink", "https://site.test/tools/noemlink/docs/topic.html", True],
+                ["tools/noemlink/index.html", "https://site.test/tools/noemlink", "https://site.test/tools/noemlink/docsfoo", False],
+                ["tools/noemlink/index.html", "https://site.test/tools/noemlink", "https://site.test/tools/noemlink/docs-old/x", False],
+                ["tools/noemlink/index.html", "https://site.test/tools/noemlink", "https://site.test/tools/noemlinkx/docs", False],
                 ["docs/index.html", "https://site.test/docs", "https://site.test/docs/guide", True],
                 ["docs/index.html", "https://site.test/docs", "https://site.test/docs/getting-started.html", True],
                 ["docs/index.html", "https://site.test/docs", "https://site.test/docs-old/guide.html", False],
-                ["tools/index.html", "https://site.test/tools", "https://site.test/tools/noemobj", False],
+                ["tools/index.html", "https://site.test/tools", "https://site.test/tools/noeminspect", False],
             ]
             module_cases = [
                 ["index.html", "project"],
                 ["about/background.html", "project"],
                 ["about/intellectual-foundations.html", "project"],
-                ["architecture/object-lifecycle.html", "architecture"],
-                ["specifications/gsir.html", "architecture"],
-                ["components/nsfe.html", "architecture"],
+                ["architecture/noema-lifecycle.html", "architecture"],
+                ["specifications/noema-ir.html", "architecture"],
+                ["components/horizon-engine.html", "architecture"],
                 ["docs/getting-started.html", "docs"],
                 ["downloads/index.html", "resources"],
                 ["faq/index.html", "resources"],
                 ["development/testing.html", "development"],
                 ["news/index.html", "development"],
-                ["tools/noemobj/index.html", "tools"],
-                ["tools/noemld/index.html", "noemld"],
-                ["tools/noemld/docs/contract.html", "noemldDocs"],
+                ["tools/noeminspect/index.html", "tools"],
+                ["tools/noemlink/index.html", "noemlink"],
+                ["tools/noemlink/docs/contract.html", "noemlinkDocs"],
             ]
             behavior_script = (
                 "const api = require(process.argv[1]);"
@@ -1587,27 +1611,27 @@ def main():
                 ] != ["docs/index.html", "docs/new.html"]:
                     errors.append("dynamic manual directory does not sort new Markdown pages")
 
-    noemld_index = ROOT / NOEMLD_DOC_ORDER[0]
-    if noemld_index.exists():
-        parser = parse(noemld_index)
-        toc_routes = resolved_routes(noemld_index, parser.scoped_links["manual-index-links"])
+    noemlink_index = ROOT / NOEMLINK_DOC_ORDER[0]
+    if noemlink_index.exists():
+        parser = parse(noemlink_index)
+        toc_routes = resolved_routes(noemlink_index, parser.scoped_links["manual-index-links"])
         expected_topics = [
-            entry["route"] for entry in read_manual_source_entries("noemld")
+            entry["route"] for entry in read_manual_source_entries("noemlink")
             if not entry["is_index"]
         ]
         if toc_routes != expected_topics:
-            errors.append("noemld index manual TOC does not match Markdown topic order")
+            errors.append("noemlink index manual TOC does not match Markdown topic order")
 
-    for index, route in enumerate(NOEMLD_DOC_ORDER[1:], start=1):
+    for index, route in enumerate(NOEMLINK_DOC_ORDER[1:], start=1):
         path = ROOT / route
         if not path.exists():
-            errors.append(f"missing noemld topic page {route}")
+            errors.append(f"missing noemlink topic page {route}")
             continue
         if NUMBERED_NAME.search(route):
             errors.append(f"{route}: numbered topic filename is forbidden")
         parser = parse(path)
-        if parser.tool_id != "noemld":
-            errors.append(f"{route}: tool manual must inherit data-tool-id='noemld'")
+        if parser.tool_id != "noemlink":
+            errors.append(f"{route}: tool manual must inherit data-tool-id='noemlink'")
         for class_name in ("breadcrumbs", "manual-nav-top", "manual-nav-bottom"):
             if parser.class_counts[class_name] != 1:
                 errors.append(f"{route}: expected one {class_name}")
@@ -1643,7 +1667,7 @@ def main():
         return 1
     print(
         f"PASS: {len(HTML_FILES)} registered pages, "
-        f"{len(global_rows)} global landings, and project portal/noemld docs contract"
+        f"{len(global_rows)} global landings, and project portal/noemlink docs contract"
     )
     return 0
 

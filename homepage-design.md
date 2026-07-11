@@ -21,18 +21,18 @@
 
 首页承担全站唯一的完整“叙事型门户”，但不再是唯一采用该设计语言的页面。全站共享顶部导航、连续画布、编辑式排版和交互语言；列表、文章、工具和文档页面分别采用适合其职责的页面范式，详细映射统一维护在 README。首页不承担规范定义，也不把候选方案、未来能力或研究愿景写成已完成成果。
 
-首页首屏必须先用普通语言回答现实问题，再出现 GSIR、GOBJ、SSO、Strict 和 Lowering 等术语。所有能力描述继续标注成熟度；当前仍明确处于“设计与安全核心阶段”，没有可安装编译器、Runtime 或正式规范版本。
+首页首屏必须先用普通语言回答现实问题，再出现 NIR、NOBJ、HOBJ、Deterministic 和 实现化 等术语。所有能力描述继续标注成熟度；当前仍明确处于“设计与安全核心阶段”，没有可安装编译器、Fulfillment Runtime 或正式规范版本。
 
 ## 3. 页面结构映射
 
 | 结构角色 | Noemion 首页映射 | 主要内容与目标 |
 | --- | --- | --- |
 | 顶部品牌与主导航 | Noemion 顶部导航 | 品牌；项目、架构、规范、工具、文档入口；移动端折叠菜单 |
-| 人物式左右首屏 | “从人类意图到机器表征对象”首屏 | 左侧主张和状态，右侧为 GSIR/GOBJ 对象生命周期抽象图形；不使用人物图 |
+| 人物式左右首屏 | “从人类意图到机器表征对象”首屏 | 左侧主张和状态，右侧为 NIR/NOBJ 对象生命周期抽象图形；不使用人物图 |
 | 双栏核心论点 | “意义还没有成为工程对象” | 左侧强结论，右侧解释目标、约束、依赖与复现四个现实缺口 |
 | 居中栏目标题 | “把一次性上下文变成可验证对象” | 用一句话承接问题与工具链方案 |
-| 四条精选内容行 | 四条核心阅读路径 | 背景与边界、对象生命周期、GSIR/GOBJ、Strict Compiler Core；每行包含图形、标题、摘要和圆形箭头 |
-| 三列最新内容网格 | “当前设计焦点” | GSIR 语义、GOBJ/SSO 对象工程、安全二进制核心；状态必须写成设计提案、开放问题或阶段目标 |
+| 四条精选内容行 | 四条核心阅读路径 | 背景与边界、对象生命周期、NIR/NOBJ、Deterministic Noesis Core；每行包含图形、标题、摘要和圆形箭头 |
+| 三列最新内容网格 | “当前设计焦点” | NIR 语义、NOBJ/HOBJ 对象工程、安全二进制核心；状态必须写成设计提案、开放问题或阶段目标 |
 | 第二个大标题与课程行 | “从理解行为到可信装载” | 人类需求、确定性编译、对象链接、受约束运行的连续阅读路径 |
 | 邮件订阅区 | “从哪里开始阅读”主行动区 | 主按钮进入入门指南，次入口查看架构与规范；不虚构订阅规模或社区数据 |
 | 推荐语区 | “证据优先于主张” | 用简短原则说明规范、ADR、可复现测试和安全验证是放行依据，不使用虚构背书 |
@@ -49,9 +49,9 @@
 | 01 首屏 | **从人类意图，到机器表征对象。** | 把一次性的提示词上下文，编译为可分析、验证、重定位、链接和安全装载的目标与约束。状态标签固定为“设计与安全核心阶段”。 | `docs/getting-started.html`：从这里理解 Noemion |
 | 02 核心缺口 | **意义还没有成为工程对象。** | 提示词擅长表达，但目标、硬约束、证据、权限和验收条件仍埋在文本中；模型每次临时解释，独立工具无法可靠检查。右栏用四段分别解释目标与措辞、约束、依赖、复现治理。 | `about/background.html`：为什么需要对象工具链 |
 | 03 方案过渡 | **把一次性上下文，变成可验证对象。** | 不替代 Prompt，也不让模型决定对象布局；把需要长期保存和严格处理的语义交给确定性工具链。 | 无按钮，承担上下文转场 |
-| 04 核心路径 | **四条路径理解系统。** | 背景与边界；对象生命周期；GSIR/GOBJ；Strict Compiler Core。每条摘要只回答一个问题，避免复制目标页正文。 | `about/background.html`、`architecture/object-lifecycle.html`、`specifications/`、`components/compiler-core.html` |
-| 05 当前焦点 | **当前设计焦点。** | 三列分别标记“设计提案：GSIR 目标语义”“设计提案：GOBJ/SSO 对象工程”“第一阶段：安全二进制核心”。禁止使用“已实现”“已发布”等完成态措辞。 | `specifications/gsir.html`、`specifications/gobj.html`、`development/implementation-roadmap.html` |
-| 06 生命周期 | **从理解行为，到可信装载。** | 自然语言与资料 → 确定性编译 → GSIR/GOBJ → Linker/Loader → 受约束 Runtime。说明模型只能提出不可信候选，不能直接生成 GOBJ。 | `architecture/object-lifecycle.html` |
+| 04 核心路径 | **四条路径理解系统。** | 背景与边界；对象生命周期；NIR/NOBJ；Deterministic Noesis Core。每条摘要只回答一个问题，避免复制目标页正文。 | `about/background.html`、`architecture/noema-lifecycle.html`、`specifications/`、`components/noesis-core.html` |
+| 05 当前焦点 | **当前设计焦点。** | 三列分别标记“设计提案：NIR 目标语义”“设计提案：NOBJ/HOBJ 对象工程”“第一阶段：安全二进制核心”。禁止使用“已实现”“已发布”等完成态措辞。 | `specifications/noema-ir.html`、`specifications/noema-object.html`、`development/implementation-roadmap.html` |
+| 06 生命周期 | **从理解行为，到可信装载。** | 自然语言与资料 → 确定性编译 → NIR/NOBJ → Linker/Loader → 受约束 Fulfillment Runtime。说明模型只能提出不可信候选，不能直接生成 NOBJ。 | `architecture/noema-lifecycle.html` |
 | 07 开始阅读 | **先理解边界，再阅读对象。** | 主行动进入入门指南；次行动进入规范成熟度登记。当前没有下载按钮、安装命令或版本承诺。 | `docs/getting-started.html`、`specifications/index.html` |
 | 08 证据原则 | **证据优先于主张。** | 规范条款必须可测试，格式和语义决定必须记录 ADR，安全主张必须对应拒绝路径、Malformed/Fuzz 与一致性证据。 | `development/testing.html` |
 | 09 名称与思想 | **Noemion 是什么，也不是什么。** | Noemion 从 Noema 衍生；Noesis/Noema 只提供理解与对象的工程类比。思想资源产生问题和反例，不能直接产生规范条款。 | `about/intellectual-foundations.html` |
@@ -64,7 +64,7 @@
 
 1. 品牌 `Noemion` 返回首页。
 2. `为什么` 指向 `about/background.html`。
-3. `如何工作` 指向 `architecture/object-lifecycle.html`。
+3. `如何工作` 指向 `architecture/noema-lifecycle.html`。
 4. `规范` 指向 `specifications/index.html`。
 5. `工具` 指向 `tools/index.html`。
 6. `文档` 指向 `docs/index.html`。
@@ -78,9 +78,9 @@
 | --- | --- | --- | --- |
 | 首屏主图 | 右侧纵向“语义频谱”中悬浮一组可链接对象切片；左侧 `SOURCE / BIND / RELOC / VERIFY` 数据轨道将不同状态的数据包推向确定性核心，随后收敛到带符号和重定位标记的对象 | 表达过程与对象分离、底层数据状态逐步检查、歧义被保留、确定性核心决定布局 | 人脑、机器人、魔法粒子、虚构产品界面、人物肖像或伪装成真实遥测的数据面板 |
 | 背景与边界缩略图 | 多段文字指向同一目标身份，但硬约束独立成层 | 措辞不等于语义身份 | 把 Prompt 描述成无价值或应被取代 |
-| 生命周期缩略图 | Source、Compiler Core、Object、Linker/Loader、Runtime 五段路径 | 确定性边界和不可信输入边界 | 模型直接连接 GOBJ 输出 |
-| GSIR/GOBJ 缩略图 | 左侧目标/约束图，右侧 Section/符号/重定位对象表 | 语义层与对象格式分工 | 冻结尚未决定的字段编号或 ABI |
-| Strict 缩略图 | 相同输入两次生成相同摘要，模型路径被隔离在候选区 | 无模型、确定、可复现 | 宣称已有性能、兼容性或安全认证结果 |
+| 生命周期缩略图 | Source、Noesis Core、Object、Linker/Loader、Fulfillment Runtime 五段路径 | 确定性边界和不可信输入边界 | 模型直接连接 NOBJ 输出 |
+| NIR/NOBJ 缩略图 | 左侧目标/约束图，右侧 Section/符号/重定位对象表 | 语义层与对象格式分工 | 冻结尚未决定的字段编号或 ABI |
+| Deterministic 缩略图 | 相同输入两次生成相同摘要，模型路径被隔离在候选区 | 无模型、确定、可复现 | 宣称已有性能、兼容性或安全认证结果 |
 
 图形优先使用自有 SVG，并沿用现有 `glass-mint-underlay.svg`、如意云纹和 favicon 的几何语言；可以重新组合视觉语汇，但不直接把现有装饰资产当作技术证明。
 
@@ -108,7 +108,7 @@
 - 以现有墨绿、纸白和薄荷色为基础，加入 Noemion 的“语义频谱”：薄荷、青蓝、琥珀和朱橙只用于首屏图形、关键短语和分区细线。
 - 卡片和入口行保持近方形或小圆角，不使用大面积胶囊卡片；圆形箭头是少量明确的行动符号。
 - 深度表面优先使用透明多层阴影，内容分区仍使用细分隔线。图片或渲染图在浅色模式使用 `rgba(0, 0, 0, 0.1)` 内描边，深色模式使用 `rgba(255, 255, 255, 0.1)`。
-- 图形资产必须服务于 GSIR、GOBJ、符号、重定位、链接或可信装载等真实概念，禁止仅为装饰堆叠无意义科技纹理。
+- 图形资产必须服务于 NIR、NOBJ、符号、重定位、链接或可信装载等真实概念，禁止仅为装饰堆叠无意义科技纹理。
 
 ## 5. 动效契约
 

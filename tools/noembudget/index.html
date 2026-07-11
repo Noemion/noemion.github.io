@@ -1,0 +1,26 @@
+---
+layout: default
+title: "noembudget · 对象体积与预算分析 · Noemion"
+page_role: "tool-project"
+footer_text: "Noemion · noembudget project"
+permalink: "/tools/noembudget/index.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noembudget</span></nav>
+  <div class="hero"><h1>noembudget · 对象体积与预算分析</h1><p>按 Section、运行/调试、模型、产物、依赖和披露层统计磁盘体积与装载预算。</p><div class="badges"><span class="badge">Phase 4 / Phase 5</span><span class="badge">Object Tools</span><span class="badge">Section/运行预算报告</span><span class="badge">Design Stage</span></div></div>
+  <div class="tool-project-body">
+  <section><h2>它解决什么问题</h2><p><code>noembudget</code> 按 Section、运行/调试、模型、产物、依赖和披露层统计磁盘体积与装载预算。</p><p>磁盘字节、映射内存、解压峰值、依赖闭包和运行披露预算是不同口径。混用口径会让“体积优化”掩盖运行成本或安全必需内容，因此该工具必须明确计量模型。</p>
+</section>
+  <section>
+<h2>当前状态</h2>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发顺序：</strong>先完成对象布局、Segment 映射、披露图和包格式；随后用合成对象与真实纵向切片校准每种计量口径，并与装载器和 Fulfillment Runtime 实测结果比较估算误差。</p>
+</section>
+  <section><h2>它怎样工作</h2><div class="flow"><div class="step">选择计量口径</div><div class="step">解析对象与闭包</div><div class="step">归属字节和预算</div><div class="step">比较基线</div><div class="step">报告主要贡献者</div></div><ul><li>统计文件、Section、Segment、归档成员和包组件尺寸</li><li>区分运行闭包、调试信息、精确产物和模型资产</li><li>估算装载峰值、映射内存与披露预算</li><li>比较链接、strip、量化和打包前后变化</li></ul></section>
+  <section><h2>它读取什么，产生什么</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>产物</td><td>NOBJ、archive、HOBJ 或 noempkg</td></tr><tr><td>输入</td><td>Accounting 配置</td><td>disk/load/runtime/debug/model/disclosure 口径</td></tr><tr><td>输入</td><td>Baseline</td><td>可选的历史报告或预算文件</td></tr><tr><td>输出</td><td>Size Table</td><td>组件字节、占比、对齐浪费与归属</td></tr><tr><td>输出</td><td>Budget Verdict</td><td>预算通过、超限和主要贡献者</td></tr><tr><td>输出</td><td>Delta Report</td><td>相对 baseline 的新增、减少与迁移</td></tr></tbody></table></div></section>
+  <section><h2>它不会做什么</h2><ul><li>不以估算替代真实运行基准</li><li>不删除大型 Section</li><li>不把压缩后磁盘尺寸当作解压峰值</li><li>不读取或展示敏感产物内容</li></ul><p>所有对象输入均视为不可信；偏移、长度、计数、索引和对齐计算必须使用 checked arithmetic。报告必须标记共享依赖的归属策略、压缩假设、对齐开销和未能解析的组件，避免产生虚假精度。</p>
+</section>
+  </div>
+  <section><h2>继续阅读</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 NOBJ、NIR 与 HOBJ 的权威状态。</span></a><a class="page-link" href="../../components/noesis-core.html"><strong>Noesis Core</strong><span>查看确定性对象处理与安全边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div>
+</section>
+</main>

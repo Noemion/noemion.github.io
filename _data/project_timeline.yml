@@ -20,7 +20,7 @@ overview:
   roadmap_href: /development/implementation-roadmap.html
 
 current:
-  summary: 项目范围、非目标与信任原则的设计已经完成并公开。当前正在收敛 GSIR、GOBJ 与 SSO 的最小规范，以及安全 Reader/Writer 和验证器的实现契约；下一项工作是安全二进制核心的实现与验证。
+  summary: 项目范围、非目标和信任原则已经形成公开说明。当前工作是收敛 Noema IR、Noema Object 与 Horizon Object 的最小规范，并定义安全读取器、对象写入器和验证器的接口；随后才开始实现安全对象核心。
   facts:
     - label: 已完成
       value: 项目范围与信任原则设计
@@ -34,12 +34,12 @@ items:
     state: confirmed
     label: 已完成
     title: 项目定位与信任原则设计
-    description: 已完成项目定位、非目标、Strict 无模型边界、模型输出不可信、对象输入不可信和歧义保留原则的公开设计。
+    description: 已完成项目定位、非目标、Deterministic 无模型边界、模型输出不可信、对象输入不可信和歧义保留原则的公开设计。
   - id: object-and-toolchain-boundaries
     state: confirmed
     label: 已完成
     title: 核心对象与工具链职责划分
-    description: 已完成 GSIR、GOBJ、SSO、Compiler Core、Linker/Loader 与 Runtime 的职责边界和公开架构入口设计。
+    description: 已完成 Noema IR、Noema Object、Horizon Object、Noesis Core、Noema Object System 与 Fulfillment Runtime 的职责划分和公开架构说明。
   - id: specification-binary-core-design
     state: current
     label: 正在进行
@@ -53,10 +53,10 @@ items:
   - id: strict-compile-and-link
     state: future
     label: 后续规划
-    title: 文本 IR、Strict 编译与链接
-    description: 规划规范化文本往返、确定性 Compiler Core、符号解析、重定位、归档、依赖闭包和链接一致性工作。
+    title: 文本 IR、Deterministic 编译与链接
+    description: 规划规范化文本往返、确定性 Noesis Core、符号解析、重定位、归档、依赖闭包和链接一致性工作。
   - id: trusted-load-and-assisted
     state: future
     label: 后续规划
     title: 可信装载、发布与模型辅助
-    description: 规划签名装载、最小 Runtime、SSO 发布，以及只提交不可信候选的 Assisted 前端能力。
+    description: 规划签名装载、最小 Fulfillment Runtime、Horizon Object 发布，以及只提交不可信候选的模型辅助输入。

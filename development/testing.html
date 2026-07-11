@@ -1,15 +1,15 @@
 ---
 layout: default
-title: "测试、Fuzz 与验证 · Noemion"
+title: "测试、模糊测试与验证 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 测试策略"
 permalink: "/development/testing.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发</a><span aria-hidden="true">/</span><span>测试策略</span></nav>
-  <div class="hero"><h1>测试、Fuzz 与验证</h1><p>覆盖对象安全、确定性编译、语义保真、链接、披露、信任与模型候选的测试矩阵。</p><div class="badges"><span class="badge">Malformed</span><span class="badge">Round-trip</span><span class="badge">Fuzz</span></div></div>
+  <div class="hero"><h1>测试、模糊测试与验证</h1><p>覆盖对象安全、确定性编译、语义保真、链接、披露、信任与模型候选的测试矩阵。</p><div class="badges"><span class="badge">畸形样例</span><span class="badge">往返转换</span><span class="badge">模糊测试</span></div></div>
   <section class="content-rows">
-    <h2>已确认原则：安全与拒绝路径</h2>
+    <h2>安全与拒绝路径</h2>
     <p class="callout"><strong>读懂测试结论：</strong>“合法样例通过”只证明一条成功路径；安全核心还必须证明畸形、冲突、越权、超限和不完整输入能够稳定、快速且无部分产物地失败。</p>
     <ul>
       <li>对象解析测试覆盖非法偏移、长度、计数、索引、对齐、重叠、整数溢出、循环引用、超深图和恶意大计数。</li>
@@ -19,47 +19,47 @@ permalink: "/development/testing.html"
     </ul>
   </section>
   <section class="content-rows">
-    <h2>已确认原则：编译与复现</h2>
+    <h2>编译与复现</h2>
     <ul>
-      <li>Golden、规范化文本 Round-trip、类型错误、约束冲突和覆盖缺口。</li>
+      <li>基准样例、规范化文本往返转换、类型错误、约束冲突和覆盖缺口。</li>
       <li>相同输入、工具版本和规范化构建环境的字节级复现。</li>
       <li>不同工作目录、归档顺序和固定构建纪元不能污染结果。</li>
       <li>对象差异工具必须区分布局、调试、信任元数据和运行语义变化。</li>
     </ul>
   </section>
   <section class="content-rows">
-    <h2>设计提案：语义与覆盖测试</h2>
+    <h2>当前设计：语义与覆盖测试</h2>
     <ul>
-      <li>Source-to-GSIR 蕴含检查、反编译摘要和 Semantic Mutation Testing。</li>
-      <li>逐 Source Unit 验证目标、硬约束、条件、例外、路由、依赖和歧义得到保留。</li>
+      <li>Source-to-NIR 蕴含检查、反编译摘要和 Semantic Mutation Testing。</li>
+      <li>逐来源单元验证目标、硬约束、条件、例外、路由、依赖和歧义得到保留。</li>
       <li>无法理解、冲突和未分类输入阻断发布；模型置信度不能替代覆盖证据。</li>
       <li>披露测试同时验证必需内容完整和无关节点最小化。</li>
     </ul>
   </section>
   <section class="content-rows">
-    <h2>设计提案：链接、SSO 与 Runtime</h2>
+    <h2>当前设计：链接、HOBJ 与 Fulfillment Runtime</h2>
     <ul>
       <li>强/弱符号、ID 重映射、约束可满足性、权限交集和语义冲突矩阵。</li>
-      <li>主 SSO 与强依赖闭包完整；弱依赖缺失行为明确。</li>
-      <li>strip 前后语义图、硬约束、依赖、Artifact Contract 和运行语义哈希一致。</li>
+      <li>主 HOBJ 与强依赖闭包完整；弱依赖缺失行为明确。</li>
+      <li>strip 前后语义图、硬约束、依赖、验收契约和运行语义哈希一致。</li>
       <li>预算不足、披露越权、会话重放和状态漂移必须安全拒绝或重新同步。</li>
     </ul>
   </section>
   <section class="content-band">
-    <h2>已确认原则：Fuzz 从第一天开始</h2>
-    <p>Fuzz 至少覆盖 GOBJ/SSO Reader、文本与 GSL Parser、重定位、Coverage Ledger、Disclosure Graph、依赖闭包、Strip 和 Merkle Validator，并限制资源占用、递归深度和压缩扩张。</p>
+    <h2>模糊测试从第一天开始</h2>
+    <p>模糊测试至少覆盖 NOBJ/HOBJ 读取器、文本与 NSL Parser、重定位、证据账本、披露图、依赖闭包、Strip 和 Merkle Validator，并限制资源占用、递归深度和压缩扩张。</p>
   </section>
   <section class="content-band">
-    <h2>未来阶段：模型与跨平台矩阵</h2>
-    <p>NSFE 阶段增加来源隔离、困难负例、歧义、OOD、跨块关系、错误确定率、校准和量化退化；稳定阶段增加平台矩阵、性能预算和双构建复现。具体阈值须由基线与 ADR 决定。</p>
+    <h2>后续计划：模型与跨平台矩阵</h2>
+    <p>Horizon Engine 阶段增加来源隔离、困难负例、歧义、OOD、跨块关系、错误确定率、校准和量化退化；稳定阶段增加平台矩阵、性能预算和双构建复现。具体阈值须由基线与 ADR 决定。</p>
   </section>
   <section class="content-wide">
     <h2>证据等级与研究复现</h2>
     <div class="table-wrap"><table><thead><tr><th>等级</th><th>适用结论</th><th>最低材料</th></tr></thead><tbody>
       <tr><td>示例</td><td>说明接口或候选语义</td><td>明确输入、预期输出和非规范声明</td></tr>
       <tr><td>回归</td><td>证明已知行为未被破坏</td><td>固定语料、版本、断言和失败诊断</td></tr>
-      <tr><td>性质与安全</td><td>支持不变量和拒绝路径</td><td>属性测试、Fuzz、资源限制、畸形与对抗案例</td></tr>
-      <tr><td>互操作</td><td>支持 Profile 或标准化主张</td><td>至少两个独立实现或独立验证器、共享向量和差异报告</td></tr>
+      <tr><td>性质与安全</td><td>支持不变量和拒绝路径</td><td>属性测试、模糊测试、资源限制、畸形与对抗案例</td></tr>
+      <tr><td>互操作</td><td>支持配置或标准化主张</td><td>至少两个独立实现或独立验证器、共享向量和差异报告</td></tr>
       <tr><td>研究实验</td><td>支持论文或模型效果结论</td><td>假设、基线、数据许可、切分、消融、统计不确定性和失败分析</td></tr>
     </tbody></table></div>
     <p>任何公开结果都应记录规范与工具版本、构建环境、随机性控制、硬件、原始数据摘要和复现实验步骤。内部通过但材料不可复现的结果不能升级为标准化或科学结论。</p>

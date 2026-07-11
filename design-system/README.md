@@ -2,6 +2,8 @@
 
 本目录是修改站点页面、共享布局、目录和交互动效时的设计路由入口。开始改动前，先根据目标文件或 `page_role` 读取下表指定文档；涉及多个角色时读取所有对应文档。
 
+修改任何公开文案、组件名称、对象术语、工具名称、文件名或路由时，还必须读取 [`language-and-naming.md`](language-and-naming.md)；核心命名决定见 [`adr-0001-noemion-nomenclature.md`](adr-0001-noemion-nomenclature.md)。
+
 全局原则、品牌语言、断点和验收基线见 [`../sitewide-design-system.md`](../sitewide-design-system.md)。本目录文档负责把这些原则落实到具体页面类型，不能改变 Noemion 的成熟度、权威性或证据边界。
 
 ## 路由表
@@ -18,7 +20,7 @@
 | 卡片、按钮、表格、Callout、流程、动效 | 修改共享视觉组件或状态反馈 | [`components-motion.md`](components-motion.md) |
 | 图片、照片、生成式视觉、裁切与图片动效 | 新增或替换 `assets/images/`，或修改页面中的 `<img>` / 图片背景 | [`images.md`](images.md)，并继续读取所属页面角色文档 |
 
-工具页按路径中的 `<tool>` 路由。例如修改 `tools/noemobj/index.html` 时，先读 `tool-project.md`，再读 `internal-tools.md#noemobj`；修改 `tools/noemld/docs/*.md` 时读 `manual.md`，并继承 `internal-tools.md#noemld` 的工具视觉签名。
+工具页按路径中的 `<tool>` 路由。例如修改 `tools/noeminspect/index.html` 时，先读 `tool-project.md`，再读 `internal-tools.md#noeminspect`；修改 `tools/noemlink/docs/*.md` 时读 `manual.md`，并继承 `internal-tools.md#noemlink` 的工具视觉签名。
 
 ## 冲突处理
 

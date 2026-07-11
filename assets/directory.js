@@ -15,8 +15,8 @@
   };
 
   const resolveDirectoryModule = (route) => {
-    if (route.startsWith("tools/noemld/docs/")) return "noemldDocs";
-    if (route.startsWith("tools/noemld/")) return "noemld";
+    if (route.startsWith("tools/noemlink/docs/")) return "noemlinkDocs";
+    if (route.startsWith("tools/noemlink/")) return "noemlink";
     if (route.startsWith("tools/")) return "tools";
     if (route.startsWith("docs/")) return "docs";
     if (/^(architecture|specifications|components)\//.test(route)) return "architecture";
@@ -122,7 +122,7 @@
           label: "系统架构",
           items: [
             { href: "architecture/index.html", label: "架构总览" },
-            { href: "architecture/object-lifecycle.html", label: "对象生命周期" },
+            { href: "architecture/noema-lifecycle.html", label: "Noema 生命周期" },
             { href: "architecture/open-questions.html", label: "开放问题" }
           ]
         },
@@ -130,18 +130,18 @@
           label: "对象规范",
           items: [
             { href: "specifications/index.html", label: "规范登记" },
-            { href: "specifications/gsir.html", label: "GSIR" },
-            { href: "specifications/gobj.html", label: "GOBJ" },
-            { href: "specifications/sso.html", label: "SSO" }
+            { href: "specifications/noema-ir.html", label: "Noema IR" },
+            { href: "specifications/noema-object.html", label: "Noema Object" },
+            { href: "specifications/horizon-object.html", label: "Horizon Object" }
           ]
         },
         {
           label: "系统组件",
           items: [
             { href: "components/index.html", label: "组件总览" },
-            { href: "components/compiler-core.html", label: "Compiler Core" },
-            { href: "components/linker-loader.html", label: "Linker、Loader 与 Runtime" },
-            { href: "components/nsfe.html", label: "NSFE" }
+            { href: "components/noesis-core.html", label: "Noesis Core" },
+            { href: "components/noema-object-system.html", label: "Noema Object System" },
+            { href: "components/horizon-engine.html", label: "Horizon Engine" }
           ]
         }
       ]
@@ -237,126 +237,126 @@
         {
           label: "合规套件",
           items: [
-            { href: "tools/noemconform/index.html", label: "noemconform · 合规套件" }
+            { href: "tools/noemcertify/index.html", label: "noemcertify · 合规套件" }
           ]
         },
         {
           label: "对象工具",
           items: [
-            { href: "tools/noemobj/index.html", label: "noemobj · 对象查看" },
-            { href: "tools/noemverify/index.html", label: "noemverify · 对象验证" },
-            { href: "tools/noemcopy/index.html", label: "noemcopy · 对象变换" },
-            { href: "tools/noemsize/index.html", label: "noemsize · 尺寸分析" }
+            { href: "tools/noeminspect/index.html", label: "noeminspect · 对象查看" },
+            { href: "tools/noemvalidate/index.html", label: "noemvalidate · 对象验证" },
+            { href: "tools/noemtransform/index.html", label: "noemtransform · 对象变换" },
+            { href: "tools/noembudget/index.html", label: "noembudget · 尺寸分析" }
           ]
         },
         {
           label: "文本 IR",
           items: [
-            { href: "tools/noemas/index.html", label: "noemas · IR 汇编" },
-            { href: "tools/noemdis/index.html", label: "noemdis · IR 反汇编" },
-            { href: "tools/noemfmt/index.html", label: "noemfmt · 文本规范化" },
-            { href: "tools/noemdiff/index.html", label: "noemdiff · 语义差异" }
+            { href: "tools/noemassemble/index.html", label: "noemassemble · IR 汇编" },
+            { href: "tools/noemdecode/index.html", label: "noemdecode · IR 反汇编" },
+            { href: "tools/noemformat/index.html", label: "noemformat · 文本规范化" },
+            { href: "tools/noemcompare/index.html", label: "noemcompare · 语义差异" }
           ]
         },
         {
           label: "编译与链接",
           items: [
-            { href: "tools/noemc/index.html", label: "noemc · 编译器" },
-            { href: "tools/noemlint/index.html", label: "noemlint · 语义检查" },
-            { href: "tools/noemar/index.html", label: "noemar · 对象归档" },
-            { href: "tools/noemnm/index.html", label: "noemnm · 符号检查" },
-            { href: "tools/noemld/index.html", label: "noemld · 链接器" }
+            { href: "tools/noemcompile/index.html", label: "noemcompile · 编译器" },
+            { href: "tools/noemanalyze/index.html", label: "noemanalyze · 语义检查" },
+            { href: "tools/noemarchive/index.html", label: "noemarchive · 对象归档" },
+            { href: "tools/noemsymbols/index.html", label: "noemsymbols · 符号检查" },
+            { href: "tools/noemlink/index.html", label: "noemlink · 链接器" }
           ]
         },
         {
           label: "发布与运行",
           items: [
-            { href: "tools/noemstrip/index.html", label: "noemstrip · 调试剥离" },
-            { href: "tools/noemcov/index.html", label: "noemcov · 覆盖审计" },
-            { href: "tools/noempack/index.html", label: "noempack · 发布打包" },
-            { href: "tools/noemrun/index.html", label: "noemrun · 可信执行" },
-            { href: "tools/noemtrace/index.html", label: "noemtrace · 运行追踪" }
+            { href: "tools/noemreduce/index.html", label: "noemreduce · 调试剥离" },
+            { href: "tools/noemcoverage/index.html", label: "noemcoverage · 覆盖审计" },
+            { href: "tools/noembundle/index.html", label: "noembundle · 发布打包" },
+            { href: "tools/noemexecute/index.html", label: "noemexecute · 可信执行" },
+            { href: "tools/noemobserve/index.html", label: "noemobserve · 运行追踪" }
           ]
         },
         {
           label: "模型工程",
           items: [
-            { href: "tools/noemdata/index.html", label: "noemdata · 数据工程" },
+            { href: "tools/noemdataset/index.html", label: "noemdataset · 数据工程" },
             { href: "tools/noemtrain/index.html", label: "noemtrain · 训练编排" },
-            { href: "tools/noemeval/index.html", label: "noemeval · 模型评估" },
-            { href: "tools/noemquant/index.html", label: "noemquant · 量化部署" }
+            { href: "tools/noemevaluate/index.html", label: "noemevaluate · 模型评估" },
+            { href: "tools/noemquantize/index.html", label: "noemquantize · 量化部署" }
           ]
         }
       ]
     },
-    noemld: {
+    noemlink: {
       kicker: "Tool Project",
-      title: "noemld",
-      root: { href: "tools/noemld/index.html", label: "noemld 项目页" },
+      title: "noemlink",
+      root: { href: "tools/noemlink/index.html", label: "noemlink 项目页" },
       parent: { href: "tools/index.html", label: "返回工具目录" },
       groups: [
         {
           label: "项目入口",
           items: [
-            { href: "tools/noemld/index.html", label: "noemld 项目页" },
-            { href: "tools/noemld/docs/index.html", label: "noemld 文档" }
+            { href: "tools/noemlink/index.html", label: "noemlink 项目页" },
+            { href: "tools/noemlink/docs/index.html", label: "noemlink 文档" }
           ]
         },
         {
           label: "关键文档",
           items: [
-            { href: "tools/noemld/docs/contract.html", label: "工具契约" },
-            { href: "tools/noemld/docs/inputs-outputs.html", label: "输入与输出" },
-            { href: "tools/noemld/docs/pipeline.html", label: "处理流程" },
-            { href: "tools/noemld/docs/loader-security.html", label: "装载与安全" }
+            { href: "tools/noemlink/docs/contract.html", label: "工具契约" },
+            { href: "tools/noemlink/docs/inputs-outputs.html", label: "输入与输出" },
+            { href: "tools/noemlink/docs/pipeline.html", label: "处理流程" },
+            { href: "tools/noemlink/docs/loader-security.html", label: "装载与安全" }
           ]
         },
         {
           label: "相关入口",
           items: [
             { href: "specifications/index.html", label: "对象规范" },
-            { href: "components/linker-loader.html", label: "Linker、Loader 与 Runtime" }
+            { href: "components/noema-object-system.html", label: "Noema Object System" }
           ]
         }
       ]
     },
-    noemldDocs: {
+    noemlinkDocs: {
       kicker: "Tool Documentation",
-      title: "noemld 文档",
-      root: { href: "tools/noemld/docs/index.html", label: "文档首页" },
-      parent: { href: "tools/noemld/index.html", label: "返回 noemld 项目页" },
+      title: "noemlink 文档",
+      root: { href: "tools/noemlink/docs/index.html", label: "文档首页" },
+      parent: { href: "tools/noemlink/index.html", label: "返回 noemlink 项目页" },
       groups: [
         {
           label: "开始",
           items: [
-            { href: "tools/noemld/docs/index.html", label: "文档首页" },
-            { href: "tools/noemld/docs/contract.html", label: "工具契约" },
-            { href: "tools/noemld/docs/inputs-outputs.html", label: "输入与输出" },
-            { href: "tools/noemld/docs/invocation.html", label: "命令行调用" }
+            { href: "tools/noemlink/docs/index.html", label: "文档首页" },
+            { href: "tools/noemlink/docs/contract.html", label: "工具契约" },
+            { href: "tools/noemlink/docs/inputs-outputs.html", label: "输入与输出" },
+            { href: "tools/noemlink/docs/invocation.html", label: "命令行调用" }
           ]
         },
         {
           label: "链接流程",
           items: [
-            { href: "tools/noemld/docs/pipeline.html", label: "处理流程" },
-            { href: "tools/noemld/docs/symbol-resolution.html", label: "符号解析" },
-            { href: "tools/noemld/docs/relocations.html", label: "重定位与 ID 重映射" },
-            { href: "tools/noemld/docs/sso-linking.html", label: "SSO 链接" }
+            { href: "tools/noemlink/docs/pipeline.html", label: "处理流程" },
+            { href: "tools/noemlink/docs/symbol-resolution.html", label: "符号解析" },
+            { href: "tools/noemlink/docs/relocations.html", label: "重定位与 ID 重映射" },
+            { href: "tools/noemlink/docs/horizon-linking.html", label: "HOBJ 链接" }
           ]
         },
         {
           label: "安全与质量",
           items: [
-            { href: "tools/noemld/docs/loader-security.html", label: "装载与安全" },
-            { href: "tools/noemld/docs/diagnostics.html", label: "诊断与失败边界" },
-            { href: "tools/noemld/docs/testing.html", label: "测试与验收" }
+            { href: "tools/noemlink/docs/loader-security.html", label: "装载与安全" },
+            { href: "tools/noemlink/docs/diagnostics.html", label: "诊断与失败边界" },
+            { href: "tools/noemlink/docs/testing.html", label: "测试与验收" }
           ]
         },
         {
           label: "参考",
           items: [
-            { href: "tools/noemld/docs/dependencies.html", label: "上下游依赖" },
-            { href: "tools/noemld/docs/reference-index.html", label: "参考索引" }
+            { href: "tools/noemlink/docs/dependencies.html", label: "上下游依赖" },
+            { href: "tools/noemlink/docs/reference-index.html", label: "参考索引" }
           ]
         }
       ]
@@ -382,10 +382,10 @@
       kicker: "定义权威边界",
       description: "查看机器语义、对象格式、共享对象和组件契约。",
       items: [
-        { href: "specifications/gsir.html", label: "GSIR", description: "目标、约束、歧义、证据与验收语义", cover: "gsir", coverLabel: "GOAL GRAPH" },
-        { href: "specifications/gobj.html", label: "GOBJ", description: "Section、符号、重定位与完整性边界", cover: "gobj", coverLabel: "SECTION MAP" },
-        { href: "specifications/sso.html", label: "SSO", description: "依赖闭包、共享对象与渐进式披露", cover: "sso", coverLabel: "DEPENDENCY CLOSURE" },
-        { href: "components/index.html", label: "系统组件", description: "确定性核心、链接装载、Runtime 与 NSFE", cover: "components", coverLabel: "SYSTEM LAYERS" }
+        { href: "specifications/noema-ir.html", label: "Noema IR", description: "目标、约束、歧义、证据与验收语义", cover: "noema-ir", coverLabel: "INTENT GRAPH" },
+        { href: "specifications/noema-object.html", label: "Noema Object", description: "Section、符号、重定位与完整性边界", cover: "noema-object", coverLabel: "OBJECT MAP" },
+        { href: "specifications/horizon-object.html", label: "Horizon Object", description: "依赖闭包、共享对象与渐进式披露", cover: "horizon-object", coverLabel: "DISCLOSURE HORIZON" },
+        { href: "components/index.html", label: "系统组件", description: "确定性核心、链接装载、Fulfillment Runtime 与 Horizon Engine", cover: "components", coverLabel: "SYSTEM LAYERS" }
       ]
     },
     {
@@ -394,10 +394,10 @@
       kicker: "执行对象工程",
       description: "按验证、检查、编译和链接任务进入确定性工具链。",
       items: [
-        { href: "tools/noemconform/index.html", label: "规范合规", description: "执行 Golden、Malformed 与一致性套件", cover: "conform", coverLabel: "CONFORMANCE" },
-        { href: "tools/noemobj/index.html", label: "对象检查", description: "安全查看对象、符号与披露结构", cover: "inspect", coverLabel: "OBJECT INSPECT" },
-        { href: "tools/noemc/index.html", label: "编译", description: "驱动前端并调用确定性 Compiler Core", cover: "compile", coverLabel: "SOURCE → OBJECT" },
-        { href: "tools/noemld/index.html", label: "链接", description: "解析符号、应用重定位并形成闭包", cover: "link", coverLabel: "SYMBOL LINK" }
+        { href: "tools/noemcertify/index.html", label: "规范合规", description: "执行 Golden、Malformed 与一致性套件", cover: "conform", coverLabel: "CONFORMANCE" },
+        { href: "tools/noeminspect/index.html", label: "对象检查", description: "安全查看对象、符号与披露结构", cover: "inspect", coverLabel: "OBJECT INSPECT" },
+        { href: "tools/noemcompile/index.html", label: "编译", description: "驱动前端并调用确定性 Noesis Core", cover: "compile", coverLabel: "SOURCE → OBJECT" },
+        { href: "tools/noemlink/index.html", label: "链接", description: "解析符号、应用重定位并形成闭包", cover: "link", coverLabel: "SYMBOL LINK" }
       ]
     },
     {
@@ -410,7 +410,7 @@
         { href: "docs/architecture-guide.html", label: "架构指南", description: "理解生命周期、边界与失败路径", cover: "architecture-guide", coverLabel: "BOUNDARY GUIDE" },
         { href: "docs/tools-reference.html", label: "工具参考", description: "按生命周期定位 23 个工具", cover: "tools-reference", coverLabel: "TOOL MATRIX" },
         { href: "docs/specifications-reference.html", label: "规范参考", description: "权威来源、成熟度与 ADR 阅读顺序", cover: "spec-reference", coverLabel: "SPEC AUTHORITY" },
-        { href: "tools/noemld/docs/index.html", label: "noemld 手册", description: "链接器契约、流程、安全与测试专题", cover: "noemld-manual", coverLabel: "LINKER MANUAL" }
+        { href: "tools/noemlink/docs/index.html", label: "noemlink 手册", description: "链接器契约、流程、安全与测试专题", cover: "noemlink-manual", coverLabel: "LINKER MANUAL" }
       ]
     },
     {

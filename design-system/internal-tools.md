@@ -4,140 +4,140 @@
 
 工具路径由默认布局自动写入 `body[data-tool-id]`。共享 CSS 使用工具 ID 选择对应的色彩、签名文字、网格角度和焦点位置；不得在单个 HTML 页面内添加样式。
 
-### noemconform
+### noemcertify
 
 - 签名：`SPEC / CONFORM`
 - 色彩：规范绿、系统蓝、合规黄绿。
 - 母题：垂直校准线和一致性检查点。
 - 内容强调：规范条款、Golden、Malformed 与跨实现一致性。
 
-### noemobj
+### noeminspect
 
 - 签名：`OBJECT / INSPECT`
 - 色彩：检视青、对象蓝、偏移橙。
 - 母题：对象记录、字段窗口和偏移切片。
 - 内容强调：Header、Section、Symbol、Relocation 与只读安全。
 
-### noemverify
+### noemvalidate
 
 - 签名：`TRUST / VERIFY`
 - 色彩：验证紫、深靛、通过绿。
 - 母题：分层验证门和信任链节点。
 - 内容强调：结构、语义、策略、覆盖和信任结论分离。
 
-### noemcopy
+### noemtransform
 
 - 签名：`OBJECT / TRANSFORM`
 - 色彩：变换红、映射蓝、闭包薄荷。
 - 母题：输入输出双视图和受约束映射。
 - 内容强调：复制、抽取、删除、重建与语义不变条件。
 
-### noemsize
+### noembudget
 
 - 签名：`BUDGET / MEASURE`
 - 色彩：预算金、度量青、超限橙。
 - 母题：刻度、容量条和资源边界。
 - 内容强调：Section、Segment、闭包和披露预算。
 
-### noemas
+### noemassemble
 
 - 签名：`TEXT IR / ASSEMBLE`
 - 色彩：汇编靛、语法蓝、目标薄荷。
 - 母题：文本行收敛为对象记录。
 - 内容强调：规范文本、确定性汇编和诊断定位。
 
-### noemdis
+### noemdecode
 
 - 签名：`OBJECT / DISASSEMBLE`
 - 色彩：反汇编青、结构蓝、注释粉。
 - 母题：对象记录展开为稳定文本行。
 - 内容强调：可再次汇编的表示、来源和损失边界。
 
-### noemfmt
+### noemformat
 
 - 签名：`TEXT / NORMALIZE`
 - 色彩：规范蓝紫、层级紫、格式淡紫。
 - 母题：等宽基线、对齐列和规范化节拍。
 - 内容强调：稳定格式、幂等性和语义不变。
 
-### noemdiff
+### noemcompare
 
 - 签名：`SEMANTICS / DIFF`
 - 色彩：差异洋红、基线紫、变化黄。
 - 母题：双栏差异、变化标记和语义层级。
 - 内容强调：布局、调试、信任元数据与运行语义差异。
 
-### noemc
+### noemcompile
 
 - 签名：`SOURCE / COMPILE`
 - 色彩：编译蓝、核心靛、诊断橙。
 - 母题：Source、Pass、对象的收敛管线。
-- 内容强调：前端模式、确定性 Compiler Core 和对象生成权。
+- 内容强调：前端模式、确定性 Noesis Core 和对象生成权。
 
-### noemlint
+### noemanalyze
 
 - 签名：`SEMANTICS / LINT`
 - 色彩：检查绿、规则紫、提示薄荷。
 - 母题：语义下划线和规则定位点。
 - 内容强调：不生成对象的语义、覆盖和策略检查。
 
-### noemar
+### noemarchive
 
 - 签名：`OBJECT / ARCHIVE`
 - 色彩：归档棕、索引褐、内容金。
 - 母题：成员堆叠、归档目录和符号索引。
 - 内容强调：确定性成员顺序、内容身份和按需选择。
 
-### noemnm
+### noemsymbols
 
 - 签名：`SYMBOL / RESOLVE`
 - 色彩：符号钢青、命名蓝、引用亮青。
 - 母题：定义、引用和版本连接图。
 - 内容强调：符号绑定、版本、可见性和来源。
 
-### noemld
+### noemlink
 
 - 签名：`SYMBOL / LINK`
 - 色彩：冲突红、链接深蓝、闭包薄荷。
 - 母题：符号边、重定位和依赖闭包。
 - 内容强调：确定性链接、冲突失败、Link Map 和装载边界。
 
-### noemstrip
+### noemreduce
 
 - 签名：`RELEASE / STRIP`
 - 色彩：发布石墨、对象黑、调试粉。
 - 母题：开发视图与发布视图的剥离层。
 - 内容强调：调试信息分离和发布语义不变证明。
 
-### noemcov
+### noemcoverage
 
 - 签名：`SOURCE / COVERAGE`
 - 色彩：覆盖绿、审计青、缺口黄。
 - 母题：覆盖网格、缺口单元和来源连线。
 - 内容强调：Source Unit 覆盖、发布闭包和缺失证据。
 
-### noempack
+### noembundle
 
 - 签名：`RELEASE / PACKAGE`
 - 色彩：封装紫、清单靛、签名金。
 - 母题：层叠包、Manifest 和签名封条。
-- 内容强调：SSO、依赖、策略、签名和供应链元数据。
+- 内容强调：HOBJ、依赖、策略、签名和供应链元数据。
 
-### noemrun
+### noemexecute
 
 - 签名：`TRUST / EXECUTE`
-- 色彩：执行绿、Runtime 蓝、通过亮绿。
+- 色彩：执行绿、Fulfillment Runtime 蓝、通过亮绿。
 - 母题：验证门、装载路径和受约束执行脉冲。
-- 内容强调：验证、装载、披露、Lowering 和运行证据。
+- 内容强调：验证、装载、披露、实现化 和运行证据。
 
-### noemtrace
+### noemobserve
 
 - 签名：`RUNTIME / TRACE`
 - 色彩：追踪青、事件蓝、异常红。
 - 母题：时间线、事件节点和源级因果边。
 - 内容强调：运行事件、调试伴随文件和因果链。
 
-### noemdata
+### noemdataset
 
 - 签名：`DATA / LINEAGE`
 - 色彩：数据青、血缘蓝、许可橙。
@@ -149,16 +149,16 @@
 - 签名：`MODEL / TRAIN`
 - 色彩：训练靛、任务紫、教师橙红。
 - 母题：任务头、训练阶段和教师—学生连接。
-- 内容强调：NSFE 适配、多任务训练、蒸馏和复现。
+- 内容强调：Horizon Engine 适配、多任务训练、蒸馏和复现。
 
-### noemeval
+### noemevaluate
 
 - 签名：`MODEL / EVALUATE`
 - 色彩：评测洋红、切片蓝、校准青。
 - 母题：切片矩阵、校准曲线和失败分布。
 - 内容强调：错误确定、校准、OOD、切片和部署退化。
 
-### noemquant
+### noemquantize
 
 - 签名：`MODEL / QUANTIZE`
 - 色彩：量化金、设备深蓝、导出浅蓝。

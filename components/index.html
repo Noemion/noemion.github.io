@@ -7,7 +7,7 @@ permalink: "/components/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>组件</span></nav>
-  <div class="hero"><h1>组件</h1><p>按系统职责进入 Compiler Core、链接与装载、对象格式、Runtime 和 NSFE。</p><div class="badges"><span class="badge">Core</span><span class="badge">Objects</span><span class="badge">Runtime</span></div></div>
+  <div class="hero"><h1>系统组件</h1><p>Noemion 把确定性编译、对象处理、结果验收和模型辅助分成四个相互约束的组件。</p><div class="badges"><span class="badge">Noesis</span><span class="badge">Noema</span><span class="badge">Horizon</span></div></div>
   <section>
     <h2>为什么按组件分层</h2>
     <p class="lead">Noemion 必须把确定性对象生成、不可信对象处理、生成式求解和模型辅助分隔开，否则模型输出可能绕过格式、权限和完整性规则，系统也无法定位错误属于规范、编译、链接还是运行阶段。</p>
@@ -15,20 +15,20 @@ permalink: "/components/index.html"
   <section>
     <h2>核心组件</h2>
     <div class="page-links">
-      <a class="page-link" href="compiler-core.html"><strong>Compiler Core</strong><span>确定性解析、规范化、验证与 GSIR/GOBJ 生成。</span></a>
-      <a class="page-link" href="linker-loader.html"><strong>Linker、Loader 与 Runtime</strong><span>符号、重定位、对象合并、可信装载和生成式求解边界。</span></a>
-      <a class="page-link" href="../specifications/gobj.html"><strong>对象格式</strong><span>GOBJ/SSO 的组织、链接、装载与完整性规则。</span></a>
-      <a class="page-link" href="nsfe.html"><strong>NSFE</strong><span>封闭任务头、Source Graph 聚合、检索路由与模型工程状态。</span></a>
+      <a class="page-link" href="noesis-core.html"><strong>Noesis Core</strong><span>把来源表达编译为可检验的 Noema IR，并生成确定性对象。</span></a>
+      <a class="page-link" href="noema-object-system.html"><strong>Noema Object System</strong><span>解析符号和依赖，链接、验证并装载 Noema Object。</span></a>
+      <a class="page-link" href="../specifications/noema-object.html"><strong>Noema Object</strong><span>规定对象记录、引用、布局和完整性边界。</span></a>
+      <a class="page-link" href="horizon-engine.html"><strong>Horizon Engine</strong><span>从长篇来源中提取带证据的候选语义，但不决定对象内容。</span></a>
     </div>
   </section>
   <section>
     <h2>职责边界</h2>
-    <p>对象格式负责组织、链接、装载与完整性；Runtime 负责生成式求解与 Lowering。模型不能决定二进制布局或直接生成 GOBJ。</p>
+    <p>Noema Object 负责组织、链接、装载与完整性。Fulfillment Runtime 在对象通过验证后执行求解和实现化。模型只能提交候选，不能决定对象布局或直接生成 NOBJ。</p>
   </section>
   <section>
     <h2>概要设计与依赖方向</h2>
-    <div class="flow"><div class="step">规范与 Profile</div><div class="step">Compiler Core</div><div class="step">对象与链接器</div><div class="step">验证与 Loader</div><div class="step">Runtime / NSFE</div></div>
-    <p>依赖方向必须从候选语义走向确定性对象，再走向已验证的运行绑定。Runtime 可以消费对象声明，但不得回写对象布局；NSFE 可以产生候选、聚合与路由信号，但其输出必须经过确定性边界才能进入对象或策略。</p>
+    <div class="flow"><div class="step">规范与配置</div><div class="step">Noesis Core</div><div class="step">Noema Object System</div><div class="step">安全装载</div><div class="step">Fulfillment Runtime</div></div>
+    <p>数据只沿一个方向取得更高信任：候选语义先经过确定性编译，再形成对象和运行绑定。Fulfillment Runtime 可以读取对象声明，但不能回写对象布局；Horizon Engine 可以生成候选和检索信号，但这些结果必须经过 Noesis Core 检查后才能进入对象或策略。</p>
     <p>每个组件的权威说明必须定义输入输出、内部状态、关键算法或数据结构、失败条件、资源上限、可观测事件和验证策略。缺少其中任何一项时，只能视为职责级设计，不能推定接口或实现已经稳定。</p>
   </section>
   <section>

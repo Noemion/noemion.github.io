@@ -1,6 +1,6 @@
 # Noemion Public Discovery
 
-Version: 1
+Version: 2
 
 Noemion publishes its current project portal, architecture, specifications, component boundaries, development status, tool projects, and manuals as canonical HTML pages. This Markdown index provides a compact discovery surface for readers and automated tools.
 
@@ -19,19 +19,19 @@ Noemion publishes its current project portal, architecture, specifications, comp
 ## Architecture and components
 
 - [Architecture](https://noemion.github.io/architecture/index.html) — system layers, object lifecycle, and trust boundaries
-- [Object lifecycle](https://noemion.github.io/architecture/object-lifecycle.html) — source, deterministic compilation, linking, loading, and runtime boundaries
+- [Noema lifecycle](https://noemion.github.io/architecture/noema-lifecycle.html) — source, deterministic compilation, object formation, linking, loading, and fulfillment boundaries
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
-- [Components](https://noemion.github.io/components/index.html) — compiler, linker, loader, runtime, and model-engineering responsibilities
-- [Compiler Core](https://noemion.github.io/components/compiler-core.html) — deterministic compilation boundary and Strict mode
-- [Linker, Loader, and Runtime](https://noemion.github.io/components/linker-loader.html) — symbol resolution, relocation, loading, and constrained execution
-- [NSFE](https://noemion.github.io/components/nsfe.html) — model-engineering architecture and current maturity
+- [Components](https://noemion.github.io/components/index.html) — Noesis, Noema, Horizon, and Fulfillment responsibilities
+- [Noesis Core](https://noemion.github.io/components/noesis-core.html) — deterministic compilation boundary and Deterministic Profile
+- [Noema Object System](https://noemion.github.io/components/noema-object-system.html) — symbol resolution, relocation, validation, loading, and fulfillment
+- [Horizon Engine](https://noemion.github.io/components/horizon-engine.html) — model-engineering architecture and current maturity
 
 ## Specifications
 
 - [Specifications](https://noemion.github.io/specifications/index.html) — authority, maturity, and normative-source map
-- [GSIR](https://noemion.github.io/specifications/gsir.html) — goals, constraints, ambiguity, evidence, and acceptance semantics
-- [GOBJ](https://noemion.github.io/specifications/gobj.html) — sections, symbols, relocations, dependencies, and integrity
-- [SSO](https://noemion.github.io/specifications/sso.html) — progressive disclosure and semantic shared objects
+- [Noema IR](https://noemion.github.io/specifications/noema-ir.html) — goals, constraints, ambiguity, evidence, and acceptance semantics
+- [Noema Object](https://noemion.github.io/specifications/noema-object.html) — sections, symbols, relocations, dependencies, and integrity
+- [Horizon Object](https://noemion.github.io/specifications/horizon-object.html) — progressive disclosure and shared dependencies
 
 ## Guides and reference
 
@@ -55,45 +55,45 @@ Noemion publishes its current project portal, architecture, specifications, comp
 ## Tool projects
 
 - [Tool directory](https://noemion.github.io/tools/index.html) — lifecycle-oriented index of all tool projects
-- [noemconform](https://noemion.github.io/tools/noemconform/index.html) — conformance checking
-- [noemobj](https://noemion.github.io/tools/noemobj/index.html) — object inspection
-- [noemverify](https://noemion.github.io/tools/noemverify/index.html) — structural and integrity verification
-- [noemcopy](https://noemion.github.io/tools/noemcopy/index.html) — object copying and transformation
-- [noemsize](https://noemion.github.io/tools/noemsize/index.html) — object size reporting
-- [noemas](https://noemion.github.io/tools/noemas/index.html) — source assembly
-- [noemdis](https://noemion.github.io/tools/noemdis/index.html) — object disassembly
-- [noemfmt](https://noemion.github.io/tools/noemfmt/index.html) — source formatting
-- [noemdiff](https://noemion.github.io/tools/noemdiff/index.html) — semantic and object comparison
-- [noemc](https://noemion.github.io/tools/noemc/index.html) — deterministic compilation
-- [noemlint](https://noemion.github.io/tools/noemlint/index.html) — static analysis
-- [noemar](https://noemion.github.io/tools/noemar/index.html) — archive construction and inspection
-- [noemnm](https://noemion.github.io/tools/noemnm/index.html) — symbol listing
-- [noemld](https://noemion.github.io/tools/noemld/index.html) — linking and dependency closure
-- [noemstrip](https://noemion.github.io/tools/noemstrip/index.html) — removable metadata reduction
-- [noemcov](https://noemion.github.io/tools/noemcov/index.html) — coverage-ledger processing
-- [noempack](https://noemion.github.io/tools/noempack/index.html) — release packaging
-- [noemrun](https://noemion.github.io/tools/noemrun/index.html) — constrained execution
-- [noemtrace](https://noemion.github.io/tools/noemtrace/index.html) — execution tracing
-- [noemdata](https://noemion.github.io/tools/noemdata/index.html) — dataset processing
+- [noemcertify](https://noemion.github.io/tools/noemcertify/index.html) — conformance checking
+- [noeminspect](https://noemion.github.io/tools/noeminspect/index.html) — object inspection
+- [noemvalidate](https://noemion.github.io/tools/noemvalidate/index.html) — structural and integrity verification
+- [noemtransform](https://noemion.github.io/tools/noemtransform/index.html) — object copying and transformation
+- [noembudget](https://noemion.github.io/tools/noembudget/index.html) — object size reporting
+- [noemassemble](https://noemion.github.io/tools/noemassemble/index.html) — source assembly
+- [noemdecode](https://noemion.github.io/tools/noemdecode/index.html) — object disassembly
+- [noemformat](https://noemion.github.io/tools/noemformat/index.html) — source formatting
+- [noemcompare](https://noemion.github.io/tools/noemcompare/index.html) — semantic and object comparison
+- [noemcompile](https://noemion.github.io/tools/noemcompile/index.html) — deterministic compilation
+- [noemanalyze](https://noemion.github.io/tools/noemanalyze/index.html) — static analysis
+- [noemarchive](https://noemion.github.io/tools/noemarchive/index.html) — archive construction and inspection
+- [noemsymbols](https://noemion.github.io/tools/noemsymbols/index.html) — symbol listing
+- [noemlink](https://noemion.github.io/tools/noemlink/index.html) — linking and dependency closure
+- [noemreduce](https://noemion.github.io/tools/noemreduce/index.html) — removable metadata reduction
+- [noemcoverage](https://noemion.github.io/tools/noemcoverage/index.html) — coverage-ledger processing
+- [noembundle](https://noemion.github.io/tools/noembundle/index.html) — release packaging
+- [noemexecute](https://noemion.github.io/tools/noemexecute/index.html) — constrained execution
+- [noemobserve](https://noemion.github.io/tools/noemobserve/index.html) — execution tracing
+- [noemdataset](https://noemion.github.io/tools/noemdataset/index.html) — dataset processing
 - [noemtrain](https://noemion.github.io/tools/noemtrain/index.html) — training workflows
-- [noemeval](https://noemion.github.io/tools/noemeval/index.html) — evaluation workflows
-- [noemquant](https://noemion.github.io/tools/noemquant/index.html) — quantization workflows
+- [noemevaluate](https://noemion.github.io/tools/noemevaluate/index.html) — evaluation workflows
+- [noemquantize](https://noemion.github.io/tools/noemquantize/index.html) — quantization workflows
 
-## noemld manual
+## noemlink manual
 
-- [Manual index](https://noemion.github.io/tools/noemld/docs/index.html) — linker documentation and reading order
-- [Contract](https://noemion.github.io/tools/noemld/docs/contract.html) — responsibilities and stable contract
-- [Inputs and outputs](https://noemion.github.io/tools/noemld/docs/inputs-outputs.html) — accepted objects and produced artifacts
-- [Invocation](https://noemion.github.io/tools/noemld/docs/invocation.html) — command-line invocation status and conventions
-- [Pipeline](https://noemion.github.io/tools/noemld/docs/pipeline.html) — end-to-end linking flow
-- [Symbol resolution](https://noemion.github.io/tools/noemld/docs/symbol-resolution.html) — symbol lookup and binding rules
-- [Relocations](https://noemion.github.io/tools/noemld/docs/relocations.html) — typed relocations and identifier remapping
-- [SSO linking](https://noemion.github.io/tools/noemld/docs/sso-linking.html) — disclosure and dependency closure
-- [Loader security](https://noemion.github.io/tools/noemld/docs/loader-security.html) — structural validation, integrity, and policy checks
-- [Diagnostics](https://noemion.github.io/tools/noemld/docs/diagnostics.html) — failures, diagnostics, and rejection boundaries
-- [Testing](https://noemion.github.io/tools/noemld/docs/testing.html) — determinism, malformed inputs, fuzzing, and acceptance
-- [Dependencies](https://noemion.github.io/tools/noemld/docs/dependencies.html) — upstream and downstream relationships
-- [Reference index](https://noemion.github.io/tools/noemld/docs/reference-index.html) — command, term, and object index
+- [Manual index](https://noemion.github.io/tools/noemlink/docs/index.html) — linker documentation and reading order
+- [Contract](https://noemion.github.io/tools/noemlink/docs/contract.html) — responsibilities and stable contract
+- [Inputs and outputs](https://noemion.github.io/tools/noemlink/docs/inputs-outputs.html) — accepted objects and produced artifacts
+- [Invocation](https://noemion.github.io/tools/noemlink/docs/invocation.html) — command-line invocation status and conventions
+- [Pipeline](https://noemion.github.io/tools/noemlink/docs/pipeline.html) — end-to-end linking flow
+- [Symbol resolution](https://noemion.github.io/tools/noemlink/docs/symbol-resolution.html) — symbol lookup and binding rules
+- [Relocations](https://noemion.github.io/tools/noemlink/docs/relocations.html) — typed relocations and identifier remapping
+- [HOBJ linking](https://noemion.github.io/tools/noemlink/docs/horizon-linking.html) — disclosure and dependency closure
+- [Loader security](https://noemion.github.io/tools/noemlink/docs/loader-security.html) — structural validation, integrity, and policy checks
+- [Diagnostics](https://noemion.github.io/tools/noemlink/docs/diagnostics.html) — failures, diagnostics, and rejection boundaries
+- [Testing](https://noemion.github.io/tools/noemlink/docs/testing.html) — determinism, malformed inputs, fuzzing, and acceptance
+- [Dependencies](https://noemion.github.io/tools/noemlink/docs/dependencies.html) — upstream and downstream relationships
+- [Reference index](https://noemion.github.io/tools/noemlink/docs/reference-index.html) — command, term, and object index
 
 ## Availability and authority
 

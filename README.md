@@ -25,10 +25,10 @@
 
 ### 手册内容源与生成
 
-`docs/*.md` 与 `tools/noemld/docs/*.md` 是当前 20 个手册/指南页面的唯一正文源，由 Jekyll 通过专用文档布局生成现有 `.html` 公开路由：
+`docs/*.md` 与 `tools/noemlink/docs/*.md` 是当前 20 个手册/指南页面的唯一正文源，由 Jekyll 通过专用文档布局生成现有 `.html` 公开路由：
 
 - 作者只编辑 Markdown 正文和必要的 Front Matter，不编辑构建目录中的 HTML。
-- 源文件可由 `docs/getting-started.md` 生成 `/docs/getting-started.html`，由 `tools/noemld/docs/contract.md` 生成 `/tools/noemld/docs/contract.html`；公开 URL 与目录链接保持不变。
+- 源文件可由 `docs/getting-started.md` 生成 `/docs/getting-started.html`，由 `tools/noemlink/docs/contract.md` 生成 `/tools/noemlink/docs/contract.html`；公开 URL 与目录链接保持不变。
 - `<main>`、面包屑、文档 Hero、手册分页、固定左栏和页脚由 `_layouts/`、`_includes/` 与共享目录数据生成，不在每个 Markdown 文件中复制。
 - 正文只使用通用 Markdown 的标题、段落、列表、链接、引用、表格和围栏代码块；不写原始 HTML、Kramdown 专有属性或页面级 include。特殊视觉由共享布局和 CSS 根据标准生成元素统一呈现。
 - 仓库中不保留对应的手写 `.html` 源文件或双轨内容；质量测试按 Front Matter 的 `permalink` 校验 Markdown 源与正式 HTML 路由。
@@ -70,8 +70,8 @@ badges: ["Documentation"]
 - `index.html`：项目门户，概括定位、能力、状态和主要入口。
 - `about/`：项目背景、动机、范围、非目标，以及思想与方法基础的采用边界。
 - `architecture/`：系统关系、对象生命周期、信任边界和开放问题。
-- `specifications/`：GSIR、GOBJ、SSO 等规范的权威来源与成熟度。
-- `components/`：Compiler Core、链接装载、Runtime 和 NSFE 等组件入口。
+- `specifications/`：Noema IR（NIR）、Noema Object（NOBJ）、Horizon Object（HOBJ）等规范的权威来源与成熟度。
+- `components/`：Noesis Core、Noema Object System、Fulfillment Runtime 和 Horizon Engine 等组件入口。
 - `tools/`：23 个工具的分类目录；`tools/<tool>/index.html` 是工具项目页。
 - `tools/<tool>/docs/`：仅在存在实质帮助手册时建立；目录内 Markdown 由 Jekyll 生成 HTML 手册页，工具项目入口本身继续使用 HTML。
 - `docs/`：保存入门、使用、架构、开发、工具和规范六类任务型文档；正文链接权威页面，不复制第二套规范。
@@ -97,13 +97,15 @@ badges: ["Documentation"]
 
 修改页面前从 [`design-system/README.md`](design-system/README.md) 进入设计路由，并按页面角色读取门户、目录、专题、工具项目、手册或共享组件对应文档。设计文档目录被 Jekyll 排除，不会生成公开站点页面。
 
+修改公开文案、组件名称、对象术语、工具命令、文件名或路由时，还必须遵循 [`design-system/language-and-naming.md`](design-system/language-and-naming.md)。核心命名由 [`design-system/adr-0001-noemion-nomenclature.md`](design-system/adr-0001-noemion-nomenclature.md) 决定：Noesis 表示确定性编译活动，Noema 表示编译后机器对象，Horizon 表示可按策略展开的背景与依赖，Fulfillment 表示结果验收和具体实现。哲学名称只说明问题结构，工程含义仍由规范、数据结构、不变量和测试定义。
+
 技术长文、工具项目介绍和手册正文还必须读取 [`design-system/readability.md`](design-system/readability.md)。1200px 是连续画布而不是正文行宽：普通段落保持约 700–760px 阅读列，桌面正文采用 17–18px 与约 1.75–1.8 行高。需要利用右侧空间时，优先形成约 800px 主阅读列与约 380px 粘性信息栏，并从 Hero 起让信息栏持续承载章节目录、成熟度、可用状态、关键对象、输入输出或下一阅读入口；没有足够信息时使用单列，不为排版保留空栏。
 
 图片只在能增强概念解释、页面辨识或内容氛围时使用。选择顺序为许可清晰的素材库、经授权的项目素材、项目定制生成图；素材必须下载到仓库并压缩，不能依赖第三方热链。来源、许可、裁切焦点、替代文本和生成提示记录在 [`design-system/images.md`](design-system/images.md)，公开页面不暴露设计参考或模仿关系。
 
 23 个内部工具分别拥有独立视觉签名，详见 [`design-system/internal-tools.md`](design-system/internal-tools.md)。默认布局根据 `tools/<tool>/...` 路径自动写入 `data-tool-id`，共享 CSS 再应用对应的配色、对象面板签名、网格角度和强调状态；工具项目页不维护页面级 CSS。工具帮助手册继承工具强调色，但正文、目录和分页继续遵循统一手册规范。
 
-Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷、青蓝、朱橙和琥珀的光谱只标记来源、歧义、对象层与状态；黑色对象记录面板表示可检查的 GSIR/GOBJ/SSO；等宽序号、阶段脉冲和证据门表达成熟度。任何装饰都不得取代权威性、失败语义和证据边界。
+Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷、青蓝、朱橙和琥珀的光谱只标记来源、歧义、对象层与状态；黑色对象记录面板表示可检查的 NIR/NOBJ/HOBJ；等宽序号、阶段脉冲和证据门表达成熟度。任何装饰都不得取代权威性、失败语义和证据边界。
 
 全站统一品牌、字体、颜色、基础间距、面包屑和目录引擎；具体目录分组、正文结构、表格、清单、手册分页和状态展示由模块职责决定。模块可以共享布局组件，但不得为了视觉对称强行增加不适用的章节。
 
@@ -121,7 +123,7 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 
 ### 全站可读性规则
 
-1. 页面先回答读者正在问什么、为什么重要和本页结论，再引入 GSIR、GOBJ、SSO、Strict、Lowering 等项目术语。
+1. 页面先回答读者正在问什么、为什么重要和直接结论，再引入 Noema IR、Noema Object、Horizon Object、Deterministic Profile 和实现化等项目术语。
 2. 缩写和专业词第一次出现时使用完整名称或直白解释；不能要求读者先理解整个 Noemion 体系才能读懂入口页。
 3. 抽象机制优先用一个具体问题、因果链、流程或对照关系解释，再进入结构、字段和不变量。
 4. 哲学概念只作为问题框架和工程启发；必须明确区分思想来源、工程类比、正式规范和验证证据，不能用哲学术语替代技术定义。

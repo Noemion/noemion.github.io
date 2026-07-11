@@ -18,19 +18,19 @@ docs:
       label: 参考
       order: 3
 
-noemld:
+noemlink:
   kicker: Tool Documentation
-  title: noemld 文档
-  root: /tools/noemld/docs/index.html
-  parent_url: /tools/noemld/index.html
-  parent_label: 返回 noemld 项目页
+  title: noemlink 文档
+  root: /tools/noemlink/docs/index.html
+  parent_url: /tools/noemlink/index.html
+  parent_label: 返回 noemlink 项目页
   breadcrumbs:
     - label: 项目
       url: /index.html
     - label: 工具
       url: /tools/index.html
-    - label: noemld
-      url: /tools/noemld/index.html
+    - label: noemlink
+      url: /tools/noemlink/index.html
   groups:
     start:
       label: 开始

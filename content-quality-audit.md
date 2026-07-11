@@ -42,14 +42,14 @@
 - `news/index.html`
 - `about/background.html`
 - `about/intellectual-foundations.html`
-- `architecture/object-lifecycle.html`
+- `architecture/noema-lifecycle.html`
 - `architecture/open-questions.html`
-- `specifications/gsir.html`
-- `specifications/gobj.html`
-- `specifications/sso.html`
-- `components/compiler-core.html`
-- `components/linker-loader.html`
-- `components/nsfe.html`
+- `specifications/noema-ir.html`
+- `specifications/noema-object.html`
+- `specifications/horizon-object.html`
+- `components/noesis-core.html`
+- `components/noema-object-system.html`
+- `components/horizon-engine.html`
 - `development/implementation-roadmap.html`
 - `development/testing.html`
 - `development/current-stage.html`
@@ -60,42 +60,42 @@
 - `docs/development-guide.html`
 - `docs/tools-reference.html`
 - `docs/specifications-reference.html`
-- `tools/noemconform/index.html`
-- `tools/noemobj/index.html`
-- `tools/noemverify/index.html`
-- `tools/noemcopy/index.html`
-- `tools/noemsize/index.html`
-- `tools/noemas/index.html`
-- `tools/noemdis/index.html`
-- `tools/noemfmt/index.html`
-- `tools/noemdiff/index.html`
-- `tools/noemc/index.html`
-- `tools/noemlint/index.html`
-- `tools/noemar/index.html`
-- `tools/noemnm/index.html`
-- `tools/noemld/index.html`
-- `tools/noemstrip/index.html`
-- `tools/noemcov/index.html`
-- `tools/noempack/index.html`
-- `tools/noemrun/index.html`
-- `tools/noemtrace/index.html`
-- `tools/noemdata/index.html`
+- `tools/noemcertify/index.html`
+- `tools/noeminspect/index.html`
+- `tools/noemvalidate/index.html`
+- `tools/noemtransform/index.html`
+- `tools/noembudget/index.html`
+- `tools/noemassemble/index.html`
+- `tools/noemdecode/index.html`
+- `tools/noemformat/index.html`
+- `tools/noemcompare/index.html`
+- `tools/noemcompile/index.html`
+- `tools/noemanalyze/index.html`
+- `tools/noemarchive/index.html`
+- `tools/noemsymbols/index.html`
+- `tools/noemlink/index.html`
+- `tools/noemreduce/index.html`
+- `tools/noemcoverage/index.html`
+- `tools/noembundle/index.html`
+- `tools/noemexecute/index.html`
+- `tools/noemobserve/index.html`
+- `tools/noemdataset/index.html`
 - `tools/noemtrain/index.html`
-- `tools/noemeval/index.html`
-- `tools/noemquant/index.html`
-- `tools/noemld/docs/index.html`
-- `tools/noemld/docs/contract.html`
-- `tools/noemld/docs/inputs-outputs.html`
-- `tools/noemld/docs/invocation.html`
-- `tools/noemld/docs/pipeline.html`
-- `tools/noemld/docs/symbol-resolution.html`
-- `tools/noemld/docs/relocations.html`
-- `tools/noemld/docs/sso-linking.html`
-- `tools/noemld/docs/loader-security.html`
-- `tools/noemld/docs/diagnostics.html`
-- `tools/noemld/docs/testing.html`
-- `tools/noemld/docs/dependencies.html`
-- `tools/noemld/docs/reference-index.html`
+- `tools/noemevaluate/index.html`
+- `tools/noemquantize/index.html`
+- `tools/noemlink/docs/index.html`
+- `tools/noemlink/docs/contract.html`
+- `tools/noemlink/docs/inputs-outputs.html`
+- `tools/noemlink/docs/invocation.html`
+- `tools/noemlink/docs/pipeline.html`
+- `tools/noemlink/docs/symbol-resolution.html`
+- `tools/noemlink/docs/relocations.html`
+- `tools/noemlink/docs/horizon-linking.html`
+- `tools/noemlink/docs/loader-security.html`
+- `tools/noemlink/docs/diagnostics.html`
+- `tools/noemlink/docs/testing.html`
+- `tools/noemlink/docs/dependencies.html`
+- `tools/noemlink/docs/reference-index.html`
 
 这些页面已增加问题背景、黄金圈定位、概要设计、规范不变量、验证证据、IPD 或研究/标准化治理内容。下一轮仍需检查术语一致性、主张与证据链接、现有技术对比和可验证条款。
 
@@ -103,15 +103,15 @@
 
 23 个工具项目页均已在既定六个章节内补足具体问题、上游输入、下游消费者、概要流程、关键不变量、失败边界、阶段门、验证证据和详细文档建立条件。下一轮仍须逐项核验工具间的状态术语、输入输出名称和主张—证据链，不把结构完整误判为设计已经冻结。
 
-`noemld` 文档中心及 12 个专题页已补入输入输出契约、状态与数据结构、冲突规则、确定性算法、资源限制、诊断设计、测试矩阵、威胁模型、依赖契约与术语成熟度。具体字段、编号、ABI 和 Profile 仍明确保留为待规范或 ADR 冻结的开放设计。
+`noemlink` 文档中心及 12 个专题页已补入输入输出契约、状态与数据结构、冲突规则、确定性算法、资源限制、诊断设计、测试矩阵、威胁模型、依赖契约与术语成熟度。具体字段、编号、ABI 和 Profile 仍明确保留为待规范或 ADR 冻结的开放设计。
 
 ## 第二轮跨页证据审查结果
 
-- **术语与阶段：**已核对 GOBJ 工程名、AELF/GRO/SRO/ARO 候选名、GSIR、SSO、Strict、Compiler Core 和 Phase 0–8。发现并修正工具目录把 9 个技术 Phase 误写为 8 个的问题。技术 Phase 与 IPD 管理阶段已明确区分。
+- **术语与阶段：**已核对 NOBJ 工程名、AELF/GRO/SRO/ARO 候选名、NIR、HOBJ、Deterministic、Noesis Core 和 Phase 0–8。发现并修正工具目录把 9 个技术 Phase 误写为 8 个的问题。技术 Phase 与 IPD 管理阶段已明确区分。
 - **状态表述：**23 个工具项目页均明确“设计阶段、无已发布可执行程序、CLI/参数/扩展名未冻结”；下载、使用、开发、FAQ、新闻和首页没有把未来能力表述为现有制品。
 - **研究与知识产权：**页面只登记研究问题、可证伪假设、现有技术比较、论文/专利/软著/标准化证据路线与公开披露纪律，没有声明已经发表、授权、登记或获标准组织采纳。
 - **主张与证据：**关键架构和工具主张已映射到规范页面、ADR 要求、阶段门、测试矩阵、威胁模型或明确的未来证据。尚不存在的原型、实验、互操作报告和独立实现被标为未形成，未用设计文本替代真实证据。
-- **对象与路由：**README 机器可读注册表、实际 HTML、页面角色、共享目录配置和上级入口一致；66 个路由各登记一次，23 个工具项目页和 noemld 13 页文档子树均可定位。
+- **对象与路由：**README 机器可读注册表、实际 HTML、页面角色、共享目录配置和上级入口一致；66 个路由各登记一次，23 个工具项目页和 noemlink 13 页文档子树均可定位。
 - **浏览器验收：**66/66 页面均以最新 Jekyll 成品逐页复查。桌面端全部具有唯一正文、标题、活动目录、非空章节、无整页横向溢出和等宽网格；首页保持独立叙事门户，内页继续使用模块目录与正文布局。390px 移动端再次逐页检查，无整页溢出，长表格保持在自身滚动容器内；浏览器控制台无错误或警告。
 - **动画与可访问性：**首页首屏按 90ms 间隔分组进入，对象图形使用低频 transform 动画；横向入口增加只在悬停或键盘聚焦时出现的 Noemion 四色频谱描边，并组合图形 1.025 放大、标题与箭头 4px 位移、0.25→1 图标交叉切换。浏览器已验证悬停终态与可中断 transition；CSS 为 `prefers-reduced-motion` 取消描边流动、进入、循环与空间位移动效，并保留 44px 以上行动区域。
 
@@ -140,22 +140,22 @@
 | --- | ---: | --- | --- |
 | 项目门户与背景 | 4 | 首次访问者叙事、项目边界、思想来源、研究状态 | 解释与工程结论分开；书目来源保留原始 URL |
 | 架构 | 3 | 生命周期、信任转换、开放问题、失败位置 | 继续保留不变量、未决项和可审计证据 |
-| 规范 | 4 | 权威性、成熟度、规范强度、编码与语义边界 | GSIR/GOBJ/SSO 增加直白解释，但不削弱“必须/不得”和失败语义 |
-| 组件 | 4 | Compiler、Linker、Loader、Runtime、NSFE 的职责隔离 | 候选模型、确定性核心和对象边界保持清楚 |
+| 规范 | 4 | 权威性、成熟度、规范强度、编码与语义边界 | NIR/NOBJ/HOBJ 增加直白解释，但不削弱“必须/不得”和失败语义 |
+| 组件 | 4 | Compiler、Linker、Loader、Fulfillment Runtime、Horizon Engine 的职责隔离 | 候选模型、确定性核心和对象边界保持清楚 |
 | 开发、资源与 FAQ | 10 | 当前可用性、贡献渠道、发布纪律、知识产权与证据等级 | 删除推测入口和制作过程表述，保留真实未发布状态 |
 | 工具项目页 | 23 | 使用问题、状态、输入输出、阶段门、处理边界、未冻结接口 | 全部工具页改为面向使用者的产品状态，不再讨论页面或文档制作 |
-| noemld 文档 | 13 | 契约、流程、算法、安全、诊断、测试、依赖和术语权威性 | 设计契约与已发布手册严格区分，候选示例不构成稳定 ABI |
+| noemlink 文档 | 13 | 契约、流程、算法、安全、诊断、测试、依赖和术语权威性 | 设计契约与已发布手册严格区分，候选示例不构成稳定 ABI |
 | **合计** | **65** | 公开表达、技术严谨性、导航与证据边界 | **通过源码与 Jekyll 成品检查** |
 
 自动检查禁止已知幕后词语进入正式 HTML；所有外部书目、论文、规范、下载和资源链接必须把原始 URL 作为可见链接文字；三个核心规范页必须同时具有“直白解释”、成熟度区分、规范性措辞和开放问题。每个有标题的正文区段还必须达到最低信息量，防止只留下标题或占位句。
 
 ## 全站产品化文案复审
 
-- 已逐项扫描当前 66 个正式页面的 HTML 与 Markdown 权威源，覆盖门户、目录、专题、23 个工具项目页、6 个跨项目指南和 13 个 noemld 手册页面。
+- 已逐项扫描当前 66 个正式页面的 HTML 与 Markdown 权威源，覆盖门户、目录、专题、23 个工具项目页、6 个跨项目指南和 13 个 noemlink 手册页面。
 - 公开界面不再使用“本页”“阶段门”“证据门”“放行”“退出证据”、未解释的 IPD 或“已确认内容限于”等内部制作与研发管理措辞；自动检查会阻止这些词重新进入最终 HTML。
 - 23 个工具项目页统一以“当前状态”说明是否可用，以“开发计划”或“开发顺序”说明依赖和下一步，以具体测试目标说明如何验证；未发布状态、输入输出和安全边界保持不变。
 - 开发、下载、FAQ、新闻和路线图已改为直接展示当前工作、资源开放顺序、开发流程、完成标准和近期里程碑，不再向访问者展示内部决策流程。
-- noemld 手册继续保留确定性、安全、规范性要求和研究验证等专业内容，但将管理式“放行”术语改为“测试与验收”“安全验证”“发布验收标准”等开发者可直接理解的名称。
+- noemlink 手册继续保留确定性、安全、规范性要求和研究验证等专业内容，但将管理式“放行”术语改为“测试与验收”“安全验证”“发布验收标准”等开发者可直接理解的名称。
 - 学术论证、正式规范、安全约束和测试术语不做非技术化删减；专业名词首次出现仍应配合直白解释，避免以项目内部缩写替代实际含义。
 
 ## 全站布局与代码复审
@@ -165,3 +165,13 @@
 - 23 个工具项目页的“相关资源”必须以可点击入口组结束，构建检查会拒绝卡片组之后出现孤立说明段；当前源码和重新生成的 HTML 均不存在旧构建中曾出现的内部契约式尾段。
 - 手机端所有显式专题版式按语义顺序折叠为单列；面包屑和导航按钮保持同一行，菜单展开时锁定背景滚动，菜单自身保留纵向滚动与边界约束，关闭动画、Esc 和外部点击关闭均通过浏览器验证。
 - 代码复审删除了未被任何页面使用的 `grid3` 与 `checklist` 样式，并移除共享头部曾同时维护的 `portal-*` 历史别名及重复 CSS；自动检查阻止这些推断式选择器、未使用别名和重复尾段重新进入站点。
+
+## 全站语言与命名复审
+
+- 66 个正式页面的 HTML 或 Markdown 权威源已逐页检查并调整；页面标题和首段先说明读者问题，再引入项目术语。工具页统一按“解决什么问题、当前状态、怎样工作、读取与产出、不会做什么、继续阅读”组织。
+- 写作规则采用主动语态和现在时，明确输入、动作、结果与失败；已清除空强调标记、中文词间异常空格、无主语的“供……消费”表达，以及“设计提案、未来阶段、阶段门、证据门、放行”等内部或过时状态套话。
+- 核心命名采用 `Noesis—Noema—Horizon—Fulfillment`：Noesis Core、Noesis Source（NSL）、Noema IR（NIR）、Noema Object（NOBJ）、Horizon Object（HOBJ）、Noema Object System、Fulfillment Runtime 与 Horizon Engine。哲学来源、工程类比和规范定义继续分开。
+- 23 个工具项目改用 `noem` 加完整动作词的命令名；目录、页面标题、手册、导航、视觉标识、CSS 选择器、测试和路由表同步迁移。旧命令、旧对象名和旧路由不保留兼容入口。
+- `noemlink` 的 13 个 Markdown 手册页面保留任务式正文和参考章节，Hero 摘要改为完整句，直接说明每一章回答的问题。
+- 自动检查会拒绝旧对象名、旧工具名、旧路径、异常中文空格、空强调标记和机械化状态用语；路由测试继续核对 66 个页面、23 个工具与动态手册顺序。
+- 浏览器逐页打开 66 个 Jekyll 成品，全部具有唯一正文、标题、共享导航和页脚，没有旧名称、异常中文词间空格或横向溢出。另以 390px 宽度复核首页、思想基础、Noema 生命周期、规范、核心组件、工具目录和 noemlink 手册；长名称自然换行，导航按钮保持可见。

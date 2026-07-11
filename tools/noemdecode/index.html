@@ -1,0 +1,26 @@
+---
+layout: default
+title: "noemdecode · NIR 反汇编器 · Noemion"
+page_role: "tool-project"
+footer_text: "Noemion · noemdecode project"
+permalink: "/tools/noemdecode/index.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemdecode</span></nav>
+  <div class="hero"><h1>noemdecode · NIR 反汇编器</h1><p>把运行 Section 反汇编为可再次汇编的规范文本，并按请求附带调试、覆盖和来源注释。</p><div class="badges"><span class="badge">Phase 2</span><span class="badge">Text IR</span><span class="badge">NOBJ / HOBJ → 文本 NIR</span><span class="badge">Design Stage</span></div></div>
+  <div class="tool-project-body">
+  <section><h2>它解决什么问题</h2><p><code>noemdecode</code> 把运行 Section 反汇编为可再次汇编的规范文本，并按请求附带调试、覆盖和来源注释。</p><p>对象必须能被独立审计、评审和重建；只显示字节或摘要不足以验证语义。反汇编器提供对象到规范文本的可追溯映射，同时明确哪些信息已被 strip 或无法恢复。</p>
+</section>
+  <section>
+<h2>当前状态</h2>
+<p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
+<p><strong>开发顺序：</strong>先完成安全读取器、规范文本语法和稳定命名规则；随后验证合法对象可规范化再汇编、损坏对象能够安全拒绝、注释视图不改变运行文本语义。</p>
+</section>
+  <section><h2>它怎样工作</h2><div class="flow"><div class="step">结构验证</div><div class="step">读取语义记录</div><div class="step">建立稳定名称</div><div class="step">分离运行与注释</div><div class="step">输出规范文本</div></div><ul><li>反汇编多层 NIR、符号引用、重定位和验收契约</li><li>使用稳定名称替代布局相关 ID</li><li>可选显示来源映射、证据账本和 Disclosure 注释</li><li>输出 canonical、pretty 或 JSON 视图</li></ul></section>
+  <section><h2>它读取什么，产生什么</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Object</td><td>通过结构验证的 NOBJ/HOBJ</td></tr><tr><td>输入</td><td>Layer Filter</td><td>hierarchical/constraint/evaluation/binary 或 all</td></tr><tr><td>输入</td><td>Annotation Policy</td><td>debug/coverage/source/relocation 注释开关</td></tr><tr><td>输出</td><td>Text NIR</td><td>可被 noemassemble 接受的规范或易读文本</td></tr><tr><td>输出</td><td>Symbol Map</td><td>对象 ID 到稳定文本名称映射</td></tr><tr><td>输出</td><td>Diagnostics</td><td>无法表示或损坏记录的位置与原因</td></tr></tbody></table></div></section>
+  <section><h2>它不会做什么</h2><ul><li>不恢复已被 strip 删除的源文本</li><li>不把调试注释混入运行语义</li><li>不将损坏对象猜测为合法 NIR</li><li>不宣称反汇编摘要等同原始自然语言</li></ul><p>所有对象输入均视为不可信；偏移、长度、计数、索引和对齐计算必须使用 checked arithmetic。输出必须标记不可表示记录、未知扩展和信息损失，不能用占位文本制造可再次汇编的假象。</p>
+</section>
+  </div>
+  <section><h2>继续阅读</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 NIR、NOBJ 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/noesis-core.html"><strong>Noesis Core</strong><span>查看确定性编译、文本 IR 与对象生成边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div>
+</section>
+</main>

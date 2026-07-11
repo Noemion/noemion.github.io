@@ -1,0 +1,51 @@
+---
+layout: default
+title: "Noesis Core · Noemion"
+page_role: "content"
+footer_text: "Noemion · Noesis Core"
+permalink: "/components/noesis-core.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">组件</a><span aria-hidden="true">/</span><span>Noesis Core</span></nav>
+  <div class="hero"><h1>Noesis Core</h1><p>确定性地分析来源表达，形成可检验的意义，并生成 Noema IR 与 Noema Object。</p><div class="badges"><span class="badge">Noesis</span><span class="badge">Deterministic</span><span class="badge">Fail Closed</span></div></div>
+  <section class="content-wide">
+    <h2>职责</h2>
+    <div class="flow"><div class="step">受控源或封闭候选</div><div class="step">语义构造</div><div class="step">绑定与类型检查</div><div class="step">约束与覆盖审计</div><div class="step">NIR / NOBJ</div></div>
+    <p><em>Noesis</em> 在这里表示从表达形成可检验意义的编译活动。Noesis Core 是唯一可以生成 NIR 和 NOBJ 的组件；它规范化输入，绑定符号与概念，检查类型和约束，保留不能消除的歧义，并确定对象布局。</p>
+  </section>
+  <section class="content-wide">
+    <h2>三种输入配置</h2>
+    <table><thead><tr><th>模式</th><th>输入与信任边界</th></tr></thead><tbody>
+      <tr><td>Deterministic 配置</td><td>只读取受控来源，不调用模型；相同的规范化输入和环境必须产生相同结果。</td></tr>
+      <tr><td>Model-assisted 配置</td><td>Horizon Engine 提交带来源、证据、置信度和歧义状态的封闭候选；Noesis Core 决定接受或拒绝。</td></tr>
+      <tr><td>External-generation 配置</td><td>外部模型可以生成候选来源，但候选仍是不可信输入，必须重新经过完整的确定性检查。</td></tr>
+    </tbody></table>
+
+<p>具体命令行选项属于工具接口，不由组件职责定义冻结；只有 CLI 规范、版本策略和对应一致性测试获批后才形成兼容承诺。</p>
+  </section>
+  <section class="content-rows">
+    <h2>当前编译流程</h2>
+    <ol>
+      <li>规范化源文本、上下文、资源、领域命名空间和策略。</li>
+      <li>识别目标、结果类型、模态、否定、范围、条件与多个合法解释。</li>
+      <li>构造高层 NIR，执行实体绑定与硬约束、软偏好、推断权限编译。</li>
+      <li>分类未指定、可推断、冲突、待确认与本体库外语义。</li>
+      <li>构造验收契约和证据图，检查类型、符号、可满足性和来源覆盖。</li>
+      <li>把高层表示实现化为可编码的 NIR，再由确定性对象写入器生成 NOBJ。</li>
+    </ol>
+  </section>
+  <section class="content-rows">
+    <h2>失败边界</h2>
+    <ul><li>模型置信度不能替代类型、覆盖或安全证明。</li><li>编译器无法可靠理解的输入是编译失败；源内容显式保留的歧义才是合法运行语义。</li><li>精确载荷不能被有损摘要；覆盖缺口、冲突和未分类来源不能静默发布。</li></ul>
+  </section>
+  <section class="content-band">
+    <h2>后续计划：长上下文与模型辅助</h2>
+    <p>第一阶段只设计规范与安全对象核心。来源图长上下文编译和 Horizon Engine 模型辅助输入，要等确定性路径、覆盖模型和拒绝行为稳定后再开发。</p>
+  </section>
+  <section class="content-stack">
+    <h2>详细设计入口与验证证据</h2>
+    <p>尚未冻结的核心契约包括规范化上下文、符号与类型环境、约束求解接口、歧义状态机、证据账本、编译阶段管理、对象写入器和诊断模型。每个编译阶段必须声明输入和输出不变量、是否允许产生未决状态、资源上限以及失败后能否继续。</p>
+    <p>验收测试需要覆盖相同输入的字节级复现、规范化往返、类型与约束负例、歧义保持、来源单元覆盖、精确载荷保护、跨阶段属性测试，以及关闭模型后的完整确定性流程。性能数据不能替代语义和安全正确性。</p>
+  </section>
+  <div class="next-prev"><a href="../specifications/horizon-object.html">← Horizon Object</a><a href="noema-object-system.html">Noema Object System →</a></div>
+</main>

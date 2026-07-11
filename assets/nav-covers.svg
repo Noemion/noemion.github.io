@@ -19,16 +19,16 @@
       <path d="M48 31c1-8 15-10 20-4 6 8-7 10-7 17" fill="none" stroke="#3158ff" stroke-width="5" stroke-linecap="round"/>
       <circle cx="60" cy="51" r="3" fill="#f04b23"/>
     </symbol>
-    <symbol id="nav-cover-gsir" viewBox="0 0 116 82">
+    <symbol id="nav-cover-noema-ir" viewBox="0 0 116 82">
       <path d="M19 57 43 24l28 14 25-18M43 24l4 35m24-21 8 25M47 59l32 4" stroke="#789388" stroke-width="2" fill="none"/>
       <circle cx="19" cy="57" r="7" fill="#68d7b2"/><circle cx="43" cy="24" r="8" fill="#3158ff"/><circle cx="71" cy="38" r="7" fill="#f4be35"/><circle cx="96" cy="20" r="6" fill="#f04b23"/><circle cx="47" cy="59" r="5" fill="#f0f6f3"/><circle cx="79" cy="63" r="6" fill="#68d7b2"/>
     </symbol>
-    <symbol id="nav-cover-gobj" viewBox="0 0 116 82">
+    <symbol id="nav-cover-noema-object" viewBox="0 0 116 82">
       <rect x="13" y="11" width="90" height="60" fill="#161e1a" stroke="#789388"/>
       <path d="M13 26h90M13 41h90M13 56h90M36 11v60" stroke="#789388"/>
       <rect x="42" y="17" width="34" height="4" fill="#68d7b2"/><rect x="42" y="32" width="48" height="4" fill="#3158ff"/><rect x="42" y="47" width="27" height="4" fill="#f4be35"/><rect x="42" y="62" width="42" height="4" fill="#f04b23"/>
     </symbol>
-    <symbol id="nav-cover-sso" viewBox="0 0 116 82">
+    <symbol id="nav-cover-horizon-object" viewBox="0 0 116 82">
       <rect x="10" y="15" width="43" height="50" fill="#3158ff" opacity=".75"/><rect x="37" y="23" width="43" height="42" fill="#68d7b2" opacity=".82"/><rect x="64" y="31" width="42" height="34" fill="#f4be35" opacity=".9"/>
       <path d="M21 53h21M49 53h20M76 53h19" stroke="#101714" stroke-width="3"/>
     </symbol>
@@ -70,7 +70,7 @@
       <rect x="18" y="9" width="64" height="64" fill="#f0f6f3"/><rect x="26" y="18" width="7" height="46" fill="#f04b23"/><path d="M41 22h30M41 32h24M41 42h30M41 52h19M41 62h27" stroke="#3158ff" stroke-width="3"/>
       <rect x="76" y="17" width="24" height="42" fill="#68d7b2"/><path d="M82 26h12M82 35h12M82 44h8" stroke="#10261e" stroke-width="2"/>
     </symbol>
-    <symbol id="nav-cover-noemld-manual" viewBox="0 0 116 82">
+    <symbol id="nav-cover-noemlink-manual" viewBox="0 0 116 82">
       <rect x="9" y="14" width="31" height="54" fill="#3158ff"/><rect x="76" y="14" width="31" height="54" fill="#f04b23"/>
       <path d="M17 28h15M17 39h15M17 50h15M84 28h15M84 39h15M84 50h15" stroke="#f0f6f3" stroke-width="3"/>
       <path d="M40 28h17v27h19M53 22l7 6-7 6m16 15 7 6-7 6" stroke="#f4be35" stroke-width="3" fill="none"/>
