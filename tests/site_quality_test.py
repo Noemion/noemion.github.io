@@ -554,6 +554,7 @@ def validate_jekyll_sources():
             "page.permalink contains '/docs/'",
             'data-tool-id="{{ page_tool_id }}"',
             "{{ '/assets/style.css' | relative_url }}",
+            "{{ '/assets/directory.css' | relative_url }}",
             "{{ '/assets/directory.js' | relative_url }}",
             "{{ '/assets/catalog.js' | relative_url }}",
             "site.github.build_revision",
@@ -1323,10 +1324,12 @@ def main():
                 )
         if parser.skip_links != 1 or parser.main_targets != 1:
             errors.append(f"{rel}: missing unique skip link or main target")
-        if len(parser.stylesheets) != 1:
-            errors.append(f"{rel}: expected exactly one stylesheet")
-        elif not urlsplit(parser.stylesheets[0]).query:
-            errors.append(f"{rel}: shared stylesheet must include a build cache key")
+        stylesheet_paths = [urlsplit(stylesheet).path for stylesheet in parser.stylesheets]
+        if len(parser.stylesheets) != 2 or not stylesheet_paths[0].endswith("assets/style.css") or not stylesheet_paths[1].endswith("assets/directory.css"):
+            errors.append(f"{rel}: expected versioned style.css and directory.css stylesheets")
+        for stylesheet in parser.stylesheets:
+            if not urlsplit(stylesheet).query:
+                errors.append(f"{rel}: shared stylesheet must include a build cache key: {stylesheet}")
         directory_scripts = [
             script
             for script in parser.scripts
