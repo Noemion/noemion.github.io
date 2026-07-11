@@ -1,16 +1,10 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>noemld 文档 · Noemion</title>
-  <link rel="stylesheet" href="../../../assets/style.css">
-  <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
-  <script src="../../../assets/directory.js" defer></script>
-</head>
-<body data-page-role="docs-index">
-<a class="skip-link" href="#main-content">跳到正文</a>
-<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../../../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../../../index.html">项目首页</a></noscript></div></header>
+---
+layout: default
+title: "noemld 文档 · Noemion"
+page_role: "docs-index"
+footer_text: "Noemion · noemld documentation"
+permalink: "/tools/noemld/docs/index.html"
+---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../../index.html">项目</a><span aria-hidden="true">/</span><a href="../../index.html">工具</a><span aria-hidden="true">/</span><a href="../index.html">noemld</a><span aria-hidden="true">/</span><span aria-current="page">文档</span></nav>
   <div class="hero"><h1>noemld 文档</h1><p>职责、调用边界、确定性链接流程、安全规则和验证入口。</p><div class="badges"><span class="badge">Documentation</span><span class="badge">Phase 4 / Phase 5</span><span class="badge">12 Topics</span></div></div>
@@ -23,6 +17,3 @@
   <section><h2>成熟度与证据边界</h2><div class="callout warning">CLI 参数、重定位类型、AELF 名称与具体 ABI 仍需相应规范或 ADR 冻结；文档中的候选示例不构成已批准规范。</div><p>当前可作为评审基线的是：Strict 模式无模型、同一有效输入产生可复现结果、对象输入一律不可信、所有偏移和规模运算采用 checked arithmetic、权限不可静默扩大。尚未完成的是记录布局、算法复杂度上限、诊断编号、互操作 Profile 和独立实现验证。</p><p>当规范条款、参考实现测试向量和至少一个独立消费者形成闭环后，相关页面才可从“设计说明”升级为“实现与一致性参考”。</p></section>
   <div class="next-prev"><a href="../index.html">← noemld 项目页</a><a href="contract.html">开始阅读 →</a></div>
 </main>
-<footer>Noemion · noemld documentation</footer>
-</body>
-</html>

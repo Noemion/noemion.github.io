@@ -1,16 +1,10 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>工具参考 · Noemion 文档</title>
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <script src="../assets/directory.js" defer></script>
-</head>
-<body data-page-role="content">
-<a class="skip-link" href="#main-content">跳到正文</a>
-<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+---
+layout: default
+title: "工具参考 · Noemion 文档"
+page_role: "content"
+footer_text: "Noemion · 工具参考"
+permalink: "/docs/tools-reference.html"
+---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">文档</a><span aria-hidden="true">/</span><span aria-current="page">工具参考</span></nav>
   <div class="hero"><h1>Noemion 工具参考</h1><p>按对象生命周期整理 23 个工具的职责、阶段和现有文档状态。</p><div class="badges"><span class="badge">23 Tools</span><span class="badge">Project Pages</span><span class="badge">Unreleased</span></div></div>
@@ -22,6 +16,3 @@
   <section><h2>文档状态</h2><p><strong>设计提案：</strong>只有存在实质内容时才建立工具自己的 `docs/` 子树。目前 <a href="../tools/noemld/docs/">noemld 文档</a>提供 12 个专题样板；其他工具先保持项目页，后续逐一 review 后决定拆分深度。</p><p>建立专题文档的最低条件是工具项目页已经稳定说明问题、职责和边界，并且至少存在需要独立维护的契约、流程、安全、测试或参考内容。专题页仍处于设计阶段时必须标明证据缺口，不得用文档数量暗示实现成熟。</p><p><strong>开放问题：</strong>各工具 CLI、扩展名、稳定输入输出 schema、研究验证方法和发布顺序尚未冻结。</p></section>
   <div class="next-prev"><a href="development-guide.html">← 开发指南</a><a href="index.html">文档首页</a><a href="specifications-reference.html">规范参考 →</a></div>
 </main>
-<footer>Noemion · 工具参考</footer>
-</body>
-</html>

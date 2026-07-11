@@ -1,16 +1,10 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>noemfmt · 规范格式化工具 · Noemion</title>
-  <link rel="stylesheet" href="../../assets/style.css">
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <script src="../../assets/directory.js" defer></script>
-</head>
-<body data-page-role="tool-project">
-<a class="skip-link" href="#main-content">跳到正文</a>
-<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../../index.html">项目首页</a></noscript></div></header>
+---
+layout: default
+title: "noemfmt · 规范格式化工具 · Noemion"
+page_role: "tool-project"
+footer_text: "Noemion · noemfmt project"
+permalink: "/tools/noemfmt/index.html"
+---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemfmt</span></nav>
   <div class="hero"><h1>noemfmt · 规范格式化工具</h1><p>对 GSL 和文本 GSIR 做纯表现层规范化，提供稳定格式作为评审、缓存和差异比较基础。</p><div class="badges"><span class="badge">Phase 2 / Phase 3</span><span class="badge">Text IR</span><span class="badge">GSL / 文本 GSIR 规范形式</span><span class="badge">Design Stage</span></div></div>
@@ -21,6 +15,3 @@
   <section><h2>处理边界</h2><ul><li>不重命名符号或改变绑定</li><li>不删除看似冗余的约束</li><li>不修复类型错误或补全缺失字段</li><li>不把格式化成功解释为语义有效</li></ul><p>源文本、include 和配置均视为不可信并受大小与深度限制。无法建立完整语法树时应报告诊断，不以局部重排覆盖错误区域。</p></section>
   <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GSIR、GOBJ 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性编译、文本 IR 与对象生成边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div><p>专题文档应在语法稳定后定义规范打印规则、注释模型、可交换结构和版本迁移行为。</p></section>
 </main>
-<footer>Noemion · noemfmt project</footer>
-</body>
-</html>

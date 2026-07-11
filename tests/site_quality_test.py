@@ -9,12 +9,20 @@ import subprocess
 import sys
 
 
-ROOT = Path(__file__).resolve().parents[1]
-README = ROOT / "README.md"
+SOURCE_ROOT = Path(__file__).resolve().parents[1]
+SOURCE_ONLY = len(sys.argv) == 1 or sys.argv[1] == "--source-only"
+ROOT = SOURCE_ROOT if SOURCE_ONLY else Path(sys.argv[1]).resolve()
+README = SOURCE_ROOT / "README.md"
 DIRECTORY_CSS = ROOT / "assets" / "directory.css"
-HTML_FILES = sorted(ROOT.rglob("*.html"))
+SOURCE_HTML_FILES = sorted(
+    path
+    for path in SOURCE_ROOT.rglob("*.html")
+    if "_site" not in path.parts and not any(part.startswith("_") for part in path.parts)
+)
+HTML_FILES = SOURCE_HTML_FILES if SOURCE_ONLY else sorted(ROOT.rglob("*.html"))
 RAW_AMP = re.compile(r"&(?![A-Za-z][A-Za-z0-9]+;|#[0-9]+;|#x[0-9A-Fa-f]+;)")
 HREF_LITERAL = re.compile(r'href:\s*"([^"]+)"')
+FRONT_MATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 ROUTE_ROW = re.compile(
     r"^\| `([^`]+\.html)` \| (portal|section|content|tool|docs|topic) \| `([^`]*)` \| ([0-9]+) \| ([^|]+) \|$",
     re.MULTILINE,
@@ -217,13 +225,19 @@ def read_route_rows():
     return rows
 
 
+def resolve_local_path(path, url_path):
+    if url_path.startswith("/"):
+        return (ROOT / unquote(url_path).lstrip("/")).resolve()
+    return (path.parent / unquote(url_path)).resolve()
+
+
 def resolved_routes(path, hrefs):
     routes = []
     for href in hrefs:
         parts = urlsplit(href)
         if parts.scheme or href.startswith(("#", "mailto:", "tel:")):
             continue
-        routes.append((path.parent / unquote(parts.path)).resolve().relative_to(ROOT).as_posix())
+        routes.append(resolve_local_path(path, parts.path).relative_to(ROOT).as_posix())
     return routes
 
 
@@ -240,6 +254,97 @@ def expected_manual_roles(index):
 
 def normalize_visible_text(text):
     return " ".join(text.split())
+
+
+def front_matter_value(block, key):
+    match = re.search(rf"^{re.escape(key)}:\s*(.+)$", block, re.MULTILINE)
+    if match is None:
+        return None
+    value = match.group(1).strip()
+    if value.startswith('"'):
+        return json.loads(value)
+    return value
+
+
+def validate_jekyll_sources():
+    errors = []
+    route_rows = read_route_rows()
+    registry = {row["route"]: row for row in route_rows}
+    registered = sorted(registry)
+    source_routes = sorted(path.relative_to(SOURCE_ROOT).as_posix() for path in SOURCE_HTML_FILES)
+
+    if len(route_rows) != len(registry):
+        errors.append("README contains duplicate HTML routes")
+    if registered != source_routes:
+        errors.append("README routes do not exactly match Jekyll source pages")
+    if len(source_routes) != 64:
+        errors.append(f"expected 64 Jekyll source pages, found {len(source_routes)}")
+
+    forbidden_shell = re.compile(
+        r"<!doctype|<html\b|<head\b|<body\b|class=\"site-header\"|<footer\b",
+        re.IGNORECASE,
+    )
+    for path in SOURCE_HTML_FILES:
+        route = path.relative_to(SOURCE_ROOT).as_posix()
+        text = path.read_text()
+        match = FRONT_MATTER.match(text)
+        if match is None:
+            errors.append(f"{route}: missing YAML front matter")
+            continue
+        metadata = match.group(1)
+        row = registry.get(route)
+        expected_role = ROLE_BY_KIND.get(row["kind"]) if row else None
+        expected = {
+            "layout": "default",
+            "page_role": expected_role,
+            "permalink": "/" + route,
+        }
+        for key, value in expected.items():
+            actual = front_matter_value(metadata, key)
+            if actual != value:
+                errors.append(f"{route}: front matter {key} must be {value!r}, got {actual!r}")
+        for key in ("title", "footer_text"):
+            if not front_matter_value(metadata, key):
+                errors.append(f"{route}: front matter requires {key}")
+        body = text[match.end():]
+        if forbidden_shell.search(body):
+            errors.append(f"{route}: page shell must come from the Jekyll layout")
+        parser = parse(path)
+        if parser.main_targets != 1:
+            errors.append(f"{route}: source must retain one main content target")
+
+    layout = SOURCE_ROOT / "_layouts/default.html"
+    header = SOURCE_ROOT / "_includes/site-header.html"
+    footer = SOURCE_ROOT / "_includes/site-footer.html"
+    for path in (layout, header, footer):
+        if not path.exists():
+            errors.append(f"missing Jekyll shared shell: {path.relative_to(SOURCE_ROOT)}")
+    if layout.exists():
+        layout_text = layout.read_text()
+        for token in (
+            "{{ content }}",
+            "{% include site-header.html %}",
+            "{% include site-footer.html %}",
+            "{{ '/assets/style.css' | relative_url }}",
+            "{{ '/assets/directory.js' | relative_url }}",
+            'data-page-role="{{ page.page_role }}"',
+        ):
+            if token not in layout_text:
+                errors.append(f"default layout missing contract: {token}")
+
+    directory_script = SOURCE_ROOT / "assets/directory.js"
+    if directory_script.exists():
+        declared = sorted(set(HREF_LITERAL.findall(directory_script.read_text())))
+        if declared != registered:
+            errors.append("directory.js module entries do not cover every registered route")
+    else:
+        errors.append("missing assets/directory.js")
+
+    if errors:
+        print("\n".join(errors))
+        return 1
+    print(f"PASS: {len(source_routes)} Jekyll source pages use the shared layout contract")
+    return 0
 
 
 def validate_tool_project_contract(h2_texts, status_texts, manual_counts=None):
@@ -502,7 +607,7 @@ def main():
         if len(parser.icons) != 1:
             errors.append(f"{rel}: missing unique favicon reference")
         else:
-            icon_path = (path.parent / unquote(urlsplit(parser.icons[0]).path)).resolve()
+            icon_path = resolve_local_path(path, urlsplit(parser.icons[0]).path)
             if icon_path != favicon.resolve() or not icon_path.exists():
                 errors.append(f"{rel}: favicon path does not resolve to assets/favicon.svg")
         duplicates = sorted(name for name in set(parser.ids) if parser.ids.count(name) > 1)
@@ -512,7 +617,7 @@ def main():
             parts = urlsplit(href)
             if parts.scheme or href.startswith(("mailto:", "tel:")):
                 continue
-            target = path if not parts.path else (path.parent / unquote(parts.path)).resolve()
+            target = path if not parts.path else resolve_local_path(path, parts.path)
             if not target.exists():
                 errors.append(f"{rel}: broken link {href}")
             elif parts.fragment and target.suffix == ".html":
@@ -659,4 +764,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(validate_jekyll_sources() if SOURCE_ONLY else main())

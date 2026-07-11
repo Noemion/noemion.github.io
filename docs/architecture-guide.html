@@ -1,16 +1,10 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>架构指南 · Noemion 文档</title>
-  <link rel="stylesheet" href="../assets/style.css">
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <script src="../assets/directory.js" defer></script>
-</head>
-<body data-page-role="content">
-<a class="skip-link" href="#main-content">跳到正文</a>
-<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+---
+layout: default
+title: "架构指南 · Noemion 文档"
+page_role: "content"
+footer_text: "Noemion · 架构指南"
+permalink: "/docs/architecture-guide.html"
+---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">文档</a><span aria-hidden="true">/</span><span aria-current="page">架构指南</span></nav>
   <div class="hero"><h1>Noemion 架构指南</h1><p>从语义来源到可信执行，理解各层职责、对象流转和信任边界。</p><div class="badges"><span class="badge">Architecture</span><span class="badge">Objects</span><span class="badge">Trust Boundaries</span></div></div>
@@ -22,6 +16,3 @@
   <section><h2>开放问题</h2><p><strong>开放问题：</strong>消费端 ABI、动态依赖、长上下文状态同步、最终对象命名、连续表示互操作和模型包格式仍需证据、规范或 ADR。</p><p>架构主张需要分别用确定性构建、Malformed/Fuzz、链接冲突矩阵、篡改与回滚、跨 Runtime 等价和目标设备资源实验验证。当前架构图是待验证的概要设计，不是性能或产业可行性证明。</p><p><strong>未来阶段：</strong>第一阶段安全二进制核心稳定后，才评估 NSFE 训练、量化和跨设备 Runtime。</p><p><a href="../architecture/open-questions.html">查看完整开放问题清单</a></p></section>
   <div class="next-prev"><a href="installation-and-usage.html">← 使用与获取</a><a href="index.html">文档首页</a><a href="development-guide.html">开发指南 →</a></div>
 </main>
-<footer>Noemion · 架构指南</footer>
-</body>
-</html>

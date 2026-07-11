@@ -1,16 +1,10 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>noemstrip · 开发对象发布裁剪器 · Noemion</title>
-  <link rel="stylesheet" href="../../assets/style.css">
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <script src="../../assets/directory.js" defer></script>
-</head>
-<body data-page-role="tool-project">
-<a class="skip-link" href="#main-content">跳到正文</a>
-<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../../index.html">项目首页</a></noscript></div></header>
+---
+layout: default
+title: "noemstrip · 开发对象发布裁剪器 · Noemion"
+page_role: "tool-project"
+footer_text: "Noemion · noemstrip project"
+permalink: "/tools/noemstrip/index.html"
+---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemstrip</span></nav>
   <div class="hero"><h1>noemstrip · 开发对象发布裁剪器</h1><p>移除非运行时 .debug.*、训练溯源和开发决策记录，同时证明运行语义、依赖和披露行为保持不变。</p><div class="badges"><span class="badge">Phase 5</span><span class="badge">Release &amp; Runtime</span><span class="badge">开发 SSO → 发布 SSO</span><span class="badge">Design Stage</span></div></div>
@@ -21,6 +15,3 @@
   <section><h2>处理边界</h2><ul><li>不删除运行闭包、硬约束或 Artifact Contract</li><li>不以文件变小作为成功标准</li><li>不保留覆盖已变化字节的旧签名</li><li>不恢复或重新生成缺失调试信息</li></ul><p>所有对象输入均视为不可信；无法证明某 Section 与运行语义无关时必须保留或拒绝。输出对象和 Debug Companion 需要不可混淆的关联标识与访问策略。</p></section>
   <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GOBJ、SSO 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/linker-loader.html"><strong>组件边界</strong><span>查看链接、装载、Runtime 与安全边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div><p>专题文档应定义 Strip Profile、运行闭包、等价证明、Debug Companion 和重新签名流程。</p></section>
 </main>
-<footer>Noemion · noemstrip project</footer>
-</body>
-</html>

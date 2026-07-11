@@ -1,16 +1,10 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>noemcopy · 对象复制与变换工具 · Noemion</title>
-  <link rel="stylesheet" href="../../assets/style.css">
-  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <script src="../../assets/directory.js" defer></script>
-</head>
-<body data-page-role="tool-project">
-<a class="skip-link" href="#main-content">跳到正文</a>
-<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../../index.html">项目首页</a></noscript></div></header>
+---
+layout: default
+title: "noemcopy · 对象复制与变换工具 · Noemion"
+page_role: "tool-project"
+footer_text: "Noemion · noemcopy project"
+permalink: "/tools/noemcopy/index.html"
+---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemcopy</span></nav>
   <div class="hero"><h1>noemcopy · 对象复制与变换工具</h1><p>执行 Section 复制、抽取、重命名和受控删除，并在每次变换后重建索引、对齐、哈希与签名状态。</p><div class="badges"><span class="badge">Phase 1 / Phase 5</span><span class="badge">Object Tools</span><span class="badge">结构保持的对象变换</span><span class="badge">Design Stage</span></div></div>
@@ -21,6 +15,3 @@
   <section><h2>处理边界</h2><ul><li>不做语义级 strip 决策</li><li>不直接修补任意偏移或原始字节</li><li>不保留已被变换破坏的旧签名为有效状态</li><li>不允许删除运行闭包必需 Section</li></ul><p>所有对象输入均视为不可信；偏移、长度、计数、索引和对齐计算必须使用 checked arithmetic。变换必须先形成新对象并完成验证，再原子交付；失败时保留原对象不变。</p></section>
   <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GOBJ、GSIR 与 SSO 的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性对象处理与安全边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div><p>专题文档应在变换代数和签名状态规则稳定后说明操作顺序、冲突、Change Manifest 与安全回滚。</p></section>
 </main>
-<footer>Noemion · noemcopy project</footer>
-</body>
-</html>
