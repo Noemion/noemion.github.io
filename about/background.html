@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>背景与边界 · Noemion</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="content">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">项目背景</a><span aria-hidden="true">/</span><span>背景与边界</span></nav>
+  <div class="hero"><h1>背景与边界</h1><p>Noemion 为什么存在、解决什么问题，以及不试图成为什么。</p><div class="badges"><span class="badge">Motivation</span><span class="badge">Scope</span><span class="badge">Non-goals</span></div></div>
+  <section>
+    <h2>已确认原则：项目目标</h2>
+    <p class="lead">Noemion 面向生成式计算建立可执行、可链接的表征对象体系，使目标、约束、偏好、资源引用、歧义和验收规则能够被机器分析、验证、重定位和执行。</p>
+    <ul>
+      <li>GSIR 表达目标、约束、证据、评价与未决语义，而不是只保存一段供模型阅读的文本。</li>
+      <li>对象格式负责组织、链接、装载和完整性；Runtime 负责生成式求解与 Lowering。</li>
+      <li>项目借鉴 ELF 的 Section、Segment、符号、重定位、动态链接、调试、strip 和装载工程策略，但不复制传统机器指令语义。</li>
+    </ul>
+  </section>
+  <section>
+    <h2>已确认原则：与相邻形式的区别</h2>
+    <div class="status-grid">
+      <article class="status-item"><h3>Prompt</h3><p>文本提示可以作为输入或来源，但仅将文本二进制化并不能形成可验证、可链接的语义 IR。</p></article>
+      <article class="status-item"><h3>Skill 包</h3><p>SKILL.md、脚本和资源的压缩归档负责分发内容，不等同于具有类型、符号、约束和重定位语义的对象。</p></article>
+      <article class="status-item"><h3>传统 IR</h3><p>传统 IR 通常强调“怎样执行”；GSIR 强调“什么结果满足目标”以及生成式求解不可越过的边界。</p></article>
+      <article class="status-item"><h3>普通二进制容器</h3><p>JSON、CBOR、Protobuf 或 Token ID 编码只能承载数据，不能凭编码方式自动获得 GSIR 语义。</p></article>
+    </div>
+  </section>
+  <section>
+    <h2>已确认原则：系统与信任边界</h2>
+    <ul>
+      <li>Strict 模式无模型、确定且可复现；只有确定性的 Compiler Core 能生成 GSIR/GOBJ。</li>
+      <li>通用模型可作为外部源码生成器，模型输出始终是不可信输入。</li>
+      <li>模型不得决定二进制布局或直接生成 GOBJ。</li>
+      <li>歧义是一等信息；证据不足时保留未决语义，不制造错误确定性。</li>
+      <li>首个实施阶段只做规范与安全二进制核心，不引入模型、LLVM、MLIR 或大型框架。</li>
+    </ul>
+  </section>
+  <section>
+    <h2>开放问题：名称与实现选择</h2>
+    <p>总体对象规范的候选名称、类似 <code>.o</code> 的对象最终名称以及首版实现语言尚未冻结。工程讨论可暂用 GOBJ，但候选 AELF 等名称不构成正式规范。完整清单见<a href="../architecture/open-questions.html">开放问题</a>。</p>
+  </section>
+  <section>
+    <h2>未来阶段：路线图语境</h2>
+    <p>链接、可信装载、SSO 发布与 NSFE 只在前置阶段的规范、拒绝路径和安全测试通过后推进。阶段产物和放行门见<a href="../development/implementation-roadmap.html">实施路线图</a>。</p>
+  </section>
+  <section>
+    <h2>研究命题与反证条件</h2>
+    <p>Noemion 的上位命题是：将生成式任务表示为带类型、约束、证据、权限与验收条件的对象，可以比仅依赖文本上下文提供更强的可验证性、组合性和可复现性。该命题必须与结构化 Prompt、工作流 DSL、知识图谱、传统 IR 和普通对象容器进行对照，而不能只用项目内部术语证明自身价值。</p>
+    <ul>
+      <li>如果对象化表示不能在跨模型或跨 Runtime 实验中保持关键约束等价，模型无关性主张应被限制或否定。</li>
+      <li>如果链接、验证和装载的额外复杂度不能换来可测量的错误定位、安全或复现收益，工程范围必须收缩。</li>
+      <li>如果歧义集合和证据机制不能降低错误确定率，相关语义结构需要重新设计。</li>
+      <li>如果对象条款无法形成独立实现和一致性测试，标准化目标尚不成立。</li>
+    </ul>
+  </section>
+  <div class="next-prev"><a href="index.html">← 项目背景</a><a href="../architecture/object-lifecycle.html">对象生命周期 →</a></div>
+</main>
+<footer>Noemion · 背景与边界</footer>
+</body>
+</html>

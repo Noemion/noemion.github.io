@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SSO 链接 · noemld 文档 · Noemion</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<script src="../../../assets/directory.js" defer>
+</script>
+</head>
+<body data-page-role="docs-topic">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" data-site-root href="../../../index.html">Noemion</a>
+<details class="directory-panel">
+<summary>目录</summary>
+<nav data-directory aria-label="目录">
+</nav>
+</details>
+<noscript>
+<a class="no-script-home" href="../../../index.html">项目首页</a>
+</noscript>
+</div>
+</header>
+<main id="main-content" tabindex="-1">
+<nav class="breadcrumbs" aria-label="面包屑">
+<a href="../../../index.html">项目</a>
+<span aria-hidden="true">/</span>
+<a href="../../index.html">工具</a>
+<span aria-hidden="true">/</span>
+<a href="../index.html">noemld</a>
+<span aria-hidden="true">/</span>
+<a href="index.html">文档</a>
+<span aria-hidden="true">/</span>
+<span aria-current="page">SSO 链接</span>
+</nav>
+<nav class="manual-nav manual-nav-top" aria-label="手册分页">
+<a data-manual-role="previous" href="relocations.html">← 上一页</a>
+<a data-manual-role="up" href="index.html">上级</a>
+<a href="index.html">目录</a>
+<a data-manual-role="next" href="loader-security.html">下一页 →</a>
+<a data-manual-role="index" href="reference-index.html">索引</a>
+</nav>
+<div class="hero">
+<h1>SSO 链接</h1>
+<p>约束、权限、Disclosure Graph 与依赖闭包</p>
+<div class="badges">
+<span class="badge">noemld</span>
+<span class="badge">Phase 4 / Phase 5</span>
+</div>
+</div>
+<section>
+<h2>组合问题</h2>
+<p>SSO 把可共享语义资产与每次运行的私有状态分离。链接时必须证明多个 SSO 的 Contract、权限、披露条件和依赖能够共同成立，而不是简单拼接或覆盖。越靠后的输入不能天然拥有更高优先级，模型也不能替代确定性的合并规则。</p>
+</section>
+<section>
+<h2>共享与私有状态</h2>
+<pre>
+<code>只读语义图、工作流和 Contract       多 Agent 共享
+只读知识子 SSO 与语义原型           多 Agent 共享
+披露状态、记忆和上下文               每会话私有
+调用表、符号绑定和权限状态           每实例私有</code>
+</pre>
+<p>共享表示内容可复用，不表示权限、信任或运行状态自动共享。任何从共享资产到私有上下文的绑定都必须由 Runtime 在实例边界重新验证。</p>
+</section>
+<section>
+<h2>合并规则</h2>
+<ul>
+<li>硬约束和接口冲突导致链接失败。</li>
+<li>权限取更严格交集，扩大必须显式授权。</li>
+<li>软偏好按显式优先级合并。</li>
+<li>强依赖必须形成内容寻址、版本锁定的完整闭包。</li>
+<li>调试剥离不得改变运行语义哈希。</li>
+</ul>
+<p>披露层级与覆盖证书仍以 <a href="../../../specifications/sso.html">SSO 与渐进式披露</a>为权威来源。</p>
+</section>
+<section>
+<h2>候选合并代数</h2>
+<div class="table-wrap"><table><thead><tr><th>对象</th><th>默认组合</th><th>拒绝条件</th></tr></thead><tbody><tr><td>硬约束</td><td>逻辑合取，全部必须成立。</td><td>不可同时满足或求值域不兼容。</td></tr><tr><td>权限</td><td>取允许能力的交集和限制的并集。</td><td>产物所需能力被移除，或请求未授权扩大。</td></tr><tr><td>软偏好</td><td>仅按显式优先级与稳定平局规则合并。</td><td>优先级循环或同级冲突无规范解。</td></tr><tr><td>Artifact Contract</td><td>接口、schema、前后置条件逐项兼容。</td><td>输入输出、效果或版本承诺不相容。</td></tr><tr><td>Disclosure Graph</td><td>合并节点后重新计算可达性与覆盖。</td><td>出现未授权披露、覆盖缺口或循环超限。</td></tr></tbody></table></div>
+<div class="callout warning">该表表达待规范化的设计方向，不是已经冻结的形式代数。每类对象仍需给出数据模型、判定算法和反例。</div>
+</section>
+<section>
+<h2>依赖闭包与验证证据</h2>
+<p>强依赖闭包以内容身份和版本约束为节点，以必需关系为边，按稳定顺序求不动点。循环并非一律非法，但必须由 Profile 明确允许，并证明初始化、权限和披露语义有唯一结果；否则拒绝。</p>
+<p>放行证据至少包括合并交换或顺序独立性测试、权限不扩大证明、Contract 冲突矩阵、Disclosure Graph 覆盖反例，以及剥离前后运行语义哈希等价测试。</p>
+</section>
+<nav class="manual-nav manual-nav-bottom" aria-label="手册分页">
+<a data-manual-role="previous" href="relocations.html">← 上一页</a>
+<a data-manual-role="up" href="index.html">上级</a>
+<a href="index.html">目录</a>
+<a data-manual-role="next" href="loader-security.html">下一页 →</a>
+<a data-manual-role="index" href="reference-index.html">索引</a>
+</nav>
+</main>
+<footer>Noemion · noemld documentation</footer>
+</body>
+</html>

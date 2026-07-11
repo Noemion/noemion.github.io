@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>输入与输出 · noemld 文档 · Noemion</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<script src="../../../assets/directory.js" defer>
+</script>
+</head>
+<body data-page-role="docs-topic">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" data-site-root href="../../../index.html">Noemion</a>
+<details class="directory-panel">
+<summary>目录</summary>
+<nav data-directory aria-label="目录">
+</nav>
+</details>
+<noscript>
+<a class="no-script-home" href="../../../index.html">项目首页</a>
+</noscript>
+</div>
+</header>
+<main id="main-content" tabindex="-1">
+<nav class="breadcrumbs" aria-label="面包屑">
+<a href="../../../index.html">项目</a>
+<span aria-hidden="true">/</span>
+<a href="../../index.html">工具</a>
+<span aria-hidden="true">/</span>
+<a href="../index.html">noemld</a>
+<span aria-hidden="true">/</span>
+<a href="index.html">文档</a>
+<span aria-hidden="true">/</span>
+<span aria-current="page">输入与输出</span>
+</nav>
+<nav class="manual-nav manual-nav-top" aria-label="手册分页">
+<a data-manual-role="previous" href="contract.html">← 上一页</a>
+<a data-manual-role="up" href="index.html">上级</a>
+<a href="index.html">目录</a>
+<a data-manual-role="next" href="invocation.html">下一页 →</a>
+<a data-manual-role="index" href="reference-index.html">索引</a>
+</nav>
+<div class="hero">
+<h1>输入与输出</h1>
+<p>链接输入、Profile、Lock 与产物契约</p>
+<div class="badges">
+<span class="badge">noemld</span>
+<span class="badge">Phase 4 / Phase 5</span>
+</div>
+</div>
+<section>
+<h2>输入信任模型</h2>
+<p>每个对象、归档、锁文件和链接脚本都按不可信输入处理。来源可信或签名有效只说明身份与完整性，不证明结构安全或语义兼容。解析器必须先完成长度、偏移、计数、对齐、索引、编码和资源上限验证，再允许内容进入符号与图合并阶段。</p>
+</section>
+<section>
+<h2>输入</h2>
+<div class="table-wrap"><table><thead><tr><th>对象</th><th>最低契约</th><th>进入条件</th></tr></thead><tbody><tr><td>Link Inputs</td><td>GOBJ、archive、SSO 与候选链接脚本</td><td>格式版本可识别、内容指纹可计算、目标和 schema 相容。</td></tr><tr><td>Link Profile</td><td>产物种类、目标 ABI、资源预算与冲突策略</td><td>Profile 标识稳定，所有默认值显式解析并写入 Link Map。</td></tr><tr><td>Dependency Lock</td><td>内容寻址依赖、版本、信任声明和可选性</td><td>强依赖全部锁定；Strict 模式不允许隐式网络解析。</td></tr></tbody></table></div>
+</section>
+<section>
+<h2>输出</h2>
+<div class="table-wrap"><table><thead><tr><th>对象</th><th>契约</th><th>消费者</th></tr></thead><tbody><tr><td>Linked Object / SSO</td><td>解析后的符号、类型化引用、运行 Segment 与披露闭包</td><td>noemverify、noemstrip、noempack、Loader。</td></tr><tr><td>Link Map</td><td>输入成员、选择原因、ID 映射、Section 计划和产物摘要</td><td>开发者、审计工具、测试与论文复现实验。</td></tr><tr><td>Conflict Report</td><td>未解析、重复定义、约束、权限和资源失败</td><td>构建系统、开发者和治理评审。</td></tr></tbody></table></div>
+</section>
+<section>
+<h2>输出原子性与谱系</h2>
+<p>成功产物必须绑定输入集合、顺序无关的集合摘要、Profile、Dependency Lock、规范版本和链接器版本。失败时不得发布 Linked Object；Link Map 可作为诊断草稿保留，但必须带有“未完成、不可装载”状态，避免被下游误用。</p>
+<p>产物验证应由独立组件执行，不能仅凭 <code>noemld</code> 自报成功。Link Map 也不能替代对象本身的完整性校验。</p>
+</section>
+<section>
+<h2>资源与拒绝边界</h2>
+<ul><li>Profile 必须限定单对象大小、输入总量、Section 数、符号数、图节点与边数、重定位数、依赖深度和诊断上限。</li><li>所有累计值在分配和相加前检查；不允许先溢出再比较。</li><li>未知必需特性、版本或重定位类型必须失败；只有规范明确可跳过的可选扩展才可忽略。</li><li>重复输入、别名路径和归档循环必须按内容身份检测，不能依赖文件名。</li></ul>
+<div class="callout warning">字段布局、上限数值和扩展名尚未冻结；它们必须进入 GOBJ/SSO 规范或 Profile 文档，不能只存在于实现常量中。</div>
+</section>
+<nav class="manual-nav manual-nav-bottom" aria-label="手册分页">
+<a data-manual-role="previous" href="contract.html">← 上一页</a>
+<a data-manual-role="up" href="index.html">上级</a>
+<a href="index.html">目录</a>
+<a data-manual-role="next" href="invocation.html">下一页 →</a>
+<a data-manual-role="index" href="reference-index.html">索引</a>
+</nav>
+</main>
+<footer>Noemion · noemld documentation</footer>
+</body>
+</html>

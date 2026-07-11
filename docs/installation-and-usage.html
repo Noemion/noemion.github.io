@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>使用与获取 · Noemion 文档</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="content">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">文档</a><span aria-hidden="true">/</span><span aria-current="page">使用与获取</span></nav>
+  <div class="hero"><h1>使用与获取</h1><p>说明当前可获取资源、未来工具链使用流程和发布完整性要求。</p><div class="badges"><span class="badge">Unreleased</span><span class="badge">Usage Model</span><span class="badge">Integrity First</span></div></div>
+  <section><h2>当前可用性</h2><p class="callout warning"><strong>已确认原则：</strong>当前没有正式版本、二进制安装包或可执行工具。网站描述的是规范和工程蓝图，不能把页面里的工具名当作已经可以运行的命令。</p><p>资源状态以<a href="../downloads/">下载与资源</a>页面为准；没有真实制品时不提供占位按钮或推测性安装命令。</p></section>
+  <section><h2>未来使用流程</h2><p><strong>设计提案：</strong>工具链成熟后的典型数据流预计如下，具体命令、参数、扩展名和 ABI 尚未冻结。</p><div class="flow"><div class="step">Author</div><div class="step">Compile</div><div class="step">Inspect</div><div class="step">Link</div><div class="step">Verify / Run</div></div><ol><li>用受规范约束的源形式描述目标、约束和验收条件，并记录来源与 Profile。</li><li>由确定性 Compiler Core 生成 GSIR/GOBJ，同时产生诊断和覆盖证据。</li><li>使用对象查看与验证工具检查结构、语义、策略和未决项。</li><li>由链接器解析符号、重定位和依赖闭包，生成链接对象、SSO、Link Map 或冲突报告。</li><li>发布包完成签名、完整性和供应链验证后，才由 Loader/Runtime 装载执行并记录运行证据。</li></ol></section>
+  <section><h2>输入与产物边界</h2><div class="table-wrap"><table><thead><tr><th>阶段</th><th>输入</th><th>产物</th><th>状态</th></tr></thead><tbody><tr><td>语义编译</td><td>规范源、Profile、显式上下文</td><td>GSIR/GOBJ</td><td>架构已定义，实现未发布</td></tr><tr><td>链接</td><td>GOBJ、归档、锁定依赖</td><td>链接对象、SSO、Link Map</td><td>noemld 文档样板已存在</td></tr><tr><td>发布</td><td>已验证对象、Manifest、策略</td><td>签名发布包</td><td>未来阶段</td></tr><tr><td>运行</td><td>已验证包、Run Profile</td><td>运行结果、审计报告</td><td>未来阶段</td></tr></tbody></table></div></section>
+  <section><h2>安装与发布原则</h2><ul><li>正式资源必须提供版本、目标平台或格式、大小、发布日期、校验值和签名信息。</li><li>安装指南只引用真实存在的制品和仓库，不使用占位 URL。</li><li>开发快照与正式版本必须明确区分，不能共享含糊的“最新版”入口。</li><li>依赖必须内容寻址、版本锁定并带有可验证来源。</li><li>进入公开候选发布前，应完成 IPD 验证阶段所需的复现、安全、许可证、SBOM 和互操作证据。</li></ul></section>
+  <section><h2>安全检查</h2><ul><li>下载后先验证校验值和签名，再解析对象。</li><li>对象 Reader 在分配或切片前验证偏移、长度、计数和对齐。</li><li>验证通过不等于获得无限权限；Loader 仍需检查策略、能力和 Segment 属性。</li><li>模型不得决定二进制布局、签名范围或装载权限。</li></ul><p>测试策略见<a href="../development/testing.html">测试、Fuzz 与验证</a>。</p></section>
+  <section><h2>开放问题</h2><p><strong>开放问题：</strong>首批支持平台、分发格式、包管理集成、源码托管位置、命令行语法和对象扩展名尚未决定。相关决定必须在实际发布前通过规范或 ADR 固化。</p><p>发布决策还需要回答支持周期、漏洞响应、密钥轮换、撤回与回滚、许可证组合、长期归档和研究制品引用方式；没有这些生命周期安排时不能把一次构建描述为稳定发行。</p></section>
+  <div class="next-prev"><a href="getting-started.html">← 入门指南</a><a href="index.html">文档首页</a><a href="architecture-guide.html">架构指南 →</a></div>
+</main>
+<footer>Noemion · 使用与获取</footer>
+</body>
+</html>

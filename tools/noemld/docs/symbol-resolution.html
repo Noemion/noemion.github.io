@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>符号解析 · noemld 文档 · Noemion</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<script src="../../../assets/directory.js" defer>
+</script>
+</head>
+<body data-page-role="docs-topic">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" data-site-root href="../../../index.html">Noemion</a>
+<details class="directory-panel">
+<summary>目录</summary>
+<nav data-directory aria-label="目录">
+</nav>
+</details>
+<noscript>
+<a class="no-script-home" href="../../../index.html">项目首页</a>
+</noscript>
+</div>
+</header>
+<main id="main-content" tabindex="-1">
+<nav class="breadcrumbs" aria-label="面包屑">
+<a href="../../../index.html">项目</a>
+<span aria-hidden="true">/</span>
+<a href="../../index.html">工具</a>
+<span aria-hidden="true">/</span>
+<a href="../index.html">noemld</a>
+<span aria-hidden="true">/</span>
+<a href="index.html">文档</a>
+<span aria-hidden="true">/</span>
+<span aria-current="page">符号解析</span>
+</nav>
+<nav class="manual-nav manual-nav-top" aria-label="手册分页">
+<a data-manual-role="previous" href="pipeline.html">← 上一页</a>
+<a data-manual-role="up" href="index.html">上级</a>
+<a href="index.html">目录</a>
+<a data-manual-role="next" href="relocations.html">下一页 →</a>
+<a data-manual-role="index" href="reference-index.html">索引</a>
+</nav>
+<div class="hero">
+<h1>符号解析</h1>
+<p>强弱绑定、版本、可见性与归档成员选择</p>
+<div class="badges">
+<span class="badge">noemld</span>
+<span class="badge">Phase 4 / Phase 5</span>
+</div>
+</div>
+<section>
+<h2>设计目标</h2>
+<p>符号解析负责把“谁引用了什么”转化为唯一、可解释的定义选择。名称相同并不代表语义相同；版本、命名空间、类型、可见性和绑定强度都属于解析键。任何未写进规则的输入顺序偏好都会破坏复现，也会让攻击者通过排列对象影响最终行为。</p>
+</section>
+<section>
+<h2>解析规则</h2>
+<ul>
+<li>扫描显式对象和归档索引，建立全局符号表。</li>
+<li>按可见性、版本和强弱绑定选择定义。</li>
+<li>只拉入满足当前未解析强引用所需的归档成员。</li>
+<li>链接顺序不得改变规范允许范围之外的结果。</li>
+</ul>
+</section>
+<section>
+<h2>候选解析键与选择顺序</h2>
+<div class="callout warning">下列字段与优先级是详细设计候选，最终形式必须由符号与版本规范冻结。</div>
+<ol><li>以命名空间、规范化名称、符号种类、版本要求和目标 Profile 构造查询键。</li><li>过滤不可见、版本不满足、类型不兼容或来自未准入依赖的定义。</li><li>按强定义、弱定义、仅声明等规范类别形成候选集合；不能用文件遍历顺序打破平局。</li><li>若规范规则仍不能产生唯一选择，则生成冲突；只有规范明确允许的可替代弱定义才能用稳定键选择。</li><li>将选择、被拒候选和原因写入 Link Map，再驱动归档成员闭包扩展。</li></ol>
+</section>
+<section>
+<h2>冲突矩阵</h2>
+<div class="table-wrap"><table><thead><tr><th>情况</th><th>候选结果</th><th>必须记录</th></tr></thead><tbody><tr><td>一个兼容强定义</td><td>选择该定义。</td><td>定义来源、版本、可见性和类型。</td></tr><tr><td>多个强定义</td><td>失败，除非规范声明它们是可合并的同一内容身份。</td><td>全部候选和冲突字段。</td></tr><tr><td>只有兼容弱定义</td><td>按冻结的稳定规则选择或合并。</td><td>所有候选与排序键。</td></tr><tr><td>弱引用无定义</td><td>仅按 Profile 定义的缺失语义继续。</td><td>缺失状态及下游行为。</td></tr><tr><td>强引用无定义</td><td>失败。</td><td>引用链、搜索过的依赖和版本约束。</td></tr><tr><td>同名但类型不兼容</td><td>失败，不允许名称匹配掩盖类型冲突。</td><td>期望类型、实际类型和来源。</td></tr></tbody></table></div>
+</section>
+<section>
+<h2>失败条件</h2>
+<ul>
+<li>未解析强符号必须失败。</li>
+<li>版本不匹配必须失败。</li>
+<li>多个强定义不得静默选择最后写入者。</li>
+</ul>
+<p>归档成员选择应以不动点算法终止，并由 Profile 约束扫描轮数、成员数和符号数。循环别名、版本回退链和恶意碰撞必须有专门的负向测试向量。</p>
+</section>
+<section>
+<h2>验证证据</h2>
+<p>解析算法放行需要证明：输入排列不改变结果；显式对象与归档索引得到一致的定义语义；强弱、版本、可见性和类型组合的冲突矩阵全部覆盖；每次选择都能从 Link Map 回溯到规范规则。若未来提供增量链接，其结果还必须与完整重链接等价。</p>
+</section>
+<nav class="manual-nav manual-nav-bottom" aria-label="手册分页">
+<a data-manual-role="previous" href="pipeline.html">← 上一页</a>
+<a data-manual-role="up" href="index.html">上级</a>
+<a href="index.html">目录</a>
+<a data-manual-role="next" href="relocations.html">下一页 →</a>
+<a data-manual-role="index" href="reference-index.html">索引</a>
+</nav>
+</main>
+<footer>Noemion · noemld documentation</footer>
+</body>
+</html>

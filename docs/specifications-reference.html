@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>规范参考 · Noemion 文档</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="content">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">文档</a><span aria-hidden="true">/</span><span aria-current="page">规范参考</span></nav>
+  <div class="hero"><h1>Noemion 规范参考</h1><p>理解权威来源、成熟度标记，以及 GSIR、GOBJ、SSO 和 ADR 的阅读顺序。</p><div class="badges"><span class="badge">Authority</span><span class="badge">Maturity</span><span class="badge">ADR</span></div></div>
+  <section><h2>如何判断权威性</h2><p><strong>已确认原则：</strong>正式规范定义“必须是什么”；架构和项目页面解释关系；文档页提供阅读路径；FAQ 只回答常见问题。发生冲突时，以已批准规范和 ADR 为准。</p><ul><li>规范性要求使用必须、不得、只有等明确约束，并能对应测试或明确说明不可自动判定。</li><li>设计提案不能因为出现在示例、工具页、论文草稿或 FAQ 中而升级为规范。</li><li>相同定义只保留一个权威页面，其他页面通过链接引用。</li><li>实现行为、实验结果和专利文本都不能反向替代规范定义。</li></ul><p><a href="../specifications/">进入规范与成熟度登记</a></p></section>
+  <section><h2>成熟度标记</h2><div class="table-wrap"><table><thead><tr><th>标记</th><th>含义</th><th>使用要求</th></tr></thead><tbody><tr><td>已确认原则</td><td>项目当前必须遵守的边界</td><td>变更需更新规范，必要时记录 ADR</td></tr><tr><td>设计提案</td><td>可评审的候选结构或流程</td><td>不得作为稳定接口依赖</td></tr><tr><td>开放问题</td><td>证据不足或存在多个候选</td><td>保持未决，不制造默认答案</td></tr><tr><td>未来阶段</td><td>超出当前实施范围</td><td>不得提前引入依赖或承诺发布日期</td></tr></tbody></table></div></section>
+  <section><h2>GSIR</h2><p>GSIR 是生成式语义中间表示，表达目标、约束、偏好、歧义、推断权限、证据和验收条件。它不是二进制化 Prompt，也不是 Agent 关键词表。</p><p><strong>开放问题：</strong>最小核心类型集、连续表示互操作、评价器接口和模型原生载荷边界尚未冻结。</p><p><a href="../specifications/gsir.html">阅读 GSIR 权威页面</a></p></section>
+  <section><h2>GOBJ</h2><p>GOBJ 是当前用于讨论可重定位生成式对象的工程名。对象包含安全可解析的 Header、Section、符号、类型化引用、完整性和装载视图。</p><p><strong>设计提案：</strong>Section/Segment 双视图借鉴 ELF 工程策略，但不照搬传统机器指令语义。</p><p><strong>开放问题：</strong>最终对象名称、ABI 字段、Section 编号和重定位标识尚未冻结。</p><p><a href="../specifications/gobj.html">阅读 GOBJ 权威页面</a></p></section>
+  <section><h2>SSO</h2><p>SSO 以内容寻址依赖闭包、Artifact Contract 和 Disclosure Graph 承载共享语义能力。运行时按请求、依赖和预算进行受控披露。</p><p><strong>已确认原则：</strong>调试剥离不得改变运行语义哈希；权限扩大必须显式授权；硬约束冲突必须失败。</p><p><a href="../specifications/sso.html">阅读 SSO 权威页面</a></p></section>
+  <section><h2>开放问题与 ADR</h2><p>开放问题集中保存在<a href="../architecture/open-questions.html">架构开放问题</a>。格式、类型系统、执行语义、CLI、ABI、信任边界和兼容性选择一旦决定，应记录 ADR，说明背景、候选、决定、后果和替代方案。</p><p>面向标准化时，规范条款还需关联互操作 Profile、正反样例、一致性测试、安全分析和版本演进规则；面向研究和知识产权时，应关联假设、现有技术、实验结果、贡献与公开披露记录。</p><p><strong>未来阶段：</strong>随着 Markdown 正式规范建立，HTML 将继续作为项目门户、解释层和阅读入口，而不承担唯一规范源。</p></section>
+  <div class="next-prev"><a href="tools-reference.html">← 工具参考</a><a href="index.html">文档首页</a><span></span></div>
+</main>
+<footer>Noemion · 规范参考</footer>
+</body>
+</html>

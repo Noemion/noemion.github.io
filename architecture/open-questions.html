@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>开放问题 · Noemion</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="content">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构</a><span aria-hidden="true">/</span><span>开放问题</span></nav>
+  <div class="hero"><h1>开放问题</h1><p>集中保存尚未通过规范或 ADR 决定的名称、类型、ABI、实现与资源问题。</p><div class="badges"><span class="badge">Unresolved</span><span class="badge">Evidence Required</span></div></div>
+  <section>
+    <h2>开放问题：对象与语义</h2>
+    <details open><summary>对象与总体格式最终叫什么？</summary><p>工程阶段暂用 GOBJ；GRO、SRO、ARO 以及 AELF 等均只是候选名称，不是已确认规范。</p></details>
+    <details><summary>GSIR 最小核心类型集是什么？</summary><p>需要用真实语料和实现原型确定最小集合；“约 20～30 种”只是规划估计。</p></details>
+    <details><summary>连续语义残差如何标准化？</summary><p>Encoder 指纹、维度、码本、量化、相似度与跨模型稳定性仍需证据和互操作测试。</p></details>
+    <details><summary>评价器如何成为可链接对象？</summary><p>确定性、模型与外部评价器的接口、权限和失败边界尚待设计。</p></details>
+  </section>
+  <section>
+    <h2>开放问题：语言、ABI 与工具面</h2>
+    <details><summary>GSL 采用何种表面语法？</summary><p>严格声明式 DSL 是当前优先方向，自然语言化语法糖仍是后续候选。</p></details>
+    <details><summary>披露与 Runtime ABI 如何定型？</summary><p>状态哈希、预算单位、继续句柄、检查点、Prompt Renderer 槽位和消费者确认协议均未冻结。</p></details>
+    <details><summary>CLI 与重定位标识是什么？</summary><p>旧蓝图中的命令示例和 <code>R_GSIR_*</code> 名称仅用于阐明职责，不构成稳定 CLI 或规范标识。</p></details>
+  </section>
+  <section>
+    <h2>开放问题：实现与模型</h2>
+    <details><summary>首版实现语言是什么？</summary><p>Rust 与 C++ 各有工程优势，尚未形成 ADR；第一阶段也不引入 LLVM/MLIR。</p></details>
+    <details><summary>NSFE 选用哪个语言底座和训练方案？</summary><p>候选底座、蒸馏范围、量化方法、阈值与数值门槛必须经过来源隔离评测，不能由当前蓝图直接决定。</p></details>
+    <details><summary>覆盖证书采用哪些自动门槛？</summary><p>需通过真实 Skill/Prompt 语料确定 Source Unit 分类、等价性测试与人工确认风险分级。</p></details>
+  </section>
+  <section>
+    <h2>未来阶段：设备升级条件</h2>
+    <p>当前 M2 Pro、16GB 设备可承担规范、安全 Reader/Writer、Strict 前端、链接器、验证器、Fuzz 与最小 Runtime 的开发。只有 NSFE 训练、多 VM 并行或大型 Debug 构建成为实际瓶颈时才触发升级评估；优先考虑统一内存容量。</p>
+  </section>
+  <section>
+    <h2>决策方法与关闭条件</h2>
+    <p>开放问题不能仅靠偏好或命名讨论关闭。每项问题应记录负责人、影响的规范和工具、候选方案、现有技术或先例、评价指标、原型或实验、风险、知识产权与互操作影响，以及最终 ADR。</p>
+    <div class="table-wrap"><table><thead><tr><th>优先级</th><th>判定标准</th><th>最迟关闭阶段</th></tr></thead><tbody>
+      <tr><td>阻断型</td><td>影响安全解析、确定性、对象兼容或第一阶段范围</td><td>进入相关开发阶段前</td></tr>
+      <tr><td>架构型</td><td>影响多个组件、规范层次或长期演进</td><td>计划评审或首个纵向切片前</td></tr>
+      <tr><td>接口型</td><td>影响 CLI、ABI、Profile 或互操作</td><td>对外候选发布前</td></tr>
+      <tr><td>优化型</td><td>只影响性能、体验或后续模型能力</td><td>基线与瓶颈证据形成后</td></tr>
+    </tbody></table></div>
+  </section>
+  <div class="next-prev"><a href="object-lifecycle.html">← 对象生命周期</a><a href="../specifications/">规范登记 →</a></div>
+</main>
+<footer>Noemion · 开放问题</footer>
+</body>
+</html>

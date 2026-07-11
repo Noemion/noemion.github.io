@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>项目背景 · Noemion</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="section">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>项目背景</span></nav>
+  <div class="hero"><h1>项目背景</h1><p>解释 Noemion 为什么存在、适用范围、非目标、核心原则以及路线图语境。</p><div class="badges"><span class="badge">Why</span><span class="badge">Scope</span><span class="badge">Principles</span></div></div>
+  <section>
+    <h2>问题与动机</h2>
+    <p>生成式系统需要表达的不只是提示文本，还包括可验证的目标、约束、歧义、证据和验收边界。完整论证将由<a href="background.html">背景说明</a>集中维护。</p>
+    <p>如果这些信息只存在于自然语言上下文中，系统很难回答“哪些要求是硬约束”“某个结论依赖哪些证据”“组合两个任务后权限是否扩大”“模型或依赖变化后结果是否仍可复现”等工程问题。Noemion 试图把这些问题从模型内部行为转移到可检查的对象、工具和运行契约中。</p>
+  </section>
+  <section>
+    <h2>黄金圈定位</h2>
+    <div class="status-grid">
+      <article class="status-item"><h3>Why · 为什么</h3><p>让生成式任务的意图、约束、证据和权限能够被独立审查，而不是只能信任一次模型输出。</p></article>
+      <article class="status-item"><h3>How · 如何做</h3><p>以确定性 Compiler Core、可重定位对象、链接装载、完整性验证和受限 Runtime 建立工程边界。</p></article>
+      <article class="status-item"><h3>What · 形成什么</h3><p>形成 GSIR、GOBJ、SSO、配套规范、对象工具、测试语料、验证证据与可追溯决策记录。</p></article>
+      <article class="status-item"><h3>Who · 面向谁</h3><p>面向研究者、编译与系统工程师、安全评审者、工具开发者以及未来的互操作规范参与者。</p></article>
+    </div>
+  </section>
+  <section>
+    <h2>范围与非目标</h2>
+    <div class="status-grid">
+      <article class="status-item"><h3>范围</h3><p>设计可机器分析、验证、重定位、链接和执行的生成式语义对象及其工具链。</p></article>
+      <article class="status-item"><h3>非目标</h3><p>不把 Prompt、Skill 包或文本容器改名为二进制对象，也不让模型决定对象布局。</p></article>
+    </div>
+  </section>
+  <section>
+    <h2>核心原则</h2>
+    <p>Strict 确定性、歧义保留、不可信模型输出、不可信对象输入与 checked arithmetic 等约束，以<a href="../specifications/">规范登记页</a>所指向的权威文件为准。</p>
+  </section>
+  <section>
+    <h2>路线图语境</h2>
+    <p>阶段目标、放行条件和测试边界在<a href="../development/implementation-roadmap.html">实施路线图</a>集中维护；未决设计进入<a href="../architecture/open-questions.html">开放问题</a>。</p>
+  </section>
+  <section>
+    <h2>研究问题与证据计划</h2>
+    <p>项目将逐步把宏观愿景拆成可证伪问题，例如：相同语义对象能否在不同模型与 Runtime 下保持约束等价；链接顺序是否会影响规范允许范围之外的结果；歧义保留是否能降低错误确定性；对象级权限和披露边界能否被静态验证。</p>
+    <p>这些问题目前属于研究议程，不是已经验证的结论。每个结论需要对应规范条款、对照基线、实验设计、数据来源、测试结果、失败案例和版本信息；论文、专利与标准化材料应从同一证据链生成，而不是分别维护互相矛盾的叙述。</p>
+  </section>
+</main>
+<footer>Noemion · 项目背景</footer>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FAQ · Noemion</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="section">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>FAQ</span></nav>
+  <div class="hero"><h1>FAQ</h1><p>回答跨项目的常见问题；正式约束仍以规范为准，未决事项保持开放。</p><div class="badges"><span class="badge">Project</span><span class="badge">Security</span><span class="badge">Development</span></div></div>
+  <div class="faq-list">
+    <section>
+      <h2>项目定位</h2>
+      <details><summary>Noemion 是什么？</summary><p>Noemion 是面向生成式计算的表征对象与工具链设计，目标是让目标和约束可被机器分析、验证、重定位和执行。更多背景见<a href="../about/">项目背景</a>。</p></details>
+      <details><summary>Noemion 当前是产品、研究课题还是标准？</summary><p>当前首先是规范与工程研究项目，处于概念细化和安全二进制核心设计阶段。它可以发展为博士研究、论文、专利、软著或标准化候选，但这些方向都需要独立证据和审查，不能把愿景表述为已经取得的成果。</p></details>
+    </section>
+    <section>
+      <h2>架构与设计</h2>
+      <details><summary>GSIR、GOBJ 和 SSO 分别负责什么？</summary><p>概览见<a href="../architecture/">架构入口</a>；涉及格式和语义约束时，以<a href="../specifications/">规范登记页</a>所指向的权威文件为准。</p></details>
+      <details><summary>尚未决定的架构事项在哪里？</summary><p>对象命名、ABI、模型工程和硬件条件等未决事项保留在<a href="../architecture/open-questions.html">开放问题</a>中。</p></details>
+    </section>
+    <section>
+      <h2>使用与安装</h2>
+      <details><summary>现在可以下载安装吗？</summary><p>不可以。项目处于规范与安全二进制核心开发阶段，<a href="../downloads/">下载页</a>会如实标注资源状态。</p></details>
+    </section>
+    <section>
+      <h2>安全与确定性</h2>
+      <details><summary>Strict 模式会调用模型吗？</summary><p>不会。Strict 模式必须无模型、确定且可复现；具体约束以<a href="../specifications/">规范登记页</a>所指向的权威文件为准。</p></details>
+      <details><summary>模型能直接生成 GOBJ 吗？</summary><p>不能。一切模型输出均视为不可信，模型不得决定二进制布局或直接生成 GOBJ；规范依据见<a href="../specifications/">规范登记页</a>。</p></details>
+    </section>
+    <section>
+      <h2>开发与贡献</h2>
+      <details><summary>当前优先开发什么？</summary><p>第一阶段只做规范和安全二进制核心。阶段放行门与测试策略见<a href="../development/">开发入口</a>。</p></details>
+      <details><summary>项目如何管理研发阶段？</summary><p>治理上参考 IPD 的概念、计划、开发、验证、发布和生命周期阶段；技术上按规范、安全核心、Strict 编译链接、可信运行和模型工程逐级放行。每个阶段需要明确进入条件、产物、退出证据和下一决策门。</p></details>
+      <details><summary>论文、专利和标准材料可以直接复用网站内容吗？</summary><p>可以把网站作为问题、架构和追溯入口，但引用时必须记录版本和成熟度，并核对权威规范、ADR、实验或测试证据。专利公开前需要新颖性与权属审查；标准提案需要可测试条款、互操作案例和安全分析。</p></details>
+    </section>
+    <section>
+      <h2>常见误解</h2>
+      <details><summary>GSIR 是二进制化 Prompt 或 Skill 包吗？</summary><p>不是。GSIR 必须表达可机器分析、验证、重定位和执行的目标与约束；规范定义见<a href="../specifications/">规范登记页</a>。</p></details>
+      <details><summary>借鉴 ELF 是否意味着兼容 ELF 或执行机器指令？</summary><p>不是。项目借鉴 Section/Segment、符号、重定位、链接、调试和装载等成熟工程策略，但对象语义面向生成式目标与约束，不承诺传统 ELF ABI 或机器指令兼容。</p></details>
+    </section>
+  </div>
+</main>
+<footer>Noemion · FAQ</footer>
+</body>
+</html>

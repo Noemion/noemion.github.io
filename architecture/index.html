@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>架构 · Noemion</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="section">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>架构</span></nav>
+  <div class="hero"><h1>架构</h1><p>汇总系统关系、对象生命周期、信任边界和开放问题入口，不替代正式规范。</p><div class="badges"><span class="badge">System Map</span><span class="badge">Lifecycle</span><span class="badge">Trust Boundary</span></div></div>
+  <section>
+    <h2>架构目标与质量属性</h2>
+    <p class="lead">架构的首要目标不是提高单次生成效果，而是让任务语义、对象转换、依赖组合、权限变化和运行结果能够被定位、验证与复现。</p>
+    <div class="status-grid">
+      <article class="status-item"><h3>确定性</h3><p>相同规范输入、Profile 与锁定依赖应产生相同的规范化对象和诊断结果。</p></article>
+      <article class="status-item"><h3>可组合性</h3><p>符号、类型化引用、约束与依赖闭包能够链接，并明确报告不可合并的冲突。</p></article>
+      <article class="status-item"><h3>可验证性</h3><p>结构、语义、权限、完整性和覆盖要求具有分层检查点，而不是依赖模型自证。</p></article>
+      <article class="status-item"><h3>可演进性</h3><p>格式版本、能力协商和 ADR 管理允许规范演进，同时拒绝未声明的语义漂移。</p></article>
+    </div>
+  </section>
+  <section>
+    <h2>系统关系</h2>
+    <div class="flow"><div class="step">源语言 / 语义候选</div><div class="step">Compiler Core</div><div class="step">GSIR / GOBJ</div><div class="step">Linker / Loader</div><div class="step">Runtime</div></div>
+    <p>各职责单元的入口见<a href="../components/">组件目录</a>，格式与执行约束见<a href="../specifications/">规范登记页</a>。</p>
+  </section>
+  <section>
+    <h2>概要设计</h2>
+    <div class="table-wrap"><table><thead><tr><th>层次</th><th>主要输入</th><th>主要输出</th><th>必须保持的不变量</th></tr></thead><tbody>
+      <tr><td>Source Frontend</td><td>语言、Schema、知识与策略来源</td><td>候选语义与来源映射</td><td>保留来源、歧义和未决信息</td></tr>
+      <tr><td>Compiler Core</td><td>规范化源表示与 Profile</td><td>GSIR / GOBJ</td><td>无模型、确定、布局受规范控制</td></tr>
+      <tr><td>Linker / Loader</td><td>对象、归档、SSO、锁定依赖</td><td>链接对象、运行 Segment、装载状态</td><td>冲突显式、权限不静默扩大、完整性可验证</td></tr>
+      <tr><td>Runtime</td><td>已验证对象、模型与外部能力绑定</td><td>受约束求解结果与运行证据</td><td>Lowering 不改变对象声明的硬约束和权限边界</td></tr>
+    </tbody></table></div>
+    <p>更细的阶段、信任转换和失败位置见<a href="object-lifecycle.html">对象生命周期</a>；记录布局、类型系统和执行语义必须进入正式规范或 ADR。</p>
+  </section>
+  <section>
+    <h2>对象生命周期</h2>
+    <p><a href="object-lifecycle.html">对象生命周期</a>集中说明从输入、确定性编译、链接、验证到装载执行的阶段与边界。</p>
+  </section>
+  <section>
+    <h2>信任边界</h2>
+    <p>模型输出不得直接生成 GOBJ；对象偏移、长度、计数、索引和对齐均需检查。安全规则的规范状态见<a href="../specifications/">规范登记页</a>。</p>
+  </section>
+  <section>
+    <h2>开放问题</h2>
+    <p>尚未批准的名称、ABI、模型与设备决策保留在<a href="open-questions.html">开放问题</a>中，不在架构概览中固化。</p>
+  </section>
+</main>
+<footer>Noemion · 架构</footer>
+</body>
+</html>

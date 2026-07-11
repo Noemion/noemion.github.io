@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>工具契约 · noemld 文档 · Noemion</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<script src="../../../assets/directory.js" defer>
+</script>
+</head>
+<body data-page-role="docs-topic">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" data-site-root href="../../../index.html">Noemion</a>
+<details class="directory-panel">
+<summary>目录</summary>
+<nav data-directory aria-label="目录">
+</nav>
+</details>
+<noscript>
+<a class="no-script-home" href="../../../index.html">项目首页</a>
+</noscript>
+</div>
+</header>
+<main id="main-content" tabindex="-1">
+<nav class="breadcrumbs" aria-label="面包屑">
+<a href="../../../index.html">项目</a>
+<span aria-hidden="true">/</span>
+<a href="../../index.html">工具</a>
+<span aria-hidden="true">/</span>
+<a href="../index.html">noemld</a>
+<span aria-hidden="true">/</span>
+<a href="index.html">文档</a>
+<span aria-hidden="true">/</span>
+<span aria-current="page">工具契约</span>
+</nav>
+<nav class="manual-nav manual-nav-top" aria-label="手册分页">
+<a data-manual-role="previous" href="index.html">← 上一页</a>
+<a data-manual-role="up" href="index.html">上级</a>
+<a href="index.html">目录</a>
+<a data-manual-role="next" href="inputs-outputs.html">下一页 →</a>
+<a data-manual-role="index" href="reference-index.html">索引</a>
+</nav>
+<div class="hero">
+<h1>工具契约</h1>
+<p>职责、非职责与稳定边界</p>
+<div class="badges">
+<span class="badge">noemld</span>
+<span class="badge">Phase 4 / Phase 5</span>
+</div>
+</div>
+<section>
+<h2>问题与目标</h2>
+<p>链接阶段要把多个分别有效的对象组合为一个整体有效的对象。局部有效并不推出组合后仍有效：两个对象可能定义同一强符号、提出互斥约束、要求不同 ABI，或在合并后扩大权限。因此 <code>noemld</code> 的目标不是“尽量生成输出”，而是在确定性规则足以证明组合成立时生成输出，否则以结构化证据拒绝。</p>
+</section>
+<section>
+<h2>职责</h2>
+<ul>
+<li>验证并合并兼容 Section 与多层 GSIR 图。</li>
+<li>执行强弱符号、版本、可见性与归档成员解析。</li>
+<li>重映射节点与 Artifact ID，并应用类型化重定位。</li>
+<li>按语义规则合并约束、权限、Artifact Contract 与 Disclosure Graph。</li>
+<li>生成 Link Map、依赖闭包、运行 Segment 和可验证诊断。</li>
+</ul>
+</section>
+<section>
+<h2>明确非职责</h2>
+<ul>
+<li>不调用模型解决语义冲突。</li>
+<li>不以最后写入者规则覆盖约束或权限。</li>
+<li>不自动下载未锁定依赖。</li>
+<li>不负责运行时求解或 Prompt Rendering。</li>
+<li>不替代 <a href="../../../specifications/gobj.html">GOBJ 格式验证</a>和 Runtime 的装载时策略检查。</li>
+</ul>
+</section>
+<section>
+<h2>核心不变量</h2>
+<div class="table-wrap"><table><thead><tr><th>不变量</th><th>可观察要求</th><th>失败结果</th></tr></thead><tbody><tr><td>确定性</td><td>相同有效输入集合、Profile、锁文件和规范版本产生字节相同或规范定义的等价结果。</td><td>拒绝放行并记录非确定来源。</td></tr><tr><td>闭包完整</td><td>所有强引用、强依赖、权限要求和披露要求均可解析。</td><td>无输出，生成 Conflict Report。</td></tr><tr><td>权限单调收敛</td><td>组合默认取更严格权限；扩大必须有显式、可追溯授权。</td><td>安全失败，不降级为 warning。</td></tr><tr><td>事务性</td><td>任一阶段失败都不得留下被误认作有效的部分产物。</td><td>只保留诊断和可标识的调试中间件。</td></tr><tr><td>边界安全</td><td>所有偏移、长度、计数、对齐和 ID 运算使用 checked arithmetic。</td><td>溢出、越界或资源超限立即失败。</td></tr></tbody></table></div>
+</section>
+<section>
+<h2>契约验收</h2>
+<p>进入实现前，应把上述不变量映射到对象格式条款、算法伪代码、诊断类别和正反测试向量。实现放行至少需要确定性重复构建、输入排列不变性、冲突矩阵、恶意对象语料、资源上限测试，以及由 <a href="../../noemverify/index.html">noemverify</a> 对最终产物独立验证。</p>
+<div class="callout warning">当前页面定义设计意图和验收方向，不冻结具体符号规则编号、输出扩展名或 ABI。任何实现差异必须先回到规范或 ADR 解决，不能由代码行为反向成为事实标准。</div>
+</section>
+<nav class="manual-nav manual-nav-bottom" aria-label="手册分页">
+<a data-manual-role="previous" href="index.html">← 上一页</a>
+<a data-manual-role="up" href="index.html">上级</a>
+<a href="index.html">目录</a>
+<a data-manual-role="next" href="inputs-outputs.html">下一页 →</a>
+<a data-manual-role="index" href="reference-index.html">索引</a>
+</nav>
+</main>
+<footer>Noemion · noemld documentation</footer>
+</body>
+</html>

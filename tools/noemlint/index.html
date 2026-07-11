@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>noemlint · 语义与策略检查器 · Noemion</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <script src="../../assets/directory.js" defer></script>
+</head>
+<body data-page-role="tool-project">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemlint</span></nav>
+  <div class="hero"><h1>noemlint · 语义与策略检查器</h1><p>在不生成对象的情况下检查未绑定概念、约束冲突、权限扩大、不可达披露节点和不稳定依赖。</p><div class="badges"><span class="badge">Phase 3</span><span class="badge">Compiler &amp; Link</span><span class="badge">GSL / GSIR 诊断</span><span class="badge">Design Stage</span></div></div>
+  <section><h2>工具简介</h2><p><code>noemlint</code> 在不生成对象的情况下检查未绑定概念、约束冲突、权限扩大、不可达披露节点和不稳定依赖。</p><p><strong>问题背景：</strong>完整编译和验证成本较高，而许多语义、策略和维护问题可以在编辑期发现。noemlint 提供快速反馈，但必须与规范错误和发布门清楚区分。</p></section>
+  <section><h2>当前状态</h2><p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。页面仅说明已经确认的工具定位、预期输入与产物以及安全边界。</p><p><strong>阶段门：</strong>规则必须具有稳定 ID、适用语法/规范版本、严重度依据、正反样例和误报治理；进入 CI 前需证明 Baseline 不会隐藏新增高风险问题。</p></section>
+  <section><h2>主要能力</h2><div class="flow"><div class="step">快速解析</div><div class="step">建立局部语义环境</div><div class="step">运行规则集</div><div class="step">应用受审查 Baseline</div><div class="step">输出可定位诊断</div></div><ul><li>快速解析 GSL 或文本 GSIR 并运行静态语义规则</li><li>检查模态、否定、条件、例外和作用域可疑组合</li><li>检测未使用符号、遮蔽、循环依赖和不可达节点</li><li>支持规则级启停、严重度 profile 与 CI 基线</li></ul></section>
+  <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>GSL/Text GSIR</td><td>单文件、目录或 stdin</td></tr><tr><td>输入</td><td>Lint Profile</td><td>启用规则、严重度、领域策略和忽略清单</td></tr><tr><td>输入</td><td>Ontology Snapshot</td><td>概念、关系和弃用规则</td></tr><tr><td>输出</td><td>Diagnostics</td><td>规则 ID、严重度、源范围、证据和建议</td></tr><tr><td>输出</td><td>SARIF/JSON Report</td><td>供 CI、编辑器与审计系统消费</td></tr><tr><td>输出</td><td>Baseline</td><td>受审查的既有问题指纹</td></tr></tbody></table></div></section>
+  <section><h2>处理边界</h2><ul><li>不自动消除语义歧义</li><li>不改写用户约束以通过检查</li><li>不替代完整 noemc 类型检查和 noemverify</li><li>不把 warning 当作发布通过证据</li></ul><p>规则关闭、严重度降低和 Baseline 变更必须可审计；过期 ontology 或 Profile 应产生明确状态，不能让“无诊断”被误解为语义有效。</p></section>
+  <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GSIR、GOBJ 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性编译、文本 IR 与对象生成边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div><p>专题文档应定义规则生命周期、严重度、配置合并、Baseline 审查和编辑器/CI 输出契约。</p></section>
+</main>
+<footer>Noemion · noemlint project</footer>
+</body>
+</html>

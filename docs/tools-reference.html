@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工具参考 · Noemion 文档</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="content">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">文档</a><span aria-hidden="true">/</span><span aria-current="page">工具参考</span></nav>
+  <div class="hero"><h1>Noemion 工具参考</h1><p>按对象生命周期整理 23 个工具的职责、阶段和现有文档状态。</p><div class="badges"><span class="badge">23 Tools</span><span class="badge">Project Pages</span><span class="badge">Unreleased</span></div></div>
+  <section><h2>工具链总览</h2><p><strong>已确认原则：</strong>每个工具入口都是项目说明页，不表示已有可执行程序。命令行接口、参数和文件扩展名尚未冻结。</p><p>工具按“规范与对象 → 文本 IR → 编译链接 → 发布运行 → 模型工程”逐步推进。每个工具必须说明上游输入、下游消费者、关键不变量、失败边界、阶段门和验证证据，不能只用一行命令描述代替设计。完整分类入口见<a href="../tools/">工具目录</a>。</p></section>
+  <section><h2>规范与对象工具</h2><div class="page-links"><a class="page-link" href="../tools/noemconform/"><strong>noemconform</strong><span>规范、Golden、Malformed 和跨工具一致性套件。</span></a><a class="page-link" href="../tools/noemobj/"><strong>noemobj</strong><span>只读查看 Header、Section、符号、重定位和语义图。</span></a><a class="page-link" href="../tools/noemverify/"><strong>noemverify</strong><span>分层验证结构、语义、覆盖、策略和信任链。</span></a><a class="page-link" href="../tools/noemcopy/"><strong>noemcopy</strong><span>受约束地复制、抽取、删除和重建对象内容。</span></a><a class="page-link" href="../tools/noemsize/"><strong>noemsize</strong><span>分析 Section、Segment、闭包和披露预算占用。</span></a></div></section>
+  <section><h2>编译与链接</h2><div class="page-links"><a class="page-link" href="../tools/noemas/"><strong>noemas</strong><span>将规范文本 GSIR 确定性汇编为对象。</span></a><a class="page-link" href="../tools/noemdis/"><strong>noemdis</strong><span>将对象反汇编为规范文本表示。</span></a><a class="page-link" href="../tools/noemfmt/"><strong>noemfmt</strong><span>规范化 GSL 与文本 GSIR 的表现形式。</span></a><a class="page-link" href="../tools/noemdiff/"><strong>noemdiff</strong><span>区分布局、调试、信任元数据和运行语义差异。</span></a><a class="page-link" href="../tools/noemc/"><strong>noemc</strong><span>驱动前端并由确定性 Compiler Core 生成 GSIR/GOBJ。</span></a><a class="page-link" href="../tools/noemlint/"><strong>noemlint</strong><span>检查语义、覆盖和策略问题，不生成对象。</span></a><a class="page-link" href="../tools/noemar/"><strong>noemar</strong><span>建立确定性对象归档和符号索引。</span></a><a class="page-link" href="../tools/noemnm/"><strong>noemnm</strong><span>检查符号定义、引用、版本和可见性。</span></a><a class="page-link" href="../tools/noemld/"><strong>noemld</strong><span>解析符号、应用重定位、合并依赖闭包并输出链接对象或 SSO。</span></a></div></section>
+  <section><h2>发布与运行</h2><div class="page-links"><a class="page-link" href="../tools/noemstrip/"><strong>noemstrip</strong><span>分离开发调试信息并证明发布语义不变。</span></a><a class="page-link" href="../tools/noemcov/"><strong>noemcov</strong><span>审计 Source Unit 覆盖和发布闭包完整性。</span></a><a class="page-link" href="../tools/noempack/"><strong>noempack</strong><span>组装签名对象、依赖、策略与模型指纹。</span></a><a class="page-link" href="../tools/noemrun/"><strong>noemrun</strong><span>可信验证、装载、渐进式披露与 Runtime 执行。</span></a><a class="page-link" href="../tools/noemtrace/"><strong>noemtrace</strong><span>关联运行事件、调试伴随文件和源级因果链。</span></a></div></section>
+  <section><h2>模型工程</h2><p><strong>未来阶段：</strong>以下工具只在确定性核心稳定后进入实施，模型输出始终视为不可信。</p><div class="page-links"><a class="page-link" href="../tools/noemdata/"><strong>noemdata</strong><span>构造有许可、有血缘、无泄漏的数据集快照。</span></a><a class="page-link" href="../tools/noemtrain/"><strong>noemtrain</strong><span>编排 NSFE 适配、多任务训练和教师蒸馏。</span></a><a class="page-link" href="../tools/noemeval/"><strong>noemeval</strong><span>评估错误确定、校准、OOD、切片和部署退化。</span></a><a class="page-link" href="../tools/noemquant/"><strong>noemquant</strong><span>导出、量化、端侧基准并封装模型包。</span></a></div></section>
+  <section><h2>文档状态</h2><p><strong>设计提案：</strong>只有存在实质内容时才建立工具自己的 `docs/` 子树。目前 <a href="../tools/noemld/docs/">noemld 文档</a>提供 12 个专题样板；其他工具先保持项目页，后续逐一 review 后决定拆分深度。</p><p>建立专题文档的最低条件是工具项目页已经稳定说明问题、职责和边界，并且至少存在需要独立维护的契约、流程、安全、测试或参考内容。专题页仍处于设计阶段时必须标明证据缺口，不得用文档数量暗示实现成熟。</p><p><strong>开放问题：</strong>各工具 CLI、扩展名、稳定输入输出 schema、研究验证方法和发布顺序尚未冻结。</p></section>
+  <div class="next-prev"><a href="development-guide.html">← 开发指南</a><a href="index.html">文档首页</a><a href="specifications-reference.html">规范参考 →</a></div>
+</main>
+<footer>Noemion · 工具参考</footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+title: Noemion
+description: >-
+  A deterministic object model and toolchain for compiling human intent into
+  verifiable, linkable, and securely loadable machine objects for generative computing.
+url: https://noemion.github.io
+baseurl: ""
+repository: Noemion/noemion.github.io
+lang: zh-CN
+timezone: Asia/Shanghai
+encoding: utf-8
+markdown: kramdown
+highlighter: rouge
+
+exclude:
+  - AGENTS.md
+  - README.md
+  - content-quality-audit.md
+  - tests
+  - Gemfile
+  - Gemfile.lock
+  - vendor

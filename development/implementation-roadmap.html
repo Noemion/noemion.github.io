@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>实施路线图 · Noemion</title>
+  <link rel="stylesheet" href="../assets/style.css"><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="content">
+<a class="skip-link" href="#main-content">跳到正文</a><header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发</a><span aria-hidden="true">/</span><span>实施路线图</span></nav>
+  <div class="hero"><h1>实施路线图</h1><p>从最小规范和恶意语料开始，逐步进入确定性编译、链接、可信装载与模型辅助。</p><div class="badges"><span class="badge">Phases</span><span class="badge">Release Gates</span><span class="badge">Reproducible</span></div></div>
+  <section>
+    <h2>已确认原则：实施纪律</h2>
+    <div class="status-grid">
+      <article class="status-item"><h3>规范先行</h3><p>格式、类型系统、执行语义和信任边界先进入规范与 ADR，再由工具共享同一 schema registry。</p></article>
+      <article class="status-item"><h3>安全核心先行</h3><p>先让恶意对象无法越界、溢出、递归失控或产生部分可信结果，再建立更高层功能。</p></article>
+      <article class="status-item"><h3>纵向切片</h3><p>每阶段交付可验证输入输出、稳定错误、Golden 与拒绝路径，不以内库完成替代验收。</p></article>
+      <article class="status-item"><h3>模型最后接入</h3><p>Strict 链保持无模型；NSFE 只提交不可信候选，不改变对象格式和可信核心。</p></article>
+    </div>
+  </section>
+  <section>
+    <h2>设计提案：阶段与放行门</h2>
+    <div class="table-wrap"><table><thead><tr><th>阶段</th><th>主要产物</th><th>放行条件</th></tr></thead><tbody>
+      <tr><td>Phase 0<br>规范与样本</td><td>格式、schema registry、错误码、限制值、ADR、合法和畸形语料</td><td>每个字段、索引、长度与演进规则都有条款和正反样本。</td></tr>
+      <tr><td>Phase 1<br>安全二进制核心</td><td>Checked Reader/Writer、Header、Section、字符串与符号表</td><td>畸形对象不能越界、溢出、无限递归或形成部分可信结果。</td></tr>
+      <tr><td>Phase 2<br>文本 IR 往返</td><td>规范化文本 GSIR、汇编、反汇编和语义差异</td><td>规范化 Round-trip 一致，对象字节可复现。</td></tr>
+      <tr><td>Phase 3<br>Strict 编译</td><td>GSL Parser、Sema、Lowering、Coverage Ledger、GOBJ 生成</td><td>无模型环境可完成编译；相同规范化输入产生相同字节。</td></tr>
+      <tr><td>Phase 4<br>归档与链接</td><td>归档、符号解析、ID 重映射、重定位和冲突矩阵</td><td>强依赖完整、无静默覆盖，链接顺序不改变规范结果。</td></tr>
+      <tr><td>Phase 5<br>SSO 与发布</td><td>Disclosure Graph、strip、覆盖证明与发布包</td><td>strip 前后运行语义相同，依赖与策略指纹闭合。</td></tr>
+      <tr><td>Phase 6<br>可信装载</td><td>签名、Merkle、权限保护、Loader 与最小 Runtime</td><td>篡改、回滚、越权披露、预算不足和状态漂移安全拒绝。</td></tr>
+      <tr><td>Phase 7<br>Assisted 前端</td><td>数据集、NSFE、校准、OOD、量化和模型包</td><td>模型只能提交候选；关闭模型后 Strict 与对象格式不变。</td></tr>
+      <tr><td>Phase 8<br>稳定与认证</td><td>跨工具一致性、平台矩阵、Fuzz、性能和复现报告</td><td>规范套件、恶意语料、平台矩阵和双构建复现全部通过。</td></tr>
+    </tbody></table></div>
+  </section>
+  <section>
+    <h2>设计提案：工具职责分组</h2>
+    <ul>
+      <li><strong>规范与对象：</strong><a href="../tools/noemconform/index.html">noemconform</a>、<a href="../tools/noemobj/index.html">noemobj</a>、<a href="../tools/noemverify/index.html">noemverify</a> 与 <a href="../tools/noemcopy/index.html">noemcopy</a>。</li>
+      <li><strong>文本 IR：</strong><a href="../tools/noemas/index.html">noemas</a>、<a href="../tools/noemdis/index.html">noemdis</a>、<a href="../tools/noemfmt/index.html">noemfmt</a> 与 <a href="../tools/noemdiff/index.html">noemdiff</a>。</li>
+      <li><strong>编译链接：</strong><a href="../tools/noemc/index.html">noemc</a>、<a href="../tools/noemlint/index.html">noemlint</a>、<a href="../tools/noemar/index.html">noemar</a>、<a href="../tools/noemnm/index.html">noemnm</a> 与 <a href="../tools/noemld/index.html">noemld</a>。</li>
+      <li><strong>发布运行：</strong><a href="../tools/noemstrip/index.html">noemstrip</a>、<a href="../tools/noemcov/index.html">noemcov</a>、<a href="../tools/noempack/index.html">noempack</a>、<a href="../tools/noemrun/index.html">noemrun</a> 与 <a href="../tools/noemtrace/index.html">noemtrace</a>。</li>
+      <li><strong>模型工程：</strong><a href="../tools/noemdata/index.html">noemdata</a>、<a href="../tools/noemtrain/index.html">noemtrain</a>、<a href="../tools/noemeval/index.html">noemeval</a> 与 <a href="../tools/noemquant/index.html">noemquant</a>。</li>
+    </ul>
+    <p>工具名表达规划职责；具体 CLI、参数、归档扩展名和包格式尚未冻结，必须由各工具文档与 ADR 决定。</p>
+  </section>
+  <section>
+    <h2>开放问题：仓库、接口与实现选择</h2>
+    <p>仓库目录、构建系统、实现语言、稳定错误码、CLI 语法、文件扩展名、ABI 和规范演进策略仍需逐阶段确定，不能由蓝图示例静默升级。</p>
+  </section>
+  <section>
+    <h2>未来阶段：NSFE 与认证</h2>
+    <p>模型数据、训练、蒸馏和量化属于 Phase 7；跨平台认证与性能预算属于 Phase 8。两者都不进入第一阶段。</p>
+  </section>
+  <section>
+    <h2>IPD 映射与可追溯交付</h2>
+    <p>Phase 0–8 是技术能力顺序，不等同于 IPD 管理阶段。概念阶段可以覆盖多个技术 Phase 的问题与候选；计划、开发和验证阶段应对每个纵向切片重复执行；发布与生命周期阶段只适用于已经通过对应放行门的制品。</p>
+    <div class="table-wrap"><table><thead><tr><th>追溯对象</th><th>必须链接到</th><th>评审问题</th></tr></thead><tbody>
+      <tr><td>研究问题或需求</td><td>用例、现有技术、风险、规范范围</td><td>问题是否真实且可证伪或验收</td></tr>
+      <tr><td>规范条款</td><td>设计决定、正反样例、一致性测试</td><td>是否无歧义、可实现、可测试</td></tr>
+      <tr><td>实现任务</td><td>规范版本、接口、威胁与测试计划</td><td>是否越过已批准边界或制造隐式语义</td></tr>
+      <tr><td>验证结果</td><td>输入、环境、版本、基线、原始结果</td><td>是否可复现并支持对应主张</td></tr>
+      <tr><td>论文/专利/软著/标准材料</td><td>贡献记录、证据、权属、公开版本</td><td>表述是否超出真实成果与审查状态</td></tr>
+    </tbody></table></div>
+  </section>
+  <div class="next-prev"><a href="index.html">← 开发</a><a href="testing.html">测试策略 →</a></div>
+</main><footer>Noemion · 实施路线图</footer></body></html>

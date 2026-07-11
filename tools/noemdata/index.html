@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>noemdata · 模型数据工程 · Noemion</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <script src="../../assets/directory.js" defer></script>
+</head>
+<body data-page-role="tool-project">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemdata</span></nav>
+  <div class="hero"><h1>noemdata · 模型数据工程</h1><p>把来源各异的 Skill、Prompt、规范与负例转化为有许可、有血缘、可切分、可复现的 NSFE 数据集和 Source Graph 样本。</p><div class="badges"><span class="badge">Phase 7</span><span class="badge">Model Engineering</span><span class="badge">Corpus → Dataset Snapshot</span><span class="badge">Design Stage</span></div></div>
+  <section><h2>工具简介</h2><h3>为什么需要数据工程边界</h3><p>NSFE 的研究结论不仅取决于模型结构，也取决于样本从哪里来、允许怎样使用、经历了哪些变换，以及训练集是否污染了评测集。若数据谱系、许可或切分关系不可复核，即使指标很高，也无法支撑论文复现、专利实施例、软件成果登记或未来一致性测试。</p><p><code>noemdata</code> 的职责是把来源各异的 Skill、Prompt、规范与负例转化为有许可、有血缘、可切分、可复现的 NSFE 数据集和 Source Graph 样本。它不是通用爬虫，也不负责用规模掩盖来源不确定性。</p></section>
+  <section><h2>当前状态</h2><p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。页面仅说明已经确认的工具定位、预期输入与产物以及安全边界。</p><h3>进入实现前的阶段门</h3><p>实现候选只有在 Source Registry、许可与隐私分类、样本 schema、Gold 仲裁规则、文档族切分策略和撤回机制均形成可审查规范后才可进入开发。冻结训练快照前还必须证明训练、验证和盲测分区不存在同源文档族或模板级泄漏。</p></section>
+  <section><h2>主要能力</h2><ul><li>导入、规范化、去重、分片和许可过滤，并保留原始来源指纹</li><li>构造层级 Source Graph、跨度标注和封闭任务标签，显式保存冲突与未决项</li><li>隔离 Gold、Silver、合成与对抗样本，防止不同证据等级被混合解释</li><li>检测训练评测泄漏、近重复和来源污染，并生成可追踪到样本族的报告</li></ul><h3>概要处理流</h3><ol class="process"><li><strong>登记来源：</strong>记录所有者、许可、用途、敏感等级、获取方式和内容指纹。</li><li><strong>准入过滤：</strong>拒绝许可不清、无法撤回或超出研究授权范围的来源。</li><li><strong>规范化与去重：</strong>保留原文映射，在文档族和模板层面识别近重复。</li><li><strong>构图与标注：</strong>生成 Source Graph、任务标签、冲突记录和人工仲裁状态。</li><li><strong>冻结与审计：</strong>按内容寻址生成快照、血缘清单、分区证明和泄漏报告。</li></ol></section>
+  <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Source Registry</td><td>位置、许可、用途、敏感级别和获取时间</td></tr><tr><td>输入</td><td>Annotation Package</td><td>人工标签、教师候选、冲突和审核状态</td></tr><tr><td>输入</td><td>Dataset Recipe</td><td>schema、过滤、切分、采样和随机种子</td></tr><tr><td>输出</td><td>Dataset Snapshot</td><td>内容寻址、不可变、按任务分片的数据集</td></tr><tr><td>输出</td><td>Lineage Manifest</td><td>每条样本的来源、变换、许可和审核链</td></tr><tr><td>输出</td><td>Leakage Report</td><td>跨 split 重复、基准污染和模板泄漏证据</td></tr></tbody></table></div></section>
+  <section><h2>处理边界</h2><ul><li>不自行创造缺少来源的权威标签；人工裁决也必须记录依据和复核者</li><li>不把教师模型输出、合成样本或高置信预测自动视为 Gold</li><li>不跨越许可、隐私、地域或用途边界收集和复用数据</li><li>不按随机记录切分同源文档族，不用表面去重代替泄漏审计</li><li>来源撤回或授权变化时，必须能定位受影响样本、快照、模型与评估结论</li></ul><p>模型输出和模型包一律视为不可信；它们不能决定二进制布局，也不能直接生成 GOBJ。数据规模、覆盖率和自动化程度同样不能替代来源合法性与证据可追溯性。</p><h3>专题文档拆分条件</h3><p>当数据契约进入评审时，应分别建立来源与许可治理、标注与仲裁、切分与泄漏检测、血缘与撤回四类专题文档；在此之前，本页只定义项目边界，不虚构已经冻结的数据格式。</p></section>
+  <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../components/nsfe.html"><strong>NSFE 组件</strong><span>查看语言底座、Source Graph 聚合和封闭任务头设计。</span></a><a class="page-link" href="../../development/implementation-roadmap.html"><strong>实施路线</strong><span>查看模型工程的证据门和阶段边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看模型工程与工具链上下游。</span></a></div></section>
+</main>
+<footer>Noemion · noemdata project</footer>
+</body>
+</html>

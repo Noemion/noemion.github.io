@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>上下游依赖 · noemld 文档 · Noemion</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<script src="../../../assets/directory.js" defer>
+</script>
+</head>
+<body data-page-role="docs-topic">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" data-site-root href="../../../index.html">Noemion</a>
+<details class="directory-panel">
+<summary>目录</summary>
+<nav data-directory aria-label="目录">
+</nav>
+</details>
+<noscript>
+<a class="no-script-home" href="../../../index.html">项目首页</a>
+</noscript>
+</div>
+</header>
+<main id="main-content" tabindex="-1">
+<nav class="breadcrumbs" aria-label="面包屑">
+<a href="../../../index.html">项目</a>
+<span aria-hidden="true">/</span>
+<a href="../../index.html">工具</a>
+<span aria-hidden="true">/</span>
+<a href="../index.html">noemld</a>
+<span aria-hidden="true">/</span>
+<a href="index.html">文档</a>
+<span aria-hidden="true">/</span>
+<span aria-current="page">上下游依赖</span>
+</nav>
+<nav class="manual-nav manual-nav-top" aria-label="手册分页">
+<a data-manual-role="previous" href="testing.html">← 上一页</a>
+<a data-manual-role="up" href="index.html">上级</a>
+<a href="index.html">目录</a>
+<a data-manual-role="next" href="reference-index.html">下一页 →</a>
+<a data-manual-role="index" href="reference-index.html">索引</a>
+</nav>
+<div class="hero">
+<h1>上下游依赖</h1>
+<p>noemld 消费和输出的工具关系</p>
+<div class="badges">
+<span class="badge">noemld</span>
+<span class="badge">Phase 4 / Phase 5</span>
+</div>
+</div>
+<section>
+<h2>依赖边界</h2>
+<p><code>noemld</code> 处在对象生产、归档、验证、裁剪、打包和装载之间。工具名称上的相邻关系不构成契约；每条边都必须说明对象类型、版本、内容身份、失败责任和权威规范。Strict 链接不得通过隐式网络访问补齐依赖。</p>
+</section>
+<section>
+<h2>上游</h2>
+<ul>
+<li><a href="../../noemc/index.html">noemc</a> 产生待链接 GOBJ；其输出必须先满足格式与目标 Profile。</li>
+<li>
+<a href="../../noemar/index.html">noemar</a> 提供内容可寻址归档与可验证成员索引。</li>
+<li>
+<a href="../../noemnm/index.html">noemnm</a> 读取同一符号模型，用于人工检查但不替代链接器解析。</li>
+<li>
+<a href="../../noemverify/index.html">noemverify</a> 在链接前后执行独立对象验证。</li>
+</ul>
+</section>
+<section>
+<h2>下游</h2>
+<ul>
+<li>
+<a href="../../noemstrip/index.html">noemstrip</a> 执行发布裁剪。</li>
+<li>
+<a href="../../noempack/index.html">noempack</a> 构造可验证发布包。</li>
+<li>
+<a href="../../noemrun/index.html">noemrun</a> 装载并执行链接产物。</li>
+</ul>
+</section>
+<section>
+<h2>Dependency Lock 契约</h2>
+<div class="table-wrap"><table><thead><tr><th>信息</th><th>目的</th><th>失败边界</th></tr></thead><tbody><tr><td>内容摘要与对象种类</td><td>避免同名替换，确保解析到预期字节和解释。</td><td>摘要不符或种类不符立即失败。</td></tr><tr><td>版本与 Profile</td><td>约束格式、ABI、导出接口和兼容范围。</td><td>未知必需版本或不兼容 Profile 失败。</td></tr><tr><td>来源与信任声明</td><td>支持供应链审计，不把来源信任误当结构信任。</td><td>策略要求但信息缺失时失败。</td></tr><tr><td>强弱与可选性</td><td>区分必须闭合的依赖和有明确缺失语义的依赖。</td><td>强依赖缺失失败；可选依赖按规范记录。</td></tr></tbody></table></div>
+</section>
+<section>
+<h2>依赖图规则</h2>
+<ul><li>按内容身份去重，路径、镜像地址和文件名只作为来源元数据。</li><li>强依赖必须形成完整锁定闭包；弱依赖缺失的运行语义必须由 Profile 明确。</li><li>循环依赖只有在相关对象种类和初始化语义明确允许时才可接受，否则生成包含完整环路的诊断。</li><li>上游 schema 或规范版本变化必须触发重新验证，不通过旧缓存静默沿用。</li></ul>
+<p>每个 Link Map 应记录实际消费的依赖子图、未使用锁条目和选择理由，便于构建复现、供应链审计和影响分析。</p>
+</section>
+<section>
+<h2>跨工具验收</h2>
+<p>放行前应建立最小封闭流水线：编译对象、建立归档、符号检查、链接、独立验证、语义保持裁剪、可验证打包和受控装载。任一工具对共同字段的解释不一致，都应回到规范解决，而不是加入转换兼容层。</p>
+</section>
+<nav class="manual-nav manual-nav-bottom" aria-label="手册分页">
+<a data-manual-role="previous" href="testing.html">← 上一页</a>
+<a data-manual-role="up" href="index.html">上级</a>
+<a href="index.html">目录</a>
+<a data-manual-role="next" href="reference-index.html">下一页 →</a>
+<a data-manual-role="index" href="reference-index.html">索引</a>
+</nav>
+</main>
+<footer>Noemion · noemld documentation</footer>
+</body>
+</html>

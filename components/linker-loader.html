@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linker、Loader 与 Runtime · Noemion</title>
+  <link rel="stylesheet" href="../assets/style.css"><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="content">
+<a class="skip-link" href="#main-content">跳到正文</a><header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">组件</a><span aria-hidden="true">/</span><span>Linker、Loader 与 Runtime</span></nav>
+  <div class="hero"><h1>Linker、Loader 与 Runtime</h1><p>对象组合、可信装载、完整性验证和生成式执行的职责边界。</p><div class="badges"><span class="badge">Link</span><span class="badge">Verify</span><span class="badge">Load</span><span class="badge">Runtime</span></div></div>
+  <section>
+    <h2>已确认原则：Linker 职责</h2>
+    <ul>
+      <li>合并可兼容的 Section、字符串、符号、语义节点与依赖。</li>
+      <li>解析导入导出，重新编号对象内部 ID，并应用资源、策略、评价器、模型、Schema、原型和能力等引用类别的重定位。</li>
+      <li>按语义类型处理约束、权限、工作流和披露规则冲突，不采用静默的最后写入者覆盖。</li>
+      <li>删除不可达内容后重建受影响的摘要、完整性结构与签名计划。</li>
+    </ul>
+    <p><code>R_GSIR_*</code> 等具体重定位标识只是候选命名，尚未成为规范。</p>
+  </section>
+  <section>
+    <h2>已确认原则：SSO 共享边界</h2>
+    <p>只读语义图、工作流、Contract、知识子对象和语义原型可在多个 Agent 间共享；披露状态、记忆、上下文、调用表、绑定和权限状态属于会话或实例私有。强依赖必须形成可验证闭包。</p>
+  </section>
+  <section>
+    <h2>已确认原则：Loader 与 Runtime</h2>
+    <ol>
+      <li>检查 Magic、版本、Header、边界、计数、索引和对齐。</li>
+      <li>验证签名范围以及待加载数据的完整性证明。</li>
+      <li>按类型和权限映射 Segment，建立符号、模型与调用表并完成允许的重定位。</li>
+      <li>检查策略后冻结关键绑定、权限与入口。</li>
+      <li>Runtime 将可执行 GSIR Lowering 为模型输入和运行控制结构，并负责生成、评价、选择与终止。</li>
+    </ol>
+  </section>
+  <section>
+    <h2>设计提案：完整性与装载后保护</h2>
+    <p>当前设计建议采用数据块、Section 与全局根组成的分层 Merkle 验证，并将 Header、表项、偏移长度、入口、符号、重定位、权限、策略和模型要求纳入签名范围。AI-NX/AI-RELRO 是描述段解释权限与重定位后冻结策略的设计名称，具体位标志和 ABI 尚未冻结。</p>
+  </section>
+  <section>
+    <h2>开放问题：消费端与动态依赖</h2>
+    <p>Prompt Renderer 与直接 Lowering 的 ABI、动态依赖声明、撤销、回滚、披露状态同步和预算协议仍需规范与 ADR。</p>
+  </section>
+  <section>
+    <h2>未来阶段：可信装载</h2>
+    <p>最小 Loader / Runtime 位于安全二进制核心、Strict 编译和链接之后；签名、Merkle、权限映射与状态漂移拒绝必须有畸形和对抗测试。</p>
+  </section>
+  <section>
+    <h2>概要设计：事务边界与验证</h2>
+    <p>链接和装载都应采用“先计划、后提交”的事务边界。Linker 先完成输入扫描、符号选择、ID 映射、约束与权限冲突分析和布局计划，所有强制检查通过后才产生输出对象；Loader 先验证结构、完整性、版本、依赖和权限映射，全部通过后才暴露可执行入口，避免部分可信状态。</p>
+    <div class="table-wrap"><table><thead><tr><th>组件</th><th>可观察产物</th><th>关键失败证据</th></tr></thead><tbody>
+      <tr><td>Linker</td><td>Link Map、符号选择、ID 映射、依赖闭包、输出摘要</td><td>未解析、重复定义、类型、约束、权限与 Profile 冲突报告</td></tr>
+      <tr><td>Verifier</td><td>分层验证结果与规范条款定位</td><td>字节、记录、节点、策略或证明路径的精确诊断</td></tr>
+      <tr><td>Loader</td><td>装载计划、Segment 权限、冻结绑定和运行入口</td><td>篡改、回滚、越权、状态漂移和资源上限拒绝</td></tr>
+      <tr><td>Runtime</td><td>披露决定、Lowering 计划、评价与终止记录</td><td>预算不足、能力未授权、契约未满足和外部依赖失败</td></tr>
+    </tbody></table></div>
+  </section>
+  <div class="next-prev"><a href="compiler-core.html">← Compiler Core</a><a href="nsfe.html">NSFE →</a></div>
+</main><footer>Noemion · Linker、Loader 与 Runtime</footer></body></html>

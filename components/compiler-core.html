@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Compiler Core · Noemion</title>
+  <link rel="stylesheet" href="../assets/style.css"><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="content">
+<a class="skip-link" href="#main-content">跳到正文</a><header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">组件</a><span aria-hidden="true">/</span><span>Compiler Core</span></nav>
+  <div class="hero"><h1>Compiler Core</h1><p>确定性语义构造、验证、覆盖审计与对象生成的可信核心。</p><div class="badges"><span class="badge">Strict</span><span class="badge">Deterministic</span><span class="badge">Fail Closed</span></div></div>
+  <section>
+    <h2>已确认原则：职责</h2>
+    <div class="flow"><div class="step">受控源或封闭候选</div><div class="step">语义构造</div><div class="step">绑定与类型检查</div><div class="step">约束与覆盖审计</div><div class="step">GSIR / GOBJ</div></div>
+    <p>Compiler Core 是唯一可生成 GSIR/GOBJ 的组件。它负责规范化、符号与概念绑定、类型和约束检查、歧义保留、Source Unit 覆盖、Lowering 以及确定性对象布局。</p>
+  </section>
+  <section>
+    <h2>已确认原则：三种前端边界</h2>
+    <table><thead><tr><th>模式</th><th>输入与信任边界</th></tr></thead><tbody>
+      <tr><td>Strict</td><td>受控 GSL 经无模型路径解析；相同规范化输入和环境产生可复现结果。</td></tr>
+      <tr><td>Assisted</td><td>NSFE 只提交带来源、证据、置信度和歧义状态的封闭候选；Core 决定采纳或拒绝。</td></tr>
+      <tr><td>Generate-Strict</td><td>外部生成式模型只生成候选 GSL，随后由 Strict 路径检查；模型输出仍是不可信源码。</td></tr>
+    </tbody></table>
+    <p>具体命令行选项属于工具接口设计，不由本页冻结。</p>
+  </section>
+  <section>
+    <h2>设计提案：编译 Pass</h2>
+    <ol>
+      <li>规范化源文本、上下文、资源、领域命名空间和策略。</li>
+      <li>识别目标、结果类型、模态、否定、范围、条件与多个合法解释。</li>
+      <li>构造高层 GSIR，执行实体绑定与硬约束、软偏好、推断权限编译。</li>
+      <li>分类未指定、可推断、冲突、待确认与 ontology 外语义。</li>
+      <li>构造 Artifact Contract 和 Evaluation Graph，执行类型、符号、可满足性和覆盖检查。</li>
+      <li>Lowering 为可编码 GSIR，再由确定性 Writer 生成对象。</li>
+    </ol>
+  </section>
+  <section>
+    <h2>已确认原则：失败边界</h2>
+    <ul><li>模型置信度不能替代类型、覆盖或安全证明。</li><li>编译器无法可靠理解的输入是编译失败；源内容显式保留的歧义才是合法运行语义。</li><li>精确载荷不能被有损摘要；覆盖缺口、冲突和未分类来源不能静默发布。</li></ul>
+  </section>
+  <section>
+    <h2>未来阶段：长上下文与 Assisted</h2>
+    <p>第一阶段只实现规范与安全二进制核心。Source Graph 长上下文编译和 NSFE Assisted 前端必须在 Strict 路径、覆盖模型与拒绝行为稳定后进入。</p>
+  </section>
+  <section>
+    <h2>详细设计入口与验证证据</h2>
+    <p>后续详细设计至少需要分别定义规范化上下文、符号与类型环境、约束求解接口、歧义状态机、Coverage Ledger、Pass 管理、确定性 Writer 和诊断模型。每个 Pass 必须声明输入不变量、输出不变量、是否允许产生未决状态、复杂度或资源上限以及失败后是否可继续。</p>
+    <p>Compiler Core 的放行证据包括：相同输入的字节级复现、规范化 Round-trip、类型与约束负例、歧义保持、Source Unit 覆盖、精确载荷保护、跨 Pass 属性测试和关闭模型后的完整 Strict 流程。性能数据不能替代语义和安全正确性。</p>
+  </section>
+  <div class="next-prev"><a href="../specifications/sso.html">← SSO</a><a href="linker-loader.html">Linker、Loader 与 Runtime →</a></div>
+</main><footer>Noemion · Compiler Core</footer></body></html>

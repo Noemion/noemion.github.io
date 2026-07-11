@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>noemfmt · 规范格式化工具 · Noemion</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <script src="../../assets/directory.js" defer></script>
+</head>
+<body data-page-role="tool-project">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemfmt</span></nav>
+  <div class="hero"><h1>noemfmt · 规范格式化工具</h1><p>对 GSL 和文本 GSIR 做纯表现层规范化，提供稳定格式作为评审、缓存和差异比较基础。</p><div class="badges"><span class="badge">Phase 2 / Phase 3</span><span class="badge">Text IR</span><span class="badge">GSL / 文本 GSIR 规范形式</span><span class="badge">Design Stage</span></div></div>
+  <section><h2>工具简介</h2><p><code>noemfmt</code> 对 GSL 和文本 GSIR 做纯表现层规范化，提供稳定格式作为评审、缓存和差异比较基础。</p><p><strong>问题背景：</strong>无关的空白、顺序和字面量形式会制造评审噪声并破坏缓存与复现；但格式化器如果改变约束作用域或声明顺序，也会产生隐蔽语义变化。noemfmt 必须证明只改变表现层。</p></section>
+  <section><h2>当前状态</h2><p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。页面仅说明已经确认的工具定位、预期输入与产物以及安全边界。</p><p><strong>阶段门：</strong>需要稳定语法树、注释附着和可交换声明规则；放行证据包括幂等性、语义树前后等价、宽度与注释属性测试，以及不同环境产生相同输出。</p></section>
+  <section><h2>主要能力</h2><div class="flow"><div class="step">解析完整语法树</div><div class="step">保留语义顺序</div><div class="step">规范字面量与注释</div><div class="step">稳定打印</div><div class="step">幂等与差异检查</div></div><ul><li>统一缩进、换行、数字、字符串、标识符和注释位置</li><li>按规范规则排序可交换声明，同时保留有语义顺序的结构</li><li>提供 check、write、stdin/stdout 和差异输出模式</li><li>识别 GSL 与 GSIR 或接受显式语言参数</li></ul></section>
+  <section><h2>输入与产物</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Source Text</td><td>GSL 或文本 GSIR</td></tr><tr><td>输入</td><td>Format Profile</td><td>行宽、规范版本和允许的语法扩展</td></tr><tr><td>输入</td><td>Mode</td><td>check/write/diff/stdout</td></tr><tr><td>输出</td><td>Formatted Text</td><td>语义等价的规范表现</td></tr><tr><td>输出</td><td>Format Diff</td><td>check 失败时的最小文本差异</td></tr><tr><td>输出</td><td>Syntax Diagnostics</td><td>阻止安全格式化的解析错误</td></tr></tbody></table></div></section>
+  <section><h2>处理边界</h2><ul><li>不重命名符号或改变绑定</li><li>不删除看似冗余的约束</li><li>不修复类型错误或补全缺失字段</li><li>不把格式化成功解释为语义有效</li></ul><p>源文本、include 和配置均视为不可信并受大小与深度限制。无法建立完整语法树时应报告诊断，不以局部重排覆盖错误区域。</p></section>
+  <section><h2>相关资源</h2><div class="page-links"><a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GSIR、GOBJ 与对象语义的权威状态。</span></a><a class="page-link" href="../../components/compiler-core.html"><strong>Compiler Core</strong><span>查看确定性编译、文本 IR 与对象生成边界。</span></a><a class="page-link" href="../index.html"><strong>工具目录</strong><span>查看上下游工具及其阶段。</span></a></div><p>专题文档应在语法稳定后定义规范打印规则、注释模型、可交换结构和版本迁移行为。</p></section>
+</main>
+<footer>Noemion · noemfmt project</footer>
+</body>
+</html>

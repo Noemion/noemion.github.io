@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>noemld · Noemion Linker · Noemion</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <script src="../../assets/directory.js" defer></script>
+</head>
+<body data-page-role="tool-project">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../../index.html">项目</a><span aria-hidden="true">/</span><a href="../index.html">工具</a><span aria-hidden="true">/</span><span aria-current="page">noemld</span></nav>
+  <div class="hero"><h1>noemld</h1><p>Noemion Linker：面向 GOBJ、归档与 SSO 的确定性链接工具项目。</p><div class="badges"><span class="badge">Phase 4 / Phase 5</span><span class="badge">Compiler &amp; Link</span><span class="badge">Design Stage</span></div></div>
+  <section>
+    <h2>工具简介</h2>
+    <p><code>noemld</code> 负责解析符号、重映射对象内部 ID、应用类型化重定位，并按语义规则组合约束、权限和依赖闭包。它不调用模型解决冲突，也不承担 Runtime 求解。</p>
+    <p><strong>问题背景：</strong>生成式对象的链接不仅合并字节和符号，还会组合硬约束、权限、Artifact Contract、披露图和依赖。普通最后写入者规则会隐藏语义冲突或扩大权限，因此 noemld 必须把组合规则和失败证据结构化。</p>
+  </section>
+  <section>
+    <h2>当前状态</h2>
+    <p class="callout warning"><strong>设计阶段：</strong>当前未发布可执行程序；命令行接口、参数和文件扩展名尚未冻结。当前页面仅描述已经确认的职责边界和仍待规范或 ADR 冻结的接口。</p>
+    <p><strong>阶段门：</strong>进入 Phase 4 前必须稳定符号、归档、重定位和冲突规则；进入 Phase 5 前必须稳定 SSO 闭包、权限与披露合并。放行证据包括链接顺序不影响规范结果、冲突矩阵完整和相同输入产生相同输出。</p>
+  </section>
+  <section>
+    <h2>主要能力</h2>
+    <div class="flow"><div class="step">扫描输入与归档</div><div class="step">解析符号</div><div class="step">映射 ID 与重定位</div><div class="step">合并约束/权限/闭包</div><div class="step">提交输出与报告</div></div>
+    <ul>
+      <li>解析强弱符号、版本、可见性与所需归档成员。</li>
+      <li>合并兼容 Section、GSIR 图与 Contract，并重映射节点和 Artifact ID。</li>
+      <li>应用类型化重定位，构建强依赖闭包、Link Map 与结构化冲突报告。</li>
+      <li>按语义类型处理约束、权限和披露规则冲突，不采用静默覆盖。</li>
+    </ul>
+  </section>
+  <section>
+    <h2>输入与产物</h2>
+    <div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>关键契约</th></tr></thead><tbody><tr><td>输入</td><td>GOBJ、归档、SSO</td><td>结构已验证，但符号、约束与依赖仍待全局解析</td></tr><tr><td>输入</td><td>Link Profile 与 Dependency Lock</td><td>声明输出形态、目标 ABI、限制、冲突策略和内容寻址依赖</td></tr><tr><td>产物</td><td>链接对象或 SSO</td><td>符号已解析、ID 已重映射、必需闭包与权限状态明确</td></tr><tr><td>产物</td><td>Link Map</td><td>记录输入成员、符号选择、重定位、Section 和摘要计划</td></tr><tr><td>产物</td><td>Conflict Report</td><td>定位未解析、重复、类型、约束、权限与依赖冲突</td></tr></tbody></table></div>
+  </section>
+  <section>
+    <h2>处理边界</h2>
+    <ul>
+      <li>不调用模型解决符号、类型、约束或权限冲突。</li>
+      <li>不承担 Runtime 的生成式求解与 Lowering。</li>
+      <li>未知强制 Section、越界索引、非法对齐和溢出必须稳定拒绝。</li>
+      <li>歧义和冲突必须保留为结构化未决信息，不得静默覆盖。</li>
+    </ul>
+    <p>所有对象输入均视为不可信；偏移、长度、计数、索引和对齐计算必须使用 checked arithmetic。</p>
+    <p>链接采用先计划、后提交的事务边界；任一强制检查失败时不得输出看似可用的部分链接对象，也不得调用模型猜测冲突选择。</p>
+  </section>
+  <section>
+    <h2>相关资源</h2>
+    <div class="page-links">
+      <a class="page-link" href="docs/"><strong>noemld 文档</strong><span>职责、输入输出、流程、安全、测试与参考专题。</span></a>
+      <a class="page-link" href="../../specifications/"><strong>规范</strong><span>查看 GSIR、GOBJ 与 SSO 的权威状态。</span></a>
+      <a class="page-link" href="../../components/linker-loader.html"><strong>Linker、Loader 与 Runtime</strong><span>查看组件边界和信任模型。</span></a>
+      <a class="page-link" href="../../downloads/"><strong>下载</strong><span>查看真实的发布与资源状态。</span></a>
+      <a class="page-link" href="../../development/"><strong>开发</strong><span>查看路线图、测试和贡献渠道状态。</span></a>
+    </div>
+  </section>
+</main>
+<footer>Noemion · noemld project</footer>
+</body>
+</html>

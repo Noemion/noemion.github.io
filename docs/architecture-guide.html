@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>架构指南 · Noemion 文档</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="content">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header"><div class="header-inner"><a class="brand" data-site-root href="../index.html">Noemion</a><details class="directory-panel"><summary>目录</summary><nav data-directory aria-label="目录"></nav></details><noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript></div></header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">文档</a><span aria-hidden="true">/</span><span aria-current="page">架构指南</span></nav>
+  <div class="hero"><h1>Noemion 架构指南</h1><p>从语义来源到可信执行，理解各层职责、对象流转和信任边界。</p><div class="badges"><span class="badge">Architecture</span><span class="badge">Objects</span><span class="badge">Trust Boundaries</span></div></div>
+  <section><h2>系统分层</h2><p><strong>已确认原则：</strong>对象格式负责组织、链接、装载和完整性；Runtime 负责生成式求解与 Lowering。二者不能用一个模糊“模型执行层”合并。</p><div class="flow"><div class="step">Source / NSFE</div><div class="step">Compiler Core</div><div class="step">GSIR / GOBJ</div><div class="step">Linker / SSO</div><div class="step">Loader / Runtime</div></div><p>分层优先保障确定性、可组合、可验证、关闭失败和可演进；单次生成质量属于 Runtime 或模型评测指标，不能覆盖对象与信任边界。组件职责入口见<a href="../components/">系统组件</a>。</p></section>
+  <section><h2>对象生命周期</h2><ol><li>源输入先被解析为保留歧义和证据来源的受约束结构。</li><li>确定性 Compiler Core 执行类型检查、规范化、覆盖检查和对象布局。</li><li>GOBJ 暴露 Section、符号和类型化重定位，供对象工具与链接器消费。</li><li>Linker 解析依赖并构造可验证闭包，必要时输出 SSO。</li><li>Loader 验证结构、签名、策略和 Segment 属性，再交给 Runtime。</li><li>Runtime 求解目标并 Lowering 到具体执行表面，不反写已签名对象。</li></ol><p>详细生命周期见<a href="../architecture/object-lifecycle.html">对象生命周期与信任边界</a>。</p></section>
+  <section><h2>编译与链接边界</h2><ul><li>NSFE 或其他模型只能提出候选语义，不能直接生成 GOBJ。</li><li>Compiler Core 决定类型、规范化结果、覆盖结论和确定性布局。</li><li>Linker 解析符号、重映射 ID、应用类型化重定位并合并依赖闭包。</li><li>遇到硬约束、权限或接口冲突时必须失败，不调用模型“猜一个答案”。</li></ul><p><strong>设计提案：</strong>具体 Pass 划分、符号版本模型和重定位编号仍待规范冻结。</p></section>
+  <section><h2>装载与运行边界</h2><ul><li>Loader 负责安全解析、完整性验证、映射和重定位后冻结。</li><li>Runtime 只消费已验证对象和显式 Run Profile。</li><li>Prompt Rendering 是可能的 Lowering 目标之一，但不是对象格式本身。</li><li>运行期派生产物必须与签名对象分离并记录来源。</li></ul><p>链接装载组件说明见<a href="../components/linker-loader.html">Linker、Loader 与 Runtime</a>。</p></section>
+  <section><h2>信任边界</h2><div class="grid"><article class="card"><h3>不可信输入</h3><p>模型输出、外部对象、归档成员、Manifest、调试伴随文件和依赖声明。</p></article><article class="card"><h3>确定性核心</h3><p>解析、类型检查、布局、重定位、哈希、签名范围和策略验证。</p></article><article class="card"><h3>受限模型能力</h3><p>候选提取、层级聚合、检索路由和封闭任务头，不拥有对象写入权。</p></article><article class="card"><h3>显式授权</h3><p>权限扩大、动态依赖、外部能力与披露预算必须由 Profile 或策略授权。</p></article></div></section>
+  <section><h2>开放问题</h2><p><strong>开放问题：</strong>消费端 ABI、动态依赖、长上下文状态同步、最终对象命名、连续表示互操作和模型包格式仍需证据、规范或 ADR。</p><p>架构主张需要分别用确定性构建、Malformed/Fuzz、链接冲突矩阵、篡改与回滚、跨 Runtime 等价和目标设备资源实验验证。当前架构图是待验证的概要设计，不是性能或产业可行性证明。</p><p><strong>未来阶段：</strong>第一阶段安全二进制核心稳定后，才评估 NSFE 训练、量化和跨设备 Runtime。</p><p><a href="../architecture/open-questions.html">查看完整开放问题清单</a></p></section>
+  <div class="next-prev"><a href="installation-and-usage.html">← 使用与获取</a><a href="index.html">文档首页</a><a href="development-guide.html">开发指南 →</a></div>
+</main>
+<footer>Noemion · 架构指南</footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工具目录 · Noemion</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <script src="../assets/directory.js" defer></script>
+</head>
+<body data-page-role="section">
+<a class="skip-link" href="#main-content">跳到正文</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" data-site-root href="../index.html">Noemion</a>
+    <details class="directory-panel">
+      <summary>目录</summary>
+      <nav data-directory aria-label="目录"></nav>
+    </details>
+    <noscript><a class="no-script-home" href="../index.html">项目首页</a></noscript>
+  </div>
+</header>
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>工具</span></nav>
+  <div class="hero">
+    <h1>Noemion 工具目录</h1>
+    <p>从规范合规、安全对象核心和文本 IR，逐步进入确定性编译链接、发布运行时与不可信模型辅助。</p>
+    <div class="badges"><span class="badge">23 Tools</span><span class="badge">9 Phases</span><span class="badge">Stable Routes</span></div>
+  </div>
+  <section>
+    <h2>阅读路径</h2>
+    <p class="lead">每个稳定入口打开工具项目页，先说明工具定位、当前状态、主要输入输出与相关资源；只有已经形成实质内容的工具，才从项目页继续进入独立文档区域。</p>
+    <div class="flow"><div class="step">规范与对象</div><div class="step">文本 IR</div><div class="step">编译与链接</div><div class="step">发布与运行</div><div class="step">模型辅助</div></div>
+    <p>阶段归属、失败边界和放行条件见<a href="../development/implementation-roadmap.html">实施路线图</a>。</p>
+  </section>
+  <section>
+    <h2>工具链概要设计</h2>
+    <p>工具集合按证据链而不是命令数量组织：规范合规工具定义可接受行为，安全对象工具负责检查和变换对象，文本 IR 工具提供可审查表示，编译链接工具形成确定性对象关系，发布运行工具维护完整性与执行证据，模型工程工具只在确定性核心稳定后进入。</p>
+    <div class="table-wrap"><table><thead><tr><th>层次</th><th>设计责任</th><th>不得跨越的边界</th></tr></thead><tbody>
+      <tr><td>合规与验证</td><td>把规范条款转成可执行测试、诊断和一致性证据</td><td>不能用单一实现行为反向定义规范</td></tr>
+      <tr><td>对象与文本表示</td><td>安全读取、转换、比较、汇编和反汇编对象</td><td>不能绕过结构、类型、权限和完整性检查</td></tr>
+      <tr><td>编译与链接</td><td>确定性生成、解析符号、应用重定位和形成闭包</td><td>不能调用模型解决规范要求确定处理的冲突</td></tr>
+      <tr><td>发布与运行</td><td>裁剪、覆盖审计、签名打包、可信装载和追踪</td><td>不能静默扩大权限、依赖或披露范围</td></tr>
+      <tr><td>模型工程</td><td>数据、训练、评估和部署候选模型能力</td><td>模型输出始终不可信，不能直接决定对象布局</td></tr>
+    </tbody></table></div>
+  </section>
+  <section>
+    <h2>规范合规</h2>
+    <div class="page-links"><a class="page-link" href="noemconform/index.html"><strong>noemconform</strong><span>执行规范条款、Golden、Malformed 和跨工具一致性套件。</span></a></div>
+  </section>
+  <section>
+    <h2>安全对象工具</h2>
+    <div class="page-links">
+      <a class="page-link" href="noemobj/index.html"><strong>noemobj</strong><span>安全查看 Header、Section、Symbol、Relocation、GSIR 与披露结构。</span></a>
+      <a class="page-link" href="noemverify/index.html"><strong>noemverify</strong><span>分层验证结构、语义、覆盖、策略和信任链。</span></a>
+      <a class="page-link" href="noemcopy/index.html"><strong>noemcopy</strong><span>受约束地复制、抽取、删除和重建对象内容。</span></a>
+      <a class="page-link" href="noemsize/index.html"><strong>noemsize</strong><span>分析 Section、Segment、闭包和披露预算占用。</span></a>
+    </div>
+  </section>
+  <section>
+    <h2>文本 IR 工具</h2>
+    <div class="page-links">
+      <a class="page-link" href="noemas/index.html"><strong>noemas</strong><span>将规范文本 GSIR 确定性汇编为 GOBJ。</span></a>
+      <a class="page-link" href="noemdis/index.html"><strong>noemdis</strong><span>将对象反汇编为可再次汇编的规范文本。</span></a>
+      <a class="page-link" href="noemfmt/index.html"><strong>noemfmt</strong><span>统一 GSL 与文本 GSIR 的稳定表现形式。</span></a>
+      <a class="page-link" href="noemdiff/index.html"><strong>noemdiff</strong><span>区分布局、调试、信任元数据和运行语义差异。</span></a>
+    </div>
+  </section>
+  <section>
+    <h2>编译与链接</h2>
+    <div class="page-links">
+      <a class="page-link" href="noemc/index.html"><strong>noemc</strong><span>驱动 Strict、Assisted 与 Generate-Strict 前端及确定性 Compiler Core。</span></a>
+      <a class="page-link" href="noemlint/index.html"><strong>noemlint</strong><span>检查 GSL、GSIR、覆盖和策略问题，不生成对象。</span></a>
+      <a class="page-link" href="noemar/index.html"><strong>noemar</strong><span>建立确定性 GOBJ 归档和符号索引。</span></a>
+      <a class="page-link" href="noemnm/index.html"><strong>noemnm</strong><span>检查符号定义、引用、版本和可见性。</span></a>
+      <a class="page-link" href="noemld/index.html"><strong>noemld</strong><span>解析符号、应用重定位、合并闭包并输出 SSO。</span></a>
+    </div>
+  </section>
+  <section>
+    <h2>发布与运行时</h2>
+    <div class="page-links">
+      <a class="page-link" href="noemstrip/index.html"><strong>noemstrip</strong><span>分离开发调试信息并证明发布语义不变。</span></a>
+      <a class="page-link" href="noemcov/index.html"><strong>noemcov</strong><span>审计 Source Unit 覆盖和发布闭包完整性。</span></a>
+      <a class="page-link" href="noempack/index.html"><strong>noempack</strong><span>组装签名 SSO、依赖、策略与模型指纹。</span></a>
+      <a class="page-link" href="noemrun/index.html"><strong>noemrun</strong><span>可信验证、装载、渐进式披露与 Runtime 执行。</span></a>
+      <a class="page-link" href="noemtrace/index.html"><strong>noemtrace</strong><span>关联运行事件、调试伴随文件和源级因果链。</span></a>
+    </div>
+  </section>
+  <section>
+    <h2>模型工程</h2>
+    <div class="page-links">
+      <a class="page-link" href="noemdata/index.html"><strong>noemdata</strong><span>构造有许可、有血缘、无泄漏的数据集快照。</span></a>
+      <a class="page-link" href="noemtrain/index.html"><strong>noemtrain</strong><span>编排 NSFE 适配、多任务训练和教师蒸馏。</span></a>
+      <a class="page-link" href="noemeval/index.html"><strong>noemeval</strong><span>评估错误确定、校准、OOD、切片与部署退化。</span></a>
+      <a class="page-link" href="noemquant/index.html"><strong>noemquant</strong><span>导出、量化、端侧基准并封装 NSFE 模型包。</span></a>
+    </div>
+  </section>
+  <div class="next-prev"><a href="../components/">← 组件</a><a href="noemconform/index.html">noemconform →</a></div>
+</main>
+<footer>Noemion · 工具项目目录</footer>
+</body>
+</html>
