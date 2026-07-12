@@ -1321,6 +1321,13 @@ def tool_project_validator_self_test():
 def main():
     errors = tool_project_validator_self_test()
     directory_css = DIRECTORY_CSS.read_text()
+    for token in (
+        "background:color-mix(in srgb,var(--paper) 90%,transparent)",
+        "border:1px solid color-mix(in srgb,var(--rule) 64%,transparent)",
+        "backdrop-filter:blur(12px) saturate(112%)",
+    ):
+        if token not in directory_css:
+            errors.append(f"directory.css missing translucent sticky-header contract: {token}")
     unscoped_nav_selectors = re.findall(
         r"(?m)^\s*(nav(?:\s+a)?(?::[\w()-]+|\.[\w-]+)*)\s*\{",
         directory_css,

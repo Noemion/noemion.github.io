@@ -173,10 +173,10 @@ section[id]{scroll-margin-top:20px}
 body .global-header{
   position:sticky;top:0;right:auto;bottom:auto;left:auto;z-index:30;
   width:min(1200px,calc(100% - 36px));height:64px;margin:0 auto;
-  overflow:visible;background:color-mix(in srgb,var(--paper) 94%,transparent);
-  border:1px solid var(--rule);border-top:0;border-radius:0;
-  box-shadow:0 1px 0 color-mix(in srgb,var(--text) 5%,transparent);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)
+  overflow:visible;background:color-mix(in srgb,var(--paper) 90%,transparent);
+  border:1px solid color-mix(in srgb,var(--rule) 64%,transparent);border-top:0;border-radius:0;
+  box-shadow:0 1px 0 color-mix(in srgb,var(--paper) 44%,transparent);
+  backdrop-filter:blur(12px) saturate(112%);-webkit-backdrop-filter:blur(12px) saturate(112%)
 }
 body .global-header-inner{
   display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;
