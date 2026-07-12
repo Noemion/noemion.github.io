@@ -7,12 +7,13 @@ permalink: "/specifications/tekmor.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>Tekmor</span></nav>
-  <header class="content-introduction"><h1>Tekmor</h1><p>把结构化观察、来源、方法、环境、强度与限制绑定到精确对象和判断范围。</p><div class="badges"><span class="badge">Scoped Evidence</span><span class="badge">Structured Phain</span><span class="badge">Not Formal Proof</span></div></header>
+  <header class="content-introduction"><h1>Tekmor</h1><p>Tekmor 记录谁在什么条件下观察了什么，并明确这项证据能支持多大范围的判断。</p><div class="badges"><span class="badge">Scoped Evidence</span><span class="badge">Structured Phain</span><span class="badge">Not Formal Proof</span></div></header>
 
   <section class="content-stack">
-    <h2>Tekmor 能证明什么</h2>
-    <p class="lead">Tekmor 回答“谁在什么条件下观察或判断了什么，以及这项记录绑定到哪些对象”。其中的 <code>phain</code> 使用与适用 <code>skena</code> 可比较的符号和关系位置；Tekmor 使依据可定位、可检查完整性、可比较和可撤销，但不自动证明外部事实为真。</p>
-    <p class="callout"><strong>不得混淆：</strong>Tekmor 不是数学证明，不是模型自述，不是日志数量，也不是 Acceptance Decision。证据齐全只表示决定者拥有规范要求的输入；满足判断与最终结论仍由 <code>krin</code> 中预先声明的规则和权威作出。</p>
+    <h2>Tekmor 能支持什么判断</h2>
+    <p class="lead">Tekmor 回答“谁在什么条件下观察或判断了什么，以及记录绑定到哪些对象”。其中的 <code>phain</code> 与适用 <code>skena</code> 使用可比较的符号和关系位置。</p>
+    <p>Tekmor 让依据可定位、可检查完整性、可比较和可撤销，但不自动证明外部事实为真。</p>
+    <p class="callout"><strong>不得混淆：</strong>Tekmor 不是数学证明、模型自述、日志数量或最终验收决定。证据齐全只说明决定者拥有规范要求的输入；满足判断和最终结论仍由 <code>krin</code> 预先声明的规则与权威作出。</p>
   </section>
 
   <section class="content-wide">
@@ -37,15 +38,15 @@ permalink: "/specifications/tekmor.html"
       <tr><td>Pleko Tekmor</td><td><code>pleko</code></td><td>Synem、<code>tasse</code>、审计者</td><td>被绑定依赖在未来仍可用。</td></tr>
       <tr><td>Sphra Tekmor</td><td><code>sphra</code> 与外部签名系统</td><td>Praxor、发布者、审计者</td><td>对象语义正确或当前环境授权。</td></tr>
       <tr><td>Praxe Tekmor</td><td>Praxor、能力适配器和环境观察器</td><td>证据闭包与决定引擎</td><td>候选已经相对 krin 为 met 或最终 accepted。</td></tr>
-      <tr><td>Decision Tekmor</td><td>确定性策略或指定外部权威</td><td>用户、CI、审计与后续运行</td><td>输入变化后旧决定仍然有效。</td></tr>
+      <tr><td>决定类 Tekmor</td><td>确定性策略或指定外部权威</td><td>用户、CI、审计与后续运行</td><td>输入变化后旧决定仍然有效。</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
     <h2>Dromen 与运行记录</h2>
     <p>Praxor 从 attested Endem/Synem、执行策略、授权能力和当前环境建立 Dromen。Dromen 只存在于会话内；Tekmor 只保存足以重放判断的身份、参数和观察，不序列化实时句柄、凭据、模型私有状态或整个内存视图。</p>
-    <div class="flow"><div class="step">attested Endem / Synem</div><div class="step">Dromen</div><div class="step">Capability Request</div><div class="step">环境 Observation</div><div class="step">phain · 结构化观察</div><div class="step">Praxe Tekmor</div><div class="step">Decision Tekmor</div></div>
-    <p>一次运行可以把相关 Tekmor 封装为单一 Praxe Record，内部仍必须区分原始事件、规范化观察、完整性声明、证据闭包和最终决定。Praxor 不得因为自己产生了记录就默认信任记录内容。</p>
+    <div class="flow"><div class="step">attested Endem / Synem</div><div class="step">Dromen</div><div class="step">能力请求</div><div class="step">环境观察</div><div class="step">phain · 结构化观察</div><div class="step">Praxe Tekmor</div><div class="step">决定类 Tekmor</div></div>
+    <p>一次运行可以把相关 Tekmor 封装为单一运行记录，内部仍必须区分原始事件、规范化观察、完整性声明、证据范围和最终决定。Praxor 不得因为自己产生了记录就默认信任记录内容。</p>
   </section>
 
   <section class="content-rows">
@@ -61,7 +62,7 @@ permalink: "/specifications/tekmor.html"
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p>Tekmor 的有限主张、身份绑定、证据等级和“证据不等于证明”边界已经采用。事件编码、时间域、签名、隐私 Profile、撤销协议、跨实现归并和 Praxe Record 物理格式仍需威胁模型与测试。</p>
+    <p>Tekmor 的有限主张、身份绑定、证据等级和“证据不等于证明”边界已经采用。事件编码、时间域、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需威胁模型与测试。</p>
   </section>
   <div class="next-prev"><a href="synem.html">← Synem 规范</a><a href="../components/poiet.html">Poiet 组件 →</a></div>
 </main>

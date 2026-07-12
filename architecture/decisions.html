@@ -24,7 +24,7 @@ permalink: "/architecture/decisions.html"
       <tr><td>ADR-0004 候选、能力与验收边界</td><td>Retained in part</td><td>候选不等于事实、能力声明不等于句柄、Tekmor 不等于验收继续有效。</td></tr>
       <tr><td>ADR-0005 独立工具名称</td><td>Superseded by ADR-0008</td><td>只保留 <code>endem</code> 与八个子命令。</td></tr>
       <tr><td>ADR-0006 旧结构基线</td><td>Superseded by ADR-0008</td><td>安全解析原则保留，语义和物理设计重新围绕 Endem 展开。</td></tr>
-      <tr><td>ADR-0007 Phase 0/1 纵向切片</td><td>Superseded by ADR-0008</td><td>首条切片改为 Goal Card → poie → Endem → elenk/theor → peira。</td></tr>
+      <tr><td>ADR-0007 第一阶段纵向切片</td><td>Superseded by ADR-0008</td><td>首条切片改为受控来源表达 → poie → Endem → elenk/theor → peira。</td></tr>
       <tr><td><a href="adr-0008-endem-system.html">ADR-0008 Endem 制品与单一命令面</a></td><td>Superseded by ADR-0010</td><td>保留单一 CLI、权限分离与安全机制；制品、组件、动作和状态名称已取代。</td></tr>
       <tr><td><a href="adr-0009-propositional-kernel.html">ADR-0009 Endem 命题投影语义核</a></td><td>Superseded by ADR-0010</td><td>保留结构显示与未确定分层；五组字段和目标力量模型已取代。</td></tr>
       <tr><td><a href="adr-0010-native-lexicon.html">ADR-0010 原生词汇与事态分层</a></td><td>Accepted</td><td>当前六个语义面、一个根 skena、phain 比较、原生制品/组件/动作与生命周期。</td></tr>
@@ -65,13 +65,13 @@ permalink: "/architecture/decisions.html"
       <li>GNU <code>readelf</code> 与 BFD：<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">https://www.sourceware.org/binutils/docs/binutils/readelf.html</a>、<a href="https://sourceware.org/binutils/docs/bfd.html">https://sourceware.org/binutils/docs/bfd.html</a></li>
       <li>MCP 2025-11-25：<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a></li>
       <li>A2A 1.0.1：<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a></li>
-      <li>OpenAI Harness Engineering：<a href="https://openai.com/index/harness-engineering/">https://openai.com/index/harness-engineering/</a></li>
+      <li>OpenAI 关于智能体控制平面工程的实践文章：<a href="https://openai.com/index/harness-engineering/">https://openai.com/index/harness-engineering/</a></li>
     </ul>
   </section>
 
   <section class="content-band">
     <h2>变更规则</h2>
-    <p>任何改变六个语义面、根 skena 唯一性、事态/方向分离、phain 比较、状态机、Synem 组合、Dromen 非文件边界、Tekmor 有限主张或唯一命令面的提案，都必须新增 ADR，并同步规范、组件、生命周期、手册和测试向量。</p>
+    <p>改变以下任一边界的提案必须新增 ADR：六个语义面、根 <code>skena</code> 唯一性、事态与方向分离、<code>phain</code> 比较、状态机、Synem 组合、Dromen 会话边界、Tekmor 有限主张或唯一命令面。采用决定后，还要同步规范、组件、生命周期、手册和测试向量。</p>
   </section>
   <div class="next-prev"><a href="endem-lifecycle.html">← Endem 生命周期</a><a href="open-questions.html">开放问题 →</a></div>
 </main>

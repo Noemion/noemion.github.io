@@ -11,15 +11,21 @@ permalink: "/about/index.html"
   <section>
     <h2>问题</h2>
     <p class="lead">生成式系统接收的是文字，却必须兑现目标、遵守硬约束、控制能力并用证据验收。把这些内容留在一次性上下文中，会让每个模型和每次运行重新猜测同一契约。</p>
-    <p>项目要回答的不是“怎样写出更好的提示词”，而是：一个期望终态怎样获得稳定身份，怎样在组合时发现冲突，怎样在运行前冻结权限和验收，怎样在运行后追溯证据。</p>
+    <p>Noemion 不研究“怎样写出更好的提示词”。它研究一项自然语言目标怎样跨越多次运行，仍保持同一个可检查的工程身份。</p>
+    <ul>
+      <li>形成目标时，保留来源、意义、期望事态和未决信息。</li>
+      <li>组合目标时，显式发现引用、约束和权限冲突。</li>
+      <li>实现目标前，固定能力上限、观察要求和验收权威。</li>
+      <li>实现目标后，用可定位证据说明发生了什么、结论适用于哪里。</li>
+    </ul>
   </section>
   <section>
     <h2>项目创造什么</h2>
     <div class="status-grid">
-      <article class="status-item"><h3>Endem</h3><p>最小、独立有效、可验证的期望终态单元；六个语义面围绕一个根 skena 形成完整契约。</p></article>
-      <article class="status-item"><h3>Synem</h3><p>两个或更多 Endem、固定依赖和发布范围组成的已解析闭包；单个自包含 Endem 不需要它。</p></article>
-      <article class="status-item"><h3>Dromen</h3><p>Praxor 重新验证实际字节后形成的一次会话实现态，不是新的磁盘格式。</p></article>
-      <article class="status-item"><h3>Tekmor</h3><p>封装结构化观察 phain、对象、环境和声明范围的证据记录，不把模型陈述当作完成证明。</p></article>
+      <article class="status-item"><h3>Endem</h3><p>最小、独立有效且可验证的期望终态单元。六个语义面围绕一个根 <code>skena</code> 形成完整契约。</p></article>
+      <article class="status-item"><h3>Synem</h3><p>两个或更多 Endem 解析引用和冲突后形成的组合闭包。单个自包含 Endem 不需要 Synem。</p></article>
+      <article class="status-item"><h3>Dromen</h3><p>Praxor 为一次受控实现建立的会话状态。它不是磁盘格式，也不携带跨会话权限。</p></article>
+      <article class="status-item"><h3>Tekmor</h3><p>绑定主体、范围和结构化观察 <code>phain</code> 的证据记录。模型陈述不能单独证明目标已经完成。</p></article>
     </div>
   </section>
   <section>

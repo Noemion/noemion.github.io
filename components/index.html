@@ -7,10 +7,10 @@ permalink: "/components/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>系统组件</span></nav>
-  <header class="section-introduction"><h1>系统组件</h1><p>只保留确定性制品核心、独立只读检查器和隔离实现运行器三个可单独验证的职责边界。</p><div class="badges"><span class="badge">Poiet</span><span class="badge">Theor</span><span class="badge">Praxor</span><span class="badge">Minimal Topology</span></div></header>
+  <header class="section-introduction"><h1>系统组件</h1><p>三个组件分别负责写入规范制品、独立读取不可信字节和在最小权限下实现目标。</p><div class="badges"><span class="badge">Poiet</span><span class="badge">Theor</span><span class="badge">Praxor</span><span class="badge">Minimal Topology</span></div></header>
   <section>
     <h2>为什么只有三个组件</h2>
-    <p class="lead">组件数量由不同的信任、权限和失败责任决定，不由传统编译工具数量或命名对称决定。Poiet 能写规范制品，Theor 必须独立观察，Praxor 才能持有会话级能力；这三条边界若合并，会分别失去确定性、交叉检查或最小权限。</p>
+    <p class="lead">组件数量由信任、权限和失败责任决定，不由命名对称决定。Poiet 能写规范制品；Theor 必须用独立代码读取；只有 Praxor 可以在会话中获得受限能力。合并任何两项，都会削弱确定性、交叉检查或最小权限。</p>
   </section>
   <section>
     <h2>组件入口</h2>
@@ -22,10 +22,10 @@ permalink: "/components/index.html"
   </section>
   <section>
     <h2>职责与依赖方向</h2>
-    <div class="flow"><div class="step">Rhem Source</div><div class="step">Poiet projection → Endem / Synem</div><div class="step">Theor 旁路检查</div><div class="step">Poiet → attested</div><div class="step">Praxor → Dromen</div><div class="step">Tekmor / Decision</div></div>
+    <div class="flow"><div class="step">受控来源表达</div><div class="step">Poiet 投影 → Endem / Synem</div><div class="step">Theor 独立检查</div><div class="step">Poiet → attested</div><div class="step">Praxor → Dromen</div><div class="step">Tekmor / 最终决定</div></div>
     <div class="table-wrap"><table><thead><tr><th>组件</th><th>可以依赖</th><th>不得依赖</th></tr></thead><tbody>
-      <tr><td>Poiet</td><td>规范注册表、确定性算法、外部签名响应验证接口</td><td>模型 SDK、Praxor、实时能力、Theor 输出</td></tr>
-      <tr><td>Theor</td><td>公开规范和自己的有界解析实现</td><td>Poiet 的 Parser/Writer、组合器、BFD 或生产错误实现</td></tr>
+      <tr><td>Poiet</td><td>规范注册表、确定性算法、外部签名响应验证接口</td><td>模型开发包、Praxor、实时能力、Theor 输出</td></tr>
+      <tr><td>Theor</td><td>公开规范和自己的有界解析实现</td><td>Poiet 的生产解析器、写入器、组合器、BFD 或错误分类实现</td></tr>
       <tr><td>Praxor</td><td>Poiet 的生产验证接口、隔离后端适配器、策略和能力提供者</td><td>Poiet 写入器、对象改写接口、Theor 诊断作为授权依据</td></tr>
     </tbody></table></div>
   </section>

@@ -6,7 +6,7 @@ global:
     description: 从项目背景、架构设计和方法边界理解 Noemion 为什么存在。
     items:
       - { href: /about/background.html, label: 背景与边界, description: 为什么目标语义需要成为工程对象, cover: background, cover_label: "EXPRESSION ≠ IDENTITY" }
-      - { href: /architecture/index.html, label: 架构设计, description: 从编译、链接到可信装载的职责分层, cover: architecture, cover_label: "TRUST PIPELINE" }
+      - { href: /architecture/index.html, label: 架构设计, description: 从确定性成形、组合到受控实现的职责分层, cover: architecture, cover_label: "TRUST BOUNDARIES" }
       - { href: /about/intellectual-foundations.html, label: 思想与方法, description: 区分思想启发、工程类比与可验证结论, cover: foundations, cover_label: "METHOD / BOUNDARY" }
       - { href: /faq/index.html, label: 常见问题, description: 直接回答项目范围、状态与非目标, cover: faq, cover_label: "SCOPE CHECK" }
   - key: specifications
@@ -15,7 +15,7 @@ global:
     kicker: 定义权威边界
     description: 查看 Endem、组合闭包、范围证据和组件契约。
     items:
-      - { href: /specifications/endem.html, label: Endem, description: 最小自然语言目标对象与规范字段, cover: endem-spec, cover_label: "SAY → DONE" }
+      - { href: /specifications/endem.html, label: Endem, description: 最小自然语言目标制品与六个语义面, cover: endem-spec, cover_label: "SIGN → SITUATION" }
       - { href: /specifications/synem.html, label: Synem, description: 已解析、可封装的组合闭包, cover: synem, cover_label: "RESOLVED CLOSURE" }
       - { href: /specifications/tekmor.html, label: Tekmor, description: 含 phain 的有范围证据, cover: tekmor, cover_label: "SCOPED EVIDENCE" }
       - { href: /components/index.html, label: 系统组件, description: Poiet、Theor 与 Praxor 的权限和失败边界, cover: components, cover_label: "SYSTEM BOUNDARIES" }

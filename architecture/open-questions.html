@@ -11,13 +11,13 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
-    <p class="lead">Endem、Synem、Dromen、Tekmor、Poiet、Theor、Praxor、六个语义面、nascent → coherent → attested 和八个动作由 ADR-0010 采用。它们不再作为候选名称或工具数量问题反复讨论。</p>
+    <p class="lead">ADR-0010 已经采用现行制品、组件、六个语义面、三个制品状态和八个动作。这些名称与职责不再作为开放问题反复讨论。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
 
   <section class="content-grid">
     <h2>Endem 编码与语义</h2>
-    <details open><summary>Rhem Source 的最小表面语法是什么？</summary><p>需要比较严格声明式文本、带自然语言来源的结构化文档和 API 输入。任何方案都必须明确表达六个语义面、来源范围、关系位置和未知状态，并能在无模型环境确定性解析。</p></details>
+    <details open><summary>受控来源表达采用什么最小语法？</summary><p>需要比较严格声明式文本、带自然语言来源的结构化文档和 API 输入。任何方案都必须明确表达六个语义面、来源范围、关系位置和未知状态，并能在无模型环境确定性解析。</p></details>
     <details><summary>Endem 的物理编码怎样支持安全随机访问？</summary><p>需确定魔数、版本、目录、字段宽度、记录长度、对齐、关键/可选扩展、压缩和资源上限。首要目标是有界读取和跨实现一致，不是兼容 ELF 或某种通用容器。</p></details>
     <details><summary>一个根 skena 的语义等价怎样判断？</summary><p>布局、来源注释或调试记录变化后，哪些 semion、skena、telis、krin 和 apor 属性必须保持，仍需规范化规则和反例。规则冻结前只能比较显式符号、关系和条件，不能发明语义哈希。</p></details>
     <details><summary>自然语言候选由谁授权决定？</summary><p>需定义决定主体、作用范围、撤销、重放、高风险语义面和多人冲突。模型置信度、结构合法和单次界面点击都不能单独成为永久授权。</p></details>
@@ -39,14 +39,14 @@ permalink: "/architecture/open-questions.html"
     <details><summary>Praxor 怎样隔离模型和能力适配器？</summary><p>需确定进程、沙箱、取消、超时、幂等、网络、文件、凭据和资源限额。后端失败不能让 Praxor 静默扩大权限或修改 attested 制品。</p></details>
     <details><summary>Tekmor 怎样封装 phain？</summary><p>需确定 phain 的关系对齐、序列、时间域、父记录、摘要、脱敏、丢失、采样、签名和多生产者归并，同时避免循环自证。</p></details>
     <details><summary>谁形成最终决定？</summary><p>确定性规则、外部评价器与人工权威需要明确输入、权限和失败语义。Tekmor 齐全只说明依据可用，不能自动把状态提升为 accepted。</p></details>
-    <details><summary>MCP 与 A2A 怎样映射到 Praxor 外缘？</summary><p>需冻结协议版本、工具/Agent 声明的信任等级、token audience、取消与重放语义。外部 Task 状态和 Artifact 不能直接成为 Endem 状态或 Decision Tekmor。</p></details>
+    <details><summary>MCP 与 A2A 怎样映射到 Praxor 外缘？</summary><p>需冻结协议版本、工具或 Agent 声明的信任等级、令牌受众、取消与重放语义。外部任务状态和产物不能直接成为 Endem 状态或最终决定类 Tekmor。</p></details>
   </section>
 
   <section class="content-grid">
     <h2>实施与发布条件</h2>
     <details open><summary>首版实现语言和仓库结构是什么？</summary><p>需要用同一规范向量比较内存安全、checked arithmetic、模糊测试、跨平台、FFI、依赖和复现成本。第一阶段不引入 LLVM、MLIR、BFD 或模型框架。</p></details>
     <details><summary>独立 Theor 怎样证明实现独立？</summary><p>需禁止共享生产解析库、生成代码和错误分类实现，并通过差分、变异和故障注入证明它能发现生产路径的共同假设。</p></details>
-    <details><summary>名称何时通过正式发布 gate？</summary><p>项目内部命名已经冻结，但公开发行前仍需目标法域商标、近似类别、包管理器、命令、域名和法律复核。未通过 gate 不得声称商标可用。</p></details>
+    <details><summary>名称何时满足正式发布条件？</summary><p>项目内部命名已经冻结，但公开发行前仍需检查目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。审查完成前不得声称商标可用。</p></details>
     <details><summary>怎样证明构建可复现？</summary><p>对象字节、工具二进制和签名真实性是三个不同属性。需要双路径构建、固定环境输入、逐字节比较和独立签名验证。</p></details>
   </section>
 

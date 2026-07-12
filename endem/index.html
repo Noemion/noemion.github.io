@@ -7,13 +7,14 @@ permalink: "/endem/index.html"
 ---
 <main id="main-content" class="tool-project" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>Endem</span></nav>
-  <header class="application-introduction"><h1>endem · 目标制品应用</h1><p>用一个入口制作、验证、组合、发布、独立观察和隔离实行 Endem/Synem。</p><div class="badges"><span class="badge">Single CLI</span><span class="badge">8 Actions</span><span class="badge">Design Stage</span><span class="badge">No Executable Yet</span></div></header>
+  <header class="application-introduction"><h1>endem · 目标制品应用</h1><p>一个命令入口贯穿目标制品的形成、检查、组合、发布和受控实现。</p><div class="badges"><span class="badge">Single CLI</span><span class="badge">8 Actions</span><span class="badge">Design Stage</span><span class="badge">No Executable Yet</span></div></header>
 
   <div class="tool-project-body">
     <div class="tool-project-main">
       <section>
         <h2>它解决什么问题</h2>
-        <p class="lead">传统对象工具常把汇编、查看、符号、链接、裁剪、打包和执行拆成许多命令。Endem 处理的是目标契约而不是机器指令；用户真正需要的是沿同一制品生命周期完成工作，并在每次状态变化时得到明确失败。</p>
+        <p class="lead">Endem 处理目标契约，而不是机器指令。用户需要沿同一制品生命周期完成工作，并在每次状态变化时得到明确结果或失败原因。</p>
+        <p>传统对象工具把汇编、查看、链接和打包拆成许多程序。Noemion 借鉴这些职责边界，但不照搬工具数量。</p>
         <p><code>endem</code> 是唯一公开 CLI。它的八个子命令共享术语、诊断和发行入口，但 Poiet、独立 Theor、隔离 Praxor 和外部签名系统继续保持不同实现与权限边界。</p>
       </section>
 
@@ -35,20 +36,20 @@ permalink: "/endem/index.html"
           <li><code>elenk</code> 使用 Poiet 的生产读取路径，并按结构、语义、状态、完整性和策略分层报告。</li>
           <li><code>pleko</code> 使用内容身份和显式策略解析引用，不能读取环境隐式路径。</li>
           <li><code>tasse</code> 产生不可变候选和 Signing Request；<code>sphra</code> 只核对并附加外部响应。</li>
-          <li><code>theor</code> 使用不共享 Poiet 解析代码的 Theor；<code>praxe</code> 启动不拥有 Writer 的隔离 Praxor。</li>
+          <li><code>theor</code> 使用不共享 Poiet 解析代码的 Theor；<code>praxe</code> 启动不拥有写入器的隔离 Praxor。</li>
         </ul>
       </section>
 
       <section>
         <h2>它读取什么，产生什么</h2>
         <div class="table-wrap"><table><thead><tr><th>入口</th><th>主要输入</th><th>主要输出</th></tr></thead><tbody>
-          <tr><td><code>poie</code></td><td>Rhem Source、投影候选、Semion Decision、规范版本</td><td>nascent Endem、Poie Tekmor、诊断</td></tr>
-          <tr><td><code>elenk</code></td><td>Endem/Synem、验证层、限制和信任材料</td><td>分层结论、Elenk Tekmor；内部 Verified Handle</td></tr>
-          <tr><td><code>pleko</code></td><td>Endem 集合、Pleko Policy、Dependency Lock</td><td>coherent Endem 或 Synem、Pleko Tekmor</td></tr>
-          <tr><td><code>tasse</code></td><td>coherent 制品、发布 Profile、覆盖与调试策略</td><td>不可变候选、manifest、Signing Request</td></tr>
-          <tr><td><code>sphra</code></td><td>原候选、原请求、Signature Response</td><td>attested Endem/Synem、Sphra Tekmor</td></tr>
+          <tr><td><code>poie</code></td><td>受控来源、投影候选、语义决定和规范版本</td><td>nascent Endem、Poie Tekmor、诊断</td></tr>
+          <tr><td><code>elenk</code></td><td>Endem/Synem、验证层、限制和信任材料</td><td>分层结论、Elenk Tekmor 和内部验证句柄</td></tr>
+          <tr><td><code>pleko</code></td><td>Endem 集合、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Tekmor</td></tr>
+          <tr><td><code>tasse</code></td><td>coherent 制品、发布配置、覆盖与调试策略</td><td>不可变候选、清单和签名请求</td></tr>
+          <tr><td><code>sphra</code></td><td>原候选、原请求和外部签名响应</td><td>attested Endem/Synem、Sphra Tekmor</td></tr>
           <tr><td><code>theor</code></td><td>任意原始制品字节、视图和预算</td><td>只读文本/结构视图、差分和诊断</td></tr>
-          <tr><td><code>praxe</code></td><td>attested 制品、Praxe Policy、后端与能力目录</td><td>Dromen、Praxe Record、Praxe/Decision Tekmor</td></tr>
+          <tr><td><code>praxe</code></td><td>attested 制品、运行策略、后端与能力目录</td><td>Dromen、运行记录、运行与决定类 Tekmor</td></tr>
           <tr><td><code>peira</code></td><td>规范向量、实现构建、恶意语料和复现配置</td><td>一致性、差分、模糊测试与复现报告</td></tr>
         </tbody></table></div>
       </section>
@@ -60,7 +61,7 @@ permalink: "/endem/index.html"
           <li>不让 <code>theor</code> 的可读视图替代生产 <code>elenk</code> 或生成可信句柄。</li>
           <li>不提供可以任意删除、改名或重写 semion、skena、telis、krin、apor 的通用变换命令。</li>
           <li>不通过环境变量、当前目录或网络“最新版本”解析正式依赖。</li>
-          <li>不持有发布私钥；没有 Signature Response 时只能保留未签候选。</li>
+          <li>不持有发布私钥；没有外部签名响应时只能保留未签候选。</li>
           <li>不让 <code>praxe</code> 后端持有实时能力句柄、改写 attested 制品或自行宣布 accepted。</li>
           <li>不把 Tekmor、签名、模型评分或工具数量描述为数学证明或成熟实现证据。</li>
         </ul>

@@ -19,13 +19,13 @@ badges: ["Reference", "Unfrozen CLI"]
 
 | 子命令 | 主要输入 | 主要输出 | 权限边界 |
 | --- | --- | --- | --- |
-| `poie` | Rhem Source、投影候选与具名决定 | nascent Endem、Poie Tekmor | 唯一规范写入入口 |
+| `poie` | 受控来源、投影候选与具名决定 | nascent Endem、Poie Tekmor | 唯一规范写入入口 |
 | `elenk` | 原始制品、层、限制和信任材料 | 分层结论、Elenk Tekmor | 生产验证路径 |
-| `pleko` | Endem、Pleko Policy、Dependency Lock | coherent Endem/Synem、Pleko Tekmor | 不读取环境隐式依赖 |
-| `tasse` | coherent 制品、发布 Profile | 候选、manifest、Signing Request | 不持有私钥 |
-| `sphra` | 原候选、请求、Signature Response | attested 制品、Sphra Tekmor | 不修改被签载荷 |
-| `theor` | 任意原始制品、视图、预算 | 只读视图、差分、诊断 | 独立 Theor，不生成 Verified Handle |
-| `praxe` | attested 制品、执行策略、后端与能力 | Dromen、Praxe Record、Tekmor、决定 | 隔离 Praxor，不拥有 Writer |
+| `pleko` | Endem、组合策略和依赖锁 | coherent Endem/Synem、Pleko Tekmor | 不读取环境隐式依赖 |
+| `tasse` | coherent 制品和发布配置 | 候选、清单和签名请求 | 不持有私钥 |
+| `sphra` | 原候选、请求和外部签名响应 | attested 制品、Sphra Tekmor | 不修改被签载荷 |
+| `theor` | 任意原始制品、视图和预算 | 只读视图、差分、诊断 | 独立 Theor，不生成生产验证句柄 |
+| `praxe` | attested 制品、执行策略、后端与能力 | Dromen、运行记录、Tekmor 和决定 | 隔离 Praxor，不拥有写入器 |
 | `peira` | 规范向量、实现和复现配置 | 一致性、差分、模糊与复现报告 | 不替代第三方认证或发布授权 |
 
 `.endem` 扩展名已经采用；参数、选项、退出码、Synem/Tekmor 扩展名和尚未发布的安装接口仍未冻结。本表只冻结职责，不应据此编写依赖具体参数的脚本。
@@ -92,4 +92,4 @@ badges: ["Reference", "Unfrozen CLI"]
 - GNU BFD：https://sourceware.org/binutils/docs/bfd.html
 - MCP 2025-11-25：https://modelcontextprotocol.io/specification/2025-11-25
 - A2A 1.0.1：https://a2a-protocol.org/v1.0.1/specification/
-- OpenAI Harness Engineering：https://openai.com/index/harness-engineering/
+- OpenAI 关于智能体控制平面工程的实践文章：https://openai.com/index/harness-engineering/

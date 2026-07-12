@@ -7,22 +7,22 @@ permalink: "/components/praxor.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">系统组件</a><span aria-hidden="true">/</span><span>Praxor</span></nav>
-  <header class="content-introduction"><h1>Praxor</h1><p>在隔离权限域重新验证 attested Endem/Synem，建立 Dromen，受控调用后端和能力并形成 Tekmor。</p><div class="badges"><span class="badge">Isolated Domain</span><span class="badge">Dromen</span><span class="badge">Least Capability</span><span class="badge">Tekmor</span></div></header>
+  <header class="content-introduction"><h1>Praxor</h1><p>在隔离权限域重新检查待运行制品，只授予本次实现需要的能力，并记录有范围的证据。</p><div class="badges"><span class="badge">Isolated Domain</span><span class="badge">Dromen</span><span class="badge">Least Capability</span><span class="badge">Tekmor</span></div></header>
 
   <section class="content-stack">
     <h2>为什么 Praxor 不能并入模型</h2>
-    <p class="lead">模型或其他求解后端能够提出候选和能力请求，但不能证明签名包安全、请求已授权、工具结果真实或任务已经完成。Praxor 把装载、会话、能力、观察、预算和决定策略放在后端外侧，并让每一步产生可定位 Tekmor。</p>
-    <p>Praxor 是 <code>endem praxe</code> 背后的隔离域。它可以使用 Poiet 的生产 elenk 接口，但不得链接 Poiet Writer 或修改 attested 制品；后端与能力适配器应进一步隔离。</p>
+    <p class="lead">模型可以提出候选和能力请求，却不能证明请求已获授权、工具结果真实或任务已经完成。Praxor 因此把装载、能力、观察、预算和决定策略留在求解后端之外。</p>
+    <p>Praxor 是 <code>endem praxe</code> 背后的隔离域。它可以调用 Poiet 的生产验证接口，但不得链接 Poiet 写入器，也不得修改 attested 制品。求解后端与能力适配器还应进一步隔离。</p>
   </section>
 
   <section class="content-wide">
     <h2>权威输入与输出</h2>
     <div class="table-wrap"><table><thead><tr><th>方向</th><th>内容</th><th>边界</th></tr></thead><tbody>
       <tr><td>输入</td><td>attested Endem/Synem 原始字节</td><td>重新验证签名、状态、闭包和实际摘要，不复用过期结论。</td></tr>
-      <tr><td>输入</td><td>Praxe Policy + krin</td><td>固定能力上限、预算、停止、观察、证据、人工升级和决定权威；只能收紧制品要求。</td></tr>
-      <tr><td>输入</td><td>Backend Binding + Capability Catalog</td><td>模型/求解器与可用能力的身份、版本和参数结构；描述仍是不可信声明。</td></tr>
+      <tr><td>输入</td><td>运行策略与 <code>krin</code></td><td>固定能力上限、预算、停止、观察、证据、人工升级和决定权威；只能收紧制品要求。</td></tr>
+      <tr><td>输入</td><td>后端绑定与能力目录</td><td>模型或求解器与可用能力的身份、版本和参数结构；描述仍是不可信声明。</td></tr>
       <tr><td>会话状态</td><td>Dromen</td><td>只读、一次性、不可序列化；不保存跨会话能力句柄。</td></tr>
-      <tr><td>输出</td><td>Praxe Record</td><td>候选、能力请求/观察、预算、错误、Run/Decision Tekmor 和最终状态。</td></tr>
+      <tr><td>输出</td><td>运行记录</td><td>候选、能力请求与观察、预算、错误、运行与决定类 Tekmor 和最终状态。</td></tr>
       <tr><td>消费者</td><td>用户、CI、审计和指定外部权威</td><td>模型或 Praxor 自述不能成为唯一决定依据。</td></tr>
     </tbody></table></div>
   </section>
@@ -41,24 +41,24 @@ permalink: "/components/praxor.html"
 
   <section class="content-wide">
     <h2>运行循环</h2>
-    <div class="flow"><div class="step">elenk attested bytes</div><div class="step">build Dromen</div><div class="step">backend candidate / request</div><div class="step">policy elenk</div><div class="step">execute or deny</div><div class="step">phain → Tekmor</div><div class="step">krin / continue / escalate</div></div>
+    <div class="flow"><div class="step">检查 attested 字节</div><div class="step">建立 Dromen</div><div class="step">后端提出候选或请求</div><div class="step">策略检查</div><div class="step">执行或拒绝</div><div class="step">phain → Tekmor</div><div class="step">krin → 继续或升级</div></div>
     <ol>
       <li>Loader 验证实际输入并在失败时原子拒绝，不建立部分 Dromen。</li>
       <li>控制平面按最小披露和能力上限创建 Dromen。</li>
-      <li>后端产生候选或 Capability Request；它不能直接访问环境。</li>
+      <li>后端产生候选或类型化能力请求；它不能直接访问环境。</li>
       <li>Praxor 校验参数、权限、预算、副作用、幂等和当前状态，再执行或拒绝。</li>
-      <li>真实结果先规范化为可与 skena 比较的 phain，再作为 Capability Observation 和 Praxe Tekmor 返回下一轮。</li>
-      <li>预注册策略读取 krin 和必需 Tekmor，先形成 met、unmet、agno 或 fault，再由具名权威形成 accepted、unsatisfied、pending-review、failed 或 interrupted。</li>
+      <li>真实结果先规范化为可与 skena 比较的 phain，再作为能力观察和 Praxe Tekmor 返回下一轮。</li>
+      <li>预注册策略读取 <code>krin</code> 和必需 Tekmor，先形成满足、未满足、观察不足或求值故障。具名权威再据此形成最终运行状态。</li>
     </ol>
   </section>
 
   <section class="content-wide">
     <h2>外部协议适配</h2>
-    <p>MCP、A2A 和供应商工具调用只连接 Praxor 外缘。远端工具说明、Agent Card、Task 状态、参数 schema 和返回内容都必须重新映射到本地 Capability Catalog、请求、观察和 Tekmor：</p>
+    <p>MCP、A2A 和供应商工具调用只连接 Praxor 外缘。远端工具说明、Agent Card、任务状态、参数结构和返回内容都必须重新映射到本地能力目录、请求、观察和 Tekmor：</p>
     <ul>
       <li>MCP 2025-11-25：<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a></li>
       <li>A2A 1.0.1：<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a></li>
-      <li>OpenAI Harness Engineering：<a href="https://openai.com/index/harness-engineering/">https://openai.com/index/harness-engineering/</a></li>
+      <li>OpenAI 关于智能体控制平面工程的实践文章：<a href="https://openai.com/index/harness-engineering/">https://openai.com/index/harness-engineering/</a></li>
     </ul>
     <p>这些资料支持工具可读性、反馈循环和协议互操作，但不定义 Endem、Dromen、Tekmor、权限或最终验收。第一阶段不接入任何外部智能体协议或模型 SDK。</p>
   </section>
@@ -77,7 +77,7 @@ permalink: "/components/praxor.html"
 
   <section class="content-band">
     <h2>当前成熟度与未冻结接口</h2>
-    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离和 Tekmor 不等于验收已经采用。Praxe Policy、Dromen API、Capability Request/Observation、Praxe Record、沙箱、预算单位、事件结构和 Decision Tekmor 尚未冻结。</p>
+    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离和 Tekmor 不等于验收已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、预算单位、事件结构和决定类 Tekmor 尚未冻结。</p>
   </section>
   <div class="next-prev"><a href="theor.html">← Theor</a><a href="../architecture/endem-lifecycle.html">Endem 生命周期 →</a></div>
 </main>

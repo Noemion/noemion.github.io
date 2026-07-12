@@ -12,7 +12,7 @@ permalink: "/architecture/adr-0009-propositional-kernel.html"
   <section class="content-stack">
     <h2>直接结论</h2>
     <p class="callout warning"><strong>现行决定：</strong><a href="adr-0010-native-lexicon.html">ADR-0010：原生词汇与事态分层</a>采用六个语义面，并分开中性事态、目标方向和结构化观察。以下五组旧词只用于解释迁移。</p>
-    <p class="lead">旧的 <code>say / aim / must / done / open</code> 能分类需求，却没有表达记号怎样取得意义、命题怎样投影为可能事态。Endem 现在采用 <code>say / mean / case / when / open</code>；旧字段不再是当前接口。</p>
+    <p class="lead">这份 ADR 当时把需求分类推进为命题投影：<code>say / aim / must / done / open</code> 改为 <code>say / mean / case / when / open</code>。ADR-0010 后来又用六个现行语义面取代了这两组名称。</p>
     <p class="callout"><strong>核心不变量：</strong>一个 Endem 只有一个根 <code>case</code>。<code>mean</code> 与 <code>case</code> 共享稳定符号和关系位置；它们的图结构显示形式，不设置由制品自填的 <code>logical_form</code>、<code>valid</code> 或 <code>true</code> 字段。</p>
   </section>
 
@@ -63,13 +63,13 @@ permalink: "/architecture/adr-0009-propositional-kernel.html"
 
   <section class="content-wide">
     <h2>对 ADR-0008 的影响</h2>
-    <p>ADR-0008 继续决定 Endem、Weave、Frame、Witness、open/bound/sealed 状态、单一 <code>endem</code> CLI、八个动作以及 Core/Reader/Runner 权限边界。它的旧五字段分类、根 <code>aim</code> 和对应实现切片由本决定取代。</p>
+    <p>在本 ADR 作出时，ADR-0008 仍决定 Endem、Weave、Frame、Witness、三个状态、单一 CLI、八个动作以及三个权限域。本 ADR 只取代其中的五字段分类、根 <code>aim</code> 和对应实现切片；ADR-0010 后来又取代其余历史名称。</p>
     <p>开发阶段不提供旧字段别名或转换垫片。所有规范、手册、示例、视觉和测试必须使用新语义核；历史 ADR 只用于解释迁移。</p>
   </section>
 
   <section class="content-band">
     <h2>仍未冻结的内容</h2>
-    <p>物理记录编号、文本语法、符号 ID 编码、量化表达、时间模型、<code>when</code> 求值语言、Phase 1 以外的言语力量和稳定 ABI 仍需规范向量、两个读取实现和对抗测试。</p>
+    <p>这份历史记录没有冻结物理记录编号、文本语法、符号 ID、量化、时间、求值语言或稳定 ABI。当前未决范围以 ADR-0010 和开放问题页为准。</p>
   </section>
   <div class="next-prev"><a href="adr-0008-endem-system.html">← ADR-0008</a><a href="open-questions.html">开放问题 →</a></div>
 </main>

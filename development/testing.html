@@ -12,28 +12,28 @@ permalink: "/development/testing.html"
   <section class="content-rows"><h2>解析与资源安全</h2><p class="callout"><strong>基本规则：</strong>“合法样例通过”只证明一条成功路径。畸形、冲突、越权、超限和不完整输入必须稳定、快速且不产生部分可信结果地失败。</p><ul>
     <li>覆盖非法偏移、长度、计数、索引、对齐、重叠、环、自引用、超深图、压缩炸弹和恶意大计数。</li>
     <li>所有加法、乘法、对齐与区间端点使用 checked arithmetic；超限与溢出是规范错误，不是崩溃。</li>
-    <li>未知 critical 结构拒绝，未知 optional 结构按规范跳过并保留诊断；读取受字节、节点、深度、内存和时间预算约束。</li>
+    <li>未知关键结构必须拒绝；未知可选结构按规范跳过并保留诊断。读取受字节、节点、深度、内存和时间预算约束。</li>
     <li>错误必须定位到条款 ID 与字节、记录或语义路径；任何未执行层都不能被描述为通过。</li>
   </ul></section>
 
   <section class="content-rows"><h2>形成、往返与复现</h2><ul>
-    <li>相同 <code>rhem/semion/skena/telis/krin/apor</code>、投影决定、profile 和固定依赖产生完全相同的 Endem 字节。</li>
+    <li>相同六个语义面、投影决定、验证配置和固定依赖产生完全相同的 Endem 字节。</li>
     <li>规范文本 → Endem → 规范文本往返保持规范化等价；非规范空白或排列差异不得改变身份。</li>
     <li>分别报告 Endem 字节复现、工具二进制复现和发布签名真实性；三者不能相互替代。</li>
-    <li>至少在两个工作目录和两个隔离环境构建；locale、时区、临时路径、归档顺序和时间戳不得污染结果。</li>
+    <li>至少在两个工作目录和两个隔离环境构建；区域设置、时区、临时路径、归档顺序和时间戳不得污染结果。</li>
   </ul></section>
 
   <section class="content-rows"><h2>双读取器契约</h2><ul>
-    <li>Poiet 的生产 Parser 直接读取实际字节，并只在全部检查通过后产生内部 verified handle。</li>
-    <li><code>endem theor</code> 使用不共享解析代码的独立 Theor，只输出有界视图、差异、引用、大小与 trace。</li>
-    <li>两者对共享向量逐字段比较解释、上限和失败分类；查看器输出、符号列表或 pretty print 永不回流生产信任链。</li>
+    <li>Poiet 的生产解析器直接读取实际字节，并只在全部检查通过后产生内部验证句柄。</li>
+    <li><code>endem theor</code> 使用不共享解析代码的独立 Theor，只输出有界视图、差异、引用、大小与跟踪信息。</li>
+    <li>两者对共享向量逐字段比较解释、上限和失败分类；查看器输出、符号列表或格式化文本永不回流生产信任链。</li>
     <li>差异必须被视为实现或规范缺陷，不能用“多数实现一致”掩盖。</li>
   </ul></section>
 
   <section class="content-rows"><h2>语义与歧义保留</h2><ul>
     <li>逐来源单元验证记号、符号、指称、关系角色、作用域、力量、满足条件和未决分支得到保留。</li>
     <li>语义变异测试分别交换关系角色、翻转极性、改变 kine/mene 或弱化一条 <code>krin</code>，确认身份或验证结论发生预期变化。</li>
-    <li>模型置信度不能关闭 <code>apor</code>；只有规则可重推导或具名 Semion Decision 才能确认语义。</li>
+    <li>模型置信度不能关闭 <code>apor</code>；只有规则可重推导或具名语义决定才能确认语义。</li>
     <li>一个 Endem 只能有一个根 <code>skena</code>；多目标组合必须通过显式引用进入 Synem。</li>
     <li>违反 Profile 或无允许投影的输入必须稳定返回 <code>aseme</code>；观察不足必须返回 <code>agno</code>，不能混入 <code>apor</code>。</li>
   </ul></section>
@@ -45,19 +45,19 @@ permalink: "/development/testing.html"
     <li>私钥始终在外部签名系统；签名响应必须精确匹配请求、主体摘要、策略和发行身份。</li>
   </ul></section>
 
-  <section class="content-rows"><h2>Praxor、Harness 与 Tekmor</h2><ul>
+  <section class="content-rows"><h2>Praxor、控制平面与 Tekmor</h2><ul>
     <li>Praxor 重新验证收到的实际 Synem 字节，不信任此前路径名、查看输出或缓存结论。</li>
-    <li>Harness 独占实时能力句柄，覆盖最小权限、读写分离、幂等、副作用、提示注入、污染返回和 confused deputy。</li>
+    <li>控制平面持有实时能力句柄，并检查最小权限、读写分离、幂等、副作用、提示注入、污染返回和代理混淆风险。</li>
     <li>模型只能产生候选和能力请求；确定性策略决定调用，真实观察返回会话，具名权威或机器规则决定验收。</li>
     <li>Tekmor 绑定 Endem/Synem、环境、策略、事件链、证据范围和决定；证据缺失必须得到 pending、failed 或人工升级，而不是 accepted。</li>
     <li>恢复测试覆盖工具失败、环境漂移、重复失败、预算耗尽、取消竞态、状态冲突和人工判断分支。</li>
   </ul></section>
 
   <section class="content-rows"><h2>模型与协议适配</h2><ul>
-    <li>MCP/A2A gateway 覆盖版本不兼容、未知必需字段、恶意工具/Agent 描述、schema 欺骗、状态伪造与静默降级。</li>
-    <li>结构化输出测试必须包含 schema 合法但事实错误、引用悬空、跨字段冲突或权限越界的候选。</li>
-    <li>模型任务执行多次独立运行，报告成功率、置信区间、模型/工具/策略身份和失败切片；seed 或 temperature=0 不是跨版本确定性证明。</li>
-    <li>模型评价器只产生 advisory assessment；机器 accepted 来自确定性规则，需要价值判断时由具名外部权威签署。</li>
+    <li>MCP/A2A 适配器覆盖版本不兼容、未知必需字段、恶意工具或 Agent 描述、参数结构欺骗、状态伪造与静默降级。</li>
+    <li>结构化输出测试必须包含结构合法但事实错误、引用悬空、跨字段冲突或权限越界的候选。</li>
+    <li>模型任务执行多次独立运行，报告成功率、置信区间、模型、工具、策略身份和失败切片；固定随机种子或零温度不是跨版本确定性证明。</li>
+    <li>模型评价器只产生建议性评价；机器可判定的 accepted 来自确定性规则，需要价值判断时由具名外部权威签署。</li>
   </ul></section>
 
   <section class="content-wide"><h2>证据等级</h2><div class="table-wrap"><table><thead><tr><th>等级</th><th>支持什么</th><th>最低材料</th></tr></thead><tbody>

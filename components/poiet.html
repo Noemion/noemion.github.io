@@ -18,11 +18,11 @@ permalink: "/components/poiet.html"
   <section class="content-wide">
     <h2>权威输入与生产者</h2>
     <div class="table-wrap"><table><thead><tr><th>输入</th><th>生产者</th><th>Poiet 检查</th></tr></thead><tbody>
-      <tr><td>Rhem Source / 受控来源</td><td>用户、规范作者或受控生成器</td><td>编码、来源身份、投影决定、一个根 skena、telis、krin、apor 和版本。</td></tr>
-      <tr><td>Candidate + Semion Decision</td><td>不可信模型/外部前端，以及有权确认的主体</td><td>候选范围、替代项、权限、撤销与来源摘要。</td></tr>
-      <tr><td>Pleko Policy + Dependency Lock</td><td>构建配置和依赖管理者</td><td>内容身份、冲突、循环、能力收敛和可重放性。</td></tr>
-      <tr><td>Tasse Profile</td><td>发布配置</td><td>保留内容、调试外置、覆盖、预算和确定性元数据。</td></tr>
-      <tr><td>Signature Response</td><td>外部签名系统</td><td>原请求、候选载荷、算法、签名者、策略版本和签名有效性。</td></tr>
+      <tr><td>受控来源表达</td><td>用户、规范作者或受控生成器</td><td>编码、来源身份、投影决定、一个根 skena、telis、krin、apor 和版本。</td></tr>
+      <tr><td>投影候选与语义决定</td><td>不可信模型或外部前端，以及有权确认的主体</td><td>候选范围、替代项、权限、撤销与来源摘要。</td></tr>
+      <tr><td>组合策略与依赖锁</td><td>构建配置和依赖管理者</td><td>内容身份、冲突、循环、能力收敛和可重放性。</td></tr>
+      <tr><td>发布配置</td><td>发布负责人</td><td>保留内容、调试外置、覆盖、预算和确定性元数据。</td></tr>
+      <tr><td>外部签名响应</td><td>外部签名系统</td><td>原请求、候选载荷、算法、签名者、策略版本和签名有效性。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -30,10 +30,10 @@ permalink: "/components/poiet.html"
     <h2>输出与消费者</h2>
     <div class="table-wrap"><table><thead><tr><th>输出</th><th>实际消费者</th><th>输出成立的前提</th></tr></thead><tbody>
       <tr><td>nascent Endem + Poie Tekmor</td><td>elenk、theor、pleko、人工确认</td><td>结构合法、来源可定位、semion/skena 关系位置一致、一个根 skena、telis 与 krin 完整；apor 项仍显式存在。</td></tr>
-      <tr><td>生产 Elenk Result</td><td>pleko、tasse、Praxor</td><td>每个请求层明确 pass/fail/not-evaluated，并绑定实际字节与配置。</td></tr>
+      <tr><td>生产验证结果</td><td>pleko、tasse、Praxor</td><td>每个验证层明确通过、失败或未执行，并绑定实际字节与配置。</td></tr>
       <tr><td>coherent Endem / Synem + Pleko Tekmor</td><td>tasse、theor</td><td>必需引用与冲突已解析，权限未扩大。</td></tr>
-      <tr><td>Unsigned Candidate + Signing Request</td><td>外部签名系统、sphra</td><td>发布载荷冻结，闭包完整，裁剪保持规范属性。</td></tr>
-      <tr><td>attested Endem / Synem + Sphra Tekmor</td><td>theor、Praxor</td><td>Signature Response 精确绑定原候选和请求；被签字节未改变。</td></tr>
+      <tr><td>未签候选与签名请求</td><td>外部签名系统、sphra</td><td>发布载荷冻结，闭包完整，裁剪保持规范属性。</td></tr>
+      <tr><td>attested Endem / Synem + Sphra Tekmor</td><td>theor、Praxor</td><td>外部签名响应精确绑定原候选和请求；被签字节未改变。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -63,7 +63,7 @@ permalink: "/components/poiet.html"
 
   <section class="content-band">
     <h2>当前成熟度与未冻结接口</h2>
-    <p>Poiet 的唯一写入责任、确定性、状态机和失败边界已经采用，尚未发布实现。Rhem Source 语法、投影规则、规范记录、物理编码、生产 Verified Handle、Pleko Policy、Tasse Profile、Signing Request/Response 和错误码仍需规范与测试冻结。</p>
+    <p>Poiet 的唯一写入责任、确定性、状态机和失败边界已经采用，但实现尚未发布。受控来源语法、投影规则、物理编码、内部验证句柄、组合策略、发布配置、签名请求与响应结构和错误码仍未冻结。</p>
   </section>
   <div class="next-prev"><a href="index.html">← 系统组件</a><a href="theor.html">Theor →</a></div>
 </main>

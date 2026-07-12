@@ -93,7 +93,7 @@ DOC_GUIDE_HEADINGS = {
         "从这里开始", "六个语义面", "四个名词", "一个应用", "推荐阅读路径", "当前状态",
     ],
     "docs/installation-and-usage.html": [
-        "当前可用性", "计划中的使用流程", "发布原则", "命名发布门",
+        "当前可用性", "计划中的使用流程", "发布原则", "命名发布条件",
     ],
     "docs/architecture-guide.html": [
         "最小系统图", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
@@ -334,7 +334,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "Praxor",
             "Dromen",
             "praxe",
-            "Capability Request",
+            "类型化能力请求",
             "Tekmor",
             "accepted",
             "pending-review",
@@ -392,7 +392,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "checked arithmetic",
             "theor",
             "独立 Theor",
-            "生产 Parser",
+            "生产解析器",
             "不可信",
         ),
     },
@@ -401,7 +401,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "Dromen",
             "外部签名",
             "私钥始终留在外部签名系统",
-            "Signature Envelope",
+            "签名包络",
             "Tekmor",
             "phain",
             "accepted",
@@ -699,6 +699,14 @@ def validate_readability_behavior_contracts(root):
                 style_text,
                 r"\.project-progress-summary\s*\{[^}]*position:sticky;[^}]*top:88px"
             ),
+            "current stage summary must use readable body text": (
+                style_text,
+                r"\.current-stage-panel>p\{[^}]*font-size:16px;[^}]*line-height:1\.75"
+            ),
+            "timeline descriptions must use readable body text": (
+                style_text,
+                r"\.timeline-copy p\{[^}]*font-size:16px;[^}]*line-height:1\.7"
+            ),
             "FAQ answers must preserve the readable line length": (
                 style_text,
                 r"\.faq-list\s+details>p\s*\{[^}]*max-width:760px;"
@@ -718,6 +726,75 @@ def validate_readability_behavior_contracts(root):
             errors.append("missing assets/style.css")
         if not directory_style.exists():
             errors.append("missing assets/directory.css")
+    return errors
+
+
+def validate_prose_readability_contracts():
+    errors = []
+    historical_routes = {
+        "architecture/adr-0008-endem-system.html",
+        "architecture/adr-0009-propositional-kernel.html",
+    }
+    current_prose_forbidden = (
+        r"\.weave\b",
+        r"\bRhem Source\b",
+        r"\bHarness\b",
+        r"\bAcceptance Decision\b",
+        r"\bSemion Decision\b",
+        r"\bVerified Handle\b",
+        r"\bweave-binding-release\b",
+        r"SAY\s*→\s*DONE",
+    )
+
+    for path in SOURCE_PAGE_FILES:
+        source_text = path.read_text()
+        source_match = FRONT_MATTER.match(source_text)
+        if source_match is None:
+            continue
+        permalink = front_matter_value(source_match.group(1), "permalink")
+        route = permalink.lstrip("/") if permalink else path.relative_to(SOURCE_ROOT).as_posix()
+        body = source_text[source_match.end():]
+
+        if route not in historical_routes:
+            for pattern in current_prose_forbidden:
+                if re.search(pattern, body):
+                    errors.append(f"{route}: current prose retains unexplained or obsolete wording {pattern!r}")
+
+        if path.suffix == ".html":
+            prose_blocks = re.findall(r"<p\b[^>]*>(.*?)</p>", body, re.DOTALL | re.IGNORECASE)
+        else:
+            prose_blocks = [
+                block
+                for block in re.split(r"\n\s*\n", body)
+                if not block.lstrip().startswith((
+                    "#", "- ", "1. ", "2. ", "3. ", "4. ", "5. ",
+                    "6. ", "7. ", "8. ", "9. ", "|", "```", ">",
+                ))
+            ]
+        for block in prose_blocks:
+            visible = re.sub(r"https?://[^\s<)]+", "", block)
+            visible = re.sub(r"{%.*?%}|{{.*?}}", " ", visible, flags=re.DOTALL)
+            visible = re.sub(r"<[^>]+>|[`*_#>|\[\]()]", " ", visible)
+            visible = " ".join(visible.split())
+            for sentence in re.split(r"[。！？；]+", visible):
+                cjk_count = len(re.findall(r"[\u4e00-\u9fff]", sentence))
+                if cjk_count > 70:
+                    errors.append(
+                        f"{route}: prose sentence exceeds 70 Chinese characters and should be split: {sentence[:80]!r}"
+                    )
+
+    foundations = (SOURCE_ROOT / "about" / "intellectual-foundations.html").read_text()
+    for token in (
+        "世界是事实的总体，而不是事物的总体。",
+        "命题不是词的混合。",
+        "理解一个命题意味着知道若命题为真事情该是怎样的。",
+        "哲学的目的是从逻辑上澄清思想。",
+        "凡是可以说的东西都可以清楚地说出来。",
+        "贺绍甲译《逻辑哲学论》",
+        "不直接决定软件规范",
+    ):
+        if token not in foundations:
+            errors.append(f"intellectual foundations missing checked quotation boundary {token!r}")
     return errors
 
 
@@ -893,6 +970,7 @@ def validate_jekyll_sources():
             )
     errors.extend(validate_required_text_contracts(SOURCE_ROOT))
     errors.extend(validate_readability_behavior_contracts(SOURCE_ROOT))
+    errors.extend(validate_prose_readability_contracts())
 
     forbidden_shell = re.compile(
         r"<!doctype|<html\b|<head\b|<body\b|class=\"site-header\"|<footer\b",

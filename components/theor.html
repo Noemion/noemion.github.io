@@ -7,12 +7,12 @@ permalink: "/components/theor.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">系统组件</a><span aria-hidden="true">/</span><span>Theor</span></nav>
-  <header class="content-introduction"><h1>Theor</h1><p>为 <code>endem theor</code> 提供不共享 Poiet 解析代码的有界只读实现，用于观察、比较和交叉检查。</p><div class="badges"><span class="badge">Independent</span><span class="badge">Read Only</span><span class="badge">No Verified Handle</span></div></header>
+  <header class="content-introduction"><h1>Theor</h1><p>为 <code>endem theor</code> 提供不共享 Poiet 解析代码的有界只读实现，用于观察、比较和交叉检查。</p><div class="badges"><span class="badge">Independent</span><span class="badge">Read Only</span><span class="badge">No Trust Upgrade</span></div></header>
 
   <section class="content-stack">
     <h2>为什么需要独立 Theor</h2>
     <p class="lead">如果查看器复用 Poiet 的生产解析器，两个入口会继承相同的字段误解、边界错误和生成代码缺陷。Theor 只依据公开规范直接读取原始字节，让开发者和一致性测试获得第二种解释路径。</p>
-    <p class="callout"><strong>独立不是换一个命令名：</strong>Theor 不得链接 Poiet 的生产解析器、Writer、组合器或错误分类实现，也不使用 BFD 的 canonical representation 代替 Endem 逐字段解析。</p>
+    <p class="callout"><strong>独立不是换一个命令名：</strong>Theor 不得链接 Poiet 的生产解析器、写入器、组合器或错误分类实现。它也不能用 BFD 的通用内部表示代替 Endem 逐字段解析。</p>
   </section>
 
   <section class="content-wide">
@@ -31,8 +31,8 @@ permalink: "/components/theor.html"
     <ul>
       <li>Theor 使用独立数据结构、范围检查和错误路径；共享的只能是公开规范和测试向量。</li>
       <li>生产与独立实现由差分测试比较字段解释和失败分类，不能比较私有内存结构。</li>
-      <li>故障注入必须证明 Theor 能发现 Poiet Writer/Parser 的共同假设，而不是只重放相同代码。</li>
-      <li>Theor 不生成生产 Verified Handle，不改变状态，不修复对象，也不执行 Dromen。</li>
+      <li>故障注入必须证明 Theor 能发现 Poiet 写入器和解析器的共同假设，而不是只重放相同代码。</li>
+      <li>Theor 不生成生产验证句柄，不改变状态，不修复对象，也不执行 Dromen。</li>
       <li>结构可解析、状态自称 attested 和签名字段存在都不构成信任结论。</li>
     </ul>
   </section>
@@ -51,7 +51,7 @@ permalink: "/components/theor.html"
   <section class="content-wide">
     <h2>GNU 机制的采用边界</h2>
     <p>GNU <code>readelf</code> 独立于 BFD，可避免 BFD 解析错误影响直接检查；Theor 借鉴这一隔离做法：<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">https://www.sourceware.org/binutils/docs/binutils/readelf.html</a></p>
-    <p>BFD 面向多种传统对象格式并使用 canonical representation。Endem 第一阶段需要小型、格式专用和逐字段可审计的实现，因此不链接 BFD：<a href="https://sourceware.org/binutils/docs/bfd.html">https://sourceware.org/binutils/docs/bfd.html</a></p>
+    <p>BFD 为多种传统对象格式提供通用内部表示。Endem 第一阶段需要小型、格式专用、逐字段可审计的实现，因此不链接 BFD：<a href="https://sourceware.org/binutils/docs/bfd.html">https://sourceware.org/binutils/docs/bfd.html</a></p>
     <p>这些资料只说明隔离和直接解析的工程先例；Theor 不是 <code>readelf</code> 或 <code>objdump</code> 的功能复刻，也不继承 ELF 地址和机器指令语义。</p>
   </section>
 

@@ -17,7 +17,7 @@ badges: ["Authority", "Maturity", "ADR"]
 ## 权威顺序
 
 1. 版本化规范定义“必须是什么”。
-2. Accepted ADR 定义为什么选择该边界以及怎样变更。
+2. 状态为“已接受”的 ADR 解释为什么选择该边界，以及以后怎样变更。
 3. 架构页解释制品和组件关系。
 4. 指南提供阅读路径；FAQ 和示例不建立实现义务。
 
@@ -27,7 +27,7 @@ badges: ["Authority", "Maturity", "ADR"]
 
 ## Endem
 
-[Endem 规范](../specifications/endem.html)定义一个根 `skena`、六个语义面、形式显示、来源确认、显式未知、身份和规范编码边界。当前已接受语义骨架与 `.endem` 工程扩展名；magic、字段宽度、记录编号、求值语言、摘要算法和扩展 registry 尚未冻结。
+[Endem 规范](../specifications/endem.html)定义一个根 `skena`、六个语义面、形式显示、来源确认、显式未知、身份和规范编码边界。当前已接受语义骨架与 `.endem` 工程扩展名；魔数、字段宽度、记录编号、求值语言、摘要算法和扩展注册表尚未冻结。
 
 ## Synem
 
@@ -35,10 +35,10 @@ badges: ["Authority", "Maturity", "ADR"]
 
 ## Dromen 与 Tekmor
 
-Dromen 是 Praxor 内部不可变加载态，不是磁盘格式。[Tekmor 规范](../specifications/tekmor.html)定义对象、环境、策略、事件、证据范围和 Acceptance Decision 的不可变记录。模型的 Candidate Assessment 只能是其中一项不可信输入。
+Dromen 是 Praxor 为一次受控实现建立的会话状态，不是磁盘格式。[Tekmor 规范](../specifications/tekmor.html)定义对象、环境、策略、事件、证据范围和最终决定记录。模型评价只能作为其中一项不可信输入。
 
 ## ADR 与开放问题
 
-[ADR-0010](../architecture/adr-0010-native-lexicon.html)是当前词汇、六语义面与事态分层决定；ADR-0008 和 ADR-0009 只保存已被取代的设计历史。编码、实现语言、扩展 registry、远端协议 gateway 和发行治理等未决事项集中在[开放问题](../architecture/open-questions.html)。
+[ADR-0010](../architecture/adr-0010-native-lexicon.html)是当前词汇、六语义面与事态分层决定；ADR-0008 和 ADR-0009 只保存已被取代的设计历史。编码、实现语言、扩展注册表、远端协议适配和发行治理等未决事项集中在[开放问题](../architecture/open-questions.html)。
 
-面向标准化时，规范还需关联互操作 profile、正反向量、一致性测试、安全分析和版本演进；面向研究与知识产权时，应关联假设、现有技术、实验、贡献与公开披露记录。
+面向标准化时，规范还需关联互操作配置、正反向量、一致性测试、安全分析和版本演进。面向研究与知识产权时，还应关联假设、现有技术、实验、贡献与公开披露记录。

@@ -22,24 +22,14 @@ badges: ["Unreleased", "Endem CLI", "Integrity First"]
 
 ## 计划中的使用流程
 
-```text
-endem poie goal.endem.txt -o goal.endem
-endem elenk goal.endem
-endem theor goal.endem
-endem pleko goal.endem dep.endem -o release.weave
-endem tasse release.weave
-endem sphra release.weave --request signing.req
-endem praxe release.weave
-```
+当前参数和 Synem 扩展名尚未冻结，因此这里不提供看似可以直接执行的命令。计划中的职责顺序是：
 
-以上仅说明子命令职责，不冻结参数拼写或 Synem 扩展名。
-
-1. 作者提交受控 Rhem Source；模型只能协助提出 `semion/skena/telis/krin/apor` 投影候选，不能把候选写成规范事实。
-2. `poie` 依据确定性规则与 Semion Decision 写入 Endem。
+1. 作者提交受控来源表达；模型只能协助提出意义、事态、方向、判据和未决项候选，不能把候选写成规范事实。
+2. `poie` 依据确定性规则与具名语义决定写入 Endem。
 3. `elenk` 直接读取实际字节并分层验证；`theor` 以独立实现提供只读视图。
 4. 有真实多目标消费者时，`pleko` 才解析引用并形成 Synem。
 5. `tasse` 证明裁剪等价；`sphra` 只产生请求并核对外部签名响应，私钥不进入 Poiet。
-6. `praxe` 在隔离进程重新验证 Synem，建立 Dromen，由 Harness 控制能力，最终形成 Tekmor 与 Acceptance Decision。
+6. `praxe` 在隔离进程重新验证 Synem 并建立 Dromen。控制平面持有能力句柄，运行过程形成 Tekmor，具名权威作出最终验收决定。
 
 ## 发布原则
 
@@ -49,6 +39,6 @@ endem praxe release.weave
 - 下载后先验证摘要和签名，再解析制品；签名有效不意味着当前运行策略允许其能力。
 - 撤回、漏洞响应、密钥轮换、支持周期和长期归档必须在稳定发布前建立。
 
-## 命名发布门
+## 命名发布条件
 
 Endem 已通过互联网与 PyPI/npm/crates 等相邻工程命名初筛；正式软件和商标发布前仍必须完成目标司法辖区与类别的专业商标检索。若发现阻断冲突，应在 ABI 冻结前通过 ADR 一次性改名，不保留旧命令或格式别名。

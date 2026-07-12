@@ -7,12 +7,12 @@ permalink: "/about/intellectual-foundations.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">项目背景</a><span aria-hidden="true">/</span><span>思想与方法基础</span></nav>
-  <header class="content-introduction"><h1>思想与方法基础</h1><p>从现象学、语言哲学和逻辑中提取工程问题，同时解释为什么工程词汇最终必须脱离哲学术语独立成立。</p><div class="badges"><span class="badge">Phenomenology</span><span class="badge">Semantics</span><span class="badge">Engineering Limits</span></div></header>
+  <header class="content-introduction"><h1>思想与方法基础</h1><p>哲学帮助 Noemion 发现问题；工程规范、数据结构和测试负责给出可执行答案。</p><div class="badges"><span class="badge">Phenomenology</span><span class="badge">Semantics</span><span class="badge">Engineering Limits</span></div></header>
 
   <section class="content-split">
     <h2>为什么阅读这些著作</h2>
-    <p class="lead">Noemion 要把自然语言中的目标和约束编译为机器对象，因此必须先面对一个比对象格式更早的问题：一段表达的意义来自什么，什么使它指向同一对象、构成一个行为或满足一个条件。</p>
-    <p>哲学著作不会替我们给出 Endem 字段、规范编码或 Praxor 算法。它们的价值是揭示容易被工程直觉掩盖的分歧，并提供反例：表面语法可能遮蔽逻辑形式；同一句话可能执行不同的行为；语境推论不等于字面内容；规则不能只靠继续解释规则来固定；名称也不等于一组可变描述。</p>
+    <p class="lead">在设计对象格式之前，Noemion 必须先回答：一段表达怎样取得意义，怎样稳定地指向对象，又怎样说明某种事态已经满足。</p>
+    <p>哲学著作不会替我们给出 Endem 字段、规范编码或 Praxor 算法。它们帮助项目识别容易混淆的边界，例如表面语法与关系结构、字面内容与语境推论、规则说明与规则实践。工程设计随后把这些边界写成类型、不变量、诊断和测试。</p>
   </section>
 
   <section class="content-rows">
@@ -55,15 +55,15 @@ permalink: "/about/intellectual-foundations.html"
 
   <section class="content-stack">
     <h2>《逻辑哲学论》与工程设计相关的命题</h2>
-    <p>本次按命题编号逐项核对路德维希·维特根斯坦著、贺绍甲译《逻辑哲学论》（商务印书馆，2009 年第 1 版）与开放编号校本。以下内容只说明哪些结构约束进入工程设计，不构成对该书的完整解释。开放编号文本：<a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29">https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29</a></p>
+    <p>以下短引文已按命题编号核对路德维希·维特根斯坦著、贺绍甲译《逻辑哲学论》。它们只用来澄清 Noemion 面对的问题，不构成对全书的完整解释，也不直接决定软件规范。开放编号文本：<a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29">https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29</a></p>
     <ul>
-      <li><strong>1–2.063：</strong>世界由事实和事态而不是事物清单构成。Endem 因此要求 <code>skena</code> 表达对象之间成立或不成立的关系。</li>
-      <li><strong>2.1–3.1432：</strong>图像与命题由元素按确定方式结合，并通过投影关系指向可能事态。Endem 因此把来源 <code>rhem</code>、投影 <code>semion</code> 与中性事态 <code>skena</code> 分开。</li>
-      <li><strong>4.002–4.0031：</strong>日常语言会掩饰思想的形式，表面语法不保证真实结构。Poiet 不能把模型摘要或六段文本直接当作规范意义。</li>
-      <li><strong>4.022–4.024、4.431：</strong>理解命题关联到它为真时事情如何及其真值条件。Endem 由 <code>skena</code> 描述可能事态，<code>telis</code> 单独描述目标方向，<code>krin</code> 规定怎样把 <code>phain</code> 与 skena 比较；这些工程结构不等于哲学真值理论。</li>
-      <li><strong>2.172、4.12–4.1212：</strong>逻辑形式由结构显示而不是再被说出。Endem 不设置自填的 <code>logical_form</code> 或 <code>valid</code> 字段，Poiet 与独立 Theor 直接验证关系拓扑。</li>
-      <li><strong>4.112–4.116、6.5–7：</strong>划界要求把无意义、可表达但未决、意义已定但观察未知分成 <code>aseme</code>、<code>apor</code> 和 <code>agno</code>；格式不声称编码不可说之物。</li>
+      <li><blockquote><p>“世界是事实的总体，而不是事物的总体。”</p></blockquote><strong>命题 1.1：</strong>这启发 <code>skena</code> 使用对象—关系结构，而不是实体清单。它不要求 Noemion 接受逻辑原子主义。</li>
+      <li><blockquote><p>“命题不是词的混合。”</p></blockquote><strong>命题 3.141：</strong>这提醒 Poiet 不能把六段文本或模型摘要直接当作规范意义。Endem 必须保存可独立检查的关系位置。</li>
+      <li><blockquote><p>“理解一个命题意味着知道若命题为真事情该是怎样的。”</p></blockquote><strong>命题 4.024：</strong>这启发项目把中性可能事态 <code>skena</code>、目标方向 <code>telis</code> 和比较规则 <code>krin</code> 分开。开放式目标仍不能缩成封闭二值真值表。</li>
+      <li><blockquote><p>“哲学的目的是从逻辑上澄清思想。”</p></blockquote><strong>命题 4.112：</strong>哲学在项目中承担澄清和划界的角色，不承担字段设计或验收权威。</li>
+      <li><blockquote><p>“凡是可以说的东西都可以清楚地说出来。”</p></blockquote><strong>命题 4.116：</strong>这成为公开内容的写作要求：先说清问题和结论，再引入专名。它不意味着所有自然语言歧义都能自动消除。</li>
     </ul>
+    <p>工程上，Noemion 还必须区分四种结果：没有允许意义的 <code>aseme</code>、仍待授权选择的 <code>apor</code>、观察不足的 <code>agno</code> 和求值故障 <code>fault</code>。这些错误与状态由 ADR-0010 和规范定义，不是从原书直接推导出来的分类。</p>
     <p class="callout warning"><strong>反向约束：</strong>这本书的图像论、原子事实和早期语言观不能单独覆盖请求、承诺、授权、时间、概率、价值判断与开放式生成。ADR-0010 只采用可测试的结构约束；后期维特根斯坦、语用学、言语行为、翻译不确定性和推理语义学继续提供必须共同考虑的反例。</p>
   </section>
 

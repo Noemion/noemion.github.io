@@ -9,14 +9,14 @@ manual_group: "format"
 manual_order: 1
 nav_title: "格式与成形"
 page_heading: "格式与成形"
-page_lead: "从 Rhem Source 的六个语义面形成具有一个根 skena 的 nascent Endem。"
+page_lead: "把受控来源表达分解为六个语义面，并形成只有一个根 skena 的 nascent Endem。"
 summary: "来源、意义、可能事态、目标方向、满足判据、未决边界与确定性 poie。"
 badges: ["poie", "One Root Skena"]
 ---
 
-## 最小来源卡
+## 最小来源表达
 
-Rhem Source 是面向人的来源表达。进入 Endem 前必须形成以下六个语义面：
+受控来源表达是面向人的原始输入。Poiet 形成 Endem 前，必须把它映射为以下六个语义面：
 
 | 语义面 | 读者要回答的问题 | 不能省略的边界 |
 | --- | --- | --- |
@@ -75,4 +75,4 @@ apor:
 
 ## 确定性
 
-相同规范化 Rhem Source、投影决定、配置、依赖和 Poiet 版本必须产生相同 nascent Endem 字节。时间、工作目录、哈希表遍历、并发完成顺序和模型随机性不得进入规范字节。
+相同的规范化来源、投影决定、配置、依赖和 Poiet 版本必须产生相同 nascent Endem 字节。时间、工作目录、哈希表遍历、并发完成顺序和模型随机性不得进入规范字节。

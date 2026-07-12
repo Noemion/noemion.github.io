@@ -10,10 +10,10 @@ permalink: "/architecture/adr-0008-endem-system.html"
   <header class="content-introduction"><h1>ADR-0008：Endem 制品与单一命令面</h1><p>保存 Endem 与单一 CLI 的形成历史；其余制品、组件、动作和状态名称已由 ADR-0010 取代。</p><div class="badges"><span class="badge">Superseded by ADR-0010</span><span class="badge">2026-07-12</span><span class="badge">Historical Vocabulary</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
-    <h2>决定摘要</h2>
-    <p class="lead">Noemion 不再按传统二进制工具的数量组织产品。系统以 <strong>Endem</strong> 为最小、可编译的自然语言目标制品，以 <strong>Weave</strong> 表示多个 Endem 已完成解析的组合闭包，以 <strong>Frame</strong> 表示一次运行中建立的只读求解视图，以 <strong>Witness</strong> 保存可定位的观察和判断依据。</p>
+    <h2>怎样阅读这份历史记录</h2>
     <p class="callout warning"><strong>后续决定：</strong>本 ADR 除 Endem、`.endem` 与单一 CLI 外的现行名称均已取代。当前语义、制品、组件、动作和生命周期由 <a href="adr-0010-native-lexicon.html">ADR-0010：原生词汇与事态分层</a>定义。</p>
-    <p class="callout"><strong>直接结论：</strong>公开命令只有 <code>endem</code>。<code>form</code>、<code>check</code>、<code>bind</code>、<code>pack</code>、<code>seal</code>、<code>see</code>、<code>run</code> 与 <code>test</code> 是它的固定职责入口，不再建设 23 个并列应用。</p>
+    <p class="lead">这份记录只解释项目怎样确定 Endem 和单一命令入口。文中的 Weave、Frame、Witness、五组字段、三个旧状态和八个旧动作都不是现行接口。</p>
+    <p>现行对应关系是：Weave → Synem，Frame → Dromen，Witness → Tekmor；具体字段、状态和动作以 ADR-0010 为准。</p>
   </section>
 
   <section class="content-wide">
@@ -66,11 +66,11 @@ permalink: "/architecture/adr-0008-endem-system.html"
 
   <section class="content-wide">
     <h2>命名检索与正式商标检查</h2>
-    <p>Endem、Weave、Frame、Witness 与 <code>endem</code> 已作为本项目工程术语冻结，用于替换旧对象和工具家族。冻结只说明项目内部不再继续发散命名，不构成商标可注册、域名可取得或第三方权利无冲突的法律结论。</p>
+    <p>这份 ADR 当时冻结了 Endem、Weave、Frame、Witness 与 <code>endem</code>。ADR-0010 后来只保留 Endem、<code>.endem</code> 和单一命令入口；其余名称已退出。任何内部决定都不构成商标可注册、域名可取得或第三方权利无冲突的法律结论。</p>
     <ol>
       <li>开发阶段执行字面与近似检索：操作系统命令、主流包管理器、GitHub 仓库、语言生态包名、域名和同类开发工具。</li>
-      <li>公开发布前建立正式 gate：目标法域商标数据库、相同及近似类别、公司与产品名称、开源包身份和律师或合格知识产权人员复核。</li>
-      <li>gate 未通过时必须在首个稳定 ABI 前一次性调整术语、命令和扩展名，并用新 ADR 保持五字段语义与身份规则不变；不得在发布后依靠别名掩盖冲突。</li>
+      <li>公开发布前完成正式审查：目标法域商标数据库、相同及近似类别、公司与产品名称、开源包身份和合格知识产权人员复核。</li>
+      <li>审查未通过时，必须在首个稳定 ABI 前一次性调整术语、命令和扩展名，并用新 ADR 保持当时的语义与身份规则；不得在发布后依靠别名掩盖冲突。</li>
     </ol>
   </section>
 
@@ -100,7 +100,7 @@ permalink: "/architecture/adr-0008-endem-system.html"
 
   <section class="content-band">
     <h2>仍未冻结的内容</h2>
-    <p>Endem、Weave、Frame、Witness、三个状态、<code>.endem</code> 扩展名和唯一命令面继续有效；五组语义与根节点规则由 ADR-0009 取代。魔数、Weave/Witness 扩展名、字段宽度、记录编号、文本语法、摘要与签名算法、Frame 协议、Witness 编码、退出状态和安装包仍需规范向量、威胁模型、跨实现原型与后续 ADR。</p>
+    <p>本 ADR 只留下 Endem、<code>.endem</code> 和单一 <code>endem</code> 入口。其余名称与结构均已由 ADR-0010 取代，不得从这份历史记录推导当前扩展名、字段、状态、动作或 ABI。</p>
   </section>
   <div class="next-prev"><a href="decisions.html">← 架构决策</a><a href="adr-0009-propositional-kernel.html">ADR-0009 →</a></div>
 </main>

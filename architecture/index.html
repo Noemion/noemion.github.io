@@ -7,7 +7,7 @@ permalink: "/architecture/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>架构设计</span></nav>
-  <header class="section-introduction"><h1>架构设计</h1><p>围绕 Endem 最小目标制品，说明确定性成形、独立读取、组合发布和隔离运行怎样保持清楚边界。</p><div class="badges"><span class="badge">Endem First</span><span class="badge">One CLI</span><span class="badge">Three Components</span><span class="badge">Fail Closed</span></div></header>
+  <header class="section-introduction"><h1>架构设计</h1><p>一项自然语言目标怎样形成制品、组合依赖、受控实现，并留下可验收的证据。</p><div class="badges"><span class="badge">Endem First</span><span class="badge">One CLI</span><span class="badge">Three Components</span><span class="badge">Fail Closed</span></div></header>
 
   <section>
     <h2>架构的直接结论</h2>
@@ -22,7 +22,7 @@ permalink: "/architecture/index.html"
 
   <section>
     <h2>系统关系</h2>
-    <div class="flow"><div class="step">Rhem Source</div><div class="step">projection / poie</div><div class="step">nascent Endem</div><div class="step">elenk / theor</div><div class="step">pleko → coherent Endem / Synem</div><div class="step">tasse / external sign / sphra</div><div class="step">praxe → Dromen</div><div class="step">Tekmor / Decision</div></div>
+    <div class="flow"><div class="step">受控来源表达</div><div class="step">投影 / poie</div><div class="step">nascent Endem</div><div class="step">elenk / theor</div><div class="step">pleko → coherent Endem / Synem</div><div class="step">tasse / 外部签名 / sphra</div><div class="step">praxe → Dromen</div><div class="step">Tekmor / 最终决定</div></div>
     <p><code>poie</code> 是唯一语义成形入口；<code>elenk</code> 是生产验证路径；<code>theor</code> 是不共享解析代码的只读观察路径；<code>pleko</code> 只在存在多个 Endem 或外部引用时启用；<code>praxe</code> 重新验证实际 attested 字节，并在隔离域建立会话。</p>
   </section>
 
@@ -33,7 +33,7 @@ permalink: "/architecture/index.html"
       <a class="page-link" href="../components/theor.html"><strong>Theor · 独立只读检查器</strong><span>为 theor 提供第二条有界解析与比较路径，不生成生产可信句柄。</span></a>
       <a class="page-link" href="../components/praxor.html"><strong>Praxor · 隔离实现运行器</strong><span>重新验证 attested 制品，建立 Dromen，控制能力并形成 Tekmor。</span></a>
     </div>
-    <p>三者可以由同一发行包提供，但 Poiet、Theor 和 Praxor 的代码依赖、权限和失败责任必须保持可验证分离。没有模型、外部能力或多步反馈的任务可以使用最小 Praxor；不能因此让 Runtime 后端持有实时句柄或自行验收。</p>
+    <p>三者可以由同一发行包提供，但代码依赖、权限和失败责任必须保持可验证分离。没有模型、外部能力或多步反馈的任务可以使用最小 Praxor；求解后端仍不得持有实时句柄或自行验收。</p>
   </section>
 
   <section>

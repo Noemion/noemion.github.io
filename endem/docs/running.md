@@ -16,7 +16,7 @@ badges: ["tasse", "sphra", "praxe"]
 
 ## tasse 冻结什么
 
-`endem tasse` 读取 coherent Endem 或 Synem、发布 Profile、覆盖要求和调试策略，产生不可变候选载荷、manifest、Signing Request 和 Tasse Tekmor。
+`endem tasse` 读取 coherent Endem 或 Synem，以及发布配置、覆盖要求和调试策略。它产生不可变候选载荷、清单、签名请求和 Tasse Tekmor。
 
 它可以外置不影响运行的调试和详细来源内容，但必须证明以下属性未改变：
 
@@ -33,17 +33,17 @@ badges: ["tasse", "sphra", "praxe"]
 
 私钥始终留在外部签名系统。流程为：
 
-1. `tasse` 冻结候选并产生 Signing Request；
-2. 外部系统验证授权并返回 Signature Response；
+1. `tasse` 冻结候选并产生签名请求；
+2. 外部系统验证授权并返回签名响应；
 3. `sphra` 同时读取原候选、原请求和响应；
 4. 验证载荷、算法、签名者和策略版本；
-5. 在被签载荷之外附加 Signature Envelope，形成 attested Endem/Synem。
+5. 在被签载荷之外附加签名包络，形成 attested Endem/Synem。
 
 任何被签载荷变化都要求重新 tasse 和重新签名。签名有效只证明指定身份对指定字节作出签名，不证明语义正确或当前环境授权。
 
 ## praxe 的隔离域
 
-`endem praxe` 是用户入口，实际工作由不拥有 Poiet Writer 的隔离 Praxor 完成。Praxor 先重新验证实际 attested 字节，再读取 Praxe Policy、后端绑定和 Capability Catalog。
+`endem praxe` 是用户入口，实际工作由不拥有 Poiet 写入器的隔离 Praxor 完成。Praxor 先重新验证实际 attested 字节，再读取运行策略、后端绑定和能力目录。
 
 > 预先生成的 Elenk Tekmor 不能替代对实际运行输入的重新检查。
 
@@ -55,9 +55,9 @@ Praxor 为一次会话建立 Dromen。Dromen 只披露当前任务所需的 Ende
 
 ## 能力与反馈循环
 
-1. 后端读取 Dromen 并返回候选或类型化 Capability Request。
+1. 后端读取 Dromen 并返回候选或类型化能力请求。
 2. Praxor 检查参数、权限、预算、副作用、幂等和当前状态。
-3. Praxor 执行或拒绝请求，把真实结果规范化为 phain，再写入 Capability Observation 和 Praxe Tekmor。
+3. Praxor 执行或拒绝请求，把真实结果规范化为 phain，再写入能力观察和 Praxe Tekmor。
 4. 后端可以根据观察继续求解，但不能直接持有句柄或修改 attested 制品。
 5. 重复失败、预算耗尽、状态漂移或需要价值判断时，Praxor 按预注册策略停止或请求外部权威。
 
@@ -66,7 +66,7 @@ MCP 和 A2A 只适合作为 Praxor 外缘协议适配器：
 - https://modelcontextprotocol.io/specification/2025-11-25
 - https://a2a-protocol.org/v1.0.1/specification/
 
-远端工具说明、Agent Card、Task 状态、schema 和返回内容均是不可信声明，不能直接成为能力授权、Endem 状态或最终决定。
+远端工具说明、Agent Card、任务状态、参数结构和返回内容均是不可信声明，不能直接成为能力授权、Endem 状态或最终决定。
 
 ## Tekmor 与最终决定
 

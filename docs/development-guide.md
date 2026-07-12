@@ -19,7 +19,7 @@ badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 第一阶段只做规范和最小安全核心，不引入模型、LLVM、MLIR、多格式抽象或大型框架。
 
 - 冻结 `rhem/semion/skena/telis/krin/apor` 的最小语义、不变量、错误和资源限制。
-- 实现规范 Writer、生产 Parser、确定性序列化和 `endem poie/elenk`。
+- 实现规范写入器、生产解析器、确定性序列化和 `endem poie/elenk`。
 - 用不共享解析代码的实现交付 `endem theor`。
 - 建立合法、边界、畸形和对抗语料，以及往返、属性、模糊和双构建复现测试。
 
@@ -44,8 +44,8 @@ badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 ```text
 spec/       权威条款、registry 与错误码
 vectors/    规范字节、注释、合法与畸形向量
-poiet/      Writer、生产 Parser、poie/elenk/pleko
-theor/        独立只读 Theor，不依赖 core parser
+poiet/      写入器、生产解析器、poie/elenk/pleko
+theor/      独立只读 Theor，不依赖生产解析器
 cli/        endem 调度与独立进程边界
 ```
 
@@ -63,6 +63,6 @@ cli/        endem 调度与独立进程边界
 
 ## 模型与协议
 
-模型加入前必须有无模型基线。模型输出只进入 Candidate Envelope；MCP/A2A 只通过 Praxor 外缘 gateway；外部 schema 合法不等于语义正确或权限允许。若模型无法在错误确定率、上下文成本或任务成功率上证明净增益，就停止自研模型平台投入。
+模型加入前必须先建立无模型基线。模型输出只作为不可信候选进入系统；MCP 和 A2A 只通过 Praxor 外缘的协议适配器接入。外部参数结构合法不等于语义正确或权限允许。若模型无法在错误确定率、上下文成本或任务成功率上证明净增益，项目就停止自研模型平台投入。
 
 完整完成标准见[开发路线图](../development/implementation-roadmap.html)，测试矩阵见[测试与验证](../development/testing.html)。

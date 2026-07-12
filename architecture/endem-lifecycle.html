@@ -7,29 +7,36 @@ permalink: "/architecture/endem-lifecycle.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>Endem 生命周期</span></nav>
-  <header class="content-introduction"><h1>Endem 生命周期</h1><p>从 rhem 来源、意义投影和中性事态，到 attested 制品、Dromen、phain、Tekmor 与最终决定。</p><div class="badges"><span class="badge">nascent</span><span class="badge">coherent</span><span class="badge">attested</span><span class="badge">Dromen</span><span class="badge">Tekmor</span></div></header>
+  <header class="content-introduction"><h1>Endem 生命周期</h1><p>跟随一项目标从来源表达进入 Endem，再经过组合、发布、受控实现和证据验收。</p><div class="badges"><span class="badge">nascent</span><span class="badge">coherent</span><span class="badge">attested</span><span class="badge">Dromen</span><span class="badge">Tekmor</span></div></header>
 
   <section class="content-stack">
     <h2>生命周期不是信任等级流水线</h2>
-    <p class="lead">每个阶段只回答一种问题。poie 说明目标契约已经确定性编码；pleko 说明引用和冲突已经解析；sphra 说明发布载荷和签名响应一致；praxe 说明当前环境建立了受控会话；Tekmor 说明判断依据可定位。任何阶段都不能替代其他阶段。</p>
+    <p class="lead">生命周期不是一条“越往后越可信”的流水线。每个阶段只回答一种问题，任何阶段都不能替代其他阶段。</p>
+    <ul>
+      <li><code>poie</code> 说明目标契约已经确定性编码。</li>
+      <li><code>pleko</code> 说明引用和冲突已经解析。</li>
+      <li><code>sphra</code> 说明发布载荷与外部签名响应一致。</li>
+      <li><code>praxe</code> 说明当前环境已经建立受控会话。</li>
+      <li>Tekmor 只说明判断依据可定位，并限定这项依据的适用范围。</li>
+    </ul>
     <p class="callout"><strong>关键边界：</strong>Endem 在 nascent、coherent、attested 三个状态之间演进。apor 是语义面，不是生命周期状态；Dromen 是一次会话的实现态，Tekmor 是有限证据记录。</p>
   </section>
 
   <section class="content-wide">
     <h2>主流程</h2>
-    <div class="flow"><div class="step">Rhem Source / Candidate</div><div class="step">projection</div><div class="step">poie</div><div class="step">nascent Endem</div><div class="step">elenk + theor</div><div class="step">pleko</div><div class="step">coherent Endem / Synem</div><div class="step">tasse / sphra</div><div class="step">praxe → Dromen</div><div class="step">Tekmor → Decision</div></div>
+    <div class="flow"><div class="step">受控来源 / 投影候选</div><div class="step">确定投影</div><div class="step">poie</div><div class="step">nascent Endem</div><div class="step">elenk + theor</div><div class="step">pleko</div><div class="step">coherent Endem / Synem</div><div class="step">tasse / sphra</div><div class="step">praxe → Dromen</div><div class="step">Tekmor → 最终决定</div></div>
   </section>
 
   <section class="content-wide">
     <h2>阶段、消费者与失败</h2>
     <div class="table-wrap"><table><thead><tr><th>阶段</th><th>权威输入</th><th>正式输出</th><th>失败责任</th><th>下游消费者</th></tr></thead><tbody>
-      <tr><td>Rhem Source → poie</td><td>rhem、semion、skena、telis、krin、apor，或有来源的投影候选与授权决定</td><td>nascent Endem、Poie Tekmor、诊断</td><td>来源不可重放、aseme、根 skena 不唯一、telis/krin 缺失、候选越权确认</td><td>elenk、theor、pleko 或人工确认</td></tr>
-      <tr><td>nascent Endem → elenk</td><td>原始对象字节、限制、规范版本和请求验证层</td><td>分层结论、Elenk Tekmor；内部可产生生产 Verified Handle</td><td>结构、引用、语义、状态、完整性或资源限制失败</td><td>pleko、tasse、Praxor</td></tr>
+      <tr><td>受控来源 → poie</td><td>六个语义面，或带来源的投影候选与授权决定</td><td>nascent Endem、Poie Tekmor、诊断</td><td>来源不可重放、aseme、根 skena 不唯一、telis/krin 缺失、候选越权确认</td><td>elenk、theor、pleko 或人工确认</td></tr>
+      <tr><td>nascent Endem → elenk</td><td>原始对象字节、限制、规范版本和请求验证层</td><td>分层结论、Elenk Tekmor；内部可产生生产验证句柄</td><td>结构、引用、语义、状态、完整性或资源限制失败</td><td>pleko、tasse、Praxor</td></tr>
       <tr><td>任意对象 → theor</td><td>原始 Endem/Synem/Tekmor 字节和输出预算</td><td>只读视图、差分、诊断</td><td>畸形、未知关键记录、无法表示或资源超限</td><td>开发者、审计者、peira；不进入生产信任链</td></tr>
-      <tr><td>Endem 集合 → pleko</td><td>已检查对象、Pleko Policy、Dependency Lock</td><td>coherent Endem 或 Synem、Pleko Tekmor</td><td>未解析引用、冲突、循环、权限扩大、身份不稳定</td><td>tasse、theor</td></tr>
+      <tr><td>Endem 集合 → pleko</td><td>已检查对象、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Tekmor</td><td>未解析引用、冲突、循环、权限扩大、身份不稳定</td><td>tasse、theor</td></tr>
       <tr><td>coherent → tasse</td><td>闭包、发布 Profile、调试策略、覆盖要求</td><td>不可变候选载荷、manifest、Signing Request、Tasse Tekmor</td><td>闭包不全、裁剪改变语义、非确定性元数据、覆盖缺口</td><td>外部签名系统、sphra</td></tr>
-      <tr><td>候选 + Response → sphra</td><td>原候选、原请求、外部 Signature Response、信任策略</td><td>attested Endem/Synem、Sphra Tekmor</td><td>载荷、请求、算法、签名者或策略不匹配</td><td>theor、Praxor</td></tr>
-      <tr><td>attested → praxe</td><td>实际 attested 字节、Praxe Policy、后端和 Capability Catalog</td><td>Dromen、Praxe Tekmor、Decision Tekmor、Praxe Record</td><td>签名/策略失败、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
+      <tr><td>候选 + 签名响应 → sphra</td><td>原候选、原请求、外部签名响应和信任策略</td><td>attested Endem/Synem、Sphra Tekmor</td><td>载荷、请求、算法、签名者或策略不匹配</td><td>theor、Praxor</td></tr>
+      <tr><td>attested → praxe</td><td>实际 attested 字节、运行策略、后端和能力目录</td><td>Dromen、运行与决定类 Tekmor、运行记录</td><td>签名或策略失败、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
     </tbody></table></div>
   </section>
 
@@ -49,7 +56,7 @@ permalink: "/architecture/endem-lifecycle.html"
     <ol>
       <li><code>tasse</code> 计算发布闭包和可选 Debug Companion，证明删除内容不改变规范属性。</li>
       <li>待签载荷冻结后生成 Signing Request；私钥始终留在外部签名系统。</li>
-      <li><code>sphra</code> 同时读取原候选、原请求与 Signature Response，先验证绑定，再附加 Signature Envelope。</li>
+      <li><code>sphra</code> 同时读取原候选、原请求与签名响应，先验证绑定，再附加签名包络。</li>
       <li>签名封装不得改写被签载荷；任何载荷变化都要求重新 tasse 和外部签名。</li>
       <li>attested 只说明发布身份和字节范围，不证明当前环境可运行。</li>
     </ol>
@@ -62,8 +69,8 @@ permalink: "/architecture/endem-lifecycle.html"
       <li>Praxor 从对象、当前策略和授权能力建立 Dromen；实时句柄只保留在隔离执行侧。</li>
       <li>后端读取 Dromen 的受限视图，返回候选或类型化能力请求，不能直接调用外部能力。</li>
       <li>Praxor 验证请求、执行或拒绝，再把真实观察规范化为 phain 并记录为 Praxe Tekmor。</li>
-      <li>决定引擎按照执行前固定的 krin 和权威要求比较 skena 与 phain，形成 Decision Tekmor；观察不足时保持 agno，需要价值判断时保持 pending-review。</li>
-      <li>会话结束后 Dromen 销毁，Praxe Record 保留允许公开的 Tekmor 和身份链。</li>
+      <li>决定引擎按照执行前固定的 krin 和权威要求比较 skena 与 phain，形成决定类 Tekmor。观察不足时保持 agno；需要价值判断时保持 pending-review。</li>
+      <li>会话结束后 Dromen 销毁，运行记录只保留允许公开的 Tekmor 和身份链。</li>
     </ol>
   </section>
 
@@ -80,7 +87,7 @@ permalink: "/architecture/endem-lifecycle.html"
 
   <section class="content-band">
     <h2>当前实现顺序</h2>
-    <p>第一条切片只实现 Rhem Source → deterministic projection → poie → nascent Endem → elenk/theor → peira。pleko、Synem、tasse、sphra、Praxor、Dromen 和运行 Tekmor 必须等待最小格式、两条读取路径、恶意语料和字节复现稳定后再进入。</p>
+    <p>第一条切片只实现“受控来源表达 → 确定性投影 → <code>poie</code> → nascent Endem → <code>elenk/theor</code> → <code>peira</code>”。最小格式、两条读取路径、恶意语料和字节复现稳定后，项目才继续实现组合、发布与受控运行。</p>
   </section>
   <div class="next-prev"><a href="index.html">← 架构设计</a><a href="decisions.html">架构决策 →</a></div>
 </main>

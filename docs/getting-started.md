@@ -16,7 +16,7 @@ badges: ["Getting Started", "Noemion", "No Release Yet"]
 
 ## 从这里开始
 
-Noemion 试图为自然语言目标建立一种像目标文件之于传统计算那样持久、可组合、可独立检查的工程基础，但不会把传统对象术语和工具数量照搬过来。
+Noemion 为自然语言目标建立持久、可组合、可独立检查的工程基础。传统目标文件提供了重要类比，但项目不会照搬它的术语、机器指令语义或工具数量。
 
 项目创造的核心词是 **Endem**：由 *end* 与表示“最小区别单位”的 *-eme* 合成，定义为“最小、独立有效、可验证的期望终态单元”。它不是缩写，也不是 `OBJ` 的新前缀。
 
@@ -37,19 +37,19 @@ Noemion 试图为自然语言目标建立一种像目标文件之于传统计算
 
 - **[Endem](../specifications/endem.html)：**最小目标制品。
 - **[Synem](../specifications/synem.html)：**两个或更多 Endem、固定依赖和发布范围形成的已解析闭包；单个自包含 Endem 不需要 Synem。
-- **Dromen：**attested Endem 或 Synem 经 Praxor 重新验证后形成的不可变加载态；不是文件格式。
-- **[Tekmor](../specifications/tekmor.html)：**与 Endem/Synem、环境和策略绑定的证据与决定记录；不声称数学证明。
+- **Dromen：**Praxor 重新验证 attested Endem 或 Synem 后，为一次受控实现建立的会话状态；不是文件格式。
+- **[Tekmor](../specifications/tekmor.html)：**绑定目标、环境、方法和声明范围的证据记录；它不是数学证明，也不自动形成最终验收决定。
 
 ## 一个应用
 
 唯一公开命令是 `endem`：
 
 ```text
-endem poie   endem elenk   endem pleko   endem tasse
-endem sphra   endem theor     endem praxe    endem peira
+endem poie    endem elenk    endem pleko    endem tasse
+endem sphra   endem theor    endem praxe    endem peira
 ```
 
-一个命令入口不等于一个信任域。`theor` 背后必须使用与 Poiet Parser 不共享解析代码的独立实现；`praxe` 背后必须是隔离的最小权限进程。私钥位于外部签名系统，模型只提交候选和能力请求。
+一个命令入口不等于一个信任域。`theor` 背后必须使用不共享 Poiet 生产解析代码的独立实现；`praxe` 背后必须是隔离的最小权限进程。私钥位于外部签名系统，模型只提交候选和能力请求。
 
 ## 推荐阅读路径
 

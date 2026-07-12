@@ -18,20 +18,20 @@ badges: ["elenk", "theor", "Fail Closed"]
 
 | 入口 | 主要问题 | 能否进入生产信任链 |
 | --- | --- | --- |
-| `endem elenk` | 这份实际字节是否满足请求的结构、语义、状态、完整性与策略层？ | 可以；全部所需层通过后，Poiet 内部可产生绑定字节和配置的 Verified Handle |
+| `endem elenk` | 这份实际字节是否满足请求的结构、语义、状态、完整性与策略层？ | 可以；全部所需层通过后，Poiet 内部可产生绑定字节和配置的生产验证句柄 |
 | `endem theor` | 独立实现怎样读取和显示这份实际字节？ | 不可以；只提供观察、差分和诊断 |
 
 `theor` 可解析对象不表示 `elenk` 已通过；`elenk` 通过也不能替代 `theor` 在一致性测试中的第二种解释。
 
 ## 独立 Theor 要求
 
-`theor` 不得复用 Poiet 的生产 Parser、Writer、组合器、生成代码或错误分类实现。它只共享公开规范和测试向量，并使用独立数据结构与资源限制。
+`theor` 不得复用 Poiet 的生产解析器、写入器、组合器、生成代码或错误分类实现。它只共享公开规范和测试向量，并使用独立数据结构与资源限制。
 
 GNU `readelf` 独立于 BFD 的做法提供了工程先例：
 
 https://www.sourceware.org/binutils/docs/binutils/readelf.html
 
-BFD 面向多格式 canonical representation，可能隐藏格式特有信息；Endem 第一阶段不链接 BFD：
+BFD 面向多种格式提供通用内部表示，可能隐藏格式特有信息；Endem 第一阶段不链接 BFD：
 
 https://sourceware.org/binutils/docs/bfd.html
 
