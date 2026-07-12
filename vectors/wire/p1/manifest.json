@@ -38,6 +38,16 @@
       "id": "WV-P1-APOR-REJECT-SOURCE-REFERENCE-001",
       "hex": "vectors/wire/p1/apor-source-reference.hex",
       "expect": {"result": "reject", "code": "endem.semantic.reference", "clause": "END-FMT-014", "layer": "semantic", "semantic_path": "/apor/items/0/source_ref"}
+    },
+    {
+      "id": "WV-P1-REJECT-NON-MINIMAL-CBOR-001",
+      "hex": "vectors/wire/p1/non-minimal-cbor.hex",
+      "expect": {"result": "reject", "code": "endem.wire.payload.cbor", "clause": "END-FMT-009", "layer": "structure", "path": "/"}
+    },
+    {
+      "id": "WV-P1-REJECT-EDGE-LIMIT-001",
+      "hex": "vectors/wire/p1/edge-limit.hex",
+      "expect": {"result": "reject", "code": "endem.wire.profile.limit", "clause": "END-FMT-010", "layer": "profile", "path": "/"}
     }
   ]
 }

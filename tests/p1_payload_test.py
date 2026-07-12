@@ -20,19 +20,19 @@ LANGUAGE_TAG = re.compile(r"^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$")
 
 
 class P1Error(Exception):
-    def __init__(self, code, clause, path):
+    def __init__(self, code, clause, path, layer="semantic"):
         super().__init__(code)
         self.result = {
             "result": "reject",
             "code": code,
             "clause": clause,
-            "layer": "semantic",
-            "semantic_path": path,
+            "layer": layer,
+            "semantic_path" if layer == "semantic" else "path": path,
         }
 
 
-def fail(code, clause, path):
-    raise P1Error(code, clause, path)
+def fail(code, clause, path, layer="semantic"):
+    raise P1Error(code, clause, path, layer)
 
 
 def encode_head(major, value):
@@ -90,7 +90,7 @@ class Decoder:
     def take(self, position, length):
         end = position + length
         if end > len(self.data):
-            fail("endem.wire.payload.cbor", "END-FMT-009", "/")
+            fail("endem.wire.payload.cbor", "END-FMT-009", "/", "structure")
         return self.data[position:end], end
 
     def argument(self, position, additional):
@@ -99,20 +99,20 @@ class Decoder:
         widths = {24: 1, 25: 2, 26: 4, 27: 8}
         width = widths.get(additional)
         if width is None:
-            fail("endem.wire.payload.cbor", "END-FMT-009", "/")
+            fail("endem.wire.payload.cbor", "END-FMT-009", "/", "structure")
         raw, position = self.take(position, width)
         value = int.from_bytes(raw, "big")
         minimum = {1: 24, 2: 256, 4: 65536, 8: 4294967296}[width]
         if value < minimum:
-            fail("endem.wire.payload.cbor", "END-FMT-009", "/")
+            fail("endem.wire.payload.cbor", "END-FMT-009", "/", "structure")
         return value, position
 
     def item(self, position=0, depth=0):
         self.budget.items += 1
         if self.budget.items > self.profile["limits"]["max_graph_nodes"]:
-            fail("endem.wire.profile.limit", "END-FMT-010", "/")
+            fail("endem.wire.profile.limit", "END-FMT-010", "/", "profile")
         if depth > self.profile["limits"]["max_nesting_depth"]:
-            fail("endem.wire.profile.limit", "END-FMT-010", "/")
+            fail("endem.wire.profile.limit", "END-FMT-010", "/", "profile")
         raw, position = self.take(position, 1)
         major = raw[0] >> 5
         additional = raw[0] & 0x1F
@@ -122,22 +122,22 @@ class Decoder:
         if major == 3:
             length, position = self.argument(position, additional)
             if length > self.profile["limits"]["max_string_bytes"]:
-                fail("endem.wire.profile.limit", "END-FMT-010", "/")
+                fail("endem.wire.profile.limit", "END-FMT-010", "/", "profile")
             raw, position = self.take(position, length)
             self.budget.allocated += length
             if self.budget.allocated > self.profile["limits"]["max_total_allocation_bytes"]:
-                fail("endem.wire.profile.limit", "END-FMT-010", "/")
+                fail("endem.wire.profile.limit", "END-FMT-010", "/", "profile")
             try:
                 return raw.decode("utf-8"), position
             except UnicodeDecodeError:
-                fail("endem.wire.payload.cbor", "END-FMT-009", "/")
+                fail("endem.wire.payload.cbor", "END-FMT-009", "/", "structure")
         if major == 4:
             length, position = self.argument(position, additional)
             if length > self.profile["limits"]["max_graph_edges"]:
-                fail("endem.wire.profile.limit", "END-FMT-010", "/")
+                fail("endem.wire.profile.limit", "END-FMT-010", "/", "profile")
             self.budget.edges += length
             if self.budget.edges > self.profile["limits"]["max_graph_edges"]:
-                fail("endem.wire.profile.limit", "END-FMT-010", "/")
+                fail("endem.wire.profile.limit", "END-FMT-010", "/", "profile")
             values = []
             for _ in range(length):
                 value, position = self.item(position, depth + 1)
@@ -146,7 +146,7 @@ class Decoder:
         if major == 5:
             length, position = self.argument(position, additional)
             if length > self.profile["limits"]["max_graph_edges"]:
-                fail("endem.wire.profile.limit", "END-FMT-010", "/")
+                fail("endem.wire.profile.limit", "END-FMT-010", "/", "profile")
             self.budget.edges += length
             if self.budget.edges > self.profile["limits"]["max_graph_edges"]:
                 fail("endem.wire.profile.limit", "END-FMT-010", "/")
@@ -157,13 +157,13 @@ class Decoder:
                 key, position = self.item(position, depth + 1)
                 key_bytes = self.data[key_start:position]
                 if not isinstance(key, int) or key < 0 or (prior_key is not None and key_bytes <= prior_key):
-                    fail("endem.wire.payload.cbor", "END-FMT-009", "/")
+                    fail("endem.wire.payload.cbor", "END-FMT-009", "/", "structure")
                 prior_key = key_bytes
                 if key in mapping:
-                    fail("endem.wire.payload.cbor", "END-FMT-009", "/")
+                    fail("endem.wire.payload.cbor", "END-FMT-009", "/", "structure")
                 mapping[key], position = self.item(position, depth + 1)
             return mapping, position
-        fail("endem.wire.payload.cbor", "END-FMT-009", "/")
+        fail("endem.wire.payload.cbor", "END-FMT-009", "/", "structure")
 
 
 def identifier(value, path):
@@ -251,8 +251,9 @@ def source_to_records(model):
     }
 
 
-def build_container(records):
+def build_container(records, payload_overrides=None):
     payloads = {kind: encode_cbor(records[kind]) for kind in range(1, 7)}
+    payloads.update(payload_overrides or {})
     directory_end = HEADER_SIZE + 6 * ENTRY_SIZE
     offsets = {}
     position = directory_end
@@ -279,27 +280,27 @@ def build_container(records):
 
 def read_container(data, profile):
     if len(data) < HEADER_SIZE or data[:8] != MAGIC:
-        fail("endem.wire.header.magic", "END-FMT-001", "/")
+        fail("endem.wire.header.magic", "END-FMT-001", "/", "structure")
     fields = struct.unpack_from("<8sHHHHBBBBIQQ24s", data, 0)
     _, major, minor, header_size, entry_size, byte_order, profile_id, state, flags, count, directory, file_size, reserved = fields
     if (major, minor, header_size, entry_size, byte_order, profile_id, state, flags, count, directory) != (0, 1, 64, 48, 1, 2, 0, 0, 6, 64):
-        fail("endem.wire.profile.feature", "END-FMT-010", "/")
+        fail("endem.wire.profile.feature", "END-FMT-010", "/", "profile")
     if file_size != len(data) or reserved != bytes(24):
-        fail("endem.wire.header.size", "END-FMT-003", "/")
+        fail("endem.wire.header.size", "END-FMT-003", "/", "structure")
     records = {}
     budget = Budget()
     for index in range(6):
         base = 64 + index * 48
         kind, record_flags, record_id, offset, stored, logical, alignment, link, info, entry_reserved = struct.unpack_from("<HHIQQQIIII", data, base)
         if (kind, record_flags, record_id, logical, alignment, link, info, entry_reserved) != (index + 1, 1, index + 1, stored, 8, 0, 0, 0):
-            fail("endem.wire.profile.feature", "END-FMT-010", "/")
+            fail("endem.wire.profile.feature", "END-FMT-010", "/", "profile")
         end = offset + stored
         if offset % 8 or end > len(data):
-            fail("endem.wire.record.range", "END-FMT-006", "/")
+            fail("endem.wire.record.range", "END-FMT-006", "/", "structure")
         decoder = Decoder(data[offset:end], profile, budget)
         value, consumed = decoder.item()
         if consumed != stored or not isinstance(value, dict):
-            fail("endem.wire.payload.cbor", "END-FMT-009", "/")
+            fail("endem.wire.payload.cbor", "END-FMT-009", "/", "structure")
         records[kind] = value
     return records
 
@@ -445,6 +446,18 @@ def mutate_records(records, vector_id):
     return records
 
 
+def build_vector(records, vector_id):
+    mutated = mutate_records(records, vector_id)
+    if vector_id == "WV-P1-REJECT-NON-MINIMAL-CBOR-001":
+        canonical = encode_cbor(mutated[1])
+        if canonical[0] != 0xA7:
+            raise AssertionError("rhem root must be a seven-entry map")
+        return build_container(mutated, {1: b"\xb8\x07" + canonical[1:]})
+    if vector_id == "WV-P1-REJECT-EDGE-LIMIT-001":
+        return build_container(mutated, {1: b"\xa1\x01\x9a\x00\x04\x00\x01"})
+    return build_container(mutated)
+
+
 def load_hex(path):
     return bytes.fromhex(path.read_text())
 
@@ -492,7 +505,7 @@ def main():
     for vector in manifest.get("vectors", []):
         vector_id = vector["id"]
         seen.add(vector_id)
-        expected_bytes = build_container(mutate_records(base_records, vector_id))
+        expected_bytes = build_vector(base_records, vector_id)
         actual_bytes = load_hex(ROOT / vector["hex"])
         if actual_bytes != expected_bytes:
             errors.append(f"{vector_id}: checked-in bytes differ from deterministic source mapping")
@@ -512,12 +525,12 @@ def main():
             reject_count += 1
     if len(seen) != len(manifest.get("vectors", [])):
         errors.append("END-P1 vector IDs must be unique")
-    if accept_count != 2 or reject_count != 5:
-        errors.append("END-P1 requires two semantic accepts and five semantic rejects")
+    if accept_count != 2 or reject_count != 7:
+        errors.append("END-P1 requires two semantic accepts and seven deterministic rejects")
     if errors:
         print("\n".join(errors))
         return 1
-    print("PASS: END-P1 encoded and decoded 7 complete payload vectors (2 semantic accepts, 5 deterministic rejects)")
+    print("PASS: END-P1 encoded and decoded 9 complete payload vectors (2 semantic accepts, 7 deterministic rejects)")
     return 0
 
 

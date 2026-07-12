@@ -300,6 +300,8 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p0.json"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/edge-limit.hex"},
+        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
         {"status": "planned", "ref": "peira:resource-limit-before-allocation"},
         {"status": "manual-authority", "authority": "future Profile ADR reviewers"}
       ]
@@ -452,6 +454,8 @@
       "failure_owner": "Poiet and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/payload-not-map.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/non-minimal-cbor.hex"},
+        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "planned", "ref": "peira:wire-cbor-determinism"}
       ]
@@ -467,6 +471,7 @@
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/edge-limit.hex"},
         {"status": "planned", "ref": "peira:p0-limit-boundaries"}
       ]
     },
