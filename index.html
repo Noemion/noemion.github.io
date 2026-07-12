@@ -10,7 +10,7 @@ permalink: "/index.html"
     <div class="portal-hero-copy">
       <p class="portal-eyebrow">A deterministic foundation for natural-language goals</p>
       <h1 id="portal-title"><span>让目标不再只是文字，</span><strong>而成为 Endem。</strong></h1>
-      <p class="portal-hero-summary">Endem 是最小、独立有效、可验证的期望终态单元：来源记号经过明确投影，形成一个根可能事态及其满足条件。</p>
+      <p class="portal-hero-summary">Endem 是最小、独立有效、可验证的期望终态单元：来源经过明确投影，形成一个根可能事态、独立目标方向及其结构化满足判据。</p>
       <div class="portal-actions">
         <a class="portal-button portal-button-primary" href="docs/getting-started.html"><span>认识 Endem</span><span aria-hidden="true">↗</span></a>
         <a class="portal-button portal-button-secondary" href="architecture/endem-lifecycle.html"><span>查看完整生命周期</span><span aria-hidden="true">→</span></a>
@@ -21,31 +21,35 @@ permalink: "/index.html"
       </div>
     </div>
 
-    <div class="portal-hero-visual" role="img" aria-label="来源经过 form 形成 Endem，五组投影语义为 say、mean、case、when 与 open">
+    <div class="portal-hero-visual" role="img" aria-label="来源经过 poie 形成 Endem，六个语义面为 rhem、semion、skena、telis、krin 与 apor">
       <div class="semantic-spectrum" aria-hidden="true"></div>
       <div class="dataflow-field" aria-hidden="true">
-        <span class="dataflow-status"><i></i><b>ENDEM / OPEN</b></span>
-        <span class="dataflow-lane dataflow-lane-source"><b>SAY</b><i></i><em></em></span>
-        <span class="dataflow-lane dataflow-lane-bind"><b>MEAN</b><i></i><em></em></span>
-        <span class="dataflow-lane dataflow-lane-reloc"><b>CASE</b><i></i><em></em></span>
-        <span class="dataflow-lane dataflow-lane-verify"><b>WHEN</b><i></i><em></em></span>
+        <span class="dataflow-status"><i></i><b>ENDEM / NASCENT</b></span>
+        <span class="dataflow-lane dataflow-lane-rhem"><b>RHEM</b><i></i><em></em></span>
+        <span class="dataflow-lane dataflow-lane-semion"><b>SEMION</b><i></i><em></em></span>
+        <span class="dataflow-lane dataflow-lane-skena"><b>SKENA</b><i></i><em></em></span>
+        <span class="dataflow-lane dataflow-lane-telis"><b>TELIS</b><i></i><em></em></span>
+        <span class="dataflow-lane dataflow-lane-krin"><b>KRIN</b><i></i><em></em></span>
+        <span class="dataflow-lane dataflow-lane-apor"><b>APOR</b><i></i><em></em></span>
       </div>
       <div class="source-cluster" aria-hidden="true">
-        <span class="source-chip source-chip-goal"><b>SAY</b> 原始表达</span>
-        <span class="source-chip source-chip-context"><b>WHEN</b> 满足观察</span>
-        <span class="source-chip source-chip-ambiguity"><b>OPEN</b> 保留未决</span>
+        <span class="source-chip source-chip-goal"><b>RHEM</b> 原始表达</span>
+        <span class="source-chip source-chip-context"><b>SEMION</b> 授权投影</span>
+        <span class="source-chip source-chip-ambiguity"><b>APOR</b> 保留未决</span>
       </div>
       <div class="compiler-bridge" aria-hidden="true">
-        <span>FORM</span>
+        <span>POIE</span>
         <i></i>
       </div>
       <div class="endem-object-visual" aria-hidden="true">
-        <div class="endem-object-title"><span>ENDEM</span><small>ONE CASE</small></div>
-        <div class="endem-object-record"><b>01</b><span>say</span><i></i></div>
-        <div class="endem-object-record"><b>02</b><span>mean</span><i></i></div>
-        <div class="endem-object-record"><b>03</b><span>case</span><i></i></div>
-        <div class="endem-object-record"><b>04</b><span>when · open</span><i></i></div>
-        <div class="endem-object-footer"><span>BOUND</span><span>CHECKED</span><span>VERIFIABLE</span></div>
+        <div class="endem-object-title"><span>ENDEM</span><small>ONE SKENA</small></div>
+        <div class="endem-object-record"><b>01</b><span>rhem</span><i></i></div>
+        <div class="endem-object-record"><b>02</b><span>semion</span><i></i></div>
+        <div class="endem-object-record"><b>03</b><span>skena</span><i></i></div>
+        <div class="endem-object-record"><b>04</b><span>telis</span><i></i></div>
+        <div class="endem-object-record"><b>05</b><span>krin</span><i></i></div>
+        <div class="endem-object-record"><b>06</b><span>apor</span><i></i></div>
+        <div class="endem-object-footer"><span>NASCENT</span><span>ELENK</span><span>VERIFIABLE</span></div>
       </div>
       <div class="object-orbit object-orbit-one" aria-hidden="true"></div>
       <div class="object-orbit object-orbit-two" aria-hidden="true"></div>
@@ -60,36 +64,36 @@ permalink: "/index.html"
     <div class="portal-thesis-copy">
       <p class="portal-lead"><strong>Endem</strong> 由 <em>end</em> 与表示“最小区别单位”的构词成分 <em>-eme</em> 合成，工程定义是“最小、独立有效、可验证的期望终态单元”。</p>
       <p>Noemion 只是项目与生态名称。制品、动作和应用不再批量携带品牌前缀，也不再用传统 <code>OBJ</code> 词尾假装自然语言目标只是另一种机器目标文件。</p>
-      <p>一个 Endem 只有一个根 <code>case</code>。复杂任务通过明确引用和组合形成 Weave，而不是把所有上下文塞进巨型提示词。</p>
+      <p>一个 Endem 只有一个根 <code>skena</code>。复杂任务通过明确引用和组合形成 Synem，而不是把所有上下文塞进巨型提示词。</p>
       <p>名称提供共同语言；真正语义仍由规范、不变量、失败路径和测试决定。</p>
     </div>
   </section>
 
   <section class="portal-paths portal-reveal">
     <div class="portal-section-heading">
-      <p class="portal-section-index">02 · FIVE WORDS</p>
-      <h2 class="portal-chapter-title"><span>五个短词<br>形成命题投影</span></h2>
-      <p>来源、意义、事态、满足和未决边界必须分开；结构显示形式。</p>
+      <p class="portal-section-index">02 · SIX FACETS</p>
+      <h2 class="portal-chapter-title"><span>六个短词<br>展开完整语义</span></h2>
+      <p>来源、意义、事态、目标方向、判断和未决边界彼此分开；结构显示形式。</p>
     </div>
     <div class="portal-feature-list">
       <a class="portal-feature-row" href="specifications/endem.html">
-        <span class="feature-visual feature-visual-expression" aria-hidden="true"><i>SAY</i><i>MEAN</i><b>SIGN → SENSE</b></span>
-        <span class="feature-copy"><small>SOURCE &amp; MEANING</small><strong><code>say</code> 保存记号，<code>mean</code> 固定投影</strong><span>同一说法可以有多种解释；只有规则或具名授权能够确认符号、指称、关系和作用域。</span></span>
+        <span class="feature-visual feature-visual-expression" aria-hidden="true"><i>RHEM</i><i>SEMION</i><b>SIGN → SENSE</b></span>
+        <span class="feature-copy"><small>SOURCE &amp; MEANING</small><strong><code>rhem</code> 保存记号，<code>semion</code> 固定投影</strong><span>同一说法可以有多种解释；只有规则或具名授权能够确认符号、指称、关系和作用域。</span></span>
         <span class="portal-arrow" aria-hidden="true">↗</span>
       </a>
-      <a class="portal-feature-row" href="specifications/endem.html#case">
-        <span class="feature-visual feature-visual-strict" aria-hidden="true"><span><i>CASE</i><b>SEEK</b></span><span><i>KEEP</i><b>AVOID</b></span></span>
-        <span class="feature-copy"><small>POSSIBLE SITUATION</small><strong><code>case</code> 描述应成立的对象关系</strong><span>目标、持续不变量和禁止事态共享同一关系结构，并通过 seek、keep、avoid 区分力量。</span></span>
+      <a class="portal-feature-row" href="specifications/endem.html#skena">
+        <span class="feature-visual feature-visual-strict" aria-hidden="true"><span><i>SKENA</i><b>RELATION</b></span><span><i>TELIS</i><b>KINE · MENE</b></span></span>
+        <span class="feature-copy"><small>SITUATION &amp; DIRECTION</small><strong><code>skena</code> 保存事态，<code>telis</code> 保存目标方向</strong><span>禁止事项由事态中的显式否定表达；kine 与 mene 只区分达到成立和持续成立。</span></span>
         <span class="portal-arrow" aria-hidden="true">↗</span>
       </a>
-      <a class="portal-feature-row" href="specifications/endem.html#when">
-        <span class="feature-visual feature-visual-object" aria-hidden="true"><i>WHEN</i><b>+</b><i>WITNESS</i><span>MET · UNKNOWN · ERROR</span></span>
-        <span class="feature-copy"><small>FULFILLMENT</small><strong><code>when</code> 在运行前确定怎样判断满足</strong><span>观察类型、必需证据、未知处理和决定权威必须先固定；模型不能让命题自证。</span></span>
+      <a class="portal-feature-row" href="specifications/endem.html#krin">
+        <span class="feature-visual feature-visual-object" aria-hidden="true"><i>SKENA</i><b>↔</b><i>PHAIN</i><span>MET · AGNO · FAULT</span></span>
+        <span class="feature-copy"><small>FULFILLMENT</small><strong><code>krin</code> 规定怎样比较事态与观察</strong><span>phain、必需 Tekmor、观察不足处理和决定权威必须先固定；模型不能让命题自证。</span></span>
         <span class="portal-arrow" aria-hidden="true">↗</span>
       </a>
-      <a class="portal-feature-row" href="specifications/endem.html#open">
-        <span class="feature-visual feature-visual-lifecycle" aria-hidden="true"><i>OPEN</i><i>KEEP</i><i>ASK</i><i>RESOLVE</i></span>
-        <span class="feature-copy"><small>AMBIGUITY</small><strong><code>open</code> 把未决意义当作一等信息</strong><span>候选解释、冲突和解决权限都可追踪；没有授权时，系统宁可停下，也不制造错误确定性。</span></span>
+      <a class="portal-feature-row" href="specifications/endem.html#apor">
+        <span class="feature-visual feature-visual-lifecycle" aria-hidden="true"><i>APOR</i><i>MENE</i><i>ASK</i><i>RESOLVE</i></span>
+        <span class="feature-copy"><small>AMBIGUITY</small><strong><code>apor</code> 把未决意义当作一等信息</strong><span>候选解释、冲突和解决权限都可追踪；没有授权时，系统宁可停下，也不制造错误确定性。</span></span>
         <span class="portal-arrow" aria-hidden="true">↗</span>
       </a>
     </div>
@@ -102,9 +106,9 @@ permalink: "/index.html"
       <p>权限、权威、生命周期或保密级别没有不同，就不应被拆成新的正式制品。</p>
     </div>
     <div class="portal-focus-grid">
-      <a class="portal-focus-card focus-card-endem" href="specifications/endem.html"><span class="focus-art" aria-hidden="true"><b>ENDEM</b></span><span class="focus-card-copy"><small>最小制品</small><strong>Endem</strong><span>一个根 case 与五组命题投影语义。</span></span></a>
-      <a class="portal-focus-card focus-card-weave" href="specifications/weave.html"><span class="focus-art" aria-hidden="true"><b>WEAVE</b></span><span class="focus-card-copy"><small>组合闭包</small><strong>Weave</strong><span>已解析的 Endem、固定依赖与发布范围。</span></span></a>
-      <a class="portal-focus-card focus-card-witness" href="specifications/witness.html"><span class="focus-art" aria-hidden="true"><b>WITNESS</b></span><span class="focus-card-copy"><small>运行证据</small><strong>Frame · Witness</strong><span>Frame 是加载态；Witness 记录带范围的证据与决定。</span></span></a>
+      <a class="portal-focus-card focus-card-endem" href="specifications/endem.html"><span class="focus-art" aria-hidden="true"><b>ENDEM</b></span><span class="focus-card-copy"><small>最小制品</small><strong>Endem</strong><span>一个根 skena 与六个语义面。</span></span></a>
+      <a class="portal-focus-card focus-card-synem" href="specifications/synem.html"><span class="focus-art" aria-hidden="true"><b>SYNEM</b></span><span class="focus-card-copy"><small>组合闭包</small><strong>Synem</strong><span>已解析的 Endem、固定依赖与发布范围。</span></span></a>
+      <a class="portal-focus-card focus-card-tekmor" href="specifications/tekmor.html"><span class="focus-art" aria-hidden="true"><b>TEKMOR</b></span><span class="focus-card-copy"><small>有范围证据</small><strong>Dromen · Tekmor</strong><span>Dromen 是会话实现态；Tekmor 封装 phain、范围与决定依据。</span></span></a>
     </div>
   </section>
 
@@ -115,16 +119,16 @@ permalink: "/index.html"
       <p>公开应用只有 <code>endem</code>。子命令按职责组织，安全边界通过独立实现和进程隔离保持。</p>
     </div>
     <div class="portal-lifecycle-list">
-      <a href="endem/"><span class="lifecycle-number">01</span><span class="lifecycle-copy"><strong><code>form · check · bind</code></strong><span>确定性形成、验证和组合；只有规范写入器能够产生规范字节。</span></span><span class="lifecycle-state">CORE</span></a>
-      <a href="components/reader.html"><span class="lifecycle-number">02</span><span class="lifecycle-copy"><strong><code>see</code></strong><span>单独构建的只读解析器，不复用生产读取器，也不产生可信验证句柄。</span></span><span class="lifecycle-state">READ</span></a>
-      <a href="components/runner.html"><span class="lifecycle-number">03</span><span class="lifecycle-copy"><strong><code>run</code></strong><span>隔离进程重新验证实际字节，Harness 独占能力句柄，模型始终位于不可信域。</span></span><span class="lifecycle-state">RUN</span></a>
+      <a href="endem/"><span class="lifecycle-number">01</span><span class="lifecycle-copy"><strong><code>poie · elenk · pleko</code></strong><span>确定性形成、验证和组合；只有规范写入器能够产生规范字节。</span></span><span class="lifecycle-state">POIET</span></a>
+      <a href="components/theor.html"><span class="lifecycle-number">02</span><span class="lifecycle-copy"><strong><code>theor</code></strong><span>单独构建的只读解析器，不复用生产读取器，也不产生可信验证句柄。</span></span><span class="lifecycle-state">READ</span></a>
+      <a href="components/praxor.html"><span class="lifecycle-number">03</span><span class="lifecycle-copy"><strong><code>praxe</code></strong><span>隔离进程重新验证实际字节，Harness 独占能力句柄，模型始终位于不可信域。</span></span><span class="lifecycle-state">PRAXE</span></a>
     </div>
   </section>
 
   <section class="portal-start portal-reveal">
     <p class="portal-section-index">05 · CURRENT STAGE</p>
     <h2 class="portal-chapter-title"><span>先证明最小纵向切片</span></h2>
-    <p>当前已接受词汇与应用拓扑，但尚无稳定编码、ABI 或可安装工具。第一实现阶段只建设 <code>form</code>、<code>check</code>、<code>see</code> 与 <code>test</code>，并用逐字节复现、双读取器一致和恶意输入语料证明边界。</p>
+    <p>当前已接受词汇与应用拓扑，但尚无稳定编码、ABI 或可安装工具。第一实现阶段只建设 <code>poie</code>、<code>elenk</code>、<code>theor</code> 与 <code>peira</code>，并用逐字节复现、双读取器一致和恶意输入语料证明边界。</p>
     <div class="portal-actions portal-actions-center">
       <a class="portal-button portal-button-primary" href="development/implementation-roadmap.html"><span>查看实施路线</span><span aria-hidden="true">↗</span></a>
       <a class="portal-button portal-button-secondary" href="endem/"><span>查看应用设计</span><span aria-hidden="true">→</span></a>
@@ -135,16 +139,16 @@ permalink: "/index.html"
     <p class="portal-section-index">06 · EVIDENCE OVER CLAIMS</p>
     <h2 class="portal-chapter-title"><span>借鉴工具链思想，不复制工具数量</span></h2>
     <blockquote><p>“只有存在独立消费者、不同权威或不同失败责任，才值得成为单独应用或正式制品。”</p></blockquote>
-    <a href="architecture/adr-0009-propositional-kernel.html">阅读命题投影语义决定 <span aria-hidden="true">→</span></a>
+    <a href="architecture/adr-0010-native-lexicon.html">阅读原生词汇与事态分层决定 <span aria-hidden="true">→</span></a>
   </section>
 
   <section class="portal-next portal-reveal">
     <div class="portal-section-heading"><p class="portal-section-index">07 · CONTINUE</p><h2 class="portal-chapter-title"><span>继续阅读</span></h2></div>
     <div class="portal-next-grid">
       <a href="endem/"><small>01</small><strong>Endem 应用</strong><span>命令与信任边界</span></a>
-      <a href="specifications/"><small>02</small><strong>规范</strong><span>Endem、Weave 与 Witness</span></a>
+      <a href="specifications/"><small>02</small><strong>规范</strong><span>Endem、Synem 与 Tekmor</span></a>
       <a href="architecture/"><small>03</small><strong>架构</strong><span>制品如何形成、组合与运行</span></a>
-      <a href="components/"><small>04</small><strong>组件</strong><span>Core、Reader 与 Runner</span></a>
+      <a href="components/"><small>04</small><strong>组件</strong><span>Poiet、Theor 与 Praxor</span></a>
       <a href="development/"><small>05</small><strong>实施</strong><span>验证条件与停止条件</span></a>
       <a href="docs/"><small>06</small><strong>文档</strong><span>指南与参考</span></a>
     </div>

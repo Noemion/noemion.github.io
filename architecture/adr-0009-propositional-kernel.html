@@ -7,10 +7,11 @@ permalink: "/architecture/adr-0009-propositional-kernel.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0009</span></nav>
-  <div class="hero"><h1>ADR-0009：Endem 命题投影语义核</h1><p>让来源记号通过可审计投影形成可能事态和满足条件，并由结构本身显示逻辑形式。</p><div class="badges"><span class="badge">Accepted</span><span class="badge">2026-07-12</span><span class="badge">Semantic Kernel</span><span class="badge">Encoding Unfrozen</span></div></div>
+  <div class="hero"><h1>ADR-0009：Endem 命题投影语义核</h1><p>保存从需求分类转向命题结构的决策历史；五组名称与目标力量模型已由 ADR-0010 取代。</p><div class="badges"><span class="badge">Superseded by ADR-0010</span><span class="badge">2026-07-12</span><span class="badge">Historical Semantics</span><span class="badge">Encoding Unfrozen</span></div></div>
 
   <section class="content-stack">
     <h2>直接结论</h2>
+    <p class="callout warning"><strong>现行决定：</strong><a href="adr-0010-native-lexicon.html">ADR-0010：原生词汇与事态分层</a>采用六个语义面，并分开中性事态、目标方向和结构化观察。以下五组旧词只用于解释迁移。</p>
     <p class="lead">旧的 <code>say / aim / must / done / open</code> 能分类需求，却没有表达记号怎样取得意义、命题怎样投影为可能事态。Endem 现在采用 <code>say / mean / case / when / open</code>；旧字段不再是当前接口。</p>
     <p class="callout"><strong>核心不变量：</strong>一个 Endem 只有一个根 <code>case</code>。<code>mean</code> 与 <code>case</code> 共享稳定符号和关系位置；它们的图结构显示形式，不设置由制品自填的 <code>logical_form</code>、<code>valid</code> 或 <code>true</code> 字段。</p>
   </section>

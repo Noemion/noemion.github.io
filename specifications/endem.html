@@ -7,51 +7,59 @@ permalink: "/specifications/endem.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>Endem</span></nav>
-  <div class="hero"><h1>Endem</h1><p>把来源记号、意义投影、一个根可能事态、满足条件和未决边界保存为同一件可检查制品。</p><div class="badges"><span class="badge">Accepted Semantics</span><span class="badge">One Root Case</span><span class="badge">Encoding Unfrozen</span></div></div>
+  <div class="hero"><h1>Endem</h1><p>把来源、意义、可能事态、目标方向、满足判据和未决边界保存为同一件可检查制品。</p><div class="badges"><span class="badge">Six Semantic Facets</span><span class="badge">One Root Skena</span><span class="badge">Encoding Unfrozen</span></div></div>
 
   <section class="content-stack">
     <h2>Endem 表示什么</h2>
-    <p class="lead">Endem 是 Noemion 的最小目标制品。它说明一段来源表达怎样投影为对象和关系、若目标满足时哪一种可能事态应成立、怎样从外部观察判断满足，以及哪些投影仍未确定；它不规定模型必须使用哪条提示、计划或推理过程。</p>
-    <p class="callout"><strong>最小不变量：</strong>一个 Endem 必须且只能有一个根 <code>case</code> 节点。根节点可以组合相互依赖的子命题；如果两个根可以独立实现、验收或失败，Core 必须形成两个 Endem，再由 Weave 组合。</p>
+    <p class="lead">Endem 是最小、独立有效且可验证的期望终态单元。它说明来源表达怎样投影为对象与关系、哪一种中性事态是目标内容、目标要求该事态变化还是持续、怎样与结构化观察比较，以及哪些投影仍未确定；它不规定模型必须采用哪条提示、计划或推理过程。</p>
+    <p class="callout"><strong>最小不变量：</strong>一个 Endem 必须且只能有一个根 <code>skena</code> 节点。根节点可以组合相互依赖的子命题；如果两个根可以独立实现、验收或失败，Poiet 必须形成两个 Endem，再由 Synem 组合。</p>
   </section>
 
   <section class="content-wide">
-    <h2>五组命题投影语义</h2>
-    <div class="table-wrap"><table><thead><tr><th>字段组</th><th>最低职责</th><th>主要拒绝条件</th></tr></thead><tbody>
-      <tr><td><code>say</code></td><td>来源记号、主体、精确表达或内容摘要、语言、媒体类型、范围与版本。</td><td>范围越界、内容摘要不匹配、编码无效、来源无法重放。</td></tr>
-      <tr id="mean"><td><code>mean</code></td><td>记号到符号、指称、关系、作用域、极性、量化、时间和力量的已授权投影。</td><td>模型摘要被当作意义、指称无来源、作用域被默认或候选越权确认。</td></tr>
-      <tr id="case"><td><code>case</code></td><td>一个根满足命题及其对象—关系图；Phase 1 至少区分 seek、keep 与 avoid。</td><td>零个或多个根、只有实体没有关系、关系角色不完整或独立目标未拆分。</td></tr>
-      <tr id="when"><td><code>when</code></td><td>满足条件、观察类型、必需 Witness、未知与错误处理、决定权威。</td><td>命题自证、只给分数没有条件、未知被当作满足或模型成为唯一权威。</td></tr>
-      <tr id="open"><td><code>open</code></td><td>候选解释、冲突、缺口、风险、解决策略和有权绑定的主体。</td><td>只保留最高置信候选、无授权关闭歧义、未决项在状态变化中消失。</td></tr>
+    <h2>六个语义面</h2>
+    <div class="table-wrap"><table><thead><tr><th>语义面</th><th>最低职责</th><th>主要拒绝条件</th></tr></thead><tbody>
+      <tr><td><code>rhem</code></td><td>来源记号、主体、精确表达或内容摘要、语言、媒体类型、范围与版本。</td><td>范围越界、内容摘要不匹配、编码无效、来源无法重放。</td></tr>
+      <tr id="semion"><td><code>semion</code></td><td>记号到符号、指称、关系、作用域、极性、量化、时间和来源位置的已授权投影。</td><td>模型摘要被当作意义、指称无来源、作用域被默认或候选越权确认。</td></tr>
+      <tr id="skena"><td><code>skena</code></td><td>一个根、中性可能事态及其对象—关系图，显式保存组合与极性。</td><td>零个或多个根、只有实体没有关系、关系角色不完整或混入目标力量。</td></tr>
+      <tr id="telis"><td><code>telis</code></td><td><code>kine</code> 使事态达到成立；<code>mene</code> 使事态在声明区间持续成立。</td><td>用力量值重复表达否定、没有时间边界或把询问/许可压成目标。</td></tr>
+      <tr id="krin"><td><code>krin</code></td><td><code>phain</code> 观察类型、结构比较、必需 Tekmor、<code>agno/fault</code> 处理和决定权威。</td><td>命题自证、只给分数没有结构比较、观察不足被当作满足或模型成为唯一权威。</td></tr>
+      <tr id="apor"><td><code>apor</code></td><td>候选解释、冲突、缺口、风险、解决策略和有权绑定的主体。</td><td>只保留最高置信候选、无授权关闭歧义、未决项在状态变化中消失。</td></tr>
     </tbody></table></div>
-    <p><code>say/mean/case/when/open</code> 是固定的顶层键与语义顺序；只有没有未决项的 <code>open</code> 可以是显式空集合。二进制记录编号和物理排布尚未冻结。实现可以为快速读取分区存储，但任何布局都必须恢复同一顺序、符号身份、关系位置与规范含义。</p>
+    <p><code>rhem/semion/skena/telis/krin/apor</code> 是固定顶层键与语义顺序；没有未决项时，<code>apor</code> 必须是显式空集合。二进制记录编号和物理排布尚未冻结。任何布局都必须恢复同一顺序、符号身份、关系位置与规范含义。</p>
   </section>
 
   <section class="content-wide">
     <h2>形式必须由结构显示</h2>
-    <p><code>mean</code> 和 <code>case</code> 使用同一组稳定符号身份。关系节点必须保存谓词身份、有序或具名角色、极性、作用域和来源映射；复合节点显式保存合取、析取、否定、条件或 Profile 允许的其他组合。</p>
-    <p>规范载荷不得包含由作者填写的 <code>logical_form</code>、<code>valid</code> 或 <code>true</code> 自我声明。Core 和独立 Reader 通过关系拓扑、角色数量、组合边与引用位置分别验证结构。只保存五段文本的实现不符合本规范。</p>
+    <p><code>semion</code>、<code>skena</code> 和适用 Tekmor 中的 <code>phain</code> 使用同一组稳定符号身份。关系节点必须保存谓词身份、有序或具名角色、极性、作用域和来源映射；复合节点显式保存合取、析取、否定、条件或 Profile 允许的其他组合。</p>
+    <p>规范载荷不得包含由作者填写的 <code>logical_form</code>、<code>valid</code> 或 <code>true</code> 自我声明。Poiet 和独立 Theor 通过关系拓扑、角色数量、组合边与引用位置分别验证结构。只保存六段文本的实现不符合本规范。</p>
   </section>
 
   <section class="content-wide">
     <h2>来源与候选绑定</h2>
-    <div class="flow"><div class="step">来源记号</div><div class="step">投影候选</div><div class="step">规则重推导 / 授权绑定 / 保留 open</div><div class="step">mean + case + when</div><div class="step">确定性 form</div><div class="step">open Endem</div></div>
+    <div class="flow"><div class="step">rhem · 来源</div><div class="step">semion · 投影</div><div class="step">skena · 事态</div><div class="step">telis · 方向</div><div class="step">krin · 判据</div><div class="step">apor · 未决</div><div class="step">poie → nascent Endem</div></div>
     <ul>
       <li>受控来源卡可以由版本化投影规则和具名决定形成规范记录。</li>
       <li>模型或外部系统只能提交绑定来源范围、替代项和证据的候选，不能直接写 Endem。</li>
-      <li>没有任何允许投影或违反 Profile 的组合必须以 <code>no-sense</code> 拒绝；存在可表达候选但无法选择时才进入 <code>open</code>。</li>
-      <li>来源忠实、投影明确、结构合法、观察充分和最终接受是五个不同判断；任何一步成功都不能替代后续判断。</li>
+      <li>没有任何允许投影或违反 Profile 的组合必须以 <code>aseme</code> 拒绝；存在可表达候选但无法选择时才进入 <code>apor</code>。</li>
+      <li>来源忠实、投影明确、事态合法、目标方向、观察充分和最终接受是不同判断；任何一步成功都不能替代后续判断。</li>
     </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>从可能事态到实际观察</h2>
+    <p><code>skena</code> 不宣称事情已经发生。Praxor 把实际观察规范化为 <code>phain</code>，再由 Tekmor 绑定生产者、方法、环境、时间域、强度、限制和完整性。<code>krin</code> 只能比较声明范围内可对齐的关系位置。</p>
+    <div class="flow"><div class="step">skena · 目标事态</div><div class="step">telis · kine / mene</div><div class="step">phain · 观察事态</div><div class="step">Tekmor · 范围与依据</div><div class="step">krin · 结构比较</div><div class="step">met / unmet / agno / fault</div></div>
+    <p><code>aseme</code> 表示没有任何允许的意义投影，<code>apor</code> 表示存在多个允许候选但无权选择，<code>agno</code> 表示意义和判据已经确定而观察不足。三者不得互相代替。</p>
   </section>
 
   <section class="content-wide">
     <h2>状态机</h2>
     <div class="table-wrap"><table><thead><tr><th>状态</th><th>成立条件</th><th>允许的消费者</th><th>不能推导</th></tr></thead><tbody>
-      <tr><td><code>open</code></td><td>结构合法，但仍有未决语义、引用或确认事项。</td><td><code>check</code>、<code>see</code>、人工或授权绑定流程。</td><td>不能执行发布；不能假设 open 项会在运行中自动解决。</td></tr>
-      <tr><td><code>bound</code></td><td>必需引用、约束冲突、能力上限和验收关系都取得确定结果。</td><td><code>pack</code>、<code>see</code>、组合为 Weave。</td><td>不证明来源可信、当前环境授权或结果已完成。</td></tr>
-      <tr><td><code>sealed</code></td><td>发布载荷冻结，签名请求与外部响应精确匹配。</td><td><code>see</code>、隔离的 <code>run</code>。</td><td>签名有效不证明语义正确，也不授予实时能力。</td></tr>
+      <tr><td><code>nascent</code></td><td>结构合法，但仍可能有 <code>apor</code>、引用或确认事项。</td><td><code>elenk</code>、<code>theor</code>、人工或授权解析流程。</td><td>不能执行发布；不能假设未决项会在运行中自动消失。</td></tr>
+      <tr><td><code>coherent</code></td><td>必需引用、约束冲突、能力上限和验收关系都取得确定结果。</td><td><code>tasse</code>、<code>theor</code>、组合为 Synem。</td><td>不证明来源可信、当前环境授权或结果已完成。</td></tr>
+      <tr><td><code>attested</code></td><td>发布载荷冻结，签名请求与外部响应精确匹配。</td><td><code>theor</code>、隔离的 <code>praxe</code>。</td><td>签名有效不证明语义正确，也不授予实时能力。</td></tr>
     </tbody></table></div>
-    <p>状态变化保持 Endem 的语义身份和来源链，但每次都会产生新的精确文件摘要。不得把旧状态字节当作新状态对象，也不得在 seal 后原地改写被签载荷。</p>
+    <p>状态变化保持 Endem 的语义身份和来源链，但每次都会产生新的精确文件摘要。不得把旧状态字节当作新状态对象，也不得在 sphra 后原地改写被签载荷。</p>
   </section>
 
   <section class="content-wide">
@@ -60,7 +68,7 @@ permalink: "/specifications/endem.html"
       <tr><td>Exact Digest</td><td>对完整制品字节计算，支持内容寻址和复现比较。</td><td>语义等价、发布者身份或运行授权。</td></tr>
       <tr><td>Semantic Key</td><td>在等价规则冻结后标识跨布局保持的目标与契约。</td><td>当前尚未冻结，不能提前宣称互操作。</td></tr>
       <tr><td>Signature Envelope</td><td>在被签载荷之外绑定候选包、算法、签名者和策略。</td><td>结构、语义、权限和环境检查。</td></tr>
-      <tr><td>Witness Link</td><td>把来源、绑定、构建、签名和运行依据关联到制品身份。</td><td>Witness 内容真实或任务最终通过。</td></tr>
+      <tr><td>Tekmor Link</td><td>把来源、绑定、构建、签名和运行依据关联到制品身份。</td><td>Tekmor 内容真实或任务最终通过。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -69,15 +77,15 @@ permalink: "/specifications/endem.html"
     <ul>
       <li>所有 offset、length、count、index、alignment、解压大小和累计预算使用 checked arithmetic。</li>
       <li>读取器必须先验证目录和资源上限，再分配或解释大型载荷。</li>
-      <li>未知且影响 mean、case、when、open、状态、权限、绑定或完整性的关键记录必须拒绝。</li>
-      <li>未知可选调试记录可以跳过，但跳过不得把失败对象提升为 bound 或 sealed。</li>
+      <li>未知且影响 semion、skena、telis、krin、apor、状态、权限、绑定或完整性的关键记录必须拒绝。</li>
+      <li>未知可选调试记录可以跳过，但跳过不得把失败对象提升为 coherent 或 attested。</li>
       <li>解析失败不产生部分可信 Endem；诊断必须定位到字节范围、记录或字段组。</li>
     </ul>
   </section>
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p><code>say/mean/case/when/open</code>、一个根 case、形式由结构显示、<code>no-sense/open/unknown</code> 分离、三个制品状态、<code>.endem</code> 扩展名和安全读取原则已经采用。物理编码、文本语法、字段宽度、魔数、记录编号、量化与时间模型、求值语言、压缩、摘要和签名算法仍需规范向量、两个读取实现和对抗测试。</p>
+    <p><code>rhem/semion/skena/telis/krin/apor</code>、一个根 skena、事态与方向分离、<code>phain</code> 结构比较、<code>aseme/apor/agno</code> 分离、三个制品状态、<code>.endem</code> 扩展名和安全读取原则已经采用。物理编码、文本语法、字段宽度、魔数、记录编号、量化与时间模型、求值语言、压缩、摘要和签名算法仍需规范向量、两个解释实现和对抗测试。</p>
   </section>
-  <div class="next-prev"><a href="index.html">← 规范参考指南</a><a href="weave.html">Weave 规范 →</a></div>
+  <div class="next-prev"><a href="index.html">← 规范参考指南</a><a href="synem.html">Synem 规范 →</a></div>
 </main>

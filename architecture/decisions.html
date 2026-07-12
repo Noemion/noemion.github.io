@@ -7,40 +7,42 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <div class="hero"><h1>架构决策</h1><p>说明当前采用的 Endem 命题投影语义、制品体系、单一命令面和组件边界。</p><div class="badges"><span class="badge">ADR-0009 Accepted</span><span class="badge">Supersession Tracked</span><span class="badge">ABI Unfrozen</span></div></div>
+  <div class="hero"><h1>架构决策</h1><p>说明当前采用的原生语义、事态分层、制品体系、单一命令面和组件边界。</p><div class="badges"><span class="badge">ADR-0010 Accepted</span><span class="badge">Supersession Tracked</span><span class="badge">ABI Unfrozen</span></div></div>
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0009-propositional-kernel.html">ADR-0009：Endem 命题投影语义核</a>定义当前五组投影语义与根节点；<a href="adr-0008-endem-system.html">ADR-0008：Endem 制品与单一命令面</a>继续定义名称、状态、组件、命令和权限拓扑。</p>
-    <p>旧 ADR 继续作为设计历史存在，但被取代的术语、路由和工具数量不能反向约束当前实现。仍被保留的安全原则已经映射到 Core、Reader、Runner、Frame 和 Witness。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010：原生词汇与事态分层</a>定义当前六个语义面、制品、组件、动作和生命周期。ADR-0008 与 ADR-0009 继续保存设计演变，但现行接口不继承其中被取代的名称。</p>
+    <p>被保留的安全原则已经重新映射到 Poiet、Theor、Praxor、Dromen 和 Tekmor。历史词只解释为什么迁移，不能反向约束实现、路由或 ABI。</p>
   </section>
 
   <section class="content-wide">
     <h2>决策状态</h2>
     <div class="table-wrap"><table><thead><tr><th>ADR</th><th>状态</th><th>当前解释</th></tr></thead><tbody>
-      <tr><td>ADR-0001 核心命名体系</td><td>Superseded by ADR-0008</td><td>公开对象和组件改用 Endem、Weave、Frame、Witness 与直白工程副标题。</td></tr>
-      <tr><td>ADR-0002 控制面边界</td><td>Retained in part</td><td>模型不可信、最小能力、实时句柄隔离与人工升级原则进入 Runner。</td></tr>
-      <tr><td>ADR-0003 工具链产物闭环</td><td>Superseded by ADR-0008</td><td>主产物流收敛为 Endem/Weave、外部签名材料和 Witness。</td></tr>
-      <tr><td>ADR-0004 候选、能力与验收边界</td><td>Retained in part</td><td>候选不等于事实、能力声明不等于句柄、Witness 不等于验收继续有效。</td></tr>
+      <tr><td>ADR-0001 核心命名体系</td><td>Superseded by ADR-0008</td><td>公开对象和组件改用 Endem、Synem、Dromen、Tekmor 与直白工程副标题。</td></tr>
+      <tr><td>ADR-0002 控制面边界</td><td>Retained in part</td><td>模型不可信、最小能力、实时句柄隔离与人工升级原则进入 Praxor。</td></tr>
+      <tr><td>ADR-0003 工具链产物闭环</td><td>Superseded by ADR-0008</td><td>主产物流收敛为 Endem/Synem、外部签名材料和 Tekmor。</td></tr>
+      <tr><td>ADR-0004 候选、能力与验收边界</td><td>Retained in part</td><td>候选不等于事实、能力声明不等于句柄、Tekmor 不等于验收继续有效。</td></tr>
       <tr><td>ADR-0005 独立工具名称</td><td>Superseded by ADR-0008</td><td>只保留 <code>endem</code> 与八个子命令。</td></tr>
       <tr><td>ADR-0006 旧结构基线</td><td>Superseded by ADR-0008</td><td>安全解析原则保留，语义和物理设计重新围绕 Endem 展开。</td></tr>
-      <tr><td>ADR-0007 Phase 0/1 纵向切片</td><td>Superseded by ADR-0008</td><td>首条切片改为 Goal Card → form → Endem → check/see → test。</td></tr>
-      <tr><td><a href="adr-0008-endem-system.html">ADR-0008 Endem 制品与单一命令面</a></td><td>Accepted in part</td><td>名称、职责、状态和应用拓扑继续有效；旧五字段分类与根 aim 被 ADR-0009 取代。</td></tr>
-      <tr><td><a href="adr-0009-propositional-kernel.html">ADR-0009 Endem 命题投影语义核</a></td><td>Accepted</td><td>当前 say/mean/case/when/open、一个根 case、形式显示和未确定状态边界。</td></tr>
+      <tr><td>ADR-0007 Phase 0/1 纵向切片</td><td>Superseded by ADR-0008</td><td>首条切片改为 Goal Card → poie → Endem → elenk/theor → peira。</td></tr>
+      <tr><td><a href="adr-0008-endem-system.html">ADR-0008 Endem 制品与单一命令面</a></td><td>Superseded by ADR-0010</td><td>保留单一 CLI、权限分离与安全机制；制品、组件、动作和状态名称已取代。</td></tr>
+      <tr><td><a href="adr-0009-propositional-kernel.html">ADR-0009 Endem 命题投影语义核</a></td><td>Superseded by ADR-0010</td><td>保留结构显示与未确定分层；五组字段和目标力量模型已取代。</td></tr>
+      <tr><td><a href="adr-0010-native-lexicon.html">ADR-0010 原生词汇与事态分层</a></td><td>Accepted</td><td>当前六个语义面、一个根 skena、phain 比较、原生制品/组件/动作与生命周期。</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
     <h2>当前冻结的内容</h2>
     <div class="table-wrap"><table><thead><tr><th>决定</th><th>采用的边界</th><th>直接影响</th></tr></thead><tbody>
-      <tr><td>命题投影语义</td><td>一个 Endem 只有一个根 case，并保存 say、mean、case、when 与 open。</td><td>来源格式、投影规则、Core、规范向量和错误语义。</td></tr>
-      <tr><td>形式显示</td><td>mean 与 case 共享符号和关系位置，不使用自证逻辑形式字段。</td><td>结构编码、Core/Reader 差分和 no-sense 诊断。</td></tr>
-      <tr><td>同一制品状态</td><td>Endem 沿 open → bound → sealed 演进，不建立平行对象家族。</td><td>身份、摘要、发布、签名和生命周期。</td></tr>
-      <tr><td>组合闭包</td><td>Weave 只在多个 Endem 需要解析关系时出现；权限只能收紧。</td><td>bind、依赖锁定、冲突和披露。</td></tr>
-      <tr><td>运行非文件视图</td><td>Frame 只存在于会话内，不携带到磁盘或跨会话。</td><td>Runner、能力句柄、上下文和隔离。</td></tr>
-      <tr><td>有限证据主张</td><td>Witness 保存可定位依据，但不自动证明结论或形成 accepted。</td><td>来源、绑定、签名、运行、验收与审计。</td></tr>
-      <tr><td>唯一 CLI</td><td><code>endem</code> 提供 form/check/bind/pack/seal/see/run/test。</td><td>工具项目、手册、安装包和自动化接口。</td></tr>
-      <tr><td>独立与隔离</td><td>see 不共享生产解析；run 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>
+      <tr><td>六个语义面</td><td>一个 Endem 只有一个根 skena，并保存 rhem、semion、skena、telis、krin 与 apor。</td><td>来源格式、投影规则、Poiet、规范向量和错误语义。</td></tr>
+      <tr><td>事态与方向分离</td><td>skena 保持中性；telis 只使用 kine/mene；禁止由事态否定表达。</td><td>规范化、等价判断、时间模型和反例向量。</td></tr>
+      <tr><td>形式显示</td><td>semion、skena 与 phain 共享符号和关系位置，不使用自证逻辑形式字段。</td><td>结构编码、Poiet/Theor 差分和 aseme 诊断。</td></tr>
+      <tr><td>同一制品状态</td><td>Endem 沿 nascent → coherent → attested 演进，不建立平行对象家族。</td><td>身份、摘要、发布、签名和生命周期。</td></tr>
+      <tr><td>组合闭包</td><td>Synem 只在多个 Endem 需要解析关系时出现；权限只能收紧。</td><td>pleko、依赖锁定、冲突和披露。</td></tr>
+      <tr><td>运行非文件视图</td><td>Dromen 只存在于会话内，不携带到磁盘或跨会话。</td><td>Praxor、能力句柄、上下文和隔离。</td></tr>
+      <tr><td>有限证据主张</td><td>Tekmor 保存可定位依据，但不自动证明结论或形成 accepted。</td><td>来源、绑定、签名、运行、验收与审计。</td></tr>
+      <tr><td>唯一 CLI</td><td><code>endem</code> 提供 poie/elenk/pleko/tasse/sphra/theor/praxe/peira。</td><td>应用项目、手册、安装包和自动化接口。</td></tr>
+      <tr><td>独立与隔离</td><td>theor 不共享生产解析；praxe 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -50,9 +52,9 @@ permalink: "/architecture/decisions.html"
       <li>不把任意自然语言或模型 JSON 直接视为 Endem。</li>
       <li>不为查看、符号、大小、归档、裁剪、跟踪和评估各建一个产品。</li>
       <li>不使用环境路径、当前目录或网络“最新版本”解析正式依赖。</li>
-      <li>不让通用对象变换器任意改写 mean、case、when 或 open。</li>
-      <li>不把签名、Witness 数量、模型评分或 Runtime 自述当作任务完成。</li>
-      <li>不把 Frame 序列化为可复制的权限对象。</li>
+      <li>不让通用对象变换器任意改写 semion、skena、telis、krin 或 apor。</li>
+      <li>不把签名、Tekmor 数量、模型评分或 Runtime 自述当作任务完成。</li>
+      <li>不把 Dromen 序列化为可复制的权限对象。</li>
     </ul>
   </section>
 
@@ -69,7 +71,7 @@ permalink: "/architecture/decisions.html"
 
   <section class="content-band">
     <h2>变更规则</h2>
-    <p>任何改变 Endem 五组投影语义、根 case 唯一性、形式显示规则、状态机、Weave 组合、Frame 非文件边界、Witness 有限主张或唯一命令面的提案，都必须新增 ADR，并同步规范、组件、生命周期、手册和测试向量。</p>
+    <p>任何改变六个语义面、根 skena 唯一性、事态/方向分离、phain 比较、状态机、Synem 组合、Dromen 非文件边界、Tekmor 有限主张或唯一命令面的提案，都必须新增 ADR，并同步规范、组件、生命周期、手册和测试向量。</p>
   </section>
   <div class="next-prev"><a href="endem-lifecycle.html">← Endem 生命周期</a><a href="open-questions.html">开放问题 →</a></div>
 </main>

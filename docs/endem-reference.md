@@ -16,34 +16,34 @@ badges: ["One CLI", "8 Verbs", "Unreleased"]
 
 ## 应用总览
 
-`endem` 是唯一公开应用。它提供一致的用户入口，但不会把 Core、独立 Reader 与隔离 Runner 链接进同一信任域。
+`endem` 是唯一公开应用。它提供一致的用户入口，但不会把 Poiet、独立 Theor 与隔离 Praxor 链接进同一信任域。
 
 | 子命令 | 直接职责 | 输出 | 何时建设 |
 | --- | --- | --- | --- |
-| `form` | 来源绑定、规范化、确定性写入 | Endem、诊断 | Phase 1 |
-| `check` | 生产验证实际字节 | 分层结论、内部 verified handle | Phase 1 |
-| `see` | 独立只读解析、view/diff/refs/size | 有界视图与差异 | Phase 1 |
-| `test` | 规范、语料、双 Reader 与复现 | 一致性报告 | Phase 1 |
-| `bind` | 解析引用、冲突与依赖闭包 | Weave、link map | Phase 2，有真实组合案例后 |
-| `pack` | 类型化裁剪和发布闭包 | 发布候选、Debug Companion | Phase 3 |
-| `seal` | 生成请求并核对外部签名响应 | 签名 Weave | Phase 3 |
-| `run` | 重新验证、装载、能力循环与验收 | Frame、Witness、Decision | Phase 4 |
+| `poie` | 来源绑定、规范化、确定性写入 | Endem、诊断 | Phase 1 |
+| `elenk` | 生产验证实际字节 | 分层结论、内部 verified handle | Phase 1 |
+| `theor` | 独立只读解析、view/diff/refs/size | 有界视图与差异 | Phase 1 |
+| `peira` | 规范、语料、Poiet/Theor 差分与复现 | 一致性报告 | Phase 1 |
+| `pleko` | 解析引用、冲突与依赖闭包 | Synem、link map | Phase 2，有真实组合案例后 |
+| `tasse` | 类型化裁剪和发布闭包 | 发布候选、Debug Companion | Phase 3 |
+| `sphra` | 生成请求并核对外部签名响应 | 签名 Synem | Phase 3 |
+| `praxe` | 重新验证、装载、能力循环与验收 | Dromen、Tekmor、Decision | Phase 4 |
 
-## Core 子命令
+## Poiet 子命令
 
-`form/check/bind/pack/seal/test`共享规范 registry，但只有一个规范 Writer。通用任意 transform、archive、strip 或格式转换不成为稳定命令；只有语义明确、有消费者且能证明不变量的类型化变换进入相应步骤。
+`poie/elenk/pleko/tasse/sphra/peira`共享规范 registry，但只有一个规范 Writer。通用任意 transform、archive、strip 或格式转换不成为稳定命令；只有语义明确、有消费者且能证明不变量的类型化变换进入相应步骤。
 
-`seal` 不持有私钥。外部签名系统拥有独立权威和生命周期，因此 Signing Request/Response 保持 sidecar。
+`sphra` 不持有私钥。外部签名系统拥有独立权威和生命周期，因此 Signing Request/Response 保持 sidecar。
 
-## `see` 的独立性
+## `theor` 的独立性
 
-`endem see` 的用户界面可以由主命令调度，但实现必须单独构建，不能复用生产 Reader、Writer、绑定器或内部 verified handle。它只能回答“这些字节在有界读取下怎样显示”，不能回答“这些字节已经可信”。
+`endem theor` 的用户界面可以由主命令调度，但实现必须单独构建，不能复用 Poiet 的 Parser、Writer、组合器或内部 verified handle。它只能回答“这些字节在有界读取下怎样显示”，不能回答“这些字节已经可信”。
 
 建议二级动作保持普通短词：`view`、`diff`、`refs`、`size`、`trace`。是否全部成为稳定接口取决于真实消费者。
 
-## `run` 的隔离性
+## `praxe` 的隔离性
 
-`endem run` 启动独立 Runner 进程。Runner 重验实际字节并建立 Frame；Harness 独占能力句柄；模型/后端是受限子进程，只能提交候选和能力请求。Witness 记录真实 observation、事件完整性、证据范围和最终权威决定。
+`endem praxe` 启动独立 Praxor 进程。Praxor 重验实际字节并建立 Dromen；Harness 独占能力句柄；模型/后端是受限子进程，只能提交候选和能力请求。Tekmor 记录真实 observation、事件完整性、证据范围和最终权威决定。
 
 ## 不建设独立模型平台
 

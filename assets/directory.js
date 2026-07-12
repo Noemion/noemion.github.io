@@ -149,6 +149,7 @@
             { href: "architecture/decisions.html", label: "架构决策" },
             { href: "architecture/adr-0008-endem-system.html", label: "ADR-0008 · Endem 体系" },
             { href: "architecture/adr-0009-propositional-kernel.html", label: "ADR-0009 · 命题投影" },
+            { href: "architecture/adr-0010-native-lexicon.html", label: "ADR-0010 · 原生词汇与事态" },
             { href: "architecture/open-questions.html", label: "开放问题" }
           ]
         },
@@ -157,17 +158,17 @@
           items: [
             { href: "specifications/index.html", label: "规范与成熟度" },
             { href: "specifications/endem.html", label: "Endem" },
-            { href: "specifications/weave.html", label: "Weave" },
-            { href: "specifications/witness.html", label: "Witness" }
+            { href: "specifications/synem.html", label: "Synem" },
+            { href: "specifications/tekmor.html", label: "Tekmor" }
           ]
         },
         {
           label: "系统组件",
           items: [
             { href: "components/index.html", label: "组件总览" },
-            { href: "components/core.html", label: "Core" },
-            { href: "components/reader.html", label: "Reader" },
-            { href: "components/runner.html", label: "Runner" }
+            { href: "components/poiet.html", label: "Poiet" },
+            { href: "components/theor.html", label: "Theor" },
+            { href: "components/praxor.html", label: "Praxor" }
           ]
         }
       ]
@@ -279,9 +280,9 @@
         {
           label: "职责边界",
           items: [
-            { href: "components/core.html", label: "Core" },
-            { href: "components/reader.html", label: "Reader" },
-            { href: "components/runner.html", label: "Runner" }
+            { href: "components/poiet.html", label: "Poiet" },
+            { href: "components/theor.html", label: "Theor" },
+            { href: "components/praxor.html", label: "Praxor" }
           ]
         }
       ]
@@ -308,9 +309,9 @@
       description: "查看 Endem、组合闭包、范围证据和组件契约。",
       items: [
         { href: "specifications/endem.html", label: "Endem", description: "最小自然语言目标对象与规范字段", cover: "endem-spec", coverLabel: "SAY → DONE" },
-        { href: "specifications/weave.html", label: "Weave", description: "已解析、可封装的组合闭包", cover: "weave", coverLabel: "RESOLVED CLOSURE" },
-        { href: "specifications/witness.html", label: "Witness", description: "范围声明、来源、完整性与验收证据", cover: "witness", coverLabel: "SCOPED EVIDENCE" },
-        { href: "components/index.html", label: "系统组件", description: "Core、Reader 与 Runner 的权限和失败边界", cover: "components", coverLabel: "SYSTEM BOUNDARIES" }
+        { href: "specifications/synem.html", label: "Synem", description: "已解析、可封装的组合闭包", cover: "synem", coverLabel: "RESOLVED CLOSURE" },
+        { href: "specifications/tekmor.html", label: "Tekmor", description: "含 phain 的有范围证据", cover: "tekmor", coverLabel: "SCOPED EVIDENCE" },
+        { href: "components/index.html", label: "系统组件", description: "Poiet、Theor 与 Praxor 的权限和失败边界", cover: "components", coverLabel: "SYSTEM BOUNDARIES" }
       ]
     },
     {
@@ -320,9 +321,9 @@
       description: "通过一个公开命令面进入确定性对象工程和受限运行。",
       items: [
         { href: "endem/index.html", label: "Endem 应用", description: "查看唯一公开 CLI 与八个动作的边界", cover: "endem", coverLabel: "ONE COMMAND" },
-        { href: "endem/docs/format.html", label: "格式与形成", description: "定义规范字段、编码与确定性形成", cover: "format", coverLabel: "FORM / CHECK" },
-        { href: "endem/docs/safety.html", label: "安全与证据", description: "检查有界读取、独立观察与签名边界", cover: "see", coverLabel: "CHECK / SEE" },
-        { href: "endem/docs/running.html", label: "装载与运行", description: "理解 Frame、能力、观察与验收", cover: "run", coverLabel: "SEAL / RUN" }
+        { href: "endem/docs/format.html", label: "格式与形成", description: "定义规范字段、编码与确定性形成", cover: "format", coverLabel: "POIE / ELENK" },
+        { href: "endem/docs/safety.html", label: "安全与证据", description: "检查有界读取、独立观察与签名边界", cover: "theor", coverLabel: "ELENK / THEOR" },
+        { href: "endem/docs/running.html", label: "装载与运行", description: "理解 Dromen、能力、phain 与 Tekmor", cover: "praxe", coverLabel: "SPHRA / PRAXE" }
       ]
     },
     {

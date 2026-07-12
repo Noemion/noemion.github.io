@@ -1,0 +1,65 @@
+---
+layout: default
+title: "Synem · 多目标解析闭包规范"
+page_role: "content"
+footer_text: "Noemion · Synem"
+permalink: "/specifications/synem.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>Synem</span></nav>
+  <div class="hero"><h1>Synem</h1><p>把多个 Endem 的引用、约束、能力和判据关系解析为一个可重放的组合闭包。</p><div class="badges"><span class="badge">Coherent Closure</span><span class="badge">Multi-Endem</span><span class="badge">No Ambient Search</span></div></div>
+
+  <section class="content-stack">
+    <h2>Synem 为什么存在</h2>
+    <p class="lead">Endem 保持一个根 skena，因此可独立理解、检查和验收。只有当多个目标需要共享定义、产物、能力或验收依赖时，<code>endem pleko</code> 才建立 Synem。Synem 是已解析闭包，不是把文件简单放入归档，也不是一个自动扩大上下文的知识包。</p>
+    <p class="callout"><strong>直接结论：</strong>只有一个 Endem、没有跨对象引用的任务不需要 Synem。不能为了架构对称或发布包装强制创建空闭包。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>输入与输出</h2>
+    <div class="table-wrap"><table><thead><tr><th>类别</th><th>内容</th><th>要求</th></tr></thead><tbody>
+      <tr><td>输入</td><td>两个或更多 nascent/coherent Endem</td><td>每个对象具有精确摘要、一个根 skena、一个 telis 和可验证来源。</td></tr>
+      <tr><td>输入</td><td>Pleko Policy</td><td>声明命名空间、版本、缺失行为、冲突、权限和循环策略。</td></tr>
+      <tr><td>输入</td><td>Dependency Lock</td><td>按内容身份锁定所有外部依赖，不使用目录枚举或“最新版本”。</td></tr>
+      <tr><td>输出</td><td>Synem Manifest</td><td>列出成员、解析结果、能力交集、验收依赖、顺序和摘要。</td></tr>
+      <tr><td>输出</td><td>Coherent Endem Set</td><td>成员保持各自根 skena 与 telis；跨对象引用都能重放。</td></tr>
+      <tr><td>诊断</td><td>Pleko Tekmor</td><td>记录选择、冲突、拒绝和使用的策略，不把选择过程伪装成数学证明。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>组合不变量</h2>
+    <div class="table-wrap"><table><thead><tr><th>维度</th><th>必须保持</th><th>失败示例</th></tr></thead><tbody>
+      <tr><td>目标</td><td>每个成员仍只有一个根 skena；Synem 只描述它们之间的关系。</td><td>合并时删除某个目标，或静默生成没有来源的新目标。</td></tr>
+      <tr><td>约束</td><td>硬约束不得降级；互相冲突时关闭失败或保留待授权冲突。</td><td>按输入顺序选择最后一个约束。</td></tr>
+      <tr><td>能力</td><td>组合后的授权上限只能保持或收紧。</td><td>成员之一请求网络，导致全部成员获得网络句柄。</td></tr>
+      <tr><td>验收</td><td>跨目标依赖显式指向所需 Tekmor 和决定权威。</td><td>一个目标完成就把整个 Synem 标为完成。</td></tr>
+      <tr><td>身份</td><td>依赖按内容摘要和兼容策略解析，结果可重放。</td><td>受当前目录、环境变量、网络搜索顺序或时间影响。</td></tr>
+      <tr><td>披露</td><td>Praxor 只为当前 Dromen 选择必需成员和语义面，不能遗漏相关 semion/skena/telis/krin。</td><td>为节省上下文只披露根 skena，隐藏关系、目标方向或满足条件。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-rows">
+    <h2>绑定过程</h2>
+    <ol>
+      <li>验证所有成员的结构、状态、精确摘要和必需特性。</li>
+      <li>建立局部命名空间，列出导入、导出、产物、能力与验收引用。</li>
+      <li>只按 Dependency Lock 和 Pleko Policy 解析候选，不读取环境隐式路径。</li>
+      <li>执行类型、约束、权限、缺失行为和循环检查；任何未定义冲突都失败。</li>
+      <li>为每个解析和拒绝产生 Pleko Tekmor，生成稳定排序的 Synem Manifest。</li>
+      <li>重新运行 <code>elenk</code>；通过后成员可以标为 coherent，发布时再由 <code>tasse</code>/<code>sphra</code> 冻结。</li>
+    </ol>
+  </section>
+
+  <section class="content-wide">
+    <h2>循环与可选依赖</h2>
+    <p>第一版应拒绝必需依赖循环，因为循环会使初始化、披露预算和验收先后关系难以得到唯一结论。未来只有在规范定义固定点语义、资源上限、失败顺序和跨实现测试后，才可以引入受限循环。</p>
+    <p>可选依赖必须声明缺失时的可观察行为。缺失不能改写 semion、削弱 skena、让 krin 更容易满足或扩大能力上限；若无法证明缺失分支仍满足这些要求，依赖就是必需项。</p>
+  </section>
+
+  <section class="content-band">
+    <h2>当前成熟度</h2>
+    <p>Synem 的多 Endem 边界、内容寻址、权限收敛和显式冲突已经采用。符号模型、版本约束语法、循环能力、闭包编码、远程对象仓库和性能策略仍未冻结；没有真实双 Endem 案例前不实施独立归档格式。</p>
+  </section>
+  <div class="next-prev"><a href="endem.html">← Endem 规范</a><a href="tekmor.html">Tekmor 规范 →</a></div>
+</main>

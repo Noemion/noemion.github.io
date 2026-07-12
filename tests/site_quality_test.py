@@ -72,12 +72,13 @@ REQUIRED_CORE_ROUTES = {
     "endem/index.html",
     *MANUAL_ROUTE_ORDERS["endem"],
     "specifications/endem.html",
-    "specifications/weave.html",
-    "specifications/witness.html",
+    "specifications/synem.html",
+    "specifications/tekmor.html",
     "architecture/endem-lifecycle.html",
-    "components/core.html",
-    "components/reader.html",
-    "components/runner.html",
+    "architecture/adr-0010-native-lexicon.html",
+    "components/poiet.html",
+    "components/theor.html",
+    "components/praxor.html",
 }
 DOC_GUIDE_ORDER = [
     "docs/getting-started.html",
@@ -89,7 +90,7 @@ DOC_GUIDE_ORDER = [
 ]
 DOC_GUIDE_HEADINGS = {
     "docs/getting-started.html": [
-        "从这里开始", "五组投影", "四个名词", "一个应用", "推荐阅读路径", "当前状态",
+        "从这里开始", "六个语义面", "四个名词", "一个应用", "推荐阅读路径", "当前状态",
     ],
     "docs/installation-and-usage.html": [
         "当前可用性", "计划中的使用流程", "发布原则", "命名发布门",
@@ -101,15 +102,15 @@ DOC_GUIDE_HEADINGS = {
         "第一阶段范围", "规范与 ADR 先行", "实现工作流", "建议仓库边界", "审查清单", "模型与协议",
     ],
     "docs/endem-reference.html": [
-        "应用总览", "Core 子命令", "see 的独立性", "run 的隔离性", "不建设独立模型平台",
+        "应用总览", "Poiet 子命令", "theor 的独立性", "praxe 的隔离性", "不建设独立模型平台",
     ],
     "docs/specifications-reference.html": [
-        "权威顺序", "Endem", "Weave", "Frame 与 Witness", "ADR 与开放问题",
+        "权威顺序", "Endem", "Synem", "Dromen 与 Tekmor", "ADR 与开放问题",
     ],
 }
 HOME_HEADINGS = [
     "不是给旧对象格式换前缀",
-    "五个短词形成命题投影",
+    "六个短词展开完整语义",
     "只保留有独立生命周期的名词",
     "一个入口不等于一个信任域",
     "先证明最小纵向切片",
@@ -206,8 +207,8 @@ LEGACY_ADR_ALLOWLIST = re.compile(
 )
 NORMATIVE_ROUTES = (
     "specifications/endem.html",
-    "specifications/weave.html",
-    "specifications/witness.html",
+    "specifications/synem.html",
+    "specifications/tekmor.html",
 )
 CONTENT_LAYOUT_ROUTES = (
     "about/background.html",
@@ -216,15 +217,16 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/decisions.html",
     "architecture/adr-0008-endem-system.html",
     "architecture/adr-0009-propositional-kernel.html",
+    "architecture/adr-0010-native-lexicon.html",
     "architecture/open-questions.html",
-    "components/core.html",
-    "components/reader.html",
-    "components/runner.html",
+    "components/poiet.html",
+    "components/theor.html",
+    "components/praxor.html",
     "development/implementation-roadmap.html",
     "development/testing.html",
     "specifications/endem.html",
-    "specifications/weave.html",
-    "specifications/witness.html",
+    "specifications/synem.html",
+    "specifications/tekmor.html",
 )
 CONTENT_LAYOUT_CLASSES = {
     "content-split",
@@ -235,21 +237,50 @@ CONTENT_LAYOUT_CLASSES = {
     "content-rows",
 }
 
+CURRENT_DOMAIN_IDENTIFIERS = {
+    "endem", "rhem", "semion", "skena", "telis", "krin", "apor", "phain",
+    "synem", "dromen", "tekmor", "poiet", "theor", "praxor",
+    "poie", "elenk", "pleko", "tasse", "sphra", "praxe", "peira",
+}
+MAINSTREAM_LANGUAGE_KEYWORDS = {
+    # C, C++, Java, ECMAScript, Go, Rust, Swift, Kotlin and Python keyword union.
+    "alignas", "alignof", "and", "as", "asm", "assert", "async", "await", "auto",
+    "become", "bool", "boolean", "break", "byte", "case", "catch", "char", "class",
+    "compl", "concept", "const", "const_cast", "consteval", "constexpr", "constinit",
+    "continue", "co_await", "co_return", "co_yield", "decltype", "default", "defer",
+    "delete", "do", "double", "dynamic_cast", "else", "enum", "explicit", "export",
+    "extends", "extern", "false", "final", "finally", "float", "fn", "for", "friend",
+    "from", "fun", "goto", "if", "implements", "import", "in", "inline", "instanceof",
+    "int", "interface", "internal", "is", "let", "long", "match", "module", "mutable",
+    "namespace", "native", "new", "noexcept", "nonlocal", "not", "null", "nullptr",
+    "object", "open", "operator", "or", "out", "override", "package", "pass", "private",
+    "protected", "public", "register", "reinterpret_cast", "requires", "return", "sealed",
+    "short", "signed", "sizeof", "static", "static_assert", "static_cast", "strictfp",
+    "struct", "super", "switch", "synchronized", "template", "this", "thread_local",
+    "throw", "throws", "trait", "transient", "true", "try", "typealias", "typedef",
+    "typeid", "typename", "typeof", "union", "unsafe", "unsigned", "use", "using", "var",
+    "virtual", "void", "volatile", "wchar_t", "when", "where", "while", "with", "yield",
+}
+REMOVED_PUBLIC_ROUTES = {
+    "specifications/weave.html", "specifications/witness.html",
+    "components/core.html", "components/reader.html", "components/runner.html",
+}
+
 REQUIRED_ARCHITECTURE_ROUTES = {
     "architecture/decisions.html": "architecture/index.html",
-    "components/runner.html": "components/index.html",
+    "components/praxor.html": "components/index.html",
 }
 
 SYSTEM_BOUNDARY_CONTRACTS = {
     "architecture/index.html": {
         "required": (
             "Endem",
-            "Weave",
-            "Witness",
-            "Frame",
-            "Core",
-            "Reader",
-            "Runner",
+            "Synem",
+            "Tekmor",
+            "Dromen",
+            "Poiet",
+            "Theor",
+            "Praxor",
             "生产验证和",
             "不共享",
             "模型候选",
@@ -266,12 +297,12 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "外部签名",
             "候选不等于事实",
             "能力声明不等于句柄",
-            "Witness 不等于验收",
+            "Tekmor 不等于验收",
         ),
     },
-    "components/core.html": {
+    "components/poiet.html": {
         "required": (
-            "Core",
+            "Poiet",
             "Endem",
             "确定性",
             "模型",
@@ -279,10 +310,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "checked arithmetic",
         ),
     },
-    "components/reader.html": {
+    "components/theor.html": {
         "required": (
-            "Reader",
-            "see",
+            "Theor",
+            "theor",
             "独立",
             "只读",
             "生产解析器",
@@ -290,13 +321,13 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "checked arithmetic",
         ),
     },
-    "components/runner.html": {
+    "components/praxor.html": {
         "required": (
-            "Runner",
-            "Frame",
-            "run",
+            "Praxor",
+            "Dromen",
+            "praxe",
             "Capability Request",
-            "Witness",
+            "Tekmor",
             "accepted",
             "pending-review",
             "决定权威",
@@ -307,20 +338,23 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "specifications/endem.html": {
         "required": (
             ".endem",
-            "say",
-            "mean",
-            "case",
-            "when",
-            "open",
-            "no-sense",
-            "unknown",
+            "rhem",
+            "semion",
+            "skena",
+            "telis",
+            "krin",
+            "apor",
+            "phain",
+            "aseme",
+            "agno",
+            "fault",
             "logical_form",
             "checked arithmetic",
         ),
     },
-    "specifications/weave.html": {
+    "specifications/synem.html": {
         "required": (
-            "Weave",
+            "Synem",
             "局部命名空间",
             "导入",
             "导出",
@@ -332,9 +366,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             r"弱引用无定义",
         ),
     },
-    "specifications/witness.html": {
+    "specifications/tekmor.html": {
         "required": (
-            "Witness",
+            "Tekmor",
+            "phain",
             "subject",
             "claim",
             "basis",
@@ -347,19 +382,20 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "endem/docs/safety.html": {
         "required": (
             "checked arithmetic",
-            "see",
-            "独立 Reader",
-            "生产 Reader",
+            "theor",
+            "独立 Theor",
+            "生产 Parser",
             "不可信",
         ),
     },
     "endem/docs/running.html": {
         "required": (
-            "Frame",
+            "Dromen",
             "外部签名",
             "私钥始终留在外部签名系统",
             "Signature Envelope",
-            "Witness",
+            "Tekmor",
+            "phain",
             "accepted",
             "pending-review",
             "决定权威",
@@ -1305,8 +1341,8 @@ def validate_jekyll_sources():
 
         expected_nav_covers = {
             "background", "architecture", "foundations", "faq",
-            "endem-spec", "weave", "witness", "components",
-            "endem", "see", "format", "run",
+            "endem-spec", "synem", "tekmor", "components",
+            "endem", "theor", "format", "praxe",
             "getting-started", "architecture-guide", "application-reference",
             "spec-reference", "endem-manual", "current-stage", "roadmap", "testing",
             "news", "downloads",
@@ -1390,7 +1426,7 @@ def validate_jekyll_sources():
             "current_stage.title",
             'class="current-stage-feature"',
             'class="current-stage-visual"',
-            'src="../assets/images/secure-object-core.svg"',
+            'src="../assets/images/secure-endem-poiet.svg"',
             'width="1440" height="960"',
             'class="current-stage-panel"',
             'class="project-progress-section"',
@@ -1408,7 +1444,7 @@ def validate_jekyll_sources():
                 errors.append(f"current stage page exposes internal workflow copy: {forbidden}")
 
     image_contracts = {
-        "assets/images/secure-object-core.svg": (20_000, 'src="../assets/images/secure-object-core.svg"'),
+        "assets/images/secure-endem-poiet.svg": (20_000, 'src="../assets/images/secure-endem-poiet.svg"'),
     }
     image_consumers = (SOURCE_ROOT / "index.html").read_text() + (SOURCE_ROOT / "development/current-stage.html").read_text()
     for image_route, (maximum_bytes, source_token) in image_contracts.items():
@@ -1509,6 +1545,9 @@ def application_project_validator_self_test():
 
 def main():
     errors = application_project_validator_self_test()
+    keyword_collisions = sorted(CURRENT_DOMAIN_IDENTIFIERS & MAINSTREAM_LANGUAGE_KEYWORDS)
+    if keyword_collisions:
+        errors.append(f"current domain identifiers collide with mainstream language keywords: {keyword_collisions}")
     directory_css = DIRECTORY_CSS.read_text()
     for token in (
         "background:color-mix(in srgb,var(--paper) 90%,transparent)",
@@ -1544,6 +1583,10 @@ def main():
         set(registered_rows) | set(read_manual_source_routes())
     )
     actual_routes = [path.relative_to(ROOT).as_posix() for path in HTML_FILES]
+
+    stale_routes = sorted(REMOVED_PUBLIC_ROUTES & set(actual_routes))
+    if stale_routes:
+        errors.append(f"removed public routes must not survive as aliases or redirects: {stale_routes}")
 
     if (ROOT / "assets" / "images" / "secure-object-core.jpg").exists():
         errors.append("built output must not retain obsolete secure-object-core.jpg")
@@ -1642,8 +1685,8 @@ def main():
             " ".join("".join(section["text"]) for section in parser.sections)
         )
         for term in (
-            "Endem", "Weave", "Frame", "Witness", "say", "mean", "case", "when", "open",
-            "一个根", "模型", "不可信",
+            "Endem", "Synem", "Dromen", "Tekmor", "rhem", "semion", "skena", "telis",
+            "krin", "apor", "phain", "一个根", "模型", "不可信",
         ):
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
@@ -1651,11 +1694,13 @@ def main():
         if home_source.count('class="portal-chapter-title"') != len(HOME_HEADINGS):
             errors.append("index.html: every homepage chapter heading must use the shared symbolic title treatment")
         for token in (
-            "ENDEM / OPEN",
-            "dataflow-lane-source",
-            "dataflow-lane-bind",
-            "dataflow-lane-reloc",
-            "dataflow-lane-verify",
+            "ENDEM / NASCENT",
+            "dataflow-lane-rhem",
+            "dataflow-lane-semion",
+            "dataflow-lane-skena",
+            "dataflow-lane-telis",
+            "dataflow-lane-krin",
+            "dataflow-lane-apor",
             'class="endem-object-visual"',
             'class="endem-object-title"',
             'class="endem-object-record"',
@@ -1694,8 +1739,8 @@ def main():
             " ".join("".join(section["text"]) for section in parser.sections)
         )
         for term in (
-            "不得直接推出", "思想采用的验证要求", "五组投影",
-            "对象语言", "言语行为", "会话含义", "no-sense", "unknown",
+            "不得直接推出", "思想采用的验证要求", "六个语义面",
+            "事态", "目标方向", "phain", "aseme", "agno", "fault",
         ):
             if term not in visible_text:
                 errors.append(f"about/intellectual-foundations.html: must preserve {term}")
@@ -2121,9 +2166,9 @@ def main():
                 ["architecture/endem-lifecycle.html", "architecture"],
                 ["architecture/decisions.html", "architecture"],
                 ["specifications/endem.html", "architecture"],
-                ["components/core.html", "architecture"],
-                ["components/reader.html", "architecture"],
-                ["components/runner.html", "architecture"],
+                ["components/poiet.html", "architecture"],
+                ["components/theor.html", "architecture"],
+                ["components/praxor.html", "architecture"],
                 ["docs/getting-started.html", "docs"],
                 ["downloads/index.html", "resources"],
                 ["faq/index.html", "resources"],

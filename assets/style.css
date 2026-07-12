@@ -463,10 +463,11 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
   animation:portal-data-packet 5.2s linear infinite
 }
 .dataflow-lane em{width:5px;height:5px;top:16px;animation-delay:-2.6s;animation-duration:6.4s;background:#f06a43}
-.dataflow-lane-source{top:72px}.dataflow-lane-bind{top:138px;left:46px;width:calc(100% - 50px)}
-.dataflow-lane-reloc{top:204px;left:10px;width:calc(100% - 14px)}.dataflow-lane-verify{top:270px;left:66px;width:calc(100% - 70px)}
-.dataflow-lane-bind::before{animation-delay:-1.8s}.dataflow-lane-reloc::before{animation-delay:-3.4s}.dataflow-lane-verify::before{animation-delay:-4.6s}
-.dataflow-lane-bind i{animation-duration:6.8s;animation-delay:-2.1s}.dataflow-lane-reloc i{animation-duration:4.7s;animation-delay:-3.2s}.dataflow-lane-verify i{animation-duration:7.2s;animation-delay:-1.4s}
+.dataflow-lane-rhem{top:58px}.dataflow-lane-semion{top:105px;left:46px;width:calc(100% - 50px)}
+.dataflow-lane-skena{top:152px;left:10px;width:calc(100% - 14px)}.dataflow-lane-telis{top:199px;left:66px;width:calc(100% - 70px)}
+.dataflow-lane-krin{top:246px;left:28px;width:calc(100% - 32px)}.dataflow-lane-apor{top:293px;left:78px;width:calc(100% - 82px)}
+.dataflow-lane-semion::before{animation-delay:-1.2s}.dataflow-lane-skena::before{animation-delay:-2.4s}.dataflow-lane-telis::before{animation-delay:-3.6s}.dataflow-lane-krin::before{animation-delay:-4.8s}.dataflow-lane-apor::before{animation-delay:-5.6s}
+.dataflow-lane-semion i{animation-duration:6.8s;animation-delay:-2.1s}.dataflow-lane-skena i{animation-duration:4.7s;animation-delay:-3.2s}.dataflow-lane-telis i{animation-duration:7.2s;animation-delay:-1.4s}.dataflow-lane-krin i{animation-duration:5.9s;animation-delay:-4.1s}.dataflow-lane-apor i{animation-duration:7.6s;animation-delay:-2.9s}
 .source-cluster{position:absolute;top:112px;left:38px;z-index:3;width:218px}
 .source-chip{
   display:block;width:max-content;max-width:100%;margin:0 0 11px;padding:9px 11px;color:#15221d;
@@ -623,12 +624,12 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
 .focus-card-endem .focus-art i:nth-child(1){top:42px;left:50px}
 .focus-card-endem .focus-art i:nth-child(2){top:116px;right:62px}
 .focus-card-endem .focus-art i:nth-child(3){bottom:45px;left:92px}
-.focus-card-weave .focus-art{background:linear-gradient(135deg,#121a17 0 35%,#3158ff 100%)}
-.focus-card-weave .focus-art::before{top:42px;right:42px;bottom:42px;left:42px;border:1px solid rgba(255,255,255,.38)}
-.focus-card-weave .focus-art i{right:60px;left:60px;height:16px;border:1px solid rgba(255,255,255,.46)}
-.focus-card-weave .focus-art i:nth-child(1){top:66px}
-.focus-card-weave .focus-art i:nth-child(2){top:100px}
-.focus-card-weave .focus-art i:nth-child(3){top:134px}
+.focus-card-synem .focus-art{background:linear-gradient(135deg,#121a17 0 35%,#3158ff 100%)}
+.focus-card-synem .focus-art::before{top:42px;right:42px;bottom:42px;left:42px;border:1px solid rgba(255,255,255,.38)}
+.focus-card-synem .focus-art i{right:60px;left:60px;height:16px;border:1px solid rgba(255,255,255,.46)}
+.focus-card-synem .focus-art i:nth-child(1){top:66px}
+.focus-card-synem .focus-art i:nth-child(2){top:100px}
+.focus-card-synem .focus-art i:nth-child(3){top:134px}
 .focus-card-core .focus-art{background:linear-gradient(135deg,#e35a2d,#f5bf36)}
 .focus-card-core .focus-art::before{inset:54px;background:repeating-linear-gradient(90deg,rgba(19,24,21,.75) 0 10px,transparent 10px 20px)}
 .focus-card-core .focus-art::after{inset:75px;background:#111714;box-shadow:0 0 0 10px rgba(255,255,255,.25)}
@@ -863,7 +864,7 @@ body[data-page-role="portal"] .site-footer{
   .dataflow-field{inset:18px auto auto 0;width:100%;height:330px;opacity:.78;mask-image:linear-gradient(90deg,#000 0 84%,transparent 100%)}
   .dataflow-status{left:auto;right:18px}
   .dataflow-lane{left:-8px;width:82%}
-  .dataflow-lane-source{top:66px}.dataflow-lane-bind{top:126px;left:26px}.dataflow-lane-reloc{top:186px;left:-18px}.dataflow-lane-verify{top:246px;left:46px}
+  .dataflow-lane-rhem{top:48px}.dataflow-lane-semion{top:92px;left:26px}.dataflow-lane-skena{top:136px;left:-18px}.dataflow-lane-telis{top:180px;left:46px}.dataflow-lane-krin{top:224px;left:8px}.dataflow-lane-apor{top:268px;left:54px}
   .source-cluster{top:42px;left:24px}
   .compiler-bridge{top:208px;left:42px}
   .endem-object-visual{top:272px;right:22px;bottom:auto;width:calc(100% - 44px);min-width:0}

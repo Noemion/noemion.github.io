@@ -7,7 +7,7 @@ permalink: "/development/testing.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>测试与验证</span></nav>
-  <div class="hero"><h1>测试与验证</h1><p>Endem、Weave 与 Runner 只有通过明确失败路径，才能获得对应范围的信任。</p><div class="badges"><span class="badge">Malformed Corpus</span><span class="badge">Cross-reader</span><span class="badge">Reproducible</span></div></div>
+  <div class="hero"><h1>测试与验证</h1><p>Endem、Synem 与 Praxor 只有通过明确失败路径，才能获得对应范围的信任。</p><div class="badges"><span class="badge">Malformed Corpus</span><span class="badge">Cross-reader</span><span class="badge">Reproducible</span></div></div>
 
   <section class="content-rows"><h2>解析与资源安全</h2><p class="callout"><strong>基本规则：</strong>“合法样例通过”只证明一条成功路径。畸形、冲突、越权、超限和不完整输入必须稳定、快速且不产生部分可信结果地失败。</p><ul>
     <li>覆盖非法偏移、长度、计数、索引、对齐、重叠、环、自引用、超深图、压缩炸弹和恶意大计数。</li>
@@ -17,39 +17,39 @@ permalink: "/development/testing.html"
   </ul></section>
 
   <section class="content-rows"><h2>形成、往返与复现</h2><ul>
-    <li>相同 <code>say/mean/case/when/open</code>、投影决定、profile 和固定依赖产生完全相同的 Endem 字节。</li>
+    <li>相同 <code>rhem/semion/skena/telis/krin/apor</code>、投影决定、profile 和固定依赖产生完全相同的 Endem 字节。</li>
     <li>规范文本 → Endem → 规范文本往返保持规范化等价；非规范空白或排列差异不得改变身份。</li>
     <li>分别报告 Endem 字节复现、工具二进制复现和发布签名真实性；三者不能相互替代。</li>
     <li>至少在两个工作目录和两个隔离环境构建；locale、时区、临时路径、归档顺序和时间戳不得污染结果。</li>
   </ul></section>
 
   <section class="content-rows"><h2>双读取器契约</h2><ul>
-    <li>生产 Reader 直接读取实际字节并可在全部检查通过后产生内部 verified handle。</li>
-    <li><code>endem see</code> 使用不共享解析代码的独立 Reader，只输出有界视图、差异、引用、大小与 trace。</li>
+    <li>Poiet 的生产 Parser 直接读取实际字节，并只在全部检查通过后产生内部 verified handle。</li>
+    <li><code>endem theor</code> 使用不共享解析代码的独立 Theor，只输出有界视图、差异、引用、大小与 trace。</li>
     <li>两者对共享向量逐字段比较解释、上限和失败分类；查看器输出、符号列表或 pretty print 永不回流生产信任链。</li>
     <li>差异必须被视为实现或规范缺陷，不能用“多数实现一致”掩盖。</li>
   </ul></section>
 
   <section class="content-rows"><h2>语义与歧义保留</h2><ul>
     <li>逐来源单元验证记号、符号、指称、关系角色、作用域、力量、满足条件和未决分支得到保留。</li>
-    <li>语义变异测试分别交换关系角色、翻转极性、改变 seek/keep/avoid 或弱化一条 <code>when</code>，确认身份或验证结论发生预期变化。</li>
-    <li>模型置信度不能关闭 <code>open</code>；只有规则可重推导或具名 Source Binding Decision 才能确认语义。</li>
-    <li>一个 Endem 只能有一个根 <code>case</code>；多目标组合必须通过显式引用进入 Weave。</li>
-    <li>违反 Profile 或无允许投影的输入必须稳定返回 <code>no-sense</code>；观察不足必须返回 <code>unknown</code>，不能混入 <code>open</code>。</li>
+    <li>语义变异测试分别交换关系角色、翻转极性、改变 kine/mene 或弱化一条 <code>krin</code>，确认身份或验证结论发生预期变化。</li>
+    <li>模型置信度不能关闭 <code>apor</code>；只有规则可重推导或具名 Semion Decision 才能确认语义。</li>
+    <li>一个 Endem 只能有一个根 <code>skena</code>；多目标组合必须通过显式引用进入 Synem。</li>
+    <li>违反 Profile 或无允许投影的输入必须稳定返回 <code>aseme</code>；观察不足必须返回 <code>agno</code>，不能混入 <code>apor</code>。</li>
   </ul></section>
 
   <section class="content-rows"><h2>绑定、发布与签名</h2><ul>
     <li>引用可见性、版本、必需/可选依赖、ID 重映射、约束可满足性、权限交集和冲突矩阵全部有正反向量。</li>
     <li>链接顺序不改变规范结果；任何能力合并只能保持或收窄上限。</li>
-    <li><code>pack</code> 前后 mean、case、when、open、依赖与披露行为保持规范等价；Debug Companion 有独立访问与生命周期。</li>
+    <li><code>tasse</code> 前后 semion、skena、telis、krin、apor、依赖与披露行为保持规范等价；Debug Companion 有独立访问与生命周期。</li>
     <li>私钥始终在外部签名系统；签名响应必须精确匹配请求、主体摘要、策略和发行身份。</li>
   </ul></section>
 
-  <section class="content-rows"><h2>Runner、Harness 与 Witness</h2><ul>
-    <li>Runner 重新验证收到的实际 Weave 字节，不信任此前路径名、查看输出或缓存结论。</li>
+  <section class="content-rows"><h2>Praxor、Harness 与 Tekmor</h2><ul>
+    <li>Praxor 重新验证收到的实际 Synem 字节，不信任此前路径名、查看输出或缓存结论。</li>
     <li>Harness 独占实时能力句柄，覆盖最小权限、读写分离、幂等、副作用、提示注入、污染返回和 confused deputy。</li>
     <li>模型只能产生候选和能力请求；确定性策略决定调用，真实观察返回会话，具名权威或机器规则决定验收。</li>
-    <li>Witness 绑定 Endem/Weave、环境、策略、事件链、证据范围和决定；证据缺失必须得到 pending、failed 或人工升级，而不是 accepted。</li>
+    <li>Tekmor 绑定 Endem/Synem、环境、策略、事件链、证据范围和决定；证据缺失必须得到 pending、failed 或人工升级，而不是 accepted。</li>
     <li>恢复测试覆盖工具失败、环境漂移、重复失败、预算耗尽、取消竞态、状态冲突和人工判断分支。</li>
   </ul></section>
 

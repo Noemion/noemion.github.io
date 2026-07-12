@@ -23,12 +23,12 @@
       <path d="M19 57 43 24l28 14 25-18M43 24l4 35m24-21 8 25M47 59l32 4" stroke="#789388" stroke-width="2" fill="none"/>
       <circle cx="19" cy="57" r="7" fill="#68d7b2"/><circle cx="43" cy="24" r="8" fill="#3158ff"/><circle cx="71" cy="38" r="7" fill="#f4be35"/><circle cx="96" cy="20" r="6" fill="#f04b23"/><circle cx="47" cy="59" r="5" fill="#f0f6f3"/><circle cx="79" cy="63" r="6" fill="#68d7b2"/>
     </symbol>
-    <symbol id="nav-cover-weave" viewBox="0 0 116 82">
+    <symbol id="nav-cover-synem" viewBox="0 0 116 82">
       <rect x="13" y="11" width="90" height="60" fill="#161e1a" stroke="#789388"/>
       <path d="M13 26h90M13 41h90M13 56h90M36 11v60" stroke="#789388"/>
       <rect x="42" y="17" width="34" height="4" fill="#68d7b2"/><rect x="42" y="32" width="48" height="4" fill="#3158ff"/><rect x="42" y="47" width="27" height="4" fill="#f4be35"/><rect x="42" y="62" width="42" height="4" fill="#f04b23"/>
     </symbol>
-    <symbol id="nav-cover-witness" viewBox="0 0 116 82">
+    <symbol id="nav-cover-tekmor" viewBox="0 0 116 82">
       <rect x="10" y="15" width="43" height="50" fill="#3158ff" opacity=".75"/><rect x="37" y="23" width="43" height="42" fill="#68d7b2" opacity=".82"/><rect x="64" y="31" width="42" height="34" fill="#f4be35" opacity=".9"/>
       <path d="M21 53h21M49 53h20M76 53h19" stroke="#101714" stroke-width="3"/>
     </symbol>
@@ -41,7 +41,7 @@
       <path d="m24 26 4 4 8-9m-12 21 4 4 8-9m-12 21 4 4 8-9" fill="none" stroke="#68d7b2" stroke-width="3"/>
       <rect x="50" y="24" width="38" height="4" fill="#f0f6f3" opacity=".7"/><rect x="50" y="40" width="28" height="4" fill="#f4be35"/><rect x="50" y="56" width="42" height="4" fill="#3158ff"/>
     </symbol>
-    <symbol id="nav-cover-see" viewBox="0 0 116 82">
+    <symbol id="nav-cover-theor" viewBox="0 0 116 82">
       <rect x="14" y="15" width="53" height="48" fill="#161e1a" stroke="#789388"/><path d="M21 25h37M21 35h28M21 45h34M21 55h23" stroke="#68d7b2" stroke-width="3"/>
       <circle cx="76" cy="42" r="18" fill="none" stroke="#f4be35" stroke-width="5"/><path d="m89 55 14 14" stroke="#f04b23" stroke-width="6" stroke-linecap="round"/>
     </symbol>
@@ -50,7 +50,7 @@
       <path d="M47 41h21m-7-7 7 7-7 7" stroke="#f4be35" stroke-width="3" fill="none"/>
       <rect x="74" y="18" width="32" height="46" fill="#f04b23"/><path d="M80 30h20M80 40h20M80 50h20" stroke="#101714" stroke-width="3"/>
     </symbol>
-    <symbol id="nav-cover-run" viewBox="0 0 116 82">
+    <symbol id="nav-cover-praxe" viewBox="0 0 116 82">
       <circle cx="22" cy="24" r="9" fill="#3158ff"/><circle cx="22" cy="58" r="9" fill="#68d7b2"/><circle cx="58" cy="41" r="11" fill="#f4be35"/><circle cx="95" cy="24" r="9" fill="#f04b23"/><circle cx="95" cy="58" r="9" fill="#3158ff"/>
       <path d="M30 27 48 36M30 55l18-9m21-5 18-13m-18 13 18 13" stroke="#f0f6f3" stroke-width="3"/>
     </symbol>

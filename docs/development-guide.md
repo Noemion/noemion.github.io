@@ -9,8 +9,8 @@ manual_group: "guides"
 manual_order: 4
 nav_title: "开发指南"
 hero_title: "Noemion 开发指南"
-hero_description: "面向 Endem 规范、安全核心、独立 Reader 与隔离 Runner 的开发纪律。"
-summary: "面向 Endem 规范、安全核心、独立 Reader 与隔离 Runner 的开发纪律。"
+hero_description: "面向 Endem 规范、安全核心、独立 Theor 与隔离 Praxor 的开发纪律。"
+summary: "面向 Endem 规范、安全核心、独立 Theor 与隔离 Praxor 的开发纪律。"
 badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 ---
 
@@ -18,9 +18,9 @@ badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 
 第一阶段只做规范和最小安全核心，不引入模型、LLVM、MLIR、多格式抽象或大型框架。
 
-- 冻结 `say/mean/case/when/open` 的最小语义、不变量、错误和资源限制。
-- 实现规范 Writer、生产 Reader、确定性序列化和 `endem form/check`。
-- 用不共享解析代码的实现交付 `endem see`。
+- 冻结 `rhem/semion/skena/telis/krin/apor` 的最小语义、不变量、错误和资源限制。
+- 实现规范 Writer、生产 Parser、确定性序列化和 `endem poie/elenk`。
+- 用不共享解析代码的实现交付 `endem theor`。
 - 建立合法、边界、畸形和对抗语料，以及往返、属性、模糊和双构建复现测试。
 
 ## 规范与 ADR 先行
@@ -36,7 +36,7 @@ badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 2. 引用唯一规范条款或先补 ADR。
 3. 先加入失败向量，固定缺失行为与诊断。
 4. 实现最小确定性变化；解析计算全部使用 checked arithmetic。
-5. 运行合法/畸形语料、属性/模糊测试、双 Reader、往返与复现检查。
+5. 运行合法/畸形语料、属性/模糊测试、Poiet/Theor 差分、往返与复现检查。
 6. 更新规范、ADR、路线、手册和公开成熟度；删除被替代入口，不保留兼容垫片。
 
 ## 建议仓库边界
@@ -44,25 +44,25 @@ badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 ```text
 spec/       权威条款、registry 与错误码
 vectors/    规范字节、注释、合法与畸形向量
-core/       Writer、生产 Reader、form/check/bind
-see/        独立只读 Reader，不依赖 core parser
+poiet/      Writer、生产 Parser、poie/elenk/pleko
+theor/        独立只读 Theor，不依赖 core parser
 cli/        endem 调度与独立进程边界
 ```
 
-没有独立版本、权限、保密或真实消费者时不拆仓库。`see` 可以共享规范常量生成物，但不能共享生产解析状态机；`run` 建立后必须是不同进程并使用最小权限。
+没有独立版本、权限、保密或真实消费者时不拆仓库。`theor` 可以共享规范常量生成物，但不能共享生产解析状态机；`praxe` 建立后必须是不同进程并使用最小权限。
 
 ## 审查清单
 
 | 层 | 必查项 |
 | --- | --- |
 | 结构 | magic、版本、偏移、长度、计数、索引、对齐、重叠、环、上限 |
-| 语义 | 一个根 case、say/mean 投影、关系角色、seek/keep/avoid、when、open/unknown/no-sense 与权威 |
+| 语义 | 一个根 skena、rhem/semion 投影、关系角色、kine/mene、krin、apor/agno/aseme 与权威 |
 | 组合 | 引用身份、版本、依赖闭包、冲突矩阵、权限交集、顺序无关 |
 | 发布 | 裁剪等价、Debug Companion、主体摘要、外部签名、SBOM、复现 |
 | 运行 | 实际字节重验、能力最小化、真实观察、事件完整、验收分层 |
 
 ## 模型与协议
 
-模型加入前必须有无模型基线。模型输出只进入 Candidate Envelope；MCP/A2A 只通过 Runner 外缘 gateway；外部 schema 合法不等于语义正确或权限允许。若模型无法在错误确定率、上下文成本或任务成功率上证明净增益，就停止自研模型平台投入。
+模型加入前必须有无模型基线。模型输出只进入 Candidate Envelope；MCP/A2A 只通过 Praxor 外缘 gateway；外部 schema 合法不等于语义正确或权限允许。若模型无法在错误确定率、上下文成本或任务成功率上证明净增益，就停止自研模型平台投入。
 
 完整完成标准见[开发路线图](../development/implementation-roadmap.html)，测试矩阵见[测试与验证](../development/testing.html)。

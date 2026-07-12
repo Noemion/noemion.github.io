@@ -2,15 +2,15 @@
 
 本目录是修改站点页面、共享布局、目录和交互动效时的设计路由入口。开始改动前，先根据目标文件或 `page_role` 读取下表指定文档；涉及多个角色时读取所有对应文档。
 
-修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、五组投影语义、Weave、Frame、Witness、Core、Reader、Runner、八个动作和唯一 CLI 是当前命名基线，设计文档不得引入旧名称或兼容入口。
+修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、六个语义面、Synem、Dromen、Tekmor、Poiet、Theor、Praxor、八个动作和唯一 CLI 是当前命名基线，设计文档不得引入旧名称或兼容入口。
 
-修改 `.endem`、`say/mean/case/when/open`、命题投影、引用、内容身份、规范排序、封装布局或构建证据排布时，先读取当前 Endem、Weave 和 Witness 规范，再读取 ADR-0009 与相关活跃 ADR。历史 ADR 的旧词只用于解释决策迁移，不得重新进入公开接口。
+修改 `.endem`、`rhem/semion/skena/telis/krin/apor`、`phain`、事态投影、引用、内容身份、规范排序、封装布局或证据排布时，先读取当前 Endem、Synem 和 Tekmor 规范，再读取 ADR-0010 与相关活跃 ADR。ADR-0009 及更早记录中的旧词只用于解释决策迁移，不得重新进入公开接口。
 
-修改 Endem 生命周期、Core/Reader/Runner 隔离、独立读取路径、GNU 工具链采用范围或外部 AI 协议落点时，先读取 `/architecture/endem-lifecycle.html`、对应组件页面和它们链接的活跃 ADR。
+修改 Endem 生命周期、Poiet/Theor/Praxor 隔离、独立读取路径、GNU 工具链采用范围或外部 AI 协议落点时，先读取 `/architecture/endem-lifecycle.html`、对应组件页面和它们链接的活跃 ADR。
 
-修改 `form/check/bind/pack/seal/see/run/test` 的输入输出、失败语义、发布闭包、签名回填或跨组件消费者关系时，先读取 [`internal-tools.md`](internal-tools.md)、Endem 手册与活跃产物流 ADR。
+修改 `poie/elenk/pleko/tasse/sphra/theor/praxe/peira` 的输入输出、失败语义、发布闭包、签名回填或跨组件消费者关系时，先读取 [`internal-tools.md`](internal-tools.md)、Endem 手册与活跃产物流 ADR。
 
-修改模型候选、上下文装配、能力接口、反馈循环、Frame、Witness 或人工升级边界时，必须同时读取 Reader、Runner 与 Witness 规范以及相关活跃 ADR。任何设计都不得让模型决定规范字节、删除 `open`、扩大能力或宣告最终验收。
+修改模型候选、上下文装配、能力接口、反馈循环、Dromen、Tekmor 或人工升级边界时，必须同时读取 Theor、Praxor 与 Tekmor 规范以及相关活跃 ADR。任何设计都不得让模型决定规范字节、删除 `apor`、扩大能力或宣告最终验收。
 
 全局原则、品牌语言、断点和验收基线见 [`../sitewide-design-system.md`](../sitewide-design-system.md)。本目录文档负责把这些原则落实到具体页面类型，不能改变 Noemion 的成熟度、权威性或证据边界。
 
@@ -43,7 +43,7 @@
 ## 修改后的最低验证
 
 - 运行 `python3 tests/site_quality_test.py`。
-- 涉及 JavaScript 时运行 `node --check assets/directory.js`。
+- 涉及 JavaScript 时运行 `node --elenk assets/directory.js`。
 - 涉及布局或样式时检查桌面约 1512px 与移动约 390px。
 - 检查键盘焦点、减少动态效果、深浅色和页面级横向溢出。
 - 手册变更还要构建 `_site`，确认动态目录、索引和分页顺序。

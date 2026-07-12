@@ -7,12 +7,12 @@ permalink: "/architecture/adr-0008-endem-system.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0008</span></nav>
-  <div class="hero"><h1>ADR-0008：Endem 制品与单一命令面</h1><p>冻结核心名称、组合闭包、运行视图、证据记录和唯一命令行入口；旧五字段已由 ADR-0009 取代。</p><div class="badges"><span class="badge">Accepted in Part</span><span class="badge">2026-07-12</span><span class="badge">Semantics Superseded</span><span class="badge">ABI Unfrozen</span></div></div>
+  <div class="hero"><h1>ADR-0008：Endem 制品与单一命令面</h1><p>保存 Endem 与单一 CLI 的形成历史；其余制品、组件、动作和状态名称已由 ADR-0010 取代。</p><div class="badges"><span class="badge">Superseded by ADR-0010</span><span class="badge">2026-07-12</span><span class="badge">Historical Vocabulary</span><span class="badge">ABI Unfrozen</span></div></div>
 
   <section class="content-stack">
     <h2>决定摘要</h2>
     <p class="lead">Noemion 不再按传统二进制工具的数量组织产品。系统以 <strong>Endem</strong> 为最小、可编译的自然语言目标制品，以 <strong>Weave</strong> 表示多个 Endem 已完成解析的组合闭包，以 <strong>Frame</strong> 表示一次运行中建立的只读求解视图，以 <strong>Witness</strong> 保存可定位的观察和判断依据。</p>
-    <p class="callout warning"><strong>后续决定：</strong>本 ADR 的 <code>say/aim/must/done/open</code> 与根 <code>aim</code> 规则只保留为决策历史，现行语义由 <a href="adr-0009-propositional-kernel.html">ADR-0009：Endem 命题投影语义核</a>定义。</p>
+    <p class="callout warning"><strong>后续决定：</strong>本 ADR 除 Endem、`.endem` 与单一 CLI 外的现行名称均已取代。当前语义、制品、组件、动作和生命周期由 <a href="adr-0010-native-lexicon.html">ADR-0010：原生词汇与事态分层</a>定义。</p>
     <p class="callout"><strong>直接结论：</strong>公开命令只有 <code>endem</code>。<code>form</code>、<code>check</code>、<code>bind</code>、<code>pack</code>、<code>seal</code>、<code>see</code>、<code>run</code> 与 <code>test</code> 是它的固定职责入口，不再建设 23 个并列应用。</p>
   </section>
 

@@ -1,0 +1,69 @@
+---
+layout: default
+title: "Poiet · 确定性制品核心"
+page_role: "content"
+footer_text: "Noemion · Poiet"
+permalink: "/components/poiet.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">系统组件</a><span aria-hidden="true">/</span><span>Poiet</span></nav>
+  <div class="hero"><h1>Poiet</h1><p>确定性地形成、验证、组合和冻结 Endem/Synem，是唯一能够写规范制品的组件。</p><div class="badges"><span class="badge">Deterministic Maker</span><span class="badge">Sole Writer</span><span class="badge">Fail Closed</span></div></div>
+
+  <section class="content-stack">
+    <h2>为什么 Poiet 不能省略</h2>
+    <p class="lead">如果自然语言前端、模型、组合器和发布工具各自决定一套对象语义，Endem 将无法复现，也无法判断六个语义面是否在转换中保持。Poiet 集中执行投影、规范化、状态机和写入不变量，所有合格 Endem/Synem 都必须经过它。</p>
+    <p>Poiet 可以是一组库而不是独立服务，但模型、Praxor、Theor 和外部签名系统不能绕过它写入规范字节或提升 Endem 状态。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>权威输入与生产者</h2>
+    <div class="table-wrap"><table><thead><tr><th>输入</th><th>生产者</th><th>Poiet 检查</th></tr></thead><tbody>
+      <tr><td>Rhem Source / 受控来源</td><td>用户、规范作者或受控生成器</td><td>编码、来源身份、投影决定、一个根 skena、telis、krin、apor 和版本。</td></tr>
+      <tr><td>Candidate + Semion Decision</td><td>不可信模型/外部前端，以及有权确认的主体</td><td>候选范围、替代项、权限、撤销与来源摘要。</td></tr>
+      <tr><td>Pleko Policy + Dependency Lock</td><td>构建配置和依赖管理者</td><td>内容身份、冲突、循环、能力收敛和可重放性。</td></tr>
+      <tr><td>Tasse Profile</td><td>发布配置</td><td>保留内容、调试外置、覆盖、预算和确定性元数据。</td></tr>
+      <tr><td>Signature Response</td><td>外部签名系统</td><td>原请求、候选载荷、算法、签名者、策略版本和签名有效性。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>输出与消费者</h2>
+    <div class="table-wrap"><table><thead><tr><th>输出</th><th>实际消费者</th><th>输出成立的前提</th></tr></thead><tbody>
+      <tr><td>nascent Endem + Poie Tekmor</td><td>elenk、theor、pleko、人工确认</td><td>结构合法、来源可定位、semion/skena 关系位置一致、一个根 skena、telis 与 krin 完整；apor 项仍显式存在。</td></tr>
+      <tr><td>生产 Elenk Result</td><td>pleko、tasse、Praxor</td><td>每个请求层明确 pass/fail/not-evaluated，并绑定实际字节与配置。</td></tr>
+      <tr><td>coherent Endem / Synem + Pleko Tekmor</td><td>tasse、theor</td><td>必需引用与冲突已解析，权限未扩大。</td></tr>
+      <tr><td>Unsigned Candidate + Signing Request</td><td>外部签名系统、sphra</td><td>发布载荷冻结，闭包完整，裁剪保持规范属性。</td></tr>
+      <tr><td>attested Endem / Synem + Sphra Tekmor</td><td>theor、Praxor</td><td>Signature Response 精确绑定原候选和请求；被签字节未改变。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-rows">
+    <h2>关键不变量</h2>
+    <ul>
+      <li>相同规范化输入、配置、依赖和工具版本产生相同字节与稳定诊断。</li>
+      <li>所有偏移、长度、计数、索引、对齐、解压和累计预算使用 checked arithmetic。</li>
+      <li>未知关键记录、状态与内容不一致、悬空引用和权限扩大关闭失败。</li>
+      <li>模型只能提交候选，不能决定字段、布局、绑定、签名范围或验收结果。</li>
+      <li>apor 项只能被授权绑定、保留为明确运行时未知或导致失败，不能静默删除。</li>
+      <li>sphra 只在被签载荷之外附加封装；私钥不进入 Poiet。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>失败与拒绝责任</h2>
+    <div class="table-wrap"><table><thead><tr><th>失败类别</th><th>Poiet 必须返回</th><th>不得做</th></tr></thead><tbody>
+      <tr><td>Source invalid</td><td>来源位置、编码或摘要诊断</td><td>猜测缺失文本或调用模型修复。</td></tr>
+      <tr><td>Contract incomplete</td><td>缺少的 rhem/semion/skena/telis/krin/apor 语义面和稳定错误码</td><td>用默认提示补充来源、投影、可能事态、目标方向、满足判据或未决项。</td></tr>
+      <tr><td>Aseme</td><td>违反 Profile、关系角色无效或没有允许投影的来源范围</td><td>把畸形组合包装成合法 nascent Endem。</td></tr>
+      <tr><td>Pleko conflict</td><td>参与成员、冲突字段、策略和 Pleko Tekmor</td><td>按输入顺序、弱绑定或最后写入者静默选择。</td></tr>
+      <tr><td>Tasse changes semantics</td><td>变化属性、被移除记录和拒绝结论</td><td>只因文件更小就继续发布。</td></tr>
+      <tr><td>Sphra mismatch</td><td>请求、载荷、算法、签名者或策略差异</td><td>修改候选以适配签名响应。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-band">
+    <h2>当前成熟度与未冻结接口</h2>
+    <p>Poiet 的唯一写入责任、确定性、状态机和失败边界已经采用，尚未发布实现。Rhem Source 语法、投影规则、规范记录、物理编码、生产 Verified Handle、Pleko Policy、Tasse Profile、Signing Request/Response 和错误码仍需规范与测试冻结。</p>
+  </section>
+  <div class="next-prev"><a href="index.html">← 系统组件</a><a href="theor.html">Theor →</a></div>
+</main>

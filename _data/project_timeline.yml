@@ -20,14 +20,14 @@ overview:
   roadmap_href: /development/implementation-roadmap.html
 
 current:
-  summary: 项目已采用 Endem 命题投影语义与单一应用拓扑。当前工作是定义 say、mean、case、when、open 的安全编码、关系不变量、资源上限、错误语义与正反向量；随后才实现 form、check、独立 see 和 test。
+  summary: 项目已采用 Endem 原生六语义面、事态分层与单一应用拓扑。当前工作是定义 rhem、semion、skena、telis、krin、apor 的安全编码、关系不变量、资源上限、错误语义与正反向量；随后才实现 poie、elenk、独立 theor 和 peira。
   facts:
     - label: 已完成
       value: Endem 词汇与应用拓扑决定
     - label: 正在进行
       value: 最小语义与安全编码规范
     - label: 后续工作
-      value: form/check/see/test 纵向切片
+      value: poie/elenk/theor/peira 纵向切片
 
 items:
   - id: scope-and-trust
@@ -39,24 +39,24 @@ items:
     state: confirmed
     label: 已完成
     title: Endem 词汇与单一应用拓扑
-    description: 已将旧对象与工具家族收敛为 Endem、Weave、Frame、Witness 和唯一公开 CLI endem；旧入口不保留兼容别名。
+    description: 已将旧对象与工具家族收敛为 Endem、Synem、Dromen、Tekmor 和唯一公开 CLI endem；旧入口不保留兼容别名。
   - id: endem-specification-core-design
     state: current
     label: 正在进行
     title: 最小规范与安全核心设计
-    description: 正在收敛五组投影语义、关系位置、编码边界、错误语义、checked arithmetic、资源限制和合法/畸形样本。
+    description: 正在收敛六个语义面、关系位置、编码边界、错误语义、checked arithmetic、资源限制和合法/畸形样本。
   - id: endem-core-validation
     state: next
     label: 计划开发
-    title: form/check/see/test 纵向切片
-    description: 计划实现规范 Writer、生产 Reader、独立只读 Reader、往返、恶意语料、模糊测试和双环境复现。
+    title: poie/elenk/theor/peira 纵向切片
+    description: 计划实现规范 Writer、生产 Parser、独立只读 Theor、往返、恶意语料、模糊测试和双环境复现。
   - id: weave-binding-release
     state: future
     label: 后续规划
-    title: Weave 组合与外部签名发布
-    description: 只有真实多 Endem 消费者成立后，才开发 bind、pack、seal、冲突矩阵、固定依赖和 Debug Companion。
-  - id: controlled-run
+    title: Synem 组合与外部签名发布
+    description: 只有真实多 Endem 消费者成立后，才开发 pleko、tasse、sphra、冲突矩阵、固定依赖和 Debug Companion。
+  - id: controlled-praxe
     state: future
     label: 后续规划
-    title: Frame、Runner 与 Witness
+    title: Dromen、Praxor 与 Tekmor
     description: 先用规则型后端验证重新装载、能力控制、真实观察、证据闭包和验收分层，随后再评估模型及外部协议适配。

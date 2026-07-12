@@ -21,20 +21,21 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Architecture](https://noemion.github.io/architecture/index.html) — system layers, artifact lifecycle, and trust boundaries
 - [Endem lifecycle](https://noemion.github.io/architecture/endem-lifecycle.html) — source, deterministic formation, closure, evidence, loading, and execution boundaries
 - [Architecture decisions](https://noemion.github.io/architecture/decisions.html) — accepted responsibility boundaries and explicitly unfrozen interfaces
-- [ADR-0008](https://noemion.github.io/architecture/adr-0008-endem-system.html) — accepted Endem vocabulary, artifact lifecycle, and single-application topology
-- [ADR-0009](https://noemion.github.io/architecture/adr-0009-propositional-kernel.html) — accepted propositional projection semantics, one-root case graph, and meaning boundaries
+- [ADR-0008](https://noemion.github.io/architecture/adr-0008-endem-system.html) — superseded record of the earlier artifact and application topology
+- [ADR-0009](https://noemion.github.io/architecture/adr-0009-propositional-kernel.html) — superseded record of the earlier propositional projection
+- [ADR-0010](https://noemion.github.io/architecture/adr-0010-native-lexicon.html) — current native lexicon, six semantic facets, and situation/goal/evidence separation
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
-- [Components](https://noemion.github.io/components/index.html) — Core, Reader, and Runner responsibility boundaries
-- [Core](https://noemion.github.io/components/core.html) — deterministic Endem formation, checking, binding, and packing boundary
-- [Reader](https://noemion.github.io/components/reader.html) — independent, bounded, read-only interpretation and diagnostic boundary
-- [Runner](https://noemion.github.io/components/runner.html) — constrained loading, capability mediation, evidence collection, and execution boundary
+- [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Praxor responsibility boundaries
+- [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary
+- [Theor](https://noemion.github.io/components/theor.html) — independent, bounded, read-only interpretation and diagnostic boundary
+- [Praxor](https://noemion.github.io/components/praxor.html) — constrained loading, capability mediation, evidence collection, and execution boundary
 
 ## Specifications
 
 - [Specifications](https://noemion.github.io/specifications/index.html) — authority, maturity, and normative-source map
 - [Endem](https://noemion.github.io/specifications/endem.html) — the smallest deterministic natural-language goal artifact and its canonical fields
-- [Weave](https://noemion.github.io/specifications/weave.html) — resolved, composable closure and binding rules
-- [Witness](https://noemion.github.io/specifications/witness.html) — scoped evidence, provenance, integrity, and acceptance claims
+- [Synem](https://noemion.github.io/specifications/synem.html) — resolved, composable closure and binding rules
+- [Tekmor](https://noemion.github.io/specifications/tekmor.html) — scoped evidence, provenance, integrity, and acceptance claims
 
 ## Guides and reference
 
@@ -57,15 +58,15 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Endem application
 
-- [Endem](https://noemion.github.io/endem/index.html) — the single public command surface for form, check, bind, pack, seal, see, run, and test
+- [Endem](https://noemion.github.io/endem/index.html) — the single public command surface for poie, elenk, pleko, tasse, sphra, theor, praxe, and peira
 
 ## Endem manual
 
 - [Manual index](https://noemion.github.io/endem/docs/index.html) — responsibilities, actions, trust boundaries, and reading order
 - [Format](https://noemion.github.io/endem/docs/format.html) — canonical Endem fields, encoding, deterministic formation, and round trips
-- [Binding](https://noemion.github.io/endem/docs/binding.html) — symbols, references, Weave closure, conflict handling, and packing
+- [Binding](https://noemion.github.io/endem/docs/binding.html) — symbols, references, Synem closure, conflict handling, and packing
 - [Safety](https://noemion.github.io/endem/docs/safety.html) — bounded parsing, checked arithmetic, independent reading, integrity, and signing boundaries
-- [Running](https://noemion.github.io/endem/docs/running.html) — Frame creation, constrained execution, observations, evidence closure, and acceptance
+- [Running](https://noemion.github.io/endem/docs/running.html) — Dromen creation, constrained execution, observations, evidence closure, and acceptance
 - [Reference](https://noemion.github.io/endem/docs/reference.html) — actions, artifacts, diagnostics, states, and normative sources
 
 ## Availability and authority
