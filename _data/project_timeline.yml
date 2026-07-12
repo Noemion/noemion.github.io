@@ -43,7 +43,7 @@ items:
     state: current
     label: 正在进行
     title: poie/elenk/theor/peira 纵向切片
-    description: 正在建立 Rust 安全核心工作区，实现规范写入器、生产解析器、独立只读 Theor、恶意语料、模糊测试和双环境复现。
+    description: 已实现 Rust Poiet、生产侧 Elenk、独立 Theor 和统一 CLI，并通过 END-P1 正反向量、3,372 个有界变异样本与双环境对象字节复现；正在扩大边界语料并准备公开仓库。
   - id: synem-binding-release
     state: future
     label: 后续规划

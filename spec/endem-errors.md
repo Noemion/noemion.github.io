@@ -49,7 +49,7 @@
 | `endem.semantic.field.unknown` | `END-FMT-013` | END-P1 映射出现未登记字段键 |
 | `endem.semantic.reference` | `END-FMT-014` | END-P1 出现悬空 symbol、relation、situation 或 source 引用 |
 
-这些错误码当前由语义向量和 END-P1 完整载荷检查器执行。它们不是生产 Poiet 或 Theor，也不构成稳定诊断 ABI。
+这些错误码由规范向量检查器和首个本地 Rust 候选执行。候选包含 Poiet 生产侧结构路径与不共享解析代码的 Theor，但错误文本、退出状态和诊断结构仍不构成稳定 ABI。
 
 ## 4. 稳定性边界
 

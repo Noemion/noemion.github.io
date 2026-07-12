@@ -7,7 +7,7 @@ permalink: "/endem/index.html"
 ---
 <main id="main-content" class="tool-project" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>Endem</span></nav>
-  <header class="application-introduction"><h1>endem · 目标制品应用</h1><p>一个命令入口贯穿目标制品的形成、检查、组合、发布和受控实现。</p><div class="badges"><span class="badge">Single CLI</span><span class="badge">8 Actions</span><span class="badge">Design Stage</span><span class="badge">No Executable Yet</span></div></header>
+  <header class="application-introduction"><h1>endem · 目标制品应用</h1><p>一个命令入口贯穿目标制品的形成、检查、组合、发布和受控实现。</p><div class="badges"><span class="badge">Single CLI</span><span class="badge">4 Actions Implemented</span><span class="badge">Experimental Core</span><span class="badge">Unreleased</span></div></header>
 
   <div class="tool-project-body">
     <section>
@@ -19,11 +19,12 @@ permalink: "/endem/index.html"
 
     <section class="tool-status-panel">
         <h2>当前状态</h2>
-        <p><strong>实现准备阶段，尚未提供可执行程序。</strong>Endem 语义、END-FMT 容器、END-P1 完整载荷、命令名和职责已经采用；参数、退出状态、安装包和稳定 ABI 尚未冻结。</p>
+        <p><strong>首个安全核心已经实现，但尚未公开发行。</strong>本地 Rust 工作区能够从显式 Source Manifest 生成 END-P1，由生产侧 Elenk 检查结构，再由不共享解析代码的 Theor 检查语义。参数、退出状态、安装包和稳定 ABI 尚未冻结。</p>
         <ul>
-          <li>ADR-0012 已为 Poiet 与生产读取核心选择 Rust 1.97.0；安全核心代码尚未建立。</li>
-          <li>ADR-0013 已建立 END-P1 字段、排序和引用 schema，并形成完整正反字节向量。</li>
-          <li>首个实现只覆盖 <code>poie</code>、<code>elenk</code>、<code>theor</code> 与 <code>peira</code>。</li>
+          <li>实现固定 Rust 1.97.0，禁止 unsafe 和第三方 crate，并在 release 构建中检查整数溢出。</li>
+          <li><code>poie</code> 生成的 843 字节对象与 END-P1 权威接受向量逐字节一致。</li>
+          <li><code>elenk</code>、独立 <code>theor</code> 与 <code>peira</code> 已覆盖结构、语义、差分和有界变异检查。</li>
+          <li>实现仓库、安装包、签名和跨平台复现尚未公开，因此当前不是可下载版本。</li>
           <li><code>pleko</code> 等真实多 Endem 案例与最小格式通过双实现验证后开发。</li>
           <li><code>tasse</code>、<code>sphra</code> 和 <code>praxe</code> 等发布与安全边界冻结后开发。</li>
         </ul>

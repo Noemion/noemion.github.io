@@ -13,14 +13,14 @@ page_heading: "endem 使用手册"
 page_lead: "说明一个命令怎样形成、检查、组合、发布并在最小权限下实现目标制品。"
 summary: "Endem 格式、组合、安全、运行和命令参考的连续手册。"
 manual_index_heading: "endem 手册目录"
-badges: ["Single CLI", "Design Stage"]
+badges: ["Single CLI", "Experimental Core"]
 ---
 
 ## 这套手册解决什么问题
 
 `endem` 是 Noemion 唯一公开命令行入口。八个动作沿同一件 Endem 制品的生命周期分工，不再要求用户先理解一组仿照传统对象工具命名的程序。
 
-> 当前没有可执行程序。命令名称、职责和 `.endem` 扩展名已经采用，参数、退出状态、安装包和稳定 ABI 尚未冻结。本手册定义处理边界，不提供可以直接复制执行的命令示例。
+> 首个本地候选已经实现 `poie/elenk/theor/peira`，但远端源码仓库、安装包和稳定命令契约尚未公开。本手册继续以处理边界为主，不把候选参数写成发行 ABI。
 
 ## 推荐阅读顺序
 

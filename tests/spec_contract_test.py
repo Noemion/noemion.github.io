@@ -423,10 +423,11 @@ def validate_public_boundary(errors):
             "不是稳定 ABI",
         ),
         "development/implementation-roadmap.html": (
-            "P0-LANG-001",
             "Rust 1.97.0",
             "C/Rust 双原型",
-            "建立首个实现工作区",
+            "P1-W1 安全核心",
+            "3,372 个有界变异",
+            "远端仓库尚待创建",
         ),
     }
     for relative_path, tokens in public_contracts.items():

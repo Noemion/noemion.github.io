@@ -30,6 +30,13 @@ permalink: "/development/testing.html"
     <li>差异必须被视为实现或规范缺陷，不能用“多数实现一致”掩盖。</li>
   </ul></section>
 
+  <section class="content-rows"><h2>首个候选已经验证什么</h2><p class="callout"><strong>当前证据：</strong>Poiet 从显式来源清单生成 843 字节 END-P1，与权威接受向量逐字节相同；独立 Theor 接受该对象，并分别拒绝未知字段、悬空引用和来源范围越界。</p><ul>
+    <li>Poiet 与 Theor 没有共享解析器、CBOR 解码器、验证器或错误实现；普通依赖树只含工作区内三个 crate。</li>
+    <li>3,372 个单字节翻转与截断样本没有触发 panic，也没有出现语义接受绕过结构拒绝。</li>
+    <li>不同区域设置和构建纪元产生相同对象摘要 <code>d21c96fe…84d2c8b</code>；这只证明对象字节复现，不证明可执行文件跨平台复现。</li>
+    <li>仍缺覆盖引导模糊、更多资源边界向量、故障注入、跨平台 CI、签名与 SBOM。</li>
+  </ul></section>
+
   <section class="content-rows"><h2>语义与歧义保留</h2><ul>
     <li>逐来源单元验证记号、符号、指称、关系角色、作用域、力量、满足条件和未决分支得到保留。</li>
     <li>语义变异测试分别交换关系角色、翻转极性、改变 kine/mene 或弱化一条 <code>krin</code>，确认身份或验证结论发生预期变化。</li>

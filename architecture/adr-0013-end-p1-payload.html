@@ -51,7 +51,7 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
 
   <section class="content-band">
     <h2>进入实现的条件</h2>
-    <p>END-P1 只有在完整语义接受向量、未知字段拒绝、悬空引用拒绝和来源范围拒绝都形成规范字节，并由独立测试解码后，才允许建立生产 Poiet 工作区。Rust 与 Theor 随后分别重写读取状态机；测试脚本不能链接进生产实现。</p>
+    <p>END-P1 只有在完整语义接受向量、未知字段拒绝、悬空引用拒绝和来源范围拒绝都形成规范字节，并由独立测试解码后，才允许建立生产 Poiet 工作区。该条件已经满足：首个本地 Rust 候选分别重写 Poiet 与 Theor 路径，测试脚本没有链接进实现。远端仓库与稳定符合性声明仍未形成。</p>
   </section>
   <div class="next-prev"><a href="adr-0012-rust-core-language.html">← ADR-0012</a><a href="open-questions.html">开放问题 →</a></div>
 </main>
