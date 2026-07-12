@@ -34,7 +34,7 @@ endem run release.weave
 
 以上仅说明子命令职责，不冻结参数拼写或 Weave 扩展名。
 
-1. 作者以受控来源表达 `say/aim/must/done/open`，模型只能协助形成待确认草稿。
+1. 作者提交受控 Source Card；模型只能协助提出 `mean/case/when/open` 投影候选，不能把候选写成规范事实。
 2. `form` 依据确定性规则与 Source Binding Decision 写入 Endem。
 3. `check` 直接读取实际字节并分层验证；`see` 以独立实现提供只读视图。
 4. 有真实多目标消费者时，`bind` 才解析引用并形成 Weave。

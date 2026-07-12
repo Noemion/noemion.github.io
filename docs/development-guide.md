@@ -18,7 +18,7 @@ badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 
 第一阶段只做规范和最小安全核心，不引入模型、LLVM、MLIR、多格式抽象或大型框架。
 
-- 冻结 `say/aim/must/done/open` 的最小语义、不变量、错误和资源限制。
+- 冻结 `say/mean/case/when/open` 的最小语义、不变量、错误和资源限制。
 - 实现规范 Writer、生产 Reader、确定性序列化和 `endem form/check`。
 - 用不共享解析代码的实现交付 `endem see`。
 - 建立合法、边界、畸形和对抗语料，以及往返、属性、模糊和双构建复现测试。
@@ -56,7 +56,7 @@ cli/        endem 调度与独立进程边界
 | 层 | 必查项 |
 | --- | --- |
 | 结构 | magic、版本、偏移、长度、计数、索引、对齐、重叠、环、上限 |
-| 语义 | 一个根 aim、来源绑定、硬约束、歧义、验收与权威 |
+| 语义 | 一个根 case、say/mean 投影、关系角色、seek/keep/avoid、when、open/unknown/no-sense 与权威 |
 | 组合 | 引用身份、版本、依赖闭包、冲突矩阵、权限交集、顺序无关 |
 | 发布 | 裁剪等价、Debug Companion、主体摘要、外部签名、SBOM、复现 |
 | 运行 | 实际字节重验、能力最小化、真实观察、事件完整、验收分层 |

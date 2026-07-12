@@ -42,13 +42,13 @@ controlled source
 
 `form` 只接受两类可确认语义：可由确定性规则从 `say` 重推导的内容，或具有具名 Source Binding Decision 的内容。模型、检索器和外部前端只能提交 Candidate Envelope；它们不能写规范字节、选择布局或关闭 `open`。
 
-一个 Endem 只允许一个根 `aim`。计划、思维链、采样参数、实时能力句柄、私钥和运行历史不属于 Endem。
+一个 Endem 只允许一个根 `case`。计划、思维链、采样参数、实时能力句柄、私钥和运行历史不属于 Endem。
 
 ## 组合与发布
 
 `bind` 解析 Endem 引用、固定依赖、检查约束可满足性并构造 Weave。能力合并只能保持或收窄权限；硬约束或验收冲突必须失败，不能调用模型“猜一个折中”。
 
-`pack` 只执行规范定义的类型化裁剪，并证明 aim、must、done、open、依赖和披露行为保持等价。`seal` 生成不可变签名请求，核对外部签名响应；Core 永不持有私钥。
+`pack` 只执行规范定义的类型化裁剪，并证明 mean、case、when、open、依赖和披露行为保持等价。`seal` 生成不可变签名请求，核对外部签名响应；Core 永不持有私钥。
 
 ## 装载与运行
 
@@ -56,7 +56,7 @@ Runner 不信任路径名、缓存结论或 `see` 输出，而是重新读取实
 
 Harness 位于模型外侧并独占实时能力句柄。模型提出 Capability Request；确定性策略决定是否调用；真实 UI、日志、测试和工具返回形成 Observation。模型只产生候选与 advisory assessment。
 
-`done`、Acceptance Policy、预算、停止条件和人工升级条件在运行前确定。Witness 绑定事件、证据范围、对象身份、环境和策略；最终状态只能是 accepted、unsatisfied、pending-review、failed 或 interrupted 之一，并且说明决策权威。
+`when`、Acceptance Policy、预算、停止条件和人工升级条件在运行前确定。Witness 绑定事件、证据范围、对象身份、环境和策略；满足状态先区分 met、unmet、unknown、error，最终运行状态再区分 accepted、unsatisfied、pending-review、failed 或 interrupted，并说明决策权威。
 
 ## 信任不是单一分数
 

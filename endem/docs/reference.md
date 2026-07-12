@@ -19,7 +19,7 @@ badges: ["Reference", "Unfrozen CLI"]
 
 | 子命令 | 主要输入 | 主要输出 | 权限边界 |
 | --- | --- | --- | --- |
-| `form` | Goal Card、候选与绑定决定 | open Endem、Form Witness | 唯一规范写入入口 |
+| `form` | Source Card、投影候选与具名决定 | open Endem、Form Witness | 唯一规范写入入口 |
 | `check` | 原始制品、层、限制和信任材料 | 分层结论、Check Witness | 生产验证路径 |
 | `bind` | Endem、Binding Policy、Dependency Lock | bound Endem/Weave、Binding Witness | 不读取环境隐式依赖 |
 | `pack` | bound 制品、发布 Profile | 候选、manifest、Signing Request | 不持有私钥 |
@@ -34,7 +34,7 @@ badges: ["Reference", "Unfrozen CLI"]
 
 | 名称 | 定义 |
 | --- | --- |
-| Endem | 具有一个根 `aim` 和五组语义的最小目标制品 |
+| Endem | 具有一个根 `case` 和五组投影语义的最小目标制品 |
 | Weave | 两个或更多 Endem 的已解析组合闭包 |
 | Frame | Runner 为一次会话建立的只读视图，不是文件 |
 | Witness | 对来源、检查、绑定、签名、运行或决定作出有限主张的证据记录 |
@@ -46,7 +46,8 @@ badges: ["Reference", "Unfrozen CLI"]
 | Endem | `open` | 结构合法，但仍有未决语义或引用 |
 | Endem | `bound` | 必需引用、冲突、能力和验收关系已解析 |
 | Endem | `sealed` | 发布载荷冻结并绑定外部签名响应 |
-| Run | `accepted` | done 条件、必需 Witness 和决定权威均满足 |
+| 满足判断 | `met / unmet / unknown / error` | case 相对 when 和当前观察的满足判断 |
+| Run | `accepted` | when 条件为 met、必需 Witness 齐全且决定权威匹配 |
 | Run | `unsatisfied` | 可判定条件没有满足 |
 | Run | `pending-review` | 需要指定外部权威判断 |
 | Run | `failed` | 系统、策略、对象或后端失败 |

@@ -24,7 +24,7 @@ badges: ["Single CLI", "Design Stage"]
 
 ## 推荐阅读顺序
 
-1. 阅读[格式与成形](format.html)，理解一个根 `aim` 和 `say/aim/must/done/open`。
+1. 阅读[格式与成形](format.html)，理解一个根 `case` 和 `say/mean/case/when/open`。
 2. 阅读[绑定与组合](binding.html)，理解 open Endem 怎样成为 bound Endem 或 Weave。
 3. 阅读[安全与独立检查](safety.html)，区分生产 `check` 与独立 `see`。
 4. 阅读[发布与运行](running.html)，理解 `pack`、外部签名、`seal`、Frame 和 Witness。
@@ -32,7 +32,7 @@ badges: ["Single CLI", "Design Stage"]
 
 ## 最短主线
 
-Goal Card 先由 `form` 形成 open Endem。`check` 运行生产验证；`see` 使用另一套直接 Reader 观察同一字节。需要跨对象引用时，`bind` 形成 bound Endem 或 Weave。发布时，`pack` 冻结候选并请求外部签名，`seal` 核对回填。`run` 在隔离域建立 Frame，并把环境观察与决定写入 Witness。
+Source Card 先经过确定性投影规则或具名决定，再由 `form` 形成 open Endem。`check` 运行生产验证；`see` 使用另一套直接 Reader 观察同一字节。需要跨对象引用时，`bind` 形成 bound Endem 或 Weave。发布时，`pack` 冻结候选并请求外部签名，`seal` 核对回填。`run` 在隔离域建立 Frame，并把环境观察与决定写入 Witness。
 
 ## 当前实施范围
 

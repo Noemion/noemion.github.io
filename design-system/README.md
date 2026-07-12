@@ -2,9 +2,9 @@
 
 本目录是修改站点页面、共享布局、目录和交互动效时的设计路由入口。开始改动前，先根据目标文件或 `page_role` 读取下表指定文档；涉及多个角色时读取所有对应文档。
 
-修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、五字段、Weave、Frame、Witness、Core、Reader、Runner、八个动作和唯一 CLI 是当前命名基线，设计文档不得引入旧名称或兼容入口。
+修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、五组投影语义、Weave、Frame、Witness、Core、Reader、Runner、八个动作和唯一 CLI 是当前命名基线，设计文档不得引入旧名称或兼容入口。
 
-修改 `.endem`、`say/aim/must/done/open`、引用、内容身份、规范排序、封装布局或构建证据排布时，先读取当前 Endem、Weave 和 Witness 规范，再读取这些规范链接的活跃 ADR。历史 ADR 的旧词只用于解释决策迁移，不得重新进入公开接口。
+修改 `.endem`、`say/mean/case/when/open`、命题投影、引用、内容身份、规范排序、封装布局或构建证据排布时，先读取当前 Endem、Weave 和 Witness 规范，再读取 ADR-0009 与相关活跃 ADR。历史 ADR 的旧词只用于解释决策迁移，不得重新进入公开接口。
 
 修改 Endem 生命周期、Core/Reader/Runner 隔离、独立读取路径、GNU 工具链采用范围或外部 AI 协议落点时，先读取 `/architecture/endem-lifecycle.html`、对应组件页面和它们链接的活跃 ADR。
 

@@ -11,7 +11,7 @@
 2. 这个最小制品叫 Endem，而不是带品牌前缀的传统对象缩写。
 3. 当前处于规范和安全核心阶段，没有可安装软件。
 
-主行动进入入门指南，次行动进入 Endem 生命周期。首屏图形只显示 `say/aim/must/done/open`、`form` 和 Endem，不显示虚构监控数据、模型拟人形象或未冻结字段编号。
+主行动进入入门指南，次行动进入 Endem 生命周期。首屏图形只显示 `say/mean/case/when/open`、`form` 和 Endem，并通过关系线显示投影，不显示虚构监控数据、模型拟人形象或未冻结字段编号。
 
 ## 信息顺序
 
@@ -19,7 +19,7 @@
 | --- | --- | --- |
 | Hero | Endem 是什么，当前能做什么 | 入门、生命周期 |
 | The Primitive | 为什么不沿用 OBJ/IR 前缀体系 | ADR-0008、背景 |
-| Five Words | 五字段怎样形成最小契约 | Endem 规范 |
+| Five Words | 五组投影怎样形成最小契约 | Endem 规范 |
 | Four Nouns | 哪些状态值得拥有正式名词 | Endem、Weave、Witness 规范 |
 | One Application | 为什么一个入口仍保持三个信任域 | Endem 应用、组件 |
 | Current Stage | 第一纵向切片及证据门 | 实施路线、测试 |

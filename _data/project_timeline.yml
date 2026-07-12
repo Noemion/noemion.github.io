@@ -20,7 +20,7 @@ overview:
   roadmap_href: /development/implementation-roadmap.html
 
 current:
-  summary: 项目已冻结 Endem 领域词汇与单一应用拓扑。当前工作是定义 say、aim、must、done、open 的最小规范、规范编码、资源上限、错误语义与正反向量；随后才实现 form、check、独立 see 和 test。
+  summary: 项目已采用 Endem 命题投影语义与单一应用拓扑。当前工作是定义 say、mean、case、when、open 的安全编码、关系不变量、资源上限、错误语义与正反向量；随后才实现 form、check、独立 see 和 test。
   facts:
     - label: 已完成
       value: Endem 词汇与应用拓扑决定
@@ -44,7 +44,7 @@ items:
     state: current
     label: 正在进行
     title: 最小规范与安全核心设计
-    description: 正在收敛五字段语义、编码边界、错误语义、checked arithmetic、资源限制、不变量和合法/畸形样本。
+    description: 正在收敛五组投影语义、关系位置、编码边界、错误语义、checked arithmetic、资源限制和合法/畸形样本。
   - id: endem-core-validation
     state: next
     label: 计划开发

@@ -1,0 +1,74 @@
+---
+layout: default
+title: "ADR-0009 · Endem 命题投影语义核"
+page_role: "content"
+footer_text: "Noemion · ADR-0009"
+permalink: "/architecture/adr-0009-propositional-kernel.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0009</span></nav>
+  <div class="hero"><h1>ADR-0009：Endem 命题投影语义核</h1><p>让来源记号通过可审计投影形成可能事态和满足条件，并由结构本身显示逻辑形式。</p><div class="badges"><span class="badge">Accepted</span><span class="badge">2026-07-12</span><span class="badge">Semantic Kernel</span><span class="badge">Encoding Unfrozen</span></div></div>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">旧的 <code>say / aim / must / done / open</code> 能分类需求，却没有表达记号怎样取得意义、命题怎样投影为可能事态。Endem 现在采用 <code>say / mean / case / when / open</code>；旧字段不再是当前接口。</p>
+    <p class="callout"><strong>核心不变量：</strong>一个 Endem 只有一个根 <code>case</code>。<code>mean</code> 与 <code>case</code> 共享稳定符号和关系位置；它们的图结构显示形式，不设置由制品自填的 <code>logical_form</code>、<code>valid</code> 或 <code>true</code> 字段。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>五组投影语义</h2>
+    <div class="table-wrap"><table><thead><tr><th>组</th><th>回答的问题</th><th>失败边界</th></tr></thead><tbody>
+      <tr><td><code>say</code></td><td>来源中出现了哪些可重定位记号？</td><td>来源不可重放、摘要不匹配或推断伪装成原文。</td></tr>
+      <tr><td><code>mean</code></td><td>这些记号怎样绑定符号、指称、关系、作用域和力量？</td><td>模型摘要被当作意义、指称无来源或作用域被静默选择。</td></tr>
+      <tr><td><code>case</code></td><td>哪一种可能事态应成为、保持或不得成为现实？</td><td>没有根命题、出现多个独立根或只有实体清单没有关系。</td></tr>
+      <tr><td><code>when</code></td><td>哪些观察支持满足、反驳、未知或错误，谁有权决定？</td><td>命题自证、模型评分替代 Witness 或未知被当作满足。</td></tr>
+      <tr><td><code>open</code></td><td>投影、指称、关系、测量或权威还有什么未确定？</td><td>只保留最高概率候选、运行时默认或声称编码不可说之物。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>从记号到可能事态</h2>
+    <div class="flow"><div class="step">say · source signs</div><div class="step">mean · projection</div><div class="step">case · possible situation</div><div class="step">when · fulfillment conditions</div><div class="step">Witness · observation</div><div class="step">Decision</div></div>
+    <ul>
+      <li><code>say</code> 保存表达事实，不宣称解释正确。</li>
+      <li><code>mean</code> 保存已授权投影；无法选择的候选继续进入 <code>open</code>。</li>
+      <li><code>case</code> 保存对象—关系图。Phase 1 至少区分 <code>seek</code>、<code>keep</code> 与 <code>avoid</code>。</li>
+      <li><code>when</code> 把关系节点绑定到观察和决定规则，但不把观察或结论写成命题的自我真值声明。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>三种不能混淆的未确定</h2>
+    <div class="table-wrap"><table><thead><tr><th>状态</th><th>含义</th><th>处理</th></tr></thead><tbody>
+      <tr><td><code>no-sense</code></td><td>记号组合违反 Profile，或没有任何允许的投影。</td><td><code>form</code> 拒绝，不产生合法 Endem。</td></tr>
+      <tr><td><code>open</code></td><td>存在可表达候选，但规则与授权不足以选择。</td><td>保留候选、来源和解决权限；不能执行阻断性未决项。</td></tr>
+      <tr><td><code>unknown</code></td><td>意义与满足条件已经确定，但外部观察不足。</td><td>Runner 保留未知，不把它改成 <code>unmet</code> 或 <code>met</code>。</td></tr>
+    </tbody></table></div>
+    <p>工程满足状态还区分 <code>met</code>、<code>unmet</code> 与 <code>error</code>。这些状态不是哲学真值；最终 <code>accepted</code> 还要求 Witness 完整、权威匹配并且没有阻断性 <code>open</code>。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>《逻辑哲学论》的采用边界</h2>
+    <div class="table-wrap"><table><thead><tr><th>原书问题</th><th>工程采用</th><th>明确拒绝</th></tr></thead><tbody>
+      <tr><td>事实是对象的结合（1–2）</td><td><code>case</code> 使用对象—关系结构。</td><td>不断言世界由不可再分逻辑原子组成。</td></tr>
+      <tr><td>图像通过元素关系接触实在（2.13–2.21）</td><td><code>mean</code> 记录符号、指称和投影。</td><td>不假定自然语言与现实天然同构。</td></tr>
+      <tr><td>命题是有结构的事实（3.14–3.1432）</td><td>关系位置和组合边进入规范内容。</td><td>不把词袋或五段文本称为命题结构。</td></tr>
+      <tr><td>理解关联到真时的情况（4.022–4.024、4.431）</td><td><code>case</code> 与 <code>when</code> 分别保存可能事态和满足条件。</td><td>不把开放目标缩为封闭二值真值表。</td></tr>
+      <tr><td>逻辑形式只能显示（2.172、4.12–4.1212）</td><td>结构由 Core 和独立 Reader 分别验证。</td><td>不设置自称有效或真实的载荷字段。</td></tr>
+      <tr><td>为可说者划界（4.112–4.116、7）</td><td>分开 <code>no-sense</code>、<code>open</code> 和 <code>unknown</code>。</td><td>不声称格式能够保存不可说之物。</td></tr>
+    </tbody></table></div>
+    <p>本次对照路德维希·维特根斯坦著、贺绍甲译《逻辑哲学论》（商务印书馆，2009 年第 1 版）及开放编号校本：<a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29">https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29</a></p>
+  </section>
+
+  <section class="content-wide">
+    <h2>对 ADR-0008 的影响</h2>
+    <p>ADR-0008 继续决定 Endem、Weave、Frame、Witness、open/bound/sealed 状态、单一 <code>endem</code> CLI、八个动作以及 Core/Reader/Runner 权限边界。它的旧五字段分类、根 <code>aim</code> 和对应实现切片由本决定取代。</p>
+    <p>开发阶段不提供旧字段别名或转换垫片。所有规范、手册、示例、视觉和测试必须使用新语义核；历史 ADR 只用于解释迁移。</p>
+  </section>
+
+  <section class="content-band">
+    <h2>仍未冻结的内容</h2>
+    <p>物理记录编号、文本语法、符号 ID 编码、量化表达、时间模型、<code>when</code> 求值语言、Phase 1 以外的言语力量和稳定 ABI 仍需规范向量、两个读取实现和对抗测试。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0008-endem-system.html">← ADR-0008</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

@@ -15,14 +15,14 @@ permalink: "/faq/index.html"
       <details><summary>Endem 这个词怎样形成？</summary><p>它由 <em>end</em> 与表示最小区别单位的构词成分 <em>-eme</em> 合成，工程定义为最小期望终态单元。正式软件发行前仍需完成专业商标检索。</p></details>
     </section>
     <section><h2>制品与应用</h2>
-      <details><summary>Endem 包含什么？</summary><p>五组显式语义：<code>say</code> 来源表达、<code>aim</code> 唯一根终态、<code>must</code> 硬边界、<code>done</code> 验收、<code>open</code> 未决项。它不是提示文本的二进制包装。</p></details>
+      <details><summary>Endem 包含什么？</summary><p>五组命题投影语义：<code>say</code> 来源记号、<code>mean</code> 意义投影、<code>case</code> 一个根可能事态、<code>when</code> 满足观察、<code>open</code> 未决边界。它不是提示文本的二进制包装。</p></details>
       <details><summary>Weave、Frame 和 Witness 是什么？</summary><p>Weave 是已解析的 Endem 与固定依赖闭包；Frame 是一次运行的不可变加载态，不是文件；Witness 是绑定对象、环境和策略的证据与决定记录。</p></details>
       <details><summary>为什么只保留一个 CLI？</summary><p>现有职责没有 23 个独立用户、权威或生命周期。唯一入口 <code>endem</code> 用短子命令组织职责；只有 Reader 与 Runner 因独立证据和权限边界保持独立实现/进程。</p></details>
       <details><summary>一个 CLI 会不会破坏安全隔离？</summary><p>不会。<code>endem see</code> 由单独构建的 Reader 实现，<code>endem run</code> 启动隔离进程。统一的是用户入口，不是解析代码、verified handle 或实时能力句柄。</p></details>
     </section>
     <section><h2>安全与模型</h2>
       <details><summary>模型能直接生成 Endem 吗？</summary><p>不能。模型只能生成带来源和未决状态的候选；Core 依据确定性规则或具名 Source Binding Decision 形成规范字节。</p></details>
-      <details><summary>模型能调用工具或宣告完成吗？</summary><p>模型只能提出能力请求和候选结果。Harness 的确定性策略决定实际调用，<code>done</code> 预先固定验收，Witness 记录真实证据，指定权威形成最终决定。</p></details>
+      <details><summary>模型能调用工具或宣告完成吗？</summary><p>模型只能提出能力请求和候选结果。Harness 的确定性策略决定实际调用，<code>when</code> 预先固定满足条件和决定权威，Witness 记录真实观察，指定权威形成最终决定。</p></details>
       <details><summary>Deterministic 路径会调用模型吗？</summary><p>不会。形成、验证、绑定、布局、摘要、签名范围和规则型验收都必须可在无模型环境复现。</p></details>
     </section>
     <section><h2>状态与实施</h2>

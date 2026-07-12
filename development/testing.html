@@ -17,7 +17,7 @@ permalink: "/development/testing.html"
   </ul></section>
 
   <section class="content-rows"><h2>形成、往返与复现</h2><ul>
-    <li>相同 <code>say/aim/must/done/open</code>、来源决定、profile 和固定依赖产生完全相同的 Endem 字节。</li>
+    <li>相同 <code>say/mean/case/when/open</code>、投影决定、profile 和固定依赖产生完全相同的 Endem 字节。</li>
     <li>规范文本 → Endem → 规范文本往返保持规范化等价；非规范空白或排列差异不得改变身份。</li>
     <li>分别报告 Endem 字节复现、工具二进制复现和发布签名真实性；三者不能相互替代。</li>
     <li>至少在两个工作目录和两个隔离环境构建；locale、时区、临时路径、归档顺序和时间戳不得污染结果。</li>
@@ -31,16 +31,17 @@ permalink: "/development/testing.html"
   </ul></section>
 
   <section class="content-rows"><h2>语义与歧义保留</h2><ul>
-    <li>逐来源单元验证明示目标、硬约束、禁止事项、例外、验收和未决分支得到保留。</li>
-    <li>语义变异测试分别删除、翻转或弱化一条 <code>must</code>/<code>done</code>，确认身份或验证结论发生预期变化。</li>
+    <li>逐来源单元验证记号、符号、指称、关系角色、作用域、力量、满足条件和未决分支得到保留。</li>
+    <li>语义变异测试分别交换关系角色、翻转极性、改变 seek/keep/avoid 或弱化一条 <code>when</code>，确认身份或验证结论发生预期变化。</li>
     <li>模型置信度不能关闭 <code>open</code>；只有规则可重推导或具名 Source Binding Decision 才能确认语义。</li>
-    <li>一个 Endem 只能有一个根 <code>aim</code>；多目标组合必须通过显式引用进入 Weave。</li>
+    <li>一个 Endem 只能有一个根 <code>case</code>；多目标组合必须通过显式引用进入 Weave。</li>
+    <li>违反 Profile 或无允许投影的输入必须稳定返回 <code>no-sense</code>；观察不足必须返回 <code>unknown</code>，不能混入 <code>open</code>。</li>
   </ul></section>
 
   <section class="content-rows"><h2>绑定、发布与签名</h2><ul>
     <li>引用可见性、版本、必需/可选依赖、ID 重映射、约束可满足性、权限交集和冲突矩阵全部有正反向量。</li>
     <li>链接顺序不改变规范结果；任何能力合并只能保持或收窄上限。</li>
-    <li><code>pack</code> 前后 aim、must、done、open、依赖与披露行为保持规范等价；Debug Companion 有独立访问与生命周期。</li>
+    <li><code>pack</code> 前后 mean、case、when、open、依赖与披露行为保持规范等价；Debug Companion 有独立访问与生命周期。</li>
     <li>私钥始终在外部签名系统；签名响应必须精确匹配请求、主体摘要、策略和发行身份。</li>
   </ul></section>
 

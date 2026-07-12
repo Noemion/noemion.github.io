@@ -10,7 +10,7 @@ permalink: "/index.html"
     <div class="portal-hero-copy">
       <p class="portal-eyebrow">A deterministic foundation for natural-language goals</p>
       <h1 id="portal-title"><span>让目标不再只是文字，</span><strong>而成为 Endem。</strong></h1>
-      <p class="portal-hero-summary">Endem 是最小、独立有效、可验证的期望终态单元：一个根目标，连同来源、硬边界、验收和未决歧义。</p>
+      <p class="portal-hero-summary">Endem 是最小、独立有效、可验证的期望终态单元：来源记号经过明确投影，形成一个根可能事态及其满足条件。</p>
       <div class="portal-actions">
         <a class="portal-button portal-button-primary" href="docs/getting-started.html"><span>认识 Endem</span><span aria-hidden="true">↗</span></a>
         <a class="portal-button portal-button-secondary" href="architecture/endem-lifecycle.html"><span>查看完整生命周期</span><span aria-hidden="true">→</span></a>
@@ -21,18 +21,18 @@ permalink: "/index.html"
       </div>
     </div>
 
-    <div class="portal-hero-visual" role="img" aria-label="来源经过 form 形成 Endem，五个语义组为 say、aim、must、done 与 open">
+    <div class="portal-hero-visual" role="img" aria-label="来源经过 form 形成 Endem，五组投影语义为 say、mean、case、when 与 open">
       <div class="semantic-spectrum" aria-hidden="true"></div>
       <div class="dataflow-field" aria-hidden="true">
         <span class="dataflow-status"><i></i><b>ENDEM / OPEN</b></span>
         <span class="dataflow-lane dataflow-lane-source"><b>SAY</b><i></i><em></em></span>
-        <span class="dataflow-lane dataflow-lane-bind"><b>AIM</b><i></i><em></em></span>
-        <span class="dataflow-lane dataflow-lane-reloc"><b>MUST</b><i></i><em></em></span>
-        <span class="dataflow-lane dataflow-lane-verify"><b>DONE</b><i></i><em></em></span>
+        <span class="dataflow-lane dataflow-lane-bind"><b>MEAN</b><i></i><em></em></span>
+        <span class="dataflow-lane dataflow-lane-reloc"><b>CASE</b><i></i><em></em></span>
+        <span class="dataflow-lane dataflow-lane-verify"><b>WHEN</b><i></i><em></em></span>
       </div>
       <div class="source-cluster" aria-hidden="true">
         <span class="source-chip source-chip-goal"><b>SAY</b> 原始表达</span>
-        <span class="source-chip source-chip-context"><b>DONE</b> 验收证据</span>
+        <span class="source-chip source-chip-context"><b>WHEN</b> 满足观察</span>
         <span class="source-chip source-chip-ambiguity"><b>OPEN</b> 保留未决</span>
       </div>
       <div class="compiler-bridge" aria-hidden="true">
@@ -40,11 +40,11 @@ permalink: "/index.html"
         <i></i>
       </div>
       <div class="endem-object-visual" aria-hidden="true">
-        <div class="endem-object-title"><span>ENDEM</span><small>ONE AIM</small></div>
+        <div class="endem-object-title"><span>ENDEM</span><small>ONE CASE</small></div>
         <div class="endem-object-record"><b>01</b><span>say</span><i></i></div>
-        <div class="endem-object-record"><b>02</b><span>aim</span><i></i></div>
-        <div class="endem-object-record"><b>03</b><span>must</span><i></i></div>
-        <div class="endem-object-record"><b>04</b><span>done · open</span><i></i></div>
+        <div class="endem-object-record"><b>02</b><span>mean</span><i></i></div>
+        <div class="endem-object-record"><b>03</b><span>case</span><i></i></div>
+        <div class="endem-object-record"><b>04</b><span>when · open</span><i></i></div>
         <div class="endem-object-footer"><span>BOUND</span><span>CHECKED</span><span>VERIFIABLE</span></div>
       </div>
       <div class="object-orbit object-orbit-one" aria-hidden="true"></div>
@@ -60,7 +60,7 @@ permalink: "/index.html"
     <div class="portal-thesis-copy">
       <p class="portal-lead"><strong>Endem</strong> 由 <em>end</em> 与表示“最小区别单位”的构词成分 <em>-eme</em> 合成，工程定义是“最小、独立有效、可验证的期望终态单元”。</p>
       <p>Noemion 只是项目与生态名称。制品、动作和应用不再批量携带品牌前缀，也不再用传统 <code>OBJ</code> 词尾假装自然语言目标只是另一种机器目标文件。</p>
-      <p>一个 Endem 只有一个根 <code>aim</code>。复杂任务通过明确引用和组合形成 Weave，而不是把所有上下文塞进巨型提示词。</p>
+      <p>一个 Endem 只有一个根 <code>case</code>。复杂任务通过明确引用和组合形成 Weave，而不是把所有上下文塞进巨型提示词。</p>
       <p>名称提供共同语言；真正语义仍由规范、不变量、失败路径和测试决定。</p>
     </div>
   </section>
@@ -68,23 +68,23 @@ permalink: "/index.html"
   <section class="portal-paths portal-reveal">
     <div class="portal-section-heading">
       <p class="portal-section-index">02 · FIVE WORDS</p>
-      <h2 class="portal-chapter-title"><span>五个短词<br>构成最小契约</span></h2>
-      <p>字段可以为空，但不能被静默省略；未知必须继续是未知。</p>
+      <h2 class="portal-chapter-title"><span>五个短词<br>形成命题投影</span></h2>
+      <p>来源、意义、事态、满足和未决边界必须分开；结构显示形式。</p>
     </div>
     <div class="portal-feature-list">
       <a class="portal-feature-row" href="specifications/endem.html">
-        <span class="feature-visual feature-visual-expression" aria-hidden="true"><i>SAY</i><i>AIM</i><b>ONE ROOT END</b></span>
-        <span class="feature-copy"><small>SOURCE &amp; END</small><strong><code>say</code> 保存来源，<code>aim</code> 定义终态</strong><span>同一目标可以有多种说法；任何规范化都必须保持来源绑定，并且只有一个根目标。</span></span>
+        <span class="feature-visual feature-visual-expression" aria-hidden="true"><i>SAY</i><i>MEAN</i><b>SIGN → SENSE</b></span>
+        <span class="feature-copy"><small>SOURCE &amp; MEANING</small><strong><code>say</code> 保存记号，<code>mean</code> 固定投影</strong><span>同一说法可以有多种解释；只有规则或具名授权能够确认符号、指称、关系和作用域。</span></span>
         <span class="portal-arrow" aria-hidden="true">↗</span>
       </a>
-      <a class="portal-feature-row" href="specifications/endem.html#must">
-        <span class="feature-visual feature-visual-strict" aria-hidden="true"><span><i>MUST</i><b>ALLOW</b></span><span><i>NEVER</i><b>DENY</b></span></span>
-        <span class="feature-copy"><small>BOUNDARY</small><strong><code>must</code> 明确硬约束与能力上限</strong><span>禁止事项、权限边界和资源上限不是提示语气，而是失败即拒绝的契约。</span></span>
+      <a class="portal-feature-row" href="specifications/endem.html#case">
+        <span class="feature-visual feature-visual-strict" aria-hidden="true"><span><i>CASE</i><b>SEEK</b></span><span><i>KEEP</i><b>AVOID</b></span></span>
+        <span class="feature-copy"><small>POSSIBLE SITUATION</small><strong><code>case</code> 描述应成立的对象关系</strong><span>目标、持续不变量和禁止事态共享同一关系结构，并通过 seek、keep、avoid 区分力量。</span></span>
         <span class="portal-arrow" aria-hidden="true">↗</span>
       </a>
-      <a class="portal-feature-row" href="specifications/endem.html#done">
-        <span class="feature-visual feature-visual-object" aria-hidden="true"><i>DONE</i><b>+</b><i>WITNESS</i><span>JUDGE · EVIDENCE · SCOPE</span></span>
-        <span class="feature-copy"><small>ACCEPTANCE</small><strong><code>done</code> 在运行前确定如何验收</strong><span>验收条件、所需证据和判断权威必须先固定；模型只能提交候选，不能自称完成。</span></span>
+      <a class="portal-feature-row" href="specifications/endem.html#when">
+        <span class="feature-visual feature-visual-object" aria-hidden="true"><i>WHEN</i><b>+</b><i>WITNESS</i><span>MET · UNKNOWN · ERROR</span></span>
+        <span class="feature-copy"><small>FULFILLMENT</small><strong><code>when</code> 在运行前确定怎样判断满足</strong><span>观察类型、必需证据、未知处理和决定权威必须先固定；模型不能让命题自证。</span></span>
         <span class="portal-arrow" aria-hidden="true">↗</span>
       </a>
       <a class="portal-feature-row" href="specifications/endem.html#open">
@@ -102,7 +102,7 @@ permalink: "/index.html"
       <p>权限、权威、生命周期或保密级别没有不同，就不应被拆成新的正式制品。</p>
     </div>
     <div class="portal-focus-grid">
-      <a class="portal-focus-card focus-card-endem" href="specifications/endem.html"><span class="focus-art" aria-hidden="true"><b>ENDEM</b></span><span class="focus-card-copy"><small>最小制品</small><strong>Endem</strong><span>一个根 aim 与五组显式语义。</span></span></a>
+      <a class="portal-focus-card focus-card-endem" href="specifications/endem.html"><span class="focus-art" aria-hidden="true"><b>ENDEM</b></span><span class="focus-card-copy"><small>最小制品</small><strong>Endem</strong><span>一个根 case 与五组命题投影语义。</span></span></a>
       <a class="portal-focus-card focus-card-weave" href="specifications/weave.html"><span class="focus-art" aria-hidden="true"><b>WEAVE</b></span><span class="focus-card-copy"><small>组合闭包</small><strong>Weave</strong><span>已解析的 Endem、固定依赖与发布范围。</span></span></a>
       <a class="portal-focus-card focus-card-witness" href="specifications/witness.html"><span class="focus-art" aria-hidden="true"><b>WITNESS</b></span><span class="focus-card-copy"><small>运行证据</small><strong>Frame · Witness</strong><span>Frame 是加载态；Witness 记录带范围的证据与决定。</span></span></a>
     </div>
@@ -135,7 +135,7 @@ permalink: "/index.html"
     <p class="portal-section-index">06 · EVIDENCE OVER CLAIMS</p>
     <h2 class="portal-chapter-title"><span>借鉴工具链思想，不复制工具数量</span></h2>
     <blockquote><p>“只有存在独立消费者、不同权威或不同失败责任，才值得成为单独应用或正式制品。”</p></blockquote>
-    <a href="architecture/adr-0008-endem-system.html">阅读词汇与应用拓扑决定 <span aria-hidden="true">→</span></a>
+    <a href="architecture/adr-0009-propositional-kernel.html">阅读命题投影语义决定 <span aria-hidden="true">→</span></a>
   </section>
 
   <section class="portal-next portal-reveal">

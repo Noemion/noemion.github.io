@@ -11,17 +11,17 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
-    <p class="lead">Endem、Weave、Frame、Witness、一个根 aim、say/aim/must/done/open、open → bound → sealed、唯一 CLI 与八个子命令已经由 ADR-0008 采用。它们不再作为候选名称或工具数量问题反复讨论。</p>
+    <p class="lead">Endem、Weave、Frame、Witness、open → bound → sealed、唯一 CLI 与八个子命令由 ADR-0008 采用；一个根 case 与 say/mean/case/when/open 由 ADR-0009 采用。它们不再作为候选名称或工具数量问题反复讨论。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
 
   <section class="content-grid">
     <h2>Endem 编码与语义</h2>
-    <details open><summary>Goal Card 的最小表面语法是什么？</summary><p>需要比较严格声明式文本、带自然语言字段的结构化文档和 API 输入。任何方案都必须明确表达五组语义、来源范围和未知状态，并能在无模型环境确定性解析。</p></details>
+    <details open><summary>Source Card 的最小表面语法是什么？</summary><p>需要比较严格声明式文本、带自然语言来源的结构化文档和 API 输入。任何方案都必须明确表达五组投影语义、来源范围、关系位置和未知状态，并能在无模型环境确定性解析。</p></details>
     <details><summary>Endem 的物理编码怎样支持安全随机访问？</summary><p>需确定魔数、版本、目录、字段宽度、记录长度、对齐、关键/可选扩展、压缩和资源上限。首要目标是有界读取和跨实现一致，不是兼容 ELF 或某种通用容器。</p></details>
-    <details><summary>一个根 aim 的语义等价怎样判断？</summary><p>布局、来源注释或调试记录变化后，哪些 aim、must、done 和 open 属性必须保持，仍需规范化规则和反例。规则冻结前只能比较显式属性，不能发明语义哈希。</p></details>
+    <details><summary>一个根 case 的语义等价怎样判断？</summary><p>布局、来源注释或调试记录变化后，哪些 mean、case、when 和 open 属性必须保持，仍需规范化规则和反例。规则冻结前只能比较显式符号、关系和条件，不能发明语义哈希。</p></details>
     <details><summary>自然语言候选由谁授权绑定？</summary><p>需定义决定主体、作用范围、撤销、重放、高风险字段和多人冲突。模型置信度、结构合法和单次界面点击都不能单独成为永久授权。</p></details>
-    <details><summary>连续或模糊要求怎样进入五组语义？</summary><p>软偏好、感知质量、风格和不可完全判定条件需要保留不确定性和评价环境，不能为了机器处理伪造精确阈值。</p></details>
+    <details><summary>连续或模糊要求怎样进入五组投影语义？</summary><p>软偏好、感知质量、风格和不可完全判定条件需要保留不确定性和评价环境，不能为了机器处理伪造精确阈值。</p></details>
   </section>
 
   <section class="content-grid">
@@ -29,13 +29,13 @@ permalink: "/architecture/open-questions.html"
     <details open><summary>绑定标识和版本约束采用什么语法？</summary><p>需要同时满足内容寻址、可读命名、版本兼容和可重放解析；环境搜索顺序和网络最新版本不能成为正式输入。</p></details>
     <details><summary>什么时候允许依赖循环？</summary><p>第一版拒绝必需循环。未来若支持，必须先定义固定点语义、披露与验收顺序、预算上限、失败原子性和跨实现向量。</p></details>
     <details><summary>Weave 是否需要独立物理容器？</summary><p>在真实多 Endem、流式读取或离线分发消费者出现前，内容寻址 manifest 和现有确定性归档可能已经足够；不能为形式完整提前创造格式。</p></details>
-    <details><summary>pack 可以删除哪些信息？</summary><p>只有不改变 aim、must、done、open、绑定、能力上限和运行披露的内容才能外置。需要先定义属性级等价检查和 Debug Companion 摘要绑定。</p></details>
+    <details><summary>pack 可以删除哪些信息？</summary><p>只有不改变 mean、case、when、open、绑定、能力上限和运行披露的内容才能外置。需要先定义关系级等价检查和 Debug Companion 摘要绑定。</p></details>
     <details><summary>seal 的算法与撤销策略是什么？</summary><p>需确定待签消息、算法协商、多签、密钥轮换、撤销、时间来源和离线验证。签名必须位于被签载荷之外，且不能替代结构或环境授权。</p></details>
   </section>
 
   <section class="content-grid">
     <h2>Frame、Runner 与 Witness</h2>
-    <details open><summary>Frame 的最小只读接口是什么？</summary><p>需要定义 aim、must、done、open、成员披露、预算和能力需求怎样进入一次运行，同时确保 Frame 不含实时句柄、凭据或可跨会话权限。</p></details>
+    <details open><summary>Frame 的最小只读接口是什么？</summary><p>需要定义 mean 关系、case 子图、when、open、成员披露、预算和能力需求怎样进入一次运行，同时确保 Frame 不含实时句柄、凭据或可跨会话权限。</p></details>
     <details><summary>Runner 怎样隔离模型和能力适配器？</summary><p>需确定进程、沙箱、取消、超时、幂等、网络、文件、凭据和资源限额。后端失败不能让 Runner 静默扩大权限或修改 sealed 制品。</p></details>
     <details><summary>Witness 采用什么事件与完整性结构？</summary><p>需确定序列、时间域、父记录、摘要、脱敏、丢失、采样、签名和多生产者归并，同时避免循环自证。</p></details>
     <details><summary>谁形成最终决定？</summary><p>确定性规则、外部评价器与人工权威需要明确输入、权限和失败语义。Witness 齐全只说明依据可用，不能自动把状态提升为 accepted。</p></details>

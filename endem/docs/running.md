@@ -20,9 +20,9 @@ badges: ["pack", "seal", "run"]
 
 它可以外置不影响运行的调试和详细来源内容，但必须证明以下属性未改变：
 
-- 每个根 `aim`；
-- 所有 `must` 的强度与作用域；
-- `done` 的条件、证据和权威；
+- 每个根 `case` 及其 seek、keep、avoid 力量；
+- `mean` 中所有符号、关系位置和作用域；
+- `when` 的满足条件、观察、证据和权威；
 - 仍需运行处理的 `open`；
 - 绑定结果、能力上限和披露边界。
 
@@ -71,4 +71,4 @@ MCP 和 A2A 只适合作为 Runner 外缘协议适配器：
 
 Witness 记录有限的来源、检查、绑定、签名、运行或决定依据。它不等于数学证明，也不自动证明 claim 为真。
 
-最终状态至少区分 `accepted`、`unsatisfied`、`pending-review`、`failed` 和 `interrupted`。只有 `done` 的全部必需条件可判定、Witness 足够且决定权威匹配时，才能形成 `accepted`；否则必须保留失败或待复核状态。
+满足判断先区分 `met`、`unmet`、`unknown` 和 `error`。最终运行状态再区分 `accepted`、`unsatisfied`、`pending-review`、`failed` 和 `interrupted`。只有 `when` 的全部必需条件为 `met`、Witness 足够、没有阻断性 `open` 且决定权威匹配时，才能形成 `accepted`。

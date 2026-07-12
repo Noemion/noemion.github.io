@@ -27,7 +27,7 @@ badges: ["Authority", "Maturity", "ADR"]
 
 ## Endem
 
-[Endem 规范](../specifications/endem.html)定义一个根 `aim`、五字段语义、来源确认、显式未知、身份和规范编码边界。当前已接受语义骨架与 `.endem` 工程扩展名；magic、字段宽度、记录编号、摘要算法和扩展 registry 尚未冻结。
+[Endem 规范](../specifications/endem.html)定义一个根 `case`、五组投影语义、形式显示、来源确认、显式未知、身份和规范编码边界。当前已接受语义骨架与 `.endem` 工程扩展名；magic、字段宽度、记录编号、求值语言、摘要算法和扩展 registry 尚未冻结。
 
 ## Weave
 

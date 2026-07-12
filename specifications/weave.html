@@ -11,18 +11,18 @@ permalink: "/specifications/weave.html"
 
   <section class="content-stack">
     <h2>Weave 为什么存在</h2>
-    <p class="lead">Endem 保持一个根 aim，因此可独立理解、检查和验收。只有当多个目标需要共享定义、产物、能力或验收依赖时，<code>endem bind</code> 才建立 Weave。Weave 是已解析闭包，不是把文件简单放入归档，也不是一个自动扩大上下文的知识包。</p>
+    <p class="lead">Endem 保持一个根 case，因此可独立理解、检查和验收。只有当多个目标需要共享定义、产物、能力或验收依赖时，<code>endem bind</code> 才建立 Weave。Weave 是已解析闭包，不是把文件简单放入归档，也不是一个自动扩大上下文的知识包。</p>
     <p class="callout"><strong>直接结论：</strong>只有一个 Endem、没有跨对象引用的任务不需要 Weave。不能为了架构对称或发布包装强制创建空闭包。</p>
   </section>
 
   <section class="content-wide">
     <h2>输入与输出</h2>
     <div class="table-wrap"><table><thead><tr><th>类别</th><th>内容</th><th>要求</th></tr></thead><tbody>
-      <tr><td>输入</td><td>两个或更多 open/bound Endem</td><td>每个对象具有精确摘要、一个根 aim 和可验证来源。</td></tr>
+      <tr><td>输入</td><td>两个或更多 open/bound Endem</td><td>每个对象具有精确摘要、一个根 case 和可验证来源。</td></tr>
       <tr><td>输入</td><td>Binding Policy</td><td>声明命名空间、版本、缺失行为、冲突、权限和循环策略。</td></tr>
       <tr><td>输入</td><td>Dependency Lock</td><td>按内容身份锁定所有外部依赖，不使用目录枚举或“最新版本”。</td></tr>
       <tr><td>输出</td><td>Weave Manifest</td><td>列出成员、解析结果、能力交集、验收依赖、顺序和摘要。</td></tr>
-      <tr><td>输出</td><td>Bound Endem Set</td><td>成员保持各自根 aim；跨对象引用都能重放。</td></tr>
+      <tr><td>输出</td><td>Bound Endem Set</td><td>成员保持各自根 case；跨对象引用都能重放。</td></tr>
       <tr><td>诊断</td><td>Binding Witness</td><td>记录选择、冲突、拒绝和使用的策略，不把选择过程伪装成数学证明。</td></tr>
     </tbody></table></div>
   </section>
@@ -30,12 +30,12 @@ permalink: "/specifications/weave.html"
   <section class="content-wide">
     <h2>组合不变量</h2>
     <div class="table-wrap"><table><thead><tr><th>维度</th><th>必须保持</th><th>失败示例</th></tr></thead><tbody>
-      <tr><td>目标</td><td>每个成员仍只有一个根 aim；Weave 只描述它们之间的关系。</td><td>合并时删除某个目标，或静默生成没有来源的新目标。</td></tr>
+      <tr><td>目标</td><td>每个成员仍只有一个根 case；Weave 只描述它们之间的关系。</td><td>合并时删除某个目标，或静默生成没有来源的新目标。</td></tr>
       <tr><td>约束</td><td>硬约束不得降级；互相冲突时关闭失败或保留待授权冲突。</td><td>按输入顺序选择最后一个约束。</td></tr>
       <tr><td>能力</td><td>组合后的授权上限只能保持或收紧。</td><td>成员之一请求网络，导致全部成员获得网络句柄。</td></tr>
       <tr><td>验收</td><td>跨目标依赖显式指向所需 Witness 和决定权威。</td><td>一个目标完成就把整个 Weave 标为完成。</td></tr>
       <tr><td>身份</td><td>依赖按内容摘要和兼容策略解析，结果可重放。</td><td>受当前目录、环境变量、网络搜索顺序或时间影响。</td></tr>
-      <tr><td>披露</td><td>Runner 只为当前 Frame 选择必需成员和字段，不能遗漏相关 must/done。</td><td>为节省上下文只披露 aim，隐藏安全约束。</td></tr>
+      <tr><td>披露</td><td>Runner 只为当前 Frame 选择必需成员和字段，不能遗漏相关 mean/case/when。</td><td>为节省上下文只披露根 case，隐藏关系、持续边界或满足条件。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -54,7 +54,7 @@ permalink: "/specifications/weave.html"
   <section class="content-wide">
     <h2>循环与可选依赖</h2>
     <p>第一版应拒绝必需依赖循环，因为循环会使初始化、披露预算和验收先后关系难以得到唯一结论。未来只有在规范定义固定点语义、资源上限、失败顺序和跨实现测试后，才可以引入受限循环。</p>
-    <p>可选依赖必须声明缺失时的可观察行为。缺失不能使 must 变弱、done 更容易或能力上限扩大；若无法证明缺失分支仍满足这些要求，依赖就是必需项。</p>
+    <p>可选依赖必须声明缺失时的可观察行为。缺失不能改写 mean、削弱 case、让 when 更容易满足或扩大能力上限；若无法证明缺失分支仍满足这些要求，依赖就是必需项。</p>
   </section>
 
   <section class="content-band">

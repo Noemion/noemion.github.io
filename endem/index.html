@@ -19,7 +19,7 @@ permalink: "/endem/index.html"
 
       <section class="tool-status-panel">
         <h2>当前状态</h2>
-        <p><strong>设计阶段，尚未提供可执行程序。</strong>Endem、Weave、Frame、Witness、五组语义、三个状态、<code>.endem</code> 扩展名、命令名和职责已经采用；参数、退出状态、安装包和稳定 ABI 尚未冻结。</p>
+        <p><strong>设计阶段，尚未提供可执行程序。</strong>Endem、Weave、Frame、Witness、五组投影语义、三个状态、<code>.endem</code> 扩展名、命令名和职责已经采用；参数、退出状态、安装包和稳定 ABI 尚未冻结。</p>
         <ul>
           <li>首个实现只覆盖 <code>form</code>、<code>check</code>、<code>see</code> 与 <code>test</code>。</li>
           <li><code>bind</code> 等真实多 Endem 案例与最小格式稳定后开发。</li>
@@ -42,7 +42,7 @@ permalink: "/endem/index.html"
       <section>
         <h2>它读取什么，产生什么</h2>
         <div class="table-wrap"><table><thead><tr><th>入口</th><th>主要输入</th><th>主要输出</th></tr></thead><tbody>
-          <tr><td><code>form</code></td><td>Goal Card、来源候选、Binding Decision、规范版本</td><td>open Endem、Form Witness、诊断</td></tr>
+          <tr><td><code>form</code></td><td>Source Card、投影候选、Binding Decision、规范版本</td><td>open Endem、Form Witness、诊断</td></tr>
           <tr><td><code>check</code></td><td>Endem/Weave、验证层、限制和信任材料</td><td>分层结论、Check Witness；内部 Verified Handle</td></tr>
           <tr><td><code>bind</code></td><td>Endem 集合、Binding Policy、Dependency Lock</td><td>bound Endem 或 Weave、Binding Witness</td></tr>
           <tr><td><code>pack</code></td><td>bound 制品、发布 Profile、覆盖与调试策略</td><td>不可变候选、manifest、Signing Request</td></tr>
@@ -58,7 +58,7 @@ permalink: "/endem/index.html"
         <ul>
           <li>不把任意自然语言、模型 JSON 或结构化输出直接视为合格 Endem。</li>
           <li>不让 <code>see</code> 的可读视图替代生产 <code>check</code> 或生成可信句柄。</li>
-          <li>不提供可以任意删除、改名或重写 aim、must、done、open 的通用变换命令。</li>
+          <li>不提供可以任意删除、改名或重写 mean、case、when、open 的通用变换命令。</li>
           <li>不通过环境变量、当前目录或网络“最新版本”解析正式依赖。</li>
           <li>不持有发布私钥；没有 Signature Response 时只能保留未签候选。</li>
           <li>不让 <code>run</code> 后端持有实时能力句柄、改写 sealed 制品或自行宣布 accepted。</li>
@@ -72,7 +72,7 @@ permalink: "/endem/index.html"
     <h2>继续阅读</h2>
     <div class="page-links">
       <a class="page-link" href="docs/index.html"><strong>endem 使用手册</strong><span>按格式、绑定、安全、运行和参考顺序阅读完整契约。</span></a>
-      <a class="page-link" href="../specifications/endem.html"><strong>Endem 规范</strong><span>核对一个根 aim、五组语义和状态机。</span></a>
+      <a class="page-link" href="../specifications/endem.html"><strong>Endem 规范</strong><span>核对一个根 case、五组投影语义和状态机。</span></a>
       <a class="page-link" href="../architecture/endem-lifecycle.html"><strong>Endem 生命周期</strong><span>查看八个子命令与状态、消费者和失败的连续关系。</span></a>
       <a class="page-link" href="../components/index.html"><strong>Core、Reader 与 Runner</strong><span>查看单一 CLI 背后的实现独立和权限隔离。</span></a>
     </div>

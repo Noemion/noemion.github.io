@@ -30,7 +30,7 @@ permalink: "/about/intellectual-foundations.html"
     <h2>核心思想与工程问题</h2>
     <div class="table-wrap"><table><thead><tr><th>思想来源</th><th>关键区分</th><th>对 Noemion 的工程问题</th><th>不得直接推出</th></tr></thead><tbody>
       <tr><td>胡塞尔现象学</td><td>意向活动/意向相关项、对象同一性/被给予方式、意向/充实、主题/视域</td><td>系统怎样区分来源表达、编译活动和被表达的对象？同一对象通过不同表达出现时，哪些关系必须保持，哪些背景可以稍后披露？</td><td>不把软件编译等同于意识活动，不用哲学术语替代字段、算法或测试。</td></tr>
-      <tr><td>早期维特根斯坦</td><td>事物/事实、记号/命题、命题/可能事态、说出/显示</td><td>Endem 是否描述可满足状态和关系，而不只是实体清单？结构不变量如何由验证器显示，而不是靠文档宣称？</td><td>不采用逻辑原子主义作为世界模型，也不假定自然语言与任务世界存在简单同构。</td></tr>
+      <tr><td>早期维特根斯坦</td><td>事物/事实、记号/命题、命题/可能事态、说出/显示、意义/真值条件</td><td>Endem 是否区分来源记号、意义投影、可能事态和满足观察？关系结构能否由两个实现独立验证，而不是靠载荷自称有效？</td><td>不采用逻辑原子主义作为世界模型，不假定自然语言与任务世界简单同构，也不把开放生成式目标缩成二值命题逻辑。</td></tr>
       <tr><td>弗雷格与罗素</td><td>表达/意义/指称，表面语法/逻辑形式，名称/摹状词</td><td>源码措辞、语义身份、符号绑定和外部对象是否分层？唯一性、存在性与作用域是否显式？</td><td>不把每个目标压成唯一指称，也不把自然语言正规化误认为语义已经确定。</td></tr>
       <tr><td>Carnap 与 Tarski</td><td>外延/内涵，对象语言/元语言，真/满足，原子/复合递归</td><td>Endem、规范配置、验证器和评价环境怎样分层？复合约束的满足关系能否由组成部分递归定义？</td><td>不把开放生成式任务简化为封闭二值真值系统。</td></tr>
       <tr><td>后期维特根斯坦与 Quine</td><td>意义/使用，规则/实践，翻译/不确定性</td><td>语义是否需要操作配置、使用场景和可观察行为？无法唯一翻译的内容怎样保留为歧义而不是静默确定？</td><td>不以“意义依赖使用”为理由放弃形式化，也不宣称存在脱离实现和场景的万能语义对象。</td></tr>
@@ -49,31 +49,32 @@ permalink: "/about/intellectual-foundations.html"
     </div>
     <div>
       <p>“视域”继续提醒我们：背景信息总是多于当前披露的信息。但工程上只使用 <strong>scope</strong> 表示一次运行可见的能力过滤视图，它不是新的文件类型。</p>
-      <p>“充实”继续提示目标与实际结果之间需要核对。工程上由 <code>done</code> 预先固定验收条件，由 <strong>Witness</strong> 记录带范围的证据，并由确定性策略或指定权威作出决定。</p>
+      <p>“充实”继续提示目标与实际结果之间需要核对。工程上由 <code>when</code> 预先固定满足条件、观察类型和决定权威，由 <strong>Witness</strong> 记录带范围的证据，再形成 <code>met</code>、<code>unmet</code>、<code>unknown</code> 或 <code>error</code> 判断。</p>
     </div>
   </section>
 
   <section class="content-stack">
     <h2>《逻辑哲学论》与工程设计相关的命题</h2>
-    <p>当前按《逻辑哲学论》的编号体系对照译本与开放文本阅读；正式研究引用还需记录具体版次、年份、译者和页码。以下内容只列出用于检验工程类比的命题，不构成对该书的完整解释。开放编号文本：<a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_logico-philosophicus_(version_arborescente_statique)">https://www.wittgensteinproject.org/w/index.php/Tractatus_logico-philosophicus_(version_arborescente_statique)</a></p>
+    <p>本次按命题编号逐项核对路德维希·维特根斯坦著、贺绍甲译《逻辑哲学论》（商务印书馆，2009 年第 1 版）与开放编号校本。以下内容只说明哪些结构约束进入工程设计，不构成对该书的完整解释。开放编号文本：<a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29">https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29</a></p>
     <ul>
-      <li><strong>1–2：</strong>“世界是事实的总体”促使对象模型关注成立或不成立的关系状态，而不是只收集名称和资源。</li>
-      <li><strong>2.1–3：</strong>图像、事实和逻辑形式提醒我们，任何机器表征都必须明确说明它怎样对应任务状态；仅凭结构相似不能证明语义正确。</li>
-      <li><strong>4.024：</strong>理解一个命题与知道它为真时事情如何相关。这为验收契约和证据图提供问题来源，但生成式验收不必等同于命题真值。</li>
-      <li><strong>4.111–4.112：</strong>原文把哲学描述为澄清活动；Noemion 只把这一点类比为“先澄清术语和边界再实现”，它不能直接推出规范先行或任何软件拒绝规则。</li>
-      <li><strong>6.5–7：</strong>可说与不可说的边界提醒规范必须能表示“尚不能判定或表达”，而不是让模型补出虚假确定性。</li>
+      <li><strong>1–2.063：</strong>世界由事实和事态而不是事物清单构成。Endem 因此要求 <code>case</code> 表达对象之间成立或不成立的关系。</li>
+      <li><strong>2.1–3.1432：</strong>图像与命题由元素按确定方式结合，并通过投影关系指向可能事态。Endem 因此把来源 <code>say</code>、投影 <code>mean</code> 与事态 <code>case</code> 分开。</li>
+      <li><strong>4.002–4.0031：</strong>日常语言会掩饰思想的形式，表面语法不保证真实结构。Core 不能把模型摘要或五段文本直接当作规范意义。</li>
+      <li><strong>4.022–4.024、4.431：</strong>理解命题关联到它为真时事情如何及其真值条件。Endem 由 <code>case</code> 描述可能事态，由 <code>when</code> 描述工程满足条件；二者不等于哲学真值理论。</li>
+      <li><strong>2.172、4.12–4.1212：</strong>逻辑形式由结构显示而不是再被说出。Endem 不设置自填的 <code>logical_form</code> 或 <code>valid</code> 字段，Core 与独立 Reader 直接验证关系拓扑。</li>
+      <li><strong>4.112–4.116、6.5–7：</strong>划界要求把无意义、可表达但未决、意义已定但观察未知分成 <code>no-sense</code>、<code>open</code> 和 <code>unknown</code>；格式不声称编码不可说之物。</li>
     </ul>
-    <p class="callout warning"><strong>反向约束：</strong>这本书的图像论、原子事实和早期语言观不能单独成为 Noemion 的语义基础。后期维特根斯坦、语用学、翻译不确定性和推理语义学提供了必须共同考虑的反例。</p>
+    <p class="callout warning"><strong>反向约束：</strong>这本书的图像论、原子事实和早期语言观不能单独覆盖请求、承诺、授权、时间、概率、价值判断与开放式生成。ADR-0009 只采用可测试的结构约束；后期维特根斯坦、语用学、言语行为、翻译不确定性和推理语义学继续提供必须共同考虑的反例。</p>
   </section>
 
   <section class="content-grid">
-    <h2>Endem 语义的待验证设计方案</h2>
-    <p>以下内容仍是研究提案，尚未成为规范：</p>
+    <h2>Endem 语义核与后续验证</h2>
+    <p>ADR-0009 已采用命题投影语义核；物理编码、更多言语力量和求值语言仍待规范向量与反例验证：</p>
     <div class="status-grid">
-      <article class="status-item"><h3>四类记录关系</h3><p>区分 Source Expression、Compiled Meaning、Reference Binding 与 Acceptance Contract；后两项并非与前两项同类的“身份”，分类仍需反例检验。</p></article>
-      <article class="status-item"><h3>语义来源等级</h3><p>至少区分明示内容、结构蕴涵、语境推论、工具推导和模型候选；每一层具有不同的确认权限与可撤销性。</p></article>
-      <article class="status-item"><h3>行为类型</h3><p>目标不仅描述世界，也可能要求询问、承诺、授权或执行。行为类型需要行动者、权限、前置条件、效果和失败语义。</p></article>
-      <article class="status-item"><h3>满足环境</h3><p>约束是否满足取决于明确的变量绑定、证据、版本、能力和 Runner 配置；验证器不得使用未登记的背景假设。</p></article>
+      <article class="status-item"><h3>已采用：五组投影</h3><p><code>say / mean / case / when / open</code> 分别承担来源、意义投影、可能事态、满足观察和未决边界。</p></article>
+      <article class="status-item"><h3>已采用：结构显示形式</h3><p><code>mean</code> 与 <code>case</code> 共享符号和关系位置；规范载荷不能通过自填字段自证有效。</p></article>
+      <article class="status-item"><h3>待扩展：言语力量</h3><p>Phase 1 只冻结 <code>seek</code>、<code>keep</code>、<code>avoid</code>。询问、承诺、许可和授权需要独立权限与满足模型。</p></article>
+      <article class="status-item"><h3>待实现：满足求值</h3><p><code>when</code> 必须在显式变量绑定、证据、版本、能力和 Runner 配置中产生 met、unmet、unknown 或 error；不得读取未登记背景。</p></article>
     </div>
   </section>
 
@@ -81,7 +82,7 @@ permalink: "/about/intellectual-foundations.html"
     <h2>核心书目与资源状态</h2>
     <div class="table-wrap"><table><thead><tr><th>著作</th><th>当前用途</th><th>研究状态</th><th>版本或检索资源</th></tr></thead><tbody>
       <tr><td>Husserl, <em>Ideas I</em></td><td>意向活动/意向相关项、意向性、对象给予方式与视域</td><td>原典章节与解释争议已定位；需要版本化研究笔记和竞争解释对照</td><td><a href="https://www.routledge.com/Ideas-General-Introduction-to-Pure-Phenomenology/Husserl/p/book/9780415519038">https://www.routledge.com/Ideas-General-Introduction-to-Pure-Phenomenology/Husserl/p/book/9780415519038</a></td></tr>
-      <tr><td>Wittgenstein, <em>Tractatus Logico-Philosophicus</em></td><td>事实、命题、逻辑形式、语言边界</td><td>已整理与工程设计相关的编号命题；正式引用仍需补齐所用中文版本元数据</td><td><a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_logico-philosophicus_(version_arborescente_statique)">https://www.wittgensteinproject.org/w/index.php/Tractatus_logico-philosophicus_(version_arborescente_statique)</a></td></tr>
+      <tr><td>Wittgenstein, <em>Tractatus Logico-Philosophicus</em></td><td>事实、命题、投影、逻辑形式、真值条件与语言边界</td><td>已核对贺绍甲中译本元数据和关键命题，并由 ADR-0009 采用可测试的工程边界</td><td><a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29">https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29</a></td></tr>
       <tr><td>Wittgenstein, <em>Philosophical Investigations</em></td><td>意义即使用、语言游戏、规则遵循</td><td>版本与关键章节已定位，待逐章精读</td><td><a href="https://www.wiley.com/en-us/Wittgenstein-c-PL45">https://www.wiley.com/en-us/Wittgenstein-c-PL45</a></td></tr>
       <tr><td>Frege, “Über Sinn und Bedeutung”</td><td>意义、指称、组合与替换问题</td><td>原论文与翻译争议已定位，待形成与 Endem 来源绑定的反例对照</td><td><a href="https://www.degruyter.com/document/doi/10.1515/9783111546216-003/html">https://www.degruyter.com/document/doi/10.1515/9783111546216-003/html</a></td></tr>
       <tr><td>Russell, “On Denoting”</td><td>表面语法、逻辑形式、存在与唯一性</td><td>原论文范围已定位，待与候选解析和作用域诊断逐项对照</td><td><a href="https://academic.oup.com/mind/article-abstract/XIV/4/479/964157">https://academic.oup.com/mind/article-abstract/XIV/4/479/964157</a></td></tr>

@@ -12,7 +12,7 @@ permalink: "/specifications/witness.html"
   <section class="content-stack">
     <h2>Witness 能证明什么</h2>
     <p class="lead">Witness 回答“谁在什么条件下观察或判断了什么，以及这项记录绑定到哪些对象”。它使依据可定位、可验证完整性、可比较和可撤销，但不自动证明外部事实为真，也不自动形成任务通过结论。</p>
-    <p class="callout"><strong>不得混淆：</strong>Witness 不是数学证明，不是模型自述，不是日志数量，也不是 Acceptance Decision。证据齐全只表示决定者拥有规范要求的输入；结论仍由 <code>done</code> 中预先声明的规则和权威作出。</p>
+    <p class="callout"><strong>不得混淆：</strong>Witness 不是数学证明，不是模型自述，不是日志数量，也不是 Acceptance Decision。证据齐全只表示决定者拥有规范要求的输入；满足判断与最终结论仍由 <code>when</code> 中预先声明的规则和权威作出。</p>
   </section>
 
   <section class="content-wide">
@@ -35,7 +35,7 @@ permalink: "/specifications/witness.html"
       <tr><td>Check Witness</td><td>生产验证器</td><td><code>bind</code>、<code>pack</code>、Runner</td><td>未执行的层已经通过。</td></tr>
       <tr><td>Binding Witness</td><td><code>bind</code></td><td>Weave、<code>pack</code>、审计者</td><td>被绑定依赖在未来仍可用。</td></tr>
       <tr><td>Seal Witness</td><td><code>seal</code> 与外部签名系统</td><td>Runner、发布者、审计者</td><td>对象语义正确或当前环境授权。</td></tr>
-      <tr><td>Run Witness</td><td>Runner、能力适配器和环境观察器</td><td>证据闭包与决定引擎</td><td>候选已经最终满足 done。</td></tr>
+      <tr><td>Run Witness</td><td>Runner、能力适配器和环境观察器</td><td>证据闭包与决定引擎</td><td>候选已经相对 when 为 met 或最终 accepted。</td></tr>
       <tr><td>Decision Witness</td><td>确定性策略或指定外部权威</td><td>用户、CI、审计与后续运行</td><td>输入变化后旧决定仍然有效。</td></tr>
     </tbody></table></div>
   </section>

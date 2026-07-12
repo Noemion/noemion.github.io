@@ -22,7 +22,7 @@ permalink: "/components/index.html"
   </section>
   <section>
     <h2>职责与依赖方向</h2>
-    <div class="flow"><div class="step">Goal Card</div><div class="step">Core → Endem / Weave</div><div class="step">Reader 旁路检查</div><div class="step">Core → sealed</div><div class="step">Runner → Frame</div><div class="step">Witness / Decision</div></div>
+    <div class="flow"><div class="step">Source Card</div><div class="step">Core projection → Endem / Weave</div><div class="step">Reader 旁路检查</div><div class="step">Core → sealed</div><div class="step">Runner → Frame</div><div class="step">Witness / Decision</div></div>
     <div class="table-wrap"><table><thead><tr><th>组件</th><th>可以依赖</th><th>不得依赖</th></tr></thead><tbody>
       <tr><td>Core</td><td>规范注册表、确定性算法、外部签名响应验证接口</td><td>模型 SDK、Runner、实时能力、Reader 输出</td></tr>
       <tr><td>Reader</td><td>公开规范和自己的有界解析实现</td><td>Core 的 Reader/Writer、绑定器、BFD 或生产错误实现</td></tr>

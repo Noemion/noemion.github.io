@@ -148,6 +148,7 @@
             { href: "architecture/endem-lifecycle.html", label: "Endem 生命周期" },
             { href: "architecture/decisions.html", label: "架构决策" },
             { href: "architecture/adr-0008-endem-system.html", label: "ADR-0008 · Endem 体系" },
+            { href: "architecture/adr-0009-propositional-kernel.html", label: "ADR-0009 · 命题投影" },
             { href: "architecture/open-questions.html", label: "开放问题" }
           ]
         },

@@ -11,12 +11,12 @@ permalink: "/specifications/index.html"
   <section>
     <h2>先看哪些规范</h2>
     <p class="lead">先从 Endem 理解一项自然语言目标怎样成为可检查制品，再阅读 Weave 的多目标组合规则，最后用 Witness 区分观察依据、完整性和最终判断。</p>
-    <p>当前已经冻结的是名称、职责、五组语义、状态、<code>.endem</code> 扩展名和信任边界；二进制字段、编号、Weave/Witness 扩展名、摘要与签名算法仍未冻结。页面使用“必须、不得、可以”表达当前架构要求，不代表已经发布稳定 ABI 或可执行程序。</p>
+    <p>当前已经冻结的是名称、职责、五组投影语义、状态、<code>.endem</code> 扩展名和信任边界；二进制字段、编号、Weave/Witness 扩展名、摘要与签名算法仍未冻结。页面使用“必须、不得、可以”表达当前架构要求，不代表已经发布稳定 ABI 或可执行程序。</p>
   </section>
   <section>
     <h2>三项规范</h2>
     <div class="page-links">
-      <a class="page-link" href="endem.html"><strong>Endem · 最小目标制品</strong><span>查看 say、aim、must、done、open 和 open → bound → sealed 状态。</span></a>
+      <a class="page-link" href="endem.html"><strong>Endem · 最小目标制品</strong><span>查看 say、mean、case、when、open 和 open → bound → sealed 状态。</span></a>
       <a class="page-link" href="weave.html"><strong>Weave · 多目标解析闭包</strong><span>查看多个 Endem 怎样解析引用、收敛权限并报告冲突。</span></a>
       <a class="page-link" href="witness.html"><strong>Witness · 可定位证据记录</strong><span>查看来源、构建、绑定、签名、运行和决定依据怎样保持身份链。</span></a>
     </div>
@@ -28,7 +28,7 @@ permalink: "/specifications/index.html"
   <section>
     <h2>规范与实现的边界</h2>
     <div class="table-wrap"><table><thead><tr><th>层次</th><th>当前权威内容</th><th>尚未形成的证据</th></tr></thead><tbody>
-      <tr><td>语义</td><td>一个根 aim、五组字段、显式未知、验收与能力上限</td><td>代表性语料覆盖、跨领域最小性和等价规则</td></tr>
+      <tr><td>语义</td><td>一个根 case、五组投影、形式显示、显式未知、满足与权威</td><td>代表性语料覆盖、跨领域最小性、关系等价和求值规则</td></tr>
       <tr><td>组合</td><td>内容寻址、显式绑定、权限不扩大、冲突关闭失败</td><td>大规模闭包性能、循环处理和远程仓库协议</td></tr>
       <tr><td>证据</td><td>Witness 可定位、可绑定、可声明强度，但不自动证明结论</td><td>稳定事件编码、跨实现验证和撤销策略</td></tr>
       <tr><td>物理格式</td><td>有界读取、checked arithmetic、未知关键记录拒绝</td><td>魔数、布局、字段宽度、压缩、摘要与签名算法</td></tr>

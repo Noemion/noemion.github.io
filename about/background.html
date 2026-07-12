@@ -10,12 +10,12 @@ permalink: "/about/background.html"
   <div class="hero"><h1>背景与边界</h1><p>从提示文本到持久目标契约，中间缺少的工程原语。</p><div class="badges"><span class="badge">Motivation</span><span class="badge">Scope</span><span class="badge">Non-goals</span></div></div>
   <section class="content-stack">
     <h2>为什么需要 Endem</h2>
-    <p class="lead">提示词适合表达一次请求，却没有稳定回答来源、目标、硬约束、验收和歧义分别是什么。Endem 把这五类信息变成可独立处理的最小契约。</p>
+    <p class="lead">提示词适合表达一次请求，却没有稳定回答记号怎样取得意义、指向哪些对象关系、在什么观察下满足。Endem 把来源、投影、可能事态、满足条件和未决边界变成可独立处理的最小契约。</p>
     <div class="table-wrap"><table><thead><tr><th>字段</th><th>回答的问题</th><th>不能静默做什么</th></tr></thead><tbody>
       <tr><td><code>say</code></td><td>人或上游系统实际表达了什么，来源在哪里？</td><td>不能在规范化后丢失来源绑定。</td></tr>
-      <tr><td><code>aim</code></td><td>唯一根终态是什么？</td><td>不能把多个相互独立的目标伪装成一个目标。</td></tr>
-      <tr><td><code>must</code></td><td>什么必须成立，什么绝不能发生？</td><td>不能由模型把软偏好升级成硬约束，或反向降级。</td></tr>
-      <tr><td><code>done</code></td><td>由谁、用什么证据判断完成？</td><td>不能让执行者同时自定标准并自我验收。</td></tr>
+      <tr><td><code>mean</code></td><td>来源记号怎样绑定符号、指称、关系和作用域？</td><td>不能把模型摘要当作已确认意义。</td></tr>
+      <tr><td><code>case</code></td><td>若满足，哪一种对象—关系事态应成为现实？</td><td>不能把实体清单或多个独立根伪装成一个命题。</td></tr>
+      <tr><td><code>when</code></td><td>由谁、依据什么观察判断满足？</td><td>不能让执行者同时自定标准并自我验收。</td></tr>
       <tr><td><code>open</code></td><td>哪些含义、冲突或依赖仍未确定？</td><td>不能用高置信输出抹去未决状态。</td></tr>
     </tbody></table></div>
   </section>
@@ -23,9 +23,9 @@ permalink: "/about/background.html"
     <h2>与相邻形式的区别</h2>
     <div class="status-grid">
       <article class="status-item"><h3>Prompt</h3><p>Prompt 是来源表达或运行输入；Endem 是经过来源绑定与规则检查的持久目标单元。</p></article>
-      <article class="status-item"><h3>Skill / Agent 包</h3><p>它们分发说明、脚本与资源；Endem 定义期望终态、约束和验收，不携带任意执行权限。</p></article>
+      <article class="status-item"><h3>Skill / Agent 包</h3><p>它们分发说明、脚本与资源；Endem 定义意义投影、目标事态与满足条件，不携带任意执行权限。</p></article>
       <article class="status-item"><h3>普通数据容器</h3><p>CBOR、Protobuf 或 JSON 可以承载编码，但不会自动产生 Endem 的语义与失败规则。</p></article>
-      <article class="status-item"><h3>传统目标文件</h3><p>传统格式绑定符号与地址；Endem 绑定目标、来源、能力上限、验收和仍未解决的语义。</p></article>
+      <article class="status-item"><h3>传统目标文件</h3><p>传统格式绑定符号与地址；Endem 绑定来源记号、意义、可能事态、满足观察和仍未解决的投影。</p></article>
     </div>
   </section>
   <section class="content-rows">

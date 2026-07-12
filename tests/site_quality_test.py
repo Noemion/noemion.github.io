@@ -89,7 +89,7 @@ DOC_GUIDE_ORDER = [
 ]
 DOC_GUIDE_HEADINGS = {
     "docs/getting-started.html": [
-        "从这里开始", "五个字段", "四个名词", "一个应用", "推荐阅读路径", "当前状态",
+        "从这里开始", "五组投影", "四个名词", "一个应用", "推荐阅读路径", "当前状态",
     ],
     "docs/installation-and-usage.html": [
         "当前可用性", "计划中的使用流程", "发布原则", "命名发布门",
@@ -109,7 +109,7 @@ DOC_GUIDE_HEADINGS = {
 }
 HOME_HEADINGS = [
     "不是给旧对象格式换前缀",
-    "五个短词构成最小契约",
+    "五个短词形成命题投影",
     "只保留有独立生命周期的名词",
     "一个入口不等于一个信任域",
     "先证明最小纵向切片",
@@ -122,7 +122,7 @@ INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "核心思想与工程问题",
     "Noemion 名称怎样形成",
     "《逻辑哲学论》与工程设计相关的命题",
-    "Endem 语义的待验证设计方案",
+    "Endem 语义核与后续验证",
     "核心书目与资源状态",
     "思想采用的验证要求",
 ]
@@ -215,6 +215,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/endem-lifecycle.html",
     "architecture/decisions.html",
     "architecture/adr-0008-endem-system.html",
+    "architecture/adr-0009-propositional-kernel.html",
     "architecture/open-questions.html",
     "components/core.html",
     "components/reader.html",
@@ -307,10 +308,13 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             ".endem",
             "say",
-            "aim",
-            "must",
-            "done",
+            "mean",
+            "case",
+            "when",
             "open",
+            "no-sense",
+            "unknown",
+            "logical_form",
             "checked arithmetic",
         ),
     },
@@ -1638,7 +1642,7 @@ def main():
             " ".join("".join(section["text"]) for section in parser.sections)
         )
         for term in (
-            "Endem", "Weave", "Frame", "Witness", "say", "aim", "must", "done", "open",
+            "Endem", "Weave", "Frame", "Witness", "say", "mean", "case", "when", "open",
             "一个根", "模型", "不可信",
         ):
             if term not in visible_text:
@@ -1690,8 +1694,8 @@ def main():
             " ".join("".join(section["text"]) for section in parser.sections)
         )
         for term in (
-            "不得直接推出", "思想采用的验证要求", "Source Expression",
-            "对象语言", "言语行为", "会话含义",
+            "不得直接推出", "思想采用的验证要求", "五组投影",
+            "对象语言", "言语行为", "会话含义", "no-sense", "unknown",
         ):
             if term not in visible_text:
                 errors.append(f"about/intellectual-foundations.html: must preserve {term}")

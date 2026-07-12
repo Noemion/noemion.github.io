@@ -22,6 +22,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Endem lifecycle](https://noemion.github.io/architecture/endem-lifecycle.html) — source, deterministic formation, closure, evidence, loading, and execution boundaries
 - [Architecture decisions](https://noemion.github.io/architecture/decisions.html) — accepted responsibility boundaries and explicitly unfrozen interfaces
 - [ADR-0008](https://noemion.github.io/architecture/adr-0008-endem-system.html) — accepted Endem vocabulary, artifact lifecycle, and single-application topology
+- [ADR-0009](https://noemion.github.io/architecture/adr-0009-propositional-kernel.html) — accepted propositional projection semantics, one-root case graph, and meaning boundaries
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Core, Reader, and Runner responsibility boundaries
 - [Core](https://noemion.github.io/components/core.html) — deterministic Endem formation, checking, binding, and packing boundary

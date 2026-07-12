@@ -30,7 +30,7 @@ source ─ form ─► Endem ─ bind ─► Weave ─ load ─► Frame ─ run
 
 | 名词 | 存在价值 | 生产者 | 消费者 | 省略条件 |
 | --- | --- | --- | --- | --- |
-| Endem | 保存一个根期望终态及 say/aim/must/done/open | Core 的 `form` | check、see、bind、注册表与人工审查 | 不可省略；它是最小原语 |
+| Endem | 保存一个根期望终态及 say/mean/case/when/open | Core 的 `form` | check、see、bind、注册表与人工审查 | 不可省略；它是最小原语 |
 | Weave | 固定多 Endem 引用、依赖、冲突结论与发布范围 | Core 的 `bind/pack/seal` | Runner、部署与审计 | 单一自包含 Endem 或没有组合消费者时省略 |
 | Frame | 保存一次运行已重新验证的不可变加载态和能力上限 | Runner loader | Harness 与运行后端 | 不作为磁盘制品或公开格式 |
 | Witness | 把事件、观察、证据范围、环境、策略与决定绑定 | Runner/Harness/决策权威 | 用户、CI、审计与离线评估 | 只有权威或保密边界确实不同时才拆 sidecar |

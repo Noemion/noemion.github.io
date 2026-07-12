@@ -56,7 +56,7 @@ https://sourceware.org/binutils/docs/bfd.html
 `check` 对每个请求层返回 `pass`、`fail` 或 `not-run`。建议至少区分：
 
 1. 物理结构和边界；
-2. 五组语义与引用；
+2. 五组投影语义与引用；
 3. open/bound/sealed 状态不变量；
 4. 内容摘要、签名范围与撤销材料；
 5. 当前策略、能力上限和目标环境兼容性。

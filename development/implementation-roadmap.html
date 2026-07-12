@@ -22,9 +22,9 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>下一条可执行路径</h2>
     <p class="callout"><strong>直接结论：</strong>第一实现只交付 <code>form</code>、<code>check</code>、<code>see</code> 与 <code>test</code>。不同时创建工具家族，不接模型，不做通用二进制抽象层。</p>
-    <div class="flow"><div class="step">Controlled source</div><div class="step">endem form</div><div class="step">.endem</div><div class="step">endem check</div><div class="step">endem see</div><div class="step">endem test</div></div>
+    <div class="flow"><div class="step">Source Card</div><div class="step">projection rules / decisions</div><div class="step">endem form</div><div class="step">.endem</div><div class="step">endem check</div><div class="step">endem see</div><div class="step">endem test</div></div>
     <div class="table-wrap"><table><thead><tr><th>职责</th><th>正式输入与输出</th><th>完成标准</th></tr></thead><tbody>
-      <tr><td><code>form</code></td><td>带来源决定的 <code>say/aim/must/done/open</code> → Endem</td><td>相同规范化输入与配置产生相同字节；失败不留下部分制品。</td></tr>
+      <tr><td><code>form</code></td><td>Source Card + 投影决定 → <code>say/mean/case/when/open</code> → Endem</td><td>相同规范化输入与配置产生相同字节；失败不留下部分制品。</td></tr>
       <tr><td><code>check</code></td><td>实际 Endem 字节 + profile → 分层结论</td><td>结构、引用、语义、资源与完整性逐层报告；未执行层不被描述为通过。</td></tr>
       <tr><td><code>see</code></td><td>任意不可信字节 → 有界只读视图</td><td>不复用生产 Reader、Writer 或绑定器；绝不产生可信验证句柄。</td></tr>
       <tr><td><code>test</code></td><td>规范向量 + 两条读取路径 + 两次隔离构建</td><td>解释和失败分类一致；Endem 与可执行文件分别报告逐字节复现结果。</td></tr>
@@ -34,7 +34,7 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>阶段、进入门与停止条件</h2>
     <div class="table-wrap"><table><thead><tr><th>阶段</th><th>只交付什么</th><th>进入下一阶段的验证条件</th><th>停止或合并条件</th></tr></thead><tbody>
-      <tr><td>Phase 0<br>词汇与规范骨架</td><td>Endem、Weave、Frame、Witness；五字段不变量；条款 ID；威胁模型；正反向量</td><td>术语无循环定义，每个规范“必须”都有测试或明确人工权威</td><td>不能说明消费者或失败责任的名词删除</td></tr>
+      <tr><td>Phase 0<br>词汇与规范骨架</td><td>Endem、Weave、Frame、Witness；五组投影语义、一个根 case、形式显示、no-sense/open/unknown；条款 ID 与正反向量</td><td>关系角色、投影、满足状态与错误有可复查定义，每个规范“必须”都有测试或明确人工权威</td><td>不能说明消费者或失败责任的名词删除</td></tr>
       <tr><td>Phase 1<br>最小安全核心</td><td><code>form/check/see/test</code>，规范 Writer、生产 Reader、独立 Reader</td><td>双 Reader 一致、恶意语料关闭失败、资源有界、双环境逐字节复现</td><td>若最小字段仍不能表达真实任务，回到规范，不叠加补丁格式</td></tr>
       <tr><td>Phase 2<br>组合</td><td><code>bind</code>，引用解析、冲突矩阵、固定依赖与 Weave</td><td>至少两个真实多 Endem 案例；链接顺序不改变规范结果；权限只能收窄</td><td>没有真实复用消费者时不建设归档、动态链接或共享披露文件</td></tr>
       <tr><td>Phase 3<br>发布</td><td><code>pack/seal</code>、Debug Companion、外部签名请求与回填</td><td>裁剪等价、闭包完整、签名主体精确、可复现发行与 SBOM</td><td>通用 transform/strip/archive 仍无消费者时保持为内部类型化步骤</td></tr>
