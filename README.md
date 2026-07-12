@@ -14,13 +14,14 @@
 - `_layouts/default.html`：全站 HTML 外壳，负责语言、标题、共享 CSS/JavaScript、页面角色和正文插槽。
 - `_layouts/default.html` 同时根据正式路由写入 `data-site-module`；共享样式据此应用背景、架构、规范、组件、Endem、指南、开发、资源和常见问题各自的几何母题，页面不手写模块样式。
 - `_layouts/manual.html`：手册布局，负责面包屑、手册引言、正文容器、动态索引和上下页导航，并继承默认外壳。
-- `_includes/site-header.html`：构建品牌入口、五个可直接访问的一级任务入口、按需增强的模块目录容器和项目阶段入口。
+- `_includes/site-header.html`：构建品牌入口、五个可直接访问的一级任务入口、按需增强的模块目录容器和项目时间线入口。
 - `_includes/project-timeline.html`：通用项目时间线渲染器，接收页面指定的数据对象并生成阶段列表。
 - `_includes/docs-rail.html`：构建时扫描当前 `manual_id` 的页面，直接输出可在无脚本环境阅读的文档栏，并作为移动目录的只读数据来源。
 - `_includes/site-footer.html`：根据页面 Front Matter 生成模块化页脚。
 - `_data/manuals.yml`：登记手册级名称、根路由、上级入口、面包屑和分组，不逐页复制目录链接。
 - `_data/navigation.yml`：登记顶部导航卡片与普通页面模块目录；Jekyll 同时生成一级入口和 `/assets/navigation-data.json`。
-- `_data/project_timeline.yml`：项目阶段、当前状态摘要和页头阶段入口的唯一人工配置源。
+- `_data/site_header.yml`：全站页头独立行动入口的唯一配置源，当前提供 `TIMELINE` 项目时间线入口。
+- `_data/project_timeline.yml`：项目阶段与当前状态摘要的唯一人工配置源，只服务承担进度说明职责的页面。
 - 普通正式 `.html` 使用 `layout: default` 并编写职责对应的 `<main>`；手册 `.md` 使用 `layout: manual` 并只编写 Markdown 正文，公开文件名由 `permalink` 确定。
 - `assets/site.mjs`：小型全站入口，只判断页面能力并按需加载 `assets/modules/*.mjs`；路由模型、数据仓库、顶部导航、模块目录、移动端状态和正文增强分别维护独立接口。`assets/theme.js` 在 CSS 加载前恢复全站 `Light / Dark / System` 选择，并负责持久化、系统主题监听和页脚菜单交互；`assets/images/` 保存经过裁切和压缩的站点图片。
 - `sitemap.md`：不带 Front Matter 的公开 Markdown 发现索引，也是唯一正式路由注册表；它不进入 Markdown 转换，由 Pages 工作流在 Jekyll 构建后原样加入 `/sitemap.md`，供读者和自动化工具按内容家族读取全部正式 HTML 路由、顺序和职责。README 不再复制路由表，质量测试直接以该文件核对源码与构建产物。
@@ -63,7 +64,9 @@ badges: ["Documentation"]
 
 ### 项目时间线配置与嵌入
 
-项目进度只编辑 `_data/project_timeline.yml`，不在页面或 JavaScript 中重复填写阶段节点。`current_stage_id` 必须对应 `items` 中唯一一个 `state: current` 的条目；可用状态为 `confirmed`、`current`、`next` 和 `future`。`header` 控制全站页头的无障碍标签、“4 字阶段名 + 阶段”状态卡片和值对应的目标页面，文字后的短活动轨道只表示正在进行，不表示完成百分比；`overview` 控制状态摘要与路线图入口，`current` 控制当前阶段摘要与事实栏，`items` 按书写顺序生成“已完成 / 正在进行 / 后续规划”时间线及对应计数。
+项目进度只编辑 `_data/project_timeline.yml`，不在页面或 JavaScript 中重复填写阶段节点。`current_stage_id` 必须对应 `items` 中唯一一个 `state: current` 的条目；可用状态为 `confirmed`、`current`、`next` 和 `future`。`overview` 控制状态摘要与路线图入口，`current` 控制当前阶段摘要与事实栏，`items` 按书写顺序生成“已完成 / 正在进行 / 后续规划”时间线及对应计数。项目阶段不进入全站页头，避免把内部研发进度误解成版本、页面或可用状态。
+
+全站页头的右侧行动入口只编辑 `_data/site_header.yml`。当前只显示 `TIMELINE` 并链接 `/development/current-stage.html`；不附加图形、Endem、当前阶段名或完成比例，让文字本身承担完整导航含义。
 
 需要嵌入时间线的普通 HTML 页面在 Front Matter 中声明 `timeline_data: "project_timeline"`，正文先通过 `site.data[page.timeline_data]` 取得配置，再调用 `{% raw %}{% include project-timeline.html timeline=timeline %}{% endraw %}`。Jekyll 会在每次本地构建和 `main` 分支 Pages 构建时自动生成最终 HTML；不需要手工维护构建产物。新增另一套时间线时可在 `_data/` 新建同结构 YAML，并把页面的 `timeline_data` 改为对应文件名。
 

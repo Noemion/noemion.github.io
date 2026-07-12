@@ -3,12 +3,6 @@ title: 项目进度时间线
 aria_label: Noemion 项目进度时间线
 current_stage_id: endem-specification-core-design
 
-header:
-  label: 当前阶段
-  value: Endem 规范设计阶段
-  href: /development/current-stage.html
-  title: 查看当前项目阶段与进度时间线
-
 overview:
   kicker: PROJECT / PROGRESS
   title: 项目状态概览

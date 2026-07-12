@@ -1041,16 +1041,12 @@ def validate_jekyll_sources():
         for token in (
             "data-global-nav",
             "global-directory-panel",
-            "data-portal-stage",
+            "data-site-timeline",
             "<span>导航</span>",
-            "global-stage-value",
-            "global-stage-progress",
-            "global-stage-text",
-            "data-stage-value",
-            "site.data.project_timeline",
-            "project_timeline.current_stage_id",
-            "project_timeline.header.href",
-            "current_stage.title",
+            "global-timeline-value",
+            "site.data.site_header.timeline",
+            "header_timeline.href",
+            "header_timeline.aria_label",
         ):
             if token not in header_text:
                 errors.append(f"site header missing global navigation contract: {token}")
@@ -1061,6 +1057,8 @@ def validate_jekyll_sources():
             "portal-primary-nav",
             "portal-stage-link",
             "portal-directory-panel",
+            "global-stage-",
+            "global-timeline-mark",
         ):
             if legacy_class in header_text:
                 errors.append(f"site header retains obsolete portal alias: {legacy_class}")
@@ -1120,10 +1118,7 @@ def validate_jekyll_sources():
             "@media(min-width:840px) and (max-width:999px)",
             "prefers-reduced-motion:reduce",
             "body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}",
-            ".global-stage-progress::after",
-            "width:38px;height:4px",
-            "@keyframes global-stage-progress-loop",
-            ".global-stage-progress::after{animation:none!important;opacity:1;transform:translateX(108%) scaleX(.74)}",
+            ".global-timeline-value{",
             "background:#fff",
             ".content-split{",
             ".content-split-reverse{",
@@ -1164,9 +1159,9 @@ def validate_jekyll_sources():
             "clip-path:polygon(0 0,74% 0,100% 26%,100% 100%,0 100%)",
             'body .global-brand{grid-column:1;min-width:0;overflow:hidden',
             'body .global-brand>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
-            'body[data-page-role="portal"] .global-header-inner{grid-template-columns:minmax(0,1fr) clamp(126px,39vw,154px) 84px}',
-            'body[data-page-role="portal"] .global-stage-link{width:100%;min-width:0;padding:10px 5px}',
-            'body[data-page-role="portal"] .global-stage-progress{width:22px}',
+            'body[data-page-role="portal"] .global-header-inner{grid-template-columns:minmax(0,1fr) clamp(102px,30vw,124px) 84px}',
+            'body[data-page-role="portal"] .global-timeline-link{width:100%;min-width:0;padding:10px 5px}',
+            'body[data-page-role="portal"] .global-timeline-value{width:100%;min-width:0;padding-inline:7px;font-size:10px;letter-spacing:.04em}',
         ):
             if token not in shared_css:
                 errors.append(f"shared styles missing site-wide design contract: {token}")
@@ -1185,9 +1180,11 @@ def validate_jekyll_sources():
         if "margin-left:300px" in shared_css:
             errors.append("content pages must not reserve a meaningless fixed 300px left gap")
         for obsolete_stage_motion in (
+            "global-stage-",
             "global-stage-pulse",
             "global-stage-text-flow",
             "global-stage-sheen",
+            "global-timeline-mark",
         ):
             if obsolete_stage_motion in shared_css:
                 errors.append(
@@ -1401,7 +1398,21 @@ def validate_jekyll_sources():
             errors.append("global navigation entries must route to unique project covers")
 
     timeline_config = SOURCE_ROOT / "_data/project_timeline.yml"
+    site_header_config = SOURCE_ROOT / "_data/site_header.yml"
     timeline_include = SOURCE_ROOT / "_includes/project-timeline.html"
+    if not site_header_config.exists():
+        errors.append("missing _data/site_header.yml")
+    else:
+        site_header_text = site_header_config.read_text()
+        for token in (
+            "timeline:",
+            "label: TIMELINE",
+            "href: /development/current-stage.html",
+            "aria_label: 查看 Noemion 项目时间线",
+            "title: 查看项目进度时间线",
+        ):
+            if token not in site_header_text:
+                errors.append(f"site header timeline configuration missing: {token}")
     if not timeline_config.exists():
         errors.append("missing _data/project_timeline.yml")
     else:
@@ -1423,21 +1434,14 @@ def validate_jekyll_sources():
             errors.append("project timeline must define exactly one current state")
         if not set(item_states) <= {"confirmed", "current", "next", "future"}:
             errors.append("project timeline contains an unsupported state")
-        if "href: /development/current-stage.html" not in timeline_text:
-            errors.append("project timeline header must route to the current stage page")
+        if re.search(r"^header:\s*$", timeline_text, re.MULTILINE):
+            errors.append("project timeline must not expose a global header stage interface")
         for overview_key in (
             "completed_label", "active_label", "planned_label",
             "current_label", "roadmap_label", "roadmap_href",
         ):
             if not re.search(rf"^  {overview_key}:\s*.+$", timeline_text, re.MULTILINE):
                 errors.append(f"project timeline overview requires {overview_key}")
-        header_value_match = re.search(r"^  value:\s*(.+?)\s*$", timeline_text, re.MULTILINE)
-        if (
-            header_value_match is None
-            or not header_value_match.group(1).endswith("阶段")
-            or len(header_value_match.group(1)) > 16
-        ):
-            errors.append("project timeline header value must remain concise and end with 阶段")
     if not timeline_include.exists():
         errors.append("missing _includes/project-timeline.html")
     else:
@@ -2051,21 +2055,20 @@ def main():
         ]
         if rendered_counts != expected_counts:
             errors.append("current stage overview counts must match configured timeline states")
-        configured_current = [stage for stage in configured_stages if stage[1] == "current"]
-        current_title = configured_current[0][2] if len(configured_current) == 1 else ""
-        configured_header_value_match = re.search(
-            r"^  value:\s*(.+?)\s*$", timeline_source_text, re.MULTILINE
+        site_header_source_text = (SOURCE_ROOT / "_data/site_header.yml").read_text()
+        configured_timeline_label_match = re.search(
+            r"^  label:\s*(.+?)\s*$", site_header_source_text, re.MULTILINE
         )
-        configured_header_value = (
-            configured_header_value_match.group(1)
-            if configured_header_value_match is not None
+        configured_timeline_label = (
+            configured_timeline_label_match.group(1)
+            if configured_timeline_label_match is not None
             else ""
         )
         for token in (
             'data-timeline-id="noemion-project-progress"',
-            f'aria-label="当前阶段：{current_title}"',
+            'aria-label="查看 Noemion 项目时间线"',
             'href="/development/current-stage.html"',
-            f'<strong class="global-stage-value" data-stage-value="{configured_header_value}"><span class="global-stage-text">{configured_header_value}</span><span class="global-stage-progress" aria-hidden="true"></span></strong>',
+            f'<strong class="global-timeline-value">{configured_timeline_label}</strong>',
             'class="project-progress-summary"',
             'class="progress-counts"',
             "项目状态概览",
