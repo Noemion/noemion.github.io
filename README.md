@@ -1,18 +1,18 @@
 # Noemion GitHub Pages
 
-本仓库是 [`Noemion/noemion.github.io`](https://github.com/Noemion/noemion.github.io) 的 Jekyll 源目录，发布于 <https://noemion.github.io/>。Noemion 是一套面向生成式计算的表征对象编译、链接与可信装载工具链；一级入口负责项目、架构、资源和开发信息，工具项目页介绍单个工具，只有实际存在的 `docs/` 子树承载手册式专题文档。
+本仓库是 [`Noemion/noemion.github.io`](https://github.com/Noemion/noemion.github.io) 的 Jekyll 源目录，发布于 <https://noemion.github.io/>。Noemion 只作为项目与新领域的品牌；站点公开定义 Endem、Weave、Frame、Witness、Core、Reader、Runner 与唯一 `endem` 应用，一级入口负责项目、架构、规范、资源和开发信息，`endem/docs/` 承载 CLI 使用手册。
 
 ## Jekyll 与发布
 
 - `_config.yml` 定义账户站点 URL、仓库身份、语言、Markdown 处理器和构建排除项；账户站点的 `baseurl` 必须保持为空。
 - `.github/workflows/pages.yml` 在 `main` 分支推送时先运行路由测试，再通过 GitHub 官方 Jekyll Pages Actions 构建 `_site`、原样加入公开 `sitemap.md` 并部署。
-- 当前 89 个正式页面由 Jekyll 处理：49 个普通页面使用 HTML 正文源，40 个手册/指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。
+- 全部正式页面由 Jekyll 处理：普通页面使用 HTML 正文源，手册与指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。页面数量以 `sitemap.md` 和质量测试的实际结果为准，不在 README 固定重复。
 - 本地构建基线固定为 `.ruby-version` 中的 Ruby 3.4.10 与 `Gemfile.lock` 中的 Bundler 2.6.9；当前工作区自带的系统 Ruby 不作为发布环境基线。macOS 已安装 Homebrew Ruby 时，先运行 `export PATH="$(brew --prefix ruby@3.4)/bin:$PATH"`，再运行 `bundle config set --local path vendor/bundle`、`bundle install` 和 `bundle exec jekyll build`。
 
 ## Jekyll 源码模型
 
 - `_layouts/default.html`：全站 HTML 外壳，负责语言、标题、共享 CSS/JavaScript、页面角色和正文插槽。
-- `_layouts/default.html` 同时根据正式路由写入 `data-site-module`；共享样式据此应用背景、架构、规范、组件、工具、指南、开发、资源和常见问题各自的几何母题，页面不手写模块样式。
+- `_layouts/default.html` 同时根据正式路由写入 `data-site-module`；共享样式据此应用背景、架构、规范、组件、Endem、指南、开发、资源和常见问题各自的几何母题，页面不手写模块样式。
 - `_layouts/manual.html`：手册布局，负责面包屑、Hero、正文容器、动态索引和上下页导航，并继承默认外壳。
 - `_includes/site-header.html`：品牌入口与空目录容器；具体目录由 `assets/directory.js` 按当前路由生成，项目阶段入口从统一时间线配置读取。
 - `_includes/project-timeline.html`：通用项目时间线渲染器，接收页面指定的数据对象并生成阶段列表。
@@ -21,20 +21,20 @@
 - `_data/manuals.yml`：登记手册级名称、根路由、上级入口、面包屑和分组，不逐页复制目录链接。
 - `_data/project_timeline.yml`：项目阶段、当前状态摘要和页头阶段入口的唯一人工配置源。
 - 普通正式 `.html` 使用 `layout: default` 并编写职责对应的 `<main>`；手册 `.md` 使用 `layout: manual` 并只编写 Markdown 正文，公开文件名由 `permalink` 确定。
-- `assets/`：继续维护现有视觉、目录引擎、动画和图形资源；`assets/theme.js` 在 CSS 加载前恢复全站 `Light / Dark / System` 选择，并负责持久化、系统主题监听和页脚菜单交互；`assets/catalog.js` 为大型聚合页提供渐进增强的搜索与分组筛选，关闭脚本时保留完整内容；`assets/images/` 保存经过裁切和压缩的站点图片，Jekyll 不改变其内容。
+- `assets/`：继续维护现有视觉、目录引擎、动画和图形资源；`assets/theme.js` 在 CSS 加载前恢复全站 `Light / Dark / System` 选择，并负责持久化、系统主题监听和页脚菜单交互；`assets/images/` 保存经过裁切和压缩的站点图片，Jekyll 不改变其内容。
 - `sitemap.md`：不带 Front Matter 的公开 Markdown 发现索引，也是唯一正式路由注册表；它不进入 Markdown 转换，由 Pages 工作流在 Jekyll 构建后原样加入 `/sitemap.md`，供读者和自动化工具按内容家族读取全部正式 HTML 路由、顺序和职责。README 不再复制路由表，质量测试直接以该文件核对源码与构建产物。
 
 ### 手册内容源与生成
 
-`docs/*.md` 与 `tools/*/docs/*.md` 是当前 40 个手册/指南页面的唯一正文源，由 Jekyll 通过专用文档布局生成现有 `.html` 公开路由。工具手册当前覆盖 `noesis`、`morphe`、`theoria` 与 `synthesis`：
+`docs/*.md` 与 `endem/docs/*.md` 是手册和指南页面的唯一正文源，由 Jekyll 通过专用文档布局生成 `.html` 公开路由。Endem 手册固定覆盖总览、格式、绑定、安全、运行与参考六类任务：
 
 - 作者只编辑 Markdown 正文和必要的 Front Matter，不编辑构建目录中的 HTML。
-- 源文件可由 `docs/getting-started.md` 生成 `/docs/getting-started.html`，由 `tools/synthesis/docs/contract.md` 生成 `/tools/synthesis/docs/contract.html`；公开 URL 与目录链接保持不变。
+- 源文件可由 `docs/getting-started.md` 生成 `/docs/getting-started.html`，由 `endem/docs/binding.md` 生成 `/endem/docs/binding.html`；公开 URL 只采用当前路由。
 - `<main>`、面包屑、文档 Hero、手册分页、固定左栏和页脚由 `_layouts/`、`_includes/` 与共享目录数据生成，不在每个 Markdown 文件中复制。
 - 正文只使用通用 Markdown 的标题、段落、列表、链接、引用、表格和围栏代码块；不写原始 HTML、Kramdown 专有属性或页面级 include。特殊视觉由共享布局和 CSS 根据标准生成元素统一呈现。
 - 仓库中不保留对应的手写 `.html` 源文件或双轨内容；质量测试按 Front Matter 的 `permalink` 校验 Markdown 源与正式 HTML 路由。
 
-本迁移同时覆盖跨项目 `docs/` 指南和工具 `tools/<tool>/docs/` 手册；工具项目入口 `tools/<tool>/index.html`、普通内容页和门户页不因本规则自动改为 Markdown。
+这一规则同时覆盖跨项目 `docs/` 指南和 `endem/docs/` 手册；Endem 应用入口 `endem/index.html`、普通内容页和门户页不因本规则自动改为 Markdown。仓库不保留旧工具树、旧命令页面、重定向或兼容别名。
 
 新增手册页面时，只需在对应目录创建 Markdown 并填写以下元数据；目录侧栏、移动目录、手册首页索引以及上一页/下一页会在构建时自动调整：
 
@@ -44,7 +44,7 @@ layout: manual
 title: "新专题 · 示例手册 · Noemion"
 page_role: "docs-topic"
 footer_text: "Noemion · example documentation"
-permalink: "/tools/example/docs/new-topic.html"
+permalink: "/docs/example-topic.html"
 manual_id: "example"
 manual_group: "start"
 manual_order: 2
@@ -70,17 +70,17 @@ badges: ["Documentation"]
 
 - `index.html`：项目门户，概括定位、能力、状态和主要入口。
 - `about/`：项目背景、动机、范围、非目标，以及思想与方法基础的采用边界。
-- `architecture/`：系统关系、对象生命周期、信任边界和开放问题。
-- `specifications/`：Noema IR（NIR）、Noema Object（NOBJ）、Horizon Object（HOBJ）等规范的权威来源与成熟度。
-- `components/`：Noesis Core、Noema Object System、Fulfillment Runtime、Horizon Engine 和 Agent Harness 等组件入口。
-- `tools/`：23 个工具的分类目录；`tools/<tool>/index.html` 是工具项目页。
-- `tools/<tool>/docs/`：仅在存在实质帮助手册时建立；目录内 Markdown 由 Jekyll 生成 HTML 手册页，工具项目入口本身继续使用 HTML。
-- `docs/`：保存入门、使用、架构、开发、工具和规范六类任务型文档；正文链接权威页面，不复制第二套规范。
+- `architecture/`：系统关系、Endem 生命周期、信任边界和开放问题；正式生命周期入口是 `/architecture/endem-lifecycle.html`。
+- `specifications/`：Endem、Weave 与 Witness 的权威规范和成熟度入口，正式路由分别是 `/specifications/endem.html`、`/specifications/weave.html` 与 `/specifications/witness.html`。
+- `components/`：Core、Reader 与 Runner 的职责和隔离边界，正式路由分别是 `/components/core.html`、`/components/reader.html` 与 `/components/runner.html`。
+- `endem/index.html`：唯一公开应用入口，介绍 `.endem`、八个动作、当前状态、信任边界和手册入口。
+- `endem/docs/`：唯一 CLI 使用手册；Markdown 生成总览、格式、绑定、安全、运行与参考六个正式 HTML 路由。
+- `docs/`：保存入门、使用、架构、开发、Endem 和规范六类任务型文档；正文链接权威页面，不复制第二套规范。
 - `downloads/`、`faq/`、`development/`、`news/`：资源状态、常见问题、开发入口和经确认的进展。
 
 ## 浏览与共享资源
 
-从 `index.html` 开始浏览。Jekyll 布局通过 `relative_url` 统一加载共享资源，正文内部继续使用与正式路由对应的相对链接。`assets/style.css` 与 `assets/directory.css` 由共享布局分别加载并携带同一构建版本，避免部署后主样式与导航样式命中不同缓存；目录的基础布局、折叠、高亮、响应式行为和滚动条在 `assets/directory.css` 中维护。`assets/directory.js` 同时承担目录渲染引擎和模块配置中心，根据当前路由选择项目、架构与对象、文档、资源、开发、工具、单个工具或工具文档目录。空目录容器只存在于共享 include，不在页面源码中复制导航链接。
+从 `index.html` 开始浏览。Jekyll 布局通过 `relative_url` 统一加载共享资源，正文内部继续使用与正式路由对应的相对链接。`assets/style.css` 与 `assets/directory.css` 由共享布局分别加载并携带同一构建版本，避免部署后主样式与导航样式命中不同缓存；目录的基础布局、折叠、高亮、响应式行为和滚动条在 `assets/directory.css` 中维护。`assets/directory.js` 同时承担目录渲染引擎和模块配置中心，根据当前路由选择项目、架构与制品、文档、资源、开发、Endem 应用或 Endem 手册目录。空目录容器只存在于共享 include，不在页面源码中复制导航链接。
 
 导航一致性以“可达”而不是“完全相同”为准：每个非门户页面至少提供返回直接上级 `index.html`、所属模块目录页或路由表登记的特定目录页的方式。面包屑、模块目录中的上级入口以及手册导航中的“上级”都可以承担这一职责。
 
@@ -92,7 +92,7 @@ badges: ["Documentation"]
 
 ## Noemion 全站设计系统
 
-桌面端统一使用约 1200px 居中连续画布、64px 顶部导航、近白纸面、细分隔线、大字号编辑式标题和高密度内容行；移动端按阅读顺序折叠为单列。布局围绕 Noemion 的对象语义、工程内容、图形、配色和成熟度语言建立，不以装饰削弱技术边界。
+桌面端统一使用约 1200px 居中连续画布、64px 顶部导航、近白纸面、细分隔线、大字号编辑式标题和高密度内容行；移动端按阅读顺序折叠为单列。布局围绕 Endem 领域的制品语义、工程内容、图形、配色和成熟度语言建立，不以装饰削弱技术边界。
 
 页面角色采用同一设计语言下的不同页面范式：`portal` 使用首页叙事；`section` 使用分组列表；`content` 使用编辑式文章；`tool-project` 使用主内容与状态面板；所有 `/docs/` 路由及 `docs-index`、`docs-topic` 使用固定文档栏和阅读区。所有顶部一级入口必须支持悬停与键盘聚焦展开，卡片标题、圆形箭头和表面提供一致反馈；按压缩放为 0.96，进入与状态切换支持减少动态效果。完整规则见 [`sitewide-design-system.md`](sitewide-design-system.md)，首页内容蓝图见 [`homepage-design.md`](homepage-design.md)。
 
@@ -100,33 +100,37 @@ badges: ["Documentation"]
 
 分析哲学相关视觉由 [`design-system/philosophical-visual-language.md`](design-system/philosophical-visual-language.md) 约束：只使用与项目直接相关的表达、命题、关系、对象和证据线图，不把哲学家肖像、古典装饰或名言当作技术内容。
 
-修改页面前从 [`design-system/README.md`](design-system/README.md) 进入设计路由，并按页面角色读取门户、目录、专题、工具项目、手册或共享组件对应文档。设计文档目录被 Jekyll 排除，不会生成公开站点页面。
+修改页面前从 [`design-system/README.md`](design-system/README.md) 进入设计路由，并按页面角色读取门户、目录、专题、Endem 应用、手册或共享组件对应文档。设计文档目录被 Jekyll 排除，不会生成公开站点页面。
 
-修改公开文案、组件名称、对象术语、工具命令、文件名或路由时，还必须遵循 [`design-system/language-and-naming.md`](design-system/language-and-naming.md)。核心命名由 [`design-system/adr-0001-noemion-nomenclature.md`](design-system/adr-0001-noemion-nomenclature.md) 决定：Noesis 表示确定性编译活动，Noema 表示编译后机器对象，Horizon 表示可按策略展开的背景与依赖，Fulfillment 表示结果验收和具体实现。哲学名称只说明问题结构，工程含义仍由规范、数据结构、不变量和测试定义。
+修改公开文案、组件名称、制品术语、动作、文件名或路由时，还必须遵循 [`design-system/language-and-naming.md`](design-system/language-and-naming.md)。Noemion 只作为品牌；Endem 是 `end` 与表示最小区别单位的 `-eme` 融合形成的新词，表示最小、独立有效且可验证的期望终态单元。正式扩展名为 `.endem`，唯一公开 CLI 为 `endem`。
 
-智能体工程采用 Agent Harness 作为 Fulfillment Runtime 外侧的控制平面，具体边界由 [`design-system/adr-0002-agent-harness-boundary.md`](design-system/adr-0002-agent-harness-boundary.md) 决定。它装配版本化上下文、暴露最小类型化能力、验证调用策略并收集观察与验收证据；它不属于确定性可信核心，也不能直接生成 NIR/NOBJ、修改签名对象或让模型自行扩大权限。
+每个 Endem 按固定顺序表达 `say`、`aim`、`must`、`done` 与 `open`。至少 `say`、`aim` 与 `done` 必须具有可定位内容；没有约束或未决项时，`must` 与 `open` 仍显式存在为空集合。字段是规范语义，不等于随意的五段文本；正式编码、类型和限制由 Endem 规范定义。
 
-工具链产物闭环与外部签名回填由 [`design-system/adr-0003-toolchain-artifact-flow.md`](design-system/adr-0003-toolchain-artifact-flow.md) 决定。主产物必须沿“来源 → NOBJ → 链接对象/HOBJ → Release Object → Release Coverage Proof → Unsigned Package Candidate → 外部签名回填 → Signed Noemion Package → Loaded State → Run Evidence → Evidence Closure Report → Acceptance Decision → 离线评估”流转；每项正式输入都必须有明确生产者，每项正式输出都必须有明确消费者或说明它只服务人工检查。
+Weave 是两个或更多 Endem 经符号、依赖、约束与内容身份解析后形成、可以确定性封装的组合闭包；单个自包含 Endem 不需要 Weave。Frame 是 sealed Endem 或 Weave 通过重新验证、策略和能力授予后形成的已装载运行态；Witness 是绑定明确主体、声明范围、方法、环境、结果和限制的证据。Witness 只支持声明范围内的判断，不能自动升级为最终验收。
 
-候选语义、会话能力和最终验收的分层由 [`design-system/adr-0004-candidate-capability-acceptance-boundary.md`](design-system/adr-0004-candidate-capability-acceptance-boundary.md) 决定。Candidate Envelope 不是 NIR，Capability Requirement 不是实时句柄，Candidate Assessment 也不是 Acceptance Decision；所有相关组件、工具、指南和测试必须保留这三条边界。
+主产物流按“来源 → `form` → Endem → `bind` → Weave → `pack` → 确定性封装 → `seal` → 发布信任包络 → `run` → Frame → Witness → 人工或确定性验收”组织。每项正式输入必须有明确生产者，每项正式输出必须有明确消费者或说明它只服务人工检查。
 
-技术长文、工具项目介绍和手册正文还必须读取 [`design-system/readability.md`](design-system/readability.md)。1200px 是连续画布而不是正文行宽：普通段落保持约 700–760px 阅读列，桌面正文采用 17–18px 与约 1.75–1.8 行高。需要利用右侧空间时，优先形成约 800px 主阅读列与约 380px 粘性信息栏，并从 Hero 起让信息栏持续承载章节目录、成熟度、可用状态、关键对象、输入输出或下一阅读入口；没有足够信息时使用单列，不为排版保留空栏。
+Core 负责确定性的 `form`、`check`、`bind` 与 `pack`；模型不得决定规范字节、内容身份或签名。`seal` 在确定性产物形成后由独立密钥权限域执行。`see` 背后的 Reader 必须与生产写入路径独立实现、保持只读且无写入/密钥/运行权限；`run` 背后的 Runner 必须位于独立最小权限域。统一 CLI 不能被描述成统一实现或统一权限。
+
+模型、检索与智能体控制位于确定性 Core 外部。模型只能提出不可信来源候选、计划和能力参数，不能修改已封装或已签名制品、删除 `open` 中的歧义、自行扩大 Runner 权限或宣告验收通过。控制平面负责版本化上下文、类型化能力、策略检查、观察反馈、预算与人工升级，并把结果记录为有范围的 Witness。
+
+技术长文、Endem 应用介绍和手册正文还必须读取 [`design-system/readability.md`](design-system/readability.md)。1200px 是连续画布而不是正文行宽：普通段落保持约 700–760px 阅读列，桌面正文采用 17–18px 与约 1.75–1.8 行高。需要利用右侧空间时，优先形成约 800px 主阅读列与约 380px 粘性信息栏，并从 Hero 起让信息栏持续承载章节目录、成熟度、可用状态、关键制品、输入输出或下一阅读入口；没有足够信息时使用单列，不为排版保留空栏。
 
 图片只在能增强概念解释、页面辨识或内容氛围时使用。选择顺序为许可清晰的素材库、经授权的项目素材、项目定制生成图；素材必须下载到仓库并压缩，不能依赖第三方热链。来源、许可、裁切焦点、替代文本和生成提示记录在 [`design-system/images.md`](design-system/images.md)，公开页面不暴露设计参考或模仿关系。
 
-23 个内部工具分别拥有独立视觉签名，详见 [`design-system/internal-tools.md`](design-system/internal-tools.md)。默认布局根据 `tools/<tool>/...` 路径自动写入 `data-tool-id`，共享 CSS 再应用对应的配色、对象面板签名、网格角度和强调状态；工具项目页不维护页面级 CSS。工具帮助手册继承工具强调色，但正文、目录和分页继续遵循统一手册规范。
+唯一 Endem 应用及八个动作的视觉签名见 [`design-system/internal-tools.md`](design-system/internal-tools.md)。默认布局可以按当前动作写入状态标识，共享 CSS 再应用有限的配色、制品面板签名、网格角度和强调状态；应用页不维护页面级 CSS。手册可以继承动作强调色，但正文、目录和分页继续遵循统一手册规范。视觉差异不得把动作伪装成独立产品。
 
-Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷、青蓝、朱橙和琥珀的光谱只标记来源、歧义、对象层与状态；黑色对象记录面板表示可检查的 NIR/NOBJ/HOBJ；等宽序号、状态脉冲和证据状态表达成熟度。任何装饰都不得取代权威性、失败语义和证据边界。
+Noemion 的视觉识别由“语义频谱”与 Endem 语言形成：薄荷、青蓝、朱橙和琥珀只标记 `say`、`open`、Endem/Weave 与 Witness/Frame 状态；黑色记录面板表示可检查的规范字段、引用、闭包和证据范围；等宽序号、状态脉冲和证据状态表达成熟度。任何装饰都不得取代权威性、失败语义和证据边界。
 
 全站统一品牌、字体、颜色、基础间距、面包屑和目录引擎；具体目录分组、正文结构、表格、清单、手册分页和状态展示由模块职责决定。模块可以共享布局组件，但不得为了视觉对称强行增加不适用的章节。
 
 普通专题页不再使用固定 300px 空白偏移，也不通过 `nth-of-type` 或 `:has()` 猜测版式。每个 HTML 章节显式使用 `content-split`、`content-stack`、`content-band`、`content-wide`、`content-grid` 或 `content-rows` 中的一种；需要镜像论证时才附加 `content-split-reverse`。同一页面组合多种节奏，1000px 以下按正文顺序折叠为单列。只有真实目录、项目状态或时间线摘要可以占据侧栏。
 
-运行测试前必须安装可从命令行调用的 Node.js。源码阶段验证 89 个页面的 Front Matter、固定路由、共享布局和目录注册；Jekyll 构建后，质量测试会直接检查 `_site` 中的最终 HTML，并加载同一份生产 `assets/directory.js`，验证模块覆盖、页面类型、工具文档高亮以及模块不会向全局对象暴露 API。
+运行测试前必须安装可从命令行调用的 Node.js。源码阶段按 `sitemap.md` 验证全部页面的 Front Matter、固定路由、共享布局和目录注册；Jekyll 构建后，质量测试直接检查 `_site` 中的最终 HTML，并加载同一份生产 `assets/directory.js`，验证模块覆盖、页面类型、Endem 手册高亮以及模块不会向全局对象暴露 API。
 
-每个 `kind=tool` / `data-page-role=tool-project` 页面都是项目入口而非手册：必须包含“项目 / 工具 / 当前工具”面包屑，以及“它解决什么问题”“当前状态”“它怎样工作”“它读取什么，产生什么”“它不会做什么”“继续阅读”六个语义章节。当前状态必须明确处于设计阶段、当前未发布可执行程序，并说明命令行接口、参数和文件扩展名尚未冻结；只有实际存在实质内容时才链接或创建工具 `docs/`。
+`endem/index.html` 是应用入口而非手册：必须包含“项目 / Endem”面包屑，以及“它解决什么问题”“当前状态”“它怎样工作”“它读取什么，产生什么”“它不会做什么”“继续阅读”六个语义章节。当前状态必须明确实现与发行成熟度；`.endem`、`endem` 和八个动作已经冻结，但未冻结的参数、字节布局和能力不得伪装成可用接口。只有实际存在实质内容时才链接对应 `endem/docs/` 专题。
 
-“继续阅读”章节以资源卡片结束，只承担规范、组件、开发路线、手册或工具目录的跳转职责；不得在卡片后追加孤立的候选接口、内部约束或重复状态段落。仍有必要公开的接口边界必须在“当前状态”或“它不会做什么”中用完整上下文说明。
+“继续阅读”章节以资源卡片结束，只承担规范、组件、开发路线、Endem 应用或手册目录的跳转职责；不得在卡片后追加孤立的候选接口、内部约束或重复状态段落。仍有必要公开的接口边界必须在“当前状态”或“它不会做什么”中用完整上下文说明。
 
 ## 内容质量与研究治理
 
@@ -134,7 +138,7 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 
 ### 全站可读性规则
 
-1. 页面先回答读者正在问什么、为什么重要和直接结论，再引入 Noema IR、Noema Object、Horizon Object、Deterministic Profile 和实现化等项目术语。
+1. 页面先回答读者正在问什么、为什么重要和直接结论，再引入 Endem、`say/aim/must/done/open`、Weave、Frame、Witness、Core、Reader 和 Runner 等项目术语。
 2. 缩写和专业词第一次出现时使用完整名称或直白解释；不能要求读者先理解整个 Noemion 体系才能读懂入口页。
 3. 抽象机制优先用一个具体问题、因果链、流程或对照关系解释，再进入结构、字段和不变量。
 4. 哲学概念只作为问题框架和工程启发；必须明确区分思想来源、工程类比、正式规范和验证证据，不能用哲学术语替代技术定义。
@@ -145,18 +149,18 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 9. 网站作为后续设计、实现和互操作工作的标准与规范入口，采用“直白解释 + 精确定义”双层表达；解释可以增加，但不得弱化规范术语、约束强度、不变量、失败语义、成熟度标记和权威来源。
 10. 外部书目、论文、规范、下载和其他资源链接必须显示原始 URL，不能只保留概括性标题；资源说明和可复制链接分开书写。站内导航继续使用明确的目标名称。
 11. 所有公开界面使用产品化语言，直接说明现状、能力、限制、开发计划和验证结果；不出现“本页”“阶段门”“证据门”“放行”“退出证据”或未解释的 IPD 等内部制作与管理术语。规范、安全和学术内容可以保留必要专业词，但首次出现要给出直白解释。
-12. 组件、工具和界面元素必须说明存在价值、与上下游的关系以及省略或合并条件；没有正式消费者的输出只能标为诊断、人工材料或候选接口，不能为了目录或视觉对称假装形成闭环。
+12. 组件、动作和界面元素必须说明存在价值、与上下游的关系以及省略或合并条件；没有正式消费者的输出只能标为诊断、人工材料或候选接口，不能为了目录或视觉对称假装形成闭环。
 
 ### 模块化内容规范
 
 | 模块或页面类型 | 应重点回答 | 不应强行套用 |
 | --- | --- | --- |
-| 项目门户与 `about/` | 项目背景、受众、问题、范围、非目标、原则、状态和主要入口 | 命令参数、对象字段或手册式逐章导航 |
-| `architecture/` 与 `components/` | 系统关系、职责分层、对象或控制流、存在必要性、上下游、信任与失败边界、关键决策和开放问题 | 发布资源清单、重复规范字段定义或没有消费者的形式组件 |
+| 项目门户与 `about/` | 项目背景、受众、问题、范围、非目标、原则、状态和主要入口 | CLI 参数、规范字段或手册式逐章导航 |
+| `architecture/` 与 `components/` | 系统关系、职责分层、制品或控制流、存在必要性、上下游、信任与失败边界、关键决策和开放问题 | 发布资源清单、重复规范字段定义或没有消费者的形式组件 |
 | `specifications/` | 权威来源、成熟度、术语、规范性要求、数据模型、不变量、错误语义、版本演进和一致性验证 | 营销承诺、未经批准的候选结论或使用指南式重复说明 |
 | 跨项目 `docs/` 指南 | 面向读者任务说明前置知识、背景、阅读或操作顺序、预期结果、常见误解、下一步和权威参考 | 复制第二套规范，或机械加入与任务无关的 IPD、专利和架构章节 |
-| 工具项目页 `tools/<tool>/index.html` | 在既定六个章节中说明问题、状态、工作方式、输入输出、边界和后续阅读入口 | GNU 手册章节编号、完整 CLI 手册或顺序分页 |
-| 工具 `docs/` 与专题页 | 按 GNU 手册方式组织目录、连续阅读路径、契约、调用语义、处理步骤、诊断、安全、测试、依赖和索引；只编写该工具实际需要的专题 | 为目录对称创建空页面，或把项目介绍反复复制到每个专题 |
+| Endem 应用页 `endem/index.html` | 在既定六个章节中说明问题、状态、八个动作、输入输出、Core/Reader/Runner/密钥边界和后续阅读入口 | GNU 手册章节编号、完整 CLI 手册或顺序分页 |
+| `endem/docs/` 与专题页 | 按 GNU 手册方式组织目录、连续阅读路径、格式、绑定、安全、运行、诊断、测试和参考；只编写唯一 CLI 实际需要的专题 | 为动作对称创建空页面，或把八个动作包装为独立产品 |
 | `downloads/` 资源页 | 真实资源状态、版本、格式或平台、大小、许可、来源、校验值、签名、SBOM、发布日期、撤回与归档信息 | 虚构下载按钮、仓库、版本、校验值或安装命令 |
 | `development/` | 路线图、已完成工作、当前工作、后续规划、规范/ADR 流程、测试、安全、贡献和报告渠道 | 把计划任务写成已完成能力，或把内部评审条件直接写给使用者 |
 | `news/` 与 `faq/` | 新闻记录日期、范围、证据、限制和下一决策点；FAQ 直接回答高频问题并链接权威页面 | 用占位公告制造历史，或在 FAQ 中重新定义技术规范 |
@@ -177,14 +181,14 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 
 ## 维护规则
 
-1. 内容修改只编辑权威专题页面；项目介绍、正式规范、开放问题和工具文档保持职责分离。
+1. 内容修改只编辑权威专题页面；项目介绍、正式规范、开放问题、Endem 应用页和 CLI 手册保持职责分离。
 2. 全局 HTML 外壳只编辑 `_layouts/default.html`，站点头部和页脚只编辑 `_includes/`；全局颜色和正文排版只编辑 `assets/style.css`，目录样式只编辑 `assets/directory.css`。禁止页面复制公共外壳、页面级 CSS、内联 `<style>` 或 `style=`。
 3. `assets/directory.js` 维护目录渲染和全部模块配置；模块目录可以拥有不同的内容与分组，但必须覆盖注册表中的全部 HTML 路由，并为每个页面选择正确的模块目录。新增模块目录时继续使用同一共享引擎，不在页面源码或 include 中复制目录链接。
-4. 每个工具的全部 HTML 页面只保存在 `tools/<tool>/`。工具 `index.html` 是项目页；只有存在实质专题文档时才创建 `docs/index.html` 与语义命名的专题页，不为空目录制造文档树。
+4. 唯一应用的全部页面只保存在 `endem/`。`endem/index.html` 是应用页；`endem/docs/` 只保留总览、格式、绑定、安全、运行和参考六类实质手册，不为动作制造独立产品树。
 5. 新增、删除、移动或改名页面时，同步 `sitemap.md`、`assets/directory.js`（仅当全局落地页变化）、受影响的模块目录、对应入口、顺序导航和全部交叉链接；每个非门户页面必须保留可用的上级或指定目录返回入口。
 6. 路由、目录和命名直接采用当前规范；不保留旧入口、旧路径、旧别名、重定向或兼容垫片。
 7. 每次路由或页面角色变更先运行 `python3 tests/site_quality_test.py` 检查 Jekyll 源码；完整本地发布检查在构建后执行 `cp sitemap.md _site/sitemap.md`，再运行 `python3 tests/site_quality_test.py _site`，确认最终 HTML、正式路由注册表、全局目录和页面角色一致。GitHub Pages 工作流自动执行同一复制步骤。
-8. 新增工具时创建 `tools/<tool>/index.html`，并同步 `tools/index.html`、`sitemap.md` 和全局目录的对应工具分类。
+8. 不新增并列公开工具。新增能力时先判断能否成为 `endem` 的现有动作、选项或内部组件；确有不可替代的新边界时先更新规范与 ADR，不能直接创建新的命令品牌或工具路由。
 9. 正式技术规范逐步迁移为 Markdown；HTML 保留为导航和设计总览。
 10. `docs/index.html` 的六个入口必须指向 `docs/` 下实际存在的任务型 HTML；这些页面负责解释和阅读路径，不替代权威规范。
 11. 网页改动完成并通过源码、Jekyll 构建、构建产物和浏览器验收后，默认继续提交、推送并确认 GitHub Pages 部署，再提供在线地址；只有用户明确要求不发布时才停留在本地。

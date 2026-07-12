@@ -1,6 +1,6 @@
 # ADR-0004：候选语义、能力调用与验收决定边界
 
-- 状态：已接受为架构设计原则
+- 状态：Retained in part by ADR-0008
 - 日期：2026-07-12
 - 影响范围：Horizon Engine、Noesis Core、Noema Object System、Agent Harness、Fulfillment Runtime、运行与评估工具
 

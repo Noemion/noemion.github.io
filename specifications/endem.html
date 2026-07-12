@@ -1,0 +1,77 @@
+---
+layout: default
+title: "Endem · 最小目标制品规范"
+page_role: "content"
+footer_text: "Noemion · Endem"
+permalink: "/specifications/endem.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>Endem</span></nav>
+  <div class="hero"><h1>Endem</h1><p>把一项自然语言目标、不可违反的边界、验收要求和未决语义保存为同一件可检查制品。</p><div class="badges"><span class="badge">Accepted Semantics</span><span class="badge">One Root Aim</span><span class="badge">Encoding Unfrozen</span></div></div>
+
+  <section class="content-stack">
+    <h2>Endem 表示什么</h2>
+    <p class="lead">Endem 是 Noemion 的最小目标制品。它描述“什么结果可以满足目标、哪些边界不得违反、怎样取得可审查依据、哪些意思还没有确定”，而不规定模型必须使用哪条提示、计划或推理过程。</p>
+    <p class="callout"><strong>最小不变量：</strong>一个 Endem 必须且只能有一个根 <code>aim</code>。如果来源同时要求两个可以独立完成、独立验收的目标，编译器必须形成两个 Endem，再由 Weave 组合；不得用数组包装绕过根目标唯一性。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>五组规范语义</h2>
+    <div class="table-wrap"><table><thead><tr><th>字段组</th><th>最低职责</th><th>主要拒绝条件</th></tr></thead><tbody>
+      <tr><td><code>say</code></td><td>来源身份、精确表达或内容摘要、语言、媒体类型、范围与版本。</td><td>范围越界、内容摘要不匹配、编码无效、来源无法重放。</td></tr>
+      <tr><td><code>aim</code></td><td>唯一根目标、结果种类、目标状态和预期产物角色。</td><td>零个或多个根目标、目标没有可识别结果、产物无消费者。</td></tr>
+      <tr id="must"><td><code>must</code></td><td>硬约束、能力需求与上限、禁止事项、作用域、冲突和未知策略。</td><td>硬约束被降级、实时句柄或凭据进入制品、未知被当作满足。</td></tr>
+      <tr id="done"><td><code>done</code></td><td>结果结构、验收条件、必需 Witness、失败状态和决定权威。</td><td>只给分数没有条件、必需依据不明确、模型被指定为唯一最终权威。</td></tr>
+      <tr id="open"><td><code>open</code></td><td>候选解释、冲突、缺口、风险、解决策略和有权绑定的主体。</td><td>只保留最高置信候选、无授权关闭歧义、未决项在状态变化中消失。</td></tr>
+    </tbody></table></div>
+    <p><code>say/aim/must/done/open</code> 是固定的顶层文本键与语义顺序；<code>must</code> 和 <code>open</code> 可以是显式空集合，其余三组必须含可定位内容。二进制记录编号和物理排布尚未冻结。实现可以为快速读取分区存储，但任何布局都必须恢复同一字段顺序与规范含义。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>来源与候选绑定</h2>
+    <div class="flow"><div class="step">来源表达</div><div class="step">候选与替代项</div><div class="step">规则重推导 / 授权绑定 / 保留 open</div><div class="step">确定性 form</div><div class="step">open Endem</div></div>
+    <ul>
+      <li>受控目标卡可以由版本化规则直接形成规范记录。</li>
+      <li>模型或外部系统只能提交绑定来源范围、替代项和证据的候选，不能直接写 Endem。</li>
+      <li>无法由规则重推导且没有授权决定的候选，必须保留在 <code>open</code> 或导致 <code>form</code> 失败。</li>
+      <li>来源忠实、结构合法和结果满足是三个不同命题；任何一步成功都不能替代后续判断。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>状态机</h2>
+    <div class="table-wrap"><table><thead><tr><th>状态</th><th>成立条件</th><th>允许的消费者</th><th>不能推导</th></tr></thead><tbody>
+      <tr><td><code>open</code></td><td>结构合法，但仍有未决语义、引用或确认事项。</td><td><code>check</code>、<code>see</code>、人工或授权绑定流程。</td><td>不能执行发布；不能假设 open 项会在运行中自动解决。</td></tr>
+      <tr><td><code>bound</code></td><td>必需引用、约束冲突、能力上限和验收关系都取得确定结果。</td><td><code>pack</code>、<code>see</code>、组合为 Weave。</td><td>不证明来源可信、当前环境授权或结果已完成。</td></tr>
+      <tr><td><code>sealed</code></td><td>发布载荷冻结，签名请求与外部响应精确匹配。</td><td><code>see</code>、隔离的 <code>run</code>。</td><td>签名有效不证明语义正确，也不授予实时能力。</td></tr>
+    </tbody></table></div>
+    <p>状态变化保持 Endem 的语义身份和来源链，但每次都会产生新的精确文件摘要。不得把旧状态字节当作新状态对象，也不得在 seal 后原地改写被签载荷。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>身份与完整性</h2>
+    <div class="table-wrap"><table><thead><tr><th>属性</th><th>用途</th><th>不得替代</th></tr></thead><tbody>
+      <tr><td>Exact Digest</td><td>对完整制品字节计算，支持内容寻址和复现比较。</td><td>语义等价、发布者身份或运行授权。</td></tr>
+      <tr><td>Semantic Key</td><td>在等价规则冻结后标识跨布局保持的目标与契约。</td><td>当前尚未冻结，不能提前宣称互操作。</td></tr>
+      <tr><td>Signature Envelope</td><td>在被签载荷之外绑定候选包、算法、签名者和策略。</td><td>结构、语义、权限和环境检查。</td></tr>
+      <tr><td>Witness Link</td><td>把来源、绑定、构建、签名和运行依据关联到制品身份。</td><td>Witness 内容真实或任务最终通过。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-rows">
+    <h2>安全读取与资源限制</h2>
+    <ul>
+      <li>所有 offset、length、count、index、alignment、解压大小和累计预算使用 checked arithmetic。</li>
+      <li>读取器必须先验证目录和资源上限，再分配或解释大型载荷。</li>
+      <li>未知且影响 aim、must、done、open、状态、权限、绑定或完整性的关键记录必须拒绝。</li>
+      <li>未知可选调试记录可以跳过，但跳过不得把失败对象提升为 bound 或 sealed。</li>
+      <li>解析失败不产生部分可信 Endem；诊断必须定位到字节范围、记录或字段组。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>当前成熟度</h2>
+    <p>一个根 aim、五组语义、三个状态、<code>.endem</code> 扩展名、来源候选边界和安全读取原则已经采用。物理编码、文本语法、字段宽度、魔数、记录编号、压缩、摘要和签名算法仍需规范向量、两个读取实现和对抗测试。</p>
+  </section>
+  <div class="next-prev"><a href="index.html">← 规范参考指南</a><a href="weave.html">Weave 规范 →</a></div>
+</main>

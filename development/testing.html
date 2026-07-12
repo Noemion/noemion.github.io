@@ -7,83 +7,64 @@ permalink: "/development/testing.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>测试与验证</span></nav>
-  <div class="hero"><h1>测试与验证</h1><p>说明对象安全、确定性编译、语义保真、链接、披露、信任和模型候选需要通过哪些测试。</p><div class="badges"><span class="badge">畸形样例</span><span class="badge">往返转换</span><span class="badge">模糊测试</span></div></div>
-  <section class="content-rows">
-    <h2>安全与拒绝路径</h2>
-    <p class="callout"><strong>读懂测试结论：</strong>“合法样例通过”只证明一条成功路径；安全核心还必须证明畸形、冲突、越权、超限和不完整输入能够稳定、快速且无部分产物地失败。</p>
-    <ul>
-      <li>对象解析测试覆盖非法偏移、长度、计数、索引、对齐、重叠、整数溢出、循环引用、超深图和恶意大计数。</li>
-      <li>签名与完整性测试覆盖错误范围、错误 Merkle Proof、篡改、回滚和撤销。</li>
-      <li>每个验证层独立报告；未执行或未通过的层不能被描述为通过。</li>
-      <li>错误输入必须关闭失败，且诊断能定位到规范条款以及字节、记录或节点位置。</li>
-    </ul>
-  </section>
-  <section class="content-rows">
-    <h2>编译与复现</h2>
-    <ul>
-      <li>基准样例、规范化文本往返转换、类型错误、约束冲突和覆盖缺口。</li>
-      <li>生产 Reader/Writer 与不共享解析代码的独立 Reader 使用同一字节向量，逐字段比较解释、限制和失败分类。</li>
-      <li>相同输入、工具版本和规范化构建环境的对象字节级复现；工具二进制复现与发布者签名真实性分别报告。</li>
-      <li>至少在两个工作目录和两个隔离环境重复构建；归档顺序、locale、时区、固定构建纪元和临时路径不能污染结果。</li>
-      <li>对象差异工具必须区分布局、调试、信任元数据和运行语义变化。</li>
-    </ul>
-  </section>
-  <section class="content-rows">
-    <h2>设计方案：语义与覆盖测试</h2>
-    <ul>
-      <li>Source-to-NIR 蕴含检查、反编译摘要和 Semantic Mutation Testing。</li>
-      <li>逐来源单元验证目标、硬约束、条件、例外、路由、依赖和歧义得到保留。</li>
-      <li>无法理解、冲突和未分类输入阻断发布；模型置信度不能替代覆盖证据。</li>
-      <li>披露测试同时验证必需内容完整和无关节点最小化。</li>
-    </ul>
-  </section>
-  <section class="content-rows">
-    <h2>设计方案：链接、HOBJ 与 Fulfillment Runtime</h2>
-    <ul>
-      <li>local/export/import、必需/可选依赖、ID 重映射、约束可满足性、权限交集和语义冲突矩阵。</li>
-      <li>主 HOBJ 与必需依赖闭包完整；可选依赖缺失行为明确。</li>
-      <li>strip 前后语义图、硬约束、依赖、验收契约和披露行为满足规范化属性等价；只有等价规则冻结后才比较运行语义哈希。</li>
-      <li>预算不足、披露越权、会话重放和状态漂移必须安全拒绝或重新同步。</li>
-    </ul>
-  </section>
-  <section class="content-rows">
-    <h2>设计方案：Agent Harness 验证</h2>
-    <ul>
-      <li>上下文测试验证版本、来源、适用范围、失效链接和逐步披露，不允许临时提示静默覆盖规范。</li>
-      <li>能力测试覆盖参数结构、最小权限、读写分离、幂等性、副作用、提示注入和被污染的工具返回。</li>
-      <li>反馈测试让智能体读取真实 UI 状态、日志、指标、追踪和测试结果，完成故障复现、修复验证和结果对照。</li>
-      <li>恢复测试覆盖工具失败、环境漂移、重复失败、预算耗尽、状态冲突和需要人工判断的分支。</li>
-      <li>端到端验收同时检查任务结果、过程合规和证据完整；智能体自述成功不能作为验收证据。</li>
-    </ul>
-  </section>
-  <section class="content-rows">
-    <h2>外部协议与模型适配测试</h2>
-    <ul>
-      <li>MCP/A2A 适配覆盖协议版本不兼容、未知必需字段、恶意 Tool/Agent Card、schema 欺骗、任务状态伪造与静默降级。</li>
-      <li>授权测试覆盖 token audience、精确资源绑定、token passthrough、confused deputy、SSRF、重放、取消竞态和重复执行幂等性；仅在 OAuth Authorization Code Grant 用例中按客户端类型验证 PKCE。</li>
-      <li>结构化输出测试必须包含完全符合 schema 但事实错误、引用悬空、跨字段冲突或权限越界的候选。</li>
-      <li>模型和 Agent 任务执行多次独立运行，报告成功率、置信区间、模型/工具/策略身份和失败切片；seed 或 temperature=0 不作为跨版本确定性证明。</li>
-      <li>LLM 评价器只能产生 advisory assessment；机器 accepted 由确定性验证器形成，需要价值判断时由具名外部权威签署。</li>
-    </ul>
-  </section>
-  <section class="content-band">
-    <h2>模糊测试从第一天开始</h2>
-    <p>模糊测试至少覆盖 NOBJ/HOBJ 读取器、文本与 NSL Parser、重定位、证据账本、披露图、依赖闭包、Strip 和 Merkle Validator，并限制资源占用、递归深度和压缩扩张。完整性负向样例必须包含“攻击者修改载荷并同步重算对象内 Integrity Root”：在缺少受信外部 Exact File Digest、Package Subject Digest 或签名绑定时，该对象最多保持内部自洽，绝不能提升为可信状态。</p>
-  </section>
-  <section class="content-band">
-    <h2>后续计划：模型与跨平台矩阵</h2>
-    <p>Horizon Engine 阶段增加来源隔离、困难负例、歧义、OOD、跨块关系、错误确定率、校准和量化退化；Agent Harness 阶段增加任务成功、越权拒绝、工具污染、长时恢复和人工升级测试；稳定阶段增加平台矩阵、性能预算和双构建复现。具体阈值须由基线与 ADR 决定。</p>
-  </section>
-  <section class="content-wide">
-    <h2>证据等级与研究复现</h2>
-    <div class="table-wrap"><table><thead><tr><th>等级</th><th>适用结论</th><th>最低材料</th></tr></thead><tbody>
-      <tr><td>示例</td><td>说明接口或候选语义</td><td>明确输入、预期输出和非规范声明</td></tr>
-      <tr><td>回归</td><td>证明已知行为未被破坏</td><td>固定语料、版本、断言和失败诊断</td></tr>
-      <tr><td>性质与安全</td><td>支持不变量和拒绝路径</td><td>属性测试、模糊测试、资源限制、畸形与对抗案例</td></tr>
-      <tr><td>互操作</td><td>支持配置或标准化主张</td><td>至少两个独立实现或独立验证器、共享向量和差异报告</td></tr>
-      <tr><td>研究实验</td><td>支持论文或模型效果结论</td><td>假设、基线、数据许可、切分、消融、统计不确定性和失败分析</td></tr>
-    </tbody></table></div>
-    <p>任何公开结果都应记录规范与工具版本、构建环境、随机性控制、硬件、原始数据摘要和复现实验步骤。内部通过但材料不可复现的结果不能升级为标准化或科学结论。</p>
-  </section>
+  <div class="hero"><h1>测试与验证</h1><p>Endem、Weave 与 Runner 只有通过明确失败路径，才能获得对应范围的信任。</p><div class="badges"><span class="badge">Malformed Corpus</span><span class="badge">Cross-reader</span><span class="badge">Reproducible</span></div></div>
+
+  <section class="content-rows"><h2>解析与资源安全</h2><p class="callout"><strong>基本规则：</strong>“合法样例通过”只证明一条成功路径。畸形、冲突、越权、超限和不完整输入必须稳定、快速且不产生部分可信结果地失败。</p><ul>
+    <li>覆盖非法偏移、长度、计数、索引、对齐、重叠、环、自引用、超深图、压缩炸弹和恶意大计数。</li>
+    <li>所有加法、乘法、对齐与区间端点使用 checked arithmetic；超限与溢出是规范错误，不是崩溃。</li>
+    <li>未知 critical 结构拒绝，未知 optional 结构按规范跳过并保留诊断；读取受字节、节点、深度、内存和时间预算约束。</li>
+    <li>错误必须定位到条款 ID 与字节、记录或语义路径；任何未执行层都不能被描述为通过。</li>
+  </ul></section>
+
+  <section class="content-rows"><h2>形成、往返与复现</h2><ul>
+    <li>相同 <code>say/aim/must/done/open</code>、来源决定、profile 和固定依赖产生完全相同的 Endem 字节。</li>
+    <li>规范文本 → Endem → 规范文本往返保持规范化等价；非规范空白或排列差异不得改变身份。</li>
+    <li>分别报告 Endem 字节复现、工具二进制复现和发布签名真实性；三者不能相互替代。</li>
+    <li>至少在两个工作目录和两个隔离环境构建；locale、时区、临时路径、归档顺序和时间戳不得污染结果。</li>
+  </ul></section>
+
+  <section class="content-rows"><h2>双读取器契约</h2><ul>
+    <li>生产 Reader 直接读取实际字节并可在全部检查通过后产生内部 verified handle。</li>
+    <li><code>endem see</code> 使用不共享解析代码的独立 Reader，只输出有界视图、差异、引用、大小与 trace。</li>
+    <li>两者对共享向量逐字段比较解释、上限和失败分类；查看器输出、符号列表或 pretty print 永不回流生产信任链。</li>
+    <li>差异必须被视为实现或规范缺陷，不能用“多数实现一致”掩盖。</li>
+  </ul></section>
+
+  <section class="content-rows"><h2>语义与歧义保留</h2><ul>
+    <li>逐来源单元验证明示目标、硬约束、禁止事项、例外、验收和未决分支得到保留。</li>
+    <li>语义变异测试分别删除、翻转或弱化一条 <code>must</code>/<code>done</code>，确认身份或验证结论发生预期变化。</li>
+    <li>模型置信度不能关闭 <code>open</code>；只有规则可重推导或具名 Source Binding Decision 才能确认语义。</li>
+    <li>一个 Endem 只能有一个根 <code>aim</code>；多目标组合必须通过显式引用进入 Weave。</li>
+  </ul></section>
+
+  <section class="content-rows"><h2>绑定、发布与签名</h2><ul>
+    <li>引用可见性、版本、必需/可选依赖、ID 重映射、约束可满足性、权限交集和冲突矩阵全部有正反向量。</li>
+    <li>链接顺序不改变规范结果；任何能力合并只能保持或收窄上限。</li>
+    <li><code>pack</code> 前后 aim、must、done、open、依赖与披露行为保持规范等价；Debug Companion 有独立访问与生命周期。</li>
+    <li>私钥始终在外部签名系统；签名响应必须精确匹配请求、主体摘要、策略和发行身份。</li>
+  </ul></section>
+
+  <section class="content-rows"><h2>Runner、Harness 与 Witness</h2><ul>
+    <li>Runner 重新验证收到的实际 Weave 字节，不信任此前路径名、查看输出或缓存结论。</li>
+    <li>Harness 独占实时能力句柄，覆盖最小权限、读写分离、幂等、副作用、提示注入、污染返回和 confused deputy。</li>
+    <li>模型只能产生候选和能力请求；确定性策略决定调用，真实观察返回会话，具名权威或机器规则决定验收。</li>
+    <li>Witness 绑定 Endem/Weave、环境、策略、事件链、证据范围和决定；证据缺失必须得到 pending、failed 或人工升级，而不是 accepted。</li>
+    <li>恢复测试覆盖工具失败、环境漂移、重复失败、预算耗尽、取消竞态、状态冲突和人工判断分支。</li>
+  </ul></section>
+
+  <section class="content-rows"><h2>模型与协议适配</h2><ul>
+    <li>MCP/A2A gateway 覆盖版本不兼容、未知必需字段、恶意工具/Agent 描述、schema 欺骗、状态伪造与静默降级。</li>
+    <li>结构化输出测试必须包含 schema 合法但事实错误、引用悬空、跨字段冲突或权限越界的候选。</li>
+    <li>模型任务执行多次独立运行，报告成功率、置信区间、模型/工具/策略身份和失败切片；seed 或 temperature=0 不是跨版本确定性证明。</li>
+    <li>模型评价器只产生 advisory assessment；机器 accepted 来自确定性规则，需要价值判断时由具名外部权威签署。</li>
+  </ul></section>
+
+  <section class="content-wide"><h2>证据等级</h2><div class="table-wrap"><table><thead><tr><th>等级</th><th>支持什么</th><th>最低材料</th></tr></thead><tbody>
+    <tr><td>示例</td><td>解释候选语义</td><td>输入、预期输出、非规范声明</td></tr>
+    <tr><td>回归</td><td>已知行为未被破坏</td><td>固定语料、版本、断言、失败诊断</td></tr>
+    <tr><td>性质与安全</td><td>不变量与拒绝路径</td><td>属性测试、模糊测试、资源限制、对抗案例</td></tr>
+    <tr><td>互操作</td><td>格式或配置主张</td><td>至少两个独立实现、共享向量、差异报告</td></tr>
+    <tr><td>研究实验</td><td>模型或系统效果</td><td>假设、基线、数据许可、消融、统计不确定性、失败分析</td></tr>
+  </tbody></table></div></section>
   <div class="next-prev"><a href="implementation-roadmap.html">← 开发路线图</a><a href="../architecture/open-questions.html">开放问题 →</a></div>
 </main>

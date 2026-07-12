@@ -1,11 +1,11 @@
 id: noemion-project-progress
 title: 项目进度时间线
 aria_label: Noemion 项目进度时间线
-current_stage_id: specification-binary-core-design
+current_stage_id: endem-specification-core-design
 
 header:
   label: 当前阶段
-  value: 规范设计阶段
+  value: Endem 规范设计阶段
   href: /development/current-stage.html
   title: 查看当前项目阶段与进度时间线
 
@@ -20,43 +20,43 @@ overview:
   roadmap_href: /development/implementation-roadmap.html
 
 current:
-  summary: 项目范围、非目标和信任原则已经形成公开说明。当前工作是收敛 Noema IR、Noema Object 与 Horizon Object 的最小规范，并定义安全读取器、对象写入器和验证器的接口；随后才开始实现安全对象核心。
+  summary: 项目已冻结 Endem 领域词汇与单一应用拓扑。当前工作是定义 say、aim、must、done、open 的最小规范、规范编码、资源上限、错误语义与正反向量；随后才实现 form、check、独立 see 和 test。
   facts:
     - label: 已完成
-      value: 项目范围与信任原则设计
+      value: Endem 词汇与应用拓扑决定
     - label: 正在进行
-      value: 对象规范与安全核心设计
+      value: 最小语义与安全编码规范
     - label: 后续工作
-      value: Reader/Writer 与验证器实现
+      value: form/check/see/test 纵向切片
 
 items:
   - id: scope-and-trust
     state: confirmed
     label: 已完成
     title: 项目定位与信任原则设计
-    description: 已完成项目定位、非目标、Deterministic 无模型边界、模型输出不可信、对象输入不可信和歧义保留原则的公开设计。
-  - id: object-and-toolchain-boundaries
+    description: 已完成范围、非目标、无模型确定性、模型与对象输入不可信、歧义保留和证据验收原则。
+  - id: endem-vocabulary-topology
     state: confirmed
     label: 已完成
-    title: 核心对象与工具链职责划分
-    description: 已完成 Noema IR、Noema Object、Horizon Object、Noesis Core、Noema Object System、Agent Harness 与 Fulfillment Runtime 的职责划分和公开架构设计说明。
-  - id: specification-binary-core-design
+    title: Endem 词汇与单一应用拓扑
+    description: 已将旧对象与工具家族收敛为 Endem、Weave、Frame、Witness 和唯一公开 CLI endem；旧入口不保留兼容别名。
+  - id: endem-specification-core-design
     state: current
     label: 正在进行
-    title: 最小规范与安全二进制核心设计
-    description: 正在收敛对象语义、格式边界、错误语义、资源限制、checked arithmetic、不变量，以及合法与畸形样本的最低集合。
-  - id: secure-binary-core-validation
+    title: 最小规范与安全核心设计
+    description: 正在收敛五字段语义、编码边界、错误语义、checked arithmetic、资源限制、不变量和合法/畸形样本。
+  - id: endem-core-validation
     state: next
     label: 计划开发
-    title: 安全二进制核心实现与验证
-    description: 计划实现 Checked Reader/Writer、结构验证器、Round-trip、Malformed 与 Fuzz 拒绝路径，并形成可重复验证结果。
-  - id: strict-compile-and-link
+    title: form/check/see/test 纵向切片
+    description: 计划实现规范 Writer、生产 Reader、独立只读 Reader、往返、恶意语料、模糊测试和双环境复现。
+  - id: weave-binding-release
     state: future
     label: 后续规划
-    title: 文本 IR、Deterministic 编译与链接
-    description: 规划规范化文本往返、确定性 Noesis Core、符号解析、重定位、归档、依赖闭包和链接一致性工作。
-  - id: trusted-load-and-assisted
+    title: Weave 组合与外部签名发布
+    description: 只有真实多 Endem 消费者成立后，才开发 bind、pack、seal、冲突矩阵、固定依赖和 Debug Companion。
+  - id: controlled-run
     state: future
     label: 后续规划
-    title: 可信装载、发布与模型辅助
-    description: 规划发布闭包、外部签名回填、可信装载、Agent Harness、最小 Fulfillment Runtime，以及只提交不可信候选的模型辅助输入。
+    title: Frame、Runner 与 Witness
+    description: 先用规则型后端验证重新装载、能力控制、真实观察、证据闭包和验收分层，随后再评估模型及外部协议适配。

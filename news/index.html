@@ -7,39 +7,12 @@ permalink: "/news/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>项目动态</span></nav>
-  <div class="hero"><h1>项目动态</h1><p>记录已经发生的里程碑、规范变更和发布状态；每条记录都链接到可以核对的项目资料。</p><div class="badges"><span class="badge">Development</span><span class="badge">No Release Yet</span></div></div>
-  <section>
-    <h2>发布状态</h2>
-    <p class="callout warning">目前没有正式版本公告，也没有可报告的发行版本号或发布日期。这里仅汇总能够从项目页面核验的设计和开发进展。</p>
-    <nav class="catalog-controls" aria-label="进展分类">
-      <a class="catalog-filter" href="#project-progress">项目进展</a>
-      <a class="catalog-filter" href="#spec-progress">规范进展</a>
-      <a class="catalog-filter" href="#verification-progress">验证进展</a>
-    </nav>
-  </section>
-  <section>
-    <h2>进展记录</h2>
-    <p>Noemion 当前处于规范与安全二进制核心设计阶段。以下入口分别说明已经完成的工作、正在推进的内容和下一步计划。</p>
-    <div class="news-ledger">
-      <a class="news-record" id="project-progress" href="../development/current-stage.html">
-        <span class="news-record-art" aria-hidden="true"><b>PROJECT / STATUS</b></span>
-        <span class="news-record-copy"><small>CURRENT DEVELOPMENT</small><strong>项目阶段与实际进度</strong><span>查看已经完成的设计、正在推进的安全核心工作和后续项目计划。</span></span>
-        <span class="news-record-arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="news-record" id="spec-progress" href="../specifications/index.html">
-        <span class="news-record-art" aria-hidden="true"><b>NIR / NOBJ / HOBJ</b></span>
-        <span class="news-record-copy"><small>SPECIFICATION STATUS</small><strong>对象规范与成熟度</strong><span>核对 NIR、NOBJ 和 HOBJ 的当前权威状态、开放问题与后续收敛方向。</span></span>
-        <span class="news-record-arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="news-record" id="verification-progress" href="../development/testing.html">
-        <span class="news-record-art" aria-hidden="true"><b>TEST / VERIFY</b></span>
-        <span class="news-record-copy"><small>VERIFICATION PLAN</small><strong>测试、安全与一致性工作</strong><span>查看确定性测试、畸形样例输入、模糊测试、安全拒绝路径和跨工具一致性计划。</span></span>
-        <span class="news-record-arrow" aria-hidden="true">↗</span>
-      </a>
-    </div>
-  </section>
-  <section>
-    <h2>研究与公开披露边界</h2>
-    <p>论文、专利或标准提案只有在具备相应实验、贡献记录、许可、权属和现有技术分析后才会单独公告。当前没有已经发表、授权、登记或被标准组织采纳的成果。</p>
-  </section>
+  <div class="hero"><h1>项目动态</h1><p>只记录可由 ADR、规范、测试或发布物核对的进展。</p><div class="badges"><span class="badge">Development</span><span class="badge">No Release Yet</span></div></div>
+  <section><h2>发布状态</h2><p class="callout warning">目前没有正式软件版本、规范版本或发行日期。</p></section>
+  <section><h2>最新架构里程碑</h2><div class="news-ledger">
+    <a class="news-record" href="../architecture/adr-0008-endem-system.html"><span class="news-record-art" aria-hidden="true"><b>ENDEM / ACCEPTED</b></span><span class="news-record-copy"><small>NAMING &amp; TOPOLOGY</small><strong>创造 Endem，并收敛为一个应用入口</strong><span>最小目标制品采用 Endem；公开应用采用 endem；旧对象缩写与 23 个并列工具入口被一次性替代。</span></span><span class="news-record-arrow" aria-hidden="true">↗</span></a>
+    <a class="news-record" href="../development/current-stage.html"><span class="news-record-art" aria-hidden="true"><b>PROJECT / STATUS</b></span><span class="news-record-copy"><small>CURRENT DEVELOPMENT</small><strong>最小语义与安全编码规范</strong><span>当前收敛五字段不变量、错误、上限、规范字节和正反向量。</span></span><span class="news-record-arrow" aria-hidden="true">↗</span></a>
+    <a class="news-record" href="../development/testing.html"><span class="news-record-art" aria-hidden="true"><b>TEST / VERIFY</b></span><span class="news-record-copy"><small>VERIFICATION PLAN</small><strong>双 Reader 与恶意输入验证</strong><span>第一纵向切片必须通过独立解释、模糊测试、资源限制和双构建复现。</span></span><span class="news-record-arrow" aria-hidden="true">↗</span></a>
+  </div></section>
+  <section><h2>研究与披露边界</h2><p>论文、专利、软著或标准提案只有在具备对应实验、贡献、许可、权属和现有技术分析后才单独公告；当前没有已经发表、授权、登记或被标准组织采纳的成果。</p></section>
 </main>

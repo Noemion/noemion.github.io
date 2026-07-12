@@ -2,19 +2,15 @@
 
 本目录是修改站点页面、共享布局、目录和交互动效时的设计路由入口。开始改动前，先根据目标文件或 `page_role` 读取下表指定文档；涉及多个角色时读取所有对应文档。
 
-修改任何公开文案、组件名称、对象术语、工具名称、文件名或路由时，还必须读取 [`language-and-naming.md`](language-and-naming.md)；核心命名决定见 [`adr-0001-noemion-nomenclature.md`](adr-0001-noemion-nomenclature.md)。
+修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、五字段、Weave、Frame、Witness、Core、Reader、Runner、八个动作和唯一 CLI 是当前命名基线，设计文档不得引入旧名称或兼容入口。
 
-修改工具命令名、工具路由或“项目品牌—命令品牌”关系时，还必须读取 [`adr-0005-independent-tool-names.md`](adr-0005-independent-tool-names.md)。
+修改 `.endem`、`say/aim/must/done/open`、引用、内容身份、规范排序、封装布局或构建证据排布时，先读取当前 Endem、Weave 和 Witness 规范，再读取这些规范链接的活跃 ADR。历史 ADR 的旧词只用于解释决策迁移，不得重新进入公开接口。
 
-修改 NIR 逻辑记录、NOBJ Header、Section/Segment、符号、重定位、来源或构建证据排布时，还必须读取 [`adr-0006-nir-nobj-structural-baseline.md`](adr-0006-nir-nobj-structural-baseline.md)。
+修改 Endem 生命周期、Core/Reader/Runner 隔离、独立读取路径、GNU 工具链采用范围或外部 AI 协议落点时，先读取 `/architecture/endem-lifecycle.html`、对应组件页面和它们链接的活跃 ADR。
 
-修改首个实现仓库、Phase 0/1 纵向切片、独立读取器、GNU 工具链采用范围或外部 AI 协议落点时，还必须读取 [`adr-0007-phase0-implementation-baseline.md`](adr-0007-phase0-implementation-baseline.md)。
+修改 `form/check/bind/pack/seal/see/run/test` 的输入输出、失败语义、发布闭包、签名回填或跨组件消费者关系时，先读取 [`internal-tools.md`](internal-tools.md)、Endem 手册与活跃产物流 ADR。
 
-修改智能体上下文、能力接口、反馈循环、运行证据或人工升级边界时，还必须读取 [`adr-0002-agent-harness-boundary.md`](adr-0002-agent-harness-boundary.md)。
-
-修改工具输入输出、发布闭包、签名回填、运行产物或跨工具消费者关系时，还必须读取 [`adr-0003-toolchain-artifact-flow.md`](adr-0003-toolchain-artifact-flow.md)。
-
-修改模型候选升级、运行能力、候选评价、证据闭包或最终验收决定时，还必须读取 [`adr-0004-candidate-capability-acceptance-boundary.md`](adr-0004-candidate-capability-acceptance-boundary.md)。
+修改模型候选、上下文装配、能力接口、反馈循环、Frame、Witness 或人工升级边界时，必须同时读取 Reader、Runner 与 Witness 规范以及相关活跃 ADR。任何设计都不得让模型决定规范字节、删除 `open`、扩大能力或宣告最终验收。
 
 全局原则、品牌语言、断点和验收基线见 [`../sitewide-design-system.md`](../sitewide-design-system.md)。本目录文档负责把这些原则落实到具体页面类型，不能改变 Noemion 的成熟度、权威性或证据边界。
 
@@ -26,15 +22,15 @@
 | 首页门户 | `page_role: portal`、`index.html` | [`portal.md`](portal.md)、[`../homepage-design.md`](../homepage-design.md) |
 | 模块目录与聚合页 | `page_role: section` | [`section.md`](section.md) |
 | 架构、规范和普通专题 | `page_role: content` 且没有 `manual_id` | [`content.md`](content.md) |
-| 工具项目入口 | `page_role: tool-project`、`tools/<tool>/index.html` | [`tool-project.md`](tool-project.md) 与 [`internal-tools.md`](internal-tools.md) 中当前工具条目 |
+| Endem 应用入口 | `page_role: tool-project`、`endem/index.html` | [`tool-project.md`](tool-project.md) 与 [`internal-tools.md`](internal-tools.md) |
 | 手册与指南 | `layout: manual` 或存在 `manual_id` | [`manual.md`](manual.md) |
-| 技术长文、工具说明与手册正文可读性 | 修改正文宽度、字号、行高、固定信息栏或长内容节奏 | [`readability.md`](readability.md)，并继续读取所属页面角色文档 |
+| 技术长文、Endem 应用说明与手册正文可读性 | 修改正文宽度、字号、行高、固定信息栏或长内容节奏 | [`readability.md`](readability.md)，并继续读取所属页面角色文档 |
 | 卡片、按钮、表格、Callout、流程、动效 | 修改共享视觉组件或状态反馈 | [`components-motion.md`](components-motion.md) |
 | 图片、照片、生成式视觉、裁切与图片动效 | 新增或替换 `assets/images/`，或修改页面中的 `<img>` / 图片背景 | [`images.md`](images.md)，并继续读取所属页面角色文档 |
 | 模块几何母题、Hero 多边形、章节形状与文档折页 | 修改任一正式页面的几何布局或模块视觉身份 | [`geometric-layouts.md`](geometric-layouts.md)，并继续读取所属页面角色文档 |
 | 分析哲学线条、节点、命题关系与哲学相关图形 | 新增或修改任何哲学来源的视觉表达 | [`philosophical-visual-language.md`](philosophical-visual-language.md)、[`geometric-layouts.md`](geometric-layouts.md) |
 
-工具页按路径中的 `<tool>` 路由。例如修改 `tools/theoria/index.html` 时，先读 `tool-project.md`，再读 `internal-tools.md#theoria`；修改 `tools/synthesis/docs/*.md` 时读 `manual.md`，并继承 `internal-tools.md#synthesis` 的工具视觉签名。
+修改 `endem/index.html` 时，先读 `tool-project.md`，再读 `internal-tools.md`；修改 `endem/docs/*.md` 时读 `manual.md`，并按当前任务继承 `internal-tools.md` 中对应动作的视觉签名。不得创建并列应用页或旧工具路由。
 
 ## 冲突处理
 

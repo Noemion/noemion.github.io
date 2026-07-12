@@ -1,0 +1,85 @@
+---
+layout: default
+title: "Endem 生命周期 · Noemion"
+page_role: "content"
+footer_text: "Noemion · Endem 生命周期"
+permalink: "/architecture/endem-lifecycle.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>Endem 生命周期</span></nav>
+  <div class="hero"><h1>Endem 生命周期</h1><p>从自然语言目标卡到 sealed 制品、运行 Frame、Witness 和最终决定的完整状态链。</p><div class="badges"><span class="badge">open</span><span class="badge">bound</span><span class="badge">sealed</span><span class="badge">Frame</span><span class="badge">Witness</span></div></div>
+
+  <section class="content-stack">
+    <h2>生命周期不是信任等级流水线</h2>
+    <p class="lead">每个阶段只回答一种问题。form 说明目标契约已经确定性编码；bind 说明引用和冲突已经解析；seal 说明发布载荷和签名响应一致；run 说明当前环境建立了受控会话；Witness 说明判断依据可定位。任何阶段都不能替代其他阶段。</p>
+    <p class="callout"><strong>关键边界：</strong>Endem 在 open、bound、sealed 三个状态之间演进。Frame 不是第四种 Endem 状态，而是一次运行内的只读视图；Witness 也不是状态，而是有限证据记录。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>主流程</h2>
+    <div class="flow"><div class="step">Goal Card / Candidate</div><div class="step">form</div><div class="step">open Endem</div><div class="step">check + see</div><div class="step">bind</div><div class="step">bound Endem / Weave</div><div class="step">pack</div><div class="step">external sign</div><div class="step">seal</div><div class="step">sealed Endem / Weave</div><div class="step">run → Frame</div><div class="step">Witness → Decision</div></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>阶段、消费者与失败</h2>
+    <div class="table-wrap"><table><thead><tr><th>阶段</th><th>权威输入</th><th>正式输出</th><th>失败责任</th><th>下游消费者</th></tr></thead><tbody>
+      <tr><td>Goal Card → form</td><td>say、aim、must、done、open，或有来源的候选与授权绑定</td><td>open Endem、Source/Form Witness、诊断</td><td>来源不可重放、根 aim 不唯一、硬约束或验收缺失、候选越权确认</td><td>check、see、bind 或人工确认</td></tr>
+      <tr><td>open Endem → check</td><td>原始对象字节、限制、规范版本和请求验证层</td><td>分层结论、Check Witness；内部可产生生产 Verified Handle</td><td>结构、引用、语义、状态、完整性或资源限制失败</td><td>bind、pack、Runner</td></tr>
+      <tr><td>任意对象 → see</td><td>原始 Endem/Weave/Witness 字节和输出预算</td><td>只读视图、差分、诊断</td><td>畸形、未知关键记录、无法表示或资源超限</td><td>开发者、审计者、test；不进入生产信任链</td></tr>
+      <tr><td>Endem 集合 → bind</td><td>已检查对象、Binding Policy、Dependency Lock</td><td>bound Endem 或 Weave、Binding Witness</td><td>未解析引用、冲突、循环、权限扩大、身份不稳定</td><td>pack、see</td></tr>
+      <tr><td>bound → pack</td><td>闭包、发布 Profile、调试策略、覆盖要求</td><td>不可变候选载荷、manifest、Signing Request、Pack Witness</td><td>闭包不全、裁剪改变语义、非确定性元数据、覆盖缺口</td><td>外部签名系统、seal</td></tr>
+      <tr><td>候选 + Response → seal</td><td>原候选、原请求、外部 Signature Response、信任策略</td><td>sealed Endem/Weave、Seal Witness</td><td>载荷、请求、算法、签名者或策略不匹配</td><td>see、Runner</td></tr>
+      <tr><td>sealed → run</td><td>实际 sealed 字节、Execution Policy、后端和 Capability Catalog</td><td>Frame、Run Witness、Decision Witness、Run Record</td><td>签名/策略失败、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-rows">
+    <h2>open → bound</h2>
+    <ol>
+      <li><code>check</code> 验证 open Endem 的结构和语义，不因存在 open 项就称对象损坏。</li>
+      <li><code>bind</code> 只从显式依赖锁定、授权决定和绑定策略取得候选。</li>
+      <li>每个 open 项必须变成已解析、明确保留的运行时未知、获授权绑定或失败；不得静默删除。</li>
+      <li>跨 Endem 引用形成 Weave；没有跨对象消费者时保持单一 bound Endem。</li>
+      <li>权限和 must 只能保持或收紧，done 不能因组合变得更容易。</li>
+    </ol>
+  </section>
+
+  <section class="content-rows">
+    <h2>bound → sealed</h2>
+    <ol>
+      <li><code>pack</code> 计算发布闭包和可选 Debug Companion，证明删除内容不改变规范属性。</li>
+      <li>待签载荷冻结后生成 Signing Request；私钥始终留在外部签名系统。</li>
+      <li><code>seal</code> 同时读取原候选、原请求与 Signature Response，先验证绑定，再附加 Signature Envelope。</li>
+      <li>签名封装不得改写被签载荷；任何载荷变化都要求重新 pack 和外部签名。</li>
+      <li>sealed 只说明发布身份和字节范围，不证明当前环境可运行。</li>
+    </ol>
+  </section>
+
+  <section class="content-rows">
+    <h2>sealed → Frame → Witness</h2>
+    <ol>
+      <li>Runner 对实际输入字节重新执行所需 <code>check</code>，不复用过期结论。</li>
+      <li>Runner 从对象、当前策略和授权能力建立 Frame；实时句柄只保留在隔离执行侧。</li>
+      <li>后端读取 Frame 的受限视图，返回候选或类型化能力请求，不能直接调用外部能力。</li>
+      <li>Runner 验证请求、执行或拒绝，再把真实观察记录为 Run Witness。</li>
+      <li>决定引擎按照执行前固定的 done 和权威要求形成 Decision Witness；需要价值判断时保持 pending-review。</li>
+      <li>会话结束后 Frame 销毁，Run Record 保留允许公开的 Witness 和身份链。</li>
+    </ol>
+  </section>
+
+  <section class="content-wide">
+    <h2>稳定状态与失败状态</h2>
+    <div class="table-wrap"><table><thead><tr><th>类别</th><th>允许状态</th><th>含义</th></tr></thead><tbody>
+      <tr><td>Endem</td><td>open / bound / sealed</td><td>语义与发布生命周期状态。</td></tr>
+      <tr><td>Run</td><td>accepted / unsatisfied / pending-review / failed / interrupted</td><td>一次会话相对 done、当前环境和决定权威的结果。</td></tr>
+      <tr><td>Check</td><td>pass / fail / not-run</td><td>每个请求验证层的独立结论；不能压成含义不明的成功布尔值。</td></tr>
+      <tr><td>Witness</td><td>valid / invalid / insufficient / revoked / unknown</td><td>记录身份、完整性和适用性，不等同于其 claim 为真。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-band">
+    <h2>当前实现顺序</h2>
+    <p>第一条切片只实现 Goal Card → form → open Endem → check/see → test。bind、Weave、pack、seal、Runner、Frame 和运行 Witness 必须等待最小格式、两条读取路径、恶意语料和字节复现稳定后再进入。</p>
+  </section>
+  <div class="next-prev"><a href="index.html">← 架构设计</a><a href="decisions.html">架构决策 →</a></div>
+</main>

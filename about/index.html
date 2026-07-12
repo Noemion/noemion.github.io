@@ -7,41 +7,33 @@ permalink: "/about/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>项目背景</span></nav>
-  <div class="hero"><h1>项目背景</h1><p>说明 Noemion 为什么存在、适合解决哪些问题、明确排除哪些目标，以及当前如何推进。</p><div class="badges"><span class="badge">Why</span><span class="badge">Scope</span><span class="badge">Principles</span></div></div>
+  <div class="hero"><h1>项目背景</h1><p>为什么自然语言目标需要自己的最小工程制品，以及 Noemion 明确不建设什么。</p><div class="badges"><span class="badge">Why</span><span class="badge">Scope</span><span class="badge">Evidence</span></div></div>
   <section>
-    <h2>问题与动机</h2>
-    <p>生成式系统需要表达的不只是提示文本，还包括可验证的目标、约束、歧义、证据和验收边界。完整的问题分析、适用范围与反证条件见<a href="background.html">背景与边界</a>。</p>
-    <p>如果这些信息只存在于自然语言上下文中，系统很难回答“哪些要求是硬约束”“某个结论依赖哪些证据”“组合两个任务后权限是否扩大”“模型或依赖变化后结果是否仍可复现”等工程问题。Noemion 试图把这些问题从模型内部行为转移到可检查的对象、工具和运行契约中。</p>
+    <h2>问题</h2>
+    <p class="lead">生成式系统接收的是文字，却必须兑现目标、遵守硬约束、控制能力并用证据验收。把这些内容留在一次性上下文中，会让每个模型和每次运行重新猜测同一契约。</p>
+    <p>项目要回答的不是“怎样写出更好的提示词”，而是：一个期望终态怎样获得稳定身份，怎样在组合时发现冲突，怎样在运行前冻结权限和验收，怎样在运行后追溯证据。</p>
   </section>
   <section>
-    <h2>项目定位</h2>
+    <h2>项目创造什么</h2>
     <div class="status-grid">
-      <article class="status-item"><h3>为什么需要</h3><p>让生成式任务的意图、约束、证据和权限能够被独立审查，而不是只能信任一次模型输出。</p></article>
-      <article class="status-item"><h3>怎样实现</h3><p>以确定性 Noesis Core、可重定位对象、可信链接装载、受约束 Agent Harness 和 Fulfillment Runtime 建立分层工程边界。</p></article>
-      <article class="status-item"><h3>形成什么</h3><p>形成 NIR、NOBJ、HOBJ、配套规范、对象工具、测试语料、验证证据与可追溯决策记录。</p></article>
-      <article class="status-item"><h3>适合谁阅读</h3><p>面向研究者、编译与系统工程师、安全评审者、工具开发者以及未来的互操作规范参与者。</p></article>
+      <article class="status-item"><h3>Endem</h3><p>最小、独立有效、可验证的期望终态单元；一个根 <code>aim</code> 与 <code>say / must / done / open</code> 四组边界信息。</p></article>
+      <article class="status-item"><h3>Weave</h3><p>两个或更多 Endem、固定依赖和发布范围组成的已解析闭包；单个自包含 Endem 不需要它。</p></article>
+      <article class="status-item"><h3>Frame</h3><p>Runner 重新验证实际字节后形成的不可变加载态，不是新的磁盘格式。</p></article>
+      <article class="status-item"><h3>Witness</h3><p>带对象、环境和策略范围的运行证据与决定记录，不把模型陈述当作完成证明。</p></article>
     </div>
   </section>
   <section>
-    <h2>范围与非目标</h2>
-    <div class="status-grid">
-      <article class="status-item"><h3>范围</h3><p>设计可机器分析、验证、重定位、链接和执行的生成式语义对象及其工具链。</p></article>
-      <article class="status-item"><h3>非目标</h3><p>不把提示词、Skill 包或文本容器改名为二进制对象，也不让模型决定对象布局。</p></article>
-    </div>
+    <h2>项目不创造什么</h2>
+    <ul>
+      <li>不把提示词、Skill 包、JSON 或 Token 序列改名为目标制品。</li>
+      <li>不把 GNU Binutils 的工具数量、命令命名或机器指令本体照搬到新领域。</li>
+      <li>不建立另一套通用模型训练平台；只有出现不可替代的研究需求才适配现有生态。</li>
+      <li>不让模型决定规范字节、扩大权限、修改签名制品或宣告验收通过。</li>
+    </ul>
   </section>
   <section>
-    <h2>核心原则</h2>
-    <p>Deterministic 确定性、歧义保留、不可信模型输出、不可信对象输入与 checked arithmetic 等约束，以<a href="../specifications/">规范与成熟度页面</a>所指向的权威文件为准。</p>
-    <p><a href="intellectual-foundations.html">阅读思想与方法基础，了解语言哲学中的关键区分如何转化为工程问题，以及哪些部分明确不进入规范</a>。</p>
+    <h2>如何推进</h2>
+    <p>第一条纵向切片只包含 <code>endem form</code>、<code>check</code>、独立实现的 <code>see</code> 和一致性入口 <code>test</code>。只有在双读取器、恶意输入、逐字节复现和资源上限证据通过后，才进入组合、封装和运行。</p>
+    <p><a href="background.html">阅读完整背景与边界</a>，或查看<a href="../development/implementation-roadmap.html">分阶段实施路线</a>。</p>
   </section>
-  <section>
-    <h2>开发路线与当前状态</h2>
-    <p><a href="../development/implementation-roadmap.html">开发路线图</a>说明开发顺序、交付内容和完成标准；尚未确定的设计决策保留在<a href="../architecture/open-questions.html">开放问题</a>。</p>
-  </section>
-  <section>
-    <h2>研究问题与证据计划</h2>
-    <p>项目将逐步把宏观愿景拆成可证伪问题，例如：相同语义对象能否在不同模型与 Fulfillment Runtime 下保持约束等价；Agent Harness 能否在不扩大权限的前提下稳定完成长任务；链接顺序是否会影响规范允许范围之外的结果；歧义保留是否能降低错误确定性；对象级权限和披露边界能否被静态验证。</p>
-    <p>这些问题目前属于研究议程，不是已经验证的结论。每个结论需要对应规范条款、对照基线、实验设计、数据来源、测试结果、失败案例和版本信息；论文、专利与标准化材料应从同一证据链生成，而不是分别维护互相矛盾的叙述。</p>
-  </section>
-  <div class="next-prev"><a href="../index.html">← 项目首页</a><a href="background.html">背景与边界 →</a></div>
 </main>

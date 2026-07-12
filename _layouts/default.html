@@ -1,7 +1,5 @@
 <!doctype html>
 {% assign permalink_parts = page.permalink | split: '/' %}
-{% assign page_tool_id = nil %}
-{% if permalink_parts[1] == 'tools' and permalink_parts.size > 3 %}{% assign page_tool_id = permalink_parts[2] %}{% endif %}
 {% assign page_site_module = permalink_parts[1] %}
 {% if page.permalink == '/index.html' %}
   {% assign page_site_module = 'project' %}
@@ -35,9 +33,8 @@
   <link rel="stylesheet" href="{{ '/assets/directory.css' | relative_url }}?v={{ asset_version | escape }}">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   <script src="{{ '/assets/directory.js' | relative_url }}?v={{ asset_version | escape }}" defer></script>
-  {% if page.permalink == '/tools/index.html' %}<script src="{{ '/assets/catalog.js' | relative_url }}?v={{ asset_version | escape }}" defer></script>{% endif %}
 </head>
-<body data-page-role="{{ page.page_role }}" data-site-module="{{ page_site_module }}"{% if page_tool_id %} data-tool-id="{{ page_tool_id }}"{% endif %}{% if page.manual_id or page.permalink contains '/docs/' %} data-docs-layout="true"{% endif %}>
+<body data-page-role="{{ page.page_role }}" data-site-module="{{ page_site_module }}"{% if page.manual_id or page.permalink contains '/docs/' %} data-docs-layout="true"{% endif %}>
 <a class="skip-link" href="#main-content">跳到正文</a>
 {% include site-header.html %}
 {% if page.manual_id %}{% include manual-directory-data.html %}{% endif %}

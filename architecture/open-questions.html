@@ -7,51 +7,52 @@ permalink: "/architecture/open-questions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>开放问题</span></nav>
-  <div class="hero"><h1>开放问题</h1><p>集中记录尚未通过规范或架构决策记录（ADR）确定的名称、类型、ABI、实现和资源问题。</p><div class="badges"><span class="badge">Unresolved</span><span class="badge">Evidence Required</span></div></div>
-  <section class="content-grid">
-    <h2>待定事项：对象与语义</h2>
-    <details open><summary>Noema Object 怎样版本化？</summary><p>NOBJ 的固定 Header、前置目录、长度限定 Section、逻辑字段职责和非循环摘要域已经作为详细设计基线采用。仍需确定主/次版本兼容规则、魔数字节、字段宽度、能力位、Section 编号、摘要算法、完整性覆盖描述符、文件扩展名，以及未知 required/optional 记录在不同版本之间的精确处理矩阵。</p></details>
-    <details><summary>NIR 最小核心类型集是什么？</summary><p>需要用真实语料和实现原型确定最小集合；“约 20～30 种”只是规划估计。</p></details>
-    <details><summary>连续语义残差如何标准化？</summary><p>Encoder 指纹、维度、码本、量化、相似度与跨模型稳定性仍需证据和互操作测试。</p></details>
-    <details><summary>评价器如何成为可链接对象？</summary><p>确定性、模型与外部评价器的接口、权限和失败边界尚待设计。</p></details>
-    <details><summary>四类语义关系是否足够且正交？</summary><p>Source Expression、Compiled Meaning、Reference Binding 与 Acceptance Contract 当前只表示四类需要分别追踪的关系，不是已证明稳定的四层身份体系；需要以同义改写、跨版本绑定、语境推论和复合验收反例检验是否遗漏或重复。</p></details>
-    <details><summary>语义来源和满足环境如何进入对象？</summary><p>明示内容、结构蕴涵、语境推论、工具推导与模型候选的确认权限尚未定型；评价环境的证据、能力和背景假设也须决定是对象数据、可链接依赖还是 Fulfillment Runtime 配置。</p></details>
-    <details><summary>模型候选怎样升级为确认语义？</summary><p>当前基线要求 Candidate Envelope 至少携带候选、替代解释、证据、置信信息、模型/窗口指纹和未决状态；只有确定性重推导、授权的 Source Binding Decision 或显式歧义记录可以进入 NIR。仍需确定决定签署者、授权范围编码、撤销与重放协议、可重推导规则注册表，以及哪些高风险语义必须人工确认。类型正确或模型高置信不能单独完成升级。</p></details>
-    <details><summary>HOBJ 与 NOBJ 的格式和链接关系是什么？</summary><p>当前职责边界采用“共享内容先编译为 NOBJ，再由 synthesis 将 NOBJ 与已有 HOBJ 链接为 HOBJ”；HOBJ 是否共享容器头、怎样递归链接、哪些记录只能出现在 HOBJ，仍需对象规范与 ADR。</p></details>
+  <div class="hero"><h1>开放问题</h1><p>记录 Endem 体系中尚未通过规范向量、威胁模型、实现原型或正式权利检查回答的问题。</p><div class="badges"><span class="badge">Names Frozen</span><span class="badge">ABI Unfrozen</span><span class="badge">Evidence Required</span></div></div>
+
+  <section class="content-stack">
+    <h2>哪些问题已经关闭</h2>
+    <p class="lead">Endem、Weave、Frame、Witness、一个根 aim、say/aim/must/done/open、open → bound → sealed、唯一 CLI 与八个子命令已经由 ADR-0008 采用。它们不再作为候选名称或工具数量问题反复讨论。</p>
+    <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
+
   <section class="content-grid">
-    <h2>待定事项：语言、ABI 与工具面</h2>
-    <details><summary>NSL 采用何种表面语法？</summary><p>严格声明式 DSL 是当前优先方向，自然语言化语法糖仍是后续候选。</p></details>
-    <details><summary>披露与 Fulfillment Runtime ABI 如何定型？</summary><p>状态哈希、预算单位、继续句柄、检查点、后端输入适配器槽位和消费者确认协议均未冻结；后端适配不属于对象格式本身。</p></details>
-    <details><summary>Agent Harness 的能力与事件结构怎样定型？</summary><p>上下文清单、能力参数、副作用分类、观察事件、状态快照、预算、重复失败和人工升级结构仍需威胁模型、原型与 ADR；它们不能由模型输出临时定义。</p></details>
-    <details><summary>MCP、A2A 与外部遥测怎样接入？</summary><p>当前边界要求它们只作为 Agent Harness 外缘的版本化适配器，不能定义 NIR/NOBJ、内部能力或 Acceptance Decision。仍需确定协议 Profile、能力降级失败语义、身份与 token audience、重放/取消/幂等性、恶意 schema、遥测字段映射和版本迁移测试。</p></details>
-    <details><summary>Harness 与 Runtime 怎样交换请求和观察？</summary><p>Runtime Request、Capability Request、Capability Observation、幂等性、超时、取消、恢复和会话级重试协议尚未冻结。Runtime 不持有实时能力句柄，Harness 也不能改变 Runtime 对象语义。</p></details>
-    <details><summary>谁持有并传递 Loaded State？</summary><p>Loaded State Handle 的不可伪造性、进程边界、生命周期、撤销、并发读取与 Runtime 只读视图仍需规范。当前边界要求 Object System 交给 Harness，Runtime 只能经 Harness 获得请求所需视图。</p></details>
-    <details><summary>最终验收由谁决定？</summary><p>Candidate Assessment、证据闭包、确定性 Acceptance Policy 与人工或外部权威的签署协议仍需规范。noemcoverage 只检查证据是否可定位，noemevaluate 只做离线评估，两者都不能修改单次会话的 Acceptance Decision。</p></details>
-    <details><summary>运行产物怎样保持同一身份链？</summary><p>会话、对象、环境、Runtime 请求、能力调用、观察、候选、Run Result、Trace 与 Acceptance Decision 的稳定身份和防篡改关联尚待事件规范与签名策略确定。</p></details>
-    <details><summary>CLI 与重定位标识是什么？</summary><p><code>noesis</code>、<code>morphe</code>、<code>theoria</code> 与 <code>synthesis</code> 已作为首批独立工具名采用，但参数、退出状态、文件扩展名和发行包仍未冻结；发布前还需完成命令、包、域名和商标复核。<code>R_NIR_*</code> 仍只表示重定位职责候选，必须另行确定命名空间、编号、版本策略、未知类型处理和一致性测试向量。</p></details>
-    <details><summary>行为请求需要哪些最小字段？</summary><p>询问、承诺、授权与执行是否属于核心行为类型，以及行动者、权限、前置条件、效果和撤销边界怎样跨 Compiler、链接器与 Fulfillment Runtime 保持一致，仍需威胁模型和 ADR。</p></details>
+    <h2>Endem 编码与语义</h2>
+    <details open><summary>Goal Card 的最小表面语法是什么？</summary><p>需要比较严格声明式文本、带自然语言字段的结构化文档和 API 输入。任何方案都必须明确表达五组语义、来源范围和未知状态，并能在无模型环境确定性解析。</p></details>
+    <details><summary>Endem 的物理编码怎样支持安全随机访问？</summary><p>需确定魔数、版本、目录、字段宽度、记录长度、对齐、关键/可选扩展、压缩和资源上限。首要目标是有界读取和跨实现一致，不是兼容 ELF 或某种通用容器。</p></details>
+    <details><summary>一个根 aim 的语义等价怎样判断？</summary><p>布局、来源注释或调试记录变化后，哪些 aim、must、done 和 open 属性必须保持，仍需规范化规则和反例。规则冻结前只能比较显式属性，不能发明语义哈希。</p></details>
+    <details><summary>自然语言候选由谁授权绑定？</summary><p>需定义决定主体、作用范围、撤销、重放、高风险字段和多人冲突。模型置信度、结构合法和单次界面点击都不能单独成为永久授权。</p></details>
+    <details><summary>连续或模糊要求怎样进入五组语义？</summary><p>软偏好、感知质量、风格和不可完全判定条件需要保留不确定性和评价环境，不能为了机器处理伪造精确阈值。</p></details>
   </section>
+
   <section class="content-grid">
-    <h2>待定事项：实现与模型</h2>
-    <details><summary>首版实现语言是什么？</summary><p>Rust 与 C++ 各有工程优势，尚未形成 ADR；第一阶段也不引入 LLVM/MLIR。</p></details>
-    <details><summary>Horizon Engine 选用哪个语言底座和训练方案？</summary><p>候选底座、蒸馏范围、量化方法、阈值与数值门槛必须经过来源隔离评测，并以质量、校准、资源和许可证据决定，不能由未经验证的目标值直接决定。</p></details>
-    <details><summary>Coverage Proof 采用哪些自动门槛？</summary><p>需通过代表性来源语料确定来源单元分类、等价性测试与人工确认风险分级，并区分编译来源覆盖、发布对象覆盖和运行证据覆盖。</p></details>
-    <details><summary>Release Object、签名包与撤销状态怎样关联？</summary><p>Unsigned Package Candidate、Signing Request、Signature Response、Signed Noemion Package、回滚保护、撤销与重新签名的身份关系仍需发布格式和签名 ADR 冻结。</p></details>
+    <h2>Weave 与发布</h2>
+    <details open><summary>绑定标识和版本约束采用什么语法？</summary><p>需要同时满足内容寻址、可读命名、版本兼容和可重放解析；环境搜索顺序和网络最新版本不能成为正式输入。</p></details>
+    <details><summary>什么时候允许依赖循环？</summary><p>第一版拒绝必需循环。未来若支持，必须先定义固定点语义、披露与验收顺序、预算上限、失败原子性和跨实现向量。</p></details>
+    <details><summary>Weave 是否需要独立物理容器？</summary><p>在真实多 Endem、流式读取或离线分发消费者出现前，内容寻址 manifest 和现有确定性归档可能已经足够；不能为形式完整提前创造格式。</p></details>
+    <details><summary>pack 可以删除哪些信息？</summary><p>只有不改变 aim、must、done、open、绑定、能力上限和运行披露的内容才能外置。需要先定义属性级等价检查和 Debug Companion 摘要绑定。</p></details>
+    <details><summary>seal 的算法与撤销策略是什么？</summary><p>需确定待签消息、算法协商、多签、密钥轮换、撤销、时间来源和离线验证。签名必须位于被签载荷之外，且不能替代结构或环境授权。</p></details>
   </section>
+
+  <section class="content-grid">
+    <h2>Frame、Runner 与 Witness</h2>
+    <details open><summary>Frame 的最小只读接口是什么？</summary><p>需要定义 aim、must、done、open、成员披露、预算和能力需求怎样进入一次运行，同时确保 Frame 不含实时句柄、凭据或可跨会话权限。</p></details>
+    <details><summary>Runner 怎样隔离模型和能力适配器？</summary><p>需确定进程、沙箱、取消、超时、幂等、网络、文件、凭据和资源限额。后端失败不能让 Runner 静默扩大权限或修改 sealed 制品。</p></details>
+    <details><summary>Witness 采用什么事件与完整性结构？</summary><p>需确定序列、时间域、父记录、摘要、脱敏、丢失、采样、签名和多生产者归并，同时避免循环自证。</p></details>
+    <details><summary>谁形成最终决定？</summary><p>确定性规则、外部评价器与人工权威需要明确输入、权限和失败语义。Witness 齐全只说明依据可用，不能自动把状态提升为 accepted。</p></details>
+    <details><summary>MCP 与 A2A 怎样映射到 Runner 外缘？</summary><p>需冻结协议版本、工具/Agent 声明的信任等级、token audience、取消与重放语义。外部 Task 状态和 Artifact 不能直接成为 Endem 状态或 Decision Witness。</p></details>
+  </section>
+
+  <section class="content-grid">
+    <h2>实施与发布条件</h2>
+    <details open><summary>首版实现语言和仓库结构是什么？</summary><p>需要用同一规范向量比较内存安全、checked arithmetic、模糊测试、跨平台、FFI、依赖和复现成本。第一阶段不引入 LLVM、MLIR、BFD 或模型框架。</p></details>
+    <details><summary>独立 Reader 怎样证明实现独立？</summary><p>需禁止共享生产解析库、生成代码和错误分类实现，并通过差分、变异和故障注入证明它能发现生产路径的共同假设。</p></details>
+    <details><summary>名称何时通过正式发布 gate？</summary><p>项目内部命名已经冻结，但公开发行前仍需目标法域商标、近似类别、包管理器、命令、域名和法律复核。未通过 gate 不得声称商标可用。</p></details>
+    <details><summary>怎样证明构建可复现？</summary><p>对象字节、工具二进制和签名真实性是三个不同属性。需要双路径构建、固定环境输入、逐字节比较和独立签名验证。</p></details>
+  </section>
+
   <section class="content-band">
-    <h2>后续计划：资源与性能基线</h2>
-    <p>实现前不承诺特定开发设备足以承担全部阶段。安全对象核心、模糊测试、跨平台构建、Runtime 场景与 Horizon Engine 训练应分别建立可复现的时间、内存、存储和并发基线；只有真实瓶颈形成后才决定本地、持续集成或专用算力配置。</p>
+    <h2>问题关闭规则</h2>
+    <p>开放问题只有在权威规范或 ADR、正反测试向量、至少一个实现原型和明确失败语义同时存在时才关闭。论文、模型指标、概念演示或单一实现行为不能单独冻结 ABI。</p>
   </section>
-  <section class="content-wide">
-    <h2>开放问题如何形成决策</h2>
-    <p>开放问题不能仅靠偏好或命名讨论关闭。每项问题应记录负责人、影响的规范和工具、候选方案、现有技术或先例、评价指标、原型或实验、风险、知识产权与互操作影响，以及最终 ADR。</p>
-    <div class="table-wrap"><table><thead><tr><th>优先级</th><th>判定标准</th><th>最迟关闭阶段</th></tr></thead><tbody>
-      <tr><td>阻断型</td><td>影响安全解析、确定性、对象兼容或第一阶段范围</td><td>进入相关开发阶段前</td></tr>
-      <tr><td>架构型</td><td>影响多个组件、规范层次或长期演进</td><td>计划评审或首个纵向切片前</td></tr>
-      <tr><td>接口型</td><td>影响 CLI、ABI、配置或互操作</td><td>对外候选发布前</td></tr>
-      <tr><td>优化型</td><td>只影响性能、体验或后续模型能力</td><td>基线与瓶颈证据形成后</td></tr>
-    </tbody></table></div>
-  </section>
-  <div class="next-prev"><a href="noema-lifecycle.html">← 对象生命周期</a><a href="../specifications/">规范与成熟度 →</a></div>
+  <div class="next-prev"><a href="decisions.html">← 架构决策</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
 </main>

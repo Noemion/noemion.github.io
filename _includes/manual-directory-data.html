@@ -1,4 +1,6 @@
-{% assign manual_pages = site.pages | where_exp: "item", "item.manual_id != nil" | sort: "permalink" %}
+{% assign docs_manual_pages = site.pages | where: "manual_id", "docs" %}
+{% assign endem_manual_pages = site.pages | where: "manual_id", "endem" %}
+{% assign manual_pages = docs_manual_pages | concat: endem_manual_pages | sort: "permalink" %}
 <script type="application/json" data-manual-directory-source>
 {
   "manuals": {{ site.data.manuals | jsonify }},

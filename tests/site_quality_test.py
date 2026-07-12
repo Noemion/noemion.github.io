@@ -15,19 +15,17 @@ ROOT = SOURCE_ROOT if SOURCE_ONLY else Path(sys.argv[1]).resolve()
 README = SOURCE_ROOT / "README.md"
 SOURCE_SITEMAP = SOURCE_ROOT / "sitemap.md"
 DIRECTORY_CSS = ROOT / "assets" / "directory.css"
-MINIMUM_ROUTE_COUNT = 89
-MINIMUM_HTML_SOURCE_COUNT = 49
-MINIMUM_MANUAL_SOURCE_COUNT = 40
 SOURCE_HTML_FILES = sorted(
     path
     for path in SOURCE_ROOT.rglob("*.html")
-    if "_site" not in path.parts and not any(part.startswith("_") for part in path.parts)
+    if "_site" not in path.parts
+    and "vendor" not in path.parts
+    and not any(part.startswith("_") for part in path.parts)
 )
 MANUAL_MARKDOWN_FILES = sorted(
-    [*SOURCE_ROOT.glob("docs/*.md"), *SOURCE_ROOT.glob("tools/*/docs/*.md")]
+    [*SOURCE_ROOT.glob("docs/*.md"), *SOURCE_ROOT.glob("endem/docs/*.md")]
 )
 SOURCE_PAGE_FILES = sorted([*SOURCE_HTML_FILES, *MANUAL_MARKDOWN_FILES])
-TOOL_IDS = sorted(path.parent.name for path in SOURCE_ROOT.glob("tools/*/index.html"))
 HTML_FILES = SOURCE_HTML_FILES if SOURCE_ONLY else sorted(ROOT.rglob("*.html"))
 RAW_AMP = re.compile(r"&(?![A-Za-z][A-Za-z0-9]+;|#[0-9]+;|#x[0-9A-Fa-f]+;)")
 HREF_LITERAL = re.compile(r'href:\s*"([^"]+)"')
@@ -53,94 +51,70 @@ PORTAL_ROUTES = [
     "architecture/index.html",
     "specifications/index.html",
     "components/index.html",
-    "tools/index.html",
     "docs/index.html",
     "downloads/index.html",
     "faq/index.html",
     "development/index.html",
     "news/index.html",
 ]
-TOOL_MANUAL_ROUTE_ORDERS = {
-    "noesis": [
-        "tools/noesis/docs/index.html",
-        "tools/noesis/docs/source-and-candidates.html",
-        "tools/noesis/docs/semantic-binding.html",
-        "tools/noesis/docs/nir-record-model.html",
-        "tools/noesis/docs/nobj-emission.html",
-        "tools/noesis/docs/evidence-and-determinism.html",
-        "tools/noesis/docs/worked-example.html",
-        "tools/noesis/docs/reference-index.html",
+APPLICATION_ROUTES = ["endem/index.html"]
+MANUAL_ROUTE_ORDERS = {
+    "endem": [
+        "endem/docs/index.html",
+        "endem/docs/format.html",
+        "endem/docs/binding.html",
+        "endem/docs/safety.html",
+        "endem/docs/running.html",
+        "endem/docs/reference.html",
     ],
-    "morphe": [
-        "tools/morphe/docs/index.html",
-        "tools/morphe/docs/text-nir-contract.html",
-        "tools/morphe/docs/object-layout.html",
-        "tools/morphe/docs/deterministic-encoding.html",
-        "tools/morphe/docs/round-trip-testing.html",
-        "tools/morphe/docs/reference-index.html",
-    ],
-    "theoria": [
-        "tools/theoria/docs/index.html",
-        "tools/theoria/docs/header-and-sections.html",
-        "tools/theoria/docs/nir-and-origin-views.html",
-        "tools/theoria/docs/safe-reading.html",
-        "tools/theoria/docs/reference-index.html",
-    ],
-    "synthesis": [
-        "tools/synthesis/docs/index.html",
-        "tools/synthesis/docs/contract.html",
-        "tools/synthesis/docs/inputs-outputs.html",
-        "tools/synthesis/docs/object-sections.html",
-        "tools/synthesis/docs/invocation.html",
-        "tools/synthesis/docs/pipeline.html",
-        "tools/synthesis/docs/symbol-resolution.html",
-        "tools/synthesis/docs/relocations.html",
-        "tools/synthesis/docs/horizon-linking.html",
-        "tools/synthesis/docs/loader-security.html",
-        "tools/synthesis/docs/diagnostics.html",
-        "tools/synthesis/docs/testing.html",
-        "tools/synthesis/docs/dependencies.html",
-        "tools/synthesis/docs/reference-index.html",
-    ],
+}
+REQUIRED_CORE_ROUTES = {
+    "endem/index.html",
+    *MANUAL_ROUTE_ORDERS["endem"],
+    "specifications/endem.html",
+    "specifications/weave.html",
+    "specifications/witness.html",
+    "architecture/endem-lifecycle.html",
+    "components/core.html",
+    "components/reader.html",
+    "components/runner.html",
 }
 DOC_GUIDE_ORDER = [
     "docs/getting-started.html",
     "docs/installation-and-usage.html",
     "docs/architecture-guide.html",
     "docs/development-guide.html",
-    "docs/tools-reference.html",
+    "docs/endem-reference.html",
     "docs/specifications-reference.html",
 ]
 DOC_GUIDE_HEADINGS = {
     "docs/getting-started.html": [
-        "从这里开始", "核心对象", "信任与确定性", "推荐阅读路径", "当前项目状态", "下一步",
+        "从这里开始", "五个字段", "四个名词", "一个应用", "推荐阅读路径", "当前状态",
     ],
     "docs/installation-and-usage.html": [
-        "当前可用性", "计划中的使用流程", "输入与产物边界", "安装与发布原则", "安全检查", "尚待确定的发布接口",
+        "当前可用性", "计划中的使用流程", "发布原则", "命名发布门",
     ],
     "docs/architecture-guide.html": [
-        "系统分层", "对象生命周期", "编译与链接边界", "装载与运行边界", "信任边界", "尚待确定的接口",
+        "最小系统图", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
     ],
     "docs/development-guide.html": [
-        "第一阶段范围", "规范与 ADR 先行", "实现工作流", "测试与模糊测试", "贡献与报告", "后续开发顺序",
+        "第一阶段范围", "规范与 ADR 先行", "实现工作流", "建议仓库边界", "审查清单", "模型与协议",
     ],
-    "docs/tools-reference.html": [
-        "工具链总览", "规范与对象工具", "编译与链接", "发布与运行", "模型工程", "相关资料状态",
+    "docs/endem-reference.html": [
+        "应用总览", "Core 子命令", "see 的独立性", "run 的隔离性", "不建设独立模型平台",
     ],
     "docs/specifications-reference.html": [
-        "如何判断权威性", "成熟度标记", "Noema IR", "Noema Object", "Horizon Object", "开放问题与 ADR",
+        "权威顺序", "Endem", "Weave", "Frame 与 Witness", "ADR 与开放问题",
     ],
 }
 HOME_HEADINGS = [
-    "意义还没有成为工程对象",
-    "把一次性上下文变成可验证对象",
-    "当前设计重点",
-    "从理解行为到可信装载",
-    "先理解边界再阅读对象",
-    "证据优先于主张",
-    "Noemion 是什么也不是什么",
-    "从规范条款到可复现结果",
-    "选择下一步",
+    "不是给旧对象格式换前缀",
+    "五个短词构成最小契约",
+    "只保留有独立生命周期的名词",
+    "一个入口不等于一个信任域",
+    "先证明最小纵向切片",
+    "借鉴工具链思想，不复制工具数量",
+    "继续阅读",
 ]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "为什么阅读这些著作",
@@ -148,7 +122,7 @@ INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "核心思想与工程问题",
     "Noemion 名称怎样形成",
     "《逻辑哲学论》与工程设计相关的命题",
-    "Noema IR 的待验证设计方案",
+    "Endem 语义的待验证设计方案",
     "核心书目与资源状态",
     "思想采用的验证要求",
 ]
@@ -157,14 +131,15 @@ ROLE_BY_KIND = {
     "section": "section",
     "content": "content",
     "tool": "tool-project",
+    "app": "tool-project",
     "docs": "docs-index",
     "topic": "docs-topic",
 }
 SITE_MODULES = {
     "project", "about", "architecture", "specifications", "components",
-    "tools", "docs", "development", "resources", "support",
+    "endem", "docs", "development", "resources", "support",
 }
-TOOL_PROJECT_SECTIONS = [
+APPLICATION_PROJECT_SECTIONS = [
     "它解决什么问题",
     "当前状态",
     "它怎样工作",
@@ -172,8 +147,12 @@ TOOL_PROJECT_SECTIONS = [
     "它不会做什么",
     "继续阅读",
 ]
-TOOL_PROJECT_STATUS_DECLARATION = (
-    "当前状态：尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。"
+APPLICATION_STATUS_DISCLOSURES = (
+    "设计阶段",
+    "尚未提供可执行程序",
+    "参数",
+    "稳定 ABI",
+    "尚未冻结",
 )
 PUBLIC_META_PHRASES = (
     "本轮",
@@ -209,38 +188,42 @@ PUBLIC_META_PHRASES = (
 )
 UNCLEAR_CHINESE_UI_TERMS = re.compile(
     r"架构决定|文档中心|文档首页|架构指南|工具参考(?!指南)|"
-    r"规范参考(?!指南)|规范登记(?:页)?|架构入口|使用与获取|新闻与进展|实施路线图|"
+    r"规范登记(?:页)?|架构入口|使用与获取|新闻与进展|实施路线图|"
     r"路线图语境|黄金圈定位|第一批检查点|当前设计：|"
     r"尚待确定：|概要设计："
 )
 LEGACY_PUBLIC_TERMS = re.compile(
-    r"\b(?:GSIR|GOBJ|SSO|NSFE|GSL|noemconform|noemobj|noemverify|noemcopy|"
-    r"noemsize|noemas|noemdis|noemfmt|noemdiff|noemc|noemlint|noemar|"
-    r"noemnm|noemld|noemstrip|noemcov|noempack|noemrun|noemtrace|"
-    r"noemdata|noemeval|noemquant)\b|Compiler Core|"
-    r"(?:compiler-core|linker-loader|nsfe|gsir|gobj|sso)\.html"
+    r"\b(?:G(?:SIR|OBJ|SL)|S(?:SO)|N(?:SFE|IR|OBJ|SL)|H(?:OBJ))\b|"
+    r"\bNo(?:esis|ema)\b|\b(?:Hori(?:zon)|Fulfill(?:ment))\b|"
+    r"\bnoem(?!ion\b)[a-z]+\b|\b(?:morph(?:e)|theor(?:ia)|synth(?:esis))\b|"
+    r"(?:compiler-core|linker-loader|nsfe|gsir|gobj|sso|noem(?:a)-ir|"
+    r"noem(?:a)-object|horizon-object|noesis-core|noem(?:a)-object-system|"
+    r"horizon-engine|agent-harness|fulfillment-runtime|noem(?:a)-lifecycle)\.html|"
+    r"(?:^|[/\"'])tools/"
+)
+LEGACY_ADR_ALLOWLIST = re.compile(
+    r"^design-system/adr-000[1-7]-[^/]+\.md$"
 )
 NORMATIVE_ROUTES = (
-    "specifications/noema-ir.html",
-    "specifications/noema-object.html",
-    "specifications/horizon-object.html",
+    "specifications/endem.html",
+    "specifications/weave.html",
+    "specifications/witness.html",
 )
 CONTENT_LAYOUT_ROUTES = (
     "about/background.html",
     "about/intellectual-foundations.html",
-    "architecture/noema-lifecycle.html",
+    "architecture/endem-lifecycle.html",
     "architecture/decisions.html",
+    "architecture/adr-0008-endem-system.html",
     "architecture/open-questions.html",
-    "components/noesis-core.html",
-    "components/noema-object-system.html",
-    "components/horizon-engine.html",
-    "components/agent-harness.html",
-    "components/fulfillment-runtime.html",
+    "components/core.html",
+    "components/reader.html",
+    "components/runner.html",
     "development/implementation-roadmap.html",
     "development/testing.html",
-    "specifications/noema-object.html",
-    "specifications/noema-ir.html",
-    "specifications/horizon-object.html",
+    "specifications/endem.html",
+    "specifications/weave.html",
+    "specifications/witness.html",
 )
 CONTENT_LAYOUT_CLASSES = {
     "content-split",
@@ -253,81 +236,24 @@ CONTENT_LAYOUT_CLASSES = {
 
 REQUIRED_ARCHITECTURE_ROUTES = {
     "architecture/decisions.html": "architecture/index.html",
-    "components/fulfillment-runtime.html": "components/index.html",
+    "components/runner.html": "components/index.html",
 }
 
-TOOLCHAIN_CLOSURE_CONTRACTS = {
-    "tools/noembundle/index.html": {
-        "required": (
-            "回填输入",
-            "Unsigned Package Candidate",
-            "Signing Request",
-            "Signature Response",
-            "Signature Envelope",
-            "不持有私钥",
-        ),
-    },
-    "tools/noemexecute/index.html": {
-        "required": (
-            "Candidate Assessment",
-            "Evidence Closure Report",
-            "Acceptance Decision",
-            "pending-evidence",
-            "pending-review",
-        ),
-    },
-    "tools/noemcoverage/index.html": {
-        "required": (
-            "Release Coverage Proof",
-            "Run Evidence Closure",
-            "Evidence Closure Report",
-            "不签署发布包",
-            "不单独形成 Acceptance Decision",
-        ),
-    },
-    "tools/noemevaluate/index.html": {
-        "required": (
-            "Offline Evaluation",
-            "Model Qualification Record",
-            "Agent Scenario + Final Run Evidence",
-            "Scenario Evaluation Decision",
-            "不修改原 Acceptance Decision",
-        ),
-    },
-    "tools/noesis/index.html": {
-        "required": (
-            "Candidate Envelope",
-            "Source Binding Decision",
-            "确定性 Noesis Core",
-            "不直接产生 NIR",
-        ),
-    },
-    "tools/noemquantize/index.html": {
-        "required": (
-            "Model Package Candidate",
-            "未签名 Model Package Candidate",
-        ),
-        "required_patterns": (
-            r"不自行[^<。]{0,100}(?:签署|签名)",
-        ),
-    },
+SYSTEM_BOUNDARY_CONTRACTS = {
     "architecture/index.html": {
         "required": (
-            "Source / Candidate Envelope",
-            "Noesis Core",
-            "NIR / NOBJ",
-            "Linked Object / HOBJ",
-            "Release + Coverage",
-            "Signed Package",
-            "Loaded State",
-            "Harness Session",
-            "Runtime Request",
-            "Candidate Assessment",
-            "Capability Request / Observation",
-            "Evidence Closure",
-            "Acceptance Decision / 继续循环",
-            "信任不是单一分数",
-            "彼此独立的属性",
+            "Endem",
+            "Weave",
+            "Witness",
+            "Frame",
+            "Core",
+            "Reader",
+            "Runner",
+            "生产验证和",
+            "不共享",
+            "模型候选",
+            "不可信",
+            "最终决定",
         ),
         "forbidden_patterns": (
             r"每一步只能增加(?:信任|可信度)",
@@ -336,79 +262,103 @@ TOOLCHAIN_CLOSURE_CONTRACTS = {
     },
     "architecture/decisions.html": {
         "required": (
-            "工具链产物与外部签名",
-            "候选、能力与验收分层",
-            "Candidate Assessment",
-            "Evidence Closure",
-            "Acceptance Decision",
+            "外部签名",
+            "候选不等于事实",
+            "能力声明不等于句柄",
+            "Witness 不等于验收",
         ),
     },
-    "components/fulfillment-runtime.html": {
+    "components/core.html": {
         "required": (
-            "Candidate Assessment",
+            "Core",
+            "Endem",
+            "确定性",
+            "模型",
+            "不可信",
+            "checked arithmetic",
+        ),
+    },
+    "components/reader.html": {
+        "required": (
+            "Reader",
+            "see",
+            "独立",
+            "只读",
+            "生产解析器",
+            "不共享",
+            "checked arithmetic",
+        ),
+    },
+    "components/runner.html": {
+        "required": (
+            "Runner",
+            "Frame",
+            "run",
             "Capability Request",
-            "不宣告任务最终验收",
-            "不得输出最终 accepted",
-            "不需要 Fulfillment Runtime",
+            "Witness",
+            "accepted",
+            "pending-review",
+            "决定权威",
+            "模型",
+            "不可信",
         ),
     },
-    "components/agent-harness.html": {
+    "specifications/endem.html": {
         "required": (
-            "外部协议与结构化输出适配",
-            "MCP 2025-11-25",
-            "A2A 1.0.1",
-            "工具描述、行为注解和输出 schema 不是可信事实或调用授权",
-            "token passthrough",
-            "OpenTelemetry GenAI",
+            ".endem",
+            "say",
+            "aim",
+            "must",
+            "done",
+            "open",
+            "checked arithmetic",
         ),
     },
-    "specifications/noema-object.html": {
+    "specifications/weave.html": {
         "required": (
-            "Exact File Digest",
-            "Integrity Root",
-            "Semantic Identity",
-            "Header 不保存递归覆盖自身的完整文件摘要",
-            "根记录及其存储字节不覆盖自身",
-            "不是信任锚",
-            "攻击者可以同时修改裸 NOBJ 载荷并重新计算对象内 Integrity Root",
-        ),
-        "forbidden_patterns": (
-            r"完整性 Section 索引与对象字节摘要",
-        ),
-    },
-    "development/implementation-roadmap.html": {
-        "required": (
-            "下一条可执行路径",
-            "P0-W1 权威规范",
-            "P0-W4 语言与构建 ADR",
-            "theoria 独立 Reader",
-            "不表示必须建立 23 个独立二进制",
-            "BFD canonical form",
-            "MCP / A2A",
-        ),
-    },
-    "tools/synthesis/docs/symbol-resolution.html": {
-        "required": (
-            "local/export/import",
-            "required import",
-            "optional import",
-            "不采用 ELF weak symbol 的隐式优先级",
+            "Weave",
+            "局部命名空间",
+            "导入",
+            "导出",
+            "必需依赖",
+            "可选依赖",
         ),
         "forbidden_patterns": (
             r"按强定义、弱定义",
             r"弱引用无定义",
         ),
     },
-    "tools/synthesis/docs/loader-security.html": {
+    "specifications/witness.html": {
         "required": (
-            "Preamble/Header",
-            "Load Directory",
-            "Section Directory",
-            "Signature Envelope",
-            "不得包含根记录自身",
+            "Witness",
+            "subject",
+            "claim",
+            "basis",
+            "strength",
+            "integrity",
+            "证据闭包",
+            "最终决定",
         ),
-        "forbidden_patterns": (
-            r"Program/Section Header",
+    },
+    "endem/docs/safety.html": {
+        "required": (
+            "checked arithmetic",
+            "see",
+            "独立 Reader",
+            "生产 Reader",
+            "不可信",
+        ),
+    },
+    "endem/docs/running.html": {
+        "required": (
+            "Frame",
+            "外部签名",
+            "私钥始终留在外部签名系统",
+            "Signature Envelope",
+            "Witness",
+            "accepted",
+            "pending-review",
+            "决定权威",
         ),
     },
 }
@@ -437,7 +387,6 @@ class PageParser(HTMLParser):
         self.active_h2 = None
         self.page_role = None
         self.site_module = None
-        self.tool_id = None
         self.stack = []
 
     def handle_starttag(self, tag, attrs):
@@ -457,7 +406,6 @@ class PageParser(HTMLParser):
         if tag == "body" and data.get("data-page-role"):
             self.page_role = data["data-page-role"]
             self.site_module = data.get("data-site-module")
-            self.tool_id = data.get("data-tool-id")
         if tag == "a" and "href" in data:
             href = data["href"]
             self.links.append(href)
@@ -542,25 +490,23 @@ def read_route_rows():
             kind = "portal"
             parent = ""
             order = 0
-        elif route in PORTAL_ROUTES[1:]:
-            kind = "section"
+        elif route == "endem/index.html":
+            kind = "app"
             parent = "index.html"
             sibling_orders[parent] += 1
             order = sibling_orders[parent]
-        elif re.fullmatch(r"tools/[^/]+/docs/index\.html", route):
+        elif route == "endem/docs/index.html":
             kind = "docs"
-            tool_id = route.split("/")[1]
-            parent = f"tools/{tool_id}/index.html"
+            parent = "endem/index.html"
             order = 0
-        elif re.fullmatch(r"tools/[^/]+/docs/[^/]+\.html", route):
+        elif re.fullmatch(r"endem/docs/[^/]+\.html", route):
             kind = "topic"
-            tool_id = route.split("/")[1]
-            parent = f"tools/{tool_id}/docs/index.html"
+            parent = "endem/docs/index.html"
             sibling_orders[parent] += 1
             order = sibling_orders[parent]
-        elif route.startswith("tools/") and route.endswith("/index.html"):
-            kind = "tool"
-            parent = "tools/index.html"
+        elif route in PORTAL_ROUTES[1:]:
+            kind = "section"
+            parent = "index.html"
             sibling_orders[parent] += 1
             order = sibling_orders[parent]
         else:
@@ -598,10 +544,10 @@ def resolved_routes(path, hrefs):
 
 
 def expected_manual_roles(manual_id, index):
-    routes = TOOL_MANUAL_ROUTE_ORDERS[manual_id]
+    routes = MANUAL_ROUTE_ORDERS[manual_id]
     roles = {
         "previous": "/" + routes[index - 1],
-        "up": f"/tools/{manual_id}/docs/index.html",
+        "up": f"/{manual_id}/docs/index.html",
         "index": "/" + routes[-1],
     }
     if index + 1 < len(routes):
@@ -615,7 +561,7 @@ def normalize_visible_text(text):
 
 def validate_required_text_contracts(root):
     errors = []
-    for route, contract in TOOLCHAIN_CLOSURE_CONTRACTS.items():
+    for route, contract in SYSTEM_BOUNDARY_CONTRACTS.items():
         path = root / route
         if not path.exists() and root == SOURCE_ROOT:
             for manual_source in MANUAL_MARKDOWN_FILES:
@@ -667,7 +613,7 @@ def validate_readability_behavior_contracts(root):
             '{ href: "architecture/decisions.html", label: "架构决策" }',
             'title: "指南与参考"',
             '{ href: "docs/architecture-guide.html", label: "架构设计指南" }',
-            '{ href: "docs/tools-reference.html", label: "工具参考指南" }',
+            '{ href: "docs/endem-reference.html", label: "Endem 应用参考" }',
             '{ href: "docs/specifications-reference.html", label: "规范参考指南" }',
             '{ href: "news/index.html", label: "项目动态" }',
             '{ href: "faq/index.html", label: "常见问题" }',
@@ -751,6 +697,35 @@ def front_matter_value(block, key):
     return value
 
 
+def validate_legacy_source_vocabulary():
+    errors = []
+    skipped_parts = {".git", "_site", "vendor", ".bundle"}
+    for path in SOURCE_ROOT.rglob("*"):
+        if not path.is_file() or skipped_parts.intersection(path.parts):
+            continue
+        relative = path.relative_to(SOURCE_ROOT).as_posix()
+        if LEGACY_ADR_ALLOWLIST.fullmatch(relative):
+            continue
+        legacy_path_match = LEGACY_PUBLIC_TERMS.search(relative)
+        if legacy_path_match:
+            errors.append(
+                f"{relative}: legacy vocabulary remains in path "
+                f"{legacy_path_match.group(0)!r}"
+            )
+            continue
+        try:
+            text = path.read_text()
+        except UnicodeDecodeError:
+            continue
+        legacy_text_match = LEGACY_PUBLIC_TERMS.search(text)
+        if legacy_text_match:
+            errors.append(
+                f"{relative}: legacy vocabulary remains outside superseded ADRs "
+                f"{legacy_text_match.group(0)!r}"
+            )
+    return errors
+
+
 def read_manual_source_routes():
     routes = []
     for path in MANUAL_MARKDOWN_FILES:
@@ -783,6 +758,7 @@ def read_manual_source_entries(manual_id):
 
 def validate_jekyll_sources():
     errors = []
+    errors.extend(validate_legacy_source_vocabulary())
     ruby_version = SOURCE_ROOT / ".ruby-version"
     gem_lock = SOURCE_ROOT / "Gemfile.lock"
     gitignore = SOURCE_ROOT / ".gitignore"
@@ -797,7 +773,7 @@ def validate_jekyll_sources():
         errors.append("missing .github/workflows/pages.yml")
     else:
         workflow_text = pages_workflow.read_text()
-        for script in ("assets/directory.js", "assets/catalog.js", "assets/theme.js"):
+        for script in ("assets/directory.js", "assets/theme.js"):
             if f"node --check {script}" not in workflow_text:
                 errors.append(f"Pages workflow must syntax-check {script}")
         official_action_refs = re.findall(
@@ -832,21 +808,9 @@ def validate_jekyll_sources():
         errors.append("sitemap.md contains duplicate HTML routes")
     if registered != source_routes:
         errors.append("sitemap.md routes do not exactly match Jekyll source pages")
-    if len(source_routes) < MINIMUM_ROUTE_COUNT:
-        errors.append(
-            f"expected at least {MINIMUM_ROUTE_COUNT} Jekyll source pages, "
-            f"found {len(source_routes)}"
-        )
-    if len(SOURCE_HTML_FILES) < MINIMUM_HTML_SOURCE_COUNT:
-        errors.append(
-            f"expected at least {MINIMUM_HTML_SOURCE_COUNT} HTML authority sources, "
-            f"found {len(SOURCE_HTML_FILES)}"
-        )
-    if len(MANUAL_MARKDOWN_FILES) < MINIMUM_MANUAL_SOURCE_COUNT:
-        errors.append(
-            f"expected at least {MINIMUM_MANUAL_SOURCE_COUNT} Markdown manual sources, "
-            f"found {len(MANUAL_MARKDOWN_FILES)}"
-        )
+    missing_core_routes = sorted(REQUIRED_CORE_ROUTES - set(source_routes))
+    if missing_core_routes:
+        errors.append(f"missing required Endem topology routes: {missing_core_routes}")
     for route, parent in REQUIRED_ARCHITECTURE_ROUTES.items():
         row = registry.get(route)
         if row is None or row["kind"] != "content" or row["parent"] != parent:
@@ -918,7 +882,8 @@ def validate_jekyll_sources():
             if re.search(r"^\s*\{:", body, re.MULTILINE):
                 errors.append(f"{route}: Markdown body must not use Kramdown attributes")
             headings = re.findall(r"^##\s+(.+?)\s*$", body, re.MULTILINE)
-            if route in DOC_GUIDE_HEADINGS and headings != DOC_GUIDE_HEADINGS[route]:
+            normalized_headings = [heading.replace("`", "") for heading in headings]
+            if route in DOC_GUIDE_HEADINGS and normalized_headings != DOC_GUIDE_HEADINGS[route]:
                 errors.append(
                     f"{route}: Markdown h2 sequence must be {DOC_GUIDE_HEADINGS[route]}, got {headings}"
                 )
@@ -977,12 +942,10 @@ def validate_jekyll_sources():
             "{% include site-footer.html %}",
             "data-docs-rail",
             "page.permalink contains '/docs/'",
-            'data-tool-id="{{ page_tool_id }}"',
             "{{ '/assets/style.css' | relative_url }}",
             "{{ '/assets/directory.css' | relative_url }}",
             "{{ '/assets/theme.js' | relative_url }}",
             "{{ '/assets/directory.js' | relative_url }}",
-            "{{ '/assets/catalog.js' | relative_url }}",
             "site.github.build_revision",
             "?v={{ asset_version | escape }}",
             'data-page-role="{{ page.page_role }}"',
@@ -1045,6 +1008,7 @@ def validate_jekyll_sources():
             "sitemap.md",
             "Browse All",
             "Documentation",
+            "Endem",
             "Development",
         ):
             if token not in footer_text:
@@ -1312,8 +1276,6 @@ def validate_jekyll_sources():
         ):
             if token not in directory_text:
                 errors.append(f"directory.js missing dynamic manual contract: {token}")
-        if "synthesisDocs:" in directory_text:
-            errors.append("directory.js must not retain a static synthesis manual directory duplicate")
         if "details.open = containsCurrent || groupIndex === 0;" in directory_text:
             errors.append("desktop documentation rail must not hide non-current groups by default")
         if "item.dataset.navGroup" in directory_text or "link.dataset.navItem" in directory_text:
@@ -1323,10 +1285,10 @@ def validate_jekyll_sources():
 
         expected_nav_covers = {
             "background", "architecture", "foundations", "faq",
-            "noema-ir", "noema-object", "horizon-object", "components",
-            "conform", "inspect", "compile", "link",
-            "getting-started", "architecture-guide", "tools-reference",
-            "spec-reference", "synthesis-manual", "current-stage", "roadmap", "testing",
+            "endem-spec", "weave", "witness", "components",
+            "endem", "see", "format", "run",
+            "getting-started", "architecture-guide", "application-reference",
+            "spec-reference", "endem-manual", "current-stage", "roadmap", "testing",
             "news", "downloads",
         }
         nav_cover_asset = SOURCE_ROOT / "assets/nav-covers.svg"
@@ -1377,10 +1339,10 @@ def validate_jekyll_sources():
         header_value_match = re.search(r"^  value:\s*(.+?)\s*$", timeline_text, re.MULTILINE)
         if (
             header_value_match is None
-            or len(header_value_match.group(1)) != 6
             or not header_value_match.group(1).endswith("阶段")
+            or len(header_value_match.group(1)) > 16
         ):
-            errors.append("project timeline header value must use four characters followed by 阶段")
+            errors.append("project timeline header value must remain concise and end with 阶段")
     if not timeline_include.exists():
         errors.append("missing _includes/project-timeline.html")
     else:
@@ -1451,21 +1413,16 @@ def validate_jekyll_sources():
     if obsolete_image.exists():
         errors.append("obsolete secure-object-core.jpg must not remain in source or built output")
 
-    tool_design = design_root / "internal-tools.md"
     style_text = style.read_text() if style.exists() else ""
-    tool_design_text = tool_design.read_text() if tool_design.exists() else ""
-    if len(TOOL_IDS) != 23:
-        errors.append(f"expected 23 HTML tool project pages, found {len(TOOL_IDS)}")
-    for tool_id in TOOL_IDS:
-        if (SOURCE_ROOT / "tools" / tool_id / "index.md").exists():
-            errors.append(f"tools/{tool_id}/index.md is forbidden; tool project pages remain HTML")
-        tool_source = SOURCE_ROOT / "tools" / tool_id / "index.html"
-        if tool_source.read_text().count('class="tool-project-body"') != 1:
-            errors.append(f"tool project {tool_id} must define one bounded sticky body")
-        if f'body[data-tool-id="{tool_id}"]' not in style_text:
-            errors.append(f"missing custom visual signature for tool {tool_id}")
-        if f"### {tool_id}" not in tool_design_text:
-            errors.append(f"missing design guidance for tool {tool_id}")
+    if (SOURCE_ROOT / "tools").exists():
+        errors.append("the retired multi-tool source tree must not remain")
+    endem_source = SOURCE_ROOT / "endem" / "index.html"
+    if not endem_source.exists():
+        errors.append("missing Endem application page")
+    elif endem_source.read_text().count('class="tool-project-body"') != 1:
+        errors.append("Endem application page must define one bounded sticky body")
+    if 'body[data-site-module="endem"]' not in style_text:
+        errors.append("missing shared Endem application visual signature")
 
     if errors:
         print("\n".join(errors))
@@ -1474,12 +1431,12 @@ def validate_jekyll_sources():
     return 0
 
 
-def validate_tool_project_contract(h2_texts, status_texts, manual_counts=None):
+def validate_application_project_contract(h2_texts, status_texts, manual_counts=None):
     errors = []
-    if list(h2_texts) != TOOL_PROJECT_SECTIONS:
+    if list(h2_texts) != APPLICATION_PROJECT_SECTIONS:
         errors.append(
-            "tool-project h2 sequence must be exactly "
-            f"{TOOL_PROJECT_SECTIONS}, got {list(h2_texts)}"
+            "application-project h2 sequence must be exactly "
+            f"{APPLICATION_PROJECT_SECTIONS}, got {list(h2_texts)}"
         )
 
     manual_counts = manual_counts or {}
@@ -1489,46 +1446,49 @@ def validate_tool_project_contract(h2_texts, status_texts, manual_counts=None):
 
     if len(status_texts) != 1:
         errors.append("expected one 当前状态 section")
-    elif TOOL_PROJECT_STATUS_DECLARATION not in normalize_visible_text(status_texts[0]):
-        errors.append(
-            "current-state section must contain the complete disclosure: "
-            + TOOL_PROJECT_STATUS_DECLARATION
-        )
+    else:
+        status_text = normalize_visible_text(status_texts[0])
+        missing = [token for token in APPLICATION_STATUS_DISCLOSURES if token not in status_text]
+        if missing:
+            errors.append(
+                "Endem current-state section is missing disclosures: "
+                + ", ".join(missing)
+            )
     return errors
 
 
-def tool_project_validator_self_test():
+def application_project_validator_self_test():
     errors = []
-    valid_status = [TOOL_PROJECT_STATUS_DECLARATION]
-    if validate_tool_project_contract(TOOL_PROJECT_SECTIONS, valid_status):
-        errors.append("tool-project validator rejects the valid reference contract")
+    valid_status = ["；".join(APPLICATION_STATUS_DISCLOSURES)]
+    if validate_application_project_contract(APPLICATION_PROJECT_SECTIONS, valid_status):
+        errors.append("application-project validator rejects the valid reference contract")
 
     negative_cases = {
         "wrong order": [
-            ["当前状态", "工具简介", *TOOL_PROJECT_SECTIONS[2:]],
+            ["当前状态", "应用简介", *APPLICATION_PROJECT_SECTIONS[2:]],
             valid_status,
         ],
         "duplicate section": [
-            [*TOOL_PROJECT_SECTIONS[:2], "当前状态", *TOOL_PROJECT_SECTIONS[2:]],
+            [*APPLICATION_PROJECT_SECTIONS[:2], "当前状态", *APPLICATION_PROJECT_SECTIONS[2:]],
             valid_status,
         ],
         "extra numbered chapter": [
-            [*TOOL_PROJECT_SECTIONS, "第七章 依赖与文档拆分"],
+            [*APPLICATION_PROJECT_SECTIONS, "第七章 依赖与文档拆分"],
             valid_status,
         ],
         "reversed release wording": [
-            TOOL_PROJECT_SECTIONS,
-            ["当前状态：已经发布可执行版本，命令行界面、参数和文件扩展名已经确定。"],
+            APPLICATION_PROJECT_SECTIONS,
+            ["已经发布可执行版本，参数与稳定 ABI 已经确定。"],
         ],
     }
     for name, (headings, statuses) in negative_cases.items():
-        if not validate_tool_project_contract(headings, statuses):
-            errors.append(f"tool-project validator failed to reject {name}")
+        if not validate_application_project_contract(headings, statuses):
+            errors.append(f"application-project validator failed to reject {name}")
     return errors
 
 
 def main():
-    errors = tool_project_validator_self_test()
+    errors = application_project_validator_self_test()
     directory_css = DIRECTORY_CSS.read_text()
     for token in (
         "background:color-mix(in srgb,var(--paper) 90%,transparent)",
@@ -1574,10 +1534,9 @@ def main():
         errors.append("sitemap.md contains duplicate HTML routes")
     if sorted(registered) != sorted(actual_routes):
         errors.append("sitemap.md routes do not exactly match HTML files")
-    if len(registered) < MINIMUM_ROUTE_COUNT:
-        errors.append(
-            f"expected at least {MINIMUM_ROUTE_COUNT} formal routes, found {len(registered)}"
-        )
+    missing_core_routes = sorted(REQUIRED_CORE_ROUTES - set(registered))
+    if missing_core_routes:
+        errors.append(f"missing required Endem topology routes: {missing_core_routes}")
     errors.extend(validate_required_text_contracts(ROOT))
     errors.extend(validate_readability_behavior_contracts(ROOT))
 
@@ -1588,6 +1547,8 @@ def main():
         sitemap_text = sitemap.read_text()
         if FRONT_MATTER.match(sitemap_text):
             errors.append("sitemap.md must remain a static Markdown file without Front Matter")
+        if "Version: 3" not in sitemap_text:
+            errors.append("sitemap.md must identify the Endem topology as discovery version 3")
         sitemap_routes = set(
             re.findall(r"https://noemion\.github\.io/([A-Za-z0-9_./-]+\.html)", sitemap_text)
         )
@@ -1604,6 +1565,9 @@ def main():
     section_routes = [row["route"] for row in route_rows if row["kind"] == "section"]
     if sorted(section_routes) != sorted(PORTAL_ROUTES[1:]):
         errors.append("sitemap.md section routes do not match the approved portal architecture")
+    app_routes = [row["route"] for row in route_rows if row["kind"] == "app"]
+    if sorted(app_routes) != sorted(APPLICATION_ROUTES):
+        errors.append("sitemap.md application routes do not match the approved Endem topology")
 
     manual_payload_page = ROOT / "docs/index.html"
     if not manual_payload_page.exists():
@@ -1629,7 +1593,7 @@ def main():
                     )
                 manual_index_routes = [
                     "docs/index.html",
-                    *[routes[0] for routes in TOOL_MANUAL_ROUTE_ORDERS.values()],
+                    *[routes[0] for routes in MANUAL_ROUTE_ORDERS.values()],
                 ]
                 for manual_index_route in manual_index_routes:
                     index_path = ROOT / manual_index_route
@@ -1657,23 +1621,37 @@ def main():
         visible_text = normalize_visible_text(
             " ".join("".join(section["text"]) for section in parser.sections)
         )
-        for term in ("提示词工程", "Noesis", "Noema", "分析哲学", "工程类比"):
+        for term in (
+            "Endem", "Weave", "Frame", "Witness", "say", "aim", "must", "done", "open",
+            "一个根", "模型", "不可信",
+        ):
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
         home_source = home.read_text()
         if home_source.count('class="portal-chapter-title"') != len(HOME_HEADINGS):
             errors.append("index.html: every homepage chapter heading must use the shared symbolic title treatment")
         for token in (
-            "DATAFLOW / ACTIVE",
+            "ENDEM / OPEN",
             "dataflow-lane-source",
             "dataflow-lane-bind",
             "dataflow-lane-reloc",
             "dataflow-lane-verify",
-            "portal-arrow-ring",
-            "arrow-ring-progress",
+            'class="endem-object-visual"',
+            'class="endem-object-title"',
+            'class="endem-object-record"',
+            'class="endem-object-footer"',
+            "compiler-bridge",
         ):
             if token not in home_source:
                 errors.append(f"index.html: homepage dataflow visual missing {token}")
+        home_style_path = ROOT / "assets" / "style.css"
+        home_style = home_style_path.read_text() if home_style_path.exists() else ""
+        for selector in (
+            ".endem-object-visual", ".endem-object-title",
+            ".endem-object-record", ".endem-object-footer",
+        ):
+            if selector not in home_style:
+                errors.append(f"style.css missing homepage visual selector {selector}")
 
     foundations = ROOT / "about/intellectual-foundations.html"
     if foundations.exists():
@@ -1735,43 +1713,40 @@ def main():
         visible_text = normalize_visible_text(
             " ".join("".join(section["text"]) for section in parser.sections)
         )
-        for term in ("直白解释", "必须", "不得"):
+        for term in ("必须", "不得"):
             if term not in visible_text:
                 errors.append(f"{route}: normative page must preserve {term}")
         if not any(
             marker in visible_text
-            for marker in ("当前设计", "设计方案", "待验证设计", "待验证设计方案")
+            for marker in ("已经采用", "已接受", "已冻结")
         ):
-            errors.append(f"{route}: normative page must distinguish current or testable design")
+            errors.append(f"{route}: normative page must state which boundary has been accepted")
         if not any(
             marker in visible_text
-            for marker in ("尚待确定", "待定事项", "开放问题")
+            for marker in ("仍需", "仍未冻结", "尚未冻结", "待验证", "开放问题")
         ):
-            errors.append(f"{route}: normative page must preserve unresolved boundaries")
+            errors.append(f"{route}: normative page must preserve unfrozen or unresolved boundaries")
 
     for row in route_rows:
-        if row["kind"] != "tool":
+        if row["kind"] != "app":
             continue
         path = ROOT / row["route"]
         if not path.exists():
             continue
         parser = parse(path)
-        tool = Path(row["route"]).parent.name
         breadcrumb = " ".join("".join(parser.breadcrumb_text).split())
         breadcrumb_routes = resolved_routes(path, parser.breadcrumb_links)
         if (
             parser.class_counts["breadcrumbs"] != 1
-            or breadcrumb_routes != ["index.html", "tools/index.html"]
-            or not all(label in breadcrumb for label in ("项目", "工具", tool))
+            or breadcrumb_routes != ["index.html"]
+            or not all(label in breadcrumb for label in ("项目", "Endem"))
         ):
-            errors.append(f"{row['route']}: must expose 项目 / 工具 / 当前工具 breadcrumbs")
-        if parser.tool_id != tool:
-            errors.append(f"{row['route']}: body data-tool-id must be {tool!r}")
+            errors.append(f"{row['route']}: must expose 项目 / Endem breadcrumbs")
         if parser.class_counts["tool-project-body"] != 1:
-            errors.append(f"{row['route']}: must preserve one bounded sticky tool body")
+            errors.append(f"{row['route']}: must preserve one bounded sticky application body")
         status_sections = [section for section in parser.sections if section["heading"] == "当前状态"]
         status_texts = ["".join(section["text"]) for section in status_sections]
-        contract_errors = validate_tool_project_contract(
+        contract_errors = validate_application_project_contract(
             parser.h2_texts,
             status_texts,
             parser.class_counts,
@@ -1796,10 +1771,14 @@ def main():
     global_rows = [
         row["route"]
         for row in route_rows
-        if row["kind"] in {"portal", "section", "tool"}
+        if row["kind"] in {"portal", "section", "app"}
     ]
-    if route_rows and len(global_rows) != 34:
-        errors.append(f"expected 34 global landing routes, found {len(global_rows)}")
+    expected_global_rows = set(PORTAL_ROUTES) | set(APPLICATION_ROUTES)
+    if route_rows and set(global_rows) != expected_global_rows:
+        errors.append(
+            "global landing routes do not match the Endem information architecture: "
+            f"expected={sorted(expected_global_rows)}, got={sorted(global_rows)}"
+        )
 
     route_registry = {row["route"]: row for row in route_rows}
 
@@ -1860,16 +1839,24 @@ def main():
                 *("".join(section["text"]) for section in parser.sections),
             ])
         )
-        if not any(marker in visible_text for marker in ("现行设计", "当前设计", "设计方案", "已经明确", "当前", "必须", "负责")) or not any(
-            marker in visible_text for marker in ("待验证", "尚待确定", "待定事项", "后续计划", "尚未")
+        if not any(
+            marker in visible_text
+            for marker in ("现行设计", "当前设计", "已经采用", "当前", "必须", "不得", "不能", "只")
         ):
-            errors.append(f"{route}: guide must distinguish current design from unfinished work")
+            errors.append(f"{route}: guide must state an adopted boundary")
+        if route != "docs/architecture-guide.html" and not any(
+            marker in visible_text
+            for marker in (
+                "待验证", "尚待确定", "待定事项", "后续计划", "尚未", "未发布", "未冻结", "第一阶段", "何时建设",
+            )
+        ):
+            errors.append(f"{route}: guide must identify unfinished work")
 
-    for manual_id, manual_routes in TOOL_MANUAL_ROUTE_ORDERS.items():
-        tool_route = f"tools/{manual_id}/index.html"
-        tool_row = route_registry.get(tool_route)
-        if tool_row is None or tool_row["kind"] != "tool":
-            errors.append(f"{tool_route} must be registered as kind tool")
+    for manual_id, manual_routes in MANUAL_ROUTE_ORDERS.items():
+        app_route = f"{manual_id}/index.html"
+        app_row = route_registry.get(app_route)
+        if app_row is None or app_row["kind"] != "app":
+            errors.append(f"{app_route} must be registered as kind app")
 
         manual_root = manual_routes[0]
         manual_row = route_registry.get(manual_root)
@@ -1892,16 +1879,6 @@ def main():
                 or row["parent"] != manual_root
             ):
                 errors.append(f"{route}: invalid {manual_id} topic registry metadata")
-
-        legacy_topic_routes = [
-            (Path("tools") / manual_id / Path(route).name).as_posix()
-            for route in manual_routes[1:]
-            if (ROOT / "tools" / manual_id / Path(route).name).exists()
-        ]
-        if legacy_topic_routes:
-            errors.append(
-                f"legacy {manual_id} topic routes are forbidden: {legacy_topic_routes}"
-            )
 
     numbered_routes = [
         route
@@ -1990,27 +1967,15 @@ def main():
                 errors.append(f"current stage output exposes internal workflow copy: {forbidden}")
 
     directory_script = ROOT / "assets/directory.js"
-    catalog_script = ROOT / "assets/catalog.js"
     theme_script = ROOT / "assets/theme.js"
     favicon = ROOT / "assets/favicon.svg"
     if not directory_script.exists():
         errors.append("missing assets/directory.js")
-    if not catalog_script.exists():
-        errors.append("missing assets/catalog.js")
     if not theme_script.exists():
         errors.append("missing assets/theme.js")
     if not favicon.exists():
         errors.append("missing assets/favicon.svg")
-    tools_catalog = ROOT / "tools" / "index.html"
-    if tools_catalog.exists():
-        tools_catalog_text = tools_catalog.read_text()
-        if not re.search(r'<div class="catalog-controls"[^>]*\shidden(?:\s|>)', tools_catalog_text):
-            errors.append("tools catalog controls must stay hidden until enhancement is active")
-    if catalog_script.exists() and "if (controls) controls.hidden = false;" not in catalog_script.read_text():
-        errors.append("catalog.js must reveal controls only after enhancement initializes")
     style_text = (ROOT / "assets" / "style.css").read_text() if (ROOT / "assets" / "style.css").exists() else ""
-    if ".catalog-controls[hidden]{display:none!important}" not in style_text:
-        errors.append("style.css must keep catalog controls hidden before enhancement")
     if "scale(.996)" in style_text or "scale(0.996)" in style_text:
         errors.append("style.css press feedback must use the design-system scale(0.96) contract")
 
@@ -2101,7 +2066,7 @@ def main():
         registered_set = set(registered)
         manual_routes = {
             route for route in registered
-            if route.startswith("docs/") or re.match(r"^tools/[^/]+/docs/", route)
+            if route.startswith("docs/") or route.startswith("endem/docs/")
         }
         if not declared <= registered_set:
             errors.append("directory.js contains links outside the formal route registry")
@@ -2122,34 +2087,30 @@ def main():
             errors.append("node is required to execute directory active-item behavior tests")
         else:
             active_cases = [
-                ["tools/synthesis/index.html", "https://site.test/tools/synthesis", "https://site.test/tools/synthesis/docs", True],
-                ["tools/synthesis/index.html", "https://site.test/tools/synthesis", "https://site.test/tools/synthesis/docs/topic.html", True],
-                ["tools/synthesis/index.html", "https://site.test/tools/synthesis", "https://site.test/tools/synthesis/docsfoo", False],
-                ["tools/synthesis/index.html", "https://site.test/tools/synthesis", "https://site.test/tools/synthesis/docs-old/x", False],
-                ["tools/synthesis/index.html", "https://site.test/tools/synthesis", "https://site.test/tools/synthesisx/docs", False],
+                ["endem/index.html", "https://site.test/endem", "https://site.test/endem/docs", True],
+                ["endem/index.html", "https://site.test/endem", "https://site.test/endem/docs/safety.html", True],
+                ["endem/index.html", "https://site.test/endem", "https://site.test/endem-old/docs", False],
                 ["docs/index.html", "https://site.test/docs", "https://site.test/docs/guide", True],
                 ["docs/index.html", "https://site.test/docs", "https://site.test/docs/getting-started.html", True],
                 ["docs/index.html", "https://site.test/docs", "https://site.test/docs-old/guide.html", False],
-                ["tools/index.html", "https://site.test/tools", "https://site.test/tools/theoria", False],
             ]
             module_cases = [
                 ["index.html", "project"],
                 ["about/background.html", "project"],
                 ["about/intellectual-foundations.html", "project"],
-                ["architecture/noema-lifecycle.html", "architecture"],
+                ["architecture/endem-lifecycle.html", "architecture"],
                 ["architecture/decisions.html", "architecture"],
-                ["specifications/noema-ir.html", "architecture"],
-                ["components/horizon-engine.html", "architecture"],
-                ["components/agent-harness.html", "architecture"],
-                ["components/fulfillment-runtime.html", "architecture"],
+                ["specifications/endem.html", "architecture"],
+                ["components/core.html", "architecture"],
+                ["components/reader.html", "architecture"],
+                ["components/runner.html", "architecture"],
                 ["docs/getting-started.html", "docs"],
                 ["downloads/index.html", "resources"],
                 ["faq/index.html", "resources"],
                 ["development/testing.html", "development"],
                 ["news/index.html", "development"],
-                ["tools/theoria/index.html", "tools"],
-                ["tools/synthesis/index.html", "synthesis"],
-                ["tools/synthesis/docs/contract.html", "synthesis"],
+                ["endem/index.html", "endem"],
+                ["endem/docs/safety.html", "endem"],
             ]
             behavior_script = (
                 "const api = require(process.argv[1]);"
@@ -2207,7 +2168,7 @@ def main():
                 ] != ["docs/index.html", "docs/new.html"]:
                     errors.append("dynamic manual directory does not sort new Markdown pages")
 
-    for manual_id, manual_routes in TOOL_MANUAL_ROUTE_ORDERS.items():
+    for manual_id, manual_routes in MANUAL_ROUTE_ORDERS.items():
         manual_index = ROOT / manual_routes[0]
         if manual_index.exists():
             parser = parse(manual_index)
@@ -2231,10 +2192,8 @@ def main():
             if NUMBERED_NAME.search(route):
                 errors.append(f"{route}: numbered topic filename is forbidden")
             parser = parse(path)
-            if parser.tool_id != manual_id:
-                errors.append(
-                    f"{route}: tool manual must inherit data-tool-id='{manual_id}'"
-                )
+            if parser.site_module != "endem":
+                errors.append(f"{route}: Endem manual must inherit data-site-module='endem'")
             for class_name in ("breadcrumbs", "manual-nav-top", "manual-nav-bottom"):
                 if parser.class_counts[class_name] != 1:
                     errors.append(f"{route}: expected one {class_name}")
@@ -2273,7 +2232,8 @@ def main():
         return 1
     print(
         f"PASS: {len(HTML_FILES)} registered pages, "
-        f"{len(global_rows)} global landings, and four tool-manual contracts"
+        f"{len(global_rows)} global landings, {len(MANUAL_ROUTE_ORDERS['endem'])} Endem manual routes, "
+        "and deterministic trust-boundary contracts"
     )
     return 0
 

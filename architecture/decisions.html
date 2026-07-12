@@ -7,39 +7,67 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <div class="hero"><h1>架构决策</h1><p>集中说明已经采用的跨组件职责边界、排除的替代方案，以及仍未确定的接口和字段。</p><div class="badges"><span class="badge">Accepted Principles</span><span class="badge">Not Stable ABI</span><span class="badge">Traceable</span></div></div>
+  <div class="hero"><h1>架构决策</h1><p>说明当前采用的 Endem 制品体系、单一命令面、组件边界和旧决定的取代状态。</p><div class="badges"><span class="badge">ADR-0008 Accepted</span><span class="badge">Supersession Tracked</span><span class="badge">ABI Unfrozen</span></div></div>
+
   <section class="content-stack">
-    <h2>架构决策的适用范围</h2>
-    <p class="lead">架构决策约束组件职责和后续规范方向，但不等同于已经发布的软件接口。每项决策回答“为什么这样分层、排除了哪些做法、影响哪些组件和规范”；具体字段、编码、ABI 和错误码仍须进入正式规范与一致性测试。</p>
-    <p>决定发生变化时，相关架构、组件、工具、手册和测试必须在同一次变更中更新。尚无充分证据的问题继续保留在<a href="open-questions.html">开放问题</a>，不能用实现便利静默替代。</p>
+    <h2>当前权威决定</h2>
+    <p class="lead"><a href="adr-0008-endem-system.html">ADR-0008：Endem 制品与单一命令面</a>是当前对象、组件、命令、生命周期和首条实现切片的权威架构决策。它冻结名称和职责，不冻结二进制 ABI、文本语法或安装接口。</p>
+    <p>旧 ADR 继续作为设计历史存在，但被取代的术语、路由和工具数量不能反向约束当前实现。仍被保留的安全原则已经映射到 Core、Reader、Runner、Frame 和 Witness。</p>
   </section>
+
   <section class="content-wide">
-    <h2>已采纳的架构决策</h2>
-    <div class="table-wrap"><table><thead><tr><th>决定</th><th>采用的边界</th><th>直接影响</th></tr></thead><tbody>
-      <tr><td>命名与语义边界</td><td>Noesis 表示确定性理解与编译活动；Noema 表示机器对象；Horizon 表示未完全展开的背景；Fulfillment 表示受约束求解。</td><td>NIR、NOBJ、HOBJ、组件名、工具名与公开术语。</td></tr>
-      <tr><td>项目品牌与工具命令独立</td><td>Noemion 不强制成为所有命令的字面前缀；工具可以采用能解释职责的独立哲学名称，但工程含义仍由输入、输出、不变量与测试定义，命令名不得进入对象格式身份。</td><td><code>noesis</code>、<code>morphe</code>、<code>theoria</code>、<code>synthesis</code>、工具路由与未来命令行界面。</td></tr>
-      <tr><td>Agent Harness 控制平面</td><td>Harness 位于 Fulfillment Runtime 外侧，负责上下文、会话级能力、策略、观察、预算和人工升级；模型不能绕过它调用能力。</td><td>Agent Harness、noemexecute、noemobserve、noemcoverage 与 noemevaluate。</td></tr>
-      <tr><td>工具链产物与外部签名</td><td>发布链依次形成 Release Object、Release Coverage Proof、Unsigned Package Candidate、Signing Request、Signature Response 与 Signed Noemion Package；私钥只在外部签名系统。</td><td>noemreduce、noemcoverage、noembundle、noemexecute 与对象生命周期。</td></tr>
-      <tr><td>候选、能力与验收分层</td><td>Candidate Envelope 不是 NIR；Capability Requirement 不是实时句柄；Candidate Assessment、Evidence Closure 和 Acceptance Decision 是三个不同结果。</td><td>Noesis Core、Object System、Agent Harness、Runtime 与所有运行证据工具。</td></tr>
-      <tr><td>NIR/NOBJ 结构基线</td><td>自然语言先形成不可信候选；确认语义经过确定性重推导或授权绑定后进入带显式来源的 NIR 图记录。NOBJ 使用固定 Header、前置目录、长度限定 Section 和分层验证，不让模型决定记录或二进制布局。</td><td>NIR/NOBJ 规范、Noesis Core、四套格式工具手册、验证器与畸形对象语料。</td></tr>
-      <tr><td>身份、完整性与签名域分离</td><td>完整文件摘要在对象外计算；对象内 Integrity Root 不覆盖自身，未经外部摘要或签名绑定时也不是信任锚；Semantic Identity 等待等价规则冻结；发布签名属于外部封装且不证明语义正确。</td><td>NOBJ Header、Integrity Section、Debug Companion、发布清单、签名范围与等价测试。</td></tr>
-      <tr><td>Phase 0/1 首个纵向切片</td><td>先完成 Text NIR → NOBJ、生产验证器、独立直接读取器和差分一致性；工具页表示职责，不承诺 23 个独立二进制。</td><td>首个实现仓库、规范条款、测试向量、Reader/Writer、theoria、noemvalidate 与 noemcertify。</td></tr>
-      <tr><td>外部 AI 协议只做适配</td><td>MCP、A2A、JSON Schema 和 OpenTelemetry GenAI 只在 Agent Harness 外缘映射；远端工具说明、Agent Card、schema 与任务状态均是不可信声明。</td><td>协议 Profile、能力策略、令牌隔离、安全回归与遥测 exporter。</td></tr>
+    <h2>决策状态</h2>
+    <div class="table-wrap"><table><thead><tr><th>ADR</th><th>状态</th><th>当前解释</th></tr></thead><tbody>
+      <tr><td>ADR-0001 核心命名体系</td><td>Superseded by ADR-0008</td><td>公开对象和组件改用 Endem、Weave、Frame、Witness 与直白工程副标题。</td></tr>
+      <tr><td>ADR-0002 控制面边界</td><td>Retained in part</td><td>模型不可信、最小能力、实时句柄隔离与人工升级原则进入 Runner。</td></tr>
+      <tr><td>ADR-0003 工具链产物闭环</td><td>Superseded by ADR-0008</td><td>主产物流收敛为 Endem/Weave、外部签名材料和 Witness。</td></tr>
+      <tr><td>ADR-0004 候选、能力与验收边界</td><td>Retained in part</td><td>候选不等于事实、能力声明不等于句柄、Witness 不等于验收继续有效。</td></tr>
+      <tr><td>ADR-0005 独立工具名称</td><td>Superseded by ADR-0008</td><td>只保留 <code>endem</code> 与八个子命令。</td></tr>
+      <tr><td>ADR-0006 旧结构基线</td><td>Superseded by ADR-0008</td><td>安全解析原则保留，语义和物理设计重新围绕 Endem 展开。</td></tr>
+      <tr><td>ADR-0007 Phase 0/1 纵向切片</td><td>Superseded by ADR-0008</td><td>首条切片改为 Goal Card → form → Endem → check/see → test。</td></tr>
+      <tr><td><a href="adr-0008-endem-system.html">ADR-0008 Endem 制品与单一命令面</a></td><td>Accepted</td><td>当前名称、职责、状态、应用拓扑和首条实现路径。</td></tr>
     </tbody></table></div>
   </section>
+
+  <section class="content-wide">
+    <h2>ADR-0008 冻结的内容</h2>
+    <div class="table-wrap"><table><thead><tr><th>决定</th><th>采用的边界</th><th>直接影响</th></tr></thead><tbody>
+      <tr><td>最小目标制品</td><td>一个 Endem 只能有一个根 aim，并保留 say、must、done 与 open。</td><td>来源格式、Core、规范向量和错误语义。</td></tr>
+      <tr><td>同一制品状态</td><td>Endem 沿 open → bound → sealed 演进，不建立平行对象家族。</td><td>身份、摘要、发布、签名和生命周期。</td></tr>
+      <tr><td>组合闭包</td><td>Weave 只在多个 Endem 需要解析关系时出现；权限只能收紧。</td><td>bind、依赖锁定、冲突和披露。</td></tr>
+      <tr><td>运行非文件视图</td><td>Frame 只存在于会话内，不携带到磁盘或跨会话。</td><td>Runner、能力句柄、上下文和隔离。</td></tr>
+      <tr><td>有限证据主张</td><td>Witness 保存可定位依据，但不自动证明结论或形成 accepted。</td><td>来源、绑定、签名、运行、验收与审计。</td></tr>
+      <tr><td>唯一 CLI</td><td><code>endem</code> 提供 form/check/bind/pack/seal/see/run/test。</td><td>工具项目、手册、安装包和自动化接口。</td></tr>
+      <tr><td>独立与隔离</td><td>see 不共享生产解析；run 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>
+    </tbody></table></div>
+  </section>
+
   <section class="content-split">
-    <h2>已排除的捷径</h2>
+    <h2>排除的捷径</h2>
     <ul>
-      <li>模型输出不能直接生成 NIR/NOBJ，也不能因结构合法被当作来源忠实语义。</li>
-      <li>签名不能替代结构、语义、权限和环境策略验证。</li>
-      <li>Loaded State 不携带可直接执行的会话能力句柄。</li>
-      <li>Runtime 候选通过评价，不等于任务已经最终验收。</li>
-      <li>Release Coverage Proof、Evidence Closure Report、离线评估和跨工具一致性检查都不能替代发布授权或人工专属判断。</li>
+      <li>不把任意自然语言或模型 JSON 直接视为 Endem。</li>
+      <li>不为查看、符号、大小、归档、裁剪、跟踪和评估各建一个产品。</li>
+      <li>不使用环境路径、当前目录或网络“最新版本”解析正式依赖。</li>
+      <li>不让通用对象变换器任意改写 aim、must、done 或 open。</li>
+      <li>不把签名、Witness 数量、模型评分或 Runtime 自述当作任务完成。</li>
+      <li>不把 Frame 序列化为可复制的权限对象。</li>
     </ul>
   </section>
-  <section class="content-band">
-    <h2>尚未冻结的内容</h2>
-    <p>Candidate Envelope、Source Binding Decision、NIR 公共记录头与记录家族、NOBJ Header/Section Directory 的逻辑字段职责、非循环摘要域和首个实现切片已经形成详细设计基线。仍未冻结的是实现语言、类型枚举、字段宽度、魔数字节、Section/重定位编号、Text NIR 语法、压缩与摘要算法、协议适配 Profile，以及 Loaded State Handle、Runtime/Harness 协议、Acceptance Decision、签名封装和撤销协议。它们仍需威胁模型、跨实现原型和正反测试，不能从当前逻辑字段直接推断稳定 ABI。</p>
+
+  <section class="content-wide">
+    <h2>外部机制的采用边界</h2>
+    <p>GNU、MCP、A2A 和智能体工程资料只用于核对可复用机制，不决定 Endem 语义或成熟度：</p>
+    <ul>
+      <li>GNU <code>readelf</code> 与 BFD：<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">https://www.sourceware.org/binutils/docs/binutils/readelf.html</a>、<a href="https://sourceware.org/binutils/docs/bfd.html">https://sourceware.org/binutils/docs/bfd.html</a></li>
+      <li>MCP 2025-11-25：<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a></li>
+      <li>A2A 1.0.1：<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a></li>
+      <li>OpenAI Harness Engineering：<a href="https://openai.com/index/harness-engineering/">https://openai.com/index/harness-engineering/</a></li>
+    </ul>
   </section>
-  <div class="next-prev"><a href="noema-lifecycle.html">← 对象生命周期</a><a href="open-questions.html">开放问题 →</a></div>
+
+  <section class="content-band">
+    <h2>变更规则</h2>
+    <p>任何改变 Endem 五组语义、根 aim 唯一性、状态机、Weave 组合、Frame 非文件边界、Witness 有限主张或唯一命令面的提案，都必须新增 ADR，并同步规范、组件、生命周期、手册和测试向量。</p>
+  </section>
+  <div class="next-prev"><a href="endem-lifecycle.html">← Endem 生命周期</a><a href="open-questions.html">开放问题 →</a></div>
 </main>

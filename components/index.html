@@ -2,50 +2,39 @@
 layout: default
 title: "系统组件 · Noemion"
 page_role: "section"
-footer_text: "Noemion · 组件"
+footer_text: "Noemion · 系统组件"
 permalink: "/components/index.html"
 ---
 <main id="main-content" tabindex="-1">
-  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>组件</span></nav>
-  <div class="hero"><h1>系统组件</h1><p>Noemion 把确定性编译、对象处理、模型辅助、智能体控制、生成式求解和结果验收分成相互约束的组件。</p><div class="badges"><span class="badge">Noesis</span><span class="badge">Noema</span><span class="badge">Horizon</span><span class="badge">Harness</span><span class="badge">Fulfillment</span></div></div>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>系统组件</span></nav>
+  <div class="hero"><h1>系统组件</h1><p>只保留确定性制品核心、独立只读检查器和隔离实现运行器三个可单独验证的职责边界。</p><div class="badges"><span class="badge">Core</span><span class="badge">Reader</span><span class="badge">Runner</span><span class="badge">Minimal Topology</span></div></div>
   <section>
-    <h2>为什么按组件分层</h2>
-    <p class="lead">Noemion 必须把确定性对象生成、不可信对象处理、会话与能力控制、生成式求解和模型辅助分隔开，否则模型输出可能绕过格式、权限和完整性规则，系统也无法定位错误属于规范、编译、链接、装载、策略还是运行阶段。</p>
+    <h2>为什么只有三个组件</h2>
+    <p class="lead">组件数量由不同的信任、权限和失败责任决定，不由传统编译工具数量或命名对称决定。Core 能写规范制品，Reader 必须独立观察，Runner 才能持有会话级能力；这三条边界若合并，会分别失去确定性、交叉检查或最小权限。</p>
   </section>
   <section>
-    <h2>核心组件</h2>
+    <h2>组件入口</h2>
     <div class="page-links">
-      <a class="page-link" href="horizon-engine.html"><strong>Horizon Engine</strong><span>从长篇来源中提取带证据的不可信候选，但不决定对象内容。</span></a>
-      <a class="page-link" href="noesis-core.html"><strong>Noesis Core</strong><span>把受控来源或候选编译为可检验的 Noema IR，并生成确定性对象。</span></a>
-      <a class="page-link" href="noema-object-system.html"><strong>Noema Object System</strong><span>解析符号和依赖，链接、验证并装载 Noema Object。</span></a>
-      <a class="page-link" href="agent-harness.html"><strong>Agent Harness</strong><span>装配上下文和受限能力，驱动可观察、可拒绝的智能体会话。</span></a>
-      <a class="page-link" href="fulfillment-runtime.html"><strong>Fulfillment Runtime</strong><span>在已验证对象和验收契约下求解，并产生候选评价或能力请求。</span></a>
+      <a class="page-link" href="core.html"><strong>Core · 确定性制品核心</strong><span>形成、验证、绑定、打包和封装 Endem/Weave，唯一能够写规范制品。</span></a>
+      <a class="page-link" href="reader.html"><strong>Reader · 独立只读检查器</strong><span>使用第二条直接读取实现查看和比较制品，不生成生产可信句柄。</span></a>
+      <a class="page-link" href="runner.html"><strong>Runner · 隔离实现运行器</strong><span>重新验证 sealed 制品，建立 Frame，控制能力并形成 Witness 与决定。</span></a>
     </div>
   </section>
   <section>
-    <h2>组件为什么存在，什么时候可以省略</h2>
-    <p>这些名称首先表示必须可审计的逻辑职责，不要求每项都部署成独立进程或服务。一个实现可以把多个职责放入同一二进制，但不能因此混淆输入、权限、失败和证据；不需要某项能力的场景也不应被迫加载对应组件。</p>
-    <div class="table-wrap"><table><thead><tr><th>组件</th><th>不可替代的价值</th><th>省略或合并条件</th><th>不能被合并掉的边界</th></tr></thead><tbody>
-      <tr><td>Horizon Engine</td><td>在长来源中产生带来源、不确定性和替代解释的有限 Candidate Envelope。</td><td>完全受控的 NSL、Text NIR 或外部候选路径可以不使用；若实验不能优于规则/外部基线，应停止建设。</td><td>它始终是不可信前端，不能与 Noesis Core 合并成模型直接写对象。</td></tr>
-      <tr><td>Noesis Core</td><td>以确定性规则完成来源绑定、类型、约束、歧义和规范对象写入，是形成合格 NIR/NOBJ 的信任转换点。</td><td>可以作为编译器、汇编器共享的库，不必独立运行；凡生成合格对象都不能绕过。</td><td>模型、Runtime 和 Harness 不能取得布局或确认语义的决定权。</td></tr>
-      <tr><td>Noema Object System</td><td>把不可信对象安全地链接、验证和装载为不可变 Loaded State，并隔离失败原子性。</td><td>只做编译或静态检查、不链接和不运行时可以不启用装载部分；实现可作为库嵌入工具。</td><td>签名、结构、依赖、权限和环境装载检查不能交给 Runtime 猜测。</td></tr>
-      <tr><td>Agent Harness</td><td>在多步、可调用外部能力的任务中统一会话、最小权限、真实观察、预算、恢复和 Acceptance Policy。</td><td>无外部能力、无多步反馈且验收完全确定的单次求解可以退化为最小适配层，不必独立服务。</td><td>只要存在外部副作用或动态权限，Runtime 就不能直接持有句柄或自行验收。</td></tr>
-      <tr><td>Fulfillment Runtime</td><td>把已验证语义转化为具体候选，并把求解后端差异限制在受约束接口内。</td><td>对象编译、查看、链接、验证和发布流程不需要启动 Runtime；不同后端可以实现同一逻辑接口。</td><td>求解不能回写签名对象、扩大权限或把 Candidate Assessment 冒充 Acceptance Decision。</td></tr>
+    <h2>职责与依赖方向</h2>
+    <div class="flow"><div class="step">Goal Card</div><div class="step">Core → Endem / Weave</div><div class="step">Reader 旁路检查</div><div class="step">Core → sealed</div><div class="step">Runner → Frame</div><div class="step">Witness / Decision</div></div>
+    <div class="table-wrap"><table><thead><tr><th>组件</th><th>可以依赖</th><th>不得依赖</th></tr></thead><tbody>
+      <tr><td>Core</td><td>规范注册表、确定性算法、外部签名响应验证接口</td><td>模型 SDK、Runner、实时能力、Reader 输出</td></tr>
+      <tr><td>Reader</td><td>公开规范和自己的有界解析实现</td><td>Core 的 Reader/Writer、绑定器、BFD 或生产错误实现</td></tr>
+      <tr><td>Runner</td><td>Core 的生产验证接口、隔离后端适配器、策略和能力提供者</td><td>Core 写入器、对象改写接口、Reader 诊断作为授权依据</td></tr>
     </tbody></table></div>
   </section>
   <section>
-    <h2>职责边界</h2>
-    <p>Noema Object 是数据格式；Noema Object System 负责链接、验证和装载。Agent Harness 管理上下文、会话级能力、真实环境观察和最终验收流程。Fulfillment Runtime 在受限语义视图下求解并评价候选，但只能提出 Capability Request，不能直接持有外部能力或宣告任务最终通过。模型只能提交候选，不能决定对象布局、扩大权限或直接生成 NOBJ。</p>
+    <h2>部署不等于逻辑边界</h2>
+    <p><code>endem</code> 是唯一公开 CLI，三个组件可以随同一个发行包装载；<code>see</code> 仍必须使用独立代码路径，<code>run</code> 仍必须进入隔离权限域。简单任务可以不启动 Runner，多对象不存在时可以不启用 bind，但所有规范制品都必须通过 Core。</p>
   </section>
   <section>
-    <h2>组件关系与依赖方向</h2>
-    <div class="flow"><div class="step">来源 / Candidate Envelope</div><div class="step">Noesis Core</div><div class="step">NIR / NOBJ</div><div class="step">Noema Object System</div><div class="step">Loaded State</div><div class="step">Agent Harness ↔ Runtime</div><div class="step">Evidence / Decision</div></div>
-    <p>组件关系不是“信任不断上升”的单向直线。Noesis Core 只能证明受控推导、结构和约束检查；Object System 只能证明链接、完整性和当前装载策略；Runtime 候选、工具结果和环境观察仍是不可信数据。Harness 与 Runtime 通过 Runtime Request、Capability Request 和 Capability Observation 循环协作，直到预先声明的策略形成 Acceptance Decision 或要求人工复核。</p>
-    <p>Horizon Engine 产生 Candidate Envelope，不直接产生 Horizon Object。Noesis Core 把共享内容编译为 NOBJ；Object System 可以把 NOBJ 与已有 HOBJ 链接为新的 HOBJ。HOBJ 是对象形态，Horizon Engine 是模型组件，两者只有语义主题关联，没有直接的生产者—产物关系。</p>
-    <p>每个组件的权威说明必须定义输入输出、内部状态、关键算法或数据结构、失败条件、资源上限、可观测事件和验证策略。缺少其中任何一项时，只能视为职责级设计，不能推定接口或实现已经稳定。对象格式本身属于<a href="../specifications/noema-object.html">NOBJ 规范</a>，不作为运行组件重复登记。</p>
-  </section>
-  <section>
-    <h2>工具入口</h2>
-    <p>组件说明回答系统“由什么组成”；具体命令、输入输出和使用方式由<a href="../tools/">工具项目页</a>及其文档负责。</p>
+    <h2>规范与命令入口</h2>
+    <p>制品职责见<a href="../specifications/">Endem、Weave 与 Witness 规范</a>，状态变化见<a href="../architecture/endem-lifecycle.html">Endem 生命周期</a>，唯一命令的使用说明见<a href="../endem/">Endem 应用页</a>。</p>
   </section>
 </main>

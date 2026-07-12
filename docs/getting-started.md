@@ -9,54 +9,57 @@ manual_group: "start"
 manual_order: 1
 nav_title: "入门指南"
 hero_title: "Noemion 入门指南"
-hero_description: "从项目为什么存在开始，理解核心对象、确定性编译、可信装载与受约束执行。"
-summary: "从项目为什么存在开始，理解核心对象、确定性编译、可信装载与受约束执行。"
-badges: ["Getting Started", "Design Stage", "No Release Yet"]
+hero_description: "从 Endem 这个最小原语开始，理解目标怎样被形成、组合、装载与验收。"
+summary: "从 Endem 这个最小原语开始，理解目标怎样被形成、组合、装载与验收。"
+badges: ["Getting Started", "Endem", "No Release Yet"]
 ---
 
 ## 从这里开始
 
-Noemion 不是把提示词、文本或 Skill 包换一种二进制编码，而是为生成式计算建立可机器分析、验证、重定位、链接和执行的目标与约束对象体系。
+Noemion 试图为自然语言目标建立一种像目标文件之于传统计算那样持久、可组合、可独立检查的工程基础，但不会把传统对象术语和工具数量照搬过来。
 
-它试图解决的不是“如何写出更好的单次提示”，而是目标、约束、证据、歧义、依赖和权限如何成为可检查、可组合、可复现的长期工程对象。第一次接触 Noemion 时，建议先阅读[项目背景与边界](../about/background.html)，再依次了解对象、架构和工具链。
+项目创造的核心词是 **Endem**：由 *end* 与表示“最小区别单位”的 *-eme* 合成，定义为“最小、独立有效、可验证的期望终态单元”。它不是缩写，也不是 `OBJ` 的新前缀。
 
-## 核心对象
+## 五个字段
 
-- **[Noema IR（NIR）](../specifications/noema-ir.html)：**表达目标、解空间、硬约束、软偏好、歧义、推断权限、证据要求和验收条件。
-- **[Noema Object（NOBJ）](../specifications/noema-object.html)：**把 NIR 封装为带符号、类型化引用和完整性信息的可重定位对象。
-- **[Horizon Object（HOBJ）](../specifications/horizon-object.html)：**保存可以按任务和权限逐步披露的共享知识与依赖，不等同于压缩提示词。
+| 字段 | 含义 |
+| --- | --- |
+| `say` | 来源实际表达的内容、语言和来源绑定 |
+| `aim` | 唯一根期望终态 |
+| `must` | 硬约束、禁止事项和能力上限 |
+| `done` | 验收条件、必需证据和判断权威 |
+| `open` | 未决解释、冲突和解决权限 |
 
-## 信任与确定性
+一个 Endem 只有一个根 `aim`。`must` 或 `open` 可以为空，但必须显式存在；模型置信度不能把 `open` 静默改成确定事实。
 
-- Deterministic Profile 不调用模型，结果确定且可复现。
-- 只有确定性的 Noesis Core 能生成 NIR/NOBJ。
-- 模型输出和所有对象输入均视为不可信。
-- 歧义是一等信息；宁可保留未决语义，也不能制造错误确定性。
-- 偏移、长度、计数、索引和对齐计算必须使用 checked arithmetic。
-- Noema Object System 只交付不可变 Loaded State；Agent Harness 管理会话、能力和反馈；Fulfillment Runtime 负责受约束求解。
-- 模型不能绕过 Harness 调用能力、扩大权限或自行宣告结果通过验收。
+## 四个名词
 
-完整生命周期见[对象生命周期与信任边界](../architecture/noema-lifecycle.html)；需要理解运行层分工时，继续阅读 [Noema Object System](../components/noema-object-system.html)、[Agent Harness](../components/agent-harness.html)与 [Fulfillment Runtime](../components/fulfillment-runtime.html)。
+- **[Endem](../specifications/endem.html)：**最小目标制品。
+- **[Weave](../specifications/weave.html)：**两个或更多 Endem、固定依赖和发布范围形成的已解析闭包；单个自包含 Endem 不需要 Weave。
+- **Frame：**sealed Endem 或 Weave 经 Runner 重新验证后形成的不可变加载态；不是文件格式。
+- **[Witness](../specifications/witness.html)：**与 Endem/Weave、环境和策略绑定的证据与决定记录；不声称数学证明。
+
+## 一个应用
+
+唯一公开命令是 `endem`：
+
+```text
+endem form   endem check   endem bind   endem pack
+endem seal   endem see     endem run    endem test
+```
+
+一个命令入口不等于一个信任域。`see` 背后必须使用与生产 Reader 不共享解析代码的独立实现；`run` 背后必须是隔离的最小权限进程。私钥位于外部签名系统，模型只提交候选和能力请求。
 
 ## 推荐阅读路径
 
-1. 从[项目背景](../about/)理解问题、非目标和可证伪命题。
-2. 阅读[架构设计指南](architecture-guide.html)，建立端到端系统图并理解信任边界。
-3. 进入[规范参考指南](specifications-reference.html)，区分现行设计、待验证方案和待定事项。
-4. 通过[工具参考指南](tools-reference.html)，了解各开发阶段的工具职责。
-5. 准备参与实现、研究或标准化时阅读[开发指南](development-guide.html)及其中的证据和治理要求。
+1. [背景与边界](../about/background.html)：理解 Endem 与 Prompt、Skill 包、传统目标文件的区别。
+2. [架构设计指南](architecture-guide.html)：理解 Endem → Weave → Frame → Witness。
+3. [规范参考指南](specifications-reference.html)：区分已接受决定、待验证设计和开放问题。
+4. [Endem 应用参考](endem-reference.html)：查看八个子命令的消费者、失败责任和实施阶段。
+5. [开发指南](development-guide.html)：了解最小纵向切片、双 Reader 和验证条件。
 
-研究者应追踪假设、基线、实验和失败案例；实现者应追踪规范、ADR、测试和版本；标准评审者应追踪术语、规范性条款、配置和互操作证据。
+## 当前状态
 
-## 当前项目状态
+> 词汇与应用拓扑已经接受；规范编码和实现尚未发布。没有可安装的 `endem`、稳定扩展机制、ABI 或正式软件版本。
 
-> **设计阶段：**当前重点是规范与安全二进制核心，尚未发布可执行编译器、Noema Object System、Agent Harness、Fulfillment Runtime 或正式安装包。工具名称表示计划中的职责边界，不代表存在可调用命令或稳定接口。
-
-目前已经明确问题范围、架构关系、工具职责和部分规范不变量，但还没有性能、互操作性、跨模型等价或产业价值的实现证据。CLI、扩展名、ABI、重定位编号和模型工程细节仍需规范、ADR、原型和实验确定。
-
-## 下一步
-
-**后续计划：**规范、安全读取器/对象写入器、验证器和确定性 Noesis Core 完成实现与验证后，项目才会继续实现链接发布、可信装载、Agent Harness 与 Fulfillment Runtime，并准备可安装工具。
-
-- [继续阅读架构设计指南](architecture-guide.html)：了解对象如何编译、链接、装载和执行。
-- [查看获取与使用指南](installation-and-usage.html)：了解当前可以获取哪些资源，以及正式发布前暂不提供哪些能力。
+第一实现阶段只建设 `form`、`check`、`see` 和 `test`。组合、发布、受控运行和模型适配必须等待前一阶段的安全与复现证据。

@@ -1,0 +1,105 @@
+---
+layout: default
+title: "ADR-0008 · Endem 制品与单一命令面"
+page_role: "content"
+footer_text: "Noemion · ADR-0008"
+permalink: "/architecture/adr-0008-endem-system.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0008</span></nav>
+  <div class="hero"><h1>ADR-0008：Endem 制品与单一命令面</h1><p>冻结最小目标制品、组合闭包、运行视图、证据记录和唯一命令行入口。</p><div class="badges"><span class="badge">Accepted</span><span class="badge">2026-07-12</span><span class="badge">Naming Frozen</span><span class="badge">ABI Unfrozen</span></div></div>
+
+  <section class="content-stack">
+    <h2>决定摘要</h2>
+    <p class="lead">Noemion 不再按传统二进制工具的数量组织产品。系统以 <strong>Endem</strong> 为最小、可编译的自然语言目标制品，以 <strong>Weave</strong> 表示多个 Endem 已完成解析的组合闭包，以 <strong>Frame</strong> 表示一次运行中建立的只读求解视图，以 <strong>Witness</strong> 保存可定位的观察和判断依据。</p>
+    <p class="callout"><strong>直接结论：</strong>公开命令只有 <code>endem</code>。<code>form</code>、<code>check</code>、<code>bind</code>、<code>pack</code>、<code>seal</code>、<code>see</code>、<code>run</code> 与 <code>test</code> 是它的固定职责入口，不再建设 23 个并列应用。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>制品与运行术语</h2>
+    <div class="table-wrap"><table><thead><tr><th>名称</th><th>直白工程副标题</th><th>规范边界</th></tr></thead><tbody>
+      <tr><td>Endem</td><td>最小目标制品</td><td>一个 Endem 必须且只能有一个根 <code>aim</code>；它保存 <code>say</code>、<code>aim</code>、<code>must</code>、<code>done</code> 与 <code>open</code> 五组语义。</td></tr>
+      <tr><td>Weave</td><td>多目标解析闭包</td><td>由两个或更多 Endem 经过显式绑定产生；所有必需引用、约束冲突、能力上限和验收关系都有确定结论。</td></tr>
+      <tr><td>Frame</td><td>运行时只读视图</td><td>由 Runner 针对一次会话建立，不是文件、对象种类、包成员或可跨会话复用的句柄。</td></tr>
+      <tr><td>Witness</td><td>可定位证据记录</td><td>绑定对象、会话、环境、观察、规则和判断；它证明“记录了什么依据”，不宣称数学证明、事实必然为真或任务自动通过。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>Endem 的五组语义</h2>
+    <div class="table-wrap"><table><thead><tr><th>字段组</th><th>回答的问题</th><th>必须保留的边界</th></tr></thead><tbody>
+      <tr><td><code>say</code></td><td>用户或权威来源实际表达了什么？</td><td>精确文本或内容摘要、语言、来源范围和版本；来源身份不证明解释正确。</td></tr>
+      <tr><td><code>aim</code></td><td>什么结果才算目标？</td><td>唯一根目标、结果种类和预期产物；多个独立根目标必须拆成多个 Endem。</td></tr>
+      <tr><td><code>must</code></td><td>哪些边界不得违反？</td><td>硬约束、能力上限、禁止事项、适用范围、冲突与未知处理；不得静默降级为偏好。</td></tr>
+      <tr><td><code>done</code></td><td>怎样判断目标已经满足？</td><td>验收条件、结果结构、必需 Witness、失败状态和决定权威。</td></tr>
+      <tr><td><code>open</code></td><td>哪些语义还没有被确认？</td><td>替代解释、冲突、缺口、风险、允许的解决方式和有权确认的主体。</td></tr>
+    </tbody></table></div>
+    <p>自然语言可以进入 <code>say</code>，但模型解释只能成为候选。只有可由版本化规则重新推导、经过明确授权绑定，或仍以未决状态保留的内容，才能进入同一 Endem 的其他字段组。Endem 不保存思维链、运行计划、模型权重、实时能力句柄、凭据或私钥。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>同一制品的状态</h2>
+    <div class="flow"><div class="step">open · 仍含未决引用或语义</div><div class="step">bound · 引用和冲突已解析</div><div class="step">sealed · 发布载荷已冻结并绑定外部签名</div></div>
+    <ul>
+      <li><strong>open</strong> 是合法但不可直接发布执行的状态；它必须准确保存未决事项，不能假装失败已经消失。</li>
+      <li><strong>bound</strong> 表示必需语义、依赖与能力上限已经解析，不表示来源可信、环境授权或结果满足。</li>
+      <li><strong>sealed</strong> 表示不可变发布载荷与外部签名响应一致，不表示语义正确，也不表示当前环境允许运行。</li>
+    </ul>
+    <p>状态是同一 Endem 的生命周期属性，不通过复制成 Open Object、Release Object 或 Signed Object 等平行对象家族来表达。任何状态变化都产生新的精确文件摘要，并保留前一状态的来源绑定。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>唯一命令面</h2>
+    <div class="table-wrap"><table><thead><tr><th>入口</th><th>职责</th><th>主要失败责任</th></tr></thead><tbody>
+      <tr><td><code>endem form</code></td><td>把受控目标卡或已授权候选确定性形成 open Endem。</td><td>来源无法定位、根 aim 不唯一、约束或验收不完整、候选越权升级。</td></tr>
+      <tr><td><code>endem check</code></td><td>使用生产读取路径分层检查结构、语义、状态、完整性和策略。</td><td>越界、溢出、悬空引用、未知关键记录、状态与内容不一致。</td></tr>
+      <tr><td><code>endem bind</code></td><td>解析 Endem 之间的引用和约束，形成 bound Endem 或 Weave。</td><td>缺失依赖、循环、冲突、权限扩大、依赖身份不稳定。</td></tr>
+      <tr><td><code>endem pack</code></td><td>冻结发布闭包、可选调试伴随资料和待签消息。</td><td>覆盖缺口、不可复现元数据、发布裁剪改变语义、闭包不完整。</td></tr>
+      <tr><td><code>endem seal</code></td><td>核对外部 Signature Response，并在被签载荷外附加签名封装。</td><td>请求、载荷、算法、签名者或策略版本不匹配。</td></tr>
+      <tr><td><code>endem see</code></td><td>以独立直接读取器查看、比较和导出有界结构视图。</td><td>畸形输入、未知关键结构、资源超限；不得生成生产 Verified Handle。</td></tr>
+      <tr><td><code>endem run</code></td><td>在隔离域重新验证 sealed Endem/Weave，建立 Frame，受控调用后端与能力并形成 Witness。</td><td>签名、策略、能力、后端、预算、状态漂移、证据缺失或需要人工判断。</td></tr>
+      <tr><td><code>endem test</code></td><td>运行规范向量、生产/独立读取差分、恶意语料和复现检查。</td><td>实现与条款不一致、两条读取路径分歧、拒绝行为或字节复现失败。</td></tr>
+    </tbody></table></div>
+    <p><code>see</code> 与其他子命令共享发行入口，不共享生产解析实现；<code>run</code> 共享用户入口，不共享编译器权限域。命令行的一致外观不能消除内部的实现独立性或进程隔离。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>命名检索与正式商标检查</h2>
+    <p>Endem、Weave、Frame、Witness 与 <code>endem</code> 已作为本项目工程术语冻结，用于替换旧对象和工具家族。冻结只说明项目内部不再继续发散命名，不构成商标可注册、域名可取得或第三方权利无冲突的法律结论。</p>
+    <ol>
+      <li>开发阶段执行字面与近似检索：操作系统命令、主流包管理器、GitHub 仓库、语言生态包名、域名和同类开发工具。</li>
+      <li>公开发布前建立正式 gate：目标法域商标数据库、相同及近似类别、公司与产品名称、开源包身份和律师或合格知识产权人员复核。</li>
+      <li>gate 未通过时必须在首个稳定 ABI 前一次性调整术语、命令和扩展名，并用新 ADR 保持五字段语义与身份规则不变；不得在发布后依靠别名掩盖冲突。</li>
+    </ol>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部技术只提供机制先例</h2>
+    <ul>
+      <li>GNU <code>readelf</code> 独立于 BFD 的做法支持 <code>see</code> 采用第二条直接读取路径：<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">https://www.sourceware.org/binutils/docs/binutils/readelf.html</a></li>
+      <li>BFD 的多格式 canonical form 可能丢失格式特有信息，因此不进入 Endem 第一阶段可信核心：<a href="https://sourceware.org/binutils/docs/bfd.html">https://sourceware.org/binutils/docs/bfd.html</a></li>
+      <li>MCP 的工具与资源声明只作为 Runner 外缘适配输入，不构成权限或事实：<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a></li>
+      <li>A2A 的 Task 与 Artifact 只承担跨系统交换，不定义 Endem、Frame 或最终验收：<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a></li>
+      <li>OpenAI 的 Harness Engineering 提供环境可读性、反馈循环和机械边界的实践依据，不决定本项目格式或成熟度：<a href="https://openai.com/index/harness-engineering/">https://openai.com/index/harness-engineering/</a></li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>被取代的旧决策</h2>
+    <div class="table-wrap"><table><thead><tr><th>旧决策</th><th>状态</th><th>ADR-0008 的处理</th></tr></thead><tbody>
+      <tr><td>ADR-0001 核心命名体系</td><td>Superseded</td><td>以 Endem、Weave、Frame、Witness 和直白工程副标题取代旧四层公开对象/组件命名。</td></tr>
+      <tr><td>ADR-0002 控制面边界</td><td>Retained in part</td><td>能力句柄、模型不可信和人工升级原则保留，具体职责收敛到隔离 Runner。</td></tr>
+      <tr><td>ADR-0003 工具链产物闭环</td><td>Superseded</td><td>产物流收敛为 Endem/Weave、外部签名材料与 Witness，不再为每一步建立平行产品。</td></tr>
+      <tr><td>ADR-0004 候选、能力与验收边界</td><td>Retained in part</td><td>候选不等于事实、能力声明不等于句柄、证据不等于验收继续有效，并映射到 Frame/Witness。</td></tr>
+      <tr><td>ADR-0005 独立工具名称</td><td>Superseded</td><td>公开命令统一为 <code>endem</code> 和八个子命令。</td></tr>
+      <tr><td>ADR-0006 旧结构基线</td><td>Superseded</td><td>保留安全解析、显式引用和 checked arithmetic 原则，格式重新围绕 Endem 五组语义设计。</td></tr>
+      <tr><td>ADR-0007 Phase 0/1 纵向切片</td><td>Superseded</td><td>首条切片改为目标卡 → <code>form</code> → Endem → <code>check</code>/<code>see</code> → <code>test</code>。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-band">
+    <h2>仍未冻结的内容</h2>
+    <p>Endem、Weave、Frame、Witness、五组语义、三个状态、<code>.endem</code> 扩展名和唯一命令面已经冻结；魔数、Weave/Witness 扩展名、字段宽度、记录编号、文本语法、摘要与签名算法、Frame 协议、Witness 编码、退出状态和安装包仍需规范向量、威胁模型、跨实现原型与后续 ADR。</p>
+  </section>
+  <div class="next-prev"><a href="decisions.html">← 架构决策</a><a href="endem-lifecycle.html">Endem 生命周期 →</a></div>
+</main>

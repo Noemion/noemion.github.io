@@ -16,8 +16,8 @@ layout: manual
 title: 页面标题
 page_role: docs-topic
 footer_text: 页脚文字
-permalink: /tools/example/docs/topic.html
-manual_id: example
+permalink: /endem/docs/topic.html
+manual_id: endem
 manual_group: start
 manual_order: 1
 nav_title: 导航短标题
@@ -49,5 +49,5 @@ badges: [Documentation]
 - 桌面侧栏 320px、阅读区 880px；侧栏显示手册名称、分组、数量和当前页。阅读区内普通正文限制在约 720–760px，表格和代码可以使用阅读区完整宽度。
 - 桌面侧栏中的全部分组首次加载时默认展开，保证完整目录和当前页面始终可见；分组标题仍允许用户手动收起，目录内容超过视口时只滚动侧栏本身。
 - 阅读区使用紧凑 Hero、30px 左右章节标题和顶部/底部分页。
-- 指南和手册不使用普通页面的大面积渐变对象卡；Hero 使用折页，章节标题使用梯形页签，动态索引使用同一页签节奏。`noesis`、`morphe`、`theoria` 与 `synthesis` 手册分别继承所属工具强调色，但都不改变折页结构、目录与阅读列。完整规则见 [`geometric-layouts.md`](geometric-layouts.md)。
+- 指南和手册不使用普通页面的大面积渐变制品卡；Hero 使用折页，章节标题使用梯形页签，动态索引使用同一页签节奏。Endem 手册按 `form/check/bind/pack/seal/see/run/test` 的职责色区分主题，但不改变折页结构、目录与阅读列。完整规则见 [`geometric-layouts.md`](geometric-layouts.md)。
 - 1000px 以下隐藏固定侧栏，由移动目录接管；正文、表格和代码块不得造成页面级横向滚动。

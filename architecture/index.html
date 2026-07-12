@@ -7,48 +7,63 @@ permalink: "/architecture/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>架构设计</span></nav>
-  <div class="hero"><h1>架构设计</h1><p>说明来源表达如何经过确定性编译、对象链接和安全装载，最终形成可以验收的运行结果。</p><div class="badges"><span class="badge">System Map</span><span class="badge">Lifecycle</span><span class="badge">Trust Boundary</span></div></div>
+  <div class="hero"><h1>架构设计</h1><p>围绕 Endem 最小目标制品，说明确定性成形、独立读取、组合发布和隔离运行怎样保持清楚边界。</p><div class="badges"><span class="badge">Endem First</span><span class="badge">One CLI</span><span class="badge">Three Components</span><span class="badge">Fail Closed</span></div></div>
+
   <section>
-    <h2>架构目标与质量属性</h2>
-    <p class="lead">架构的首要目标不是提高单次生成效果，而是让任务语义、对象转换、依赖组合、权限变化和运行结果能够被定位、验证与复现。</p>
+    <h2>架构的直接结论</h2>
+    <p class="lead">Noemion 不是一组仿照传统二进制工具命名的命令。它要建立的基础是：一项自然语言目标可以成为持久、可组合、可受控运行、可由证据验收的制品。</p>
     <div class="status-grid">
-      <article class="status-item"><h3>确定性</h3><p>相同规范输入、配置与锁定依赖应产生相同的规范化对象和诊断结果。</p></article>
-      <article class="status-item"><h3>可组合性</h3><p>符号、类型化引用、约束与依赖闭包能够链接，并明确报告不可合并的冲突。</p></article>
-      <article class="status-item"><h3>可验证性</h3><p>结构、语义、权限、完整性和覆盖要求具有分层检查点，而不是依赖模型自证。</p></article>
-      <article class="status-item"><h3>可演进性</h3><p>格式版本、能力协商和 ADR 管理允许规范演进，同时拒绝未声明的语义漂移。</p></article>
+      <article class="status-item"><h3>一件核心制品</h3><p>Endem 保存一个根 aim，以及 say、must、done 和 open；复杂目标通过 Weave 组合。</p></article>
+      <article class="status-item"><h3>一个命令入口</h3><p><code>endem</code> 提供八个固定子命令，避免每项内部操作变成独立产品。</p></article>
+      <article class="status-item"><h3>两条读取路径</h3><p>生产验证和 <code>see</code> 独立直接读取，不共享会掩盖共同错误的解析实现。</p></article>
+      <article class="status-item"><h3>一个隔离运行域</h3><p><code>run</code> 在编译器外建立 Frame，能力句柄和模型后端不能进入制品或 Core。</p></article>
     </div>
   </section>
+
   <section>
     <h2>系统关系</h2>
-    <p><strong>对象与发布链：</strong></p>
-    <div class="flow"><div class="step">Source / Candidate Envelope</div><div class="step">Noesis Core</div><div class="step">NIR / NOBJ</div><div class="step">Linked Object / HOBJ</div><div class="step">Release + Coverage</div><div class="step">Signed Package</div><div class="step">Loaded State</div></div>
-    <p><strong>运行与验收循环：</strong></p>
-    <div class="flow"><div class="step">Harness Session</div><div class="step">Runtime Request</div><div class="step">Candidate Assessment</div><div class="step">Capability Request / Observation</div><div class="step">Evidence Closure</div><div class="step">Acceptance Decision / 继续循环</div></div>
-    <p>第一条链形成可装载对象；第二条链表示一次运行迭代，Harness 会根据观察、预算和停止条件继续调用 Runtime 或结束会话。每个阶段只证明特定属性：签名证明身份和字节完整性，不证明语义正确；装载证明当前环境允许建立状态，不证明运行结果满足目标；Runtime 产生的候选和外部环境观察始终重新进入不可信域。</p>
-    <p>各职责单元的入口见<a href="../components/">系统组件目录</a>，格式与执行约束见<a href="../specifications/">规范与成熟度页面</a>。</p>
+    <div class="flow"><div class="step">Goal Card</div><div class="step">form</div><div class="step">open Endem</div><div class="step">check / see</div><div class="step">bind → bound Endem / Weave</div><div class="step">pack / external sign / seal</div><div class="step">run → Frame</div><div class="step">Witness / Decision</div></div>
+    <p><code>form</code> 是唯一语义成形入口；<code>check</code> 是生产验证路径；<code>see</code> 是不共享解析代码的只读观察路径；<code>bind</code> 只在存在多个 Endem 或外部引用时启用；<code>run</code> 重新验证实际 sealed 字节，并在隔离域建立会话。</p>
   </section>
+
   <section>
-    <h2>架构设计概要</h2>
-    <div class="table-wrap"><table><thead><tr><th>层次</th><th>主要输入</th><th>主要输出</th><th>必须保持的不变量</th></tr></thead><tbody>
-      <tr><td>Source Frontend</td><td>受控语言、来源资料或模型候选</td><td>Source Package、Candidate Envelope 与来源映射</td><td>模型候选不因结构合法自动升级为受信语义</td></tr>
-      <tr><td>Noesis Core</td><td>受控来源、候选封装、Source Binding Decision 与配置</td><td>NIR、NOBJ 与编译证据账本</td><td>无模型、确定、保留歧义；布局受规范控制</td></tr>
-      <tr><td>链接与发布</td><td>NOBJ、HOBJ、归档、锁定依赖与发布证据</td><td>Linked Object / HOBJ、Release Object、Release Coverage Proof 与 Signed Package</td><td>冲突显式、权限不扩大；私钥只在外部签名系统</td></tr>
-      <tr><td>Noema Object System</td><td>Signed Package、装载策略与目标环境</td><td>不可变 Loaded State、能力需求与装载证据</td><td>安全解析、身份绑定、失败原子性；不保存实时能力句柄</td></tr>
-      <tr><td>Agent Harness</td><td>Loaded State、执行配置、Runtime Binding 与能力目录</td><td>受控会话、Capability Observation、证据闭包与 Acceptance Decision</td><td>按预注册策略执行能力与验收；需要外部判断时保持 pending-review</td></tr>
-      <tr><td>Fulfillment Runtime</td><td>受限语义视图、求解后端、运行请求与观察</td><td>不可信候选、Candidate Assessment 与 Capability Request</td><td>不持有实时能力句柄，不改变对象硬约束或宣告最终验收</td></tr>
+    <h2>三个组件</h2>
+    <div class="page-links">
+      <a class="page-link" href="../components/core.html"><strong>Core · 确定性制品核心</strong><span>负责 form、生产 check、bind、pack 和 seal 的规范状态转换。</span></a>
+      <a class="page-link" href="../components/reader.html"><strong>Reader · 独立只读检查器</strong><span>为 see 提供第二条有界解析与比较路径，不生成生产可信句柄。</span></a>
+      <a class="page-link" href="../components/runner.html"><strong>Runner · 隔离实现运行器</strong><span>重新验证 sealed 制品，建立 Frame，控制能力并形成 Witness。</span></a>
+    </div>
+    <p>三者可以由同一发行包提供，但 Core、Reader 和 Runner 的代码依赖、权限和失败责任必须保持可验证分离。没有模型、外部能力或多步反馈的任务可以使用最小 Runner；不能因此让 Runtime 后端持有实时句柄或自行验收。</p>
+  </section>
+
+  <section>
+    <h2>制品与非制品</h2>
+    <div class="table-wrap"><table><thead><tr><th>名称</th><th>类别</th><th>责任</th></tr></thead><tbody>
+      <tr><td>Endem</td><td>持久制品</td><td>一个根 aim 和完整目标契约，状态为 open、bound 或 sealed。</td></tr>
+      <tr><td>Weave</td><td>持久组合闭包</td><td>保存多个 Endem 的已解析关系、内容身份和权限交集。</td></tr>
+      <tr><td>Frame</td><td>会话内只读视图</td><td>只为一次运行装配必需语义与授权，不序列化为文件。</td></tr>
+      <tr><td>Witness</td><td>持久证据记录</td><td>限定地声明观察、推导或决定依据，不等于数学证明。</td></tr>
     </tbody></table></div>
-    <p>更细的阶段、信任转换和失败位置见<a href="noema-lifecycle.html">对象生命周期</a>；记录布局、类型系统和执行语义必须进入正式规范或 ADR。</p>
   </section>
-  <section>
-    <h2>对象生命周期</h2>
-    <p><a href="noema-lifecycle.html">对象生命周期</a>逐项列出来源、编译、链接、发布签名、装载、会话、能力调用、运行证据和最终验收的产物、失败与审计依据。</p>
-  </section>
+
   <section>
     <h2>信任边界</h2>
-    <p>信任不是单一分数。来源可追溯、结构有效、语义有效、依赖闭合、字节完整、环境授权和结果验收是彼此独立的属性；每个组件只能声明自己已经检查的属性。模型输出不得直接生成 NOBJ；能力调用必须经过参数、权限、预算和副作用检查；对象偏移、长度、计数、索引和对齐均需检查。智能体控制面的职责见<a href="../components/agent-harness.html">Agent Harness</a>，求解与候选评价边界见<a href="../components/fulfillment-runtime.html">Fulfillment Runtime</a>，安全规则的规范状态见<a href="../specifications/">规范与成熟度页面</a>。</p>
+    <ul>
+      <li>自然语言来源、模型候选、对象字节、依赖、签名包、工具返回和环境观察都从不可信状态进入。</li>
+      <li>Core 只能证明确定性成形、结构、语义和状态不变量；它不能证明任务已经完成。</li>
+      <li>Reader 只提供独立观察和差分证据；可显示不等于生产验证通过。</li>
+      <li>Runner 只在当前环境和策略内绑定能力；sealed 制品不保存实时句柄，也不自动获得权限。</li>
+      <li>Witness 只承担有限主张；最终决定必须读取 <code>done</code>、必需证据和指定权威。</li>
+    </ul>
   </section>
+
   <section>
-    <h2>开放问题</h2>
-    <p>当前已采用的跨组件边界集中在<a href="decisions.html">架构决策</a>；尚未批准的格式、ABI、模型、运行协议与资源决策保留在<a href="open-questions.html">开放问题</a>中，不在架构设计总览中固化。</p>
+    <h2>继续阅读</h2>
+    <div class="page-links">
+      <a class="page-link" href="endem-lifecycle.html"><strong>Endem 生命周期</strong><span>逐步查看 open、bound、sealed、Frame 和 Witness 的状态与失败。</span></a>
+      <a class="page-link" href="decisions.html"><strong>架构决策</strong><span>查看 ADR-0008 和被取代的旧对象、组件与工具决定。</span></a>
+      <a class="page-link" href="open-questions.html"><strong>开放问题</strong><span>查看编码、绑定、运行、证据和发布前仍需回答的问题。</span></a>
+      <a class="page-link" href="../specifications/"><strong>规范参考指南</strong><span>查看 Endem、Weave 与 Witness 的规范性要求。</span></a>
+    </div>
   </section>
 </main>

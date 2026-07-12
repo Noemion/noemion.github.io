@@ -9,71 +9,57 @@ manual_group: "guides"
 manual_order: 3
 nav_title: "架构设计指南"
 hero_title: "Noemion 架构设计指南"
-hero_description: "从语义来源到可信执行，理解各层职责、对象流转和信任边界。"
-summary: "从语义来源到可信执行，理解各层职责、对象流转和信任边界。"
-badges: ["Architecture", "Objects", "Trust Boundaries"]
+hero_description: "从 Endem 到 Witness，理解三个实现域、四个名词和每道信任边界。"
+summary: "从 Endem 到 Witness，理解三个实现域、四个名词和每道信任边界。"
+badges: ["Architecture", "Endem", "Trust Boundaries"]
 ---
 
-## 系统分层
+## 最小系统图
 
-Noema Object 是数据格式；Noema Object System 负责链接、验证、装载和完整性；Agent Harness 负责会话、能力、观察和验收策略；Fulfillment Runtime 负责求解目标并评价候选。三者承担不同的失败责任，不能合并成含义模糊的“模型执行层”。
+```text
+controlled source
+      │ form
+      ▼
+    Endem ── bind ──► Weave ── load ──► Frame
+      │                 │                  │ run
+      └── see ──────────┴── see            ▼
+                                         Witness
+```
 
-> **阅读方法：**先确认每层接收什么、产出什么、失败时由谁负责，再阅读具体算法。只要输入输出或失败责任不清楚，就不能用流程图中的箭头推定接口已经成立。
+这四个名词有不同生命周期：Endem 是最小目标；Weave 是解析后的组合闭包；Frame 是一次运行的内存状态；Witness 是运行后可归档的证据与决定。流程中的中间报告只有在权威、权限、保密或生命周期确实不同的情况下才成为独立 sidecar。
 
-数据依次经过来源或 Horizon Engine、Noesis Core、Noema IR、Noema Object、链接发布和安全装载。进入动态求解后，Agent Harness 组织上下文、会话级能力和反馈循环，Fulfillment Runtime 产生不可信候选与 Candidate Assessment。信任不是单一递增分数：每一步只增加来源、结构、语义、闭包、完整性或环境授权中的特定证据；模型候选、工具结果和 Runtime 输出会重新进入不可信域。
+## 三个实现域
 
-这套分层首先保障确定性、可组合性、可验证性和失败即拒绝。单次生成质量属于运行或模型评测指标，不能替代对象与信任检查。组件职责见[系统组件](../components/)。
+| 域 | 输入 | 输出 | 失败责任 |
+| --- | --- | --- | --- |
+| **Core** | 来源绑定、Endem、固定依赖、发布策略 | Endem、Weave、签名请求、分层诊断 | 来源不明、语义未授权、格式/引用/约束冲突、非确定性、闭包不完整 |
+| **Reader** | 任意不可信 Endem、Weave 或 Witness 字节 | 有界只读视图、差异、引用、大小、trace | 畸形输入、未知关键结构、资源超限、无法比较；不能产生 verified handle |
+| **Runner** | Weave、执行 profile、验收策略、能力目录 | Frame、Witness、Acceptance Decision | 签名/闭包失败、能力拒绝、预算耗尽、状态漂移、证据缺失、人工升级 |
 
-## 对象生命周期
+公开 CLI 都叫 `endem`，但 `see` 必须单独构建，`run` 必须单独进程。用户心智模型可以简洁，内部信任边界不能因此合并。
 
-1. 受控源输入直接解析；模型路径只产生绑定来源、替代解释和未决状态的 Candidate Envelope。
-2. 确定性 Noesis Core 只确认可由规则重推导或具有 Source Binding Decision 的语义，再执行类型、约束、歧义、覆盖和对象布局检查。
-3. Noema Object 暴露 Section、符号和类型化重定位，对象工具和链接器据此读取文件。
-4. 链接器解析依赖并构造 Linked Object 或 Horizon Object；裁剪、Release Coverage Proof 与独立验证随后形成发布闭包。
-5. noembundle 建立不可变候选和 Signing Request，核对外部 Signature Response 后形成 Signed Noemion Package。
-6. Noema Object System 验证实际包字节、策略和 Segment 属性，再产生不可变 Loaded State。
-7. Agent Harness 根据 Loaded State 与 Execution Profile 建立隔离会话；Runtime 返回候选或 Capability Request，Harness 执行策略检查并返回 Capability Observation。
-8. noemobserve 与 noemcoverage 形成 Trace Integrity Report 和 Evidence Closure Report；noemexecute finalize 按 Acceptance Policy 形成最终 Acceptance Decision。
+## 形成与语义确认
 
-详细生命周期见[对象生命周期与信任边界](../architecture/noema-lifecycle.html)。
+`form` 只接受两类可确认语义：可由确定性规则从 `say` 重推导的内容，或具有具名 Source Binding Decision 的内容。模型、检索器和外部前端只能提交 Candidate Envelope；它们不能写规范字节、选择布局或关闭 `open`。
 
-## 编译与链接边界
+一个 Endem 只允许一个根 `aim`。计划、思维链、采样参数、实时能力句柄、私钥和运行历史不属于 Endem。
 
-- Horizon Engine 或其他模型只能提出 Candidate Envelope，不能直接生成 NIR/NOBJ/HOBJ。
-- Noesis Core 决定类型、规范化结果、编译来源覆盖和确定性布局，但不能靠类型检查证明任意模型解释忠实于来源。
-- 链接器解析符号、重映射 ID、应用类型化重定位并合并依赖闭包。
-- 遇到硬约束、权限或接口冲突时必须失败，不调用模型“猜一个答案”。
+## 组合与发布
 
-具体编译阶段、符号版本模型和重定位编号仍待规范确定。
+`bind` 解析 Endem 引用、固定依赖、检查约束可满足性并构造 Weave。能力合并只能保持或收窄权限；硬约束或验收冲突必须失败，不能调用模型“猜一个折中”。
 
-## 装载与运行边界
+`pack` 只执行规范定义的类型化裁剪，并证明 aim、must、done、open、依赖和披露行为保持等价。`seal` 生成不可变签名请求，核对外部签名响应；Core 永不持有私钥。
 
-- 装载器负责安全解析、完整性验证、内存映射和重定位后冻结。
-- Fulfillment Runtime 只读取 Harness 提供的受限语义视图和显式 Runtime Request，不直接持有外部能力句柄。
-- 将对象转换为模型输入只是可能的实现方式之一，不属于对象格式本身。
-- 运行期派生产物必须与签名对象分离并记录来源。
-- Agent Harness 只能暴露显式授权的类型化能力；Runtime 提出 Capability Request，但确定性策略决定是否执行。
-- UI、日志、指标、追踪和测试结果作为结构化观察返回会话，不能由模型陈述替代。
-- 验收契约、Acceptance Policy、预算、停止条件和人工升级条件在执行前确定。Runtime 只产生 Candidate Assessment；证据闭合后才形成 accepted、unsatisfied、pending-review、failed 或 interrupted。
+## 装载与运行
 
-链接、验证和装载职责见[Noema Object System](../components/noema-object-system.html)。
-智能体控制面的上下文、能力和反馈边界见[Agent Harness](../components/agent-harness.html)。
-求解、候选评价和结果状态见[Fulfillment Runtime](../components/fulfillment-runtime.html)。
+Runner 不信任路径名、缓存结论或 `see` 输出，而是重新读取实际 Weave 字节。全部结构、闭包、摘要、签名、策略与能力上限通过后才建立 Frame。
 
-## 信任边界
+Harness 位于模型外侧并独占实时能力句柄。模型提出 Capability Request；确定性策略决定是否调用；真实 UI、日志、测试和工具返回形成 Observation。模型只产生候选与 advisory assessment。
 
-- **不可信输入：**模型输出、外部对象、归档成员、清单、调试伴随文件和依赖声明。
-- **确定性核心：**解析、类型检查、布局、重定位、哈希、签名范围和策略验证。
-- **受限模型能力：**候选提取、层级聚合、检索路由和封闭任务头，不拥有对象写入权。
-- **显式授权：**权限扩大、动态依赖、外部能力和披露预算必须由配置或策略授权。
-- **可观察执行：**Capability Request / Observation、环境变化、拒绝、恢复、Trace 完整性和验收决定必须关联到会话、对象和环境指纹。
+`done`、Acceptance Policy、预算、停止条件和人工升级条件在运行前确定。Witness 绑定事件、证据范围、对象身份、环境和策略；最终状态只能是 accepted、unsatisfied、pending-review、failed 或 interrupted 之一，并且说明决策权威。
 
-## 尚待确定的接口
+## 信任不是单一分数
 
-**待定事项：**消费端 ABI、动态依赖、长上下文状态同步、对象扩展名、连续表示互操作和模型包格式仍需证据、规范或 ADR。
+每一步只增加特定范围的证据：来源、结构、语义、闭包、完整性、环境授权或验收。一个结构有效的 Endem 仍可能语义未确认；一个签名正确的 Weave 仍可能不适合当前策略；一个高质量模型候选仍不是 accepted。
 
-架构主张需要分别用确定性构建、畸形样例/模糊测试、链接冲突矩阵、篡改与回滚、跨 Fulfillment Runtime 等价和目标设备资源实验验证。当前架构图是待验证的概要设计，不是性能或产业可行性证明。
-
-**后续计划：**第一阶段安全二进制核心稳定后，才评估 Horizon Engine 训练、量化和跨设备 Fulfillment Runtime。
-
-[查看完整开放问题清单](../architecture/open-questions.html)
+[查看完整生命周期](../architecture/endem-lifecycle.html) · [查看组件职责](../components/) · [查看测试要求](../development/testing.html)

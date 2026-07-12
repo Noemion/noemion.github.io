@@ -7,38 +7,28 @@ permalink: "/faq/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>常见问题</span></nav>
-  <div class="hero"><h1>常见问题</h1><p>直接回答项目范围、当前状态、安全边界和开发计划中的高频问题；正式约束仍以规范为准。</p><div class="badges"><span class="badge">Project</span><span class="badge">Security</span><span class="badge">Development</span></div></div>
+  <div class="hero"><h1>常见问题</h1><p>直接回答 Endem、应用拓扑、安全边界和当前成熟度。</p><div class="badges"><span class="badge">Endem</span><span class="badge">Security</span><span class="badge">Development</span></div></div>
   <div class="faq-list">
-    <section>
-      <h2>项目定位</h2>
-      <details><summary>Noemion 是什么？</summary><p>Noemion 是面向生成式计算的表征对象与工具链设计，目标是让目标和约束可被机器分析、验证、重定位和执行。对普通使用者，它意味着任务要求能够被明确保存和检查；对开发者，它意味着可定义对象、符号、链接、装载和验证契约。更多背景见<a href="../about/">项目背景</a>。</p></details>
-      <details><summary>Noemion 当前是产品、研究课题还是标准？</summary><p>当前首先是规范与工程研究项目，处于概念细化和安全二进制核心设计阶段。它可以发展为博士研究、论文、专利、软著或标准化候选，但这些方向都需要独立证据和审查，不能把愿景表述为已经取得的成果。</p></details>
+    <section><h2>名称与定位</h2>
+      <details><summary>Noemion 与 Endem 有什么区别？</summary><p>Noemion 是项目和生态品牌；Endem 是项目创造的工程术语，表示最小、独立有效、可验证的期望终态单元。工具和格式不需要批量携带 Noemion 前缀。</p></details>
+      <details><summary>为什么不用“某某 OBJ”？</summary><p>因为目标、约束、歧义和验收不是机器指令对象的另一种载荷。Endem 借鉴可链接制品思想，但用新名词建立新本体，避免名称反过来把设计限制在传统目标文件模型里。</p></details>
+      <details><summary>Endem 这个词怎样形成？</summary><p>它由 <em>end</em> 与表示最小区别单位的构词成分 <em>-eme</em> 合成，工程定义为最小期望终态单元。正式软件发行前仍需完成专业商标检索。</p></details>
     </section>
-    <section>
-    <h2>架构设计</h2>
-      <details><summary>NIR、NOBJ 和 HOBJ 分别负责什么？</summary><p>NIR 表达目标、约束、歧义、证据和验收条件；NOBJ 把这些语义封装为可重定位、可验证的对象；HOBJ 保存可按依赖、权限和任务逐步披露的共享内容。三者的关系见<a href="../architecture/">架构设计</a>，精确约束以<a href="../specifications/">规范与成熟度页面</a>所指向的权威文件为准。</p></details>
-      <details><summary>Agent Harness 和 Fulfillment Runtime 有什么区别？</summary><p>Agent Harness 是运行外侧的控制平面，管理上下文、能力、策略、观察、预算和人工升级；Fulfillment Runtime 在已验证对象与运行配置下生成并评价候选结果。模型不能绕过 Harness 直接调用能力，Runtime 也不能修改对象约束。可分别阅读 <a href="../components/agent-harness.html">Agent Harness</a> 与 <a href="../components/fulfillment-runtime.html">Fulfillment Runtime</a>。</p></details>
-      <details><summary>尚未决定的架构事项在哪里？</summary><p>对象命名、ABI、模型工程和硬件条件等未决事项保留在<a href="../architecture/open-questions.html">开放问题</a>中。</p></details>
+    <section><h2>制品与应用</h2>
+      <details><summary>Endem 包含什么？</summary><p>五组显式语义：<code>say</code> 来源表达、<code>aim</code> 唯一根终态、<code>must</code> 硬边界、<code>done</code> 验收、<code>open</code> 未决项。它不是提示文本的二进制包装。</p></details>
+      <details><summary>Weave、Frame 和 Witness 是什么？</summary><p>Weave 是已解析的 Endem 与固定依赖闭包；Frame 是一次运行的不可变加载态，不是文件；Witness 是绑定对象、环境和策略的证据与决定记录。</p></details>
+      <details><summary>为什么只保留一个 CLI？</summary><p>现有职责没有 23 个独立用户、权威或生命周期。唯一入口 <code>endem</code> 用短子命令组织职责；只有 Reader 与 Runner 因独立证据和权限边界保持独立实现/进程。</p></details>
+      <details><summary>一个 CLI 会不会破坏安全隔离？</summary><p>不会。<code>endem see</code> 由单独构建的 Reader 实现，<code>endem run</code> 启动隔离进程。统一的是用户入口，不是解析代码、verified handle 或实时能力句柄。</p></details>
     </section>
-    <section>
-      <h2>使用与安装</h2>
-      <details><summary>现在可以下载安装吗？</summary><p>不可以。项目处于最小规范与安全二进制核心设计阶段，尚未开始核心实现；<a href="../downloads/">下载页</a>会如实标注资源状态。</p></details>
+    <section><h2>安全与模型</h2>
+      <details><summary>模型能直接生成 Endem 吗？</summary><p>不能。模型只能生成带来源和未决状态的候选；Core 依据确定性规则或具名 Source Binding Decision 形成规范字节。</p></details>
+      <details><summary>模型能调用工具或宣告完成吗？</summary><p>模型只能提出能力请求和候选结果。Harness 的确定性策略决定实际调用，<code>done</code> 预先固定验收，Witness 记录真实证据，指定权威形成最终决定。</p></details>
+      <details><summary>Deterministic 路径会调用模型吗？</summary><p>不会。形成、验证、绑定、布局、摘要、签名范围和规则型验收都必须可在无模型环境复现。</p></details>
     </section>
-    <section>
-      <h2>安全与确定性</h2>
-      <details><summary>Deterministic Profile 会调用模型吗？</summary><p>不会。Deterministic Profile 必须无模型、确定且可复现；具体约束以<a href="../specifications/">规范与成熟度页面</a>所指向的权威文件为准。</p></details>
-      <details><summary>模型能直接生成 NOBJ 吗？</summary><p>不能。一切模型输出均视为不可信，模型不得决定二进制布局或直接生成 NOBJ；规范依据见<a href="../specifications/">规范与成熟度页面</a>。</p></details>
-    </section>
-    <section>
-      <h2>开发与贡献</h2>
-      <details><summary>当前优先开发什么？</summary><p>当前正在完成最小规范与安全二进制核心设计，下一步开发 Checked 读取器/对象写入器、结构验证器和对应的恶意对象测试。实时状态见<a href="../development/current-stage.html">当前项目阶段</a>。</p></details>
-      <details><summary>项目按什么顺序开发？</summary><p>先完成规范和安全二进制核心，再开发 Deterministic 编译链接、发布签名、可信装载、Agent Harness 与 Fulfillment Runtime，最后进入模型工程。每一步都会明确交付内容和验证结果，具体顺序见<a href="../development/implementation-roadmap.html">开发路线图</a>。</p></details>
-      <details><summary>论文、专利和标准材料可以直接复用网站内容吗？</summary><p>可以把网站作为问题、架构和追溯入口，但引用时必须记录版本和成熟度，并核对权威规范、ADR、实验或测试证据。专利公开前需要新颖性与权属审查；标准提案需要可测试条款、互操作案例和安全分析。</p></details>
-    </section>
-    <section>
-      <h2>常见误解</h2>
-      <details><summary>NIR 是二进制化提示词或 Skill 包吗？</summary><p>不是。NIR 必须表达可机器分析、验证、重定位和执行的目标与约束；规范定义见<a href="../specifications/">规范与成熟度页面</a>。</p></details>
-      <details><summary>借鉴 ELF 是否意味着兼容 ELF 或执行机器指令？</summary><p>不是。项目借鉴 Section/Segment、符号、重定位、链接、调试和装载等成熟工程策略，但对象语义面向生成式目标与约束，不承诺传统 ELF ABI 或机器指令兼容。</p></details>
+    <section><h2>状态与实施</h2>
+      <details><summary>现在可以安装吗？</summary><p>不可以。当前处于规范与安全核心设计阶段，没有正式版本或有效安装命令。</p></details>
+      <details><summary>第一阶段实现什么？</summary><p>只实现 <code>form</code>、<code>check</code>、独立 <code>see</code> 和 <code>test</code>，证明双 Reader、畸形输入关闭失败、资源有界和双环境逐字节复现。</p></details>
+      <details><summary>会自建模型训练平台吗？</summary><p>默认不会。数据、训练、评估和量化优先适配成熟外部栈；只有出现 Noemion 特有且不可替代的需求，并通过增益实验，才新增研究适配面。</p></details>
     </section>
   </div>
 </main>

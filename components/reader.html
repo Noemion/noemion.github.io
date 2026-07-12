@@ -1,0 +1,73 @@
+---
+layout: default
+title: "Reader · 独立只读检查器"
+page_role: "content"
+footer_text: "Noemion · Reader"
+permalink: "/components/reader.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">系统组件</a><span aria-hidden="true">/</span><span>Reader</span></nav>
+  <div class="hero"><h1>Reader</h1><p>为 <code>endem see</code> 提供不共享 Core 解析代码的有界只读实现，用于观察、比较和交叉检查。</p><div class="badges"><span class="badge">Independent</span><span class="badge">Read Only</span><span class="badge">No Verified Handle</span></div></div>
+
+  <section class="content-stack">
+    <h2>为什么需要独立 Reader</h2>
+    <p class="lead">如果查看器复用 Core 的生产解析器，两个入口会继承相同的字段误解、边界错误和生成代码缺陷。Reader 只依据公开规范直接读取原始字节，让开发者和一致性测试获得第二种解释路径。</p>
+    <p class="callout"><strong>独立不是换一个命令名：</strong>Reader 不得链接 Core 的 Reader、Writer、绑定器或生产错误实现，也不使用 BFD 的 canonical form 代替 Endem 逐字段解析。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>输入、输出与消费者</h2>
+    <div class="table-wrap"><table><thead><tr><th>方向</th><th>内容</th><th>边界</th></tr></thead><tbody>
+      <tr><td>输入</td><td>原始 Endem、Weave、Witness 或发布封装字节</td><td>全部不可信；路径、扩展名和签名存在不建立信任。</td></tr>
+      <tr><td>输入</td><td>视图与资源预算</td><td>限制深度、节点、字符串、解压、图和总输出。</td></tr>
+      <tr><td>输出</td><td>原始字段、五组语义、状态、成员、引用、摘要和 Witness 视图</td><td>区分文件声明、Reader 推导和 Core 验证结论。</td></tr>
+      <tr><td>输出</td><td>文本、结构化数据、差分和受限图</td><td>稳定排序；损坏或截断必须显式标注。</td></tr>
+      <tr><td>消费者</td><td>开发者、安全审查、<code>endem test</code> 和互操作实现</td><td>Runner、bind 和 pack 不得以 Reader 输出代替生产 check。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-rows">
+    <h2>实现独立性</h2>
+    <ul>
+      <li>Reader 使用独立数据结构、范围检查和错误路径；共享的只能是公开规范和测试向量。</li>
+      <li>生产与独立实现由差分测试比较字段解释和失败分类，不能比较私有内存结构。</li>
+      <li>故障注入必须证明 Reader 能发现 Core Writer/Reader 的共同假设，而不是只重放相同代码。</li>
+      <li>Reader 不生成生产 Verified Handle，不改变状态，不修复对象，也不执行 Frame。</li>
+      <li>结构可解析、状态自称 sealed 和签名字段存在都不构成信任结论。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>安全读取顺序</h2>
+    <ol>
+      <li>读取最小前导信息并检查版本、总大小和全局预算。</li>
+      <li>用 checked arithmetic 验证目录范围、计数、对齐、重叠和未知关键记录。</li>
+      <li>按用户选择的视图读取必要记录，不默认展开所有来源、依赖或 Witness。</li>
+      <li>解析引用时限制递归、集合大小和字符串，循环只报告，不无限展开。</li>
+      <li>输出稳定顺序和精确诊断，明确哪些字段未读取、截断或无法解释。</li>
+    </ol>
+  </section>
+
+  <section class="content-wide">
+    <h2>GNU 机制的采用边界</h2>
+    <p>GNU <code>readelf</code> 独立于 BFD，可避免 BFD 解析错误影响直接检查；Reader 借鉴这一隔离做法：<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">https://www.sourceware.org/binutils/docs/binutils/readelf.html</a></p>
+    <p>BFD 面向多种传统对象格式并使用 canonical representation。Endem 第一阶段需要小型、格式专用和逐字段可审计的实现，因此不链接 BFD：<a href="https://sourceware.org/binutils/docs/bfd.html">https://sourceware.org/binutils/docs/bfd.html</a></p>
+    <p>这些资料只说明隔离和直接解析的工程先例；Reader 不是 <code>readelf</code> 或 <code>objdump</code> 的功能复刻，也不继承 ELF 地址和机器指令语义。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>失败责任</h2>
+    <div class="table-wrap"><table><thead><tr><th>失败</th><th>Reader 结果</th><th>消费者应怎样处理</th></tr></thead><tbody>
+      <tr><td>Malformed</td><td>定位首个安全失败和可选后续有限诊断</td><td>不得继续解释为完整对象。</td></tr>
+      <tr><td>Unsupported required feature</td><td>报告版本、记录和所需能力</td><td>升级实现或拒绝，不静默跳过。</td></tr>
+      <tr><td>Budget exceeded</td><td>报告限值、已用量和停止位置</td><td>显式提高预算或缩小视图，不能当作对象有效。</td></tr>
+      <tr><td>Core/Reader disagreement</td><td>保存最小输入和双方解释</td><td>阻断一致性发布，回到规范与实现调查。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-band">
+    <h2>当前成熟度与未冻结接口</h2>
+    <p>独立代码路径、只读、资源有界和不产生生产可信句柄已经采用。具体视图名称、JSON 结构、差分分类、图格式、错误码和独立实现语言尚未冻结。</p>
+  </section>
+  <div class="next-prev"><a href="core.html">← Core</a><a href="runner.html">Runner →</a></div>
+</main>

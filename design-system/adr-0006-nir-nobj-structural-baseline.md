@@ -1,6 +1,6 @@
 # ADR-0006：NIR 逻辑记录与 NOBJ 结构基线
 
-- 状态：已接受为详细设计基线；数值 ABI、字段宽度和 Section 编号未冻结
+- 状态：Superseded by ADR-0008
 - 日期：2026-07-12
 - 影响范围：Noesis Core、NIR/NOBJ 规范、`noesis`、`morphe`、`theoria`、`synthesis`、验证器与测试语料
 
