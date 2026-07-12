@@ -16,7 +16,7 @@ badges: ["Authority", "Maturity", "ADR"]
 
 ## 权威顺序
 
-1. 版本化规范定义“必须是什么”。
+1. 版本化 Markdown 条款源定义“必须是什么”。
 2. 状态为“已接受”的 ADR 解释为什么选择该边界，以及以后怎样变更。
 3. 架构页解释制品和组件关系。
 4. 指南提供阅读路径；FAQ 和示例不建立实现义务。
@@ -25,9 +25,11 @@ badges: ["Authority", "Maturity", "ADR"]
 
 每个规范“必须/不得/只有”都应关联机器测试或具名人工权威。实现、论文、专利、演示和模型输出不能反向替代规范。
 
+当前 Endem 条款源是 END-CORE 0.1.0-draft：[https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md)。机器可读登记保存术语、条款、成熟度、实现状态和验证引用：[https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json](https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json)。威胁模型把不可信输入和失败责任映射到条款：[https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md)。公开 HTML 提供直白解释，不复制第二套条款。
+
 ## Endem
 
-[Endem 规范](../specifications/endem.html)定义一个根 `skena`、六个语义面、形式显示、来源确认、显式未知、身份和规范编码边界。当前已接受语义骨架与 `.endem` 工程扩展名；魔数、字段宽度、记录编号、求值语言、摘要算法和扩展注册表尚未冻结。
+[Endem 规范](../specifications/endem.html)解释一个根 `skena`、六个语义面、形式显示、来源确认、显式未知、身份和安全边界。当前已接受语义骨架与 `.endem` 工程扩展名；魔数、字段宽度、记录编号、求值语言、摘要算法和扩展注册表尚未冻结。
 
 ## Synem
 

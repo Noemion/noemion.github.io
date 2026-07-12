@@ -18,7 +18,9 @@ exclude:
   - homepage-design.md
   - sitewide-design-system.md
   - sitemap.md
+  - spec/
   - tests
+  - vectors/
   - Gemfile
   - Gemfile.lock
   - vendor

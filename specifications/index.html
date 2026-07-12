@@ -22,13 +22,23 @@ permalink: "/specifications/index.html"
     </div>
   </section>
   <section>
+    <h2>规范源与可追溯性</h2>
+    <p class="lead">END-CORE 0.1.0-draft 已把 Endem 的已接受语义边界写成唯一条款 ID，并把每条义务连接到现有向量、计划测试或具名复核权威。</p>
+    <div class="table-wrap"><table><thead><tr><th>工程源</th><th>用途</th><th>当前边界</th></tr></thead><tbody>
+      <tr><td>条款源：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md</a></td><td>版本、规范强度、条款 ID、失败责任和未决接口。</td><td>已条款化语义与安全边界；物理编码仍未冻结。</td></tr>
+      <tr><td>机器可读登记：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json</a></td><td>规范、术语、成熟度、实现状态与验证引用。</td><td><code>accepted</code> 不表示实现存在；计划测试不能写成已覆盖。</td></tr>
+      <tr><td>威胁模型：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md</a></td><td>把不可信输入、资源放大、歧义清洗、身份混淆和共同故障映射到条款。</td><td>要求 Profile 给出有限上限，但数值仍需语料和复杂度实验。</td></tr>
+      <tr><td>语义向量：<a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/semantic">https://github.com/Noemion/noemion.github.io/tree/main/vectors/semantic</a></td><td>最小接受、多个根、事态混入目标力量、未记录歧义和模型越权等正反案例。</td><td>这些 JSON 不是 .endem 线格式，也不定义未来 ABI。</td></tr>
+    </tbody></table></div>
+  </section>
+  <section>
     <h2>不作为文件规范的概念</h2>
     <p><strong>Dromen</strong> 是 Praxor 针对一次会话从 attested Endem 或 Synem、执行策略和当前授权建立的只读运行视图。Dromen 不得成为磁盘文件、发布对象或跨会话句柄，因此本站不为它建立对象格式规范。它的建立与销毁规则见<a href="../components/praxor.html">Praxor 组件</a>。</p>
   </section>
   <section>
     <h2>规范与实现的边界</h2>
     <div class="table-wrap"><table><thead><tr><th>层次</th><th>当前权威内容</th><th>尚未形成的证据</th></tr></thead><tbody>
-      <tr><td>语义</td><td>一个根 skena、六个语义面、形式显示、显式未知、满足与权威</td><td>代表性语料覆盖、跨领域最小性、关系等价和求值规则</td></tr>
+      <tr><td>语义</td><td>一个根 skena、六个语义面、形式显示、显式未知、满足与权威；已有 5 个条款化语义向量</td><td>更广泛语料覆盖、跨领域最小性、关系等价和求值规则</td></tr>
       <tr><td>组合</td><td>内容寻址、显式绑定、权限不扩大、冲突关闭失败</td><td>大规模闭包性能、循环处理和远程仓库协议</td></tr>
       <tr><td>证据</td><td>Tekmor 可定位、可绑定、可声明强度，但不自动证明结论</td><td>稳定事件编码、跨实现验证和撤销策略</td></tr>
       <tr><td>物理格式</td><td>有界读取、checked arithmetic、未知关键记录拒绝</td><td>魔数、布局、字段宽度、压缩、摘要与签名算法</td></tr>

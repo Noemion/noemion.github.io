@@ -71,8 +71,9 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Availability and authority
 
-- The canonical public content is HTML. Markdown files under the source repository are authoring inputs for selected manuals and are not public route twins.
+- Canonical website explanations are HTML. Versioned implementation obligations live in the linked `spec/*.md` sources, while `spec/registry.json` and `vectors/` provide machine-readable maturity and test traceability; they are not duplicate Pages routes.
 - Project status, proposed designs, normative specifications, and verified evidence remain distinct. Follow each page's maturity and authority labels.
+- END-CORE 0.1.0-draft and its first semantic vectors are public engineering drafts, not a stable specification or wire-format release.
 - No public executable release is currently available. The downloads page is the authoritative source for release availability.
 
 ## Usage

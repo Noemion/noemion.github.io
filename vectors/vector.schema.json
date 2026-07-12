@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noemion.github.io/schema/semantic-vector-v1",
+  "title": "Noemion semantic vector envelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["vector_format", "id", "description", "spec", "expect", "input"],
+  "properties": {
+    "vector_format": {"const": "noemion.semantic-vector.v1"},
+    "id": {"type": "string", "pattern": "^SV-(VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$"},
+    "description": {"type": "string", "minLength": 1},
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": {"const": "END-CORE"},
+        "version": {"const": "0.1.0-draft"}
+      }
+    },
+    "expect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result", "clauses", "diagnostics"],
+      "properties": {
+        "result": {"enum": ["accept", "reject"]},
+        "clauses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^END-[A-Z]+-[0-9]{3}$"}
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["code", "clause", "location"],
+            "properties": {
+              "code": {"type": "string", "minLength": 1},
+              "clause": {"type": "string", "pattern": "^END-[A-Z]+-[0-9]{3}$"},
+              "location": {"type": "string", "pattern": "^/"}
+            }
+          }
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "description": "Semantic test model only; not an Endem wire representation"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "vector_format": "noemion.semantic-vector.v1",
+  "id": "SV-REJECT-ROOTS-001",
+  "description": "两个可以独立验收的根事态不能进入同一个 Endem。",
+  "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "expect": {
+    "result": "reject",
+    "clauses": ["END-CORE-001", "END-ERR-001"],
+    "diagnostics": [
+      {"code": "endem.root.not_unique", "clause": "END-CORE-001", "location": "/input/skena/roots/1"}
+    ]
+  },
+  "input": {
+    "rhem": {"source_id": "source:request-002", "content": "生成报告并部署服务"},
+    "semion": {"symbols": [], "relations": []},
+    "skena": {
+      "roots": ["situation:report-produced", "situation:service-deployed"],
+      "situations": [
+        {"id": "situation:report-produced", "relation": "rel:produced", "polarity": "positive"},
+        {"id": "situation:service-deployed", "relation": "rel:deployed", "polarity": "positive"}
+      ]
+    },
+    "telis": {"mode": "kine"},
+    "krin": {"decision_authority": "authority:requester"},
+    "apor": []
+  }
+}

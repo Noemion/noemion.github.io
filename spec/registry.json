@@ -1,0 +1,289 @@
+{
+  "registry_version": 1,
+  "updated": "2026-07-13",
+  "documents": [
+    {
+      "spec_id": "END-CORE",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "decision_status": "accepted-scope",
+      "implementation_status": "unimplemented",
+      "wire_status": "unfrozen",
+      "path": "spec/endem-core.md",
+      "scope": "Endem semantic, authority, state, identity, safety and verification core"
+    }
+  ],
+  "supporting_documents": [
+    {
+      "id": "END-THREAT",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "path": "spec/endem-threat-model.md",
+      "scope": "Endem untrusted-input threats, mandatory mitigations and Profile limit obligations"
+    }
+  ],
+  "terms": [
+    {"term": "Noemion", "kind": "project", "decision_status": "accepted", "definition": "项目、新领域与社区总名"},
+    {"term": "Endem", "kind": "artifact", "decision_status": "accepted", "definition": "最小、独立有效且可验证的期望终态单元"},
+    {"term": "Synem", "kind": "artifact", "decision_status": "accepted", "definition": "两个或更多 Endem 的已解析组合闭包"},
+    {"term": "Dromen", "kind": "session-state", "decision_status": "accepted", "definition": "一次会话内重新验证后的只读实现状态"},
+    {"term": "Tekmor", "kind": "evidence", "decision_status": "accepted", "definition": "绑定主体、范围、方法、环境、结果和限制的证据记录"},
+    {"term": "rhem", "kind": "semantic-facet", "decision_status": "accepted", "definition": "来源记号与可重定位范围"},
+    {"term": "semion", "kind": "semantic-facet", "decision_status": "accepted", "definition": "已授权的符号、指称、关系和角色投影"},
+    {"term": "skena", "kind": "semantic-facet", "decision_status": "accepted", "definition": "一个根、中性且可比较的可能事态"},
+    {"term": "telis", "kind": "semantic-facet", "decision_status": "accepted", "definition": "达到或保持事态的目标方向"},
+    {"term": "krin", "kind": "semantic-facet", "decision_status": "accepted", "definition": "结构比较、证据、未知处理和决定权威契约"},
+    {"term": "apor", "kind": "semantic-facet", "decision_status": "accepted", "definition": "可表达但尚未获授权决定的投影缺口"},
+    {"term": "wire-format", "kind": "interface", "decision_status": "unresolved", "definition": "Endem 的物理字节编码、编号、宽度、对齐和扩展规则"}
+  ],
+  "threats": [
+    {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001"], "evidence_status": "planned"},
+    {"id": "THR-END-002", "clauses": ["END-SAF-002"], "evidence_status": "planned"},
+    {"id": "THR-END-003", "clauses": ["END-SAF-003"], "evidence_status": "planned"},
+    {"id": "THR-END-004", "clauses": ["END-APR-001", "END-UNK-001", "END-AUT-001"], "evidence_status": "partial"},
+    {"id": "THR-END-005", "clauses": ["END-KRN-001", "END-STR-001"], "evidence_status": "partial"},
+    {"id": "THR-END-006", "clauses": ["END-ID-001"], "evidence_status": "planned"},
+    {"id": "THR-END-007", "clauses": ["END-VER-001"], "evidence_status": "planned"},
+    {"id": "THR-END-008", "clauses": ["END-STA-001"], "evidence_status": "planned"},
+    {"id": "THR-END-009", "clauses": ["END-CON-001", "END-DET-001"], "evidence_status": "planned"},
+    {"id": "THR-END-010", "clauses": ["END-ERR-001"], "evidence_status": "partial"}
+  ],
+  "clauses": [
+    {
+      "id": "END-CON-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "planned",
+      "failure_owner": "Poiet and every reader",
+      "verification": [{"status": "planned", "ref": "peira:conformance-identity"}]
+    },
+    {
+      "id": "END-CON-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "release validation",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-CORE-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/two-roots-reject.json"}
+      ]
+    },
+    {
+      "id": "END-CORE-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet and every reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
+        {"status": "planned", "ref": "peira:facet-presence"}
+      ]
+    },
+    {
+      "id": "END-SRC-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
+        {"status": "planned", "ref": "peira:source-range-and-digest"}
+      ]
+    },
+    {
+      "id": "END-SEM-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"}
+      ]
+    },
+    {
+      "id": "END-SIT-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/force-in-skena-reject.json"}
+      ]
+    },
+    {
+      "id": "END-TEL-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
+        {"status": "planned", "ref": "peira:telis-mode"}
+      ]
+    },
+    {
+      "id": "END-KRN-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet and Praxor",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
+        {"status": "planned", "ref": "peira:krin-no-self-proof"}
+      ]
+    },
+    {
+      "id": "END-APR-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
+        {"status": "planned", "ref": "peira:apor-preservation"}
+      ]
+    },
+    {
+      "id": "END-UNK-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, Praxor and every evaluator",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
+        {"status": "planned", "ref": "peira:unknown-state-separation"}
+      ]
+    },
+    {
+      "id": "END-STR-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet and Theor",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
+        {"status": "planned", "ref": "peira:relation-position-differential"}
+      ]
+    },
+    {
+      "id": "END-AUT-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet and Praxor",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
+        {"status": "planned", "ref": "peira:model-candidate-boundary"}
+      ]
+    },
+    {
+      "id": "END-DET-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "planned",
+      "failure_owner": "Poiet",
+      "verification": [
+        {"status": "planned", "ref": "peira:determinism-same-input"},
+        {"status": "planned", "ref": "peira:reproducible-two-environments"}
+      ]
+    },
+    {
+      "id": "END-STA-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "planned",
+      "failure_owner": "Poiet, sphra and Praxor",
+      "verification": [{"status": "planned", "ref": "peira:state-non-implication"}]
+    },
+    {
+      "id": "END-ID-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "planned",
+      "failure_owner": "Poiet and release validation",
+      "verification": [
+        {"status": "planned", "ref": "peira:identity-domain-separation"},
+        {"status": "manual-authority", "authority": "future format ADR reviewers"}
+      ]
+    },
+    {
+      "id": "END-SAF-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "planned",
+      "failure_owner": "every reader",
+      "verification": [
+        {"status": "planned", "ref": "peira:checked-arithmetic"},
+        {"status": "planned", "ref": "peira:parser-fuzzing"}
+      ]
+    },
+    {
+      "id": "END-SAF-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "planned",
+      "failure_owner": "every reader",
+      "verification": [
+        {"status": "planned", "ref": "peira:resource-limit-before-allocation"},
+        {"status": "manual-authority", "authority": "future Profile ADR reviewers"}
+      ]
+    },
+    {
+      "id": "END-SAF-003",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "planned",
+      "failure_owner": "every reader",
+      "verification": [
+        {"status": "planned", "ref": "peira:unknown-critical-record"},
+        {"status": "manual-authority", "authority": "future format registry reviewers"}
+      ]
+    },
+    {
+      "id": "END-ERR-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, Theor and every reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/two-roots-reject.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/force-in-skena-reject.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
+        {"status": "planned", "ref": "peira:diagnostic-differential"}
+      ]
+    },
+    {
+      "id": "END-VER-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "planned",
+      "failure_owner": "Theor and repository dependency checks",
+      "verification": [
+        {"status": "planned", "ref": "peira:reader-dependency-independence"},
+        {"status": "planned", "ref": "peira:mutation-and-fault-injection"}
+      ]
+    },
+    {
+      "id": "END-VER-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "covered",
+      "failure_owner": "specification maintenance",
+      "verification": [{"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"}]
+    }
+  ]
+}

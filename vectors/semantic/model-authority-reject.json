@@ -1,0 +1,31 @@
+{
+  "vector_format": "noemion.semantic-vector.v1",
+  "id": "SV-REJECT-AUTHORITY-001",
+  "description": "模型自述不能成为确认 semion 投影的授权来源。",
+  "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "expect": {
+    "result": "reject",
+    "clauses": ["END-SEM-001", "END-AUT-001", "END-ERR-001"],
+    "diagnostics": [
+      {"code": "endem.projection.authority_untrusted", "clause": "END-AUT-001", "location": "/input/semion/relations/0/projection"}
+    ]
+  },
+  "input": {
+    "rhem": {"source_id": "source:request-005", "content": "生成安全评审报告"},
+    "semion": {
+      "symbols": [],
+      "relations": [
+        {
+          "id": "rel:produced",
+          "predicate": "produced",
+          "roles": [],
+          "projection": {"kind": "model-self-assertion", "id": "model:example"}
+        }
+      ]
+    },
+    "skena": {"roots": ["situation:report-produced"], "situations": []},
+    "telis": {"mode": "kine"},
+    "krin": {"decision_authority": "authority:requester"},
+    "apor": []
+  }
+}

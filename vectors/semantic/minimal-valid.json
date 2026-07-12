@@ -1,0 +1,54 @@
+{
+  "vector_format": "noemion.semantic-vector.v1",
+  "id": "SV-VALID-MINIMAL-001",
+  "description": "一个根事态、六个语义面和可追溯投影组成的最小可接受语义模型。",
+  "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "expect": {
+    "result": "accept",
+    "clauses": ["END-CORE-001", "END-CORE-002", "END-SRC-001", "END-SEM-001", "END-SIT-001", "END-TEL-001", "END-KRN-001", "END-STR-001"],
+    "diagnostics": []
+  },
+  "input": {
+    "rhem": {
+      "source_id": "source:request-001",
+      "subject": "authority:requester",
+      "media_type": "text/plain",
+      "language": "zh-CN",
+      "version": "1",
+      "content": "为已登记项目生成安全评审报告",
+      "range": {"unit": "unicode-scalar", "start": 0, "length": 16}
+    },
+    "semion": {
+      "symbols": [
+        {"id": "sym:project", "kind": "entity", "source_ref": "source:request-001#/range"},
+        {"id": "sym:report", "kind": "artifact", "source_ref": "source:request-001#/range"}
+      ],
+      "relations": [
+        {
+          "id": "rel:produced",
+          "predicate": "produced",
+          "roles": [
+            {"name": "result", "symbol": "sym:report"},
+            {"name": "for", "symbol": "sym:project"}
+          ],
+          "projection": {"kind": "rule", "id": "projection:zh-goal-v1"}
+        }
+      ]
+    },
+    "skena": {
+      "roots": ["situation:report-produced"],
+      "situations": [
+        {"id": "situation:report-produced", "relation": "rel:produced", "polarity": "positive"}
+      ]
+    },
+    "telis": {"mode": "kine"},
+    "krin": {
+      "required_phain": [{"relation": "rel:produced", "match": "same-roles"}],
+      "required_tekmor": ["artifact-content-observation"],
+      "on_missing_observation": "agno",
+      "on_evaluation_error": "fault",
+      "decision_authority": "authority:requester"
+    },
+    "apor": []
+  }
+}

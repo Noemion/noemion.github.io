@@ -22,6 +22,7 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>下一条可执行路径</h2>
     <p class="callout"><strong>直接结论：</strong>第一实现只交付 <code>poie</code>、<code>elenk</code>、<code>theor</code> 与 <code>peira</code>。不同时创建工具家族，不接模型，不做通用二进制抽象层。</p>
+    <p>第 0 阶段已经产生 END-CORE 0.1.0-draft、机器可读条款登记和 5 个语义向量。开始实现前仍需冻结物理格式草案、资源 Profile、稳定错误类别和规范字节向量；现有 JSON 向量不能直接作为写入格式。</p>
     <div class="flow"><div class="step">受控来源表达</div><div class="step">投影规则 / 具名决定</div><div class="step">endem poie</div><div class="step">.endem</div><div class="step">endem elenk</div><div class="step">endem theor</div><div class="step">endem peira</div></div>
     <div class="table-wrap"><table><thead><tr><th>职责</th><th>正式输入与输出</th><th>完成标准</th></tr></thead><tbody>
       <tr><td><code>poie</code></td><td>受控来源 + 投影决定 → 六个语义面 → Endem</td><td>相同规范化输入与配置产生相同字节；失败不留下部分制品。</td></tr>
@@ -41,6 +42,17 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td>第 4 阶段<br>受控运行</td><td><code>praxe</code>、隔离 Praxor、Dromen、Tekmor 和规则型后端</td><td>实际字节重验、能力最小化、事件完整、验收权威分离、恢复与升级路径</td><td>若单一 Tekmor 无法覆盖不同权威，再按权限或生命周期拆分</td></tr>
       <tr><td>第 5 阶段<br>模型与协议适配</td><td>模型候选封装、MCP/A2A 适配器和版本化遥测导出器</td><td>相对无模型基线，在错误确定率、上下文成本或任务成功率上证明净增益</td><td>没有不可替代增益时停止模型训练平台建设，继续使用外部成熟工具</td></tr>
     </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>第 0 阶段当前产物</h2>
+    <div class="table-wrap"><table><thead><tr><th>工作包</th><th>已经形成</th><th>仍需完成</th></tr></thead><tbody>
+      <tr><td>P0-W1 条款源</td><td>END-CORE 0.1.0-draft、22 个唯一条款 ID、术语与成熟度登记。</td><td>继续通过真实语料校正条款；物理格式另立规范。</td></tr>
+      <tr><td>P0-W2 威胁与限制</td><td>10 类不可信输入威胁、强制缓解条款和 Profile 必需上限清单。</td><td>用对象规模、复杂度和目标平台实验确定具体数值。</td></tr>
+      <tr><td>P0-W3 规范向量</td><td>1 个接受向量、4 个直接拒绝向量、统一外壳和自动追溯检查。</td><td>增加来源、未知状态、时间、资源边界和规范字节向量。</td></tr>
+      <tr><td>P0-W4 语言与构建</td><td>只定义了比较维度，没有实验结果。</td><td>用同一组字节向量比较候选语言、依赖、模糊测试和复现成本。</td></tr>
+    </tbody></table></div>
+    <p>这些产物把设计变成了可引用的实施输入，但仍不证明存在可执行程序。只有 P0-W3 产生规范字节样本后，P0-W4 才能进行公平的跨语言读取实验。</p>
   </section>
 
   <section class="content-wide">
