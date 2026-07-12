@@ -279,7 +279,9 @@ def build_container(records, payload_overrides=None):
 
 
 def read_container(data, profile):
-    if len(data) < HEADER_SIZE or data[:8] != MAGIC:
+    if len(data) < HEADER_SIZE:
+        fail("endem.wire.header.truncated", "END-FMT-001", "/", "structure")
+    if data[:8] != MAGIC:
         fail("endem.wire.header.magic", "END-FMT-001", "/", "structure")
     fields = struct.unpack_from("<8sHHHHBBBBIQQ24s", data, 0)
     _, major, minor, header_size, entry_size, byte_order, profile_id, state, flags, count, directory, file_size, reserved = fields
@@ -292,8 +294,10 @@ def read_container(data, profile):
     for index in range(6):
         base = 64 + index * 48
         kind, record_flags, record_id, offset, stored, logical, alignment, link, info, entry_reserved = struct.unpack_from("<HHIQQQIIII", data, base)
-        if (kind, record_flags, record_id, logical, alignment, link, info, entry_reserved) != (index + 1, 1, index + 1, stored, 8, 0, 0, 0):
-            fail("endem.wire.profile.feature", "END-FMT-010", "/", "profile")
+        if (kind, record_id) != (index + 1, index + 1):
+            fail("endem.wire.directory.order", "END-FMT-005", f"/directory/{index}", "structure")
+        if (record_flags, logical, alignment, link, info, entry_reserved) != (1, stored, 8, 0, 0, 0):
+            fail("endem.wire.profile.feature", "END-FMT-011", f"/directory/{index}", "profile")
         end = offset + stored
         if offset % 8 or end > len(data):
             fail("endem.wire.record.range", "END-FMT-006", "/", "structure")
@@ -459,6 +463,15 @@ def build_vector(records, vector_id):
         return build_container(mutated, {1: b"\xa1\x01" + b"\x81" * 17 + b"\x00"})
     if vector_id == "WV-P1-REJECT-STRING-LIMIT-001":
         return build_container(mutated, {1: b"\xa1\x01\x7a\x00\x10\x00\x01"})
+    if vector_id == "WV-P1-REJECT-TRUNCATED-HEADER-001":
+        return build_container(mutated)[:63]
+    if vector_id == "WV-P1-REJECT-DIRECTORY-ORDER-001":
+        data = bytearray(build_container(mutated))
+        first = bytes(data[HEADER_SIZE:HEADER_SIZE + ENTRY_SIZE])
+        second = bytes(data[HEADER_SIZE + ENTRY_SIZE:HEADER_SIZE + 2 * ENTRY_SIZE])
+        data[HEADER_SIZE:HEADER_SIZE + ENTRY_SIZE] = second
+        data[HEADER_SIZE + ENTRY_SIZE:HEADER_SIZE + 2 * ENTRY_SIZE] = first
+        return bytes(data)
     return build_container(mutated)
 
 
@@ -529,12 +542,12 @@ def main():
             reject_count += 1
     if len(seen) != len(manifest.get("vectors", [])):
         errors.append("END-P1 vector IDs must be unique")
-    if accept_count != 2 or reject_count != 9:
-        errors.append("END-P1 requires two semantic accepts and nine deterministic rejects")
+    if accept_count != 2 or reject_count != 11:
+        errors.append("END-P1 requires two semantic accepts and eleven deterministic rejects")
     if errors:
         print("\n".join(errors))
         return 1
-    print("PASS: END-P1 encoded and decoded 11 wire vectors (2 semantic accepts, 9 deterministic rejects)")
+    print("PASS: END-P1 encoded and decoded 13 wire vectors (2 semantic accepts, 11 deterministic rejects)")
     return 0
 
 

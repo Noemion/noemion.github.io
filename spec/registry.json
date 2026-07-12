@@ -366,6 +366,8 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/minimal-structural.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/bad-magic.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/truncated-header.hex"},
+        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"}
       ]
     },
@@ -373,7 +375,7 @@
       "id": "END-FMT-002",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
-      "evidence_status": "partial",
+      "evidence_status": "covered",
       "failure_owner": "Poiet and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
@@ -406,11 +408,12 @@
       "id": "END-FMT-005",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
-      "evidence_status": "partial",
+      "evidence_status": "covered",
       "failure_owner": "Poiet and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
-        {"status": "planned", "ref": "peira:wire-directory-order"}
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/directory-order.hex"},
+        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"}
       ]
     },
     {

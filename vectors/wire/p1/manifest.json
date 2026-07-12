@@ -58,6 +58,16 @@
       "id": "WV-P1-REJECT-STRING-LIMIT-001",
       "hex": "vectors/wire/p1/string-limit.hex",
       "expect": {"result": "reject", "code": "endem.wire.profile.limit", "clause": "END-FMT-010", "layer": "profile", "path": "/"}
+    },
+    {
+      "id": "WV-P1-REJECT-TRUNCATED-HEADER-001",
+      "hex": "vectors/wire/p1/truncated-header.hex",
+      "expect": {"result": "reject", "code": "endem.wire.header.truncated", "clause": "END-FMT-001", "layer": "structure", "path": "/"}
+    },
+    {
+      "id": "WV-P1-REJECT-DIRECTORY-ORDER-001",
+      "hex": "vectors/wire/p1/directory-order.hex",
+      "expect": {"result": "reject", "code": "endem.wire.directory.order", "clause": "END-FMT-005", "layer": "structure", "path": "/directory/0"}
     }
   ]
 }

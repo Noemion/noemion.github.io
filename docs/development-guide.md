@@ -20,7 +20,7 @@ badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 
 ADR-0012 已选择 Rust 1.97.0 作为 Poiet 与生产读取核心语言。第一纵向切片禁止 `unsafe` 和第三方 crate，固定工具链、提交 `Cargo.lock`，并在 release 构建中继续检查整数溢出。C 原型只作差分与模糊测试依据，不进入生产代码。
 
-首个本地候选已经落实这条基线：Poiet、Theor 与 CLI 分为三个工作区 crate，Theor 另写 CBOR 解码和验证路径，十一个 END-P1 字节向量进入回归测试。当前重点从“建立工作区”转为扩大边界语料、覆盖引导模糊、跨平台复现和公开仓库。
+首个本地候选已经落实这条基线：Poiet、Theor 与 CLI 分为三个工作区 crate，Theor 另写 CBOR 解码和验证路径，十三个 END-P1 字节向量进入回归测试。当前重点从“建立工作区”转为扩大边界语料、覆盖引导模糊、跨平台复现和公开仓库。
 
 - 冻结 `rhem/semion/skena/telis/krin/apor` 的最小语义、不变量、错误和资源限制。
 - 保持规范写入器、生产侧结构检查与 `endem poie/elenk` 的确定性边界。
