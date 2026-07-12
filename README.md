@@ -6,7 +6,7 @@
 
 - `_config.yml` 定义账户站点 URL、仓库身份、语言、Markdown 处理器和构建排除项；账户站点的 `baseurl` 必须保持为空。
 - `.github/workflows/pages.yml` 在 `main` 分支推送时先运行路由测试，再通过 GitHub 官方 Jekyll Pages Actions 构建 `_site`、原样加入公开 `sitemap.md` 并部署。
-- 当前 66 个正式页面由 Jekyll 处理：46 个普通页面使用 HTML 正文源，20 个手册/指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。
+- 当前 67 个正式页面由 Jekyll 处理：47 个普通页面使用 HTML 正文源，20 个手册/指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。
 - 本地可在安装兼容 Ruby 与 Bundler 后运行 `bundle install` 和 `bundle exec jekyll serve`；当前工作区自带的系统 Ruby 不作为发布环境基线。
 
 ## Jekyll 源码模型
@@ -71,7 +71,7 @@ badges: ["Documentation"]
 - `about/`：项目背景、动机、范围、非目标，以及思想与方法基础的采用边界。
 - `architecture/`：系统关系、对象生命周期、信任边界和开放问题。
 - `specifications/`：Noema IR（NIR）、Noema Object（NOBJ）、Horizon Object（HOBJ）等规范的权威来源与成熟度。
-- `components/`：Noesis Core、Noema Object System、Fulfillment Runtime 和 Horizon Engine 等组件入口。
+- `components/`：Noesis Core、Noema Object System、Fulfillment Runtime、Horizon Engine 和 Agent Harness 等组件入口。
 - `tools/`：23 个工具的分类目录；`tools/<tool>/index.html` 是工具项目页。
 - `tools/<tool>/docs/`：仅在存在实质帮助手册时建立；目录内 Markdown 由 Jekyll 生成 HTML 手册页，工具项目入口本身继续使用 HTML。
 - `docs/`：保存入门、使用、架构、开发、工具和规范六类任务型文档；正文链接权威页面，不复制第二套规范。
@@ -99,6 +99,8 @@ badges: ["Documentation"]
 
 修改公开文案、组件名称、对象术语、工具命令、文件名或路由时，还必须遵循 [`design-system/language-and-naming.md`](design-system/language-and-naming.md)。核心命名由 [`design-system/adr-0001-noemion-nomenclature.md`](design-system/adr-0001-noemion-nomenclature.md) 决定：Noesis 表示确定性编译活动，Noema 表示编译后机器对象，Horizon 表示可按策略展开的背景与依赖，Fulfillment 表示结果验收和具体实现。哲学名称只说明问题结构，工程含义仍由规范、数据结构、不变量和测试定义。
 
+智能体工程采用 Agent Harness 作为 Fulfillment Runtime 外侧的控制平面，具体边界由 [`design-system/adr-0002-agent-harness-boundary.md`](design-system/adr-0002-agent-harness-boundary.md) 决定。它装配版本化上下文、暴露最小类型化能力、验证调用策略并收集观察与验收证据；它不属于确定性可信核心，也不能直接生成 NIR/NOBJ、修改签名对象或让模型自行扩大权限。
+
 技术长文、工具项目介绍和手册正文还必须读取 [`design-system/readability.md`](design-system/readability.md)。1200px 是连续画布而不是正文行宽：普通段落保持约 700–760px 阅读列，桌面正文采用 17–18px 与约 1.75–1.8 行高。需要利用右侧空间时，优先形成约 800px 主阅读列与约 380px 粘性信息栏，并从 Hero 起让信息栏持续承载章节目录、成熟度、可用状态、关键对象、输入输出或下一阅读入口；没有足够信息时使用单列，不为排版保留空栏。
 
 图片只在能增强概念解释、页面辨识或内容氛围时使用。选择顺序为许可清晰的素材库、经授权的项目素材、项目定制生成图；素材必须下载到仓库并压缩，不能依赖第三方热链。来源、许可、裁切焦点、替代文本和生成提示记录在 [`design-system/images.md`](design-system/images.md)，公开页面不暴露设计参考或模仿关系。
@@ -111,7 +113,7 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 
 普通专题页不再使用固定 300px 空白偏移，也不通过 `nth-of-type` 或 `:has()` 猜测版式。每个 HTML 章节显式使用 `content-split`、`content-stack`、`content-band`、`content-wide`、`content-grid` 或 `content-rows` 中的一种；需要镜像论证时才附加 `content-split-reverse`。同一页面组合多种节奏，1000px 以下按正文顺序折叠为单列。只有真实目录、项目状态或时间线摘要可以占据侧栏。
 
-运行测试前必须安装可从命令行调用的 Node.js。源码阶段验证 66 个页面的 Front Matter、固定路由、共享布局和目录注册；Jekyll 构建后，质量测试会直接检查 `_site` 中的最终 HTML，并加载同一份生产 `assets/directory.js`，验证模块覆盖、页面类型、工具文档高亮以及模块不会向全局对象暴露 API。
+运行测试前必须安装可从命令行调用的 Node.js。源码阶段验证 67 个页面的 Front Matter、固定路由、共享布局和目录注册；Jekyll 构建后，质量测试会直接检查 `_site` 中的最终 HTML，并加载同一份生产 `assets/directory.js`，验证模块覆盖、页面类型、工具文档高亮以及模块不会向全局对象暴露 API。
 
 每个 `kind=tool` / `data-page-role=tool-project` 页面都是项目入口而非手册：必须包含“项目 / 工具 / 当前工具”面包屑，以及“工具简介”“当前状态”“主要能力”“输入与产物”“处理边界”“相关资源”六个语义章节。当前状态必须明确处于设计阶段、当前未发布可执行程序，并说明命令行接口、参数和文件扩展名尚未冻结；只有实际存在实质内容时才链接或创建工具 `docs/`。
 

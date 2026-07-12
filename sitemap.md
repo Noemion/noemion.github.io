@@ -25,6 +25,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Noesis Core](https://noemion.github.io/components/noesis-core.html) — deterministic compilation boundary and Deterministic Profile
 - [Noema Object System](https://noemion.github.io/components/noema-object-system.html) — symbol resolution, relocation, validation, loading, and fulfillment
 - [Horizon Engine](https://noemion.github.io/components/horizon-engine.html) — model-engineering architecture and current maturity
+- [Agent Harness](https://noemion.github.io/components/agent-harness.html) — constrained context, capabilities, feedback loops, and acceptance evidence for agent execution
 
 ## Specifications
 

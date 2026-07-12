@@ -45,13 +45,23 @@ permalink: "/development/testing.html"
       <li>预算不足、披露越权、会话重放和状态漂移必须安全拒绝或重新同步。</li>
     </ul>
   </section>
+  <section class="content-rows">
+    <h2>当前设计：Agent Harness 验证</h2>
+    <ul>
+      <li>上下文测试验证版本、来源、适用范围、失效链接和逐步披露，不允许临时提示静默覆盖规范。</li>
+      <li>能力测试覆盖参数结构、最小权限、读写分离、幂等性、副作用、提示注入和被污染的工具返回。</li>
+      <li>反馈测试让智能体读取真实 UI 状态、日志、指标、追踪和测试结果，完成故障复现、修复验证和结果对照。</li>
+      <li>恢复测试覆盖工具失败、环境漂移、重复失败、预算耗尽、状态冲突和需要人工判断的分支。</li>
+      <li>端到端验收同时检查任务结果、过程合规和证据完整；智能体自述成功不能作为验收证据。</li>
+    </ul>
+  </section>
   <section class="content-band">
     <h2>模糊测试从第一天开始</h2>
     <p>模糊测试至少覆盖 NOBJ/HOBJ 读取器、文本与 NSL Parser、重定位、证据账本、披露图、依赖闭包、Strip 和 Merkle Validator，并限制资源占用、递归深度和压缩扩张。</p>
   </section>
   <section class="content-band">
     <h2>后续计划：模型与跨平台矩阵</h2>
-    <p>Horizon Engine 阶段增加来源隔离、困难负例、歧义、OOD、跨块关系、错误确定率、校准和量化退化；稳定阶段增加平台矩阵、性能预算和双构建复现。具体阈值须由基线与 ADR 决定。</p>
+    <p>Horizon Engine 阶段增加来源隔离、困难负例、歧义、OOD、跨块关系、错误确定率、校准和量化退化；Agent Harness 阶段增加任务成功、越权拒绝、工具污染、长时恢复和人工升级测试；稳定阶段增加平台矩阵、性能预算和双构建复现。具体阈值须由基线与 ADR 决定。</p>
   </section>
   <section class="content-wide">
     <h2>证据等级与研究复现</h2>

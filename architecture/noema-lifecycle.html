@@ -10,8 +10,8 @@ permalink: "/architecture/noema-lifecycle.html"
   <div class="hero"><h1>Noema 生命周期与信任边界</h1><p>跟踪来源表达怎样成为 Noema IR、Noema Object 和经过验证的运行结果。</p><div class="badges"><span class="badge">Lifecycle</span><span class="badge">Trust Boundary</span><span class="badge">Deterministic Core</span></div></div>
   <section class="content-wide">
     <h2>生命周期</h2>
-    <div class="flow"><div class="step">自然语言 / NSL / 资源</div><div class="step">前端候选或 Deterministic 解析</div><div class="step">Noesis Core</div><div class="step">NIR / NOBJ</div><div class="step">链接器 / 装载器</div><div class="step">Fulfillment Runtime</div></div>
-    <p>前端负责产生受限候选或解析受控源语言；Noesis Core 负责绑定、类型与约束检查、覆盖审计和确定性对象生成；链接与装载组件负责对象组合、验证和安全映射；Fulfillment Runtime 才负责生成式求解与实现化。</p>
+    <div class="flow"><div class="step">自然语言 / NSL / 资源</div><div class="step">前端候选或 Deterministic 解析</div><div class="step">Noesis Core</div><div class="step">NIR / NOBJ</div><div class="step">链接器 / 装载器</div><div class="step">Agent Harness</div><div class="step">Fulfillment Runtime</div></div>
+    <p>前端负责产生受限候选或解析受控源语言；Noesis Core 负责绑定、类型与约束检查、覆盖审计和确定性对象生成；链接与装载组件负责对象组合、验证和安全映射；Agent Harness 负责运行会话的上下文、能力和反馈；Fulfillment Runtime 才负责生成式求解与实现化。</p>
     <p>例如，一个“生成报告”的请求只有在目标受众、必需章节、禁止披露内容、证据来源和验收条件都进入受检语义后，才适合成为对象；Fulfillment Runtime 可以选择怎样形成报告，但不能删除硬约束或扩大访问权限。</p>
   </section>
   <section class="content-rows">
@@ -30,6 +30,15 @@ permalink: "/architecture/noema-lifecycle.html"
       <li>NOBJ 可保留待链接引用；最终执行对象必须满足必需依赖闭包和信任策略。</li>
       <li>装载器在映射前验证结构、边界、签名范围和所需完整性证明，验证失败时关闭失败。</li>
       <li>重定位完成后，关键符号绑定、入口、策略与权限应被冻结，避免装载后提权。</li>
+    </ul>
+  </section>
+  <section class="content-rows">
+    <h2>智能体执行边界</h2>
+    <ul>
+      <li>Agent Harness 只从已验证对象、显式执行配置和版本化资料构造任务上下文。</li>
+      <li>模型提出能力调用后，由确定性策略检查参数、权限、预算、副作用和当前状态。</li>
+      <li>工具结果、UI 状态、日志、指标和追踪作为结构化观察返回会话；模型输出不能替代真实环境状态。</li>
+      <li>验收契约、停止条件和人工升级条件在执行前固定；重复失败和预算耗尽不能触发静默提权。</li>
     </ul>
   </section>
   <section class="content-band">
@@ -58,6 +67,7 @@ permalink: "/architecture/noema-lifecycle.html"
       <tr><td>NOBJ → Linked Object</td><td>符号、重定位、依赖、权限和约束无静默冲突</td><td>冲突报告</td><td>链接映射、依赖闭包和输入摘要</td></tr>
       <tr><td>Object → Loaded State</td><td>结构、签名、完整性、权限映射和版本配置有效</td><td>装载拒绝</td><td>验证层结果和装载计划</td></tr>
       <tr><td>Loaded State → Fulfillment Runtime Result</td><td>实现化、披露、外部能力和停止条件遵守对象契约</td><td>受控失败或未满足结果</td><td>运行事件、评价记录和输出验收报告</td></tr>
+      <tr><td>Harness Action → Environment Change</td><td>能力、参数、权限、预算、副作用和环境状态均符合执行配置</td><td>策略拒绝、工具失败、预算耗尽或人工升级</td><td>调用记录、结构化观察、状态快照和验收结论</td></tr>
     </tbody></table></div>
   </section>
   <div class="next-prev"><a href="../about/intellectual-foundations.html">← 思想与方法基础</a><a href="open-questions.html">开放问题 →</a></div>

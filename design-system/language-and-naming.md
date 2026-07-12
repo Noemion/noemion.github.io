@@ -42,6 +42,7 @@
 | Linker / Loader | Noema Object System | 解析、链接、验证和装载对象的系统 | `components/noema-object-system.html` |
 | Runtime | Fulfillment Runtime | 在约束下求解并产生可验收结果的运行时 | 与对象系统共同说明 |
 | NSFE | Horizon Engine | 结合来源图、检索和封闭任务头的模型工程组件 | `components/horizon-engine.html` |
+| — | Agent Harness | 组织智能体上下文、受限能力、反馈循环与验收证据的外侧控制平面 | `components/agent-harness.html` |
 | Strict mode | Deterministic Profile | 不调用模型、结果可复现的确定性配置 | 正文不再使用 `Strict` 作为未解释标签 |
 | Assisted mode | Model-assisted Profile | 模型只能提出候选、不能决定对象布局的辅助配置 | 必须同时说明不可信边界 |
 | Lowering | realization | 把已验证目标落实为具体执行或产物 | 中文写“实现化”或直接说明具体动作 |

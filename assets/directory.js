@@ -141,7 +141,8 @@
             { href: "components/index.html", label: "组件总览" },
             { href: "components/noesis-core.html", label: "Noesis Core" },
             { href: "components/noema-object-system.html", label: "Noema Object System" },
-            { href: "components/horizon-engine.html", label: "Horizon Engine" }
+            { href: "components/horizon-engine.html", label: "Horizon Engine" },
+            { href: "components/agent-harness.html", label: "Agent Harness" }
           ]
         }
       ]

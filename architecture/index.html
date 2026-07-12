@@ -20,7 +20,7 @@ permalink: "/architecture/index.html"
   </section>
   <section>
     <h2>系统关系</h2>
-    <div class="flow"><div class="step">源语言 / 语义候选</div><div class="step">Noesis Core</div><div class="step">NIR / NOBJ</div><div class="step">链接器 / 装载器</div><div class="step">Fulfillment Runtime</div></div>
+    <div class="flow"><div class="step">源语言 / 语义候选</div><div class="step">Noesis Core</div><div class="step">NIR / NOBJ</div><div class="step">链接器 / 装载器</div><div class="step">Agent Harness</div><div class="step">Fulfillment Runtime</div></div>
     <p>可以把这条链理解为“提出要求—形成受检对象—组合依赖—验证装载—受约束执行”。前一阶段只能把明确产物交给后一阶段，任何组件都不得越过自己的信任边界替下游做隐式决定。</p>
     <p>各职责单元的入口见<a href="../components/">组件目录</a>，格式与执行约束见<a href="../specifications/">规范登记页</a>。</p>
   </section>
@@ -31,6 +31,7 @@ permalink: "/architecture/index.html"
       <tr><td>Noesis Core</td><td>规范化源表示与配置</td><td>NIR / NOBJ</td><td>无模型、确定、布局受规范控制</td></tr>
       <tr><td>链接器 / 装载器</td><td>对象、归档、HOBJ、锁定依赖</td><td>链接对象、运行 Segment、装载状态</td><td>冲突显式、权限不静默扩大、完整性可验证</td></tr>
       <tr><td>Fulfillment Runtime</td><td>已验证对象、模型与外部能力绑定</td><td>受约束求解结果与运行证据</td><td>实现化不改变对象声明的硬约束和权限边界</td></tr>
+      <tr><td>Agent Harness</td><td>已验证对象、执行配置与类型化能力</td><td>受控会话、观察反馈与验收证据</td><td>模型不能扩大权限、绕过策略或自行确认任务完成</td></tr>
     </tbody></table></div>
     <p>更细的阶段、信任转换和失败位置见<a href="noema-lifecycle.html">对象生命周期</a>；记录布局、类型系统和执行语义必须进入正式规范或 ADR。</p>
   </section>
@@ -40,7 +41,7 @@ permalink: "/architecture/index.html"
   </section>
   <section>
     <h2>信任边界</h2>
-    <p>模型输出不得直接生成 NOBJ；对象偏移、长度、计数、索引和对齐均需检查。安全规则的规范状态见<a href="../specifications/">规范登记页</a>。</p>
+    <p>模型输出不得直接生成 NOBJ；能力调用必须经过参数、权限、预算和副作用检查；对象偏移、长度、计数、索引和对齐均需检查。智能体控制面的职责见<a href="../components/agent-harness.html">Agent Harness</a>，安全规则的规范状态见<a href="../specifications/">规范登记页</a>。</p>
   </section>
   <section>
     <h2>开放问题</h2>
