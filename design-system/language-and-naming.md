@@ -53,24 +53,26 @@
 
 ## 工具命名
 
-命令统一使用小写 `noem` 前缀和能够直接说明动作的英文动词。只有已经足够明确的名称保留；传统工具缩写不再作为 Noemion 的公开主名称。
+Noemion 是项目与对象体系的品牌，不是每个工具命令的强制前缀。命令可以使用直白动作词，也可以使用能够准确说明工程角色的哲学名称；独立名称必须满足可读、可发音、可检索、无明显命令冲突，并在标题和 `--help` 中同时给出直白职责。不能为了系列感给所有工具强造希腊词，也不能让命令名称进入对象魔数、Section 类型或 ABI 身份。
+
+当前先为来源编译、对象成形、只读观察和全局组合四个边界采用独立名称；其他 `noem*` 工具继续保留动作型工作名，直到新的名称确实能提高理解且经过 ADR 记录。
 
 | 旧命令 | 当前命令 | 主要动作 |
 | --- | --- | --- |
 | `noemconform` | `noemcertify` | 运行一致性测试并生成可复查报告 |
-| `noemobj` | `noeminspect` | 查看对象结构、符号和来源 |
+| `noemobj` | `theoria` | 查看对象结构、符号和来源 |
 | `noemverify` | `noemvalidate` | 验证结构、完整性和策略 |
 | `noemcopy` | `noemtransform` | 执行受控对象变换 |
 | `noemsize` | `noembudget` | 统计空间占用和预算 |
-| `noemas` | `noemassemble` | 把 Noema IR 文本汇编为对象 |
+| `noemas` | `morphe` | 把 Noema IR 文本汇编为对象 |
 | `noemdis` | `noemdecode` | 把对象解码为规范文本视图 |
 | `noemfmt` | `noemformat` | 规范化 Noema IR 文本格式 |
 | `noemdiff` | `noemcompare` | 比较对象与语义差异 |
-| `noemc` | `noemcompile` | 执行确定性意向编译 |
+| `noemc` | `noesis` | 执行确定性意向编译 |
 | `noemlint` | `noemanalyze` | 执行静态语义和策略分析 |
 | `noemar` | `noemarchive` | 创建和查看对象归档 |
 | `noemnm` | `noemsymbols` | 列出符号、绑定和版本 |
-| `noemld` | `noemlink` | 解析依赖并链接对象 |
+| `noemld` | `synthesis` | 解析依赖并链接对象 |
 | `noemstrip` | `noemreduce` | 删除允许移除的开发信息 |
 | `noemcov` | `noemcoverage` | 分析证据与验收覆盖 |
 | `noempack` | `noembundle` | 生成可验证发布包 |
@@ -81,11 +83,18 @@
 | `noemeval` | `noemevaluate` | 评估模型与任务头 |
 | `noemquant` | `noemquantize` | 量化并封装模型 |
 
+| 当前命令 | 哲学线索 | 工程职责 | 正式路由 |
+| --- | --- | --- | --- |
+| `noesis` | 意向活动、理解与判断 | 把受控来源或有来源约束的候选交给确定性 Noesis Core，形成 NIR/NOBJ。 | `tools/noesis/` |
+| `morphe` | 形式、结构 | 把显式 Text NIR 确定性编码为对象形式，不解释自然语言。 | `tools/morphe/` |
+| `theoria` | 观察、考察 | 只读检查 Header、Section、NIR 记录、符号、重定位与来源。 | `tools/theoria/` |
+| `synthesis` | 综合、组合 | 把多个局部对象、符号和约束组合为全局一致对象。 | `tools/synthesis/` |
+
 ## 文件与路由
 
 - 文件和目录使用完整的规范名或工具名，不使用已经废止的缩写。
 - 正式路由只登记当前名称；不保留旧路由、重定向或兼容别名。
-- 手册目录与所属工具同名。例如链接器手册位于 `tools/noemlink/docs/`。
+- 手册目录与所属工具同名。例如链接器手册位于 `tools/synthesis/docs/`。
 - 路由、导航、页面标题、交叉链接、测试、设计文档和配置必须在同一变更中更新。
 
 ## 中文信息架构名称
@@ -130,5 +139,6 @@
 - GNU Coding Standards, GNU Manuals: https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html
 - GNU Coding Standards, Manual Structure Details: https://www.gnu.org/prep/standards/html_node/Manual-Structure-Details.html
 - GNU Hello manual: https://www.gnu.org/software/hello/manual/hello.html
+- GNU Binutils 工具清单（`as`、`ld`、`objdump`、`readelf` 等工具不以 GNU 作为命令前缀）：https://www.gnu.org/software/binutils/binutils.html
 - 全国哲学社会科学工作办公室，《逻辑研究》——现象学的始基: http://www.nopss.gov.cn/GB/219506/219508/219511/14639916.html
 - 南京大学实践与文本，《生活世界现象学导论》: https://ptext.nju.edu.cn/info/1283/7690.htm

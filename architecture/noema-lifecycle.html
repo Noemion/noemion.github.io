@@ -31,7 +31,7 @@ permalink: "/architecture/noema-lifecycle.html"
     <h2>对象与装载边界</h2>
     <ul>
       <li>一切对象输入均不可信；偏移、长度、计数、索引和对齐计算使用 checked arithmetic。</li>
-      <li>NOBJ 可保留待链接引用；noemlink 可将 NOBJ 与已有 HOBJ 链接为新的 Linked Object 或 HOBJ。</li>
+      <li>NOBJ 可保留待链接引用；synthesis 可将 NOBJ 与已有 HOBJ 链接为新的 Linked Object 或 HOBJ。</li>
       <li>Release Object 必须绑定 Release Coverage Proof 与验证结论；noembundle 先生成不可变候选包和 Signing Request，回填时同时核对候选包、原请求与外部 Signature Response，再在被签载荷外附加 Signature Envelope。</li>
       <li>Noema Object System 在映射前验证 Signed Package 的结构、边界、签名范围和完整性证明，验证失败时关闭失败。</li>
       <li>重定位完成后，关键符号绑定、入口、策略与权限应被冻结，避免装载后提权。</li>

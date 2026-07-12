@@ -28,6 +28,37 @@ AcceptanceDecision = Decide(Policy, CandidateAssessment, EvidenceClosure, Author
       <tr><td>Validation Plan</td><td>规则验证器、评价器、阈值、所需证据与无法自动判断时的处理方式；真实运行证据不写回该计划。</td></tr>
     </tbody></table></div>
   </section>
+  <section class="content-wide">
+    <h2>详细设计基线：自然语言怎样进入 NIR</h2>
+    <p>自然语言不直接成为 NIR。来源先被切分为具有制品摘要和精确跨度的 Source Unit；模型或外部前端只能为这些单元提交 Candidate Envelope。Noesis Core 只有在候选能够由版本化确定性规则重新推导、绑定经过授权的 Source Binding Decision，或明确保留为歧义/未决状态时，才能建立 NIR 记录。</p>
+    <div class="table-wrap"><table><thead><tr><th>层次</th><th>最低字段职责</th><th>信任结论</th></tr></thead><tbody>
+      <tr><td>Source Package</td><td>制品身份、内容摘要、媒体类型、语言、版本、许可和长度。</td><td>只证明读取的是哪份来源，不证明解释正确。</td></tr>
+      <tr><td>Source Unit</td><td>单元 ID、父单元、跨度类型、起点、长度和片段摘要。</td><td>建立可重放定位，不产生语义。</td></tr>
+      <tr><td>Candidate Envelope</td><td>候选主张、替代解释、证据、置信信息、模型/窗口指纹和未决状态。</td><td>始终是不可信候选，不是 NIR。</td></tr>
+      <tr><td>Source Binding Decision</td><td>候选身份、授权主体、决定范围、理由、证据和制品摘要。</td><td>只授权指定绑定；不能授权模型决定布局或扩大权限。</td></tr>
+      <tr><td>Normalized NIR</td><td>规范化记录、类型化引用、显式未知状态、来源引用和验收契约。</td><td>只表示确定性核心已经检查的语义，不证明任务已完成。</td></tr>
+    </tbody></table></div>
+    <p>Source Binding Decision 是独立、可验证的输入制品。NIR 只保存其摘要与受影响记录引用，避免把临时对话、界面点击或不可重放的人工记忆静默变成语义。</p>
+  </section>
+  <section class="content-wide">
+    <h2>详细设计基线：记录公共头与引用</h2>
+    <p>每条可扩展记录具有共同逻辑头：<code>record_kind</code>、<code>schema_version</code>、<code>flags</code>、<code>record_size</code>、<code>local_id</code>、<code>type_ref</code> 和 <code>origin_ref</code>。记录大小允许工具跳过规范明确可选的未知记录；未知且影响语义、链接、权限或验收的记录必须失败。</p>
+    <p>逻辑引用使用“记录类别 + 局部索引”或稳定符号，不使用文件偏移充当语义身份。链接器可以重编号局部索引，但不能因此改变稳定符号、来源摘要、约束强度或验收身份。</p>
+  </section>
+  <section class="content-wide">
+    <h2>详细设计基线：NIR 记录字段</h2>
+    <div class="table-wrap"><table><thead><tr><th>记录</th><th>最低字段</th><th>主要失败条件</th></tr></thead><tbody>
+      <tr><td>Module</td><td>NIR 版本、命名空间、Profile、根目标、默认作用域、必需特性、验收根。</td><td>未知必需特性、根引用缺失或 Profile 与来源路径不一致。</td></tr>
+      <tr><td>Node</td><td>kind、type、symbol、modality、polarity、resolution state、payload、origin。</td><td>类型未知、状态与载荷冲突、符号类别不匹配或无来源确认语义。</td></tr>
+      <tr><td>Edge</td><td>relation type、source、target、scope、qualifiers、origin。</td><td>悬空引用、目标类别错误、作用域越界或非法关系。</td></tr>
+      <tr><td>Constraint</td><td>strength、operator、operands、scope、priority、conflict policy、unknown policy、origin。</td><td>硬约束被降级、操作数类型错误、冲突策略缺失或 unknown 被当作满足。</td></tr>
+      <tr><td>Ambiguity</td><td>subject、alternatives、evidence、risk、state、resolution policy、binding decision。</td><td>只保留最高置信解释、替代项来源缺失或无授权关闭歧义。</td></tr>
+      <tr><td>Acceptance</td><td>subject goals、result schema、evaluator、evidence requirements、authority、unknown behavior、result states。</td><td>评价器无版本、证据要求不完整、决定权威缺失或分数直接升级为 accepted。</td></tr>
+      <tr><td>Capability Requirement</td><td>capability type、parameter schema、risk class、authorization ceiling、preconditions。</td><td>包含实时句柄、超出授权上限或把可选能力当作已绑定能力。</td></tr>
+      <tr><td>Artifact Expectation</td><td>media type、schema、encoding、cardinality、destination role、required properties。</td><td>无消费者、编码未定义、必需属性无法验收或输出数量语义不明确。</td></tr>
+      <tr><td>Origin</td><td>记录引用、来源摘要与跨度、derivation class、规则/模型身份、决定摘要、authority。</td><td>确认语义无来源、模型候选伪装成规则推导或决定摘要不匹配。</td></tr>
+    </tbody></table></div>
+  </section>
   <section class="content-band">
     <h2>歧义、模态与推断权限</h2>
     <p>实现必须能表达已知、未指定、可推断、歧义、冲突、未解决和本体库外等状态。硬约束与软偏好分离，推断权限至少区分允许推断、禁止推断和需要确认。证据不足不能被模型置信度替换为唯一结论。</p>
@@ -49,7 +80,7 @@ AcceptanceDecision = Decide(Policy, CandidateAssessment, EvidenceClosure, Author
   </section>
   <section class="content-band">
     <h2>待定事项：最小类型与连续表示</h2>
-    <p>核心类型集、连续残差互操作、评价器接口和模型原生载荷边界尚未冻结，见<a href="../architecture/open-questions.html">开放问题</a>。</p>
+    <p>上述记录职责已经作为详细设计基线采用，但核心类型枚举、字段宽度、连续残差互操作、评价器接口、文本语法和模型原生载荷边界尚未冻结，见<a href="../architecture/open-questions.html">开放问题</a>。工具手册中的结构示意用于解释数据流，不构成可执行语法。</p>
   </section>
   <section class="content-rows">
     <h2>设计概要：规范不变量与验证路线</h2>

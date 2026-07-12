@@ -15,8 +15,8 @@
   };
 
   const resolveDirectoryModule = (route) => {
-    if (route.startsWith("tools/noemlink/docs/")) return "noemlinkDocs";
-    if (route.startsWith("tools/noemlink/")) return "noemlink";
+    if (route.startsWith("tools/synthesis/docs/")) return "synthesisDocs";
+    if (route.startsWith("tools/synthesis/")) return "synthesis";
     if (route.startsWith("tools/")) return "tools";
     if (route.startsWith("docs/")) return "docs";
     if (/^(architecture|specifications|components)\//.test(route)) return "architecture";
@@ -275,7 +275,7 @@
         {
           label: "对象工具",
           items: [
-            { href: "tools/noeminspect/index.html", label: "noeminspect · 对象查看" },
+            { href: "tools/theoria/index.html", label: "theoria · 对象查看" },
             { href: "tools/noemvalidate/index.html", label: "noemvalidate · 对象验证" },
             { href: "tools/noemtransform/index.html", label: "noemtransform · 对象变换" },
             { href: "tools/noembudget/index.html", label: "noembudget · 大小与预算" }
@@ -284,7 +284,7 @@
         {
           label: "文本 IR",
           items: [
-            { href: "tools/noemassemble/index.html", label: "noemassemble · IR 汇编" },
+            { href: "tools/morphe/index.html", label: "morphe · IR 汇编" },
             { href: "tools/noemdecode/index.html", label: "noemdecode · IR 反汇编" },
             { href: "tools/noemformat/index.html", label: "noemformat · 文本规范化" },
             { href: "tools/noemcompare/index.html", label: "noemcompare · 对象与语义比较" }
@@ -293,11 +293,11 @@
         {
           label: "编译与链接",
           items: [
-            { href: "tools/noemcompile/index.html", label: "noemcompile · 编译器" },
+            { href: "tools/noesis/index.html", label: "noesis · 编译器" },
             { href: "tools/noemanalyze/index.html", label: "noemanalyze · 语义检查" },
             { href: "tools/noemarchive/index.html", label: "noemarchive · 对象归档" },
             { href: "tools/noemsymbols/index.html", label: "noemsymbols · 符号检查" },
-            { href: "tools/noemlink/index.html", label: "noemlink · 链接器" }
+            { href: "tools/synthesis/index.html", label: "synthesis · 链接器" }
           ]
         },
         {
@@ -321,26 +321,26 @@
         }
       ]
     },
-    noemlink: {
+    synthesis: {
       kicker: "Tool Project",
-      title: "noemlink",
-      root: { href: "tools/noemlink/index.html", label: "noemlink 项目页" },
+      title: "synthesis",
+      root: { href: "tools/synthesis/index.html", label: "synthesis 项目页" },
       parent: { href: "tools/index.html", label: "返回工具目录" },
       groups: [
         {
           label: "项目入口",
           items: [
-            { href: "tools/noemlink/index.html", label: "noemlink 项目页" },
-            { href: "tools/noemlink/docs/index.html", label: "noemlink 使用手册" }
+            { href: "tools/synthesis/index.html", label: "synthesis 项目页" },
+            { href: "tools/synthesis/docs/index.html", label: "synthesis 使用手册" }
           ]
         },
         {
           label: "核心主题",
           items: [
-            { href: "tools/noemlink/docs/contract.html", label: "职责与契约" },
-            { href: "tools/noemlink/docs/inputs-outputs.html", label: "输入与输出" },
-            { href: "tools/noemlink/docs/pipeline.html", label: "处理流程" },
-            { href: "tools/noemlink/docs/loader-security.html", label: "装载与安全" }
+            { href: "tools/synthesis/docs/contract.html", label: "职责与契约" },
+            { href: "tools/synthesis/docs/inputs-outputs.html", label: "输入与输出" },
+            { href: "tools/synthesis/docs/pipeline.html", label: "处理流程" },
+            { href: "tools/synthesis/docs/loader-security.html", label: "装载与安全" }
           ]
         },
         {
@@ -352,43 +352,43 @@
         }
       ]
     },
-    noemlinkDocs: {
+    synthesisDocs: {
       kicker: "Tool Manual",
-      title: "noemlink 使用手册",
-      root: { href: "tools/noemlink/docs/index.html", label: "手册首页" },
-      parent: { href: "tools/noemlink/index.html", label: "返回 noemlink 项目页" },
+      title: "synthesis 使用手册",
+      root: { href: "tools/synthesis/docs/index.html", label: "手册首页" },
+      parent: { href: "tools/synthesis/index.html", label: "返回 synthesis 项目页" },
       groups: [
         {
           label: "快速开始",
           items: [
-            { href: "tools/noemlink/docs/index.html", label: "手册首页" },
-            { href: "tools/noemlink/docs/contract.html", label: "职责与契约" },
-            { href: "tools/noemlink/docs/inputs-outputs.html", label: "输入与输出" },
-            { href: "tools/noemlink/docs/invocation.html", label: "命令行调用" }
+            { href: "tools/synthesis/docs/index.html", label: "手册首页" },
+            { href: "tools/synthesis/docs/contract.html", label: "职责与契约" },
+            { href: "tools/synthesis/docs/inputs-outputs.html", label: "输入与输出" },
+            { href: "tools/synthesis/docs/invocation.html", label: "命令行调用" }
           ]
         },
         {
           label: "链接流程",
           items: [
-            { href: "tools/noemlink/docs/pipeline.html", label: "处理流程" },
-            { href: "tools/noemlink/docs/symbol-resolution.html", label: "符号解析" },
-            { href: "tools/noemlink/docs/relocations.html", label: "重定位与 ID 重映射" },
-            { href: "tools/noemlink/docs/horizon-linking.html", label: "HOBJ 链接" }
+            { href: "tools/synthesis/docs/pipeline.html", label: "处理流程" },
+            { href: "tools/synthesis/docs/symbol-resolution.html", label: "符号解析" },
+            { href: "tools/synthesis/docs/relocations.html", label: "重定位与 ID 重映射" },
+            { href: "tools/synthesis/docs/horizon-linking.html", label: "HOBJ 链接" }
           ]
         },
         {
           label: "安全与验证",
           items: [
-            { href: "tools/noemlink/docs/loader-security.html", label: "装载与安全" },
-            { href: "tools/noemlink/docs/diagnostics.html", label: "诊断与失败边界" },
-            { href: "tools/noemlink/docs/testing.html", label: "测试与验收" }
+            { href: "tools/synthesis/docs/loader-security.html", label: "装载与安全" },
+            { href: "tools/synthesis/docs/diagnostics.html", label: "诊断与失败边界" },
+            { href: "tools/synthesis/docs/testing.html", label: "测试与验收" }
           ]
         },
         {
           label: "参考资料",
           items: [
-            { href: "tools/noemlink/docs/dependencies.html", label: "上下游依赖" },
-            { href: "tools/noemlink/docs/reference-index.html", label: "参考索引" }
+            { href: "tools/synthesis/docs/dependencies.html", label: "上下游依赖" },
+            { href: "tools/synthesis/docs/reference-index.html", label: "参考索引" }
           ]
         }
       ]
@@ -427,9 +427,9 @@
       description: "按验证、检查、编译和链接任务进入确定性工具链。",
       items: [
         { href: "tools/noemcertify/index.html", label: "规范一致性", description: "执行 Golden、Malformed 与一致性测试套件", cover: "conform", coverLabel: "CONFORMANCE" },
-        { href: "tools/noeminspect/index.html", label: "对象检查", description: "安全查看对象、符号与披露结构", cover: "inspect", coverLabel: "OBJECT INSPECT" },
-        { href: "tools/noemcompile/index.html", label: "编译", description: "驱动前端并调用确定性 Noesis Core", cover: "compile", coverLabel: "SOURCE → OBJECT" },
-        { href: "tools/noemlink/index.html", label: "链接", description: "解析符号、应用重定位并形成闭包", cover: "link", coverLabel: "SYMBOL LINK" }
+        { href: "tools/theoria/index.html", label: "对象检查", description: "安全查看对象、符号与披露结构", cover: "inspect", coverLabel: "OBJECT INSPECT" },
+        { href: "tools/noesis/index.html", label: "编译", description: "驱动前端并调用确定性 Noesis Core", cover: "compile", coverLabel: "SOURCE → OBJECT" },
+        { href: "tools/synthesis/index.html", label: "链接", description: "解析符号、应用重定位并形成闭包", cover: "link", coverLabel: "SYMBOL LINK" }
       ]
     },
     {
@@ -442,7 +442,7 @@
         { href: "docs/architecture-guide.html", label: "架构设计指南", description: "理解生命周期、边界与失败路径", cover: "architecture-guide", coverLabel: "BOUNDARY GUIDE" },
         { href: "docs/tools-reference.html", label: "工具参考指南", description: "按生命周期定位 23 个工具", cover: "tools-reference", coverLabel: "TOOL MATRIX" },
         { href: "docs/specifications-reference.html", label: "规范参考指南", description: "查找权威来源、成熟度和 ADR 阅读顺序", cover: "spec-reference", coverLabel: "SPEC AUTHORITY" },
-        { href: "tools/noemlink/docs/index.html", label: "noemlink 使用手册", description: "查找链接器职责、流程、安全与测试主题", cover: "noemlink-manual", coverLabel: "LINKER MANUAL" }
+        { href: "tools/synthesis/docs/index.html", label: "synthesis 使用手册", description: "查找链接器职责、流程、安全与测试主题", cover: "synthesis-manual", coverLabel: "LINKER MANUAL" }
       ]
     },
     {

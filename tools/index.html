@@ -45,10 +45,10 @@ permalink: "/tools/index.html"
     <h3>Phase 0–8 与工具入口</h3>
     <div class="table-wrap"><table><thead><tr><th>Phase</th><th>主要工具</th><th>阶段结果</th></tr></thead><tbody>
       <tr><td>0</td><td>noemcertify</td><td>规范套件、正反样例与一致性入口</td></tr>
-      <tr><td>1</td><td>noeminspect、noemvalidate、noemtransform、noembudget</td><td>安全二进制读取、验证与受控变换</td></tr>
-      <tr><td>2</td><td>noemassemble、noemdecode、noemformat、noemcompare</td><td>Text NIR 往返与差异分类</td></tr>
-      <tr><td>3</td><td>noemcompile、noemanalyze</td><td>确定性 NIR/NOBJ 与编译证据账本</td></tr>
-      <tr><td>4</td><td>noemarchive、noemsymbols、noemlink</td><td>归档、符号、Linked Object / HOBJ</td></tr>
+      <tr><td>1</td><td>theoria、noemvalidate、noemtransform、noembudget</td><td>安全二进制读取、验证与受控变换</td></tr>
+      <tr><td>2</td><td>morphe、noemdecode、noemformat、noemcompare</td><td>Text NIR 往返与差异分类</td></tr>
+      <tr><td>3</td><td>noesis、noemanalyze</td><td>确定性 NIR/NOBJ 与编译证据账本</td></tr>
+      <tr><td>4</td><td>noemarchive、noemsymbols、synthesis</td><td>归档、符号、Linked Object / HOBJ</td></tr>
       <tr><td>5</td><td>noemreduce、noemcoverage、noembundle</td><td>Release Object、Release Coverage Proof 与 Signed Package</td></tr>
       <tr><td>6</td><td>noemexecute、noemobserve、noemcoverage</td><td>Loaded State、Run Evidence、Evidence Closure 与 Acceptance Decision</td></tr>
       <tr><td>7</td><td>noemdataset、noemtrain、noemevaluate、noemquantize</td><td>Checkpoint / Model Package Candidate 与资格记录</td></tr>
@@ -72,7 +72,7 @@ permalink: "/tools/index.html"
   <section id="object-tools" data-catalog-group="object">
     <h2>安全对象工具</h2>
     <div class="page-links">
-      <a class="page-link" data-catalog-item href="noeminspect/index.html"><strong>noeminspect</strong><span>安全查看 Header、Section、Symbol、Relocation、NIR 与披露结构。</span></a>
+      <a class="page-link" data-catalog-item href="theoria/index.html"><strong>theoria</strong><span>安全查看 Header、Section、Symbol、Relocation、NIR 与披露结构。</span></a>
       <a class="page-link" data-catalog-item href="noemvalidate/index.html"><strong>noemvalidate</strong><span>分层验证结构、语义、覆盖、策略和信任链。</span></a>
       <a class="page-link" data-catalog-item href="noemtransform/index.html"><strong>noemtransform</strong><span>受约束地复制、抽取、删除和重建对象内容。</span></a>
       <a class="page-link" data-catalog-item href="noembudget/index.html"><strong>noembudget</strong><span>分析 Section、Segment、闭包和披露预算占用。</span></a>
@@ -81,7 +81,7 @@ permalink: "/tools/index.html"
   <section id="text-tools" data-catalog-group="object">
     <h2>文本 IR 工具</h2>
     <div class="page-links">
-      <a class="page-link" data-catalog-item href="noemassemble/index.html"><strong>noemassemble</strong><span>将规范文本 NIR 确定性汇编为 NOBJ。</span></a>
+      <a class="page-link" data-catalog-item href="morphe/index.html"><strong>morphe</strong><span>将规范文本 NIR 确定性汇编为 NOBJ。</span></a>
       <a class="page-link" data-catalog-item href="noemdecode/index.html"><strong>noemdecode</strong><span>将对象反汇编为可再次汇编的规范文本。</span></a>
       <a class="page-link" data-catalog-item href="noemformat/index.html"><strong>noemformat</strong><span>统一 NSL 与文本 NIR 的稳定表现形式。</span></a>
       <a class="page-link" data-catalog-item href="noemcompare/index.html"><strong>noemcompare</strong><span>区分布局、调试、信任元数据和运行语义差异。</span></a>
@@ -90,11 +90,11 @@ permalink: "/tools/index.html"
   <section id="compile-tools" data-catalog-group="compile">
     <h2>编译与链接</h2>
     <div class="page-links">
-      <a class="page-link" data-catalog-item href="noemcompile/index.html"><strong>noemcompile</strong><span>驱动 Deterministic、Model-assisted 与 External-generation 前端及确定性 Noesis Core。</span></a>
+      <a class="page-link" data-catalog-item href="noesis/index.html"><strong>noesis</strong><span>驱动 Deterministic、Model-assisted 与 External-generation 前端及确定性 Noesis Core。</span></a>
       <a class="page-link" data-catalog-item href="noemanalyze/index.html"><strong>noemanalyze</strong><span>检查 NSL、NIR、覆盖和策略问题，不生成对象。</span></a>
       <a class="page-link" data-catalog-item href="noemarchive/index.html"><strong>noemarchive</strong><span>建立确定性 NOBJ 归档和符号索引。</span></a>
       <a class="page-link" data-catalog-item href="noemsymbols/index.html"><strong>noemsymbols</strong><span>检查符号定义、引用、版本和可见性。</span></a>
-      <a class="page-link" data-catalog-item href="noemlink/index.html"><strong>noemlink</strong><span>解析符号、应用重定位，并输出 Linked Object、可重定位 NOBJ 或 HOBJ。</span></a>
+      <a class="page-link" data-catalog-item href="synthesis/index.html"><strong>synthesis</strong><span>解析符号、应用重定位，并输出 Linked Object、可重定位 NOBJ 或 HOBJ。</span></a>
     </div>
   </section>
   <section id="runtime-tools" data-catalog-group="runtime">

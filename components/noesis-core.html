@@ -42,7 +42,7 @@ permalink: "/components/noesis-core.html"
   </section>
   <section class="content-band">
     <h2>存在必要性与部署形态</h2>
-    <p>任何合格 NIR/NOBJ 都需要同一套确定性来源绑定、类型、约束、歧义和对象写入规则，因此 Noesis Core 的逻辑边界不能省略。它不必是独立进程：noemcompile、noemassemble 或其他前端可以共享同一核心库，但不能各自发展一套不同语义或让模型绕过该路径。</p>
+    <p>任何合格 NIR/NOBJ 都需要同一套确定性来源绑定、类型、约束、歧义和对象写入规则，因此 Noesis Core 的逻辑边界不能省略。它不必是独立进程：noesis、morphe 或其他前端可以共享同一核心库，但不能各自发展一套不同语义或让模型绕过该路径。</p>
   </section>
   <section class="content-band">
     <h2>后续计划：长上下文与模型辅助</h2>
@@ -52,7 +52,7 @@ permalink: "/components/noesis-core.html"
     <h2>详细设计入口与验证证据</h2>
     <p>尚未冻结的核心契约包括 Candidate Envelope、Source Binding Decision、规范化上下文、符号与类型环境、约束求解接口、歧义状态机、证据账本、编译阶段管理、对象写入器和诊断模型。每个编译阶段必须声明输入和输出不变量、是否允许产生未决状态、资源上限以及失败后能否继续。</p>
     <p>验收测试需要覆盖相同输入的字节级复现、规范化往返、类型与约束负例、歧义保持、来源单元覆盖、精确载荷保护、跨阶段属性测试，以及关闭模型后的完整确定性流程。性能数据不能替代语义和安全正确性。</p>
-    <p>语义职责见<a href="../specifications/noema-ir.html">Noema IR 规范</a>，对象编码见<a href="../specifications/noema-object.html">Noema Object 规范</a>，编译与文本对象入口见<a href="../tools/noemcompile/index.html">noemcompile</a>和<a href="../tools/noemassemble/index.html">noemassemble</a>。</p>
+    <p>语义职责见<a href="../specifications/noema-ir.html">Noema IR 规范</a>，对象编码见<a href="../specifications/noema-object.html">Noema Object 规范</a>，编译与文本对象入口见<a href="../tools/noesis/index.html">noesis</a>和<a href="../tools/morphe/index.html">morphe</a>。</p>
   </section>
   <div class="next-prev"><a href="horizon-engine.html">← Horizon Engine</a><a href="noema-object-system.html">Noema Object System →</a></div>
 </main>

@@ -6,7 +6,7 @@
 
 - `_config.yml` 定义账户站点 URL、仓库身份、语言、Markdown 处理器和构建排除项；账户站点的 `baseurl` 必须保持为空。
 - `.github/workflows/pages.yml` 在 `main` 分支推送时先运行路由测试，再通过 GitHub 官方 Jekyll Pages Actions 构建 `_site`、原样加入公开 `sitemap.md` 并部署。
-- 当前 69 个正式页面由 Jekyll 处理：49 个普通页面使用 HTML 正文源，20 个手册/指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。
+- 当前 89 个正式页面由 Jekyll 处理：49 个普通页面使用 HTML 正文源，40 个手册/指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。
 - 本地可在安装兼容 Ruby 与 Bundler 后运行 `bundle install` 和 `bundle exec jekyll serve`；当前工作区自带的系统 Ruby 不作为发布环境基线。
 
 ## Jekyll 源码模型
@@ -26,10 +26,10 @@
 
 ### 手册内容源与生成
 
-`docs/*.md` 与 `tools/noemlink/docs/*.md` 是当前 20 个手册/指南页面的唯一正文源，由 Jekyll 通过专用文档布局生成现有 `.html` 公开路由：
+`docs/*.md` 与 `tools/*/docs/*.md` 是当前 40 个手册/指南页面的唯一正文源，由 Jekyll 通过专用文档布局生成现有 `.html` 公开路由。工具手册当前覆盖 `noesis`、`morphe`、`theoria` 与 `synthesis`：
 
 - 作者只编辑 Markdown 正文和必要的 Front Matter，不编辑构建目录中的 HTML。
-- 源文件可由 `docs/getting-started.md` 生成 `/docs/getting-started.html`，由 `tools/noemlink/docs/contract.md` 生成 `/tools/noemlink/docs/contract.html`；公开 URL 与目录链接保持不变。
+- 源文件可由 `docs/getting-started.md` 生成 `/docs/getting-started.html`，由 `tools/synthesis/docs/contract.md` 生成 `/tools/synthesis/docs/contract.html`；公开 URL 与目录链接保持不变。
 - `<main>`、面包屑、文档 Hero、手册分页、固定左栏和页脚由 `_layouts/`、`_includes/` 与共享目录数据生成，不在每个 Markdown 文件中复制。
 - 正文只使用通用 Markdown 的标题、段落、列表、链接、引用、表格和围栏代码块；不写原始 HTML、Kramdown 专有属性或页面级 include。特殊视觉由共享布局和 CSS 根据标准生成元素统一呈现。
 - 仓库中不保留对应的手写 `.html` 源文件或双轨内容；质量测试按 Front Matter 的 `permalink` 校验 Markdown 源与正式 HTML 路由。
@@ -122,7 +122,7 @@ Noemion 的视觉识别由“语义频谱”与机器对象语言形成：薄荷
 
 普通专题页不再使用固定 300px 空白偏移，也不通过 `nth-of-type` 或 `:has()` 猜测版式。每个 HTML 章节显式使用 `content-split`、`content-stack`、`content-band`、`content-wide`、`content-grid` 或 `content-rows` 中的一种；需要镜像论证时才附加 `content-split-reverse`。同一页面组合多种节奏，1000px 以下按正文顺序折叠为单列。只有真实目录、项目状态或时间线摘要可以占据侧栏。
 
-运行测试前必须安装可从命令行调用的 Node.js。源码阶段验证 69 个页面的 Front Matter、固定路由、共享布局和目录注册；Jekyll 构建后，质量测试会直接检查 `_site` 中的最终 HTML，并加载同一份生产 `assets/directory.js`，验证模块覆盖、页面类型、工具文档高亮以及模块不会向全局对象暴露 API。
+运行测试前必须安装可从命令行调用的 Node.js。源码阶段验证 89 个页面的 Front Matter、固定路由、共享布局和目录注册；Jekyll 构建后，质量测试会直接检查 `_site` 中的最终 HTML，并加载同一份生产 `assets/directory.js`，验证模块覆盖、页面类型、工具文档高亮以及模块不会向全局对象暴露 API。
 
 每个 `kind=tool` / `data-page-role=tool-project` 页面都是项目入口而非手册：必须包含“项目 / 工具 / 当前工具”面包屑，以及“它解决什么问题”“当前状态”“它怎样工作”“它读取什么，产生什么”“它不会做什么”“继续阅读”六个语义章节。当前状态必须明确处于设计阶段、当前未发布可执行程序，并说明命令行接口、参数和文件扩展名尚未冻结；只有实际存在实质内容时才链接或创建工具 `docs/`。
 

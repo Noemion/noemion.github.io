@@ -25,19 +25,19 @@ badges: ["23 Tools", "Project Pages", "Unreleased"]
 | Phase | 工具 | 主要输入 | 正式输出 | 直接下游 |
 | --- | --- | --- | --- | --- |
 | 0 / 8 | [noemcertify](../tools/noemcertify/) | 规范、测试语料库、Toolchain Build | Conformance Report、发布资格证据 | CI、规范评审、发布评审 |
-| 1 | [noeminspect](../tools/noeminspect/) | NOBJ、HOBJ、Signed Package | Text / Structured View | 开发者、noemvalidate |
+| 1 | [theoria](../tools/theoria/) | NOBJ、HOBJ、Signed Package | Text / Structured View | 开发者、noemvalidate |
 | 1 / 5 / 6 | [noemvalidate](../tools/noemvalidate/) | 对象、配置、Trust Material | Layered Verdict、Verified Object Handle | archive、link、bundle、Object System |
 | 1 | [noemtransform](../tools/noemtransform/) | Source Object、Transform Plan | Transformed Object、Change Manifest | compare、validate、reduce |
 | 1 / 5 / 6 | [noembudget](../tools/noembudget/) | 对象、包、Baseline | Budget Verdict、Delta Report | CI、Package 配置、Execution Profile |
-| 2 | [noemassemble](../tools/noemassemble/) | Text NIR Source Package | Relocatable NOBJ、Assembly Evidence Ledger | decode、coverage、link |
+| 2 | [morphe](../tools/morphe/) | Text NIR Source Package | Relocatable NOBJ、Assembly Evidence Ledger | decode、coverage、link |
 | 2 | [noemdecode](../tools/noemdecode/) | NOBJ / HOBJ | Canonical Text NIR、Pretty / JSON View | assemble、compare、开发者 |
 | 2 / 3 | [noemformat](../tools/noemformat/) | NSL / Text NIR | Formatted Text、Format Diff | compile、assemble、CI |
 | 2 / 5 | [noemcompare](../tools/noemcompare/) | 两个文本或对象产物 | Classified Diff、Semantic Verdict | reduce、validate、发布审计 |
-| 3 / 7 | [noemcompile](../tools/noemcompile/) | NSL 或 Candidate Envelope、绑定决定 | Relocatable NOBJ、证据账本、Build Manifest | analyze、archive、link、coverage |
+| 3 / 7 | [noesis](../tools/noesis/) | NSL 或 Candidate Envelope、绑定决定 | Relocatable NOBJ、证据账本、Build Manifest | analyze、archive、link、coverage |
 | 3 | [noemanalyze](../tools/noemanalyze/) | NSL / Text NIR、Reviewed Baseline | Diagnostics、Baseline Candidate | 开发者、CI、compile |
 | 4 | [noemarchive](../tools/noemarchive/) | 已验证 NOBJ Members | Noemion Archive、Member Listing | symbols、link |
 | 4 | [noemsymbols](../tools/noemsymbols/) | NOBJ、Archive、HOBJ、Package | Symbol Listing、ABI Snapshot | link、compare、开发者 |
-| 4 / 5 | [noemlink](../tools/noemlink/) | NOBJ、Archive、HOBJ、Link Request | Linked Object / HOBJ、Link Map | validate、reduce |
+| 4 / 5 | [synthesis](../tools/synthesis/) | NOBJ、Archive、HOBJ、Link Request | Linked Object / HOBJ、Link Map | validate、reduce |
 | 5 | [noemreduce](../tools/noemreduce/) | Development NOBJ / HOBJ | Release Object、Debug Companion、等价证据 | coverage、validate、bundle |
 | 5 / 6 | [noemcoverage](../tools/noemcoverage/) | 来源/对象映射或 Run Evidence | Release Coverage Proof / Evidence Closure Report | bundle / execute finalize |
 | 5 | [noembundle](../tools/noembundle/) | Release 闭包、模型资格、外部签名响应 | Signed Noemion Package | noemexecute、下载发布 |
@@ -53,22 +53,22 @@ badges: ["23 Tools", "Project Pages", "Unreleased"]
 ## 规范与对象工具
 
 - [noemcertify](../tools/noemcertify/)：执行规范条款、基准样例、畸形样例和跨工具一致性测试。
-- [noeminspect](../tools/noeminspect/)：只读查看 Header、Section、符号、重定位和语义图。
+- [theoria](../tools/theoria/)：只读查看 Header、Section、符号、重定位和语义图。
 - [noemvalidate](../tools/noemvalidate/)：分层验证结构、语义、覆盖、策略和信任链。
 - [noemtransform](../tools/noemtransform/)：受约束地复制、抽取、删除和重建对象内容。
 - [noembudget](../tools/noembudget/)：分析 Section、Segment、闭包和披露预算占用。
 
 ## 编译与链接
 
-- [noemassemble](../tools/noemassemble/)：将规范文本 NIR 确定性汇编为对象。
+- [morphe](../tools/morphe/)：将规范文本 NIR 确定性汇编为对象。
 - [noemdecode](../tools/noemdecode/)：将对象反汇编为规范文本表示。
 - [noemformat](../tools/noemformat/)：规范化 NSL 与文本 NIR 的表现形式。
 - [noemcompare](../tools/noemcompare/)：区分布局、调试、信任元数据和运行语义差异。
-- [noemcompile](../tools/noemcompile/)：驱动前端并由确定性 Noesis Core 生成 NIR/NOBJ。
+- [noesis](../tools/noesis/)：驱动前端并由确定性 Noesis Core 生成 NIR/NOBJ。
 - [noemanalyze](../tools/noemanalyze/)：检查语义、覆盖和策略问题，不生成对象。
 - [noemarchive](../tools/noemarchive/)：建立确定性对象归档和符号索引。
 - [noemsymbols](../tools/noemsymbols/)：检查符号定义、引用、版本和可见性。
-- [noemlink](../tools/noemlink/)：解析符号、应用重定位、合并依赖闭包并输出链接对象或 HOBJ。
+- [synthesis](../tools/synthesis/)：解析符号、应用重定位、合并依赖闭包并输出链接对象或 HOBJ。
 
 ## 发布与运行
 
@@ -89,7 +89,7 @@ badges: ["23 Tools", "Project Pages", "Unreleased"]
 
 ## 相关资料状态
 
-**当前范围：**[noemlink 文档](../tools/noemlink/docs/)已经按契约、输入输出、调用、流程、符号、重定位、HOBJ、安全、诊断、测试、依赖和术语索引拆分。其他工具目前提供用途、输入输出、处理边界和开发计划，尚无独立操作手册。
+**当前范围：**四个承担格式边界的工具已经建立独立使用手册：[noesis 使用手册](../tools/noesis/docs/)解释自然语言候选、来源绑定、NIR 记录和 NOBJ 生成；[morphe 使用手册](../tools/morphe/docs/)解释 Text NIR、对象排布、确定性编码和往返验证；[theoria 使用手册](../tools/theoria/docs/)解释 Header、Section、NIR 来源视图和安全读取；[synthesis 使用手册](../tools/synthesis/docs/)解释对象准入、符号、重定位、依赖闭包与链接安全。其他工具目前提供用途、输入输出、处理边界和开发计划，尚无独立使用手册。
 
 工具只有在契约、流程、安全、测试或参考内容能够独立维护，并且不会重复权威规范时，才建立自己的 `docs/` 区域。文档数量不代表实现成熟度；是否可用仍以发布物、版本说明和验证证据为准。
 

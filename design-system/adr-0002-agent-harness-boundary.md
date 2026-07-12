@@ -29,7 +29,7 @@ Agent Harness 不属于确定性可信核心，也不是新的对象编译器。
 
 ## 工具映射
 
-- `noemcompile`：把受控来源或模型候选交给 Noesis Core，产生确定性对象与证据账本。
+- `noesis`：把受控来源或模型候选交给 Noesis Core，产生确定性对象与证据账本。
 - `noemexecute`：驱动对象系统建立不可变 Loaded State，由 Harness 建立会话级能力绑定、预算与隔离环境，并调用 Runtime；运行阶段只留下候选和运行记录。
 - `noemobserve`：把同一会话的能力调用、观察、策略拒绝和状态转换规范化为带完整性声明的 Trace。
 - `noemcoverage`：分别检查发布来源映射和运行证据闭包；证据齐全不等于任务已经满足。

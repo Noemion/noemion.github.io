@@ -18,8 +18,8 @@
 
 Noemion 采用以下主产物流：
 
-1. **来源 → NOBJ：**`noemcompile` 或 `noemassemble` 产生可重定位 NOBJ；`noemformat`、`noemanalyze`、`noeminspect`、`noemvalidate`、`noemcompare` 和 `noembudget` 提供前后检查与分析。
-2. **NOBJ → 链接对象 / HOBJ：**`noemarchive` 与 `noemsymbols` 提供归档和符号视图，`noemlink` 解析符号、重定位、约束和依赖闭包。
+1. **来源 → NOBJ：**`noesis` 或 `morphe` 产生可重定位 NOBJ；`noemformat`、`noemanalyze`、`theoria`、`noemvalidate`、`noemcompare` 和 `noembudget` 提供前后检查与分析。
+2. **NOBJ → 链接对象 / HOBJ：**`noemarchive` 与 `noemsymbols` 提供归档和符号视图，`synthesis` 解析符号、重定位、约束和依赖闭包。
 3. **链接对象 → 发布对象：**`noemreduce` 删除允许移除的开发信息并产生 Debug Companion、对象摘要与等价证据；`noemcoverage` 对最终发布对象、来源和 Assembly/Compiler Evidence Ledger 建立 Release Coverage Proof；`noemvalidate` 对准备打包的对象执行所需验证层。
 4. **发布对象 → 签名包：**`noembundle` 消费发布对象、Release Coverage Proof、验证结论、依赖锁定以及带 eligible-for-bundle 资格记录的模型包，先生成不可变候选包和 Signing Request。私钥始终留在外部签名系统；回填时必须同时读取原候选包、原 Signing Request 与 Signature Response，并只在候选载荷外附加 Signature Envelope，不能改变被签字节。
 5. **签名包 → 运行记录：**`noemexecute` 重新验证实际包字节和运行策略，建立装载状态、Agent Harness 会话和 Fulfillment Runtime 调用，输出 Run Record、Session State、Run Report、Trace Stream 与 Trace Integrity Metadata。

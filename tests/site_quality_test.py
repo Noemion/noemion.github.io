@@ -15,9 +15,9 @@ ROOT = SOURCE_ROOT if SOURCE_ONLY else Path(sys.argv[1]).resolve()
 README = SOURCE_ROOT / "README.md"
 SOURCE_SITEMAP = SOURCE_ROOT / "sitemap.md"
 DIRECTORY_CSS = ROOT / "assets" / "directory.css"
-MINIMUM_ROUTE_COUNT = 69
+MINIMUM_ROUTE_COUNT = 89
 MINIMUM_HTML_SOURCE_COUNT = 49
-MINIMUM_MANUAL_SOURCE_COUNT = 20
+MINIMUM_MANUAL_SOURCE_COUNT = 40
 SOURCE_HTML_FILES = sorted(
     path
     for path in SOURCE_ROOT.rglob("*.html")
@@ -60,21 +60,49 @@ PORTAL_ROUTES = [
     "development/index.html",
     "news/index.html",
 ]
-NOEMLINK_DOC_ORDER = [
-    "tools/noemlink/docs/index.html",
-    "tools/noemlink/docs/contract.html",
-    "tools/noemlink/docs/inputs-outputs.html",
-    "tools/noemlink/docs/invocation.html",
-    "tools/noemlink/docs/pipeline.html",
-    "tools/noemlink/docs/symbol-resolution.html",
-    "tools/noemlink/docs/relocations.html",
-    "tools/noemlink/docs/horizon-linking.html",
-    "tools/noemlink/docs/loader-security.html",
-    "tools/noemlink/docs/diagnostics.html",
-    "tools/noemlink/docs/testing.html",
-    "tools/noemlink/docs/dependencies.html",
-    "tools/noemlink/docs/reference-index.html",
-]
+TOOL_MANUAL_ROUTE_ORDERS = {
+    "noesis": [
+        "tools/noesis/docs/index.html",
+        "tools/noesis/docs/source-and-candidates.html",
+        "tools/noesis/docs/semantic-binding.html",
+        "tools/noesis/docs/nir-record-model.html",
+        "tools/noesis/docs/nobj-emission.html",
+        "tools/noesis/docs/evidence-and-determinism.html",
+        "tools/noesis/docs/worked-example.html",
+        "tools/noesis/docs/reference-index.html",
+    ],
+    "morphe": [
+        "tools/morphe/docs/index.html",
+        "tools/morphe/docs/text-nir-contract.html",
+        "tools/morphe/docs/object-layout.html",
+        "tools/morphe/docs/deterministic-encoding.html",
+        "tools/morphe/docs/round-trip-testing.html",
+        "tools/morphe/docs/reference-index.html",
+    ],
+    "theoria": [
+        "tools/theoria/docs/index.html",
+        "tools/theoria/docs/header-and-sections.html",
+        "tools/theoria/docs/nir-and-origin-views.html",
+        "tools/theoria/docs/safe-reading.html",
+        "tools/theoria/docs/reference-index.html",
+    ],
+    "synthesis": [
+        "tools/synthesis/docs/index.html",
+        "tools/synthesis/docs/contract.html",
+        "tools/synthesis/docs/inputs-outputs.html",
+        "tools/synthesis/docs/object-sections.html",
+        "tools/synthesis/docs/invocation.html",
+        "tools/synthesis/docs/pipeline.html",
+        "tools/synthesis/docs/symbol-resolution.html",
+        "tools/synthesis/docs/relocations.html",
+        "tools/synthesis/docs/horizon-linking.html",
+        "tools/synthesis/docs/loader-security.html",
+        "tools/synthesis/docs/diagnostics.html",
+        "tools/synthesis/docs/testing.html",
+        "tools/synthesis/docs/dependencies.html",
+        "tools/synthesis/docs/reference-index.html",
+    ],
+}
 DOC_GUIDE_ORDER = [
     "docs/getting-started.html",
     "docs/installation-and-usage.html",
@@ -266,7 +294,7 @@ TOOLCHAIN_CLOSURE_CONTRACTS = {
             "不修改原 Acceptance Decision",
         ),
     },
-    "tools/noemcompile/index.html": {
+    "tools/noesis/index.html": {
         "required": (
             "Candidate Envelope",
             "Source Binding Decision",
@@ -460,13 +488,15 @@ def read_route_rows():
             parent = "index.html"
             sibling_orders[parent] += 1
             order = sibling_orders[parent]
-        elif route == "tools/noemlink/docs/index.html":
+        elif re.fullmatch(r"tools/[^/]+/docs/index\.html", route):
             kind = "docs"
-            parent = "tools/noemlink/index.html"
+            tool_id = route.split("/")[1]
+            parent = f"tools/{tool_id}/index.html"
             order = 0
-        elif route.startswith("tools/noemlink/docs/"):
+        elif re.fullmatch(r"tools/[^/]+/docs/[^/]+\.html", route):
             kind = "topic"
-            parent = "tools/noemlink/docs/index.html"
+            tool_id = route.split("/")[1]
+            parent = f"tools/{tool_id}/docs/index.html"
             sibling_orders[parent] += 1
             order = sibling_orders[parent]
         elif route.startswith("tools/") and route.endswith("/index.html"):
@@ -508,14 +538,15 @@ def resolved_routes(path, hrefs):
     return routes
 
 
-def expected_manual_roles(index):
+def expected_manual_roles(manual_id, index):
+    routes = TOOL_MANUAL_ROUTE_ORDERS[manual_id]
     roles = {
-        "previous": "/" + NOEMLINK_DOC_ORDER[index - 1],
-        "up": "/tools/noemlink/docs/index.html",
-        "index": "/tools/noemlink/docs/reference-index.html",
+        "previous": "/" + routes[index - 1],
+        "up": f"/tools/{manual_id}/docs/index.html",
+        "index": "/" + routes[-1],
     }
-    if index + 1 < len(NOEMLINK_DOC_ORDER):
-        roles["next"] = "/" + NOEMLINK_DOC_ORDER[index + 1]
+    if index + 1 < len(routes):
+        roles["next"] = "/" + routes[index + 1]
     return roles
 
 
@@ -573,7 +604,7 @@ def validate_readability_behavior_contracts(root):
             '{ href: "news/index.html", label: "项目动态" }',
             '{ href: "faq/index.html", label: "常见问题" }',
             '{ href: "development/implementation-roadmap.html", label: "开发路线图" }',
-            'title: "noemlink 使用手册"',
+            'title: "synthesis 使用手册"',
         ):
             if token not in directory_text:
                 errors.append(
@@ -1173,7 +1204,7 @@ def validate_jekyll_sources():
             "noema-ir", "noema-object", "horizon-object", "components",
             "conform", "inspect", "compile", "link",
             "getting-started", "architecture-guide", "tools-reference",
-            "spec-reference", "noemlink-manual", "current-stage", "roadmap", "testing",
+            "spec-reference", "synthesis-manual", "current-stage", "roadmap", "testing",
             "news", "downloads",
         }
         nav_cover_asset = SOURCE_ROOT / "assets/nav-covers.svg"
@@ -1655,39 +1686,43 @@ def main():
         ):
             errors.append(f"{route}: guide must distinguish current design from unfinished work")
 
-    noemlink_tool = route_registry.get("tools/noemlink/index.html")
-    if noemlink_tool is None or noemlink_tool["kind"] != "tool":
-        errors.append("tools/noemlink/index.html must be registered as kind tool")
-    noemlink_docs = route_registry.get(NOEMLINK_DOC_ORDER[0])
-    if noemlink_docs is None or noemlink_docs["kind"] != "docs":
-        errors.append("tools/noemlink/docs/index.html must be registered as kind docs")
+    for manual_id, manual_routes in TOOL_MANUAL_ROUTE_ORDERS.items():
+        tool_route = f"tools/{manual_id}/index.html"
+        tool_row = route_registry.get(tool_route)
+        if tool_row is None or tool_row["kind"] != "tool":
+            errors.append(f"{tool_route} must be registered as kind tool")
 
-    noemlink_rows = [row for row in route_rows if row["route"] in NOEMLINK_DOC_ORDER]
-    if route_rows:
-        ordered_noemlink = [
-            row["route"] for row in sorted(noemlink_rows, key=lambda row: row["order"])
+        manual_root = manual_routes[0]
+        manual_row = route_registry.get(manual_root)
+        if manual_row is None or manual_row["kind"] != "docs":
+            errors.append(f"{manual_root} must be registered as kind docs")
+
+        manual_rows = [row for row in route_rows if row["route"] in manual_routes]
+        if route_rows:
+            ordered_routes = [
+                row["route"] for row in sorted(manual_rows, key=lambda row: row["order"])
+            ]
+            if ordered_routes != manual_routes:
+                errors.append(f"sitemap {manual_id} routes do not match the manual order")
+
+        for route in manual_routes[1:]:
+            row = route_registry.get(route)
+            if (
+                row is None
+                or row["kind"] != "topic"
+                or row["parent"] != manual_root
+            ):
+                errors.append(f"{route}: invalid {manual_id} topic registry metadata")
+
+        legacy_topic_routes = [
+            (Path("tools") / manual_id / Path(route).name).as_posix()
+            for route in manual_routes[1:]
+            if (ROOT / "tools" / manual_id / Path(route).name).exists()
         ]
-        if ordered_noemlink != NOEMLINK_DOC_ORDER:
-            errors.append("README noemlink routes do not match the manual order")
-
-    for route in NOEMLINK_DOC_ORDER[1:]:
-        row = route_registry.get(route)
-        if (
-            row is None
-            or row["kind"] != "topic"
-            or row["parent"] != "tools/noemlink/docs/index.html"
-        ):
-            errors.append(f"{route}: invalid noemlink topic registry metadata")
-
-    legacy_noemlink_routes = [
-        (Path("tools/noemlink") / Path(route).name).as_posix()
-        for route in NOEMLINK_DOC_ORDER[1:]
-        if (ROOT / "tools/noemlink" / Path(route).name).exists()
-    ]
-    if legacy_noemlink_routes:
-        errors.append(
-            f"legacy noemlink topic routes are forbidden: {legacy_noemlink_routes}"
-        )
+        if legacy_topic_routes:
+            errors.append(
+                f"legacy {manual_id} topic routes are forbidden: {legacy_topic_routes}"
+            )
 
     numbered_routes = [
         route
@@ -1870,15 +1905,15 @@ def main():
             errors.append("node is required to execute directory active-item behavior tests")
         else:
             active_cases = [
-                ["tools/noemlink/index.html", "https://site.test/tools/noemlink", "https://site.test/tools/noemlink/docs", True],
-                ["tools/noemlink/index.html", "https://site.test/tools/noemlink", "https://site.test/tools/noemlink/docs/topic.html", True],
-                ["tools/noemlink/index.html", "https://site.test/tools/noemlink", "https://site.test/tools/noemlink/docsfoo", False],
-                ["tools/noemlink/index.html", "https://site.test/tools/noemlink", "https://site.test/tools/noemlink/docs-old/x", False],
-                ["tools/noemlink/index.html", "https://site.test/tools/noemlink", "https://site.test/tools/noemlinkx/docs", False],
+                ["tools/synthesis/index.html", "https://site.test/tools/synthesis", "https://site.test/tools/synthesis/docs", True],
+                ["tools/synthesis/index.html", "https://site.test/tools/synthesis", "https://site.test/tools/synthesis/docs/topic.html", True],
+                ["tools/synthesis/index.html", "https://site.test/tools/synthesis", "https://site.test/tools/synthesis/docsfoo", False],
+                ["tools/synthesis/index.html", "https://site.test/tools/synthesis", "https://site.test/tools/synthesis/docs-old/x", False],
+                ["tools/synthesis/index.html", "https://site.test/tools/synthesis", "https://site.test/tools/synthesisx/docs", False],
                 ["docs/index.html", "https://site.test/docs", "https://site.test/docs/guide", True],
                 ["docs/index.html", "https://site.test/docs", "https://site.test/docs/getting-started.html", True],
                 ["docs/index.html", "https://site.test/docs", "https://site.test/docs-old/guide.html", False],
-                ["tools/index.html", "https://site.test/tools", "https://site.test/tools/noeminspect", False],
+                ["tools/index.html", "https://site.test/tools", "https://site.test/tools/theoria", False],
             ]
             module_cases = [
                 ["index.html", "project"],
@@ -1895,9 +1930,9 @@ def main():
                 ["faq/index.html", "resources"],
                 ["development/testing.html", "development"],
                 ["news/index.html", "development"],
-                ["tools/noeminspect/index.html", "tools"],
-                ["tools/noemlink/index.html", "noemlink"],
-                ["tools/noemlink/docs/contract.html", "noemlinkDocs"],
+                ["tools/theoria/index.html", "tools"],
+                ["tools/synthesis/index.html", "synthesis"],
+                ["tools/synthesis/docs/contract.html", "synthesisDocs"],
             ]
             behavior_script = (
                 "const api = require(process.argv[1]);"
@@ -1955,34 +1990,43 @@ def main():
                 ] != ["docs/index.html", "docs/new.html"]:
                     errors.append("dynamic manual directory does not sort new Markdown pages")
 
-    noemlink_index = ROOT / NOEMLINK_DOC_ORDER[0]
-    if noemlink_index.exists():
-        parser = parse(noemlink_index)
-        toc_routes = resolved_routes(noemlink_index, parser.scoped_links["manual-index-links"])
-        expected_topics = [
-            entry["route"] for entry in read_manual_source_entries("noemlink")
-            if not entry["is_index"]
-        ]
-        if toc_routes != expected_topics:
-            errors.append("noemlink index manual TOC does not match Markdown topic order")
+    for manual_id, manual_routes in TOOL_MANUAL_ROUTE_ORDERS.items():
+        manual_index = ROOT / manual_routes[0]
+        if manual_index.exists():
+            parser = parse(manual_index)
+            toc_routes = resolved_routes(
+                manual_index, parser.scoped_links["manual-index-links"]
+            )
+            expected_topics = [
+                entry["route"] for entry in read_manual_source_entries(manual_id)
+                if not entry["is_index"]
+            ]
+            if toc_routes != expected_topics:
+                errors.append(
+                    f"{manual_id} index manual TOC does not match Markdown topic order"
+                )
 
-    for index, route in enumerate(NOEMLINK_DOC_ORDER[1:], start=1):
-        path = ROOT / route
-        if not path.exists():
-            errors.append(f"missing noemlink topic page {route}")
-            continue
-        if NUMBERED_NAME.search(route):
-            errors.append(f"{route}: numbered topic filename is forbidden")
-        parser = parse(path)
-        if parser.tool_id != "noemlink":
-            errors.append(f"{route}: tool manual must inherit data-tool-id='noemlink'")
-        for class_name in ("breadcrumbs", "manual-nav-top", "manual-nav-bottom"):
-            if parser.class_counts[class_name] != 1:
-                errors.append(f"{route}: expected one {class_name}")
-        expected = expected_manual_roles(index)
-        for scope in ("manual-nav-top", "manual-nav-bottom"):
-            if parser.manual_roles[scope] != expected:
-                errors.append(f"{route}: invalid {scope} roles {parser.manual_roles[scope]}")
+        for index, route in enumerate(manual_routes[1:], start=1):
+            path = ROOT / route
+            if not path.exists():
+                errors.append(f"missing {manual_id} topic page {route}")
+                continue
+            if NUMBERED_NAME.search(route):
+                errors.append(f"{route}: numbered topic filename is forbidden")
+            parser = parse(path)
+            if parser.tool_id != manual_id:
+                errors.append(
+                    f"{route}: tool manual must inherit data-tool-id='{manual_id}'"
+                )
+            for class_name in ("breadcrumbs", "manual-nav-top", "manual-nav-bottom"):
+                if parser.class_counts[class_name] != 1:
+                    errors.append(f"{route}: expected one {class_name}")
+            expected = expected_manual_roles(manual_id, index)
+            for scope in ("manual-nav-top", "manual-nav-bottom"):
+                if parser.manual_roles[scope] != expected:
+                    errors.append(
+                        f"{route}: invalid {scope} roles {parser.manual_roles[scope]}"
+                    )
 
     style = (ROOT / "assets/style.css").read_text()
     for token in (
@@ -2012,7 +2056,7 @@ def main():
         return 1
     print(
         f"PASS: {len(HTML_FILES)} registered pages, "
-        f"{len(global_rows)} global landings, and project portal/noemlink docs contract"
+        f"{len(global_rows)} global landings, and four tool-manual contracts"
     )
     return 0
 

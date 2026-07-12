@@ -17,12 +17,12 @@
 3. `Horizon` 表示围绕当前对象、可以按策略逐步披露的依赖与背景。
 4. `Fulfillment` 表示结果接受、证据核对和具体执行；中文工程文档优先使用“验收”和“实现结果”。
 
-核心对象采用 `Noema IR (NIR)`、`Noema Object (NOBJ)` 与 `Horizon Object (HOBJ)`。受控声明式来源语言称为 `Noesis Source (NSL)`。组件采用 `Noesis Core`、`Noema Object System`、`Fulfillment Runtime` 与 `Horizon Engine`。命令使用 `noem` 前缀和完整动作词。
+核心对象采用 `Noema IR (NIR)`、`Noema Object (NOBJ)` 与 `Horizon Object (HOBJ)`。受控声明式来源语言称为 `Noesis Source (NSL)`。组件采用 `Noesis Core`、`Noema Object System`、`Fulfillment Runtime` 与 `Horizon Engine`。工具命令的品牌边界与独立命名由 ADR-0005 继续规定。
 
 ## 理由
 
 - 名称能够解释项目名，同时保持哲学来源与工程定义的边界。
-- 完整动作词比 `as`、`ld`、`nm`、`obj` 等历史缩写更容易被首次使用者理解和检索。
+- 工具名称必须能通过副标题、手册和帮助信息让首次使用者理解，不能只依赖项目内部缩写。
 - 三个对象名分别回答“意义怎样表示”“怎样形成可链接文件”“怎样披露共享依赖”，职责比通用生成式缩写更清楚。
 - 中文正文可以使用自然的“编译、对象、视域、验收”说明，不必依赖英语缩写组织句子。
 
@@ -31,3 +31,4 @@
 - 当前处于开发阶段，直接替换旧名称和路由，不提供别名或重定向。
 - 旧名称只允许出现在本 ADR 和迁移检查中；正式页面、导航、配置、测试和公开路由不得继续使用。
 - 名称本身不冻结二进制字段、扩展名、ABI 或命令行参数；这些接口仍需各自规范和 ADR。
+- 本 ADR 中“命令统一使用 `noem` 前缀”的早期约束由 ADR-0005 取代；对象、组件和四层工程语义不受影响。

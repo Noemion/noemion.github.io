@@ -4,6 +4,10 @@
 
 修改任何公开文案、组件名称、对象术语、工具名称、文件名或路由时，还必须读取 [`language-and-naming.md`](language-and-naming.md)；核心命名决定见 [`adr-0001-noemion-nomenclature.md`](adr-0001-noemion-nomenclature.md)。
 
+修改工具命令名、工具路由或“项目品牌—命令品牌”关系时，还必须读取 [`adr-0005-independent-tool-names.md`](adr-0005-independent-tool-names.md)。
+
+修改 NIR 逻辑记录、NOBJ Header、Section/Segment、符号、重定位、来源或构建证据排布时，还必须读取 [`adr-0006-nir-nobj-structural-baseline.md`](adr-0006-nir-nobj-structural-baseline.md)。
+
 修改智能体上下文、能力接口、反馈循环、运行证据或人工升级边界时，还必须读取 [`adr-0002-agent-harness-boundary.md`](adr-0002-agent-harness-boundary.md)。
 
 修改工具输入输出、发布闭包、签名回填、运行产物或跨工具消费者关系时，还必须读取 [`adr-0003-toolchain-artifact-flow.md`](adr-0003-toolchain-artifact-flow.md)。
@@ -28,7 +32,7 @@
 | 模块几何母题、Hero 多边形、章节形状与文档折页 | 修改任一正式页面的几何布局或模块视觉身份 | [`geometric-layouts.md`](geometric-layouts.md)，并继续读取所属页面角色文档 |
 | 分析哲学线条、节点、命题关系与哲学相关图形 | 新增或修改任何哲学来源的视觉表达 | [`philosophical-visual-language.md`](philosophical-visual-language.md)、[`geometric-layouts.md`](geometric-layouts.md) |
 
-工具页按路径中的 `<tool>` 路由。例如修改 `tools/noeminspect/index.html` 时，先读 `tool-project.md`，再读 `internal-tools.md#noeminspect`；修改 `tools/noemlink/docs/*.md` 时读 `manual.md`，并继承 `internal-tools.md#noemlink` 的工具视觉签名。
+工具页按路径中的 `<tool>` 路由。例如修改 `tools/theoria/index.html` 时，先读 `tool-project.md`，再读 `internal-tools.md#theoria`；修改 `tools/synthesis/docs/*.md` 时读 `manual.md`，并继承 `internal-tools.md#synthesis` 的工具视觉签名。
 
 ## 冲突处理
 

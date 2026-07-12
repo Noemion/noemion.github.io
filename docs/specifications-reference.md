@@ -38,9 +38,9 @@ badges: ["Authority", "Maturity", "ADR"]
 
 ## Noema IR
 
-Noema IR（NIR）表达目标、约束、偏好、歧义、推断权限、证据和验收条件。它不是二进制化提示词，也不是代理关键词表。
+Noema IR（NIR）表达目标、约束、偏好、歧义、推断权限、证据和验收条件。它不是二进制化提示词，也不是代理关键词表。当前详细设计基线已经确定自然语言只产生 Candidate Envelope、确认语义必须经过确定性重推导或授权的 Source Binding Decision，并规定公共记录头、类型化引用和九类核心记录职责。
 
-**待定事项：**最小核心类型集、连续表示互操作、评价器接口和模型原生载荷边界尚未冻结。
+**待定事项：**记录类型枚举、字段宽度、Text NIR 语法、连续表示互操作、评价器接口和模型原生载荷边界尚未冻结。
 
 [阅读 NIR 规范](../specifications/noema-ir.html)
 
@@ -48,9 +48,9 @@ Noema IR（NIR）表达目标、约束、偏好、歧义、推断权限、证据
 
 Noema Object（NOBJ）把 NIR 封装为可重定位对象。它包含可安全解析的 Header、Section、符号、类型化引用、完整性信息和装载视图。
 
-**设计方案：**Section/Segment 双视图借鉴 ELF 工程策略，但不照搬传统机器指令语义。
+**详细设计基线：**NOBJ 使用固定 Preamble/Header、可选 Load Directory、前置 Section Directory、长度限定 Section、类型化符号与重定位、来源/构建证据和完整性材料。Section/Segment 双视图借鉴 ELF 工程策略，但不照搬传统机器指令语义。
 
-**待定事项：**最终对象名称、ABI 字段、Section 编号和重定位标识尚未冻结。
+**待定事项：**魔数字节、数值字段宽度、Section 编号、压缩与摘要算法、重定位编号和文件扩展名尚未冻结。
 
 [阅读 NOBJ 规范](../specifications/noema-object.html)
 

@@ -2,7 +2,7 @@
 
 ## 审计目标与结论边界
 
-本清单覆盖 `sitemap.md` 登记的全部 69 条正式 HTML 路由。审计不只判断页面是否存在，还逐项检查页面承担的读者任务、内容准确性、组件存在价值、上下游关系、产物生产者与消费者、职责与信任边界、验收决定权威、版式可读性和页面跳转。
+本清单覆盖 `sitemap.md` 登记的全部 89 条正式 HTML 路由。审计不只判断页面是否存在，还逐项检查页面承担的读者任务、内容准确性、组件存在价值、上下游关系、产物生产者与消费者、职责与信任边界、验收决定权威、版式可读性和页面跳转。
 
 当前结论只表示站点已经在设计阶段形成可追踪的信息架构和系统关系，不表示 Noemion 已经发布可执行程序，也不表示候选规范、算法、ABI、实验、论文、专利、软件著作权或标准化成果已经形成。实现、测试、实验和第三方互操作证据出现后，相关页面必须重新审计，不能用设计文本替代真实结果。
 
@@ -24,10 +24,10 @@
 
 ## 路由与权威源基线
 
-- 正式 HTML 路由：69 条。
-- 页面角色：`portal` 1、`section` 10、`content` 22、`tool-project` 23、`docs-index` 1、`docs-topic` 12。
-- 权威源：49 个普通 HTML 正文源，20 个 Markdown 手册或指南源；Jekyll 把两类来源统一生成正式 HTML。
-- Markdown 权威源包括 7 个跨项目指南和 13 个 `noemlink` 手册页面；目录、分页、面包屑、页头和页脚由共享布局生成。
+- 正式 HTML 路由：89 条。
+- 页面角色：`portal` 1、`section` 10、`content` 22、`tool-project` 23、`docs-index` 4、`docs-topic` 29。
+- 权威源：49 个普通 HTML 正文源，40 个 Markdown 手册或指南源；Jekyll 把两类来源统一生成正式 HTML。
+- Markdown 权威源包括 7 个跨项目指南、8 个 `noesis`、6 个 `morphe`、5 个 `theoria` 和 14 个 `synthesis` 手册页面；目录、分页、面包屑、页头和页脚由共享布局生成。
 - `sitemap.md` 是正式路由注册表；目录引擎、入口页、手册索引和上下页导航必须与它共同保持可达，不在 README 或页面正文复制第二套路由表。
 
 ## 系统闭环与逐页研究审计
@@ -48,12 +48,12 @@
 
 | 产物或状态 | 直接生产者 | 直接消费者 | 闭环要求 |
 | --- | --- | --- | --- |
-| 格式化来源与静态诊断 | `noemformat`、`noemanalyze` | 作者、`noemcompile`、测试与审查流程 | 格式化不能改变语义；诊断必须绑定来源位置和规则版本 |
+| 格式化来源与静态诊断 | `noemformat`、`noemanalyze` | 作者、`noesis`、测试与审查流程 | 格式化不能改变语义；诊断必须绑定来源位置和规则版本 |
 | Candidate Envelope | Horizon Engine 或经授权的外部模型适配器 | Noesis Core | 绑定来源身份、精确跨度、候选、替代项、证据、置信信息和未决状态；它不是 NIR |
 | Source Binding Decision | 授权的确定性规则或人工决定流程 | Noesis Core | 结构合法不能替代来源忠实；无法建立依据时拒绝或保留未决语义 |
-| NIR / 可重定位 NOBJ | `noemcompile` 或 `noemassemble` | `noeminspect`、`noemvalidate`、`noemcompare`、`noembudget`、`noemarchive`、`noemlink` | 只有确定性的 Noesis 边界可以形成正式 NIR/NOBJ；Assembly/Compiler Evidence Ledger 伴随来源与转换证据 |
-| Archive 与 Symbol View | `noemarchive`、`noemsymbols` | `noemlink`、诊断与人工检查 | 归档成员顺序、符号身份和选择规则必须确定且可复现 |
-| Linked Object / HOBJ 闭包 | `noemlink` | `noemvalidate`、`noemreduce`、后续发布流程 | 链接只解析符号、重定位、约束和依赖闭包，不装载裸对象，也不签名 |
+| NIR / 可重定位 NOBJ | `noesis` 或 `morphe` | `theoria`、`noemvalidate`、`noemcompare`、`noembudget`、`noemarchive`、`synthesis` | 只有确定性的 Noesis 边界可以形成正式 NIR/NOBJ；Assembly/Compiler Evidence Ledger 伴随来源与转换证据 |
+| Archive 与 Symbol View | `noemarchive`、`noemsymbols` | `synthesis`、诊断与人工检查 | 归档成员顺序、符号身份和选择规则必须确定且可复现 |
+| Linked Object / HOBJ 闭包 | `synthesis` | `noemvalidate`、`noemreduce`、后续发布流程 | 链接只解析符号、重定位、约束和依赖闭包，不装载裸对象，也不签名 |
 | Release Object、Debug Companion 与等价证据 | `noemreduce` | `noemvalidate`、`noemcoverage`、`noembundle`、调试工具 | 删除信息必须证明运行相关语义未变；旧签名在字节变化后失效 |
 | Release Coverage Proof | `noemcoverage` 的发布模式 | `noembundle`、审查流程 | 说明发布对象与来源/编译证据的覆盖关系，不等同于签名授权或运行结果正确 |
 | Model Qualification Record | `noemevaluate` 对浮点候选或量化包执行离线评估 | `noemquantize`、`noembundle` | 必须绑定模型、数据、基线、评估配置和资格状态；只有 `eligible-for-bundle` 记录可以进入候选发布包 |
@@ -90,7 +90,7 @@
 - 门户、目录、专题、工具项目和手册使用不同信息密度。视觉组件必须承担定位、状态、关系或操作价值；只为填空而存在的图片、边框、卡片和侧栏应删除。
 - 非门户页至少提供直接上级入口；手册同时提供动态目录与上下页；聚合页提供分组和快速跳转；链接文字说明点击后能解决的问题。
 
-## 69 条正式路由逐页结论
+## 89 条正式路由逐页结论
 
 以下清单按 `sitemap.md` 的内容家族排列。每一行同时记录页面存在价值、与系统或相邻页面的关系，以及内容、布局与跳转的主要检查结论。
 
@@ -110,8 +110,8 @@
 | --- | --- | --- |
 | `architecture/index.html` | 给出确定性工具链、对象系统、Harness 与 Runtime 的全局关系 | 已区分发布产物链和运行反馈环；信任按属性分别验证，页面目录把读者送到生命周期、决定和开放问题 |
 | `architecture/noema-lifecycle.html` | 追踪来源、对象、发布包、装载、运行证据和最终决定的连续身份 | 生命周期覆盖外部签名回填、Capability Request/Observation 和 Evidence Closure；流程与检查点表必须在窄屏独立滚动 |
-| `architecture/decisions.html` | 集中登记已采用的跨组件原则，避免同一边界在多页产生不同版本 | 明确“原则已采用”不等于 ABI 已稳定；连接四项 ADR 主题、被排除的捷径和仍需规范的接口 |
-| `architecture/open-questions.html` | 保存尚无充分证据的选择，防止实现便利被静默写成既成结论 | 已覆盖候选升级、HOBJ 关系、Runtime 协议、Loaded State、验收权威、身份链和撤销；每项问题指向所影响规范或组件 |
+| `architecture/decisions.html` | 集中登记已采用的跨组件原则，避免同一边界在多页产生不同版本 | 明确“详细设计基线已采用”不等于数值 ABI 已稳定；连接命名、Harness、产物链、候选边界、独立工具名和 NIR/NOBJ 结构六项 ADR 主题 |
+| `architecture/open-questions.html` | 保存尚无充分证据的选择，防止实现便利被静默写成既成结论 | 已覆盖数值布局、候选升级、HOBJ 关系、Runtime 协议、Loaded State、验收权威、命令与重定位编号、身份链和撤销；每项问题指向所影响规范或组件 |
 | `components/index.html` | 用统一矩阵解释五个组件为何存在、怎样协作以及删除或合并的后果 | 组件卡片不能只复述名称；入口明确 HOBJ 与 Horizon Engine 的区别，并链接各责任专题 |
 | `components/noesis-core.html` | 定义确定性语义提升和 NIR/NOBJ 形成边界 | Candidate Envelope、Source Binding Decision 与未决语义处理分开；类型合法不被误写为来源忠实 |
 | `components/noema-object-system.html` | 定义对象解析、链接、装载、完整性和不可变 Loaded State 的共同安全边界 | 不持有签名私钥，也不把实时能力句柄交给 Runtime；Loaded State 交给 Harness 建立受限会话视图 |
@@ -157,19 +157,19 @@
 | --- | --- | --- |
 | `tools/index.html` | 把 23 个工具按对象、编译链接、发布运行和模型工程组织为可搜索目录 | 主链、可选模型支线和 Phase 0–8 顺序一致；分组锚点、筛选和卡片均链接正式工具页 |
 | `tools/noemcertify/index.html` | 对规范套件和跨工具报告做一致性检查 | 可先作为测试运行器，不替代发布、签名或会话验收；上下游指向规范、测试和各阶段报告 |
-| `tools/noeminspect/index.html` | 提供不改变对象的结构、元数据和发布包查看能力 | 可复用 Object System 解析库；独立只读入口有助于审计，输出面向开发者和诊断流程 |
+| `tools/theoria/index.html` | 提供不改变对象的结构、元数据和发布包查看能力 | 可复用 Object System 解析库；独立只读入口有助于审计，输出面向开发者和诊断流程 |
 | `tools/noemvalidate/index.html` | 对对象、候选包和签名包执行分层结构、完整性与策略验证 | 安全核心必须存在，可同时提供库与 CLI；验证结果进入链接、发布或执行前检查，但不证明任务满足 |
 | `tools/noemtransform/index.html` | 承担显式、可审计的对象复制和允许转换 | 早期可作为对象库子命令；任何字节变化都要产生新身份并使旧签名失效，不能静默重写 |
 | `tools/noembudget/index.html` | 报告 section、依赖、披露和发布对象的大小预算 | 属于分析视图，可先与 inspect 共用实现；独立价值在可比较预算报告和回归阈值 |
-| `tools/noemassemble/index.html` | 为低级 Noesis Source 提供确定性 NOBJ 入口 | 是 `noemcompile` 的可选同级生产者，不是模型入口；必须产生 Assembly Evidence Ledger |
+| `tools/morphe/index.html` | 为低级 Noesis Source 提供确定性 NOBJ 入口 | 是 `noesis` 的可选同级生产者，不是模型入口；必须产生 Assembly Evidence Ledger |
 | `tools/noemdecode/index.html` | 把对象还原为可检查表示，支持审计、调试和重现 | 可先作为 inspect 模式；不能承诺恢复原始来源，输出必须标明不可逆信息 |
 | `tools/noemformat/index.html` | 统一 Noesis Source 的稳定格式，减少无意义差异 | 不属于语义核心，可与前端共享解析；格式化必须幂等且保持语义 |
 | `tools/noemcompare/index.html` | 比较来源、对象、发布物或运行结果的身份和语义差异 | 可先进入测试工具；必须区分字节相同、结构等价、契约都满足和不可比较 |
-| `tools/noemcompile/index.html` | 把来源或受控候选确定性转换为 NIR/NOBJ | 主链核心生产者；必须处理 Candidate Envelope、Source Binding Decision 和歧义，模型不能直接产出对象 |
+| `tools/noesis/index.html` | 把来源或受控候选确定性转换为 NIR/NOBJ | 主链核心生产者；必须处理 Candidate Envelope、Source Binding Decision 和歧义，模型不能直接产出对象 |
 | `tools/noemanalyze/index.html` | 在编译前后提供静态规则、约束和来源问题诊断 | 可共享 Noesis 前端；输出反馈给作者、编译和测试，不改变对象身份 |
 | `tools/noemarchive/index.html` | 为多对象工程建立确定性归档与成员索引 | 单对象第一阶段可省略；规模化链接需要稳定成员顺序、身份和选择规则 |
 | `tools/noemsymbols/index.html` | 提供符号、定义、引用和绑定的只读视图 | 可先作为 inspect 子命令；独立价值在链接诊断和可脚本化 Symbol View |
-| `tools/noemlink/index.html` | 解析符号、重定位、约束和 HOBJ 依赖闭包 | 多对象与共享依赖场景的主链核心；输出交给验证、reduce 和发布，不直接签名或装载裸对象 |
+| `tools/synthesis/index.html` | 解析符号、重定位、约束和 HOBJ 依赖闭包 | 多对象与共享依赖场景的主链核心；输出交给验证、reduce 和发布，不直接签名或装载裸对象 |
 | `tools/noemreduce/index.html` | 删除允许移除的开发信息，形成 Release Object 与 Debug Companion | 发布前才需要；必须输出摘要、等价证据和旧签名失效信息，不能删除运行必需语义 |
 | `tools/noemcoverage/index.html` | 分别检查发布证据覆盖和运行验收证据闭合 | 两种模式产物不同：Release Coverage Proof 给 bundle，Evidence Closure Report 给 execute finalize；它不作最终决定 |
 | `tools/noembundle/index.html` | 建立不可变候选包、签名请求并验证外部签名回填 | 只在分发时需要；prepare/finalize 都绑定同一候选身份，工具不持有私钥也不自行签名授权 |
@@ -180,23 +180,58 @@
 | `tools/noemevaluate/index.html` | 对浮点模型、量化包或完成会话做离线基准、回归和资格判断 | 同时服务模型资格与事后场景评估，但不修改单次会话决定；结果绑定数据、基线、配置和对象身份 |
 | `tools/noemquantize/index.html` | 把已评估的模型候选转换为 Model Package Candidate 并报告量化影响 | 可选部署工具；不自行批准或签名，量化包必须再次评估后才可能进入 bundle |
 
-### `noemlink` 手册（13）
+### `noesis` 使用手册（8）
 
 | 路由 | 存在价值与关联 | 审计结论 |
 | --- | --- | --- |
-| `tools/noemlink/docs/index.html` | 动态组织 linker 手册阅读顺序、分组和术语入口 | Markdown 权威源通过 Jekyll 生成；目录、移动索引和上下页不手工复制 |
-| `tools/noemlink/docs/contract.html` | 定义 noemlink 负责和不负责的稳定责任边界 | 明确只处理解析、重定位、约束和依赖闭包；不渲染提示词、不签名、不执行 Runtime |
-| `tools/noemlink/docs/inputs-outputs.html` | 列明接受的 NOBJ、Archive、HOBJ 描述、策略与输出对象/报告 | 裸链接输出只能进入验证、reduce 和发布准备，不能直接当作已签包或 Loaded State |
-| `tools/noemlink/docs/invocation.html` | 记录尚未冻结的 CLI 结构、顺序输入和确定性调用约定 | 示例使用中性占位符而非伪造扩展名；参数候选不构成稳定接口 |
-| `tools/noemlink/docs/pipeline.html` | 解释摄取、规范化、符号解析、重定位、闭包、布局和发射的内部顺序 | 内部自检与独立 `noemvalidate` 分开；每步失败终止条件可定位 |
-| `tools/noemlink/docs/symbol-resolution.html` | 规定定义、引用、可见性、冲突和未解析符号的确定性选择 | 排序与冲突规则绑定稳定键；不依赖文件系统枚举或并行完成顺序 |
-| `tools/noemlink/docs/relocations.html` | 说明类型化重定位、范围检查、标识重映射和溢出失败 | 使用 checked arithmetic；未知类型、越界、错位和重复应用都有明确拒绝语义 |
-| `tools/noemlink/docs/horizon-linking.html` | 说明 HOBJ 共享依赖、披露请求和闭包形成 | 区分 Disclosure Request、Trigger 与 Task；Object System 负责装载时闭包，不把责任交给 Runtime |
-| `tools/noemlink/docs/loader-security.html` | 从链接输出追踪到签名包验证和安全装载 | 明确 loader 只接受 bundle 形成的 Signed Noemion Package；结构、完整性、策略和资源限制分别检查 |
-| `tools/noemlink/docs/diagnostics.html` | 统一错误分类、位置、稳定排序和可安全公开的信息 | 诊断既供开发者定位，也可进入自动测试；不得泄漏敏感载荷或依赖非确定顺序 |
-| `tools/noemlink/docs/testing.html` | 建立确定性、畸形输入、fuzz、属性、互操作和全链路测试矩阵 | 覆盖链接到验证、reduce、coverage、bundle、execute、observe 和最终决定，不把单元测试当作发布证明 |
-| `tools/noemlink/docs/dependencies.html` | 把 noemlink 的上游来源和下游发布/运行证据链集中列明 | 生产者与消费者名称和主产物链一致；避免文档之间形成循环依赖或无人读取的正式输出 |
-| `tools/noemlink/docs/reference-index.html` | 为命令、对象、状态和术语提供可扫描索引 | 使用通用 Markdown 表格，术语链接到权威专题；候选名和稳定定义保持区分 |
+| `tools/noesis/docs/index.html` | 组织自然语言来源到 NIR/NOBJ 的连续阅读路径 | 动态目录覆盖候选输入、语义绑定、记录、对象生成、证据和示例；不把手册当成可执行软件声明 |
+| `tools/noesis/docs/source-and-candidates.html` | 把来源制品、精确跨度和不可信候选分层 | Source Package 只证明来源身份，Candidate Envelope 始终不是 NIR；输入边界可供前端和审计共同复核 |
+| `tools/noesis/docs/semantic-binding.html` | 解释候选何时可以升级为确认语义 | 只允许确定性重推导、授权决定或显式歧义三条路径；类型正确和高置信均不能替代来源忠实 |
+| `tools/noesis/docs/nir-record-model.html` | 集中说明公共记录头、类型化引用和核心记录家族 | 与 NIR 规范共用同一字段职责；手册解释编译器消费方式，不复制第二套规范 |
+| `tools/noesis/docs/nobj-emission.html` | 把逻辑记录映射到 Header、目录和 Section | 明确 Section 排序、引用重编号、来源与构建证据边界；模型不决定字节布局 |
+| `tools/noesis/docs/evidence-and-determinism.html` | 约束规范化排序、环境隔离和构建证据 | 时间、绝对路径、哈希迭代和并发完成顺序不得污染对象；模型指纹只进入候选或构建来源 |
+| `tools/noesis/docs/worked-example.html` | 用一个可核对例子连接自然语言、候选、NIR 与 NOBJ | 示例明确标记非规范性，不伪造稳定语法或编号；硬约束、未知状态和人工检查条件均可追踪 |
+| `tools/noesis/docs/reference-index.html` | 汇总对象、字段、信任状态和外部工程依据 | 站内入口指向权威规范，外部 URL 保持可见；研究先例与 Noemion 设计决定分开 |
+
+### `morphe` 使用手册（6）
+
+| 路由 | 存在价值与关联 | 审计结论 |
+| --- | --- | --- |
+| `tools/morphe/docs/index.html` | 组织 Text NIR 到 NOBJ 的确定性汇编路径 | 首页明确 morphe 不解释自然语言、不提升候选语义；目录由 Markdown 元数据动态生成 |
+| `tools/morphe/docs/text-nir-contract.html` | 定义汇编器接收的显式记录、引用和来源要求 | 缺失类型、作用域、来源或未知策略时失败；文本表现不能靠命名猜测语义 |
+| `tools/morphe/docs/object-layout.html` | 从写入器视角解释 Header、前置目录、Section 和完整性材料 | 布局与 NOBJ 规范一致，64/32 位只作为原型候选；所有范围在载荷读取前验证 |
+| `tools/morphe/docs/deterministic-encoding.html` | 规定规范排序、填充、编码 Profile 和环境隔离 | 通用编码的任意合法输出不自动成为规范字节；重复构建必须得到相同摘要 |
+| `tools/morphe/docs/round-trip-testing.html` | 建立文本规范化、对象往返、负例和独立消费者验证 | 区分语法往返、结构往返和语义保持，不把 pretty print 相同当作对象等价 |
+| `tools/morphe/docs/reference-index.html` | 提供 Text NIR、布局、编码和测试主题索引 | 读者可以从字段职责回到规范，从实现任务进入对应测试，不维护重复术语定义 |
+
+### `theoria` 使用手册（5）
+
+| 路由 | 存在价值与关联 | 审计结论 |
+| --- | --- | --- |
+| `tools/theoria/docs/index.html` | 组织对象准入、结构视图、来源视图和安全读取 | 明确只读查看不等于验证通过；目录与分页从 Markdown 元数据自动生成 |
+| `tools/theoria/docs/header-and-sections.html` | 解释原始字段与解释视图怎样同时呈现 | Preamble、Header、Load/Section Directory 先经边界检查；损坏声明不能被友好文本覆盖 |
+| `tools/theoria/docs/nir-and-origin-views.html` | 连接 NIR 记录、类型化引用、Origin 和调试来源 | 确认语义、候选和可裁剪调试载荷分栏；查看器不替代 Source Binding 决定 |
+| `tools/theoria/docs/safe-reading.html` | 规定读取预算、checked arithmetic、诊断和输出限制 | 截断、溢出、递归、解压放大和终端转义均有拒绝或转义要求；有界输出不产生部分可信结论 |
+| `tools/theoria/docs/reference-index.html` | 提供对象视图、来源视图和安全读取索引 | 外部格式资料用于理解先例，最终字段解释仍回到 NIR/NOBJ 规范与 ADR |
+
+### `synthesis` 使用手册（14）
+
+| 路由 | 存在价值与关联 | 审计结论 |
+| --- | --- | --- |
+| `tools/synthesis/docs/index.html` | 动态组织 linker 手册阅读顺序、分组和术语入口 | Markdown 权威源通过 Jekyll 生成；目录、移动索引和上下页不手工复制 |
+| `tools/synthesis/docs/contract.html` | 定义 synthesis 负责和不负责的稳定责任边界 | 明确只处理解析、重定位、约束和依赖闭包；不渲染提示词、不签名、不执行 Runtime |
+| `tools/synthesis/docs/inputs-outputs.html` | 列明接受的 NOBJ、Archive、HOBJ 描述、策略与输出对象/报告 | 裸链接输出只能进入验证、reduce 和发布准备，不能直接当作已签包或 Loaded State |
+| `tools/synthesis/docs/object-sections.html` | 说明链接器怎样从 NOBJ Header、目录和 Section 建立有界链接视图 | 目录关联、固定记录交叉检查、来源/策略保留和 unknown required 失败与 NOBJ 基线一致 |
+| `tools/synthesis/docs/invocation.html` | 记录尚未冻结的 CLI 结构、顺序输入和确定性调用约定 | 示例使用中性占位符而非伪造扩展名；参数候选不构成稳定接口 |
+| `tools/synthesis/docs/pipeline.html` | 解释摄取、规范化、符号解析、重定位、闭包、布局和发射的内部顺序 | 内部自检与独立 `noemvalidate` 分开；每步失败终止条件可定位 |
+| `tools/synthesis/docs/symbol-resolution.html` | 规定定义、引用、可见性、冲突和未解析符号的确定性选择 | 排序与冲突规则绑定稳定键；不依赖文件系统枚举或并行完成顺序 |
+| `tools/synthesis/docs/relocations.html` | 说明类型化重定位、范围检查、标识重映射和溢出失败 | 使用 checked arithmetic；未知类型、越界、错位和重复应用都有明确拒绝语义 |
+| `tools/synthesis/docs/horizon-linking.html` | 说明 HOBJ 共享依赖、披露请求和闭包形成 | 区分 Disclosure Request、Trigger 与 Task；Object System 负责装载时闭包，不把责任交给 Runtime |
+| `tools/synthesis/docs/loader-security.html` | 从链接输出追踪到签名包验证和安全装载 | 明确 loader 只接受 bundle 形成的 Signed Noemion Package；结构、完整性、策略和资源限制分别检查 |
+| `tools/synthesis/docs/diagnostics.html` | 统一错误分类、位置、稳定排序和可安全公开的信息 | 诊断既供开发者定位，也可进入自动测试；不得泄漏敏感载荷或依赖非确定顺序 |
+| `tools/synthesis/docs/testing.html` | 建立确定性、畸形输入、fuzz、属性、互操作和全链路测试矩阵 | 覆盖链接到验证、reduce、coverage、bundle、execute、observe 和最终决定，不把单元测试当作发布证明 |
+| `tools/synthesis/docs/dependencies.html` | 把 synthesis 的上游来源和下游发布/运行证据链集中列明 | 生产者与消费者名称和主产物链一致；避免文档之间形成循环依赖或无人读取的正式输出 |
+| `tools/synthesis/docs/reference-index.html` | 为命令、对象、状态和术语提供可扫描索引 | 使用通用 Markdown 表格，术语链接到权威专题；候选名和稳定定义保持区分 |
 
 ## 逐类布局、可读性与跳转检查
 
@@ -225,16 +260,16 @@
 ### 中文信息架构与页面用词审校
 
 - 以 MDN 中文文档、Microsoft Learn 中文架构中心和 Kubernetes 中文文档的内容类型为参照，区分任务型指南、定义型参考资料、架构设计、架构决策、工具使用手册、项目动态和常见问题。
-- 逐项复核 69 条正式路由的页面标题、主标题、Hero 摘要、面包屑、导航卡片、页脚入口、手册分组、分页标签和正文一级章节；同时检查会生成 HTML 的 20 个 Markdown 权威源。
-- 统一采用“架构设计”“架构决策”“指南与参考”“获取与使用指南”“工具参考指南”“规范参考指南”“noemlink 使用手册”“开发路线图”“测试与验证”“项目动态”和“常见问题”。
+- 逐项复核 89 条正式路由的页面标题、主标题、Hero 摘要、面包屑、导航卡片、页脚入口、手册分组、分页标签和正文一级章节；同时检查会生成 HTML 的 40 个 Markdown 权威源。
+- 统一采用“架构设计”“架构决策”“指南与参考”“获取与使用指南”“工具参考指南”“规范参考指南”“工具使用手册”“开发路线图”“测试与验证”“项目动态”和“常见问题”。
 - 英文项目名、对象标识、命令名、规范缩写、流程产物、状态徽标和主题控件继续保留；审校目标是让中文分类准确、句意完整，而不是机械消除英文。
 - 对可能误导职责的工具中文名进行收敛：`noemcertify` 使用“规范一致性检查工具”，`noembudget` 使用“对象大小与资源预算分析”，`noemcoverage` 使用“证据覆盖分析工具”，`noemformat` 使用“文本规范化工具”，`noemreduce` 使用“发布对象裁剪工具”。
 - 质量测试新增含糊旧称检查，防止页面重新出现“架构决定”“文档中心”“工具参考”“规范参考”“实施路线图”等旧标签。
 
-- 源码检查逐项核对 69 条正式路由、49 个 HTML 正文源和 20 个 Markdown 权威源；Jekyll 成品检查再次核对 69 个 HTML、34 个全局入口、手册目录和正式路由注册表。
-- 浏览器以 1512px 桌面和 390px 手机逐条打开 69 条路由；桌面浅色、桌面深色与手机结果均没有整页横向溢出、空正文区段、缺失标题、图片加载失败或浏览器错误。
+- 源码检查逐项核对 89 条正式路由、49 个 HTML 正文源和 40 个 Markdown 权威源；Jekyll 成品检查再次核对 89 个 HTML、34 个全局入口、四套工具手册目录和正式路由注册表。
+- 浏览器以 1512px 桌面和 390px 手机逐条打开 89 条路由；桌面浅色、桌面深色与手机结果均没有整页横向溢出、空正文区段、缺失标题、图片加载失败或浏览器错误。
 - 文档布局额外检查 1218、1217、1100、1000、999、840、839 和 390px：固定目录只在 1218px 及以上显示；1000–1217px 正文归中；839px 及以下菜单按钮与面包屑同排。
 - 交互检查覆盖桌面导航悬停展开、卡片逐项进入与封面反馈、5px 循环频谱框线、550ms 箭头圆环、移动目录背景冻结与外部手势收回、主题跨页面保持、长文页内目录跳转、Markdown 表格独立横向滚动、项目摘要和工具状态卡粘性定位。
 - 外部书目与工程依据链接重新检查；失效的 Google Books 入口已经替换为出版社或稳定书目记录，访问控制返回 403 的站点仍保留其可由浏览器访问的权威 URL，不误写为站内故障。
 
-当前 69 条路由已完成上述内容与关系审计，形成设计阶段的信息闭环。最终发布仍必须以同一版本的源码检查、Jekyll 构建、构建产物检查、桌面与移动浏览器复核为依据；任何新路由、新工具、新对象、新运行状态或新研究结论都要同步更新 `sitemap.md`、目录与本审计。
+当前 89 条路由已完成上述内容与关系审计，形成设计阶段的信息闭环。最终发布仍必须以同一版本的源码检查、Jekyll 构建、构建产物检查、桌面与移动浏览器复核为依据；任何新路由、新工具、新对象、新运行状态或新研究结论都要同步更新 `sitemap.md`、目录与本审计。

@@ -17,9 +17,11 @@ permalink: "/architecture/decisions.html"
     <h2>已采纳的架构决策</h2>
     <div class="table-wrap"><table><thead><tr><th>决定</th><th>采用的边界</th><th>直接影响</th></tr></thead><tbody>
       <tr><td>命名与语义边界</td><td>Noesis 表示确定性理解与编译活动；Noema 表示机器对象；Horizon 表示未完全展开的背景；Fulfillment 表示受约束求解。</td><td>NIR、NOBJ、HOBJ、组件名、工具名与公开术语。</td></tr>
+      <tr><td>项目品牌与工具命令独立</td><td>Noemion 不强制成为所有命令的字面前缀；工具可以采用能解释职责的独立哲学名称，但工程含义仍由输入、输出、不变量与测试定义，命令名不得进入对象格式身份。</td><td><code>noesis</code>、<code>morphe</code>、<code>theoria</code>、<code>synthesis</code>、工具路由与未来命令行界面。</td></tr>
       <tr><td>Agent Harness 控制平面</td><td>Harness 位于 Fulfillment Runtime 外侧，负责上下文、会话级能力、策略、观察、预算和人工升级；模型不能绕过它调用能力。</td><td>Agent Harness、noemexecute、noemobserve、noemcoverage 与 noemevaluate。</td></tr>
       <tr><td>工具链产物与外部签名</td><td>发布链依次形成 Release Object、Release Coverage Proof、Unsigned Package Candidate、Signing Request、Signature Response 与 Signed Noemion Package；私钥只在外部签名系统。</td><td>noemreduce、noemcoverage、noembundle、noemexecute 与对象生命周期。</td></tr>
       <tr><td>候选、能力与验收分层</td><td>Candidate Envelope 不是 NIR；Capability Requirement 不是实时句柄；Candidate Assessment、Evidence Closure 和 Acceptance Decision 是三个不同结果。</td><td>Noesis Core、Object System、Agent Harness、Runtime 与所有运行证据工具。</td></tr>
+      <tr><td>NIR/NOBJ 结构基线</td><td>自然语言先形成不可信候选；确认语义经过确定性重推导或授权绑定后进入带显式来源的 NIR 图记录。NOBJ 使用固定 Header、前置目录、长度限定 Section 和分层验证，不让模型决定记录或二进制布局。</td><td>NIR/NOBJ 规范、Noesis Core、四套格式工具手册、验证器与畸形对象语料。</td></tr>
     </tbody></table></div>
   </section>
   <section class="content-split">
@@ -34,7 +36,7 @@ permalink: "/architecture/decisions.html"
   </section>
   <section class="content-band">
     <h2>尚未冻结的内容</h2>
-    <p>Candidate Envelope、Source Binding Decision、Loaded State Handle、Runtime Request、Capability Request、Capability Observation、Acceptance Policy、Acceptance Decision、签名封装和撤销协议仍需规范、威胁模型、原型和正反测试。当前登记只约束职责，不承诺字段或调用语法。</p>
+    <p>Candidate Envelope、Source Binding Decision、NIR 公共记录头与记录家族、NOBJ Header/Section Directory 的逻辑字段职责和物理顺序已经形成详细设计基线。仍未冻结的是类型枚举、字段宽度、魔数字节、Section/重定位编号、Text NIR 语法、压缩与摘要算法，以及 Loaded State Handle、Runtime/Harness 协议、Acceptance Decision、签名封装和撤销协议。它们仍需威胁模型、跨实现原型和正反测试，不能从当前逻辑字段直接推断稳定 ABI。</p>
   </section>
   <div class="next-prev"><a href="noema-lifecycle.html">← 对象生命周期</a><a href="open-questions.html">开放问题 →</a></div>
 </main>

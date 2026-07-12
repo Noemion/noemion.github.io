@@ -59,19 +59,19 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 - [Tool directory](https://noemion.github.io/tools/index.html) — lifecycle-oriented index of all tool projects
 - [noemcertify](https://noemion.github.io/tools/noemcertify/index.html) — conformance checking
-- [noeminspect](https://noemion.github.io/tools/noeminspect/index.html) — object inspection
+- [theoria](https://noemion.github.io/tools/theoria/index.html) — object inspection
 - [noemvalidate](https://noemion.github.io/tools/noemvalidate/index.html) — structural and integrity verification
 - [noemtransform](https://noemion.github.io/tools/noemtransform/index.html) — object copying and transformation
 - [noembudget](https://noemion.github.io/tools/noembudget/index.html) — object size reporting
-- [noemassemble](https://noemion.github.io/tools/noemassemble/index.html) — source assembly
+- [morphe](https://noemion.github.io/tools/morphe/index.html) — source assembly
 - [noemdecode](https://noemion.github.io/tools/noemdecode/index.html) — object disassembly
 - [noemformat](https://noemion.github.io/tools/noemformat/index.html) — source formatting
 - [noemcompare](https://noemion.github.io/tools/noemcompare/index.html) — semantic and object comparison
-- [noemcompile](https://noemion.github.io/tools/noemcompile/index.html) — deterministic compilation
+- [noesis](https://noemion.github.io/tools/noesis/index.html) — deterministic compilation
 - [noemanalyze](https://noemion.github.io/tools/noemanalyze/index.html) — static analysis
 - [noemarchive](https://noemion.github.io/tools/noemarchive/index.html) — archive construction and inspection
 - [noemsymbols](https://noemion.github.io/tools/noemsymbols/index.html) — symbol listing
-- [noemlink](https://noemion.github.io/tools/noemlink/index.html) — linking and dependency closure
+- [synthesis](https://noemion.github.io/tools/synthesis/index.html) — linking and dependency closure
 - [noemreduce](https://noemion.github.io/tools/noemreduce/index.html) — removable metadata reduction
 - [noemcoverage](https://noemion.github.io/tools/noemcoverage/index.html) — coverage-ledger processing
 - [noembundle](https://noemion.github.io/tools/noembundle/index.html) — release packaging
@@ -82,21 +82,50 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [noemevaluate](https://noemion.github.io/tools/noemevaluate/index.html) — evaluation workflows
 - [noemquantize](https://noemion.github.io/tools/noemquantize/index.html) — quantization workflows
 
-## noemlink manual
+## noesis manual
 
-- [Manual index](https://noemion.github.io/tools/noemlink/docs/index.html) — linker documentation and reading order
-- [Contract](https://noemion.github.io/tools/noemlink/docs/contract.html) — responsibilities and stable contract
-- [Inputs and outputs](https://noemion.github.io/tools/noemlink/docs/inputs-outputs.html) — accepted objects and produced artifacts
-- [Invocation](https://noemion.github.io/tools/noemlink/docs/invocation.html) — command-line invocation status and conventions
-- [Pipeline](https://noemion.github.io/tools/noemlink/docs/pipeline.html) — end-to-end linking flow
-- [Symbol resolution](https://noemion.github.io/tools/noemlink/docs/symbol-resolution.html) — symbol lookup and binding rules
-- [Relocations](https://noemion.github.io/tools/noemlink/docs/relocations.html) — typed relocations and identifier remapping
-- [HOBJ linking](https://noemion.github.io/tools/noemlink/docs/horizon-linking.html) — disclosure and dependency closure
-- [Loader security](https://noemion.github.io/tools/noemlink/docs/loader-security.html) — structural validation, integrity, and policy checks
-- [Diagnostics](https://noemion.github.io/tools/noemlink/docs/diagnostics.html) — failures, diagnostics, and rejection boundaries
-- [Testing](https://noemion.github.io/tools/noemlink/docs/testing.html) — determinism, malformed inputs, fuzzing, and acceptance
-- [Dependencies](https://noemion.github.io/tools/noemlink/docs/dependencies.html) — upstream and downstream relationships
-- [Reference index](https://noemion.github.io/tools/noemlink/docs/reference-index.html) — command, term, and object index
+- [Manual index](https://noemion.github.io/tools/noesis/docs/index.html) — natural-language candidates, semantic binding, NIR records, NOBJ emission, and evidence
+- [Source and candidate inputs](https://noemion.github.io/tools/noesis/docs/source-and-candidates.html) — source packages, precise spans, and untrusted candidate envelopes
+- [Semantic binding](https://noemion.github.io/tools/noesis/docs/semantic-binding.html) — deterministic derivation, authorized source binding, ambiguity, and rejection
+- [NIR record model](https://noemion.github.io/tools/noesis/docs/nir-record-model.html) — common record headers, typed references, record families, and invariants
+- [NOBJ emission](https://noemion.github.io/tools/noesis/docs/nobj-emission.html) — deterministic mapping from NIR records to headers, directories, and sections
+- [Evidence and determinism](https://noemion.github.io/tools/noesis/docs/evidence-and-determinism.html) — ordering, provenance, fingerprints, and reproducible build evidence
+- [Worked example](https://noemion.github.io/tools/noesis/docs/worked-example.html) — non-normative translation from natural language to NIR and NOBJ sections
+- [Reference index](https://noemion.github.io/tools/noesis/docs/reference-index.html) — objects, fields, trust states, specifications, and research sources
+
+## morphe manual
+
+- [Manual index](https://noemion.github.io/tools/morphe/docs/index.html) — Text NIR input, object layout, deterministic encoding, and round-trip validation
+- [Text NIR contract](https://noemion.github.io/tools/morphe/docs/text-nir-contract.html) — records, dependencies, origins, and validation required before assembly
+- [Object layout](https://noemion.github.io/tools/morphe/docs/object-layout.html) — preamble, header, directories, section payloads, and integrity material
+- [Deterministic encoding](https://noemion.github.io/tools/morphe/docs/deterministic-encoding.html) — canonical ordering, encoding profile, padding, and environment isolation
+- [Round-trip testing](https://noemion.github.io/tools/morphe/docs/round-trip-testing.html) — canonical round trips, malformed inputs, properties, and independent consumers
+- [Reference index](https://noemion.github.io/tools/morphe/docs/reference-index.html) — input, layout, encoding, and validation topics
+
+## theoria manual
+
+- [Manual index](https://noemion.github.io/tools/theoria/docs/index.html) — object admission, structure views, NIR origins, and bounded inspection
+- [Header and section views](https://noemion.github.io/tools/theoria/docs/header-and-sections.html) — preamble, header, load directory, section directory, and payload views
+- [NIR and origin views](https://noemion.github.io/tools/theoria/docs/nir-and-origin-views.html) — typed records, references, origins, candidates, and debug-source boundaries
+- [Safe reading](https://noemion.github.io/tools/theoria/docs/safe-reading.html) — checked arithmetic, budgets, diagnostic layers, and output safety
+- [Reference index](https://noemion.github.io/tools/theoria/docs/reference-index.html) — object views, source views, safe reading, and external format references
+
+## synthesis manual
+
+- [Manual index](https://noemion.github.io/tools/synthesis/docs/index.html) — linker documentation and reading order
+- [Contract](https://noemion.github.io/tools/synthesis/docs/contract.html) — responsibilities and stable contract
+- [Inputs and outputs](https://noemion.github.io/tools/synthesis/docs/inputs-outputs.html) — accepted objects and produced artifacts
+- [Object sections](https://noemion.github.io/tools/synthesis/docs/object-sections.html) — NOBJ directory fields, section families, associations, and link admission
+- [Invocation](https://noemion.github.io/tools/synthesis/docs/invocation.html) — command-line invocation status and conventions
+- [Pipeline](https://noemion.github.io/tools/synthesis/docs/pipeline.html) — end-to-end linking flow
+- [Symbol resolution](https://noemion.github.io/tools/synthesis/docs/symbol-resolution.html) — symbol lookup and binding rules
+- [Relocations](https://noemion.github.io/tools/synthesis/docs/relocations.html) — typed relocations and identifier remapping
+- [HOBJ linking](https://noemion.github.io/tools/synthesis/docs/horizon-linking.html) — disclosure and dependency closure
+- [Loader security](https://noemion.github.io/tools/synthesis/docs/loader-security.html) — structural validation, integrity, and policy checks
+- [Diagnostics](https://noemion.github.io/tools/synthesis/docs/diagnostics.html) — failures, diagnostics, and rejection boundaries
+- [Testing](https://noemion.github.io/tools/synthesis/docs/testing.html) — determinism, malformed inputs, fuzzing, and acceptance
+- [Dependencies](https://noemion.github.io/tools/synthesis/docs/dependencies.html) — upstream and downstream relationships
+- [Reference index](https://noemion.github.io/tools/synthesis/docs/reference-index.html) — command, term, and object index
 
 ## Availability and authority
 

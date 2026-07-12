@@ -10,14 +10,14 @@ permalink: "/architecture/open-questions.html"
   <div class="hero"><h1>开放问题</h1><p>集中记录尚未通过规范或架构决策记录（ADR）确定的名称、类型、ABI、实现和资源问题。</p><div class="badges"><span class="badge">Unresolved</span><span class="badge">Evidence Required</span></div></div>
   <section class="content-grid">
     <h2>待定事项：对象与语义</h2>
-    <details open><summary>Noema Object 怎样版本化？</summary><p>Noema Object（NOBJ）已经作为当前工程名称采用，但文件扩展名、版本协商、能力声明和未知记录处理仍需对象规范与 ADR 确定。</p></details>
+    <details open><summary>Noema Object 怎样版本化？</summary><p>NOBJ 的固定 Header、前置目录、长度限定 Section 和逻辑字段职责已经作为详细设计基线采用。仍需确定主/次版本兼容规则、魔数字节、字段宽度、能力位、Section 编号、文件扩展名，以及未知 required/optional 记录在不同版本之间的精确处理矩阵。</p></details>
     <details><summary>NIR 最小核心类型集是什么？</summary><p>需要用真实语料和实现原型确定最小集合；“约 20～30 种”只是规划估计。</p></details>
     <details><summary>连续语义残差如何标准化？</summary><p>Encoder 指纹、维度、码本、量化、相似度与跨模型稳定性仍需证据和互操作测试。</p></details>
     <details><summary>评价器如何成为可链接对象？</summary><p>确定性、模型与外部评价器的接口、权限和失败边界尚待设计。</p></details>
     <details><summary>四类语义关系是否足够且正交？</summary><p>Source Expression、Compiled Meaning、Reference Binding 与 Acceptance Contract 当前只表示四类需要分别追踪的关系，不是已证明稳定的四层身份体系；需要以同义改写、跨版本绑定、语境推论和复合验收反例检验是否遗漏或重复。</p></details>
     <details><summary>语义来源和满足环境如何进入对象？</summary><p>明示内容、结构蕴涵、语境推论、工具推导与模型候选的确认权限尚未定型；评价环境的证据、能力和背景假设也须决定是对象数据、可链接依赖还是 Fulfillment Runtime 配置。</p></details>
-    <details><summary>模型候选怎样升级为确认语义？</summary><p>Candidate Envelope 的最小字段、Source Binding Decision 的授权主体、可由确定性规则重推导的范围，以及必须保留为未决语义的情形仍需 NIR 规范、威胁模型和反例语料。类型正确或模型高置信不能单独完成升级。</p></details>
-    <details><summary>HOBJ 与 NOBJ 的格式和链接关系是什么？</summary><p>当前职责边界采用“共享内容先编译为 NOBJ，再由 noemlink 将 NOBJ 与已有 HOBJ 链接为 HOBJ”；HOBJ 是否共享容器头、怎样递归链接、哪些记录只能出现在 HOBJ，仍需对象规范与 ADR。</p></details>
+    <details><summary>模型候选怎样升级为确认语义？</summary><p>当前基线要求 Candidate Envelope 至少携带候选、替代解释、证据、置信信息、模型/窗口指纹和未决状态；只有确定性重推导、授权的 Source Binding Decision 或显式歧义记录可以进入 NIR。仍需确定决定签署者、授权范围编码、撤销与重放协议、可重推导规则注册表，以及哪些高风险语义必须人工确认。类型正确或模型高置信不能单独完成升级。</p></details>
+    <details><summary>HOBJ 与 NOBJ 的格式和链接关系是什么？</summary><p>当前职责边界采用“共享内容先编译为 NOBJ，再由 synthesis 将 NOBJ 与已有 HOBJ 链接为 HOBJ”；HOBJ 是否共享容器头、怎样递归链接、哪些记录只能出现在 HOBJ，仍需对象规范与 ADR。</p></details>
   </section>
   <section class="content-grid">
     <h2>待定事项：语言、ABI 与工具面</h2>
@@ -28,7 +28,7 @@ permalink: "/architecture/open-questions.html"
     <details><summary>谁持有并传递 Loaded State？</summary><p>Loaded State Handle 的不可伪造性、进程边界、生命周期、撤销、并发读取与 Runtime 只读视图仍需规范。当前边界要求 Object System 交给 Harness，Runtime 只能经 Harness 获得请求所需视图。</p></details>
     <details><summary>最终验收由谁决定？</summary><p>Candidate Assessment、证据闭包、确定性 Acceptance Policy 与人工或外部权威的签署协议仍需规范。noemcoverage 只检查证据是否可定位，noemevaluate 只做离线评估，两者都不能修改单次会话的 Acceptance Decision。</p></details>
     <details><summary>运行产物怎样保持同一身份链？</summary><p>会话、对象、环境、Runtime 请求、能力调用、观察、候选、Run Result、Trace 与 Acceptance Decision 的稳定身份和防篡改关联尚待事件规范与签名策略确定。</p></details>
-    <details><summary>CLI 与重定位标识是什么？</summary><p>尚未规范化的命令示例和 <code>R_NIR_*</code> 名称只表示候选职责，不构成稳定 CLI 或 ABI。冻结前必须确定命名空间、版本策略、未知类型处理和一致性测试向量。</p></details>
+    <details><summary>CLI 与重定位标识是什么？</summary><p><code>noesis</code>、<code>morphe</code>、<code>theoria</code> 与 <code>synthesis</code> 已作为首批独立工具名采用，但参数、退出状态、文件扩展名和发行包仍未冻结；发布前还需完成命令、包、域名和商标复核。<code>R_NIR_*</code> 仍只表示重定位职责候选，必须另行确定命名空间、编号、版本策略、未知类型处理和一致性测试向量。</p></details>
     <details><summary>行为请求需要哪些最小字段？</summary><p>询问、承诺、授权与执行是否属于核心行为类型，以及行动者、权限、前置条件、效果和撤销边界怎样跨 Compiler、链接器与 Fulfillment Runtime 保持一致，仍需威胁模型和 ADR。</p></details>
   </section>
   <section class="content-grid">

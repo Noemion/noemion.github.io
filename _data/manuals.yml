@@ -20,12 +20,12 @@ docs:
       label: 参考指南
       order: 3
 
-noemlink:
+noesis:
   kicker: Tool Manual
-  title: noemlink 使用手册
-  root: /tools/noemlink/docs/index.html
-  parent_url: /tools/noemlink/index.html
-  parent_label: 返回 noemlink 项目页
+  title: noesis 使用手册
+  root: /tools/noesis/docs/index.html
+  parent_url: /tools/noesis/index.html
+  parent_label: 返回 noesis 项目页
   up_label: 返回手册首页
   index_label: 参考索引
   breadcrumbs:
@@ -33,8 +33,95 @@ noemlink:
       url: /index.html
     - label: 工具
       url: /tools/index.html
-    - label: noemlink
-      url: /tools/noemlink/index.html
+    - label: noesis
+      url: /tools/noesis/index.html
+  groups:
+    start:
+      label: 输入与边界
+      order: 1
+    translation:
+      label: 语义编译
+      order: 2
+    object:
+      label: 对象生成
+      order: 3
+    reference:
+      label: 证据与参考
+      order: 4
+
+morphe:
+  kicker: Tool Manual
+  title: morphe 使用手册
+  root: /tools/morphe/docs/index.html
+  parent_url: /tools/morphe/index.html
+  parent_label: 返回 morphe 项目页
+  up_label: 返回手册首页
+  index_label: 参考索引
+  breadcrumbs:
+    - label: 项目
+      url: /index.html
+    - label: 工具
+      url: /tools/index.html
+    - label: morphe
+      url: /tools/morphe/index.html
+  groups:
+    start:
+      label: 文本输入
+      order: 1
+    encoding:
+      label: 对象编码
+      order: 2
+    validation:
+      label: 往返与验证
+      order: 3
+    reference:
+      label: 参考资料
+      order: 4
+
+theoria:
+  kicker: Tool Manual
+  title: theoria 使用手册
+  root: /tools/theoria/docs/index.html
+  parent_url: /tools/theoria/index.html
+  parent_label: 返回 theoria 项目页
+  up_label: 返回手册首页
+  index_label: 参考索引
+  breadcrumbs:
+    - label: 项目
+      url: /index.html
+    - label: 工具
+      url: /tools/index.html
+    - label: theoria
+      url: /tools/theoria/index.html
+  groups:
+    start:
+      label: 对象准入
+      order: 1
+    views:
+      label: 结构与语义视图
+      order: 2
+    security:
+      label: 安全读取
+      order: 3
+    reference:
+      label: 参考资料
+      order: 4
+
+synthesis:
+  kicker: Tool Manual
+  title: synthesis 使用手册
+  root: /tools/synthesis/docs/index.html
+  parent_url: /tools/synthesis/index.html
+  parent_label: 返回 synthesis 项目页
+  up_label: 返回手册首页
+  index_label: 参考索引
+  breadcrumbs:
+    - label: 项目
+      url: /index.html
+    - label: 工具
+      url: /tools/index.html
+    - label: synthesis
+      url: /tools/synthesis/index.html
   groups:
     start:
       label: 快速开始

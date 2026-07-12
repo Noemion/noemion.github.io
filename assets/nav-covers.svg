@@ -70,7 +70,7 @@
       <rect x="18" y="9" width="64" height="64" fill="#f0f6f3"/><rect x="26" y="18" width="7" height="46" fill="#f04b23"/><path d="M41 22h30M41 32h24M41 42h30M41 52h19M41 62h27" stroke="#3158ff" stroke-width="3"/>
       <rect x="76" y="17" width="24" height="42" fill="#68d7b2"/><path d="M82 26h12M82 35h12M82 44h8" stroke="#10261e" stroke-width="2"/>
     </symbol>
-    <symbol id="nav-cover-noemlink-manual" viewBox="0 0 116 82">
+    <symbol id="nav-cover-synthesis-manual" viewBox="0 0 116 82">
       <rect x="9" y="14" width="31" height="54" fill="#3158ff"/><rect x="76" y="14" width="31" height="54" fill="#f04b23"/>
       <path d="M17 28h15M17 39h15M17 50h15M84 28h15M84 39h15M84 50h15" stroke="#f0f6f3" stroke-width="3"/>
       <path d="M40 28h17v27h19M53 22l7 6-7 6m16 15 7 6-7 6" stroke="#f4be35" stroke-width="3" fill="none"/>

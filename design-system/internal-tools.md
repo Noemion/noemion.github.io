@@ -11,7 +11,7 @@
 - 母题：垂直校准线和一致性检查点。
 - 内容强调：规范条款、Golden、Malformed 与跨实现一致性。
 
-### noeminspect
+### theoria
 
 - 签名：`OBJECT / INSPECT`
 - 色彩：检视青、对象蓝、偏移橙。
@@ -39,7 +39,7 @@
 - 母题：刻度、容量条和资源边界。
 - 内容强调：Section、Segment、闭包和披露预算。
 
-### noemassemble
+### morphe
 
 - 签名：`TEXT IR / ASSEMBLE`
 - 色彩：汇编靛、语法蓝、目标薄荷。
@@ -67,7 +67,7 @@
 - 母题：双栏差异、变化标记和语义层级。
 - 内容强调：布局、调试、信任元数据与运行语义差异。
 
-### noemcompile
+### noesis
 
 - 签名：`SOURCE / COMPILE`
 - 色彩：编译蓝、核心靛、诊断橙。
@@ -95,7 +95,7 @@
 - 母题：定义、引用和版本连接图。
 - 内容强调：符号绑定、版本、可见性和来源。
 
-### noemlink
+### synthesis
 
 - 签名：`SYMBOL / LINK`
 - 色彩：冲突红、链接深蓝、闭包薄荷。
