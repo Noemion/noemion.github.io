@@ -950,11 +950,10 @@ def validate_jekyll_sources():
             "@media(min-width:840px) and (max-width:999px)",
             "prefers-reduced-motion:reduce",
             "body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}",
-            ".global-stage-value::after",
-            "@keyframes global-stage-pulse",
-            "@keyframes global-stage-text-flow",
-            "@keyframes global-stage-sheen",
-            "-webkit-text-fill-color:transparent",
+            ".global-stage-progress::after",
+            "width:38px;height:4px",
+            "@keyframes global-stage-progress-loop",
+            ".global-stage-progress::after{animation:none!important;opacity:1;transform:translateX(108%) scaleX(.74)}",
             "background:#fff",
             ".content-split{",
             ".content-split-reverse{",
@@ -1010,6 +1009,15 @@ def validate_jekyll_sources():
             errors.append("1000-1217px documentation override must follow the base desktop docs layout")
         if "margin-left:300px" in shared_css:
             errors.append("content pages must not reserve a meaningless fixed 300px left gap")
+        for obsolete_stage_motion in (
+            "global-stage-pulse",
+            "global-stage-text-flow",
+            "global-stage-sheen",
+        ):
+            if obsolete_stage_motion in shared_css:
+                errors.append(
+                    f"shared styles retain obsolete stage animation: {obsolete_stage_motion}"
+                )
         if re.search(
             r'body\[data-docs-layout="true"\]\s+\.hero::before,\s*'
             r'body\[data-docs-layout="true"\]\s+\.hero::after\s*\{display:none\}',
@@ -1214,8 +1222,12 @@ def validate_jekyll_sources():
             if not re.search(rf"^  {overview_key}:\s*.+$", timeline_text, re.MULTILINE):
                 errors.append(f"project timeline overview requires {overview_key}")
         header_value_match = re.search(r"^  value:\s*(.+?)\s*$", timeline_text, re.MULTILINE)
-        if header_value_match is None or not 3 <= len(header_value_match.group(1)) <= 4:
-            errors.append("project timeline header value must contain three or four characters")
+        if (
+            header_value_match is None
+            or len(header_value_match.group(1)) != 6
+            or not header_value_match.group(1).endswith("阶段")
+        ):
+            errors.append("project timeline header value must use four characters followed by 阶段")
     if not timeline_include.exists():
         errors.append("missing _includes/project-timeline.html")
     else:
@@ -1745,7 +1757,7 @@ def main():
             'data-timeline-id="noemion-project-progress"',
             f'aria-label="当前阶段：{current_title}"',
             'href="/development/current-stage.html"',
-            f'<strong class="global-stage-value" data-stage-value="{configured_header_value}"><span class="global-stage-progress" aria-hidden="true"></span><span class="global-stage-text">{configured_header_value}</span></strong>',
+            f'<strong class="global-stage-value" data-stage-value="{configured_header_value}"><span class="global-stage-text">{configured_header_value}</span><span class="global-stage-progress" aria-hidden="true"></span></strong>',
             'class="project-progress-summary"',
             'class="progress-counts"',
             "项目状态概览",
