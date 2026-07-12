@@ -27,13 +27,9 @@ badges: ["elenk", "theor", "Fail Closed"]
 
 `theor` 不得复用 Poiet 的生产解析器、写入器、组合器、生成代码或错误分类实现。它只共享公开规范和测试向量，并使用独立数据结构与资源限制。
 
-GNU `readelf` 独立于 BFD 的做法提供了工程先例：
+GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf.html)说明它独立于 BFD，为第二条直接读取路径提供了工程先例。
 
-https://www.sourceware.org/binutils/docs/binutils/readelf.html
-
-BFD 面向多种格式提供通用内部表示，可能隐藏格式特有信息；Endem 第一阶段不链接 BFD：
-
-https://sourceware.org/binutils/docs/bfd.html
+[GNU BFD 手册](https://sourceware.org/binutils/docs/bfd.html)说明它为多种格式提供通用内部表示。该表示可能隐藏格式特有信息，因此 Endem 第一阶段不链接 BFD。
 
 这些资料只支持“独立直接读取”的方法，不决定 Endem 格式，也不使 `theor` 成为传统对象工具的复刻。
 

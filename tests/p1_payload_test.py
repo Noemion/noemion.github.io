@@ -74,9 +74,18 @@ def encode_cbor(value):
     raise TypeError(f"unsupported CBOR value {type(value)!r}")
 
 
+class Budget:
+    def __init__(self):
+        self.items = 0
+        self.allocated = 0
+        self.edges = 0
+
+
 class Decoder:
-    def __init__(self, data):
+    def __init__(self, data, profile, budget):
         self.data = data
+        self.profile = profile
+        self.budget = budget
 
     def take(self, position, length):
         end = position + length
@@ -99,7 +108,10 @@ class Decoder:
         return value, position
 
     def item(self, position=0, depth=0):
-        if depth > 16:
+        self.budget.items += 1
+        if self.budget.items > self.profile["limits"]["max_graph_nodes"]:
+            fail("endem.wire.profile.limit", "END-FMT-010", "/")
+        if depth > self.profile["limits"]["max_nesting_depth"]:
             fail("endem.wire.profile.limit", "END-FMT-010", "/")
         raw, position = self.take(position, 1)
         major = raw[0] >> 5
@@ -109,13 +121,23 @@ class Decoder:
             return (value if major == 0 else -1 - value), position
         if major == 3:
             length, position = self.argument(position, additional)
+            if length > self.profile["limits"]["max_string_bytes"]:
+                fail("endem.wire.profile.limit", "END-FMT-010", "/")
             raw, position = self.take(position, length)
+            self.budget.allocated += length
+            if self.budget.allocated > self.profile["limits"]["max_total_allocation_bytes"]:
+                fail("endem.wire.profile.limit", "END-FMT-010", "/")
             try:
                 return raw.decode("utf-8"), position
             except UnicodeDecodeError:
                 fail("endem.wire.payload.cbor", "END-FMT-009", "/")
         if major == 4:
             length, position = self.argument(position, additional)
+            if length > self.profile["limits"]["max_graph_edges"]:
+                fail("endem.wire.profile.limit", "END-FMT-010", "/")
+            self.budget.edges += length
+            if self.budget.edges > self.profile["limits"]["max_graph_edges"]:
+                fail("endem.wire.profile.limit", "END-FMT-010", "/")
             values = []
             for _ in range(length):
                 value, position = self.item(position, depth + 1)
@@ -123,6 +145,11 @@ class Decoder:
             return values, position
         if major == 5:
             length, position = self.argument(position, additional)
+            if length > self.profile["limits"]["max_graph_edges"]:
+                fail("endem.wire.profile.limit", "END-FMT-010", "/")
+            self.budget.edges += length
+            if self.budget.edges > self.profile["limits"]["max_graph_edges"]:
+                fail("endem.wire.profile.limit", "END-FMT-010", "/")
             mapping = {}
             prior_key = None
             for _ in range(length):
@@ -143,6 +170,10 @@ def identifier(value, path):
     if not isinstance(value, str) or IDENTIFIER.fullmatch(value) is None:
         fail("endem.semantic.field.identifier", "END-FMT-013", path)
     return value
+
+
+def anchors_source(reference, source_id):
+    return reference == source_id or reference.startswith(source_id + "#/")
 
 
 def exact_map(value, keys, path):
@@ -246,16 +277,17 @@ def build_container(records):
     return header + bytes(directory) + bytes(body)
 
 
-def read_container(data):
+def read_container(data, profile):
     if len(data) < HEADER_SIZE or data[:8] != MAGIC:
         fail("endem.wire.header.magic", "END-FMT-001", "/")
     fields = struct.unpack_from("<8sHHHHBBBBIQQ24s", data, 0)
-    _, major, minor, header_size, entry_size, byte_order, profile, state, flags, count, directory, file_size, reserved = fields
-    if (major, minor, header_size, entry_size, byte_order, profile, state, flags, count, directory) != (0, 1, 64, 48, 1, 2, 0, 0, 6, 64):
+    _, major, minor, header_size, entry_size, byte_order, profile_id, state, flags, count, directory, file_size, reserved = fields
+    if (major, minor, header_size, entry_size, byte_order, profile_id, state, flags, count, directory) != (0, 1, 64, 48, 1, 2, 0, 0, 6, 64):
         fail("endem.wire.profile.feature", "END-FMT-010", "/")
     if file_size != len(data) or reserved != bytes(24):
         fail("endem.wire.header.size", "END-FMT-003", "/")
     records = {}
+    budget = Budget()
     for index in range(6):
         base = 64 + index * 48
         kind, record_flags, record_id, offset, stored, logical, alignment, link, info, entry_reserved = struct.unpack_from("<HHIQQQIIII", data, base)
@@ -264,7 +296,7 @@ def read_container(data):
         end = offset + stored
         if offset % 8 or end > len(data):
             fail("endem.wire.record.range", "END-FMT-006", "/")
-        decoder = Decoder(data[offset:end])
+        decoder = Decoder(data[offset:end], profile, budget)
         value, consumed = decoder.item()
         if consumed != stored or not isinstance(value, dict):
             fail("endem.wire.payload.cbor", "END-FMT-009", "/")
@@ -293,7 +325,7 @@ def validate_records(records):
     symbol_ids = {item[1] for item in symbols}
     for index, item in enumerate(symbols):
         identifier(item[2], f"/semion/symbols/{index}/kind")
-        if not identifier(item[3], f"/semion/symbols/{index}/source_ref").startswith(source_id):
+        if not anchors_source(identifier(item[3], f"/semion/symbols/{index}/source_ref"), source_id):
             fail("endem.semantic.reference", "END-FMT-014", f"/semion/symbols/{index}/source_ref")
     ordered_unique(relations, lambda item, index: identifier(exact_map(item, (1, 2, 3, 4), f"/semion/relations/{index}")[1], f"/semion/relations/{index}/id"), "/semion/relations")
     relation_ids = set()
@@ -332,29 +364,84 @@ def validate_records(records):
     if krin[3] != 0 or krin[4] != 0:
         fail("endem.krin.policy", "END-KRN-001", "/krin")
     identifier(krin[5], "/krin/decision_authority")
+    ordered_unique(
+        krin[1],
+        lambda requirement, index: identifier(
+            exact_map(requirement, (1, 2), f"/krin/required_phain/{index}")[1],
+            f"/krin/required_phain/{index}/relation",
+        ),
+        "/krin/required_phain",
+    )
     for index, requirement in enumerate(krin[1]):
         requirement = exact_map(requirement, (1, 2), f"/krin/required_phain/{index}")
         if identifier(requirement[1], f"/krin/required_phain/{index}/relation") not in relation_ids:
             fail("endem.semantic.reference", "END-FMT-014", f"/krin/required_phain/{index}/relation")
         if requirement[2] != 0:
             fail("endem.krin.match", "END-KRN-001", f"/krin/required_phain/{index}/match")
-    for index, evidence in enumerate(krin[2]):
-        identifier(evidence, f"/krin/required_tekmor/{index}")
+    ordered_unique(
+        krin[2],
+        lambda evidence, index: encode_cbor(identifier(evidence, f"/krin/required_tekmor/{index}")),
+        "/krin/required_tekmor",
+    )
 
     apor = exact_map(records[6], (1,), "/apor")
-    if not isinstance(apor[1], list):
-        fail("endem.semantic.field.type", "END-FMT-013", "/apor/items")
+    ordered_unique(
+        apor[1],
+        lambda item, index: identifier(
+            exact_map(item, (1, 2, 3, 4, 5, 6, 7), f"/apor/items/{index}")[1],
+            f"/apor/items/{index}/id",
+        ),
+        "/apor/items",
+    )
+    for index, item in enumerate(apor[1]):
+        path = f"/apor/items/{index}"
+        source_ref = identifier(item[2], f"{path}/source_ref")
+        if not anchors_source(source_ref, source_id):
+            fail("endem.semantic.reference", "END-FMT-014", f"{path}/source_ref")
+        ordered_unique(
+            item[3],
+            lambda value, value_index: encode_cbor(identifier(value, f"{path}/candidates/{value_index}")),
+            f"{path}/candidates",
+        )
+        if not isinstance(item[4], str):
+            fail("endem.semantic.field.type", "END-FMT-013", f"{path}/conflict")
+        ordered_unique(
+            item[5],
+            lambda value, value_index: encode_cbor(identifier(value, f"{path}/impact_scope/{value_index}")),
+            f"{path}/impact_scope",
+        )
+        if not isinstance(item[6], list) or not item[6]:
+            fail("endem.apor.unrecorded_projection_choice", "END-APR-001", f"{path}/allowed_resolutions")
+        if any(not isinstance(value, int) or isinstance(value, bool) or value not in (0, 1) for value in item[6]):
+            fail("endem.projection.authority_untrusted", "END-AUT-001", f"{path}/allowed_resolutions")
+        if item[6] != sorted(item[6]) or len(item[6]) != len(set(item[6])):
+            fail("endem.semantic.field.order", "END-FMT-013", f"{path}/allowed_resolutions")
+        identifier(item[7], f"{path}/decision_authority")
     return {"result": "semantic-accept", "profile": "END-P1"}
 
 
 def mutate_records(records, vector_id):
     records = copy.deepcopy(records)
+    if vector_id.startswith("WV-P1-APOR-"):
+        records[6][1] = [{
+            1: "apor:audience",
+            2: "source:request-001#/range",
+            3: sorted(["audience:security", "audience:executive"], key=encode_cbor),
+            4: "目标读者尚未确认",
+            5: ["rel:produced"],
+            6: [0, 1],
+            7: "authority:requester",
+        }]
     if vector_id == "WV-P1-REJECT-UNKNOWN-FIELD-001":
         records[1][8] = 0
     elif vector_id == "WV-P1-REJECT-DANGLING-REFERENCE-001":
         records[2][2][0][3][0][2] = "sym:missing"
     elif vector_id == "WV-P1-REJECT-SOURCE-RANGE-001":
         records[1][7][3] = 16
+    elif vector_id == "WV-P1-APOR-REJECT-DUPLICATE-RESOLUTION-001":
+        records[6][1][0][6] = [0, 0]
+    elif vector_id == "WV-P1-APOR-REJECT-SOURCE-REFERENCE-001":
+        records[6][1][0][2] = "source:request-001-copy#/range"
     return records
 
 
@@ -411,7 +498,7 @@ def main():
             errors.append(f"{vector_id}: checked-in bytes differ from deterministic source mapping")
             continue
         try:
-            actual = validate_records(read_container(actual_bytes))
+            actual = validate_records(read_container(actual_bytes, profile))
         except P1Error as exc:
             actual = exc.result
         expected = vector["expect"]
@@ -425,12 +512,12 @@ def main():
             reject_count += 1
     if len(seen) != len(manifest.get("vectors", [])):
         errors.append("END-P1 vector IDs must be unique")
-    if accept_count != 1 or reject_count != 3:
-        errors.append("END-P1 requires one semantic accept and three semantic rejects")
+    if accept_count != 2 or reject_count != 5:
+        errors.append("END-P1 requires two semantic accepts and five semantic rejects")
     if errors:
         print("\n".join(errors))
         return 1
-    print("PASS: END-P1 encoded and decoded 4 complete payload vectors (1 semantic accept, 3 deterministic rejects)")
+    print("PASS: END-P1 encoded and decoded 7 complete payload vectors (2 semantic accepts, 5 deterministic rejects)")
     return 0
 
 

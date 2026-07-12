@@ -77,11 +77,11 @@ permalink: "/architecture/adr-0008-endem-system.html"
   <section class="content-wide">
     <h2>外部技术只提供机制先例</h2>
     <ul>
-      <li>GNU <code>readelf</code> 独立于 BFD 的做法支持 <code>see</code> 采用第二条直接读取路径：<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">https://www.sourceware.org/binutils/docs/binutils/readelf.html</a></li>
-      <li>BFD 的多格式 canonical form 可能丢失格式特有信息，因此不进入 Endem 第一阶段可信核心：<a href="https://sourceware.org/binutils/docs/bfd.html">https://sourceware.org/binutils/docs/bfd.html</a></li>
-      <li>MCP 的工具与资源声明只作为 Runner 外缘适配输入，不构成权限或事实：<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a></li>
-      <li>A2A 1.0 的 Task 与 Artifact 只承担跨系统交换，不定义 Endem、Frame 或最终验收；链接固定到 v1.0.1 文档快照：<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a></li>
-      <li>OpenAI 的 Harness Engineering 提供环境可读性、反馈循环和机械边界的实践依据，不决定本项目格式或成熟度：<a href="https://openai.com/index/harness-engineering/">https://openai.com/index/harness-engineering/</a></li>
+      <li>GNU <code>readelf</code> 独立于 BFD 的做法支持 <code>see</code> 采用第二条直接读取路径，依据见 <a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">GNU readelf 手册</a>。</li>
+      <li>BFD 的多格式 canonical form 可能丢失格式特有信息，因此不进入 Endem 第一阶段可信核心，依据见 <a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD 手册</a>。</li>
+      <li>MCP 的工具与资源声明只作为 Runner 外缘适配输入，不构成权限或事实。这里固定参考 <a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 规范</a>。</li>
+      <li>A2A 1.0 的 Task 与 Artifact 只承担跨系统交换，不定义 Endem、Frame 或最终验收。这里固定参考 <a href="https://a2a-protocol.org/v1.0.1/specification/">A2A v1.0.1 文档快照</a>。</li>
+      <li>OpenAI 的 <a href="https://openai.com/index/harness-engineering/">Harness Engineering 实践文章</a>提供环境可读性、反馈循环和机械边界的工程案例，但不决定本项目格式或成熟度。</li>
     </ul>
   </section>
 

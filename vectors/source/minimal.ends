@@ -1,0 +1,11 @@
+# 一个可复现的 END-P1 最小清单
+rhem	source:request-001	authority:requester	text/plain	zh-CN	1	为已登记项目生成安全评审报告	0	14
+symbol	sym:project	entity	source:request-001#/range
+symbol	sym:report	artifact	source:request-001#/range
+relation	rel:produced	produced	rule	projection:zh-goal-v1	result=sym:report	for=sym:project
+situation	situation:report-produced	rel:produced	positive
+root	situation:report-produced
+telis	kine
+phain	rel:produced	same-roles
+tekmor	artifact-content-observation
+krin	agno	fault	authority:requester

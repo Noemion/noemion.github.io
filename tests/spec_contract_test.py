@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "spec" / "registry.json"
 CORE_SPEC_PATH = ROOT / "spec" / "endem-core.md"
 FORMAT_SPEC_PATH = ROOT / "spec" / "endem-format.md"
+SOURCE_MANIFEST_SPEC_PATH = ROOT / "spec" / "endem-source-manifest.md"
 THREAT_PATH = ROOT / "spec" / "endem-threat-model.md"
 ERROR_CATALOG_PATH = ROOT / "spec" / "endem-errors.md"
 PROFILE_PATH = ROOT / "spec" / "profiles" / "end-p0.json"
@@ -36,8 +37,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
         errors.append("spec/registry.json: registry_version must be 1")
 
     documents = registry.get("documents")
-    if not isinstance(documents, list) or len(documents) != 2:
-        errors.append("spec/registry.json: END-CORE and END-FMT documents are required")
+    if not isinstance(documents, list) or len(documents) != 3:
+        errors.append("spec/registry.json: END-CORE, END-FMT and END-SRCM documents are required")
     else:
         documents_by_id = {document.get("spec_id"): document for document in documents}
         expected_documents = {
@@ -51,9 +52,14 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 "implementation_status": "vector-checker-only",
                 "wire_status": "experimental-draft", "path": "spec/endem-format.md",
             },
+            "END-SRCM": {
+                "version": "0.1.0-draft", "status": "draft",
+                "implementation_status": "local-candidate-unpublished",
+                "wire_status": "not-applicable", "path": "spec/endem-source-manifest.md",
+            },
         }
         if set(documents_by_id) != set(expected_documents):
-            errors.append("spec/registry.json: document IDs must be END-CORE and END-FMT")
+            errors.append("spec/registry.json: document IDs must be END-CORE, END-FMT and END-SRCM")
         for spec_id, expected_document in expected_documents.items():
             document = documents_by_id.get(spec_id, {})
             for key, value in expected_document.items():
@@ -99,7 +105,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: term names must be unique")
         for required_term in (
             "Noemion", "Endem", "Synem", "Dromen", "Tekmor",
-            *REQUIRED_FACETS, "wire-format", "END-P0", "END-P1",
+            *REQUIRED_FACETS, "wire-format", "END-P0", "END-P1", "source-manifest",
         ):
             if required_term not in term_names:
                 errors.append(f"spec/registry.json: missing term {required_term}")
@@ -221,9 +227,12 @@ def validate_registry(registry, spec_text, threat_text, errors):
         ):
             if field not in clause:
                 errors.append(f"{clause_id}: missing registry field {field}")
-        expected_implementation = (
-            "vector-checker-only" if clause_id.startswith("END-FMT-") else "unimplemented"
-        )
+        if clause_id.startswith("END-FMT-"):
+            expected_implementation = "vector-checker-only"
+        elif clause_id.startswith("END-SRCM-"):
+            expected_implementation = "local-candidate-unpublished"
+        else:
+            expected_implementation = "unimplemented"
         if clause.get("implementation_status") != expected_implementation:
             errors.append(
                 f"{clause_id}: implementation must be {expected_implementation}"
@@ -368,6 +377,8 @@ def validate_public_boundary(errors):
         errors.append("Pages workflow must execute semantic vectors, not only register them")
     if "python3 tests/p1_payload_test.py" not in workflow_text:
         errors.append("Pages workflow must execute complete END-P1 payload vectors")
+    if "python3 tests/source_manifest_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute END-SRCM source manifest vectors")
     for exact_exclusion in ("  - experiments/", "  - spec/", "  - vectors/"):
         if exact_exclusion not in config_text:
             errors.append(f"_config.yml: missing exact exclusion {exact_exclusion.strip()!r}")
@@ -422,6 +433,12 @@ def validate_public_boundary(errors):
             "RFC 8949",
             "不是稳定 ABI",
         ),
+        "architecture/adr-0014-source-manifest.html": (
+            "END-SRCM",
+            "实验性来源清单",
+            "禁止模型直接生成规范对象",
+            "正式来源语言",
+        ),
         "development/implementation-roadmap.html": (
             "Rust 1.97.0",
             "C/Rust 双原型",
@@ -441,7 +458,10 @@ def main():
     errors = []
     registry = load_json(REGISTRY_PATH, errors)
     try:
-        spec_text = CORE_SPEC_PATH.read_text() + "\n" + FORMAT_SPEC_PATH.read_text()
+        spec_text = (
+            CORE_SPEC_PATH.read_text() + "\n" + FORMAT_SPEC_PATH.read_text()
+            + "\n" + SOURCE_MANIFEST_SPEC_PATH.read_text()
+        )
     except OSError as exc:
         errors.append(f"spec sources: cannot read: {exc}")
         spec_text = ""
@@ -462,9 +482,9 @@ def main():
         print("\n".join(errors))
         return 1
     print(
-        "PASS: END-CORE and END-FMT 0.1.0-draft have unique clauses, explicit "
+        "PASS: END-CORE, END-FMT and END-SRCM 0.1.0-draft have unique clauses, explicit "
         "maturity, traceable evidence, 10 registered threats, executed semantic "
-        "vectors, END-P1 payload vectors, and P0-LANG-001 language evidence"
+        "vectors, END-P1 payload/source vectors, and P0-LANG-001 language evidence"
     )
     return 0
 

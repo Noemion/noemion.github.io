@@ -24,9 +24,7 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
       <tr><td>覆盖引导模糊测试</td><td>6 个种子，最大 512 字节</td><td>Linux 强制完成 10,000 次 libFuzzer 运行。</td><td>有限轮次不能证明没有漏洞。</td></tr>
       <tr><td>重复构建</td><td>同一主机、同一源码和工具链，两个输出目录</td><td>C 与 Rust 的两次优化二进制摘要分别一致。</td><td>不是跨操作系统或跨编译器复现。</td></tr>
     </tbody></table></div>
-    <p>实验源与边界：<a href="https://github.com/Noemion/noemion.github.io/tree/main/experiments/p0-language">https://github.com/Noemion/noemion.github.io/tree/main/experiments/p0-language</a></p>
-    <p>机器可读结果：<a href="https://github.com/Noemion/noemion.github.io/blob/main/experiments/p0-language/results.json">https://github.com/Noemion/noemion.github.io/blob/main/experiments/p0-language/results.json</a></p>
-    <p>Linux 强制实验：<a href="https://github.com/Noemion/noemion.github.io/actions/runs/29205071270">https://github.com/Noemion/noemion.github.io/actions/runs/29205071270</a></p>
+    <p>复核入口：<a href="https://github.com/Noemion/noemion.github.io/tree/main/experiments/p0-language">实验源码与边界</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/experiments/p0-language/results.json">机器可读结果</a>、<a href="https://github.com/Noemion/noemion.github.io/actions/runs/29205071270">Linux 强制实验记录</a>。</p>
     <p class="callout warning"><strong>成熟度：</strong>这些原型不是生产实现，也不产生规范 Endem；它们只为当前结构切片提供语言与失败边界证据。</p>
   </section>
 
@@ -56,11 +54,11 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
 
   <section class="content-wide">
     <h2>权威机制与采用边界</h2>
-    <p>Rust 所有权让编译器在无垃圾回收器的情况下管理内存，但安全代码仍可能包含逻辑错误，所以规范向量、资源上限和独立 Theor 不能省略：<a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html</a></p>
-    <p>Rust 无符号整数提供显式 <code>checked_add</code> 与 <code>checked_mul</code>；项目采用这些返回失败的运算，而不是依赖调试模式 panic 或发行模式行为：<a href="https://doc.rust-lang.org/stable/std/primitive.u64.html">https://doc.rust-lang.org/stable/std/primitive.u64.html</a></p>
-    <p>GNU GCC 提供 AddressSanitizer、UndefinedBehaviorSanitizer 和覆盖引导插桩；这些继续用于 C 差分原型和未来 FFI 边界：<a href="https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html">https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html</a></p>
-    <p>LLVM libFuzzer 要求目标直接消费任意字节、保持快速和确定，并建议与 Sanitizer 组合；这与 END-FMT 读取器的输入边界一致：<a href="https://llvm.org/docs/LibFuzzer.html">https://llvm.org/docs/LibFuzzer.html</a></p>
-    <p>Cargo 会优先使用 <code>Cargo.lock</code> 中的版本以兼顾复现和依赖解析；这支持锁定依赖，但不自动证明二进制可复现：<a href="https://doc.rust-lang.org/cargo/reference/resolver.html">https://doc.rust-lang.org/cargo/reference/resolver.html</a></p>
+    <p>Rust 所有权让编译器在无垃圾回收器的情况下管理内存，但安全代码仍可能包含逻辑错误，所以规范向量、资源上限和独立 Theor 不能省略。语言机制见 <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">《The Rust Programming Language》的所有权章节</a>。</p>
+    <p>Rust 无符号整数提供显式 <code>checked_add</code> 与 <code>checked_mul</code>；项目采用这些返回失败的运算，而不是依赖调试模式 panic 或发行模式行为。接口见 <a href="https://doc.rust-lang.org/stable/std/primitive.u64.html">Rust <code>u64</code> 标准库文档</a>。</p>
+    <p>GNU GCC 提供 AddressSanitizer、UndefinedBehaviorSanitizer 和覆盖引导插桩；这些继续用于 C 差分原型和未来 FFI 边界。选项见 <a href="https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html">GCC Instrumentation Options</a>。</p>
+    <p>LLVM libFuzzer 要求目标直接消费任意字节、保持快速和确定，并建议与 Sanitizer 组合；这与 END-FMT 读取器的输入边界一致。要求见 <a href="https://llvm.org/docs/LibFuzzer.html">LLVM libFuzzer 文档</a>。</p>
+    <p>Cargo 会优先使用 <code>Cargo.lock</code> 中的版本以兼顾复现和依赖解析；这支持锁定依赖，但不自动证明二进制可复现。行为见 <a href="https://doc.rust-lang.org/cargo/reference/resolver.html">Cargo 依赖解析文档</a>。</p>
   </section>
 
   <section class="content-wide">

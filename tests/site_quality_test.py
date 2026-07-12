@@ -78,6 +78,8 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0010-native-lexicon.html",
     "architecture/adr-0011-endem-container.html",
     "architecture/adr-0012-rust-core-language.html",
+    "architecture/adr-0013-end-p1-payload.html",
+    "architecture/adr-0014-source-manifest.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -222,6 +224,8 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0010-native-lexicon.html",
     "architecture/adr-0011-endem-container.html",
     "architecture/adr-0012-rust-core-language.html",
+    "architecture/adr-0013-end-p1-payload.html",
+    "architecture/adr-0014-source-manifest.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -821,9 +825,9 @@ def validate_public_html(route, text):
         )
     for href, label_markup in EXTERNAL_ANCHOR.findall(text):
         label = normalize_visible_text(HTML_TAG.sub("", label_markup))
-        if label != href:
+        if not label or label == href or label.startswith(("http://", "https://")):
             errors.append(
-                f"{route}: external resource link must display its original URL {href!r}"
+                f"{route}: external resource link must use a descriptive label instead of the raw URL {href!r}"
             )
     return errors
 
@@ -1374,24 +1378,27 @@ def validate_jekyll_sources():
 
     external_boundary_contracts = {
         "architecture/decisions.html": (
-            "A2A 1.0，文档快照 v1.0.1",
+            "A2A 1.0 · v1.0.1 文档快照",
             "补丁号不进入协议协商",
-            "opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/",
+            "github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai",
+            "2026-07-28 发布候选",
             "敏感内容不得默认导出",
         ),
         "components/praxor.html": (
-            "A2A 1.0，文档快照 v1.0.1",
+            "A2A 1.0 · v1.0.1 文档快照",
             "令牌必须绑定目标资源",
-            "opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/",
+            "github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai",
             "默认不导出正文",
         ),
         "development/implementation-roadmap.html": (
             "补丁号不进入协议协商",
+            "包含破坏性变化",
             "默认脱敏的导出器",
             "不进入 Endem 编码、Tekmor 身份或最终决定",
         ),
         "endem/docs/running.md": (
-            "A2A 1.0，文档快照 v1.0.1",
+            "A2A 1.0 · v1.0.1 文档快照",
+            "2026-07-28 发布候选",
             "默认不导出正文",
             "不构成 Tekmor 身份",
         ),

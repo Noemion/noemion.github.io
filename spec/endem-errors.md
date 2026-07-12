@@ -46,12 +46,37 @@
 | `endem.skena.contains_goal_force` | `END-SIT-001` | 中性事态混入目标方向或力量 |
 | `endem.apor.unrecorded_projection_choice` | `END-APR-001` | 存在多个允许投影但未记录未决选择 |
 | `endem.projection.authority_untrusted` | `END-AUT-001` | 模型自述或其他不可信来源试图确认投影 |
+| `endem.semantic.field.type` | `END-FMT-013` | END-P1 字段值不是登记的数据类型 |
+| `endem.semantic.field.missing` | `END-FMT-013` | END-P1 映射缺少必需字段 |
+| `endem.semantic.field.identifier` | `END-FMT-013` | 标识符为空、过长或含禁用字符 |
+| `endem.semantic.field.media_type` | `END-FMT-013` | 来源媒体类型不符合受限格式 |
+| `endem.semantic.field.language` | `END-FMT-013` | 来源语言标签不符合受限格式 |
+| `endem.semantic.field.order` | `END-FMT-013` | 需要规范排序且不重复的集合发生乱序或重复 |
 | `endem.semantic.field.unknown` | `END-FMT-013` | END-P1 映射出现未登记字段键 |
 | `endem.semantic.reference` | `END-FMT-014` | END-P1 出现悬空 symbol、relation、situation 或 source 引用 |
+| `endem.skena.polarity` | `END-SIT-001` | 事态极性不是已登记值 |
+| `endem.telis.mode` | `END-TEL-001` | 目标模式不是当前 Profile 唯一允许的 `kine` |
+| `endem.krin.policy` | `END-KRN-001` | 缺失观察或评估错误策略不是当前 Profile 的固定值 |
+| `endem.krin.match` | `END-KRN-001` | 观察关系匹配方式不是当前 Profile 的固定值 |
+
+## 4. 实验源清单错误码
+
+这些错误发生在实验源清单进入确定性语义映射之前，不属于 `.endem` 对象 ABI。它们仍需绑定条款，以便生产者、测试与文档使用同一拒绝原因。
+
+| 错误码 | 主条款 | 触发条件 |
+| --- | --- | --- |
+| `endem.source.utf8` | `END-SRCM-001` | 源文件不是有效 UTF-8 |
+| `endem.source.limit` | `END-SRCM-001` | 文件或单行超过源清单上限 |
+| `endem.source.directive` | `END-SRCM-002` | 行首指令未登记 |
+| `endem.source.arity` | `END-SRCM-002` | 指令字段数不符合其固定形状 |
+| `endem.source.duplicate` | `END-SRCM-002` | 单例指令重复出现 |
+| `endem.source.integer` | `END-SRCM-002` | 范围字段不是无符号十进制整数 |
+| `endem.source.escape` | `END-SRCM-003` | 使用了未登记或不完整的转义 |
+| `endem.source.role` | `END-SRCM-003` | `relation` 角色缺少名称、等号或 symbol 标识符 |
 
 这些错误码由规范向量检查器和首个本地 Rust 候选执行。候选包含 Poiet 生产侧结构路径与不共享解析代码的 Theor，但错误文本、退出状态和诊断结构仍不构成稳定 ABI。
 
-## 4. 稳定性边界
+## 5. 稳定性边界
 
 上述错误码只在 `END-FMT 0.1.0-draft` 的向量与实验中稳定，尚不构成发行 ABI。提升为稳定接口前必须完成：
 

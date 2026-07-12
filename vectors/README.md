@@ -20,4 +20,4 @@
 - 任何新增向量都必须被 `tests/spec_contract_test.py` 读取。
 - 线格式向量必须固定 END-FMT 与精确 Profile。END-P0 由 `tests/wire_vector_test.py` 读取；END-P1 由 `tests/p1_payload_test.py` 从语义源确定性编码、逐字段解码并比较预期。禁止只比较预生成摘要。
 
-向量只证明列出的行为，不证明实现没有其他缺陷。首个 Rust 候选已由 Poiet 生成接受字节，并由生产侧结构路径和独立 Theor 消费四个 END-P1 向量；后续实现仍必须重复逐字段解释、失败分类和资源边界比较。
+向量只证明列出的行为，不证明实现没有其他缺陷。首个 Rust 候选已由 Poiet 生成两个接受对象，并由生产侧结构路径和独立 Theor 消费全部七个 END-P1 向量；后续实现仍必须重复逐字段解释、失败分类和资源边界比较。

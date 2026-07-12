@@ -35,17 +35,17 @@ permalink: "/architecture/adr-0011-endem-container.html"
   <section class="content-wide">
     <h2>从 ELF 与 GNU 工具链借鉴什么</h2>
     <div class="table-wrap"><table><thead><tr><th>权威机制</th><th>采用部分</th><th>明确排除</th></tr></thead><tbody>
-      <tr><td>ELF 固定头部与节表：<a href="https://gabi.xinuos.com/elf/01-intro.html">https://gabi.xinuos.com/elf/01-intro.html</a></td><td>固定位置的路线图、显式目录和面向不同消费者的解释边界。</td><td>机器地址、指令、装载段、处理器 ABI 和传统链接规则。</td></tr>
-      <tr><td>ELF 条目大小、数量与偏移：<a href="https://gabi.xinuos.com/elf/02-eheader.html">https://gabi.xinuos.com/elf/02-eheader.html</a></td><td>每个结构明确宽度和范围；Endem 额外要求所有组合运算受检。</td><td>扩展编号技巧、宿主结构体映射和处理器相关字节序。</td></tr>
-      <tr><td>GNU readelf 独立于 BFD：<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">https://www.sourceware.org/binutils/docs/binutils/readelf.html</a></td><td>Theor 与生产路径共享规范和向量，不共享解析器或通用内部表示。</td><td>把 Theor 做成 objdump/readelf 的功能复刻。</td></tr>
-      <tr><td>GNU ar 确定性模式：<a href="https://sourceware.org/binutils/docs/binutils/ar-cmdline.html">https://sourceware.org/binutils/docs/binutils/ar-cmdline.html</a></td><td>消除所有者、组、时间戳和文件模式等环境差异。</td><td>把传统归档成员、路径或符号索引直接搬进 Endem。</td></tr>
+      <tr><td><a href="https://gabi.xinuos.com/elf/01-intro.html">ELF 固定头部与节表</a></td><td>固定位置的路线图、显式目录和面向不同消费者的解释边界。</td><td>机器地址、指令、装载段、处理器 ABI 和传统链接规则。</td></tr>
+      <tr><td><a href="https://gabi.xinuos.com/elf/02-eheader.html">ELF 条目大小、数量与偏移</a></td><td>每个结构明确宽度和范围；Endem 额外要求所有组合运算受检。</td><td>扩展编号技巧、宿主结构体映射和处理器相关字节序。</td></tr>
+      <tr><td><a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">GNU readelf 独立于 BFD</a></td><td>Theor 与生产路径共享规范和向量，不共享解析器或通用内部表示。</td><td>把 Theor 做成 objdump/readelf 的功能复刻。</td></tr>
+      <tr><td><a href="https://sourceware.org/binutils/docs/binutils/ar-cmdline.html">GNU ar 确定性模式</a></td><td>消除所有者、组、时间戳和文件模式等环境差异。</td><td>把传统归档成员、路径或符号索引直接搬进 Endem。</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
     <h2>为什么记录载荷使用受限 CBOR</h2>
     <p>重新发明整数、字符串、数组和映射编码会扩大可信解析面，也会重复解决最短整数、长度和键顺序问题。RFC 8949 已定义确定性编码基础，因此 END-P0 只采用一个更小的子集：确定长度、最短表示、无符号整数键、编码字节排序、无浮点、无标签、无重复键。</p>
-    <p>CBOR 不是 Endem 的对象模型。通用 CBOR 数据不能自动成为 Endem；记录种类、字段含义、关系位置、授权、状态和验收全部由 Noemion 规范定义。来源：<a href="https://www.rfc-editor.org/rfc/rfc8949.html">https://www.rfc-editor.org/rfc/rfc8949.html</a></p>
+    <p>CBOR 不是 Endem 的对象模型。通用 CBOR 数据不能自动成为 Endem；记录种类、字段含义、关系位置、授权、状态和验收全部由 Noemion 规范定义。编码依据见 <a href="https://www.rfc-editor.org/rfc/rfc8949.html">RFC 8949</a>。</p>
   </section>
 
   <section class="content-wide">
@@ -78,7 +78,7 @@ permalink: "/architecture/adr-0011-endem-container.html"
 
   <section class="content-band">
     <h2>权威来源</h2>
-    <p>精确字段、条款和接受语义以 END-FMT 规范源 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md</a>、END-P0 Profile <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p0.json">https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p0.json</a>、错误目录 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-errors.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-errors.md</a> 和规范字节向量为准。</p>
+    <p>精确字段、条款和接受语义以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 规范源</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p0.json">END-P0 Profile</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-errors.md">诊断目录</a>和规范字节向量为准。</p>
   </section>
   <div class="next-prev"><a href="adr-0010-native-lexicon.html">← ADR-0010</a><a href="adr-0012-rust-core-language.html">ADR-0012 →</a></div>
 </main>

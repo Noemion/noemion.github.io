@@ -56,9 +56,9 @@ permalink: "/components/praxor.html"
     <h2>外部协议适配</h2>
     <p>MCP、A2A、遥测系统和供应商工具只连接 Praxor 外缘。所有远端描述和返回内容都要先经过本地版本、权限、结构和来源检查。</p>
     <div class="table-wrap"><table><thead><tr><th>外部接口</th><th>进入 Praxor 的方式</th><th>本地边界</th></tr></thead><tbody>
-      <tr><td>MCP 2025-11-25：<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a></td><td>工具说明、参数和结果映射为本地能力请求与观察。</td><td>声明不授予权限；令牌必须绑定目标资源，不能转交给下游服务。</td></tr>
-      <tr><td>A2A 1.0，文档快照 v1.0.1：<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a></td><td>Task、Message 与 Artifact 映射为外部任务记录和候选结果。</td><td>外部状态不改变 Endem；Artifact 不是 Tekmor，也不能形成最终决定。</td></tr>
-      <tr><td>OpenTelemetry 生成式 AI 语义约定：<a href="https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/">https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/</a></td><td>由可替换、带版本的导出器发送允许披露的运行观测。</td><td>输入、输出、工具参数和结果可能含敏感信息；默认不导出正文，也不把外部字段作为本地身份。</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 稳定规范</a></td><td>工具说明、参数和结果映射为本地能力请求与观察。</td><td>声明不授予权限；令牌必须绑定目标资源，不能转交给下游服务。2026-07-28 候选版在正式发布与重验前不进入基线。</td></tr>
+      <tr><td><a href="https://a2a-protocol.org/v1.0.1/specification/">A2A 1.0 · v1.0.1 文档快照</a></td><td>Task、Message 与 Artifact 映射为外部任务记录和候选结果。</td><td>外部状态不改变 Endem；Artifact 不是 Tekmor，也不能形成最终决定。</td></tr>
+      <tr><td><a href="https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai">OpenTelemetry GenAI 语义约定</a></td><td>由可替换、带版本的导出器发送允许披露的运行观测。</td><td>当前状态为 Development；输入、输出、工具参数和结果可能含敏感信息，默认不导出正文，也不把外部字段作为本地身份。</td></tr>
     </tbody></table></div>
     <p>这些资料支持互操作和可观测性，却不定义 Endem、Dromen、Tekmor、权限或验收。第一阶段不接入外部智能体协议、遥测约定或模型 SDK。</p>
   </section>

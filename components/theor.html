@@ -50,8 +50,8 @@ permalink: "/components/theor.html"
 
   <section class="content-wide">
     <h2>GNU 机制的采用边界</h2>
-    <p>GNU <code>readelf</code> 独立于 BFD，可避免 BFD 解析错误影响直接检查；Theor 借鉴这一隔离做法：<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">https://www.sourceware.org/binutils/docs/binutils/readelf.html</a></p>
-    <p>BFD 为多种传统对象格式提供通用内部表示。Endem 第一阶段需要小型、格式专用、逐字段可审计的实现，因此不链接 BFD：<a href="https://sourceware.org/binutils/docs/bfd.html">https://sourceware.org/binutils/docs/bfd.html</a></p>
+    <p>GNU <code>readelf</code> 独立于 BFD，可避免 BFD 解析错误影响直接检查；Theor 借鉴这一隔离做法。依据见 <a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">GNU readelf 手册</a>。</p>
+    <p>BFD 为多种传统对象格式提供通用内部表示。Endem 第一阶段需要小型、格式专用、逐字段可审计的实现，因此不链接 BFD。边界依据见 <a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD 手册</a>。</p>
     <p>这些资料只说明隔离和直接解析的工程先例；Theor 不是 <code>readelf</code> 或 <code>objdump</code> 的功能复刻，也不继承 ELF 地址和机器指令语义。</p>
   </section>
 

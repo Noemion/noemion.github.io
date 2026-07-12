@@ -10,6 +10,11 @@
       "expect": {"result": "semantic-accept", "profile": "END-P1"}
     },
     {
+      "id": "WV-P1-APOR-ACCEPT-001",
+      "hex": "vectors/wire/p1/minimal-apor.hex",
+      "expect": {"result": "semantic-accept", "profile": "END-P1"}
+    },
+    {
       "id": "WV-P1-REJECT-UNKNOWN-FIELD-001",
       "hex": "vectors/wire/p1/unknown-field.hex",
       "expect": {"result": "reject", "code": "endem.semantic.field.unknown", "clause": "END-FMT-013", "layer": "semantic", "semantic_path": "/rhem/8"}
@@ -23,6 +28,16 @@
       "id": "WV-P1-REJECT-SOURCE-RANGE-001",
       "hex": "vectors/wire/p1/source-range.hex",
       "expect": {"result": "reject", "code": "endem.rhem.range_out_of_bounds", "clause": "END-SRC-001", "layer": "semantic", "semantic_path": "/rhem/7"}
+    },
+    {
+      "id": "WV-P1-APOR-REJECT-DUPLICATE-RESOLUTION-001",
+      "hex": "vectors/wire/p1/duplicate-resolution.hex",
+      "expect": {"result": "reject", "code": "endem.semantic.field.order", "clause": "END-FMT-013", "layer": "semantic", "semantic_path": "/apor/items/0/allowed_resolutions"}
+    },
+    {
+      "id": "WV-P1-APOR-REJECT-SOURCE-REFERENCE-001",
+      "hex": "vectors/wire/p1/apor-source-reference.hex",
+      "expect": {"result": "reject", "code": "endem.semantic.reference", "clause": "END-FMT-014", "layer": "semantic", "semantic_path": "/apor/items/0/source_ref"}
     }
   ]
 }

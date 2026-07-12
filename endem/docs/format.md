@@ -48,9 +48,9 @@ apor:
   - "目标读者尚未确认"
 ```
 
-正式来源语法仍需决定注释、包含关系和版本演进。实现不得因为示例类似 YAML 就假定采用 YAML。形成后的实验性 `.endem` 容器由 END-FMT 0.1 定义；END-P1 已固定首个实现所需的六记录字段、枚举、排序和引用闭包，但它仍不是稳定 ABI。
+[ADR-0014](../../architecture/adr-0014-source-manifest.html) 已为首个 Poiet 候选采用逐行来源清单；上面的 YAML 仍只是职责示意，不是该语法。正式来源语言仍需解决注释、包含关系、版本演进和错误恢复。形成后的实验性 `.endem` 容器由 END-FMT 0.1 定义；END-P1 已固定首个实现所需的字段、枚举、排序和引用闭包，但它仍不是稳定 ABI。
 
-格式条款源：[https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)。END-P0 只保留为结构实验；首个实现使用 [https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json)，只允许 nascent、kine、六个关键记录和无压缩载荷。
+精确容器义务见 [END-FMT 条款源](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)。END-P0 只保留为结构实验；首个实现使用 [END-P1 Profile](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json)，只允许 nascent、kine、六个关键记录和无压缩载荷。
 
 ## 候选不能直接成形
 

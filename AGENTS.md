@@ -24,13 +24,14 @@
 - 面向读者的信息架构必须使用中文技术网站常见且职责明确的栏目名称：整体结构与关键决策写“架构设计”或“架构决策”，任务型内容写“指南”，按术语、制品或动作查找的内容写“参考指南”或“参考资料”，Endem 单一应用的连续专题写“使用手册”。不得用孤立的“架构”“文档”“参考”作为无法判断内容类型的页面主标题或导航名称；项目专有英文名和规范标识不受此限制。
 - 正式 HTML 只面向开发者、普通用户和潜在使用者，不得出现提示词、生成过程、用户指令、内部 review、补写过程、页面制作或为了验收而编写等幕后表述；状态信息只说明产品、规范、实现和证据本身。公开产品文案不得使用“本页”“阶段门”“证据门”“放行”“退出证据”或未解释的 IPD 等内部制作与管理术语，必须改写为实际状态、开发计划、完成标准或验证结果；规范性条款、安全约束和学术论证中的专业术语不受此限制，但首次出现仍需直白解释。
 - 网站是 Noemion 后续设计、实现与互操作工作的标准和规范入口；采用“直白解释 + 精确定义”双层表达，不能为了可读性删减术语边界、规范性强度、不变量、失败语义、成熟度或权威来源。
-- 实现义务的唯一条款源维护在 `spec/*.md`，机器可读的规范、Profile、术语、条款、成熟度和验证映射维护在 `spec/registry.json` 与 `spec/profiles/`，正反向量维护在 `vectors/`。公开 HTML 只解释并链接精确源文件，不复制第二套条款；`vectors/semantic/` 的 JSON 只是语义测试外壳，`vectors/wire/` 的十六进制才表达 END-FMT 实验字节，两者都不得冒充稳定 ABI。新增或修改条款时必须同步登记、向量或明确的计划验证，并运行 `tests/spec_contract_test.py`、`tests/semantic_vector_test.py`、`tests/wire_vector_test.py` 与 `tests/p1_payload_test.py`；语义向量只有被执行并比较预期诊断后才能称为验证证据。
+- 实现义务的唯一条款源维护在 `spec/*.md`，机器可读的规范、Profile、术语、条款、成熟度和验证映射维护在 `spec/registry.json` 与 `spec/profiles/`，正反向量维护在 `vectors/`。公开 HTML 只解释并链接精确源文件，不复制第二套条款；`vectors/semantic/` 的 JSON 是语义测试外壳，`vectors/wire/` 的十六进制表达 END-FMT 实验字节，`vectors/source/` 表达实验性 Poiet 来源清单，三者都不得冒充稳定 ABI。新增或修改条款时必须同步登记、向量或明确的计划验证，并运行 `tests/spec_contract_test.py`、`tests/semantic_vector_test.py`、`tests/wire_vector_test.py`、`tests/p1_payload_test.py` 与 `tests/source_manifest_test.py`；向量只有被执行并比较预期后才能称为验证证据。
 - `experiments/` 只保存可重复、可删除的非生产证据。语言实验必须让候选实现读取同一规范字节、报告同一主错误类别，并区分本机重复构建、跨平台复现、Sanitizer、确定性变异和覆盖引导模糊测试；不得用源码行数、单次速度或“内存安全”标签替代实际边界检查。
 - ADR-0012 规定首版 Poiet 与生产读取核心使用 Rust 1.97.0 stable：第一纵向切片必须 `forbid(unsafe_code)`、零第三方 crate、显式 checked arithmetic、release 溢出检查、固定 `rust-toolchain.toml` 和提交 `Cargo.lock`。C 原型只保存在 `experiments/` 作为差分预言机与 fuzz target，不得链接进 Poiet、Theor 或 CLI；正式 Theor 必须另写解析状态机和错误路径。
 - ADR-0013 规定首个实现只写 `profile_id=2` 的 END-P1；END-P0 只保留为结构实验。END-P1 的字段键、嵌套 map、枚举、数组排序和引用闭包以 `spec/endem-format.md` 与 `spec/profiles/end-p1.json` 为准。实现不得增加未登记字段、复用 JSON 键名作为线格式、支持未定义的 mene 区间，或把 P0 结构接受升级为语义接受。
+- ADR-0014 与 `spec/endem-source-manifest.md` 规定首个 Poiet 来源清单；它只是一项可替换的实验输入，不是新的哲学专名、稳定源语言或 Endem 身份。任何语法变更必须同步 `vectors/source/` 并证明仍确定性映射到同一 END-P1；正式来源语言出现后直接删除该入口。
 - 架构组件、动作职责和页面组件都必须说明存在必要性、自身价值、上游输入或触发者、下游消费者、与相邻组件的边界，以及可以省略、合并或停止建设的条件；不得仅为架构图对称、目录完整或视觉填充保留无人消费的产物、重复动作或无信息价值的界面元素。
 - Praxor 外侧的控制平面负责上下文装配、类型化能力、策略检查、观察反馈、预算与人工升级，不属于确定性 Poiet。模型只能提出不可信来源候选、计划和能力参数；不得决定 Endem/Synem 规范字节、修改已封装或已签名制品、自行扩大权限、删除 `apor` 项或宣告验收通过。涉及智能体工程的页面必须同时说明 Praxor、控制平面、Tekmor 与人工验收的责任边界。
-- 外部书目、论文、规范、下载和其他资源链接必须在正文中保留可见的原始 URL，不得只用概括性标题替代链接本身；解释与 URL 分开书写。内部路由仍使用能说明目标内容的链接文字。
+- 外部书目、论文、规范、下载和其他资源链接必须使用能说明内容或来源的可读标签，不得把完整 URL 当作正文链接文字。链接目标仍保留原始地址，读者可以通过浏览器检查；内部路由同样使用能说明目标内容的标签。
 - Endem 应用入口与使用手册分离：`endem/index.html` 是唯一应用项目页，`endem/docs/*.md` 是唯一 CLI 手册源。不得再创建并列工具树、旧工具路由或兼容入口。
 - `endem/index.html` 必须保持 HTML 源，并按 `design-system/internal-tools.md` 使用统一应用视觉；`endem/docs/*.md` 使用纯通用 Markdown 正文。八个动作可以拥有有限的状态色和图形强调，但不能被包装为八个独立应用、命令品牌或权限域。
 - Endem 应用页“继续阅读”章节只放置可点击资源入口，不得在卡片之后追加孤立的候选接口。接口状态、开发顺序或候选契约必须放在“当前状态”或“它不会做什么”的明确上下文中，且不能与全站未发布声明重复。
@@ -39,6 +40,6 @@
 - 全站顶部一级入口在悬停与键盘聚焦时展开分组面板；卡片标题、箭头和表面必须提供一致悬停反馈，并支持 `prefers-reduced-motion`。页面类型映射、视觉元素和验收细则维护在 `sitewide-design-system.md`，README 只保留公开层面的概要。
 - 修改任何页面、布局、目录、CSS 或交互动效前，必须先读取 `design-system/README.md`，再按其中的路由表读取目标 `page_role` 或组件对应的设计文档；改动跨越多个页面角色时必须同时遵守所有相关文档。新增页面范式时先新增设计文档和路由，不得只在实现中形成隐式规则。
 - 公开页面不得把设计提案、候选名称、未来能力、论文、专利、软著或标准化意图表述为已实现或已获认可的成果。
-- 规范、登记或向量变化后先运行 `python3 tests/spec_contract_test.py`、`python3 tests/semantic_vector_test.py`、`python3 tests/wire_vector_test.py` 与 `python3 tests/p1_payload_test.py`；路由或页面角色变化后运行 `python3 tests/site_quality_test.py`。发布前构建 `_site`，再运行 `python3 tests/site_quality_test.py _site` 并检查浏览器实际渲染。
+- 规范、登记或向量变化后先运行 `python3 tests/spec_contract_test.py`、`python3 tests/semantic_vector_test.py`、`python3 tests/wire_vector_test.py`、`python3 tests/p1_payload_test.py` 与 `python3 tests/source_manifest_test.py`；路由或页面角色变化后运行 `python3 tests/site_quality_test.py`。发布前构建 `_site`，再运行 `python3 tests/site_quality_test.py _site` 并检查浏览器实际渲染。
 - 网页改动完成且源码检查、Jekyll 构建、构建产物检查与浏览器验收均通过后，必须主动提交并推送到 GitHub，确认 GitHub Pages 构建状态，并向用户提供可直接查看的在线地址；除非用户明确要求只保留本地改动。发布所需的认证、权限或工具缺失时必须立即说明阻塞，不能把“本地完成”当作最终完成。
 - 内容审查状态记录在 `content-quality-audit.md`；项目级要求变化时同步本文件或 README，避免规则散落。

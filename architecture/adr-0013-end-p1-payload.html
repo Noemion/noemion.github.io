@@ -34,14 +34,14 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
       <li>第一切片只编码 <code>kine</code>。<code>mene</code> 仍属于 END-CORE，但在时间区间模型另行决定前不进入 END-P1。</li>
       <li><code>apor</code> 即使为空也编码为含显式 items 数组的记录；非空项保存候选、冲突、影响范围、允许的解决方式和决定主体。</li>
     </ul>
-    <p>机器可读 Profile：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json</a></p>
+    <p>字段、枚举与上限见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">机器可读 END-P1 Profile</a>。</p>
   </section>
 
   <section class="content-wide">
     <h2>外部格式只提供机制</h2>
-    <p>RFC 8949 区分 well-formed、valid 与 application-expected 三层接受，并允许应用定义自己的具体数据模型。END-P1 采用这种分层和确定性编码，不采用通用 CBOR 的全部类型或开放扩展：<a href="https://www.rfc-editor.org/rfc/rfc8949.html">https://www.rfc-editor.org/rfc/rfc8949.html</a></p>
-    <p>语言字段按 BCP 47 保存，媒体字段按媒体类型注册结构保存；它们只描述来源，不证明投影正确：<a href="https://www.rfc-editor.org/rfc/rfc5646.html">https://www.rfc-editor.org/rfc/rfc5646.html</a>；<a href="https://www.rfc-editor.org/rfc/rfc6838.html">https://www.rfc-editor.org/rfc/rfc6838.html</a></p>
-    <p>Unicode 标量范围用于可重放来源位置，不能把字节、UTF-16 code unit 和用户可见字素混为同一单位：<a href="https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-2/">https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-2/</a></p>
+    <p><a href="https://www.rfc-editor.org/rfc/rfc8949.html">RFC 8949</a> 区分 well-formed、valid 与 application-expected 三层接受，并允许应用定义自己的具体数据模型。END-P1 采用这种分层和确定性编码，不采用通用 CBOR 的全部类型或开放扩展。</p>
+    <p>语言字段遵守 <a href="https://www.rfc-editor.org/rfc/rfc5646.html">BCP 47</a>，媒体字段遵守 <a href="https://www.rfc-editor.org/rfc/rfc6838.html">RFC 6838 媒体类型结构</a>。两者只描述来源，不证明投影正确。</p>
+    <p>来源位置使用 Unicode 标量范围，不能把字节、UTF-16 code unit 和用户可见字素混为同一单位。单位定义见 <a href="https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-2/">Unicode 17 核心规范第 2 章</a>。</p>
   </section>
 
   <section class="content-wide">
@@ -53,5 +53,5 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
     <h2>进入实现的条件</h2>
     <p>END-P1 只有在完整语义接受向量、未知字段拒绝、悬空引用拒绝和来源范围拒绝都形成规范字节，并由独立测试解码后，才允许建立生产 Poiet 工作区。该条件已经满足：首个本地 Rust 候选分别重写 Poiet 与 Theor 路径，测试脚本没有链接进实现。远端仓库与稳定符合性声明仍未形成。</p>
   </section>
-  <div class="next-prev"><a href="adr-0012-rust-core-language.html">← ADR-0012</a><a href="open-questions.html">开放问题 →</a></div>
+  <div class="next-prev"><a href="adr-0012-rust-core-language.html">← ADR-0012</a><a href="adr-0014-source-manifest.html">ADR-0014 →</a></div>
 </main>

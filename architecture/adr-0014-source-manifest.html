@@ -1,0 +1,57 @@
+---
+layout: default
+title: "ADR-0014 · 首个 Poiet 来源清单"
+page_role: "content"
+footer_text: "Noemion · ADR-0014"
+permalink: "/architecture/adr-0014-source-manifest.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0014</span></nav>
+  <header class="content-introduction"><h1>ADR-0014 · 首个 Poiet 来源清单</h1><p>用一份有限、显式的来源清单连接人类表达与 END-P1，同时禁止模型直接生成规范对象。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">END-SRCM 0.1</span><span class="badge">Experimental Input</span><span class="badge">Replaceable</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">首个 <code>poie</code> 接受 UTF-8、制表符分列的实验性来源清单。清单同时保存原始自然语言和已经授权的结构投影；Poiet 只做确定性解析、验证和写入，不调用模型补齐意义。</p>
+    <p>这项决定关闭“首个候选怎样进入 Poiet”的实现接口，但不把 <code>.ends</code> 冻结成长期源语言。未来正式语言出现时直接删除这一入口，不保留兼容垫片。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么不能直接接收 Prompt 或模型 JSON</h2>
+    <div class="table-wrap"><table><thead><tr><th>输入方式</th><th>关键问题</th><th>本决定怎样处理</th></tr></thead><tbody>
+      <tr><td>自由 Prompt</td><td>来源记号、已确认投影和未决候选混在一起，写入器无法判断谁有权决定。</td><td>原文进入 rhem；确认关系单独列出；未决选择进入 apor。</td></tr>
+      <tr><td>模型 JSON</td><td>结构合法仍可能事实错误、引用悬空或越权，模型也会影响字段顺序和默认值。</td><td>模型只能在上游提出候选；Poiet 重新解析、验证并决定规范字节。</td></tr>
+      <tr><td>直接手写 CBOR</td><td>作者可以绕过字段、排序、来源和授权检查。</td><td>只有 Poiet Writer 产生 END-P1；来源清单从不携带布局指令。</td></tr>
+      <tr><td>大型通用 IR</td><td>引入尚无消费者的类型、依赖和扩展机制，扩大可信核心。</td><td>只登记首个真实切片需要的十种指令，未知指令关闭失败。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>语法边界</h2>
+    <p>每个非注释行由制表符分成一个指令和固定参数。单例指令是 <code>rhem/root/telis/krin</code>；可重复指令是 <code>symbol/relation/situation/phain/tekmor/apor</code>。文本只解释四种反斜杠转义，复合标识符集合只使用逗号分隔。</p>
+    <p class="callout"><strong>名称边界：</strong>“来源清单”是直白工程名称，不再创造新的哲学专名。<code>.ends</code> 只是实验后缀，不是 Endem 对象扩展名或身份的一部分。</p>
+    <p>完整指令、基数、转义、资源与退出条件见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-source-manifest.md">END-SRCM 条款源</a>。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>确定性与授权</h2>
+    <ul>
+      <li>输入顺序不决定对象字节；Poiet 按 END-P1 的稳定 ID 和 CBOR 规则排序。</li>
+      <li>重复身份、未知引用、越界来源和未登记枚举必须拒绝，不能由后项覆盖。</li>
+      <li>规则或具名权威确认的关系才能进入 semion；其他可表达候选保留在 apor。</li>
+      <li>来源清单不包含 profile、offset、length、record ID 或 CBOR 键等布局控制项。</li>
+      <li>结构接受、语义接受、可信签署和目标满足继续是四种不同判断。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>验证与停止条件</h2>
+    <p>最小清单必须先映射到现有语义接受向量，再逐字节生成 END-P1 接受对象。未知指令、错误参数数量、重复单例和无效转义必须稳定拒绝；Poiet 与 Theor 继续只共享规范和向量。</p>
+    <p>当正式来源语言具备注释、包含、版本演进、歧义模型、错误恢复和独立语料时，删除来源清单。若清单不能表达新的真实任务，也应回到规范，而不是增加隐式默认或模型补全。</p>
+  </section>
+
+  <section class="content-band">
+    <h2>成熟度边界</h2>
+    <p>ADR-0014 只采用首个实验输入。它不承诺通用自然语言编译、稳定 CLI、包格式或向后兼容；本地 Rust 候选已经实现该语法，但远端实现仓库尚未公开。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0013-end-p1-payload.html">← ADR-0013</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

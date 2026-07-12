@@ -53,12 +53,12 @@ permalink: "/architecture/adr-0010-native-lexicon.html"
     <h2>名称审计</h2>
     <p>本次对照 C/C++、Rust、Go、Python、Java、ECMAScript、Swift 与 Kotlin 的关键字集合。项目也查询了 PyPI、npm 与 crates.io 的精确包名。</p>
     <p>现行领域词没有关键字冲突，查询时也没有形成跨三大注册表的强占用。该结果只降低工程混淆，不构成商标或未来包名可用性保证。</p>
-    <p>关键字资料：<a href="https://doc.rust-lang.org/stable/reference/keywords.html">https://doc.rust-lang.org/stable/reference/keywords.html</a>、<a href="https://go.dev/ref/spec#Keywords">https://go.dev/ref/spec#Keywords</a>、<a href="https://docs.python.org/3/reference/lexical_analysis.html#keywords">https://docs.python.org/3/reference/lexical_analysis.html#keywords</a>、<a href="https://docs.swift.org/swift-book/ReferenceManual/LexicalStructure.html">https://docs.swift.org/swift-book/ReferenceManual/LexicalStructure.html</a>、<a href="https://kotlinlang.org/docs/keyword-reference.html">https://kotlinlang.org/docs/keyword-reference.html</a></p>
+    <p>关键字集合分别核对 <a href="https://doc.rust-lang.org/stable/reference/keywords.html">Rust Reference</a>、<a href="https://go.dev/ref/spec#Keywords">Go Specification</a>、<a href="https://docs.python.org/3/reference/lexical_analysis.html#keywords">Python Reference</a>、<a href="https://docs.swift.org/swift-book/ReferenceManual/LexicalStructure.html">Swift Reference</a> 与 <a href="https://kotlinlang.org/docs/keyword-reference.html">Kotlin Reference</a>。</p>
   </section>
 
   <section class="content-band">
     <h2>仍未冻结的内容</h2>
-    <p>ADR-0011 已为六个语义面采用实验性记录编号、固定前导和目录。文本语法、记录内部字段、<code>phain</code> 编码、量化与时间模型、<code>krin</code> 求值语言、扩展注册表、摘要与签名算法和稳定 ABI 仍需规范向量、两个独立解释实现和对抗测试。</p>
+    <p>ADR-0011 已采用实验性容器，ADR-0013 已关闭 END-P1 记录字段，ADR-0014 已关闭首个来源清单。正式来源语言、<code>phain</code> 编码、量化与时间模型、<code>krin</code> 求值语言、扩展注册表、摘要与签名算法和稳定 ABI 仍需独立规范与对抗测试。</p>
   </section>
   <div class="next-prev"><a href="adr-0009-propositional-kernel.html">← ADR-0009</a><a href="adr-0011-endem-container.html">ADR-0011 →</a></div>
 </main>

@@ -63,12 +63,12 @@ Praxor 为一次会话建立 Dromen。Dromen 只披露当前任务所需的 Ende
 
 MCP 和 A2A 只适合作为 Praxor 外缘的协议适配器：
 
-- MCP 2025-11-25：[https://modelcontextprotocol.io/specification/2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25)
-- A2A 1.0，文档快照 v1.0.1：[https://a2a-protocol.org/v1.0.1/specification/](https://a2a-protocol.org/v1.0.1/specification/)
+- [MCP 2025-11-25 稳定规范](https://modelcontextprotocol.io/specification/2025-11-25)；2026-07-28 发布候选含破坏性变化，正式发布并重验前不采用
+- [A2A 1.0 · v1.0.1 文档快照](https://a2a-protocol.org/v1.0.1/specification/)
 
 远端工具说明、Agent Card、任务状态、参数结构和返回内容均是不可信声明，不能直接成为能力授权、Endem 状态或最终决定。A2A 的补丁号只固定查阅的文档快照，不进入协议协商。
 
-运行观测以后可以通过带版本的 OpenTelemetry 生成式 AI 语义约定导出：[https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/](https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/)。输入、输出和工具数据可能含有敏感信息，因此默认不导出正文；外部字段也不构成 Tekmor 身份。
+运行观测以后可以通过带版本的 [OpenTelemetry GenAI 语义约定](https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai)导出。该约定当前处于 Development；输入、输出和工具数据可能含有敏感信息，因此默认不导出正文，外部字段也不构成 Tekmor 身份。
 
 ## Tekmor 与最终决定
 

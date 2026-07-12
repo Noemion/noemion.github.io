@@ -21,6 +21,16 @@
       "wire_status": "experimental-draft",
       "path": "spec/endem-format.md",
       "scope": "Endem fixed header, record directory, deterministic payload subset, P0 structural acceptance and P1 closed semantic payload"
+    },
+    {
+      "spec_id": "END-SRCM",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "decision_status": "accepted-draft",
+      "implementation_status": "local-candidate-unpublished",
+      "wire_status": "not-applicable",
+      "path": "spec/endem-source-manifest.md",
+      "scope": "Experimental deterministic Poiet source manifest mapped to END-P1"
     }
   ],
   "supporting_documents": [
@@ -79,7 +89,8 @@
     {"term": "apor", "kind": "semantic-facet", "decision_status": "accepted", "definition": "可表达但尚未获授权决定的投影缺口"},
     {"term": "wire-format", "kind": "interface", "decision_status": "accepted-draft", "definition": "END-FMT 定义的实验性物理字节编码；尚非稳定 ABI"},
     {"term": "END-P0", "kind": "profile", "decision_status": "experimental", "definition": "只用于结构向量和跨语言实验的有限符合性 Profile"},
-    {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "用于首个实现纵向切片的封闭六记录语义载荷 Profile"}
+    {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "用于首个实现纵向切片的封闭六记录语义载荷 Profile"},
+    {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 Poiet 使用的实验性逐行来源清单；不是稳定源语言"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -495,7 +506,8 @@
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/manifest.json"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/minimal-semantic.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/unknown-field.hex"}
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/unknown-field.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/duplicate-resolution.hex"}
       ]
     },
     {
@@ -510,7 +522,91 @@
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/manifest.json"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/minimal-semantic.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/dangling-reference.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/source-range.hex"}
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/source-range.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/apor-source-reference.hex"}
+      ]
+    },
+    {
+      "id": "END-SRCM-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "local-candidate-unpublished",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet source reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "spec/endem-source-manifest.md"},
+        {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
+        {"status": "planned", "ref": "peira:source-size-boundaries"}
+      ]
+    },
+    {
+      "id": "END-SRCM-002",
+      "decision_status": "accepted-draft",
+      "implementation_status": "local-candidate-unpublished",
+      "evidence_status": "covered",
+      "failure_owner": "Poiet source reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/source/minimal.ends"},
+        {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"}
+      ]
+    },
+    {
+      "id": "END-SRCM-003",
+      "decision_status": "accepted-draft",
+      "implementation_status": "local-candidate-unpublished",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet source reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
+        {"status": "planned", "ref": "peira:source-escape-boundaries"}
+      ]
+    },
+    {
+      "id": "END-SRCM-004",
+      "decision_status": "accepted-draft",
+      "implementation_status": "local-candidate-unpublished",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/source/minimal.ends"},
+        {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/minimal-semantic.hex"},
+        {"status": "planned", "ref": "peira:source-order-independence"}
+      ]
+    },
+    {
+      "id": "END-SRCM-005",
+      "decision_status": "accepted-draft",
+      "implementation_status": "local-candidate-unpublished",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet and upstream authoring authority",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-SRCM-006",
+      "decision_status": "accepted-draft",
+      "implementation_status": "local-candidate-unpublished",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
+        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
+        {"status": "planned", "ref": "peira:source-atomic-failure"}
+      ]
+    },
+    {
+      "id": "END-SRCM-007",
+      "decision_status": "accepted-draft",
+      "implementation_status": "local-candidate-unpublished",
+      "evidence_status": "partial",
+      "failure_owner": "release validation",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "architecture/adr-0014-source-manifest.html"},
+        {"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     }
   ]

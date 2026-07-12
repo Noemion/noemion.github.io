@@ -7,11 +7,11 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的原生语义、实验性容器、封闭载荷、安全核心语言、单一命令面和组件边界。</p><div class="badges"><span class="badge">ADR-0010 Accepted</span><span class="badge">ADR-0012 Accepted</span><span class="badge">ADR-0013 Draft</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的原生语义、实验性容器、来源清单、安全核心语言、单一命令面和组件边界。</p><div class="badges"><span class="badge">ADR-0010 Accepted</span><span class="badge">ADR-0012 Accepted</span><span class="badge">ADR-0014 Draft</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010：原生词汇与事态分层</a>定义六个语义面；<a href="adr-0011-endem-container.html">ADR-0011：Endem 实验性容器格式</a>定义字节边界；<a href="adr-0012-rust-core-language.html">ADR-0012：首版安全核心采用 Rust</a>选择实现语言；<a href="adr-0013-end-p1-payload.html">ADR-0013：END-P1 封闭语义载荷</a>为第一实现关闭字段、排序和引用接口。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>定义六个语义面；<a href="adr-0011-endem-container.html">ADR-0011</a>定义字节边界；<a href="adr-0012-rust-core-language.html">ADR-0012</a>选择 Rust；<a href="adr-0013-end-p1-payload.html">ADR-0013</a>关闭 END-P1 载荷；<a href="adr-0014-source-manifest.html">ADR-0014</a>定义首个 Poiet 来源清单。</p>
     <p>被保留的安全原则已经重新映射到 Poiet、Theor、Praxor、Dromen 和 Tekmor。历史词只解释为什么迁移，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -31,6 +31,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0011-endem-container.html">ADR-0011 Endem 实验性容器格式</a></td><td>Accepted Draft</td><td>采用固定前导、定宽目录、六记录、受限确定性 CBOR 与 END-P0；尚非稳定 ABI。</td></tr>
       <tr><td><a href="adr-0012-rust-core-language.html">ADR-0012 首版安全核心采用 Rust</a></td><td>Accepted</td><td>Poiet 与生产读取核心固定 Rust 1.97.0、安全子集和零第三方依赖；C 只作非生产差分预言机。</td></tr>
       <tr><td><a href="adr-0013-end-p1-payload.html">ADR-0013 END-P1 封闭语义载荷</a></td><td>Accepted Draft</td><td>END-P0 保留为结构实验；END-P1 为首个实现固定六记录字段、枚举、规范排序和引用闭包。</td></tr>
+      <tr><td><a href="adr-0014-source-manifest.html">ADR-0014 首个 Poiet 来源清单</a></td><td>Accepted Draft</td><td>用有限来源清单连接自然语言来源与授权投影；模型不能直接生成规范对象，正式来源语言出现后删除该入口。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -49,6 +50,7 @@ permalink: "/architecture/decisions.html"
       <tr><td>实验性容器</td><td>END-FMT 0.1 采用 64 字节前导、48 字节目录项、六种关键记录和 END-P0 有限上限。</td><td>规范字节、错误分类、Poiet/Theor 语言实验；不构成稳定 ABI。</td></tr>
       <tr><td>首版核心语言</td><td>Poiet 与生产读取核心使用 Rust 1.97.0，禁止 unsafe，首条切片不引入第三方 crate。</td><td>实现仓库、构建锁、受检算术、模糊测试和供应链边界。</td></tr>
       <tr><td>首个实现 Profile</td><td>END-P1 使用 profile 2，封闭六记录字段并只支持 nascent 与 kine。</td><td>Poiet/Theor 字段解析、交叉引用、完整载荷向量；不构成稳定 ABI。</td></tr>
+      <tr><td>首个来源输入</td><td>END-SRCM 使用 UTF-8 逐行来源清单，显式分开来源、授权投影和 apor。</td><td>Poiet 输入解析与失败定位；不是稳定源语言或对象身份。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -68,11 +70,11 @@ permalink: "/architecture/decisions.html"
     <h2>外部机制的采用边界</h2>
     <p>以下资料只提供可复查的机制先例。每一项都同时写明采用部分和禁止推导，外部版本变化不能静默改变 Endem。</p>
     <div class="table-wrap"><table><thead><tr><th>资料与复核基线</th><th>Noemion 采用什么</th><th>不能据此推出什么</th></tr></thead><tbody>
-      <tr><td>ELF 对象格式：<a href="https://gabi.xinuos.com/elf/">https://gabi.xinuos.com/elf/</a><br>GNU Binutils 2.46：<a href="https://sourceware.org/binutils/docs/">https://sourceware.org/binutils/docs/</a></td><td>结构视图与装载视图分离、显式引用，以及独立于 BFD 的第二条读取路径。</td><td>不继承机器地址、指令、弱符号规则，也不让 BFD 的通用表示进入第一阶段可信核心。</td></tr>
-      <tr><td>MCP 2025-11-25：<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a></td><td>把远端工具说明、注解和结果作为版本化适配输入，并校验令牌受众与最小权限。</td><td>工具声明不等于本地授权，远端结果不等于事实或验收。</td></tr>
-      <tr><td>A2A 1.0，文档快照 v1.0.1：<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a></td><td>借用 Task、Message 与 Artifact 交换跨系统工作状态和结果。</td><td>补丁号不进入协议协商；外部 Task 或 Artifact 也不成为 Endem 身份、状态或验收决定。</td></tr>
-      <tr><td>OpenTelemetry 生成式 AI 语义约定：<a href="https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/">https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/</a></td><td>以后可由带版本、可脱敏的导出器映射运行观测。</td><td>这些仍在迁移和演进的字段不进入 Endem 编码、Tekmor 身份或最终决定；敏感内容不得默认导出。</td></tr>
-      <tr><td>智能体控制平面工程实践：<a href="https://openai.com/index/harness-engineering/">https://openai.com/index/harness-engineering/</a></td><td>借鉴环境可读性、真实反馈和机械检查。</td><td>实践文章不定义项目格式、能力边界、成熟度或实现证据。</td></tr>
+      <tr><td><a href="https://gabi.xinuos.com/elf/">ELF 对象格式</a><br><a href="https://sourceware.org/binutils/">GNU Binutils 2.46.1</a></td><td>结构视图与装载视图分离、显式引用，以及独立于 BFD 的第二条读取路径。</td><td>不继承机器地址、指令、弱符号规则，也不让 BFD 的通用表示进入第一阶段可信核心。</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 稳定规范</a><br><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">2026-07-28 发布候选</a></td><td>当前只把稳定版的远端工具说明、注解和结果作为版本化适配输入；同时跟踪候选版的无状态核心、扩展和授权变化。</td><td>候选版在 2026-07-28 正式发布并通过兼容、安全与降级测试前，不进入实现基线；工具声明也不等于本地授权。</td></tr>
+      <tr><td><a href="https://a2a-protocol.org/v1.0.1/specification/">A2A 1.0 · v1.0.1 文档快照</a></td><td>借用 Task、Message 与 Artifact 交换跨系统工作状态和结果。</td><td>补丁号不进入协议协商；外部 Task 或 Artifact 也不成为 Endem 身份、状态或验收决定。</td></tr>
+      <tr><td><a href="https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai">OpenTelemetry GenAI 语义约定</a></td><td>以后可由带版本、可脱敏的导出器映射运行观测。</td><td>该约定仍处于 Development，不进入 Endem 编码、Tekmor 身份或最终决定；敏感内容不得默认导出。</td></tr>
+      <tr><td><a href="https://openai.com/index/harness-engineering/">智能体控制平面工程实践</a></td><td>借鉴环境可读性、真实反馈和机械检查。</td><td>实践文章不定义项目格式、能力边界、成熟度或实现证据。</td></tr>
     </tbody></table></div>
     <p class="callout"><strong>复核日期：</strong>2026-07-13。适配器必须固定所用规范版本；升级时重新运行兼容、安全、重放、取消和权限测试。</p>
   </section>

@@ -78,11 +78,10 @@ def checked_mul(left, right, code):
 
 
 class CborReader:
-    def __init__(self, data, profile):
+    def __init__(self, data, profile, budget):
         self.data = data
         self.profile = profile
-        self.allocated = 0
-        self.items = 0
+        self.budget = budget
 
     def take(self, position, length):
         end = position + length
@@ -105,8 +104,8 @@ class CborReader:
         return value, position
 
     def item(self, position=0, depth=0):
-        self.items += 1
-        if self.items > self.profile["max_graph_nodes"]:
+        self.budget["items"] += 1
+        if self.budget["items"] > self.profile["max_graph_nodes"]:
             fail("endem.wire.profile.limit")
         if depth > self.profile["max_nesting_depth"]:
             fail("endem.wire.profile.limit")
@@ -124,8 +123,8 @@ class CborReader:
             if length > self.profile["max_string_bytes"]:
                 fail("endem.wire.profile.limit")
             raw, position = self.take(position, length)
-            self.allocated += length
-            if self.allocated > self.profile["max_total_allocation_bytes"]:
+            self.budget["allocated"] += length
+            if self.budget["allocated"] > self.profile["max_total_allocation_bytes"]:
                 fail("endem.wire.profile.limit")
             if major == 3:
                 try:
@@ -137,6 +136,9 @@ class CborReader:
         if major in (4, 5):
             length, position = self.argument(position, additional)
             if length > self.profile["max_graph_edges"]:
+                fail("endem.wire.profile.limit")
+            self.budget["edges"] += length
+            if self.budget["edges"] > self.profile["max_graph_edges"]:
                 fail("endem.wire.profile.limit")
             if major == 4:
                 values = []
@@ -166,8 +168,8 @@ class CborReader:
         fail("endem.wire.payload.cbor")
 
 
-def validate_payload(payload, profile, file_offset):
-    reader = CborReader(payload, profile)
+def validate_payload(payload, profile, budget, file_offset):
+    reader = CborReader(payload, profile, budget)
     value, end = reader.item()
     if end != len(payload):
         fail("endem.wire.payload.cbor")
@@ -249,8 +251,9 @@ def validate_wire(data, profile_document):
     if previous_end != len(data):
         fail("endem.wire.record.padding", previous_end, len(data))
 
+    budget = {"items": 0, "edges": 0, "allocated": 0}
     for _, _, start, end in entries:
-        validate_payload(data[start:end], limits, start)
+        validate_payload(data[start:end], limits, budget, start)
     return {"result": "structural-accept", "semantic": "not-evaluated"}
 
 

@@ -75,7 +75,7 @@ tools/       最小 CLI 外壳与一致性运行器
 ## 参考与采用边界
 
 - ELF gABI：https://gabi.xinuos.com/elf/
-- GNU Binutils 2.46 文档：https://sourceware.org/binutils/docs/
+- GNU Binutils 2.46.1 当前发行与 2.46 文档：https://sourceware.org/binutils/
 - GNU `readelf` 独立解析边界：https://www.sourceware.org/binutils/docs/binutils/readelf.html
 - GNU `ar` 确定性模式：https://sourceware.org/binutils/docs/binutils/ar-cmdline.html
 - GDB separate debug files：https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Separate-Debug-Files.html
@@ -83,7 +83,7 @@ tools/       最小 CLI 外壳与一致性运行器
 - MCP 2025-11-25：https://modelcontextprotocol.io/specification/2025-11-25
 - A2A 1.0 规范，文档快照 v1.0.1：https://a2a-protocol.org/v1.0.1/specification/
 - JSON Schema 2020-12：https://json-schema.org/draft/2020-12
-- OpenTelemetry 生成式 AI 语义约定迁移说明：https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/
+- OpenTelemetry GenAI 语义约定（Development）：https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai
 - OpenTelemetry GenAI 独立语义仓库：https://github.com/open-telemetry/semantic-conventions-genai
 
 ## 后果
