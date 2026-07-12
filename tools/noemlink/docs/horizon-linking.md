@@ -1,8 +1,8 @@
 ---
 layout: "manual"
-title: "HOBJ 链接 · noemlink 文档 · Noemion"
+title: "HOBJ 链接 · noemlink 使用手册 · Noemion"
 page_role: "docs-topic"
-footer_text: "Noemion · noemlink documentation"
+footer_text: "Noemion · noemlink 使用手册"
 permalink: "/tools/noemlink/docs/horizon-linking.html"
 manual_id: "noemlink"
 manual_group: "linking"

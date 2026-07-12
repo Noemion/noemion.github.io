@@ -33,7 +33,7 @@ AcceptanceDecision = Decide(Policy, CandidateAssessment, EvidenceClosure, Author
     <p>实现必须能表达已知、未指定、可推断、歧义、冲突、未解决和本体库外等状态。硬约束与软偏好分离，推断权限至少区分允许推断、禁止推断和需要确认。证据不足不能被模型置信度替换为唯一结论。</p>
   </section>
   <section class="content-wide">
-    <h2>当前设计：语义关系、来源与满足环境</h2>
+    <h2>设计方案：语义关系、来源与满足环境</h2>
     <p>根据<a href="../about/intellectual-foundations.html">思想与方法基础</a>提出的分析框架，当前研究提议把经常混用的四类记录关系分开。它们并非同一种“身份”；此处只登记待验证的结构，不构成已冻结字段或编码。</p>
     <div class="table-wrap"><table><thead><tr><th>关系</th><th>回答的问题</th><th>需要保留的证据</th></tr></thead><tbody>
       <tr><td>Source Expression</td><td>用户、规范或工具实际给出了什么表达？</td><td>来源、跨度、版本、许可和原始上下文。</td></tr>
@@ -44,15 +44,15 @@ AcceptanceDecision = Decide(Policy, CandidateAssessment, EvidenceClosure, Author
     <p>语义来源还应区分明示内容、结构蕴涵、可撤销的语境推论、工具推导和模型候选。它们不能共享同一确认权限；Candidate Envelope 通过类型检查也不等于来源忠实。满足判断只能读取配置明确登记的证据、版本、能力和背景假设。</p>
   </section>
   <section class="content-band">
-    <h2>当前设计：混合语义与分层 IR</h2>
+    <h2>设计方案：混合语义与分层 IR</h2>
     <p>当前提案以符号语义图和带权约束承担边界与验证，以语义原型或连续残差表达难以完全离散化的要求。高层语义、规范化编码、后端适配和行为请求等分层视图仍只是研究候选；各层是否需要独立形式、怎样命名以及如何保持等价都须规范化。</p>
   </section>
   <section class="content-band">
-    <h2>尚待确定：最小类型与连续表示</h2>
+    <h2>待定事项：最小类型与连续表示</h2>
     <p>核心类型集、连续残差互操作、评价器接口和模型原生载荷边界尚未冻结，见<a href="../architecture/open-questions.html">开放问题</a>。</p>
   </section>
   <section class="content-rows">
-    <h2>概要设计：规范不变量与验证路线</h2>
+    <h2>设计概要：规范不变量与验证路线</h2>
     <ul>
       <li>每个硬约束必须具有稳定标识、作用域、来源和可判定或显式不可判定状态；不得在实现化中降级为软偏好。</li>
       <li>每个推断结果必须能追溯允许它的权限、规则和证据；禁止推断与需要确认状态不能被模型置信度覆盖。</li>
@@ -61,5 +61,5 @@ AcceptanceDecision = Decide(Policy, CandidateAssessment, EvidenceClosure, Author
     </ul>
     <p>研究验证需要覆盖表达能力、来源忠实性、歧义保留、错误确定率、约束冲突定位、跨模型/Fulfillment Runtime 契约等价和表示成本。最小类型集应由代表性语料、反例和实现复杂度共同决定，而不是按预设数量凑齐。</p>
   </section>
-  <div class="next-prev"><a href="index.html">← 规范登记</a><a href="noema-object.html">NOBJ →</a></div>
+  <div class="next-prev"><a href="index.html">← 规范与成熟度</a><a href="noema-object.html">NOBJ →</a></div>
 </main>

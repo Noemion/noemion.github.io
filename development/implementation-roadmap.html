@@ -1,15 +1,15 @@
 ---
 layout: default
-title: "实施路线图 · Noemion"
+title: "开发路线图 · Noemion"
 page_role: "content"
-footer_text: "Noemion · 实施路线图"
+footer_text: "Noemion · 开发路线图"
 permalink: "/development/implementation-roadmap.html"
 ---
 <main id="main-content" tabindex="-1">
-  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发</a><span aria-hidden="true">/</span><span>实施路线图</span></nav>
-  <div class="hero"><h1>实施路线图</h1><p>从最小规范和恶意语料开始，逐步进入确定性编译、链接、可信装载与模型辅助。</p><div class="badges"><span class="badge">Phases</span><span class="badge">Completion Criteria</span><span class="badge">Reproducible</span></div></div>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>开发路线图</span></nav>
+  <div class="hero"><h1>开发路线图</h1><p>从最小规范和恶意语料开始，逐步推进确定性编译、链接、可信装载和模型辅助。</p><div class="badges"><span class="badge">Phases</span><span class="badge">Completion Criteria</span><span class="badge">Reproducible</span></div></div>
   <section class="content-grid">
-    <h2>实施纪律</h2>
+    <h2>开发原则</h2>
     <div class="status-grid">
       <article class="status-item"><h3>规范先行</h3><p>格式、类型系统、执行语义和信任边界先进入规范与 ADR，再由工具共享同一结构定义 registry。</p></article>
       <article class="status-item"><h3>安全核心先行</h3><p>先让恶意对象无法越界、溢出、递归失控或产生部分可信结果，再建立更高层功能。</p></article>
@@ -18,7 +18,7 @@ permalink: "/development/implementation-roadmap.html"
     </div>
   </section>
   <section class="content-wide">
-    <h2>当前设计：开发阶段与完成标准</h2>
+    <h2>设计方案：开发阶段与完成标准</h2>
     <div class="table-wrap"><table><thead><tr><th>阶段</th><th>主要产物</th><th>完成标准</th></tr></thead><tbody>
       <tr><td>Phase 0<br>规范与样本</td><td>格式、结构定义 registry、错误码、限制值、ADR、合法和畸形语料</td><td>每个字段、索引、长度与演进规则都有条款和正反样本。</td></tr>
       <tr><td>Phase 1<br>安全二进制核心</td><td>Checked 读取器/对象写入器、Header、Section、字符串与符号表</td><td>畸形对象不能越界、溢出、无限递归或形成部分可信结果。</td></tr>
@@ -28,11 +28,11 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td>Phase 5<br>HOBJ 与发布</td><td>披露图、strip、Coverage Proof、验证结论、候选包、签名请求与签名回填</td><td>strip 前后运行语义相同；最终包绑定发布对象、依赖、策略、模型、证据和外部签名身份。</td></tr>
       <tr><td>Phase 6<br>可信装载与运行</td><td>Merkle、权限保护、Loaded State、Agent Harness、最小 Fulfillment Runtime、Trace Stream</td><td>篡改、回滚、越权披露、工具污染、预算不足和状态漂移产生明确拒绝或升级结果。</td></tr>
       <tr><td>Phase 7<br>Model-assisted 前端</td><td>数据集、Horizon Engine、校准、OOD、量化、模型包和模型评估</td><td>模型只能提交候选；关闭模型后 Deterministic 与对象格式不变。</td></tr>
-      <tr><td>Phase 8<br>稳定与认证</td><td>端到端任务评估、跨工具一致性、平台矩阵、模糊测试、性能和复现报告</td><td>规范套件、恶意语料、Agent 场景、平台矩阵和双构建复现全部通过。</td></tr>
+      <tr><td>Phase 8<br>稳定与一致性验证</td><td>端到端任务评估、跨工具一致性、平台矩阵、模糊测试、性能和复现报告</td><td>规范套件、恶意语料、Agent 场景、平台矩阵和双构建复现全部通过。</td></tr>
     </tbody></table></div>
   </section>
   <section class="content-rows">
-    <h2>当前设计：工具职责分组</h2>
+    <h2>设计方案：工具职责分组</h2>
     <ul>
       <li><strong>规范与对象：</strong><a href="../tools/noemcertify/index.html">noemcertify</a>、<a href="../tools/noeminspect/index.html">noeminspect</a>、<a href="../tools/noemvalidate/index.html">noemvalidate</a> 与 <a href="../tools/noemtransform/index.html">noemtransform</a>。</li>
       <li><strong>文本 IR：</strong><a href="../tools/noemassemble/index.html">noemassemble</a>、<a href="../tools/noemdecode/index.html">noemdecode</a>、<a href="../tools/noemformat/index.html">noemformat</a> 与 <a href="../tools/noemcompare/index.html">noemcompare</a>。</li>
@@ -43,12 +43,12 @@ permalink: "/development/implementation-roadmap.html"
     <p>主产物顺序为“来源 → NOBJ → 链接对象/HOBJ → Release Object → Release Coverage Proof → Unsigned Package Candidate → 外部签名回填 → Signed Noemion Package → Loaded State → Run Evidence → Evidence Closure Report → Acceptance Decision → 离线评估”。工具名表达规划职责；具体 CLI、参数、归档扩展名和包格式尚未冻结，必须由各工具文档与 ADR 决定。</p>
   </section>
   <section class="content-band">
-    <h2>尚待确定：仓库、接口与实现选择</h2>
+    <h2>待定事项：仓库、接口与实现选择</h2>
     <p>仓库目录、构建系统、实现语言、稳定错误码、CLI 语法、文件扩展名、ABI 和规范演进策略仍需逐阶段确定；未经 ADR、规范条款和一致性证据批准的示例不得升级为稳定接口。</p>
   </section>
   <section class="content-band">
-    <h2>后续计划：Horizon Engine 与认证</h2>
-    <p>模型数据、训练、蒸馏和量化属于 Phase 7；跨平台认证与性能预算属于 Phase 8。两者都不进入第一阶段。</p>
+    <h2>后续计划：Horizon Engine 与一致性验证</h2>
+    <p>模型数据、训练、蒸馏和量化属于 Phase 7；跨平台一致性验证与性能预算属于 Phase 8。两者都不进入第一阶段。</p>
   </section>
   <section class="content-wide">
     <h2>交付物追溯</h2>
@@ -61,5 +61,5 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td>论文/专利/软著/标准材料</td><td>贡献记录、证据、权属、公开版本</td><td>表述是否超出真实成果与审查状态</td></tr>
     </tbody></table></div>
   </section>
-  <div class="next-prev"><a href="index.html">← 开发</a><a href="testing.html">测试策略 →</a></div>
+  <div class="next-prev"><a href="index.html">← 开发与贡献</a><a href="testing.html">测试与验证 →</a></div>
 </main>

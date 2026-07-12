@@ -1,16 +1,16 @@
 ---
 layout: "manual"
-title: "使用与获取 · Noemion 文档"
+title: "获取与使用指南 · Noemion"
 page_role: "content"
-footer_text: "Noemion · 使用与获取"
+footer_text: "Noemion · 获取与使用指南"
 permalink: "/docs/installation-and-usage.html"
 manual_id: "docs"
 manual_group: "start"
 manual_order: 2
-nav_title: "使用与获取"
-hero_title: "使用与获取"
-hero_description: "说明当前可获取资源、未来工具链使用流程和发布完整性要求。"
-summary: "说明当前可获取资源、未来工具链使用流程和发布完整性要求。"
+nav_title: "获取与使用指南"
+hero_title: "获取与使用指南"
+hero_description: "说明当前可以获取哪些资源、正式工具链计划怎样使用，以及发布时需要满足哪些完整性要求。"
+summary: "查看当前可用资源、计划中的使用流程和发布完整性要求。"
 badges: ["Unreleased", "Usage Model", "Integrity First"]
 ---
 
@@ -61,10 +61,10 @@ badges: ["Unreleased", "Usage Model", "Integrity First"]
 - 验证通过不等于获得无限权限；装载器仍需检查策略、能力和 Segment 属性。
 - 模型不得决定二进制布局、签名范围或装载权限。
 
-测试策略见[测试、模糊测试与验证](../development/testing.html)。
+测试要求见[测试与验证](../development/testing.html)。
 
 ## 尚待确定的发布接口
 
-**尚待确定：**首批支持平台、分发格式、包管理集成、源码托管位置、命令行语法和对象扩展名尚未决定。相关决定必须在实际发布前通过规范或 ADR 固化。
+**待定事项：**首批支持平台、分发格式、包管理集成、源码托管位置、命令行语法和对象扩展名尚未决定。相关决定必须在实际发布前通过规范或 ADR 固化。
 
 发布决策还需要回答支持周期、漏洞响应、密钥轮换、撤回与回滚、许可证组合、长期归档和研究制品引用方式；没有这些生命周期安排时不能把一次构建描述为稳定发行。

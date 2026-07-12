@@ -1,20 +1,20 @@
 ---
 layout: default
-title: "架构决定 · Noemion"
+title: "架构决策 · Noemion"
 page_role: "content"
-footer_text: "Noemion · 架构决定"
+footer_text: "Noemion · 架构决策"
 permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
-  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构</a><span aria-hidden="true">/</span><span>架构决定</span></nav>
-  <div class="hero"><h1>架构决定</h1><p>集中说明当前已经采用的跨组件边界，以及这些决定尚未冻结哪些接口和字段。</p><div class="badges"><span class="badge">Accepted Principles</span><span class="badge">Not Stable ABI</span><span class="badge">Traceable</span></div></div>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
+  <div class="hero"><h1>架构决策</h1><p>集中说明已经采用的跨组件职责边界、排除的替代方案，以及仍未确定的接口和字段。</p><div class="badges"><span class="badge">Accepted Principles</span><span class="badge">Not Stable ABI</span><span class="badge">Traceable</span></div></div>
   <section class="content-stack">
-    <h2>怎样阅读这些决定</h2>
-    <p class="lead">架构决定约束组件职责和后续规范方向，但不等同于已经发布的软件接口。每项决定回答“为什么这样分层、哪些做法被排除、影响哪些页面”；具体字段、编码、ABI 和错误码仍须进入正式规范与一致性测试。</p>
+    <h2>架构决策的适用范围</h2>
+    <p class="lead">架构决策约束组件职责和后续规范方向，但不等同于已经发布的软件接口。每项决策回答“为什么这样分层、排除了哪些做法、影响哪些组件和规范”；具体字段、编码、ABI 和错误码仍须进入正式规范与一致性测试。</p>
     <p>决定发生变化时，相关架构、组件、工具、手册和测试必须在同一次变更中更新。尚无充分证据的问题继续保留在<a href="open-questions.html">开放问题</a>，不能用实现便利静默替代。</p>
   </section>
   <section class="content-wide">
-    <h2>当前决定登记</h2>
+    <h2>已采纳的架构决策</h2>
     <div class="table-wrap"><table><thead><tr><th>决定</th><th>采用的边界</th><th>直接影响</th></tr></thead><tbody>
       <tr><td>命名与语义边界</td><td>Noesis 表示确定性理解与编译活动；Noema 表示机器对象；Horizon 表示未完全展开的背景；Fulfillment 表示受约束求解。</td><td>NIR、NOBJ、HOBJ、组件名、工具名与公开术语。</td></tr>
       <tr><td>Agent Harness 控制平面</td><td>Harness 位于 Fulfillment Runtime 外侧，负责上下文、会话级能力、策略、观察、预算和人工升级；模型不能绕过它调用能力。</td><td>Agent Harness、noemexecute、noemobserve、noemcoverage 与 noemevaluate。</td></tr>
@@ -29,7 +29,7 @@ permalink: "/architecture/decisions.html"
       <li>签名不能替代结构、语义、权限和环境策略验证。</li>
       <li>Loaded State 不携带可直接执行的会话能力句柄。</li>
       <li>Runtime 候选通过评价，不等于任务已经最终验收。</li>
-      <li>Release Coverage Proof、Evidence Closure Report、离线评估和跨工具认证都不能替代发布授权或人工专属判断。</li>
+      <li>Release Coverage Proof、Evidence Closure Report、离线评估和跨工具一致性检查都不能替代发布授权或人工专属判断。</li>
     </ul>
   </section>
   <section class="content-band">

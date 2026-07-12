@@ -16,7 +16,7 @@ overview:
   active_label: 正在进行
   planned_label: 后续规划
   current_label: 当前工作
-  roadmap_label: 查看完整实施路线图
+  roadmap_label: 查看完整开发路线图
   roadmap_href: /development/implementation-roadmap.html
 
 current:
@@ -39,7 +39,7 @@ items:
     state: confirmed
     label: 已完成
     title: 核心对象与工具链职责划分
-    description: 已完成 Noema IR、Noema Object、Horizon Object、Noesis Core、Noema Object System、Agent Harness 与 Fulfillment Runtime 的职责划分和公开架构说明。
+    description: 已完成 Noema IR、Noema Object、Horizon Object、Noesis Core、Noema Object System、Agent Harness 与 Fulfillment Runtime 的职责划分和公开架构设计说明。
   - id: specification-binary-core-design
     state: current
     label: 正在进行

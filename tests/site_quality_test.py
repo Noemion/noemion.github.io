@@ -97,7 +97,7 @@ DOC_GUIDE_HEADINGS = {
         "第一阶段范围", "规范与 ADR 先行", "实现工作流", "测试与模糊测试", "贡献与报告", "后续开发顺序",
     ],
     "docs/tools-reference.html": [
-        "工具链总览", "规范与对象工具", "编译与链接", "发布与运行", "模型工程", "文档状态",
+        "工具链总览", "规范与对象工具", "编译与链接", "发布与运行", "模型工程", "相关资料状态",
     ],
     "docs/specifications-reference.html": [
         "如何判断权威性", "成熟度标记", "Noema IR", "Noema Object", "Horizon Object", "开放问题与 ADR",
@@ -106,7 +106,7 @@ DOC_GUIDE_HEADINGS = {
 HOME_HEADINGS = [
     "意义还没有成为工程对象",
     "把一次性上下文变成可验证对象",
-    "当前设计焦点",
+    "当前设计重点",
     "从理解行为到可信装载",
     "先理解边界再阅读对象",
     "证据优先于主张",
@@ -116,11 +116,11 @@ HOME_HEADINGS = [
 ]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "为什么阅读这些著作",
-    "阅读与采用方法",
+    "研究方法与采用边界",
     "核心思想与工程问题",
     "Noemion 名称怎样形成",
-    "《逻辑哲学论》的第一批检查点",
-    "对 Noema IR 的待验证设计",
+    "《逻辑哲学论》与工程设计相关的命题",
+    "Noema IR 的待验证设计方案",
     "核心书目与资源状态",
     "思想采用的验证要求",
 ]
@@ -174,6 +174,12 @@ PUBLIC_META_PHRASES = (
     "Codex",
     "ChatGPT",
     "subagent",
+)
+UNCLEAR_CHINESE_UI_TERMS = re.compile(
+    r"架构决定|文档中心|文档首页|架构指南|工具参考(?!指南)|"
+    r"规范参考(?!指南)|规范登记(?:页)?|架构入口|使用与获取|新闻与进展|实施路线图|"
+    r"路线图语境|黄金圈定位|第一批检查点|当前设计：|"
+    r"尚待确定：|概要设计："
 )
 LEGACY_PUBLIC_TERMS = re.compile(
     r"\b(?:GSIR|GOBJ|SSO|NSFE|GSL|noemconform|noemobj|noemverify|noemcopy|"
@@ -552,6 +558,16 @@ def validate_readability_behavior_contracts(root):
             'outline.setAttribute("aria-label", "章节导航")',
             'contentMain.querySelector(":scope > .hero")',
             'insertAdjacentElement("afterend", outline)',
+            '{ href: "architecture/index.html", label: "架构设计" }',
+            '{ href: "architecture/decisions.html", label: "架构决策" }',
+            'title: "指南与参考"',
+            '{ href: "docs/architecture-guide.html", label: "架构设计指南" }',
+            '{ href: "docs/tools-reference.html", label: "工具参考指南" }',
+            '{ href: "docs/specifications-reference.html", label: "规范参考指南" }',
+            '{ href: "news/index.html", label: "项目动态" }',
+            '{ href: "faq/index.html", label: "常见问题" }',
+            '{ href: "development/implementation-roadmap.html", label: "开发路线图" }',
+            'title: "noemlink 使用手册"',
         ):
             if token not in directory_text:
                 errors.append(
@@ -606,6 +622,12 @@ def validate_public_html(route, text):
     for phrase in PUBLIC_META_PHRASES:
         if phrase in text:
             errors.append(f"{route}: public HTML exposes internal production phrase {phrase!r}")
+    unclear_match = UNCLEAR_CHINESE_UI_TERMS.search(text)
+    if unclear_match:
+        errors.append(
+            f"{route}: retains unclear Chinese information-architecture term "
+            f"{unclear_match.group(0)!r}"
+        )
     for href, label_markup in EXTERNAL_ANCHOR.findall(text):
         label = normalize_visible_text(HTML_TAG.sub("", label_markup))
         if label != href:
@@ -1437,9 +1459,15 @@ def main():
         for term in ("直白解释", "必须", "不得"):
             if term not in visible_text:
                 errors.append(f"{route}: normative page must preserve {term}")
-        if "当前设计" not in visible_text and "待验证设计" not in visible_text:
+        if not any(
+            marker in visible_text
+            for marker in ("当前设计", "设计方案", "待验证设计", "待验证设计方案")
+        ):
             errors.append(f"{route}: normative page must distinguish current or testable design")
-        if "尚待确定" not in visible_text and "开放问题" not in visible_text:
+        if not any(
+            marker in visible_text
+            for marker in ("尚待确定", "待定事项", "开放问题")
+        ):
             errors.append(f"{route}: normative page must preserve unresolved boundaries")
 
     for row in route_rows:
@@ -1539,7 +1567,7 @@ def main():
             parser.page_role != "content"
             or parser.class_counts["breadcrumbs"] != 1
             or breadcrumb_routes != ["index.html", "docs/index.html"]
-            or not all(label in breadcrumb for label in ("项目", "文档"))
+            or not all(label in breadcrumb for label in ("项目", "指南与参考"))
         ):
             errors.append(f"{route}: invalid project / docs / current breadcrumbs")
         if parser.h2_texts != DOC_GUIDE_HEADINGS[route]:
@@ -1553,8 +1581,8 @@ def main():
                 *("".join(section["text"]) for section in parser.sections),
             ])
         )
-        if not any(marker in visible_text for marker in ("现行设计", "当前设计", "已经明确", "当前", "必须", "负责")) or not any(
-            marker in visible_text for marker in ("待验证", "尚待确定", "后续计划", "尚未")
+        if not any(marker in visible_text for marker in ("现行设计", "当前设计", "设计方案", "已经明确", "当前", "必须", "负责")) or not any(
+            marker in visible_text for marker in ("待验证", "尚待确定", "待定事项", "后续计划", "尚未")
         ):
             errors.append(f"{route}: guide must distinguish current design from unfinished work")
 

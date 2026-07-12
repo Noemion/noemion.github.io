@@ -34,11 +34,11 @@ permalink: "/components/noema-object-system.html"
     </ol>
   </section>
   <section class="content-split">
-    <h2>当前设计：完整性与装载后保护</h2>
+    <h2>设计方案：完整性与装载后保护</h2>
     <p>当前设计建议采用数据块、Section 与全局根组成的分层 Merkle 验证，并将 Header、表项、偏移长度、入口、符号、重定位、权限、策略和模型要求纳入签名范围。AI-NX/AI-RELRO 是描述段解释权限与重定位后冻结策略的设计名称，具体位标志和 ABI 尚未冻结。</p>
   </section>
   <section class="content-band">
-    <h2>尚待确定：消费端与动态依赖</h2>
+    <h2>待定事项：消费端与动态依赖</h2>
     <p>Loaded State Handle、动态依赖声明、撤销、回滚和披露视图仍需规范与 ADR。Loaded State 只携带不可变能力需求和授权上限，不携带实时句柄；Agent Harness 负责会话级能力绑定，Fulfillment Runtime 负责求解；两者都不能把运行状态写回签名对象。</p>
   </section>
   <section class="content-band">
@@ -50,7 +50,7 @@ permalink: "/components/noema-object-system.html"
     <p>只做来源编译或静态对象检查时可以不启动装载部分；一旦需要组合多个对象、验证发布包或建立运行状态，就必须有独立于 Runtime 的对象系统边界。它可以作为 noemlink、noemvalidate 与 noemexecute 共享的安全库，而不必单独成为服务，但解析、验证、提交与失败证据必须保持一致。</p>
   </section>
   <section class="content-wide">
-    <h2>概要设计：事务边界与验证</h2>
+    <h2>设计概要：事务边界与验证</h2>
     <p>链接和装载都应采用“先计划、后提交”的事务边界。链接器先完成输入扫描、符号选择、ID 映射、约束与权限冲突分析和布局计划，所有强制检查通过后才产生输出对象；装载器先验证结构、完整性、版本、依赖和权限映射，全部通过后才暴露可执行入口，避免部分可信状态。</p>
     <div class="table-wrap"><table><thead><tr><th>组件</th><th>可观察产物</th><th>关键失败证据</th></tr></thead><tbody>
       <tr><td>链接器</td><td>链接映射、符号选择、ID 映射、依赖闭包、输出摘要</td><td>未解析、重复定义、类型、约束、权限与配置冲突报告</td></tr>

@@ -73,7 +73,7 @@
 
 - 工具链按“来源 → NOBJ → 链接对象/HOBJ → Release Object → Release Coverage Proof → Unsigned Package Candidate → 外部签名回填 → Signed Noemion Package → Loaded State → 运行记录 → Evidence Closure Report → Acceptance Decision”形成主链；模型工程是可选支线，只通过带资格状态的 Model Qualification Record 进入发布候选。
 - 信任不是沿流水线单调增加的分数。解析验证结构安全，Source Binding 约束来源忠实，签名验证字节来源与完整性，装载策略验证当前环境授权，运行证据记录真实执行，Acceptance Decision 判断任务契约；任何一步都不能替代其他属性。
-- Candidate Envelope 不是 NIR，Capability Requirement 不是实时句柄，Candidate Assessment 不是 Acceptance Decision。Runtime、离线评估器和跨工具认证工具都不能自行宣告会话最终成功。
+- Candidate Envelope 不是 NIR，Capability Requirement 不是实时句柄，Candidate Assessment 不是 Acceptance Decision。Runtime、离线评估器和跨工具一致性检查工具都不能自行宣告会话最终成功。
 - Agent Harness 可以汇总证据和执行确定性策略，但遇到人工专属判断时必须保持 `pending-review`，由配置指定的外部权威作出决定。
 - 所有正式输入都要有生产者，所有正式输出都要有消费者或明确标注只服务人工检查。新增产物还要说明身份绑定、版本、失败责任、签名范围和失效条件。
 
@@ -123,7 +123,7 @@
 
 | 路由 | 存在价值与关联 | 审计结论 |
 | --- | --- | --- |
-| `specifications/index.html` | 区分对象规范草案、已采用架构原则和其他说明性页面的权威级别 | 成熟度与规范来源可定位，入口链接 NIR、NOBJ、HOBJ 和架构决定，不把原则登记误写为稳定编码 |
+| `specifications/index.html` | 区分对象规范草案、已采用架构原则和其他说明性页面的权威级别 | 成熟度与规范来源可定位，入口链接 NIR、NOBJ、HOBJ 和架构决策，不把原则登记误写为稳定编码 |
 | `specifications/noema-ir.html` | 定义目标、约束、歧义、来源绑定、验证计划和验收语义 | 三态评价与 Acceptance Policy 分开，公式只作非规范说明；记录关系不再被误称为四个独立身份 |
 | `specifications/noema-object.html` | 定义 NOBJ 的 section、symbol、relocation、dependency、完整性与局部标识 | 区分对象格式、Object System 与 Runtime；说明 HOBJ、生产工具和消费者，并把最终签名范围留给发布包 |
 | `specifications/horizon-object.html` | 定义共享依赖、披露触发、闭包计算与可撤销视域 | HOBJ 由链接和对象系统处理，不与 Horizon Engine 混同；披露层、请求、触发和任务拆分条件可追踪 |
@@ -221,6 +221,15 @@
 - 源码检查、Jekyll 构建、构建产物检查和多宽度浏览器验收均使用同一变更版本完成。
 
 ## 2026-07-12 验证记录
+
+### 中文信息架构与页面用词审校
+
+- 以 MDN 中文文档、Microsoft Learn 中文架构中心和 Kubernetes 中文文档的内容类型为参照，区分任务型指南、定义型参考资料、架构设计、架构决策、工具使用手册、项目动态和常见问题。
+- 逐项复核 69 条正式路由的页面标题、主标题、Hero 摘要、面包屑、导航卡片、页脚入口、手册分组、分页标签和正文一级章节；同时检查会生成 HTML 的 20 个 Markdown 权威源。
+- 统一采用“架构设计”“架构决策”“指南与参考”“获取与使用指南”“工具参考指南”“规范参考指南”“noemlink 使用手册”“开发路线图”“测试与验证”“项目动态”和“常见问题”。
+- 英文项目名、对象标识、命令名、规范缩写、流程产物、状态徽标和主题控件继续保留；审校目标是让中文分类准确、句意完整，而不是机械消除英文。
+- 对可能误导职责的工具中文名进行收敛：`noemcertify` 使用“规范一致性检查工具”，`noembudget` 使用“对象大小与资源预算分析”，`noemcoverage` 使用“证据覆盖分析工具”，`noemformat` 使用“文本规范化工具”，`noemreduce` 使用“发布对象裁剪工具”。
+- 质量测试新增含糊旧称检查，防止页面重新出现“架构决定”“文档中心”“工具参考”“规范参考”“实施路线图”等旧标签。
 
 - 源码检查逐项核对 69 条正式路由、49 个 HTML 正文源和 20 个 Markdown 权威源；Jekyll 成品检查再次核对 69 个 HTML、34 个全局入口、手册目录和正式路由注册表。
 - 浏览器以 1512px 桌面和 390px 手机逐条打开 69 条路由；桌面浅色、桌面深色与手机结果均没有整页横向溢出、空正文区段、缺失标题、图片加载失败或浏览器错误。

@@ -10,7 +10,7 @@ timeline_data: "project_timeline"
 {% assign current_stage_matches = timeline.items | where: "id", timeline.current_stage_id %}
 {% assign current_stage = current_stage_matches | first %}
 <main id="main-content" class="current-stage-page" tabindex="-1">
-  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发</a><span aria-hidden="true">/</span><span>当前项目阶段</span></nav>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>当前项目阶段</span></nav>
   <div class="hero"><h1>当前项目阶段</h1><p>查看已经完成、正在设计和随后计划开展的工作。</p><div class="badges"><span class="badge">Completed Work</span><span class="badge">In Progress</span><span class="badge">Roadmap</span></div></div>
   <div class="current-stage-feature">
     <figure class="current-stage-visual">
@@ -26,5 +26,5 @@ timeline_data: "project_timeline"
   <section class="project-progress-section">
     {% include project-timeline.html timeline=timeline %}
   </section>
-  <div class="next-prev"><a href="index.html">← 开发</a><a href="implementation-roadmap.html">实施路线图 →</a></div>
+  <div class="next-prev"><a href="index.html">← 开发与贡献</a><a href="implementation-roadmap.html">开发路线图 →</a></div>
 </main>

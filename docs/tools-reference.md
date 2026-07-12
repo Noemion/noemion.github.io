@@ -1,16 +1,16 @@
 ---
 layout: "manual"
-title: "工具参考 · Noemion 文档"
+title: "工具参考指南 · Noemion"
 page_role: "content"
-footer_text: "Noemion · 工具参考"
+footer_text: "Noemion · 工具参考指南"
 permalink: "/docs/tools-reference.html"
 manual_id: "docs"
 manual_group: "reference"
 manual_order: 5
-nav_title: "工具参考"
-hero_title: "Noemion 工具参考"
-hero_description: "按对象生命周期整理 23 个工具的职责、阶段和现有文档状态。"
-summary: "按对象生命周期整理 23 个工具的职责、阶段和现有文档状态。"
+nav_title: "工具参考指南"
+hero_title: "Noemion 工具参考指南"
+hero_description: "按对象生命周期查找 23 个规划工具的职责、开发阶段和现有资料。"
+summary: "按对象生命周期查找工具职责、开发阶段和相关资料。"
 badges: ["23 Tools", "Project Pages", "Unreleased"]
 ---
 
@@ -87,10 +87,10 @@ badges: ["23 Tools", "Project Pages", "Unreleased"]
 - [noemevaluate](../tools/noemevaluate/)：先为浮点 Checkpoint Candidate 建立量化资格，量化后重新评估 Model Package Candidate；另在 Acceptance Decision 之后离线评估 Agent 场景。
 - [noemquantize](../tools/noemquantize/)：只导出、量化并测量未签名 Model Package Candidate，质量资格仍由 noemevaluate 形成。
 
-## 文档状态
+## 相关资料状态
 
 **当前范围：**[noemlink 文档](../tools/noemlink/docs/)已经按契约、输入输出、调用、流程、符号、重定位、HOBJ、安全、诊断、测试、依赖和术语索引拆分。其他工具目前提供用途、输入输出、处理边界和开发计划，尚无独立操作手册。
 
 工具只有在契约、流程、安全、测试或参考内容能够独立维护，并且不会重复权威规范时，才建立自己的 `docs/` 区域。文档数量不代表实现成熟度；是否可用仍以发布物、版本说明和验证证据为准。
 
-**尚待确定：**各工具的 CLI、扩展名和稳定输入输出结构尚未冻结。Phase 0–8、主产物顺序和验证责任已经作为当前架构边界采用，但具体研究方法、阈值与发布授权流程仍需规范、ADR 和真实证据。
+**待定事项：**各工具的 CLI、扩展名和稳定输入输出结构尚未冻结。Phase 0–8、主产物顺序和验证责任已经作为当前架构边界采用，但具体研究方法、阈值与发布授权流程仍需规范、ADR 和真实证据。

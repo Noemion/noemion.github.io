@@ -1,8 +1,8 @@
 ---
 layout: "manual"
-title: "测试与验收 · noemlink 文档 · Noemion"
+title: "测试与验收 · noemlink 使用手册 · Noemion"
 page_role: "docs-topic"
-footer_text: "Noemion · noemlink documentation"
+footer_text: "Noemion · noemlink 使用手册"
 permalink: "/tools/noemlink/docs/testing.html"
 manual_id: "noemlink"
 manual_group: "security"

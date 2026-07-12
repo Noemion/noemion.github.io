@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "架构 · Noemion"
+title: "架构设计 · Noemion"
 page_role: "section"
-footer_text: "Noemion · 架构"
+footer_text: "Noemion · 架构设计"
 permalink: "/architecture/index.html"
 ---
 <main id="main-content" tabindex="-1">
-  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>架构</span></nav>
-  <div class="hero"><h1>架构</h1><p>了解来源表达怎样经过确定性编译、对象链接和安全装载，最终成为可验收结果。</p><div class="badges"><span class="badge">System Map</span><span class="badge">Lifecycle</span><span class="badge">Trust Boundary</span></div></div>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>架构设计</span></nav>
+  <div class="hero"><h1>架构设计</h1><p>说明来源表达如何经过确定性编译、对象链接和安全装载，最终形成可以验收的运行结果。</p><div class="badges"><span class="badge">System Map</span><span class="badge">Lifecycle</span><span class="badge">Trust Boundary</span></div></div>
   <section>
     <h2>架构目标与质量属性</h2>
     <p class="lead">架构的首要目标不是提高单次生成效果，而是让任务语义、对象转换、依赖组合、权限变化和运行结果能够被定位、验证与复现。</p>
@@ -25,10 +25,10 @@ permalink: "/architecture/index.html"
     <p><strong>运行与验收循环：</strong></p>
     <div class="flow"><div class="step">Harness Session</div><div class="step">Runtime Request</div><div class="step">Candidate Assessment</div><div class="step">Capability Request / Observation</div><div class="step">Evidence Closure</div><div class="step">Acceptance Decision / 继续循环</div></div>
     <p>第一条链形成可装载对象；第二条链表示一次运行迭代，Harness 会根据观察、预算和停止条件继续调用 Runtime 或结束会话。每个阶段只证明特定属性：签名证明身份和字节完整性，不证明语义正确；装载证明当前环境允许建立状态，不证明运行结果满足目标；Runtime 产生的候选和外部环境观察始终重新进入不可信域。</p>
-    <p>各职责单元的入口见<a href="../components/">组件目录</a>，格式与执行约束见<a href="../specifications/">规范登记页</a>。</p>
+    <p>各职责单元的入口见<a href="../components/">系统组件目录</a>，格式与执行约束见<a href="../specifications/">规范与成熟度页面</a>。</p>
   </section>
   <section>
-    <h2>概要设计</h2>
+    <h2>架构设计概要</h2>
     <div class="table-wrap"><table><thead><tr><th>层次</th><th>主要输入</th><th>主要输出</th><th>必须保持的不变量</th></tr></thead><tbody>
       <tr><td>Source Frontend</td><td>受控语言、来源资料或模型候选</td><td>Source Package、Candidate Envelope 与来源映射</td><td>模型候选不因结构合法自动升级为受信语义</td></tr>
       <tr><td>Noesis Core</td><td>受控来源、候选封装、Source Binding Decision 与配置</td><td>NIR、NOBJ 与编译证据账本</td><td>无模型、确定、保留歧义；布局受规范控制</td></tr>
@@ -45,10 +45,10 @@ permalink: "/architecture/index.html"
   </section>
   <section>
     <h2>信任边界</h2>
-    <p>信任不是单一分数。来源可追溯、结构有效、语义有效、依赖闭合、字节完整、环境授权和结果验收是彼此独立的属性；每个组件只能声明自己已经检查的属性。模型输出不得直接生成 NOBJ；能力调用必须经过参数、权限、预算和副作用检查；对象偏移、长度、计数、索引和对齐均需检查。智能体控制面的职责见<a href="../components/agent-harness.html">Agent Harness</a>，求解与候选评价边界见<a href="../components/fulfillment-runtime.html">Fulfillment Runtime</a>，安全规则的规范状态见<a href="../specifications/">规范登记页</a>。</p>
+    <p>信任不是单一分数。来源可追溯、结构有效、语义有效、依赖闭合、字节完整、环境授权和结果验收是彼此独立的属性；每个组件只能声明自己已经检查的属性。模型输出不得直接生成 NOBJ；能力调用必须经过参数、权限、预算和副作用检查；对象偏移、长度、计数、索引和对齐均需检查。智能体控制面的职责见<a href="../components/agent-harness.html">Agent Harness</a>，求解与候选评价边界见<a href="../components/fulfillment-runtime.html">Fulfillment Runtime</a>，安全规则的规范状态见<a href="../specifications/">规范与成熟度页面</a>。</p>
   </section>
   <section>
     <h2>开放问题</h2>
-    <p>当前已采用的跨组件边界集中在<a href="decisions.html">架构决定</a>；尚未批准的格式、ABI、模型、运行协议与资源决策保留在<a href="open-questions.html">开放问题</a>中，不在架构概览中固化。</p>
+    <p>当前已采用的跨组件边界集中在<a href="decisions.html">架构决策</a>；尚未批准的格式、ABI、模型、运行协议与资源决策保留在<a href="open-questions.html">开放问题</a>中，不在架构设计总览中固化。</p>
   </section>
 </main>

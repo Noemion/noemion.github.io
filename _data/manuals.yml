@@ -1,29 +1,33 @@
 docs:
-  kicker: Documentation
-  title: 文档中心
+  kicker: Guides / Reference
+  title: 指南与参考
   root: /docs/index.html
   parent_url: /index.html
-  parent_label: 返回项目目录
+  parent_label: 返回项目首页
+  up_label: 返回指南首页
+  index_label: 指南首页
   breadcrumbs:
     - label: 项目
       url: /index.html
   groups:
     start:
-      label: 开始
+      label: 快速开始
       order: 1
     guides:
-      label: 指南
+      label: 专题指南
       order: 2
     reference:
-      label: 参考
+      label: 参考指南
       order: 3
 
 noemlink:
-  kicker: Tool Documentation
-  title: noemlink 文档
+  kicker: Tool Manual
+  title: noemlink 使用手册
   root: /tools/noemlink/docs/index.html
   parent_url: /tools/noemlink/index.html
   parent_label: 返回 noemlink 项目页
+  up_label: 返回手册首页
+  index_label: 参考索引
   breadcrumbs:
     - label: 项目
       url: /index.html
@@ -33,14 +37,14 @@ noemlink:
       url: /tools/noemlink/index.html
   groups:
     start:
-      label: 开始
+      label: 快速开始
       order: 1
     linking:
       label: 链接流程
       order: 2
     security:
-      label: 安全与质量
+      label: 安全与验证
       order: 3
     reference:
-      label: 参考
+      label: 参考资料
       order: 4

@@ -34,7 +34,7 @@ badges: [Documentation]
 - Jekyll 按 `manual_id` 收集页面，按 `manual_order` 生成上一页和下一页。
 - 侧栏和移动目录按 `_data/manuals.yml` 中的分组顺序、页面 `manual_group` 与 `manual_order` 生成。
 - 手册首页自动生成分组目录卡片，新页面无需修改 HTML 或 JavaScript。
-- “索引”链接自动指向同一手册中标记 `manual_index_entry` 的页面；未设置时回到手册首页。
+- 参考索引链接自动指向同一手册中标记 `manual_index_entry` 的页面；未设置时使用当前手册配置的首页名称并回到手册首页，不能把首页误标为“索引”。
 
 ## 正文样式
 

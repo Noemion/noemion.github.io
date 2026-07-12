@@ -116,9 +116,9 @@
           ]
         },
         {
-          label: "架构与设计",
+          label: "架构设计",
           items: [
-            { href: "architecture/index.html", label: "架构" },
+            { href: "architecture/index.html", label: "架构设计" },
             { href: "specifications/index.html", label: "规范" },
             { href: "components/index.html", label: "组件" }
           ]
@@ -127,39 +127,39 @@
           label: "资源",
           items: [
             { href: "tools/index.html", label: "工具目录" },
-            { href: "docs/index.html", label: "文档中心" },
+            { href: "docs/index.html", label: "指南与参考" },
             { href: "downloads/index.html", label: "下载与资源" },
-            { href: "faq/index.html", label: "FAQ" }
+            { href: "faq/index.html", label: "常见问题" }
           ]
         },
         {
           label: "开发",
           items: [
-            { href: "development/index.html", label: "开发入口" },
-            { href: "news/index.html", label: "新闻与进展" }
+            { href: "development/index.html", label: "开发与贡献" },
+            { href: "news/index.html", label: "项目动态" }
           ]
         }
       ]
     },
     architecture: {
       kicker: "Architecture",
-      title: "架构与对象",
-      root: { href: "architecture/index.html", label: "架构首页" },
-      parent: { href: "index.html", label: "返回项目目录" },
+      title: "架构设计与对象",
+      root: { href: "architecture/index.html", label: "架构设计首页" },
+      parent: { href: "index.html", label: "返回项目首页" },
       groups: [
         {
-          label: "系统架构",
+          label: "架构设计",
           items: [
-            { href: "architecture/index.html", label: "架构总览" },
+            { href: "architecture/index.html", label: "架构设计总览" },
             { href: "architecture/noema-lifecycle.html", label: "Noema 生命周期" },
-            { href: "architecture/decisions.html", label: "架构决定" },
+            { href: "architecture/decisions.html", label: "架构决策" },
             { href: "architecture/open-questions.html", label: "开放问题" }
           ]
         },
         {
           label: "对象规范",
           items: [
-            { href: "specifications/index.html", label: "规范登记" },
+            { href: "specifications/index.html", label: "规范与成熟度" },
             { href: "specifications/noema-ir.html", label: "Noema IR" },
             { href: "specifications/noema-object.html", label: "Noema Object" },
             { href: "specifications/horizon-object.html", label: "Horizon Object" }
@@ -179,31 +179,31 @@
       ]
     },
     docs: {
-      kicker: "Documentation",
-      title: "文档中心",
-      root: { href: "docs/index.html", label: "文档首页" },
-      parent: { href: "index.html", label: "返回项目目录" },
+      kicker: "Guides / Reference",
+      title: "指南与参考",
+      root: { href: "docs/index.html", label: "指南首页" },
+      parent: { href: "index.html", label: "返回项目首页" },
       groups: [
         {
-          label: "开始",
+          label: "快速开始",
           items: [
-            { href: "docs/index.html", label: "文档首页" },
+            { href: "docs/index.html", label: "指南首页" },
             { href: "docs/getting-started.html", label: "入门指南" },
-            { href: "docs/installation-and-usage.html", label: "使用与获取" }
+            { href: "docs/installation-and-usage.html", label: "获取与使用指南" }
           ]
         },
         {
-          label: "指南",
+          label: "专题指南",
           items: [
-            { href: "docs/architecture-guide.html", label: "架构指南" },
+            { href: "docs/architecture-guide.html", label: "架构设计指南" },
             { href: "docs/development-guide.html", label: "开发指南" }
           ]
         },
         {
-          label: "参考",
+          label: "参考指南",
           items: [
-            { href: "docs/tools-reference.html", label: "工具参考" },
-            { href: "docs/specifications-reference.html", label: "规范参考" }
+            { href: "docs/tools-reference.html", label: "工具参考指南" },
+            { href: "docs/specifications-reference.html", label: "规范参考指南" }
           ]
         }
       ]
@@ -212,19 +212,19 @@
       kicker: "Resources",
       title: "资源与支持",
       root: { href: "downloads/index.html", label: "资源首页" },
-      parent: { href: "index.html", label: "返回项目目录" },
+      parent: { href: "index.html", label: "返回项目首页" },
       groups: [
         {
           label: "获取资源",
           items: [
             { href: "downloads/index.html", label: "下载与资源" },
-            { href: "docs/index.html", label: "文档中心" }
+            { href: "docs/index.html", label: "指南与参考" }
           ]
         },
         {
           label: "支持",
           items: [
-            { href: "faq/index.html", label: "FAQ" },
+            { href: "faq/index.html", label: "常见问题" },
             { href: "development/index.html", label: "开发与贡献" }
           ]
         }
@@ -232,23 +232,23 @@
     },
     development: {
       kicker: "Development",
-      title: "开发与进展",
-      root: { href: "development/index.html", label: "开发首页" },
-      parent: { href: "index.html", label: "返回项目目录" },
+      title: "开发与贡献",
+      root: { href: "development/index.html", label: "开发与贡献" },
+      parent: { href: "index.html", label: "返回项目首页" },
       groups: [
         {
           label: "开发",
           items: [
-            { href: "development/index.html", label: "开发入口" },
+            { href: "development/index.html", label: "开发概览" },
             { href: "development/current-stage.html", label: "当前项目阶段" },
-            { href: "development/implementation-roadmap.html", label: "实施路线图" },
-            { href: "development/testing.html", label: "测试策略" }
+            { href: "development/implementation-roadmap.html", label: "开发路线图" },
+            { href: "development/testing.html", label: "测试与验证" }
           ]
         },
         {
-          label: "进展",
+          label: "项目状态",
           items: [
-            { href: "news/index.html", label: "新闻与进展" },
+            { href: "news/index.html", label: "项目动态" },
             { href: "architecture/open-questions.html", label: "开放问题" }
           ]
         }
@@ -258,7 +258,7 @@
       kicker: "Toolchain",
       title: "工具目录",
       root: { href: "tools/index.html", label: "工具总览" },
-      parent: { href: "index.html", label: "返回项目目录" },
+      parent: { href: "index.html", label: "返回项目首页" },
       groups: [
         {
           label: "工具链",
@@ -267,9 +267,9 @@
           ]
         },
         {
-          label: "合规套件",
+          label: "规范一致性",
           items: [
-            { href: "tools/noemcertify/index.html", label: "noemcertify · 合规套件" }
+            { href: "tools/noemcertify/index.html", label: "noemcertify · 一致性检查" }
           ]
         },
         {
@@ -278,7 +278,7 @@
             { href: "tools/noeminspect/index.html", label: "noeminspect · 对象查看" },
             { href: "tools/noemvalidate/index.html", label: "noemvalidate · 对象验证" },
             { href: "tools/noemtransform/index.html", label: "noemtransform · 对象变换" },
-            { href: "tools/noembudget/index.html", label: "noembudget · 尺寸分析" }
+            { href: "tools/noembudget/index.html", label: "noembudget · 大小与预算" }
           ]
         },
         {
@@ -287,7 +287,7 @@
             { href: "tools/noemassemble/index.html", label: "noemassemble · IR 汇编" },
             { href: "tools/noemdecode/index.html", label: "noemdecode · IR 反汇编" },
             { href: "tools/noemformat/index.html", label: "noemformat · 文本规范化" },
-            { href: "tools/noemcompare/index.html", label: "noemcompare · 语义差异" }
+            { href: "tools/noemcompare/index.html", label: "noemcompare · 对象与语义比较" }
           ]
         },
         {
@@ -303,8 +303,8 @@
         {
           label: "发布与运行",
           items: [
-            { href: "tools/noemreduce/index.html", label: "noemreduce · 调试剥离" },
-            { href: "tools/noemcoverage/index.html", label: "noemcoverage · 覆盖审计" },
+            { href: "tools/noemreduce/index.html", label: "noemreduce · 发布裁剪" },
+            { href: "tools/noemcoverage/index.html", label: "noemcoverage · 证据覆盖" },
             { href: "tools/noembundle/index.html", label: "noembundle · 发布打包" },
             { href: "tools/noemexecute/index.html", label: "noemexecute · 可信执行" },
             { href: "tools/noemobserve/index.html", label: "noemobserve · 运行追踪" }
@@ -331,13 +331,13 @@
           label: "项目入口",
           items: [
             { href: "tools/noemlink/index.html", label: "noemlink 项目页" },
-            { href: "tools/noemlink/docs/index.html", label: "noemlink 文档" }
+            { href: "tools/noemlink/docs/index.html", label: "noemlink 使用手册" }
           ]
         },
         {
-          label: "关键文档",
+          label: "核心主题",
           items: [
-            { href: "tools/noemlink/docs/contract.html", label: "工具契约" },
+            { href: "tools/noemlink/docs/contract.html", label: "职责与契约" },
             { href: "tools/noemlink/docs/inputs-outputs.html", label: "输入与输出" },
             { href: "tools/noemlink/docs/pipeline.html", label: "处理流程" },
             { href: "tools/noemlink/docs/loader-security.html", label: "装载与安全" }
@@ -353,16 +353,16 @@
       ]
     },
     noemlinkDocs: {
-      kicker: "Tool Documentation",
-      title: "noemlink 文档",
-      root: { href: "tools/noemlink/docs/index.html", label: "文档首页" },
+      kicker: "Tool Manual",
+      title: "noemlink 使用手册",
+      root: { href: "tools/noemlink/docs/index.html", label: "手册首页" },
       parent: { href: "tools/noemlink/index.html", label: "返回 noemlink 项目页" },
       groups: [
         {
-          label: "开始",
+          label: "快速开始",
           items: [
-            { href: "tools/noemlink/docs/index.html", label: "文档首页" },
-            { href: "tools/noemlink/docs/contract.html", label: "工具契约" },
+            { href: "tools/noemlink/docs/index.html", label: "手册首页" },
+            { href: "tools/noemlink/docs/contract.html", label: "职责与契约" },
             { href: "tools/noemlink/docs/inputs-outputs.html", label: "输入与输出" },
             { href: "tools/noemlink/docs/invocation.html", label: "命令行调用" }
           ]
@@ -377,7 +377,7 @@
           ]
         },
         {
-          label: "安全与质量",
+          label: "安全与验证",
           items: [
             { href: "tools/noemlink/docs/loader-security.html", label: "装载与安全" },
             { href: "tools/noemlink/docs/diagnostics.html", label: "诊断与失败边界" },
@@ -385,7 +385,7 @@
           ]
         },
         {
-          label: "参考",
+          label: "参考资料",
           items: [
             { href: "tools/noemlink/docs/dependencies.html", label: "上下游依赖" },
             { href: "tools/noemlink/docs/reference-index.html", label: "参考索引" }
@@ -398,12 +398,12 @@
   const GLOBAL_NAV_GROUPS = Object.freeze([
     {
       href: "about/index.html",
-      label: "了解",
+      label: "项目",
       kicker: "建立共同语境",
-      description: "从问题、架构和方法边界理解 Noemion 为什么存在。",
+      description: "从项目背景、架构设计和方法边界理解 Noemion 为什么存在。",
       items: [
         { href: "about/background.html", label: "背景与边界", description: "为什么目标语义需要成为工程对象", cover: "background", coverLabel: "EXPRESSION ≠ IDENTITY" },
-        { href: "architecture/index.html", label: "系统架构", description: "从编译、链接到可信装载的职责分层", cover: "architecture", coverLabel: "TRUST PIPELINE" },
+        { href: "architecture/index.html", label: "架构设计", description: "从编译、链接到可信装载的职责分层", cover: "architecture", coverLabel: "TRUST PIPELINE" },
         { href: "about/intellectual-foundations.html", label: "思想与方法", description: "区分哲学启发、工程类比与可验证结论", cover: "foundations", coverLabel: "NOESIS / NOEMA" },
         { href: "faq/index.html", label: "常见问题", description: "直接回答项目范围、状态与非目标", cover: "faq", coverLabel: "SCOPE CHECK" }
       ]
@@ -426,7 +426,7 @@
       kicker: "执行对象工程",
       description: "按验证、检查、编译和链接任务进入确定性工具链。",
       items: [
-        { href: "tools/noemcertify/index.html", label: "规范合规", description: "执行 Golden、Malformed 与一致性套件", cover: "conform", coverLabel: "CONFORMANCE" },
+        { href: "tools/noemcertify/index.html", label: "规范一致性", description: "执行 Golden、Malformed 与一致性测试套件", cover: "conform", coverLabel: "CONFORMANCE" },
         { href: "tools/noeminspect/index.html", label: "对象检查", description: "安全查看对象、符号与披露结构", cover: "inspect", coverLabel: "OBJECT INSPECT" },
         { href: "tools/noemcompile/index.html", label: "编译", description: "驱动前端并调用确定性 Noesis Core", cover: "compile", coverLabel: "SOURCE → OBJECT" },
         { href: "tools/noemlink/index.html", label: "链接", description: "解析符号、应用重定位并形成闭包", cover: "link", coverLabel: "SYMBOL LINK" }
@@ -434,15 +434,15 @@
     },
     {
       href: "docs/index.html",
-      label: "文档",
+      label: "指南",
       kicker: "选择阅读路径",
-      description: "按学习、架构、工具、规范和链接器专题进入权威内容。",
+      description: "按入门、架构设计、开发、工具和规范主题选择指南或参考资料。",
       items: [
         { href: "docs/getting-started.html", label: "入门指南", description: "从问题背景和核心对象开始", cover: "getting-started", coverLabel: "START PATH" },
-        { href: "docs/architecture-guide.html", label: "架构指南", description: "理解生命周期、边界与失败路径", cover: "architecture-guide", coverLabel: "BOUNDARY GUIDE" },
-        { href: "docs/tools-reference.html", label: "工具参考", description: "按生命周期定位 23 个工具", cover: "tools-reference", coverLabel: "TOOL MATRIX" },
-        { href: "docs/specifications-reference.html", label: "规范参考", description: "权威来源、成熟度与 ADR 阅读顺序", cover: "spec-reference", coverLabel: "SPEC AUTHORITY" },
-        { href: "tools/noemlink/docs/index.html", label: "noemlink 手册", description: "链接器契约、流程、安全与测试专题", cover: "noemlink-manual", coverLabel: "LINKER MANUAL" }
+        { href: "docs/architecture-guide.html", label: "架构设计指南", description: "理解生命周期、边界与失败路径", cover: "architecture-guide", coverLabel: "BOUNDARY GUIDE" },
+        { href: "docs/tools-reference.html", label: "工具参考指南", description: "按生命周期定位 23 个工具", cover: "tools-reference", coverLabel: "TOOL MATRIX" },
+        { href: "docs/specifications-reference.html", label: "规范参考指南", description: "查找权威来源、成熟度和 ADR 阅读顺序", cover: "spec-reference", coverLabel: "SPEC AUTHORITY" },
+        { href: "tools/noemlink/docs/index.html", label: "noemlink 使用手册", description: "查找链接器职责、流程、安全与测试主题", cover: "noemlink-manual", coverLabel: "LINKER MANUAL" }
       ]
     },
     {
@@ -452,9 +452,9 @@
       description: "查看当前进展、验证策略、后续规划和可下载资源状态。",
       items: [
         { href: "development/current-stage.html", label: "当前项目阶段", description: "已完成工作、正在推进内容与后续规划", cover: "current-stage", coverLabel: "ACTIVE WORK" },
-        { href: "development/implementation-roadmap.html", label: "实施路线", description: "阶段安排、工具职责与完成标准", cover: "roadmap", coverLabel: "DELIVERY PATH" },
-        { href: "development/testing.html", label: "测试策略", description: "确定性、Fuzz、威胁与一致性验证", cover: "testing", coverLabel: "REJECT MATRIX" },
-        { href: "news/index.html", label: "新闻与进展", description: "只登记可核对的项目进展", cover: "news", coverLabel: "VERIFIED SIGNAL" },
+        { href: "development/implementation-roadmap.html", label: "开发路线图", description: "阶段安排、工具职责与完成标准", cover: "roadmap", coverLabel: "DELIVERY PATH" },
+        { href: "development/testing.html", label: "测试与验证", description: "确定性、模糊测试、威胁与一致性验证", cover: "testing", coverLabel: "REJECT MATRIX" },
+        { href: "news/index.html", label: "项目动态", description: "只登记可核对的项目进展", cover: "news", coverLabel: "VERIFIED SIGNAL" },
         { href: "downloads/index.html", label: "资源状态", description: "版本、签名和发布资源的真实状态", cover: "downloads", coverLabel: "SIGNED PACKAGE" }
       ]
     }

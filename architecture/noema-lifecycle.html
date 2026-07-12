@@ -6,7 +6,7 @@ footer_text: "Noemion · Noema 生命周期"
 permalink: "/architecture/noema-lifecycle.html"
 ---
 <main id="main-content" tabindex="-1">
-  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构</a><span aria-hidden="true">/</span><span>Noema 生命周期</span></nav>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>Noema 生命周期</span></nav>
   <div class="hero"><h1>Noema 生命周期与信任边界</h1><p>跟踪来源表达怎样成为 Noema IR、Noema Object 和经过验证的运行结果。</p><div class="badges"><span class="badge">Lifecycle</span><span class="badge">Trust Boundary</span><span class="badge">Deterministic Core</span></div></div>
   <section class="content-wide">
     <h2>生命周期</h2>
@@ -48,11 +48,11 @@ permalink: "/architecture/noema-lifecycle.html"
     </ul>
   </section>
   <section class="content-band">
-    <h2>当前设计：对象视图</h2>
+    <h2>设计方案：对象视图</h2>
     <p>当前设计借鉴 ELF 的 Section/Segment 双视图：Section 服务链接、调试与对象工具，Segment 服务验证和装载。具体 Header、记录布局和签名结构仍须由正式格式规范与 ADR 固化。</p>
   </section>
   <section class="content-split">
-    <h2>当前设计：对象语言、元语言与行为边界</h2>
+    <h2>设计方案：对象语言、元语言与行为边界</h2>
     <p><a href="../about/intellectual-foundations.html">思想与方法基础</a>提示我们区分被执行或评价的对象数据，以及描述其类型、验证规则和环境的元层。当前提议要求 NIR/NOBJ 不得把配置、验证器规则或 Fulfillment Runtime 私有假设伪装成对象自身事实；跨层引用必须有显式版本和信任来源。</p>
     <ul>
       <li>如果目标要求询问、承诺、授权或执行，候选行为对象应携带行为类型、行动者、权限、前置条件、预期效果和失败语义，而不只是命题内容。</li>
@@ -62,7 +62,7 @@ permalink: "/architecture/noema-lifecycle.html"
     <p>这些结构仍须用反例语料、竞争设计、ADR 和一致性测试证明，尚不是对象格式字段。</p>
   </section>
   <section class="content-band">
-    <h2>尚待确定：运行协议</h2>
+    <h2>待定事项：运行协议</h2>
     <p>后端输入适配器、Runtime Request、Capability Request、Capability Observation、状态同步、预算单位和 Acceptance Decision 结构仍未定型。后端输入适配器只是 Runtime 的一种实现方式，不属于 NIR 或对象格式，详见<a href="open-questions.html">开放问题</a>。</p>
   </section>
   <section class="content-wide">

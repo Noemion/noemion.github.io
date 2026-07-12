@@ -1,28 +1,28 @@
 ---
 layout: "manual"
-title: "文档 · Noemion"
+title: "指南与参考 · Noemion"
 page_role: "section"
-footer_text: "Noemion · 文档"
+footer_text: "Noemion · 指南与参考"
 permalink: "/docs/index.html"
 manual_id: "docs"
 manual_group: "start"
 manual_order: 0
-nav_title: "文档"
-hero_title: "文档"
-hero_description: "按任务查找入门、使用、架构、开发、工具文档和规范参考。"
-summary: "按任务查找入门、使用、架构、开发、工具文档和规范参考。"
+nav_title: "指南与参考"
+hero_title: "指南与参考"
+hero_description: "按任务选择入门指南、获取与使用指南、架构设计指南和开发指南，或查阅工具与规范参考指南。"
+summary: "按任务选择专题指南，或按工具、规范和术语查阅参考资料。"
 badges: ["Guides", "Tool Docs", "Reference"]
 manual_is_index: true
-manual_index_heading: "按任务查找"
+manual_index_heading: "按任务与内容类型查找"
 ---
 
-## 如何使用这些文档
+## 如何使用这些指南与参考资料
 
 先根据任务建立共同背景，再进入权威架构、规范或工具专题。任务型文档解释概念和阅读路径，不复制第二套技术定义。标为“待验证设计”“尚待确定”或“后续计划”的内容都不是稳定接口。
 
 推荐顺序：确认问题 → 阅读背景 → 定位权威页 → 核对成熟度 → 追踪证据。
 
-## 文档边界
+## 指南、参考资料与规范的边界
 
 六类任务文档负责解释概念、提供阅读路径并说明当前可用性；架构关系由架构专题定义，规范性术语和约束仍以对应规范及经批准 ADR 为准。
 

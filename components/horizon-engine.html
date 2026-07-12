@@ -32,7 +32,7 @@ permalink: "/components/horizon-engine.html"
     <p>Horizon Engine 不是形成对象的必需组件：受控 NSL、Text NIR 或合格外部 Candidate Envelope 可以直接进入 Noesis Core。只有在长来源、跨章节关系、歧义发现和检索路由上，以来源隔离实验证明它相对规则与外部模型基线带来稳定收益，才值得承担训练、校准和模型供应链成本；不能证明时应省略或停止建设。</p>
   </section>
   <section class="content-split">
-    <h2>当前设计：层级语义编码</h2>
+    <h2>设计方案：层级语义编码</h2>
     <pre><code>确定性结构前端
 → 来源图与稳定来源单元 ID
 → 局部双向语言编码器
@@ -45,12 +45,12 @@ permalink: "/components/horizon-engine.html"
     <p>结构前端确定性识别文件、标题、段落、列表、代码、表格与引用；局部编码器处理受限窗口；层级聚合与稀疏图层传播跨块关系；Noesis Core 重新检查来源绑定、类型、歧义和编译来源覆盖。</p>
   </section>
   <section class="content-split content-split-reverse">
-    <h2>当前设计：数据与评测</h2>
+    <h2>设计方案：数据与评测</h2>
     <p>数据拟分为人工裁决的 Gold、经审计弱标注的 Silver、许可清晰的 Unlabeled（无标签语料）与 Adversarial（对抗反例）；切分按仓库、作者或文档族隔离。评测覆盖文本跨度、概念、关系、模态和否定范围、硬约束召回、OOD/NIL、错误确定率、校准、跨块召回、延迟与峰值内存。</p>
     <p>任何候选数值门槛都必须在 Gold Pilot 建立统计依据后通过 ADR 固化；未经来源隔离评测和置信区间支持的百分比只能作为实验目标，不是规范要求。</p>
   </section>
   <section class="content-band">
-    <h2>尚待确定：底座、训练与量化</h2>
+    <h2>待定事项：底座、训练与量化</h2>
     <p>MacBERT、DistilmBERT、ModernBERT 等只属于同条件选型对比候选；模型规模、教师模型、领域自适应预训练（DAPT）、任务自适应预训练（TAPT）、蒸馏范围、OOD 方法、量化格式和阈值必须在相同结构层、数据切片与目标硬件上比较。生成式大模型只可作为标注、External-generation 或能力上限对照。</p>
   </section>
   <section class="content-band">
@@ -58,7 +58,7 @@ permalink: "/components/horizon-engine.html"
     <p>未来按规则基线、局部语言基线、Noemion 结构层、领域继续预训练、蒸馏压缩、校准/OOD 与导出量化依次推进。模型包需要覆盖权重、词表、本体库、架构与任务头结构定义、量化配置、评测、校准和血缘；进入发布包时由 noembundle 纳入外部签名范围，并始终作为不可信输入验证。</p>
   </section>
   <section class="content-band">
-    <h2>尚待确定：何时从头预训练</h2>
+    <h2>待定事项：何时从头预训练</h2>
     <p>只有现有底座在合理微调和领域适配后仍系统性失败、消融定位到底座瓶颈、拥有许可清晰的大规模语料与长期盲测集、预算允许多次完整实验，且收益显著高于维护成本时，才进入立项评审。</p>
   </section>
   <section class="content-rows">

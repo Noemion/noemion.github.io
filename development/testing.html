@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "测试、模糊测试与验证 · Noemion"
+title: "测试与验证 · Noemion"
 page_role: "content"
-footer_text: "Noemion · 测试策略"
+footer_text: "Noemion · 测试与验证"
 permalink: "/development/testing.html"
 ---
 <main id="main-content" tabindex="-1">
-  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发</a><span aria-hidden="true">/</span><span>测试策略</span></nav>
-  <div class="hero"><h1>测试、模糊测试与验证</h1><p>覆盖对象安全、确定性编译、语义保真、链接、披露、信任与模型候选的测试矩阵。</p><div class="badges"><span class="badge">畸形样例</span><span class="badge">往返转换</span><span class="badge">模糊测试</span></div></div>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>测试与验证</span></nav>
+  <div class="hero"><h1>测试与验证</h1><p>说明对象安全、确定性编译、语义保真、链接、披露、信任和模型候选需要通过哪些测试。</p><div class="badges"><span class="badge">畸形样例</span><span class="badge">往返转换</span><span class="badge">模糊测试</span></div></div>
   <section class="content-rows">
     <h2>安全与拒绝路径</h2>
     <p class="callout"><strong>读懂测试结论：</strong>“合法样例通过”只证明一条成功路径；安全核心还必须证明畸形、冲突、越权、超限和不完整输入能够稳定、快速且无部分产物地失败。</p>
@@ -28,7 +28,7 @@ permalink: "/development/testing.html"
     </ul>
   </section>
   <section class="content-rows">
-    <h2>当前设计：语义与覆盖测试</h2>
+    <h2>设计方案：语义与覆盖测试</h2>
     <ul>
       <li>Source-to-NIR 蕴含检查、反编译摘要和 Semantic Mutation Testing。</li>
       <li>逐来源单元验证目标、硬约束、条件、例外、路由、依赖和歧义得到保留。</li>
@@ -37,7 +37,7 @@ permalink: "/development/testing.html"
     </ul>
   </section>
   <section class="content-rows">
-    <h2>当前设计：链接、HOBJ 与 Fulfillment Runtime</h2>
+    <h2>设计方案：链接、HOBJ 与 Fulfillment Runtime</h2>
     <ul>
       <li>强/弱符号、ID 重映射、约束可满足性、权限交集和语义冲突矩阵。</li>
       <li>主 HOBJ 与强依赖闭包完整；弱依赖缺失行为明确。</li>
@@ -46,7 +46,7 @@ permalink: "/development/testing.html"
     </ul>
   </section>
   <section class="content-rows">
-    <h2>当前设计：Agent Harness 验证</h2>
+    <h2>设计方案：Agent Harness 验证</h2>
     <ul>
       <li>上下文测试验证版本、来源、适用范围、失效链接和逐步披露，不允许临时提示静默覆盖规范。</li>
       <li>能力测试覆盖参数结构、最小权限、读写分离、幂等性、副作用、提示注入和被污染的工具返回。</li>
@@ -74,5 +74,5 @@ permalink: "/development/testing.html"
     </tbody></table></div>
     <p>任何公开结果都应记录规范与工具版本、构建环境、随机性控制、硬件、原始数据摘要和复现实验步骤。内部通过但材料不可复现的结果不能升级为标准化或科学结论。</p>
   </section>
-  <div class="next-prev"><a href="implementation-roadmap.html">← 实施路线图</a><a href="../architecture/open-questions.html">开放问题 →</a></div>
+  <div class="next-prev"><a href="implementation-roadmap.html">← 开发路线图</a><a href="../architecture/open-questions.html">开放问题 →</a></div>
 </main>

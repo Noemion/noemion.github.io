@@ -1,6 +1,6 @@
 ---
 layout: "manual"
-title: "开发指南 · Noemion 文档"
+title: "开发指南 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 开发指南"
 permalink: "/docs/development-guide.html"
@@ -11,7 +11,7 @@ nav_title: "开发指南"
 hero_title: "Noemion 开发指南"
 hero_description: "面向规范、安全对象核心、确定性工具链和后续模型工程的开发纪律。"
 summary: "面向规范、安全对象核心、确定性工具链和后续模型工程的开发纪律。"
-badges: ["Spec First", "Deterministic Core", "模糊测试 Early"]
+badges: ["Spec First", "Deterministic Core", "Fuzz Early"]
 ---
 
 ## 第一阶段范围
@@ -21,7 +21,7 @@ badges: ["Spec First", "Deterministic Core", "模糊测试 Early"]
 - 冻结最小 NIR/NOBJ 结构和安全解析规则。
 - 实现受检算术（checked arithmetic）、安全读取器、对象写入器、验证器和确定性序列化。
 - 建立畸形样例集、基准样例集、模糊测试和跨工具一致性检查。
-- 在规范允许的范围内建立对象查看、验证、复制和尺寸分析工具。
+- 在规范允许的范围内建立对象查看、验证、复制和大小分析工具。
 
 ## 规范与 ADR 先行
 
@@ -30,7 +30,7 @@ badges: ["Spec First", "Deterministic Core", "模糊测试 Early"]
 - 开放问题不能因为实现方便而静默变成默认行为。
 - 候选 CLI、扩展名和 ABI 只能作为待验证设计展示。
 
-规范阅读入口见[规范参考](specifications-reference.html)。
+规范阅读入口见[规范参考指南](specifications-reference.html)。
 
 ## 实现工作流
 
@@ -71,7 +71,7 @@ Agent Harness 的开发顺序是“先边界，后自治”：先定义类型化
 - 知识产权候选应记录贡献人、现有技术、创新点边界和公开披露状态，不在普通问题讨论中提前披露未审查方案。
 - 任何报告都不得包含真实密钥、签名私钥或敏感对象数据。
 
-**尚待确定：**贡献治理、版本策略、安全披露和知识产权审查渠道将在项目基础设施确定后公布。
+**待定事项：**贡献治理、版本策略、安全披露和知识产权审查渠道将在项目基础设施确定后公布。
 
 ## 后续开发顺序
 
@@ -79,4 +79,4 @@ Agent Harness 的开发顺序是“先边界，后自治”：先定义类型化
 
 论文、专利、软著与标准化产物应随真实证据形成：研究结论来自可复现实验，专利候选先经过检索与权属审查，软著基于真实软件版本，标准提案基于稳定规范和互操作测试。
 
-[查看实施路线与完成标准](../development/implementation-roadmap.html)
+[查看开发路线与完成标准](../development/implementation-roadmap.html)

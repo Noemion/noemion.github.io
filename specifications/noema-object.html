@@ -24,7 +24,7 @@ permalink: "/specifications/noema-object.html"
     <p>“签名有效”只证明签名范围内字节来自相应密钥持有者且未被篡改，不证明记录边界安全、语义兼容或权限合理；结构、语义与信任验证必须分层执行，不得用任一层的通过替代其他层。</p>
   </section>
   <section class="content-wide">
-    <h2>当前设计：Section / Segment 双视图</h2>
+    <h2>设计方案：Section / Segment 双视图</h2>
     <p>对象布局拟包含 Header、Program Header Table、Section Header Table、Section Data 以及可选的完整性材料。Section 服务链接和对象工具，Segment 服务装载与权限映射；最终发布包的签名范围和外部签名回填属于 noembundle，不由 NOBJ 布局示例提前决定。</p>
     <div class="table-wrap"><table><thead><tr><th>Section 家族提案</th><th>职责</th></tr></thead><tbody>
       <tr><td>NIR 语义</td><td>目标、节点、边、约束、歧义、产物与评价器。</td></tr>
@@ -34,7 +34,7 @@ permalink: "/specifications/noema-object.html"
     </tbody></table></div>
   </section>
   <section class="content-band">
-    <h2>当前设计：记录与完整性</h2>
+    <h2>设计方案：记录与完整性</h2>
     <p>节点和边记录需要区分两类身份：对象内部局部索引可以在链接时重编号；跨对象、版本和重定位保持的语义身份或稳定符号不能因布局变化而改变。类型、标志、引用、模态、权重、来源关系、字段宽度、编码、对齐、版本演进、Section 名称和 Merkle 层级尚须正式格式规范与样本共同确定。</p>
   </section>
   <section class="content-band">
@@ -42,11 +42,11 @@ permalink: "/specifications/noema-object.html"
     <p>Noesis Core 或 noemassemble 通过规范对象写入路径产生可重定位 NOBJ；noemlink 可以把一个或多个 NOBJ 与已有 HOBJ 链接为 Linked Object 或新的 HOBJ。HOBJ 是保留共享依赖与披露语义的对象形态，不由 Horizon Engine 直接生成。发布前还必须经过独立验证、允许的裁剪、Release Coverage Proof 和外部签名封装。</p>
   </section>
   <section class="content-band">
-    <h2>尚待确定：名称、布局与重定位</h2>
+    <h2>待定事项：名称、布局与重定位</h2>
     <p>NOBJ 的文件扩展名、ABI 字段和 <code>R_NIR_*</code> 等重定位标识仍未确定；当前示例只表示需要覆盖的引用类别，不能作为实现接口。参见<a href="../architecture/open-questions.html">开放问题</a>。</p>
   </section>
   <section class="content-wide">
-    <h2>概要设计：对象不变量与一致性测试</h2>
+    <h2>设计概要：对象不变量与一致性测试</h2>
     <div class="table-wrap"><table><thead><tr><th>不变量</th><th>必须拒绝的反例</th><th>主要验证方式</th></tr></thead><tbody>
       <tr><td>边界与算术安全</td><td>溢出、越界、重叠、错误对齐、递归或计数放大</td><td>畸形样例语料、属性测试和覆盖引导模糊测试</td></tr>
       <tr><td>引用完整</td><td>错误索引、悬空强引用、类型不匹配和循环闭包</td><td>分层验证器与链接冲突矩阵</td></tr>

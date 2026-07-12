@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "FAQ · Noemion"
+title: "常见问题 · Noemion"
 page_role: "section"
-footer_text: "Noemion · FAQ"
+footer_text: "Noemion · 常见问题"
 permalink: "/faq/index.html"
 ---
 <main id="main-content" tabindex="-1">
-  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>FAQ</span></nav>
-  <div class="hero"><h1>FAQ</h1><p>回答跨项目的常见问题；正式约束仍以规范为准，未决事项保持开放。</p><div class="badges"><span class="badge">Project</span><span class="badge">Security</span><span class="badge">Development</span></div></div>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>常见问题</span></nav>
+  <div class="hero"><h1>常见问题</h1><p>直接回答项目范围、当前状态、安全边界和开发计划中的高频问题；正式约束仍以规范为准。</p><div class="badges"><span class="badge">Project</span><span class="badge">Security</span><span class="badge">Development</span></div></div>
   <div class="faq-list">
     <section>
       <h2>项目定位</h2>
@@ -15,8 +15,8 @@ permalink: "/faq/index.html"
       <details><summary>Noemion 当前是产品、研究课题还是标准？</summary><p>当前首先是规范与工程研究项目，处于概念细化和安全二进制核心设计阶段。它可以发展为博士研究、论文、专利、软著或标准化候选，但这些方向都需要独立证据和审查，不能把愿景表述为已经取得的成果。</p></details>
     </section>
     <section>
-      <h2>架构与设计</h2>
-      <details><summary>NIR、NOBJ 和 HOBJ 分别负责什么？</summary><p>NIR 表达目标、约束、歧义、证据和验收条件；NOBJ 把这些语义封装为可重定位、可验证的对象；HOBJ 保存可按依赖、权限和任务逐步披露的共享内容。三者的关系见<a href="../architecture/">架构入口</a>，精确约束以<a href="../specifications/">规范登记页</a>所指向的权威文件为准。</p></details>
+    <h2>架构设计</h2>
+      <details><summary>NIR、NOBJ 和 HOBJ 分别负责什么？</summary><p>NIR 表达目标、约束、歧义、证据和验收条件；NOBJ 把这些语义封装为可重定位、可验证的对象；HOBJ 保存可按依赖、权限和任务逐步披露的共享内容。三者的关系见<a href="../architecture/">架构设计</a>，精确约束以<a href="../specifications/">规范与成熟度页面</a>所指向的权威文件为准。</p></details>
       <details><summary>Agent Harness 和 Fulfillment Runtime 有什么区别？</summary><p>Agent Harness 是运行外侧的控制平面，管理上下文、能力、策略、观察、预算和人工升级；Fulfillment Runtime 在已验证对象与运行配置下生成并评价候选结果。模型不能绕过 Harness 直接调用能力，Runtime 也不能修改对象约束。可分别阅读 <a href="../components/agent-harness.html">Agent Harness</a> 与 <a href="../components/fulfillment-runtime.html">Fulfillment Runtime</a>。</p></details>
       <details><summary>尚未决定的架构事项在哪里？</summary><p>对象命名、ABI、模型工程和硬件条件等未决事项保留在<a href="../architecture/open-questions.html">开放问题</a>中。</p></details>
     </section>
@@ -26,18 +26,18 @@ permalink: "/faq/index.html"
     </section>
     <section>
       <h2>安全与确定性</h2>
-      <details><summary>Deterministic Profile 会调用模型吗？</summary><p>不会。Deterministic Profile 必须无模型、确定且可复现；具体约束以<a href="../specifications/">规范登记页</a>所指向的权威文件为准。</p></details>
-      <details><summary>模型能直接生成 NOBJ 吗？</summary><p>不能。一切模型输出均视为不可信，模型不得决定二进制布局或直接生成 NOBJ；规范依据见<a href="../specifications/">规范登记页</a>。</p></details>
+      <details><summary>Deterministic Profile 会调用模型吗？</summary><p>不会。Deterministic Profile 必须无模型、确定且可复现；具体约束以<a href="../specifications/">规范与成熟度页面</a>所指向的权威文件为准。</p></details>
+      <details><summary>模型能直接生成 NOBJ 吗？</summary><p>不能。一切模型输出均视为不可信，模型不得决定二进制布局或直接生成 NOBJ；规范依据见<a href="../specifications/">规范与成熟度页面</a>。</p></details>
     </section>
     <section>
       <h2>开发与贡献</h2>
       <details><summary>当前优先开发什么？</summary><p>当前正在完成最小规范与安全二进制核心设计，下一步开发 Checked 读取器/对象写入器、结构验证器和对应的恶意对象测试。实时状态见<a href="../development/current-stage.html">当前项目阶段</a>。</p></details>
-      <details><summary>项目按什么顺序开发？</summary><p>先完成规范和安全二进制核心，再开发 Deterministic 编译链接、发布签名、可信装载、Agent Harness 与 Fulfillment Runtime，最后进入模型工程。每一步都会明确交付内容和验证结果，具体顺序见<a href="../development/implementation-roadmap.html">实施路线图</a>。</p></details>
+      <details><summary>项目按什么顺序开发？</summary><p>先完成规范和安全二进制核心，再开发 Deterministic 编译链接、发布签名、可信装载、Agent Harness 与 Fulfillment Runtime，最后进入模型工程。每一步都会明确交付内容和验证结果，具体顺序见<a href="../development/implementation-roadmap.html">开发路线图</a>。</p></details>
       <details><summary>论文、专利和标准材料可以直接复用网站内容吗？</summary><p>可以把网站作为问题、架构和追溯入口，但引用时必须记录版本和成熟度，并核对权威规范、ADR、实验或测试证据。专利公开前需要新颖性与权属审查；标准提案需要可测试条款、互操作案例和安全分析。</p></details>
     </section>
     <section>
       <h2>常见误解</h2>
-      <details><summary>NIR 是二进制化提示词或 Skill 包吗？</summary><p>不是。NIR 必须表达可机器分析、验证、重定位和执行的目标与约束；规范定义见<a href="../specifications/">规范登记页</a>。</p></details>
+      <details><summary>NIR 是二进制化提示词或 Skill 包吗？</summary><p>不是。NIR 必须表达可机器分析、验证、重定位和执行的目标与约束；规范定义见<a href="../specifications/">规范与成熟度页面</a>。</p></details>
       <details><summary>借鉴 ELF 是否意味着兼容 ELF 或执行机器指令？</summary><p>不是。项目借鉴 Section/Segment、符号、重定位、链接、调试和装载等成熟工程策略，但对象语义面向生成式目标与约束，不承诺传统 ELF ABI 或机器指令兼容。</p></details>
     </section>
   </div>

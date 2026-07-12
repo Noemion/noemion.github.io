@@ -1,14 +1,14 @@
 ---
 layout: "manual"
-title: "工具契约 · noemlink 文档 · Noemion"
+title: "职责与契约 · noemlink 使用手册 · Noemion"
 page_role: "docs-topic"
-footer_text: "Noemion · noemlink documentation"
+footer_text: "Noemion · noemlink 使用手册"
 permalink: "/tools/noemlink/docs/contract.html"
 manual_id: "noemlink"
 manual_group: "start"
 manual_order: 1
-nav_title: "工具契约"
-hero_title: "工具契约"
+nav_title: "职责与契约"
+hero_title: "职责与契约"
 hero_description: "说明 noemlink 负责什么、拒绝什么，以及哪些边界可以依赖。"
 summary: "说明 noemlink 负责什么、拒绝什么，以及哪些边界可以依赖。"
 badges: ["noemlink", "Phase 4 / Phase 5"]

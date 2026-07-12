@@ -57,7 +57,7 @@
 
 | 旧命令 | 当前命令 | 主要动作 |
 | --- | --- | --- |
-| `noemconform` | `noemcertify` | 运行一致性测试并生成认证报告 |
+| `noemconform` | `noemcertify` | 运行一致性测试并生成可复查报告 |
 | `noemobj` | `noeminspect` | 查看对象结构、符号和来源 |
 | `noemverify` | `noemvalidate` | 验证结构、完整性和策略 |
 | `noemcopy` | `noemtransform` | 执行受控对象变换 |
@@ -88,6 +88,25 @@
 - 手册目录与所属工具同名。例如链接器手册位于 `tools/noemlink/docs/`。
 - 路由、导航、页面标题、交叉链接、测试、设计文档和配置必须在同一变更中更新。
 
+## 中文信息架构名称
+
+页面名称必须先说明内容类型，再说明主题。中文站点采用以下固定含义：
+
+| 名称 | 使用场景 | 不使用的含糊写法 |
+| --- | --- | --- |
+| 项目概览 | 项目目的、范围、现状和主要入口 | 单独使用“了解”作为正式页面标题 |
+| 架构设计 | 系统分层、组件关系、对象流和信任边界 | 单独使用“架构”作为页面主标题 |
+| 架构决策 | 已采用的职责边界、备选方案和后果 | “架构决定” |
+| 入门指南 / 获取与使用指南 / 开发指南 | 帮助读者完成一项任务或形成阅读路径 | 用“文档”概括所有任务型内容 |
+| 工具参考指南 / 规范参考指南 | 按工具、对象、术语、成熟度或权威来源查找信息 | 单独使用“工具参考”“规范参考”或“参考” |
+| 使用手册 | 单个工具的职责、调用、流程、安全、诊断与索引 | 把工具手册统称为“工具文档” |
+| 项目动态 | 已发生且可核对的里程碑、规范变化和发布状态 | “新闻与进展”或暗示固定发布节奏的“新闻” |
+| 常见问题 | 对高频问题的直接回答 | 仅使用英文缩写“FAQ” |
+
+导航可以为可用空间使用“项目、规范、工具、指南、开发”等短标签，但展开后的卡片、页面标题和链接文字必须使用上表中的完整名称。项目专有名、规范标识、命令名、对象缩写、视觉状态徽标和已经形成稳定交互含义的英文控件可以继续使用英文；要求是中文部分分类准确、句意完整，而不是机械消除英文。
+
+这套区分参考了中文开发者站点的成熟内容类型：任务型内容使用“指南”或“任务”，定义与查表内容使用“参考”，系统关系使用“架构设计”或“体系结构设计”。Noemion 采用更符合本站既有用语的“架构设计”。
+
 ## 逐页检查表
 
 每个正式页面都要核对以下项目：
@@ -102,6 +121,12 @@
 
 ## 参考依据
 
+- MDN，《面向开发者的 Web 技术》：https://developer.mozilla.org/zh-CN/docs/Web
+- MDN，《文档写作规范》：https://developer.mozilla.org/zh-CN/docs/MDN/Writing_guidelines/Writing_style_guide
+- Microsoft Learn，《Azure 体系结构中心》：https://learn.microsoft.com/zh-cn/azure/architecture/
+- Kubernetes，《概念》：https://kubernetes.io/zh-cn/docs/concepts/
+- Kubernetes，《任务》：https://kubernetes.io/zh-cn/docs/tasks/
+- Kubernetes，《中文本地化样式指南》：https://kubernetes.io/zh-cn/docs/contribute/localization_zh/
 - GNU Coding Standards, GNU Manuals: https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html
 - GNU Coding Standards, Manual Structure Details: https://www.gnu.org/prep/standards/html_node/Manual-Structure-Details.html
 - GNU Hello manual: https://www.gnu.org/software/hello/manual/hello.html

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "组件 · Noemion"
+title: "系统组件 · Noemion"
 page_role: "section"
 footer_text: "Noemion · 组件"
 permalink: "/components/index.html"
@@ -38,7 +38,7 @@ permalink: "/components/index.html"
     <p>Noema Object 是数据格式；Noema Object System 负责链接、验证和装载。Agent Harness 管理上下文、会话级能力、真实环境观察和最终验收流程。Fulfillment Runtime 在受限语义视图下求解并评价候选，但只能提出 Capability Request，不能直接持有外部能力或宣告任务最终通过。模型只能提交候选，不能决定对象布局、扩大权限或直接生成 NOBJ。</p>
   </section>
   <section>
-    <h2>概要设计与依赖方向</h2>
+    <h2>组件关系与依赖方向</h2>
     <div class="flow"><div class="step">来源 / Candidate Envelope</div><div class="step">Noesis Core</div><div class="step">NIR / NOBJ</div><div class="step">Noema Object System</div><div class="step">Loaded State</div><div class="step">Agent Harness ↔ Runtime</div><div class="step">Evidence / Decision</div></div>
     <p>组件关系不是“信任不断上升”的单向直线。Noesis Core 只能证明受控推导、结构和约束检查；Object System 只能证明链接、完整性和当前装载策略；Runtime 候选、工具结果和环境观察仍是不可信数据。Harness 与 Runtime 通过 Runtime Request、Capability Request 和 Capability Observation 循环协作，直到预先声明的策略形成 Acceptance Decision 或要求人工复核。</p>
     <p>Horizon Engine 产生 Candidate Envelope，不直接产生 Horizon Object。Noesis Core 把共享内容编译为 NOBJ；Object System 可以把 NOBJ 与已有 HOBJ 链接为新的 HOBJ。HOBJ 是对象形态，Horizon Engine 是模型组件，两者只有语义主题关联，没有直接的生产者—产物关系。</p>

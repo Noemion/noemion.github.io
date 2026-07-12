@@ -1,22 +1,22 @@
 ---
 layout: "manual"
-title: "noemlink 文档 · Noemion"
+title: "noemlink 使用手册 · Noemion"
 page_role: "docs-index"
-footer_text: "Noemion · noemlink documentation"
+footer_text: "Noemion · noemlink 使用手册"
 permalink: "/tools/noemlink/docs/index.html"
 manual_id: "noemlink"
 manual_group: "start"
 manual_order: 0
-nav_title: "文档"
-hero_title: "noemlink 文档"
-hero_description: "职责、调用边界、确定性链接流程、安全规则和验证入口。"
-summary: "职责、调用边界、确定性链接流程、安全规则和验证入口。"
+nav_title: "使用手册"
+hero_title: "noemlink 使用手册"
+hero_description: "按主题查找链接器职责、命令行调用、确定性链接流程、安全规则和验证方法。"
+summary: "查找链接器职责、调用方式、处理流程、安全规则和验证方法。"
 badges: ["Documentation", "Phase 4 / Phase 5", "12 Topics"]
 manual_is_index: true
-manual_index_heading: "文档目录"
+manual_index_heading: "手册目录"
 ---
 
-## 为什么单独建立链接器文档
+## 为什么单独建立链接器使用手册
 
 `noemlink` 位于“多个局部对象”成为“一个可装载整体”的信任转换点。符号选择、ID 重映射、约束合并、权限收敛或依赖闭包中的任何隐式规则，都会影响产物语义、安全边界和复现结果。因此它不是普通文件拼接器，每项决定都必须形成可规范、可测试、可诊断的契约。
 

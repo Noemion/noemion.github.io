@@ -32,7 +32,7 @@ permalink: "/specifications/horizon-object.html"
     </ul>
   </section>
   <section class="content-split">
-    <h2>当前设计：披露图与覆盖状态</h2>
+    <h2>设计方案：披露图与覆盖状态</h2>
     <p>当前提案使用五层披露视图：Discovery（可发现的名称与摘要）、Contract（接口、约束与验收契约）、Execution（执行所需结构）、Knowledge（按请求选择的知识）和 Debug（开发诊断与来源细节）。固定层级保证审计，查询驱动选择减少上下文。来源单元的覆盖状态拟区分已映射、重复、装饰、精确产物、未解决和冲突。</p>
     <p>代码、数值表、公式、结构定义、逐字模板、法律条款和二进制资源等不可安全摘要的内容必须精确保留或由可信外部资源承载。</p>
   </section>
@@ -47,7 +47,7 @@ permalink: "/specifications/horizon-object.html"
     </ol>
   </section>
   <section class="content-band">
-    <h2>尚待确定：披露 ABI</h2>
+    <h2>待定事项：披露 ABI</h2>
     <p>节点类型、Section 名称、状态哈希、预算单位、继续句柄、检查点与消费端确认协议仍是待验证设计。跨轮 Bundle 的字段示意不能视为已冻结 ABI。</p>
   </section>
   <section class="content-band">
@@ -55,7 +55,7 @@ permalink: "/specifications/horizon-object.html"
     <p>来源图、局部抽取、全局链接、定向回读、Coverage Audit 与 Disclosure Planning 将分阶段实现；无法安全拆分或可靠理解的输入必须报错，不得静默截断。</p>
   </section>
   <section class="content-stack">
-    <h2>概要设计：发布闭包与研究验证</h2>
+    <h2>设计概要：发布闭包与研究验证</h2>
     <p>HOBJ 发布闭包由主对象、强依赖、版本与内容摘要、权限和信任策略、披露图、验收契约、评价器以及必需精确载荷组成。弱依赖必须声明缺失行为；动态依赖必须受配置、锁定和运行授权约束。</p>
     <p>验证工作需要回答三类问题：语义完整性是否优于普通压缩或摘要；渐进式披露能否在不丢失安全约束的前提下降低上下文成本；不同 Noema Object System 实现是否能对同一 HOBJ 得出一致的必需闭包、披露视图与拒绝结论。每项实验都应包含长上下文基线、对抗遗漏、权限冲突、预算不足和不可安全摘要材料。</p>
   </section>

@@ -1,8 +1,8 @@
 ---
 layout: "manual"
-title: "输入与输出 · noemlink 文档 · Noemion"
+title: "输入与输出 · noemlink 使用手册 · Noemion"
 page_role: "docs-topic"
-footer_text: "Noemion · noemlink documentation"
+footer_text: "Noemion · noemlink 使用手册"
 permalink: "/tools/noemlink/docs/inputs-outputs.html"
 manual_id: "noemlink"
 manual_group: "start"

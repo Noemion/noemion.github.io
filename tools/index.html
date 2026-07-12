@@ -20,7 +20,7 @@ permalink: "/tools/index.html"
     <div class="flow"><div class="step">规范与来源</div><div class="step">对象与文本 IR</div><div class="step">编译与链接</div><div class="step">裁剪 / Release Coverage</div><div class="step">打包 / 外部签名</div><div class="step">装载 / Harness / Runtime</div><div class="step">观察 / Run Closure / Decision</div></div>
     <p><strong>模型工程支线：</strong></p>
     <div class="flow"><div class="step">Dataset Snapshot</div><div class="step">Checkpoint Candidate</div><div class="step">浮点模型资格评估</div><div class="step">Model Package Candidate</div><div class="step">量化后资格评估</div><div class="step">进入 compile / bundle 锁定</div></div>
-    <p>开发顺序、失败边界和完成标准见<a href="../development/implementation-roadmap.html">实施路线图</a>。</p>
+    <p>开发顺序、失败边界和完成标准见<a href="../development/implementation-roadmap.html">开发路线图</a>。</p>
     <div class="catalog-controls" aria-label="工具筛选">
       <input class="catalog-search" type="search" data-catalog-search placeholder="搜索工具、职责或对象" aria-label="搜索工具">
       <button class="catalog-filter" type="button" data-catalog-filter="all" aria-pressed="true">全部</button>
@@ -30,13 +30,13 @@ permalink: "/tools/index.html"
       <button class="catalog-filter" type="button" data-catalog-filter="model" aria-pressed="false">模型工程</button>
     </div>
     <p class="catalog-empty" data-catalog-empty role="status">没有匹配的工具，请调整关键词或分类。</p>
-    <nav class="catalog-jumps" aria-label="工具类别快速跳转"><a href="#conformance-tools">规范合规</a><a href="#object-tools">安全对象</a><a href="#text-tools">文本 IR</a><a href="#compile-tools">编译链接</a><a href="#runtime-tools">发布运行</a><a href="#model-tools">模型工程</a></nav>
+    <nav class="catalog-jumps" aria-label="工具类别快速跳转"><a href="#conformance-tools">规范一致性</a><a href="#object-tools">安全对象</a><a href="#text-tools">文本 IR</a><a href="#compile-tools">编译链接</a><a href="#runtime-tools">发布运行</a><a href="#model-tools">模型工程</a></nav>
   </section>
   <section>
-    <h2>工具链概要设计</h2>
-    <p>这些工具按对象生命周期组织。认证工具执行规范测试；对象工具检查和变换文件；文本工具提供可阅读表示；编译与链接工具形成确定性对象；发布工具冻结覆盖、依赖和签名闭包；运行工具分别记录装载、Harness、Runtime 和评价证据；模型工具只产生不可信候选。</p>
+    <h2>工具链设计概要</h2>
+    <p>这些工具按对象生命周期组织。一致性检查工具执行规范测试；对象工具检查和变换文件；文本工具提供可阅读表示；编译与链接工具形成确定性对象；发布工具冻结覆盖、依赖和签名闭包；运行工具分别记录装载、Harness、Runtime 和评价证据；模型工具只产生不可信候选。</p>
     <div class="table-wrap"><table><thead><tr><th>层次</th><th>设计责任</th><th>不得跨越的边界</th></tr></thead><tbody>
-      <tr><td>合规与验证</td><td>把规范条款转成可执行测试、诊断和一致性证据</td><td>不能用单一实现行为反向定义规范</td></tr>
+      <tr><td>规范一致性与验证</td><td>把规范条款转成可执行测试、诊断和一致性证据</td><td>不能用单一实现行为反向定义规范</td></tr>
       <tr><td>对象与文本表示</td><td>安全读取、转换、比较、汇编和反汇编对象</td><td>不能绕过结构、类型、权限和完整性检查</td></tr>
       <tr><td>编译与链接</td><td>确定性生成、解析符号、应用重定位和形成闭包</td><td>不能调用模型解决规范要求确定处理的冲突</td></tr>
       <tr><td>发布与运行</td><td>裁剪、覆盖审计、签名打包、可信装载和追踪</td><td>不能静默扩大权限、依赖或披露范围</td></tr>
@@ -60,13 +60,13 @@ permalink: "/tools/index.html"
     <p>23 个名称是可审计的职责入口，不是必须各自维护一套进程、仓库或重复解析器。实现阶段应先共享结构定义、安全读取器和报告结构，再根据权限、失败原子性、使用频率与发布边界决定独立命令、子命令或库接口；不能因为目录已有名称就证明独立工具有价值。</p>
     <div class="table-wrap"><table><thead><tr><th>职责组</th><th>保留价值</th><th>适合的最小形态</th><th>合并或停止条件</th></tr></thead><tbody>
       <tr><td>验证、链接、覆盖、打包、执行</td><td>分别承担安全拒绝、依赖闭包、证据闭包、签名封装和会话控制，权限与失败责任不同。</td><td>独立命令面或服务边界，共享底层对象库。</td><td>可以同仓实现，但不能合并掉验证结论、签名身份、会话权限或 Acceptance Decision 边界。</td></tr>
-      <tr><td>查看、预算、符号、比较、观察、认证</td><td>为开发者、持续集成和审计提供只读视图，避免只能通过变换工具理解对象。</td><td>独立子命令或统一只读工具集；机器输出结构保持稳定。</td><td>若独立命令只复制同一报告且没有不同受众、性能或权限需求，应合并为子命令。</td></tr>
+      <tr><td>查看、预算、符号、比较、观察、一致性检查</td><td>为开发者、持续集成和审计提供只读视图，避免只能通过变换工具理解对象。</td><td>独立子命令或统一只读工具集；机器输出结构保持稳定。</td><td>若独立命令只复制同一报告且没有不同受众、性能或权限需求，应合并为子命令。</td></tr>
       <tr><td>格式化、汇编、反汇编、编译、分析、归档、裁剪与受控变换</td><td>输入语言、是否改写数据、事务语义和下游产物不同，分名有助于明确失败后是否可以提交输出。</td><td>共享 Parser、Writer 与变换库的多个命令面。</td><td><code>noemtransform</code> 若不能证明通用事务框架优于明确的专用操作，应缩减或并入具体工具；其他薄封装同样处理。</td></tr>
       <tr><td>数据、训练、评估与量化</td><td>保存 Noemion 特有的来源血缘、泄漏检查、资格记录与发布身份链。</td><td>先作为现有模型工程系统的可复现适配层和清单规范。</td><td>若没有超出现有工具的项目特有约束或可复现证据，不建设重复训练平台；Horizon Engine 不能证明增益时停止投入。</td></tr>
     </tbody></table></div>
   </section>
   <section id="conformance-tools" data-catalog-group="object">
-    <h2>规范合规</h2>
+    <h2>规范一致性</h2>
     <div class="page-links"><a class="page-link" data-catalog-item href="noemcertify/index.html"><strong>noemcertify</strong><span>执行规范条款、基准样例、畸形样例和跨工具一致性测试。</span></a></div>
   </section>
   <section id="object-tools" data-catalog-group="object">
@@ -98,7 +98,7 @@ permalink: "/tools/index.html"
     </div>
   </section>
   <section id="runtime-tools" data-catalog-group="runtime">
-    <h2>发布与运行时</h2>
+    <h2>发布与运行</h2>
     <div class="page-links">
       <a class="page-link" data-catalog-item href="noemreduce/index.html"><strong>noemreduce</strong><span>分离开发调试信息并证明发布语义不变。</span></a>
       <a class="page-link" data-catalog-item href="noemcoverage/index.html"><strong>noemcoverage</strong><span>分别建立 Release Coverage Proof 与 Run Evidence Closure。</span></a>
