@@ -8,8 +8,8 @@ manual_id: "docs"
 manual_group: "start"
 manual_order: 2
 nav_title: "获取与使用指南"
-hero_title: "获取与使用指南"
-hero_description: "说明当前可用资源、计划中的 Endem 流程和正式发布的完整性要求。"
+page_heading: "获取与使用指南"
+page_lead: "说明当前可用资源、计划中的 Endem 流程和正式发布的完整性要求。"
 summary: "查看当前可用资源、计划中的 Endem 流程和正式发布要求。"
 badges: ["Unreleased", "Endem CLI", "Integrity First"]
 ---

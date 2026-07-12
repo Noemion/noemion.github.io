@@ -8,8 +8,8 @@ manual_id: "docs"
 manual_group: "start"
 manual_order: 1
 nav_title: "入门指南"
-hero_title: "Noemion 入门指南"
-hero_description: "从 Endem 这个最小原语开始，理解目标怎样被形成、组合、装载与验收。"
+page_heading: "Noemion 入门指南"
+page_lead: "从 Endem 这个最小原语开始，理解目标怎样被形成、组合、装载与验收。"
 summary: "从 Endem 这个最小原语开始，理解目标怎样被形成、组合、装载与验收。"
 badges: ["Getting Started", "Endem", "No Release Yet"]
 ---

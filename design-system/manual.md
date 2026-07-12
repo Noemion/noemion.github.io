@@ -5,7 +5,7 @@
 ## 权威源
 
 - 手册正文只维护 `.md` 文件；公开 `.html` 由 Jekyll 构建。
-- Markdown 不复制 `<main>`、面包屑、Hero、分页、侧栏或页脚。
+- Markdown 不复制 `<main>`、面包屑、手册引言、分页、侧栏或页脚。
 - 手册级配置维护在 `_data/manuals.yml`；页面只声明所属手册、分组、顺序、标题和摘要。
 - 新页面的 `permalink` 是公开路由，删除或改名不保留兼容入口。
 
@@ -21,8 +21,8 @@ manual_id: endem
 manual_group: start
 manual_order: 1
 nav_title: 导航短标题
-hero_title: 页面主标题
-hero_description: 一句话摘要
+page_heading: 页面主标题
+page_lead: 一句话摘要
 summary: 目录卡片摘要
 badges: [Documentation]
 ```
@@ -48,7 +48,7 @@ badges: [Documentation]
 
 - 桌面侧栏 320px、阅读区 880px；侧栏显示手册名称、分组、数量和当前页。阅读区内普通正文限制在约 720–760px，表格和代码可以使用阅读区完整宽度。
 - 桌面侧栏中的全部分组首次加载时默认展开，保证完整目录和当前页面始终可见；分组标题仍允许用户手动收起，目录内容超过视口时只滚动侧栏本身。
-- 阅读区使用紧凑 Hero、30px 左右章节标题和顶部/底部分页。
-- 指南和手册不使用普通页面的大面积渐变制品卡；Hero 使用折页，章节标题使用梯形页签，动态索引使用同一页签节奏。Endem 手册按 `poie/elenk/pleko/tasse/sphra/theor/praxe/peira` 的职责色区分主题，但不改变折页结构、目录与阅读列。完整规则见 [`geometric-layouts.md`](geometric-layouts.md)。
+- 阅读区使用紧凑手册引言、30px 左右章节标题和顶部/底部分页。
+- 指南和手册不使用普通页面的大面积渐变制品卡；手册引言使用折页，章节标题使用梯形页签，动态索引使用同一页签节奏。Endem 手册按 `poie/elenk/pleko/tasse/sphra/theor/praxe/peira` 的职责色区分主题，但不改变折页结构、目录与阅读列。完整规则见 [`geometric-layouts.md`](geometric-layouts.md)。
 - 1000px 以下隐藏固定侧栏，由移动目录接管；正文、表格和代码块不得造成页面级横向滚动。
-- 560px 以下 Hero 视觉独占一行时必须以阅读区中心线对齐，折页角标跟随视觉本体定位，不能继续继承桌面右对齐。
+- 560px 以下手册引言视觉独占一行时必须以阅读区中心线对齐，折页角标跟随视觉本体定位，不能继续继承桌面右对齐。

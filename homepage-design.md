@@ -17,7 +17,7 @@
 
 | 章节 | 核心问题 | 权威出口 |
 | --- | --- | --- |
-| Hero | Endem 是什么，当前能做什么 | 入门、生命周期 |
+| 门户引言 | Endem 是什么，当前能做什么 | 入门、生命周期 |
 | The Primitive | 为什么不沿用 OBJ/IR 前缀体系 | ADR-0008、背景 |
 | Six Facets | 六个语义面怎样形成最小契约 | Endem 规范 |
 | Four Nouns | 哪些状态值得拥有正式名词 | Endem、Synem、Tekmor 规范 |

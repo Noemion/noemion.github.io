@@ -9,8 +9,8 @@ manual_group: "reference"
 manual_order: 5
 manual_index_entry: true
 nav_title: "参考索引"
-hero_title: "参考索引"
-hero_description: "集中查找 endem 子命令、制品、状态、组件和稳定失败类别。"
+page_heading: "参考索引"
+page_lead: "集中查找 endem 子命令、制品、状态、组件和稳定失败类别。"
 summary: "八个入口、Endem/Synem/Dromen/Tekmor、状态、失败和权威参考。"
 badges: ["Reference", "Unfrozen CLI"]
 ---

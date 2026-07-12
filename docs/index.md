@@ -8,8 +8,8 @@ manual_id: "docs"
 manual_group: "start"
 manual_order: 0
 nav_title: "指南与参考"
-hero_title: "指南与参考"
-hero_description: "从 Endem 入门，按任务进入架构、开发、应用或规范参考。"
+page_heading: "指南与参考"
+page_lead: "从 Endem 入门，按任务进入架构、开发、应用或规范参考。"
 summary: "从 Endem 入门，按任务进入架构、开发、应用或规范参考。"
 badges: ["Guides", "Endem Manual", "Reference"]
 manual_is_index: true

@@ -15,7 +15,7 @@
         <summary><small>{{ group.order | prepend: '0' | slice: -2, 2 }}</small><strong>{{ group.label }}</strong><span>{{ group_pages.size }}</span></summary>
         <div class="docs-rail-links">
           {% for manual_page in group_pages %}
-          <a href="{{ manual_page.permalink | relative_url }}"{% if manual_page.permalink == page.permalink %} class="active" aria-current="page"{% endif %}>{{ manual_page.nav_title | default: manual_page.hero_title }}</a>
+          <a href="{{ manual_page.permalink | relative_url }}"{% if manual_page.permalink == page.permalink %} class="active" aria-current="page"{% endif %}>{{ manual_page.nav_title | default: manual_page.page_heading }}</a>
           {% endfor %}
         </div>
       </details>

@@ -8,8 +8,8 @@ manual_id: "endem"
 manual_group: "safety"
 manual_order: 3
 nav_title: "安全与独立检查"
-hero_title: "安全与独立检查"
-hero_description: "区分生产 elenk 与独立 theor，并对所有不可信制品执行有界读取。"
+page_heading: "安全与独立检查"
+page_lead: "区分生产 elenk 与独立 theor，并对所有不可信制品执行有界读取。"
 summary: "生产验证、独立 Theor、checked arithmetic、分层结论和差分测试。"
 badges: ["elenk", "theor", "Fail Closed"]
 ---

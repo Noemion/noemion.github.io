@@ -8,8 +8,8 @@ manual_id: "docs"
 manual_group: "guides"
 manual_order: 3
 nav_title: "架构设计指南"
-hero_title: "Noemion 架构设计指南"
-hero_description: "从 Endem 到 Tekmor，理解三个实现域、四个名词和每道信任边界。"
+page_heading: "Noemion 架构设计指南"
+page_lead: "从 Endem 到 Tekmor，理解三个实现域、四个名词和每道信任边界。"
 summary: "从 Endem 到 Tekmor，理解三个实现域、四个名词和每道信任边界。"
 badges: ["Architecture", "Endem", "Trust Boundaries"]
 ---

@@ -8,8 +8,8 @@ manual_id: "endem"
 manual_group: "format"
 manual_order: 1
 nav_title: "格式与成形"
-hero_title: "格式与成形"
-hero_description: "从 Rhem Source 的六个语义面形成具有一个根 skena 的 nascent Endem。"
+page_heading: "格式与成形"
+page_lead: "从 Rhem Source 的六个语义面形成具有一个根 skena 的 nascent Endem。"
 summary: "来源、意义、可能事态、目标方向、满足判据、未决边界与确定性 poie。"
 badges: ["poie", "One Root Skena"]
 ---

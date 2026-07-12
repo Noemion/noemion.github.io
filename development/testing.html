@@ -7,7 +7,7 @@ permalink: "/development/testing.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>测试与验证</span></nav>
-  <div class="hero"><h1>测试与验证</h1><p>Endem、Synem 与 Praxor 只有通过明确失败路径，才能获得对应范围的信任。</p><div class="badges"><span class="badge">Malformed Corpus</span><span class="badge">Cross-reader</span><span class="badge">Reproducible</span></div></div>
+  <header class="content-introduction"><h1>测试与验证</h1><p>Endem、Synem 与 Praxor 只有通过明确失败路径，才能获得对应范围的信任。</p><div class="badges"><span class="badge">Malformed Corpus</span><span class="badge">Cross-reader</span><span class="badge">Reproducible</span></div></header>
 
   <section class="content-rows"><h2>解析与资源安全</h2><p class="callout"><strong>基本规则：</strong>“合法样例通过”只证明一条成功路径。畸形、冲突、越权、超限和不完整输入必须稳定、快速且不产生部分可信结果地失败。</p><ul>
     <li>覆盖非法偏移、长度、计数、索引、对齐、重叠、环、自引用、超深图、压缩炸弹和恶意大计数。</li>

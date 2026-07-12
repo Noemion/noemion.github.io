@@ -8,8 +8,8 @@ manual_id: "docs"
 manual_group: "reference"
 manual_order: 6
 nav_title: "规范参考指南"
-hero_title: "Noemion 规范参考指南"
-hero_description: "理解 Endem、Synem、Tekmor、成熟度标记与 ADR 的权威顺序。"
+page_heading: "Noemion 规范参考指南"
+page_lead: "理解 Endem、Synem、Tekmor、成熟度标记与 ADR 的权威顺序。"
 summary: "理解 Endem、Synem、Tekmor、成熟度标记与 ADR 的权威顺序。"
 badges: ["Authority", "Maturity", "ADR"]
 ---

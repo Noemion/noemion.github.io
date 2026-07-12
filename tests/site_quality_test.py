@@ -236,6 +236,14 @@ CONTENT_LAYOUT_CLASSES = {
     "content-grid",
     "content-rows",
 }
+INTRODUCTION_CLASSES = {
+    "portal-introduction",
+    "section-introduction",
+    "content-introduction",
+    "application-introduction",
+    "manual-introduction",
+}
+DEPRECATED_LAYOUT_TERM = "he" + "ro"
 
 CURRENT_DOMAIN_IDENTIFIERS = {
     "endem", "rhem", "semion", "skena", "telis", "krin", "apor", "phain",
@@ -427,6 +435,7 @@ class PageParser(HTMLParser):
         self.active_h2 = None
         self.page_role = None
         self.site_module = None
+        self.docs_layout = False
         self.stack = []
 
     def handle_starttag(self, tag, attrs):
@@ -446,6 +455,7 @@ class PageParser(HTMLParser):
         if tag == "body" and data.get("data-page-role"):
             self.page_role = data["data-page-role"]
             self.site_module = data.get("data-site-module")
+            self.docs_layout = data.get("data-docs-layout") == "true"
         if tag == "a" and "href" in data:
             href = data["href"]
             self.links.append(href)
@@ -645,7 +655,7 @@ def validate_readability_behavior_contracts(root):
         for token in (
             'querySelectorAll(".manual-article table")',
             'wrapper.className = "table-wrap manual-table-wrap"',
-            'this.main.querySelector(":scope > .hero")',
+            'this.main.querySelector(":scope > .content-introduction")',
             'insertAdjacentElement("afterend", outline)',
         ):
             if token not in behavior_text:
@@ -671,8 +681,8 @@ def validate_readability_behavior_contracts(root):
     if style.exists() and directory_style.exists():
         style_text = style.read_text()
         directory_text = directory_style.read_text()
-        if 'body[data-docs-layout="true"] .hero::before{top:auto;right:auto;bottom:28px;left:50%;width:130px;height:104px;transform:translateX(-50%)}' not in style_text:
-            errors.append("mobile documentation hero visual must be centered on its standalone row")
+        if 'body[data-docs-layout="true"] .manual-introduction::before{top:auto;right:auto;bottom:28px;left:50%;width:130px;height:104px;transform:translateX(-50%)}' not in style_text:
+            errors.append("mobile manual introduction visual must be centered on its standalone row")
         css_patterns = {
             "docs content must become a centered single column from 1217px": (
                 style_text,
@@ -767,6 +777,8 @@ def validate_legacy_source_vocabulary():
                 f"{relative}: legacy vocabulary remains outside superseded ADRs "
                 f"{legacy_text_match.group(0)!r}"
             )
+        if DEPRECATED_LAYOUT_TERM in text.lower():
+            errors.append(f"{relative}: retains the deprecated generic lead-layout term")
     return errors
 
 
@@ -933,7 +945,7 @@ def validate_jekyll_sources():
         if forbidden_shell.search(body):
             errors.append(f"{route}: page shell must come from the Jekyll layout")
         if is_manual_markdown:
-            for key in ("manual_id", "manual_group", "manual_order", "nav_title", "hero_title", "hero_description"):
+            for key in ("manual_id", "manual_group", "manual_order", "nav_title", "page_heading", "page_lead"):
                 if front_matter_value(metadata, key) is None:
                     errors.append(f"{route}: Markdown manual requires {key}")
             body_without_autolinks = re.sub(
@@ -1145,10 +1157,10 @@ def validate_jekyll_sources():
             'body[data-site-module="development"]',
             'body[data-site-module="resources"]',
             'body[data-site-module="support"]',
-            "clip-path:var(--module-hero-clip)",
+            "clip-path:var(--module-introduction-clip)",
             "clip-path:var(--module-card-clip)",
             "radial-gradient(circle at var(--module-node-1)",
-            'body[data-docs-layout="true"] .hero::before{',
+            'body[data-docs-layout="true"] .manual-introduction::before{',
             "clip-path:polygon(0 0,74% 0,100% 26%,100% 100%,0 100%)",
             'body .global-brand{grid-column:1;min-width:0;overflow:hidden',
             'body .global-brand>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
@@ -1182,11 +1194,11 @@ def validate_jekyll_sources():
                     f"shared styles retain obsolete stage animation: {obsolete_stage_motion}"
                 )
         if re.search(
-            r'body\[data-docs-layout="true"\]\s+\.hero::before,\s*'
-            r'body\[data-docs-layout="true"\]\s+\.hero::after\s*\{display:none\}',
+            r'body\[data-docs-layout="true"\]\s+\.manual-introduction::before,\s*'
+            r'body\[data-docs-layout="true"\]\s+\.manual-introduction::after\s*\{display:none\}',
             shared_css,
         ):
-            errors.append("documentation heroes must preserve their folded-page geometry")
+            errors.append("manual introductions must preserve their folded-page geometry")
         for legacy_selector in (
             ".portal-header",
             ".portal-header-inner",
@@ -1787,8 +1799,27 @@ def main():
                 f"{row['route']}: data-site-module must be {expected_module!r}, "
                 f"got {parser.site_module!r}"
             )
-        if row["kind"] != "portal" and parser.class_counts["hero"] != 1:
-            errors.append(f"{row['route']}: every non-portal page must expose one module-aware hero")
+        expected_introduction = (
+            "portal-introduction"
+            if row["kind"] == "portal"
+            else "manual-introduction"
+            if parser.docs_layout
+            else "application-introduction"
+            if row["kind"] in {"app", "tool"}
+            else "section-introduction"
+            if row["kind"] == "section"
+            else "content-introduction"
+        )
+        introduction_counts = {
+            name: parser.class_counts[name]
+            for name in INTRODUCTION_CLASSES
+            if parser.class_counts[name]
+        }
+        if introduction_counts != {expected_introduction: 1}:
+            errors.append(
+                f"{row['route']}: expected one {expected_introduction}, "
+                f"got {introduction_counts}"
+            )
 
     for route in NORMATIVE_ROUTES:
         path = ROOT / route

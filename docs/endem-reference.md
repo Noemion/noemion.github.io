@@ -8,8 +8,8 @@ manual_id: "docs"
 manual_group: "reference"
 manual_order: 5
 nav_title: "Endem 应用参考"
-hero_title: "Endem 应用参考"
-hero_description: "一个公开 CLI、八个短动作、三个不能合并的信任域。"
+page_heading: "Endem 应用参考"
+page_lead: "一个公开 CLI、八个短动作、三个不能合并的信任域。"
 summary: "按生命周期查找 endem 子命令、消费者、失败责任和实施阶段。"
 badges: ["One CLI", "8 Verbs", "Unreleased"]
 ---

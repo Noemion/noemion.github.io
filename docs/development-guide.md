@@ -8,8 +8,8 @@ manual_id: "docs"
 manual_group: "guides"
 manual_order: 4
 nav_title: "开发指南"
-hero_title: "Noemion 开发指南"
-hero_description: "面向 Endem 规范、安全核心、独立 Theor 与隔离 Praxor 的开发纪律。"
+page_heading: "Noemion 开发指南"
+page_lead: "面向 Endem 规范、安全核心、独立 Theor 与隔离 Praxor 的开发纪律。"
 summary: "面向 Endem 规范、安全核心、独立 Theor 与隔离 Praxor 的开发纪律。"
 badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 ---

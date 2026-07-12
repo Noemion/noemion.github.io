@@ -31,7 +31,7 @@ export class PageOutline {
       link.textContent = heading.textContent.trim();
       outline.append(link);
     });
-    this.main.querySelector(":scope > .hero")?.insertAdjacentElement("afterend", outline);
+    this.main.querySelector(":scope > .content-introduction")?.insertAdjacentElement("afterend", outline);
   }
 }
 

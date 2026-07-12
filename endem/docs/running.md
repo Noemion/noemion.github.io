@@ -8,8 +8,8 @@ manual_id: "endem"
 manual_group: "running"
 manual_order: 4
 nav_title: "发布与运行"
-hero_title: "发布与运行"
-hero_description: "冻结发布载荷、核对外部签名，并在隔离 Praxor 中建立 Dromen 与 Tekmor。"
+page_heading: "发布与运行"
+page_lead: "冻结发布载荷、核对外部签名，并在隔离 Praxor 中建立 Dromen 与 Tekmor。"
 summary: "tasse、sphra、外部签名、Praxor、Dromen、能力循环与最终决定。"
 badges: ["tasse", "sphra", "praxe"]
 ---

@@ -9,8 +9,8 @@ manual_group: "start"
 manual_order: 0
 manual_is_index: true
 nav_title: "手册首页"
-hero_title: "endem 使用手册"
-hero_description: "说明一个命令怎样制作、验证、组合、发布、独立观察和隔离实行目标制品。"
+page_heading: "endem 使用手册"
+page_lead: "说明一个命令怎样制作、验证、组合、发布、独立观察和隔离实行目标制品。"
 summary: "Endem 格式、组合、安全、运行和命令参考的连续手册。"
 manual_index_heading: "endem 手册目录"
 badges: ["Single CLI", "Design Stage"]

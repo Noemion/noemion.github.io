@@ -24,7 +24,7 @@ layout: default
       <a href="{{ breadcrumb.url | relative_url }}">{{ breadcrumb.label }}</a><span aria-hidden="true">/</span>
     {% endfor %}
     {% unless page.manual_is_index %}<a href="{{ manual.root | relative_url }}">{{ manual.title }}</a><span aria-hidden="true">/</span>{% endunless %}
-    <span aria-current="page">{{ page.nav_title | default: page.hero_title }}</span>
+    <span aria-current="page">{{ page.nav_title | default: page.page_heading }}</span>
   </nav>
 
   <nav class="manual-nav manual-nav-top" aria-label="手册分页">
@@ -35,11 +35,11 @@ layout: default
     <a data-manual-role="index" href="{{ index_page.url | default: manual.root | relative_url }}">{{ index_label }}</a>
   </nav>
 
-  <div class="hero">
-    <h1>{{ page.hero_title | default: page.nav_title }}</h1>
-    <p>{{ page.hero_description }}</p>
+  <header class="manual-introduction">
+    <h1>{{ page.page_heading | default: page.nav_title }}</h1>
+    <p>{{ page.page_lead }}</p>
     {% if page.badges %}<div class="badges">{% for badge in page.badges %}<span class="badge">{{ badge }}</span>{% endfor %}</div>{% endif %}
-  </div>
+  </header>
 
   <article class="manual-article">
     {{ content }}
@@ -56,7 +56,7 @@ layout: default
         <div class="page-links manual-index-links">
           {% for manual_page in manual_pages %}
             {% if manual_page.manual_group == group_key and manual_page.manual_is_index != true %}
-            <a class="page-link" href="{{ manual_page.url | relative_url }}"><strong>{{ manual_page.nav_title | default: manual_page.hero_title }}</strong><span>{{ manual_page.summary | default: manual_page.hero_description }}</span></a>
+            <a class="page-link" href="{{ manual_page.url | relative_url }}"><strong>{{ manual_page.nav_title | default: manual_page.page_heading }}</strong><span>{{ manual_page.summary | default: manual_page.page_lead }}</span></a>
             {% endif %}
           {% endfor %}
         </div>
