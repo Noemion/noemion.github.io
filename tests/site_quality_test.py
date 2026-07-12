@@ -990,8 +990,9 @@ def validate_jekyll_sources():
     if homepage_source.exists():
         homepage_text = homepage_source.read_text()
         for token in (
-            '<h1 id="portal-title"><span>Noemion，</span><strong>让目标成为可验证的工程制品。</strong></h1>',
-            '<p class="portal-introduction-summary">Noemion 是面向自然语言目标的确定性基础项目；Endem 是其中最小、独立有效且可验证的期望终态制品。</p>',
+            'title: "Noemion · 自然语言目标的确定性工程基础"',
+            '<h1 id="portal-title"><span>Noemion，</span><strong><span>自然语言目标的</span><span>确定性工程基础。</span></strong></h1>',
+            '<p class="portal-introduction-summary">Noemion 把自然语言目标确定性地形成和组合为持久制品，在最小权限下实现，并用有范围的证据验收；Endem 是其中的最小目标制品。</p>',
             '<span>了解 Noemion</span>',
             '<span>认识 Endem</span>',
             '<strong>Noemion</strong> 是整个项目、新领域与社区的名称',
@@ -1756,7 +1757,7 @@ def main():
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
         home_source = home.read_text()
-        if '<h1 id="portal-title"><span>Noemion，</span><strong>让目标成为可验证的工程制品。</strong></h1>' not in home_source:
+        if '<h1 id="portal-title"><span>Noemion，</span><strong><span>自然语言目标的</span><span>确定性工程基础。</span></strong></h1>' not in home_source:
             errors.append("index.html: rendered portal must identify Noemion before Endem")
         if home_source.count('class="portal-chapter-title"') != len(HOME_HEADINGS):
             errors.append("index.html: every homepage chapter heading must use the shared symbolic title treatment")

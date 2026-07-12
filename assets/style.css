@@ -366,10 +366,10 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
   font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase
 }
 .portal-introduction h1{
-  margin:0;color:var(--portal-ink);font-size:clamp(48px,5.2vw,68px);font-weight:430;
+  margin:0;color:var(--portal-ink);font-size:clamp(48px,4.6vw,60px);font-weight:430;
   letter-spacing:-.055em;line-height:.99;text-wrap:balance
 }
-.portal-introduction h1 span,.portal-introduction h1 strong{display:block}
+.portal-introduction h1>span,.portal-introduction h1>strong,.portal-introduction h1 strong>span{display:block}
 .portal-introduction h1 strong{
   margin-top:5px;color:var(--portal-ink);font-weight:760;
   text-decoration-line:underline;text-decoration-color:var(--portal-coral);
@@ -824,7 +824,7 @@ body[data-page-role="portal"] .site-footer{
   body[data-page-role="portal"] .portal-main{width:calc(100% - 16px);margin-bottom:48px}
   .portal-introduction{grid-template-columns:1fr;min-height:0}
   .portal-introduction-copy{min-height:540px;padding:62px 34px 36px}
-  .portal-introduction h1{font-size:clamp(46px,11vw,62px)}
+  .portal-introduction h1{font-size:clamp(42px,9vw,52px)}
   .portal-introduction-visual{min-height:560px}
   .dataflow-field{width:68%}
   .portal-thesis{grid-template-columns:1fr;min-height:0}
@@ -855,7 +855,7 @@ body[data-page-role="portal"] .site-footer{
 @media(max-width:560px){
   .portal-introduction-copy{min-height:500px;padding:48px 24px 30px}
   .portal-eyebrow{margin-bottom:24px;font-size:9px}
-  .portal-introduction h1{font-size:46px;line-height:1.02}
+  .portal-introduction h1{font-size:42px;line-height:1.02}
   .portal-introduction-summary{margin-top:27px;font-size:16px}
   .portal-actions{align-items:stretch;flex-direction:column}
   .portal-button{width:100%;justify-content:space-between}
@@ -901,6 +901,14 @@ body[data-page-role="portal"] .site-footer{
   }
   .portal-next-grid>a:nth-last-child(-n+2){border-bottom:1px solid var(--portal-line)}
   .portal-next-grid>a:last-child{border-bottom:0}
+}
+
+@media(max-width:380px){
+  .portal-introduction h1{font-size:38px}
+}
+
+@media(max-width:340px){
+  .portal-introduction h1{font-size:33px}
 }
 
 @media(prefers-reduced-motion:reduce){
