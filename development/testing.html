@@ -34,7 +34,7 @@ permalink: "/development/testing.html"
     <li>Poiet 与 Theor 没有共享解析器、CBOR 解码器、验证器或错误实现；普通依赖树只含工作区内三个 crate。</li>
     <li>3,372 个单字节翻转与截断样本没有触发 panic，也没有出现语义接受绕过结构拒绝。</li>
     <li>不同区域设置和构建纪元产生相同对象摘要 <code>d21c96fe…84d2c8b</code>；这只证明对象字节复现，不证明可执行文件跨平台复现。</li>
-    <li>仍缺覆盖引导模糊、更多资源边界向量、故障注入、跨平台 CI、签名与 SBOM。</li>
+    <li>本地 Poiet 与 Theor 覆盖引导目标已各运行 100,000 次；仍缺公开 CI、长时多平台 campaign、故障注入、签名与 SBOM。</li>
   </ul></section>
 
   <section class="content-rows"><h2>语义与歧义保留</h2><ul>

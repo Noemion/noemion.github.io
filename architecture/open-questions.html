@@ -46,7 +46,7 @@ permalink: "/architecture/open-questions.html"
   <section class="content-grid">
     <h2>实施与发布条件</h2>
     <details open><summary>独立 Theor 使用什么实现边界？</summary><p>首个候选同样使用 Rust，但拥有自己的数据结构、CBOR 解码器、验证器和错误实现；它只与 Poiet 共享公开规范和字节向量。是否需要第二种语言，要由真实共同故障和维护成本决定。</p></details>
-    <details><summary>独立 Theor 还缺什么证据？</summary><p>当前已检查依赖树、正反向量和 3,372 个有界变异样本。仍需覆盖引导模糊、故障注入、更多边界类别和跨平台运行，证明两条路径不会在同一输入假设上同时失效。</p></details>
+    <details><summary>独立 Theor 还缺什么证据？</summary><p>当前已检查依赖树、十三个 END-P1 向量、3,372 个有界变异，并让 Poiet 与 Theor 覆盖引导目标各运行 100,000 次。仍需公开代码审计、长时 fuzz、故障注入和跨平台运行，继续寻找两条路径的共同输入假设。</p></details>
     <details><summary>名称何时满足正式发布条件？</summary><p>项目内部命名已经冻结，但公开发行前仍需检查目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。审查完成前不得声称商标可用。</p></details>
     <details><summary>怎样证明构建可复现？</summary><p>对象字节、工具二进制和签名真实性是三个不同属性。需要双路径构建、固定环境输入、逐字节比较和独立签名验证。</p></details>
   </section>
