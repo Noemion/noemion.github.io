@@ -22,6 +22,9 @@ permalink: "/architecture/decisions.html"
       <tr><td>工具链产物与外部签名</td><td>发布链依次形成 Release Object、Release Coverage Proof、Unsigned Package Candidate、Signing Request、Signature Response 与 Signed Noemion Package；私钥只在外部签名系统。</td><td>noemreduce、noemcoverage、noembundle、noemexecute 与对象生命周期。</td></tr>
       <tr><td>候选、能力与验收分层</td><td>Candidate Envelope 不是 NIR；Capability Requirement 不是实时句柄；Candidate Assessment、Evidence Closure 和 Acceptance Decision 是三个不同结果。</td><td>Noesis Core、Object System、Agent Harness、Runtime 与所有运行证据工具。</td></tr>
       <tr><td>NIR/NOBJ 结构基线</td><td>自然语言先形成不可信候选；确认语义经过确定性重推导或授权绑定后进入带显式来源的 NIR 图记录。NOBJ 使用固定 Header、前置目录、长度限定 Section 和分层验证，不让模型决定记录或二进制布局。</td><td>NIR/NOBJ 规范、Noesis Core、四套格式工具手册、验证器与畸形对象语料。</td></tr>
+      <tr><td>身份、完整性与签名域分离</td><td>完整文件摘要在对象外计算；对象内 Integrity Root 不覆盖自身，未经外部摘要或签名绑定时也不是信任锚；Semantic Identity 等待等价规则冻结；发布签名属于外部封装且不证明语义正确。</td><td>NOBJ Header、Integrity Section、Debug Companion、发布清单、签名范围与等价测试。</td></tr>
+      <tr><td>Phase 0/1 首个纵向切片</td><td>先完成 Text NIR → NOBJ、生产验证器、独立直接读取器和差分一致性；工具页表示职责，不承诺 23 个独立二进制。</td><td>首个实现仓库、规范条款、测试向量、Reader/Writer、theoria、noemvalidate 与 noemcertify。</td></tr>
+      <tr><td>外部 AI 协议只做适配</td><td>MCP、A2A、JSON Schema 和 OpenTelemetry GenAI 只在 Agent Harness 外缘映射；远端工具说明、Agent Card、schema 与任务状态均是不可信声明。</td><td>协议 Profile、能力策略、令牌隔离、安全回归与遥测 exporter。</td></tr>
     </tbody></table></div>
   </section>
   <section class="content-split">
@@ -36,7 +39,7 @@ permalink: "/architecture/decisions.html"
   </section>
   <section class="content-band">
     <h2>尚未冻结的内容</h2>
-    <p>Candidate Envelope、Source Binding Decision、NIR 公共记录头与记录家族、NOBJ Header/Section Directory 的逻辑字段职责和物理顺序已经形成详细设计基线。仍未冻结的是类型枚举、字段宽度、魔数字节、Section/重定位编号、Text NIR 语法、压缩与摘要算法，以及 Loaded State Handle、Runtime/Harness 协议、Acceptance Decision、签名封装和撤销协议。它们仍需威胁模型、跨实现原型和正反测试，不能从当前逻辑字段直接推断稳定 ABI。</p>
+    <p>Candidate Envelope、Source Binding Decision、NIR 公共记录头与记录家族、NOBJ Header/Section Directory 的逻辑字段职责、非循环摘要域和首个实现切片已经形成详细设计基线。仍未冻结的是实现语言、类型枚举、字段宽度、魔数字节、Section/重定位编号、Text NIR 语法、压缩与摘要算法、协议适配 Profile，以及 Loaded State Handle、Runtime/Harness 协议、Acceptance Decision、签名封装和撤销协议。它们仍需威胁模型、跨实现原型和正反测试，不能从当前逻辑字段直接推断稳定 ABI。</p>
   </section>
   <div class="next-prev"><a href="noema-lifecycle.html">← 对象生命周期</a><a href="open-questions.html">开放问题 →</a></div>
 </main>

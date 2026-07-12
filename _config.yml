@@ -1,7 +1,6 @@
 title: Noemion
 description: >-
-  A deterministic Noesis-to-Noema toolchain for compiling human intent into
-  verifiable, linkable, and securely loadable objects for generative computing.
+  Noemion 是面向生成式计算的确定性表征对象编译、链接与可信装载工具链。
 url: https://noemion.github.io
 baseurl: ""
 repository: Noemion/noemion.github.io

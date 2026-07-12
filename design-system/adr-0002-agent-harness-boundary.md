@@ -27,6 +27,18 @@ Agent Harness 不属于确定性可信核心，也不是新的对象编译器。
 5. 验收契约、预算、停止条件和人工升级条件在执行前确定；模型不得自行宣告成功或扩大权限。
 6. Agent Harness 不直接生成 NIR/NOBJ，不修改签名对象，不绕过 Noesis Core、对象验证或装载策略。
 
+## 外部协议、结构化输出与遥测适配
+
+MCP、A2A、供应商工具调用和结构化输出只作为 Agent Harness 外缘的互操作输入，不能定义 Noemion 内部能力、任务、事件或验收 ABI：
+
+1. 适配器必须显式绑定协议版本，把远端 Tool、Agent Card、Task、schema 和结果翻译为 Noemion 自有的 Capability Catalog、Runtime Request、Capability Request/Observation、Evidence 与 Policy 结构。
+2. 远端工具说明、行为注解、Agent Card、输出 schema 和模型生成参数均视为不可信声明。模式合法只证明结构，不证明参数授权、值语义、工具行为或结果正确。
+3. Bearer token、刷新令牌、私钥和实时能力句柄不得进入模型上下文、NIR/NOBJ 或可重放 Trace。HTTP 适配器必须执行访问令牌 audience/resource 限制、token passthrough 禁止和 SSRF 防护；采用 OAuth Authorization Code Grant 时，public client 必须使用 PKCE，confidential client 按 RFC 9700 建议使用 PKCE。不得把只适用于授权码流程的 PKCE 错写成所有凭证模式的通用机制。
+4. OpenTelemetry GenAI 等外部遥测语义只能由版本化 exporter 生成；Noemion 的稳定事件身份和 Acceptance Decision 不能依赖尚未发布稳定 schema 的外部字段。
+5. 协议缺失能力、版本不兼容或未知必需字段时关闭失败，不把降级后的远端任务状态静默映射为 Noemion 的 accepted、authorized 或 complete。
+
+截至 2026-07-12，实施基线只把 MCP 2025-11-25 与 A2A 1.0 系列（研究快照 1.0.1）视为后续适配候选；第一阶段不引入任何外部智能体协议。协议版本变化必须先通过跨版本、恶意 schema、重放、取消、幂等性、confused deputy 与 token audience 测试，再更新适配 Profile。
+
 ## 工具映射
 
 - `noesis`：把受控来源或模型候选交给 Noesis Core，产生确定性对象与证据账本。
@@ -52,3 +64,8 @@ Agent Harness 成为必要的逻辑控制边界，但不要求独立进程或单
 ## 依据
 
 - OpenAI, “工程技术：在智能体优先的世界中利用 Codex”: https://openai.com/zh-Hans-CN/index/harness-engineering/
+- MCP 2025-11-25 规范与工具安全边界：https://modelcontextprotocol.io/specification/2025-11-25 和 https://modelcontextprotocol.io/specification/2025-11-25/server/tools
+- A2A 1.0.1 规范：https://a2a-protocol.org/v1.0.1/specification/
+- OAuth 安全与资源绑定：https://www.rfc-editor.org/info/rfc9700/、https://www.rfc-editor.org/rfc/rfc9728.html 和 https://www.rfc-editor.org/info/rfc8707/
+- OpenTelemetry GenAI 语义仓库：https://github.com/open-telemetry/semantic-conventions-genai
+- JSON Schema 2020-12：https://json-schema.org/draft/2020-12

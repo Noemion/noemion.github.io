@@ -15,11 +15,21 @@
 {% else %}
   {% assign asset_version = site.time | date: '%s' %}
 {% endif %}
+{% assign page_description = page.summary | default: page.description | default: site.description %}
 <html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ page.title | escape }}</title>
+  <meta name="description" content="{{ page_description | strip_html | strip_newlines | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title | escape }}">
+  <meta property="og:title" content="{{ page.title | escape }}">
+  <meta property="og:description" content="{{ page_description | strip_html | strip_newlines | escape }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
   <script src="{{ '/assets/theme.js' | relative_url }}?v={{ asset_version | escape }}"></script>
   <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ asset_version | escape }}">
   <link rel="stylesheet" href="{{ '/assets/directory.css' | relative_url }}?v={{ asset_version | escape }}">

@@ -15,7 +15,6 @@
   };
 
   const resolveDirectoryModule = (route) => {
-    if (route.startsWith("tools/synthesis/docs/")) return "synthesisDocs";
     if (route.startsWith("tools/synthesis/")) return "synthesis";
     if (route.startsWith("tools/")) return "tools";
     if (route.startsWith("docs/")) return "docs";
@@ -352,47 +351,6 @@
         }
       ]
     },
-    synthesisDocs: {
-      kicker: "Tool Manual",
-      title: "synthesis 使用手册",
-      root: { href: "tools/synthesis/docs/index.html", label: "手册首页" },
-      parent: { href: "tools/synthesis/index.html", label: "返回 synthesis 项目页" },
-      groups: [
-        {
-          label: "快速开始",
-          items: [
-            { href: "tools/synthesis/docs/index.html", label: "手册首页" },
-            { href: "tools/synthesis/docs/contract.html", label: "职责与契约" },
-            { href: "tools/synthesis/docs/inputs-outputs.html", label: "输入与输出" },
-            { href: "tools/synthesis/docs/invocation.html", label: "命令行调用" }
-          ]
-        },
-        {
-          label: "链接流程",
-          items: [
-            { href: "tools/synthesis/docs/pipeline.html", label: "处理流程" },
-            { href: "tools/synthesis/docs/symbol-resolution.html", label: "符号解析" },
-            { href: "tools/synthesis/docs/relocations.html", label: "重定位与 ID 重映射" },
-            { href: "tools/synthesis/docs/horizon-linking.html", label: "HOBJ 链接" }
-          ]
-        },
-        {
-          label: "安全与验证",
-          items: [
-            { href: "tools/synthesis/docs/loader-security.html", label: "装载与安全" },
-            { href: "tools/synthesis/docs/diagnostics.html", label: "诊断与失败边界" },
-            { href: "tools/synthesis/docs/testing.html", label: "测试与验收" }
-          ]
-        },
-        {
-          label: "参考资料",
-          items: [
-            { href: "tools/synthesis/docs/dependencies.html", label: "上下游依赖" },
-            { href: "tools/synthesis/docs/reference-index.html", label: "参考索引" }
-          ]
-        }
-      ]
-    }
   });
 
   const GLOBAL_NAV_GROUPS = Object.freeze([

@@ -46,7 +46,7 @@ permalink: "/specifications/noema-object.html"
       <tr><td>编码</td><td><code>encoding_profile</code>、<code>flags</code>、<code>required_features</code></td><td>未知必需特性失败；禁止把未声明字节序或宽度按本机默认解释。</td></tr>
       <tr><td>Section 视图</td><td>Section Directory 偏移、数量、表项大小、字符串表索引</td><td><code>count × entry_size</code>、偏移加长度和索引全部 checked。</td></tr>
       <tr><td>装载视图</td><td>Load Directory 偏移、数量与表项大小</td><td>无装载视图时全部为规范空值；存在时 Segment 不得越权或重叠。</td></tr>
-      <tr><td>完整性</td><td>完整性 Section 索引与对象字节摘要</td><td>摘要算法由 Profile 声明，字段自身的覆盖规则不能循环定义。</td></tr>
+      <tr><td>完整性</td><td>完整性 Section 索引与完整性 Profile 标识</td><td>Header 不保存递归覆盖自身的完整文件摘要；未知必需 Profile、循环覆盖或自引用必须失败。</td></tr>
     </tbody></table></div>
     <p>当前实现原型候选为小端、64 位 checked offset/length 与 32 位表索引；它只是研究起点，尚未冻结为 ABI。</p>
   </section>
@@ -78,7 +78,7 @@ permalink: "/specifications/noema-object.html"
   <section class="content-wide">
     <h2>详细设计基线：链接与证据记录</h2>
     <div class="table-wrap"><table><thead><tr><th>记录</th><th>最低逻辑字段</th><th>验证重点</th></tr></thead><tbody>
-      <tr><td>Symbol</td><td>name ref、kind、binding、visibility、definition state、section/record ref、type/version ref、size or arity、origin ref、stable-key digest</td><td>名称不充当身份；定义状态、记录类别与类型一致；稳定键不随布局改变。</td></tr>
+      <tr><td>Symbol</td><td>namespace/name ref、kind、linkage class（local/export/import）、visibility、definition state、section/record/type/version ref、resolution/missing policy、size or arity、origin ref、stable-key digest</td><td>名称不充当身份；可选性与缺失行为显式声明；多个定义不能按输入顺序或隐式弱绑定选择。</td></tr>
       <tr><td>Relocation</td><td>target section/record/field、kind、symbol ref、expected type、encoding/width、optional addend、overflow policy、origin ref</td><td>只能改写声明字段；未知类型、错位、类型变化、溢出和重复应用失败。</td></tr>
       <tr><td>Dependency</td><td>kind、content digest、version constraint、required features、resolution policy、optional flag、origin ref</td><td>正式解析结果内容寻址且可重放；网络最新版本和目录枚举不能成为隐式输入。</td></tr>
       <tr><td>Origin</td><td>subject range、source digest、source unit/span、derivation class、rule/model identity、decision digest、authority、evidence refs</td><td>确认语义可追溯；候选、规则推导和授权决定保持不同确认等级。</td></tr>
@@ -95,7 +95,7 @@ permalink: "/specifications/noema-object.html"
       <tr><td><code>nir.constraints</code> / <code>nir.ambiguities</code></td><td>硬软约束、未知策略、替代解释与处理状态。</td><td>不得因裁剪改变强度或删除未决状态。</td></tr>
       <tr><td><code>nir.acceptance</code> / <code>nir.capabilities</code> / <code>nir.artifacts</code></td><td>验收、能力需求和输出契约。</td><td>Runtime 或策略需要时保留；不包含实时句柄。</td></tr>
       <tr><td><code>strings</code> / <code>symbols</code> / <code>relocations</code></td><td>显示名称、导入导出、可见性与待链接引用。</td><td>链接后按对象类型保留或重建。</td></tr>
-      <tr><td><code>dependencies</code> / <code>policies</code></td><td>内容寻址依赖、版本、权限和处理规则。</td><td>强依赖与安全策略必须保留。</td></tr>
+      <tr><td><code>dependencies</code> / <code>policies</code></td><td>内容寻址依赖、版本、权限和处理规则。</td><td>必需依赖与安全策略必须保留。</td></tr>
       <tr><td><code>origins</code></td><td>确认语义的最小来源摘要、跨度和决定引用。</td><td>覆盖证明完成前不得删除；发布形态至少保留可追溯摘要。</td></tr>
       <tr><td><code>build</code></td><td>输入摘要、配置、工具/模型指纹和已解析依赖。</td><td>不进入 Runtime 语义；按发布策略保留或外置。</td></tr>
       <tr><td><code>debug.source</code></td><td>原始表达、注释、完整候选和详细诊断映射。</td><td>可以进入 Debug Companion，但删除前必须证明不改变运行语义。</td></tr>
@@ -107,19 +107,31 @@ permalink: "/specifications/noema-object.html"
     <h2>设计方案：记录与完整性</h2>
     <p>节点和边记录需要区分两类身份：对象内部局部索引可以在链接时重编号；跨对象、版本和重定位保持的语义身份或稳定符号不能因布局变化而改变。类型、标志、引用、模态、权重、来源关系、字段宽度、编码、对齐、版本演进、Section 名称和 Merkle 层级尚须正式格式规范与样本共同确定。</p>
   </section>
+  <section class="content-wide">
+    <h2>文件摘要、完整性根、语义身份与签名</h2>
+    <p>四种属性服务不同消费者，不能共用一个含义模糊的“对象哈希”。完整 NOBJ 的 Exact File Digest 由对象外部对全部文件字节计算，因此不会递归写回自身；它用于内容寻址、构建比较和发布清单，不证明语义可接受。</p>
+    <div class="table-wrap"><table><thead><tr><th>属性</th><th>覆盖与用途</th><th>不得推导的结论</th></tr></thead><tbody>
+      <tr><td>Exact File Digest</td><td>对象外部计算的完整文件字节摘要；任何字节变化都会改变结果。</td><td>不能证明两个不同布局对象语义不等价，也不能证明发布者身份。</td></tr>
+      <tr><td>Integrity Root</td><td><code>integrity</code> Section 按 Profile 覆盖 Header/目录职责字段和非自身 Section 的 stored/logical digest；根记录及其存储字节不覆盖自身。</td><td>未由受信外部摘要或签名认证时只能证明内部自洽，不是信任锚；也不能替代范围、类型、策略与权限验证。</td></tr>
+      <tr><td>Semantic Identity</td><td>未来基于冻结的规范化表示和等价规则建立。</td><td>当前阶段不得用未定义语义哈希宣告 strip、重定位或布局变化等价。</td></tr>
+      <tr><td>Package Subject Digest / Signature</td><td>发布层绑定不可变候选载荷、清单与外部签名身份；Signature Envelope 位于被签载荷之外。</td><td>签名有效不等于对象语义正确或当前环境授权。</td></tr>
+    </tbody></table></div>
+    <p>攻击者可以同时修改裸 NOBJ 载荷并重新计算对象内 Integrity Root。来源真实性和抗恶意篡改必须由受信锁定清单中的 Exact File Digest，或发布层 Package Subject Digest / Signature 绑定；独立验证器不得仅因内部根匹配就提升对象的信任状态。</p>
+    <p>Debug Companion 必须同时绑定主对象与伴随文件的完整内容摘要。GNU GDB 的 separate debug files 提供了分离调试资料的工程先例，但其 build ID 与 debug-link CRC 只用于关联或查找，不能替代内容摘要和签名。参考原文：<a href="https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Separate-Debug-Files.html">https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Separate-Debug-Files.html</a></p>
+  </section>
   <section class="content-band">
     <h2>与 HOBJ 和工具链的关系</h2>
     <p>Noesis Core 或 morphe 通过规范对象写入路径产生可重定位 NOBJ；synthesis 可以把一个或多个 NOBJ 与已有 HOBJ 链接为 Linked Object 或新的 HOBJ。HOBJ 是保留共享依赖与披露语义的对象形态，不由 Horizon Engine 直接生成。发布前还必须经过独立验证、允许的裁剪、Release Coverage Proof 和外部签名封装。</p>
   </section>
   <section class="content-band">
     <h2>待定事项：名称、布局与重定位</h2>
-    <p>物理顺序、逻辑字段职责和 Section 家族已作为详细设计基线采用；NOBJ 的文件扩展名、魔数字节、字段宽度、Section 编号、压缩与摘要算法、ABI 数值和 <code>R_NIR_*</code> 等重定位标识仍未确定。当前示例只表示需要覆盖的引用类别，不能作为实现接口。参见<a href="../architecture/open-questions.html">开放问题</a>。</p>
+    <p>物理顺序、逻辑字段职责、Section 家族和非循环摘要域已作为详细设计基线采用；NOBJ 的文件扩展名、魔数字节、字段宽度、Section 编号、压缩与摘要算法、完整性描述符编码、ABI 数值和 <code>R_NIR_*</code> 等重定位标识仍未确定。当前示例只表示需要覆盖的引用类别，不能作为实现接口。参见<a href="../architecture/open-questions.html">开放问题</a>。</p>
   </section>
   <section class="content-wide">
     <h2>设计概要：对象不变量与一致性测试</h2>
     <div class="table-wrap"><table><thead><tr><th>不变量</th><th>必须拒绝的反例</th><th>主要验证方式</th></tr></thead><tbody>
       <tr><td>边界与算术安全</td><td>溢出、越界、重叠、错误对齐、递归或计数放大</td><td>畸形样例语料、属性测试和覆盖引导模糊测试</td></tr>
-      <tr><td>引用完整</td><td>错误索引、悬空强引用、类型不匹配和循环闭包</td><td>分层验证器与链接冲突矩阵</td></tr>
+      <tr><td>引用完整</td><td>错误索引、悬空 required import、类型不匹配和循环闭包</td><td>分层验证器与链接冲突矩阵</td></tr>
       <tr><td>确定性</td><td>工作目录、归档顺序、时间戳或未锁定依赖污染字节</td><td>双构建复现和规范化往返转换</td></tr>
       <tr><td>语义保持</td><td>重定位、strip 或布局重排改变目标、约束、权限或契约</td><td>规范属性比较、差异分类和前后等价测试；语义哈希需等待等价规则冻结</td></tr>
       <tr><td>完整性范围</td><td>未覆盖关键 Header、策略、入口、符号或依赖</td><td>签名范围测试、篡改与回滚案例</td></tr>

@@ -352,6 +352,65 @@ TOOLCHAIN_CLOSURE_CONTRACTS = {
             "不需要 Fulfillment Runtime",
         ),
     },
+    "components/agent-harness.html": {
+        "required": (
+            "外部协议与结构化输出适配",
+            "MCP 2025-11-25",
+            "A2A 1.0.1",
+            "工具描述、行为注解和输出 schema 不是可信事实或调用授权",
+            "token passthrough",
+            "OpenTelemetry GenAI",
+        ),
+    },
+    "specifications/noema-object.html": {
+        "required": (
+            "Exact File Digest",
+            "Integrity Root",
+            "Semantic Identity",
+            "Header 不保存递归覆盖自身的完整文件摘要",
+            "根记录及其存储字节不覆盖自身",
+            "不是信任锚",
+            "攻击者可以同时修改裸 NOBJ 载荷并重新计算对象内 Integrity Root",
+        ),
+        "forbidden_patterns": (
+            r"完整性 Section 索引与对象字节摘要",
+        ),
+    },
+    "development/implementation-roadmap.html": {
+        "required": (
+            "下一条可执行路径",
+            "P0-W1 权威规范",
+            "P0-W4 语言与构建 ADR",
+            "theoria 独立 Reader",
+            "不表示必须建立 23 个独立二进制",
+            "BFD canonical form",
+            "MCP / A2A",
+        ),
+    },
+    "tools/synthesis/docs/symbol-resolution.html": {
+        "required": (
+            "local/export/import",
+            "required import",
+            "optional import",
+            "不采用 ELF weak symbol 的隐式优先级",
+        ),
+        "forbidden_patterns": (
+            r"按强定义、弱定义",
+            r"弱引用无定义",
+        ),
+    },
+    "tools/synthesis/docs/loader-security.html": {
+        "required": (
+            "Preamble/Header",
+            "Load Directory",
+            "Section Directory",
+            "Signature Envelope",
+            "不得包含根记录自身",
+        ),
+        "forbidden_patterns": (
+            r"Program/Section Header",
+        ),
+    },
 }
 
 
@@ -558,6 +617,15 @@ def validate_required_text_contracts(root):
     errors = []
     for route, contract in TOOLCHAIN_CLOSURE_CONTRACTS.items():
         path = root / route
+        if not path.exists() and root == SOURCE_ROOT:
+            for manual_source in MANUAL_MARKDOWN_FILES:
+                source_match = FRONT_MATTER.match(manual_source.read_text())
+                if source_match is None:
+                    continue
+                permalink = front_matter_value(source_match.group(1), "permalink")
+                if permalink and permalink.lstrip("/") == route:
+                    path = manual_source
+                    break
         if not path.exists():
             errors.append(f"missing system-closure page {route}")
             continue
@@ -604,7 +672,6 @@ def validate_readability_behavior_contracts(root):
             '{ href: "news/index.html", label: "项目动态" }',
             '{ href: "faq/index.html", label: "常见问题" }',
             '{ href: "development/implementation-roadmap.html", label: "开发路线图" }',
-            'title: "synthesis 使用手册"',
         ):
             if token not in directory_text:
                 errors.append(
@@ -716,6 +783,34 @@ def read_manual_source_entries(manual_id):
 
 def validate_jekyll_sources():
     errors = []
+    ruby_version = SOURCE_ROOT / ".ruby-version"
+    gem_lock = SOURCE_ROOT / "Gemfile.lock"
+    gitignore = SOURCE_ROOT / ".gitignore"
+    pages_workflow = SOURCE_ROOT / ".github" / "workflows" / "pages.yml"
+    if not ruby_version.exists() or ruby_version.read_text().strip() != "3.4.10":
+        errors.append(".ruby-version must pin the local Jekyll build baseline to 3.4.10")
+    if not gem_lock.exists() or "BUNDLED WITH\n   2.6.9" not in gem_lock.read_text():
+        errors.append("Gemfile.lock must pin Bundler 2.6.9 for the local build baseline")
+    if gitignore.exists() and re.search(r"^Gemfile\.lock$", gitignore.read_text(), re.MULTILINE):
+        errors.append(".gitignore must not ignore the tracked Jekyll application lockfile")
+    if not pages_workflow.exists():
+        errors.append("missing .github/workflows/pages.yml")
+    else:
+        workflow_text = pages_workflow.read_text()
+        for script in ("assets/directory.js", "assets/catalog.js", "assets/theme.js"):
+            if f"node --check {script}" not in workflow_text:
+                errors.append(f"Pages workflow must syntax-check {script}")
+        official_action_refs = re.findall(
+            r"uses:\s+(actions/[A-Za-z0-9_-]+)@([^\s#]+)", workflow_text
+        )
+        if len(official_action_refs) != 5:
+            errors.append("Pages workflow must declare the five reviewed official Actions")
+        for action_name, action_ref in official_action_refs:
+            if not re.fullmatch(r"[0-9a-f]{40}", action_ref):
+                errors.append(f"Pages workflow must pin {action_name} to a full commit SHA")
+        dependabot = SOURCE_ROOT / ".github" / "dependabot.yml"
+        if not dependabot.exists() or "package-ecosystem: github-actions" not in dependabot.read_text():
+            errors.append("Dependabot must track immutable GitHub Actions pins")
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
     registered = sorted(set(registry) | set(read_manual_source_routes()))
@@ -894,6 +989,12 @@ def validate_jekyll_sources():
             'data-site-module="{{ page_site_module }}"',
             "page_site_module = 'resources'",
             "page_site_module = 'support'",
+            "page_description = page.summary | default: page.description | default: site.description",
+            '<meta name="description"',
+            '<link rel="canonical"',
+            '<meta property="og:title"',
+            '<meta property="og:url"',
+            '<meta name="twitter:card" content="summary">',
         ):
             if token not in layout_text:
                 errors.append(f"default layout missing contract: {token}")
@@ -1103,6 +1204,12 @@ def validate_jekyll_sources():
         "philosophical-visual-language": "philosophical-visual-language.md",
     }
     design_root = SOURCE_ROOT / "design-system"
+    protocol_reference_files = [*SOURCE_PAGE_FILES, *design_root.glob("*.md")]
+    for protocol_reference_file in protocol_reference_files:
+        if "a2a-protocol.org/latest/" in protocol_reference_file.read_text():
+            errors.append(
+                f"{protocol_reference_file.relative_to(SOURCE_ROOT)}: A2A evidence must use a versioned specification URL"
+            )
     design_index = design_root / "README.md"
     if not design_index.exists():
         errors.append("missing design-system/README.md routing index")
@@ -1116,6 +1223,7 @@ def validate_jekyll_sources():
 
     manual_config = SOURCE_ROOT / "_data/manuals.yml"
     manual_layout = SOURCE_ROOT / "_layouts/manual.html"
+    manual_directory_data = SOURCE_ROOT / "_includes/manual-directory-data.html"
     if not manual_config.exists():
         errors.append("missing _data/manuals.yml")
     if not manual_layout.exists():
@@ -1131,6 +1239,18 @@ def validate_jekyll_sources():
         ):
             if token not in manual_layout_text:
                 errors.append(f"manual layout missing dynamic contract: {token}")
+    if not manual_directory_data.exists():
+        errors.append("missing _includes/manual-directory-data.html")
+    else:
+        manual_directory_text = manual_directory_data.read_text()
+        if 'sort: "permalink"' not in manual_directory_text:
+            errors.append(
+                "manual directory data must use the unique permalink as its stable build order"
+            )
+        if 'sort: "manual_order"' in manual_directory_text:
+            errors.append(
+                "manual directory data must not sort unrelated manuals by colliding manual_order values"
+            )
 
     manual_records = []
     for path in MANUAL_MARKDOWN_FILES:
@@ -1192,6 +1312,8 @@ def validate_jekyll_sources():
         ):
             if token not in directory_text:
                 errors.append(f"directory.js missing dynamic manual contract: {token}")
+        if "synthesisDocs:" in directory_text:
+            errors.append("directory.js must not retain a static synthesis manual directory duplicate")
         if "details.open = containsCurrent || groupIndex === 0;" in directory_text:
             errors.append("desktop documentation rail must not hide non-current groups by default")
         if "item.dataset.navGroup" in directory_text or "link.dataset.navItem" in directory_text:
@@ -1286,7 +1408,7 @@ def validate_jekyll_sources():
             "current_stage.title",
             'class="current-stage-feature"',
             'class="current-stage-visual"',
-            'src="../assets/images/secure-object-core.jpg"',
+            'src="../assets/images/secure-object-core.svg"',
             'width="1440" height="960"',
             'class="current-stage-panel"',
             'class="project-progress-section"',
@@ -1304,7 +1426,7 @@ def validate_jekyll_sources():
                 errors.append(f"current stage page exposes internal workflow copy: {forbidden}")
 
     image_contracts = {
-        "assets/images/secure-object-core.jpg": (400_000, 'src="../assets/images/secure-object-core.jpg"'),
+        "assets/images/secure-object-core.svg": (20_000, 'src="../assets/images/secure-object-core.svg"'),
     }
     image_consumers = (SOURCE_ROOT / "index.html").read_text() + (SOURCE_ROOT / "development/current-stage.html").read_text()
     for image_route, (maximum_bytes, source_token) in image_contracts.items():
@@ -1315,6 +1437,19 @@ def validate_jekyll_sources():
             errors.append(f"site image exceeds {maximum_bytes} bytes: {image_route}")
         if source_token not in image_consumers:
             errors.append(f"site image is not connected to its intended page: {image_route}")
+        if image_path.suffix == ".svg" and image_path.exists():
+            svg_text = image_path.read_text()
+            if 'width="1440" height="960" viewBox="0 0 1440 960"' not in svg_text:
+                errors.append(f"site SVG must preserve its declared intrinsic canvas: {image_route}")
+            if re.search(
+                r"<(?:script|foreignObject)\b|\son[a-z]+\s*=|(?:href|xlink:href)\s*=\s*[\"'](?:https?:|//)",
+                svg_text,
+                re.IGNORECASE,
+            ):
+                errors.append(f"site SVG must not contain executable or external content: {image_route}")
+    obsolete_image = ROOT / "assets" / "images" / "secure-object-core.jpg"
+    if obsolete_image.exists():
+        errors.append("obsolete secure-object-core.jpg must not remain in source or built output")
 
     tool_design = design_root / "internal-tools.md"
     style_text = style.read_text() if style.exists() else ""
@@ -1430,6 +1565,9 @@ def main():
     )
     actual_routes = [path.relative_to(ROOT).as_posix() for path in HTML_FILES]
 
+    if (ROOT / "assets" / "images" / "secure-object-core.jpg").exists():
+        errors.append("built output must not retain obsolete secure-object-core.jpg")
+
     if not route_rows:
         errors.append("sitemap.md has no formal HTML route entries")
     if len(registered_rows) != len(set(registered_rows)):
@@ -1466,6 +1604,47 @@ def main():
     section_routes = [row["route"] for row in route_rows if row["kind"] == "section"]
     if sorted(section_routes) != sorted(PORTAL_ROUTES[1:]):
         errors.append("sitemap.md section routes do not match the approved portal architecture")
+
+    manual_payload_page = ROOT / "docs/index.html"
+    if not manual_payload_page.exists():
+        errors.append("missing docs/index.html for rendered manual directory validation")
+    else:
+        manual_page_text = manual_payload_page.read_text()
+        manual_payload_match = re.search(
+            r'<script type="application/json" data-manual-directory-source>\s*'
+            r'(\{.*?\})\s*</script>',
+            manual_page_text,
+            re.DOTALL,
+        )
+        if manual_payload_match is None:
+            errors.append("docs/index.html: missing rendered manual directory data")
+        else:
+            try:
+                manual_payload = json.loads(manual_payload_match.group(1))
+                manual_routes = [page["route"] for page in manual_payload["pages"]]
+                expected_manual_routes = sorted(read_manual_source_routes())
+                if manual_routes != expected_manual_routes:
+                    errors.append(
+                        "rendered manual directory data must contain every manual route exactly once in formal route order"
+                    )
+                manual_index_routes = [
+                    "docs/index.html",
+                    *[routes[0] for routes in TOOL_MANUAL_ROUTE_ORDERS.values()],
+                ]
+                for manual_index_route in manual_index_routes:
+                    index_path = ROOT / manual_index_route
+                    index_match = re.search(
+                        r'<script type="application/json" data-manual-directory-source>\s*'
+                        r'(\{.*?\})\s*</script>',
+                        index_path.read_text() if index_path.exists() else "",
+                        re.DOTALL,
+                    )
+                    if index_match is None:
+                        errors.append(f"{manual_index_route}: missing shared manual directory data")
+                    elif json.loads(index_match.group(1)) != manual_payload:
+                        errors.append(f"{manual_index_route}: manual directory payload diverges from the shared source")
+            except (KeyError, TypeError, json.JSONDecodeError) as exc:
+                errors.append(f"docs/index.html: invalid rendered manual directory data: {exc}")
 
     home = ROOT / "index.html"
     if home.exists():
@@ -1822,12 +2001,47 @@ def main():
         errors.append("missing assets/theme.js")
     if not favicon.exists():
         errors.append("missing assets/favicon.svg")
+    tools_catalog = ROOT / "tools" / "index.html"
+    if tools_catalog.exists():
+        tools_catalog_text = tools_catalog.read_text()
+        if not re.search(r'<div class="catalog-controls"[^>]*\shidden(?:\s|>)', tools_catalog_text):
+            errors.append("tools catalog controls must stay hidden until enhancement is active")
+    if catalog_script.exists() and "if (controls) controls.hidden = false;" not in catalog_script.read_text():
+        errors.append("catalog.js must reveal controls only after enhancement initializes")
+    style_text = (ROOT / "assets" / "style.css").read_text() if (ROOT / "assets" / "style.css").exists() else ""
+    if ".catalog-controls[hidden]{display:none!important}" not in style_text:
+        errors.append("style.css must keep catalog controls hidden before enhancement")
+    if "scale(.996)" in style_text or "scale(0.996)" in style_text:
+        errors.append("style.css press feedback must use the design-system scale(0.96) contract")
 
+    rendered_canonical_urls = []
     for path in HTML_FILES:
         text = path.read_text()
         parser = parse(path)
         rel = path.relative_to(ROOT).as_posix()
         errors.extend(validate_public_html(rel, text))
+        if not SOURCE_ONLY:
+            for head_token in (
+                '<meta name="description" content="',
+                '<link rel="canonical" href="https://noemion.github.io/',
+                '<meta property="og:title" content="',
+                '<meta property="og:url" content="https://noemion.github.io/',
+                '<meta name="twitter:card" content="summary">',
+            ):
+                if head_token not in text:
+                    errors.append(f"{rel}: missing rendered discovery metadata {head_token}")
+            expected_public_url = f"https://noemion.github.io/{rel}"
+            canonical_matches = re.findall(r'<link rel="canonical" href="([^"]+)">', text)
+            description_matches = re.findall(r'<meta name="description" content="([^"]*)">', text)
+            og_url_matches = re.findall(r'<meta property="og:url" content="([^"]+)">', text)
+            if canonical_matches != [expected_public_url]:
+                errors.append(f"{rel}: canonical URL must exactly match its formal route")
+            else:
+                rendered_canonical_urls.extend(canonical_matches)
+            if len(description_matches) != 1 or not description_matches[0].strip():
+                errors.append(f"{rel}: rendered description metadata must be unique and non-empty")
+            if og_url_matches != [expected_public_url]:
+                errors.append(f"{rel}: Open Graph URL must exactly match its formal route")
         if RAW_AMP.search(text):
             errors.append(f"{rel}: contains an unescaped ampersand")
         if parser.directory_containers != 1:
@@ -1877,6 +2091,9 @@ def main():
             elif parts.fragment and target.suffix == ".html":
                 if parts.fragment not in parse(target).ids:
                     errors.append(f"{rel}: missing fragment target {href}")
+
+    if len(rendered_canonical_urls) != len(set(rendered_canonical_urls)):
+        errors.append("rendered canonical URLs must be unique across formal routes")
 
     if directory_script.exists() and route_rows:
         directory_source = directory_script.read_text()
@@ -1932,7 +2149,7 @@ def main():
                 ["news/index.html", "development"],
                 ["tools/theoria/index.html", "tools"],
                 ["tools/synthesis/index.html", "synthesis"],
-                ["tools/synthesis/docs/contract.html", "synthesisDocs"],
+                ["tools/synthesis/docs/contract.html", "synthesis"],
             ]
             behavior_script = (
                 "const api = require(process.argv[1]);"

@@ -541,7 +541,7 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
 }
 .portal-feature-row:last-child{border-bottom:0}
 .portal-feature-row:hover{color:var(--text);background:var(--paper-subtle);box-shadow:inset 4px 0 0 var(--portal-coral)}
-.portal-feature-row:active{transform:scale(.996)}
+.portal-feature-row:active{transform:scale(.96)}
 .feature-visual{
   position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:132px;overflow:hidden;
   background:#ecefeb;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);
@@ -606,7 +606,7 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
 }
 .portal-focus-card:last-child{border-right:0}
 .portal-focus-card:hover{color:var(--text);background:var(--paper);filter:brightness(1.025)}
-.portal-focus-card:active{transform:scale(.996)}
+.portal-focus-card:active{transform:scale(.96)}
 .focus-art{
   position:relative;display:block;height:270px;overflow:hidden;background:#e7ebe8;
   box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)
@@ -652,7 +652,7 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
 }
 .portal-lifecycle-list>a:last-child{border-bottom:0}
 .portal-lifecycle-list>a:hover{color:var(--text);background:var(--paper-subtle);box-shadow:inset 4px 0 0 var(--portal-coral)}
-.portal-lifecycle-list>a:active{transform:scale(.996)}
+.portal-lifecycle-list>a:active{transform:scale(.96)}
 .lifecycle-number{color:var(--rule-strong);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:34px;font-weight:740}
 .lifecycle-copy{display:block}
 .lifecycle-copy strong{display:block;color:var(--heading);font-size:24px;letter-spacing:-.025em}
@@ -1564,6 +1564,7 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
 .catalog-controls{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;max-width:none!important;margin:28px 0 0
 }
+.catalog-controls[hidden]{display:none!important}
 .catalog-search{
   flex:1 1 320px;min-height:48px;padding:0 16px;color:var(--heading);background:var(--paper);
   border:1px solid var(--rule-strong);border-radius:0;font:inherit;box-shadow:inset 0 0 0 1px transparent;
@@ -1595,7 +1596,7 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
 }
 .news-record:last-child{border-bottom:0}
 .news-record:hover{color:var(--text);background:var(--paper-subtle)}
-.news-record:active{transform:scale(.996)}
+.news-record:active{transform:scale(.96)}
 .news-record-art{
   position:relative;display:grid;place-items:center;height:130px;overflow:hidden;color:#fff;background:#101714;
   outline:1px solid rgba(0,0,0,.1);outline-offset:-1px

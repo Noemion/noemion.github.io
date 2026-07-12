@@ -1,13 +1,13 @@
 # Noemion GitHub Pages
 
-本仓库是 [`Noemion/noemion.github.io`](https://github.com/Noemion/noemion.github.io) 的 Jekyll 源目录，计划发布到 <https://noemion.github.io/>。Noemion 是一套面向生成式计算的表征对象编译、链接与可信装载工具链；一级入口负责项目、架构、资源和开发信息，工具项目页介绍单个工具，只有实际存在的 `docs/` 子树承载手册式专题文档。
+本仓库是 [`Noemion/noemion.github.io`](https://github.com/Noemion/noemion.github.io) 的 Jekyll 源目录，发布于 <https://noemion.github.io/>。Noemion 是一套面向生成式计算的表征对象编译、链接与可信装载工具链；一级入口负责项目、架构、资源和开发信息，工具项目页介绍单个工具，只有实际存在的 `docs/` 子树承载手册式专题文档。
 
 ## Jekyll 与发布
 
 - `_config.yml` 定义账户站点 URL、仓库身份、语言、Markdown 处理器和构建排除项；账户站点的 `baseurl` 必须保持为空。
 - `.github/workflows/pages.yml` 在 `main` 分支推送时先运行路由测试，再通过 GitHub 官方 Jekyll Pages Actions 构建 `_site`、原样加入公开 `sitemap.md` 并部署。
 - 当前 89 个正式页面由 Jekyll 处理：49 个普通页面使用 HTML 正文源，40 个手册/指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。
-- 本地可在安装兼容 Ruby 与 Bundler 后运行 `bundle install` 和 `bundle exec jekyll serve`；当前工作区自带的系统 Ruby 不作为发布环境基线。
+- 本地构建基线固定为 `.ruby-version` 中的 Ruby 3.4.10 与 `Gemfile.lock` 中的 Bundler 2.6.9；当前工作区自带的系统 Ruby 不作为发布环境基线。macOS 已安装 Homebrew Ruby 时，先运行 `export PATH="$(brew --prefix ruby@3.4)/bin:$PATH"`，再运行 `bundle config set --local path vendor/bundle`、`bundle install` 和 `bundle exec jekyll build`。
 
 ## Jekyll 源码模型
 
@@ -58,7 +58,7 @@ badges: ["Documentation"]
 
 新建一套手册时，先在 `_data/manuals.yml` 登记手册级信息与允许的分组；已有手册新增专题不修改该数据文件。`manual_order` 在同一手册内必须唯一，`manual_group` 必须对应已登记分组。手册首页使用 `manual_is_index: true`，术语索引入口使用 `manual_index_entry: true`。
 
-源码检查运行 `python3 tests/site_quality_test.py`。完整发布检查先运行 `bundle exec jekyll build`，再运行 `python3 tests/site_quality_test.py _site`；GitHub Actions 按同一顺序验证并部署。
+源码检查运行 `python3 tests/site_quality_test.py`。完整发布检查先运行 `bundle exec jekyll build`，执行 `cp sitemap.md _site/sitemap.md`，再运行 `python3 tests/site_quality_test.py _site`；GitHub Actions 按同一顺序验证并部署。构建产物中的手册目录数据按正式路由排序，不能让文件系统或 Jekyll 页面枚举顺序改变同一提交的输出字节。
 
 ### 项目时间线配置与嵌入
 

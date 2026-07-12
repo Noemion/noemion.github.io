@@ -11,7 +11,7 @@ permalink: "/specifications/horizon-object.html"
   <section class="content-stack">
     <h2>完整性边界</h2>
     <p class="lead"><em>Horizon</em> 表示当前尚未展开、但与对象理解有关的背景和可能状态。Horizon Object（HOBJ）不是提示词或 Skill 的压缩包；它保存经过覆盖检查、可以链接并按策略披露的共享内容。系统可以移除说明性原文，但必须保留所有会影响行为的目标、约束、条件、例外、知识和依赖。</p>
-    <p class="callout"><strong>直白解释：</strong>HOBJ 让多个任务复用同一份经过验证的能力，同时只向当前运行披露必要部分。节省上下文不能以遗漏安全条件、隐藏强依赖或扩大访问权限为代价。</p>
+    <p class="callout"><strong>直白解释：</strong>HOBJ 让多个任务复用同一份经过验证的能力，同时只向当前运行披露必要部分。节省上下文不能以遗漏安全条件、隐藏必需依赖或扩大访问权限为代价。</p>
     <ul>
       <li>结构化文档、受控源语言和其他来源可以使用不同前端，但必须汇入同一确定性 Noesis Core；模型候选仍须经过来源绑定。</li>
       <li>大型知识的完整性由主 HOBJ 与经过验证的内容寻址依赖闭包共同承担。</li>
@@ -20,7 +20,7 @@ permalink: "/specifications/horizon-object.html"
   </section>
   <section class="content-band">
     <h2>产生与再次链接</h2>
-    <p>Horizon Engine 只产生 Candidate Envelope，不产生 HOBJ。共享来源先由 Noesis Core 编译为可重定位 NOBJ；synthesis 再把一个或多个 NOBJ 与已有 HOBJ 合并为新的 HOBJ。HOBJ 可以继续作为链接输入，但内容身份、强依赖闭包、披露规则和权限收敛必须保持可验证。</p>
+    <p>Horizon Engine 只产生 Candidate Envelope，不产生 HOBJ。共享来源先由 Noesis Core 编译为可重定位 NOBJ；synthesis 再把一个或多个 NOBJ 与已有 HOBJ 合并为新的 HOBJ。HOBJ 可以继续作为链接输入，但内容身份、必需依赖闭包、披露规则和权限收敛必须保持可验证。</p>
   </section>
   <section class="content-rows">
     <h2>链接与 strip</h2>
@@ -56,7 +56,7 @@ permalink: "/specifications/horizon-object.html"
   </section>
   <section class="content-stack">
     <h2>设计概要：发布闭包与研究验证</h2>
-    <p>HOBJ 发布闭包由主对象、强依赖、版本与内容摘要、权限和信任策略、披露图、验收契约、评价器以及必需精确载荷组成。弱依赖必须声明缺失行为；动态依赖必须受配置、锁定和运行授权约束。</p>
+    <p>HOBJ 发布闭包由主对象、必需依赖、版本与内容摘要、权限和信任策略、披露图、验收契约、评价器以及必需精确载荷组成。可选依赖必须声明缺失行为；动态依赖必须受配置、锁定和运行授权约束。</p>
     <p>验证工作需要回答三类问题：语义完整性是否优于普通压缩或摘要；渐进式披露能否在不丢失安全约束的前提下降低上下文成本；不同 Noema Object System 实现是否能对同一 HOBJ 得出一致的必需闭包、披露视图与拒绝结论。每项实验都应包含长上下文基线、对抗遗漏、权限冲突、预算不足和不可安全摘要材料。</p>
   </section>
   <div class="next-prev"><a href="noema-object.html">← NOBJ</a><a href="../components/noesis-core.html">Noesis Core →</a></div>

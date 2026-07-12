@@ -23,9 +23,9 @@ permalink: "/tools/synthesis/index.html"
     <h2>它怎样工作</h2>
     <div class="flow"><div class="step">扫描输入与归档</div><div class="step">解析符号</div><div class="step">映射 ID 与重定位</div><div class="step">合并约束/权限/闭包</div><div class="step">提交输出与报告</div></div>
     <ul>
-      <li>解析强弱符号、版本、可见性与所需归档成员。</li>
+      <li>解析 local/export/import、版本、可见性、显式缺失策略与所需归档成员。</li>
       <li>合并兼容 Section、NIR 图与契约，并重映射节点和产物 ID。</li>
-      <li>应用类型化重定位，构建强依赖闭包、链接映射与结构化冲突报告。</li>
+      <li>应用类型化重定位，构建必需依赖闭包、链接映射与结构化冲突报告。</li>
       <li>按语义类型处理约束、权限和披露规则冲突，不采用静默覆盖。</li>
     </ul>
   </section>

@@ -24,7 +24,7 @@ badges: ["synthesis", "Phase 4 / Phase 5"]
 | --- | --- | --- |
 | Link Inputs | NOBJ、Noemion Archive、HOBJ 与显式 Link Request | 格式版本可识别、内容指纹可计算、目标和结构定义相容。Link Request 由 CLI、构建系统或库前端按同一结构生成。 |
 | Link 配置 | 产物种类、目标 ABI、资源预算与冲突策略 | 配置标识稳定，所有默认值显式解析并写入链接映射。 |
-| 依赖锁定 | 内容寻址依赖、版本、信任声明和可选性 | 强依赖全部锁定；Deterministic Profile 不允许隐式网络解析。 |
+| 依赖锁定 | 内容寻址依赖、版本、信任声明和可选性 | 必需依赖全部锁定；Deterministic Profile 不允许隐式网络解析。 |
 
 ## 输出
 

@@ -53,6 +53,17 @@ permalink: "/components/horizon-engine.html"
     <h2>待定事项：底座、训练与量化</h2>
     <p>MacBERT、DistilmBERT、ModernBERT 等只属于同条件选型对比候选；模型规模、教师模型、领域自适应预训练（DAPT）、任务自适应预训练（TAPT）、蒸馏范围、OOD 方法、量化格式和阈值必须在相同结构层、数据切片与目标硬件上比较。生成式大模型只可作为标注、External-generation 或能力上限对照。</p>
   </section>
+  <section class="content-wide">
+    <h2>AI 能力趋势怎样改变选型</h2>
+    <p>推理模型、长上下文、工具调用、结构化输出、多模态和开放权重部署都在快速演进，但它们只改变候选生产器的能力与成本，不改变模型不可信、来源必须可定位和对象由确定性核心形成的边界。</p>
+    <div class="table-wrap"><table><thead><tr><th>趋势</th><th>对 Noemion 的采用方式</th><th>验证要求</th></tr></thead><tbody>
+      <tr><td>结构化输出与约束解码</td><td>用于 Candidate Envelope、工具参数和外部交换适配；内部先定义完整语义约束，再下投到供应商支持的 schema 子集。</td><td>加入“完全符合 schema 但事实错误、引用悬空或权限越界”的反例；语法通过不能升级为 NIR。</td></tr>
+      <tr><td>长上下文与外部记忆</td><td>继续使用版本化来源、精确跨度和按视域披露，不把模型隐藏状态当作事实仓库。</td><td>与检索和分块基线比较多跳、聚合、冲突、更新与拒答；不能只使用 needle test。</td></tr>
+      <tr><td>GraphRAG 与知识图</td><td>模型提取的节点、边和摘要只进入候选图，每条确认关系必须返回来源跨度。</td><td>依次比较规则、BM25、向量与图检索的证据召回、冲突识别、延迟和成本；未胜过简单基线时停止建设。</td></tr>
+      <tr><td>开放权重与本地推理</td><td>提供隐私、成本与可研究性选项，但继续记录模型、词表、量化和运行环境身份。</td><td>报告多次运行、置信区间、校准、OOD、量化退化与失败切片；seed 不构成跨平台确定性保证。</td></tr>
+    </tbody></table></div>
+    <p>结构化输出的供应商说明明确区分 schema 匹配与值正确性：<a href="https://openai.com/index/introducing-structured-outputs-in-the-api/">https://openai.com/index/introducing-structured-outputs-in-the-api/</a>。长上下文与长期记忆的研究基线：<a href="https://arxiv.org/abs/2404.06654">https://arxiv.org/abs/2404.06654</a>、<a href="https://proceedings.iclr.cc/paper_files/paper/2025/hash/d813d324dbf0598bbdc9c8e79740ed01-Abstract-Conference.html">https://proceedings.iclr.cc/paper_files/paper/2025/hash/d813d324dbf0598bbdc9c8e79740ed01-Abstract-Conference.html</a>。GraphRAG 的当前研究实现：<a href="https://github.com/microsoft/graphrag">https://github.com/microsoft/graphrag</a>。</p>
+  </section>
   <section class="content-band">
     <h2>后续计划：训练阶梯与模型包</h2>
     <p>未来按规则基线、局部语言基线、Noemion 结构层、领域继续预训练、蒸馏压缩、校准/OOD 与导出量化依次推进。模型包需要覆盖权重、词表、本体库、架构与任务头结构定义、量化配置、评测、校准和血缘；进入发布包时由 noembundle 纳入外部签名范围，并始终作为不可信输入验证。</p>

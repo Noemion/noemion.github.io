@@ -38,7 +38,7 @@ Integrity material
 | 编码 | encoding profile、flags、required features。 |
 | Section | directory offset、count、entry size、string table index。 |
 | Segment | load directory offset、count、entry size。 |
-| 完整性 | integrity section index、object byte digest。 |
+| 完整性 | integrity section index、integrity profile；不保存递归覆盖自身的完整文件摘要。 |
 
 当前原型候选使用小端、64 位 offset/length 与 32 位索引，但这些宽度尚未冻结。读取器不能按本机指针宽度解释对象。
 
@@ -68,7 +68,7 @@ Integrity material
 
 | 记录 | 汇编器必须写明 |
 | --- | --- |
-| Symbol | name ref、kind、binding、visibility、definition state、section/record ref、type/version ref、size or arity、origin ref、stable-key digest。 |
+| Symbol | namespace/name ref、kind、local/export/import、visibility、definition state、section/record/type/version ref、resolution/missing policy、size or arity、origin ref、stable-key digest。 |
 | Relocation | target section/record/field、kind、symbol ref、expected type、encoding/width、optional addend、overflow policy、origin ref。 |
 | Dependency | kind、content digest、version constraint、required features、resolution policy、optional flag、origin ref。 |
 | Origin | subject range、source digest、source unit/span、derivation class、rule/model identity、decision digest、authority、evidence refs。 |
@@ -76,6 +76,12 @@ Integrity material
 | Integrity Entry | subject kind/index、stored/logical coverage、algorithm/profile、digest、tree parent/path ref、coverage flags。 |
 
 这些字段同样只冻结职责。写入器不能因为字段宽度和数值枚举尚未确定，就省略类型、来源、溢出策略或摘要覆盖范围。
+
+## 摘要域不能自引用
+
+完整 NOBJ 的 Exact File Digest 由对象外部对全部字节计算，不能写回自己覆盖的文件。对象内的 `integrity` Section 只按 Profile 覆盖 Header/目录职责字段和其他 Section 的 stored/logical digest；`integrity` Section 的目录项不得通过 digest reference 指向自身，根记录及其存储字节也不进入自身覆盖域。
+
+Exact File Digest、内部 Integrity Root、尚未定义的 Semantic Identity 与发布包签名是四种不同属性。写入器必须输出明确的覆盖描述，不能用 build ID、CRC 或签名存在代替结构与语义验证。裸 NOBJ 的内部根只证明对象自洽；来源真实性和抗恶意篡改必须由受信外部 Exact File Digest、Package Subject Digest 或签名绑定。
 
 ## 记录编码
 

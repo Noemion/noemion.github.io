@@ -18,13 +18,48 @@ permalink: "/development/implementation-roadmap.html"
     </div>
   </section>
   <section class="content-wide">
+    <h2>下一条可执行路径</h2>
+    <p class="callout"><strong>直接结论：</strong>下一步不是同时创建 23 个命令，也不是接入模型。先交付一条可以被两种独立读取实现共同解释、能对畸形输入关闭失败、并能在隔离环境重复构建的最小 NOBJ 纵向切片。</p>
+    <div class="flow"><div class="step">Canonical Text NIR</div><div class="step">morphe 前端</div><div class="step">Noesis Core 共享 Writer</div><div class="step">Relocatable NOBJ</div><div class="step">noemvalidate 生产 Reader</div><div class="step">theoria 独立 Reader</div><div class="step">noemcertify 差分报告</div></div>
+    <div class="table-wrap"><table><thead><tr><th>步骤</th><th>正式输入与输出</th><th>完成标准</th></tr></thead><tbody>
+      <tr><td>规范输入</td><td>版本化条款、注册表、Canonical Text NIR 与合法/畸形向量</td><td>每个字段、限制与失败都能定位到唯一条款和期望诊断。</td></tr>
+      <tr><td>确定性写入</td><td>显式 Text NIR → 规范化记录 → NOBJ</td><td>相同规范化输入、配置和依赖产生相同字节；失败不留下部分对象。</td></tr>
+      <tr><td>生产验证</td><td>原始 NOBJ + 验证配置 → Layered Verdict</td><td>范围、类型、引用、资源与完整性分别检查；查看器输出不进入信任输入。</td></tr>
+      <tr><td>独立观察</td><td>原始 NOBJ → 有界 Raw / Structured View</td><td>不复用生产写入器、链接器或 BFD 解析代码；只提供差分和诊断证据。</td></tr>
+      <tr><td>复现与差分</td><td>两个读取结果、两个隔离构建与全部测试向量</td><td>字段解释和失败分类一致；对象与工具二进制分别报告逐字节复现结果。</td></tr>
+    </tbody></table></div>
+  </section>
+  <section class="content-wide">
+    <h2>Phase 0 工作包</h2>
+    <div class="table-wrap"><table><thead><tr><th>工作包</th><th>具体产物</th><th>开始实现前必须回答</th></tr></thead><tbody>
+      <tr><td>P0-W1 权威规范</td><td>版本化 Markdown、条款 ID、术语/成熟度注册表、正反样本索引</td><td>哪个文件是唯一规范源，HTML 如何只承担解释和导航。</td></tr>
+      <tr><td>P0-W2 威胁与限制</td><td>解析威胁模型、最大值、checked arithmetic、critical/optional 扩展、摘要域</td><td>溢出、越界、重叠、循环、自引用和资源放大怎样稳定失败。</td></tr>
+      <tr><td>P0-W3 测试向量</td><td>规范字节、字段注释、合法/边界/畸形语料与期望诊断</td><td>两个实现能否只依据规范得到相同解释，而不读取彼此内部状态。</td></tr>
+      <tr><td>P0-W4 语言与构建 ADR</td><td>Rust 与 C/C++ 的同向量最小读取实验、依赖/许可清单、复现和模糊测试结果</td><td>内存安全、受检算术、跨平台、FFI、构建复现和长期维护成本怎样权衡。</td></tr>
+    </tbody></table></div>
+    <p>首个实现仓库保持单一工作区，按 <code>spec/</code>、<code>vectors/</code>、<code>core/</code>、<code>oracle/</code> 与 <code>tools/</code> 分离职责。仓库名和首版语言必须由 ADR 确定；没有独立版本、权限隔离、资源边界或真实消费者时，不提前拆成多个仓库或服务。</p>
+  </section>
+  <section class="content-wide">
+    <h2>GNU 工具链与 AI 协议的采用边界</h2>
+    <div class="table-wrap"><table><thead><tr><th>现有技术</th><th>立即采用的机制</th><th>暂不进入可信核心</th></tr></thead><tbody>
+      <tr><td>ELF / GNU Binutils</td><td>Section/Load 双视图、显式符号与类型化重定位、未知关键扩展拒绝、link map、独立读取器。</td><td>BFD canonical form、gold、动态环境搜索、lazy binding、weak symbol 选择和通用链接脚本。</td></tr>
+      <tr><td>GNU <code>ar</code> / GDB</td><td>确定性归档元数据、主对象与 Debug Companion 分离、内容摘要绑定。</td><td>把 build ID 或 debug-link CRC 当成内容完整性或签名证明。</td></tr>
+      <tr><td>GNU 构建与发行</td><td>固定 locale/时区/路径，两个隔离环境重复构建；正式发行后再使用 distcheck 类检查。</td><td>把 Make、Autoconf 或 Guix 的存在本身当作复现保证；Guix 只能作为可选 Linux CI 通道。</td></tr>
+      <tr><td>MCP / A2A</td><td>后续在 Agent Harness 外缘实现版本化 gateway/facade，翻译为 Noemion 自有能力、任务、证据与策略。</td><td>远端工具说明、Agent Card 或 Task 状态直接定义内部 ABI、权限或验收。</td></tr>
+      <tr><td>JSON Schema / 结构化输出</td><td>外部参数、候选交换和测试夹具；依次执行语法、类型、跨字段、引用、权限与领域验证。</td><td>因 schema 合法而让模型直接形成 NIR/NOBJ，或把供应商 strict 模式当作语义证明。</td></tr>
+      <tr><td>OpenTelemetry GenAI</td><td>后续通过版本化 exporter 输出遥测。</td><td>尚未稳定的外部字段进入对象 ABI、事件身份或 Acceptance Decision。</td></tr>
+    </tbody></table></div>
+    <p>GNU 工程依据：<a href="https://sourceware.org/binutils/docs/">https://sourceware.org/binutils/docs/</a>、<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">https://www.sourceware.org/binutils/docs/binutils/readelf.html</a>、<a href="https://sourceware.org/binutils/docs/binutils/ar-cmdline.html">https://sourceware.org/binutils/docs/binutils/ar-cmdline.html</a>、<a href="https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Separate-Debug-Files.html">https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Separate-Debug-Files.html</a>。</p>
+    <p>AI 互操作研究快照（2026-07-12）：<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a>、<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a>、<a href="https://json-schema.org/draft/2020-12">https://json-schema.org/draft/2020-12</a>、<a href="https://github.com/open-telemetry/semantic-conventions-genai">https://github.com/open-telemetry/semantic-conventions-genai</a>。这些版本只约束适配器研究，不冻结 Noemion 内部格式。</p>
+  </section>
+  <section class="content-wide">
     <h2>设计方案：开发阶段与完成标准</h2>
     <div class="table-wrap"><table><thead><tr><th>阶段</th><th>主要产物</th><th>完成标准</th></tr></thead><tbody>
-      <tr><td>Phase 0<br>规范与样本</td><td>格式、结构定义 registry、错误码、限制值、ADR、合法和畸形语料</td><td>每个字段、索引、长度与演进规则都有条款和正反样本。</td></tr>
-      <tr><td>Phase 1<br>安全二进制核心</td><td>Checked 读取器/对象写入器、Header、Section、字符串与符号表</td><td>畸形对象不能越界、溢出、无限递归或形成部分可信结果。</td></tr>
+      <tr><td>Phase 0<br>规范与样本</td><td>Markdown 规范、条款 ID、结构定义 registry、错误码、限制值、威胁模型、身份/摘要域、合法和畸形语料</td><td>每个字段、索引、长度、扩展与演进规则都有唯一条款、正反样本和预期诊断。</td></tr>
+      <tr><td>Phase 1<br>安全二进制核心</td><td>Checked 生产 Reader/Writer、独立直接 Reader、Header、目录、Section、字符串与符号表</td><td>畸形对象不能越界、溢出、无限递归或形成部分可信结果；两条读取路径解释一致且不共享解析实现。</td></tr>
       <tr><td>Phase 2<br>文本 IR 往返</td><td>规范化文本 NIR、汇编、反汇编和语义差异</td><td>规范化往返转换一致，对象字节可复现。</td></tr>
       <tr><td>Phase 3<br>Deterministic 编译</td><td>NSL Parser、Sema、实现化、证据账本、NOBJ 生成</td><td>无模型环境可完成编译；相同规范化输入产生相同字节。</td></tr>
-      <tr><td>Phase 4<br>归档与链接</td><td>归档、符号解析、ID 重映射、重定位和冲突矩阵</td><td>强依赖完整、无静默覆盖，链接顺序不改变规范结果。</td></tr>
+      <tr><td>Phase 4<br>归档与链接</td><td>归档、符号解析、ID 重映射、重定位和冲突矩阵</td><td>必需依赖完整、无静默覆盖，链接顺序不改变规范结果。</td></tr>
       <tr><td>Phase 5<br>HOBJ 与发布</td><td>披露图、strip、Coverage Proof、验证结论、候选包、签名请求与签名回填</td><td>strip 前后运行语义相同；最终包绑定发布对象、依赖、策略、模型、证据和外部签名身份。</td></tr>
       <tr><td>Phase 6<br>可信装载与运行</td><td>Merkle、权限保护、Loaded State、Agent Harness、最小 Fulfillment Runtime、Trace Stream</td><td>篡改、回滚、越权披露、工具污染、预算不足和状态漂移产生明确拒绝或升级结果。</td></tr>
       <tr><td>Phase 7<br>Model-assisted 前端</td><td>数据集、Horizon Engine、校准、OOD、量化、模型包和模型评估</td><td>模型只能提交候选；关闭模型后 Deterministic 与对象格式不变。</td></tr>
@@ -40,11 +75,11 @@ permalink: "/development/implementation-roadmap.html"
       <li><strong>发布运行：</strong><a href="../tools/noemreduce/index.html">noemreduce</a>、<a href="../tools/noemcoverage/index.html">noemcoverage</a>、<a href="../tools/noembundle/index.html">noembundle</a>、<a href="../tools/noemexecute/index.html">noemexecute</a> 与 <a href="../tools/noemobserve/index.html">noemobserve</a>。</li>
       <li><strong>模型工程：</strong><a href="../tools/noemdataset/index.html">noemdataset</a>、<a href="../tools/noemtrain/index.html">noemtrain</a>、<a href="../tools/noemevaluate/index.html">noemevaluate</a> 与 <a href="../tools/noemquantize/index.html">noemquantize</a>。</li>
     </ul>
-    <p>主产物顺序为“来源 → NOBJ → 链接对象/HOBJ → Release Object → Release Coverage Proof → Unsigned Package Candidate → 外部签名回填 → Signed Noemion Package → Loaded State → Run Evidence → Evidence Closure Report → Acceptance Decision → 离线评估”。工具名表达规划职责；具体 CLI、参数、归档扩展名和包格式尚未冻结，必须由各工具文档与 ADR 决定。</p>
+    <p>主产物顺序为“来源 → NOBJ → 链接对象/HOBJ → Release Object → Release Coverage Proof → Unsigned Package Candidate → 外部签名回填 → Signed Noemion Package → Loaded State → Run Evidence → Evidence Closure Report → Acceptance Decision → 离线评估”。工具名表达规划职责，不表示必须建立 23 个独立二进制；早期工具可以是共享库、子命令或只供测试的适配层。具体 CLI、参数、归档扩展名和包格式尚未冻结，必须由各工具文档与 ADR 决定。</p>
   </section>
   <section class="content-band">
     <h2>待定事项：仓库、接口与实现选择</h2>
-    <p>仓库目录、构建系统、实现语言、稳定错误码、CLI 语法、文件扩展名、ABI 和规范演进策略仍需逐阶段确定；未经 ADR、规范条款和一致性证据批准的示例不得升级为稳定接口。</p>
+    <p>首个实现仓库采用单一工作区和 <code>spec/vectors/core/oracle/tools</code> 职责边界；正式仓库名、构建系统、实现语言、稳定错误码、CLI 语法、文件扩展名、ABI 和规范演进策略仍需逐阶段确定。实现语言必须先用同一最小读取向量比较 Rust 与 C/C++，再通过 ADR 选择；未经规范条款、正反向量和一致性证据批准的示例不得升级为稳定接口。</p>
   </section>
   <section class="content-band">
     <h2>后续计划：Horizon Engine 与一致性验证</h2>

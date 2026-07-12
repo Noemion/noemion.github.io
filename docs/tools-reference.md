@@ -25,18 +25,18 @@ badges: ["23 Tools", "Project Pages", "Unreleased"]
 | Phase | 工具 | 主要输入 | 正式输出 | 直接下游 |
 | --- | --- | --- | --- | --- |
 | 0 / 8 | [noemcertify](../tools/noemcertify/) | 规范、测试语料库、Toolchain Build | Conformance Report、发布资格证据 | CI、规范评审、发布评审 |
-| 1 | [theoria](../tools/theoria/) | NOBJ、HOBJ、Signed Package | Text / Structured View | 开发者、noemvalidate |
+| 1 | [theoria](../tools/theoria/) | NOBJ、HOBJ、Signed Package | Text / Structured View | 开发者、诊断与人工审查 |
 | 1 / 5 / 6 | [noemvalidate](../tools/noemvalidate/) | 对象、配置、Trust Material | Layered Verdict、Verified Object Handle | archive、link、bundle、Object System |
 | 1 | [noemtransform](../tools/noemtransform/) | Source Object、Transform Plan | Transformed Object、Change Manifest | compare、validate、reduce |
 | 1 / 5 / 6 | [noembudget](../tools/noembudget/) | 对象、包、Baseline | Budget Verdict、Delta Report | CI、Package 配置、Execution Profile |
 | 2 | [morphe](../tools/morphe/) | Text NIR Source Package | Relocatable NOBJ、Assembly Evidence Ledger | decode、coverage、link |
 | 2 | [noemdecode](../tools/noemdecode/) | NOBJ / HOBJ | Canonical Text NIR、Pretty / JSON View | assemble、compare、开发者 |
 | 2 / 3 | [noemformat](../tools/noemformat/) | NSL / Text NIR | Formatted Text、Format Diff | compile、assemble、CI |
-| 2 / 5 | [noemcompare](../tools/noemcompare/) | 两个文本或对象产物 | Classified Diff、Semantic Verdict | reduce、validate、发布审计 |
+| 2 / 5 | [noemcompare](../tools/noemcompare/) | 两个文本或对象产物 | Classified Diff、Semantic Verdict | 开发者、CI、reduce 等价审查与发布审计 |
 | 3 / 7 | [noesis](../tools/noesis/) | NSL 或 Candidate Envelope、绑定决定 | Relocatable NOBJ、证据账本、Build Manifest | analyze、archive、link、coverage |
 | 3 | [noemanalyze](../tools/noemanalyze/) | NSL / Text NIR、Reviewed Baseline | Diagnostics、Baseline Candidate | 开发者、CI、compile |
 | 4 | [noemarchive](../tools/noemarchive/) | 已验证 NOBJ Members | Noemion Archive、Member Listing | symbols、link |
-| 4 | [noemsymbols](../tools/noemsymbols/) | NOBJ、Archive、HOBJ、Package | Symbol Listing、ABI Snapshot | link、compare、开发者 |
+| 4 | [noemsymbols](../tools/noemsymbols/) | NOBJ、Archive、HOBJ、Package | Symbol Listing、ABI Snapshot | 开发者、CI、compare 与链接诊断 |
 | 4 / 5 | [synthesis](../tools/synthesis/) | NOBJ、Archive、HOBJ、Link Request | Linked Object / HOBJ、Link Map | validate、reduce |
 | 5 | [noemreduce](../tools/noemreduce/) | Development NOBJ / HOBJ | Release Object、Debug Companion、等价证据 | coverage、validate、bundle |
 | 5 / 6 | [noemcoverage](../tools/noemcoverage/) | 来源/对象映射或 Run Evidence | Release Coverage Proof / Evidence Closure Report | bundle / execute finalize |

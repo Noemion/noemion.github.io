@@ -38,7 +38,7 @@ badges: ["synthesis", "Phase 4 / Phase 5"]
 
 ## 完整性与签名
 
-签名范围覆盖 Header、Program/Section Header、入口、符号、重定位、权限、策略和模型要求；按需加载时验证对应数据块与 Merkle 路径。
+签名范围覆盖 Preamble/Header、Load Directory、Section Directory、入口、符号、重定位、依赖、权限、策略和模型要求；按需加载时验证对应 stored/logical 数据块与 Merkle 路径。完整文件摘要在对象外计算，内部 Integrity Root 的覆盖描述不得包含根记录自身，Signature Envelope 也不得改写被签候选载荷。
 
 签名方案还必须规定算法标识、密钥身份、吊销与轮换、时间或单调版本策略，以及未知算法的失败行为。Merkle 根、块大小和缺失块语义必须进入签名范围，避免验证正确的数据却使用错误的解释。
 

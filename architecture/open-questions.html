@@ -10,7 +10,7 @@ permalink: "/architecture/open-questions.html"
   <div class="hero"><h1>开放问题</h1><p>集中记录尚未通过规范或架构决策记录（ADR）确定的名称、类型、ABI、实现和资源问题。</p><div class="badges"><span class="badge">Unresolved</span><span class="badge">Evidence Required</span></div></div>
   <section class="content-grid">
     <h2>待定事项：对象与语义</h2>
-    <details open><summary>Noema Object 怎样版本化？</summary><p>NOBJ 的固定 Header、前置目录、长度限定 Section 和逻辑字段职责已经作为详细设计基线采用。仍需确定主/次版本兼容规则、魔数字节、字段宽度、能力位、Section 编号、文件扩展名，以及未知 required/optional 记录在不同版本之间的精确处理矩阵。</p></details>
+    <details open><summary>Noema Object 怎样版本化？</summary><p>NOBJ 的固定 Header、前置目录、长度限定 Section、逻辑字段职责和非循环摘要域已经作为详细设计基线采用。仍需确定主/次版本兼容规则、魔数字节、字段宽度、能力位、Section 编号、摘要算法、完整性覆盖描述符、文件扩展名，以及未知 required/optional 记录在不同版本之间的精确处理矩阵。</p></details>
     <details><summary>NIR 最小核心类型集是什么？</summary><p>需要用真实语料和实现原型确定最小集合；“约 20～30 种”只是规划估计。</p></details>
     <details><summary>连续语义残差如何标准化？</summary><p>Encoder 指纹、维度、码本、量化、相似度与跨模型稳定性仍需证据和互操作测试。</p></details>
     <details><summary>评价器如何成为可链接对象？</summary><p>确定性、模型与外部评价器的接口、权限和失败边界尚待设计。</p></details>
@@ -24,6 +24,7 @@ permalink: "/architecture/open-questions.html"
     <details><summary>NSL 采用何种表面语法？</summary><p>严格声明式 DSL 是当前优先方向，自然语言化语法糖仍是后续候选。</p></details>
     <details><summary>披露与 Fulfillment Runtime ABI 如何定型？</summary><p>状态哈希、预算单位、继续句柄、检查点、后端输入适配器槽位和消费者确认协议均未冻结；后端适配不属于对象格式本身。</p></details>
     <details><summary>Agent Harness 的能力与事件结构怎样定型？</summary><p>上下文清单、能力参数、副作用分类、观察事件、状态快照、预算、重复失败和人工升级结构仍需威胁模型、原型与 ADR；它们不能由模型输出临时定义。</p></details>
+    <details><summary>MCP、A2A 与外部遥测怎样接入？</summary><p>当前边界要求它们只作为 Agent Harness 外缘的版本化适配器，不能定义 NIR/NOBJ、内部能力或 Acceptance Decision。仍需确定协议 Profile、能力降级失败语义、身份与 token audience、重放/取消/幂等性、恶意 schema、遥测字段映射和版本迁移测试。</p></details>
     <details><summary>Harness 与 Runtime 怎样交换请求和观察？</summary><p>Runtime Request、Capability Request、Capability Observation、幂等性、超时、取消、恢复和会话级重试协议尚未冻结。Runtime 不持有实时能力句柄，Harness 也不能改变 Runtime 对象语义。</p></details>
     <details><summary>谁持有并传递 Loaded State？</summary><p>Loaded State Handle 的不可伪造性、进程边界、生命周期、撤销、并发读取与 Runtime 只读视图仍需规范。当前边界要求 Object System 交给 Harness，Runtime 只能经 Harness 获得请求所需视图。</p></details>
     <details><summary>最终验收由谁决定？</summary><p>Candidate Assessment、证据闭包、确定性 Acceptance Policy 与人工或外部权威的签署协议仍需规范。noemcoverage 只检查证据是否可定位，noemevaluate 只做离线评估，两者都不能修改单次会话的 Acceptance Decision。</p></details>

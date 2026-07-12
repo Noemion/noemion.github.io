@@ -22,8 +22,9 @@ permalink: "/development/testing.html"
     <h2>编译与复现</h2>
     <ul>
       <li>基准样例、规范化文本往返转换、类型错误、约束冲突和覆盖缺口。</li>
-      <li>相同输入、工具版本和规范化构建环境的字节级复现。</li>
-      <li>不同工作目录、归档顺序和固定构建纪元不能污染结果。</li>
+      <li>生产 Reader/Writer 与不共享解析代码的独立 Reader 使用同一字节向量，逐字段比较解释、限制和失败分类。</li>
+      <li>相同输入、工具版本和规范化构建环境的对象字节级复现；工具二进制复现与发布者签名真实性分别报告。</li>
+      <li>至少在两个工作目录和两个隔离环境重复构建；归档顺序、locale、时区、固定构建纪元和临时路径不能污染结果。</li>
       <li>对象差异工具必须区分布局、调试、信任元数据和运行语义变化。</li>
     </ul>
   </section>
@@ -39,9 +40,9 @@ permalink: "/development/testing.html"
   <section class="content-rows">
     <h2>设计方案：链接、HOBJ 与 Fulfillment Runtime</h2>
     <ul>
-      <li>强/弱符号、ID 重映射、约束可满足性、权限交集和语义冲突矩阵。</li>
-      <li>主 HOBJ 与强依赖闭包完整；弱依赖缺失行为明确。</li>
-      <li>strip 前后语义图、硬约束、依赖、验收契约和运行语义哈希一致。</li>
+      <li>local/export/import、必需/可选依赖、ID 重映射、约束可满足性、权限交集和语义冲突矩阵。</li>
+      <li>主 HOBJ 与必需依赖闭包完整；可选依赖缺失行为明确。</li>
+      <li>strip 前后语义图、硬约束、依赖、验收契约和披露行为满足规范化属性等价；只有等价规则冻结后才比较运行语义哈希。</li>
       <li>预算不足、披露越权、会话重放和状态漂移必须安全拒绝或重新同步。</li>
     </ul>
   </section>
@@ -55,9 +56,19 @@ permalink: "/development/testing.html"
       <li>端到端验收同时检查任务结果、过程合规和证据完整；智能体自述成功不能作为验收证据。</li>
     </ul>
   </section>
+  <section class="content-rows">
+    <h2>外部协议与模型适配测试</h2>
+    <ul>
+      <li>MCP/A2A 适配覆盖协议版本不兼容、未知必需字段、恶意 Tool/Agent Card、schema 欺骗、任务状态伪造与静默降级。</li>
+      <li>授权测试覆盖 token audience、精确资源绑定、token passthrough、confused deputy、SSRF、重放、取消竞态和重复执行幂等性；仅在 OAuth Authorization Code Grant 用例中按客户端类型验证 PKCE。</li>
+      <li>结构化输出测试必须包含完全符合 schema 但事实错误、引用悬空、跨字段冲突或权限越界的候选。</li>
+      <li>模型和 Agent 任务执行多次独立运行，报告成功率、置信区间、模型/工具/策略身份和失败切片；seed 或 temperature=0 不作为跨版本确定性证明。</li>
+      <li>LLM 评价器只能产生 advisory assessment；机器 accepted 由确定性验证器形成，需要价值判断时由具名外部权威签署。</li>
+    </ul>
+  </section>
   <section class="content-band">
     <h2>模糊测试从第一天开始</h2>
-    <p>模糊测试至少覆盖 NOBJ/HOBJ 读取器、文本与 NSL Parser、重定位、证据账本、披露图、依赖闭包、Strip 和 Merkle Validator，并限制资源占用、递归深度和压缩扩张。</p>
+    <p>模糊测试至少覆盖 NOBJ/HOBJ 读取器、文本与 NSL Parser、重定位、证据账本、披露图、依赖闭包、Strip 和 Merkle Validator，并限制资源占用、递归深度和压缩扩张。完整性负向样例必须包含“攻击者修改载荷并同步重算对象内 Integrity Root”：在缺少受信外部 Exact File Digest、Package Subject Digest 或签名绑定时，该对象最多保持内部自洽，绝不能提升为可信状态。</p>
   </section>
   <section class="content-band">
     <h2>后续计划：模型与跨平台矩阵</h2>

@@ -8,6 +8,8 @@
 
 修改 NIR 逻辑记录、NOBJ Header、Section/Segment、符号、重定位、来源或构建证据排布时，还必须读取 [`adr-0006-nir-nobj-structural-baseline.md`](adr-0006-nir-nobj-structural-baseline.md)。
 
+修改首个实现仓库、Phase 0/1 纵向切片、独立读取器、GNU 工具链采用范围或外部 AI 协议落点时，还必须读取 [`adr-0007-phase0-implementation-baseline.md`](adr-0007-phase0-implementation-baseline.md)。
+
 修改智能体上下文、能力接口、反馈循环、运行证据或人工升级边界时，还必须读取 [`adr-0002-agent-harness-boundary.md`](adr-0002-agent-harness-boundary.md)。
 
 修改工具输入输出、发布闭包、签名回填、运行产物或跨工具消费者关系时，还必须读取 [`adr-0003-toolchain-artifact-flow.md`](adr-0003-toolchain-artifact-flow.md)。

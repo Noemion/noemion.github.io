@@ -58,6 +58,17 @@ permalink: "/components/agent-harness.html"
       <li>验证失败回到循环，但重复失败、预算耗尽或需要价值判断时请求人工处理。</li>
     </ul>
   </section>
+  <section class="content-wide">
+    <h2>外部协议与结构化输出适配</h2>
+    <p>MCP、A2A 和供应商工具调用解决互操作，不授予 Noemion 内部权限。适配器位于 Harness 外缘：它把远端声明转换为版本化 Capability Catalog、Task、Evidence 和 Policy 输入，再由本地确定性策略决定发现、调用、拒绝、重试或升级。</p>
+    <div class="table-wrap"><table><thead><tr><th>外部机制</th><th>可以采用</th><th>不能推导</th></tr></thead><tbody>
+      <tr><td>MCP 2025-11-25</td><td>工具、资源和上下文的版本化连接协议。</td><td>工具描述、行为注解和输出 schema 不是可信事实或调用授权。</td></tr>
+      <tr><td>A2A 1.0.1</td><td>独立 Agent 之间的任务交换适配；补丁版本不改变 1.0 协议兼容系列。</td><td>Agent Card 和远端 Task 状态不能直接成为内部能力、Evidence Closure 或 Acceptance Decision。</td></tr>
+      <tr><td>JSON Schema / 约束解码</td><td>描述外部参数、候选结构和测试夹具。</td><td>结构合法不证明字段值正确、跨字段不变量成立或操作有权限。</td></tr>
+      <tr><td>OpenTelemetry GenAI</td><td>通过版本化 exporter 输出可替换遥测。</td><td>尚未稳定的外部字段不能进入 NOBJ ABI 或 Noemion 事件身份。</td></tr>
+    </tbody></table></div>
+    <p>远程授权还必须遵守 token audience 与资源绑定：令牌不进入模型上下文，适配器禁止 token passthrough；采用 OAuth Authorization Code Grant 时，public client 必须使用 PKCE，confidential client 按 RFC 9700 建议使用 PKCE。安全测试覆盖 SSRF、confused deputy、取消竞态、重复执行和未知字段，不能把 PKCE 错当成所有凭证模式的通用机制。正式依据：<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a>、<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a>、<a href="https://www.rfc-editor.org/info/rfc9700/">https://www.rfc-editor.org/info/rfc9700/</a>、<a href="https://www.rfc-editor.org/rfc/rfc9728.html">https://www.rfc-editor.org/rfc/rfc9728.html</a>、<a href="https://www.rfc-editor.org/info/rfc8707/">https://www.rfc-editor.org/info/rfc8707/</a>。</p>
+  </section>
   <section class="content-rows">
     <h2>与现有组件的关系</h2>
     <ul>
@@ -80,7 +91,7 @@ permalink: "/components/agent-harness.html"
       <tr><td>恢复与停止</td><td>工具失败、环境漂移、预算耗尽、重复失败和人工升级条件产生确定结果。</td></tr>
       <tr><td>可追溯性</td><td>目标、上下文、行动、观察、对象、环境和验收结论能够通过稳定身份关联。</td></tr>
     </tbody></table></div>
-    <p>当前只形成职责和信任边界，尚未发布 Agent Harness。Loaded State Handle、Execution Profile、Context Manifest、Capability Catalog、Runtime Request、Capability Request、Capability Observation、状态快照、证据闭包和 Acceptance Decision 仍需规范和测试后才能冻结。</p>
+    <p>当前只形成职责、信任边界和外部协议适配原则，尚未发布 Agent Harness。Loaded State Handle、Execution Profile、Context Manifest、Capability Catalog、Runtime Request、Capability Request、Capability Observation、状态快照、证据闭包、Acceptance Decision 与协议适配 Profile 仍需规范和测试后才能冻结。</p>
     <p>运行入口见<a href="../tools/noemexecute/index.html">noemexecute</a>，事件规范化见<a href="../tools/noemobserve/index.html">noemobserve</a>，证据闭包见<a href="../tools/noemcoverage/index.html">noemcoverage</a>，离线场景评估见<a href="../tools/noemevaluate/index.html">noemevaluate</a>。</p>
   </section>
   <section class="content-band">

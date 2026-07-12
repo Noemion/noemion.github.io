@@ -41,9 +41,9 @@ Section Directory 的 offset、stored/logical size、alignment、entry size/coun
 | `nir.acceptance` | 合并兼容验收契约；决定权威和 unknown 行为冲突必须失败。 |
 | `nir.capabilities` | 权限默认收敛到更严格上限，不建立实时句柄。 |
 | `nir.artifacts` | 合并输出结构和消费者契约，检测名称或结构冲突。 |
-| `symbols` | 执行定义、引用、版本、强弱和可见性选择。 |
+| `symbols` | 执行 local/export/import、版本、显式缺失策略和可见性解析。 |
 | `relocations` | 按来源字段、目标符号、类型和加数应用修正。 |
-| `dependencies` / `policies` | 计算强依赖闭包并收敛权限与策略。 |
+| `dependencies` / `policies` | 计算必需依赖闭包并收敛权限与策略。 |
 | `origins` | 重映射记录引用并保持来源摘要、跨度和决定身份。 |
 | `build` / `debug.source` | 默认不参与运行语义；按输出策略保留、合并或外置。 |
 
@@ -55,9 +55,9 @@ Section Directory 的 offset、stored/logical size、alignment、entry size/coun
 
 | 记录 | 链接所需字段 | 链接器必须证明 |
 | --- | --- | --- |
-| Symbol | kind、binding、visibility、definition state、section/record/type/version 引用、origin、stable-key digest | 定义与引用类型一致，选择顺序确定，稳定键不依赖输入文件位置。 |
+| Symbol | namespace/name、kind、local/export/import、visibility、definition state、section/record/type/version 引用、resolution/missing policy、origin、stable-key digest | 定义与引用类型一致，可选性显式，选择不依赖输入文件位置。 |
 | Relocation | target section/record/field、kind、symbol、expected type、encoding/width、addend、overflow policy、origin | 目标字段允许重定位，应用一次且不溢出，结果仍符合声明类型。 |
-| Dependency | kind、content digest、version constraint、required features、resolution policy、optional flag、origin | 解析结果已锁定且可重放，未知强依赖失败，可选依赖缺失不会改变必需语义。 |
+| Dependency | kind、content digest、version constraint、required features、resolution policy、optional flag、origin | 解析结果已锁定且可重放，未知必需依赖失败，可选依赖缺失不会改变必需语义。 |
 
 链接器完成 ID 重映射后必须重新验证所有 section/record/field 引用，并重建受影响的摘要材料。名称相同但 stable-key、类型、版本或来源不兼容的 Symbol 不能静默合并。
 

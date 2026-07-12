@@ -14,7 +14,7 @@ permalink: "/tools/noemtransform/index.html"
   <section>
 <h2>当前状态</h2>
 <p class="callout warning"><strong>当前状态：</strong>尚未发布可执行版本，命令行界面、参数和文件扩展名仍在设计中。当前公开信息包括计划用途、输入输出和安全边界；安装与调用说明将在首个可用版本发布时提供。</p>
-<p><strong>开发顺序：</strong>先稳定 Section/引用规则、语义哈希和对象写入器；每种变换都将验证前置条件、影响分析、原子提交、往返转换，以及失败时不产生部分对象。</p>
+<p><strong>开发顺序：</strong>先稳定 Section/引用规则、规范化等价属性和对象写入器；只有等价规则冻结后才引入语义哈希。每种变换都将验证前置条件、影响分析、原子提交、往返转换，以及失败时不产生部分对象。</p>
 </section>
   <section><h2>它怎样工作</h2><div class="flow"><div class="step">验证源对象</div><div class="step">解析变换计划</div><div class="step">计算影响闭包</div><div class="step">重建对象</div><div class="step">验证与报告</div></div><ul><li>复制完整对象或选定 Section 到新对象</li><li>抽取调试、来源、产物或模型元数据为补充对象</li><li>重命名允许重命名的 Section 与局部符号</li><li>规范化对齐、排序、内容寻址和构建元数据</li></ul></section>
   <section><h2>它读取什么，产生什么</h2><div class="table-wrap"><table><thead><tr><th>方向</th><th>对象</th><th>作用</th></tr></thead><tbody><tr><td>输入</td><td>Source Object</td><td>已通过结构验证的 NOBJ/HOBJ</td></tr><tr><td>输入</td><td>Transform Plan</td><td>copy/extract/rename/remove/normalize 操作及顺序</td></tr><tr><td>输入</td><td>Target 配置</td><td>对象版本、字节序、对齐和发布/开发封装</td></tr><tr><td>输出</td><td>Transformed Object</td><td>重建目录、索引、引用和哈希的新对象</td></tr><tr><td>输出</td><td>Change Manifest</td><td>操作、受影响引用、旧签名失效状态和规范属性比较</td></tr><tr><td>输出</td><td>Supplement Object</td><td>通用抽取结果；当用于发布裁剪时必须采用 noemreduce 定义的 Debug Companion 身份、访问策略和消费者契约</td></tr></tbody></table></div></section>

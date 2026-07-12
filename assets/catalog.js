@@ -5,10 +5,13 @@
   if (!catalog) return;
 
   const search = catalog.querySelector("[data-catalog-search]");
+  const controls = catalog.querySelector(".catalog-controls");
   const filters = [...catalog.querySelectorAll("[data-catalog-filter]")];
   const groups = [...catalog.querySelectorAll("[data-catalog-group]")];
   const empty = catalog.querySelector("[data-catalog-empty]");
   let activeGroup = "all";
+
+  if (controls) controls.hidden = false;
 
   const normalize = (value) => value.trim().toLocaleLowerCase("zh-CN");
 

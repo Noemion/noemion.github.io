@@ -1,4 +1,4 @@
-{% assign manual_pages = site.pages | where_exp: "item", "item.manual_id != nil" | sort: "manual_order" %}
+{% assign manual_pages = site.pages | where_exp: "item", "item.manual_id != nil" | sort: "permalink" %}
 <script type="application/json" data-manual-directory-source>
 {
   "manuals": {{ site.data.manuals | jsonify }},
