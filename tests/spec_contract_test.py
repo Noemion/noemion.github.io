@@ -44,12 +44,12 @@ def validate_registry(registry, spec_text, threat_text, errors):
         expected_documents = {
             "END-CORE": {
                 "version": "0.1.0-draft", "status": "draft",
-                "implementation_status": "unimplemented", "wire_status": "unfrozen",
+                "implementation_status": "partial-local-candidate-unpublished", "wire_status": "unfrozen",
                 "path": "spec/endem-core.md",
             },
             "END-FMT": {
                 "version": "0.1.0-draft", "status": "draft",
-                "implementation_status": "vector-checker-only",
+                "implementation_status": "local-candidate-unpublished",
                 "wire_status": "experimental-draft", "path": "spec/endem-format.md",
             },
             "END-SRCM": {
@@ -228,7 +228,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             if field not in clause:
                 errors.append(f"{clause_id}: missing registry field {field}")
         if clause_id.startswith("END-FMT-"):
-            expected_implementation = "vector-checker-only"
+            expected_implementation = "local-candidate-unpublished"
         elif clause_id.startswith("END-SRCM-"):
             expected_implementation = "local-candidate-unpublished"
         else:

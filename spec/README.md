@@ -34,7 +34,7 @@
 - `evidence_status`：仓库内是否已有覆盖向量或测试；
 - `wire_status`：物理编码是否冻结。
 
-`decision_status: accepted` 不表示实现存在，也不表示证据充分。`wire_status: experimental-draft` 只允许草案实验；任何程序都不得声称产生可互操作的稳定 `.endem` 字节。
+`implementation_status` 使用四级值：`unimplemented`、`vector-checker-only`、`partial-local-candidate-unpublished` 与 `local-candidate-unpublished`。本地候选只说明存在未公开实现，不构成公开符合性声明。`decision_status: accepted` 不表示实现存在，也不表示证据充分；`wire_status: experimental-draft` 只允许草案实验，任何程序都不得声称产生可互操作的稳定 `.endem` 字节。
 
 ## 变更规则
 
