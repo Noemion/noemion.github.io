@@ -10,15 +10,14 @@ permalink: "/endem/index.html"
   <header class="application-introduction"><h1>endem · 目标制品应用</h1><p>一个命令入口贯穿目标制品的形成、检查、组合、发布和受控实现。</p><div class="badges"><span class="badge">Single CLI</span><span class="badge">8 Actions</span><span class="badge">Design Stage</span><span class="badge">No Executable Yet</span></div></header>
 
   <div class="tool-project-body">
-    <div class="tool-project-main">
-      <section>
+    <section>
         <h2>它解决什么问题</h2>
         <p class="lead">Endem 处理目标契约，而不是机器指令。用户需要沿同一制品生命周期完成工作，并在每次状态变化时得到明确结果或失败原因。</p>
         <p>传统对象工具把汇编、查看、链接和打包拆成许多程序。Noemion 借鉴这些职责边界，但不照搬工具数量。</p>
         <p><code>endem</code> 是唯一公开 CLI。它的八个子命令共享术语、诊断和发行入口，但 Poiet、独立 Theor、隔离 Praxor 和外部签名系统继续保持不同实现与权限边界。</p>
-      </section>
+    </section>
 
-      <section class="tool-status-panel">
+    <section class="tool-status-panel">
         <h2>当前状态</h2>
         <p><strong>设计阶段，尚未提供可执行程序。</strong>Endem 语义、END-FMT 实验性容器、END-P0、命令名和职责已经采用；完整载荷、参数、退出状态、安装包和稳定 ABI 尚未冻结。</p>
         <ul>
@@ -27,9 +26,9 @@ permalink: "/endem/index.html"
           <li><code>pleko</code> 等真实多 Endem 案例与最小格式通过双实现验证后开发。</li>
           <li><code>tasse</code>、<code>sphra</code> 和 <code>praxe</code> 等发布与安全边界冻结后开发。</li>
         </ul>
-      </section>
+    </section>
 
-      <section>
+    <section>
         <h2>它怎样工作</h2>
         <div class="flow"><div class="step">poie · 形成 nascent Endem</div><div class="step">elenk · 生产验证</div><div class="step">pleko · 形成 coherent / Synem</div><div class="step">tasse · 冻结候选</div><div class="step">sphra · 核对外部签名</div><div class="step">theor · 独立只读观察</div><div class="step">praxe · 隔离实现</div><div class="step">peira · 一致性验证</div></div>
         <ul>
@@ -39,9 +38,9 @@ permalink: "/endem/index.html"
           <li><code>tasse</code> 产生不可变候选和 Signing Request；<code>sphra</code> 只核对并附加外部响应。</li>
           <li><code>theor</code> 使用不共享 Poiet 解析代码的 Theor；<code>praxe</code> 启动不拥有写入器的隔离 Praxor。</li>
         </ul>
-      </section>
+    </section>
 
-      <section>
+    <section>
         <h2>它读取什么，产生什么</h2>
         <div class="table-wrap"><table><thead><tr><th>入口</th><th>主要输入</th><th>主要输出</th></tr></thead><tbody>
           <tr><td><code>poie</code></td><td>受控来源、投影候选、语义决定和规范版本</td><td>nascent Endem、Poie Tekmor、诊断</td></tr>
@@ -53,9 +52,9 @@ permalink: "/endem/index.html"
           <tr><td><code>praxe</code></td><td>attested 制品、运行策略、后端与能力目录</td><td>Dromen、运行记录、运行与决定类 Tekmor</td></tr>
           <tr><td><code>peira</code></td><td>规范向量、实现构建、恶意语料和复现配置</td><td>一致性、差分、模糊测试与复现报告</td></tr>
         </tbody></table></div>
-      </section>
+    </section>
 
-      <section>
+    <section>
         <h2>它不会做什么</h2>
         <ul>
           <li>不把任意自然语言、模型 JSON 或结构化输出直接视为合格 Endem。</li>
@@ -66,8 +65,7 @@ permalink: "/endem/index.html"
           <li>不让 <code>praxe</code> 后端持有实时能力句柄、改写 attested 制品或自行宣布 accepted。</li>
           <li>不把 Tekmor、签名、模型评分或工具数量描述为数学证明或成熟实现证据。</li>
         </ul>
-      </section>
-    </div>
+    </section>
   </div>
 
   <section>

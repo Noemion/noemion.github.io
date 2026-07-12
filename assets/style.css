@@ -1481,7 +1481,7 @@ body[data-page-role="tool-project"] .application-introduction{
 body[data-page-role="tool-project"] .application-introduction::before{width:33.333%}
 body[data-page-role="tool-project"] .application-introduction::after{right:3.4%;width:26%}
 body[data-page-role="tool-project"] .tool-project-body{
-  grid-template-columns:minmax(0,800px) minmax(320px,400px)
+  grid-template-columns:minmax(0,800px) minmax(380px,1fr)
 }
 body[data-page-role="tool-project"] .tool-project-body>section:not(:nth-of-type(2))>:is(p,ul,ol,blockquote){
   max-width:740px;font-size:18px;line-height:1.78
@@ -1585,6 +1585,12 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
   box-shadow:0 0 0 1px rgba(255,255,255,.13)
 }
 
+@media(max-width:1217px){
+  body[data-page-role="tool-project"] .tool-project-body{display:block}
+  body[data-page-role="tool-project"] .tool-project-body>section{padding:50px 40px;border-right:0}
+  body[data-page-role="tool-project"] .tool-project-body>section:nth-of-type(2){position:relative;top:auto;grid-column:auto;grid-row:auto;margin:20px;padding:28px}
+}
+
 @media(max-width:999px){
   body:not([data-page-role="portal"]) main{width:calc(100% - 16px);margin-bottom:48px}
   body:not([data-page-role="portal"]) .site-footer{width:calc(100% - 16px);margin:-48px auto 0}
@@ -1616,9 +1622,6 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
   .progress-counts>div{grid-template-columns:1fr;align-content:center;gap:10px;min-height:96px}
   .progress-roadmap-link{margin-top:28px}
   .project-timeline-block{padding:50px 40px 56px}
-  body[data-page-role="tool-project"] .tool-project-body{display:block}
-  body[data-page-role="tool-project"] .tool-project-body>section{padding:50px 40px;border-right:0}
-  body[data-page-role="tool-project"] .tool-project-body>section:nth-of-type(2){position:relative;top:auto;margin:20px;padding:28px}
   body[data-site-module="support"] .faq-list>section{padding:44px 40px}
   body[data-page-role="content"]:not([data-docs-layout="true"]) main>section>:is(p,ul,ol,blockquote),
   body[data-page-role="tool-project"] .tool-project-body>section:not(:nth-of-type(2))>:is(p,ul,ol,blockquote),

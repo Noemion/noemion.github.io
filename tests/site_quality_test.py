@@ -716,6 +716,12 @@ def validate_readability_behavior_contracts(root):
                 r"\.faq-list\s+details>p\s*\{[^}]*max-width:760px;"
                 r"[^}]*font-size:17px;[^}]*line-height:1\.75"
             ),
+            "tool project must collapse before a tablet canvas clips its status panel": (
+                style_text,
+                r"@media\(max-width:1217px\)\s*\{"
+                r"[^}]*body\[data-page-role=\"tool-project\"\]\s+\.tool-project-body"
+                r"\s*\{\s*display:block"
+            ),
             "mobile manual navigation targets must be at least 44px square": (
                 style_text,
                 r"\.manual-nav\s+a\s*\{[^}]*min-width:44px;"
@@ -1669,8 +1675,19 @@ def validate_jekyll_sources():
     endem_source = SOURCE_ROOT / "endem" / "index.html"
     if not endem_source.exists():
         errors.append("missing Endem application page")
-    elif endem_source.read_text().count('class="tool-project-body"') != 1:
-        errors.append("Endem application page must define one bounded sticky body")
+    else:
+        endem_text = endem_source.read_text()
+        if endem_text.count('class="tool-project-body"') != 1:
+            errors.append("Endem application page must define one bounded sticky body")
+        elif re.search(
+            r'class="tool-project-body">\s*<section\b.*?'
+            r'<section class="tool-status-panel"',
+            endem_text,
+            re.DOTALL,
+        ) is None:
+            errors.append(
+                "Endem application sections must participate directly in the responsive grid"
+            )
     if 'body[data-site-module="endem"]' not in style_text:
         errors.append("missing shared Endem application visual signature")
 
