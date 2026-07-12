@@ -1150,6 +1150,11 @@ def validate_jekyll_sources():
             "radial-gradient(circle at var(--module-node-1)",
             'body[data-docs-layout="true"] .hero::before{',
             "clip-path:polygon(0 0,74% 0,100% 26%,100% 100%,0 100%)",
+            'body .global-brand{grid-column:1;min-width:0;overflow:hidden',
+            'body .global-brand>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+            'body[data-page-role="portal"] .global-header-inner{grid-template-columns:minmax(0,1fr) clamp(126px,39vw,154px) 84px}',
+            'body[data-page-role="portal"] .global-stage-link{width:100%;min-width:0;padding:10px 5px}',
+            'body[data-page-role="portal"] .global-stage-progress{width:22px}',
         ):
             if token not in shared_css:
                 errors.append(f"shared styles missing site-wide design contract: {token}")

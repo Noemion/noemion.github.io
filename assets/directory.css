@@ -368,7 +368,9 @@ body .global-directory-panel{display:none}
 @media(max-width:999px){
   body .global-header{width:calc(100% - 16px);height:64px;margin:0 8px}
   body .global-header-inner{grid-template-columns:minmax(0,1fr) auto auto;padding:0}
-  body .global-brand{grid-column:1;padding:0 14px;border-right:0}
+  body .global-brand{grid-column:1;min-width:0;overflow:hidden;padding:0 14px;border-right:0}
+  body .global-brand .portal-brand-mark{flex:0 0 auto}
+  body .global-brand>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   body .global-primary-nav{display:none}
   body .global-stage-link{
     grid-column:2;padding:10px 13px;border-right:1px solid var(--rule);border-left:1px solid var(--rule)
@@ -445,11 +447,18 @@ body .global-directory-panel{display:none}
 }
 
 @media(max-width:520px){
+  body[data-page-role="portal"] .global-header-inner{grid-template-columns:minmax(0,1fr) clamp(126px,39vw,154px) 84px}
   body .global-brand{padding-inline:12px}
   body .global-brand .portal-brand-mark{width:28px;height:28px}
-  body .global-stage-link{min-width:142px;padding:10px 8px}
-  .global-stage-value{min-width:126px;gap:8px;padding-inline:10px;font-size:11px;letter-spacing:.06em}
-  .global-stage-progress{width:30px}
+  body[data-page-role="portal"] .global-stage-link{width:100%;min-width:0;padding:10px 5px}
+  body[data-page-role="portal"] .global-stage-value{width:100%;min-width:0;gap:5px;padding-inline:6px;font-size:10px;letter-spacing:.04em}
+  body[data-page-role="portal"] .global-stage-text{min-width:0}
+  body[data-page-role="portal"] .global-stage-progress{width:22px}
+}
+
+@media(max-width:360px){
+  body[data-page-role="portal"] .global-stage-value{justify-content:center;gap:0;padding-inline:4px}
+  body[data-page-role="portal"] .global-stage-progress{display:none}
 }
 
 :root[data-resolved-theme="dark"] body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}
