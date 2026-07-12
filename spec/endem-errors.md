@@ -37,7 +37,19 @@
 | `endem.wire.profile.limit` | `END-FMT-010` | profile | 任一资源超过当前有效上限 |
 | `endem.wire.profile.feature` | `END-FMT-011` | profile | P0 出现压缩、加密、更高状态或其他未登记能力 |
 
-## 3. 稳定性边界
+## 3. 语义错误码
+
+| 错误码 | 主条款 | 触发条件 |
+| --- | --- | --- |
+| `endem.root.not_unique` | `END-CORE-001` | 根事态缺失或多于一个 |
+| `endem.rhem.range_out_of_bounds` | `END-SRC-001` | 来源 Unicode 标量范围超过实际内容 |
+| `endem.skena.contains_goal_force` | `END-SIT-001` | 中性事态混入目标方向或力量 |
+| `endem.apor.unrecorded_projection_choice` | `END-APR-001` | 存在多个允许投影但未记录未决选择 |
+| `endem.projection.authority_untrusted` | `END-AUT-001` | 模型自述或其他不可信来源试图确认投影 |
+
+这些错误码当前由语义向量检查器执行。它只验证已登记的最小语义模型，不是生产 Poiet 或 Theor，也不证明六个载荷的物理字段 schema 已经冻结。
+
+## 4. 稳定性边界
 
 上述错误码只在 `END-FMT 0.1.0-draft` 的向量与实验中稳定，尚不构成发行 ABI。提升为稳定接口前必须完成：
 

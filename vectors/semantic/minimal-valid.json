@@ -16,7 +16,7 @@
       "language": "zh-CN",
       "version": "1",
       "content": "为已登记项目生成安全评审报告",
-      "range": {"unit": "unicode-scalar", "start": 0, "length": 16}
+      "range": {"unit": "unicode-scalar", "start": 0, "length": 14}
     },
     "semion": {
       "symbols": [

@@ -135,6 +135,8 @@
       "failure_owner": "Poiet",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/source-range-reject.json"},
+        {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
         {"status": "planned", "ref": "peira:source-range-and-digest"}
       ]
     },
@@ -307,6 +309,8 @@
         {"status": "covered-by-repo", "ref": "vectors/semantic/force-in-skena-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/source-range-reject.json"},
+        {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
         {"status": "planned", "ref": "peira:diagnostic-differential"}
       ]
     },
@@ -327,7 +331,10 @@
       "implementation_status": "unimplemented",
       "evidence_status": "covered",
       "failure_owner": "specification maintenance",
-      "verification": [{"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"}]
+      "verification": [
+        {"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"},
+        {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"}
+      ]
     },
     {
       "id": "END-FMT-001",

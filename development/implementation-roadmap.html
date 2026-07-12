@@ -49,7 +49,7 @@ permalink: "/development/implementation-roadmap.html"
     <div class="table-wrap"><table><thead><tr><th>工作包</th><th>已经形成</th><th>仍需完成</th></tr></thead><tbody>
       <tr><td>P0-W1 条款源</td><td>END-CORE 与 END-FMT 0.1.0-draft、34 个唯一条款 ID、术语与成熟度登记。</td><td>继续通过真实语料和两条独立实现修订草案。</td></tr>
       <tr><td>P0-W2 威胁与限制</td><td>10 类不可信输入威胁、END-P0 的 8 项有限上限和结构错误目录。</td><td>用边界语料、最坏复杂度和目标平台实验验证或调整数值。</td></tr>
-      <tr><td>P0-W3 规范向量</td><td>5 个语义向量；1 个结构接受与 5 个确定拒绝字节向量；独立测试读取器。</td><td>增加截断、乱序、非最短 CBOR、资源边界和完整语义载荷向量。</td></tr>
+      <tr><td>P0-W3 规范向量</td><td>6 个已执行语义向量；1 个结构接受与 5 个确定拒绝字节向量；语义与结构使用不同测试入口。</td><td>增加截断、乱序、非最短 CBOR、资源边界和完整语义载荷向量。</td></tr>
       <tr><td>P0-W4 语言与构建</td><td>C/Rust 双原型、6 个规范向量、144 个差分变异、C Sanitizer、10,000 次 libFuzzer、两次重复构建；ADR-0012 选择 Rust 1.97.0。</td><td>建立生产工作区、Rust 覆盖引导目标和跨平台对象/可执行复现。</td></tr>
     </tbody></table></div>
     <p>这些产物已经支持进入第 1 阶段，但 C/Rust 原型仍是可删除实验，不是生产解析器或可执行发行物。首个工作区必须重新实现规范结构，不得把实验脚本直接改名为 Poiet。</p>

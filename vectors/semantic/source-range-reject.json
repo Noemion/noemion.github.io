@@ -1,0 +1,29 @@
+{
+  "vector_format": "noemion.semantic-vector.v1",
+  "id": "SV-REJECT-SOURCE-RANGE-001",
+  "description": "来源声明的 Unicode 标量范围超过实际内容时不能形成 Endem。",
+  "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "expect": {
+    "result": "reject",
+    "clauses": ["END-SRC-001", "END-ERR-001"],
+    "diagnostics": [
+      {"code": "endem.rhem.range_out_of_bounds", "clause": "END-SRC-001", "location": "/input/rhem/range"}
+    ]
+  },
+  "input": {
+    "rhem": {
+      "source_id": "source:request-006",
+      "subject": "authority:requester",
+      "media_type": "text/plain",
+      "language": "zh-CN",
+      "version": "1",
+      "content": "为已登记项目生成安全评审报告",
+      "range": {"unit": "unicode-scalar", "start": 0, "length": 16}
+    },
+    "semion": {"symbols": [], "relations": []},
+    "skena": {"roots": ["situation:report-produced"], "situations": []},
+    "telis": {"mode": "kine"},
+    "krin": {"decision_authority": "authority:requester"},
+    "apor": []
+  }
+}

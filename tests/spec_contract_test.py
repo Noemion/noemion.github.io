@@ -354,7 +354,7 @@ def validate_vectors(clause_ids, covered_vector_refs, errors):
     if accept_count < 1 or reject_count < 4:
         errors.append("semantic vectors require at least one accept and four reject cases")
     for required_reject_clause in (
-        "END-CORE-001", "END-SIT-001", "END-APR-001", "END-AUT-001",
+        "END-CORE-001", "END-SRC-001", "END-SIT-001", "END-APR-001", "END-AUT-001",
     ):
         if required_reject_clause not in rejected_clause_ids:
             errors.append(f"missing direct rejection vector for {required_reject_clause}")
@@ -362,6 +362,9 @@ def validate_vectors(clause_ids, covered_vector_refs, errors):
 
 def validate_public_boundary(errors):
     config_text = (ROOT / "_config.yml").read_text()
+    workflow_text = (ROOT / ".github" / "workflows" / "pages.yml").read_text()
+    if "python3 tests/semantic_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute semantic vectors, not only register them")
     for exact_exclusion in ("  - experiments/", "  - spec/", "  - vectors/"):
         if exact_exclusion not in config_text:
             errors.append(f"_config.yml: missing exact exclusion {exact_exclusion.strip()!r}")
