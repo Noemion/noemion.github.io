@@ -28,8 +28,8 @@ permalink: "/architecture/open-questions.html"
     <h2>Synem 与发布</h2>
     <details open><summary>绑定标识和版本约束采用什么语法？</summary><p>需要同时满足内容寻址、可读命名、版本兼容和可重放解析；环境搜索顺序和网络最新版本不能成为正式输入。</p></details>
     <details><summary>什么时候允许依赖循环？</summary><p>第一版拒绝必需循环。未来若支持，必须先定义固定点语义、披露与验收顺序、预算上限、失败原子性和跨实现向量。</p></details>
-    <details><summary>Synem 是否需要独立物理容器？</summary><p>在真实多 Endem、流式读取或离线分发消费者出现前，内容寻址 manifest 和现有确定性归档可能已经足够；不能为形式完整提前创造格式。</p></details>
-    <details><summary>tasse 可以删除哪些信息？</summary><p>只有不改变 semion、skena、telis、krin、apor、组合、能力上限和运行披露的内容才能外置。需要先定义关系级等价检查和 Debug Companion 摘要绑定。</p></details>
+    <details><summary>Synem 是否需要独立物理容器？</summary><p>在出现多 Endem、流式读取或离线分发的真实消费者前，内容寻址清单和现有确定性归档可能已经足够。不能只为形式完整提前创造格式。</p></details>
+    <details><summary>tasse 可以删除哪些信息？</summary><p>只有不改变六个语义面、组合、能力上限和运行披露的内容才能外置。还需证明裁剪前后关系等价，并用完整摘要绑定调试伴随记录。</p></details>
     <details><summary>sphra 的算法与撤销策略是什么？</summary><p>需确定待签消息、算法协商、多签、密钥轮换、撤销、时间来源和离线验证。签名必须位于被签载荷之外，且不能替代结构或环境授权。</p></details>
   </section>
 
@@ -44,7 +44,7 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-grid">
     <h2>实施与发布条件</h2>
-    <details open><summary>首版实现语言和仓库结构是什么？</summary><p>需要用同一规范向量比较内存安全、checked arithmetic、模糊测试、跨平台、FFI、依赖和复现成本。第一阶段不引入 LLVM、MLIR、BFD 或模型框架。</p></details>
+    <details open><summary>首版实现语言和仓库结构是什么？</summary><p>需要用同一组规范样本比较内存安全、溢出检查、模糊测试、跨平台、跨语言调用、依赖和复现成本。第一阶段不引入 LLVM、MLIR、BFD 或模型框架。</p></details>
     <details><summary>独立 Theor 怎样证明实现独立？</summary><p>需禁止共享生产解析库、生成代码和错误分类实现，并通过差分、变异和故障注入证明它能发现生产路径的共同假设。</p></details>
     <details><summary>名称何时满足正式发布条件？</summary><p>项目内部命名已经冻结，但公开发行前仍需检查目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。审查完成前不得声称商标可用。</p></details>
     <details><summary>怎样证明构建可复现？</summary><p>对象字节、工具二进制和签名真实性是三个不同属性。需要双路径构建、固定环境输入、逐字节比较和独立签名验证。</p></details>

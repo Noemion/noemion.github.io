@@ -34,7 +34,7 @@ permalink: "/architecture/endem-lifecycle.html"
       <tr><td>nascent Endem → elenk</td><td>原始对象字节、限制、规范版本和请求验证层</td><td>分层结论、Elenk Tekmor；内部可产生生产验证句柄</td><td>结构、引用、语义、状态、完整性或资源限制失败</td><td>pleko、tasse、Praxor</td></tr>
       <tr><td>任意对象 → theor</td><td>原始 Endem/Synem/Tekmor 字节和输出预算</td><td>只读视图、差分、诊断</td><td>畸形、未知关键记录、无法表示或资源超限</td><td>开发者、审计者、peira；不进入生产信任链</td></tr>
       <tr><td>Endem 集合 → pleko</td><td>已检查对象、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Tekmor</td><td>未解析引用、冲突、循环、权限扩大、身份不稳定</td><td>tasse、theor</td></tr>
-      <tr><td>coherent → tasse</td><td>闭包、发布 Profile、调试策略、覆盖要求</td><td>不可变候选载荷、manifest、Signing Request、Tasse Tekmor</td><td>闭包不全、裁剪改变语义、非确定性元数据、覆盖缺口</td><td>外部签名系统、sphra</td></tr>
+      <tr><td>coherent → tasse</td><td>闭包、发布规则、调试策略、覆盖要求</td><td>不可变候选载荷、发布清单、待签消息、Tasse Tekmor</td><td>闭包不全、裁剪改变语义、非确定性元数据、覆盖缺口</td><td>外部签名系统、sphra</td></tr>
       <tr><td>候选 + 签名响应 → sphra</td><td>原候选、原请求、外部签名响应和信任策略</td><td>attested Endem/Synem、Sphra Tekmor</td><td>载荷、请求、算法、签名者或策略不匹配</td><td>theor、Praxor</td></tr>
       <tr><td>attested → praxe</td><td>实际 attested 字节、运行策略、后端和能力目录</td><td>Dromen、运行与决定类 Tekmor、运行记录</td><td>签名或策略失败、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
     </tbody></table></div>
@@ -54,7 +54,7 @@ permalink: "/architecture/endem-lifecycle.html"
   <section class="content-rows">
     <h2>coherent → attested</h2>
     <ol>
-      <li><code>tasse</code> 计算发布闭包和可选 Debug Companion，证明删除内容不改变规范属性。</li>
+      <li><code>tasse</code> 计算发布闭包和可选调试伴随记录，并证明删除内容不改变规范属性。</li>
       <li>待签载荷冻结后生成 Signing Request；私钥始终留在外部签名系统。</li>
       <li><code>sphra</code> 同时读取原候选、原请求与签名响应，先验证绑定，再附加签名包络。</li>
       <li>签名封装不得改写被签载荷；任何载荷变化都要求重新 tasse 和外部签名。</li>

@@ -91,5 +91,6 @@ badges: ["Reference", "Unfrozen CLI"]
 - GNU `readelf`：https://www.sourceware.org/binutils/docs/binutils/readelf.html
 - GNU BFD：https://sourceware.org/binutils/docs/bfd.html
 - MCP 2025-11-25：https://modelcontextprotocol.io/specification/2025-11-25
-- A2A 1.0.1：https://a2a-protocol.org/v1.0.1/specification/
+- A2A 1.0，文档快照 v1.0.1：https://a2a-protocol.org/v1.0.1/specification/
+- OpenTelemetry 生成式 AI 语义约定迁移说明：https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/
 - OpenAI 关于智能体控制平面工程的实践文章：https://openai.com/index/harness-engineering/

@@ -60,13 +60,15 @@ permalink: "/architecture/decisions.html"
 
   <section class="content-wide">
     <h2>外部机制的采用边界</h2>
-    <p>GNU、MCP、A2A 和智能体工程资料只用于核对可复用机制，不决定 Endem 语义或成熟度：</p>
-    <ul>
-      <li>GNU <code>readelf</code> 与 BFD：<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">https://www.sourceware.org/binutils/docs/binutils/readelf.html</a>、<a href="https://sourceware.org/binutils/docs/bfd.html">https://sourceware.org/binutils/docs/bfd.html</a></li>
-      <li>MCP 2025-11-25：<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a></li>
-      <li>A2A 1.0.1：<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a></li>
-      <li>OpenAI 关于智能体控制平面工程的实践文章：<a href="https://openai.com/index/harness-engineering/">https://openai.com/index/harness-engineering/</a></li>
-    </ul>
+    <p>以下资料只提供可复查的机制先例。每一项都同时写明采用部分和禁止推导，外部版本变化不能静默改变 Endem。</p>
+    <div class="table-wrap"><table><thead><tr><th>资料与复核基线</th><th>Noemion 采用什么</th><th>不能据此推出什么</th></tr></thead><tbody>
+      <tr><td>ELF 对象格式：<a href="https://gabi.xinuos.com/elf/">https://gabi.xinuos.com/elf/</a><br>GNU Binutils 2.46：<a href="https://sourceware.org/binutils/docs/">https://sourceware.org/binutils/docs/</a></td><td>结构视图与装载视图分离、显式引用，以及独立于 BFD 的第二条读取路径。</td><td>不继承机器地址、指令、弱符号规则，也不让 BFD 的通用表示进入第一阶段可信核心。</td></tr>
+      <tr><td>MCP 2025-11-25：<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a></td><td>把远端工具说明、注解和结果作为版本化适配输入，并校验令牌受众与最小权限。</td><td>工具声明不等于本地授权，远端结果不等于事实或验收。</td></tr>
+      <tr><td>A2A 1.0，文档快照 v1.0.1：<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a></td><td>借用 Task、Message 与 Artifact 交换跨系统工作状态和结果。</td><td>补丁号不进入协议协商；外部 Task 或 Artifact 也不成为 Endem 身份、状态或验收决定。</td></tr>
+      <tr><td>OpenTelemetry 生成式 AI 语义约定：<a href="https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/">https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/</a></td><td>以后可由带版本、可脱敏的导出器映射运行观测。</td><td>这些仍在迁移和演进的字段不进入 Endem 编码、Tekmor 身份或最终决定；敏感内容不得默认导出。</td></tr>
+      <tr><td>智能体控制平面工程实践：<a href="https://openai.com/index/harness-engineering/">https://openai.com/index/harness-engineering/</a></td><td>借鉴环境可读性、真实反馈和机械检查。</td><td>实践文章不定义项目格式、能力边界、成熟度或实现证据。</td></tr>
+    </tbody></table></div>
+    <p class="callout"><strong>复核日期：</strong>2026-07-13。适配器必须固定所用规范版本；升级时重新运行兼容、安全、重放、取消和权限测试。</p>
   </section>
 
   <section class="content-band">

@@ -58,9 +58,10 @@ permalink: "/development/implementation-roadmap.html"
     <h2>面向 Agent 时代的适配边界</h2>
     <ul>
       <li>MCP 工具说明、注解和远端返回都只是 Praxor 外缘的不可信输入；能力授权来自 Dromen 与会话策略。参见 <a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">https://modelcontextprotocol.io/specification/2025-11-25/server/tools</a>。</li>
-      <li>A2A Task、Message 与 Artifact 适合跨 Agent 传输和生命周期，但不能替代 Endem 身份、Synem 闭包或 Tekmor 验收。参见 <a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a>。</li>
+      <li>A2A 1.0 的 Task、Message 与 Artifact 适合跨 Agent 传输和记录生命周期，但不能替代 Endem 身份、Synem 闭包或 Tekmor 验收。页面固定使用 v1.0.1 文档快照：<a href="https://a2a-protocol.org/v1.0.1/specification/">https://a2a-protocol.org/v1.0.1/specification/</a>。补丁号不进入协议协商。</li>
       <li>可靠 Agent 依赖清晰环境、可读工具、真实观察和反馈循环；这些由 Praxor 及其外侧控制平面负责，不通过增加薄命令包装解决。参见 <a href="https://openai.com/index/harness-engineering/">https://openai.com/index/harness-engineering/</a>。</li>
-      <li>外部协议版本只约束适配器，不进入 Endem 编码、内部事件身份或最终验收决定。</li>
+      <li>OpenTelemetry 的生成式 AI 字段仍在演进，并可能携带输入、输出和工具数据。它只进入带版本、默认脱敏的导出器，不进入 Endem 编码、Tekmor 身份或最终决定。迁移说明：<a href="https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/">https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/</a>。</li>
+      <li>所有外部协议版本只约束适配器，升级必须重新验证兼容性、安全边界和降级行为。</li>
     </ul>
   </section>
 

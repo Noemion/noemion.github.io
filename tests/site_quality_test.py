@@ -1349,10 +1349,47 @@ def validate_jekyll_sources():
     design_root = SOURCE_ROOT / "design-system"
     protocol_reference_files = [*SOURCE_PAGE_FILES, *design_root.glob("*.md")]
     for protocol_reference_file in protocol_reference_files:
-        if "a2a-protocol.org/latest/" in protocol_reference_file.read_text():
+        protocol_reference_text = protocol_reference_file.read_text()
+        if "a2a-protocol.org/latest/" in protocol_reference_text:
             errors.append(
                 f"{protocol_reference_file.relative_to(SOURCE_ROOT)}: A2A evidence must use a versioned specification URL"
             )
+        if re.search(r"\bA2A\s+1\.0\.1\b", protocol_reference_text):
+            errors.append(
+                f"{protocol_reference_file.relative_to(SOURCE_ROOT)}: A2A patch version labels must not be presented as the negotiated protocol version"
+            )
+
+    external_boundary_contracts = {
+        "architecture/decisions.html": (
+            "A2A 1.0，文档快照 v1.0.1",
+            "补丁号不进入协议协商",
+            "opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/",
+            "敏感内容不得默认导出",
+        ),
+        "components/praxor.html": (
+            "A2A 1.0，文档快照 v1.0.1",
+            "令牌必须绑定目标资源",
+            "opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/",
+            "默认不导出正文",
+        ),
+        "development/implementation-roadmap.html": (
+            "补丁号不进入协议协商",
+            "默认脱敏的导出器",
+            "不进入 Endem 编码、Tekmor 身份或最终决定",
+        ),
+        "endem/docs/running.md": (
+            "A2A 1.0，文档快照 v1.0.1",
+            "默认不导出正文",
+            "不构成 Tekmor 身份",
+        ),
+    }
+    for relative_path, required_tokens in external_boundary_contracts.items():
+        boundary_text = (SOURCE_ROOT / relative_path).read_text()
+        for token in required_tokens:
+            if token not in boundary_text:
+                errors.append(
+                    f"{relative_path}: missing external technology boundary {token!r}"
+                )
     design_index = design_root / "README.md"
     if not design_index.exists():
         errors.append("missing design-system/README.md routing index")
