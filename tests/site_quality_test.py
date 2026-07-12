@@ -1924,6 +1924,7 @@ def main():
         "conic-gradient(from var(--spectrum-angle)",
         "@keyframes spectrum-trace{to{--spectrum-angle:360deg}}",
         ".portal-feature-row::before{padding:5px}",
+        ".portal-chapter-title>span{min-width:0;text-align:center}",
         "transition-duration:550ms,160ms",
         ".dataflow-field",
         ".site-header,main",

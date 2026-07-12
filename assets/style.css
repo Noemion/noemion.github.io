@@ -530,7 +530,7 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
   box-shadow:0 1px 0 color-mix(in srgb,var(--heading) 12%,transparent)
 }
 .portal-chapter-title::after{background:linear-gradient(90deg,var(--portal-mint),var(--portal-blue))}
-.portal-chapter-title>span{min-width:0}
+.portal-chapter-title>span{min-width:0;text-align:center}
 .portal-section-heading>p:last-child{max-width:610px;margin:20px auto 0;color:var(--muted);font-size:16px}
 .portal-paths .portal-section-heading strong{color:var(--portal-coral)}
 .portal-feature-list{border-top:1px solid var(--portal-line)}
