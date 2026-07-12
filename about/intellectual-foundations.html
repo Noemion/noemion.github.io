@@ -44,7 +44,7 @@ permalink: "/about/intellectual-foundations.html"
   <section class="content-split">
     <h2>Noemion 名称怎样形成</h2>
     <div>
-      <p><strong>Noemion</strong> 从 <em>Noema</em> 衍生，但不是缩写。中文学术文献通常把 noema 译为“意向相关项”，把 noesis 译为“意向活动”：前者是对象作为被把握、被判断或被要求之物，后者是给予对象以某种意义的活动。</p>
+      <p><strong>Noemion</strong> 从 <em>Noema</em> 衍生，但不是缩写。本项目采用“意向相关项”和“意向活动”作为工作性译法，用来区分意识活动与其相关项；现象学研究对 noema 的精确解释存在竞争读法，因此该译法只是工程类比，不宣称解决哲学争议。概念背景：<a href="https://plato.stanford.edu/entries/husserl/">https://plato.stanford.edu/entries/husserl/</a></p>
       <p>Noemion 借用这组关系来提出工程问题：来源句子可以变化，但编译后的对象身份、约束和验收条件需要独立表示。项目因此把确定性编译活动称为 <strong>Noesis Core</strong>，把机器表示称为 <strong>Noema IR</strong> 和 <strong>Noema Object</strong>。</p>
     </div>
     <div>
@@ -55,12 +55,12 @@ permalink: "/about/intellectual-foundations.html"
 
   <section class="content-stack">
     <h2>《逻辑哲学论》的第一批检查点</h2>
-    <p>当前使用商务印书馆贺绍甲译本进行编号正文阅读。以下内容是设计检查点，不是对该书的完整解释：</p>
+    <p>当前按《逻辑哲学论》的编号体系对照译本与开放文本阅读；正式研究引用还需记录具体版次、年份、译者和页码。以下内容只是工程类比检查点，不是对该书的完整解释。开放编号文本：<a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_logico-philosophicus_(version_arborescente_statique)">https://www.wittgensteinproject.org/w/index.php/Tractatus_logico-philosophicus_(version_arborescente_statique)</a></p>
     <ul>
       <li><strong>1–2：</strong>“世界是事实的总体”促使对象模型关注成立或不成立的关系状态，而不是只收集名称和资源。</li>
       <li><strong>2.1–3：</strong>图像、事实和逻辑形式提醒我们，任何机器表征都必须明确说明它怎样对应任务状态；仅凭结构相似不能证明语义正确。</li>
       <li><strong>4.024：</strong>理解一个命题与知道它为真时事情如何相关。这为验收契约和证据图提供问题来源，但生成式验收不必等同于命题真值。</li>
-      <li><strong>4.111–4.112：</strong>澄清思想和划定边界支持规范先行、术语分层和拒绝无意义输入的方向。</li>
+      <li><strong>4.111–4.112：</strong>原文把哲学描述为澄清活动；Noemion 只把这一点类比为“先澄清术语和边界再实现”，它不能直接推出规范先行或任何软件拒绝规则。</li>
       <li><strong>6.5–7：</strong>可说与不可说的边界提醒规范必须能表示“尚不能判定或表达”，而不是让模型补出虚假确定性。</li>
     </ul>
     <p class="callout warning"><strong>反向约束：</strong>这本书的图像论、原子事实和早期语言观不能单独成为 Noemion 的语义基础。后期维特根斯坦、语用学、翻译不确定性和推理语义学提供了必须共同考虑的反例。</p>
@@ -70,7 +70,7 @@ permalink: "/about/intellectual-foundations.html"
     <h2>对 Noema IR 的待验证设计</h2>
     <p>以下内容仍是研究提案，尚未成为规范：</p>
     <div class="status-grid">
-      <article class="status-item"><h3>四层语义身份</h3><p>区分 Source Expression、Compiled Meaning、Reference Binding 与 Satisfaction 契约，避免把原文、编译结果、外部所指和验收规则混为一个字段。</p></article>
+      <article class="status-item"><h3>四类记录关系</h3><p>区分 Source Expression、Compiled Meaning、Reference Binding 与 Acceptance Contract；后两项并非与前两项同类的“身份”，分类仍需反例检验。</p></article>
       <article class="status-item"><h3>语义来源等级</h3><p>至少区分明示内容、结构蕴涵、语境推论、工具推导和模型候选；每一层具有不同的确认权限与可撤销性。</p></article>
       <article class="status-item"><h3>行为类型</h3><p>目标不仅描述世界，也可能要求询问、承诺、授权或执行。行为类型需要行动者、权限、前置条件、效果和失败语义。</p></article>
       <article class="status-item"><h3>满足环境</h3><p>约束是否满足取决于明确的变量绑定、证据、版本、能力和 Fulfillment Runtime 配置；验证器不得使用未登记的背景假设。</p></article>
@@ -79,18 +79,21 @@ permalink: "/about/intellectual-foundations.html"
 
   <section class="content-wide">
     <h2>核心书目与资源状态</h2>
-    <div class="table-wrap"><table><thead><tr><th>著作</th><th>当前用途</th><th>研究状态</th><th>权威资源</th></tr></thead><tbody>
-      <tr><td>Wittgenstein, <em>Tractatus Logico-Philosophicus</em></td><td>事实、命题、逻辑形式、语言边界</td><td>商务印书馆贺绍甲译本；编号正文已进入首轮专题研究</td><td><a href="https://plato.stanford.edu/entries/wittgenstein/">https://plato.stanford.edu/entries/wittgenstein/</a></td></tr>
-      <tr><td>Wittgenstein, <em>Philosophical Investigations</em></td><td>意义即使用、语言游戏、规则遵循</td><td>版本与关键章节已定位，待逐章精读</td><td><a href="https://books.google.com/books/about/Philosophical_Investigations.html?id=XN9yyyhYMDoC">https://books.google.com/books/about/Philosophical_Investigations.html?id=XN9yyyhYMDoC</a></td></tr>
-      <tr><td>Dummett, <em>Frege: Philosophy of Language</em></td><td>意义、指称、真值条件与组合性</td><td>书目和内容范围已核对，待专题阅读</td><td><a href="https://books.google.com/books/about/Frege.html?id=EYP7uCZIRQYC">https://books.google.com/books/about/Frege.html?id=EYP7uCZIRQYC</a></td></tr>
-      <tr><td>Carnap, <em>Meaning and Necessity</em></td><td>外延、内涵、语义规则与元语言</td><td>官方目录已研读，按章节进入</td><td><a href="https://press.uchicago.edu/ucp/books/book/chicago/M/bo3638630.html">https://press.uchicago.edu/ucp/books/book/chicago/M/bo3638630.html</a></td></tr>
+    <div class="table-wrap"><table><thead><tr><th>著作</th><th>当前用途</th><th>研究状态</th><th>版本或检索资源</th></tr></thead><tbody>
+      <tr><td>Husserl, <em>Ideas I</em></td><td>Noesis/noema、意向性、对象给予方式与视域</td><td>原典章节与解释争议已定位；需要版本化研究笔记和竞争解释对照</td><td><a href="https://www.routledge.com/Ideas-General-Introduction-to-Pure-Phenomenology/Husserl/p/book/9780415519038">https://www.routledge.com/Ideas-General-Introduction-to-Pure-Phenomenology/Husserl/p/book/9780415519038</a></td></tr>
+      <tr><td>Wittgenstein, <em>Tractatus Logico-Philosophicus</em></td><td>事实、命题、逻辑形式、语言边界</td><td>编号检查点已形成；正式引用仍需补齐所用中文版本元数据</td><td><a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_logico-philosophicus_(version_arborescente_statique)">https://www.wittgensteinproject.org/w/index.php/Tractatus_logico-philosophicus_(version_arborescente_statique)</a></td></tr>
+      <tr><td>Wittgenstein, <em>Philosophical Investigations</em></td><td>意义即使用、语言游戏、规则遵循</td><td>版本与关键章节已定位，待逐章精读</td><td><a href="https://www.wiley.com/en-us/Wittgenstein-c-PL45">https://www.wiley.com/en-us/Wittgenstein-c-PL45</a></td></tr>
+      <tr><td>Frege, “Über Sinn und Bedeutung”</td><td>意义、指称、组合与替换问题</td><td>原论文与翻译争议已定位，待形成与 NIR 来源绑定的反例对照</td><td><a href="https://www.degruyter.com/document/doi/10.1515/9783111546216-003/html">https://www.degruyter.com/document/doi/10.1515/9783111546216-003/html</a></td></tr>
+      <tr><td>Russell, “On Denoting”</td><td>表面语法、逻辑形式、存在与唯一性</td><td>原论文范围已定位，待与候选解析和作用域诊断逐项对照</td><td><a href="https://academic.oup.com/mind/article-abstract/XIV/4/479/964157">https://academic.oup.com/mind/article-abstract/XIV/4/479/964157</a></td></tr>
+      <tr><td>Dummett, <em>Frege: Philosophy of Language</em></td><td>意义、指称、真值条件与组合性</td><td>书目和内容范围已核对，待专题阅读</td><td><a href="https://www.bloomsbury.com/uk/frege-9780715616499/">https://www.bloomsbury.com/uk/frege-9780715616499/</a></td></tr>
+      <tr><td>Carnap, <em>Meaning and Necessity</em></td><td>外延、内涵、语义规则与元语言</td><td>出版社目录与章节范围已定位，待按问题逐章研究</td><td><a href="https://press.uchicago.edu/ucp/books/book/chicago/M/bo3638630.html">https://press.uchicago.edu/ucp/books/book/chicago/M/bo3638630.html</a></td></tr>
       <tr><td>Tarski, <em>Logic, Semantics, Metamathematics</em></td><td>对象语言、元语言、满足与真定义</td><td>核心论文范围已定位，待形式化对照</td><td><a href="https://hackettpublishing.com/logic-semantics-metamathematics">https://hackettpublishing.com/logic-semantics-metamathematics</a></td></tr>
-      <tr><td>Austin, <em>How to Do Things with Words</em></td><td>言语行为、言外之力和成功条件</td><td>讲座结构与核心转向已核对</td><td><a href="https://academic.oup.com/book/5162">https://academic.oup.com/book/5162</a></td></tr>
-      <tr><td>Searle, <em>Intentionality</em></td><td>意向内容、满足条件与适合方向</td><td>导论和目录已研读，待逐章复核</td><td><a href="https://www.cambridge.org/core/books/intentionality/04339DA8A542FAF094BAE449118162E6">https://www.cambridge.org/core/books/intentionality/04339DA8A542FAF094BAE449118162E6</a></td></tr>
-      <tr><td>Grice, <em>Studies in the Way of Words</em></td><td>字面内容、会话含义和共享背景</td><td>William James 讲座线索已核对</td><td><a href="https://books.google.com/books/about/Studies_in_the_Way_of_Words.html?id=8r78DwAAQBAJ">https://books.google.com/books/about/Studies_in_the_Way_of_Words.html?id=8r78DwAAQBAJ</a></td></tr>
-      <tr><td>Kripke, <em>Naming and Necessity</em></td><td>名称、描述与跨情境指称稳定性</td><td>三讲范围已核对，待反例整理</td><td><a href="https://books.google.com/books/about/Naming_and_Necessity.html?id=9vvAlOBfq0kC">https://books.google.com/books/about/Naming_and_Necessity.html?id=9vvAlOBfq0kC</a></td></tr>
-      <tr><td>Brandom, <em>Articulating Reasons</em></td><td>推理角色、承诺、不相容与逻辑表达</td><td>目录与核心论点已研读，待映射验证</td><td><a href="https://books.google.com/books?vid=ISBN9780674006928">https://books.google.com/books?vid=ISBN9780674006928</a></td></tr>
-      <tr><td>Quine, <em>Word and Object</em></td><td>翻译不确定性、指称和本体承诺</td><td>内容范围已核对，列入第二批精读</td><td><a href="https://books.google.com/books/about/Word_and_Object.html?id=sVH3YlIZK5QC">https://books.google.com/books/about/Word_and_Object.html?id=sVH3YlIZK5QC</a></td></tr>
+      <tr><td>Austin, <em>How to Do Things with Words</em></td><td>言语行为、言外之力和成功条件</td><td>讲座结构与核心转向已定位，待形成行为类型反例集</td><td><a href="https://academic.oup.com/book/5162">https://academic.oup.com/book/5162</a></td></tr>
+      <tr><td>Searle, <em>Intentionality</em></td><td>意向内容、满足条件与适合方向</td><td>导论和目录已定位，待逐章复核</td><td><a href="https://www.cambridge.org/core/books/intentionality/04339DA8A542FAF094BAE449118162E6">https://www.cambridge.org/core/books/intentionality/04339DA8A542FAF094BAE449118162E6</a></td></tr>
+      <tr><td>Grice, <em>Studies in the Way of Words</em></td><td>字面内容、会话含义和共享背景</td><td>William James 讲座线索已核对</td><td><a href="https://search.worldcat.org/title/644374880">https://search.worldcat.org/title/644374880</a></td></tr>
+      <tr><td>Kripke, <em>Naming and Necessity</em></td><td>名称、描述与跨情境指称稳定性</td><td>三讲范围已核对，待反例整理</td><td><a href="https://www.wiley-vch.de/en/areas-interest/humanities-social-sciences/naming-and-necessity-978-0-631-12801-4">https://www.wiley-vch.de/en/areas-interest/humanities-social-sciences/naming-and-necessity-978-0-631-12801-4</a></td></tr>
+      <tr><td>Brandom, <em>Articulating Reasons</em></td><td>推理角色、承诺、不相容与逻辑表达</td><td>目录与核心论点范围已定位，待映射验证</td><td><a href="https://books.google.com/books?vid=ISBN9780674006928">https://books.google.com/books?vid=ISBN9780674006928</a></td></tr>
+      <tr><td>Quine, <em>Word and Object</em></td><td>翻译不确定性、指称和本体承诺</td><td>内容范围已核对，列入第二批精读</td><td><a href="https://mitpress.mit.edu/9780262518314/word-and-object/">https://mitpress.mit.edu/9780262518314/word-and-object/</a></td></tr>
     </tbody></table></div>
   </section>
 

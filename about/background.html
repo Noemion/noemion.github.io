@@ -14,7 +14,7 @@ permalink: "/about/background.html"
     <p class="callout"><strong>对使用者意味着什么：</strong>同一个任务即使换一种表达，也应保留相同的目标身份、不可违反条件和验收依据；若系统无法确认语义，就应报告未决项，而不是给出看似确定的结果。</p>
     <ul>
       <li>NIR 表达目标、约束、证据、评价与未决语义，而不是只保存一段供模型阅读的文本。</li>
-      <li>对象格式负责组织、链接、装载和完整性；Fulfillment Runtime 负责生成式求解与实现化。</li>
+      <li>对象格式与 Noema Object System 负责组织、链接、装载和完整性；Agent Harness 负责会话与能力控制；Fulfillment Runtime 负责生成式求解与实现化。</li>
       <li>项目借鉴 ELF 的 Section、Segment、符号、重定位、动态链接、调试、strip 和装载工程策略，但不复制传统机器指令语义。</li>
     </ul>
   </section>
@@ -30,9 +30,10 @@ permalink: "/about/background.html"
   <section class="content-rows">
     <h2>系统与信任边界</h2>
     <ul>
-      <li>Deterministic Profile无模型、确定且可复现；只有确定性的 Noesis Core 能生成 NIR/NOBJ。</li>
+      <li>Deterministic Profile 无模型、确定且可复现；只有确定性的 Noesis Core 能生成 NIR/NOBJ。</li>
       <li>通用模型可作为外部源码生成器，模型输出始终是不可信输入。</li>
       <li>模型不得决定二进制布局或直接生成 NOBJ。</li>
+      <li>模型不得绕过 Agent Harness 直接调用能力、扩大权限或自行宣告任务完成。</li>
       <li>歧义是一等信息；证据不足时保留未决语义，不制造错误确定性。</li>
       <li>首个实施阶段只做规范与安全二进制核心，不引入模型、LLVM、MLIR 或大型框架。</li>
     </ul>
@@ -43,7 +44,7 @@ permalink: "/about/background.html"
   </section>
   <section class="content-band">
     <h2>后续计划：路线图语境</h2>
-    <p>链接、可信装载、HOBJ 发布与 Horizon Engine 将在前序规范、安全检查和拒绝路径稳定后推进。开发顺序和完成标准见<a href="../development/implementation-roadmap.html">实施路线图</a>。</p>
+    <p>链接、HOBJ 发布、可信装载、Agent Harness、Fulfillment Runtime 与 Horizon Engine 将在前序规范、安全检查和拒绝路径稳定后推进。开发顺序和完成标准见<a href="../development/implementation-roadmap.html">实施路线图</a>。</p>
   </section>
   <section class="content-split">
     <h2>研究命题与反证条件</h2>

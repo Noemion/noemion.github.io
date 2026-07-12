@@ -7,16 +7,20 @@ permalink: "/specifications/horizon-object.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范</a><span aria-hidden="true">/</span><span>HOBJ</span></nav>
-  <div class="hero"><h1>Horizon Object</h1><p>保存可以按权限和任务需要逐步披露的共享知识、依赖与行为边界。</p><div class="badges"><span class="badge">HOBJ</span><span class="badge">Progressive Disclosure</span><span class="badge">Strippable</span></div></div>
+  <div class="hero"><h1>Horizon Object</h1><p>保存可以按权限和任务需要逐步披露的共享知识、依赖与行为边界。</p><div class="badges"><span class="badge">Proposed Object</span><span class="badge">Unfrozen ABI</span><span class="badge">HOBJ</span><span class="badge">Progressive Disclosure</span></div></div>
   <section class="content-stack">
     <h2>完整性边界</h2>
     <p class="lead"><em>Horizon</em> 表示当前尚未展开、但与对象理解有关的背景和可能状态。Horizon Object（HOBJ）不是提示词或 Skill 的压缩包；它保存经过覆盖检查、可以链接并按策略披露的共享内容。系统可以移除说明性原文，但必须保留所有会影响行为的目标、约束、条件、例外、知识和依赖。</p>
     <p class="callout"><strong>直白解释：</strong>HOBJ 让多个任务复用同一份经过验证的能力，同时只向当前运行披露必要部分。节省上下文不能以遗漏安全条件、隐藏强依赖或扩大访问权限为代价。</p>
     <ul>
-      <li>规范化 Skill 与任意提示词可使用不同前端，但汇入同一确定性 Noesis Core。</li>
+      <li>结构化文档、受控源语言和其他来源可以使用不同前端，但必须汇入同一确定性 Noesis Core；模型候选仍须经过来源绑定。</li>
       <li>大型知识的完整性由主 HOBJ 与经过验证的内容寻址依赖闭包共同承担。</li>
-      <li>任意自然语言的语义等价不能伪装成数学证明；覆盖证书必须可审计并允许保守拒绝。</li>
+      <li>任意自然语言的语义等价不能伪装成数学证明；Release Coverage Proof 必须可审计并允许保守拒绝。</li>
     </ul>
+  </section>
+  <section class="content-band">
+    <h2>产生与再次链接</h2>
+    <p>Horizon Engine 只产生 Candidate Envelope，不产生 HOBJ。共享来源先由 Noesis Core 编译为可重定位 NOBJ；noemlink 再把一个或多个 NOBJ 与已有 HOBJ 合并为新的 HOBJ。HOBJ 可以继续作为链接输入，但内容身份、强依赖闭包、披露规则和权限收敛必须保持可验证。</p>
   </section>
   <section class="content-rows">
     <h2>链接与 strip</h2>
@@ -24,21 +28,22 @@ permalink: "/specifications/horizon-object.html"
       <li>硬约束和接口冲突导致链接失败；权限默认取更严格交集；低信任对象不能覆盖高信任策略。</li>
       <li>工作流默认保留命名空间，软偏好按显式优先级合并，链接器输出合并与冲突报告。</li>
       <li>开发对象与发布对象具有同一运行语义；发布形态通过删除非运行时调试信息获得。</li>
-      <li>strip 前后目标、约束、验收契约、依赖、披露行为和运行语义哈希保持一致。</li>
+      <li>strip 前后目标、约束、验收契约、依赖和披露行为必须满足规范化等价检查；只有等价规则冻结后，才能把运行语义哈希作为互操作要求。</li>
     </ul>
   </section>
   <section class="content-split">
     <h2>当前设计：披露图与覆盖状态</h2>
-    <p>当前提案使用 Discovery、契约、Execution、Knowledge 和 Debug 五层披露视图；固定层级保证审计，查询驱动选择减少上下文。来源单元的覆盖状态拟区分已映射、重复、装饰、精确产物、未解决和冲突。</p>
+    <p>当前提案使用五层披露视图：Discovery（可发现的名称与摘要）、Contract（接口、约束与验收契约）、Execution（执行所需结构）、Knowledge（按请求选择的知识）和 Debug（开发诊断与来源细节）。固定层级保证审计，查询驱动选择减少上下文。来源单元的覆盖状态拟区分已映射、重复、装饰、精确产物、未解决和冲突。</p>
     <p>代码、数值表、公式、结构定义、逐字模板、法律条款和二进制资源等不可安全摘要的内容必须精确保留或由可信外部资源承载。</p>
   </section>
   <section class="content-rows">
     <h2>受控披露</h2>
     <ol>
-      <li>调用方请求能力、主题或符号。</li>
-      <li>Fulfillment Runtime 检查 Trigger、权限与信任策略，并计算依赖闭包。</li>
-      <li>相关契约与硬约束强制加入，再在预算内加入 Knowledge 与 Example。</li>
-      <li>必需内容超过消费端限制时拆分任务或拒绝，不能裁掉安全边界。</li>
+      <li>用户请求、Runtime 的 Capability Request 或预定义工作流触发披露需求，但都不能直接读取共享内容。</li>
+      <li>Agent Harness 生成带会话、对象、请求目标和预算身份的 Disclosure Request；Noema Object System 检查 Trigger（对象中预定义的披露条件）、权限与信任策略，并计算依赖闭包。</li>
+      <li>对象系统把相关契约与硬约束强制加入，再在预算内建立 Knowledge 与 Example 的只读披露视图。</li>
+      <li>Fulfillment Runtime 只消费已经授权的披露视图，不自行扩展依赖或上下文。</li>
+      <li>必需内容超过运行端限制时，Agent Harness 只能按预定义拆分规则保持原目标、硬约束、验收契约和覆盖闭包，无法保持时必须拒绝。</li>
     </ol>
   </section>
   <section class="content-band">
@@ -52,7 +57,7 @@ permalink: "/specifications/horizon-object.html"
   <section class="content-stack">
     <h2>概要设计：发布闭包与研究验证</h2>
     <p>HOBJ 发布闭包由主对象、强依赖、版本与内容摘要、权限和信任策略、披露图、验收契约、评价器以及必需精确载荷组成。弱依赖必须声明缺失行为；动态依赖必须受配置、锁定和运行授权约束。</p>
-    <p>验证工作需要回答三类问题：语义完整性是否优于普通压缩或摘要；渐进式披露能否在不丢失安全约束的前提下降低上下文成本；不同编译器或 Fulfillment Runtime 是否能对同一 HOBJ 得出一致的必需闭包与拒绝结论。每项实验都应包含长上下文基线、对抗遗漏、权限冲突、预算不足和不可安全摘要材料。</p>
+    <p>验证工作需要回答三类问题：语义完整性是否优于普通压缩或摘要；渐进式披露能否在不丢失安全约束的前提下降低上下文成本；不同 Noema Object System 实现是否能对同一 HOBJ 得出一致的必需闭包、披露视图与拒绝结论。每项实验都应包含长上下文基线、对抗遗漏、权限冲突、预算不足和不可安全摘要材料。</p>
   </section>
   <div class="next-prev"><a href="noema-object.html">← NOBJ</a><a href="../components/noesis-core.html">Noesis Core →</a></div>
 </main>

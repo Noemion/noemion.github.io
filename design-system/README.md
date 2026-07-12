@@ -6,6 +6,10 @@
 
 修改智能体上下文、能力接口、反馈循环、运行证据或人工升级边界时，还必须读取 [`adr-0002-agent-harness-boundary.md`](adr-0002-agent-harness-boundary.md)。
 
+修改工具输入输出、发布闭包、签名回填、运行产物或跨工具消费者关系时，还必须读取 [`adr-0003-toolchain-artifact-flow.md`](adr-0003-toolchain-artifact-flow.md)。
+
+修改模型候选升级、运行能力、候选评价、证据闭包或最终验收决定时，还必须读取 [`adr-0004-candidate-capability-acceptance-boundary.md`](adr-0004-candidate-capability-acceptance-boundary.md)。
+
 全局原则、品牌语言、断点和验收基线见 [`../sitewide-design-system.md`](../sitewide-design-system.md)。本目录文档负责把这些原则落实到具体页面类型，不能改变 Noemion 的成熟度、权威性或证据边界。
 
 ## 路由表

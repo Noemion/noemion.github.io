@@ -40,7 +40,7 @@
 | GOBJ | Noema Object | 可链接的意向对象文件 | `NOBJ`、`specifications/noema-object.html` |
 | SSO | Horizon Object | 按视域逐步披露的共享对象 | `HOBJ`、`specifications/horizon-object.html` |
 | Linker / Loader | Noema Object System | 解析、链接、验证和装载对象的系统 | `components/noema-object-system.html` |
-| Runtime | Fulfillment Runtime | 在约束下求解并产生可验收结果的运行时 | 与对象系统共同说明 |
+| Runtime | Fulfillment Runtime | 在约束下求解并产生可验收结果的运行时 | `components/fulfillment-runtime.html` |
 | NSFE | Horizon Engine | 结合来源图、检索和封闭任务头的模型工程组件 | `components/horizon-engine.html` |
 | — | Agent Harness | 组织智能体上下文、受限能力、反馈循环与验收证据的外侧控制平面 | `components/agent-harness.html` |
 | Strict mode | Deterministic Profile | 不调用模型、结果可复现的确定性配置 | 正文不再使用 `Strict` 作为未解释标签 |

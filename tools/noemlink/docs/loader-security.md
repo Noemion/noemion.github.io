@@ -16,7 +16,7 @@ badges: ["noemlink", "Phase 4 / Phase 5"]
 
 ## 信任转换与职责分界
 
-`noemlink` 负责生成可验证的 Segment 计划、绑定和完整性材料；装载器/Fulfillment Runtime 负责在实际环境中重新验证并装载。链接成功不等于允许执行，签名有效也不等于内容安全。对象、依赖、模型包和外部资源在每个边界都继续按不可信输入处理。
+`noemlink` 负责生成可验证的 Segment 计划、绑定和完整性材料；它不产生签名包。发布链必须经过独立验证、裁剪、Release Coverage Proof 和 noembundle 外部签名回填，Noema Object System 只装载最终 Signed Noemion Package。链接成功不等于形成发布包，签名有效也不等于内容安全。对象、依赖、模型包和外部资源在每个边界都继续按不可信输入处理。
 
 ## 威胁模型
 
@@ -26,13 +26,13 @@ badges: ["noemlink", "Phase 4 / Phase 5"]
 - 利用超大图、深依赖、压缩炸弹或诊断洪泛消耗资源。
 - 在验证后、冻结前修改绑定，造成检查与使用时不一致。
 
-## 装载器 / Fulfillment Runtime 流程
+## Noema Object System 装载流程
 
 1. 在分配前检查魔数、版本、文件总长、Header、表边界、计数和配置上限。
 2. 验证签名策略、回滚策略与待加载 Segment 的 Merkle Proof，并确认覆盖范围。
 3. 先建立不可执行的暂存映射，再按类型构造符号表、模型表和调用表。
 4. 完成允许的装载时重定位，复核段属性、权限、策略和依赖身份。
-5. 冻结关键绑定与只读区域，清除暂存写权限，最后才交给 Fulfillment Runtime 实现化。
+5. 冻结关键绑定与只读区域，清除暂存写权限，产生不可变 Loaded State，再交给 Agent Harness 与 Fulfillment Runtime。
 
 任一步失败都销毁本次装载事务，不暴露半初始化实例，也不降级到更宽松配置。
 

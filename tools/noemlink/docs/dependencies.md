@@ -27,9 +27,10 @@ badges: ["noemlink", "Phase 4 / Phase 5"]
 
 ## 下游
 
-- [noemreduce](../../noemreduce/index.html) 执行发布裁剪。
-- [noembundle](../../noembundle/index.html) 构造可验证发布包。
-- [noemexecute](../../noemexecute/index.html) 装载并执行链接产物。
+- [noemreduce](../../noemreduce/index.html) 对链接对象执行允许的发布裁剪并产生调试伴随文件。
+- [noemcoverage](../../noemcoverage/index.html) 为最终 Release Object、来源与运行证据建立覆盖证明。
+- [noembundle](../../noembundle/index.html) 绑定验证结论、依赖锁定和覆盖证明，经过外部签名回填后形成 Signed Noemion Package。
+- [noemexecute](../../noemexecute/index.html) 消费签名包，依次驱动 Noema Object System、Agent Harness 与 Fulfillment Runtime；它不直接执行裸链接产物。
 
 ## 依赖锁定契约
 
@@ -51,4 +52,6 @@ badges: ["noemlink", "Phase 4 / Phase 5"]
 
 ## 跨工具验收
 
-发布前应建立最小封闭流水线：编译对象、建立归档、符号检查、链接、独立验证、语义保持裁剪、可验证打包和受控装载。任一工具对共同字段的解释不一致，都应回到规范解决，而不是加入转换兼容层。
+发布前应建立最小封闭流水线：编译对象、建立归档、符号检查、链接、独立验证、语义保持裁剪、覆盖证明、外部签名回填、受控装载与运行证据。任一工具对共同字段的解释不一致，都应回到规范解决，而不是加入转换兼容层。
+
+运行证据继续沿 `noemexecute → noemobserve → noemcoverage(run) → noemexecute finalize` 形成 Acceptance Decision；noemevaluate 只在此后做离线场景评估。该尾链不是 noemlink 的直接消费者，但用于证明链接产物进入完整系统后仍能保持身份与契约。

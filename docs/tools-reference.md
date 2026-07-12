@@ -20,6 +20,36 @@ badges: ["23 Tools", "Project Pages", "Unreleased"]
 
 工具按“规范与对象 → 文本 IR → 编译链接 → 发布运行 → 模型工程”组织。每个工具都说明输入、输出、关键不变量、失败边界、开发依赖和验证目标。不要仅根据工具名称推断命令或格式。完整分类见[工具目录](../tools/)。
 
+### 生命周期矩阵
+
+| Phase | 工具 | 主要输入 | 正式输出 | 直接下游 |
+| --- | --- | --- | --- | --- |
+| 0 / 8 | [noemcertify](../tools/noemcertify/) | 规范、测试语料库、Toolchain Build | Conformance Report、发布资格证据 | CI、规范评审、发布评审 |
+| 1 | [noeminspect](../tools/noeminspect/) | NOBJ、HOBJ、Signed Package | Text / Structured View | 开发者、noemvalidate |
+| 1 / 5 / 6 | [noemvalidate](../tools/noemvalidate/) | 对象、配置、Trust Material | Layered Verdict、Verified Object Handle | archive、link、bundle、Object System |
+| 1 | [noemtransform](../tools/noemtransform/) | Source Object、Transform Plan | Transformed Object、Change Manifest | compare、validate、reduce |
+| 1 / 5 / 6 | [noembudget](../tools/noembudget/) | 对象、包、Baseline | Budget Verdict、Delta Report | CI、Package 配置、Execution Profile |
+| 2 | [noemassemble](../tools/noemassemble/) | Text NIR Source Package | Relocatable NOBJ、Assembly Evidence Ledger | decode、coverage、link |
+| 2 | [noemdecode](../tools/noemdecode/) | NOBJ / HOBJ | Canonical Text NIR、Pretty / JSON View | assemble、compare、开发者 |
+| 2 / 3 | [noemformat](../tools/noemformat/) | NSL / Text NIR | Formatted Text、Format Diff | compile、assemble、CI |
+| 2 / 5 | [noemcompare](../tools/noemcompare/) | 两个文本或对象产物 | Classified Diff、Semantic Verdict | reduce、validate、发布审计 |
+| 3 / 7 | [noemcompile](../tools/noemcompile/) | NSL 或 Candidate Envelope、绑定决定 | Relocatable NOBJ、证据账本、Build Manifest | analyze、archive、link、coverage |
+| 3 | [noemanalyze](../tools/noemanalyze/) | NSL / Text NIR、Reviewed Baseline | Diagnostics、Baseline Candidate | 开发者、CI、compile |
+| 4 | [noemarchive](../tools/noemarchive/) | 已验证 NOBJ Members | Noemion Archive、Member Listing | symbols、link |
+| 4 | [noemsymbols](../tools/noemsymbols/) | NOBJ、Archive、HOBJ、Package | Symbol Listing、ABI Snapshot | link、compare、开发者 |
+| 4 / 5 | [noemlink](../tools/noemlink/) | NOBJ、Archive、HOBJ、Link Request | Linked Object / HOBJ、Link Map | validate、reduce |
+| 5 | [noemreduce](../tools/noemreduce/) | Development NOBJ / HOBJ | Release Object、Debug Companion、等价证据 | coverage、validate、bundle |
+| 5 / 6 | [noemcoverage](../tools/noemcoverage/) | 来源/对象映射或 Run Evidence | Release Coverage Proof / Evidence Closure Report | bundle / execute finalize |
+| 5 | [noembundle](../tools/noembundle/) | Release 闭包、模型资格、外部签名响应 | Signed Noemion Package | noemexecute、下载发布 |
+| 6 | [noemexecute](../tools/noemexecute/) | Signed Package、Execution Profile | Run Evidence、Run Result、Acceptance Decision | observe、coverage、evaluate |
+| 6 | [noemobserve](../tools/noemobserve/) | Trace Stream、Integrity Metadata | Normalized Trace、Trace Integrity Report | coverage、evaluate |
+| 7 | [noemdataset](../tools/noemdataset/) | Source Registry、Annotation Package | Dataset Snapshot、Lineage、Leakage Report | train、evaluate |
+| 7 | [noemtrain](../tools/noemtrain/) | 数据快照、配方、Base Model | Checkpoint Candidate、Training Manifest | noemevaluate |
+| 7 / 8 | [noemevaluate](../tools/noemevaluate/) | 模型候选或 Final Run Evidence | Model Qualification / Scenario Evaluation | quantize、bundle、回归评审 |
+| 7 | [noemquantize](../tools/noemquantize/) | 合格 Checkpoint Candidate | Model Package Candidate、量化与设备报告 | noemevaluate、noembundle |
+
+全部入口当前都是设计阶段。Phase 只表示预计开发顺序，不表示对应工具已经实现。
+
 ## 规范与对象工具
 
 - [noemcertify](../tools/noemcertify/)：执行规范条款、基准样例、畸形样例和跨工具一致性测试。
@@ -43,10 +73,10 @@ badges: ["23 Tools", "Project Pages", "Unreleased"]
 ## 发布与运行
 
 - [noemreduce](../tools/noemreduce/)：分离开发调试信息并证明发布语义不变。
-- [noemcoverage](../tools/noemcoverage/)：审计来源单元覆盖和发布闭包完整性。
-- [noembundle](../tools/noembundle/)：组装签名对象、依赖、策略与模型指纹。
-- [noemexecute](../tools/noemexecute/)：可信验证、装载、渐进式披露与 Fulfillment Runtime 执行。
-- [noemobserve](../tools/noemobserve/)：关联运行事件、调试伴随文件和源级因果链。
+- [noemcoverage](../tools/noemcoverage/)：分别建立 Release Coverage Proof 与 Run Evidence Closure。
+- [noembundle](../tools/noembundle/)：冻结发布闭包，生成签名请求，并核对外部签名响应后封装最终包。
+- [noemexecute](../tools/noemexecute/)：验证签名包，驱动 Harness / Runtime 循环，并在证据闭合后形成 Acceptance Decision。
+- [noemobserve](../tools/noemobserve/)：规范化运行事件，并报告 Trace 完整性、事件丢失与证据强度。
 
 ## 模型工程
 
@@ -54,8 +84,8 @@ badges: ["23 Tools", "Project Pages", "Unreleased"]
 
 - [noemdataset](../tools/noemdataset/)：构造有许可、有血缘、无泄漏的数据集快照。
 - [noemtrain](../tools/noemtrain/)：编排 Horizon Engine 适配、多任务训练和教师蒸馏。
-- [noemevaluate](../tools/noemevaluate/)：评估错误确定、校准、OOD、切片和部署退化。
-- [noemquantize](../tools/noemquantize/)：导出、量化、端侧基准并封装模型包。
+- [noemevaluate](../tools/noemevaluate/)：先为浮点 Checkpoint Candidate 建立量化资格，量化后重新评估 Model Package Candidate；另在 Acceptance Decision 之后离线评估 Agent 场景。
+- [noemquantize](../tools/noemquantize/)：只导出、量化并测量未签名 Model Package Candidate，质量资格仍由 noemevaluate 形成。
 
 ## 文档状态
 
@@ -63,4 +93,4 @@ badges: ["23 Tools", "Project Pages", "Unreleased"]
 
 工具只有在契约、流程、安全、测试或参考内容能够独立维护，并且不会重复权威规范时，才建立自己的 `docs/` 区域。文档数量不代表实现成熟度；是否可用仍以发布物、版本说明和验证证据为准。
 
-**尚待确定：**各工具的 CLI、扩展名、稳定输入输出结构、研究验证方法和发布顺序尚未确定。
+**尚待确定：**各工具的 CLI、扩展名和稳定输入输出结构尚未冻结。Phase 0–8、主产物顺序和验证责任已经作为当前架构边界采用，但具体研究方法、阈值与发布授权流程仍需规范、ADR 和真实证据。

@@ -24,13 +24,16 @@ badges: ["Unreleased", "Usage Model", "Integrity First"]
 
 工具链成熟后预计采用以下数据流。具体命令、参数、扩展名和 ABI 尚未确定。
 
-整体流程为 Author → Compile → Inspect → Link → Verify / Run。
+整体流程为 Author → Compile → Inspect / Validate → Link → Reduce / Coverage → Bundle / Sign → Execute / Observe → Run Coverage → Execute Finalize → Offline Evaluate。
 
 1. 用受规范约束的来源形式描述目标、约束和验收条件，并记录来源与配置。
 2. 由确定性 Noesis Core 生成 NIR 和 NOBJ，同时产生诊断和覆盖证据。
 3. 使用对象查看与验证工具检查结构、语义、策略和未决项。
 4. 由链接器解析符号、重定位和依赖闭包，生成链接对象、HOBJ、链接映射或冲突报告。
-5. 发布包通过签名、完整性和供应链验证后，装载器才把它交给 Fulfillment Runtime 执行并记录结果。
+5. 对最终发布对象建立 Release Coverage Proof 和分层验证结论，再由 noembundle 冻结依赖、模型、策略、Manifest 与 SBOM。
+6. noembundle 先生成不可变 Unsigned Package Candidate 与 Signing Request；外部签名系统保护私钥并返回 Signature Response；回填阶段必须同时核对候选、请求和响应，才在被签载荷外附加 Signature Envelope 并形成 Signed Noemion Package。
+7. noemexecute 重新验证实际包字节，建立 Loaded State 与 Agent Harness 会话，再驱动 Fulfillment Runtime 产生不可信候选、Candidate Assessment 和 Capability Request。
+8. noemobserve 形成带完整性声明的 Normalized Trace，noemcoverage 建立 Evidence Closure Report，noemexecute finalize 按预置策略形成 Acceptance Decision；noemevaluate 只在此后离线评估模型资格或端到端场景。
 
 ## 输入与产物边界
 
@@ -38,8 +41,10 @@ badges: ["Unreleased", "Usage Model", "Integrity First"]
 | --- | --- | --- | --- |
 | 语义编译 | 规范源、配置、显式上下文 | NIR/NOBJ | 架构已定义，实现未发布 |
 | 链接 | NOBJ、归档、锁定依赖 | 链接对象、HOBJ、链接映射 | 契约与流程已有专题说明，实现未发布 |
-| 发布 | 已验证对象、清单、策略 | 签名发布包 | 后续计划 |
-| 运行 | 已验证包、运行配置 | 运行结果、审计报告 | 后续计划 |
+| 发布 | Release Object、Release Coverage Proof、验证结论、锁定依赖 | Unsigned Package Candidate、Signing Request、Signed Noemion Package | 后续计划 |
+| 运行 | Signed Noemion Package、Execution Profile、Runtime Binding | Loaded State、Run Record、Run Report、Trace Stream | 后续计划 |
+| 证据与验收 | Run Record、Normalized Trace、Acceptance Policy | Evidence Closure Report、Acceptance Decision | 后续计划 |
+| 离线评估 | Checkpoint 或已完成运行的证据与决定 | Model Qualification Record、场景评估结论 | 后续计划 |
 
 ## 安装与发布原则
 

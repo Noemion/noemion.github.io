@@ -30,10 +30,11 @@ Agent Harness 不属于确定性可信核心，也不是新的对象编译器。
 ## 工具映射
 
 - `noemcompile`：把受控来源或模型候选交给 Noesis Core，产生确定性对象与证据账本。
-- `noemexecute`：装载已验证对象，建立能力句柄、预算、隔离环境和运行会话。
-- `noemobserve`：记录能力调用、观察、策略拒绝、状态转换和来源映射。
-- `noemcoverage`：检查来源、约束、执行步骤和验收证据是否形成闭包。
-- `noemevaluate`：评估模型候选质量，也评估完整任务的成功、越权、恢复和人工升级行为。
+- `noemexecute`：驱动对象系统建立不可变 Loaded State，由 Harness 建立会话级能力绑定、预算与隔离环境，并调用 Runtime；运行阶段只留下候选和运行记录。
+- `noemobserve`：把同一会话的能力调用、观察、策略拒绝和状态转换规范化为带完整性声明的 Trace。
+- `noemcoverage`：分别检查发布来源映射和运行证据闭包；证据齐全不等于任务已经满足。
+- `noemexecute finalize`：按执行前固定的 Acceptance Policy 和 Evidence Closure Report 形成最终 Acceptance Decision。
+- `noemevaluate`：评估模型候选资格，也在 Acceptance Decision 之后离线评估完整任务场景；它不修改单次会话决定。
 
 ## 采用边界
 
@@ -46,9 +47,8 @@ Agent Harness 不属于确定性可信核心，也不是新的对象编译器。
 
 ## 后果
 
-Agent Harness 成为组件设计的一部分，但当前仍处于设计阶段。后续规范必须分别冻结能力结构定义、执行配置、事件结构定义、上下文清单、策略拒绝、状态快照和验收报告；在这些契约形成前，不提供可执行程序或稳定 ABI。
+Agent Harness 成为必要的逻辑控制边界，但不要求独立进程或单独部署：简单的确定性任务可以把最小 Harness 实现为 `noemexecute` 内部适配层；只有动态能力、多步观察或外部判断存在时才需要完整会话控制。后续规范必须分别冻结能力结构定义、执行配置、事件结构定义、上下文清单、策略拒绝、状态快照、Evidence Closure 和 Acceptance Decision；在这些契约形成前，不提供可执行程序或稳定 ABI。
 
 ## 依据
 
 - OpenAI, “工程技术：在智能体优先的世界中利用 Codex”: https://openai.com/zh-Hans-CN/index/harness-engineering/
-

@@ -7,15 +7,15 @@ permalink: "/components/agent-harness.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">组件</a><span aria-hidden="true">/</span><span>Agent Harness</span></nav>
-  <div class="hero"><h1>Agent Harness</h1><p>把模型、工具、上下文、反馈和验收组织成受约束的执行环境，让每一步都可观察、可拒绝、可复查。</p><div class="badges"><span class="badge">Control Plane</span><span class="badge">Least Capability</span><span class="badge">Evidence Loop</span></div></div>
+  <div class="hero"><h1>Agent Harness</h1><p>把 Runtime、工具、上下文、反馈和验收策略组织成受约束的执行环境，让每一步都可观察、可拒绝、可复查。</p><div class="badges"><span class="badge">Design Stage</span><span class="badge">Control Plane</span><span class="badge">Least Capability</span><span class="badge">Evidence Loop</span></div></div>
   <section class="content-stack">
     <h2>它解决什么问题</h2>
-    <p class="lead">模型能提出下一步，但不能自行证明权限合规、工具结果正确或任务已经完成。Agent Harness 位于 Fulfillment Runtime 外侧，负责给智能体一张可导航的任务地图、最小能力集合和连续反馈，而不是把整个环境暴露给模型。</p>
-    <p>这层设计把“提示模型完成任务”改写为可检查的控制循环：系统先固定目标和验收契约，再逐步披露相关上下文，验证每次能力调用，观察环境变化，并只在证据满足契约时结束。</p>
+    <p class="lead">Fulfillment Runtime 中的模型或求解后端能提出候选和下一步能力请求，但不能自行证明权限合规、工具结果正确或任务已经完成。Agent Harness 位于 Runtime 外侧，负责提供可导航的任务地图、最小能力集合和连续反馈，而不是把整个环境暴露给模型。</p>
+    <p>这层设计把“提示模型完成任务”改写为可检查的控制循环：系统先固定目标、验收契约和 Acceptance Policy，再逐步披露相关上下文，验证每次 Capability Request，观察环境变化，并在证据闭合后形成明确决定或请求指定权威复核。</p>
   </section>
   <section class="content-wide">
     <h2>执行循环</h2>
-    <div class="flow"><div class="step">固定目标与契约</div><div class="step">披露最小上下文</div><div class="step">提出受限行动</div><div class="step">策略验证并执行</div><div class="step">观察与重新判断</div><div class="step">验收或人工处理</div></div>
+    <div class="flow"><div class="step">固定 Profile / Policy</div><div class="step">建立 Runtime Request</div><div class="step">接收 Capability Request</div><div class="step">策略验证并执行</div><div class="step">返回 Observation</div><div class="step">证据闭合与决定 / 继续</div></div>
     <p>每次循环都产生结构化事件。后续步骤读取工具返回的真实状态，而不是依赖模型记忆或人工复制。失败会保留为诊断、策略拒绝、预算耗尽、环境漂移或验收未满足等明确结果。</p>
   </section>
   <section class="content-wide">
@@ -24,8 +24,18 @@ permalink: "/components/agent-harness.html"
       <tr><td>从版本化资料构造任务地图并按需披露上下文</td><td>用临时提示覆盖规范、ADR 或对象声明</td></tr>
       <tr><td>暴露类型化能力并检查参数、权限、预算和副作用</td><td>默认开放 Shell、网络、文件写入或凭据</td></tr>
       <tr><td>隔离会话，绑定工具、模型、对象和环境指纹</td><td>直接生成 NIR/NOBJ 或修改签名对象</td></tr>
-      <tr><td>收集观察、调用、拒绝、恢复和验收证据</td><td>让模型自行宣告正确、扩大权限或跳过验证</td></tr>
-      <tr><td>在预先声明的条件下停止或请求人工判断</td><td>把无休止重试当作恢复策略</td></tr>
+      <tr><td>收集观察、调用、拒绝、恢复和契约证据</td><td>把 Runtime 的 Candidate Assessment 当作最终验收</td></tr>
+      <tr><td>按预先声明的 Acceptance Policy 决定结束、继续或请求外部判断</td><td>替指定人工或外部权威作出其专属判断</td></tr>
+    </tbody></table></div>
+  </section>
+  <section class="content-wide">
+    <h2>输入、协议与产物</h2>
+    <div class="table-wrap"><table><thead><tr><th>类别</th><th>对象</th><th>职责</th></tr></thead><tbody>
+      <tr><td>输入</td><td>Loaded State Handle、Execution Profile、Context Manifest</td><td>绑定对象、运行配置、版本化上下文、预算、停止条件和证据要求</td></tr>
+      <tr><td>输入</td><td>Runtime Binding、Capability Catalog、环境身份</td><td>指定求解后端与可发现能力；凭据和实时句柄只由 Harness 执行侧保管</td></tr>
+      <tr><td>循环</td><td>Runtime Request → Capability Request → Capability Observation</td><td>Runtime 提出需求，Harness 校验并执行，真实环境结果返回下一轮求解</td></tr>
+      <tr><td>输出</td><td>Harness Session、Run Evidence、Escalation Request</td><td>记录状态、行动、观察、拒绝、预算、恢复和需要外部判断的事项</td></tr>
+      <tr><td>输出</td><td>Acceptance Decision</td><td>只按预注册策略形成 accepted、unsatisfied、pending-review、failed 或 interrupted，并绑定全部身份与证据</td></tr>
     </tbody></table></div>
   </section>
   <section class="content-split">
@@ -53,24 +63,29 @@ permalink: "/components/agent-harness.html"
     <ul>
       <li><strong>Horizon Engine</strong> 产生带来源的不可信语义候选；Agent Harness 不把候选升级为事实。</li>
       <li><strong>Noesis Core</strong> 是唯一可以形成 NIR/NOBJ 的确定性组件；Harness 只能提交输入并读取诊断。</li>
-      <li><strong>Noema Object System</strong> 验证、链接和装载对象；Harness 不能绕过对象与权限检查。</li>
-      <li><strong>Fulfillment Runtime</strong> 在已验证对象和运行配置下求解；Harness 管理外侧会话、能力和反馈循环。</li>
+      <li><strong>Noema Object System</strong> 验证、链接和装载对象并交付 Loaded State；Harness 不能绕过对象与权限检查。</li>
+      <li><strong>Fulfillment Runtime</strong> 接收受限语义视图和观察，产生候选、Candidate Assessment 与 Capability Request；Harness 管理外侧会话、实时能力和反馈循环。</li>
     </ul>
+  </section>
+  <section class="content-band">
+    <h2>存在必要性与最小形态</h2>
+    <p>无外部能力、无多步反馈且验收完全可由确定性规则一次完成的任务，可以把 Harness 缩减为最小适配层，不需要独立服务。只要任务涉及文件、网络、工具、凭据、UI、动态披露、恢复或人工判断，Harness 的会话级权限与观察边界就不可由 Runtime 代替，否则模型会同时成为计划者、执行者和验收者。</p>
   </section>
   <section class="content-wide">
     <h2>验证要求</h2>
     <div class="table-wrap"><table><thead><tr><th>维度</th><th>必须验证</th></tr></thead><tbody>
-      <tr><td>任务成功</td><td>真实环境中的结果满足验收契约，而不只是生成了看似合理的内容。</td></tr>
+      <tr><td>任务验收</td><td>真实环境中的证据闭合并满足预注册 Acceptance Policy；需要外部判断时只能返回 pending-review。</td></tr>
       <tr><td>能力安全</td><td>越权参数、未授权副作用、提示注入和工具返回污染被拒绝或隔离。</td></tr>
       <tr><td>反馈闭环</td><td>智能体能读取 UI、日志、指标、追踪和测试结果，并用它们复现与验证问题。</td></tr>
       <tr><td>恢复与停止</td><td>工具失败、环境漂移、预算耗尽、重复失败和人工升级条件产生确定结果。</td></tr>
       <tr><td>可追溯性</td><td>目标、上下文、行动、观察、对象、环境和验收结论能够通过稳定身份关联。</td></tr>
     </tbody></table></div>
-    <p>当前只形成职责和信任边界。能力结构定义、执行配置、事件结构定义、状态快照与验收报告仍需规范和测试后才能冻结。</p>
+    <p>当前只形成职责和信任边界，尚未发布 Agent Harness。Loaded State Handle、Execution Profile、Context Manifest、Capability Catalog、Runtime Request、Capability Request、Capability Observation、状态快照、证据闭包和 Acceptance Decision 仍需规范和测试后才能冻结。</p>
+    <p>运行入口见<a href="../tools/noemexecute/index.html">noemexecute</a>，事件规范化见<a href="../tools/noemobserve/index.html">noemobserve</a>，证据闭包见<a href="../tools/noemcoverage/index.html">noemcoverage</a>，离线场景评估见<a href="../tools/noemevaluate/index.html">noemevaluate</a>。</p>
   </section>
   <section class="content-band">
     <h2>工程依据与采用边界</h2>
     <p>这项设计吸收了智能体优先工程中关于版本化知识、可读工具、真实环境观察、机械化架构约束和持续清理的经验。Noemion 不把高吞吐量当作降低确定性、安全或独立验收要求的理由，也不假定一种环境中的自治水平可以直接迁移到不同风险任务。参考原文：<a href="https://openai.com/zh-Hans-CN/index/harness-engineering/">https://openai.com/zh-Hans-CN/index/harness-engineering/</a></p>
   </section>
-  <div class="next-prev"><a href="horizon-engine.html">← Horizon Engine</a><a href="noesis-core.html">Noesis Core →</a></div>
+  <div class="next-prev"><a href="noema-object-system.html">← Noema Object System</a><a href="fulfillment-runtime.html">Fulfillment Runtime →</a></div>
 </main>

@@ -218,6 +218,7 @@ body .global-nav-trigger:active{transform:scale(.96)}
   opacity:0;filter:blur(5px);visibility:hidden;pointer-events:none;transform:translateY(13px) scale(.975);transform-origin:top left;
   transition-property:opacity,filter,visibility,transform;transition-duration:200ms;transition-timing-function:cubic-bezier(.2,0,0,1)
 }
+.global-nav-item:nth-last-child(-n+2) .global-nav-menu{right:0;left:auto;transform-origin:top right}
 .global-nav-item.is-menu-open>.global-nav-menu,
 .global-nav-item:focus-within>.global-nav-menu{
   opacity:1;filter:blur(0);visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)
@@ -413,11 +414,16 @@ body .global-directory-panel{display:none}
   .docs-rail{display:none}
 }
 
+@media(max-width:1217px){
+  .docs-rail{display:none}
+}
+
 @media(max-width:839px){
   body:not([data-page-role="portal"]) .global-header-inner{grid-template-columns:minmax(0,1fr) auto}
   body:not([data-page-role="portal"]) .global-directory-panel{
     position:absolute;top:64px;right:0;z-index:4;display:block;width:84px;height:48px
   }
+  body[data-page-role="portal"] .site-header .global-directory-panel{grid-column:3}
   body:not([data-page-role="portal"]) .global-directory-panel>summary{
     width:84px;height:48px;background:color-mix(in srgb,var(--paper) 94%,transparent);
     border-bottom:1px solid var(--rule-strong);border-left:1px solid var(--rule);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)
@@ -425,7 +431,10 @@ body .global-directory-panel{display:none}
   body:not([data-page-role="portal"]) .global-directory-panel nav{
     top:48px;right:0;left:auto;width:min(390px,calc(100vw - 16px));max-height:calc(100dvh - 120px)
   }
-  html.mobile-directory-open,html.mobile-directory-open body{overflow:hidden;overscroll-behavior:none}
+  html.mobile-directory-open{overflow:hidden;overscroll-behavior:none}
+  html.mobile-directory-open body{
+    position:fixed;top:var(--mobile-directory-scroll-top,0);right:0;left:0;width:100%;overflow:hidden;overscroll-behavior:none
+  }
   html.mobile-directory-open .global-directory-panel nav{
     overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch
   }

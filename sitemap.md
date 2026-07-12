@@ -20,12 +20,14 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 - [Architecture](https://noemion.github.io/architecture/index.html) — system layers, object lifecycle, and trust boundaries
 - [Noema lifecycle](https://noemion.github.io/architecture/noema-lifecycle.html) — source, deterministic compilation, object formation, linking, loading, and fulfillment boundaries
+- [Architecture decisions](https://noemion.github.io/architecture/decisions.html) — accepted responsibility boundaries and explicitly unfrozen interfaces
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Noesis, Noema, Horizon, and Fulfillment responsibilities
 - [Noesis Core](https://noemion.github.io/components/noesis-core.html) — deterministic compilation boundary and Deterministic Profile
-- [Noema Object System](https://noemion.github.io/components/noema-object-system.html) — symbol resolution, relocation, validation, loading, and fulfillment
+- [Noema Object System](https://noemion.github.io/components/noema-object-system.html) — symbol resolution, relocation, validation, and immutable loaded state
 - [Horizon Engine](https://noemion.github.io/components/horizon-engine.html) — model-engineering architecture and current maturity
 - [Agent Harness](https://noemion.github.io/components/agent-harness.html) — constrained context, capabilities, feedback loops, and acceptance evidence for agent execution
+- [Fulfillment Runtime](https://noemion.github.io/components/fulfillment-runtime.html) — constrained realization, candidate evaluation, stopping, and result states
 
 ## Specifications
 

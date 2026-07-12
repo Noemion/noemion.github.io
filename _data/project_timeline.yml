@@ -39,7 +39,7 @@ items:
     state: confirmed
     label: 已完成
     title: 核心对象与工具链职责划分
-    description: 已完成 Noema IR、Noema Object、Horizon Object、Noesis Core、Noema Object System 与 Fulfillment Runtime 的职责划分和公开架构说明。
+    description: 已完成 Noema IR、Noema Object、Horizon Object、Noesis Core、Noema Object System、Agent Harness 与 Fulfillment Runtime 的职责划分和公开架构说明。
   - id: specification-binary-core-design
     state: current
     label: 正在进行
@@ -59,4 +59,4 @@ items:
     state: future
     label: 后续规划
     title: 可信装载、发布与模型辅助
-    description: 规划签名装载、最小 Fulfillment Runtime、Horizon Object 发布，以及只提交不可信候选的模型辅助输入。
+    description: 规划发布闭包、外部签名回填、可信装载、Agent Harness、最小 Fulfillment Runtime，以及只提交不可信候选的模型辅助输入。

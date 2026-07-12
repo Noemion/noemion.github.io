@@ -160,9 +160,12 @@ pre{
 }
 pre code{padding:0;color:inherit;background:transparent;border:0}
 
-.flow{display:grid;grid-template-columns:repeat(5,minmax(125px,1fr));gap:10px;margin:17px 0}
+.flow{
+  display:flex;gap:10px;max-width:100%;margin:17px 0;padding-bottom:3px;
+  overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity
+}
 .step{
-  position:relative;padding:12px;text-align:center;font-size:14px;
+  position:relative;flex:1 0 125px;min-width:0;padding:12px;text-align:center;font-size:14px;scroll-snap-align:start;
   background:var(--paper-subtle);border:1px solid var(--rule);border-radius:0;
   transition-property:border-color,background-color;transition-duration:150ms;transition-timing-function:var(--ease)
 }
@@ -208,6 +211,7 @@ details p{padding-bottom:11px}
 .faq-list{display:grid;gap:0}
 .faq-list section{padding-bottom:18px}
 .faq-list details{margin-block:8px}
+.faq-list details>p{max-width:760px;font-size:17px;line-height:1.75}
 
 .next-prev{
   display:flex;justify-content:space-between;gap:16px;margin-top:26px;padding-top:16px;
@@ -298,7 +302,8 @@ details p{padding-bottom:11px}
 @media(max-width:999px){
   main{margin:18px 10px 48px;padding:28px 22px 34px;border-radius:3px}
   .grid,.page-links,.status-grid{grid-template-columns:1fr}
-  .flow{grid-template-columns:1fr}
+  .flow{flex-direction:column;overflow:visible;padding-bottom:0;scroll-snap-type:none}
+  .step{flex:0 0 auto;width:100%}
   .step:not(:last-child)::after{content:"↓";right:50%;top:auto;bottom:-12px;transform:translate(50%,50%)}
 }
 
@@ -383,16 +388,16 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
 .portal-button:active{transform:scale(.96)}
 .portal-button-primary,
 .portal-button-primary:visited{
-  color:#fff;background:var(--portal-ink);
+  color:#10261e;background:#f0f6f3;
   box-shadow:0 0 0 1px rgba(0,0,0,.08),0 7px 18px rgba(14,22,18,.12)
 }
-.portal-button-primary:hover{color:#fff;background:var(--portal-coral);box-shadow:0 0 0 1px rgba(0,0,0,.08),0 9px 24px rgba(240,75,35,.2)}
+.portal-button-primary:hover{color:#10261e;background:var(--portal-mint);box-shadow:0 0 0 1px rgba(0,0,0,.08),0 9px 24px rgba(104,215,178,.2)}
 .portal-button-secondary,
 .portal-button-secondary:visited{
-  color:var(--heading);background:var(--paper);
-  box-shadow:0 0 0 1px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.05)
+  color:#fff;background:#101714;
+  box-shadow:0 0 0 1px rgba(0,0,0,.1),0 7px 18px rgba(14,22,18,.12)
 }
-.portal-button-secondary:hover{color:var(--heading);background:var(--paper-subtle);box-shadow:0 0 0 1px rgba(0,0,0,.14),0 3px 8px rgba(0,0,0,.06)}
+.portal-button-secondary:hover{color:#fff;background:var(--portal-coral);box-shadow:0 0 0 1px rgba(0,0,0,.08),0 9px 24px rgba(240,75,35,.2)}
 .portal-hero-meta{
   display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:auto;padding-top:44px;
   color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.05em
@@ -792,10 +797,10 @@ body[data-page-role="portal"] .site-footer{
 }
 :root[data-resolved-theme="dark"] .portal-button-primary,
 :root[data-resolved-theme="dark"] .portal-button-primary:visited{color:#101714;background:#f0f6f3;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
-:root[data-resolved-theme="dark"] .portal-button-primary:hover{color:#fff;background:var(--portal-coral)}
+:root[data-resolved-theme="dark"] .portal-button-primary:hover{color:#10261e;background:var(--portal-mint)}
 :root[data-resolved-theme="dark"] .portal-button-secondary,
-:root[data-resolved-theme="dark"] .portal-button-secondary:visited{color:var(--heading);box-shadow:0 0 0 1px rgba(255,255,255,.12)}
-:root[data-resolved-theme="dark"] .portal-button-secondary:hover{box-shadow:0 0 0 1px rgba(255,255,255,.2)}
+:root[data-resolved-theme="dark"] .portal-button-secondary:visited{color:#fff;background:#151e1a;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+:root[data-resolved-theme="dark"] .portal-button-secondary:hover{color:#fff;background:var(--portal-coral);box-shadow:0 0 0 1px rgba(255,255,255,.2)}
 :root[data-resolved-theme="dark"] .feature-visual{box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
 :root[data-resolved-theme="dark"] .feature-visual-expression,
 :root[data-resolved-theme="dark"] .feature-visual-strict{filter:brightness(.72) saturate(.9)}
@@ -926,7 +931,7 @@ body:not([data-page-role="portal"]){
 }
 body:not([data-page-role="portal"]) main{
   width:min(1200px,calc(100% - 36px));max-width:none;margin:0 auto 64px;padding:0;
-  overflow:hidden;background:var(--paper);border:1px solid var(--rule);border-top:0;border-radius:0;box-shadow:none
+  overflow:clip;background:var(--paper);border:1px solid var(--rule);border-top:0;border-radius:0;box-shadow:none
 }
 body:not([data-page-role="portal"]) main>*{position:relative}
 body:not([data-page-role="portal"]) main a:visited{color:inherit}
@@ -1148,9 +1153,9 @@ body[data-page-role="content"]:not([data-docs-layout="true"]) .next-prev{margin-
 .project-progress-section{
   margin-left:0!important;padding:0!important;border-left:0!important
 }
-.project-progress-layout{display:grid;grid-template-columns:300px minmax(0,1fr);width:100%}
+.project-progress-layout{display:grid;grid-template-columns:300px minmax(0,1fr);align-items:start;width:100%}
 .project-progress-summary{
-  position:relative;display:flex;flex-direction:column;min-width:0;padding:62px 34px;overflow:hidden;
+  position:sticky;top:88px;display:flex;flex-direction:column;align-self:start;min-width:0;max-height:calc(100vh - 112px);padding:62px 34px;overflow:auto;
   background:var(--paper-subtle);border-right:1px solid var(--portal-line)
 }
 .project-progress-summary::before{
@@ -1276,7 +1281,12 @@ body[data-docs-layout="true"] .page-links{margin-inline:-54px}
 }
 .manual-article>h3{margin-top:32px;font-size:21px;letter-spacing:-.02em}
 .manual-article>p,.manual-article>ul,.manual-article>ol,.manual-article>blockquote{max-width:760px}
-.manual-article table{display:block;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}
+.manual-article>table{display:block;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}
+.manual-article .manual-table-wrap table{display:table;min-width:680px}
+.manual-article .manual-table-wrap::after{
+  content:"Swipe table →";display:block;padding:5px 2px 0;color:var(--nav-muted);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9px;letter-spacing:.08em;text-align:right
+}
 .manual-article>blockquote{
   margin:18px 0;padding:18px 20px;background:var(--paper-subtle);border:0;border-left:4px solid var(--portal-coral)
 }
@@ -1289,6 +1299,11 @@ body[data-docs-layout="true"] .page-links{margin-inline:-54px}
   color:var(--rule-strong);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9px
 }
 body[data-docs-layout="true"] .manual-index-group .page-links{margin:0;border:1px solid var(--portal-line)}
+
+@media(min-width:1000px) and (max-width:1217px){
+  body[data-docs-layout="true"] main,
+  body[data-docs-layout="true"] .site-footer{width:min(1000px,calc(100% - 36px));margin-right:auto;margin-left:auto}
+}
 
 /* Tool-specific visual signatures. Project pages remain HTML; manuals inherit only the signature. */
 body[data-tool-id]{
@@ -1340,7 +1355,7 @@ body[data-tool-id="noemexecute"]{--tool-accent:#207c5a;--tool-a:#5bd794;--tool-b
 body[data-tool-id="noemobserve"]{--tool-accent:#1d7796;--tool-a:#50cde1;--tool-b:#3558a0;--tool-c:#ef6659;--tool-signature:"RUNTIME / TRACE";--tool-angle:150deg;--tool-cell:35px;--tool-focus-x:63%}
 body[data-tool-id="noemdataset"]{--tool-accent:#247b70;--tool-a:#5cc9b3;--tool-b:#286d8f;--tool-c:#ed8750;--tool-signature:"DATA / LINEAGE";--tool-angle:0deg;--tool-cell:30px;--tool-focus-x:79%}
 body[data-tool-id="noemtrain"]{--tool-accent:#5550b5;--tool-a:#7d78e7;--tool-b:#3d4b91;--tool-c:#ef7458;--tool-signature:"MODEL / TRAIN";--tool-angle:135deg;--tool-cell:41px;--tool-focus-x:74%}
-body[data-tool-id="noemevaluate"]{--tool-accent:#a03e87;--tool-a:#df72c1;--tool-b:#4854a4;--tool-c:#57d4d0;--tool-signature:"MODEL / EVALUATE";--tool-angle:45deg;--tool-cell:23px;--tool-focus-x:67%}
+body[data-tool-id="noemevaluate"]{--tool-accent:#a03e87;--tool-a:#df72c1;--tool-b:#4854a4;--tool-c:#57d4d0;--tool-signature:"MODEL / AGENT EVAL";--tool-angle:45deg;--tool-cell:23px;--tool-focus-x:67%}
 body[data-tool-id="noemquantize"]{--tool-accent:#9b641f;--tool-a:#efbd52;--tool-b:#354d75;--tool-c:#6da6d7;--tool-signature:"MODEL / QUANTIZE";--tool-angle:90deg;--tool-cell:37px;--tool-focus-x:83%}
 
 /* Reading-scale and interaction refinement across every page family. */
@@ -1371,9 +1386,25 @@ body[data-page-role="tool-project"] .tool-project-body>section:nth-of-type(2)>p{
   font-size:15px;line-height:1.72
 }
 body[data-page-role="tool-project"] .tool-project-body table{font-size:15px;line-height:1.65}
+@media(min-width:1000px){body[data-page-role="tool-project"] .tool-project-body .table-wrap table{min-width:0}}
 body[data-docs-layout="true"] .hero p{font-size:17px;line-height:1.72}
 .manual-article>:is(p,ul,ol,blockquote){font-size:18px;line-height:1.78}
 .manual-article table{font-size:15px;line-height:1.65}
+
+.page-outline{
+  display:flex;align-items:center;gap:10px;max-width:none;margin:0;padding:16px 38px;
+  overflow-x:auto;overscroll-behavior-inline:contain;background:var(--paper-subtle);border-bottom:1px solid var(--portal-line)
+}
+.page-outline>strong{
+  flex:0 0 auto;color:var(--nav-muted);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:9px;letter-spacing:.11em;text-transform:uppercase
+}
+.page-outline a{
+  flex:0 0 auto;display:inline-flex;align-items:center;min-height:36px;padding:0 10px;color:var(--muted);
+  background:var(--paper);box-shadow:0 0 0 1px var(--rule);font-size:12px;text-decoration:none
+}
+.page-outline a:hover{color:var(--heading);box-shadow:0 0 0 1px var(--portal-coral)}
+h2[id]{scroll-margin-top:84px}
 
 /* Noemion spectrum trace: an interruptible, content-safe hover frame. */
 @property --spectrum-angle{
@@ -1431,6 +1462,12 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
 .catalog-filter:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .catalog-empty{display:none;margin:24px 0 0;color:var(--muted);font-size:16px}
 .catalog-empty[data-visible="true"]{display:block}
+.catalog-jumps{display:flex;gap:8px;max-width:none!important;margin:18px 0 0;overflow-x:auto;overscroll-behavior-inline:contain}
+.catalog-jumps a{
+  flex:0 0 auto;display:inline-flex;align-items:center;min-height:40px;padding:0 12px;color:var(--muted);
+  background:var(--paper);box-shadow:0 0 0 1px var(--rule);font-size:12px;font-weight:700;text-decoration:none
+}
+.catalog-jumps a:hover{color:var(--heading);box-shadow:0 0 0 1px var(--portal-coral)}
 [data-catalog-item][hidden],[data-catalog-group][hidden]{display:none!important}
 .news-ledger{display:grid;margin:28px -56px -62px;border-top:1px solid var(--portal-line)}
 .news-record{
@@ -1496,7 +1533,7 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
   .current-stage-visual{width:min(760px,100%);margin:0 auto}
   .current-stage-panel{width:min(720px,calc(100% - 36px));margin:-50px auto 0}
   .project-progress-layout{grid-template-columns:1fr}
-  .project-progress-summary{padding:46px 40px;border-right:0;border-bottom:1px solid var(--portal-line)}
+  .project-progress-summary{position:relative;top:auto;max-height:none;padding:46px 40px;overflow:hidden;border-right:0;border-bottom:1px solid var(--portal-line)}
   .progress-counts{grid-template-columns:repeat(3,minmax(0,1fr))}
   .progress-counts>div{grid-template-columns:1fr;align-content:center;gap:10px;min-height:96px}
   .progress-roadmap-link{margin-top:28px}
@@ -1552,6 +1589,8 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
   body[data-docs-layout="true"] .page-links{margin-inline:-24px}
   .manual-article{padding:0 24px 40px}
   .manual-article>h2{margin-inline:-24px;padding-inline:24px}
+  .manual-nav a{min-width:44px;min-height:44px;justify-content:center}
+  .page-outline{padding-inline:24px}
   body[data-page-role="section"] main>section>p,
   body[data-page-role="content"]:not([data-docs-layout="true"]) main>section>:is(p,ul,ol,blockquote),
   body[data-page-role="tool-project"] .tool-project-body>section:not(:nth-of-type(2))>:is(p,ul,ol,blockquote),

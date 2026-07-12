@@ -25,10 +25,10 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td>Phase 2<br>文本 IR 往返</td><td>规范化文本 NIR、汇编、反汇编和语义差异</td><td>规范化往返转换一致，对象字节可复现。</td></tr>
       <tr><td>Phase 3<br>Deterministic 编译</td><td>NSL Parser、Sema、实现化、证据账本、NOBJ 生成</td><td>无模型环境可完成编译；相同规范化输入产生相同字节。</td></tr>
       <tr><td>Phase 4<br>归档与链接</td><td>归档、符号解析、ID 重映射、重定位和冲突矩阵</td><td>强依赖完整、无静默覆盖，链接顺序不改变规范结果。</td></tr>
-      <tr><td>Phase 5<br>HOBJ 与发布</td><td>披露图、strip、覆盖证明与发布包</td><td>strip 前后运行语义相同，依赖与策略指纹闭合。</td></tr>
-      <tr><td>Phase 6<br>可信装载</td><td>签名、Merkle、权限保护、装载器与最小 Fulfillment Runtime</td><td>篡改、回滚、越权披露、预算不足和状态漂移安全拒绝。</td></tr>
-      <tr><td>Phase 7<br>Model-assisted 前端</td><td>数据集、Horizon Engine、校准、OOD、量化和模型包</td><td>模型只能提交候选；关闭模型后 Deterministic 与对象格式不变。</td></tr>
-      <tr><td>Phase 8<br>稳定与认证</td><td>跨工具一致性、平台矩阵、模糊测试、性能和复现报告</td><td>规范套件、恶意语料、平台矩阵和双构建复现全部通过。</td></tr>
+      <tr><td>Phase 5<br>HOBJ 与发布</td><td>披露图、strip、Coverage Proof、验证结论、候选包、签名请求与签名回填</td><td>strip 前后运行语义相同；最终包绑定发布对象、依赖、策略、模型、证据和外部签名身份。</td></tr>
+      <tr><td>Phase 6<br>可信装载与运行</td><td>Merkle、权限保护、Loaded State、Agent Harness、最小 Fulfillment Runtime、Trace Stream</td><td>篡改、回滚、越权披露、工具污染、预算不足和状态漂移产生明确拒绝或升级结果。</td></tr>
+      <tr><td>Phase 7<br>Model-assisted 前端</td><td>数据集、Horizon Engine、校准、OOD、量化、模型包和模型评估</td><td>模型只能提交候选；关闭模型后 Deterministic 与对象格式不变。</td></tr>
+      <tr><td>Phase 8<br>稳定与认证</td><td>端到端任务评估、跨工具一致性、平台矩阵、模糊测试、性能和复现报告</td><td>规范套件、恶意语料、Agent 场景、平台矩阵和双构建复现全部通过。</td></tr>
     </tbody></table></div>
   </section>
   <section class="content-rows">
@@ -40,7 +40,7 @@ permalink: "/development/implementation-roadmap.html"
       <li><strong>发布运行：</strong><a href="../tools/noemreduce/index.html">noemreduce</a>、<a href="../tools/noemcoverage/index.html">noemcoverage</a>、<a href="../tools/noembundle/index.html">noembundle</a>、<a href="../tools/noemexecute/index.html">noemexecute</a> 与 <a href="../tools/noemobserve/index.html">noemobserve</a>。</li>
       <li><strong>模型工程：</strong><a href="../tools/noemdataset/index.html">noemdataset</a>、<a href="../tools/noemtrain/index.html">noemtrain</a>、<a href="../tools/noemevaluate/index.html">noemevaluate</a> 与 <a href="../tools/noemquantize/index.html">noemquantize</a>。</li>
     </ul>
-    <p>工具名表达规划职责；具体 CLI、参数、归档扩展名和包格式尚未冻结，必须由各工具文档与 ADR 决定。</p>
+    <p>主产物顺序为“来源 → NOBJ → 链接对象/HOBJ → Release Object → Release Coverage Proof → Unsigned Package Candidate → 外部签名回填 → Signed Noemion Package → Loaded State → Run Evidence → Evidence Closure Report → Acceptance Decision → 离线评估”。工具名表达规划职责；具体 CLI、参数、归档扩展名和包格式尚未冻结，必须由各工具文档与 ADR 决定。</p>
   </section>
   <section class="content-band">
     <h2>尚待确定：仓库、接口与实现选择</h2>

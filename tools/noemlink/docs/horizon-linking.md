@@ -27,7 +27,7 @@ HOBJ 把可共享语义资产与每次运行的私有状态分离。链接时必
 调用表、符号绑定和权限状态每实例私有
 ```
 
-共享表示内容可复用，不表示权限、信任或运行状态自动共享。任何从共享资产到私有上下文的绑定都必须由 Fulfillment Runtime 在实例边界重新验证。
+共享表示内容可复用，不表示权限、信任或运行状态自动共享。Agent Harness 只能提交受约束的披露请求，Noema Object System 必须在实例边界按依赖、权限与策略建立只读视图，Fulfillment Runtime 只消费该视图而不自行扩大披露范围。
 
 ## 合并规则
 
@@ -37,7 +37,7 @@ HOBJ 把可共享语义资产与每次运行的私有状态分离。链接时必
 - 强依赖必须形成内容寻址、版本锁定的完整闭包。
 - 调试剥离不得改变运行语义哈希。
 
-披露层级与覆盖证书仍以[Horizon Object](../../../specifications/horizon-object.html)为权威来源。
+披露层级与披露覆盖记录仍以[Horizon Object](../../../specifications/horizon-object.html)为权威来源；发布阶段的 Release Coverage Proof 由 noemcoverage 另行建立。
 
 ## 候选合并代数
 

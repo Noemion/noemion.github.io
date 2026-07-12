@@ -15,6 +15,9 @@ ROOT = SOURCE_ROOT if SOURCE_ONLY else Path(sys.argv[1]).resolve()
 README = SOURCE_ROOT / "README.md"
 SOURCE_SITEMAP = SOURCE_ROOT / "sitemap.md"
 DIRECTORY_CSS = ROOT / "assets" / "directory.css"
+MINIMUM_ROUTE_COUNT = 69
+MINIMUM_HTML_SOURCE_COUNT = 49
+MINIMUM_MANUAL_SOURCE_COUNT = 20
 SOURCE_HTML_FILES = sorted(
     path
     for path in SOURCE_ROOT.rglob("*.html")
@@ -188,11 +191,13 @@ CONTENT_LAYOUT_ROUTES = (
     "about/background.html",
     "about/intellectual-foundations.html",
     "architecture/noema-lifecycle.html",
+    "architecture/decisions.html",
     "architecture/open-questions.html",
     "components/noesis-core.html",
     "components/noema-object-system.html",
     "components/horizon-engine.html",
     "components/agent-harness.html",
+    "components/fulfillment-runtime.html",
     "development/implementation-roadmap.html",
     "development/testing.html",
     "specifications/noema-object.html",
@@ -206,6 +211,109 @@ CONTENT_LAYOUT_CLASSES = {
     "content-wide",
     "content-grid",
     "content-rows",
+}
+
+REQUIRED_ARCHITECTURE_ROUTES = {
+    "architecture/decisions.html": "architecture/index.html",
+    "components/fulfillment-runtime.html": "components/index.html",
+}
+
+TOOLCHAIN_CLOSURE_CONTRACTS = {
+    "tools/noembundle/index.html": {
+        "required": (
+            "回填输入",
+            "Unsigned Package Candidate",
+            "Signing Request",
+            "Signature Response",
+            "Signature Envelope",
+            "不持有私钥",
+        ),
+    },
+    "tools/noemexecute/index.html": {
+        "required": (
+            "Candidate Assessment",
+            "Evidence Closure Report",
+            "Acceptance Decision",
+            "pending-evidence",
+            "pending-review",
+        ),
+    },
+    "tools/noemcoverage/index.html": {
+        "required": (
+            "Release Coverage Proof",
+            "Run Evidence Closure",
+            "Evidence Closure Report",
+            "不签署发布包",
+            "不单独形成 Acceptance Decision",
+        ),
+    },
+    "tools/noemevaluate/index.html": {
+        "required": (
+            "Offline Evaluation",
+            "Model Qualification Record",
+            "Agent Scenario + Final Run Evidence",
+            "Scenario Evaluation Decision",
+            "不修改原 Acceptance Decision",
+        ),
+    },
+    "tools/noemcompile/index.html": {
+        "required": (
+            "Candidate Envelope",
+            "Source Binding Decision",
+            "确定性 Noesis Core",
+            "不直接产生 NIR",
+        ),
+    },
+    "tools/noemquantize/index.html": {
+        "required": (
+            "Model Package Candidate",
+            "未签名 Model Package Candidate",
+        ),
+        "required_patterns": (
+            r"不自行[^<。]{0,100}(?:签署|签名)",
+        ),
+    },
+    "architecture/index.html": {
+        "required": (
+            "Source / Candidate Envelope",
+            "Noesis Core",
+            "NIR / NOBJ",
+            "Linked Object / HOBJ",
+            "Release + Coverage",
+            "Signed Package",
+            "Loaded State",
+            "Harness Session",
+            "Runtime Request",
+            "Candidate Assessment",
+            "Capability Request / Observation",
+            "Evidence Closure",
+            "Acceptance Decision / 继续循环",
+            "信任不是单一分数",
+            "彼此独立的属性",
+        ),
+        "forbidden_patterns": (
+            r"每一步只能增加(?:信任|可信度)",
+            r"信任(?:必须|只能|会)?单调(?:增加|提高|上升)",
+        ),
+    },
+    "architecture/decisions.html": {
+        "required": (
+            "工具链产物与外部签名",
+            "候选、能力与验收分层",
+            "Candidate Assessment",
+            "Evidence Closure",
+            "Acceptance Decision",
+        ),
+    },
+    "components/fulfillment-runtime.html": {
+        "required": (
+            "Candidate Assessment",
+            "Capability Request",
+            "不宣告任务最终验收",
+            "不得输出最终 accepted",
+            "不需要 Fulfillment Runtime",
+        ),
+    },
 }
 
 
@@ -403,6 +511,96 @@ def normalize_visible_text(text):
     return " ".join(text.split())
 
 
+def validate_required_text_contracts(root):
+    errors = []
+    for route, contract in TOOLCHAIN_CLOSURE_CONTRACTS.items():
+        path = root / route
+        if not path.exists():
+            errors.append(f"missing system-closure page {route}")
+            continue
+        text = path.read_text()
+        for token in contract.get("required", ()):
+            if token not in text:
+                errors.append(f"{route}: missing system-closure contract {token!r}")
+        for pattern in contract.get("required_patterns", ()):
+            if re.search(pattern, text) is None:
+                errors.append(
+                    f"{route}: missing system-closure pattern {pattern!r}"
+                )
+        for pattern in contract.get("forbidden_patterns", ()):
+            if re.search(pattern, text):
+                errors.append(
+                    f"{route}: contradicts system-closure contract with {pattern!r}"
+                )
+    return errors
+
+
+def validate_readability_behavior_contracts(root):
+    errors = []
+    directory_script = root / "assets" / "directory.js"
+    style = root / "assets" / "style.css"
+    directory_style = root / "assets" / "directory.css"
+
+    if directory_script.exists():
+        directory_text = directory_script.read_text()
+        for token in (
+            'document.querySelectorAll(".manual-article table")',
+            'wrapper.className = "table-wrap manual-table-wrap"',
+            'contentMain.querySelectorAll(":scope > section > h2")',
+            "contentHeadings.length >= 6",
+            'outline.className = "page-outline"',
+            'outline.setAttribute("aria-label", "章节导航")',
+            'contentMain.querySelector(":scope > .hero")',
+            'insertAdjacentElement("afterend", outline)',
+        ):
+            if token not in directory_text:
+                errors.append(
+                    f"directory.js missing readability behavior contract: {token}"
+                )
+    else:
+        errors.append("missing assets/directory.js")
+
+    if style.exists() and directory_style.exists():
+        style_text = style.read_text()
+        directory_text = directory_style.read_text()
+        css_patterns = {
+            "docs content must become a centered single column from 1217px": (
+                style_text,
+                r"@media\(min-width:1000px\)\s+and\s+\(max-width:1217px\)\s*\{"
+                r"[^}]*body\[data-docs-layout=\"true\"\]\s+main,"
+                r"\s*body\[data-docs-layout=\"true\"\]\s+\.site-footer\s*\{"
+                r"[^}]*width:min\(1000px,calc\(100%\s*-\s*36px\)\)"
+            ),
+            "documentation rail must disappear at 1217px": (
+                directory_text,
+                r"@media\(max-width:1217px\)\s*\{\s*\.docs-rail\s*\{\s*display:none"
+            ),
+            "project progress summary must remain sticky on desktop": (
+                style_text,
+                r"\.project-progress-summary\s*\{[^}]*position:sticky;[^}]*top:88px"
+            ),
+            "FAQ answers must preserve the readable line length": (
+                style_text,
+                r"\.faq-list\s+details>p\s*\{[^}]*max-width:760px;"
+                r"[^}]*font-size:17px;[^}]*line-height:1\.75"
+            ),
+            "mobile manual navigation targets must be at least 44px square": (
+                style_text,
+                r"\.manual-nav\s+a\s*\{[^}]*min-width:44px;"
+                r"[^}]*min-height:44px"
+            ),
+        }
+        for label, (css_text, pattern) in css_patterns.items():
+            if re.search(pattern, css_text, re.DOTALL) is None:
+                errors.append(f"shared styles missing readability contract: {label}")
+    else:
+        if not style.exists():
+            errors.append("missing assets/style.css")
+        if not directory_style.exists():
+            errors.append("missing assets/directory.css")
+    return errors
+
+
 def validate_public_html(route, text):
     errors = []
     for phrase in PUBLIC_META_PHRASES:
@@ -480,8 +678,29 @@ def validate_jekyll_sources():
         errors.append("sitemap.md contains duplicate HTML routes")
     if registered != source_routes:
         errors.append("sitemap.md routes do not exactly match Jekyll source pages")
-    if len(source_routes) < 65:
-        errors.append(f"expected at least 65 Jekyll source pages, found {len(source_routes)}")
+    if len(source_routes) < MINIMUM_ROUTE_COUNT:
+        errors.append(
+            f"expected at least {MINIMUM_ROUTE_COUNT} Jekyll source pages, "
+            f"found {len(source_routes)}"
+        )
+    if len(SOURCE_HTML_FILES) < MINIMUM_HTML_SOURCE_COUNT:
+        errors.append(
+            f"expected at least {MINIMUM_HTML_SOURCE_COUNT} HTML authority sources, "
+            f"found {len(SOURCE_HTML_FILES)}"
+        )
+    if len(MANUAL_MARKDOWN_FILES) < MINIMUM_MANUAL_SOURCE_COUNT:
+        errors.append(
+            f"expected at least {MINIMUM_MANUAL_SOURCE_COUNT} Markdown manual sources, "
+            f"found {len(MANUAL_MARKDOWN_FILES)}"
+        )
+    for route, parent in REQUIRED_ARCHITECTURE_ROUTES.items():
+        row = registry.get(route)
+        if row is None or row["kind"] != "content" or row["parent"] != parent:
+            errors.append(
+                f"{route}: must be registered as content under {parent}"
+            )
+    errors.extend(validate_required_text_contracts(SOURCE_ROOT))
+    errors.extend(validate_readability_behavior_contracts(SOURCE_ROOT))
 
     forbidden_shell = re.compile(
         r"<!doctype|<html\b|<head\b|<body\b|class=\"site-header\"|<footer\b",
@@ -720,7 +939,8 @@ def validate_jekyll_sources():
             '@media(max-width:839px)',
             'body:not([data-page-role="portal"]) .global-directory-panel',
             '.site-header .directory-panel.is-closing nav',
-            'html.mobile-directory-open,html.mobile-directory-open body',
+            'html.mobile-directory-open body',
+            'position:fixed',
             'overscroll-behavior:contain',
             ':root[data-resolved-theme="dark"]',
             ".site-footer-grid",
@@ -737,6 +957,12 @@ def validate_jekyll_sources():
             errors.append("page-link grids must not expose the separator color in empty cells")
         if not re.search(r'body\[data-page-role="tool-project"\]\s+main\s*\{[^}]*overflow\s*:\s*clip', shared_css):
             errors.append("tool project main must preserve the sticky status panel scroll range")
+        if not re.search(r'body:not\(\[data-page-role="portal"\]\)\s+main\s*\{[^}]*overflow\s*:\s*clip', shared_css):
+            errors.append("non-portal main must not create a scroll container that disables sticky summaries")
+        docs_base_index = shared_css.find('body[data-docs-layout="true"] main{')
+        docs_medium_index = shared_css.rfind('@media(min-width:1000px) and (max-width:1217px)')
+        if docs_base_index < 0 or docs_medium_index < docs_base_index:
+            errors.append("1000-1217px documentation override must follow the base desktop docs layout")
         if "margin-left:300px" in shared_css:
             errors.append("content pages must not reserve a meaningless fixed 300px left gap")
         for legacy_selector in (
@@ -865,7 +1091,11 @@ def validate_jekyll_sources():
             'event.key === "Escape"',
             'nextScrollY > previousScrollY + 8',
             'window.setTimeout(finishPanelClose, 180)',
-            'document.documentElement.classList.toggle("mobile-directory-open"',
+            'document.documentElement.classList.add("mobile-directory-open")',
+            'document.documentElement.style.setProperty("--mobile-directory-scroll-top"',
+            'document.addEventListener("wheel", containOpenMenuGesture, { passive: false })',
+            'document.addEventListener("touchmove", containOpenMenuGesture, { passive: false })',
+            'window.scrollTo(0, lockedScrollY)',
             'setPageScrollLock(true)',
         ):
             if token not in directory_text:
@@ -1103,6 +1333,12 @@ def main():
         errors.append("sitemap.md contains duplicate HTML routes")
     if sorted(registered) != sorted(actual_routes):
         errors.append("sitemap.md routes do not exactly match HTML files")
+    if len(registered) < MINIMUM_ROUTE_COUNT:
+        errors.append(
+            f"expected at least {MINIMUM_ROUTE_COUNT} formal routes, found {len(registered)}"
+        )
+    errors.extend(validate_required_text_contracts(ROOT))
+    errors.extend(validate_readability_behavior_contracts(ROOT))
 
     sitemap = ROOT / "sitemap.md"
     if not sitemap.exists():
@@ -1259,6 +1495,13 @@ def main():
         errors.append(f"expected 34 global landing routes, found {len(global_rows)}")
 
     route_registry = {row["route"]: row for row in route_rows}
+
+    for route, parent in REQUIRED_ARCHITECTURE_ROUTES.items():
+        row = route_registry.get(route)
+        if row is None or row["kind"] != "content" or row["parent"] != parent:
+            errors.append(
+                f"{route}: must be registered as content under {parent}"
+            )
 
     for order, route in enumerate(DOC_GUIDE_ORDER, start=1):
         row = route_registry.get(route)
@@ -1545,9 +1788,11 @@ def main():
                 ["about/background.html", "project"],
                 ["about/intellectual-foundations.html", "project"],
                 ["architecture/noema-lifecycle.html", "architecture"],
+                ["architecture/decisions.html", "architecture"],
                 ["specifications/noema-ir.html", "architecture"],
                 ["components/horizon-engine.html", "architecture"],
                 ["components/agent-harness.html", "architecture"],
+                ["components/fulfillment-runtime.html", "architecture"],
                 ["docs/getting-started.html", "docs"],
                 ["downloads/index.html", "resources"],
                 ["faq/index.html", "resources"],

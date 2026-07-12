@@ -1,0 +1,40 @@
+---
+layout: default
+title: "架构决定 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 架构决定"
+permalink: "/architecture/decisions.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构</a><span aria-hidden="true">/</span><span>架构决定</span></nav>
+  <div class="hero"><h1>架构决定</h1><p>集中说明当前已经采用的跨组件边界，以及这些决定尚未冻结哪些接口和字段。</p><div class="badges"><span class="badge">Accepted Principles</span><span class="badge">Not Stable ABI</span><span class="badge">Traceable</span></div></div>
+  <section class="content-stack">
+    <h2>怎样阅读这些决定</h2>
+    <p class="lead">架构决定约束组件职责和后续规范方向，但不等同于已经发布的软件接口。每项决定回答“为什么这样分层、哪些做法被排除、影响哪些页面”；具体字段、编码、ABI 和错误码仍须进入正式规范与一致性测试。</p>
+    <p>决定发生变化时，相关架构、组件、工具、手册和测试必须在同一次变更中更新。尚无充分证据的问题继续保留在<a href="open-questions.html">开放问题</a>，不能用实现便利静默替代。</p>
+  </section>
+  <section class="content-wide">
+    <h2>当前决定登记</h2>
+    <div class="table-wrap"><table><thead><tr><th>决定</th><th>采用的边界</th><th>直接影响</th></tr></thead><tbody>
+      <tr><td>命名与语义边界</td><td>Noesis 表示确定性理解与编译活动；Noema 表示机器对象；Horizon 表示未完全展开的背景；Fulfillment 表示受约束求解。</td><td>NIR、NOBJ、HOBJ、组件名、工具名与公开术语。</td></tr>
+      <tr><td>Agent Harness 控制平面</td><td>Harness 位于 Fulfillment Runtime 外侧，负责上下文、会话级能力、策略、观察、预算和人工升级；模型不能绕过它调用能力。</td><td>Agent Harness、noemexecute、noemobserve、noemcoverage 与 noemevaluate。</td></tr>
+      <tr><td>工具链产物与外部签名</td><td>发布链依次形成 Release Object、Release Coverage Proof、Unsigned Package Candidate、Signing Request、Signature Response 与 Signed Noemion Package；私钥只在外部签名系统。</td><td>noemreduce、noemcoverage、noembundle、noemexecute 与对象生命周期。</td></tr>
+      <tr><td>候选、能力与验收分层</td><td>Candidate Envelope 不是 NIR；Capability Requirement 不是实时句柄；Candidate Assessment、Evidence Closure 和 Acceptance Decision 是三个不同结果。</td><td>Noesis Core、Object System、Agent Harness、Runtime 与所有运行证据工具。</td></tr>
+    </tbody></table></div>
+  </section>
+  <section class="content-split">
+    <h2>已排除的捷径</h2>
+    <ul>
+      <li>模型输出不能直接生成 NIR/NOBJ，也不能因结构合法被当作来源忠实语义。</li>
+      <li>签名不能替代结构、语义、权限和环境策略验证。</li>
+      <li>Loaded State 不携带可直接执行的会话能力句柄。</li>
+      <li>Runtime 候选通过评价，不等于任务已经最终验收。</li>
+      <li>Release Coverage Proof、Evidence Closure Report、离线评估和跨工具认证都不能替代发布授权或人工专属判断。</li>
+    </ul>
+  </section>
+  <section class="content-band">
+    <h2>尚未冻结的内容</h2>
+    <p>Candidate Envelope、Source Binding Decision、Loaded State Handle、Runtime Request、Capability Request、Capability Observation、Acceptance Policy、Acceptance Decision、签名封装和撤销协议仍需规范、威胁模型、原型和正反测试。当前登记只约束职责，不承诺字段或调用语法。</p>
+  </section>
+  <div class="next-prev"><a href="noema-lifecycle.html">← 对象生命周期</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

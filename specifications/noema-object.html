@@ -7,14 +7,14 @@ permalink: "/specifications/noema-object.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范</a><span aria-hidden="true">/</span><span>NOBJ</span></nav>
-  <div class="hero"><h1>Noema Object</h1><p>把 Noema IR 封装为可重定位、可验证和可安全装载的对象文件。</p><div class="badges"><span class="badge">NOBJ</span><span class="badge">Sections</span><span class="badge">Checked Arithmetic</span></div></div>
+  <div class="hero"><h1>Noema Object</h1><p>把 Noema IR 封装为可重定位、可验证和可安全装载的对象文件。</p><div class="badges"><span class="badge">Current Boundary</span><span class="badge">Unfrozen Layout</span><span class="badge">NOBJ</span><span class="badge">Checked Arithmetic</span></div></div>
   <section class="content-stack">
     <h2>对象职责</h2>
     <p class="callout"><strong>直白解释：</strong>NOBJ 类似传统工具链中的可重定位对象：它把已经检查过的语义、符号和待解析引用装进统一边界，使查看器、链接器和装载器能够在不重新猜测自然语言的前提下处理任务。</p>
     <ul>
       <li>Noema Object（NOBJ）指类似 <code>.o</code> 的可重定位生成式对象；文件扩展名和版本编码仍待规范确定。</li>
       <li>对象格式组织 NIR、符号、资源、策略、调试与信任信息，并支持验证、链接、重定位和装载。</li>
-      <li>Fulfillment Runtime 而非对象格式负责生成式求解与模型输入实现化。</li>
+      <li>Noema Object System 负责链接、验证和装载；Fulfillment Runtime 而非对象格式负责生成式求解。</li>
       <li>自然语言原文只能作为可选来源或调试信息，不能成为核心执行载荷。</li>
     </ul>
   </section>
@@ -25,17 +25,21 @@ permalink: "/specifications/noema-object.html"
   </section>
   <section class="content-wide">
     <h2>当前设计：Section / Segment 双视图</h2>
-    <p>对象布局拟包含 Header、Program Header Table、Section Header Table、Section Data 以及可选的签名与 Merkle 数据。Section 服务链接和对象工具，Segment 服务装载与权限映射。</p>
-    <table><thead><tr><th>Section 家族提案</th><th>职责</th></tr></thead><tbody>
+    <p>对象布局拟包含 Header、Program Header Table、Section Header Table、Section Data 以及可选的完整性材料。Section 服务链接和对象工具，Segment 服务装载与权限映射；最终发布包的签名范围和外部签名回填属于 noembundle，不由 NOBJ 布局示例提前决定。</p>
+    <div class="table-wrap"><table><thead><tr><th>Section 家族提案</th><th>职责</th></tr></thead><tbody>
       <tr><td>NIR 语义</td><td>目标、节点、边、约束、歧义、产物与评价器。</td></tr>
       <tr><td>符号与字符串</td><td>名称、导入导出、可见性和待链接引用。</td></tr>
-      <tr><td>策略与信任</td><td>权限、策略、摘要、签名范围与证明。</td></tr>
+      <tr><td>策略与完整性</td><td>权限、策略、对象摘要，以及发布封装必须纳入签名范围的关键材料。</td></tr>
       <tr><td>调试与来源</td><td>来源映射、覆盖详情、诊断与可选原文，可在发布时 strip。</td></tr>
-    </tbody></table>
+    </tbody></table></div>
   </section>
   <section class="content-band">
     <h2>当前设计：记录与完整性</h2>
-    <p>节点和边记录需要稳定 ID、类型、标志、引用、模态、权重和来源关系。具体字段宽度、编码、对齐、版本演进、Section 名称、签名覆盖和 Merkle 层级尚须正式格式规范与样本共同确定。</p>
+    <p>节点和边记录需要区分两类身份：对象内部局部索引可以在链接时重编号；跨对象、版本和重定位保持的语义身份或稳定符号不能因布局变化而改变。类型、标志、引用、模态、权重、来源关系、字段宽度、编码、对齐、版本演进、Section 名称和 Merkle 层级尚须正式格式规范与样本共同确定。</p>
+  </section>
+  <section class="content-band">
+    <h2>与 HOBJ 和工具链的关系</h2>
+    <p>Noesis Core 或 noemassemble 通过规范对象写入路径产生可重定位 NOBJ；noemlink 可以把一个或多个 NOBJ 与已有 HOBJ 链接为 Linked Object 或新的 HOBJ。HOBJ 是保留共享依赖与披露语义的对象形态，不由 Horizon Engine 直接生成。发布前还必须经过独立验证、允许的裁剪、Release Coverage Proof 和外部签名封装。</p>
   </section>
   <section class="content-band">
     <h2>尚待确定：名称、布局与重定位</h2>
@@ -47,7 +51,7 @@ permalink: "/specifications/noema-object.html"
       <tr><td>边界与算术安全</td><td>溢出、越界、重叠、错误对齐、递归或计数放大</td><td>畸形样例语料、属性测试和覆盖引导模糊测试</td></tr>
       <tr><td>引用完整</td><td>错误索引、悬空强引用、类型不匹配和循环闭包</td><td>分层验证器与链接冲突矩阵</td></tr>
       <tr><td>确定性</td><td>工作目录、归档顺序、时间戳或未锁定依赖污染字节</td><td>双构建复现和规范化往返转换</td></tr>
-      <tr><td>语义保持</td><td>重定位、strip 或布局重排改变目标、约束、权限或契约</td><td>语义哈希、差异分类和前后等价测试</td></tr>
+      <tr><td>语义保持</td><td>重定位、strip 或布局重排改变目标、约束、权限或契约</td><td>规范属性比较、差异分类和前后等价测试；语义哈希需等待等价规则冻结</td></tr>
       <tr><td>完整性范围</td><td>未覆盖关键 Header、策略、入口、符号或依赖</td><td>签名范围测试、篡改与回滚案例</td></tr>
     </tbody></table></div>
   </section>

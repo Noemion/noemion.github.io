@@ -20,31 +20,35 @@ permalink: "/architecture/index.html"
   </section>
   <section>
     <h2>系统关系</h2>
-    <div class="flow"><div class="step">源语言 / 语义候选</div><div class="step">Noesis Core</div><div class="step">NIR / NOBJ</div><div class="step">链接器 / 装载器</div><div class="step">Agent Harness</div><div class="step">Fulfillment Runtime</div></div>
-    <p>可以把这条链理解为“提出要求—形成受检对象—组合依赖—验证装载—受约束执行”。前一阶段只能把明确产物交给后一阶段，任何组件都不得越过自己的信任边界替下游做隐式决定。</p>
+    <p><strong>对象与发布链：</strong></p>
+    <div class="flow"><div class="step">Source / Candidate Envelope</div><div class="step">Noesis Core</div><div class="step">NIR / NOBJ</div><div class="step">Linked Object / HOBJ</div><div class="step">Release + Coverage</div><div class="step">Signed Package</div><div class="step">Loaded State</div></div>
+    <p><strong>运行与验收循环：</strong></p>
+    <div class="flow"><div class="step">Harness Session</div><div class="step">Runtime Request</div><div class="step">Candidate Assessment</div><div class="step">Capability Request / Observation</div><div class="step">Evidence Closure</div><div class="step">Acceptance Decision / 继续循环</div></div>
+    <p>第一条链形成可装载对象；第二条链表示一次运行迭代，Harness 会根据观察、预算和停止条件继续调用 Runtime 或结束会话。每个阶段只证明特定属性：签名证明身份和字节完整性，不证明语义正确；装载证明当前环境允许建立状态，不证明运行结果满足目标；Runtime 产生的候选和外部环境观察始终重新进入不可信域。</p>
     <p>各职责单元的入口见<a href="../components/">组件目录</a>，格式与执行约束见<a href="../specifications/">规范登记页</a>。</p>
   </section>
   <section>
     <h2>概要设计</h2>
     <div class="table-wrap"><table><thead><tr><th>层次</th><th>主要输入</th><th>主要输出</th><th>必须保持的不变量</th></tr></thead><tbody>
-      <tr><td>Source Frontend</td><td>语言、结构定义、知识与策略来源</td><td>候选语义与来源映射</td><td>保留来源、歧义和未决信息</td></tr>
-      <tr><td>Noesis Core</td><td>规范化源表示与配置</td><td>NIR / NOBJ</td><td>无模型、确定、布局受规范控制</td></tr>
-      <tr><td>链接器 / 装载器</td><td>对象、归档、HOBJ、锁定依赖</td><td>链接对象、运行 Segment、装载状态</td><td>冲突显式、权限不静默扩大、完整性可验证</td></tr>
-      <tr><td>Fulfillment Runtime</td><td>已验证对象、模型与外部能力绑定</td><td>受约束求解结果与运行证据</td><td>实现化不改变对象声明的硬约束和权限边界</td></tr>
-      <tr><td>Agent Harness</td><td>已验证对象、执行配置与类型化能力</td><td>受控会话、观察反馈与验收证据</td><td>模型不能扩大权限、绕过策略或自行确认任务完成</td></tr>
+      <tr><td>Source Frontend</td><td>受控语言、来源资料或模型候选</td><td>Source Package、Candidate Envelope 与来源映射</td><td>模型候选不因结构合法自动升级为受信语义</td></tr>
+      <tr><td>Noesis Core</td><td>受控来源、候选封装、Source Binding Decision 与配置</td><td>NIR、NOBJ 与编译证据账本</td><td>无模型、确定、保留歧义；布局受规范控制</td></tr>
+      <tr><td>链接与发布</td><td>NOBJ、HOBJ、归档、锁定依赖与发布证据</td><td>Linked Object / HOBJ、Release Object、Release Coverage Proof 与 Signed Package</td><td>冲突显式、权限不扩大；私钥只在外部签名系统</td></tr>
+      <tr><td>Noema Object System</td><td>Signed Package、装载策略与目标环境</td><td>不可变 Loaded State、能力需求与装载证据</td><td>安全解析、身份绑定、失败原子性；不保存实时能力句柄</td></tr>
+      <tr><td>Agent Harness</td><td>Loaded State、执行配置、Runtime Binding 与能力目录</td><td>受控会话、Capability Observation、证据闭包与 Acceptance Decision</td><td>按预注册策略执行能力与验收；需要外部判断时保持 pending-review</td></tr>
+      <tr><td>Fulfillment Runtime</td><td>受限语义视图、求解后端、运行请求与观察</td><td>不可信候选、Candidate Assessment 与 Capability Request</td><td>不持有实时能力句柄，不改变对象硬约束或宣告最终验收</td></tr>
     </tbody></table></div>
     <p>更细的阶段、信任转换和失败位置见<a href="noema-lifecycle.html">对象生命周期</a>；记录布局、类型系统和执行语义必须进入正式规范或 ADR。</p>
   </section>
   <section>
     <h2>对象生命周期</h2>
-    <p><a href="noema-lifecycle.html">对象生命周期</a>集中说明从输入、确定性编译、链接、验证到装载执行的阶段与边界。</p>
+    <p><a href="noema-lifecycle.html">对象生命周期</a>逐项列出来源、编译、链接、发布签名、装载、会话、能力调用、运行证据和最终验收的产物、失败与审计依据。</p>
   </section>
   <section>
     <h2>信任边界</h2>
-    <p>模型输出不得直接生成 NOBJ；能力调用必须经过参数、权限、预算和副作用检查；对象偏移、长度、计数、索引和对齐均需检查。智能体控制面的职责见<a href="../components/agent-harness.html">Agent Harness</a>，安全规则的规范状态见<a href="../specifications/">规范登记页</a>。</p>
+    <p>信任不是单一分数。来源可追溯、结构有效、语义有效、依赖闭合、字节完整、环境授权和结果验收是彼此独立的属性；每个组件只能声明自己已经检查的属性。模型输出不得直接生成 NOBJ；能力调用必须经过参数、权限、预算和副作用检查；对象偏移、长度、计数、索引和对齐均需检查。智能体控制面的职责见<a href="../components/agent-harness.html">Agent Harness</a>，求解与候选评价边界见<a href="../components/fulfillment-runtime.html">Fulfillment Runtime</a>，安全规则的规范状态见<a href="../specifications/">规范登记页</a>。</p>
   </section>
   <section>
     <h2>开放问题</h2>
-    <p>尚未批准的名称、ABI、模型与设备决策保留在<a href="open-questions.html">开放问题</a>中，不在架构概览中固化。</p>
+    <p>当前已采用的跨组件边界集中在<a href="decisions.html">架构决定</a>；尚未批准的格式、ABI、模型、运行协议与资源决策保留在<a href="open-questions.html">开放问题</a>中，不在架构概览中固化。</p>
   </section>
 </main>

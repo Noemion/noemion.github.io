@@ -2,7 +2,7 @@
 layout: default
 title: "Noemion · 从人类意图到机器表征对象"
 page_role: "portal"
-footer_text: "Noemion · 设计与安全核心阶段 · 当前无可安装程序"
+footer_text: "Noemion"
 permalink: "/index.html"
 ---
 <main id="main-content" class="portal-main" tabindex="-1">
@@ -84,7 +84,7 @@ permalink: "/index.html"
         <span class="feature-visual feature-visual-lifecycle" aria-hidden="true">
           <i>SOURCE</i><i>CORE</i><i>OBJECT</i><i>RUNTIME</i>
         </span>
-        <span class="feature-copy"><small>ARCHITECTURE · 对象生命周期</small><strong>让每一道信任边界都能被看见</strong><span>从源输入、确定性编译、链接与装载，一直到受约束 Fulfillment Runtime，分清谁可以决定什么。</span></span>
+        <span class="feature-copy"><small>ARCHITECTURE · 对象生命周期</small><strong>让每一道信任边界都能被看见</strong><span>从源输入、确定性编译、链接与装载，到 Agent Harness 和 Fulfillment Runtime，分清谁可以决定什么。</span></span>
         <span class="portal-arrow" aria-hidden="true"><svg class="portal-arrow-ring" viewBox="0 0 46 46"><circle class="arrow-ring-track" cx="23" cy="23" r="20"></circle><circle class="arrow-ring-progress" cx="23" cy="23" r="20"></circle></svg><i class="arrow-base">→</i><i class="arrow-active">↗</i></span>
       </a>
       <a class="portal-feature-row" href="specifications/index.html">
@@ -118,9 +118,9 @@ permalink: "/index.html"
         <span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>GOAL GRAPH</b></span>
         <span class="focus-card-copy"><small>待验证设计</small><strong>Noema IR</strong><span>目标、约束、偏好、歧义、证据与验收条件。</span></span>
       </a>
-      <a class="portal-focus-card focus-card-noema-object" href="specifications/noema-object.html">
+      <a class="portal-focus-card focus-card-noema-object" href="specifications/index.html">
         <span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>OBJECT MAP</b></span>
-        <span class="focus-card-copy"><small>待验证设计</small><strong>Noema / Horizon Object</strong><span>Section、符号、重定位、依赖闭包与完整性。</span></span>
+        <span class="focus-card-copy"><small>待验证设计</small><strong>Noema 与 Horizon Object</strong><span>Section、符号、重定位、依赖闭包与完整性。</span></span>
       </a>
       <a class="portal-focus-card focus-card-core" href="development/implementation-roadmap.html">
         <span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>SAFE CORE</b></span>
@@ -146,9 +146,9 @@ permalink: "/index.html"
         <span class="lifecycle-copy"><strong>Noema Object → Linked Object</strong><span>解析符号、应用类型化重定位、合并依赖闭包；硬约束或权限冲突必须失败。</span></span>
         <span class="lifecycle-state">LINK</span>
       </a>
-      <a href="components/noema-object-system.html">
+      <a href="components/agent-harness.html">
         <span class="lifecycle-number">03</span>
-        <span class="lifecycle-copy"><strong>Verified Object → Fulfillment Runtime</strong><span>装载器验证结构、完整性与策略，再把已验证对象交给受约束生成式求解和实现化。</span></span>
+        <span class="lifecycle-copy"><strong>Loaded State → Harness → Runtime</strong><span>对象系统交付不可变状态；Harness 管理上下文与能力；Runtime 在验收契约下求解并评价候选。</span></span>
         <span class="lifecycle-state">LOAD</span>
       </a>
     </div>

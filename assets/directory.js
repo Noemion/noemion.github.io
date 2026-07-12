@@ -71,6 +71,35 @@
     return;
   }
 
+  document.querySelectorAll(".manual-article table").forEach((table) => {
+    if (table.parentElement?.classList.contains("table-wrap")) return;
+    const wrapper = document.createElement("div");
+    wrapper.className = "table-wrap manual-table-wrap";
+    table.before(wrapper);
+    wrapper.append(table);
+  });
+
+  const contentMain = document.querySelector('body[data-page-role="content"]:not([data-docs-layout="true"]) main');
+  const contentHeadings = contentMain
+    ? Array.from(contentMain.querySelectorAll(":scope > section > h2"))
+    : [];
+  if (contentMain && contentHeadings.length >= 6) {
+    const outline = document.createElement("nav");
+    outline.className = "page-outline";
+    outline.setAttribute("aria-label", "章节导航");
+    const label = document.createElement("strong");
+    label.textContent = "Sections";
+    outline.append(label);
+    contentHeadings.forEach((heading, index) => {
+      if (!heading.id) heading.id = `section-${String(index + 1).padStart(2, "0")}`;
+      const link = document.createElement("a");
+      link.href = `#${heading.id}`;
+      link.textContent = heading.textContent.trim();
+      outline.append(link);
+    });
+    contentMain.querySelector(":scope > .hero")?.insertAdjacentElement("afterend", outline);
+  }
+
   const DIRECTORY_MODULES = Object.freeze({
     project: {
       kicker: "Project",
@@ -123,6 +152,7 @@
           items: [
             { href: "architecture/index.html", label: "架构总览" },
             { href: "architecture/noema-lifecycle.html", label: "Noema 生命周期" },
+            { href: "architecture/decisions.html", label: "架构决定" },
             { href: "architecture/open-questions.html", label: "开放问题" }
           ]
         },
@@ -142,7 +172,8 @@
             { href: "components/noesis-core.html", label: "Noesis Core" },
             { href: "components/noema-object-system.html", label: "Noema Object System" },
             { href: "components/horizon-engine.html", label: "Horizon Engine" },
-            { href: "components/agent-harness.html", label: "Agent Harness" }
+            { href: "components/agent-harness.html", label: "Agent Harness" },
+            { href: "components/fulfillment-runtime.html", label: "Fulfillment Runtime" }
           ]
         }
       ]
@@ -386,7 +417,7 @@
         { href: "specifications/noema-ir.html", label: "Noema IR", description: "目标、约束、歧义、证据与验收语义", cover: "noema-ir", coverLabel: "INTENT GRAPH" },
         { href: "specifications/noema-object.html", label: "Noema Object", description: "Section、符号、重定位与完整性边界", cover: "noema-object", coverLabel: "OBJECT MAP" },
         { href: "specifications/horizon-object.html", label: "Horizon Object", description: "依赖闭包、共享对象与渐进式披露", cover: "horizon-object", coverLabel: "DISCLOSURE HORIZON" },
-        { href: "components/index.html", label: "系统组件", description: "确定性核心、链接装载、Fulfillment Runtime 与 Horizon Engine", cover: "components", coverLabel: "SYSTEM LAYERS" }
+        { href: "components/index.html", label: "系统组件", description: "候选、编译、对象、Harness 与 Runtime 职责", cover: "components", coverLabel: "SYSTEM LAYERS" }
       ]
     },
     {
@@ -698,9 +729,21 @@
   const interactiveMobileMenu = window.matchMedia("(max-width: 839px)");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let closeTimer = 0;
+  let lockedScrollY = 0;
 
   const setPageScrollLock = (locked) => {
-    document.documentElement.classList.toggle("mobile-directory-open", locked && interactiveMobileMenu.matches);
+    const shouldLock = locked && interactiveMobileMenu.matches;
+    if (shouldLock && !document.documentElement.classList.contains("mobile-directory-open")) {
+      lockedScrollY = window.scrollY;
+      document.documentElement.style.setProperty("--mobile-directory-scroll-top", `${-lockedScrollY}px`);
+      document.documentElement.classList.add("mobile-directory-open");
+      return;
+    }
+    if (!shouldLock && document.documentElement.classList.contains("mobile-directory-open")) {
+      document.documentElement.classList.remove("mobile-directory-open");
+      document.documentElement.style.removeProperty("--mobile-directory-scroll-top");
+      window.scrollTo(0, lockedScrollY);
+    }
   };
 
   const finishPanelClose = () => {
@@ -738,6 +781,14 @@
   document.addEventListener("pointerdown", (event) => {
     if (interactiveMobileMenu.matches && panel?.open && !panel.contains(event.target)) closePanel();
   });
+  const containOpenMenuGesture = (event) => {
+    if (!interactiveMobileMenu.matches || !panel?.open || panel.classList.contains("is-closing")) return;
+    if (nav.contains(event.target)) return;
+    event.preventDefault();
+    closePanel();
+  };
+  document.addEventListener("wheel", containOpenMenuGesture, { passive: false });
+  document.addEventListener("touchmove", containOpenMenuGesture, { passive: false });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && interactiveMobileMenu.matches && panel?.open) {
       closePanel();

@@ -27,7 +27,7 @@ badges: ["noemlink", "Phase 4 / Phase 5"]
 5. **结构合并：**规划兼容 Section、字符串、NIR 图和契约的目标位置。
 6. **ID 与引用修正：**建立双向映射并应用类型化重定位；见[重定位](relocations.html)。
 7. **语义合并：**按类型代数合并约束、权限与披露图；见[Horizon Object 链接](horizon-linking.html)。
-8. **布局与封存：**构建 Segment、哈希和链接映射，执行独立验证后原子提交；见[装载与安全](loader-security.html)。
+8. **布局与封存：**构建 Segment、哈希和链接映射，通过链接器内部全量自检后原子提交；提交产物仍必须再由 noemvalidate 独立验证，见[装载与安全](loader-security.html)。
 
 ## 阶段检查点
 
@@ -36,7 +36,7 @@ badges: ["noemlink", "Phase 4 / Phase 5"]
 | 输入冻结 | 所有内容身份、配置和上限确定。 | Input 清单、规范化链接请求。 |
 | 解析闭包 | 强引用已解析，归档选择达到不动点。 | 符号选择表、成员拉入理由。 |
 | 合并计划 | Section、ID、重定位、权限和约束无冲突。 | 未提交的链接计划。 |
-| 产物提交 | 序列化对象通过全量结构与语义自检。 | Linked Object、链接映射、验证摘要。 |
+| 产物提交 | 序列化对象通过链接器内部全量结构与语义自检。 | Linked Object、链接映射、内部自检摘要；下游独立 Layered Verdict 尚未产生。 |
 
 ## 确定性与复杂度约束
 

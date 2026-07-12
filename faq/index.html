@@ -16,22 +16,23 @@ permalink: "/faq/index.html"
     </section>
     <section>
       <h2>架构与设计</h2>
-      <details><summary>NIR、NOBJ 和 HOBJ 分别负责什么？</summary><p>概览见<a href="../architecture/">架构入口</a>；涉及格式和语义约束时，以<a href="../specifications/">规范登记页</a>所指向的权威文件为准。</p></details>
+      <details><summary>NIR、NOBJ 和 HOBJ 分别负责什么？</summary><p>NIR 表达目标、约束、歧义、证据和验收条件；NOBJ 把这些语义封装为可重定位、可验证的对象；HOBJ 保存可按依赖、权限和任务逐步披露的共享内容。三者的关系见<a href="../architecture/">架构入口</a>，精确约束以<a href="../specifications/">规范登记页</a>所指向的权威文件为准。</p></details>
+      <details><summary>Agent Harness 和 Fulfillment Runtime 有什么区别？</summary><p>Agent Harness 是运行外侧的控制平面，管理上下文、能力、策略、观察、预算和人工升级；Fulfillment Runtime 在已验证对象与运行配置下生成并评价候选结果。模型不能绕过 Harness 直接调用能力，Runtime 也不能修改对象约束。可分别阅读 <a href="../components/agent-harness.html">Agent Harness</a> 与 <a href="../components/fulfillment-runtime.html">Fulfillment Runtime</a>。</p></details>
       <details><summary>尚未决定的架构事项在哪里？</summary><p>对象命名、ABI、模型工程和硬件条件等未决事项保留在<a href="../architecture/open-questions.html">开放问题</a>中。</p></details>
     </section>
     <section>
       <h2>使用与安装</h2>
-      <details><summary>现在可以下载安装吗？</summary><p>不可以。项目处于规范与安全二进制核心开发阶段，<a href="../downloads/">下载页</a>会如实标注资源状态。</p></details>
+      <details><summary>现在可以下载安装吗？</summary><p>不可以。项目处于最小规范与安全二进制核心设计阶段，尚未开始核心实现；<a href="../downloads/">下载页</a>会如实标注资源状态。</p></details>
     </section>
     <section>
       <h2>安全与确定性</h2>
-      <details><summary>Deterministic Profile会调用模型吗？</summary><p>不会。Deterministic Profile必须无模型、确定且可复现；具体约束以<a href="../specifications/">规范登记页</a>所指向的权威文件为准。</p></details>
+      <details><summary>Deterministic Profile 会调用模型吗？</summary><p>不会。Deterministic Profile 必须无模型、确定且可复现；具体约束以<a href="../specifications/">规范登记页</a>所指向的权威文件为准。</p></details>
       <details><summary>模型能直接生成 NOBJ 吗？</summary><p>不能。一切模型输出均视为不可信，模型不得决定二进制布局或直接生成 NOBJ；规范依据见<a href="../specifications/">规范登记页</a>。</p></details>
     </section>
     <section>
       <h2>开发与贡献</h2>
       <details><summary>当前优先开发什么？</summary><p>当前正在完成最小规范与安全二进制核心设计，下一步开发 Checked 读取器/对象写入器、结构验证器和对应的恶意对象测试。实时状态见<a href="../development/current-stage.html">当前项目阶段</a>。</p></details>
-      <details><summary>项目按什么顺序开发？</summary><p>先完成规范和安全二进制核心，再开发 Deterministic 编译链接、可信装载与 Fulfillment Runtime，最后进入模型工程。每一步都会明确交付内容和验证结果，具体顺序见<a href="../development/implementation-roadmap.html">实施路线图</a>。</p></details>
+      <details><summary>项目按什么顺序开发？</summary><p>先完成规范和安全二进制核心，再开发 Deterministic 编译链接、发布签名、可信装载、Agent Harness 与 Fulfillment Runtime，最后进入模型工程。每一步都会明确交付内容和验证结果，具体顺序见<a href="../development/implementation-roadmap.html">实施路线图</a>。</p></details>
       <details><summary>论文、专利和标准材料可以直接复用网站内容吗？</summary><p>可以把网站作为问题、架构和追溯入口，但引用时必须记录版本和成熟度，并核对权威规范、ADR、实验或测试证据。专利公开前需要新颖性与权属审查；标准提案需要可测试条款、互操作案例和安全分析。</p></details>
     </section>
     <section>
