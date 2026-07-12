@@ -132,6 +132,10 @@ ROLE_BY_KIND = {
     "docs": "docs-index",
     "topic": "docs-topic",
 }
+SITE_MODULES = {
+    "project", "about", "architecture", "specifications", "components",
+    "tools", "docs", "development", "resources", "support",
+}
 TOOL_PROJECT_SECTIONS = [
     "它解决什么问题",
     "当前状态",
@@ -345,6 +349,7 @@ class PageParser(HTMLParser):
         self.active_section = None
         self.active_h2 = None
         self.page_role = None
+        self.site_module = None
         self.tool_id = None
         self.stack = []
 
@@ -364,6 +369,7 @@ class PageParser(HTMLParser):
             self.ids.append(data["id"])
         if tag == "body" and data.get("data-page-role"):
             self.page_role = data["data-page-role"]
+            self.site_module = data.get("data-site-module")
             self.tool_id = data.get("data-tool-id")
         if tag == "a" and "href" in data:
             href = data["href"]
@@ -854,6 +860,9 @@ def validate_jekyll_sources():
             "site.github.build_revision",
             "?v={{ asset_version | escape }}",
             'data-page-role="{{ page.page_role }}"',
+            'data-site-module="{{ page_site_module }}"',
+            "page_site_module = 'resources'",
+            "page_site_module = 'support'",
         ):
             if token not in layout_text:
                 errors.append(f"default layout missing contract: {token}")
@@ -970,6 +979,20 @@ def validate_jekyll_sources():
             '.site-theme-menu[data-state="open"]',
             ".theme-icon-sun",
             ".theme-icon-moon",
+            'body[data-site-module="about"]',
+            'body[data-site-module="architecture"]',
+            'body[data-site-module="specifications"]',
+            'body[data-site-module="components"]',
+            'body[data-site-module="tools"]',
+            'body[data-site-module="docs"]',
+            'body[data-site-module="development"]',
+            'body[data-site-module="resources"]',
+            'body[data-site-module="support"]',
+            "clip-path:var(--module-hero-clip)",
+            "clip-path:var(--module-card-clip)",
+            "radial-gradient(circle at var(--module-node-1)",
+            'body[data-docs-layout="true"] .hero::before{',
+            "clip-path:polygon(0 0,74% 0,100% 26%,100% 100%,0 100%)",
         ):
             if token not in shared_css:
                 errors.append(f"shared styles missing site-wide design contract: {token}")
@@ -987,6 +1010,12 @@ def validate_jekyll_sources():
             errors.append("1000-1217px documentation override must follow the base desktop docs layout")
         if "margin-left:300px" in shared_css:
             errors.append("content pages must not reserve a meaningless fixed 300px left gap")
+        if re.search(
+            r'body\[data-docs-layout="true"\]\s+\.hero::before,\s*'
+            r'body\[data-docs-layout="true"\]\s+\.hero::after\s*\{display:none\}',
+            shared_css,
+        ):
+            errors.append("documentation heroes must preserve their folded-page geometry")
         for legacy_selector in (
             ".portal-header",
             ".portal-header-inner",
@@ -1031,6 +1060,8 @@ def validate_jekyll_sources():
         "components": "components-motion.md",
         "images": "images.md",
         "internal-tools": "internal-tools.md",
+        "geometric-layouts": "geometric-layouts.md",
+        "philosophical-visual-language": "philosophical-visual-language.md",
     }
     design_root = SOURCE_ROOT / "design-system"
     design_index = design_root / "README.md"
@@ -1451,8 +1482,27 @@ def main():
 
     for row in route_rows:
         path = ROOT / row["route"]
-        if path.exists() and parse(path).page_role != ROLE_BY_KIND[row["kind"]]:
+        if not path.exists():
+            continue
+        parser = parse(path)
+        if parser.page_role != ROLE_BY_KIND[row["kind"]]:
             errors.append(f"{row['route']}: page role does not match registry kind")
+        route_head = row["route"].split("/", 1)[0]
+        expected_module = (
+            "project" if row["route"] == "index.html"
+            else "resources" if route_head in {"downloads", "news"}
+            else "support" if route_head == "faq"
+            else route_head
+        )
+        if expected_module not in SITE_MODULES:
+            errors.append(f"{row['route']}: unknown expected site module {expected_module!r}")
+        elif parser.site_module != expected_module:
+            errors.append(
+                f"{row['route']}: data-site-module must be {expected_module!r}, "
+                f"got {parser.site_module!r}"
+            )
+        if row["kind"] != "portal" and parser.class_counts["hero"] != 1:
+            errors.append(f"{row['route']}: every non-portal page must expose one module-aware hero")
 
     for route in NORMATIVE_ROUTES:
         path = ROOT / route

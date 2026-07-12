@@ -12,6 +12,7 @@
 ## Jekyll 源码模型
 
 - `_layouts/default.html`：全站 HTML 外壳，负责语言、标题、共享 CSS/JavaScript、页面角色和正文插槽。
+- `_layouts/default.html` 同时根据正式路由写入 `data-site-module`；共享样式据此应用背景、架构、规范、组件、工具、指南、开发、资源和常见问题各自的几何母题，页面不手写模块样式。
 - `_layouts/manual.html`：手册布局，负责面包屑、Hero、正文容器、动态索引和上下页导航，并继承默认外壳。
 - `_includes/site-header.html`：品牌入口与空目录容器；具体目录由 `assets/directory.js` 按当前路由生成，项目阶段入口从统一时间线配置读取。
 - `_includes/project-timeline.html`：通用项目时间线渲染器，接收页面指定的数据对象并生成阶段列表。
@@ -94,6 +95,10 @@ badges: ["Documentation"]
 桌面端统一使用约 1200px 居中连续画布、64px 顶部导航、近白纸面、细分隔线、大字号编辑式标题和高密度内容行；移动端按阅读顺序折叠为单列。布局围绕 Noemion 的对象语义、工程内容、图形、配色和成熟度语言建立，不以装饰削弱技术边界。
 
 页面角色采用同一设计语言下的不同页面范式：`portal` 使用首页叙事；`section` 使用分组列表；`content` 使用编辑式文章；`tool-project` 使用主内容与状态面板；所有 `/docs/` 路由及 `docs-index`、`docs-topic` 使用固定文档栏和阅读区。所有顶部一级入口必须支持悬停与键盘聚焦展开，卡片标题、圆形箭头和表面提供一致反馈；按压缩放为 0.96，进入与状态切换支持减少动态效果。完整规则见 [`sitewide-design-system.md`](sitewide-design-system.md)，首页内容蓝图见 [`homepage-design.md`](homepage-design.md)。
+
+模块视觉身份由 [`design-system/geometric-layouts.md`](design-system/geometric-layouts.md) 统一维护：同一模块的目录页、专题页和手册共享一个可解释的几何母题，页面角色只调整面积与密度。所有形状由共享布局和 CSS 生成，普通页面和 Markdown 手册正文不写页面级几何标记。
+
+分析哲学相关视觉由 [`design-system/philosophical-visual-language.md`](design-system/philosophical-visual-language.md) 约束：只使用与项目直接相关的表达、命题、关系、对象和证据线图，不把哲学家肖像、古典装饰或名言当作技术内容。
 
 修改页面前从 [`design-system/README.md`](design-system/README.md) 进入设计路由，并按页面角色读取门户、目录、专题、工具项目、手册或共享组件对应文档。设计文档目录被 Jekyll 排除，不会生成公开站点页面。
 

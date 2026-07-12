@@ -25,6 +25,8 @@
 | 技术长文、工具说明与手册正文可读性 | 修改正文宽度、字号、行高、固定信息栏或长内容节奏 | [`readability.md`](readability.md)，并继续读取所属页面角色文档 |
 | 卡片、按钮、表格、Callout、流程、动效 | 修改共享视觉组件或状态反馈 | [`components-motion.md`](components-motion.md) |
 | 图片、照片、生成式视觉、裁切与图片动效 | 新增或替换 `assets/images/`，或修改页面中的 `<img>` / 图片背景 | [`images.md`](images.md)，并继续读取所属页面角色文档 |
+| 模块几何母题、Hero 多边形、章节形状与文档折页 | 修改任一正式页面的几何布局或模块视觉身份 | [`geometric-layouts.md`](geometric-layouts.md)，并继续读取所属页面角色文档 |
+| 分析哲学线条、节点、命题关系与哲学相关图形 | 新增或修改任何哲学来源的视觉表达 | [`philosophical-visual-language.md`](philosophical-visual-language.md)、[`geometric-layouts.md`](geometric-layouts.md) |
 
 工具页按路径中的 `<tool>` 路由。例如修改 `tools/noeminspect/index.html` 时，先读 `tool-project.md`，再读 `internal-tools.md#noeminspect`；修改 `tools/noemlink/docs/*.md` 时读 `manual.md`，并继承 `internal-tools.md#noemlink` 的工具视觉签名。
 
