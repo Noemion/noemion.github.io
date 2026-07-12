@@ -18,17 +18,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+      - name: Set up locked Ruby and Bundler
+        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1 # v1
+        with:
+          bundler-cache: true
       - name: Validate Jekyll sources
         run: python3 tests/site_quality_test.py
       - name: Validate JavaScript syntax
         run: node --check assets/directory.js && node --check assets/theme.js
       - name: Configure GitHub Pages
+        id: pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
       - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
-        with:
-          source: ./
-          destination: ./_site
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
       - name: Publish Markdown discovery index
         run: sudo install -m 0644 sitemap.md _site/sitemap.md
       - name: Validate rendered site

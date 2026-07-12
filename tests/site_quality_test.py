@@ -776,14 +776,30 @@ def validate_jekyll_sources():
         for script in ("assets/directory.js", "assets/theme.js"):
             if f"node --check {script}" not in workflow_text:
                 errors.append(f"Pages workflow must syntax-check {script}")
-        official_action_refs = re.findall(
-            r"uses:\s+(actions/[A-Za-z0-9_-]+)@([^\s#]+)", workflow_text
+        action_refs = re.findall(
+            r"uses:\s+([A-Za-z0-9_-]+/[A-Za-z0-9_-]+)@([^\s#]+)", workflow_text
         )
-        if len(official_action_refs) != 5:
-            errors.append("Pages workflow must declare the five reviewed official Actions")
-        for action_name, action_ref in official_action_refs:
+        expected_actions = {
+            "actions/checkout",
+            "ruby/setup-ruby",
+            "actions/configure-pages",
+            "actions/upload-pages-artifact",
+            "actions/deploy-pages",
+        }
+        if {action_name for action_name, _ in action_refs} != expected_actions:
+            errors.append("Pages workflow must declare exactly the five reviewed build and deploy Actions")
+        for action_name, action_ref in action_refs:
             if not re.fullmatch(r"[0-9a-f]{40}", action_ref):
                 errors.append(f"Pages workflow must pin {action_name} to a full commit SHA")
+        for workflow_contract in (
+            "bundler-cache: true",
+            'bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"',
+            "JEKYLL_ENV: production",
+        ):
+            if workflow_contract not in workflow_text:
+                errors.append(f"Pages workflow missing locked build contract: {workflow_contract}")
+        if "actions/jekyll-build-pages" in workflow_text:
+            errors.append("Pages workflow must not use the implicit Jekyll dependency environment")
         dependabot = SOURCE_ROOT / ".github" / "dependabot.yml"
         if not dependabot.exists() or "package-ecosystem: github-actions" not in dependabot.read_text():
             errors.append("Dependabot must track immutable GitHub Actions pins")
