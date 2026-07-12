@@ -455,6 +455,10 @@ def build_vector(records, vector_id):
         return build_container(mutated, {1: b"\xb8\x07" + canonical[1:]})
     if vector_id == "WV-P1-REJECT-EDGE-LIMIT-001":
         return build_container(mutated, {1: b"\xa1\x01\x9a\x00\x04\x00\x01"})
+    if vector_id == "WV-P1-REJECT-DEPTH-LIMIT-001":
+        return build_container(mutated, {1: b"\xa1\x01" + b"\x81" * 17 + b"\x00"})
+    if vector_id == "WV-P1-REJECT-STRING-LIMIT-001":
+        return build_container(mutated, {1: b"\xa1\x01\x7a\x00\x10\x00\x01"})
     return build_container(mutated)
 
 
@@ -525,12 +529,12 @@ def main():
             reject_count += 1
     if len(seen) != len(manifest.get("vectors", [])):
         errors.append("END-P1 vector IDs must be unique")
-    if accept_count != 2 or reject_count != 7:
-        errors.append("END-P1 requires two semantic accepts and seven deterministic rejects")
+    if accept_count != 2 or reject_count != 9:
+        errors.append("END-P1 requires two semantic accepts and nine deterministic rejects")
     if errors:
         print("\n".join(errors))
         return 1
-    print("PASS: END-P1 encoded and decoded 9 complete payload vectors (2 semantic accepts, 7 deterministic rejects)")
+    print("PASS: END-P1 encoded and decoded 11 wire vectors (2 semantic accepts, 9 deterministic rejects)")
     return 0
 
 

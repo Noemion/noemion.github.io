@@ -48,6 +48,16 @@
       "id": "WV-P1-REJECT-EDGE-LIMIT-001",
       "hex": "vectors/wire/p1/edge-limit.hex",
       "expect": {"result": "reject", "code": "endem.wire.profile.limit", "clause": "END-FMT-010", "layer": "profile", "path": "/"}
+    },
+    {
+      "id": "WV-P1-REJECT-DEPTH-LIMIT-001",
+      "hex": "vectors/wire/p1/depth-limit.hex",
+      "expect": {"result": "reject", "code": "endem.wire.profile.limit", "clause": "END-FMT-010", "layer": "profile", "path": "/"}
+    },
+    {
+      "id": "WV-P1-REJECT-STRING-LIMIT-001",
+      "hex": "vectors/wire/p1/string-limit.hex",
+      "expect": {"result": "reject", "code": "endem.wire.profile.limit", "clause": "END-FMT-010", "layer": "profile", "path": "/"}
     }
   ]
 }

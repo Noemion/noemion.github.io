@@ -472,6 +472,8 @@
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/edge-limit.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/depth-limit.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p1/string-limit.hex"},
         {"status": "planned", "ref": "peira:p0-limit-boundaries"}
       ]
     },
