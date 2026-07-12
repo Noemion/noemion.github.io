@@ -1,7 +1,7 @@
 id: noemion-project-progress
 title: 项目进度时间线
 aria_label: Noemion 项目进度时间线
-current_stage_id: endem-specification-core-design
+current_stage_id: endem-core-validation
 
 overview:
   kicker: PROJECT / PROGRESS
@@ -14,12 +14,12 @@ overview:
   roadmap_href: /development/implementation-roadmap.html
 
 current:
-  summary: 项目已公开 END-CORE 与 END-FMT 0.1.0-draft、END-P0、结构错误目录和首组语义/字节向量。当前使用同一组字节比较实现语言与构建方案，再进入 poie、elenk、独立 theor 和 peira 的最小纵向切片。
+  summary: 项目已公开 END-CORE、END-FMT、END-P0 和首组语义/字节向量，并通过 C/Rust 双原型、差分、Sanitizer、模糊和重复构建选择 Rust 作为 Poiet 与生产读取核心语言。当前开始 poie/elenk/theor/peira 最小纵向切片。
   facts:
     - label: 已完成
       value: Endem 词汇与应用拓扑决定
     - label: 正在进行
-      value: 实现语言与构建方案实验
+      value: Rust 最小安全核心工作区
     - label: 后续工作
       value: poie/elenk/theor/peira 纵向切片
 
@@ -35,15 +35,15 @@ items:
     title: Endem 词汇与单一应用拓扑
     description: 已将旧对象与工具家族收敛为 Endem、Synem、Dromen、Tekmor 和唯一公开 CLI endem；旧入口不保留兼容别名。
   - id: endem-specification-core-design
+    state: confirmed
+    label: 已完成
+    title: 最小规范与安全核心设计
+    description: 已形成语义与实验性容器条款、END-P0、错误目录、规范字节，并用 P0-LANG-001 选择首版核心语言。
+  - id: endem-core-validation
     state: current
     label: 正在进行
-    title: 最小规范与安全核心设计
-    description: 已形成语义与实验性容器条款、END-P0、错误目录和首组规范字节；正在用同一向量比较候选语言与构建方案。
-  - id: endem-core-validation
-    state: next
-    label: 计划开发
     title: poie/elenk/theor/peira 纵向切片
-    description: 计划实现规范写入器、生产解析器、独立只读 Theor、往返测试、恶意语料、模糊测试和双环境复现。
+    description: 正在建立 Rust 安全核心工作区，实现规范写入器、生产解析器、独立只读 Theor、恶意语料、模糊测试和双环境复现。
   - id: synem-binding-release
     state: future
     label: 后续规划

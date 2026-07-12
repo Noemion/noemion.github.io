@@ -106,6 +106,56 @@ def validate_registry(registry, spec_text, threat_text, errors):
         if wire_term and wire_term.get("decision_status") != "accepted-draft":
             errors.append("spec/registry.json: wire-format must be accepted-draft")
 
+    experiments = registry.get("experiments")
+    if not isinstance(experiments, list) or len(experiments) != 1:
+        errors.append("spec/registry.json: exactly one P0 language experiment is required")
+    else:
+        experiment = experiments[0]
+        expected_experiment = {
+            "id": "P0-LANG-001",
+            "status": "verified-structural-slice",
+            "protocol": "experiments/p0-language/README.md",
+            "results": "experiments/p0-language/results.json",
+            "workflow": ".github/workflows/p0-language.yml",
+            "decision": "architecture/adr-0012-rust-core-language.html",
+            "production_implementation": False,
+        }
+        for key, value in expected_experiment.items():
+            if experiment.get(key) != value:
+                errors.append(f"P0-LANG-001 {key} must be {value!r}")
+        for path_field in ("protocol", "results", "workflow", "decision"):
+            if not (ROOT / experiment.get(path_field, "")).is_file():
+                errors.append(f"P0-LANG-001 missing {path_field} file")
+        results = load_json(ROOT / experiment.get("results", ""), errors)
+        if results:
+            if results.get("decision", {}).get("poiet_structural_core") != "Rust 1.97.0 stable":
+                errors.append("P0-LANG-001 must record the bounded Rust core decision")
+            if results.get("linux_ci", {}).get("conclusion") != "success":
+                errors.append("P0-LANG-001 must retain successful Linux CI evidence")
+            if results.get("macos", {}).get("differential_mutation_count") != 144:
+                errors.append("P0-LANG-001 must retain the 144-case differential result")
+            macos = results.get("macos", {})
+            if macos.get("vector_count") != 6 or macos.get("all_vectors_match") is not True:
+                errors.append("P0-LANG-001 must retain the 6-vector macOS result")
+            if macos.get("differential_mutations_match") is not True or macos.get("c_sanitizers_pass") is not True:
+                errors.append("P0-LANG-001 must retain differential and sanitizer success")
+            for language, source in (
+                ("c", ROOT / "experiments/p0-language/c/validator.c"),
+                ("rust", ROOT / "experiments/p0-language/rust/main.rs"),
+            ):
+                artifact = macos.get("artifacts", {}).get(language, {})
+                actual_lines = sum(1 for line in source.read_text().splitlines() if line.strip())
+                if artifact.get("source_nonblank_lines") != actual_lines:
+                    errors.append(f"P0-LANG-001 {language} source line evidence drifted")
+                if artifact.get("repeated_binary_sha256_match") is not True:
+                    errors.append(f"P0-LANG-001 {language} repeated build evidence must be true")
+            workflow_text = (ROOT / experiment["workflow"]).read_text()
+            for token in ("rustup toolchain install 1.97.0", "--require-libfuzzer"):
+                if token not in workflow_text:
+                    errors.append(f"P0-LANG-001 workflow missing {token!r}")
+            if results.get("linux_ci", {}).get("required_libfuzzer_runs") != 10000:
+                errors.append("P0-LANG-001 Linux evidence must require 10000 libFuzzer runs")
+
     spec_clause_ids = SPEC_HEADING.findall(spec_text)
     if not spec_clause_ids:
         errors.append("spec sources: no normative clause headings found")
@@ -348,6 +398,20 @@ def validate_public_boundary(errors):
             "机器可读登记",
             "spec/endem-threat-model.md",
         ),
+        "architecture/adr-0012-rust-core-language.html": (
+            "Rust 1.97.0",
+            "forbid(unsafe_code)",
+            "10,000 次 libFuzzer",
+            "experiments/p0-language/results.json",
+            "Theor 必须另写解析结构和错误路径",
+            "不是生产实现",
+        ),
+        "development/implementation-roadmap.html": (
+            "P0-LANG-001",
+            "Rust 1.97.0",
+            "C/Rust 双原型",
+            "建立首个实现工作区",
+        ),
     }
     for relative_path, tokens in public_contracts.items():
         text = (ROOT / relative_path).read_text()
@@ -382,7 +446,8 @@ def main():
         return 1
     print(
         "PASS: END-CORE and END-FMT 0.1.0-draft have unique clauses, explicit "
-        "maturity, traceable evidence, 10 registered threats, and semantic vectors"
+        "maturity, traceable evidence, 10 registered threats, semantic vectors, "
+        "and P0-LANG-001 implementation evidence"
     )
     return 0
 

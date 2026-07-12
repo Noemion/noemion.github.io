@@ -1,0 +1,107 @@
+{
+  "evidence_format": "noemion.language-experiment.v1",
+  "experiment": "P0-LANG-001",
+  "date": "2026-07-13",
+  "format": "END-FMT 0.1.0-draft",
+  "profile": "END-P0 0.1.0-draft",
+  "decision_scope": "first Poiet and production-reader structural core only",
+  "macos": {
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+    "vector_count": 6,
+    "all_vectors_match": true,
+    "differential_mutation_count": 144,
+    "differential_mutations_match": true,
+    "c_sanitizers_pass": true,
+    "c_libfuzzer_available": false,
+    "c_libfuzzer_blocker": "Apple Command Line Tools did not contain libclang_rt.fuzzer_osx.a",
+    "artifacts": {
+      "c": {
+        "source_nonblank_lines": 266,
+        "binary_bytes": 34040,
+        "binary_sha256": "56bb8f4925b132ea3440ed02073957b74be332ba16d83f16072a14b1b706e38d",
+        "repeated_binary_sha256_match": true,
+        "dynamic_dependencies": ["/usr/lib/libSystem.B.dylib"]
+      },
+      "rust": {
+        "source_nonblank_lines": 168,
+        "binary_bytes": 488488,
+        "binary_sha256": "a106fed5d38db9f3f013f3abd548aa6eb4a6de2777a6c67c06959d5ae191203f",
+        "repeated_binary_sha256_match": true,
+        "dynamic_dependencies": ["/usr/lib/libSystem.B.dylib"]
+      }
+    }
+  },
+  "linux_ci": {
+    "runner": "ubuntu-24.04",
+    "rust_toolchain": "1.97.0",
+    "workflow": "Validate Phase 0 language experiment",
+    "run_id": 29205071270,
+    "run_url": "https://github.com/Noemion/noemion.github.io/actions/runs/29205071270",
+    "conclusion": "success",
+    "checkout": "success",
+    "locked_rust_install": "success",
+    "compiler_identity_recording": "success",
+    "differential_sanitizer_fuzz_reproducibility_step": "success",
+    "required_libfuzzer_runs": 10000
+  },
+  "comparison": {
+    "rust": {
+      "memory_boundary": "safe language subset with unsafe code forbidden",
+      "checked_arithmetic": "checked_add and checked_mul return explicit absence on overflow",
+      "third_party_runtime_dependencies": 0,
+      "strengths": [
+        "compile-time ownership and bounds safety without garbage collection",
+        "smaller prototype source surface for the same current vector slice",
+        "explicit checked arithmetic and easy unsafe-code prohibition",
+        "lockable toolchain and dependency graph"
+      ],
+      "costs": [
+        "larger optimized binary in the measured macOS build",
+        "requires a separately provisioned Rust toolchain",
+        "compiler diversity is not parser implementation diversity"
+      ]
+    },
+    "c": {
+      "memory_boundary": "manual memory and bounds discipline",
+      "checked_arithmetic": "project-defined helpers and review discipline",
+      "third_party_runtime_dependencies": 0,
+      "strengths": [
+        "small optimized binary",
+        "broad GNU and systems-tool availability",
+        "direct sanitizer and coverage-guided fuzzing instrumentation"
+      ],
+      "costs": [
+        "memory safety and lifetime correctness are not guaranteed by the language",
+        "more source was required for the same current vector slice",
+        "safety depends on warnings, sanitizers, fuzzing and manual review remaining enabled"
+      ]
+    }
+  },
+  "decision": {
+    "poiet_structural_core": "Rust 1.97.0 stable",
+    "rust_policy": [
+      "forbid unsafe code in the first vertical slice",
+      "use no third-party crates until a consumer and evidence justify one",
+      "use explicit checked arithmetic in every untrusted structural calculation",
+      "pin the exact toolchain and commit Cargo.lock",
+      "enable overflow checks in release builds"
+    ],
+    "c_prototype": "retain only as a non-production differential oracle and fuzz target",
+    "theor": "must use an independently written parser and error path; final implementation language remains subject to the independence audit",
+    "not_decided": [
+      "full deterministic CBOR implementation",
+      "complete END-CORE semantic schema",
+      "cross-platform byte-for-byte executable reproducibility",
+      "production Theor language",
+      "FFI and packaging ABI"
+    ]
+  },
+  "limitations": [
+    "Both prototypes implement only the current END-P0 structural vector slice.",
+    "Same-host repeated binary equality is not cross-platform reproducibility.",
+    "Ten thousand fuzz iterations are bounded evidence, not proof of defect absence.",
+    "Binary size and source lines are descriptive measurements, not standalone selection scores."
+  ]
+}

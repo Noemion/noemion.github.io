@@ -13,6 +13,8 @@
 
 [`endem-errors.md`](endem-errors.md) 登记结构与 Profile 错误码。[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存 JSON 语义外壳；`../vectors/wire/` 保存真实字节的十六进制表达。结构接受向量不等于语义有效 Endem。
 
+`registry.json` 还登记非规范实验及其决定链。P0-LANG-001 的协议与结果位于 `../experiments/p0-language/`；它支持 ADR-0012 的首版核心语言决定，但不会改变 END-CORE 或 END-FMT 的条款含义，也不把原型登记为生产实现。
+
 ## 规范强度
 
 只有大写的 `MUST`、`MUST NOT`、`SHOULD`、`SHOULD NOT` 与 `MAY` 具有规范强度，解释遵循 BCP 14。正文在首次出现时同时给出中文含义。

@@ -12,7 +12,7 @@ permalink: "/architecture/open-questions.html"
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
     <p class="lead">ADR-0010 已经采用现行制品、组件、六个语义面、三个制品状态和八个动作。这些名称与职责不再作为开放问题反复讨论。</p>
-    <p>END-CORE 与 END-FMT 0.1.0-draft 已把语义、安全和实验性容器写成唯一条款 ID，并建立 END-P0、结构错误目录与首组语义/字节向量。格式草案仍可修订，也没有冻结完整字段 schema、求值语言或实现选择。</p>
+    <p>END-CORE 与 END-FMT 已建立语义、容器、END-P0 和首组向量；ADR-0012 又根据 C/Rust 差分、Sanitizer、模糊和重复构建结果，为 Poiet 与生产读取核心选择 Rust。格式草案、完整字段 schema、Theor 最终实现和求值语言仍未冻结。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
 
@@ -45,7 +45,7 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-grid">
     <h2>实施与发布条件</h2>
-    <details open><summary>首版实现语言和仓库结构是什么？</summary><p>需要用同一组规范样本比较内存安全、溢出检查、模糊测试、跨平台、跨语言调用、依赖和复现成本。第一阶段不引入 LLVM、MLIR、BFD 或模型框架。</p></details>
+    <details open><summary>独立 Theor 使用什么实现边界？</summary><p>Poiet 与生产读取核心已选择 Rust；Theor 仍需另写数据结构、解析状态机和错误路径。可以使用 Rust 或另一种适合不可信读取的语言，但必须用依赖检查、变异和故障注入证明没有复用生产解析代码。</p></details>
     <details><summary>独立 Theor 怎样证明实现独立？</summary><p>需禁止共享生产解析库、生成代码和错误分类实现，并通过差分、变异和故障注入证明它能发现生产路径的共同假设。</p></details>
     <details><summary>名称何时满足正式发布条件？</summary><p>项目内部命名已经冻结，但公开发行前仍需检查目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。审查完成前不得声称商标可用。</p></details>
     <details><summary>怎样证明构建可复现？</summary><p>对象字节、工具二进制和签名真实性是三个不同属性。需要双路径构建、固定环境输入、逐字节比较和独立签名验证。</p></details>

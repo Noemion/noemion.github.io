@@ -18,6 +18,8 @@ badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 
 第一阶段只做规范和最小安全核心，不引入模型、LLVM、MLIR、多格式抽象或大型框架。
 
+ADR-0012 已选择 Rust 1.97.0 作为 Poiet 与生产读取核心语言。第一纵向切片禁止 `unsafe` 和第三方 crate，固定工具链、提交 `Cargo.lock`，并在 release 构建中继续检查整数溢出。C 原型只作差分与模糊测试依据，不进入生产代码。
+
 - 冻结 `rhem/semion/skena/telis/krin/apor` 的最小语义、不变量、错误和资源限制。
 - 实现规范写入器、生产解析器、确定性序列化和 `endem poie/elenk`。
 - 用不共享解析代码的实现交付 `endem theor`。
@@ -44,12 +46,12 @@ badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 ```text
 spec/       权威条款、registry 与错误码
 vectors/    规范字节、注释、合法与畸形向量
-poiet/      写入器、生产解析器、poie/elenk/pleko
+poiet/      Rust 写入器、生产解析器、poie/elenk/pleko
 theor/      独立只读 Theor，不依赖生产解析器
 cli/        endem 调度与独立进程边界
 ```
 
-没有独立版本、权限、保密或真实消费者时不拆仓库。`theor` 可以共享规范常量生成物，但不能共享生产解析状态机；`praxe` 建立后必须是不同进程并使用最小权限。
+没有独立版本、权限、保密或真实消费者时不拆仓库。`theor` 只能共享公开规范与向量，不能共享生成常量、生产解析状态机或错误分类实现；`praxe` 建立后必须是不同进程并使用最小权限。
 
 ## 审查清单
 

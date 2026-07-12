@@ -7,11 +7,11 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的原生语义、事态分层、实验性容器、单一命令面和组件边界。</p><div class="badges"><span class="badge">ADR-0010 Accepted</span><span class="badge">ADR-0011 Draft</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的原生语义、实验性容器、安全核心语言、单一命令面和组件边界。</p><div class="badges"><span class="badge">ADR-0010 Accepted</span><span class="badge">ADR-0011 Draft</span><span class="badge">ADR-0012 Accepted</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010：原生词汇与事态分层</a>定义六个语义面、制品、组件、动作和生命周期；<a href="adr-0011-endem-container.html">ADR-0011：Endem 实验性容器格式</a>定义第一组可供两条读取路径共同解释的字节边界。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010：原生词汇与事态分层</a>定义六个语义面；<a href="adr-0011-endem-container.html">ADR-0011：Endem 实验性容器格式</a>定义字节边界；<a href="adr-0012-rust-core-language.html">ADR-0012：首版安全核心采用 Rust</a>把同一规范字节的 C/Rust 实验转化为有限实现决定。</p>
     <p>被保留的安全原则已经重新映射到 Poiet、Theor、Praxor、Dromen 和 Tekmor。历史词只解释为什么迁移，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -29,6 +29,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0009-propositional-kernel.html">ADR-0009 Endem 命题投影语义核</a></td><td>Superseded by ADR-0010</td><td>保留结构显示与未确定分层；五组字段和目标力量模型已取代。</td></tr>
       <tr><td><a href="adr-0010-native-lexicon.html">ADR-0010 原生词汇与事态分层</a></td><td>Accepted</td><td>当前六个语义面、一个根 skena、phain 比较、原生制品/组件/动作与生命周期。</td></tr>
       <tr><td><a href="adr-0011-endem-container.html">ADR-0011 Endem 实验性容器格式</a></td><td>Accepted Draft</td><td>采用固定前导、定宽目录、六记录、受限确定性 CBOR 与 END-P0；尚非稳定 ABI。</td></tr>
+      <tr><td><a href="adr-0012-rust-core-language.html">ADR-0012 首版安全核心采用 Rust</a></td><td>Accepted</td><td>Poiet 与生产读取核心固定 Rust 1.97.0、安全子集和零第三方依赖；C 只作非生产差分预言机。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -45,6 +46,7 @@ permalink: "/architecture/decisions.html"
       <tr><td>唯一 CLI</td><td><code>endem</code> 提供 poie/elenk/pleko/tasse/sphra/theor/praxe/peira。</td><td>应用项目、手册、安装包和自动化接口。</td></tr>
       <tr><td>独立与隔离</td><td>theor 不共享生产解析；praxe 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>
       <tr><td>实验性容器</td><td>END-FMT 0.1 采用 64 字节前导、48 字节目录项、六种关键记录和 END-P0 有限上限。</td><td>规范字节、错误分类、Poiet/Theor 语言实验；不构成稳定 ABI。</td></tr>
+      <tr><td>首版核心语言</td><td>Poiet 与生产读取核心使用 Rust 1.97.0，禁止 unsafe，首条切片不引入第三方 crate。</td><td>实现仓库、构建锁、受检算术、模糊测试和供应链边界。</td></tr>
     </tbody></table></div>
   </section>
 

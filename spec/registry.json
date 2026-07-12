@@ -46,6 +46,18 @@
       "scope": "Finite Phase 0 conformance limits and allowed END-FMT capabilities"
     }
   ],
+  "experiments": [
+    {
+      "id": "P0-LANG-001",
+      "status": "verified-structural-slice",
+      "scope": "C17 and safe Rust comparison for the END-P0 structural reader slice",
+      "protocol": "experiments/p0-language/README.md",
+      "results": "experiments/p0-language/results.json",
+      "workflow": ".github/workflows/p0-language.yml",
+      "decision": "architecture/adr-0012-rust-core-language.html",
+      "production_implementation": false
+    }
+  ],
   "terms": [
     {"term": "Noemion", "kind": "project", "decision_status": "accepted", "definition": "项目、新领域与社区总名"},
     {"term": "Endem", "kind": "artifact", "decision_status": "accepted", "definition": "最小、独立有效且可验证的期望终态单元"},
