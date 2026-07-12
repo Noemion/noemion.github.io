@@ -1,0 +1,57 @@
+---
+layout: default
+title: "ADR-0013 · END-P1 封闭语义载荷"
+page_role: "content"
+footer_text: "Noemion · ADR-0013"
+permalink: "/architecture/adr-0013-end-p1-payload.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0013</span></nav>
+  <header class="content-introduction"><h1>ADR-0013 · END-P1 封闭语义载荷</h1><p>保留 END-P0 作为结构实验，新建 END-P1 作为首个实现 Profile，明确六个记录的字段键、枚举、排序和引用规则。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">END-P1</span><span class="badge">Profile 2</span><span class="badge">ABI Unfrozen</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接决定</h2>
+    <p class="lead">Poiet 的首个纵向切片不写 END-P0。END-P0 只保留为固定头部、目录和受限 CBOR 的结构实验；生产候选改用 <code>profile_id=2</code> 的 END-P1，并且必须在六个记录内遵守封闭字段 schema。</p>
+    <p>这避免两种错误：一是把六个空映射误称为 Endem，二是在实现仓库里私自发明字段。END-P1 仍是实验性实现 Profile，不是稳定 ABI；开发阶段发现反例时可以直接修订，但必须同步 ADR、Profile、正反字节向量和两个读取路径。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么不能继续复用 END-P0</h2>
+    <div class="table-wrap"><table><thead><tr><th>现有证据</th><th>能够证明</th><th>不能证明</th></tr></thead><tbody>
+      <tr><td>END-P0 六个结构记录</td><td>读取器能安全定位六个关键载荷。</td><td>载荷内有哪些字段、引用和语义约束。</td></tr>
+      <tr><td>六个语义 JSON 向量</td><td>一个最小模型和五种拒绝原因能被实际执行。</td><td>JSON 是规范字节，或任意 JSON 可以直接写入 Endem。</td></tr>
+      <tr><td>C/Rust 结构实验</td><td>两种语言能对同一结构错误给出一致首错。</td><td>任何原型已经实现 Poiet、Theor 或 END-CORE。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>END-P1 关闭哪些接口</h2>
+    <ul>
+      <li>六个记录继续使用 kind 1–6；每个记录的根映射只允许登记键，未知键关闭失败。</li>
+      <li>符号、关系、角色、事态、观察要求和未决项使用显式标识与交叉引用，不复制自由文本图。</li>
+      <li>数组按稳定身份或编码值排序，重复项拒绝；Poiet 不采用输入顺序或哈希表遍历顺序。</li>
+      <li>来源范围以 Unicode 标量计数，并在解释投影前检查；媒体类型与语言标签保留原始标准化文本。</li>
+      <li>第一切片只编码 <code>kine</code>。<code>mene</code> 仍属于 END-CORE，但在时间区间模型另行决定前不进入 END-P1。</li>
+      <li><code>apor</code> 即使为空也编码为含显式 items 数组的记录；非空项保存候选、冲突、影响范围、允许的解决方式和决定主体。</li>
+    </ul>
+    <p>机器可读 Profile：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json</a></p>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部格式只提供机制</h2>
+    <p>RFC 8949 区分 well-formed、valid 与 application-expected 三层接受，并允许应用定义自己的具体数据模型。END-P1 采用这种分层和确定性编码，不采用通用 CBOR 的全部类型或开放扩展：<a href="https://www.rfc-editor.org/rfc/rfc8949.html">https://www.rfc-editor.org/rfc/rfc8949.html</a></p>
+    <p>语言字段按 BCP 47 保存，媒体字段按媒体类型注册结构保存；它们只描述来源，不证明投影正确：<a href="https://www.rfc-editor.org/rfc/rfc5646.html">https://www.rfc-editor.org/rfc/rfc5646.html</a>；<a href="https://www.rfc-editor.org/rfc/rfc6838.html">https://www.rfc-editor.org/rfc/rfc6838.html</a></p>
+    <p>Unicode 标量范围用于可重放来源位置，不能把字节、UTF-16 code unit 和用户可见字素混为同一单位：<a href="https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-2/">https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-2/</a></p>
+  </section>
+
+  <section class="content-wide">
+    <h2>明确不关闭的接口</h2>
+    <p>END-P1 不定义量化、时间区间、单位换算、摘要、签名、Semantic Key、Synem、coherent/attested、压缩、加密、远程披露或稳定 ABI。这些能力没有真实向量和消费者前，不占用字段键，也不以保留空字段假装完成。</p>
+  </section>
+
+  <section class="content-band">
+    <h2>进入实现的条件</h2>
+    <p>END-P1 只有在完整语义接受向量、未知字段拒绝、悬空引用拒绝和来源范围拒绝都形成规范字节，并由独立测试解码后，才允许建立生产 Poiet 工作区。Rust 与 Theor 随后分别重写读取状态机；测试脚本不能链接进生产实现。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0012-rust-core-language.html">← ADR-0012</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

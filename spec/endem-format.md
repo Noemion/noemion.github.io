@@ -4,7 +4,7 @@
 - 版本：`0.1.0-draft`
 - 日期：2026-07-13
 - 状态：实验性格式草案；由 ADR-0011 采用，尚不是稳定 ABI
-- 适用 Profile：`END-P0`（编号 `1`）
+- 适用 Profile：`END-P0`（编号 `1`，结构实验）与 `END-P1`（编号 `2`，首个封闭语义载荷）
 - 实现状态：只有规范向量检查器；尚无符合性实现
 
 ## 1. 范围与接受层次
@@ -65,7 +65,7 @@
 | 12 | 2 | `header_size` | `64` |
 | 14 | 2 | `directory_entry_size` | `48` |
 | 16 | 1 | `byte_order` | `1`，小端 |
-| 17 | 1 | `profile_id` | `1`，即 `END-P0` |
+| 17 | 1 | `profile_id` | `1` 为 `END-P0`；`2` 为 `END-P1` |
 | 18 | 1 | `state` | `0`，即 `nascent`；其他值在本 Profile 中拒绝 |
 | 19 | 1 | `flags` | `0` |
 | 20 | 4 | `record_count` | 记录目录项数量 |
@@ -164,19 +164,50 @@ CBOR 只承担记录内部的无歧义类型编码。记录编号、六个语义
 
 **验证：**`WV-REJECT-PAYLOAD-ROOT-001`；未来非最短与键顺序向量。
 
-## 7. Profile 与状态
+## 7. END-P1 封闭语义载荷
+
+END-P1 使用与 END-P0 相同的头部、目录、六个记录 kind 和确定性 CBOR 子集，但不接受空语义映射。机器可读字段登记维护在 `spec/profiles/end-p1.json`；该文件与本节共同构成 Profile 2 的权威字段源。
+
+每个 map 只允许登记键且必须包含全部 required key。标识符是 1–255 字节 ASCII 文本，匹配 `^[A-Za-z][A-Za-z0-9._:/#-]{0,254}$`。普通来源内容和冲突说明可以使用 UTF-8；语言标签与媒体类型必须是 ASCII 文本，并分别遵守 BCP 47 与媒体类型基本语法。
+
+| 记录 | 根映射键 | 主要嵌套结构 |
+| --- | --- | --- |
+| rhem | 1 source_id；2 subject；3 media_type；4 language；5 version；6 content；7 range | range：1 unit=0（Unicode scalar）；2 start；3 length |
+| semion | 1 symbols；2 relations | symbol：id/kind/source_ref；relation：id/predicate/roles/projection；role：name/symbol；projection：kind/id |
+| skena | 1 root；2 situations | situation：id/relation/polarity；polarity 0 positive、1 negative |
+| telis | 1 mode | END-P1 只允许 0 kine；mene 等待区间模型 |
+| krin | 1 required_phain；2 required_tekmor；3 on_missing_observation；4 on_evaluation_error；5 decision_authority | relation match 只允许 same-roles；缺观察为 agno；求值失败为 fault |
+| apor | 1 items | item：id/source_ref/candidates/conflict/impact_scope/allowed_resolutions/decision_authority |
+
+### END-FMT-013 — P1 字段闭包与规范排序
+
+**要求：**`profile_id=2` `MUST` 精确绑定 END-P1 0.1.0-draft。每个 map `MUST` 拒绝未知、缺失、重复或错误类型的键。symbols、relations、roles、situations、required_phain 与 apor items `MUST` 按各自 ASCII 稳定 ID 的原始字节升序排列；其余集合按确定性 CBOR 编码字节排序。身份相同的重复项 `MUST` 拒绝，不能靠后项覆盖。
+
+**失败：**字段集合、类型、枚举、顺序或重复不符合登记时，读取器必须在语义层原子失败并定位记录和路径。
+
+**验证：**END-P1 完整接受与未知字段拒绝字节向量；`tests/p1_payload_test.py`。
+
+### END-FMT-014 — P1 引用闭包与来源范围
+
+**要求：**rhem 范围端点 `MUST` 以受检算术落在 content 的 Unicode 标量数量内。semion 角色 `MUST` 引用已登记 symbol；skena root `MUST` 引用唯一 situation，situation 与 krin `MUST` 引用已登记 relation；所有 source_ref `MUST` 锚定当前 rhem source_id。P1 只允许受信规则或具名授权投影、kine 方向和显式 apor items。
+
+**失败：**任何范围越界、悬空引用、不可信投影、未登记方向或未记录歧义都必须语义拒绝，不能返回部分可信 Endem。
+
+**验证：**END-P1 完整接受、悬空引用与来源范围拒绝字节向量；`tests/p1_payload_test.py`。
+
+## 8. Profile 与状态
 
 ### END-FMT-010 — Profile 固定且有限
 
-**要求：**`profile_id=1` `MUST` 精确绑定 `spec/profiles/end-p0.json`。调用者可以设置更低的本地预算，但 `MUST NOT` 在不改变 Profile 身份的情况下提高规范上限。所有限制必须在相应分配、递归或输出前检查。
+**要求：**`profile_id=1` `MUST` 精确绑定 `spec/profiles/end-p0.json`，`profile_id=2` `MUST` 精确绑定 `spec/profiles/end-p1.json`。调用者可以设置更低的本地预算，但 `MUST NOT` 在不改变 Profile 身份的情况下提高规范上限。所有限制必须在相应分配、递归或输出前检查。
 
 **失败：**Profile 未知、限制缺失、值为零或无限、或对象超过任一限制时必须拒绝。
 
 **验证：**Profile 登记检查；未来边界值和超限值向量。
 
-### END-FMT-011 — P0 禁止压缩、加密与 attested 状态
+### END-FMT-011 — P0/P1 禁止压缩、加密与 attested 状态
 
-**要求：**`END-P0` 中 `stored_length` `MUST` 等于 `logical_length`，记录标志只能为关键位 `1`，`state` 只能为 `0`（`nascent`）。压缩、加密、签名包络、外部记录、`coherent` 与 `attested` `MUST NOT` 出现在本 Profile。
+**要求：**`END-P0` 与 `END-P1` 中 `stored_length` `MUST` 等于 `logical_length`，记录标志只能为关键位 `1`，`state` 只能为 `0`（`nascent`）。压缩、加密、签名包络、外部记录、`coherent` 与 `attested` `MUST NOT` 出现在这两个 Profile。
 
 **失败：**发现未登记变换或更高状态必须报告不受支持的必需能力，不能降级读取后提升信任。
 
@@ -190,11 +221,11 @@ CBOR 只承担记录内部的无歧义类型编码。记录编号、六个语义
 
 **验证：**`WV-STRUCT-ACCEPT-001` 的预期结果明确为 `structural-accept/semantic-not-evaluated`；发布复核。
 
-## 8. 当前未决接口
+## 9. 当前未决接口
 
 以下内容没有被 `END-FMT 0.1.0-draft` 冻结：
 
-- 六个记录内部的完整字段编号与关系 schema；
+- END-P1 之外的量化、时间、单位、求值和扩展字段；
 - 内容摘要、签名包络、Semantic Key 与 Tekmor 绑定；
 - `coherent`、`attested`、Synem 和调试伴随记录；
 - 压缩、加密、流式传输、随机访问索引和远程披露；
@@ -202,7 +233,7 @@ CBOR 只承担记录内部的无歧义类型编码。记录编号、六个语义
 
 任何新增记录种类、字段编号、变换或状态都必须先有 ADR、登记、正反字节向量和独立读取实验。当前项目不承诺兼容本草案产生的字节。
 
-## 9. 机制来源与采用边界
+## 10. 机制来源与采用边界
 
 - ELF 以固定头部提供文件路线图，并用节表与程序头提供不同消费者视图；Endem 只采用“固定前导 + 显式目录 + 消费者边界”，不采用地址、指令、装载段或处理器 ABI：https://gabi.xinuos.com/elf/01-intro.html
 - ELF 明确记录偏移、条目大小和数量；Endem 进一步要求所有乘加、端点与对齐使用受检算术：https://gabi.xinuos.com/elf/02-eheader.html

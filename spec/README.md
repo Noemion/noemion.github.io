@@ -6,8 +6,8 @@
 
 | 规范 | 版本 | 状态 | 已覆盖 | 明确未覆盖 |
 | --- | --- | --- | --- | --- |
-| [`endem-core.md`](endem-core.md) | `0.1.0-draft` | 草案；已接受语义边界的第一份条款化表达 | Endem 最小性、六个语义面、事态与方向分离、未知状态、确定性、安全读取、身份分层与验证责任 | 完整记录字段 schema、求值语言、摘要与签名算法 |
-| [`endem-format.md`](endem-format.md) | `0.1.0-draft` | 已采用的实验性草案；尚非稳定 ABI | 固定前导、定宽记录目录、六种记录、确定性 CBOR 子集、END-P0 与结构诊断 | 完整语义载荷、coherent/attested、签名、压缩、Synem 和跨版本承诺 |
+| [`endem-core.md`](endem-core.md) | `0.1.0-draft` | 草案；已接受语义边界的第一份条款化表达 | Endem 最小性、六个语义面、事态与方向分离、未知状态、确定性、安全读取、身份分层与验证责任 | END-P1 之外的量化、时间、求值、摘要与签名 |
+| [`endem-format.md`](endem-format.md) | `0.1.0-draft` | 已采用的实验性草案；尚非稳定 ABI | 固定前导、定宽目录、确定性 CBOR、END-P0 结构实验与 END-P1 封闭语义载荷 | coherent/attested、签名、压缩、Synem 和跨版本承诺 |
 
 [`endem-threat-model.md`](endem-threat-model.md) 把不可信输入、资源放大、歧义清洗、身份混淆和解析器共同故障映射到规范条款。[`profiles/end-p0.json`](profiles/end-p0.json) 给出第一组跨实现实验的有限上限；这些数值不是生产规模证明，提高时必须采用新的 Profile 身份。
 

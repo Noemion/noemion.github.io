@@ -65,8 +65,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 errors.append(f"spec/registry.json: {spec_id} document path does not exist")
 
     supporting_documents = registry.get("supporting_documents")
-    if not isinstance(supporting_documents, list) or len(supporting_documents) != 3:
-        errors.append("spec/registry.json: threat, error catalog and P0 Profile documents are required")
+    if not isinstance(supporting_documents, list) or len(supporting_documents) != 4:
+        errors.append("spec/registry.json: threat, error catalog, P0 and P1 Profile documents are required")
     else:
         supporting_by_id = {document.get("id"): document for document in supporting_documents}
         threat_document = supporting_by_id.get("END-THREAT", {})
@@ -81,6 +81,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
         expected_supporting = {
             "END-ERRCAT": "spec/endem-errors.md",
             "END-P0": "spec/profiles/end-p0.json",
+            "END-P1": "spec/profiles/end-p1.json",
         }
         for document_id, path in expected_supporting.items():
             document = supporting_by_id.get(document_id, {})
@@ -98,7 +99,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: term names must be unique")
         for required_term in (
             "Noemion", "Endem", "Synem", "Dromen", "Tekmor",
-            *REQUIRED_FACETS, "wire-format", "END-P0",
+            *REQUIRED_FACETS, "wire-format", "END-P0", "END-P1",
         ):
             if required_term not in term_names:
                 errors.append(f"spec/registry.json: missing term {required_term}")
@@ -365,6 +366,8 @@ def validate_public_boundary(errors):
     workflow_text = (ROOT / ".github" / "workflows" / "pages.yml").read_text()
     if "python3 tests/semantic_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute semantic vectors, not only register them")
+    if "python3 tests/p1_payload_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute complete END-P1 payload vectors")
     for exact_exclusion in ("  - experiments/", "  - spec/", "  - vectors/"):
         if exact_exclusion not in config_text:
             errors.append(f"_config.yml: missing exact exclusion {exact_exclusion.strip()!r}")
@@ -377,8 +380,10 @@ def validate_public_boundary(errors):
         "specifications/index.html": (
             "END-CORE 0.1.0-draft",
             "END-FMT 0.1.0-draft",
+            "END-P1",
             "spec/endem-core.md",
             "spec/endem-format.md",
+            "spec/profiles/end-p1.json",
             "spec/registry.json",
             "vectors/semantic",
             "vectors/wire",
@@ -388,6 +393,7 @@ def validate_public_boundary(errors):
         "specifications/endem.html": (
             "END-CORE 0.1.0-draft",
             "END-FMT 0.1.0-draft",
+            "END-P1",
             "spec/endem-core.md",
             "spec/endem-format.md",
             "条款 ID",
@@ -408,6 +414,13 @@ def validate_public_boundary(errors):
             "experiments/p0-language/results.json",
             "Theor 必须另写解析结构和错误路径",
             "不是生产实现",
+        ),
+        "architecture/adr-0013-end-p1-payload.html": (
+            "END-P1",
+            "profile_id=2",
+            "spec/profiles/end-p1.json",
+            "RFC 8949",
+            "不是稳定 ABI",
         ),
         "development/implementation-roadmap.html": (
             "P0-LANG-001",
@@ -449,8 +462,8 @@ def main():
         return 1
     print(
         "PASS: END-CORE and END-FMT 0.1.0-draft have unique clauses, explicit "
-        "maturity, traceable evidence, 10 registered threats, semantic vectors, "
-        "and P0-LANG-001 implementation evidence"
+        "maturity, traceable evidence, 10 registered threats, executed semantic "
+        "vectors, END-P1 payload vectors, and P0-LANG-001 language evidence"
     )
     return 0
 

@@ -95,6 +95,7 @@ modules:
           - { href: /architecture/adr-0010-native-lexicon.html, label: "ADR-0010 · 原生词汇与事态" }
           - { href: /architecture/adr-0011-endem-container.html, label: "ADR-0011 · Endem 容器格式" }
           - { href: /architecture/adr-0012-rust-core-language.html, label: "ADR-0012 · Rust 安全核心" }
+          - { href: /architecture/adr-0013-end-p1-payload.html, label: "ADR-0013 · END-P1 语义载荷" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:

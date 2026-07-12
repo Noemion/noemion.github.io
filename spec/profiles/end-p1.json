@@ -1,0 +1,129 @@
+{
+  "profile_format": "endem.profile.v1",
+  "profile_id": 2,
+  "name": "END-P1",
+  "version": "0.1.0-draft",
+  "status": "experimental-implementation",
+  "core": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "format": {"id": "END-FMT", "version": "0.1.0-draft"},
+  "limits": {
+    "max_artifact_bytes": 16777216,
+    "max_record_count": 6,
+    "max_graph_nodes": 65536,
+    "max_graph_edges": 262144,
+    "max_nesting_depth": 16,
+    "max_string_bytes": 1048576,
+    "max_decompressed_bytes": 16777216,
+    "max_total_allocation_bytes": 67108864
+  },
+  "required_record_kinds": [1, 2, 3, 4, 5, 6],
+  "allowed_states": [0],
+  "allowed_record_flags": [1],
+  "compression": false,
+  "encryption": false,
+  "identifier_pattern": "^[A-Za-z][A-Za-z0-9._:/#-]{0,254}$",
+  "records": {
+    "1": {"name": "rhem", "schema": "rhem", "required_keys": [1, 2, 3, 4, 5, 6, 7]},
+    "2": {"name": "semion", "schema": "semion", "required_keys": [1, 2]},
+    "3": {"name": "skena", "schema": "skena", "required_keys": [1, 2]},
+    "4": {"name": "telis", "schema": "telis", "required_keys": [1]},
+    "5": {"name": "krin", "schema": "krin", "required_keys": [1, 2, 3, 4, 5]},
+    "6": {"name": "apor", "schema": "apor", "required_keys": [1]}
+  },
+  "maps": {
+    "rhem": {
+      "1": {"name": "source_id", "type": "identifier"},
+      "2": {"name": "subject", "type": "identifier"},
+      "3": {"name": "media_type", "type": "media-type"},
+      "4": {"name": "language", "type": "language-tag"},
+      "5": {"name": "version", "type": "text"},
+      "6": {"name": "content", "type": "text"},
+      "7": {"name": "range", "type": "source_range"}
+    },
+    "source_range": {
+      "1": {"name": "unit", "type": "enum:range_unit"},
+      "2": {"name": "start", "type": "uint"},
+      "3": {"name": "length", "type": "uint"}
+    },
+    "semion": {
+      "1": {"name": "symbols", "type": "array<symbol>"},
+      "2": {"name": "relations", "type": "array<relation>"}
+    },
+    "symbol": {
+      "1": {"name": "id", "type": "identifier"},
+      "2": {"name": "kind", "type": "identifier"},
+      "3": {"name": "source_ref", "type": "identifier"}
+    },
+    "relation": {
+      "1": {"name": "id", "type": "identifier"},
+      "2": {"name": "predicate", "type": "identifier"},
+      "3": {"name": "roles", "type": "array<role>"},
+      "4": {"name": "projection", "type": "projection"}
+    },
+    "role": {
+      "1": {"name": "name", "type": "identifier"},
+      "2": {"name": "symbol", "type": "identifier"}
+    },
+    "projection": {
+      "1": {"name": "kind", "type": "enum:projection_kind"},
+      "2": {"name": "id", "type": "identifier"}
+    },
+    "skena": {
+      "1": {"name": "root", "type": "identifier"},
+      "2": {"name": "situations", "type": "array<situation>"}
+    },
+    "situation": {
+      "1": {"name": "id", "type": "identifier"},
+      "2": {"name": "relation", "type": "identifier"},
+      "3": {"name": "polarity", "type": "enum:polarity"}
+    },
+    "telis": {
+      "1": {"name": "mode", "type": "enum:telis_mode"}
+    },
+    "krin": {
+      "1": {"name": "required_phain", "type": "array<phain_requirement>"},
+      "2": {"name": "required_tekmor", "type": "array<identifier>"},
+      "3": {"name": "on_missing_observation", "type": "enum:missing_policy"},
+      "4": {"name": "on_evaluation_error", "type": "enum:error_policy"},
+      "5": {"name": "decision_authority", "type": "identifier"}
+    },
+    "phain_requirement": {
+      "1": {"name": "relation", "type": "identifier"},
+      "2": {"name": "match", "type": "enum:relation_match"}
+    },
+    "apor": {
+      "1": {"name": "items", "type": "array<apor_item>"}
+    },
+    "apor_item": {
+      "1": {"name": "id", "type": "identifier"},
+      "2": {"name": "source_ref", "type": "identifier"},
+      "3": {"name": "candidates", "type": "array<identifier>"},
+      "4": {"name": "conflict", "type": "text"},
+      "5": {"name": "impact_scope", "type": "array<identifier>"},
+      "6": {"name": "allowed_resolutions", "type": "array<enum:projection_kind>"},
+      "7": {"name": "decision_authority", "type": "identifier"}
+    }
+  },
+  "enums": {
+    "range_unit": {"0": "unicode-scalar"},
+    "projection_kind": {"0": "rule", "1": "named-authority"},
+    "polarity": {"0": "positive", "1": "negative"},
+    "telis_mode": {"0": "kine"},
+    "relation_match": {"0": "same-roles"},
+    "missing_policy": {"0": "agno"},
+    "error_policy": {"0": "fault"}
+  },
+  "canonical_array_order": {
+    "symbols": "id",
+    "relations": "id",
+    "roles": "name",
+    "situations": "id",
+    "required_phain": "relation",
+    "required_tekmor": "encoded-text",
+    "apor_items": "id",
+    "candidates": "encoded-text",
+    "impact_scope": "encoded-text",
+    "allowed_resolutions": "uint"
+  },
+  "notes": "First closed semantic payload profile for the implementation slice. P0 remains structural experiment evidence. P1 supports nascent Endem and kine only; mene requires a separately specified interval model. Unknown map keys are rejected."
+}

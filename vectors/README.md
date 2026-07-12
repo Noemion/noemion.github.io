@@ -4,7 +4,7 @@
 
 `semantic/` 验证 Endem 语义结构、授权边界和失败定位。每个 JSON 文件都是 `noemion.semantic-vector.v1` 测试外壳，不是 `.endem`，也不能改名后交给运行时。
 
-`wire/` 保存 END-FMT 0.1.0-draft 的规范十六进制字节和统一预期清单。十六进制文件去除空白后解码为原始输入；接受向量只证明结构与 END-P0 Profile 合法，明确不运行 END-CORE 语义判断。
+`wire/` 保存 END-FMT 0.1.0-draft 的规范十六进制字节。顶层清单属于 END-P0，只证明结构合法；`wire/p1/` 属于 END-P1，使用完整六记录载荷并实际运行字段、排序、引用和来源范围判断。两组都不是稳定 ABI。
 
 向量外壳由 [`vector.schema.json`](vector.schema.json) 约束。该 Schema 使用 JSON Schema 2020-12，只验证测试资料的结构；它不验证 Endem 语义，也不成为 Endem ABI。
 
@@ -18,6 +18,6 @@
 - 拒绝向量至少给出一个稳定错误类别、主条款 ID 和 JSON Pointer 位置；
 - `clauses` 只能引用 `spec/registry.json` 中存在的条款；
 - 任何新增向量都必须被 `tests/spec_contract_test.py` 读取。
-- 线格式向量必须固定 END-FMT 与 END-P0 版本，并由独立于未来生产解析器的 `tests/wire_vector_test.py` 逐字段读取；禁止只比较预生成摘要。
+- 线格式向量必须固定 END-FMT 与精确 Profile。END-P0 由 `tests/wire_vector_test.py` 读取；END-P1 由 `tests/p1_payload_test.py` 从语义源确定性编码、逐字段解码并比较预期。禁止只比较预生成摘要。
 
 向量只证明当前外壳与预期一致，不能证明未来实现已经正确。实现出现后，同一向量必须分别由 Poiet/生产路径和独立 Theor 消费，并比较逐字段解释与失败分类。

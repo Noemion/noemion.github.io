@@ -14,7 +14,7 @@ overview:
   roadmap_href: /development/implementation-roadmap.html
 
 current:
-  summary: 项目已公开 END-CORE、END-FMT、END-P0 和首组语义/字节向量，并通过 C/Rust 双原型、差分、Sanitizer、模糊和重复构建选择 Rust 作为 Poiet 与生产读取核心语言。当前开始 poie/elenk/theor/peira 最小纵向切片。
+  summary: 项目已公开 END-CORE、END-FMT 和 END-P1 完整载荷向量，并通过 C/Rust 实验选择 Rust 作为 Poiet 与生产读取核心语言。当前开始 poie/elenk/theor/peira 最小纵向切片。
   facts:
     - label: 已完成
       value: Endem 词汇与应用拓扑决定
@@ -38,7 +38,7 @@ items:
     state: confirmed
     label: 已完成
     title: 最小规范与安全核心设计
-    description: 已形成语义与实验性容器条款、END-P0、错误目录、规范字节，并用 P0-LANG-001 选择首版核心语言。
+    description: 已形成语义与容器条款、END-P0 结构实验、END-P1 封闭载荷、错误目录和正反规范字节，并用 P0-LANG-001 选择首版核心语言。
   - id: endem-core-validation
     state: current
     label: 正在进行

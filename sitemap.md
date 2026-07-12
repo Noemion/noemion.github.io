@@ -26,6 +26,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0010](https://noemion.github.io/architecture/adr-0010-native-lexicon.html) — current native lexicon, six semantic facets, and situation/goal/evidence separation
 - [ADR-0011](https://noemion.github.io/architecture/adr-0011-endem-container.html) — experimental Endem header, record directory, deterministic payload subset, and P0 limits
 - [ADR-0012](https://noemion.github.io/architecture/adr-0012-rust-core-language.html) — evidence-backed Rust selection for the first Poiet and production-reader structural core
+- [ADR-0013](https://noemion.github.io/architecture/adr-0013-end-p1-payload.html) — closed END-P1 semantic payload fields, ordering, references, and implementation gate
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Praxor responsibility boundaries
 - [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary

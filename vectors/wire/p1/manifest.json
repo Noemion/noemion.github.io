@@ -1,0 +1,28 @@
+{
+  "vector_format": "endem.p1-wire-vector-manifest.v1",
+  "format": {"id": "END-FMT", "version": "0.1.0-draft"},
+  "profile": {"id": 2, "name": "END-P1", "version": "0.1.0-draft"},
+  "semantic_source": "vectors/semantic/minimal-valid.json",
+  "vectors": [
+    {
+      "id": "WV-P1-SEMANTIC-ACCEPT-001",
+      "hex": "vectors/wire/p1/minimal-semantic.hex",
+      "expect": {"result": "semantic-accept", "profile": "END-P1"}
+    },
+    {
+      "id": "WV-P1-REJECT-UNKNOWN-FIELD-001",
+      "hex": "vectors/wire/p1/unknown-field.hex",
+      "expect": {"result": "reject", "code": "endem.semantic.field.unknown", "clause": "END-FMT-013", "layer": "semantic", "semantic_path": "/rhem/8"}
+    },
+    {
+      "id": "WV-P1-REJECT-DANGLING-REFERENCE-001",
+      "hex": "vectors/wire/p1/dangling-reference.hex",
+      "expect": {"result": "reject", "code": "endem.semantic.reference", "clause": "END-FMT-014", "layer": "semantic", "semantic_path": "/semion/relations/0/roles/0/symbol"}
+    },
+    {
+      "id": "WV-P1-REJECT-SOURCE-RANGE-001",
+      "hex": "vectors/wire/p1/source-range.hex",
+      "expect": {"result": "reject", "code": "endem.rhem.range_out_of_bounds", "clause": "END-SRC-001", "layer": "semantic", "semantic_path": "/rhem/7"}
+    }
+  ]
+}

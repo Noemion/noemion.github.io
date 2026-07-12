@@ -151,7 +151,7 @@ APPLICATION_PROJECT_SECTIONS = [
     "继续阅读",
 ]
 APPLICATION_STATUS_DISCLOSURES = (
-    "设计阶段",
+    "实现准备阶段",
     "尚未提供可执行程序",
     "参数",
     "稳定 ABI",

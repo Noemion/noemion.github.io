@@ -55,7 +55,7 @@ badges: ["Reference", "Unfrozen CLI"]
 
 ## 稳定失败类别
 
-END-ERRCAT 0.1 已登记结构与 END-P0 的实验错误码；完整 CLI 诊断 ABI 尚未冻结。实现还必须稳定区分以下更高层失败：
+END-ERRCAT 0.1 已登记 END-P0 结构错误和首组 END-P1 语义错误；完整 CLI 诊断 ABI 尚未冻结。实现还必须稳定区分以下更高层失败：
 
 - source invalid；
 - contract incomplete；

@@ -7,11 +7,11 @@ permalink: "/specifications/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>规范参考指南</span></nav>
-  <header class="section-introduction"><h1>规范参考指南</h1><p>从一项目标、多个目标的组合，到验收证据，查看当前采用的规则和仍未冻结的接口。</p><div class="badges"><span class="badge">Endem</span><span class="badge">Synem</span><span class="badge">Tekmor</span><span class="badge">Schema Unfrozen</span></div></header>
+  <header class="section-introduction"><h1>规范参考指南</h1><p>从一项目标、多个目标的组合，到验收证据，查看当前采用的规则和仍未冻结的接口。</p><div class="badges"><span class="badge">Endem</span><span class="badge">END-P1</span><span class="badge">Tekmor</span><span class="badge">ABI Unfrozen</span></div></header>
   <section>
     <h2>先看哪些规范</h2>
     <p class="lead">先读 Endem，理解一项目标怎样成为可检查制品。再读 Synem，理解多个目标怎样解析依赖。最后读 Tekmor，理解证据能支持什么判断，又不能证明什么。</p>
-    <p>名称、职责、六个语义面、状态、<code>.endem</code> 扩展名和信任边界已经采用。END-FMT 0.1.0-draft 进一步给出实验性前导、记录目录与 END-P0，但完整载荷字段、Synem/Tekmor 扩展名、摘要与签名算法仍未冻结；当前也没有稳定 ABI 或可执行程序。</p>
+    <p>名称、职责、六个语义面、状态、<code>.endem</code> 扩展名和信任边界已经采用。END-P1 已关闭首个实现的六记录字段、枚举、排序和引用；Synem/Tekmor 编码、摘要、签名和稳定 ABI 仍未冻结，当前也没有可执行程序。</p>
   </section>
   <section>
     <h2>三项规范</h2>
@@ -25,12 +25,13 @@ permalink: "/specifications/index.html"
     <h2>规范源与可追溯性</h2>
     <p class="lead">END-CORE 0.1.0-draft 定义语义边界；END-FMT 0.1.0-draft 定义实验性容器。两者使用唯一条款 ID，并把义务连接到现有向量、计划测试或具名复核权威。</p>
     <div class="table-wrap"><table><thead><tr><th>工程源</th><th>用途</th><th>当前边界</th></tr></thead><tbody>
-      <tr><td>语义条款：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md</a></td><td>六个语义面、授权、状态、身份、安全与验证责任。</td><td>完整字段 schema 与求值语言仍未冻结。</td></tr>
-      <tr><td>格式条款：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md</a></td><td>固定前导、记录目录、受限 CBOR、END-P0 与结构接受层次。</td><td>END-FMT 0.1.0-draft 尚非稳定 ABI，也没有符合性实现。</td></tr>
+      <tr><td>语义条款：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md</a></td><td>六个语义面、授权、状态、身份、安全与验证责任。</td><td>END-P1 之外的量化、时间和求值语言仍未冻结。</td></tr>
+      <tr><td>格式条款：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md</a></td><td>固定前导、记录目录、受限 CBOR、结构实验 END-P0 与实现 Profile END-P1。</td><td>END-FMT 0.1.0-draft 尚非稳定 ABI，也没有符合性实现。</td></tr>
+      <tr><td>END-P1 Profile：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json</a></td><td>六记录字段键、嵌套 map、枚举、规范数组顺序和资源限制。</td><td>只覆盖 nascent 与 kine，不预留尚无消费者的未来字段。</td></tr>
       <tr><td>机器可读登记：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json</a></td><td>规范、术语、成熟度、实现状态与验证引用。</td><td><code>accepted</code> 不表示实现存在；计划测试不能写成已覆盖。</td></tr>
       <tr><td>威胁与诊断：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md</a><br><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-errors.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-errors.md</a></td><td>把不可信输入、资源放大和共同故障映射到条款与稳定实验错误码。</td><td>END-P0 数值只支持第一轮实验，仍需规模和复杂度证据。</td></tr>
       <tr><td>语义向量：<a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/semantic">https://github.com/Noemion/noemion.github.io/tree/main/vectors/semantic</a></td><td>多个根、事态混入目标力量、未记录歧义和模型越权等正反案例。</td><td>这些 JSON 不是 .endem 物理格式。</td></tr>
-      <tr><td>字节向量：<a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/wire">https://github.com/Noemion/noemion.github.io/tree/main/vectors/wire</a></td><td>1 个结构接受和 5 个确定拒绝字节案例。</td><td>结构接受不代表 END-CORE 语义接受。</td></tr>
+      <tr><td>字节向量：<a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/wire">https://github.com/Noemion/noemion.github.io/tree/main/vectors/wire</a></td><td>END-P0 含 1 个结构接受和 5 个结构拒绝；END-P1 含 1 个完整语义接受和 3 个语义拒绝。</td><td>这些仍是实验性规范字节，不构成稳定 ABI。</td></tr>
     </tbody></table></div>
   </section>
   <section>
@@ -43,7 +44,7 @@ permalink: "/specifications/index.html"
       <tr><td>语义</td><td>一个根 skena、六个语义面、形式显示、显式未知、满足与权威；已有 6 个实际执行的条款化语义向量</td><td>更广泛语料覆盖、跨领域最小性、关系等价和求值规则</td></tr>
       <tr><td>组合</td><td>内容寻址、显式绑定、权限不扩大、冲突关闭失败</td><td>大规模闭包性能、循环处理和远程仓库协议</td></tr>
       <tr><td>证据</td><td>Tekmor 可定位、可绑定、可声明强度，但不自动证明结论</td><td>稳定事件编码、跨实现验证和撤销策略</td></tr>
-      <tr><td>物理格式</td><td>实验性魔数、64 字节前导、48 字节目录、六种记录、受限 CBOR 与 END-P0</td><td>完整字段 schema、压缩、摘要、签名、Synem 和稳定 ABI</td></tr>
+      <tr><td>物理格式</td><td>实验性魔数、64 字节前导、48 字节目录、六种记录、受限 CBOR，以及 END-P1 封闭字段 schema</td><td>压缩、摘要、签名、Synem 和稳定 ABI</td></tr>
     </tbody></table></div>
   </section>
   <div class="next-prev"><a href="../architecture/decisions.html">← 架构决策</a><a href="endem.html">Endem 规范 →</a></div>

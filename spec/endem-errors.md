@@ -46,8 +46,10 @@
 | `endem.skena.contains_goal_force` | `END-SIT-001` | 中性事态混入目标方向或力量 |
 | `endem.apor.unrecorded_projection_choice` | `END-APR-001` | 存在多个允许投影但未记录未决选择 |
 | `endem.projection.authority_untrusted` | `END-AUT-001` | 模型自述或其他不可信来源试图确认投影 |
+| `endem.semantic.field.unknown` | `END-FMT-013` | END-P1 映射出现未登记字段键 |
+| `endem.semantic.reference` | `END-FMT-014` | END-P1 出现悬空 symbol、relation、situation 或 source 引用 |
 
-这些错误码当前由语义向量检查器执行。它只验证已登记的最小语义模型，不是生产 Poiet 或 Theor，也不证明六个载荷的物理字段 schema 已经冻结。
+这些错误码当前由语义向量和 END-P1 完整载荷检查器执行。它们不是生产 Poiet 或 Theor，也不构成稳定诊断 ABI。
 
 ## 4. 稳定性边界
 

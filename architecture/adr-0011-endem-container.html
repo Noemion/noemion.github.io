@@ -28,7 +28,7 @@ permalink: "/architecture/adr-0011-endem-container.html"
   <section class="content-wide">
     <h2>容器结构</h2>
     <div class="flow"><div class="step">64 B 固定前导</div><div class="step">6 × 48 B 记录目录</div><div class="step">零填充与 8 B 对齐</div><div class="step">rhem</div><div class="step">semion</div><div class="step">skena</div><div class="step">telis</div><div class="step">krin</div><div class="step">apor</div></div>
-    <p>固定前导保存格式版本、Profile、状态、目录位置、记录数和文件总大小。目录只定位记录并说明其种类、范围和对齐；六个记录的内部映射继续由 END-CORE 和后续字段 schema 约束。</p>
+    <p>固定前导保存格式版本、Profile、状态、目录位置、记录数和文件总大小。目录只定位记录并说明其种类、范围和对齐；六个记录的内部映射由 END-CORE 和后续 Profile 约束，首个封闭映射现由 ADR-0013 的 END-P1 定义。</p>
     <p class="callout"><strong>有意保持简单：</strong>END-P0 不支持压缩、加密、未知记录、供应商扩展、coherent、attested 或签名包络。增加任一能力前必须先有新的 ADR、Profile、威胁分析和字节向量。</p>
   </section>
 
