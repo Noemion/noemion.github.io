@@ -19,6 +19,7 @@
 | 修改范围 | 识别条件 | 必读设计文档 |
 | --- | --- | --- |
 | 全站外壳、顶部导航、页脚、目录 | `_layouts/default.html`、`_includes/site-header.html`、`_includes/site-footer.html`、`assets/directory.*` | [`global-shell.md`](global-shell.md) |
+| 前端模块、接口、数据源与按需加载 | `assets/site.mjs`、`assets/modules/*.mjs`、`_data/navigation.yml` | [`frontend-architecture.md`](frontend-architecture.md)、[`global-shell.md`](global-shell.md) |
 | 首页门户 | `page_role: portal`、`index.html` | [`portal.md`](portal.md)、[`../homepage-design.md`](../homepage-design.md) |
 | 模块目录与聚合页 | `page_role: section` | [`section.md`](section.md) |
 | 架构、规范和普通专题 | `page_role: content` 且没有 `manual_id` | [`content.md`](content.md) |
@@ -43,7 +44,7 @@
 ## 修改后的最低验证
 
 - 运行 `python3 tests/site_quality_test.py`。
-- 涉及 JavaScript 时运行 `node --elenk assets/directory.js`。
+- 涉及 JavaScript 时运行 `node --check assets/site.mjs`、`node --check assets/theme.js`，并检查 `assets/modules/*.mjs`。
 - 涉及布局或样式时检查桌面约 1512px 与移动约 390px。
 - 检查键盘焦点、减少动态效果、深浅色和页面级横向溢出。
 - 手册变更还要构建 `_site`，确认动态目录、索引和分页顺序。

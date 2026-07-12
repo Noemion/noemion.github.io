@@ -20,7 +20,7 @@
 ## 全局导航
 
 - 品牌返回首页；一级入口按项目、架构、规范、Endem、指南和开发组织。
-- 桌面面板与移动目录使用 `assets/directory.js` 同一数据源。
+- 桌面面板与移动目录使用 `_data/navigation.yml` 同一数据源；手册目录由 Jekyll 直接生成。
 - 阶段入口从 `_data/project_timeline.yml` 读取，不手工复制状态。
 - 旧制品与旧应用没有隐藏入口、重定向或兼容卡片。
 

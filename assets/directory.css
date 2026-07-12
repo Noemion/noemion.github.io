@@ -102,7 +102,9 @@
 }
 .site-header .directory-panel .nav-section-links a.active:visited{color:var(--nav-active-text)}
 .site-header .directory-panel .nav-section-links a:active{transform:scale(.96)}
-.no-script-home{display:block;min-height:40px;padding:8px 10px}
+.no-script-navigation{display:grid;gap:2px;margin-top:8px}
+.no-script-navigation a{display:flex;align-items:center;min-height:40px;padding:8px 10px;color:var(--nav-text);text-decoration:none}
+.no-script-navigation a:hover{background:var(--paper-subtle);color:var(--heading)}
 section[id]{scroll-margin-top:20px}
 
 @media(min-width:1000px){
@@ -154,6 +156,7 @@ section[id]{scroll-margin-top:20px}
   }
   .site-header .directory-panel .directory-context{margin-bottom:5px}
   section[id]{scroll-margin-top:72px}
+  .no-script-navigation{grid-column:1/-1;grid-template-columns:1fr 1fr;margin:8px -8px -4px}
 }
 
 @media(prefers-reduced-motion:reduce){

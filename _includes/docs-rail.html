@@ -1,0 +1,25 @@
+{% assign manual = site.data.manuals[page.manual_id] %}
+{% assign manual_pages = site.pages | where: "manual_id", page.manual_id | sort: "manual_order" %}
+<aside class="docs-rail" aria-label="文档章节导航">
+  <nav data-docs-rail data-manual-id="{{ page.manual_id | escape }}" data-directory-kicker="{{ manual.kicker | escape }}" data-directory-title="{{ manual.title | escape }}" data-directory-root="{{ manual.root | escape }}" data-directory-parent-href="{{ manual.parent_url | escape }}" data-directory-parent-label="{{ manual.parent_label | escape }}">
+    <div class="docs-rail-header">
+      <span>{{ manual.kicker }}</span>
+      <a href="{{ manual.root | relative_url }}">{{ manual.title }}</a>
+    </div>
+    {% for group_pair in manual.groups %}
+      {% assign group_key = group_pair[0] %}
+      {% assign group = group_pair[1] %}
+      {% assign group_pages = manual_pages | where: "manual_group", group_key %}
+      {% if group_pages.size > 0 %}
+      <details class="docs-rail-group" data-directory-group open>
+        <summary><small>{{ group.order | prepend: '0' | slice: -2, 2 }}</small><strong>{{ group.label }}</strong><span>{{ group_pages.size }}</span></summary>
+        <div class="docs-rail-links">
+          {% for manual_page in group_pages %}
+          <a href="{{ manual_page.permalink | relative_url }}"{% if manual_page.permalink == page.permalink %} class="active" aria-current="page"{% endif %}>{{ manual_page.nav_title | default: manual_page.hero_title }}</a>
+          {% endfor %}
+        </div>
+      </details>
+      {% endif %}
+    {% endfor %}
+  </nav>
+</aside>

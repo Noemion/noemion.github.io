@@ -51,3 +51,4 @@ badges: [Documentation]
 - 阅读区使用紧凑 Hero、30px 左右章节标题和顶部/底部分页。
 - 指南和手册不使用普通页面的大面积渐变制品卡；Hero 使用折页，章节标题使用梯形页签，动态索引使用同一页签节奏。Endem 手册按 `poie/elenk/pleko/tasse/sphra/theor/praxe/peira` 的职责色区分主题，但不改变折页结构、目录与阅读列。完整规则见 [`geometric-layouts.md`](geometric-layouts.md)。
 - 1000px 以下隐藏固定侧栏，由移动目录接管；正文、表格和代码块不得造成页面级横向滚动。
+- 560px 以下 Hero 视觉独占一行时必须以阅读区中心线对齐，折页角标跟随视觉本体定位，不能继续继承桌面右对齐。

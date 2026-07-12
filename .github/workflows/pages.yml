@@ -25,7 +25,7 @@ jobs:
       - name: Validate Jekyll sources
         run: python3 tests/site_quality_test.py
       - name: Validate JavaScript syntax
-        run: node --check assets/directory.js && node --check assets/theme.js
+        run: node --check assets/site.mjs && node --check assets/theme.js && for file in assets/modules/*.mjs; do node --check "$file"; done
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6

@@ -4,12 +4,18 @@
 <header class="site-header global-header">
   <div class="header-inner global-header-inner">
     <a class="brand global-brand" data-site-root href="{{ '/index.html' | relative_url }}"><span class="portal-brand-mark" aria-hidden="true">N</span><span>Noemion</span></a>
-    <nav class="global-primary-nav" data-global-nav aria-label="主要导航"></nav>
+    <nav class="global-primary-nav" data-global-nav aria-label="主要导航">
+      {% for group in site.data.navigation.global %}
+      <div class="global-nav-item" data-global-nav-item="{{ group.key | escape }}">
+        <a class="global-nav-trigger" href="{{ group.href | relative_url }}" aria-haspopup="true" aria-expanded="false"><span>{{ group.label }}</span><span class="global-nav-caret" aria-hidden="true">⌄</span></a>
+      </div>
+      {% endfor %}
+    </nav>
     <a class="global-stage-link" data-portal-stage href="{{ project_timeline.header.href | relative_url }}" aria-label="{{ project_timeline.header.label | escape }}：{{ current_stage.title | escape }}" title="{{ project_timeline.header.title | escape }}"><strong class="global-stage-value" data-stage-value="{{ project_timeline.header.value | escape }}"><span class="global-stage-text">{{ project_timeline.header.value | escape }}</span><span class="global-stage-progress" aria-hidden="true"></span></strong></a>
     <details class="directory-panel global-directory-panel">
       <summary><span>导航</span><span class="portal-menu-icon" aria-hidden="true"></span></summary>
       <nav data-directory aria-label="项目目录"></nav>
     </details>
-    <noscript><a class="no-script-home" href="{{ '/index.html' | relative_url }}">项目首页</a></noscript>
+    <noscript><nav class="no-script-navigation" aria-label="无脚本站点导航"><a href="{{ '/index.html' | relative_url }}">项目首页</a><a href="{{ '/sitemap.md' | relative_url }}">完整路由表</a></nav></noscript>
   </div>
 </header>

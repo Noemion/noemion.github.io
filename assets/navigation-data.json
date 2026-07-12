@@ -1,0 +1,4 @@
+---
+permalink: /assets/navigation-data.json
+---
+{{ site.data.navigation | jsonify }}

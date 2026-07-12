@@ -28,7 +28,7 @@ MANUAL_MARKDOWN_FILES = sorted(
 SOURCE_PAGE_FILES = sorted([*SOURCE_HTML_FILES, *MANUAL_MARKDOWN_FILES])
 HTML_FILES = SOURCE_HTML_FILES if SOURCE_ONLY else sorted(ROOT.rglob("*.html"))
 RAW_AMP = re.compile(r"&(?![A-Za-z][A-Za-z0-9]+;|#[0-9]+;|#x[0-9A-Fa-f]+;)")
-HREF_LITERAL = re.compile(r'href:\s*"([^"]+)"')
+NAVIGATION_HREF = re.compile(r"\bhref:\s*[\"']?(/[^,}\s\"']+)")
 EXTERNAL_ANCHOR = re.compile(
     r'<a\s+[^>]*href="(https?://[^"]+)"[^>]*>(.*?)</a>',
     re.IGNORECASE | re.DOTALL,
@@ -634,41 +634,45 @@ def validate_required_text_contracts(root):
 
 def validate_readability_behavior_contracts(root):
     errors = []
-    directory_script = root / "assets" / "directory.js"
+    content_script = root / "assets" / "modules" / "content-enhancements.mjs"
+    navigation_data = SOURCE_ROOT / "_data" / "navigation.yml"
     style = root / "assets" / "style.css"
     directory_style = root / "assets" / "directory.css"
 
-    if directory_script.exists():
-        directory_text = directory_script.read_text()
+    if content_script.exists() and navigation_data.exists():
+        behavior_text = content_script.read_text()
+        navigation_text = navigation_data.read_text()
         for token in (
-            'document.querySelectorAll(".manual-article table")',
+            'querySelectorAll(".manual-article table")',
             'wrapper.className = "table-wrap manual-table-wrap"',
-            'contentMain.querySelectorAll(":scope > section > h2")',
-            "contentHeadings.length >= 6",
-            'outline.className = "page-outline"',
-            'outline.setAttribute("aria-label", "章节导航")',
-            'contentMain.querySelector(":scope > .hero")',
+            'this.main.querySelector(":scope > .hero")',
             'insertAdjacentElement("afterend", outline)',
-            '{ href: "architecture/index.html", label: "架构设计" }',
-            '{ href: "architecture/decisions.html", label: "架构决策" }',
-            'title: "指南与参考"',
-            '{ href: "docs/architecture-guide.html", label: "架构设计指南" }',
-            '{ href: "docs/endem-reference.html", label: "Endem 应用参考" }',
-            '{ href: "docs/specifications-reference.html", label: "规范参考指南" }',
-            '{ href: "news/index.html", label: "项目动态" }',
-            '{ href: "faq/index.html", label: "常见问题" }',
-            '{ href: "development/implementation-roadmap.html", label: "开发路线图" }',
         ):
-            if token not in directory_text:
+            if token not in behavior_text:
                 errors.append(
-                    f"directory.js missing readability behavior contract: {token}"
+                    f"content enhancement module missing readability contract: {token}"
                 )
+        for token in (
+            "href: /architecture/index.html",
+            "href: /architecture/decisions.html",
+            "label: 指南",
+            "href: /docs/architecture-guide.html",
+            "href: /docs/endem-reference.html",
+            "href: /docs/specifications-reference.html",
+            "href: /news/index.html",
+            "href: /faq/index.html",
+            "href: /development/implementation-roadmap.html",
+        ):
+            if token not in navigation_text:
+                errors.append(f"navigation data missing readability contract: {token}")
     else:
-        errors.append("missing assets/directory.js")
+        errors.append("missing content enhancement module or navigation data")
 
     if style.exists() and directory_style.exists():
         style_text = style.read_text()
         directory_text = directory_style.read_text()
+        if 'body[data-docs-layout="true"] .hero::before{top:auto;right:auto;bottom:28px;left:50%;width:130px;height:104px;transform:translateX(-50%)}' not in style_text:
+            errors.append("mobile documentation hero visual must be centered on its standalone row")
         css_patterns = {
             "docs content must become a centered single column from 1217px": (
                 style_text,
@@ -813,9 +817,11 @@ def validate_jekyll_sources():
         errors.append("missing .github/workflows/pages.yml")
     else:
         workflow_text = pages_workflow.read_text()
-        for script in ("assets/directory.js", "assets/theme.js"):
+        for script in ("assets/site.mjs", "assets/theme.js"):
             if f"node --check {script}" not in workflow_text:
                 errors.append(f"Pages workflow must syntax-check {script}")
+        if "assets/modules/*.mjs" not in workflow_text:
+            errors.append("Pages workflow must syntax-check every front-end module")
         action_refs = re.findall(
             r"uses:\s+([A-Za-z0-9_-]+/[A-Za-z0-9_-]+)@([^\s#]+)", workflow_text
         )
@@ -996,12 +1002,12 @@ def validate_jekyll_sources():
             "{{ content }}",
             "{% include site-header.html %}",
             "{% include site-footer.html %}",
-            "data-docs-rail",
-            "page.permalink contains '/docs/'",
+            "{% include docs-rail.html %}",
             "{{ '/assets/style.css' | relative_url }}",
             "{{ '/assets/directory.css' | relative_url }}",
             "{{ '/assets/theme.js' | relative_url }}",
-            "{{ '/assets/directory.js' | relative_url }}",
+            "{{ '/assets/site.mjs' | relative_url }}",
+            'type="module"',
             "site.github.build_revision",
             "?v={{ asset_version | escape }}",
             'data-page-role="{{ page.page_role }}"',
@@ -1197,18 +1203,21 @@ def validate_jekyll_sources():
                     f"content layout must be explicit instead of inferred by selector: {selector}"
                 )
 
-    directory_script = SOURCE_ROOT / "assets/directory.js"
-    if directory_script.exists():
-        declared = set(HREF_LITERAL.findall(directory_script.read_text()))
+    navigation_config = SOURCE_ROOT / "_data/navigation.yml"
+    if navigation_config.exists():
+        declared = {
+            href.lstrip("/")
+            for href in NAVIGATION_HREF.findall(navigation_config.read_text())
+        }
         registered_set = set(registered)
         manual_routes = {route for route, path in source_entries if path.suffix == ".md"}
         if not declared <= registered_set:
-            errors.append("directory.js contains links outside the formal route registry")
+            errors.append("navigation data contains links outside the formal route registry")
         missing_static = sorted((registered_set - manual_routes) - declared)
         if missing_static:
-            errors.append(f"directory.js does not cover non-manual routes: {missing_static}")
+            errors.append(f"navigation data does not cover non-manual routes: {missing_static}")
     else:
-        errors.append("missing assets/directory.js")
+        errors.append("missing _data/navigation.yml")
 
     design_routes = {
         "portal": "portal.md",
@@ -1222,6 +1231,7 @@ def validate_jekyll_sources():
         "internal-tools": "internal-tools.md",
         "geometric-layouts": "geometric-layouts.md",
         "philosophical-visual-language": "philosophical-visual-language.md",
+        "frontend-architecture": "frontend-architecture.md",
     }
     design_root = SOURCE_ROOT / "design-system"
     protocol_reference_files = [*SOURCE_PAGE_FILES, *design_root.glob("*.md")]
@@ -1243,7 +1253,7 @@ def validate_jekyll_sources():
 
     manual_config = SOURCE_ROOT / "_data/manuals.yml"
     manual_layout = SOURCE_ROOT / "_layouts/manual.html"
-    manual_directory_data = SOURCE_ROOT / "_includes/manual-directory-data.html"
+    docs_rail_include = SOURCE_ROOT / "_includes/docs-rail.html"
     if not manual_config.exists():
         errors.append("missing _data/manuals.yml")
     if not manual_layout.exists():
@@ -1259,18 +1269,19 @@ def validate_jekyll_sources():
         ):
             if token not in manual_layout_text:
                 errors.append(f"manual layout missing dynamic contract: {token}")
-    if not manual_directory_data.exists():
-        errors.append("missing _includes/manual-directory-data.html")
+    if not docs_rail_include.exists():
+        errors.append("missing _includes/docs-rail.html")
     else:
-        manual_directory_text = manual_directory_data.read_text()
-        if 'sort: "permalink"' not in manual_directory_text:
-            errors.append(
-                "manual directory data must use the unique permalink as its stable build order"
-            )
-        if 'sort: "manual_order"' in manual_directory_text:
-            errors.append(
-                "manual directory data must not sort unrelated manuals by colliding manual_order values"
-            )
+        docs_rail_text = docs_rail_include.read_text()
+        for token in (
+            'where: "manual_id", page.manual_id',
+            'sort: "manual_order"',
+            "data-docs-rail",
+            "data-directory-group",
+            'aria-current="page"',
+        ):
+            if token not in docs_rail_text:
+                errors.append(f"server-rendered manual rail missing contract: {token}")
 
     manual_records = []
     for path in MANUAL_MARKDOWN_FILES:
@@ -1300,43 +1311,54 @@ def validate_jekyll_sources():
                 if f"    {group}:" not in config_text:
                     errors.append(f"manual {manual_id}: unknown configured group {group}")
 
-    if directory_script.exists():
-        directory_text = directory_script.read_text()
+    site_script = SOURCE_ROOT / "assets/site.mjs"
+    module_root = SOURCE_ROOT / "assets/modules"
+    if site_script.exists() and module_root.exists():
+        module_text = "\n".join(path.read_text() for path in sorted(module_root.glob("*.mjs")))
+        site_text = site_script.read_text()
+        navigation_text = navigation_config.read_text() if navigation_config.exists() else ""
         for phrase in PUBLIC_META_PHRASES:
-            if phrase in directory_text:
+            if phrase in navigation_text:
                 errors.append(
-                    f"directory.js exposes internal production phrase {phrase!r} in visible navigation copy"
+                    f"navigation data exposes internal production phrase {phrase!r} in visible copy"
                 )
         for token in (
-            "data-manual-directory-source",
-            "readManualDirectory",
-            "payload.pages",
-            "manualDirectory?.directory",
-            "details.open = true;",
+            "directoryFromDocsRail",
             'trigger.setAttribute("aria-expanded", "false")',
             'item.addEventListener("mouseenter"',
             'item.classList.toggle("is-menu-open", expanded)',
-            'window.setTimeout(() => setExpanded(true), 40)',
-            'window.setTimeout(() => setExpanded(false), 120)',
-            'intro.innerHTML = `<small>${group.kicker}</small>',
+            "setTimeout(() => this.#setExpanded(item, true), 40)",
+            "setTimeout(() => this.#setExpanded(item, false), 120)",
             'document.addEventListener("pointerdown"',
             'event.key === "Escape"',
-            'nextScrollY > previousScrollY + 8',
-            'window.setTimeout(finishPanelClose, 180)',
+            "setTimeout(() => this.#finishClose(), 180)",
             'document.documentElement.classList.add("mobile-directory-open")',
             'document.documentElement.style.setProperty("--mobile-directory-scroll-top"',
             'document.addEventListener("wheel", containOpenMenuGesture, { passive: false })',
             'document.addEventListener("touchmove", containOpenMenuGesture, { passive: false })',
-            'window.scrollTo(0, lockedScrollY)',
-            'setPageScrollLock(true)',
+            "nextScrollY > this.previousScrollY + 8",
+            "NavigationStore",
+            "DirectoryNavigation",
+            "MobileDirectoryController",
         ):
-            if token not in directory_text:
-                errors.append(f"directory.js missing dynamic manual contract: {token}")
-        if "details.open = containsCurrent || groupIndex === 0;" in directory_text:
-            errors.append("desktop documentation rail must not hide non-current groups by default")
-        if "item.dataset.navGroup" in directory_text or "link.dataset.navItem" in directory_text:
-            errors.append("global navigation must not expose decorative title numbers")
-        if "portal-nav-link" in directory_text:
+            if token not in module_text:
+                errors.append(f"front-end modules missing interaction contract: {token}")
+        for token in (
+            'import(moduleUrl("global-navigation"))',
+            'import(moduleUrl("directory-navigation"))',
+            'import(moduleUrl("content-enhancements"))',
+            'if (desktopDirectory.matches) ensureDirectory()',
+            "needsTableScroller || longContent",
+        ):
+            if token not in site_text:
+                errors.append(f"site entry missing progressive loading contract: {token}")
+        if re.search(r'^import\s+.+?from\s+["\']\./modules/', site_text, re.MULTILINE):
+            errors.append("site entry must propagate its build version to route-model imports")
+        for module_name in ("global-navigation.mjs", "directory-navigation.mjs"):
+            dependency_text = (module_root / module_name).read_text()
+            if "new URL(import.meta.url).search" not in dependency_text or "dom-factory.mjs${version}" not in dependency_text:
+                errors.append(f"{module_name} must propagate its build version to shared dependencies")
+        if "portal-nav-link" in module_text:
             errors.append("global navigation must not emit the obsolete portal-nav-link alias")
 
         expected_nav_covers = {
@@ -1356,7 +1378,7 @@ def validate_jekyll_sources():
             ))
             if cover_ids != expected_nav_covers:
                 errors.append("navigation cover sprite must define 22 unique project covers")
-        configured_cover_entries = re.findall(r'cover: "([^"]+)"', directory_text)
+        configured_cover_entries = re.findall(r'\bcover:\s*([^,}\s]+)', navigation_text)
         configured_covers = set(configured_cover_entries)
         if len(configured_cover_entries) != 22 or configured_covers != expected_nav_covers:
             errors.append("global navigation entries must route to unique project covers")
@@ -1632,46 +1654,40 @@ def main():
     if sorted(app_routes) != sorted(APPLICATION_ROUTES):
         errors.append("sitemap.md application routes do not match the approved Endem topology")
 
-    manual_payload_page = ROOT / "docs/index.html"
-    if not manual_payload_page.exists():
-        errors.append("missing docs/index.html for rendered manual directory validation")
-    else:
-        manual_page_text = manual_payload_page.read_text()
-        manual_payload_match = re.search(
-            r'<script type="application/json" data-manual-directory-source>\s*'
-            r'(\{.*?\})\s*</script>',
-            manual_page_text,
-            re.DOTALL,
-        )
-        if manual_payload_match is None:
-            errors.append("docs/index.html: missing rendered manual directory data")
-        else:
-            try:
-                manual_payload = json.loads(manual_payload_match.group(1))
-                manual_routes = [page["route"] for page in manual_payload["pages"]]
-                expected_manual_routes = sorted(read_manual_source_routes())
-                if manual_routes != expected_manual_routes:
-                    errors.append(
-                        "rendered manual directory data must contain every manual route exactly once in formal route order"
-                    )
-                manual_index_routes = [
-                    "docs/index.html",
-                    *[routes[0] for routes in MANUAL_ROUTE_ORDERS.values()],
-                ]
-                for manual_index_route in manual_index_routes:
-                    index_path = ROOT / manual_index_route
-                    index_match = re.search(
-                        r'<script type="application/json" data-manual-directory-source>\s*'
-                        r'(\{.*?\})\s*</script>',
-                        index_path.read_text() if index_path.exists() else "",
-                        re.DOTALL,
-                    )
-                    if index_match is None:
-                        errors.append(f"{manual_index_route}: missing shared manual directory data")
-                    elif json.loads(index_match.group(1)) != manual_payload:
-                        errors.append(f"{manual_index_route}: manual directory payload diverges from the shared source")
-            except (KeyError, TypeError, json.JSONDecodeError) as exc:
-                errors.append(f"docs/index.html: invalid rendered manual directory data: {exc}")
+    manual_ids = {"docs", *MANUAL_ROUTE_ORDERS}
+    for manual_id in manual_ids:
+        expected_manual_routes = [
+            entry["route"] for entry in read_manual_source_entries(manual_id)
+        ]
+        for route in expected_manual_routes:
+            manual_path = ROOT / route
+            if not manual_path.exists():
+                errors.append(f"missing rendered manual page {route}")
+                continue
+            rail_match = re.search(
+                rf'<nav data-docs-rail data-manual-id="{re.escape(manual_id)}".*?</nav>',
+                manual_path.read_text(),
+                re.DOTALL,
+            )
+            if rail_match is None:
+                errors.append(f"{route}: missing server-rendered manual rail")
+                continue
+            link_groups = re.findall(
+                r'<div class="docs-rail-links">(.*?)</div>',
+                rail_match.group(0),
+                re.DOTALL,
+            )
+            rendered_routes = [
+                urlsplit(href).path.lstrip("/")
+                for group in link_groups
+                for href in re.findall(r'<a href="([^"]+)"', group)
+            ]
+            if rendered_routes != expected_manual_routes:
+                errors.append(
+                    f"{route}: manual rail must contain its manual routes once in manual_order"
+                )
+            if rail_match.group(0).count("data-directory-group open") != len(link_groups):
+                errors.append(f"{route}: every desktop manual group must start open")
 
     home = ROOT / "index.html"
     if home.exists():
@@ -2031,11 +2047,15 @@ def main():
             if forbidden in current_stage_output_text:
                 errors.append(f"current stage output exposes internal workflow copy: {forbidden}")
 
-    directory_script = ROOT / "assets/directory.js"
+    site_script = ROOT / "assets/site.mjs"
+    route_module = ROOT / "assets/modules/route-model.mjs"
+    directory_module = ROOT / "assets/modules/directory-navigation.mjs"
+    navigation_data = ROOT / "assets/navigation-data.json"
     theme_script = ROOT / "assets/theme.js"
     favicon = ROOT / "assets/favicon.svg"
-    if not directory_script.exists():
-        errors.append("missing assets/directory.js")
+    for path in (site_script, route_module, directory_module, navigation_data):
+        if not path.exists():
+            errors.append(f"missing built front-end asset {path.relative_to(ROOT)}")
     if not theme_script.exists():
         errors.append("missing assets/theme.js")
     if not favicon.exists():
@@ -2074,6 +2094,11 @@ def main():
                 errors.append(f"{rel}: Open Graph URL must exactly match its formal route")
         if RAW_AMP.search(text):
             errors.append(f"{rel}: contains an unescaped ampersand")
+        if text.count('data-global-nav-item=') != 5:
+            errors.append(f"{rel}: server-rendered primary navigation must expose five task links")
+        no_script_match = re.search(r"<noscript>(.*?)</noscript>", text, re.DOTALL)
+        if no_script_match is None or "/sitemap.md" not in no_script_match.group(1):
+            errors.append(f"{rel}: no-script navigation must expose the complete route registry")
         if parser.directory_containers != 1:
             errors.append(f"{rel}: expected one data-directory nav")
         for section in parser.sections:
@@ -2090,15 +2115,15 @@ def main():
         for stylesheet in parser.stylesheets:
             if not urlsplit(stylesheet).query:
                 errors.append(f"{rel}: shared stylesheet must include a build cache key: {stylesheet}")
-        directory_scripts = [
+        site_scripts = [
             script
             for script in parser.scripts
-            if urlsplit(script).path.endswith("assets/directory.js")
+            if urlsplit(script).path.endswith("assets/site.mjs")
         ]
-        if len(directory_scripts) != 1:
-            errors.append(f"{rel}: missing shared directory script")
-        elif not urlsplit(directory_scripts[0]).query:
-            errors.append(f"{rel}: shared directory script must include a build cache key")
+        if len(site_scripts) != 1:
+            errors.append(f"{rel}: missing shared module entry")
+        elif not urlsplit(site_scripts[0]).query:
+            errors.append(f"{rel}: shared module entry must include a build cache key")
         for script in parser.scripts:
             if not urlsplit(script).query:
                 errors.append(f"{rel}: shared script must include a build cache key: {script}")
@@ -2125,39 +2150,61 @@ def main():
     if len(rendered_canonical_urls) != len(set(rendered_canonical_urls)):
         errors.append("rendered canonical URLs must be unique across formal routes")
 
-    if directory_script.exists() and route_rows:
-        directory_source = directory_script.read_text()
-        declared = set(HREF_LITERAL.findall(directory_source))
+    if navigation_data.exists() and route_module.exists() and directory_module.exists() and route_rows:
+        try:
+            navigation_payload = json.loads(navigation_data.read_text())
+        except json.JSONDecodeError as error:
+            errors.append(f"built navigation data is invalid JSON: {error}")
+            navigation_payload = {}
+        declared = {
+            urlsplit(item.get("href", "")).path.lstrip("/")
+            for module in navigation_payload.get("modules", {}).values()
+            for group in module.get("groups", [])
+            for item in group.get("items", [])
+        }
+        declared.update(
+            urlsplit(group.get("href", "")).path.lstrip("/")
+            for group in navigation_payload.get("global", [])
+        )
+        declared.update(
+            urlsplit(item.get("href", "")).path.lstrip("/")
+            for group in navigation_payload.get("global", [])
+            for item in group.get("items", [])
+        )
+        declared.discard("")
         registered_set = set(registered)
         manual_routes = {
             route for route in registered
             if route.startswith("docs/") or route.startswith("endem/docs/")
         }
         if not declared <= registered_set:
-            errors.append("directory.js contains links outside the formal route registry")
+            errors.append("built navigation data contains links outside the formal route registry")
         missing_static = sorted((registered_set - manual_routes) - declared)
         if missing_static:
-            errors.append(f"directory.js does not cover non-manual routes: {missing_static}")
-        for token in (
-            "DIRECTORY_MODULES",
-            "resolveDirectoryModule",
-            "nav-section-toggle",
-            'setAttribute("aria-expanded"',
-            'toggleAttribute("inert"',
-        ):
+            errors.append(f"built navigation data does not cover non-manual routes: {missing_static}")
+        directory_source = directory_module.read_text()
+        for token in ("DirectoryNavigation", "nav-section-toggle", 'toggleAttribute("inert"'):
             if token not in directory_source:
-                errors.append(f"directory.js missing modular navigation contract: {token}")
+                errors.append(f"directory module missing contract: {token}")
+        dom_factory_source = (ROOT / "assets/modules/dom-factory.mjs").read_text()
+        global_navigation_source = (ROOT / "assets/modules/global-navigation.mjs").read_text()
+        if 'createElementNS("http://www.w3.org/2000/svg"' not in dom_factory_source:
+            errors.append("navigation covers must create nodes in the SVG namespace")
+        if 'createSvgElement("svg"' not in global_navigation_source or 'createSvgElement("use"' not in global_navigation_source:
+            errors.append("global navigation must render both SVG and use nodes through the SVG factory")
+        if "routeModel.isCurrent(item.href)" not in directory_source:
+            errors.append("directory current-page state must use exact URL matching")
         node = shutil.which("node")
         if node is None:
             errors.append("node is required to execute directory active-item behavior tests")
         else:
             active_cases = [
-                ["endem/index.html", "https://site.test/endem", "https://site.test/endem/docs", True],
-                ["endem/index.html", "https://site.test/endem", "https://site.test/endem/docs/safety.html", True],
-                ["endem/index.html", "https://site.test/endem", "https://site.test/endem-old/docs", False],
-                ["docs/index.html", "https://site.test/docs", "https://site.test/docs/guide", True],
-                ["docs/index.html", "https://site.test/docs", "https://site.test/docs/getting-started.html", True],
-                ["docs/index.html", "https://site.test/docs", "https://site.test/docs-old/guide.html", False],
+                ["endem/index.html", "https://site.test/endem/index.html", True],
+                ["endem/index.html", "https://site.test/endem/", True],
+                ["endem/index.html", "https://site.test/endem/docs/safety.html", False],
+                ["docs/index.html", "https://site.test/docs", True],
+                ["docs/index.html", "https://site.test/docs/getting-started.html", False],
+                ["docs/index.html", "https://site.test/docs-old/guide.html", False],
             ]
             module_cases = [
                 ["index.html", "project"],
@@ -2178,30 +2225,24 @@ def main():
                 ["endem/docs/safety.html", "endem"],
             ]
             behavior_script = (
-                "const api = require(process.argv[1]);"
-                "if (globalThis.NoemionDirectory !== undefined) "
-                "throw new Error('directory module must not expose a global API');"
-                "if (!Object.isFrozen(api)) throw new Error('directory module API must be frozen');"
-                "const { isDirectoryItemActive, resolveDirectoryModule, createManualDirectory } = api;"
+                "const api = await import(process.argv[1]);"
+                "const { RouteModel, resolveDirectoryModule } = api;"
                 "const cases = JSON.parse(process.argv[2]);"
-                "const active = cases.map(([itemHref, target, current]) => "
-                "isDirectoryItemActive(itemHref, target, current));"
+                "const active = cases.map(([itemHref, current]) => "
+                "new RouteModel('https://site.test/', current).isCurrent(itemHref));"
                 "const moduleCases = JSON.parse(process.argv[3]);"
                 "const modules = moduleCases.map(([route]) => resolveDirectoryModule(route));"
-                "const manual = createManualDirectory({"
-                "manuals:{demo:{kicker:'Docs',title:'Demo',root:'/docs/index.html',"
-                "parent_url:'/index.html',parent_label:'Home',groups:{start:{label:'Start',order:1}}}},"
-                "pages:[{manualId:'demo',group:'start',order:2,route:'docs/new.html',label:'New'},"
-                "{manualId:'demo',group:'start',order:0,route:'docs/index.html',label:'Home'}]},"
-                "'docs/new.html');"
-                "process.stdout.write(JSON.stringify({active, modules, manual}));"
+                "const baseModel = new RouteModel('https://site.test/project/', 'https://site.test/project/docs/a.html');"
+                "const basePaths = [baseModel.absolute('/project/docs/index.html'),baseModel.absolute('/docs/index.html')];"
+                "process.stdout.write(JSON.stringify({active, modules, basePaths}));"
             )
             completed = subprocess.run(
                 [
                     node,
+                    "--input-type=module",
                     "-e",
                     behavior_script,
-                    str(directory_script),
+                    route_module.as_uri(),
                     json.dumps(active_cases),
                     json.dumps(module_cases),
                 ],
@@ -2215,11 +2256,11 @@ def main():
                 )
             else:
                 actual = json.loads(completed.stdout)
-                expected_active = [case[3] for case in active_cases]
+                expected_active = [case[2] for case in active_cases]
                 expected_modules = [case[1] for case in module_cases]
                 if actual["active"] != expected_active:
                     errors.append(
-                        "directory active-item behavior mismatch: "
+                        "directory exact-current behavior mismatch: "
                         f"expected {expected_active}, got {actual['active']}"
                     )
                 if actual["modules"] != expected_modules:
@@ -2227,11 +2268,11 @@ def main():
                         "directory module routing mismatch: "
                         f"expected {expected_modules}, got {actual['modules']}"
                     )
-                manual_items = actual["manual"]["directory"]["groups"][0]["items"]
-                if actual["manual"]["moduleKey"] != "manual-demo" or [
-                    item["href"] for item in manual_items
-                ] != ["docs/index.html", "docs/new.html"]:
-                    errors.append("dynamic manual directory does not sort new Markdown pages")
+                if actual["basePaths"] != [
+                    "https://site.test/project/docs/index.html",
+                    "https://site.test/project/docs/index.html",
+                ]:
+                    errors.append("route model must not duplicate a configured base path")
 
     for manual_id, manual_routes in MANUAL_ROUTE_ORDERS.items():
         manual_index = ROOT / manual_routes[0]

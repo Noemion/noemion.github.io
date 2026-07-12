@@ -1,0 +1,162 @@
+global:
+  - key: project
+    href: /about/index.html
+    label: 项目
+    kicker: 建立共同语境
+    description: 从项目背景、架构设计和方法边界理解 Noemion 为什么存在。
+    items:
+      - { href: /about/background.html, label: 背景与边界, description: 为什么目标语义需要成为工程对象, cover: background, cover_label: "EXPRESSION ≠ IDENTITY" }
+      - { href: /architecture/index.html, label: 架构设计, description: 从编译、链接到可信装载的职责分层, cover: architecture, cover_label: "TRUST PIPELINE" }
+      - { href: /about/intellectual-foundations.html, label: 思想与方法, description: 区分思想启发、工程类比与可验证结论, cover: foundations, cover_label: "METHOD / BOUNDARY" }
+      - { href: /faq/index.html, label: 常见问题, description: 直接回答项目范围、状态与非目标, cover: faq, cover_label: "SCOPE CHECK" }
+  - key: specifications
+    href: /specifications/index.html
+    label: 规范
+    kicker: 定义权威边界
+    description: 查看 Endem、组合闭包、范围证据和组件契约。
+    items:
+      - { href: /specifications/endem.html, label: Endem, description: 最小自然语言目标对象与规范字段, cover: endem-spec, cover_label: "SAY → DONE" }
+      - { href: /specifications/synem.html, label: Synem, description: 已解析、可封装的组合闭包, cover: synem, cover_label: "RESOLVED CLOSURE" }
+      - { href: /specifications/tekmor.html, label: Tekmor, description: 含 phain 的有范围证据, cover: tekmor, cover_label: "SCOPED EVIDENCE" }
+      - { href: /components/index.html, label: 系统组件, description: Poiet、Theor 与 Praxor 的权限和失败边界, cover: components, cover_label: "SYSTEM BOUNDARIES" }
+  - key: endem
+    href: /endem/index.html
+    label: Endem
+    kicker: 形成、检查与运行
+    description: 通过一个公开命令面进入确定性对象工程和受限运行。
+    items:
+      - { href: /endem/index.html, label: Endem 应用, description: 查看唯一公开 CLI 与八个动作的边界, cover: endem, cover_label: "ONE COMMAND" }
+      - { href: /endem/docs/format.html, label: 格式与形成, description: 定义规范字段、编码与确定性形成, cover: format, cover_label: "POIE / ELENK" }
+      - { href: /endem/docs/safety.html, label: 安全与证据, description: 检查有界读取、独立观察与签名边界, cover: theor, cover_label: "ELENK / THEOR" }
+      - { href: /endem/docs/running.html, label: 装载与运行, description: 理解 Dromen、能力、phain 与 Tekmor, cover: praxe, cover_label: "SPHRA / PRAXE" }
+  - key: docs
+    href: /docs/index.html
+    label: 指南
+    kicker: 选择阅读路径
+    description: 按入门、架构设计、开发、应用和规范主题选择指南或参考资料。
+    items:
+      - { href: /docs/getting-started.html, label: 入门指南, description: 从问题背景和核心对象开始, cover: getting-started, cover_label: "START PATH" }
+      - { href: /docs/architecture-guide.html, label: 架构设计指南, description: 理解生命周期、边界与失败路径, cover: architecture-guide, cover_label: "BOUNDARY GUIDE" }
+      - { href: /docs/endem-reference.html, label: Endem 应用参考, description: 查找 Endem 动作与组件职责, cover: application-reference, cover_label: "ACTION MAP" }
+      - { href: /docs/specifications-reference.html, label: 规范参考指南, description: 查找权威来源、成熟度和 ADR 阅读顺序, cover: spec-reference, cover_label: "SPEC AUTHORITY" }
+      - { href: /endem/docs/index.html, label: Endem 使用手册, description: 查找格式、绑定、安全、运行和参考主题, cover: endem-manual, cover_label: "ENDEM MANUAL" }
+  - key: development
+    href: /development/index.html
+    label: 开发
+    kicker: 以证据推进
+    description: 查看当前进展、验证策略、后续规划和可下载资源状态。
+    items:
+      - { href: /development/current-stage.html, label: 当前项目阶段, description: 已完成工作、正在推进内容与后续规划, cover: current-stage, cover_label: "ACTIVE WORK" }
+      - { href: /development/implementation-roadmap.html, label: 开发路线图, description: 阶段安排、应用职责与完成标准, cover: roadmap, cover_label: "DELIVERY PATH" }
+      - { href: /development/testing.html, label: 测试与验证, description: 确定性、模糊测试、威胁与一致性验证, cover: testing, cover_label: "REJECT MATRIX" }
+      - { href: /news/index.html, label: 项目动态, description: 只登记可核对的项目进展, cover: news, cover_label: "VERIFIED SIGNAL" }
+      - { href: /downloads/index.html, label: 资源状态, description: 版本、签名和发布资源的真实状态, cover: downloads, cover_label: "SIGNED PACKAGE" }
+
+modules:
+  project:
+    kicker: Project
+    title: 项目导航
+    root: { href: /index.html, label: 项目首页 }
+    groups:
+      - label: 项目
+        items:
+          - { href: /index.html, label: 项目首页 }
+          - { href: /about/index.html, label: 项目背景 }
+          - { href: /about/background.html, label: 背景与边界 }
+          - { href: /about/intellectual-foundations.html, label: 思想与方法基础 }
+      - label: 架构设计
+        items:
+          - { href: /architecture/index.html, label: 架构设计 }
+          - { href: /specifications/index.html, label: 规范 }
+          - { href: /components/index.html, label: 组件 }
+      - label: 资源
+        items:
+          - { href: /endem/index.html, label: Endem 应用 }
+          - { href: /docs/index.html, label: 指南与参考 }
+          - { href: /downloads/index.html, label: 下载与资源 }
+          - { href: /faq/index.html, label: 常见问题 }
+      - label: 开发
+        items:
+          - { href: /development/index.html, label: 开发与贡献 }
+          - { href: /news/index.html, label: 项目动态 }
+  architecture:
+    kicker: Architecture
+    title: 架构设计与基础对象
+    root: { href: /architecture/index.html, label: 架构设计首页 }
+    parent: { href: /index.html, label: 返回项目首页 }
+    groups:
+      - label: 架构设计
+        items:
+          - { href: /architecture/index.html, label: 架构设计总览 }
+          - { href: /architecture/endem-lifecycle.html, label: Endem 生命周期 }
+          - { href: /architecture/decisions.html, label: 架构决策 }
+          - { href: /architecture/adr-0008-endem-system.html, label: "ADR-0008 · Endem 体系" }
+          - { href: /architecture/adr-0009-propositional-kernel.html, label: "ADR-0009 · 命题投影" }
+          - { href: /architecture/adr-0010-native-lexicon.html, label: "ADR-0010 · 原生词汇与事态" }
+          - { href: /architecture/open-questions.html, label: 开放问题 }
+      - label: 对象规范
+        items:
+          - { href: /specifications/index.html, label: 规范与成熟度 }
+          - { href: /specifications/endem.html, label: Endem }
+          - { href: /specifications/synem.html, label: Synem }
+          - { href: /specifications/tekmor.html, label: Tekmor }
+      - label: 系统组件
+        items:
+          - { href: /components/index.html, label: 组件总览 }
+          - { href: /components/poiet.html, label: Poiet }
+          - { href: /components/theor.html, label: Theor }
+          - { href: /components/praxor.html, label: Praxor }
+  resources:
+    kicker: Resources
+    title: 资源与支持
+    root: { href: /downloads/index.html, label: 资源首页 }
+    parent: { href: /index.html, label: 返回项目首页 }
+    groups:
+      - label: 获取资源
+        items:
+          - { href: /downloads/index.html, label: 下载与资源 }
+          - { href: /docs/index.html, label: 指南与参考 }
+      - label: 支持
+        items:
+          - { href: /faq/index.html, label: 常见问题 }
+          - { href: /development/index.html, label: 开发与贡献 }
+  development:
+    kicker: Development
+    title: 开发与贡献
+    root: { href: /development/index.html, label: 开发与贡献 }
+    parent: { href: /index.html, label: 返回项目首页 }
+    groups:
+      - label: 开发
+        items:
+          - { href: /development/index.html, label: 开发概览 }
+          - { href: /development/current-stage.html, label: 当前项目阶段 }
+          - { href: /development/implementation-roadmap.html, label: 开发路线图 }
+          - { href: /development/testing.html, label: 测试与验证 }
+      - label: 项目状态
+        items:
+          - { href: /news/index.html, label: 项目动态 }
+          - { href: /architecture/open-questions.html, label: 开放问题 }
+  endem:
+    kicker: Application
+    title: Endem
+    root: { href: /endem/index.html, label: Endem 应用 }
+    parent: { href: /index.html, label: 返回项目首页 }
+    groups:
+      - label: 应用入口
+        items:
+          - { href: /endem/index.html, label: Endem 应用 }
+          - { href: /endem/docs/index.html, label: Endem 使用手册 }
+      - label: 形成与绑定
+        items:
+          - { href: /endem/docs/format.html, label: 格式与形成 }
+          - { href: /endem/docs/binding.html, label: 绑定与闭包 }
+      - label: 安全与运行
+        items:
+          - { href: /endem/docs/safety.html, label: 安全与证据 }
+          - { href: /endem/docs/running.html, label: 装载与运行 }
+          - { href: /endem/docs/reference.html, label: 动作与诊断参考 }
+      - label: 职责边界
+        items:
+          - { href: /components/poiet.html, label: Poiet }
+          - { href: /components/theor.html, label: Theor }
+          - { href: /components/praxor.html, label: Praxor }

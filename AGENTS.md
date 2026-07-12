@@ -27,7 +27,7 @@
 - `endem/index.html` 必须保持 HTML 源，并按 `design-system/internal-tools.md` 使用统一应用视觉；`endem/docs/*.md` 使用纯通用 Markdown 正文。八个动作可以拥有有限的状态色和图形强调，但不能被包装为八个独立应用、命令品牌或权限域。
 - Endem 应用页“继续阅读”章节只放置可点击资源入口，不得在卡片之后追加孤立的候选接口。接口状态、开发顺序或候选契约必须放在“当前状态”或“它不会做什么”的明确上下文中，且不能与全站未发布声明重复。
 - 手册与指南正文的权威源文件必须使用 Markdown；Jekyll 负责把 Markdown 转换为正式 `.html` 路由。正文只允许通用 Markdown 语法，不得包含原始 HTML 或 Kramdown 专有属性。不得把构建生成的 HTML 当作正文维护入口，也不得同时保留内容重复的 `.md` 与手写 `.html` 两套权威源。新增页面只通过 Markdown Front Matter 加入手册，目录、索引和分页必须根据 `manual_id`、分组与顺序动态生成。
-- 全站样式只在 `assets/style.css` 和 `assets/directory.css` 维护，目录数据与渲染只在 `assets/directory.js` 维护；禁止页面级 CSS 和复制目录链接。
+- 全站样式只在 `assets/style.css` 和 `assets/directory.css` 维护；正式导航数据只在 `_data/navigation.yml` 与 `_data/manuals.yml` 维护，服务端导航由 `_includes/` 生成，按需交互由 `assets/site.mjs` 与 `assets/modules/*.mjs` 维护。禁止页面级 CSS、页面内交互脚本和复制目录链接。
 - 全站顶部一级入口在悬停与键盘聚焦时展开分组面板；卡片标题、箭头和表面必须提供一致悬停反馈，并支持 `prefers-reduced-motion`。页面类型映射、视觉元素和验收细则维护在 `sitewide-design-system.md`，README 只保留公开层面的概要。
 - 修改任何页面、布局、目录、CSS 或交互动效前，必须先读取 `design-system/README.md`，再按其中的路由表读取目标 `page_role` 或组件对应的设计文档；改动跨越多个页面角色时必须同时遵守所有相关文档。新增页面范式时先新增设计文档和路由，不得只在实现中形成隐式规则。
 - 公开页面不得把设计提案、候选名称、未来能力、论文、专利、软著或标准化意图表述为已实现或已获认可的成果。
