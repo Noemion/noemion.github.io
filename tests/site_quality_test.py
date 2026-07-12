@@ -1119,6 +1119,7 @@ def validate_jekyll_sources():
             "prefers-reduced-motion:reduce",
             "body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}",
             ".global-timeline-value{",
+            "width:100%;height:100%;min-width:96px;min-height:64px",
             "background:#fff",
             ".content-split{",
             ".content-split-reverse{",
@@ -1160,7 +1161,7 @@ def validate_jekyll_sources():
             'body .global-brand{grid-column:1;min-width:0;overflow:hidden',
             'body .global-brand>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
             'body[data-page-role="portal"] .global-header-inner{grid-template-columns:minmax(0,1fr) clamp(102px,30vw,124px) 84px}',
-            'body[data-page-role="portal"] .global-timeline-link{width:100%;min-width:0;padding:10px 5px}',
+            'body[data-page-role="portal"] .global-timeline-link{width:100%;min-width:0;padding:0}',
             'body[data-page-role="portal"] .global-timeline-value{width:100%;min-width:0;padding-inline:7px;font-size:10px;letter-spacing:.04em}',
         ):
             if token not in shared_css:
