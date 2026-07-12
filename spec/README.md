@@ -6,11 +6,12 @@
 
 | 规范 | 版本 | 状态 | 已覆盖 | 明确未覆盖 |
 | --- | --- | --- | --- | --- |
-| [`endem-core.md`](endem-core.md) | `0.1.0-draft` | 草案；已接受语义边界的第一份条款化表达 | Endem 最小性、六个语义面、事态与方向分离、未知状态、确定性、安全读取、身份分层与验证责任 | 物理编码、魔数、字段宽度、记录编号、规范文本语法、摘要与签名算法、稳定 ABI |
+| [`endem-core.md`](endem-core.md) | `0.1.0-draft` | 草案；已接受语义边界的第一份条款化表达 | Endem 最小性、六个语义面、事态与方向分离、未知状态、确定性、安全读取、身份分层与验证责任 | 完整记录字段 schema、求值语言、摘要与签名算法 |
+| [`endem-format.md`](endem-format.md) | `0.1.0-draft` | 已采用的实验性草案；尚非稳定 ABI | 固定前导、定宽记录目录、六种记录、确定性 CBOR 子集、END-P0 与结构诊断 | 完整语义载荷、coherent/attested、签名、压缩、Synem 和跨版本承诺 |
 
-[`endem-threat-model.md`](endem-threat-model.md) 把不可信输入、资源放大、歧义清洗、身份混淆和解析器共同故障映射到规范条款。它要求每个读取 Profile 给出有限上限，但不会在缺少语料和复杂度实验时随意冻结数值。
+[`endem-threat-model.md`](endem-threat-model.md) 把不可信输入、资源放大、歧义清洗、身份混淆和解析器共同故障映射到规范条款。[`profiles/end-p0.json`](profiles/end-p0.json) 给出第一组跨实现实验的有限上限；这些数值不是生产规模证明，提高时必须采用新的 Profile 身份。
 
-[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存语义向量；这些 JSON 文件只是测试输入外壳，不是 `.endem` 文件，也不预告未来二进制布局。
+[`endem-errors.md`](endem-errors.md) 登记结构与 Profile 错误码。[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存 JSON 语义外壳；`../vectors/wire/` 保存真实字节的十六进制表达。结构接受向量不等于语义有效 Endem。
 
 ## 规范强度
 
@@ -30,7 +31,7 @@
 - `evidence_status`：仓库内是否已有覆盖向量或测试；
 - `wire_status`：物理编码是否冻结。
 
-`decision_status: accepted` 不表示实现存在，也不表示证据充分。`wire_status: unfrozen` 时，任何程序都不得声称产生可互操作的稳定 `.endem` 字节。
+`decision_status: accepted` 不表示实现存在，也不表示证据充分。`wire_status: experimental-draft` 只允许草案实验；任何程序都不得声称产生可互操作的稳定 `.endem` 字节。
 
 ## 变更规则
 
@@ -39,4 +40,4 @@
 3. 删除条款必须保留版本历史，并说明替代条款或删除理由。
 4. `covered-by-repo` 只能用于仓库中实际存在且由自动检查读取的证据。
 5. `planned` 表示验证尚未实现，不能在公开页面写成已经通过。
-6. 物理格式确定后另建格式规范；不得把语义向量 JSON 直接改名为 `.endem`。
+6. 格式草案变化必须同步 ADR、END-FMT、Profile、错误目录、登记和正反字节向量；不得把语义向量 JSON 直接改名为 `.endem`。

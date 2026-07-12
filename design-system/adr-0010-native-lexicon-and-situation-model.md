@@ -108,4 +108,4 @@ Endem/Synem 使用三个英文状态值：
 - 所有现行规范、页面、手册、路由、目录、示例、视觉、测试和项目简介在同一变更中迁移。
 - `/specifications/weave.html`、`/specifications/witness.html`、`/components/core.html`、`/components/reader.html` 与 `/components/runner.html` 删除，使用 Synem、Tekmor、Poiet、Theor、Praxor 新路由，不提供重定向。
 - ADR-0008 与 ADR-0009 保留为被取代的历史记录；旧词只允许出现在明确标为 Superseded 的 ADR 和名称迁移表。
-- 物理编码、字段编号、`phain` 编码、求值语言、量化与时间模型、扩展 registry 和稳定 ABI 仍未冻结。
+- ADR-0011 已采用实验性固定前导、目录和六个记录编号；记录内部字段、`phain` 编码、求值语言、量化与时间模型、扩展 registry 和稳定 ABI 仍未冻结。

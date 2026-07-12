@@ -76,6 +76,7 @@ REQUIRED_CORE_ROUTES = {
     "specifications/tekmor.html",
     "architecture/endem-lifecycle.html",
     "architecture/adr-0010-native-lexicon.html",
+    "architecture/adr-0011-endem-container.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -218,6 +219,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0008-endem-system.html",
     "architecture/adr-0009-propositional-kernel.html",
     "architecture/adr-0010-native-lexicon.html",
+    "architecture/adr-0011-endem-container.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -928,6 +930,9 @@ def validate_jekyll_sources():
                 errors.append(f"Pages workflow must pin {action_name} to a full commit SHA")
         for workflow_contract in (
             "bundler-cache: true",
+            "python3 tests/spec_contract_test.py",
+            "python3 tests/wire_vector_test.py",
+            "python3 tests/site_quality_test.py",
             'bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"',
             "JEKYLL_ENV: production",
         ):

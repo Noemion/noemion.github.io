@@ -7,13 +7,13 @@ permalink: "/specifications/endem.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>Endem</span></nav>
-  <header class="content-introduction"><h1>Endem</h1><p>一件 Endem 说明目标来自哪里、表示什么、期望什么，以及怎样判断是否满足。</p><div class="badges"><span class="badge">END-CORE 0.1.0-draft</span><span class="badge">Six Semantic Facets</span><span class="badge">One Root Skena</span><span class="badge">Encoding Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>Endem</h1><p>一件 Endem 说明目标来自哪里、表示什么、期望什么，以及怎样判断是否满足。</p><div class="badges"><span class="badge">END-CORE 0.1.0-draft</span><span class="badge">END-FMT 0.1.0-draft</span><span class="badge">One Root Skena</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
     <h2>Endem 表示什么</h2>
     <p class="lead">Endem 是最小、独立有效且可验证的期望终态单元。它把一项自然语言目标变成可检查的对象—关系契约。</p>
     <p>这份契约保存来源表达、已确认意义、中性可能事态、目标方向、比较规则和未决信息。它不规定模型采用哪条提示、计划或推理过程。</p>
-    <p class="callout"><strong>权威边界：</strong>这是一份面向读者的规范解释。实现义务、条款 ID 与验证映射以版本化 Markdown 源为准：<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md</a>。当前物理编码仍未冻结。</p>
+    <p class="callout"><strong>权威边界：</strong>这是一份面向读者的规范解释。语义义务与条款 ID 以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md</a> 为准；实验性容器以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md</a> 为准。END-FMT 0.1.0-draft 尚非稳定 ABI。</p>
     <p class="callout"><strong>最小不变量：</strong>一个 Endem 必须且只能有一个根 <code>skena</code> 节点。根节点可以组合相互依赖的子命题；如果两个根可以独立实现、验收或失败，Poiet 必须形成两个 Endem，再由 Synem 组合。</p>
   </section>
 
@@ -27,7 +27,7 @@ permalink: "/specifications/endem.html"
       <tr id="krin"><td><code>krin</code></td><td><code>phain</code> 观察类型、结构比较、必需 Tekmor、<code>agno/fault</code> 处理和决定权威。</td><td>命题自证、只给分数没有结构比较、观察不足被当作满足或模型成为唯一权威。</td></tr>
       <tr id="apor"><td><code>apor</code></td><td>候选解释、冲突、缺口、风险、解决策略和有权绑定的主体。</td><td>只保留最高置信候选、无授权关闭歧义、未决项在状态变化中消失。</td></tr>
     </tbody></table></div>
-    <p><code>rhem/semion/skena/telis/krin/apor</code> 是固定顶层键与语义顺序；没有未决项时，<code>apor</code> 必须是显式空集合。二进制记录编号和物理排布尚未冻结。任何布局都必须恢复同一顺序、符号身份、关系位置与规范含义。</p>
+    <p><code>rhem/semion/skena/telis/krin/apor</code> 是固定语义顺序；没有未决项时，<code>apor</code> 必须是显式空集合。END-P0 把它们登记为编号 1–6 的六个关键记录，但记录内部字段编号仍未冻结。任何后续布局都必须恢复同一顺序、符号身份、关系位置与规范含义。</p>
   </section>
 
   <section class="content-wide">
@@ -88,7 +88,7 @@ permalink: "/specifications/endem.html"
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p>六个语义面、一个根 <code>skena</code>、事态与方向分离、<code>phain</code> 结构比较、三类未知、三个制品状态、<code>.endem</code> 扩展名和安全读取原则已经采用。物理编码、文本语法、字段宽度、魔数、记录编号、量化与时间模型、求值语言、压缩、摘要和签名算法仍需规范向量、两个独立解释实现和对抗测试。</p>
+    <p>六个语义面、一个根 <code>skena</code>、事态与方向分离、<code>phain</code> 结构比较、三类未知、三个制品状态和 <code>.endem</code> 扩展名已经采用。END-FMT 0.1 还采用实验性魔数、定宽目录、记录编号、受限 CBOR 与 END-P0；完整字段 schema、量化与时间模型、求值语言、压缩、摘要和签名算法仍需规范向量、两个独立解释实现和对抗测试。</p>
   </section>
   <div class="next-prev"><a href="index.html">← 规范参考指南</a><a href="synem.html">Synem 规范 →</a></div>
 </main>

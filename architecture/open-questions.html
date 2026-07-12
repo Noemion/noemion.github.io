@@ -12,14 +12,14 @@ permalink: "/architecture/open-questions.html"
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
     <p class="lead">ADR-0010 已经采用现行制品、组件、六个语义面、三个制品状态和八个动作。这些名称与职责不再作为开放问题反复讨论。</p>
-    <p>END-CORE 0.1.0-draft 已把语义与安全边界写成唯一条款 ID，并建立首组语义向量和威胁映射。它没有冻结物理编码、Profile 数值、求值语言或实现选择。</p>
+    <p>END-CORE 与 END-FMT 0.1.0-draft 已把语义、安全和实验性容器写成唯一条款 ID，并建立 END-P0、结构错误目录与首组语义/字节向量。格式草案仍可修订，也没有冻结完整字段 schema、求值语言或实现选择。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
 
   <section class="content-grid">
     <h2>Endem 编码与语义</h2>
     <details open><summary>受控来源表达采用什么最小语法？</summary><p>需要比较严格声明式文本、带自然语言来源的结构化文档和 API 输入。任何方案都必须明确表达六个语义面、来源范围、关系位置和未知状态，并能在无模型环境确定性解析。</p></details>
-    <details><summary>Endem 的物理编码怎样支持安全随机访问？</summary><p>需确定魔数、版本、目录、字段宽度、记录长度、对齐、关键/可选扩展、压缩和资源上限。首要目标是有界读取和跨实现一致，不是兼容 ELF 或某种通用容器。</p></details>
+    <details><summary>实验性容器还缺哪些字段？</summary><p>固定前导、目录、记录范围和 END-P0 已有草案；仍需定义六个记录内部的字段编号、引用、关系 schema、时间、量化和单位。每项新增字段都要有真实消费者、失败语义和正反字节向量。</p></details>
     <details><summary>一个根 skena 的语义等价怎样判断？</summary><p>布局、来源注释或调试记录变化后，哪些 semion、skena、telis、krin 和 apor 属性必须保持，仍需规范化规则和反例。规则冻结前只能比较显式符号、关系和条件，不能发明语义哈希。</p></details>
     <details><summary>自然语言候选由谁授权决定？</summary><p>需定义决定主体、作用范围、撤销、重放、高风险语义面和多人冲突。模型置信度、结构合法和单次界面点击都不能单独成为永久授权。</p></details>
     <details><summary>连续或模糊要求怎样进入六个语义面？</summary><p>软偏好、感知质量、风格和不可完全判定条件需要保留不确定性和评价环境，不能为了机器处理伪造精确阈值。</p></details>

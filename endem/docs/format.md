@@ -48,7 +48,9 @@ apor:
   - "目标读者尚未确认"
 ```
 
-正式语法仍需决定字段编码、引用、注释、包含关系和版本演进。实现不得因为示例类似 YAML 就假定采用 YAML。
+正式来源语法仍需决定字段、引用、注释、包含关系和版本演进。实现不得因为示例类似 YAML 就假定采用 YAML。形成后的实验性 `.endem` 容器由 END-FMT 0.1 定义，但六个记录内部 schema 仍未冻结。
+
+格式条款源：[https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)。END-P0 只允许 nascent、六个关键记录和无压缩载荷；结构接受不等于语义接受。
 
 ## 候选不能直接成形
 

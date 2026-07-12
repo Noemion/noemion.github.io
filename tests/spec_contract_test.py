@@ -6,8 +6,11 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "spec" / "registry.json"
-SPEC_PATH = ROOT / "spec" / "endem-core.md"
+CORE_SPEC_PATH = ROOT / "spec" / "endem-core.md"
+FORMAT_SPEC_PATH = ROOT / "spec" / "endem-format.md"
 THREAT_PATH = ROOT / "spec" / "endem-threat-model.md"
+ERROR_CATALOG_PATH = ROOT / "spec" / "endem-errors.md"
+PROFILE_PATH = ROOT / "spec" / "profiles" / "end-p0.json"
 VECTOR_ROOT = ROOT / "vectors" / "semantic"
 SCHEMA_PATH = ROOT / "vectors" / "vector.schema.json"
 
@@ -33,31 +36,40 @@ def validate_registry(registry, spec_text, threat_text, errors):
         errors.append("spec/registry.json: registry_version must be 1")
 
     documents = registry.get("documents")
-    if not isinstance(documents, list) or len(documents) != 1:
-        errors.append("spec/registry.json: exactly one current specification document is required")
+    if not isinstance(documents, list) or len(documents) != 2:
+        errors.append("spec/registry.json: END-CORE and END-FMT documents are required")
     else:
-        document = documents[0]
-        expected_document = {
-            "spec_id": "END-CORE",
-            "version": "0.1.0-draft",
-            "status": "draft",
-            "implementation_status": "unimplemented",
-            "wire_status": "unfrozen",
-            "path": "spec/endem-core.md",
+        documents_by_id = {document.get("spec_id"): document for document in documents}
+        expected_documents = {
+            "END-CORE": {
+                "version": "0.1.0-draft", "status": "draft",
+                "implementation_status": "unimplemented", "wire_status": "unfrozen",
+                "path": "spec/endem-core.md",
+            },
+            "END-FMT": {
+                "version": "0.1.0-draft", "status": "draft",
+                "implementation_status": "vector-checker-only",
+                "wire_status": "experimental-draft", "path": "spec/endem-format.md",
+            },
         }
-        for key, value in expected_document.items():
-            if document.get(key) != value:
-                errors.append(
-                    f"spec/registry.json: document {key} must be {value!r}"
-                )
-        if not (ROOT / document.get("path", "")).is_file():
-            errors.append("spec/registry.json: document path does not exist")
+        if set(documents_by_id) != set(expected_documents):
+            errors.append("spec/registry.json: document IDs must be END-CORE and END-FMT")
+        for spec_id, expected_document in expected_documents.items():
+            document = documents_by_id.get(spec_id, {})
+            for key, value in expected_document.items():
+                if document.get(key) != value:
+                    errors.append(
+                        f"spec/registry.json: {spec_id} {key} must be {value!r}"
+                    )
+            if not (ROOT / document.get("path", "")).is_file():
+                errors.append(f"spec/registry.json: {spec_id} document path does not exist")
 
     supporting_documents = registry.get("supporting_documents")
-    if not isinstance(supporting_documents, list) or len(supporting_documents) != 1:
-        errors.append("spec/registry.json: exactly one threat-model supporting document is required")
+    if not isinstance(supporting_documents, list) or len(supporting_documents) != 3:
+        errors.append("spec/registry.json: threat, error catalog and P0 Profile documents are required")
     else:
-        threat_document = supporting_documents[0]
+        supporting_by_id = {document.get("id"): document for document in supporting_documents}
+        threat_document = supporting_by_id.get("END-THREAT", {})
         if threat_document.get("id") != "END-THREAT":
             errors.append("spec/registry.json: threat model ID must be END-THREAT")
         if threat_document.get("version") != "0.1.0-draft":
@@ -66,6 +78,16 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: threat model path is incorrect")
         if not (ROOT / threat_document.get("path", "")).is_file():
             errors.append("spec/registry.json: threat model path does not exist")
+        expected_supporting = {
+            "END-ERRCAT": "spec/endem-errors.md",
+            "END-P0": "spec/profiles/end-p0.json",
+        }
+        for document_id, path in expected_supporting.items():
+            document = supporting_by_id.get(document_id, {})
+            if document.get("version") != "0.1.0-draft" or document.get("path") != path:
+                errors.append(f"spec/registry.json: invalid {document_id} registration")
+            if not (ROOT / document.get("path", "")).is_file():
+                errors.append(f"spec/registry.json: missing {document_id} source")
 
     terms = registry.get("terms")
     if not isinstance(terms, list) or not terms:
@@ -76,19 +98,19 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: term names must be unique")
         for required_term in (
             "Noemion", "Endem", "Synem", "Dromen", "Tekmor",
-            *REQUIRED_FACETS, "wire-format",
+            *REQUIRED_FACETS, "wire-format", "END-P0",
         ):
             if required_term not in term_names:
                 errors.append(f"spec/registry.json: missing term {required_term}")
         wire_term = next((term for term in terms if term.get("term") == "wire-format"), None)
-        if wire_term and wire_term.get("decision_status") != "unresolved":
-            errors.append("spec/registry.json: wire-format must remain unresolved")
+        if wire_term and wire_term.get("decision_status") != "accepted-draft":
+            errors.append("spec/registry.json: wire-format must be accepted-draft")
 
     spec_clause_ids = SPEC_HEADING.findall(spec_text)
     if not spec_clause_ids:
-        errors.append("spec/endem-core.md: no normative clause headings found")
+        errors.append("spec sources: no normative clause headings found")
     if len(spec_clause_ids) != len(set(spec_clause_ids)):
-        errors.append("spec/endem-core.md: clause headings must be unique")
+        errors.append("spec sources: clause headings must be unique")
 
     clauses = registry.get("clauses")
     if not isinstance(clauses, list) or not clauses:
@@ -148,8 +170,13 @@ def validate_registry(registry, spec_text, threat_text, errors):
         ):
             if field not in clause:
                 errors.append(f"{clause_id}: missing registry field {field}")
-        if clause.get("implementation_status") != "unimplemented":
-            errors.append(f"{clause_id}: implementation must remain unimplemented")
+        expected_implementation = (
+            "vector-checker-only" if clause_id.startswith("END-FMT-") else "unimplemented"
+        )
+        if clause.get("implementation_status") != expected_implementation:
+            errors.append(
+                f"{clause_id}: implementation must be {expected_implementation}"
+            )
         if clause.get("evidence_status") not in ALLOWED_EVIDENCE_STATUS:
             errors.append(f"{clause_id}: invalid evidence_status")
         verification = clause.get("verification")
@@ -296,21 +323,28 @@ def validate_public_boundary(errors):
     public_contracts = {
         "specifications/index.html": (
             "END-CORE 0.1.0-draft",
+            "END-FMT 0.1.0-draft",
             "spec/endem-core.md",
+            "spec/endem-format.md",
             "spec/registry.json",
             "vectors/semantic",
+            "vectors/wire",
             "spec/endem-threat-model.md",
-            "不是 .endem 线格式",
+            "不是 .endem 物理格式",
         ),
         "specifications/endem.html": (
             "END-CORE 0.1.0-draft",
+            "END-FMT 0.1.0-draft",
             "spec/endem-core.md",
+            "spec/endem-format.md",
             "条款 ID",
-            "物理编码仍未冻结",
+            "尚非稳定 ABI",
         ),
         "docs/specifications-reference.md": (
             "END-CORE 0.1.0-draft",
+            "END-FMT 0.1.0-draft",
             "spec/endem-core.md",
+            "spec/endem-format.md",
             "机器可读登记",
             "spec/endem-threat-model.md",
         ),
@@ -326,9 +360,9 @@ def main():
     errors = []
     registry = load_json(REGISTRY_PATH, errors)
     try:
-        spec_text = SPEC_PATH.read_text()
+        spec_text = CORE_SPEC_PATH.read_text() + "\n" + FORMAT_SPEC_PATH.read_text()
     except OSError as exc:
-        errors.append(f"spec/endem-core.md: cannot read: {exc}")
+        errors.append(f"spec sources: cannot read: {exc}")
         spec_text = ""
     try:
         threat_text = THREAT_PATH.read_text()
@@ -347,8 +381,8 @@ def main():
         print("\n".join(errors))
         return 1
     print(
-        "PASS: END-CORE 0.1.0-draft has unique clauses, explicit maturity, "
-        "traceable evidence, 10 registered threats, and 5 semantic vectors"
+        "PASS: END-CORE and END-FMT 0.1.0-draft have unique clauses, explicit "
+        "maturity, traceable evidence, 10 registered threats, and semantic vectors"
     )
     return 0
 

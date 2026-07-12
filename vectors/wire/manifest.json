@@ -1,0 +1,13 @@
+{
+  "vector_format": "endem.wire-vector-manifest.v1",
+  "format": {"id": "END-FMT", "version": "0.1.0-draft"},
+  "profile": {"id": 1, "name": "END-P0", "version": "0.1.0-draft"},
+  "vectors": [
+    {"id": "WV-STRUCT-ACCEPT-001", "hex": "vectors/wire/minimal-structural.hex", "expect": {"result": "structural-accept", "semantic": "not-evaluated", "clauses": ["END-FMT-001", "END-FMT-004", "END-FMT-006", "END-FMT-008", "END-FMT-009", "END-FMT-012"]}},
+    {"id": "WV-REJECT-MAGIC-001", "hex": "vectors/wire/bad-magic.hex", "expect": {"result": "reject", "code": "endem.wire.header.magic", "clause": "END-FMT-001", "layer": "structure", "byte_range": [0, 8]}},
+    {"id": "WV-REJECT-DIRECTORY-BOUNDS-001", "hex": "vectors/wire/directory-out-of-bounds.hex", "expect": {"result": "reject", "code": "endem.wire.directory.out_of_bounds", "clause": "END-FMT-004", "layer": "structure", "byte_range": [20, 32]}},
+    {"id": "WV-REJECT-OVERLAP-001", "hex": "vectors/wire/record-overlap.hex", "expect": {"result": "reject", "code": "endem.wire.record.overlap", "clause": "END-FMT-006", "layer": "structure", "byte_range": [352, 353]}},
+    {"id": "WV-REJECT-UNKNOWN-KIND-001", "hex": "vectors/wire/unknown-kind.hex", "expect": {"result": "reject", "code": "endem.wire.record.unknown_kind", "clause": "END-FMT-007", "layer": "profile", "byte_range": [64, 66]}},
+    {"id": "WV-REJECT-PAYLOAD-ROOT-001", "hex": "vectors/wire/payload-not-map.hex", "expect": {"result": "reject", "code": "endem.wire.payload.not_map", "clause": "END-FMT-009", "layer": "structure", "byte_range": [352, 353]}}
+  ]
+}

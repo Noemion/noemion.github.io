@@ -22,7 +22,7 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>下一条可执行路径</h2>
     <p class="callout"><strong>直接结论：</strong>第一实现只交付 <code>poie</code>、<code>elenk</code>、<code>theor</code> 与 <code>peira</code>。不同时创建工具家族，不接模型，不做通用二进制抽象层。</p>
-    <p>第 0 阶段已经产生 END-CORE 0.1.0-draft、机器可读条款登记和 5 个语义向量。开始实现前仍需冻结物理格式草案、资源 Profile、稳定错误类别和规范字节向量；现有 JSON 向量不能直接作为写入格式。</p>
+    <p>第 0 阶段已经产生 END-CORE 与 END-FMT 0.1.0-draft、END-P0、稳定实验错误目录、5 个语义向量和 6 个规范字节向量。下一步直接进入 P0-W4：用同一组字节比较候选实现语言与构建方案；现有草案仍不是稳定 ABI。</p>
     <div class="flow"><div class="step">受控来源表达</div><div class="step">投影规则 / 具名决定</div><div class="step">endem poie</div><div class="step">.endem</div><div class="step">endem elenk</div><div class="step">endem theor</div><div class="step">endem peira</div></div>
     <div class="table-wrap"><table><thead><tr><th>职责</th><th>正式输入与输出</th><th>完成标准</th></tr></thead><tbody>
       <tr><td><code>poie</code></td><td>受控来源 + 投影决定 → 六个语义面 → Endem</td><td>相同规范化输入与配置产生相同字节；失败不留下部分制品。</td></tr>
@@ -47,12 +47,12 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>第 0 阶段当前产物</h2>
     <div class="table-wrap"><table><thead><tr><th>工作包</th><th>已经形成</th><th>仍需完成</th></tr></thead><tbody>
-      <tr><td>P0-W1 条款源</td><td>END-CORE 0.1.0-draft、22 个唯一条款 ID、术语与成熟度登记。</td><td>继续通过真实语料校正条款；物理格式另立规范。</td></tr>
-      <tr><td>P0-W2 威胁与限制</td><td>10 类不可信输入威胁、强制缓解条款和 Profile 必需上限清单。</td><td>用对象规模、复杂度和目标平台实验确定具体数值。</td></tr>
-      <tr><td>P0-W3 规范向量</td><td>1 个接受向量、4 个直接拒绝向量、统一外壳和自动追溯检查。</td><td>增加来源、未知状态、时间、资源边界和规范字节向量。</td></tr>
-      <tr><td>P0-W4 语言与构建</td><td>只定义了比较维度，没有实验结果。</td><td>用同一组字节向量比较候选语言、依赖、模糊测试和复现成本。</td></tr>
+      <tr><td>P0-W1 条款源</td><td>END-CORE 与 END-FMT 0.1.0-draft、34 个唯一条款 ID、术语与成熟度登记。</td><td>继续通过真实语料和两条独立实现修订草案。</td></tr>
+      <tr><td>P0-W2 威胁与限制</td><td>10 类不可信输入威胁、END-P0 的 8 项有限上限和结构错误目录。</td><td>用边界语料、最坏复杂度和目标平台实验验证或调整数值。</td></tr>
+      <tr><td>P0-W3 规范向量</td><td>5 个语义向量；1 个结构接受与 5 个确定拒绝字节向量；独立测试读取器。</td><td>增加截断、乱序、非最短 CBOR、资源边界和完整语义载荷向量。</td></tr>
+      <tr><td>P0-W4 语言与构建</td><td>输入格式、错误类别和比较目标已经具备。</td><td>用同一字节集比较内存安全、依赖、模糊测试、跨平台和复现成本。</td></tr>
     </tbody></table></div>
-    <p>这些产物把设计变成了可引用的实施输入，但仍不证明存在可执行程序。只有 P0-W3 产生规范字节样本后，P0-W4 才能进行公平的跨语言读取实验。</p>
+    <p>这些产物把设计变成了可引用的实施输入，但测试读取器不是生产解析器，也不证明存在可执行程序。P0-W4 现在可以对同一规范字节开展公平的跨语言读取实验。</p>
   </section>
 
   <section class="content-wide">
@@ -77,6 +77,6 @@ permalink: "/development/implementation-roadmap.html"
     </ul>
   </section>
 
-  <section class="content-band"><h2>实现仓库基线</h2><p>首个仓库保持单一工作区，按 <code>spec/</code>、<code>vectors/</code>、<code>core/</code>、<code>theor/</code> 与 <code>cli/</code> 分离。实现语言、构建系统、错误码和编码扩展由各自 ADR 决定；没有独立版本、权限隔离或真实消费者时不拆仓库。</p></section>
+  <section class="content-band"><h2>实现仓库基线</h2><p>首个仓库保持单一工作区，按 <code>spec/</code>、<code>vectors/</code>、<code>core/</code>、<code>theor/</code> 与 <code>cli/</code> 分离。实现语言和构建系统由 P0-W4 实验决定；错误码与实验编码以 END-FMT、END-ERRCAT 和 END-P0 为准。没有独立版本、权限隔离或真实消费者时不拆仓库。</p></section>
   <div class="next-prev"><a href="index.html">← 开发与贡献</a><a href="testing.html">测试与验证 →</a></div>
 </main>

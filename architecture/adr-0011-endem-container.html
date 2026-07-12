@@ -1,0 +1,84 @@
+---
+layout: default
+title: "ADR-0011 · Endem 实验性容器格式"
+page_role: "content"
+footer_text: "Noemion · ADR-0011"
+permalink: "/architecture/adr-0011-endem-container.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0011</span></nav>
+  <header class="content-introduction"><h1>ADR-0011 · Endem 实验性容器格式</h1><p>采用固定前导、显式记录目录和确定性载荷子集，为 Poiet 与独立 Theor 建立同一组可对抗的规范字节。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">END-FMT 0.1</span><span class="badge">Not Stable ABI</span></div></header>
+
+  <section class="content-stack">
+    <h2>决定</h2>
+    <p class="lead">第一阶段采用 END-FMT 0.1.0-draft：64 字节固定前导、48 字节定宽目录项、六个关键语义记录，以及 RFC 8949 确定性 CBOR 的严格子集。配套 END-P0 Profile 给出有限资源上限，但当前字节不承诺向后兼容。</p>
+    <p>格式只解决安全定位、确定性编码和独立解释。结构合法不等于语义合法，更不等于目标为真、可执行或已经完成。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么现在必须作出决定</h2>
+    <div class="table-wrap"><table><thead><tr><th>当前问题</th><th>没有格式草案的后果</th><th>这项决定提供什么</th></tr></thead><tbody>
+      <tr><td>Poiet 与 Theor 需要解释同一原始字节</td><td>两条路径只能比较内部 JSON，无法发现偏移、长度、对齐和顺序错误。</td><td>共同的公开字节向量，但不共享解析代码。</td></tr>
+      <tr><td>所有输入都不可信</td><td>资源上限和 checked arithmetic 只能停留在口号。</td><td>固定乘加、范围、重叠、对齐和 Profile 检查点。</td></tr>
+      <tr><td>确定性必须可观察</td><td>相同语义仍可能因字段顺序、时间戳或编码选择产生不同字节。</td><td>固定目录顺序、最短编码、确定长度和零填充。</td></tr>
+      <tr><td>实现语言实验需要同一目标</td><td>候选语言会各自发明输入结构，比较结果没有意义。</td><td>P0-W4 可以使用同一组接受和拒绝向量。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>容器结构</h2>
+    <div class="flow"><div class="step">64 B 固定前导</div><div class="step">6 × 48 B 记录目录</div><div class="step">零填充与 8 B 对齐</div><div class="step">rhem</div><div class="step">semion</div><div class="step">skena</div><div class="step">telis</div><div class="step">krin</div><div class="step">apor</div></div>
+    <p>固定前导保存格式版本、Profile、状态、目录位置、记录数和文件总大小。目录只定位记录并说明其种类、范围和对齐；六个记录的内部映射继续由 END-CORE 和后续字段 schema 约束。</p>
+    <p class="callout"><strong>有意保持简单：</strong>END-P0 不支持压缩、加密、未知记录、供应商扩展、coherent、attested 或签名包络。增加任一能力前必须先有新的 ADR、Profile、威胁分析和字节向量。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>从 ELF 与 GNU 工具链借鉴什么</h2>
+    <div class="table-wrap"><table><thead><tr><th>权威机制</th><th>采用部分</th><th>明确排除</th></tr></thead><tbody>
+      <tr><td>ELF 固定头部与节表：<a href="https://gabi.xinuos.com/elf/01-intro.html">https://gabi.xinuos.com/elf/01-intro.html</a></td><td>固定位置的路线图、显式目录和面向不同消费者的解释边界。</td><td>机器地址、指令、装载段、处理器 ABI 和传统链接规则。</td></tr>
+      <tr><td>ELF 条目大小、数量与偏移：<a href="https://gabi.xinuos.com/elf/02-eheader.html">https://gabi.xinuos.com/elf/02-eheader.html</a></td><td>每个结构明确宽度和范围；Endem 额外要求所有组合运算受检。</td><td>扩展编号技巧、宿主结构体映射和处理器相关字节序。</td></tr>
+      <tr><td>GNU readelf 独立于 BFD：<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">https://www.sourceware.org/binutils/docs/binutils/readelf.html</a></td><td>Theor 与生产路径共享规范和向量，不共享解析器或通用内部表示。</td><td>把 Theor 做成 objdump/readelf 的功能复刻。</td></tr>
+      <tr><td>GNU ar 确定性模式：<a href="https://sourceware.org/binutils/docs/binutils/ar-cmdline.html">https://sourceware.org/binutils/docs/binutils/ar-cmdline.html</a></td><td>消除所有者、组、时间戳和文件模式等环境差异。</td><td>把传统归档成员、路径或符号索引直接搬进 Endem。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么记录载荷使用受限 CBOR</h2>
+    <p>重新发明整数、字符串、数组和映射编码会扩大可信解析面，也会重复解决最短整数、长度和键顺序问题。RFC 8949 已定义确定性编码基础，因此 END-P0 只采用一个更小的子集：确定长度、最短表示、无符号整数键、编码字节排序、无浮点、无标签、无重复键。</p>
+    <p>CBOR 不是 Endem 的对象模型。通用 CBOR 数据不能自动成为 Endem；记录种类、字段含义、关系位置、授权、状态和验收全部由 Noemion 规范定义。来源：<a href="https://www.rfc-editor.org/rfc/rfc8949.html">https://www.rfc-editor.org/rfc/rfc8949.html</a></p>
+  </section>
+
+  <section class="content-wide">
+    <h2>备选方案</h2>
+    <div class="table-wrap"><table><thead><tr><th>方案</th><th>没有采用的原因</th><th>重新考虑条件</th></tr></thead><tbody>
+      <tr><td>把语义向量 JSON 直接作为 .endem</td><td>文本表示、数字、键顺序和解析器行为难以形成小型稳定 ABI，也容易退化成二进制化 Prompt 的反面。</td><td>不重新考虑；JSON 继续用于人类可读测试外壳。</td></tr>
+      <tr><td>完整采用 ELF</td><td>地址、段、节、符号和重定位语义围绕机器程序，错误地扩大 Endem 的机器对象负担。</td><td>不重新考虑；只持续借鉴经过边界审查的机制。</td></tr>
+      <tr><td>只使用通用 CBOR 文件</td><td>没有固定路线图、记录范围和六语义面目录，无法在解释复杂载荷前完成有界结构检查。</td><td>若未来证明固定目录没有真实消费者或不能带来独立验证价值。</td></tr>
+      <tr><td>自创完整 TLV 类型系统</td><td>会同时发明容器和数据模型，增加解析器、规范和互操作风险。</td><td>只有受限 CBOR 无法满足已验证的零拷贝、流式或安全要求时。</td></tr>
+      <tr><td>Protocol Buffers、FlatBuffers 或大型 IR 框架</td><td>引入生成代码或复杂运行时，会削弱 Poiet/Theor 的故障独立性，并超出第一阶段小型可信核心。</td><td>后续非可信适配层存在明确消费者且不进入规范字节时。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>Profile 与资源上限</h2>
+    <p>END-P0 把文件限制为 16 MiB、记录数限制为 64、图节点限制为 65,536、图边限制为 262,144、嵌套深度限制为 64、单字符串限制为 1 MiB、解压后总量限制为 16 MiB、累计分配限制为 64 MiB。</p>
+    <p>这些数值是第一轮跨实现实验的保守边界，不是生产规模证明。调用者可以进一步收紧；任何提高都必须使用新的 Profile 身份，不能用环境变量静默改变 END-P0。</p>
+  </section>
+
+  <section class="content-stack">
+    <h2>后果与停止条件</h2>
+    <ul>
+      <li>Poiet 和 Theor 可以开始针对同一字节边界做语言、模糊测试与差分实验。</li>
+      <li>现有语义 JSON 向量继续验证 END-CORE；新增十六进制向量只验证结构和 Profile，不混淆两类证据。</li>
+      <li>格式草案增加了规范维护成本；条款、登记、错误目录、Profile 和向量必须同步。</li>
+      <li>如果两个独立解析实验不能在不共享代码的情况下稳定解释这些向量，必须修改或撤回草案，不以实现补丁掩盖规范缺陷。</li>
+      <li>如果固定目录、六记录分离或受限 CBOR 没有下游消费者，或显著阻碍流式安全读取，应以新 ADR 合并或删除相应机制。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>权威来源</h2>
+    <p>精确字段、条款和接受语义以 END-FMT 规范源 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md</a>、END-P0 Profile <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p0.json">https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p0.json</a>、错误目录 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-errors.md">https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-errors.md</a> 和规范字节向量为准。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0010-native-lexicon.html">← ADR-0010</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

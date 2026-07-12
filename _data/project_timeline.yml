@@ -14,12 +14,12 @@ overview:
   roadmap_href: /development/implementation-roadmap.html
 
 current:
-  summary: 项目已公开 END-CORE 0.1.0-draft、机器可读条款登记和第一组语义正反向量。当前继续定义物理编码、Profile 资源上限、错误码和字节向量；完成这些工作后，才开始实现 poie、elenk、独立 theor 和 peira。
+  summary: 项目已公开 END-CORE 与 END-FMT 0.1.0-draft、END-P0、结构错误目录和首组语义/字节向量。当前使用同一组字节比较实现语言与构建方案，再进入 poie、elenk、独立 theor 和 peira 的最小纵向切片。
   facts:
     - label: 已完成
       value: Endem 词汇与应用拓扑决定
     - label: 正在进行
-      value: 物理编码、资源 Profile 与字节向量
+      value: 实现语言与构建方案实验
     - label: 后续工作
       value: poie/elenk/theor/peira 纵向切片
 
@@ -38,7 +38,7 @@ items:
     state: current
     label: 正在进行
     title: 最小规范与安全核心设计
-    description: 已形成版本化语义条款、机器可读登记和首组正反向量；正在定义物理编码、错误码、资源 Profile 与字节样本。
+    description: 已形成语义与实验性容器条款、END-P0、错误目录和首组规范字节；正在用同一向量比较候选语言与构建方案。
   - id: endem-core-validation
     state: next
     label: 计划开发

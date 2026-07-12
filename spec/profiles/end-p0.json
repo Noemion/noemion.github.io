@@ -1,0 +1,24 @@
+{
+  "profile_format": "endem.profile.v1",
+  "profile_id": 1,
+  "name": "END-P0",
+  "version": "0.1.0-draft",
+  "status": "experimental-conformance",
+  "format": {"id": "END-FMT", "version": "0.1.0-draft"},
+  "limits": {
+    "max_artifact_bytes": 16777216,
+    "max_record_count": 64,
+    "max_graph_nodes": 65536,
+    "max_graph_edges": 262144,
+    "max_nesting_depth": 64,
+    "max_string_bytes": 1048576,
+    "max_decompressed_bytes": 16777216,
+    "max_total_allocation_bytes": 67108864
+  },
+  "required_record_kinds": [1, 2, 3, 4, 5, 6],
+  "allowed_states": [0],
+  "allowed_record_flags": [1],
+  "compression": false,
+  "encryption": false,
+  "notes": "Finite conformance limits for Phase 0 vectors and experiments; not production sizing evidence or a stable ABI."
+}
