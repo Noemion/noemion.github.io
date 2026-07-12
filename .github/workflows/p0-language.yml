@@ -1,0 +1,36 @@
+name: Validate Phase 0 language experiment
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "experiments/p0-language/**"
+      - "vectors/wire/**"
+      - "spec/endem-format.md"
+      - "spec/profiles/end-p0.json"
+      - ".github/workflows/p0-language.yml"
+  pull_request:
+    paths:
+      - "experiments/p0-language/**"
+      - "vectors/wire/**"
+      - "spec/endem-format.md"
+      - "spec/profiles/end-p0.json"
+      - ".github/workflows/p0-language.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare-readers:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out the exact revision
+        uses: actions/checkout@de0fac2e4500dabe0009f38a1e76a7d4e0fec9a1
+      - name: Install the locked Rust toolchain
+        run: rustup toolchain install 1.97.0 --profile minimal --no-self-update
+      - name: Record compiler identities
+        run: clang --version && rustup run 1.97.0 rustc --version
+      - name: Run differential, sanitizer, fuzzing and reproducibility checks
+        run: RUSTC="$(rustup which --toolchain 1.97.0 rustc)" python3 experiments/p0-language/run_experiment.py --require-libfuzzer | tee /tmp/p0-language-report.json

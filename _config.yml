@@ -12,6 +12,7 @@ highlighter: rouge
 
 exclude:
   - design-system
+  - experiments/
   - AGENTS.md
   - README.md
   - content-quality-audit.md

@@ -78,6 +78,7 @@ badges: ["Documentation"]
 - `architecture/`：系统关系、Endem 生命周期、信任边界和开放问题；正式生命周期入口是 `/architecture/endem-lifecycle.html`。
 - `specifications/`：Endem、Synem 与 Tekmor 的权威规范和成熟度入口，正式路由分别是 `/specifications/endem.html`、`/specifications/synem.html` 与 `/specifications/tekmor.html`。
 - `spec/` 与 `vectors/`：实现可逐条引用的规范源、Profile、机器可读登记、语义外壳和实验字节向量；它们不生成并列 Pages 路由，也不冒充稳定 ABI。
+- `experiments/`：可重复但非生产的实现证据；P0-W4 在这里保存彼此独立的 C/Rust 读取原型与实验脚本。目录不生成 Pages 路由，公开页面只总结已经实际运行的结果和限制。
 - `components/`：Poiet、Theor 与 Praxor 的职责和隔离边界，正式路由分别是 `/components/poiet.html`、`/components/theor.html` 与 `/components/praxor.html`。
 - `endem/index.html`：唯一公开应用入口，介绍 `.endem`、八个动作、当前状态、信任边界和手册入口。
 - `endem/docs/`：唯一 CLI 使用手册；Markdown 生成总览、格式、绑定、安全、运行与参考六个正式 HTML 路由。

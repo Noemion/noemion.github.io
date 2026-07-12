@@ -312,10 +312,10 @@ def validate_vectors(clause_ids, covered_vector_refs, errors):
 
 def validate_public_boundary(errors):
     config_text = (ROOT / "_config.yml").read_text()
-    for exact_exclusion in ("  - spec/", "  - vectors/"):
+    for exact_exclusion in ("  - experiments/", "  - spec/", "  - vectors/"):
         if exact_exclusion not in config_text:
             errors.append(f"_config.yml: missing exact exclusion {exact_exclusion.strip()!r}")
-    if re.search(r"^\s*-\s+(?:spec|vectors)\s*$", config_text, re.MULTILINE):
+    if re.search(r"^\s*-\s+(?:experiments|spec|vectors)\s*$", config_text, re.MULTILINE):
         errors.append(
             "_config.yml: bare spec/vectors exclusions can also hide prefix-matching public routes"
         )
