@@ -9,9 +9,9 @@ manual_group: "start"
 manual_order: 1
 nav_title: "入门指南"
 page_heading: "Noemion 入门指南"
-page_lead: "从 Endem 这个最小原语开始，理解目标怎样被形成、组合、装载与验收。"
-summary: "从 Endem 这个最小原语开始，理解目标怎样被形成、组合、装载与验收。"
-badges: ["Getting Started", "Endem", "No Release Yet"]
+page_lead: "先理解 Noemion 为什么存在，再认识 Endem 及目标的形成、组合、装载与验收。"
+summary: "先理解 Noemion 为什么存在，再认识 Endem 及目标的形成、组合、装载与验收。"
+badges: ["Getting Started", "Noemion", "No Release Yet"]
 ---
 
 ## 从这里开始
@@ -25,8 +25,9 @@ Noemion 试图为自然语言目标建立一种像目标文件之于传统计算
 | 字段 | 含义 |
 | --- | --- |
 | `rhem` | 来源实际出现的记号、语言和来源绑定 |
-| `semion` | 记号到符号、指称、关系、作用域和力量的已授权投影 |
-| `skena` | 一个根对象—关系图，描述应成为、保持或避免的可能事态 |
+| `semion` | 记号到符号、指称、关系和作用域的已授权投影 |
+| `skena` | 一个根对象—关系图，描述不带目标力量的中性可能事态 |
+| `telis` | 目标要求事态达到成立（kine）还是持续成立（mene） |
 | `krin` | 满足条件、观察类型、必需证据、未知处理和判断权威 |
 | `apor` | 未决投影、冲突、测量和解决权限 |
 

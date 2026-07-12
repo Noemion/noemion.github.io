@@ -288,16 +288,17 @@ body .global-nav-trigger:active{transform:scale(.96)}
 }
 .global-nav-card:hover i{opacity:1;filter:blur(0);transform:translateX(4px) scale(1)}
 body .global-timeline-link{
-  display:grid;place-items:center;min-width:124px;align-self:stretch;padding:0;color:#10261e;background:#fff;
-  border-left:1px solid rgba(0,0,0,.12);font-size:13px;font-weight:700;text-decoration:none;
+  display:grid;place-items:center;min-width:124px;align-self:stretch;padding:0;color:var(--nav-text);
+  background:transparent;border-left:1px solid var(--rule);
+  font-size:13px;font-weight:700;text-decoration:none;
   transition-property:background-color,color,transform;transition-duration:150ms;transition-timing-function:var(--ease)
 }
-body .global-timeline-link:visited{color:#10261e}
-body .global-timeline-link:hover{color:#10261e;background:#f6f8f7}
+body .global-timeline-link:visited{color:var(--nav-text)}
+body .global-timeline-link:hover{color:var(--heading);background:color-mix(in srgb,var(--nav-bg) 78%,var(--accent-soft))}
 body .global-timeline-link:active{transform:scale(.96)}
 .global-timeline-value{
   display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-width:96px;min-height:64px;
-  padding:7px 13px;color:#10261e;
+  padding:7px 13px;color:inherit;
   font-size:12px;font-weight:820;letter-spacing:.08em;line-height:1;white-space:nowrap;
   transition-property:transform;transition-duration:150ms;transition-timing-function:var(--ease)
 }
@@ -353,7 +354,7 @@ body .global-directory-panel{display:none}
   body .global-brand>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   body .global-primary-nav{display:none}
   body .global-timeline-link{
-    grid-column:2;padding:0;border-right:1px solid rgba(0,0,0,.12);border-left:1px solid rgba(0,0,0,.12)
+    grid-column:2;padding:0;border-right:1px solid var(--rule);border-left:1px solid var(--rule)
   }
   body .global-directory-panel{
     display:block;grid-column:3;align-self:stretch;margin:0;padding:0;border:0;background:transparent

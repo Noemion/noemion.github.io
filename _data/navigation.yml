@@ -21,9 +21,9 @@ global:
       - { href: /components/index.html, label: 系统组件, description: Poiet、Theor 与 Praxor 的权限和失败边界, cover: components, cover_label: "SYSTEM BOUNDARIES" }
   - key: endem
     href: /endem/index.html
-    label: Endem
+    label: 应用
     kicker: 形成、检查与运行
-    description: 通过一个公开命令面进入确定性对象工程和受限运行。
+    description: 进入 Noemion 的 Endem 应用，查看确定性制品工程和受限运行。
     items:
       - { href: /endem/index.html, label: Endem 应用, description: 查看唯一公开 CLI 与八个动作的边界, cover: endem, cover_label: "ONE COMMAND" }
       - { href: /endem/docs/format.html, label: 格式与形成, description: 定义规范字段、编码与确定性形成, cover: format, cover_label: "POIE / ELENK" }

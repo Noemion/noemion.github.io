@@ -109,7 +109,7 @@ DOC_GUIDE_HEADINGS = {
     ],
 }
 HOME_HEADINGS = [
-    "不是给旧对象格式换前缀",
+    "项目名与工程名各自负责",
     "六个短词展开完整语义",
     "只保留有独立生命周期的名词",
     "一个入口不等于一个信任域",
@@ -988,9 +988,25 @@ def validate_jekyll_sources():
 
     homepage_source = SOURCE_ROOT / "index.html"
     if homepage_source.exists():
+        homepage_text = homepage_source.read_text()
+        for token in (
+            '<h1 id="portal-title"><span>Noemion，</span><strong>让目标成为可验证的工程制品。</strong></h1>',
+            '<p class="portal-introduction-summary">Noemion 是面向自然语言目标的确定性基础项目；Endem 是其中最小、独立有效且可验证的期望终态制品。</p>',
+            '<span>了解 Noemion</span>',
+            '<span>认识 Endem</span>',
+            '<strong>Noemion</strong> 是整个项目、新领域与社区的名称',
+        ):
+            if token not in homepage_text:
+                errors.append(f"index.html: missing Noemion project ownership contract: {token}")
+        for forbidden in (
+            "Noemion 只是项目",
+            "而成为 Endem",
+        ):
+            if forbidden in homepage_text:
+                errors.append(f"index.html: Endem must not replace the Noemion project identity: {forbidden}")
         expression_visual_match = re.search(
             r'<span class="feature-visual feature-visual-expression".*?</span>',
-            homepage_source.read_text(),
+            homepage_text,
             re.DOTALL,
         )
         if expression_visual_match is None:
@@ -1120,7 +1136,8 @@ def validate_jekyll_sources():
             "body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}",
             ".global-timeline-value{",
             "width:100%;height:100%;min-width:96px;min-height:64px",
-            "background:#fff",
+            "background:transparent;border-left:1px solid var(--rule)",
+            "background:color-mix(in srgb,var(--nav-bg) 78%,var(--accent-soft))",
             ".content-split{",
             ".content-split-reverse{",
             ".content-stack",
@@ -1168,6 +1185,8 @@ def validate_jekyll_sources():
                 errors.append(f"shared styles missing site-wide design contract: {token}")
         if re.search(r"transition\s*:\s*all\b", shared_css):
             errors.append("shared styles must not use transition: all")
+        if re.search(r"\.global-timeline-link\s*\{[^}]*background\s*:\s*#fff", shared_css):
+            errors.append("TIMELINE must use the theme navigation surface instead of pure white")
         if re.search(r'\.page-links\s*\{[^}]*background\s*:\s*var\(--portal-line\)', shared_css):
             errors.append("page-link grids must not expose the separator color in empty cells")
         if not re.search(r'body\[data-page-role="tool-project"\]\s+main\s*\{[^}]*overflow\s*:\s*clip', shared_css):
@@ -1332,6 +1351,14 @@ def validate_jekyll_sources():
         module_text = "\n".join(path.read_text() for path in sorted(module_root.glob("*.mjs")))
         site_text = site_script.read_text()
         navigation_text = navigation_config.read_text() if navigation_config.exists() else ""
+        global_navigation_text = navigation_text.split("\nmodules:", 1)[0]
+        global_navigation_labels = re.findall(
+            r"^    label:\s*(.+?)\s*$", global_navigation_text, re.MULTILINE
+        )
+        if global_navigation_labels != ["项目", "规范", "应用", "指南", "开发"]:
+            errors.append(
+                "global navigation must use project task labels and keep Endem inside the application group"
+            )
         for phrase in PUBLIC_META_PHRASES:
             if phrase in navigation_text:
                 errors.append(
@@ -1723,12 +1750,14 @@ def main():
             " ".join("".join(section["text"]) for section in parser.sections)
         )
         for term in (
-            "Endem", "Synem", "Dromen", "Tekmor", "rhem", "semion", "skena", "telis",
+            "Noemion", "Endem", "Synem", "Dromen", "Tekmor", "rhem", "semion", "skena", "telis",
             "krin", "apor", "phain", "一个根", "模型", "不可信",
         ):
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
         home_source = home.read_text()
+        if '<h1 id="portal-title"><span>Noemion，</span><strong>让目标成为可验证的工程制品。</strong></h1>' not in home_source:
+            errors.append("index.html: rendered portal must identify Noemion before Endem")
         if home_source.count('class="portal-chapter-title"') != len(HOME_HEADINGS):
             errors.append("index.html: every homepage chapter heading must use the shared symbolic title treatment")
         for token in (

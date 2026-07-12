@@ -1,6 +1,6 @@
 # Noemion GitHub Pages
 
-本仓库是 [`Noemion/noemion.github.io`](https://github.com/Noemion/noemion.github.io) 的 Jekyll 源目录，发布于 <https://noemion.github.io/>。Noemion 只作为项目与新领域的品牌；站点公开定义 Endem、Synem、Dromen、Tekmor、Poiet、Theor、Praxor 与唯一 `endem` 应用，一级入口负责项目、架构、规范、资源和开发信息，`endem/docs/` 承载 CLI 使用手册。
+本仓库是 [`Noemion/noemion.github.io`](https://github.com/Noemion/noemion.github.io) 的 Jekyll 源目录，发布于 <https://noemion.github.io/>。Noemion 是项目、新领域与社区的总名和品牌；站点在这个总名之下定义 Endem、Synem、Dromen、Tekmor、Poiet、Theor、Praxor 与唯一 `endem` 应用，一级入口负责项目、规范、应用、指南和开发信息，`endem/docs/` 承载 CLI 使用手册。
 
 ## Jekyll 与发布
 
@@ -66,7 +66,7 @@ badges: ["Documentation"]
 
 项目进度只编辑 `_data/project_timeline.yml`，不在页面或 JavaScript 中重复填写阶段节点。`current_stage_id` 必须对应 `items` 中唯一一个 `state: current` 的条目；可用状态为 `confirmed`、`current`、`next` 和 `future`。`overview` 控制状态摘要与路线图入口，`current` 控制当前阶段摘要与事实栏，`items` 按书写顺序生成“已完成 / 正在进行 / 后续规划”时间线及对应计数。项目阶段不进入全站页头，避免把内部研发进度误解成版本、页面或可用状态。
 
-全站页头的右侧行动入口只编辑 `_data/site_header.yml`。当前只显示 `TIMELINE` 并链接 `/development/current-stage.html`；不附加图形、Endem、当前阶段名或完成比例，让文字本身承担完整导航含义。白色入口表面直接铺满所属页头单元，不建立带外边距的内层卡片。
+全站页头的右侧行动入口只编辑 `_data/site_header.yml`。当前只显示 `TIMELINE` 并链接 `/development/current-stage.html`；不附加图形、Endem、当前阶段名或完成比例，让文字本身承担完整导航含义。入口默认继承页头背景，只用分隔线定义铺满的单元边界；悬停时才显示轻微主题色变化，不建立带外边距的内层卡片或常态选中表面。
 
 需要嵌入时间线的普通 HTML 页面在 Front Matter 中声明 `timeline_data: "project_timeline"`，正文先通过 `site.data[page.timeline_data]` 取得配置，再调用 `{% raw %}{% include project-timeline.html timeline=timeline %}{% endraw %}`。Jekyll 会在每次本地构建和 `main` 分支 Pages 构建时自动生成最终 HTML；不需要手工维护构建产物。新增另一套时间线时可在 `_data/` 新建同结构 YAML，并把页面的 `timeline_data` 改为对应文件名。
 
@@ -96,7 +96,7 @@ badges: ["Documentation"]
 
 ## Noemion 全站设计系统
 
-桌面端统一使用约 1200px 居中连续画布、64px 顶部导航、近白纸面、细分隔线、大字号编辑式标题和高密度内容行；移动端按阅读顺序折叠为单列。布局围绕 Endem 领域的制品语义、工程内容、图形、配色和成熟度语言建立，不以装饰削弱技术边界。
+桌面端统一使用约 1200px 居中连续画布、64px 顶部导航、近白纸面、细分隔线、大字号编辑式标题和高密度内容行；移动端按阅读顺序折叠为单列。布局围绕 Noemion 领域及 Endem 等具体制品的工程语义、图形、配色和成熟度语言建立，不以装饰削弱技术边界。
 
 页面角色采用同一设计语言下的不同页面范式：`portal` 使用首页叙事；`section` 使用分组列表；`content` 使用编辑式文章；`tool-project` 使用主内容与状态面板；所有 `/docs/` 路由及 `docs-index`、`docs-topic` 使用固定文档栏和阅读区。所有顶部一级入口必须支持悬停与键盘聚焦展开，卡片标题、圆形箭头和表面提供一致反馈；按压缩放为 0.96，进入与状态切换支持减少动态效果。完整规则见 [`sitewide-design-system.md`](sitewide-design-system.md)，首页内容蓝图见 [`homepage-design.md`](homepage-design.md)。
 
