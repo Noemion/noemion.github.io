@@ -48,6 +48,7 @@ permalink: "/specifications/adapters.html"
     <p>当前没有具体协议 Profile。MCP、A2A、HTTP、模型 SDK 和操作系统调用的物理 Profile，JSON-RPC、Protocol Buffers、SSE 与 Webhook 字段映射，适配器 API、进程隔离、凭据代理、事件存储、重试实现和部署拓扑仍保持开放。</p>
     <p>Agent Card、工具列表和 schema 只是能力声明，不能缩写成“Agent 已有能力”。声明、协商、授权、会话上限、即时可调用性与调用结果的完整分层见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/capability-discovery-and-negotiation-proposal.md">非规范能力发现与协商研究提案</a>；该提案不修改现行十二条适配规则，也不创建能力制品或新规范。</p>
     <p>并行调用和外部 Task 不能自行决定哪个候选可以提交。分支必须共享同一 Dromen 上限，非幂等副作用默认串行提交，竞争写入在执行前核对强前提，取消则只表示停止请求而非回滚。完整审查见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/parallel-and-speculative-execution-proposal.md">非规范并行、推测执行与提交边界提案</a>；该提案不修改现行十二条适配规则，也不创建事务层或并行对象。</p>
+    <p>模型、控制面、凭据与实时句柄、适配进程、文件、网络、资源终止和观察也必须保持可审查的责任分离。完整审查见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">非规范模型、适配器与能力域隔离研究提案</a>；模型不能接收原始凭据，token 不能透传，取消和超时不能冒充回滚，容器或 seccomp 名称也不能替代实际限制证据。该提案不修改现行十二条适配规则，也不创建隔离规范或部署对象。</p>
     <p>背景、权衡和权威资料见 <a href="../architecture/adr-0026-external-protocol-adapters.html">ADR-0026 外部协议适配边界</a>。</p>
   </section>
   <div class="next-prev"><a href="diagnostics.html">← 结构化诊断</a><a href="../architecture/adr-0026-external-protocol-adapters.html">ADR-0026 →</a></div>

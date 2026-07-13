@@ -415,11 +415,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "三种成熟度不得混写",
             "一次运行怎样穿过边界",
             "运行事实应该放在哪里",
-            "八条最危险的越级路径",
+            "九条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的六个约束",
+            "GNU 技术提供的七个约束",
             "什么时候才值得增加新对象",
-            "八项研究怎样回到现有规范",
+            "九项研究怎样回到现有规范",
             "模型输出是候选，不是规范内容",
             "旧 Dromen、秘密或权限",
             "Task 完成，也不证明目标满足",
@@ -1903,6 +1903,61 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the parallel execution research proposal"
                 )
 
+    isolation_proposal = SOURCE_ROOT / "spec" / "model-adapter-isolation-proposal.md"
+    if not isolation_proposal.exists():
+        errors.append("missing non-normative model, adapter and capability isolation research proposal")
+    else:
+        proposal_text = isolation_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "结论状态：桌面审查完成；等待用户决定",
+            "隔离不是单一开关、进程或产品名称",
+            "不构成 ADR、CORE 规范、Profile 或实现要求",
+            "不创建隔离制品、沙箱格式、部署对象、命令、组件、结果域、稳定接口或哲学专名",
+            "不创建 `ISO-CORE`、`SANDBOX-CORE`",
+            "不进入 `registry.json`",
+            "十个责任面必须分开",
+            "MCP Security Best Practices",
+            "A2A 1.0 版本化规范",
+            "Linux `no_new_privs`",
+            "Seccomp 不是完整沙箱",
+            "Landlock",
+            "cgroup v2",
+            "GNU Guix",
+            "GNU Coreutils `timeout`",
+            "十六个案例",
+            "隔离控制矩阵",
+            "威胁到失败责任的映射",
+            "失败域与结果隔离",
+            "候选责任的唯一主归属",
+            "等待用户决定",
+        ):
+            if token not in proposal_text:
+                errors.append(f"model adapter isolation proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if (
+            "model-adapter-isolation" in registry_text
+            or '"ISO-CORE"' in registry_text
+            or '"SANDBOX-CORE"' in registry_text
+        ):
+            errors.append("non-normative isolation proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "specifications" / "dromen.html",
+            SOURCE_ROOT / "specifications" / "adapters.html",
+            SOURCE_ROOT / "components" / "drasor.html",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "docs" / "architecture-guide.md",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+            SOURCE_ROOT / "content-quality-audit.md",
+        ):
+            if "model-adapter-isolation-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the model adapter isolation research proposal"
+                )
+
     agent_boundaries = SOURCE_ROOT / "architecture" / "agent-system-boundaries.html"
     if not agent_boundaries.exists():
         errors.append("missing public Agent system boundary guide")
@@ -1911,10 +1966,10 @@ def validate_jekyll_sources():
         for token in (
             "三种成熟度不得混写",
             "运行事实应该放在哪里",
-            "八条最危险的越级路径",
+            "九条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的六个约束",
-            "八项研究怎样回到现有规范",
+            "GNU 技术提供的七个约束",
+            "九项研究怎样回到现有规范",
             "2025-11-25",
             "2026-07-28",
             "A2A 1.0 版本化规范",
@@ -1926,6 +1981,9 @@ def validate_jekyll_sources():
             "Guix profile generations",
             "Autoconf feature checks",
             "Make parallel execution",
+            "Guix shell",
+            "Coreutils timeout",
+            "沙箱名称替代隔离证据",
         ):
             if token not in boundary_text:
                 errors.append(f"Agent boundary guide missing cross-domain contract: {token}")
@@ -1937,6 +1995,7 @@ def validate_jekyll_sources():
             "memory-checkpoint-and-resumption-proposal.md",
             "capability-discovery-and-negotiation-proposal.md",
             "parallel-and-speculative-execution-proposal.md",
+            "model-adapter-isolation-proposal.md",
             "semantic-equivalence-and-migration-proposal.md",
         ):
             if proposal_name not in boundary_text:
