@@ -117,7 +117,7 @@ export class MobileDirectoryController {
   connect() {
     if (!this.panel || !this.summary) return;
     this.summary.addEventListener("click", (event) => this.#toggle(event));
-    document.addEventListener("pointerdown", (event) => {
+    document.addEventListener("click", (event) => {
       if (this.interactive.matches && this.panel.open && !this.panel.contains(event.target)) this.close();
     });
     document.addEventListener("keydown", (event) => {

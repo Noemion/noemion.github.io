@@ -415,11 +415,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "三种成熟度不得混写",
             "一次运行怎样穿过边界",
             "运行事实应该放在哪里",
-            "六条最危险的越级路径",
+            "七条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的四个约束",
+            "GNU 技术提供的五个约束",
             "什么时候才值得增加新对象",
-            "六项研究怎样回到现有规范",
+            "七项研究怎样回到现有规范",
             "模型输出是候选，不是规范内容",
             "旧 Dromen、秘密或权限",
             "Task 完成，也不证明目标满足",
@@ -1810,6 +1810,51 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the memory and resumption research proposal"
                 )
 
+    capability_proposal = SOURCE_ROOT / "spec" / "capability-discovery-and-negotiation-proposal.md"
+    if not capability_proposal.exists():
+        errors.append("missing non-normative capability discovery and negotiation research proposal")
+    else:
+        proposal_text = capability_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "结论状态：桌面审查完成；等待用户决定",
+            "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
+            "不创建新制品、文件格式、扩展名、命令、组件、结果域、稳定接口或哲学专名",
+            "不进入 `registry.json`",
+            "六类事实必须分开",
+            "MCP 2025-11-25 生命周期",
+            "A2A 1.0 规范",
+            "RFC 8707",
+            "GNU Autoconf 2.73",
+            "新能力不能扩写旧 Dromen",
+            "候选责任的唯一主归属",
+            "十二个案例",
+            "变化处理矩阵",
+            "威胁到失败责任的映射",
+            "失败域与结果隔离",
+            "不创建 `CAP-CORE`、能力制品或新专名",
+            "这些结论不会在本轮改变任何现行规范条款、登记、向量、Dromen 字段或结果值",
+        ):
+            if token not in proposal_text:
+                errors.append(f"capability discovery proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "capability-discovery-and-negotiation" in registry_text or '"CAP-CORE"' in registry_text:
+            errors.append("non-normative capability discovery proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "specifications" / "adapters.html",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "docs" / "architecture-guide.md",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+            SOURCE_ROOT / "content-quality-audit.md",
+        ):
+            if "capability-discovery-and-negotiation-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the capability discovery research proposal"
+                )
+
     agent_boundaries = SOURCE_ROOT / "architecture" / "agent-system-boundaries.html"
     if not agent_boundaries.exists():
         errors.append("missing public Agent system boundary guide")
@@ -1818,10 +1863,10 @@ def validate_jekyll_sources():
         for token in (
             "三种成熟度不得混写",
             "运行事实应该放在哪里",
-            "六条最危险的越级路径",
+            "七条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的四个约束",
-            "六项研究怎样回到现有规范",
+            "GNU 技术提供的五个约束",
+            "七项研究怎样回到现有规范",
             "2025-11-25",
             "2026-07-28",
             "A2A 1.0 版本化规范",
@@ -1831,6 +1876,7 @@ def validate_jekyll_sources():
             "OpenAI Agents SDK tracing",
             "Make target、prerequisite 与 recipe",
             "Guix profile generations",
+            "Autoconf feature checks",
         ):
             if token not in boundary_text:
                 errors.append(f"Agent boundary guide missing cross-domain contract: {token}")
@@ -1840,6 +1886,7 @@ def validate_jekyll_sources():
             "state-change-and-causal-attribution-proposal.md",
             "preview-simulation-and-approval-proposal.md",
             "memory-checkpoint-and-resumption-proposal.md",
+            "capability-discovery-and-negotiation-proposal.md",
             "semantic-equivalence-and-migration-proposal.md",
         ):
             if proposal_name not in boundary_text:
@@ -2241,11 +2288,15 @@ def validate_jekyll_sources():
             'data-mobile-directory-pending-open',
             '".global-directory-panel[open]"',
             "shouldContainScrollGesture",
-            'document.addEventListener("wheel", containWheel, { passive: false })',
-            'document.addEventListener("touchstart", rememberTouch, { passive: true })',
-            'document.addEventListener("touchmove", containTouch, { passive: false })',
-            'document.addEventListener("touchend", forgetTouch, { passive: true })',
-            'document.addEventListener("touchcancel", forgetTouch, { passive: true })',
+            'document.addEventListener("wheel", containWheel, { passive: false, capture: true })',
+            'document.addEventListener("touchstart", rememberTouch, { passive: true, capture: true })',
+            'document.addEventListener("touchmove", containTouch, { passive: false, capture: true })',
+            'document.addEventListener("touchend", forgetTouch, { passive: true, capture: true })',
+            'document.addEventListener("touchcancel", forgetTouch, { passive: true, capture: true })',
+            'window.visualViewport?.addEventListener("resize", syncViewportHeight, { passive: true })',
+            'window.addEventListener("orientationchange", syncViewportHeight, { passive: true })',
+            'window.visualViewport?.height || window.innerHeight',
+            'root.style.setProperty(viewportHeightProperty, `${Math.round(viewportHeight)}px`)',
             "if (touchY === null)",
             'panel.open = pendingOpen',
             'window.noemionMobileDirectoryScroll = Object.freeze',
@@ -2253,6 +2304,7 @@ def validate_jekyll_sources():
             'root.style.setProperty(scrollOffsetProperty, `${-scrollY}px`)',
             'root.classList.add("mobile-directory-open")',
             'root.classList.remove("mobile-directory-open")',
+            'root.style.removeProperty(viewportHeightProperty)',
             'root.style.scrollBehavior = "auto"',
             'root.scrollTop = scrollY',
             'document.body.scrollTop = scrollY',
@@ -2299,12 +2351,13 @@ def validate_jekyll_sources():
             'position:fixed;top:var(--mobile-directory-scroll-offset,0)',
             'html.mobile-directory-open body .global-header{',
             'position:fixed;top:0;right:8px;left:8px;width:auto;margin:0',
-            'position:fixed;top:64px;right:auto;bottom:auto;left:0;width:calc(100vw - 16px);height:calc(100dvh - 72px);max-height:none',
+            'backdrop-filter:none;-webkit-backdrop-filter:none',
+            'height:calc(var(--mobile-directory-viewport-height,100dvh) - 72px);max-height:none',
             'html.mobile-directory-open body:not([data-page-role="portal"]) .global-directory-panel nav{',
-            'top:112px;right:auto;bottom:auto;left:0;width:calc(100vw - 16px);height:calc(100dvh - 120px);max-height:none',
+            'height:calc(var(--mobile-directory-viewport-height,100dvh) - 120px);max-height:none',
             'touch-action:pan-y pinch-zoom',
             'isolation:isolate',
-            'overscroll-behavior:contain',
+            'overflow-anchor:none;overscroll-behavior:none',
             '.directory-loading-status{display:none',
             'nav[aria-busy="true"] .directory-loading-status',
             ':root[data-resolved-theme="dark"]',
@@ -2708,7 +2761,7 @@ def validate_jekyll_sources():
             'item.classList.toggle("is-menu-open", expanded)',
             "setTimeout(() => this.#setExpanded(item, true), 40)",
             "setTimeout(() => this.#setExpanded(item, false), 120)",
-            'document.addEventListener("pointerdown"',
+            'document.addEventListener("click"',
             'event.key === "Escape"',
             "setTimeout(() => this.#finishClose(), 180)",
             "window.noemionMobileDirectoryScroll",
@@ -3823,7 +3876,7 @@ def main():
                 "const document = {documentElement:root,body:{scrollTop:0},"
                 "querySelector:(selector)=>selector==='.global-directory-panel[open]'?panel:null,"
                 "addEventListener:(type,handler)=>{listeners[type]=handler;}};"
-                "const window = {matchMedia:()=>({matches:true}),scrollY:0};"
+                "const window = {matchMedia:()=>({matches:true}),scrollY:0,innerHeight:852,addEventListener:noop};"
                 "runInNewContext(readFileSync(process.argv[1],'utf8'),{window,document,CustomEvent:function(){}});"
                 "const cases = JSON.parse(process.argv[2]);"
                 "const api = window.noemionMobileDirectoryScroll;"

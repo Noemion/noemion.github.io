@@ -5,7 +5,14 @@
   const root = document.documentElement;
   const scrollPositionAttribute = "data-mobile-directory-scroll-y";
   const scrollOffsetProperty = "--mobile-directory-scroll-offset";
+  const viewportHeightProperty = "--mobile-directory-viewport-height";
   let touchY = null;
+
+  const syncViewportHeight = () => {
+    if (!root.classList.contains("mobile-directory-open")) return;
+    const viewportHeight = window.visualViewport?.height || window.innerHeight;
+    root.style.setProperty(viewportHeightProperty, `${Math.round(viewportHeight)}px`);
+  };
 
   const shouldContainScrollGesture = (scrollContainer, deltaY) => {
     const maximumScrollTop = Math.max(
@@ -21,9 +28,11 @@
   const lockPageScroll = () => {
     if (root.classList.contains("mobile-directory-open")) return;
     const scrollY = window.scrollY || root.scrollTop || 0;
+    touchY = null;
     root.setAttribute(scrollPositionAttribute, String(scrollY));
     root.style.setProperty(scrollOffsetProperty, `${-scrollY}px`);
     root.classList.add("mobile-directory-open");
+    syncViewportHeight();
   };
 
   const unlockPageScroll = () => {
@@ -33,10 +42,12 @@
     root.style.scrollBehavior = "auto";
     root.classList.remove("mobile-directory-open");
     root.style.removeProperty(scrollOffsetProperty);
+    root.style.removeProperty(viewportHeightProperty);
     root.removeAttribute(scrollPositionAttribute);
     root.scrollTop = scrollY;
     document.body.scrollTop = scrollY;
     root.style.scrollBehavior = previousScrollBehavior;
+    touchY = null;
   };
 
   window.noemionMobileDirectoryScroll = Object.freeze({
@@ -92,11 +103,13 @@
     touchY = null;
   };
 
-  document.addEventListener("wheel", containWheel, { passive: false });
-  document.addEventListener("touchstart", rememberTouch, { passive: true });
-  document.addEventListener("touchmove", containTouch, { passive: false });
-  document.addEventListener("touchend", forgetTouch, { passive: true });
-  document.addEventListener("touchcancel", forgetTouch, { passive: true });
+  document.addEventListener("wheel", containWheel, { passive: false, capture: true });
+  document.addEventListener("touchstart", rememberTouch, { passive: true, capture: true });
+  document.addEventListener("touchmove", containTouch, { passive: false, capture: true });
+  document.addEventListener("touchend", forgetTouch, { passive: true, capture: true });
+  document.addEventListener("touchcancel", forgetTouch, { passive: true, capture: true });
+  window.visualViewport?.addEventListener("resize", syncViewportHeight, { passive: true });
+  window.addEventListener("orientationchange", syncViewportHeight, { passive: true });
 
   document.addEventListener("click", (event) => {
     const summary = event.target.closest?.(".global-directory-panel > summary");
