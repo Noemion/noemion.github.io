@@ -38,7 +38,7 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td>第 0 阶段<br>词汇与规范骨架</td><td>Endem、Synem、Dromen、Iknem；六个语义面、一个根 skena、形式显示、三类未知、条款 ID 与正反向量</td><td>关系角色、投影、满足状态与错误有可复查定义；每项规范要求都有测试或明确人工权威</td><td>删除不能说明消费者或失败责任的名词</td></tr>
       <tr><td>第 1 阶段<br>最小安全核心</td><td><code>ktise/elenk/theor</code>、规范写入器、生产解析器、独立 Theor 和一致性门禁</td><td>Ktisor/Theor 差分一致、恶意语料关闭失败、资源有界、双环境逐字节复现</td><td>若最小字段仍不能表达真实任务，回到规范；若 <code>peira</code> 没有独立用户任务，就只保留内部测试身份</td></tr>
       <tr><td>第 2 阶段<br>组合</td><td><code>pleko</code>、引用解析、冲突矩阵、固定依赖与 Synem</td><td>至少两个真实多 Endem 案例；链接顺序不改变规范结果；权限只能收窄</td><td>没有真实复用消费者时不建设归档、动态链接或共享披露文件</td></tr>
-      <tr><td>第 3 阶段<br>发布</td><td><code>tasse/sphra</code>、调试伴随记录、外部签名请求与响应</td><td>裁剪等价、闭包完整、签名主体精确、可复现发行与 SBOM</td><td>通用变换、裁剪或归档没有消费者时，只保留为内部步骤</td></tr>
+      <tr><td>第 3 阶段<br>发布</td><td><code>tasse/sphra</code>、调试伴随记录、外部签名请求与响应</td><td>版本化保留关系、闭包完整、签名主体精确、可复现发行与 SBOM</td><td>没有真实消费者或无法冻结保留属性、损失和反例时，不执行删除并停止建设通用变换</td></tr>
       <tr><td>第 4 阶段<br>受控运行</td><td><code>drase</code>、隔离 Drasor、Dromen、Iknem 和规则型后端</td><td>实际字节重验、能力最小化、事件完整、验收权威分离、恢复与升级路径</td><td>若单一 Iknem 无法覆盖不同权威，再按权限或生命周期拆分</td></tr>
       <tr><td>第 5 阶段<br>模型与协议适配</td><td>模型候选封装、MCP/A2A 适配器和版本化遥测导出器</td><td>相对无模型基线，在错误确定率、上下文成本或任务成功率上证明净增益</td><td>没有不可替代增益时停止模型训练平台建设，继续使用外部成熟工具</td></tr>
     </tbody></table></div>
@@ -65,7 +65,7 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td>GNU GCC 诊断</td><td>稳定诊断内容与文本、SARIF 等输出出口分开，保留规则与位置</td><td>不复制编译器严重度、参数或把自由消息当作机器协议</td></tr>
       <tr><td>GNU 发行实践</td><td>固定区域设置、时区、路径与构建纪元；两环境复现；调试信息分离并绑定摘要</td><td>把构建工具本身当作复现证明</td></tr>
     </tbody></table></div>
-    <p><a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">GNU readelf 手册</a>明确说明它独立于 BFD；<a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD 手册</a>同时说明跨格式 canonical 转换可能丢失信息。这里借鉴的是验证与职责思想，不是命令清单。Section/Segment、符号、重定位、形成映射、裁剪、调试分离和 Build ID 的逐项边界见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/gnu-elf-applicability-proposal.md">非规范 GNU 与 ELF 适用性研究提案</a>。</p>
+    <p><a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">GNU readelf 手册</a>明确说明它独立于 BFD；<a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD 手册</a>同时说明跨格式 canonical 转换可能丢失信息。这里借鉴的是验证与职责思想，不是命令清单。Section/Segment、符号、重定位、形成映射、裁剪、调试分离和 Build ID 的逐项边界见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/gnu-elf-applicability-proposal.md">非规范 GNU 与 ELF 适用性研究提案</a>；规范化、裁剪和迁移为什么不能自动成为语义等价，见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">非规范语义等价与迁移研究提案</a>。</p>
   </section>
 
   <section class="content-wide">
@@ -73,6 +73,7 @@ permalink: "/development/implementation-roadmap.html"
     <ul>
       <li>模型上下文不能只是把政策、对话、检索片段和工具返回拼成一段文字。一次调用必须能够追溯输入选择、角色、权威、顺序、变换、截断、缓存和损失；外部数据不能因位置、标签或自述取得指令权。当前只形成<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">非规范上下文装配研究提案</a>，不新增制品、命令、组件或 CORE 规范。</li>
       <li>目标、计划和执行状态必须分开。Endem/Synem 固定终态，Dromen 固定会话上限，计划只在该上限内变化；步骤、handoff、MCP/A2A Task 或工具完成都不能直接成为 <code>met</code> 或 <code>accepted</code>。当前只形成<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/planning-and-replanning-proposal.md">非规范目标、计划与重规划研究提案</a>，不新增计划制品、命令、组件或 CORE 规范。</li>
+      <li>文本相似、规范化输出相同、模型裁判同意或迁移成功都不能直接建立语义等价。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">非规范语义等价与迁移研究提案</a>把精确身份、结构同构、观察等价、迁移、强化/弱化和模型相似度分开；它不新增等价制品、命令、组件、Semantic Key 或 CORE 规范。</li>
       <li>MCP 工具说明、注解和远端返回都只是 Drasor 外缘的不可信输入；能力授权来自 Dromen 与会话策略。截至 2026 年 7 月 13 日，当前研究基线是官方仍标为 Current 的 <a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">2025-11-25 工具规范</a>。官方于 5 月 21 日锁定并公开、计划于 7 月 28 日转为最终版的 2026-07-28 候选版只用于评估版本漂移，不作为当前符合性基线。任何后续正式版本都必须重新完成兼容、安全、错误来源、降级和权限复核。</li>
       <li>A2A 1.0 的 Task、Message 与 Artifact 适合跨 Agent 传输和记录生命周期，但不能替代 Endem 身份、Synem 闭包或 Iknem 验收。补丁号不进入协议协商；具体映射必须建立遵守 ADP-CORE 的独立 Profile。当前没有协议实现。</li>
       <li>可靠 Agent 依赖清晰环境、可读工具、真实观察和反馈循环；这些由 Drasor 及其外侧控制平面负责，不通过增加薄命令包装解决。实践案例见<a href="https://openai.com/index/harness-engineering/">智能体控制平面工程实践</a>。</li>

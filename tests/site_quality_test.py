@@ -1271,6 +1271,45 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the planning research proposal"
                 )
+
+    equivalence_proposal = SOURCE_ROOT / "spec" / "semantic-equivalence-and-migration-proposal.md"
+    if not equivalence_proposal.exists():
+        errors.append("missing non-normative semantic equivalence and migration research proposal")
+    else:
+        proposal_text = equivalence_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
+            "不创建新制品、文件格式、扩展名、命令、组件、结果域或稳定接口",
+            "不进入 `registry.json`",
+            "Noemion 不应建立一个跨对象、跨 Profile、跨版本通用的“语义等价”布尔值",
+            "五类关系必须分开",
+            "`tasse` 的当前边界",
+            "W3C RDF Dataset Canonicalization",
+            "GNU BFD canonical object-file format",
+            "Sentence-BERT",
+            "NIST AI 800-3",
+            "支持案例与反例",
+            "威胁到失败责任的映射",
+            "候选责任的唯一主归属",
+            "Semantic Key 的进入条件",
+            "等待决定",
+        ):
+            if token not in proposal_text:
+                errors.append(f"semantic equivalence proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "semantic-equivalence-and-migration" in registry_text:
+            errors.append("non-normative semantic equivalence proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+        ):
+            if "semantic-equivalence-and-migration-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the semantic equivalence research proposal"
+                )
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
     registered = sorted(set(registry) | set(read_manual_source_routes()))
@@ -2227,6 +2266,24 @@ def main():
     keyword_collisions = sorted(CURRENT_DOMAIN_IDENTIFIERS & MAINSTREAM_LANGUAGE_KEYWORDS)
     if keyword_collisions:
         errors.append(f"current domain identifiers collide with mainstream language keywords: {keyword_collisions}")
+    numbered_domain_identifiers = sorted(
+        identifier for identifier in CURRENT_DOMAIN_IDENTIFIERS
+        if any(character.isdigit() for character in identifier)
+    )
+    if numbered_domain_identifiers:
+        errors.append(
+            "coined domain identifiers must not contain digits: "
+            + ", ".join(numbered_domain_identifiers)
+        )
+    naming_standard_text = (SOURCE_ROOT / "design-system" / "language-and-naming.md").read_text()
+    for token in (
+        "## 无数字词汇原则",
+        "不得添加数字后缀表示“新版”",
+        "数字只在它确实承担精确引用时保留",
+        "为什么纯文字名称不足",
+    ):
+        if token not in naming_standard_text:
+            errors.append(f"language and naming standard missing no-digit boundary: {token}")
     directory_css = DIRECTORY_CSS.read_text()
     for token in (
         "background:color-mix(in srgb,var(--paper) 90%,transparent)",

@@ -22,7 +22,7 @@ permalink: "/architecture/open-questions.html"
     <details open><summary>实验来源清单怎样升级为正式语言？</summary><p>ADR-0014 只关闭首个 <code>.ends</code> 输入。正式语言仍需解决注释、包含、版本演进、歧义、错误恢复和工具支持；在正反语料与真实消费者出现前，不扩展当前清单。</p></details>
     <details><summary>END-P1 之后还缺哪些字段？</summary><p>ADR-0023 已关闭内容标准分层，但没有预先冻结未来内容。END-P1 已关闭未来首条实现路径评审所需字段，并已有正负极性字节；时间、缺席、单变量量化、测量、组合、条件适用性和统计登记仍需真实消费者、新 Profile 与正反字节向量。ID-CORE 已固定摘要与签名的抽象边界，但它们是否进入容器、采用何种物理 Profile 仍未决定。</p></details>
     <details><summary>条件与排他组合怎样表达？</summary><p>ADR-0020 只允许单个 Endem 使用 <code>all_of / any_of</code>；ADR-0021 已把跨 Endem 条件固定为 Synem 会话激活。<code>xor / xone</code>、形成时条件编码和复杂守卫语言仍未冻结，不得嵌入自由脚本。</p></details>
-    <details><summary>一个根 skena 的语义等价怎样判断？</summary><p>布局、来源注释或调试记录变化后，哪些 semion、skena、telis、krin 和 apor 属性必须保持，仍需规范化规则和反例。规则冻结前只能比较显式符号、关系和条件，不能发明语义哈希。</p></details>
+    <details><summary>一个根 skena 的语义等价怎样判断？</summary><p>当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">非规范语义等价与迁移研究提案</a>已经否定跨 Profile 的通用等价布尔值，并把精确身份、封闭结构同构、有范围观察等价、迁移、强化/弱化与模型相似度分开。它提出十六个案例、十三类威胁和 Semantic Key 的进入条件，但仍在等待用户接受；在此之前只能比较显式符号、关系和条件，不能发明语义哈希。</p></details>
     <details><summary>Unicode 标识符与原始来源字节何时进入 Profile？</summary><p>TXT-CORE 已固定当前 ASCII 标识符和来源文本不做隐式规范化，也明确 END-SRCM 不能证明原始文件逐字节保真。只有国际化标识符或原始字节审计出现不可替代消费者，并能固定 Unicode 版本、比较、双向、同形、身份、变换和正反字节向量时，才建立新 Profile。</p></details>
     <details><summary>权威目录与政策语言怎样获得物理 Profile？</summary><p>AUT-CORE 已固定主体、范围、委托、同意、多人冲突、撤销、重放与结果分离。ADR-0030 又规定 END-P1 的权威字段只是选择器，不能自证授权。权威目录、角色与政策语言、授权伴随关系、事件编码、同意 UI Profile 和外部协议映射仍需真实消费者、独立威胁分析、规范字节与实现阶段授权。</p></details>
     <details><summary>连续或模糊要求怎样进入六个语义面？</summary><p>ADR-0019 已关闭可量化构念、总体、单位、聚合器、不确定度和阈值的抽象边界。软偏好、感知质量、风格、模型裁判校准和不可完全判定条件仍需保留评价环境，不能为了机器处理伪造精确阈值。</p></details>
@@ -34,7 +34,7 @@ permalink: "/architecture/open-questions.html"
     <details><summary>ELF 的符号与重定位思想怎样用于 Synem？</summary><p>当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/gnu-elf-applicability-proposal.md">非规范 GNU 与 ELF 适用性研究提案</a>只采用显式引用、精确绑定、形成映射和失败责任。它拒绝地址修补、弱符号、默认版本、环境搜索、顺序选择和运行期语义漂移。物理符号视图、绑定表或版本语法只有在出现真实 Synem 消费者、同名冲突反例和规范向量后才能提出 ADR。</p></details>
     <details><summary>什么时候允许依赖循环？</summary><p>SYN-GRF-001 已规定第一阶段拒绝依赖与激活循环。未来若支持，必须先定义固定点语义、披露与验收顺序、预算上限、失败原子性和跨实现向量。</p></details>
     <details><summary>Synem 是否需要独立物理容器？</summary><p>在出现多 Endem、流式读取或离线分发的真实消费者前，内容寻址清单和现有确定性归档可能已经足够。不能只为形式完整提前创造格式。</p></details>
-    <details><summary>tasse 可以删除哪些信息？</summary><p>ID-REL-001 已要求裁剪结果与调试伴随文件各有精确身份，并记录变换、保留内容和损失。哪些内容可以删除、怎样证明语义等价、伴随关系采用什么物理格式，仍需真实消费者与正反字节向量。</p></details>
+    <details><summary>tasse 可以删除哪些信息？</summary><p>ID-REL-001 已要求裁剪结果与调试伴随文件各有精确身份，并记录变换、保留内容和损失。当前没有裁剪等价规范；<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">非规范研究提案</a>主张先冻结版本化保留关系、观察范围和正反向量，不能证明时保留或失败。哪些属性允许删除、伴随关系采用什么物理格式，仍需真实消费者。</p></details>
     <details><summary>sphra 的算法与撤销策略是什么？</summary><p>ID-CORE 已固定有类型待签陈述、外置包络、权威分离、截止点和撤销解释。摘要与签名算法基线、多签政策、密钥体系、证书 Profile、时间来源、透明日志、撤销分发和离线包络物理编码仍需独立 ADR 与证据。</p></details>
   </section>
 

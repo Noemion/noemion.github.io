@@ -48,7 +48,7 @@ badges: ["Architecture", "Endem", "Trust Boundaries"]
 
 `pleko` 解析 Endem 引用、固定依赖、检查约束可满足性并构造 Synem。能力合并只能保持或收窄权限；硬约束或验收冲突必须失败，不能调用模型“猜一个折中”。
 
-`tasse` 只执行规范定义的类型化裁剪，并证明 semion、skena、telis、krin、apor、依赖和披露行为保持等价。`sphra` 生成不可变签名请求，核对外部签名响应；Ktisor 永不持有私钥。
+`tasse` 目前没有可执行的裁剪等价规范。未来只有在版本化关系明确列出必须保留的 semion、skena、telis、krin、apor、依赖和披露属性，并具备正反向量后，它才能执行允许的类型化变换；否则保留内容或失败。`sphra` 生成不可变签名请求，核对外部签名响应；Ktisor 永不持有私钥。
 
 ## 装载与运行
 

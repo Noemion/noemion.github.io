@@ -35,6 +35,8 @@
 
 [`planning-and-replanning-proposal.md`](planning-and-replanning-proposal.md) 研究 Endem/Synem 目标、Dromen 会话边界、可变计划、外部 Task、行动轨迹、Iknem 与最终决定怎样保持分离。它用 GNU Make 的 target/prerequisite/recipe 分离、ReAct、A2A 1.0.0、MCP experimental Tasks 和 OpenAI Agents SDK 核对现实 Agent 工作流，但不创建计划制品、计划格式、计划命令、计划组件或 `PLAN-CORE`，也不进入 `registry.json`。当前首选是把未来唯一义务归还现有 END、SYN、DRO、IKN、AUT、ADP、DIA 与 TXT 责任。
 
+[`semantic-equivalence-and-migration-proposal.md`](semantic-equivalence-and-migration-proposal.md) 研究精确身份、封闭结构同构、有范围观察等价、版本化迁移、强化/弱化和模型相似度怎样分开。它用 W3C RDFC-1.0、RFC 8785、Unicode UAX #15、YANG 更新规则、GNU BFD/objcopy、Sentence-BERT、LLM-as-a-Judge 与 NIST AI 800-3 检查规范化和模型判断的适用域。它不创建等价制品、迁移格式、Semantic Key、命令、组件或 CORE，也不进入 `registry.json`；当前首选是把未来唯一义务归还现有 ID、END、SYN、TXT、AUT、IKN、ADP、DIA 与 DRO 责任。
+
 [`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用三十个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分、结果域、时间范围、缺席推断、量化范围、测量阈值、复合判断以及内容与授权伴随关系是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
 
 [`synem-scenarios.md`](synem-scenarios.md) 用十个非规范场景检查闭包、绑定、可选依赖、权限、成员结果和激活边界。它同样不是语法、解析器或组件证据。
