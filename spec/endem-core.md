@@ -88,6 +88,30 @@
 
 **验证：**`SV-VALID-001`；未来 `peira:telis-mode` 测试。
 
+### END-QNT-001 — 量化必须固定成员范围
+
+**要求：**量化 `skena` `MUST` 固定一个关系模板和且仅一个被量化角色，并绑定集合身份、具名成员资格权威、`enumerated` 或 `rule-bound` 成员模式、确定截止点、成员身份规则，以及完整成员清单或确定性成员规则。`enumerated` 成员 `MUST` 按规范身份唯一；重复成员必须拒绝，不得静默去重。模型、查询结果、搜索路径或运行工具 `MUST NOT` 在求值时另选有利子集。
+
+**失败：**成员资格权威、截止点、身份规则或被量化角色缺失，集合同时使用两种模式，成员规则依赖未记录环境，或同一成员以重复记录出现时，形成操作必须拒绝。
+
+**验证：**`SCN-016`、`SCN-018` 与 `SCN-019` 设计审查；`vectors/quantification/cases.json`；未来 `peira:quantified-collection-scope` 组件测试。
+
+### END-QNT-002 — 量词与闭包条件必须显式
+
+**要求：**第一阶段量词只允许 `all`、`some`、`at_least`、`at_most` 与 `exactly`；后三者 `MUST` 绑定非负整数阈值。支持全称满足、上界满足或精确数量满足的集合 `MUST` 是截止点已封闭的 `enumerated` 范围，除非已有足以反驳或满足该结论的决定性成员证据。空集合 `MUST` 绑定具名权威明确授权的 `allow` 政策；不得以默认空集和形式逻辑的空真值静默产生 `met`。量化 `mene` 在成员变更政策、成员有效区间和滚动闭包冻结前不受支持。
+
+**失败：**量词未知、阈值缺失或为负、开放集合被用于证明 `all`、`at_most` 或 `exactly` 已满足、空集合政策缺失，或动态成员集合被用于持续目标时，形成或求值必须拒绝相应确定结论。
+
+**验证：**`SCN-016`、`SCN-017` 与 `SCN-019` 设计审查；`vectors/quantification/cases.json`；未来 `peira:quantifier-closure` 组件测试。
+
+### END-QNT-003 — 聚合只按不同成员身份计数
+
+**要求：**量化求值 `MUST` 按规范化后的不同成员身份聚合成员级 `met/unmet/agno/fault`，不得按日志行、观察次数、证据数量或模型提及次数计数。决定性结果可以提前形成：`all` 的一个有效 `unmet`、`some` 的一个有效 `met`、`at_least k` 的 `k` 个不同 `met`、`at_most k` 的 `k+1` 个不同 `met`、`exactly k` 的 `k+1` 个不同 `met`。没有决定性结果时，未封闭或观察不足产生 `agno`，成员求值契约故障产生 `fault`，只有封闭范围的完整成员结果才可形成其余 `met` 或 `unmet`。聚合结果 `MUST` 保留实际成员结果与所用 Tekmor 的可追溯链接。
+
+**失败：**重复见证被累计、一个成员的多条日志被当成多个成员、未知成员被当作未满足、故障被当作反例，或在不完整范围内产生非决定性的确定结果时，该聚合结果无效。
+
+**验证：**`SCN-016` 至 `SCN-018` 设计审查；`vectors/quantification/cases.json`；未来 `peira:distinct-cardinality-aggregation` 组件测试。
+
 ### END-NEG-001 — 否定必须作用于同一关系与角色位置
 
 **要求：**负极性 `skena` `MUST` 引用 `semion` 中已经授权的关系身份和同一组具名角色，并把极性显式编码为 `negative`。实现 `MUST NOT` 以删除关系节点、构造 `not_` 前缀谓词、交换角色、增加 `avoid/forbid` 方向或依赖空集合来表达否定。END-P1 当前只编码原子关系极性；复合否定与双重否定规范化仍不受支持。

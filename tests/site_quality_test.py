@@ -83,6 +83,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0015-result-domains.html",
     "architecture/adr-0016-mene-time-model.html",
     "architecture/adr-0017-negation-and-absence.html",
+    "architecture/adr-0018-quantification-and-membership.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -232,6 +233,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0015-result-domains.html",
     "architecture/adr-0016-mene-time-model.html",
     "architecture/adr-0017-negation-and-absence.html",
+    "architecture/adr-0018-quantification-and-membership.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -1453,6 +1455,16 @@ def validate_jekyll_sources():
             "查询没有匹配只说明该查询范围",
             "一次无匹配不能越过搜索范围成为普遍否定",
             "这份数据模型本身不证明日志流完整",
+        ),
+        "architecture/adr-0018-quantification-and-membership.html": (
+            "SHACL 2017 Recommendation",
+            "SHACL 1.2",
+            "2026 Working Draft",
+            "OWL 2",
+            "COUNT(DISTINCT",
+            "GNU",
+            "一次文件搜索不能自行证明",
+            "Noemion 的结果域、空集合政策和信任边界仍由 END-CORE 自己规定",
         ),
     }
     for relative_path, required_tokens in external_boundary_contracts.items():

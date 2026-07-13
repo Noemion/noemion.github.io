@@ -6,7 +6,7 @@
 
 | 规范 | 版本 | 状态 | 已覆盖 | 明确未覆盖 |
 | --- | --- | --- | --- | --- |
-| [`endem-core.md`](endem-core.md) | `0.1.0-draft` | 草案；已接受语义边界的第一份条款化表达 | Endem 最小性、六个语义面、事态与方向分离、未知状态、确定性、安全读取、身份分层与验证责任 | END-P1 之外的量化、时间、求值、摘要与签名 |
+| [`endem-core.md`](endem-core.md) | `0.1.0-draft` | 草案；已接受语义边界的第一份条款化表达 | Endem 最小性、六个语义面、事态与方向分离、抽象单变量量化、未知状态、确定性、安全读取、身份分层与验证责任 | 量化物理字段、嵌套或多变量量化、时间、求值、摘要与签名 |
 | [`endem-format.md`](endem-format.md) | `0.1.0-draft` | 已采用的实验性草案；尚非稳定 ABI | 固定前导、定宽目录、确定性 CBOR、END-P0 结构实验与 END-P1 封闭语义载荷 | coherent/attested、签名、压缩、Synem 和跨版本承诺 |
 | [`endem-source-manifest.md`](endem-source-manifest.md) | `0.1.0-draft` | 实验性 Poiet 输入；正式来源语言出现后删除 | UTF-8 逐行指令、转义、基数、授权边界和 END-P1 映射 | 注释元数据、包含、模块、量化、时间、求值语言和兼容承诺 |
 
@@ -14,13 +14,15 @@
 
 [`endem-errors.md`](endem-errors.md) 登记结构与 Profile 错误码。[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存 JSON 语义外壳；`../vectors/wire/` 保存真实字节的十六进制表达。结构接受向量不等于语义有效 Endem。
 
-[`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用十五个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分、结果域、时间范围与缺席推断是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
+[`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用十九个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分、结果域、时间范围、缺席推断与量化范围是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
 
 `../vectors/result-domains/cases.json` 保存 ADR-0015 的十二个正反提案向量；`../tests/result_domain_vector_test.py` 只执行结果域约束，不实现 Praxor、求值器或决定引擎。向量通过只能证明当前矩阵和条款一致，不能证明运行组件存在。
 
 `../vectors/mene/cases.json` 保存 ADR-0016 的十二个时间与连续性提案向量；`../tests/mene_vector_test.py` 只执行 fixed/elapsed 范围、strict/budgeted 政策和覆盖分类，不实现时钟、监控器、Praxor 或求值器。
 
 `../vectors/negation/cases.json` 保存 ADR-0017 的十二个否定与缺席提案向量；`../tests/negation_vector_test.py` 只执行显式负观察、空结果、封闭范围、正反例和观察故障分类，不实现日志收集器、Praxor 或求值器。
+
+`../vectors/quantification/cases.json` 保存 ADR-0018 的十二个量化与成员资格提案向量；`../tests/quantification_vector_test.py` 只检查成员范围、空集合、不同成员计数和决定性聚合，不实现 Poiet、Praxor、成员目录或求值器。
 
 `registry.json` 还登记非规范实验及其决定链。P0-LANG-001 的协议与结果位于 `../experiments/p0-language/`；它支持 ADR-0012 的首版核心语言决定，但不会改变 END-CORE 或 END-FMT 的条款含义，也不把原型登记为生产实现。
 

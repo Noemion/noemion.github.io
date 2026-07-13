@@ -31,6 +31,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0015](https://noemion.github.io/architecture/adr-0015-result-domains.html) — separate artifact, satisfaction, decision, session, and evidence result domains
 - [ADR-0016](https://noemion.github.io/architecture/adr-0016-mene-time-model.html) — fixed and elapsed time scopes, continuity policies, coverage gaps, and clock authority
 - [ADR-0017](https://noemion.github.io/architecture/adr-0017-negation-and-absence.html) — explicit negative relations, absence evidence, closed observation scopes, and failure classification
+- [ADR-0018](https://noemion.github.io/architecture/adr-0018-quantification-and-membership.html) — quantified collection scopes, distinct membership, cardinality, and decisive evidence
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Praxor responsibility boundaries
 - [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary

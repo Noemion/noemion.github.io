@@ -86,6 +86,16 @@ permalink: "/components/praxor.html"
   </section>
 
   <section class="content-wide">
+    <h2>量化聚合责任</h2>
+    <ul>
+      <li>装载时重新核对集合身份、成员权威、截止点、身份规则和唯一量化角色，不能由运行查询替换规范范围。</li>
+      <li>把每个不同成员的观察分别形成结果与 Tekmor 链接，再按 ADR-0018 的决定性规则聚合。</li>
+      <li>重复事件、重试和多份证据不得增加成员数；范围不完整为 <code>agno</code>，成员求值契约故障为 <code>fault</code>。</li>
+      <li>当前没有成员目录、聚合器或量化求值器；这些只是未来 Praxor 的责任边界。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
     <h2>失败与拒绝责任</h2>
     <div class="table-wrap"><table><thead><tr><th>失败</th><th>Praxor 必须记录</th><th>后续状态</th></tr></thead><tbody>
       <tr><td>Load rejected</td><td>对象身份、失败层、规则和位置</td><td>会话 <code>failed</code>；不创建 Dromen，也不伪造满足结果。</td></tr>

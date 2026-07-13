@@ -1,0 +1,91 @@
+{
+  "vector_format": "noemion.quantification-vector-v1",
+  "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "description": "Finite quantification proposal vectors for ADR-0018; not a collection resolver, Praxor, evaluator, or component implementation",
+  "cases": [
+    {
+      "id": "QV-VALID-ALL-CLOSED-MET-001",
+      "target": {"relation": "healthy", "bound_role": "node", "collection": {"id": "production-nodes", "authority": "inventory-owner", "mode": "enumerated", "cutoff": "release-start", "identity": "node-id", "members": ["node-a", "node-b"], "empty": "reject"}, "quantifier": {"mode": "all"}},
+      "member_results": [{"member": "node-a", "result": "met"}, {"member": "node-b", "result": "met"}],
+      "proposed_result": "met",
+      "expect": {"result": "accept", "clause": "END-QNT-003"}
+    },
+    {
+      "id": "QV-VALID-ALL-COUNTEREXAMPLE-UNMET-001",
+      "target": {"relation": "healthy", "bound_role": "node", "collection": {"id": "production-nodes", "authority": "inventory-owner", "mode": "enumerated", "cutoff": "release-start", "identity": "node-id", "members": ["node-a", "node-b"], "empty": "reject"}, "quantifier": {"mode": "all"}},
+      "member_results": [{"member": "node-a", "result": "unmet"}, {"member": "node-b", "result": "fault"}],
+      "proposed_result": "unmet",
+      "expect": {"result": "accept", "clause": "END-QNT-003"}
+    },
+    {
+      "id": "QV-VALID-SOME-WITNESS-MET-001",
+      "target": {"relation": "ready", "bound_role": "region", "collection": {"id": "service-regions", "authority": "routing-owner", "mode": "rule-bound", "cutoff": "decision-time", "identity": "region-id", "rule": "active-service-region", "empty": "reject"}, "quantifier": {"mode": "some"}},
+      "member_results": [{"member": "region-east", "result": "met"}, {"member": "region-west", "result": "fault"}],
+      "proposed_result": "met",
+      "expect": {"result": "accept", "clause": "END-QNT-003"}
+    },
+    {
+      "id": "QV-VALID-SOME-CLOSED-UNMET-001",
+      "target": {"relation": "approved", "bound_role": "reviewer", "collection": {"id": "required-reviewers", "authority": "review-owner", "mode": "enumerated", "cutoff": "review-open", "identity": "person-id", "members": ["reviewer-a", "reviewer-b"], "empty": "reject"}, "quantifier": {"mode": "some"}},
+      "member_results": [{"member": "reviewer-a", "result": "unmet"}, {"member": "reviewer-b", "result": "unmet"}],
+      "proposed_result": "unmet",
+      "expect": {"result": "accept", "clause": "END-QNT-003"}
+    },
+    {
+      "id": "QV-VALID-AT-LEAST-DISTINCT-MET-001",
+      "target": {"relation": "approved", "bound_role": "reviewer", "collection": {"id": "eligible-reviewers", "authority": "review-owner", "mode": "rule-bound", "cutoff": "review-close", "identity": "person-id", "rule": "eligible-security-reviewer", "empty": "reject"}, "quantifier": {"mode": "at_least", "threshold": 2}},
+      "member_results": [{"member": "reviewer-a", "result": "met"}, {"member": "reviewer-b", "result": "met"}, {"member": "reviewer-c", "result": "agno"}],
+      "proposed_result": "met",
+      "expect": {"result": "accept", "clause": "END-QNT-003"}
+    },
+    {
+      "id": "QV-VALID-EXACTLY-CLOSED-MET-001",
+      "target": {"relation": "approved", "bound_role": "reviewer", "collection": {"id": "eligible-reviewers", "authority": "review-owner", "mode": "enumerated", "cutoff": "review-close", "identity": "person-id", "members": ["reviewer-a", "reviewer-b", "reviewer-c"], "empty": "reject"}, "quantifier": {"mode": "exactly", "threshold": 2}},
+      "member_results": [{"member": "reviewer-a", "result": "met"}, {"member": "reviewer-b", "result": "met"}, {"member": "reviewer-c", "result": "unmet"}],
+      "proposed_result": "met",
+      "expect": {"result": "accept", "clause": "END-QNT-003"}
+    },
+    {
+      "id": "QV-REJECT-MEMBERSHIP-AUTHORITY-MISSING-001",
+      "target": {"relation": "healthy", "bound_role": "node", "collection": {"id": "production-nodes", "mode": "enumerated", "cutoff": "release-start", "identity": "node-id", "members": ["node-a"], "empty": "reject"}, "quantifier": {"mode": "all"}},
+      "member_results": [{"member": "node-a", "result": "met"}],
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-QNT-001"}
+    },
+    {
+      "id": "QV-REJECT-DUPLICATE-MEMBER-001",
+      "target": {"relation": "healthy", "bound_role": "node", "collection": {"id": "production-nodes", "authority": "inventory-owner", "mode": "enumerated", "cutoff": "release-start", "identity": "node-id", "members": ["node-a", "node-a"], "empty": "reject"}, "quantifier": {"mode": "all"}},
+      "member_results": [{"member": "node-a", "result": "met"}],
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-QNT-001"}
+    },
+    {
+      "id": "QV-REJECT-ALL-OPEN-AS-MET-001",
+      "target": {"relation": "healthy", "bound_role": "node", "collection": {"id": "production-nodes", "authority": "inventory-owner", "mode": "rule-bound", "cutoff": "release-start", "identity": "node-id", "rule": "production-node", "empty": "reject"}, "quantifier": {"mode": "all"}},
+      "member_results": [{"member": "node-a", "result": "met"}],
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-QNT-002"}
+    },
+    {
+      "id": "QV-REJECT-EMPTY-ALL-IMPLICIT-001",
+      "target": {"relation": "healthy", "bound_role": "node", "collection": {"id": "production-nodes", "authority": "inventory-owner", "mode": "enumerated", "cutoff": "release-start", "identity": "node-id", "members": [], "empty": "reject"}, "quantifier": {"mode": "all"}},
+      "member_results": [],
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-QNT-002"}
+    },
+    {
+      "id": "QV-REJECT-DUPLICATE-WITNESS-COUNT-001",
+      "target": {"relation": "approved", "bound_role": "reviewer", "collection": {"id": "eligible-reviewers", "authority": "review-owner", "mode": "enumerated", "cutoff": "review-close", "identity": "person-id", "members": ["reviewer-a", "reviewer-b"], "empty": "reject"}, "quantifier": {"mode": "at_least", "threshold": 2}},
+      "member_results": [{"member": "reviewer-a", "result": "met"}, {"member": "reviewer-a", "result": "met"}],
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-QNT-003"}
+    },
+    {
+      "id": "QV-REJECT-AT-MOST-INCOMPLETE-AS-MET-001",
+      "target": {"relation": "failed", "bound_role": "node", "collection": {"id": "production-nodes", "authority": "inventory-owner", "mode": "rule-bound", "cutoff": "release-end", "identity": "node-id", "rule": "production-node", "empty": "reject"}, "quantifier": {"mode": "at_most", "threshold": 2}},
+      "member_results": [{"member": "node-a", "result": "met"}],
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-QNT-003"}
+    }
+  ]
+}

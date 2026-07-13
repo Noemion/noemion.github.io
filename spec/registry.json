@@ -106,7 +106,10 @@
     {"term": "time-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "Tekmor 声明的半开观测区间并集、方法、时钟、不确定度与缺口"},
     {"term": "relation-polarity", "kind": "semantic-interface", "decision_status": "accepted", "definition": "同一关系身份与角色位置上的 positive 或 negative 事态极性"},
     {"term": "negative-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "显式负极性观察，或在封闭观察范围内由完整缺席依据支持的负主张"},
-    {"term": "observation-closure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定权威、有限全集、角色路径、时间、方法、截止点、丢失计数与排除项的封闭观察声明"}
+    {"term": "observation-closure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定权威、有限全集、角色路径、时间、方法、截止点、丢失计数与排除项的封闭观察声明"},
+    {"term": "quantifier", "kind": "semantic-interface", "decision_status": "accepted", "definition": "all、some、at_least、at_most 或 exactly 对一个固定关系角色的量化方式"},
+    {"term": "collection-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "绑定集合身份、成员资格权威、模式、截止点、身份规则和成员或规则的量化范围"},
+    {"term": "cardinality-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "按不同规范成员身份聚合并保留成员级结果与 Tekmor 链接的基数证据"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -120,7 +123,8 @@
     {"id": "THR-END-009", "clauses": ["END-CON-001", "END-DET-001"], "evidence_status": "planned"},
     {"id": "THR-END-010", "clauses": ["END-ERR-001"], "evidence_status": "partial"},
     {"id": "THR-END-011", "clauses": ["END-TIM-001", "END-TIM-002", "END-TIM-003"], "evidence_status": "partial"},
-    {"id": "THR-END-012", "clauses": ["END-NEG-001", "END-NEG-002", "END-NEG-003"], "evidence_status": "partial"}
+    {"id": "THR-END-012", "clauses": ["END-NEG-001", "END-NEG-002", "END-NEG-003"], "evidence_status": "partial"},
+    {"id": "THR-END-013", "clauses": ["END-QNT-001", "END-QNT-002", "END-QNT-003"], "evidence_status": "partial"}
   ],
   "clauses": [
     {
@@ -208,6 +212,45 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "peira:telis-mode"}
+      ]
+    },
+    {
+      "id": "END-QNT-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, membership authorities and every semantic reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
+        {"status": "planned", "ref": "peira:quantified-collection-scope"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-QNT-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, membership authorities and every evaluator",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
+        {"status": "planned", "ref": "peira:quantifier-closure"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-QNT-003",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Praxor, observation adapters and every evaluator",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
+        {"status": "planned", "ref": "peira:distinct-cardinality-aggregation"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
     {

@@ -6,7 +6,7 @@
 
 `wire/` 保存 END-FMT 0.1.0-draft 的规范十六进制字节。顶层清单属于 END-P0，只证明结构合法；`wire/p1/` 属于 END-P1，使用完整六记录载荷并实际运行字段、排序、引用和来源范围判断。两组都不是稳定 ABI。
 
-`result-domains/`、`mene/` 与 `negation/` 分别保存判断结果、时间连续性和否定缺席的提案矩阵。它们用于检查设计规则之间是否一致，不是 `.endem` 字节，也不证明运行组件存在。
+`result-domains/`、`mene/`、`negation/` 与 `quantification/` 分别保存判断结果、时间连续性、否定缺席和量化成员资格的提案矩阵。它们用于检查设计规则之间是否一致，不是 `.endem` 字节，也不证明运行组件存在。
 
 向量外壳由 [`vector.schema.json`](vector.schema.json) 约束。该 Schema 使用 JSON Schema 2020-12，只验证测试资料的结构；它不验证 Endem 语义，也不成为 Endem ABI。
 
