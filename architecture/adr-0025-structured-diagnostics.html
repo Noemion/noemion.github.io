@@ -1,0 +1,91 @@
+---
+layout: default
+title: "ADR-0025 结构化诊断边界"
+page_role: "content"
+footer_text: "Noemion · ADR-0025"
+permalink: "/architecture/adr-0025-structured-diagnostics.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0025</span></nav>
+  <header class="content-introduction"><h1>ADR-0025<br>结构化诊断边界</h1><p>让人、自动化和模型看到同一失败事实，同时阻止消息文本、外部状态和恢复建议改变本地语义或权限。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">DIA-CORE 0.1.0-draft</span><span class="badge">Failure First</span><span class="badge">No Component Code</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">所有 Noemion 工程对象共享一套诊断内容标准，但诊断不成为新的制品、结果域或权限来源。</p>
+    <p>每项诊断必须保留稳定机器码、生产语境、失败层次、类型化位置、主错误选择、有限恢复分类、外部来源、披露政策、资源预算和原子失败状态。文本、颜色、语言、SARIF、HTTP、MCP 与未来 CLI 只负责呈现或传输，不能改写这些内容。</p>
+    <p>本决定建立 <code>DIA-CORE 0.1.0-draft</code> 和跨对象 <code>DIA-CAT</code> 目录。它不建立诊断运行时、日志服务、重试引擎、协议适配器、物理格式或可执行 CLI。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么现有错误码不够</h2>
+    <div class="table-wrap"><table><thead><tr><th>现有情况</th><th>造成的问题</th><th>本决定</th></tr></thead><tbody>
+      <tr><td>Endem 容器已有实验错误码</td><td>只能定位结构和部分语义，无法统一组合、会话、证据和外部协议</td><td>保留对象专用码，用 DIA-CORE 统一外层内容与安全规则</td></tr>
+      <tr><td>外部 Agent 和工具返回自由消息</td><td>模型可能按措辞重试、提权或把失败写成目标结果</td><td>保存原协议结构与本地映射，禁止解析消息取得语义</td></tr>
+      <tr><td>并发检查可以产生多个错误</td><td>完成顺序可能改变主错误，导致缓存和自动修复不稳定</td><td>按失败层、规则优先级、规范位置和机器码选择唯一主错误</td></tr>
+      <tr><td>诊断常带路径、堆栈和请求正文</td><td>攻击者可以放大输出、污染终端或泄露令牌与隐私</td><td>类型化位置、先检查预算、默认最小披露和独立调试域</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>一项诊断必须回答什么</h2>
+    <div class="table-wrap"><table><thead><tr><th>内容</th><th>直接问题</th><th>禁止的替代物</th></tr></thead><tbody>
+      <tr><td>机器身份</td><td>这是哪一类稳定问题</td><td>本地化消息、颜色、堆栈片段</td></tr>
+      <tr><td>生产语境</td><td>谁用哪版规则检查了哪个实际输入</td><td>文件名、当前目录、“latest”</td></tr>
+      <tr><td>层次</td><td>失败发生在来源、结构、语义、闭包、会话、证据还是外部边界</td><td>单一 success/failure 布尔值</td></tr>
+      <tr><td>位置</td><td>问题位于来源范围、字节范围、语义路径、图路径或会话绑定的哪里</td><td>未转义外部文本和无限路径</td></tr>
+      <tr><td>恢复</td><td>修复输入、刷新绑定、取得授权、有限重试还是停止</td><td>自动提权、无限重试、模型执行副作用</td></tr>
+      <tr><td>安全与预算</td><td>哪些内容被省略，最多可以报告多少</td><td>实时秘密、无限因果链和递归自报错误</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>错误层次不能替代结果域</h2>
+    <p>诊断说明某个操作为什么停止或需要注意；结果说明目标、决定、会话或证据处于什么状态。二者可以有关联，但不能相互强制转换。</p>
+    <div class="table-wrap"><table><thead><tr><th>输入信号</th><th>诊断可以记录</th><th>诊断不能直接推出</th></tr></thead><tbody>
+      <tr><td>容器目录越界</td><td><code>structure</code> 层阻断，后续层 <code>not-run</code></td><td>目标 <code>fault</code> 或权威 <code>rejected</code></td></tr>
+      <tr><td>MCP JSON-RPC 错误</td><td><code>protocol</code> 来源、远端码与本地映射</td><td>目标 <code>unmet</code></td></tr>
+      <tr><td>工具结果 <code>isError: true</code></td><td>外部工具执行来源和可行动反馈</td><td>会话必然 <code>failed</code> 或决定 <code>rejected</code></td></tr>
+      <tr><td>后端超时</td><td><code>backend</code> 层、预算和截止点</td><td>没有独立求值规则时的 <code>agno/fault</code></td></tr>
+      <tr><td>政策拒绝 step-up</td><td><code>policy</code> 层和具名权威</td><td>修改当前 Dromen 或自动开始新会话</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>面向 Agent 的恢复边界</h2>
+    <p>模型需要可行动反馈，但“可行动”不等于“可以自行行动”。DIA-CORE 只登记六种恢复分类：修复输入、刷新绑定、取得授权、短暂错误重试、操作员复核和不得重试。</p>
+    <ul>
+      <li>每项建议必须说明前置条件和影响范围，不能把自由文本当作命令。</li>
+      <li>重试、子 Agent 和工具回调共同消费当前 Dromen 的有限预算。</li>
+      <li>取得授权只说明需要哪个具名权威；它不授予能力，也不关闭 <code>apor</code>。</li>
+      <li>修改已签制品、发布、删除或扩权等外部副作用必须经过原有权限与确认边界。</li>
+      <li>同一确定性输入重复产生相同拒绝时，恢复只能要求改变输入或停止。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>GNU 与开放标准提供的对照</h2>
+    <ul>
+      <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Message-Formatting-Options.html">GNU GCC 诊断格式选项</a>允许同一诊断输出为文本或 SARIF，并保存位置、规则和相关事件。Noemion 借鉴“诊断内容与输出出口分开”，不复制 GCC 参数或编译器严重度。</li>
+      <li><a href="https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html">SARIF 2.1.0</a>提供规则身份、物理/逻辑位置、相关位置和代码流。它适合未来静态检查导出，但不能表达能力、满足或验收权威。</li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc9457.html">RFC 9457 Problem Details</a>区分问题类型、人类标题、具体发生和详情，并警告错误响应可能泄露实现与隐私信息。Noemion 借鉴身份和发生分离，不把 HTTP 状态当成本地结果。</li>
+      <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP 2025-11-25 工具规范</a>区分 JSON-RPC 协议错误和带 <code>isError</code> 的工具执行错误。Praxor 外缘必须保留这种来源差异，再进行本地有限映射。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>规范影响与验证</h2>
+    <ul>
+      <li>新增 <code>DIA-CORE 0.1.0-draft</code> 十条跨对象诊断内容要求。</li>
+      <li>把原 Endem 专用目录替换为 <code>DIA-CAT</code>，保留现有 Endem 草案码并补齐 Synem、Dromen、Tekmor 和诊断系统码。</li>
+      <li>新增十类诊断威胁和十五个非规范自然语言场景。</li>
+      <li>二十个提案向量覆盖十个允许诊断包络和十个确定拒绝；检查器只证明规范资料一致。</li>
+      <li>END-CORE、END-FMT、END-P1、SYN-CORE、DRO-CORE、TEK-CORE 与任何规范字节保持不变。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>仍未冻结的内容</h2>
+    <p>JSON、CBOR、SARIF、Problem Details、MCP、CLI 文本、退出状态、持久日志、遥测、跨进程关联、堆栈和修复补丁格式仍未冻结。当前没有诊断生产器、渲染器、日志服务、重试引擎、协议适配器或 CLI；项目仍未进入组件代码阶段。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0024-dromen-session-contract.html">← ADR-0024</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

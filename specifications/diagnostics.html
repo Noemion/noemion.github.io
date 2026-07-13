@@ -1,0 +1,81 @@
+---
+layout: default
+title: "结构化诊断规范 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 结构化诊断规范"
+permalink: "/specifications/diagnostics.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>结构化诊断</span></nav>
+  <header class="content-introduction"><h1>结构化诊断<br>让失败可以被人和机器共同理解</h1><p>统一 Endem、Synem、Dromen、Tekmor 与外部协议错误的机器身份、位置、恢复和安全边界。</p><div class="badges"><span class="badge">DIA-CORE 0.1.0-draft</span><span class="badge">DIA-CAT</span><span class="badge">No Wire Format</span><span class="badge">No Runtime</span></div></header>
+
+  <section class="content-stack">
+    <h2>先给直白定义</h2>
+    <p class="lead">结构化诊断是一份有限、可定位、机器可读的失败说明。它告诉调用者哪个操作依据哪条规则，在检查哪个精确输入时，因什么原因停止或需要注意。</p>
+    <p>诊断不是目标结果、证据、最终决定、权限或自动修复命令。一个诊断可以帮助人和 Agent 选择下一步，但必须经过原有政策、预算和授权边界。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>十条核心规则</h2>
+    <div class="table-wrap"><table><thead><tr><th>规则</th><th>直接含义</th></tr></thead><tbody>
+      <tr><td><code>DIA-IDN-001</code></td><td>稳定机器码与人类消息分开；程序不得解析措辞取得语义。</td></tr>
+      <tr><td><code>DIA-PIN-001</code></td><td>固定生产者、操作、实际输入、规范/Profile/目录版本和本次发生。</td></tr>
+      <tr><td><code>DIA-LAY-001</code></td><td>来源、结构、语义、会话、证据、协议和后端错误不得互相洗白，也不得替代结果域。</td></tr>
+      <tr><td><code>DIA-LOC-001</code></td><td>来源范围、字节范围、语义路径和会话绑定必须类型化、有界并安全显示。</td></tr>
+      <tr><td><code>DIA-PRI-001</code></td><td>主阻断诊断按规则和规范位置确定，不能取决于并发返回顺序。</td></tr>
+      <tr><td><code>DIA-REC-001</code></td><td>恢复建议必须声明前置条件；不得授予权限、无限重试或直接执行副作用。</td></tr>
+      <tr><td><code>DIA-EXT-001</code></td><td>外部错误保留协议版本、远端主体与原始结构化状态，再映射到本地码。</td></tr>
+      <tr><td><code>DIA-SEC-001</code></td><td>默认最小披露，不保存令牌、私钥、cookie、能力句柄或未授权正文。</td></tr>
+      <tr><td><code>DIA-BND-001</code></td><td>数量、深度、位置、消息和总输出都使用先检查的有限预算。</td></tr>
+      <tr><td><code>DIA-ATM-001</code></td><td>阻断错误使操作原子失败，不能同时返回部分可信对象或成功状态。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>一项完整诊断包含什么</h2>
+    <div class="table-wrap"><table><thead><tr><th>内容</th><th>例子</th><th>为何需要</th></tr></thead><tbody>
+      <tr><td>机器码与标题</td><td><code>dromen.environment.drift</code></td><td>让自动化依赖稳定身份，而不是消息文本。</td></tr>
+      <tr><td>生产语境</td><td>生产者、<code>praxe</code>、精确制品身份、DRO-CORE 与 DIA-CAT 版本</td><td>阻止诊断被错误复用到另一个输入或规则版本。</td></tr>
+      <tr><td>层次与执行范围</td><td><code>session</code>，执行到 session，后续为 <code>not-run</code></td><td>避免“没有检查”被写成“已经通过”。</td></tr>
+      <tr><td>类型化位置</td><td><code>session_binding: environment/adapter</code></td><td>让人定位问题，同时限制攻击者控制的字符串。</td></tr>
+      <tr><td>恢复分类</td><td><code>refresh-binding</code>，需要重新观察环境</td><td>给出下一步，但不自行修改 Dromen 或扩大权限。</td></tr>
+      <tr><td>披露与预算</td><td>公共脱敏政策、最多 32 项、总输出 64 KiB</td><td>防止秘密泄露和诊断风暴。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么不能只返回一段错误文字</h2>
+    <p>文字适合解释，不适合承担机器协议。语言、本地化和措辞会变化；错误正文还可能来自攻击者、模型或远端服务。若 Agent 通过字符串匹配决定“重试”“提权”或“任务失败”，消息就变成了未授权控制接口。</p>
+    <p>DIA-CORE 因此要求机器码、条款、层次、位置和恢复分类独立存在。人类消息可以更清楚，但自动化只能消费登记字段，并继续服从 Dromen 的能力与预算。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部 Agent 错误怎样进入本地边界</h2>
+    <div class="flow"><div class="step">外部结构化错误</div><div class="step">保留协议与远端来源</div><div class="step">选择受限本地诊断码</div><div class="step">应用披露与预算</div><div class="step">独立决定恢复</div><div class="step">保持结果域不变</div></div>
+    <p>MCP 的 JSON-RPC 协议错误、工具执行错误，A2A 状态，HTTP Problem Details，操作系统错误和模型 SDK 异常必须保留各自来源。适配器不能因为消息中出现“success”“failed”或“permission”就改写目标满足、最终决定或当前会话权限。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>诊断目录怎样组织</h2>
+    <p><code>DIA-CAT</code> 使用对象或诊断系统本身作为首段，例如 <code>endem.*</code>、<code>synem.*</code>、<code>dromen.*</code>、<code>tekmor.*</code> 与 <code>diagnostic.*</code>。Noemion 是项目品牌，不进入机器码。</p>
+    <p>目录保留已有 Endem 结构与内容草案码，并为 SYN-CORE、DRO-CORE、TEK-CORE 和 DIA-CORE 的每条核心拒绝责任登记初始码。目录版本必须与诊断一起固定；当前机器码仍是草案接口，不是稳定 ABI。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>权威规范和验证资料</h2>
+    <div class="page-links">
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md"><strong>DIA-CORE 诊断内容条款</strong><span>十条关于身份、语境、层次、位置、主错误、恢复、外部来源、安全、预算和原子性的规范要求。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md"><strong>DIA-CAT 诊断目录</strong><span>登记跨 Endem、Synem、Dromen、Tekmor 与诊断系统自身的草案机器码。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-threat-model.md"><strong>诊断威胁模型</strong><span>检查消息解析、状态洗白、主错误竞态、自动提权、泄密、风暴和部分成功。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-scenarios.md"><strong>诊断自然语言场景</strong><span>十五个支持案例、反例和边界场景；它们不是实现或符合性声明。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/diagnostics/cases.json"><strong>诊断提案向量</strong><span>二十个资料一致性提案，覆盖十项允许包络与十项确定拒绝。</span></a>
+    </div>
+  </section>
+
+  <section class="content-band">
+    <h2>当前成熟度</h2>
+    <p>DIA-CORE 已接受并固定抽象诊断内容边界。未来实现必须遵守十条核心规则，不得把诊断当作证据、结果、权限或自动修复命令。</p>
+    <p>物理编码、CLI 退出状态、SARIF/HTTP/MCP 映射、持久日志和遥测仍未冻结，仍需在代码开发阶段获准后分别设计与验证。当前没有诊断生产器、渲染器、日志服务、重试引擎、协议适配器或 CLI；提案向量只能证明规范资料之间一致。</p>
+  </section>
+  <div class="next-prev"><a href="tekmor.html">← Tekmor</a><a href="../architecture/adr-0025-structured-diagnostics.html">ADR-0025 →</a></div>
+</main>

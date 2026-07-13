@@ -47,6 +47,8 @@ badges: ["Authority", "Maturity", "ADR"]
 
 [Tekmor 规范](../specifications/tekmor.html)解释主体范围、有限无环溯源、结构化观察、证据类别、完整性、外部有效性评估、相对 `krin` 的覆盖度、决定分离与最小披露。规范源是 [TEK-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-core.md)；模型评价只能保持 `model-candidate`。当前没有物理 Tekmor 格式或组件实现。
 
+[结构化诊断规范](../specifications/diagnostics.html)解释稳定机器码、生产语境、失败层次、类型化位置、确定性主错误、受限恢复、外部来源、最小披露、资源预算与原子失败。规范源是 [DIA-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md)，草案机器码见 [DIA-CAT](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md)。诊断不是目标结果、证据、权限或自动修复命令；当前没有物理编码或组件实现。
+
 允许保留的运行观察、失效原因和决定关系进入 Tekmor 或带范围的会话事件。它们不能重新创建 Dromen 或恢复旧权限。
 
 ## ADR 与开放问题

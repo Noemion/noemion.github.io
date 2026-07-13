@@ -11,7 +11,7 @@ permalink: "/architecture/decisions.html"
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；<a href="adr-0021-synem-closure-and-activation.html">ADR-0021</a>固定 Synem 组合闭包；<a href="adr-0022-tekmor-evidence-and-appraisal.html">ADR-0022</a>固定 Tekmor 证据与评估边界；<a href="adr-0023-endem-content-standard.html">ADR-0023</a>固定 Endem 内容标准分层；<a href="adr-0024-dromen-session-contract.html">ADR-0024</a>固定 Dromen 会话契约。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0025-structured-diagnostics.html">ADR-0025</a>依次固定 Synem 组合闭包、Tekmor 证据、内容标准分层、Dromen 会话契约和结构化诊断边界。</p>
     <p>ADR-0008 与 ADR-0009 只保存公开迁移历史。更早、无入口且与现行决策源重复的内部 ADR 副本已经删除，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -35,6 +35,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0022-tekmor-evidence-and-appraisal.html">ADR-0022 Tekmor 证据范围与评估边界</a></td><td>Accepted Design</td><td>固定主体范围、溯源、phain 对齐、证据类别、完整性、有效性、覆盖、决定分离与最小披露；不创建物理格式。</td></tr>
       <tr><td><a href="adr-0023-endem-content-standard.html">ADR-0023 Endem 内容标准分层</a></td><td>Accepted Design</td><td>由 END-CORE 定义通用内容，END-P1 定义当前封闭内容 Profile，END-FMT 定义物理容器；三层分别验证。</td></tr>
       <tr><td><a href="adr-0024-dromen-session-contract.html">ADR-0024 Dromen 会话契约</a></td><td>Accepted Design</td><td>由 DRO-CORE 固定一次会话的精确主体、政策、环境、能力、预算、观察责任、只读失效与销毁；永远不创建 Dromen 文件。</td></tr>
+      <tr><td><a href="adr-0025-structured-diagnostics.html">ADR-0025 结构化诊断边界</a></td><td>Accepted Design</td><td>由 DIA-CORE 固定跨对象诊断身份、语境、层次、位置、主错误、恢复和安全边界；诊断不成为结果、权限或自动修复命令。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -48,6 +49,7 @@ permalink: "/architecture/decisions.html"
       <tr><td>组合闭包</td><td>Synem 只在多个 Endem 需要解析关系时出现；权限只能收紧。</td><td>pleko、依赖锁定、冲突和披露。</td></tr>
       <tr><td>一次运行的只读契约</td><td>Dromen 按 DRO-CORE 只绑定一个 Praxe 会话；实时秘密和句柄外置，实质漂移使旧契约失效，记录不能恢复权限。</td><td>Praxor、最小能力域、预算、观察责任、失效和销毁。</td></tr>
       <tr><td>有限证据主张</td><td>Tekmor 按 TEK-CORE 保存精确主体、范围、溯源、phain、主张和限制；有效性、覆盖度与决定外置。</td><td>来源、绑定、签名、运行、验收、撤销、隐私与审计。</td></tr>
+      <tr><td>失败可被稳定处理</td><td>DIA-CORE 让机器码与消息分开，固定生产语境并确定性选择主错误；外部错误和恢复建议不能越权改写本地结果或权限。</td><td>Poiet、Theor、Praxor、协议适配器、自动化与人工审查。</td></tr>
       <tr><td>唯一 CLI</td><td><code>endem</code> 提供 poie/elenk/pleko/tasse/sphra/theor/praxe/peira。</td><td>应用项目、手册、安装包和自动化接口。</td></tr>
       <tr><td>独立与隔离</td><td>theor 不共享生产解析；praxe 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>
       <tr><td>实验性容器</td><td>END-FMT 0.1 采用 64 字节前导、48 字节目录项、六种关键记录和 END-P0 有限上限。</td><td>规范字节、错误分类、Poiet/Theor 语言实验；不构成稳定 ABI。</td></tr>

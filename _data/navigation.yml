@@ -107,6 +107,7 @@ modules:
           - { href: /architecture/adr-0022-tekmor-evidence-and-appraisal.html, label: "ADR-0022 · Tekmor 证据与评估" }
           - { href: /architecture/adr-0023-endem-content-standard.html, label: "ADR-0023 · Endem 内容标准" }
           - { href: /architecture/adr-0024-dromen-session-contract.html, label: "ADR-0024 · Dromen 会话契约" }
+          - { href: /architecture/adr-0025-structured-diagnostics.html, label: "ADR-0025 · 结构化诊断边界" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:
@@ -115,6 +116,7 @@ modules:
           - { href: /specifications/synem.html, label: Synem }
           - { href: /specifications/dromen.html, label: Dromen }
           - { href: /specifications/tekmor.html, label: Tekmor }
+          - { href: /specifications/diagnostics.html, label: 结构化诊断 }
       - label: 系统组件
         items:
           - { href: /components/index.html, label: 组件总览 }

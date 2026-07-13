@@ -1,0 +1,144 @@
+# Diagnostic Catalog
+
+- 登记 ID：`DIA-CAT`
+- 版本：`0.1.0-draft`
+- 日期：2026-07-13
+- 状态：与 `DIA-CORE 0.1.0-draft` 配套的跨对象诊断目录草案
+
+## 1. 目录规则
+
+每项诊断码使用小写 ASCII 点分段，并在本目录版本内保持唯一。首段表示受影响的工程对象或诊断系统本身；后续段从稳定领域逐步缩小到原因。Noemion 品牌不进入诊断码。
+
+每个拒绝结果至少包含稳定 `code`、主 `clause`、验证 `layer`，以及 DIA-CORE 要求的生产语境。可用位置包括 `source_range`、`byte_range`、`record_id`、`semantic_path`、`graph_path`、`session_binding`、`evidence_ref` 与 `external_request`。人类消息可以改进或本地化，程序不得依赖消息文本。
+
+一个操作可以在安全和预算范围内附加后续诊断，但主阻断诊断必须按 DIA-PRI-001 稳定选择。任何诊断集合都不能携带部分可信对象、能力或验证句柄。
+
+## 2. 诊断系统错误码
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `diagnostic.identity.unregistered` | `DIA-IDN-001` | internal | 生产者使用未登记、冲突或仅由消息构造的机器码 |
+| `diagnostic.context.unpinned` | `DIA-PIN-001` | internal | 缺少生产者、操作、精确主体或规范/目录版本 |
+| `diagnostic.layer.coerced` | `DIA-LAY-001` | internal | 外部错误或诊断被强制转换为其他结果域 |
+| `diagnostic.location.invalid` | `DIA-LOC-001` | internal | 位置无类型、越界、超限或未安全显示 |
+| `diagnostic.primary.nondeterministic` | `DIA-PRI-001` | internal | 主诊断受并发、返回顺序、语言或模型判断影响 |
+| `diagnostic.recovery.unauthorized` | `DIA-REC-001` | policy | 恢复建议扩大权限、跳过检查或脱离预算重试 |
+| `diagnostic.external.unmapped` | `DIA-EXT-001` | protocol | 外部错误缺少来源、协议版本或受限本地映射 |
+| `diagnostic.disclosure.secret` | `DIA-SEC-001` | internal | 诊断暴露秘密、句柄、隐私数据或未授权正文 |
+| `diagnostic.budget.exceeded` | `DIA-BND-001` | internal | 诊断数量、深度、位置或总输出超过 Profile 上限 |
+| `diagnostic.atomicity.partial_success` | `DIA-ATM-001` | internal | 阻断诊断同时返回部分可信结果或成功状态 |
+
+## 3. Endem 结构与 Profile 错误码
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `endem.wire.header.truncated` | `END-FMT-001` | structure | 输入不足 64 字节，无法读取固定前导 |
+| `endem.wire.header.magic` | `END-FMT-001` | structure | 8 字节格式身份不同 |
+| `endem.wire.header.version` | `END-FMT-001` | structure | 格式主次版本不受支持 |
+| `endem.wire.header.layout` | `END-FMT-002` | structure | 字节序、头大小或目录项大小不同 |
+| `endem.wire.header.size` | `END-FMT-003` | structure | 声明文件大小与实际字节数不同 |
+| `endem.wire.header.reserved` | `END-FMT-003` | structure | 头标志或保留字节非零 |
+| `endem.wire.directory.out_of_bounds` | `END-FMT-004` | structure | 目录乘加溢出、覆盖头部或超出文件 |
+| `endem.wire.directory.order` | `END-FMT-005` | structure | 条目未按 `(kind, record_id)` 排序 |
+| `endem.wire.record.id` | `END-FMT-005` | structure | 记录编号为零或重复 |
+| `endem.wire.record.range` | `END-FMT-006` | structure | 记录端点溢出、越界或覆盖头部/目录 |
+| `endem.wire.record.alignment` | `END-FMT-006` | structure | 记录偏移不满足对齐或对齐值不受支持 |
+| `endem.wire.record.overlap` | `END-FMT-006` | structure | 两个非空记录范围重叠 |
+| `endem.wire.record.padding` | `END-FMT-006` | structure | 记录间填充含非零字节，或最后记录后仍有尾随填充 |
+| `endem.wire.record.unknown_kind` | `END-FMT-007` | profile | P0 出现未登记记录种类 |
+| `endem.wire.record.flags` | `END-FMT-007` | profile | P0 记录没有精确关键标志 `1` |
+| `endem.wire.facet.cardinality` | `END-FMT-008` | profile | 六种记录缺失、重复或出现额外记录 |
+| `endem.wire.payload.cbor` | `END-FMT-009` | structure | CBOR 不良构、非确定或使用禁用类型 |
+| `endem.wire.payload.not_map` | `END-FMT-009` | structure | 记录载荷根不是确定长度映射 |
+| `endem.wire.profile.unknown` | `END-FMT-010` | profile | Profile 编号未知或没有精确登记 |
+| `endem.wire.profile.limit` | `END-FMT-010` | profile | 任一资源超过当前有效上限 |
+| `endem.wire.profile.feature` | `END-FMT-011` | profile | P0 出现压缩、加密、更高状态或其他未登记能力 |
+
+## 4. Endem 内容错误码
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `endem.root.not_unique` | `END-CORE-001` | semantic | 根事态缺失或多于一个 |
+| `endem.rhem.range_out_of_bounds` | `END-SRC-001` | semantic | 来源 Unicode 标量范围超过实际内容 |
+| `endem.skena.contains_goal_force` | `END-SIT-001` | semantic | 中性事态混入目标方向或力量 |
+| `endem.apor.unrecorded_projection_choice` | `END-APR-001` | semantic | 存在多个允许投影但未记录未决选择 |
+| `endem.projection.authority_untrusted` | `END-AUT-001` | semantic | 模型自述或其他不可信来源试图确认投影 |
+| `endem.semantic.field.type` | `END-FMT-013` | semantic | END-P1 字段值不是登记的数据类型 |
+| `endem.semantic.field.missing` | `END-FMT-013` | semantic | END-P1 映射缺少必需字段 |
+| `endem.semantic.field.identifier` | `END-FMT-013` | semantic | 标识符为空、过长或含禁用字符 |
+| `endem.semantic.field.media_type` | `END-FMT-013` | semantic | 来源媒体类型不符合受限格式 |
+| `endem.semantic.field.language` | `END-FMT-013` | semantic | 来源语言标签不符合受限格式 |
+| `endem.semantic.field.order` | `END-FMT-013` | semantic | 需要规范排序且不重复的集合发生乱序或重复 |
+| `endem.semantic.field.unknown` | `END-FMT-013` | semantic | END-P1 映射出现未登记字段键 |
+| `endem.semantic.reference` | `END-FMT-014` | semantic | END-P1 出现悬空 symbol、relation、situation 或 source 引用 |
+| `endem.skena.polarity` | `END-SIT-001` | semantic | 事态极性不是已登记值 |
+| `endem.telis.mode` | `END-TEL-001` | semantic | 目标模式不是当前 Profile 唯一允许的 `kine` |
+| `endem.krin.policy` | `END-KRN-001` | semantic | 缺失观察或评估错误政策不是当前 Profile 的固定值 |
+| `endem.krin.match` | `END-KRN-001` | semantic | 观察关系匹配方式不是当前 Profile 的固定值 |
+
+## 5. 实验来源清单错误码
+
+这些错误发生在实验来源清单进入确定性语义映射之前，不属于 `.endem` 对象 ABI。
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `endem.source.utf8` | `END-SRCM-001` | source | 源文件不是有效 UTF-8 |
+| `endem.source.limit` | `END-SRCM-001` | source | 文件或单行超过来源清单上限 |
+| `endem.source.directive` | `END-SRCM-002` | source | 行首指令未登记 |
+| `endem.source.arity` | `END-SRCM-002` | source | 指令字段数不符合其固定形状 |
+| `endem.source.duplicate` | `END-SRCM-002` | source | 单例指令重复出现 |
+| `endem.source.integer` | `END-SRCM-002` | source | 范围字段不是无符号十进制整数 |
+| `endem.source.escape` | `END-SRCM-003` | source | 使用了未登记或不完整的转义 |
+| `endem.source.role` | `END-SRCM-003` | source | `relation` 角色缺少名称、等号或 symbol 标识符 |
+
+## 6. Synem 错误码
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `synem.closure.incomplete` | `SYN-CLO-001` | closure | 成员不足、传递依赖遗漏或运行时才补全闭包 |
+| `synem.binding.unresolved` | `SYN-BND-001` | closure | 引用缺失、歧义、冲突或使用可变选择器 |
+| `synem.graph.invalid` | `SYN-GRF-001` | closure | 图不有限、存在循环或可选缺失削弱要求 |
+| `synem.authority.amplified` | `SYN-AUT-001` | policy | 组合权限使用并集或成员不能收窄 |
+| `synem.result.coerced` | `SYN-RES-001` | semantic | 成员结果被洗白、折叠或跨结果域转换 |
+| `synem.activation.invalid` | `SYN-ACT-001` | session | 激活添加成员、授予能力或映射为满足结果 |
+
+## 7. Dromen 错误码
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `dromen.subject.unbound` | `DRO-SUB-001` | session | 主体不是精确、attested 且刚刚重新验证的制品 |
+| `dromen.policy.unclosed` | `DRO-POL-001` | policy | 政策、权威、截止点或有效期未封闭 |
+| `dromen.environment.drift` | `DRO-ENV-001` | session | 环境只靠自述、缺少绑定或发生实质漂移 |
+| `dromen.capability.amplified` | `DRO-CAP-001` | policy | 能力使用并集、环境权限或原地 step-up |
+| `dromen.secret.embedded` | `DRO-SEC-001` | session | 契约包含实时秘密或能力句柄 |
+| `dromen.budget.invalid` | `DRO-BUD-001` | session | 预算无界、无单位、子任务逃逸或取消不传播 |
+| `dromen.activation.outside_closure` | `DRO-ACT-001` | session | 激活发现新成员、授予能力或改写结果域 |
+| `dromen.observation.incomplete` | `DRO-OBS-001` | evidence | krin 观察、证据、披露或决定责任缺失 |
+| `dromen.contract.mutated` | `DRO-IMM-001` | session | 封存后被修改或漂移后原地修补 |
+| `dromen.lifecycle.reused` | `DRO-LIF-001` | session | 契约被序列化、转移、恢复或跨会话复用 |
+
+## 8. Tekmor 错误码
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `tekmor.scope.unbound` | `TEK-SCP-001` | evidence | 主体、生产者、方法、环境、时间、主张或限制未固定 |
+| `tekmor.provenance.invalid` | `TEK-PRV-001` | evidence | 溯源悬空、循环、自证或隐藏动态输入 |
+| `tekmor.observation.unaligned` | `TEK-OBS-001` | evidence | phain 无法对齐关系位置或有损变换未披露 |
+| `tekmor.classification.upgraded` | `TEK-CLS-001` | evidence | 记录种类或来源类别被自评、签名、数量或分数提升 |
+| `tekmor.integrity.overclaimed` | `TEK-INT-001` | evidence | 完整性、签名或时间戳被解释为事实正确或授权 |
+| `tekmor.validity.self_asserted` | `TEK-VAL-001` | evidence | 记录自填有效性或评估缺少政策、参考值与截止点 |
+| `tekmor.coverage.invalid` | `TEK-COV-001` | evidence | 覆盖脱离精确 krin、重复计数或隐藏空洞 |
+| `tekmor.decision.unauthorized` | `TEK-DEC-001` | policy | 评估、模型、Praxor 或记录本身替代具名决定权威 |
+| `tekmor.disclosure.secret` | `TEK-PRI-001` | evidence | 记录包含实时秘密，或脱敏损失没有披露 |
+
+## 9. 稳定性边界
+
+上述机器码只在当前规范、目录和提案向量中保持草案稳定，尚不构成发行 ABI。提升为稳定接口前必须完成：
+
+1. Poiet、独立 Theor 与 Praxor 对共同失败给出相同的主层次与适用机器码；
+2. 并发、截断、乱序、重复、资源耗尽、外部协议降级和秘密注入向量齐全；
+3. 诊断 Profile 冻结数量、深度、位置、消息和总输出预算；
+4. 文本、SARIF、HTTP、MCP 与遥测适配前后保持机器语义；
+5. CLI 退出状态与结构化物理编码由单独 ADR 和规范字节冻结。
+
+当前目录只由资料检查器核对。Poiet、Theor、Praxor、诊断生产器、渲染器和协议适配器均未实现。

@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = ROOT / "vectors" / "wire" / "manifest.json"
 PROFILE_PATH = ROOT / "spec" / "profiles" / "end-p0.json"
 REGISTRY_PATH = ROOT / "spec" / "registry.json"
-ERROR_CATALOG_PATH = ROOT / "spec" / "endem-errors.md"
+ERROR_CATALOG_PATH = ROOT / "spec" / "diagnostic-catalog.md"
 
 MAGIC = b"ENDEM\x00\r\n"
 HEADER_SIZE = 64

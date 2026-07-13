@@ -154,6 +154,15 @@ endem praxe search.endem
 - 写“验收者根据 `krin`、适用 Tekmor 和决定权威作出结论”，不写“模型或 Praxor 宣告完成”。
 - 写“`apor` 保留未决语义”，不写“系统自动选择最合理解释”。
 
+## 结构化诊断语言
+
+诊断只使用直白工程术语，不为错误处理另造哲学专名。`diagnostic-code` 表示稳定机器身份，`diagnostic-layer` 表示失败发生的边界，`diagnostic-location` 表示类型化有限位置，`primary-diagnostic` 表示唯一主阻断诊断，`recovery-class` 表示不带权限和副作用的恢复分类。
+
+- 写“外部 MCP 工具执行错误映射为本地诊断”，不写“工具失败所以目标 unmet”。
+- 写“需要具名权威重新授权”，不写“诊断允许 Agent 自动提权”。
+- 写“消息用于解释，机器码用于协议”，不让自动化解析本地化文本取得语义。
+- Noemion 是品牌，不进入诊断码；机器码按 `diagnostic.*`、`endem.*`、`synem.*`、`dromen.*` 或 `tekmor.*` 的责任域登记。
+
 ## 唯一应用与正式路由
 
 | 内容 | 正式路由 |
@@ -162,6 +171,7 @@ endem praxe search.endem
 | Synem 规范 | `/specifications/synem.html` |
 | Dromen 会话契约 | `/specifications/dromen.html` |
 | Tekmor 规范 | `/specifications/tekmor.html` |
+| 结构化诊断规范 | `/specifications/diagnostics.html` |
 | Endem 生命周期 | `/architecture/endem-lifecycle.html` |
 | Poiet 组件 | `/components/poiet.html` |
 | Theor 组件 | `/components/theor.html` |
@@ -218,6 +228,7 @@ endem praxe search.endem
 9. 链接文字是否说明目的，导航是否使用当前名称。
 10. 制品、满足、决定、会话和证据结果是否分开，没有把 `completed`、`valid` 或外部 Task 成功写成 `accepted`。
 11. `mene` 是否分开时间范围、连续性政策和观测覆盖，没有把相对日期、默认时区、墙钟经过时长或稀疏采样写成确定事实。
+12. 诊断是否让机器码与消息分开，固定生产语境和失败层次，并避免把外部错误、恢复建议或重试状态写成本地结果与权限。
 
 ## 参考依据
 

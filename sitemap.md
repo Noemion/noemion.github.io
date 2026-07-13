@@ -38,6 +38,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0022](https://noemion.github.io/architecture/adr-0022-tekmor-evidence-and-appraisal.html) — scoped Tekmor evidence, provenance, validity, coverage, appraisal, decision, and disclosure boundaries
 - [ADR-0023](https://noemion.github.io/architecture/adr-0023-endem-content-standard.html) — layered Endem content standard, closed content Profiles, container rules, and conformance boundaries
 - [ADR-0024](https://noemion.github.io/architecture/adr-0024-dromen-session-contract.html) — one-session subject, policy, environment, capability, budget, observation, immutability, and disposal contract
+- [ADR-0025](https://noemion.github.io/architecture/adr-0025-structured-diagnostics.html) — stable diagnostic identity, context, layers, locations, recovery, disclosure, bounds, and atomic failure
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Praxor responsibility boundaries
 - [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary
@@ -51,6 +52,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Synem](https://noemion.github.io/specifications/synem.html) — resolved, composable closure and binding rules
 - [Dromen](https://noemion.github.io/specifications/dromen.html) — sealed read-only execution contract for exactly one Praxe session
 - [Tekmor](https://noemion.github.io/specifications/tekmor.html) — scoped evidence, provenance, integrity, and acceptance claims
+- [Structured diagnostics](https://noemion.github.io/specifications/diagnostics.html) — cross-object machine identity, locations, recovery, safety, and result-domain separation
 
 ## Guides and reference
 

@@ -6,7 +6,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 VECTOR_ROOT = ROOT / "vectors" / "semantic"
-ERROR_CATALOG = ROOT / "spec" / "endem-errors.md"
+ERROR_CATALOG = ROOT / "spec" / "diagnostic-catalog.md"
 FACETS = ("rhem", "semion", "skena", "telis", "krin", "apor")
 TOKEN = re.compile(r"^[A-Za-z][A-Za-z0-9._:/#-]{0,254}$")
 

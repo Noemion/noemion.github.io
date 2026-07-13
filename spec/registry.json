@@ -61,6 +61,16 @@
       "wire_status": "unfrozen",
       "path": "spec/tekmor-core.md",
       "scope": "Abstract scoped evidence, provenance, observation, integrity, validity, coverage, appraisal, decision and disclosure boundaries"
+    },
+    {
+      "spec_id": "DIA-CORE",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "wire_status": "unfrozen",
+      "path": "spec/diagnostics-core.md",
+      "scope": "Cross-object structured diagnostic identity, production context, failure layers, locations, precedence, recovery, external mapping, disclosure, bounds and atomic failure"
     }
   ],
   "supporting_documents": [
@@ -72,11 +82,25 @@
       "scope": "Endem untrusted-input threats, mandatory mitigations and Profile limit obligations"
     },
     {
-      "id": "END-ERRCAT",
+      "id": "DIA-CAT",
       "version": "0.1.0-draft",
       "status": "draft",
-      "path": "spec/endem-errors.md",
-      "scope": "Stable experimental diagnostic codes for END-FMT structure and Profile rejection"
+      "path": "spec/diagnostic-catalog.md",
+      "scope": "Experimental cross-object diagnostic codes for diagnostic envelopes, Endem, Synem, Dromen and Tekmor rejection"
+    },
+    {
+      "id": "DIA-THREAT",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "path": "spec/diagnostic-threat-model.md",
+      "scope": "Diagnostic identity, context, layer, location, precedence, recovery, disclosure, boundedness and atomicity threats"
+    },
+    {
+      "id": "DIA-SCEN",
+      "version": "0.1.0-draft",
+      "status": "non-normative-design-corpus",
+      "path": "spec/diagnostic-scenarios.md",
+      "scope": "Natural-language design-review scenarios for structured diagnostic boundaries"
     },
     {
       "id": "SYN-THREAT",
@@ -211,6 +235,11 @@
     ,{"term": "validity-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "验证者在精确政策、参考值、环境与截止点下形成的 valid、invalid 或 revoked 评估"}
     ,{"term": "coverage-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "相对精确 krin 与观察责任形成的 sufficient 或 insufficient 评估"}
     ,{"term": "disclosure-manifest", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "记录摘要、脱敏、分段披露和外置引用的可见范围、不可见范围及其证据影响"}
+    ,{"term": "diagnostic-code", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "与本地化消息和呈现格式分离的稳定机器诊断身份"}
+    ,{"term": "diagnostic-layer", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "说明失败发生于协议、结构、Profile、语义、政策、能力、运行、证据或决定边界的分类"}
+    ,{"term": "diagnostic-location", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "绑定位置种类、精确主体和有限范围的安全定位信息"}
+    ,{"term": "primary-diagnostic", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "按规范优先级确定的唯一主阻断诊断"}
+    ,{"term": "recovery-class", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "不授予权限也不携带副作用命令的有限恢复类别"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -252,7 +281,17 @@
     {"id": "THR-DRO-007", "clauses": ["DRO-ACT-001"], "evidence_status": "partial"},
     {"id": "THR-DRO-008", "clauses": ["DRO-OBS-001"], "evidence_status": "partial"},
     {"id": "THR-DRO-009", "clauses": ["DRO-IMM-001"], "evidence_status": "partial"},
-    {"id": "THR-DRO-010", "clauses": ["DRO-LIF-001"], "evidence_status": "partial"}
+    {"id": "THR-DRO-010", "clauses": ["DRO-LIF-001"], "evidence_status": "partial"},
+    {"id": "THR-DIA-001", "clauses": ["DIA-IDN-001"], "evidence_status": "partial"},
+    {"id": "THR-DIA-002", "clauses": ["DIA-PIN-001"], "evidence_status": "partial"},
+    {"id": "THR-DIA-003", "clauses": ["DIA-EXT-001", "DIA-LAY-001"], "evidence_status": "partial"},
+    {"id": "THR-DIA-004", "clauses": ["DIA-LOC-001", "DIA-SEC-001"], "evidence_status": "partial"},
+    {"id": "THR-DIA-005", "clauses": ["DIA-PRI-001"], "evidence_status": "partial"},
+    {"id": "THR-DIA-006", "clauses": ["DIA-REC-001"], "evidence_status": "partial"},
+    {"id": "THR-DIA-007", "clauses": ["DIA-SEC-001"], "evidence_status": "partial"},
+    {"id": "THR-DIA-008", "clauses": ["DIA-BND-001"], "evidence_status": "partial"},
+    {"id": "THR-DIA-009", "clauses": ["DIA-ATM-001"], "evidence_status": "partial"},
+    {"id": "THR-DIA-010", "clauses": ["DIA-EXT-001", "DIA-IDN-001"], "evidence_status": "partial"}
   ],
   "clauses": [
     {
@@ -1363,6 +1402,116 @@
         {"status": "covered-by-repo", "ref": "architecture/adr-0014-source-manifest.html"},
         {"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "DIA-IDN-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future diagnostic producer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
+        {"status": "planned", "ref": "peira:diagnostic-identity"}
+      ]
+    },
+    {
+      "id": "DIA-PIN-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future diagnostic producer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
+        {"status": "planned", "ref": "peira:diagnostic-context-pinning"}
+      ]
+    },
+    {
+      "id": "DIA-LAY-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future diagnostic producer and protocol adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
+        {"status": "planned", "ref": "peira:diagnostic-layer-separation"}
+      ]
+    },
+    {
+      "id": "DIA-LOC-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future diagnostic producer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
+        {"status": "planned", "ref": "peira:diagnostic-location-bounds"}
+      ]
+    },
+    {
+      "id": "DIA-PRI-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future diagnostic producer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
+        {"status": "planned", "ref": "peira:diagnostic-primary-precedence"}
+      ]
+    },
+    {
+      "id": "DIA-REC-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor control plane and named authority",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
+        {"status": "planned", "ref": "peira:diagnostic-recovery-authority"}
+      ]
+    },
+    {
+      "id": "DIA-EXT-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future external protocol adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
+        {"status": "planned", "ref": "peira:external-diagnostic-mapping"}
+      ]
+    },
+    {
+      "id": "DIA-SEC-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future diagnostic producer and disclosure policy",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
+        {"status": "planned", "ref": "peira:diagnostic-minimal-disclosure"}
+      ]
+    },
+    {
+      "id": "DIA-BND-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future diagnostic producer and reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
+        {"status": "planned", "ref": "peira:diagnostic-resource-bounds"}
+      ]
+    },
+    {
+      "id": "DIA-ATM-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future diagnostic producer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
+        {"status": "planned", "ref": "peira:diagnostic-atomic-failure"}
       ]
     }
   ]

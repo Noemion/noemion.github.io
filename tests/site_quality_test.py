@@ -75,6 +75,7 @@ REQUIRED_CORE_ROUTES = {
     "specifications/synem.html",
     "specifications/dromen.html",
     "specifications/tekmor.html",
+    "specifications/diagnostics.html",
     "architecture/endem-lifecycle.html",
     "architecture/adr-0010-native-lexicon.html",
     "architecture/adr-0011-endem-container.html",
@@ -91,6 +92,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
     "architecture/adr-0023-endem-content-standard.html",
     "architecture/adr-0024-dromen-session-contract.html",
+    "architecture/adr-0025-structured-diagnostics.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -222,6 +224,7 @@ NORMATIVE_ROUTES = (
     "specifications/synem.html",
     "specifications/dromen.html",
     "specifications/tekmor.html",
+    "specifications/diagnostics.html",
 )
 CONTENT_LAYOUT_ROUTES = (
     "about/background.html",
@@ -245,6 +248,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
     "architecture/adr-0023-endem-content-standard.html",
     "architecture/adr-0024-dromen-session-contract.html",
+    "architecture/adr-0025-structured-diagnostics.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -255,6 +259,7 @@ CONTENT_LAYOUT_ROUTES = (
     "specifications/synem.html",
     "specifications/dromen.html",
     "specifications/tekmor.html",
+    "specifications/diagnostics.html",
 )
 CONTENT_LAYOUT_CLASSES = {
     "content-split",
@@ -429,6 +434,18 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "不保存令牌",
             "实质漂移",
             "不能序列化",
+        ),
+    },
+    "specifications/diagnostics.html": {
+        "required": (
+            "DIA-CORE 0.1.0-draft",
+            "稳定机器码",
+            "生产语境",
+            "主阻断诊断",
+            "不得授予权限",
+            "不保存令牌",
+            "有限预算",
+            "部分可信对象",
         ),
     },
     "endem/docs/safety.html": {
