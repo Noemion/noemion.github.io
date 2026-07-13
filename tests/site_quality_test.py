@@ -1457,6 +1457,8 @@ def validate_jekyll_sources():
             '.portal-focus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))',
             '.focus-card-dromen .focus-art',
             '.focus-card-tekmor .focus-art',
+            'text-decoration-color:color-mix(in srgb,var(--portal-coral) 54%,var(--portal-amber))',
+            'text-decoration-thickness:.1em;text-underline-offset:.12em;text-decoration-skip-ink:none',
         ):
             if token not in shared_css:
                 errors.append(f"shared styles missing site-wide design contract: {token}")

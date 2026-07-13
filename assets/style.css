@@ -378,7 +378,9 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
 }
 .portal-introduction h1 strong>span{width:max-content;max-width:100%;text-wrap:nowrap}
 .portal-introduction h1 .portal-title-foundation{
-  margin-top:10px;color:var(--portal-coral);font-size:.86em;letter-spacing:-.035em
+  margin-top:10px;color:var(--portal-ink);font-size:.86em;letter-spacing:-.035em;
+  text-decoration-line:underline;text-decoration-color:color-mix(in srgb,var(--portal-coral) 54%,var(--portal-amber));
+  text-decoration-thickness:.1em;text-underline-offset:.12em;text-decoration-skip-ink:none
 }
 .portal-introduction-summary{
   max-width:510px;margin:34px 0 0;color:var(--muted);font-size:18px;line-height:1.7
