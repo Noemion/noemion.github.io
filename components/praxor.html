@@ -22,7 +22,7 @@ permalink: "/components/praxor.html"
       <tr><td>输入</td><td>运行策略与 <code>krin</code></td><td>固定能力上限、预算、停止、观察、证据、人工升级和决定权威；只能收紧制品要求。</td></tr>
       <tr><td>输入</td><td>后端绑定与能力目录</td><td>模型或求解器与可用能力的身份、版本和参数结构；描述仍是不可信声明。</td></tr>
       <tr><td>会话状态</td><td>Dromen</td><td>只读、一次性、不可序列化；不保存跨会话能力句柄。</td></tr>
-      <tr><td>输出</td><td>运行记录</td><td>候选、能力请求与观察、预算、错误、运行与决定类 Tekmor 和最终状态。</td></tr>
+      <tr><td>输出</td><td>运行记录</td><td>候选、能力请求与观察、预算、错误、运行与决定类 Tekmor，以及彼此分离的满足、决定和会话结果。</td></tr>
       <tr><td>消费者</td><td>用户、CI、审计和指定外部权威</td><td>模型或 Praxor 自述不能成为唯一决定依据。</td></tr>
     </tbody></table></div>
   </section>
@@ -48,7 +48,7 @@ permalink: "/components/praxor.html"
       <li>后端产生候选或类型化能力请求；它不能直接访问环境。</li>
       <li>Praxor 校验参数、权限、预算、副作用、幂等和当前状态，再执行或拒绝。</li>
       <li>真实结果先规范化为可与 skena 比较的 phain，再作为能力观察和 Praxe Tekmor 返回下一轮。</li>
-      <li>预注册策略读取 <code>krin</code> 和必需 Tekmor，先形成满足、未满足、观察不足或求值故障。具名权威再据此形成最终运行状态。</li>
+      <li>预注册策略读取 <code>krin</code> 和必需 Tekmor，先形成 <code>met / unmet / agno / fault</code>。具名权威再形成 <code>accepted / rejected / deferred</code>；会话终止另记为 <code>completed / failed / interrupted</code>。</li>
     </ol>
   </section>
 
@@ -56,7 +56,7 @@ permalink: "/components/praxor.html"
     <h2>外部协议适配</h2>
     <p>MCP、A2A、遥测系统和供应商工具只连接 Praxor 外缘。所有远端描述和返回内容都要先经过本地版本、权限、结构和来源检查。</p>
     <div class="table-wrap"><table><thead><tr><th>外部接口</th><th>进入 Praxor 的方式</th><th>本地边界</th></tr></thead><tbody>
-      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 稳定规范</a></td><td>工具说明、参数和结果映射为本地能力请求与观察。</td><td>声明不授予权限；令牌必须绑定目标资源，不能转交给下游服务。2026-07-28 候选版在正式发布与重验前不进入基线。</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 稳定规范</a></td><td>工具说明、参数和结果映射为本地能力请求与观察。</td><td>声明不授予权限；令牌必须绑定目标资源，不能转交给下游服务。后续版本只有完成兼容、安全与降级复核后才进入新适配基线。</td></tr>
       <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a></td><td>Task、Message 与 Artifact 映射为外部任务记录和候选结果。</td><td>外部状态不改变 Endem；Artifact 不是 Tekmor，也不能形成最终决定。</td></tr>
       <tr><td><a href="https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai">OpenTelemetry GenAI 语义约定</a></td><td>由可替换、带版本的导出器发送允许披露的运行观测。</td><td>当前状态为 Development；输入、输出、工具参数和结果可能含敏感信息，默认不导出正文，也不把外部字段作为本地身份。</td></tr>
     </tbody></table></div>
@@ -66,18 +66,18 @@ permalink: "/components/praxor.html"
   <section class="content-wide">
     <h2>失败与拒绝责任</h2>
     <div class="table-wrap"><table><thead><tr><th>失败</th><th>Praxor 必须记录</th><th>后续状态</th></tr></thead><tbody>
-      <tr><td>Load rejected</td><td>对象身份、失败层、规则和位置</td><td>failed；不创建 Dromen。</td></tr>
-      <tr><td>Capability denied</td><td>请求摘要、策略版本、拒绝规则和当前状态</td><td>继续、unsatisfied 或 pending-review，按预注册策略。</td></tr>
-      <tr><td>Backend failed</td><td>后端身份、稳定错误类别、预算和安全诊断</td><td>重试、failed 或 interrupted；不得提权。</td></tr>
-      <tr><td>Budget exhausted</td><td>预算单位、限值、已用量和停止位置</td><td>unsatisfied 或 interrupted。</td></tr>
-      <tr><td>State drift</td><td>期望与实际对象、环境、依赖或能力身份</td><td>旧 Dromen 失效；拒绝或重新建立会话。</td></tr>
-      <tr><td>Tekmor insufficient</td><td>缺失的 krin 条件、证据强度和决定权威</td><td>agno、pending-review 或 unsatisfied，不得 accepted。</td></tr>
+      <tr><td>Load rejected</td><td>对象身份、失败层、规则和位置</td><td>会话 <code>failed</code>；不创建 Dromen，也不伪造满足结果。</td></tr>
+      <tr><td>Capability denied</td><td>请求摘要、策略版本、拒绝规则和当前状态</td><td>按预注册策略继续或 <code>interrupted</code>；若必需观察无法形成则为 <code>agno</code>，决定保持 <code>deferred</code> 或由具名政策拒绝。</td></tr>
+      <tr><td>Backend failed</td><td>后端身份、稳定错误类别、预算和安全诊断</td><td>会话 <code>failed</code> 或 <code>interrupted</code>；求值无法完成时为 <code>fault</code>，不得推成 <code>unmet</code>。</td></tr>
+      <tr><td>Budget exhausted</td><td>预算单位、限值、已用量和停止位置</td><td>会话 <code>interrupted</code>；满足结果按已有观察为 <code>agno</code> 或 <code>fault</code>。</td></tr>
+      <tr><td>State drift</td><td>期望与实际对象、环境、依赖或能力身份</td><td>旧 Dromen 失效，会话中断或失败；不从漂移推断目标为假。</td></tr>
+      <tr><td>Tekmor insufficient</td><td>缺失的 krin 条件、证据强度和决定权威</td><td>满足结果为 <code>agno</code>，决定为 <code>deferred</code> 或由具名关闭失败政策 <code>rejected</code>；不得 <code>accepted</code>。</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-band">
     <h2>当前成熟度与未冻结接口</h2>
-    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离和 Tekmor 不等于验收已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、预算单位、事件结构和决定类 Tekmor 尚未冻结。</p>
+    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、Tekmor 不等于验收以及结果域分离已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、预算单位、事件编码和决定类 Tekmor 尚未冻结。</p>
   </section>
   <div class="next-prev"><a href="theor.html">← Theor</a><a href="../architecture/endem-lifecycle.html">Endem 生命周期 →</a></div>
 </main>

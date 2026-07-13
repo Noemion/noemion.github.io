@@ -96,17 +96,21 @@
     {"term": "wire-format", "kind": "interface", "decision_status": "accepted-draft", "definition": "END-FMT 定义的实验性物理字节编码；尚非稳定 ABI"},
     {"term": "END-P0", "kind": "profile", "decision_status": "experimental", "definition": "只用于结构向量和跨语言实验的有限符合性 Profile"},
     {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "用于未来首条实现路径评审的封闭六记录语义载荷设计 Profile"},
-    {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 Poiet 使用的实验性逐行来源清单；不是稳定源语言"}
+    {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 Poiet 使用的实验性逐行来源清单；不是稳定源语言"},
+    {"term": "satisfaction-result", "kind": "result-domain", "decision_status": "accepted", "definition": "met、unmet、agno 或 fault；只描述 skena 相对 krin、phain 与 Tekmor 的比较"},
+    {"term": "decision-result", "kind": "result-domain", "decision_status": "accepted", "definition": "accepted、rejected 或 deferred；只描述具名权威的最终决定"},
+    {"term": "session-result", "kind": "result-domain", "decision_status": "accepted", "definition": "completed、failed 或 interrupted；只描述一次 Praxe 会话怎样终止"},
+    {"term": "evidence-status", "kind": "result-domain", "decision_status": "accepted", "definition": "Tekmor 的 valid、invalid 或 revoked 与证据集合的 sufficient 或 insufficient 两个正交维度"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
     {"id": "THR-END-002", "clauses": ["END-SAF-002", "END-FMT-010"], "evidence_status": "partial"},
     {"id": "THR-END-003", "clauses": ["END-SAF-003", "END-FMT-007"], "evidence_status": "partial"},
     {"id": "THR-END-004", "clauses": ["END-APR-001", "END-UNK-001", "END-AUT-001"], "evidence_status": "partial"},
-    {"id": "THR-END-005", "clauses": ["END-KRN-001", "END-STR-001"], "evidence_status": "partial"},
+    {"id": "THR-END-005", "clauses": ["END-KRN-001", "END-KRN-002", "END-STR-001"], "evidence_status": "partial"},
     {"id": "THR-END-006", "clauses": ["END-ID-001"], "evidence_status": "planned"},
     {"id": "THR-END-007", "clauses": ["END-VER-001"], "evidence_status": "planned"},
-    {"id": "THR-END-008", "clauses": ["END-STA-001"], "evidence_status": "planned"},
+    {"id": "THR-END-008", "clauses": ["END-STA-001", "END-STA-002", "END-DEC-001"], "evidence_status": "planned"},
     {"id": "THR-END-009", "clauses": ["END-CON-001", "END-DET-001"], "evidence_status": "planned"},
     {"id": "THR-END-010", "clauses": ["END-ERR-001"], "evidence_status": "partial"}
   ],
@@ -210,6 +214,19 @@
       ]
     },
     {
+      "id": "END-KRN-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Praxor and every evaluator",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
+        {"status": "planned", "ref": "peira:satisfaction-result-separation"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
       "id": "END-APR-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
@@ -254,6 +271,19 @@
       ]
     },
     {
+      "id": "END-DEC-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Praxor and named decision authorities",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
+        {"status": "planned", "ref": "peira:decision-authority-and-basis"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
       "id": "END-DET-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
@@ -271,6 +301,19 @@
       "evidence_status": "planned",
       "failure_owner": "Poiet, sphra and Praxor",
       "verification": [{"status": "planned", "ref": "peira:state-non-implication"}]
+    },
+    {
+      "id": "END-STA-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Praxor, protocol adapters and evidence consumers",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
+        {"status": "planned", "ref": "peira:orthogonal-result-domains"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
     },
     {
       "id": "END-ID-001",

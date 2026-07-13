@@ -30,8 +30,8 @@ permalink: "/development/testing.html"
     <li>差异必须被视为实现或规范缺陷，不能用“多数实现一致”掩盖。</li>
   </ul></section>
 
-  <section class="content-rows"><h2>当前资料检查能证明什么</h2><p class="callout"><strong>当前证据：</strong>仓库中的 Python 检查器可以读取登记、语义向量、实验字节和来源样例，并比较预期接受或拒绝结果。它们检查规范资料是否自洽，不是 Poiet、Theor 或生产读取器。</p><ul>
-    <li>检查器覆盖已登记字段、引用、来源范围、排序和资源边界案例。</li>
+  <section class="content-rows"><h2>当前资料检查能证明什么</h2><p class="callout"><strong>当前证据：</strong>仓库中的 Python 检查器可以读取登记、语义向量、结果域提案向量、实验字节和来源样例，并比较预期接受或拒绝结果。它们检查规范资料是否自洽，不是 Poiet、Theor、Praxor、求值器或决定引擎。</p><ul>
+    <li>检查器覆盖已登记字段、引用、来源范围、排序、资源边界和结果域禁止转换案例。</li>
     <li>规范向量描述未来实现必须共同处理的正反案例，但不证明任何组件已经满足这些要求。</li>
     <li>当前没有组件依赖树、可执行文件复现、实现级模糊测试、故障注入、签名或 SBOM 证据。</li>
     <li>用户明确开启代码阶段后，Poiet 与 Theor 才需要分别实现并接受同一组测试。</li>
@@ -43,6 +43,7 @@ permalink: "/development/testing.html"
     <li>模型置信度不能关闭 <code>apor</code>；只有规则可重推导或具名语义决定才能确认语义。</li>
     <li>一个 Endem 只能有一个根 <code>skena</code>；多目标组合必须通过显式引用进入 Synem。</li>
     <li>违反 Profile 或无允许投影的输入必须稳定返回 <code>aseme</code>；观察不足必须返回 <code>agno</code>，不能混入 <code>apor</code>。</li>
+    <li>十二个结果域提案向量分别执行 <code>met/unmet/agno/fault</code>、<code>accepted/rejected/deferred</code>、Praxe 会话和证据状态的允许组合与拒绝路径；它们不模拟运行组件。</li>
   </ul></section>
 
   <section class="content-rows"><h2>绑定、发布与签名</h2><ul>
@@ -56,12 +57,12 @@ permalink: "/development/testing.html"
     <li>Praxor 重新验证收到的实际 Synem 字节，不信任此前路径名、查看输出或缓存结论。</li>
     <li>控制平面持有实时能力句柄，并检查最小权限、读写分离、幂等、副作用、提示注入、污染返回和代理混淆风险。</li>
     <li>模型只能产生候选和能力请求；确定性策略决定调用，真实观察返回会话，具名权威或机器规则决定验收。</li>
-    <li>Tekmor 绑定 Endem/Synem、环境、策略、事件链、证据范围和决定；证据缺失必须得到 pending、failed 或人工升级，而不是 accepted。</li>
+    <li>Tekmor 绑定 Endem/Synem、环境、策略、事件链、证据范围和决定；证据覆盖不足产生 <code>agno</code>，决定保持 <code>deferred</code> 或由具名关闭失败政策拒绝，不能直接 <code>accepted</code>。</li>
     <li>恢复测试覆盖工具失败、环境漂移、重复失败、预算耗尽、取消竞态、状态冲突和人工判断分支。</li>
   </ul></section>
 
   <section class="content-rows"><h2>模型与协议适配</h2><ul>
-    <li>MCP/A2A 适配器覆盖版本不兼容、未知必需字段、恶意工具或 Agent 描述、参数结构欺骗、状态伪造与静默降级。</li>
+    <li>MCP/A2A 适配器覆盖版本不兼容、未知必需字段、恶意工具或 Agent 描述、参数结构欺骗、状态伪造与静默降级；外部 <code>completed</code> 不能映射为本地 <code>met</code> 或 <code>accepted</code>。</li>
     <li>结构化输出测试必须包含结构合法但事实错误、引用悬空、跨字段冲突或权限越界的候选。</li>
     <li>模型任务执行多次独立运行，报告成功率、置信区间、模型、工具、策略身份和失败切片；固定随机种子或零温度不是跨版本确定性证明。</li>
     <li>模型评价器只产生建议性评价；机器可判定的 accepted 来自确定性规则，需要价值判断时由具名外部权威签署。</li>

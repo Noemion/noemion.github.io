@@ -96,6 +96,14 @@
 
 **验证：**`SV-VALID-001`；未来 `peira:krin-no-self-proof` 测试。
 
+### END-KRN-002 — 满足结果必须区分反驳、未知与故障
+
+**要求：**一次完整求值 `MUST` 产生且只产生 `met`、`unmet`、`agno` 或 `fault`。结果 `MUST` 绑定被判断的 Endem 身份、`krin` 版本、观察截止点、实际使用的 Tekmor 和稳定原因。`met` 与 `unmet` `MUST` 只在必需观察齐全、有效、适用且比较已完整执行时产生；观察缺失、过期、越出范围或覆盖不足 `MUST` 产生 `agno`；求值器、规则、依赖或观察适配过程未按契约完成 `MUST` 产生 `fault`。
+
+**失败：**实现从无日志、超时、权限缺失或执行错误推出 `unmet`，从工具成功或外部任务完成推出 `met`，或用新观察原地改写旧结果时，该结果无效。
+
+**验证：**`SCN-005`、`SCN-006` 与 `SCN-009` 设计审查；`vectors/result-domains/cases.json` 提案向量；未来 `peira:satisfaction-result-separation` 组件测试。
+
 ### END-APR-001 — 未决投影不得消失
 
 **要求：**可表达但尚未获授权选择的投影 `MUST` 保存在 `apor`，并记录候选、冲突、影响范围、允许的解决方式和具名决定主体。
@@ -130,6 +138,14 @@
 
 **验证：**`SV-REJECT-AUTHORITY-001`；未来 `peira:model-candidate-boundary` 测试。
 
+### END-DEC-001 — 最终决定必须保留满足结果与权威
+
+**要求：**最终决定 `MUST` 是 `accepted`、`rejected` 或 `deferred`，并 `MUST` 绑定输入满足结果、适用 Tekmor 的有效性与覆盖度、决定规则、具名权威和声明范围。`accepted` `MUST` 同时要求 `met`、有效且未撤销的必需 Tekmor、充分覆盖和获授权决定；`rejected` `MUST` 来自具名权威依据 `unmet` 或预先登记政策作出的否定决定；尚无获授权最终决定时 `MUST` 使用 `deferred`。
+
+**失败：**模型、Praxor、工具返回、外部 Task 状态或证据数量直接产生最终决定，决定不保存原满足结果，或 `agno`、`fault` 被静默提升为 `accepted` 时，该决定无效。
+
+**验证：**`SCN-009` 设计审查；`vectors/result-domains/cases.json` 提案向量；未来 `peira:decision-authority-and-basis` 组件测试。
+
 ### END-DET-001 — 相同输入产生相同规范结果
 
 **要求：**Poiet 对相同的规范化来源、授权决定、配置、依赖、Profile 与版本 `MUST` 产生相同的规范结果；线格式冻结后还 `MUST` 产生逐字节相同的 Endem。
@@ -147,6 +163,14 @@
 **失败：**实现把签名、状态名、Tekmor 数量或模型自述解释为语义正确、环境授权或任务完成时，必须拒绝该推导。
 
 **验证：**未来 `peira:state-non-implication` 测试。
+
+### END-STA-002 — 五个结果域不得互相强制转换
+
+**要求：**实现 `MUST` 分别保存制品生命周期、满足判断、权威决定、会话终止和证据状态。会话终止只允许 `completed`、`failed` 或 `interrupted`；Tekmor 身份与适用性只允许 `valid`、`invalid` 或 `revoked`，证据集合覆盖度 `MUST` 另行表示为 `sufficient` 或 `insufficient`。任何适配器 `MUST NOT` 把一个结果域的值强制转换为另一个结果域的值。
+
+**失败：**`completed` 被解释为 `met` 或 `accepted`，`failed` 被解释为 `unmet`，Tekmor `valid` 被解释为覆盖充分，或外部协议状态覆盖本地结果时，必须拒绝该推导。
+
+**验证：**`SCN-009` 设计审查；`vectors/result-domains/cases.json` 提案向量；未来 `peira:orthogonal-result-domains` 组件笛卡尔测试。
 
 ### END-ID-001 — 精确身份与语义等价分离
 
@@ -213,9 +237,9 @@
 以下内容仍为开放问题，不能从本规范或语义向量中推导：
 
 - 受控来源文本语法与规范化规则；
-- END-P1 之外的量化、时间、单位、求值和扩展字段；
+- END-P1 之外的量化、时间、单位、求值事件和扩展字段；
 - END-P0 数值的生产规模证据与后续 Profile 协商；
-- 量化、时间、单位与 `krin` 求值语言；
+- 量化、时间、单位、`krin` 求值语言，以及结果事件的编码、聚合与重放；
 - 压缩、摘要、签名与撤销算法；
 - Semantic Key 与跨布局等价规则；
 - 稳定错误码、CLI 参数、退出状态与 ABI。

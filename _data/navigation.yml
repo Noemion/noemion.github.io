@@ -97,6 +97,7 @@ modules:
           - { href: /architecture/adr-0012-rust-core-language.html, label: "ADR-0012 · 未来 Rust 基线" }
           - { href: /architecture/adr-0013-end-p1-payload.html, label: "ADR-0013 · END-P1 语义载荷" }
           - { href: /architecture/adr-0014-source-manifest.html, label: "ADR-0014 · Poiet 来源清单" }
+          - { href: /architecture/adr-0015-result-domains.html, label: "ADR-0015 · 判断与运行结果" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:

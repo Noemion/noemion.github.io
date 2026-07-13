@@ -12,6 +12,8 @@
 
 修改模型候选、上下文装配、能力接口、反馈循环、Dromen、Tekmor 或人工升级边界时，必须同时读取 Theor、Praxor 与 Tekmor 规范以及相关活跃 ADR。任何设计都不得让模型决定规范字节、删除 `apor`、扩大能力或宣告最终验收。
 
+修改满足判断、权威决定、Praxe 会话终止、Tekmor 有效性或证据覆盖度时，必须读取 ADR-0015、Endem 生命周期、Praxor 与 Tekmor 规范。不得把外部 Task、工具调用或会话的完成状态直接映射为 `met` 或 `accepted`。
+
 全局原则、品牌语言、断点和验收基线见 [`../sitewide-design-system.md`](../sitewide-design-system.md)。本目录文档负责把这些原则落实到具体页面类型，不能改变 Noemion 的成熟度、权威性或证据边界。
 
 ## 路由表

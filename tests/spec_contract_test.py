@@ -113,6 +113,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
         for required_term in (
             "Noemion", "Endem", "Synem", "Dromen", "Tekmor",
             *REQUIRED_FACETS, "wire-format", "END-P0", "END-P1", "source-manifest",
+            "satisfaction-result", "decision-result", "session-result", "evidence-status",
         ):
             if required_term not in term_names:
                 errors.append(f"spec/registry.json: missing term {required_term}")
@@ -377,6 +378,8 @@ def validate_public_boundary(errors):
     workflow_text = (ROOT / ".github" / "workflows" / "pages.yml").read_text()
     if "python3 tests/semantic_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute semantic vectors, not only register them")
+    if "python3 tests/result_domain_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute result-domain vectors")
     if "python3 tests/p1_payload_test.py" not in workflow_text:
         errors.append("Pages workflow must execute complete END-P1 payload vectors")
     if "python3 tests/source_manifest_test.py" not in workflow_text:
@@ -399,6 +402,7 @@ def validate_public_boundary(errors):
             "spec/profiles/end-p1.json",
             "spec/registry.json",
             "vectors/semantic",
+            "vectors/result-domains",
             "vectors/wire",
             "spec/endem-threat-model.md",
             "spec/endem-scenarios.md",
@@ -413,6 +417,8 @@ def validate_public_boundary(errors):
             "spec/endem-format.md",
             "spec/endem-scenarios.md",
             "自然语言场景怎样检验六个语义面",
+            "五个结果域分别回答什么",
+            "ADR-0015",
             "观察不足是",
             "求值过程失败为",
             "两个 Endem",
@@ -428,6 +434,7 @@ def validate_public_boundary(errors):
             "spec/endem-threat-model.md",
             "spec/endem-scenarios.md",
             "不属于上述规范义务",
+            "ADR-0015",
         ),
         "architecture/adr-0012-rust-core-language.html": (
             "Rust 1.97.0",
@@ -449,6 +456,16 @@ def validate_public_boundary(errors):
             "实验性来源清单",
             "禁止模型直接生成规范对象",
             "正式来源语言",
+        ),
+        "architecture/adr-0015-result-domains.html": (
+            "五个结果域",
+            "met / unmet / agno / fault",
+            "accepted / rejected / deferred",
+            "completed / failed / interrupted",
+            "valid / invalid / revoked",
+            "sufficient / insufficient",
+            "不新增 END-P1 字段",
+            "没有 Praxor",
         ),
         "development/implementation-roadmap.html": (
             "Rust 1.97.0",
@@ -488,8 +505,8 @@ def main():
         scenario_text = ""
 
     scenario_ids = SCENARIO_HEADING.findall(scenario_text)
-    if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 9)]:
-        errors.append("spec/endem-scenarios.md: scenario IDs must be unique and ordered SCN-001 through SCN-008")
+    if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 10)]:
+        errors.append("spec/endem-scenarios.md: scenario IDs must be unique and ordered SCN-001 through SCN-009")
     for token in (
         "事态由对象结合构成（2.01）",
         "图示形式由结构显示而非自我陈述（2.17–2.172）",
@@ -497,6 +514,8 @@ def main():
         "观察不足不同于未满足",
         "求值故障不同于观察不足",
         "两个独立根必须拆分",
+        "completed` 不等于 `met` 或 `accepted",
+        "failed` 不等于 `unmet",
         "不是可执行测试",
     ):
         if token not in scenario_text:
@@ -515,7 +534,8 @@ def main():
     print(
         "PASS: END-CORE, END-FMT and END-SRCM 0.1.0-draft have unique clauses, explicit "
         "maturity, traceable evidence, 10 registered threats, executed semantic "
-        "vectors, eight natural-language design scenarios, END-P1 payload/source vectors, "
+        "vectors, nine natural-language design scenarios, 12 result-domain vectors, "
+        "END-P1 payload/source vectors, "
         "and P0-LANG-001 historical language evidence"
     )
     return 0

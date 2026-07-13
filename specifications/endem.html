@@ -52,7 +52,19 @@ permalink: "/specifications/endem.html"
     <h2>从可能事态到实际观察</h2>
     <p><code>skena</code> 不宣称事情已经发生。Praxor 把实际观察规范化为 <code>phain</code>，再由 Tekmor 绑定生产者、方法、环境、时间域、强度、限制和完整性。<code>krin</code> 只能比较声明范围内可对齐的关系位置。</p>
     <div class="flow"><div class="step">skena · 目标事态</div><div class="step">telis · kine / mene</div><div class="step">phain · 观察事态</div><div class="step">Tekmor · 范围与依据</div><div class="step">krin · 结构比较</div><div class="step">met / unmet / agno / fault</div></div>
-    <p><code>aseme</code> 表示没有任何允许的意义投影，<code>apor</code> 表示存在多个允许候选但无权选择，<code>agno</code> 表示意义和判据已经确定而观察不足。三者不得互相代替。</p>
+    <p><code>aseme</code> 表示没有任何允许的意义投影，<code>apor</code> 表示存在多个允许候选但无权选择，<code>agno</code> 表示意义和判据已经确定而观察不足。三者不得互相代替；<code>fault</code> 只表示求值过程没有按契约完成。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>五个结果域分别回答什么</h2>
+    <div class="table-wrap"><table><thead><tr><th>问题</th><th>结果</th><th>不能替代</th></tr></thead><tbody>
+      <tr><td>制品形成到哪一步</td><td><code>nascent / coherent / attested</code></td><td>不替代目标满足、环境授权或最终决定。</td></tr>
+      <tr><td>目标事态是否满足</td><td><code>met / unmet / agno / fault</code></td><td>不替代权威接受或会话终止。</td></tr>
+      <tr><td>具名权威怎样决定</td><td><code>accepted / rejected / deferred</code></td><td>不改写原满足结果。</td></tr>
+      <tr><td>一次会话怎样结束</td><td><code>completed / failed / interrupted</code></td><td><code>completed</code> 不等于 <code>met</code>；<code>failed</code> 不等于 <code>unmet</code>。</td></tr>
+      <tr><td>证据是否有效且覆盖充分</td><td><code>valid / invalid / revoked</code><br><code>sufficient / insufficient</code></td><td>记录有效性与证据集合覆盖度不能合并。</td></tr>
+    </tbody></table></div>
+    <p><a href="../architecture/adr-0015-result-domains.html">ADR-0015</a>冻结这些禁止推导，但不新增 END-P1 字段。结果事件编码、时间域、聚合和重放仍未冻结。</p>
   </section>
 
   <section class="content-wide">
@@ -67,8 +79,9 @@ permalink: "/specifications/endem.html"
       <tr><td>恢复验证器因存储故障无法运行</td><td>求值过程失败为 <code>fault</code></td><td>工具故障不是 <code>unmet</code>，也不能隐藏为普通 <code>agno</code></td></tr>
       <tr><td>把响应时间控制在合理范围</td><td>阈值、窗口、单位、分位数和具名决定主体</td><td>历史均值、行业惯例或模型建议都不是授权</td></tr>
       <tr><td>生成安全评审报告并部署修复后的服务</td><td>按独立身份、权限、失败和验收责任拆成两个 Endem</td><td>不能只按连接词机械拆分，也不能用一个复合根掩盖两项责任</td></tr>
+      <tr><td>恢复试验正常结束但发现数据损坏</td><td>会话 <code>completed</code>、满足结果 <code>unmet</code>、权威决定 <code>rejected</code></td><td>运行成功不能冒充目标满足，验证器故障也不能冒充目标未满足</td></tr>
     </tbody></table></div>
-    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。它当前登记为非规范材料，不证明 Poiet、Theor 或任何自然语言解析能力已经存在。</p>
+    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。九个场景当前登记为非规范材料，不证明 Poiet、Theor 或任何自然语言解析能力已经存在。</p>
   </section>
 
   <section class="content-wide">

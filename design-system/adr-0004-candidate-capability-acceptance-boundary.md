@@ -1,10 +1,12 @@
 # ADR-0004：候选语义、能力调用与验收决定边界
 
-- 状态：Retained in part by ADR-0010；旧对象、状态与工具名称已废止
+- 状态：Retained in part by ADR-0010 and ADR-0015；旧对象、状态、结果集合与工具名称已废止
 - 日期：2026-07-12
 - 影响范围：Horizon Engine、Noesis Core、Noema Object System、Agent Harness、Fulfillment Runtime、运行与评估工具
 
 ## 问题
+
+> 历史边界：本记录只保留“候选不等于事实、能力声明不等于句柄、证据不等于最终决定”。下文旧对象名、命令名和 `accepted/unsatisfied/pending-review/failed/interrupted` 混合结果集合均已失效；现行结果域以 ADR-0015 为准。
 
 “模型候选通过类型检查”“Runtime 评价候选”和“运行证据覆盖契约”都不能单独证明任务已经正确完成。如果不区分候选升级、能力请求和最终验收，系统会留下三类危险空白：
 

@@ -43,6 +43,17 @@ permalink: "/specifications/tekmor.html"
   </section>
 
   <section class="content-wide">
+    <h2>记录有效不等于证据充分</h2>
+    <div class="table-wrap"><table><thead><tr><th>维度</th><th>允许值</th><th>回答的问题</th></tr></thead><tbody>
+      <tr><td>Tekmor 有效性</td><td><code>valid / invalid / revoked</code></td><td>记录身份、完整性、生产者和适用范围当前是否可用。</td></tr>
+      <tr><td>证据覆盖度</td><td><code>sufficient / insufficient</code></td><td>一组有效 Tekmor 是否覆盖指定 <code>krin</code> 的全部必需观察。</td></tr>
+      <tr><td>满足判断</td><td><code>met / unmet / agno / fault</code></td><td>目标事态相对观察和比较契约的结果；不属于 Tekmor 有效性。</td></tr>
+      <tr><td>权威决定</td><td><code>accepted / rejected / deferred</code></td><td>具名权威是否作出最终决定；不能由记录数量自动产生。</td></tr>
+    </tbody></table></div>
+    <p>同一份 Tekmor 可以完整有效，却不足以覆盖另一个范围更大的 <code>krin</code>。反过来，多份记录数量再多，只要生产者、范围或关系位置无效，也不能形成充分覆盖。完整分层见 <a href="../architecture/adr-0015-result-domains.html">ADR-0015</a>。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>Dromen 与运行记录</h2>
     <p>Praxor 从 attested Endem/Synem、执行策略、授权能力和当前环境建立 Dromen。Dromen 只存在于会话内；Tekmor 只保存足以重放判断的身份、参数和观察，不序列化实时句柄、凭据、模型私有状态或整个内存视图。</p>
     <div class="flow"><div class="step">attested Endem / Synem</div><div class="step">Dromen</div><div class="step">能力请求</div><div class="step">环境观察</div><div class="step">phain · 结构化观察</div><div class="step">Praxe Tekmor</div><div class="step">决定类 Tekmor</div></div>
@@ -62,7 +73,7 @@ permalink: "/specifications/tekmor.html"
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p>Tekmor 的有限主张、身份绑定、证据等级和“证据不等于证明”边界已经采用。事件编码、时间域、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需威胁模型与测试。</p>
+    <p>Tekmor 的有限主张、身份绑定、证据等级、“证据不等于证明”以及有效性与覆盖度分离已经采用。事件编码、时间域、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需威胁模型与测试。</p>
   </section>
   <div class="next-prev"><a href="synem.html">← Synem 规范</a><a href="../components/poiet.html">Poiet 组件 →</a></div>
 </main>

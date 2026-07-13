@@ -36,7 +36,7 @@ permalink: "/architecture/endem-lifecycle.html"
       <tr><td>Endem 集合 → pleko</td><td>已检查对象、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Tekmor</td><td>未解析引用、冲突、循环、权限扩大、身份不稳定</td><td>tasse、theor</td></tr>
       <tr><td>coherent → tasse</td><td>闭包、发布规则、调试策略、覆盖要求</td><td>不可变候选载荷、发布清单、待签消息、Tasse Tekmor</td><td>闭包不全、裁剪改变语义、非确定性元数据、覆盖缺口</td><td>外部签名系统、sphra</td></tr>
       <tr><td>候选 + 签名响应 → sphra</td><td>原候选、原请求、外部签名响应和信任策略</td><td>attested Endem/Synem、Sphra Tekmor</td><td>载荷、请求、算法、签名者或策略不匹配</td><td>theor、Praxor</td></tr>
-      <tr><td>attested → praxe</td><td>实际 attested 字节、运行策略、后端和能力目录</td><td>Dromen、运行与决定类 Tekmor、运行记录</td><td>签名或策略失败、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
+      <tr><td>attested → praxe</td><td>实际 attested 字节、运行策略、后端和能力目录</td><td>Dromen、运行与决定类 Tekmor、满足结果、权威决定和会话终止结果</td><td>签名或策略失败、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
     </tbody></table></div>
   </section>
 
@@ -69,7 +69,8 @@ permalink: "/architecture/endem-lifecycle.html"
       <li>Praxor 从对象、当前策略和授权能力建立 Dromen；实时句柄只保留在隔离执行侧。</li>
       <li>后端读取 Dromen 的受限视图，返回候选或类型化能力请求，不能直接调用外部能力。</li>
       <li>Praxor 验证请求、执行或拒绝，再把真实观察规范化为 phain 并记录为 Praxe Tekmor。</li>
-      <li>决定引擎按照执行前固定的 krin 和权威要求比较 skena 与 phain，形成决定类 Tekmor。观察不足时保持 agno；需要价值判断时保持 pending-review。</li>
+      <li>求值器按照执行前固定的 <code>krin</code> 比较 <code>skena</code> 与 <code>phain</code>，形成 <code>met / unmet / agno / fault</code> 中的一个满足结果。</li>
+      <li>具名权威读取满足结果、有效 Tekmor 和覆盖度，再形成 <code>accepted / rejected / deferred</code> 中的一个决定；会话另行记录 <code>completed / failed / interrupted</code>。</li>
       <li>会话结束后 Dromen 销毁，运行记录只保留允许公开的 Tekmor 和身份链。</li>
     </ol>
   </section>
@@ -78,11 +79,14 @@ permalink: "/architecture/endem-lifecycle.html"
     <h2>稳定状态与失败状态</h2>
     <div class="table-wrap"><table><thead><tr><th>类别</th><th>允许状态</th><th>含义</th></tr></thead><tbody>
       <tr><td>Endem</td><td>nascent / coherent / attested</td><td>语义与发布生命周期状态。</td></tr>
-      <tr><td>满足判断</td><td>met / unmet / agno / fault</td><td>skena 相对 phain、krin 与求值规则的工程满足状态。</td></tr>
-      <tr><td>Praxe</td><td>accepted / unsatisfied / pending-review / failed / interrupted</td><td>一次会话在满足状态、Tekmor 和决定权威之上的最终结果。</td></tr>
+      <tr><td>满足判断</td><td>met / unmet / agno / fault</td><td>skena 相对 phain、krin 与求值规则的工程满足结果。</td></tr>
+      <tr><td>权威决定</td><td>accepted / rejected / deferred</td><td>具名规则或主体依据满足结果、Tekmor 和覆盖度作出的最终决定。</td></tr>
+      <tr><td>Praxe 会话</td><td>completed / failed / interrupted</td><td>只描述一次运行怎样终止，不说明目标是否满足或已被接受。</td></tr>
       <tr><td>Elenk</td><td>pass / fail / not-evaluated</td><td>每个请求验证层的独立结论；不能压成含义不明的成功布尔值。</td></tr>
-      <tr><td>Tekmor</td><td>valid / invalid / insufficient / revoked / agno</td><td>记录身份、完整性和适用性，不等同于其 claim 为真。</td></tr>
+      <tr><td>Tekmor 有效性</td><td>valid / invalid / revoked</td><td>记录身份、完整性和适用性，不等同于其 claim 为真。</td></tr>
+      <tr><td>证据覆盖度</td><td>sufficient / insufficient</td><td>一组有效 Tekmor 是否覆盖当前 krin；不与单份记录有效性合并。</td></tr>
     </tbody></table></div>
+    <p>这五个结果域由 <a href="adr-0015-result-domains.html">ADR-0015</a> 分开。外部 Task 的 <code>completed</code>、工具返回成功或会话正常结束都不能跨域改写满足结果与最终决定。</p>
   </section>
 
   <section class="content-band">

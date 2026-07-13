@@ -1,0 +1,151 @@
+{
+  "vector_format": "noemion.result-domain-v1",
+  "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "description": "Normative proposal vectors for ADR-0015 result-domain separation; not Praxor or decision-engine implementation data",
+  "cases": [
+    {
+      "id": "RV-VALID-MET-ACCEPT-001",
+      "satisfaction": "met",
+      "satisfaction_source": "krin",
+      "session": "completed",
+      "tekmor_validity": "valid",
+      "coverage": "sufficient",
+      "authority": "authorized",
+      "authority_action": "accept",
+      "proposed_decision": "accepted",
+      "expect": {"result": "accept", "clause": "END-DEC-001"}
+    },
+    {
+      "id": "RV-VALID-UNMET-REJECT-001",
+      "satisfaction": "unmet",
+      "satisfaction_source": "krin",
+      "session": "completed",
+      "tekmor_validity": "valid",
+      "coverage": "sufficient",
+      "authority": "authorized",
+      "authority_action": "reject",
+      "proposed_decision": "rejected",
+      "expect": {"result": "accept", "clause": "END-DEC-001"}
+    },
+    {
+      "id": "RV-VALID-AGNO-DEFER-001",
+      "satisfaction": "agno",
+      "satisfaction_source": "krin",
+      "session": "completed",
+      "tekmor_validity": "valid",
+      "coverage": "insufficient",
+      "authority": "unavailable",
+      "authority_action": "defer",
+      "proposed_decision": "deferred",
+      "expect": {"result": "accept", "clause": "END-KRN-002"}
+    },
+    {
+      "id": "RV-VALID-FAULT-DEFER-001",
+      "satisfaction": "fault",
+      "satisfaction_source": "krin",
+      "session": "failed",
+      "tekmor_validity": "invalid",
+      "coverage": "insufficient",
+      "authority": "unavailable",
+      "authority_action": "defer",
+      "proposed_decision": "deferred",
+      "expect": {"result": "accept", "clause": "END-KRN-002"}
+    },
+    {
+      "id": "RV-VALID-AGNO-POLICY-REJECT-001",
+      "satisfaction": "agno",
+      "satisfaction_source": "krin",
+      "session": "completed",
+      "tekmor_validity": "valid",
+      "coverage": "insufficient",
+      "authority": "authorized",
+      "authority_action": "reject-inconclusive",
+      "proposed_decision": "rejected",
+      "expect": {"result": "accept", "clause": "END-DEC-001"}
+    },
+    {
+      "id": "RV-VALID-MET-DEFER-001",
+      "satisfaction": "met",
+      "satisfaction_source": "krin",
+      "session": "completed",
+      "tekmor_validity": "valid",
+      "coverage": "sufficient",
+      "authority": "authorized",
+      "authority_action": "defer",
+      "proposed_decision": "deferred",
+      "expect": {"result": "accept", "clause": "END-DEC-001"}
+    },
+    {
+      "id": "RV-REJECT-COMPLETED-AS-ACCEPTED-001",
+      "satisfaction": null,
+      "satisfaction_source": "none",
+      "session": "completed",
+      "tekmor_validity": "valid",
+      "coverage": "sufficient",
+      "authority": "authorized",
+      "authority_action": "accept",
+      "proposed_decision": "accepted",
+      "expect": {"result": "reject", "clause": "END-STA-002"}
+    },
+    {
+      "id": "RV-REJECT-SESSION-AS-SATISFACTION-001",
+      "satisfaction": "unmet",
+      "satisfaction_source": "session",
+      "session": "failed",
+      "tekmor_validity": "valid",
+      "coverage": "sufficient",
+      "authority": "authorized",
+      "authority_action": "reject",
+      "proposed_decision": "rejected",
+      "expect": {"result": "reject", "clause": "END-STA-002"}
+    },
+    {
+      "id": "RV-REJECT-EXTERNAL-AS-SATISFACTION-001",
+      "satisfaction": "met",
+      "satisfaction_source": "external-task",
+      "session": "completed",
+      "tekmor_validity": "valid",
+      "coverage": "sufficient",
+      "authority": "authorized",
+      "authority_action": "accept",
+      "proposed_decision": "accepted",
+      "expect": {"result": "reject", "clause": "END-STA-002"}
+    },
+    {
+      "id": "RV-REJECT-INSUFFICIENT-AS-ACCEPTED-001",
+      "satisfaction": "met",
+      "satisfaction_source": "krin",
+      "session": "completed",
+      "tekmor_validity": "valid",
+      "coverage": "insufficient",
+      "authority": "authorized",
+      "authority_action": "accept",
+      "proposed_decision": "accepted",
+      "expect": {"result": "reject", "clause": "END-DEC-001"}
+    },
+    {
+      "id": "RV-REJECT-REVOKED-AS-ACCEPTED-001",
+      "satisfaction": "met",
+      "satisfaction_source": "krin",
+      "session": "completed",
+      "tekmor_validity": "revoked",
+      "coverage": "sufficient",
+      "authority": "authorized",
+      "authority_action": "accept",
+      "proposed_decision": "accepted",
+      "expect": {"result": "reject", "clause": "END-DEC-001"}
+    },
+    {
+      "id": "RV-REJECT-AGNO-AS-ACCEPTED-001",
+      "satisfaction": "agno",
+      "satisfaction_source": "krin",
+      "session": "completed",
+      "tekmor_validity": "valid",
+      "coverage": "insufficient",
+      "authority": "authorized",
+      "authority_action": "accept",
+      "proposed_decision": "accepted",
+      "expect": {"result": "reject", "clause": "END-KRN-002"}
+    }
+  ]
+}

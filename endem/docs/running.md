@@ -63,7 +63,7 @@ Praxor 为一次会话建立 Dromen。Dromen 只披露当前任务所需的 Ende
 
 MCP 和 A2A 只适合作为 Praxor 外缘的协议适配器：
 
-- [MCP 2025-11-25 稳定规范](https://modelcontextprotocol.io/specification/2025-11-25)；2026-07-28 发布候选含破坏性变化，正式发布并重验前不采用
+- [MCP 2025-11-25 稳定规范](https://modelcontextprotocol.io/specification/2025-11-25)；后续正式版本只有完成兼容、安全、错误来源、降级和权限复核后才进入新适配基线
 - [A2A 1.0 版本化规范](https://a2a-protocol.org/v1.0.0/specification/)
 
 远端工具说明、Agent Card、任务状态、参数结构和返回内容均是不可信声明，不能直接成为能力授权、Endem 状态或最终决定。A2A 的补丁号只固定查阅的文档快照，不进入协议协商。
@@ -74,4 +74,6 @@ MCP 和 A2A 只适合作为 Praxor 外缘的协议适配器：
 
 Tekmor 记录有限的来源、检查、绑定、签名、运行或决定依据。它不等于数学证明，也不自动证明 claim 为真。
 
-满足判断先区分 `met`、`unmet`、`agno` 和 `fault`。最终运行状态再区分 `accepted`、`unsatisfied`、`pending-review`、`failed` 和 `interrupted`。只有 `krin` 对适用 phain 的全部必需条件为 `met`、Tekmor 足够、没有阻断性 `apor` 且决定权威匹配时，才能形成 `accepted`。
+满足判断先区分 `met`、`unmet`、`agno` 和 `fault`。具名权威随后形成 `accepted`、`rejected` 或 `deferred`；Praxe 会话另行记录 `completed`、`failed` 或 `interrupted`。只有 `krin` 对适用 phain 的全部必需条件为 `met`、必需 Tekmor 有效且覆盖充分、没有阻断性 `apor` 且决定权威匹配时，才能形成 `accepted`。
+
+这三个结果域不能互相替代。会话 `completed` 只说明运行按终止规则结束；它可以对应 `unmet` 和 `rejected`。验证器或后端故障产生 `fault` 或会话 `failed`，不能冒充目标本身 `unmet`。完整禁止推导见 [ADR-0015](../../architecture/adr-0015-result-domains.html)。

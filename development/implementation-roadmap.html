@@ -70,7 +70,7 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>面向 Agent 时代的适配边界</h2>
     <ul>
-      <li>MCP 工具说明、注解和远端返回都只是 Praxor 外缘的不可信输入；能力授权来自 Dromen 与会话策略。当前基线是 <a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">2025-11-25 稳定工具规范</a>。<a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">2026-07-28 发布候选</a>包含破坏性变化，正式发布并重验前不采用。</li>
+      <li>MCP 工具说明、注解和远端返回都只是 Praxor 外缘的不可信输入；能力授权来自 Dromen 与会话策略。当前研究基线是 <a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">2025-11-25 稳定工具规范</a>。任何后续正式版本都必须重新完成兼容、安全、错误来源、降级和权限复核。</li>
       <li>A2A 1.0 的 Task、Message 与 Artifact 适合跨 Agent 传输和记录生命周期，但不能替代 Endem 身份、Synem 闭包或 Tekmor 验收。页面固定参考 <a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a>；补丁号不进入协议协商。</li>
       <li>可靠 Agent 依赖清晰环境、可读工具、真实观察和反馈循环；这些由 Praxor 及其外侧控制平面负责，不通过增加薄命令包装解决。实践案例见<a href="https://openai.com/index/harness-engineering/">智能体控制平面工程实践</a>。</li>
       <li><a href="https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai">OpenTelemetry GenAI 语义约定</a>仍处于 Development，并可能携带输入、输出和工具数据。它只进入带版本、默认脱敏的导出器，不进入 Endem 编码、Tekmor 身份或最终决定。</li>

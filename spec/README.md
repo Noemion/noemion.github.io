@@ -14,7 +14,9 @@
 
 [`endem-errors.md`](endem-errors.md) 登记结构与 Profile 错误码。[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存 JSON 语义外壳；`../vectors/wire/` 保存真实字节的十六进制表达。结构接受向量不等于语义有效 Endem。
 
-[`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用八个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足和多根拆分是否能被现行六语义面解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
+[`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用九个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分和结果域分离是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
+
+`../vectors/result-domains/cases.json` 保存 ADR-0015 的十二个正反提案向量；`../tests/result_domain_vector_test.py` 只执行结果域约束，不实现 Praxor、求值器或决定引擎。向量通过只能证明当前矩阵和条款一致，不能证明运行组件存在。
 
 `registry.json` 还登记非规范实验及其决定链。P0-LANG-001 的协议与结果位于 `../experiments/p0-language/`；它支持 ADR-0012 的首版核心语言决定，但不会改变 END-CORE 或 END-FMT 的条款含义，也不把原型登记为生产实现。
 
