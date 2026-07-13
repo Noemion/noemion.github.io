@@ -18,7 +18,7 @@ badges: ["Architecture", "Endem", "Trust Boundaries"]
 
 ```text
 受控来源表达
-      │ poie
+      │ ktise
       ▼
     Endem ── pleko ──► Synem ── drase ──► Dromen
       │                 │                    │
@@ -32,7 +32,7 @@ badges: ["Architecture", "Endem", "Trust Boundaries"]
 
 | 域 | 输入 | 输出 | 失败责任 |
 | --- | --- | --- | --- |
-| **Poiet** | 来源绑定、Endem、固定依赖、发布策略 | Endem、Synem、签名请求、分层诊断 | 来源不明、语义未授权、格式/引用/约束冲突、非确定性、闭包不完整 |
+| **Ktisor** | 来源绑定、Endem、固定依赖、发布策略 | Endem、Synem、签名请求、分层诊断 | 来源不明、语义未授权、格式/引用/约束冲突、非确定性、闭包不完整 |
 | **Theor** | 任意不可信 Endem、Synem 或 Iknem 字节 | 有界只读视图、差异、引用、大小和跟踪信息 | 畸形输入、未知关键结构、资源超限、无法比较；不能产生生产验证句柄 |
 | **Drasor** | Synem、运行配置、验收策略和能力目录 | Dromen、Iknem 和最终决定 | 签名或闭包失败、能力拒绝、预算耗尽、状态漂移、证据缺失和人工升级 |
 
@@ -40,7 +40,7 @@ badges: ["Architecture", "Endem", "Trust Boundaries"]
 
 ## 形成与语义确认
 
-`poie` 只接受两类可确认语义：可以由确定性规则从 `rhem` 重推导的内容，或由具名权威确认的语义决定。模型、检索器和外部前端只能提交候选；它们不能写规范字节、选择布局或关闭 `apor`。
+`ktise` 只接受两类可确认语义：可以由确定性规则从 `rhem` 重推导的内容，或由具名权威确认的语义决定。模型、检索器和外部前端只能提交候选；它们不能写规范字节、选择布局或关闭 `apor`。
 
 一个 Endem 只允许一个根 `skena`。计划、思维链、采样参数、实时能力句柄、私钥和运行历史不属于 Endem。
 
@@ -48,7 +48,7 @@ badges: ["Architecture", "Endem", "Trust Boundaries"]
 
 `pleko` 解析 Endem 引用、固定依赖、检查约束可满足性并构造 Synem。能力合并只能保持或收窄权限；硬约束或验收冲突必须失败，不能调用模型“猜一个折中”。
 
-`tasse` 只执行规范定义的类型化裁剪，并证明 semion、skena、telis、krin、apor、依赖和披露行为保持等价。`sphra` 生成不可变签名请求，核对外部签名响应；Poiet 永不持有私钥。
+`tasse` 只执行规范定义的类型化裁剪，并证明 semion、skena、telis、krin、apor、依赖和披露行为保持等价。`sphra` 生成不可变签名请求，核对外部签名响应；Ktisor 永不持有私钥。
 
 ## 装载与运行
 

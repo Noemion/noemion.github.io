@@ -1,0 +1,66 @@
+---
+layout: default
+title: "ADR-0032 · 确定性制作名称冲突"
+page_role: "content"
+footer_text: "Noemion · ADR-0032"
+permalink: "/architecture/adr-0032-deterministic-maker-name-collision.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0032</span></nav>
+  <header class="content-introduction"><h1>ADR-0032<br>确定性制作名称冲突</h1><p>用 Ktisor 与 <code>ktise</code> 消除推理引擎同名冲突，同时保持规范制品的唯一写入责任不变。</p><div class="badges"><span class="badge">Accepted</span><span class="badge">2026-07-13</span><span class="badge">Direct replacement</span><span class="badge">No compatibility</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead"><strong>Ktisor</strong> 取代旧确定性制作组件名，公开动作改为 <code>ktise</code>。</p>
+    <p>Ktisor 仍是 Endem 与 Synem 规范字节的唯一写入边界。它确定投影、规范顺序、引用闭包、物理布局和内容身份；模型、Theor、Drasor 与签名权限域都不能绕过它写入或改写规范制品。</p>
+    <p class="callout"><strong>迁移规则：</strong>项目尚未进入组件代码阶段，也不考虑向后兼容。旧组件页、图像名、动作、路径和正文直接退出；不保留别名、重定向、双写或兼容垫片。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>遗漏了什么</h2>
+    <p>ADR-0031 检查了组件名，却没有把大小写无关的公开动作作为独立发布面复核。这使一个精确冲突漏过门禁。</p>
+    <div class="table-wrap"><table><thead><tr><th>退役名称</th><th>可核对的外部使用</th><th>冲突判断</th></tr></thead><tbody>
+      <tr><td>旧公开动作</td><td><a href="https://github.com/datamininggroup/POIE">PFA Open Inference Engine</a> 使用相同字母组合，公开说明其参考实现用于执行预测与分析模型的评分计算。</td><td>大小写不能形成可靠区分；双方都位于人工智能工程与模型处理的发现空间，已触发名称审计的停止条件。</td></tr>
+      <tr><td>旧组件名</td><td>组件名与旧动作来自同一词族，继续保留会让文档、搜索和未来安装界面维持错误关联。</td><td>组件与动作必须共同退出，不能只改命令拼写。</td></tr>
+    </tbody></table></div>
+    <p>这项判断只说明工程发现与语义相邻性，不能判断商标权、在先权利或法律可用性。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>候选比较</h2>
+    <div class="table-wrap"><table><thead><tr><th>候选</th><th>工程观察</th><th>决定</th></tr></thead><tbody>
+      <tr><td>Ktisor / <code>ktise</code></td><td>组件与动作关系清楚；2026-07-13 的精确产品、GitHub 仓库名和主要语言包索引初筛没有发现相邻同名工具。</td><td>采用；含义只由职责、不变量、规范和测试定义。</td></tr>
+      <tr><td>Teukor / <code>teuke</code></td><td>精确软件冲突较少，但 Teuke 已作为姓氏和人名稳定使用，搜索区分度较弱。</td><td>拒绝</td></tr>
+      <tr><td><code>form</code> / <code>make</code></td><td>直白，却与常见命令、构建工具和普通动词重叠，无法承担稳定动作身份。</td><td>只用于释义</td></tr>
+    </tbody></table></div>
+    <p>Ktisor 可以帮助记忆“确定性形成者”，但词源不产生工程语义。任何实现都只能依据 END-CORE、END-P1、END-FMT、SYN-CORE、诊断条款和公开向量判断其行为。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>时间点筛查结果</h2>
+    <div class="table-wrap"><table><thead><tr><th>入口</th><th>Ktisor</th><th><code>ktise</code></th><th>结论边界</th></tr></thead><tbody>
+      <tr><td>GitHub 精确仓库名</td><td>未发现</td><td>未发现</td><td>不是账户、仓库或权利保留</td></tr>
+      <tr><td>PyPI 简单索引</td><td>HTTP 404</td><td>HTTP 404</td><td>只表示查询时没有精确项目</td></tr>
+      <tr><td>npm Registry</td><td>Not found</td><td>Not found</td><td>不代表未来仍可取得</td></tr>
+      <tr><td>crates.io API</td><td>crate does not exist</td><td>crate does not exist</td><td>不构成包名预留</td></tr>
+    </tbody></table></div>
+    <p>首次正式发行前必须重新检查软件、人工智能产品、协议、标准组织、主要包管理器、命令路径、域名和目标法域商标，并保存可复核证据。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>动作名称不等于实现优先级</h2>
+    <p>八个公开动作目前只是应用职责，不是八个已经证明必要的组件。保留名称不能替代真实消费者、失败责任和验证证据。</p>
+    <div class="table-wrap"><table><thead><tr><th>成熟度</th><th>动作</th><th>当前边界</th></tr></thead><tbody>
+      <tr><td>首条切片有直接消费者</td><td><code>ktise</code>、<code>elenk</code>、<code>theor</code></td><td>分别承担确定性形成、生产校验和独立只读解释；仍没有实现授权。</td></tr>
+      <tr><td>依赖后续制品或发布机制</td><td><code>pleko</code>、<code>tasse</code>、<code>sphra</code>、<code>drase</code></td><td>只有在组合、分发、签名和受限会话出现真实消费者后才进入实现范围。</td></tr>
+      <tr><td>仍需重新证明公开面价值</td><td><code>peira</code></td><td>当前可解释为一致性与互操作验证入口；是否应成为最终用户动作，必须在代码阶段前另行审查。</td></tr>
+    </tbody></table></div>
+    <p>本 ADR 只接受 Ktisor 与 <code>ktise</code> 的名称替换，不自动冻结八个动作的最终产品拓扑。</p>
+  </section>
+
+  <section class="content-band">
+    <h2>不改变的边界</h2>
+    <p>本次更名不修改 END-CORE、END-P1、END-FMT、SYN-CORE、内容身份、结果域、字节布局、唯一 <code>endem</code> CLI、Theor 独立读取路径、Drasor 最小能力域或签名权限隔离。旧词只保留在本 ADR 与名称审计中作为冲突证据。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0031-release-name-collision-gate.html">← ADR-0031</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

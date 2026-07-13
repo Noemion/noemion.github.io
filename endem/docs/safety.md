@@ -18,14 +18,14 @@ badges: ["elenk", "theor", "Fail Closed"]
 
 | 入口 | 主要问题 | 能否进入生产信任链 |
 | --- | --- | --- |
-| `endem elenk` | 这份实际字节是否满足请求的结构、语义、状态、完整性与策略层？ | 可以；全部所需层通过后，Poiet 内部可产生绑定字节和配置的生产验证句柄 |
+| `endem elenk` | 这份实际字节是否满足请求的结构、语义、状态、完整性与策略层？ | 可以；全部所需层通过后，Ktisor 内部可产生绑定字节和配置的生产验证句柄 |
 | `endem theor` | 独立实现怎样读取和显示这份实际字节？ | 不可以；只提供观察、差分和诊断 |
 
 `theor` 可解析对象不表示 `elenk` 已通过；`elenk` 通过也不能替代 `theor` 在一致性测试中的第二种解释。
 
 ## 独立 Theor 要求
 
-`theor` 不得复用 Poiet 的生产解析器、写入器、组合器、生成代码或错误分类实现。它只共享公开规范和测试向量，并使用独立数据结构与资源限制。
+`theor` 不得复用 Ktisor 的生产解析器、写入器、组合器、生成代码或错误分类实现。它只共享公开规范和测试向量，并使用独立数据结构与资源限制。
 
 GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf.html)说明它独立于 BFD，为第二条直接读取路径提供了工程先例。
 
@@ -61,4 +61,4 @@ GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf
 
 ## peira 怎样使用两条路径
 
-`endem peira` 对合法、边界和畸形向量分别运行 Poiet 与 Theor，并比较字段解释、失败位置和分类。任何分歧都阻断一致性发布，先调查规范是否含糊，再修复实现；不能简单选择某一实现作为事实来源。
+`endem peira` 对合法、边界和畸形向量分别运行 Ktisor 与 Theor，并比较字段解释、失败位置和分类。任何分歧都阻断一致性发布，先调查规范是否含糊，再修复实现；不能简单选择某一实现作为事实来源。

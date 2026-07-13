@@ -30,7 +30,7 @@ permalink: "/architecture/adr-0016-mene-time-model.html"
       <li>目标范围统一解释为半开区间 <code>[start, end)</code>：包含开始时刻，不包含结束时刻。相邻区间因此既不重叠也不留下边界空洞。</li>
       <li><code>fixed</code> 第一版只接受秒值 00–59 的规范 UTC 瞬间；闰秒词法、循环日历规则、开放端点、无限区间和本地日历重复仍保持未决。</li>
       <li><code>elapsed</code> 时长必须是正的、精确的固定长度单位；“一个月”“一个工作日”和模糊近似不能按秒数猜测。</li>
-      <li>来源可以保留“下周一凌晨”等原句，但 Poiet 只有在具名权威把它解析为上述范围后才能确认 <code>semion</code>；否则进入 <code>apor</code>。</li>
+      <li>来源可以保留“下周一凌晨”等原句，但 Ktisor 只有在具名权威把它解析为上述范围后才能确认 <code>semion</code>；否则进入 <code>apor</code>。</li>
       <li>时钟分辨率、同步方式、最大不确定度、回拨或重启事件属于 Iknem。没有这些信息时，比较器不能假定时间顺序精确。</li>
     </ul>
   </section>

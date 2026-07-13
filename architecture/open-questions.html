@@ -52,7 +52,8 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-grid">
     <h2>实施与发布条件</h2>
-    <details open><summary>独立 Theor 使用什么实现边界？</summary><p>未来 Theor 必须拥有自己的数据结构、解码器、验证器和错误路径，只与 Poiet 共享公开规范和字节向量。当前没有实现；是否采用 Rust 或第二种语言，必须在用户开启代码阶段后根据共同故障风险和维护成本重新确认。</p></details>
+    <details open><summary>独立 Theor 使用什么实现边界？</summary><p>未来 Theor 必须拥有自己的数据结构、解码器、验证器和错误路径，只与 Ktisor 共享公开规范和字节向量。当前没有实现；是否采用 Rust 或第二种语言，必须在用户开启代码阶段后根据共同故障风险和维护成本重新确认。</p></details>
+    <details><summary>peira 应该是公开动作还是内部发布门禁？</summary><p>差分、恶意输入、复现和互操作检查不可省略，但这不自动证明最终用户需要单独运行 <code>endem peira</code>。代码阶段前必须先识别独立用户任务、输入输出、失败责任和不能由开发测试或发行流程承担的价值；否则只保留规范测试身份，不扩大公开 CLI。</p></details>
     <details><summary>独立 Theor 还缺什么证据？</summary><p>当前只有规范向量、资料检查器和未来验证条件。用户开启代码阶段后，才建立依赖审计、差分测试、长时 fuzz、故障注入和跨平台运行，用来寻找两条独立路径的共同输入假设。</p></details>
     <details><summary>名称何时满足正式发布条件？</summary><p>ADR-0031 只完成工程初筛和当前名称选择。公开发行前仍需重新检查相邻 AI 与开发工具、目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。若再次触发冲突，直接更名；审查完成前不得声称商标可用。</p></details>
     <details><summary>怎样证明构建可复现？</summary><p>ID-REP-001 已要求精确输入闭包、工具与参数、环境约束、至少两条独立产出路径和逐字节输出比较。仍需在代码阶段建立真实隔离构建、缓存独立性、差异归因和发布证据；build ID、签名和一次重跑都不能替代这些证据。</p></details>
@@ -62,5 +63,5 @@ permalink: "/architecture/open-questions.html"
     <h2>问题关闭规则</h2>
     <p>设计问题可以由权威规范或 ADR、正反向量和明确失败语义关闭。涉及组件行为、性能或互操作的问题必须保持开放，直到用户明确开启代码阶段并出现相应实现证据；论文、模型指标、概念演示或单一实现行为不能单独冻结 ABI。</p>
   </section>
-  <div class="next-prev"><a href="adr-0031-release-name-collision-gate.html">← ADR-0031</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
+  <div class="next-prev"><a href="adr-0032-deterministic-maker-name-collision.html">← ADR-0032</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
 </main>

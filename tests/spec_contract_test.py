@@ -262,7 +262,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 errors.append(f"P0-LANG-001 missing {path_field} file")
         results = load_json(ROOT / experiment.get("results", ""), errors)
         if results:
-            if results.get("decision", {}).get("poiet_structural_core") != "Rust 1.97.0 stable":
+            if results.get("decision", {}).get("ktisor_structural_core") != "Rust 1.97.0 stable":
                 errors.append("P0-LANG-001 must record the bounded Rust core decision")
             if results.get("linux_ci", {}).get("conclusion") != "success":
                 errors.append("P0-LANG-001 must retain successful Linux CI evidence")
@@ -707,7 +707,7 @@ def validate_public_boundary(errors):
             "OWL 2",
             "COUNT(DISTINCT",
             "GNU",
-            "不表示 Poiet、Drasor、求值器或 CLI 已经实现",
+            "不表示 Ktisor、Drasor、求值器或 CLI 已经实现",
         ),
         "architecture/adr-0019-measurement-and-thresholds.html": (
             "测量谓词必须同时固定构念",
@@ -735,7 +735,7 @@ def validate_public_boundary(errors):
             "GNU Coreutils test",
             "GNU Bash Lists",
             "SHACL 1.2 Core",
-            "不表示 Poiet、Theor、Drasor、CLI 或求值器已经实现",
+            "不表示 Ktisor、Theor、Drasor、CLI 或求值器已经实现",
         ),
         "architecture/adr-0021-synem-closure-and-activation.html": (
             "SYN-CORE 0.1.0-draft",
@@ -745,7 +745,7 @@ def validate_public_boundary(errors):
             "GNU make",
             "W3C SHACL",
             "MCP 2025-11-25",
-            "不表示 Poiet、Theor、Drasor、CLI、解析器或运行时已经实现",
+            "不表示 Ktisor、Theor、Drasor、CLI、解析器或运行时已经实现",
         ),
         "architecture/adr-0022-iknem-evidence-and-appraisal.html": (
             "IKN-CORE 0.1.0-draft",
@@ -857,6 +857,16 @@ def validate_public_boundary(errors):
             "IKN-CORE",
             "不保留别名、重定向、双写或兼容垫片",
             "正式发行前必须再次查询",
+        ),
+        "architecture/adr-0032-deterministic-maker-name-collision.html": (
+            "Accepted",
+            "Ktisor",
+            "ktise",
+            "PFA Open Inference Engine",
+            "大小写不能形成可靠区分",
+            "不保留别名、重定向、双写或兼容垫片",
+            "动作名称不等于实现优先级",
+            "peira",
         ),
         "specifications/synem.html": (
             "SYN-CORE 0.1.0-draft",

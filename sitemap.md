@@ -25,9 +25,9 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0009](https://noemion.github.io/architecture/adr-0009-propositional-kernel.html) — superseded record of the earlier propositional projection
 - [ADR-0010](https://noemion.github.io/architecture/adr-0010-native-lexicon.html) — current native lexicon, six semantic facets, and situation/goal/evidence separation
 - [ADR-0011](https://noemion.github.io/architecture/adr-0011-endem-container.html) — experimental Endem header, record directory, deterministic payload subset, and P0 limits
-- [ADR-0012](https://noemion.github.io/architecture/adr-0012-rust-core-language.html) — evidence-backed Rust selection for the first Poiet and production-reader structural core
+- [ADR-0012](https://noemion.github.io/architecture/adr-0012-rust-core-language.html) — evidence-backed Rust selection for the first Ktisor and production-reader structural core
 - [ADR-0013](https://noemion.github.io/architecture/adr-0013-end-p1-payload.html) — closed END-P1 semantic payload fields, ordering, references, and implementation gate
-- [ADR-0014](https://noemion.github.io/architecture/adr-0014-source-manifest.html) — experimental Poiet source manifest, authority boundary, and replacement conditions
+- [ADR-0014](https://noemion.github.io/architecture/adr-0014-source-manifest.html) — experimental Ktisor source manifest, authority boundary, and replacement conditions
 - [ADR-0015](https://noemion.github.io/architecture/adr-0015-result-domains.html) — separate artifact, satisfaction, decision, session, and evidence result domains
 - [ADR-0016](https://noemion.github.io/architecture/adr-0016-mene-time-model.html) — fixed and elapsed time scopes, continuity policies, coverage gaps, and clock authority
 - [ADR-0017](https://noemion.github.io/architecture/adr-0017-negation-and-absence.html) — explicit negative relations, absence evidence, closed observation scopes, and failure classification
@@ -45,9 +45,10 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0029](https://noemion.github.io/architecture/adr-0029-authority-and-authorization-decisions.html) — authority contexts, principal qualification, bounded scope, delegation, consent, replay, and result separation
 - [ADR-0030](https://noemion.github.io/architecture/adr-0030-endem-content-and-authorization-companions.html) — stable Endem content identity, untrusted authority selectors, external authorization prerequisites, and companion relations
 - [ADR-0031](https://noemion.github.io/architecture/adr-0031-release-name-collision-gate.html) — release-name collision evidence, Iknem and Drasor/drase selection, and one-time migration without compatibility aliases
+- [ADR-0032](https://noemion.github.io/architecture/adr-0032-deterministic-maker-name-collision.html) — exact action-name collision evidence, Ktisor/ktise selection, action maturity, and direct replacement boundaries
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
-- [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Drasor responsibility boundaries
-- [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary
+- [Components](https://noemion.github.io/components/index.html) — Ktisor, Theor, and Drasor responsibility boundaries
+- [Ktisor](https://noemion.github.io/components/ktisor.html) — deterministic Endem formation, checking, binding, and packing boundary
 - [Theor](https://noemion.github.io/components/theor.html) — independent, bounded, read-only interpretation and diagnostic boundary
 - [Drasor](https://noemion.github.io/components/drasor.html) — constrained loading, capability mediation, evidence collection, and execution boundary
 
@@ -85,7 +86,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Endem application
 
-- [Endem](https://noemion.github.io/endem/index.html) — the single public command surface for poie, elenk, pleko, tasse, sphra, theor, drase, and peira
+- [Endem](https://noemion.github.io/endem/index.html) — the single public command surface for ktise, elenk, pleko, tasse, sphra, theor, drase, and peira
 
 ## Endem manual
 

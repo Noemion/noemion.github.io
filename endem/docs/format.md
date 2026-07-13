@@ -10,13 +10,13 @@ manual_order: 1
 nav_title: "格式与成形"
 page_heading: "格式与成形"
 page_lead: "把受控来源表达分解为六个语义面，并形成只有一个根 skena 的 nascent Endem。"
-summary: "来源、意义、可能事态、目标方向、满足判据、未决边界与确定性 poie。"
-badges: ["poie", "One Root Skena"]
+summary: "来源、意义、可能事态、目标方向、满足判据、未决边界与确定性 ktise。"
+badges: ["ktise", "One Root Skena"]
 ---
 
 ## 最小来源表达
 
-受控来源表达是面向人的原始输入。Poiet 形成 Endem 前，必须把它映射为以下六个语义面：
+受控来源表达是面向人的原始输入。Ktisor 形成 Endem 前，必须把它映射为以下六个语义面：
 
 | 语义面 | 读者要回答的问题 | 不能省略的边界 |
 | --- | --- | --- |
@@ -48,23 +48,23 @@ apor:
   - "目标读者尚未确认"
 ```
 
-[ADR-0014](../../architecture/adr-0014-source-manifest.html) 已为未来 Poiet 设计逐行来源清单；上面的 YAML 仍只是职责示意，不是该语法。正式来源语言仍需解决注释、包含关系、版本演进和错误恢复。实验性 `.endem` 容器由 END-FMT 0.1 定义；END-P1 已固定未来首条实现路径评审所需的字段、枚举、排序和引用闭包，但它仍不是稳定 ABI。
+[ADR-0014](../../architecture/adr-0014-source-manifest.html) 已为未来 Ktisor 设计逐行来源清单；上面的 YAML 仍只是职责示意，不是该语法。正式来源语言仍需解决注释、包含关系、版本演进和错误恢复。实验性 `.endem` 容器由 END-FMT 0.1 定义；END-P1 已固定未来首条实现路径评审所需的字段、枚举、排序和引用闭包，但它仍不是稳定 ABI。
 
 精确容器义务见 [END-FMT 条款源](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)。END-P0 只保留为结构实验；如果用户以后开启代码阶段，首条实现路径必须从 [END-P1 设计 Profile](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json) 开始评审，只允许 nascent、kine、六个关键记录和无压缩载荷。
 
 ## 候选不能直接成形
 
-自然语言模型或外部系统可以提出意义、关系、目标方向、满足条件和替代解释，但这些内容始终是不可信候选。`poie` 只接受以下三种处理结果：
+自然语言模型或外部系统可以提出意义、关系、目标方向、满足条件和替代解释，但这些内容始终是不可信候选。`ktise` 只接受以下三种处理结果：
 
 1. 由版本化确定性规则从来源重新推导；
 2. 绑定到明确授权、范围有限且可撤销的决定；
 3. 继续保留在 `apor`，不伪装成确认语义。
 
-违反 Profile 或没有任何允许投影时，`poie` 必须以 `aseme` 失败并定位来源范围；存在多个可表达候选但无法选择时才进入 `apor`。
+违反 Profile 或没有任何允许投影时，`ktise` 必须以 `aseme` 失败并定位来源范围；存在多个可表达候选但无法选择时才进入 `apor`。
 
-## poie 的失败原子性
+## ktise 的失败原子性
 
-`poie` 在完成全部来源、结构、类型、约束和资源检查前，不写出部分可信 Endem。失败至少区分：
+`ktise` 在完成全部来源、结构、类型、约束和资源检查前，不写出部分可信 Endem。失败至少区分：
 
 - 来源无效或摘要不符；
 - 根 `skena` 缺失或不唯一；
@@ -77,4 +77,4 @@ apor:
 
 ## 确定性
 
-相同的规范化来源、投影决定、配置、依赖和 Poiet 版本必须产生相同 nascent Endem 字节。时间、工作目录、哈希表遍历、并发完成顺序和模型随机性不得进入规范字节。
+相同的规范化来源、投影决定、配置、依赖和 Ktisor 版本必须产生相同 nascent Endem 字节。时间、工作目录、哈希表遍历、并发完成顺序和模型随机性不得进入规范字节。

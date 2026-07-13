@@ -26,7 +26,7 @@ global:
     description: 进入 Noemion 的 Endem 应用，查看确定性制品工程和受限运行。
     items:
       - { href: /endem/index.html, label: Endem 应用, description: 查看唯一公开 CLI 与八个动作的边界, cover: endem, cover_label: "ONE COMMAND" }
-      - { href: /endem/docs/format.html, label: 格式与形成, description: 定义规范字段、编码与确定性形成, cover: format, cover_label: "POIE / ELENK" }
+      - { href: /endem/docs/format.html, label: 格式与形成, description: 定义规范字段、编码与确定性形成, cover: format, cover_label: "KTISE / ELENK" }
       - { href: /endem/docs/safety.html, label: 安全与证据, description: 检查有界读取、独立观察与签名边界, cover: theor, cover_label: "ELENK / THEOR" }
       - { href: /endem/docs/running.html, label: 装载与运行, description: 理解 Dromen、能力、phain 与 Iknem, cover: drase, cover_label: "SPHRA / DRASE" }
   - key: docs
@@ -96,7 +96,7 @@ modules:
           - { href: /architecture/adr-0011-endem-container.html, label: "ADR-0011 · Endem 容器格式" }
           - { href: /architecture/adr-0012-rust-core-language.html, label: "ADR-0012 · 未来 Rust 基线" }
           - { href: /architecture/adr-0013-end-p1-payload.html, label: "ADR-0013 · END-P1 内容 Profile" }
-          - { href: /architecture/adr-0014-source-manifest.html, label: "ADR-0014 · Poiet 来源清单" }
+          - { href: /architecture/adr-0014-source-manifest.html, label: "ADR-0014 · Ktisor 来源清单" }
           - { href: /architecture/adr-0015-result-domains.html, label: "ADR-0015 · 判断与运行结果" }
           - { href: /architecture/adr-0016-mene-time-model.html, label: "ADR-0016 · mene 时间模型" }
           - { href: /architecture/adr-0017-negation-and-absence.html, label: "ADR-0017 · 否定与缺席证据" }
@@ -114,6 +114,7 @@ modules:
           - { href: /architecture/adr-0029-authority-and-authorization-decisions.html, label: "ADR-0029 · 权威与授权决定" }
           - { href: /architecture/adr-0030-endem-content-and-authorization-companions.html, label: "ADR-0030 · 内容与授权伴随关系" }
           - { href: /architecture/adr-0031-release-name-collision-gate.html, label: "ADR-0031 · 发布名称冲突门禁" }
+          - { href: /architecture/adr-0032-deterministic-maker-name-collision.html, label: "ADR-0032 · 确定性制作名称冲突" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:
@@ -130,7 +131,7 @@ modules:
       - label: 系统组件
         items:
           - { href: /components/index.html, label: 组件总览 }
-          - { href: /components/poiet.html, label: Poiet }
+          - { href: /components/ktisor.html, label: Ktisor }
           - { href: /components/theor.html, label: Theor }
           - { href: /components/drasor.html, label: Drasor }
   resources:
@@ -184,6 +185,6 @@ modules:
           - { href: /endem/docs/reference.html, label: 动作与诊断参考 }
       - label: 职责边界
         items:
-          - { href: /components/poiet.html, label: Poiet }
+          - { href: /components/ktisor.html, label: Ktisor }
           - { href: /components/theor.html, label: Theor }
           - { href: /components/drasor.html, label: Drasor }

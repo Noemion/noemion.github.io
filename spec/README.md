@@ -8,7 +8,7 @@
 | --- | --- | --- | --- | --- |
 | [`endem-core.md`](endem-core.md) | `0.1.0-draft` | 通用内容标准草案；已接受语义与规范分层的条款化表达 | Endem 最小性、六个语义面、内容 Profile、分层符合性、事态与方向分离、单变量量化、测量阈值、复合判据、未知状态、确定性、安全读取、身份分层与验证责任 | 量化、测量与组合物理字段、嵌套或多变量量化、条件适用性、时间、求值、摘要与签名物理 Profile |
 | [`endem-format.md`](endem-format.md) | `0.1.0-draft` | 已采用的实验性容器草案；尚非稳定 ABI | 固定前导、定宽目录、确定性 CBOR、END-P0 结构实验与 END-P1 封闭内容 Profile | coherent/attested、签名、压缩、Synem 和跨版本承诺 |
-| [`endem-source-manifest.md`](endem-source-manifest.md) | `0.1.0-draft` | 实验性 Poiet 输入；正式来源语言出现后删除 | UTF-8 逐行指令、转义、基数、授权边界和 END-P1 映射 | 注释元数据、包含、模块、量化、时间、求值语言和兼容承诺 |
+| [`endem-source-manifest.md`](endem-source-manifest.md) | `0.1.0-draft` | 实验性 Ktisor 输入；正式来源语言出现后删除 | UTF-8 逐行指令、转义、基数、授权边界和 END-P1 映射 | 注释元数据、包含、模块、量化、时间、求值语言和兼容承诺 |
 | [`synem-core.md`](synem-core.md) | `0.1.0-draft` | 草案；已接受组合闭包边界的第一份条款化表达 | 完整闭包、精确绑定、有限无环、权限交集、成员结果分离与会话激活 | 物理容器、版本范围语法、符号、调度、远程仓库和稳定 ABI |
 | [`dromen-core.md`](dromen-core.md) | `0.1.0-draft` | 草案；已接受一次会话契约的第一份条款化表达 | 精确主体、政策与环境绑定、能力和预算求交、秘密外置、观察责任、只读失效与销毁 | 运行 API、沙箱、凭据代理、事件编码、恢复策略和组件实现；永远不建立 Dromen 文件 |
 | [`iknem-core.md`](iknem-core.md) | `0.1.0-draft` | 草案；已接受证据与评估边界的第一份条款化表达 | 主体范围、溯源、phain 对齐、证据类别、完整性、有效性、覆盖、决定分离与最小披露 | 物理容器、签名算法、透明日志、撤销分发、时钟归并、隐私策略和稳定 ABI |
@@ -47,7 +47,7 @@
 
 `../vectors/negation/cases.json` 保存 ADR-0017 的十二个否定与缺席提案向量；`../tests/negation_vector_test.py` 只执行显式负观察、空结果、封闭范围、正反例和观察故障分类，不实现日志收集器、Drasor 或求值器。
 
-`../vectors/quantification/cases.json` 保存 ADR-0018 的十二个量化与成员资格提案向量；`../tests/quantification_vector_test.py` 只检查成员范围、空集合、不同成员计数和决定性聚合，不实现 Poiet、Drasor、成员目录或求值器。
+`../vectors/quantification/cases.json` 保存 ADR-0018 的十二个量化与成员资格提案向量；`../tests/quantification_vector_test.py` 只检查成员范围、空集合、不同成员计数和决定性聚合，不实现 Ktisor、Drasor、成员目录或求值器。
 
 `../vectors/measurement/cases.json` 保存 ADR-0019 的十二个测量与阈值提案向量；`../tests/measurement_vector_test.py` 只检查构念、总体、单位、程序、聚合器、不确定区间与阈值分类，不实现采集器、统计引擎、Drasor 或求值器。
 

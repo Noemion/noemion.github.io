@@ -11,7 +11,7 @@
 2. 这个最小制品叫 Endem，而不是带品牌前缀的传统对象缩写。
 3. 当前处于规范和安全核心阶段，没有可安装软件。
 
-主行动进入入门指南，次行动进入 Endem 生命周期。首屏图形只显示 `rhem/semion/skena/telis/krin/apor`、`poie` 和 Endem，并通过关系线显示投影，不显示虚构监控数据、模型拟人形象或未冻结字段编号。
+主行动进入入门指南，次行动进入 Endem 生命周期。首屏图形只显示 `rhem/semion/skena/telis/krin/apor`、`ktise` 和 Endem，并通过关系线显示投影，不显示虚构监控数据、模型拟人形象或未冻结字段编号。
 
 ## 信息顺序
 
@@ -28,7 +28,7 @@
 ## 图形语义
 
 - Endem 面板使用六条短记录表达语义面，不表现为传统机器段表。
-- 数据流标签固定使用 `RHEM / SEMION / SKENA / TELIS / KRIN / APOR` 与 `POIE`。
+- 数据流标签固定使用 `RHEM / SEMION / SKENA / TELIS / KRIN / APOR` 与 `KTISE`。
 - Endem、Synem、Dromen、Iknem 的关系使用状态/闭包/运行证据区分，不画成四个同构文件盒。
 - 颜色只区分来源、边界、未决、验收和状态；动画不暗示真实吞吐、成功率或发布状态。
 

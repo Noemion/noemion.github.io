@@ -18,12 +18,12 @@ badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 
 第一阶段只做规范和最小安全核心，不引入模型、LLVM、MLIR、多格式抽象或大型框架。
 
-ADR-0012 已把 Rust 1.97.0 选为未来 Poiet 与生产读取核心的候选语言。项目尚未进入代码开发阶段；禁止 `unsafe`、第三方 crate、工具链锁、`Cargo.lock` 与 release 溢出检查都只是未来实现门禁。C/Rust 语言材料只作历史研究依据，不进入生产代码。
+ADR-0012 已把 Rust 1.97.0 选为未来 Ktisor 与生产读取核心的候选语言。项目尚未进入代码开发阶段；禁止 `unsafe`、第三方 crate、工具链锁、`Cargo.lock` 与 release 溢出检查都只是未来实现门禁。C/Rust 语言材料只作历史研究依据，不进入生产代码。
 
-当前没有 Poiet、Theor、CLI 工作区或实现级 fuzz。十四个 END-P1 字节向量用于检查规范资料，不能证明解析器、写入器或独立读取路径存在。只有用户明确开启代码阶段后，以下开发纪律才进入实施：
+当前没有 Ktisor、Theor、CLI 工作区或实现级 fuzz。十四个 END-P1 字节向量用于检查规范资料，不能证明解析器、写入器或独立读取路径存在。只有用户明确开启代码阶段后，以下开发纪律才进入实施：
 
 - 冻结 `rhem/semion/skena/telis/krin/apor` 的最小语义、不变量、错误和资源限制。
-- 保持规范写入器、生产侧结构检查与 `endem poie/elenk` 的确定性边界。
+- 保持规范写入器、生产侧结构检查与 `endem ktise/elenk` 的确定性边界。
 - 继续让 `endem theor` 独立实现读取、字段与引用验证，禁止共享生产解析代码。
 - 规划合法、边界、畸形和对抗语料，以及未来长时公开 CI、故障注入和跨平台复现。
 
@@ -40,7 +40,7 @@ ADR-0012 已把 Rust 1.97.0 选为未来 Poiet 与生产读取核心的候选语
 2. 引用唯一规范条款或先补 ADR。
 3. 先加入失败向量，固定缺失行为与诊断。
 4. 实现最小确定性变化；解析计算全部使用 checked arithmetic。
-5. 运行合法/畸形语料、属性/模糊测试、Poiet/Theor 差分、往返与复现检查。
+5. 运行合法/畸形语料、属性/模糊测试、Ktisor/Theor 差分、往返与复现检查。
 6. 更新规范、ADR、路线、手册和公开成熟度；删除被替代入口，不保留兼容垫片。
 
 ## 建议仓库边界
@@ -48,7 +48,7 @@ ADR-0012 已把 Rust 1.97.0 选为未来 Poiet 与生产读取核心的候选语
 ```text
 spec/       权威条款、registry 与错误码
 vectors/    规范字节、注释、合法与畸形向量
-poiet/      Rust 写入器、生产解析器、poie/elenk/pleko
+ktisor/      Rust 写入器、生产解析器、ktise/elenk/pleko
 theor/      独立只读 Theor，不依赖生产解析器
 cli/        endem 调度与独立进程边界
 ```

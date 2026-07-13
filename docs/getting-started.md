@@ -45,11 +45,11 @@ Noemion 为自然语言目标建立持久、可组合、可独立检查的工程
 唯一公开命令是 `endem`：
 
 ```text
-endem poie    endem elenk    endem pleko    endem tasse
+endem ktise    endem elenk    endem pleko    endem tasse
 endem sphra   endem theor    endem drase    endem peira
 ```
 
-一个命令入口不等于一个信任域。`theor` 背后必须使用不共享 Poiet 生产解析代码的独立实现；`drase` 背后必须是隔离的最小权限进程。私钥位于外部签名系统，模型只提交候选和能力请求。
+一个命令入口不等于一个信任域。`theor` 背后必须使用不共享 Ktisor 生产解析代码的独立实现；`drase` 背后必须是隔离的最小权限进程。私钥位于外部签名系统，模型只提交候选和能力请求。
 
 ## 推荐阅读路径
 
@@ -57,10 +57,10 @@ endem sphra   endem theor    endem drase    endem peira
 2. [架构设计指南](architecture-guide.html)：理解 Endem → Synem → Dromen → Iknem。
 3. [规范参考指南](specifications-reference.html)：区分已接受决定、待验证设计和开放问题。
 4. [Endem 应用参考](endem-reference.html)：查看八个子命令的消费者、失败责任和实施阶段。
-5. [开发指南](development-guide.html)：了解最小纵向切片、Poiet/Theor 差分和验证条件。
+5. [开发指南](development-guide.html)：了解最小纵向切片、Ktisor/Theor 差分和验证条件。
 
 ## 当前状态
 
 > 词汇与应用拓扑已经接受；规范编码和实现尚未发布。没有可安装的 `endem`、稳定扩展机制、ABI 或正式软件版本。
 
-第一实现阶段只建设 `poie`、`elenk`、`theor` 和 `peira`。组合、发布、受控运行和模型适配必须等待前一阶段的安全与复现证据。
+第一实现阶段只建设 `ktise`、`elenk`、独立 `theor` 和必需的一致性门禁。`peira` 是否值得成为公开动作仍需在代码阶段前证明；组合、发布、受控运行和模型适配必须等待前一阶段的安全与复现证据。

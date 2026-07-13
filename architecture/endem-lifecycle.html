@@ -13,7 +13,7 @@ permalink: "/architecture/endem-lifecycle.html"
     <h2>生命周期不是信任等级流水线</h2>
     <p class="lead">生命周期不是一条“越往后越可信”的流水线。每个阶段只回答一种问题，任何阶段都不能替代其他阶段。</p>
     <ul>
-      <li><code>poie</code> 说明目标契约已经确定性编码。</li>
+      <li><code>ktise</code> 说明目标契约已经确定性编码。</li>
       <li><code>pleko</code> 说明引用和冲突已经解析。</li>
       <li><code>sphra</code> 说明发布载荷与外部签名响应一致。</li>
       <li><code>drase</code> 说明当前环境已经建立受控会话。</li>
@@ -24,13 +24,13 @@ permalink: "/architecture/endem-lifecycle.html"
 
   <section class="content-wide">
     <h2>主流程</h2>
-    <div class="flow"><div class="step">受控来源 / 投影候选</div><div class="step">确定投影</div><div class="step">poie</div><div class="step">nascent Endem</div><div class="step">elenk + theor</div><div class="step">pleko</div><div class="step">coherent Endem / Synem</div><div class="step">tasse / sphra</div><div class="step">drase → Dromen</div><div class="step">Iknem → 最终决定</div></div>
+    <div class="flow"><div class="step">受控来源 / 投影候选</div><div class="step">确定投影</div><div class="step">ktise</div><div class="step">nascent Endem</div><div class="step">elenk + theor</div><div class="step">pleko</div><div class="step">coherent Endem / Synem</div><div class="step">tasse / sphra</div><div class="step">drase → Dromen</div><div class="step">Iknem → 最终决定</div></div>
   </section>
 
   <section class="content-wide">
     <h2>阶段、消费者与失败</h2>
     <div class="table-wrap"><table><thead><tr><th>阶段</th><th>权威输入</th><th>正式输出</th><th>失败责任</th><th>下游消费者</th></tr></thead><tbody>
-      <tr><td>受控来源 → poie</td><td>六个语义面，或带来源的投影候选与授权决定</td><td>nascent Endem、Poie Iknem、诊断</td><td>来源不可重放、aseme、根 skena 不唯一、telis/krin 缺失、候选越权确认</td><td>elenk、theor、pleko 或人工确认</td></tr>
+      <tr><td>受控来源 → ktise</td><td>六个语义面，或带来源的投影候选与授权决定</td><td>nascent Endem、Ktise Iknem、诊断</td><td>来源不可重放、aseme、根 skena 不唯一、telis/krin 缺失、候选越权确认</td><td>elenk、theor、pleko 或人工确认</td></tr>
       <tr><td>nascent Endem → elenk</td><td>原始对象字节、限制、规范版本和请求验证层</td><td>分层结论、Elenk Iknem；内部可产生生产验证句柄</td><td>结构、引用、语义、状态、完整性或资源限制失败</td><td>pleko、tasse、Drasor</td></tr>
       <tr><td>任意对象 → theor</td><td>原始 Endem/Synem/Iknem 字节和输出预算</td><td>只读视图、差分、诊断</td><td>畸形、未知关键记录、无法表示或资源超限</td><td>开发者、审计者、peira；不进入生产信任链</td></tr>
       <tr><td>Endem 集合 → pleko</td><td>已检查对象、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Iknem</td><td>未解析引用、冲突、循环、权限扩大、身份不稳定</td><td>tasse、theor</td></tr>
@@ -94,7 +94,7 @@ permalink: "/architecture/endem-lifecycle.html"
 
   <section class="content-band">
     <h2>未来代码阶段的实现顺序</h2>
-    <p>当前没有组件实现。只有用户明确开启代码阶段后，第一条切片才限制为“受控来源表达 → 确定性投影 → <code>poie</code> → nascent Endem → <code>elenk/theor</code> → <code>peira</code>”。最小格式、两条读取路径、恶意语料和字节复现稳定后，项目才评估组合、发布与受控运行。</p>
+    <p>当前没有组件实现。只有用户明确开启代码阶段后，第一条切片才限制为“受控来源表达 → 确定性投影 → <code>ktise</code> → nascent Endem → <code>elenk/theor</code> → 差分与复现门禁”。最小格式、两条读取路径、恶意语料和字节复现稳定后，项目才评估组合、发布与受控运行；门禁是否作为公开 <code>peira</code> 动作出现仍未决定。</p>
   </section>
   <div class="next-prev"><a href="index.html">← 架构设计</a><a href="decisions.html">架构决策 →</a></div>
 </main>

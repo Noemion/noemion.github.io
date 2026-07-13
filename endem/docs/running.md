@@ -43,7 +43,7 @@ badges: ["tasse", "sphra", "drase"]
 
 ## drase 的隔离域
 
-`endem drase` 是用户入口，实际工作由不拥有 Poiet 写入器的隔离 Drasor 完成。Drasor 先重新验证实际 attested 字节，再读取运行策略、后端绑定和能力目录。
+`endem drase` 是用户入口，实际工作由不拥有 Ktisor 写入器的隔离 Drasor 完成。Drasor 先重新验证实际 attested 字节，再读取运行策略、后端绑定和能力目录。
 
 > 预先生成的 Elenk Iknem 不能替代对实际运行输入的重新检查。
 

@@ -4,7 +4,7 @@
   "date": "2026-07-13",
   "format": "END-FMT 0.1.0-draft",
   "profile": "END-P0 0.1.0-draft",
-  "decision_scope": "first Poiet and production-reader structural core only",
+  "decision_scope": "first Ktisor and production-reader structural core only",
   "macos": {
     "platform": "macOS-26.5.1-arm64-arm-64bit",
     "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
@@ -80,7 +80,7 @@
     }
   },
   "decision": {
-    "poiet_structural_core": "Rust 1.97.0 stable",
+    "ktisor_structural_core": "Rust 1.97.0 stable",
     "rust_policy": [
       "forbid unsafe code in the first vertical slice",
       "use no third-party crates until a consumer and evidence justify one",

@@ -30,7 +30,7 @@
       "implementation_status": "vector-checker-only",
       "wire_status": "not-applicable",
       "path": "spec/endem-source-manifest.md",
-      "scope": "Experimental deterministic Poiet source manifest mapped to END-P1"
+      "scope": "Experimental deterministic Ktisor source manifest mapped to END-P1"
     },
     {
       "spec_id": "SYN-CORE",
@@ -203,7 +203,7 @@
       "version": "0.1.0-draft",
       "status": "experimental-design-profile",
       "path": "spec/profiles/end-p1.json",
-      "scope": "First closed semantic payload design profile for future Poiet, elenk, Theor and peira"
+      "scope": "First closed semantic payload design profile for future Ktisor, elenk, Theor and peira"
     },
     {
       "id": "ADP-THREAT",
@@ -290,7 +290,7 @@
     {"term": "content-profile", "kind": "specification-layer", "decision_status": "accepted", "definition": "在精确 END-CORE 与 END-FMT 版本下封闭字段、类型、枚举、规范顺序、引用、状态和资源上限的内容能力集合"},
     {"term": "END-P0", "kind": "profile", "decision_status": "experimental", "definition": "只用于结构向量和跨语言实验的有限符合性 Profile"},
     {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "用于未来首条实现路径评审的封闭六记录内容设计 Profile"},
-    {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 Poiet 使用的实验性逐行来源清单；不是稳定源语言"},
+    {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 Ktisor 使用的实验性逐行来源清单；不是稳定源语言"},
     {"term": "satisfaction-result", "kind": "result-domain", "decision_status": "accepted", "definition": "met、unmet、agno 或 fault；只描述 skena 相对 krin、phain 与 Iknem 的比较"},
     {"term": "decision-result", "kind": "result-domain", "decision_status": "accepted", "definition": "accepted、rejected 或 deferred；只描述具名权威的最终决定"},
     {"term": "session-result", "kind": "result-domain", "decision_status": "accepted", "definition": "completed、failed 或 interrupted；只描述一次 Drase 会话怎样终止"},
@@ -705,7 +705,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, Pleko and every Synem reader",
+      "failure_owner": "Ktisor, Pleko and every Synem reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
@@ -717,7 +717,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, Pleko and every Synem reader",
+      "failure_owner": "Ktisor, Pleko and every Synem reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
@@ -777,7 +777,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "Poiet and every reader",
+      "failure_owner": "Ktisor and every reader",
       "verification": [{"status": "planned", "ref": "peira:conformance-identity"}]
     },
     {
@@ -807,7 +807,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Profile maintainers, Poiet and every reader",
+      "failure_owner": "Profile maintainers, Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
@@ -844,7 +844,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet",
+      "failure_owner": "Ktisor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/two-roots-reject.json"}
@@ -855,7 +855,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and every reader",
+      "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "peira:facet-presence"}
@@ -866,7 +866,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet",
+      "failure_owner": "Ktisor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/source-range-reject.json"},
@@ -879,7 +879,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet",
+      "failure_owner": "Ktisor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"}
@@ -890,7 +890,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet",
+      "failure_owner": "Ktisor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/force-in-skena-reject.json"}
@@ -901,7 +901,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet",
+      "failure_owner": "Ktisor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "peira:telis-mode"}
@@ -912,7 +912,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, semantic authorities and Synem maintainers",
+      "failure_owner": "Ktisor, semantic authorities and Synem maintainers",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -925,7 +925,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, Theor and every semantic reader",
+      "failure_owner": "Ktisor, Theor and every semantic reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -964,7 +964,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, membership authorities and every semantic reader",
+      "failure_owner": "Ktisor, membership authorities and every semantic reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
@@ -977,7 +977,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, membership authorities and every evaluator",
+      "failure_owner": "Ktisor, membership authorities and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
@@ -1003,7 +1003,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "semantic authorities, evaluation owners and Poiet",
+      "failure_owner": "semantic authorities, evaluation owners and Ktisor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1016,7 +1016,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, measurement producers and every evaluator",
+      "failure_owner": "Ktisor, measurement producers and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1055,7 +1055,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and every semantic reader",
+      "failure_owner": "Ktisor and every semantic reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/negative-relation-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
@@ -1095,7 +1095,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, Drasor and time authorities",
+      "failure_owner": "Ktisor, Drasor and time authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
@@ -1108,7 +1108,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, Drasor and policy authorities",
+      "failure_owner": "Ktisor, Drasor and policy authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
@@ -1134,7 +1134,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and Drasor",
+      "failure_owner": "Ktisor and Drasor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "peira:krin-no-self-proof"}
@@ -1158,7 +1158,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet",
+      "failure_owner": "Ktisor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
         {"status": "planned", "ref": "peira:apor-preservation"}
@@ -1169,7 +1169,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, Drasor and every evaluator",
+      "failure_owner": "Ktisor, Drasor and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
         {"status": "planned", "ref": "peira:unknown-state-separation"}
@@ -1180,7 +1180,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and Theor",
+      "failure_owner": "Ktisor and Theor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "peira:relation-position-differential"}
@@ -1191,7 +1191,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and Drasor",
+      "failure_owner": "Ktisor and Drasor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
         {"status": "planned", "ref": "peira:model-candidate-boundary"}
@@ -1202,7 +1202,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, every content validator and authorization companion resolver",
+      "failure_owner": "Ktisor, every content validator and authorization companion resolver",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-missing-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-mismatch-reject.json"},
@@ -1228,7 +1228,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "Poiet",
+      "failure_owner": "Ktisor",
       "verification": [
         {"status": "planned", "ref": "peira:determinism-same-input"},
         {"status": "planned", "ref": "peira:reproducible-two-environments"}
@@ -1239,7 +1239,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "Poiet, sphra and Drasor",
+      "failure_owner": "Ktisor, sphra and Drasor",
       "verification": [{"status": "planned", "ref": "peira:state-non-implication"}]
     },
     {
@@ -1260,7 +1260,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and release validation",
+      "failure_owner": "Ktisor and release validation",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/identity-core.md"},
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
@@ -1273,7 +1273,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, identity producers and authorization companion consumers",
+      "failure_owner": "Ktisor, identity producers and authorization companion consumers",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/negative-relation-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/external-context-identity-valid.json"},
@@ -1328,7 +1328,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, Theor and every reader",
+      "failure_owner": "Ktisor, Theor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/two-roots-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/force-in-skena-reject.json"},
@@ -1366,7 +1366,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "Poiet and every reader",
+      "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/minimal-structural.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/bad-magic.hex"},
@@ -1380,7 +1380,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "Poiet and every reader",
+      "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "planned", "ref": "peira:wire-layout-variants"}
@@ -1391,7 +1391,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and every reader",
+      "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "planned", "ref": "peira:wire-size-and-reserved"}
@@ -1413,7 +1413,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "Poiet and every reader",
+      "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/directory-order.hex"},
@@ -1447,7 +1447,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and every reader",
+      "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/minimal-structural.hex"},
         {"status": "planned", "ref": "peira:wire-facet-cardinality"}
@@ -1458,7 +1458,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "Poiet and every reader",
+      "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/payload-not-map.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/non-minimal-cbor.hex"},
@@ -1489,7 +1489,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and every reader",
+      "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p0.json"},
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
@@ -1514,7 +1514,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and every END-P1 reader",
+      "failure_owner": "Ktisor and every END-P1 reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
@@ -1529,7 +1529,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and every END-P1 reader",
+      "failure_owner": "Ktisor and every END-P1 reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
@@ -1559,7 +1559,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Poiet source reader",
+      "failure_owner": "Ktisor source reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/endem-source-manifest.md"},
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
@@ -1571,7 +1571,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "Poiet source reader",
+      "failure_owner": "Ktisor source reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/source/minimal.ends"},
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"}
@@ -1582,7 +1582,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Poiet source reader",
+      "failure_owner": "Ktisor source reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
         {"status": "planned", "ref": "peira:source-escape-boundaries"}
@@ -1593,7 +1593,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Poiet",
+      "failure_owner": "Ktisor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/source/minimal.ends"},
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
@@ -1606,7 +1606,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and upstream authoring authority",
+      "failure_owner": "Ktisor and upstream authoring authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
@@ -1618,7 +1618,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Poiet",
+      "failure_owner": "Ktisor",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
@@ -2196,7 +2196,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "every future semantic review authority, candidate producer and Poiet input boundary",
+      "failure_owner": "every future semantic review authority, candidate producer and Ktisor input boundary",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},

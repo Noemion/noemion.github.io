@@ -103,7 +103,8 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0029-authority-and-authorization-decisions.html",
     "architecture/adr-0030-endem-content-and-authorization-companions.html",
     "architecture/adr-0031-release-name-collision-gate.html",
-    "components/poiet.html",
+    "architecture/adr-0032-deterministic-maker-name-collision.html",
+    "components/ktisor.html",
     "components/theor.html",
     "components/drasor.html",
 }
@@ -129,7 +130,7 @@ DOC_GUIDE_HEADINGS = {
         "第一阶段范围", "规范与 ADR 先行", "实现工作流", "建议仓库边界", "审查清单", "模型与协议",
     ],
     "docs/endem-reference.html": [
-        "应用总览", "Poiet 子命令", "theor 的独立性", "drase 的隔离性", "不建设独立模型平台",
+        "应用总览", "Ktisor 子命令", "theor 的独立性", "drase 的隔离性", "不建设独立模型平台",
     ],
     "docs/specifications-reference.html": [
         "权威顺序", "Endem", "Synem", "Dromen 与 Iknem", "ADR 与开放问题",
@@ -230,11 +231,12 @@ LEGACY_PUBLIC_TERMS = re.compile(
     r"(?:^|[/\"'])tools/"
 )
 RETIRED_RELEASE_TERMS = re.compile(
-    r"\b(?:praxor|praxe|tekmor)\b|\bTEK(?:-[A-Z0-9]+)+\b|\bTK-[A-Z0-9-]+\b|\btek-core\b",
+    r"\b(?:praxor|praxe|tekmor|poiet|poie)\b|\bTEK(?:-[A-Z0-9]+)+\b|\bTK-[A-Z0-9-]+\b|\btek-core\b",
     re.IGNORECASE,
 )
 RETIRED_RELEASE_EVIDENCE_PATHS = {
     "architecture/adr-0031-release-name-collision-gate.html",
+    "architecture/adr-0032-deterministic-maker-name-collision.html",
     "design-system/name-audit.md",
 }
 NORMATIVE_ROUTES = (
@@ -277,8 +279,9 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0029-authority-and-authorization-decisions.html",
     "architecture/adr-0030-endem-content-and-authorization-companions.html",
     "architecture/adr-0031-release-name-collision-gate.html",
+    "architecture/adr-0032-deterministic-maker-name-collision.html",
     "architecture/open-questions.html",
-    "components/poiet.html",
+    "components/ktisor.html",
     "components/theor.html",
     "components/drasor.html",
     "development/implementation-roadmap.html",
@@ -312,8 +315,8 @@ DEPRECATED_LAYOUT_TERM = "he" + "ro"
 
 CURRENT_DOMAIN_IDENTIFIERS = {
     "endem", "rhem", "semion", "skena", "telis", "krin", "apor", "phain",
-    "synem", "dromen", "iknem", "poiet", "theor", "drasor",
-    "poie", "elenk", "pleko", "tasse", "sphra", "drase", "peira",
+    "synem", "dromen", "iknem", "ktisor", "theor", "drasor",
+    "ktise", "elenk", "pleko", "tasse", "sphra", "drase", "peira",
 }
 MAINSTREAM_LANGUAGE_KEYWORDS = {
     # C, C++, Java, ECMAScript, Go, Rust, Swift, Kotlin and Python keyword union.
@@ -353,7 +356,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "Synem",
             "Iknem",
             "Dromen",
-            "Poiet",
+            "Ktisor",
             "Theor",
             "Drasor",
             "生产验证和",
@@ -377,9 +380,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "判断与运行结果分层",
         ),
     },
-    "components/poiet.html": {
+    "components/ktisor.html": {
         "required": (
-            "Poiet",
+            "Ktisor",
             "Endem",
             "确定性",
             "模型",
@@ -576,6 +579,17 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "不保留别名、重定向、双写或兼容垫片",
             "Praxor Lab",
             "tekmor.xyz",
+        ),
+    },
+    "architecture/adr-0032-deterministic-maker-name-collision.html": {
+        "required": (
+            "Ktisor",
+            "ktise",
+            "PFA Open Inference Engine",
+            "大小写不能形成可靠区分",
+            "不保留别名、重定向、双写或兼容垫片",
+            "动作名称不等于实现优先级",
+            "peira",
         ),
     },
     "endem/docs/safety.html": {
@@ -1056,7 +1070,7 @@ def validate_legacy_source_vocabulary():
             retired_match = RETIRED_RELEASE_TERMS.search(text)
             if retired_match:
                 errors.append(
-                    f"{relative}: retired release terminology remains outside ADR-0031 and name audit "
+                    f"{relative}: retired release terminology remains outside accepted naming evidence "
                     f"{retired_match.group(0)!r}"
                 )
         if DEPRECATED_LAYOUT_TERM in text.lower():
@@ -1811,6 +1825,11 @@ def validate_jekyll_sources():
             "旧名 Praxor",
             "旧名 Tekmor",
             "ADR-0031",
+            "旧名 Poiet",
+            "PFA Open Inference Engine",
+            "Ktisor",
+            "ktise",
+            "ADR-0032",
         ):
             if token not in name_audit_text:
                 errors.append(f"name audit missing evidence or boundary: {token!r}")
@@ -2038,7 +2057,7 @@ def validate_jekyll_sources():
             "current_stage.title",
             'class="current-stage-feature"',
             'class="current-stage-visual"',
-            'src="../assets/images/secure-endem-poiet.svg"',
+            'src="../assets/images/secure-endem-ktisor.svg"',
             'width="1440" height="960"',
             'class="current-stage-panel"',
             'class="project-progress-section"',
@@ -2056,7 +2075,7 @@ def validate_jekyll_sources():
                 errors.append(f"current stage page exposes internal workflow copy: {forbidden}")
 
     image_contracts = {
-        "assets/images/secure-endem-poiet.svg": (20_000, 'src="../assets/images/secure-endem-poiet.svg"'),
+        "assets/images/secure-endem-ktisor.svg": (20_000, 'src="../assets/images/secure-endem-ktisor.svg"'),
     }
     image_consumers = (SOURCE_ROOT / "index.html").read_text() + (SOURCE_ROOT / "development/current-stage.html").read_text()
     for image_route, (maximum_bytes, source_token) in image_contracts.items():
@@ -2834,7 +2853,7 @@ def main():
                 ["architecture/endem-lifecycle.html", "architecture"],
                 ["architecture/decisions.html", "architecture"],
                 ["specifications/endem.html", "architecture"],
-                ["components/poiet.html", "architecture"],
+                ["components/ktisor.html", "architecture"],
                 ["components/theor.html", "architecture"],
                 ["components/drasor.html", "architecture"],
                 ["docs/getting-started.html", "docs"],

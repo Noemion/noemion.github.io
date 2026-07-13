@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0011-endem-container.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0011</span></nav>
-  <header class="content-introduction"><h1>ADR-0011<br>Endem 实验性容器格式</h1><p>采用固定前导、显式记录目录和确定性载荷子集，为 Poiet 与独立 Theor 建立同一组可对抗的规范字节。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">END-FMT 0.1</span><span class="badge">Not Stable ABI</span></div></header>
+  <header class="content-introduction"><h1>ADR-0011<br>Endem 实验性容器格式</h1><p>采用固定前导、显式记录目录和确定性载荷子集，为 Ktisor 与独立 Theor 建立同一组可对抗的规范字节。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">END-FMT 0.1</span><span class="badge">Not Stable ABI</span></div></header>
 
   <section class="content-stack">
     <h2>决定</h2>
@@ -18,7 +18,7 @@ permalink: "/architecture/adr-0011-endem-container.html"
   <section class="content-wide">
     <h2>为什么现在必须作出决定</h2>
     <div class="table-wrap"><table><thead><tr><th>当前问题</th><th>没有格式草案的后果</th><th>这项决定提供什么</th></tr></thead><tbody>
-      <tr><td>Poiet 与 Theor 需要解释同一原始字节</td><td>两条路径只能比较内部 JSON，无法发现偏移、长度、对齐和顺序错误。</td><td>共同的公开字节向量，但不共享解析代码。</td></tr>
+      <tr><td>Ktisor 与 Theor 需要解释同一原始字节</td><td>两条路径只能比较内部 JSON，无法发现偏移、长度、对齐和顺序错误。</td><td>共同的公开字节向量，但不共享解析代码。</td></tr>
       <tr><td>所有输入都不可信</td><td>资源上限和 checked arithmetic 只能停留在口号。</td><td>固定乘加、范围、重叠、对齐和 Profile 检查点。</td></tr>
       <tr><td>确定性必须可观察</td><td>相同语义仍可能因字段顺序、时间戳或编码选择产生不同字节。</td><td>固定目录顺序、最短编码、确定长度和零填充。</td></tr>
       <tr><td>实现语言实验需要同一目标</td><td>候选语言会各自发明输入结构，比较结果没有意义。</td><td>P0-W4 可以使用同一组接受和拒绝向量。</td></tr>
@@ -55,7 +55,7 @@ permalink: "/architecture/adr-0011-endem-container.html"
       <tr><td>完整采用 ELF</td><td>地址、段、节、符号和重定位语义围绕机器程序，错误地扩大 Endem 的机器对象负担。</td><td>不重新考虑；只持续借鉴经过边界审查的机制。</td></tr>
       <tr><td>只使用通用 CBOR 文件</td><td>没有固定路线图、记录范围和六语义面目录，无法在解释复杂载荷前完成有界结构检查。</td><td>若未来证明固定目录没有真实消费者或不能带来独立验证价值。</td></tr>
       <tr><td>自创完整 TLV 类型系统</td><td>会同时发明容器和数据模型，增加解析器、规范和互操作风险。</td><td>只有受限 CBOR 无法满足已验证的零拷贝、流式或安全要求时。</td></tr>
-      <tr><td>Protocol Buffers、FlatBuffers 或大型 IR 框架</td><td>引入生成代码或复杂运行时，会削弱 Poiet/Theor 的故障独立性，并超出第一阶段小型可信核心。</td><td>后续非可信适配层存在明确消费者且不进入规范字节时。</td></tr>
+      <tr><td>Protocol Buffers、FlatBuffers 或大型 IR 框架</td><td>引入生成代码或复杂运行时，会削弱 Ktisor/Theor 的故障独立性，并超出第一阶段小型可信核心。</td><td>后续非可信适配层存在明确消费者且不进入规范字节时。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -68,7 +68,7 @@ permalink: "/architecture/adr-0011-endem-container.html"
   <section class="content-stack">
     <h2>后果与停止条件</h2>
     <ul>
-      <li>Poiet 和 Theor 可以开始针对同一字节边界做语言、模糊测试与差分实验。</li>
+      <li>Ktisor 和 Theor 可以开始针对同一字节边界做语言、模糊测试与差分实验。</li>
       <li>现有语义 JSON 向量继续验证 END-CORE；新增十六进制向量只验证结构和 Profile，不混淆两类证据。</li>
       <li>格式草案增加了规范维护成本；条款、登记、错误目录、Profile 和向量必须同步。</li>
       <li>如果两个独立解析实验不能在不共享代码的情况下稳定解释这些向量，必须修改或撤回草案，不以实现补丁掩盖规范缺陷。</li>

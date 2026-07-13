@@ -11,7 +11,7 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
 
   <section class="content-stack">
     <h2>直接决定</h2>
-    <p class="lead">Poiet 的首个纵向切片不写 END-P0。END-P0 只保留为固定头部、目录和受限 CBOR 的结构实验；生产候选改用 <code>profile_id=2</code> 的 END-P1，并且必须在六个记录内遵守封闭字段 schema。</p>
+    <p class="lead">Ktisor 的首个纵向切片不写 END-P0。END-P0 只保留为固定头部、目录和受限 CBOR 的结构实验；生产候选改用 <code>profile_id=2</code> 的 END-P1，并且必须在六个记录内遵守封闭字段 schema。</p>
     <p>这避免两种错误：一是把六个空映射误称为 Endem，二是让未来实现私自发明字段。END-P1 仍是实验性设计 Profile，不是稳定 ABI；发现反例时可以直接修订，但必须同步 ADR、Profile、正反字节向量和验证方案。</p>
   </section>
 
@@ -20,7 +20,7 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
     <div class="table-wrap"><table><thead><tr><th>现有证据</th><th>能够证明</th><th>不能证明</th></tr></thead><tbody>
       <tr><td>END-P0 六个结构记录</td><td>读取器能安全定位六个关键载荷。</td><td>载荷内有哪些字段、引用和语义约束。</td></tr>
       <tr><td>七个语义 JSON 向量</td><td>正负极性的两个可接受模型和五种拒绝原因能被实际执行。</td><td>JSON 是规范字节，或任意 JSON 可以直接写入 Endem。</td></tr>
-      <tr><td>C/Rust 结构实验</td><td>两种语言能对同一结构错误给出一致首错。</td><td>任何原型已经实现 Poiet、Theor 或 END-CORE。</td></tr>
+      <tr><td>C/Rust 结构实验</td><td>两种语言能对同一结构错误给出一致首错。</td><td>任何原型已经实现 Ktisor、Theor 或 END-CORE。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -29,7 +29,7 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
     <ul>
       <li>六个记录继续使用 kind 1–6；每个记录的根映射只允许登记键，未知键关闭失败。</li>
       <li>符号、关系、角色、事态、观察要求和未决项使用显式标识与交叉引用，不复制自由文本图。</li>
-      <li>数组按稳定身份或编码值排序，重复项拒绝；Poiet 不采用输入顺序或哈希表遍历顺序。</li>
+      <li>数组按稳定身份或编码值排序，重复项拒绝；Ktisor 不采用输入顺序或哈希表遍历顺序。</li>
       <li>来源范围以 Unicode 标量计数，并在解释投影前检查；媒体类型与语言标签保留原始标准化文本。</li>
       <li>第一切片只编码 <code>kine</code>。ADR-0016 已固定 <code>mene</code> 的抽象时间语义，但 END-P1 没有相应字段；它必须等待新的 Profile 与正反字节向量。</li>
       <li><code>apor</code> 即使为空也编码为含显式 items 数组的记录；非空项保存候选、冲突、影响范围、允许的解决方式和决定主体。</li>
@@ -52,7 +52,7 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
 
   <section class="content-band">
     <h2>进入实现的条件</h2>
-    <p>END-P1 的接受、未知字段、悬空引用和来源范围向量已经形成，并由资料检查器读取；这只满足未来实现前的规范准备条件。项目尚未进入代码开发阶段，因此不得建立生产 Poiet 工作区，也没有 Poiet/Theor 实现或符合性声明。</p>
+    <p>END-P1 的接受、未知字段、悬空引用和来源范围向量已经形成，并由资料检查器读取；这只满足未来实现前的规范准备条件。项目尚未进入代码开发阶段，因此不得建立生产 Ktisor 工作区，也没有 Ktisor/Theor 实现或符合性声明。</p>
   </section>
   <div class="next-prev"><a href="adr-0012-rust-core-language.html">← ADR-0012</a><a href="adr-0014-source-manifest.html">ADR-0014 →</a></div>
 </main>

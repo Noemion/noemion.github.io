@@ -14,7 +14,7 @@ permalink: "/specifications/endem.html"
     <p class="lead">Endem 是最小、独立有效且可验证的期望终态单元。它把一项自然语言目标变成可检查的对象—关系契约。</p>
     <p>这份契约保存来源表达、已确认意义、中性可能事态、目标方向、比较规则和未决信息。它不规定模型采用哪条提示、计划或推理过程。</p>
     <p class="callout"><strong>权威边界：</strong>这是一份面向读者的解释。通用内容义务与条款 ID 以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 内容标准</a>为准；当前封闭字段集合以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 内容 Profile</a>为准；实验性容器以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 条款源</a>为准。三层分别验证，END-FMT 0.1.0-draft 尚非稳定 ABI。</p>
-    <p class="callout"><strong>最小不变量：</strong>一个 Endem 必须且只能有一个根 <code>skena</code> 节点。根节点可以组合相互依赖的子命题；如果两个根可以独立实现、验收或失败，Poiet 必须形成两个 Endem，再由 Synem 组合。</p>
+    <p class="callout"><strong>最小不变量：</strong>一个 Endem 必须且只能有一个根 <code>skena</code> 节点。根节点可以组合相互依赖的子命题；如果两个根可以独立实现、验收或失败，Ktisor 必须形成两个 Endem，再由 Synem 组合。</p>
   </section>
 
   <section class="content-wide">
@@ -46,12 +46,12 @@ permalink: "/specifications/endem.html"
     <h2>形式必须由结构显示</h2>
     <p><a href="../about/intellectual-foundations.html">思想与方法基础</a>用《逻辑哲学论》命题 3.141 解释“结构不是词语堆积”的问题来源。这里不从引文推导规范；ADR-0010、本规范和测试共同定义 Endem 的正式结构要求。</p>
     <p><code>semion</code>、<code>skena</code> 和适用 Iknem 中的 <code>phain</code> 使用同一组稳定符号身份。关系节点必须保存谓词身份、有序或具名角色、极性、作用域和来源映射。第一阶段复合节点只允许 <code>all_of</code> 与 <code>any_of</code>；否定保留在关系极性，条件和排他析取仍未冻结。</p>
-    <p>规范载荷不得包含由作者填写的 <code>logical_form</code>、<code>valid</code> 或 <code>true</code> 自我声明。Poiet 和独立 Theor 通过关系拓扑、角色数量、组合边与引用位置分别验证结构。只保存六段文本的实现不符合本规范。</p>
+    <p>规范载荷不得包含由作者填写的 <code>logical_form</code>、<code>valid</code> 或 <code>true</code> 自我声明。Ktisor 和独立 Theor 通过关系拓扑、角色数量、组合边与引用位置分别验证结构。只保存六段文本的实现不符合本规范。</p>
   </section>
 
   <section class="content-wide">
     <h2>来源与候选绑定</h2>
-    <div class="flow"><div class="step">rhem · 来源</div><div class="step">semion · 投影</div><div class="step">skena · 事态</div><div class="step">telis · 方向</div><div class="step">krin · 判据</div><div class="step">apor · 未决</div><div class="step">poie → nascent Endem</div></div>
+    <div class="flow"><div class="step">rhem · 来源</div><div class="step">semion · 投影</div><div class="step">skena · 事态</div><div class="step">telis · 方向</div><div class="step">krin · 判据</div><div class="step">apor · 未决</div><div class="step">ktise → nascent Endem</div></div>
     <ul>
       <li>受控来源卡可以由版本化投影规则和具名决定形成规范记录，但完整内容接受必须另外核对精确授权伴随关系。</li>
       <li>模型或外部系统只能提交绑定来源范围、替代项和证据的候选，不能直接写 Endem。</li>
@@ -170,7 +170,7 @@ permalink: "/specifications/endem.html"
       <tr><td>主通道或备用通道可用</td><td>决定性 <code>met</code> 可以短路，但保存完整求值覆盖</td><td>未求值叶不是 <code>agno</code>，已遇故障不能消失</td></tr>
       <tr><td>如果批准就部署</td><td>拆分目标与依赖，或把适用性保留在 <code>apor</code></td><td>当前不得嵌入条件脚本或伪造“不适用”结果</td></tr>
     </tbody></table></div>
-    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。三十个场景当前登记为非规范材料，不证明 Poiet、Theor、Drasor 或任何自然语言解析、时间、缺席、量化、测量、组合求值或授权组件已经存在。</p>
+    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。三十个场景当前登记为非规范材料，不证明 Ktisor、Theor、Drasor 或任何自然语言解析、时间、缺席、量化、测量、组合求值或授权组件已经存在。</p>
   </section>
 
   <section class="content-wide">
