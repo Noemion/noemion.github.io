@@ -11,7 +11,7 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
-    <p class="lead">ADR-0010 已经采用现行制品、六个语义面和生命周期；ADR-0031 至 ADR-0033 又直接替换冲突名称与易误读的标准 ID。ADR-0034 重新打开具体拼写的发行读音审查；ADR-0035 把公开动作收敛为五个。</p>
+    <p class="lead">ADR-0010 与 ADR-0015 已经采用现行制品、六个语义面、生命周期和结果域，ADR-0031 至 ADR-0033 又直接替换冲突名称与易误读的标准 ID。它们仍是当前规范基线，但后续非规范审查已经重新打开具体发行拼写，并质疑 <code>attested</code> 是否把外部签名与证明关系误写成内容状态；形成新 ADR 前不能把这项边界称为最终关闭。</p>
     <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0030 固定 Synem、Iknem、内容标准分层、Dromen、结构化诊断、协议适配、身份、文本、授权以及内容与外部决定的伴随边界；ADR-0031 至 ADR-0035 固定名称迁移、口头区分与公开动作门禁。</p>
     <p>当前没有 Theor、权威目录、政策求值器或其他组件实现。稳定 ABI、时间与组合物理字段、嵌套或多变量量化、Synem 与 Iknem 物理容器、正式来源语言、Unicode 标识符、原始来源字节绑定、摘要和签名物理 Profile、授权决定与最终决定事件编码仍未冻结。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
@@ -60,7 +60,7 @@ permalink: "/architecture/open-questions.html"
     <h2>实施与发布条件</h2>
     <details open><summary>独立 Theor 使用什么实现边界？</summary><p>未来 Theor 必须拥有自己的数据结构、解码器、验证器和错误路径，只与 Ktisor 共享公开规范和字节向量。当前没有实现；是否采用 Rust 或第二种语言，必须在用户开启代码阶段后根据共同故障风险和维护成本重新确认。</p></details>
     <details><summary>独立 Theor 还缺什么证据？</summary><p>当前只有规范向量、资料检查器和未来验证条件。用户开启代码阶段后，才建立依赖审计、差分测试、长时 fuzz、故障注入和跨平台运行，用来寻找两条独立路径的共同输入假设。</p></details>
-    <details><summary>哪些现行名称还值得成为发行专名？</summary><p>尚未决定。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/release-terminology-simplification-proposal.md">非规范发行术语去专名化提案</a>建议只保留 Endem 进入人类验证，并比较对象、角色与动作的直白候选；后续<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-facet-terminology-proposal.md">语义面与观察词提案</a>又保留七项职责，但建议以 <code>source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation</code> 比较现行短词。两组候选都不是现行规范值、字段、CLI、别名或重定向；只有用户接受方向、独立人类验证通过并形成迁移 ADR 后，才一次性替换旧入口。</p></details>
+    <details><summary>哪些现行名称还值得成为发行专名？</summary><p>尚未决定。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/release-terminology-simplification-proposal.md">非规范发行术语去专名化提案</a>建议只保留 Endem 进入人类验证，并比较对象、角色与动作的直白候选；后续<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-facet-terminology-proposal.md">语义面与观察词提案</a>又保留七项职责，但建议以直白字段比较现行短词。最新<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md">生命周期与结果词提案</a>还发现 <code>attested</code> 把外部多值签名和证明关系误写成内容单值状态，并比较 <code>formed/resolved/undetermined/no_allowed_projection/stopped</code>。三组候选都不是现行规范值、字段、CLI、别名或重定向；只有用户接受方向、独立人类验证通过并形成迁移 ADR 后，才一次性替换旧入口。</p></details>
     <details><summary>名称何时满足正式发布条件？</summary><p>ADR-0031 至 ADR-0033 只完成工程初筛、当前名称选择与标准 ID 可读性治理；ADR-0034 进一步要求为目标语言登记读音，并用首次朗读、听写回填和成对混淆记录证明词表内口头区分。具体任务、样本边界和停止规则见<a href="../docs/terminology-and-pronunciation.html">术语与读音验证指南</a>，当前尚未执行。<code>kine/mene</code> 已在此前先未通过桌面门禁，<code>reach/maintain</code> 也只处于候选状态。公开发行前仍需重新检查相邻 AI 与开发工具、目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。任一门禁失败都必须重新命名或给出经验证的新候选，审查完成前不得声称名称已具备发行条件。</p></details>
     <details><summary>怎样证明构建可复现？</summary><p>ID-REP-001 已要求精确输入闭包、工具与参数、环境约束、至少两条独立产出路径和逐字节输出比较。仍需在代码阶段建立真实隔离构建、缓存独立性、差异归因和发布证据；build ID、签名和一次重跑都不能替代这些证据。</p></details>
   </section>

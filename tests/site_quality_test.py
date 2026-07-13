@@ -1659,6 +1659,73 @@ def validate_jekyll_sources():
                         f"{current_interface.relative_to(SOURCE_ROOT)} exposes non-normative facet candidate {candidate_field}"
                     )
 
+    lifecycle_terms_proposal = SOURCE_ROOT / "spec" / "lifecycle-and-result-terminology-proposal.md"
+    if not lifecycle_terms_proposal.exists():
+        errors.append("missing non-normative lifecycle and result terminology proposal")
+    else:
+        proposal_text = lifecycle_terms_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "结论状态：桌面审查完成；等待用户决定与人类验证",
+            "不构成 ADR、CORE 规范、内容 Profile、登记项、迁移决定或实现要求",
+            "不进入 `registry.json`",
+            "停止把 `attested` 作为 Endem 生命周期状态",
+            "`content state: formed / resolved`",
+            "signed-statement binding",
+            "`satisfaction: met / unmet / undetermined / fault`",
+            "`no_allowed_projection`",
+            "`session: completed / failed / stopped`",
+            "RFC 9334 RATS Architecture",
+            "in-toto Attestation Framework",
+            "GNU Automake",
+            "MCP 2025-11-25 Tasks",
+            "A2A 最新规范",
+            "W3C SCXML",
+            "NIST AI RMF Core",
+            "候选词不是别名、兼容值或规范化结果",
+            "subject.attested",
+            "每次内容变化产生新身份",
+            "这些结论不会在本轮改变任何现行规范值",
+        ):
+            if token not in proposal_text:
+                errors.append(f"lifecycle terminology proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "lifecycle-and-result-terminology" in registry_text:
+            errors.append("non-normative lifecycle terminology proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "design-system" / "name-audit.md",
+            SOURCE_ROOT / "design-system" / "language-and-naming.md",
+            SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "content-quality-audit.md",
+        ):
+            if "lifecycle-and-result-terminology-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the lifecycle terminology proposal"
+                )
+        for current_interface in (
+            SOURCE_ROOT / "spec" / "endem-core.md",
+            SOURCE_ROOT / "spec" / "dromen-core.md",
+            SOURCE_ROOT / "spec" / "profiles" / "end-p1.json",
+            SOURCE_ROOT / "vectors" / "dromen" / "cases.json",
+            SOURCE_ROOT / "architecture" / "endem-lifecycle.html",
+        ):
+            interface_text = current_interface.read_text()
+            for candidate_value in (
+                "content state: formed",
+                "content state: resolved",
+                "satisfaction: undetermined",
+                "no_allowed_projection",
+                "session: stopped",
+                "signed-statement binding",
+            ):
+                if candidate_value in interface_text:
+                    errors.append(
+                        f"{current_interface.relative_to(SOURCE_ROOT)} exposes non-normative lifecycle candidate {candidate_value}"
+                    )
+
     preview_proposal = SOURCE_ROOT / "spec" / "preview-simulation-and-approval-proposal.md"
     if not preview_proposal.exists():
         errors.append("missing non-normative preview, simulation, and approval research proposal")

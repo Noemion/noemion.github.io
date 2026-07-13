@@ -16,6 +16,8 @@
 
 六个语义面与结构化观察也不能因为 ADR-0010 已接受职责就跳过名称审查。[语义面与观察词去专名化提案](../spec/semantic-facet-terminology-proposal.md)保留七项边界，却建议以 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation` 比较现行希腊化短词。该结论同样只是人类验证候选，不修改现行字段或 Profile。
 
+生命周期与结果词也必须通过同一门禁。[生命周期与结果词边界提案](../spec/lifecycle-and-result-terminology-proposal.md)判定 `attested` 不应作为内容状态，因为外部签名与证明是依赖政策和截止点的多值关系；它同时比较 `formed/resolved/undetermined/no_allowed_projection/stopped`。这些候选不改变现行规范值、Dromen 向量或结果矩阵。
+
 ## 无数字词汇原则
 
 Noemion 创造的是可以长期口述、书写和实现的领域语言，不用数字代替尚未完成的命名工作。新造的工具、组件、制品、动作、语义面、结果词和关键概念必须优先采用不含阿拉伯数字的短词：不得添加数字后缀表示“新版”，不得把层级或阶段塞进词中，也不得用 `0`、`1` 等数字模仿字母。
@@ -77,7 +79,7 @@ https://www.etymonline.com/word/-eme
 
 ## 核心领域语言
 
-下表记录现行设计阶段标识和已冻结职责，不证明每一项都应保留为发行专名。对象、角色与动作候选见[发行术语去专名化研究提案](../spec/release-terminology-simplification-proposal.md)，语义面与观察候选见[语义面与观察词提案](../spec/semantic-facet-terminology-proposal.md)；在单独 ADR 接受前，下表不得提前双写候选机器值。
+下表记录现行设计阶段标识和已冻结职责，不证明每一项都应保留为发行专名。对象、角色与动作候选见[发行术语去专名化研究提案](../spec/release-terminology-simplification-proposal.md)，语义面与观察候选见[语义面与观察词提案](../spec/semantic-facet-terminology-proposal.md)，生命周期与结果候选见[生命周期和结果词提案](../spec/lifecycle-and-result-terminology-proposal.md)；在单独 ADR 接受前，下表不得提前双写候选机器值。
 
 | 名称 | 直白工程定义 | 不能被误解为 |
 | --- | --- | --- |
@@ -296,6 +298,7 @@ endem drase search.endem
 
 - [Noemion 发行术语去专名化研究提案](../spec/release-terminology-simplification-proposal.md)：先审查专名必要性，再比较直白对象、角色和动作候选；当前非规范。
 - [Noemion 语义面与观察词去专名化研究提案](../spec/semantic-facet-terminology-proposal.md)：保留七项职责边界，同时比较直白字段与观察名称；当前非规范。
+- [Noemion 生命周期与结果词边界研究提案](../spec/lifecycle-and-result-terminology-proposal.md)：把内容形成分类与外部签名、证明关系分开，并比较直白结果词；当前非规范。
 
 - MDN，《文档写作规范》：https://developer.mozilla.org/zh-CN/docs/MDN/Writing_guidelines/Writing_style_guide
 - Kubernetes，《中文本地化样式指南》：https://kubernetes.io/zh-cn/docs/contribute/localization_zh/

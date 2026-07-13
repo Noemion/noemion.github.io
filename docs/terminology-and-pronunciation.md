@@ -22,6 +22,8 @@ Noemion 目前只接受了术语职责和读音审查方法，没有冻结任何
 
 [语义面与观察词去专名化提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-facet-terminology-proposal.md)把门禁继续应用到 `rhem/semion/skena/telis/krin/apor/phain`。提案保留七项职责分层，并以七个直白字段名进入验证；它同样不修改现行 END-CORE、Profile 或来源清单。
 
+[生命周期与结果词边界提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md)把门禁应用到 `nascent/coherent/attested`、`agno/aseme` 与会话终止词。它先纠正 `attested` 把外部关系写成内容状态的边界，再比较直白候选；读音流畅不能保住语义错误的名称，普通词也仍须在完整域限定短语中验证。
+
 桌面证据已经足以排除 `kine/mene` 作为首次正式发行拼写，但没有改变现行规范值。[`telis` 发行词候选提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/telis-release-terms-proposal.md)推荐先验证 `reach/maintain`；这两个词仍是候选，不是官方术语、别名或规范化结果。
 
 验证分成两个阶段：先让未接触项目的参与者暴露自然读法，再用另一批参与者检验候选读音能否在完整词表中被唯一听出、写回并匹配正确职责。两个阶段不能使用同一批人。
