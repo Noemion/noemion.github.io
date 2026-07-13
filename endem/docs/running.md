@@ -94,11 +94,13 @@ MCP 和 A2A 只适合作为 Praxor 外缘的协议适配器：
 
 远端工具说明、Agent Card、任务状态、参数结构和返回内容均是不可信声明，不能直接成为能力授权、Endem 状态或最终决定。A2A 的补丁号只固定查阅的文档快照，不进入协议协商。
 
-运行观测以后可以通过带版本的 [OpenTelemetry GenAI 语义约定](https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai)导出。该约定当前处于 Development；输入、输出和工具数据可能含有敏感信息，因此默认不导出正文，外部字段也不构成 Tekmor 身份。
+运行观测以后可以通过带版本的 [OpenTelemetry GenAI 语义约定独立仓库](https://github.com/open-telemetry/semantic-conventions-genai)导出。该约定仍在演进且 Schema URL 待定；输入、输出和工具数据可能含有敏感信息，因此默认不导出正文，外部字段也不构成 Tekmor 身份。
 
 ## Tekmor 与最终决定
 
-Tekmor 记录有限的来源、检查、绑定、签名、运行或决定依据。它不等于数学证明，也不自动证明 claim 为真。
+Tekmor 记录有限的来源、检查、绑定、签名、运行或决定依据。它不等于数学证明，也不自动证明 claim 为真。每项记录必须绑定精确主体、主张范围和有限无环溯源，并分开原始观察、确定性派生、外部断言、人工判断和模型候选。
+
+`valid / invalid / revoked` 由验证者在精确政策、参考值、环境和截止点下形成，不是记录的自填状态。`sufficient / insufficient` 只相对当前 `krin` 与观察责任计算；重复事件、证据数量、签名或模型评分不能补齐缺失范围。`decision-record` 只记录具名权威已经作出的决定，不产生决定权限。完整边界见 [ADR-0022](../../architecture/adr-0022-tekmor-evidence-and-appraisal.html)。当前没有物理 Tekmor 格式、采集器、验证器、归并器、撤销服务或决定引擎。
 
 满足判断先区分 `met`、`unmet`、`agno` 和 `fault`。具名权威随后形成 `accepted`、`rejected` 或 `deferred`；Praxe 会话另行记录 `completed`、`failed` 或 `interrupted`。只有 `krin` 对适用 phain 的全部必需条件为 `met`、必需 Tekmor 有效且覆盖充分、没有阻断性 `apor` 且决定权威匹配时，才能形成 `accepted`。
 

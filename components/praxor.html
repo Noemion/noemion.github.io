@@ -22,9 +22,21 @@ permalink: "/components/praxor.html"
       <tr><td>输入</td><td>运行策略与 <code>krin</code></td><td>固定能力上限、预算、停止、观察、证据、人工升级和决定权威；只能收紧制品要求。</td></tr>
       <tr><td>输入</td><td>后端绑定与能力目录</td><td>模型或求解器与可用能力的身份、版本和参数结构；描述仍是不可信声明。</td></tr>
       <tr><td>会话状态</td><td>Dromen</td><td>只读、一次性、不可序列化；不保存跨会话能力句柄。</td></tr>
-      <tr><td>输出</td><td>运行记录</td><td>候选、能力请求与观察、预算、错误、运行与决定类 Tekmor，以及彼此分离的满足、决定和会话结果。</td></tr>
+      <tr><td>输出</td><td>运行记录</td><td>符合 TEK-CORE 抽象边界的候选、能力请求、观察、预算、错误、运行与决定记录，以及彼此分离的满足、决定和会话结果；物理 Tekmor 格式尚未定义。</td></tr>
       <tr><td>消费者</td><td>用户、CI、审计和指定外部权威</td><td>模型或 Praxor 自述不能成为唯一决定依据。</td></tr>
     </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>Tekmor 记录与评估边界</h2>
+    <p class="lead">Praxor 可以生产有范围的记录，但不能给自己的记录填写“真实”“有效”“覆盖充分”或“最终接受”。</p>
+    <ul>
+      <li>记录种类分为 observation、derivation、attestation、appraisal 与 decision-record；来源类别另分为直接观察、确定性派生、外部断言、人工判断与模型候选。</li>
+      <li>原始返回、规范化变换、phain 与主张分别保存；模型解释始终保持 model-candidate，不能升级为直接观察。</li>
+      <li>签名和摘要只支持完整性与来源认证。验证者依据精确政策、参考值、环境和截止点形成 valid、invalid 或 revoked。</li>
+      <li>证据集合只相对当前 <code>krin</code> 与观察责任形成 sufficient 或 insufficient；重复日志、更多签名或模型评分不能补齐缺失范围。</li>
+      <li>decision-record 只记录具名权威已经作出的决定，不会让 Praxor 获得决定权限。完整边界见 <a href="../architecture/adr-0022-tekmor-evidence-and-appraisal.html">ADR-0022</a>。</li>
+    </ul>
   </section>
 
   <section class="content-wide">
@@ -69,7 +81,7 @@ permalink: "/components/praxor.html"
     <div class="table-wrap"><table><thead><tr><th>外部接口</th><th>进入 Praxor 的方式</th><th>本地边界</th></tr></thead><tbody>
       <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 稳定规范</a></td><td>工具说明、参数和结果映射为本地能力请求与观察。</td><td>声明不授予权限；令牌必须绑定目标资源，不能转交给下游服务。后续版本只有完成兼容、安全与降级复核后才进入新适配基线。</td></tr>
       <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a></td><td>Task、Message 与 Artifact 映射为外部任务记录和候选结果。</td><td>外部状态不改变 Endem；Artifact 不是 Tekmor，也不能形成最终决定。</td></tr>
-      <tr><td><a href="https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai">OpenTelemetry GenAI 语义约定</a></td><td>由可替换、带版本的导出器发送允许披露的运行观测。</td><td>当前状态为 Development；输入、输出、工具参数和结果可能含敏感信息，默认不导出正文，也不把外部字段作为本地身份。</td></tr>
+      <tr><td><a href="https://github.com/open-telemetry/semantic-conventions-genai">OpenTelemetry GenAI 语义约定独立仓库</a></td><td>由可替换、带版本的导出器发送允许披露的运行观测。</td><td>独立仓库仍在演进且 Schema URL 待定；输入、输出、工具参数和结果可能含敏感信息，默认不导出正文，也不把外部字段作为本地身份。</td></tr>
     </tbody></table></div>
     <p>这些资料支持互操作和可观测性，却不定义 Endem、Dromen、Tekmor、权限或验收。第一阶段不接入外部智能体协议、遥测约定或模型 SDK。</p>
   </section>
@@ -139,7 +151,7 @@ permalink: "/components/praxor.html"
 
   <section class="content-band">
     <h2>当前成熟度与未冻结接口</h2>
-    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、Tekmor 不等于验收、结果域分离、mene 时钟、否定观察、量化聚合、测量判断以及复合判断责任已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、时间、封闭、测量与组合声明字段、预算单位、事件编码和决定类 Tekmor 尚未冻结。</p>
+    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、TEK-CORE 抽象边界、结果域分离、mene 时钟、否定观察、量化聚合、测量判断以及复合判断责任已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、时间、封闭、测量与组合声明字段、预算单位、事件编码和 Tekmor 物理格式尚未冻结。</p>
   </section>
   <div class="next-prev"><a href="theor.html">← Theor</a><a href="../architecture/endem-lifecycle.html">Endem 生命周期 →</a></div>
 </main>

@@ -1,0 +1,80 @@
+---
+layout: default
+title: "ADR-0023 Endem 内容标准分层"
+page_role: "content"
+footer_text: "Noemion · ADR-0023"
+permalink: "/architecture/adr-0023-endem-content-standard.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0023</span></nav>
+  <header class="content-introduction"><h1>ADR-0023<br>Endem 内容标准</h1><p>把自然语言目标的通用内容规则、具体内容 Profile 与物理容器分开定义，让不同工具能够对同一目标对象作出可比较的符合性判断。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">END-CORE 0.1.0-draft</span><span class="badge">Layered Conformance</span><span class="badge">No Component Code</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">项目需要一份目标文件内容标准，但不需要再造一个与 END-CORE 重复的规范。现有 <code>END-CORE</code> 正式承担通用内容标准，<code>END-P1</code> 承担当前封闭内容 Profile，<code>END-FMT</code> 只承担物理容器。</p>
+    <p>这三层必须分别版本化、分别验证。能读出目录不表示内容合格，字段集合闭合不表示语义成立，内容成立也不表示目标已经实现或被权威接受。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>ELF 提供的真正借鉴</h2>
+    <p>ELF 不是由 IETF RFC 定义。它主要由 System V ABI 中的通用 ELF 规范，以及面向具体处理器的 psABI 补充共同定义。通用规范说明头部、节、符号、重定位和装载视图；处理器补充再约束机器相关内容。</p>
+    <div class="table-wrap"><table><thead><tr><th>ELF 分层</th><th>Endem 对应职责</th><th>不能照搬</th></tr></thead><tbody>
+      <tr><td>通用对象规则</td><td><code>END-CORE</code> 定义所有 Endem 共享的内容语义、不变量与符合性边界</td><td>机器指令、地址、处理器寄存器和传统链接语义</td></tr>
+      <tr><td>处理器或平台补充</td><td><code>END-P*</code> 固定某一能力集合的字段、枚举、规范顺序、引用和资源上限</td><td>把运行平台、模型供应商或操作系统变成自然语言语义</td></tr>
+      <tr><td>文件结构与数据表示</td><td><code>END-FMT</code> 定义字节路线图、记录目录、确定性编码和有界读取</td><td>用容器结构替代语义验证</td></tr>
+      <tr><td>工具与实现</td><td>未来 Poiet 与独立 Theor 共享规范和向量，不共享解析实现</td><td>把某个实现的内部结构当成标准</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>采用的规范层次</h2>
+    <div class="table-wrap"><table><thead><tr><th>层次</th><th>必须回答</th><th>当前权威源</th></tr></thead><tbody>
+      <tr><td>通用内容</td><td>什么是一个 Endem，六个语义面怎样分工，引用和授权怎样闭合，哪些状态与结果不得混用</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 0.1.0-draft</a></td></tr>
+      <tr><td>内容 Profile</td><td>这一版本允许哪些字段、类型、枚举、关系结构、排序、状态与预算</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 0.1.0-draft</a></td></tr>
+      <tr><td>物理容器</td><td>怎样找到记录、解释字节、拒绝越界与非规范编码</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 0.1.0-draft</a></td></tr>
+      <tr><td>登记与证据</td><td>精确版本、条款、威胁、场景和正反向量是否一一对应</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">规范与验证登记</a>及向量目录</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>三种接受必须分别报告</h2>
+    <div class="flow"><div class="step">容器接受</div><div class="step">Profile 接受</div><div class="step">内容接受</div><div class="step">生命周期与证据</div><div class="step">满足判断</div><div class="step">权威决定</div></div>
+    <ul>
+      <li>容器接受只说明头部、目录、范围与编码可以安全解释。</li>
+      <li>Profile 接受只说明字段、枚举、排序、引用和资源约束符合指定版本。</li>
+      <li>内容接受说明对象满足 END-CORE 的语义与授权义务，但不证明现实中的目标事态成立。</li>
+      <li>签名、Tekmor、运行会话、满足判断和最终决定继续保持各自独立的结果域。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>扩展规则</h2>
+    <p>第一版稳定标准之前不承诺向后兼容。新增 Profile 或字段时直接替换旧设计，不保留含义漂移的别名；但每次改变都必须显式绑定新版本并提供威胁、支持案例、反例和正反向量。</p>
+    <ul>
+      <li>Profile 可以收窄能力或补齐物理字段，不能改写六个语义面的职责。</li>
+      <li>未知必需能力关闭失败；当前没有供应商私有语义区或运行时动态补字段。</li>
+      <li>没有具名生产者、消费者和失败责任的字段不进入内容标准。</li>
+      <li>模型候选、提示、计划、推理轨迹、实时凭据和遥测导出字段不进入 Endem 内容身份。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>权威资料与采用限制</h2>
+    <ul>
+      <li><a href="https://gabi.xinuos.com/elf/01-intro.html">ELF Object File Format 的文件结构说明</a>分开链接视图与执行视图，并让固定头部成为解释文件的路线图。Endem 借鉴分层和可独立解释性，不采用机器程序语义。</li>
+      <li><a href="https://gabi.xinuos.com/elf/03-sheader.html">ELF Sections</a>定义节目录、类型、链接信息与扩展范围。Endem 借鉴显式目录和封闭类型，不把语义面降格成任意节名。</li>
+      <li><a href="https://refspecs.linuxfoundation.org/ELF/ppc64/PPC-elf64abi-1.8.html">PowerPC 64 位 ELF ABI 补充</a>明确区分通用 ABI 与处理器补充。Endem 的 Profile 类比这种职责分层，但不对应处理器。</li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc2119.html">RFC 2119</a>与 <a href="https://www.rfc-editor.org/rfc/rfc8174.html">RFC 8174</a>只提供规范要求用语，不定义 Endem 内容。</li>
+    </ul>
+  </section>
+
+  <section class="content-stack">
+    <h2>后果与当前状态</h2>
+    <ul>
+      <li>END-CORE 的标题、范围与符合性条款明确成为内容标准，不新增重复规范 ID。</li>
+      <li>END-P1 继续是实验性设计 Profile；它只支持 nascent、kine 和当前封闭字段，不代表稳定 ABI。</li>
+      <li>当前资料检查器只能检查规范、登记与向量的一致性，不能证明任何写入器、读取器、CLI 或运行时已经实现。</li>
+    </ul>
+  </section>
+  <div class="next-prev"><a href="adr-0022-tekmor-evidence-and-appraisal.html">← ADR-0022</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

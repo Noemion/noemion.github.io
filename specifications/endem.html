@@ -13,8 +13,19 @@ permalink: "/specifications/endem.html"
     <h2>Endem 表示什么</h2>
     <p class="lead">Endem 是最小、独立有效且可验证的期望终态单元。它把一项自然语言目标变成可检查的对象—关系契约。</p>
     <p>这份契约保存来源表达、已确认意义、中性可能事态、目标方向、比较规则和未决信息。它不规定模型采用哪条提示、计划或推理过程。</p>
-    <p class="callout"><strong>权威边界：</strong>这是一份面向读者的解释。语义义务与条款 ID 以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 条款源</a>为准；实验性容器以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 条款源</a>为准。END-FMT 0.1.0-draft 尚非稳定 ABI。</p>
+    <p class="callout"><strong>权威边界：</strong>这是一份面向读者的解释。通用内容义务与条款 ID 以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 内容标准</a>为准；当前封闭字段集合以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 内容 Profile</a>为准；实验性容器以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 条款源</a>为准。三层分别验证，END-FMT 0.1.0-draft 尚非稳定 ABI。</p>
     <p class="callout"><strong>最小不变量：</strong>一个 Endem 必须且只能有一个根 <code>skena</code> 节点。根节点可以组合相互依赖的子命题；如果两个根可以独立实现、验收或失败，Poiet 必须形成两个 Endem，再由 Synem 组合。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>目标文件内容由哪份标准定义</h2>
+    <p class="lead">END-CORE 是 Endem 的通用内容标准，END-P1 是当前内容 Profile，END-FMT 是字节容器。它们共同定义一份实验性 <code>.endem</code>，但不能互相替代。</p>
+    <div class="table-wrap"><table><thead><tr><th>层次</th><th>定义什么</th><th>通过后仍不能说明</th></tr></thead><tbody>
+      <tr><td>END-FMT 容器</td><td>固定前导、记录目录、范围、确定性编码与有界读取</td><td>内容字段闭合或语义成立</td></tr>
+      <tr><td>END-P1 内容 Profile</td><td>六记录的字段、类型、枚举、顺序、引用、状态与资源上限</td><td>所有 END-CORE 内容义务均已满足</td></tr>
+      <tr><td>END-CORE 内容标准</td><td>六个语义面的职责、授权、关系不变量、状态、身份和符合性</td><td>目标已经满足、签名有效、会话可运行或权威已经接受</td></tr>
+    </tbody></table></div>
+    <p><a href="../architecture/adr-0023-endem-content-standard.html">ADR-0023</a>借鉴 ELF 通用规范与平台补充的分层思想，但不复制机器指令、处理器 ABI 或传统链接语义。任何符合性报告都必须分别写出容器接受、Profile 接受和内容接受。</p>
   </section>
 
   <section class="content-wide">

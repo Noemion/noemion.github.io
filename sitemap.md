@@ -35,6 +35,8 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0019](https://noemion.github.io/architecture/adr-0019-measurement-and-thresholds.html) — measurement constructs, estimands, units, aggregation, uncertainty, and threshold comparison
 - [ADR-0020](https://noemion.github.io/architecture/adr-0020-composite-situations-and-criteria.html) — composite situations, aligned criteria, four-result propagation, and decisive short-circuit evidence
 - [ADR-0021](https://noemion.github.io/architecture/adr-0021-synem-closure-and-activation.html) — exact Synem closure, permission convergence, member result separation, and session activation
+- [ADR-0022](https://noemion.github.io/architecture/adr-0022-tekmor-evidence-and-appraisal.html) — scoped Tekmor evidence, provenance, validity, coverage, appraisal, decision, and disclosure boundaries
+- [ADR-0023](https://noemion.github.io/architecture/adr-0023-endem-content-standard.html) — layered Endem content standard, closed content Profiles, container rules, and conformance boundaries
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Praxor responsibility boundaries
 - [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary

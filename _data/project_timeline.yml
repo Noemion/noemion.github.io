@@ -1,7 +1,7 @@
 id: noemion-project-progress
 title: 项目进度时间线
 aria_label: Noemion 项目进度时间线
-current_stage_id: endem-core-validation
+current_stage_id: specification-validation
 
 overview:
   kicker: PROJECT / PROGRESS
@@ -14,10 +14,10 @@ overview:
   roadmap_href: /development/implementation-roadmap.html
 
 current:
-  summary: 项目已公开 END-CORE、END-FMT 和 END-P1 完整载荷向量，并通过 C/Rust 实验选择 Rust 作为 Poiet 与生产读取核心语言。当前开始 poie/elenk/theor/peira 最小纵向切片。
+  summary: 项目已建立 Endem 内容标准分层、Synem 组合闭包与 Tekmor 证据边界。当前继续用条款、威胁、场景和正反向量验证资料一致性，不开发组件。
   facts:
     - label: 已完成
-      value: Endem 词汇与应用拓扑决定
+      value: Endem 内容标准与对象边界
     - label: 正在进行
       value: 规范、威胁模型与验证方案
     - label: 后续工作
@@ -39,11 +39,11 @@ items:
     label: 已完成
     title: 最小规范与安全核心设计
     description: 已形成语义与容器条款、END-P0 结构实验、END-P1 封闭载荷、错误目录和正反规范字节，并用 P0-LANG-001 选择首版核心语言。
-  - id: endem-core-validation
+  - id: specification-validation
     state: current
-    label: 尚未开始
-    title: poie/elenk/theor/peira 纵向切片
-    description: 当前没有组件实现或实现仓库。只有用户明确开启代码开发阶段后，项目才会重新确认仓库、范围、候选语言、依赖和验证门禁。
+    label: 正在进行
+    title: 规范分层与证据边界验证
+    description: 当前只完善 END-CORE 内容标准、Profile、Synem、Tekmor、威胁模型、自然语言场景与正反向量；这些检查不表示 Poiet、Theor、Praxor 或 CLI 已经实现。
   - id: synem-binding-release
     state: future
     label: 后续规划
@@ -53,4 +53,4 @@ items:
     state: future
     label: 后续规划
     title: Dromen、Praxor 与 Tekmor
-    description: 先用规则型后端验证重新装载、能力控制、真实观察、证据闭包和验收分层，随后再评估模型及外部协议适配。
+    description: 进入代码阶段后，先用规则型后端验证重新装载、能力控制、真实观察、有范围证据和验收分层，随后再评估模型及外部协议适配。

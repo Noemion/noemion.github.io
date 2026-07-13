@@ -87,6 +87,8 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0019-measurement-and-thresholds.html",
     "architecture/adr-0020-composite-situations-and-criteria.html",
     "architecture/adr-0021-synem-closure-and-activation.html",
+    "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
+    "architecture/adr-0023-endem-content-standard.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -213,9 +215,6 @@ LEGACY_PUBLIC_TERMS = re.compile(
     r"horizon-engine|agent-harness|fulfillment-runtime|noem(?:a)-lifecycle)\.html|"
     r"(?:^|[/\"'])tools/"
 )
-LEGACY_ADR_ALLOWLIST = re.compile(
-    r"^design-system/adr-000[1-7]-[^/]+\.md$"
-)
 NORMATIVE_ROUTES = (
     "specifications/endem.html",
     "specifications/synem.html",
@@ -240,6 +239,8 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0019-measurement-and-thresholds.html",
     "architecture/adr-0020-composite-situations-and-criteria.html",
     "architecture/adr-0021-synem-closure-and-activation.html",
+    "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
+    "architecture/adr-0023-endem-content-standard.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -324,10 +325,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "architecture/decisions.html": {
         "required": (
-            "外部签名",
-            "候选不等于事实",
-            "能力声明不等于句柄",
-            "Tekmor 不等于验收",
+            "身份不等于权威",
+            "外部状态不等于本地结果",
+            "能力声明不等于实时句柄",
+            "Tekmor 证据与评估",
             "ADR-0015",
             "判断与运行结果分层",
         ),
@@ -403,12 +404,12 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             "Tekmor",
             "phain",
-            "subject",
-            "claim",
-            "basis",
-            "strength",
-            "integrity",
-            "证据闭包",
+            "精确证据主体",
+            "主张",
+            "原始观察",
+            "model-candidate",
+            "完整性",
+            "sufficient / insufficient",
             "最终决定",
         ),
     },
@@ -869,8 +870,6 @@ def validate_legacy_source_vocabulary():
         if not path.is_file() or skipped_parts.intersection(path.parts):
             continue
         relative = path.relative_to(SOURCE_ROOT).as_posix()
-        if LEGACY_ADR_ALLOWLIST.fullmatch(relative):
-            continue
         legacy_path_match = LEGACY_PUBLIC_TERMS.search(relative)
         if legacy_path_match:
             errors.append(
@@ -1408,7 +1407,7 @@ def validate_jekyll_sources():
         "architecture/decisions.html": (
             "A2A 1.0 版本化规范",
             "补丁号不进入协议协商",
-            "github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai",
+            "github.com/open-telemetry/semantic-conventions-genai",
             "MCP 2025-11-25 稳定规范",
             "GNU Automake 测试结果语义",
             "后续版本在正式发布",
@@ -1424,7 +1423,7 @@ def validate_jekyll_sources():
         "components/praxor.html": (
             "A2A 1.0 版本化规范",
             "令牌必须绑定目标资源",
-            "github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai",
+            "github.com/open-telemetry/semantic-conventions-genai",
             "默认不导出正文",
             "completed / failed / interrupted",
             "不得推成",
@@ -1524,7 +1523,7 @@ def validate_jekyll_sources():
 
     name_audit = design_root / "name-audit.md"
     naming_standard = design_root / "language-and-naming.md"
-    naming_adr = design_root / "adr-0010-native-lexicon-and-situation-model.md"
+    naming_adr = SOURCE_ROOT / "architecture" / "adr-0010-native-lexicon.html"
     if not name_audit.exists():
         errors.append("missing dated release-name conflict screening")
     else:

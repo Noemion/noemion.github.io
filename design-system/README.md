@@ -4,7 +4,7 @@
 
 修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、六个语义面、Synem、Dromen、Tekmor、Poiet、Theor、Praxor、八个动作和唯一 CLI 是当前命名基线，设计文档不得引入旧名称或兼容入口。修改品牌、制品名、命令、扩展名或分发坐标时还必须读取并更新 [`name-audit.md`](name-audit.md)，不能用旧查询结果证明当前可用性。
 
-修改 `.endem`、`rhem/semion/skena/telis/krin/apor`、`phain`、事态投影、引用、内容身份、规范排序、封装布局或证据排布时，先读取当前 Endem、Synem 和 Tekmor 规范，再读取 ADR-0010 与相关活跃 ADR。ADR-0009 及更早记录中的旧词只用于解释决策迁移，不得重新进入公开接口。
+修改 `.endem`、`rhem/semion/skena/telis/krin/apor`、`phain`、事态投影、引用、内容身份、规范排序、封装布局或证据排布时，先读取当前 Endem、Synem 和 Tekmor 规范，再读取 [`ADR-0010`](../architecture/adr-0010-native-lexicon.html) 与相关活跃 ADR。架构决策只在 `architecture/` 维护；本目录不保存历史 ADR 副本，也不得重新引入旧词或兼容接口。
 
 修改 Endem 生命周期、Poiet/Theor/Praxor 隔离、独立读取路径、GNU 工具链采用范围或外部 AI 协议落点时，先读取 `/architecture/endem-lifecycle.html`、对应组件页面和它们链接的活跃 ADR。
 

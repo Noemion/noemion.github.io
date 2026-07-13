@@ -68,10 +68,10 @@ permalink: "/architecture/endem-lifecycle.html"
       <li>Praxor 对实际输入字节重新执行所需 <code>elenk</code>，不复用过期结论。</li>
       <li>Praxor 从对象、当前策略和授权能力建立 Dromen；实时句柄只保留在隔离执行侧。</li>
       <li>后端读取 Dromen 的受限视图，返回候选或类型化能力请求，不能直接调用外部能力。</li>
-      <li>Praxor 验证请求、执行或拒绝，再把真实观察规范化为 phain 并记录为 Praxe Tekmor。</li>
+      <li>Praxor 验证请求、执行或拒绝，再把真实观察、规范化变换与 phain 分开记录为符合 TEK-CORE 抽象边界的 Praxe 证据。</li>
       <li>若 <code>telis</code> 为 <code>mene</code>，Praxor 还必须按 ADR-0016 绑定 fixed 或 elapsed 范围，记录时钟域、覆盖区间、缺口和违约预算。</li>
       <li>求值器按照执行前固定的 <code>krin</code> 比较 <code>skena</code> 与 <code>phain</code>，形成 <code>met / unmet / agno / fault</code> 中的一个满足结果。</li>
-      <li>具名权威读取满足结果、有效 Tekmor 和覆盖度，再形成 <code>accepted / rejected / deferred</code> 中的一个决定；会话另行记录 <code>completed / failed / interrupted</code>。</li>
+      <li>验证者先在精确政策、参考值、环境与截止点下评估 Tekmor 有效性，再相对当前 <code>krin</code> 计算覆盖度；具名权威最后形成 <code>accepted / rejected / deferred</code> 中的一个决定。会话另行记录 <code>completed / failed / interrupted</code>。</li>
       <li>会话结束后 Dromen 销毁，运行记录只保留允许公开的 Tekmor 和身份链。</li>
     </ol>
   </section>
@@ -84,11 +84,12 @@ permalink: "/architecture/endem-lifecycle.html"
       <tr><td>权威决定</td><td>accepted / rejected / deferred</td><td>具名规则或主体依据满足结果、Tekmor 和覆盖度作出的最终决定。</td></tr>
       <tr><td>Praxe 会话</td><td>completed / failed / interrupted</td><td>只描述一次运行怎样终止，不说明目标是否满足或已被接受。</td></tr>
       <tr><td>Elenk</td><td>pass / fail / not-evaluated</td><td>每个请求验证层的独立结论；不能压成含义不明的成功布尔值。</td></tr>
-      <tr><td>Tekmor 有效性</td><td>valid / invalid / revoked</td><td>记录身份、完整性和适用性，不等同于其 claim 为真。</td></tr>
+      <tr><td>Tekmor 有效性</td><td>valid / invalid / revoked</td><td>验证者针对精确政策、参考值、环境和截止点形成的外部评估；不等同于 claim 为真。</td></tr>
       <tr><td>证据覆盖度</td><td>sufficient / insufficient</td><td>一组有效 Tekmor 是否覆盖当前 krin；不与单份记录有效性合并。</td></tr>
     </tbody></table></div>
     <p>这五个结果域由 <a href="adr-0015-result-domains.html">ADR-0015</a> 分开。外部 Task 的 <code>completed</code>、工具返回成功或会话正常结束都不能跨域改写满足结果与最终决定。</p>
     <p><code>mene</code> 的时间范围、连续性政策与覆盖分类由 <a href="adr-0016-mene-time-model.html">ADR-0016</a> 定义。当前没有 mene 线格式、时钟适配器或持续求值实现。</p>
+    <p>Tekmor 的主体、范围、溯源、观察类别、有效性、覆盖度、决定和最小披露由 <a href="adr-0022-tekmor-evidence-and-appraisal.html">ADR-0022</a> 与 TEK-CORE 定义。当前没有物理 Tekmor 格式、验证器、归并器、撤销服务或决定引擎。</p>
   </section>
 
   <section class="content-band">

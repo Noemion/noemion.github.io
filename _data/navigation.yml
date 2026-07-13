@@ -95,7 +95,7 @@ modules:
           - { href: /architecture/adr-0010-native-lexicon.html, label: "ADR-0010 · 原生词汇与事态" }
           - { href: /architecture/adr-0011-endem-container.html, label: "ADR-0011 · Endem 容器格式" }
           - { href: /architecture/adr-0012-rust-core-language.html, label: "ADR-0012 · 未来 Rust 基线" }
-          - { href: /architecture/adr-0013-end-p1-payload.html, label: "ADR-0013 · END-P1 语义载荷" }
+          - { href: /architecture/adr-0013-end-p1-payload.html, label: "ADR-0013 · END-P1 内容 Profile" }
           - { href: /architecture/adr-0014-source-manifest.html, label: "ADR-0014 · Poiet 来源清单" }
           - { href: /architecture/adr-0015-result-domains.html, label: "ADR-0015 · 判断与运行结果" }
           - { href: /architecture/adr-0016-mene-time-model.html, label: "ADR-0016 · mene 时间模型" }
@@ -104,6 +104,8 @@ modules:
           - { href: /architecture/adr-0019-measurement-and-thresholds.html, label: "ADR-0019 · 测量谓词与阈值" }
           - { href: /architecture/adr-0020-composite-situations-and-criteria.html, label: "ADR-0020 · 复合事态与判据" }
           - { href: /architecture/adr-0021-synem-closure-and-activation.html, label: "ADR-0021 · Synem 闭包与激活" }
+          - { href: /architecture/adr-0022-tekmor-evidence-and-appraisal.html, label: "ADR-0022 · Tekmor 证据与评估" }
+          - { href: /architecture/adr-0023-endem-content-standard.html, label: "ADR-0023 · Endem 内容标准" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:

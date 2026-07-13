@@ -1,115 +1,94 @@
 ---
 layout: default
-title: "Tekmor · 可定位证据记录规范"
+title: "Tekmor 有范围证据规范"
 page_role: "content"
 footer_text: "Noemion · Tekmor"
 permalink: "/specifications/tekmor.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>Tekmor</span></nav>
-  <header class="content-introduction"><h1>Tekmor</h1><p>Tekmor 记录谁在什么条件下观察了什么，并明确这项证据能支持多大范围的判断。</p><div class="badges"><span class="badge">Scoped Evidence</span><span class="badge">Structured Phain</span><span class="badge">Not Formal Proof</span></div></header>
+  <header class="content-introduction"><h1>Tekmor<br>有范围证据</h1><p>记录谁针对哪个精确对象、通过什么方法观察到什么，并明确这项依据能够支持和不能支持的判断范围。</p><div class="badges"><span class="badge">TEK-CORE 0.1.0-draft</span><span class="badge">Scoped Evidence</span><span class="badge">No Wire Format</span><span class="badge">No Component Code</span></div></header>
 
   <section class="content-stack">
-    <h2>Tekmor 能支持什么判断</h2>
-    <p class="lead">Tekmor 回答“谁在什么条件下观察或判断了什么，以及记录绑定到哪些对象”。其中的 <code>phain</code> 与适用 <code>skena</code> 使用可比较的符号和关系位置。</p>
-    <p>Tekmor 让依据可定位、可检查完整性、可比较和可撤销，但不自动证明外部事实为真。</p>
-    <p class="callout"><strong>不得混淆：</strong>Tekmor 不是数学证明、模型自述、日志数量或最终验收决定。证据齐全只说明决定者拥有规范要求的输入；满足判断和最终结论仍由 <code>krin</code> 预先声明的规则与权威作出。</p>
+    <h2>直接结论</h2>
+    <p class="lead">Tekmor 不是把日志装进新格式，而是把证据主张限制在可复核的主体、方法、环境、时间和观察范围内。</p>
+    <p>一项记录可以完整、带签名且来源明确，却仍然不适用于当前目标。证据集合也可以全部有效，却没有覆盖 <code>krin</code> 要求的全部关系、主体或时间。因此 Tekmor 有效性、覆盖度、满足判断和最终决定必须分别计算。</p>
+    <p class="callout"><strong>当前状态：</strong>项目已经建立抽象 <code>TEK-CORE 0.1.0-draft</code>、九项威胁、十四个场景和十八个提案向量；Tekmor 物理格式与组件接口仍未冻结，也没有采集器、验证器、归并器、撤销服务或决定引擎。任何资料检查通过均不得被描述为组件实现或稳定互操作。</p>
   </section>
 
   <section class="content-wide">
-    <h2>最低字段职责</h2>
-    <div class="table-wrap"><table><thead><tr><th>字段</th><th>职责</th><th>拒绝条件</th></tr></thead><tbody>
-      <tr><td>kind / version</td><td>来源、poie、elenk、pleko、tasse、sphra、praxe、decision 等记录类别和结构版本。</td><td>未知关键类别或不兼容版本。</td></tr>
-      <tr><td>subject</td><td>Endem、Synem、Dromen、产物、能力调用或契约项的精确身份。</td><td>摘要缺失、对象状态不匹配或引用悬空。</td></tr>
-      <tr><td>producer</td><td>规则、工具、环境、人工或外部系统的身份与版本。</td><td>无法识别生产者或把模型冒充决定权威。</td></tr>
-      <tr><td>phain</td><td>规范化的结构化观察；保存适用符号、关系角色、作用域、极性和观测值。</td><td>无法对齐 skena、来源不明、把自由文本或分数伪装成关系事实。</td></tr>
-      <tr><td>claim</td><td>记录实际声称的有限结论，例如“此字段通过范围检查”。</td><td>结论超出生产者权限或没有可检查语义。</td></tr>
-      <tr><td>basis</td><td>输入摘要、规则、观察、参数、时间域和关联 Tekmor。</td><td>缺少必需输入、循环自证或把不可重放对话当作依据。</td></tr>
-      <tr><td>strength</td><td>直接观察、确定性推导、外部声明、模型候选或人工判断等证据等级。</td><td>等级与来源不一致，或通过置信度提升权限。</td></tr>
-      <tr><td>integrity</td><td>记录摘要、序列、父记录、签名或防篡改声明。</td><td>链断裂、重复序号、摘要不符或完整性能力被夸大。</td></tr>
+    <h2>权威资料在哪里</h2>
+    <div class="table-wrap"><table><thead><tr><th>资料</th><th>职责</th><th>成熟度</th></tr></thead><tbody>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-core.md">TEK-CORE 规范源</a></td><td>主体、溯源、观察、类别、完整性、有效性、覆盖、决定与披露条款</td><td>0.1.0-draft</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-threat-model.md">Tekmor 威胁模型</a></td><td>范围漂白、循环自证、证据升级、撤销失明、覆盖伪造和泄密</td><td>draft</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-scenarios.md">Tekmor 自然语言场景</a></td><td>支持案例、反例和未决边界；不是符合性条款</td><td>non-normative</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/tekmor/cases.json">Tekmor 提案向量</a></td><td>九个允许分类与九个确定拒绝的资料一致性矩阵</td><td>vector-checker-only</td></tr>
+      <tr><td><a href="../architecture/adr-0022-tekmor-evidence-and-appraisal.html">ADR-0022</a></td><td>为什么采用这些边界，以及与 W3C、RATS、SLSA、GNU Guix 和 AI 遥测的关系</td><td>Accepted Design</td></tr>
+    </tbody></table></div>
+    <p>只有 <code>spec/tekmor-core.md</code> 是 Tekmor 的现行规范条款源。此 HTML 页面负责解释，不建立第二套字段或符合性要求。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>一项记录的最低职责</h2>
+    <div class="table-wrap"><table><thead><tr><th>职责</th><th>需要说明</th><th>常见错误</th></tr></thead><tbody>
+      <tr><td>主体与范围</td><td>精确证据主体，也就是对象或事件身份、适用总体、时间与截止点</td><td>用名称、路径或“当前运行”代替身份</td></tr>
+      <tr><td>生产者</td><td>身份、版本、权限和能够提出的主张类型</td><td>模型、工具或签名者自动取得决定权</td></tr>
+      <tr><td>方法与环境</td><td>方法版本、参数、环境、时钟和参考值</td><td>固定样本结果外推到未知总体</td></tr>
+      <tr><td>溯源</td><td>输入、活动、派生关系、父记录和责任主体</td><td>隐藏动态依赖或让记录循环自证</td></tr>
+      <tr><td>观察</td><td>原始引用、变换、结构化 phain 和信息损失</td><td>把自由文本、工具成功或空查询写成事实</td></tr>
+      <tr><td>主张与限制</td><td>实际结论、未覆盖路径、丢失、过滤、脱敏和不确定性</td><td>让主张越过方法和生产者权限</td></tr>
+      <tr><td>完整性</td><td>内容身份、认证、序列、签名或包含关系</td><td>把签名有效写成事实正确</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>Tekmor 家族</h2>
-    <div class="table-wrap"><table><thead><tr><th>家族</th><th>生产者</th><th>主要消费者</th><th>不能宣告</th></tr></thead><tbody>
-      <tr><td>Source Tekmor</td><td><code>poie</code> 或来源适配器</td><td><code>elenk</code>、人工绑定、发布审查</td><td>自然语言解释已经正确。</td></tr>
-      <tr><td>Elenk Tekmor</td><td>生产验证器</td><td><code>pleko</code>、<code>tasse</code>、Praxor</td><td>未执行的层已经通过。</td></tr>
-      <tr><td>Pleko Tekmor</td><td><code>pleko</code></td><td>Synem、<code>tasse</code>、审计者</td><td>被绑定依赖在未来仍可用。</td></tr>
-      <tr><td>Sphra Tekmor</td><td><code>sphra</code> 与外部签名系统</td><td>Praxor、发布者、审计者</td><td>对象语义正确或当前环境授权。</td></tr>
-      <tr><td>Praxe Tekmor</td><td>Praxor、能力适配器和环境观察器</td><td>证据闭包与决定引擎</td><td>候选已经相对 krin 为 met 或最终 accepted。</td></tr>
-      <tr><td>决定类 Tekmor</td><td>确定性策略或指定外部权威</td><td>用户、CI、审计与后续运行</td><td>输入变化后旧决定仍然有效。</td></tr>
+    <h2>观察必须能与目标关系比较</h2>
+    <p><code>phain</code> 是 Tekmor 中的结构化观察。它必须与适用 <code>skena</code> 共享符号身份、关系身份、角色位置、极性和作用域，才能由 <code>krin</code> 比较。</p>
+    <div class="flow"><div class="step">原始观察引用</div><div class="step">规范化与有损变换</div><div class="step">phain 关系结构</div><div class="step">有限主张</div><div class="step">有效性评估</div><div class="step">krin 覆盖计算</div><div class="step">满足判断</div><div class="step">权威决定</div></div>
+    <p>模型对日志的解释可以保存为 <code>model-candidate</code>，但不能伪装成 <code>direct-observation</code>。命令退出 0 只说明命令状态；没有预先登记的关系映射时，它不能直接说明目标服务健康。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>记录种类与来源类别</h2>
+    <div class="table-wrap"><table><thead><tr><th>维度</th><th>允许值</th><th>边界</th></tr></thead><tbody>
+      <tr><td>记录种类</td><td><code>observation / derivation / attestation / appraisal / decision-record</code></td><td>说明记录执行了观察、派生、外部声明、政策评估还是记录决定事件</td></tr>
+      <tr><td>来源类别</td><td><code>direct-observation / deterministic-derivation / external-assertion / human-judgment / model-candidate</code></td><td>说明依据怎样产生；不能靠置信分数、签名或重复次数升级</td></tr>
     </tbody></table></div>
+    <p><code>decision-record</code> 只记录具名权威已经作出的决定。创建记录不会授予决定权限，验证者或 Praxor 也不能默认成为最终决定者。</p>
   </section>
 
   <section class="content-wide">
-    <h2>记录有效不等于证据充分</h2>
-    <div class="table-wrap"><table><thead><tr><th>维度</th><th>允许值</th><th>回答的问题</th></tr></thead><tbody>
-      <tr><td>Tekmor 有效性</td><td><code>valid / invalid / revoked</code></td><td>记录身份、完整性、生产者和适用范围当前是否可用。</td></tr>
-      <tr><td>证据覆盖度</td><td><code>sufficient / insufficient</code></td><td>一组有效 Tekmor 是否覆盖指定 <code>krin</code> 的全部必需观察。</td></tr>
-      <tr><td>满足判断</td><td><code>met / unmet / agno / fault</code></td><td>目标事态相对观察和比较契约的结果；不属于 Tekmor 有效性。</td></tr>
-      <tr><td>权威决定</td><td><code>accepted / rejected / deferred</code></td><td>具名权威是否作出最终决定；不能由记录数量自动产生。</td></tr>
+    <h2>有效不等于充分</h2>
+    <div class="table-wrap"><table><thead><tr><th>结果域</th><th>允许值</th><th>必须绑定</th></tr></thead><tbody>
+      <tr><td>Tekmor 有效性</td><td><code>valid / invalid / revoked</code></td><td>记录身份、验证政策、参考值、信任根、环境和截止点</td></tr>
+      <tr><td>证据覆盖度</td><td><code>sufficient / insufficient</code></td><td>精确 Endem、krin、关系位置、主体集合、时间与观察责任</td></tr>
+      <tr><td>满足判断</td><td><code>met / unmet / agno / fault</code></td><td>skena、phain、比较规则和实际使用的 Tekmor</td></tr>
+      <tr><td>权威决定</td><td><code>accepted / rejected / deferred</code></td><td>满足结果、有效性、覆盖度、决定规则和具名权威</td></tr>
     </tbody></table></div>
-    <p>同一份 Tekmor 可以完整有效，却不足以覆盖另一个范围更大的 <code>krin</code>。反过来，多份记录数量再多，只要生产者、范围或关系位置无效，也不能形成充分覆盖。完整分层见 <a href="../architecture/adr-0015-result-domains.html">ADR-0015</a>。</p>
+    <p><code>valid</code> 是验证者在指定上下文形成的评估，不是记录对自己的声明。政策、密钥、方法、来源或截止点变化后必须重新评估；旧事件保留，但不能继续冒充当前结论。</p>
   </section>
 
   <section class="content-wide">
-    <h2>持续目标需要时间覆盖</h2>
-    <p>服务于 <code>mene</code> 的 Tekmor 除了 <code>phain</code>，还必须声明半开覆盖区间、观测方法、时钟域、时钟生产者、分辨率、最大不确定度、同步方式、已知空洞和重启或回拨事件。</p>
-    <div class="table-wrap"><table><thead><tr><th>证据情况</th><th>能够支持</th><th>不能支持</th></tr></thead><tbody>
-      <tr><td>单个健康采样点</td><td>该采样时刻附近、在声明分辨率内的有限观察。</td><td>整个发布窗口连续健康。</td></tr>
-      <tr><td>覆盖区间带显式空洞</td><td>已覆盖部分的观察和空洞位置。</td><td>用插值、最后值延续或没有告警填补空洞。</td></tr>
-      <tr><td>完整覆盖与有效时钟</td><td>按 strict 或 budgeted 政策计算 met/unmet。</td><td>自动形成 accepted；最终决定仍需要具名权威。</td></tr>
-      <tr><td>时钟或同步契约故障</td><td>定位 fault、生产者和受影响区间。</td><td>目标为 unmet，或旧时间记录仍适用。</td></tr>
-    </tbody></table></div>
-    <p>时间覆盖语义见 <a href="../architecture/adr-0016-mene-time-model.html">ADR-0016</a>。当前没有 Tekmor 时间编码、时钟采集器或多生产者归并实现。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>Dromen 与运行记录</h2>
-    <p>Praxor 从 attested Endem/Synem、执行策略、授权能力和当前环境建立 Dromen。Dromen 只存在于会话内；Tekmor 只保存足以重放判断的身份、参数和观察，不序列化实时句柄、凭据、模型私有状态或整个内存视图。</p>
-    <div class="flow"><div class="step">attested Endem / Synem</div><div class="step">Dromen</div><div class="step">能力请求</div><div class="step">环境观察</div><div class="step">phain · 结构化观察</div><div class="step">Praxe Tekmor</div><div class="step">决定类 Tekmor</div></div>
-    <p>一次运行可以把相关 Tekmor 封装为单一运行记录，内部仍必须区分原始事件、规范化观察、完整性声明、证据范围和最终决定。Praxor 不得因为自己产生了记录就默认信任记录内容。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>负观察与缺席证据</h2>
-    <p>显式负观察必须保存与目标相同的关系身份、角色和顺序，并声明生产者、方法、范围与限制。空查询只能记录“在这些输入和条件下没有匹配”，默认支持 <code>agno</code>，不能伪装成负极性 <code>phain</code>。</p>
-    <p>若具名权威要从缺席支持负目标，Tekmor 集合还必须绑定全集、全部角色路径、时间截止、完整枚举方法、迟到规则、过滤、去重、丢失和排除项。任何未知覆盖使结论回到 <code>agno</code>；观察契约故障为 <code>fault</code>。完整边界见 <a href="../architecture/adr-0017-negation-and-absence.html">ADR-0017</a>。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>量化与基数证据</h2>
-    <p>Tekmor 必须保存集合身份、成员资格权威、截止点、身份规则、实际成员级结果和每项结果使用的证据。聚合只按不同成员身份计数；同一主体的重复事件、签名或日志不能增加基数。</p>
-    <p>决定性见证或反例可以提前支持有限结论；其余结论必须证明成员范围已经封闭。范围不完整为 <code>agno</code>，成员求值契约故障为 <code>fault</code>。完整边界见 <a href="../architecture/adr-0018-quantification-and-membership.html">ADR-0018</a>。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>测量与阈值证据</h2>
-    <p>测量类 Tekmor 必须保留构念、适用总体、生产者、方法版本、观察窗口、纳入与排除规则、原始观察及单位、换算、聚合器、有效样本数、缺失处理、不确定区间和阈值。仪表盘显示值、排名或模型置信度不能替代这些依据。</p>
-    <p>固定基准结果只能支持该固定项目；推广结论还必须保存预注册的 estimand、统计模型、抽样假设和限制。区间跨越阈值为 <code>agno</code>，测量程序违约为 <code>fault</code>。完整边界见 <a href="../architecture/adr-0019-measurement-and-thresholds.html">ADR-0019</a>。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>复合判断证据</h2>
-    <p>复合判断类 Tekmor 必须保存每个已求值叶的结果和依据、决定性叶集合、未求值叶、停止原因以及总体结果。<code>all_of</code> 的有效 <code>unmet</code> 与 <code>any_of</code> 的有效 <code>met</code> 可以决定总体结果，但不能删除已经记录的故障。</p>
-    <p>未求值叶不是 <code>agno</code>；它只说明决定性短路后没有继续工作。完整边界见 <a href="../architecture/adr-0020-composite-situations-and-criteria.html">ADR-0020</a>。当前没有组合求值器或复合 Tekmor 物理格式。</p>
-  </section>
-
-  <section class="content-rows">
-    <h2>隐私、最小披露与撤销</h2>
+    <h2>覆盖按责任计算而不是按数量计算</h2>
+    <p>覆盖度只统计当前 <code>krin</code> 要求且已经验证、适用、未撤销的不同观察责任。同一日志复制一百次、同一观察附加多个签名或同一主体反复重试，都不能填补新的关系路径、主体、时间区间或成员。</p>
     <ul>
-      <li>Tekmor 只保存验收与审计必需的字段；敏感原文、凭据和高风险工具输出按策略摘要、脱敏或外置。</li>
-      <li>脱敏必须声明损失及其对证据强度的影响，不能用“已脱敏”掩盖无法验证。</li>
-      <li>来源撤回、密钥撤销、环境身份变化或规则版本变化必须使受影响的决定可定位并失效。</li>
-      <li>时间戳只说明记录时间域，不进入 Endem 的确定性语义身份。</li>
-      <li>模型生成的说明可以作为低等级 Tekmor 内容，但不能成为唯一的权限、完整性或最终验收依据。</li>
+      <li>持续目标的时间空洞产生 <code>insufficient</code>，不能用最后值延续或插值静默填补。</li>
+      <li>负目标只有在全集、角色路径、截止点、枚举、丢失和迟到边界封闭时，缺席才可能支持判断。</li>
+      <li>量化判断按不同成员身份保存成员结果，不能按事件或证据数量计数。</li>
+      <li>测量判断保留原始观察、换算、聚合、不确定区间和阈值，显示舍入值不能成为依据。</li>
+      <li>复合判断保留已求值叶、决定性依据、未求值叶、停止原因和已经遇到的故障。</li>
     </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>最小披露不是信息丢失免责条款</h2>
+    <p>Tekmor 不保存 Bearer token、刷新令牌、私钥、会话 cookie、文件描述符、实时能力句柄或未获授权的提示与工具正文。它可以保存不可逆摘要、发行者、受众、范围、调用身份和外置引用。</p>
+    <p>摘要、脱敏或外置必须说明原对象身份、变换规则、可见和不可见范围，以及这些省略怎样影响主张与覆盖度。若审计者无法取得外置对象，或脱敏删除了主体和关系位置，相关依据只能视为不可验证或覆盖不足。</p>
   </section>
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p>Tekmor 的有限主张、身份绑定、证据等级、“证据不等于证明”、有效性与覆盖度分离、mene 时间覆盖、否定证据职责、测量依据和复合判断覆盖边界已经采用。事件编码、时间、封闭、测量与组合声明字段、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需新 Profile 与测试。</p>
+    <p>TEK-CORE 已冻结抽象证据与评估边界，但不冻结物理容器、扩展名、字段编号、摘要与签名算法、透明日志、撤销分发、远程查询、跨生产者时钟归并、隐私策略语言和长期归档。未来实现必须先由用户明确开启代码阶段，再以新 Profile 和规范字节证明互操作。</p>
   </section>
   <div class="next-prev"><a href="synem.html">← Synem 规范</a><a href="../components/poiet.html">Poiet 组件 →</a></div>
 </main>

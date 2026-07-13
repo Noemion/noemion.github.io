@@ -25,13 +25,17 @@ badges: ["Authority", "Maturity", "ADR"]
 
 每个规范“必须/不得/只有”都应关联机器测试或具名人工权威。实现、论文、专利、演示和模型输出不能反向替代规范。
 
-当前权威源包括 [END-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md)、[END-FMT 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)、[SYN-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md)与[机器可读登记](https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json)。Endem 和 Synem 的不可信输入与失败责任分别见[Endem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md)与[Synem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-threat-model.md)。公开 HTML 只负责直白解释，不复制第二套条款。
+当前权威源包括作为通用内容标准的 [END-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md)、作为当前封闭内容 Profile 的 [END-P1](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json)、作为实验性容器的 [END-FMT 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)、[SYN-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md)、[TEK-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-core.md)与[机器可读登记](https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json)。Endem、Synem 和 Tekmor 的不可信输入与失败责任分别见[Endem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md)、[Synem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-threat-model.md)与[Tekmor 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-threat-model.md)。公开 HTML 只负责直白解释，不复制第二套条款。
 
 [END-SCEN 自然语言场景语料](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md)用二十七个案例寻找规范缺口，但不属于上述规范义务。只有案例转化为唯一条款、登记验证方式并形成正反向量后，对应判断才可能进入符合性要求。
 
+[SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)与[TEK-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-scenarios.md)分别用十个和十四个场景检查组合闭包及证据边界，同样不属于上述规范义务。
+
 ## Endem
 
-[Endem 规范](../specifications/endem.html)解释一个根 `skena`、六个语义面、形式显示、来源确认、显式未知、身份和安全边界。ADR-0011 已采用实验性容器，ADR-0013 以 END-P1 固定载荷，ADR-0014 又以 [END-SRCM](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-source-manifest.md)固定首个来源清单。正式来源语言、求值语言、摘要算法、扩展注册表和稳定 ABI 尚未冻结。
+[Endem 规范](../specifications/endem.html)解释一个根 `skena`、六个语义面、形式显示、来源确认、显式未知、身份和安全边界。ADR-0023 明确 END-CORE 是通用内容标准、END-P1 是封闭内容 Profile、END-FMT 是物理容器；容器接受、Profile 接受和内容接受必须分别报告。ADR-0014 另以 [END-SRCM](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-source-manifest.md)固定首个来源清单。正式来源语言、求值语言、摘要算法、扩展注册表和稳定 ABI 尚未冻结。
+
+判断扩展按问题分别读取：[ADR-0015](../architecture/adr-0015-result-domains.html)分开结果域，[ADR-0016](../architecture/adr-0016-mene-time-model.html)定义持续时间，[ADR-0017](../architecture/adr-0017-negation-and-absence.html)定义否定与缺席，[ADR-0018](../architecture/adr-0018-quantification-and-membership.html)定义量化范围，[ADR-0019](../architecture/adr-0019-measurement-and-thresholds.html)定义测量与阈值，[ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)定义复合事态。它们当前都只冻结抽象内容边界，没有增加 END-P1 物理字段。
 
 ## Synem
 
@@ -39,10 +43,12 @@ badges: ["Authority", "Maturity", "ADR"]
 
 ## Dromen 与 Tekmor
 
-Dromen 是 Praxor 为一次受控实现建立的会话状态，不是磁盘格式。[Tekmor 规范](../specifications/tekmor.html)定义对象、环境、策略、事件、证据范围和最终决定记录。模型评价只能作为其中一项不可信输入。
+[Tekmor 规范](../specifications/tekmor.html)解释主体范围、有限无环溯源、结构化观察、证据类别、完整性、外部有效性评估、相对 `krin` 的覆盖度、决定分离与最小披露。规范源是 [TEK-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-core.md)；模型评价只能保持 `model-candidate`。当前没有物理 Tekmor 格式或组件实现。
+
+Dromen 是 Praxor 为一次受控实现建立的会话状态，不是磁盘格式。会话结束后销毁，允许保留的观察和决定关系才进入 Tekmor。
 
 ## ADR 与开放问题
 
-[ADR-0010](../architecture/adr-0010-native-lexicon.html)至 [ADR-0014](../architecture/adr-0014-source-manifest.html)固定现行词汇、Endem 格式、Profile 与来源清单；[ADR-0015](../architecture/adr-0015-result-domains.html)、[ADR-0016](../architecture/adr-0016-mene-time-model.html)、[ADR-0017](../architecture/adr-0017-negation-and-absence.html)、[ADR-0018](../architecture/adr-0018-quantification-and-membership.html)、[ADR-0019](../architecture/adr-0019-measurement-and-thresholds.html)与 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)固定判断、时间、否定、量化、测量与复合边界；[ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html)固定 Synem 组合闭包与条件激活。ADR-0008 和 ADR-0009 只保存被取代的设计历史。其余扩展、远端协议适配和发行治理集中在[开放问题](../architecture/open-questions.html)。
+[ADR-0010](../architecture/adr-0010-native-lexicon.html)至 [ADR-0014](../architecture/adr-0014-source-manifest.html)固定现行词汇、Endem 格式、Profile 与来源清单；[ADR-0015](../architecture/adr-0015-result-domains.html)至 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)固定判断、时间、否定、量化、测量与复合边界；[ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html)固定 Synem 组合闭包与条件激活；[ADR-0022](../architecture/adr-0022-tekmor-evidence-and-appraisal.html)固定 Tekmor 证据与评估边界；[ADR-0023](../architecture/adr-0023-endem-content-standard.html)固定内容标准、Profile 与容器的分层。ADR-0008 和 ADR-0009 只保存被取代的公开设计历史。其余扩展、远端协议适配和发行治理集中在[开放问题](../architecture/open-questions.html)。
 
 面向标准化时，规范还需关联互操作配置、正反向量、一致性测试、安全分析和版本演进。面向研究与知识产权时，还应关联假设、现有技术、实验、贡献与公开披露记录。

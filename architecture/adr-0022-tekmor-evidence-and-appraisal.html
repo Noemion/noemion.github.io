@@ -1,0 +1,103 @@
+---
+layout: default
+title: "ADR-0022 Tekmor 证据范围与评估边界"
+page_role: "content"
+footer_text: "Noemion · ADR-0022"
+permalink: "/architecture/adr-0022-tekmor-evidence-and-appraisal.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0022</span></nav>
+  <header class="content-introduction"><h1>ADR-0022<br>证据范围<br>评估边界</h1><p>固定 Tekmor 的主体、溯源、观察、完整性、有效性、覆盖度、决定和最小披露边界，让证据可以复核而不因签名、数量或模型自述越权。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">TEK-CORE 0.1.0-draft</span><span class="badge">No Wire Format</span><span class="badge">No Component Code</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">Tekmor 是一项有明确主体、范围、生产者、方法、环境、观察、主张和限制的证据记录。它不是日志包装、可信分数、数学证明或最终验收决定。</p>
+    <p>同一记录必须分开表达原始观察、结构化 <code>phain</code>、派生过程、有限主张、完整性和适用限制。验证者再依据具名政策形成有效性评估，证据集合再相对精确 <code>krin</code> 形成覆盖度；具名权威最后才可能作出决定。</p>
+    <p>本决定建立 <code>TEK-CORE 0.1.0-draft</code>，但不创建 Tekmor 扩展名、物理容器、签名算法、撤销协议或实现。本次工作不表示采集器、验证器、归并器、决定引擎、Theor 或 Praxor 已经实现。</p>
+  </section>
+
+  <section class="content-band">
+    <h2>哲学启发与采用限制</h2>
+    <blockquote><p>“要能看出图像的真假，必须将它同实在比较”</p><cite>路德维希·维特根斯坦《逻辑哲学论》2.223</cite></blockquote>
+    <p>这句话提示的是边界：记录不能只凭自身宣告为真。Tekmor 因此必须让观察与目标关系可比较，也必须保存比较依赖的方法、范围和限制。</p>
+    <p>项目不把“图像”和“事实”的哲学关系直接变成软件定理。主体身份、溯源图、证据类别、覆盖计算、撤销和决定权威仍由规范条款、威胁模型与正反向量定义。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>一项 Tekmor 必须回答九个问题</h2>
+    <div class="table-wrap"><table><thead><tr><th>问题</th><th>最低责任</th><th>不能省略的边界</th></tr></thead><tbody>
+      <tr><td>针对什么</td><td>精确主体身份与声明范围</td><td>名称、路径和“当前对象”不能替代内容或事件身份</td></tr>
+      <tr><td>谁产生</td><td>生产者身份、版本与权限</td><td>生产记录不自动取得判断或决定权限</td></tr>
+      <tr><td>怎样产生</td><td>方法、版本、参数与环境</td><td>方法覆盖决定主张上限</td></tr>
+      <tr><td>用了什么</td><td>精确输入、父记录和派生关系</td><td>未知输入进入限制，不能藏进环境名称</td></tr>
+      <tr><td>观察到什么</td><td>原始引用、变换与结构化 phain</td><td>推断、模型说明和工具成功不冒充原始观察</td></tr>
+      <tr><td>实际声称什么</td><td>有限主张与记录种类</td><td>不得外推到未声明主体、总体或时间</td></tr>
+      <tr><td>怎样检查完整性</td><td>内容身份、认证、序列与签名关系</td><td>完整性不等于事实正确</td></tr>
+      <tr><td>什么仍有限</td><td>时间、丢失、过滤、脱敏和已知缺口</td><td>限制必须参与有效性与覆盖判断</td></tr>
+      <tr><td>谁能继续判断</td><td>验证政策、krin 与决定权威</td><td>记录不能自填 valid 或 accepted</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>记录种类与来源类别分别回答不同问题</h2>
+    <div class="table-wrap"><table><thead><tr><th>维度</th><th>允许值</th><th>用途</th></tr></thead><tbody>
+      <tr><td>记录种类</td><td><code>observation / derivation / attestation / appraisal / decision-record</code></td><td>说明这项记录做了什么</td></tr>
+      <tr><td>来源类别</td><td><code>direct-observation / deterministic-derivation / external-assertion / human-judgment / model-candidate</code></td><td>说明依据怎样产生</td></tr>
+    </tbody></table></div>
+    <p>模型可以生成一项带完整溯源的候选说明，但它仍是 <code>model-candidate</code>。签名可以认证外部声明的来源，却不能把它改成直接观察；人工判断也不能因为职位较高就冒充环境事实。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>四个相邻结果域不得合并</h2>
+    <div class="table-wrap"><table><thead><tr><th>结果域</th><th>允许值</th><th>回答的问题</th></tr></thead><tbody>
+      <tr><td>Tekmor 有效性</td><td><code>valid / invalid / revoked</code></td><td>验证者在指定政策、参考值、环境与截止点下是否接受这项记录</td></tr>
+      <tr><td>证据覆盖度</td><td><code>sufficient / insufficient</code></td><td>有效记录集合是否覆盖精确 krin 的全部观察责任</td></tr>
+      <tr><td>满足判断</td><td><code>met / unmet / agno / fault</code></td><td>skena 相对 phain 与比较契约得到什么结果</td></tr>
+      <tr><td>权威决定</td><td><code>accepted / rejected / deferred</code></td><td>具名权威依据前述结果作出什么决定</td></tr>
+    </tbody></table></div>
+    <p><code>valid</code> 不是 Tekmor 自带字段，而是带政策与截止点的外部评估。<code>decision-record</code> 只记录已经发生的决定事件；创建这种记录不会产生决定权限。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>九条规范规则</h2>
+    <ol>
+      <li><code>TEK-SCP-001</code>：每项主张绑定精确主体和有限范围。</li>
+      <li><code>TEK-PRV-001</code>：溯源图完整、有限、无环且不能循环自证。</li>
+      <li><code>TEK-OBS-001</code>：原始观察、变换、phain 和主张分别记录。</li>
+      <li><code>TEK-CLS-001</code>：记录种类与来源类别不得靠置信度或签名升级。</li>
+      <li><code>TEK-INT-001</code>：完整性和生产者认证不替代事实正确与授权。</li>
+      <li><code>TEK-VAL-001</code>：有效性评估外置，并绑定政策、参考值和截止点。</li>
+      <li><code>TEK-COV-001</code>：覆盖度只相对精确 krin 和不同观察责任计算。</li>
+      <li><code>TEK-DEC-001</code>：评估、满足判断和具名权威决定保持正交。</li>
+      <li><code>TEK-PRI-001</code>：只做最小披露，不保存实时秘密，并声明信息损失。</li>
+    </ol>
+  </section>
+
+  <section class="content-wide">
+    <h2>开放标准与 GNU 机制提供的边界</h2>
+    <ul>
+      <li><a href="https://www.w3.org/TR/prov-dm/">W3C PROV Data Model</a>分开 entity、activity、agent、派生和 bundle。Tekmor 借鉴可追溯的对象—活动—责任图，但不采用 RDF 或 PROV 的物理编码。</li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc9334.html">RFC 9334 RATS Architecture</a>分开 Evidence、验证者的 Attestation Results 和依赖方自己的评估政策。Tekmor 同样不允许验证者替代应用权威作出最终决定。</li>
+      <li><a href="https://slsa.dev/spec/v1.2/provenance">SLSA 1.2 Provenance</a>把外部参数视为不可信输入，并要求记录构建定义、运行细节、解析后的依赖与输出主体。Tekmor 借鉴精确输入和生产者边界，不把构建证明当成通用事实证明。</li>
+      <li><a href="https://guix.gnu.org/manual/en/html_node/Invoking-guix-challenge.html">GNU Guix 的 guix challenge</a>比较本地与替代服务器的独立构建结果。结果不同可以定位不可复现或潜在篡改，却不能单凭差异决定哪一方正确。</li>
+      <li><a href="https://github.com/open-telemetry/semantic-conventions-genai">OpenTelemetry GenAI 语义约定独立仓库</a>正在继续定义 GenAI、MCP、供应商跨度、指标和事件，当前 Schema URL 仍待确定。它只适合作为带版本、默认脱敏的导出映射，不进入 Tekmor 身份。</li>
+      <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/security_best_practices">MCP Security Best Practices</a>禁止 token passthrough，并强调受众、范围和最小权限。Tekmor 可以记录不可逆凭据属性和调用范围，但不得保存令牌正文或实时能力句柄。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>规范影响与验证</h2>
+    <ul>
+      <li>新增 <code>TEK-CORE 0.1.0-draft</code> 九条规范条款。</li>
+      <li>新增九项 Tekmor 威胁和十四个非规范自然语言场景。</li>
+      <li>十八个提案向量覆盖九个允许分类与九个确定拒绝；检查器只证明资料矩阵一致。</li>
+      <li>END-CORE、END-FMT、SYN-CORE 与现有字节保持不变。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>仍未冻结的内容</h2>
+    <p>Tekmor 物理容器、扩展名、字段编号、摘要与签名算法、透明日志、撤销分发、远程查询、跨生产者时钟归并、隐私策略语言和长期归档仍保持开放。没有真实消费者和新 Profile 前，不为了与 Endem 对称创建格式。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0021-synem-closure-and-activation.html">← ADR-0021</a><a href="adr-0023-endem-content-standard.html">ADR-0023 →</a></div>
+</main>

@@ -10,18 +10,24 @@ CORE_SPEC_PATH = ROOT / "spec" / "endem-core.md"
 FORMAT_SPEC_PATH = ROOT / "spec" / "endem-format.md"
 SOURCE_MANIFEST_SPEC_PATH = ROOT / "spec" / "endem-source-manifest.md"
 SYNEM_SPEC_PATH = ROOT / "spec" / "synem-core.md"
-THREAT_PATHS = (ROOT / "spec" / "endem-threat-model.md", ROOT / "spec" / "synem-threat-model.md")
+TEKMOR_SPEC_PATH = ROOT / "spec" / "tekmor-core.md"
+THREAT_PATHS = (
+    ROOT / "spec" / "endem-threat-model.md",
+    ROOT / "spec" / "synem-threat-model.md",
+    ROOT / "spec" / "tekmor-threat-model.md",
+)
 ERROR_CATALOG_PATH = ROOT / "spec" / "endem-errors.md"
 SCENARIO_CORPUS_PATH = ROOT / "spec" / "endem-scenarios.md"
 SYNEM_SCENARIO_PATH = ROOT / "spec" / "synem-scenarios.md"
+TEKMOR_SCENARIO_PATH = ROOT / "spec" / "tekmor-scenarios.md"
 PROFILE_PATH = ROOT / "spec" / "profiles" / "end-p0.json"
 VECTOR_ROOT = ROOT / "vectors" / "semantic"
 SCHEMA_PATH = ROOT / "vectors" / "vector.schema.json"
 
-CLAUSE_ID = re.compile(r"^(?:END|SYN)-[A-Z]+-[0-9]{3}$")
+CLAUSE_ID = re.compile(r"^(?:END|SYN|TEK)-[A-Z]+-[0-9]{3}$")
 VECTOR_ID = re.compile(r"^SV-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
-SPEC_HEADING = re.compile(r"^### ((?:END|SYN)-[A-Z]+-[0-9]{3})\s+—", re.MULTILINE)
-THREAT_HEADING = re.compile(r"^### (THR-(?:END|SYN)-[0-9]{3})\s+—", re.MULTILINE)
+SPEC_HEADING = re.compile(r"^### ((?:END|SYN|TEK)-[A-Z]+-[0-9]{3})\s+—", re.MULTILINE)
+THREAT_HEADING = re.compile(r"^### (THR-(?:END|SYN|TEK)-[0-9]{3})\s+—", re.MULTILINE)
 SCENARIO_HEADING = re.compile(r"^### (SCN-[0-9]{3})\s+—", re.MULTILINE)
 REQUIRED_FACETS = ("rhem", "semion", "skena", "telis", "krin", "apor")
 ALLOWED_VERIFICATION_STATUS = {"covered-by-repo", "planned", "manual-authority"}
@@ -41,8 +47,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
         errors.append("spec/registry.json: registry_version must be 1")
 
     documents = registry.get("documents")
-    if not isinstance(documents, list) or len(documents) != 4:
-        errors.append("spec/registry.json: END-CORE, END-FMT, END-SRCM and SYN-CORE documents are required")
+    if not isinstance(documents, list) or len(documents) != 5:
+        errors.append("spec/registry.json: END-CORE, END-FMT, END-SRCM, SYN-CORE and TEK-CORE documents are required")
     else:
         documents_by_id = {document.get("spec_id"): document for document in documents}
         expected_documents = {
@@ -66,9 +72,14 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 "implementation_status": "vector-checker-only", "wire_status": "unfrozen",
                 "path": "spec/synem-core.md",
             },
+            "TEK-CORE": {
+                "version": "0.1.0-draft", "status": "draft",
+                "implementation_status": "vector-checker-only", "wire_status": "unfrozen",
+                "path": "spec/tekmor-core.md",
+            },
         }
         if set(documents_by_id) != set(expected_documents):
-            errors.append("spec/registry.json: document IDs must be END-CORE, END-FMT, END-SRCM and SYN-CORE")
+            errors.append("spec/registry.json: document IDs must be END-CORE, END-FMT, END-SRCM, SYN-CORE and TEK-CORE")
         for spec_id, expected_document in expected_documents.items():
             document = documents_by_id.get(spec_id, {})
             for key, value in expected_document.items():
@@ -80,8 +91,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 errors.append(f"spec/registry.json: {spec_id} document path does not exist")
 
     supporting_documents = registry.get("supporting_documents")
-    if not isinstance(supporting_documents, list) or len(supporting_documents) != 7:
-        errors.append("spec/registry.json: Endem/Synem threat and scenario documents, error catalog, P0 and P1 Profiles are required")
+    if not isinstance(supporting_documents, list) or len(supporting_documents) != 9:
+        errors.append("spec/registry.json: Endem/Synem/Tekmor threat and scenario documents, error catalog, P0 and P1 Profiles are required")
     else:
         supporting_by_id = {document.get("id"): document for document in supporting_documents}
         threat_document = supporting_by_id.get("END-THREAT", {})
@@ -95,9 +106,11 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: threat model path does not exist")
         expected_supporting = {
             "SYN-THREAT": "spec/synem-threat-model.md",
+            "TEK-THREAT": "spec/tekmor-threat-model.md",
             "END-ERRCAT": "spec/endem-errors.md",
             "END-SCEN": "spec/endem-scenarios.md",
             "SYN-SCEN": "spec/synem-scenarios.md",
+            "TEK-SCEN": "spec/tekmor-scenarios.md",
             "END-P0": "spec/profiles/end-p0.json",
             "END-P1": "spec/profiles/end-p1.json",
         }
@@ -113,6 +126,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: END-SCEN must remain a non-normative design corpus")
         if supporting_by_id.get("SYN-SCEN", {}).get("status") != "non-normative-design-corpus":
             errors.append("spec/registry.json: SYN-SCEN must remain a non-normative design corpus")
+        if supporting_by_id.get("TEK-SCEN", {}).get("status") != "non-normative-design-corpus":
+            errors.append("spec/registry.json: TEK-SCEN must remain a non-normative design corpus")
 
     terms = registry.get("terms")
     if not isinstance(terms, list) or not terms:
@@ -123,7 +138,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: term names must be unique")
         for required_term in (
             "Noemion", "Endem", "Synem", "Dromen", "Tekmor",
-            *REQUIRED_FACETS, "wire-format", "END-P0", "END-P1", "source-manifest",
+            *REQUIRED_FACETS, "wire-format", "content-standard", "content-profile", "END-P0", "END-P1", "source-manifest",
             "satisfaction-result", "decision-result", "session-result", "evidence-status",
             "time-scope", "continuity-policy", "time-coverage",
             "relation-polarity", "negative-evidence", "observation-closure",
@@ -131,6 +146,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
             "measurement-construct", "estimand", "measurement-procedure", "threshold-contract",
             "criterion-leaf", "criterion-composition", "decisive-basis", "evaluation-coverage",
             "closure-member", "binding-record", "dependency-relation", "activation-guard", "activation-status",
+            "evidence-subject", "evidence-scope", "provenance-edge", "evidence-class",
+            "validity-assessment", "coverage-assessment", "disclosure-manifest",
         ):
             if required_term not in term_names:
                 errors.append(f"spec/registry.json: missing term {required_term}")
@@ -211,8 +228,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
 
     threat_heading_ids = THREAT_HEADING.findall(threat_text)
     threats = registry.get("threats")
-    if not isinstance(threats, list) or len(threats) != 21:
-        errors.append("spec/registry.json: exactly 15 Endem and 6 Synem threats are required")
+    if not isinstance(threats, list) or len(threats) != 30:
+        errors.append("spec/registry.json: exactly 15 Endem, 6 Synem and 9 Tekmor threats are required")
     else:
         threat_ids = [threat.get("id") for threat in threats]
         if len(threat_ids) != len(set(threat_ids)):
@@ -225,7 +242,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             )
         for threat in threats:
             threat_id = threat.get("id", "<unknown>")
-            if not re.fullmatch(r"THR-(?:END|SYN)-[0-9]{3}", threat_id):
+            if not re.fullmatch(r"THR-(?:END|SYN|TEK)-[0-9]{3}", threat_id):
                 errors.append(f"spec/registry.json: invalid threat ID {threat_id!r}")
             mapped_clauses = threat.get("clauses")
             if not isinstance(mapped_clauses, list) or not mapped_clauses:
@@ -409,6 +426,8 @@ def validate_public_boundary(errors):
         errors.append("Pages workflow must execute composite situation and criteria vectors")
     if "python3 tests/synem_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute Synem closure and activation vectors")
+    if "python3 tests/tekmor_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute Tekmor evidence and appraisal vectors")
     if "python3 tests/p1_payload_test.py" not in workflow_text:
         errors.append("Pages workflow must execute complete END-P1 payload vectors")
     if "python3 tests/source_manifest_test.py" not in workflow_text:
@@ -444,6 +463,10 @@ def validate_public_boundary(errors):
             "spec/synem-core.md",
             "spec/synem-threat-model.md",
             "vectors/synem",
+            "TEK-CORE 0.1.0-draft",
+            "spec/tekmor-core.md",
+            "spec/tekmor-threat-model.md",
+            "vectors/tekmor",
             "非规范设计审查材料",
             "不是 .endem 物理格式",
         ),
@@ -604,6 +627,30 @@ def validate_public_boundary(errors):
             "MCP 2025-11-25",
             "不表示 Poiet、Theor、Praxor、CLI、解析器或运行时已经实现",
         ),
+        "architecture/adr-0022-tekmor-evidence-and-appraisal.html": (
+            "TEK-CORE 0.1.0-draft",
+            "W3C PROV Data Model",
+            "RFC 9334 RATS Architecture",
+            "SLSA 1.2 Provenance",
+            "GNU Guix 的 guix challenge",
+            "OpenTelemetry GenAI 语义约定独立仓库",
+            "MCP Security Best Practices",
+            "不表示采集器、验证器、归并器、决定引擎、Theor 或 Praxor 已经实现",
+        ),
+        "architecture/adr-0023-endem-content-standard.html": (
+            "END-CORE 0.1.0-draft",
+            "END-P1 0.1.0-draft",
+            "END-FMT 0.1.0-draft",
+            "ELF 不是由 IETF RFC 定义",
+            "通用内容",
+            "内容 Profile",
+            "物理容器",
+            "容器接受",
+            "Profile 接受",
+            "内容接受",
+            "不新增重复规范 ID",
+            "不能证明任何写入器、读取器、CLI 或运行时已经实现",
+        ),
         "specifications/synem.html": (
             "SYN-CORE 0.1.0-draft",
             "spec/synem-core.md",
@@ -612,6 +659,17 @@ def validate_public_boundary(errors):
             "active / inactive / unresolved / error",
             "ADR-0021",
             "不是物理格式",
+        ),
+        "specifications/tekmor.html": (
+            "TEK-CORE 0.1.0-draft",
+            "spec/tekmor-core.md",
+            "spec/tekmor-threat-model.md",
+            "spec/tekmor-scenarios.md",
+            "valid / invalid / revoked",
+            "sufficient / insufficient",
+            "model-candidate",
+            "不是记录对自己的声明",
+            "没有采集器、验证器、归并器、撤销服务或决定引擎",
         ),
         "development/implementation-roadmap.html": (
             "Rust 1.97.0",
@@ -636,6 +694,7 @@ def main():
             CORE_SPEC_PATH.read_text() + "\n" + FORMAT_SPEC_PATH.read_text()
             + "\n" + SOURCE_MANIFEST_SPEC_PATH.read_text()
             + "\n" + SYNEM_SPEC_PATH.read_text()
+            + "\n" + TEKMOR_SPEC_PATH.read_text()
         )
     except OSError as exc:
         errors.append(f"spec sources: cannot read: {exc}")
@@ -655,6 +714,11 @@ def main():
     except OSError as exc:
         errors.append(f"spec/synem-scenarios.md: cannot read: {exc}")
         synem_scenario_text = ""
+    try:
+        tekmor_scenario_text = TEKMOR_SCENARIO_PATH.read_text()
+    except OSError as exc:
+        errors.append(f"spec/tekmor-scenarios.md: cannot read: {exc}")
+        tekmor_scenario_text = ""
 
     scenario_ids = SCENARIO_HEADING.findall(scenario_text)
     if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 28)]:
@@ -699,6 +763,13 @@ def main():
         if token not in synem_scenario_text:
             errors.append(f"spec/synem-scenarios.md: missing design-review boundary {token!r}")
 
+    tekmor_scenario_ids = re.findall(r"^### (TEK-SCN-[0-9]{3})\s+—", tekmor_scenario_text, re.MULTILINE)
+    if tekmor_scenario_ids != [f"TEK-SCN-{index:03d}" for index in range(1, 15)]:
+        errors.append("spec/tekmor-scenarios.md: scenario IDs must be unique and ordered TEK-SCN-001 through TEK-SCN-014")
+    for token in ("固定测试集不能代表未知总体", "循环自证", "模型解释保持候选", "有效签名遇到撤销", "重复日志仍不能补齐覆盖", "不得保存实时凭据"):
+        if token not in tekmor_scenario_text:
+            errors.append(f"spec/tekmor-scenarios.md: missing design-review boundary {token!r}")
+
     if registry is not None:
         clause_ids, covered_vector_refs = validate_registry(
             registry, spec_text, threat_text, errors
@@ -710,14 +781,15 @@ def main():
         print("\n".join(errors))
         return 1
     print(
-        "PASS: END-CORE, END-FMT, END-SRCM and SYN-CORE 0.1.0-draft have unique clauses, explicit "
-        "maturity, traceable evidence, 21 registered threats, executed semantic "
+        "PASS: END-CORE, END-FMT, END-SRCM, SYN-CORE and TEK-CORE 0.1.0-draft have unique clauses, explicit "
+        "maturity, traceable evidence, 30 registered threats, executed semantic "
         "vectors, 27 natural-language design scenarios, 12 result-domain vectors, "
         "12 mene time and continuity vectors, 12 negation and absence vectors, "
         "12 quantification and membership vectors, "
         "12 measurement and threshold vectors, "
         "12 composite situation and criteria vectors, "
         "12 Synem closure and activation vectors, "
+        "18 Tekmor evidence and appraisal vectors, "
         "END-P1 payload/source vectors, "
         "and P0-LANG-001 historical language evidence"
     )

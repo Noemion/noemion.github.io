@@ -10,7 +10,7 @@
       "implementation_status": "vector-checker-only",
       "wire_status": "unfrozen",
       "path": "spec/endem-core.md",
-      "scope": "Endem semantic, authority, state, identity, safety and verification core"
+      "scope": "Endem universal content standard for semantics, authority, state, identity, safety, verification and Profile conformance"
     },
     {
       "spec_id": "END-FMT",
@@ -41,6 +41,16 @@
       "wire_status": "unfrozen",
       "path": "spec/synem-core.md",
       "scope": "Abstract multi-Endem closure, exact binding, authority convergence, member result separation and session activation"
+    },
+    {
+      "spec_id": "TEK-CORE",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "wire_status": "unfrozen",
+      "path": "spec/tekmor-core.md",
+      "scope": "Abstract scoped evidence, provenance, observation, integrity, validity, coverage, appraisal, decision and disclosure boundaries"
     }
   ],
   "supporting_documents": [
@@ -66,6 +76,13 @@
       "scope": "Synem closure, binding, graph, authority, result and activation threats"
     },
     {
+      "id": "TEK-THREAT",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "path": "spec/tekmor-threat-model.md",
+      "scope": "Tekmor scope, provenance, observation, classification, integrity, validity, coverage, decision and disclosure threats"
+    },
+    {
       "id": "END-SCEN",
       "version": "0.1.0-draft",
       "status": "non-normative-design-corpus",
@@ -78,6 +95,13 @@
       "status": "non-normative-design-corpus",
       "path": "spec/synem-scenarios.md",
       "scope": "Natural-language design-review scenarios for closure, binding, permissions, member results and activation"
+    },
+    {
+      "id": "TEK-SCEN",
+      "version": "0.1.0-draft",
+      "status": "non-normative-design-corpus",
+      "path": "spec/tekmor-scenarios.md",
+      "scope": "Natural-language design-review scenarios for evidence scope, provenance, appraisal, coverage, decisions and disclosure"
     },
     {
       "id": "END-P0",
@@ -118,8 +142,10 @@
     {"term": "krin", "kind": "semantic-facet", "decision_status": "accepted", "definition": "结构比较、证据、未知处理和决定权威契约"},
     {"term": "apor", "kind": "semantic-facet", "decision_status": "accepted", "definition": "可表达但尚未获授权决定的投影缺口"},
     {"term": "wire-format", "kind": "interface", "decision_status": "accepted-draft", "definition": "END-FMT 定义的实验性物理字节编码；尚非稳定 ABI"},
+    {"term": "content-standard", "kind": "specification-layer", "decision_status": "accepted", "definition": "END-CORE 定义的通用 Endem 内容语义、不变量、授权与符合性边界"},
+    {"term": "content-profile", "kind": "specification-layer", "decision_status": "accepted", "definition": "在精确 END-CORE 与 END-FMT 版本下封闭字段、类型、枚举、规范顺序、引用、状态和资源上限的内容能力集合"},
     {"term": "END-P0", "kind": "profile", "decision_status": "experimental", "definition": "只用于结构向量和跨语言实验的有限符合性 Profile"},
-    {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "用于未来首条实现路径评审的封闭六记录语义载荷设计 Profile"},
+    {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "用于未来首条实现路径评审的封闭六记录内容设计 Profile"},
     {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 Poiet 使用的实验性逐行来源清单；不是稳定源语言"},
     {"term": "satisfaction-result", "kind": "result-domain", "decision_status": "accepted", "definition": "met、unmet、agno 或 fault；只描述 skena 相对 krin、phain 与 Tekmor 的比较"},
     {"term": "decision-result", "kind": "result-domain", "decision_status": "accepted", "definition": "accepted、rejected 或 deferred；只描述具名权威的最终决定"},
@@ -147,6 +173,13 @@
     ,{"term": "dependency-relation", "kind": "synem-interface", "decision_status": "accepted", "definition": "Synem 成员之间显式登记的必需或可选依赖关系"}
     ,{"term": "activation-guard", "kind": "synem-interface", "decision_status": "accepted", "definition": "引用精确结果事件、结果域、期望值、截止点与授权策略的会话激活条件"}
     ,{"term": "activation-status", "kind": "result-domain", "decision_status": "accepted", "definition": "active、inactive、unresolved 或 error；只描述固定闭包成员在一次会话中是否生效"}
+    ,{"term": "evidence-subject", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "Tekmor 主张所绑定的精确对象、会话、调用、观察集合或决定事件身份"}
+    ,{"term": "evidence-scope", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "限制 Tekmor 主张适用主体、总体、关系、方法、环境、时间和截止点的边界"}
+    ,{"term": "provenance-edge", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "连接输入、活动、派生输出与责任主体的有限无环溯源关系"}
+    ,{"term": "evidence-class", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "direct-observation、deterministic-derivation、external-assertion、human-judgment 或 model-candidate 来源类别"}
+    ,{"term": "validity-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "验证者在精确政策、参考值、环境与截止点下形成的 valid、invalid 或 revoked 评估"}
+    ,{"term": "coverage-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "相对精确 krin 与观察责任形成的 sufficient 或 insufficient 评估"}
+    ,{"term": "disclosure-manifest", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "记录摘要、脱敏、分段披露和外置引用的可见范围、不可见范围及其证据影响"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -169,9 +202,126 @@
     {"id": "THR-SYN-003", "clauses": ["SYN-GRF-001"], "evidence_status": "partial"},
     {"id": "THR-SYN-004", "clauses": ["SYN-AUT-001"], "evidence_status": "partial"},
     {"id": "THR-SYN-005", "clauses": ["SYN-STA-001"], "evidence_status": "partial"},
-    {"id": "THR-SYN-006", "clauses": ["SYN-ACT-001"], "evidence_status": "partial"}
+    {"id": "THR-SYN-006", "clauses": ["SYN-ACT-001"], "evidence_status": "partial"},
+    {"id": "THR-TEK-001", "clauses": ["TEK-SCP-001"], "evidence_status": "partial"},
+    {"id": "THR-TEK-002", "clauses": ["TEK-PRV-001"], "evidence_status": "partial"},
+    {"id": "THR-TEK-003", "clauses": ["TEK-OBS-001"], "evidence_status": "partial"},
+    {"id": "THR-TEK-004", "clauses": ["TEK-CLS-001"], "evidence_status": "partial"},
+    {"id": "THR-TEK-005", "clauses": ["TEK-INT-001"], "evidence_status": "partial"},
+    {"id": "THR-TEK-006", "clauses": ["TEK-VAL-001"], "evidence_status": "partial"},
+    {"id": "THR-TEK-007", "clauses": ["TEK-COV-001"], "evidence_status": "partial"},
+    {"id": "THR-TEK-008", "clauses": ["TEK-DEC-001"], "evidence_status": "partial"},
+    {"id": "THR-TEK-009", "clauses": ["TEK-PRI-001"], "evidence_status": "partial"}
   ],
   "clauses": [
+    {
+      "id": "TEK-SCP-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "every Tekmor producer, verifier and consumer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
+        {"status": "planned", "ref": "peira:tekmor-scope-binding"}
+      ]
+    },
+    {
+      "id": "TEK-PRV-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Tekmor producers, mergers and every verifier",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
+        {"status": "planned", "ref": "peira:tekmor-provenance-closure"}
+      ]
+    },
+    {
+      "id": "TEK-OBS-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "observation adapters, Tekmor producers and evaluators",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
+        {"status": "planned", "ref": "peira:tekmor-observation-alignment"}
+      ]
+    },
+    {
+      "id": "TEK-CLS-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Tekmor producers and every evidence consumer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
+        {"status": "planned", "ref": "peira:tekmor-evidence-class"}
+      ]
+    },
+    {
+      "id": "TEK-INT-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "integrity verifiers, policy owners and every consumer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
+        {"status": "planned", "ref": "peira:tekmor-integrity-separation"}
+      ]
+    },
+    {
+      "id": "TEK-VAL-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Tekmor verifiers, revocation authorities and policy owners",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
+        {"status": "planned", "ref": "peira:tekmor-validity-appraisal"}
+      ]
+    },
+    {
+      "id": "TEK-COV-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "coverage evaluators, krin owners and decision authorities",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
+        {"status": "planned", "ref": "peira:tekmor-coverage"}
+      ]
+    },
+    {
+      "id": "TEK-DEC-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "appraisal producers, decision authorities and result consumers",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
+        {"status": "planned", "ref": "peira:tekmor-decision-separation"}
+      ]
+    },
+    {
+      "id": "TEK-PRI-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Tekmor producers, disclosure policy owners and storage operators",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
+        {"status": "planned", "ref": "peira:tekmor-minimal-disclosure"}
+      ]
+    },
     {
       "id": "SYN-CLS-001",
       "decision_status": "accepted",
@@ -258,6 +408,41 @@
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
       "failure_owner": "release validation",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-CON-003",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "every reader, conformance reporter and release validation",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"},
+        {"status": "planned", "ref": "peira:layered-conformance-report"}
+      ]
+    },
+    {
+      "id": "END-CON-004",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Profile maintainers, Poiet and every reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
+        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
+        {"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"},
+        {"status": "planned", "ref": "peira:profile-semantic-closure"}
+      ]
+    },
+    {
+      "id": "END-CON-005",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "specification and Profile maintainers",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
