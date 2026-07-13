@@ -79,6 +79,18 @@ permalink: "/specifications/endem.html"
   </section>
 
   <section class="content-wide">
+    <h2>否定与缺席怎样判断</h2>
+    <p class="lead">否定目标保留同一关系、同一角色和顺序，只改变 <code>skena</code> 的极性。没有记录默认表示观察不足，不表示关系已经被观察为不成立。</p>
+    <div class="table-wrap"><table><thead><tr><th>依据</th><th>判断</th><th>边界</th></tr></thead><tbody>
+      <tr><td>同构且显式 <code>negative</code> 的有效 <code>phain</code></td><td>可以支持 <code>met</code></td><td>必须绑定具名生产者、范围和方法。</td></tr>
+      <tr><td>同构且显式 <code>positive</code> 的反例</td><td><code>unmet</code></td><td>不能被更多空查询抵消。</td></tr>
+      <tr><td>查询未命中或日志为空</td><td>默认 <code>agno</code></td><td>只有权威证明全集、路径、时间、枚举与损失边界均封闭时，完整缺席才可支持 <code>met</code>。</td></tr>
+      <tr><td>观察器或适配器未按契约完成</td><td><code>fault</code></td><td>不能改写成目标为假或没有事件。</td></tr>
+    </tbody></table></div>
+    <p>完整决定见 <a href="../architecture/adr-0017-negation-and-absence.html">ADR-0017</a>。END-P1 只补齐原子负极性规范字节，不增加封闭声明字段；复合和量化否定仍未冻结。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>自然语言场景怎样检验六个语义面</h2>
     <p class="lead">同一套字段只有在能区分不同失败原因时才有意义。以下场景不是产品演示或可执行测试，而是用来暴露规范缺口的设计审查语料。</p>
     <div class="table-wrap"><table><thead><tr><th>来源场景</th><th>必须表达的区别</th><th>不能偷换成什么</th></tr></thead><tbody>
@@ -94,8 +106,11 @@ permalink: "/specifications/endem.html"
       <tr><td>固定发布窗口持续可用</td><td><code>fixed</code> UTC 半开区间、具名时钟权威和 strict/budgeted 政策</td><td>本地默认时区或相对日期不能成为规范输入</td></tr>
       <tr><td>只有三个健康采样点</td><td>有效 Tekmor 仍存在覆盖空洞，结果为 <code>agno</code></td><td>离散样本、插值或没有告警不证明连续成立</td></tr>
       <tr><td>部署完成后保持十分钟</td><td><code>elapsed</code> 绑定具名事件，以单调时钟测量固定时长</td><td>墙钟回拨、远端完成时间戳或未声明重启不能决定经过时长</td></tr>
+      <tr><td>撤销匿名用户读取私有报告的能力</td><td>同一 <code>can_read</code> 关系与角色保持不变，只把事态极性设为 <code>negative</code></td><td>不另造 <code>cannot_read</code>，也不删除关系节点</td></tr>
+      <tr><td>部分审计日志没有访问记录</td><td>范围未封闭，结果为 <code>agno</code></td><td>没有访问日志不等于没有访问</td></tr>
+      <tr><td>不可绕过入口完整枚举后没有访问记录</td><td>封闭声明有效且没有正反例时，缺席可以在该范围支持 <code>met</code></td><td>封闭的是有限观察范围，不是整个世界</td></tr>
     </tbody></table></div>
-    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。十二个场景当前登记为非规范材料，不证明 Poiet、Theor、Praxor 或任何自然语言解析与时间求值能力已经存在。</p>
+    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。十五个场景当前登记为非规范材料，不证明 Poiet、Theor、Praxor 或任何自然语言解析、时间求值或缺席推断能力已经存在。</p>
   </section>
 
   <section class="content-wide">
@@ -131,7 +146,7 @@ permalink: "/specifications/endem.html"
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p>六个语义面、一个根 <code>skena</code>、事态与方向分离、<code>phain</code> 结构比较、三类未知、三个制品状态和 <code>.endem</code> 扩展名已经采用。END-P1 又形成 2 个语义接受和 11 个预期拒绝字节向量；它们覆盖非空 <code>apor</code>、截断、目录乱序、非最短 CBOR 和四类资源边界。量化与时间、求值语言、压缩、摘要、签名和稳定 ABI 仍需新的 Profile；两个独立实现和对抗测试只能在代码阶段开启后建立。</p>
+    <p>六个语义面、一个根 <code>skena</code>、事态与方向分离、<code>phain</code> 结构比较、三类未知、否定与缺席边界、三个制品状态和 <code>.endem</code> 扩展名已经采用。END-P1 又形成 3 个语义接受和 11 个预期拒绝字节向量；它们覆盖正负极性、非空 <code>apor</code>、截断、目录乱序、非最短 CBOR 和四类资源边界。复合与量化否定、时间和封闭声明字段、求值语言、压缩、摘要、签名和稳定 ABI 仍需新的 Profile；两个独立实现和对抗测试只能在代码阶段开启后建立。</p>
   </section>
   <div class="next-prev"><a href="index.html">← 规范参考指南</a><a href="synem.html">Synem 规范 →</a></div>
 </main>

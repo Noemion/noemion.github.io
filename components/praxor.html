@@ -75,6 +75,17 @@ permalink: "/components/praxor.html"
   </section>
 
   <section class="content-wide">
+    <h2>负观察与封闭范围责任</h2>
+    <ul>
+      <li>Praxor 必须把显式负观察、查询未命中和观察器故障记录为三种不同事实。</li>
+      <li>空日志、工具“未发现”或模型结论默认产生 <code>agno</code>，不能自动生成负极性 <code>phain</code>。</li>
+      <li>从缺席推断前，控制平面必须核对具名权威、全集、全部角色路径、时间截止、完整枚举、迟到窗口和损失边界。</li>
+      <li>同构正极性反例产生 <code>unmet</code>；观察器未按契约完成产生 <code>fault</code>。</li>
+    </ul>
+    <p>这些是 ADR-0017 的未来运行责任。当前没有 Praxor、日志收集器、完整性证明器或求值器。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>失败与拒绝责任</h2>
     <div class="table-wrap"><table><thead><tr><th>失败</th><th>Praxor 必须记录</th><th>后续状态</th></tr></thead><tbody>
       <tr><td>Load rejected</td><td>对象身份、失败层、规则和位置</td><td>会话 <code>failed</code>；不创建 Dromen，也不伪造满足结果。</td></tr>
@@ -88,7 +99,7 @@ permalink: "/components/praxor.html"
 
   <section class="content-band">
     <h2>当前成熟度与未冻结接口</h2>
-    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、Tekmor 不等于验收、结果域分离以及 mene 时钟责任已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、时间字段、预算单位、事件编码和决定类 Tekmor 尚未冻结。</p>
+    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、Tekmor 不等于验收、结果域分离、mene 时钟以及否定观察责任已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、时间和封闭声明字段、预算单位、事件编码和决定类 Tekmor 尚未冻结。</p>
   </section>
   <div class="next-prev"><a href="theor.html">← Theor</a><a href="../architecture/endem-lifecycle.html">Endem 生命周期 →</a></div>
 </main>

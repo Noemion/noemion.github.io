@@ -11,7 +11,7 @@ permalink: "/specifications/index.html"
   <section>
     <h2>先看哪些规范</h2>
     <p class="lead">先读 Endem，理解一项目标怎样成为可检查制品。再读 Synem，理解多个目标怎样解析依赖。最后读 Tekmor，理解证据能支持什么判断，又不能证明什么。</p>
-    <p>名称、职责、六个语义面、状态、<code>.endem</code> 扩展名、结果域和 mene 抽象时间语义已经采用。END-P1 已关闭对象载荷，END-SRCM 已关闭首个实验来源清单；当前只有资料检查器读取这些草案，没有 Rust 组件、时钟适配器或求值器。mene 物理字段、Synem/Tekmor 编码、摘要、签名和稳定 ABI 仍未冻结。</p>
+    <p>名称、职责、六个语义面、状态、<code>.endem</code> 扩展名、结果域、mene 抽象时间以及否定与缺席边界已经采用。END-P1 已关闭对象载荷，END-SRCM 已关闭首个实验来源清单；当前只有资料检查器读取这些草案，没有 Rust 组件、时钟适配器或求值器。mene 物理字段、封闭观察声明、Synem/Tekmor 编码、摘要、签名和稳定 ABI 仍未冻结。</p>
   </section>
   <section>
     <h2>三项规范</h2>
@@ -29,13 +29,14 @@ permalink: "/specifications/index.html"
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 格式条款</a></td><td>固定前导、记录目录、受限 CBOR、结构实验 END-P0 与设计 Profile END-P1。</td><td>END-FMT 0.1.0-draft 尚非稳定 ABI，也没有公开符合性声明。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 Profile</a></td><td>六记录字段键、嵌套 map、枚举、规范数组顺序和资源限制。</td><td>只覆盖 nascent 与 kine，不预留尚无消费者的未来字段。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-source-manifest.md">END-SRCM 来源清单</a></td><td>首个 Poiet 输入的指令、转义、基数、授权边界和 END-P1 映射。</td><td>是可替换的实验接口，不是稳定源语言或 Endem 身份。</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 场景语料</a></td><td>十二个自然语言场景检查方向、否定、歧义、观察、故障、权威、多根、结果域和持续时间边界。</td><td>是非规范设计审查材料，不是解析能力、符合性测试或实现证据。</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 场景语料</a></td><td>十五个自然语言场景检查方向、否定、歧义、观察、故障、权威、多根、结果域、持续时间和缺席推断边界。</td><td>是非规范设计审查材料，不是解析能力、符合性测试或实现证据。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读登记</a></td><td>规范、术语、成熟度、实现状态与验证引用。</td><td><code>accepted</code> 不表示稳定发行；计划测试不能写成已覆盖。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md">威胁模型</a><br><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-errors.md">诊断目录</a></td><td>把不可信输入、资源放大和共同故障映射到条款与稳定实验错误码。</td><td>END-P0 数值只支持第一轮实验，仍需规模和复杂度证据。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/semantic">语义向量集</a></td><td>多个根、事态混入目标力量、未记录歧义和模型越权等正反案例。</td><td>这些 JSON 不是 .endem 物理格式。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/result-domains/cases.json">结果域向量集</a></td><td>十二个提案覆盖满足、决定、会话和证据状态的允许组合与确定拒绝。</td><td>检查器只验证 ADR-0015 矩阵，不是 Praxor、求值器或决定引擎。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/mene/cases.json">mene 时间向量集</a></td><td>十二个提案覆盖 fixed/elapsed、strict/budgeted、覆盖缺口、违约和时钟故障。</td><td>检查器只验证 ADR-0016 抽象矩阵，不是时钟、监控器、Praxor 或求值器。</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/wire">字节向量集</a></td><td>END-P0 含 1 个结构接受和 5 个结构拒绝；END-P1 含 2 个接受和 11 个分层拒绝。</td><td>这些仍是实验性规范字节，不构成稳定 ABI。</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/negation/cases.json">否定与缺席向量集</a></td><td>十二个提案覆盖显式负观察、空结果、封闭范围、正反例和观察故障。</td><td>检查器只验证 ADR-0017 的结果矩阵，不是日志收集器、Praxor 或求值器。</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/wire">字节向量集</a></td><td>END-P0 含 1 个结构接受和 5 个结构拒绝；END-P1 含 3 个接受和 11 个分层拒绝。</td><td>这些仍是实验性规范字节，不构成稳定 ABI。</td></tr>
     </tbody></table></div>
   </section>
   <section>
@@ -45,7 +46,7 @@ permalink: "/specifications/index.html"
   <section>
     <h2>规范与实现的边界</h2>
     <div class="table-wrap"><table><thead><tr><th>层次</th><th>当前权威内容</th><th>尚未形成的证据</th></tr></thead><tbody>
-      <tr><td>语义</td><td>一个根 skena、六个语义面、形式显示、显式未知、满足与权威；已有 12 个设计审查场景、6 个条款化语义向量、12 个结果域向量和 12 个 mene 提案向量</td><td>场景和提案向量还不是组件证据；时间字段、统计判据、结果事件编码、跨领域最小性、关系等价和求值语言仍未冻结</td></tr>
+      <tr><td>语义</td><td>一个根 skena、六个语义面、形式显示、显式未知、满足与权威；已有 15 个设计审查场景、7 个条款化语义向量、12 个结果域、12 个 mene 和 12 个否定提案向量</td><td>场景和提案向量还不是组件证据；时间与封闭声明字段、统计判据、结果事件编码、跨领域最小性、关系等价和求值语言仍未冻结</td></tr>
       <tr><td>组合</td><td>内容寻址、显式绑定、权限不扩大、冲突关闭失败</td><td>大规模闭包性能、循环处理和远程仓库协议</td></tr>
       <tr><td>证据</td><td>Tekmor 可定位、可绑定、可声明强度，但不自动证明结论</td><td>稳定事件编码、跨实现验证和撤销策略</td></tr>
       <tr><td>物理格式</td><td>实验性魔数、64 字节前导、48 字节目录、六种记录、受限 CBOR，以及 END-P1 封闭字段 schema</td><td>压缩、摘要、签名、Synem 和稳定 ABI</td></tr>

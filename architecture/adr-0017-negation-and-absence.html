@@ -1,0 +1,83 @@
+---
+layout: default
+title: "ADR-0017 否定事态与缺席证据"
+page_role: "content"
+footer_text: "Noemion · ADR-0017"
+permalink: "/architecture/adr-0017-negation-and-absence.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0017</span></nav>
+  <header class="content-introduction"><h1>ADR-0017<br>否定事态<br>缺席证据</h1><p>分开关系不成立、没有观察和观察系统故障，避免用空日志、部分搜索或模型未发现异常来证明禁止目标已经满足。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">Negative Evidence</span><span class="badge">No Wire Schema Change</span><span class="badge">No Component Code</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">否定目标必须保留被否定的关系。没有关系节点不是否定，没有日志也不是负事实；只有显式负观察，或在具名封闭范围内得到完整支持的缺席，才能支持关系不成立。</p>
+    <p>本决定冻结抽象语义、禁止推导与现有 END-P1 负极性案例。它不增加 END-P1 字段；END-P1 已有 <code>positive / negative</code> 枚举，当前只补齐此前缺失的负极性语义与规范字节。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>哲学启发与采用限制</h2>
+    <p>维特根斯坦在《逻辑哲学论》命题 2.06 中写道：“事态的存在和不存在即是实在。”贺绍甲译本紧接着把两者称为肯定事实与否定事实；命题 2.062 又提醒，不能从一个事态的存在或不存在推出另一个事态。</p>
+    <p>Noemion 只采用其中的问题区分：同一关系可以成立或不成立，否定不能靠另一个无关关系暗示。软件系统却永远不能假装拥有命题 2.05 所说的全部世界事实；因此局部数据中没有记录，不能直接推出世界中没有相应事态。</p>
+    <p>命题 4.0621 进一步说明，否定记号不对应实在中的一个独立对象。工程上据此拒绝为每个谓词再创造 <code>not_*</code> 谓词，但正式规则仍由 END-CORE、Profile 与向量定义，不由哲学命题直接推出。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>三个问题必须分开</h2>
+    <div class="table-wrap"><table><thead><tr><th>情况</th><th>表示</th><th>默认结果</th><th>不能偷换</th></tr></thead><tbody>
+      <tr><td>关系被明确观察为不成立</td><td>同一关系、同一角色、显式 <code>negative</code> 的 <code>phain</code></td><td>在权威与范围有效时可以支持 <code>met</code></td><td>不能用自由文本“没有”或模型结论替代结构化观察。</td></tr>
+      <tr><td>数据中没有匹配记录</td><td>查询范围、数据集身份与空结果 Tekmor</td><td><code>agno</code></td><td>不能默认成为负极性 <code>phain</code>。</td></tr>
+      <tr><td>观察器、日志链或适配器失效</td><td>故障主体、契约、影响范围与原因</td><td><code>fault</code></td><td>不能写成目标为假或未发生事件。</td></tr>
+      <tr><td>发现同角色的正极性反例</td><td>显式 <code>positive</code> 的同构 <code>phain</code></td><td><code>unmet</code></td><td>不能被更多空结果或拒绝事件抵消。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>否定保留同一关系结构</h2>
+    <ul>
+      <li><code>semion</code> 只登记一次谓词身份、角色名、角色顺序与指称，例如 <code>can_read(actor, resource)</code>。</li>
+      <li><code>skena</code> 引用该关系，并用 <code>positive</code> 或 <code>negative</code> 表示可能事态的极性。</li>
+      <li><code>telis</code> 仍只表示 <code>kine</code> 或 <code>mene</code>，不能再增加 <code>avoid</code> 或 <code>forbid</code> 重复否定。</li>
+      <li>删除关系、另造 <code>cannot_read</code>、交换 actor/resource 或把空列表当作否定，都会破坏与 <code>phain</code> 的同构比较。</li>
+      <li>END-P1 当前只支持原子关系的极性。复合否定、量化否定、双重否定消去和德摩根变换继续保持开放。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>何时可以从缺席推断</h2>
+    <p class="lead">封闭的是一个有限观察范围，不是世界。具名权威必须先证明当前数据覆盖了目标要求的全部主体、关系、角色路径和时间。</p>
+    <div class="table-wrap"><table><thead><tr><th>封闭声明</th><th>必须回答</th><th>缺失后的结果</th></tr></thead><tbody>
+      <tr><td>权威与全集</td><td>谁有权声明封闭；枚举哪些主体、关系、对象和环境。</td><td><code>agno</code></td></tr>
+      <tr><td>角色路径</td><td>所有访问入口、代理、缓存、批处理和旁路是否都被覆盖。</td><td><code>agno</code></td></tr>
+      <tr><td>时间与截止点</td><td>观察采用哪个区间；迟到记录何时不再可能出现。</td><td><code>agno</code></td></tr>
+      <tr><td>完整枚举方法</td><td>怎样证明数据不是采样、部分索引或分页截断。</td><td><code>agno</code></td></tr>
+      <tr><td>损失与排除</td><td>丢失、过滤、去重、撤销、未知值和明确排除项分别是多少。</td><td>未知为 <code>agno</code>；契约失效为 <code>fault</code></td></tr>
+    </tbody></table></div>
+    <p>只有上述声明有效、证据覆盖充分且没有正极性反例时，缺席才能在声明范围内支持 <code>met</code>。完整性随后被撤销或发现旁路时，旧结论必须可定位并失效。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部标准与 GNU 工具提供的对照</h2>
+    <p><a href="https://www.w3.org/TR/owl2-primer/#Open_World_Assumption">W3C OWL 2 Primer 的开放世界说明</a>区分“没有陈述”和“陈述为假”；<a href="https://www.w3.org/TR/shacl/#ClosedConstraintComponent">W3C SHACL 封闭约束</a>则只在显式形状范围内限制允许属性。Noemion 采用同样的范围纪律，但不把 OWL 个体、SHACL Shape 或 RDF 数据集直接变成 Endem 字段。</p>
+    <p><a href="https://www.w3.org/TR/sparql11-query/#neg-notexists">SPARQL 1.1 NOT EXISTS</a>判断给定数据集和当前解映射中是否存在匹配图模式。查询没有匹配只说明该查询范围；它不会自动证明外部世界不存在对应事态。</p>
+    <p><a href="https://www.gnu.org/software/grep/manual/grep.html#General-Output-Control">GNU grep 输出控制</a>可以列出指定输入中没有选中行的文件。这个行为是很好的工程类比：结果始终受输入文件、匹配表达式和读取错误约束；一次无匹配不能越过搜索范围成为普遍否定。</p>
+    <p><a href="https://opentelemetry.io/docs/specs/otel/logs/data-model/">OpenTelemetry Logs 数据模型</a>区分事件发生时间与收集系统观察时间，并记录来源和属性。Noemion 据此作出一项明确推论：遥测记录可以成为观察，但这份数据模型本身不证明日志流完整；完整性仍须由独立的封闭声明和损失边界证明。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>后果与验证路线</h2>
+    <ul>
+      <li>END-CORE 新增显式关系极性、负观察依据和封闭观察范围三条义务。</li>
+      <li>新增十五个自然语言设计场景中的三个否定案例，以及十二个否定提案向量。</li>
+      <li>END-P1 增加一个负极性语义接受字节向量，不修改记录、字段键、枚举值或 Profile ID。</li>
+      <li>未来 Praxor 与 Tekmor 必须保存空查询的实际范围、完整性声明和损失信息；当前没有日志收集器、策略引擎或求值器。</li>
+      <li>外部 Agent、MCP 工具、检索器或模型的“未发现”只是一项带来源声明，不能自动成为负极性观察。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>仍未冻结的内容</h2>
+    <p>复合与量化否定、双重否定规范化、封闭声明的物理字段、跨生产者完整性合并、迟到窗口、撤销传播、负观察签名和隐私保护仍需新 Profile、威胁分析与实现证据。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0016-mene-time-model.html">← ADR-0016</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

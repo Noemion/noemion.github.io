@@ -115,6 +115,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             *REQUIRED_FACETS, "wire-format", "END-P0", "END-P1", "source-manifest",
             "satisfaction-result", "decision-result", "session-result", "evidence-status",
             "time-scope", "continuity-policy", "time-coverage",
+            "relation-polarity", "negative-evidence", "observation-closure",
         ):
             if required_term not in term_names:
                 errors.append(f"spec/registry.json: missing term {required_term}")
@@ -195,8 +196,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
 
     threat_heading_ids = THREAT_HEADING.findall(threat_text)
     threats = registry.get("threats")
-    if not isinstance(threats, list) or len(threats) != 11:
-        errors.append("spec/registry.json: exactly 11 registered Endem threats are required")
+    if not isinstance(threats, list) or len(threats) != 12:
+        errors.append("spec/registry.json: exactly 12 registered Endem threats are required")
     else:
         threat_ids = [threat.get("id") for threat in threats]
         if len(threat_ids) != len(set(threat_ids)):
@@ -383,6 +384,8 @@ def validate_public_boundary(errors):
         errors.append("Pages workflow must execute result-domain vectors")
     if "python3 tests/mene_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute mene time and continuity vectors")
+    if "python3 tests/negation_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute negation and absence vectors")
     if "python3 tests/p1_payload_test.py" not in workflow_text:
         errors.append("Pages workflow must execute complete END-P1 payload vectors")
     if "python3 tests/source_manifest_test.py" not in workflow_text:
@@ -407,6 +410,7 @@ def validate_public_boundary(errors):
             "vectors/semantic",
             "vectors/result-domains",
             "vectors/mene",
+            "vectors/negation",
             "vectors/wire",
             "spec/endem-threat-model.md",
             "spec/endem-scenarios.md",
@@ -424,7 +428,9 @@ def validate_public_boundary(errors):
             "五个结果域分别回答什么",
             "ADR-0015",
             "ADR-0016",
+            "ADR-0017",
             "时间范围和连续性政策",
+            "否定与缺席怎样判断",
             "观察不足是",
             "求值过程失败为",
             "两个 Endem",
@@ -442,6 +448,7 @@ def validate_public_boundary(errors):
             "不属于上述规范义务",
             "ADR-0015",
             "ADR-0016",
+            "ADR-0017",
         ),
         "architecture/adr-0012-rust-core-language.html": (
             "Rust 1.97.0",
@@ -492,6 +499,20 @@ def validate_public_boundary(errors):
             "不增加 END-P1 字段",
             "没有计时器、监控器或求值组件",
         ),
+        "architecture/adr-0017-negation-and-absence.html": (
+            "同一关系、同一角色",
+            "negative",
+            "agno",
+            "fault",
+            "封闭观察范围",
+            "W3C OWL 2 Primer",
+            "W3C SHACL",
+            "SPARQL 1.1 NOT EXISTS",
+            "GNU grep",
+            "OpenTelemetry Logs",
+            "不增加 END-P1 字段",
+            "没有日志收集器、策略引擎或求值器",
+        ),
         "development/implementation-roadmap.html": (
             "Rust 1.97.0",
             "C/Rust 双原型",
@@ -530,8 +551,8 @@ def main():
         scenario_text = ""
 
     scenario_ids = SCENARIO_HEADING.findall(scenario_text)
-    if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 13)]:
-        errors.append("spec/endem-scenarios.md: scenario IDs must be unique and ordered SCN-001 through SCN-012")
+    if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 16)]:
+        errors.append("spec/endem-scenarios.md: scenario IDs must be unique and ordered SCN-001 through SCN-015")
     for token in (
         "事态由对象结合构成（2.01）",
         "图示形式由结构显示而非自我陈述（2.17–2.172）",
@@ -545,6 +566,9 @@ def main():
         "离散健康采样不能证明连续可用",
         "单调时钟",
         "观测覆盖空洞",
+        "否定不创造第二套关系",
+        "没有访问日志不等于没有访问",
+        "封闭范围才允许从缺席推断",
         "不是可执行测试",
     ):
         if token not in scenario_text:
@@ -562,9 +586,9 @@ def main():
         return 1
     print(
         "PASS: END-CORE, END-FMT and END-SRCM 0.1.0-draft have unique clauses, explicit "
-        "maturity, traceable evidence, 11 registered threats, executed semantic "
-        "vectors, 12 natural-language design scenarios, 12 result-domain vectors, "
-        "12 mene time and continuity vectors, "
+        "maturity, traceable evidence, 12 registered threats, executed semantic "
+        "vectors, 15 natural-language design scenarios, 12 result-domain vectors, "
+        "12 mene time and continuity vectors, 12 negation and absence vectors, "
         "END-P1 payload/source vectors, "
         "and P0-LANG-001 historical language evidence"
     )

@@ -63,7 +63,7 @@ badges: ["Documentation"]
 
 新建一套手册时，先在 `_data/manuals.yml` 登记手册级信息与允许的分组；已有手册新增专题不修改该数据文件。`manual_order` 在同一手册内必须唯一，`manual_group` 必须对应已登记分组。手册首页使用 `manual_is_index: true`，术语索引入口使用 `manual_index_entry: true`。
 
-规范登记检查运行 `python3 tests/spec_contract_test.py`，语义向量执行运行 `python3 tests/semantic_vector_test.py`，结果域向量执行运行 `python3 tests/result_domain_vector_test.py`，mene 时间向量执行运行 `python3 tests/mene_vector_test.py`，END-P0 结构字节运行 `python3 tests/wire_vector_test.py`，END-P1 完整载荷运行 `python3 tests/p1_payload_test.py`，源码页面检查运行 `python3 tests/site_quality_test.py`。完整发布检查随后运行 `bundle exec jekyll build`，执行 `cp sitemap.md _site/sitemap.md`，再运行 `python3 tests/site_quality_test.py _site`；GitHub Actions 按同一顺序验证并部署。构建产物中的手册目录数据按正式路由排序，不能让文件系统或 Jekyll 页面枚举顺序改变同一提交的输出字节。
+规范登记检查运行 `python3 tests/spec_contract_test.py`，语义向量执行运行 `python3 tests/semantic_vector_test.py`，结果域向量执行运行 `python3 tests/result_domain_vector_test.py`，mene 时间向量执行运行 `python3 tests/mene_vector_test.py`，否定与缺席向量执行运行 `python3 tests/negation_vector_test.py`，END-P0 结构字节运行 `python3 tests/wire_vector_test.py`，END-P1 完整载荷运行 `python3 tests/p1_payload_test.py`，源码页面检查运行 `python3 tests/site_quality_test.py`。完整发布检查随后运行 `bundle exec jekyll build`，执行 `cp sitemap.md _site/sitemap.md`，再运行 `python3 tests/site_quality_test.py _site`；GitHub Actions 按同一顺序验证并部署。构建产物中的手册目录数据按正式路由排序，不能让文件系统或 Jekyll 页面枚举顺序改变同一提交的输出字节。
 
 ### 项目时间线配置与嵌入
 
@@ -121,13 +121,15 @@ ADR-0011 规定 END-FMT 0.1 的实验性容器边界：64 字节固定前导、4
 
 ADR-0012 参考 P0-LANG-001 留下的历史 C/Rust 研究结果，把 Rust 1.97.0 记录为未来 Poiet 与生产读取核心的候选语言。项目当前不运行该实验，也没有组件实现；进入代码阶段后必须重新审查工具链、依赖和验证范围。
 
-ADR-0013 保留 END-P0 作为结构实验，并建立 profile 2 的 END-P1 作为首个设计 Profile。END-P1 固定六个记录的字段键、嵌套 map、枚举、规范数组顺序与引用闭包；当前 13 个字节向量供资料检查器比较 2 个语义接受和 11 类预期拒绝，其中包含非空 `apor`、截断、目录乱序、非最短 CBOR 以及资源边界。它仍不是稳定 ABI，也没有组件实现。
+ADR-0013 保留 END-P0 作为结构实验，并建立 profile 2 的 END-P1 作为首个设计 Profile。END-P1 固定六个记录的字段键、嵌套 map、枚举、规范数组顺序与引用闭包；当前 14 个字节向量供资料检查器比较 3 个语义接受和 11 类预期拒绝，其中包含正负极性、非空 `apor`、截断、目录乱序、非最短 CBOR以及资源边界。它仍不是稳定 ABI，也没有组件实现。
 
 ADR-0014 采用首个实验性 Poiet 来源清单。它用直白的逐行指令分开自然语言来源、授权投影和未决 <code>apor</code>，并确定性映射到 END-P1；它不是稳定源语言，正式语言出现后直接删除。
 
 ADR-0015 分开五个结果域：制品生命周期、满足判断、权威决定、Praxe 会话终止，以及 Tekmor 有效性与证据覆盖度。外部 Agent 的 `completed`、工具成功和会话正常结束都不能直接成为 `met` 或 `accepted`；这项决定不增加 END-P1 字段，也不表示决定引擎已经实现。
 
 ADR-0016 固定 `mene` 的抽象时间与连续性语义：跨系统时段使用具名权威解析的 `fixed` UTC 半开区间，会话内经过时长使用具名事件和单调时钟的 `elapsed` 范围；连续性只使用 `strict` 或完整 `budgeted` 政策。END-P1 继续只支持 `kine`，当前没有时间字段或运行组件。
+
+ADR-0017 分开否定事态、记录缺席和观察故障。负目标保留同一关系、角色与顺序；空日志和未命中查询默认只能支持 `agno`。只有具名权威证明有限观察范围已经封闭时，完整缺席才能支持 `met`；END-P1 当前只补齐原子负极性向量，没有封闭声明字段或运行组件。
 
 Synem 是两个或更多 Endem 经符号、依赖、约束与内容身份解析后形成、可以确定性封装的组合闭包；单个自包含 Endem 不需要 Synem。Dromen 是 attested Endem 或 Synem 通过重新验证、策略和能力授予后形成的已装载运行态；Tekmor 是绑定明确主体、声明范围、方法、环境、结果和限制的证据。Tekmor 只支持声明范围内的判断，不能自动升级为最终验收。
 

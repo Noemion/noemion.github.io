@@ -103,7 +103,10 @@
     {"term": "evidence-status", "kind": "result-domain", "decision_status": "accepted", "definition": "Tekmor 的 valid、invalid 或 revoked 与证据集合的 sufficient 或 insufficient 两个正交维度"},
     {"term": "time-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "mene 使用的 fixed UTC 区间或 elapsed 具名事件经过时长"},
     {"term": "continuity-policy", "kind": "semantic-interface", "decision_status": "accepted", "definition": "mene 的 strict 全区间保持或带完整违约预算的 budgeted 保持"},
-    {"term": "time-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "Tekmor 声明的半开观测区间并集、方法、时钟、不确定度与缺口"}
+    {"term": "time-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "Tekmor 声明的半开观测区间并集、方法、时钟、不确定度与缺口"},
+    {"term": "relation-polarity", "kind": "semantic-interface", "decision_status": "accepted", "definition": "同一关系身份与角色位置上的 positive 或 negative 事态极性"},
+    {"term": "negative-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "显式负极性观察，或在封闭观察范围内由完整缺席依据支持的负主张"},
+    {"term": "observation-closure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定权威、有限全集、角色路径、时间、方法、截止点、丢失计数与排除项的封闭观察声明"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -116,7 +119,8 @@
     {"id": "THR-END-008", "clauses": ["END-STA-001", "END-STA-002", "END-DEC-001"], "evidence_status": "planned"},
     {"id": "THR-END-009", "clauses": ["END-CON-001", "END-DET-001"], "evidence_status": "planned"},
     {"id": "THR-END-010", "clauses": ["END-ERR-001"], "evidence_status": "partial"},
-    {"id": "THR-END-011", "clauses": ["END-TIM-001", "END-TIM-002", "END-TIM-003"], "evidence_status": "partial"}
+    {"id": "THR-END-011", "clauses": ["END-TIM-001", "END-TIM-002", "END-TIM-003"], "evidence_status": "partial"},
+    {"id": "THR-END-012", "clauses": ["END-NEG-001", "END-NEG-002", "END-NEG-003"], "evidence_status": "partial"}
   ],
   "clauses": [
     {
@@ -204,6 +208,46 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "peira:telis-mode"}
+      ]
+    },
+    {
+      "id": "END-NEG-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet and every semantic reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/negative-relation-valid.json"},
+        {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
+        {"status": "planned", "ref": "peira:negative-relation-identity"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-NEG-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Praxor, observation adapters and every evaluator",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
+        {"status": "planned", "ref": "peira:negative-observation-basis"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-NEG-003",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "observation authorities, Praxor and every evaluator",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
+        {"status": "planned", "ref": "peira:closed-observation-scope"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
     {

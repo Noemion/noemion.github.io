@@ -72,6 +72,12 @@ permalink: "/specifications/tekmor.html"
     <p>一次运行可以把相关 Tekmor 封装为单一运行记录，内部仍必须区分原始事件、规范化观察、完整性声明、证据范围和最终决定。Praxor 不得因为自己产生了记录就默认信任记录内容。</p>
   </section>
 
+  <section class="content-wide">
+    <h2>负观察与缺席证据</h2>
+    <p>显式负观察必须保存与目标相同的关系身份、角色和顺序，并声明生产者、方法、范围与限制。空查询只能记录“在这些输入和条件下没有匹配”，默认支持 <code>agno</code>，不能伪装成负极性 <code>phain</code>。</p>
+    <p>若具名权威要从缺席支持负目标，Tekmor 集合还必须绑定全集、全部角色路径、时间截止、完整枚举方法、迟到规则、过滤、去重、丢失和排除项。任何未知覆盖使结论回到 <code>agno</code>；观察契约故障为 <code>fault</code>。完整边界见 <a href="../architecture/adr-0017-negation-and-absence.html">ADR-0017</a>。</p>
+  </section>
+
   <section class="content-rows">
     <h2>隐私、最小披露与撤销</h2>
     <ul>
@@ -85,7 +91,7 @@ permalink: "/specifications/tekmor.html"
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p>Tekmor 的有限主张、身份绑定、证据等级、“证据不等于证明”、有效性与覆盖度分离以及 mene 时间覆盖职责已经采用。事件编码、时间字段、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需新 Profile 与测试。</p>
+    <p>Tekmor 的有限主张、身份绑定、证据等级、“证据不等于证明”、有效性与覆盖度分离、mene 时间覆盖以及否定证据职责已经采用。事件编码、时间与封闭声明字段、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需新 Profile 与测试。</p>
   </section>
   <div class="next-prev"><a href="synem.html">← Synem 规范</a><a href="../components/poiet.html">Poiet 组件 →</a></div>
 </main>

@@ -1,0 +1,91 @@
+{
+  "vector_format": "noemion.negation-vector-v1",
+  "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "description": "Negation and absence proposal vectors for ADR-0017; not a policy engine, log collector, Praxor, or evaluator implementation",
+  "cases": [
+    {
+      "id": "NV-VALID-DIRECT-NEGATIVE-MET-001",
+      "target": {"relation": "can_read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
+      "observation": {"status": "valid", "mode": "direct", "relation": "can_read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative", "authority": "access-policy"},
+      "proposed_result": "met",
+      "expect": {"result": "accept", "clause": "END-NEG-002"}
+    },
+    {
+      "id": "NV-VALID-DIRECT-POSITIVE-UNMET-001",
+      "target": {"relation": "can_read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
+      "observation": {"status": "valid", "mode": "direct", "relation": "can_read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "positive", "authority": "access-policy"},
+      "proposed_result": "unmet",
+      "expect": {"result": "accept", "clause": "END-NEG-002"}
+    },
+    {
+      "id": "NV-VALID-OPEN-LOG-AGNO-001",
+      "target": {"relation": "read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
+      "observation": {"status": "valid", "mode": "event-log", "matching_positive_count": 0, "scope": "available-audit-events"},
+      "proposed_result": "agno",
+      "expect": {"result": "accept", "clause": "END-NEG-003"}
+    },
+    {
+      "id": "NV-VALID-OBSERVER-FAULT-001",
+      "target": {"relation": "read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
+      "observation": {"status": "fault", "mode": "event-log", "reason": "collector-contract-failed"},
+      "proposed_result": "fault",
+      "expect": {"result": "accept", "clause": "END-NEG-002"}
+    },
+    {
+      "id": "NV-VALID-CLOSED-ABSENCE-MET-001",
+      "target": {"relation": "read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
+      "observation": {"status": "valid", "mode": "closed-enumeration", "matching_positive_count": 0, "closure": {"authority": "audit-owner", "universe": "all-read-decisions", "interval": "release-window", "method": "complete-enumeration", "cutoff": "window-end", "dropped_count": 0, "known_exclusions": [], "all_paths": true}},
+      "proposed_result": "met",
+      "expect": {"result": "accept", "clause": "END-NEG-003"}
+    },
+    {
+      "id": "NV-VALID-CLOSED-COUNTEREXAMPLE-UNMET-001",
+      "target": {"relation": "read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
+      "observation": {"status": "valid", "mode": "closed-enumeration", "matching_positive_count": 1, "closure": {"authority": "audit-owner", "universe": "all-read-decisions", "interval": "release-window", "method": "complete-enumeration", "cutoff": "window-end", "dropped_count": 0, "known_exclusions": [], "all_paths": true}},
+      "proposed_result": "unmet",
+      "expect": {"result": "accept", "clause": "END-NEG-003"}
+    },
+    {
+      "id": "NV-REJECT-TARGET-POLARITY-MISSING-001",
+      "target": {"relation": "can_read", "roles": {"actor": "anonymous", "resource": "private-report"}},
+      "observation": {"status": "valid", "mode": "direct", "relation": "can_read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative", "authority": "access-policy"},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-NEG-001"}
+    },
+    {
+      "id": "NV-REJECT-TARGET-RELATION-OMITTED-001",
+      "target": {"roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
+      "observation": {"status": "valid", "mode": "event-log", "matching_positive_count": 0, "scope": "available-audit-events"},
+      "proposed_result": "agno",
+      "expect": {"result": "reject", "clause": "END-NEG-001"}
+    },
+    {
+      "id": "NV-REJECT-DIRECT-POLARITY-MISSING-001",
+      "target": {"relation": "can_read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
+      "observation": {"status": "valid", "mode": "direct", "relation": "can_read", "roles": {"actor": "anonymous", "resource": "private-report"}, "authority": "access-policy"},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-NEG-002"}
+    },
+    {
+      "id": "NV-REJECT-OPEN-LOG-AS-MET-001",
+      "target": {"relation": "read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
+      "observation": {"status": "valid", "mode": "event-log", "matching_positive_count": 0, "scope": "available-audit-events"},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-NEG-003"}
+    },
+    {
+      "id": "NV-REJECT-INCOMPLETE-CLOSURE-AS-MET-001",
+      "target": {"relation": "read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
+      "observation": {"status": "valid", "mode": "closed-enumeration", "matching_positive_count": 0, "closure": {"authority": "audit-owner", "universe": "all-read-decisions", "interval": "release-window", "method": "complete-enumeration", "cutoff": "window-end", "known_exclusions": [], "all_paths": true}},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-NEG-003"}
+    },
+    {
+      "id": "NV-REJECT-FAULT-AS-UNMET-001",
+      "target": {"relation": "read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
+      "observation": {"status": "fault", "mode": "event-log", "reason": "collector-contract-failed"},
+      "proposed_result": "unmet",
+      "expect": {"result": "reject", "clause": "END-NEG-002"}
+    }
+  ]
+}

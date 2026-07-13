@@ -23,7 +23,7 @@ jobs:
         with:
           bundler-cache: true
       - name: Validate Jekyll sources
-        run: python3 tests/spec_contract_test.py && python3 tests/semantic_vector_test.py && python3 tests/result_domain_vector_test.py && python3 tests/mene_vector_test.py && python3 tests/wire_vector_test.py && python3 tests/p1_payload_test.py && python3 tests/source_manifest_test.py && python3 tests/site_quality_test.py
+        run: python3 tests/spec_contract_test.py && python3 tests/semantic_vector_test.py && python3 tests/result_domain_vector_test.py && python3 tests/mene_vector_test.py && python3 tests/negation_vector_test.py && python3 tests/wire_vector_test.py && python3 tests/p1_payload_test.py && python3 tests/source_manifest_test.py && python3 tests/site_quality_test.py
       - name: Validate JavaScript syntax
         run: node --check assets/site.mjs && node --check assets/theme.js && for file in assets/modules/*.mjs; do node --check "$file"; done
       - name: Configure GitHub Pages

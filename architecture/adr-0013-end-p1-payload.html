@@ -19,7 +19,7 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
     <h2>为什么不能继续复用 END-P0</h2>
     <div class="table-wrap"><table><thead><tr><th>现有证据</th><th>能够证明</th><th>不能证明</th></tr></thead><tbody>
       <tr><td>END-P0 六个结构记录</td><td>读取器能安全定位六个关键载荷。</td><td>载荷内有哪些字段、引用和语义约束。</td></tr>
-      <tr><td>六个语义 JSON 向量</td><td>一个最小模型和五种拒绝原因能被实际执行。</td><td>JSON 是规范字节，或任意 JSON 可以直接写入 Endem。</td></tr>
+      <tr><td>七个语义 JSON 向量</td><td>正负极性的两个可接受模型和五种拒绝原因能被实际执行。</td><td>JSON 是规范字节，或任意 JSON 可以直接写入 Endem。</td></tr>
       <tr><td>C/Rust 结构实验</td><td>两种语言能对同一结构错误给出一致首错。</td><td>任何原型已经实现 Poiet、Theor 或 END-CORE。</td></tr>
     </tbody></table></div>
   </section>

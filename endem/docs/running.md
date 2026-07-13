@@ -73,6 +73,12 @@ Praxor 为一次会话建立 Dromen。Dromen 只披露当前任务所需的 Ende
 
 抽象时间语义见 [ADR-0016](../../architecture/adr-0016-mene-time-model.html)。END-P1 当前只支持 `kine`；手册没有可执行的 mene 参数或时间字段。
 
+## 否定观察与缺席
+
+Praxor 必须把显式负观察、查询未命中和观察器故障分开。空日志、工具“未发现”或模型结论默认产生 `agno`，不能直接生成负极性 `phain`。
+
+只有具名权威证明全集、所有角色路径、时间截止、完整枚举、迟到规则与损失边界均已封闭时，完整缺席才能在该有限范围支持 `met`。同构正反例产生 `unmet`；观察器未按契约完成产生 `fault`。完整边界见 [ADR-0017](../../architecture/adr-0017-negation-and-absence.html)。当前没有对应的 CLI 参数、日志收集器或求值实现。
+
 MCP 和 A2A 只适合作为 Praxor 外缘的协议适配器：
 
 - [MCP 2025-11-25 稳定规范](https://modelcontextprotocol.io/specification/2025-11-25)；后续正式版本只有完成兼容、安全、错误来源、降级和权限复核后才进入新适配基线

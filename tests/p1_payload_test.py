@@ -483,8 +483,9 @@ def main():
     errors = []
     catalog = ERROR_CATALOG_PATH.read_text()
     profile = json.loads(PROFILE_PATH.read_text())
-    source = json.loads(SOURCE_PATH.read_text())["input"]
     manifest = json.loads(MANIFEST_PATH.read_text())
+    source = json.loads((ROOT / manifest["semantic_source"]).read_text())["input"]
+    negative_source = json.loads((ROOT / manifest["negative_semantic_source"]).read_text())["input"]
     if profile.get("profile_id") != 2 or profile.get("name") != "END-P1":
         errors.append("END-P1 must use profile_id 2")
     expected_records = {
@@ -516,13 +517,15 @@ def main():
     if profile.get("limits", {}).get("max_nesting_depth") != 16:
         errors.append("END-P1 nesting limit must remain 16 until measured again")
     base_records = source_to_records(source)
+    negative_records = source_to_records(negative_source)
     seen = set()
     accept_count = 0
     reject_count = 0
     for vector in manifest.get("vectors", []):
         vector_id = vector["id"]
         seen.add(vector_id)
-        expected_bytes = build_vector(base_records, vector_id)
+        source_records = negative_records if vector_id == "WV-P1-NEGATIVE-ACCEPT-001" else base_records
+        expected_bytes = build_vector(source_records, vector_id)
         actual_bytes = load_hex(ROOT / vector["hex"])
         if actual_bytes != expected_bytes:
             errors.append(f"{vector_id}: checked-in bytes differ from deterministic source mapping")
@@ -542,12 +545,12 @@ def main():
             reject_count += 1
     if len(seen) != len(manifest.get("vectors", [])):
         errors.append("END-P1 vector IDs must be unique")
-    if accept_count != 2 or reject_count != 11:
-        errors.append("END-P1 requires two semantic accepts and eleven deterministic rejects")
+    if accept_count != 3 or reject_count != 11:
+        errors.append("END-P1 requires three semantic accepts and eleven deterministic rejects")
     if errors:
         print("\n".join(errors))
         return 1
-    print("PASS: END-P1 encoded and decoded 13 wire vectors (2 semantic accepts, 11 deterministic rejects)")
+    print("PASS: END-P1 encoded and decoded 14 wire vectors (3 semantic accepts, 11 deterministic rejects)")
     return 0
 
 

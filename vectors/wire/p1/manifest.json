@@ -3,6 +3,7 @@
   "format": {"id": "END-FMT", "version": "0.1.0-draft"},
   "profile": {"id": 2, "name": "END-P1", "version": "0.1.0-draft"},
   "semantic_source": "vectors/semantic/minimal-valid.json",
+  "negative_semantic_source": "vectors/semantic/negative-relation-valid.json",
   "vectors": [
     {
       "id": "WV-P1-SEMANTIC-ACCEPT-001",
@@ -12,6 +13,11 @@
     {
       "id": "WV-P1-APOR-ACCEPT-001",
       "hex": "vectors/wire/p1/minimal-apor.hex",
+      "expect": {"result": "semantic-accept", "profile": "END-P1"}
+    },
+    {
+      "id": "WV-P1-NEGATIVE-ACCEPT-001",
+      "hex": "vectors/wire/p1/negative-relation.hex",
       "expect": {"result": "semantic-accept", "profile": "END-P1"}
     },
     {

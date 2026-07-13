@@ -6,6 +6,8 @@
 
 `wire/` 保存 END-FMT 0.1.0-draft 的规范十六进制字节。顶层清单属于 END-P0，只证明结构合法；`wire/p1/` 属于 END-P1，使用完整六记录载荷并实际运行字段、排序、引用和来源范围判断。两组都不是稳定 ABI。
 
+`result-domains/`、`mene/` 与 `negation/` 分别保存判断结果、时间连续性和否定缺席的提案矩阵。它们用于检查设计规则之间是否一致，不是 `.endem` 字节，也不证明运行组件存在。
+
 向量外壳由 [`vector.schema.json`](vector.schema.json) 约束。该 Schema 使用 JSON Schema 2020-12，只验证测试资料的结构；它不验证 Endem 语义，也不成为 Endem ABI。
 
 - JSON Schema 2020-12：https://json-schema.org/draft/2020-12/json-schema-core
@@ -20,4 +22,4 @@
 - 任何新增向量都必须被 `tests/spec_contract_test.py` 读取。
 - 线格式向量必须固定 END-FMT 与精确 Profile。END-P0 由 `tests/wire_vector_test.py` 读取；END-P1 由 `tests/p1_payload_test.py` 从语义源确定性编码、逐字段解码并比较预期。禁止只比较预生成摘要。
 
-向量只定义列出的预期行为，不证明任何组件已经实现。当前 Python 检查器只核对字节、字段、失败分类和登记关系；未来 Poiet、生产读取器与独立 Theor 必须各自消费全部十三个 END-P1 向量，不能复用检查脚本冒充实现。
+向量只定义列出的预期行为，不证明任何组件已经实现。当前 Python 检查器只核对字节、字段、失败分类和登记关系；未来 Poiet、生产读取器与独立 Theor 必须各自消费全部十四个 END-P1 向量，不能复用检查脚本冒充实现。
