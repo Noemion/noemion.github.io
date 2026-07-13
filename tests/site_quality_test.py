@@ -415,11 +415,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "三种成熟度不得混写",
             "一次运行怎样穿过边界",
             "运行事实应该放在哪里",
-            "七条最危险的越级路径",
+            "八条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的五个约束",
+            "GNU 技术提供的六个约束",
             "什么时候才值得增加新对象",
-            "七项研究怎样回到现有规范",
+            "八项研究怎样回到现有规范",
             "模型输出是候选，不是规范内容",
             "旧 Dromen、秘密或权限",
             "Task 完成，也不证明目标满足",
@@ -1855,6 +1855,54 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the capability discovery research proposal"
                 )
 
+    parallel_proposal = SOURCE_ROOT / "spec" / "parallel-and-speculative-execution-proposal.md"
+    if not parallel_proposal.exists():
+        errors.append("missing non-normative parallel and speculative execution research proposal")
+    else:
+        proposal_text = parallel_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "结论状态：桌面审查完成；等待用户决定",
+            "并行调度、分支完成、候选结果、提交授权、外部副作用和目标满足是六种不同事实",
+            "不构成 ADR、CORE 规范、Profile 或实现要求",
+            "不创建并行制品、事务格式、分支对象、命令、组件、结果域、稳定接口或哲学专名",
+            "不进入 `registry.json`",
+            "七个阶段必须分开",
+            "MCP 2025-11-25 Tasks",
+            "MCP Sampling 草案",
+            "MCP `2026-07-28` 发布候选",
+            "A2A 1.0 版本化规范",
+            "GNU Make jobserver",
+            "RFC 9110 第 13.1.1 节",
+            "取消失败分支只能请求停止尚未发生的工作",
+            "操作类别与并行资格",
+            "案例十四：孤儿副作用",
+            "提交前重新核对矩阵",
+            "威胁到失败责任的映射",
+            "失败域与结果隔离",
+            "不建立 `PAR-CORE`、分支制品或事务格式",
+            "等待用户决定",
+        ):
+            if token not in proposal_text:
+                errors.append(f"parallel execution proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "parallel-and-speculative-execution" in registry_text or '"PAR-CORE"' in registry_text:
+            errors.append("non-normative parallel execution proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "specifications" / "adapters.html",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "docs" / "architecture-guide.md",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+            SOURCE_ROOT / "content-quality-audit.md",
+        ):
+            if "parallel-and-speculative-execution-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the parallel execution research proposal"
+                )
+
     agent_boundaries = SOURCE_ROOT / "architecture" / "agent-system-boundaries.html"
     if not agent_boundaries.exists():
         errors.append("missing public Agent system boundary guide")
@@ -1863,10 +1911,10 @@ def validate_jekyll_sources():
         for token in (
             "三种成熟度不得混写",
             "运行事实应该放在哪里",
-            "七条最危险的越级路径",
+            "八条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的五个约束",
-            "七项研究怎样回到现有规范",
+            "GNU 技术提供的六个约束",
+            "八项研究怎样回到现有规范",
             "2025-11-25",
             "2026-07-28",
             "A2A 1.0 版本化规范",
@@ -1877,6 +1925,7 @@ def validate_jekyll_sources():
             "Make target、prerequisite 与 recipe",
             "Guix profile generations",
             "Autoconf feature checks",
+            "Make parallel execution",
         ):
             if token not in boundary_text:
                 errors.append(f"Agent boundary guide missing cross-domain contract: {token}")
@@ -1887,6 +1936,7 @@ def validate_jekyll_sources():
             "preview-simulation-and-approval-proposal.md",
             "memory-checkpoint-and-resumption-proposal.md",
             "capability-discovery-and-negotiation-proposal.md",
+            "parallel-and-speculative-execution-proposal.md",
             "semantic-equivalence-and-migration-proposal.md",
         ):
             if proposal_name not in boundary_text:
