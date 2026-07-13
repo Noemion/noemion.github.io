@@ -406,13 +406,18 @@ body .global-directory-panel{display:none}
   }
   html.mobile-directory-open{overflow:hidden;overscroll-behavior:none}
   html.mobile-directory-open body{
-    position:fixed;top:var(--mobile-directory-scroll-offset,0);right:0;left:0;width:100%;overflow:hidden
+    position:fixed;top:var(--mobile-directory-scroll-offset,0);right:0;left:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none
   }
   html.mobile-directory-open body .global-header{
     position:fixed;top:0;right:8px;left:8px;width:auto;margin:0
   }
   html.mobile-directory-open .global-directory-panel nav{
-    overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch
+    position:fixed;top:64px;right:auto;bottom:auto;left:0;width:calc(100vw - 16px);height:calc(100dvh - 72px);max-height:none;
+    overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y pinch-zoom;
+    -webkit-overflow-scrolling:touch;isolation:isolate
+  }
+  html.mobile-directory-open body:not([data-page-role="portal"]) .global-directory-panel nav{
+    top:112px;right:auto;bottom:auto;left:0;width:calc(100vw - 16px);height:calc(100dvh - 120px);max-height:none
   }
   .global-directory-panel nav[aria-busy="true"] .directory-loading-status{display:block;padding:18px 4px}
   body:not([data-page-role="portal"]) main{padding-top:48px}

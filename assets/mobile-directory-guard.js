@@ -5,6 +5,18 @@
   const root = document.documentElement;
   const scrollPositionAttribute = "data-mobile-directory-scroll-y";
   const scrollOffsetProperty = "--mobile-directory-scroll-offset";
+  let touchY = null;
+
+  const shouldContainScrollGesture = (scrollContainer, deltaY) => {
+    const maximumScrollTop = Math.max(
+      0,
+      scrollContainer.scrollHeight - scrollContainer.clientHeight
+    );
+    if (maximumScrollTop <= 1) return true;
+    if (deltaY < 0) return scrollContainer.scrollTop <= 1;
+    if (deltaY > 0) return scrollContainer.scrollTop >= maximumScrollTop - 1;
+    return false;
+  };
 
   const lockPageScroll = () => {
     if (root.classList.contains("mobile-directory-open")) return;
@@ -26,19 +38,62 @@
 
   window.noemionMobileDirectoryScroll = Object.freeze({
     lock: lockPageScroll,
-    unlock: unlockPageScroll
+    unlock: unlockPageScroll,
+    shouldContainScrollGesture
   });
 
-  const pendingPanel = () => document.querySelector(
-    ".global-directory-panel[open][data-mobile-directory-pending-open]"
-  );
+  const openPanel = () => document.querySelector(".global-directory-panel[open]");
+  const openScrollContainer = () => openPanel()?.querySelector("[data-directory]");
 
-  const containPendingGesture = (event) => {
-    if (mobileViewport.matches && pendingPanel()) event.preventDefault();
+  const rememberTouch = (event) => {
+    if (!mobileViewport.matches || !openPanel()) return;
+    const scrollContainer = openScrollContainer();
+    if (!scrollContainer?.contains(event.target)) {
+      touchY = null;
+      return;
+    }
+    touchY = event.touches[0]?.clientY ?? null;
   };
 
-  document.addEventListener("wheel", containPendingGesture, { passive: false });
-  document.addEventListener("touchmove", containPendingGesture, { passive: false });
+  const containWheel = (event) => {
+    if (!mobileViewport.matches || !openPanel()) return;
+    const scrollContainer = openScrollContainer();
+    if (
+      !scrollContainer?.contains(event.target) ||
+      shouldContainScrollGesture(scrollContainer, event.deltaY)
+    ) {
+      event.preventDefault();
+    }
+  };
+
+  const containTouch = (event) => {
+    if (!mobileViewport.matches || !openPanel()) return;
+    const scrollContainer = openScrollContainer();
+    const currentY = event.touches[0]?.clientY;
+    if (!scrollContainer?.contains(event.target) || currentY === undefined) {
+      event.preventDefault();
+      touchY = currentY ?? null;
+      return;
+    }
+    if (touchY === null) {
+      event.preventDefault();
+      touchY = currentY;
+      return;
+    }
+    const deltaY = touchY - currentY;
+    touchY = currentY;
+    if (shouldContainScrollGesture(scrollContainer, deltaY)) event.preventDefault();
+  };
+
+  const forgetTouch = () => {
+    touchY = null;
+  };
+
+  document.addEventListener("wheel", containWheel, { passive: false });
+  document.addEventListener("touchstart", rememberTouch, { passive: true });
+  document.addEventListener("touchmove", containTouch, { passive: false });
+  document.addEventListener("touchend", forgetTouch, { passive: true });
+  document.addEventListener("touchcancel", forgetTouch, { passive: true });
 
   document.addEventListener("click", (event) => {
     const summary = event.target.closest?.(".global-directory-panel > summary");

@@ -41,6 +41,8 @@
 
 [`telis-release-terms-proposal.md`](telis-release-terms-proposal.md) 分开 `telis` 已接受的两个目标方向与尚未通过的发行拼写。权威词典、GNU Names 原则和职责透明度已经足以排除 `kine/mene` 作为首次正式发行拼写；现行规范值暂不改变，`reach/maintain` 只取得进入独立人类朗读、听写、职责匹配和反例验证的资格。提案不是 ADR、CORE、Profile 或登记项，不建立别名，也不提前改写 END-TEL-001。
 
+[`release-terminology-simplification-proposal.md`](release-terminology-simplification-proposal.md) 先审查对象、角色和动作是否真的需要专名，再比较 Endem closure、session contract、scoped evidence record、deterministic producer、independent inspector、bounded runner 与 `form/check/compose/inspect/run`。它保留现行职责、结果域、权限和测试边界，不进入 `registry.json`，也不提前修改 SYN-CORE、DRO-CORE、IKN-CORE、字段、路由或 CLI；接受方向后仍须经过独立人类验证和单独迁移 ADR。
+
 [`preview-simulation-and-approval-proposal.md`](preview-simulation-and-approval-proposal.md) 研究预览、dry-run、模拟、授权、执行尝试、事后观察、满足与最终决定怎样保持分离。它用 GNU Make、MCP 2025-11-25、A2A 1.0.0、OpenAI Agents SDK 与 NIST AI 600-1 检查当前 Agent 审批流程。它不创建预览制品、模拟格式、批准结果域、命令、组件或 CORE，也不进入 `registry.json`；当前首选是把显示、授权、会话漂移、外部调用、观察和满足义务归还现有 TEXT-IDENTIFIER、AUT、DRO、ADP、IKN、ID、END 与 DIA 责任。
 
 [`memory-checkpoint-and-resumption-proposal.md`](memory-checkpoint-and-resumption-proposal.md) 研究会话历史、上下文压缩、计划检查点、外部 Task 句柄、持久工作区、恢复、重放与回滚怎样保持分离。它用 OpenAI Agents SDK、MCP 当前版及发布候选、A2A 1.0、GNU Make 与 GNU Guix 核对现实持久状态机制。它不创建记忆制品、检查点格式、恢复命令、组件或 CORE，也不进入 `registry.json`；当前首选是把变换、身份、新会话、外部任务、授权消费、证据和诊断义务归还现有 TEXT-IDENTIFIER、ID、DRO、ADP、AUT、IKN、DIA、END 与 SYN 责任。

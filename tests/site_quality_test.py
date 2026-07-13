@@ -1523,6 +1523,73 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the telis release terms proposal"
                 )
 
+    release_terms_proposal = SOURCE_ROOT / "spec" / "release-terminology-simplification-proposal.md"
+    if not release_terms_proposal.exists():
+        errors.append("missing non-normative release terminology simplification proposal")
+    else:
+        proposal_text = release_terms_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "结论状态：桌面审查完成；等待用户决定与人类验证",
+            "不构成 ADR、CORE 规范、内容 Profile、登记项或实现要求",
+            "不进入 `registry.json`",
+            "只有确实需要独立公共身份、且普通术语无法准确承担职责时，才创造专名",
+            "保留 Endem 进入人类读音验证",
+            "Endem closure（Endem 闭包）",
+            "session contract（会话契约）",
+            "scoped evidence record（有范围证据记录）",
+            "deterministic producer（确定性生产边界）",
+            "independent inspector（独立检查边界）",
+            "bounded runner（有界运行边界）",
+            "`form`、`check`、`compose`、`inspect` 与 `run`",
+            "ISO 704:2022",
+            "GNU Coding Standards 的 Names 规则",
+            "MCP 2025-11-25 工具定义",
+            "A2A AgentSkill",
+            "NIST Dictionary of Algorithms and Data Structures",
+            "W3C PROV-DM",
+            "RFC 9334 RATS Architecture",
+            "候选普通词不是别名、重定向或兼容入口",
+            "标准 ID 的具体新拼写、条款前缀和机器对象种类不能由本提案提前冻结",
+            "仍需单独按语义面逐项审查",
+        ):
+            if token not in proposal_text:
+                errors.append(f"release terminology proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "release-terminology-simplification" in registry_text:
+            errors.append("non-normative release terminology proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "design-system" / "name-audit.md",
+            SOURCE_ROOT / "design-system" / "language-and-naming.md",
+            SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "content-quality-audit.md",
+        ):
+            if "release-terminology-simplification-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the release terminology proposal"
+                )
+        for current_interface in (
+            SOURCE_ROOT / "endem" / "index.html",
+            SOURCE_ROOT / "endem" / "docs" / "reference.md",
+            SOURCE_ROOT / "endem" / "docs" / "format.md",
+            SOURCE_ROOT / "endem" / "docs" / "running.md",
+        ):
+            interface_text = current_interface.read_text()
+            for candidate_command in (
+                "`endem form`",
+                "`endem check`",
+                "`endem compose`",
+                "`endem inspect`",
+                "`endem run`",
+            ):
+                if candidate_command in interface_text:
+                    errors.append(
+                        f"{current_interface.relative_to(SOURCE_ROOT)} exposes non-normative command candidate {candidate_command}"
+                    )
+
     preview_proposal = SOURCE_ROOT / "spec" / "preview-simulation-and-approval-proposal.md"
     if not preview_proposal.exists():
         errors.append("missing non-normative preview, simulation, and approval research proposal")
@@ -2035,8 +2102,14 @@ def validate_jekyll_sources():
             '".global-directory-panel > summary"',
             "event.preventDefault()",
             'data-mobile-directory-pending-open',
-            'document.addEventListener("wheel", containPendingGesture, { passive: false })',
-            'document.addEventListener("touchmove", containPendingGesture, { passive: false })',
+            '".global-directory-panel[open]"',
+            "shouldContainScrollGesture",
+            'document.addEventListener("wheel", containWheel, { passive: false })',
+            'document.addEventListener("touchstart", rememberTouch, { passive: true })',
+            'document.addEventListener("touchmove", containTouch, { passive: false })',
+            'document.addEventListener("touchend", forgetTouch, { passive: true })',
+            'document.addEventListener("touchcancel", forgetTouch, { passive: true })',
+            "if (touchY === null)",
             'panel.open = pendingOpen',
             'window.noemionMobileDirectoryScroll = Object.freeze',
             'root.setAttribute(scrollPositionAttribute, String(scrollY))',
@@ -2088,6 +2161,11 @@ def validate_jekyll_sources():
             'position:fixed;top:var(--mobile-directory-scroll-offset,0)',
             'html.mobile-directory-open body .global-header{',
             'position:fixed;top:0;right:8px;left:8px;width:auto;margin:0',
+            'position:fixed;top:64px;right:auto;bottom:auto;left:0;width:calc(100vw - 16px);height:calc(100dvh - 72px);max-height:none',
+            'html.mobile-directory-open body:not([data-page-role="portal"]) .global-directory-panel nav{',
+            'top:112px;right:auto;bottom:auto;left:0;width:calc(100vw - 16px);height:calc(100dvh - 120px);max-height:none',
+            'touch-action:pan-y pinch-zoom',
+            'isolation:isolate',
             'overscroll-behavior:contain',
             '.directory-loading-status{display:none',
             'nav[aria-busy="true"] .directory-loading-status',
@@ -2496,12 +2574,6 @@ def validate_jekyll_sources():
             "window.noemionMobileDirectoryScroll",
             "scrollLock?.lock()",
             "scrollLock?.unlock()",
-            "shouldContainScrollGesture",
-            'document.addEventListener("wheel", (event) => this.#containWheel(event), { passive: false })',
-            'this.root.addEventListener("touchstart", (event) => this.#rememberTouch(event), { passive: true })',
-            'document.addEventListener("touchmove", (event) => this.#containTouch(event), { passive: false })',
-            'document.addEventListener("touchend", () => this.#forgetTouch(), { passive: true })',
-            'document.addEventListener("touchcancel", () => this.#forgetTouch(), { passive: true })',
             "open() {",
             "NavigationStore",
             "DirectoryNavigation",
@@ -2514,6 +2586,8 @@ def validate_jekyll_sources():
             "scrollTo(0, this.lockedScrollY)",
             "this.previousScrollY",
             'window.addEventListener("scroll"',
+            'document.addEventListener("touchmove"',
+            'document.addEventListener("wheel"',
         ):
             if forbidden in module_text:
                 errors.append(f"front-end modules retain viewport-shifting mobile menu lock: {forbidden}")
@@ -3597,10 +3671,31 @@ def main():
                 [{"scrollTop": 250, "scrollHeight": 900, "clientHeight": 400}, 0, False],
             ]
             scroll_script = (
-                "const { shouldContainScrollGesture } = await import(process.argv[1]);"
+                "const { readFileSync } = await import('node:fs');"
+                "const { runInNewContext } = await import('node:vm');"
+                "const listeners = {};"
+                "const noop = () => {};"
+                "const root = {classList:{contains:()=>false,add:noop,remove:noop},"
+                "style:{setProperty:noop,removeProperty:noop},setAttribute:noop,removeAttribute:noop,scrollTop:0};"
+                "const nav = {scrollTop:0,scrollHeight:900,clientHeight:400,contains:(target)=>target.inside};"
+                "const panel = {open:true,querySelector:()=>nav};"
+                "const document = {documentElement:root,body:{scrollTop:0},"
+                "querySelector:(selector)=>selector==='.global-directory-panel[open]'?panel:null,"
+                "addEventListener:(type,handler)=>{listeners[type]=handler;}};"
+                "const window = {matchMedia:()=>({matches:true}),scrollY:0};"
+                "runInNewContext(readFileSync(process.argv[1],'utf8'),{window,document,CustomEvent:function(){}});"
                 "const cases = JSON.parse(process.argv[2]);"
-                "process.stdout.write(JSON.stringify(cases.map(([metrics, deltaY]) => "
-                "shouldContainScrollGesture(metrics, deltaY))));"
+                "const api = window.noemionMobileDirectoryScroll;"
+                "const boundaries = cases.map(([metrics,deltaY])=>api.shouldContainScrollGesture(metrics,deltaY));"
+                "const move = (inside,y)=>{let prevented=false;listeners.touchmove({target:{inside},"
+                "touches:[{clientY:y}],preventDefault:()=>{prevented=true;}});return prevented;};"
+                "const start = (inside,y)=>listeners.touchstart({target:{inside},touches:[{clientY:y}]});"
+                "nav.scrollTop=250;const untracked=move(true,100);listeners.touchend();"
+                "nav.scrollTop=250;start(true,100);const middle=move(true,80);listeners.touchend();"
+                "nav.scrollTop=0;start(true,100);const top=move(true,120);listeners.touchend();"
+                "nav.scrollTop=500;start(true,100);const bottom=move(true,80);listeners.touchend();"
+                "const outside=move(false,80);"
+                "process.stdout.write(JSON.stringify({boundaries,touch:[untracked,middle,top,bottom,outside]}));"
             )
             scroll_completed = subprocess.run(
                 [
@@ -3608,7 +3703,7 @@ def main():
                     "--input-type=module",
                     "-e",
                     scroll_script,
-                    directory_module.as_uri(),
+                    directory_guard.as_posix(),
                     json.dumps(scroll_cases),
                 ],
                 capture_output=True,
@@ -3622,10 +3717,16 @@ def main():
             else:
                 actual_scroll_results = json.loads(scroll_completed.stdout)
                 expected_scroll_results = [case[2] for case in scroll_cases]
-                if actual_scroll_results != expected_scroll_results:
+                if actual_scroll_results["boundaries"] != expected_scroll_results:
                     errors.append(
                         "mobile directory scroll-boundary behavior mismatch: "
-                        f"expected {expected_scroll_results}, got {actual_scroll_results}"
+                        f"expected {expected_scroll_results}, got {actual_scroll_results['boundaries']}"
+                    )
+                expected_touch_results = [True, False, True, True, True]
+                if actual_scroll_results["touch"] != expected_touch_results:
+                    errors.append(
+                        "mobile directory touch containment mismatch: "
+                        f"expected {expected_touch_results}, got {actual_scroll_results['touch']}"
                     )
 
     for manual_id, manual_routes in MANUAL_ROUTE_ORDERS.items():
