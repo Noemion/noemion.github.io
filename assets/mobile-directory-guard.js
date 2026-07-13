@@ -25,6 +25,18 @@
     return false;
   };
 
+  const scrollMenuBy = (scrollContainer, deltaY) => {
+    const maximumScrollTop = Math.max(
+      0,
+      scrollContainer.scrollHeight - scrollContainer.clientHeight
+    );
+    const nextScrollTop = Math.min(
+      maximumScrollTop,
+      Math.max(0, scrollContainer.scrollTop + deltaY)
+    );
+    scrollContainer.scrollTop = nextScrollTop;
+  };
+
   const lockPageScroll = () => {
     if (root.classList.contains("mobile-directory-open")) return;
     const scrollY = window.scrollY || root.scrollTop || 0;
@@ -46,8 +58,15 @@
     root.removeAttribute(scrollPositionAttribute);
     root.scrollTop = scrollY;
     document.body.scrollTop = scrollY;
+    window.scrollTo(0, scrollY);
     root.style.scrollBehavior = previousScrollBehavior;
     touchY = null;
+  };
+
+  const holdLockedPagePosition = () => {
+    if (!root.classList.contains("mobile-directory-open")) return;
+    if (window.scrollX === 0 && window.scrollY === 0) return;
+    window.scrollTo(0, 0);
   };
 
   window.noemionMobileDirectoryScroll = Object.freeze({
@@ -62,7 +81,7 @@
   const rememberTouch = (event) => {
     if (!mobileViewport.matches || !openPanel()) return;
     const scrollContainer = openScrollContainer();
-    if (!scrollContainer?.contains(event.target)) {
+    if (!scrollContainer?.contains(event.target) || event.touches.length !== 1) {
       touchY = null;
       return;
     }
@@ -72,18 +91,18 @@
   const containWheel = (event) => {
     if (!mobileViewport.matches || !openPanel()) return;
     const scrollContainer = openScrollContainer();
-    if (
-      !scrollContainer?.contains(event.target) ||
-      shouldContainScrollGesture(scrollContainer, event.deltaY)
-    ) {
-      event.preventDefault();
-    }
+    event.preventDefault();
+    if (scrollContainer?.contains(event.target)) scrollMenuBy(scrollContainer, event.deltaY);
   };
 
   const containTouch = (event) => {
     if (!mobileViewport.matches || !openPanel()) return;
     const scrollContainer = openScrollContainer();
     const currentY = event.touches[0]?.clientY;
+    if (event.touches.length !== 1) {
+      touchY = null;
+      return;
+    }
     if (!scrollContainer?.contains(event.target) || currentY === undefined) {
       event.preventDefault();
       touchY = currentY ?? null;
@@ -96,7 +115,8 @@
     }
     const deltaY = touchY - currentY;
     touchY = currentY;
-    if (shouldContainScrollGesture(scrollContainer, deltaY)) event.preventDefault();
+    event.preventDefault();
+    scrollMenuBy(scrollContainer, deltaY);
   };
 
   const forgetTouch = () => {
@@ -104,12 +124,13 @@
   };
 
   document.addEventListener("wheel", containWheel, { passive: false, capture: true });
-  document.addEventListener("touchstart", rememberTouch, { passive: true, capture: true });
+  document.addEventListener("touchstart", rememberTouch, { passive: false, capture: true });
   document.addEventListener("touchmove", containTouch, { passive: false, capture: true });
   document.addEventListener("touchend", forgetTouch, { passive: true, capture: true });
   document.addEventListener("touchcancel", forgetTouch, { passive: true, capture: true });
   window.visualViewport?.addEventListener("resize", syncViewportHeight, { passive: true });
   window.addEventListener("orientationchange", syncViewportHeight, { passive: true });
+  window.addEventListener("scroll", holdLockedPagePosition, { passive: true });
 
   document.addEventListener("click", (event) => {
     const summary = event.target.closest?.(".global-directory-panel > summary");

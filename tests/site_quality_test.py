@@ -2339,10 +2339,11 @@ def validate_jekyll_sources():
             '".global-directory-panel[open]"',
             "shouldContainScrollGesture",
             'document.addEventListener("wheel", containWheel, { passive: false, capture: true })',
-            'document.addEventListener("touchstart", rememberTouch, { passive: true, capture: true })',
+            'document.addEventListener("touchstart", rememberTouch, { passive: false, capture: true })',
             'document.addEventListener("touchmove", containTouch, { passive: false, capture: true })',
             'document.addEventListener("touchend", forgetTouch, { passive: true, capture: true })',
             'document.addEventListener("touchcancel", forgetTouch, { passive: true, capture: true })',
+            'window.addEventListener("scroll", holdLockedPagePosition, { passive: true })',
             'window.visualViewport?.addEventListener("resize", syncViewportHeight, { passive: true })',
             'window.addEventListener("orientationchange", syncViewportHeight, { passive: true })',
             'window.visualViewport?.height || window.innerHeight',
@@ -2358,6 +2359,7 @@ def validate_jekyll_sources():
             'root.style.scrollBehavior = "auto"',
             'root.scrollTop = scrollY',
             'document.body.scrollTop = scrollY',
+            'window.scrollTo(0, scrollY)',
             'root.style.scrollBehavior = previousScrollBehavior',
             'toggleAttribute("aria-busy", pendingOpen)',
             'panel.dispatchEvent(new CustomEvent("noemion:directoryrequest"))',
@@ -2405,9 +2407,10 @@ def validate_jekyll_sources():
             'height:calc(var(--mobile-directory-viewport-height,100dvh) - 72px);max-height:none',
             'html.mobile-directory-open body:not([data-page-role="portal"]) .global-directory-panel nav{',
             'height:calc(var(--mobile-directory-viewport-height,100dvh) - 120px);max-height:none',
-            'touch-action:pan-y pinch-zoom',
+            'touch-action:pinch-zoom',
             'isolation:isolate',
             'overflow-anchor:none;overscroll-behavior:none',
+            '.nav-section-links{min-height:0;overflow:hidden;overflow:clip}',
             '.directory-loading-status{display:none',
             'nav[aria-busy="true"] .directory-loading-status',
             ':root[data-resolved-theme="dark"]',
@@ -2447,6 +2450,8 @@ def validate_jekyll_sources():
             errors.append("shared styles must not use transition: all")
         if "max-height:calc(100vh - 72px)" in shared_css:
             errors.append("mobile directory must use the dynamic viewport height on iOS")
+        if "-webkit-overflow-scrolling:touch" in shared_css:
+            errors.append("mobile directory must not restore the obsolete WebKit momentum-scrolling workaround")
         if "@media(min-width:840px) and (max-width:999px)" in shared_css:
             errors.append("compact layouts must not restore hover navigation on iPhone landscape widths")
         if ".focus-card-core" in shared_css:
@@ -3917,29 +3922,42 @@ def main():
             scroll_script = (
                 "const { readFileSync } = await import('node:fs');"
                 "const { runInNewContext } = await import('node:vm');"
-                "const listeners = {};"
+                "const listeners = {};const windowListeners = {};"
                 "const noop = () => {};"
-                "const root = {classList:{contains:()=>false,add:noop,remove:noop},"
-                "style:{setProperty:noop,removeProperty:noop},setAttribute:noop,removeAttribute:noop,scrollTop:0};"
+                "const classes=new Set();const attrs=new Map();"
+                "const root = {classList:{contains:(v)=>classes.has(v),add:(v)=>classes.add(v),remove:(v)=>classes.delete(v)},"
+                "style:{scrollBehavior:'',setProperty:noop,removeProperty:noop},"
+                "setAttribute:(k,v)=>attrs.set(k,v),getAttribute:(k)=>attrs.get(k),removeAttribute:(k)=>attrs.delete(k),scrollTop:0};"
                 "const nav = {scrollTop:0,scrollHeight:900,clientHeight:400,contains:(target)=>target.inside};"
                 "const panel = {open:true,querySelector:()=>nav};"
                 "const document = {documentElement:root,body:{scrollTop:0},"
                 "querySelector:(selector)=>selector==='.global-directory-panel[open]'?panel:null,"
                 "addEventListener:(type,handler)=>{listeners[type]=handler;}};"
-                "const window = {matchMedia:()=>({matches:true}),scrollY:0,innerHeight:852,addEventListener:noop};"
+                "const window = {matchMedia:()=>({matches:true}),scrollX:0,scrollY:180,innerHeight:852,"
+                "scrollTo:(x,y)=>{window.scrollX=x;window.scrollY=y;},"
+                "addEventListener:(type,handler)=>{windowListeners[type]=handler;}};"
                 "runInNewContext(readFileSync(process.argv[1],'utf8'),{window,document,CustomEvent:function(){}});"
                 "const cases = JSON.parse(process.argv[2]);"
                 "const api = window.noemionMobileDirectoryScroll;"
                 "const boundaries = cases.map(([metrics,deltaY])=>api.shouldContainScrollGesture(metrics,deltaY));"
-                "const move = (inside,y)=>{let prevented=false;listeners.touchmove({target:{inside},"
-                "touches:[{clientY:y}],preventDefault:()=>{prevented=true;}});return prevented;};"
-                "const start = (inside,y)=>listeners.touchstart({target:{inside},touches:[{clientY:y}]});"
-                "nav.scrollTop=250;const untracked=move(true,100);listeners.touchend();"
-                "nav.scrollTop=250;start(true,100);const middle=move(true,80);listeners.touchend();"
-                "nav.scrollTop=0;start(true,100);const top=move(true,120);listeners.touchend();"
-                "nav.scrollTop=500;start(true,100);const bottom=move(true,80);listeners.touchend();"
-                "const outside=move(false,80);"
-                "process.stdout.write(JSON.stringify({boundaries,touch:[untracked,middle,top,bottom,outside]}));"
+                "const move = (inside,y,touches=1)=>{let prevented=false;listeners.touchmove({target:{inside},"
+                "touches:Array.from({length:touches},(_,i)=>({clientY:y+i})),preventDefault:()=>{prevented=true;}});return prevented;};"
+                "const start = (inside,y,touches=1)=>listeners.touchstart({target:{inside},"
+                "touches:Array.from({length:touches},(_,i)=>({clientY:y+i}))});"
+                "nav.scrollTop=250;const untracked=move(true,100);const untrackedTop=nav.scrollTop;listeners.touchend();"
+                "nav.scrollTop=250;start(true,100);const middle=move(true,80);const middleTop=nav.scrollTop;listeners.touchend();"
+                "nav.scrollTop=0;start(true,100);const top=move(true,120);const topValue=nav.scrollTop;listeners.touchend();"
+                "nav.scrollTop=500;start(true,100);const bottom=move(true,80);const bottomValue=nav.scrollTop;listeners.touchend();"
+                "const outside=move(false,80);start(true,100,2);const pinch=move(true,80,2);"
+                "const wheel=(inside,deltaY)=>{let prevented=false;listeners.wheel({target:{inside},deltaY,"
+                "preventDefault:()=>{prevented=true;}});return prevented;};"
+                "nav.scrollTop=250;const wheelInside=wheel(true,80);const wheelInsideTop=nav.scrollTop;"
+                "const wheelOutside=wheel(false,80);const wheelOutsideTop=nav.scrollTop;"
+                "api.lock();window.scrollX=9;window.scrollY=40;windowListeners.scroll();const held=[window.scrollX,window.scrollY];"
+                "api.unlock();const restored=[window.scrollX,window.scrollY];"
+                "process.stdout.write(JSON.stringify({boundaries,touch:[untracked,middle,top,bottom,outside,pinch],"
+                "positions:[untrackedTop,middleTop,topValue,bottomValue],"
+                "wheel:[wheelInside,wheelOutside,wheelInsideTop,wheelOutsideTop],held,restored}));"
             )
             scroll_completed = subprocess.run(
                 [
@@ -3966,12 +3984,26 @@ def main():
                         "mobile directory scroll-boundary behavior mismatch: "
                         f"expected {expected_scroll_results}, got {actual_scroll_results['boundaries']}"
                     )
-                expected_touch_results = [True, False, True, True, True]
+                expected_touch_results = [True, True, True, True, True, False]
                 if actual_scroll_results["touch"] != expected_touch_results:
                     errors.append(
                         "mobile directory touch containment mismatch: "
                         f"expected {expected_touch_results}, got {actual_scroll_results['touch']}"
                     )
+                if actual_scroll_results["positions"] != [250, 270, 0, 500]:
+                    errors.append(
+                        "mobile directory manual scroll position mismatch: "
+                        f"got {actual_scroll_results['positions']}"
+                    )
+                if actual_scroll_results["wheel"] != [True, True, 330, 330]:
+                    errors.append(
+                        "mobile directory wheel containment mismatch: "
+                        f"got {actual_scroll_results['wheel']}"
+                    )
+                if actual_scroll_results["held"] != [0, 0]:
+                    errors.append("mobile directory must correct root scroll drift while open")
+                if actual_scroll_results["restored"] != [0, 180]:
+                    errors.append("mobile directory must restore the recorded page position when closed")
 
     for manual_id, manual_routes in MANUAL_ROUTE_ORDERS.items():
         manual_index = ROOT / manual_routes[0]
