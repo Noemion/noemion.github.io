@@ -20,6 +20,8 @@ Noemion 目前只接受了术语职责和读音审查方法，没有冻结任何
 
 读音验证之前还必须先问“是否需要专名”。如果标准术语或简短职责短语已经能准确恢复对象、消费者和失败责任，继续创造新词只会增加记忆、听写和职责匹配负担。[发行术语去专名化研究提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/release-terminology-simplification-proposal.md)把这项门禁应用到现行对象、角色和动作，但当前只形成候选，不修改规范。
 
+[语义面与观察词去专名化提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-facet-terminology-proposal.md)把门禁继续应用到 `rhem/semion/skena/telis/krin/apor/phain`。提案保留七项职责分层，并以七个直白字段名进入验证；它同样不修改现行 END-CORE、Profile 或来源清单。
+
 桌面证据已经足以排除 `kine/mene` 作为首次正式发行拼写，但没有改变现行规范值。[`telis` 发行词候选提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/telis-release-terms-proposal.md)推荐先验证 `reach/maintain`；这两个词仍是候选，不是官方术语、别名或规范化结果。
 
 验证分成两个阶段：先让未接触项目的参与者暴露自然读法，再用另一批参与者检验候选读音能否在完整词表中被唯一听出、写回并匹配正确职责。两个阶段不能使用同一批人。
@@ -64,7 +66,7 @@ Noemion 目前只接受了术语职责和读音审查方法，没有冻结任何
 
 ## 任务与材料
 
-材料不能只比较新造词之间的发音。每组测试都应同时包含“保留专名”和“改用直白职责名”的版本，并让参与者在不知道项目偏好的情况下完成对象选择、职责匹配和反例判断。当前优先比较 Endem 与 Endem closure，以及 scoped evidence record、session contract、deterministic producer、independent inspector、bounded runner 和 `endem form/check/compose/inspect/run` 的完整语句。
+材料不能只比较新造词之间的发音。每组测试都应同时包含“保留专名”和“改用直白职责名”的版本，并让参与者在不知道项目偏好的情况下完成对象选择、职责匹配和反例判断。当前优先比较 Endem 与 Endem closure，scoped evidence record、session contract、deterministic producer、independent inspector、bounded runner 和 `endem form/check/compose/inspect/run`，以及 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation` 的完整语句。语义面组还必须使用来源与投影、事态与观察、方向与判据、未决意义与观察不足的成对反例。
 
 每个听者先听完整语句，再完成三项相互独立的回答：
 
@@ -112,6 +114,6 @@ Noemion 目前只接受了术语职责和读音审查方法，没有冻结任何
 
 ## 当前状态
 
-截至 2026-07-14，Noemion 尚未执行上述人类研究，也没有合格的发行读音表。`kine/mene` 已未通过发行拼写桌面门禁，`reach/maintain` 是等待发现阶段验证的首选候选。后续桌面审查又建议只保留 Endem 继续验证，把 Synem、Dromen、Iknem、Ktisor、Theor、Drasor 与五个动作同直白职责候选比较；该建议尚未得到用户决定或人类证据。其余词不能因未列为高风险就自动通过。
+截至 2026-07-14，Noemion 尚未执行上述人类研究，也没有合格的发行读音表。`kine/mene` 已未通过发行拼写桌面门禁，`reach/maintain` 是等待发现阶段验证的首选候选。后续桌面审查建议只保留 Endem 继续验证，把其余对象、角色、动作以及七个语义面/观察词同直白职责候选比较；这些建议尚未得到用户决定或人类证据。现行拼写不能因职责已接受或未列为高风险就自动通过。
 
 在真实结果形成前，公开资料继续先写直白职责，再使用设计阶段名称；不得发布“官方发音”、音频词典或名称已经适合全球传播的结论。

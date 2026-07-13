@@ -171,6 +171,8 @@ ADR-0035 把公开动作收敛为 `ktise`、`elenk`、`pleko`、`theor` 与 `dra
 
 [`spec/release-terminology-simplification-proposal.md`](spec/release-terminology-simplification-proposal.md)在读音门禁之前增加专名必要性审查。桌面结论暂时保留 Endem 进入人类验证，并建议把 Synem、Dromen、Iknem、Ktisor、Theor、Drasor 及五个动作分别同 Endem closure、session contract、scoped evidence record、deterministic producer、independent inspector、bounded runner 和 `form/check/compose/inspect/run` 比较。提案不是 ADR、规范、别名或现行 CLI；只有用户接受方向、人类验证通过并形成迁移 ADR 后，才一次性修改规范 ID、字段、页面、路由和向量。
 
+[`spec/semantic-facet-terminology-proposal.md`](spec/semantic-facet-terminology-proposal.md)继续审查六个语义面与结构化观察的现行拼写。桌面结论保留全部职责分层，但建议把 `rhem/semion/skena/telis/krin/apor/phain` 同 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation` 比较。候选不改变一个根事态、授权、观察对齐、满足或结果域，也不是现行字段；用户决定、人类验证和迁移 ADR 形成前不修改 END-CORE、Profile、来源清单或向量。
+
 [`docs/terminology-and-pronunciation.md`](docs/terminology-and-pronunciation.md)把该门禁落实为两阶段人类验证：先用独立首次朗读发现自然变体，再用另一批听者在清晰与远程会议条件中完成名称选择、手写拼写和职责匹配。60 个零关键混淆判断只支持约 5% 的单侧 95% 上界，不证明全球无错误；当前研究尚未执行。
 
 主产物流按“来源 → `ktise` → Endem → `pleko` → Synem → 生产者物理封装 → 外部发布与签名 → `drase` → Dromen → Iknem → 人工或确定性验收”组织。每项正式输入必须有明确生产者，每项正式输出必须有明确消费者或说明它只服务人工检查。

@@ -1590,6 +1590,75 @@ def validate_jekyll_sources():
                         f"{current_interface.relative_to(SOURCE_ROOT)} exposes non-normative command candidate {candidate_command}"
                     )
 
+    facet_terms_proposal = SOURCE_ROOT / "spec" / "semantic-facet-terminology-proposal.md"
+    if not facet_terms_proposal.exists():
+        errors.append("missing non-normative semantic facet terminology proposal")
+    else:
+        proposal_text = facet_terms_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "结论状态：桌面审查完成；等待用户决定与人类验证",
+            "不构成 ADR、CORE 规范、内容 Profile、登记项或实现要求",
+            "不进入 `registry.json`",
+            "六个语义面与结构化观察的职责继续成立，不能合并",
+            "没有通过专名必要性桌面门禁",
+            "`source_expression`",
+            "`meaning_projection`",
+            "`situation`",
+            "`goal_direction`",
+            "`satisfaction_criteria`",
+            "`unresolved_meaning`",
+            "`structured_observation`",
+            "ISO 704:2022",
+            "GNU Coding Standards 的 Names 规则",
+            "ISO/IEC/IEEE 29148:2018",
+            "MCP 2025-11-25 Schema",
+            "A2A Agent Discovery",
+            "NIST AI RMF Core",
+            "W3C PROV-DM",
+            "W3C SOSA/SSN",
+            "候选普通词不是字段别名、兼容键、自动规范化结果或现行接口",
+            "数字记录布局",
+            "新的规范与 Profile 身份",
+        ):
+            if token not in proposal_text:
+                errors.append(f"semantic facet terminology proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "semantic-facet-terminology" in registry_text:
+            errors.append("non-normative semantic facet terminology proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "design-system" / "name-audit.md",
+            SOURCE_ROOT / "design-system" / "language-and-naming.md",
+            SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "content-quality-audit.md",
+        ):
+            if "semantic-facet-terminology-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the semantic facet terminology proposal"
+                )
+        for current_interface in (
+            SOURCE_ROOT / "spec" / "endem-core.md",
+            SOURCE_ROOT / "spec" / "endem-format.md",
+            SOURCE_ROOT / "spec" / "profiles" / "end-p1.json",
+            SOURCE_ROOT / "endem" / "docs" / "format.md",
+        ):
+            interface_text = current_interface.read_text()
+            for candidate_field in (
+                "source_expression",
+                "meaning_projection",
+                "goal_direction",
+                "satisfaction_criteria",
+                "unresolved_meaning",
+                "structured_observation",
+            ):
+                if candidate_field in interface_text:
+                    errors.append(
+                        f"{current_interface.relative_to(SOURCE_ROOT)} exposes non-normative facet candidate {candidate_field}"
+                    )
+
     preview_proposal = SOURCE_ROOT / "spec" / "preview-simulation-and-approval-proposal.md"
     if not preview_proposal.exists():
         errors.append("missing non-normative preview, simulation, and approval research proposal")
