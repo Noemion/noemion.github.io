@@ -113,7 +113,11 @@
     {"term": "measurement-construct", "kind": "semantic-interface", "decision_status": "accepted", "definition": "测量希望表达的抽象概念及其已授权直接可观察标准、总体和用途"},
     {"term": "estimand", "kind": "semantic-interface", "decision_status": "accepted", "definition": "测量程序意图估计的固定总体或泛化总体数量"},
     {"term": "measurement-procedure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定生产者、版本、窗口、纳入排除、单位、聚合器、样本和缺失政策的可重放程序"},
-    {"term": "threshold-contract", "kind": "semantic-interface", "decision_status": "accepted", "definition": "绑定比较器、阈值、单位、舍入边界和不确定度政策的判断契约"}
+    {"term": "threshold-contract", "kind": "semantic-interface", "decision_status": "accepted", "definition": "绑定比较器、阈值、单位、舍入边界和不确定度政策的判断契约"},
+    {"term": "criterion-leaf", "kind": "semantic-interface", "decision_status": "accepted", "definition": "与一个 skena 关系叶和适用 phain 位置对齐并独立产生四种满足结果之一的最小判据"},
+    {"term": "criterion-composition", "kind": "semantic-interface", "decision_status": "accepted", "definition": "用 all_of 或 any_of 确定性组合叶判断结果的有限无环结构"},
+    {"term": "decisive-basis", "kind": "evidence-interface", "decision_status": "accepted", "definition": "足以决定 all_of 为 unmet 或 any_of 为 met 的已求值叶集合"},
+    {"term": "evaluation-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "一次组合判断中已求值叶、未求值叶、停止原因和所用 Tekmor 的完整记录"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -129,7 +133,8 @@
     {"id": "THR-END-011", "clauses": ["END-TIM-001", "END-TIM-002", "END-TIM-003"], "evidence_status": "partial"},
     {"id": "THR-END-012", "clauses": ["END-NEG-001", "END-NEG-002", "END-NEG-003"], "evidence_status": "partial"},
     {"id": "THR-END-013", "clauses": ["END-QNT-001", "END-QNT-002", "END-QNT-003"], "evidence_status": "partial"},
-    {"id": "THR-END-014", "clauses": ["END-MSR-001", "END-MSR-002", "END-MSR-003", "END-MSR-004"], "evidence_status": "partial"}
+    {"id": "THR-END-014", "clauses": ["END-MSR-001", "END-MSR-002", "END-MSR-003", "END-MSR-004"], "evidence_status": "partial"},
+    {"id": "THR-END-015", "clauses": ["END-CMP-001", "END-CMP-002", "END-CMP-003", "END-CMP-004"], "evidence_status": "partial"}
   ],
   "clauses": [
     {
@@ -217,6 +222,58 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "peira:telis-mode"}
+      ]
+    },
+    {
+      "id": "END-CMP-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, semantic authorities and Synem maintainers",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
+        {"status": "planned", "ref": "peira:composite-root-boundary"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-CMP-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, Theor and every semantic reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
+        {"status": "planned", "ref": "peira:composition-topology-alignment"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-CMP-003",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Praxor and every evaluator",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
+        {"status": "planned", "ref": "peira:four-result-composition"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-CMP-004",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Praxor, observation adapters and every evaluator",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
+        {"status": "planned", "ref": "peira:decisive-short-circuit-provenance"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
     {

@@ -12,15 +12,16 @@ permalink: "/architecture/open-questions.html"
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
     <p class="lead">ADR-0010 已经采用现行制品、组件、六个语义面、三个制品状态和八个动作。这些名称与职责不再作为开放问题反复讨论。</p>
-    <p>END-CORE 与 END-FMT 已建立语义和实验性容器设计。ADR-0012 至 ADR-0014 记录未来 Rust 候选，并关闭 END-P1 载荷与首个实验来源清单。ADR-0015 至 ADR-0019 分开结果域，固定 mene 抽象时间、否定缺席、单变量量化以及测量与阈值语义。</p>
-    <p>当前没有 Theor 或其他组件实现。稳定 ABI、mene、量化与测量物理字段、嵌套或多变量量化、复合观察表达式、正式来源语言和结果事件编码仍未冻结。</p>
+    <p>END-CORE 与 END-FMT 已建立语义和实验性容器设计。ADR-0012 至 ADR-0014 记录未来 Rust 候选，并关闭 END-P1 载荷与首个实验来源清单。ADR-0015 至 ADR-0020 分开结果域，固定 mene 抽象时间、否定缺席、单变量量化、测量阈值以及复合判断语义。</p>
+    <p>当前没有 Theor 或其他组件实现。稳定 ABI、mene、量化、测量与组合物理字段、嵌套或多变量量化、条件适用性、正式来源语言和结果事件编码仍未冻结。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
 
   <section class="content-grid">
     <h2>Endem 编码与语义</h2>
     <details open><summary>实验来源清单怎样升级为正式语言？</summary><p>ADR-0014 只关闭首个 <code>.ends</code> 输入。正式语言仍需解决注释、包含、版本演进、歧义、错误恢复和工具支持；在正反语料与真实消费者出现前，不扩展当前清单。</p></details>
-    <details><summary>END-P1 之后还缺哪些字段？</summary><p>END-P1 已关闭未来首条实现路径评审所需的来源、符号、关系、事态、方向、判断与未决字段，并已有正负极性字节。ADR-0016 至 ADR-0019 已固定 mene、缺席、单变量量化和测量阈值的抽象语义，但物理时间、封闭、量化与测量声明、复合否定与观察、统计模型登记、摘要、签名和 Synem 仍需真实消费者、新 Profile 与正反字节向量。</p></details>
+    <details><summary>END-P1 之后还缺哪些字段？</summary><p>END-P1 已关闭未来首条实现路径评审所需字段，并已有正负极性字节。ADR-0016 至 ADR-0020 已固定时间、缺席、单变量量化、测量和组合的抽象语义。物理声明、条件适用性、统计登记、摘要、签名和 Synem 仍需真实消费者、新 Profile 与正反字节向量。</p></details>
+    <details><summary>条件与排他组合怎样表达？</summary><p>ADR-0020 只冻结 <code>all_of / any_of</code>。<code>if / iff</code> 需要适用性、激活和不适用状态；<code>xor / xone</code> 需要计数及未知与故障传播。规则冻结前应拆成 Endem 与依赖，或把选择保留在 <code>apor</code>，不得嵌入自由脚本。</p></details>
     <details><summary>一个根 skena 的语义等价怎样判断？</summary><p>布局、来源注释或调试记录变化后，哪些 semion、skena、telis、krin 和 apor 属性必须保持，仍需规范化规则和反例。规则冻结前只能比较显式符号、关系和条件，不能发明语义哈希。</p></details>
     <details><summary>自然语言候选由谁授权决定？</summary><p>需定义决定主体、作用范围、撤销、重放、高风险语义面和多人冲突。模型置信度、结构合法和单次界面点击都不能单独成为永久授权。</p></details>
     <details><summary>连续或模糊要求怎样进入六个语义面？</summary><p>ADR-0019 已关闭可量化构念、总体、单位、聚合器、不确定度和阈值的抽象边界。软偏好、感知质量、风格、模型裁判校准和不可完全判定条件仍需保留评价环境，不能为了机器处理伪造精确阈值。</p></details>

@@ -85,6 +85,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0017-negation-and-absence.html",
     "architecture/adr-0018-quantification-and-membership.html",
     "architecture/adr-0019-measurement-and-thresholds.html",
+    "architecture/adr-0020-composite-situations-and-criteria.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -236,6 +237,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0017-negation-and-absence.html",
     "architecture/adr-0018-quantification-and-membership.html",
     "architecture/adr-0019-measurement-and-thresholds.html",
+    "architecture/adr-0020-composite-situations-and-criteria.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -1477,6 +1479,16 @@ def validate_jekyll_sources():
             "GNU Units 手册",
             "遥测流本身不选择",
             "不能决定业务总体、聚合器或阈值",
+        ),
+        "architecture/adr-0020-composite-situations-and-criteria.html": (
+            "W3C SHACL Recommendation",
+            "SHACL 1.2 Core",
+            "Working Draft",
+            "GNU Coreutils test",
+            "GNU Bash Lists",
+            "NIST AI 800-2 Initial Public Draft",
+            "不采用 RDF Shape 或二值符合性",
+            "只借鉴减少不必要工作的机制",
         ),
     }
     for relative_path, required_tokens in external_boundary_contracts.items():

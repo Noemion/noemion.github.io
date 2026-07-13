@@ -1,0 +1,99 @@
+---
+layout: default
+title: "ADR-0020 复合事态与判据组合"
+page_role: "content"
+footer_text: "Noemion · ADR-0020"
+permalink: "/architecture/adr-0020-composite-situations-and-criteria.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0020</span></nav>
+  <header class="content-introduction"><h1>ADR-0020<br>复合事态<br>判据组合</h1><p>让一个根事态可以表达彼此不可分的多个关系，同时固定四结果传播、决定性短路和证据覆盖，避免用布尔脚本掩盖未知与故障。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">Composite Criteria</span><span class="badge">No Wire Schema Change</span><span class="badge">No Component Code</span></div></header>
+
+  <section class="content-band">
+    <h2>直接结论</h2>
+    <p class="lead">第一阶段只允许用 <code>all_of</code> 和 <code>any_of</code> 组合判据。它们组合的是已经独立得到的叶级 <code>met / unmet / agno / fault</code>，不是原始数值、自由文本或可执行表达式。</p>
+    <p>只有共同描述同一个终态、共享同一目标方向和验收责任、不能被独立替换或接受的关系，才能进入一个 Endem 的复合根。能够独立实现、版本化、授权、接受或失败的目标必须拆成多个 Endem，再由 Synem 组合。</p>
+    <p>本决定冻结抽象语义，不给 END-P1 增加字段，也不表示 Poiet、Theor、Praxor、CLI 或求值器已经实现。</p>
+  </section>
+
+  <section class="content-band">
+    <h2>哲学启发与采用限制</h2>
+    <blockquote><p>“所有命题都是基本命题的真值运算结果。”</p><cite>路德维希·维特根斯坦《逻辑哲学论》5.3</cite></blockquote>
+    <p>命题 5 及 5.3 提供了一个重要问题结构：复合陈述的形式必须能够从其组成部分和组合方式中显示出来。Noemion 因此拒绝把“同时满足这些条件”藏在备注、脚本或模型推理中。</p>
+    <p>这里不直接采用《逻辑哲学论》的二值真值函数。现实系统还会遇到观察不足和求值故障，所以 Noemion 必须保留四种判断结果；安全优先级、短路记录和 Endem 边界也都由工程规范决定。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>先判断一个 Endem 还是多个 Endem</h2>
+    <div class="table-wrap"><table><thead><tr><th>问题</th><th>一个复合 Endem</th><th>多个 Endem 与 Synem</th></tr></thead><tbody>
+      <tr><td>终态身份</td><td>所有叶共同描述同一个终态</td><td>每一部分都有自己的终态</td></tr>
+      <tr><td>目标方向</td><td>共享一个 <code>kine</code> 或 <code>mene</code></td><td>方向或时间责任可以不同</td></tr>
+      <tr><td>生命周期</td><td>只能共同实现、替换和验收</td><td>可以独立版本化、替换或停止</td></tr>
+      <tr><td>权威与失败责任</td><td>共享同一最终决定边界</td><td>可以由不同主体独立接受或失败</td></tr>
+    </tbody></table></div>
+    <p>自然语言中出现“并且”或“或者”不能机械决定边界。例如“接口可达并且响应模式正确”可以是同一个服务终态；“发布报告完成并且服务已经部署”则是两个可独立失败的目标。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>结构必须同时出现在事态与判据中</h2>
+    <ol>
+      <li><code>skena</code> 使用有限、无环的关系叶和组合节点显示一个根事态。</li>
+      <li>每个组合节点只能是 <code>all_of</code> 或 <code>any_of</code>，且至少包含两个不同子节点。</li>
+      <li><code>krin</code> 为每个关系叶给出一个叶判据，并以同样的组合拓扑组合叶结果。</li>
+      <li><code>phain</code> 仍与叶关系和角色位置对齐；原始观察先按叶判据判断，再组合结果。</li>
+    </ol>
+    <p>子节点顺序不承载语义，重复引用和环都必须拒绝。未来物理 Profile 必须另行定义规范排序、引用和深度预算；当前 END-P1 不编码复合结构。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>四结果组合矩阵</h2>
+    <div class="table-wrap"><table><thead><tr><th>操作</th><th>决定性结果</th><th>没有决定性结果时</th></tr></thead><tbody>
+      <tr><td><code>all_of</code></td><td>任一叶为 <code>unmet</code>，总体为 <code>unmet</code></td><td>有 <code>fault</code> 则 <code>fault</code>；否则有 <code>agno</code> 则 <code>agno</code>；全部为 <code>met</code> 才是 <code>met</code></td></tr>
+      <tr><td><code>any_of</code></td><td>任一叶为 <code>met</code>，总体为 <code>met</code></td><td>有 <code>fault</code> 则 <code>fault</code>；否则有 <code>agno</code> 则 <code>agno</code>；全部为 <code>unmet</code> 才是 <code>unmet</code></td></tr>
+    </tbody></table></div>
+    <p><code>fault</code> 只在没有决定性满足或反驳时优先于 <code>agno</code>。这个优先级不允许删除叶结果：一次故障即使没有控制总体结果，也必须留在求值记录中。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>短路只能减少工作不能改写事实</h2>
+    <p><code>all_of</code> 发现有效 <code>unmet</code>，或 <code>any_of</code> 发现有效 <code>met</code> 后，可以停止求值其余叶。结果必须保存决定依据 <code>decisive-basis</code>，以及由已求值叶、所用 Tekmor、未求值叶清单和停止原因组成的 <code>evaluation-coverage</code>。</p>
+    <p>未求值叶不是 <code>agno</code>，因为它没有得到判断。不同求值顺序可以改变覆盖范围，但不能改变已经出现决定性结果后的总体分类；已遇到的故障也不能被短路记录抹掉。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么不开放任意表达式</h2>
+    <ul>
+      <li><code>not</code> 不作为组合操作；否定仍由关系叶的显式极性表达，避免与 ADR-0017 重复。</li>
+      <li><code>if / iff</code> 暂不支持。条件目标需要另行定义适用性、激活和“不适用”边界，不能用 <code>agno</code> 冒充。</li>
+      <li><code>xor / xone</code> 暂不支持。它们需要额外的计数、故障与未知传播规则。</li>
+      <li>不得嵌入 shell、CEL、Rego、SPARQL、任意算术或模型代码。ADR-0019 的已登记测量程序只在单个叶内产生结果。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部技术提供的对照</h2>
+    <ul>
+      <li><a href="https://www.w3.org/TR/shacl/">W3C SHACL Recommendation</a>定义 <code>and</code>、<code>or</code>、<code>not</code> 和 <code>xone</code> 约束，并把数据不符合与验证过程失败分开。Noemion 采用显式组合与失败分离，不采用 RDF Shape 或二值符合性作为制品语义。</li>
+      <li><a href="https://www.w3.org/TR/shacl12-core/">SHACL 1.2 Core</a>截至 2026 年仍是 Working Draft；其中 <code>intent</code> 与 <code>agentInstruction</code> 不得影响验证结果。这一发展方向支持把 AI 指令和形式判据分开，但不能作为稳定依赖。</li>
+      <li><a href="https://www.gnu.org/software/coreutils/manual/html_node/test-invocation.html">GNU Coreutils test</a>用不同退出状态区分假与错误，说明“条件不成立”和“检查失败”不应合并。</li>
+      <li><a href="https://www.gnu.org/software/bash/manual/html_node/Lists.html">GNU Bash Lists</a>展示 <code>&amp;&amp;</code> 与 <code>||</code> 的决定性短路。Noemion 只借鉴减少不必要工作的机制，不采用 shell 退出码、求值副作用或左结合语义。</li>
+      <li><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf">NIST AI 800-2 Initial Public Draft</a>要求先说明评估目的与可直接观察的测量标准。组合判据因此只能连接已经明确的叶判断，不能用总分掩盖叶定义。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>规范影响与验证</h2>
+    <ul>
+      <li>END-CORE 新增 <code>END-CMP-001</code> 至 <code>END-CMP-004</code>。</li>
+      <li>END-SCEN 新增四个案例；威胁模型新增复合判断洗白。</li>
+      <li>十二个提案向量覆盖六个允许分类和六个确定拒绝；检查器只是规范一致性检查，不是求值器。</li>
+      <li>END-P1 不变；物理字段、规范字节和组件测试必须等待新 Profile 与用户明确开启代码阶段。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>仍未冻结的内容</h2>
+    <p>条件适用性、排他析取、复合否定、跨叶变量绑定、时间和量化组合、规范化、物理字段、规范排序、深度预算与规范字节仍需真实消费者、威胁分析和新 Profile。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0019-measurement-and-thresholds.html">← ADR-0019</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

@@ -118,6 +118,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             "relation-polarity", "negative-evidence", "observation-closure",
             "quantifier", "collection-scope", "cardinality-evidence",
             "measurement-construct", "estimand", "measurement-procedure", "threshold-contract",
+            "criterion-leaf", "criterion-composition", "decisive-basis", "evaluation-coverage",
         ):
             if required_term not in term_names:
                 errors.append(f"spec/registry.json: missing term {required_term}")
@@ -198,8 +199,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
 
     threat_heading_ids = THREAT_HEADING.findall(threat_text)
     threats = registry.get("threats")
-    if not isinstance(threats, list) or len(threats) != 14:
-        errors.append("spec/registry.json: exactly 14 registered Endem threats are required")
+    if not isinstance(threats, list) or len(threats) != 15:
+        errors.append("spec/registry.json: exactly 15 registered Endem threats are required")
     else:
         threat_ids = [threat.get("id") for threat in threats]
         if len(threat_ids) != len(set(threat_ids)):
@@ -392,6 +393,8 @@ def validate_public_boundary(errors):
         errors.append("Pages workflow must execute quantification and membership vectors")
     if "python3 tests/measurement_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute measurement and threshold vectors")
+    if "python3 tests/composition_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute composite situation and criteria vectors")
     if "python3 tests/p1_payload_test.py" not in workflow_text:
         errors.append("Pages workflow must execute complete END-P1 payload vectors")
     if "python3 tests/source_manifest_test.py" not in workflow_text:
@@ -419,6 +422,7 @@ def validate_public_boundary(errors):
             "vectors/negation",
             "vectors/quantification",
             "vectors/measurement",
+            "vectors/composition",
             "vectors/wire",
             "spec/endem-threat-model.md",
             "spec/endem-scenarios.md",
@@ -438,6 +442,8 @@ def validate_public_boundary(errors):
             "ADR-0016",
             "ADR-0017",
             "ADR-0018",
+            "ADR-0019",
+            "ADR-0020",
             "ADR-0019",
             "时间范围和连续性政策",
             "否定与缺席怎样判断",
@@ -558,6 +564,18 @@ def validate_public_boundary(errors):
             "GNU Units",
             "不表示遥测采集器、基准运行器、统计引擎、Praxor 或求值器已经实现",
         ),
+        "architecture/adr-0020-composite-situations-and-criteria.html": (
+            "第一阶段只允许用",
+            "all_of",
+            "any_of",
+            "decisive-basis",
+            "evaluation-coverage",
+            "未求值叶不是",
+            "GNU Coreutils test",
+            "GNU Bash Lists",
+            "SHACL 1.2 Core",
+            "不表示 Poiet、Theor、Praxor、CLI 或求值器已经实现",
+        ),
         "development/implementation-roadmap.html": (
             "Rust 1.97.0",
             "C/Rust 双原型",
@@ -596,8 +614,8 @@ def main():
         scenario_text = ""
 
     scenario_ids = SCENARIO_HEADING.findall(scenario_text)
-    if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 24)]:
-        errors.append("spec/endem-scenarios.md: scenario IDs must be unique and ordered SCN-001 through SCN-023")
+    if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 28)]:
+        errors.append("spec/endem-scenarios.md: scenario IDs must be unique and ordered SCN-001 through SCN-027")
     for token in (
         "事态由对象结合构成（2.01）",
         "图示形式由结构显示而非自我陈述（2.17–2.172）",
@@ -622,6 +640,10 @@ def main():
         "固定基准准确率不等于普遍能力",
         "单位可换算不等于可以随意换算",
         "缺样本和统计程序故障必须分开",
+        "同一服务终态可以使用复合根",
+        "独立报告与部署必须拆成两个 Endem",
+        "决定性短路仍要保存覆盖",
+        "条件目标暂不进入组合语言",
         "不是可执行测试",
     ):
         if token not in scenario_text:
@@ -639,11 +661,12 @@ def main():
         return 1
     print(
         "PASS: END-CORE, END-FMT and END-SRCM 0.1.0-draft have unique clauses, explicit "
-        "maturity, traceable evidence, 14 registered threats, executed semantic "
-        "vectors, 23 natural-language design scenarios, 12 result-domain vectors, "
+        "maturity, traceable evidence, 15 registered threats, executed semantic "
+        "vectors, 27 natural-language design scenarios, 12 result-domain vectors, "
         "12 mene time and continuity vectors, 12 negation and absence vectors, "
         "12 quantification and membership vectors, "
         "12 measurement and threshold vectors, "
+        "12 composite situation and criteria vectors, "
         "END-P1 payload/source vectors, "
         "and P0-LANG-001 historical language evidence"
     )

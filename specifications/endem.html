@@ -33,7 +33,7 @@ permalink: "/specifications/endem.html"
   <section class="content-wide">
     <h2>形式必须由结构显示</h2>
     <p><a href="../about/intellectual-foundations.html">思想与方法基础</a>用《逻辑哲学论》命题 3.141 解释“结构不是词语堆积”的问题来源。这里不从引文推导规范；ADR-0010、本规范和测试共同定义 Endem 的正式结构要求。</p>
-    <p><code>semion</code>、<code>skena</code> 和适用 Tekmor 中的 <code>phain</code> 使用同一组稳定符号身份。关系节点必须保存谓词身份、有序或具名角色、极性、作用域和来源映射；复合节点显式保存合取、析取、否定、条件或 Profile 允许的其他组合。</p>
+    <p><code>semion</code>、<code>skena</code> 和适用 Tekmor 中的 <code>phain</code> 使用同一组稳定符号身份。关系节点必须保存谓词身份、有序或具名角色、极性、作用域和来源映射。第一阶段复合节点只允许 <code>all_of</code> 与 <code>any_of</code>；否定保留在关系极性，条件和排他析取仍未冻结。</p>
     <p>规范载荷不得包含由作者填写的 <code>logical_form</code>、<code>valid</code> 或 <code>true</code> 自我声明。Poiet 和独立 Theor 通过关系拓扑、角色数量、组合边与引用位置分别验证结构。只保存六段文本的实现不符合本规范。</p>
   </section>
 
@@ -115,6 +115,18 @@ permalink: "/specifications/endem.html"
   </section>
 
   <section class="content-wide">
+    <h2>复合事态怎样组合判断</h2>
+    <p class="lead">复合根仍然只能描述一个不可分终态。可以独立实现、版本化、验收或失败的部分必须拆成多个 Endem，再由 Synem 组合。</p>
+    <div class="table-wrap"><table><thead><tr><th>部分</th><th>当前规则</th><th>失败边界</th></tr></thead><tbody>
+      <tr><td>结构</td><td>有限无环的 <code>all_of / any_of</code>，每个节点至少两个不同子项</td><td>重复叶、环、条件脚本和任意表达式必须拒绝</td></tr>
+      <tr><td>对齐</td><td>每个 <code>skena</code> 关系叶对应一个 <code>krin</code> 叶判据</td><td>判据不能增删或错配事态分支</td></tr>
+      <tr><td>结果</td><td><code>all_of</code> 的 <code>unmet</code> 和 <code>any_of</code> 的 <code>met</code> 是决定性结果</td><td>没有决定性结果时，<code>fault</code> 与 <code>agno</code> 不能被改写为真假</td></tr>
+      <tr><td>短路</td><td>保存决定依据、已求值叶、未求值叶、Tekmor 和停止原因</td><td>未求值不是 <code>agno</code>；已遇到的故障不能被删除</td></tr>
+    </tbody></table></div>
+    <p>完整决定见 <a href="../architecture/adr-0020-composite-situations-and-criteria.html">ADR-0020</a>。它不增加 END-P1 字段，也不表示组合求值组件已经存在。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>自然语言场景怎样检验六个语义面</h2>
     <p class="lead">同一套字段只有在能区分不同失败原因时才有意义。以下场景不是产品演示或可执行测试，而是用来暴露规范缺口的设计审查语料。</p>
     <div class="table-wrap"><table><thead><tr><th>来源场景</th><th>必须表达的区别</th><th>不能偷换成什么</th></tr></thead><tbody>
@@ -141,8 +153,12 @@ permalink: "/specifications/endem.html"
       <tr><td>基准准确率至少 80%</td><td>固定基准与泛化总体是不同 estimand</td><td>单一题集点估计不能自动证明普遍能力</td></tr>
       <tr><td>0.3 秒阈值与毫秒观察</td><td>量纲兼容、换算方向、版本和误差</td><td>单位工具不能决定业务构念或统计方法</td></tr>
       <tr><td>样本不足或分位程序失败</td><td>前者为 <code>agno</code>，后者为 <code>fault</code></td><td>不能填零、丢弃或猜测满足状态</td></tr>
+      <tr><td>接口可达且响应模式正确</td><td>同一终态用 <code>all_of</code> 组合两个对齐叶判据</td><td>只有全部 <code>met</code> 才是总体 <code>met</code></td></tr>
+      <tr><td>生成报告并部署服务</td><td>两个独立生命周期分别形成 Endem，再由 Synem 组合</td><td>自然语言连词不能掩盖独立失败与验收责任</td></tr>
+      <tr><td>主通道或备用通道可用</td><td>决定性 <code>met</code> 可以短路，但保存完整求值覆盖</td><td>未求值叶不是 <code>agno</code>，已遇故障不能消失</td></tr>
+      <tr><td>如果批准就部署</td><td>拆分目标与依赖，或把适用性保留在 <code>apor</code></td><td>当前不得嵌入条件脚本或伪造“不适用”结果</td></tr>
     </tbody></table></div>
-    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。二十三个场景当前登记为非规范材料，不证明 Poiet、Theor、Praxor 或任何自然语言解析、时间、缺席、量化或测量求值能力已经存在。</p>
+    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。二十七个场景当前登记为非规范材料，不证明 Poiet、Theor、Praxor 或任何自然语言解析、时间、缺席、量化、测量或组合求值能力已经存在。</p>
   </section>
 
   <section class="content-wide">
@@ -178,7 +194,7 @@ permalink: "/specifications/endem.html"
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p>六个语义面、一个根 <code>skena</code>、事态与方向分离、<code>phain</code> 结构比较、三类未知、否定与缺席、抽象量化和测量阈值边界、三个制品状态及 <code>.endem</code> 扩展名已经采用。END-P1 又形成 3 个语义接受和 11 个预期拒绝字节向量。时间、封闭、量化与测量物理字段、复合表达式、统计模型登记、压缩、摘要、签名和稳定 ABI 仍需新的 Profile；两个独立实现和对抗测试只能在代码阶段开启后建立。</p>
+    <p>六个语义面、一个根 <code>skena</code>、事态与方向分离、<code>phain</code> 结构比较、三类未知、否定与缺席、抽象量化、测量阈值和复合判断边界、三个制品状态及 <code>.endem</code> 扩展名已经采用。END-P1 又形成 3 个语义接受和 11 个预期拒绝字节向量。时间、封闭、量化、测量与组合物理字段、条件适用性、统计模型登记、压缩、摘要、签名和稳定 ABI 仍需新的 Profile；两个独立实现和对抗测试只能在代码阶段开启后建立。</p>
   </section>
   <div class="next-prev"><a href="index.html">← 规范参考指南</a><a href="synem.html">Synem 规范 →</a></div>
 </main>

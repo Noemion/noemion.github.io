@@ -106,6 +106,16 @@ permalink: "/components/praxor.html"
   </section>
 
   <section class="content-wide">
+    <h2>复合判断责任</h2>
+    <ul>
+      <li>装载时核对复合结构有限无环、只使用 <code>all_of / any_of</code>，并确认每个事态叶与一个判据叶对齐。</li>
+      <li>先形成叶级 <code>met / unmet / agno / fault</code>，再按 ADR-0020 的固定矩阵组合；不得直接组合原始值或运行自由表达式。</li>
+      <li>只有决定性反例或见证才允许短路，并保存决定依据、已求值叶、未求值叶、全部 Tekmor 与停止原因。</li>
+      <li>当前没有组合求值器；这些只是 ADR-0020 规定的未来 Praxor 责任边界。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
     <h2>失败与拒绝责任</h2>
     <div class="table-wrap"><table><thead><tr><th>失败</th><th>Praxor 必须记录</th><th>后续状态</th></tr></thead><tbody>
       <tr><td>Load rejected</td><td>对象身份、失败层、规则和位置</td><td>会话 <code>failed</code>；不创建 Dromen，也不伪造满足结果。</td></tr>
@@ -119,7 +129,7 @@ permalink: "/components/praxor.html"
 
   <section class="content-band">
     <h2>当前成熟度与未冻结接口</h2>
-    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、Tekmor 不等于验收、结果域分离、mene 时钟、否定观察、量化聚合以及测量判断责任已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、时间、封闭与测量声明字段、预算单位、事件编码和决定类 Tekmor 尚未冻结。</p>
+    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、Tekmor 不等于验收、结果域分离、mene 时钟、否定观察、量化聚合、测量判断以及复合判断责任已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、时间、封闭、测量与组合声明字段、预算单位、事件编码和决定类 Tekmor 尚未冻结。</p>
   </section>
   <div class="next-prev"><a href="theor.html">← Theor</a><a href="../architecture/endem-lifecycle.html">Endem 生命周期 →</a></div>
 </main>

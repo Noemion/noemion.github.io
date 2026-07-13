@@ -33,6 +33,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0017](https://noemion.github.io/architecture/adr-0017-negation-and-absence.html) — explicit negative relations, absence evidence, closed observation scopes, and failure classification
 - [ADR-0018](https://noemion.github.io/architecture/adr-0018-quantification-and-membership.html) — quantified collection scopes, distinct membership, cardinality, and decisive evidence
 - [ADR-0019](https://noemion.github.io/architecture/adr-0019-measurement-and-thresholds.html) — measurement constructs, estimands, units, aggregation, uncertainty, and threshold comparison
+- [ADR-0020](https://noemion.github.io/architecture/adr-0020-composite-situations-and-criteria.html) — composite situations, aligned criteria, four-result propagation, and decisive short-circuit evidence
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Praxor responsibility boundaries
 - [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary

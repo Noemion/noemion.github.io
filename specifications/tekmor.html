@@ -90,6 +90,12 @@ permalink: "/specifications/tekmor.html"
     <p>固定基准结果只能支持该固定项目；推广结论还必须保存预注册的 estimand、统计模型、抽样假设和限制。区间跨越阈值为 <code>agno</code>，测量程序违约为 <code>fault</code>。完整边界见 <a href="../architecture/adr-0019-measurement-and-thresholds.html">ADR-0019</a>。</p>
   </section>
 
+  <section class="content-wide">
+    <h2>复合判断证据</h2>
+    <p>复合判断类 Tekmor 必须保存每个已求值叶的结果和依据、决定性叶集合、未求值叶、停止原因以及总体结果。<code>all_of</code> 的有效 <code>unmet</code> 与 <code>any_of</code> 的有效 <code>met</code> 可以决定总体结果，但不能删除已经记录的故障。</p>
+    <p>未求值叶不是 <code>agno</code>；它只说明决定性短路后没有继续工作。完整边界见 <a href="../architecture/adr-0020-composite-situations-and-criteria.html">ADR-0020</a>。当前没有组合求值器或复合 Tekmor 物理格式。</p>
+  </section>
+
   <section class="content-rows">
     <h2>隐私、最小披露与撤销</h2>
     <ul>
@@ -103,7 +109,7 @@ permalink: "/specifications/tekmor.html"
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p>Tekmor 的有限主张、身份绑定、证据等级、“证据不等于证明”、有效性与覆盖度分离、mene 时间覆盖、否定证据职责以及测量依据边界已经采用。事件编码、时间、封闭与测量声明字段、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需新 Profile 与测试。</p>
+    <p>Tekmor 的有限主张、身份绑定、证据等级、“证据不等于证明”、有效性与覆盖度分离、mene 时间覆盖、否定证据职责、测量依据和复合判断覆盖边界已经采用。事件编码、时间、封闭、测量与组合声明字段、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需新 Profile 与测试。</p>
   </section>
   <div class="next-prev"><a href="synem.html">← Synem 规范</a><a href="../components/poiet.html">Poiet 组件 →</a></div>
 </main>

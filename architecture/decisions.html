@@ -7,11 +7,11 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的原生语义、实验性容器、来源清单、结果分层、时间连续性、否定证据、量化范围、测量阈值、未来语言基线和组件边界。</p><div class="badges"><span class="badge">ADR-0010 Accepted</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的原生语义、实验性容器、来源清单、结果分层、时间连续性、否定证据、量化范围、测量阈值、复合判断、未来语言基线和组件边界。</p><div class="badges"><span class="badge">ADR-0010 Accepted</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>定义六个语义面；<a href="adr-0011-endem-container.html">ADR-0011</a>定义实验字节边界；<a href="adr-0012-rust-core-language.html">ADR-0012</a>记录未来 Rust 基线；<a href="adr-0013-end-p1-payload.html">ADR-0013</a>关闭 END-P1 设计载荷；<a href="adr-0014-source-manifest.html">ADR-0014</a>定义实验来源清单；<a href="adr-0015-result-domains.html">ADR-0015</a>分开判断与运行结果；<a href="adr-0016-mene-time-model.html">ADR-0016</a>固定 mene 时间与连续性边界；<a href="adr-0017-negation-and-absence.html">ADR-0017</a>分开否定事态与记录缺席；<a href="adr-0018-quantification-and-membership.html">ADR-0018</a>固定量化范围与不同成员计数；<a href="adr-0019-measurement-and-thresholds.html">ADR-0019</a>固定测量构念、程序、单位、不确定度与阈值。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>定义六个语义面；<a href="adr-0011-endem-container.html">ADR-0011</a>定义实验字节边界；<a href="adr-0012-rust-core-language.html">ADR-0012</a>记录未来 Rust 基线；<a href="adr-0013-end-p1-payload.html">ADR-0013</a>关闭 END-P1 设计载荷；<a href="adr-0014-source-manifest.html">ADR-0014</a>定义实验来源清单；<a href="adr-0015-result-domains.html">ADR-0015</a>分开判断与运行结果；<a href="adr-0016-mene-time-model.html">ADR-0016</a>固定 mene 时间与连续性边界；<a href="adr-0017-negation-and-absence.html">ADR-0017</a>分开否定事态与记录缺席；<a href="adr-0018-quantification-and-membership.html">ADR-0018</a>固定量化范围与不同成员计数；<a href="adr-0019-measurement-and-thresholds.html">ADR-0019</a>固定测量构念、程序、单位、不确定度与阈值；<a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定单根复合边界、四结果传播与决定性短路。</p>
     <p>被保留的安全原则已经重新映射到 Poiet、Theor、Praxor、Dromen 和 Tekmor。历史词只解释为什么迁移，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -37,6 +37,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0017-negation-and-absence.html">ADR-0017 否定事态与缺席证据</a></td><td>Accepted Design</td><td>否定保留同一关系与角色；空结果默认是 agno，只有封闭观察范围内的完整缺席可以支持负目标。</td></tr>
       <tr><td><a href="adr-0018-quantification-and-membership.html">ADR-0018 量化范围与集合成员资格</a></td><td>Accepted Design</td><td>先固定成员权威、截止点与身份规则，再按不同成员聚合；不允许有利子集、重复见证或默认空真值。</td></tr>
       <tr><td><a href="adr-0019-measurement-and-thresholds.html">ADR-0019 测量谓词与阈值契约</a></td><td>Accepted Design</td><td>分开构念、固定或泛化总体、测量程序和阈值比较；不允许用代理分数、单位、舍入或隐藏不确定度洗白结果。</td></tr>
+      <tr><td><a href="adr-0020-composite-situations-and-criteria.html">ADR-0020 复合事态与判据组合</a></td><td>Accepted Design</td><td>只允许一个不可分终态使用 all_of/any_of；固定四结果传播、决定性短路和求值覆盖，不开放任意表达式。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -61,6 +62,7 @@ permalink: "/architecture/decisions.html"
       <tr><td>否定与缺席证据</td><td>negative 作用于同一关系和角色；没有记录不等于负观察，缺席推断必须绑定封闭观察范围。</td><td>Poiet、Praxor、Tekmor、END-P1 负极性向量与未来完整性声明；空日志不能成为 met。</td></tr>
       <tr><td>量化范围与成员资格</td><td>只支持单个被量化角色；集合、权威、截止点、身份和空集政策必须显式，基数只按不同成员计数。</td><td>Poiet、Praxor、Tekmor 与未来量化 Profile；当前不改变 END-P1，也不实现求值器。</td></tr>
       <tr><td>测量谓词与阈值</td><td>构念、总体、数值、单位、程序、聚合器、样本、不确定度和比较器必须共同固定。</td><td>Poiet、Praxor、Tekmor、AI 评估与未来测量 Profile；当前不改变 END-P1，也不实现统计引擎。</td></tr>
+      <tr><td>复合事态与判据</td><td>一个不可分终态可用有限无环的 all_of/any_of；skena 与 krin 叶对齐，四结果确定传播，决定性短路保存覆盖。</td><td>Poiet、Praxor、Tekmor、Synem 拆分与未来组合 Profile；当前不改变 END-P1，也不实现求值器。</td></tr>
     </tbody></table></div>
   </section>
 
