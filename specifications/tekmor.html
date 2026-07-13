@@ -54,6 +54,18 @@ permalink: "/specifications/tekmor.html"
   </section>
 
   <section class="content-wide">
+    <h2>持续目标需要时间覆盖</h2>
+    <p>服务于 <code>mene</code> 的 Tekmor 除了 <code>phain</code>，还必须声明半开覆盖区间、观测方法、时钟域、时钟生产者、分辨率、最大不确定度、同步方式、已知空洞和重启或回拨事件。</p>
+    <div class="table-wrap"><table><thead><tr><th>证据情况</th><th>能够支持</th><th>不能支持</th></tr></thead><tbody>
+      <tr><td>单个健康采样点</td><td>该采样时刻附近、在声明分辨率内的有限观察。</td><td>整个发布窗口连续健康。</td></tr>
+      <tr><td>覆盖区间带显式空洞</td><td>已覆盖部分的观察和空洞位置。</td><td>用插值、最后值延续或没有告警填补空洞。</td></tr>
+      <tr><td>完整覆盖与有效时钟</td><td>按 strict 或 budgeted 政策计算 met/unmet。</td><td>自动形成 accepted；最终决定仍需要具名权威。</td></tr>
+      <tr><td>时钟或同步契约故障</td><td>定位 fault、生产者和受影响区间。</td><td>目标为 unmet，或旧时间记录仍适用。</td></tr>
+    </tbody></table></div>
+    <p>时间覆盖语义见 <a href="../architecture/adr-0016-mene-time-model.html">ADR-0016</a>。当前没有 Tekmor 时间编码、时钟采集器或多生产者归并实现。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>Dromen 与运行记录</h2>
     <p>Praxor 从 attested Endem/Synem、执行策略、授权能力和当前环境建立 Dromen。Dromen 只存在于会话内；Tekmor 只保存足以重放判断的身份、参数和观察，不序列化实时句柄、凭据、模型私有状态或整个内存视图。</p>
     <div class="flow"><div class="step">attested Endem / Synem</div><div class="step">Dromen</div><div class="step">能力请求</div><div class="step">环境观察</div><div class="step">phain · 结构化观察</div><div class="step">Praxe Tekmor</div><div class="step">决定类 Tekmor</div></div>
@@ -73,7 +85,7 @@ permalink: "/specifications/tekmor.html"
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p>Tekmor 的有限主张、身份绑定、证据等级、“证据不等于证明”以及有效性与覆盖度分离已经采用。事件编码、时间域、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需威胁模型与测试。</p>
+    <p>Tekmor 的有限主张、身份绑定、证据等级、“证据不等于证明”、有效性与覆盖度分离以及 mene 时间覆盖职责已经采用。事件编码、时间字段、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需新 Profile 与测试。</p>
   </section>
   <div class="next-prev"><a href="synem.html">← Synem 规范</a><a href="../components/poiet.html">Poiet 组件 →</a></div>
 </main>

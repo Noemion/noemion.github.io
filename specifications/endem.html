@@ -68,6 +68,17 @@ permalink: "/specifications/endem.html"
   </section>
 
   <section class="content-wide">
+    <h2>mene 怎样表达持续时间</h2>
+    <p class="lead"><code>mene</code> 只有在时间范围和连续性政策已经确定时才可判断。它不读取运行机器当前时间，也不把采样频率当作目标语义。</p>
+    <div class="table-wrap"><table><thead><tr><th>部分</th><th>允许设计</th><th>必须拒绝或保留未决</th></tr></thead><tbody>
+      <tr><td>时间范围</td><td><code>fixed</code> 使用具名权威解析的 UTC 半开区间；<code>elapsed</code> 使用具名事件、固定时长和单调时钟。</td><td>“现在起”“明天”、默认本地时区、日历月年、墙钟经过时长和未绑定事件。</td></tr>
+      <tr><td>连续性</td><td><code>strict</code> 要求全区间成立；<code>budgeted</code> 明确累计、单次和次数上限。</td><td>把遥测空洞、缺少告警或几个健康采样点当作允许中断。</td></tr>
+      <tr><td>覆盖结果</td><td>完整覆盖且预算内为 <code>met</code>；有效违约为 <code>unmet</code>；缺口为 <code>agno</code>；时钟契约故障为 <code>fault</code>。</td><td>插值填洞、远端 Task 时间戳充当时钟权威，或验证器故障充当目标未满足。</td></tr>
+    </tbody></table></div>
+    <p>完整决定见 <a href="../architecture/adr-0016-mene-time-model.html">ADR-0016</a>。它不新增 END-P1 字段；未来 mene Profile 仍需物理字段、范围限制和正反字节向量。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>自然语言场景怎样检验六个语义面</h2>
     <p class="lead">同一套字段只有在能区分不同失败原因时才有意义。以下场景不是产品演示或可执行测试，而是用来暴露规范缺口的设计审查语料。</p>
     <div class="table-wrap"><table><thead><tr><th>来源场景</th><th>必须表达的区别</th><th>不能偷换成什么</th></tr></thead><tbody>
@@ -80,8 +91,11 @@ permalink: "/specifications/endem.html"
       <tr><td>把响应时间控制在合理范围</td><td>阈值、窗口、单位、分位数和具名决定主体</td><td>历史均值、行业惯例或模型建议都不是授权</td></tr>
       <tr><td>生成安全评审报告并部署修复后的服务</td><td>按独立身份、权限、失败和验收责任拆成两个 Endem</td><td>不能只按连接词机械拆分，也不能用一个复合根掩盖两项责任</td></tr>
       <tr><td>恢复试验正常结束但发现数据损坏</td><td>会话 <code>completed</code>、满足结果 <code>unmet</code>、权威决定 <code>rejected</code></td><td>运行成功不能冒充目标满足，验证器故障也不能冒充目标未满足</td></tr>
+      <tr><td>固定发布窗口持续可用</td><td><code>fixed</code> UTC 半开区间、具名时钟权威和 strict/budgeted 政策</td><td>本地默认时区或相对日期不能成为规范输入</td></tr>
+      <tr><td>只有三个健康采样点</td><td>有效 Tekmor 仍存在覆盖空洞，结果为 <code>agno</code></td><td>离散样本、插值或没有告警不证明连续成立</td></tr>
+      <tr><td>部署完成后保持十分钟</td><td><code>elapsed</code> 绑定具名事件，以单调时钟测量固定时长</td><td>墙钟回拨、远端完成时间戳或未声明重启不能决定经过时长</td></tr>
     </tbody></table></div>
-    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。九个场景当前登记为非规范材料，不证明 Poiet、Theor 或任何自然语言解析能力已经存在。</p>
+    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。十二个场景当前登记为非规范材料，不证明 Poiet、Theor、Praxor 或任何自然语言解析与时间求值能力已经存在。</p>
   </section>
 
   <section class="content-wide">

@@ -23,7 +23,7 @@ badges: ["poie", "One Root Skena"]
 | `rhem` | 来源出现了哪些记号？ | 原文或摘要、语言、主体、来源和精确范围 |
 | `semion` | 这些记号怎样取得意义？ | 符号、指称、关系、作用域、极性、时间和来源映射 |
 | `skena` | 哪一种中性可能事态构成目标内容？ | 一个根对象—关系图、组合与极性 |
-| `telis` | 目标要求事态变化还是持续？ | kine 或 mene、适用时间边界；不重复表达否定 |
+| `telis` | 目标要求事态变化还是持续？ | kine 或 mene；mene 还需 fixed/elapsed 范围与 strict/budgeted 连续性；不重复表达否定 |
 | `krin` | 怎样把 phain 与 skena 比较？ | 结构比较、Tekmor 类型、agno/fault 处理和决定权威 |
 | `apor` | 哪些投影还没确定？ | 替代解释、冲突、测量、风险和允许的解决方式 |
 

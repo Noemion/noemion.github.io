@@ -7,11 +7,11 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的原生语义、实验性容器、来源清单、结果分层、未来安全核心语言基线、单一命令面和组件边界。</p><div class="badges"><span class="badge">ADR-0010 Accepted</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的原生语义、实验性容器、来源清单、结果分层、mene 时间语义、未来安全核心语言基线、单一命令面和组件边界。</p><div class="badges"><span class="badge">ADR-0010 Accepted</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>定义六个语义面；<a href="adr-0011-endem-container.html">ADR-0011</a>定义实验字节边界；<a href="adr-0012-rust-core-language.html">ADR-0012</a>记录未来 Rust 基线；<a href="adr-0013-end-p1-payload.html">ADR-0013</a>关闭 END-P1 设计载荷；<a href="adr-0014-source-manifest.html">ADR-0014</a>定义实验来源清单；<a href="adr-0015-result-domains.html">ADR-0015</a>分开判断与运行结果。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>定义六个语义面；<a href="adr-0011-endem-container.html">ADR-0011</a>定义实验字节边界；<a href="adr-0012-rust-core-language.html">ADR-0012</a>记录未来 Rust 基线；<a href="adr-0013-end-p1-payload.html">ADR-0013</a>关闭 END-P1 设计载荷；<a href="adr-0014-source-manifest.html">ADR-0014</a>定义实验来源清单；<a href="adr-0015-result-domains.html">ADR-0015</a>分开判断与运行结果；<a href="adr-0016-mene-time-model.html">ADR-0016</a>固定 mene 时间与连续性边界。</p>
     <p>被保留的安全原则已经重新映射到 Poiet、Theor、Praxor、Dromen 和 Tekmor。历史词只解释为什么迁移，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -33,6 +33,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0013-end-p1-payload.html">ADR-0013 END-P1 封闭语义载荷</a></td><td>Accepted Draft</td><td>END-P0 保留为结构实验；END-P1 作为首个设计 Profile 固定六记录字段、枚举、规范排序和引用闭包。</td></tr>
       <tr><td><a href="adr-0014-source-manifest.html">ADR-0014 首个 Poiet 来源清单</a></td><td>Accepted Draft</td><td>用有限来源清单连接自然语言来源与授权投影；模型不能直接生成规范对象，正式来源语言出现后删除该入口。</td></tr>
       <tr><td><a href="adr-0015-result-domains.html">ADR-0015 判断与运行结果分层</a></td><td>Accepted Design</td><td>分开制品生命周期、满足判断、权威决定、会话终止、Tekmor 有效性和证据覆盖度；不改变 END-P1 字节。</td></tr>
+      <tr><td><a href="adr-0016-mene-time-model.html">ADR-0016 mene 时间与连续性模型</a></td><td>Accepted Design</td><td>采用 fixed/elapsed 时间范围、strict/budgeted 连续性与显式覆盖缺口；END-P1 继续只支持 kine。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -40,7 +41,7 @@ permalink: "/architecture/decisions.html"
     <h2>当前冻结的内容</h2>
     <div class="table-wrap"><table><thead><tr><th>决定</th><th>采用的边界</th><th>直接影响</th></tr></thead><tbody>
       <tr><td>六个语义面</td><td>一个 Endem 只有一个根 skena，并保存 rhem、semion、skena、telis、krin 与 apor。</td><td>来源格式、投影规则、Poiet、规范向量和错误语义。</td></tr>
-      <tr><td>事态与方向分离</td><td>skena 保持中性；telis 只使用 kine/mene；禁止由事态否定表达。</td><td>规范化、等价判断、时间模型和反例向量。</td></tr>
+      <tr><td>事态与方向分离</td><td>skena 保持中性；telis 只使用 kine/mene；禁止由事态否定表达。</td><td>规范化、等价判断、时间字段与反例向量。</td></tr>
       <tr><td>形式显示</td><td>semion、skena 与 phain 共享符号和关系位置，不使用自证逻辑形式字段。</td><td>结构编码、Poiet/Theor 差分和 aseme 诊断。</td></tr>
       <tr><td>同一制品状态</td><td>Endem 沿 nascent → coherent → attested 演进，不建立平行对象家族。</td><td>身份、摘要、发布、签名和生命周期。</td></tr>
       <tr><td>组合闭包</td><td>Synem 只在多个 Endem 需要解析关系时出现；权限只能收紧。</td><td>pleko、依赖锁定、冲突和披露。</td></tr>
@@ -53,6 +54,7 @@ permalink: "/architecture/decisions.html"
       <tr><td>首个设计 Profile</td><td>END-P1 使用 profile 2，封闭六记录字段并只支持 nascent 与 kine。</td><td>未来 Poiet/Theor 字段解析、交叉引用和当前载荷向量；不构成稳定 ABI。</td></tr>
       <tr><td>首个来源输入</td><td>END-SRCM 使用 UTF-8 逐行来源清单，显式分开来源、授权投影和 apor。</td><td>Poiet 输入解析与失败定位；不是稳定源语言或对象身份。</td></tr>
       <tr><td>判断与运行结果分层</td><td>满足只使用 met/unmet/agno/fault；决定只使用 accepted/rejected/deferred；会话只使用 completed/failed/interrupted。</td><td>Praxor、Tekmor、协议适配、人工验收和未来组合向量；不新增对象或 wire 字段。</td></tr>
+      <tr><td>mene 时间与连续性</td><td>时间范围只使用 fixed 确定区间或 elapsed 具名事件时长；连续性只使用 strict 或完整 budgeted。</td><td>Poiet、Praxor、Tekmor 和未来 mene Profile；遥测缺口不能成为允许违约。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -75,6 +77,8 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="https://gabi.xinuos.com/elf/">ELF 对象格式</a><br><a href="https://sourceware.org/binutils/">GNU Binutils 2.46.1</a></td><td>结构视图与装载视图分离、显式引用，以及独立于 BFD 的第二条读取路径。</td><td>不继承机器地址、指令、弱符号规则，也不让 BFD 的通用表示进入第一阶段可信核心。</td></tr>
       <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 稳定规范</a></td><td>把协议错误与工具执行错误保留为不同来源事件，并将工具说明、注解和结果作为版本化适配输入。</td><td>后续版本在正式发布并完成兼容、安全与降级复核前不成为基线；工具 schema、服务器说明、OAuth 身份和 <code>isError</code> 都不等于本地能力授权或满足结果。</td></tr>
       <tr><td><a href="https://www.gnu.org/software/automake/manual/html_node/Generalities-about-Testing.html">GNU Automake 测试结果语义</a></td><td>借鉴正常断言失败、跳过和环境硬错误的分离，避免把目标反驳、观察不足和求值故障合并。</td><td>不继承 Automake 的退出码、PASS/FAIL 名称或测试协议，也不把测试成功直接映射为 Endem accepted。</td></tr>
+      <tr><td><a href="https://www.rfc-editor.org/info/rfc3339/">RFC 3339 时间戳</a><br><a href="https://www.rfc-editor.org/info/rfc9557/">RFC 9557 附加时区信息</a><br><a href="https://www.gnu.org/software/libc/manual/html_node/Getting-the-Time.html">GNU C Library 时钟说明</a></td><td>采用确定 UTC 瞬间、显式时区来源，以及绝对时间与单调经过时长的分离。</td><td>不接受默认本地时区、相对日期或墙钟经过时长，也不直接继承 RFC 全类型空间或 libc 时钟编号。</td></tr>
+      <tr><td><a href="https://www.w3.org/TR/owl-time/">W3C OWL-Time</a><br><a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/">OpenTelemetry Metrics 数据模型</a></td><td>借鉴瞬间、区间、时长、参考系统、时间窗口与数据缺口的分层。</td><td>OWL 类、OTLP 窗口、采样点和远端时间戳都不直接成为 Endem 字段、时钟权威或 mene 满足证据。</td></tr>
       <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a></td><td>借用 Task、Message、Artifact、多绑定和主次版本协商交换跨系统候选状态与结果；签名 Agent Card 只支持来源核对。</td><td>补丁号不进入协议协商；签名证明发布者关联，不证明能力描述真实，也不让外部 Task、Artifact 或 Agent Card 成为 Endem 身份、状态或验收决定。</td></tr>
       <tr><td><a href="https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai">OpenTelemetry GenAI 语义约定</a></td><td>以后可由带版本、可脱敏的导出器映射运行观测。</td><td>该约定仍处于 Development，不进入 Endem 编码、Tekmor 身份或最终决定；敏感内容不得默认导出。</td></tr>
       <tr><td><a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI RMF 与 GenAI Profile</a></td><td>采用风险登记、测试评估验证确认和具名责任人的治理框架，检查模型候选、远端工具和人工决定。</td><td>风险框架不定义 Endem 字段、合格阈值或软件符合性；AI RMF 1.0 正在修订，不能冻结为 ABI。</td></tr>

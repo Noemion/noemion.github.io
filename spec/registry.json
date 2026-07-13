@@ -100,7 +100,10 @@
     {"term": "satisfaction-result", "kind": "result-domain", "decision_status": "accepted", "definition": "met、unmet、agno 或 fault；只描述 skena 相对 krin、phain 与 Tekmor 的比较"},
     {"term": "decision-result", "kind": "result-domain", "decision_status": "accepted", "definition": "accepted、rejected 或 deferred；只描述具名权威的最终决定"},
     {"term": "session-result", "kind": "result-domain", "decision_status": "accepted", "definition": "completed、failed 或 interrupted；只描述一次 Praxe 会话怎样终止"},
-    {"term": "evidence-status", "kind": "result-domain", "decision_status": "accepted", "definition": "Tekmor 的 valid、invalid 或 revoked 与证据集合的 sufficient 或 insufficient 两个正交维度"}
+    {"term": "evidence-status", "kind": "result-domain", "decision_status": "accepted", "definition": "Tekmor 的 valid、invalid 或 revoked 与证据集合的 sufficient 或 insufficient 两个正交维度"},
+    {"term": "time-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "mene 使用的 fixed UTC 区间或 elapsed 具名事件经过时长"},
+    {"term": "continuity-policy", "kind": "semantic-interface", "decision_status": "accepted", "definition": "mene 的 strict 全区间保持或带完整违约预算的 budgeted 保持"},
+    {"term": "time-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "Tekmor 声明的半开观测区间并集、方法、时钟、不确定度与缺口"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -112,7 +115,8 @@
     {"id": "THR-END-007", "clauses": ["END-VER-001"], "evidence_status": "planned"},
     {"id": "THR-END-008", "clauses": ["END-STA-001", "END-STA-002", "END-DEC-001"], "evidence_status": "planned"},
     {"id": "THR-END-009", "clauses": ["END-CON-001", "END-DET-001"], "evidence_status": "planned"},
-    {"id": "THR-END-010", "clauses": ["END-ERR-001"], "evidence_status": "partial"}
+    {"id": "THR-END-010", "clauses": ["END-ERR-001"], "evidence_status": "partial"},
+    {"id": "THR-END-011", "clauses": ["END-TIM-001", "END-TIM-002", "END-TIM-003"], "evidence_status": "partial"}
   ],
   "clauses": [
     {
@@ -200,6 +204,45 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "peira:telis-mode"}
+      ]
+    },
+    {
+      "id": "END-TIM-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, Praxor and time authorities",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
+        {"status": "planned", "ref": "peira:mene-time-scope"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-TIM-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, Praxor and policy authorities",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
+        {"status": "planned", "ref": "peira:mene-continuity-policy"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
+      ]
+    },
+    {
+      "id": "END-TIM-003",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Praxor, observation adapters and every evaluator",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
+        {"status": "planned", "ref": "peira:mene-coverage-classification"},
+        {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
     {

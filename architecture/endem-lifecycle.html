@@ -69,6 +69,7 @@ permalink: "/architecture/endem-lifecycle.html"
       <li>Praxor 从对象、当前策略和授权能力建立 Dromen；实时句柄只保留在隔离执行侧。</li>
       <li>后端读取 Dromen 的受限视图，返回候选或类型化能力请求，不能直接调用外部能力。</li>
       <li>Praxor 验证请求、执行或拒绝，再把真实观察规范化为 phain 并记录为 Praxe Tekmor。</li>
+      <li>若 <code>telis</code> 为 <code>mene</code>，Praxor 还必须按 ADR-0016 绑定 fixed 或 elapsed 范围，记录时钟域、覆盖区间、缺口和违约预算。</li>
       <li>求值器按照执行前固定的 <code>krin</code> 比较 <code>skena</code> 与 <code>phain</code>，形成 <code>met / unmet / agno / fault</code> 中的一个满足结果。</li>
       <li>具名权威读取满足结果、有效 Tekmor 和覆盖度，再形成 <code>accepted / rejected / deferred</code> 中的一个决定；会话另行记录 <code>completed / failed / interrupted</code>。</li>
       <li>会话结束后 Dromen 销毁，运行记录只保留允许公开的 Tekmor 和身份链。</li>
@@ -87,6 +88,7 @@ permalink: "/architecture/endem-lifecycle.html"
       <tr><td>证据覆盖度</td><td>sufficient / insufficient</td><td>一组有效 Tekmor 是否覆盖当前 krin；不与单份记录有效性合并。</td></tr>
     </tbody></table></div>
     <p>这五个结果域由 <a href="adr-0015-result-domains.html">ADR-0015</a> 分开。外部 Task 的 <code>completed</code>、工具返回成功或会话正常结束都不能跨域改写满足结果与最终决定。</p>
+    <p><code>mene</code> 的时间范围、连续性政策与覆盖分类由 <a href="adr-0016-mene-time-model.html">ADR-0016</a> 定义。当前没有 mene 线格式、时钟适配器或持续求值实现。</p>
   </section>
 
   <section class="content-band">

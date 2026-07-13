@@ -53,6 +53,17 @@ permalink: "/components/praxor.html"
   </section>
 
   <section class="content-wide">
+    <h2>mene 的时钟与覆盖责任</h2>
+    <ul>
+      <li>Praxor 对 <code>fixed</code> 读取已经授权的 UTC 区间，不用当前机器时区重新解释来源表达。</li>
+      <li>Praxor 对 <code>elapsed</code> 绑定具名起始事件，并使用声明的单调时钟测量经过时长；墙钟回拨不能缩短目标区间。</li>
+      <li>观察适配器把覆盖区间、已知空洞、时钟分辨率、不确定度、同步和重启事件写入 Tekmor。</li>
+      <li>离散采样只能支持采样时刻；覆盖空洞产生 <code>agno</code>，时钟契约故障产生 <code>fault</code>，不能默认为 <code>met</code>。</li>
+      <li>A2A Task、MCP 工具和远端遥测的时间戳只作为带来源事件，不能取得本地时钟权威。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
     <h2>外部协议适配</h2>
     <p>MCP、A2A、遥测系统和供应商工具只连接 Praxor 外缘。所有远端描述和返回内容都要先经过本地版本、权限、结构和来源检查。</p>
     <div class="table-wrap"><table><thead><tr><th>外部接口</th><th>进入 Praxor 的方式</th><th>本地边界</th></tr></thead><tbody>
@@ -77,7 +88,7 @@ permalink: "/components/praxor.html"
 
   <section class="content-band">
     <h2>当前成熟度与未冻结接口</h2>
-    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、Tekmor 不等于验收以及结果域分离已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、预算单位、事件编码和决定类 Tekmor 尚未冻结。</p>
+    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、Tekmor 不等于验收、结果域分离以及 mene 时钟责任已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、时间字段、预算单位、事件编码和决定类 Tekmor 尚未冻结。</p>
   </section>
   <div class="next-prev"><a href="theor.html">← Theor</a><a href="../architecture/endem-lifecycle.html">Endem 生命周期 →</a></div>
 </main>

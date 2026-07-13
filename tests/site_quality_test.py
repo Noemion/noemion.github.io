@@ -81,6 +81,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0013-end-p1-payload.html",
     "architecture/adr-0014-source-manifest.html",
     "architecture/adr-0015-result-domains.html",
+    "architecture/adr-0016-mene-time-model.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -228,6 +229,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0013-end-p1-payload.html",
     "architecture/adr-0014-source-manifest.html",
     "architecture/adr-0015-result-domains.html",
+    "architecture/adr-0016-mene-time-model.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -1428,6 +1430,16 @@ def validate_jekyll_sources():
             "后续正式版本",
             "默认不导出正文",
             "不构成 Tekmor 身份",
+        ),
+        "architecture/adr-0016-mene-time-model.html": (
+            "RFC 3339",
+            "RFC 9557",
+            "GNU C Library 时钟说明",
+            "GNU Coreutils 相对日期说明",
+            "W3C OWL-Time",
+            "OpenTelemetry Metrics 数据模型",
+            "A2A 1.0",
+            "不会直接进入 Endem",
         ),
     }
     for relative_path, required_tokens in external_boundary_contracts.items():

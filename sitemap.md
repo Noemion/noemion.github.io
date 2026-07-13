@@ -29,6 +29,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0013](https://noemion.github.io/architecture/adr-0013-end-p1-payload.html) — closed END-P1 semantic payload fields, ordering, references, and implementation gate
 - [ADR-0014](https://noemion.github.io/architecture/adr-0014-source-manifest.html) — experimental Poiet source manifest, authority boundary, and replacement conditions
 - [ADR-0015](https://noemion.github.io/architecture/adr-0015-result-domains.html) — separate artifact, satisfaction, decision, session, and evidence result domains
+- [ADR-0016](https://noemion.github.io/architecture/adr-0016-mene-time-model.html) — fixed and elapsed time scopes, continuity policies, coverage gaps, and clock authority
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Praxor responsibility boundaries
 - [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary

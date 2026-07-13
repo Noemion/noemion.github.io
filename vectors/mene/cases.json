@@ -1,0 +1,103 @@
+{
+  "vector_format": "noemion.mene-vector-v1",
+  "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "description": "Normative mene proposal vectors for ADR-0016; not a clock, monitor, Praxor, or evaluator implementation",
+  "cases": [
+    {
+      "id": "MV-VALID-FIXED-STRICT-MET-001",
+      "scope": {"kind": "fixed", "start": "2026-07-20T00:00:00Z", "end": "2026-07-20T01:00:00Z", "authority": "release-owner"},
+      "continuity": {"kind": "strict"},
+      "observation": {"clock_status": "valid", "coverage": [[0, 3600]], "breaches": []},
+      "proposed_result": "met",
+      "expect": {"result": "accept", "clause": "END-TIM-003"}
+    },
+    {
+      "id": "MV-VALID-FIXED-STRICT-UNMET-001",
+      "scope": {"kind": "fixed", "start": "2026-07-20T00:00:00Z", "end": "2026-07-20T01:00:00Z", "authority": "release-owner"},
+      "continuity": {"kind": "strict"},
+      "observation": {"clock_status": "valid", "coverage": [[0, 3600]], "breaches": [[1200, 1260]]},
+      "proposed_result": "unmet",
+      "expect": {"result": "accept", "clause": "END-TIM-003"}
+    },
+    {
+      "id": "MV-VALID-FIXED-GAP-AGNO-001",
+      "scope": {"kind": "fixed", "start": "2026-07-20T00:00:00Z", "end": "2026-07-20T01:00:00Z", "authority": "release-owner"},
+      "continuity": {"kind": "strict"},
+      "observation": {"clock_status": "valid", "coverage": [[0, 1200], [1800, 3600]], "breaches": []},
+      "proposed_result": "agno",
+      "expect": {"result": "accept", "clause": "END-TIM-003"}
+    },
+    {
+      "id": "MV-VALID-FIXED-CLOCK-FAULT-001",
+      "scope": {"kind": "fixed", "start": "2026-07-20T00:00:00Z", "end": "2026-07-20T01:00:00Z", "authority": "release-owner"},
+      "continuity": {"kind": "strict"},
+      "observation": {"clock_status": "invalid", "coverage": [[0, 3600]], "breaches": []},
+      "proposed_result": "fault",
+      "expect": {"result": "accept", "clause": "END-TIM-003"}
+    },
+    {
+      "id": "MV-VALID-FIXED-BUDGETED-MET-001",
+      "scope": {"kind": "fixed", "start": "2026-07-20T00:00:00Z", "end": "2026-07-20T01:00:00Z", "authority": "release-owner"},
+      "continuity": {"kind": "budgeted", "max_total_breach_seconds": 180, "max_single_breach_seconds": 120, "max_breach_count": 2},
+      "observation": {"clock_status": "valid", "coverage": [[0, 3600]], "breaches": [[600, 660], [2400, 2460]]},
+      "proposed_result": "met",
+      "expect": {"result": "accept", "clause": "END-TIM-002"}
+    },
+    {
+      "id": "MV-VALID-ELAPSED-MET-001",
+      "scope": {"kind": "elapsed", "anchor_event": "deploy.completed#42", "duration_seconds": 600, "clock_domain": "monotonic", "clock_authority": "praxor.session-clock", "restart_boundary": "session"},
+      "continuity": {"kind": "strict"},
+      "observation": {"clock_status": "valid", "coverage": [[0, 600]], "breaches": []},
+      "proposed_result": "met",
+      "expect": {"result": "accept", "clause": "END-TIM-001"}
+    },
+    {
+      "id": "MV-REJECT-FIXED-REVERSED-001",
+      "scope": {"kind": "fixed", "start": "2026-07-20T01:00:00Z", "end": "2026-07-20T00:00:00Z", "authority": "release-owner"},
+      "continuity": {"kind": "strict"},
+      "observation": {"clock_status": "valid", "coverage": [], "breaches": []},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-TIM-001"}
+    },
+    {
+      "id": "MV-REJECT-FIXED-LOCAL-DEFAULT-001",
+      "scope": {"kind": "fixed", "start": "2026-07-20T01:00:00", "end": "2026-07-20T02:00:00", "authority": "system-default"},
+      "continuity": {"kind": "strict"},
+      "observation": {"clock_status": "valid", "coverage": [], "breaches": []},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-TIM-001"}
+    },
+    {
+      "id": "MV-REJECT-ELAPSED-CIVIL-CLOCK-001",
+      "scope": {"kind": "elapsed", "anchor_event": "deploy.completed#42", "duration_seconds": 600, "clock_domain": "civil", "clock_authority": "system-wall-clock", "restart_boundary": "session"},
+      "continuity": {"kind": "strict"},
+      "observation": {"clock_status": "valid", "coverage": [[0, 600]], "breaches": []},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-TIM-001"}
+    },
+    {
+      "id": "MV-REJECT-BUDGET-INCOMPLETE-001",
+      "scope": {"kind": "fixed", "start": "2026-07-20T00:00:00Z", "end": "2026-07-20T01:00:00Z", "authority": "release-owner"},
+      "continuity": {"kind": "budgeted", "max_total_breach_seconds": 180, "max_single_breach_seconds": 120},
+      "observation": {"clock_status": "valid", "coverage": [[0, 3600]], "breaches": []},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-TIM-002"}
+    },
+    {
+      "id": "MV-REJECT-GAP-AS-MET-001",
+      "scope": {"kind": "fixed", "start": "2026-07-20T00:00:00Z", "end": "2026-07-20T01:00:00Z", "authority": "release-owner"},
+      "continuity": {"kind": "strict"},
+      "observation": {"clock_status": "valid", "coverage": [[0, 1200], [1800, 3600]], "breaches": []},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-TIM-003"}
+    },
+    {
+      "id": "MV-REJECT-CLOCK-FAULT-AS-UNMET-001",
+      "scope": {"kind": "fixed", "start": "2026-07-20T00:00:00Z", "end": "2026-07-20T01:00:00Z", "authority": "release-owner"},
+      "continuity": {"kind": "strict"},
+      "observation": {"clock_status": "invalid", "coverage": [[0, 3600]], "breaches": []},
+      "proposed_result": "unmet",
+      "expect": {"result": "reject", "clause": "END-TIM-003"}
+    }
+  ]
+}
