@@ -10,9 +10,10 @@
 | [`endem-format.md`](endem-format.md) | `0.1.0-draft` | 已采用的实验性容器草案；尚非稳定 ABI | 固定前导、定宽目录、确定性 CBOR、END-P0 结构实验与 END-P1 封闭内容 Profile | coherent/attested、签名、压缩、Synem 和跨版本承诺 |
 | [`endem-source-manifest.md`](endem-source-manifest.md) | `0.1.0-draft` | 实验性 Poiet 输入；正式来源语言出现后删除 | UTF-8 逐行指令、转义、基数、授权边界和 END-P1 映射 | 注释元数据、包含、模块、量化、时间、求值语言和兼容承诺 |
 | [`synem-core.md`](synem-core.md) | `0.1.0-draft` | 草案；已接受组合闭包边界的第一份条款化表达 | 完整闭包、精确绑定、有限无环、权限交集、成员结果分离与会话激活 | 物理容器、版本范围语法、符号、调度、远程仓库和稳定 ABI |
+| [`dromen-core.md`](dromen-core.md) | `0.1.0-draft` | 草案；已接受一次会话契约的第一份条款化表达 | 精确主体、政策与环境绑定、能力和预算求交、秘密外置、观察责任、只读失效与销毁 | 运行 API、沙箱、凭据代理、事件编码、恢复策略和组件实现；永远不建立 Dromen 文件 |
 | [`tekmor-core.md`](tekmor-core.md) | `0.1.0-draft` | 草案；已接受证据与评估边界的第一份条款化表达 | 主体范围、溯源、phain 对齐、证据类别、完整性、有效性、覆盖、决定分离与最小披露 | 物理容器、签名算法、透明日志、撤销分发、时钟归并、隐私策略和稳定 ABI |
 
-[`endem-threat-model.md`](endem-threat-model.md) 把单个 Endem 的不可信输入与失败责任映射到规范条款；[`synem-threat-model.md`](synem-threat-model.md) 单独处理依赖替换、闭包截断、循环、权限放大、结果洗白与激活竞态；[`tekmor-threat-model.md`](tekmor-threat-model.md) 处理范围漂白、循环自证、观察升级、撤销失明、覆盖伪造、决定越权和泄密。[`profiles/end-p0.json`](profiles/end-p0.json) 给出第一组跨实现实验的有限上限；这些数值不是生产规模证明，提高时必须采用新的 Profile 身份。
+[`endem-threat-model.md`](endem-threat-model.md) 把单个 Endem 的不可信输入与失败责任映射到规范条款；[`synem-threat-model.md`](synem-threat-model.md) 单独处理依赖替换、闭包截断、循环、权限放大、结果洗白与激活竞态；[`dromen-threat-model.md`](dromen-threat-model.md) 处理主体替换、陈旧政策、环境漂移、能力放大、秘密持久化、预算逃逸和会话复活；[`tekmor-threat-model.md`](tekmor-threat-model.md) 处理范围漂白、循环自证、观察升级、撤销失明、覆盖伪造、决定越权和泄密。[`profiles/end-p0.json`](profiles/end-p0.json) 给出第一组跨实现实验的有限上限；这些数值不是生产规模证明，提高时必须采用新的 Profile 身份。
 
 [`endem-errors.md`](endem-errors.md) 登记结构与 Profile 错误码。[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存 JSON 语义外壳；`../vectors/wire/` 保存真实字节的十六进制表达。结构接受向量不等于语义有效 Endem。
 
@@ -21,6 +22,8 @@
 [`synem-scenarios.md`](synem-scenarios.md) 用十个非规范场景检查闭包、绑定、可选依赖、权限、成员结果和激活边界。它同样不是语法、解析器或组件证据。
 
 [`tekmor-scenarios.md`](tekmor-scenarios.md) 用十四个非规范场景检查证据范围、溯源、观察、类别、有效性、覆盖、决定和最小披露。它不是 Tekmor 格式、采集器、验证器或决定引擎。
+
+[`dromen-scenarios.md`](dromen-scenarios.md) 用十五个非规范场景检查会话主体、政策、环境、能力、秘密、预算、激活、观察、只读失效和销毁。它不是 Dromen 格式、装载器、沙箱、凭据代理或运行时。
 
 `../vectors/result-domains/cases.json` 保存 ADR-0015 的十二个正反提案向量；`../tests/result_domain_vector_test.py` 只执行结果域约束，不实现 Praxor、求值器或决定引擎。向量通过只能证明当前矩阵和条款一致，不能证明运行组件存在。
 
@@ -37,6 +40,8 @@
 `../vectors/synem/cases.json` 保存 ADR-0021 的十二个闭包与条件激活提案向量；`../tests/synem_vector_test.py` 只检查六条 SYN-CORE 规则，不实现解析器、Pleko、Praxor、运行时或求值器。
 
 `../vectors/tekmor/cases.json` 保存 ADR-0022 的十八个证据与评估提案向量；`../tests/tekmor_vector_test.py` 只检查九条 TEK-CORE 规则，不实现采集器、验证器、归并器、撤销服务、决定引擎或运行时。
+
+`../vectors/dromen/cases.json` 保存 ADR-0024 的二十个会话契约提案向量；`../tests/dromen_vector_test.py` 只检查十条 DRO-CORE 规则，不实现装载器、沙箱、凭据代理、Praxor、事件系统或运行时。
 
 `registry.json` 还登记非规范实验及其决定链。P0-LANG-001 的协议与结果位于 `../experiments/p0-language/`；它支持 ADR-0012 的首版核心语言决定，但不会改变 END-CORE 或 END-FMT 的条款含义，也不把原型登记为生产实现。
 

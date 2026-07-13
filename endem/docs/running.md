@@ -49,9 +49,9 @@ badges: ["tasse", "sphra", "praxe"]
 
 ## Dromen
 
-Praxor 为一次会话建立 Dromen。Dromen 只披露当前任务所需的 Endem/Synem 语义和能力参数结构；它不是文件，不进入发布包，也不包含凭据、token、文件描述符、网络连接或其他实时句柄。
+Praxor 按 [ADR-0024](../../architecture/adr-0024-dromen-session-contract.html) 为一次 Praxe 会话封存 Dromen。Dromen 把精确 attested Endem 或 Synem 与政策、环境、非秘密能力描述、有限预算和证据责任绑定在一起；它不是文件，不进入发布包，也不包含凭据、token、文件描述符、网络连接或其他实时句柄。
 
-对象、策略、环境或能力身份变化时，旧 Dromen 立即失效。会话结束后 Dromen 销毁。
+对象、政策、权威、环境、能力、预算或证据责任发生实质变化时，旧 Dromen 失效。扩大权限必须建立新的 Praxe 会话。会话结束后，Dromen 和绑定的实时能力都不可再用；允许保留的记录不能恢复旧权限。
 
 ## 能力与反馈循环
 

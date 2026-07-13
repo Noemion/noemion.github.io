@@ -7,35 +7,38 @@ permalink: "/specifications/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>规范参考指南</span></nav>
-  <header class="section-introduction"><h1>规范参考指南</h1><p>从一项目标、多个目标的组合，到验收证据，查看当前采用的规则和仍未冻结的接口。</p><div class="badges"><span class="badge">END-CORE</span><span class="badge">SYN-CORE</span><span class="badge">TEK-CORE</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="section-introduction"><h1>规范参考指南</h1><p>从一项目标、多个目标的组合、一次会话的运行边界，到验收证据，查看当前采用的规则和仍未冻结的接口。</p><div class="badges"><span class="badge">END-CORE</span><span class="badge">SYN-CORE</span><span class="badge">DRO-CORE</span><span class="badge">TEK-CORE</span><span class="badge">ABI Unfrozen</span></div></header>
   <section>
     <h2>先看哪些规范</h2>
-    <p class="lead">先读 Endem，理解一项目标怎样成为可检查制品。再读 Synem，理解多个目标怎样解析依赖。最后读 Tekmor，理解证据能支持什么判断，又不能证明什么。</p>
-    <p>名称、职责、六个语义面、结果域、复合判断、Synem 闭包与 Tekmor 证据评估边界已经采用。END-P1 已关闭 Endem 设计载荷，SYN-CORE 0.1.0-draft 已关闭抽象组合边界，TEK-CORE 0.1.0-draft 已关闭抽象证据边界；当前只有资料检查器，没有组件实现。时间、量化、测量、组合、Synem 与 Tekmor 的物理编码、摘要、签名和稳定 ABI 仍未冻结。</p>
+    <p class="lead">先读 Endem，理解一项目标怎样成为可检查制品。再读 Synem，理解多个目标怎样解析依赖。然后读 Dromen，理解制品怎样只在一次会话内获得受限运行边界。最后读 Tekmor，理解证据能支持什么判断，又不能证明什么。</p>
+    <p>名称、职责、六个语义面、结果域、复合判断、Synem 闭包、Dromen 会话契约与 Tekmor 证据评估边界已经采用。END-P1 已关闭 Endem 设计载荷；SYN-CORE 0.1.0-draft、DRO-CORE 0.1.0-draft 与 TEK-CORE 0.1.0-draft 分别关闭抽象组合、会话和证据边界。当前只有资料检查器，没有组件实现。时间、量化、测量、组合、Synem 与 Tekmor 的物理编码、运行 API、摘要、签名和稳定 ABI 仍未冻结。</p>
   </section>
   <section>
-    <h2>三类对象指南</h2>
+    <h2>四类对象指南</h2>
     <div class="page-links">
       <a class="page-link" href="endem.html"><strong>Endem · 最小目标制品</strong><span>查看来源、意义、事态、目标方向、判据、未决边界和三个制品状态。</span></a>
       <a class="page-link" href="synem.html"><strong>Synem · 多目标解析闭包</strong><span>查看多个 Endem 怎样解析引用、收敛权限并报告冲突。</span></a>
+      <a class="page-link" href="dromen.html"><strong>Dromen · 一次运行的只读契约</strong><span>查看精确制品怎样绑定政策、环境、能力、预算和证据责任。</span></a>
       <a class="page-link" href="tekmor.html"><strong>Tekmor · 可定位证据记录</strong><span>查看来源、构建、绑定、签名、运行和决定依据怎样保持身份链。</span></a>
     </div>
   </section>
   <section>
     <h2>规范源与可追溯性</h2>
-    <p class="lead">END-CORE 0.1.0-draft 是单个目标的通用内容标准，END-P1 是当前封闭内容 Profile，END-FMT 0.1.0-draft 定义实验性容器；SYN-CORE 0.1.0-draft 定义多目标组合闭包，TEK-CORE 0.1.0-draft 定义证据与评估边界。它们使用唯一条款 ID，并把义务连接到现有向量、计划测试或具名复核权威。</p>
+    <p class="lead">END-CORE 0.1.0-draft 是单个目标的通用内容标准，END-P1 是当前封闭内容 Profile，END-FMT 0.1.0-draft 定义实验性容器；SYN-CORE 定义多目标组合闭包，DRO-CORE 定义一次会话的只读执行契约，TEK-CORE 定义证据与评估边界。它们使用唯一条款 ID，并把义务连接到现有向量、计划测试或具名复核权威。</p>
     <div class="table-wrap"><table><thead><tr><th>工程源</th><th>用途</th><th>当前边界</th></tr></thead><tbody>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 内容标准</a></td><td>六个语义面、规范分层、Profile 符合性、抽象单变量量化、授权、状态、身份、安全与验证责任。</td><td>量化物理字段、嵌套或多变量量化、时间和求值语言仍未冻结。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 格式条款</a></td><td>固定前导、记录目录、受限 CBOR、结构实验 END-P0 与设计 Profile END-P1。</td><td>END-FMT 0.1.0-draft 尚非稳定 ABI，也没有公开符合性声明。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 内容 Profile</a></td><td>六记录字段键、嵌套 map、枚举、规范数组顺序、引用、状态和资源限制。</td><td>只覆盖 nascent 与 kine，不预留尚无消费者的未来字段。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-source-manifest.md">END-SRCM 来源清单</a></td><td>首个 Poiet 输入的指令、转义、基数、授权边界和 END-P1 映射。</td><td>是可替换的实验接口，不是稳定源语言或 Endem 身份。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md">SYN-CORE 组合条款</a></td><td>完整闭包、精确绑定、有限无环、权限交集、成员结果与条件激活。</td><td>不是物理 Synem 格式，不定义扩展名、魔数、仓库或执行调度。</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md">DRO-CORE 会话条款</a></td><td>精确主体、政策封闭、环境绑定、能力与预算求交、观察责任、只读失效和销毁。</td><td>Dromen 永远不是文件；当前不定义运行 API、沙箱、凭据代理、事件编码或恢复协议。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-core.md">TEK-CORE 证据条款</a></td><td>主体范围、溯源、观察、证据类别、完整性、有效性、覆盖、决定与最小披露。</td><td>不是物理 Tekmor 格式，不定义扩展名、签名算法、撤销服务或长期归档。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 场景语料</a></td><td>二十七个自然语言场景检查方向、否定、歧义、观察、故障、权威、多根、结果域、时间、缺席、量化、测量和复合判断。</td><td>是非规范设计审查材料，不是解析能力、符合性测试或实现证据。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读登记</a></td><td>规范、术语、成熟度、实现状态与验证引用。</td><td><code>accepted</code> 不表示稳定发行；计划测试不能写成已覆盖。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md">威胁模型</a><br><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-errors.md">诊断目录</a></td><td>把不可信输入、资源放大和共同故障映射到条款与稳定实验错误码。</td><td>END-P0 数值只支持第一轮实验，仍需规模和复杂度证据。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-threat-model.md">Synem 威胁模型</a><br><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md">Synem 场景语料</a></td><td>检查依赖替换、闭包截断、权限放大、结果洗白和激活竞态。</td><td>场景是非规范设计审查材料，不是组件证据。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-threat-model.md">Tekmor 威胁模型</a><br><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-scenarios.md">Tekmor 场景语料</a></td><td>检查范围漂白、循环自证、观察升级、撤销失明、覆盖伪造、决定越权和泄密。</td><td>十四个场景是非规范设计审查材料，不是采集器或验证器证据。</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-threat-model.md">Dromen 威胁模型</a><br><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md">Dromen 场景语料</a></td><td>检查主体替换、陈旧政策、环境漂移、能力放大、预算逃逸、契约修改和会话复活。</td><td>十五个场景是非规范设计审查材料，不是装载器、沙箱或运行时证据。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/semantic">语义向量集</a></td><td>多个根、事态混入目标力量、未记录歧义和模型越权等正反案例。</td><td>这些 JSON 不是 .endem 物理格式。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/result-domains/cases.json">结果域向量集</a></td><td>十二个提案覆盖满足、决定、会话和证据状态的允许组合与确定拒绝。</td><td>检查器只验证 ADR-0015 矩阵，不是 Praxor、求值器或决定引擎。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/mene/cases.json">mene 时间向量集</a></td><td>十二个提案覆盖 fixed/elapsed、strict/budgeted、覆盖缺口、违约和时钟故障。</td><td>检查器只验证 ADR-0016 抽象矩阵，不是时钟、监控器、Praxor 或求值器。</td></tr>
@@ -44,19 +47,21 @@ permalink: "/specifications/index.html"
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/measurement/cases.json">测量与阈值向量集</a></td><td>十二个提案覆盖构念、总体、单位、聚合、缺失、不确定度和阈值。</td><td>检查器只验证 ADR-0019 的分类矩阵，不是遥测采集器、基准运行器、统计引擎或求值器。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/composition/cases.json">复合事态与判据向量集</a></td><td>十二个提案覆盖单根边界、拓扑对齐、四结果传播和决定性短路。</td><td>检查器只验证 ADR-0020 的分类矩阵，不是解析器、Praxor、运行时或求值器。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/synem">Synem 闭包与激活向量集</a></td><td>十二个提案覆盖完整闭包、精确绑定、权限交集、成员结果与激活状态。</td><td>检查器只验证 ADR-0021 矩阵，不是解析器、Praxor 或运行时。</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/dromen">Dromen 会话契约向量集</a></td><td>二十个提案覆盖主体、政策、环境、能力、秘密、预算、激活、观察、只读和生命周期。</td><td>检查器只验证 ADR-0024 矩阵，不是装载器、沙箱、凭据代理、Praxor 或运行时。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/tekmor">Tekmor 证据与评估向量集</a></td><td>十八个提案覆盖主体范围、溯源、观察、证据类别、完整性、有效性、覆盖、决定与披露。</td><td>检查器只验证 ADR-0022 矩阵，不是采集器、验证器、撤销服务或决定引擎。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/wire">字节向量集</a></td><td>END-P0 含 1 个结构接受和 5 个结构拒绝；END-P1 含 3 个接受和 11 个分层拒绝。</td><td>这些仍是实验性规范字节，不构成稳定 ABI。</td></tr>
     </tbody></table></div>
   </section>
   <section>
-    <h2>不作为文件规范的概念</h2>
-    <p><strong>Dromen</strong> 是 Praxor 针对一次会话从 attested Endem 或 Synem、执行策略和当前授权建立的只读运行视图。Dromen 不得成为磁盘文件、发布对象或跨会话句柄，因此本站不为它建立对象格式规范。它的建立与销毁规则见<a href="../components/praxor.html">Praxor 组件</a>。</p>
+    <h2>Dromen 为什么有规范却没有文件格式</h2>
+    <p><strong>Dromen</strong> 是 Praxor 为一次 Praxe 会话封存的只读执行契约。DRO-CORE 规范它的建立、失效和销毁规则，是为了阻止隐式权限和环境漂移；它同时明确禁止文件扩展名、可移植序列化、跨会话身份和恢复机制。持久审计由 Tekmor 或会话事件承担，不能借记录重新获得权限。</p>
   </section>
   <section>
     <h2>规范与实现的边界</h2>
     <div class="table-wrap"><table><thead><tr><th>层次</th><th>当前权威内容</th><th>尚未形成的证据</th></tr></thead><tbody>
-      <tr><td>语义</td><td>Endem 的一个根与六语义面；Synem 的完整闭包；Tekmor 的证据评估边界；共有 51 个非规范设计场景，并执行七组各 12 个专题向量与 18 个 Tekmor 向量</td><td>场景和提案向量还不是组件证据；时间、量化、测量、组合、Synem 与 Tekmor 的物理字段仍未冻结</td></tr>
+      <tr><td>语义与会话</td><td>Endem 的一个根与六语义面；Synem 的完整闭包；Dromen 的一次会话契约；Tekmor 的证据评估边界；共有 66 个非规范设计场景，并执行七组各 12 个专题向量、20 个 Dromen 向量与 18 个 Tekmor 向量</td><td>场景和提案向量还不是组件证据；时间、量化、测量、组合、Synem 与 Tekmor 的物理字段及 Dromen 运行 API 仍未冻结</td></tr>
       <tr><td>组合</td><td>SYN-CORE 的完整闭包、精确绑定、权限交集、成员结果与会话激活</td><td>物理格式、大规模性能、受限循环和远程仓库协议</td></tr>
+      <tr><td>运行边界</td><td>DRO-CORE 的精确主体、政策与环境绑定、能力和预算求交、只读失效及销毁</td><td>Praxor、沙箱、能力代理、事件编码、恢复策略和平台隔离证据</td></tr>
       <tr><td>证据</td><td>TEK-CORE 定义有范围记录、外部有效性评估、krin 覆盖度与决定分离</td><td>物理格式、稳定事件编码、跨实现验证、撤销分发和隐私策略语言</td></tr>
       <tr><td>物理格式</td><td>实验性魔数、64 字节前导、48 字节目录、六种记录、受限 CBOR，以及 END-P1 封闭字段 schema</td><td>压缩、摘要、签名、Synem 和稳定 ABI</td></tr>
     </tbody></table></div>

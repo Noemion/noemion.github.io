@@ -45,8 +45,8 @@ def main():
     except (OSError, json.JSONDecodeError) as exc:
         print(f"cannot read Synem vectors: {exc}")
         return 1
-    if document.get("vector_format") != "noemion.synem-vector-v1":
-        errors.append("Synem vectors must use noemion.synem-vector-v1")
+    if document.get("vector_format") != "syn-core.vector.v1":
+        errors.append("Synem vectors must use syn-core.vector.v1")
     if document.get("spec") != {"id": "SYN-CORE", "version": "0.1.0-draft"}:
         errors.append("Synem vectors must pin SYN-CORE 0.1.0-draft")
     if "not a resolver, parser, Praxor, evaluator, runtime, or component implementation" not in document.get("description", ""):

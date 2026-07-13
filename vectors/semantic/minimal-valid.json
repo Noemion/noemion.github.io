@@ -1,5 +1,5 @@
 {
-  "vector_format": "noemion.semantic-vector.v1",
+  "vector_format": "end-core.semantic-vector.v1",
   "id": "SV-VALID-MINIMAL-001",
   "description": "一个根事态、六个语义面和可追溯投影组成的最小可接受语义模型。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},

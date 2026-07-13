@@ -19,7 +19,7 @@ permalink: "/architecture/endem-lifecycle.html"
       <li><code>praxe</code> 说明当前环境已经建立受控会话。</li>
       <li>Tekmor 只说明判断依据可定位，并限定这项依据的适用范围。</li>
     </ul>
-    <p class="callout"><strong>关键边界：</strong>Endem 在 nascent、coherent、attested 三个状态之间演进。apor 是语义面，不是生命周期状态；Dromen 是一次会话的实现态，Tekmor 是有限证据记录。</p>
+    <p class="callout"><strong>关键边界：</strong>Endem 在 nascent、coherent、attested 三个状态之间演进。apor 是语义面，不是生命周期状态；Dromen 是一次 Praxe 会话的密封只读执行契约，Tekmor 是有限证据记录。</p>
   </section>
 
   <section class="content-wide">
@@ -66,13 +66,13 @@ permalink: "/architecture/endem-lifecycle.html"
     <h2>attested → Dromen → Tekmor</h2>
     <ol>
       <li>Praxor 对实际输入字节重新执行所需 <code>elenk</code>，不复用过期结论。</li>
-      <li>Praxor 从对象、当前策略和授权能力建立 Dromen；实时句柄只保留在隔离执行侧。</li>
-      <li>后端读取 Dromen 的受限视图，返回候选或类型化能力请求，不能直接调用外部能力。</li>
+      <li>Praxor 按 <a href="adr-0024-dromen-session-contract.html">ADR-0024</a> 重新验证精确对象，并把政策、环境、能力、预算和证据责任求交后封存 Dromen；实时句柄只保留在独立最小能力域。</li>
+      <li>后端读取 Dromen 的非秘密只读描述，返回候选或类型化能力请求，不能直接取得外部能力。</li>
       <li>Praxor 验证请求、执行或拒绝，再把真实观察、规范化变换与 phain 分开记录为符合 TEK-CORE 抽象边界的 Praxe 证据。</li>
       <li>若 <code>telis</code> 为 <code>mene</code>，Praxor 还必须按 ADR-0016 绑定 fixed 或 elapsed 范围，记录时钟域、覆盖区间、缺口和违约预算。</li>
       <li>求值器按照执行前固定的 <code>krin</code> 比较 <code>skena</code> 与 <code>phain</code>，形成 <code>met / unmet / agno / fault</code> 中的一个满足结果。</li>
       <li>验证者先在精确政策、参考值、环境与截止点下评估 Tekmor 有效性，再相对当前 <code>krin</code> 计算覆盖度；具名权威最后形成 <code>accepted / rejected / deferred</code> 中的一个决定。会话另行记录 <code>completed / failed / interrupted</code>。</li>
-      <li>会话结束后 Dromen 销毁，运行记录只保留允许公开的 Tekmor 和身份链。</li>
+      <li>会话结束、失败、中断或实质漂移后，Dromen 与绑定实时能力都不可再用；允许保留的运行记录只进入有范围的 Tekmor 或会话事件，不能恢复权限。</li>
     </ol>
   </section>
 

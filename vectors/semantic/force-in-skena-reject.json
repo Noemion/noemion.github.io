@@ -1,5 +1,5 @@
 {
-  "vector_format": "noemion.semantic-vector.v1",
+  "vector_format": "end-core.semantic-vector.v1",
   "id": "SV-REJECT-FORCE-001",
   "description": "目标方向写进 skena 会把可能事态与目标力量混在一起。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},

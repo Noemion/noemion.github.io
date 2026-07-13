@@ -7,11 +7,11 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、Synem 组合闭包、Tekmor 证据评估、未来语言基线和组件边界。</p><div class="badges"><span class="badge">ADR-0010—0023</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、Synem 组合闭包、Dromen 会话契约、Tekmor 证据评估、未来语言基线和组件边界。</p><div class="badges"><span class="badge">ADR-0010—0024</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；<a href="adr-0021-synem-closure-and-activation.html">ADR-0021</a>固定 Synem 组合闭包；<a href="adr-0022-tekmor-evidence-and-appraisal.html">ADR-0022</a>固定 Tekmor 证据与评估边界；<a href="adr-0023-endem-content-standard.html">ADR-0023</a>固定 Endem 内容标准、Profile 与容器的分层。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；<a href="adr-0021-synem-closure-and-activation.html">ADR-0021</a>固定 Synem 组合闭包；<a href="adr-0022-tekmor-evidence-and-appraisal.html">ADR-0022</a>固定 Tekmor 证据与评估边界；<a href="adr-0023-endem-content-standard.html">ADR-0023</a>固定 Endem 内容标准分层；<a href="adr-0024-dromen-session-contract.html">ADR-0024</a>固定 Dromen 会话契约。</p>
     <p>ADR-0008 与 ADR-0009 只保存公开迁移历史。更早、无入口且与现行决策源重复的内部 ADR 副本已经删除，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -34,6 +34,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0021-synem-closure-and-activation.html">ADR-0021 Synem 组合闭包与条件激活</a></td><td>Accepted Design</td><td>固定完整传递闭包、精确绑定、有限无环、权限交集、成员结果分离和会话激活四状态；不创建物理格式。</td></tr>
       <tr><td><a href="adr-0022-tekmor-evidence-and-appraisal.html">ADR-0022 Tekmor 证据范围与评估边界</a></td><td>Accepted Design</td><td>固定主体范围、溯源、phain 对齐、证据类别、完整性、有效性、覆盖、决定分离与最小披露；不创建物理格式。</td></tr>
       <tr><td><a href="adr-0023-endem-content-standard.html">ADR-0023 Endem 内容标准分层</a></td><td>Accepted Design</td><td>由 END-CORE 定义通用内容，END-P1 定义当前封闭内容 Profile，END-FMT 定义物理容器；三层分别验证。</td></tr>
+      <tr><td><a href="adr-0024-dromen-session-contract.html">ADR-0024 Dromen 会话契约</a></td><td>Accepted Design</td><td>由 DRO-CORE 固定一次会话的精确主体、政策、环境、能力、预算、观察责任、只读失效与销毁；永远不创建 Dromen 文件。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -45,7 +46,7 @@ permalink: "/architecture/decisions.html"
       <tr><td>形式显示</td><td>semion、skena 与 phain 共享符号和关系位置，不使用自证逻辑形式字段。</td><td>结构编码、Poiet/Theor 差分和 aseme 诊断。</td></tr>
       <tr><td>同一制品状态</td><td>Endem 沿 nascent → coherent → attested 演进，不建立平行对象家族。</td><td>身份、摘要、发布、签名和生命周期。</td></tr>
       <tr><td>组合闭包</td><td>Synem 只在多个 Endem 需要解析关系时出现；权限只能收紧。</td><td>pleko、依赖锁定、冲突和披露。</td></tr>
-      <tr><td>运行非文件视图</td><td>Dromen 只存在于会话内，不携带到磁盘或跨会话。</td><td>Praxor、能力句柄、上下文和隔离。</td></tr>
+      <tr><td>一次运行的只读契约</td><td>Dromen 按 DRO-CORE 只绑定一个 Praxe 会话；实时秘密和句柄外置，实质漂移使旧契约失效，记录不能恢复权限。</td><td>Praxor、最小能力域、预算、观察责任、失效和销毁。</td></tr>
       <tr><td>有限证据主张</td><td>Tekmor 按 TEK-CORE 保存精确主体、范围、溯源、phain、主张和限制；有效性、覆盖度与决定外置。</td><td>来源、绑定、签名、运行、验收、撤销、隐私与审计。</td></tr>
       <tr><td>唯一 CLI</td><td><code>endem</code> 提供 poie/elenk/pleko/tasse/sphra/theor/praxe/peira。</td><td>应用项目、手册、安装包和自动化接口。</td></tr>
       <tr><td>独立与隔离</td><td>theor 不共享生产解析；praxe 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>

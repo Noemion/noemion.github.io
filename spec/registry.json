@@ -43,6 +43,16 @@
       "scope": "Abstract multi-Endem closure, exact binding, authority convergence, member result separation and session activation"
     },
     {
+      "spec_id": "DRO-CORE",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "wire_status": "not-applicable",
+      "path": "spec/dromen-core.md",
+      "scope": "Abstract one-session subject, policy, environment, capability, budget, observation, immutability and disposal contract"
+    },
+    {
       "spec_id": "TEK-CORE",
       "version": "0.1.0-draft",
       "status": "draft",
@@ -83,6 +93,13 @@
       "scope": "Tekmor scope, provenance, observation, classification, integrity, validity, coverage, decision and disclosure threats"
     },
     {
+      "id": "DRO-THREAT",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "path": "spec/dromen-threat-model.md",
+      "scope": "Dromen subject substitution, stale policy, environment drift, capability amplification, secret persistence, budget escape and session resurrection threats"
+    },
+    {
       "id": "END-SCEN",
       "version": "0.1.0-draft",
       "status": "non-normative-design-corpus",
@@ -102,6 +119,13 @@
       "status": "non-normative-design-corpus",
       "path": "spec/tekmor-scenarios.md",
       "scope": "Natural-language design-review scenarios for evidence scope, provenance, appraisal, coverage, decisions and disclosure"
+    },
+    {
+      "id": "DRO-SCEN",
+      "version": "0.1.0-draft",
+      "status": "non-normative-design-corpus",
+      "path": "spec/dromen-scenarios.md",
+      "scope": "Natural-language design-review scenarios for one-session subject, policy, environment, authority, capability, budget, observation and lifecycle boundaries"
     },
     {
       "id": "END-P0",
@@ -133,7 +157,7 @@
     {"term": "Noemion", "kind": "project", "decision_status": "accepted", "definition": "项目、新领域与社区总名"},
     {"term": "Endem", "kind": "artifact", "decision_status": "accepted", "definition": "最小、独立有效且可验证的期望终态单元"},
     {"term": "Synem", "kind": "artifact", "decision_status": "accepted", "definition": "两个或更多 Endem 的已解析组合闭包"},
-    {"term": "Dromen", "kind": "session-state", "decision_status": "accepted", "definition": "一次会话内重新验证后的只读实现状态"},
+    {"term": "Dromen", "kind": "session-contract", "decision_status": "accepted", "definition": "Praxor 为一次 Praxe 会话从精确制品、政策、环境、能力、预算和证据责任建立的密封只读执行契约"},
     {"term": "Tekmor", "kind": "evidence", "decision_status": "accepted", "definition": "绑定主体、范围、方法、环境、结果和限制的证据记录"},
     {"term": "rhem", "kind": "semantic-facet", "decision_status": "accepted", "definition": "来源记号与可重定位范围"},
     {"term": "semion", "kind": "semantic-facet", "decision_status": "accepted", "definition": "已授权的符号、指称、关系和角色投影"},
@@ -173,6 +197,13 @@
     ,{"term": "dependency-relation", "kind": "synem-interface", "decision_status": "accepted", "definition": "Synem 成员之间显式登记的必需或可选依赖关系"}
     ,{"term": "activation-guard", "kind": "synem-interface", "decision_status": "accepted", "definition": "引用精确结果事件、结果域、期望值、截止点与授权策略的会话激活条件"}
     ,{"term": "activation-status", "kind": "result-domain", "decision_status": "accepted", "definition": "active、inactive、unresolved 或 error；只描述固定闭包成员在一次会话中是否生效"}
+    ,{"term": "session-subject", "kind": "dromen-interface", "decision_status": "accepted", "definition": "Dromen 在建立截止点重新验证并绑定的一个精确 attested Endem 或 Synem"}
+    ,{"term": "policy-closure", "kind": "dromen-interface", "decision_status": "accepted", "definition": "一次会话采用的精确政策、权威、consent、截止点、有效期和范围内 apor 处理的封闭集合"}
+    ,{"term": "environment-binding", "kind": "dromen-interface", "decision_status": "accepted", "definition": "把平台、时钟、隔离、适配器、协议和后端声明连接到具名观察的会话绑定"}
+    ,{"term": "capability-envelope", "kind": "dromen-interface", "decision_status": "accepted", "definition": "由制品、政策、操作主体、环境和适配器上限求交得到的非秘密会话能力描述"}
+    ,{"term": "budget-envelope", "kind": "dromen-interface", "decision_status": "accepted", "definition": "按资源类别绑定有限上限、单位、计数权威、重置规则和耗尽动作的会话预算"}
+    ,{"term": "observation-plan", "kind": "dromen-interface", "decision_status": "accepted", "definition": "把每项 krin 责任连接到观察生产者、方法、phain 位置、Tekmor 类别、披露、评估和决定权威的映射"}
+    ,{"term": "material-drift", "kind": "dromen-interface", "decision_status": "accepted", "definition": "主体、政策、权威、必需环境、能力、预算、激活守卫或证据责任发生使原会话契约不再成立的变化"}
     ,{"term": "evidence-subject", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "Tekmor 主张所绑定的精确对象、会话、调用、观察集合或决定事件身份"}
     ,{"term": "evidence-scope", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "限制 Tekmor 主张适用主体、总体、关系、方法、环境、时间和截止点的边界"}
     ,{"term": "provenance-edge", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "连接输入、活动、派生输出与责任主体的有限无环溯源关系"}
@@ -211,9 +242,139 @@
     {"id": "THR-TEK-006", "clauses": ["TEK-VAL-001"], "evidence_status": "partial"},
     {"id": "THR-TEK-007", "clauses": ["TEK-COV-001"], "evidence_status": "partial"},
     {"id": "THR-TEK-008", "clauses": ["TEK-DEC-001"], "evidence_status": "partial"},
-    {"id": "THR-TEK-009", "clauses": ["TEK-PRI-001"], "evidence_status": "partial"}
+    {"id": "THR-TEK-009", "clauses": ["TEK-PRI-001"], "evidence_status": "partial"},
+    {"id": "THR-DRO-001", "clauses": ["DRO-SUB-001"], "evidence_status": "partial"},
+    {"id": "THR-DRO-002", "clauses": ["DRO-SUB-001", "DRO-POL-001"], "evidence_status": "partial"},
+    {"id": "THR-DRO-003", "clauses": ["DRO-ENV-001", "DRO-IMM-001"], "evidence_status": "partial"},
+    {"id": "THR-DRO-004", "clauses": ["DRO-CAP-001", "DRO-SEC-001"], "evidence_status": "partial"},
+    {"id": "THR-DRO-005", "clauses": ["DRO-SEC-001", "DRO-LIF-001"], "evidence_status": "partial"},
+    {"id": "THR-DRO-006", "clauses": ["DRO-BUD-001"], "evidence_status": "partial"},
+    {"id": "THR-DRO-007", "clauses": ["DRO-ACT-001"], "evidence_status": "partial"},
+    {"id": "THR-DRO-008", "clauses": ["DRO-OBS-001"], "evidence_status": "partial"},
+    {"id": "THR-DRO-009", "clauses": ["DRO-IMM-001"], "evidence_status": "partial"},
+    {"id": "THR-DRO-010", "clauses": ["DRO-LIF-001"], "evidence_status": "partial"}
   ],
   "clauses": [
+    {
+      "id": "DRO-SUB-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor loader and every session establishment path",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
+        {"status": "planned", "ref": "peira:dromen-subject-revalidation"}
+      ]
+    },
+    {
+      "id": "DRO-POL-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor policy resolver and named session authority",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
+        {"status": "planned", "ref": "peira:dromen-policy-closure"}
+      ]
+    },
+    {
+      "id": "DRO-ENV-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor environment verifier and every adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
+        {"status": "planned", "ref": "peira:dromen-environment-binding"}
+      ]
+    },
+    {
+      "id": "DRO-CAP-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor capability resolver and minimal capability domain",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
+        {"status": "planned", "ref": "peira:dromen-capability-intersection"}
+      ]
+    },
+    {
+      "id": "DRO-SEC-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "future minimal capability domain, Praxor and every log or evidence producer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
+        {"status": "planned", "ref": "peira:dromen-secret-separation"}
+      ]
+    },
+    {
+      "id": "DRO-BUD-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor scheduler, adapters and delegated task controller",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
+        {"status": "planned", "ref": "peira:dromen-budget-envelope"}
+      ]
+    },
+    {
+      "id": "DRO-ACT-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor activation evaluator and every Synem session consumer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
+        {"status": "planned", "ref": "peira:dromen-activation-boundary"}
+      ]
+    },
+    {
+      "id": "DRO-OBS-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor, observation adapters, Tekmor producers and decision authorities",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
+        {"status": "planned", "ref": "peira:dromen-observation-plan"}
+      ]
+    },
+    {
+      "id": "DRO-IMM-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor session controller and every mutable environment adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
+        {"status": "planned", "ref": "peira:dromen-drift-invalidation"}
+      ]
+    },
+    {
+      "id": "DRO-LIF-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor session controller, capability domain and evidence/log producers",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
+        {"status": "planned", "ref": "peira:dromen-session-disposal"}
+      ]
+    },
     {
       "id": "TEK-SCP-001",
       "decision_status": "accepted",

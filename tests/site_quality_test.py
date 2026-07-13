@@ -73,6 +73,7 @@ REQUIRED_CORE_ROUTES = {
     *MANUAL_ROUTE_ORDERS["endem"],
     "specifications/endem.html",
     "specifications/synem.html",
+    "specifications/dromen.html",
     "specifications/tekmor.html",
     "architecture/endem-lifecycle.html",
     "architecture/adr-0010-native-lexicon.html",
@@ -89,6 +90,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0021-synem-closure-and-activation.html",
     "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
     "architecture/adr-0023-endem-content-standard.html",
+    "architecture/adr-0024-dromen-session-contract.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -218,6 +220,7 @@ LEGACY_PUBLIC_TERMS = re.compile(
 NORMATIVE_ROUTES = (
     "specifications/endem.html",
     "specifications/synem.html",
+    "specifications/dromen.html",
     "specifications/tekmor.html",
 )
 CONTENT_LAYOUT_ROUTES = (
@@ -241,6 +244,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0021-synem-closure-and-activation.html",
     "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
     "architecture/adr-0023-endem-content-standard.html",
+    "architecture/adr-0024-dromen-session-contract.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -249,6 +253,7 @@ CONTENT_LAYOUT_ROUTES = (
     "development/testing.html",
     "specifications/endem.html",
     "specifications/synem.html",
+    "specifications/dromen.html",
     "specifications/tekmor.html",
 )
 CONTENT_LAYOUT_CLASSES = {
@@ -411,6 +416,19 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "完整性",
             "sufficient / insufficient",
             "最终决定",
+        ),
+    },
+    "specifications/dromen.html": {
+        "required": (
+            "Dromen",
+            "只读执行契约",
+            "DRO-CORE 0.1.0-draft",
+            "精确制品",
+            "能力只能",
+            "有限且带单位的预算",
+            "不保存令牌",
+            "实质漂移",
+            "不能序列化",
         ),
     },
     "endem/docs/safety.html": {
@@ -1675,7 +1693,7 @@ def validate_jekyll_sources():
 
         expected_nav_covers = {
             "background", "architecture", "foundations", "faq",
-            "endem-spec", "synem", "tekmor", "components",
+            "endem-spec", "synem", "dromen", "tekmor",
             "endem", "theor", "format", "praxe",
             "getting-started", "architecture-guide", "application-reference",
             "spec-reference", "endem-manual", "current-stage", "roadmap", "testing",

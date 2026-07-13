@@ -37,7 +37,7 @@ Noemion 为自然语言目标建立持久、可组合、可独立检查的工程
 
 - **[Endem](../specifications/endem.html)：**最小目标制品。
 - **[Synem](../specifications/synem.html)：**两个或更多 Endem、固定依赖和发布范围形成的已解析闭包；单个自包含 Endem 不需要 Synem。
-- **Dromen：**Praxor 重新验证 attested Endem 或 Synem 后，为一次受控实现建立的会话状态；不是文件格式。
+- **[Dromen](../specifications/dromen.html)：**Praxor 为一次 Praxe 会话从精确制品、政策、环境、能力、预算和证据责任封存的只读执行契约；不是文件格式或可恢复权限。
 - **[Tekmor](../specifications/tekmor.html)：**绑定目标、环境、方法和声明范围的证据记录；它不是数学证明，也不自动形成最终验收决定。
 
 ## 一个应用

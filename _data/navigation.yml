@@ -13,12 +13,12 @@ global:
     href: /specifications/index.html
     label: 规范
     kicker: 定义权威边界
-    description: 查看 Endem、组合闭包、范围证据和组件契约。
+    description: 查看 Endem、组合闭包、会话契约和范围证据。
     items:
       - { href: /specifications/endem.html, label: Endem, description: 最小自然语言目标制品与六个语义面, cover: endem-spec, cover_label: "SIGN → SITUATION" }
       - { href: /specifications/synem.html, label: Synem, description: 已解析、可封装的组合闭包, cover: synem, cover_label: "RESOLVED CLOSURE" }
+      - { href: /specifications/dromen.html, label: Dromen, description: 一次运行的密封只读会话契约, cover: dromen, cover_label: "SESSION CONTRACT" }
       - { href: /specifications/tekmor.html, label: Tekmor, description: 含 phain 的有范围证据, cover: tekmor, cover_label: "SCOPED EVIDENCE" }
-      - { href: /components/index.html, label: 系统组件, description: Poiet、Theor 与 Praxor 的权限和失败边界, cover: components, cover_label: "SYSTEM BOUNDARIES" }
   - key: endem
     href: /endem/index.html
     label: 应用
@@ -106,12 +106,14 @@ modules:
           - { href: /architecture/adr-0021-synem-closure-and-activation.html, label: "ADR-0021 · Synem 闭包与激活" }
           - { href: /architecture/adr-0022-tekmor-evidence-and-appraisal.html, label: "ADR-0022 · Tekmor 证据与评估" }
           - { href: /architecture/adr-0023-endem-content-standard.html, label: "ADR-0023 · Endem 内容标准" }
+          - { href: /architecture/adr-0024-dromen-session-contract.html, label: "ADR-0024 · Dromen 会话契约" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:
           - { href: /specifications/index.html, label: 规范与成熟度 }
           - { href: /specifications/endem.html, label: Endem }
           - { href: /specifications/synem.html, label: Synem }
+          - { href: /specifications/dromen.html, label: Dromen }
           - { href: /specifications/tekmor.html, label: Tekmor }
       - label: 系统组件
         items:

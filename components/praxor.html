@@ -21,7 +21,7 @@ permalink: "/components/praxor.html"
       <tr><td>输入</td><td>attested Endem 字节与 Synem 精确成员闭包</td><td>重新验证签名、状态、绑定和实际摘要，不复用过期结论；Synem 物理格式尚未定义。</td></tr>
       <tr><td>输入</td><td>运行策略与 <code>krin</code></td><td>固定能力上限、预算、停止、观察、证据、人工升级和决定权威；只能收紧制品要求。</td></tr>
       <tr><td>输入</td><td>后端绑定与能力目录</td><td>模型或求解器与可用能力的身份、版本和参数结构；描述仍是不可信声明。</td></tr>
-      <tr><td>会话状态</td><td>Dromen</td><td>只读、一次性、不可序列化；不保存跨会话能力句柄。</td></tr>
+      <tr><td>会话契约</td><td>Dromen</td><td>按 DRO-CORE 只读、一次性、不可序列化；不保存跨会话能力句柄。</td></tr>
       <tr><td>输出</td><td>运行记录</td><td>符合 TEK-CORE 抽象边界的候选、能力请求、观察、预算、错误、运行与决定记录，以及彼此分离的满足、决定和会话结果；物理 Tekmor 格式尚未定义。</td></tr>
       <tr><td>消费者</td><td>用户、CI、审计和指定外部权威</td><td>模型或 Praxor 自述不能成为唯一决定依据。</td></tr>
     </tbody></table></div>
@@ -40,14 +40,14 @@ permalink: "/components/praxor.html"
   </section>
 
   <section class="content-wide">
-    <h2>Dromen 不是文件</h2>
-    <p>Dromen 是 Praxor 从当前 attested 制品、策略、环境与授权能力计算出的会话视图。它只披露当前根 skena 所需的 semion 关系、skena 子图、telis、krin、apor、Synem 成员和能力参数结构。</p>
+    <h2>Dromen 是一次会话的只读契约</h2>
+    <p>Dromen 是 Praxor 按 <a href="../architecture/adr-0024-dromen-session-contract.html">ADR-0024</a> 从精确 attested 制品、政策、环境、能力、预算和证据责任求交后封存的会话契约。它只披露本次实现需要的非秘密语义与能力描述，不保存运行观察和最终结果。</p>
     <ul>
       <li>Dromen 不进入 tasse、sphra、对象仓库或模型缓存。</li>
       <li>Dromen 不包含凭据、Bearer token、文件描述符、网络连接或其他实时句柄。</li>
-      <li>后端只能读取 Dromen 提供的只读值并返回类型化请求。</li>
-      <li>环境、策略、对象或能力身份变化时，旧 Dromen 立即失效。</li>
-      <li>会话结束后 Dromen 销毁；允许保留的信息进入有脱敏规则的 Tekmor。</li>
+      <li>后端只能读取 Dromen 提供的只读值并返回类型化请求；step-up 授权必须建立新会话。</li>
+      <li>环境、政策、对象、权威、能力、预算或证据责任发生实质变化时，旧 Dromen 失效而不是原地更新。</li>
+      <li>会话结束后 Dromen 与绑定实时能力都不可再用；允许保留的信息进入有范围和脱敏规则的 Tekmor 或会话事件，但不能恢复旧权限。</li>
     </ul>
   </section>
 
@@ -151,7 +151,7 @@ permalink: "/components/praxor.html"
 
   <section class="content-band">
     <h2>当前成熟度与未冻结接口</h2>
-    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、TEK-CORE 抽象边界、结果域分离、mene 时钟、否定观察、量化聚合、测量判断以及复合判断责任已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、时间、封闭、测量与组合声明字段、预算单位、事件编码和 Tekmor 物理格式尚未冻结。</p>
+    <p>隔离权限域、DRO-CORE 会话契约、后端不可信、能力句柄隔离、TEK-CORE 抽象边界、结果域分离、mene 时钟、否定观察、量化聚合、测量判断以及复合判断责任已经采用。Praxor API、能力请求与观察事件、运行记录、沙箱、时间与预算计数器、封闭、测量与组合声明字段、事件编码和 Tekmor 物理格式尚未冻结。</p>
   </section>
   <div class="next-prev"><a href="theor.html">← Theor</a><a href="../architecture/endem-lifecycle.html">Endem 生命周期 →</a></div>
 </main>

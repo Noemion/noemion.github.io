@@ -22,7 +22,7 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>代码阶段之前与未来第一条路径</h2>
     <p class="callout"><strong>直接结论：</strong>当前只完成第 0 阶段的规范与验证方案，不创建实现工作区。未来若用户明确开启代码阶段，第一实现才考虑 <code>poie</code>、<code>elenk</code>、<code>theor</code> 与 <code>peira</code>；不同时创建工具家族，不接模型，不做通用二进制抽象层。</p>
-    <p>第 0 阶段已经产生作为内容标准的 END-CORE、实验性容器 END-FMT、END-P1 内容 Profile、SYN-CORE、TEK-CORE、威胁模型和规范向量。ADR-0012 把 Rust 记为未来首版候选语言，ADR-0021 与 ADR-0022 分别关闭 Synem 抽象闭包和 Tekmor 抽象证据边界，ADR-0023 固定内容标准分层。这些资料只用于评审设计和形成未来验收条件，不表示 Poiet、Theor、Praxor、CLI 或安全核心已经开始开发。</p>
+    <p>第 0 阶段已经产生作为内容标准的 END-CORE、实验性容器 END-FMT、END-P1 内容 Profile、SYN-CORE、DRO-CORE、TEK-CORE、威胁模型和规范向量。ADR-0012 把 Rust 记为未来首版候选语言；ADR-0021 至 ADR-0024 分别固定 Synem 闭包、Tekmor 证据、Endem 内容分层与 Dromen 会话契约。这些资料只用于评审设计和形成未来验收条件，不表示 Poiet、Theor、Praxor、CLI 或安全核心已经开始开发。</p>
     <div class="flow"><div class="step">受控来源表达</div><div class="step">投影规则 / 具名决定</div><div class="step">endem poie</div><div class="step">.endem</div><div class="step">endem elenk</div><div class="step">endem theor</div><div class="step">endem peira</div></div>
     <div class="table-wrap"><table><thead><tr><th>职责</th><th>正式输入与输出</th><th>完成标准</th></tr></thead><tbody>
       <tr><td><code>poie</code></td><td>受控来源 + 投影决定 → 六个语义面 → Endem</td><td>相同规范化输入与配置产生相同字节；失败不留下部分制品。</td></tr>
@@ -47,9 +47,9 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>第 0 阶段当前产物</h2>
     <div class="table-wrap"><table><thead><tr><th>工作包</th><th>已经形成</th><th>仍需完成</th></tr></thead><tbody>
-      <tr><td>P0-W1 条款源</td><td>END-CORE、END-FMT、END-SRCM、SYN-CORE、TEK-CORE、81 个唯一条款 ID、END-P0/END-P1 与成熟度登记。</td><td>代码阶段前继续用真实自然语言案例和反例修订；独立实现验证必须等待用户开启代码阶段。</td></tr>
-      <tr><td>P0-W2 威胁与限制</td><td>15 项 Endem、6 项 Synem 与 9 项 Tekmor 威胁，END-P0 的 8 项有限上限和结构错误目录。</td><td>当前补齐边界语料与最坏复杂度分析；目标平台实验必须等待代码阶段。</td></tr>
-      <tr><td>P0-W3 规范向量</td><td>7 个已执行语义向量；END-P0 含 1 个结构接受与 5 个拒绝；END-P1 含 3 个语义接受与 11 个拒绝；七组专题各有 12 个提案向量，Tekmor 另有 18 个证据与评估向量。</td><td>继续增加累计分配、偏移算术和组合引用字节边界向量。</td></tr>
+      <tr><td>P0-W1 条款源</td><td>END-CORE、END-FMT、END-SRCM、SYN-CORE、DRO-CORE、TEK-CORE、91 个唯一条款 ID、END-P0/END-P1 与成熟度登记。</td><td>代码阶段前继续用真实自然语言案例和反例修订；独立实现验证必须等待用户开启代码阶段。</td></tr>
+      <tr><td>P0-W2 威胁与限制</td><td>15 项 Endem、6 项 Synem、10 项 Dromen 与 9 项 Tekmor 威胁，END-P0 的 8 项有限上限和结构错误目录。</td><td>当前补齐边界语料与最坏复杂度分析；目标平台实验必须等待代码阶段。</td></tr>
+      <tr><td>P0-W3 规范向量</td><td>7 个已执行语义向量；END-P0 含 1 个结构接受与 5 个拒绝；END-P1 含 3 个语义接受与 11 个拒绝；七组专题各有 12 个提案向量，Dromen 有 20 个会话契约向量，Tekmor 有 18 个证据与评估向量。</td><td>继续增加累计分配、偏移算术和组合引用字节边界向量。</td></tr>
       <tr><td>P0-W4 历史语言研究</td><td>C/Rust 双原型、6 个规范向量、144 个差分变异、C Sanitizer、10,000 次 libFuzzer 和两次重复构建的历史记录；ADR-0012 据此记录 Rust 1.97.0 基线。</td><td>冻结为历史研究资料，不自动运行、不继续扩展，也不视为组件证据。</td></tr>
       <tr><td>P1-W1 安全核心</td><td>尚未开始；当前只有职责分离、候选语言、END-P1 规范向量和未来验证条件。</td><td>等待用户明确开启代码开发阶段；届时重新确认仓库、范围、依赖、CI 与停止条件。</td></tr>
     </tbody></table></div>

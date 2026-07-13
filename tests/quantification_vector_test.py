@@ -155,8 +155,8 @@ def main():
         print(f"cannot read quantification vectors: {exc}")
         return 1
 
-    if document.get("vector_format") != "noemion.quantification-vector-v1":
-        errors.append("quantification vectors must use noemion.quantification-vector-v1")
+    if document.get("vector_format") != "end-core.quantification-vector.v1":
+        errors.append("quantification vectors must use end-core.quantification-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("quantification vectors must pin END-CORE 0.1.0-draft")
     if "not a collection resolver, Praxor, evaluator, or component implementation" not in document.get("description", ""):

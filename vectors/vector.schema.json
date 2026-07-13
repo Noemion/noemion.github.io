@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "required": ["vector_format", "id", "description", "spec", "expect", "input"],
   "properties": {
-    "vector_format": {"const": "noemion.semantic-vector.v1"},
+    "vector_format": {"const": "end-core.semantic-vector.v1"},
     "id": {"type": "string", "pattern": "^SV-(VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$"},
     "description": {"type": "string", "minLength": 1},
     "spec": {

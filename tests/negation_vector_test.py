@@ -116,8 +116,8 @@ def main():
         print(f"cannot read negation vectors: {exc}")
         return 1
 
-    if document.get("vector_format") != "noemion.negation-vector-v1":
-        errors.append("negation vectors must use noemion.negation-vector-v1")
+    if document.get("vector_format") != "end-core.negation-vector.v1":
+        errors.append("negation vectors must use end-core.negation-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("negation vectors must pin END-CORE 0.1.0-draft")
     if "not a policy engine, log collector, Praxor, or evaluator implementation" not in document.get("description", ""):

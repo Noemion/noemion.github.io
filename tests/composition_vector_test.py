@@ -134,8 +134,8 @@ def main():
     except (OSError, json.JSONDecodeError) as exc:
         print(f"cannot read composition vectors: {exc}")
         return 1
-    if document.get("vector_format") != "noemion.composition-vector-v1":
-        errors.append("composition vectors must use noemion.composition-vector-v1")
+    if document.get("vector_format") != "end-core.composition-vector.v1":
+        errors.append("composition vectors must use end-core.composition-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("composition vectors must pin END-CORE 0.1.0-draft")
     if "not a parser, Praxor, evaluator, runtime, or component implementation" not in document.get("description", ""):

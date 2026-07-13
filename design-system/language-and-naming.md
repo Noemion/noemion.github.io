@@ -40,7 +40,7 @@ https://www.etymonline.com/word/-eme
 | Noemion | 项目、新领域与社区品牌 | 格式前缀、组件层或 CLI 前缀 |
 | Endem | 最小、独立有效且可验证的期望终态单元 | Prompt、任务消息、执行脚本或二进制化文本 |
 | Synem | 多个 Endem 经符号、依赖、约束和内容身份解析后形成、可以确定性封装的组合闭包 | 文件列表、搜索路径结果、归档目录或运行时临时依赖 |
-| Dromen | attested Endem 或 Synem 通过重新验证、策略检查和最小能力授予后形成的一次会话实现态 | 持久格式、签名制品、全局会话或永久权限 |
+| Dromen | Praxor 为一次 Praxe 会话从精确 attested Endem 或 Synem、政策、环境、能力、预算和证据责任封存的只读执行契约 | 持久格式、签名制品、进程映像、凭据包、可恢复会话或永久权限 |
 | Tekmor | 绑定明确主体和声明范围，并封装结构化观察 `phain`、方法、环境、结果与限制的证据 | 无范围的“通过”徽标、最终验收决定或模型自评 |
 | Poiet | 决定规范语义、排序、布局与确定性字节的可信核心 | 模型推理服务、Theor 或 Praxor |
 | Theor | `theor` 背后的独立只读实现，直接读取不可信字节并形成检查视图 | Poiet 解析器的包装、编辑器或生产写入路径 |
@@ -160,6 +160,7 @@ endem praxe search.endem
 | --- | --- |
 | Endem 规范 | `/specifications/endem.html` |
 | Synem 规范 | `/specifications/synem.html` |
+| Dromen 会话契约 | `/specifications/dromen.html` |
 | Tekmor 规范 | `/specifications/tekmor.html` |
 | Endem 生命周期 | `/architecture/endem-lifecycle.html` |
 | Poiet 组件 | `/components/poiet.html` |

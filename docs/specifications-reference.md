@@ -9,8 +9,8 @@ manual_group: "reference"
 manual_order: 6
 nav_title: "规范参考指南"
 page_heading: "Noemion 规范参考指南"
-page_lead: "理解 Endem、Synem、Tekmor、成熟度标记与 ADR 的权威顺序。"
-summary: "理解 Endem、Synem、Tekmor、成熟度标记与 ADR 的权威顺序。"
+page_lead: "理解 Endem、Synem、Dromen、Tekmor、成熟度标记与 ADR 的权威顺序。"
+summary: "理解 Endem、Synem、Dromen、Tekmor、成熟度标记与 ADR 的权威顺序。"
 badges: ["Authority", "Maturity", "ADR"]
 ---
 
@@ -25,11 +25,11 @@ badges: ["Authority", "Maturity", "ADR"]
 
 每个规范“必须/不得/只有”都应关联机器测试或具名人工权威。实现、论文、专利、演示和模型输出不能反向替代规范。
 
-当前权威源包括作为通用内容标准的 [END-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md)、作为当前封闭内容 Profile 的 [END-P1](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json)、作为实验性容器的 [END-FMT 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)、[SYN-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md)、[TEK-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-core.md)与[机器可读登记](https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json)。Endem、Synem 和 Tekmor 的不可信输入与失败责任分别见[Endem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md)、[Synem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-threat-model.md)与[Tekmor 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-threat-model.md)。公开 HTML 只负责直白解释，不复制第二套条款。
+当前权威源包括作为通用内容标准的 [END-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md)、作为当前封闭内容 Profile 的 [END-P1](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json)、作为实验性容器的 [END-FMT 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)、[SYN-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md)、[DRO-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md)、[TEK-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-core.md)与[机器可读登记](https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json)。四类对象的不可信输入与失败责任分别见[Endem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md)、[Synem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-threat-model.md)、[Dromen 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-threat-model.md)与[Tekmor 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-threat-model.md)。公开 HTML 只负责直白解释，不复制第二套条款。
 
 [END-SCEN 自然语言场景语料](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md)用二十七个案例寻找规范缺口，但不属于上述规范义务。只有案例转化为唯一条款、登记验证方式并形成正反向量后，对应判断才可能进入符合性要求。
 
-[SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)与[TEK-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-scenarios.md)分别用十个和十四个场景检查组合闭包及证据边界，同样不属于上述规范义务。
+[SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)、[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)与[TEK-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-scenarios.md)分别用十个、十五个和十四个场景检查组合闭包、会话契约及证据边界，同样不属于上述规范义务。
 
 ## Endem
 
@@ -43,12 +43,14 @@ badges: ["Authority", "Maturity", "ADR"]
 
 ## Dromen 与 Tekmor
 
+[Dromen 会话契约](../specifications/dromen.html)解释精确会话主体、政策封闭、环境绑定、能力与预算上限、观察责任、只读失效和销毁。规范源是 [DRO-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md)；[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)不属于上述规范义务。Dromen 永远不是磁盘格式、凭据包或可恢复会话，当前也没有 Praxor 或运行时实现。
+
 [Tekmor 规范](../specifications/tekmor.html)解释主体范围、有限无环溯源、结构化观察、证据类别、完整性、外部有效性评估、相对 `krin` 的覆盖度、决定分离与最小披露。规范源是 [TEK-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-core.md)；模型评价只能保持 `model-candidate`。当前没有物理 Tekmor 格式或组件实现。
 
-Dromen 是 Praxor 为一次受控实现建立的会话状态，不是磁盘格式。会话结束后销毁，允许保留的观察和决定关系才进入 Tekmor。
+允许保留的运行观察、失效原因和决定关系进入 Tekmor 或带范围的会话事件。它们不能重新创建 Dromen 或恢复旧权限。
 
 ## ADR 与开放问题
 
-[ADR-0010](../architecture/adr-0010-native-lexicon.html)至 [ADR-0014](../architecture/adr-0014-source-manifest.html)固定现行词汇、Endem 格式、Profile 与来源清单；[ADR-0015](../architecture/adr-0015-result-domains.html)至 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)固定判断、时间、否定、量化、测量与复合边界；[ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html)固定 Synem 组合闭包与条件激活；[ADR-0022](../architecture/adr-0022-tekmor-evidence-and-appraisal.html)固定 Tekmor 证据与评估边界；[ADR-0023](../architecture/adr-0023-endem-content-standard.html)固定内容标准、Profile 与容器的分层。ADR-0008 和 ADR-0009 只保存被取代的公开设计历史。其余扩展、远端协议适配和发行治理集中在[开放问题](../architecture/open-questions.html)。
+[ADR-0010](../architecture/adr-0010-native-lexicon.html)至 [ADR-0014](../architecture/adr-0014-source-manifest.html)固定现行词汇、Endem 格式、Profile 与来源清单；[ADR-0015](../architecture/adr-0015-result-domains.html)至 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)固定判断、时间、否定、量化、测量与复合边界；[ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html)固定 Synem 组合闭包与条件激活；[ADR-0022](../architecture/adr-0022-tekmor-evidence-and-appraisal.html)固定 Tekmor 证据与评估边界；[ADR-0023](../architecture/adr-0023-endem-content-standard.html)固定内容标准、Profile 与容器的分层；[ADR-0024](../architecture/adr-0024-dromen-session-contract.html)固定 Dromen 会话契约。ADR-0008 和 ADR-0009 只保存被取代的公开设计历史。其余扩展、远端协议适配和发行治理集中在[开放问题](../architecture/open-questions.html)。
 
 面向标准化时，规范还需关联互操作配置、正反向量、一致性测试、安全分析和版本演进。面向研究与知识产权时，还应关联假设、现有技术、实验、贡献与公开披露记录。

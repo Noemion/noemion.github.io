@@ -109,8 +109,8 @@ def main():
     except (OSError, json.JSONDecodeError) as exc:
         print(f"cannot read Tekmor vectors: {exc}")
         return 1
-    if document.get("vector_format") != "noemion.tekmor-vector-v1":
-        errors.append("Tekmor vectors must use noemion.tekmor-vector-v1")
+    if document.get("vector_format") != "tek-core.vector.v1":
+        errors.append("Tekmor vectors must use tek-core.vector.v1")
     if document.get("spec") != {"id": "TEK-CORE", "version": "0.1.0-draft"}:
         errors.append("Tekmor vectors must pin TEK-CORE 0.1.0-draft")
     if "not a collector, verifier, merger, revocation service, decision engine, runtime, or component implementation" not in document.get("description", ""):

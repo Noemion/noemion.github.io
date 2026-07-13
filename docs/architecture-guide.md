@@ -26,7 +26,7 @@ badges: ["Architecture", "Endem", "Trust Boundaries"]
                                            Tekmor
 ```
 
-这四个名词有不同生命周期。Endem 是最小目标制品；Synem 是解析后的组合闭包；Dromen 是一次会话的实现态；Tekmor 是有范围的证据记录。中间报告只有在权威、权限、保密或生命周期确实不同时，才成为独立伴随记录。
+这四个名词有不同生命周期。Endem 是最小目标制品；Synem 是解析后的组合闭包；Dromen 是一次 Praxe 会话的只读执行契约；Tekmor 是有范围的证据记录。中间报告只有在权威、权限、保密或生命周期确实不同时，才成为独立伴随记录。
 
 ## 三个实现域
 
@@ -52,7 +52,7 @@ badges: ["Architecture", "Endem", "Trust Boundaries"]
 
 ## 装载与运行
 
-Praxor 不信任路径名、缓存结论或 `theor` 输出，而是重新读取实际 Endem 字节并核对 Synem 的精确成员闭包。全部结构、绑定、摘要、签名、策略与能力上限通过后才建立 Dromen；Synem 物理格式尚未定义。
+Praxor 不信任路径名、缓存结论或 `theor` 输出，而是重新读取实际 Endem 字节并核对 Synem 的精确成员闭包。全部结构、绑定、摘要、签名、政策、环境、能力、预算和证据责任通过后，才按 [DRO-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md)封存 Dromen；Synem 物理格式尚未定义。
 
 Praxor 外侧的控制平面持有实时能力句柄。模型提出类型化能力请求，确定性策略决定执行或拒绝。真实界面、日志、测试和工具返回形成环境观察；模型只能给出候选和建议性评价。
 

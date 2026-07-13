@@ -1,5 +1,5 @@
 {
-  "vector_format": "noemion.synem-vector-v1",
+  "vector_format": "syn-core.vector.v1",
   "spec": {"id": "SYN-CORE", "version": "0.1.0-draft"},
   "description": "Synem closure and activation proposal matrix; a specification consistency matrix, not a resolver, parser, Praxor, evaluator, runtime, or component implementation",
   "cases": [

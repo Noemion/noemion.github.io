@@ -2,11 +2,11 @@
 
 本目录保存可由 Poiet、生产读取器、独立 Theor 和 `peira` 共同消费的规范向量。
 
-`semantic/` 验证 Endem 语义结构、授权边界和失败定位。每个 JSON 文件都是 `noemion.semantic-vector.v1` 测试外壳，不是 `.endem`，也不能改名后交给运行时。
+`semantic/` 验证 Endem 语义结构、授权边界和失败定位。每个 JSON 文件都是 `end-core.semantic-vector.v1` 测试外壳，不是 `.endem`，也不能改名后交给运行时。向量外壳使用规范 ID，不使用 Noemion 品牌前缀。
 
 `wire/` 保存 END-FMT 0.1.0-draft 的规范十六进制字节。顶层清单属于 END-P0，只证明结构合法；`wire/p1/` 属于 END-P1，使用完整六记录载荷并实际运行字段、排序、引用和来源范围判断。两组都不是稳定 ABI。
 
-`result-domains/`、`mene/`、`negation/`、`quantification/`、`measurement/`、`composition/`、`synem/` 与 `tekmor/` 分别保存判断结果、时间连续性、否定缺席、量化成员资格、测量阈值、复合判据、Synem 闭包激活和 Tekmor 证据评估的提案矩阵。它们用于检查设计规则之间是否一致，不是 `.endem`、Synem 或 Tekmor 物理字节，也不证明运行组件存在。
+`result-domains/`、`mene/`、`negation/`、`quantification/`、`measurement/`、`composition/`、`synem/`、`dromen/` 与 `tekmor/` 分别保存判断结果、时间连续性、否定缺席、量化成员资格、测量阈值、复合判据、Synem 闭包激活、Dromen 会话契约和 Tekmor 证据评估的提案矩阵。它们用于检查设计规则之间是否一致，不是 `.endem`、Synem、Dromen 或 Tekmor 物理字节，也不证明运行组件存在。
 
 向量外壳由 [`vector.schema.json`](vector.schema.json) 约束。该 Schema 使用 JSON Schema 2020-12，只验证测试资料的结构；它不验证 Endem 语义，也不成为 Endem ABI。
 

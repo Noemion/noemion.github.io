@@ -12,7 +12,7 @@ permalink: "/architecture/open-questions.html"
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
     <p class="lead">ADR-0010 已经采用现行制品、组件、六个语义面、三个制品状态和八个动作。这些名称与职责不再作为开放问题反复讨论。</p>
-    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 与 SYN-CORE 固定 Synem 抽象闭包；ADR-0022 与 TEK-CORE 固定 Tekmor 证据与评估边界；ADR-0023 固定 END-CORE 内容标准、END-P* 内容 Profile 与 END-FMT 容器的分层。</p>
+    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 与 SYN-CORE 固定 Synem 抽象闭包；ADR-0022 与 TEK-CORE 固定 Tekmor 证据与评估边界；ADR-0023 固定 END-CORE 内容标准分层；ADR-0024 与 DRO-CORE 固定 Dromen 一次会话契约。</p>
     <p>当前没有 Theor 或其他组件实现。稳定 ABI、时间与组合物理字段、嵌套或多变量量化、Synem 与 Tekmor 物理容器、正式来源语言和结果事件编码仍未冻结。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
@@ -38,7 +38,7 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-grid">
     <h2>Dromen、Praxor 与 Tekmor</h2>
-    <details open><summary>Dromen 的最小只读接口是什么？</summary><p>需要定义 semion 关系、skena 子图、telis、krin、apor、成员披露、预算和能力需求怎样进入一次运行，同时确保 Dromen 不含实时句柄、凭据或可跨会话权限。</p></details>
+    <details open><summary>Dromen 的运行 API 和平台隔离怎样实现？</summary><p>DRO-CORE 已固定主体、政策、环境、能力、秘密、预算、激活、观察、只读与销毁边界。未来仍需在代码阶段选择进程模型、沙箱组合、凭据代理、事件编码、预算计数器与销毁机制，并用平台级对抗证据证明，而不是把 Linux、容器或模型 SDK 名称当作隔离结论。</p></details>
     <details><summary>Praxor 怎样隔离模型和能力适配器？</summary><p>需确定进程、沙箱、取消、超时、幂等、网络、文件、凭据和资源限额。后端失败不能让 Praxor 静默扩大权限或修改 attested 制品。</p></details>
     <details><summary>Tekmor 怎样获得物理编码？</summary><p>TEK-CORE 已固定 phain 对齐、有限无环溯源、证据类别、有效性、覆盖、决定分离和最小披露。字段编号、容器、摘要与签名算法、透明日志、撤销分发、跨生产者时钟归并、隐私策略和规范字节仍需真实消费者与新 Profile。</p></details>
     <details><summary>mene 时间怎样进入未来 Profile？</summary><p>ADR-0016 已决定 fixed/elapsed、strict/budgeted 与覆盖结果；字段编号、数值宽度、亚秒精度、闰秒、循环日历、时区数据库封装、跨重启关联和多生产者归并仍保持开放。</p></details>

@@ -1,5 +1,5 @@
 {
-  "vector_format": "noemion.mene-vector-v1",
+  "vector_format": "end-core.mene-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
   "description": "Normative mene proposal vectors for ADR-0016; not a clock, monitor, Praxor, or evaluator implementation",
   "cases": [

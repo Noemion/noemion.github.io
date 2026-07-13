@@ -65,8 +65,8 @@ def main():
         print(f"cannot read result-domain vectors: {exc}")
         return 1
 
-    if document.get("vector_format") != "noemion.result-domain-v1":
-        errors.append("result-domain vectors must use noemion.result-domain-v1")
+    if document.get("vector_format") != "end-core.result-domain-vector.v1":
+        errors.append("result-domain vectors must use end-core.result-domain-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("result-domain vectors must pin END-CORE 0.1.0-draft")
     if "not Praxor or decision-engine implementation data" not in document.get("description", ""):

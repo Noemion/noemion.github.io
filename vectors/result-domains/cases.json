@@ -1,5 +1,5 @@
 {
-  "vector_format": "noemion.result-domain-v1",
+  "vector_format": "end-core.result-domain-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
   "description": "Normative proposal vectors for ADR-0015 result-domain separation; not Praxor or decision-engine implementation data",
   "cases": [

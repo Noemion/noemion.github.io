@@ -1,5 +1,5 @@
 {
-  "vector_format": "noemion.tekmor-vector-v1",
+  "vector_format": "tek-core.vector.v1",
   "spec": {"id": "TEK-CORE", "version": "0.1.0-draft"},
   "description": "Tekmor evidence and appraisal proposal matrix; a specification consistency matrix, not a collector, verifier, merger, revocation service, decision engine, runtime, or component implementation",
   "cases": [

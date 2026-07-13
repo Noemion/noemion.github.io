@@ -1,5 +1,5 @@
 {
-  "vector_format": "noemion.measurement-vector-v1",
+  "vector_format": "end-core.measurement-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
   "description": "Measurement and threshold proposal vectors for ADR-0019; not a telemetry collector, benchmark runner, statistical engine, Praxor, evaluator, or component implementation",
   "cases": [

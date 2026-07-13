@@ -32,9 +32,13 @@
       <rect x="10" y="15" width="43" height="50" fill="#3158ff" opacity=".75"/><rect x="37" y="23" width="43" height="42" fill="#68d7b2" opacity=".82"/><rect x="64" y="31" width="42" height="34" fill="#f4be35" opacity=".9"/>
       <path d="M21 53h21M49 53h20M76 53h19" stroke="#101714" stroke-width="3"/>
     </symbol>
-    <symbol id="nav-cover-components" viewBox="0 0 116 82">
-      <rect x="12" y="13" width="40" height="25" fill="#68d7b2"/><rect x="64" y="13" width="40" height="25" fill="#3158ff"/><rect x="12" y="46" width="40" height="23" fill="#f04b23"/><rect x="64" y="46" width="40" height="23" fill="#f4be35"/>
-      <path d="M52 25h12M32 38v8m52-8v8M52 57h12" stroke="#f0f6f3" stroke-width="2"/>
+    <symbol id="nav-cover-dromen" viewBox="0 0 116 82">
+      <rect x="15" y="13" width="86" height="56" rx="2" fill="#161e1a" stroke="#789388"/>
+      <path d="M15 29h86M39 29v40" stroke="#789388"/>
+      <circle cx="27" cy="21" r="4" fill="#68d7b2"/>
+      <path d="M48 39h31M48 49h25M48 59h29" stroke="#f0f6f3" stroke-width="3"/>
+      <path d="m88 35 9 6v12l-9 6-9-6V41Z" fill="#3158ff"/>
+      <path d="m84 47 3 3 6-7" fill="none" stroke="#f4be35" stroke-width="2"/>
     </symbol>
     <symbol id="nav-cover-endem" viewBox="0 0 116 82">
       <path d="M17 18h82v48H17Z" fill="#161e1a" stroke="#789388"/><path d="M17 34h82M17 50h82M42 18v48" stroke="#789388"/>

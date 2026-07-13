@@ -1,5 +1,5 @@
 {
-  "vector_format": "noemion.semantic-vector.v1",
+  "vector_format": "end-core.semantic-vector.v1",
   "id": "SV-VALID-NEGATIVE-RELATION-001",
   "description": "负极性只作用于已授权关系与同一角色位置，不通过缺失关系或第三种目标方向表达。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},

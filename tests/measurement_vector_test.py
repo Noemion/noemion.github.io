@@ -133,8 +133,8 @@ def main():
     except (OSError, json.JSONDecodeError) as exc:
         print(f"cannot read measurement vectors: {exc}")
         return 1
-    if document.get("vector_format") != "noemion.measurement-vector-v1":
-        errors.append("measurement vectors must use noemion.measurement-vector-v1")
+    if document.get("vector_format") != "end-core.measurement-vector.v1":
+        errors.append("measurement vectors must use end-core.measurement-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("measurement vectors must pin END-CORE 0.1.0-draft")
     if "not a telemetry collector, benchmark runner, statistical engine, Praxor, evaluator, or component implementation" not in document.get("description", ""):

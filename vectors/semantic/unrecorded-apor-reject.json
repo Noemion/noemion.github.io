@@ -1,5 +1,5 @@
 {
-  "vector_format": "noemion.semantic-vector.v1",
+  "vector_format": "end-core.semantic-vector.v1",
   "id": "SV-REJECT-APOR-001",
   "description": "存在两个允许投影但 apor 为空时，系统伪造了不存在的确定性。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},

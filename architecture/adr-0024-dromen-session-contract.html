@@ -1,0 +1,92 @@
+---
+layout: default
+title: "ADR-0024 Dromen 会话契约"
+page_role: "content"
+footer_text: "Noemion · ADR-0024"
+permalink: "/architecture/adr-0024-dromen-session-contract.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0024</span></nav>
+  <header class="content-introduction"><h1>ADR-0024<br>Dromen 会话契约</h1><p>固定持久目标制品进入一次受控运行前必须绑定的主体、政策、环境、能力、预算、观察责任与销毁边界。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">DRO-CORE 0.1.0-draft</span><span class="badge">Session Only</span><span class="badge">No Component Code</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">Dromen 不是可执行目标文件，也不是运行中的全部可变状态。它是 Praxor 在一次 Praxe 会话开始前封存的只读执行契约。</p>
+    <p>这份契约把精确 attested Endem 或 Synem，与当时有效的政策、权威、环境、能力上限、预算和证据责任绑定在一起。运行观察进入 Tekmor；能力句柄留在独立最小权限域；满足结果、最终决定和会话终止继续使用各自结果域。</p>
+    <p>本决定建立 <code>DRO-CORE 0.1.0-draft</code>。它不建立 Dromen 文件、序列化格式、运行时 API、沙箱实现或凭据代理，也不表示 Praxor 已经实现。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么需要独立边界</h2>
+    <div class="table-wrap"><table><thead><tr><th>对象</th><th>回答的问题</th><th>不能承担的职责</th></tr></thead><tbody>
+      <tr><td>Endem 或 Synem</td><td>期望什么终态，多个目标怎样形成固定闭包</td><td>不能携带当前机器、实时凭据或一次会话权限</td></tr>
+      <tr><td>Dromen</td><td>这个精确制品在这一次会话中依据什么边界可以运行</td><td>不能记录持续变化的观察、工具返回或最终结果</td></tr>
+      <tr><td>Praxor</td><td>谁重新验证、建立契约、隔离能力并执行会话</td><td>不能改写制品、扩大授权或替代验收权威</td></tr>
+      <tr><td>Tekmor</td><td>实际发生了什么，证据在什么范围内适用</td><td>不能保存实时秘密或仅凭存在就恢复会话</td></tr>
+    </tbody></table></div>
+    <p>若省略 Dromen，Praxor 只能把运行环境和能力保存在隐式配置里。这样既无法说明某次运行实际采用了哪组边界，也无法判断中途变化应当继续、重验还是关闭会话。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>建立时必须封闭的内容</h2>
+    <div class="table-wrap"><table><thead><tr><th>绑定</th><th>最低内容</th><th>失败时怎样处理</th></tr></thead><tbody>
+      <tr><td>主体</td><td>精确内容身份、Profile、attestation、闭包和当前撤销状态</td><td>歧义、变化、无效或撤销时拒绝建立</td></tr>
+      <tr><td>政策与权威</td><td>政策身份、决定与升级权威、截止点、有效期及适用 consent</td><td>默认最新、冲突或范围内 apor 未决时拒绝</td></tr>
+      <tr><td>环境</td><td>平台、时钟、隔离配置、适配器、协议和模型或规则后端身份</td><td>只靠远端自述或缺少必需绑定时拒绝</td></tr>
+      <tr><td>能力</td><td>动作、资源或受众、范围、约束、授予者、有效期和撤销检查</td><td>只允许取交集；缺少必需能力时不运行</td></tr>
+      <tr><td>预算</td><td>时间、调用、重试、令牌、字节、存储、进程和成本的有限上限</td><td>单位不明、子任务逃逸或取消不可传播时拒绝</td></tr>
+      <tr><td>证据责任</td><td>每项 krin 的观察生产者、方法、phain 位置、Tekmor 类别、披露和决定权威</td><td>责任缺口不能留给运行后猜测</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>只读不等于没有生命周期</h2>
+    <div class="flow"><div class="step">会话提案</div><div class="step">重新验证</div><div class="step">边界求交</div><div class="step">封存 Dromen</div><div class="step">受控运行</div><div class="step">完成或失效</div><div class="step">销毁实时能力</div></div>
+    <p>只有完成全部检查并封存后的对象才叫 Dromen。政策、模型、适配器、能力范围或其他实质绑定变化时，旧 Dromen 失效；Praxor追加漂移事件并按预先声明的规则中断或失败。扩大权限必须形成新的 Praxe 会话，而不是修改原契约。</p>
+    <p>日志可以保存经脱敏的绑定摘要和失效原因，但这些记录只能作为 Tekmor 或会话事件。它们不能重新创建 Dromen、恢复凭据或继续旧会话。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>能力描述与实时能力必须分开</h2>
+    <p>Dromen 只记录非秘密能力描述，例如允许读取哪个资源、令牌面向哪个受众、调用上限是多少。Bearer token、刷新令牌、私钥、文件描述符、socket 和供应商原生句柄留在独立最小能力域，并绑定这一会话。</p>
+    <p><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization">MCP 2025-11-25 授权规范</a>要求令牌绑定目标资源，并强调按需请求范围；<a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks">MCP Task 安全条款</a>要求任务绑定授权上下文。Dromen 采用相同问题边界，但不复制 OAuth、Task ID 或协议对象。协议凭据与远端任务始终位于 Praxor 外缘。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>从 ELF 与 GNU Linux 借鉴什么</h2>
+    <ul>
+      <li><a href="https://gabi.xinuos.com/elf/07-pheader.html">ELF gABI 的程序装载章节</a>明确区分静态文件和系统据此建立的动态进程映像。Noemion 借鉴“持久制品不等于运行表示”，但 Dromen 不是 Segment、内存映像或可执行格式。</li>
+      <li><a href="https://man7.org/linux/man-pages/man7/capabilities.7.html">Linux capabilities</a>把传统超级用户权限拆成可独立限制的能力集合，并以 bounding set 限制执行后可获得的上界。Dromen 同样只允许能力求交和收窄，但规范不预先指定 Linux 实现。</li>
+      <li><a href="https://www.kernel.org/doc/html/latest/userspace-api/no_new_privs.html">Linux no_new_privs</a>提供执行后不能获得新增权限的单向约束；<a href="https://docs.kernel.org/userspace-api/landlock.html">Landlock</a>允许进程继续限制自己的环境权限。这些机制是未来候选证据，不是“使用 Linux 就已经安全”的证明。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>面向 Agent 时代的直接影响</h2>
+    <ul>
+      <li>模型、MCP 工具和 A2A Agent 可以提出计划、能力请求和候选观察，但不能修改 Dromen。</li>
+      <li>模型切换、协议降级、工具列表变化和远端权限提升都是环境或能力变化，必须由绑定规则判断是否使会话失效。</li>
+      <li>子 Agent、重试和长时任务不能获得新的预算；它们只能消费会话上限的严格子集。</li>
+      <li>外部 Task 的成功、失败和取消保留为带来源事件，不直接成为目标满足、Tekmor 充分或权威接受。</li>
+      <li>当前 Agent 协议越来越强调协商、授权上下文和长任务生命周期，这使显式会话契约成为底层需要，而不是附加日志功能。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>规范影响与验证</h2>
+    <ul>
+      <li>新增 <code>DRO-CORE 0.1.0-draft</code> 十条规范条款。</li>
+      <li>新增十项 Dromen 威胁和十五个非规范自然语言场景。</li>
+      <li>二十个提案向量覆盖十个允许契约与十个确定拒绝；检查器只证明资料矩阵一致。</li>
+      <li>END-CORE、END-FMT、END-P1、SYN-CORE、TEK-CORE 与任何规范字节保持不变。</li>
+      <li>项目仍未进入组件代码阶段；当前不存在 Praxor、装载器、沙箱、凭据域、预算器或 Dromen API。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>仍未冻结的内容</h2>
+    <p>运行 API、进程模型、沙箱组合、凭据存储、能力代理、事件编码、预算计数器、恢复策略和销毁机制仍保持开放。Dromen 永远不获得文件格式；若未来实现需要持久审计，只能定义 Tekmor 或会话事件，而不能把 Dromen 转化为可恢复权限的对象。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0023-endem-content-standard.html">← ADR-0023</a><a href="open-questions.html">开放问题 →</a></div>
+</main>
+

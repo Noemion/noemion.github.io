@@ -1,5 +1,5 @@
 {
-  "vector_format": "noemion.negation-vector-v1",
+  "vector_format": "end-core.negation-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
   "description": "Negation and absence proposal vectors for ADR-0017; not a policy engine, log collector, Praxor, or evaluator implementation",
   "cases": [

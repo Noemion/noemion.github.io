@@ -166,8 +166,8 @@ def main():
         print(f"cannot read mene vectors: {exc}")
         return 1
 
-    if document.get("vector_format") != "noemion.mene-vector-v1":
-        errors.append("mene vectors must use noemion.mene-vector-v1")
+    if document.get("vector_format") != "end-core.mene-vector.v1":
+        errors.append("mene vectors must use end-core.mene-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("mene vectors must pin END-CORE 0.1.0-draft")
     description = document.get("description", "")
