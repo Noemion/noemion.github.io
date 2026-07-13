@@ -26,6 +26,7 @@ permalink: "/architecture/open-questions.html"
     <details><summary>Unicode 标识符与原始来源字节何时进入 Profile？</summary><p>TEXT-IDENTIFIER-CORE 已固定当前 ASCII 标识符和来源文本不做隐式规范化，也明确 END-SRCM 不能证明原始文件逐字节保真。只有国际化标识符或原始字节审计出现不可替代消费者，并能固定 Unicode 版本、比较、双向、同形、身份、变换和正反字节向量时，才建立新 Profile。</p></details>
     <details><summary>权威目录与政策语言怎样获得物理 Profile？</summary><p>AUT-CORE 已固定主体、范围、委托、同意、多人冲突、撤销、重放与结果分离。ADR-0030 又规定 END-P1 的权威字段只是选择器，不能自证授权。权威目录、角色与政策语言、授权伴随关系、事件编码、同意 UI Profile 和外部协议映射仍需真实消费者、独立威胁分析、规范字节与实现阶段授权。</p></details>
     <details><summary>连续或模糊要求怎样进入六个语义面？</summary><p>ADR-0019 已关闭可量化构念、总体、单位、聚合器、不确定度和阈值的抽象边界。软偏好、感知质量、风格、模型裁判校准和不可完全判定条件仍需保留评价环境，不能为了机器处理伪造精确阈值。</p></details>
+    <details><summary><code>kine/mene</code> 会成为正式发行拼写吗？</summary><p>不会按现状直接发行。<code>kine</code> 已有稳定而无关的英语读音和词义，两个词也不能让首次读者恢复目标方向职责，因此已经未通过桌面门禁。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/telis-release-terms-proposal.md">非规范 <code>telis</code> 发行词候选提案</a>建议先用独立人类证据验证 <code>reach/maintain</code>。候选不是现行枚举；END-TEL-001、END-P1 和向量暂不修改，也不建立别名。若测试与用户决定接受替换，再以单独 ADR 一次性迁移。</p></details>
   </section>
 
   <section class="content-grid">
@@ -59,7 +60,7 @@ permalink: "/architecture/open-questions.html"
     <h2>实施与发布条件</h2>
     <details open><summary>独立 Theor 使用什么实现边界？</summary><p>未来 Theor 必须拥有自己的数据结构、解码器、验证器和错误路径，只与 Ktisor 共享公开规范和字节向量。当前没有实现；是否采用 Rust 或第二种语言，必须在用户开启代码阶段后根据共同故障风险和维护成本重新确认。</p></details>
     <details><summary>独立 Theor 还缺什么证据？</summary><p>当前只有规范向量、资料检查器和未来验证条件。用户开启代码阶段后，才建立依赖审计、差分测试、长时 fuzz、故障注入和跨平台运行，用来寻找两条独立路径的共同输入假设。</p></details>
-    <details><summary>名称何时满足正式发布条件？</summary><p>ADR-0031 至 ADR-0033 只完成工程初筛、当前名称选择与标准 ID 可读性治理；ADR-0034 进一步要求为目标语言登记读音，并用首次朗读、听写回填和成对混淆记录证明词表内口头区分。具体任务、样本边界和停止规则见<a href="../docs/terminology-and-pronunciation.html">术语与读音验证指南</a>，当前尚未执行。公开发行前仍需重新检查相邻 AI 与开发工具、目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。任一门禁失败都必须重新命名或给出经验证的新候选，审查完成前不得声称名称已具备发行条件。</p></details>
+    <details><summary>名称何时满足正式发布条件？</summary><p>ADR-0031 至 ADR-0033 只完成工程初筛、当前名称选择与标准 ID 可读性治理；ADR-0034 进一步要求为目标语言登记读音，并用首次朗读、听写回填和成对混淆记录证明词表内口头区分。具体任务、样本边界和停止规则见<a href="../docs/terminology-and-pronunciation.html">术语与读音验证指南</a>，当前尚未执行。<code>kine/mene</code> 已在此前先未通过桌面门禁，<code>reach/maintain</code> 也只处于候选状态。公开发行前仍需重新检查相邻 AI 与开发工具、目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。任一门禁失败都必须重新命名或给出经验证的新候选，审查完成前不得声称名称已具备发行条件。</p></details>
     <details><summary>怎样证明构建可复现？</summary><p>ID-REP-001 已要求精确输入闭包、工具与参数、环境约束、至少两条独立产出路径和逐字节输出比较。仍需在代码阶段建立真实隔离构建、缓存独立性、差异归因和发布证据；build ID、签名和一次重跑都不能替代这些证据。</p></details>
   </section>
 

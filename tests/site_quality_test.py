@@ -1487,6 +1487,42 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the causation research proposal"
                 )
 
+    telis_terms_proposal = SOURCE_ROOT / "spec" / "telis-release-terms-proposal.md"
+    if not telis_terms_proposal.exists():
+        errors.append("missing non-normative telis release terms research proposal")
+    else:
+        proposal_text = telis_terms_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "不构成 ADR、CORE 规范、内容 Profile、登记项或实现要求",
+            "不进入 `registry.json`",
+            "`kine / mene` 不适合作为首次正式发行的拼写",
+            "`reach / maintain` 作为第一组人类验证候选",
+            "语义先于拼写",
+            "桌面门禁只能排除明显不合格候选",
+            "不改 END-TEL-001",
+            "不增加别名、双写、自动规范化、重定向或兼容读音",
+            "Iknem",
+            "Ktisor/ktise",
+            "Endem/Synem",
+        ):
+            if token not in proposal_text:
+                errors.append(f"telis release terms proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "telis-release-terms" in registry_text:
+            errors.append("non-normative telis release terms proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "design-system" / "name-audit.md",
+            SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+        ):
+            if "telis-release-terms-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the telis release terms proposal"
+                )
+
     preview_proposal = SOURCE_ROOT / "spec" / "preview-simulation-and-approval-proposal.md"
     if not preview_proposal.exists():
         errors.append("missing non-normative preview, simulation, and approval research proposal")

@@ -24,7 +24,7 @@ Noemion 为自然语言目标建立持久、可组合、可独立检查的工程
 
 当前资料还没有冻结 Noemion、Endem 和其他领域词的发行读音。此前的名称审查主要排查软件、包、命令、标准和权利冲突，不能证明一个词在中文或英语交流中读得顺、听得清、写得回。
 
-[ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html) 已把目标语言读音和词表内口头区分设为独立门禁。`Iknem`、`Ktisor/ktise` 与 `kine/mene` 属于优先复核项；Endem 与 Synem 还要做成对听辨。项目完成 IPA、普通拼读提示、首次朗读和听写证据前，不用临时读法冒充正式读法。
+[ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html) 已把目标语言读音和词表内口头区分设为独立门禁。`kine/mene` 已未通过发行拼写桌面门禁，现行规范值暂时保留；`reach/maintain` 只是等待人类验证的候选。`Iknem` 与 `Ktisor/ktise` 仍是高风险项，Endem 与 Synem 还要做成对听辨。项目完成 IPA、普通拼读提示、首次朗读和听写证据前，不用临时读法冒充正式读法。
 
 [术语与读音验证指南](terminology-and-pronunciation.html)说明怎样招募独立参与者、组织材料、统计关键混淆并记录隐私边界。当前只有方案，没有人类研究结果。
 
