@@ -799,16 +799,18 @@ def validate_prose_readability_contracts():
 
     foundations = (SOURCE_ROOT / "about" / "intellectual-foundations.html").read_text()
     for token in (
-        "世界是事实的总体，而不是事物的总体。",
-        "命题不是词的混合。",
+        "事态由对象的结合构成。",
+        "图像通过要素与对象的对应",
+        "图示者与被图示者必须共享可对应形式",
+        "名称指向对象",
         "理解一个命题意味着知道若命题为真事情该是怎样的。",
-        "哲学的目的是从逻辑上澄清思想。",
-        "凡是可以说的东西都可以清楚地说出来。",
+        "4.062–4.064",
+        "5.6 与 7",
         "贺绍甲译《逻辑哲学论》",
         "不直接决定软件规范",
     ):
         if token not in foundations:
-            errors.append(f"intellectual foundations missing checked quotation boundary {token!r}")
+            errors.append(f"intellectual foundations missing checked proposition boundary {token!r}")
     return errors
 
 

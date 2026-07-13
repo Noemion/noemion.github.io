@@ -56,13 +56,17 @@ permalink: "/about/intellectual-foundations.html"
   <section class="content-stack">
     <h2>《逻辑哲学论》与工程设计相关的命题</h2>
     <p>以下短引文已按命题编号核对路德维希·维特根斯坦著、贺绍甲译《逻辑哲学论》。它们只用来澄清 Noemion 面对的问题，不构成对全书的完整解释，也不直接决定软件规范。编号可对照 <a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29">Wittgenstein Project 开放文本</a>。</p>
-    <ul>
-      <li><blockquote><p>“世界是事实的总体，而不是事物的总体。”</p></blockquote><strong>命题 1.1：</strong>这启发 <code>skena</code> 使用对象—关系结构，而不是实体清单。它不要求 Noemion 接受逻辑原子主义。</li>
-      <li><blockquote><p>“命题不是词的混合。”</p></blockquote><strong>命题 3.141：</strong>这提醒 Poiet 不能把六段文本或模型摘要直接当作规范意义。Endem 必须保存可独立检查的关系位置。</li>
-      <li><blockquote><p>“理解一个命题意味着知道若命题为真事情该是怎样的。”</p></blockquote><strong>命题 4.024：</strong>这启发项目把中性可能事态 <code>skena</code>、目标方向 <code>telis</code> 和比较规则 <code>krin</code> 分开。开放式目标仍不能缩成封闭二值真值表。</li>
-      <li><blockquote><p>“哲学的目的是从逻辑上澄清思想。”</p></blockquote><strong>命题 4.112：</strong>哲学在项目中承担澄清和划界的角色，不承担字段设计或验收权威。</li>
-      <li><blockquote><p>“凡是可以说的东西都可以清楚地说出来。”</p></blockquote><strong>命题 4.116：</strong>这成为公开内容的写作要求：先说清问题和结论，再引入专名。它不意味着所有自然语言歧义都能自动消除。</li>
-    </ul>
+    <div class="table-wrap"><table><thead><tr><th>命题范围</th><th>经核对的问题结构</th><th>Noemion 的工程映射</th><th>采用限制</th></tr></thead><tbody>
+      <tr><td>2.01</td><td>事态由对象的结合构成。</td><td><code>skena</code> 必须保存对象、关系、角色与组合，不能只是实体清单。</td><td>不接受逻辑原子主义作为现实世界的完整本体。</td></tr>
+      <tr><td>2.1–2.15</td><td>图像通过要素与对象的对应及要素之间的关系描述可能情况。</td><td><code>semion</code> 固定记号、符号和指称投影；<code>skena</code> 保存可比较关系结构。</td><td>自然语言、软件状态和社会事实不必与单一图像简单同构。</td></tr>
+      <tr><td>2.17–2.172</td><td>图示者与被图示者必须共享可对应形式，而图像不再把这种形式当作另一个对象陈述。</td><td>逻辑形式由关系拓扑和角色位置显示；载荷不得用 <code>logical_form</code>、<code>true</code> 或 <code>valid</code> 自证。</td><td>“显示”在这里转化为可由两条读取路径独立检查的结构，不是神秘属性。</td></tr>
+      <tr><td>3.203–3.21</td><td>名称指向对象，记号配置对应对象在情况中的配置。</td><td><code>rhem</code> 保留记号，<code>semion</code> 记录稳定符号身份、指称来源和关系位置。</td><td>稳定 ID 不自动证明现实指称正确，也不消除翻译和语境不确定性。</td></tr>
+      <tr><td>4.024 与 4.063</td><td>理解一项陈述需要知道它在何种情况下成立；作出真假判断前必须先规定判定条件。</td><td><code>krin</code> 必须在观察之前固定 <code>phain</code> 类型、比较关系、必需 Tekmor 和决定权威。</td><td>开放生成目标不能被压成无语境的二值真值表；价值判断仍需具名外部权威。</td></tr>
+      <tr><td>4.062–4.064</td><td>肯定与否定针对同一现实关系，否定不是另一个被指称对象。</td><td>禁止事项由 <code>skena</code> 的显式否定关系表达；<code>telis</code> 只区分达到成立与保持成立。</td><td>这不等于所有规范性禁止都能只靠命题否定解释；权限与制度条件仍须另行建模。</td></tr>
+      <tr><td>5.6 与 7</td><td>语言能够表达的边界限制了可陈述内容。</td><td>来源无法支持、指称无法授权或条件无法表达时保留 <code>aseme</code> 或 <code>apor</code>，不伪造确定性。</td><td>Noemion 不声称编码“不可说之物”；它只记录明确的表达缺口、候选与责任边界。</td></tr>
+    </tbody></table></div>
+    <blockquote><p>“理解一个命题意味着知道若命题为真事情该是怎样的。”</p></blockquote>
+    <p><strong>命题 4.024 的工程启发：</strong>目标结构与判断条件必须分开。<code>skena</code> 说明哪种事态，<code>telis</code> 说明目标方向，<code>krin</code> 说明哪些实际观察足以支持判断；任何一层都不能替另一层自证。</p>
     <p>工程上，Noemion 还必须区分四种结果：没有允许意义的 <code>aseme</code>、仍待授权选择的 <code>apor</code>、观察不足的 <code>agno</code> 和求值故障 <code>fault</code>。这些错误与状态由 ADR-0010 和规范定义，不是从原书直接推导出来的分类。</p>
     <p class="callout warning"><strong>反向约束：</strong>这本书的图像论、原子事实和早期语言观不能单独覆盖请求、承诺、授权、时间、概率、价值判断与开放式生成。ADR-0010 只采用可测试的结构约束；后期维特根斯坦、语用学、言语行为、翻译不确定性和推理语义学继续提供必须共同考虑的反例。</p>
   </section>
@@ -74,7 +78,7 @@ permalink: "/about/intellectual-foundations.html"
       <article class="status-item"><h3>已采用：六个语义面</h3><p><code>rhem / semion / skena / telis / krin / apor</code> 分别承担来源、意义投影、中性事态、目标方向、满足判据和未决边界。</p></article>
       <article class="status-item"><h3>已采用：结构显示形式</h3><p><code>semion</code>、<code>skena</code> 与 <code>phain</code> 共享符号和关系位置；规范载荷不能通过自填字段自证有效。</p></article>
       <article class="status-item"><h3>已采用：方向不改写事态</h3><p><code>telis</code> 只冻结 <code>kine</code> 与 <code>mene</code>；禁止事项由 skena 的显式否定表达，不再重复编码。</p></article>
-      <article class="status-item"><h3>待实现：满足求值</h3><p><code>krin</code> 必须在显式变量绑定、Tekmor、版本、能力和 Praxor 配置中产生 met、unmet、agno 或 fault；不得读取未登记背景。</p></article>
+      <article class="status-item"><h3>待完善：满足求值规范</h3><p><code>krin</code> 仍需补齐变量绑定、统计窗口、单位、容差、Tekmor 范围和决定状态转换；当前没有求值组件。</p></article>
     </div>
   </section>
 
@@ -82,7 +86,7 @@ permalink: "/about/intellectual-foundations.html"
     <h2>核心书目与资源状态</h2>
     <div class="table-wrap"><table><thead><tr><th>著作</th><th>当前用途</th><th>研究状态</th><th>版本或检索资源</th></tr></thead><tbody>
       <tr><td>Husserl, <em>Ideas I</em></td><td>意向活动/意向相关项、意向性、对象给予方式与视域</td><td>原典章节与解释争议已定位；需要版本化研究笔记和竞争解释对照</td><td><a href="https://www.routledge.com/Ideas-General-Introduction-to-Pure-Phenomenology/Husserl/p/book/9780415519038">Routledge 书目</a></td></tr>
-      <tr><td>Wittgenstein, <em>Tractatus Logico-Philosophicus</em></td><td>事实、命题、投影、逻辑形式、真值条件与语言边界</td><td>已核对贺绍甲中译本元数据和关键命题，并由 ADR-0009 采用可测试的工程边界</td><td><a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29">开放编号文本</a></td></tr>
+      <tr><td>Wittgenstein, <em>Tractatus Logico-Philosophicus</em></td><td>事实、命题、投影、逻辑形式、真值条件与语言边界</td><td>已核对贺绍甲中译本元数据及命题 2.01、2.1–2.17、3.203–3.21、4.024、4.062–4.064、5.6 与 7；ADR-0010 只采用可测试的工程边界</td><td><a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29">开放编号文本</a></td></tr>
       <tr><td>Wittgenstein, <em>Philosophical Investigations</em></td><td>意义即使用、语言游戏、规则遵循</td><td>版本与关键章节已定位，待逐章精读</td><td><a href="https://www.wiley.com/en-us/Wittgenstein-c-PL45">Wiley 书目</a></td></tr>
       <tr><td>Frege, “Über Sinn und Bedeutung”</td><td>意义、指称、组合与替换问题</td><td>原论文与翻译争议已定位，待形成与 Endem 来源绑定的反例对照</td><td><a href="https://www.degruyter.com/document/doi/10.1515/9783111546216-003/html">De Gruyter 文献页</a></td></tr>
       <tr><td>Russell, “On Denoting”</td><td>表面语法、逻辑形式、存在与唯一性</td><td>原论文范围已定位，待与候选解析和作用域诊断逐项对照</td><td><a href="https://academic.oup.com/mind/article-abstract/XIV/4/479/964157">Oxford Academic 文献页</a></td></tr>

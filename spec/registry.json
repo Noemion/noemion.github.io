@@ -49,6 +49,13 @@
       "scope": "Stable experimental diagnostic codes for END-FMT structure and Profile rejection"
     },
     {
+      "id": "END-SCEN",
+      "version": "0.1.0-draft",
+      "status": "non-normative-design-corpus",
+      "path": "spec/endem-scenarios.md",
+      "scope": "Natural-language design-review scenarios for facet, ambiguity, judgment and root-boundary coverage"
+    },
+    {
       "id": "END-P0",
       "version": "0.1.0-draft",
       "status": "experimental-conformance",

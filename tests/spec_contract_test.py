@@ -11,6 +11,7 @@ FORMAT_SPEC_PATH = ROOT / "spec" / "endem-format.md"
 SOURCE_MANIFEST_SPEC_PATH = ROOT / "spec" / "endem-source-manifest.md"
 THREAT_PATH = ROOT / "spec" / "endem-threat-model.md"
 ERROR_CATALOG_PATH = ROOT / "spec" / "endem-errors.md"
+SCENARIO_CORPUS_PATH = ROOT / "spec" / "endem-scenarios.md"
 PROFILE_PATH = ROOT / "spec" / "profiles" / "end-p0.json"
 VECTOR_ROOT = ROOT / "vectors" / "semantic"
 SCHEMA_PATH = ROOT / "vectors" / "vector.schema.json"
@@ -19,6 +20,7 @@ CLAUSE_ID = re.compile(r"^END-[A-Z]+-[0-9]{3}$")
 VECTOR_ID = re.compile(r"^SV-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
 SPEC_HEADING = re.compile(r"^### (END-[A-Z]+-[0-9]{3})\s+—", re.MULTILINE)
 THREAT_HEADING = re.compile(r"^### (THR-END-[0-9]{3})\s+—", re.MULTILINE)
+SCENARIO_HEADING = re.compile(r"^### (SCN-[0-9]{3})\s+—", re.MULTILINE)
 REQUIRED_FACETS = ("rhem", "semion", "skena", "telis", "krin", "apor")
 ALLOWED_VERIFICATION_STATUS = {"covered-by-repo", "planned", "manual-authority"}
 ALLOWED_EVIDENCE_STATUS = {"planned", "partial", "covered"}
@@ -71,8 +73,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 errors.append(f"spec/registry.json: {spec_id} document path does not exist")
 
     supporting_documents = registry.get("supporting_documents")
-    if not isinstance(supporting_documents, list) or len(supporting_documents) != 4:
-        errors.append("spec/registry.json: threat, error catalog, P0 and P1 Profile documents are required")
+    if not isinstance(supporting_documents, list) or len(supporting_documents) != 5:
+        errors.append("spec/registry.json: threat, error catalog, scenario corpus, P0 and P1 Profile documents are required")
     else:
         supporting_by_id = {document.get("id"): document for document in supporting_documents}
         threat_document = supporting_by_id.get("END-THREAT", {})
@@ -86,6 +88,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: threat model path does not exist")
         expected_supporting = {
             "END-ERRCAT": "spec/endem-errors.md",
+            "END-SCEN": "spec/endem-scenarios.md",
             "END-P0": "spec/profiles/end-p0.json",
             "END-P1": "spec/profiles/end-p1.json",
         }
@@ -95,6 +98,10 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 errors.append(f"spec/registry.json: invalid {document_id} registration")
             if not (ROOT / document.get("path", "")).is_file():
                 errors.append(f"spec/registry.json: missing {document_id} source")
+
+        scenario_document = supporting_by_id.get("END-SCEN", {})
+        if scenario_document.get("status") != "non-normative-design-corpus":
+            errors.append("spec/registry.json: END-SCEN must remain a non-normative design corpus")
 
     terms = registry.get("terms")
     if not isinstance(terms, list) or not terms:
@@ -394,6 +401,8 @@ def validate_public_boundary(errors):
             "vectors/semantic",
             "vectors/wire",
             "spec/endem-threat-model.md",
+            "spec/endem-scenarios.md",
+            "非规范设计审查材料",
             "不是 .endem 物理格式",
         ),
         "specifications/endem.html": (
@@ -402,6 +411,11 @@ def validate_public_boundary(errors):
             "END-P1",
             "spec/endem-core.md",
             "spec/endem-format.md",
+            "spec/endem-scenarios.md",
+            "自然语言场景怎样检验六个语义面",
+            "观察不足是",
+            "求值过程失败为",
+            "两个 Endem",
             "条款 ID",
             "尚非稳定 ABI",
         ),
@@ -412,6 +426,8 @@ def validate_public_boundary(errors):
             "spec/endem-format.md",
             "机器可读登记",
             "spec/endem-threat-model.md",
+            "spec/endem-scenarios.md",
+            "不属于上述规范义务",
         ),
         "architecture/adr-0012-rust-core-language.html": (
             "Rust 1.97.0",
@@ -465,6 +481,26 @@ def main():
     except OSError as exc:
         errors.append(f"spec/endem-threat-model.md: cannot read: {exc}")
         threat_text = ""
+    try:
+        scenario_text = SCENARIO_CORPUS_PATH.read_text()
+    except OSError as exc:
+        errors.append(f"spec/endem-scenarios.md: cannot read: {exc}")
+        scenario_text = ""
+
+    scenario_ids = SCENARIO_HEADING.findall(scenario_text)
+    if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 9)]:
+        errors.append("spec/endem-scenarios.md: scenario IDs must be unique and ordered SCN-001 through SCN-008")
+    for token in (
+        "事态由对象结合构成（2.01）",
+        "图示形式由结构显示而非自我陈述（2.17–2.172）",
+        "禁止事项由否定事态表达",
+        "观察不足不同于未满足",
+        "求值故障不同于观察不足",
+        "两个独立根必须拆分",
+        "不是可执行测试",
+    ):
+        if token not in scenario_text:
+            errors.append(f"spec/endem-scenarios.md: missing design-review boundary {token!r}")
 
     if registry is not None:
         clause_ids, covered_vector_refs = validate_registry(
@@ -479,7 +515,8 @@ def main():
     print(
         "PASS: END-CORE, END-FMT and END-SRCM 0.1.0-draft have unique clauses, explicit "
         "maturity, traceable evidence, 10 registered threats, executed semantic "
-        "vectors, END-P1 payload/source vectors, and P0-LANG-001 language evidence"
+        "vectors, eight natural-language design scenarios, END-P1 payload/source vectors, "
+        "and P0-LANG-001 historical language evidence"
     )
     return 0
 
