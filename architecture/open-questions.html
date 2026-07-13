@@ -12,15 +12,15 @@ permalink: "/architecture/open-questions.html"
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
     <p class="lead">ADR-0010 已经采用现行制品、组件、六个语义面、三个制品状态和八个动作。这些名称与职责不再作为开放问题反复讨论。</p>
-    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0024 固定 Synem、Tekmor、内容标准分层与 Dromen；ADR-0025 与 ADR-0026 分别固定结构化诊断和协议无关外部适配边界。</p>
-    <p>当前没有 Theor 或其他组件实现。稳定 ABI、时间与组合物理字段、嵌套或多变量量化、Synem 与 Tekmor 物理容器、正式来源语言和结果事件编码仍未冻结。</p>
+    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0027 固定 Synem、Tekmor、内容标准分层、Dromen、结构化诊断、协议无关外部适配以及精确内容身份与签名解释边界。</p>
+    <p>当前没有 Theor 或其他组件实现。稳定 ABI、时间与组合物理字段、嵌套或多变量量化、Synem 与 Tekmor 物理容器、正式来源语言、摘要和签名物理 Profile 与结果事件编码仍未冻结。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
 
   <section class="content-grid">
     <h2>Endem 编码与语义</h2>
     <details open><summary>实验来源清单怎样升级为正式语言？</summary><p>ADR-0014 只关闭首个 <code>.ends</code> 输入。正式语言仍需解决注释、包含、版本演进、歧义、错误恢复和工具支持；在正反语料与真实消费者出现前，不扩展当前清单。</p></details>
-    <details><summary>END-P1 之后还缺哪些字段？</summary><p>ADR-0023 已关闭内容标准分层，但没有预先冻结未来内容。END-P1 已关闭未来首条实现路径评审所需字段，并已有正负极性字节；时间、缺席、单变量量化、测量、组合、条件适用性、统计登记、摘要、签名和 Synem 的物理表达仍需真实消费者、新 Profile 与正反字节向量。</p></details>
+    <details><summary>END-P1 之后还缺哪些字段？</summary><p>ADR-0023 已关闭内容标准分层，但没有预先冻结未来内容。END-P1 已关闭未来首条实现路径评审所需字段，并已有正负极性字节；时间、缺席、单变量量化、测量、组合、条件适用性和统计登记仍需真实消费者、新 Profile 与正反字节向量。ID-CORE 已固定摘要与签名的抽象边界，但它们是否进入容器、采用何种物理 Profile 仍未决定。</p></details>
     <details><summary>条件与排他组合怎样表达？</summary><p>ADR-0020 只允许单个 Endem 使用 <code>all_of / any_of</code>；ADR-0021 已把跨 Endem 条件固定为 Synem 会话激活。<code>xor / xone</code>、形成时条件编码和复杂守卫语言仍未冻结，不得嵌入自由脚本。</p></details>
     <details><summary>一个根 skena 的语义等价怎样判断？</summary><p>布局、来源注释或调试记录变化后，哪些 semion、skena、telis、krin 和 apor 属性必须保持，仍需规范化规则和反例。规则冻结前只能比较显式符号、关系和条件，不能发明语义哈希。</p></details>
     <details><summary>自然语言候选由谁授权决定？</summary><p>需定义决定主体、作用范围、撤销、重放、高风险语义面和多人冲突。模型置信度、结构合法和单次界面点击都不能单独成为永久授权。</p></details>
@@ -29,11 +29,11 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-grid">
     <h2>Synem 与发布</h2>
-    <details open><summary>绑定标识和版本约束采用什么语法？</summary><p>SYN-CORE 已要求最终绑定唯一精确内容身份，并禁止环境搜索和网络最新版本。可读名称、版本范围的候选语法、摘要算法和绑定记录物理编码仍需新 Profile。</p></details>
+    <details open><summary>绑定标识和版本约束采用什么语法？</summary><p>SYN-CORE 已要求最终绑定唯一精确内容身份，ID-CORE 又固定完整引用的必需语境，并禁止环境搜索和网络最新版本。可读名称、版本范围的候选语法、摘要算法基线、文本编码和绑定记录物理格式仍需新 Profile。</p></details>
     <details><summary>什么时候允许依赖循环？</summary><p>SYN-GRF-001 已规定第一阶段拒绝依赖与激活循环。未来若支持，必须先定义固定点语义、披露与验收顺序、预算上限、失败原子性和跨实现向量。</p></details>
     <details><summary>Synem 是否需要独立物理容器？</summary><p>在出现多 Endem、流式读取或离线分发的真实消费者前，内容寻址清单和现有确定性归档可能已经足够。不能只为形式完整提前创造格式。</p></details>
-    <details><summary>tasse 可以删除哪些信息？</summary><p>只有不改变六个语义面、组合、能力上限和运行披露的内容才能外置。还需证明裁剪前后关系等价，并用完整摘要绑定调试伴随记录。</p></details>
-    <details><summary>sphra 的算法与撤销策略是什么？</summary><p>需确定待签消息、算法协商、多签、密钥轮换、撤销、时间来源和离线验证。签名必须位于被签载荷之外，且不能替代结构或环境授权。</p></details>
+    <details><summary>tasse 可以删除哪些信息？</summary><p>ID-REL-001 已要求裁剪结果与调试伴随文件各有精确身份，并记录变换、保留内容和损失。哪些内容可以删除、怎样证明语义等价、伴随关系采用什么物理格式，仍需真实消费者与正反字节向量。</p></details>
+    <details><summary>sphra 的算法与撤销策略是什么？</summary><p>ID-CORE 已固定有类型待签陈述、外置包络、权威分离、截止点和撤销解释。摘要与签名算法基线、多签政策、密钥体系、证书 Profile、时间来源、透明日志、撤销分发和离线包络物理编码仍需独立 ADR 与证据。</p></details>
   </section>
 
   <section class="content-grid">
@@ -52,12 +52,12 @@ permalink: "/architecture/open-questions.html"
     <details open><summary>独立 Theor 使用什么实现边界？</summary><p>未来 Theor 必须拥有自己的数据结构、解码器、验证器和错误路径，只与 Poiet 共享公开规范和字节向量。当前没有实现；是否采用 Rust 或第二种语言，必须在用户开启代码阶段后根据共同故障风险和维护成本重新确认。</p></details>
     <details><summary>独立 Theor 还缺什么证据？</summary><p>当前只有规范向量、资料检查器和未来验证条件。用户开启代码阶段后，才建立依赖审计、差分测试、长时 fuzz、故障注入和跨平台运行，用来寻找两条独立路径的共同输入假设。</p></details>
     <details><summary>名称何时满足正式发布条件？</summary><p>项目内部命名已经冻结，但公开发行前仍需检查目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。审查完成前不得声称商标可用。</p></details>
-    <details><summary>怎样证明构建可复现？</summary><p>对象字节、工具二进制和签名真实性是三个不同属性。需要双路径构建、固定环境输入、逐字节比较和独立签名验证。</p></details>
+    <details><summary>怎样证明构建可复现？</summary><p>ID-REP-001 已要求精确输入闭包、工具与参数、环境约束、至少两条独立产出路径和逐字节输出比较。仍需在代码阶段建立真实隔离构建、缓存独立性、差异归因和发布证据；build ID、签名和一次重跑都不能替代这些证据。</p></details>
   </section>
 
   <section class="content-band">
     <h2>问题关闭规则</h2>
     <p>设计问题可以由权威规范或 ADR、正反向量和明确失败语义关闭。涉及组件行为、性能或互操作的问题必须保持开放，直到用户明确开启代码阶段并出现相应实现证据；论文、模型指标、概念演示或单一实现行为不能单独冻结 ABI。</p>
   </section>
-  <div class="next-prev"><a href="adr-0026-external-protocol-adapters.html">← ADR-0026</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
+  <div class="next-prev"><a href="adr-0027-exact-identity-and-attestation.html">← ADR-0027</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
 </main>

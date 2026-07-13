@@ -6,7 +6,7 @@
 
 `wire/` 保存 END-FMT 0.1.0-draft 的规范十六进制字节。顶层清单属于 END-P0，只证明结构合法；`wire/p1/` 属于 END-P1，使用完整六记录载荷并实际运行字段、排序、引用和来源范围判断。两组都不是稳定 ABI。
 
-`result-domains/`、`mene/`、`negation/`、`quantification/`、`measurement/`、`composition/`、`synem/`、`dromen/`、`tekmor/`、`diagnostics/` 与 `adapters/` 分别保存判断结果、时间连续性、否定缺席、量化成员资格、测量阈值、复合判据、Synem 闭包激活、Dromen 会话契约、Tekmor 证据评估、跨对象结构化诊断和外部协议适配的提案矩阵。它们用于检查设计规则之间是否一致，不是 `.endem`、Synem、Dromen、Tekmor、诊断或协议物理字节，也不证明运行组件存在。
+`result-domains/`、`mene/`、`negation/`、`quantification/`、`measurement/`、`composition/`、`synem/`、`dromen/`、`tekmor/`、`diagnostics/`、`adapters/` 与 `identity/` 分别保存判断结果、时间连续性、否定缺席、量化成员资格、测量阈值、复合判据、Synem 闭包激活、Dromen 会话契约、Tekmor 证据评估、跨对象结构化诊断、外部协议适配以及精确内容身份与签名边界的提案矩阵。它们用于检查设计规则之间是否一致，不是 `.endem`、Synem、Dromen、Tekmor、诊断、协议或签名物理字节，也不证明运行组件存在。`identity/` 中的 SHA-256 只用于已知算法示例，不是发行算法决定。
 
 向量外壳由 [`vector.schema.json`](vector.schema.json) 约束。该 Schema 使用 JSON Schema 2020-12，只验证测试资料的结构；它不验证 Endem 语义，也不成为 Endem ABI。
 

@@ -1,0 +1,58 @@
+---
+layout: default
+title: "精确内容身份与签名规范"
+page_role: "content"
+footer_text: "Noemion · Exact Identity and Attestation"
+permalink: "/specifications/identity.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>精确内容身份与签名</span></nav>
+  <header class="content-introduction"><h1>精确内容身份与签名</h1><p>定义跨 Endem、Synem、Tekmor、发布陈述和伴随制品的精确字节身份、不可变引用、签名验证、撤销与可复现性边界。</p><div class="badges"><span class="badge">ID-CORE 0.1.0-draft</span><span class="badge">12 Clauses</span><span class="badge">Wire Unfrozen</span><span class="badge">No Crypto Code</span></div></header>
+
+  <section class="content-stack">
+    <h2>它解决什么问题</h2>
+    <p class="lead">任何声称“这是同一个目标制品”“这份证据属于它”或“这份签名覆盖它”的系统，都必须先定义精确身份。</p>
+    <p>ID-CORE 让各对象共享同一组引用和验证不变量，又防止摘要、签名、证书、撤销、信任和验收互相冒充。它不是新制品、文件格式、命令、密码算法或 Semantic Key。</p>
+    <p class="callout"><strong>权威边界：</strong>实现义务以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-core.md">ID-CORE 条款源</a>为准。当前 SHA-256 只出现在提案向量中，不表示未来发行算法已经选定。</p>
+  </section>
+
+  <section class="content-stack">
+    <h2>已接受边界</h2>
+    <p>ID-CORE 已接受并固定精确身份、不可变引用、有类型签名陈述、外置验证包络、截止点有效性、独立复现和制品关系的抽象边界。未来实现必须遵守十二条核心规则。</p>
+    <p>摘要相同不得直接推出语义等价、事实为真、主体有权、制品已被接受或派生物继承来源身份。签名验证通过也不得越过既定权威、政策、撤销与结果域。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>十二条身份与签名规则</h2>
+    <div class="table-wrap"><table><thead><tr><th>规则</th><th>直白要求</th><th>必须拒绝</th></tr></thead><tbody>
+      <tr><td><code>ID-DOM-001</code></td><td>身份绑定对象种类、规范、表示、Profile 和身份域</td><td>跨语境只比较摘要文本</td></tr>
+      <tr><td><code>ID-BYT-001</code></td><td>摘要覆盖精确、版本化且非循环的字节范围</td><td>隐式规范化、可变输入和自包含摘要</td></tr>
+      <tr><td><code>ID-REF-001</code></td><td>安全引用携带完整身份并唯一闭合</td><td>名称、路径、URL、latest、build ID 或外部 ID 替代目标</td></tr>
+      <tr><td><code>ID-ALG-001</code></td><td>算法、参数、用途和安全状态由版本化政策登记</td><td>未知算法、参数歧义、静默替换和降级</td></tr>
+      <tr><td><code>ID-DSP-001</code></td><td>短摘要只显示，安全比较使用完整值</td><td>前缀碰撞、首个匹配和 build ID 校验</td></tr>
+      <tr><td><code>ID-EQV-001</code></td><td>精确字节身份与语义等价保持分开</td><td>摘要相同推出真假或派生物继承 Semantic Key</td></tr>
+      <tr><td><code>ID-STM-001</code></td><td>签名覆盖有类型的对象、用途、受众、主体和政策陈述</td><td>裸摘要签名跨类型或跨用途重放</td></tr>
+      <tr><td><code>ID-ENV-001</code></td><td>签名和验证材料外置并绑定精确陈述</td><td>包络改变对象身份或只保存密钥提示</td></tr>
+      <tr><td><code>ID-AUT-001</code></td><td>密码验证、主体认证、授权、适用性和决定分开</td><td>签名或日志包含直接证明真、授权或接受</td></tr>
+      <tr><td><code>ID-VAL-001</code></td><td>有效性绑定截止点、信任根、政策、撤销和状态新鲜度</td><td>无限缓存成功或撤销后沿用旧授权</td></tr>
+      <tr><td><code>ID-REP-001</code></td><td>可复现性需要独立产出和逐字节输出比较</td><td>相同日志、build ID、缓存副本或单次重跑冒充复现</td></tr>
+      <tr><td><code>ID-REL-001</code></td><td>裁剪、调试、压缩和迁移制品各有身份与显式关系</td><td>派生物继承来源身份、签名、证据、接受或能力</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>符合性材料</h2>
+    <div class="table-wrap"><table><thead><tr><th>材料</th><th>当前覆盖</th><th>不能证明</th></tr></thead><tbody>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-threat-model.md">ID-THREAT</a></td><td>12 类身份混淆、降级、重放、撤销和信任继承威胁</td><td>密码实现、密钥隔离或发布系统已经安全</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-scenarios.md">ID-SCEN</a></td><td>18 个支持、反例与边界场景</td><td>场景本身是签名标准或组件测试</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/identity">ID-CORE 向量</a></td><td>24 个提案包含 12 个允许案例与 12 个确定拒绝</td><td>摘要器、签名器、验证器、透明日志或可复现构建已经实现</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>当前仍未冻结</h2>
+    <p>摘要和签名算法基线、算法登记表、摘要文本语法、签名陈述物理编码、COSE、DSSE 或 Sigstore Profile、证书体系、透明日志、时间戳与撤销分发、Semantic Key、跨版本等价和调试伴随格式均保持开放。</p>
+    <p>背景、权衡和权威资料见 <a href="../architecture/adr-0027-exact-identity-and-attestation.html">ADR-0027 精确内容身份与签名边界</a>。</p>
+  </section>
+  <div class="next-prev"><a href="adapters.html">← 外部协议适配</a><a href="../architecture/adr-0027-exact-identity-and-attestation.html">ADR-0027 →</a></div>
+</main>

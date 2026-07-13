@@ -81,6 +81,16 @@
       "wire_status": "not-applicable",
       "path": "spec/adapter-core.md",
       "scope": "Protocol-independent Praxor external adapter version, peer, capability, invocation, mapping, state, artifact, error, cancellation, retry, delivery and security boundaries"
+    },
+    {
+      "spec_id": "ID-CORE",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "wire_status": "unfrozen",
+      "path": "spec/identity-core.md",
+      "scope": "Cross-artifact exact byte identity, immutable references, algorithm policy, signed statements, verification envelopes, validity, reproducibility and derived-artifact relations"
     }
   ],
   "supporting_documents": [
@@ -188,6 +198,20 @@
       "status": "non-normative-design-corpus",
       "path": "spec/adapter-scenarios.md",
       "scope": "Natural-language design-review scenarios for external protocol adapter boundaries"
+    },
+    {
+      "id": "ID-THREAT",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "path": "spec/identity-threat-model.md",
+      "scope": "Cross-domain identity, byte-boundary, mutable-reference, algorithm, display, statement, envelope, authority, validity, reproducibility and derived-artifact threats"
+    },
+    {
+      "id": "ID-SCEN",
+      "version": "0.1.0-draft",
+      "status": "non-normative-design-corpus",
+      "path": "spec/identity-scenarios.md",
+      "scope": "Natural-language design-review scenarios for exact identity, attestation, revocation, reproducibility and companion-artifact boundaries"
     }
   ],
   "experiments": [
@@ -271,6 +295,13 @@
     ,{"term": "external-state", "kind": "external-result-domain", "decision_status": "accepted-draft", "definition": "外部协议请求、任务、消息、产物、HTTP 或 SDK 的原生状态；不得提升为 Noemion 结果域"}
     ,{"term": "delivery-evidence", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "绑定授权、序列、去重、乱序、缺口、终结与资源边界的流式或异步交付依据"}
     ,{"term": "idempotency-class", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "read-only、idempotent、deduplicated 或 non-idempotent 的调用重试分类"}
+    ,{"term": "exact-content-identity", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "由身份域、对象语境和完整摘要元组共同解释的精确字节身份"}
+    ,{"term": "identity-domain", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "版本化定义对象种类、规范语境与摘要输入边界的身份比较空间"}
+    ,{"term": "digest-reference", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "携带完整身份域、对象语境、算法、长度和摘要值的不可变安全引用"}
+    ,{"term": "signed-statement", "kind": "attestation-interface", "decision_status": "accepted-draft", "definition": "把精确对象身份、陈述类型、用途、受众、主体和政策纳入受保护内容的签名陈述"}
+    ,{"term": "attestation-envelope", "kind": "attestation-interface", "decision_status": "accepted-draft", "definition": "外置保存签名和有限验证材料且不改变被指对象身份的包络"}
+    ,{"term": "validity-cutoff", "kind": "attestation-interface", "decision_status": "accepted-draft", "definition": "签名有效性评估所绑定的具名时间截止点"}
+    ,{"term": "artifact-relation", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "以双方精确身份、变换规则、保留内容、损失和验证条件描述派生或伴随关系"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -278,7 +309,7 @@
     {"id": "THR-END-003", "clauses": ["END-SAF-003", "END-FMT-007"], "evidence_status": "partial"},
     {"id": "THR-END-004", "clauses": ["END-APR-001", "END-UNK-001", "END-AUT-001"], "evidence_status": "partial"},
     {"id": "THR-END-005", "clauses": ["END-KRN-001", "END-KRN-002", "END-STR-001"], "evidence_status": "partial"},
-    {"id": "THR-END-006", "clauses": ["END-ID-001"], "evidence_status": "planned"},
+    {"id": "THR-END-006", "clauses": ["END-ID-001", "ID-DOM-001", "ID-DSP-001", "ID-EQV-001"], "evidence_status": "partial"},
     {"id": "THR-END-007", "clauses": ["END-VER-001"], "evidence_status": "planned"},
     {"id": "THR-END-008", "clauses": ["END-STA-001", "END-STA-002", "END-DEC-001"], "evidence_status": "planned"},
     {"id": "THR-END-009", "clauses": ["END-CON-001", "END-DET-001"], "evidence_status": "planned"},
@@ -334,7 +365,19 @@
     {"id": "THR-ADP-009", "clauses": ["ADP-CAN-001"], "evidence_status": "partial"},
     {"id": "THR-ADP-010", "clauses": ["ADP-RTY-001"], "evidence_status": "partial"},
     {"id": "THR-ADP-011", "clauses": ["ADP-DEL-001"], "evidence_status": "partial"},
-    {"id": "THR-ADP-012", "clauses": ["ADP-SEC-001"], "evidence_status": "partial"}
+    {"id": "THR-ADP-012", "clauses": ["ADP-SEC-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-001", "clauses": ["ID-DOM-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-002", "clauses": ["ID-BYT-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-003", "clauses": ["ID-REF-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-004", "clauses": ["ID-ALG-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-005", "clauses": ["ID-DSP-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-006", "clauses": ["ID-EQV-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-007", "clauses": ["ID-STM-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-008", "clauses": ["ID-ENV-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-009", "clauses": ["ID-AUT-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-010", "clauses": ["ID-VAL-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-011", "clauses": ["ID-REP-001"], "evidence_status": "partial"},
+    {"id": "THR-ID-012", "clauses": ["ID-REL-001"], "evidence_status": "partial"}
   ],
   "clauses": [
     {
@@ -1098,9 +1141,11 @@
       "id": "END-ID-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
-      "evidence_status": "planned",
+      "evidence_status": "partial",
       "failure_owner": "Poiet and release validation",
       "verification": [
+        {"status": "covered-by-repo", "ref": "spec/identity-core.md"},
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
         {"status": "planned", "ref": "peira:identity-domain-separation"},
         {"status": "manual-authority", "authority": "future format ADR reviewers"}
       ]
@@ -1687,6 +1732,138 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "peira:adapter-security-envelope"}
+      ]
+    },
+    {
+      "id": "ID-DOM-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future artifact producer, resolver and verifier",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:identity-domain-binding"}
+      ]
+    },
+    {
+      "id": "ID-BYT-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future canonical writer, hasher and verifier",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:identity-byte-domain"}
+      ]
+    },
+    {
+      "id": "ID-REF-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future closure resolver, evidence producer and session loader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:identity-reference-closure"}
+      ]
+    },
+    {
+      "id": "ID-ALG-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "future algorithm registry, release policy and every verifier",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:identity-algorithm-policy"}
+      ]
+    },
+    {
+      "id": "ID-DSP-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future resolver, CLI, UI, log and diagnostic producer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:identity-full-digest-binding"}
+      ]
+    },
+    {
+      "id": "ID-EQV-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "future specification maintainers and every identity consumer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:identity-equivalence-separation"}
+      ]
+    },
+    {
+      "id": "ID-STM-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future signing domain and statement verifier",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:signed-statement-context"}
+      ]
+    },
+    {
+      "id": "ID-ENV-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "future signing domain, publication system and every verifier",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:attestation-envelope-materials"}
+      ]
+    },
+    {
+      "id": "ID-AUT-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future verifier, policy evaluator and named decision authority",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:signature-authority-separation"}
+      ]
+    },
+    {
+      "id": "ID-VAL-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "future trust policy, status distributor and every verifier",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:signature-validity-cutoff"}
+      ]
+    },
+    {
+      "id": "ID-REP-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "future build, packaging and release validation authorities",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:reproducible-independent-outputs"}
+      ]
+    },
+    {
+      "id": "ID-REL-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future transformer, strip operation and companion resolver",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "peira:artifact-relation-binding"}
       ]
     }
   ]

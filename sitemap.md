@@ -40,6 +40,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0024](https://noemion.github.io/architecture/adr-0024-dromen-session-contract.html) — one-session subject, policy, environment, capability, budget, observation, immutability, and disposal contract
 - [ADR-0025](https://noemion.github.io/architecture/adr-0025-structured-diagnostics.html) — stable diagnostic identity, context, layers, locations, recovery, disclosure, bounds, and atomic failure
 - [ADR-0026](https://noemion.github.io/architecture/adr-0026-external-protocol-adapters.html) — protocol-independent external adapter version, peer, capability, state, retry, delivery, and security boundaries
+- [ADR-0027](https://noemion.github.io/architecture/adr-0027-exact-identity-and-attestation.html) — exact content identity, immutable references, signed statements, validity, reproducibility, and derived-artifact relations
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Praxor responsibility boundaries
 - [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary
@@ -55,6 +56,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Tekmor](https://noemion.github.io/specifications/tekmor.html) — scoped evidence, provenance, integrity, and acceptance claims
 - [Structured diagnostics](https://noemion.github.io/specifications/diagnostics.html) — cross-object machine identity, locations, recovery, safety, and result-domain separation
 - [External protocol adapters](https://noemion.github.io/specifications/adapters.html) — version pinning, peer trust, capability intersection, state separation, retry, delivery, and security boundaries
+- [Exact identity and attestation](https://noemion.github.io/specifications/identity.html) — cross-artifact byte identity, signed statements, validity cutoffs, reproducibility, and companion relations
 
 ## Guides and reference
 

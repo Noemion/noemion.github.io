@@ -77,6 +77,7 @@ REQUIRED_CORE_ROUTES = {
     "specifications/tekmor.html",
     "specifications/diagnostics.html",
     "specifications/adapters.html",
+    "specifications/identity.html",
     "architecture/endem-lifecycle.html",
     "architecture/adr-0010-native-lexicon.html",
     "architecture/adr-0011-endem-container.html",
@@ -95,6 +96,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0024-dromen-session-contract.html",
     "architecture/adr-0025-structured-diagnostics.html",
     "architecture/adr-0026-external-protocol-adapters.html",
+    "architecture/adr-0027-exact-identity-and-attestation.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -228,6 +230,7 @@ NORMATIVE_ROUTES = (
     "specifications/tekmor.html",
     "specifications/diagnostics.html",
     "specifications/adapters.html",
+    "specifications/identity.html",
 )
 CONTENT_LAYOUT_ROUTES = (
     "about/background.html",
@@ -253,6 +256,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0024-dromen-session-contract.html",
     "architecture/adr-0025-structured-diagnostics.html",
     "architecture/adr-0026-external-protocol-adapters.html",
+    "architecture/adr-0027-exact-identity-and-attestation.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -265,6 +269,7 @@ CONTENT_LAYOUT_ROUTES = (
     "specifications/tekmor.html",
     "specifications/diagnostics.html",
     "specifications/adapters.html",
+    "specifications/identity.html",
 )
 CONTENT_LAYOUT_CLASSES = {
     "content-split",
@@ -470,6 +475,25 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "ADP-SEC-001",
             "不可信候选",
             "当前没有具体协议 Profile",
+        ),
+    },
+    "specifications/identity.html": {
+        "required": (
+            "ID-CORE 0.1.0-draft",
+            "ID-DOM-001",
+            "ID-BYT-001",
+            "ID-REF-001",
+            "ID-ALG-001",
+            "ID-DSP-001",
+            "ID-EQV-001",
+            "ID-STM-001",
+            "ID-ENV-001",
+            "ID-AUT-001",
+            "ID-VAL-001",
+            "ID-REP-001",
+            "ID-REL-001",
+            "不是新制品",
+            "当前仍未冻结",
         ),
     },
     "endem/docs/safety.html": {

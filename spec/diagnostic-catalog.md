@@ -148,7 +148,24 @@
 | `adapter.delivery.evidence_incomplete` | `ADP-DEL-001` | protocol | 流式、推送或轮询缺少认证、序列、去重、缺口或终结证据 |
 | `adapter.security.envelope_invalid` | `ADP-SEC-001` | policy | 令牌透传、网络目标、租户披露或资源预算违反最小权限 |
 
-## 10. 稳定性边界
+## 10. 精确身份与签名错误码
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `identity.domain.unbound` | `ID-DOM-001` | identity | 身份缺少对象、规范、表示、Profile 或域语境，或跨语境只比较摘要文本 |
+| `identity.bytes.input_undefined` | `ID-BYT-001` | identity | 摘要输入范围、顺序、规范化或排除项不明确、可变或自包含循环 |
+| `identity.reference.mutable` | `ID-REF-001` | identity | 安全引用缺少完整身份或依赖名称、路径、URL、latest、build ID 等可变选择器 |
+| `identity.algorithm.disallowed` | `ID-ALG-001` | identity | 算法未知、禁用、撤销、参数不完整、用途不匹配或发生静默替换 |
+| `identity.display.used_for_binding` | `ID-DSP-001` | identity | 截断摘要、短显示或 build ID 被用于安全比较和对象选择 |
+| `identity.equivalence.overclaimed` | `ID-EQV-001` | semantic | 精确身份被提升为真假、语义等价或派生身份继承 |
+| `identity.statement.context_incomplete` | `ID-STM-001` | evidence | 签名陈述缺少类型、用途、受众、主体、政策或受保护关键上下文 |
+| `identity.envelope.material_incomplete` | `ID-ENV-001` | evidence | 验证包络未绑定陈述、只保存密钥提示、缺少必要材料或继承主体身份 |
+| `identity.authority.overclaimed` | `ID-AUT-001` | policy | 签名、证书或日志包含被提升为事实、权限、满足或最终接受 |
+| `identity.validity.context_incomplete` | `ID-VAL-001` | evidence | 有效性评估缺少截止点、信任根、政策、撤销或足够新鲜的状态材料 |
+| `identity.reproducibility.unproven` | `ID-REP-001` | evidence | 可复现声明缺少精确输入、独立产出、完整输出身份或逐字节比较 |
+| `identity.relation.inherited` | `ID-REL-001` | identity | 派生或伴随制品继承来源身份、签名、证据、接受状态、能力或未定义等价 |
+
+## 11. 稳定性边界
 
 上述机器码只在当前规范、目录和提案向量中保持草案稳定，尚不构成发行 ABI。提升为稳定接口前必须完成：
 

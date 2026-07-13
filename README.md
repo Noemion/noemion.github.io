@@ -9,7 +9,7 @@
 - `_config.yml` 定义账户站点 URL、仓库身份、语言、Markdown 处理器和构建排除项；账户站点的 `baseurl` 必须保持为空。
 - `.github/workflows/pages.yml` 在 `main` 分支推送时先按 `.ruby-version` 与 `Gemfile.lock` 设置锁定环境、运行路由测试并构建 `_site`，再通过 GitHub 官方 Pages Actions 加入公开 `sitemap.md`、上传并部署。
 - 全部正式页面由 Jekyll 处理：普通页面使用 HTML 正文源，手册与指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。页面数量以 `sitemap.md` 和质量测试的实际结果为准，不在 README 固定重复。
-- `spec/*.md` 保存 END-CORE、END-FMT、END-SRCM、SYN-CORE、DRO-CORE、TEK-CORE、DIA-CORE 与 ADP-CORE 等版本化规范条款。END-CORE 是 Endem 通用内容标准，`spec/profiles/end-p1.json` 是当前封闭内容 Profile，END-FMT 是实验性容器；三层分别验证。DRO-CORE、DIA-CORE 与 ADP-CORE 分别定义一次会话、结构化诊断和外部协议适配的抽象边界，都不建立文件格式。`spec/registry.json` 保存机器可读成熟度和验证映射，`vectors/` 保存语义外壳、专题提案矩阵和实验性规范字节。这些工程源文件由 Jekyll 排除；公开规范页面负责直白解释并链接精确源文件，不能复制另一套条款。
+- `spec/*.md` 保存 END-CORE、END-FMT、END-SRCM、SYN-CORE、DRO-CORE、TEK-CORE、DIA-CORE、ADP-CORE 与 ID-CORE 等版本化规范条款。END-CORE 是 Endem 通用内容标准，`spec/profiles/end-p1.json` 是当前封闭内容 Profile，END-FMT 是实验性容器；三层分别验证。DRO-CORE、DIA-CORE、ADP-CORE 与 ID-CORE 分别定义一次会话、结构化诊断、外部协议适配以及精确内容身份与签名的抽象边界，都不建立文件格式。`spec/registry.json` 保存机器可读成熟度和验证映射，`vectors/` 保存语义外壳、专题提案矩阵和实验性规范字节。这些工程源文件由 Jekyll 排除；公开规范页面负责直白解释并链接精确源文件，不能复制另一套条款。
 - 本地构建基线固定为 `.ruby-version` 中的 Ruby 3.4.10 与 `Gemfile.lock` 中的 Bundler 2.6.9；当前工作区自带的系统 Ruby 不作为发布环境基线。macOS 已安装 Homebrew Ruby 时，先运行 `export PATH="$(brew --prefix ruby@3.4)/bin:$PATH"`，再运行 `bundle config set --local path vendor/bundle`、`bundle install` 和 `bundle exec jekyll build`。
 
 ## Jekyll 源码模型
@@ -63,7 +63,7 @@ badges: ["Documentation"]
 
 新建一套手册时，先在 `_data/manuals.yml` 登记手册级信息与允许的分组；已有手册新增专题不修改该数据文件。`manual_order` 在同一手册内必须唯一，`manual_group` 必须对应已登记分组。手册首页使用 `manual_is_index: true`，术语索引入口使用 `manual_index_entry: true`。
 
-规范登记检查运行 `python3 tests/spec_contract_test.py`，语义向量执行运行 `python3 tests/semantic_vector_test.py`，结果域、时间、否定、量化、测量、复合判断、Synem、Dromen 与 Tekmor 向量分别运行对应的 `tests/*_vector_test.py`；其中 Synem 闭包与激活运行 `python3 tests/synem_vector_test.py`，Dromen 会话契约运行 `python3 tests/dromen_vector_test.py`，Tekmor 证据与评估运行 `python3 tests/tekmor_vector_test.py`。END-P0 结构字节运行 `python3 tests/wire_vector_test.py`，END-P1 完整载荷运行 `python3 tests/p1_payload_test.py`，源码页面检查运行 `python3 tests/site_quality_test.py`。完整发布检查随后运行 `bundle exec jekyll build`，执行 `cp sitemap.md _site/sitemap.md`，再运行 `python3 tests/site_quality_test.py _site`；GitHub Actions 按同一顺序验证并部署。构建产物中的手册目录数据按正式路由排序，不能让文件系统或 Jekyll 页面枚举顺序改变同一提交的输出字节。
+规范登记检查运行 `python3 tests/spec_contract_test.py`，语义向量执行运行 `python3 tests/semantic_vector_test.py`，结果域、时间、否定、量化、测量、复合判断、Synem、Dromen、Tekmor、诊断、适配与精确身份向量分别运行对应的 `tests/*_vector_test.py`；其中 ID-CORE 运行 `python3 tests/identity_vector_test.py`。END-P0 结构字节运行 `python3 tests/wire_vector_test.py`，END-P1 完整载荷运行 `python3 tests/p1_payload_test.py`，源码页面检查运行 `python3 tests/site_quality_test.py`。完整发布检查随后运行 `bundle exec jekyll build`，执行 `cp sitemap.md _site/sitemap.md`，再运行 `python3 tests/site_quality_test.py _site`；GitHub Actions 按同一顺序验证并部署。构建产物中的手册目录数据按正式路由排序，不能让文件系统或 Jekyll 页面枚举顺序改变同一提交的输出字节。
 
 ### 项目时间线配置与嵌入
 
@@ -148,6 +148,8 @@ ADR-0024 与 DRO-CORE 固定 Dromen：它是 Praxor 为一个 Praxe 会话从精
 ADR-0025 与 DIA-CORE 固定跨对象结构化诊断：机器码与人类消息分开，诊断必须固定生产语境、失败层次和类型化位置，并确定性选择唯一主阻断诊断。恢复分类不授予权限，外部协议错误不等于本地结果，披露与资源必须有界；阻断错误不得伴随部分可信成功。当前没有诊断生产器、协议适配器或运行时。
 
 ADR-0026 与 ADP-CORE 固定 Praxor 外部协议适配边界：绑定精确协议版本和对端，能力取交集，外部状态与本地结果分开，映射保留来源和损失，取消不冒充回滚，重试需要幂等证据，异步交付需要完整证据，凭据和网络目标保持最小化。当前没有 MCP、A2A、HTTP、SDK 或其他协议 Profile 和适配器实现。
+
+ADR-0027 与 ID-CORE 固定跨制品精确内容身份与签名边界：完整身份绑定对象语境、算法、长度和摘要，安全引用不依赖名称、路径、URL、build ID 或短显示；签名陈述、验证材料、主体授权、截止点有效性、撤销、决定与可复现性分别判断。裁剪、调试、压缩和迁移制品各有身份及显式关系。当前没有冻结发行算法、签名物理 Profile、证书、透明日志、撤销协议、Semantic Key 或密码组件实现。
 
 主产物流按“来源 → `poie` → Endem → `pleko` → Synem → `tasse` → 确定性封装 → `sphra` → 发布信任包络 → `praxe` → Dromen → Tekmor → 人工或确定性验收”组织。每项正式输入必须有明确生产者，每项正式输出必须有明确消费者或说明它只服务人工检查。
 
