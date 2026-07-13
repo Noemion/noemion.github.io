@@ -370,10 +370,15 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
   letter-spacing:-.055em;line-height:.99;text-wrap:balance
 }
 .portal-introduction h1>span,.portal-introduction h1>strong,.portal-introduction h1 strong>span{display:block}
+.portal-introduction h1 .portal-title-brand{
+  margin-bottom:20px;font-size:.54em;font-weight:680;letter-spacing:.015em;line-height:1;text-wrap:nowrap
+}
 .portal-introduction h1 strong{
-  margin-top:5px;color:var(--portal-ink);font-weight:760;
-  text-decoration-line:underline;text-decoration-color:var(--portal-coral);
-  text-decoration-thickness:.09em;text-underline-offset:.11em
+  color:var(--portal-ink);font-size:.64em;font-weight:760;letter-spacing:-.045em;line-height:1.12
+}
+.portal-introduction h1 strong>span{width:max-content;max-width:100%;text-wrap:nowrap}
+.portal-introduction h1 .portal-title-foundation{
+  margin-top:10px;color:var(--portal-coral);font-size:.86em;letter-spacing:-.035em
 }
 .portal-introduction-summary{
   max-width:510px;margin:34px 0 0;color:var(--muted);font-size:18px;line-height:1.7
@@ -825,6 +830,7 @@ body[data-page-role="portal"] .site-footer{
   .portal-introduction{grid-template-columns:1fr;min-height:0}
   .portal-introduction-copy{min-height:540px;padding:62px 34px 36px}
   .portal-introduction h1{font-size:clamp(42px,9vw,52px)}
+  .portal-introduction h1 strong{font-size:.7em}
   .portal-introduction-visual{min-height:560px}
   .dataflow-field{width:68%}
   .portal-thesis{grid-template-columns:1fr;min-height:0}
@@ -856,6 +862,7 @@ body[data-page-role="portal"] .site-footer{
   .portal-introduction-copy{min-height:500px;padding:48px 24px 30px}
   .portal-eyebrow{margin-bottom:24px;font-size:9px}
   .portal-introduction h1{font-size:42px;line-height:1.02}
+  .portal-introduction h1 strong{font-size:.62em}
   .portal-introduction-summary{margin-top:27px;font-size:16px}
   .portal-actions{align-items:stretch;flex-direction:column}
   .portal-button{width:100%;justify-content:space-between}
@@ -905,10 +912,12 @@ body[data-page-role="portal"] .site-footer{
 
 @media(max-width:380px){
   .portal-introduction h1{font-size:38px}
+  .portal-introduction h1 strong{font-size:.65em}
 }
 
 @media(max-width:340px){
   .portal-introduction h1{font-size:33px}
+  .portal-introduction h1 strong{font-size:.68em}
 }
 
 @media(prefers-reduced-motion:reduce){

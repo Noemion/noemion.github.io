@@ -1,5 +1,10 @@
 # Noemion Pages Repository Rules
 
+- 当前尚未进入代码开发阶段。除非用户以后明确宣布进入代码开发阶段并指定范围，本仓库只维护哲学与语言研究、术语、架构、规范、威胁模型、验证方案、公开文档和网站；不得新增或迁入任何实际项目组件实现。
+- 门户主标题与承担核心主张的大型标题不得使用逗号、句号等标点制造停顿；应按完整语义分行，以排版层级形成节奏。标题必须先说明 Noemion 定义的对象和基础作用，宏大定位只能写成项目使命，不能暗示尚未完成的规范、组件或生态已经建成。
+- 当前禁止 `implementation/`、生产 crate、可执行 CLI、Poiet/Theor/Praxor 源码、运行时、实现型 GitHub Actions、fuzz target、安装包和二进制发行物。不得把语言原型、规范向量检查器、Python 契约测试或页面构建写成“安全核心已经实现”。
+- 现有 `experiments/` 与规范向量只能作为待重新审查的历史研究材料；不得扩展、运行后形成新的实现结论或作为进入组件开发的默认授权。是否保留这些材料由本轮阶段回退审计决定。
+- 网站与规范的自动检查可以继续运行，但只证明页面、登记、条款和向量之间的一致性。组件开发阶段必须由用户明确开启，不能由 ADR、路线图、测试计划或“第一纵向切片”等文字自动触发。
 - 本目录对应 `https://github.com/Noemion/noemion.github.io`，发布地址为 `https://noemion.github.io/`；仓库名和站点域名使用全小写。
 - 本仓库是 GitHub Pages 的 Jekyll 源目录。保留 `_config.yml` 与 `.github/workflows/pages.yml`，不得添加 `.nojekyll`。
 - 站点必须由 Jekyll 生成：公共外壳只维护在 `_layouts/` 与 `_includes/`；普通 HTML 源只保留 Front Matter 和职责对应的 `<main>` 正文，手册 Markdown 只保留 Front Matter 与正文，不复制 `<head>`、站点头部、面包屑、分页、侧栏或页脚。

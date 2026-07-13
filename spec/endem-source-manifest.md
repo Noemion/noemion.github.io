@@ -5,7 +5,7 @@
 - 日期：2026-07-13
 - 状态：实验性 Poiet 输入草案；由 ADR-0014 采用
 - 对象关系：只映射到 `END-P1`；不是 `.endem` 线格式，也不是稳定源语言
-- 实现状态：首个本地 Rust 候选；公开仓库尚未建立
+- 实现状态：仅有来源样例与资料检查器；没有 Poiet 解析实现
 
 ## 1. 范围
 
@@ -19,7 +19,7 @@
 
 **失败：**编码无效、文件或单行超限时，Poiet 必须在解析指令前拒绝，不能产生部分 Endem。
 
-**验证：**`tests/source_manifest_test.py`；首个 Rust 候选的边界测试。
+**验证：**`tests/source_manifest_test.py`；未来 Poiet 与 Theor 的边界测试需在代码阶段开启后建立。
 
 ### END-SRCM-002 — 指令集合封闭
 
@@ -48,7 +48,7 @@
 
 **失败：**未知或不完整转义、role 缺少等号、CSV 元素不符合 END-P1 类型时必须拒绝。
 
-**验证：**`tests/source_manifest_test.py`；首个 Rust 候选的 parser 单元测试。
+**验证：**`tests/source_manifest_test.py`；未来来源解析器单元测试需在代码阶段开启后建立。
 
 ### END-SRCM-004 — 输入顺序不决定对象字节
 
@@ -56,7 +56,7 @@
 
 **失败：**相同规范集合因输入顺序产生不同 `.endem` 字节，或重复身份被静默接受，均不符合本规范。
 
-**验证：**`tests/source_manifest_test.py` 把最小清单映射到 `SV-VALID-MINIMAL-001`；Rust 候选逐字节匹配 `WV-P1-SEMANTIC-ACCEPT-001`。
+**验证：**`tests/source_manifest_test.py` 把最小清单映射到 `SV-VALID-MINIMAL-001`，并由资料检查器逐字节比较 `WV-P1-SEMANTIC-ACCEPT-001`。
 
 ### END-SRCM-005 — 来源、候选与授权不能混合
 
@@ -72,7 +72,7 @@
 
 **失败：**任一阶段失败时只返回诊断，不返回部分可信模型或字节。
 
-**验证：**首个 Rust 候选的 Poiet 测试、END-P1 正反向量和有界变异语料。
+**验证：**当前使用 END-P1 正反向量与资料检查器；未来 Poiet 与 Theor 的实现测试需在代码阶段开启后建立。
 
 ### END-SRCM-007 — 实验入口不得冒充正式语言
 

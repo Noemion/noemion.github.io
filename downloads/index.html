@@ -8,13 +8,13 @@ permalink: "/downloads/index.html"
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>下载</span></nav>
   <header class="section-introduction"><h1>下载与资源</h1><p>当前没有可安装的 endem；这里说明已经公开什么，以及正式发行前还缺什么。</p><div class="badges"><span class="badge">Unreleased</span><span class="badge">Integrity</span><span class="badge">Supply Chain</span></div></header>
-  <section><h2>为什么暂不提供下载</h2><p class="lead">首个 Rust 候选已经具备 Poiet 写入、生产侧结构检查、独立 Theor 和有界变异测试，但实现仓库、跨平台构建、签名、SBOM 与稳定 CLI 契约尚未公开。此时提供二进制，容易让实验 Profile 被误解为稳定发行。</p></section>
+  <section><h2>为什么暂不提供下载</h2><p class="lead">项目尚未进入组件代码开发阶段，因此不存在 Poiet、Theor、Praxor、<code>endem</code> CLI、安装包或二进制。当前公开的是架构、规范和验证方案；把这些资料包装成下载会错误暗示组件已经实现。</p></section>
   <section data-resource-state="unreleased"><h2>正式版本</h2><p>暂未发布；没有有效的安装命令、包名或版本号。</p></section>
   <section><h2>资源状态</h2><ul class="resource-list">
     <li><strong>网站与设计资料</strong><span class="resource-state">已公开</span><p>项目门户、ADR、架构、规范草案与验证路线。</p></li>
     <li><strong>核心、格式与规范向量</strong><span class="resource-state">实验草案已公开</span><p>已有 END-CORE、END-FMT、6 个语义 JSON 向量、6 个 END-P0 结构字节和 13 个 END-P1 字节；稳定 ABI 仍待形成。</p></li>
     <li><strong>P0-W4 语言实验</strong><span class="resource-state">证据已公开</span><p>C/Rust 结构读取原型、机器可读结果和 Linux 模糊测试工作流可供复核；它们不是可安装程序或生产解析器。</p></li>
-    <li><strong>Endem Poiet 与独立 Theor</strong><span class="resource-state">本地候选已验证，尚未公开</span><p>候选固定 Rust 1.97.0、禁止 unsafe 和第三方 crate，并已执行正反向量、差分、变异与对象字节复现。远端源码仓库尚未建立。</p></li>
+    <li><strong>Endem Poiet 与独立 Theor</strong><span class="resource-state">尚未开发</span><p>当前只有职责、信任边界、候选语言和未来验证条件；没有实现仓库、生产源码或可执行程序。</p></li>
     <li><strong>发行制品</strong><span class="resource-state">等待验证</span><p>需要双环境复现、摘要、外部签名、SBOM、供应链声明与撤回机制。</p></li>
   </ul></section>
   <section><h2>发布顺序</h2><div class="table-wrap"><table><thead><tr><th>阶段</th><th>可获取内容</th><th>最低门槛</th></tr></thead><tbody>

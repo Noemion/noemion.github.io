@@ -44,17 +44,17 @@ def validate_registry(registry, spec_text, threat_text, errors):
         expected_documents = {
             "END-CORE": {
                 "version": "0.1.0-draft", "status": "draft",
-                "implementation_status": "partial-local-candidate-unpublished", "wire_status": "unfrozen",
+                "implementation_status": "vector-checker-only", "wire_status": "unfrozen",
                 "path": "spec/endem-core.md",
             },
             "END-FMT": {
                 "version": "0.1.0-draft", "status": "draft",
-                "implementation_status": "local-candidate-unpublished",
+                "implementation_status": "vector-checker-only",
                 "wire_status": "experimental-draft", "path": "spec/endem-format.md",
             },
             "END-SRCM": {
                 "version": "0.1.0-draft", "status": "draft",
-                "implementation_status": "local-candidate-unpublished",
+                "implementation_status": "vector-checker-only",
                 "wire_status": "not-applicable", "path": "spec/endem-source-manifest.md",
             },
         }
@@ -228,9 +228,9 @@ def validate_registry(registry, spec_text, threat_text, errors):
             if field not in clause:
                 errors.append(f"{clause_id}: missing registry field {field}")
         if clause_id.startswith("END-FMT-"):
-            expected_implementation = "local-candidate-unpublished"
+            expected_implementation = "vector-checker-only"
         elif clause_id.startswith("END-SRCM-"):
-            expected_implementation = "local-candidate-unpublished"
+            expected_implementation = "vector-checker-only"
         else:
             expected_implementation = "unimplemented"
         if clause.get("implementation_status") != expected_implementation:
@@ -443,8 +443,8 @@ def validate_public_boundary(errors):
             "Rust 1.97.0",
             "C/Rust 双原型",
             "P1-W1 安全核心",
-            "3,372 个有界变异",
-            "远端仓库尚待创建",
+            "尚未开始",
+            "等待用户明确开启代码开发阶段",
         ),
     }
     for relative_path, tokens in public_contracts.items():

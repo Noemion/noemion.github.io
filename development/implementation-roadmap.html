@@ -21,8 +21,8 @@ permalink: "/development/implementation-roadmap.html"
 
   <section class="content-wide">
     <h2>下一条可执行路径</h2>
-    <p class="callout"><strong>直接结论：</strong>第一实现只交付 <code>poie</code>、<code>elenk</code>、<code>theor</code> 与 <code>peira</code>。不同时创建工具家族，不接模型，不做通用二进制抽象层。</p>
-    <p>第 0 阶段已经产生 END-CORE、END-FMT、END-P0、错误目录和语义/结构向量。ADR-0012 选择 Rust，ADR-0013 以 END-P1 关闭首个字段、排序与引用接口。第 1 阶段的本地工作区已经生成权威字节、执行 Poiet/Theor 正反向量，并为两条读取路径各完成 100,000 次覆盖引导运行；下一步是公开仓库、长时 fuzz 和跨平台复现。</p>
+    <p class="callout"><strong>直接结论：</strong>当前只完成第 0 阶段的规范与验证方案，不创建实现工作区。未来若用户明确开启代码阶段，第一实现才考虑 <code>poie</code>、<code>elenk</code>、<code>theor</code> 与 <code>peira</code>；不同时创建工具家族，不接模型，不做通用二进制抽象层。</p>
+    <p>第 0 阶段已经产生 END-CORE、END-FMT、END-P0、错误目录和语义/结构向量。ADR-0012 把 Rust 记为未来首版候选语言，ADR-0013 以 END-P1 关闭首个字段、排序与引用接口。这些资料只用于评审设计和形成未来验收条件，不表示 Poiet、Theor、CLI 或安全核心已经开始开发。</p>
     <div class="flow"><div class="step">受控来源表达</div><div class="step">投影规则 / 具名决定</div><div class="step">endem poie</div><div class="step">.endem</div><div class="step">endem elenk</div><div class="step">endem theor</div><div class="step">endem peira</div></div>
     <div class="table-wrap"><table><thead><tr><th>职责</th><th>正式输入与输出</th><th>完成标准</th></tr></thead><tbody>
       <tr><td><code>poie</code></td><td>受控来源 + 投影决定 → 六个语义面 → Endem</td><td>相同规范化输入与配置产生相同字节；失败不留下部分制品。</td></tr>
@@ -51,9 +51,9 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td>P0-W2 威胁与限制</td><td>10 类不可信输入威胁、END-P0 的 8 项有限上限和结构错误目录。</td><td>用边界语料、最坏复杂度和目标平台实验验证或调整数值。</td></tr>
       <tr><td>P0-W3 规范向量</td><td>6 个已执行语义向量；END-P0 含 1 个结构接受与 5 个拒绝；END-P1 含 2 个语义接受与 11 个拒绝。</td><td>继续增加累计分配、偏移算术和组合引用边界向量。</td></tr>
       <tr><td>P0-W4 语言与构建</td><td>C/Rust 双原型、6 个规范向量、144 个差分变异、C Sanitizer、10,000 次 libFuzzer、两次重复构建；ADR-0012 选择 Rust 1.97.0。</td><td>继续保留为语言选择证据，不进入生产路径。</td></tr>
-      <tr><td>P1-W1 安全核心</td><td>Rust Poiet 写入、生产侧 Elenk、独立 Theor、统一 CLI、13 个 END-P1 字节向量、3,372 个有界变异、两条 100,000 次 fuzz 与双环境对象复现。</td><td>公开远端仓库与 CI；补充长时 fuzz、更多边界向量、跨平台二进制复现和供应链材料。</td></tr>
+      <tr><td>P1-W1 安全核心</td><td>尚未开始；当前只有职责分离、候选语言、END-P1 规范向量和未来验证条件。</td><td>等待用户明确开启代码开发阶段；届时重新确认仓库、范围、依赖、CI 与停止条件。</td></tr>
     </tbody></table></div>
-    <p>C/Rust 原型仍是可删除实验，不是生产解析器或发行物。首个 Rust 工作区已经重新实现规范结构，没有链接实验脚本；它是候选安全核心，但在远端源码、CI 和发行材料公开前仍不是正式版本。</p>
+    <p>C/Rust 语言材料只保留为可删除的历史研究证据，不是生产解析器、组件源码或发行物。当前没有 Rust 安全核心工作区，也不得因为规范向量存在就自动开始实现。</p>
   </section>
 
   <section class="content-wide">
@@ -78,6 +78,6 @@ permalink: "/development/implementation-roadmap.html"
     </ul>
   </section>
 
-  <section class="content-band"><h2>实现仓库基线</h2><p>本地候选采用 Rust 1.97.0 单一工作区，以独立 crate 分离 Poiet、Theor 与 CLI，并锁定规范提交和权威向量。Poiet 与 Theor 不共享解析代码；第一纵向切片禁止 unsafe 和第三方 crate，提交工具链锁与 Cargo.lock。远端仓库尚待创建。</p></section>
+  <section class="content-band"><h2>未来实现基线</h2><p>当前不创建实现仓库或 Rust 工作区。用户以后明确开启代码阶段时，项目必须重新确认仓库位置，并按 ADR-0012 评估 Rust 1.97.0、Poiet/Theor 独立实现、禁止 unsafe、依赖边界、工具链锁和 Cargo.lock；这些条件现在只是设计约束。</p></section>
   <div class="next-prev"><a href="index.html">← 开发与贡献</a><a href="testing.html">测试与验证 →</a></div>
 </main>

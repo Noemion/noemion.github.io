@@ -97,7 +97,7 @@ DOC_GUIDE_HEADINGS = {
         "从这里开始", "六个语义面", "四个名词", "一个应用", "推荐阅读路径", "当前状态",
     ],
     "docs/installation-and-usage.html": [
-        "当前可用性", "当前候选验证的流程", "发布原则", "命名发布条件",
+        "当前可用性", "未来职责流程", "发布原则", "命名发布条件",
     ],
     "docs/architecture-guide.html": [
         "最小系统图", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
@@ -118,7 +118,7 @@ HOME_HEADINGS = [
     "只保留有独立生命周期的名词",
     "一个入口不等于一个信任域",
     "先证明最小纵向切片",
-    "借鉴工具链思想，不复制工具数量",
+    "借鉴工具链思想不复制工具数量",
     "继续阅读",
 ]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
@@ -153,8 +153,8 @@ APPLICATION_PROJECT_SECTIONS = [
     "继续阅读",
 ]
 APPLICATION_STATUS_DISCLOSURES = (
-    "首个安全核心已经实现",
-    "尚未公开发行",
+    "尚未进入代码开发阶段",
+    "没有可执行组件",
     "参数",
     "稳定 ABI",
     "尚未冻结",
@@ -1085,9 +1085,9 @@ def validate_jekyll_sources():
     if homepage_source.exists():
         homepage_text = homepage_source.read_text()
         for token in (
-            'title: "Noemion · 自然语言目标的确定性工程基础"',
-            '<h1 id="portal-title"><span>Noemion，</span><strong><span>自然语言目标的</span><span>确定性工程基础。</span></strong></h1>',
-            '<p class="portal-introduction-summary">Noemion 把自然语言目标确定性地形成和组合为持久制品，在最小权限下实现，并用有范围的证据验收；Endem 是其中的最小目标制品。</p>',
+            'title: "Noemion · 人工智能时代的自然语言目标规范"',
+            '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>定义人工智能时代的</span><span>自然语言目标规范</span><span class="portal-title-foundation">奠定可验证智能的工程基石</span></strong></h1>',
+            '<p class="portal-introduction-summary">Noemion 正在定义一套面向人工智能时代的目标制品、组合规则与验收边界，让自然语言目标能够被确定地表达、受控地实现并由有范围的证据检验。Endem 是这套体系中的最小目标制品。</p>',
             '<span>了解 Noemion</span>',
             '<span>认识 Endem</span>',
             '<strong>Noemion</strong> 是整个项目、新领域与社区的名称',
@@ -1939,7 +1939,7 @@ def main():
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
         home_source = home.read_text()
-        if '<h1 id="portal-title"><span>Noemion，</span><strong><span>自然语言目标的</span><span>确定性工程基础。</span></strong></h1>' not in home_source:
+        if '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>定义人工智能时代的</span><span>自然语言目标规范</span><span class="portal-title-foundation">奠定可验证智能的工程基石</span></strong></h1>' not in home_source:
             errors.append("index.html: rendered portal must identify Noemion before Endem")
         if home_source.count('class="portal-chapter-title"') != len(HOME_HEADINGS):
             errors.append("index.html: every homepage chapter heading must use the shared symbolic title treatment")

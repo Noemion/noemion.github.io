@@ -7,7 +7,7 @@
       "version": "0.1.0-draft",
       "status": "draft",
       "decision_status": "accepted-scope",
-      "implementation_status": "partial-local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "wire_status": "unfrozen",
       "path": "spec/endem-core.md",
       "scope": "Endem semantic, authority, state, identity, safety and verification core"
@@ -17,7 +17,7 @@
       "version": "0.1.0-draft",
       "status": "draft",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "wire_status": "experimental-draft",
       "path": "spec/endem-format.md",
       "scope": "Endem fixed header, record directory, deterministic payload subset, P0 structural acceptance and P1 closed semantic payload"
@@ -27,7 +27,7 @@
       "version": "0.1.0-draft",
       "status": "draft",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "wire_status": "not-applicable",
       "path": "spec/endem-source-manifest.md",
       "scope": "Experimental deterministic Poiet source manifest mapped to END-P1"
@@ -360,7 +360,7 @@
     {
       "id": "END-FMT-001",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
       "failure_owner": "Poiet and every reader",
       "verification": [
@@ -374,7 +374,7 @@
     {
       "id": "END-FMT-002",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
       "failure_owner": "Poiet and every reader",
       "verification": [
@@ -385,7 +385,7 @@
     {
       "id": "END-FMT-003",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "Poiet and every reader",
       "verification": [
@@ -396,7 +396,7 @@
     {
       "id": "END-FMT-004",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
       "failure_owner": "every reader",
       "verification": [
@@ -407,7 +407,7 @@
     {
       "id": "END-FMT-005",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
       "failure_owner": "Poiet and every reader",
       "verification": [
@@ -419,7 +419,7 @@
     {
       "id": "END-FMT-006",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
       "failure_owner": "every reader",
       "verification": [
@@ -430,7 +430,7 @@
     {
       "id": "END-FMT-007",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
       "failure_owner": "every reader",
       "verification": [
@@ -441,7 +441,7 @@
     {
       "id": "END-FMT-008",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "Poiet and every reader",
       "verification": [
@@ -452,7 +452,7 @@
     {
       "id": "END-FMT-009",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
       "failure_owner": "Poiet and every reader",
       "verification": [
@@ -466,7 +466,7 @@
     {
       "id": "END-FMT-010",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every reader",
       "verification": [
@@ -483,7 +483,7 @@
     {
       "id": "END-FMT-011",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "Poiet and every reader",
       "verification": [
@@ -497,7 +497,7 @@
     {
       "id": "END-FMT-012",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
       "failure_owner": "every reader and release validation",
       "verification": [
@@ -508,7 +508,7 @@
     {
       "id": "END-FMT-013",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "Poiet and every END-P1 reader",
       "verification": [
@@ -523,7 +523,7 @@
     {
       "id": "END-FMT-014",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "Poiet and every END-P1 reader",
       "verification": [
@@ -539,7 +539,7 @@
     {
       "id": "END-SRCM-001",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "Poiet source reader",
       "verification": [
@@ -551,7 +551,7 @@
     {
       "id": "END-SRCM-002",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
       "failure_owner": "Poiet source reader",
       "verification": [
@@ -562,7 +562,7 @@
     {
       "id": "END-SRCM-003",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "Poiet source reader",
       "verification": [
@@ -573,7 +573,7 @@
     {
       "id": "END-SRCM-004",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "Poiet",
       "verification": [
@@ -586,7 +586,7 @@
     {
       "id": "END-SRCM-005",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "Poiet and upstream authoring authority",
       "verification": [
@@ -598,7 +598,7 @@
     {
       "id": "END-SRCM-006",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "Poiet",
       "verification": [
@@ -610,7 +610,7 @@
     {
       "id": "END-SRCM-007",
       "decision_status": "accepted-draft",
-      "implementation_status": "local-candidate-unpublished",
+      "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "release validation",
       "verification": [

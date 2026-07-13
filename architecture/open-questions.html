@@ -7,12 +7,12 @@ permalink: "/architecture/open-questions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>开放问题</span></nav>
-  <header class="content-introduction"><h1>开放问题</h1><p>记录 Endem 体系中尚未通过规范向量、威胁模型、实现原型或正式权利检查回答的问题。</p><div class="badges"><span class="badge">Names Frozen</span><span class="badge">ABI Unfrozen</span><span class="badge">Evidence Required</span></div></header>
+  <header class="content-introduction"><h1>开放问题</h1><p>记录 Endem 体系中尚未通过规范向量、威胁模型、验证方案或正式权利检查回答的问题。</p><div class="badges"><span class="badge">Names Frozen</span><span class="badge">ABI Unfrozen</span><span class="badge">Evidence Required</span></div></header>
 
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
     <p class="lead">ADR-0010 已经采用现行制品、组件、六个语义面、三个制品状态和八个动作。这些名称与职责不再作为开放问题反复讨论。</p>
-    <p>END-CORE 与 END-FMT 已建立语义和容器；ADR-0012 已选择 Rust，ADR-0013 关闭 END-P1 载荷，ADR-0014 又关闭首个实验性来源清单。首个独立 Theor 已用 Rust 重写读取路径；稳定 ABI、END-P1 之外的量化与时间、正式来源语言和求值语言仍未冻结。</p>
+    <p>END-CORE 与 END-FMT 已建立语义和实验性容器设计；ADR-0012 记录未来代码阶段的 Rust 候选，ADR-0013 关闭 END-P1 载荷设计，ADR-0014 关闭首个实验性来源清单设计。当前没有 Theor 或其他组件实现；稳定 ABI、END-P1 之外的量化与时间、正式来源语言和求值语言仍未冻结。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
 
@@ -45,15 +45,15 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-grid">
     <h2>实施与发布条件</h2>
-    <details open><summary>独立 Theor 使用什么实现边界？</summary><p>首个候选同样使用 Rust，但拥有自己的数据结构、CBOR 解码器、验证器和错误实现；它只与 Poiet 共享公开规范和字节向量。是否需要第二种语言，要由真实共同故障和维护成本决定。</p></details>
-    <details><summary>独立 Theor 还缺什么证据？</summary><p>当前已检查依赖树、十三个 END-P1 向量、3,372 个有界变异，并让 Poiet 与 Theor 覆盖引导目标各运行 100,000 次。仍需公开代码审计、长时 fuzz、故障注入和跨平台运行，继续寻找两条路径的共同输入假设。</p></details>
+    <details open><summary>独立 Theor 使用什么实现边界？</summary><p>未来 Theor 必须拥有自己的数据结构、解码器、验证器和错误路径，只与 Poiet 共享公开规范和字节向量。当前没有实现；是否采用 Rust 或第二种语言，必须在用户开启代码阶段后根据共同故障风险和维护成本重新确认。</p></details>
+    <details><summary>独立 Theor 还缺什么证据？</summary><p>当前只有规范向量、资料检查器和未来验证条件。用户开启代码阶段后，才建立依赖审计、差分测试、长时 fuzz、故障注入和跨平台运行，用来寻找两条独立路径的共同输入假设。</p></details>
     <details><summary>名称何时满足正式发布条件？</summary><p>项目内部命名已经冻结，但公开发行前仍需检查目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。审查完成前不得声称商标可用。</p></details>
     <details><summary>怎样证明构建可复现？</summary><p>对象字节、工具二进制和签名真实性是三个不同属性。需要双路径构建、固定环境输入、逐字节比较和独立签名验证。</p></details>
   </section>
 
   <section class="content-band">
     <h2>问题关闭规则</h2>
-    <p>开放问题只有在权威规范或 ADR、正反测试向量、至少一个实现原型和明确失败语义同时存在时才关闭。论文、模型指标、概念演示或单一实现行为不能单独冻结 ABI。</p>
+    <p>设计问题可以由权威规范或 ADR、正反向量和明确失败语义关闭。涉及组件行为、性能或互操作的问题必须保持开放，直到用户明确开启代码阶段并出现相应实现证据；论文、模型指标、概念演示或单一实现行为不能单独冻结 ABI。</p>
   </section>
   <div class="next-prev"><a href="decisions.html">← 架构决策</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
 </main>

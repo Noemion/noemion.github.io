@@ -30,11 +30,11 @@ permalink: "/development/testing.html"
     <li>差异必须被视为实现或规范缺陷，不能用“多数实现一致”掩盖。</li>
   </ul></section>
 
-  <section class="content-rows"><h2>首个候选已经验证什么</h2><p class="callout"><strong>当前证据：</strong>Poiet 从显式来源清单生成 843 字节 END-P1，与权威接受向量逐字节相同；独立 Theor 接受该对象，并分别拒绝未知字段、悬空引用和来源范围越界。</p><ul>
-    <li>Poiet 与 Theor 没有共享解析器、CBOR 解码器、验证器或错误实现；普通依赖树只含工作区内三个 crate。</li>
-    <li>3,372 个单字节翻转与截断样本没有触发 panic，也没有出现语义接受绕过结构拒绝。</li>
-    <li>不同区域设置和构建纪元产生相同对象摘要 <code>d21c96fe…84d2c8b</code>；这只证明对象字节复现，不证明可执行文件跨平台复现。</li>
-    <li>本地 Poiet 与 Theor 覆盖引导目标已各运行 100,000 次；仍缺公开 CI、长时多平台 campaign、故障注入、签名与 SBOM。</li>
+  <section class="content-rows"><h2>当前资料检查能证明什么</h2><p class="callout"><strong>当前证据：</strong>仓库中的 Python 检查器可以读取登记、语义向量、实验字节和来源样例，并比较预期接受或拒绝结果。它们检查规范资料是否自洽，不是 Poiet、Theor 或生产读取器。</p><ul>
+    <li>检查器覆盖已登记字段、引用、来源范围、排序和资源边界案例。</li>
+    <li>规范向量描述未来实现必须共同处理的正反案例，但不证明任何组件已经满足这些要求。</li>
+    <li>当前没有组件依赖树、可执行文件复现、实现级模糊测试、故障注入、签名或 SBOM 证据。</li>
+    <li>用户明确开启代码阶段后，Poiet 与 Theor 才需要分别实现并接受同一组测试。</li>
   </ul></section>
 
   <section class="content-rows"><h2>语义与歧义保留</h2><ul>

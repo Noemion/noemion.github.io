@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0012</span></nav>
-  <header class="content-introduction"><h1>ADR-0012 · 首版安全核心采用 Rust</h1><p>Poiet 与生产读取核心采用安全 Rust；C 原型只保留为差分检查和模糊测试对象，不进入生产信任路径。</p><div class="badges"><span class="badge">Accepted</span><span class="badge">Rust 1.97.0</span><span class="badge">P0-LANG-001</span><span class="badge">Candidate Implemented</span></div></header>
+  <header class="content-introduction"><h1>ADR-0012 · 首版安全核心采用 Rust</h1><p>未来进入代码阶段后，Poiet 与生产读取核心采用安全 Rust；当前只冻结语言选择与约束，不编写组件实现。</p><div class="badges"><span class="badge">Design Accepted</span><span class="badge">Rust 1.97.0</span><span class="badge">P0-LANG-001</span><span class="badge">Implementation Not Started</span></div></header>
 
   <section class="content-stack">
     <h2>决定</h2>
@@ -77,7 +77,7 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
       <li>Rust Poiet 与独立 Theor 必须分别实现完整确定性 CBOR 子集，不能共享解析代码。</li>
       <li>需要增加截断、非最短整数、乱序键、深度、字符串、节点、边和累计分配边界向量。</li>
       <li>需要 Linux 与 macOS 的规范对象字节复现，以及至少两个隔离构建环境的可执行文件比较。</li>
-      <li>后续 P1 候选已为 Poiet 与 Theor 建立独立 cargo-fuzz 目标，并以十三个 END-P1 向量为种子各运行 100,000 次；仍缺长时、多平台和公开 CI 证据。</li>
+      <li>代码阶段开启后，Poiet 与 Theor 必须建立彼此独立的 fuzz 目标，并以 END-P1 正反向量为初始语料；当前没有实现级 fuzz 结果。</li>
       <li>需要在出现真实 FFI、包管理器和发行消费者后再决定 C ABI、动态库或静态链接政策。</li>
     </ul>
   </section>

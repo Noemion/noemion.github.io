@@ -19,9 +19,9 @@ current:
     - label: 已完成
       value: Endem 词汇与应用拓扑决定
     - label: 正在进行
-      value: Rust 最小安全核心工作区
+      value: 规范、威胁模型与验证方案
     - label: 后续工作
-      value: poie/elenk/theor/peira 纵向切片
+      value: 用户明确开启代码阶段后再确定
 
 items:
   - id: scope-and-trust
@@ -41,9 +41,9 @@ items:
     description: 已形成语义与容器条款、END-P0 结构实验、END-P1 封闭载荷、错误目录和正反规范字节，并用 P0-LANG-001 选择首版核心语言。
   - id: endem-core-validation
     state: current
-    label: 正在进行
+    label: 尚未开始
     title: poie/elenk/theor/peira 纵向切片
-    description: 已实现 Rust Poiet、生产侧 Elenk、独立 Theor 和统一 CLI，并通过 END-P1 正反向量、3,372 个有界变异样本与双环境对象字节复现；正在扩大边界语料并准备公开仓库。
+    description: 当前没有组件实现或实现仓库。只有用户明确开启代码开发阶段后，项目才会重新确认仓库、范围、候选语言、依赖和验证门禁。
   - id: synem-binding-release
     state: future
     label: 后续规划

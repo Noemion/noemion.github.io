@@ -11,7 +11,7 @@ permalink: "/specifications/index.html"
   <section>
     <h2>先看哪些规范</h2>
     <p class="lead">先读 Endem，理解一项目标怎样成为可检查制品。再读 Synem，理解多个目标怎样解析依赖。最后读 Tekmor，理解证据能支持什么判断，又不能证明什么。</p>
-    <p>名称、职责、六个语义面、状态、<code>.endem</code> 扩展名和信任边界已经采用。END-P1 已关闭对象载荷，END-SRCM 已关闭首个实验来源清单，本地 Rust 候选已执行两者；Synem/Tekmor 编码、摘要、签名和稳定 ABI 仍未冻结。</p>
+    <p>名称、职责、六个语义面、状态、<code>.endem</code> 扩展名和信任边界已经采用。END-P1 已关闭对象载荷，END-SRCM 已关闭首个实验来源清单；当前只有资料检查器读取这些草案，没有 Rust 组件实现。Synem/Tekmor 编码、摘要、签名和稳定 ABI 仍未冻结。</p>
   </section>
   <section>
     <h2>三项规范</h2>
@@ -26,7 +26,7 @@ permalink: "/specifications/index.html"
     <p class="lead">END-CORE 0.1.0-draft 定义语义边界；END-FMT 0.1.0-draft 定义实验性容器。两者使用唯一条款 ID，并把义务连接到现有向量、计划测试或具名复核权威。</p>
     <div class="table-wrap"><table><thead><tr><th>工程源</th><th>用途</th><th>当前边界</th></tr></thead><tbody>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 语义条款</a></td><td>六个语义面、授权、状态、身份、安全与验证责任。</td><td>END-P1 之外的量化、时间和求值语言仍未冻结。</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 格式条款</a></td><td>固定前导、记录目录、受限 CBOR、结构实验 END-P0 与实现 Profile END-P1。</td><td>END-FMT 0.1.0-draft 尚非稳定 ABI，也没有公开符合性声明。</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 格式条款</a></td><td>固定前导、记录目录、受限 CBOR、结构实验 END-P0 与设计 Profile END-P1。</td><td>END-FMT 0.1.0-draft 尚非稳定 ABI，也没有公开符合性声明。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 Profile</a></td><td>六记录字段键、嵌套 map、枚举、规范数组顺序和资源限制。</td><td>只覆盖 nascent 与 kine，不预留尚无消费者的未来字段。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-source-manifest.md">END-SRCM 来源清单</a></td><td>首个 Poiet 输入的指令、转义、基数、授权边界和 END-P1 映射。</td><td>是可替换的实验接口，不是稳定源语言或 Endem 身份。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读登记</a></td><td>规范、术语、成熟度、实现状态与验证引用。</td><td><code>accepted</code> 不表示稳定发行；计划测试不能写成已覆盖。</td></tr>

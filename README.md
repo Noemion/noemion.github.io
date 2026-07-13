@@ -2,6 +2,8 @@
 
 本仓库是 [`Noemion/noemion.github.io`](https://github.com/Noemion/noemion.github.io) 的 Jekyll 源目录，发布于 <https://noemion.github.io/>。Noemion 是项目、新领域与社区的总名和品牌；站点在这个总名之下定义 Endem、Synem、Dromen、Tekmor、Poiet、Theor、Praxor 与唯一 `endem` 应用，一级入口负责项目、规范、应用、指南和开发信息，`endem/docs/` 承载 CLI 使用手册。
 
+当前尚未进入组件代码开发阶段。本仓库只维护哲学与语言研究、术语、架构、规范、威胁模型、验证方案、公开文档和网站；Poiet、Theor、Praxor 与 `endem` CLI 均没有实现源码。规范检查脚本只能证明资料一致，不能被描述为组件实现。
+
 ## Jekyll 与发布
 
 - `_config.yml` 定义账户站点 URL、仓库身份、语言、Markdown 处理器和构建排除项；账户站点的 `baseurl` 必须保持为空。
@@ -119,7 +121,7 @@ ADR-0011 规定 END-FMT 0.1 的实验性容器边界：64 字节固定前导、4
 
 ADR-0012 根据 P0-LANG-001 的 C/Rust 双原型、144 个差分变异、Sanitizer、10,000 次 libFuzzer 与重复构建证据，选择 Rust 1.97.0 作为 Poiet 与生产读取核心语言。第一纵向切片禁止 unsafe 与第三方 crate；C 原型只保留为非生产差分预言机。Theor 仍必须另写解析实现。
 
-ADR-0013 保留 END-P0 作为结构实验，并建立 profile 2 的 END-P1 作为首个实现 Profile。END-P1 固定六个记录的字段键、嵌套 map、枚举、规范数组顺序与引用闭包；当前 13 个字节向量覆盖 2 个语义接受和 11 类确定性拒绝，其中包含非空 `apor`、截断、目录乱序、非最短 CBOR 以及资源边界。它仍不是稳定 ABI。
+ADR-0013 保留 END-P0 作为结构实验，并建立 profile 2 的 END-P1 作为首个设计 Profile。END-P1 固定六个记录的字段键、嵌套 map、枚举、规范数组顺序与引用闭包；当前 13 个字节向量供资料检查器比较 2 个语义接受和 11 类预期拒绝，其中包含非空 `apor`、截断、目录乱序、非最短 CBOR 以及资源边界。它仍不是稳定 ABI，也没有组件实现。
 
 ADR-0014 采用首个实验性 Poiet 来源清单。它用直白的逐行指令分开自然语言来源、授权投影和未决 <code>apor</code>，并确定性映射到 END-P1；它不是稳定源语言，正式语言出现后直接删除。
 

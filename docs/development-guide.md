@@ -18,14 +18,14 @@ badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 
 第一阶段只做规范和最小安全核心，不引入模型、LLVM、MLIR、多格式抽象或大型框架。
 
-ADR-0012 已选择 Rust 1.97.0 作为 Poiet 与生产读取核心语言。第一纵向切片禁止 `unsafe` 和第三方 crate，固定工具链、提交 `Cargo.lock`，并在 release 构建中继续检查整数溢出。C 原型只作差分与模糊测试依据，不进入生产代码。
+ADR-0012 已把 Rust 1.97.0 选为未来 Poiet 与生产读取核心的候选语言。项目尚未进入代码开发阶段；禁止 `unsafe`、第三方 crate、工具链锁、`Cargo.lock` 与 release 溢出检查都只是未来实现门禁。C/Rust 语言材料只作历史研究依据，不进入生产代码。
 
-首个本地候选已经落实这条基线：Poiet、Theor 与 CLI 分为三个工作区 crate，Theor 另写 CBOR 解码和验证路径，十三个 END-P1 字节向量进入回归测试。Poiet 与 Theor fuzz 目标又各完成 100,000 次本机运行；当前重点转为公开仓库、长时 fuzz 和跨平台复现。
+当前没有 Poiet、Theor、CLI 工作区或实现级 fuzz。十三个 END-P1 字节向量用于检查规范资料，不能证明解析器、写入器或独立读取路径存在。只有用户明确开启代码阶段后，以下开发纪律才进入实施：
 
 - 冻结 `rhem/semion/skena/telis/krin/apor` 的最小语义、不变量、错误和资源限制。
 - 保持规范写入器、生产侧结构检查与 `endem poie/elenk` 的确定性边界。
 - 继续让 `endem theor` 独立实现读取、字段与引用验证，禁止共享生产解析代码。
-- 扩大合法、边界、畸形和对抗语料，并把本地覆盖引导目标升级为长时公开 CI、故障注入和跨平台复现。
+- 规划合法、边界、畸形和对抗语料，以及未来长时公开 CI、故障注入和跨平台复现。
 
 ## 规范与 ADR 先行
 

@@ -7,12 +7,12 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0013</span></nav>
-  <header class="content-introduction"><h1>ADR-0013 · END-P1 封闭语义载荷</h1><p>保留 END-P0 作为结构实验，新建 END-P1 作为首个实现 Profile，明确六个记录的字段键、枚举、排序和引用规则。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">END-P1</span><span class="badge">Profile 2</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>ADR-0013 · END-P1 封闭语义载荷</h1><p>保留 END-P0 作为结构实验，新建 END-P1 作为首个设计 Profile，明确六个记录的字段键、枚举、排序和引用规则。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">END-P1</span><span class="badge">Profile 2</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
     <h2>直接决定</h2>
     <p class="lead">Poiet 的首个纵向切片不写 END-P0。END-P0 只保留为固定头部、目录和受限 CBOR 的结构实验；生产候选改用 <code>profile_id=2</code> 的 END-P1，并且必须在六个记录内遵守封闭字段 schema。</p>
-    <p>这避免两种错误：一是把六个空映射误称为 Endem，二是在实现仓库里私自发明字段。END-P1 仍是实验性实现 Profile，不是稳定 ABI；开发阶段发现反例时可以直接修订，但必须同步 ADR、Profile、正反字节向量和两个读取路径。</p>
+    <p>这避免两种错误：一是把六个空映射误称为 Endem，二是让未来实现私自发明字段。END-P1 仍是实验性设计 Profile，不是稳定 ABI；发现反例时可以直接修订，但必须同步 ADR、Profile、正反字节向量和验证方案。</p>
   </section>
 
   <section class="content-wide">
@@ -51,7 +51,7 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
 
   <section class="content-band">
     <h2>进入实现的条件</h2>
-    <p>END-P1 只有在完整语义接受向量、未知字段拒绝、悬空引用拒绝和来源范围拒绝都形成规范字节，并由独立测试解码后，才允许建立生产 Poiet 工作区。该条件已经满足：首个本地 Rust 候选分别重写 Poiet 与 Theor 路径，测试脚本没有链接进实现。远端仓库与稳定符合性声明仍未形成。</p>
+    <p>END-P1 的接受、未知字段、悬空引用和来源范围向量已经形成，并由资料检查器读取；这只满足未来实现前的规范准备条件。项目尚未进入代码开发阶段，因此不得建立生产 Poiet 工作区，也没有 Poiet/Theor 实现或符合性声明。</p>
   </section>
   <div class="next-prev"><a href="adr-0012-rust-core-language.html">← ADR-0012</a><a href="adr-0014-source-manifest.html">ADR-0014 →</a></div>
 </main>
