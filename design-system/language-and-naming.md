@@ -36,7 +36,7 @@ https://www.etymonline.com/word/-eme
 
 语音合成、自动转写和语音模型可以用于发现风险，但不能替代人类证据。模型输出仍是不可信候选；未来若支持口述动作，系统必须显示识别出的精确机器请求并按授权边界确认，不能凭转写或置信度直接执行。
 
-当前首轮风险把 `Iknem`、`Ktisor/ktise`、`sphra` 与 `kine/mene` 列为优先复核，把 Endem/Synem 列为成对听辨重点。其余名称没有因此自动通过。正式证据、风险更新和停止条件维护在 [`name-audit.md`](name-audit.md)，规范门禁见 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html)。
+当前首轮风险把 `Iknem`、`Ktisor/ktise`、`sphra` 与 `kine/mene` 列为优先复核，把 Endem/Synem 列为成对听辨重点。其余名称没有因此自动通过。发现阶段、独立听者、60 个判断、停止规则和证据记录见[术语与读音验证指南](../docs/terminology-and-pronunciation.html)；风险更新维护在 [`name-audit.md`](name-audit.md)，规范门禁见 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html)。
 
 ## 写作原则
 

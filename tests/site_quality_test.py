@@ -113,6 +113,7 @@ REQUIRED_CORE_ROUTES = {
 DOC_GUIDE_ORDER = [
     "docs/getting-started.html",
     "docs/installation-and-usage.html",
+    "docs/terminology-and-pronunciation.html",
     "docs/architecture-guide.html",
     "docs/development-guide.html",
     "docs/endem-reference.html",
@@ -124,6 +125,10 @@ DOC_GUIDE_HEADINGS = {
     ],
     "docs/installation-and-usage.html": [
         "当前可用性", "未来职责流程", "发布原则", "命名发布条件",
+    ],
+    "docs/terminology-and-pronunciation.html": [
+        "直接结论", "证据适用边界", "两阶段验证", "任务与材料", "通过与停止规则",
+        "证据记录", "人工智能只做辅助探针", "当前状态",
     ],
     "docs/architecture-guide.html": [
         "最小系统图", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
@@ -660,6 +665,24 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "sphra",
             "kine",
             "No Voice Interface",
+        ),
+    },
+    "docs/terminology-and-pronunciation.html": {
+        "required": (
+            "ISO 704:2022",
+            "ISO 9241-11:2018",
+            "RFC 5646 / BCP 47",
+            "W3C Pronunciation Lexicon Specification 1.0",
+            "ITU-T P.800",
+            "ITU-T P.808",
+            "NISTIR 8429",
+            "至少 24 名",
+            "至少收集 60 个",
+            "rule of three",
+            "5 至 15 个刺激",
+            "误选成另一个现行名称",
+            "参与者标识必须假名化",
+            "尚未执行上述人类研究",
         ),
     },
     "endem/docs/safety.html": {
@@ -2701,6 +2724,54 @@ def main():
     ):
         if token not in getting_started_text:
             errors.append(f"getting started guide missing pronunciation status boundary: {token}")
+    terminology_guide_text = (
+        SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md"
+    ).read_text()
+    for token in (
+        "两个阶段不能使用同一批人",
+        "同一参与者不能为同一名称重复贡献判断",
+        "不证明所有人、口音、设备和环境下都不会出错",
+        "不能进入人类样本数",
+        "Noemion 尚未执行上述人类研究",
+    ):
+        if token not in terminology_guide_text:
+            errors.append(f"terminology guide missing human-evidence boundary: {token}")
+    name_maturity_contracts = {
+        "about/background.html": (
+            "项目已接受 Endem 所指的最小制品职责",
+            "现行拼写和读音仍须通过发行名称门禁",
+        ),
+        "specifications/index.html": (
+            "项目已经采用术语职责",
+            "具体发行拼写和读音仍未通过名称门禁",
+        ),
+        "docs/installation-and-usage.md": (
+            "Endem 只通过了有日期的精确工程名初筛",
+            "术语与读音验证指南",
+        ),
+        "docs/specifications-reference.md": (
+            "固定术语职责",
+            "没有证明现行拼写或读音已经通过",
+        ),
+        "design-system/tool-project.md": (
+            "只承担已接受的设计职责",
+            "具体发行拼写和读音仍受 ADR-0034 约束",
+        ),
+    }
+    for relative_path, required_tokens in name_maturity_contracts.items():
+        contract_text = (SOURCE_ROOT / relative_path).read_text()
+        for token in required_tokens:
+            if token not in contract_text:
+                errors.append(f"{relative_path} missing name-maturity boundary: {token}")
+    for relative_path, forbidden in {
+        "about/background.html": "已接受 Endem 词汇",
+        "specifications/index.html": "名称、职责、六个语义面",
+        "docs/installation-and-usage.md": "Endem 已通过互联网",
+        "docs/specifications-reference.md": "固定现行词汇",
+        "design-system/tool-project.md": "子命令名是已接受词汇",
+    }.items():
+        if forbidden in (SOURCE_ROOT / relative_path).read_text():
+            errors.append(f"{relative_path} retains overclaimed name maturity: {forbidden}")
     directory_css = DIRECTORY_CSS.read_text()
     for token in (
         "background:color-mix(in srgb,var(--paper) 90%,transparent)",

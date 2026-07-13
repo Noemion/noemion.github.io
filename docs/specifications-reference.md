@@ -6,7 +6,7 @@ footer_text: "Noemion · 规范参考指南"
 permalink: "/docs/specifications-reference.html"
 manual_id: "docs"
 manual_group: "reference"
-manual_order: 6
+manual_order: 7
 nav_title: "规范参考指南"
 page_heading: "Noemion 规范参考指南"
 page_lead: "理解 Endem、Synem、Dromen、Iknem、跨制品边界、成熟度标记与 ADR 的权威顺序。"
@@ -63,6 +63,6 @@ badges: ["Authority", "Maturity", "ADR"]
 
 ## ADR 与开放问题
 
-[ADR-0010](../architecture/adr-0010-native-lexicon.html)至 [ADR-0014](../architecture/adr-0014-source-manifest.html)固定现行词汇、Endem 格式、Profile 与来源清单；[ADR-0015](../architecture/adr-0015-result-domains.html)至 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)固定判断、时间、否定、量化、测量与复合边界；[ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html)至 [ADR-0030](../architecture/adr-0030-endem-content-and-authorization-companions.html)固定组合、证据、内容分层、会话、诊断、适配、精确身份、文本解释、授权决定以及 Endem 内容与授权伴随关系。END-P1 内的权威字段只是待解析选择器，独立文件最多达到 Profile 接受；完整内容接受还需要精确绑定的外部授权决定。ADR-0008 和 ADR-0009 只保存被取代的公开设计历史。具体 Profile、物理编码与发行治理集中在[开放问题](../architecture/open-questions.html)。
+[ADR-0010](../architecture/adr-0010-native-lexicon.html)至 [ADR-0014](../architecture/adr-0014-source-manifest.html)固定术语职责、Endem 格式、Profile 与来源清单；[ADR-0015](../architecture/adr-0015-result-domains.html)至 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)固定判断、时间、否定、量化、测量与复合边界；[ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html)至 [ADR-0030](../architecture/adr-0030-endem-content-and-authorization-companions.html)固定组合、证据、内容分层、会话、诊断、适配、精确身份、文本解释、授权决定以及 Endem 内容与授权伴随关系。[ADR-0031](../architecture/adr-0031-release-name-collision-gate.html)至 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html)固定名称迁移和发行门禁，但没有证明现行拼写或读音已经通过。END-P1 内的权威字段只是待解析选择器，独立文件最多达到 Profile 接受；完整内容接受还需要精确绑定的外部授权决定。ADR-0008 和 ADR-0009 只保存被取代的公开设计历史。具体 Profile、物理编码与发行治理集中在[开放问题](../architecture/open-questions.html)，人类名称证据按[术语与读音验证指南](terminology-and-pronunciation.html)形成。
 
 面向标准化时，规范还需关联互操作配置、正反向量、一致性测试、安全分析和版本演进。面向研究与知识产权时，还应关联假设、现有技术、实验、贡献与公开披露记录。

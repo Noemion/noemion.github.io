@@ -6,7 +6,7 @@ footer_text: "Noemion · 开发指南"
 permalink: "/docs/development-guide.html"
 manual_id: "docs"
 manual_group: "guides"
-manual_order: 4
+manual_order: 5
 nav_title: "开发指南"
 page_heading: "Noemion 开发指南"
 page_lead: "面向 Endem 规范、安全核心、独立 Theor 与隔离 Drasor 的开发纪律。"

@@ -6,7 +6,7 @@ footer_text: "Noemion · Endem 应用参考"
 permalink: "/docs/endem-reference.html"
 manual_id: "docs"
 manual_group: "reference"
-manual_order: 5
+manual_order: 6
 nav_title: "Endem 应用参考"
 page_heading: "Endem 应用参考"
 page_lead: "一个公开 CLI、八个短动作、三个不能合并的信任域。"

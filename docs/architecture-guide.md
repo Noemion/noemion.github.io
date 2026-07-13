@@ -6,7 +6,7 @@ footer_text: "Noemion · 架构设计指南"
 permalink: "/docs/architecture-guide.html"
 manual_id: "docs"
 manual_group: "guides"
-manual_order: 3
+manual_order: 4
 nav_title: "架构设计指南"
 page_heading: "Noemion 架构设计指南"
 page_lead: "从 Endem 到 Iknem，理解三个实现域、四个名词和每道信任边界。"

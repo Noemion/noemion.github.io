@@ -61,7 +61,7 @@ ktise elenk pleko tasse sphra theor drase peira
 | Endem / Synem | 共同结尾显示词族，也可能在句中、口音或弱信号下被混淆 | 中风险；必须做成对听辨 |
 | Noemion、Dromen、Theor、Drasor、其余动作和语义面 | 一个拼写可能对应多个元音、重音或听写结果，目前没有人类测试记录 | 未验证；不能因没有显著难点而自动通过 |
 
-正式口头证据必须按 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html) 保存目标语言、BCP 47 标签、IPA、普通拼读提示、参与者背景、首次朗读、句中听写、成对混淆和原始结果。W3C 的 [Pronunciation Lexicon Specification](https://www.w3.org/TR/pronunciation-lexicon/)说明专名可能需要显式书写—读音映射；GNU 的 [Names](https://www.gnu.org/prep/standards/html_node/Names.html)规则要求名称传达含义而不是只追求简短。TTS、ASR 和语音模型只能补充寻找反例，不能替代人类证据或取得语义权威。
+正式口头证据必须按 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html) 保存目标语言、BCP 47 标签、IPA、普通拼读提示、参与者背景、首次朗读、句中听写、成对混淆和原始结果。[术语与读音验证指南](../docs/terminology-and-pronunciation.html)进一步规定独立参与者、两阶段任务、60 个首次判断、停止规则和最小记录。W3C 的 [Pronunciation Lexicon Specification](https://www.w3.org/TR/pronunciation-lexicon/)说明专名可能需要显式书写—读音映射；GNU 的 [Names](https://www.gnu.org/prep/standards/html_node/Names.html)规则要求名称传达含义而不是只追求简短。TTS、ASR 和语音模型只能补充寻找反例，不能替代人类证据或取得语义权威。
 
 ## 可自动复查的精确查询
 
