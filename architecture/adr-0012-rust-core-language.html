@@ -1,22 +1,22 @@
 ---
 layout: default
-title: "ADR-0012 · 首版安全核心采用 Rust"
+title: "ADR-0012 · 未来安全核心的 Rust 基线"
 page_role: "content"
 footer_text: "Noemion · ADR-0012"
 permalink: "/architecture/adr-0012-rust-core-language.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0012</span></nav>
-  <header class="content-introduction"><h1>ADR-0012 · 首版安全核心采用 Rust</h1><p>未来进入代码阶段后，Poiet 与生产读取核心采用安全 Rust；当前只冻结语言选择与约束，不编写组件实现。</p><div class="badges"><span class="badge">Design Accepted</span><span class="badge">Rust 1.97.0</span><span class="badge">P0-LANG-001</span><span class="badge">Implementation Not Started</span></div></header>
+  <header class="content-introduction"><h1>ADR-0012 · 未来安全核心的 Rust 基线</h1><p>若用户明确开启代码阶段，Poiet 与生产读取核心以安全 Rust 作为实现基线；当前只保存设计约束和历史研究，不编写组件。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">Rust 1.97.0 Baseline</span><span class="badge">Historical Evidence</span><span class="badge">Implementation Not Started</span></div></header>
 
   <section class="content-stack">
     <h2>决定</h2>
-    <p class="lead">第一条“poie → elenk”纵向切片使用 Rust 1.97.0 stable 编写 Poiet 与生产读取核心。首版禁止 <code>unsafe</code>，不引入第三方 crate，所有不可信偏移、长度、计数和对齐使用显式受检算术，发行构建继续启用溢出检查。</p>
+    <p class="lead">如果代码阶段以后开启，第一条“poie → elenk”纵向切片以 Rust 1.97.0 stable 作为重新评审起点。未来首版禁止 <code>unsafe</code>，不引入第三方 crate，所有不可信偏移、长度、计数和对齐使用显式受检算术，发行构建继续启用溢出检查。</p>
     <p>这项决定不要求整个 Noemion 生态只使用 Rust。Praxor 适配器、界面、协议桥接和未来外部工具可以采用适合自身消费者的语言。Theor 必须另写解析结构和错误路径；即使以后也使用 Rust，也不得复用 Poiet 解析代码、生成代码或错误分类实现。</p>
   </section>
 
   <section class="content-wide">
-    <h2>实验怎样进行</h2>
+    <h2>历史实验怎样进行</h2>
     <div class="table-wrap"><table><thead><tr><th>检查</th><th>实际输入</th><th>结果</th><th>不能据此推出什么</th></tr></thead><tbody>
       <tr><td>规范向量</td><td>1 个结构接受、5 个确定拒绝 END-P0 字节</td><td>C 与 Rust 6/6 命中同一预期。</td><td>没有验证完整 CBOR 或 END-CORE 语义。</td></tr>
       <tr><td>差分变异</td><td>截断、128 个分布式单字节翻转、尾随字节，共 144 例</td><td>两个原型给出相同首个错误类别，无崩溃。</td><td>不等于所有错误优先级已经覆盖。</td></tr>
@@ -41,14 +41,14 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
   </section>
 
   <section class="content-wide">
-    <h2>采用的构建政策</h2>
+    <h2>未来代码阶段的构建政策</h2>
     <ul>
-      <li>首个实现固定 Rust 1.97.0；升级需要重新运行规范向量、差分、模糊和重复构建。</li>
+      <li>代码阶段开启时先以 Rust 1.97.0 为评审基线；若当时工具链已变化，必须记录升级 ADR 并重新评估规范向量、差分、模糊和重复构建方案。</li>
       <li>仓库提交 <code>rust-toolchain.toml</code> 与 <code>Cargo.lock</code>，发布不能依赖网络“最新版本”。</li>
       <li>第一纵向切片使用 <code>#![forbid(unsafe_code)]</code>，CI 同时拒绝警告；任何未来 unsafe 提案必须单独 ADR、最小封装和 Miri/Sanitizer/模糊证据。</li>
       <li>第一纵向切片不使用第三方 crate。新增依赖必须说明不可替代消费者、许可证、维护状态、供应链边界和删除条件。</li>
       <li>release profile 保持整数溢出检查；不得用 wrapping 运算解释不可信结构字段。</li>
-      <li>C 原型保留在 <code>experiments/</code>，只消费规范字节并给出差分结果，不链接进 Poiet、Theor 或 CLI。</li>
+      <li>C 原型当前冻结在 <code>experiments/</code> 作为历史材料，不自动运行或扩展；未来即使复用，也只能消费规范字节并给出差分结果，不能链接进 Poiet、Theor 或 CLI。</li>
     </ul>
   </section>
 

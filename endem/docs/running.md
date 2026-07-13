@@ -64,7 +64,7 @@ Praxor 为一次会话建立 Dromen。Dromen 只披露当前任务所需的 Ende
 MCP 和 A2A 只适合作为 Praxor 外缘的协议适配器：
 
 - [MCP 2025-11-25 稳定规范](https://modelcontextprotocol.io/specification/2025-11-25)；2026-07-28 发布候选含破坏性变化，正式发布并重验前不采用
-- [A2A 1.0 · v1.0.1 文档快照](https://a2a-protocol.org/v1.0.1/specification/)
+- [A2A 1.0 版本化规范](https://a2a-protocol.org/v1.0.0/specification/)
 
 远端工具说明、Agent Card、任务状态、参数结构和返回内容均是不可信声明，不能直接成为能力授权、Endem 状态或最终决定。A2A 的补丁号只固定查阅的文档快照，不进入协议协商。
 

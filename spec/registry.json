@@ -60,7 +60,7 @@
       "version": "0.1.0-draft",
       "status": "experimental-design-profile",
       "path": "spec/profiles/end-p1.json",
-      "scope": "First closed semantic payload profile for Poiet, elenk, Theor and peira"
+      "scope": "First closed semantic payload design profile for future Poiet, elenk, Theor and peira"
     }
   ],
   "experiments": [
@@ -88,7 +88,7 @@
     {"term": "apor", "kind": "semantic-facet", "decision_status": "accepted", "definition": "可表达但尚未获授权决定的投影缺口"},
     {"term": "wire-format", "kind": "interface", "decision_status": "accepted-draft", "definition": "END-FMT 定义的实验性物理字节编码；尚非稳定 ABI"},
     {"term": "END-P0", "kind": "profile", "decision_status": "experimental", "definition": "只用于结构向量和跨语言实验的有限符合性 Profile"},
-    {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "用于首个实现纵向切片的封闭六记录语义载荷 Profile"},
+    {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "用于未来首条实现路径评审的封闭六记录语义载荷设计 Profile"},
     {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 Poiet 使用的实验性逐行来源清单；不是稳定源语言"}
   ],
   "threats": [

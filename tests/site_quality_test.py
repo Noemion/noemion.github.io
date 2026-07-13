@@ -910,6 +910,14 @@ def validate_jekyll_sources():
     gem_lock = SOURCE_ROOT / "Gemfile.lock"
     gitignore = SOURCE_ROOT / ".gitignore"
     pages_workflow = SOURCE_ROOT / ".github" / "workflows" / "pages.yml"
+    workflow_files = sorted(
+        path.name for path in (SOURCE_ROOT / ".github" / "workflows").glob("*.yml")
+    )
+    if workflow_files != ["pages.yml"]:
+        errors.append(
+            "design stage permits only the documentation Pages workflow, "
+            f"got {workflow_files}"
+        )
     if not ruby_version.exists() or ruby_version.read_text().strip() != "3.4.10":
         errors.append(".ruby-version must pin the local Jekyll build baseline to 3.4.10")
     if not gem_lock.exists() or "BUNDLED WITH\n   2.6.9" not in gem_lock.read_text():
@@ -1378,14 +1386,21 @@ def validate_jekyll_sources():
 
     external_boundary_contracts = {
         "architecture/decisions.html": (
-            "A2A 1.0 · v1.0.1 文档快照",
+            "A2A 1.0 版本化规范",
             "补丁号不进入协议协商",
             "github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai",
             "2026-07-28 发布候选",
             "敏感内容不得默认导出",
+            "NIST AI RMF 与 GenAI Profile",
+            "外部协议适配不变量",
+            "身份不等于权威",
+            "外部状态不等于制品状态",
+            "能力声明不等于实时句柄",
+            "遥测单向外送",
+            "撤销与重放显式",
         ),
         "components/praxor.html": (
-            "A2A 1.0 · v1.0.1 文档快照",
+            "A2A 1.0 版本化规范",
             "令牌必须绑定目标资源",
             "github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai",
             "默认不导出正文",
@@ -1397,7 +1412,7 @@ def validate_jekyll_sources():
             "不进入 Endem 编码、Tekmor 身份或最终决定",
         ),
         "endem/docs/running.md": (
-            "A2A 1.0 · v1.0.1 文档快照",
+            "A2A 1.0 版本化规范",
             "2026-07-28 发布候选",
             "默认不导出正文",
             "不构成 Tekmor 身份",

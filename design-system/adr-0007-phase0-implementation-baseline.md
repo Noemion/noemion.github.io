@@ -83,7 +83,7 @@ tools/       最小 CLI 外壳与一致性运行器
 - GDB separate debug files：https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Separate-Debug-Files.html
 - Reproducible Builds `SOURCE_DATE_EPOCH`：https://reproducible-builds.org/specs/source-date-epoch/
 - MCP 2025-11-25：https://modelcontextprotocol.io/specification/2025-11-25
-- A2A 1.0 规范，文档快照 v1.0.1：https://a2a-protocol.org/v1.0.1/specification/
+- A2A 1.0 版本化规范：https://a2a-protocol.org/v1.0.0/specification/
 - JSON Schema 2020-12：https://json-schema.org/draft/2020-12
 - OpenTelemetry GenAI 语义约定（Development）：https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai
 - OpenTelemetry GenAI 独立语义仓库：https://github.com/open-telemetry/semantic-conventions-genai

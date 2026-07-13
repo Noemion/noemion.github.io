@@ -7,11 +7,11 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的原生语义、实验性容器、来源清单、安全核心语言、单一命令面和组件边界。</p><div class="badges"><span class="badge">ADR-0010 Accepted</span><span class="badge">ADR-0012 Accepted</span><span class="badge">ADR-0014 Draft</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的原生语义、实验性容器、来源清单、未来安全核心语言基线、单一命令面和组件边界。</p><div class="badges"><span class="badge">ADR-0010 Accepted</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>定义六个语义面；<a href="adr-0011-endem-container.html">ADR-0011</a>定义字节边界；<a href="adr-0012-rust-core-language.html">ADR-0012</a>选择 Rust；<a href="adr-0013-end-p1-payload.html">ADR-0013</a>关闭 END-P1 载荷；<a href="adr-0014-source-manifest.html">ADR-0014</a>定义首个 Poiet 来源清单。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>定义六个语义面；<a href="adr-0011-endem-container.html">ADR-0011</a>定义实验字节边界；<a href="adr-0012-rust-core-language.html">ADR-0012</a>记录未来 Rust 基线；<a href="adr-0013-end-p1-payload.html">ADR-0013</a>关闭 END-P1 设计载荷；<a href="adr-0014-source-manifest.html">ADR-0014</a>定义实验来源清单。</p>
     <p>被保留的安全原则已经重新映射到 Poiet、Theor、Praxor、Dromen 和 Tekmor。历史词只解释为什么迁移，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -29,8 +29,8 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0009-propositional-kernel.html">ADR-0009 Endem 命题投影语义核</a></td><td>Superseded by ADR-0010</td><td>保留结构显示与未确定分层；五组字段和目标力量模型已取代。</td></tr>
       <tr><td><a href="adr-0010-native-lexicon.html">ADR-0010 原生词汇与事态分层</a></td><td>Accepted</td><td>当前六个语义面、一个根 skena、phain 比较、原生制品/组件/动作与生命周期。</td></tr>
       <tr><td><a href="adr-0011-endem-container.html">ADR-0011 Endem 实验性容器格式</a></td><td>Accepted Draft</td><td>采用固定前导、定宽目录、六记录、受限确定性 CBOR 与 END-P0；尚非稳定 ABI。</td></tr>
-      <tr><td><a href="adr-0012-rust-core-language.html">ADR-0012 首版安全核心采用 Rust</a></td><td>Accepted</td><td>Poiet 与生产读取核心固定 Rust 1.97.0、安全子集和零第三方依赖；C 只作非生产差分预言机。</td></tr>
-      <tr><td><a href="adr-0013-end-p1-payload.html">ADR-0013 END-P1 封闭语义载荷</a></td><td>Accepted Draft</td><td>END-P0 保留为结构实验；END-P1 为首个实现固定六记录字段、枚举、规范排序和引用闭包。</td></tr>
+      <tr><td><a href="adr-0012-rust-core-language.html">ADR-0012 未来安全核心的 Rust 基线</a></td><td>Accepted Design</td><td>若用户开启代码阶段，Poiet 与生产读取核心以 Rust 1.97.0 和安全子集作为重新评审起点；当前没有实现工作区。</td></tr>
+      <tr><td><a href="adr-0013-end-p1-payload.html">ADR-0013 END-P1 封闭语义载荷</a></td><td>Accepted Draft</td><td>END-P0 保留为结构实验；END-P1 作为首个设计 Profile 固定六记录字段、枚举、规范排序和引用闭包。</td></tr>
       <tr><td><a href="adr-0014-source-manifest.html">ADR-0014 首个 Poiet 来源清单</a></td><td>Accepted Draft</td><td>用有限来源清单连接自然语言来源与授权投影；模型不能直接生成规范对象，正式来源语言出现后删除该入口。</td></tr>
     </tbody></table></div>
   </section>
@@ -71,12 +71,26 @@ permalink: "/architecture/decisions.html"
     <p>以下资料只提供可复查的机制先例。每一项都同时写明采用部分和禁止推导，外部版本变化不能静默改变 Endem。</p>
     <div class="table-wrap"><table><thead><tr><th>资料与复核基线</th><th>Noemion 采用什么</th><th>不能据此推出什么</th></tr></thead><tbody>
       <tr><td><a href="https://gabi.xinuos.com/elf/">ELF 对象格式</a><br><a href="https://sourceware.org/binutils/">GNU Binutils 2.46.1</a></td><td>结构视图与装载视图分离、显式引用，以及独立于 BFD 的第二条读取路径。</td><td>不继承机器地址、指令、弱符号规则，也不让 BFD 的通用表示进入第一阶段可信核心。</td></tr>
-      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 稳定规范</a><br><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">2026-07-28 发布候选</a></td><td>当前只把稳定版的远端工具说明、注解和结果作为版本化适配输入；同时跟踪候选版的无状态核心、扩展和授权变化。</td><td>候选版在 2026-07-28 正式发布并通过兼容、安全与降级测试前，不进入实现基线；工具声明也不等于本地授权。</td></tr>
-      <tr><td><a href="https://a2a-protocol.org/v1.0.1/specification/">A2A 1.0 · v1.0.1 文档快照</a></td><td>借用 Task、Message 与 Artifact 交换跨系统工作状态和结果。</td><td>补丁号不进入协议协商；外部 Task 或 Artifact 也不成为 Endem 身份、状态或验收决定。</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 稳定规范</a><br><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">2026-07-28 发布候选</a></td><td>当前只把稳定版的远端工具说明、注解和结果作为版本化适配输入；候选版的无状态核心、扩展和授权强化只进入跟踪清单。</td><td>候选版在正式发布并完成兼容、安全与降级复核前不成为基线；工具 schema、服务器说明和 OAuth 身份都不等于本地能力授权。</td></tr>
+      <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a></td><td>借用 Task、Message、Artifact、多绑定和主次版本协商交换跨系统候选状态与结果；签名 Agent Card 只支持来源核对。</td><td>补丁号不进入协议协商；签名证明发布者关联，不证明能力描述真实，也不让外部 Task、Artifact 或 Agent Card 成为 Endem 身份、状态或验收决定。</td></tr>
       <tr><td><a href="https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai">OpenTelemetry GenAI 语义约定</a></td><td>以后可由带版本、可脱敏的导出器映射运行观测。</td><td>该约定仍处于 Development，不进入 Endem 编码、Tekmor 身份或最终决定；敏感内容不得默认导出。</td></tr>
+      <tr><td><a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI RMF 与 GenAI Profile</a></td><td>采用风险登记、测试评估验证确认和具名责任人的治理框架，检查模型候选、远端工具和人工决定。</td><td>风险框架不定义 Endem 字段、合格阈值或软件符合性；AI RMF 1.0 正在修订，不能冻结为 ABI。</td></tr>
       <tr><td><a href="https://openai.com/index/harness-engineering/">智能体控制平面工程实践</a></td><td>借鉴环境可读性、真实反馈和机械检查。</td><td>实践文章不定义项目格式、能力边界、成熟度或实现证据。</td></tr>
     </tbody></table></div>
     <p class="callout"><strong>复核日期：</strong>2026-07-13。适配器必须固定所用规范版本；升级时重新运行兼容、安全、重放、取消和权限测试。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部协议适配不变量</h2>
+    <p class="lead">AI 协议只扩大可交换信息，不扩大 Noemion 的信任。未来任何 MCP、A2A、模型供应商或遥测适配器都必须遵守以下边界。</p>
+    <div class="table-wrap"><table><thead><tr><th>不变量</th><th>必须保留</th><th>违反时怎样处理</th></tr></thead><tbody>
+      <tr><td>版本固定</td><td>协议主次版本、schema 摘要、扩展集合、传输与授权配置必须成为显式输入。</td><td>版本未知、候选版未复核或降级不明确时拒绝适配，不按“最新版本”猜测。</td></tr>
+      <tr><td>身份不等于权威</td><td>OAuth 主体、Agent Card 签名和服务器证书只证明声明来源；语义决定与能力授予仍由本地具名权威负责。</td><td>不得因为签名有效而确认 <code>semion</code>、删除 <code>apor</code> 或授予 Praxor 句柄。</td></tr>
+      <tr><td>外部状态不等于制品状态</td><td>Task、Message、Artifact、MCP Task 或工具结果只能成为带来源的候选或 <code>phain</code> 输入。</td><td>不得直接映射成 Endem 的 nascent/coherent/attested 状态、Tekmor 结论或最终验收。</td></tr>
+      <tr><td>能力声明不等于实时句柄</td><td>远端工具 schema 与 Agent Card 能力先进入控制平面，经策略、受众、范围、预算和人工升级检查。</td><td>模型与远端 Agent 永远不能自行扩大能力、改写策略或绕过 Praxor。</td></tr>
+      <tr><td>遥测单向外送</td><td>OpenTelemetry 映射位于运行与证据系统外缘，默认脱敏并绑定语义约定版本。</td><td>遥测字段不得回流决定 Endem 内容身份、Tekmor 身份或验收规则。</td></tr>
+      <tr><td>撤销与重放显式</td><td>令牌撤销、Agent Card 轮换、任务取消、重试、幂等和重放窗口必须留下可定位事件。</td><td>状态不明时进入 <code>agno</code>、<code>apor</code> 或失败，不得用远端“成功”覆盖本地未知。</td></tr>
+    </tbody></table></div>
   </section>
 
   <section class="content-band">

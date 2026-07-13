@@ -1,6 +1,6 @@
 # ADR-0002：Agent Harness 的职责与信任边界
 
-- 状态：Retained in part by ADR-0008
+- 状态：Retained in part by ADR-0010；旧对象与组件名称已废止
 - 日期：2026-07-12
 - 影响范围：组件、工具职责、开发工作流、测试与公开说明
 
@@ -65,7 +65,7 @@ Agent Harness 成为必要的逻辑控制边界，但不要求独立进程或单
 
 - OpenAI, “工程技术：在智能体优先的世界中利用 Codex”: https://openai.com/zh-Hans-CN/index/harness-engineering/
 - MCP 2025-11-25 规范与工具安全边界：https://modelcontextprotocol.io/specification/2025-11-25 和 https://modelcontextprotocol.io/specification/2025-11-25/server/tools
-- A2A 1.0 规范，文档快照 v1.0.1：https://a2a-protocol.org/v1.0.1/specification/
+- A2A 1.0 版本化规范：https://a2a-protocol.org/v1.0.0/specification/
 - OAuth 安全与资源绑定：https://www.rfc-editor.org/info/rfc9700/、https://www.rfc-editor.org/rfc/rfc9728.html 和 https://www.rfc-editor.org/info/rfc8707/
 - OpenTelemetry GenAI 语义约定（Development）：https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai
 - OpenTelemetry GenAI 独立语义仓库：https://github.com/open-telemetry/semantic-conventions-genai

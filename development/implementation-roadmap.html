@@ -7,7 +7,7 @@ permalink: "/development/implementation-roadmap.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>开发路线图</span></nav>
-  <header class="content-introduction"><h1>开发路线图</h1><p>从 Endem 最小纵向切片开始，按证据逐步增加组合、发布和受控运行。</p><div class="badges"><span class="badge">Vertical Slice</span><span class="badge">Stop Conditions</span><span class="badge">Reproducible</span></div></header>
+  <header class="content-introduction"><h1>开发路线图</h1><p>当前先完成术语、规范、威胁模型和验证方案；代码阶段只有在用户明确开启后才按最小路径推进。</p><div class="badges"><span class="badge">Design Stage</span><span class="badge">Stop Conditions</span><span class="badge">No Component Code</span></div></header>
 
   <section class="content-grid">
     <h2>开发原则</h2>
@@ -20,7 +20,7 @@ permalink: "/development/implementation-roadmap.html"
   </section>
 
   <section class="content-wide">
-    <h2>下一条可执行路径</h2>
+    <h2>代码阶段之前与未来第一条路径</h2>
     <p class="callout"><strong>直接结论：</strong>当前只完成第 0 阶段的规范与验证方案，不创建实现工作区。未来若用户明确开启代码阶段，第一实现才考虑 <code>poie</code>、<code>elenk</code>、<code>theor</code> 与 <code>peira</code>；不同时创建工具家族，不接模型，不做通用二进制抽象层。</p>
     <p>第 0 阶段已经产生 END-CORE、END-FMT、END-P0、错误目录和语义/结构向量。ADR-0012 把 Rust 记为未来首版候选语言，ADR-0013 以 END-P1 关闭首个字段、排序与引用接口。这些资料只用于评审设计和形成未来验收条件，不表示 Poiet、Theor、CLI 或安全核心已经开始开发。</p>
     <div class="flow"><div class="step">受控来源表达</div><div class="step">投影规则 / 具名决定</div><div class="step">endem poie</div><div class="step">.endem</div><div class="step">endem elenk</div><div class="step">endem theor</div><div class="step">endem peira</div></div>
@@ -47,10 +47,10 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>第 0 阶段当前产物</h2>
     <div class="table-wrap"><table><thead><tr><th>工作包</th><th>已经形成</th><th>仍需完成</th></tr></thead><tbody>
-      <tr><td>P0-W1 条款源</td><td>END-CORE、END-FMT 0.1.0-draft、36 个唯一条款 ID、END-P0/END-P1 与成熟度登记。</td><td>继续通过真实语料和两条独立实现修订草案。</td></tr>
-      <tr><td>P0-W2 威胁与限制</td><td>10 类不可信输入威胁、END-P0 的 8 项有限上限和结构错误目录。</td><td>用边界语料、最坏复杂度和目标平台实验验证或调整数值。</td></tr>
+      <tr><td>P0-W1 条款源</td><td>END-CORE、END-FMT、END-SRCM、43 个唯一条款 ID、END-P0/END-P1 与成熟度登记。</td><td>代码阶段前继续用真实自然语言案例和反例修订；独立实现验证必须等待用户开启代码阶段。</td></tr>
+      <tr><td>P0-W2 威胁与限制</td><td>10 类不可信输入威胁、END-P0 的 8 项有限上限和结构错误目录。</td><td>当前补齐边界语料与最坏复杂度分析；目标平台实验必须等待代码阶段。</td></tr>
       <tr><td>P0-W3 规范向量</td><td>6 个已执行语义向量；END-P0 含 1 个结构接受与 5 个拒绝；END-P1 含 2 个语义接受与 11 个拒绝。</td><td>继续增加累计分配、偏移算术和组合引用边界向量。</td></tr>
-      <tr><td>P0-W4 语言与构建</td><td>C/Rust 双原型、6 个规范向量、144 个差分变异、C Sanitizer、10,000 次 libFuzzer、两次重复构建；ADR-0012 选择 Rust 1.97.0。</td><td>继续保留为语言选择证据，不进入生产路径。</td></tr>
+      <tr><td>P0-W4 历史语言研究</td><td>C/Rust 双原型、6 个规范向量、144 个差分变异、C Sanitizer、10,000 次 libFuzzer 和两次重复构建的历史记录；ADR-0012 据此记录 Rust 1.97.0 基线。</td><td>冻结为历史研究资料，不自动运行、不继续扩展，也不视为组件证据。</td></tr>
       <tr><td>P1-W1 安全核心</td><td>尚未开始；当前只有职责分离、候选语言、END-P1 规范向量和未来验证条件。</td><td>等待用户明确开启代码开发阶段；届时重新确认仓库、范围、依赖、CI 与停止条件。</td></tr>
     </tbody></table></div>
     <p>C/Rust 语言材料只保留为可删除的历史研究证据，不是生产解析器、组件源码或发行物。当前没有 Rust 安全核心工作区，也不得因为规范向量存在就自动开始实现。</p>
@@ -71,7 +71,7 @@ permalink: "/development/implementation-roadmap.html"
     <h2>面向 Agent 时代的适配边界</h2>
     <ul>
       <li>MCP 工具说明、注解和远端返回都只是 Praxor 外缘的不可信输入；能力授权来自 Dromen 与会话策略。当前基线是 <a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">2025-11-25 稳定工具规范</a>。<a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">2026-07-28 发布候选</a>包含破坏性变化，正式发布并重验前不采用。</li>
-      <li>A2A 1.0 的 Task、Message 与 Artifact 适合跨 Agent 传输和记录生命周期，但不能替代 Endem 身份、Synem 闭包或 Tekmor 验收。页面固定参考 <a href="https://a2a-protocol.org/v1.0.1/specification/">A2A v1.0.1 文档快照</a>；补丁号不进入协议协商。</li>
+      <li>A2A 1.0 的 Task、Message 与 Artifact 适合跨 Agent 传输和记录生命周期，但不能替代 Endem 身份、Synem 闭包或 Tekmor 验收。页面固定参考 <a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a>；补丁号不进入协议协商。</li>
       <li>可靠 Agent 依赖清晰环境、可读工具、真实观察和反馈循环；这些由 Praxor 及其外侧控制平面负责，不通过增加薄命令包装解决。实践案例见<a href="https://openai.com/index/harness-engineering/">智能体控制平面工程实践</a>。</li>
       <li><a href="https://github.com/open-telemetry/semantic-conventions/tree/main/docs/gen-ai">OpenTelemetry GenAI 语义约定</a>仍处于 Development，并可能携带输入、输出和工具数据。它只进入带版本、默认脱敏的导出器，不进入 Endem 编码、Tekmor 身份或最终决定。</li>
       <li>所有外部协议版本只约束适配器，升级必须重新验证兼容性、安全边界和降级行为。</li>

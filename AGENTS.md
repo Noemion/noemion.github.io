@@ -30,9 +30,9 @@
 - 正式 HTML 只面向开发者、普通用户和潜在使用者，不得出现提示词、生成过程、用户指令、内部 review、补写过程、页面制作或为了验收而编写等幕后表述；状态信息只说明产品、规范、实现和证据本身。公开产品文案不得使用“本页”“阶段门”“证据门”“放行”“退出证据”或未解释的 IPD 等内部制作与管理术语，必须改写为实际状态、开发计划、完成标准或验证结果；规范性条款、安全约束和学术论证中的专业术语不受此限制，但首次出现仍需直白解释。
 - 网站是 Noemion 后续设计、实现与互操作工作的标准和规范入口；采用“直白解释 + 精确定义”双层表达，不能为了可读性删减术语边界、规范性强度、不变量、失败语义、成熟度或权威来源。
 - 实现义务的唯一条款源维护在 `spec/*.md`，机器可读的规范、Profile、术语、条款、成熟度和验证映射维护在 `spec/registry.json` 与 `spec/profiles/`，正反向量维护在 `vectors/`。公开 HTML 只解释并链接精确源文件，不复制第二套条款；`vectors/semantic/` 的 JSON 是语义测试外壳，`vectors/wire/` 的十六进制表达 END-FMT 实验字节，`vectors/source/` 表达实验性 Poiet 来源清单，三者都不得冒充稳定 ABI。新增或修改条款时必须同步登记、向量或明确的计划验证，并运行 `tests/spec_contract_test.py`、`tests/semantic_vector_test.py`、`tests/wire_vector_test.py`、`tests/p1_payload_test.py` 与 `tests/source_manifest_test.py`；向量只有被执行并比较预期后才能称为验证证据。
-- `experiments/` 只保存可重复、可删除的非生产证据。语言实验必须让候选实现读取同一规范字节、报告同一主错误类别，并区分本机重复构建、跨平台复现、Sanitizer、确定性变异和覆盖引导模糊测试；不得用源码行数、单次速度或“内存安全”标签替代实际边界检查。
-- ADR-0012 规定首版 Poiet 与生产读取核心使用 Rust 1.97.0 stable：第一纵向切片必须 `forbid(unsafe_code)`、零第三方 crate、显式 checked arithmetic、release 溢出检查、固定 `rust-toolchain.toml` 和提交 `Cargo.lock`。C 原型只保存在 `experiments/` 作为差分预言机与 fuzz target，不得链接进 Poiet、Theor 或 CLI；正式 Theor 必须另写解析状态机和错误路径。
-- ADR-0013 规定首个实现只写 `profile_id=2` 的 END-P1；END-P0 只保留为结构实验。END-P1 的字段键、嵌套 map、枚举、数组排序和引用闭包以 `spec/endem-format.md` 与 `spec/profiles/end-p1.json` 为准。实现不得增加未登记字段、复用 JSON 键名作为线格式、支持未定义的 mene 区间，或把 P0 结构接受升级为语义接受。
+- `experiments/` 只保存当前冻结、可删除的历史非生产研究材料。代码阶段开启前不得自动运行、扩展或据此形成新的实现结论；历史结果只能说明当时有限输入下的观察，不能用源码行数、单次速度或“内存安全”标签替代未来边界验证。
+- ADR-0012 记录未来 Poiet 与生产读取核心的 Rust 1.97.0 设计基线。用户开启代码阶段后，仍须重新评审工具链版本；`forbid(unsafe_code)`、零第三方 crate、显式 checked arithmetic、release 溢出检查、工具链锁和 Theor 独立解析路径都是未来实现约束，不表示组件已经存在。
+- ADR-0013 规定 `profile_id=2` 的 END-P1 是未来首条实现路径的设计 Profile；END-P0 只保留为结构实验。用户开启代码阶段后，未来实现不得增加未登记字段、复用 JSON 键名作为线格式、支持未定义的 mene 区间，或把 P0 结构接受升级为语义接受。
 - ADR-0014 与 `spec/endem-source-manifest.md` 规定首个 Poiet 来源清单；它只是一项可替换的实验输入，不是新的哲学专名、稳定源语言或 Endem 身份。任何语法变更必须同步 `vectors/source/` 并证明仍确定性映射到同一 END-P1；正式来源语言出现后直接删除该入口。
 - 架构组件、动作职责和页面组件都必须说明存在必要性、自身价值、上游输入或触发者、下游消费者、与相邻组件的边界，以及可以省略、合并或停止建设的条件；不得仅为架构图对称、目录完整或视觉填充保留无人消费的产物、重复动作或无信息价值的界面元素。
 - Praxor 外侧的控制平面负责上下文装配、类型化能力、策略检查、观察反馈、预算与人工升级，不属于确定性 Poiet。模型只能提出不可信来源候选、计划和能力参数；不得决定 Endem/Synem 规范字节、修改已封装或已签名制品、自行扩大权限、删除 `apor` 项或宣告验收通过。涉及智能体工程的页面必须同时说明 Praxor、控制平面、Tekmor 与人工验收的责任边界。
