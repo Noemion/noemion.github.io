@@ -109,7 +109,7 @@ export class MobileDirectoryController {
     this.panel = panel;
     this.root = root;
     this.summary = panel?.querySelector(":scope > summary");
-    this.interactive = matchMedia("(max-width: 839px)");
+    this.interactive = matchMedia("(max-width: 999px)");
     this.reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     this.closeTimer = 0;
   }

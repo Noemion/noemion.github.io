@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const mobileViewport = window.matchMedia("(max-width: 839px)");
+  const mobileViewport = window.matchMedia("(max-width: 999px)");
   const root = document.documentElement;
   const scrollPositionAttribute = "data-mobile-directory-scroll-y";
   const scrollOffsetProperty = "--mobile-directory-scroll-offset";
@@ -29,11 +29,14 @@
   const unlockPageScroll = () => {
     if (!root.classList.contains("mobile-directory-open")) return;
     const scrollY = Number(root.getAttribute(scrollPositionAttribute)) || 0;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
     root.classList.remove("mobile-directory-open");
     root.style.removeProperty(scrollOffsetProperty);
     root.removeAttribute(scrollPositionAttribute);
     root.scrollTop = scrollY;
     document.body.scrollTop = scrollY;
+    root.style.scrollBehavior = previousScrollBehavior;
   };
 
   window.noemionMobileDirectoryScroll = Object.freeze({

@@ -391,7 +391,7 @@ body .global-directory-panel{display:none}
   .docs-rail{display:none}
 }
 
-@media(max-width:839px){
+@media(max-width:999px){
   body:not([data-page-role="portal"]) .global-header-inner{grid-template-columns:minmax(0,1fr) auto}
   body:not([data-page-role="portal"]) .global-directory-panel{
     position:absolute;top:64px;right:0;z-index:4;display:block;width:84px;height:48px
@@ -425,16 +425,6 @@ body .global-directory-panel{display:none}
     position:fixed;top:64px;right:8px;left:8px;z-index:8;width:auto;padding-right:102px;background:color-mix(in srgb,var(--paper-subtle) 94%,transparent);
     backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)
   }
-}
-
-@media(min-width:840px) and (max-width:999px){
-  body .global-header-inner{grid-template-columns:auto minmax(0,1fr) auto}
-  body .global-brand{grid-column:auto;padding:0 16px;border-right:1px solid var(--rule)}
-  body .global-primary-nav{display:flex}
-  .global-nav-menu{width:480px}
-  .global-nav-item:nth-last-child(-n+2) .global-nav-menu{right:0;left:auto;transform-origin:top right}
-  body .global-timeline-link{grid-column:auto;border-right:0}
-  body .global-directory-panel{display:none}
 }
 
 @media(max-width:520px){

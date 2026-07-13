@@ -2168,6 +2168,7 @@ def validate_jekyll_sources():
         guard_text = directory_guard.read_text()
         for token in (
             'document.addEventListener("click"',
+            'window.matchMedia("(max-width: 999px)")',
             '".global-directory-panel > summary"',
             "event.preventDefault()",
             'data-mobile-directory-pending-open',
@@ -2185,8 +2186,10 @@ def validate_jekyll_sources():
             'root.style.setProperty(scrollOffsetProperty, `${-scrollY}px`)',
             'root.classList.add("mobile-directory-open")',
             'root.classList.remove("mobile-directory-open")',
+            'root.style.scrollBehavior = "auto"',
             'root.scrollTop = scrollY',
             'document.body.scrollTop = scrollY',
+            'root.style.scrollBehavior = previousScrollBehavior',
             'toggleAttribute("aria-busy", pendingOpen)',
             'panel.dispatchEvent(new CustomEvent("noemion:directoryrequest"))',
         ):
@@ -2203,7 +2206,6 @@ def validate_jekyll_sources():
             ".global-nav-menu",
             ".global-nav-visual",
             "calc(var(--nav-order) * 45ms)",
-            "@media(min-width:840px) and (max-width:999px)",
             "prefers-reduced-motion:reduce",
             "body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}",
             ".global-timeline-value{",
@@ -2222,7 +2224,7 @@ def validate_jekyll_sources():
             'a:visited:not(.portal-button)',
             ".portal-button-primary:visited",
             ".portal-button-secondary:visited",
-            '@media(max-width:839px)',
+            '@media(max-width:999px)',
             'body:not([data-page-role="portal"]) .global-directory-panel',
             '.site-header .directory-panel.is-closing nav',
             'html.mobile-directory-open{overflow:hidden;overscroll-behavior:none}',
@@ -2275,6 +2277,8 @@ def validate_jekyll_sources():
             errors.append("shared styles must not use transition: all")
         if "max-height:calc(100vh - 72px)" in shared_css:
             errors.append("mobile directory must use the dynamic viewport height on iOS")
+        if "@media(min-width:840px) and (max-width:999px)" in shared_css:
+            errors.append("compact layouts must not restore hover navigation on iPhone landscape widths")
         if ".focus-card-core" in shared_css:
             errors.append("homepage object visuals must not retain the obsolete unmatched focus-card-core selector")
         if re.search(r"\.global-timeline-link\s*\{[^}]*background\s*:\s*#fff", shared_css):
@@ -2644,6 +2648,7 @@ def validate_jekyll_sources():
             "scrollLock?.lock()",
             "scrollLock?.unlock()",
             "open() {",
+            'matchMedia("(max-width: 999px)")',
             "NavigationStore",
             "DirectoryNavigation",
             "MobileDirectoryController",
