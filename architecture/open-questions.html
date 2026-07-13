@@ -12,7 +12,7 @@ permalink: "/architecture/open-questions.html"
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
     <p class="lead">ADR-0010 已经采用现行制品、组件、六个语义面、三个制品状态和八个动作。这些名称与职责不再作为开放问题反复讨论。</p>
-    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0029 固定 Synem、Tekmor、内容标准分层、Dromen、结构化诊断、协议无关外部适配、精确内容身份与签名、文本解释以及权威与授权决定边界。</p>
+    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0030 固定 Synem、Tekmor、内容标准分层、Dromen、结构化诊断、协议适配、身份、文本、授权以及内容与外部决定的伴随边界。</p>
     <p>当前没有 Theor、权威目录、政策求值器或其他组件实现。稳定 ABI、时间与组合物理字段、嵌套或多变量量化、Synem 与 Tekmor 物理容器、正式来源语言、Unicode 标识符、原始来源字节绑定、摘要和签名物理 Profile、授权决定与最终决定事件编码仍未冻结。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
@@ -24,7 +24,7 @@ permalink: "/architecture/open-questions.html"
     <details><summary>条件与排他组合怎样表达？</summary><p>ADR-0020 只允许单个 Endem 使用 <code>all_of / any_of</code>；ADR-0021 已把跨 Endem 条件固定为 Synem 会话激活。<code>xor / xone</code>、形成时条件编码和复杂守卫语言仍未冻结，不得嵌入自由脚本。</p></details>
     <details><summary>一个根 skena 的语义等价怎样判断？</summary><p>布局、来源注释或调试记录变化后，哪些 semion、skena、telis、krin 和 apor 属性必须保持，仍需规范化规则和反例。规则冻结前只能比较显式符号、关系和条件，不能发明语义哈希。</p></details>
     <details><summary>Unicode 标识符与原始来源字节何时进入 Profile？</summary><p>TXT-CORE 已固定当前 ASCII 标识符和来源文本不做隐式规范化，也明确 END-SRCM 不能证明原始文件逐字节保真。只有国际化标识符或原始字节审计出现不可替代消费者，并能固定 Unicode 版本、比较、双向、同形、身份、变换和正反字节向量时，才建立新 Profile。</p></details>
-    <details><summary>权威目录与政策语言怎样获得物理 Profile？</summary><p>AUT-CORE 已固定主体、范围、委托、同意、多人冲突、撤销、重放与结果分离的抽象义务，也已关闭“模型或一次点击能否自行授权”的问题。权威目录、角色与政策语言、授权事件编码、同意 UI Profile 和外部协议映射仍需真实消费者、独立威胁分析、规范字节与实现阶段授权。</p></details>
+    <details><summary>权威目录与政策语言怎样获得物理 Profile？</summary><p>AUT-CORE 已固定主体、范围、委托、同意、多人冲突、撤销、重放与结果分离。ADR-0030 又规定 END-P1 的权威字段只是选择器，不能自证授权。权威目录、角色与政策语言、授权伴随关系、事件编码、同意 UI Profile 和外部协议映射仍需真实消费者、独立威胁分析、规范字节与实现阶段授权。</p></details>
     <details><summary>连续或模糊要求怎样进入六个语义面？</summary><p>ADR-0019 已关闭可量化构念、总体、单位、聚合器、不确定度和阈值的抽象边界。软偏好、感知质量、风格、模型裁判校准和不可完全判定条件仍需保留评价环境，不能为了机器处理伪造精确阈值。</p></details>
   </section>
 
@@ -60,5 +60,5 @@ permalink: "/architecture/open-questions.html"
     <h2>问题关闭规则</h2>
     <p>设计问题可以由权威规范或 ADR、正反向量和明确失败语义关闭。涉及组件行为、性能或互操作的问题必须保持开放，直到用户明确开启代码阶段并出现相应实现证据；论文、模型指标、概念演示或单一实现行为不能单独冻结 ABI。</p>
   </section>
-  <div class="next-prev"><a href="adr-0029-authority-and-authorization-decisions.html">← ADR-0029</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
+  <div class="next-prev"><a href="adr-0030-endem-content-and-authorization-companions.html">← ADR-0030</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
 </main>

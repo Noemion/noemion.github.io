@@ -1,8 +1,9 @@
 {
-  "vector_format": "end-core.semantic-vector.v1",
+  "vector_format": "end-core.semantic-vector.v2",
   "id": "SV-REJECT-SOURCE-RANGE-001",
   "description": "来源声明的 Unicode 标量范围超过实际内容时不能形成 Endem。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "context": {"external_preconditions": []},
   "expect": {
     "result": "reject",
     "clauses": ["END-SRC-001", "END-ERR-001"],

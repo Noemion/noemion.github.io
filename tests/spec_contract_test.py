@@ -314,8 +314,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
 
     threat_heading_ids = THREAT_HEADING.findall(threat_text)
     threats = registry.get("threats")
-    if not isinstance(threats, list) or len(threats) != 98:
-        errors.append("spec/registry.json: exactly 98 object and cross-cutting threats are required")
+    if not isinstance(threats, list) or len(threats) != 99:
+        errors.append("spec/registry.json: exactly 99 object and cross-cutting threats are required")
     else:
         threat_ids = [threat.get("id") for threat in threats]
         if len(threat_ids) != len(set(threat_ids)):
@@ -419,7 +419,7 @@ def validate_vectors(clause_ids, covered_vector_refs, errors):
         if vector is None:
             continue
         label = path.relative_to(ROOT).as_posix()
-        if vector.get("vector_format") != "end-core.semantic-vector.v1":
+        if vector.get("vector_format") != "end-core.semantic-vector.v2":
             errors.append(f"{label}: invalid vector_format")
         vector_id = vector.get("id")
         if not isinstance(vector_id, str) or not VECTOR_ID.fullmatch(vector_id):
@@ -428,6 +428,9 @@ def validate_vectors(clause_ids, covered_vector_refs, errors):
             vector_ids.append(vector_id)
         if vector.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
             errors.append(f"{label}: must pin END-CORE 0.1.0-draft")
+        context = vector.get("context")
+        if not isinstance(context, dict) or not isinstance(context.get("external_preconditions"), list):
+            errors.append(f"{label}: v2 vectors must declare external_preconditions")
 
         input_model = vector.get("input")
         if not isinstance(input_model, dict):
@@ -832,6 +835,17 @@ def validate_public_boundary(errors):
             "GNU Guix",
             "当前没有权威目录",
         ),
+        "architecture/adr-0030-endem-content-and-authorization-companions.html": (
+            "END-CON-006",
+            "END-AUT-002",
+            "END-ID-002",
+            "END-FMT-015",
+            "in-toto Attestation Framework 1.2",
+            "The Update Framework 1.0.27",
+            "GNU Guix",
+            "MCP 2025-11-25",
+            "当前改动只修正规范边界",
+        ),
         "specifications/synem.html": (
             "SYN-CORE 0.1.0-draft",
             "spec/synem-core.md",
@@ -1010,8 +1024,8 @@ def main():
         authority_scenario_text = ""
 
     scenario_ids = SCENARIO_HEADING.findall(scenario_text)
-    if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 28)]:
-        errors.append("spec/endem-scenarios.md: scenario IDs must be unique and ordered SCN-001 through SCN-027")
+    if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 31)]:
+        errors.append("spec/endem-scenarios.md: scenario IDs must be unique and ordered SCN-001 through SCN-030")
     for token in (
         "事态由对象结合构成（2.01）",
         "图示形式由结构显示而非自我陈述（2.17–2.172）",
@@ -1113,8 +1127,8 @@ def main():
         return 1
     print(
         "PASS: END-CORE, END-FMT, END-SRCM, SYN-CORE, DRO-CORE, TEK-CORE, DIA-CORE, ADP-CORE, ID-CORE, TXT-CORE and AUT-CORE 0.1.0-draft have unique clauses, explicit "
-        "maturity, traceable evidence, 98 registered threats, executed semantic "
-        "vectors, 27 natural-language design scenarios, 12 result-domain vectors, "
+        "maturity, traceable evidence, 99 registered threats, executed semantic "
+        "vectors, 30 natural-language design scenarios, 12 result-domain vectors, "
         "12 mene time and continuity vectors, 12 negation and absence vectors, "
         "12 quantification and membership vectors, "
         "12 measurement and threshold vectors, "

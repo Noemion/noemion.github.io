@@ -7,11 +7,11 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、组合闭包、会话契约、证据、诊断、外部适配、精确内容身份、文本边界与组件边界。</p><div class="badges"><span class="badge">ADR-0010—0028</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、组合闭包、会话契约、证据、授权、身份与组件边界。</p><div class="badges"><span class="badge">ADR-0010—0030</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0029-authority-and-authorization-decisions.html">ADR-0029</a>依次固定 Synem 组合闭包、Tekmor 证据、内容标准分层、Dromen 会话契约、结构化诊断、外部协议适配、精确内容身份与签名、文本与标识符以及权威与授权决定边界。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>依次固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权以及内容与外部决定的伴随边界。</p>
     <p>ADR-0008 与 ADR-0009 只保存公开迁移历史。更早、无入口且与现行决策源重复的内部 ADR 副本已经删除，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -40,6 +40,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0027-exact-identity-and-attestation.html">ADR-0027 精确内容身份与签名边界</a></td><td>Accepted Draft</td><td>由 ID-CORE 固定跨制品精确身份、不可变引用、签名陈述、验证材料、撤销、可复现性与派生关系；算法和物理 Profile 仍未冻结。</td></tr>
       <tr><td><a href="adr-0028-text-and-identifier-boundaries.html">ADR-0028 文本与标识符边界</a></td><td>Accepted Draft</td><td>由 TXT-CORE 固定文本槽、严格 UTF-8、来源溯源、ASCII 标识符、规范化、比较、范围、双向显示、隐藏字符、模型输入与显示边界；不增加物理字段。</td></tr>
       <tr><td><a href="adr-0029-authority-and-authorization-decisions.html">ADR-0029 权威与授权决定边界</a></td><td>Accepted Draft</td><td>由 AUT-CORE 固定权威语境、主体资格、范围、自然语言授权、委托、同意、多人决定、撤销、重放、能力交集和结果分离；不创建新制品或政策引擎。</td></tr>
+      <tr><td><a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030 Endem 内容与授权伴随关系</a></td><td>Accepted Draft</td><td>修正内容身份与授权决定混合问题；P1 权威字段只作选择器，完整内容接受需要外部前置条件，授权变化不改写内容身份。</td></tr>
     </tbody></table></div>
   </section>
 

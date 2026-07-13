@@ -43,6 +43,7 @@ permalink: "/architecture/adr-0023-endem-content-standard.html"
       <li>容器接受只说明头部、目录、范围与编码可以安全解释。</li>
       <li>Profile 接受只说明字段、枚举、排序、引用和资源约束符合指定版本。</li>
       <li>内容接受说明对象满足 END-CORE 的语义与授权义务，但不证明现实中的目标事态成立。</li>
+      <li>END-P1 不承载授权决定；只有精确外部前置条件已核对时，内容接受才能继续。</li>
       <li>签名、Tekmor、运行会话、满足判断和最终决定继续保持各自独立的结果域。</li>
     </ul>
   </section>
@@ -55,6 +56,7 @@ permalink: "/architecture/adr-0023-endem-content-standard.html"
       <li>未知必需能力关闭失败；当前没有供应商私有语义区或运行时动态补字段。</li>
       <li>没有具名生产者、消费者和失败责任的字段不进入内容标准。</li>
       <li>模型候选、提示、计划、推理轨迹、实时凭据和遥测导出字段不进入 Endem 内容身份。</li>
+      <li>授权、签名、证据、撤销和最终决定也不进入内容身份；它们使用外部伴随关系。</li>
     </ul>
   </section>
 
@@ -73,6 +75,7 @@ permalink: "/architecture/adr-0023-endem-content-standard.html"
     <ul>
       <li>END-CORE 的标题、范围与符合性条款明确成为内容标准，不新增重复规范 ID。</li>
       <li>END-P1 继续是实验性设计 Profile；它只支持 nascent、kine 和当前封闭字段，不代表稳定 ABI。</li>
+      <li>ADR-0030 已修正内容身份与授权伴随关系；END-P1 单文件最高只支持 Profile 接受。</li>
       <li>当前资料检查器只能检查规范、登记与向量的一致性，不能证明任何写入器、读取器、CLI 或运行时已经实现。</li>
     </ul>
   </section>

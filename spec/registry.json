@@ -386,6 +386,7 @@
     {"id": "THR-END-013", "clauses": ["END-QNT-001", "END-QNT-002", "END-QNT-003"], "evidence_status": "partial"},
     {"id": "THR-END-014", "clauses": ["END-MSR-001", "END-MSR-002", "END-MSR-003", "END-MSR-004"], "evidence_status": "partial"},
     {"id": "THR-END-015", "clauses": ["END-CMP-001", "END-CMP-002", "END-CMP-003", "END-CMP-004"], "evidence_status": "partial"},
+    {"id": "THR-END-016", "clauses": ["END-CON-006", "END-AUT-002", "END-ID-002", "END-FMT-015", "AUT-SEM-001"], "evidence_status": "partial"},
     {"id": "THR-SYN-001", "clauses": ["SYN-RES-001"], "evidence_status": "partial"},
     {"id": "THR-SYN-002", "clauses": ["SYN-CLS-001"], "evidence_status": "partial"},
     {"id": "THR-SYN-003", "clauses": ["SYN-GRF-001"], "evidence_status": "partial"},
@@ -826,6 +827,19 @@
       ]
     },
     {
+      "id": "END-CON-006",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "every conformance reporter and external prerequisite resolver",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-missing-reject.json"},
+        {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
+        {"status": "planned", "ref": "peira:external-conformance-prerequisites"}
+      ]
+    },
+    {
       "id": "END-CORE-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
@@ -1184,6 +1198,19 @@
       ]
     },
     {
+      "id": "END-AUT-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, every content validator and authorization companion resolver",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-missing-reject.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-mismatch-reject.json"},
+        {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
+        {"status": "planned", "ref": "peira:projection-authorization-companion"}
+      ]
+    },
+    {
       "id": "END-DEC-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
@@ -1239,6 +1266,19 @@
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
         {"status": "planned", "ref": "peira:identity-domain-separation"},
         {"status": "manual-authority", "authority": "future format ADR reviewers"}
+      ]
+    },
+    {
+      "id": "END-ID-002",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, identity producers and authorization companion consumers",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/semantic/negative-relation-valid.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/external-context-identity-valid.json"},
+        {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
+        {"status": "planned", "ref": "peira:identity-independent-of-external-decisions"}
       ]
     },
     {
@@ -1498,6 +1538,20 @@
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/dangling-reference.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/source-range.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/apor-source-reference.hex"}
+      ]
+    },
+    {
+      "id": "END-FMT-015",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every END-P1 reader and content conformance reporter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-missing-reject.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-mismatch-reject.json"},
+        {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
+        {"status": "planned", "ref": "peira:p1-selector-non-self-authentication"}
       ]
     },
     {

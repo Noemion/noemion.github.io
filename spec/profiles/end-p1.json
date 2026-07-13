@@ -6,6 +6,17 @@
   "status": "experimental-design-profile",
   "core": {"id": "END-CORE", "version": "0.1.0-draft"},
   "format": {"id": "END-FMT", "version": "0.1.0-draft"},
+  "conformance": {
+    "standalone_claim_ceiling": "profile-accepted",
+    "content_acceptance_external_prerequisites": [
+      {
+        "spec_id": "AUT-CORE",
+        "version": "0.1.0-draft",
+        "clause": "AUT-SEM-001",
+        "physical_binding": "unfrozen"
+      }
+    ]
+  },
   "limits": {
     "max_artifact_bytes": 16777216,
     "max_record_count": 6,
@@ -125,5 +136,5 @@
     "impact_scope": "encoded-text",
     "allowed_resolutions": "uint"
   },
-  "notes": "First closed content Profile under END-CORE, as formalized by ADR-0023. P0 remains structural experiment evidence. P1 supports nascent Endem and kine only; ADR-0016 defines abstract mene time semantics, ADR-0018 defines abstract single-role quantification, ADR-0019 defines abstract measurement and threshold semantics, and ADR-0020 defines abstract all_of/any_of composition semantics, but new Profiles must define their physical fields. Unknown map keys are rejected."
+  "notes": "First closed content Profile under END-CORE, as formalized by ADR-0023 and clarified by ADR-0030. P0 remains structural experiment evidence. P1 supports nascent Endem and kine only; authority-looking identifiers are untrusted selectors rather than authorization proofs, so the standalone file cannot exceed Profile acceptance. ADR-0016 defines abstract mene time semantics, ADR-0018 defines abstract single-role quantification, ADR-0019 defines abstract measurement and threshold semantics, and ADR-0020 defines abstract all_of/any_of composition semantics, but new Profiles must define their physical fields. Unknown map keys are rejected."
 }

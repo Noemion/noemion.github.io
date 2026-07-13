@@ -1,0 +1,30 @@
+{
+  "vector_format": "end-core.semantic-vector.v2",
+  "id": "SV-REJECT-AUTHORIZATION-BINDING-002",
+  "description": "另一候选的授权前置条件不能重用于当前投影。",
+  "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "context": {"external_preconditions": [{"spec_id": "AUT-CORE", "version": "0.1.0-draft", "clause": "AUT-SEM-001", "subject": "/input/semion/relations/0/projection", "projection_id": "projection:other-candidate", "status": "satisfied", "evidence_ref": "fixture:authorization:other"}]},
+  "expect": {
+    "result": "reject",
+    "clauses": ["END-CON-006", "END-AUT-002", "END-FMT-015"],
+    "diagnostics": [
+      {"code": "endem.projection.authorization_binding_mismatch", "clause": "END-AUT-002", "location": "/input/semion/relations/0/projection"}
+    ]
+  },
+  "input": {
+    "rhem": {"source_id": "source:binding-002", "subject": "authority:requester", "media_type": "text/plain", "language": "zh-CN", "version": "1", "content": "生成报告", "range": {"unit": "unicode-scalar", "start": 0, "length": 4}},
+    "semion": {
+      "symbols": [
+        {"id": "sym:project", "kind": "entity", "source_ref": "source:binding-002#/range"},
+        {"id": "sym:report", "kind": "artifact", "source_ref": "source:binding-002#/range"}
+      ],
+      "relations": [
+        {"id": "rel:produced", "predicate": "produced", "roles": [{"name": "for", "symbol": "sym:project"}, {"name": "result", "symbol": "sym:report"}], "projection": {"kind": "rule", "id": "projection:zh-goal-v1"}}
+      ]
+    },
+    "skena": {"roots": ["situation:report-produced"], "situations": [{"id": "situation:report-produced", "relation": "rel:produced", "polarity": "positive"}]},
+    "telis": {"mode": "kine"},
+    "krin": {"required_phain": [{"relation": "rel:produced", "match": "same-roles"}], "required_tekmor": ["artifact-content-observation"], "on_missing_observation": "agno", "on_evaluation_error": "fault", "decision_authority": "authority:requester"},
+    "apor": []
+  }
+}

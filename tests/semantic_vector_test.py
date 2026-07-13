@@ -131,7 +131,31 @@ def validate_rhem(rhem):
     return source_id
 
 
-def validate_semion(semion, source_id):
+def validate_external_authorization(context, projection, location):
+    if not isinstance(context, dict):
+        fail("endem.projection.authorization_binding_missing", "END-AUT-002", location)
+    preconditions = context.get("external_preconditions")
+    if not isinstance(preconditions, list):
+        fail("endem.projection.authorization_binding_missing", "END-AUT-002", location)
+    matches = [item for item in preconditions if isinstance(item, dict) and item.get("subject") == location]
+    if not matches:
+        fail("endem.projection.authorization_binding_missing", "END-AUT-002", location)
+    if len(matches) != 1:
+        fail("endem.projection.authorization_binding_mismatch", "END-AUT-002", location)
+    binding = matches[0]
+    expected = {
+        "spec_id": "AUT-CORE",
+        "version": "0.1.0-draft",
+        "clause": "AUT-SEM-001",
+        "projection_id": projection.get("id"),
+        "status": "satisfied",
+    }
+    if any(binding.get(key) != value for key, value in expected.items()):
+        fail("endem.projection.authorization_binding_mismatch", "END-AUT-002", location)
+    require_text(binding.get("evidence_ref"), "END-AUT-002", f"{location}/@authorization/evidence_ref", token=True)
+
+
+def validate_semion(semion, source_id, context):
     symbols = require_list(semion.get("symbols"), "/input/semion/symbols")
     relations = require_list(semion.get("relations"), "/input/semion/relations")
     if not symbols or not relations:
@@ -174,6 +198,7 @@ def validate_semion(semion, source_id):
         if projection.get("kind") not in {"rule", "named-authority"}:
             fail("endem.projection.authority_untrusted", "END-AUT-001", f"/input/semion/relations/{index}/projection")
         require_text(projection.get("id"), "END-SEM-001", f"/input/semion/relations/{index}/projection/id", token=True)
+        validate_external_authorization(context, projection, f"/input/semion/relations/{index}/projection")
     return relation_ids
 
 
@@ -247,12 +272,12 @@ def validate_apor(apor):
             fail("endem.apor.resolution", "END-APR-001", f"/input/apor/{index}/allowed_resolutions")
 
 
-def validate_model(model):
+def validate_model(model, context):
     if not isinstance(model, dict) or set(model) != set(FACETS):
         fail("endem.semantic.facets", "END-CORE-002", "/input")
     validate_primary_rejections(model)
     source_id = validate_rhem(require_mapping(model["rhem"], "/input/rhem"))
-    relation_ids = validate_semion(require_mapping(model["semion"], "/input/semion"), source_id)
+    relation_ids = validate_semion(require_mapping(model["semion"], "/input/semion"), source_id, context)
     validate_skena(require_mapping(model["skena"], "/input/skena"), relation_ids)
     validate_telis(require_mapping(model["telis"], "/input/telis"))
     validate_krin(require_mapping(model["krin"], "/input/krin"), relation_ids)
@@ -265,12 +290,13 @@ def main():
     vectors = sorted(VECTOR_ROOT.glob("*.json"))
     accept_count = 0
     reject_count = 0
+    identity_groups = {}
 
     for path in vectors:
         vector = json.loads(path.read_text())
         expected = vector["expect"]
         try:
-            validate_model(vector["input"])
+            validate_model(vector["input"], vector.get("context"))
             actual = {"result": "accept", "diagnostics": []}
         except SemanticError as exc:
             actual = {"result": "reject", "diagnostics": [exc.diagnostic]}
@@ -292,6 +318,20 @@ def main():
                     f"{path.relative_to(ROOT)}: diagnostic catalog missing "
                     f"{diagnostic['code']}"
                 )
+        identity_group = vector.get("identity_equivalence_group")
+        if identity_group is not None:
+            identity_groups.setdefault(identity_group, []).append(
+                (path, json.dumps(vector["input"], sort_keys=True, separators=(",", ":")), json.dumps(vector.get("context"), sort_keys=True))
+            )
+
+    for group_id, members in identity_groups.items():
+        if len(members) < 2:
+            errors.append(f"{group_id}: identity equivalence group requires at least two vectors")
+            continue
+        if len({member[1] for member in members}) != 1:
+            errors.append(f"{group_id}: external context variants must preserve identical Endem input content")
+        if len({member[2] for member in members}) != len(members):
+            errors.append(f"{group_id}: external context variants must use distinct companion evidence")
 
     if accept_count < 1 or reject_count < 5:
         errors.append("semantic execution requires at least one accept and five rejects")
@@ -300,7 +340,8 @@ def main():
         return 1
     print(
         f"PASS: executed {accept_count + reject_count} semantic vectors "
-        f"({accept_count} accept, {reject_count} deterministic rejects)"
+        f"({accept_count} accept, {reject_count} deterministic rejects, "
+        f"{len(identity_groups)} external-context identity group)"
     )
     return 0
 

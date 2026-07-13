@@ -1,8 +1,9 @@
 {
-  "vector_format": "end-core.semantic-vector.v1",
+  "vector_format": "end-core.semantic-vector.v2",
   "id": "SV-REJECT-ROOTS-001",
   "description": "两个可以独立验收的根事态不能进入同一个 Endem。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "context": {"external_preconditions": []},
   "expect": {
     "result": "reject",
     "clauses": ["END-CORE-001", "END-ERR-001"],

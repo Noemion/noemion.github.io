@@ -1,9 +1,9 @@
 {
   "vector_format": "end-core.semantic-vector.v2",
-  "id": "SV-VALID-NEGATIVE-RELATION-001",
-  "description": "负极性只作用于已授权关系与同一角色位置，不通过缺失关系或第三种目标方向表达。",
+  "id": "SV-VALID-EXTERNAL-CONTEXT-002",
+  "description": "同一 Endem 内容由另一项精确授权前置条件支持时，内容身份保持不变。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
-  "context": {"external_preconditions": [{"spec_id": "AUT-CORE", "version": "0.1.0-draft", "clause": "AUT-SEM-001", "subject": "/input/semion/relations/0/projection", "projection_id": "authority:security-owner", "status": "satisfied", "evidence_ref": "fixture:authorization:security-a"}]},
+  "context": {"external_preconditions": [{"spec_id": "AUT-CORE", "version": "0.1.0-draft", "clause": "AUT-SEM-001", "subject": "/input/semion/relations/0/projection", "projection_id": "authority:security-owner", "status": "satisfied", "evidence_ref": "fixture:authorization:security-b"}]},
   "identity_equivalence_group": "IE-AUTH-CONTEXT-001",
   "expect": {
     "result": "accept",

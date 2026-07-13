@@ -43,6 +43,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0027](https://noemion.github.io/architecture/adr-0027-exact-identity-and-attestation.html) — exact content identity, immutable references, signed statements, validity, reproducibility, and derived-artifact relations
 - [ADR-0028](https://noemion.github.io/architecture/adr-0028-text-and-identifier-boundaries.html) — text slots, strict UTF-8, source provenance, identifiers, normalization, bidi, hidden characters, model input, and display boundaries
 - [ADR-0029](https://noemion.github.io/architecture/adr-0029-authority-and-authorization-decisions.html) — authority contexts, principal qualification, bounded scope, delegation, consent, replay, and result separation
+- [ADR-0030](https://noemion.github.io/architecture/adr-0030-endem-content-and-authorization-companions.html) — stable Endem content identity, untrusted authority selectors, external authorization prerequisites, and companion relations
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Praxor responsibility boundaries
 - [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary

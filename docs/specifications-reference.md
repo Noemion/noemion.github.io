@@ -29,7 +29,7 @@ badges: ["Authority", "Maturity", "ADR"]
 
 不可信输入和失败责任由对应模型说明，包括 [Endem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md)与[授权威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-threat-model.md)。威胁模型不创造新的规范义务。
 
-[END-SCEN 自然语言场景语料](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md)用二十七个案例寻找规范缺口，但不属于上述规范义务。只有案例转化为唯一条款、登记验证方式并形成正反向量后，对应判断才可能进入符合性要求。
+[END-SCEN 自然语言场景语料](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md)用三十个案例寻找规范缺口，但不属于上述规范义务。只有案例转化为唯一条款、登记验证方式并形成正反向量后，对应判断才可能进入符合性要求。
 
 [SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)、[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)、[TEK-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-scenarios.md)与[AUT-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-scenarios.md)分别检查组合闭包、会话契约、证据及授权边界，同样不属于上述规范义务。
 
@@ -63,6 +63,6 @@ badges: ["Authority", "Maturity", "ADR"]
 
 ## ADR 与开放问题
 
-[ADR-0010](../architecture/adr-0010-native-lexicon.html)至 [ADR-0014](../architecture/adr-0014-source-manifest.html)固定现行词汇、Endem 格式、Profile 与来源清单；[ADR-0015](../architecture/adr-0015-result-domains.html)至 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)固定判断、时间、否定、量化、测量与复合边界；[ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html)至 [ADR-0029](../architecture/adr-0029-authority-and-authorization-decisions.html)固定组合、证据、内容分层、会话、诊断、适配、精确身份、文本解释以及权威与授权决定边界。ADR-0008 和 ADR-0009 只保存被取代的公开设计历史。具体 Profile、物理编码与发行治理集中在[开放问题](../architecture/open-questions.html)。
+[ADR-0010](../architecture/adr-0010-native-lexicon.html)至 [ADR-0014](../architecture/adr-0014-source-manifest.html)固定现行词汇、Endem 格式、Profile 与来源清单；[ADR-0015](../architecture/adr-0015-result-domains.html)至 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)固定判断、时间、否定、量化、测量与复合边界；[ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html)至 [ADR-0030](../architecture/adr-0030-endem-content-and-authorization-companions.html)固定组合、证据、内容分层、会话、诊断、适配、精确身份、文本解释、授权决定以及 Endem 内容与授权伴随关系。END-P1 内的权威字段只是待解析选择器，独立文件最多达到 Profile 接受；完整内容接受还需要精确绑定的外部授权决定。ADR-0008 和 ADR-0009 只保存被取代的公开设计历史。具体 Profile、物理编码与发行治理集中在[开放问题](../architecture/open-questions.html)。
 
 面向标准化时，规范还需关联互操作配置、正反向量、一致性测试、安全分析和版本演进。面向研究与知识产权时，还应关联假设、现有技术、实验、贡献与公开披露记录。

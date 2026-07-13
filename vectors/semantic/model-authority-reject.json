@@ -1,8 +1,9 @@
 {
-  "vector_format": "end-core.semantic-vector.v1",
+  "vector_format": "end-core.semantic-vector.v2",
   "id": "SV-REJECT-AUTHORITY-001",
   "description": "模型自述不能成为确认 semion 投影的授权来源。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "context": {"external_preconditions": []},
   "expect": {
     "result": "reject",
     "clauses": ["END-SEM-001", "END-AUT-001", "END-ERR-001"],

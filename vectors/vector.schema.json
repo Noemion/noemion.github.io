@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://noemion.github.io/schema/semantic-vector-v1",
-  "title": "Noemion semantic vector envelope v1",
+  "title": "Endem semantic vector envelope v2",
   "type": "object",
   "additionalProperties": false,
-  "required": ["vector_format", "id", "description", "spec", "expect", "input"],
+  "required": ["vector_format", "id", "description", "spec", "context", "expect", "input"],
   "properties": {
-    "vector_format": {"const": "end-core.semantic-vector.v1"},
+    "vector_format": {"const": "end-core.semantic-vector.v2"},
     "id": {"type": "string", "pattern": "^SV-(VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$"},
     "description": {"type": "string", "minLength": 1},
     "spec": {
@@ -17,6 +17,36 @@
         "id": {"const": "END-CORE"},
         "version": {"const": "0.1.0-draft"}
       }
+    },
+    "context": {
+      "type": "object",
+      "description": "Non-wire test preconditions supplied by the validating environment; this object is not part of Endem content identity or a physical authorization format.",
+      "additionalProperties": false,
+      "required": ["external_preconditions"],
+      "properties": {
+        "external_preconditions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["spec_id", "version", "clause", "subject", "projection_id", "status", "evidence_ref"],
+            "properties": {
+              "spec_id": {"const": "AUT-CORE"},
+              "version": {"const": "0.1.0-draft"},
+              "clause": {"const": "AUT-SEM-001"},
+              "subject": {"type": "string", "pattern": "^/input/semion/relations/[0-9]+/projection$"},
+              "projection_id": {"type": "string", "minLength": 1},
+              "status": {"const": "satisfied"},
+              "evidence_ref": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    },
+    "identity_equivalence_group": {
+      "type": "string",
+      "description": "Test-only group asserting identical Endem input content across differing external contexts.",
+      "pattern": "^IE-[A-Z0-9-]+-[0-9]{3}$"
     },
     "expect": {
       "type": "object",

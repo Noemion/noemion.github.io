@@ -63,6 +63,8 @@
 | `endem.skena.contains_goal_force` | `END-SIT-001` | semantic | 中性事态混入目标方向或力量 |
 | `endem.apor.unrecorded_projection_choice` | `END-APR-001` | semantic | 存在多个允许投影但未记录未决选择 |
 | `endem.projection.authority_untrusted` | `END-AUT-001` | semantic | 模型自述或其他不可信来源试图确认投影 |
+| `endem.projection.authorization_binding_missing` | `END-AUT-002` | semantic | 投影没有对应的外部授权前置条件，不能继续声明内容接受 |
+| `endem.projection.authorization_binding_mismatch` | `END-AUT-002` | semantic | 外部授权前置条件没有精确绑定当前投影位置或候选 |
 | `endem.semantic.field.type` | `END-FMT-013` | semantic | END-P1 字段值不是登记的数据类型 |
 | `endem.semantic.field.missing` | `END-FMT-013` | semantic | END-P1 映射缺少必需字段 |
 | `endem.semantic.field.identifier` | `END-FMT-013` | semantic | 标识符为空、过长或含禁用字符 |

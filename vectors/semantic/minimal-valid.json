@@ -1,11 +1,12 @@
 {
-  "vector_format": "end-core.semantic-vector.v1",
+  "vector_format": "end-core.semantic-vector.v2",
   "id": "SV-VALID-MINIMAL-001",
   "description": "一个根事态、六个语义面和可追溯投影组成的最小可接受语义模型。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "context": {"external_preconditions": [{"spec_id": "AUT-CORE", "version": "0.1.0-draft", "clause": "AUT-SEM-001", "subject": "/input/semion/relations/0/projection", "projection_id": "projection:zh-goal-v1", "status": "satisfied", "evidence_ref": "fixture:authorization:minimal-a"}]},
   "expect": {
     "result": "accept",
-    "clauses": ["END-CORE-001", "END-CORE-002", "END-SRC-001", "END-SEM-001", "END-SIT-001", "END-TEL-001", "END-KRN-001", "END-STR-001"],
+    "clauses": ["END-CON-006", "END-CORE-001", "END-CORE-002", "END-SRC-001", "END-SEM-001", "END-SIT-001", "END-TEL-001", "END-KRN-001", "END-STR-001", "END-AUT-002"],
     "diagnostics": []
   },
   "input": {
