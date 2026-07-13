@@ -1234,6 +1234,43 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the GNU and ELF research proposal"
                 )
+
+    planning_proposal = SOURCE_ROOT / "spec" / "planning-and-replanning-proposal.md"
+    if not planning_proposal.exists():
+        errors.append("missing non-normative planning and replanning research proposal")
+    else:
+        proposal_text = planning_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
+            "不创建新制品、文件格式、扩展名、命令、组件、结果域或稳定接口",
+            "不进入 `registry.json`",
+            "五个对象不能混为一谈",
+            "计划步骤何时不是 Endem",
+            "来自 GNU Make 的可用边界",
+            "A2A 1.0.0",
+            "MCP 2025-11-25 Tasks",
+            "OpenAI Agents SDK",
+            "重规划触发矩阵",
+            "威胁到失败责任的映射",
+            "失败域与结果隔离",
+            "等待决定",
+        ):
+            if token not in proposal_text:
+                errors.append(f"planning proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "planning-and-replanning" in registry_text:
+            errors.append("non-normative planning proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+        ):
+            if "planning-and-replanning-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the planning research proposal"
+                )
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
     registered = sorted(set(registry) | set(read_manual_source_routes()))

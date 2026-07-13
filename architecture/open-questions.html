@@ -11,8 +11,8 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
-    <p class="lead">ADR-0010 已经采用现行制品、六个语义面和生命周期；ADR-0031 又以 Iknem 与 Drasor/drase 直接替换冲突名称。职责不因更名而重新开放。</p>
-    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0030 固定 Synem、Iknem、内容标准分层、Dromen、结构化诊断、协议适配、身份、文本、授权以及内容与外部决定的伴随边界；ADR-0031 固定名称迁移规则。</p>
+    <p class="lead">ADR-0010 已经采用现行制品、六个语义面和生命周期；ADR-0031 与 ADR-0032 又直接替换冲突名称。职责不因更名而重新开放。</p>
+    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0030 固定 Synem、Iknem、内容标准分层、Dromen、结构化诊断、协议适配、身份、文本、授权以及内容与外部决定的伴随边界；ADR-0031 与 ADR-0032 固定名称迁移规则。</p>
     <p>当前没有 Theor、权威目录、政策求值器或其他组件实现。稳定 ABI、时间与组合物理字段、嵌套或多变量量化、Synem 与 Iknem 物理容器、正式来源语言、Unicode 标识符、原始来源字节绑定、摘要和签名物理 Profile、授权决定与最终决定事件编码仍未冻结。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
@@ -42,6 +42,7 @@ permalink: "/architecture/open-questions.html"
     <h2>Dromen、Drasor 与 Iknem</h2>
     <details open><summary>Dromen 的运行 API 和平台隔离怎样实现？</summary><p>DRO-CORE 已固定主体、政策、环境、能力、秘密、预算、激活、观察、只读与销毁边界。未来仍需在代码阶段选择进程模型、沙箱组合、凭据代理、事件编码、预算计数器与销毁机制，并用平台级对抗证据证明，而不是把 Linux、容器或模型 SDK 名称当作隔离结论。</p></details>
     <details><summary>模型上下文怎样装配而不让数据取得指令权？</summary><p>TXT、AUT、ADP 与 DRO 已分别约束模型实际输入、授权、外部来源和会话上限，但尚未统一输入选择、角色、顺序、截断、缓存和损失。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">非规范研究提案</a>已经补齐十四个案例、唯一责任归属、八类威胁和失败域矩阵，主张由控制平面形成可审计装配说明，并把未来条款归还现有规范。它不创建新制品、命令、组件或哲学专名；在用户明确接受设计前仍不进入 ADR、CORE、登记或向量。</p></details>
+    <details><summary>目标、计划和重规划怎样分开？</summary><p>Endem/Synem 固定终态，Dromen 固定会话上限，计划只是在上限内可变的控制平面状态。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/planning-and-replanning-proposal.md">非规范目标、计划与重规划研究提案</a>用十二个案例、重规划矩阵和十类威胁说明：步骤、handoff、MCP/A2A Task 和工具完成都不能直接成为目标满足或最终接受。它不创建计划制品、命令、组件或 CORE；在用户接受责任分配前不进入登记或向量。</p></details>
     <details><summary>Drasor 怎样隔离模型和能力适配器？</summary><p>需确定进程、沙箱、取消、超时、幂等、网络、文件、凭据和资源限额。后端失败不能让 Drasor 静默扩大权限或修改 attested 制品。</p></details>
     <details><summary>Iknem 怎样获得物理编码？</summary><p>IKN-CORE 已固定 phain 对齐、有限无环溯源、证据类别、有效性、覆盖、决定分离和最小披露。字段编号、容器、摘要与签名算法、透明日志、撤销分发、跨生产者时钟归并、隐私策略和规范字节仍需真实消费者与新 Profile。</p></details>
     <details><summary>mene 时间怎样进入未来 Profile？</summary><p>ADR-0016 已决定 fixed/elapsed、strict/budgeted 与覆盖结果；字段编号、数值宽度、亚秒精度、闰秒、循环日历、时区数据库封装、跨重启关联和多生产者归并仍保持开放。</p></details>
@@ -55,7 +56,7 @@ permalink: "/architecture/open-questions.html"
     <details open><summary>独立 Theor 使用什么实现边界？</summary><p>未来 Theor 必须拥有自己的数据结构、解码器、验证器和错误路径，只与 Ktisor 共享公开规范和字节向量。当前没有实现；是否采用 Rust 或第二种语言，必须在用户开启代码阶段后根据共同故障风险和维护成本重新确认。</p></details>
     <details><summary>peira 应该是公开动作还是内部发布门禁？</summary><p>差分、恶意输入、复现和互操作检查不可省略，但这不自动证明最终用户需要单独运行 <code>endem peira</code>。代码阶段前必须先识别独立用户任务、输入输出、失败责任和不能由开发测试或发行流程承担的价值；否则只保留规范测试身份，不扩大公开 CLI。</p></details>
     <details><summary>独立 Theor 还缺什么证据？</summary><p>当前只有规范向量、资料检查器和未来验证条件。用户开启代码阶段后，才建立依赖审计、差分测试、长时 fuzz、故障注入和跨平台运行，用来寻找两条独立路径的共同输入假设。</p></details>
-    <details><summary>名称何时满足正式发布条件？</summary><p>ADR-0031 只完成工程初筛和当前名称选择。公开发行前仍需重新检查相邻 AI 与开发工具、目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。若再次触发冲突，直接更名；审查完成前不得声称商标可用。</p></details>
+    <details><summary>名称何时满足正式发布条件？</summary><p>ADR-0031 与 ADR-0032 只完成工程初筛和当前名称选择。公开发行前仍需重新检查相邻 AI 与开发工具、目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。若再次触发冲突，直接更名；审查完成前不得声称商标可用。</p></details>
     <details><summary>怎样证明构建可复现？</summary><p>ID-REP-001 已要求精确输入闭包、工具与参数、环境约束、至少两条独立产出路径和逐字节输出比较。仍需在代码阶段建立真实隔离构建、缓存独立性、差异归因和发布证据；build ID、签名和一次重跑都不能替代这些证据。</p></details>
   </section>
 
