@@ -13,7 +13,7 @@ global:
     href: /specifications/index.html
     label: 规范
     kicker: 定义权威边界
-    description: 查看 Endem、组合闭包、会话契约和范围证据。
+    description: 查看 Endem、组合闭包、会话契约、范围证据与授权边界。
     items:
       - { href: /specifications/endem.html, label: Endem, description: 最小自然语言目标制品与六个语义面, cover: endem-spec, cover_label: "SIGN → SITUATION" }
       - { href: /specifications/synem.html, label: Synem, description: 已解析、可封装的组合闭包, cover: synem, cover_label: "RESOLVED CLOSURE" }
@@ -111,6 +111,7 @@ modules:
           - { href: /architecture/adr-0026-external-protocol-adapters.html, label: "ADR-0026 · 外部协议适配" }
           - { href: /architecture/adr-0027-exact-identity-and-attestation.html, label: "ADR-0027 · 精确内容身份与签名" }
           - { href: /architecture/adr-0028-text-and-identifier-boundaries.html, label: "ADR-0028 · 文本与标识符边界" }
+          - { href: /architecture/adr-0029-authority-and-authorization-decisions.html, label: "ADR-0029 · 权威与授权决定" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:
@@ -123,6 +124,7 @@ modules:
           - { href: /specifications/adapters.html, label: 外部协议适配 }
           - { href: /specifications/identity.html, label: 精确内容身份与签名 }
           - { href: /specifications/text.html, label: 文本与标识符边界 }
+          - { href: /specifications/authority.html, label: 权威与授权决定 }
       - label: 系统组件
         items:
           - { href: /components/index.html, label: 组件总览 }

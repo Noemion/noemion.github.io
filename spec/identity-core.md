@@ -20,7 +20,7 @@
 - RFC 2119：https://www.rfc-editor.org/rfc/rfc2119.html
 - RFC 8174：https://www.rfc-editor.org/rfc/rfc8174.html
 
-符合性声明 `MUST` 固定 `ID-CORE`、对象规范、物理表示、内容 Profile、身份域、摘要算法政策和签名陈述 Profile 的精确版本。当前向量以 SHA-256 作为已知算法示例，只检查字段与边界，不为未来发行选择摘要或签名算法。
+符合性声明 `MUST` 固定 `ID-CORE`、对象规范、物理表示、内容 Profile、身份域、摘要算法政策和签名陈述 Profile 的精确版本。签名主体、验证身份或密钥适用性被用于授权时，还 `MUST` 固定并符合 `AUT-CORE` 的精确版本；签名有效不能替代授权决定。当前向量以 SHA-256 作为已知算法示例，只检查字段与边界，不为未来发行选择摘要或签名算法。
 
 ## 3. 精确身份与证明内容
 

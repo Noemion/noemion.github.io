@@ -14,7 +14,7 @@ overview:
   roadmap_href: /development/implementation-roadmap.html
 
 current:
-  summary: 项目已建立 Endem 内容标准分层、Synem 组合闭包、Dromen 会话契约、Tekmor 证据边界、跨对象结构化诊断、外部协议适配以及精确内容身份与签名边界。当前继续用条款、威胁、场景和正反向量验证资料一致性，不开发组件。
+  summary: 项目已建立 Endem 内容标准分层、Synem 组合闭包、Dromen 会话契约、Tekmor 证据边界，以及诊断、适配、身份、文本和权威授权的跨对象规范。当前继续用条款、威胁、场景和正反向量验证资料一致性，不开发组件。
   facts:
     - label: 已完成
       value: Endem 内容标准与对象边界
@@ -38,12 +38,12 @@ items:
     state: confirmed
     label: 已完成
     title: 最小规范与安全核心设计
-    description: 已形成语义与容器条款、END-P0 结构实验、END-P1 封闭载荷、DIA-CORE 诊断边界、ADP-CORE 外部适配边界、ID-CORE 精确身份与签名边界、TXT-CORE 文本与标识符边界、跨对象诊断目录和正反规范字节，并用 P0-LANG-001 选择未来候选语言。
+    description: 已形成语义与容器条款、END-P0 结构实验、END-P1 封闭载荷，以及诊断、适配、身份、文本和权威授权边界；已有跨对象诊断目录与正反规范材料，并用 P0-LANG-001 选择未来候选语言。
   - id: specification-validation
     state: current
     label: 正在进行
     title: 规范分层与证据边界验证
-    description: 当前只完善 END-CORE 内容标准、Profile、Synem、Dromen、Tekmor、DIA-CORE、ADP-CORE、ID-CORE、TXT-CORE、威胁模型、自然语言场景与正反向量；这些检查不表示 Poiet、Theor、Praxor、诊断系统、协议适配器、密码组件、Unicode 处理器、模型输入网关或 CLI 已经实现。
+    description: 当前只完善 END-CORE 内容标准、Profile、Synem、Dromen、Tekmor、DIA-CORE、ADP-CORE、ID-CORE、TXT-CORE、AUT-CORE、威胁模型、自然语言场景与正反向量；这些检查不表示任何组件已经实现。
   - id: synem-binding-release
     state: future
     label: 后续规划

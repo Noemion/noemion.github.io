@@ -20,7 +20,7 @@
 - RFC 2119：https://www.rfc-editor.org/rfc/rfc2119.html
 - RFC 8174：https://www.rfc-editor.org/rfc/rfc8174.html
 
-符合性声明 `MUST` 固定 `ADP-CORE`、DRO-CORE、DIA-CORE、适用对象规范和外部协议的精确版本。当前没有 MCP 或 A2A Profile；JSON-RPC、HTTP、Protocol Buffers、SSE、Webhook 与 SDK 对象只是未来映射候选，不能自称为 Noemion 规范字节。
+符合性声明 `MUST` 固定 `ADP-CORE`、DRO-CORE、DIA-CORE、AUT-CORE、适用对象规范和外部协议的精确版本。外部 scope、凭据、Agent 状态或 step-up 只能成为授权输入或上限，不能替代本地授权决定。当前没有 MCP 或 A2A Profile；JSON-RPC、HTTP、Protocol Buffers、SSE、Webhook 与 SDK 对象只是未来映射候选，不能自称为 Noemion 规范字节。
 
 ## 3. 适配内容
 

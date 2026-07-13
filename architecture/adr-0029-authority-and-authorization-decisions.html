@@ -1,0 +1,100 @@
+---
+layout: default
+title: "ADR-0029 权威与授权决定边界"
+page_role: "content"
+footer_text: "Noemion · ADR-0029"
+permalink: "/architecture/adr-0029-authority-and-authorization-decisions.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0029</span></nav>
+  <header class="content-introduction"><h1>ADR-0029<br>权威与授权决定边界</h1><p>让自然语言候选、委托 Agent、人类同意和运行能力都服从同一套可核对的主体、范围、政策、时效与结果分离规则。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">AUT-CORE 0.1.0-draft</span><span class="badge">Protocol Independent</span><span class="badge">No Policy Engine</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">Noemion 采用 AUT-CORE 作为跨制品权威与授权决定标准。模型、签名、登录、界面点击、外部 Agent 状态和凭据都不能自行取得语义或最终决定权。</p>
+    <p>AUT-CORE 固定十二条抽象规则，关闭“谁有权确认自然语言候选”这一开放问题。它不创建新制品、授权令牌、政策语言或组件，也不增加 END-P1 字段。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么现有规范还不够</h2>
+    <div class="table-wrap"><table><thead><tr><th>现有规范</th><th>已经要求</th><th>仍缺少的共同定义</th></tr></thead><tbody>
+      <tr><td>END-CORE</td><td><code>semion</code> 必须由确定性规则或具名权威确认</td><td>主体怎样取得权威、范围怎样固定、候选怎样被安全展示</td></tr>
+      <tr><td>DRO-CORE</td><td>政策、权威、同意和能力必须在会话前封闭</td><td>委托、step-up、撤销和能力交集的共同授权语义</td></tr>
+      <tr><td>TEK-CORE</td><td>决定记录不能自行创造决定权限</td><td>决定请求、多人门槛、冲突和重放怎样约束</td></tr>
+      <tr><td>ID-CORE</td><td>签名验证与主体授权必须分开</td><td>角色适用性和当前决定范围由什么证明</td></tr>
+      <tr><td>ADP-CORE</td><td>外部协议状态和 scope 不能扩大本地能力</td><td>链式 Agent 授权怎样回到本地具名权威</td></tr>
+      <tr><td>TXT-CORE</td><td>授权界面要绑定精确机器值和安全显示视图</td><td>显示一致何时足以成为有效同意的一项依据</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>采用的权威模型</h2>
+    <div class="flow"><div class="step">精确请求</div><div class="step">权威语境</div><div class="step">主体与角色</div><div class="step">封闭范围</div><div class="step">依据与安全视图</div><div class="step">grant deny defer</div><div class="step">时效与撤销</div></div>
+    <p>授权不是一个布尔字段。请求必须说明谁请求、谁实际行动、代表谁、针对什么对象执行什么动作、出于什么目的、面向哪个受众、使用哪份政策以及在什么截止点判断。</p>
+    <p><code>grant</code> 只授予记录中的有限范围；<code>deny</code> 只拒绝当前请求；<code>defer</code> 表示没有获授权答案。它们构成授权决定域，不替代最终 <code>accepted / rejected / deferred</code>、满足结果或会话终止。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>自然语言意义为什么不能自我授权</h2>
+    <p>结构合法的候选只说明它能被当前类型系统表达。模型置信度只描述模型输出；高相似度只描述某个比较 Profile。三者都不能说明候选符合来源主体意图，更不能决定谁有权关闭相关 <code>apor</code>。</p>
+    <p>授权者必须核对精确来源、解码文本、候选、影响的语义面和关系位置、候选生产方式、安全显示视图、决定理由和剩余未决项。批量批准只有在所有候选属于同一权威范围并完整展示差异时才可能有效。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>委托与冒充怎样处理</h2>
+    <p>RFC 8693 明确区分 delegation 与 impersonation。Noemion 默认采用委托：每一级保留原授权主体、授予者、实际行动者、被代表主体、范围、目的、受众、期限、深度和撤销来源。</p>
+    <p>每一级范围、预算和期限只能保持或继续收窄，链必须有限无环。外部协议即使允许冒充，本地仍保存真实行动者；没有独立政策明确允许时，冒充不能进入授权闭包。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>MCP 与 A2A 为什么不能成为授权权威</h2>
+    <p>MCP 2025-11-25 要求访问令牌绑定目标资源，并允许 scope 不足后发起增量授权。A2A 允许 Agent 把 <code>AUTH_REQUIRED</code> 继续交给客户端或上游 Agent。两者都提供传输机制，却不会替部署者定义自然语言语义、组织角色和最终验收权限。</p>
+    <p>因此，外部 scope、凭据、任务状态和 Agent Card 只能成为适配输入。Praxor 必须把它们与 AUT-CORE 权威语境、Dromen、制品限制、适配器能力和预算求交。任何 step-up 都建立新授权决定与新 Praxe 会话。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>同意、多人决定和重放</h2>
+    <p>RFC 9396 表明细粒度授权需要动作、资源和交易条件，并允许只授予请求子集。AUT-CORE 进一步要求同意界面绑定精确机器请求，披露目的、接收方、期限、撤销和文本变换；默认选中、无关权限捆绑和不可达拒绝路径都不能形成有效同意。</p>
+    <p>多人决定在请求前固定合格主体、不同身份、所需角色或数量、否决、冲突与缺席规则。一次决定还绑定请求、对象、目的、会话、次数和去重键，防止旧点击、重复签名和新 request ID 重放。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>GNU 技术提供的边界参照</h2>
+    <p>GNU Guix 不会仅因替代物带有签名就接受任意服务器。管理员必须把允许的公钥显式加入本地 ACL；这说明密码证明与本地授权政策属于不同判断。</p>
+    <p>GnuPG 同样区分密钥或签名验证与用户选择的 trust model。Noemion 借鉴“本地显式配置谁被信任”的原则，但不采用 Guix ACL、公钥、GnuPG ownertrust 或 Web of Trust 作为自然语言语义权威。</p>
+  </section>
+
+  <section class="content-stack">
+    <h2>语言哲学采用边界</h2>
+    <p>《逻辑哲学论》4.022 说：“命题显示其意义。命题显示当它为真时事情是怎样的，而且宣称事情就是这样的。”这支持 Noemion 把候选命题的意义结构与其真假分开。</p>
+    <p>逻辑形式不会显示组织授权、法律同意或委托链。谁可以确认一种投影、批准一种能力或作出最终决定，必须通过外部政策和主体关系建立。项目不从哲学命题直接推出认证方法、角色体系或授权算法。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>权威资料与采用限制</h2>
+    <ul>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc9396.html">RFC 9396 Rich Authorization Requests</a>用于细粒度范围与部分授予参照。</li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc8693.html">RFC 8693 Token Exchange</a>用于委托、冒充、subject 与 actor 分离参照。</li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc9470.html">RFC 9470 Step-up Authentication</a>说明重新认证不等于资源授权政策。</li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc9700.html">RFC 9700 OAuth Security BCP</a>用于受众、资源、动作和发送者限制参照。</li>
+      <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization">MCP 2025-11-25 Authorization</a>与<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 规范</a>用于 Agent 时代的授权传输与链式请求反例。</li>
+      <li><a href="https://guix.gnu.org/manual/devel/en/guix.pdf">GNU Guix Reference Manual</a>与<a href="https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration-Options.html">GnuPG Configuration Options</a>用于本地显式信任政策参照。</li>
+    </ul>
+  </section>
+
+  <section class="content-stack">
+    <h2>后果与当前状态</h2>
+    <ul>
+      <li><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md">AUT-CORE 0.1.0-draft</a>定义 12 条跨制品义务。</li>
+      <li>12 类威胁、18 个设计场景和 24 个正反向量覆盖当前抽象边界。</li>
+      <li>END-CORE 的投影授权、DRO-CORE 的政策与能力闭包、TEK-CORE 的决定权威、ID-CORE 的授权分离和 ADP-CORE 的 step-up 统一引用本边界。</li>
+      <li>当前没有权威目录、身份提供方、政策求值器、同意界面、法定人数服务、撤销服务、能力代理、决定服务或协议授权实现。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>仍未冻结的内容</h2>
+    <p>主体与角色体系、政策语言、授权事件物理编码、同意 UI Profile、多人算法、凭据格式、协议映射、撤销分发、审计存储和法律效力仍需真实消费者、独立 Profile 与实现证据。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0028-text-and-identifier-boundaries.html">← ADR-0028</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

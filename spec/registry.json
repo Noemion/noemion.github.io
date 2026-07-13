@@ -101,6 +101,16 @@
       "wire_status": "not-applicable",
       "path": "spec/text-core.md",
       "scope": "Cross-artifact text slots, strict UTF-8, source provenance, identifier closure, normalization, comparison, ranges, bidi, hidden characters, metadata, model input and display boundaries"
+    },
+    {
+      "spec_id": "AUT-CORE",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "wire_status": "not-applicable",
+      "path": "spec/authority-core.md",
+      "scope": "Cross-artifact authority context, principal, scope, semantic authorization, authorization decision, delegation, multi-authority, consent, validity, replay, capability and result-separation boundaries"
     }
   ],
   "supporting_documents": [
@@ -236,6 +246,20 @@
       "status": "non-normative-design-corpus",
       "path": "spec/text-scenarios.md",
       "scope": "Natural-language design-review scenarios for Unicode text, identifiers, source provenance, normalization, display and model-input boundaries"
+    },
+    {
+      "id": "AUT-THREAT",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "path": "spec/authority-threat-model.md",
+      "scope": "Authority-context, principal, scope, semantic approval, decision, delegation, multi-authority, consent, validity, replay, capability and result-laundering threats"
+    },
+    {
+      "id": "AUT-SCEN",
+      "version": "0.1.0-draft",
+      "status": "non-normative-design-corpus",
+      "path": "spec/authority-scenarios.md",
+      "scope": "Natural-language design-review scenarios for semantic authorization, delegation, consent, multi-authority decisions, revocation, replay and capability boundaries"
     }
   ],
   "experiments": [
@@ -335,6 +359,16 @@
     ,{"term": "hidden-character-inventory", "kind": "text-security-interface", "decision_status": "accepted-draft", "definition": "按 Unicode 版本记录不可见、默认可忽略、变体、连接、空白、混合脚本与同形风险位置的审查清单"}
     ,{"term": "model-text-binding", "kind": "model-boundary-interface", "decision_status": "accepted-draft", "definition": "把模型实际输入身份、预处理、隐藏字符清单、模型与 tokenizer 身份和人类显示视图连接起来的候选约束"}
     ,{"term": "display-view", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "绑定来源身份并披露转义、截断、脱敏、方向隔离和控制字符可视化的非权威呈现"}
+    ,{"term": "authority-context", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "把政策、权威域、对象、动作、目的、受众、租户、条件、截止点与失败责任固定在一次授权检查中的语境"}
+    ,{"term": "authority-principal", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "在精确权威语境中经认证、角色核对并获准作出有限决定的主体"}
+    ,{"term": "authorization-scope", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "按对象、动作、语义位置、目的、受众、资源、时间和条件封闭的默认不授予范围"}
+    ,{"term": "semantic-authorization", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "确定性规则或具名权威针对精确来源、候选和语义位置作出的有限确认"}
+    ,{"term": "authorization-decision", "kind": "authority-result-domain", "decision_status": "accepted-draft", "definition": "grant、deny 或 defer；只回答精确请求在当前权威语境中是否获得有限授权"}
+    ,{"term": "delegation-chain", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "保留原始主体、逐级授予者、实际行动者、范围、期限、深度和撤销来源的有限无环委托关系"}
+    ,{"term": "multi-authority-policy", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "预先固定合格主体、不同身份、数量或角色、否决、冲突、缺席和截止点的多人决定规则"}
+    ,{"term": "consent-binding", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "把人类安全视图、精确机器请求、动作、资源、目的、接收方、期限、撤销和后果连接起来的同意关系"}
+    ,{"term": "authorization-validity", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "授权决定在具名截止点相对适用期、主体、政策、状态和撤销仍可使用的判断"}
+    ,{"term": "decision-replay-binding", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "把授权决定限制到唯一请求、对象、动作、目的、受众、会话、截止点、使用次数和去重规则的绑定"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -422,7 +456,19 @@
     {"id": "THR-TXT-009", "clauses": ["TXT-HID-001"], "evidence_status": "partial"},
     {"id": "THR-TXT-010", "clauses": ["TXT-MET-001"], "evidence_status": "partial"},
     {"id": "THR-TXT-011", "clauses": ["TXT-AIM-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-012", "clauses": ["TXT-OUT-001"], "evidence_status": "partial"}
+    {"id": "THR-TXT-012", "clauses": ["TXT-OUT-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-001", "clauses": ["AUT-CTX-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-002", "clauses": ["AUT-PRN-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-003", "clauses": ["AUT-SCP-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-004", "clauses": ["AUT-SEM-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-005", "clauses": ["AUT-DEC-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-006", "clauses": ["AUT-DEL-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-007", "clauses": ["AUT-MUL-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-008", "clauses": ["AUT-CNS-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-009", "clauses": ["AUT-TIM-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-010", "clauses": ["AUT-RPL-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-011", "clauses": ["AUT-CAP-001"], "evidence_status": "partial"},
+    {"id": "THR-AUT-012", "clauses": ["AUT-SEP-001"], "evidence_status": "partial"}
   ],
   "clauses": [
     {
@@ -2053,6 +2099,150 @@
         {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
         {"status": "planned", "ref": "peira:text-display-export-provenance"}
+      ]
+    },
+    {
+      "id": "AUT-CTX-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future policy resolver, authority registry and authorization consumer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:authority-context-binding"}
+      ]
+    },
+    {
+      "id": "AUT-PRN-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future identity adapter, authority registry and decision boundary",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:authority-principal-role"}
+      ]
+    },
+    {
+      "id": "AUT-SCP-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future authorization scope producer, comparator and consumer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:authority-scope-closure"}
+      ]
+    },
+    {
+      "id": "AUT-SEM-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future semantic review authority, candidate producer and Poiet input boundary",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:semantic-authorization-binding"}
+      ]
+    },
+    {
+      "id": "AUT-DEC-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future authorization decision producer and relying consumer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:authorization-decision-content"}
+      ]
+    },
+    {
+      "id": "AUT-DEL-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future delegating control plane, Agent adapter and capability broker",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:delegation-chain-narrowing"}
+      ]
+    },
+    {
+      "id": "AUT-MUL-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future multi-authority policy owner and decision aggregator",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:multi-authority-policy"}
+      ]
+    },
+    {
+      "id": "AUT-CNS-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future consent surface, secure display path and authority checker",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:consent-view-binding"}
+      ]
+    },
+    {
+      "id": "AUT-TIM-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future authorization status source, revocation authority and consumer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:authorization-validity-cutoff"}
+      ]
+    },
+    {
+      "id": "AUT-RPL-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future authorization request producer, replay guard and side-effect adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:authorization-replay-binding"}
+      ]
+    },
+    {
+      "id": "AUT-CAP-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future Praxor capability resolver, Dromen establisher and external adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:authorized-capability-intersection"}
+      ]
+    },
+    {
+      "id": "AUT-SEP-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future authority consumer, result mapper, Praxor and decision authority",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
+        {"status": "planned", "ref": "peira:authority-result-domain-separation"}
       ]
     }
   ]

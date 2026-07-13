@@ -1,0 +1,101 @@
+---
+layout: default
+title: "权威与授权决定规范"
+page_role: "content"
+footer_text: "Noemion · Authority and Authorization Decisions"
+permalink: "/specifications/authority.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>权威与授权决定</span></nav>
+  <header class="content-introduction"><h1>权威与授权决定边界</h1><p>定义谁可以在什么范围内确认自然语言意义、解决未决项、授予运行能力或作出决定，并让委托、同意、撤销和多人冲突都可核对。</p><div class="badges"><span class="badge">AUT-CORE 0.1.0-draft</span><span class="badge">12 Clauses</span><span class="badge">No Wire Format</span><span class="badge">No Policy Engine</span></div></header>
+
+  <section class="content-stack">
+    <h2>它解决什么问题</h2>
+    <p class="lead">模型可以提出候选，界面可以收集点击，签名可以认证陈述，但只有落在精确政策与范围内的具名权威才能形成授权。</p>
+    <p>项目已接受这项跨制品边界：认证、授权、满足和最终决定必须分别判断，任何一层不得替另一层作结论。</p>
+    <p>此前 Endem、Dromen、Tekmor、身份和协议适配规范都要求“具名权威”或“当前政策”，却没有共同定义主体、作用范围、委托、多人冲突、同意、撤销和重放。AUT-CORE 收敛这些跨对象不变量，不创建新的制品、文件格式、令牌、角色系统或组件。</p>
+    <p class="callout"><strong>权威边界：</strong>实现义务以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md">AUT-CORE 条款源</a>为准。当前只有规范、威胁、场景和提案向量，没有身份提供方、政策求值器、同意界面、能力代理或决定服务。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>必须分开的六个问题</h2>
+    <div class="table-wrap"><table><thead><tr><th>问题</th><th>需要什么</th><th>不能直接推出</th></tr></thead><tbody>
+      <tr><td>当前主体是谁</td><td>认证方法、身份与实际行动者</td><td>这个主体有权决定</td></tr>
+      <tr><td>主体能决定什么</td><td>政策、角色来源、对象、动作、目的和范围</td><td>其他字段、租户或用途也获权</td></tr>
+      <tr><td>候选意义是否获准</td><td>精确来源、候选、语义位置、安全视图和具名权威</td><td>候选为真或目标已经满足</td></tr>
+      <tr><td>运行能力是否获授</td><td>授权范围与制品、政策、环境、Dromen、适配器和预算求交</td><td>环境可访问或协议提供的全部能力</td></tr>
+      <tr><td>证据是否足够</td><td>适用 Tekmor 的有效性和覆盖度</td><td>授权主体已最终接受</td></tr>
+      <tr><td>最终是否接受</td><td>原满足结果、证据、决定规则和最终权威</td><td>由认证、授权、签名或会话完成替代</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>十二条权威与授权规则</h2>
+    <div class="table-wrap"><table><thead><tr><th>规则</th><th>直白要求</th><th>必须拒绝</th></tr></thead><tbody>
+      <tr><td><code>AUT-CTX-001</code></td><td>绑定政策、权威域、对象、动作、目的、租户、条件和截止点</td><td>latest 政策、环境角色或页面位置替代语境</td></tr>
+      <tr><td><code>AUT-PRN-001</code></td><td>分开请求者、行动者、被代表主体、认证、角色与决定权</td><td>登录、签名、成员资格或 Agent 自述自动授权</td></tr>
+      <tr><td><code>AUT-SCP-001</code></td><td>按对象、动作、语义位置、目的、受众、资源和时间封闭范围</td><td>通配符、前缀、环境权限或未知字段扩大授权</td></tr>
+      <tr><td><code>AUT-SEM-001</code></td><td>确认自然语言候选时绑定来源、候选、语义位置、显示视图和权威</td><td>模型置信度、结构合法或未区分批量点击确认意义</td></tr>
+      <tr><td><code>AUT-DEC-001</code></td><td>决定记录精确请求、范围、依据、主体、理由和 <code>grant / deny / defer</code></td><td>模糊“已批准”、部分范围冒充全部或 defer 当允许</td></tr>
+      <tr><td><code>AUT-DEL-001</code></td><td>委托保留原主体和实际行动者，并逐级收窄范围、期限和预算</td><td>冒充、隐藏中间人、循环、无限深度或子 Agent 扩权</td></tr>
+      <tr><td><code>AUT-MUL-001</code></td><td>预先固定合格主体、不同身份、门槛、否决、冲突和截止点</td><td>重复账户凑人数、重复签名计票或到达顺序改变结果</td></tr>
+      <tr><td><code>AUT-CNS-001</code></td><td>同意绑定可理解安全视图、机器请求、目的、接收方、期限和撤销</td><td>默认选中、捆绑权限、隐藏接收方或同意者无权</td></tr>
+      <tr><td><code>AUT-TIM-001</code></td><td>使用授权前核对适用期、截止点、主体、政策、状态与撤销</td><td>永久缓存批准、忽略离职或撤销、删除历史记录</td></tr>
+      <tr><td><code>AUT-RPL-001</code></td><td>决定绑定请求、对象、动作、目的、会话、次数和去重规则</td><td>旧点击跨对象重放、付款重复消费或重试换 ID</td></tr>
+      <tr><td><code>AUT-CAP-001</code></td><td>能力只取授权与所有本地上限的交集，step-up 建立新会话</td><td>权限并集、token 透传、环境 root 或原地扩权</td></tr>
+      <tr><td><code>AUT-SEP-001</code></td><td>认证、授权、能力、证据、满足、最终决定和会话结果保持正交</td><td>grant 被写成真值、met、accepted 或 completed</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>自然语言候选怎样获得授权</h2>
+    <div class="flow"><div class="step">精确来源与解码文本</div><div class="step">不可信候选</div><div class="step">影响位置与风险</div><div class="step">安全显示视图</div><div class="step">具名权威与范围</div><div class="step">grant deny defer</div><div class="step">保留剩余 apor</div></div>
+    <p>一个候选即使结构合法、来自强模型并具有很高置信度，也只能停留在候选层。授权者必须看到候选相对来源改变了什么、影响哪些关系和角色、由谁产生、哪些未决项仍然存在。权限只覆盖已展示且落在主体职责内的部分。</p>
+    <p>确定性规则也不能获得无限权威。规则必须固定版本、输入域、输出位置和失败责任；超出规则声明域的输入仍进入 <code>apor</code> 或拒绝，不能用“自动规则”掩盖新的自然语言判断。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>Agent 委托为什么必须保留行动者</h2>
+    <p>RFC 8693 区分 delegation 与 impersonation：委托保留实际行动者代表谁，冒充则可能让接收方只看到被代表主体。Noemion 默认只接受可追踪委托；即使外部协议允许冒充，本地记录仍保留真实行动者，并要求独立政策明确允许。</p>
+    <p>A2A 允许 <code>AUTH_REQUIRED</code> 沿 Agent 链继续委托，MCP 允许 scope 不足后重新授权。这些机制只传递请求或凭据，不证明某个 Agent 有权批准，也不能修改已有 Dromen。扩大能力必须产生新的授权决定和新的 Praxe 会话。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>同意和多人批准怎样避免形式化陷阱</h2>
+    <p>人类点击只有在安全视图与精确机器请求一致、目的和接收方清楚、拒绝路径可达、期限和撤销后果明确时，才可能成为同意依据。点击者仍需通过当前角色和范围核对；同意不是身份认证或权威证明的替代品。</p>
+    <p>多人决定必须在看到结果前固定合格主体、不同身份规则、所需角色或数量、否决和冲突处理。同一控制主体的多个账户、重复签名和重放事件只能计一次；未解决冲突保持 <code>defer</code>，不能由最后到达的事件决定。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>权威资料与采用限制</h2>
+    <ul>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc9396.html">RFC 9396 精细授权请求</a>提供动作、资源和部分授予边界；项目不采用 OAuth JSON 作为本地格式。</li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc8693.html">RFC 8693 Token Exchange</a>区分委托与冒充；项目要求委托链始终保留实际行动者。</li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc9470.html">RFC 9470 Step-up Authentication</a>只解决认证强度不足，不定义资源授权政策；重新认证成功不会自动授权动作。</li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc9700.html">RFC 9700 OAuth 安全实践</a>要求令牌限制发送者、受众、资源与动作；项目把令牌视为能力上限而非权威本身。</li>
+      <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization">MCP 2025-11-25 授权规范</a>与<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 规范</a>提供外部授权和委托机制；本地语义与最终决定仍由 AUT-CORE 管理。</li>
+      <li><a href="https://guix.gnu.org/manual/devel/en/guix.pdf">GNU Guix 授权实践</a>要求本地显式授权替代服务器的签名密钥；<a href="https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration-Options.html">GnuPG 信任模型</a>也把密码验证与本地信任判断分开。</li>
+    </ul>
+  </section>
+
+  <section class="content-stack">
+    <h2>语言哲学边界</h2>
+    <p>维特根斯坦在《逻辑哲学论》4.022 写道：“命题显示其意义。命题显示当它为真时事情是怎样的，而且宣称事情就是这样的。”Noemion 由此坚持：候选命题的结构与真假判断必须分开。</p>
+    <p>这段话不能决定组织中谁有权批准、同意怎样有效、委托能否成立或冲突怎样解决。授权是额外的制度与安全关系，必须由精确政策、主体、范围、决定和证据定义，不能从命题的逻辑形式或措辞本身推出。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>符合性材料</h2>
+    <div class="table-wrap"><table><thead><tr><th>材料</th><th>当前覆盖</th><th>不能证明</th></tr></thead><tbody>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-threat-model.md">AUT-THREAT</a></td><td>12 类语境漂移、范围放大、委托、同意、重放和结果洗白威胁</td><td>身份系统、政策引擎或能力代理已经安全</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-scenarios.md">AUT-SCEN</a></td><td>18 个支持、反例和边界场景</td><td>场景本身是法律授权、政策语言或组件证据</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/authority">AUT-CORE 向量</a></td><td>24 个提案包含 12 个允许案例和 12 个确定拒绝</td><td>授权服务、同意界面、令牌交换或真实副作用已经实现</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-band">
+    <h2>当前仍未冻结</h2>
+    <p>权威目录、角色和政策语言、授权事件物理编码、同意 UI Profile、法定人数算法、凭据格式、外部协议映射、撤销分发、能力代理、审计存储和法律效力仍保持开放。</p>
+  </section>
+  <div class="next-prev"><a href="text.html">← 文本与标识符边界</a><a href="../architecture/adr-0029-authority-and-authorization-decisions.html">ADR-0029 →</a></div>
+</main>

@@ -12,6 +12,8 @@ Dromen is the sealed, read-only execution contract for exactly one Praxe session
 
 Dromen separates a persistent goal artifact from the mutable world in which a session attempts to realize it. It does not contain live credentials, open handles, mutable observations, model memory or final results. Runtime events and observations become scoped Tekmor; satisfaction, authority decisions and session termination remain separate result domains.
 
+Any claimed authority, consent, delegation, authorization decision or capability grant `MUST` also pin and conform to the exact applicable `AUT-CORE` version. DRO-CORE defines the sealed session intersection; it does not redefine who may authorize its inputs.
+
 The keywords `MUST`, `MUST NOT`, `SHOULD`, `SHOULD NOT` and `MAY` are normative as described by BCP 14 when written in uppercase.
 
 ## 2. Position in the lifecycle
@@ -118,4 +120,3 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 ## 4. Current non-goals
 
 This specification does not define a Dromen file, extension, magic number, serialization, stable ABI, runtime API, capability broker, sandbox, event encoding, process model, recovery protocol or implementation language. It also does not select Linux namespaces, seccomp, Landlock, containers, virtual machines or a model SDK. Those mechanisms may satisfy future implementation obligations only after the user opens the component-code stage and independent evidence demonstrates their actual isolation properties.
-

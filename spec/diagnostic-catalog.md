@@ -182,7 +182,24 @@
 | `text.model.view_unbound` | `TXT-AIM-001` | policy | 模型实际输入、预处理、tokenizer、隐藏字符清单和人工视图没有绑定 |
 | `text.output.provenance_missing` | `TXT-OUT-001` | evidence | 显示、复制、诊断或导出没有披露转义、截断、脱敏、方向与损失 |
 
-## 12. 稳定性边界
+## 12. 权威与授权决定错误码
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `authority.context.unbound` | `AUT-CTX-001` | policy | 政策、权威域、对象、动作、目的、受众、租户、条件或截止点未精确绑定 |
+| `authority.principal.unqualified` | `AUT-PRN-001` | policy | 认证、签名、成员资格或自描述被当作当前决定权限 |
+| `authority.scope.amplified` | `AUT-SCP-001` | policy | 通配符、前缀、环境权限、未知字段或错误比较扩大授权范围 |
+| `authority.semantic.unreviewed` | `AUT-SEM-001` | semantic | 模型候选、置信度、结构合法、截断视图或未区分批量点击确认语义 |
+| `authority.decision.incomplete` | `AUT-DEC-001` | policy | 授权决定缺少请求、对象、范围、语境、依据、主体、理由或有限结果 |
+| `authority.delegation.amplified` | `AUT-DEL-001` | policy | 委托隐藏行动者、允许冒充、形成循环、超深或扩大范围、期限与预算 |
+| `authority.multi.conflicted` | `AUT-MUL-001` | policy | 多权威门槛未预注册、主体重复、冲突未解决或到达顺序改变决定 |
+| `authority.consent.unbound` | `AUT-CNS-001` | policy | 人类视图与机器请求不一致、目的或接收方隐藏、拒绝不可达或同意者无权 |
+| `authority.validity.stale` | `AUT-TIM-001` | policy | 授权过期、撤销、状态不新鲜、主体或政策漂移，或缓存成功无限复用 |
+| `authority.replay.detected` | `AUT-RPL-001` | policy | 决定跨对象、动作、目的、受众或会话使用，或超过允许次数 |
+| `authority.capability.outside_intersection` | `AUT-CAP-001` | policy | 能力使用并集、环境权限、token 透传、协议挑战或原地 step-up 扩大旧会话 |
+| `authority.result.overclaimed` | `AUT-SEP-001` | policy | 授权被提升为真值、满足、证据充分、最终接受、会话完成或模型权威 |
+
+## 13. 稳定性边界
 
 上述机器码只在当前规范、目录和提案向量中保持草案稳定，尚不构成发行 ABI。提升为稳定接口前必须完成：
 
