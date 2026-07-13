@@ -1,6 +1,6 @@
 # Noemion 规范向量
 
-本目录保存可由 Ktisor、生产读取器、独立 Theor 和 `peira` 共同消费的规范向量。
+本目录保存可由 Ktisor、生产读取器、独立 Theor 和内部符合性门禁共同消费的规范向量。
 
 `semantic/` 验证 Endem 语义结构、授权边界和失败定位。每个 JSON 文件都是 `end-core.semantic-vector.v2` 测试外壳，不是 `.endem`，也不能改名后交给运行时。`context.external_preconditions` 只给检查器提供文件外的测试前置条件，不属于 Endem 规范字节；改变授权、证据或决定语境不得改变同一输入的内容身份。向量外壳使用规范 ID，不使用 Noemion 品牌前缀。
 

@@ -30,7 +30,7 @@
 
 **失败：**仅比较摘要文本、把 Endem 摘要当作 Synem 身份、忽略 Profile 或在域定义变化后沿用旧身份时，比较无效。
 
-**验证：**`ID-SCN-001`、`ID-SCN-002`；`vectors/identity/cases.json`；未来 `peira:identity-domain-binding` 组件测试。
+**验证：**`ID-SCN-001`、`ID-SCN-002`；`vectors/identity/cases.json`；未来 `conformance:identity-domain-binding` 组件测试。
 
 ### ID-BYT-001 — 摘要输入必须是精确且非循环的字节范围
 
@@ -38,7 +38,7 @@
 
 **失败：**发布者与验证者对换行、压缩、尾随数据或包络覆盖范围理解不同，摘要把自身字段作为输入，或只写“对内容求哈希”而没有定义字节边界时，身份无效。
 
-**验证：**`ID-SCN-003`；`vectors/identity/cases.json`；未来 `peira:identity-byte-domain` 组件测试。
+**验证：**`ID-SCN-003`；`vectors/identity/cases.json`；未来 `conformance:identity-byte-domain` 组件测试。
 
 ### ID-REF-001 — 安全引用必须携带完整不可变身份
 
@@ -46,7 +46,7 @@
 
 **失败：**Synem 通过搜索路径绑定成员、Dromen 通过发布标签选择主体、Iknem 只保存文件名，或签名陈述只包含 URL 时，引用不完整。
 
-**验证：**`ID-SCN-004`、`ID-SCN-005`；`vectors/identity/cases.json`；未来 `peira:identity-reference-closure` 组件测试。
+**验证：**`ID-SCN-004`、`ID-SCN-005`；`vectors/identity/cases.json`；未来 `conformance:identity-reference-closure` 组件测试。
 
 ### ID-ALG-001 — 摘要与签名算法必须由版本化政策登记
 
@@ -54,7 +54,7 @@
 
 **失败：**省略算法、接受任意长度、把 SHA-1 与 SHA-256 当作同一身份空间、把摘要算法用于未登记签名用途，或验证器自动降级时，处理无效。
 
-**验证：**`ID-SCN-006`；`vectors/identity/cases.json`；未来 `peira:identity-algorithm-policy` 组件测试。
+**验证：**`ID-SCN-006`；`vectors/identity/cases.json`；未来 `conformance:identity-algorithm-policy` 组件测试。
 
 ### ID-DSP-001 — 截断值只能显示不能绑定
 
@@ -62,7 +62,7 @@
 
 **失败：**界面复制短摘要用于 Synem 绑定、日志只保存十二位前缀、碰撞时选择缓存对象，或把 build ID 当作当前字节校验和时，绑定无效。
 
-**验证：**`ID-SCN-007`；`vectors/identity/cases.json`；未来 `peira:identity-full-digest-binding` 组件测试。
+**验证：**`ID-SCN-007`；`vectors/identity/cases.json`；未来 `conformance:identity-full-digest-binding` 组件测试。
 
 ### ID-EQV-001 — 精确身份与语义等价必须分开
 
@@ -70,7 +70,7 @@
 
 **失败：**摘要相同被解释为命题为真、不同编码被默认合并、裁剪后对象继承原身份，或发布者自行声明 Semantic Key 时，推导无效。
 
-**验证：**`ID-SCN-008`、`ID-SCN-009`；`vectors/identity/cases.json`；未来 `peira:identity-equivalence-separation` 组件测试。
+**验证：**`ID-SCN-008`、`ID-SCN-009`；`vectors/identity/cases.json`；未来 `conformance:identity-equivalence-separation` 组件测试。
 
 ### ID-STM-001 — 签名必须覆盖有类型的完整陈述
 
@@ -78,7 +78,7 @@
 
 **失败：**只对裸摘要签名、载荷类型未覆盖、发布签名被当作授权签名、算法字段可被替换，或同一签名从单签结构搬到多签结构仍被接受时，陈述无效。
 
-**验证：**`ID-SCN-010`、`ID-SCN-011`；`vectors/identity/cases.json`；未来 `peira:signed-statement-context` 组件测试。
+**验证：**`ID-SCN-010`、`ID-SCN-011`；`vectors/identity/cases.json`；未来 `conformance:signed-statement-context` 组件测试。
 
 ### ID-ENV-001 — 验证包络必须外置并完整携带验证材料
 
@@ -86,7 +86,7 @@
 
 **失败：**追加证书改变 Endem 身份、包络只保存 `kid`、离线验证缺少必要时间或日志材料，或把多个签名数量当作覆盖增加时，包络不足。
 
-**验证：**`ID-SCN-012`；`vectors/identity/cases.json`；未来 `peira:attestation-envelope-materials` 组件测试。
+**验证：**`ID-SCN-012`；`vectors/identity/cases.json`；未来 `conformance:attestation-envelope-materials` 组件测试。
 
 ### ID-AUT-001 — 密码验证不能替代身份授权与主张判断
 
@@ -94,7 +94,7 @@
 
 **失败：**供应商签名被当作事实正确、透明日志包含被当作批准、证书有效被当作当前授权，或模型签名后候选直接成为 Endem 时，权威推导无效。
 
-**验证：**`ID-SCN-013`；`vectors/identity/cases.json`；未来 `peira:signature-authority-separation` 组件测试。
+**验证：**`ID-SCN-013`；`vectors/identity/cases.json`；未来 `conformance:signature-authority-separation` 组件测试。
 
 ### ID-VAL-001 — 有效性必须绑定截止点与状态证据
 
@@ -102,7 +102,7 @@
 
 **失败：**未写截止点、只看当前时间、忽略撤销、把日志集成时间当作真实签署时间，或旧缓存继续授权新会话时，评估无效或不足。
 
-**验证：**`ID-SCN-014`、`ID-SCN-015`；`vectors/identity/cases.json`；未来 `peira:signature-validity-cutoff` 组件测试。
+**验证：**`ID-SCN-014`、`ID-SCN-015`；`vectors/identity/cases.json`；未来 `conformance:signature-validity-cutoff` 组件测试。
 
 ### ID-REP-001 — 可复现性必须由独立产出与逐字节比较证明
 
@@ -110,15 +110,15 @@
 
 **失败：**只重跑一次、两个结果来自同一缓存、输入不完整、只比较 build ID，或输出不同仍声称 bit-for-bit reproducible 时，声明不成立。
 
-**验证：**`ID-SCN-016`；`vectors/identity/cases.json`；未来 `peira:reproducible-independent-outputs` 组件测试。
+**验证：**`ID-SCN-016`；`vectors/identity/cases.json`；未来 `conformance:reproducible-independent-outputs` 组件测试。
 
 ### ID-REL-001 — 派生与伴随制品必须各有身份和显式关系
 
 **要求：**裁剪制品、调试伴随文件、索引、传输包络、压缩副本、格式迁移结果和其他派生物 `MUST` 各自拥有精确身份，并以版本化关系种类指向精确来源身份。关系 `MUST` 声明变换规则、生产者、保留内容、删除或降精度清单和可验证条件；它 `MUST NOT` 让派生物继承来源身份、签名、Semantic Key、Iknem、接受状态或权限。
 
-**失败：**`tasse` 后文件沿用原摘要、调试文件只按文件名配对、压缩包继承内部制品签名，或迁移结果自动继承原 Iknem 时，关系无效。
+**失败：**派生处理后的文件沿用原摘要、调试文件只按文件名配对、压缩包继承内部制品签名，或迁移结果自动继承原 Iknem 时，关系无效。
 
-**验证：**`ID-SCN-017`、`ID-SCN-018`；`vectors/identity/cases.json`；未来 `peira:artifact-relation-binding` 组件测试。
+**验证：**`ID-SCN-017`、`ID-SCN-018`；`vectors/identity/cases.json`；未来 `conformance:artifact-relation-binding` 组件测试。
 
 ## 4. 权威依据与采用边界
 

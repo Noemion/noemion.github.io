@@ -21,13 +21,13 @@
 
 [`diagnostics-core.md`](diagnostics-core.md) 定义跨对象诊断内容边界，[`diagnostic-catalog.md`](diagnostic-catalog.md) 登记草案机器码。[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存 JSON 语义外壳；`../vectors/diagnostics/` 保存诊断资料一致性提案；`../vectors/wire/` 保存真实字节的十六进制表达。这些向量都不表示组件已经实现。
 
-[`adapter-threat-model.md`](adapter-threat-model.md) 与 [`adapter-scenarios.md`](adapter-scenarios.md) 分别保存外部协议适配威胁和十八个非规范设计场景。`../vectors/adapters/cases.json` 保存 ADP-CORE 的二十四个提案向量；`../tests/adapter_vector_test.py` 只检查十二条抽象规则，不实现 MCP、A2A、HTTP、SDK、凭据、重试、Webhook、Drasor 或运行时。
+[`adapter-threat-model.md`](adapter-threat-model.md) 与 [`adapter-scenarios.md`](adapter-scenarios.md) 分别保存外部协议适配威胁和十五个非规范设计场景。`../vectors/adapters/cases.json` 保存 ADP-CORE 的二十四个提案向量；`../tests/adapter_vector_test.py` 只检查十二条抽象规则，不实现 MCP、A2A、HTTP、SDK、凭据、重试、Webhook、Drasor 或运行时。
 
-[`identity-threat-model.md`](identity-threat-model.md) 与 [`identity-scenarios.md`](identity-scenarios.md) 分别保存精确身份与签名威胁和十八个非规范设计场景。`../vectors/identity/cases.json` 保存 ID-CORE 的二十四个提案向量；`../tests/identity_vector_test.py` 只检查十二条抽象规则，不实现摘要器、签名器、验证器、证书、透明日志、撤销分发、可复现构建或发布系统。
+[`identity-threat-model.md`](identity-threat-model.md) 与 [`identity-scenarios.md`](identity-scenarios.md) 分别保存精确身份与签名威胁和十五个非规范设计场景。`../vectors/identity/cases.json` 保存 ID-CORE 的二十四个提案向量；`../tests/identity_vector_test.py` 只检查十二条抽象规则，不实现摘要器、签名器、验证器、证书、透明日志、撤销分发、可复现构建或发布系统。
 
-[`text-identifier-threat-model.md`](text-identifier-threat-model.md) 与 [`text-identifier-scenarios.md`](text-identifier-scenarios.md) 分别保存文本与标识符威胁和十八个非规范设计场景。`../vectors/text-identifier/cases.json` 保存 TEXT-IDENTIFIER-CORE 的二十四个提案向量；`../tests/text_identifier_vector_test.py` 只检查十二条抽象规则，不实现 UTF-8 解码器、规范化器、双向显示器、同形检测器、文本编辑器或模型输入网关。
+[`text-identifier-threat-model.md`](text-identifier-threat-model.md) 与 [`text-identifier-scenarios.md`](text-identifier-scenarios.md) 分别保存文本与标识符威胁和十五个非规范设计场景。`../vectors/text-identifier/cases.json` 保存 TEXT-IDENTIFIER-CORE 的二十四个提案向量；`../tests/text_identifier_vector_test.py` 只检查十二条抽象规则，不实现 UTF-8 解码器、规范化器、双向显示器、同形检测器、文本编辑器或模型输入网关。
 
-[`authority-threat-model.md`](authority-threat-model.md) 与 [`authority-scenarios.md`](authority-scenarios.md) 分别保存权威与授权决定威胁和十八个非规范设计场景。`../vectors/authority/cases.json` 保存 AUT-CORE 的二十四个提案向量；`../tests/authority_vector_test.py` 只检查十二条抽象规则，不实现身份提供方、权威目录、政策求值器、同意界面、能力代理或决定服务。
+[`authority-threat-model.md`](authority-threat-model.md) 与 [`authority-scenarios.md`](authority-scenarios.md) 分别保存权威与授权决定威胁和十五个非规范设计场景。`../vectors/authority/cases.json` 保存 AUT-CORE 的二十四个提案向量；`../tests/authority_vector_test.py` 只检查十二条抽象规则，不实现身份提供方、权威目录、政策求值器、同意界面、能力代理或决定服务。
 
 [`model-context-assembly-proposal.md`](model-context-assembly-proposal.md) 研究模型调用前的输入选择、角色、权威、顺序、变换、截断、缓存和损失边界。它只比较 TEXT-IDENTIFIER、AUT、ADP、DRO、IKN 与 DIA 的现有责任是否留下横切缺口，不是 ADR、CORE 规范、Profile、制品、命令或组件，也不进入 `registry.json`。当前首选是把未来唯一条款归还现有规范；只有真实消费者和验证证明职责无法清晰分担时，才重新讨论独立规范。
 
@@ -65,7 +65,7 @@
 
 `../vectors/synem/cases.json` 保存 ADR-0021 的十二个闭包与条件激活提案向量；`../tests/synem_vector_test.py` 只检查六条 SYN-CORE 规则，不实现解析器、Pleko、Drasor、运行时或求值器。
 
-`../vectors/iknem/cases.json` 保存 ADR-0022 的十八个证据与评估提案向量；`../tests/iknem_vector_test.py` 只检查九条 IKN-CORE 规则，不实现采集器、验证器、归并器、撤销服务、决定引擎或运行时。
+`../vectors/iknem/cases.json` 保存 ADR-0022 的十五个证据与评估提案向量；`../tests/iknem_vector_test.py` 只检查九条 IKN-CORE 规则，不实现采集器、验证器、归并器、撤销服务、决定引擎或运行时。
 
 `../vectors/dromen/cases.json` 保存 ADR-0024 的二十个会话契约提案向量；`../tests/dromen_vector_test.py` 只检查十条 DRO-CORE 规则，不实现装载器、沙箱、凭据代理、Drasor、事件系统或运行时。
 

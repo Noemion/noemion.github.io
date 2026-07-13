@@ -48,7 +48,7 @@ permalink: "/architecture/adr-0027-exact-identity-and-attestation.html"
   <section class="content-wide">
     <h2>可复现性和伴随制品</h2>
     <p>GNU Guix 的 <code>--check</code> 与 <code>guix challenge</code> 把可复现性落到逐字节比较。Noemion 进一步要求声明精确输入、依赖闭包、工具版本、参数、环境约束和独立产出路径。输出不同只能证明字节不同，不能仅靠摘要定位原因。</p>
-    <p><code>tasse</code> 未来形成的裁剪制品、调试伴随文件、压缩副本和迁移结果都拥有自己的身份。它们通过版本化关系说明来源、变换、保留内容和损失，不能继承来源身份、签名、Iknem、接受状态或权限。</p>
+    <p>未来形成的裁剪制品、调试伴随文件、压缩副本和迁移结果都拥有自己的身份。它们通过版本化关系说明来源、变换、保留内容和损失，不能继承来源身份、签名、Iknem、接受状态或权限。</p>
   </section>
 
   <section class="content-wide">

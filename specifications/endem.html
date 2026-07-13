@@ -178,10 +178,10 @@ permalink: "/specifications/endem.html"
     <h2>状态机</h2>
     <div class="table-wrap"><table><thead><tr><th>状态</th><th>成立条件</th><th>允许的消费者</th><th>不能推导</th></tr></thead><tbody>
       <tr><td><code>nascent</code></td><td>结构合法，但仍可能有 <code>apor</code>、引用或确认事项。</td><td><code>elenk</code>、<code>theor</code>、人工或授权解析流程。</td><td>不能执行发布；不能假设未决项会在运行中自动消失。</td></tr>
-      <tr><td><code>coherent</code></td><td>必需引用、约束冲突、能力上限和验收关系都取得确定结果。</td><td><code>tasse</code>、<code>theor</code>、组合为 Synem。</td><td>不证明来源可信、当前环境授权或结果已完成。</td></tr>
+      <tr><td><code>coherent</code></td><td>必需引用、约束冲突、能力上限和验收关系都取得确定结果。</td><td><code>theor</code>、组合为 Synem、外部发布。</td><td>不证明来源可信、当前环境授权或结果已完成。</td></tr>
       <tr><td><code>attested</code></td><td>发布载荷冻结，签名请求与外部响应精确匹配。</td><td><code>theor</code>、隔离的 <code>drase</code>。</td><td>签名有效不证明语义正确，也不授予实时能力。</td></tr>
     </tbody></table></div>
-    <p>状态变化保持 Endem 的语义身份和来源链，但每次都会产生新的精确文件摘要。不得把旧状态字节当作新状态对象，也不得在 sphra 后原地改写被签载荷。</p>
+    <p>状态变化保持 Endem 的语义身份和来源链，但每次都会产生新的精确文件摘要。不得把旧状态字节当作新状态对象，也不得在外部签名后原地改写被签载荷。</p>
   </section>
 
   <section class="content-wide">

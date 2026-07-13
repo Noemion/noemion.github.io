@@ -32,7 +32,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | 名词 | 存在价值 | 生产者 | 消费者 | 省略条件 |
 | --- | --- | --- | --- | --- |
 | Endem | 保存一个根期望终态及 rhem/semion/skena/telis/krin/apor | Ktisor 的 `ktise` | elenk、theor、pleko、注册表与人工审查 | 不可省略；它是最小原语 |
-| Synem | 固定多 Endem 引用、依赖、冲突结论与发布范围 | Ktisor 的 `pleko/tasse/sphra` | Drasor、部署与审计 | 单一自包含 Endem 或没有组合消费者时省略 |
+| Synem | 固定多 Endem 引用、依赖、冲突结论与发布范围 | Ktisor 的 `pleko` | Drasor、外部发布系统与审计 | 单一自包含 Endem 或没有组合消费者时省略 |
 | Dromen | 封存一次 Drase 会话的精确主体、政策、环境、能力、预算和证据责任 | Drasor 的 `drase` | Drasor 控制面、最小能力域与实现后端 | 不作为磁盘制品、凭据包或可恢复权限 |
 | Iknem | 把事件、观察、证据范围、环境、策略与决定绑定 | Drasor 与具名决定权威 | 用户、CI、审计与离线评估 | 只有权威或保密边界确实不同时才拆伴随记录 |
 
@@ -42,7 +42,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 
 | 实现域 | 不可替代边界 | 禁止合并的内容 |
 | --- | --- | --- |
-| Ktisor | 唯一规范写入器、生产读取器、来源绑定、elenk、pleko、tasse 与签名请求核对 | 模型不得写规范字节；Ktisor 不持有私钥或实时能力 |
+| Ktisor | 唯一规范写入器、生产读取器、来源绑定、elenk 与 pleko | 模型不得写规范字节；Ktisor 不持有私钥或实时能力 |
 | Theor | 独立解析任意不可信字节，为差分和安全审查提供第二条证据链 | 不复用生产读取器，不产生生产验证句柄，不修复输入 |
 | Drasor | 重新验证实际 Synem，建立 Dromen，控制能力与反馈，形成 Iknem | 模型不持有句柄、不扩大权限、不自我验收 |
 
@@ -55,10 +55,10 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | ktise | 作者、CI、pleko | 未授权语义、类型或约束、布局、非确定性 | 第 1 阶段 |
 | elenk | Ktisor、Drasor、发行流程 | 结构、引用、语义、资源、完整性 | 第 1 阶段 |
 | theor | 开发者、安全审查、差分 CI | 畸形输入、未知关键结构、资源超限 | 第 1 阶段，独立实现 |
-| peira | 规范与发布评审 | 条款、向量、实现差异与复现失败 | 公开动作价值待审查 |
+| 内部符合性门禁 | 规范与发布评审 | 条款、向量、实现差异与复现失败 | 内部责任，不是公开动作 |
 | pleko | 多 Endem 消费者 | 引用、版本、冲突、权限与闭包 | 第 2 阶段，有真实案例才实现 |
-| tasse | 发行流程 | 版本化保留关系、发布范围、调试伴随记录；当前不能证明时保留或失败 | 第 3 阶段，有真实裁剪消费者和正反向量才实现 |
-| sphra | 外部签名系统与发行流程 | 请求、响应或主体不匹配 | 第 3 阶段 |
+| 派生制品责任 | 对应制品生产者 | 版本化保留关系、发布范围、调试伴随记录；当前不能证明时保留或失败 | 有真实裁剪消费者和正反向量才实现 |
+| 外部签名集成 | 外部签名系统与发行流程 | 请求、响应或主体不匹配 | 包络 Profile 与真实消费者冻结后 |
 | drase | 用户、CI、审计 | 装载、能力、预算、漂移、证据与升级 | 第 4 阶段，独立进程 |
 
 通用 transform、archive、strip、符号程序、预算程序、数据程序、训练程序、评估程序和量化程序不再作为独立应用承诺。相应职责进入有语义约束的子命令、测试模块或外部成熟工具适配器。
@@ -83,7 +83,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 
 ## 公共页面结构审计 · 2026-07-12
 
-以下清单记录初次逐页审计，并在后续新增 ADR-0022 至 ADR-0034、Dromen、诊断、适配、精确身份、文本、授权、伴随关系和名称门禁页面时继续按同一标准复核。当前共有 58 个 HTML 正文源；Markdown 生成页面另由路由测试和构建产物审计覆盖。
+以下清单记录初次逐页审计，并在后续新增 ADR-0022 至 ADR-0035、Dromen、诊断、适配、精确身份、文本、授权、伴随关系、名称门禁和动作收敛页面时继续按同一标准复核。当前共有 59 个 HTML 正文源；Markdown 生成页面另由路由测试和构建产物审计覆盖。
 
 | 文件 | 审计角色 | 结论 |
 | --- | --- | --- |
@@ -128,6 +128,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | `architecture/adr-0032-deterministic-maker-name-collision.html` | 确定性制作名称冲突 | 通过 |
 | `architecture/adr-0033-text-identifier-specification-name.html` | 文本与标识符标准命名 | 通过 |
 | `architecture/adr-0034-pronunciation-and-oral-distinction.html` | 术语读音与口头区分门禁 | 通过 |
+| `architecture/adr-0035-public-actions-and-internal-responsibilities.html` | 公开动作与内部职责收敛 | 通过 |
 | `architecture/open-questions.html` | 未冻结问题 | 通过 |
 | `specifications/index.html` | 规范入口 | 通过 |
 | `specifications/endem.html` | 六语义面与最小制品 | 通过 |
@@ -154,13 +155,13 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 
 ## 全站逐页可读性复核 · 2026-07-13
 
-本轮逐一复核 `sitemap.md` 登记的 72 条正式路由，包括 58 个 HTML 正文源和 14 个由 Markdown 生成的页面。复核重点不是统一文风，而是让每种页面先完成自己的读者任务：门户给出项目定义，目录给出选择依据，专题给出结论与边界，应用给出状态与输入输出，手册给出连续操作逻辑。
+本轮逐一复核 `sitemap.md` 登记的 73 条正式路由，包括 59 个 HTML 正文源和 14 个由 Markdown 生成的页面。复核重点不是统一文风，而是让每种页面先完成自己的读者任务：门户给出项目定义，目录给出选择依据，专题给出结论与边界，应用给出状态与输入输出，手册给出连续操作逻辑。
 
 | 页面家族 | 已逐页复核的正式路由 | 本轮处理 |
 | --- | --- | --- |
 | 门户（1） | `/index.html` | 保持 Noemion 为项目主语；把控制平面和下一步入口改为无需内部术语即可理解的表达。 |
 | 项目背景（3） | `/about/index.html`、`/about/background.html`、`/about/intellectual-foundations.html` | 把核心问题拆成形成、组合、实现、验收四步；集中加入《逻辑哲学论》五条短引文，并逐条说明工程启发与不采用部分。 |
-| 架构与 ADR（32） | `/architecture/index.html`、`/architecture/endem-lifecycle.html`、`/architecture/decisions.html`、`/architecture/agent-system-boundaries.html`、`/architecture/adr-0008-endem-system.html` 至 `/architecture/adr-0034-pronunciation-and-oral-distinction.html`、`/architecture/open-questions.html` | 生命周期解释每阶段回答什么；Agent 边界图把规范、研究和运行事实分层；历史 ADR 标明失效名称；现行 ADR 固定语义、格式、判断、信任、命名和口头区分边界。 |
+| 架构与 ADR（33） | `/architecture/index.html`、`/architecture/endem-lifecycle.html`、`/architecture/decisions.html`、`/architecture/agent-system-boundaries.html`、`/architecture/adr-0008-endem-system.html` 至 `/architecture/adr-0035-public-actions-and-internal-responsibilities.html`、`/architecture/open-questions.html` | 生命周期解释每阶段回答什么；Agent 边界图把规范、研究和运行事实分层；历史 ADR 标明失效名称；现行 ADR 固定语义、格式、判断、信任、命名、口头区分与公开动作边界。 |
 | 组件（4） | `/components/index.html`、`/components/ktisor.html`、`/components/theor.html`、`/components/drasor.html` | 首段先解释三个组件为什么不能合并；把写入器、读取器、策略、句柄和请求等职责说清楚，只保留必要接口标识。 |
 | 规范（10） | `/specifications/index.html`、`/specifications/endem.html`、`/specifications/synem.html`、`/specifications/dromen.html`、`/specifications/iknem.html`、`/specifications/diagnostics.html`、`/specifications/adapters.html`、`/specifications/identity.html`、`/specifications/text-and-identifiers.html`、`/specifications/authority.html` | 先给直白定义，再给规范词；授权页明确登录、签名、Agent 状态与点击都不能自行产生语义或最终决定权。 |
 | 跨项目指南（8） | `/docs/index.html`、`/docs/getting-started.html`、`/docs/installation-and-usage.html`、`/docs/terminology-and-pronunciation.html`、`/docs/architecture-guide.html`、`/docs/development-guide.html`、`/docs/endem-reference.html`、`/docs/specifications-reference.html` | 删除未冻结却看似可执行的命令示例；统一解释候选、控制平面、验证句柄、签名材料和最终决定；新增真实人类读音证据的两阶段验证与停止规则。 |

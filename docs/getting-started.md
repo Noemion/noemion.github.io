@@ -24,7 +24,7 @@ Noemion 为自然语言目标建立持久、可组合、可独立检查的工程
 
 当前资料还没有冻结 Noemion、Endem 和其他领域词的发行读音。此前的名称审查主要排查软件、包、命令、标准和权利冲突，不能证明一个词在中文或英语交流中读得顺、听得清、写得回。
 
-[ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html) 已把目标语言读音和词表内口头区分设为独立门禁。`Iknem`、`Ktisor/ktise`、`sphra` 与 `kine/mene` 属于优先复核项；Endem 与 Synem 还要做成对听辨。项目完成 IPA、普通拼读提示、首次朗读和听写证据前，不用临时读法冒充正式读法。
+[ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html) 已把目标语言读音和词表内口头区分设为独立门禁。`Iknem`、`Ktisor/ktise` 与 `kine/mene` 属于优先复核项；Endem 与 Synem 还要做成对听辨。项目完成 IPA、普通拼读提示、首次朗读和听写证据前，不用临时读法冒充正式读法。
 
 [术语与读音验证指南](terminology-and-pronunciation.html)说明怎样招募独立参与者、组织材料、统计关键混淆并记录隐私边界。当前只有方案，没有人类研究结果。
 
@@ -55,8 +55,8 @@ Noemion 为自然语言目标建立持久、可组合、可独立检查的工程
 唯一公开命令是 `endem`：
 
 ```text
-endem ktise    endem elenk    endem pleko    endem tasse
-endem sphra   endem theor    endem drase    endem peira
+endem ktise    endem elenk    endem pleko
+endem theor    endem drase
 ```
 
 一个命令入口不等于一个信任域。`theor` 背后必须使用不共享 Ktisor 生产解析代码的独立实现；`drase` 背后必须是隔离的最小权限进程。私钥位于外部签名系统，模型只提交候选和能力请求。
@@ -66,11 +66,11 @@ endem sphra   endem theor    endem drase    endem peira
 1. [背景与边界](../about/background.html)：理解 Endem 与 Prompt、Skill 包、传统目标文件的区别。
 2. [架构设计指南](architecture-guide.html)：理解 Endem → Synem → Dromen → Iknem。
 3. [规范参考指南](specifications-reference.html)：区分已接受决定、待验证设计和开放问题。
-4. [Endem 应用参考](endem-reference.html)：查看八个子命令的消费者、失败责任和实施阶段。
+4. [Endem 应用参考](endem-reference.html)：查看五个动作的消费者、失败责任和实施阶段。
 5. [开发指南](development-guide.html)：了解最小纵向切片、Ktisor/Theor 差分和验证条件。
 
 ## 当前状态
 
 > 词汇所指的职责与应用拓扑已经接受；具体发行拼写和读音仍受 ADR-0034 门禁约束。规范编码和实现尚未发布，也没有可安装的 `endem`、稳定扩展机制、ABI 或正式软件版本。
 
-第一实现阶段只建设 `ktise`、`elenk`、独立 `theor` 和必需的一致性门禁。`peira` 是否值得成为公开动作仍需在代码阶段前证明；组合、发布、受控运行和模型适配必须等待前一阶段的安全与复现证据。
+第一实现阶段只建设 `ktise`、`elenk`、独立 `theor` 和必需的内部符合性门禁。组合、发布、受控运行和模型适配必须等待前一阶段的安全与复现证据。

@@ -42,7 +42,6 @@ permalink: "/architecture/adr-0034-pronunciation-and-oral-distinction.html"
     <h2>现行词表的首轮风险</h2>
     <div class="table-wrap"><table><thead><tr><th>对象</th><th>首轮风险</th><th>当前处理</th></tr></thead><tbody>
       <tr><td><code>Ktisor</code> / <code>ktise</code></td><td>词首 <code>kt</code> 没有项目内已验证读法；读者可能省略辅音或插入不同元音。</td><td>高风险；发行前必须完成人类朗读和听写证据，不能把工程冲突初筛写成口头门禁通过。</td></tr>
-      <tr><td><code>sphra</code></td><td>词首 <code>sphr</code> 对目标读者缺少稳定提示，听写时也难由声音恢复拼写。</td><td>高风险；重新证明独立用户动作价值时一并复核名称。</td></tr>
       <tr><td><code>Iknem</code></td><td>词首分段和首个元音没有既定项目读法；“短”不能证明“听得清”。</td><td>高风险；撤回“已验证可发音”的表述，保留证据对象职责。</td></tr>
       <tr><td><code>kine</code> / <code>mene</code></td><td><a href="https://dictionary.cambridge.org/us/pronunciation/english/kine">Cambridge Dictionary</a> 把英语 <em>kine</em> 读作 /kaɪn/；<a href="https://www.merriam-webster.com/dictionary/kine">Merriam-Webster</a>还记录其“牛”的古旧复数义。它与项目词源预期是否一致尚未说明，<code>mene</code> 也没有已验证配对读法。</td><td>高风险；语义方向保持不变，发行拼写重新审查。</td></tr>
       <tr><td><code>Endem</code> / <code>Synem</code></td><td>共同结尾有利于显示词族，也可能在弱信号、口音或句中位置造成混淆。</td><td>中风险；必须做成对听辨，不能用词源关系代替结果。</td></tr>
@@ -64,5 +63,5 @@ permalink: "/architecture/adr-0034-pronunciation-and-oral-distinction.html"
     <p>本决定不创建语音界面、发音组件、Unicode Profile、命令别名或新的规范字段。未来若允许口述动作，含糊声音不得直接执行：系统必须把识别出的精确机器动作、对象、参数和权限请求安全显示并获得适用授权。转写、会话成功或模型置信度都不能成为目标满足、最终接受或授权证据。</p>
     <p>首次朗读、独立听者、远程会议条件、60 个首次判断、零关键混淆停止规则和隐私记录由<a href="../docs/terminology-and-pronunciation.html">术语与读音验证指南</a>落实。指南是验证方案，不表示研究已经执行。</p>
   </section>
-  <div class="next-prev"><a href="adr-0033-text-identifier-specification-name.html">← ADR-0033</a><a href="open-questions.html">开放问题 →</a></div>
+  <div class="next-prev"><a href="adr-0033-text-identifier-specification-name.html">← ADR-0033</a><a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035 →</a></div>
 </main>

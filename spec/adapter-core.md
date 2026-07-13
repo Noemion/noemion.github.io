@@ -30,7 +30,7 @@
 
 **失败：**同一配置随远端默认版本改变行为、MCP 候选版被当作稳定版、A2A 主次版本未固定，或未知扩展被静默接受时，适配不得开始调用。
 
-**验证：**`ADP-SCN-001`、`ADP-SCN-002`；`vectors/adapters/cases.json`；未来 `peira:adapter-version-pin` 组件测试。
+**验证：**`ADP-SCN-001`、`ADP-SCN-002`；`vectors/adapters/cases.json`；未来 `conformance:adapter-version-pin` 组件测试。
 
 ### ADP-PEE-001 — 对端声明不能替代对端身份与信任
 
@@ -38,7 +38,7 @@
 
 **失败：**适配器仅凭自报名称选择对端、把 Agent Card 中的技能当作已授权能力、跨租户复用远端任务 ID，或重定向后继续使用原受众令牌时，绑定无效。
 
-**验证：**`ADP-SCN-003`、`ADP-SCN-004`；`vectors/adapters/cases.json`；未来 `peira:adapter-peer-binding` 组件测试。
+**验证：**`ADP-SCN-003`、`ADP-SCN-004`；`vectors/adapters/cases.json`；未来 `conformance:adapter-peer-binding` 组件测试。
 
 ### ADP-CAP-001 — 外部能力必须与 Dromen 求交
 
@@ -46,7 +46,7 @@
 
 **失败：**远端新增工具即可调用、MCP task capability 绕过本地政策、A2A streaming 声明自动打开网络回调，或错误建议触发当前会话扩权时，调用必须拒绝。
 
-**验证：**`ADP-SCN-005`；`vectors/adapters/cases.json`；未来 `peira:adapter-capability-intersection` 组件测试。
+**验证：**`ADP-SCN-005`；`vectors/adapters/cases.json`；未来 `conformance:adapter-capability-intersection` 组件测试。
 
 ### ADP-INV-001 — 每次外部调用必须绑定一次精确调用语境
 
@@ -54,7 +54,7 @@
 
 **失败：**只用模型对话 ID 关联副作用、多个 Dromen 共用一个远端 task、重试产生无法区分的重复操作，或调用无法追溯到精确输入时，适配必须关闭失败。
 
-**验证：**`ADP-SCN-006`；`vectors/adapters/cases.json`；未来 `peira:adapter-invocation-binding` 组件测试。
+**验证：**`ADP-SCN-006`；`vectors/adapters/cases.json`；未来 `conformance:adapter-invocation-binding` 组件测试。
 
 ### ADP-MAP-001 — 映射必须保留原始事实并声明信息损失
 
@@ -62,7 +62,7 @@
 
 **失败：**MCP 与 A2A 的不同任务状态被折叠成一个 success 布尔值、时间或媒体类型精度被静默丢失、未知字段被删除却声称完整，或只保留本地对象而无法追溯原协议时，映射无效。
 
-**验证：**`ADP-SCN-007`、`ADP-SCN-008`；`vectors/adapters/cases.json`；未来 `peira:adapter-loss-map` 组件测试。
+**验证：**`ADP-SCN-007`、`ADP-SCN-008`；`vectors/adapters/cases.json`；未来 `conformance:adapter-loss-map` 组件测试。
 
 ### ADP-STA-001 — 外部状态必须与本地结果域分开
 
@@ -70,7 +70,7 @@
 
 **失败：**A2A task completed 直接产生 `accepted`、MCP tool error 直接产生 `unmet`、HTTP 200 产生 Iknem `valid`，或外部取消被当作 Drase 已停止时，映射必须拒绝。
 
-**验证：**`ADP-SCN-009`、`ADP-SCN-010`；`vectors/adapters/cases.json`；未来 `peira:adapter-result-separation` 组件测试。
+**验证：**`ADP-SCN-009`、`ADP-SCN-010`；`vectors/adapters/cases.json`；未来 `conformance:adapter-result-separation` 组件测试。
 
 ### ADP-ART-001 — 外部消息与产物只能作为有来源候选
 
@@ -78,7 +78,7 @@
 
 **失败：**远端 Artifact 直接替换已签制品、模型文本直接成为 Endem 字节、相同文件名覆盖本地接受版本，或未检查媒体类型和大小即进入观察路径时，候选必须隔离或拒绝。
 
-**验证：**`ADP-SCN-011`、`ADP-SCN-012`；`vectors/adapters/cases.json`；未来 `peira:adapter-artifact-candidate` 组件测试。
+**验证：**`ADP-SCN-011`、`ADP-SCN-012`；`vectors/adapters/cases.json`；未来 `conformance:adapter-artifact-candidate` 组件测试。
 
 ### ADP-ERR-001 — 协议错误必须通过 DIA-CORE 保留来源
 
@@ -86,7 +86,7 @@
 
 **失败：**JSON-RPC 错误与工具执行错误合并、A2A TaskNotFound 被解释为目标不存在、错误消息中的 permission 字样触发 step-up，或未知码降级为成功时，适配必须拒绝该解释。
 
-**验证：**`ADP-SCN-013`；`vectors/adapters/cases.json`；未来 `peira:adapter-diagnostic-provenance` 组件测试。
+**验证：**`ADP-SCN-013`；`vectors/adapters/cases.json`；未来 `conformance:adapter-diagnostic-provenance` 组件测试。
 
 ### ADP-CAN-001 — 取消与终态不能伪造回滚或复活
 
@@ -94,7 +94,7 @@
 
 **失败：**发送取消即释放审计责任、任务终态后继续追加同一工作、断流被当作远端停止、或恢复日志重新创建旧会话能力时，生命周期处理无效。
 
-**验证：**`ADP-SCN-010`、`ADP-SCN-014`；`vectors/adapters/cases.json`；未来 `peira:adapter-cancellation-finality` 组件测试。
+**验证：**`ADP-SCN-010`、`ADP-SCN-014`；`vectors/adapters/cases.json`；未来 `conformance:adapter-cancellation-finality` 组件测试。
 
 ### ADP-RTY-001 — 重试必须由幂等证据与预算共同允许
 
@@ -102,7 +102,7 @@
 
 **失败：**连接断开后自动重复付款、没有去重依据却重放工具、每次重试生成新调用身份而隐藏重复，或轮询与重试不共享预算时，重试必须停止并升级复核。
 
-**验证：**`ADP-SCN-015`、`ADP-SCN-016`；`vectors/adapters/cases.json`；未来 `peira:adapter-idempotent-retry` 组件测试。
+**验证：**`ADP-SCN-015`、`ADP-SCN-016`；`vectors/adapters/cases.json`；未来 `conformance:adapter-idempotent-retry` 组件测试。
 
 ### ADP-DEL-001 — 流式推送与轮询必须形成可审计交付证据
 
@@ -110,7 +110,7 @@
 
 **失败：**重复事件重复执行副作用、跨租户 Webhook 注入状态、缺失中间事件却声称完整、无限轮询，或流关闭直接产生本地 completed 时，交付视图不完整。
 
-**验证：**`ADP-SCN-017`；`vectors/adapters/cases.json`；未来 `peira:adapter-delivery-evidence` 组件测试。
+**验证：**`ADP-SCN-017`；`vectors/adapters/cases.json`；未来 `conformance:adapter-delivery-evidence` 组件测试。
 
 ### ADP-SEC-001 — 凭据网络目标披露和资源必须最小化
 
@@ -118,7 +118,7 @@
 
 **失败：**上游令牌透传给下游、Webhook 指向本地元数据服务、列任务泄露其他租户、无限 TTL 保留敏感输出，或模型看到实时能力句柄时，适配必须关闭失败并按 DIA-CORE 报告。
 
-**验证：**`ADP-SCN-004`、`ADP-SCN-018`；`vectors/adapters/cases.json`；未来 `peira:adapter-security-envelope` 组件测试。
+**验证：**`ADP-SCN-004`、`ADP-SCN-018`；`vectors/adapters/cases.json`；未来 `conformance:adapter-security-envelope` 组件测试。
 
 ## 4. 权威依据与采用边界
 

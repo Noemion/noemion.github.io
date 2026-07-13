@@ -203,7 +203,7 @@
       "version": "0.1.0-draft",
       "status": "experimental-design-profile",
       "path": "spec/profiles/end-p1.json",
-      "scope": "First closed semantic payload design profile for future Ktisor, elenk, Theor and peira"
+      "scope": "First closed semantic payload design profile for future Ktisor, elenk, Theor and internal conformance"
     },
     {
       "id": "ADP-THREAT",
@@ -481,7 +481,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "peira:dromen-subject-revalidation"}
+        {"status": "planned", "ref": "conformance:dromen-subject-revalidation"}
       ]
     },
     {
@@ -493,7 +493,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "peira:dromen-policy-closure"}
+        {"status": "planned", "ref": "conformance:dromen-policy-closure"}
       ]
     },
     {
@@ -505,7 +505,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "peira:dromen-environment-binding"}
+        {"status": "planned", "ref": "conformance:dromen-environment-binding"}
       ]
     },
     {
@@ -517,7 +517,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "peira:dromen-capability-intersection"}
+        {"status": "planned", "ref": "conformance:dromen-capability-intersection"}
       ]
     },
     {
@@ -529,7 +529,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "peira:dromen-secret-separation"}
+        {"status": "planned", "ref": "conformance:dromen-secret-separation"}
       ]
     },
     {
@@ -541,7 +541,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "peira:dromen-budget-envelope"}
+        {"status": "planned", "ref": "conformance:dromen-budget-envelope"}
       ]
     },
     {
@@ -553,7 +553,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "peira:dromen-activation-boundary"}
+        {"status": "planned", "ref": "conformance:dromen-activation-boundary"}
       ]
     },
     {
@@ -565,7 +565,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "peira:dromen-observation-plan"}
+        {"status": "planned", "ref": "conformance:dromen-observation-plan"}
       ]
     },
     {
@@ -577,7 +577,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "peira:dromen-drift-invalidation"}
+        {"status": "planned", "ref": "conformance:dromen-drift-invalidation"}
       ]
     },
     {
@@ -589,7 +589,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "peira:dromen-session-disposal"}
+        {"status": "planned", "ref": "conformance:dromen-session-disposal"}
       ]
     },
     {
@@ -601,7 +601,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "peira:iknem-scope-binding"}
+        {"status": "planned", "ref": "conformance:iknem-scope-binding"}
       ]
     },
     {
@@ -613,7 +613,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "peira:iknem-provenance-closure"}
+        {"status": "planned", "ref": "conformance:iknem-provenance-closure"}
       ]
     },
     {
@@ -625,7 +625,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "peira:iknem-observation-alignment"}
+        {"status": "planned", "ref": "conformance:iknem-observation-alignment"}
       ]
     },
     {
@@ -637,7 +637,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "peira:iknem-evidence-class"}
+        {"status": "planned", "ref": "conformance:iknem-evidence-class"}
       ]
     },
     {
@@ -649,7 +649,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "peira:iknem-integrity-separation"}
+        {"status": "planned", "ref": "conformance:iknem-integrity-separation"}
       ]
     },
     {
@@ -661,7 +661,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "peira:iknem-validity-appraisal"}
+        {"status": "planned", "ref": "conformance:iknem-validity-appraisal"}
       ]
     },
     {
@@ -673,7 +673,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "peira:iknem-coverage"}
+        {"status": "planned", "ref": "conformance:iknem-coverage"}
       ]
     },
     {
@@ -685,7 +685,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "peira:iknem-decision-separation"}
+        {"status": "planned", "ref": "conformance:iknem-decision-separation"}
       ]
     },
     {
@@ -697,7 +697,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "peira:iknem-minimal-disclosure"}
+        {"status": "planned", "ref": "conformance:iknem-minimal-disclosure"}
       ]
     },
     {
@@ -709,7 +709,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "peira:synem-complete-closure"}
+        {"status": "planned", "ref": "conformance:synem-complete-closure"}
       ]
     },
     {
@@ -721,7 +721,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "peira:synem-exact-binding"}
+        {"status": "planned", "ref": "conformance:synem-exact-binding"}
       ]
     },
     {
@@ -733,7 +733,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "peira:synem-bounded-graph"}
+        {"status": "planned", "ref": "conformance:synem-bounded-graph"}
       ]
     },
     {
@@ -745,7 +745,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "peira:synem-authority-intersection"}
+        {"status": "planned", "ref": "conformance:synem-authority-intersection"}
       ]
     },
     {
@@ -757,7 +757,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "peira:synem-member-result-separation"}
+        {"status": "planned", "ref": "conformance:synem-member-result-separation"}
       ]
     },
     {
@@ -769,7 +769,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "peira:synem-session-activation"}
+        {"status": "planned", "ref": "conformance:synem-session-activation"}
       ]
     },
     {
@@ -778,7 +778,7 @@
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
       "failure_owner": "Ktisor and every reader",
-      "verification": [{"status": "planned", "ref": "peira:conformance-identity"}]
+      "verification": [{"status": "planned", "ref": "conformance:conformance-identity"}]
     },
     {
       "id": "END-CON-002",
@@ -799,7 +799,7 @@
       "failure_owner": "every reader, conformance reporter and release validation",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"},
-        {"status": "planned", "ref": "peira:layered-conformance-report"}
+        {"status": "planned", "ref": "conformance:layered-conformance-report"}
       ]
     },
     {
@@ -812,7 +812,7 @@
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
         {"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"},
-        {"status": "planned", "ref": "peira:profile-semantic-closure"}
+        {"status": "planned", "ref": "conformance:profile-semantic-closure"}
       ]
     },
     {
@@ -836,7 +836,7 @@
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-missing-reject.json"},
         {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
-        {"status": "planned", "ref": "peira:external-conformance-prerequisites"}
+        {"status": "planned", "ref": "conformance:external-conformance-prerequisites"}
       ]
     },
     {
@@ -858,7 +858,7 @@
       "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
-        {"status": "planned", "ref": "peira:facet-presence"}
+        {"status": "planned", "ref": "conformance:facet-presence"}
       ]
     },
     {
@@ -871,7 +871,7 @@
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/source-range-reject.json"},
         {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
-        {"status": "planned", "ref": "peira:source-range-and-digest"}
+        {"status": "planned", "ref": "conformance:source-range-and-digest"}
       ]
     },
     {
@@ -904,7 +904,7 @@
       "failure_owner": "Ktisor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
-        {"status": "planned", "ref": "peira:telis-mode"}
+        {"status": "planned", "ref": "conformance:telis-mode"}
       ]
     },
     {
@@ -916,7 +916,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
-        {"status": "planned", "ref": "peira:composite-root-boundary"},
+        {"status": "planned", "ref": "conformance:composite-root-boundary"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -929,7 +929,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
-        {"status": "planned", "ref": "peira:composition-topology-alignment"},
+        {"status": "planned", "ref": "conformance:composition-topology-alignment"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -942,7 +942,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
-        {"status": "planned", "ref": "peira:four-result-composition"},
+        {"status": "planned", "ref": "conformance:four-result-composition"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -955,7 +955,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
-        {"status": "planned", "ref": "peira:decisive-short-circuit-provenance"},
+        {"status": "planned", "ref": "conformance:decisive-short-circuit-provenance"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -968,7 +968,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
-        {"status": "planned", "ref": "peira:quantified-collection-scope"},
+        {"status": "planned", "ref": "conformance:quantified-collection-scope"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -981,7 +981,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
-        {"status": "planned", "ref": "peira:quantifier-closure"},
+        {"status": "planned", "ref": "conformance:quantifier-closure"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -994,7 +994,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
-        {"status": "planned", "ref": "peira:distinct-cardinality-aggregation"},
+        {"status": "planned", "ref": "conformance:distinct-cardinality-aggregation"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1007,7 +1007,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
-        {"status": "planned", "ref": "peira:measurement-construct-and-population"},
+        {"status": "planned", "ref": "conformance:measurement-construct-and-population"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1020,7 +1020,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
-        {"status": "planned", "ref": "peira:numeric-unit-conversion"},
+        {"status": "planned", "ref": "conformance:numeric-unit-conversion"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1033,7 +1033,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
-        {"status": "planned", "ref": "peira:measurement-procedure-replay"},
+        {"status": "planned", "ref": "conformance:measurement-procedure-replay"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1046,7 +1046,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
-        {"status": "planned", "ref": "peira:threshold-uncertainty-classification"},
+        {"status": "planned", "ref": "conformance:threshold-uncertainty-classification"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1060,7 +1060,7 @@
         {"status": "covered-by-repo", "ref": "vectors/semantic/negative-relation-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
-        {"status": "planned", "ref": "peira:negative-relation-identity"},
+        {"status": "planned", "ref": "conformance:negative-relation-identity"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1073,7 +1073,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
-        {"status": "planned", "ref": "peira:negative-observation-basis"},
+        {"status": "planned", "ref": "conformance:negative-observation-basis"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1086,7 +1086,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
-        {"status": "planned", "ref": "peira:closed-observation-scope"},
+        {"status": "planned", "ref": "conformance:closed-observation-scope"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1099,7 +1099,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
-        {"status": "planned", "ref": "peira:mene-time-scope"},
+        {"status": "planned", "ref": "conformance:mene-time-scope"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1112,7 +1112,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
-        {"status": "planned", "ref": "peira:mene-continuity-policy"},
+        {"status": "planned", "ref": "conformance:mene-continuity-policy"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1125,7 +1125,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
-        {"status": "planned", "ref": "peira:mene-coverage-classification"},
+        {"status": "planned", "ref": "conformance:mene-coverage-classification"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1137,7 +1137,7 @@
       "failure_owner": "Ktisor and Drasor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
-        {"status": "planned", "ref": "peira:krin-no-self-proof"}
+        {"status": "planned", "ref": "conformance:krin-no-self-proof"}
       ]
     },
     {
@@ -1149,7 +1149,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
-        {"status": "planned", "ref": "peira:satisfaction-result-separation"},
+        {"status": "planned", "ref": "conformance:satisfaction-result-separation"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1161,7 +1161,7 @@
       "failure_owner": "Ktisor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
-        {"status": "planned", "ref": "peira:apor-preservation"}
+        {"status": "planned", "ref": "conformance:apor-preservation"}
       ]
     },
     {
@@ -1172,7 +1172,7 @@
       "failure_owner": "Ktisor, Drasor and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
-        {"status": "planned", "ref": "peira:unknown-state-separation"}
+        {"status": "planned", "ref": "conformance:unknown-state-separation"}
       ]
     },
     {
@@ -1183,7 +1183,7 @@
       "failure_owner": "Ktisor and Theor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
-        {"status": "planned", "ref": "peira:relation-position-differential"}
+        {"status": "planned", "ref": "conformance:relation-position-differential"}
       ]
     },
     {
@@ -1194,7 +1194,7 @@
       "failure_owner": "Ktisor and Drasor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
-        {"status": "planned", "ref": "peira:model-candidate-boundary"}
+        {"status": "planned", "ref": "conformance:model-candidate-boundary"}
       ]
     },
     {
@@ -1207,7 +1207,7 @@
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-missing-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-mismatch-reject.json"},
         {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
-        {"status": "planned", "ref": "peira:projection-authorization-companion"}
+        {"status": "planned", "ref": "conformance:projection-authorization-companion"}
       ]
     },
     {
@@ -1219,7 +1219,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
-        {"status": "planned", "ref": "peira:decision-authority-and-basis"},
+        {"status": "planned", "ref": "conformance:decision-authority-and-basis"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1230,8 +1230,8 @@
       "evidence_status": "planned",
       "failure_owner": "Ktisor",
       "verification": [
-        {"status": "planned", "ref": "peira:determinism-same-input"},
-        {"status": "planned", "ref": "peira:reproducible-two-environments"}
+        {"status": "planned", "ref": "conformance:determinism-same-input"},
+        {"status": "planned", "ref": "conformance:reproducible-two-environments"}
       ]
     },
     {
@@ -1239,8 +1239,8 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "Ktisor, sphra and Drasor",
-      "verification": [{"status": "planned", "ref": "peira:state-non-implication"}]
+      "failure_owner": "Ktisor, external signing integration and Drasor",
+      "verification": [{"status": "planned", "ref": "conformance:state-non-implication"}]
     },
     {
       "id": "END-STA-002",
@@ -1251,7 +1251,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
-        {"status": "planned", "ref": "peira:orthogonal-result-domains"},
+        {"status": "planned", "ref": "conformance:orthogonal-result-domains"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1264,7 +1264,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/identity-core.md"},
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:identity-domain-separation"},
+        {"status": "planned", "ref": "conformance:identity-domain-separation"},
         {"status": "manual-authority", "authority": "future format ADR reviewers"}
       ]
     },
@@ -1278,7 +1278,7 @@
         {"status": "covered-by-repo", "ref": "vectors/semantic/negative-relation-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/external-context-identity-valid.json"},
         {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
-        {"status": "planned", "ref": "peira:identity-independent-of-external-decisions"}
+        {"status": "planned", "ref": "conformance:identity-independent-of-external-decisions"}
       ]
     },
     {
@@ -1291,8 +1291,8 @@
         {"status": "covered-by-repo", "ref": "vectors/wire/directory-out-of-bounds.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/record-overlap.hex"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
-        {"status": "planned", "ref": "peira:checked-arithmetic"},
-        {"status": "planned", "ref": "peira:parser-fuzzing"}
+        {"status": "planned", "ref": "conformance:checked-arithmetic"},
+        {"status": "planned", "ref": "conformance:parser-fuzzing"}
       ]
     },
     {
@@ -1306,7 +1306,7 @@
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/edge-limit.hex"},
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
-        {"status": "planned", "ref": "peira:resource-limit-before-allocation"},
+        {"status": "planned", "ref": "conformance:resource-limit-before-allocation"},
         {"status": "manual-authority", "authority": "future Profile ADR reviewers"}
       ]
     },
@@ -1319,7 +1319,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/unknown-kind.hex"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
-        {"status": "planned", "ref": "peira:unknown-critical-record"},
+        {"status": "planned", "ref": "conformance:unknown-critical-record"},
         {"status": "manual-authority", "authority": "future format registry reviewers"}
       ]
     },
@@ -1336,7 +1336,7 @@
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/source-range-reject.json"},
         {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
-        {"status": "planned", "ref": "peira:diagnostic-differential"}
+        {"status": "planned", "ref": "conformance:diagnostic-differential"}
       ]
     },
     {
@@ -1346,8 +1346,8 @@
       "evidence_status": "planned",
       "failure_owner": "Theor and repository dependency checks",
       "verification": [
-        {"status": "planned", "ref": "peira:reader-dependency-independence"},
-        {"status": "planned", "ref": "peira:mutation-and-fault-injection"}
+        {"status": "planned", "ref": "conformance:reader-dependency-independence"},
+        {"status": "planned", "ref": "conformance:mutation-and-fault-injection"}
       ]
     },
     {
@@ -1383,7 +1383,7 @@
       "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
-        {"status": "planned", "ref": "peira:wire-layout-variants"}
+        {"status": "planned", "ref": "conformance:wire-layout-variants"}
       ]
     },
     {
@@ -1394,7 +1394,7 @@
       "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
-        {"status": "planned", "ref": "peira:wire-size-and-reserved"}
+        {"status": "planned", "ref": "conformance:wire-size-and-reserved"}
       ]
     },
     {
@@ -1450,7 +1450,7 @@
       "failure_owner": "Ktisor and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/minimal-structural.hex"},
-        {"status": "planned", "ref": "peira:wire-facet-cardinality"}
+        {"status": "planned", "ref": "conformance:wire-facet-cardinality"}
       ]
     },
     {
@@ -1464,7 +1464,7 @@
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/non-minimal-cbor.hex"},
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
-        {"status": "planned", "ref": "peira:wire-cbor-determinism"}
+        {"status": "planned", "ref": "conformance:wire-cbor-determinism"}
       ]
     },
     {
@@ -1481,7 +1481,7 @@
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/edge-limit.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/depth-limit.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/string-limit.hex"},
-        {"status": "planned", "ref": "peira:p0-limit-boundaries"}
+        {"status": "planned", "ref": "conformance:p0-limit-boundaries"}
       ]
     },
     {
@@ -1495,7 +1495,7 @@
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
-        {"status": "planned", "ref": "peira:p0-feature-closure"}
+        {"status": "planned", "ref": "conformance:p0-feature-closure"}
       ]
     },
     {
@@ -1551,7 +1551,7 @@
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-missing-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-mismatch-reject.json"},
         {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
-        {"status": "planned", "ref": "peira:p1-selector-non-self-authentication"}
+        {"status": "planned", "ref": "conformance:p1-selector-non-self-authentication"}
       ]
     },
     {
@@ -1563,7 +1563,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/endem-source-manifest.md"},
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
-        {"status": "planned", "ref": "peira:source-size-boundaries"}
+        {"status": "planned", "ref": "conformance:source-size-boundaries"}
       ]
     },
     {
@@ -1585,7 +1585,7 @@
       "failure_owner": "Ktisor source reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
-        {"status": "planned", "ref": "peira:source-escape-boundaries"}
+        {"status": "planned", "ref": "conformance:source-escape-boundaries"}
       ]
     },
     {
@@ -1598,7 +1598,7 @@
         {"status": "covered-by-repo", "ref": "vectors/source/minimal.ends"},
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p1/minimal-semantic.hex"},
-        {"status": "planned", "ref": "peira:source-order-independence"}
+        {"status": "planned", "ref": "conformance:source-order-independence"}
       ]
     },
     {
@@ -1622,7 +1622,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
         {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
-        {"status": "planned", "ref": "peira:source-atomic-failure"}
+        {"status": "planned", "ref": "conformance:source-atomic-failure"}
       ]
     },
     {
@@ -1645,7 +1645,7 @@
       "failure_owner": "every future diagnostic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
-        {"status": "planned", "ref": "peira:diagnostic-identity"}
+        {"status": "planned", "ref": "conformance:diagnostic-identity"}
       ]
     },
     {
@@ -1656,7 +1656,7 @@
       "failure_owner": "every future diagnostic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
-        {"status": "planned", "ref": "peira:diagnostic-context-pinning"}
+        {"status": "planned", "ref": "conformance:diagnostic-context-pinning"}
       ]
     },
     {
@@ -1667,7 +1667,7 @@
       "failure_owner": "every future diagnostic producer and protocol adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
-        {"status": "planned", "ref": "peira:diagnostic-layer-separation"}
+        {"status": "planned", "ref": "conformance:diagnostic-layer-separation"}
       ]
     },
     {
@@ -1678,7 +1678,7 @@
       "failure_owner": "every future diagnostic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
-        {"status": "planned", "ref": "peira:diagnostic-location-bounds"}
+        {"status": "planned", "ref": "conformance:diagnostic-location-bounds"}
       ]
     },
     {
@@ -1689,7 +1689,7 @@
       "failure_owner": "every future diagnostic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
-        {"status": "planned", "ref": "peira:diagnostic-primary-precedence"}
+        {"status": "planned", "ref": "conformance:diagnostic-primary-precedence"}
       ]
     },
     {
@@ -1700,7 +1700,7 @@
       "failure_owner": "future Drasor control plane and named authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
-        {"status": "planned", "ref": "peira:diagnostic-recovery-authority"}
+        {"status": "planned", "ref": "conformance:diagnostic-recovery-authority"}
       ]
     },
     {
@@ -1711,7 +1711,7 @@
       "failure_owner": "every future external protocol adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
-        {"status": "planned", "ref": "peira:external-diagnostic-mapping"}
+        {"status": "planned", "ref": "conformance:external-diagnostic-mapping"}
       ]
     },
     {
@@ -1722,7 +1722,7 @@
       "failure_owner": "every future diagnostic producer and disclosure policy",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
-        {"status": "planned", "ref": "peira:diagnostic-minimal-disclosure"}
+        {"status": "planned", "ref": "conformance:diagnostic-minimal-disclosure"}
       ]
     },
     {
@@ -1733,7 +1733,7 @@
       "failure_owner": "every future diagnostic producer and reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
-        {"status": "planned", "ref": "peira:diagnostic-resource-bounds"}
+        {"status": "planned", "ref": "conformance:diagnostic-resource-bounds"}
       ]
     },
     {
@@ -1744,7 +1744,7 @@
       "failure_owner": "every future diagnostic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
-        {"status": "planned", "ref": "peira:diagnostic-atomic-failure"}
+        {"status": "planned", "ref": "conformance:diagnostic-atomic-failure"}
       ]
     },
     {
@@ -1755,7 +1755,7 @@
       "failure_owner": "every future external protocol adapter and release policy",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-version-pin"}
+        {"status": "planned", "ref": "conformance:adapter-version-pin"}
       ]
     },
     {
@@ -1766,7 +1766,7 @@
       "failure_owner": "every future peer discovery and authentication adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-peer-binding"}
+        {"status": "planned", "ref": "conformance:adapter-peer-binding"}
       ]
     },
     {
@@ -1777,7 +1777,7 @@
       "failure_owner": "future Drasor capability resolver and every external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-capability-intersection"}
+        {"status": "planned", "ref": "conformance:adapter-capability-intersection"}
       ]
     },
     {
@@ -1788,7 +1788,7 @@
       "failure_owner": "future Drasor session controller and every external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-invocation-binding"}
+        {"status": "planned", "ref": "conformance:adapter-invocation-binding"}
       ]
     },
     {
@@ -1799,7 +1799,7 @@
       "failure_owner": "every future protocol mapping and evidence producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-loss-map"}
+        {"status": "planned", "ref": "conformance:adapter-loss-map"}
       ]
     },
     {
@@ -1810,7 +1810,7 @@
       "failure_owner": "every future protocol adapter and result consumer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-result-separation"}
+        {"status": "planned", "ref": "conformance:adapter-result-separation"}
       ]
     },
     {
@@ -1821,7 +1821,7 @@
       "failure_owner": "every future artifact adapter, reader and evidence producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-artifact-candidate"}
+        {"status": "planned", "ref": "conformance:adapter-artifact-candidate"}
       ]
     },
     {
@@ -1832,7 +1832,7 @@
       "failure_owner": "every future protocol adapter and diagnostic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-diagnostic-provenance"}
+        {"status": "planned", "ref": "conformance:adapter-diagnostic-provenance"}
       ]
     },
     {
@@ -1843,7 +1843,7 @@
       "failure_owner": "future Drasor session controller and every asynchronous adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-cancellation-finality"}
+        {"status": "planned", "ref": "conformance:adapter-cancellation-finality"}
       ]
     },
     {
@@ -1854,7 +1854,7 @@
       "failure_owner": "future retry policy, Drasor budget controller and every adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-idempotent-retry"}
+        {"status": "planned", "ref": "conformance:adapter-idempotent-retry"}
       ]
     },
     {
@@ -1865,7 +1865,7 @@
       "failure_owner": "every future stream, webhook, push and polling adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-delivery-evidence"}
+        {"status": "planned", "ref": "conformance:adapter-delivery-evidence"}
       ]
     },
     {
@@ -1876,7 +1876,7 @@
       "failure_owner": "future capability domain, network policy and every external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
-        {"status": "planned", "ref": "peira:adapter-security-envelope"}
+        {"status": "planned", "ref": "conformance:adapter-security-envelope"}
       ]
     },
     {
@@ -1887,7 +1887,7 @@
       "failure_owner": "every future artifact producer, resolver and verifier",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:identity-domain-binding"}
+        {"status": "planned", "ref": "conformance:identity-domain-binding"}
       ]
     },
     {
@@ -1898,7 +1898,7 @@
       "failure_owner": "every future canonical writer, hasher and verifier",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:identity-byte-domain"}
+        {"status": "planned", "ref": "conformance:identity-byte-domain"}
       ]
     },
     {
@@ -1909,7 +1909,7 @@
       "failure_owner": "every future closure resolver, evidence producer and session loader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:identity-reference-closure"}
+        {"status": "planned", "ref": "conformance:identity-reference-closure"}
       ]
     },
     {
@@ -1920,7 +1920,7 @@
       "failure_owner": "future algorithm registry, release policy and every verifier",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:identity-algorithm-policy"}
+        {"status": "planned", "ref": "conformance:identity-algorithm-policy"}
       ]
     },
     {
@@ -1931,7 +1931,7 @@
       "failure_owner": "every future resolver, CLI, UI, log and diagnostic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:identity-full-digest-binding"}
+        {"status": "planned", "ref": "conformance:identity-full-digest-binding"}
       ]
     },
     {
@@ -1942,7 +1942,7 @@
       "failure_owner": "future specification maintainers and every identity consumer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:identity-equivalence-separation"}
+        {"status": "planned", "ref": "conformance:identity-equivalence-separation"}
       ]
     },
     {
@@ -1953,7 +1953,7 @@
       "failure_owner": "every future signing domain and statement verifier",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:signed-statement-context"}
+        {"status": "planned", "ref": "conformance:signed-statement-context"}
       ]
     },
     {
@@ -1964,7 +1964,7 @@
       "failure_owner": "future signing domain, publication system and every verifier",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:attestation-envelope-materials"}
+        {"status": "planned", "ref": "conformance:attestation-envelope-materials"}
       ]
     },
     {
@@ -1975,7 +1975,7 @@
       "failure_owner": "every future verifier, policy evaluator and named decision authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:signature-authority-separation"}
+        {"status": "planned", "ref": "conformance:signature-authority-separation"}
       ]
     },
     {
@@ -1986,7 +1986,7 @@
       "failure_owner": "future trust policy, status distributor and every verifier",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:signature-validity-cutoff"}
+        {"status": "planned", "ref": "conformance:signature-validity-cutoff"}
       ]
     },
     {
@@ -1997,7 +1997,7 @@
       "failure_owner": "future build, packaging and release validation authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:reproducible-independent-outputs"}
+        {"status": "planned", "ref": "conformance:reproducible-independent-outputs"}
       ]
     },
     {
@@ -2008,7 +2008,7 @@
       "failure_owner": "every future transformer, strip operation and companion resolver",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
-        {"status": "planned", "ref": "peira:artifact-relation-binding"}
+        {"status": "planned", "ref": "conformance:artifact-relation-binding"}
       ]
     },
     {
@@ -2020,7 +2020,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:text-slot-contract"}
+        {"status": "planned", "ref": "conformance:text-slot-contract"}
       ]
     },
     {
@@ -2032,7 +2032,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:strict-utf8-decoding"}
+        {"status": "planned", "ref": "conformance:strict-utf8-decoding"}
       ]
     },
     {
@@ -2044,7 +2044,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:source-text-provenance"}
+        {"status": "planned", "ref": "conformance:source-text-provenance"}
       ]
     },
     {
@@ -2056,7 +2056,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:ascii-identifier-closure"}
+        {"status": "planned", "ref": "conformance:ascii-identifier-closure"}
       ]
     },
     {
@@ -2068,7 +2068,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:text-normalization-profile"}
+        {"status": "planned", "ref": "conformance:text-normalization-profile"}
       ]
     },
     {
@@ -2080,7 +2080,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:text-comparison-domain"}
+        {"status": "planned", "ref": "conformance:text-comparison-domain"}
       ]
     },
     {
@@ -2092,7 +2092,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:text-range-unit-binding"}
+        {"status": "planned", "ref": "conformance:text-range-unit-binding"}
       ]
     },
     {
@@ -2104,7 +2104,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:bidi-storage-display-separation"}
+        {"status": "planned", "ref": "conformance:bidi-storage-display-separation"}
       ]
     },
     {
@@ -2116,7 +2116,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:hidden-confusable-inventory"}
+        {"status": "planned", "ref": "conformance:hidden-confusable-inventory"}
       ]
     },
     {
@@ -2128,7 +2128,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:text-metadata-locale"}
+        {"status": "planned", "ref": "conformance:text-metadata-locale"}
       ]
     },
     {
@@ -2140,7 +2140,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:model-text-view-binding"}
+        {"status": "planned", "ref": "conformance:model-text-view-binding"}
       ]
     },
     {
@@ -2152,7 +2152,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
-        {"status": "planned", "ref": "peira:text-display-export-provenance"}
+        {"status": "planned", "ref": "conformance:text-display-export-provenance"}
       ]
     },
     {
@@ -2164,7 +2164,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:authority-context-binding"}
+        {"status": "planned", "ref": "conformance:authority-context-binding"}
       ]
     },
     {
@@ -2176,7 +2176,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:authority-principal-role"}
+        {"status": "planned", "ref": "conformance:authority-principal-role"}
       ]
     },
     {
@@ -2188,7 +2188,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:authority-scope-closure"}
+        {"status": "planned", "ref": "conformance:authority-scope-closure"}
       ]
     },
     {
@@ -2200,7 +2200,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:semantic-authorization-binding"}
+        {"status": "planned", "ref": "conformance:semantic-authorization-binding"}
       ]
     },
     {
@@ -2212,7 +2212,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:authorization-decision-content"}
+        {"status": "planned", "ref": "conformance:authorization-decision-content"}
       ]
     },
     {
@@ -2224,7 +2224,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:delegation-chain-narrowing"}
+        {"status": "planned", "ref": "conformance:delegation-chain-narrowing"}
       ]
     },
     {
@@ -2236,7 +2236,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:multi-authority-policy"}
+        {"status": "planned", "ref": "conformance:multi-authority-policy"}
       ]
     },
     {
@@ -2248,7 +2248,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:consent-view-binding"}
+        {"status": "planned", "ref": "conformance:consent-view-binding"}
       ]
     },
     {
@@ -2260,7 +2260,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:authorization-validity-cutoff"}
+        {"status": "planned", "ref": "conformance:authorization-validity-cutoff"}
       ]
     },
     {
@@ -2272,7 +2272,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:authorization-replay-binding"}
+        {"status": "planned", "ref": "conformance:authorization-replay-binding"}
       ]
     },
     {
@@ -2284,7 +2284,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:authorized-capability-intersection"}
+        {"status": "planned", "ref": "conformance:authorized-capability-intersection"}
       ]
     },
     {
@@ -2296,7 +2296,7 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
-        {"status": "planned", "ref": "peira:authority-result-domain-separation"}
+        {"status": "planned", "ref": "conformance:authority-result-domain-separation"}
       ]
     }
   ]

@@ -2,13 +2,13 @@
 
 本目录是修改站点页面、共享布局、目录和交互动效时的设计路由入口。开始改动前，先根据目标文件或 `page_role` 读取下表指定文档；涉及多个角色时读取所有对应文档。
 
-修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、六个语义面、Synem、Dromen、Iknem、Ktisor、Theor、Drasor、八个动作和唯一 CLI 是当前设计阶段命名基线，设计文档不得引入旧名称或兼容入口。它们的职责已经确定，不表示具体拼写和读音已经满足发行条件。修改品牌、制品名、命令、扩展名、读音或分发坐标时还必须读取并更新 [`name-audit.md`](name-audit.md)，不能用旧查询结果或主观拼读证明当前可用性。
+修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、六个语义面、Synem、Dromen、Iknem、Ktisor、Theor、Drasor、五个动作和唯一 CLI 是当前设计阶段命名基线，设计文档不得引入旧名称或兼容入口。它们的职责已经确定，不表示具体拼写和读音已经满足发行条件。修改品牌、制品名、命令、扩展名、读音或分发坐标时还必须读取并更新 [`name-audit.md`](name-audit.md)，不能用旧查询结果或主观拼读证明当前可用性。
 
 修改 `.endem`、`rhem/semion/skena/telis/krin/apor`、`phain`、事态投影、引用、内容身份、规范排序、封装布局或证据排布时，先读取当前 Endem、Synem 和 Iknem 规范，再读取 [`ADR-0010`](../architecture/adr-0010-native-lexicon.html) 与相关活跃 ADR。架构决策只在 `architecture/` 维护；本目录不保存历史 ADR 副本，也不得重新引入旧词或兼容接口。
 
 修改 Endem 生命周期、Ktisor/Theor/Drasor 隔离、独立读取路径、GNU 工具链采用范围或外部 AI 协议落点时，先读取 `/architecture/endem-lifecycle.html`、对应组件页面和它们链接的活跃 ADR。
 
-修改 `ktise/elenk/pleko/tasse/sphra/theor/drase/peira` 的输入输出、失败语义、发布闭包、签名回填或跨组件消费者关系时，先读取 [`internal-tools.md`](internal-tools.md)、Endem 手册与活跃产物流 ADR。
+修改 `ktise/elenk/pleko/theor/drase` 的输入输出、失败语义或跨组件消费者关系，以及修改派生封装、外部签名和符合性门禁时，先读取 [`internal-tools.md`](internal-tools.md)、Endem 手册与活跃产物流 ADR。
 
 修改模型候选、上下文装配、能力接口、反馈循环、Dromen、Iknem 或人工升级边界时，必须同时读取 Theor、Drasor 与 Iknem 规范以及相关活跃 ADR。任何设计都不得让模型决定规范字节、删除 `apor`、扩大能力或宣告最终验收。
 

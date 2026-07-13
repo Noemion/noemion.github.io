@@ -49,13 +49,13 @@ permalink: "/architecture/adr-0032-deterministic-maker-name-collision.html"
 
   <section class="content-wide">
     <h2>动作名称不等于实现优先级</h2>
-    <p>八个公开动作目前只是应用职责，不是八个已经证明必要的组件。保留名称不能替代真实消费者、失败责任和验证证据。</p>
+    <p>五个公开动作目前只是应用职责，不是五个已经证明必要的组件。保留名称不能替代真实消费者、失败责任和验证证据。</p>
     <div class="table-wrap"><table><thead><tr><th>成熟度</th><th>动作</th><th>当前边界</th></tr></thead><tbody>
       <tr><td>首条切片有直接消费者</td><td><code>ktise</code>、<code>elenk</code>、<code>theor</code></td><td>分别承担确定性形成、生产校验和独立只读解释；仍没有实现授权。</td></tr>
-      <tr><td>依赖后续制品或发布机制</td><td><code>pleko</code>、<code>tasse</code>、<code>sphra</code>、<code>drase</code></td><td>只有在组合、分发、签名和受限会话出现真实消费者后才进入实现范围。</td></tr>
-      <tr><td>仍需重新证明公开面价值</td><td><code>peira</code></td><td>当前可解释为一致性与互操作验证入口；是否应成为最终用户动作，必须在代码阶段前另行审查。</td></tr>
+      <tr><td>依赖后续消费者</td><td><code>pleko</code>、<code>drase</code></td><td>只有在组合和受限会话出现真实消费者后才进入实现范围；发布与签名责任按 ADR-0035 外置。</td></tr>
+      <tr><td>内部质量责任</td><td>内部符合性门禁</td><td>一致性与互操作验证不可省略，但 ADR-0035 已决定不扩大公开 CLI。</td></tr>
     </tbody></table></div>
-    <p>本 ADR 只接受 Ktisor 与 <code>ktise</code> 的名称替换，不自动冻结八个动作的最终产品拓扑。</p>
+    <p>本 ADR 只接受 Ktisor 与 <code>ktise</code> 的名称替换，不自动冻结五个动作的最终产品拓扑。</p>
   </section>
 
   <section class="content-band">

@@ -43,7 +43,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 **Failure:** Missing, ambiguous, changed, invalid, revoked or not-yet-attested input rejects establishment. No Dromen or satisfaction result is created.
 
-**Verification:** `DRO-SCN-001`, `DRO-SCN-002`; `vectors/dromen/cases.json`; future `peira:dromen-subject-revalidation` component tests.
+**Verification:** `DRO-SCN-001`, `DRO-SCN-002`; `vectors/dromen/cases.json`; future `conformance:dromen-subject-revalidation` component tests.
 
 ### DRO-POL-001 — Policies, authorities and cutoff must be closed before establishment
 
@@ -51,7 +51,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 **Failure:** An implicit default, mutable latest policy, missing authority, unresolved in-scope ambiguity or policy conflict rejects establishment.
 
-**Verification:** `DRO-SCN-003`, `DRO-SCN-004`; `vectors/dromen/cases.json`; future `peira:dromen-policy-closure` component tests.
+**Verification:** `DRO-SCN-003`, `DRO-SCN-004`; `vectors/dromen/cases.json`; future `conformance:dromen-policy-closure` component tests.
 
 ### DRO-ENV-001 — Environment and backend assumptions must be explicit bindings
 
@@ -59,7 +59,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 **Failure:** A missing required binding, unsupported protocol, unverified environment claim or material mismatch rejects establishment. Material drift after establishment invalidates the Dromen under `DRO-IMM-001`.
 
-**Verification:** `DRO-SCN-005`, `DRO-SCN-006`; `vectors/dromen/cases.json`; future `peira:dromen-environment-binding` component tests.
+**Verification:** `DRO-SCN-005`, `DRO-SCN-006`; `vectors/dromen/cases.json`; future `conformance:dromen-environment-binding` component tests.
 
 ### DRO-CAP-001 — The capability envelope may only intersect and reduce authority
 
@@ -67,7 +67,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 **Failure:** Union, fallback to ambient authority, wildcard expansion, token passthrough, audience substitution or runtime self-escalation invalidates the proposal or interrupts the established session.
 
-**Verification:** `DRO-SCN-007`, `DRO-SCN-008`; `vectors/dromen/cases.json`; future `peira:dromen-capability-intersection` component tests.
+**Verification:** `DRO-SCN-007`, `DRO-SCN-008`; `vectors/dromen/cases.json`; future `conformance:dromen-capability-intersection` component tests.
 
 ### DRO-SEC-001 — Live secrets and handles must remain outside the Dromen
 
@@ -75,7 +75,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 **Failure:** Secret material in the proposal, an unbound handle, reusable cross-session reference or passthrough token rejects establishment or invalidates the session.
 
-**Verification:** `DRO-SCN-009`; `vectors/dromen/cases.json`; future `peira:dromen-secret-separation` component tests.
+**Verification:** `DRO-SCN-009`; `vectors/dromen/cases.json`; future `conformance:dromen-secret-separation` component tests.
 
 ### DRO-BUD-001 — Budgets, time and cancellation must be finite and typed
 
@@ -83,7 +83,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 **Failure:** An unbounded required resource, incompatible units, hidden reset, child-budget escape or ignored cancellation rejects establishment or interrupts the session. Exhaustion does not imply `unmet`.
 
-**Verification:** `DRO-SCN-010`; `vectors/dromen/cases.json`; future `peira:dromen-budget-envelope` component tests.
+**Verification:** `DRO-SCN-010`; `vectors/dromen/cases.json`; future `conformance:dromen-budget-envelope` component tests.
 
 ### DRO-ACT-001 — Synem activation must remain inside the fixed closure and outside satisfaction
 
@@ -91,7 +91,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 **Failure:** Runtime dependency discovery, latest-version lookup, activation-driven permission gain, missing guard basis or result-domain conversion invalidates establishment or the affected session path.
 
-**Verification:** `DRO-SCN-011`; `vectors/dromen/cases.json`; future `peira:dromen-activation-boundary` component tests.
+**Verification:** `DRO-SCN-011`; `vectors/dromen/cases.json`; future `conformance:dromen-activation-boundary` component tests.
 
 ### DRO-OBS-001 — Observation, appraisal, disclosure and decision duties must be assigned
 
@@ -99,7 +99,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 **Failure:** An unassigned required observation, missing decision authority, hidden disclosure loss, or direct mapping from tool or Agent success to `met` or `accepted` rejects establishment.
 
-**Verification:** `DRO-SCN-012`, `DRO-SCN-013`; `vectors/dromen/cases.json`; future `peira:dromen-observation-plan` component tests.
+**Verification:** `DRO-SCN-012`, `DRO-SCN-013`; `vectors/dromen/cases.json`; future `conformance:dromen-observation-plan` component tests.
 
 ### DRO-IMM-001 — Establishment seals the contract and material drift invalidates it
 
@@ -107,7 +107,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 **Failure:** In-place mutation, silent refresh to broader authority, continued operation after material drift or overwriting prior evidence violates the session boundary.
 
-**Verification:** `DRO-SCN-014`; `vectors/dromen/cases.json`; future `peira:dromen-drift-invalidation` component tests.
+**Verification:** `DRO-SCN-014`; `vectors/dromen/cases.json`; future `conformance:dromen-drift-invalidation` component tests.
 
 ### DRO-LIF-001 — A Dromen is non-persistent, non-transferable and non-resumable
 
@@ -115,7 +115,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 **Failure:** Serializing a reusable Dromen, accepting a copied session identifier as authority, resuming with stale handles, or reconstructing a session from logs violates the lifecycle and requires rejection.
 
-**Verification:** `DRO-SCN-015`; `vectors/dromen/cases.json`; future `peira:dromen-session-disposal` component tests.
+**Verification:** `DRO-SCN-015`; `vectors/dromen/cases.json`; future `conformance:dromen-session-disposal` component tests.
 
 ## 4. Current non-goals
 

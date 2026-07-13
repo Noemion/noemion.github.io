@@ -28,7 +28,7 @@
 
 **失败：**实现把来源正文当作标识符、把本地化消息当作机器码、把显示别名当作内容引用，或在未声明槽类别时使用字符串作授权与绑定，必须拒绝该用途。
 
-**验证：**`TEXT-SCN-001`；`vectors/text-identifier/cases.json`；未来 `peira:text-slot-classification` 组件测试。
+**验证：**`TEXT-SCN-001`；`vectors/text-identifier/cases.json`；未来 `conformance:text-slot-classification` 组件测试。
 
 ### TEXT-ENC-001 — 解码必须唯一且先于任何变换
 
@@ -36,7 +36,7 @@
 
 **失败：**替换无效字节后继续形成对象、多个字节序列解码为同一标量、先规范化再发现解码错误，或把平台本地编码作为隐式输入，均不符合本规范。
 
-**验证：**`TEXT-SCN-002`、`TEXT-SCN-003`；`vectors/text-identifier/cases.json`；未来 `peira:utf8-unique-decode` 组件测试。
+**验证：**`TEXT-SCN-002`、`TEXT-SCN-003`；`vectors/text-identifier/cases.json`；未来 `conformance:utf8-unique-decode` 组件测试。
 
 ### TEXT-SRC-001 — 原始字节、解码文本与变换结果必须分开
 
@@ -44,7 +44,7 @@
 
 **失败：**把 CRLF 与 LF 输入称为同一原始文件、转义展开后仍沿用输入字节身份、隐式删除不可见字符，或无法说明变换前后范围关系时，来源声明不足。
 
-**验证：**`TEXT-SCN-004`、`TEXT-SCN-005`；`vectors/text-identifier/cases.json`；未来 `peira:source-byte-text-provenance` 组件测试。
+**验证：**`TEXT-SCN-004`、`TEXT-SCN-005`；`vectors/text-identifier/cases.json`；未来 `conformance:source-byte-text-provenance` 组件测试。
 
 ### TEXT-IDN-001 — 结构标识符保持封闭 ASCII
 
@@ -52,7 +52,7 @@
 
 **失败：**`A` 与 `a` 被默认合并、全角字符映射进 ASCII ID、土耳其语区域设置改变比较、视觉同形字符选择同一对象，或未升级 Profile 就接受 Unicode ID，必须拒绝。
 
-**验证：**`TEXT-SCN-006`、`TEXT-SCN-007`；`vectors/text-identifier/cases.json`；未来 `peira:ascii-identifier-closure` 组件测试。
+**验证：**`TEXT-SCN-006`、`TEXT-SCN-007`；`vectors/text-identifier/cases.json`；未来 `conformance:ascii-identifier-closure` 组件测试。
 
 ### TEXT-NRM-001 — 规范化必须绑定槽与版本
 
@@ -60,7 +60,7 @@
 
 **失败：**不同实现自行选择 NFC 或 NFKC、规范化后覆盖原文、拼接已规范化片段却不重新核对，或把规范化结果当作语义等价证明，均不符合本规范。
 
-**验证：**`TEXT-SCN-008`、`TEXT-SCN-009`；`vectors/text-identifier/cases.json`；未来 `peira:text-normalization-profile` 组件测试。
+**验证：**`TEXT-SCN-008`、`TEXT-SCN-009`；`vectors/text-identifier/cases.json`；未来 `conformance:text-normalization-profile` 组件测试。
 
 ### TEXT-CMP-001 — 比较必须声明比较域
 
@@ -68,7 +68,7 @@
 
 **失败：**界面搜索命中被当作精确引用、NFC 相等被当作原始字节相同、同形检测被当作同一对象，或未固定区域设置就产生规范顺序，比较无效。
 
-**验证：**`TEXT-SCN-010`；`vectors/text-identifier/cases.json`；未来 `peira:text-comparison-domain` 组件测试。
+**验证：**`TEXT-SCN-010`；`vectors/text-identifier/cases.json`；未来 `conformance:text-comparison-domain` 组件测试。
 
 ### TEXT-RNG-001 — 范围必须绑定主体、单位与变换
 
@@ -76,7 +76,7 @@
 
 **失败：**把用户可见字符数写成标量长度、规范化后复用旧范围、组合字符中间被当作稳定界面选区，或范围主体不明时，定位必须拒绝或降为非权威显示。
 
-**验证：**`TEXT-SCN-011`、`TEXT-SCN-012`；`vectors/text-identifier/cases.json`；未来 `peira:text-range-unit-binding` 组件测试。
+**验证：**`TEXT-SCN-011`、`TEXT-SCN-012`；`vectors/text-identifier/cases.json`；未来 `conformance:text-range-unit-binding` 组件测试。
 
 ### TEXT-BID-001 — 存储逻辑顺序与显示顺序必须分开
 
@@ -84,7 +84,7 @@
 
 **失败：**复制视觉顺序覆盖逻辑顺序、方向覆盖符让分隔符或字段边界看似移动、不同渲染器改变规范解析，或审查界面隐藏安全相关控制，均不符合本规范。
 
-**验证：**`TEXT-SCN-013`、`TEXT-SCN-014`；`vectors/text-identifier/cases.json`；未来 `peira:bidi-storage-display-separation` 组件测试。
+**验证：**`TEXT-SCN-013`、`TEXT-SCN-014`；`vectors/text-identifier/cases.json`；未来 `conformance:bidi-storage-display-separation` 组件测试。
 
 ### TEXT-HID-001 — 不可见字符与同形风险不能静默处理
 
@@ -92,7 +92,7 @@
 
 **失败：**静默删除零宽字符、把混合脚本警告当作确定攻击、按同形骨架选择账户或对象，或审核者无法看到模型实际接收的不可见序列时，处理无效。
 
-**验证：**`TEXT-SCN-015`、`TEXT-SCN-016`；`vectors/text-identifier/cases.json`；未来 `peira:hidden-confusable-inventory` 组件测试。
+**验证：**`TEXT-SCN-015`、`TEXT-SCN-016`；`vectors/text-identifier/cases.json`；未来 `conformance:hidden-confusable-inventory` 组件测试。
 
 ### TEXT-MET-001 — 语言与媒体元数据只是声明
 
@@ -100,7 +100,7 @@
 
 **失败：**根据自报 `language` 静默小写、用默认 locale 排序规范数组、媒体类型触发未登记转码，或把语言检测模型输出当作事实字段，必须拒绝规范用途。
 
-**验证：**`TEXT-SCN-017`；`vectors/text-identifier/cases.json`；未来 `peira:text-metadata-locale` 组件测试。
+**验证：**`TEXT-SCN-017`；`vectors/text-identifier/cases.json`；未来 `conformance:text-metadata-locale` 组件测试。
 
 ### TEXT-AIM-001 — 模型输入必须绑定机器实际接收的文本
 
@@ -108,7 +108,7 @@
 
 **失败：**审核者看到清洗文本而模型接收含变体选择符的另一序列、服务端隐式改写输入、日志只存显示摘要，或模型把不可见内容静默带入确认投影时，候选链不可信。
 
-**验证：**`TEXT-SCN-016`、`TEXT-SCN-018`；`vectors/text-identifier/cases.json`；未来 `peira:model-text-view-binding` 组件测试。
+**验证：**`TEXT-SCN-016`、`TEXT-SCN-018`；`vectors/text-identifier/cases.json`；未来 `conformance:model-text-view-binding` 组件测试。
 
 ### TEXT-OUT-001 — 显示、复制与导出必须披露变换
 
@@ -116,7 +116,7 @@
 
 **失败：**用户从短显示复制出安全引用、转义文本看似原文、日志截断后仍用于复现、脱敏隐藏决定性差异，或显示警告反向改变对象内容时，输出不符合本规范。
 
-**验证：**`TEXT-SCN-018`；`vectors/text-identifier/cases.json`；未来 `peira:text-display-export-provenance` 组件测试。
+**验证：**`TEXT-SCN-018`；`vectors/text-identifier/cases.json`；未来 `conformance:text-display-export-provenance` 组件测试。
 
 ## 3. 思想来源与采用限制
 

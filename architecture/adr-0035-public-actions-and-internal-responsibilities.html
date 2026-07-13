@@ -1,0 +1,66 @@
+---
+layout: default
+title: "ADR-0035 · 公开动作与内部职责收敛"
+page_role: "content"
+footer_text: "Noemion · ADR-0035"
+permalink: "/architecture/adr-0035-public-actions-and-internal-responsibilities.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0035</span></nav>
+  <header class="content-introduction"><h1>ADR-0035<br>公开动作与内部职责收敛</h1><p>只把具有独立用户任务、稳定输入输出和明确失败责任的职责保留为公开动作。</p><div class="badges"><span class="badge">Accepted</span><span class="badge">2026-07-14</span><span class="badge">Five Actions</span><span class="badge">No Compatibility Alias</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead"><code>endem</code> 的公开动作收敛为 <code>ktise</code>、<code>elenk</code>、<code>pleko</code>、<code>theor</code> 与 <code>drase</code>。</p>
+    <p>先前为裁剪与发布、签名响应核对、符合性测试设置的三个动作名不再属于当前词表、CLI 或未来发行承诺。对应工程责任没有消失：它们分别回到制品生产者、独立外部签名集成和内部符合性门禁；这些责任不是公开动作。当前阶段不保留旧入口、别名、重定向、双写或兼容垫片。</p>
+    <p class="callout"><strong>成熟度边界：</strong>五个公开动作只是职责边界，不是五个已实现子命令。第一条未来实现切片仍只考虑 <code>ktise</code>、<code>elenk</code>、独立 <code>theor</code> 与内部符合性门禁；<code>pleko</code> 和 <code>drase</code> 要等待真实消费者。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>判定方法</h2>
+    <div class="table-wrap"><table><thead><tr><th>证据</th><th>采用什么</th><th>不能推出什么</th></tr></thead><tbody>
+      <tr><td><a href="https://sourceware.org/binutils/">GNU Binutils</a><br><a href="https://sourceware.org/binutils/docs/binutils/readelf.html">GNU readelf</a></td><td>链接、转换、裁剪与只读检查可以有不同职责；独立读取路径能减少共同故障。</td><td>GNU 有一个程序，就要求 Noemion 也有一个同构公开动作。</td></tr>
+      <tr><td><a href="https://sourceware.org/binutils/docs/binutils/objcopy.html">GNU objcopy</a><br><a href="https://sourceware.org/binutils/docs/binutils/strip.html">GNU strip</a></td><td>只有输入、输出、允许损失和失败条件明确时，变换才构成可辩护用户任务。</td><td>尚无物理 Profile 与消费者的“裁剪”已经是稳定产品职责。</td></tr>
+      <tr><td><a href="https://www.gnu.org/prep/standards/html_node/Names.html">GNU Coding Standards：Names</a></td><td>名称应传达有用含义，短词不能以晦涩换取整齐。</td><td>为了形成对称词表而保留难读或无消费者的专名。</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks">MCP Tasks</a><br><a href="https://github.com/a2aproject/A2A/blob/main/docs/specification.md">A2A Specification</a></td><td>任务、消息、产物与轮询状态是外部协议对象，适配时必须保留来源和状态域。</td><td>远端 Task、Artifact 或完成状态自动成为 Endem 动作、Iknem 或满足结果。</td></tr>
+      <tr><td><a href="https://openai.github.io/openai-agents-python/handoffs/">OpenAI Agents SDK handoffs</a><br><a href="https://openai.github.io/openai-agents-python/tracing/">tracing</a></td><td>handoff 与 trace 可用于运行编排、调试和监测。</td><td>一次交接或 trace 成功就是符合性证据、授权或最终接受。</td></tr>
+    </tbody></table></div>
+    <p>公开动作必须同时具有独立用户任务、可固定输入、可识别输出、唯一失败责任和不能由相邻职责承担的价值。维护者需要某项检查，或外部工具恰好有同名程序，都不足以通过这项门禁。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>五个公开动作</h2>
+    <div class="table-wrap"><table><thead><tr><th>动作</th><th>独立用户任务</th><th>边界</th><th>成熟度</th></tr></thead><tbody>
+      <tr><td><code>ktise</code></td><td>从受控来源确定性形成一个 Endem</td><td>唯一规范写入入口；模型只提供候选</td><td>未来首条切片</td></tr>
+      <tr><td><code>elenk</code></td><td>按层验证实际制品字节</td><td>检查通过不等于满足或接受</td><td>未来首条切片</td></tr>
+      <tr><td><code>pleko</code></td><td>把至少两个精确 Endem 解析为封闭 Synem</td><td>不使用环境搜索或权限扩大</td><td>等待真实组合消费者</td></tr>
+      <tr><td><code>theor</code></td><td>以独立只读路径检查不可信字节</td><td>不复用生产解析器，不写回</td><td>未来首条切片</td></tr>
+      <tr><td><code>drase</code></td><td>在最小能力域建立一次有界 Drase 会话</td><td>不能改写制品、扩权或自判 accepted</td><td>等待运行消费者和隔离证据</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>撤下公开动作后，责任落在哪里</h2>
+    <div class="table-wrap"><table><thead><tr><th>历史职责</th><th>现行归属</th><th>重新获得接口的前置条件</th></tr></thead><tbody>
+      <tr><td>封装、裁剪与发布派生</td><td>物理封装由对应生产者承担：Endem 归 <code>ktise</code>，Synem 归 <code>pleko</code>。裁剪或迁移只作为 ID-CORE 的类型化派生关系；输出具有新身份。</td><td>真实消费者、物理 Profile、允许损失、保留关系、正反向量和失败原子性全部冻结。</td></tr>
+      <tr><td>签名请求与响应核对</td><td>独立外部签名集成；私钥、证书、撤销和时间保持在 Ktisor 与 Drasor 之外。</td><td>待签陈述、包络 Profile、算法政策、验证截止点、撤销来源和真实发布消费者冻结。</td></tr>
+      <tr><td>差分、恶意输入、复现与互操作检查</td><td>内部符合性与发行门禁；规范注册表使用中性的 <code>conformance:</code> 引用，不映射为 CLI。</td><td>若未来出现最终用户必须直接运行、且不能由测试或发行流程承担的任务，再重新提出 ADR。</td></tr>
+    </tbody></table></div>
+    <p>撤下名称不合并信任域。Ktisor、独立 Theor、隔离 Drasor 与密钥权限域仍必须具有可测试的实现、进程或权限分离。</p>
+  </section>
+
+  <section class="content-grid">
+    <h2>案例、反例与威胁</h2>
+    <article><h3>支持案例</h3><p>用户需要形成、验证、组合、独立查看或有界运行一个精确制品。这五类任务各自有可说明的输入、输出和失败责任。</p></article>
+    <article><h3>反例</h3><p>维护者要在 CI 中跑恶意语料。它是不可省略的验证责任，但没有形成独立最终用户任务，因此不应增加公开命令。</p></article>
+    <article><h3>未决场景</h3><p>未来出现必须离线签署同一类精确包络的真实发布者。项目应先冻结包络与消费者，再判断它属于现有发布系统还是需要新接口，不能预留名字占位。</p></article>
+    <article><h3>主要威胁</h3><p>最危险的退化是把外部任务完成、签名有效、trace 完整或测试通过提升为目标满足、授权或最终接受。结果域继续按 ADR-0015、ADR-0022、ADR-0027 与 ADR-0029 分开。</p></article>
+  </section>
+
+  <section class="content-band">
+    <h2>迁移与验证</h2>
+    <p>历史动作名 <code>tasse</code>、<code>sphra</code> 与 <code>peira</code> 只在本 ADR 和名称审计中保留，用来解释一次性迁移；其他现行页面、规范、向量、测试引用、路线图和导航必须删除这些名称。没有旧路由，也不接受旧拼写。</p>
+    <p>高读音风险的历史签名动作被删除，是职责门禁的结果，不是“改个更顺口的名字”。其余五个动作仍须通过 ADR-0034 的目标语言读音、听辨和写回验证；本决定不证明它们已经适合发行。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0034-pronunciation-and-oral-distinction.html">← ADR-0034</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

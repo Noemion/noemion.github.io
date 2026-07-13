@@ -3,7 +3,7 @@
 证据时间：2026-07-13T20:33:09+08:00
 工程责任：首次发行负责人
 法律责任：目标法域的合格知识产权专业人员
-状态：开发阶段工程初筛；ADR-0031 至 ADR-0033 已接受直接迁移；ADR-0034 已接受口头门禁；不是法律意见
+状态：开发阶段工程初筛；ADR-0031 至 ADR-0033 已接受直接迁移；ADR-0034 已接受口头门禁；ADR-0035 已收敛公开动作；不是法律意见
 
 ## 先给结论
 
@@ -14,7 +14,7 @@
 - 旧组件名 `Poiet` 与公开动作 `poie` 必须共同退出。`POIE` 已被 PFA Open Inference Engine 用于预测与分析模型评分，大小写不能形成可靠工程区分；ADR-0032 已采用 `Ktisor` 与 `ktise`。
 - `TXT-CORE` 容易被读成 `.txt` 文件或原始文本文件，已触发实际对象边界误解。ADR-0033 采用 `TEXT-IDENTIFIER-CORE`；它是标准 ID，不是新文件格式、制品或组件名。
 - 先前审查没有保存目标语言、IPA、首次朗读、听写回填或成对混淆证据，因此不能证明任何新造词已经通过口头传播门禁。ADR-0034 已补上这项治理要求，但具体发行读音尚未冻结。
-- `Iknem`、`Ktisor/ktise`、`sphra` 与 `kine/mene` 是首轮高风险复核项；Endem/Synem 是优先成对听辨项。风险级别不自动决定改名，也不允许用项目自行编写的读音提示冒充验证结果。
+- `Iknem`、`Ktisor/ktise` 与 `kine/mene` 是现行词表的首轮高风险复核项；Endem/Synem 是优先成对听辨项。历史动作 `sphra` 曾因词首难以稳定拼读被列为高风险，ADR-0035 已因职责价值不足将它连同 `tasse`、`peira` 撤下；这不是读音修补，也不使其余名称自动通过。
 - `Synem`、`Dromen` 与 `Theor` 存在大小写无关或近似的软件与应用使用，目前记录为发现混淆；尚未达到必须立即更名的程度。
 - PyPI、npm 与 crates.io 的 `endem` 精确包名在本次查询时均返回 404，Homebrew、Arch Linux、Fedora 和 Debian 也没有精确同名包。这个结果只说明查询时没有精确登记，不构成包名保留。
 - 当前工程结论不再是统一的中等风险。Endem 保持中等风险；旧名称的高风险已经通过直接替换处理；Drasor、drase、Iknem、Ktisor 与 ktise 只通过开发阶段初筛，首次正式发行仍由法律和实际包名取得门禁阻断。
@@ -36,7 +36,9 @@ endem
 rhem semion skena telis krin apor
 Synem Dromen Iknem
 Ktisor Theor Drasor
-ktise elenk pleko tasse sphra theor drase peira
+ktise elenk pleko theor drase
+
+历史迁移证据：`tasse sphra peira`（仅供 ADR-0035 审计，不是现行词表）。
 ```
 
 本轮把结果分成四类：
@@ -55,7 +57,7 @@ ktise elenk pleko tasse sphra theor drase peira
 | 对象 | 可核对风险 | 当前结论 |
 | --- | --- | --- |
 | `Ktisor` / `ktise` | 词首 `kt` 没有已登记的项目读音；读者可能省略辅音，也可能插入不同元音 | 高风险；工程初筛通过不等于口头门禁通过 |
-| `sphra` | 词首 `sphr` 缺少面向目标读者的稳定拼读线索，声音也难直接恢复拼写 | 高风险；与动作是否应公开一并复核 |
+| `sphra`（历史） | 词首 `sphr` 缺少面向目标读者的稳定拼读线索，声音也难直接恢复拼写 | ADR-0035 已撤下；不再进入现行读音研究 |
 | `Iknem` | 词首如何分段、首个元音怎样读均未验证 | 高风险；撤回“短、可发音”式无证据结论 |
 | `kine` / `mene` | [Cambridge Dictionary](https://dictionary.cambridge.org/us/pronunciation/english/kine) 记录英语 `kine` 为 /kaɪn/；[Merriam-Webster](https://www.merriam-webster.com/dictionary/kine)记录其古旧“牛”的复数义。项目尚未说明是否采用该读音，也没有 `mene` 的配对证据 | 高风险；保持语义职责，重新审查发行拼写与读音 |
 | Endem / Synem | 共同结尾显示词族，也可能在句中、口音或弱信号下被混淆 | 中风险；必须做成对听辨 |

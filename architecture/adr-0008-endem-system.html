@@ -12,7 +12,7 @@ permalink: "/architecture/adr-0008-endem-system.html"
   <section class="content-stack">
     <h2>怎样阅读这份历史记录</h2>
     <p class="callout warning"><strong>后续决定：</strong>本 ADR 除 Endem、`.endem` 与单一 CLI 外的现行名称均已取代。当前语义、制品、组件、动作和生命周期由 <a href="adr-0010-native-lexicon.html">ADR-0010：原生词汇与事态分层</a>定义。</p>
-    <p class="lead">这份记录只解释项目怎样确定 Endem 和单一命令入口。文中的 Weave、Frame、Witness、五组字段、三个旧状态和八个旧动作都不是现行接口。</p>
+    <p class="lead">这份记录只解释项目怎样确定 Endem 和单一命令入口。文中的 Weave、Frame、Witness、五组字段、三个旧状态和五个旧动作都不是现行接口。</p>
     <p>现行对应关系是：Weave → Synem，Frame → Dromen，Witness → Iknem；具体字段、状态和动作以 ADR-0010 为准。</p>
   </section>
 
@@ -92,7 +92,7 @@ permalink: "/architecture/adr-0008-endem-system.html"
       <tr><td>ADR-0002 控制面边界</td><td>Retained in part</td><td>能力句柄、模型不可信和人工升级原则保留，具体职责收敛到隔离 Runner。</td></tr>
       <tr><td>ADR-0003 工具链产物闭环</td><td>Superseded</td><td>产物流收敛为 Endem/Weave、外部签名材料与 Witness，不再为每一步建立平行产品。</td></tr>
       <tr><td>ADR-0004 候选、能力与验收边界</td><td>Retained in part</td><td>候选不等于事实、能力声明不等于句柄、证据不等于验收继续有效，并映射到 Frame/Witness。</td></tr>
-      <tr><td>ADR-0005 独立工具名称</td><td>Superseded</td><td>公开命令统一为 <code>endem</code> 和八个子命令。</td></tr>
+      <tr><td>ADR-0005 独立工具名称</td><td>Superseded</td><td>公开命令统一为 <code>endem</code> 和五个子命令。</td></tr>
       <tr><td>ADR-0006 旧结构基线</td><td>Superseded</td><td>保留安全解析、显式引用和 checked arithmetic 原则，格式重新围绕 Endem 五组语义设计。</td></tr>
       <tr><td>ADR-0007 Phase 0/1 纵向切片</td><td>Superseded</td><td>首条切片改为目标卡 → <code>form</code> → Endem → <code>check</code>/<code>see</code> → <code>test</code>。</td></tr>
     </tbody></table></div>

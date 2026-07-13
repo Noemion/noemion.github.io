@@ -2,11 +2,11 @@
 
 适用范围：`page_role: tool-project`，当前仅 `endem/index.html`。`tool-project` 是现有布局角色标识，不表示继续建设工具家族。
 
-本页定义唯一公开应用 `endem` 的共同结构；八个动作的色彩、签名和边界见 [`internal-tools.md`](internal-tools.md)。正文尺度与信息栏遵守 [`readability.md`](readability.md)。
+本页定义唯一公开应用 `endem` 的共同结构；五个动作的色彩、签名和边界见 [`internal-tools.md`](internal-tools.md)。正文尺度与信息栏遵守 [`readability.md`](readability.md)。
 
 ## 阅读任务
 
-应用页必须说明 Endem 为什么存在、当前能否使用、八个动作怎样分工、三个信任域为何不能合并，以及哪些历史职责被取消或并入子命令。它不是已经发布的 CLI 手册。
+应用页必须说明 Endem 为什么存在、当前能否使用、五个动作怎样分工、三个信任域为何不能合并，以及哪些历史职责被取消或并入子命令。它不是已经发布的 CLI 手册。
 
 ## 固定结构
 

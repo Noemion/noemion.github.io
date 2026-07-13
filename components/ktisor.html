@@ -30,10 +30,8 @@ permalink: "/components/ktisor.html"
     <h2>输出与消费者</h2>
     <div class="table-wrap"><table><thead><tr><th>输出</th><th>实际消费者</th><th>输出成立的前提</th></tr></thead><tbody>
       <tr><td>nascent Endem + Ktise Iknem</td><td>elenk、theor、pleko、人工确认</td><td>结构合法、来源可定位、semion/skena 关系位置一致、一个根 skena、telis 与 krin 完整；apor 项仍显式存在。</td></tr>
-      <tr><td>生产验证结果</td><td>pleko、tasse、Drasor</td><td>每个验证层明确通过、失败或未执行，并绑定实际字节与配置。</td></tr>
-      <tr><td>coherent Endem / Synem + Pleko Iknem</td><td>tasse、theor</td><td>必需传递闭包完整、引用精确唯一、图有限无环、权限只收紧；成员结果未被聚合洗白。</td></tr>
-      <tr><td>未签候选与签名请求</td><td>外部签名系统、sphra</td><td>发布载荷冻结，闭包完整；没有冻结的保留关系时不删除内容，无法证明保留时失败。</td></tr>
-      <tr><td>attested Endem / Synem + Sphra Iknem</td><td>theor、Drasor</td><td>外部签名响应精确绑定原候选和请求；被签字节未改变。</td></tr>
+      <tr><td>生产验证结果</td><td>pleko、Drasor、外部发布系统</td><td>每个验证层明确通过、失败或未执行，并绑定实际字节与配置。</td></tr>
+      <tr><td>coherent Endem / Synem + Pleko Iknem</td><td>theor、Drasor、外部发布系统</td><td>必需传递闭包完整、引用精确唯一、图有限无环、权限只收紧；成员结果未被聚合洗白。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -45,7 +43,7 @@ permalink: "/components/ktisor.html"
       <li>未知关键记录、状态与内容不一致、悬空引用和权限扩大关闭失败。</li>
       <li>模型只能提交候选，不能决定字段、布局、绑定、签名范围或验收结果。</li>
       <li>apor 项只能被授权绑定、保留为明确运行时未知或导致失败，不能静默删除。</li>
-      <li>sphra 只在被签载荷之外附加封装；私钥不进入 Ktisor。</li>
+      <li>独立外部签名集成只在被签载荷之外附加封装；私钥不进入 Ktisor。</li>
     </ul>
   </section>
 
@@ -56,8 +54,8 @@ permalink: "/components/ktisor.html"
       <tr><td>Contract incomplete</td><td>缺少的 rhem/semion/skena/telis/krin/apor 语义面和稳定错误码</td><td>用默认提示补充来源、投影、可能事态、目标方向、满足判据或未决项。</td></tr>
       <tr><td>Aseme</td><td>违反 Profile、关系角色无效或没有允许投影的来源范围</td><td>把畸形组合包装成合法 nascent Endem。</td></tr>
       <tr><td>Pleko conflict</td><td>参与成员、冲突字段、策略和 Pleko Iknem</td><td>按输入顺序、弱绑定或最后写入者静默选择。</td></tr>
-      <tr><td>Tasse preservation unproven</td><td>缺失的关系规范、未覆盖属性、被移除记录和拒绝结论</td><td>只因文件更小、仍可读取或一次运行结果相同就继续发布。</td></tr>
-      <tr><td>Sphra mismatch</td><td>请求、载荷、算法、签名者或策略差异</td><td>修改候选以适配签名响应。</td></tr>
+      <tr><td>Derivation preservation unproven</td><td>缺失的关系规范、未覆盖属性、被移除记录和拒绝结论</td><td>只因文件更小、仍可读取或一次运行结果相同就继续发布。</td></tr>
+      <tr><td>Signing envelope mismatch</td><td>请求、载荷、算法、签名者或策略差异</td><td>修改候选以适配签名响应。</td></tr>
     </tbody></table></div>
   </section>
 

@@ -106,6 +106,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0032-deterministic-maker-name-collision.html",
     "architecture/adr-0033-text-identifier-specification-name.html",
     "architecture/adr-0034-pronunciation-and-oral-distinction.html",
+    "architecture/adr-0035-public-actions-and-internal-responsibilities.html",
     "components/ktisor.html",
     "components/theor.html",
     "components/drasor.html",
@@ -257,6 +258,11 @@ RETIRED_TEXT_SPEC_EVIDENCE_PATHS = {
     "architecture/adr-0034-pronunciation-and-oral-distinction.html",
     "design-system/name-audit.md",
 }
+RETIRED_ACTION_TERMS = re.compile(r"\b(?:tasse|sphra|peira)\b", re.IGNORECASE)
+RETIRED_ACTION_EVIDENCE_PATHS = {
+    "architecture/adr-0035-public-actions-and-internal-responsibilities.html",
+    "design-system/name-audit.md",
+}
 NORMATIVE_ROUTES = (
     "specifications/endem.html",
     "specifications/synem.html",
@@ -301,6 +307,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0032-deterministic-maker-name-collision.html",
     "architecture/adr-0033-text-identifier-specification-name.html",
     "architecture/adr-0034-pronunciation-and-oral-distinction.html",
+    "architecture/adr-0035-public-actions-and-internal-responsibilities.html",
     "architecture/open-questions.html",
     "components/ktisor.html",
     "components/theor.html",
@@ -337,7 +344,7 @@ DEPRECATED_LAYOUT_TERM = "he" + "ro"
 CURRENT_DOMAIN_IDENTIFIERS = {
     "endem", "rhem", "semion", "skena", "telis", "krin", "apor", "phain",
     "synem", "dromen", "iknem", "ktisor", "theor", "drasor",
-    "ktise", "elenk", "pleko", "tasse", "sphra", "drase", "peira",
+    "ktise", "elenk", "pleko", "theor", "drase",
 }
 MAINSTREAM_LANGUAGE_KEYWORDS = {
     # C, C++, Java, ECMAScript, Go, Rust, Swift, Kotlin and Python keyword union.
@@ -634,7 +641,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "大小写不能形成可靠区分",
             "不保留别名、重定向、双写或兼容垫片",
             "动作名称不等于实现优先级",
-            "peira",
+            "内部符合性门禁",
         ),
     },
     "architecture/adr-0033-text-identifier-specification-name.html": {
@@ -662,9 +669,26 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "OpenAI Realtime API",
             "Iknem",
             "Ktisor",
-            "sphra",
             "kine",
             "No Voice Interface",
+        ),
+    },
+    "architecture/adr-0035-public-actions-and-internal-responsibilities.html": {
+        "required": (
+            "Five Actions",
+            "ktise",
+            "elenk",
+            "pleko",
+            "theor",
+            "drase",
+            "GNU Binutils",
+            "GNU objcopy",
+            "MCP Tasks",
+            "A2A Specification",
+            "OpenAI Agents SDK handoffs",
+            "conformance:",
+            "不是公开动作",
+            "不保留旧入口、别名、重定向、双写或兼容垫片",
         ),
     },
     "docs/terminology-and-pronunciation.html": {
@@ -1173,6 +1197,13 @@ def validate_legacy_source_vocabulary():
                     f"{relative}: retired text specification terminology remains outside ADR-0033 and the name audit "
                     f"{retired_text_match.group(0)!r}"
                 )
+        if not relative.startswith("tests/") and relative not in RETIRED_ACTION_EVIDENCE_PATHS:
+            retired_action_match = RETIRED_ACTION_TERMS.search(text)
+            if retired_action_match:
+                errors.append(
+                    f"{relative}: retired public action remains outside ADR-0035 and the name audit "
+                    f"{retired_action_match.group(0)!r}"
+                )
         if DEPRECATED_LAYOUT_TERM in text.lower():
             errors.append(f"{relative}: retains the deprecated generic lead-layout term")
     return errors
@@ -1388,7 +1419,7 @@ def validate_jekyll_sources():
             "不进入 `registry.json`",
             "Noemion 不应建立一个跨对象、跨 Profile、跨版本通用的“语义等价”布尔值",
             "五类关系必须分开",
-            "`tasse` 的当前边界",
+            "派生处理的当前边界",
             "W3C RDF Dataset Canonicalization",
             "GNU BFD canonical object-file format",
             "Sentence-BERT",
@@ -2320,6 +2351,7 @@ def validate_jekyll_sources():
             "TIB-CORE",
             "ADR-0033",
             "ADR-0034",
+            "ADR-0035",
             "读音与口头区分证据",
             "BCP 47",
             "首次朗读",

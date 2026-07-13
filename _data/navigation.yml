@@ -25,10 +25,10 @@ global:
     kicker: 形成、检查与运行
     description: 进入 Noemion 的 Endem 应用，查看确定性制品工程和受限运行。
     items:
-      - { href: /endem/index.html, label: Endem 应用, description: 查看唯一公开 CLI 与八个动作的边界, cover: endem, cover_label: "ONE COMMAND" }
+      - { href: /endem/index.html, label: Endem 应用, description: 查看唯一公开 CLI 与五个动作的边界, cover: endem, cover_label: "ONE COMMAND" }
       - { href: /endem/docs/format.html, label: 格式与形成, description: 定义规范字段、编码与确定性形成, cover: format, cover_label: "KTISE / ELENK" }
       - { href: /endem/docs/safety.html, label: 安全与证据, description: 检查有界读取、独立观察与签名边界, cover: theor, cover_label: "ELENK / THEOR" }
-      - { href: /endem/docs/running.html, label: 装载与运行, description: 理解 Dromen、能力、phain 与 Iknem, cover: drase, cover_label: "SPHRA / DRASE" }
+      - { href: /endem/docs/running.html, label: 装载与运行, description: 理解 Dromen、能力、phain 与 Iknem, cover: drase, cover_label: "SIGN / DRASE" }
   - key: docs
     href: /docs/index.html
     label: 指南
@@ -118,6 +118,7 @@ modules:
           - { href: /architecture/adr-0032-deterministic-maker-name-collision.html, label: "ADR-0032 · 确定性制作名称冲突" }
           - { href: /architecture/adr-0033-text-identifier-specification-name.html, label: "ADR-0033 · 文本与标识符标准命名" }
           - { href: /architecture/adr-0034-pronunciation-and-oral-distinction.html, label: "ADR-0034 · 读音与口头区分门禁" }
+          - { href: /architecture/adr-0035-public-actions-and-internal-responsibilities.html, label: "ADR-0035 · 公开动作与内部职责" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:

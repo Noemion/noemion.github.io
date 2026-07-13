@@ -30,7 +30,7 @@
 
 **失败：**系统按当前最新政策解释旧点击、在不同租户复用同一角色、用页面路径推断授权域，或没有声明决定适用于什么对象和目的时，授权语境不完整。
 
-**验证：**`AUT-SCN-001`、`AUT-SCN-002`；`vectors/authority/cases.json`；未来 `peira:authority-context-binding` 组件测试。
+**验证：**`AUT-SCN-001`、`AUT-SCN-002`；`vectors/authority/cases.json`；未来 `conformance:authority-context-binding` 组件测试。
 
 ### AUT-PRN-001 — 主体认证、角色资格与决定权必须分开
 
@@ -38,7 +38,7 @@
 
 **失败：**任何已登录用户都能批准发布、签名者被当作语义权威、服务账户代表资源所有者却不保留实际行动者，或远端 Agent 自报技能后取得授权时，主体边界无效。
 
-**验证：**`AUT-SCN-003`、`AUT-SCN-004`；`vectors/authority/cases.json`；未来 `peira:authority-principal-role` 组件测试。
+**验证：**`AUT-SCN-003`、`AUT-SCN-004`；`vectors/authority/cases.json`；未来 `conformance:authority-principal-role` 组件测试。
 
 ### AUT-SCP-001 — 权限范围必须显式且默认不授予
 
@@ -46,7 +46,7 @@
 
 **失败：**“可编辑项目”被解释为可确认全部 `semion`、读权限隐含写权限、同名前缀扩大资源集合，或未知字段按允许处理时，范围必须拒绝。
 
-**验证：**`AUT-SCN-005`；`vectors/authority/cases.json`；未来 `peira:authority-scope-closure` 组件测试。
+**验证：**`AUT-SCN-005`；`vectors/authority/cases.json`；未来 `conformance:authority-scope-closure` 组件测试。
 
 ### AUT-SEM-001 — 自然语言候选只能由确定性规则或范围有限的具名权威确认
 
@@ -54,7 +54,7 @@
 
 **失败：**模型最高概率候选直接进入 `semion`、授权者看到截断文本却批准完整对象、一次“全部接受”消除不同风险的 `apor`，或批准对象与显示对象身份不一致时，候选仍未获授权。
 
-**验证：**`AUT-SCN-006`、`AUT-SCN-007`；`vectors/authority/cases.json`；未来 `peira:semantic-authorization-binding` 组件测试。
+**验证：**`AUT-SCN-006`、`AUT-SCN-007`；`vectors/authority/cases.json`；未来 `conformance:semantic-authorization-binding` 组件测试。
 
 ### AUT-DEC-001 — 授权决定必须记录请求、结果与有限后果
 
@@ -62,7 +62,7 @@
 
 **失败：**只保存“已批准”、结果没有对象和范围、部分批准仍返回原请求、缺失依据时默认 `grant`，或 `defer` 被调用方当作允许时，决定无效。
 
-**验证：**`AUT-SCN-008`；`vectors/authority/cases.json`；未来 `peira:authorization-decision-content` 组件测试。
+**验证：**`AUT-SCN-008`；`vectors/authority/cases.json`；未来 `conformance:authorization-decision-content` 组件测试。
 
 ## 4. 委托、多人决定与同意
 
@@ -72,7 +72,7 @@
 
 **失败：**子 Agent 获得父级未拥有的权限、链中隐藏中间行动者、服务账户冒充用户、委托循环、无限深度或续期扩大范围时，委托无效。
 
-**验证：**`AUT-SCN-009`、`AUT-SCN-010`；`vectors/authority/cases.json`；未来 `peira:delegation-chain-narrowing` 组件测试。
+**验证：**`AUT-SCN-009`、`AUT-SCN-010`；`vectors/authority/cases.json`；未来 `conformance:delegation-chain-narrowing` 组件测试。
 
 ### AUT-MUL-001 — 多权威规则必须预先固定并抵抗重复与顺序影响
 
@@ -80,7 +80,7 @@
 
 **失败：**同一人用三个账户满足三人批准、重复签名增加票数、后到决定覆盖先前否决，或政策在看到投票后改变门槛时，多权威决定无效。
 
-**验证：**`AUT-SCN-011`、`AUT-SCN-012`；`vectors/authority/cases.json`；未来 `peira:multi-authority-policy` 组件测试。
+**验证：**`AUT-SCN-011`、`AUT-SCN-012`；`vectors/authority/cases.json`；未来 `conformance:multi-authority-policy` 组件测试。
 
 ### AUT-CNS-001 — 同意必须绑定可理解视图且不能替代授权政策
 
@@ -88,7 +88,7 @@
 
 **失败：**界面显示“读取报告”而机器请求包含写入、隐藏接收方、拒绝按钮不可达、显示对象与授权对象不同，或任何点击者都被当作资源所有者时，同意无效。
 
-**验证：**`AUT-SCN-013`、`AUT-SCN-014`；`vectors/authority/cases.json`；未来 `peira:consent-view-binding` 组件测试。
+**验证：**`AUT-SCN-013`、`AUT-SCN-014`；`vectors/authority/cases.json`；未来 `conformance:consent-view-binding` 组件测试。
 
 ## 5. 时效、重放、能力与结果分离
 
@@ -98,7 +98,7 @@
 
 **失败：**永久复用一次批准、离线缓存忽略撤销、角色离职后继续授权、当前时间替代声明截止点，或删除历史决定掩盖撤销时，适用性无效。
 
-**验证：**`AUT-SCN-015`；`vectors/authority/cases.json`；未来 `peira:authorization-validity-cutoff` 组件测试。
+**验证：**`AUT-SCN-015`；`vectors/authority/cases.json`；未来 `conformance:authorization-validity-cutoff` 组件测试。
 
 ### AUT-RPL-001 — 决定和同意不得跨请求、对象或目的重放
 
@@ -106,7 +106,7 @@
 
 **失败：**旧批准用于新版本 Endem、同一点击授权另一个租户、付款同意被重复消费、重试换 ID 绕过去重，或发布批准被用于能力授予时，重放必须拒绝。
 
-**验证：**`AUT-SCN-016`；`vectors/authority/cases.json`；未来 `peira:authorization-replay-binding` 组件测试。
+**验证：**`AUT-SCN-016`；`vectors/authority/cases.json`；未来 `conformance:authorization-replay-binding` 组件测试。
 
 ### AUT-CAP-001 — 能力只能由已授范围与所有本地上限求交得到
 
@@ -114,7 +114,7 @@
 
 **失败：**权限使用并集、沿用环境 root、把 token 透传给下游、MCP step-up 原地扩大旧会话，或模型创建子 Agent 后倍增预算时，能力派生无效。
 
-**验证：**`AUT-SCN-017`；`vectors/authority/cases.json`；未来 `peira:authorized-capability-intersection` 组件测试。
+**验证：**`AUT-SCN-017`；`vectors/authority/cases.json`；未来 `conformance:authorized-capability-intersection` 组件测试。
 
 ### AUT-SEP-001 — 授权不得洗白其他结果域
 
@@ -122,7 +122,7 @@
 
 **失败：**访问授权被解释为事实正确、人工确认投影后直接 `accepted`、A2A `AUTH_REQUIRED` 解决后任务被写成 `met`，或有效签名和授权主体共同替代证据判断时，跨域推导无效。
 
-**验证：**`AUT-SCN-018`；`vectors/authority/cases.json`；未来 `peira:authority-result-domain-separation` 组件测试。
+**验证：**`AUT-SCN-018`；`vectors/authority/cases.json`；未来 `conformance:authority-result-domain-separation` 组件测试。
 
 ## 6. 权威依据与采用边界
 

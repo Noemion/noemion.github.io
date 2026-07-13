@@ -14,7 +14,7 @@ permalink: "/architecture/index.html"
     <p class="lead">Noemion 不是一组仿照传统二进制工具命名的命令。它要建立的基础是：一项自然语言目标可以成为持久、可组合、可受控运行、可由证据验收的制品。</p>
     <div class="status-grid">
       <article class="status-item"><h3>一件核心制品</h3><p>Endem 保存 rhem、semion、一个根 skena、telis、krin 和 apor；同一终态可显式复合，独立目标通过 Synem 组合。</p></article>
-      <article class="status-item"><h3>一个命令入口</h3><p><code>endem</code> 提供八个固定子命令，避免每项内部操作变成独立产品。</p></article>
+      <article class="status-item"><h3>一个命令入口</h3><p><code>endem</code> 提供五个固定子命令，避免每项内部操作变成独立产品。</p></article>
       <article class="status-item"><h3>两条读取路径</h3><p>生产验证和 <code>theor</code> 独立直接读取，不共享会掩盖共同错误的解析实现。</p></article>
       <article class="status-item"><h3>一个隔离运行域</h3><p><code>drase</code> 在 Ktisor 外建立 Dromen，能力句柄和模型后端不能进入制品或确定性生产域。</p></article>
     </div>
@@ -22,14 +22,14 @@ permalink: "/architecture/index.html"
 
   <section>
     <h2>系统关系</h2>
-    <div class="flow"><div class="step">受控来源表达</div><div class="step">投影 / ktise</div><div class="step">nascent Endem</div><div class="step">elenk / theor</div><div class="step">pleko → coherent Endem / Synem</div><div class="step">tasse / 外部签名 / sphra</div><div class="step">drase → Dromen</div><div class="step">Iknem / 最终决定</div></div>
+    <div class="flow"><div class="step">受控来源表达</div><div class="step">投影 / ktise</div><div class="step">nascent Endem</div><div class="step">elenk / theor</div><div class="step">pleko → coherent Endem / Synem</div><div class="step">外部发布 / 签名</div><div class="step">drase → Dromen</div><div class="step">Iknem / 最终决定</div></div>
     <p><code>ktise</code> 是唯一语义成形入口；<code>elenk</code> 是生产验证路径；<code>theor</code> 是不共享解析代码的只读观察路径；<code>pleko</code> 只在存在多个 Endem 或外部引用时启用；<code>drase</code> 重新验证实际 attested 字节，并在隔离域建立会话。</p>
   </section>
 
   <section>
     <h2>三个组件</h2>
     <div class="page-links">
-      <a class="page-link" href="../components/ktisor.html"><strong>Ktisor · 确定性制品制作域</strong><span>负责 ktise、生产 elenk、pleko、tasse 和 sphra 响应核对。</span></a>
+      <a class="page-link" href="../components/ktisor.html"><strong>Ktisor · 确定性制品制作域</strong><span>负责 ktise、生产 elenk 与 pleko；不持有私钥，也不承担外部签名。</span></a>
       <a class="page-link" href="../components/theor.html"><strong>Theor · 独立只读检查器</strong><span>为 theor 提供第二条有界解析与比较路径，不生成生产可信句柄。</span></a>
       <a class="page-link" href="../components/drasor.html"><strong>Drasor · 隔离实现运行器</strong><span>重新验证 attested 制品，建立 Dromen，控制能力并形成 Iknem。</span></a>
     </div>

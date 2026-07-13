@@ -9,9 +9,9 @@ manual_group: "reference"
 manual_order: 6
 nav_title: "Endem 应用参考"
 page_heading: "Endem 应用参考"
-page_lead: "一个公开 CLI、八个短动作、三个不能合并的信任域。"
+page_lead: "一个公开 CLI、五个短动作、三个不能合并的信任域。"
 summary: "按生命周期查找 endem 子命令、消费者、失败责任和实施阶段。"
-badges: ["One CLI", "8 Verbs", "Unreleased"]
+badges: ["One CLI", "5 Verbs", "Unreleased"]
 ---
 
 ## 应用总览
@@ -23,17 +23,14 @@ badges: ["One CLI", "8 Verbs", "Unreleased"]
 | `ktise` | 来源绑定、规范化、确定性写入 | Endem、诊断 | 第一阶段 |
 | `elenk` | 生产验证实际字节 | 分层结论、内部验证句柄 | 第一阶段 |
 | `theor` | 独立只读解析、查看与比较 | 有界视图与差异 | 第一阶段 |
-| `peira` | 规范、语料、Ktisor/Theor 差分与复现 | 一致性报告 | 公开动作价值待审查 |
 | `pleko` | 解析引用、冲突与依赖闭包 | Synem、绑定映射 | 第二阶段；有真实组合案例后 |
-| `tasse` | 类型化裁剪和发布闭包 | 发布候选、调试伴随记录 | 第三阶段 |
-| `sphra` | 生成请求并核对外部签名响应 | attested Synem | 第三阶段 |
 | `drase` | 重新验证、装载、能力循环与验收 | Dromen、Iknem、最终决定 | 第四阶段 |
 
 ## Ktisor 子命令
 
-`ktise/elenk/pleko/tasse/sphra/peira` 共享规范注册表，但只有一个规范写入器。任意变换、归档、裁剪或格式转换不成为稳定命令；只有语义明确、有消费者且能证明不变量的类型化变换进入相应步骤。
+`ktise/elenk/pleko` 共享规范注册表，但只有一个规范写入器。任意变换、归档、裁剪或格式转换不成为稳定命令；只有语义明确、有消费者且能证明不变量的物理封装才由对应生产动作承担。
 
-`sphra` 不持有私钥。外部签名系统拥有独立权威和生命周期，因此签名请求与响应保持独立伴随材料。
+外部签名系统拥有独立权威和生命周期，因此签名请求与响应保持独立伴随材料；它目前不是公开动作。
 
 ## `theor` 的独立性
 

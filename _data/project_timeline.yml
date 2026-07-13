@@ -48,7 +48,7 @@ items:
     state: future
     label: 后续规划
     title: Synem 组合与外部签名发布
-    description: 只有出现真实的多 Endem 消费者后，才开发 pleko、tasse、sphra、冲突矩阵、固定依赖和调试伴随记录。
+    description: 只有出现真实的多 Endem 消费者后，才开发 pleko、冲突矩阵和固定依赖；派生封装由生产者承担，外部签名另行冻结集成边界。
   - id: controlled-drase
     state: future
     label: 后续规划

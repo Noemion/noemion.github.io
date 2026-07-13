@@ -14,7 +14,7 @@ permalink: "/endem/index.html"
         <h2>它解决什么问题</h2>
         <p class="lead">Endem 处理目标契约，而不是机器指令。用户需要沿同一制品生命周期完成工作，并在每次状态变化时得到明确结果或失败原因。</p>
         <p>传统对象工具把汇编、查看、链接和打包拆成许多程序。Noemion 借鉴这些职责边界，但不照搬工具数量。</p>
-        <p><code>endem</code> 是唯一公开 CLI。它的八个子命令共享术语、诊断和发行入口，但 Ktisor、独立 Theor、隔离 Drasor 和外部签名系统继续保持不同实现与权限边界。</p>
+        <p><code>endem</code> 是唯一公开 CLI。它的五个动作共享术语、诊断和发行入口，但 Ktisor、独立 Theor、隔离 Drasor 和外部签名系统继续保持不同实现与权限边界。</p>
     </section>
 
     <section class="tool-status-panel">
@@ -23,21 +23,21 @@ permalink: "/endem/index.html"
         <ul>
           <li>ADR-0012 只把 Rust 1.97.0、禁止 unsafe 和依赖边界记为未来实现约束。</li>
           <li>END-P1 字节只作为规范向量，由资料检查器读取，不是 Ktisor 的产出证据。</li>
-          <li><code>elenk</code>、独立 <code>theor</code> 与 <code>peira</code> 目前只有职责、输入输出和验证要求。</li>
+          <li><code>elenk</code> 与独立 <code>theor</code> 目前只有职责、输入输出和验证要求；一致性检查属于内部门禁。</li>
           <li>没有实现仓库、安装包、签名或跨平台构建，因此当前不是可下载版本。</li>
           <li><code>pleko</code> 等真实多 Endem 案例与最小格式通过双实现验证后开发。</li>
-          <li><code>tasse</code>、<code>sphra</code> 和 <code>drase</code> 等发布与安全边界冻结后开发。</li>
+          <li><code>drase</code> 要等待运行消费者和隔离边界；派生封装与外部签名没有公开动作承诺。</li>
         </ul>
     </section>
 
     <section>
         <h2>它怎样工作</h2>
-        <div class="flow"><div class="step">ktise · 形成 nascent Endem</div><div class="step">elenk · 生产验证</div><div class="step">pleko · 形成 coherent / Synem</div><div class="step">tasse · 冻结候选</div><div class="step">sphra · 核对外部签名</div><div class="step">theor · 独立只读观察</div><div class="step">drase · 隔离实现</div><div class="step">peira · 一致性验证</div></div>
+        <div class="flow"><div class="step">ktise · 形成 nascent Endem</div><div class="step">elenk · 生产验证</div><div class="step">pleko · 形成 coherent / Synem</div><div class="step">theor · 独立只读观察</div><div class="step">外部签名 · 独立集成</div><div class="step">drase · 隔离实现</div><div class="step">Iknem · 有界证据</div><div class="step">权威 · 最终决定</div></div>
         <ul>
           <li><code>ktise</code> 是唯一规范写入入口；模型或外部前端只能提供候选。</li>
           <li><code>elenk</code> 使用 Ktisor 的生产读取路径，并按结构、语义、状态、完整性和策略分层报告。</li>
           <li><code>pleko</code> 使用内容身份和显式策略解析引用，不能读取环境隐式路径。</li>
-          <li><code>tasse</code> 产生不可变候选和 Signing Request；<code>sphra</code> 只核对并附加外部响应。</li>
+          <li>物理封装由对应生产动作在 Profile 冻结后承担；外部签名集成不持有 Ktisor 写入权。</li>
           <li><code>theor</code> 使用不共享 Ktisor 解析代码的 Theor；<code>drase</code> 启动不拥有写入器的隔离 Drasor。</li>
         </ul>
     </section>
@@ -48,11 +48,8 @@ permalink: "/endem/index.html"
           <tr><td><code>ktise</code></td><td>受控来源、投影候选、语义决定和规范版本</td><td>nascent Endem、Ktise Iknem、诊断</td></tr>
           <tr><td><code>elenk</code></td><td>Endem/Synem、验证层、限制和信任材料</td><td>分层结论、Elenk Iknem 和内部验证句柄</td></tr>
           <tr><td><code>pleko</code></td><td>Endem 集合、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Iknem</td></tr>
-          <tr><td><code>tasse</code></td><td>coherent 制品、发布配置、覆盖与调试策略</td><td>不可变候选、清单和签名请求</td></tr>
-          <tr><td><code>sphra</code></td><td>原候选、原请求和外部签名响应</td><td>attested Endem/Synem、Sphra Iknem</td></tr>
           <tr><td><code>theor</code></td><td>任意原始制品字节、视图和预算</td><td>只读文本/结构视图、差分和诊断</td></tr>
           <tr><td><code>drase</code></td><td>attested 制品、运行策略、后端与能力目录</td><td>Dromen、运行记录、运行与决定类 Iknem</td></tr>
-          <tr><td><code>peira</code></td><td>规范向量、实现构建、恶意语料和复现配置</td><td>一致性、差分、模糊测试与复现报告</td></tr>
         </tbody></table></div>
     </section>
 
@@ -75,7 +72,7 @@ permalink: "/endem/index.html"
     <div class="page-links">
       <a class="page-link" href="docs/index.html"><strong>endem 使用手册</strong><span>按格式、绑定、安全、运行和参考顺序阅读完整契约。</span></a>
       <a class="page-link" href="../specifications/endem.html"><strong>Endem 规范</strong><span>核对一个根 skena、六个语义面和状态机。</span></a>
-      <a class="page-link" href="../architecture/endem-lifecycle.html"><strong>Endem 生命周期</strong><span>查看八个子命令与状态、消费者和失败的连续关系。</span></a>
+      <a class="page-link" href="../architecture/endem-lifecycle.html"><strong>Endem 生命周期</strong><span>查看五个动作与状态、消费者和失败的连续关系。</span></a>
       <a class="page-link" href="../components/index.html"><strong>Ktisor、Theor 与 Drasor</strong><span>查看单一 CLI 背后的实现独立和权限隔离。</span></a>
     </div>
   </section>

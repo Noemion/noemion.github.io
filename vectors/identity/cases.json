@@ -143,7 +143,7 @@
       "source_identity": "endem@example-source",
       "derived_identity": "companion@example-derived",
       "transformation": "split-debug@0.1.0-draft",
-      "producer": "future-tasse",
+      "producer": "future-derived-artifact-producer",
       "preserved": ["symbol-relations"],
       "loss_manifest": ["debug-records-removed-from-primary"],
       "verification_conditions": ["both-full-identities-match"],

@@ -49,6 +49,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0032](https://noemion.github.io/architecture/adr-0032-deterministic-maker-name-collision.html) — exact action-name collision evidence, Ktisor/ktise selection, action maturity, and direct replacement boundaries
 - [ADR-0033](https://noemion.github.io/architecture/adr-0033-text-identifier-specification-name.html) — explicit text-and-identifier standard naming, rejected ambiguous candidates, and one-time route and registry migration
 - [ADR-0034](https://noemion.github.io/architecture/adr-0034-pronunciation-and-oral-distinction.html) — pronunciation, oral distinguishability, human evidence, speech-model limits, and release-name review boundaries
+- [ADR-0035](https://noemion.github.io/architecture/adr-0035-public-actions-and-internal-responsibilities.html) — five public actions, internal conformance, external signing, derivation responsibilities, and one-time migration
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Ktisor, Theor, and Drasor responsibility boundaries
 - [Ktisor](https://noemion.github.io/components/ktisor.html) — deterministic Endem formation, checking, binding, and packing boundary
@@ -90,7 +91,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Endem application
 
-- [Endem](https://noemion.github.io/endem/index.html) — the single public command surface for ktise, elenk, pleko, tasse, sphra, theor, drase, and peira
+- [Endem](https://noemion.github.io/endem/index.html) — the single public command surface for ktise, elenk, pleko, theor, and drase
 
 ## Endem manual
 

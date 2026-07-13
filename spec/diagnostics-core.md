@@ -30,7 +30,7 @@
 
 **失败：**只有自由文本、同一码表示多个不相容原因、消息措辞变化导致自动化行为改变，或 SARIF/HTTP/MCP 适配器重新分类诊断时，该诊断无效。
 
-**验证：**`DIA-SCN-001`、`DIA-SCN-002`；`vectors/diagnostics/cases.json`；未来 `peira:diagnostic-identity-rendering` 组件测试。
+**验证：**`DIA-SCN-001`、`DIA-SCN-002`；`vectors/diagnostics/cases.json`；未来 `conformance:diagnostic-identity-rendering` 组件测试。
 
 ### DIA-PIN-001 — 诊断必须固定生产语境
 
@@ -38,7 +38,7 @@
 
 **失败：**无法判断哪一版规则检查了哪个输入、缓存诊断被复用到不同字节、或时间与随机值改变同一输入的主诊断时，诊断不可作为可靠自动化依据。
 
-**验证：**`DIA-SCN-003`；`vectors/diagnostics/cases.json`；未来 `peira:diagnostic-context-pin` 组件测试。
+**验证：**`DIA-SCN-003`；`vectors/diagnostics/cases.json`；未来 `conformance:diagnostic-context-pin` 组件测试。
 
 ### DIA-LAY-001 — 失败层次与结果域必须正交
 
@@ -46,7 +46,7 @@
 
 **失败：**MCP `isError` 被解释为目标 `unmet`，HTTP 状态被解释为权威拒绝，解析失败被解释为 `fault` 求值结果，或会话失败覆盖原满足判断时，映射必须拒绝。
 
-**验证：**`DIA-SCN-004`、`DIA-SCN-005`；`vectors/diagnostics/cases.json`；未来 `peira:diagnostic-layer-result-separation` 组件测试。
+**验证：**`DIA-SCN-004`、`DIA-SCN-005`；`vectors/diagnostics/cases.json`；未来 `conformance:diagnostic-layer-result-separation` 组件测试。
 
 ### DIA-LOC-001 — 位置必须类型化、有界且可安全显示
 
@@ -54,7 +54,7 @@
 
 **失败：**位置越界、路径遍历或控制字符进入终端、未检查范围触发大分配，或任意外部文本被当作语义路径时，诊断生成必须关闭失败。
 
-**验证：**`DIA-SCN-006`；`vectors/diagnostics/cases.json`；未来 `peira:diagnostic-location-bounds` 组件测试。
+**验证：**`DIA-SCN-006`；`vectors/diagnostics/cases.json`；未来 `conformance:diagnostic-location-bounds` 组件测试。
 
 ### DIA-PRI-001 — 主诊断选择必须确定且可解释
 
@@ -62,7 +62,7 @@
 
 **失败：**同一输入在重复运行中得到不同主码、最后到达的 Agent 错误覆盖更早结构失败，或诊断数量改变主诊断时，结果不确定。
 
-**验证：**`DIA-SCN-007`、`DIA-SCN-008`；`vectors/diagnostics/cases.json`；未来 `peira:diagnostic-primary-determinism` 组件测试。
+**验证：**`DIA-SCN-007`、`DIA-SCN-008`；`vectors/diagnostics/cases.json`；未来 `conformance:diagnostic-primary-determinism` 组件测试。
 
 ### DIA-REC-001 — 恢复建议不能成为权限或无限重试
 
@@ -70,7 +70,7 @@
 
 **失败：**权限拒绝触发自动提权、相同确定性输入被无限重试、模型依据自由文本执行删除或发布，或“可重试”被解释为会话可以继续时，恢复关系无效。
 
-**验证：**`DIA-SCN-009`、`DIA-SCN-010`；`vectors/diagnostics/cases.json`；未来 `peira:diagnostic-recovery-authority` 组件测试。
+**验证：**`DIA-SCN-009`、`DIA-SCN-010`；`vectors/diagnostics/cases.json`；未来 `conformance:diagnostic-recovery-authority` 组件测试。
 
 ### DIA-EXT-001 — 外部错误必须保留来源并经过本地映射
 
@@ -78,7 +78,7 @@
 
 **失败：**远端文本通过字符串匹配变成 `accepted` 或 `unmet`、协议错误冒充工具业务错误、未知码降级为成功，或本地码隐藏原始来源时，映射必须拒绝。
 
-**验证：**`DIA-SCN-004`、`DIA-SCN-011`；`vectors/diagnostics/cases.json`；未来 `peira:external-error-provenance` 组件测试。
+**验证：**`DIA-SCN-004`、`DIA-SCN-011`；`vectors/diagnostics/cases.json`；未来 `conformance:external-error-provenance` 组件测试。
 
 ### DIA-SEC-001 — 诊断默认最小披露
 
@@ -86,7 +86,7 @@
 
 **失败：**工具返回中的令牌被回显、堆栈或路径泄露租户数据、脱敏删除决定性身份却仍声称可复现，或调试开关静默扩大公开披露时，诊断不符合要求。
 
-**验证：**`DIA-SCN-012`、`DIA-SCN-013`；`vectors/diagnostics/cases.json`；未来 `peira:diagnostic-minimal-disclosure` 组件测试。
+**验证：**`DIA-SCN-012`、`DIA-SCN-013`；`vectors/diagnostics/cases.json`；未来 `conformance:diagnostic-minimal-disclosure` 组件测试。
 
 ### DIA-BND-001 — 诊断生成必须有有限预算
 
@@ -94,7 +94,7 @@
 
 **失败：**循环图产生无限错误、一个恶意输入放大为无界消息、诊断截断删除主码，或报告器故障递归产生新诊断时，生成器必须原子关闭。
 
-**验证：**`DIA-SCN-008`、`DIA-SCN-014`；`vectors/diagnostics/cases.json`；未来 `peira:diagnostic-budget` 组件测试。
+**验证：**`DIA-SCN-008`、`DIA-SCN-014`；`vectors/diagnostics/cases.json`；未来 `conformance:diagnostic-budget` 组件测试。
 
 ### DIA-ATM-001 — 阻断诊断不得伴随部分可信成功
 
@@ -102,7 +102,7 @@
 
 **失败：**读取器在报错后返回可继续使用的对象、Drasor 在政策错误后保留能力、部分 Synem 被标为完整，或“同时有成功和错误”被自动化解释为成功时，操作必须拒绝。
 
-**验证：**`DIA-SCN-015`；`vectors/diagnostics/cases.json`；未来 `peira:diagnostic-atomic-failure` 组件测试。
+**验证：**`DIA-SCN-015`；`vectors/diagnostics/cases.json`；未来 `conformance:diagnostic-atomic-failure` 组件测试。
 
 ## 4. 适配边界
 
