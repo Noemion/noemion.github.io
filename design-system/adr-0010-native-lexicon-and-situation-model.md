@@ -99,7 +99,7 @@ Endem/Synem 使用三个英文状态值：
 
 ## 名称审计与使用边界
 
-截至 2026-07-12，主流语言关键字集合中没有本 ADR 的现行领域词。PyPI、npm 与 crates.io 的精确包名查询显示 `endem`、`rhem`、`semion`、`skena`、`telis`、`krin`、`apor`、`synem`、`dromen`、`tekmor`、`poiet`、`theor`、`praxor` 以及八个动作当时均未同时形成强占用；相邻词、大小写变体和其他行业名称仍然存在。
+截至 2026-07-13，主流语言关键字集合中没有本 ADR 的现行领域词。PyPI、npm 与 crates.io 的精确包名查询显示 `endem`、`rhem`、`semion`、`skena`、`telis`、`krin`、`apor`、`synem`、`dromen`、`tekmor`、`poiet`、`theor`、`praxor` 以及八个动作当时均未登记。但是，GitHub 已有三个第三方精确同名 `endem` 仓库和一个同名用户，`endem.com` 也已登记；因此 Endem 是中等风险的开发候选名，不能宣称全网唯一。日期化证据、采用条件和改名条件统一维护在 [`name-audit.md`](name-audit.md)。
 
 该结果只用于降低工程混淆，不构成商标、域名或包名权利。正式发行仍须执行法域商标、近音、分类、命令、MIME、扩展名和法律复核。
 

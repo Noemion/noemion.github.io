@@ -139,15 +139,9 @@ endem praxe search.endem
 4. WIPO Global Brand Database 以及计划发行地区的商标数据库；存在疑问时由合格法律专业人员复核。
 5. 主要域名和社区账号。域名可用不等于商标可用，域名不可用也不自动否决工程术语。
 
-截至 2026-07-12 的初步互联网检索没有发现人工智能、编程语言、协议或标准组织中的强冲突，PyPI、npm 与 crates.io 的 `endem` 精确包名当时均未登记；搜索结果主要是人名、地区性企业、外语词形和能源模型变量。这只是时间点证据，不是保留名称、商标权或未来可用性的保证。
+截至 2026-07-13，PyPI、npm 与 crates.io 的 `endem` 精确包名仍未登记，GNU 包目录与 IANA 媒体类型登记表也没有精确项。但是，GitHub 已有三个第三方精确同名仓库和一个精确同名用户，`endem.com` 也已登记。因此 Endem 只能继续作为中等风险的开发候选名，不能宣称全网唯一；第一次可安装发行仍须通过商标、近音、类别、包名取得和法律复核。日期化查询式、候选和停止条件统一维护在 [`name-audit.md`](name-audit.md)。
 
-检索入口：
-
-- https://pypi.org/
-- https://www.npmjs.com/
-- https://crates.io/
-- https://github.com/search
-- https://branddb.wipo.int/
+主要检索入口包括 [PyPI](https://pypi.org/)、[npm](https://www.npmjs.com/)、[crates.io](https://crates.io/)、[GitHub 搜索](https://github.com/search)与 [WIPO Global Brand Database](https://www.wipo.int/en/web/global-brand-database)。入口只提供查询能力，具体查询式、结果时间和风险结论必须进入审计记录。
 
 ## 中文信息架构名称
 

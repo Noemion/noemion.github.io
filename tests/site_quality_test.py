@@ -1420,6 +1420,42 @@ def validate_jekyll_sources():
                 errors.append(f"missing design guidance for {role}: design-system/{filename}")
             if filename not in design_index_text:
                 errors.append(f"design routing index does not route {role} to {filename}")
+        if "name-audit.md" not in design_index_text:
+            errors.append("design routing index must route release-facing names to name-audit.md")
+
+    name_audit = design_root / "name-audit.md"
+    naming_standard = design_root / "language-and-naming.md"
+    naming_adr = design_root / "adr-0010-native-lexicon-and-situation-model.md"
+    if not name_audit.exists():
+        errors.append("missing dated release-name conflict screening")
+    else:
+        name_audit_text = name_audit.read_text()
+        if not re.search(r"证据时间：\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}", name_audit_text):
+            errors.append("name audit must record an ISO 8601 evidence time with timezone")
+        for token in (
+            "工程责任：首次发行负责人",
+            "法律责任：目标法域的合格知识产权专业人员",
+            "不是法律意见",
+            "中等风险",
+            "https://pypi.org/pypi/endem/json",
+            "https://registry.npmjs.org/endem",
+            "https://crates.io/api/v1/crates/endem",
+            "https://api.github.com/search/repositories?q=endem+in%3Aname&per_page=100",
+            "shivangx/Endem",
+            "parmarjh/endem",
+            "klu2200031072/endem",
+            "github.com/endem",
+            "IANA 媒体类型登记表",
+            "正式商标门禁仍未完成",
+            "必须停止或改名的条件",
+        ):
+            if token not in name_audit_text:
+                errors.append(f"name audit missing evidence or boundary: {token!r}")
+    for naming_path in (naming_standard, naming_adr):
+        if not naming_path.exists() or "name-audit.md" not in naming_path.read_text():
+            errors.append(
+                f"{naming_path.relative_to(SOURCE_ROOT)} must defer current conflict evidence to name-audit.md"
+            )
 
     manual_config = SOURCE_ROOT / "_data/manuals.yml"
     manual_layout = SOURCE_ROOT / "_layouts/manual.html"
