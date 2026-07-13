@@ -31,6 +31,7 @@ permalink: "/architecture/open-questions.html"
   <section class="content-grid">
     <h2>Synem 与发布</h2>
     <details open><summary>绑定标识和版本约束采用什么语法？</summary><p>SYN-CORE 已要求最终绑定唯一精确内容身份，ID-CORE 又固定完整引用的必需语境，并禁止环境搜索和网络最新版本。TXT-CORE 进一步规定当前结构标识符保持 ASCII、大小写敏感且与 locale 无关。可读名称、版本范围的候选语法、摘要算法基线、国际化标识符和绑定记录物理格式仍需新 Profile。</p></details>
+    <details><summary>ELF 的符号与重定位思想怎样用于 Synem？</summary><p>当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/gnu-elf-applicability-proposal.md">非规范 GNU 与 ELF 适用性研究提案</a>只采用显式引用、精确绑定、形成映射和失败责任。它拒绝地址修补、弱符号、默认版本、环境搜索、顺序选择和运行期语义漂移。物理符号视图、绑定表或版本语法只有在出现真实 Synem 消费者、同名冲突反例和规范向量后才能提出 ADR。</p></details>
     <details><summary>什么时候允许依赖循环？</summary><p>SYN-GRF-001 已规定第一阶段拒绝依赖与激活循环。未来若支持，必须先定义固定点语义、披露与验收顺序、预算上限、失败原子性和跨实现向量。</p></details>
     <details><summary>Synem 是否需要独立物理容器？</summary><p>在出现多 Endem、流式读取或离线分发的真实消费者前，内容寻址清单和现有确定性归档可能已经足够。不能只为形式完整提前创造格式。</p></details>
     <details><summary>tasse 可以删除哪些信息？</summary><p>ID-REL-001 已要求裁剪结果与调试伴随文件各有精确身份，并记录变换、保留内容和损失。哪些内容可以删除、怎样证明语义等价、伴随关系采用什么物理格式，仍需真实消费者与正反字节向量。</p></details>

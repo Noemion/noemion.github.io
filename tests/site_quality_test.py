@@ -1186,6 +1186,40 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the model context research proposal"
                 )
+
+    gnu_elf_proposal = SOURCE_ROOT / "spec" / "gnu-elf-applicability-proposal.md"
+    if not gnu_elf_proposal.exists():
+        errors.append("missing non-normative GNU and ELF applicability research proposal")
+    else:
+        proposal_text = gnu_elf_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
+            "不创建新制品、文件格式、扩展名、命令、组件或稳定接口",
+            "Endem 是 ELF object",
+            "Dromen 是 segment 或 process image",
+            "职责适用性矩阵",
+            "Symbol versioning",
+            "`objcopy` / `strip` / debug link",
+            "带错继续和部分输出",
+            "未来采用的证据门",
+            "不进入 `registry.json`",
+            "等待决定",
+        ):
+            if token not in proposal_text:
+                errors.append(f"GNU and ELF applicability proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "gnu-elf-applicability" in registry_text:
+            errors.append("non-normative GNU and ELF proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+        ):
+            if "gnu-elf-applicability-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the GNU and ELF research proposal"
+                )
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
     registered = sorted(set(registry) | set(read_manual_source_routes()))

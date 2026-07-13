@@ -31,6 +31,8 @@
 
 [`model-context-assembly-proposal.md`](model-context-assembly-proposal.md) 研究模型调用前的输入选择、角色、权威、顺序、变换、截断、缓存和损失边界。它只比较 TXT、AUT、ADP、DRO、IKN 与 DIA 的现有责任是否留下横切缺口，不是 ADR、CORE 规范、Profile、制品、命令或组件，也不进入 `registry.json`。当前首选是把未来唯一条款归还现有规范；只有真实消费者和验证证明职责无法清晰分担时，才重新讨论独立规范。
 
+[`gnu-elf-applicability-proposal.md`](gnu-elf-applicability-proposal.md) 把 ELF 与 GNU Binutils 的 Section/Segment、符号、重定位、链接脚本、形成映射、裁剪、调试分离、Build ID、独立读取和 BFD 信息损失逐项映射到现有 Noemion 责任。它是非规范研究资料，不创建“自然语言 ELF”、新制品、格式、命令或组件，也不进入 `registry.json`。未来只有在真实生产者、消费者、失败责任、反例和正反向量齐备后，相关机制才可以提出 ADR。
+
 [`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用三十个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分、结果域、时间范围、缺席推断、量化范围、测量阈值、复合判断以及内容与授权伴随关系是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
 
 [`synem-scenarios.md`](synem-scenarios.md) 用十个非规范场景检查闭包、绑定、可选依赖、权限、成员结果和激活边界。它同样不是语法、解析器或组件证据。
