@@ -48,6 +48,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0031](https://noemion.github.io/architecture/adr-0031-release-name-collision-gate.html) — release-name collision evidence, Iknem and Drasor/drase selection, and one-time migration without compatibility aliases
 - [ADR-0032](https://noemion.github.io/architecture/adr-0032-deterministic-maker-name-collision.html) — exact action-name collision evidence, Ktisor/ktise selection, action maturity, and direct replacement boundaries
 - [ADR-0033](https://noemion.github.io/architecture/adr-0033-text-identifier-specification-name.html) — explicit text-and-identifier standard naming, rejected ambiguous candidates, and one-time route and registry migration
+- [ADR-0034](https://noemion.github.io/architecture/adr-0034-pronunciation-and-oral-distinction.html) — pronunciation, oral distinguishability, human evidence, speech-model limits, and release-name review boundaries
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Ktisor, Theor, and Drasor responsibility boundaries
 - [Ktisor](https://noemion.github.io/components/ktisor.html) — deterministic Endem formation, checking, binding, and packing boundary

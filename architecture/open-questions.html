@@ -11,8 +11,8 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
-    <p class="lead">ADR-0010 已经采用现行制品、六个语义面和生命周期；ADR-0031 至 ADR-0033 又直接替换冲突名称与易误读的标准 ID。职责不因更名而重新开放。</p>
-    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0030 固定 Synem、Iknem、内容标准分层、Dromen、结构化诊断、协议适配、身份、文本、授权以及内容与外部决定的伴随边界；ADR-0031 至 ADR-0033 固定名称迁移规则。</p>
+    <p class="lead">ADR-0010 已经采用现行制品、六个语义面和生命周期；ADR-0031 至 ADR-0033 又直接替换冲突名称与易误读的标准 ID。ADR-0034 保持这些职责，但重新打开具体拼写的发行读音审查。</p>
+    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0030 固定 Synem、Iknem、内容标准分层、Dromen、结构化诊断、协议适配、身份、文本、授权以及内容与外部决定的伴随边界；ADR-0031 至 ADR-0034 固定名称迁移与口头区分门禁。</p>
     <p>当前没有 Theor、权威目录、政策求值器或其他组件实现。稳定 ABI、时间与组合物理字段、嵌套或多变量量化、Synem 与 Iknem 物理容器、正式来源语言、Unicode 标识符、原始来源字节绑定、摘要和签名物理 Profile、授权决定与最终决定事件编码仍未冻结。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
@@ -60,7 +60,7 @@ permalink: "/architecture/open-questions.html"
     <details open><summary>独立 Theor 使用什么实现边界？</summary><p>未来 Theor 必须拥有自己的数据结构、解码器、验证器和错误路径，只与 Ktisor 共享公开规范和字节向量。当前没有实现；是否采用 Rust 或第二种语言，必须在用户开启代码阶段后根据共同故障风险和维护成本重新确认。</p></details>
     <details><summary>peira 应该是公开动作还是内部发布门禁？</summary><p>差分、恶意输入、复现和互操作检查不可省略，但这不自动证明最终用户需要单独运行 <code>endem peira</code>。代码阶段前必须先识别独立用户任务、输入输出、失败责任和不能由开发测试或发行流程承担的价值；否则只保留规范测试身份，不扩大公开 CLI。</p></details>
     <details><summary>独立 Theor 还缺什么证据？</summary><p>当前只有规范向量、资料检查器和未来验证条件。用户开启代码阶段后，才建立依赖审计、差分测试、长时 fuzz、故障注入和跨平台运行，用来寻找两条独立路径的共同输入假设。</p></details>
-    <details><summary>名称何时满足正式发布条件？</summary><p>ADR-0031 至 ADR-0033 只完成工程初筛、当前名称选择与标准 ID 可读性治理。公开发行前仍需重新检查相邻 AI 与开发工具、目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。若再次触发冲突，直接更名；审查完成前不得声称商标可用。</p></details>
+    <details><summary>名称何时满足正式发布条件？</summary><p>ADR-0031 至 ADR-0033 只完成工程初筛、当前名称选择与标准 ID 可读性治理；ADR-0034 进一步要求为目标语言登记读音，并用首次朗读、听写回填和成对混淆记录证明词表内口头区分。公开发行前仍需重新检查相邻 AI 与开发工具、目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。任一门禁失败都必须重新命名或给出经验证的新候选，审查完成前不得声称名称已具备发行条件。</p></details>
     <details><summary>怎样证明构建可复现？</summary><p>ID-REP-001 已要求精确输入闭包、工具与参数、环境约束、至少两条独立产出路径和逐字节输出比较。仍需在代码阶段建立真实隔离构建、缓存独立性、差异归因和发布证据；build ID、签名和一次重跑都不能替代这些证据。</p></details>
   </section>
 
@@ -68,5 +68,5 @@ permalink: "/architecture/open-questions.html"
     <h2>问题关闭规则</h2>
     <p>设计问题可以由权威规范或 ADR、正反向量和明确失败语义关闭。涉及组件行为、性能或互操作的问题必须保持开放，直到用户明确开启代码阶段并出现相应实现证据；论文、模型指标、概念演示或单一实现行为不能单独冻结 ABI。</p>
   </section>
-  <div class="next-prev"><a href="adr-0033-text-identifier-specification-name.html">← ADR-0033</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
+  <div class="next-prev"><a href="adr-0034-pronunciation-and-oral-distinction.html">← ADR-0034</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
 </main>

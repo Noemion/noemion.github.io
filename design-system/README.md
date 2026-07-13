@@ -2,7 +2,7 @@
 
 本目录是修改站点页面、共享布局、目录和交互动效时的设计路由入口。开始改动前，先根据目标文件或 `page_role` 读取下表指定文档；涉及多个角色时读取所有对应文档。
 
-修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、六个语义面、Synem、Dromen、Iknem、Ktisor、Theor、Drasor、八个动作和唯一 CLI 是当前命名基线，设计文档不得引入旧名称或兼容入口。修改品牌、制品名、命令、扩展名或分发坐标时还必须读取并更新 [`name-audit.md`](name-audit.md)，不能用旧查询结果证明当前可用性。
+修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、六个语义面、Synem、Dromen、Iknem、Ktisor、Theor、Drasor、八个动作和唯一 CLI 是当前设计阶段命名基线，设计文档不得引入旧名称或兼容入口。它们的职责已经确定，不表示具体拼写和读音已经满足发行条件。修改品牌、制品名、命令、扩展名、读音或分发坐标时还必须读取并更新 [`name-audit.md`](name-audit.md)，不能用旧查询结果或主观拼读证明当前可用性。
 
 修改 `.endem`、`rhem/semion/skena/telis/krin/apor`、`phain`、事态投影、引用、内容身份、规范排序、封装布局或证据排布时，先读取当前 Endem、Synem 和 Iknem 规范，再读取 [`ADR-0010`](../architecture/adr-0010-native-lexicon.html) 与相关活跃 ADR。架构决策只在 `architecture/` 维护；本目录不保存历史 ADR 副本，也不得重新引入旧词或兼容接口。
 

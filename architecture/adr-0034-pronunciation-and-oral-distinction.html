@@ -1,0 +1,67 @@
+---
+layout: default
+title: "ADR-0034 · 术语读音与口头区分门禁"
+page_role: "content"
+footer_text: "Noemion · ADR-0034"
+permalink: "/architecture/adr-0034-pronunciation-and-oral-distinction.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0034</span></nav>
+  <header class="content-introduction"><h1>ADR-0034<br>术语读音与口头区分门禁</h1><p>把“读得出、听得清、写得回”加入发行名称审查，同时保持术语职责、机器标识符和信任边界不变。</p><div class="badges"><span class="badge">Accepted Gate</span><span class="badge">2026-07-13</span><span class="badge">Names Under Review</span><span class="badge">No Voice Interface</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">通过包名、搜索和商标初筛，只能证明名称没有已知工程阻断；它不能证明名称适合口头传播。</p>
+    <p>Noemion 从现在起把名称审查分成四个彼此独立的门禁：职责是否直白、书写与检索是否可区分、目标语言中的读音是否稳定、词表成员在口头交流中是否可区分。任一门禁失败，都不能以其他门禁成功补偿。</p>
+    <p class="callout"><strong>状态边界：</strong>现行对象和组件的工程职责继续有效；现行拼写仍可用于设计资料，但不再因为“看起来像一个词”就被称为已验证可发音或具备发行条件。具体发行读音和名称取舍尚未冻结。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么现有审查不够</h2>
+    <div class="table-wrap"><table><thead><tr><th>证据</th><th>它支持什么</th><th>不能推出什么</th></tr></thead><tbody>
+      <tr><td><a href="https://www.iso.org/standard/79077.html">ISO 704:2022</a></td><td>术语工作必须把对象、概念、定义和指称联系起来，并对术语与专名的形成采用明确原则。</td><td>某个新造词天然清楚、可说或可独占。</td></tr>
+      <tr><td><a href="https://www.gnu.org/prep/standards/html_node/Names.html">GNU Coding Standards：Names</a></td><td>名称应传达含义，不应为了短而使用晦涩缩写。</td><td>短词一定比直白职责名更易传播。</td></tr>
+      <tr><td><a href="https://www.w3.org/TR/pronunciation-lexicon/">W3C Pronunciation Lexicon Specification 1.0</a></td><td>专名和业务名称常需要把书写形式显式映射到读音；IPA 是可交换的读音表示。</td><td>写法本身足以唯一决定跨语言读音。</td></tr>
+      <tr><td><a href="https://developers.openai.com/api/reference/resources/realtime">OpenAI Realtime API</a></td><td>当前人工智能接口已经把音频输入、输出和转写作为实际交互面；转写只提供指导，并不精确等于模型实际听到的内容。</td><td>一次语音模型转写成功可以替代人类听辨或成为语义授权。</td></tr>
+    </tbody></table></div>
+    <p>因此，名称门禁必须同时覆盖人类口述、听辨、转写和机器辅助场景。语音模型与自动转写只能补充发现风险，不能裁定术语含义、执行动作或证明名称已通过。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>四项独立门禁</h2>
+    <div class="table-wrap"><table><thead><tr><th>门禁</th><th>必须保存的证据</th><th>失败例</th></tr></thead><tbody>
+      <tr><td>职责透明</td><td>直白职责、上游、下游、信任与失败责任，以及省略或合并条件</td><td>只能靠词源或哲学出处猜用途</td></tr>
+      <tr><td>书写与检索区分</td><td>精确名、大小写、近似拼写、包、命令、协议、标准、产品和权利查询</td><td>大小写变化后与相邻工具重名</td></tr>
+      <tr><td>目标语言读音稳定</td><td>每种目标语言的 BCP 47 标签、IPA、面向普通读者的读音提示、重音和允许变体</td><td>读者必须自行决定辅音是否省略或插入元音</td></tr>
+      <tr><td>词表内口头区分</td><td>成对混淆矩阵、首次朗读、听写回填、噪声与远程会议场景、参与者语言背景和原始结果</td><td>Endem 与 Synem 被持续听错，或动作名无法可靠写回</td></tr>
+    </tbody></table></div>
+    <p>IPA 和普通拼读提示必须同时保留：前者减少精确读音歧义，后者服务不熟悉 IPA 的读者。读音提示只是人类文档，不是别名、第二个机器标识符、规范化输入或兼容命令。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>现行词表的首轮风险</h2>
+    <div class="table-wrap"><table><thead><tr><th>对象</th><th>首轮风险</th><th>当前处理</th></tr></thead><tbody>
+      <tr><td><code>Ktisor</code> / <code>ktise</code></td><td>词首 <code>kt</code> 没有项目内已验证读法；读者可能省略辅音或插入不同元音。</td><td>高风险；发行前必须完成人类朗读和听写证据，不能把工程冲突初筛写成口头门禁通过。</td></tr>
+      <tr><td><code>sphra</code></td><td>词首 <code>sphr</code> 对目标读者缺少稳定提示，听写时也难由声音恢复拼写。</td><td>高风险；重新证明独立用户动作价值时一并复核名称。</td></tr>
+      <tr><td><code>Iknem</code></td><td>词首分段和首个元音没有既定项目读法；“短”不能证明“听得清”。</td><td>高风险；撤回“已验证可发音”的表述，保留证据对象职责。</td></tr>
+      <tr><td><code>kine</code> / <code>mene</code></td><td><a href="https://dictionary.cambridge.org/us/pronunciation/english/kine">Cambridge Dictionary</a> 把英语 <em>kine</em> 读作 /kaɪn/；<a href="https://www.merriam-webster.com/dictionary/kine">Merriam-Webster</a>还记录其“牛”的古旧复数义。它与项目词源预期是否一致尚未说明，<code>mene</code> 也没有已验证配对读法。</td><td>高风险；语义方向保持不变，发行拼写重新审查。</td></tr>
+      <tr><td><code>Endem</code> / <code>Synem</code></td><td>共同结尾有利于显示词族，也可能在弱信号、口音或句中位置造成混淆。</td><td>中风险；必须做成对听辨，不能用词源关系代替结果。</td></tr>
+      <tr><td>Noemion、Dromen、Theor、Drasor、其余动作与语义面</td><td>存在元音、重音或拼写回填的多个合理候选，但当前没有人类测试记录。</td><td>未验证；逐词登记，不因未发现明显难点而自动通过。</td></tr>
+    </tbody></table></div>
+    <p>风险级别只决定审查优先级，不是最终改名结论。项目不得先指定一种顺口读法，再把自己编写的提示当作名称已经通过的证据。</p>
+  </section>
+
+  <section class="content-grid">
+    <h2>验证与决定规则</h2>
+    <article><h3>支持案例</h3><p>首次接触项目的目标读者看到名称和直白职责后，能够按项目登记读法朗读；另一组读者在会议语句中听到名称后，能够从当前词表写回唯一拼写，并说明对应职责。</p></article>
+    <article><h3>反例</h3><p>参与者必须询问首字母是否发音、持续把一个名称写成另一个名称，或依靠页面上下文而不是声音区分。增加脚注不能把持续混淆变成通过。</p></article>
+    <article><h3>未决场景</h3><p>中文和英语参与者可能各自形成稳定但互不兼容的读法。项目必须决定采用一个跨语言读法，还是登记有明确语言范围的变体；决定前不得宣称全球统一发音。</p></article>
+    <article><h3>辅助自动化</h3><p>可以使用多个 TTS/ASR 系统寻找异常读法和听写冲突，但必须记录模型、版本、语言、提示和实际音频。模型结果是不可信候选，不能替代人类证据。</p></article>
+  </section>
+
+  <section class="content-band">
+    <h2>安全与应用边界</h2>
+    <p>本决定不创建语音界面、发音组件、Unicode Profile、命令别名或新的规范字段。未来若允许口述动作，含糊声音不得直接执行：系统必须把识别出的精确机器动作、对象、参数和权限请求安全显示并获得适用授权。转写、会话成功或模型置信度都不能成为目标满足、最终接受或授权证据。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0033-text-identifier-specification-name.html">← ADR-0033</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

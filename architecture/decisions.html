@@ -7,11 +7,11 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、组合闭包、会话契约、证据、授权、身份与组件边界。</p><div class="badges"><span class="badge">ADR-0010—0033</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、组合闭包、会话契约、证据、授权、身份与组件边界。</p><div class="badges"><span class="badge">ADR-0010—0034</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权与伴随边界；<a href="adr-0031-release-name-collision-gate.html">ADR-0031</a>至 <a href="adr-0033-text-identifier-specification-name.html">ADR-0033</a>处理发布名称与标准 ID 的冲突和直接迁移。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权与伴随边界；<a href="adr-0031-release-name-collision-gate.html">ADR-0031</a>至 <a href="adr-0034-pronunciation-and-oral-distinction.html">ADR-0034</a>处理发布名称、标准 ID、读音与口头区分门禁。</p>
     <p>ADR-0008 与 ADR-0009 只保存公开迁移历史。更早、无入口且与现行决策源重复的内部 ADR 副本已经删除，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -44,6 +44,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0031-release-name-collision-gate.html">ADR-0031 发布名称冲突门禁</a></td><td>Accepted</td><td>采用 Iknem 与 Drasor/drase，保持职责和不变量不变；当前阶段直接替换，不保留旧入口、别名或重定向。</td></tr>
       <tr><td><a href="adr-0032-deterministic-maker-name-collision.html">ADR-0032 确定性制作名称冲突</a></td><td>Accepted</td><td>采用 Ktisor/ktise，修复对公开动作大小写无关筛查的遗漏；同时记录八个动作并不具有相同实现成熟度。</td></tr>
       <tr><td><a href="adr-0033-text-identifier-specification-name.html">ADR-0033 文本与标识符标准命名</a></td><td>Accepted</td><td>采用 TEXT-IDENTIFIER-CORE，消除把跨制品文本边界误读为 <code>.txt</code> 文件或原始文件规范的歧义。</td></tr>
+      <tr><td><a href="adr-0034-pronunciation-and-oral-distinction.html">ADR-0034 术语读音与口头区分门禁</a></td><td>Accepted Gate</td><td>把目标语言读音和词表内听辨纳入发行审查；现行职责保持有效，具体读音与发行拼写尚未冻结。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -61,6 +62,7 @@ permalink: "/architecture/decisions.html"
       <tr><td>文本职责保持分层</td><td>TEXT-IDENTIFIER-CORE 分开来源字节、解码文本、机器标识符、人类显示与模型实际输入；当前结构标识符保持 ASCII 且不做隐式规范化。</td><td>Ktisor 来源、诊断位置、身份比较、安全审查、模型候选和未来界面。</td></tr>
       <tr><td>权威与授权保持有界</td><td>AUT-CORE 分开认证、角色资格、语义授权、能力授予与最终决定；grant/deny/defer 只回答精确请求是否获准。</td><td>自然语言候选复核、Dromen 建立、Agent 委托、同意、多人决定、撤销与重放。</td></tr>
       <tr><td>唯一 CLI</td><td><code>endem</code> 提供 ktise/elenk/pleko/tasse/sphra/theor/drase/peira。</td><td>应用项目、手册、安装包和自动化接口。</td></tr>
+      <tr><td>名称发行门禁</td><td>职责、书写检索、目标语言读音和词表内口头区分分别审查；读音提示不是机器别名。</td><td>全部领域词、组件、动作、手册、未来语音交互和首次正式发行。</td></tr>
       <tr><td>独立与隔离</td><td>theor 不共享生产解析；drase 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>
       <tr><td>实验性容器</td><td>END-FMT 0.1 采用 64 字节前导、48 字节目录项、六种关键记录和 END-P0 有限上限。</td><td>规范字节、错误分类、Ktisor/Theor 语言实验；不构成稳定 ABI。</td></tr>
       <tr><td>首版核心语言</td><td>代码阶段开启后计划评估 Rust 1.97.0；禁止 unsafe 与首条切片零第三方 crate 仍是未来实现约束。</td><td>未来实现的构建锁、受检算术、模糊测试和供应链边界。</td></tr>

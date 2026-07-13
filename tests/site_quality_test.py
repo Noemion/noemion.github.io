@@ -105,6 +105,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0031-release-name-collision-gate.html",
     "architecture/adr-0032-deterministic-maker-name-collision.html",
     "architecture/adr-0033-text-identifier-specification-name.html",
+    "architecture/adr-0034-pronunciation-and-oral-distinction.html",
     "components/ktisor.html",
     "components/theor.html",
     "components/drasor.html",
@@ -119,7 +120,7 @@ DOC_GUIDE_ORDER = [
 ]
 DOC_GUIDE_HEADINGS = {
     "docs/getting-started.html": [
-        "从这里开始", "六个语义面", "四个名词", "一个应用", "推荐阅读路径", "当前状态",
+        "从这里开始", "这些名字怎样读", "六个语义面", "四个名词", "一个应用", "推荐阅读路径", "当前状态",
     ],
     "docs/installation-and-usage.html": [
         "当前可用性", "未来职责流程", "发布原则", "命名发布条件",
@@ -248,6 +249,7 @@ RETIRED_TEXT_SPEC_TERMS = re.compile(
 )
 RETIRED_TEXT_SPEC_EVIDENCE_PATHS = {
     "architecture/adr-0033-text-identifier-specification-name.html",
+    "architecture/adr-0034-pronunciation-and-oral-distinction.html",
     "design-system/name-audit.md",
 }
 NORMATIVE_ROUTES = (
@@ -293,6 +295,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0031-release-name-collision-gate.html",
     "architecture/adr-0032-deterministic-maker-name-collision.html",
     "architecture/adr-0033-text-identifier-specification-name.html",
+    "architecture/adr-0034-pronunciation-and-oral-distinction.html",
     "architecture/open-questions.html",
     "components/ktisor.html",
     "components/theor.html",
@@ -639,6 +642,24 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "不保留旧路径、别名、重定向、双写或兼容垫片",
             "text-identifier-core.md",
             "vectors/text-identifier/",
+        ),
+    },
+    "architecture/adr-0034-pronunciation-and-oral-distinction.html": {
+        "required": (
+            "Accepted Gate",
+            "四项独立门禁",
+            "BCP 47",
+            "成对混淆矩阵",
+            "首次朗读",
+            "听写回填",
+            "W3C Pronunciation Lexicon Specification 1.0",
+            "GNU Coding Standards：Names",
+            "OpenAI Realtime API",
+            "Iknem",
+            "Ktisor",
+            "sphra",
+            "kine",
+            "No Voice Interface",
         ),
     },
     "endem/docs/safety.html": {
@@ -2265,6 +2286,14 @@ def validate_jekyll_sources():
             "TEXT-CORE",
             "TIB-CORE",
             "ADR-0033",
+            "ADR-0034",
+            "读音与口头区分证据",
+            "BCP 47",
+            "首次朗读",
+            "听写回填",
+            "成对混淆",
+            "https://www.w3.org/TR/pronunciation-lexicon/",
+            "https://www.gnu.org/prep/standards/html_node/Names.html",
         ):
             if token not in name_audit_text:
                 errors.append(f"name audit missing evidence or boundary: {token!r}")
@@ -2649,9 +2678,29 @@ def main():
         "不得添加数字后缀表示“新版”",
         "数字只在它确实承担精确引用时保留",
         "为什么纯文字名称不足",
+        "## 读音与口头区分门禁",
+        "BCP 47",
+        "首次看到拼写的朗读结果",
+        "成对混淆矩阵",
+        "语音合成、自动转写和语音模型",
     ):
         if token not in naming_standard_text:
             errors.append(f"language and naming standard missing no-digit boundary: {token}")
+    release_name_adr_text = (
+        SOURCE_ROOT / "architecture" / "adr-0031-release-name-collision-gate.html"
+    ).read_text()
+    if "短、可发音" in release_name_adr_text:
+        errors.append(
+            "ADR-0031 must not describe a name as pronounceable without ADR-0034 human evidence"
+        )
+    getting_started_text = (SOURCE_ROOT / "docs" / "getting-started.md").read_text()
+    for token in (
+        "具体发行拼写和读音仍受 ADR-0034 门禁约束",
+        "不用临时读法冒充正式读法",
+        "不会成为第二套命令、机器别名或语义权威",
+    ):
+        if token not in getting_started_text:
+            errors.append(f"getting started guide missing pronunciation status boundary: {token}")
     directory_css = DIRECTORY_CSS.read_text()
     for token in (
         "background:color-mix(in srgb,var(--paper) 90%,transparent)",
