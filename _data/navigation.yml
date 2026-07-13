@@ -110,6 +110,7 @@ modules:
           - { href: /architecture/adr-0025-structured-diagnostics.html, label: "ADR-0025 · 结构化诊断边界" }
           - { href: /architecture/adr-0026-external-protocol-adapters.html, label: "ADR-0026 · 外部协议适配" }
           - { href: /architecture/adr-0027-exact-identity-and-attestation.html, label: "ADR-0027 · 精确内容身份与签名" }
+          - { href: /architecture/adr-0028-text-and-identifier-boundaries.html, label: "ADR-0028 · 文本与标识符边界" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:
@@ -121,6 +122,7 @@ modules:
           - { href: /specifications/diagnostics.html, label: 结构化诊断 }
           - { href: /specifications/adapters.html, label: 外部协议适配 }
           - { href: /specifications/identity.html, label: 精确内容身份与签名 }
+          - { href: /specifications/text.html, label: 文本与标识符边界 }
       - label: 系统组件
         items:
           - { href: /components/index.html, label: 组件总览 }

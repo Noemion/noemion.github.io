@@ -14,6 +14,7 @@
 | [`tekmor-core.md`](tekmor-core.md) | `0.1.0-draft` | 草案；已接受证据与评估边界的第一份条款化表达 | 主体范围、溯源、phain 对齐、证据类别、完整性、有效性、覆盖、决定分离与最小披露 | 物理容器、签名算法、透明日志、撤销分发、时钟归并、隐私策略和稳定 ABI |
 | [`adapter-core.md`](adapter-core.md) | `0.1.0-draft` | 草案；已接受外部协议适配边界的第一份条款化表达 | 版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付与安全边界 | 具体协议 Profile、适配器 API、物理字段、凭据代理、事件存储和组件实现 |
 | [`identity-core.md`](identity-core.md) | `0.1.0-draft` | 草案；已接受跨制品精确身份与签名边界的第一份条款化表达 | 身份域、精确字节、不可变引用、算法政策、短显示、签名陈述、验证包络、权威、截止点、可复现性与派生关系 | 发行算法、摘要语法、签名物理 Profile、证书、透明日志、撤销分发、Semantic Key 和组件实现 |
+| [`text-core.md`](text-core.md) | `0.1.0-draft` | 草案；已接受跨制品文本与标识符边界的第一份条款化表达 | 文本槽、严格 UTF-8、来源溯源、ASCII 标识符、规范化、比较、范围、双向显示、隐藏字符、元数据、模型输入与输出视图 | Unicode 标识符、来源重写、分词、搜索排序、tokenizer 协议、原始字节字段和组件实现 |
 
 [`endem-threat-model.md`](endem-threat-model.md) 把单个 Endem 的不可信输入与失败责任映射到规范条款；[`synem-threat-model.md`](synem-threat-model.md) 单独处理依赖替换、闭包截断、循环、权限放大、结果洗白与激活竞态；[`dromen-threat-model.md`](dromen-threat-model.md) 处理主体替换、陈旧政策、环境漂移、能力放大、秘密持久化、预算逃逸和会话复活；[`tekmor-threat-model.md`](tekmor-threat-model.md) 处理范围漂白、循环自证、观察升级、撤销失明、覆盖伪造、决定越权和泄密。[`profiles/end-p0.json`](profiles/end-p0.json) 给出第一组跨实现实验的有限上限；这些数值不是生产规模证明，提高时必须采用新的 Profile 身份。
 
@@ -22,6 +23,8 @@
 [`adapter-threat-model.md`](adapter-threat-model.md) 与 [`adapter-scenarios.md`](adapter-scenarios.md) 分别保存外部协议适配威胁和十八个非规范设计场景。`../vectors/adapters/cases.json` 保存 ADP-CORE 的二十四个提案向量；`../tests/adapter_vector_test.py` 只检查十二条抽象规则，不实现 MCP、A2A、HTTP、SDK、凭据、重试、Webhook、Praxor 或运行时。
 
 [`identity-threat-model.md`](identity-threat-model.md) 与 [`identity-scenarios.md`](identity-scenarios.md) 分别保存精确身份与签名威胁和十八个非规范设计场景。`../vectors/identity/cases.json` 保存 ID-CORE 的二十四个提案向量；`../tests/identity_vector_test.py` 只检查十二条抽象规则，不实现摘要器、签名器、验证器、证书、透明日志、撤销分发、可复现构建或发布系统。
+
+[`text-threat-model.md`](text-threat-model.md) 与 [`text-scenarios.md`](text-scenarios.md) 分别保存文本与标识符威胁和十八个非规范设计场景。`../vectors/text/cases.json` 保存 TXT-CORE 的二十四个提案向量；`../tests/text_vector_test.py` 只检查十二条抽象规则，不实现 UTF-8 解码器、规范化器、双向显示器、同形检测器、文本编辑器或模型输入网关。
 
 [`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用二十七个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分、结果域、时间范围、缺席推断、量化范围、测量阈值与复合判断是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
 

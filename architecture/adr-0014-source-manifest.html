@@ -11,7 +11,7 @@ permalink: "/architecture/adr-0014-source-manifest.html"
 
   <section class="content-stack">
     <h2>直接结论</h2>
-    <p class="lead">首个 <code>poie</code> 接受 UTF-8、制表符分列的实验性来源清单。清单同时保存原始自然语言和已经授权的结构投影；Poiet 只做确定性解析、验证和写入，不调用模型补齐意义。</p>
+    <p class="lead">首个 <code>poie</code> 接受 UTF-8、制表符分列的实验性来源清单。清单同时保存解码并处理转义后的自然语言表达和已经授权的结构投影；Poiet 只做确定性解析、验证和写入，不调用模型补齐意义。</p>
     <p>这项决定关闭“首个候选怎样进入 Poiet”的实现接口，但不把 <code>.ends</code> 冻结成长期源语言。未来正式语言出现时直接删除这一入口，不保留兼容垫片。</p>
   </section>
 
@@ -29,6 +29,7 @@ permalink: "/architecture/adr-0014-source-manifest.html"
     <h2>语法边界</h2>
     <p>每个非注释行由制表符分成一个指令和固定参数。单例指令是 <code>rhem/root/telis/krin</code>；可重复指令是 <code>symbol/relation/situation/phain/tekmor/apor</code>。文本只解释四种反斜杠转义，复合标识符集合只使用逗号分隔。</p>
     <p class="callout"><strong>名称边界：</strong>“来源清单”是直白工程名称，不再创造新的哲学专名。<code>.ends</code> 只是实验后缀，不是 Endem 对象扩展名或身份的一部分。</p>
+    <p class="callout"><strong>保真边界：</strong>LF 与 CRLF 等价，四种转义会被解码，所以 <code>rhem.content</code> 不是原始 <code>.ends</code> 文件的逐字节副本。原始来源字节只有在未来另行绑定文件身份、解码 Profile、变换链和损失时才能核对。</p>
     <p>完整指令、基数、转义、资源与退出条件见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-source-manifest.md">END-SRCM 条款源</a>。</p>
   </section>
 

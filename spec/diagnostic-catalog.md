@@ -165,7 +165,24 @@
 | `identity.reproducibility.unproven` | `ID-REP-001` | evidence | 可复现声明缺少精确输入、独立产出、完整输出身份或逐字节比较 |
 | `identity.relation.inherited` | `ID-REL-001` | identity | 派生或伴随制品继承来源身份、签名、证据、接受状态、能力或未定义等价 |
 
-## 11. 稳定性边界
+## 11. 文本与标识符错误码
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `text.slot.untyped` | `TXT-SLT-001` | semantic | 字符串字段没有绑定来源、标识符、登记词、描述或显示职责 |
+| `text.encoding.invalid` | `TXT-ENC-001` | source | UTF-8 无效、非最短、含代理项或在解码前发生变换 |
+| `text.source.provenance_incomplete` | `TXT-SRC-001` | source | 原始字节、解码文本、变换、损失和身份关系没有分开 |
+| `text.identifier.out_of_profile` | `TXT-IDN-001` | semantic | 结构标识符超出 ASCII Profile 或受到规范化、大小写、locale、同形映射影响 |
+| `text.normalization.implicit` | `TXT-NRM-001` | semantic | 规范化没有绑定槽、Unicode 版本、形式、输出身份和损失 |
+| `text.comparison.domain_unbound` | `TXT-CMP-001` | identity | 搜索、排序、规范化、同形或模型相似比较替代精确身份与结构 ID |
+| `text.range.unit_mismatch` | `TXT-RNG-001` | semantic | 范围主体、表示、单位、半开区间或变换映射缺失或混用 |
+| `text.bidi.boundary_hidden` | `TXT-BID-001` | source | 双向显示改写逻辑顺序、隐藏方向控制或让视觉顺序参与身份 |
+| `text.hidden.silent` | `TXT-HID-001` | source | 不可见、变体、混合脚本或同形风险被静默删除、合并或隐藏 |
+| `text.metadata.overclaimed` | `TXT-MET-001` | semantic | 语言、媒体、方向或模型检测声明被用于隐式规范变换或权威判断 |
+| `text.model.view_unbound` | `TXT-AIM-001` | policy | 模型实际输入、预处理、tokenizer、隐藏字符清单和人工视图没有绑定 |
+| `text.output.provenance_missing` | `TXT-OUT-001` | evidence | 显示、复制、诊断或导出没有披露转义、截断、脱敏、方向与损失 |
+
+## 12. 稳定性边界
 
 上述机器码只在当前规范、目录和提案向量中保持草案稳定，尚不构成发行 ABI。提升为稳定接口前必须完成：
 

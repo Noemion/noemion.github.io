@@ -1,0 +1,78 @@
+---
+layout: default
+title: "ADR-0028 文本与标识符边界"
+page_role: "content"
+footer_text: "Noemion · ADR-0028"
+permalink: "/architecture/adr-0028-text-and-identifier-boundaries.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0028</span></nav>
+  <header class="content-introduction"><h1>ADR-0028<br>文本与标识符边界</h1><p>让来源字节、解码文字、机器标识符、显示视图和模型实际输入分别可核对，避免相同字形掩盖不同机器内容。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">TXT-CORE 0.1.0-draft</span><span class="badge">Unicode Boundaries</span><span class="badge">No Unicode Code</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">Noemion 需要一份跨制品的文本边界规范。UTF-8 只能回答字节怎样解码，不能自动回答字符串怎样比较、怎样定位、怎样显示，也不能保证人和模型看到同一内容。</p>
+    <p>采用 TXT-CORE 0.1.0-draft。它固定十二条抽象规则，不增加 Endem 字段，不创建文本对象，也不实现 Unicode 处理器。当前来源内容不做规范化，END-P1 结构标识符继续只允许 ASCII。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么可见文字不能代替机器内容</h2>
+    <blockquote><p>“记号是一个符号中可以被感官感知到的东西。”</p><cite>路德维希·维特根斯坦《逻辑哲学论》3.32</cite></blockquote>
+    <p>这里给出的工程启发很有限但很关键：可见记号只是可以被感知的层，编码序列、结构位置和已授权意义仍须分别确定。3.321 又提醒同一个记号可以被不同符号共有，所以界面中的相同字形不能自动证明机器身份或语义相等。</p>
+    <p>这些命题不决定 UTF-8、NFC、标识符语法或安全策略。具体规则仍由版本化规范、Profile、威胁模型和向量定义，不能把哲学引文当作实现证据。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>必须分开的六个对象</h2>
+    <div class="flow"><div class="step">原始来源字节</div><div class="step">严格解码文本</div><div class="step">显式变换结果</div><div class="step">结构字段与范围</div><div class="step">人类显示视图</div><div class="step">模型实际输入</div></div>
+    <p>每一层都有自己的身份和责任。解码文本不能声称保留原文件字节；显示视图不能参与安全引用；模型输入不能只用界面截图或日志摘要证明；规范化结果也不能覆盖来源后再冒充原文。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为何当前结构标识符保持 ASCII</h2>
+    <p>UAX #31 和 RFC 8264 表明，国际化标识符需要明确字符集合、映射、规范化、大小写、双向规则、比较方式和版本稳定性。UTS #39 还能发现部分同形风险，但风险骨架不是身份。</p>
+    <p>当前 END-P1 已有封闭 ASCII 语法，真实消费者尚未证明 Unicode 标识符的必要性。继续使用 ASCII 可以在解析入口关闭方向控制、混合脚本、默认可忽略字符和 locale 差异。未来如果国际化标识符拥有不可替代的消费者，必须通过独立 ADR 和 Profile 扩展，而不是放宽现有正则。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为何不统一规范化所有文本</h2>
+    <p>UAX #15 定义 NFC、NFD、NFKC 和 NFKD，但不同形式服务不同用途。兼容规范化会主动消除部分字符差异；即使规范等价成立，也不能推出原始字节相同或自然语言意义相同。</p>
+    <p>因此当前来源内容、精确内容身份和 ASCII 结构标识符一律使用 <code>none</code>。未来任何规范化都必须绑定输入槽、Unicode 版本、形式、输出用途、身份影响和原始输入关系。比较也必须说明是在精确字节、Unicode 标量、规范化结果、区域排序还是同形风险域中进行。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>双向文字和隐藏字符怎样处理</h2>
+    <p>UAX #9 负责从逻辑顺序计算显示顺序。Noemion 的身份、范围与解析只使用逻辑顺序；显示器可以重排，却不能把视觉顺序写回对象。安全审查视图必须显示方向控制、零宽字符、变体选择符、连接符、非 ASCII 空白和其他默认可忽略字符的位置。</p>
+    <p>UTS #39 的同形检测只产生风险提示。提示不能合并对象、自动改写来源或单独证明恶意。普通来源文本可以保存这些码点，但结构标识符由 ASCII Profile 直接拒绝。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>模型时代新增的责任</h2>
+    <p>已有研究展示了不可见字符、同形替换和变体选择符怎样改变 NLP 或模型处理，同时逃过普通视觉审查。这些结果会随模型和 tokenizer 变化，因此只作为威胁证据，不冻结成某个攻击成功率或检测算法。</p>
+    <p>未来模型调用必须绑定实际输入身份、预处理链、不可见字符清单、模型与 tokenizer 身份和人类复核视图。即使这些材料齐全，输出仍是模型候选，不能取得规范写入、授权或最终验收权。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>权威资料与采用限制</h2>
+    <ul>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc3629.html">RFC 3629 UTF-8</a>定义合法标量与唯一最短编码；它不定义文本比较或语义等价。</li>
+      <li><a href="https://www.unicode.org/reports/tr15/">Unicode UAX #15</a>定义规范化形式；项目不据此改写全部来源文本。</li>
+      <li><a href="https://www.unicode.org/reports/tr31/">Unicode UAX #31</a>和 <a href="https://www.rfc-editor.org/rfc/rfc8264.html">RFC 8264 PRECIS</a>提供国际化标识符与字符串 Profile 的机制；当前 END-P1 仍采用 ASCII。</li>
+      <li><a href="https://www.unicode.org/reports/tr9/">Unicode UAX #9</a>定义双向显示；视觉顺序不进入身份或范围。</li>
+      <li><a href="https://www.unicode.org/reports/tr39/">Unicode UTS #39</a>和 <a href="https://www.unicode.org/reports/tr55/">Unicode UTS #55</a>提供同形风险与安全审查方法；警告不成为身份或恶意判决。</li>
+      <li><a href="https://www.gnu.org/software/libunistring/manual/libunistring.html">GNU libunistring 手册</a>把编码、规范化、大小写、字素、词与行处理分开；项目只借鉴职责拆分，不引入实现依赖。</li>
+      <li><a href="https://arxiv.org/abs/2106.09898">Bad Characters</a>与 <a href="https://arxiv.org/abs/2510.05025">Imperceptible Jailbreaking Against LLMs</a>作为不可见文本威胁证据；论文不定义规范结论。</li>
+    </ul>
+  </section>
+
+  <section class="content-stack">
+    <h2>后果与当前状态</h2>
+    <ul>
+      <li><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-core.md">TXT-CORE 0.1.0-draft</a>定义 12 条跨制品文本义务。</li>
+      <li>12 类威胁、18 个设计场景和 24 个正反向量覆盖当前抽象边界。</li>
+      <li>END-SRCM 只承诺映射解码并处理转义后的 <code>rhem.content</code>，不再暗示原始来源文件逐字节保真。</li>
+      <li>当前没有 Unicode 处理器、规范化器、同形检测器、文本编辑器、模型输入网关或新 Profile。</li>
+    </ul>
+  </section>
+  <div class="next-prev"><a href="adr-0027-exact-identity-and-attestation.html">← ADR-0027</a><a href="open-questions.html">开放问题 →</a></div>
+</main>
