@@ -26,7 +26,7 @@
 - `_data/site_header.yml`：全站页头独立行动入口的唯一配置源，当前提供 `TIMELINE` 项目时间线入口。
 - `_data/project_timeline.yml`：项目阶段与当前状态摘要的唯一人工配置源，只服务承担进度说明职责的页面。
 - 普通正式 `.html` 使用 `layout: default` 并编写职责对应的 `<main>`；手册 `.md` 使用 `layout: manual` 并只编写 Markdown 正文，公开文件名由 `permalink` 确定。
-- `assets/site.mjs`：小型全站入口，只判断页面能力并按需加载 `assets/modules/*.mjs`；路由模型、数据仓库、顶部导航、模块目录、移动端状态和正文增强分别维护独立接口。`assets/theme.js` 在 CSS 加载前恢复全站 `Light / Dark / System` 选择，并负责持久化、系统主题监听和页脚菜单交互；`assets/images/` 保存经过裁切和压缩的站点图片。
+- `assets/site.mjs`：小型全站入口，只判断页面能力并按需加载 `assets/modules/*.mjs`；路由模型、数据仓库、顶部导航、模块目录、移动端状态和正文增强分别维护独立接口。`assets/mobile-directory-guard.js` 在页面解析阶段拦住目录控制器尚未就绪时的首次打开，避免原生 `<details>` 在滚动锁建立前暴露手势穿透窗口。`assets/theme.js` 在 CSS 加载前恢复全站 `Light / Dark / System` 选择，并负责持久化、系统主题监听和页脚菜单交互；`assets/images/` 保存经过裁切和压缩的站点图片。
 - `sitemap.md`：不带 Front Matter 的公开 Markdown 发现索引，也是唯一正式路由注册表；它不进入 Markdown 转换，由 Pages 工作流在 Jekyll 构建后原样加入 `/sitemap.md`，供读者和自动化工具按内容家族读取全部正式 HTML 路由、顺序和职责。README 不再复制路由表，质量测试直接以该文件核对源码与构建产物。
 
 ### 手册内容源与生成
@@ -89,7 +89,7 @@ badges: ["Documentation"]
 
 ## 浏览与共享资源
 
-从 `index.html` 开始浏览。Jekyll 布局通过 `relative_url` 统一加载共享资源，正文内部继续使用与正式路由对应的相对链接。`assets/style.css` 与 `assets/directory.css` 由共享布局加载并携带同一构建版本；目录布局、折叠、高亮和响应式行为只在 `assets/directory.css` 维护。一级导航与手册侧栏在构建期成为可直接访问的 HTML；`assets/site.mjs` 只在首次悬停、聚焦、打开目录或检测到长文增强需求时加载相应模块。模块职责与失败降级见 [`design-system/frontend-architecture.md`](design-system/frontend-architecture.md)。
+从 `index.html` 开始浏览。Jekyll 布局通过 `relative_url` 统一加载共享资源，正文内部继续使用与正式路由对应的相对链接。`assets/style.css` 与 `assets/directory.css` 由共享布局加载并携带同一构建版本；目录布局、折叠、高亮和响应式行为只在 `assets/directory.css` 维护。一级导航与手册侧栏在构建期成为可直接访问的 HTML；移动端首次打开先由同步守卫记录请求，目录控制器建立滚动锁后再显示菜单。`assets/site.mjs` 仍只在首次悬停、聚焦、请求目录或检测到长文增强需求时加载相应模块。模块职责与失败降级见 [`design-system/frontend-architecture.md`](design-system/frontend-architecture.md)。
 
 导航一致性以“可达”而不是“完全相同”为准：每个非门户页面至少提供返回直接上级 `index.html`、所属模块目录页或路由表登记的特定目录页的方式。面包屑、模块目录中的上级入口以及手册导航中的“上级”都可以承担这一职责。
 

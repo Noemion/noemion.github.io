@@ -59,6 +59,11 @@ const ensureDirectory = async () => {
       new module.DirectoryNavigation(directoryRoot, routeModel, moduleKey, directory).render();
       const mobile = new module.MobileDirectoryController(directoryPanel, directoryRoot);
       mobile.connect();
+      directoryPanel.dataset.mobileDirectoryReady = "true";
+      const pendingOpen = directoryPanel.hasAttribute("data-mobile-directory-pending-open");
+      directoryPanel.removeAttribute("data-mobile-directory-pending-open");
+      directoryRoot.removeAttribute("aria-busy");
+      if (pendingOpen) mobile.open();
       return mobile;
     });
   }
@@ -66,6 +71,13 @@ const ensureDirectory = async () => {
     return await directoryPromise;
   } catch (error) {
     console.warn("Enhanced directory navigation is unavailable.", error);
+    directoryPanel.dataset.mobileDirectoryReady = "true";
+    if (directoryPanel.hasAttribute("data-mobile-directory-pending-open")) {
+      directoryPanel.removeAttribute("data-mobile-directory-pending-open");
+      directoryRoot.removeAttribute("aria-busy");
+      document.documentElement.classList.remove("mobile-directory-open");
+      directoryPanel.open = true;
+    }
   }
 };
 
@@ -76,6 +88,8 @@ desktopDirectory.addEventListener("change", (event) => {
 });
 directoryPanel?.querySelector(":scope > summary")?.addEventListener("pointerdown", ensureDirectory, { once: true });
 directoryPanel?.querySelector(":scope > summary")?.addEventListener("keydown", ensureDirectory, { once: true });
+directoryPanel?.addEventListener("noemion:directoryrequest", ensureDirectory);
+if (directoryPanel?.hasAttribute("data-mobile-directory-pending-open")) ensureDirectory();
 
 const needsTableScroller = Boolean(document.querySelector(".manual-article table"));
 const longContent = document.querySelectorAll('body[data-page-role="content"]:not([data-docs-layout="true"]) main > section > h2').length >= 6;

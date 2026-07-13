@@ -154,15 +154,20 @@ export class MobileDirectoryController {
     this.closeTimer = setTimeout(() => this.#finishClose(), 180);
   }
 
-  #toggle(event) {
-    if (!this.interactive.matches) return;
-    event.preventDefault();
-    if (this.panel.open) return this.close();
+  open() {
+    if (!this.interactive.matches || this.panel.open) return;
     clearTimeout(this.closeTimer);
     this.panel.classList.remove("is-closing");
     this.panel.open = true;
     this.#forgetTouch();
     this.#setScrollLock(true);
+  }
+
+  #toggle(event) {
+    if (!this.interactive.matches) return;
+    event.preventDefault();
+    if (this.panel.open) return this.close();
+    this.open();
   }
 
   #finishClose() {

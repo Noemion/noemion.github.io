@@ -12,7 +12,7 @@
     <a class="global-timeline-link" data-site-timeline href="{{ header_timeline.href | relative_url }}" aria-label="{{ header_timeline.aria_label | escape }}" title="{{ header_timeline.title | escape }}"><strong class="global-timeline-value">{{ header_timeline.label | escape }}</strong></a>
     <details class="directory-panel global-directory-panel">
       <summary><span>导航</span><span class="portal-menu-icon" aria-hidden="true"></span></summary>
-      <nav data-directory aria-label="项目目录"></nav>
+      <nav data-directory aria-label="项目目录"><span class="directory-loading-status" role="status">正在载入目录…</span></nav>
     </details>
     <noscript><nav class="no-script-navigation" aria-label="无脚本站点导航"><a href="{{ '/index.html' | relative_url }}">项目首页</a><a href="{{ '/sitemap.md' | relative_url }}">完整路由表</a></nav></noscript>
   </div>

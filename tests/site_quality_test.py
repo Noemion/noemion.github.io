@@ -1189,7 +1189,11 @@ def validate_jekyll_sources():
         errors.append("missing .github/workflows/pages.yml")
     else:
         workflow_text = pages_workflow.read_text()
-        for script in ("assets/site.mjs", "assets/theme.js"):
+        for script in (
+            "assets/site.mjs",
+            "assets/theme.js",
+            "assets/mobile-directory-guard.js",
+        ):
             if f"node --check {script}" not in workflow_text:
                 errors.append(f"Pages workflow must syntax-check {script}")
         if "assets/modules/*.mjs" not in workflow_text:
@@ -1820,6 +1824,7 @@ def validate_jekyll_sources():
             "{{ '/assets/style.css' | relative_url }}",
             "{{ '/assets/directory.css' | relative_url }}",
             "{{ '/assets/theme.js' | relative_url }}",
+            "{{ '/assets/mobile-directory-guard.js' | relative_url }}",
             "{{ '/assets/site.mjs' | relative_url }}",
             'type="module"',
             "site.github.build_revision",
@@ -1845,6 +1850,8 @@ def validate_jekyll_sources():
             "global-directory-panel",
             "data-site-timeline",
             "<span>导航</span>",
+            'class="directory-loading-status" role="status"',
+            "正在载入目录…",
             "global-timeline-value",
             "site.data.site_header.timeline",
             "header_timeline.href",
@@ -1907,6 +1914,26 @@ def validate_jekyll_sources():
             if token not in theme_text and token not in footer.read_text():
                 errors.append(f"theme picker missing behavior contract: {token}")
 
+    directory_guard = SOURCE_ROOT / "assets/mobile-directory-guard.js"
+    if not directory_guard.exists():
+        errors.append("missing assets/mobile-directory-guard.js")
+    else:
+        guard_text = directory_guard.read_text()
+        for token in (
+            'document.addEventListener("click"',
+            '".global-directory-panel > summary"',
+            "event.preventDefault()",
+            'data-mobile-directory-pending-open',
+            'document.addEventListener("wheel", containPendingGesture, { passive: false })',
+            'document.addEventListener("touchmove", containPendingGesture, { passive: false })',
+            'panel.open = pendingOpen',
+            'classList.toggle("mobile-directory-open", pendingOpen)',
+            'toggleAttribute("aria-busy", pendingOpen)',
+            'panel.dispatchEvent(new CustomEvent("noemion:directoryrequest"))',
+        ):
+            if token not in guard_text:
+                errors.append(f"mobile directory first-open guard missing contract: {token}")
+
     style = SOURCE_ROOT / "assets/style.css"
     directory_style = SOURCE_ROOT / "assets/directory.css"
     if style.exists() and directory_style.exists():
@@ -1941,6 +1968,8 @@ def validate_jekyll_sources():
             '.site-header .directory-panel.is-closing nav',
             'html.mobile-directory-open{overscroll-behavior:none}',
             'overscroll-behavior:contain',
+            '.directory-loading-status{display:none',
+            'nav[aria-busy="true"] .directory-loading-status',
             ':root[data-resolved-theme="dark"]',
             ".site-footer-grid",
             ".site-theme-trigger",
@@ -2341,6 +2370,7 @@ def validate_jekyll_sources():
             'document.addEventListener("touchmove", (event) => this.#containTouch(event), { passive: false })',
             'document.addEventListener("touchend", () => this.#forgetTouch(), { passive: true })',
             'document.addEventListener("touchcancel", () => this.#forgetTouch(), { passive: true })',
+            "open() {",
             "NavigationStore",
             "DirectoryNavigation",
             "MobileDirectoryController",
@@ -2362,6 +2392,9 @@ def validate_jekyll_sources():
             'import(moduleUrl("content-enhancements"))',
             'if (desktopDirectory.matches) ensureDirectory()',
             "needsTableScroller || longContent",
+            'directoryPanel.dataset.mobileDirectoryReady = "true"',
+            'directoryPanel?.addEventListener("noemion:directoryrequest", ensureDirectory)',
+            'if (pendingOpen) mobile.open()',
         ):
             if token not in site_text:
                 errors.append(f"site entry missing progressive loading contract: {token}")
@@ -3121,8 +3154,9 @@ def main():
     directory_module = ROOT / "assets/modules/directory-navigation.mjs"
     navigation_data = ROOT / "assets/navigation-data.json"
     theme_script = ROOT / "assets/theme.js"
+    directory_guard = ROOT / "assets/mobile-directory-guard.js"
     favicon = ROOT / "assets/favicon.svg"
-    for path in (site_script, route_module, directory_module, navigation_data):
+    for path in (site_script, route_module, directory_module, navigation_data, directory_guard):
         if not path.exists():
             errors.append(f"missing built front-end asset {path.relative_to(ROOT)}")
     if not theme_script.exists():
@@ -3193,6 +3227,13 @@ def main():
             errors.append(f"{rel}: missing shared module entry")
         elif not urlsplit(site_scripts[0]).query:
             errors.append(f"{rel}: shared module entry must include a build cache key")
+        guard_scripts = [
+            script
+            for script in parser.scripts
+            if urlsplit(script).path.endswith("assets/mobile-directory-guard.js")
+        ]
+        if len(guard_scripts) != 1:
+            errors.append(f"{rel}: missing mobile directory first-open guard")
         for script in parser.scripts:
             if not urlsplit(script).query:
                 errors.append(f"{rel}: shared script must include a build cache key: {script}")

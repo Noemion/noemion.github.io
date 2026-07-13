@@ -37,6 +37,7 @@
 .site-header .directory-panel[open]>summary::after{transform:rotate(180deg)}
 
 .site-header .directory-panel nav{display:block;overflow:visible;scrollbar-width:thin}
+.directory-loading-status{display:none;color:var(--nav-muted);font-size:13px;letter-spacing:.02em}
 .site-header .directory-panel .directory-context{
   display:grid;gap:3px;margin:0 4px 10px;padding:3px 8px 12px;border-bottom:1px solid var(--rule-strong)
 }
@@ -407,6 +408,7 @@ body .global-directory-panel{display:none}
   html.mobile-directory-open .global-directory-panel nav{
     overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch
   }
+  .global-directory-panel nav[aria-busy="true"] .directory-loading-status{display:block;padding:18px 4px}
   body:not([data-page-role="portal"]) main{padding-top:48px}
   body:not([data-page-role="portal"]) .breadcrumbs{
     position:fixed;top:64px;right:8px;left:8px;z-index:8;width:auto;padding-right:102px;background:color-mix(in srgb,var(--paper-subtle) 94%,transparent);
