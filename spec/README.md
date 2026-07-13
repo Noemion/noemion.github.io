@@ -9,12 +9,15 @@
 | [`endem-core.md`](endem-core.md) | `0.1.0-draft` | 草案；已接受语义边界的第一份条款化表达 | Endem 最小性、六个语义面、事态与方向分离、单变量量化、测量阈值、复合判据、未知状态、确定性、安全读取、身份分层与验证责任 | 量化、测量与组合物理字段、嵌套或多变量量化、条件适用性、时间、求值、摘要与签名 |
 | [`endem-format.md`](endem-format.md) | `0.1.0-draft` | 已采用的实验性草案；尚非稳定 ABI | 固定前导、定宽目录、确定性 CBOR、END-P0 结构实验与 END-P1 封闭语义载荷 | coherent/attested、签名、压缩、Synem 和跨版本承诺 |
 | [`endem-source-manifest.md`](endem-source-manifest.md) | `0.1.0-draft` | 实验性 Poiet 输入；正式来源语言出现后删除 | UTF-8 逐行指令、转义、基数、授权边界和 END-P1 映射 | 注释元数据、包含、模块、量化、时间、求值语言和兼容承诺 |
+| [`synem-core.md`](synem-core.md) | `0.1.0-draft` | 草案；已接受组合闭包边界的第一份条款化表达 | 完整闭包、精确绑定、有限无环、权限交集、成员结果分离与会话激活 | 物理容器、版本范围语法、符号、调度、远程仓库和稳定 ABI |
 
-[`endem-threat-model.md`](endem-threat-model.md) 把不可信输入、资源放大、歧义清洗、身份混淆和解析器共同故障映射到规范条款。[`profiles/end-p0.json`](profiles/end-p0.json) 给出第一组跨实现实验的有限上限；这些数值不是生产规模证明，提高时必须采用新的 Profile 身份。
+[`endem-threat-model.md`](endem-threat-model.md) 把单个 Endem 的不可信输入与失败责任映射到规范条款；[`synem-threat-model.md`](synem-threat-model.md) 单独处理依赖替换、闭包截断、循环、权限放大、结果洗白与激活竞态。[`profiles/end-p0.json`](profiles/end-p0.json) 给出第一组跨实现实验的有限上限；这些数值不是生产规模证明，提高时必须采用新的 Profile 身份。
 
 [`endem-errors.md`](endem-errors.md) 登记结构与 Profile 错误码。[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存 JSON 语义外壳；`../vectors/wire/` 保存真实字节的十六进制表达。结构接受向量不等于语义有效 Endem。
 
 [`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用二十七个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分、结果域、时间范围、缺席推断、量化范围、测量阈值与复合判断是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
+
+[`synem-scenarios.md`](synem-scenarios.md) 用十个非规范场景检查闭包、绑定、可选依赖、权限、成员结果和激活边界。它同样不是语法、解析器或组件证据。
 
 `../vectors/result-domains/cases.json` 保存 ADR-0015 的十二个正反提案向量；`../tests/result_domain_vector_test.py` 只执行结果域约束，不实现 Praxor、求值器或决定引擎。向量通过只能证明当前矩阵和条款一致，不能证明运行组件存在。
 
@@ -27,6 +30,8 @@
 `../vectors/measurement/cases.json` 保存 ADR-0019 的十二个测量与阈值提案向量；`../tests/measurement_vector_test.py` 只检查构念、总体、单位、程序、聚合器、不确定区间与阈值分类，不实现采集器、统计引擎、Praxor 或求值器。
 
 `../vectors/composition/cases.json` 保存 ADR-0020 的十二个复合事态与判据提案向量；`../tests/composition_vector_test.py` 只检查单根边界、有限无环拓扑、叶对齐、四结果传播和决定性短路，不实现解析器、Praxor、运行时或求值器。
+
+`../vectors/synem/cases.json` 保存 ADR-0021 的十二个闭包与条件激活提案向量；`../tests/synem_vector_test.py` 只检查六条 SYN-CORE 规则，不实现解析器、Pleko、Praxor、运行时或求值器。
 
 `registry.json` 还登记非规范实验及其决定链。P0-LANG-001 的协议与结果位于 `../experiments/p0-language/`；它支持 ADR-0012 的首版核心语言决定，但不会改变 END-CORE 或 END-FMT 的条款含义，也不把原型登记为生产实现。
 

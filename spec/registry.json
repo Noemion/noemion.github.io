@@ -31,6 +31,16 @@
       "wire_status": "not-applicable",
       "path": "spec/endem-source-manifest.md",
       "scope": "Experimental deterministic Poiet source manifest mapped to END-P1"
+    },
+    {
+      "spec_id": "SYN-CORE",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "wire_status": "unfrozen",
+      "path": "spec/synem-core.md",
+      "scope": "Abstract multi-Endem closure, exact binding, authority convergence, member result separation and session activation"
     }
   ],
   "supporting_documents": [
@@ -49,11 +59,25 @@
       "scope": "Stable experimental diagnostic codes for END-FMT structure and Profile rejection"
     },
     {
+      "id": "SYN-THREAT",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "path": "spec/synem-threat-model.md",
+      "scope": "Synem closure, binding, graph, authority, result and activation threats"
+    },
+    {
       "id": "END-SCEN",
       "version": "0.1.0-draft",
       "status": "non-normative-design-corpus",
       "path": "spec/endem-scenarios.md",
       "scope": "Natural-language design-review scenarios for facet, ambiguity, judgment and root-boundary coverage"
+    },
+    {
+      "id": "SYN-SCEN",
+      "version": "0.1.0-draft",
+      "status": "non-normative-design-corpus",
+      "path": "spec/synem-scenarios.md",
+      "scope": "Natural-language design-review scenarios for closure, binding, permissions, member results and activation"
     },
     {
       "id": "END-P0",
@@ -118,6 +142,11 @@
     {"term": "criterion-composition", "kind": "semantic-interface", "decision_status": "accepted", "definition": "用 all_of 或 any_of 确定性组合叶判断结果的有限无环结构"},
     {"term": "decisive-basis", "kind": "evidence-interface", "decision_status": "accepted", "definition": "足以决定 all_of 为 unmet 或 any_of 为 met 的已求值叶集合"},
     {"term": "evaluation-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "一次组合判断中已求值叶、未求值叶、停止原因和所用 Tekmor 的完整记录"}
+    ,{"term": "closure-member", "kind": "synem-interface", "decision_status": "accepted", "definition": "以精确内容身份进入 Synem 闭包的 Endem"}
+    ,{"term": "binding-record", "kind": "synem-interface", "decision_status": "accepted", "definition": "把引用方、被引用方、精确身份、规范与解析依据固定在一起的记录"}
+    ,{"term": "dependency-relation", "kind": "synem-interface", "decision_status": "accepted", "definition": "Synem 成员之间显式登记的必需或可选依赖关系"}
+    ,{"term": "activation-guard", "kind": "synem-interface", "decision_status": "accepted", "definition": "引用精确结果事件、结果域、期望值、截止点与授权策略的会话激活条件"}
+    ,{"term": "activation-status", "kind": "result-domain", "decision_status": "accepted", "definition": "active、inactive、unresolved 或 error；只描述固定闭包成员在一次会话中是否生效"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -134,9 +163,87 @@
     {"id": "THR-END-012", "clauses": ["END-NEG-001", "END-NEG-002", "END-NEG-003"], "evidence_status": "partial"},
     {"id": "THR-END-013", "clauses": ["END-QNT-001", "END-QNT-002", "END-QNT-003"], "evidence_status": "partial"},
     {"id": "THR-END-014", "clauses": ["END-MSR-001", "END-MSR-002", "END-MSR-003", "END-MSR-004"], "evidence_status": "partial"},
-    {"id": "THR-END-015", "clauses": ["END-CMP-001", "END-CMP-002", "END-CMP-003", "END-CMP-004"], "evidence_status": "partial"}
+    {"id": "THR-END-015", "clauses": ["END-CMP-001", "END-CMP-002", "END-CMP-003", "END-CMP-004"], "evidence_status": "partial"},
+    {"id": "THR-SYN-001", "clauses": ["SYN-RES-001"], "evidence_status": "partial"},
+    {"id": "THR-SYN-002", "clauses": ["SYN-CLS-001"], "evidence_status": "partial"},
+    {"id": "THR-SYN-003", "clauses": ["SYN-GRF-001"], "evidence_status": "partial"},
+    {"id": "THR-SYN-004", "clauses": ["SYN-AUT-001"], "evidence_status": "partial"},
+    {"id": "THR-SYN-005", "clauses": ["SYN-STA-001"], "evidence_status": "partial"},
+    {"id": "THR-SYN-006", "clauses": ["SYN-ACT-001"], "evidence_status": "partial"}
   ],
   "clauses": [
+    {
+      "id": "SYN-CLS-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, Pleko and every Synem reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
+        {"status": "planned", "ref": "peira:synem-complete-closure"}
+      ]
+    },
+    {
+      "id": "SYN-RES-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Poiet, Pleko and every Synem reader",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
+        {"status": "planned", "ref": "peira:synem-exact-binding"}
+      ]
+    },
+    {
+      "id": "SYN-GRF-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Pleko, Synem readers and resource policy owners",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
+        {"status": "planned", "ref": "peira:synem-bounded-graph"}
+      ]
+    },
+    {
+      "id": "SYN-AUT-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Pleko, Praxor and capability policy owners",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
+        {"status": "planned", "ref": "peira:synem-authority-intersection"}
+      ]
+    },
+    {
+      "id": "SYN-STA-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Praxor, decision authorities and every result consumer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
+        {"status": "planned", "ref": "peira:synem-member-result-separation"}
+      ]
+    },
+    {
+      "id": "SYN-ACT-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "Praxor, event producers and activation policy owners",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
+        {"status": "planned", "ref": "peira:synem-session-activation"}
+      ]
+    },
     {
       "id": "END-CON-001",
       "decision_status": "accepted",

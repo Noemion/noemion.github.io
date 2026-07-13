@@ -86,6 +86,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0018-quantification-and-membership.html",
     "architecture/adr-0019-measurement-and-thresholds.html",
     "architecture/adr-0020-composite-situations-and-criteria.html",
+    "architecture/adr-0021-synem-closure-and-activation.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -238,6 +239,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0018-quantification-and-membership.html",
     "architecture/adr-0019-measurement-and-thresholds.html",
     "architecture/adr-0020-composite-situations-and-criteria.html",
+    "architecture/adr-0021-synem-closure-and-activation.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -1489,6 +1491,15 @@ def validate_jekyll_sources():
             "NIST AI 800-2 Initial Public Draft",
             "不采用 RDF Shape 或二值符合性",
             "只借鉴减少不必要工作的机制",
+        ),
+        "architecture/adr-0021-synem-closure-and-activation.html": (
+            "GNU ld 文件命令",
+            "GNU Guix 参考手册",
+            "GNU make 条件指令",
+            "W3C SHACL",
+            "MCP 2025-11-25 工具规范",
+            "正式绑定必须记录精确身份",
+            "不能改变 Synem 闭包或直接授予权限",
         ),
     }
     for relative_path, required_tokens in external_boundary_contracts.items():

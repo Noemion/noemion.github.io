@@ -18,7 +18,7 @@ permalink: "/components/praxor.html"
   <section class="content-wide">
     <h2>权威输入与输出</h2>
     <div class="table-wrap"><table><thead><tr><th>方向</th><th>内容</th><th>边界</th></tr></thead><tbody>
-      <tr><td>输入</td><td>attested Endem/Synem 原始字节</td><td>重新验证签名、状态、闭包和实际摘要，不复用过期结论。</td></tr>
+      <tr><td>输入</td><td>attested Endem 字节与 Synem 精确成员闭包</td><td>重新验证签名、状态、绑定和实际摘要，不复用过期结论；Synem 物理格式尚未定义。</td></tr>
       <tr><td>输入</td><td>运行策略与 <code>krin</code></td><td>固定能力上限、预算、停止、观察、证据、人工升级和决定权威；只能收紧制品要求。</td></tr>
       <tr><td>输入</td><td>后端绑定与能力目录</td><td>模型或求解器与可用能力的身份、版本和参数结构；描述仍是不可信声明。</td></tr>
       <tr><td>会话状态</td><td>Dromen</td><td>只读、一次性、不可序列化；不保存跨会话能力句柄。</td></tr>
@@ -112,6 +112,16 @@ permalink: "/components/praxor.html"
       <li>先形成叶级 <code>met / unmet / agno / fault</code>，再按 ADR-0020 的固定矩阵组合；不得直接组合原始值或运行自由表达式。</li>
       <li>只有决定性反例或见证才允许短路，并保存决定依据、已求值叶、未求值叶、全部 Tekmor 与停止原因。</li>
       <li>当前没有组合求值器；这些只是 ADR-0020 规定的未来 Praxor 责任边界。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>Synem 激活责任</h2>
+    <ul>
+      <li>只对固定、已重新验证的 Synem 闭包求值激活守卫，不在会话中发现或下载新成员。</li>
+      <li>守卫绑定精确成员结果事件、结果域、期望值、截止点和授权策略；裸状态字符串不能决定激活。</li>
+      <li>只记录 <code>active / inactive / unresolved / error</code>；未激活成员没有满足结果，激活也不创建能力句柄。</li>
+      <li>依据变化、撤销或过期时重新检查或使会话失效，并保留追加事件。完整边界见 <a href="../architecture/adr-0021-synem-closure-and-activation.html">ADR-0021</a>。</li>
     </ul>
   </section>
 

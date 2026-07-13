@@ -64,7 +64,7 @@ permalink: "/architecture/adr-0020-composite-situations-and-criteria.html"
     <h2>为什么不开放任意表达式</h2>
     <ul>
       <li><code>not</code> 不作为组合操作；否定仍由关系叶的显式极性表达，避免与 ADR-0017 重复。</li>
-      <li><code>if / iff</code> 暂不支持。条件目标需要另行定义适用性、激活和“不适用”边界，不能用 <code>agno</code> 冒充。</li>
+      <li><code>if / iff</code> 不进入单个 Endem 的组合根。跨 Endem 的条件适用性由 <a href="adr-0021-synem-closure-and-activation.html">ADR-0021</a> 的会话激活关系表达，不能用 <code>agno</code> 冒充。</li>
       <li><code>xor / xone</code> 暂不支持。它们需要额外的计数、故障与未知传播规则。</li>
       <li>不得嵌入 shell、CEL、Rego、SPARQL、任意算术或模型代码。ADR-0019 的已登记测量程序只在单个叶内产生结果。</li>
     </ul>
@@ -93,7 +93,7 @@ permalink: "/architecture/adr-0020-composite-situations-and-criteria.html"
 
   <section class="content-band">
     <h2>仍未冻结的内容</h2>
-    <p>条件适用性、排他析取、复合否定、跨叶变量绑定、时间和量化组合、规范化、物理字段、规范排序、深度预算与规范字节仍需真实消费者、威胁分析和新 Profile。</p>
+    <p>跨 Endem 条件激活已经由 ADR-0021 关闭抽象边界；排他析取、复合否定、跨叶变量绑定、时间和量化组合、规范化、物理字段、规范排序、深度预算与规范字节仍需真实消费者、威胁分析和新 Profile。</p>
   </section>
-  <div class="next-prev"><a href="adr-0019-measurement-and-thresholds.html">← ADR-0019</a><a href="open-questions.html">开放问题 →</a></div>
+  <div class="next-prev"><a href="adr-0019-measurement-and-thresholds.html">← ADR-0019</a><a href="adr-0021-synem-closure-and-activation.html">ADR-0021 →</a></div>
 </main>

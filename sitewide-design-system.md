@@ -28,7 +28,7 @@
 
 - 墨绿与纸白为基础；薄荷、青蓝、琥珀和朱橙分别用于来源、结构、验收和未决状态。
 - 等宽短词用于 `rhem/semion/skena/telis/krin/apor`、子命令、版本、偏移和状态；长正文保持系统无衬线。
-- Endem 使用五记录面板；Synem 使用交织引用；Dromen 使用封闭加载边界；Tekmor 使用事件与范围链。
+- Endem 使用六语义面板；Synem 使用成员与依赖闭包；Dromen 使用封闭加载边界；Tekmor 使用事件与范围链。
 - 视觉不能把 Dromen 画成文件，不能把 Tekmor 画成无条件证明，也不能把模型路径连到规范 Writer。
 
 ## 排版
