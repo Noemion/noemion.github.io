@@ -415,11 +415,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "三种成熟度不得混写",
             "一次运行怎样穿过边界",
             "运行事实应该放在哪里",
-            "十一条最危险的越级路径",
+            "十二条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的九个约束",
+            "GNU 技术与软件自由提供的十个约束",
             "什么时候才值得增加新对象",
-            "十一项研究怎样回到现有规范",
+            "十二项研究怎样回到现有规范",
             "模型输出是候选，不是规范内容",
             "模型评审也只是有范围的候选测量",
             "反馈记录也不等于模型学习",
@@ -2071,6 +2071,58 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the model training and update research proposal"
                 )
 
+    model_openness_proposal = SOURCE_ROOT / "spec" / "model-openness-and-software-freedom-boundaries-proposal.md"
+    if not model_openness_proposal.exists():
+        errors.append("missing non-normative model openness and software freedom research proposal")
+    else:
+        proposal_text = model_openness_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "结论状态：桌面审查完成；等待用户决定",
+            "至少十二种事实必须分开",
+            "不构成 ADR、CORE 规范、Profile、登记项、法律意见或实现要求",
+            "不建立 `OPEN-MODEL-CORE`、`LICENSE-CORE`",
+            "不进入 `registry.json`",
+            "GNU 软件自由适用于软件，不自动解决模型全栈",
+            "OSI Open Source AI Definition 1.0 的采用边界",
+            "开放完整性、许可和复现是三条证据轴",
+            "NIST AI 600-1",
+            "NIST SP 800-218A",
+            "Linux Foundation Model Openness Framework Specification",
+            "Apache License 2.0",
+            "开放权重",
+            "首选修改形式",
+            "支持案例与反例",
+            "威胁到失败责任的映射",
+            "候选责任的唯一主归属",
+            "术语和读音边界",
+            "等待用户决定",
+        ):
+            if token not in proposal_text:
+                errors.append(f"model openness proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if (
+            "model-openness-and-software-freedom" in registry_text
+            or '"OPEN-MODEL-CORE"' in registry_text
+            or '"LICENSE-CORE"' in registry_text
+        ):
+            errors.append("non-normative model openness proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "downloads" / "index.html",
+            SOURCE_ROOT / "faq" / "index.html",
+            SOURCE_ROOT / "docs" / "installation-and-usage.md",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+            SOURCE_ROOT / "content-quality-audit.md",
+        ):
+            if "model-openness-and-software-freedom-boundaries-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the model openness research proposal"
+                )
+
     agent_boundaries = SOURCE_ROOT / "architecture" / "agent-system-boundaries.html"
     if not agent_boundaries.exists():
         errors.append("missing public Agent system boundary guide")
@@ -2079,10 +2131,10 @@ def validate_jekyll_sources():
         for token in (
             "三种成熟度不得混写",
             "运行事实应该放在哪里",
-            "十一条最危险的越级路径",
+            "十二条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的九个约束",
-            "十一项研究怎样回到现有规范",
+            "GNU 技术与软件自由提供的十个约束",
+            "十二项研究怎样回到现有规范",
             "2025-11-25",
             "2026-07-28",
             "A2A 1.0 版本化规范",
@@ -2099,12 +2151,16 @@ def validate_jekyll_sources():
             "沙箱名称替代隔离证据",
             "模型评分替代测量与决定",
             "反馈替代训练资格与发布决定",
+            "可下载替代自由与可修改性",
             "NIST AI 800-2 初稿",
             "NIST AI 600-1",
             "NIST SP 800-218A",
             "Guix channel、manifest 与 time-machine",
             "Diffutils",
             "随机来源",
+            "GNU 自由软件四项自由",
+            "OSI Open Source AI Definition 1.0",
+            "Model Openness Framework",
         ):
             if token not in boundary_text:
                 errors.append(f"Agent boundary guide missing cross-domain contract: {token}")
@@ -2119,6 +2175,7 @@ def validate_jekyll_sources():
             "model-adapter-isolation-proposal.md",
             "model-assisted-evaluation-proposal.md",
             "model-training-and-update-boundaries-proposal.md",
+            "model-openness-and-software-freedom-boundaries-proposal.md",
             "semantic-equivalence-and-migration-proposal.md",
         ):
             if proposal_name not in boundary_text:
