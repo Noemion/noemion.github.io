@@ -7,12 +7,12 @@ permalink: "/architecture/adr-0028-text-and-identifier-boundaries.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0028</span></nav>
-  <header class="content-introduction"><h1>ADR-0028<br>文本与标识符边界</h1><p>让来源字节、解码文字、机器标识符、显示视图和模型实际输入分别可核对，避免相同字形掩盖不同机器内容。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">TXT-CORE 0.1.0-draft</span><span class="badge">Unicode Boundaries</span><span class="badge">No Unicode Code</span></div></header>
+  <header class="content-introduction"><h1>ADR-0028<br>文本与标识符边界</h1><p>让来源字节、解码文字、机器标识符、显示视图和模型实际输入分别可核对，避免相同字形掩盖不同机器内容。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">TEXT-IDENTIFIER-CORE 0.1.0-draft</span><span class="badge">Unicode Boundaries</span><span class="badge">No Unicode Code</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
     <p class="lead">Noemion 需要一份跨制品的文本边界规范。UTF-8 只能回答字节怎样解码，不能自动回答字符串怎样比较、怎样定位、怎样显示，也不能保证人和模型看到同一内容。</p>
-    <p>采用 TXT-CORE 0.1.0-draft。它固定十二条抽象规则，不增加 Endem 字段，不创建文本对象，也不实现 Unicode 处理器。当前来源内容不做规范化，END-P1 结构标识符继续只允许 ASCII。</p>
+    <p>采用 TEXT-IDENTIFIER-CORE 0.1.0-draft。它固定十二条抽象规则，不增加 Endem 字段，不创建文本对象，也不实现 Unicode 处理器。当前来源内容不做规范化，END-P1 结构标识符继续只允许 ASCII。</p>
   </section>
 
   <section class="content-wide">
@@ -68,7 +68,7 @@ permalink: "/architecture/adr-0028-text-and-identifier-boundaries.html"
   <section class="content-stack">
     <h2>后果与当前状态</h2>
     <ul>
-      <li><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-core.md">TXT-CORE 0.1.0-draft</a>定义 12 条跨制品文本义务。</li>
+      <li><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md">TEXT-IDENTIFIER-CORE 0.1.0-draft</a>定义 12 条跨制品文本义务。</li>
       <li>12 类威胁、18 个设计场景和 24 个正反向量覆盖当前抽象边界。</li>
       <li>END-SRCM 只承诺映射解码并处理转义后的 <code>rhem.content</code>，不再暗示原始来源文件逐字节保真。</li>
       <li>当前没有 Unicode 处理器、规范化器、同形检测器、文本编辑器、模型输入网关或新 Profile。</li>

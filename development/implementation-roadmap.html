@@ -22,7 +22,7 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>代码阶段之前与未来第一条路径</h2>
     <p class="callout"><strong>直接结论：</strong>当前只完成第 0 阶段的规范与验证方案，不创建实现工作区。未来若用户明确开启代码阶段，第一实现只考虑 <code>ktise</code>、<code>elenk</code> 与独立 <code>theor</code>；一致性验证不可省略，但是否通过公开动作 <code>peira</code> 暴露仍需先证明消费者价值。</p>
-    <p>第 0 阶段已经产生 END-CORE、END-FMT、END-P1、SYN-CORE、DRO-CORE、IKN-CORE、DIA-CORE、ADP-CORE、ID-CORE、TXT-CORE、AUT-CORE、威胁模型和规范向量。ADR-0012 把 Rust 记为未来首版候选语言；ADR-0021 至 ADR-0032 固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权决定、Endem 内容与授权伴随关系及发布名称门禁。这些资料只用于评审设计和形成未来验收条件，不表示任何组件已经开始开发。</p>
+    <p>第 0 阶段已经产生 END-CORE、END-FMT、END-P1、SYN-CORE、DRO-CORE、IKN-CORE、DIA-CORE、ADP-CORE、ID-CORE、TEXT-IDENTIFIER-CORE、AUT-CORE、威胁模型和规范向量。ADR-0012 把 Rust 记为未来首版候选语言；ADR-0021 至 ADR-0033 固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权决定、Endem 内容与授权伴随关系、发布名称门禁及文本标准 ID。这些资料只用于评审设计和形成未来验收条件，不表示任何组件已经开始开发。</p>
     <div class="flow"><div class="step">受控来源表达</div><div class="step">投影规则 / 具名决定</div><div class="step">endem ktise</div><div class="step">.endem</div><div class="step">endem elenk</div><div class="step">endem theor</div><div class="step">差分与复现门禁</div></div>
     <div class="table-wrap"><table><thead><tr><th>职责</th><th>正式输入与输出</th><th>完成标准</th></tr></thead><tbody>
       <tr><td><code>ktise</code></td><td>受控来源 + 投影决定 → 六个语义面 → Endem</td><td>相同来源身份、解码文本与显式配置产生相同字节；失败不留下部分制品。</td></tr>
@@ -74,6 +74,7 @@ permalink: "/development/implementation-roadmap.html"
       <li>模型上下文不能只是把政策、对话、检索片段和工具返回拼成一段文字。一次调用必须能够追溯输入选择、角色、权威、顺序、变换、截断、缓存和损失；外部数据不能因位置、标签或自述取得指令权。当前只形成<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">非规范上下文装配研究提案</a>，不新增制品、命令、组件或 CORE 规范。</li>
       <li>目标、计划和执行状态必须分开。Endem/Synem 固定终态，Dromen 固定会话上限，计划只在该上限内变化；步骤、handoff、MCP/A2A Task 或工具完成都不能直接成为 <code>met</code> 或 <code>accepted</code>。当前只形成<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/planning-and-replanning-proposal.md">非规范目标、计划与重规划研究提案</a>，不新增计划制品、命令、组件或 CORE 规范。</li>
       <li>终态满足、动作发生、状态转变和因果归因必须分开。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">非规范状态变化与因果归因研究提案</a>建议把 <code>kine</code> 澄清为“要求事态达到成立”的目标方向；工具成功、Task completed、Span Ok、幂等 no-op 或后态成立都不能自行证明某主体造成了结果。该建议等待用户决定，不改写规范或新增对象与组件。</li>
+      <li>预览、dry-run、批准、执行和事后观察必须分开。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/preview-simulation-and-approval-proposal.md">非规范预览、模拟与批准研究提案</a>要求显示绑定精确请求，模拟披露真实副作用例外，批准后的对象、政策、工具与环境漂移在执行前重新核对。工具成功仍不能直接成为 <code>met</code> 或 <code>accepted</code>；提案不新增制品、结果域、命令、组件或 CORE。</li>
       <li>文本相似、规范化输出相同、模型裁判同意或迁移成功都不能直接建立语义等价。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">非规范语义等价与迁移研究提案</a>把精确身份、结构同构、观察等价、迁移、强化/弱化和模型相似度分开；它不新增等价制品、命令、组件、Semantic Key 或 CORE 规范。</li>
       <li>MCP 工具说明、注解和远端返回都只是 Drasor 外缘的不可信输入；能力授权来自 Dromen 与会话策略。截至 2026 年 7 月 13 日，当前研究基线是官方仍标为 Current 的 <a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">2025-11-25 工具规范</a>。官方于 5 月 21 日锁定并公开、计划于 7 月 28 日转为最终版的 2026-07-28 候选版只用于评估版本漂移，不作为当前符合性基线。任何后续正式版本都必须重新完成兼容、安全、错误来源、降级和权限复核。</li>
       <li>A2A 1.0 的 Task、Message 与 Artifact 适合跨 Agent 传输和记录生命周期，但不能替代 Endem 身份、Synem 闭包或 Iknem 验收。补丁号不进入协议协商；具体映射必须建立遵守 ADP-CORE 的独立 Profile。当前没有协议实现。</li>

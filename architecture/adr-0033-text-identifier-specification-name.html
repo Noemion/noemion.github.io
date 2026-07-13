@@ -1,0 +1,67 @@
+---
+layout: default
+title: "ADR-0033 · 文本与标识符标准命名"
+page_role: "content"
+footer_text: "Noemion · ADR-0033"
+permalink: "/architecture/adr-0033-text-identifier-specification-name.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0033</span></nav>
+  <header class="content-introduction"><h1>ADR-0033<br>文本与标识符标准命名</h1><p>用完整职责名称消除文件格式误读，同时保持文本、标识符、显示与模型输入边界不变。</p><div class="badges"><span class="badge">Accepted</span><span class="badge">2026-07-13</span><span class="badge">Direct replacement</span><span class="badge">No new format</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">跨制品文本与标识符标准采用 <strong>TEXT-IDENTIFIER-CORE</strong>，条款和配套资料使用 <code>TEXT-*</code>。</p>
+    <p>这个名称明确说明规范同时约束文本槽和机器标识符。它不是 <code>.txt</code> 文件格式，不对应某份原始文本文件，也不创建文本处理器、词法分析器或 Unicode 对象。</p>
+    <p class="callout"><strong>迁移规则：</strong><code>TXT-CORE</code> 容易被读成普通文本文件，已经直接退出机器登记、文件、向量、测试和公开路由。项目不保留旧路径、别名、重定向、双写或兼容垫片。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么必须改名</h2>
+    <div class="table-wrap"><table><thead><tr><th>读法</th><th>它会暗示什么</th><th>实际职责</th></tr></thead><tbody>
+      <tr><td>把旧 ID 读成 <code>.txt</code></td><td>规范只描述普通文本文件或保存原文</td><td>规范约束所有已登记字符串槽、结构标识符、比较、范围、显示与模型输入</td></tr>
+      <tr><td>把它读成原始文件层</td><td>解码后的 <code>rhem.content</code> 等于输入文件的原始字节</td><td>原始字节、解码文本和变换结果必须分别绑定</td></tr>
+      <tr><td>把它读成文本组件</td><td>项目已经拥有规范化器、编辑器或输入网关</td><td>当前只有条款、威胁、场景、提案向量和资料一致性检查</td></tr>
+    </tbody></table></div>
+    <p>名称已经让读者误判对象边界，就不应依赖注释反复补救。标准 ID 应先揭示职责，再由条款定义精确行为。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>候选比较</h2>
+    <div class="table-wrap"><table><thead><tr><th>候选</th><th>核对结果</th><th>决定</th></tr></thead><tbody>
+      <tr><td><code>TXT-CORE</code></td><td>与 <code>.txt</code> 的视觉和读音关联过强，已经产生“是否对应原始文件”的实际误解。</td><td>退役</td></tr>
+      <tr><td><code>TEXT-CORE</code></td><td><a href="https://mvnrepository.com/artifact/eu.interedition/text-core">Interedition Text Core</a> 已用于范围标注文本模型。这个候选既发生精确工程重名，也会加强“通用文本文件核心”的误读。</td><td>拒绝</td></tr>
+      <tr><td><code>TIB-CORE</code></td><td><a href="https://aclanthology.org/2025.semeval-1.328/">SemEval-2025 LLMs4Subjects</a> 使用 <code>tib-core</code> 数据集训练和评估技术文献主题标注，处于相邻的文本与人工智能发现空间。</td><td>拒绝</td></tr>
+      <tr><td><code>LEX-CORE</code></td><td><code>lex</code> 通常指词法分析、词典或词法语义，只覆盖当前职责的一部分，并会把显示、来源与模型输入错误收窄为 token 处理。</td><td>拒绝</td></tr>
+      <tr><td><code>TEXT-IDENTIFIER-CORE</code></td><td>直接列出两个治理对象；虽比缩写长，却不会伪装成新领域词、文件格式或组件品牌。</td><td>采用</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>时间点筛查结果</h2>
+    <div class="table-wrap"><table><thead><tr><th>入口</th><th>2026-07-13 观察</th><th>结论边界</th></tr></thead><tbody>
+      <tr><td><a href="https://pypi.org/pypi/text-identifier-core/json">PyPI 精确项目</a></td><td>HTTP 404</td><td>只说明查询时没有精确项目，不构成保留</td></tr>
+      <tr><td><a href="https://registry.npmjs.org/text-identifier-core">npm 精确包</a></td><td>HTTP 404</td><td>不代表未来仍可取得</td></tr>
+      <tr><td><a href="https://crates.io/api/v1/crates/text-identifier-core">crates.io 精确 crate</a></td><td>crate does not exist</td><td>不构成包名或权利结论</td></tr>
+      <tr><td><a href="https://api.github.com/search/repositories?q=text-identifier-core+in%3Aname&amp;per_page=100">GitHub 精确仓库名</a></td><td>结果为零</td><td>不排除近似名称、未索引项目或其他权利</td></tr>
+      <tr><td><a href="https://www.gnu.org/software/software.html">GNU 软件目录</a></td><td>没有精确文本</td><td>不代表全部自由软件生态</td></tr>
+    </tbody></table></div>
+    <p>这是标准 ID 的工程可读性和发现性检查，不是商标意见。它也不要求未来以同名发布软件包。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>一次性迁移范围</h2>
+    <div class="table-wrap"><table><thead><tr><th>层</th><th>现行入口</th><th>保持不变</th></tr></thead><tbody>
+      <tr><td>规范与配套资料</td><td><code>text-identifier-core.md</code>、<code>text-identifier-threat-model.md</code>、<code>text-identifier-scenarios.md</code></td><td>十二条职责、十八个场景和失败责任</td></tr>
+      <tr><td>机器登记</td><td><code>TEXT-IDENTIFIER-CORE</code>、<code>TEXT-*</code>、<code>TEXT-THREAT</code>、<code>TEXT-SCEN</code></td><td>版本、成熟度、诊断码和验证状态</td></tr>
+      <tr><td>一致性材料</td><td><code>vectors/text-identifier/</code> 与 <code>text_identifier_vector_test.py</code></td><td>十二个允许案例与十二个确定拒绝</td></tr>
+      <tr><td>公开入口</td><td><code>/specifications/text-and-identifiers.html</code></td><td>面向读者的“文本与标识符边界”名称</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-band">
+    <h2>思想来源与采用限制</h2>
+    <p>维特根斯坦在《逻辑哲学论》3.321 指出，同一个记号可以被不同符号共有。这里的工程启发只是：相同字母不能保证读者理解同一职责。它不能决定标准 ID、UTF-8、标识符语法或迁移策略；这些仍由命名证据、规范条款、登记和测试共同约束。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0032-deterministic-maker-name-collision.html">← ADR-0032</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

@@ -7,11 +7,11 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、组合闭包、会话契约、证据、授权、身份与组件边界。</p><div class="badges"><span class="badge">ADR-0010—0032</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、组合闭包、会话契约、证据、授权、身份与组件边界。</p><div class="badges"><span class="badge">ADR-0010—0033</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权与伴随边界；<a href="adr-0031-release-name-collision-gate.html">ADR-0031</a>与 <a href="adr-0032-deterministic-maker-name-collision.html">ADR-0032</a>处理发布名称冲突和直接迁移。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权与伴随边界；<a href="adr-0031-release-name-collision-gate.html">ADR-0031</a>至 <a href="adr-0033-text-identifier-specification-name.html">ADR-0033</a>处理发布名称与标准 ID 的冲突和直接迁移。</p>
     <p>ADR-0008 与 ADR-0009 只保存公开迁移历史。更早、无入口且与现行决策源重复的内部 ADR 副本已经删除，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -38,11 +38,12 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0025-structured-diagnostics.html">ADR-0025 结构化诊断边界</a></td><td>Accepted Design</td><td>由 DIA-CORE 固定跨对象诊断身份、语境、层次、位置、主错误、恢复和安全边界；诊断不成为结果、权限或自动修复命令。</td></tr>
       <tr><td><a href="adr-0026-external-protocol-adapters.html">ADR-0026 外部协议适配边界</a></td><td>Accepted Draft</td><td>由 ADP-CORE 固定协议版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付和安全边界；具体协议 Profile 仍未冻结。</td></tr>
       <tr><td><a href="adr-0027-exact-identity-and-attestation.html">ADR-0027 精确内容身份与签名边界</a></td><td>Accepted Draft</td><td>由 ID-CORE 固定跨制品精确身份、不可变引用、签名陈述、验证材料、撤销、可复现性与派生关系；算法和物理 Profile 仍未冻结。</td></tr>
-      <tr><td><a href="adr-0028-text-and-identifier-boundaries.html">ADR-0028 文本与标识符边界</a></td><td>Accepted Draft</td><td>由 TXT-CORE 固定文本槽、严格 UTF-8、来源溯源、ASCII 标识符、规范化、比较、范围、双向显示、隐藏字符、模型输入与显示边界；不增加物理字段。</td></tr>
+      <tr><td><a href="adr-0028-text-and-identifier-boundaries.html">ADR-0028 文本与标识符边界</a></td><td>Accepted Draft</td><td>由 TEXT-IDENTIFIER-CORE 固定文本槽、严格 UTF-8、来源溯源、ASCII 标识符、规范化、比较、范围、双向显示、隐藏字符、模型输入与显示边界；不增加物理字段。</td></tr>
       <tr><td><a href="adr-0029-authority-and-authorization-decisions.html">ADR-0029 权威与授权决定边界</a></td><td>Accepted Draft</td><td>由 AUT-CORE 固定权威语境、主体资格、范围、自然语言授权、委托、同意、多人决定、撤销、重放、能力交集和结果分离；不创建新制品或政策引擎。</td></tr>
       <tr><td><a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030 Endem 内容与授权伴随关系</a></td><td>Accepted Draft</td><td>修正内容身份与授权决定混合问题；P1 权威字段只作选择器，完整内容接受需要外部前置条件，授权变化不改写内容身份。</td></tr>
       <tr><td><a href="adr-0031-release-name-collision-gate.html">ADR-0031 发布名称冲突门禁</a></td><td>Accepted</td><td>采用 Iknem 与 Drasor/drase，保持职责和不变量不变；当前阶段直接替换，不保留旧入口、别名或重定向。</td></tr>
       <tr><td><a href="adr-0032-deterministic-maker-name-collision.html">ADR-0032 确定性制作名称冲突</a></td><td>Accepted</td><td>采用 Ktisor/ktise，修复对公开动作大小写无关筛查的遗漏；同时记录八个动作并不具有相同实现成熟度。</td></tr>
+      <tr><td><a href="adr-0033-text-identifier-specification-name.html">ADR-0033 文本与标识符标准命名</a></td><td>Accepted</td><td>采用 TEXT-IDENTIFIER-CORE，消除把跨制品文本边界误读为 <code>.txt</code> 文件或原始文件规范的歧义。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -57,7 +58,7 @@ permalink: "/architecture/decisions.html"
       <tr><td>一次运行的只读契约</td><td>Dromen 按 DRO-CORE 只绑定一个 Drase 会话；实时秘密和句柄外置，实质漂移使旧契约失效，记录不能恢复权限。</td><td>Drasor、最小能力域、预算、观察责任、失效和销毁。</td></tr>
       <tr><td>有限证据主张</td><td>Iknem 按 IKN-CORE 保存精确主体、范围、溯源、phain、主张和限制；有效性、覆盖度与决定外置。</td><td>来源、绑定、签名、运行、验收、撤销、隐私与审计。</td></tr>
       <tr><td>失败可被稳定处理</td><td>DIA-CORE 让机器码与消息分开，固定生产语境并确定性选择主错误；外部错误和恢复建议不能越权改写本地结果或权限。</td><td>Ktisor、Theor、Drasor、协议适配器、自动化与人工审查。</td></tr>
-      <tr><td>文本职责保持分层</td><td>TXT-CORE 分开来源字节、解码文本、机器标识符、人类显示与模型实际输入；当前结构标识符保持 ASCII 且不做隐式规范化。</td><td>Ktisor 来源、诊断位置、身份比较、安全审查、模型候选和未来界面。</td></tr>
+      <tr><td>文本职责保持分层</td><td>TEXT-IDENTIFIER-CORE 分开来源字节、解码文本、机器标识符、人类显示与模型实际输入；当前结构标识符保持 ASCII 且不做隐式规范化。</td><td>Ktisor 来源、诊断位置、身份比较、安全审查、模型候选和未来界面。</td></tr>
       <tr><td>权威与授权保持有界</td><td>AUT-CORE 分开认证、角色资格、语义授权、能力授予与最终决定；grant/deny/defer 只回答精确请求是否获准。</td><td>自然语言候选复核、Dromen 建立、Agent 委托、同意、多人决定、撤销与重放。</td></tr>
       <tr><td>唯一 CLI</td><td><code>endem</code> 提供 ktise/elenk/pleko/tasse/sphra/theor/drase/peira。</td><td>应用项目、手册、安装包和自动化接口。</td></tr>
       <tr><td>独立与隔离</td><td>theor 不共享生产解析；drase 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>

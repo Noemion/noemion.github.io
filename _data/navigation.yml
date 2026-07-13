@@ -115,6 +115,7 @@ modules:
           - { href: /architecture/adr-0030-endem-content-and-authorization-companions.html, label: "ADR-0030 · 内容与授权伴随关系" }
           - { href: /architecture/adr-0031-release-name-collision-gate.html, label: "ADR-0031 · 发布名称冲突门禁" }
           - { href: /architecture/adr-0032-deterministic-maker-name-collision.html, label: "ADR-0032 · 确定性制作名称冲突" }
+          - { href: /architecture/adr-0033-text-identifier-specification-name.html, label: "ADR-0033 · 文本与标识符标准命名" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:
@@ -126,7 +127,7 @@ modules:
           - { href: /specifications/diagnostics.html, label: 结构化诊断 }
           - { href: /specifications/adapters.html, label: 外部协议适配 }
           - { href: /specifications/identity.html, label: 精确内容身份与签名 }
-          - { href: /specifications/text.html, label: 文本与标识符边界 }
+          - { href: /specifications/text-and-identifiers.html, label: 文本与标识符边界 }
           - { href: /specifications/authority.html, label: 权威与授权决定 }
       - label: 系统组件
         items:

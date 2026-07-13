@@ -5,28 +5,28 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VECTOR_PATH = ROOT / "vectors" / "text" / "cases.json"
+VECTOR_PATH = ROOT / "vectors" / "text-identifier" / "cases.json"
 CATALOG_PATH = ROOT / "spec" / "diagnostic-catalog.md"
 REGISTRY_PATH = ROOT / "spec" / "registry.json"
-CASE_ID = re.compile(r"^TXT-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
+CASE_ID = re.compile(r"^TEXT-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
 CLAUSES = {
-    "TXT-SLT-001", "TXT-ENC-001", "TXT-SRC-001", "TXT-IDN-001",
-    "TXT-NRM-001", "TXT-CMP-001", "TXT-RNG-001", "TXT-BID-001",
-    "TXT-HID-001", "TXT-MET-001", "TXT-AIM-001", "TXT-OUT-001",
+    "TEXT-SLT-001", "TEXT-ENC-001", "TEXT-SRC-001", "TEXT-IDN-001",
+    "TEXT-NRM-001", "TEXT-CMP-001", "TEXT-RNG-001", "TEXT-BID-001",
+    "TEXT-HID-001", "TEXT-MET-001", "TEXT-AIM-001", "TEXT-OUT-001",
 }
 DIAGNOSTIC_BY_CLAUSE = {
-    "TXT-SLT-001": "text.slot.untyped",
-    "TXT-ENC-001": "text.encoding.invalid",
-    "TXT-SRC-001": "text.source.provenance_incomplete",
-    "TXT-IDN-001": "text.identifier.out_of_profile",
-    "TXT-NRM-001": "text.normalization.implicit",
-    "TXT-CMP-001": "text.comparison.domain_unbound",
-    "TXT-RNG-001": "text.range.unit_mismatch",
-    "TXT-BID-001": "text.bidi.boundary_hidden",
-    "TXT-HID-001": "text.hidden.silent",
-    "TXT-MET-001": "text.metadata.overclaimed",
-    "TXT-AIM-001": "text.model.view_unbound",
-    "TXT-OUT-001": "text.output.provenance_missing",
+    "TEXT-SLT-001": "text.slot.untyped",
+    "TEXT-ENC-001": "text.encoding.invalid",
+    "TEXT-SRC-001": "text.source.provenance_incomplete",
+    "TEXT-IDN-001": "text.identifier.out_of_profile",
+    "TEXT-NRM-001": "text.normalization.implicit",
+    "TEXT-CMP-001": "text.comparison.domain_unbound",
+    "TEXT-RNG-001": "text.range.unit_mismatch",
+    "TEXT-BID-001": "text.bidi.boundary_hidden",
+    "TEXT-HID-001": "text.hidden.silent",
+    "TEXT-MET-001": "text.metadata.overclaimed",
+    "TEXT-AIM-001": "text.model.view_unbound",
+    "TEXT-OUT-001": "text.output.provenance_missing",
 }
 
 
@@ -45,13 +45,13 @@ def proposal_violation(proposal):
     if (slot.get("kind") not in {"source-content", "structural-identifier", "registered-token", "descriptive-text", "display-message"}
             or not all(slot.get(key) for key in ("profile", "normative_use", "failure_effect"))
             or any(slot.get(key) is not True for key in ("encoding_rules_bound", "comparison_rules_bound", "display_rules_bound"))):
-        return "TXT-SLT-001"
+        return "TEXT-SLT-001"
 
     encoding = proposal.get("encoding", {})
     if (encoding.get("name") != "UTF-8"
             or any(encoding.get(key) is not True for key in ("rfc3629", "valid", "shortest_form", "scalar_values_only", "decoded_before_transform", "invalid_fails_atomic"))
             or encoding.get("implicit_local_encoding") is not False):
-        return "TXT-ENC-001"
+        return "TEXT-ENC-001"
 
     source = proposal.get("source", {})
     if (not all(source.get(key) for key in ("source_byte_identity", "decoded_text_identity", "charset", "decode_profile"))
@@ -61,7 +61,7 @@ def proposal_violation(proposal):
             or source.get("decoded_content_preserved") is not True
             or source.get("claims_raw_byte_preservation") is not False
             or source.get("silent_deletion") is not False):
-        return "TXT-SRC-001"
+        return "TEXT-SRC-001"
 
     identifier = proposal.get("identifier", {})
     if (identifier.get("class") != "ascii-current-profile"
@@ -72,7 +72,7 @@ def proposal_violation(proposal):
             or identifier.get("locale_independent") is not True
             or identifier.get("unicode_extension") is not False
             or identifier.get("confusable_matching") is not False):
-        return "TXT-IDN-001"
+        return "TEXT-IDN-001"
 
     normalization = proposal.get("normalization", {})
     if (not all(normalization.get(key) for key in ("profile", "slot", "unicode_version"))
@@ -82,7 +82,7 @@ def proposal_violation(proposal):
             or normalization.get("changes_create_new_identity") is not True
             or normalization.get("original_preserved") is not True
             or normalization.get("semantic_equivalence_claim") is not False):
-        return "TXT-NRM-001"
+        return "TEXT-NRM-001"
 
     comparison = proposal.get("comparison", {})
     if (not all(comparison.get(key) for key in ("profile", "domain", "unicode_version", "result_scope"))
@@ -91,7 +91,7 @@ def proposal_violation(proposal):
             or comparison.get("normalization") not in {"none", "NFC", "NFD", "NFKC", "NFKD"}
             or comparison.get("confusable_equivalence") is not False
             or comparison.get("locale") == "process-default"):
-        return "TXT-CMP-001"
+        return "TEXT-CMP-001"
 
     text_range = proposal.get("range", {})
     if (not all(text_range.get(key) for key in ("subject_identity", "representation", "unit"))
@@ -102,7 +102,7 @@ def proposal_violation(proposal):
             or text_range.get("checked_arithmetic") is not True
             or text_range.get("transform_map") not in {None, "explicit"}
             or any(text_range.get(key) is not False for key in ("bytes_as_scalars", "graphemes_as_scalars", "tokens_as_scalars"))):
-        return "TXT-RNG-001"
+        return "TEXT-RNG-001"
 
     bidi = proposal.get("bidi", {})
     if (bidi.get("storage_order") != "logical"
@@ -111,7 +111,7 @@ def proposal_violation(proposal):
             or bidi.get("structural_controls_allowed") is not False
             or bidi.get("display_order_used_for_identity") is not False
             or bidi.get("display_rewrites_storage") is not False):
-        return "TXT-BID-001"
+        return "TEXT-BID-001"
 
     hidden = proposal.get("hidden", {})
     if (not hidden.get("unicode_version")
@@ -123,7 +123,7 @@ def proposal_violation(proposal):
             or hidden.get("warning_is_identity") is not False
             or hidden.get("skeleton_is_identity") is not False
             or hidden.get("auto_rewrite") is not False):
-        return "TXT-HID-001"
+        return "TEXT-HID-001"
 
     metadata = proposal.get("metadata", {})
     if (not all(metadata.get(key) for key in ("language_tag", "media_type"))
@@ -133,7 +133,7 @@ def proposal_violation(proposal):
             or metadata.get("unicode_version_pinned") is not True
             or metadata.get("language_transform_profile") is not None
             or metadata.get("model_detection_is_fact") is not False):
-        return "TXT-MET-001"
+        return "TEXT-MET-001"
 
     model = proposal.get("model", {})
     if (not all(model.get(key) for key in ("input_identity", "hidden_inventory_ref", "model_identity", "tokenizer_identity", "display_view_identity"))
@@ -141,13 +141,13 @@ def proposal_violation(proposal):
             or model.get("view_difference_declared") is not True
             or model.get("output_class") != "model-candidate"
             or any(model.get(key) is not False for key in ("may_authorize", "may_write_normative", "may_drop_hidden"))):
-        return "TXT-AIM-001"
+        return "TEXT-AIM-001"
 
     output = proposal.get("output", {})
     if (not all(output.get(key) for key in ("source_identity", "view_profile"))
             or any(output.get(key) is not True for key in ("escaping_declared", "truncation_declared", "normalization_declared", "direction_isolation_declared", "control_visualization_available", "copy_exact_available", "loss_effects_declared"))
             or output.get("display_used_for_binding") is not False):
-        return "TXT-OUT-001"
+        return "TEXT-OUT-001"
     return None
 
 
@@ -161,13 +161,13 @@ def main():
         print(f"cannot load text consistency sources: {exc}")
         return 1
 
-    if vectors.get("vector_format") != "txt-core.vector.v1" or vectors.get("spec") != {"id": "TXT-CORE", "version": "0.1.0-draft"}:
-        errors.append("text vectors must bind TXT-CORE 0.1.0-draft")
+    if vectors.get("vector_format") != "text-identifier-core.vector.v1" or vectors.get("spec") != {"id": "TEXT-IDENTIFIER-CORE", "version": "0.1.0-draft"}:
+        errors.append("text vectors must bind TEXT-IDENTIFIER-CORE 0.1.0-draft")
     description = vectors.get("description", "")
     if "not a Unicode processor" not in description or "not a" not in description:
         errors.append("text vectors must state the non-implementation boundary")
-    if not any(document.get("spec_id") == "TXT-CORE" for document in registry.get("documents", [])):
-        errors.append("registry must contain TXT-CORE")
+    if not any(document.get("spec_id") == "TEXT-IDENTIFIER-CORE" for document in registry.get("documents", [])):
+        errors.append("registry must contain TEXT-IDENTIFIER-CORE")
     for diagnostic in DIAGNOSTIC_BY_CLAUSE.values():
         if f"`{diagnostic}`" not in catalog:
             errors.append(f"diagnostic catalog is missing {diagnostic}")

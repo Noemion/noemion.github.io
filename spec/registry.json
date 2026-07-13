@@ -93,13 +93,13 @@
       "scope": "Cross-artifact exact byte identity, immutable references, algorithm policy, signed statements, verification envelopes, validity, reproducibility and derived-artifact relations"
     },
     {
-      "spec_id": "TXT-CORE",
+      "spec_id": "TEXT-IDENTIFIER-CORE",
       "version": "0.1.0-draft",
       "status": "draft",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "wire_status": "not-applicable",
-      "path": "spec/text-core.md",
+      "path": "spec/text-identifier-core.md",
       "scope": "Cross-artifact text slots, strict UTF-8, source provenance, identifier closure, normalization, comparison, ranges, bidi, hidden characters, metadata, model input and display boundaries"
     },
     {
@@ -234,17 +234,17 @@
       "scope": "Natural-language design-review scenarios for exact identity, attestation, revocation, reproducibility and companion-artifact boundaries"
     },
     {
-      "id": "TXT-THREAT",
+      "id": "TEXT-THREAT",
       "version": "0.1.0-draft",
       "status": "draft",
-      "path": "spec/text-threat-model.md",
+      "path": "spec/text-identifier-threat-model.md",
       "scope": "Text-slot confusion, permissive decoding, source transformation, identifier, normalization, comparison, range, bidi, hidden-character, locale, model-view and display threats"
     },
     {
-      "id": "TXT-SCEN",
+      "id": "TEXT-SCEN",
       "version": "0.1.0-draft",
       "status": "non-normative-design-corpus",
-      "path": "spec/text-scenarios.md",
+      "path": "spec/text-identifier-scenarios.md",
       "scope": "Natural-language design-review scenarios for Unicode text, identifiers, source provenance, normalization, display and model-input boundaries"
     },
     {
@@ -446,18 +446,18 @@
     {"id": "THR-ID-010", "clauses": ["ID-VAL-001"], "evidence_status": "partial"},
     {"id": "THR-ID-011", "clauses": ["ID-REP-001"], "evidence_status": "partial"},
     {"id": "THR-ID-012", "clauses": ["ID-REL-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-001", "clauses": ["TXT-SLT-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-002", "clauses": ["TXT-ENC-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-003", "clauses": ["TXT-SRC-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-004", "clauses": ["TXT-IDN-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-005", "clauses": ["TXT-NRM-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-006", "clauses": ["TXT-CMP-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-007", "clauses": ["TXT-RNG-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-008", "clauses": ["TXT-BID-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-009", "clauses": ["TXT-HID-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-010", "clauses": ["TXT-MET-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-011", "clauses": ["TXT-AIM-001"], "evidence_status": "partial"},
-    {"id": "THR-TXT-012", "clauses": ["TXT-OUT-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-001", "clauses": ["TEXT-SLT-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-002", "clauses": ["TEXT-ENC-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-003", "clauses": ["TEXT-SRC-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-004", "clauses": ["TEXT-IDN-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-005", "clauses": ["TEXT-NRM-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-006", "clauses": ["TEXT-CMP-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-007", "clauses": ["TEXT-RNG-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-008", "clauses": ["TEXT-BID-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-009", "clauses": ["TEXT-HID-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-010", "clauses": ["TEXT-MET-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-011", "clauses": ["TEXT-AIM-001"], "evidence_status": "partial"},
+    {"id": "THR-TEXT-012", "clauses": ["TEXT-OUT-001"], "evidence_status": "partial"},
     {"id": "THR-AUT-001", "clauses": ["AUT-CTX-001"], "evidence_status": "partial"},
     {"id": "THR-AUT-002", "clauses": ["AUT-PRN-001"], "evidence_status": "partial"},
     {"id": "THR-AUT-003", "clauses": ["AUT-SCP-001"], "evidence_status": "partial"},
@@ -2012,146 +2012,146 @@
       ]
     },
     {
-      "id": "TXT-SLT-001",
+      "id": "TEXT-SLT-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "future specification maintainers and every producer or consumer of a text field",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:text-slot-contract"}
       ]
     },
     {
-      "id": "TXT-ENC-001",
+      "id": "TEXT-ENC-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every future text decoder and artifact input boundary",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:strict-utf8-decoding"}
       ]
     },
     {
-      "id": "TXT-SRC-001",
+      "id": "TEXT-SRC-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every future source ingester, transformer and provenance recorder",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:source-text-provenance"}
       ]
     },
     {
-      "id": "TXT-IDN-001",
+      "id": "TEXT-IDN-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every future structural identifier producer and resolver",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:ascii-identifier-closure"}
       ]
     },
     {
-      "id": "TXT-NRM-001",
+      "id": "TEXT-NRM-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every future text transformer and identity consumer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:text-normalization-profile"}
       ]
     },
     {
-      "id": "TXT-CMP-001",
+      "id": "TEXT-CMP-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every future text comparator, resolver and search boundary",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:text-comparison-domain"}
       ]
     },
     {
-      "id": "TXT-RNG-001",
+      "id": "TEXT-RNG-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every future source mapper, diagnostic producer and range consumer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:text-range-unit-binding"}
       ]
     },
     {
-      "id": "TXT-BID-001",
+      "id": "TEXT-BID-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every future text renderer, editor and security review surface",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:bidi-storage-display-separation"}
       ]
     },
     {
-      "id": "TXT-HID-001",
+      "id": "TEXT-HID-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every future source reviewer, model boundary and identifier consumer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:hidden-confusable-inventory"}
       ]
     },
     {
-      "id": "TXT-MET-001",
+      "id": "TEXT-MET-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every future metadata validator and locale-sensitive text operation",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:text-metadata-locale"}
       ]
     },
     {
-      "id": "TXT-AIM-001",
+      "id": "TEXT-AIM-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every future model, retrieval and tokenizer input boundary",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:model-text-view-binding"}
       ]
     },
     {
-      "id": "TXT-OUT-001",
+      "id": "TEXT-OUT-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
       "failure_owner": "every future renderer, logger, exporter and secure-copy path",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/text/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/text_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/text-identifier/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/text_identifier_vector_test.py"},
         {"status": "planned", "ref": "peira:text-display-export-provenance"}
       ]
     },

@@ -55,7 +55,7 @@ badges: ["Authority", "Maturity", "ADR"]
 
 [精确内容身份与签名规范](../specifications/identity.html)解释身份域、精确字节、不可变引用、算法政策、签名陈述、外置验证材料、权威分离、截止点、撤销、可复现性与伴随制品关系。规范源是 [ID-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-core.md)。当前没有冻结发行算法、签名包络或密码组件；SHA-256 只用于提案向量示例。
 
-[文本与标识符边界规范](../specifications/text.html)解释文本槽、严格 UTF-8、来源字节与解码文本、ASCII 结构标识符、规范化、比较、范围、双向显示、隐藏字符、语言元数据、模型实际输入与显示视图。规范源是 [TXT-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/text-core.md)。END-SRCM 当前只保存解码并处理转义后的 `rhem.content`，不证明原始 `.ends` 文件逐字节保真；当前也没有 Unicode 处理器或模型输入网关。
+[文本与标识符边界规范](../specifications/text-and-identifiers.html)解释文本槽、严格 UTF-8、来源字节与解码文本、ASCII 结构标识符、规范化、比较、范围、双向显示、隐藏字符、语言元数据、模型实际输入与显示视图。规范源是 [TEXT-IDENTIFIER-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md)。END-SRCM 当前只保存解码并处理转义后的 `rhem.content`，不证明原始 `.ends` 文件逐字节保真；当前也没有 Unicode 处理器或模型输入网关。
 
 [权威与授权决定规范](../specifications/authority.html)解释谁可以在什么语境和范围内确认自然语言候选、解决 `apor`、委托 Agent、授予能力或作出授权决定。规范源是 [AUT-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md)。`grant / deny / defer` 只回答当前请求是否获准，不替代真值、满足、证据、最终接受或会话终止；当前没有权威目录、政策求值器、同意界面或决定服务。
 

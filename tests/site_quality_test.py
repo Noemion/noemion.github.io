@@ -78,7 +78,7 @@ REQUIRED_CORE_ROUTES = {
     "specifications/diagnostics.html",
     "specifications/adapters.html",
     "specifications/identity.html",
-    "specifications/text.html",
+    "specifications/text-and-identifiers.html",
     "specifications/authority.html",
     "architecture/endem-lifecycle.html",
     "architecture/adr-0010-native-lexicon.html",
@@ -104,6 +104,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0030-endem-content-and-authorization-companions.html",
     "architecture/adr-0031-release-name-collision-gate.html",
     "architecture/adr-0032-deterministic-maker-name-collision.html",
+    "architecture/adr-0033-text-identifier-specification-name.html",
     "components/ktisor.html",
     "components/theor.html",
     "components/drasor.html",
@@ -239,6 +240,16 @@ RETIRED_RELEASE_EVIDENCE_PATHS = {
     "architecture/adr-0032-deterministic-maker-name-collision.html",
     "design-system/name-audit.md",
 }
+RETIRED_TEXT_SPEC_TERMS = re.compile(
+    r"\bTXT(?:-[A-Z]+)*\b|"
+    r"spec/(?:text-core|text-threat-model|text-scenarios)\.md|"
+    r"vectors/text(?!-identifier)|tests/text_vector_test\.py|"
+    r"specifications/text\.html"
+)
+RETIRED_TEXT_SPEC_EVIDENCE_PATHS = {
+    "architecture/adr-0033-text-identifier-specification-name.html",
+    "design-system/name-audit.md",
+}
 NORMATIVE_ROUTES = (
     "specifications/endem.html",
     "specifications/synem.html",
@@ -247,7 +258,7 @@ NORMATIVE_ROUTES = (
     "specifications/diagnostics.html",
     "specifications/adapters.html",
     "specifications/identity.html",
-    "specifications/text.html",
+    "specifications/text-and-identifiers.html",
     "specifications/authority.html",
 )
 CONTENT_LAYOUT_ROUTES = (
@@ -280,6 +291,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0030-endem-content-and-authorization-companions.html",
     "architecture/adr-0031-release-name-collision-gate.html",
     "architecture/adr-0032-deterministic-maker-name-collision.html",
+    "architecture/adr-0033-text-identifier-specification-name.html",
     "architecture/open-questions.html",
     "components/ktisor.html",
     "components/theor.html",
@@ -293,7 +305,7 @@ CONTENT_LAYOUT_ROUTES = (
     "specifications/diagnostics.html",
     "specifications/adapters.html",
     "specifications/identity.html",
-    "specifications/text.html",
+    "specifications/text-and-identifiers.html",
     "specifications/authority.html",
 )
 CONTENT_LAYOUT_CLASSES = {
@@ -523,21 +535,21 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "当前仍未冻结",
         ),
     },
-    "specifications/text.html": {
+    "specifications/text-and-identifiers.html": {
         "required": (
-            "TXT-CORE 0.1.0-draft",
-            "TXT-SLT-001",
-            "TXT-ENC-001",
-            "TXT-SRC-001",
-            "TXT-IDN-001",
-            "TXT-NRM-001",
-            "TXT-CMP-001",
-            "TXT-RNG-001",
-            "TXT-BID-001",
-            "TXT-HID-001",
-            "TXT-MET-001",
-            "TXT-AIM-001",
-            "TXT-OUT-001",
+            "TEXT-IDENTIFIER-CORE 0.1.0-draft",
+            "TEXT-SLT-001",
+            "TEXT-ENC-001",
+            "TEXT-SRC-001",
+            "TEXT-IDN-001",
+            "TEXT-NRM-001",
+            "TEXT-CMP-001",
+            "TEXT-RNG-001",
+            "TEXT-BID-001",
+            "TEXT-HID-001",
+            "TEXT-MET-001",
+            "TEXT-AIM-001",
+            "TEXT-OUT-001",
             "当前仍未冻结",
         ),
     },
@@ -590,6 +602,18 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "不保留别名、重定向、双写或兼容垫片",
             "动作名称不等于实现优先级",
             "peira",
+        ),
+    },
+    "architecture/adr-0033-text-identifier-specification-name.html": {
+        "required": (
+            "TEXT-IDENTIFIER-CORE",
+            "TXT-CORE",
+            "不是 <code>.txt</code> 文件格式",
+            "TEXT-CORE",
+            "TIB-CORE",
+            "不保留旧路径、别名、重定向、双写或兼容垫片",
+            "text-identifier-core.md",
+            "vectors/text-identifier/",
         ),
     },
     "endem/docs/safety.html": {
@@ -1073,6 +1097,13 @@ def validate_legacy_source_vocabulary():
                     f"{relative}: retired release terminology remains outside accepted naming evidence "
                     f"{retired_match.group(0)!r}"
                 )
+        if not relative.startswith("tests/") and relative not in RETIRED_TEXT_SPEC_EVIDENCE_PATHS:
+            retired_text_match = RETIRED_TEXT_SPEC_TERMS.search(text)
+            if retired_text_match:
+                errors.append(
+                    f"{relative}: retired text specification terminology remains outside ADR-0033 and the name audit "
+                    f"{retired_text_match.group(0)!r}"
+                )
         if DEPRECATED_LAYOUT_TERM in text.lower():
             errors.append(f"{relative}: retains the deprecated generic lead-layout term")
     return errors
@@ -1350,6 +1381,49 @@ def validate_jekyll_sources():
             if "state-change-and-causal-attribution-proposal.md" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the causation research proposal"
+                )
+
+    preview_proposal = SOURCE_ROOT / "spec" / "preview-simulation-and-approval-proposal.md"
+    if not preview_proposal.exists():
+        errors.append("missing non-normative preview, simulation, and approval research proposal")
+    else:
+        proposal_text = preview_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
+            "不创建新制品、文件格式、扩展名、命令、组件、结果域、稳定接口或哲学专名",
+            "不进入 `registry.json`",
+            "六类事实必须分开",
+            "GNU Make",
+            "MCP 2025-11-25",
+            "A2A 1.0.0",
+            "OpenAI Agents SDK",
+            "NIST AI 600-1",
+            "预览",
+            "模拟或 dry-run",
+            "授权决定",
+            "执行尝试",
+            "事后观察",
+            "威胁到失败责任的映射",
+            "失败域与结果隔离",
+            "候选责任的唯一主归属",
+            "等待决定",
+        ):
+            if token not in proposal_text:
+                errors.append(f"preview and approval proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "preview-simulation-and-approval" in registry_text:
+            errors.append("non-normative preview and approval proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "specifications" / "authority.html",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+        ):
+            if "preview-simulation-and-approval-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the preview and approval research proposal"
                 )
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
@@ -1947,6 +2021,11 @@ def validate_jekyll_sources():
             "Ktisor",
             "ktise",
             "ADR-0032",
+            "TEXT-IDENTIFIER-CORE",
+            "TXT-CORE",
+            "TEXT-CORE",
+            "TIB-CORE",
+            "ADR-0033",
         ):
             if token not in name_audit_text:
                 errors.append(f"name audit missing evidence or boundary: {token!r}")

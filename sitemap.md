@@ -46,6 +46,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0030](https://noemion.github.io/architecture/adr-0030-endem-content-and-authorization-companions.html) — stable Endem content identity, untrusted authority selectors, external authorization prerequisites, and companion relations
 - [ADR-0031](https://noemion.github.io/architecture/adr-0031-release-name-collision-gate.html) — release-name collision evidence, Iknem and Drasor/drase selection, and one-time migration without compatibility aliases
 - [ADR-0032](https://noemion.github.io/architecture/adr-0032-deterministic-maker-name-collision.html) — exact action-name collision evidence, Ktisor/ktise selection, action maturity, and direct replacement boundaries
+- [ADR-0033](https://noemion.github.io/architecture/adr-0033-text-identifier-specification-name.html) — explicit text-and-identifier standard naming, rejected ambiguous candidates, and one-time route and registry migration
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Ktisor, Theor, and Drasor responsibility boundaries
 - [Ktisor](https://noemion.github.io/components/ktisor.html) — deterministic Endem formation, checking, binding, and packing boundary
@@ -62,7 +63,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Structured diagnostics](https://noemion.github.io/specifications/diagnostics.html) — cross-object machine identity, locations, recovery, safety, and result-domain separation
 - [External protocol adapters](https://noemion.github.io/specifications/adapters.html) — version pinning, peer trust, capability intersection, state separation, retry, delivery, and security boundaries
 - [Exact identity and attestation](https://noemion.github.io/specifications/identity.html) — cross-artifact byte identity, signed statements, validity cutoffs, reproducibility, and companion relations
-- [Text and identifier boundaries](https://noemion.github.io/specifications/text.html) — strict UTF-8, source provenance, ASCII identifiers, comparison, ranges, bidi, hidden characters, model input, and display views
+- [Text and identifier boundaries](https://noemion.github.io/specifications/text-and-identifiers.html) — strict UTF-8, source provenance, ASCII identifiers, comparison, ranges, bidi, hidden characters, model input, and display views
 - [Authority and authorization decisions](https://noemion.github.io/specifications/authority.html) — named authority, exact scope, semantic authorization, delegation, consent, revocation, replay, and capability intersection
 
 ## Guides and reference

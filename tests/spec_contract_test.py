@@ -15,7 +15,7 @@ IKNEM_SPEC_PATH = ROOT / "spec" / "iknem-core.md"
 DIAGNOSTIC_SPEC_PATH = ROOT / "spec" / "diagnostics-core.md"
 ADAPTER_SPEC_PATH = ROOT / "spec" / "adapter-core.md"
 IDENTITY_SPEC_PATH = ROOT / "spec" / "identity-core.md"
-TEXT_SPEC_PATH = ROOT / "spec" / "text-core.md"
+TEXT_SPEC_PATH = ROOT / "spec" / "text-identifier-core.md"
 AUTHORITY_SPEC_PATH = ROOT / "spec" / "authority-core.md"
 THREAT_PATHS = (
     ROOT / "spec" / "endem-threat-model.md",
@@ -25,7 +25,7 @@ THREAT_PATHS = (
     ROOT / "spec" / "diagnostic-threat-model.md",
     ROOT / "spec" / "adapter-threat-model.md",
     ROOT / "spec" / "identity-threat-model.md",
-    ROOT / "spec" / "text-threat-model.md",
+    ROOT / "spec" / "text-identifier-threat-model.md",
     ROOT / "spec" / "authority-threat-model.md",
 )
 ERROR_CATALOG_PATH = ROOT / "spec" / "diagnostic-catalog.md"
@@ -36,16 +36,16 @@ IKNEM_SCENARIO_PATH = ROOT / "spec" / "iknem-scenarios.md"
 DIAGNOSTIC_SCENARIO_PATH = ROOT / "spec" / "diagnostic-scenarios.md"
 ADAPTER_SCENARIO_PATH = ROOT / "spec" / "adapter-scenarios.md"
 IDENTITY_SCENARIO_PATH = ROOT / "spec" / "identity-scenarios.md"
-TEXT_SCENARIO_PATH = ROOT / "spec" / "text-scenarios.md"
+TEXT_SCENARIO_PATH = ROOT / "spec" / "text-identifier-scenarios.md"
 AUTHORITY_SCENARIO_PATH = ROOT / "spec" / "authority-scenarios.md"
 PROFILE_PATH = ROOT / "spec" / "profiles" / "end-p0.json"
 VECTOR_ROOT = ROOT / "vectors" / "semantic"
 SCHEMA_PATH = ROOT / "vectors" / "vector.schema.json"
 
-CLAUSE_ID = re.compile(r"^(?:END|SYN|DRO|IKN|DIA|ADP|ID|TXT|AUT)-[A-Z]+-[0-9]{3}$")
+CLAUSE_ID = re.compile(r"^(?:END|SYN|DRO|IKN|DIA|ADP|ID|TEXT|AUT)-[A-Z]+-[0-9]{3}$")
 VECTOR_ID = re.compile(r"^SV-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
-SPEC_HEADING = re.compile(r"^### ((?:END|SYN|DRO|IKN|DIA|ADP|ID|TXT|AUT)-[A-Z]+-[0-9]{3})\s+—", re.MULTILINE)
-THREAT_HEADING = re.compile(r"^### (THR-(?:END|SYN|DRO|IKN|DIA|ADP|ID|TXT|AUT)-[0-9]{3})\s+—", re.MULTILINE)
+SPEC_HEADING = re.compile(r"^### ((?:END|SYN|DRO|IKN|DIA|ADP|ID|TEXT|AUT)-[A-Z]+-[0-9]{3})\s+—", re.MULTILINE)
+THREAT_HEADING = re.compile(r"^### (THR-(?:END|SYN|DRO|IKN|DIA|ADP|ID|TEXT|AUT)-[0-9]{3})\s+—", re.MULTILINE)
 SCENARIO_HEADING = re.compile(r"^### (SCN-[0-9]{3})\s+—", re.MULTILINE)
 REQUIRED_FACETS = ("rhem", "semion", "skena", "telis", "krin", "apor")
 ALLOWED_VERIFICATION_STATUS = {"covered-by-repo", "planned", "manual-authority"}
@@ -115,10 +115,10 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 "implementation_status": "vector-checker-only", "wire_status": "unfrozen",
                 "path": "spec/identity-core.md",
             },
-            "TXT-CORE": {
+            "TEXT-IDENTIFIER-CORE": {
                 "version": "0.1.0-draft", "status": "draft",
                 "implementation_status": "vector-checker-only", "wire_status": "not-applicable",
-                "path": "spec/text-core.md",
+                "path": "spec/text-identifier-core.md",
             },
             "AUT-CORE": {
                 "version": "0.1.0-draft", "status": "draft",
@@ -127,7 +127,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             },
         }
         if set(documents_by_id) != set(expected_documents):
-            errors.append("spec/registry.json: document IDs must include END, SYN, DRO, IKN, DIA, ADP, ID, TXT and AUT current specifications")
+            errors.append("spec/registry.json: document IDs must include END, SYN, DRO, IKN, DIA, ADP, ID, TEXT-IDENTIFIER and AUT current specifications")
         for spec_id, expected_document in expected_documents.items():
             document = documents_by_id.get(spec_id, {})
             for key, value in expected_document.items():
@@ -169,8 +169,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
             "ADP-SCEN": "spec/adapter-scenarios.md",
             "ID-THREAT": "spec/identity-threat-model.md",
             "ID-SCEN": "spec/identity-scenarios.md",
-            "TXT-THREAT": "spec/text-threat-model.md",
-            "TXT-SCEN": "spec/text-scenarios.md",
+            "TEXT-THREAT": "spec/text-identifier-threat-model.md",
+            "TEXT-SCEN": "spec/text-identifier-scenarios.md",
             "AUT-THREAT": "spec/authority-threat-model.md",
             "AUT-SCEN": "spec/authority-scenarios.md",
         }
@@ -196,8 +196,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: ADP-SCEN must remain a non-normative design corpus")
         if supporting_by_id.get("ID-SCEN", {}).get("status") != "non-normative-design-corpus":
             errors.append("spec/registry.json: ID-SCEN must remain a non-normative design corpus")
-        if supporting_by_id.get("TXT-SCEN", {}).get("status") != "non-normative-design-corpus":
-            errors.append("spec/registry.json: TXT-SCEN must remain a non-normative design corpus")
+        if supporting_by_id.get("TEXT-SCEN", {}).get("status") != "non-normative-design-corpus":
+            errors.append("spec/registry.json: TEXT-SCEN must remain a non-normative design corpus")
         if supporting_by_id.get("AUT-SCEN", {}).get("status") != "non-normative-design-corpus":
             errors.append("spec/registry.json: AUT-SCEN must remain a non-normative design corpus")
 
@@ -328,7 +328,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             )
         for threat in threats:
             threat_id = threat.get("id", "<unknown>")
-            if not re.fullmatch(r"THR-(?:END|SYN|DRO|IKN|DIA|ADP|ID|TXT|AUT)-[0-9]{3}", threat_id):
+            if not re.fullmatch(r"THR-(?:END|SYN|DRO|IKN|DIA|ADP|ID|TEXT|AUT)-[0-9]{3}", threat_id):
                 errors.append(f"spec/registry.json: invalid threat ID {threat_id!r}")
             mapped_clauses = threat.get("clauses")
             if not isinstance(mapped_clauses, list) or not mapped_clauses:
@@ -354,7 +354,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             expected_implementation = "vector-checker-only"
         elif clause_id.startswith("END-SRCM-"):
             expected_implementation = "vector-checker-only"
-        elif clause_id.startswith(("DIA-", "ADP-", "ID-", "TXT-", "AUT-")):
+        elif clause_id.startswith(("DIA-", "ADP-", "ID-", "TEXT-", "AUT-")):
             expected_implementation = "vector-checker-only"
         else:
             expected_implementation = "unimplemented"
@@ -531,7 +531,7 @@ def validate_public_boundary(errors):
         errors.append("Pages workflow must execute external protocol adapter vectors")
     if "python3 tests/identity_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute exact identity and attestation vectors")
-    if "python3 tests/text_vector_test.py" not in workflow_text:
+    if "python3 tests/text_identifier_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute text and identifier vectors")
     if "python3 tests/authority_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute authority and authorization vectors")
@@ -580,9 +580,9 @@ def validate_public_boundary(errors):
             "ID-CORE 0.1.0-draft",
             "spec/identity-core.md",
             "vectors/identity",
-            "TXT-CORE 0.1.0-draft",
-            "spec/text-core.md",
-            "vectors/text",
+            "TEXT-IDENTIFIER-CORE 0.1.0-draft",
+            "spec/text-identifier-core.md",
+            "vectors/text-identifier",
             "AUT-CORE 0.1.0-draft",
             "spec/authority-core.md",
             "spec/authority-threat-model.md",
@@ -816,7 +816,7 @@ def validate_public_boundary(errors):
             "当前没有摘要器",
         ),
         "architecture/adr-0028-text-and-identifier-boundaries.html": (
-            "TXT-CORE 0.1.0-draft",
+            "TEXT-IDENTIFIER-CORE 0.1.0-draft",
             "RFC 3629",
             "UAX #15",
             "UAX #31",
@@ -867,6 +867,16 @@ def validate_public_boundary(errors):
             "不保留别名、重定向、双写或兼容垫片",
             "动作名称不等于实现优先级",
             "peira",
+        ),
+        "architecture/adr-0033-text-identifier-specification-name.html": (
+            "Accepted",
+            "TEXT-IDENTIFIER-CORE",
+            "TXT-CORE",
+            "TEXT-CORE",
+            "TIB-CORE",
+            "不是 <code>.txt</code> 文件格式",
+            "不保留旧路径、别名、重定向、双写或兼容垫片",
+            "vectors/text-identifier/",
         ),
         "specifications/synem.html": (
             "SYN-CORE 0.1.0-draft",
@@ -928,20 +938,20 @@ def validate_public_boundary(errors):
             "24 个",
             "当前仍未冻结",
         ),
-        "specifications/text.html": (
-            "TXT-CORE 0.1.0-draft",
-            "TXT-SLT-001",
-            "TXT-ENC-001",
-            "TXT-SRC-001",
-            "TXT-IDN-001",
-            "TXT-NRM-001",
-            "TXT-CMP-001",
-            "TXT-RNG-001",
-            "TXT-BID-001",
-            "TXT-HID-001",
-            "TXT-MET-001",
-            "TXT-AIM-001",
-            "TXT-OUT-001",
+        "specifications/text-and-identifiers.html": (
+            "TEXT-IDENTIFIER-CORE 0.1.0-draft",
+            "TEXT-SLT-001",
+            "TEXT-ENC-001",
+            "TEXT-SRC-001",
+            "TEXT-IDN-001",
+            "TEXT-NRM-001",
+            "TEXT-CMP-001",
+            "TEXT-RNG-001",
+            "TEXT-BID-001",
+            "TEXT-HID-001",
+            "TEXT-MET-001",
+            "TEXT-AIM-001",
+            "TEXT-OUT-001",
             "当前仍未冻结",
         ),
         "specifications/authority.html": (
@@ -1039,7 +1049,7 @@ def main():
     try:
         text_scenario_text = TEXT_SCENARIO_PATH.read_text()
     except OSError as exc:
-        errors.append(f"spec/text-scenarios.md: cannot read: {exc}")
+        errors.append(f"spec/text-identifier-scenarios.md: cannot read: {exc}")
         text_scenario_text = ""
     try:
         authority_scenario_text = AUTHORITY_SCENARIO_PATH.read_text()
@@ -1125,12 +1135,12 @@ def main():
         if token not in identity_scenario_text:
             errors.append(f"spec/identity-scenarios.md: missing design-review boundary {token!r}")
 
-    text_scenario_ids = re.findall(r"^### (TXT-SCN-[0-9]{3})\s+—", text_scenario_text, re.MULTILINE)
-    if text_scenario_ids != [f"TXT-SCN-{index:03d}" for index in range(1, 19)]:
-        errors.append("spec/text-scenarios.md: scenario IDs must be unique and ordered TXT-SCN-001 through TXT-SCN-018")
+    text_scenario_ids = re.findall(r"^### (TEXT-SCN-[0-9]{3})\s+—", text_scenario_text, re.MULTILINE)
+    if text_scenario_ids != [f"TEXT-SCN-{index:03d}" for index in range(1, 19)]:
+        errors.append("spec/text-identifier-scenarios.md: scenario IDs must be unique and ordered TEXT-SCN-001 through TEXT-SCN-018")
     for token in ("同一字符串位于不同文本槽", "解码必须原子失败", "不等于保存来源清单的原始字节", "当前 ASCII 语法直接拒绝", "不得盲目做 NFKC", "END-P1 范围按标量计数", "安全审查视图显示控制符名称和位置", "模型输入身份、预处理链、隐藏字符清单和显示视图必须共同记录"):
         if token not in text_scenario_text:
-            errors.append(f"spec/text-scenarios.md: missing design-review boundary {token!r}")
+            errors.append(f"spec/text-identifier-scenarios.md: missing design-review boundary {token!r}")
 
     authority_scenario_ids = re.findall(r"^### (AUT-SCN-[0-9]{3})\s+—", authority_scenario_text, re.MULTILINE)
     if authority_scenario_ids != [f"AUT-SCN-{index:03d}" for index in range(1, 19)]:
@@ -1150,7 +1160,7 @@ def main():
         print("\n".join(errors))
         return 1
     print(
-        "PASS: END-CORE, END-FMT, END-SRCM, SYN-CORE, DRO-CORE, IKN-CORE, DIA-CORE, ADP-CORE, ID-CORE, TXT-CORE and AUT-CORE 0.1.0-draft have unique clauses, explicit "
+        "PASS: END-CORE, END-FMT, END-SRCM, SYN-CORE, DRO-CORE, IKN-CORE, DIA-CORE, ADP-CORE, ID-CORE, TEXT-IDENTIFIER-CORE and AUT-CORE 0.1.0-draft have unique clauses, explicit "
         "maturity, traceable evidence, 99 registered threats, executed semantic "
         "vectors, 30 natural-language design scenarios, 12 result-domain vectors, "
         "12 mene time and continuity vectors, 12 negation and absence vectors, "

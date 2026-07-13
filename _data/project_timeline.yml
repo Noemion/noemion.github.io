@@ -43,7 +43,7 @@ items:
     state: current
     label: 正在进行
     title: 规范分层与证据边界验证
-    description: 当前只完善 END-CORE 内容标准、Profile、Synem、Dromen、Iknem、DIA-CORE、ADP-CORE、ID-CORE、TXT-CORE、AUT-CORE、威胁模型、自然语言场景与正反向量；这些检查不表示任何组件已经实现。
+    description: 当前只完善 END-CORE 内容标准、Profile、Synem、Dromen、Iknem、DIA-CORE、ADP-CORE、ID-CORE、TEXT-IDENTIFIER-CORE、AUT-CORE、威胁模型、自然语言场景与正反向量；这些检查不表示任何组件已经实现。
   - id: synem-binding-release
     state: future
     label: 后续规划

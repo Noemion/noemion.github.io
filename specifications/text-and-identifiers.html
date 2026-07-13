@@ -3,18 +3,18 @@ layout: default
 title: "文本与标识符边界规范"
 page_role: "content"
 footer_text: "Noemion · Text and Identifier Boundaries"
-permalink: "/specifications/text.html"
+permalink: "/specifications/text-and-identifiers.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>文本与标识符边界</span></nav>
-  <header class="content-introduction"><h1>文本与标识符边界</h1><p>定义系统怎样接收、比较、定位、显示和提交 Unicode 文本，并保证人类复核的内容与模型实际取得的内容可以核对。</p><div class="badges"><span class="badge">TXT-CORE 0.1.0-draft</span><span class="badge">12 Clauses</span><span class="badge">24 Vectors</span><span class="badge">No Unicode Code</span></div></header>
+  <header class="content-introduction"><h1>文本与标识符边界</h1><p>定义系统怎样接收、比较、定位、显示和提交 Unicode 文本，并保证人类复核的内容与模型实际取得的内容可以核对。</p><div class="badges"><span class="badge">TEXT-IDENTIFIER-CORE 0.1.0-draft</span><span class="badge">12 Clauses</span><span class="badge">24 Vectors</span><span class="badge">No Unicode Code</span></div></header>
 
   <section class="content-stack">
     <h2>它解决什么问题</h2>
     <p class="lead">看起来相同的文字不一定是相同字节、相同码点或相同意义。机器实际读取的内容也可能与审核者在屏幕上看到的内容不同。</p>
-    <p>TXT-CORE 给现有字符串字段建立共同边界。它分开来源字节、解码文本、结构标识符、规范化结果、比较规则、文本范围、显示视图和模型输入。</p>
+    <p>TEXT-IDENTIFIER-CORE 给现有字符串字段建立共同边界。它分开来源字节、解码文本、结构标识符、规范化结果、比较规则、文本范围、显示视图和模型输入。</p>
     <p>当前已接受十二条跨制品文本边界。未来生产者和使用者必须明确自己处理哪一层，不得让显示、搜索、同形提示、语言标签或模型相似度替代精确机器内容与授权意义。</p>
-    <p class="callout"><strong>权威边界：</strong>实现义务以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-core.md">TXT-CORE 条款源</a>为准。当前没有 Unicode 处理器、规范化器、同形检测器、模型输入网关或新的文本格式。</p>
+    <p class="callout"><strong>权威边界：</strong>实现义务以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md">TEXT-IDENTIFIER-CORE 条款源</a>为准。当前没有 Unicode 处理器、规范化器、同形检测器、模型输入网关或新的文本格式。</p>
   </section>
 
   <section class="content-wide">
@@ -31,18 +31,18 @@ permalink: "/specifications/text.html"
   <section class="content-wide">
     <h2>十二条文本规则</h2>
     <div class="table-wrap"><table><thead><tr><th>规则</th><th>直白要求</th><th>必须拒绝</th></tr></thead><tbody>
-      <tr><td><code>TXT-SLT-001</code></td><td>每个字符串字段先声明文本槽和失败责任</td><td>把来源正文、本地化消息和机器标识符混用</td></tr>
-      <tr><td><code>TXT-ENC-001</code></td><td>输入先按 RFC 3629 严格解码 UTF-8</td><td>过长编码、代理项、非法标量和本地编码猜测</td></tr>
-      <tr><td><code>TXT-SRC-001</code></td><td>分开来源字节、解码文本、变换和损失</td><td>把 END-SRCM 解码内容称为原文件逐字节副本</td></tr>
-      <tr><td><code>TXT-IDN-001</code></td><td>当前结构标识符保持封闭 ASCII Profile</td><td>Unicode 同形、默认 locale 和静默大小写折叠</td></tr>
-      <tr><td><code>TXT-NRM-001</code></td><td>规范化必须绑定文本槽、Unicode 版本和身份影响</td><td>盲目 NFC、NFKC 或覆盖原文</td></tr>
-      <tr><td><code>TXT-CMP-001</code></td><td>每次比较明确字节、标量、规范化或排序域</td><td>搜索命中、同形骨架或模型相似度替代精确相等</td></tr>
-      <tr><td><code>TXT-RNG-001</code></td><td>范围绑定精确主体、表示和 Unicode 标量单位</td><td>混用字节、UTF-16、字素、屏幕列和模型 token</td></tr>
-      <tr><td><code>TXT-BID-001</code></td><td>逻辑存储顺序与双向显示顺序分开</td><td>视觉顺序参与身份或安全相关方向控制被隐藏</td></tr>
-      <tr><td><code>TXT-HID-001</code></td><td>不可见字符与同形风险可被盘点和显式审查</td><td>静默删除、自动合并身份或仅凭警告判断恶意</td></tr>
-      <tr><td><code>TXT-MET-001</code></td><td>语言、媒体、方向和 locale 元数据只承担声明</td><td>自报语言触发未登记变换或取得语义权威</td></tr>
-      <tr><td><code>TXT-AIM-001</code></td><td>绑定模型实际输入、预处理、tokenizer 和复核视图</td><td>人看清洗文本而模型接收另一组码点</td></tr>
-      <tr><td><code>TXT-OUT-001</code></td><td>显示、复制和导出披露转义、截断、脱敏与方向处理</td><td>短显示或经过清洗的界面文本充当安全引用</td></tr>
+      <tr><td><code>TEXT-SLT-001</code></td><td>每个字符串字段先声明文本槽和失败责任</td><td>把来源正文、本地化消息和机器标识符混用</td></tr>
+      <tr><td><code>TEXT-ENC-001</code></td><td>输入先按 RFC 3629 严格解码 UTF-8</td><td>过长编码、代理项、非法标量和本地编码猜测</td></tr>
+      <tr><td><code>TEXT-SRC-001</code></td><td>分开来源字节、解码文本、变换和损失</td><td>把 END-SRCM 解码内容称为原文件逐字节副本</td></tr>
+      <tr><td><code>TEXT-IDN-001</code></td><td>当前结构标识符保持封闭 ASCII Profile</td><td>Unicode 同形、默认 locale 和静默大小写折叠</td></tr>
+      <tr><td><code>TEXT-NRM-001</code></td><td>规范化必须绑定文本槽、Unicode 版本和身份影响</td><td>盲目 NFC、NFKC 或覆盖原文</td></tr>
+      <tr><td><code>TEXT-CMP-001</code></td><td>每次比较明确字节、标量、规范化或排序域</td><td>搜索命中、同形骨架或模型相似度替代精确相等</td></tr>
+      <tr><td><code>TEXT-RNG-001</code></td><td>范围绑定精确主体、表示和 Unicode 标量单位</td><td>混用字节、UTF-16、字素、屏幕列和模型 token</td></tr>
+      <tr><td><code>TEXT-BID-001</code></td><td>逻辑存储顺序与双向显示顺序分开</td><td>视觉顺序参与身份或安全相关方向控制被隐藏</td></tr>
+      <tr><td><code>TEXT-HID-001</code></td><td>不可见字符与同形风险可被盘点和显式审查</td><td>静默删除、自动合并身份或仅凭警告判断恶意</td></tr>
+      <tr><td><code>TEXT-MET-001</code></td><td>语言、媒体、方向和 locale 元数据只承担声明</td><td>自报语言触发未登记变换或取得语义权威</td></tr>
+      <tr><td><code>TEXT-AIM-001</code></td><td>绑定模型实际输入、预处理、tokenizer 和复核视图</td><td>人看清洗文本而模型接收另一组码点</td></tr>
+      <tr><td><code>TEXT-OUT-001</code></td><td>显示、复制和导出披露转义、截断、脱敏与方向处理</td><td>短显示或经过清洗的界面文本充当安全引用</td></tr>
     </tbody></table></div>
   </section>
 
@@ -61,9 +61,9 @@ permalink: "/specifications/text.html"
   <section class="content-wide">
     <h2>符合性材料</h2>
     <div class="table-wrap"><table><thead><tr><th>材料</th><th>当前覆盖</th><th>不能证明</th></tr></thead><tbody>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-threat-model.md">TXT-THREAT</a></td><td>12 类编码、规范化、范围、双向显示、隐藏字符和模型视图威胁</td><td>Unicode 处理库、界面或模型网关已经安全</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-scenarios.md">TXT-SCEN</a></td><td>18 个支持、反例与未决场景</td><td>场景本身是稳定 Profile 或组件证据</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/text">TXT-CORE 向量</a></td><td>24 个提案包含 12 个允许案例与 12 个确定拒绝</td><td>解码器、规范化器、同形检测器或模型输入网关已经实现</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-threat-model.md">TEXT-THREAT</a></td><td>12 类编码、规范化、范围、双向显示、隐藏字符和模型视图威胁</td><td>Unicode 处理库、界面或模型网关已经安全</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-scenarios.md">TEXT-SCEN</a></td><td>18 个支持、反例与未决场景</td><td>场景本身是稳定 Profile 或组件证据</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/text-identifier">TEXT-IDENTIFIER-CORE 向量</a></td><td>24 个提案包含 12 个允许案例与 12 个确定拒绝</td><td>解码器、规范化器、同形检测器或模型输入网关已经实现</td></tr>
     </tbody></table></div>
   </section>
 
