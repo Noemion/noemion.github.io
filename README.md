@@ -177,6 +177,8 @@ Ktisor 负责确定性的 `ktise`、`elenk`、`pleko` 与 `tasse`；模型不得
 
 预览、模拟与批准的当前边界记录在 [`spec/preview-simulation-and-approval-proposal.md`](spec/preview-simulation-and-approval-proposal.md)。预览只说明决定者看到了什么，dry-run 只说明声明条件下预计什么，grant 只允许精确请求尝试；执行、事后观察、满足与最终决定继续分别判断。该提案不创建预览制品、模拟格式、批准结果域、命令、组件或 CORE，只有用户接受责任分配后才可能修订现有 TEXT-IDENTIFIER、AUT、DRO、ADP、IKN、ID、END 与 DIA。
 
+记忆、检查点与恢复的当前边界记录在 [`spec/memory-checkpoint-and-resumption-proposal.md`](spec/memory-checkpoint-and-resumption-proposal.md)。会话历史只是候选输入，压缩必须披露损失，检查点不是 Dromen 或证据，外部 Task 句柄不证明历史完整，恢复必须重新验证并建立新会话；重放、重试、回滚与补偿分别处理。该提案不创建记忆制品、检查点格式、恢复命令、组件或 CORE，只有用户接受责任分配后才可能修订现有 TEXT-IDENTIFIER、ID、DRO、ADP、AUT、IKN、DIA、END 与 SYN。
+
 技术长文、Endem 应用介绍和手册正文还必须读取 [`design-system/readability.md`](design-system/readability.md)。1200px 是连续画布而不是正文行宽：普通段落保持约 700–760px 阅读列，桌面正文采用 17–18px 与约 1.75–1.8 行高。需要利用右侧空间时，优先形成约 800px 主阅读列与约 380px 粘性信息栏，并从对应页面角色的引言区起让信息栏持续承载章节目录、成熟度、可用状态、关键制品、输入输出或下一阅读入口；没有足够信息时使用单列，不为排版保留空栏。
 
 图片只在能增强概念解释、页面辨识或内容氛围时使用。选择顺序为许可清晰的素材库、经授权的项目素材、项目定制生成图；素材必须下载到仓库并压缩，不能依赖第三方热链。来源、许可、裁切焦点、替代文本和生成提示记录在 [`design-system/images.md`](design-system/images.md)，公开页面不暴露设计参考或模仿关系。
