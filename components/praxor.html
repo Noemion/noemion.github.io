@@ -77,7 +77,7 @@ permalink: "/components/praxor.html"
 
   <section class="content-wide">
     <h2>外部协议适配</h2>
-    <p>MCP、A2A、遥测系统和供应商工具只连接 Praxor 外缘。所有远端描述和返回内容都要先经过本地版本、权限、结构和来源检查。</p>
+    <p>MCP、A2A、遥测系统和供应商工具只连接 Praxor 外缘。所有远端描述和返回内容都要先经过本地版本、权限、结构和来源检查，并遵守 <a href="../specifications/adapters.html">ADP-CORE 外部协议适配边界</a>。</p>
     <div class="table-wrap"><table><thead><tr><th>外部接口</th><th>进入 Praxor 的方式</th><th>本地边界</th></tr></thead><tbody>
       <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 稳定规范</a></td><td>工具说明、参数和结果映射为本地能力请求与观察。</td><td>声明不授予权限；令牌必须绑定目标资源，不能转交给下游服务。后续版本只有完成兼容、安全与降级复核后才进入新适配基线。</td></tr>
       <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a></td><td>Task、Message 与 Artifact 映射为外部任务记录和候选结果。</td><td>外部状态不改变 Endem；Artifact 不是 Tekmor，也不能形成最终决定。</td></tr>

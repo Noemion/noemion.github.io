@@ -49,10 +49,12 @@ badges: ["Authority", "Maturity", "ADR"]
 
 [结构化诊断规范](../specifications/diagnostics.html)解释稳定机器码、生产语境、失败层次、类型化位置、确定性主错误、受限恢复、外部来源、最小披露、资源预算与原子失败。规范源是 [DIA-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md)，草案机器码见 [DIA-CAT](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md)。诊断不是目标结果、证据、权限或自动修复命令；当前没有物理编码或组件实现。
 
+[外部协议适配规范](../specifications/adapters.html)解释协议版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付和安全边界。规范源是 [ADP-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-core.md)。MCP、A2A、HTTP 与 SDK 对象只保持外部来源；当前没有具体协议 Profile、适配器 API 或组件实现。
+
 允许保留的运行观察、失效原因和决定关系进入 Tekmor 或带范围的会话事件。它们不能重新创建 Dromen 或恢复旧权限。
 
 ## ADR 与开放问题
 
-[ADR-0010](../architecture/adr-0010-native-lexicon.html)至 [ADR-0014](../architecture/adr-0014-source-manifest.html)固定现行词汇、Endem 格式、Profile 与来源清单；[ADR-0015](../architecture/adr-0015-result-domains.html)至 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)固定判断、时间、否定、量化、测量与复合边界；[ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html)固定 Synem 组合闭包与条件激活；[ADR-0022](../architecture/adr-0022-tekmor-evidence-and-appraisal.html)固定 Tekmor 证据与评估边界；[ADR-0023](../architecture/adr-0023-endem-content-standard.html)固定内容标准、Profile 与容器的分层；[ADR-0024](../architecture/adr-0024-dromen-session-contract.html)固定 Dromen 会话契约。ADR-0008 和 ADR-0009 只保存被取代的公开设计历史。其余扩展、远端协议适配和发行治理集中在[开放问题](../architecture/open-questions.html)。
+[ADR-0010](../architecture/adr-0010-native-lexicon.html)至 [ADR-0014](../architecture/adr-0014-source-manifest.html)固定现行词汇、Endem 格式、Profile 与来源清单；[ADR-0015](../architecture/adr-0015-result-domains.html)至 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)固定判断、时间、否定、量化、测量与复合边界；[ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html)至 [ADR-0026](../architecture/adr-0026-external-protocol-adapters.html)固定 Synem、Tekmor、内容标准分层、Dromen、诊断和外部协议适配边界。ADR-0008 和 ADR-0009 只保存被取代的公开设计历史。具体协议 Profile、物理编码与发行治理集中在[开放问题](../architecture/open-questions.html)。
 
 面向标准化时，规范还需关联互操作配置、正反向量、一致性测试、安全分析和版本演进。面向研究与知识产权时，还应关联假设、现有技术、实验、贡献与公开披露记录。

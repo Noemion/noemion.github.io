@@ -39,6 +39,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0023](https://noemion.github.io/architecture/adr-0023-endem-content-standard.html) — layered Endem content standard, closed content Profiles, container rules, and conformance boundaries
 - [ADR-0024](https://noemion.github.io/architecture/adr-0024-dromen-session-contract.html) — one-session subject, policy, environment, capability, budget, observation, immutability, and disposal contract
 - [ADR-0025](https://noemion.github.io/architecture/adr-0025-structured-diagnostics.html) — stable diagnostic identity, context, layers, locations, recovery, disclosure, bounds, and atomic failure
+- [ADR-0026](https://noemion.github.io/architecture/adr-0026-external-protocol-adapters.html) — protocol-independent external adapter version, peer, capability, state, retry, delivery, and security boundaries
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
 - [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Praxor responsibility boundaries
 - [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary
@@ -53,6 +54,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Dromen](https://noemion.github.io/specifications/dromen.html) — sealed read-only execution contract for exactly one Praxe session
 - [Tekmor](https://noemion.github.io/specifications/tekmor.html) — scoped evidence, provenance, integrity, and acceptance claims
 - [Structured diagnostics](https://noemion.github.io/specifications/diagnostics.html) — cross-object machine identity, locations, recovery, safety, and result-domain separation
+- [External protocol adapters](https://noemion.github.io/specifications/adapters.html) — version pinning, peer trust, capability intersection, state separation, retry, delivery, and security boundaries
 
 ## Guides and reference
 

@@ -71,6 +71,16 @@
       "wire_status": "unfrozen",
       "path": "spec/diagnostics-core.md",
       "scope": "Cross-object structured diagnostic identity, production context, failure layers, locations, precedence, recovery, external mapping, disclosure, bounds and atomic failure"
+    },
+    {
+      "spec_id": "ADP-CORE",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "wire_status": "not-applicable",
+      "path": "spec/adapter-core.md",
+      "scope": "Protocol-independent Praxor external adapter version, peer, capability, invocation, mapping, state, artifact, error, cancellation, retry, delivery and security boundaries"
     }
   ],
   "supporting_documents": [
@@ -164,6 +174,20 @@
       "status": "experimental-design-profile",
       "path": "spec/profiles/end-p1.json",
       "scope": "First closed semantic payload design profile for future Poiet, elenk, Theor and peira"
+    },
+    {
+      "id": "ADP-THREAT",
+      "version": "0.1.0-draft",
+      "status": "draft",
+      "path": "spec/adapter-threat-model.md",
+      "scope": "External protocol version, peer, capability, invocation, mapping, state, artifact, error, cancellation, retry, delivery and security threats"
+    },
+    {
+      "id": "ADP-SCEN",
+      "version": "0.1.0-draft",
+      "status": "non-normative-design-corpus",
+      "path": "spec/adapter-scenarios.md",
+      "scope": "Natural-language design-review scenarios for external protocol adapter boundaries"
     }
   ],
   "experiments": [
@@ -240,6 +264,13 @@
     ,{"term": "diagnostic-location", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "绑定位置种类、精确主体和有限范围的安全定位信息"}
     ,{"term": "primary-diagnostic", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "按规范优先级确定的唯一主阻断诊断"}
     ,{"term": "recovery-class", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "不授予权限也不携带副作用命令的有限恢复类别"}
+    ,{"term": "adapter-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "固定协议、规范、schema、传输、扩展、对端与政策版本的一次外部适配约束"}
+    ,{"term": "peer-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "分开发现声明、端点、认证主体、受众、租户与政策决定的对端身份约束"}
+    ,{"term": "invocation-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "把一次外部操作连接到精确 Dromen、主体、输入、能力、预算、截止点与观察责任的调用约束"}
+    ,{"term": "loss-manifest", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "逐项记录协议映射中省略、合并、降精度与未知处理及其影响的有限清单"}
+    ,{"term": "external-state", "kind": "external-result-domain", "decision_status": "accepted-draft", "definition": "外部协议请求、任务、消息、产物、HTTP 或 SDK 的原生状态；不得提升为 Noemion 结果域"}
+    ,{"term": "delivery-evidence", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "绑定授权、序列、去重、乱序、缺口、终结与资源边界的流式或异步交付依据"}
+    ,{"term": "idempotency-class", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "read-only、idempotent、deduplicated 或 non-idempotent 的调用重试分类"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -291,7 +322,19 @@
     {"id": "THR-DIA-007", "clauses": ["DIA-SEC-001"], "evidence_status": "partial"},
     {"id": "THR-DIA-008", "clauses": ["DIA-BND-001"], "evidence_status": "partial"},
     {"id": "THR-DIA-009", "clauses": ["DIA-ATM-001"], "evidence_status": "partial"},
-    {"id": "THR-DIA-010", "clauses": ["DIA-EXT-001", "DIA-IDN-001"], "evidence_status": "partial"}
+    {"id": "THR-DIA-010", "clauses": ["DIA-EXT-001", "DIA-IDN-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-001", "clauses": ["ADP-PIN-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-002", "clauses": ["ADP-PEE-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-003", "clauses": ["ADP-CAP-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-004", "clauses": ["ADP-INV-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-005", "clauses": ["ADP-MAP-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-006", "clauses": ["ADP-STA-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-007", "clauses": ["ADP-ART-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-008", "clauses": ["ADP-ERR-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-009", "clauses": ["ADP-CAN-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-010", "clauses": ["ADP-RTY-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-011", "clauses": ["ADP-DEL-001"], "evidence_status": "partial"},
+    {"id": "THR-ADP-012", "clauses": ["ADP-SEC-001"], "evidence_status": "partial"}
   ],
   "clauses": [
     {
@@ -1512,6 +1555,138 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
         {"status": "planned", "ref": "peira:diagnostic-atomic-failure"}
+      ]
+    },
+    {
+      "id": "ADP-PIN-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future external protocol adapter and release policy",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-version-pin"}
+      ]
+    },
+    {
+      "id": "ADP-PEE-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future peer discovery and authentication adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-peer-binding"}
+      ]
+    },
+    {
+      "id": "ADP-CAP-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor capability resolver and every external adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-capability-intersection"}
+      ]
+    },
+    {
+      "id": "ADP-INV-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor session controller and every external adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-invocation-binding"}
+      ]
+    },
+    {
+      "id": "ADP-MAP-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future protocol mapping and evidence producer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-loss-map"}
+      ]
+    },
+    {
+      "id": "ADP-STA-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future protocol adapter and result consumer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-result-separation"}
+      ]
+    },
+    {
+      "id": "ADP-ART-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future artifact adapter, reader and evidence producer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-artifact-candidate"}
+      ]
+    },
+    {
+      "id": "ADP-ERR-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future protocol adapter and diagnostic producer",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-diagnostic-provenance"}
+      ]
+    },
+    {
+      "id": "ADP-CAN-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "future Praxor session controller and every asynchronous adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-cancellation-finality"}
+      ]
+    },
+    {
+      "id": "ADP-RTY-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "future retry policy, Praxor budget controller and every adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-idempotent-retry"}
+      ]
+    },
+    {
+      "id": "ADP-DEL-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "every future stream, webhook, push and polling adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-delivery-evidence"}
+      ]
+    },
+    {
+      "id": "ADP-SEC-001",
+      "decision_status": "accepted-draft",
+      "implementation_status": "vector-checker-only",
+      "evidence_status": "partial",
+      "failure_owner": "future capability domain, network policy and every external adapter",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
+        {"status": "planned", "ref": "peira:adapter-security-envelope"}
       ]
     }
   ]

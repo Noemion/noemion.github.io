@@ -12,7 +12,7 @@ permalink: "/architecture/open-questions.html"
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
     <p class="lead">ADR-0010 已经采用现行制品、组件、六个语义面、三个制品状态和八个动作。这些名称与职责不再作为开放问题反复讨论。</p>
-    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0024 固定 Synem、Tekmor、内容标准分层与 Dromen；ADR-0025 与 DIA-CORE 固定跨对象诊断内容和安全边界。</p>
+    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0024 固定 Synem、Tekmor、内容标准分层与 Dromen；ADR-0025 与 ADR-0026 分别固定结构化诊断和协议无关外部适配边界。</p>
     <p>当前没有 Theor 或其他组件实现。稳定 ABI、时间与组合物理字段、嵌套或多变量量化、Synem 与 Tekmor 物理容器、正式来源语言和结果事件编码仍未冻结。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
@@ -43,7 +43,7 @@ permalink: "/architecture/open-questions.html"
     <details><summary>Tekmor 怎样获得物理编码？</summary><p>TEK-CORE 已固定 phain 对齐、有限无环溯源、证据类别、有效性、覆盖、决定分离和最小披露。字段编号、容器、摘要与签名算法、透明日志、撤销分发、跨生产者时钟归并、隐私策略和规范字节仍需真实消费者与新 Profile。</p></details>
     <details><summary>mene 时间怎样进入未来 Profile？</summary><p>ADR-0016 已决定 fixed/elapsed、strict/budgeted 与覆盖结果；字段编号、数值宽度、亚秒精度、闰秒、循环日历、时区数据库封装、跨重启关联和多生产者归并仍保持开放。</p></details>
     <details><summary>最终决定事件怎样编码与撤销？</summary><p>ADR-0015 与 TEK-DEC-001 已规定 accepted/rejected/deferred 必须保存原满足结果与具名权威，decision-record 只记录决定而不创造权限。事件字段、重放键、撤销传播、多权威冲突和聚合规则仍需 Profile 与规范字节。</p></details>
-    <details><summary>MCP 与 A2A 怎样映射到 Praxor 外缘？</summary><p>需冻结协议版本、工具或 Agent 声明的信任等级、令牌受众、取消与重放语义。外部任务状态和产物不能直接成为 Endem 状态或最终决定类 Tekmor。</p></details>
+    <details><summary>MCP 与 A2A 的具体 Profile 怎样冻结？</summary><p>ADP-CORE 已固定版本、对端、能力、调用、状态、产物、取消、重试、交付和安全不变量。具体字段映射仍需等待精确稳定版本、真实消费者、协议专属威胁、正反协议向量和实现阶段授权；不得用通用 SDK 对象替代 Profile。</p></details>
     <details><summary>结构化诊断怎样获得物理编码与协议映射？</summary><p>DIA-CORE 已固定机器身份、生产语境、层次、位置、主错误、恢复和安全边界。JSON、CBOR、SARIF、Problem Details、MCP、CLI 退出状态、日志与遥测字段仍需真实消费者、版本规则、披露政策、规范字节和跨实现证据；任何映射都不能改写本地结果域或授权。</p></details>
   </section>
 
@@ -59,5 +59,5 @@ permalink: "/architecture/open-questions.html"
     <h2>问题关闭规则</h2>
     <p>设计问题可以由权威规范或 ADR、正反向量和明确失败语义关闭。涉及组件行为、性能或互操作的问题必须保持开放，直到用户明确开启代码阶段并出现相应实现证据；论文、模型指标、概念演示或单一实现行为不能单独冻结 ABI。</p>
   </section>
-  <div class="next-prev"><a href="adr-0025-structured-diagnostics.html">← ADR-0025</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
+  <div class="next-prev"><a href="adr-0026-external-protocol-adapters.html">← ADR-0026</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
 </main>

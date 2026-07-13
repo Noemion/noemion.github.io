@@ -13,12 +13,14 @@ SYNEM_SPEC_PATH = ROOT / "spec" / "synem-core.md"
 DROMEN_SPEC_PATH = ROOT / "spec" / "dromen-core.md"
 TEKMOR_SPEC_PATH = ROOT / "spec" / "tekmor-core.md"
 DIAGNOSTIC_SPEC_PATH = ROOT / "spec" / "diagnostics-core.md"
+ADAPTER_SPEC_PATH = ROOT / "spec" / "adapter-core.md"
 THREAT_PATHS = (
     ROOT / "spec" / "endem-threat-model.md",
     ROOT / "spec" / "synem-threat-model.md",
     ROOT / "spec" / "dromen-threat-model.md",
     ROOT / "spec" / "tekmor-threat-model.md",
     ROOT / "spec" / "diagnostic-threat-model.md",
+    ROOT / "spec" / "adapter-threat-model.md",
 )
 ERROR_CATALOG_PATH = ROOT / "spec" / "diagnostic-catalog.md"
 SCENARIO_CORPUS_PATH = ROOT / "spec" / "endem-scenarios.md"
@@ -26,14 +28,15 @@ SYNEM_SCENARIO_PATH = ROOT / "spec" / "synem-scenarios.md"
 DROMEN_SCENARIO_PATH = ROOT / "spec" / "dromen-scenarios.md"
 TEKMOR_SCENARIO_PATH = ROOT / "spec" / "tekmor-scenarios.md"
 DIAGNOSTIC_SCENARIO_PATH = ROOT / "spec" / "diagnostic-scenarios.md"
+ADAPTER_SCENARIO_PATH = ROOT / "spec" / "adapter-scenarios.md"
 PROFILE_PATH = ROOT / "spec" / "profiles" / "end-p0.json"
 VECTOR_ROOT = ROOT / "vectors" / "semantic"
 SCHEMA_PATH = ROOT / "vectors" / "vector.schema.json"
 
-CLAUSE_ID = re.compile(r"^(?:END|SYN|DRO|TEK|DIA)-[A-Z]+-[0-9]{3}$")
+CLAUSE_ID = re.compile(r"^(?:END|SYN|DRO|TEK|DIA|ADP)-[A-Z]+-[0-9]{3}$")
 VECTOR_ID = re.compile(r"^SV-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
-SPEC_HEADING = re.compile(r"^### ((?:END|SYN|DRO|TEK|DIA)-[A-Z]+-[0-9]{3})\s+—", re.MULTILINE)
-THREAT_HEADING = re.compile(r"^### (THR-(?:END|SYN|DRO|TEK|DIA)-[0-9]{3})\s+—", re.MULTILINE)
+SPEC_HEADING = re.compile(r"^### ((?:END|SYN|DRO|TEK|DIA|ADP)-[A-Z]+-[0-9]{3})\s+—", re.MULTILINE)
+THREAT_HEADING = re.compile(r"^### (THR-(?:END|SYN|DRO|TEK|DIA|ADP)-[0-9]{3})\s+—", re.MULTILINE)
 SCENARIO_HEADING = re.compile(r"^### (SCN-[0-9]{3})\s+—", re.MULTILINE)
 REQUIRED_FACETS = ("rhem", "semion", "skena", "telis", "krin", "apor")
 ALLOWED_VERIFICATION_STATUS = {"covered-by-repo", "planned", "manual-authority"}
@@ -53,8 +56,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
         errors.append("spec/registry.json: registry_version must be 1")
 
     documents = registry.get("documents")
-    if not isinstance(documents, list) or len(documents) != 7:
-        errors.append("spec/registry.json: END-CORE, END-FMT, END-SRCM, SYN-CORE, DRO-CORE, TEK-CORE and DIA-CORE documents are required")
+    if not isinstance(documents, list) or len(documents) != 8:
+        errors.append("spec/registry.json: eight current core and format documents are required")
     else:
         documents_by_id = {document.get("spec_id"): document for document in documents}
         expected_documents = {
@@ -93,9 +96,14 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 "implementation_status": "vector-checker-only", "wire_status": "unfrozen",
                 "path": "spec/diagnostics-core.md",
             },
+            "ADP-CORE": {
+                "version": "0.1.0-draft", "status": "draft",
+                "implementation_status": "vector-checker-only", "wire_status": "not-applicable",
+                "path": "spec/adapter-core.md",
+            },
         }
         if set(documents_by_id) != set(expected_documents):
-            errors.append("spec/registry.json: document IDs must be END-CORE, END-FMT, END-SRCM, SYN-CORE, DRO-CORE, TEK-CORE and DIA-CORE")
+            errors.append("spec/registry.json: document IDs must include END, SYN, DRO, TEK, DIA and ADP current specifications")
         for spec_id, expected_document in expected_documents.items():
             document = documents_by_id.get(spec_id, {})
             for key, value in expected_document.items():
@@ -107,7 +115,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 errors.append(f"spec/registry.json: {spec_id} document path does not exist")
 
     supporting_documents = registry.get("supporting_documents")
-    if not isinstance(supporting_documents, list) or len(supporting_documents) != 13:
+    if not isinstance(supporting_documents, list) or len(supporting_documents) != 15:
         errors.append("spec/registry.json: object and diagnostic threat/scenario documents, diagnostic catalog, P0 and P1 Profiles are required")
     else:
         supporting_by_id = {document.get("id"): document for document in supporting_documents}
@@ -133,6 +141,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
             "DRO-SCEN": "spec/dromen-scenarios.md",
             "END-P0": "spec/profiles/end-p0.json",
             "END-P1": "spec/profiles/end-p1.json",
+            "ADP-THREAT": "spec/adapter-threat-model.md",
+            "ADP-SCEN": "spec/adapter-scenarios.md",
         }
         for document_id, path in expected_supporting.items():
             document = supporting_by_id.get(document_id, {})
@@ -152,6 +162,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: DRO-SCEN must remain a non-normative design corpus")
         if supporting_by_id.get("DIA-SCEN", {}).get("status") != "non-normative-design-corpus":
             errors.append("spec/registry.json: DIA-SCEN must remain a non-normative design corpus")
+        if supporting_by_id.get("ADP-SCEN", {}).get("status") != "non-normative-design-corpus":
+            errors.append("spec/registry.json: ADP-SCEN must remain a non-normative design corpus")
 
     terms = registry.get("terms")
     if not isinstance(terms, list) or not terms:
@@ -176,6 +188,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
             "validity-assessment", "coverage-assessment", "disclosure-manifest",
             "diagnostic-code", "diagnostic-layer", "diagnostic-location",
             "primary-diagnostic", "recovery-class",
+            "adapter-binding", "peer-binding", "invocation-binding", "loss-manifest",
+            "external-state", "delivery-evidence", "idempotency-class",
         ):
             if required_term not in term_names:
                 errors.append(f"spec/registry.json: missing term {required_term}")
@@ -256,8 +270,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
 
     threat_heading_ids = THREAT_HEADING.findall(threat_text)
     threats = registry.get("threats")
-    if not isinstance(threats, list) or len(threats) != 50:
-        errors.append("spec/registry.json: exactly 15 Endem, 6 Synem, 10 Dromen, 9 Tekmor and 10 diagnostic threats are required")
+    if not isinstance(threats, list) or len(threats) != 62:
+        errors.append("spec/registry.json: exactly 62 object, diagnostic and adapter threats are required")
     else:
         threat_ids = [threat.get("id") for threat in threats]
         if len(threat_ids) != len(set(threat_ids)):
@@ -270,7 +284,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             )
         for threat in threats:
             threat_id = threat.get("id", "<unknown>")
-            if not re.fullmatch(r"THR-(?:END|SYN|DRO|TEK|DIA)-[0-9]{3}", threat_id):
+            if not re.fullmatch(r"THR-(?:END|SYN|DRO|TEK|DIA|ADP)-[0-9]{3}", threat_id):
                 errors.append(f"spec/registry.json: invalid threat ID {threat_id!r}")
             mapped_clauses = threat.get("clauses")
             if not isinstance(mapped_clauses, list) or not mapped_clauses:
@@ -296,7 +310,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             expected_implementation = "vector-checker-only"
         elif clause_id.startswith("END-SRCM-"):
             expected_implementation = "vector-checker-only"
-        elif clause_id.startswith("DIA-"):
+        elif clause_id.startswith(("DIA-", "ADP-")):
             expected_implementation = "vector-checker-only"
         else:
             expected_implementation = "unimplemented"
@@ -466,6 +480,8 @@ def validate_public_boundary(errors):
         errors.append("Pages workflow must execute END-SRCM source manifest vectors")
     if "python3 tests/diagnostic_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute structured diagnostic vectors")
+    if "python3 tests/adapter_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute external protocol adapter vectors")
     for exact_exclusion in ("  - experiments/", "  - spec/", "  - vectors/"):
         if exact_exclusion not in config_text:
             errors.append(f"_config.yml: missing exact exclusion {exact_exclusion.strip()!r}")
@@ -505,6 +521,9 @@ def validate_public_boundary(errors):
             "spec/tekmor-core.md",
             "spec/tekmor-threat-model.md",
             "vectors/tekmor",
+            "ADP-CORE 0.1.0-draft",
+            "spec/adapter-core.md",
+            "vectors/adapters",
             "非规范设计审查材料",
             "不是 .endem 物理格式",
         ),
@@ -709,6 +728,16 @@ def validate_public_boundary(errors):
             "工具执行错误",
             "当前没有诊断生产器",
         ),
+        "architecture/adr-0026-external-protocol-adapters.html": (
+            "ADP-CORE 0.1.0-draft",
+            "MCP 2025-11-25",
+            "2026-07-28",
+            "A2A 1.0",
+            "RFC 9110",
+            "GNU BFD",
+            "能力交集",
+            "当前没有协议 Profile",
+        ),
         "specifications/synem.html": (
             "SYN-CORE 0.1.0-draft",
             "spec/synem-core.md",
@@ -751,6 +780,15 @@ def validate_public_boundary(errors):
             "部分可信对象",
             "当前没有诊断生产器",
         ),
+        "specifications/adapters.html": (
+            "ADP-CORE 0.1.0-draft",
+            "ADP-PIN-001",
+            "ADP-SEC-001",
+            "12 类",
+            "18 个",
+            "24 个",
+            "当前仍未冻结",
+        ),
         "development/implementation-roadmap.html": (
             "Rust 1.97.0",
             "C/Rust 双原型",
@@ -777,6 +815,7 @@ def main():
             + "\n" + DROMEN_SPEC_PATH.read_text()
             + "\n" + TEKMOR_SPEC_PATH.read_text()
             + "\n" + DIAGNOSTIC_SPEC_PATH.read_text()
+            + "\n" + ADAPTER_SPEC_PATH.read_text()
         )
     except OSError as exc:
         errors.append(f"spec sources: cannot read: {exc}")
@@ -811,6 +850,11 @@ def main():
     except OSError as exc:
         errors.append(f"spec/diagnostic-scenarios.md: cannot read: {exc}")
         diagnostic_scenario_text = ""
+    try:
+        adapter_scenario_text = ADAPTER_SCENARIO_PATH.read_text()
+    except OSError as exc:
+        errors.append(f"spec/adapter-scenarios.md: cannot read: {exc}")
+        adapter_scenario_text = ""
 
     scenario_ids = SCENARIO_HEADING.findall(scenario_text)
     if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 28)]:
@@ -876,6 +920,13 @@ def main():
         if token not in diagnostic_scenario_text:
             errors.append(f"spec/diagnostic-scenarios.md: missing design-review boundary {token!r}")
 
+    adapter_scenario_ids = re.findall(r"^### (ADP-SCN-[0-9]{3})\s+—", adapter_scenario_text, re.MULTILINE)
+    if adapter_scenario_ids != [f"ADP-SCN-{index:03d}" for index in range(1, 19)]:
+        errors.append("spec/adapter-scenarios.md: scenario IDs must be unique and ordered ADP-SCN-001 through ADP-SCN-018")
+    for token in ("稳定版与候选版不能共用绑定", "Agent Card 只是自我描述", "外部 completed 不等于 accepted", "取消或断流不证明副作用回滚", "非幂等调用断连后不自动重试", "令牌透传与 SSRF 默认拒绝"):
+        if token not in adapter_scenario_text:
+            errors.append(f"spec/adapter-scenarios.md: missing design-review boundary {token!r}")
+
     if registry is not None:
         clause_ids, covered_vector_refs = validate_registry(
             registry, spec_text, threat_text, errors
@@ -887,8 +938,8 @@ def main():
         print("\n".join(errors))
         return 1
     print(
-        "PASS: END-CORE, END-FMT, END-SRCM, SYN-CORE, DRO-CORE, TEK-CORE and DIA-CORE 0.1.0-draft have unique clauses, explicit "
-        "maturity, traceable evidence, 50 registered threats, executed semantic "
+        "PASS: END-CORE, END-FMT, END-SRCM, SYN-CORE, DRO-CORE, TEK-CORE, DIA-CORE and ADP-CORE 0.1.0-draft have unique clauses, explicit "
+        "maturity, traceable evidence, 62 registered threats, executed semantic "
         "vectors, 27 natural-language design scenarios, 12 result-domain vectors, "
         "12 mene time and continuity vectors, 12 negation and absence vectors, "
         "12 quantification and membership vectors, "
@@ -898,6 +949,7 @@ def main():
         "20 Dromen session-contract vectors, "
         "18 Tekmor evidence and appraisal vectors, "
         "20 structured diagnostic vectors, "
+        "24 external protocol adapter vectors, "
         "END-P1 payload/source vectors, "
         "and P0-LANG-001 historical language evidence"
     )

@@ -22,7 +22,7 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>代码阶段之前与未来第一条路径</h2>
     <p class="callout"><strong>直接结论：</strong>当前只完成第 0 阶段的规范与验证方案，不创建实现工作区。未来若用户明确开启代码阶段，第一实现才考虑 <code>poie</code>、<code>elenk</code>、<code>theor</code> 与 <code>peira</code>；不同时创建工具家族，不接模型，不做通用二进制抽象层。</p>
-    <p>第 0 阶段已经产生 END-CORE、END-FMT、END-P1、SYN-CORE、DRO-CORE、TEK-CORE、DIA-CORE、威胁模型和规范向量。ADR-0012 把 Rust 记为未来首版候选语言；ADR-0021 至 ADR-0025 分别固定 Synem、Tekmor、Endem 内容分层、Dromen 和结构化诊断边界。这些资料只用于评审设计和形成未来验收条件，不表示 Poiet、Theor、Praxor、CLI 或安全核心已经开始开发。</p>
+    <p>第 0 阶段已经产生 END-CORE、END-FMT、END-P1、SYN-CORE、DRO-CORE、TEK-CORE、DIA-CORE、ADP-CORE、威胁模型和规范向量。ADR-0012 把 Rust 记为未来首版候选语言；ADR-0021 至 ADR-0026 分别固定 Synem、Tekmor、Endem 内容分层、Dromen、结构化诊断和外部协议适配边界。这些资料只用于评审设计和形成未来验收条件，不表示 Poiet、Theor、Praxor、CLI、协议适配器或安全核心已经开始开发。</p>
     <div class="flow"><div class="step">受控来源表达</div><div class="step">投影规则 / 具名决定</div><div class="step">endem poie</div><div class="step">.endem</div><div class="step">endem elenk</div><div class="step">endem theor</div><div class="step">endem peira</div></div>
     <div class="table-wrap"><table><thead><tr><th>职责</th><th>正式输入与输出</th><th>完成标准</th></tr></thead><tbody>
       <tr><td><code>poie</code></td><td>受控来源 + 投影决定 → 六个语义面 → Endem</td><td>相同规范化输入与配置产生相同字节；失败不留下部分制品。</td></tr>
@@ -47,9 +47,9 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>第 0 阶段当前产物</h2>
     <div class="table-wrap"><table><thead><tr><th>工作包</th><th>已经形成</th><th>仍需完成</th></tr></thead><tbody>
-      <tr><td>P0-W1 条款源</td><td>END-CORE、END-FMT、END-SRCM、SYN-CORE、DRO-CORE、TEK-CORE、DIA-CORE、101 个唯一条款 ID、END-P0/END-P1 与成熟度登记。</td><td>代码阶段前继续用真实自然语言案例和反例修订；独立实现验证必须等待用户开启代码阶段。</td></tr>
-      <tr><td>P0-W2 威胁与限制</td><td>15 项 Endem、6 项 Synem、10 项 Dromen、9 项 Tekmor 与 10 项诊断威胁，END-P0 的 8 项有限上限和跨对象诊断目录。</td><td>当前补齐边界语料与最坏复杂度分析；目标平台实验必须等待代码阶段。</td></tr>
-      <tr><td>P0-W3 规范向量</td><td>7 个已执行语义向量；END-P0 含 1 个结构接受与 5 个拒绝；END-P1 含 3 个语义接受与 11 个拒绝；七组专题各有 12 个提案向量，Dromen 有 20 个、Tekmor 有 18 个、诊断有 20 个提案向量。</td><td>继续增加累计分配、偏移算术、组合引用和诊断规模边界向量。</td></tr>
+      <tr><td>P0-W1 条款源</td><td>END-CORE、END-FMT、END-SRCM、SYN-CORE、DRO-CORE、TEK-CORE、DIA-CORE、ADP-CORE、113 个唯一条款 ID、END-P0/END-P1 与成熟度登记。</td><td>代码阶段前继续用真实自然语言案例和反例修订；独立实现验证必须等待用户开启代码阶段。</td></tr>
+      <tr><td>P0-W2 威胁与限制</td><td>15 项 Endem、6 项 Synem、10 项 Dromen、9 项 Tekmor、10 项诊断与 12 项适配威胁，END-P0 的 8 项有限上限和跨对象诊断目录。</td><td>当前补齐边界语料与最坏复杂度分析；目标平台实验必须等待代码阶段。</td></tr>
+      <tr><td>P0-W3 规范向量</td><td>7 个已执行语义向量；END-P0 含 1 个结构接受与 5 个拒绝；END-P1 含 3 个语义接受与 11 个拒绝；七组专题各有 12 个提案向量，Dromen 有 20 个、Tekmor 有 18 个、诊断有 20 个、适配有 24 个提案向量。</td><td>继续增加累计分配、偏移算术、组合引用、诊断规模和协议专属 Profile 向量。</td></tr>
       <tr><td>P0-W4 历史语言研究</td><td>C/Rust 双原型、6 个规范向量、144 个差分变异、C Sanitizer、10,000 次 libFuzzer 和两次重复构建的历史记录；ADR-0012 据此记录 Rust 1.97.0 基线。</td><td>冻结为历史研究资料，不自动运行、不继续扩展，也不视为组件证据。</td></tr>
       <tr><td>P1-W1 安全核心</td><td>尚未开始；当前只有职责分离、候选语言、END-P1 规范向量和未来验证条件。</td><td>等待用户明确开启代码开发阶段；届时重新确认仓库、范围、依赖、CI 与停止条件。</td></tr>
     </tbody></table></div>
@@ -71,8 +71,8 @@ permalink: "/development/implementation-roadmap.html"
   <section class="content-wide">
     <h2>面向 Agent 时代的适配边界</h2>
     <ul>
-      <li>MCP 工具说明、注解和远端返回都只是 Praxor 外缘的不可信输入；能力授权来自 Dromen 与会话策略。当前研究基线是 <a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">2025-11-25 稳定工具规范</a>。任何后续正式版本都必须重新完成兼容、安全、错误来源、降级和权限复核。</li>
-      <li>A2A 1.0 的 Task、Message 与 Artifact 适合跨 Agent 传输和记录生命周期，但不能替代 Endem 身份、Synem 闭包或 Tekmor 验收。页面固定参考 <a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a>；补丁号不进入协议协商。</li>
+      <li>MCP 工具说明、注解和远端返回都只是 Praxor 外缘的不可信输入；能力授权来自 Dromen 与会话策略。当前稳定研究基线是 <a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">2025-11-25 工具规范</a>；2026-07-28 候选版只用于评估版本漂移。任何后续正式版本都必须重新完成兼容、安全、错误来源、降级和权限复核。</li>
+      <li>A2A 1.0 的 Task、Message 与 Artifact 适合跨 Agent 传输和记录生命周期，但不能替代 Endem 身份、Synem 闭包或 Tekmor 验收。补丁号不进入协议协商；具体映射必须建立遵守 ADP-CORE 的独立 Profile。当前没有协议实现。</li>
       <li>可靠 Agent 依赖清晰环境、可读工具、真实观察和反馈循环；这些由 Praxor 及其外侧控制平面负责，不通过增加薄命令包装解决。实践案例见<a href="https://openai.com/index/harness-engineering/">智能体控制平面工程实践</a>。</li>
       <li><a href="https://github.com/open-telemetry/semantic-conventions-genai">OpenTelemetry GenAI 语义约定</a>已迁入独立仓库，仍在演进且 Schema URL 待定，并可能携带输入、输出和工具数据。它只进入带版本、默认脱敏的导出器，不进入 Endem 编码、Tekmor 身份或最终决定。</li>
       <li>所有外部协议版本只约束适配器，升级必须重新验证兼容性、安全边界和降级行为。</li>

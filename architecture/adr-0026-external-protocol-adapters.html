@@ -1,0 +1,81 @@
+---
+layout: default
+title: "ADR-0026 外部协议适配边界"
+page_role: "content"
+footer_text: "Noemion · ADR-0026"
+permalink: "/architecture/adr-0026-external-protocol-adapters.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0026</span></nav>
+  <header class="content-introduction"><h1>ADR-0026<br>外部协议适配边界</h1><p>让 MCP、A2A、HTTP 与未来协议进入受限会话，同时不让外部状态、身份和权限改写 Noemion 的工程语义。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">ADP-CORE 0.1.0-draft</span><span class="badge">Protocol Independent</span><span class="badge">No Adapter Code</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">Noemion 不需要一个万能 Agent 对象，也不应把 MCP 或 A2A 变成内部语义。每个外部协议只通过受 Dromen 限制的适配绑定连接到一次精确调用。</p>
+    <p>适配必须保留协议原始事实、收窄能力、声明信息损失并控制副作用。外部任务完成、工具成功、HTTP 状态和模型停止原因都不能直接成为目标满足、最终接受、会话终止或证据有效。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么现在只冻结抽象不变量</h2>
+    <p>截至 2026 年 7 月 13 日，MCP 2025-11-25 仍是稳定基线，2026-07-28 是包含破坏性变化的候选版本。候选版把核心改为无状态并把 Tasks 移到扩展，说明握手、会话与任务字段仍在快速变化。A2A 最新发布规范已经进入 1.0，但它的 Task、Message、Artifact 和 Agent Card 仍属于外部协议对象。</p>
+    <p>因此 ADP-CORE 冻结版本、身份、能力、状态、取消、重试和交付边界，不冻结具体 JSON、Protocol Buffers、SSE 或 SDK 字段。未来每个协议 Profile 必须绑定精确稳定版本和真实消费者。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部调用怎样进入 Praxor</h2>
+    <div class="flow"><div class="step">精确 Dromen</div><div class="step">协议与对端绑定</div><div class="step">能力交集</div><div class="step">一次调用身份</div><div class="step">外部操作</div><div class="step">候选产物与观察</div><div class="step">Tekmor 与本地判断</div></div>
+    <ul>
+      <li>发现信息、Agent Card 和工具清单只描述对端，不授予信任或能力。</li>
+      <li>有效能力取协议、对端、本地适配器、Dromen 与政策的交集。</li>
+      <li>每次调用绑定精确主体、输入、预算、截止点、幂等分类和观察责任。</li>
+      <li>外部消息与产物先保持不可信候选，再由独立验证和证据路径处理。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>必须分开的状态</h2>
+    <div class="table-wrap"><table><thead><tr><th>外部事实</th><th>可以说明</th><th>不能直接说明</th></tr></thead><tbody>
+      <tr><td>A2A Task <code>completed</code></td><td>对端把该任务置为外部终态</td><td><code>met</code>、<code>accepted</code> 或 Praxe <code>completed</code></td></tr>
+      <tr><td>MCP ToolResult 或协议错误</td><td>一次外部工具或协议操作的结果</td><td><code>unmet</code>、Tekmor <code>invalid</code> 或永久不可重试</td></tr>
+      <tr><td>HTTP 2xx 或 SDK stop reason</td><td>传输或供应商接口已经按自身规则结束</td><td>内容正确、证据有效或目标已经实现</td></tr>
+      <tr><td>取消确认或连接关闭</td><td>取消请求被接收或传输已结束</td><td>远端副作用已经停止、回滚或不可见</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>映射和重试的硬边界</h2>
+    <p>GNU BFD 说明不同对象格式进入统一 canonical form 时可能丢失原格式信息。外部协议适配面临同样问题，因此每次映射必须保留原始协议身份、映射版本和有限损失清单，不能用一个通用 success 布尔值掩盖差异。</p>
+    <p>自动重试只适用于只读、协议级幂等或具备去重证据的调用。连接中断和没有响应不能证明副作用没有发生；所有重试共享原调用身份、Dromen 预算、截止点和取消状态。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>安全边界</h2>
+    <ul>
+      <li>凭据留在独立能力域，并绑定主体、受众、scope、期限和本次会话。</li>
+      <li>禁止把上游令牌透传给下游，也禁止把静态秘密写入 Agent Card、工具 schema、消息或诊断。</li>
+      <li>网络目标必须经过 SSRF、重定向、Origin、DNS 重绑定和私有地址政策。</li>
+      <li>流式、Webhook、推送和轮询必须保存授权、序列、去重、乱序、缺口、终结与资源证据。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>权威资料与采用限制</h2>
+    <ul>
+      <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/changelog">MCP 2025-11-25 规范变更记录</a>提供当前稳定版本基线。</li>
+      <li><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">MCP 2026-07-28 候选版说明</a>展示无状态核心、扩展与授权变化；项目只把它作为版本漂移证据。</li>
+      <li><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a>定义 Agent Card、Task、Message 与 Artifact；这些对象保持在外部状态域。</li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110 HTTP Semantics</a>提供幂等与自动重试边界；Noemion 进一步要求共享会话预算和调用身份。</li>
+      <li><a href="https://sourceware.org/binutils/docs/bfd/Canonical-format.html">GNU BFD canonical format 说明</a>揭示统一映射可能丢失信息；Noemion 因而要求显式损失清单。</li>
+    </ul>
+  </section>
+
+  <section class="content-stack">
+    <h2>后果与当前状态</h2>
+    <ul>
+      <li><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-core.md">ADP-CORE 0.1.0-draft</a>定义 12 条协议无关适配义务。</li>
+      <li>12 类威胁、18 个设计场景和 24 个正反向量覆盖当前抽象边界。</li>
+      <li>当前没有协议 Profile、适配器 API、网络服务、凭据代理、重试引擎、Webhook 服务或 Praxor 实现。</li>
+    </ul>
+  </section>
+  <div class="next-prev"><a href="adr-0025-structured-diagnostics.html">← ADR-0025</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

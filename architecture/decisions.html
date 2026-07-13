@@ -11,7 +11,7 @@ permalink: "/architecture/decisions.html"
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0025-structured-diagnostics.html">ADR-0025</a>依次固定 Synem 组合闭包、Tekmor 证据、内容标准分层、Dromen 会话契约和结构化诊断边界。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0026-external-protocol-adapters.html">ADR-0026</a>依次固定 Synem 组合闭包、Tekmor 证据、内容标准分层、Dromen 会话契约、结构化诊断和外部协议适配边界。</p>
     <p>ADR-0008 与 ADR-0009 只保存公开迁移历史。更早、无入口且与现行决策源重复的内部 ADR 副本已经删除，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -36,6 +36,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0023-endem-content-standard.html">ADR-0023 Endem 内容标准分层</a></td><td>Accepted Design</td><td>由 END-CORE 定义通用内容，END-P1 定义当前封闭内容 Profile，END-FMT 定义物理容器；三层分别验证。</td></tr>
       <tr><td><a href="adr-0024-dromen-session-contract.html">ADR-0024 Dromen 会话契约</a></td><td>Accepted Design</td><td>由 DRO-CORE 固定一次会话的精确主体、政策、环境、能力、预算、观察责任、只读失效与销毁；永远不创建 Dromen 文件。</td></tr>
       <tr><td><a href="adr-0025-structured-diagnostics.html">ADR-0025 结构化诊断边界</a></td><td>Accepted Design</td><td>由 DIA-CORE 固定跨对象诊断身份、语境、层次、位置、主错误、恢复和安全边界；诊断不成为结果、权限或自动修复命令。</td></tr>
+      <tr><td><a href="adr-0026-external-protocol-adapters.html">ADR-0026 外部协议适配边界</a></td><td>Accepted Draft</td><td>由 ADP-CORE 固定协议版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付和安全边界；具体协议 Profile 仍未冻结。</td></tr>
     </tbody></table></div>
   </section>
 

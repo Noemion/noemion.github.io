@@ -9,7 +9,7 @@
 - `_config.yml` 定义账户站点 URL、仓库身份、语言、Markdown 处理器和构建排除项；账户站点的 `baseurl` 必须保持为空。
 - `.github/workflows/pages.yml` 在 `main` 分支推送时先按 `.ruby-version` 与 `Gemfile.lock` 设置锁定环境、运行路由测试并构建 `_site`，再通过 GitHub 官方 Pages Actions 加入公开 `sitemap.md`、上传并部署。
 - 全部正式页面由 Jekyll 处理：普通页面使用 HTML 正文源，手册与指南页面使用 Markdown 权威源；公共 `<head>`、站点头部、目录容器和页脚由共享布局生成。新增 Markdown 手册页面会增加对应正式 HTML 路由，不添加第三方主题，也不创建 `.nojekyll`。页面数量以 `sitemap.md` 和质量测试的实际结果为准，不在 README 固定重复。
-- `spec/*.md` 保存 END-CORE、END-FMT、END-SRCM、SYN-CORE、DRO-CORE、TEK-CORE 与 DIA-CORE 等版本化规范条款。END-CORE 是 Endem 通用内容标准，`spec/profiles/end-p1.json` 是当前封闭内容 Profile，END-FMT 是实验性容器；三层分别验证。DRO-CORE 只定义一次会话的抽象契约，DIA-CORE 只定义跨对象结构化诊断内容，二者都不建立文件格式。`spec/registry.json` 保存机器可读成熟度和验证映射，`vectors/` 保存语义外壳、专题提案矩阵和实验性规范字节。这些工程源文件由 Jekyll 排除；公开规范页面负责直白解释并链接精确源文件，不能复制另一套条款。
+- `spec/*.md` 保存 END-CORE、END-FMT、END-SRCM、SYN-CORE、DRO-CORE、TEK-CORE、DIA-CORE 与 ADP-CORE 等版本化规范条款。END-CORE 是 Endem 通用内容标准，`spec/profiles/end-p1.json` 是当前封闭内容 Profile，END-FMT 是实验性容器；三层分别验证。DRO-CORE、DIA-CORE 与 ADP-CORE 分别定义一次会话、结构化诊断和外部协议适配的抽象边界，都不建立文件格式。`spec/registry.json` 保存机器可读成熟度和验证映射，`vectors/` 保存语义外壳、专题提案矩阵和实验性规范字节。这些工程源文件由 Jekyll 排除；公开规范页面负责直白解释并链接精确源文件，不能复制另一套条款。
 - 本地构建基线固定为 `.ruby-version` 中的 Ruby 3.4.10 与 `Gemfile.lock` 中的 Bundler 2.6.9；当前工作区自带的系统 Ruby 不作为发布环境基线。macOS 已安装 Homebrew Ruby 时，先运行 `export PATH="$(brew --prefix ruby@3.4)/bin:$PATH"`，再运行 `bundle config set --local path vendor/bundle`、`bundle install` 和 `bundle exec jekyll build`。
 
 ## Jekyll 源码模型
@@ -146,6 +146,8 @@ ADR-0023 固定 Endem 内容标准分层：END-CORE 定义通用内容语义，E
 ADR-0024 与 DRO-CORE 固定 Dromen：它是 Praxor 为一个 Praxe 会话从精确 attested Endem 或 Synem、政策、环境、能力、预算和证据责任封存的只读执行契约。Dromen 永远不是文件、凭据包、可转移状态或可恢复权限；实质漂移使旧契约失效。Tekmor 是绑定明确主体、声明范围、方法、环境、结果和限制的证据，只支持声明范围内的判断，不能自动升级为最终验收。
 
 ADR-0025 与 DIA-CORE 固定跨对象结构化诊断：机器码与人类消息分开，诊断必须固定生产语境、失败层次和类型化位置，并确定性选择唯一主阻断诊断。恢复分类不授予权限，外部协议错误不等于本地结果，披露与资源必须有界；阻断错误不得伴随部分可信成功。当前没有诊断生产器、协议适配器或运行时。
+
+ADR-0026 与 ADP-CORE 固定 Praxor 外部协议适配边界：绑定精确协议版本和对端，能力取交集，外部状态与本地结果分开，映射保留来源和损失，取消不冒充回滚，重试需要幂等证据，异步交付需要完整证据，凭据和网络目标保持最小化。当前没有 MCP、A2A、HTTP、SDK 或其他协议 Profile 和适配器实现。
 
 主产物流按“来源 → `poie` → Endem → `pleko` → Synem → `tasse` → 确定性封装 → `sphra` → 发布信任包络 → `praxe` → Dromen → Tekmor → 人工或确定性验收”组织。每项正式输入必须有明确生产者，每项正式输出必须有明确消费者或说明它只服务人工检查。
 

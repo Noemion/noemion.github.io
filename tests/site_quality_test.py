@@ -76,6 +76,7 @@ REQUIRED_CORE_ROUTES = {
     "specifications/dromen.html",
     "specifications/tekmor.html",
     "specifications/diagnostics.html",
+    "specifications/adapters.html",
     "architecture/endem-lifecycle.html",
     "architecture/adr-0010-native-lexicon.html",
     "architecture/adr-0011-endem-container.html",
@@ -93,6 +94,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0023-endem-content-standard.html",
     "architecture/adr-0024-dromen-session-contract.html",
     "architecture/adr-0025-structured-diagnostics.html",
+    "architecture/adr-0026-external-protocol-adapters.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -225,6 +227,7 @@ NORMATIVE_ROUTES = (
     "specifications/dromen.html",
     "specifications/tekmor.html",
     "specifications/diagnostics.html",
+    "specifications/adapters.html",
 )
 CONTENT_LAYOUT_ROUTES = (
     "about/background.html",
@@ -249,6 +252,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0023-endem-content-standard.html",
     "architecture/adr-0024-dromen-session-contract.html",
     "architecture/adr-0025-structured-diagnostics.html",
+    "architecture/adr-0026-external-protocol-adapters.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -260,6 +264,7 @@ CONTENT_LAYOUT_ROUTES = (
     "specifications/dromen.html",
     "specifications/tekmor.html",
     "specifications/diagnostics.html",
+    "specifications/adapters.html",
 )
 CONTENT_LAYOUT_CLASSES = {
     "content-split",
@@ -446,6 +451,25 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "不保存令牌",
             "有限预算",
             "部分可信对象",
+        ),
+    },
+    "specifications/adapters.html": {
+        "required": (
+            "ADP-CORE 0.1.0-draft",
+            "ADP-PIN-001",
+            "ADP-PEE-001",
+            "ADP-CAP-001",
+            "ADP-INV-001",
+            "ADP-MAP-001",
+            "ADP-STA-001",
+            "ADP-ART-001",
+            "ADP-ERR-001",
+            "ADP-CAN-001",
+            "ADP-RTY-001",
+            "ADP-DEL-001",
+            "ADP-SEC-001",
+            "不可信候选",
+            "当前没有具体协议 Profile",
         ),
     },
     "endem/docs/safety.html": {

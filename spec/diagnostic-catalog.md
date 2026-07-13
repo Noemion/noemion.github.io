@@ -131,7 +131,24 @@
 | `tekmor.decision.unauthorized` | `TEK-DEC-001` | policy | 评估、模型、Praxor 或记录本身替代具名决定权威 |
 | `tekmor.disclosure.secret` | `TEK-PRI-001` | evidence | 记录包含实时秘密，或脱敏损失没有披露 |
 
-## 9. 稳定性边界
+## 9. 外部协议适配错误码
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `adapter.protocol.version_unpinned` | `ADP-PIN-001` | protocol | 协议、规范、绑定、schema、传输或扩展版本浮动或未知 |
+| `adapter.peer.binding_invalid` | `ADP-PEE-001` | protocol | 发现声明替代认证主体、受众、租户或政策绑定 |
+| `adapter.capability.outside_intersection` | `ADP-CAP-001` | policy | 外部调用能力不在协议、对端、适配器、Dromen 与政策交集内 |
+| `adapter.invocation.context_incomplete` | `ADP-INV-001` | session | 调用缺少精确主体、输入、预算、截止点、幂等或观察责任 |
+| `adapter.mapping.loss_undeclared` | `ADP-MAP-001` | protocol | 映射没有保留原始身份、版本或显式信息损失 |
+| `adapter.state.domain_confused` | `ADP-STA-001` | semantic | 外部请求、任务、消息、产物或 HTTP 状态被提升为本地结果 |
+| `adapter.artifact.candidate_unbound` | `ADP-ART-001` | evidence | 外部产物缺少来源、内容身份、边界或被直接提升为可信制品 |
+| `adapter.error.provenance_lost` | `ADP-ERR-001` | protocol | 协议、工具、任务与业务错误被合并或通过消息猜测 |
+| `adapter.cancellation.finality_unproven` | `ADP-CAN-001` | session | 取消、断流或超时被当作停止、回滚或可复活终态 |
+| `adapter.retry.not_authorized` | `ADP-RTY-001` | policy | 自动重试缺少幂等、去重、事后核对、预算或截止点依据 |
+| `adapter.delivery.evidence_incomplete` | `ADP-DEL-001` | protocol | 流式、推送或轮询缺少认证、序列、去重、缺口或终结证据 |
+| `adapter.security.envelope_invalid` | `ADP-SEC-001` | policy | 令牌透传、网络目标、租户披露或资源预算违反最小权限 |
+
+## 10. 稳定性边界
 
 上述机器码只在当前规范、目录和提案向量中保持草案稳定，尚不构成发行 ABI。提升为稳定接口前必须完成：
 

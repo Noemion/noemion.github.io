@@ -163,6 +163,15 @@ endem praxe search.endem
 - 写“消息用于解释，机器码用于协议”，不让自动化解析本地化文本取得语义。
 - Noemion 是品牌，不进入诊断码；机器码按 `diagnostic.*`、`endem.*`、`synem.*`、`dromen.*` 或 `tekmor.*` 的责任域登记。
 
+## 外部协议适配语言
+
+外部协议适配只使用直白工程术语，不为 Agent、工具、任务、重试或交付另造哲学专名。`adapter-binding` 固定协议与对端版本，`peer-binding` 分开声明和认证身份，`invocation-binding` 绑定一次本地调用，`loss-manifest` 记录映射损失，`external-state` 保存外部状态域，`idempotency-class` 约束重试，`delivery-evidence` 约束异步交付。
+
+- 写“外部 A2A Task completed，等待本地 krin 判断”，不写“Agent 已完成目标”。
+- 写“调用缺少幂等或去重证据，因此不自动重试”，不写“网络失败所以安全重试”。
+- 写“Artifact 是绑定来源和内容身份的候选”，不写“远端产物就是 Endem 或 Tekmor”。
+- 适配诊断码使用 `adapter.*` 责任域；Noemion 品牌不进入机器码、协议 Profile、schema 或 API 前缀。
+
 ## 唯一应用与正式路由
 
 | 内容 | 正式路由 |
