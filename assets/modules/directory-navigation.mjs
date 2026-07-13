@@ -224,6 +224,8 @@ export class MobileDirectoryController {
   }
 
   #setScrollLock(locked) {
-    document.documentElement.classList.toggle("mobile-directory-open", locked);
+    const scrollLock = window.noemionMobileDirectoryScroll;
+    if (locked) scrollLock?.lock();
+    else scrollLock?.unlock();
   }
 }

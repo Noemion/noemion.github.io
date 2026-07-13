@@ -1971,7 +1971,13 @@ def validate_jekyll_sources():
             'document.addEventListener("wheel", containPendingGesture, { passive: false })',
             'document.addEventListener("touchmove", containPendingGesture, { passive: false })',
             'panel.open = pendingOpen',
-            'classList.toggle("mobile-directory-open", pendingOpen)',
+            'window.noemionMobileDirectoryScroll = Object.freeze',
+            'root.setAttribute(scrollPositionAttribute, String(scrollY))',
+            'root.style.setProperty(scrollOffsetProperty, `${-scrollY}px`)',
+            'root.classList.add("mobile-directory-open")',
+            'root.classList.remove("mobile-directory-open")',
+            'root.scrollTop = scrollY',
+            'document.body.scrollTop = scrollY',
             'toggleAttribute("aria-busy", pendingOpen)',
             'panel.dispatchEvent(new CustomEvent("noemion:directoryrequest"))',
         ):
@@ -2010,7 +2016,11 @@ def validate_jekyll_sources():
             '@media(max-width:839px)',
             'body:not([data-page-role="portal"]) .global-directory-panel',
             '.site-header .directory-panel.is-closing nav',
-            'html.mobile-directory-open{overscroll-behavior:none}',
+            'html.mobile-directory-open{overflow:hidden;overscroll-behavior:none}',
+            'html.mobile-directory-open body{',
+            'position:fixed;top:var(--mobile-directory-scroll-offset,0)',
+            'html.mobile-directory-open body .global-header{',
+            'position:fixed;top:0;right:8px;left:8px;width:auto;margin:0',
             'overscroll-behavior:contain',
             '.directory-loading-status{display:none',
             'nav[aria-busy="true"] .directory-loading-status',
@@ -2049,8 +2059,8 @@ def validate_jekyll_sources():
                 errors.append(f"shared styles missing site-wide design contract: {token}")
         if re.search(r"transition\s*:\s*all\b", shared_css):
             errors.append("shared styles must not use transition: all")
-        if re.search(r'html\.mobile-directory-open(?:\s+body)?\s*\{[^}]*(?:position\s*:\s*fixed|overflow\s*:\s*hidden)', shared_css):
-            errors.append("mobile directory gesture lock must not replace the root scroll container")
+        if "max-height:calc(100vh - 72px)" in shared_css:
+            errors.append("mobile directory must use the dynamic viewport height on iOS")
         if ".focus-card-core" in shared_css:
             errors.append("homepage object visuals must not retain the obsolete unmatched focus-card-core selector")
         if re.search(r"\.global-timeline-link\s*\{[^}]*background\s*:\s*#fff", shared_css):
@@ -2415,7 +2425,9 @@ def validate_jekyll_sources():
             'document.addEventListener("pointerdown"',
             'event.key === "Escape"',
             "setTimeout(() => this.#finishClose(), 180)",
-            'document.documentElement.classList.toggle("mobile-directory-open", locked)',
+            "window.noemionMobileDirectoryScroll",
+            "scrollLock?.lock()",
+            "scrollLock?.unlock()",
             "shouldContainScrollGesture",
             'document.addEventListener("wheel", (event) => this.#containWheel(event), { passive: false })',
             'this.root.addEventListener("touchstart", (event) => this.#rememberTouch(event), { passive: true })',
@@ -2430,7 +2442,6 @@ def validate_jekyll_sources():
             if token not in module_text:
                 errors.append(f"front-end modules missing interaction contract: {token}")
         for forbidden in (
-            "--mobile-directory-scroll-top",
             "this.lockedScrollY",
             "scrollTo(0, this.lockedScrollY)",
             "this.previousScrollY",
@@ -2447,6 +2458,7 @@ def validate_jekyll_sources():
             'directoryPanel.dataset.mobileDirectoryReady = "true"',
             'directoryPanel?.addEventListener("noemion:directoryrequest", ensureDirectory)',
             'if (pendingOpen) mobile.open()',
+            'window.noemionMobileDirectoryScroll?.unlock()',
         ):
             if token not in site_text:
                 errors.append(f"site entry missing progressive loading contract: {token}")

@@ -75,7 +75,7 @@ const ensureDirectory = async () => {
     if (directoryPanel.hasAttribute("data-mobile-directory-pending-open")) {
       directoryPanel.removeAttribute("data-mobile-directory-pending-open");
       directoryRoot.removeAttribute("aria-busy");
-      document.documentElement.classList.remove("mobile-directory-open");
+      window.noemionMobileDirectoryScroll?.unlock();
       directoryPanel.open = true;
     }
   }

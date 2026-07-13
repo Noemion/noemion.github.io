@@ -381,7 +381,7 @@ body .global-directory-panel{display:none}
   body .global-directory-panel[open] .portal-menu-icon::after{top:0;transform:rotate(-45deg)}
   body .global-directory-panel nav{
     top:64px;right:-1px;left:auto;width:min(390px,calc(100vw - 16px));
-    max-height:calc(100vh - 72px);padding:14px 16px 18px;background:var(--paper);
+    max-height:calc(100dvh - 72px);padding:14px 16px 18px;background:var(--paper);
     border:1px solid var(--rule);border-top:0;box-shadow:0 18px 36px color-mix(in srgb,var(--text) 14%,transparent)
   }
   .docs-rail{display:none}
@@ -404,7 +404,13 @@ body .global-directory-panel{display:none}
   body:not([data-page-role="portal"]) .global-directory-panel nav{
     top:48px;right:0;left:auto;width:min(390px,calc(100vw - 16px));max-height:calc(100dvh - 120px)
   }
-  html.mobile-directory-open{overscroll-behavior:none}
+  html.mobile-directory-open{overflow:hidden;overscroll-behavior:none}
+  html.mobile-directory-open body{
+    position:fixed;top:var(--mobile-directory-scroll-offset,0);right:0;left:0;width:100%;overflow:hidden
+  }
+  html.mobile-directory-open body .global-header{
+    position:fixed;top:0;right:8px;left:8px;width:auto;margin:0
+  }
   html.mobile-directory-open .global-directory-panel nav{
     overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch
   }
