@@ -58,7 +58,7 @@
     {
       "id": "END-P1",
       "version": "0.1.0-draft",
-      "status": "experimental-implementation",
+      "status": "experimental-design-profile",
       "path": "spec/profiles/end-p1.json",
       "scope": "First closed semantic payload profile for Poiet, elenk, Theor and peira"
     }
@@ -66,11 +66,10 @@
   "experiments": [
     {
       "id": "P0-LANG-001",
-      "status": "verified-structural-slice",
+      "status": "historical-research-evidence",
       "scope": "C17 and safe Rust comparison for the END-P0 structural reader slice",
       "protocol": "experiments/p0-language/README.md",
       "results": "experiments/p0-language/results.json",
-      "workflow": ".github/workflows/p0-language.yml",
       "decision": "architecture/adr-0012-rust-core-language.html",
       "production_implementation": false
     }

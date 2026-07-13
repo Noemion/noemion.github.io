@@ -120,17 +120,16 @@ def validate_registry(registry, spec_text, threat_text, errors):
         experiment = experiments[0]
         expected_experiment = {
             "id": "P0-LANG-001",
-            "status": "verified-structural-slice",
+            "status": "historical-research-evidence",
             "protocol": "experiments/p0-language/README.md",
             "results": "experiments/p0-language/results.json",
-            "workflow": ".github/workflows/p0-language.yml",
             "decision": "architecture/adr-0012-rust-core-language.html",
             "production_implementation": False,
         }
         for key, value in expected_experiment.items():
             if experiment.get(key) != value:
                 errors.append(f"P0-LANG-001 {key} must be {value!r}")
-        for path_field in ("protocol", "results", "workflow", "decision"):
+        for path_field in ("protocol", "results", "decision"):
             if not (ROOT / experiment.get(path_field, "")).is_file():
                 errors.append(f"P0-LANG-001 missing {path_field} file")
         results = load_json(ROOT / experiment.get("results", ""), errors)
@@ -156,10 +155,6 @@ def validate_registry(registry, spec_text, threat_text, errors):
                     errors.append(f"P0-LANG-001 {language} source line evidence drifted")
                 if artifact.get("repeated_binary_sha256_match") is not True:
                     errors.append(f"P0-LANG-001 {language} repeated build evidence must be true")
-            workflow_text = (ROOT / experiment["workflow"]).read_text()
-            for token in ("rustup toolchain install 1.97.0", "--require-libfuzzer"):
-                if token not in workflow_text:
-                    errors.append(f"P0-LANG-001 workflow missing {token!r}")
             if results.get("linux_ci", {}).get("required_libfuzzer_runs") != 10000:
                 errors.append("P0-LANG-001 Linux evidence must require 10000 libFuzzer runs")
 

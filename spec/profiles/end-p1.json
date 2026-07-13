@@ -3,7 +3,7 @@
   "profile_id": 2,
   "name": "END-P1",
   "version": "0.1.0-draft",
-  "status": "experimental-implementation",
+  "status": "experimental-design-profile",
   "core": {"id": "END-CORE", "version": "0.1.0-draft"},
   "format": {"id": "END-FMT", "version": "0.1.0-draft"},
   "limits": {

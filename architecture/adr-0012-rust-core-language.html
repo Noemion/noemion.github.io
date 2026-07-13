@@ -36,7 +36,7 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
       <tr><td>当前源码表面</td><td>168 个非空行。</td><td>266 个非空行。</td><td>只是当前切片的描述，不作为单独评分，但没有出现“安全必然更冗长”。</td></tr>
       <tr><td>当前优化二进制</td><td>488,488 字节。</td><td>34,040 字节。</td><td>C 显著更小；第一阶段优先审计安全，尺寸差异需要后续 strip 与部署目标再评估。</td></tr>
       <tr><td>动态依赖</td><td>实测只有系统库。</td><td>实测只有系统库。</td><td>两者都没有引入大型运行框架。</td></tr>
-      <tr><td>GNU/LLVM 验证</td><td>P0-LANG-001 当时未运行 Rust fuzz；后续 P1 候选已用 cargo-fuzz 分别覆盖 Poiet 与 Theor。</td><td>GCC/Clang Sanitizer 与 libFuzzer 路径成熟，P0-LANG-001 已经实际运行。</td><td>C 原型继续作为独立对照有价值，但不因此进入生产信任路径。</td></tr>
+      <tr><td>GNU/LLVM 验证</td><td>当前没有 P1 实现级 Rust fuzz；P0-LANG-001 只作为历史研究材料保留。</td><td>GCC/Clang Sanitizer 与 libFuzzer 提供未来验证机制先例。</td><td>进入代码阶段后，Poiet 与 Theor 必须分别建立验证路径，历史 C 原型不能自动进入生产信任路径。</td></tr>
     </tbody></table></div>
   </section>
 
