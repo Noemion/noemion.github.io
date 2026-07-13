@@ -57,6 +57,8 @@
 
 [`model-adapter-isolation-proposal.md`](model-adapter-isolation-proposal.md) 研究模型输入、确定性控制面、授权、凭据与实时句柄、协议适配、文件、网络、资源终止、观察和外部目标怎样形成可审查的隔离责任。它用 MCP 与 A2A 安全规范、Linux `no_new_privs`、seccomp、Landlock、cgroup v2、GNU Guix shell、Coreutils `timeout` 与 Make jobserver 核对机制覆盖和采用限制。它不创建 `ISO-CORE`、`SANDBOX-CORE`、隔离制品、沙箱格式、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 DRO、AUT、ADP、DIA、IKN、ID 与 TEXT-IDENTIFIER 责任。
 
+[`model-assisted-evaluation-proposal.md`](model-assisted-evaluation-proposal.md) 研究评测目的、构念、可观察标准、题目与候选、协议、模型评审调用、原始输出、统计汇总和使用决定怎样保持分离。它用 NIST AI 800-2 初稿、NIST AI 800-3、NeurIPS 与 ICLR 的模型裁判研究，以及 GNU Diffutils、Coreutils 随机来源和排序规则核对偏差、随机性、依赖、漂移与限定主张。它不创建 `EVAL-CORE`、`JUDGE-CORE`、评测制品、裁判对象、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 END、TEXT-IDENTIFIER、ID、ADP、DRO、IKN、AUT 与 DIA 责任。
+
 [`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用三十个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分、结果域、时间范围、缺席推断、量化范围、测量阈值、复合判断以及内容与授权伴随关系是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
 
 [`synem-scenarios.md`](synem-scenarios.md) 用十个非规范场景检查闭包、绑定、可选依赖、权限、成员结果和激活边界。它同样不是语法、解析器或组件证据。

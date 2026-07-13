@@ -415,12 +415,13 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "三种成熟度不得混写",
             "一次运行怎样穿过边界",
             "运行事实应该放在哪里",
-            "九条最危险的越级路径",
+            "十条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的七个约束",
+            "GNU 技术提供的八个约束",
             "什么时候才值得增加新对象",
-            "九项研究怎样回到现有规范",
+            "十项研究怎样回到现有规范",
             "模型输出是候选，不是规范内容",
+            "模型评审也只是有范围的候选测量",
             "旧 Dromen、秘密或权限",
             "Task 完成，也不证明目标满足",
             "等待决定",
@@ -1958,6 +1959,60 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the model adapter isolation research proposal"
                 )
 
+    model_evaluation_proposal = SOURCE_ROOT / "spec" / "model-assisted-evaluation-proposal.md"
+    if not model_evaluation_proposal.exists():
+        errors.append("missing non-normative model-assisted evaluation research proposal")
+    else:
+        proposal_text = model_evaluation_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "结论状态：桌面审查完成；等待用户决定",
+            "评测至少包含九种不同事实",
+            "不构成 ADR、CORE 规范、Profile、登记项或实现要求",
+            "不创建评测制品、裁判对象、评分格式、基准格式、命令、组件、结果域、稳定接口或哲学专名",
+            "不建立 `EVAL-CORE`、`JUDGE-CORE`",
+            "不进入 `registry.json`",
+            "九种事实必须分开",
+            "NIST AI 800-2 Initial Public Draft",
+            "NIST AI 800-3",
+            "NeurIPS 2023 的 LLM-as-a-Judge 研究",
+            "ICLR 2025 的系统偏差研究",
+            "NeurIPS 2025 的偏差检测研究",
+            "GNU Diffutils",
+            "GNU Coreutils 随机来源",
+            "什么时候可以使用模型评审",
+            "偏差与稳健性探针",
+            "十六个案例",
+            "威胁到失败责任的映射",
+            "失败域与结果隔离",
+            "候选责任的唯一主归属",
+            "等待用户决定",
+        ):
+            if token not in proposal_text:
+                errors.append(f"model-assisted evaluation proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if (
+            "model-assisted-evaluation" in registry_text
+            or '"EVAL-CORE"' in registry_text
+            or '"JUDGE-CORE"' in registry_text
+        ):
+            errors.append("non-normative model-assisted evaluation proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "specifications" / "iknem.html",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "docs" / "architecture-guide.md",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+            SOURCE_ROOT / "development" / "testing.html",
+            SOURCE_ROOT / "content-quality-audit.md",
+        ):
+            if "model-assisted-evaluation-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the model-assisted evaluation research proposal"
+                )
+
     agent_boundaries = SOURCE_ROOT / "architecture" / "agent-system-boundaries.html"
     if not agent_boundaries.exists():
         errors.append("missing public Agent system boundary guide")
@@ -1966,10 +2021,10 @@ def validate_jekyll_sources():
         for token in (
             "三种成熟度不得混写",
             "运行事实应该放在哪里",
-            "九条最危险的越级路径",
+            "十条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的七个约束",
-            "九项研究怎样回到现有规范",
+            "GNU 技术提供的八个约束",
+            "十项研究怎样回到现有规范",
             "2025-11-25",
             "2026-07-28",
             "A2A 1.0 版本化规范",
@@ -1984,6 +2039,10 @@ def validate_jekyll_sources():
             "Guix shell",
             "Coreutils timeout",
             "沙箱名称替代隔离证据",
+            "模型评分替代测量与决定",
+            "NIST AI 800-2 初稿",
+            "Diffutils",
+            "随机来源",
         ):
             if token not in boundary_text:
                 errors.append(f"Agent boundary guide missing cross-domain contract: {token}")
@@ -1996,6 +2055,7 @@ def validate_jekyll_sources():
             "capability-discovery-and-negotiation-proposal.md",
             "parallel-and-speculative-execution-proposal.md",
             "model-adapter-isolation-proposal.md",
+            "model-assisted-evaluation-proposal.md",
             "semantic-equivalence-and-migration-proposal.md",
         ):
             if proposal_name not in boundary_text:
@@ -2029,6 +2089,12 @@ def validate_jekyll_sources():
         "RFC 8785 JSON Canonicalization Scheme",
         "OpenAI Structured Outputs",
         "schema 合规只证明形状",
+        "模型参与评测必须限定用途",
+        "模型评分是有版本、有偏差且可能漂移的候选测量",
+        "偏差探针",
+        "model-assisted-evaluation-proposal.md",
+        "NIST AI 800-2 初稿",
+        "GNU Diffutils",
     ):
         if token not in verification_text:
             errors.append(f"testing guide missing bounded verification claim: {token}")
