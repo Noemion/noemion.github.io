@@ -173,6 +173,8 @@ Ktisor 负责确定性的 `ktise`、`elenk`、`pleko` 与 `tasse`；模型不得
 
 语义等价与迁移的当前边界记录在 [`spec/semantic-equivalence-and-migration-proposal.md`](spec/semantic-equivalence-and-migration-proposal.md)。精确身份、封闭结构同构、有范围观察等价、迁移、强化/弱化和模型相似度必须分开；`tasse` 当前不能证明裁剪等价，无法依据冻结的保留关系证明允许变换时必须保留或失败。该提案不创建 Semantic Key、等价制品、命令、组件或 CORE，只有用户接受责任分配后才可能把唯一义务归还现有规范。
 
+`END-DET-001` 中的确定性只比较同一封闭形成输入：实际使用的解码文本与文本槽、严格解码 Profile、显式变换和损失、授权决定、配置、依赖、规范、内容 Profile 与格式版本必须全部固定。项目不再使用未定义的“规范化来源”，也不把来源到 Endem 再到显示文本的回转写成通用语义等价证明。
+
 状态变化与因果归因的当前边界记录在 [`spec/state-change-and-causal-attribution-proposal.md`](spec/state-change-and-causal-attribution-proposal.md)。现有 `krin` 可以判断终态，却不能单凭后态证明动作发生、状态转变或某主体造成结果；提案因此建议把 `kine` 澄清为“要求事态达到成立”的目标方向。该结论仍等待用户决定，不修改 END-TEL-001，也不创建因果制品、命令、组件或 CORE。
 
 预览、模拟与批准的当前边界记录在 [`spec/preview-simulation-and-approval-proposal.md`](spec/preview-simulation-and-approval-proposal.md)。预览只说明决定者看到了什么，dry-run 只说明声明条件下预计什么，grant 只允许精确请求尝试；执行、事后观察、满足与最终决定继续分别判断。该提案不创建预览制品、模拟格式、批准结果域、命令、组件或 CORE，只有用户接受责任分配后才可能修订现有 TEXT-IDENTIFIER、AUT、DRO、ADP、IKN、ID、END 与 DIA。

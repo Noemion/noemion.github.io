@@ -501,6 +501,18 @@ def validate_vectors(clause_ids, covered_vector_refs, errors):
 def validate_public_boundary(errors):
     config_text = (ROOT / "_config.yml").read_text()
     workflow_text = (ROOT / ".github" / "workflows" / "pages.yml").read_text()
+    core_text = CORE_SPEC_PATH.read_text()
+    for token in (
+        "同一封闭输入产生同一规范结果",
+        "实际进入 `rhem` 的解码文本及其文本槽",
+        "严格解码 Profile",
+        "显式变换结果与损失",
+        "MUST NOT` 通过未声明的 Unicode 规范化",
+    ):
+        if token not in core_text:
+            errors.append(f"END-DET-001 missing exact deterministic-input boundary: {token}")
+    if "相同的规范化来源" in core_text:
+        errors.append("END-DET-001 must not rely on an undefined normalized-source identity")
     if "python3 tests/semantic_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute semantic vectors, not only register them")
     if "python3 tests/result_domain_vector_test.py" not in workflow_text:

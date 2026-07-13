@@ -93,7 +93,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 ## Endem manual
 
 - [Manual index](https://noemion.github.io/endem/docs/index.html) — responsibilities, actions, trust boundaries, and reading order
-- [Format](https://noemion.github.io/endem/docs/format.html) — canonical Endem fields, encoding, deterministic formation, and round trips
+- [Format](https://noemion.github.io/endem/docs/format.html) — canonical Endem fields, explicit source transformations, deterministic formation, and round-trip limits
 - [Binding](https://noemion.github.io/endem/docs/binding.html) — symbols, references, Synem closure, conflict handling, and packing
 - [Safety](https://noemion.github.io/endem/docs/safety.html) — bounded parsing, checked arithmetic, independent reading, integrity, and signing boundaries
 - [Running](https://noemion.github.io/endem/docs/running.html) — Dromen creation, constrained execution, observations, evidence closure, and acceptance

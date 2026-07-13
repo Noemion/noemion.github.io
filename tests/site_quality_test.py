@@ -1539,6 +1539,72 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the Agent system boundary guide"
                 )
+
+    verification_page = SOURCE_ROOT / "development" / "testing.html"
+    verification_text = verification_page.read_text()
+    for token in (
+        "形成、变换与复现必须分开",
+        "来源与文本变换",
+        "确定性形成",
+        "显示与导出",
+        "回转与迁移",
+        "独立复现",
+        "当前没有通用 round-trip 或跨 Profile 语义等价要求",
+        "GNU Guix challenge",
+        "GNU BFD canonical form",
+        "RFC 8785 JSON Canonicalization Scheme",
+        "OpenAI Structured Outputs",
+        "schema 合规只证明形状",
+    ):
+        if token not in verification_text:
+            errors.append(f"testing guide missing bounded verification claim: {token}")
+    forbidden_round_trip_claims = {
+        SOURCE_ROOT / "development" / "testing.html": (
+            "规范文本 → Endem → 规范文本往返保持规范化等价",
+        ),
+        SOURCE_ROOT / "spec" / "endem-core.md": (
+            "相同的规范化来源",
+        ),
+        SOURCE_ROOT / "endem" / "docs" / "format.md": (
+            "相同的规范化来源",
+        ),
+    }
+    for source, forbidden_phrases in forbidden_round_trip_claims.items():
+        source_text = source.read_text()
+        for phrase in forbidden_phrases:
+            if phrase in source_text:
+                errors.append(
+                    f"{source.relative_to(SOURCE_ROOT)} retains an overclaimed round-trip boundary: {phrase}"
+                )
+
+    semantic_vector_count = len(list((SOURCE_ROOT / "vectors" / "semantic").glob("*.json")))
+    p0_wire_count = len(
+        json.loads((SOURCE_ROOT / "vectors" / "wire" / "manifest.json").read_text())["vectors"]
+    )
+    p1_wire_count = len(
+        json.loads((SOURCE_ROOT / "vectors" / "wire" / "p1" / "manifest.json").read_text())["vectors"]
+    )
+    downloads_text = (SOURCE_ROOT / "downloads" / "index.html").read_text()
+    for token in (
+        f"{semantic_vector_count} 个 Endem 语义 JSON 向量",
+        f"{p0_wire_count} 个 END-P0 结构字节",
+        f"{p1_wire_count} 个 END-P1 字节",
+    ):
+        if token not in downloads_text:
+            errors.append(f"downloads page has stale vector inventory: expected {token}")
+    if f"{semantic_vector_count} 个 Endem 语义向量" not in verification_text:
+        errors.append("testing guide semantic vector count must match vectors/semantic")
+    for source in (
+        SOURCE_ROOT / "components" / "ktisor.html",
+        SOURCE_ROOT / "development" / "testing.html",
+        SOURCE_ROOT / "development" / "implementation-roadmap.html",
+    ):
+        source_text = source.read_text()
+        for phrase in ("相同规范化输入", "前后六个语义面、依赖与披露行为保持规范等价"):
+            if phrase in source_text:
+                errors.append(
+                    f"{source.relative_to(SOURCE_ROOT)} retains an undefined verification claim: {phrase}"
+                )
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
     registered = sorted(set(registry) | set(read_manual_source_routes()))
@@ -2269,9 +2335,12 @@ def validate_jekyll_sources():
             'event.key === "Escape"',
             "setTimeout(() => this.#finishClose(), 180)",
             'document.documentElement.classList.toggle("mobile-directory-open", locked)',
-            'document.addEventListener("wheel", containOpenMenuGesture, { passive: false })',
-            'document.addEventListener("touchmove", containOpenMenuGesture, { passive: false })',
-            "nextScrollY > this.previousScrollY + 8",
+            "shouldContainScrollGesture",
+            'document.addEventListener("wheel", (event) => this.#containWheel(event), { passive: false })',
+            'this.root.addEventListener("touchstart", (event) => this.#rememberTouch(event), { passive: true })',
+            'document.addEventListener("touchmove", (event) => this.#containTouch(event), { passive: false })',
+            'document.addEventListener("touchend", () => this.#forgetTouch(), { passive: true })',
+            'document.addEventListener("touchcancel", () => this.#forgetTouch(), { passive: true })',
             "NavigationStore",
             "DirectoryNavigation",
             "MobileDirectoryController",
@@ -2282,6 +2351,8 @@ def validate_jekyll_sources():
             "--mobile-directory-scroll-top",
             "this.lockedScrollY",
             "scrollTo(0, this.lockedScrollY)",
+            "this.previousScrollY",
+            'window.addEventListener("scroll"',
         ):
             if forbidden in module_text:
                 errors.append(f"front-end modules retain viewport-shifting mobile menu lock: {forbidden}")
@@ -3272,6 +3343,49 @@ def main():
                     "https://site.test/project/docs/index.html",
                 ]:
                     errors.append("route model must not duplicate a configured base path")
+
+            scroll_cases = [
+                [{"scrollTop": 0, "scrollHeight": 400, "clientHeight": 400}, 120, True],
+                [{"scrollTop": 0, "scrollHeight": 400, "clientHeight": 400}, -120, True],
+                [{"scrollTop": 0, "scrollHeight": 900, "clientHeight": 400}, -120, True],
+                [{"scrollTop": 0, "scrollHeight": 900, "clientHeight": 400}, 120, False],
+                [{"scrollTop": 250, "scrollHeight": 900, "clientHeight": 400}, -120, False],
+                [{"scrollTop": 250, "scrollHeight": 900, "clientHeight": 400}, 120, False],
+                [{"scrollTop": 500, "scrollHeight": 900, "clientHeight": 400}, 120, True],
+                [{"scrollTop": 500, "scrollHeight": 900, "clientHeight": 400}, -120, False],
+                [{"scrollTop": 250, "scrollHeight": 900, "clientHeight": 400}, 0, False],
+            ]
+            scroll_script = (
+                "const { shouldContainScrollGesture } = await import(process.argv[1]);"
+                "const cases = JSON.parse(process.argv[2]);"
+                "process.stdout.write(JSON.stringify(cases.map(([metrics, deltaY]) => "
+                "shouldContainScrollGesture(metrics, deltaY))));"
+            )
+            scroll_completed = subprocess.run(
+                [
+                    node,
+                    "--input-type=module",
+                    "-e",
+                    scroll_script,
+                    directory_module.as_uri(),
+                    json.dumps(scroll_cases),
+                ],
+                capture_output=True,
+                text=True,
+            )
+            if scroll_completed.returncode != 0:
+                errors.append(
+                    "mobile directory scroll-boundary behavior test could not execute: "
+                    + scroll_completed.stderr.strip()
+                )
+            else:
+                actual_scroll_results = json.loads(scroll_completed.stdout)
+                expected_scroll_results = [case[2] for case in scroll_cases]
+                if actual_scroll_results != expected_scroll_results:
+                    errors.append(
+                        "mobile directory scroll-boundary behavior mismatch: "
+                        f"expected {expected_scroll_results}, got {actual_scroll_results}"
+                    )
 
     for manual_id, manual_routes in MANUAL_ROUTE_ORDERS.items():
         manual_index = ROOT / manual_routes[0]

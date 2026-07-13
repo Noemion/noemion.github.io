@@ -16,12 +16,13 @@ permalink: "/development/testing.html"
     <li>错误必须定位到条款 ID 与字节、记录或语义路径；任何未执行层都不能被描述为通过。</li>
   </ul></section>
 
-  <section class="content-rows"><h2>形成、往返与复现</h2><ul>
-    <li>相同六个语义面、投影决定、验证配置和固定依赖产生完全相同的 Endem 字节。</li>
-    <li>规范文本 → Endem → 规范文本往返保持规范化等价；非规范空白或排列差异不得改变身份。</li>
-    <li>分别报告 Endem 字节复现、工具二进制复现和发布签名真实性；三者不能相互替代。</li>
-    <li>至少在两个工作目录和两个隔离环境构建；区域设置、时区、临时路径、归档顺序和时间戳不得污染结果。</li>
-  </ul></section>
+  <section class="content-wide"><h2>形成、变换与复现必须分开</h2><p class="callout"><strong>直接结论：</strong>相同输出只在已经声明的比较域中有意义。字节相同、回转成功、结构符合 schema 和两次结果一致，都不能自动证明来源相同、语义等价或目标正确。</p><div class="table-wrap"><table><thead><tr><th>验证主张</th><th>必须固定什么</th><th>最多能证明什么</th><th>不能越过的边界</th></tr></thead><tbody>
+    <tr><td>来源与文本变换</td><td>原始字节身份、文本槽、严格解码 Profile、每次显式变换和损失</td><td>指定输出确实由指定输入按记录步骤产生</td><td>解码文本或显示视图不是原始文件；变换成功不证明可逆或意义相同</td></tr>
+    <tr><td>确定性形成</td><td>解码输入、授权决定、配置、依赖、规范、Profile、格式和 Ktisor 版本的完整闭包</td><td>同一封闭输入产生同一规范结果；在精确格式域中逐字节相同</td><td>不得用隐式规范化构造“相同输入”，也不证明输入主张为真</td></tr>
+    <tr><td>显示与导出</td><td>输入对象、渲染器或导出器版本、选项、删减和显示环境</td><td>生成一份可追溯的派生视图</td><td>派生视图不能反向重建原始来源、签名、权限或全部制品字节</td></tr>
+    <tr><td>回转与迁移</td><td>源域、目标域、双向映射、保留属性、损失、版本和失败责任</td><td>已声明属性在已声明路径中保持</td><td>当前没有通用 round-trip 或跨 Profile 语义等价要求</td></tr>
+    <tr><td>独立复现</td><td>精确输入闭包、两个独立产出路径、工具与环境约束</td><td>两份输出逐字节相同或不同</td><td>字节相同不证明设计正确；字节不同也不能自行判断哪份正确</td></tr>
+  </tbody></table></div><p>分别报告 Endem 字节复现、工具二进制复现和发布签名真实性。至少使用两个工作目录和两个隔离环境；区域设置、时区、临时路径、归档顺序和时间戳不得污染结果。</p></section>
 
   <section class="content-rows"><h2>双读取器契约</h2><ul>
     <li>Ktisor 的生产解析器直接读取实际字节，并只在全部检查通过后产生内部验证句柄。</li>
@@ -32,7 +33,7 @@ permalink: "/development/testing.html"
 
   <section class="content-rows"><h2>当前资料检查能证明什么</h2><p class="callout"><strong>当前证据：</strong>仓库中的 Python 检查器可以读取登记、语义向量、专题提案向量、Iknem 证据向量、实验字节和来源样例，并比较预期接受或拒绝结果。它们检查规范资料是否自洽，不是 Ktisor、Theor、Drasor、求值器或决定引擎。</p><ul>
     <li>检查器覆盖已登记字段、引用、来源范围、排序、资源边界和结果域禁止转换案例。</li>
-    <li>十个 Endem 语义向量包含三个接受、七个确定性拒绝和一组外部语境身份等价检查；测试语境不是 Endem 字节或授权物理格式。</li>
+    <li>10 个 Endem 语义向量包含三个接受、七个确定性拒绝和一组外部语境身份等价检查；测试语境不是 Endem 字节或授权物理格式。</li>
     <li>规范向量描述未来实现必须共同处理的正反案例，但不证明任何组件已经满足这些要求。</li>
     <li>当前没有组件依赖树、可执行文件复现、实现级模糊测试、故障注入、签名或 SBOM 证据。</li>
     <li>用户明确开启代码阶段后，Ktisor 与 Theor 才需要分别实现并接受同一组测试。</li>
@@ -57,7 +58,7 @@ permalink: "/development/testing.html"
   <section class="content-rows"><h2>绑定、发布与签名</h2><ul>
     <li>引用可见性、版本、必需/可选依赖、ID 重映射、约束可满足性、权限交集和冲突矩阵全部有正反向量。</li>
     <li>链接顺序不改变规范结果；任何能力合并只能保持或收窄上限。</li>
-    <li><code>tasse</code> 前后六个语义面、依赖与披露行为保持规范等价；调试伴随记录有独立访问权限与生命周期。</li>
+    <li><code>tasse</code> 当前没有可用的裁剪等价关系。未来只有版本化保留关系明确允许时才变换；无法证明保留时保留内容或失败。主对象、调试伴随记录和其他派生物各有精确身份、访问权限与生命周期。</li>
     <li>私钥始终在外部签名系统；签名响应必须精确匹配请求、主体摘要、策略和发行身份。</li>
     <li>END-P1 中的权威字段只定位候选权威；缺少或错绑外部授权决定时，独立文件不能越过 Profile 接受，也不能生成新的内容身份。</li>
   </ul></section>
@@ -76,6 +77,13 @@ permalink: "/development/testing.html"
     <li>模型任务执行多次独立运行，报告成功率、置信区间、模型、工具、策略身份和失败切片；固定随机种子或零温度不是跨版本确定性证明。</li>
     <li>模型评价器只产生建议性评价；机器可判定的 accepted 来自确定性规则，需要价值判断时由具名外部权威签署。</li>
   </ul></section>
+
+  <section class="content-wide"><h2>外部机制只支持有限主张</h2><div class="table-wrap"><table><thead><tr><th>权威机制</th><th>可采用的验证纪律</th><th>不能直接推出</th></tr></thead><tbody>
+    <tr><td><a href="https://guix.gnu.org/manual/en/guix.html#Invoking-guix-challenge">GNU Guix challenge</a></td><td>从独立来源取得构建结果并逐字节比较，同时保留差异供调查。</td><td>相同字节不能证明源设计正确；不同字节不能自行判定哪一份可信。</td></tr>
+    <tr><td><a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD canonical form</a></td><td>通用内部表示必须披露源格式、目标格式和无法表示的信息。</td><td>进入同一 canonical form 不能证明格式特有内容、来源和语义都被保留。</td></tr>
+    <tr><td><a href="https://www.rfc-editor.org/rfc/rfc8785.html">RFC 8785 JSON Canonicalization Scheme</a></td><td>规范形式必须限定输入域、数值和字符串处理，并保留数组顺序。</td><td>可哈希 JSON 不证明业务语义、权威或跨 Profile 等价。</td></tr>
+    <tr><td><a href="https://openai.com/index/introducing-structured-outputs-in-the-api/">OpenAI Structured Outputs</a></td><td>把模型输出约束到精确 schema，减少结构不匹配并允许确定性结构检查。</td><td>schema 合规只证明形状；字段中的事实、引用、授权和满足判断仍是不可信候选。</td></tr>
+  </tbody></table></div><p>这些机制共同支持“先声明比较域，再解释结果”。它们不支持一个跨文本、对象、模型和版本的通用等价结论。</p></section>
 
   <section class="content-wide"><h2>证据等级</h2><div class="table-wrap"><table><thead><tr><th>等级</th><th>支持什么</th><th>最低材料</th></tr></thead><tbody>
     <tr><td>示例</td><td>解释候选语义</td><td>输入、预期输出、非规范声明</td></tr>

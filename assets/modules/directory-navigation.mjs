@@ -3,6 +3,17 @@ const { createElement, createLink } = await import(
   new URL(`dom-factory.mjs${version}`, import.meta.url)
 );
 
+export const shouldContainScrollGesture = (scrollContainer, deltaY) => {
+  const maximumScrollTop = Math.max(
+    0,
+    scrollContainer.scrollHeight - scrollContainer.clientHeight
+  );
+  if (maximumScrollTop <= 1) return true;
+  if (deltaY < 0) return scrollContainer.scrollTop <= 1;
+  if (deltaY > 0) return scrollContainer.scrollTop >= maximumScrollTop - 1;
+  return false;
+};
+
 export const directoryFromDocsRail = (rail) => {
   if (!rail) return null;
   const groups = Array.from(rail.querySelectorAll("[data-directory-group]")).map((group) => ({
@@ -111,7 +122,7 @@ export class MobileDirectoryController {
     this.summary = panel?.querySelector(":scope > summary");
     this.interactive = matchMedia("(max-width: 839px)");
     this.reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-    this.previousScrollY = scrollY;
+    this.touchY = null;
     this.closeTimer = 0;
   }
 
@@ -127,19 +138,11 @@ export class MobileDirectoryController {
         this.summary.focus();
       }
     });
-    const containOpenMenuGesture = (event) => {
-      if (!this.interactive.matches || !this.panel.open || this.panel.classList.contains("is-closing")) return;
-      if (this.root.contains(event.target)) return;
-      event.preventDefault();
-      this.close();
-    };
-    document.addEventListener("wheel", containOpenMenuGesture, { passive: false });
-    document.addEventListener("touchmove", containOpenMenuGesture, { passive: false });
-    window.addEventListener("scroll", () => {
-      const nextScrollY = scrollY;
-      if (this.interactive.matches && this.panel.open && nextScrollY > this.previousScrollY + 8) this.close();
-      this.previousScrollY = nextScrollY;
-    }, { passive: true });
+    document.addEventListener("wheel", (event) => this.#containWheel(event), { passive: false });
+    this.root.addEventListener("touchstart", (event) => this.#rememberTouch(event), { passive: true });
+    document.addEventListener("touchmove", (event) => this.#containTouch(event), { passive: false });
+    document.addEventListener("touchend", () => this.#forgetTouch(), { passive: true });
+    document.addEventListener("touchcancel", () => this.#forgetTouch(), { passive: true });
     this.interactive.addEventListener("change", () => this.#syncLock());
     this.#syncLock();
   }
@@ -158,6 +161,7 @@ export class MobileDirectoryController {
     clearTimeout(this.closeTimer);
     this.panel.classList.remove("is-closing");
     this.panel.open = true;
+    this.#forgetTouch();
     this.#setScrollLock(true);
   }
 
@@ -165,7 +169,49 @@ export class MobileDirectoryController {
     clearTimeout(this.closeTimer);
     this.panel.open = false;
     this.panel.classList.remove("is-closing");
+    this.#forgetTouch();
     this.#setScrollLock(false);
+  }
+
+  #containWheel(event) {
+    if (!this.#isOpenMobileMenu()) return;
+    if (!this.root.contains(event.target) || shouldContainScrollGesture(this.root, event.deltaY)) {
+      event.preventDefault();
+    }
+  }
+
+  #rememberTouch(event) {
+    if (!this.#isOpenMobileMenu() || !this.root.contains(event.target)) return;
+    this.touchY = event.touches[0]?.clientY ?? null;
+  }
+
+  #containTouch(event) {
+    if (!this.#isOpenMobileMenu()) return;
+    const currentY = event.touches[0]?.clientY;
+    if (!this.root.contains(event.target)) {
+      event.preventDefault();
+      this.touchY = currentY ?? null;
+      return;
+    }
+    if (currentY === undefined) {
+      event.preventDefault();
+      return;
+    }
+    if (this.touchY === null) {
+      this.touchY = currentY;
+      return;
+    }
+    const deltaY = this.touchY - currentY;
+    this.touchY = currentY;
+    if (shouldContainScrollGesture(this.root, deltaY)) event.preventDefault();
+  }
+
+  #forgetTouch() {
+    this.touchY = null;
+  }
+
+  #isOpenMobileMenu() {
+    return this.interactive.matches && this.panel.open;
   }
 
   #syncLock() {
