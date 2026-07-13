@@ -40,6 +40,7 @@ permalink: "/specifications/endem.html"
       <tr id="apor"><td><code>apor</code></td><td>候选解释、冲突、缺口、风险、解决策略和有权绑定的主体。</td><td>只保留最高置信候选、无授权关闭歧义、未决项在状态变化中消失。</td></tr>
     </tbody></table></div>
     <p><code>rhem/semion/skena/telis/krin/apor</code> 是固定语义顺序；没有未决项时，<code>apor</code> 必须是显式空集合。END-P0 只验证编号 1–6 的结构记录；END-P1 已为未来首条实现路径的评审固定六记录内部字段、枚举、规范排序和引用闭包。任何后续 Profile 都必须恢复同一顺序、符号身份、关系位置与规范含义。</p>
+    <p class="note"><code>kine</code> 当前存在一项待决定的措辞边界：<code>krin</code> 能判断终态，却不能单凭后态证明动作发生、状态转变或某主体造成结果。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">非规范状态变化与因果归因研究提案</a>建议把它澄清为“要求事态达到成立”的目标方向；在用户接受并修订 ADR 与规范前，不能把这项建议冒充现行条款。</p>
   </section>
 
   <section class="content-wide">

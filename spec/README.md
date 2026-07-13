@@ -37,6 +37,8 @@
 
 [`semantic-equivalence-and-migration-proposal.md`](semantic-equivalence-and-migration-proposal.md) 研究精确身份、封闭结构同构、有范围观察等价、版本化迁移、强化/弱化和模型相似度怎样分开。它用 W3C RDFC-1.0、RFC 8785、Unicode UAX #15、YANG 更新规则、GNU BFD/objcopy、Sentence-BERT、LLM-as-a-Judge 与 NIST AI 800-3 检查规范化和模型判断的适用域。它不创建等价制品、迁移格式、Semantic Key、命令、组件或 CORE，也不进入 `registry.json`；当前首选是把未来唯一义务归还现有 ID、END、SYN、TXT、AUT、IKN、ADP、DIA 与 DRO 责任。
 
+[`state-change-and-causal-attribution-proposal.md`](state-change-and-causal-attribution-proposal.md) 研究 `kine`、终态满足、动作发生、状态转变、因果归因、授权责任与最终决定怎样分开。它用 GNU Make、Kubernetes 控制器、W3C PROV、CloudEvents、OpenTelemetry、RFC 9110、ReAct 与 A2A 检查现实执行边界。它不改写 END-TEL-001，不创建因果制品、动作格式、命令、组件或 CORE，也不进入 `registry.json`；当前建议把 `kine` 理解为目标方向，强行动或因果主张必须由结构和有范围证据显示。
+
 [`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用三十个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分、结果域、时间范围、缺席推断、量化范围、测量阈值、复合判断以及内容与授权伴随关系是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
 
 [`synem-scenarios.md`](synem-scenarios.md) 用十个非规范场景检查闭包、绑定、可选依赖、权限、成员结果和激活边界。它同样不是语法、解析器或组件证据。

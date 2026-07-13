@@ -171,6 +171,8 @@ Ktisor 负责确定性的 `ktise`、`elenk`、`pleko` 与 `tasse`；模型不得
 
 语义等价与迁移的当前边界记录在 [`spec/semantic-equivalence-and-migration-proposal.md`](spec/semantic-equivalence-and-migration-proposal.md)。精确身份、封闭结构同构、有范围观察等价、迁移、强化/弱化和模型相似度必须分开；`tasse` 当前不能证明裁剪等价，无法依据冻结的保留关系证明允许变换时必须保留或失败。该提案不创建 Semantic Key、等价制品、命令、组件或 CORE，只有用户接受责任分配后才可能把唯一义务归还现有规范。
 
+状态变化与因果归因的当前边界记录在 [`spec/state-change-and-causal-attribution-proposal.md`](spec/state-change-and-causal-attribution-proposal.md)。现有 `krin` 可以判断终态，却不能单凭后态证明动作发生、状态转变或某主体造成结果；提案因此建议把 `kine` 澄清为“要求事态达到成立”的目标方向。该结论仍等待用户决定，不修改 END-TEL-001，也不创建因果制品、命令、组件或 CORE。
+
 技术长文、Endem 应用介绍和手册正文还必须读取 [`design-system/readability.md`](design-system/readability.md)。1200px 是连续画布而不是正文行宽：普通段落保持约 700–760px 阅读列，桌面正文采用 17–18px 与约 1.75–1.8 行高。需要利用右侧空间时，优先形成约 800px 主阅读列与约 380px 粘性信息栏，并从对应页面角色的引言区起让信息栏持续承载章节目录、成熟度、可用状态、关键制品、输入输出或下一阅读入口；没有足够信息时使用单列，不为排版保留空栏。
 
 图片只在能增强概念解释、页面辨识或内容氛围时使用。选择顺序为许可清晰的素材库、经授权的项目素材、项目定制生成图；素材必须下载到仓库并压缩，不能依赖第三方热链。来源、许可、裁切焦点、替代文本和生成提示记录在 [`design-system/images.md`](design-system/images.md)，公开页面不暴露设计参考或模仿关系。

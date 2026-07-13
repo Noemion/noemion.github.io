@@ -1310,6 +1310,47 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the semantic equivalence research proposal"
                 )
+
+    causation_proposal = SOURCE_ROOT / "spec" / "state-change-and-causal-attribution-proposal.md"
+    if not causation_proposal.exists():
+        errors.append("missing non-normative state change and causal attribution research proposal")
+    else:
+        proposal_text = causation_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
+            "不创建新制品、文件格式、扩展名、命令、组件、结果域、稳定接口或哲学专名",
+            "不进入 `registry.json`",
+            "五类主张必须分开",
+            "GNU Make",
+            "W3C PROV-DM",
+            "CloudEvents",
+            "OpenTelemetry",
+            "终态满足",
+            "动作发生",
+            "状态转变",
+            "因果归因",
+            "威胁到失败责任的映射",
+            "失败域与结果隔离",
+            "候选责任的唯一主归属",
+            "等待决定",
+        ):
+            if token not in proposal_text:
+                errors.append(f"causation proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "state-change-and-causal-attribution" in registry_text:
+            errors.append("non-normative causation proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "specifications" / "endem.html",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+        ):
+            if "state-change-and-causal-attribution-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the causation research proposal"
+                )
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
     registered = sorted(set(registry) | set(read_manual_source_routes()))
