@@ -22,6 +22,8 @@ badges: ["Unreleased", "Endem CLI", "Integrity First"]
 
 当前仓库的 Apache License 2.0 只覆盖实际置于该许可下的源码与文档。它不自动覆盖未来模型参数、训练数据、第三方依赖、托管服务或商标。若以后提供模型相关资源，页面必须分别列出架构、参数、推理代码、训练代码、数据说明、数据、文档和各自条款；“API 可调用”“参数可下载”“源码可见”“自由软件”“Open Source AI”和“可复现模型”不能互换。具体责任见[模型开放性与软件自由边界研究提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/model-openness-and-software-freedom-boundaries-proposal.md)。
 
+安装位置也不证明整条人工智能路径由用户控制。未来必须分别写明第三方托管执行、自主管理执行、设备内执行和通信服务，并逐项核对实际执行者、模型与配置、数据外发、保留、下游服务、状态导出、切换损失和停服退出。源码公开、AGPL、数据驻留或 API 兼容都不能自动成为服务实例控制或无损迁移证据。具体责任见[托管人工智能服务与用户控制边界研究提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/hosted-ai-service-and-user-control-boundaries-proposal.md)。
+
 ## 未来职责流程
 
 当前参数和 Synem 接口尚未冻结。以下顺序只描述未来组件的职责关系，不表示对应实现已经存在：

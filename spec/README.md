@@ -63,6 +63,8 @@
 
 [`model-openness-and-software-freedom-boundaries-proposal.md`](model-openness-and-software-freedom-boundaries-proposal.md) 研究托管服务、参数、架构、推理与训练代码、训练数据说明、数据、文档、许可、首选修改形式、复现和外部开放分类怎样保持分离。它用 GNU 自由软件定义、OSI Open Source AI Definition 1.0、Linux Foundation Model Openness Framework、NIST AI 600-1 与 NIST SP 800-218A 核对用户自由、发布完整性、供应链和证据边界。它不创建 `OPEN-MODEL-CORE`、`LICENSE-CORE`、模型发行格式、合规服务、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 ID、AUT、IKN、ADP、TEXT-IDENTIFIER 与 DIA 责任。
 
+[`hosted-ai-service-and-user-control-boundaries-proposal.md`](hosted-ai-service-and-user-control-boundaries-proposal.md) 研究第三方托管执行、自主管理执行、设备内执行和通信服务怎样保持分离，并逐项检查实际执行者、控制平面、数据外发、隐藏变换、保留、下游服务、状态、导出、切换、停服、观察与复现。它用 GNU 对他人服务替代用户计算的分析、AGPL 边界、MCP Sampling 与授权规范、NIST AI 供应链资料和当前模型服务数据控制核对用户控制。它不创建服务 CORE、网关、云平台、导出格式、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 ID、ADP、AUT、DRO、IKN、TEXT-IDENTIFIER、DIA 与 END 责任。
+
 [`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用三十个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分、结果域、时间范围、缺席推断、量化范围、测量阈值、复合判断以及内容与授权伴随关系是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
 
 [`synem-scenarios.md`](synem-scenarios.md) 用十个非规范场景检查闭包、绑定、可选依赖、权限、成员结果和激活边界。它同样不是语法、解析器或组件证据。
