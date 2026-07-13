@@ -25,6 +25,7 @@ permalink: "/specifications/iknem.html"
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/iknem/cases.json">Iknem 提案向量</a></td><td>九个允许分类与九个确定拒绝的资料一致性矩阵</td><td>vector-checker-only</td></tr>
       <tr><td><a href="../architecture/adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a></td><td>为什么采用这些边界，以及与 W3C、RATS、SLSA、GNU Guix 和 AI 遥测的关系</td><td>Accepted Design</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测研究</a></td><td>模型评审调用、偏差探针、统计汇总与使用决定的非规范边界</td><td>awaiting-decision</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新研究</a></td><td>训练数据、反馈、派生模型、评测、发布与回滚的非规范边界</td><td>awaiting-decision</td></tr>
     </tbody></table></div>
     <p>只有 <code>spec/iknem-core.md</code> 是 Iknem 的现行规范条款源。此 HTML 页面负责解释，不建立第二套字段或符合性要求。</p>
   </section>
@@ -48,6 +49,7 @@ permalink: "/specifications/iknem.html"
     <div class="flow"><div class="step">原始观察引用</div><div class="step">规范化与有损变换</div><div class="step">phain 关系结构</div><div class="step">有限主张</div><div class="step">有效性评估</div><div class="step">krin 覆盖计算</div><div class="step">满足判断</div><div class="step">权威决定</div></div>
     <p>模型对日志的解释可以保存为 <code>model-candidate</code>，但不能伪装成 <code>direct-observation</code>。命令退出 0 只说明命令状态；没有预先登记的关系映射时，它不能直接说明目标服务健康。</p>
     <p>模型评审也遵守同一边界。多次评分、多个模型或高置信度不能改变来源类别。评分说明、实际提示、候选顺序、模型版本、偏差探针和统计区间必须另行绑定。</p>
+    <p>人工偏好、用户反馈、模型奖励和训练日志也只是各自范围内的记录。它们进入训练集不会自动取得数据资格、代表性、事实真值或发布决定权；训练完成也不会让旧证据升级或覆盖新模型。</p>
   </section>
 
   <section class="content-wide">

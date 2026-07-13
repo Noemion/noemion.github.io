@@ -59,6 +59,8 @@
 
 [`model-assisted-evaluation-proposal.md`](model-assisted-evaluation-proposal.md) 研究评测目的、构念、可观察标准、题目与候选、协议、模型评审调用、原始输出、统计汇总和使用决定怎样保持分离。它用 NIST AI 800-2 初稿、NIST AI 800-3、NeurIPS 与 ICLR 的模型裁判研究，以及 GNU Diffutils、Coreutils 随机来源和排序规则核对偏差、随机性、依赖、漂移与限定主张。它不创建 `EVAL-CORE`、`JUDGE-CORE`、评测制品、裁判对象、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 END、TEXT-IDENTIFIER、ID、ADP、DRO、IKN、AUT 与 DIA 责任。
 
+[`model-training-and-update-boundaries-proposal.md`](model-training-and-update-boundaries-proposal.md) 研究训练数据、反馈记录、基础模型、适配权重、训练活动、环境复现、行为评测、发布、回滚与运行观察怎样保持分离。它用 NIST AI 600-1、NIST SP 800-218A、RLHF、DPO、递归生成数据研究、GNU Guix 与 Diffutils 核对来源、资格、投毒、反馈回路、派生身份和复现边界。它不创建 `TRAIN-CORE`、`MODEL-CORE`、`FEEDBACK-CORE`、模型制品、训练清单格式、训练平台、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 TEXT-IDENTIFIER、ID、AUT、IKN、ADP、DRO、DIA 与 END 责任。
+
 [`endem-scenarios.md`](endem-scenarios.md) 是非规范性的自然语言设计审查语料。它用三十个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分、结果域、时间范围、缺席推断、量化范围、测量阈值、复合判断以及内容与授权伴随关系是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
 
 [`synem-scenarios.md`](synem-scenarios.md) 用十个非规范场景检查闭包、绑定、可选依赖、权限、成员结果和激活边界。它同样不是语法、解析器或组件证据。

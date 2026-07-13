@@ -415,13 +415,14 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "三种成熟度不得混写",
             "一次运行怎样穿过边界",
             "运行事实应该放在哪里",
-            "十条最危险的越级路径",
+            "十一条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的八个约束",
+            "GNU 技术提供的九个约束",
             "什么时候才值得增加新对象",
-            "十项研究怎样回到现有规范",
+            "十一项研究怎样回到现有规范",
             "模型输出是候选，不是规范内容",
             "模型评审也只是有范围的候选测量",
+            "反馈记录也不等于模型学习",
             "旧 Dromen、秘密或权限",
             "Task 完成，也不证明目标满足",
             "等待决定",
@@ -2013,6 +2014,63 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the model-assisted evaluation research proposal"
                 )
 
+    model_training_proposal = SOURCE_ROOT / "spec" / "model-training-and-update-boundaries-proposal.md"
+    if not model_training_proposal.exists():
+        errors.append("missing non-normative model training and update research proposal")
+    else:
+        proposal_text = model_training_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "结论状态：桌面审查完成；等待用户决定",
+            "至少十一种事实必须分开",
+            "不构成 ADR、CORE 规范、Profile、登记项或实现要求",
+            "不创建模型制品、数据集格式、训练清单格式、反馈格式、模型仓库、训练平台、命令、组件、结果域、稳定接口或哲学专名",
+            "不建立 `TRAIN-CORE`、`MODEL-CORE` 或 `FEEDBACK-CORE`",
+            "不进入 `registry.json`",
+            "会话、检索、提示与训练不是同一更新",
+            "反馈先是记录，之后才可能成为训练输入",
+            "可复现环境不等于可复现模型",
+            "NIST AI 600-1 Generative AI Profile",
+            "NIST SP 800-218A",
+            "NeurIPS 2022 的 RLHF 研究",
+            "NeurIPS 2023 的 DPO 研究",
+            "Nature 2024 的递归生成数据研究",
+            "GNU Guix 参考手册",
+            "GNU Diffutils",
+            "支持案例与反例",
+            "威胁到失败责任的映射",
+            "失败域与结果隔离",
+            "候选责任的唯一主归属",
+            "术语和读音边界",
+            "等待用户决定",
+        ):
+            if token not in proposal_text:
+                errors.append(f"model training proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if (
+            "model-training-and-update" in registry_text
+            or '"TRAIN-CORE"' in registry_text
+            or '"MODEL-CORE"' in registry_text
+            or '"FEEDBACK-CORE"' in registry_text
+        ):
+            errors.append("non-normative model training proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "specifications" / "identity.html",
+            SOURCE_ROOT / "specifications" / "iknem.html",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "docs" / "architecture-guide.md",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+            SOURCE_ROOT / "development" / "testing.html",
+            SOURCE_ROOT / "content-quality-audit.md",
+        ):
+            if "model-training-and-update-boundaries-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the model training and update research proposal"
+                )
+
     agent_boundaries = SOURCE_ROOT / "architecture" / "agent-system-boundaries.html"
     if not agent_boundaries.exists():
         errors.append("missing public Agent system boundary guide")
@@ -2021,10 +2079,10 @@ def validate_jekyll_sources():
         for token in (
             "三种成熟度不得混写",
             "运行事实应该放在哪里",
-            "十条最危险的越级路径",
+            "十一条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术提供的八个约束",
-            "十项研究怎样回到现有规范",
+            "GNU 技术提供的九个约束",
+            "十一项研究怎样回到现有规范",
             "2025-11-25",
             "2026-07-28",
             "A2A 1.0 版本化规范",
@@ -2040,7 +2098,11 @@ def validate_jekyll_sources():
             "Coreutils timeout",
             "沙箱名称替代隔离证据",
             "模型评分替代测量与决定",
+            "反馈替代训练资格与发布决定",
             "NIST AI 800-2 初稿",
+            "NIST AI 600-1",
+            "NIST SP 800-218A",
+            "Guix channel、manifest 与 time-machine",
             "Diffutils",
             "随机来源",
         ):
@@ -2056,6 +2118,7 @@ def validate_jekyll_sources():
             "parallel-and-speculative-execution-proposal.md",
             "model-adapter-isolation-proposal.md",
             "model-assisted-evaluation-proposal.md",
+            "model-training-and-update-boundaries-proposal.md",
             "semantic-equivalence-and-migration-proposal.md",
         ):
             if proposal_name not in boundary_text:
@@ -2095,6 +2158,12 @@ def validate_jekyll_sources():
         "model-assisted-evaluation-proposal.md",
         "NIST AI 800-2 初稿",
         "GNU Diffutils",
+        "模型更新必须重新建立证据链",
+        "训练完成、损失下降、固定种子或部署回滚",
+        "model-training-and-update-boundaries-proposal.md",
+        "NIST AI 600-1",
+        "NIST SP 800-218A",
+        "GNU Guix",
     ):
         if token not in verification_text:
             errors.append(f"testing guide missing bounded verification claim: {token}")

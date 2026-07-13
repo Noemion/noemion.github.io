@@ -86,12 +86,21 @@ permalink: "/development/testing.html"
     <tr><td>证据与决定</td><td>原始输出、<code>model-candidate</code>、人工校准、覆盖和具名权威</td><td>多个模型投票不能自动产生 <code>sufficient</code> 或 <code>accepted</code></td></tr>
   </tbody></table></div><p>完整的支持案例、反例、威胁与停止条件见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测与裁判边界研究提案</a>。它当前非规范，不创建评测 CORE、裁判对象、命令或组件。</p></section>
 
+  <section class="content-wide"><h2>模型更新必须重新建立证据链</h2><p class="callout"><strong>直接结论：</strong>训练完成、损失下降、固定种子或部署回滚都不是模型更好、可复现、可发布或目标满足的证明。</p><div class="table-wrap"><table><thead><tr><th>检查</th><th>必须保存</th><th>失败时怎样处理</th></tr></thead><tbody>
+    <tr><td>数据与反馈资格</td><td>精确快照、来源、用途、权利、同意、切片、合成来源和排除</td><td>身份或资格不明时拒绝进入对应训练目的</td></tr>
+    <tr><td>训练活动</td><td>基础模型、适配器、处理、代码、参数、环境、随机状态、停止条件和输出身份</td><td>配置或实际执行无法闭合时不形成复现主张</td></tr>
+    <tr><td>独立复现</td><td>软件闭包、数据顺序、硬件、数值路径、独立产出和逐字节比较</td><td>只固定环境或种子时明确限定证据等级</td></tr>
+    <tr><td>行为评测</td><td>新旧精确模型、用途、总体、污染检查、偏差反例、统计区间和退化切片</td><td>固定基准提高不能掩盖子群或真实用途退化</td></tr>
+    <tr><td>发布与回滚</td><td>具名权威、政策、受众、部署配置、截止点、撤回和运行监测</td><td>训练或流水线成功不能自动产生 <code>accepted</code></td></tr>
+  </tbody></table></div><p>完整边界见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究提案</a>。它当前非规范，只使用直白职责短语，不创建训练 CORE、模型制品、训练平台、命令、组件或新专名。</p></section>
+
   <section class="content-wide"><h2>外部机制只支持有限主张</h2><div class="table-wrap"><table><thead><tr><th>权威机制</th><th>可采用的验证纪律</th><th>不能直接推出</th></tr></thead><tbody>
     <tr><td><a href="https://guix.gnu.org/manual/en/guix.html#Invoking-guix-challenge">GNU Guix challenge</a></td><td>从独立来源取得构建结果并逐字节比较，同时保留差异供调查。</td><td>相同字节不能证明源设计正确；不同字节不能自行判定哪一份可信。</td></tr>
     <tr><td><a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD canonical form</a></td><td>通用内部表示必须披露源格式、目标格式和无法表示的信息。</td><td>进入同一 canonical form 不能证明格式特有内容、来源和语义都被保留。</td></tr>
     <tr><td><a href="https://www.rfc-editor.org/rfc/rfc8785.html">RFC 8785 JSON Canonicalization Scheme</a></td><td>规范形式必须限定输入域、数值和字符串处理，并保留数组顺序。</td><td>可哈希 JSON 不证明业务语义、权威或跨 Profile 等价。</td></tr>
     <tr><td><a href="https://openai.com/index/introducing-structured-outputs-in-the-api/">OpenAI Structured Outputs</a></td><td>把模型输出约束到精确 schema，减少结构不匹配并允许确定性结构检查。</td><td>schema 合规只证明形状；字段中的事实、引用、授权和满足判断仍是不可信候选。</td></tr>
     <tr><td><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf">NIST AI 800-2 初稿</a>与 <a href="https://doi.org/10.6028/NIST.AI.800-3">NIST AI 800-3</a></td><td>先固定评测目的、协议、模型版本、统计假设和限定用途，并分开固定基准与推广结论。</td><td>基准名、模型裁判、一致率或点估计不能自动成为普遍能力和发布决定。</td></tr>
+    <tr><td><a href="https://doi.org/10.6028/NIST.AI.600-1">NIST AI 600-1</a>、<a href="https://doi.org/10.6028/NIST.SP.800-218A">NIST SP 800-218A</a>与 <a href="https://guix.gnu.org/manual/en/guix.pdf">GNU Guix</a></td><td>追踪训练与微调数据、模型派生物、训练流程和反馈；固定完整软件环境并单独比较输出。</td><td>SBOM、provenance、相同环境、固定种子或训练成功都不能自动证明权重复现、行为安全或发布获批。</td></tr>
     <tr><td><a href="https://www.gnu.org/software/diffutils/manual/html_node/Invoking-diff.html">GNU Diffutils</a> 与 <a href="https://www.gnu.org/software/coreutils/manual/html_node/Random-sources.html">Coreutils 随机来源</a></td><td>分开“相同、不同、比较故障”，并记录候选顺序使用的随机来源。</td><td>差异不选择正确一方；固定随机源也不证明模型评审没有位置偏差。</td></tr>
   </tbody></table></div><p>这些机制共同支持“先声明比较域，再解释结果”。它们不支持一个跨文本、对象、模型和版本的通用等价结论。</p></section>
 
