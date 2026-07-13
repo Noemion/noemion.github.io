@@ -111,7 +111,6 @@ export class MobileDirectoryController {
     this.summary = panel?.querySelector(":scope > summary");
     this.interactive = matchMedia("(max-width: 839px)");
     this.reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-    this.lockedScrollY = 0;
     this.previousScrollY = scrollY;
     this.closeTimer = 0;
   }
@@ -174,14 +173,6 @@ export class MobileDirectoryController {
   }
 
   #setScrollLock(locked) {
-    if (locked && !document.documentElement.classList.contains("mobile-directory-open")) {
-      this.lockedScrollY = scrollY;
-      document.documentElement.style.setProperty("--mobile-directory-scroll-top", `${-this.lockedScrollY}px`);
-      document.documentElement.classList.add("mobile-directory-open");
-    } else if (!locked && document.documentElement.classList.contains("mobile-directory-open")) {
-      document.documentElement.classList.remove("mobile-directory-open");
-      document.documentElement.style.removeProperty("--mobile-directory-scroll-top");
-      scrollTo(0, this.lockedScrollY);
-    }
+    document.documentElement.classList.toggle("mobile-directory-open", locked);
   }
 }

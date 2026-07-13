@@ -403,10 +403,7 @@ body .global-directory-panel{display:none}
   body:not([data-page-role="portal"]) .global-directory-panel nav{
     top:48px;right:0;left:auto;width:min(390px,calc(100vw - 16px));max-height:calc(100dvh - 120px)
   }
-  html.mobile-directory-open{overflow:hidden;overscroll-behavior:none}
-  html.mobile-directory-open body{
-    position:fixed;top:var(--mobile-directory-scroll-top,0);right:0;left:0;width:100%;overflow:hidden;overscroll-behavior:none
-  }
+  html.mobile-directory-open{overscroll-behavior:none}
   html.mobile-directory-open .global-directory-panel nav{
     overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch
   }

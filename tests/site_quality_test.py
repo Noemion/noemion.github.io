@@ -1257,7 +1257,7 @@ def validate_jekyll_sources():
             '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>定义人工智能时代的</span><span>自然语言目标规范</span><span class="portal-title-foundation">奠定可验证智能的工程基石</span></strong></h1>',
             '<p class="portal-introduction-summary">Noemion 正在定义一套面向人工智能时代的目标制品、组合规则与验收边界，让自然语言目标能够被确定地表达、受控地实现并由有范围的证据检验。Endem 是这套体系中的最小目标制品。</p>',
             '<span>了解 Noemion</span>',
-            '<span>认识 Endem</span>',
+            '<span>查看 Noemion 架构</span>',
             '<strong>Noemion</strong> 是整个项目、新领域与社区的名称',
         ):
             if token not in homepage_text:
@@ -1265,6 +1265,7 @@ def validate_jekyll_sources():
         for forbidden in (
             "Noemion 只是项目",
             "而成为 Endem",
+            "认识 Endem",
         ):
             if forbidden in homepage_text:
                 errors.append(f"index.html: Endem must not replace the Noemion project identity: {forbidden}")
@@ -1281,6 +1282,16 @@ def validate_jekyll_sources():
                 errors.append(
                     "index.html: expression feature visual labels must use English only"
                 )
+        for token in (
+            'class="portal-focus-card focus-card-endem" href="specifications/endem.html"',
+            'class="portal-focus-card focus-card-synem" href="specifications/synem.html"',
+            'class="portal-focus-card focus-card-dromen" href="specifications/dromen.html"',
+            'class="portal-focus-card focus-card-tekmor" href="specifications/tekmor.html"',
+        ):
+            if token not in homepage_text:
+                errors.append(f"index.html: missing independent homepage object card: {token}")
+        if homepage_text.count('class="portal-focus-card ') != 4:
+            errors.append("index.html: FOUR NOUNS must render four independent object cards")
 
     layout = SOURCE_ROOT / "_layouts/default.html"
     header = SOURCE_ROOT / "_includes/site-header.html"
@@ -1416,8 +1427,7 @@ def validate_jekyll_sources():
             '@media(max-width:839px)',
             'body:not([data-page-role="portal"]) .global-directory-panel',
             '.site-header .directory-panel.is-closing nav',
-            'html.mobile-directory-open body',
-            'position:fixed',
+            'html.mobile-directory-open{overscroll-behavior:none}',
             'overscroll-behavior:contain',
             ':root[data-resolved-theme="dark"]',
             ".site-footer-grid",
@@ -1444,11 +1454,18 @@ def validate_jekyll_sources():
             'body[data-page-role="portal"] .global-header-inner{grid-template-columns:minmax(0,1fr) clamp(102px,30vw,124px) 84px}',
             'body[data-page-role="portal"] .global-timeline-link{width:100%;min-width:0;padding:0}',
             'body[data-page-role="portal"] .global-timeline-value{width:100%;min-width:0;padding-inline:7px;font-size:10px;letter-spacing:.04em}',
+            '.portal-focus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))',
+            '.focus-card-dromen .focus-art',
+            '.focus-card-tekmor .focus-art',
         ):
             if token not in shared_css:
                 errors.append(f"shared styles missing site-wide design contract: {token}")
         if re.search(r"transition\s*:\s*all\b", shared_css):
             errors.append("shared styles must not use transition: all")
+        if re.search(r'html\.mobile-directory-open(?:\s+body)?\s*\{[^}]*(?:position\s*:\s*fixed|overflow\s*:\s*hidden)', shared_css):
+            errors.append("mobile directory gesture lock must not replace the root scroll container")
+        if ".focus-card-core" in shared_css:
+            errors.append("homepage object visuals must not retain the obsolete unmatched focus-card-core selector")
         if re.search(r"\.global-timeline-link\s*\{[^}]*background\s*:\s*#fff", shared_css):
             errors.append("TIMELINE must use the theme navigation surface instead of pure white")
         if re.search(r'\.page-links\s*\{[^}]*background\s*:\s*var\(--portal-line\)', shared_css):
@@ -1785,8 +1802,7 @@ def validate_jekyll_sources():
             'document.addEventListener("pointerdown"',
             'event.key === "Escape"',
             "setTimeout(() => this.#finishClose(), 180)",
-            'document.documentElement.classList.add("mobile-directory-open")',
-            'document.documentElement.style.setProperty("--mobile-directory-scroll-top"',
+            'document.documentElement.classList.toggle("mobile-directory-open", locked)',
             'document.addEventListener("wheel", containOpenMenuGesture, { passive: false })',
             'document.addEventListener("touchmove", containOpenMenuGesture, { passive: false })',
             "nextScrollY > this.previousScrollY + 8",
@@ -1796,6 +1812,13 @@ def validate_jekyll_sources():
         ):
             if token not in module_text:
                 errors.append(f"front-end modules missing interaction contract: {token}")
+        for forbidden in (
+            "--mobile-directory-scroll-top",
+            "this.lockedScrollY",
+            "scrollTo(0, this.lockedScrollY)",
+        ):
+            if forbidden in module_text:
+                errors.append(f"front-end modules retain viewport-shifting mobile menu lock: {forbidden}")
         for token in (
             'import(moduleUrl("global-navigation"))',
             'import(moduleUrl("directory-navigation"))',
