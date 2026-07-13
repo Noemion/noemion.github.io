@@ -11,7 +11,7 @@ FORMAT_SPEC_PATH = ROOT / "spec" / "endem-format.md"
 SOURCE_MANIFEST_SPEC_PATH = ROOT / "spec" / "endem-source-manifest.md"
 SYNEM_SPEC_PATH = ROOT / "spec" / "synem-core.md"
 DROMEN_SPEC_PATH = ROOT / "spec" / "dromen-core.md"
-TEKMOR_SPEC_PATH = ROOT / "spec" / "tekmor-core.md"
+IKNEM_SPEC_PATH = ROOT / "spec" / "iknem-core.md"
 DIAGNOSTIC_SPEC_PATH = ROOT / "spec" / "diagnostics-core.md"
 ADAPTER_SPEC_PATH = ROOT / "spec" / "adapter-core.md"
 IDENTITY_SPEC_PATH = ROOT / "spec" / "identity-core.md"
@@ -21,7 +21,7 @@ THREAT_PATHS = (
     ROOT / "spec" / "endem-threat-model.md",
     ROOT / "spec" / "synem-threat-model.md",
     ROOT / "spec" / "dromen-threat-model.md",
-    ROOT / "spec" / "tekmor-threat-model.md",
+    ROOT / "spec" / "iknem-threat-model.md",
     ROOT / "spec" / "diagnostic-threat-model.md",
     ROOT / "spec" / "adapter-threat-model.md",
     ROOT / "spec" / "identity-threat-model.md",
@@ -32,7 +32,7 @@ ERROR_CATALOG_PATH = ROOT / "spec" / "diagnostic-catalog.md"
 SCENARIO_CORPUS_PATH = ROOT / "spec" / "endem-scenarios.md"
 SYNEM_SCENARIO_PATH = ROOT / "spec" / "synem-scenarios.md"
 DROMEN_SCENARIO_PATH = ROOT / "spec" / "dromen-scenarios.md"
-TEKMOR_SCENARIO_PATH = ROOT / "spec" / "tekmor-scenarios.md"
+IKNEM_SCENARIO_PATH = ROOT / "spec" / "iknem-scenarios.md"
 DIAGNOSTIC_SCENARIO_PATH = ROOT / "spec" / "diagnostic-scenarios.md"
 ADAPTER_SCENARIO_PATH = ROOT / "spec" / "adapter-scenarios.md"
 IDENTITY_SCENARIO_PATH = ROOT / "spec" / "identity-scenarios.md"
@@ -42,10 +42,10 @@ PROFILE_PATH = ROOT / "spec" / "profiles" / "end-p0.json"
 VECTOR_ROOT = ROOT / "vectors" / "semantic"
 SCHEMA_PATH = ROOT / "vectors" / "vector.schema.json"
 
-CLAUSE_ID = re.compile(r"^(?:END|SYN|DRO|TEK|DIA|ADP|ID|TXT|AUT)-[A-Z]+-[0-9]{3}$")
+CLAUSE_ID = re.compile(r"^(?:END|SYN|DRO|IKN|DIA|ADP|ID|TXT|AUT)-[A-Z]+-[0-9]{3}$")
 VECTOR_ID = re.compile(r"^SV-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
-SPEC_HEADING = re.compile(r"^### ((?:END|SYN|DRO|TEK|DIA|ADP|ID|TXT|AUT)-[A-Z]+-[0-9]{3})\s+—", re.MULTILINE)
-THREAT_HEADING = re.compile(r"^### (THR-(?:END|SYN|DRO|TEK|DIA|ADP|ID|TXT|AUT)-[0-9]{3})\s+—", re.MULTILINE)
+SPEC_HEADING = re.compile(r"^### ((?:END|SYN|DRO|IKN|DIA|ADP|ID|TXT|AUT)-[A-Z]+-[0-9]{3})\s+—", re.MULTILINE)
+THREAT_HEADING = re.compile(r"^### (THR-(?:END|SYN|DRO|IKN|DIA|ADP|ID|TXT|AUT)-[0-9]{3})\s+—", re.MULTILINE)
 SCENARIO_HEADING = re.compile(r"^### (SCN-[0-9]{3})\s+—", re.MULTILINE)
 REQUIRED_FACETS = ("rhem", "semion", "skena", "telis", "krin", "apor")
 ALLOWED_VERIFICATION_STATUS = {"covered-by-repo", "planned", "manual-authority"}
@@ -95,10 +95,10 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 "implementation_status": "vector-checker-only", "wire_status": "not-applicable",
                 "path": "spec/dromen-core.md",
             },
-            "TEK-CORE": {
+            "IKN-CORE": {
                 "version": "0.1.0-draft", "status": "draft",
                 "implementation_status": "vector-checker-only", "wire_status": "unfrozen",
-                "path": "spec/tekmor-core.md",
+                "path": "spec/iknem-core.md",
             },
             "DIA-CORE": {
                 "version": "0.1.0-draft", "status": "draft",
@@ -127,7 +127,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             },
         }
         if set(documents_by_id) != set(expected_documents):
-            errors.append("spec/registry.json: document IDs must include END, SYN, DRO, TEK, DIA, ADP, ID, TXT and AUT current specifications")
+            errors.append("spec/registry.json: document IDs must include END, SYN, DRO, IKN, DIA, ADP, ID, TXT and AUT current specifications")
         for spec_id, expected_document in expected_documents.items():
             document = documents_by_id.get(spec_id, {})
             for key, value in expected_document.items():
@@ -154,14 +154,14 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: threat model path does not exist")
         expected_supporting = {
             "SYN-THREAT": "spec/synem-threat-model.md",
-            "TEK-THREAT": "spec/tekmor-threat-model.md",
+            "IKN-THREAT": "spec/iknem-threat-model.md",
             "DRO-THREAT": "spec/dromen-threat-model.md",
             "DIA-CAT": "spec/diagnostic-catalog.md",
             "DIA-THREAT": "spec/diagnostic-threat-model.md",
             "DIA-SCEN": "spec/diagnostic-scenarios.md",
             "END-SCEN": "spec/endem-scenarios.md",
             "SYN-SCEN": "spec/synem-scenarios.md",
-            "TEK-SCEN": "spec/tekmor-scenarios.md",
+            "IKN-SCEN": "spec/iknem-scenarios.md",
             "DRO-SCEN": "spec/dromen-scenarios.md",
             "END-P0": "spec/profiles/end-p0.json",
             "END-P1": "spec/profiles/end-p1.json",
@@ -186,8 +186,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: END-SCEN must remain a non-normative design corpus")
         if supporting_by_id.get("SYN-SCEN", {}).get("status") != "non-normative-design-corpus":
             errors.append("spec/registry.json: SYN-SCEN must remain a non-normative design corpus")
-        if supporting_by_id.get("TEK-SCEN", {}).get("status") != "non-normative-design-corpus":
-            errors.append("spec/registry.json: TEK-SCEN must remain a non-normative design corpus")
+        if supporting_by_id.get("IKN-SCEN", {}).get("status") != "non-normative-design-corpus":
+            errors.append("spec/registry.json: IKN-SCEN must remain a non-normative design corpus")
         if supporting_by_id.get("DRO-SCEN", {}).get("status") != "non-normative-design-corpus":
             errors.append("spec/registry.json: DRO-SCEN must remain a non-normative design corpus")
         if supporting_by_id.get("DIA-SCEN", {}).get("status") != "non-normative-design-corpus":
@@ -209,7 +209,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
         if len(term_names) != len(set(term_names)):
             errors.append("spec/registry.json: term names must be unique")
         for required_term in (
-            "Noemion", "Endem", "Synem", "Dromen", "Tekmor",
+            "Noemion", "Endem", "Synem", "Dromen", "Iknem",
             *REQUIRED_FACETS, "wire-format", "content-standard", "content-profile", "END-P0", "END-P1", "source-manifest",
             "satisfaction-result", "decision-result", "session-result", "evidence-status",
             "time-scope", "continuity-policy", "time-coverage",
@@ -328,7 +328,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             )
         for threat in threats:
             threat_id = threat.get("id", "<unknown>")
-            if not re.fullmatch(r"THR-(?:END|SYN|DRO|TEK|DIA|ADP|ID|TXT|AUT)-[0-9]{3}", threat_id):
+            if not re.fullmatch(r"THR-(?:END|SYN|DRO|IKN|DIA|ADP|ID|TXT|AUT)-[0-9]{3}", threat_id):
                 errors.append(f"spec/registry.json: invalid threat ID {threat_id!r}")
             mapped_clauses = threat.get("clauses")
             if not isinstance(mapped_clauses, list) or not mapped_clauses:
@@ -517,8 +517,8 @@ def validate_public_boundary(errors):
         errors.append("Pages workflow must execute composite situation and criteria vectors")
     if "python3 tests/synem_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute Synem closure and activation vectors")
-    if "python3 tests/tekmor_vector_test.py" not in workflow_text:
-        errors.append("Pages workflow must execute Tekmor evidence and appraisal vectors")
+    if "python3 tests/iknem_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute Iknem evidence and appraisal vectors")
     if "python3 tests/dromen_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute Dromen session-contract vectors")
     if "python3 tests/p1_payload_test.py" not in workflow_text:
@@ -570,10 +570,10 @@ def validate_public_boundary(errors):
             "spec/dromen-core.md",
             "spec/dromen-threat-model.md",
             "vectors/dromen",
-            "TEK-CORE 0.1.0-draft",
-            "spec/tekmor-core.md",
-            "spec/tekmor-threat-model.md",
-            "vectors/tekmor",
+            "IKN-CORE 0.1.0-draft",
+            "spec/iknem-core.md",
+            "spec/iknem-threat-model.md",
+            "vectors/iknem",
             "ADP-CORE 0.1.0-draft",
             "spec/adapter-core.md",
             "vectors/adapters",
@@ -660,7 +660,7 @@ def validate_public_boundary(errors):
             "valid / invalid / revoked",
             "sufficient / insufficient",
             "不新增 END-P1 字段",
-            "没有 Praxor",
+            "没有 Drasor",
         ),
         "architecture/adr-0016-mene-time-model.html": (
             "fixed",
@@ -707,7 +707,7 @@ def validate_public_boundary(errors):
             "OWL 2",
             "COUNT(DISTINCT",
             "GNU",
-            "不表示 Poiet、Praxor、求值器或 CLI 已经实现",
+            "不表示 Poiet、Drasor、求值器或 CLI 已经实现",
         ),
         "architecture/adr-0019-measurement-and-thresholds.html": (
             "测量谓词必须同时固定构念",
@@ -723,7 +723,7 @@ def validate_public_boundary(errors):
             "OpenTelemetry Metrics",
             "Prometheus",
             "GNU Units",
-            "不表示遥测采集器、基准运行器、统计引擎、Praxor 或求值器已经实现",
+            "不表示遥测采集器、基准运行器、统计引擎、Drasor 或求值器已经实现",
         ),
         "architecture/adr-0020-composite-situations-and-criteria.html": (
             "第一阶段只允许用",
@@ -735,7 +735,7 @@ def validate_public_boundary(errors):
             "GNU Coreutils test",
             "GNU Bash Lists",
             "SHACL 1.2 Core",
-            "不表示 Poiet、Theor、Praxor、CLI 或求值器已经实现",
+            "不表示 Poiet、Theor、Drasor、CLI 或求值器已经实现",
         ),
         "architecture/adr-0021-synem-closure-and-activation.html": (
             "SYN-CORE 0.1.0-draft",
@@ -745,17 +745,17 @@ def validate_public_boundary(errors):
             "GNU make",
             "W3C SHACL",
             "MCP 2025-11-25",
-            "不表示 Poiet、Theor、Praxor、CLI、解析器或运行时已经实现",
+            "不表示 Poiet、Theor、Drasor、CLI、解析器或运行时已经实现",
         ),
-        "architecture/adr-0022-tekmor-evidence-and-appraisal.html": (
-            "TEK-CORE 0.1.0-draft",
+        "architecture/adr-0022-iknem-evidence-and-appraisal.html": (
+            "IKN-CORE 0.1.0-draft",
             "W3C PROV Data Model",
             "RFC 9334 RATS Architecture",
             "SLSA 1.2 Provenance",
             "GNU Guix 的 guix challenge",
             "OpenTelemetry GenAI 语义约定独立仓库",
             "MCP Security Best Practices",
-            "不表示采集器、验证器、归并器、决定引擎、Theor 或 Praxor 已经实现",
+            "不表示采集器、验证器、归并器、决定引擎、Theor 或 Drasor 已经实现",
         ),
         "architecture/adr-0023-endem-content-standard.html": (
             "END-CORE 0.1.0-draft",
@@ -780,7 +780,7 @@ def validate_public_boundary(errors):
             "Linux no_new_privs",
             "Landlock",
             "不建立 Dromen 文件",
-            "不表示 Praxor 已经实现",
+            "不表示 Drasor 已经实现",
         ),
         "architecture/adr-0025-structured-diagnostics.html": (
             "DIA-CORE 0.1.0-draft",
@@ -849,6 +849,15 @@ def validate_public_boundary(errors):
             "MCP 2025-11-25",
             "当前改动只修正规范边界",
         ),
+        "architecture/adr-0031-release-name-collision-gate.html": (
+            "Accepted",
+            "Iknem",
+            "Drasor",
+            "drase",
+            "IKN-CORE",
+            "不保留别名、重定向、双写或兼容垫片",
+            "正式发行前必须再次查询",
+        ),
         "specifications/synem.html": (
             "SYN-CORE 0.1.0-draft",
             "spec/synem-core.md",
@@ -858,11 +867,11 @@ def validate_public_boundary(errors):
             "ADR-0021",
             "不是物理格式",
         ),
-        "specifications/tekmor.html": (
-            "TEK-CORE 0.1.0-draft",
-            "spec/tekmor-core.md",
-            "spec/tekmor-threat-model.md",
-            "spec/tekmor-scenarios.md",
+        "specifications/iknem.html": (
+            "IKN-CORE 0.1.0-draft",
+            "spec/iknem-core.md",
+            "spec/iknem-threat-model.md",
+            "spec/iknem-scenarios.md",
             "valid / invalid / revoked",
             "sufficient / insufficient",
             "model-candidate",
@@ -878,7 +887,7 @@ def validate_public_boundary(errors):
             "DRO-LIF-001",
             "不是文件、进程、模型上下文、凭据包、可恢复会话或最终结果",
             "Dromen API、平台隔离方式、事件格式和运行后端仍未冻结",
-            "当前没有 Praxor、装载器、沙箱、凭据代理、预算器或运行时",
+            "当前没有 Drasor、装载器、沙箱、凭据代理、预算器或运行时",
         ),
         "specifications/diagnostics.html": (
             "DIA-CORE 0.1.0-draft",
@@ -967,7 +976,7 @@ def main():
             + "\n" + SOURCE_MANIFEST_SPEC_PATH.read_text()
             + "\n" + SYNEM_SPEC_PATH.read_text()
             + "\n" + DROMEN_SPEC_PATH.read_text()
-            + "\n" + TEKMOR_SPEC_PATH.read_text()
+            + "\n" + IKNEM_SPEC_PATH.read_text()
             + "\n" + DIAGNOSTIC_SPEC_PATH.read_text()
             + "\n" + ADAPTER_SPEC_PATH.read_text()
             + "\n" + IDENTITY_SPEC_PATH.read_text()
@@ -993,10 +1002,10 @@ def main():
         errors.append(f"spec/synem-scenarios.md: cannot read: {exc}")
         synem_scenario_text = ""
     try:
-        tekmor_scenario_text = TEKMOR_SCENARIO_PATH.read_text()
+        iknem_scenario_text = IKNEM_SCENARIO_PATH.read_text()
     except OSError as exc:
-        errors.append(f"spec/tekmor-scenarios.md: cannot read: {exc}")
-        tekmor_scenario_text = ""
+        errors.append(f"spec/iknem-scenarios.md: cannot read: {exc}")
+        iknem_scenario_text = ""
     try:
         dromen_scenario_text = DROMEN_SCENARIO_PATH.read_text()
     except OSError as exc:
@@ -1071,12 +1080,12 @@ def main():
         if token not in synem_scenario_text:
             errors.append(f"spec/synem-scenarios.md: missing design-review boundary {token!r}")
 
-    tekmor_scenario_ids = re.findall(r"^### (TEK-SCN-[0-9]{3})\s+—", tekmor_scenario_text, re.MULTILINE)
-    if tekmor_scenario_ids != [f"TEK-SCN-{index:03d}" for index in range(1, 15)]:
-        errors.append("spec/tekmor-scenarios.md: scenario IDs must be unique and ordered TEK-SCN-001 through TEK-SCN-014")
+    iknem_scenario_ids = re.findall(r"^### (IKN-SCN-[0-9]{3})\s+—", iknem_scenario_text, re.MULTILINE)
+    if iknem_scenario_ids != [f"IKN-SCN-{index:03d}" for index in range(1, 15)]:
+        errors.append("spec/iknem-scenarios.md: scenario IDs must be unique and ordered IKN-SCN-001 through IKN-SCN-014")
     for token in ("固定测试集不能代表未知总体", "循环自证", "模型解释保持候选", "有效签名遇到撤销", "重复日志仍不能补齐覆盖", "不得保存实时凭据"):
-        if token not in tekmor_scenario_text:
-            errors.append(f"spec/tekmor-scenarios.md: missing design-review boundary {token!r}")
+        if token not in iknem_scenario_text:
+            errors.append(f"spec/iknem-scenarios.md: missing design-review boundary {token!r}")
 
     dromen_scenario_ids = re.findall(r"^### (DRO-SCN-[0-9]{3})\s+—", dromen_scenario_text, re.MULTILINE)
     if dromen_scenario_ids != [f"DRO-SCN-{index:03d}" for index in range(1, 16)]:
@@ -1131,7 +1140,7 @@ def main():
         print("\n".join(errors))
         return 1
     print(
-        "PASS: END-CORE, END-FMT, END-SRCM, SYN-CORE, DRO-CORE, TEK-CORE, DIA-CORE, ADP-CORE, ID-CORE, TXT-CORE and AUT-CORE 0.1.0-draft have unique clauses, explicit "
+        "PASS: END-CORE, END-FMT, END-SRCM, SYN-CORE, DRO-CORE, IKN-CORE, DIA-CORE, ADP-CORE, ID-CORE, TXT-CORE and AUT-CORE 0.1.0-draft have unique clauses, explicit "
         "maturity, traceable evidence, 99 registered threats, executed semantic "
         "vectors, 30 natural-language design scenarios, 12 result-domain vectors, "
         "12 mene time and continuity vectors, 12 negation and absence vectors, "
@@ -1140,7 +1149,7 @@ def main():
         "12 composite situation and criteria vectors, "
         "12 Synem closure and activation vectors, "
         "20 Dromen session-contract vectors, "
-        "18 Tekmor evidence and appraisal vectors, "
+        "18 Iknem evidence and appraisal vectors, "
         "20 structured diagnostic vectors, "
         "24 external protocol adapter vectors, "
         "24 exact identity and attestation vectors, "

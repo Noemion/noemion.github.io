@@ -68,7 +68,7 @@ permalink: "/architecture/adr-0025-structured-diagnostics.html"
       <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Message-Formatting-Options.html">GNU GCC 诊断格式选项</a>允许同一诊断输出为文本或 SARIF，并保存位置、规则和相关事件。Noemion 借鉴“诊断内容与输出出口分开”，不复制 GCC 参数或编译器严重度。</li>
       <li><a href="https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html">SARIF 2.1.0</a>提供规则身份、物理/逻辑位置、相关位置和代码流。它适合未来静态检查导出，但不能表达能力、满足或验收权威。</li>
       <li><a href="https://www.rfc-editor.org/rfc/rfc9457.html">RFC 9457 Problem Details</a>区分问题类型、人类标题、具体发生和详情，并警告错误响应可能泄露实现与隐私信息。Noemion 借鉴身份和发生分离，不把 HTTP 状态当成本地结果。</li>
-      <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP 2025-11-25 工具规范</a>区分 JSON-RPC 协议错误和带 <code>isError</code> 的工具执行错误。Praxor 外缘必须保留这种来源差异，再进行本地有限映射。</li>
+      <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP 2025-11-25 工具规范</a>区分 JSON-RPC 协议错误和带 <code>isError</code> 的工具执行错误。Drasor 外缘必须保留这种来源差异，再进行本地有限映射。</li>
     </ul>
   </section>
 
@@ -76,10 +76,10 @@ permalink: "/architecture/adr-0025-structured-diagnostics.html"
     <h2>规范影响与验证</h2>
     <ul>
       <li>新增 <code>DIA-CORE 0.1.0-draft</code> 十条跨对象诊断内容要求。</li>
-      <li>把原 Endem 专用目录替换为 <code>DIA-CAT</code>，保留现有 Endem 草案码并补齐 Synem、Dromen、Tekmor 和诊断系统码。</li>
+      <li>把原 Endem 专用目录替换为 <code>DIA-CAT</code>，保留现有 Endem 草案码并补齐 Synem、Dromen、Iknem 和诊断系统码。</li>
       <li>新增十类诊断威胁和十五个非规范自然语言场景。</li>
       <li>二十个提案向量覆盖十个允许诊断包络和十个确定拒绝；检查器只证明规范资料一致。</li>
-      <li>END-CORE、END-FMT、END-P1、SYN-CORE、DRO-CORE、TEK-CORE 与任何规范字节保持不变。</li>
+      <li>END-CORE、END-FMT、END-P1、SYN-CORE、DRO-CORE、IKN-CORE 与任何规范字节保持不变。</li>
     </ul>
   </section>
 

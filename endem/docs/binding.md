@@ -10,7 +10,7 @@ manual_order: 2
 nav_title: "绑定与组合"
 page_heading: "绑定与组合"
 page_lead: "解析 Endem 的未决引用与跨目标关系，形成 coherent Endem 或 Synem。"
-summary: "pleko 输入、内容寻址、冲突、能力收敛、Synem 和 Pleko Tekmor。"
+summary: "pleko 输入、内容寻址、冲突、能力收敛、Synem 和 Pleko Iknem。"
 badges: ["pleko", "Synem"]
 ---
 
@@ -37,7 +37,7 @@ badges: ["pleko", "Synem"]
 2. 展开全部必需传递依赖，收集跨对象引用、产物、能力与验收依赖。
 3. 只从锁定候选中解析唯一精确内容身份；名称和范围不能替代最终绑定。
 4. 检查硬约束冲突、能力上限、缺失行为和循环。
-5. 为每项选择或拒绝产生 Pleko Tekmor。
+5. 为每项选择或拒绝产生 Pleko Iknem。
 6. 稳定排序成员与解析记录，重新运行生产 `elenk`。
 
 ## 不变量
@@ -61,8 +61,8 @@ badges: ["pleko", "Synem"]
 
 ## 条件激活
 
-形成时条件若决定成员是否进入闭包，必须在 Synem 身份形成前解析。会话期条件只能选择固定闭包中的成员，并使用 `active / inactive / unresolved / error` 独立状态；未激活成员没有本次满足结果，激活也不授予能力。当前没有可执行守卫语法或 Praxor 实现。
+形成时条件若决定成员是否进入闭包，必须在 Synem 身份形成前解析。会话期条件只能选择固定闭包中的成员，并使用 `active / inactive / unresolved / error` 独立状态；未激活成员没有本次满足结果，激活也不授予能力。当前没有可执行守卫语法或 Drasor 实现。
 
-## Pleko Tekmor
+## Pleko Iknem
 
-Pleko Tekmor 记录输入成员、候选集合、选择规则、冲突、拒绝和结果摘要。它使组合过程可重放，但不证明依赖将永久可用，也不证明组合任务已经完成。
+Pleko Iknem 记录输入成员、候选集合、选择规则、冲突、拒绝和结果摘要。它使组合过程可重放，但不证明依赖将永久可用，也不证明组合任务已经完成。

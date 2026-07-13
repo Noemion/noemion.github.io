@@ -74,7 +74,7 @@ REQUIRED_CORE_ROUTES = {
     "specifications/endem.html",
     "specifications/synem.html",
     "specifications/dromen.html",
-    "specifications/tekmor.html",
+    "specifications/iknem.html",
     "specifications/diagnostics.html",
     "specifications/adapters.html",
     "specifications/identity.html",
@@ -93,7 +93,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0019-measurement-and-thresholds.html",
     "architecture/adr-0020-composite-situations-and-criteria.html",
     "architecture/adr-0021-synem-closure-and-activation.html",
-    "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
+    "architecture/adr-0022-iknem-evidence-and-appraisal.html",
     "architecture/adr-0023-endem-content-standard.html",
     "architecture/adr-0024-dromen-session-contract.html",
     "architecture/adr-0025-structured-diagnostics.html",
@@ -102,9 +102,10 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0028-text-and-identifier-boundaries.html",
     "architecture/adr-0029-authority-and-authorization-decisions.html",
     "architecture/adr-0030-endem-content-and-authorization-companions.html",
+    "architecture/adr-0031-release-name-collision-gate.html",
     "components/poiet.html",
     "components/theor.html",
-    "components/praxor.html",
+    "components/drasor.html",
 }
 DOC_GUIDE_ORDER = [
     "docs/getting-started.html",
@@ -128,10 +129,10 @@ DOC_GUIDE_HEADINGS = {
         "第一阶段范围", "规范与 ADR 先行", "实现工作流", "建议仓库边界", "审查清单", "模型与协议",
     ],
     "docs/endem-reference.html": [
-        "应用总览", "Poiet 子命令", "theor 的独立性", "praxe 的隔离性", "不建设独立模型平台",
+        "应用总览", "Poiet 子命令", "theor 的独立性", "drase 的隔离性", "不建设独立模型平台",
     ],
     "docs/specifications-reference.html": [
-        "权威顺序", "Endem", "Synem", "Dromen 与 Tekmor", "ADR 与开放问题",
+        "权威顺序", "Endem", "Synem", "Dromen 与 Iknem", "ADR 与开放问题",
     ],
 }
 HOME_HEADINGS = [
@@ -228,11 +229,19 @@ LEGACY_PUBLIC_TERMS = re.compile(
     r"horizon-engine|agent-harness|fulfillment-runtime|noem(?:a)-lifecycle)\.html|"
     r"(?:^|[/\"'])tools/"
 )
+RETIRED_RELEASE_TERMS = re.compile(
+    r"\b(?:praxor|praxe|tekmor)\b|\bTEK(?:-[A-Z0-9]+)+\b|\bTK-[A-Z0-9-]+\b|\btek-core\b",
+    re.IGNORECASE,
+)
+RETIRED_RELEASE_EVIDENCE_PATHS = {
+    "architecture/adr-0031-release-name-collision-gate.html",
+    "design-system/name-audit.md",
+}
 NORMATIVE_ROUTES = (
     "specifications/endem.html",
     "specifications/synem.html",
     "specifications/dromen.html",
-    "specifications/tekmor.html",
+    "specifications/iknem.html",
     "specifications/diagnostics.html",
     "specifications/adapters.html",
     "specifications/identity.html",
@@ -258,7 +267,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0019-measurement-and-thresholds.html",
     "architecture/adr-0020-composite-situations-and-criteria.html",
     "architecture/adr-0021-synem-closure-and-activation.html",
-    "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
+    "architecture/adr-0022-iknem-evidence-and-appraisal.html",
     "architecture/adr-0023-endem-content-standard.html",
     "architecture/adr-0024-dromen-session-contract.html",
     "architecture/adr-0025-structured-diagnostics.html",
@@ -267,16 +276,17 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0028-text-and-identifier-boundaries.html",
     "architecture/adr-0029-authority-and-authorization-decisions.html",
     "architecture/adr-0030-endem-content-and-authorization-companions.html",
+    "architecture/adr-0031-release-name-collision-gate.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
-    "components/praxor.html",
+    "components/drasor.html",
     "development/implementation-roadmap.html",
     "development/testing.html",
     "specifications/endem.html",
     "specifications/synem.html",
     "specifications/dromen.html",
-    "specifications/tekmor.html",
+    "specifications/iknem.html",
     "specifications/diagnostics.html",
     "specifications/adapters.html",
     "specifications/identity.html",
@@ -302,8 +312,8 @@ DEPRECATED_LAYOUT_TERM = "he" + "ro"
 
 CURRENT_DOMAIN_IDENTIFIERS = {
     "endem", "rhem", "semion", "skena", "telis", "krin", "apor", "phain",
-    "synem", "dromen", "tekmor", "poiet", "theor", "praxor",
-    "poie", "elenk", "pleko", "tasse", "sphra", "praxe", "peira",
+    "synem", "dromen", "iknem", "poiet", "theor", "drasor",
+    "poie", "elenk", "pleko", "tasse", "sphra", "drase", "peira",
 }
 MAINSTREAM_LANGUAGE_KEYWORDS = {
     # C, C++, Java, ECMAScript, Go, Rust, Swift, Kotlin and Python keyword union.
@@ -327,11 +337,13 @@ MAINSTREAM_LANGUAGE_KEYWORDS = {
 REMOVED_PUBLIC_ROUTES = {
     "specifications/weave.html", "specifications/witness.html",
     "components/core.html", "components/reader.html", "components/runner.html",
+    "specifications/tekmor.html", "components/praxor.html",
+    "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
 }
 
 REQUIRED_ARCHITECTURE_ROUTES = {
     "architecture/decisions.html": "architecture/index.html",
-    "components/praxor.html": "components/index.html",
+    "components/drasor.html": "components/index.html",
 }
 
 SYSTEM_BOUNDARY_CONTRACTS = {
@@ -339,11 +351,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             "Endem",
             "Synem",
-            "Tekmor",
+            "Iknem",
             "Dromen",
             "Poiet",
             "Theor",
-            "Praxor",
+            "Drasor",
             "生产验证和",
             "不共享",
             "模型候选",
@@ -360,7 +372,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "身份不等于权威",
             "外部状态不等于本地结果",
             "能力声明不等于实时句柄",
-            "Tekmor 证据与评估",
+            "Iknem 证据与评估",
             "ADR-0015",
             "判断与运行结果分层",
         ),
@@ -386,13 +398,13 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "checked arithmetic",
         ),
     },
-    "components/praxor.html": {
+    "components/drasor.html": {
         "required": (
-            "Praxor",
+            "Drasor",
             "Dromen",
-            "praxe",
+            "drase",
             "类型化能力请求",
-            "Tekmor",
+            "Iknem",
             "accepted",
             "deferred",
             "completed / failed / interrupted",
@@ -432,9 +444,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             r"弱引用无定义",
         ),
     },
-    "specifications/tekmor.html": {
+    "specifications/iknem.html": {
         "required": (
-            "Tekmor",
+            "Iknem",
             "phain",
             "精确证据主体",
             "主张",
@@ -554,6 +566,18 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "当前仍未冻结",
         ),
     },
+    "architecture/adr-0031-release-name-collision-gate.html": {
+        "required": (
+            "Iknem",
+            "Drasor",
+            "drase",
+            "IKN-CORE",
+            "一次性迁移",
+            "不保留别名、重定向、双写或兼容垫片",
+            "Praxor Lab",
+            "tekmor.xyz",
+        ),
+    },
     "endem/docs/safety.html": {
         "required": (
             "checked arithmetic",
@@ -569,7 +593,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "外部签名",
             "私钥始终留在外部签名系统",
             "签名包络",
-            "Tekmor",
+            "Iknem",
             "phain",
             "accepted",
             "deferred",
@@ -1028,6 +1052,13 @@ def validate_legacy_source_vocabulary():
                 f"{relative}: legacy vocabulary remains outside superseded ADRs "
                 f"{legacy_text_match.group(0)!r}"
             )
+        if not relative.startswith("tests/") and relative not in RETIRED_RELEASE_EVIDENCE_PATHS:
+            retired_match = RETIRED_RELEASE_TERMS.search(text)
+            if retired_match:
+                errors.append(
+                    f"{relative}: retired release terminology remains outside ADR-0031 and name audit "
+                    f"{retired_match.group(0)!r}"
+                )
         if DEPRECATED_LAYOUT_TERM in text.lower():
             errors.append(f"{relative}: retains the deprecated generic lead-layout term")
     return errors
@@ -1318,7 +1349,7 @@ def validate_jekyll_sources():
             'class="portal-focus-card focus-card-endem" href="specifications/endem.html"',
             'class="portal-focus-card focus-card-synem" href="specifications/synem.html"',
             'class="portal-focus-card focus-card-dromen" href="specifications/dromen.html"',
-            'class="portal-focus-card focus-card-tekmor" href="specifications/tekmor.html"',
+            'class="portal-focus-card focus-card-iknem" href="specifications/iknem.html"',
         ):
             if token not in homepage_text:
                 errors.append(f"index.html: missing independent homepage object card: {token}")
@@ -1488,7 +1519,7 @@ def validate_jekyll_sources():
             'body[data-page-role="portal"] .global-timeline-value{width:100%;min-width:0;padding-inline:7px;font-size:10px;letter-spacing:.04em}',
             '.portal-focus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))',
             '.focus-card-dromen .focus-art',
-            '.focus-card-tekmor .focus-art',
+            '.focus-card-iknem .focus-art',
             'text-decoration-color:color-mix(in srgb,var(--portal-coral) 54%,var(--portal-amber))',
             'text-decoration-thickness:.1em;text-underline-offset:.12em;text-decoration-skip-ink:none',
         ):
@@ -1612,7 +1643,7 @@ def validate_jekyll_sources():
             "遥测单向外送",
             "撤销与重放显式",
         ),
-        "components/praxor.html": (
+        "components/drasor.html": (
             "A2A 1.0 版本化规范",
             "令牌必须绑定目标资源",
             "github.com/open-telemetry/semantic-conventions-genai",
@@ -1626,13 +1657,13 @@ def validate_jekyll_sources():
             "不作为当前符合性基线",
             "任何后续正式版本",
             "默认脱敏的导出器",
-            "不进入 Endem 编码、Tekmor 身份或最终决定",
+            "不进入 Endem 编码、Iknem 身份或最终决定",
         ),
         "endem/docs/running.md": (
             "A2A 1.0 版本化规范",
             "后续正式版本",
             "默认不导出正文",
-            "不构成 Tekmor 身份",
+            "不构成 Iknem 身份",
         ),
         "architecture/adr-0016-mene-time-model.html": (
             "RFC 3339",
@@ -1740,6 +1771,12 @@ def validate_jekyll_sources():
             "IANA 媒体类型登记表",
             "正式商标门禁仍未完成",
             "必须停止或改名的条件",
+            "Iknem",
+            "Drasor",
+            "drase",
+            "旧名 Praxor",
+            "旧名 Tekmor",
+            "ADR-0031",
         ):
             if token not in name_audit_text:
                 errors.append(f"name audit missing evidence or boundary: {token!r}")
@@ -1875,8 +1912,8 @@ def validate_jekyll_sources():
 
         expected_nav_covers = {
             "background", "architecture", "foundations", "faq",
-            "endem-spec", "synem", "dromen", "tekmor",
-            "endem", "theor", "format", "praxe",
+            "endem-spec", "synem", "dromen", "iknem",
+            "endem", "theor", "format", "drase",
             "getting-started", "architecture-guide", "application-reference",
             "spec-reference", "endem-manual", "current-stage", "roadmap", "testing",
             "news", "downloads",
@@ -2231,7 +2268,7 @@ def main():
             " ".join("".join(section["text"]) for section in parser.sections)
         )
         for term in (
-            "Noemion", "Endem", "Synem", "Dromen", "Tekmor", "rhem", "semion", "skena", "telis",
+            "Noemion", "Endem", "Synem", "Dromen", "Iknem", "rhem", "semion", "skena", "telis",
             "krin", "apor", "phain", "一个根", "模型", "不可信",
         ):
             if term not in visible_text:
@@ -2765,7 +2802,7 @@ def main():
                 ["specifications/endem.html", "architecture"],
                 ["components/poiet.html", "architecture"],
                 ["components/theor.html", "architecture"],
-                ["components/praxor.html", "architecture"],
+                ["components/drasor.html", "architecture"],
                 ["docs/getting-started.html", "docs"],
                 ["downloads/index.html", "resources"],
                 ["faq/index.html", "resources"],

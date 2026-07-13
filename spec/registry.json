@@ -53,13 +53,13 @@
       "scope": "Abstract one-session subject, policy, environment, capability, budget, observation, immutability and disposal contract"
     },
     {
-      "spec_id": "TEK-CORE",
+      "spec_id": "IKN-CORE",
       "version": "0.1.0-draft",
       "status": "draft",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "wire_status": "unfrozen",
-      "path": "spec/tekmor-core.md",
+      "path": "spec/iknem-core.md",
       "scope": "Abstract scoped evidence, provenance, observation, integrity, validity, coverage, appraisal, decision and disclosure boundaries"
     },
     {
@@ -80,7 +80,7 @@
       "implementation_status": "vector-checker-only",
       "wire_status": "not-applicable",
       "path": "spec/adapter-core.md",
-      "scope": "Protocol-independent Praxor external adapter version, peer, capability, invocation, mapping, state, artifact, error, cancellation, retry, delivery and security boundaries"
+      "scope": "Protocol-independent Drasor external adapter version, peer, capability, invocation, mapping, state, artifact, error, cancellation, retry, delivery and security boundaries"
     },
     {
       "spec_id": "ID-CORE",
@@ -126,7 +126,7 @@
       "version": "0.1.0-draft",
       "status": "draft",
       "path": "spec/diagnostic-catalog.md",
-      "scope": "Experimental cross-object diagnostic codes for diagnostic envelopes, Endem, Synem, Dromen and Tekmor rejection"
+      "scope": "Experimental cross-object diagnostic codes for diagnostic envelopes, Endem, Synem, Dromen and Iknem rejection"
     },
     {
       "id": "DIA-THREAT",
@@ -150,11 +150,11 @@
       "scope": "Synem closure, binding, graph, authority, result and activation threats"
     },
     {
-      "id": "TEK-THREAT",
+      "id": "IKN-THREAT",
       "version": "0.1.0-draft",
       "status": "draft",
-      "path": "spec/tekmor-threat-model.md",
-      "scope": "Tekmor scope, provenance, observation, classification, integrity, validity, coverage, decision and disclosure threats"
+      "path": "spec/iknem-threat-model.md",
+      "scope": "Iknem scope, provenance, observation, classification, integrity, validity, coverage, decision and disclosure threats"
     },
     {
       "id": "DRO-THREAT",
@@ -178,10 +178,10 @@
       "scope": "Natural-language design-review scenarios for closure, binding, permissions, member results and activation"
     },
     {
-      "id": "TEK-SCEN",
+      "id": "IKN-SCEN",
       "version": "0.1.0-draft",
       "status": "non-normative-design-corpus",
-      "path": "spec/tekmor-scenarios.md",
+      "path": "spec/iknem-scenarios.md",
       "scope": "Natural-language design-review scenarios for evidence scope, provenance, appraisal, coverage, decisions and disclosure"
     },
     {
@@ -277,8 +277,8 @@
     {"term": "Noemion", "kind": "project", "decision_status": "accepted", "definition": "项目、新领域与社区总名"},
     {"term": "Endem", "kind": "artifact", "decision_status": "accepted", "definition": "最小、独立有效且可验证的期望终态单元"},
     {"term": "Synem", "kind": "artifact", "decision_status": "accepted", "definition": "两个或更多 Endem 的已解析组合闭包"},
-    {"term": "Dromen", "kind": "session-contract", "decision_status": "accepted", "definition": "Praxor 为一次 Praxe 会话从精确制品、政策、环境、能力、预算和证据责任建立的密封只读执行契约"},
-    {"term": "Tekmor", "kind": "evidence", "decision_status": "accepted", "definition": "绑定主体、范围、方法、环境、结果和限制的证据记录"},
+    {"term": "Dromen", "kind": "session-contract", "decision_status": "accepted", "definition": "Drasor 为一次 Drase 会话从精确制品、政策、环境、能力、预算和证据责任建立的密封只读执行契约"},
+    {"term": "Iknem", "kind": "evidence", "decision_status": "accepted", "definition": "绑定主体、范围、方法、环境、结果和限制的证据记录"},
     {"term": "rhem", "kind": "semantic-facet", "decision_status": "accepted", "definition": "来源记号与可重定位范围"},
     {"term": "semion", "kind": "semantic-facet", "decision_status": "accepted", "definition": "已授权的符号、指称、关系和角色投影"},
     {"term": "skena", "kind": "semantic-facet", "decision_status": "accepted", "definition": "一个根、中性且可比较的可能事态"},
@@ -291,19 +291,19 @@
     {"term": "END-P0", "kind": "profile", "decision_status": "experimental", "definition": "只用于结构向量和跨语言实验的有限符合性 Profile"},
     {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "用于未来首条实现路径评审的封闭六记录内容设计 Profile"},
     {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 Poiet 使用的实验性逐行来源清单；不是稳定源语言"},
-    {"term": "satisfaction-result", "kind": "result-domain", "decision_status": "accepted", "definition": "met、unmet、agno 或 fault；只描述 skena 相对 krin、phain 与 Tekmor 的比较"},
+    {"term": "satisfaction-result", "kind": "result-domain", "decision_status": "accepted", "definition": "met、unmet、agno 或 fault；只描述 skena 相对 krin、phain 与 Iknem 的比较"},
     {"term": "decision-result", "kind": "result-domain", "decision_status": "accepted", "definition": "accepted、rejected 或 deferred；只描述具名权威的最终决定"},
-    {"term": "session-result", "kind": "result-domain", "decision_status": "accepted", "definition": "completed、failed 或 interrupted；只描述一次 Praxe 会话怎样终止"},
-    {"term": "evidence-status", "kind": "result-domain", "decision_status": "accepted", "definition": "Tekmor 的 valid、invalid 或 revoked 与证据集合的 sufficient 或 insufficient 两个正交维度"},
+    {"term": "session-result", "kind": "result-domain", "decision_status": "accepted", "definition": "completed、failed 或 interrupted；只描述一次 Drase 会话怎样终止"},
+    {"term": "evidence-status", "kind": "result-domain", "decision_status": "accepted", "definition": "Iknem 的 valid、invalid 或 revoked 与证据集合的 sufficient 或 insufficient 两个正交维度"},
     {"term": "time-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "mene 使用的 fixed UTC 区间或 elapsed 具名事件经过时长"},
     {"term": "continuity-policy", "kind": "semantic-interface", "decision_status": "accepted", "definition": "mene 的 strict 全区间保持或带完整违约预算的 budgeted 保持"},
-    {"term": "time-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "Tekmor 声明的半开观测区间并集、方法、时钟、不确定度与缺口"},
+    {"term": "time-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "Iknem 声明的半开观测区间并集、方法、时钟、不确定度与缺口"},
     {"term": "relation-polarity", "kind": "semantic-interface", "decision_status": "accepted", "definition": "同一关系身份与角色位置上的 positive 或 negative 事态极性"},
     {"term": "negative-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "显式负极性观察，或在封闭观察范围内由完整缺席依据支持的负主张"},
     {"term": "observation-closure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定权威、有限全集、角色路径、时间、方法、截止点、丢失计数与排除项的封闭观察声明"},
     {"term": "quantifier", "kind": "semantic-interface", "decision_status": "accepted", "definition": "all、some、at_least、at_most 或 exactly 对一个固定关系角色的量化方式"},
     {"term": "collection-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "绑定集合身份、成员资格权威、模式、截止点、身份规则和成员或规则的量化范围"},
-    {"term": "cardinality-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "按不同规范成员身份聚合并保留成员级结果与 Tekmor 链接的基数证据"},
+    {"term": "cardinality-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "按不同规范成员身份聚合并保留成员级结果与 Iknem 链接的基数证据"},
     {"term": "measurement-construct", "kind": "semantic-interface", "decision_status": "accepted", "definition": "测量希望表达的抽象概念及其已授权直接可观察标准、总体和用途"},
     {"term": "estimand", "kind": "semantic-interface", "decision_status": "accepted", "definition": "测量程序意图估计的固定总体或泛化总体数量"},
     {"term": "measurement-procedure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定生产者、版本、窗口、纳入排除、单位、聚合器、样本和缺失政策的可重放程序"},
@@ -311,7 +311,7 @@
     {"term": "criterion-leaf", "kind": "semantic-interface", "decision_status": "accepted", "definition": "与一个 skena 关系叶和适用 phain 位置对齐并独立产生四种满足结果之一的最小判据"},
     {"term": "criterion-composition", "kind": "semantic-interface", "decision_status": "accepted", "definition": "用 all_of 或 any_of 确定性组合叶判断结果的有限无环结构"},
     {"term": "decisive-basis", "kind": "evidence-interface", "decision_status": "accepted", "definition": "足以决定 all_of 为 unmet 或 any_of 为 met 的已求值叶集合"},
-    {"term": "evaluation-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "一次组合判断中已求值叶、未求值叶、停止原因和所用 Tekmor 的完整记录"}
+    {"term": "evaluation-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "一次组合判断中已求值叶、未求值叶、停止原因和所用 Iknem 的完整记录"}
     ,{"term": "closure-member", "kind": "synem-interface", "decision_status": "accepted", "definition": "以精确内容身份进入 Synem 闭包的 Endem"}
     ,{"term": "binding-record", "kind": "synem-interface", "decision_status": "accepted", "definition": "把引用方、被引用方、精确身份、规范与解析依据固定在一起的记录"}
     ,{"term": "dependency-relation", "kind": "synem-interface", "decision_status": "accepted", "definition": "Synem 成员之间显式登记的必需或可选依赖关系"}
@@ -322,15 +322,15 @@
     ,{"term": "environment-binding", "kind": "dromen-interface", "decision_status": "accepted", "definition": "把平台、时钟、隔离、适配器、协议和后端声明连接到具名观察的会话绑定"}
     ,{"term": "capability-envelope", "kind": "dromen-interface", "decision_status": "accepted", "definition": "由制品、政策、操作主体、环境和适配器上限求交得到的非秘密会话能力描述"}
     ,{"term": "budget-envelope", "kind": "dromen-interface", "decision_status": "accepted", "definition": "按资源类别绑定有限上限、单位、计数权威、重置规则和耗尽动作的会话预算"}
-    ,{"term": "observation-plan", "kind": "dromen-interface", "decision_status": "accepted", "definition": "把每项 krin 责任连接到观察生产者、方法、phain 位置、Tekmor 类别、披露、评估和决定权威的映射"}
+    ,{"term": "observation-plan", "kind": "dromen-interface", "decision_status": "accepted", "definition": "把每项 krin 责任连接到观察生产者、方法、phain 位置、Iknem 类别、披露、评估和决定权威的映射"}
     ,{"term": "material-drift", "kind": "dromen-interface", "decision_status": "accepted", "definition": "主体、政策、权威、必需环境、能力、预算、激活守卫或证据责任发生使原会话契约不再成立的变化"}
-    ,{"term": "evidence-subject", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "Tekmor 主张所绑定的精确对象、会话、调用、观察集合或决定事件身份"}
-    ,{"term": "evidence-scope", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "限制 Tekmor 主张适用主体、总体、关系、方法、环境、时间和截止点的边界"}
-    ,{"term": "provenance-edge", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "连接输入、活动、派生输出与责任主体的有限无环溯源关系"}
-    ,{"term": "evidence-class", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "direct-observation、deterministic-derivation、external-assertion、human-judgment 或 model-candidate 来源类别"}
+    ,{"term": "evidence-subject", "kind": "iknem-interface", "decision_status": "accepted", "definition": "Iknem 主张所绑定的精确对象、会话、调用、观察集合或决定事件身份"}
+    ,{"term": "evidence-scope", "kind": "iknem-interface", "decision_status": "accepted", "definition": "限制 Iknem 主张适用主体、总体、关系、方法、环境、时间和截止点的边界"}
+    ,{"term": "provenance-edge", "kind": "iknem-interface", "decision_status": "accepted", "definition": "连接输入、活动、派生输出与责任主体的有限无环溯源关系"}
+    ,{"term": "evidence-class", "kind": "iknem-interface", "decision_status": "accepted", "definition": "direct-observation、deterministic-derivation、external-assertion、human-judgment 或 model-candidate 来源类别"}
     ,{"term": "validity-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "验证者在精确政策、参考值、环境与截止点下形成的 valid、invalid 或 revoked 评估"}
     ,{"term": "coverage-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "相对精确 krin 与观察责任形成的 sufficient 或 insufficient 评估"}
-    ,{"term": "disclosure-manifest", "kind": "tekmor-interface", "decision_status": "accepted", "definition": "记录摘要、脱敏、分段披露和外置引用的可见范围、不可见范围及其证据影响"}
+    ,{"term": "disclosure-manifest", "kind": "iknem-interface", "decision_status": "accepted", "definition": "记录摘要、脱敏、分段披露和外置引用的可见范围、不可见范围及其证据影响"}
     ,{"term": "diagnostic-code", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "与本地化消息和呈现格式分离的稳定机器诊断身份"}
     ,{"term": "diagnostic-layer", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "说明失败发生于协议、结构、Profile、语义、政策、能力、运行、证据或决定边界的分类"}
     ,{"term": "diagnostic-location", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "绑定位置种类、精确主体和有限范围的安全定位信息"}
@@ -393,15 +393,15 @@
     {"id": "THR-SYN-004", "clauses": ["SYN-AUT-001"], "evidence_status": "partial"},
     {"id": "THR-SYN-005", "clauses": ["SYN-STA-001"], "evidence_status": "partial"},
     {"id": "THR-SYN-006", "clauses": ["SYN-ACT-001"], "evidence_status": "partial"},
-    {"id": "THR-TEK-001", "clauses": ["TEK-SCP-001"], "evidence_status": "partial"},
-    {"id": "THR-TEK-002", "clauses": ["TEK-PRV-001"], "evidence_status": "partial"},
-    {"id": "THR-TEK-003", "clauses": ["TEK-OBS-001"], "evidence_status": "partial"},
-    {"id": "THR-TEK-004", "clauses": ["TEK-CLS-001"], "evidence_status": "partial"},
-    {"id": "THR-TEK-005", "clauses": ["TEK-INT-001"], "evidence_status": "partial"},
-    {"id": "THR-TEK-006", "clauses": ["TEK-VAL-001"], "evidence_status": "partial"},
-    {"id": "THR-TEK-007", "clauses": ["TEK-COV-001"], "evidence_status": "partial"},
-    {"id": "THR-TEK-008", "clauses": ["TEK-DEC-001"], "evidence_status": "partial"},
-    {"id": "THR-TEK-009", "clauses": ["TEK-PRI-001"], "evidence_status": "partial"},
+    {"id": "THR-IKN-001", "clauses": ["IKN-SCP-001"], "evidence_status": "partial"},
+    {"id": "THR-IKN-002", "clauses": ["IKN-PRV-001"], "evidence_status": "partial"},
+    {"id": "THR-IKN-003", "clauses": ["IKN-OBS-001"], "evidence_status": "partial"},
+    {"id": "THR-IKN-004", "clauses": ["IKN-CLS-001"], "evidence_status": "partial"},
+    {"id": "THR-IKN-005", "clauses": ["IKN-INT-001"], "evidence_status": "partial"},
+    {"id": "THR-IKN-006", "clauses": ["IKN-VAL-001"], "evidence_status": "partial"},
+    {"id": "THR-IKN-007", "clauses": ["IKN-COV-001"], "evidence_status": "partial"},
+    {"id": "THR-IKN-008", "clauses": ["IKN-DEC-001"], "evidence_status": "partial"},
+    {"id": "THR-IKN-009", "clauses": ["IKN-PRI-001"], "evidence_status": "partial"},
     {"id": "THR-DRO-001", "clauses": ["DRO-SUB-001"], "evidence_status": "partial"},
     {"id": "THR-DRO-002", "clauses": ["DRO-SUB-001", "DRO-POL-001"], "evidence_status": "partial"},
     {"id": "THR-DRO-003", "clauses": ["DRO-ENV-001", "DRO-IMM-001"], "evidence_status": "partial"},
@@ -477,7 +477,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor loader and every session establishment path",
+      "failure_owner": "future Drasor loader and every session establishment path",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
@@ -489,7 +489,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor policy resolver and named session authority",
+      "failure_owner": "future Drasor policy resolver and named session authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
@@ -501,7 +501,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor environment verifier and every adapter",
+      "failure_owner": "future Drasor environment verifier and every adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
@@ -513,7 +513,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor capability resolver and minimal capability domain",
+      "failure_owner": "future Drasor capability resolver and minimal capability domain",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
@@ -525,7 +525,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future minimal capability domain, Praxor and every log or evidence producer",
+      "failure_owner": "future minimal capability domain, Drasor and every log or evidence producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
@@ -537,7 +537,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor scheduler, adapters and delegated task controller",
+      "failure_owner": "future Drasor scheduler, adapters and delegated task controller",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
@@ -549,7 +549,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor activation evaluator and every Synem session consumer",
+      "failure_owner": "future Drasor activation evaluator and every Synem session consumer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
@@ -561,7 +561,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor, observation adapters, Tekmor producers and decision authorities",
+      "failure_owner": "future Drasor, observation adapters, Iknem producers and decision authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
@@ -573,7 +573,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor session controller and every mutable environment adapter",
+      "failure_owner": "future Drasor session controller and every mutable environment adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
@@ -585,7 +585,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor session controller, capability domain and evidence/log producers",
+      "failure_owner": "future Drasor session controller, capability domain and evidence/log producers",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
@@ -593,111 +593,111 @@
       ]
     },
     {
-      "id": "TEK-SCP-001",
+      "id": "IKN-SCP-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "every Tekmor producer, verifier and consumer",
+      "failure_owner": "every Iknem producer, verifier and consumer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
-        {"status": "planned", "ref": "peira:tekmor-scope-binding"}
+        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
+        {"status": "planned", "ref": "peira:iknem-scope-binding"}
       ]
     },
     {
-      "id": "TEK-PRV-001",
+      "id": "IKN-PRV-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Tekmor producers, mergers and every verifier",
+      "failure_owner": "Iknem producers, mergers and every verifier",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
-        {"status": "planned", "ref": "peira:tekmor-provenance-closure"}
+        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
+        {"status": "planned", "ref": "peira:iknem-provenance-closure"}
       ]
     },
     {
-      "id": "TEK-OBS-001",
+      "id": "IKN-OBS-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "observation adapters, Tekmor producers and evaluators",
+      "failure_owner": "observation adapters, Iknem producers and evaluators",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
-        {"status": "planned", "ref": "peira:tekmor-observation-alignment"}
+        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
+        {"status": "planned", "ref": "peira:iknem-observation-alignment"}
       ]
     },
     {
-      "id": "TEK-CLS-001",
+      "id": "IKN-CLS-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Tekmor producers and every evidence consumer",
+      "failure_owner": "Iknem producers and every evidence consumer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
-        {"status": "planned", "ref": "peira:tekmor-evidence-class"}
+        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
+        {"status": "planned", "ref": "peira:iknem-evidence-class"}
       ]
     },
     {
-      "id": "TEK-INT-001",
+      "id": "IKN-INT-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
       "failure_owner": "integrity verifiers, policy owners and every consumer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
-        {"status": "planned", "ref": "peira:tekmor-integrity-separation"}
+        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
+        {"status": "planned", "ref": "peira:iknem-integrity-separation"}
       ]
     },
     {
-      "id": "TEK-VAL-001",
+      "id": "IKN-VAL-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Tekmor verifiers, revocation authorities and policy owners",
+      "failure_owner": "Iknem verifiers, revocation authorities and policy owners",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
-        {"status": "planned", "ref": "peira:tekmor-validity-appraisal"}
+        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
+        {"status": "planned", "ref": "peira:iknem-validity-appraisal"}
       ]
     },
     {
-      "id": "TEK-COV-001",
+      "id": "IKN-COV-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
       "failure_owner": "coverage evaluators, krin owners and decision authorities",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
-        {"status": "planned", "ref": "peira:tekmor-coverage"}
+        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
+        {"status": "planned", "ref": "peira:iknem-coverage"}
       ]
     },
     {
-      "id": "TEK-DEC-001",
+      "id": "IKN-DEC-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
       "failure_owner": "appraisal producers, decision authorities and result consumers",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
-        {"status": "planned", "ref": "peira:tekmor-decision-separation"}
+        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
+        {"status": "planned", "ref": "peira:iknem-decision-separation"}
       ]
     },
     {
-      "id": "TEK-PRI-001",
+      "id": "IKN-PRI-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Tekmor producers, disclosure policy owners and storage operators",
+      "failure_owner": "Iknem producers, disclosure policy owners and storage operators",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/tekmor/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/tekmor_vector_test.py"},
-        {"status": "planned", "ref": "peira:tekmor-minimal-disclosure"}
+        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
+        {"status": "planned", "ref": "peira:iknem-minimal-disclosure"}
       ]
     },
     {
@@ -741,7 +741,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Pleko, Praxor and capability policy owners",
+      "failure_owner": "Pleko, Drasor and capability policy owners",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
@@ -753,7 +753,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Praxor, decision authorities and every result consumer",
+      "failure_owner": "Drasor, decision authorities and every result consumer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
@@ -765,7 +765,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Praxor, event producers and activation policy owners",
+      "failure_owner": "Drasor, event producers and activation policy owners",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
@@ -938,7 +938,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Praxor and every evaluator",
+      "failure_owner": "Drasor and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -951,7 +951,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Praxor, observation adapters and every evaluator",
+      "failure_owner": "Drasor, observation adapters and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -990,7 +990,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Praxor, observation adapters and every evaluator",
+      "failure_owner": "Drasor, observation adapters and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
@@ -1029,7 +1029,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "measurement producers, Praxor and every evaluator",
+      "failure_owner": "measurement producers, Drasor and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1042,7 +1042,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Praxor, measurement authorities and every evaluator",
+      "failure_owner": "Drasor, measurement authorities and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1069,7 +1069,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Praxor, observation adapters and every evaluator",
+      "failure_owner": "Drasor, observation adapters and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
@@ -1082,7 +1082,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "observation authorities, Praxor and every evaluator",
+      "failure_owner": "observation authorities, Drasor and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
@@ -1095,7 +1095,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, Praxor and time authorities",
+      "failure_owner": "Poiet, Drasor and time authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
@@ -1108,7 +1108,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, Praxor and policy authorities",
+      "failure_owner": "Poiet, Drasor and policy authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
@@ -1121,7 +1121,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Praxor, observation adapters and every evaluator",
+      "failure_owner": "Drasor, observation adapters and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
@@ -1134,7 +1134,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and Praxor",
+      "failure_owner": "Poiet and Drasor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "peira:krin-no-self-proof"}
@@ -1145,7 +1145,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Praxor and every evaluator",
+      "failure_owner": "Drasor and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
@@ -1169,7 +1169,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet, Praxor and every evaluator",
+      "failure_owner": "Poiet, Drasor and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
         {"status": "planned", "ref": "peira:unknown-state-separation"}
@@ -1191,7 +1191,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Poiet and Praxor",
+      "failure_owner": "Poiet and Drasor",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
         {"status": "planned", "ref": "peira:model-candidate-boundary"}
@@ -1215,7 +1215,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Praxor and named decision authorities",
+      "failure_owner": "Drasor and named decision authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
@@ -1239,7 +1239,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "Poiet, sphra and Praxor",
+      "failure_owner": "Poiet, sphra and Drasor",
       "verification": [{"status": "planned", "ref": "peira:state-non-implication"}]
     },
     {
@@ -1247,7 +1247,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Praxor, protocol adapters and evidence consumers",
+      "failure_owner": "Drasor, protocol adapters and evidence consumers",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
@@ -1697,7 +1697,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor control plane and named authority",
+      "failure_owner": "future Drasor control plane and named authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
         {"status": "planned", "ref": "peira:diagnostic-recovery-authority"}
@@ -1774,7 +1774,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor capability resolver and every external adapter",
+      "failure_owner": "future Drasor capability resolver and every external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "peira:adapter-capability-intersection"}
@@ -1785,7 +1785,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor session controller and every external adapter",
+      "failure_owner": "future Drasor session controller and every external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "peira:adapter-invocation-binding"}
@@ -1840,7 +1840,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future Praxor session controller and every asynchronous adapter",
+      "failure_owner": "future Drasor session controller and every asynchronous adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "peira:adapter-cancellation-finality"}
@@ -1851,7 +1851,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future retry policy, Praxor budget controller and every adapter",
+      "failure_owner": "future retry policy, Drasor budget controller and every adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "peira:adapter-idempotent-retry"}
@@ -2280,7 +2280,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "every future Praxor capability resolver, Dromen establisher and external adapter",
+      "failure_owner": "every future Drasor capability resolver, Dromen establisher and external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
@@ -2292,7 +2292,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "every future authority consumer, result mapper, Praxor and decision authority",
+      "failure_owner": "every future authority consumer, result mapper, Drasor and decision authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},

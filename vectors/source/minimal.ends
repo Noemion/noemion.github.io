@@ -7,5 +7,5 @@ situation	situation:report-produced	rel:produced	positive
 root	situation:report-produced
 telis	kine
 phain	rel:produced	same-roles
-tekmor	artifact-content-observation
+iknem	artifact-content-observation
 krin	agno	fault	authority:requester

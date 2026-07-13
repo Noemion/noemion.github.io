@@ -22,8 +22,8 @@ permalink: "/architecture/adr-0026-external-protocol-adapters.html"
   </section>
 
   <section class="content-wide">
-    <h2>外部调用怎样进入 Praxor</h2>
-    <div class="flow"><div class="step">精确 Dromen</div><div class="step">协议与对端绑定</div><div class="step">能力交集</div><div class="step">一次调用身份</div><div class="step">外部操作</div><div class="step">候选产物与观察</div><div class="step">Tekmor 与本地判断</div></div>
+    <h2>外部调用怎样进入 Drasor</h2>
+    <div class="flow"><div class="step">精确 Dromen</div><div class="step">协议与对端绑定</div><div class="step">能力交集</div><div class="step">一次调用身份</div><div class="step">外部操作</div><div class="step">候选产物与观察</div><div class="step">Iknem 与本地判断</div></div>
     <ul>
       <li>发现信息、Agent Card 和工具清单只描述对端，不授予信任或能力。</li>
       <li>有效能力取协议、对端、本地适配器、Dromen 与政策的交集。</li>
@@ -35,8 +35,8 @@ permalink: "/architecture/adr-0026-external-protocol-adapters.html"
   <section class="content-wide">
     <h2>必须分开的状态</h2>
     <div class="table-wrap"><table><thead><tr><th>外部事实</th><th>可以说明</th><th>不能直接说明</th></tr></thead><tbody>
-      <tr><td>A2A Task <code>completed</code></td><td>对端把该任务置为外部终态</td><td><code>met</code>、<code>accepted</code> 或 Praxe <code>completed</code></td></tr>
-      <tr><td>MCP ToolResult 或协议错误</td><td>一次外部工具或协议操作的结果</td><td><code>unmet</code>、Tekmor <code>invalid</code> 或永久不可重试</td></tr>
+      <tr><td>A2A Task <code>completed</code></td><td>对端把该任务置为外部终态</td><td><code>met</code>、<code>accepted</code> 或 Drase <code>completed</code></td></tr>
+      <tr><td>MCP ToolResult 或协议错误</td><td>一次外部工具或协议操作的结果</td><td><code>unmet</code>、Iknem <code>invalid</code> 或永久不可重试</td></tr>
       <tr><td>HTTP 2xx 或 SDK stop reason</td><td>传输或供应商接口已经按自身规则结束</td><td>内容正确、证据有效或目标已经实现</td></tr>
       <tr><td>取消确认或连接关闭</td><td>取消请求被接收或传输已结束</td><td>远端副作用已经停止、回滚或不可见</td></tr>
     </tbody></table></div>
@@ -74,7 +74,7 @@ permalink: "/architecture/adr-0026-external-protocol-adapters.html"
     <ul>
       <li><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-core.md">ADP-CORE 0.1.0-draft</a>定义 12 条协议无关适配义务。</li>
       <li>12 类威胁、18 个设计场景和 24 个正反向量覆盖当前抽象边界。</li>
-      <li>当前没有协议 Profile、适配器 API、网络服务、凭据代理、重试引擎、Webhook 服务或 Praxor 实现。</li>
+      <li>当前没有协议 Profile、适配器 API、网络服务、凭据代理、重试引擎、Webhook 服务或 Drasor 实现。</li>
     </ul>
   </section>
   <div class="next-prev"><a href="adr-0025-structured-diagnostics.html">← ADR-0025</a><a href="adr-0027-exact-identity-and-attestation.html">ADR-0027 →</a></div>

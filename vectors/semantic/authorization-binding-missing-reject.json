@@ -24,7 +24,7 @@
     },
     "skena": {"roots": ["situation:report-produced"], "situations": [{"id": "situation:report-produced", "relation": "rel:produced", "polarity": "positive"}]},
     "telis": {"mode": "kine"},
-    "krin": {"required_phain": [{"relation": "rel:produced", "match": "same-roles"}], "required_tekmor": ["artifact-content-observation"], "on_missing_observation": "agno", "on_evaluation_error": "fault", "decision_authority": "authority:requester"},
+    "krin": {"required_phain": [{"relation": "rel:produced", "match": "same-roles"}], "required_iknem": ["artifact-content-observation"], "on_missing_observation": "agno", "on_evaluation_error": "fault", "decision_authority": "authority:requester"},
     "apor": []
   }
 }

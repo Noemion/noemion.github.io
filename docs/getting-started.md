@@ -37,8 +37,8 @@ Noemion 为自然语言目标建立持久、可组合、可独立检查的工程
 
 - **[Endem](../specifications/endem.html)：**最小目标制品。
 - **[Synem](../specifications/synem.html)：**两个或更多 Endem、固定依赖和发布范围形成的已解析闭包；单个自包含 Endem 不需要 Synem。
-- **[Dromen](../specifications/dromen.html)：**Praxor 为一次 Praxe 会话从精确制品、政策、环境、能力、预算和证据责任封存的只读执行契约；不是文件格式或可恢复权限。
-- **[Tekmor](../specifications/tekmor.html)：**绑定目标、环境、方法和声明范围的证据记录；它不是数学证明，也不自动形成最终验收决定。
+- **[Dromen](../specifications/dromen.html)：**Drasor 为一次 Drase 会话从精确制品、政策、环境、能力、预算和证据责任封存的只读执行契约；不是文件格式或可恢复权限。
+- **[Iknem](../specifications/iknem.html)：**绑定目标、环境、方法和声明范围的证据记录；它不是数学证明，也不自动形成最终验收决定。
 
 ## 一个应用
 
@@ -46,15 +46,15 @@ Noemion 为自然语言目标建立持久、可组合、可独立检查的工程
 
 ```text
 endem poie    endem elenk    endem pleko    endem tasse
-endem sphra   endem theor    endem praxe    endem peira
+endem sphra   endem theor    endem drase    endem peira
 ```
 
-一个命令入口不等于一个信任域。`theor` 背后必须使用不共享 Poiet 生产解析代码的独立实现；`praxe` 背后必须是隔离的最小权限进程。私钥位于外部签名系统，模型只提交候选和能力请求。
+一个命令入口不等于一个信任域。`theor` 背后必须使用不共享 Poiet 生产解析代码的独立实现；`drase` 背后必须是隔离的最小权限进程。私钥位于外部签名系统，模型只提交候选和能力请求。
 
 ## 推荐阅读路径
 
 1. [背景与边界](../about/background.html)：理解 Endem 与 Prompt、Skill 包、传统目标文件的区别。
-2. [架构设计指南](architecture-guide.html)：理解 Endem → Synem → Dromen → Tekmor。
+2. [架构设计指南](architecture-guide.html)：理解 Endem → Synem → Dromen → Iknem。
 3. [规范参考指南](specifications-reference.html)：区分已接受决定、待验证设计和开放问题。
 4. [Endem 应用参考](endem-reference.html)：查看八个子命令的消费者、失败责任和实施阶段。
 5. [开发指南](development-guide.html)：了解最小纵向切片、Poiet/Theor 差分和验证条件。

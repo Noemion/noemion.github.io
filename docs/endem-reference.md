@@ -16,7 +16,7 @@ badges: ["One CLI", "8 Verbs", "Unreleased"]
 
 ## 应用总览
 
-`endem` 是唯一公开应用。它提供一致的用户入口，但不会把 Poiet、独立 Theor 与隔离 Praxor 链接进同一信任域。
+`endem` 是唯一公开应用。它提供一致的用户入口，但不会把 Poiet、独立 Theor 与隔离 Drasor 链接进同一信任域。
 
 | 子命令 | 直接职责 | 输出 | 何时建设 |
 | --- | --- | --- | --- |
@@ -27,7 +27,7 @@ badges: ["One CLI", "8 Verbs", "Unreleased"]
 | `pleko` | 解析引用、冲突与依赖闭包 | Synem、绑定映射 | 第二阶段；有真实组合案例后 |
 | `tasse` | 类型化裁剪和发布闭包 | 发布候选、调试伴随记录 | 第三阶段 |
 | `sphra` | 生成请求并核对外部签名响应 | attested Synem | 第三阶段 |
-| `praxe` | 重新验证、装载、能力循环与验收 | Dromen、Tekmor、最终决定 | 第四阶段 |
+| `drase` | 重新验证、装载、能力循环与验收 | Dromen、Iknem、最终决定 | 第四阶段 |
 
 ## Poiet 子命令
 
@@ -41,9 +41,9 @@ badges: ["One CLI", "8 Verbs", "Unreleased"]
 
 建议二级动作保持普通短词：`view`、`diff`、`refs`、`size`、`trace`。是否全部成为稳定接口取决于真实消费者。
 
-## `praxe` 的隔离性
+## `drase` 的隔离性
 
-`endem praxe` 启动独立 Praxor 进程。Praxor 重验实际字节并建立 Dromen；控制平面持有能力句柄；模型或其他后端位于受限子进程，只能提交候选和能力请求。Tekmor 记录真实观察、事件完整性、证据范围和最终权威决定。
+`endem drase` 启动独立 Drasor 进程。Drasor 重验实际字节并建立 Dromen；控制平面持有能力句柄；模型或其他后端位于受限子进程，只能提交候选和能力请求。Iknem 记录真实观察、事件完整性、证据范围和最终权威决定。
 
 ## 不建设独立模型平台
 

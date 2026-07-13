@@ -3,14 +3,14 @@
 - Specification ID: `DRO-CORE`
 - Version: `0.1.0-draft`
 - Status: draft; accepted abstract session-boundary design
-- Implementation status: proposal-vector checker only; no Praxor, loader, sandbox, capability broker or runtime exists
+- Implementation status: proposal-vector checker only; no Drasor, loader, sandbox, capability broker or runtime exists
 - Wire status: not applicable; Dromen is not a persistent object and has no file format
 
 ## 1. Purpose
 
-Dromen is the sealed, read-only execution contract for exactly one Praxe session. Praxor may establish it only after revalidating an exact attested Endem or Synem and intersecting the artifact limits with current policy, environment, authority, capability and budget limits.
+Dromen is the sealed, read-only execution contract for exactly one Drase session. Drasor may establish it only after revalidating an exact attested Endem or Synem and intersecting the artifact limits with current policy, environment, authority, capability and budget limits.
 
-Dromen separates a persistent goal artifact from the mutable world in which a session attempts to realize it. It does not contain live credentials, open handles, mutable observations, model memory or final results. Runtime events and observations become scoped Tekmor; satisfaction, authority decisions and session termination remain separate result domains.
+Dromen separates a persistent goal artifact from the mutable world in which a session attempts to realize it. It does not contain live credentials, open handles, mutable observations, model memory or final results. Runtime events and observations become scoped Iknem; satisfaction, authority decisions and session termination remain separate result domains.
 
 Any claimed authority, consent, delegation, authorization decision or capability grant `MUST` also pin and conform to the exact applicable `AUT-CORE` version. DRO-CORE defines the sealed session intersection; it does not redefine who may authorize its inputs.
 
@@ -27,10 +27,10 @@ attested Endem or Synem
         + observation and disclosure duties
                          |
                          v
-              sealed Dromen for one Praxe session
+              sealed Dromen for one Drase session
                          |
                          v
-        runtime events and phain -> Tekmor -> appraisal -> decision
+        runtime events and phain -> Iknem -> appraisal -> decision
 ```
 
 An input proposal is not a Dromen. It becomes a Dromen only after all required bindings are checked and sealed. Any material change creates a new session proposal; it never mutates or resumes the old Dromen.
@@ -39,7 +39,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 ### DRO-SUB-001 — The session subject must be exact, attested and freshly revalidated
 
-**Requirement:** A Dromen `MUST` bind exactly one attested Endem or one attested Synem by exact content identity, Profile and attestation envelope. Praxor `MUST` recheck container, Profile, content, closure, signature, revocation and applicability at a named cutoff before establishment. A display name, search result, mutable path, latest version, cached success or external Task identifier `MUST NOT` substitute for the exact subject.
+**Requirement:** A Dromen `MUST` bind exactly one attested Endem or one attested Synem by exact content identity, Profile and attestation envelope. Drasor `MUST` recheck container, Profile, content, closure, signature, revocation and applicability at a named cutoff before establishment. A display name, search result, mutable path, latest version, cached success or external Task identifier `MUST NOT` substitute for the exact subject.
 
 **Failure:** Missing, ambiguous, changed, invalid, revoked or not-yet-attested input rejects establishment. No Dromen or satisfaction result is created.
 
@@ -63,7 +63,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 ### DRO-CAP-001 — The capability envelope may only intersect and reduce authority
 
-**Requirement:** The Dromen capability envelope `MUST` be the intersection of artifact and Synem limits, current policy, operator authorization, environment support and adapter bounds. Every grant `MUST` bind an action, resource or audience, scope, constraints, issuer or grant authority, expiry and revocation check. Missing required capability rejects establishment; optional capability loss may only deactivate a fixed Synem member through its declared guard. Step-up or broader authority `MUST` create a new Praxe session proposal and `MUST NOT` mutate the current Dromen.
+**Requirement:** The Dromen capability envelope `MUST` be the intersection of artifact and Synem limits, current policy, operator authorization, environment support and adapter bounds. Every grant `MUST` bind an action, resource or audience, scope, constraints, issuer or grant authority, expiry and revocation check. Missing required capability rejects establishment; optional capability loss may only deactivate a fixed Synem member through its declared guard. Step-up or broader authority `MUST` create a new Drase session proposal and `MUST NOT` mutate the current Dromen.
 
 **Failure:** Union, fallback to ambient authority, wildcard expansion, token passthrough, audience substitution or runtime self-escalation invalidates the proposal or interrupts the established session.
 
@@ -71,7 +71,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 ### DRO-SEC-001 — Live secrets and handles must remain outside the Dromen
 
-**Requirement:** A Dromen `MUST` contain only non-secret capability descriptors and irreversible references needed for audit. Bearer tokens, refresh tokens, private keys, session cookies, file descriptors, sockets, process handles and provider-native capability handles `MUST NOT` enter the Dromen, Tekmor or persistent logs. A separate minimal capability domain may hold live material and `MUST` bind it to the Dromen session, intended resource or audience, scope and expiry. Rotation that preserves the descriptor MAY occur outside the Dromen; any scope, audience or authority change requires a new session.
+**Requirement:** A Dromen `MUST` contain only non-secret capability descriptors and irreversible references needed for audit. Bearer tokens, refresh tokens, private keys, session cookies, file descriptors, sockets, process handles and provider-native capability handles `MUST NOT` enter the Dromen, Iknem or persistent logs. A separate minimal capability domain may hold live material and `MUST` bind it to the Dromen session, intended resource or audience, scope and expiry. Rotation that preserves the descriptor MAY occur outside the Dromen; any scope, audience or authority change requires a new session.
 
 **Failure:** Secret material in the proposal, an unbound handle, reusable cross-session reference or passthrough token rejects establishment or invalidates the session.
 
@@ -95,7 +95,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 ### DRO-OBS-001 — Observation, appraisal, disclosure and decision duties must be assigned
 
-**Requirement:** A Dromen `MUST` map each applicable `krin` responsibility to authorized observation producers, methods, environment and time bounds, expected `phain` relation positions, required Tekmor classes, disclosure rules, appraisal policy and named decision authority. The map `MUST` preserve the separation of observation, satisfaction, evidence validity, coverage, final decision and session termination. Model outputs and external protocol states remain typed candidates or sourced events.
+**Requirement:** A Dromen `MUST` map each applicable `krin` responsibility to authorized observation producers, methods, environment and time bounds, expected `phain` relation positions, required Iknem classes, disclosure rules, appraisal policy and named decision authority. The map `MUST` preserve the separation of observation, satisfaction, evidence validity, coverage, final decision and session termination. Model outputs and external protocol states remain typed candidates or sourced events.
 
 **Failure:** An unassigned required observation, missing decision authority, hidden disclosure loss, or direct mapping from tool or Agent success to `met` or `accepted` rejects establishment.
 
@@ -103,7 +103,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 ### DRO-IMM-001 — Establishment seals the contract and material drift invalidates it
 
-**Requirement:** After establishment, the Dromen `MUST` be read-only. Changes to subject identity, attestation or revocation state, policy, authority, required environment, capability descriptor, budget, activation guard, observation duty or disclosure policy `MUST` invalidate the Dromen and interrupt or fail the Praxe session according to its predeclared rule. The implementation `MUST` append a scoped event and preserve prior Tekmor; it `MUST NOT` patch the old Dromen or erase the drift.
+**Requirement:** After establishment, the Dromen `MUST` be read-only. Changes to subject identity, attestation or revocation state, policy, authority, required environment, capability descriptor, budget, activation guard, observation duty or disclosure policy `MUST` invalidate the Dromen and interrupt or fail the Drase session according to its predeclared rule. The implementation `MUST` append a scoped event and preserve prior Iknem; it `MUST NOT` patch the old Dromen or erase the drift.
 
 **Failure:** In-place mutation, silent refresh to broader authority, continued operation after material drift or overwriting prior evidence violates the session boundary.
 
@@ -111,7 +111,7 @@ An input proposal is not a Dromen. It becomes a Dromen only after all required b
 
 ### DRO-LIF-001 — A Dromen is non-persistent, non-transferable and non-resumable
 
-**Requirement:** A Dromen `MUST` belong to exactly one Praxe session and one authorization context. It `MUST NOT` have a file extension, portable wire format, global content identity, package coordinate or cross-session reuse mechanism. Diagnostic snapshots MAY record redacted descriptors as Tekmor or session events, but `MUST NOT` rehydrate, transfer or resurrect the Dromen. Session completion, failure, interruption or invalidation `MUST` make all bound live capability material unreachable and trigger the declared disposal procedure.
+**Requirement:** A Dromen `MUST` belong to exactly one Drase session and one authorization context. It `MUST NOT` have a file extension, portable wire format, global content identity, package coordinate or cross-session reuse mechanism. Diagnostic snapshots MAY record redacted descriptors as Iknem or session events, but `MUST NOT` rehydrate, transfer or resurrect the Dromen. Session completion, failure, interruption or invalidation `MUST` make all bound live capability material unreachable and trigger the declared disposal procedure.
 
 **Failure:** Serializing a reusable Dromen, accepting a copied session identifier as authority, resuming with stale handles, or reconstructing a session from logs violates the lifecycle and requires rejection.
 

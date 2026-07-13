@@ -19,10 +19,10 @@ permalink: "/architecture/adr-0015-result-domains.html"
     <h2>五个结果域</h2>
     <div class="table-wrap"><table><thead><tr><th>结果域</th><th>允许值</th><th>只回答什么</th><th>绝不推出什么</th></tr></thead><tbody>
       <tr><td>制品生命周期</td><td><code>nascent / coherent / attested</code></td><td>Endem 或 Synem 已形成、已收敛或已绑定发布见证。</td><td>不推出当前环境可运行、目标满足或权威接受。</td></tr>
-      <tr><td>满足判断</td><td><code>met / unmet / agno / fault</code></td><td><code>skena</code> 相对固定 <code>krin</code>、适用 <code>phain</code> 和 Tekmor 的比较结果。</td><td>不推出最终决定或会话是否正常结束。</td></tr>
+      <tr><td>满足判断</td><td><code>met / unmet / agno / fault</code></td><td><code>skena</code> 相对固定 <code>krin</code>、适用 <code>phain</code> 和 Iknem 的比较结果。</td><td>不推出最终决定或会话是否正常结束。</td></tr>
       <tr><td>权威决定</td><td><code>accepted / rejected / deferred</code></td><td>具名规则或主体是否在声明范围内作出最终决定。</td><td>不改写原满足结果，也不证明制品、证据或运行无误。</td></tr>
-      <tr><td>会话终止</td><td><code>completed / failed / interrupted</code></td><td>一次 Praxe 会话按终止规则结束、因运行故障失败或被外部条件中断。</td><td><code>completed</code> 不等于 <code>met</code> 或 <code>accepted</code>；<code>failed</code> 不等于 <code>unmet</code>。</td></tr>
-      <tr><td>证据状态</td><td><code>valid / invalid / revoked</code><br><code>sufficient / insufficient</code></td><td>Tekmor 的身份与适用性是否有效，以及证据集合是否覆盖当前 <code>krin</code>。</td><td>单份有效记录不自动形成充分覆盖或最终接受。</td></tr>
+      <tr><td>会话终止</td><td><code>completed / failed / interrupted</code></td><td>一次 Drase 会话按终止规则结束、因运行故障失败或被外部条件中断。</td><td><code>completed</code> 不等于 <code>met</code> 或 <code>accepted</code>；<code>failed</code> 不等于 <code>unmet</code>。</td></tr>
+      <tr><td>证据状态</td><td><code>valid / invalid / revoked</code><br><code>sufficient / insufficient</code></td><td>Iknem 的身份与适用性是否有效，以及证据集合是否覆盖当前 <code>krin</code>。</td><td>单份有效记录不自动形成充分覆盖或最终接受。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -34,13 +34,13 @@ permalink: "/architecture/adr-0015-result-domains.html"
       <tr><td><code>agno</code></td><td>意义和判据已经确定，但观察缺失、过期、越出范围或覆盖不足。</td><td>不能用它保存语义歧义，也不能静默降成 <code>unmet</code>。</td></tr>
       <tr><td><code>fault</code></td><td>求值器、规则、依赖或观察适配过程没有按声明契约完成。</td><td>不能把目标本身标为未满足，也不能用重试后的成功覆盖故障记录。</td></tr>
     </tbody></table></div>
-    <p>每项满足结果必须绑定 Endem 身份、<code>krin</code> 版本、观察截止点、所用 Tekmor 和稳定原因。新观察或规则版本会产生新结果，不能原地改写旧记录。</p>
+    <p>每项满足结果必须绑定 Endem 身份、<code>krin</code> 版本、观察截止点、所用 Iknem 和稳定原因。新观察或规则版本会产生新结果，不能原地改写旧记录。</p>
   </section>
 
   <section class="content-wide">
     <h2>权威决定怎样形成</h2>
     <div class="table-wrap"><table><thead><tr><th>决定</th><th>最低条件</th><th>边界</th></tr></thead><tbody>
-      <tr><td><code>accepted</code></td><td><code>met</code>、必需 Tekmor 有效且覆盖充分，以及 <code>krin</code> 指定的权威确实作出决定。</td><td>任何缺项都不得由模型、Praxor 或外部协议补写。</td></tr>
+      <tr><td><code>accepted</code></td><td><code>met</code>、必需 Iknem 有效且覆盖充分，以及 <code>krin</code> 指定的权威确实作出决定。</td><td>任何缺项都不得由模型、Drasor 或外部协议补写。</td></tr>
       <tr><td><code>rejected</code></td><td>具名权威依据 <code>unmet</code> 或预先登记的拒绝政策作出否定决定。</td><td>拒绝原因必须保留原满足结果；证据不足不自动等于目标为假。</td></tr>
       <tr><td><code>deferred</code></td><td>尚无获授权的最终决定，或 <code>agno</code>、<code>fault</code>、人工判断与授权缺口仍未解决。</td><td>它不是隐式接受、普通失败或待模型自行选择。</td></tr>
     </tbody></table></div>
@@ -51,23 +51,23 @@ permalink: "/architecture/adr-0015-result-domains.html"
     <h2>GNU 与智能体协议提供的反例</h2>
     <p><a href="https://www.gnu.org/software/automake/manual/html_node/Generalities-about-Testing.html">GNU Automake 测试语义</a>区分正常断言失败、跳过与测试环境硬错误。这支持 Noemion 把 <code>unmet</code>、<code>agno</code> 与 <code>fault</code> 分开，但 Automake 的退出码和 PASS/FAIL 名称不会进入 Endem ABI。</p>
     <p><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP 工具错误规范</a>区分协议错误与工具执行错误；<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 任务状态</a>又区分完成、失败、拒绝、取消以及等待输入或授权。这些状态只描述外部调用和任务生命周期，适配器不得把 <code>completed</code> 映射为 <code>met</code> 或 <code>accepted</code>。</p>
-    <p><a href="https://www.w3.org/TR/prov-o/">W3C PROV-O</a>把实体、活动、主体、生成、使用和失效保持为可追溯关系。Tekmor 借鉴这种来源分离，但 Noemion 自行定义证据有效性、覆盖度与决定规则。</p>
+    <p><a href="https://www.w3.org/TR/prov-o/">W3C PROV-O</a>把实体、活动、主体、生成、使用和失效保持为可追溯关系。Iknem 借鉴这种来源分离，但 Noemion 自行定义证据有效性、覆盖度与决定规则。</p>
   </section>
 
   <section class="content-wide">
     <h2>后果与验证路线</h2>
     <ul>
       <li>END-CORE 新增满足结果、权威决定和结果域分离条款；本决定不新增 END-P1 字段，现有字节保持不变。</li>
-      <li>Praxor、生命周期和 Tekmor 页面删除跨层状态混用；外部 MCP/A2A 状态只进入带来源的运行事件。</li>
+      <li>Drasor、生命周期和 Iknem 页面删除跨层状态混用；外部 MCP/A2A 状态只进入带来源的运行事件。</li>
       <li>十二个结果域提案向量执行六个允许组合与六个确定拒绝，只证明当前矩阵和条款一致。</li>
       <li>未来 <code>peira</code> 必须覆盖“会话 completed 但结果 unmet”“求值 fault 但目标未知”“结果 met 但决定 deferred”等交叉组合。</li>
-      <li>当前只有规范、场景和计划验证，没有 Praxor、决定引擎、状态编码或组件测试。</li>
+      <li>当前只有规范、场景和计划验证，没有 Drasor、决定引擎、状态编码或组件测试。</li>
     </ul>
   </section>
 
   <section class="content-band">
     <h2>仍未冻结的内容</h2>
-    <p>结果事件的物理编码、时间域、重放键、聚合规则、决定类 Tekmor 格式、会话恢复和协议状态映射表仍需独立 Profile、威胁分析与正反向量。本决定只冻结语义分层和禁止推导。</p>
+    <p>结果事件的物理编码、时间域、重放键、聚合规则、决定类 Iknem 格式、会话恢复和协议状态映射表仍需独立 Profile、威胁分析与正反向量。本决定只冻结语义分层和禁止推导。</p>
   </section>
   <div class="next-prev"><a href="adr-0014-source-manifest.html">← ADR-0014</a><a href="adr-0016-mene-time-model.html">ADR-0016 →</a></div>
 </main>

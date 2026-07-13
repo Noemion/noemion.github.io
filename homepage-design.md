@@ -20,7 +20,7 @@
 | 门户引言 | Noemion 建立什么工程基础，Endem 在其中承担什么职责 | 入门、生命周期 |
 | The Primitive | 为什么不沿用 OBJ/IR 前缀体系 | ADR-0008、背景 |
 | Six Facets | 六个语义面怎样形成最小契约 | Endem 规范 |
-| Four Nouns | 哪些状态值得拥有正式名词 | Endem、Synem、Tekmor 规范 |
+| Four Nouns | 哪些状态值得拥有正式名词 | Endem、Synem、Iknem 规范 |
 | One Application | 为什么一个入口仍保持三个信任域 | Endem 应用、组件 |
 | Current Stage | 第一纵向切片及证据门 | 实施路线、测试 |
 | Continue | 按读者任务继续 | 一级稳定入口 |
@@ -29,7 +29,7 @@
 
 - Endem 面板使用六条短记录表达语义面，不表现为传统机器段表。
 - 数据流标签固定使用 `RHEM / SEMION / SKENA / TELIS / KRIN / APOR` 与 `POIE`。
-- Endem、Synem、Dromen、Tekmor 的关系使用状态/闭包/运行证据区分，不画成四个同构文件盒。
+- Endem、Synem、Dromen、Iknem 的关系使用状态/闭包/运行证据区分，不画成四个同构文件盒。
 - 颜色只区分来源、边界、未决、验收和状态；动画不暗示真实吞吐、成功率或发布状态。
 
 ## 版式与动效

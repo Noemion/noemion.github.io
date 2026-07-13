@@ -28,7 +28,7 @@
       <path d="M13 26h90M13 41h90M13 56h90M36 11v60" stroke="#789388"/>
       <rect x="42" y="17" width="34" height="4" fill="#68d7b2"/><rect x="42" y="32" width="48" height="4" fill="#3158ff"/><rect x="42" y="47" width="27" height="4" fill="#f4be35"/><rect x="42" y="62" width="42" height="4" fill="#f04b23"/>
     </symbol>
-    <symbol id="nav-cover-tekmor" viewBox="0 0 116 82">
+    <symbol id="nav-cover-iknem" viewBox="0 0 116 82">
       <rect x="10" y="15" width="43" height="50" fill="#3158ff" opacity=".75"/><rect x="37" y="23" width="43" height="42" fill="#68d7b2" opacity=".82"/><rect x="64" y="31" width="42" height="34" fill="#f4be35" opacity=".9"/>
       <path d="M21 53h21M49 53h20M76 53h19" stroke="#101714" stroke-width="3"/>
     </symbol>
@@ -54,7 +54,7 @@
       <path d="M47 41h21m-7-7 7 7-7 7" stroke="#f4be35" stroke-width="3" fill="none"/>
       <rect x="74" y="18" width="32" height="46" fill="#f04b23"/><path d="M80 30h20M80 40h20M80 50h20" stroke="#101714" stroke-width="3"/>
     </symbol>
-    <symbol id="nav-cover-praxe" viewBox="0 0 116 82">
+    <symbol id="nav-cover-drase" viewBox="0 0 116 82">
       <circle cx="22" cy="24" r="9" fill="#3158ff"/><circle cx="22" cy="58" r="9" fill="#68d7b2"/><circle cx="58" cy="41" r="11" fill="#f4be35"/><circle cx="95" cy="24" r="9" fill="#f04b23"/><circle cx="95" cy="58" r="9" fill="#3158ff"/>
       <path d="M30 27 48 36M30 55l18-9m21-5 18-13m-18 13 18 13" stroke="#f0f6f3" stroke-width="3"/>
     </symbol>

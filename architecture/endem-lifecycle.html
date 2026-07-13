@@ -7,7 +7,7 @@ permalink: "/architecture/endem-lifecycle.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>Endem 生命周期</span></nav>
-  <header class="content-introduction"><h1>Endem 生命周期</h1><p>跟随一项目标从来源表达进入 Endem，再经过组合、发布、受控实现和证据验收。</p><div class="badges"><span class="badge">nascent</span><span class="badge">coherent</span><span class="badge">attested</span><span class="badge">Dromen</span><span class="badge">Tekmor</span></div></header>
+  <header class="content-introduction"><h1>Endem 生命周期</h1><p>跟随一项目标从来源表达进入 Endem，再经过组合、发布、受控实现和证据验收。</p><div class="badges"><span class="badge">nascent</span><span class="badge">coherent</span><span class="badge">attested</span><span class="badge">Dromen</span><span class="badge">Iknem</span></div></header>
 
   <section class="content-stack">
     <h2>生命周期不是信任等级流水线</h2>
@@ -16,27 +16,27 @@ permalink: "/architecture/endem-lifecycle.html"
       <li><code>poie</code> 说明目标契约已经确定性编码。</li>
       <li><code>pleko</code> 说明引用和冲突已经解析。</li>
       <li><code>sphra</code> 说明发布载荷与外部签名响应一致。</li>
-      <li><code>praxe</code> 说明当前环境已经建立受控会话。</li>
-      <li>Tekmor 只说明判断依据可定位，并限定这项依据的适用范围。</li>
+      <li><code>drase</code> 说明当前环境已经建立受控会话。</li>
+      <li>Iknem 只说明判断依据可定位，并限定这项依据的适用范围。</li>
     </ul>
-    <p class="callout"><strong>关键边界：</strong>Endem 在 nascent、coherent、attested 三个状态之间演进。apor 是语义面，不是生命周期状态；Dromen 是一次 Praxe 会话的密封只读执行契约，Tekmor 是有限证据记录。</p>
+    <p class="callout"><strong>关键边界：</strong>Endem 在 nascent、coherent、attested 三个状态之间演进。apor 是语义面，不是生命周期状态；Dromen 是一次 Drase 会话的密封只读执行契约，Iknem 是有限证据记录。</p>
   </section>
 
   <section class="content-wide">
     <h2>主流程</h2>
-    <div class="flow"><div class="step">受控来源 / 投影候选</div><div class="step">确定投影</div><div class="step">poie</div><div class="step">nascent Endem</div><div class="step">elenk + theor</div><div class="step">pleko</div><div class="step">coherent Endem / Synem</div><div class="step">tasse / sphra</div><div class="step">praxe → Dromen</div><div class="step">Tekmor → 最终决定</div></div>
+    <div class="flow"><div class="step">受控来源 / 投影候选</div><div class="step">确定投影</div><div class="step">poie</div><div class="step">nascent Endem</div><div class="step">elenk + theor</div><div class="step">pleko</div><div class="step">coherent Endem / Synem</div><div class="step">tasse / sphra</div><div class="step">drase → Dromen</div><div class="step">Iknem → 最终决定</div></div>
   </section>
 
   <section class="content-wide">
     <h2>阶段、消费者与失败</h2>
     <div class="table-wrap"><table><thead><tr><th>阶段</th><th>权威输入</th><th>正式输出</th><th>失败责任</th><th>下游消费者</th></tr></thead><tbody>
-      <tr><td>受控来源 → poie</td><td>六个语义面，或带来源的投影候选与授权决定</td><td>nascent Endem、Poie Tekmor、诊断</td><td>来源不可重放、aseme、根 skena 不唯一、telis/krin 缺失、候选越权确认</td><td>elenk、theor、pleko 或人工确认</td></tr>
-      <tr><td>nascent Endem → elenk</td><td>原始对象字节、限制、规范版本和请求验证层</td><td>分层结论、Elenk Tekmor；内部可产生生产验证句柄</td><td>结构、引用、语义、状态、完整性或资源限制失败</td><td>pleko、tasse、Praxor</td></tr>
-      <tr><td>任意对象 → theor</td><td>原始 Endem/Synem/Tekmor 字节和输出预算</td><td>只读视图、差分、诊断</td><td>畸形、未知关键记录、无法表示或资源超限</td><td>开发者、审计者、peira；不进入生产信任链</td></tr>
-      <tr><td>Endem 集合 → pleko</td><td>已检查对象、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Tekmor</td><td>未解析引用、冲突、循环、权限扩大、身份不稳定</td><td>tasse、theor</td></tr>
-      <tr><td>coherent → tasse</td><td>闭包、发布规则、调试策略、覆盖要求</td><td>不可变候选载荷、发布清单、待签消息、Tasse Tekmor</td><td>闭包不全、裁剪改变语义、非确定性元数据、覆盖缺口</td><td>外部签名系统、sphra</td></tr>
-      <tr><td>候选 + 签名响应 → sphra</td><td>原候选、原请求、外部签名响应和信任策略</td><td>attested Endem/Synem、Sphra Tekmor</td><td>载荷、请求、算法、签名者或策略不匹配</td><td>theor、Praxor</td></tr>
-      <tr><td>attested → praxe</td><td>实际 attested 字节、运行策略、后端和能力目录</td><td>Dromen、运行与决定类 Tekmor、满足结果、权威决定和会话终止结果</td><td>签名或策略失败、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
+      <tr><td>受控来源 → poie</td><td>六个语义面，或带来源的投影候选与授权决定</td><td>nascent Endem、Poie Iknem、诊断</td><td>来源不可重放、aseme、根 skena 不唯一、telis/krin 缺失、候选越权确认</td><td>elenk、theor、pleko 或人工确认</td></tr>
+      <tr><td>nascent Endem → elenk</td><td>原始对象字节、限制、规范版本和请求验证层</td><td>分层结论、Elenk Iknem；内部可产生生产验证句柄</td><td>结构、引用、语义、状态、完整性或资源限制失败</td><td>pleko、tasse、Drasor</td></tr>
+      <tr><td>任意对象 → theor</td><td>原始 Endem/Synem/Iknem 字节和输出预算</td><td>只读视图、差分、诊断</td><td>畸形、未知关键记录、无法表示或资源超限</td><td>开发者、审计者、peira；不进入生产信任链</td></tr>
+      <tr><td>Endem 集合 → pleko</td><td>已检查对象、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Iknem</td><td>未解析引用、冲突、循环、权限扩大、身份不稳定</td><td>tasse、theor</td></tr>
+      <tr><td>coherent → tasse</td><td>闭包、发布规则、调试策略、覆盖要求</td><td>不可变候选载荷、发布清单、待签消息、Tasse Iknem</td><td>闭包不全、裁剪改变语义、非确定性元数据、覆盖缺口</td><td>外部签名系统、sphra</td></tr>
+      <tr><td>候选 + 签名响应 → sphra</td><td>原候选、原请求、外部签名响应和信任策略</td><td>attested Endem/Synem、Sphra Iknem</td><td>载荷、请求、算法、签名者或策略不匹配</td><td>theor、Drasor</td></tr>
+      <tr><td>attested → drase</td><td>实际 attested 字节、运行策略、后端和能力目录</td><td>Dromen、运行与决定类 Iknem、满足结果、权威决定和会话终止结果</td><td>签名或策略失败、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
     </tbody></table></div>
   </section>
 
@@ -63,16 +63,16 @@ permalink: "/architecture/endem-lifecycle.html"
   </section>
 
   <section class="content-rows">
-    <h2>attested → Dromen → Tekmor</h2>
+    <h2>attested → Dromen → Iknem</h2>
     <ol>
-      <li>Praxor 对实际输入字节重新执行所需 <code>elenk</code>，不复用过期结论。</li>
-      <li>Praxor 按 <a href="adr-0024-dromen-session-contract.html">ADR-0024</a> 重新验证精确对象，并把政策、环境、能力、预算和证据责任求交后封存 Dromen；实时句柄只保留在独立最小能力域。</li>
+      <li>Drasor 对实际输入字节重新执行所需 <code>elenk</code>，不复用过期结论。</li>
+      <li>Drasor 按 <a href="adr-0024-dromen-session-contract.html">ADR-0024</a> 重新验证精确对象，并把政策、环境、能力、预算和证据责任求交后封存 Dromen；实时句柄只保留在独立最小能力域。</li>
       <li>后端读取 Dromen 的非秘密只读描述，返回候选或类型化能力请求，不能直接取得外部能力。</li>
-      <li>Praxor 验证请求、执行或拒绝，再把真实观察、规范化变换与 phain 分开记录为符合 TEK-CORE 抽象边界的 Praxe 证据。</li>
-      <li>若 <code>telis</code> 为 <code>mene</code>，Praxor 还必须按 ADR-0016 绑定 fixed 或 elapsed 范围，记录时钟域、覆盖区间、缺口和违约预算。</li>
+      <li>Drasor 验证请求、执行或拒绝，再把真实观察、规范化变换与 phain 分开记录为符合 IKN-CORE 抽象边界的 Drase 证据。</li>
+      <li>若 <code>telis</code> 为 <code>mene</code>，Drasor 还必须按 ADR-0016 绑定 fixed 或 elapsed 范围，记录时钟域、覆盖区间、缺口和违约预算。</li>
       <li>求值器按照执行前固定的 <code>krin</code> 比较 <code>skena</code> 与 <code>phain</code>，形成 <code>met / unmet / agno / fault</code> 中的一个满足结果。</li>
-      <li>验证者先在精确政策、参考值、环境与截止点下评估 Tekmor 有效性，再相对当前 <code>krin</code> 计算覆盖度；具名权威最后形成 <code>accepted / rejected / deferred</code> 中的一个决定。会话另行记录 <code>completed / failed / interrupted</code>。</li>
-      <li>会话结束、失败、中断或实质漂移后，Dromen 与绑定实时能力都不可再用；允许保留的运行记录只进入有范围的 Tekmor 或会话事件，不能恢复权限。</li>
+      <li>验证者先在精确政策、参考值、环境与截止点下评估 Iknem 有效性，再相对当前 <code>krin</code> 计算覆盖度；具名权威最后形成 <code>accepted / rejected / deferred</code> 中的一个决定。会话另行记录 <code>completed / failed / interrupted</code>。</li>
+      <li>会话结束、失败、中断或实质漂移后，Dromen 与绑定实时能力都不可再用；允许保留的运行记录只进入有范围的 Iknem 或会话事件，不能恢复权限。</li>
     </ol>
   </section>
 
@@ -81,15 +81,15 @@ permalink: "/architecture/endem-lifecycle.html"
     <div class="table-wrap"><table><thead><tr><th>类别</th><th>允许状态</th><th>含义</th></tr></thead><tbody>
       <tr><td>Endem</td><td>nascent / coherent / attested</td><td>语义与发布生命周期状态。</td></tr>
       <tr><td>满足判断</td><td>met / unmet / agno / fault</td><td>skena 相对 phain、krin 与求值规则的工程满足结果。</td></tr>
-      <tr><td>权威决定</td><td>accepted / rejected / deferred</td><td>具名规则或主体依据满足结果、Tekmor 和覆盖度作出的最终决定。</td></tr>
-      <tr><td>Praxe 会话</td><td>completed / failed / interrupted</td><td>只描述一次运行怎样终止，不说明目标是否满足或已被接受。</td></tr>
+      <tr><td>权威决定</td><td>accepted / rejected / deferred</td><td>具名规则或主体依据满足结果、Iknem 和覆盖度作出的最终决定。</td></tr>
+      <tr><td>Drase 会话</td><td>completed / failed / interrupted</td><td>只描述一次运行怎样终止，不说明目标是否满足或已被接受。</td></tr>
       <tr><td>Elenk</td><td>pass / fail / not-evaluated</td><td>每个请求验证层的独立结论；不能压成含义不明的成功布尔值。</td></tr>
-      <tr><td>Tekmor 有效性</td><td>valid / invalid / revoked</td><td>验证者针对精确政策、参考值、环境和截止点形成的外部评估；不等同于 claim 为真。</td></tr>
-      <tr><td>证据覆盖度</td><td>sufficient / insufficient</td><td>一组有效 Tekmor 是否覆盖当前 krin；不与单份记录有效性合并。</td></tr>
+      <tr><td>Iknem 有效性</td><td>valid / invalid / revoked</td><td>验证者针对精确政策、参考值、环境和截止点形成的外部评估；不等同于 claim 为真。</td></tr>
+      <tr><td>证据覆盖度</td><td>sufficient / insufficient</td><td>一组有效 Iknem 是否覆盖当前 krin；不与单份记录有效性合并。</td></tr>
     </tbody></table></div>
     <p>这五个结果域由 <a href="adr-0015-result-domains.html">ADR-0015</a> 分开。外部 Task 的 <code>completed</code>、工具返回成功或会话正常结束都不能跨域改写满足结果与最终决定。</p>
     <p><code>mene</code> 的时间范围、连续性政策与覆盖分类由 <a href="adr-0016-mene-time-model.html">ADR-0016</a> 定义。当前没有 mene 线格式、时钟适配器或持续求值实现。</p>
-    <p>Tekmor 的主体、范围、溯源、观察类别、有效性、覆盖度、决定和最小披露由 <a href="adr-0022-tekmor-evidence-and-appraisal.html">ADR-0022</a> 与 TEK-CORE 定义。当前没有物理 Tekmor 格式、验证器、归并器、撤销服务或决定引擎。</p>
+    <p>Iknem 的主体、范围、溯源、观察类别、有效性、覆盖度、决定和最小披露由 <a href="adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a> 与 IKN-CORE 定义。当前没有物理 Iknem 格式、验证器、归并器、撤销服务或决定引擎。</p>
   </section>
 
   <section class="content-band">

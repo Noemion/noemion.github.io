@@ -36,7 +36,7 @@
 | `root` | situation_id | 1 |
 | `telis` | mode | 1；END-P1 仅 `kine` |
 | `phain` | relation, match | 0..n；END-P1 仅 `same-roles` |
-| `tekmor` | evidence_requirement_id | 0..n |
+| `iknem` | evidence_requirement_id | 0..n |
 | `krin` | on_missing, on_error, decision_authority | 1；END-P1 仅 `agno`, `fault` |
 | `apor` | id, source_ref, conflict, decision_authority, candidates(csv), impact_scope(csv), resolutions(csv) | 0..n |
 
@@ -54,7 +54,7 @@
 
 ### END-SRCM-004 — 输入顺序不决定对象字节
 
-**要求：**Poiet 必须先验证身份唯一性和引用闭包，再按 END-P1 规范顺序形成记录。`symbol`、`relation`、role、`situation`、`phain`、`tekmor` 与 `apor` 的输入行顺序不得改变输出；重复身份不能靠后项覆盖。
+**要求：**Poiet 必须先验证身份唯一性和引用闭包，再按 END-P1 规范顺序形成记录。`symbol`、`relation`、role、`situation`、`phain`、`iknem` 与 `apor` 的输入行顺序不得改变输出；重复身份不能靠后项覆盖。
 
 **失败：**相同规范集合因输入顺序产生不同 `.endem` 字节，或重复身份被静默接受，均不符合本规范。
 

@@ -47,7 +47,7 @@ def parse(source):
     relations = []
     situations = []
     phain = []
-    tekmor = []
+    iknem = []
     apor = []
     for raw in source.splitlines():
         if raw == "" or raw.startswith("#"):
@@ -88,9 +88,9 @@ def parse(source):
         elif directive == "phain":
             exact(parts, 3)
             phain.append({"relation": parts[1], "match": parts[2]})
-        elif directive == "tekmor":
+        elif directive == "iknem":
             exact(parts, 2)
-            tekmor.append(parts[1])
+            iknem.append(parts[1])
         elif directive == "krin":
             exact(parts, 4)
             set_once(singletons, directive, {
@@ -115,7 +115,7 @@ def parse(source):
         "semion": {"symbols": symbols, "relations": relations},
         "skena": {"roots": [singletons["root"]], "situations": situations},
         "telis": {"mode": singletons["telis"]},
-        "krin": {"required_phain": phain, "required_tekmor": tekmor, **singletons["krin"]},
+        "krin": {"required_phain": phain, "required_iknem": iknem, **singletons["krin"]},
         "apor": apor,
     }
 
@@ -134,7 +134,7 @@ def normalize(model):
         relation["roles"].sort(key=lambda item: item["name"])
     model["skena"]["situations"].sort(key=lambda item: item["id"])
     model["krin"]["required_phain"].sort(key=lambda item: item["relation"])
-    model["krin"]["required_tekmor"].sort()
+    model["krin"]["required_iknem"].sort()
     model["apor"].sort(key=lambda item: item["id"])
     for item in model["apor"]:
         item["candidates"].sort()

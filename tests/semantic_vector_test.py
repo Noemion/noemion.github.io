@@ -245,11 +245,11 @@ def validate_krin(krin, relation_ids):
             fail("endem.krin.unknown_relation", "END-STR-001", f"/input/krin/required_phain/{index}/relation")
         if requirement.get("match") != "same-roles":
             fail("endem.krin.match", "END-KRN-001", f"/input/krin/required_phain/{index}/match")
-    required_tekmor = require_list(krin.get("required_tekmor"), "/input/krin/required_tekmor")
-    if not required_tekmor:
-        fail("endem.krin.empty_evidence", "END-KRN-001", "/input/krin/required_tekmor")
-    for index, evidence in enumerate(required_tekmor):
-        require_text(evidence, "END-KRN-001", f"/input/krin/required_tekmor/{index}", token=True)
+    required_iknem = require_list(krin.get("required_iknem"), "/input/krin/required_iknem")
+    if not required_iknem:
+        fail("endem.krin.empty_evidence", "END-KRN-001", "/input/krin/required_iknem")
+    for index, evidence in enumerate(required_iknem):
+        require_text(evidence, "END-KRN-001", f"/input/krin/required_iknem/{index}", token=True)
     if krin.get("on_missing_observation") != "agno":
         fail("endem.krin.missing_policy", "END-KRN-001", "/input/krin/on_missing_observation")
     if krin.get("on_evaluation_error") != "fault":

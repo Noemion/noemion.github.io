@@ -29,7 +29,7 @@ badges: ["Unreleased", "Endem CLI", "Integrity First"]
 3. `elenk` 直接读取实际字节并分层验证；`theor` 以独立实现提供只读视图。
 4. 有真实多目标消费者时，`pleko` 才解析引用并形成 Synem。
 5. `tasse` 证明裁剪等价；`sphra` 只产生请求并核对外部签名响应，私钥不进入 Poiet。
-6. `praxe` 在隔离进程重新验证精确制品，并按 DRO-CORE 从政策、环境、能力、预算和证据责任封存 Dromen。独立最小能力域持有实时句柄，运行过程形成 Tekmor，具名权威作出最终验收决定。
+6. `drase` 在隔离进程重新验证精确制品，并按 DRO-CORE 从政策、环境、能力、预算和证据责任封存 Dromen。独立最小能力域持有实时句柄，运行过程形成 Iknem，具名权威作出最终验收决定。
 
 ## 发布原则
 

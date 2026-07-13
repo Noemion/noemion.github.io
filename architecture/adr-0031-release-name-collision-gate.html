@@ -1,0 +1,64 @@
+---
+layout: default
+title: "ADR-0031 · 发布名称冲突门禁"
+page_role: "content"
+footer_text: "Noemion · ADR-0031"
+permalink: "/architecture/adr-0031-release-name-collision-gate.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0031</span></nav>
+  <header class="content-introduction"><h1>ADR-0031<br>发布名称冲突门禁</h1><p>用 Iknem 与 Drasor 消除相邻领域冲突，同时保持证据和受限执行职责不变。</p><div class="badges"><span class="badge">Accepted</span><span class="badge">2026-07-13</span><span class="badge">One-time migration</span><span class="badge">No compatibility</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead"><strong>Iknem</strong> 取代旧证据对象名，<strong>Drasor</strong> 取代旧受限执行域名，对应公开动作改为 <code>drase</code>。</p>
+    <p>Iknem 仍表示绑定精确主体、有限主张、溯源、观察、方法、结果和限制的证据记录。Drasor 仍负责在一次会话中重验精确输入、收窄能力、控制副作用并封存 Dromen。更名不改变任何结果域、权限边界、身份规则或规范内容。</p>
+    <p class="callout"><strong>迁移规则：</strong>当前尚未进入组件代码阶段，也不承诺向后兼容。旧术语不再进入现行页面、规范 ID、诊断域、路由、向量或动作；不保留别名、重定向、双写或兼容垫片。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>为什么必须更名</h2>
+    <div class="table-wrap"><table><thead><tr><th>退役名称</th><th>可核对的外部使用</th><th>冲突判断</th></tr></thead><tbody>
+      <tr><td>Praxor</td><td><a href="https://praxorlab.com/">Praxor Lab</a>研究大模型推理、解释性和强化学习；<a href="https://www.praxor.ai/">Praxor.ai</a>提供 Agentic AI 系统；<a href="https://www.praxor.dev/">praxor.dev</a>提供软件工程与开发工具服务。</td><td>与受限执行组件处于同一人工智能和软件工程发现空间，不能依靠说明文字消歧。</td></tr>
+      <tr><td>Tekmor</td><td><a href="https://www.tekmor.xyz/">tekmor.xyz</a>把同名用于隐私身份、零知识证明、TEE、确定性构建和链上 attestation。</td><td>与范围证据、完整性、验证和证明职责直接重叠，达到停止条件。</td></tr>
+    </tbody></table></div>
+    <p>这些证据证明工程发现冲突，不判断商标权或在先权利。首次正式发行仍需完成 WIPO、目标法域数据库、软件包坐标和合格专业人员复核。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>证据对象候选比较</h2>
+    <div class="table-wrap"><table><thead><tr><th>候选</th><th>检索与可读性</th><th>决定</th></tr></thead><tbody>
+      <tr><td>Iknem</td><td>短、可发音；2026-07-13 初筛没有发现同名的活跃 AI、证明、协议或开发工具。公开结果中的课程缩写、航空航路点和零散人名不承担相邻工程职责。</td><td>采用；含义只由 IKN-CORE 定义，不暗示记录真实、有效或充分。</td></tr>
+      <tr><td>Vekem</td><td>字形简短，但与面向 AI Agent 的记忆软件 <code>vemem</code> 仅差一个字母，口头和搜索区分度不足。</td><td>拒绝</td></tr>
+      <tr><td>Pistem</td><td>容易与 PiSTEM 教育组织及使用 AI 的透明能源模型项目发生大小写和拆词混淆。</td><td>拒绝</td></tr>
+      <tr><td><code>evidence-record</code></td><td>直白，但过于通用，适合解释职责，不适合作为需要稳定引用的对象名、规范 ID 和诊断域。</td><td>保留为释义，不作为术语</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>受限执行候选比较</h2>
+    <div class="table-wrap"><table><thead><tr><th>候选</th><th>检索与可读性</th><th>决定</th></tr></thead><tbody>
+      <tr><td>Drasor / <code>drase</code></td><td>组件与动作关系清楚。2026-07-13 初筛没有发现同名的活跃 AI、Agent、运行时或开发工具；DraSOR 酶缩写、房地产主体和早期 FORTRAN 子程序属于不相邻用途。</td><td>采用；不得由词源推导权限或执行成功。</td></tr>
+      <tr><td>Dranor / <code>dran</code></td><td>Dranor 是已发表游戏角色；<code>dran</code> 已是活跃 PyPI 科学软件名，DRAN 也用于生成式 AI 研究。</td><td>拒绝</td></tr>
+      <tr><td>Drast</td><td>已有同名 AI 销售自动化产品，处于直接相邻领域。</td><td>拒绝</td></tr>
+      <tr><td><code>execution-controller</code></td><td>容易理解，却把会话封存、最小能力域和失败责任压扁成通用控制器，也不适合作为简洁动作。</td><td>保留为释义，不作为术语</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>一次性迁移面</h2>
+    <ul>
+      <li>证据标准改为 <code>IKN-CORE</code>，规范 ID 改为 <code>ikn-core</code>，诊断域和向量目录使用 <code>iknem.*</code> 与 <code>vectors/iknem/</code>。</li>
+      <li>受限执行组件改为 Drasor，唯一 CLI 动作集合中的对应动作改为 <code>drase</code>。</li>
+      <li>Dromen 继续是 Drasor 为一次 Drase 会话封存的只读执行契约；Iknem 继续只支持自身声明范围。</li>
+      <li>规范、ADR、场景、威胁模型、页面、导航、测试、项目提示词和登记项同步替换；旧入口直接消失。</li>
+      <li>历史冲突证据只保留在本 ADR 和名称审计中，不构成旧接口或兼容承诺。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>仍然存在的停止条件</h2>
+    <p>Iknem、Drasor 与 <code>drase</code> 只通过了开发阶段的工程初筛。正式发行前必须再次查询 PyPI、npm、crates.io、主要系统包、GitHub、协议与标准、人工智能产品、域名、WIPO 和目标法域商标。若出现活跃相邻用途，直接重新命名，不以兼容成本为理由保留冲突名称。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0030-endem-content-and-authorization-companions.html">← ADR-0030</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

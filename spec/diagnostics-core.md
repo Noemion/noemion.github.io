@@ -9,9 +9,9 @@
 
 ## 1. 范围
 
-本规范定义 Poiet、独立 Theor、Praxor、`endem` 动作以及未来协议适配器产生的诊断至少必须保留哪些机器可读内容。它覆盖 Endem、Synem、Dromen、Tekmor、来源清单、物理容器、政策、后端和外部协议，但不改变这些对象自己的规范与结果域。
+本规范定义 Poiet、独立 Theor、Drasor、`endem` 动作以及未来协议适配器产生的诊断至少必须保留哪些机器可读内容。它覆盖 Endem、Synem、Dromen、Iknem、来源清单、物理容器、政策、后端和外部协议，但不改变这些对象自己的规范与结果域。
 
-诊断回答“哪个操作在检查哪个精确输入时，因哪条规范、哪个位置和什么可恢复条件停止或提示”。诊断不是 Endem、Tekmor、满足结果、最终决定、Praxe 会话结果、权限、重试命令或实现堆栈。诊断可以被后续 Tekmor 引用，但它的存在、数量或严重度不能证明目标满足、证据充分或决定已经获得授权。
+诊断回答“哪个操作在检查哪个精确输入时，因哪条规范、哪个位置和什么可恢复条件停止或提示”。诊断不是 Endem、Iknem、满足结果、最终决定、Drase 会话结果、权限、重试命令或实现堆栈。诊断可以被后续 Iknem 引用，但它的存在、数量或严重度不能证明目标满足、证据充分或决定已经获得授权。
 
 ## 2. 要求用语与符合性
 
@@ -42,7 +42,7 @@
 
 ### DIA-LAY-001 — 失败层次与结果域必须正交
 
-**要求：**诊断 `MUST` 明确属于 `source`、`structure`、`profile`、`semantic`、`closure`、`session`、`evidence`、`policy`、`protocol`、`backend` 或 `internal` 之一，并记录实际执行到哪一层。协议错误、工具执行错误、后端失败、政策拒绝和规范拒绝 `MUST` 保持来源层次。诊断 `MUST NOT` 自动映射为 `met/unmet/agno/fault`、`accepted/rejected/deferred`、`completed/failed/interrupted`、Tekmor 有效性或覆盖度。
+**要求：**诊断 `MUST` 明确属于 `source`、`structure`、`profile`、`semantic`、`closure`、`session`、`evidence`、`policy`、`protocol`、`backend` 或 `internal` 之一，并记录实际执行到哪一层。协议错误、工具执行错误、后端失败、政策拒绝和规范拒绝 `MUST` 保持来源层次。诊断 `MUST NOT` 自动映射为 `met/unmet/agno/fault`、`accepted/rejected/deferred`、`completed/failed/interrupted`、Iknem 有效性或覆盖度。
 
 **失败：**MCP `isError` 被解释为目标 `unmet`，HTTP 状态被解释为权威拒绝，解析失败被解释为 `fault` 求值结果，或会话失败覆盖原满足判断时，映射必须拒绝。
 
@@ -98,9 +98,9 @@
 
 ### DIA-ATM-001 — 阻断诊断不得伴随部分可信成功
 
-**要求：**阻断诊断出现时，相关操作 `MUST NOT` 产生部分可信 Endem、Synem、Dromen、Tekmor、签名请求、权限、验证句柄或成功状态。未执行层 `MUST` 明确为 `not-run`；可安全取得的只读观察只能作为非权威附属信息。警告和注记也 `MUST NOT` 提升对象状态或掩盖阻断错误。
+**要求：**阻断诊断出现时，相关操作 `MUST NOT` 产生部分可信 Endem、Synem、Dromen、Iknem、签名请求、权限、验证句柄或成功状态。未执行层 `MUST` 明确为 `not-run`；可安全取得的只读观察只能作为非权威附属信息。警告和注记也 `MUST NOT` 提升对象状态或掩盖阻断错误。
 
-**失败：**读取器在报错后返回可继续使用的对象、Praxor 在政策错误后保留能力、部分 Synem 被标为完整，或“同时有成功和错误”被自动化解释为成功时，操作必须拒绝。
+**失败：**读取器在报错后返回可继续使用的对象、Drasor 在政策错误后保留能力、部分 Synem 被标为完整，或“同时有成功和错误”被自动化解释为成功时，操作必须拒绝。
 
 **验证：**`DIA-SCN-015`；`vectors/diagnostics/cases.json`；未来 `peira:diagnostic-atomic-failure` 组件测试。
 
@@ -109,7 +109,7 @@
 - GNU GCC 的文本与 SARIF 输出说明同一诊断可以拥有多个呈现出口；Noemion 采用“机器内容与呈现分离”，不复制 GCC 选项或把 SARIF 作为核心格式。
 - SARIF 的规则身份、位置和相关位置适合未来静态检查导出；它不能表达 Noemion 的权限、满足或决定语义。
 - RFC 9457 的问题类型、具体发生与人类详情分离适合未来 HTTP 适配；其 HTTP `status` 不能代替本地层次和主码。
-- MCP 区分 JSON-RPC 协议错误与 `isError: true` 的工具执行错误；Praxor 外缘必须保留这一区分，再映射到本地诊断，而不是让模型依据消息文本改写目标结果。
+- MCP 区分 JSON-RPC 协议错误与 `isError: true` 的工具执行错误；Drasor 外缘必须保留这一区分，再映射到本地诊断，而不是让模型依据消息文本改写目标结果。
 
 ## 5. 当前未定义
 

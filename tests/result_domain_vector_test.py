@@ -35,7 +35,7 @@ def proposal_violation(case):
         if satisfaction != "met":
             return "END-KRN-002"
         if (
-            case["tekmor_validity"] != "valid"
+            case["iknem_validity"] != "valid"
             or case["coverage"] != "sufficient"
             or case["authority"] != "authorized"
             or action != "accept"
@@ -69,7 +69,7 @@ def main():
         errors.append("result-domain vectors must use end-core.result-domain-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("result-domain vectors must pin END-CORE 0.1.0-draft")
-    if "not Praxor or decision-engine implementation data" not in document.get("description", ""):
+    if "not Drasor or decision-engine implementation data" not in document.get("description", ""):
         errors.append("result-domain vectors must state their non-implementation boundary")
 
     cases = document.get("cases")
@@ -97,7 +97,7 @@ def main():
             ("satisfaction", SATISFACTION),
             ("satisfaction_source", SATISFACTION_SOURCE),
             ("session", SESSION),
-            ("tekmor_validity", VALIDITY),
+            ("iknem_validity", VALIDITY),
             ("coverage", COVERAGE),
             ("authority", AUTHORITY),
             ("authority_action", AUTHORITY_ACTION),

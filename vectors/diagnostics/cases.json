@@ -5,7 +5,7 @@
   "description": "Structured diagnostic proposal matrix; a specification consistency matrix, not a diagnostic producer, renderer, logger, retry engine, protocol adapter, CLI, runtime, or component implementation",
   "baseline": {
     "identity": {"code": "dromen.environment.drift", "registered": true, "unique": true, "title": "Bound environment drifted", "message_advisory": true, "consumer_parses_message": false, "rendering_preserves_identity": true},
-    "context": {"producer": "praxor-design@0.1", "operation": "praxe", "subject": "endem@sha256:01", "spec_versions": ["DIA-CORE@0.1.0-draft", "DRO-CORE@0.1.0-draft", "DIA-CAT@0.1.0-draft"], "occurrence": "session@01/event@09", "mutable_selector": false, "volatile_in_identity": false},
+    "context": {"producer": "drasor-design@0.1", "operation": "drase", "subject": "endem@sha256:01", "spec_versions": ["DIA-CORE@0.1.0-draft", "DRO-CORE@0.1.0-draft", "DIA-CAT@0.1.0-draft"], "occurrence": "session@01/event@09", "mutable_selector": false, "volatile_in_identity": false},
     "layer": {"kind": "session", "executed_through": "session", "source_preserved": true, "result_domains_separate": true, "external_status_promotes": false},
     "location": {"kind": "session_binding", "value": "environment/adapter", "typed": true, "bounded": true, "escaped": true, "raw_attacker_text": false},
     "primary": {"single": true, "deterministic": true, "precedence": "layer-rule-location-code", "arrival_order_used": false, "related_ordered": true},

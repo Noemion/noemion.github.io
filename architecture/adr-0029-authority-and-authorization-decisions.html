@@ -20,7 +20,7 @@ permalink: "/architecture/adr-0029-authority-and-authorization-decisions.html"
     <div class="table-wrap"><table><thead><tr><th>现有规范</th><th>已经要求</th><th>仍缺少的共同定义</th></tr></thead><tbody>
       <tr><td>END-CORE</td><td><code>semion</code> 必须由确定性规则或具名权威确认</td><td>主体怎样取得权威、范围怎样固定、候选怎样被安全展示</td></tr>
       <tr><td>DRO-CORE</td><td>政策、权威、同意和能力必须在会话前封闭</td><td>委托、step-up、撤销和能力交集的共同授权语义</td></tr>
-      <tr><td>TEK-CORE</td><td>决定记录不能自行创造决定权限</td><td>决定请求、多人门槛、冲突和重放怎样约束</td></tr>
+      <tr><td>IKN-CORE</td><td>决定记录不能自行创造决定权限</td><td>决定请求、多人门槛、冲突和重放怎样约束</td></tr>
       <tr><td>ID-CORE</td><td>签名验证与主体授权必须分开</td><td>角色适用性和当前决定范围由什么证明</td></tr>
       <tr><td>ADP-CORE</td><td>外部协议状态和 scope 不能扩大本地能力</td><td>链式 Agent 授权怎样回到本地具名权威</td></tr>
       <tr><td>TXT-CORE</td><td>授权界面要绑定精确机器值和安全显示视图</td><td>显示一致何时足以成为有效同意的一项依据</td></tr>
@@ -49,7 +49,7 @@ permalink: "/architecture/adr-0029-authority-and-authorization-decisions.html"
   <section class="content-wide">
     <h2>MCP 与 A2A 为什么不能成为授权权威</h2>
     <p>MCP 2025-11-25 要求访问令牌绑定目标资源，并允许 scope 不足后发起增量授权。A2A 允许 Agent 把 <code>AUTH_REQUIRED</code> 继续交给客户端或上游 Agent。两者都提供传输机制，却不会替部署者定义自然语言语义、组织角色和最终验收权限。</p>
-    <p>因此，外部 scope、凭据、任务状态和 Agent Card 只能成为适配输入。Praxor 必须把它们与 AUT-CORE 权威语境、Dromen、制品限制、适配器能力和预算求交。任何 step-up 都建立新授权决定与新 Praxe 会话。</p>
+    <p>因此，外部 scope、凭据、任务状态和 Agent Card 只能成为适配输入。Drasor 必须把它们与 AUT-CORE 权威语境、Dromen、制品限制、适配器能力和预算求交。任何 step-up 都建立新授权决定与新 Drase 会话。</p>
   </section>
 
   <section class="content-wide">
@@ -87,7 +87,7 @@ permalink: "/architecture/adr-0029-authority-and-authorization-decisions.html"
     <ul>
       <li><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md">AUT-CORE 0.1.0-draft</a>定义 12 条跨制品义务。</li>
       <li>12 类威胁、18 个设计场景和 24 个正反向量覆盖当前抽象边界。</li>
-      <li>END-CORE 的投影授权、DRO-CORE 的政策与能力闭包、TEK-CORE 的决定权威、ID-CORE 的授权分离和 ADP-CORE 的 step-up 统一引用本边界。</li>
+      <li>END-CORE 的投影授权、DRO-CORE 的政策与能力闭包、IKN-CORE 的决定权威、ID-CORE 的授权分离和 ADP-CORE 的 step-up 统一引用本边界。</li>
       <li>当前没有权威目录、身份提供方、政策求值器、同意界面、法定人数服务、撤销服务、能力代理、决定服务或协议授权实现。</li>
     </ul>
   </section>

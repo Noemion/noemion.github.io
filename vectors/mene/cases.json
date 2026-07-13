@@ -1,7 +1,7 @@
 {
   "vector_format": "end-core.mene-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
-  "description": "Normative mene proposal vectors for ADR-0016; not a clock, monitor, Praxor, or evaluator implementation",
+  "description": "Normative mene proposal vectors for ADR-0016; not a clock, monitor, Drasor, or evaluator implementation",
   "cases": [
     {
       "id": "MV-VALID-FIXED-STRICT-MET-001",
@@ -45,7 +45,7 @@
     },
     {
       "id": "MV-VALID-ELAPSED-MET-001",
-      "scope": {"kind": "elapsed", "anchor_event": "deploy.completed#42", "duration_seconds": 600, "clock_domain": "monotonic", "clock_authority": "praxor.session-clock", "restart_boundary": "session"},
+      "scope": {"kind": "elapsed", "anchor_event": "deploy.completed#42", "duration_seconds": 600, "clock_domain": "monotonic", "clock_authority": "drasor.session-clock", "restart_boundary": "session"},
       "continuity": {"kind": "strict"},
       "observation": {"clock_status": "valid", "coverage": [[0, 600]], "breaches": []},
       "proposed_result": "met",

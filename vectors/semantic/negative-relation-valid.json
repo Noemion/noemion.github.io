@@ -46,7 +46,7 @@
     "telis": {"mode": "kine"},
     "krin": {
       "required_phain": [{"relation": "rel:can-read", "match": "same-roles"}],
-      "required_tekmor": ["authorization-policy-observation"],
+      "required_iknem": ["authorization-policy-observation"],
       "on_missing_observation": "agno",
       "on_evaluation_error": "fault",
       "decision_authority": "authority:security-owner"

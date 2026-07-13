@@ -151,7 +151,7 @@ def proposal_violation(proposal):
             or not isinstance(relation.get("preserved"), list)
             or not isinstance(relation.get("loss_manifest"), list) or not relation.get("loss_manifest")
             or not isinstance(relation.get("verification_conditions"), list) or not relation.get("verification_conditions")
-            or any(relation.get(key) is not False for key in ("inherits_source_identity", "inherits_signature", "inherits_tekmor", "inherits_acceptance", "inherits_capability", "semantic_equivalence_claim"))):
+            or any(relation.get(key) is not False for key in ("inherits_source_identity", "inherits_signature", "inherits_iknem", "inherits_acceptance", "inherits_capability", "semantic_equivalence_claim"))):
         return "ID-REL-001"
     return None
 

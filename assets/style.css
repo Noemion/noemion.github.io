@@ -643,13 +643,13 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
 .focus-card-dromen .focus-art i:nth-child(1){top:88px;left:45%}
 .focus-card-dromen .focus-art i:nth-child(2){top:116px;left:52%}
 .focus-card-dromen .focus-art i:nth-child(3){top:144px;left:42%}
-.focus-card-tekmor .focus-art{background:linear-gradient(135deg,#111714 0 58%,#31584a 100%)}
-.focus-card-tekmor .focus-art::before{inset:40px 44px;background:repeating-linear-gradient(0deg,rgba(244,190,53,.6) 0 1px,transparent 1px 24px);border:1px solid rgba(255,255,255,.28)}
-.focus-card-tekmor .focus-art::after{top:70px;right:68px;bottom:70px;left:68px;border-left:1px solid rgba(255,255,255,.56);border-right:1px solid rgba(255,255,255,.32);transform:skew(-10deg)}
-.focus-card-tekmor .focus-art i{z-index:1;width:9px;height:9px;background:var(--portal-amber);border:2px solid #fff;border-radius:50%}
-.focus-card-tekmor .focus-art i:nth-child(1){top:70px;left:28%}
-.focus-card-tekmor .focus-art i:nth-child(2){top:126px;left:56%}
-.focus-card-tekmor .focus-art i:nth-child(3){top:178px;left:40%}
+.focus-card-iknem .focus-art{background:linear-gradient(135deg,#111714 0 58%,#31584a 100%)}
+.focus-card-iknem .focus-art::before{inset:40px 44px;background:repeating-linear-gradient(0deg,rgba(244,190,53,.6) 0 1px,transparent 1px 24px);border:1px solid rgba(255,255,255,.28)}
+.focus-card-iknem .focus-art::after{top:70px;right:68px;bottom:70px;left:68px;border-left:1px solid rgba(255,255,255,.56);border-right:1px solid rgba(255,255,255,.32);transform:skew(-10deg)}
+.focus-card-iknem .focus-art i{z-index:1;width:9px;height:9px;background:var(--portal-amber);border:2px solid #fff;border-radius:50%}
+.focus-card-iknem .focus-art i:nth-child(1){top:70px;left:28%}
+.focus-card-iknem .focus-art i:nth-child(2){top:126px;left:56%}
+.focus-card-iknem .focus-art i:nth-child(3){top:178px;left:40%}
 .focus-card-copy{display:block;min-height:190px;padding:25px 27px 30px}
 .focus-card-copy small{
   display:inline-block;margin-bottom:16px;padding:4px 7px;color:var(--portal-coral);background:var(--portal-coral-soft);

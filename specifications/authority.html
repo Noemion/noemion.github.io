@@ -13,7 +13,7 @@ permalink: "/specifications/authority.html"
     <h2>它解决什么问题</h2>
     <p class="lead">模型可以提出候选，界面可以收集点击，签名可以认证陈述，但只有落在精确政策与范围内的具名权威才能形成授权。</p>
     <p>项目已接受这项跨制品边界：认证、授权、满足和最终决定必须分别判断，任何一层不得替另一层作结论。</p>
-    <p>此前 Endem、Dromen、Tekmor、身份和协议适配规范都要求“具名权威”或“当前政策”，却没有共同定义主体、作用范围、委托、多人冲突、同意、撤销和重放。AUT-CORE 收敛这些跨对象不变量，不创建新的制品、文件格式、令牌、角色系统或组件。</p>
+    <p>此前 Endem、Dromen、Iknem、身份和协议适配规范都要求“具名权威”或“当前政策”，却没有共同定义主体、作用范围、委托、多人冲突、同意、撤销和重放。AUT-CORE 收敛这些跨对象不变量，不创建新的制品、文件格式、令牌、角色系统或组件。</p>
     <p class="callout"><strong>权威边界：</strong>实现义务以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md">AUT-CORE 条款源</a>为准。当前只有规范、威胁、场景和提案向量，没有身份提供方、政策求值器、同意界面、能力代理或决定服务。</p>
   </section>
 
@@ -24,7 +24,7 @@ permalink: "/specifications/authority.html"
       <tr><td>主体能决定什么</td><td>政策、角色来源、对象、动作、目的和范围</td><td>其他字段、租户或用途也获权</td></tr>
       <tr><td>候选意义是否获准</td><td>精确来源、候选、语义位置、安全视图和具名权威</td><td>候选为真或目标已经满足</td></tr>
       <tr><td>运行能力是否获授</td><td>授权范围与制品、政策、环境、Dromen、适配器和预算求交</td><td>环境可访问或协议提供的全部能力</td></tr>
-      <tr><td>证据是否足够</td><td>适用 Tekmor 的有效性和覆盖度</td><td>授权主体已最终接受</td></tr>
+      <tr><td>证据是否足够</td><td>适用 Iknem 的有效性和覆盖度</td><td>授权主体已最终接受</td></tr>
       <tr><td>最终是否接受</td><td>原满足结果、证据、决定规则和最终权威</td><td>由认证、授权、签名或会话完成替代</td></tr>
     </tbody></table></div>
   </section>
@@ -57,7 +57,7 @@ permalink: "/specifications/authority.html"
   <section class="content-wide">
     <h2>Agent 委托为什么必须保留行动者</h2>
     <p>RFC 8693 区分 delegation 与 impersonation：委托保留实际行动者代表谁，冒充则可能让接收方只看到被代表主体。Noemion 默认只接受可追踪委托；即使外部协议允许冒充，本地记录仍保留真实行动者，并要求独立政策明确允许。</p>
-    <p>A2A 允许 <code>AUTH_REQUIRED</code> 沿 Agent 链继续委托，MCP 允许 scope 不足后重新授权。这些机制只传递请求或凭据，不证明某个 Agent 有权批准，也不能修改已有 Dromen。扩大能力必须产生新的授权决定和新的 Praxe 会话。</p>
+    <p>A2A 允许 <code>AUTH_REQUIRED</code> 沿 Agent 链继续委托，MCP 允许 scope 不足后重新授权。这些机制只传递请求或凭据，不证明某个 Agent 有权批准，也不能修改已有 Dromen。扩大能力必须产生新的授权决定和新的 Drase 会话。</p>
   </section>
 
   <section class="content-wide">

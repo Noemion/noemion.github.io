@@ -1,7 +1,7 @@
 {
   "vector_format": "end-core.quantification-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
-  "description": "Finite quantification proposal vectors for ADR-0018; not a collection resolver, Praxor, evaluator, or component implementation",
+  "description": "Finite quantification proposal vectors for ADR-0018; not a collection resolver, Drasor, evaluator, or component implementation",
   "cases": [
     {
       "id": "QV-VALID-ALL-CLOSED-MET-001",

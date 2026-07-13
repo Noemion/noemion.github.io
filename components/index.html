@@ -7,34 +7,34 @@ permalink: "/components/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>系统组件</span></nav>
-  <header class="section-introduction"><h1>系统组件</h1><p>三个组件分别负责写入规范制品、独立读取不可信字节和在最小权限下实现目标。</p><div class="badges"><span class="badge">Poiet</span><span class="badge">Theor</span><span class="badge">Praxor</span><span class="badge">Minimal Topology</span></div></header>
+  <header class="section-introduction"><h1>系统组件</h1><p>三个组件分别负责写入规范制品、独立读取不可信字节和在最小权限下实现目标。</p><div class="badges"><span class="badge">Poiet</span><span class="badge">Theor</span><span class="badge">Drasor</span><span class="badge">Minimal Topology</span></div></header>
   <section>
     <h2>为什么只有三个组件</h2>
-    <p class="lead">组件数量由信任、权限和失败责任决定，不由命名对称决定。Poiet 能写规范制品；Theor 必须用独立代码读取；只有 Praxor 可以在会话中获得受限能力。合并任何两项，都会削弱确定性、交叉检查或最小权限。</p>
+    <p class="lead">组件数量由信任、权限和失败责任决定，不由命名对称决定。Poiet 能写规范制品；Theor 必须用独立代码读取；只有 Drasor 可以在会话中获得受限能力。合并任何两项，都会削弱确定性、交叉检查或最小权限。</p>
   </section>
   <section>
     <h2>组件入口</h2>
     <div class="page-links">
       <a class="page-link" href="poiet.html"><strong>Poiet · 确定性制品制作域</strong><span>形成、验证、组合和冻结 Endem/Synem，唯一能够写规范制品。</span></a>
       <a class="page-link" href="theor.html"><strong>Theor · 独立只读检查器</strong><span>使用第二条直接读取实现查看和比较制品，不生成生产可信句柄。</span></a>
-      <a class="page-link" href="praxor.html"><strong>Praxor · 隔离实现运行器</strong><span>重新验证 attested 制品，建立 Dromen，控制能力并形成 Tekmor 与决定。</span></a>
+      <a class="page-link" href="drasor.html"><strong>Drasor · 隔离实现运行器</strong><span>重新验证 attested 制品，建立 Dromen，控制能力并形成 Iknem 与决定。</span></a>
     </div>
   </section>
   <section>
     <h2>职责与依赖方向</h2>
-    <div class="flow"><div class="step">受控来源表达</div><div class="step">Poiet 投影 → Endem / Synem</div><div class="step">Theor 独立检查</div><div class="step">Poiet → attested</div><div class="step">Praxor → Dromen</div><div class="step">Tekmor / 最终决定</div></div>
+    <div class="flow"><div class="step">受控来源表达</div><div class="step">Poiet 投影 → Endem / Synem</div><div class="step">Theor 独立检查</div><div class="step">Poiet → attested</div><div class="step">Drasor → Dromen</div><div class="step">Iknem / 最终决定</div></div>
     <div class="table-wrap"><table><thead><tr><th>组件</th><th>可以依赖</th><th>不得依赖</th></tr></thead><tbody>
-      <tr><td>Poiet</td><td>规范注册表、确定性算法、外部签名响应验证接口</td><td>模型开发包、Praxor、实时能力、Theor 输出</td></tr>
+      <tr><td>Poiet</td><td>规范注册表、确定性算法、外部签名响应验证接口</td><td>模型开发包、Drasor、实时能力、Theor 输出</td></tr>
       <tr><td>Theor</td><td>公开规范和自己的有界解析实现</td><td>Poiet 的生产解析器、写入器、组合器、BFD 或错误分类实现</td></tr>
-      <tr><td>Praxor</td><td>Poiet 的生产验证接口、隔离后端适配器、策略和能力提供者</td><td>Poiet 写入器、对象改写接口、Theor 诊断作为授权依据</td></tr>
+      <tr><td>Drasor</td><td>Poiet 的生产验证接口、隔离后端适配器、策略和能力提供者</td><td>Poiet 写入器、对象改写接口、Theor 诊断作为授权依据</td></tr>
     </tbody></table></div>
   </section>
   <section>
     <h2>部署不等于逻辑边界</h2>
-    <p><code>endem</code> 是唯一公开 CLI，三个组件可以随同一个发行包装载；<code>theor</code> 仍必须使用独立代码路径，<code>praxe</code> 仍必须进入隔离权限域。简单任务可以不启动 Praxor，多对象不存在时可以不启用 pleko，但所有规范制品都必须通过 Poiet。</p>
+    <p><code>endem</code> 是唯一公开 CLI，三个组件可以随同一个发行包装载；<code>theor</code> 仍必须使用独立代码路径，<code>drase</code> 仍必须进入隔离权限域。简单任务可以不启动 Drasor，多对象不存在时可以不启用 pleko，但所有规范制品都必须通过 Poiet。</p>
   </section>
   <section>
     <h2>规范与命令入口</h2>
-    <p>制品职责见<a href="../specifications/">Endem、Synem 与 Tekmor 规范</a>，状态变化见<a href="../architecture/endem-lifecycle.html">Endem 生命周期</a>，唯一命令的使用说明见<a href="../endem/">Endem 应用页</a>。</p>
+    <p>制品职责见<a href="../specifications/">Endem、Synem 与 Iknem 规范</a>，状态变化见<a href="../architecture/endem-lifecycle.html">Endem 生命周期</a>，唯一命令的使用说明见<a href="../endem/">Endem 应用页</a>。</p>
   </section>
 </main>

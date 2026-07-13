@@ -24,7 +24,7 @@ badges: ["poie", "One Root Skena"]
 | `semion` | 这些记号怎样取得意义？ | 符号、指称、关系、作用域、极性、时间和来源映射 |
 | `skena` | 哪一种中性可能事态构成目标内容？ | 一个根对象—关系图、组合与极性 |
 | `telis` | 目标要求事态变化还是持续？ | kine 或 mene；mene 还需 fixed/elapsed 范围与 strict/budgeted 连续性；不重复表达否定 |
-| `krin` | 怎样把 phain 与 skena 比较？ | 结构比较、Tekmor 类型、agno/fault 处理和决定权威 |
+| `krin` | 怎样把 phain 与 skena 比较？ | 结构比较、Iknem 类型、agno/fault 处理和决定权威 |
 | `apor` | 哪些投影还没确定？ | 替代解释、冲突、测量、风险和允许的解决方式 |
 
 一个 Endem 必须且只能有一个根 `skena`。两个可独立完成和验收的目标应分别形成 Endem，再通过 Synem 表达关系。
@@ -43,7 +43,7 @@ skena:
 telis:
   mode: "kine"
 krin:
-  - "met if required phain relations have scoped Tekmor records"
+  - "met if required phain relations have scoped Iknem records"
 apor:
   - "目标读者尚未确认"
 ```

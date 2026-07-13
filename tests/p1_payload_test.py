@@ -229,7 +229,7 @@ def source_to_records(model):
         {1: item["relation"], 2: 0}
         for item in sorted(krin["required_phain"], key=lambda item: item["relation"])
     ]
-    tekmor = sorted(krin["required_tekmor"], key=encode_cbor)
+    iknem = sorted(krin["required_iknem"], key=encode_cbor)
     apor_items = []
     for item in sorted(model["apor"], key=lambda value: value["id"]):
         apor_items.append({
@@ -246,7 +246,7 @@ def source_to_records(model):
         2: {1: symbols, 2: relations},
         3: {1: skena["roots"][0], 2: situations},
         4: {1: 0 if telis["mode"] == "kine" else 1},
-        5: {1: phain, 2: tekmor, 3: 0, 4: 0, 5: krin["decision_authority"]},
+        5: {1: phain, 2: iknem, 3: 0, 4: 0, 5: krin["decision_authority"]},
         6: {1: apor_items},
     }
 
@@ -385,8 +385,8 @@ def validate_records(records):
             fail("endem.krin.match", "END-KRN-001", f"/krin/required_phain/{index}/match")
     ordered_unique(
         krin[2],
-        lambda evidence, index: encode_cbor(identifier(evidence, f"/krin/required_tekmor/{index}")),
-        "/krin/required_tekmor",
+        lambda evidence, index: encode_cbor(identifier(evidence, f"/krin/required_iknem/{index}")),
+        "/krin/required_iknem",
     )
 
     apor = exact_map(records[6], (1,), "/apor")

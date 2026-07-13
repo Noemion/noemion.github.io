@@ -11,7 +11,7 @@ permalink: "/architecture/adr-0027-exact-identity-and-attestation.html"
 
   <section class="content-stack">
     <h2>直接结论</h2>
-    <p class="lead">Noemion 需要一份跨 Endem、Synem、Tekmor、发布签名和伴随制品的共同内容身份标准。否则“精确身份”只是各页反复使用但没有共同定义的承诺。</p>
+    <p class="lead">Noemion 需要一份跨 Endem、Synem、Iknem、发布签名和伴随制品的共同内容身份标准。否则“精确身份”只是各页反复使用但没有共同定义的承诺。</p>
     <p>ID-CORE 固定十二条抽象规则。它不创建新制品或文件格式，也不选择摘要与签名算法。它把对象匹配、签名验证、主体授权、截止点有效性、最终决定和可复现性拆成独立判断。</p>
   </section>
 
@@ -29,13 +29,13 @@ permalink: "/architecture/adr-0027-exact-identity-and-attestation.html"
   <section class="content-wide">
     <h2>完整身份由什么组成</h2>
     <div class="flow"><div class="step">身份域与版本</div><div class="step">对象种类</div><div class="step">对象规范</div><div class="step">物理表示</div><div class="step">内容 Profile</div><div class="step">算法与长度</div><div class="step">完整摘要值</div></div>
-    <p>RFC 6920 用算法、长度和完整摘要值建立名称与数据的完整性绑定。Noemion 还需要对象种类、规范、表示、Profile 与身份域，因为同一摘要文本不能在 Endem、Synem、Tekmor 和签名陈述之间失去语境。</p>
+    <p>RFC 6920 用算法、长度和完整摘要值建立名称与数据的完整性绑定。Noemion 还需要对象种类、规范、表示、Profile 与身份域，因为同一摘要文本不能在 Endem、Synem、Iknem 和签名陈述之间失去语境。</p>
     <p>文件名、路径、URL、版本标签、<code>latest</code>、build ID、短摘要和密钥 ID 只能帮助人或程序定位候选。任何会影响闭包、证据、签名、政策或执行的引用都必须最终闭合到完整身份。</p>
   </section>
 
   <section class="content-wide">
     <h2>签名怎样避免越权解释</h2>
-    <p>签名不只覆盖一个裸摘要。签名陈述必须同时覆盖载荷类型、对象身份、陈述种类、用途、受众、声明主体、政策和影响解释的关键字段。这样，公共发布签名不能被搬成能力授权，Endem 陈述不能被重新解释为 Tekmor 决定。</p>
+    <p>签名不只覆盖一个裸摘要。签名陈述必须同时覆盖载荷类型、对象身份、陈述种类、用途、受众、声明主体、政策和影响解释的关键字段。这样，公共发布签名不能被搬成能力授权，Endem 陈述不能被重新解释为 Iknem 决定。</p>
     <p>证书、公钥提示、可信时间、透明日志和撤销材料放在外置验证包络中。它们帮助验证陈述，却不改变被签对象的精确身份。<code>kid</code> 只是密钥查找提示，透明日志包含只支持有限公开记录关系，两者都不是权威或最终接受。</p>
   </section>
 
@@ -48,7 +48,7 @@ permalink: "/architecture/adr-0027-exact-identity-and-attestation.html"
   <section class="content-wide">
     <h2>可复现性和伴随制品</h2>
     <p>GNU Guix 的 <code>--check</code> 与 <code>guix challenge</code> 把可复现性落到逐字节比较。Noemion 进一步要求声明精确输入、依赖闭包、工具版本、参数、环境约束和独立产出路径。输出不同只能证明字节不同，不能仅靠摘要定位原因。</p>
-    <p><code>tasse</code> 未来形成的裁剪制品、调试伴随文件、压缩副本和迁移结果都拥有自己的身份。它们通过版本化关系说明来源、变换、保留内容和损失，不能继承来源身份、签名、Tekmor、接受状态或权限。</p>
+    <p><code>tasse</code> 未来形成的裁剪制品、调试伴随文件、压缩副本和迁移结果都拥有自己的身份。它们通过版本化关系说明来源、变换、保留内容和损失，不能继承来源身份、签名、Iknem、接受状态或权限。</p>
   </section>
 
   <section class="content-wide">

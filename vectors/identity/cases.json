@@ -80,7 +80,7 @@
       "audience": "release-reviewers",
       "subject": "maintainer@example.invalid",
       "policy": "release-policy@0.1.0-draft",
-      "evidence_refs": ["tekmor@example-digest"],
+      "evidence_refs": ["iknem@example-digest"],
       "critical_fields_protected": true,
       "algorithm_protected": true,
       "cross_context_replay_allowed": false
@@ -149,7 +149,7 @@
       "verification_conditions": ["both-full-identities-match"],
       "inherits_source_identity": false,
       "inherits_signature": false,
-      "inherits_tekmor": false,
+      "inherits_iknem": false,
       "inherits_acceptance": false,
       "inherits_capability": false,
       "semantic_equivalence_claim": false
@@ -180,6 +180,6 @@
     {"id":"ID-REJECT-SIGNATURE-AS-TRUTH-001","proposal":{"authority":{"signer_authenticated":false,"role_authorized":false,"statement_applicable":false,"policy_satisfied":false,"final_decision":"accepted","signature_proves_truth":true,"signature_grants_capability":true,"log_inclusion_is_acceptance":true,"domains_separate":false}},"expect":{"result":"reject","clause":"ID-AUT-001","diagnostic":"identity.authority.overclaimed"}},
     {"id":"ID-REJECT-STALE-VALIDITY-001","proposal":{"validity":{"cutoff":null,"trust_roots":null,"policy":null,"signing_time_basis":null,"key_period_checked":false,"revocation_checked":false,"transparency_role_limited":false,"status_fresh":false,"offline_material_bounded":false,"cache_unbounded":true,"rotation_changes_content_identity":true,"revocation_changes_content_identity":true}},"expect":{"result":"reject","clause":"ID-VAL-001","diagnostic":"identity.validity.context_incomplete"}},
     {"id":"ID-REJECT-BUILD-ID-REPRODUCIBILITY-001","proposal":{"reproducibility":{"inputs_pinned":false,"dependency_closure_pinned":false,"tools_pinned":false,"parameters_pinned":false,"environment_constrained":false,"independent_paths":1,"output_identities":[],"byte_comparison":"not-run","shared_cache":true,"build_id_only":true,"difference_cause_claimed":"unknown-but-equal"}},"expect":{"result":"reject","clause":"ID-REP-001","diagnostic":"identity.reproducibility.unproven"}},
-    {"id":"ID-REJECT-INHERITED-TRUST-001","proposal":{"relation":{"source_identity":null,"derived_identity":null,"transformation":null,"producer":null,"loss_manifest":[],"verification_conditions":[],"inherits_source_identity":true,"inherits_signature":true,"inherits_tekmor":true,"inherits_acceptance":true,"inherits_capability":true,"semantic_equivalence_claim":true}},"expect":{"result":"reject","clause":"ID-REL-001","diagnostic":"identity.relation.inherited"}}
+    {"id":"ID-REJECT-INHERITED-TRUST-001","proposal":{"relation":{"source_identity":null,"derived_identity":null,"transformation":null,"producer":null,"loss_manifest":[],"verification_conditions":[],"inherits_source_identity":true,"inherits_signature":true,"inherits_iknem":true,"inherits_acceptance":true,"inherits_capability":true,"semantic_equivalence_claim":true}},"expect":{"result":"reject","clause":"ID-REL-001","diagnostic":"identity.relation.inherited"}}
   ]
 }

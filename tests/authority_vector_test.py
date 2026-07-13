@@ -207,7 +207,7 @@ def proposal_violation(proposal):
             or any(separation.get(key) is not False for key in (
                 "authorization_implies_truth", "authorization_implies_satisfaction",
                 "authorization_implies_acceptance", "authorization_implies_completion",
-                "model_is_authority", "praxor_is_final_authority", "protocol_state_is_authority"))):
+                "model_is_authority", "drasor_is_final_authority", "protocol_state_is_authority"))):
         return "AUT-SEP-001"
     return None
 

@@ -31,7 +31,7 @@ permalink: "/architecture/adr-0016-mene-time-model.html"
       <li><code>fixed</code> 第一版只接受秒值 00–59 的规范 UTC 瞬间；闰秒词法、循环日历规则、开放端点、无限区间和本地日历重复仍保持未决。</li>
       <li><code>elapsed</code> 时长必须是正的、精确的固定长度单位；“一个月”“一个工作日”和模糊近似不能按秒数猜测。</li>
       <li>来源可以保留“下周一凌晨”等原句，但 Poiet 只有在具名权威把它解析为上述范围后才能确认 <code>semion</code>；否则进入 <code>apor</code>。</li>
-      <li>时钟分辨率、同步方式、最大不确定度、回拨或重启事件属于 Tekmor。没有这些信息时，比较器不能假定时间顺序精确。</li>
+      <li>时钟分辨率、同步方式、最大不确定度、回拨或重启事件属于 Iknem。没有这些信息时，比较器不能假定时间顺序精确。</li>
     </ul>
   </section>
 
@@ -52,7 +52,7 @@ permalink: "/architecture/adr-0016-mene-time-model.html"
       <tr><td>存在未覆盖区间、只有离散采样、时间不确定度跨越关键边界</td><td><code>agno</code></td><td>目标和判据明确，但适用观察不足。</td></tr>
       <tr><td>时钟、同步、适配器或求值器违反声明契约</td><td><code>fault</code></td><td>求值过程没有可靠完成，不能推出目标为假。</td></tr>
     </tbody></table></div>
-    <p>覆盖范围使用同一半开区间规则形成规范并集。重叠、乱序和重复可以在不改变含义时规范化；空洞必须保留，不能插值成事实。观测方法及其保证必须进入 Tekmor，单个时间戳只证明一个时刻，不证明一段区间。</p>
+    <p>覆盖范围使用同一半开区间规则形成规范并集。重叠、乱序和重复可以在不改变含义时规范化；空洞必须保留，不能插值成事实。观测方法及其保证必须进入 Iknem，单个时间戳只证明一个时刻，不证明一段区间。</p>
   </section>
 
   <section class="content-wide">
@@ -60,7 +60,7 @@ permalink: "/architecture/adr-0016-mene-time-model.html"
     <p><a href="https://www.rfc-editor.org/info/rfc3339/">RFC 3339</a>提供可互操作的互联网时刻表示；<a href="https://www.rfc-editor.org/info/rfc9557/">RFC 9557</a>补充时区等关联信息。Noemion 采用确定瞬间和显式时区来源，不采用缺省本地时区，也不把整个 RFC 类型空间直接变成 Endem ABI。</p>
     <p><a href="https://www.gnu.org/software/libc/manual/html_node/Getting-the-Time.html">GNU C Library 时钟说明</a>指出单调时钟适合测量经过时长，却不能表示绝对时间；<a href="https://www.gnu.org/software/coreutils/manual/html_node/Relative-items-in-date-strings.html">GNU Coreutils 相对日期说明</a>也记录了夏令时和模糊月运算风险。Noemion 因此拒绝把 <code>now</code>、<code>tomorrow</code> 或默认时区写进规范时间范围。</p>
     <p><a href="https://www.w3.org/TR/owl-time/">W3C OWL-Time</a>区分瞬间、区间、时长与时间参考系统；<a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/">OpenTelemetry Metrics 数据模型</a>明确记录时间窗口、重置和数据缺口。它们支持概念分层与缺口显式化，但 OWL 类、OTLP 时间戳和遥测聚合规则都不会直接进入 Endem。</p>
-    <p><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0</a>的 Task 时间戳和状态只作为外部运行事件。远端 Agent 声称任务持续多久或何时完成，不会自动成为本地时钟权威、Tekmor 覆盖或 <code>mene</code> 满足结论。</p>
+    <p><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0</a>的 Task 时间戳和状态只作为外部运行事件。远端 Agent 声称任务持续多久或何时完成，不会自动成为本地时钟权威、Iknem 覆盖或 <code>mene</code> 满足结论。</p>
   </section>
 
   <section class="content-wide">
@@ -69,7 +69,7 @@ permalink: "/architecture/adr-0016-mene-time-model.html"
       <li>END-CORE 新增时间范围、连续性政策和观测覆盖三条义务；END-P1 字段和字节保持不变。</li>
       <li>十二个 mene 提案向量执行六个允许分类和六个确定拒绝，只证明抽象矩阵与条款一致。</li>
       <li>未来 Profile 必须登记时间字段、数值范围、时长单位、时区来源、闰秒策略和资源上限，并建立独立正反字节向量。</li>
-      <li>未来 Praxor 必须以单调时钟测量经过时长，保留民用时钟调整、观测空洞和不确定度；当前没有计时器、监控器或求值组件。</li>
+      <li>未来 Drasor 必须以单调时钟测量经过时长，保留民用时钟调整、观测空洞和不确定度；当前没有计时器、监控器或求值组件。</li>
     </ul>
   </section>
 

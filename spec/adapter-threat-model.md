@@ -3,7 +3,7 @@
 - 文档 ID：`ADP-THREAT`
 - 版本：`0.1.0-draft`
 - 日期：2026-07-13
-- 状态：Praxor 外部协议适配威胁草案
+- 状态：Drasor 外部协议适配威胁草案
 
 外部协议把不可信对端、网络、任务、消息与产物连接到一次受限会话，因此同时跨越身份、权限、副作用、证据和披露边界。本模型只定义未来实现必须关闭的威胁，不表示 MCP、A2A、HTTP、模型 SDK 或任何适配器已经实现。
 
@@ -29,11 +29,11 @@
 
 ### THR-ADP-006 — 外部完成状态洗白为本地结果
 
-A2A `completed`、MCP 工具成功、HTTP 200 或 SDK stop reason 被直接解释成 `met`、`accepted`、Praxe `completed` 或 Tekmor `valid`。`ADP-STA-001` 要求外部状态域与本地结果域正交。
+A2A `completed`、MCP 工具成功、HTTP 200 或 SDK stop reason 被直接解释成 `met`、`accepted`、Drase `completed` 或 Iknem `valid`。`ADP-STA-001` 要求外部状态域与本地结果域正交。
 
 ### THR-ADP-007 — 远端产物越权成为规范制品或证据
 
-消息、Artifact、ToolResult、模型文本、文件名或远端签名直接替换 Endem、Synem、Tekmor 或已接受输出。`ADP-ART-001` 要求外部产物保持有来源、有界的不可信候选。
+消息、Artifact、ToolResult、模型文本、文件名或远端签名直接替换 Endem、Synem、Iknem 或已接受输出。`ADP-ART-001` 要求外部产物保持有来源、有界的不可信候选。
 
 ### THR-ADP-008 — 错误文本驱动权限或业务判断
 

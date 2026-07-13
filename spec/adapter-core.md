@@ -3,15 +3,15 @@
 - 规范 ID：`ADP-CORE`
 - 版本：`0.1.0-draft`
 - 日期：2026-07-13
-- 状态：草案；条款化表达 ADR-0026 已接受的 Praxor 外部协议适配边界
+- 状态：草案；条款化表达 ADR-0026 已接受的 Drasor 外部协议适配边界
 - 物理编码：未定义；本规范不创建适配器文件、扩展名、媒体类型、网络协议或稳定 ABI
 - 实现状态：仅有规范提案向量检查器；MCP、A2A、HTTP、模型 SDK、工具和 Agent 适配器均未实现
 
 ## 1. 范围
 
-本规范定义外部工具、Agent、模型服务、任务系统和网络协议进入 Praxor 边界时必须保持的不变量。它适用于 MCP、A2A、HTTP API、操作系统调用、模型 SDK 与未来协议，但不复制任何协议的数据模型，也不把某个协议设为 Noemion 的身份或权限来源。
+本规范定义外部工具、Agent、模型服务、任务系统和网络协议进入 Drasor 边界时必须保持的不变量。它适用于 MCP、A2A、HTTP API、操作系统调用、模型 SDK 与未来协议，但不复制任何协议的数据模型，也不把某个协议设为 Noemion 的身份或权限来源。
 
-协议适配只把一次已经受 Dromen 限制的调用连接到一个精确外部操作。它必须保留外部事实、声明映射损失、收窄能力、控制副作用，并把观察交给 Tekmor 与本地判断规则。适配层不是 Endem、Synem、Dromen、Tekmor、决定权威、凭据包、模型上下文或新的结果域。
+协议适配只把一次已经受 Dromen 限制的调用连接到一个精确外部操作。它必须保留外部事实、声明映射损失、收窄能力、控制副作用，并把观察交给 Iknem 与本地判断规则。适配层不是 Endem、Synem、Dromen、Iknem、决定权威、凭据包、模型上下文或新的结果域。
 
 ## 2. 要求用语与符合性
 
@@ -58,7 +58,7 @@
 
 ### ADP-MAP-001 — 映射必须保留原始事实并声明信息损失
 
-**要求：**适配器 `MUST` 保存受披露约束的原始协议种类、字段身份、状态、错误、顺序和对端引用，并使用显式映射版本生成本地视图。无法无损表示的字段 `MUST` 进入有限损失清单，说明省略、合并、降精度或未知处理；适配器 `MUST NOT` 为追求统一结构而伪造等价。映射版本、原始身份和损失清单 `MUST` 可被 Tekmor 引用。
+**要求：**适配器 `MUST` 保存受披露约束的原始协议种类、字段身份、状态、错误、顺序和对端引用，并使用显式映射版本生成本地视图。无法无损表示的字段 `MUST` 进入有限损失清单，说明省略、合并、降精度或未知处理；适配器 `MUST NOT` 为追求统一结构而伪造等价。映射版本、原始身份和损失清单 `MUST` 可被 Iknem 引用。
 
 **失败：**MCP 与 A2A 的不同任务状态被折叠成一个 success 布尔值、时间或媒体类型精度被静默丢失、未知字段被删除却声称完整，或只保留本地对象而无法追溯原协议时，映射无效。
 
@@ -66,15 +66,15 @@
 
 ### ADP-STA-001 — 外部状态必须与本地结果域分开
 
-**要求：**外部 request、tool、task、message、artifact、HTTP 和 SDK 状态 `MUST` 保持在外部状态域。适配器 `MUST NOT` 把 `completed`、`failed`、`cancelled`、`rejected`、`input-required`、HTTP 成功或模型停止原因直接映射为满足、决定、Praxe 会话或证据结果。只有本地 `krin`、适用 Tekmor、会话规则和具名决定权威可以产生这些结果。
+**要求：**外部 request、tool、task、message、artifact、HTTP 和 SDK 状态 `MUST` 保持在外部状态域。适配器 `MUST NOT` 把 `completed`、`failed`、`cancelled`、`rejected`、`input-required`、HTTP 成功或模型停止原因直接映射为满足、决定、Drase 会话或证据结果。只有本地 `krin`、适用 Iknem、会话规则和具名决定权威可以产生这些结果。
 
-**失败：**A2A task completed 直接产生 `accepted`、MCP tool error 直接产生 `unmet`、HTTP 200 产生 Tekmor `valid`，或外部取消被当作 Praxe 已停止时，映射必须拒绝。
+**失败：**A2A task completed 直接产生 `accepted`、MCP tool error 直接产生 `unmet`、HTTP 200 产生 Iknem `valid`，或外部取消被当作 Drase 已停止时，映射必须拒绝。
 
 **验证：**`ADP-SCN-009`、`ADP-SCN-010`；`vectors/adapters/cases.json`；未来 `peira:adapter-result-separation` 组件测试。
 
 ### ADP-ART-001 — 外部消息与产物只能作为有来源候选
 
-**要求：**外部文本、文件、结构化数据、Message、Artifact、ToolResult 和模型输出 `MUST` 视为不可信候选。适配器 `MUST` 绑定生产调用、对端、媒体类型、声明身份、内容身份或受限临时引用、大小、完整性状态和披露限制。远端名称、artifact ID、签名或完成状态 `MUST NOT` 使候选自动成为 Endem、Synem、Tekmor、规范来源、已验收输出或“最新”版本。
+**要求：**外部文本、文件、结构化数据、Message、Artifact、ToolResult 和模型输出 `MUST` 视为不可信候选。适配器 `MUST` 绑定生产调用、对端、媒体类型、声明身份、内容身份或受限临时引用、大小、完整性状态和披露限制。远端名称、artifact ID、签名或完成状态 `MUST NOT` 使候选自动成为 Endem、Synem、Iknem、规范来源、已验收输出或“最新”版本。
 
 **失败：**远端 Artifact 直接替换已签制品、模型文本直接成为 Endem 字节、相同文件名覆盖本地接受版本，或未检查媒体类型和大小即进入观察路径时，候选必须隔离或拒绝。
 
@@ -123,7 +123,7 @@
 ## 4. 权威依据与采用边界
 
 - 截至 2026 年 7 月 13 日，MCP 官方版本说明仍把 2025-11-25 标为 Current；其工具错误、授权受众、实验 Tasks 和能力协商为本规范提供反例与约束。官方于 5 月 21 日锁定并公开以计划最终发布日期命名的 2026-07-28 候选版，最终版计划于 7 月 28 日发布。候选版把协议核心改为无状态并把 Tasks 移到扩展，证明 Noemion 不能绑定握手、会话或任务的单一外部形态；它只作为版本漂移证据，不是当前符合性基线。
-- A2A 1.0 的 Agent Card、Task、Message、Artifact、流式、推送、终态不可变和版本头适合跨 Agent 交换；它们不替代 Endem 身份、Dromen 权限、Tekmor 证据或决定权威。
+- A2A 1.0 的 Agent Card、Task、Message、Artifact、流式、推送、终态不可变和版本头适合跨 Agent 交换；它们不替代 Endem 身份、Dromen 权限、Iknem 证据或决定权威。
 - RFC 9110 规定只有具备幂等语义或能够证明原请求未应用时才适合自动重试；Noemion 进一步要求重试共享 Dromen 预算并保留调用身份。
 - GNU BFD 明确说明不同格式经统一 canonical form 可能丢失信息；Noemion 因此要求保留协议来源与显式损失清单，而不是建立一个宣称无损的万能 Agent 对象。
 

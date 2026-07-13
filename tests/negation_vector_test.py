@@ -120,7 +120,7 @@ def main():
         errors.append("negation vectors must use end-core.negation-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("negation vectors must pin END-CORE 0.1.0-draft")
-    if "not a policy engine, log collector, Praxor, or evaluator implementation" not in document.get("description", ""):
+    if "not a policy engine, log collector, Drasor, or evaluator implementation" not in document.get("description", ""):
         errors.append("negation vectors must state their non-implementation boundary")
 
     cases = document.get("cases")

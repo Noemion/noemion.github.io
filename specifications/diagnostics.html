@@ -7,7 +7,7 @@ permalink: "/specifications/diagnostics.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>结构化诊断</span></nav>
-  <header class="content-introduction"><h1>结构化诊断<br>让失败可以被人和机器共同理解</h1><p>统一 Endem、Synem、Dromen、Tekmor 与外部协议错误的机器身份、位置、恢复和安全边界。</p><div class="badges"><span class="badge">DIA-CORE 0.1.0-draft</span><span class="badge">DIA-CAT</span><span class="badge">No Wire Format</span><span class="badge">No Runtime</span></div></header>
+  <header class="content-introduction"><h1>结构化诊断<br>让失败可以被人和机器共同理解</h1><p>统一 Endem、Synem、Dromen、Iknem 与外部协议错误的机器身份、位置、恢复和安全边界。</p><div class="badges"><span class="badge">DIA-CORE 0.1.0-draft</span><span class="badge">DIA-CAT</span><span class="badge">No Wire Format</span><span class="badge">No Runtime</span></div></header>
 
   <section class="content-stack">
     <h2>先给直白定义</h2>
@@ -35,7 +35,7 @@ permalink: "/specifications/diagnostics.html"
     <h2>一项完整诊断包含什么</h2>
     <div class="table-wrap"><table><thead><tr><th>内容</th><th>例子</th><th>为何需要</th></tr></thead><tbody>
       <tr><td>机器码与标题</td><td><code>dromen.environment.drift</code></td><td>让自动化依赖稳定身份，而不是消息文本。</td></tr>
-      <tr><td>生产语境</td><td>生产者、<code>praxe</code>、精确制品身份、DRO-CORE 与 DIA-CAT 版本</td><td>阻止诊断被错误复用到另一个输入或规则版本。</td></tr>
+      <tr><td>生产语境</td><td>生产者、<code>drase</code>、精确制品身份、DRO-CORE 与 DIA-CAT 版本</td><td>阻止诊断被错误复用到另一个输入或规则版本。</td></tr>
       <tr><td>层次与执行范围</td><td><code>session</code>，执行到 session，后续为 <code>not-run</code></td><td>避免“没有检查”被写成“已经通过”。</td></tr>
       <tr><td>类型化位置</td><td><code>session_binding: environment/adapter</code></td><td>让人定位问题，同时限制攻击者控制的字符串。</td></tr>
       <tr><td>恢复分类</td><td><code>refresh-binding</code>，需要重新观察环境</td><td>给出下一步，但不自行修改 Dromen 或扩大权限。</td></tr>
@@ -57,15 +57,15 @@ permalink: "/specifications/diagnostics.html"
 
   <section class="content-wide">
     <h2>诊断目录怎样组织</h2>
-    <p><code>DIA-CAT</code> 使用对象或诊断系统本身作为首段，例如 <code>endem.*</code>、<code>synem.*</code>、<code>dromen.*</code>、<code>tekmor.*</code> 与 <code>diagnostic.*</code>。Noemion 是项目品牌，不进入机器码。</p>
-    <p>目录保留已有 Endem 结构与内容草案码，并为 SYN-CORE、DRO-CORE、TEK-CORE 和 DIA-CORE 的每条核心拒绝责任登记初始码。目录版本必须与诊断一起固定；当前机器码仍是草案接口，不是稳定 ABI。</p>
+    <p><code>DIA-CAT</code> 使用对象或诊断系统本身作为首段，例如 <code>endem.*</code>、<code>synem.*</code>、<code>dromen.*</code>、<code>iknem.*</code> 与 <code>diagnostic.*</code>。Noemion 是项目品牌，不进入机器码。</p>
+    <p>目录保留已有 Endem 结构与内容草案码，并为 SYN-CORE、DRO-CORE、IKN-CORE 和 DIA-CORE 的每条核心拒绝责任登记初始码。目录版本必须与诊断一起固定；当前机器码仍是草案接口，不是稳定 ABI。</p>
   </section>
 
   <section class="content-wide">
     <h2>权威规范和验证资料</h2>
     <div class="page-links">
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md"><strong>DIA-CORE 诊断内容条款</strong><span>十条关于身份、语境、层次、位置、主错误、恢复、外部来源、安全、预算和原子性的规范要求。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md"><strong>DIA-CAT 诊断目录</strong><span>登记跨 Endem、Synem、Dromen、Tekmor 与诊断系统自身的草案机器码。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md"><strong>DIA-CAT 诊断目录</strong><span>登记跨 Endem、Synem、Dromen、Iknem 与诊断系统自身的草案机器码。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-threat-model.md"><strong>诊断威胁模型</strong><span>检查消息解析、状态洗白、主错误竞态、自动提权、泄密、风暴和部分成功。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-scenarios.md"><strong>诊断自然语言场景</strong><span>十五个支持案例、反例和边界场景；它们不是实现或符合性声明。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/diagnostics/cases.json"><strong>诊断提案向量</strong><span>二十个资料一致性提案，覆盖十项允许包络与十项确定拒绝。</span></a>
@@ -77,5 +77,5 @@ permalink: "/specifications/diagnostics.html"
     <p>DIA-CORE 已接受并固定抽象诊断内容边界。未来实现必须遵守十条核心规则，不得把诊断当作证据、结果、权限或自动修复命令。</p>
     <p>物理编码、CLI 退出状态、SARIF/HTTP/MCP 映射、持久日志和遥测仍未冻结，仍需在代码开发阶段获准后分别设计与验证。当前没有诊断生产器、渲染器、日志服务、重试引擎、协议适配器或 CLI；提案向量只能证明规范资料之间一致。</p>
   </section>
-  <div class="next-prev"><a href="tekmor.html">← Tekmor</a><a href="../architecture/adr-0025-structured-diagnostics.html">ADR-0025 →</a></div>
+  <div class="next-prev"><a href="iknem.html">← Iknem</a><a href="../architecture/adr-0025-structured-diagnostics.html">ADR-0025 →</a></div>
 </main>

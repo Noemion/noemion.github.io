@@ -9,8 +9,8 @@ manual_group: "guides"
 manual_order: 4
 nav_title: "开发指南"
 page_heading: "Noemion 开发指南"
-page_lead: "面向 Endem 规范、安全核心、独立 Theor 与隔离 Praxor 的开发纪律。"
-summary: "面向 Endem 规范、安全核心、独立 Theor 与隔离 Praxor 的开发纪律。"
+page_lead: "面向 Endem 规范、安全核心、独立 Theor 与隔离 Drasor 的开发纪律。"
+summary: "面向 Endem 规范、安全核心、独立 Theor 与隔离 Drasor 的开发纪律。"
 badges: ["Spec First", "Checked Arithmetic", "Fuzz Early"]
 ---
 
@@ -53,7 +53,7 @@ theor/      独立只读 Theor，不依赖生产解析器
 cli/        endem 调度与独立进程边界
 ```
 
-没有独立版本、权限、保密或真实消费者时不拆仓库。`theor` 只能共享公开规范与向量，不能共享生成常量、生产解析状态机或错误分类实现；`praxe` 建立后必须是不同进程并使用最小权限。
+没有独立版本、权限、保密或真实消费者时不拆仓库。`theor` 只能共享公开规范与向量，不能共享生成常量、生产解析状态机或错误分类实现；`drase` 建立后必须是不同进程并使用最小权限。
 
 ## 审查清单
 
@@ -67,6 +67,6 @@ cli/        endem 调度与独立进程边界
 
 ## 模型与协议
 
-模型加入前必须先建立无模型基线。模型输出只作为不可信候选进入系统；MCP 和 A2A 只通过 Praxor 外缘的协议适配器接入。外部参数结构合法不等于语义正确或权限允许。若模型无法在错误确定率、上下文成本或任务成功率上证明净增益，项目就停止自研模型平台投入。
+模型加入前必须先建立无模型基线。模型输出只作为不可信候选进入系统；MCP 和 A2A 只通过 Drasor 外缘的协议适配器接入。外部参数结构合法不等于语义正确或权限允许。若模型无法在错误确定率、上下文成本或任务成功率上证明净增益，项目就停止自研模型平台投入。
 
 完整完成标准见[开发路线图](../development/implementation-roadmap.html)，测试矩阵见[测试与验证](../development/testing.html)。

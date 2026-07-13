@@ -16,14 +16,14 @@ permalink: "/architecture/index.html"
       <article class="status-item"><h3>一件核心制品</h3><p>Endem 保存 rhem、semion、一个根 skena、telis、krin 和 apor；同一终态可显式复合，独立目标通过 Synem 组合。</p></article>
       <article class="status-item"><h3>一个命令入口</h3><p><code>endem</code> 提供八个固定子命令，避免每项内部操作变成独立产品。</p></article>
       <article class="status-item"><h3>两条读取路径</h3><p>生产验证和 <code>theor</code> 独立直接读取，不共享会掩盖共同错误的解析实现。</p></article>
-      <article class="status-item"><h3>一个隔离运行域</h3><p><code>praxe</code> 在 Poiet 外建立 Dromen，能力句柄和模型后端不能进入制品或确定性生产域。</p></article>
+      <article class="status-item"><h3>一个隔离运行域</h3><p><code>drase</code> 在 Poiet 外建立 Dromen，能力句柄和模型后端不能进入制品或确定性生产域。</p></article>
     </div>
   </section>
 
   <section>
     <h2>系统关系</h2>
-    <div class="flow"><div class="step">受控来源表达</div><div class="step">投影 / poie</div><div class="step">nascent Endem</div><div class="step">elenk / theor</div><div class="step">pleko → coherent Endem / Synem</div><div class="step">tasse / 外部签名 / sphra</div><div class="step">praxe → Dromen</div><div class="step">Tekmor / 最终决定</div></div>
-    <p><code>poie</code> 是唯一语义成形入口；<code>elenk</code> 是生产验证路径；<code>theor</code> 是不共享解析代码的只读观察路径；<code>pleko</code> 只在存在多个 Endem 或外部引用时启用；<code>praxe</code> 重新验证实际 attested 字节，并在隔离域建立会话。</p>
+    <div class="flow"><div class="step">受控来源表达</div><div class="step">投影 / poie</div><div class="step">nascent Endem</div><div class="step">elenk / theor</div><div class="step">pleko → coherent Endem / Synem</div><div class="step">tasse / 外部签名 / sphra</div><div class="step">drase → Dromen</div><div class="step">Iknem / 最终决定</div></div>
+    <p><code>poie</code> 是唯一语义成形入口；<code>elenk</code> 是生产验证路径；<code>theor</code> 是不共享解析代码的只读观察路径；<code>pleko</code> 只在存在多个 Endem 或外部引用时启用；<code>drase</code> 重新验证实际 attested 字节，并在隔离域建立会话。</p>
   </section>
 
   <section>
@@ -31,9 +31,9 @@ permalink: "/architecture/index.html"
     <div class="page-links">
       <a class="page-link" href="../components/poiet.html"><strong>Poiet · 确定性制品制作域</strong><span>负责 poie、生产 elenk、pleko、tasse 和 sphra 响应核对。</span></a>
       <a class="page-link" href="../components/theor.html"><strong>Theor · 独立只读检查器</strong><span>为 theor 提供第二条有界解析与比较路径，不生成生产可信句柄。</span></a>
-      <a class="page-link" href="../components/praxor.html"><strong>Praxor · 隔离实现运行器</strong><span>重新验证 attested 制品，建立 Dromen，控制能力并形成 Tekmor。</span></a>
+      <a class="page-link" href="../components/drasor.html"><strong>Drasor · 隔离实现运行器</strong><span>重新验证 attested 制品，建立 Dromen，控制能力并形成 Iknem。</span></a>
     </div>
-    <p>三者可以由同一发行包提供，但代码依赖、权限和失败责任必须保持可验证分离。没有模型、外部能力或多步反馈的任务可以使用最小 Praxor；求解后端仍不得持有实时句柄或自行验收。</p>
+    <p>三者可以由同一发行包提供，但代码依赖、权限和失败责任必须保持可验证分离。没有模型、外部能力或多步反馈的任务可以使用最小 Drasor；求解后端仍不得持有实时句柄或自行验收。</p>
   </section>
 
   <section>
@@ -42,7 +42,7 @@ permalink: "/architecture/index.html"
       <tr><td>Endem</td><td>持久制品</td><td>一个根 skena 和六个语义面，状态为 nascent、coherent 或 attested。</td></tr>
       <tr><td>Synem</td><td>持久组合闭包</td><td>按 SYN-CORE 固定完整成员、精确绑定、依赖、权限交集与激活关系；物理容器尚未定义。</td></tr>
       <tr><td><a href="../specifications/dromen.html">Dromen</a></td><td>一次会话的只读执行契约</td><td>绑定精确制品、政策、环境、能力、预算和证据责任；不序列化或恢复权限。</td></tr>
-      <tr><td>Tekmor</td><td>有范围证据记录</td><td>按 TEK-CORE 绑定主体、溯源、phain、主张和限制；有效性、覆盖与决定保持外置。</td></tr>
+      <tr><td>Iknem</td><td>有范围证据记录</td><td>按 IKN-CORE 绑定主体、溯源、phain、主张和限制；有效性、覆盖与决定保持外置。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -52,8 +52,8 @@ permalink: "/architecture/index.html"
       <li>自然语言来源、模型候选、对象字节、依赖、签名包、工具返回和环境观察都从不可信状态进入。</li>
       <li>Poiet 只能证明确定性成形、结构、语义和状态不变量；它不能证明任务已经完成。</li>
       <li>Theor 只提供独立观察和差分证据；可显示不等于生产验证通过。</li>
-      <li>Praxor 只在当前环境和策略内绑定能力；attested 制品不保存实时句柄，也不自动获得权限。</li>
-      <li>Tekmor 只承担有限主张；验证政策形成有效性，<code>krin</code> 形成覆盖与满足判断，指定权威才形成最终决定。</li>
+      <li>Drasor 只在当前环境和策略内绑定能力；attested 制品不保存实时句柄，也不自动获得权限。</li>
+      <li>Iknem 只承担有限主张；验证政策形成有效性，<code>krin</code> 形成覆盖与满足判断，指定权威才形成最终决定。</li>
       <li>AUT-CORE 只回答谁能在什么范围内授权；登录、签名、模型、Agent 状态和界面点击都不能越过具名政策取得决定权。</li>
     </ul>
   </section>
@@ -61,11 +61,12 @@ permalink: "/architecture/index.html"
   <section>
     <h2>继续阅读</h2>
     <div class="page-links">
-      <a class="page-link" href="endem-lifecycle.html"><strong>Endem 生命周期</strong><span>逐步查看 nascent、coherent、attested、Dromen 和 Tekmor 的状态与失败。</span></a>
-      <a class="page-link" href="decisions.html"><strong>架构决策</strong><span>查看 Endem 语义与格式、结果分层、Synem 闭包、Tekmor 证据、诊断与协议适配边界。</span></a>
+      <a class="page-link" href="endem-lifecycle.html"><strong>Endem 生命周期</strong><span>逐步查看 nascent、coherent、attested、Dromen 和 Iknem 的状态与失败。</span></a>
+      <a class="page-link" href="decisions.html"><strong>架构决策</strong><span>查看 Endem 语义与格式、结果分层、Synem 闭包、Iknem 证据、诊断与协议适配边界。</span></a>
       <a class="page-link" href="open-questions.html"><strong>开放问题</strong><span>查看编码、绑定、运行、证据和发布前仍需回答的问题。</span></a>
       <a class="page-link" href="adr-0029-authority-and-authorization-decisions.html"><strong>权威与授权决定</strong><span>查看主体、范围、委托、同意、撤销、重放与结果分离怎样统一约束。</span></a>
       <a class="page-link" href="adr-0030-endem-content-and-authorization-companions.html"><strong>内容与授权伴随关系</strong><span>查看内容身份、权威选择器、外部授权和符合性结论怎样保持分离。</span></a>
+      <a class="page-link" href="adr-0031-release-name-collision-gate.html"><strong>发布名称冲突门禁</strong><span>查看 Iknem 与 Drasor/drase 的候选比较、采用决定和无兼容迁移规则。</span></a>
       <a class="page-link" href="../specifications/"><strong>规范参考指南</strong><span>查看对象、会话、证据、诊断与外部协议适配要求。</span></a>
     </div>
   </section>

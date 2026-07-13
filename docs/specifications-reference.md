@@ -9,7 +9,7 @@ manual_group: "reference"
 manual_order: 6
 nav_title: "规范参考指南"
 page_heading: "Noemion 规范参考指南"
-page_lead: "理解 Endem、Synem、Dromen、Tekmor、跨制品边界、成熟度标记与 ADR 的权威顺序。"
+page_lead: "理解 Endem、Synem、Dromen、Iknem、跨制品边界、成熟度标记与 ADR 的权威顺序。"
 summary: "理解对象规范、横切标准、成熟度标记与 ADR 的权威顺序。"
 badges: ["Authority", "Maturity", "ADR"]
 ---
@@ -31,7 +31,7 @@ badges: ["Authority", "Maturity", "ADR"]
 
 [END-SCEN 自然语言场景语料](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md)用三十个案例寻找规范缺口，但不属于上述规范义务。只有案例转化为唯一条款、登记验证方式并形成正反向量后，对应判断才可能进入符合性要求。
 
-[SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)、[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)、[TEK-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-scenarios.md)与[AUT-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-scenarios.md)分别检查组合闭包、会话契约、证据及授权边界，同样不属于上述规范义务。
+[SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)、[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)、[IKN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md)与[AUT-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-scenarios.md)分别检查组合闭包、会话契约、证据及授权边界，同样不属于上述规范义务。
 
 ## Endem
 
@@ -43,11 +43,11 @@ badges: ["Authority", "Maturity", "ADR"]
 
 [Synem 规范](../specifications/synem.html)解释完整闭包、精确绑定、有限无环、权限交集、成员结果分离和条件激活。规范源是 [SYN-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md)；[SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)不属于上述规范义务。当前没有物理 Synem 格式或组件实现。
 
-## Dromen 与 Tekmor
+## Dromen 与 Iknem
 
-[Dromen 会话契约](../specifications/dromen.html)解释精确会话主体、政策封闭、环境绑定、能力与预算上限、观察责任、只读失效和销毁。规范源是 [DRO-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md)；[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)不属于上述规范义务。Dromen 永远不是磁盘格式、凭据包或可恢复会话，当前也没有 Praxor 或运行时实现。
+[Dromen 会话契约](../specifications/dromen.html)解释精确会话主体、政策封闭、环境绑定、能力与预算上限、观察责任、只读失效和销毁。规范源是 [DRO-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md)；[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)不属于上述规范义务。Dromen 永远不是磁盘格式、凭据包或可恢复会话，当前也没有 Drasor 或运行时实现。
 
-[Tekmor 规范](../specifications/tekmor.html)解释主体范围、有限无环溯源、结构化观察、证据类别、完整性、外部有效性评估、相对 `krin` 的覆盖度、决定分离与最小披露。规范源是 [TEK-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/tekmor-core.md)；模型评价只能保持 `model-candidate`。当前没有物理 Tekmor 格式或组件实现。
+[Iknem 规范](../specifications/iknem.html)解释主体范围、有限无环溯源、结构化观察、证据类别、完整性、外部有效性评估、相对 `krin` 的覆盖度、决定分离与最小披露。规范源是 [IKN-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-core.md)；模型评价只能保持 `model-candidate`。当前没有物理 Iknem 格式或组件实现。
 
 [结构化诊断规范](../specifications/diagnostics.html)解释稳定机器码、生产语境、失败层次、类型化位置、确定性主错误、受限恢复、外部来源、最小披露、资源预算与原子失败。规范源是 [DIA-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md)，草案机器码见 [DIA-CAT](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md)。诊断不是目标结果、证据、权限或自动修复命令；当前没有物理编码或组件实现。
 
@@ -59,7 +59,7 @@ badges: ["Authority", "Maturity", "ADR"]
 
 [权威与授权决定规范](../specifications/authority.html)解释谁可以在什么语境和范围内确认自然语言候选、解决 `apor`、委托 Agent、授予能力或作出授权决定。规范源是 [AUT-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md)。`grant / deny / defer` 只回答当前请求是否获准，不替代真值、满足、证据、最终接受或会话终止；当前没有权威目录、政策求值器、同意界面或决定服务。
 
-允许保留的运行观察、失效原因和决定关系进入 Tekmor 或带范围的会话事件。它们不能重新创建 Dromen 或恢复旧权限。
+允许保留的运行观察、失效原因和决定关系进入 Iknem 或带范围的会话事件。它们不能重新创建 Dromen 或恢复旧权限。
 
 ## ADR 与开放问题
 

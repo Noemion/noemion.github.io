@@ -88,7 +88,7 @@ permalink: "/index.html"
       </a>
       <a class="portal-feature-row" href="specifications/endem.html#krin">
         <span class="feature-visual feature-visual-object" aria-hidden="true"><i>SKENA</i><b>↔</b><i>PHAIN</i><span>MET · AGNO · FAULT</span></span>
-        <span class="feature-copy"><small>FULFILLMENT</small><strong><code>krin</code> 规定怎样比较事态与观察</strong><span>phain、必需 Tekmor、观察不足处理和决定权威必须先固定；模型不能让命题自证。</span></span>
+        <span class="feature-copy"><small>FULFILLMENT</small><strong><code>krin</code> 规定怎样比较事态与观察</strong><span>phain、必需 Iknem、观察不足处理和决定权威必须先固定；模型不能让命题自证。</span></span>
         <span class="portal-arrow" aria-hidden="true">↗</span>
       </a>
       <a class="portal-feature-row" href="specifications/endem.html#apor">
@@ -108,8 +108,8 @@ permalink: "/index.html"
     <div class="portal-focus-grid">
       <a class="portal-focus-card focus-card-endem" href="specifications/endem.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>ENDEM</b></span><span class="focus-card-copy"><small>最小制品</small><strong>Endem</strong><span>一个根 skena 与六个语义面。</span></span></a>
       <a class="portal-focus-card focus-card-synem" href="specifications/synem.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>SYNEM</b></span><span class="focus-card-copy"><small>组合闭包</small><strong>Synem</strong><span>已解析的 Endem、固定依赖与发布范围。</span></span></a>
-      <a class="portal-focus-card focus-card-dromen" href="specifications/dromen.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>DROMEN</b></span><span class="focus-card-copy"><small>会话契约</small><strong>Dromen</strong><span>为一次 Praxe 会话封存只读执行边界。</span></span></a>
-      <a class="portal-focus-card focus-card-tekmor" href="specifications/tekmor.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>TEKMOR</b></span><span class="focus-card-copy"><small>范围证据</small><strong>Tekmor</strong><span>记录具名主体、观察、范围与决定依据。</span></span></a>
+      <a class="portal-focus-card focus-card-dromen" href="specifications/dromen.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>DROMEN</b></span><span class="focus-card-copy"><small>会话契约</small><strong>Dromen</strong><span>为一次 Drase 会话封存只读执行边界。</span></span></a>
+      <a class="portal-focus-card focus-card-iknem" href="specifications/iknem.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>IKNEM</b></span><span class="focus-card-copy"><small>范围证据</small><strong>Iknem</strong><span>记录具名主体、观察、范围与决定依据。</span></span></a>
     </div>
   </section>
 
@@ -122,14 +122,14 @@ permalink: "/index.html"
     <div class="portal-lifecycle-list">
       <a href="endem/"><span class="lifecycle-number">01</span><span class="lifecycle-copy"><strong><code>poie · elenk · pleko</code></strong><span>确定性形成、验证和组合；只有规范写入器能够产生规范字节。</span></span><span class="lifecycle-state">POIET</span></a>
       <a href="components/theor.html"><span class="lifecycle-number">02</span><span class="lifecycle-copy"><strong><code>theor</code></strong><span>单独构建的只读解析器，不复用生产读取器，也不产生可信验证句柄。</span></span><span class="lifecycle-state">READ</span></a>
-      <a href="components/praxor.html"><span class="lifecycle-number">03</span><span class="lifecycle-copy"><strong><code>praxe</code></strong><span>隔离进程重新验证实际字节；控制平面持有能力句柄，模型始终位于不可信域。</span></span><span class="lifecycle-state">PRAXE</span></a>
+      <a href="components/drasor.html"><span class="lifecycle-number">03</span><span class="lifecycle-copy"><strong><code>drase</code></strong><span>隔离进程重新验证实际字节；控制平面持有能力句柄，模型始终位于不可信域。</span></span><span class="lifecycle-state">DRASE</span></a>
     </div>
   </section>
 
   <section class="portal-start portal-reveal">
     <p class="portal-section-index">05 · CURRENT STAGE</p>
     <h2 class="portal-chapter-title"><span>先证明最小纵向切片</span></h2>
-    <p>项目尚未进入代码开发阶段。当前工作只冻结 Endem 语义、实验格式、威胁模型、错误边界和未来验证条件；<code>poie</code>、<code>elenk</code>、<code>theor</code>、<code>peira</code> 以及 Poiet、Theor、Praxor 都只是设计职责，没有可执行组件或安装包。</p>
+    <p>项目尚未进入代码开发阶段。当前工作只冻结 Endem 语义、实验格式、威胁模型、错误边界和未来验证条件；<code>poie</code>、<code>elenk</code>、<code>theor</code>、<code>peira</code> 以及 Poiet、Theor、Drasor 都只是设计职责，没有可执行组件或安装包。</p>
     <div class="portal-actions portal-actions-center">
       <a class="portal-button portal-button-primary" href="development/implementation-roadmap.html"><span>查看实施路线</span><span aria-hidden="true">↗</span></a>
       <a class="portal-button portal-button-secondary" href="endem/"><span>查看应用设计</span><span aria-hidden="true">→</span></a>
@@ -149,7 +149,7 @@ permalink: "/index.html"
       <a href="endem/"><small>01</small><strong>Endem 应用</strong><span>命令与信任边界</span></a>
       <a href="specifications/"><small>02</small><strong>规范</strong><span>对象、证据与授权边界</span></a>
       <a href="architecture/"><small>03</small><strong>架构</strong><span>制品如何形成、组合与运行</span></a>
-      <a href="components/"><small>04</small><strong>组件</strong><span>Poiet、Theor 与 Praxor</span></a>
+      <a href="components/"><small>04</small><strong>组件</strong><span>Poiet、Theor 与 Drasor</span></a>
       <a href="development/"><small>05</small><strong>实施</strong><span>验证条件与停止条件</span></a>
       <a href="docs/"><small>06</small><strong>指南与参考</strong><span>按任务进入项目内容</span></a>
     </div>

@@ -13,7 +13,7 @@ permalink: "/architecture/adr-0020-composite-situations-and-criteria.html"
     <h2>直接结论</h2>
     <p class="lead">第一阶段只允许用 <code>all_of</code> 和 <code>any_of</code> 组合判据。它们组合的是已经独立得到的叶级 <code>met / unmet / agno / fault</code>，不是原始数值、自由文本或可执行表达式。</p>
     <p>只有共同描述同一个终态、共享同一目标方向和验收责任、不能被独立替换或接受的关系，才能进入一个 Endem 的复合根。能够独立实现、版本化、授权、接受或失败的目标必须拆成多个 Endem，再由 Synem 组合。</p>
-    <p>本决定冻结抽象语义，不给 END-P1 增加字段，也不表示 Poiet、Theor、Praxor、CLI 或求值器已经实现。</p>
+    <p>本决定冻结抽象语义，不给 END-P1 增加字段，也不表示 Poiet、Theor、Drasor、CLI 或求值器已经实现。</p>
   </section>
 
   <section class="content-band">
@@ -56,7 +56,7 @@ permalink: "/architecture/adr-0020-composite-situations-and-criteria.html"
 
   <section class="content-wide">
     <h2>短路只能减少工作不能改写事实</h2>
-    <p><code>all_of</code> 发现有效 <code>unmet</code>，或 <code>any_of</code> 发现有效 <code>met</code> 后，可以停止求值其余叶。结果必须保存决定依据 <code>decisive-basis</code>，以及由已求值叶、所用 Tekmor、未求值叶清单和停止原因组成的 <code>evaluation-coverage</code>。</p>
+    <p><code>all_of</code> 发现有效 <code>unmet</code>，或 <code>any_of</code> 发现有效 <code>met</code> 后，可以停止求值其余叶。结果必须保存决定依据 <code>decisive-basis</code>，以及由已求值叶、所用 Iknem、未求值叶清单和停止原因组成的 <code>evaluation-coverage</code>。</p>
     <p>未求值叶不是 <code>agno</code>，因为它没有得到判断。不同求值顺序可以改变覆盖范围，但不能改变已经出现决定性结果后的总体分类；已遇到的故障也不能被短路记录抹掉。</p>
   </section>
 

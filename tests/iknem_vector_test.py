@@ -4,12 +4,12 @@ import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-VECTOR_PATH = ROOT / "vectors" / "tekmor" / "cases.json"
-CASE_ID = re.compile(r"^TK-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
+VECTOR_PATH = ROOT / "vectors" / "iknem" / "cases.json"
+CASE_ID = re.compile(r"^IK-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
 CLAUSES = {
-    "TEK-SCP-001", "TEK-PRV-001", "TEK-OBS-001", "TEK-CLS-001",
-    "TEK-INT-001", "TEK-VAL-001", "TEK-COV-001", "TEK-DEC-001",
-    "TEK-PRI-001",
+    "IKN-SCP-001", "IKN-PRV-001", "IKN-OBS-001", "IKN-CLS-001",
+    "IKN-INT-001", "IKN-VAL-001", "IKN-COV-001", "IKN-DEC-001",
+    "IKN-PRI-001",
 }
 RECORD_KINDS = {"observation", "derivation", "attestation", "appraisal", "decision-record"}
 SOURCE_CLASSES = {
@@ -21,7 +21,7 @@ SOURCE_CLASSES = {
 def proposal_violation(case):
     proposal = case.get("proposal")
     if not isinstance(proposal, dict):
-        return "TEK-SCP-001"
+        return "IKN-SCP-001"
     producer = proposal.get("producer")
     if (
         not isinstance(proposal.get("subject"), str)
@@ -35,7 +35,7 @@ def proposal_violation(case):
         or not proposal.get("claim")
         or not isinstance(proposal.get("limitations"), list)
     ):
-        return "TEK-SCP-001"
+        return "IKN-SCP-001"
     provenance = proposal.get("provenance")
     if (
         not isinstance(provenance, dict)
@@ -44,7 +44,7 @@ def proposal_violation(case):
         or provenance.get("cycle") is not False
         or provenance.get("hidden_inputs") is not False
     ):
-        return "TEK-PRV-001"
+        return "IKN-PRV-001"
     observation = proposal.get("observation")
     if observation is not None and (
         not isinstance(observation, dict)
@@ -53,16 +53,16 @@ def proposal_violation(case):
         or observation.get("phain_aligned") is not True
         or observation.get("inference_as_observation") is not False
     ):
-        return "TEK-OBS-001"
+        return "IKN-OBS-001"
     if (
         proposal.get("record_kind") not in RECORD_KINDS
         or proposal.get("source_class") not in SOURCE_CLASSES
         or proposal.get("self_upgrade") is not False
     ):
-        return "TEK-CLS-001"
+        return "IKN-CLS-001"
     integrity = proposal.get("integrity")
     if not isinstance(integrity, dict) or integrity.get("truth_separate") is not True:
-        return "TEK-INT-001"
+        return "IKN-INT-001"
     validity = proposal.get("validity")
     if (
         not isinstance(validity, dict)
@@ -72,7 +72,7 @@ def proposal_violation(case):
         or validity.get("state") not in {"valid", "invalid", "revoked"}
         or validity.get("recheck") is not True
     ):
-        return "TEK-VAL-001"
+        return "IKN-VAL-001"
     coverage = proposal.get("coverage")
     if (
         not isinstance(coverage, dict)
@@ -82,7 +82,7 @@ def proposal_violation(case):
         or coverage.get("result") not in {"sufficient", "insufficient"}
         or (coverage.get("gaps") is True and coverage.get("result") != "insufficient")
     ):
-        return "TEK-COV-001"
+        return "IKN-COV-001"
     decision = proposal.get("decision")
     if (
         not isinstance(decision, dict)
@@ -90,7 +90,7 @@ def proposal_violation(case):
         or decision.get("auto_accept") is not False
         or (proposal.get("record_kind") == "decision-record" and not decision.get("authority"))
     ):
-        return "TEK-DEC-001"
+        return "IKN-DEC-001"
     disclosure = proposal.get("disclosure")
     if (
         not isinstance(disclosure, dict)
@@ -98,7 +98,7 @@ def proposal_violation(case):
         or disclosure.get("loss_declared") is not True
         or disclosure.get("external_refs_exact") is not True
     ):
-        return "TEK-PRI-001"
+        return "IKN-PRI-001"
     return None
 
 
@@ -107,17 +107,17 @@ def main():
     try:
         document = json.loads(VECTOR_PATH.read_text())
     except (OSError, json.JSONDecodeError) as exc:
-        print(f"cannot read Tekmor vectors: {exc}")
+        print(f"cannot read Iknem vectors: {exc}")
         return 1
-    if document.get("vector_format") != "tek-core.vector.v1":
-        errors.append("Tekmor vectors must use tek-core.vector.v1")
-    if document.get("spec") != {"id": "TEK-CORE", "version": "0.1.0-draft"}:
-        errors.append("Tekmor vectors must pin TEK-CORE 0.1.0-draft")
+    if document.get("vector_format") != "ikn-core.vector.v1":
+        errors.append("Iknem vectors must use ikn-core.vector.v1")
+    if document.get("spec") != {"id": "IKN-CORE", "version": "0.1.0-draft"}:
+        errors.append("Iknem vectors must pin IKN-CORE 0.1.0-draft")
     if "not a collector, verifier, merger, revocation service, decision engine, runtime, or component implementation" not in document.get("description", ""):
-        errors.append("Tekmor vectors must state their non-implementation boundary")
+        errors.append("Iknem vectors must state their non-implementation boundary")
     cases = document.get("cases")
     if not isinstance(cases, list) or len(cases) != 18:
-        errors.append("Tekmor vectors require exactly 18 proposal cases")
+        errors.append("Iknem vectors require exactly 18 proposal cases")
         cases = []
     seen = set()
     counts = {"accept": 0, "reject": 0}
@@ -140,13 +140,13 @@ def main():
         if actual != expect["result"] or (violation and violation != expect["clause"]):
             errors.append(f"{case_id}: expected {expect}, evaluated {actual}/{violation}")
     if counts != {"accept": 9, "reject": 9}:
-        errors.append(f"Tekmor vectors require 9 accepts and 9 rejects, got {counts}")
+        errors.append(f"Iknem vectors require 9 accepts and 9 rejects, got {counts}")
     if rejected != CLAUSES:
-        errors.append(f"Tekmor reject coverage must include {sorted(CLAUSES)}, got {sorted(rejected)}")
+        errors.append(f"Iknem reject coverage must include {sorted(CLAUSES)}, got {sorted(rejected)}")
     if errors:
         print("\n".join(errors))
         return 1
-    print("PASS: executed 18 Tekmor vectors (9 accepted classifications, 9 deterministic rejects across 9 clauses)")
+    print("PASS: executed 18 Iknem vectors (9 accepted classifications, 9 deterministic rejects across 9 clauses)")
     return 0
 
 

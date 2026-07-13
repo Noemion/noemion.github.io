@@ -27,7 +27,7 @@ permalink: "/architecture/adr-0014-source-manifest.html"
 
   <section class="content-wide">
     <h2>语法边界</h2>
-    <p>每个非注释行由制表符分成一个指令和固定参数。单例指令是 <code>rhem/root/telis/krin</code>；可重复指令是 <code>symbol/relation/situation/phain/tekmor/apor</code>。文本只解释四种反斜杠转义，复合标识符集合只使用逗号分隔。</p>
+    <p>每个非注释行由制表符分成一个指令和固定参数。单例指令是 <code>rhem/root/telis/krin</code>；可重复指令是 <code>symbol/relation/situation/phain/iknem/apor</code>。文本只解释四种反斜杠转义，复合标识符集合只使用逗号分隔。</p>
     <p class="callout"><strong>名称边界：</strong>“来源清单”是直白工程名称，不再创造新的哲学专名。<code>.ends</code> 只是实验后缀，不是 Endem 对象扩展名或身份的一部分。</p>
     <p class="callout"><strong>保真边界：</strong>LF 与 CRLF 等价，四种转义会被解码，所以 <code>rhem.content</code> 不是原始 <code>.ends</code> 文件的逐字节副本。原始来源字节只有在未来另行绑定文件身份、解码 Profile、变换链和损失时才能核对。</p>
     <p>完整指令、基数、转义、资源与退出条件见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-source-manifest.md">END-SRCM 条款源</a>。</p>

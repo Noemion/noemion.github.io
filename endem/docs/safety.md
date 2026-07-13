@@ -40,7 +40,7 @@ GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf
 - `offset + length`；
 - `count × entry_size`；
 - 对齐上取整和累计大小；
-- 字符串、节点、边、成员和 Tekmor 数量；
+- 字符串、节点、边、成员和 Iknem 数量；
 - 解压后的逻辑大小；
 - 递归、循环和图遍历深度；
 - 单次输出和总内存预算。

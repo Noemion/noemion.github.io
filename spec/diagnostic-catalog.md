@@ -119,19 +119,19 @@
 | `dromen.contract.mutated` | `DRO-IMM-001` | session | 封存后被修改或漂移后原地修补 |
 | `dromen.lifecycle.reused` | `DRO-LIF-001` | session | 契约被序列化、转移、恢复或跨会话复用 |
 
-## 8. Tekmor 错误码
+## 8. Iknem 错误码
 
 | 错误码 | 主条款 | 层次 | 触发条件 |
 | --- | --- | --- | --- |
-| `tekmor.scope.unbound` | `TEK-SCP-001` | evidence | 主体、生产者、方法、环境、时间、主张或限制未固定 |
-| `tekmor.provenance.invalid` | `TEK-PRV-001` | evidence | 溯源悬空、循环、自证或隐藏动态输入 |
-| `tekmor.observation.unaligned` | `TEK-OBS-001` | evidence | phain 无法对齐关系位置或有损变换未披露 |
-| `tekmor.classification.upgraded` | `TEK-CLS-001` | evidence | 记录种类或来源类别被自评、签名、数量或分数提升 |
-| `tekmor.integrity.overclaimed` | `TEK-INT-001` | evidence | 完整性、签名或时间戳被解释为事实正确或授权 |
-| `tekmor.validity.self_asserted` | `TEK-VAL-001` | evidence | 记录自填有效性或评估缺少政策、参考值与截止点 |
-| `tekmor.coverage.invalid` | `TEK-COV-001` | evidence | 覆盖脱离精确 krin、重复计数或隐藏空洞 |
-| `tekmor.decision.unauthorized` | `TEK-DEC-001` | policy | 评估、模型、Praxor 或记录本身替代具名决定权威 |
-| `tekmor.disclosure.secret` | `TEK-PRI-001` | evidence | 记录包含实时秘密，或脱敏损失没有披露 |
+| `iknem.scope.unbound` | `IKN-SCP-001` | evidence | 主体、生产者、方法、环境、时间、主张或限制未固定 |
+| `iknem.provenance.invalid` | `IKN-PRV-001` | evidence | 溯源悬空、循环、自证或隐藏动态输入 |
+| `iknem.observation.unaligned` | `IKN-OBS-001` | evidence | phain 无法对齐关系位置或有损变换未披露 |
+| `iknem.classification.upgraded` | `IKN-CLS-001` | evidence | 记录种类或来源类别被自评、签名、数量或分数提升 |
+| `iknem.integrity.overclaimed` | `IKN-INT-001` | evidence | 完整性、签名或时间戳被解释为事实正确或授权 |
+| `iknem.validity.self_asserted` | `IKN-VAL-001` | evidence | 记录自填有效性或评估缺少政策、参考值与截止点 |
+| `iknem.coverage.invalid` | `IKN-COV-001` | evidence | 覆盖脱离精确 krin、重复计数或隐藏空洞 |
+| `iknem.decision.unauthorized` | `IKN-DEC-001` | policy | 评估、模型、Drasor 或记录本身替代具名决定权威 |
+| `iknem.disclosure.secret` | `IKN-PRI-001` | evidence | 记录包含实时秘密，或脱敏损失没有披露 |
 
 ## 9. 外部协议适配错误码
 
@@ -205,10 +205,10 @@
 
 上述机器码只在当前规范、目录和提案向量中保持草案稳定，尚不构成发行 ABI。提升为稳定接口前必须完成：
 
-1. Poiet、独立 Theor 与 Praxor 对共同失败给出相同的主层次与适用机器码；
+1. Poiet、独立 Theor 与 Drasor 对共同失败给出相同的主层次与适用机器码；
 2. 并发、截断、乱序、重复、资源耗尽、外部协议降级和秘密注入向量齐全；
 3. 诊断 Profile 冻结数量、深度、位置、消息和总输出预算；
 4. 文本、SARIF、HTTP、MCP 与遥测适配前后保持机器语义；
 5. CLI 退出状态与结构化物理编码由单独 ADR 和规范字节冻结。
 
-当前目录只由资料检查器核对。Poiet、Theor、Praxor、诊断生产器、渲染器和协议适配器均未实现。
+当前目录只由资料检查器核对。Poiet、Theor、Drasor、诊断生产器、渲染器和协议适配器均未实现。

@@ -35,7 +35,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0019](https://noemion.github.io/architecture/adr-0019-measurement-and-thresholds.html) — measurement constructs, estimands, units, aggregation, uncertainty, and threshold comparison
 - [ADR-0020](https://noemion.github.io/architecture/adr-0020-composite-situations-and-criteria.html) — composite situations, aligned criteria, four-result propagation, and decisive short-circuit evidence
 - [ADR-0021](https://noemion.github.io/architecture/adr-0021-synem-closure-and-activation.html) — exact Synem closure, permission convergence, member result separation, and session activation
-- [ADR-0022](https://noemion.github.io/architecture/adr-0022-tekmor-evidence-and-appraisal.html) — scoped Tekmor evidence, provenance, validity, coverage, appraisal, decision, and disclosure boundaries
+- [ADR-0022](https://noemion.github.io/architecture/adr-0022-iknem-evidence-and-appraisal.html) — scoped Iknem evidence, provenance, validity, coverage, appraisal, decision, and disclosure boundaries
 - [ADR-0023](https://noemion.github.io/architecture/adr-0023-endem-content-standard.html) — layered Endem content standard, closed content Profiles, container rules, and conformance boundaries
 - [ADR-0024](https://noemion.github.io/architecture/adr-0024-dromen-session-contract.html) — one-session subject, policy, environment, capability, budget, observation, immutability, and disposal contract
 - [ADR-0025](https://noemion.github.io/architecture/adr-0025-structured-diagnostics.html) — stable diagnostic identity, context, layers, locations, recovery, disclosure, bounds, and atomic failure
@@ -44,19 +44,20 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0028](https://noemion.github.io/architecture/adr-0028-text-and-identifier-boundaries.html) — text slots, strict UTF-8, source provenance, identifiers, normalization, bidi, hidden characters, model input, and display boundaries
 - [ADR-0029](https://noemion.github.io/architecture/adr-0029-authority-and-authorization-decisions.html) — authority contexts, principal qualification, bounded scope, delegation, consent, replay, and result separation
 - [ADR-0030](https://noemion.github.io/architecture/adr-0030-endem-content-and-authorization-companions.html) — stable Endem content identity, untrusted authority selectors, external authorization prerequisites, and companion relations
+- [ADR-0031](https://noemion.github.io/architecture/adr-0031-release-name-collision-gate.html) — release-name collision evidence, Iknem and Drasor/drase selection, and one-time migration without compatibility aliases
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — unresolved design questions and decision boundaries
-- [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Praxor responsibility boundaries
+- [Components](https://noemion.github.io/components/index.html) — Poiet, Theor, and Drasor responsibility boundaries
 - [Poiet](https://noemion.github.io/components/poiet.html) — deterministic Endem formation, checking, binding, and packing boundary
 - [Theor](https://noemion.github.io/components/theor.html) — independent, bounded, read-only interpretation and diagnostic boundary
-- [Praxor](https://noemion.github.io/components/praxor.html) — constrained loading, capability mediation, evidence collection, and execution boundary
+- [Drasor](https://noemion.github.io/components/drasor.html) — constrained loading, capability mediation, evidence collection, and execution boundary
 
 ## Specifications
 
 - [Specifications](https://noemion.github.io/specifications/index.html) — authority, maturity, and normative-source map
 - [Endem](https://noemion.github.io/specifications/endem.html) — the smallest deterministic natural-language goal artifact and its canonical fields
 - [Synem](https://noemion.github.io/specifications/synem.html) — resolved, composable closure and binding rules
-- [Dromen](https://noemion.github.io/specifications/dromen.html) — sealed read-only execution contract for exactly one Praxe session
-- [Tekmor](https://noemion.github.io/specifications/tekmor.html) — scoped evidence, provenance, integrity, and acceptance claims
+- [Dromen](https://noemion.github.io/specifications/dromen.html) — sealed read-only execution contract for exactly one Drase session
+- [Iknem](https://noemion.github.io/specifications/iknem.html) — scoped evidence, provenance, integrity, and acceptance claims
 - [Structured diagnostics](https://noemion.github.io/specifications/diagnostics.html) — cross-object machine identity, locations, recovery, safety, and result-domain separation
 - [External protocol adapters](https://noemion.github.io/specifications/adapters.html) — version pinning, peer trust, capability intersection, state separation, retry, delivery, and security boundaries
 - [Exact identity and attestation](https://noemion.github.io/specifications/identity.html) — cross-artifact byte identity, signed statements, validity cutoffs, reproducibility, and companion relations
@@ -84,7 +85,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Endem application
 
-- [Endem](https://noemion.github.io/endem/index.html) — the single public command surface for poie, elenk, pleko, tasse, sphra, theor, praxe, and peira
+- [Endem](https://noemion.github.io/endem/index.html) — the single public command surface for poie, elenk, pleko, tasse, sphra, theor, drase, and peira
 
 ## Endem manual
 

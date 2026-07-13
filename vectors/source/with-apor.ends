@@ -7,6 +7,6 @@ situation	situation:report-produced	rel:produced	positive
 root	situation:report-produced
 telis	kine
 phain	rel:produced	same-roles
-tekmor	artifact-content-observation
+iknem	artifact-content-observation
 krin	agno	fault	authority:requester
 apor	apor:audience	source:request-001#/range	目标读者尚未确认	authority:requester	audience:security,audience:executive	rel:produced	rule,named-authority

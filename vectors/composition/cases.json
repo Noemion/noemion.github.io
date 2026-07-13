@@ -1,7 +1,7 @@
 {
   "vector_format": "end-core.composition-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
-  "description": "Composite-situation proposal vectors for ADR-0020; a specification consistency matrix, not a parser, Praxor, evaluator, runtime, or component implementation",
+  "description": "Composite-situation proposal vectors for ADR-0020; a specification consistency matrix, not a parser, Drasor, evaluator, runtime, or component implementation",
   "cases": [
     {
       "id": "CV-VALID-ALL-OF-MET-001",

@@ -159,7 +159,7 @@ def main():
         errors.append("quantification vectors must use end-core.quantification-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("quantification vectors must pin END-CORE 0.1.0-draft")
-    if "not a collection resolver, Praxor, evaluator, or component implementation" not in document.get("description", ""):
+    if "not a collection resolver, Drasor, evaluator, or component implementation" not in document.get("description", ""):
         errors.append("quantification vectors must state their non-implementation boundary")
 
     cases = document.get("cases")

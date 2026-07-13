@@ -9,8 +9,8 @@ manual_group: "guides"
 manual_order: 3
 nav_title: "架构设计指南"
 page_heading: "Noemion 架构设计指南"
-page_lead: "从 Endem 到 Tekmor，理解三个实现域、四个名词和每道信任边界。"
-summary: "从 Endem 到 Tekmor，理解三个实现域、四个名词和每道信任边界。"
+page_lead: "从 Endem 到 Iknem，理解三个实现域、四个名词和每道信任边界。"
+summary: "从 Endem 到 Iknem，理解三个实现域、四个名词和每道信任边界。"
 badges: ["Architecture", "Endem", "Trust Boundaries"]
 ---
 
@@ -20,23 +20,23 @@ badges: ["Architecture", "Endem", "Trust Boundaries"]
 受控来源表达
       │ poie
       ▼
-    Endem ── pleko ──► Synem ── praxe ──► Dromen
+    Endem ── pleko ──► Synem ── drase ──► Dromen
       │                 │                    │
       └── theor ────────┴── theor            ▼
-                                           Tekmor
+                                           Iknem
 ```
 
-这四个名词有不同生命周期。Endem 是最小目标制品；Synem 是解析后的组合闭包；Dromen 是一次 Praxe 会话的只读执行契约；Tekmor 是有范围的证据记录。中间报告只有在权威、权限、保密或生命周期确实不同时，才成为独立伴随记录。
+这四个名词有不同生命周期。Endem 是最小目标制品；Synem 是解析后的组合闭包；Dromen 是一次 Drase 会话的只读执行契约；Iknem 是有范围的证据记录。中间报告只有在权威、权限、保密或生命周期确实不同时，才成为独立伴随记录。
 
 ## 三个实现域
 
 | 域 | 输入 | 输出 | 失败责任 |
 | --- | --- | --- | --- |
 | **Poiet** | 来源绑定、Endem、固定依赖、发布策略 | Endem、Synem、签名请求、分层诊断 | 来源不明、语义未授权、格式/引用/约束冲突、非确定性、闭包不完整 |
-| **Theor** | 任意不可信 Endem、Synem 或 Tekmor 字节 | 有界只读视图、差异、引用、大小和跟踪信息 | 畸形输入、未知关键结构、资源超限、无法比较；不能产生生产验证句柄 |
-| **Praxor** | Synem、运行配置、验收策略和能力目录 | Dromen、Tekmor 和最终决定 | 签名或闭包失败、能力拒绝、预算耗尽、状态漂移、证据缺失和人工升级 |
+| **Theor** | 任意不可信 Endem、Synem 或 Iknem 字节 | 有界只读视图、差异、引用、大小和跟踪信息 | 畸形输入、未知关键结构、资源超限、无法比较；不能产生生产验证句柄 |
+| **Drasor** | Synem、运行配置、验收策略和能力目录 | Dromen、Iknem 和最终决定 | 签名或闭包失败、能力拒绝、预算耗尽、状态漂移、证据缺失和人工升级 |
 
-公开 CLI 都叫 `endem`，但 `theor` 必须单独构建，`praxe` 必须单独进程。用户心智模型可以简洁，内部信任边界不能因此合并。
+公开 CLI 都叫 `endem`，但 `theor` 必须单独构建，`drase` 必须单独进程。用户心智模型可以简洁，内部信任边界不能因此合并。
 
 ## 形成与语义确认
 
@@ -52,11 +52,11 @@ badges: ["Architecture", "Endem", "Trust Boundaries"]
 
 ## 装载与运行
 
-Praxor 不信任路径名、缓存结论或 `theor` 输出，而是重新读取实际 Endem 字节并核对 Synem 的精确成员闭包。全部结构、绑定、摘要、签名、政策、环境、能力、预算和证据责任通过后，才按 [DRO-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md)封存 Dromen；Synem 物理格式尚未定义。
+Drasor 不信任路径名、缓存结论或 `theor` 输出，而是重新读取实际 Endem 字节并核对 Synem 的精确成员闭包。全部结构、绑定、摘要、签名、政策、环境、能力、预算和证据责任通过后，才按 [DRO-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md)封存 Dromen；Synem 物理格式尚未定义。
 
-Praxor 外侧的控制平面持有实时能力句柄。模型提出类型化能力请求，确定性策略决定执行或拒绝。真实界面、日志、测试和工具返回形成环境观察；模型只能给出候选和建议性评价。
+Drasor 外侧的控制平面持有实时能力句柄。模型提出类型化能力请求，确定性策略决定执行或拒绝。真实界面、日志、测试和工具返回形成环境观察；模型只能给出候选和建议性评价。
 
-`krin`、验收策略、预算、停止条件和人工升级条件在运行前确定。Tekmor 绑定事件、证据范围、对象身份、环境和策略。系统先区分 `met / unmet / agno / fault`，再由具名权威形成 `accepted / rejected / deferred`；Praxe 会话另行记录 `completed / failed / interrupted`。这些结果不能互相替代。
+`krin`、验收策略、预算、停止条件和人工升级条件在运行前确定。Iknem 绑定事件、证据范围、对象身份、环境和策略。系统先区分 `met / unmet / agno / fault`，再由具名权威形成 `accepted / rejected / deferred`；Drase 会话另行记录 `completed / failed / interrupted`。这些结果不能互相替代。
 
 若 `telis` 为 `mene`，时间范围还必须区分 `fixed` 确定 UTC 区间与 `elapsed` 具名事件经过时长。连续性使用 `strict` 或完整 `budgeted`；采样点之间没有覆盖保证时保持 `agno`，不能因为没有告警而推成 `met`。
 

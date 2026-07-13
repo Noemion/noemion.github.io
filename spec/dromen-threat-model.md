@@ -3,7 +3,7 @@
 - Document ID: `DRO-THREAT`
 - Version: `0.1.0-draft`
 - Date: 2026-07-13
-- Status: draft; paired with DRO-CORE for future Praxor and capability-domain design
+- Status: draft; paired with DRO-CORE for future Drasor and capability-domain design
 - Implementation status: proposal-vector checker only; this document is not a sandbox, loader, broker or runtime
 
 ## 1. Protection objective
@@ -32,7 +32,7 @@ An attacker unions grants, uses ambient privilege, swaps token audience, passes 
 
 ### THR-DRO-005 — Secret persistence and cross-session handle reuse
 
-Tokens, cookies, descriptors or provider handles enter the Dromen, Tekmor or logs and later reanimate authority. `DRO-SEC-001` forbids live material in these objects; `DRO-LIF-001` requires disposal and prohibits rehydration.
+Tokens, cookies, descriptors or provider handles enter the Dromen, Iknem or logs and later reanimate authority. `DRO-SEC-001` forbids live material in these objects; `DRO-LIF-001` requires disposal and prohibits rehydration.
 
 ### THR-DRO-006 — Budget escape through retries or delegation
 

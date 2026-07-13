@@ -11,14 +11,14 @@ permalink: "/specifications/dromen.html"
 
   <section class="content-stack">
     <h2>先给直白定义</h2>
-    <p class="lead">Dromen 是 Praxor 为一次 Praxe 会话从精确制品封存的只读执行契约。它说明“这个精确目标，在这一次会话里，可以依据哪些政策、环境、能力和预算运行”。</p>
+    <p class="lead">Dromen 是 Drasor 为一次 Drase 会话从精确制品封存的只读执行契约。它说明“这个精确目标，在这一次会话里，可以依据哪些政策、环境、能力和预算运行”。</p>
     <p>Endem 或 Synem 保存持久目标；Dromen 只保存本次运行的边界。它不是文件、进程、模型上下文、凭据包、可恢复会话或最终结果。</p>
   </section>
 
   <section class="content-wide">
     <h2>它从哪里来又流向哪里</h2>
-    <div class="flow"><div class="step">attested Endem 或 Synem</div><div class="step">Praxor 重新验证</div><div class="step">政策与能力求交</div><div class="step">封存 Dromen</div><div class="step">Praxe 运行</div><div class="step">phain 与 Tekmor</div><div class="step">判断和决定</div></div>
-    <p>Praxor 是 Dromen 的唯一建立者，也是失效和销毁责任人。运行后端只消费获准的最小能力；Tekmor 生产者记录结构化观察；具名验收权威最终决定是否接受。任何一个下游都不能反向改写 Dromen 或已签制品。</p>
+    <div class="flow"><div class="step">attested Endem 或 Synem</div><div class="step">Drasor 重新验证</div><div class="step">政策与能力求交</div><div class="step">封存 Dromen</div><div class="step">Drase 运行</div><div class="step">phain 与 Iknem</div><div class="step">判断和决定</div></div>
+    <p>Drasor 是 Dromen 的唯一建立者，也是失效和销毁责任人。运行后端只消费获准的最小能力；Iknem 生产者记录结构化观察；具名验收权威最终决定是否接受。任何一个下游都不能反向改写 Dromen 或已签制品。</p>
   </section>
 
   <section class="content-wide">
@@ -49,13 +49,13 @@ permalink: "/specifications/dromen.html"
 
   <section class="content-wide">
     <h2>环境变化怎样处理</h2>
-    <p>模型版本、适配器、协议、政策、能力范围、决定权威或隔离配置发生实质变化时，Praxor 使旧 Dromen 失效，并按预先声明规则中断或失败。旧观察和 Tekmor 保留，不能被新会话覆盖。</p>
-    <p>短期凭据可以在独立能力域内轮换，但前提是资源、受众、范围和授权没有变化。一旦授权边界改变，就必须建立新的 Praxe 会话。</p>
+    <p>模型版本、适配器、协议、政策、能力范围、决定权威或隔离配置发生实质变化时，Drasor 使旧 Dromen 失效，并按预先声明规则中断或失败。旧观察和 Iknem 保留，不能被新会话覆盖。</p>
+    <p>短期凭据可以在独立能力域内轮换，但前提是资源、受众、范围和授权没有变化。一旦授权边界改变，就必须建立新的 Drase 会话。</p>
   </section>
 
   <section class="content-wide">
     <h2>它与 Agent 协议的关系</h2>
-    <p>MCP 的能力协商、授权范围和长任务，A2A 的 Agent 与 Task 状态，都可以成为 Praxor 的外部输入。它们不会成为 Dromen 的权威，也不会直接改变 Endem、Synem、满足结果或最终决定。</p>
+    <p>MCP 的能力协商、授权范围和长任务，A2A 的 Agent 与 Task 状态，都可以成为 Drasor 的外部输入。它们不会成为 Dromen 的权威，也不会直接改变 Endem、Synem、满足结果或最终决定。</p>
     <p>因此，工具列表变化、模型切换、远端 Task 完成和 step-up 请求都必须先经过本地 Dromen 边界。系统不能因为协议返回成功就说目标已经满足，也不能因为远端请求更多权限就修改当前会话。</p>
   </section>
 
@@ -72,7 +72,7 @@ permalink: "/specifications/dromen.html"
   <section class="content-band">
     <h2>当前成熟度</h2>
     <p>DRO-CORE 已接受并固定抽象会话边界。未来实现必须遵守十条核心规则，不得把 Dromen 当作持久文件、凭据包或可恢复运行状态。</p>
-    <p>Dromen API、平台隔离方式、事件格式和运行后端仍未冻结，仍需在代码开发阶段获准后分别设计与验证。当前没有 Praxor、装载器、沙箱、凭据代理、预算器或运行时；提案向量只能证明规范资料之间一致。</p>
+    <p>Dromen API、平台隔离方式、事件格式和运行后端仍未冻结，仍需在代码开发阶段获准后分别设计与验证。当前没有 Drasor、装载器、沙箱、凭据代理、预算器或运行时；提案向量只能证明规范资料之间一致。</p>
   </section>
-  <div class="next-prev"><a href="synem.html">← Synem</a><a href="tekmor.html">Tekmor →</a></div>
+  <div class="next-prev"><a href="synem.html">← Synem</a><a href="iknem.html">Iknem →</a></div>
 </main>

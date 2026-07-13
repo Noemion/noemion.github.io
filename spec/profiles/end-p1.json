@@ -93,7 +93,7 @@
     },
     "krin": {
       "1": {"name": "required_phain", "type": "array<phain_requirement>"},
-      "2": {"name": "required_tekmor", "type": "array<identifier>"},
+      "2": {"name": "required_iknem", "type": "array<identifier>"},
       "3": {"name": "on_missing_observation", "type": "enum:missing_policy"},
       "4": {"name": "on_evaluation_error", "type": "enum:error_policy"},
       "5": {"name": "decision_authority", "type": "identifier"}
@@ -130,7 +130,7 @@
     "roles": "name",
     "situations": "id",
     "required_phain": "relation",
-    "required_tekmor": "encoded-text",
+    "required_iknem": "encoded-text",
     "apor_items": "id",
     "candidates": "encoded-text",
     "impact_scope": "encoded-text",
