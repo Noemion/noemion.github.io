@@ -40,7 +40,7 @@ permalink: "/architecture/open-questions.html"
   <section class="content-grid">
     <h2>Dromen、Praxor 与 Tekmor</h2>
     <details open><summary>Dromen 的运行 API 和平台隔离怎样实现？</summary><p>DRO-CORE 已固定主体、政策、环境、能力、秘密、预算、激活、观察、只读与销毁边界。未来仍需在代码阶段选择进程模型、沙箱组合、凭据代理、事件编码、预算计数器与销毁机制，并用平台级对抗证据证明，而不是把 Linux、容器或模型 SDK 名称当作隔离结论。</p></details>
-    <details><summary>模型上下文怎样装配而不让数据取得指令权？</summary><p>TXT、AUT、ADP 与 DRO 已分别约束模型实际输入、授权、外部来源和会话上限，但尚未统一输入选择、角色、顺序、截断、缓存和损失。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">非规范研究提案</a>主张由控制平面形成可审计装配说明，并把未来条款归还现有规范；它不创建新制品、命令、组件或哲学专名。</p></details>
+    <details><summary>模型上下文怎样装配而不让数据取得指令权？</summary><p>TXT、AUT、ADP 与 DRO 已分别约束模型实际输入、授权、外部来源和会话上限，但尚未统一输入选择、角色、顺序、截断、缓存和损失。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">非规范研究提案</a>已经补齐十四个案例、唯一责任归属、八类威胁和失败域矩阵，主张由控制平面形成可审计装配说明，并把未来条款归还现有规范。它不创建新制品、命令、组件或哲学专名；在用户明确接受设计前仍不进入 ADR、CORE、登记或向量。</p></details>
     <details><summary>Praxor 怎样隔离模型和能力适配器？</summary><p>需确定进程、沙箱、取消、超时、幂等、网络、文件、凭据和资源限额。后端失败不能让 Praxor 静默扩大权限或修改 attested 制品。</p></details>
     <details><summary>Tekmor 怎样获得物理编码？</summary><p>TEK-CORE 已固定 phain 对齐、有限无环溯源、证据类别、有效性、覆盖、决定分离和最小披露。字段编号、容器、摘要与签名算法、透明日志、撤销分发、跨生产者时钟归并、隐私策略和规范字节仍需真实消费者与新 Profile。</p></details>
     <details><summary>mene 时间怎样进入未来 Profile？</summary><p>ADR-0016 已决定 fixed/elapsed、strict/budgeted 与覆盖结果；字段编号、数值宽度、亚秒精度、闰秒、循环日历、时区数据库封装、跨重启关联和多生产者归并仍保持开放。</p></details>

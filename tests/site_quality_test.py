@@ -1134,6 +1134,12 @@ def validate_jekyll_sources():
             "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
             "不创建新制品、文件格式、扩展名、命令、组件或稳定接口",
             "无模型、无检索或纯确定性路径直接省略",
+            "候选责任的唯一主归属",
+            "可证伪的同权威冲突案例",
+            "供应商不可观察变换案例",
+            "威胁到责任的映射",
+            "失败域与结果隔离",
+            "等待决定",
             "model-context-assembly-proposal.md",
         ):
             if token not in proposal_text and token not in (SOURCE_ROOT / "spec" / "README.md").read_text():
