@@ -1123,6 +1123,32 @@ def validate_jekyll_sources():
         dependabot = SOURCE_ROOT / ".github" / "dependabot.yml"
         if not dependabot.exists() or "package-ecosystem: github-actions" not in dependabot.read_text():
             errors.append("Dependabot must track immutable GitHub Actions pins")
+
+    context_proposal = SOURCE_ROOT / "spec" / "model-context-assembly-proposal.md"
+    if not context_proposal.exists():
+        errors.append("missing non-normative model context assembly research proposal")
+    else:
+        proposal_text = context_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
+            "不创建新制品、文件格式、扩展名、命令、组件或稳定接口",
+            "无模型、无检索或纯确定性路径直接省略",
+            "model-context-assembly-proposal.md",
+        ):
+            if token not in proposal_text and token not in (SOURCE_ROOT / "spec" / "README.md").read_text():
+                errors.append(f"model context proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if "model-context-assembly" in registry_text:
+            errors.append("non-normative model context proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+        ):
+            if "spec/model-context-assembly-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the model context research proposal"
+                )
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
     registered = sorted(set(registry) | set(read_manual_source_routes()))
