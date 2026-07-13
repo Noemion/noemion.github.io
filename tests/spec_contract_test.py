@@ -795,6 +795,9 @@ def validate_public_boundary(errors):
             "ADP-CORE 0.1.0-draft",
             "MCP 2025-11-25",
             "2026-07-28",
+            "5 月 21 日",
+            "尚未成为当前规范",
+            "不作为当前符合性基线",
             "A2A 1.0",
             "RFC 9110",
             "GNU BFD",
@@ -944,6 +947,8 @@ def validate_public_boundary(errors):
             "P1-W1 安全核心",
             "尚未开始",
             "等待用户明确开启代码开发阶段",
+            "5 月 21 日",
+            "不作为当前符合性基线",
         ),
     }
     for relative_path, tokens in public_contracts.items():

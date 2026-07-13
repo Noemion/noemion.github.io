@@ -1616,6 +1616,8 @@ def validate_jekyll_sources():
         ),
         "development/implementation-roadmap.html": (
             "补丁号不进入协议协商",
+            "5 月 21 日",
+            "不作为当前符合性基线",
             "任何后续正式版本",
             "默认脱敏的导出器",
             "不进入 Endem 编码、Tekmor 身份或最终决定",

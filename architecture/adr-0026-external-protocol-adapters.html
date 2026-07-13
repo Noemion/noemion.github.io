@@ -17,7 +17,7 @@ permalink: "/architecture/adr-0026-external-protocol-adapters.html"
 
   <section class="content-wide">
     <h2>为什么现在只冻结抽象不变量</h2>
-    <p>截至 2026 年 7 月 13 日，MCP 2025-11-25 仍是稳定基线，2026-07-28 是包含破坏性变化的候选版本。候选版把核心改为无状态并把 Tasks 移到扩展，说明握手、会话与任务字段仍在快速变化。A2A 最新发布规范已经进入 1.0，但它的 Task、Message、Artifact 和 Agent Card 仍属于外部协议对象。</p>
+    <p>截至 2026 年 7 月 13 日，MCP 官方版本说明仍把 2025-11-25 标为 Current。官方已于 5 月 21 日锁定并公开以计划最终发布日期命名的 2026-07-28 候选版；它尚未成为当前规范，最终版计划于 7 月 28 日发布。候选版把核心改为无状态并把 Tasks 移到扩展，说明握手、会话与任务字段仍在快速变化。A2A 最新发布规范已经进入 1.0，但它的 Task、Message、Artifact 和 Agent Card 仍属于外部协议对象。</p>
     <p>因此 ADP-CORE 冻结版本、身份、能力、状态、取消、重试和交付边界，不冻结具体 JSON、Protocol Buffers、SSE 或 SDK 字段。未来每个协议 Profile 必须绑定精确稳定版本和真实消费者。</p>
   </section>
 
@@ -61,8 +61,8 @@ permalink: "/architecture/adr-0026-external-protocol-adapters.html"
   <section class="content-wide">
     <h2>权威资料与采用限制</h2>
     <ul>
-      <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/changelog">MCP 2025-11-25 规范变更记录</a>提供当前稳定版本基线。</li>
-      <li><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">MCP 2026-07-28 候选版说明</a>展示无状态核心、扩展与授权变化；项目只把它作为版本漂移证据。</li>
+      <li><a href="https://modelcontextprotocol.io/docs/learn/versioning">MCP 版本说明</a>与<a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 规范</a>确认当前规范状态与日期版本规则。</li>
+      <li><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">MCP 2026-07-28 候选版说明（2026-05-21 发布）</a>说明该候选版已经锁定、最终版计划于 7 月 28 日发布，并展示无状态核心、扩展与授权变化；项目只把它作为版本漂移证据，不作为当前符合性基线。</li>
       <li><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a>定义 Agent Card、Task、Message 与 Artifact；这些对象保持在外部状态域。</li>
       <li><a href="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110 HTTP Semantics</a>提供幂等与自动重试边界；Noemion 进一步要求共享会话预算和调用身份。</li>
       <li><a href="https://sourceware.org/binutils/docs/bfd/Canonical-format.html">GNU BFD canonical format 说明</a>揭示统一映射可能丢失信息；Noemion 因而要求显式损失清单。</li>
