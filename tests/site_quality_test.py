@@ -266,6 +266,7 @@ CONTENT_LAYOUT_ROUTES = (
     "about/intellectual-foundations.html",
     "architecture/endem-lifecycle.html",
     "architecture/decisions.html",
+    "architecture/agent-system-boundaries.html",
     "architecture/adr-0008-endem-system.html",
     "architecture/adr-0009-propositional-kernel.html",
     "architecture/adr-0010-native-lexicon.html",
@@ -358,6 +359,7 @@ REMOVED_PUBLIC_ROUTES = {
 
 REQUIRED_ARCHITECTURE_ROUTES = {
     "architecture/decisions.html": "architecture/index.html",
+    "architecture/agent-system-boundaries.html": "architecture/index.html",
     "components/drasor.html": "components/index.html",
 }
 
@@ -390,6 +392,29 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "Iknem 证据与评估",
             "ADR-0015",
             "判断与运行结果分层",
+        ),
+    },
+    "architecture/agent-system-boundaries.html": {
+        "required": (
+            "Non-normative Guide",
+            "三种成熟度不得混写",
+            "一次运行怎样穿过边界",
+            "运行事实应该放在哪里",
+            "六条最危险的越级路径",
+            "当前 Agent 技术趋势改变了什么",
+            "GNU 技术提供的四个约束",
+            "什么时候才值得增加新对象",
+            "六项研究怎样回到现有规范",
+            "模型输出是候选，不是规范内容",
+            "旧 Dromen、秘密或权限",
+            "Task 完成，也不证明目标满足",
+            "等待决定",
+            "不增加 ADR、CORE、Profile、对象、命令或组件",
+        ),
+        "forbidden_patterns": (
+            r"handoff.*自动.*(?:授权|权限)",
+            r"Task.*completed.*(?:等于|成为).*met",
+            r"检查点(?:能够|可以|会)恢复旧 Dromen",
         ),
     },
     "components/ktisor.html": {
@@ -1466,6 +1491,54 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the memory and resumption research proposal"
                 )
+
+    agent_boundaries = SOURCE_ROOT / "architecture" / "agent-system-boundaries.html"
+    if not agent_boundaries.exists():
+        errors.append("missing public Agent system boundary guide")
+    else:
+        boundary_text = agent_boundaries.read_text()
+        for token in (
+            "三种成熟度不得混写",
+            "运行事实应该放在哪里",
+            "六条最危险的越级路径",
+            "当前 Agent 技术趋势改变了什么",
+            "GNU 技术提供的四个约束",
+            "六项研究怎样回到现有规范",
+            "2025-11-25",
+            "2026-07-28",
+            "A2A 1.0 版本化规范",
+            "OpenAI Agents SDK handoffs",
+            "OpenAI Agents SDK human-in-the-loop",
+            "OpenAI Agents SDK sessions",
+            "OpenAI Agents SDK tracing",
+            "Make target、prerequisite 与 recipe",
+            "Guix profile generations",
+        ):
+            if token not in boundary_text:
+                errors.append(f"Agent boundary guide missing cross-domain contract: {token}")
+        for proposal_name in (
+            "model-context-assembly-proposal.md",
+            "planning-and-replanning-proposal.md",
+            "state-change-and-causal-attribution-proposal.md",
+            "preview-simulation-and-approval-proposal.md",
+            "memory-checkpoint-and-resumption-proposal.md",
+            "semantic-equivalence-and-migration-proposal.md",
+        ):
+            if proposal_name not in boundary_text:
+                errors.append(f"Agent boundary guide must link research input: {proposal_name}")
+        for public_source in (
+            SOURCE_ROOT / "architecture" / "index.html",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "docs" / "architecture-guide.md",
+            SOURCE_ROOT / "development" / "implementation-roadmap.html",
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "sitemap.md",
+            SOURCE_ROOT / "_data" / "navigation.yml",
+        ):
+            if "agent-system-boundaries" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the Agent system boundary guide"
+                )
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
     registered = sorted(set(registry) | set(read_manual_source_routes()))
@@ -1487,6 +1560,35 @@ def validate_jekyll_sources():
         errors.append("sitemap.md contains duplicate HTML routes")
     if registered != source_routes:
         errors.append("sitemap.md routes do not exactly match Jekyll source pages")
+
+    content_audit = SOURCE_ROOT / "content-quality-audit.md"
+    if not content_audit.exists():
+        errors.append("missing content-quality-audit.md")
+    else:
+        audit_text = content_audit.read_text()
+        inventory_match = re.search(
+            r"## 公共页面结构审计.*?\n(.*?)\n## 全站逐页可读性复核",
+            audit_text,
+            re.DOTALL,
+        )
+        if inventory_match is None:
+            errors.append("content quality audit missing bounded HTML source inventory")
+        else:
+            audit_rows = re.findall(r"\| `([^`]+\.html)` \|", inventory_match.group(1))
+            audited_pages = [row for row in audit_rows if not row.startswith("_")]
+            expected_pages = [path.relative_to(SOURCE_ROOT).as_posix() for path in SOURCE_HTML_FILES]
+            if len(audited_pages) != len(set(audited_pages)):
+                errors.append("content quality audit contains duplicate HTML page rows")
+            if set(audited_pages) != set(expected_pages):
+                errors.append(
+                    "content quality audit HTML inventory mismatch: "
+                    f"missing={sorted(set(expected_pages) - set(audited_pages))}, "
+                    f"extra={sorted(set(audited_pages) - set(expected_pages))}"
+                )
+        if f"当前共有 {len(SOURCE_HTML_FILES)} 个 HTML 正文源" not in audit_text:
+            errors.append("content quality audit HTML source count is stale")
+        if f"登记的 {len(registered)} 条正式路由" not in audit_text:
+            errors.append("content quality audit formal route count is stale")
     missing_core_routes = sorted(REQUIRED_CORE_ROUTES - set(source_routes))
     if missing_core_routes:
         errors.append(f"missing required Endem topology routes: {missing_core_routes}")
@@ -1758,6 +1860,7 @@ def validate_jekyll_sources():
             "background:color-mix(in srgb,var(--nav-bg) 78%,var(--accent-soft))",
             ".content-split{",
             ".content-split-reverse{",
+            'body[data-page-role="content"]:not([data-docs-layout="true"]) main:not(.current-stage-page)>section :is(p,li,blockquote)',
             ".content-stack",
             ".content-band{",
             ".content-wide",
@@ -3107,6 +3210,7 @@ def main():
                 ["about/intellectual-foundations.html", "project"],
                 ["architecture/endem-lifecycle.html", "architecture"],
                 ["architecture/decisions.html", "architecture"],
+                ["architecture/agent-system-boundaries.html", "architecture"],
                 ["specifications/endem.html", "architecture"],
                 ["components/ktisor.html", "architecture"],
                 ["components/theor.html", "architecture"],

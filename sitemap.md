@@ -21,6 +21,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Architecture](https://noemion.github.io/architecture/index.html) — system layers, artifact lifecycle, and trust boundaries
 - [Endem lifecycle](https://noemion.github.io/architecture/endem-lifecycle.html) — source, deterministic formation, closure, evidence, loading, and execution boundaries
 - [Architecture decisions](https://noemion.github.io/architecture/decisions.html) — accepted responsibility boundaries and explicitly unfrozen interfaces
+- [Agent system boundaries](https://noemion.github.io/architecture/agent-system-boundaries.html) — accepted constraints, non-normative research, and external runtime facts kept in separate authority domains
 - [ADR-0008](https://noemion.github.io/architecture/adr-0008-endem-system.html) — superseded record of the earlier artifact and application topology
 - [ADR-0009](https://noemion.github.io/architecture/adr-0009-propositional-kernel.html) — superseded record of the earlier propositional projection
 - [ADR-0010](https://noemion.github.io/architecture/adr-0010-native-lexicon.html) — current native lexicon, six semantic facets, and situation/goal/evidence separation

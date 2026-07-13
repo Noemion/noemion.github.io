@@ -90,6 +90,7 @@ modules:
           - { href: /architecture/index.html, label: 架构设计总览 }
           - { href: /architecture/endem-lifecycle.html, label: Endem 生命周期 }
           - { href: /architecture/decisions.html, label: 架构决策 }
+          - { href: /architecture/agent-system-boundaries.html, label: Agent 系统边界图 }
           - { href: /architecture/adr-0008-endem-system.html, label: "ADR-0008 · Endem 体系" }
           - { href: /architecture/adr-0009-propositional-kernel.html, label: "ADR-0009 · 命题投影" }
           - { href: /architecture/adr-0010-native-lexicon.html, label: "ADR-0010 · 原生词汇与事态" }

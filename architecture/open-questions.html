@@ -40,6 +40,7 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-grid">
     <h2>Dromen、Drasor 与 Iknem</h2>
+    <p>这些横切问题的已接受边界、等待决定研究和外部运行事实集中在<a href="agent-system-boundaries.html">Agent 系统边界图</a>。以下条目继续保存尚未关闭的具体决定。</p>
     <details open><summary>Dromen 的运行 API 和平台隔离怎样实现？</summary><p>DRO-CORE 已固定主体、政策、环境、能力、秘密、预算、激活、观察、只读与销毁边界。未来仍需在代码阶段选择进程模型、沙箱组合、凭据代理、事件编码、预算计数器与销毁机制，并用平台级对抗证据证明，而不是把 Linux、容器或模型 SDK 名称当作隔离结论。</p></details>
     <details><summary>模型上下文怎样装配而不让数据取得指令权？</summary><p>TEXT-IDENTIFIER、AUT、ADP 与 DRO 已分别约束模型实际输入、授权、外部来源和会话上限，但尚未统一输入选择、角色、顺序、截断、缓存和损失。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">非规范研究提案</a>已经补齐十四个案例、唯一责任归属、八类威胁和失败域矩阵，主张由控制平面形成可审计装配说明，并把未来条款归还现有规范。它不创建新制品、命令、组件或哲学专名；在用户明确接受设计前仍不进入 ADR、CORE、登记或向量。</p></details>
     <details><summary>目标、计划和重规划怎样分开？</summary><p>Endem/Synem 固定终态，Dromen 固定会话上限，计划只是在上限内可变的控制平面状态。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/planning-and-replanning-proposal.md">非规范目标、计划与重规划研究提案</a>用十二个案例、重规划矩阵和十类威胁说明：步骤、handoff、MCP/A2A Task 和工具完成都不能直接成为目标满足或最终接受。它不创建计划制品、命令、组件或 CORE；在用户接受责任分配前不进入登记或向量。</p></details>

@@ -1640,6 +1640,7 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
   .project-timeline-block{padding:50px 40px 56px}
   body[data-site-module="support"] .faq-list>section{padding:44px 40px}
   body[data-page-role="content"]:not([data-docs-layout="true"]) main>section>:is(p,ul,ol,blockquote),
+  body[data-page-role="content"]:not([data-docs-layout="true"]) main:not(.current-stage-page)>section :is(p,li,blockquote),
   body[data-page-role="tool-project"] .tool-project-body>section:not(:nth-of-type(2))>:is(p,ul,ol,blockquote),
   .manual-article>:is(p,ul,ol,blockquote){font-size:17px;line-height:1.74}
   .news-ledger{margin-right:-40px;margin-left:-40px}

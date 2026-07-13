@@ -77,7 +77,7 @@ badges: ["Documentation"]
 
 - `index.html`：项目门户，概括定位、能力、状态和主要入口。
 - `about/`：项目背景、动机、范围、非目标，以及思想与方法基础的采用边界。
-- `architecture/`：系统关系、Endem 生命周期、信任边界和开放问题；正式生命周期入口是 `/architecture/endem-lifecycle.html`。
+- `architecture/`：系统关系、Endem 生命周期、Agent 运行事实边界、信任边界和开放问题；生命周期入口是 `/architecture/endem-lifecycle.html`，跨层 Agent 入口是 `/architecture/agent-system-boundaries.html`。
 - `specifications/`：Endem、Synem、Dromen、Iknem 与跨对象边界的权威规范和成熟度入口；目录页统一列出对象、诊断、适配、身份、文本以及权威与授权决定规范的正式路由。
 - `spec/` 与 `vectors/`：实现可逐条引用的规范源、Profile、机器可读登记、语义外壳和实验字节向量；它们不生成并列 Pages 路由，也不冒充稳定 ABI。
 - `experiments/`：历史、非生产且当前冻结的语言研究材料；P0-W4 在这里保存彼此独立的 C/Rust 读取原型与既有结果。目录不生成 Pages 路由，当前不自动运行或扩展这些实验，公开页面只总结历史结果及其限制。
