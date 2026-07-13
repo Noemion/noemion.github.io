@@ -96,6 +96,16 @@ permalink: "/components/praxor.html"
   </section>
 
   <section class="content-wide">
+    <h2>测量判断责任</h2>
+    <ul>
+      <li>装载时重新核对构念、总体、方法与版本、窗口、单位、换算、纳入规则、最小样本、聚合器、阈值和不确定度政策。</li>
+      <li>保留原始观察到规范单位、聚合结果和阈值分类的完整 Tekmor 链；不得用显示舍入值、排名或模型置信度替换判断依据。</li>
+      <li>固定基准只能支持固定项目；推广结论必须使用预注册统计模型。区间跨越阈值为 <code>agno</code>，测量契约故障为 <code>fault</code>。</li>
+      <li>当前没有采集器、统计引擎或测量求值器；这些只是 ADR-0019 规定的未来 Praxor 责任边界。</li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
     <h2>失败与拒绝责任</h2>
     <div class="table-wrap"><table><thead><tr><th>失败</th><th>Praxor 必须记录</th><th>后续状态</th></tr></thead><tbody>
       <tr><td>Load rejected</td><td>对象身份、失败层、规则和位置</td><td>会话 <code>failed</code>；不创建 Dromen，也不伪造满足结果。</td></tr>
@@ -109,7 +119,7 @@ permalink: "/components/praxor.html"
 
   <section class="content-band">
     <h2>当前成熟度与未冻结接口</h2>
-    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、Tekmor 不等于验收、结果域分离、mene 时钟以及否定观察责任已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、时间和封闭声明字段、预算单位、事件编码和决定类 Tekmor 尚未冻结。</p>
+    <p>隔离权限域、Dromen 非文件、后端不可信、能力句柄隔离、Tekmor 不等于验收、结果域分离、mene 时钟、否定观察、量化聚合以及测量判断责任已经采用。运行策略、Dromen 接口、能力请求与观察、运行记录、沙箱、时间、封闭与测量声明字段、预算单位、事件编码和决定类 Tekmor 尚未冻结。</p>
   </section>
   <div class="next-prev"><a href="theor.html">← Theor</a><a href="../architecture/endem-lifecycle.html">Endem 生命周期 →</a></div>
 </main>

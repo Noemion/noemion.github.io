@@ -1,0 +1,91 @@
+{
+  "vector_format": "noemion.measurement-vector-v1",
+  "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "description": "Measurement and threshold proposal vectors for ADR-0019; not a telemetry collector, benchmark runner, statistical engine, Praxor, evaluator, or component implementation",
+  "cases": [
+    {
+      "id": "MV-VALID-P95-LATENCY-MET-001",
+      "target": {"construct": {"id": "request-latency", "relation": "responds_within", "value_role": "duration", "authority": "service-owner", "scope": "successful-production-requests"}, "procedure": {"id": "latency-p95", "producer": "telemetry-authority", "version": "1", "population": "fixed", "window": "release-window", "inclusion": "completed-successful-requests", "exclusion": "cancelled-before-dispatch", "unit": "ms", "dimension": "time", "reducer": {"mode": "quantile", "q": 0.95, "method": "nearest-rank", "max_error": 0}, "min_count": 100, "missing": "agno"}, "comparison": {"op": "le", "threshold": {"value": 300, "unit": "ms"}, "rounding": "none", "uncertainty": "interval"}},
+      "observation": {"status": "complete", "count": 1200, "value": 280, "unit": "ms", "interval": [275, 285]},
+      "proposed_result": "met",
+      "expect": {"result": "accept", "clause": "END-MSR-004"}
+    },
+    {
+      "id": "MV-VALID-P95-LATENCY-UNMET-001",
+      "target": {"construct": {"id": "request-latency", "relation": "responds_within", "value_role": "duration", "authority": "service-owner", "scope": "successful-production-requests"}, "procedure": {"id": "latency-p95", "producer": "telemetry-authority", "version": "1", "population": "fixed", "window": "release-window", "inclusion": "completed-successful-requests", "exclusion": "cancelled-before-dispatch", "unit": "ms", "dimension": "time", "reducer": {"mode": "quantile", "q": 0.95, "method": "nearest-rank", "max_error": 0}, "min_count": 100, "missing": "agno"}, "comparison": {"op": "le", "threshold": {"value": 300, "unit": "ms"}, "rounding": "none", "uncertainty": "interval"}},
+      "observation": {"status": "complete", "count": 1200, "value": 315, "unit": "ms", "interval": [310, 320]},
+      "proposed_result": "unmet",
+      "expect": {"result": "accept", "clause": "END-MSR-004"}
+    },
+    {
+      "id": "MV-VALID-FIXED-BENCHMARK-MET-001",
+      "target": {"construct": {"id": "fixed-benchmark-accuracy", "relation": "scores_at_least", "value_role": "accuracy", "authority": "evaluation-owner", "scope": "benchmark-v3-items"}, "procedure": {"id": "benchmark-fraction", "producer": "evaluation-authority", "version": "3", "population": "fixed", "window": "evaluation-run-42", "inclusion": "all-preregistered-items-and-trials", "exclusion": "none", "unit": "1", "dimension": "dimensionless", "reducer": {"mode": "fraction", "numerator": "successful-trials", "denominator": "all-valid-trials"}, "min_count": 500, "missing": "agno"}, "comparison": {"op": "ge", "threshold": {"value": 0.8, "unit": "1"}, "rounding": "none", "uncertainty": "interval"}},
+      "observation": {"status": "complete", "count": 800, "value": 0.84, "unit": "1", "interval": [0.82, 0.86]},
+      "proposed_result": "met",
+      "expect": {"result": "accept", "clause": "END-MSR-004"}
+    },
+    {
+      "id": "MV-VALID-GENERALIZED-OVERLAP-AGNO-001",
+      "target": {"construct": {"id": "generalized-task-accuracy", "relation": "scores_at_least", "value_role": "accuracy", "authority": "evaluation-owner", "scope": "declared-item-superpopulation"}, "procedure": {"id": "generalized-accuracy-model", "producer": "evaluation-authority", "version": "2", "population": "generalized", "statistical_model": "registered-glmm-v2", "assumptions": "items-and-trials-hierarchical", "window": "evaluation-run-43", "inclusion": "all-preregistered-items-and-trials", "exclusion": "none", "unit": "1", "dimension": "dimensionless", "reducer": {"mode": "model_estimate", "estimand": "generalized-accuracy"}, "min_count": 500, "missing": "agno"}, "comparison": {"op": "ge", "threshold": {"value": 0.8, "unit": "1"}, "rounding": "none", "uncertainty": "interval"}},
+      "observation": {"status": "complete", "count": 800, "value": 0.8, "unit": "1", "interval": [0.78, 0.82]},
+      "proposed_result": "agno",
+      "expect": {"result": "accept", "clause": "END-MSR-004"}
+    },
+    {
+      "id": "MV-VALID-INCOMPLETE-DATA-AGNO-001",
+      "target": {"construct": {"id": "request-latency", "relation": "responds_within", "value_role": "duration", "authority": "service-owner", "scope": "successful-production-requests"}, "procedure": {"id": "latency-mean", "producer": "telemetry-authority", "version": "1", "population": "fixed", "window": "release-window", "inclusion": "completed-successful-requests", "exclusion": "cancelled-before-dispatch", "unit": "ms", "dimension": "time", "reducer": {"mode": "arithmetic_mean", "weighting": "one-per-request"}, "min_count": 100, "missing": "agno"}, "comparison": {"op": "le", "threshold": {"value": 200, "unit": "ms"}, "rounding": "none", "uncertainty": "interval"}},
+      "observation": {"status": "incomplete", "count": 80, "value": 180, "unit": "ms", "interval": [175, 185]},
+      "proposed_result": "agno",
+      "expect": {"result": "accept", "clause": "END-MSR-003"}
+    },
+    {
+      "id": "MV-VALID-PROCEDURE-FAULT-001",
+      "target": {"construct": {"id": "request-latency", "relation": "responds_within", "value_role": "duration", "authority": "service-owner", "scope": "successful-production-requests"}, "procedure": {"id": "latency-mean", "producer": "telemetry-authority", "version": "1", "population": "fixed", "window": "release-window", "inclusion": "completed-successful-requests", "exclusion": "cancelled-before-dispatch", "unit": "ms", "dimension": "time", "reducer": {"mode": "arithmetic_mean", "weighting": "one-per-request"}, "min_count": 100, "missing": "agno"}, "comparison": {"op": "le", "threshold": {"value": 200, "unit": "ms"}, "rounding": "none", "uncertainty": "interval"}},
+      "observation": {"status": "fault", "count": 0, "unit": "ms"},
+      "proposed_result": "fault",
+      "expect": {"result": "accept", "clause": "END-MSR-003"}
+    },
+    {
+      "id": "MV-REJECT-CONSTRUCT-AUTHORITY-MISSING-001",
+      "target": {"construct": {"id": "request-latency", "relation": "responds_within", "value_role": "duration", "scope": "production-requests"}, "procedure": {"id": "latency-mean", "producer": "telemetry-authority", "version": "1", "population": "fixed", "window": "release-window", "inclusion": "all", "exclusion": "none", "unit": "ms", "dimension": "time", "reducer": {"mode": "arithmetic_mean", "weighting": "one-per-request"}, "min_count": 1, "missing": "agno"}, "comparison": {"op": "le", "threshold": {"value": 200, "unit": "ms"}, "rounding": "none", "uncertainty": "interval"}},
+      "observation": {"status": "complete", "count": 10, "value": 180, "unit": "ms", "interval": [180, 180]},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-MSR-001"}
+    },
+    {
+      "id": "MV-REJECT-GENERALIZED-WITHOUT-MODEL-001",
+      "target": {"construct": {"id": "generalized-task-accuracy", "relation": "scores_at_least", "value_role": "accuracy", "authority": "evaluation-owner", "scope": "item-superpopulation"}, "procedure": {"id": "benchmark-fraction", "producer": "evaluation-authority", "version": "1", "population": "generalized", "window": "evaluation-run", "inclusion": "all-items", "exclusion": "none", "unit": "1", "dimension": "dimensionless", "reducer": {"mode": "fraction", "numerator": "success", "denominator": "trials"}, "min_count": 100, "missing": "agno"}, "comparison": {"op": "ge", "threshold": {"value": 0.8, "unit": "1"}, "rounding": "none", "uncertainty": "interval"}},
+      "observation": {"status": "complete", "count": 100, "value": 0.85, "unit": "1", "interval": [0.8, 0.9]},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-MSR-001"}
+    },
+    {
+      "id": "MV-REJECT-INCOMPATIBLE-UNIT-001",
+      "target": {"construct": {"id": "request-latency", "relation": "responds_within", "value_role": "duration", "authority": "service-owner", "scope": "requests"}, "procedure": {"id": "latency-point", "producer": "telemetry-authority", "version": "1", "population": "fixed", "window": "request-1", "inclusion": "request-1", "exclusion": "none", "unit": "ms", "dimension": "time", "reducer": {"mode": "point"}, "min_count": 1, "missing": "agno"}, "comparison": {"op": "le", "threshold": {"value": 300, "unit": "byte"}, "rounding": "none", "uncertainty": "interval"}},
+      "observation": {"status": "complete", "count": 1, "value": 250, "unit": "ms", "interval": [250, 250]},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-MSR-002"}
+    },
+    {
+      "id": "MV-REJECT-PRECOMPARISON-ROUNDING-001",
+      "target": {"construct": {"id": "accuracy", "relation": "scores_at_least", "value_role": "accuracy", "authority": "evaluation-owner", "scope": "benchmark"}, "procedure": {"id": "accuracy-fraction", "producer": "evaluation-authority", "version": "1", "population": "fixed", "window": "run", "inclusion": "all", "exclusion": "none", "unit": "1", "dimension": "dimensionless", "reducer": {"mode": "fraction", "numerator": "success", "denominator": "trials"}, "min_count": 10, "missing": "agno"}, "comparison": {"op": "ge", "threshold": {"value": 0.8, "unit": "1"}, "rounding": {"stage": "before-comparison", "mode": "half-up", "digits": 1}, "uncertainty": "interval"}},
+      "observation": {"status": "complete", "count": 100, "value": 0.76, "unit": "1", "interval": [0.75, 0.77]},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-MSR-002"}
+    },
+    {
+      "id": "MV-REJECT-QUANTILE-METHOD-MISSING-001",
+      "target": {"construct": {"id": "request-latency", "relation": "responds_within", "value_role": "duration", "authority": "service-owner", "scope": "requests"}, "procedure": {"id": "latency-p95", "producer": "telemetry-authority", "version": "1", "population": "fixed", "window": "release-window", "inclusion": "all", "exclusion": "none", "unit": "ms", "dimension": "time", "reducer": {"mode": "quantile", "q": 0.95, "max_error": 5}, "min_count": 100, "missing": "agno"}, "comparison": {"op": "le", "threshold": {"value": 300, "unit": "ms"}, "rounding": "none", "uncertainty": "interval"}},
+      "observation": {"status": "complete", "count": 100, "value": 290, "unit": "ms", "interval": [285, 295]},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-MSR-003"}
+    },
+    {
+      "id": "MV-REJECT-UNCERTAINTY-POLICY-MISSING-001",
+      "target": {"construct": {"id": "accuracy", "relation": "scores_at_least", "value_role": "accuracy", "authority": "evaluation-owner", "scope": "benchmark"}, "procedure": {"id": "accuracy-fraction", "producer": "evaluation-authority", "version": "1", "population": "fixed", "window": "run", "inclusion": "all", "exclusion": "none", "unit": "1", "dimension": "dimensionless", "reducer": {"mode": "fraction", "numerator": "success", "denominator": "trials"}, "min_count": 10, "missing": "agno"}, "comparison": {"op": "ge", "threshold": {"value": 0.8, "unit": "1"}, "rounding": "none"}},
+      "observation": {"status": "complete", "count": 100, "value": 0.81, "unit": "1", "interval": [0.77, 0.85]},
+      "proposed_result": "met",
+      "expect": {"result": "reject", "clause": "END-MSR-004"}
+    }
+  ]
+}

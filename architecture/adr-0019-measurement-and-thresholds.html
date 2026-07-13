@@ -1,0 +1,99 @@
+---
+layout: default
+title: "ADR-0019 测量谓词与阈值契约"
+page_role: "content"
+footer_text: "Noemion · ADR-0019"
+permalink: "/architecture/adr-0019-measurement-and-thresholds.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0019</span></nav>
+  <header class="content-introduction"><h1>ADR-0019<br>测量谓词<br>阈值契约</h1><p>让每个分数和阈值都能回答测量什么、测量谁、怎样聚合、误差多大以及边界怎样比较，避免仪表盘或 AI 基准用不同口径制造确定性。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">Measurement Semantics</span><span class="badge">No Wire Schema Change</span><span class="badge">No Component Code</span></div></header>
+
+  <section class="content-band">
+    <h2>直接结论</h2>
+    <p class="lead">“响应时间合理”“准确率至少 80%”还不是可判断目标。一个测量谓词必须同时固定构念、可观察标准、总体、程序、窗口、单位、聚合器、最小样本、不确定度和比较器。</p>
+    <p>本决定只冻结抽象 <code>krin</code> 语义，不给 END-P1 增加字段，也不表示遥测采集器、基准运行器、统计引擎、Praxor 或求值器已经实现。统计模型登记、单位词典、复合观察表达式和物理编码仍需后续 Profile。</p>
+  </section>
+
+  <section class="content-band">
+    <h2>语言哲学提供判定问题</h2>
+    <blockquote><p>“理解一个命题意味着知道若命题为真事情该是怎样的。”</p><cite>路德维希·维特根斯坦《逻辑哲学论》4.024</cite></blockquote>
+    <p>对测量目标而言，知道“为真时怎样”就要求在观察前规定总体、方法、单位和边界。5.153—5.156 又把事件本身的发生与我们在不确定条件下形成的概率概括分开。这提醒项目不能把点估计、概率或置信标签直接写成事态。</p>
+    <p>这些命题只揭示判定条件与事实不可混同，不推出统计公式、单位系统或置信区间政策。工程规则仍由 END-CORE、权威决定和可复核证据定义。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>一个完整例子</h2>
+    <p>“发布窗口内成功请求的 p95 响应时间不高于 300 毫秒”首先要固定请求总体、失败与取消处理、窗口起止和延迟事件边界。</p>
+    <p>它还要固定 p95 的排序或插值方法、最少样本、估计误差，以及 300ms 是否包含边界。</p>
+    <p>如果有效不确定区间是 275–285ms，可以判断 <code>met</code>；若是 310–320ms，可以判断 <code>unmet</code>；若是 295–305ms，只能判断 <code>agno</code>。把显示值四舍五入为 300ms 不能改变结果。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>测量契约的四层</h2>
+    <div class="table-wrap"><table><thead><tr><th>层</th><th>必须固定</th><th>阻止的偷换</th></tr></thead><tbody>
+      <tr><td>构念与总体</td><td>关系、值角色、抽象构念、直接可观察标准、适用主体、固定或泛化总体、用途和权威</td><td>代理任务冒充目标能力，固定基准推广到未见总体</td></tr>
+      <tr><td>数值与单位</td><td>有限数值域、量纲、规范与观察单位、换算版本、定义域、误差和显示舍入</td><td>百分数与比例混淆，非线性逆变换，比较前舍入</td></tr>
+      <tr><td>程序与聚合</td><td>生产者、版本、窗口、纳入排除、最小样本、缺失处理、聚合器和算法参数</td><td>平均值换成 p95，删除失败记录，移动窗口或更换分桶</td></tr>
+      <tr><td>比较与不确定度</td><td><code>lt/le/gt/ge/eq</code>、阈值、单位、区间方法和证据链接</td><td>隐藏误差条，只看点估计，混同 <code>&lt;</code> 与 <code>&lt;=</code></td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>固定基准与泛化判断必须分开</h2>
+    <div class="table-wrap"><table><thead><tr><th>结果</th><th>它实际回答什么</th><th>额外要求</th></tr></thead><tbody>
+      <tr><td><code>fixed</code></td><td>系统在已登记题目、样本或观察上的表现</td><td>固定数据身份、试验次数、评分程序和随机性来源</td></tr>
+      <tr><td><code>generalized</code></td><td>系统对声明的潜在项目总体的估计表现</td><td>总体与抽样假设、estimand、预注册统计模型、估计器和不确定度</td></tr>
+    </tbody></table></div>
+    <p>固定基准准确率和泛化准确率可以数值接近，却回答不同问题并量化不同来源的不确定性。模型排名、单次平均分或裁判模型置信度不能自动完成这一转换。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>第一阶段允许的聚合器</h2>
+    <div class="table-wrap"><table><thead><tr><th>聚合器</th><th>附加义务</th></tr></thead><tbody>
+      <tr><td><code>point / count / sum / min / max</code></td><td>固定观察身份、窗口和数值域；累计量还要固定重置与重叠规则</td></tr>
+      <tr><td><code>arithmetic_mean</code></td><td>固定权重、分母、缺失和删失处理</td></tr>
+      <tr><td><code>fraction</code></td><td>固定分子谓词、分母总体和零分母政策</td></tr>
+      <tr><td><code>quantile</code></td><td>固定 q、排序或插值算法、分桶或摘要来源和最大误差</td></tr>
+      <tr><td><code>model_estimate</code></td><td>固定 estimand、模型、假设、拟合版本和不确定度方法</td></tr>
+    </tbody></table></div>
+    <p>这是一组抽象登记类别，不是表达式语言或统计库接口。未登记的自定义公式必须保留在 <code>apor</code>，不能以自由文本结果进入确定判断。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>结果矩阵</h2>
+    <div class="table-wrap"><table><thead><tr><th>证据状态</th><th>结果</th><th>原因</th></tr></thead><tbody>
+      <tr><td>有效区间完全位于满足一侧</td><td><code>met</code></td><td>方法、总体、单位、样本和比较均完整</td></tr>
+      <tr><td>有效区间完全位于反驳一侧</td><td><code>unmet</code></td><td>观察足以反驳阈值目标</td></tr>
+      <tr><td>区间跨边界、样本不足或数据不完整</td><td><code>agno</code></td><td>现有证据不能确定目标在边界哪一侧</td></tr>
+      <tr><td>采集、换算、统计或比较程序违反契约</td><td><code>fault</code></td><td>求值没有按声明程序完成</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>AI 评估与现有工具的证据</h2>
+    <ul>
+      <li><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf">NIST AI 800-2 Initial Public Draft</a>把评估目的、测量构念、直接可观察标准、测量工具和结果用途分开。它代表 2026 年正在形成的实践，不是 Noemion 的字段标准。</li>
+      <li><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-3.pdf">NIST AI 800-3</a>区分固定基准准确率与泛化准确率，并要求让 estimand、统计假设和不确定度显式。Noemion 采用这项边界，不采用某个 GLMM 作为唯一算法。</li>
+      <li><a href="https://opentelemetry.io/docs/specs/otel/metrics/data-model/">OpenTelemetry Metrics 数据模型</a>把单位、数据点类型、时间窗口、temporality、分桶边界和无记录值作为有语义的属性；同一事件可以形成不同 View，因此遥测流本身不选择 <code>krin</code>。</li>
+      <li><a href="https://prometheus.io/docs/practices/histograms/">Prometheus 直方图与摘要指南</a>说明分位数算法、窗口、分桶分辨率和聚合能力会改变结果及误差。仪表盘查询不能事后替换已授权方法。</li>
+      <li><a href="https://www.gnu.org/software/units/manual/units.html">GNU Units 手册</a>展示线性、非线性和分段换算可能具有定义域、非单调性或非唯一逆，并提供 <code>units --check</code> 检查定义。它能验证换算，不能决定业务总体、聚合器或阈值。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>规范影响与验证</h2>
+    <ul>
+      <li>END-CORE 新增 <code>END-MSR-001</code> 至 <code>END-MSR-004</code>。</li>
+      <li>END-SCEN 新增四个案例，覆盖 p95、AI 基准泛化、单位换算、样本不足和程序故障。</li>
+      <li>威胁模型新增测量与阈值洗白；十二个提案向量覆盖六个允许分类和六个确定拒绝。</li>
+      <li>END-P1 不变；物理字段、统计执行和组件测试必须等待新 Profile 与用户明确开启代码阶段。</li>
+    </ul>
+  </section>
+
+  <section class="content-band">
+    <h2>仍未冻结的内容</h2>
+    <p>单位词典和版本、任意复合表达式、多重比较、顺序检验、基线漂移、模型裁判校准、统计模型登记、隐私保护测量、物理字段和规范字节仍需真实消费者、威胁分析与新 Profile。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0018-quantification-and-membership.html">← ADR-0018</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

@@ -103,6 +103,18 @@ permalink: "/specifications/endem.html"
   </section>
 
   <section class="content-wide">
+    <h2>测量目标怎样固定口径和阈值</h2>
+    <p class="lead">分数不是事实本身。可测量目标必须先说明测量什么、测量谁、怎样取得和聚合观察，再说明阈值怎样比较。</p>
+    <div class="table-wrap"><table><thead><tr><th>部分</th><th>必须固定</th><th>失败边界</th></tr></thead><tbody>
+      <tr><td>构念与总体</td><td>关系、值角色、直接标准、固定或泛化总体、用途和权威</td><td>代理基准不能自行成为能力本体；固定分数不能推广未见总体</td></tr>
+      <tr><td>数值与单位</td><td>有限值、量纲、单位、换算版本和显示舍入</td><td>量纲不兼容、隐式百分比缩放和比较前舍入必须拒绝</td></tr>
+      <tr><td>程序与聚合</td><td>生产者、窗口、纳入排除、最小样本、缺失、均值/比例/分位数或模型估计参数</td><td>事后换窗口、聚合器、样本或分桶不能改变判断</td></tr>
+      <tr><td>阈值与区间</td><td><code>lt/le/gt/ge/eq</code>、阈值单位和不确定区间</td><td>区间跨边界为 <code>agno</code>；统计程序失败为 <code>fault</code></td></tr>
+    </tbody></table></div>
+    <p>完整决定见 <a href="../architecture/adr-0019-measurement-and-thresholds.html">ADR-0019</a>。它不增加 END-P1 字段，也不表示遥测、基准或统计组件已经存在。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>自然语言场景怎样检验六个语义面</h2>
     <p class="lead">同一套字段只有在能区分不同失败原因时才有意义。以下场景不是产品演示或可执行测试，而是用来暴露规范缺口的设计审查语料。</p>
     <div class="table-wrap"><table><thead><tr><th>来源场景</th><th>必须表达的区别</th><th>不能偷换成什么</th></tr></thead><tbody>
@@ -125,8 +137,12 @@ permalink: "/specifications/endem.html"
       <tr><td>任一获准区域已经就绪</td><td>一个有效见证决定 <code>met</code>；没有见证仍需封闭范围</td><td>查询未命中不能证明不存在</td></tr>
       <tr><td>至少三名不同评审人批准</td><td>按不同评审人身份计数</td><td>重复点击、日志或签名不能重复计数</td></tr>
       <tr><td>空的当班名单全部确认</td><td>空集合必须明确授权，成员变化必须有时间政策</td><td>默认空真和目录故障不能产生 <code>met</code></td></tr>
+      <tr><td>p95 响应时间不高于 300ms</td><td>总体、窗口、单位、分位算法、样本、误差和包含边界</td><td>平均值、舍入显示或隐藏误差不能代替 p95 判断</td></tr>
+      <tr><td>基准准确率至少 80%</td><td>固定基准与泛化总体是不同 estimand</td><td>单一题集点估计不能自动证明普遍能力</td></tr>
+      <tr><td>0.3 秒阈值与毫秒观察</td><td>量纲兼容、换算方向、版本和误差</td><td>单位工具不能决定业务构念或统计方法</td></tr>
+      <tr><td>样本不足或分位程序失败</td><td>前者为 <code>agno</code>，后者为 <code>fault</code></td><td>不能填零、丢弃或猜测满足状态</td></tr>
     </tbody></table></div>
-    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。十九个场景当前登记为非规范材料，不证明 Poiet、Theor、Praxor 或任何自然语言解析、时间、缺席或量化求值能力已经存在。</p>
+    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。二十三个场景当前登记为非规范材料，不证明 Poiet、Theor、Praxor 或任何自然语言解析、时间、缺席、量化或测量求值能力已经存在。</p>
   </section>
 
   <section class="content-wide">
@@ -162,7 +178,7 @@ permalink: "/specifications/endem.html"
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p>六个语义面、一个根 <code>skena</code>、事态与方向分离、<code>phain</code> 结构比较、三类未知、否定与缺席边界、抽象量化范围、三个制品状态和 <code>.endem</code> 扩展名已经采用。END-P1 又形成 3 个语义接受和 11 个预期拒绝字节向量；它们覆盖正负极性、非空 <code>apor</code>、截断、目录乱序、非最短 CBOR 和四类资源边界。量化物理字段、复合与量化否定、时间和封闭声明字段、求值语言、压缩、摘要、签名和稳定 ABI 仍需新的 Profile；两个独立实现和对抗测试只能在代码阶段开启后建立。</p>
+    <p>六个语义面、一个根 <code>skena</code>、事态与方向分离、<code>phain</code> 结构比较、三类未知、否定与缺席、抽象量化和测量阈值边界、三个制品状态及 <code>.endem</code> 扩展名已经采用。END-P1 又形成 3 个语义接受和 11 个预期拒绝字节向量。时间、封闭、量化与测量物理字段、复合表达式、统计模型登记、压缩、摘要、签名和稳定 ABI 仍需新的 Profile；两个独立实现和对抗测试只能在代码阶段开启后建立。</p>
   </section>
   <div class="next-prev"><a href="index.html">← 规范参考指南</a><a href="synem.html">Synem 规范 →</a></div>
 </main>

@@ -84,6 +84,12 @@ permalink: "/specifications/tekmor.html"
     <p>决定性见证或反例可以提前支持有限结论；其余结论必须证明成员范围已经封闭。范围不完整为 <code>agno</code>，成员求值契约故障为 <code>fault</code>。完整边界见 <a href="../architecture/adr-0018-quantification-and-membership.html">ADR-0018</a>。</p>
   </section>
 
+  <section class="content-wide">
+    <h2>测量与阈值证据</h2>
+    <p>测量类 Tekmor 必须保留构念、适用总体、生产者、方法版本、观察窗口、纳入与排除规则、原始观察及单位、换算、聚合器、有效样本数、缺失处理、不确定区间和阈值。仪表盘显示值、排名或模型置信度不能替代这些依据。</p>
+    <p>固定基准结果只能支持该固定项目；推广结论还必须保存预注册的 estimand、统计模型、抽样假设和限制。区间跨越阈值为 <code>agno</code>，测量程序违约为 <code>fault</code>。完整边界见 <a href="../architecture/adr-0019-measurement-and-thresholds.html">ADR-0019</a>。</p>
+  </section>
+
   <section class="content-rows">
     <h2>隐私、最小披露与撤销</h2>
     <ul>
@@ -97,7 +103,7 @@ permalink: "/specifications/tekmor.html"
 
   <section class="content-band">
     <h2>当前成熟度</h2>
-    <p>Tekmor 的有限主张、身份绑定、证据等级、“证据不等于证明”、有效性与覆盖度分离、mene 时间覆盖以及否定证据职责已经采用。事件编码、时间与封闭声明字段、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需新 Profile 与测试。</p>
+    <p>Tekmor 的有限主张、身份绑定、证据等级、“证据不等于证明”、有效性与覆盖度分离、mene 时间覆盖、否定证据职责以及测量依据边界已经采用。事件编码、时间、封闭与测量声明字段、签名、隐私配置、撤销协议、跨实现归并和运行记录物理格式仍需新 Profile 与测试。</p>
   </section>
   <div class="next-prev"><a href="synem.html">← Synem 规范</a><a href="../components/poiet.html">Poiet 组件 →</a></div>
 </main>

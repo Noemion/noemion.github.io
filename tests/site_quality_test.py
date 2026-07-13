@@ -84,6 +84,7 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0016-mene-time-model.html",
     "architecture/adr-0017-negation-and-absence.html",
     "architecture/adr-0018-quantification-and-membership.html",
+    "architecture/adr-0019-measurement-and-thresholds.html",
     "components/poiet.html",
     "components/theor.html",
     "components/praxor.html",
@@ -234,6 +235,7 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0016-mene-time-model.html",
     "architecture/adr-0017-negation-and-absence.html",
     "architecture/adr-0018-quantification-and-membership.html",
+    "architecture/adr-0019-measurement-and-thresholds.html",
     "architecture/open-questions.html",
     "components/poiet.html",
     "components/theor.html",
@@ -1465,6 +1467,16 @@ def validate_jekyll_sources():
             "GNU",
             "一次文件搜索不能自行证明",
             "Noemion 的结果域、空集合政策和信任边界仍由 END-CORE 自己规定",
+        ),
+        "architecture/adr-0019-measurement-and-thresholds.html": (
+            "NIST AI 800-2 Initial Public Draft",
+            "NIST AI 800-3",
+            "固定基准准确率与泛化准确率",
+            "OpenTelemetry Metrics 数据模型",
+            "Prometheus 直方图与摘要指南",
+            "GNU Units 手册",
+            "遥测流本身不选择",
+            "不能决定业务总体、聚合器或阈值",
         ),
     }
     for relative_path, required_tokens in external_boundary_contracts.items():

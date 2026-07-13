@@ -117,6 +117,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             "time-scope", "continuity-policy", "time-coverage",
             "relation-polarity", "negative-evidence", "observation-closure",
             "quantifier", "collection-scope", "cardinality-evidence",
+            "measurement-construct", "estimand", "measurement-procedure", "threshold-contract",
         ):
             if required_term not in term_names:
                 errors.append(f"spec/registry.json: missing term {required_term}")
@@ -197,8 +198,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
 
     threat_heading_ids = THREAT_HEADING.findall(threat_text)
     threats = registry.get("threats")
-    if not isinstance(threats, list) or len(threats) != 13:
-        errors.append("spec/registry.json: exactly 13 registered Endem threats are required")
+    if not isinstance(threats, list) or len(threats) != 14:
+        errors.append("spec/registry.json: exactly 14 registered Endem threats are required")
     else:
         threat_ids = [threat.get("id") for threat in threats]
         if len(threat_ids) != len(set(threat_ids)):
@@ -389,6 +390,8 @@ def validate_public_boundary(errors):
         errors.append("Pages workflow must execute negation and absence vectors")
     if "python3 tests/quantification_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute quantification and membership vectors")
+    if "python3 tests/measurement_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute measurement and threshold vectors")
     if "python3 tests/p1_payload_test.py" not in workflow_text:
         errors.append("Pages workflow must execute complete END-P1 payload vectors")
     if "python3 tests/source_manifest_test.py" not in workflow_text:
@@ -415,6 +418,7 @@ def validate_public_boundary(errors):
             "vectors/mene",
             "vectors/negation",
             "vectors/quantification",
+            "vectors/measurement",
             "vectors/wire",
             "spec/endem-threat-model.md",
             "spec/endem-scenarios.md",
@@ -434,9 +438,11 @@ def validate_public_boundary(errors):
             "ADR-0016",
             "ADR-0017",
             "ADR-0018",
+            "ADR-0019",
             "时间范围和连续性政策",
             "否定与缺席怎样判断",
             "量化目标怎样固定成员范围",
+            "测量目标怎样固定口径和阈值",
             "观察不足是",
             "求值过程失败为",
             "两个 Endem",
@@ -456,6 +462,7 @@ def validate_public_boundary(errors):
             "ADR-0016",
             "ADR-0017",
             "ADR-0018",
+            "ADR-0019",
         ),
         "architecture/adr-0012-rust-core-language.html": (
             "Rust 1.97.0",
@@ -535,6 +542,22 @@ def validate_public_boundary(errors):
             "GNU",
             "不表示 Poiet、Praxor、求值器或 CLI 已经实现",
         ),
+        "architecture/adr-0019-measurement-and-thresholds.html": (
+            "测量谓词必须同时固定构念",
+            "fixed",
+            "generalized",
+            "estimand",
+            "arithmetic_mean",
+            "quantile",
+            "model_estimate",
+            "不确定区间",
+            "NIST AI 800-2",
+            "NIST AI 800-3",
+            "OpenTelemetry Metrics",
+            "Prometheus",
+            "GNU Units",
+            "不表示遥测采集器、基准运行器、统计引擎、Praxor 或求值器已经实现",
+        ),
         "development/implementation-roadmap.html": (
             "Rust 1.97.0",
             "C/Rust 双原型",
@@ -573,8 +596,8 @@ def main():
         scenario_text = ""
 
     scenario_ids = SCENARIO_HEADING.findall(scenario_text)
-    if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 20)]:
-        errors.append("spec/endem-scenarios.md: scenario IDs must be unique and ordered SCN-001 through SCN-019")
+    if scenario_ids != [f"SCN-{index:03d}" for index in range(1, 24)]:
+        errors.append("spec/endem-scenarios.md: scenario IDs must be unique and ordered SCN-001 through SCN-023")
     for token in (
         "事态由对象结合构成（2.01）",
         "图示形式由结构显示而非自我陈述（2.17–2.172）",
@@ -595,6 +618,10 @@ def main():
         "任一区域就绪可以由一个见证确定",
         "至少三个批准按不同主体计数",
         "空集合和成员漂移不能静默决定结果",
+        "p95 响应时间需要完整测量契约",
+        "固定基准准确率不等于普遍能力",
+        "单位可换算不等于可以随意换算",
+        "缺样本和统计程序故障必须分开",
         "不是可执行测试",
     ):
         if token not in scenario_text:
@@ -612,10 +639,11 @@ def main():
         return 1
     print(
         "PASS: END-CORE, END-FMT and END-SRCM 0.1.0-draft have unique clauses, explicit "
-        "maturity, traceable evidence, 13 registered threats, executed semantic "
-        "vectors, 19 natural-language design scenarios, 12 result-domain vectors, "
+        "maturity, traceable evidence, 14 registered threats, executed semantic "
+        "vectors, 23 natural-language design scenarios, 12 result-domain vectors, "
         "12 mene time and continuity vectors, 12 negation and absence vectors, "
         "12 quantification and membership vectors, "
+        "12 measurement and threshold vectors, "
         "END-P1 payload/source vectors, "
         "and P0-LANG-001 historical language evidence"
     )

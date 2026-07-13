@@ -63,7 +63,7 @@ badges: ["Documentation"]
 
 新建一套手册时，先在 `_data/manuals.yml` 登记手册级信息与允许的分组；已有手册新增专题不修改该数据文件。`manual_order` 在同一手册内必须唯一，`manual_group` 必须对应已登记分组。手册首页使用 `manual_is_index: true`，术语索引入口使用 `manual_index_entry: true`。
 
-规范登记检查运行 `python3 tests/spec_contract_test.py`，语义向量执行运行 `python3 tests/semantic_vector_test.py`，结果域向量执行运行 `python3 tests/result_domain_vector_test.py`，mene 时间向量执行运行 `python3 tests/mene_vector_test.py`，否定与缺席向量执行运行 `python3 tests/negation_vector_test.py`，量化与成员资格向量执行运行 `python3 tests/quantification_vector_test.py`，END-P0 结构字节运行 `python3 tests/wire_vector_test.py`，END-P1 完整载荷运行 `python3 tests/p1_payload_test.py`，源码页面检查运行 `python3 tests/site_quality_test.py`。完整发布检查随后运行 `bundle exec jekyll build`，执行 `cp sitemap.md _site/sitemap.md`，再运行 `python3 tests/site_quality_test.py _site`；GitHub Actions 按同一顺序验证并部署。构建产物中的手册目录数据按正式路由排序，不能让文件系统或 Jekyll 页面枚举顺序改变同一提交的输出字节。
+规范登记检查运行 `python3 tests/spec_contract_test.py`，语义向量执行运行 `python3 tests/semantic_vector_test.py`，结果域向量执行运行 `python3 tests/result_domain_vector_test.py`，mene 时间向量执行运行 `python3 tests/mene_vector_test.py`，否定与缺席向量执行运行 `python3 tests/negation_vector_test.py`，量化与成员资格向量执行运行 `python3 tests/quantification_vector_test.py`，测量与阈值向量执行运行 `python3 tests/measurement_vector_test.py`，END-P0 结构字节运行 `python3 tests/wire_vector_test.py`，END-P1 完整载荷运行 `python3 tests/p1_payload_test.py`，源码页面检查运行 `python3 tests/site_quality_test.py`。完整发布检查随后运行 `bundle exec jekyll build`，执行 `cp sitemap.md _site/sitemap.md`，再运行 `python3 tests/site_quality_test.py _site`；GitHub Actions 按同一顺序验证并部署。构建产物中的手册目录数据按正式路由排序，不能让文件系统或 Jekyll 页面枚举顺序改变同一提交的输出字节。
 
 ### 项目时间线配置与嵌入
 
@@ -132,6 +132,8 @@ ADR-0016 固定 `mene` 的抽象时间与连续性语义：跨系统时段使用
 ADR-0017 分开否定事态、记录缺席和观察故障。负目标保留同一关系、角色与顺序；空日志和未命中查询默认只能支持 `agno`。只有具名权威证明有限观察范围已经封闭时，完整缺席才能支持 `met`；END-P1 当前只补齐原子负极性向量，没有封闭声明字段或运行组件。
 
 ADR-0018 固定抽象量化范围与集合成员资格。`all`、`some`、`at_least`、`at_most` 和 `exactly` 必须绑定一个关系角色、成员权威、截止点与身份规则；基数只按不同成员计数，空集合不能默认产生满足。END-P1 当前没有量化字段，也没有成员目录或求值组件。
+
+ADR-0019 固定抽象测量谓词与阈值契约。可测量判断必须先固定构念、总体、数值域、单位、观察窗口、测量程序、聚合器、阈值和不确定度政策；固定基准分数不得冒充对未测试总体的推广结论，点估计也不得越过阈值区间单独决定满足。END-P1 当前没有测量字段，也没有采集、统计或求值组件。
 
 Synem 是两个或更多 Endem 经符号、依赖、约束与内容身份解析后形成、可以确定性封装的组合闭包；单个自包含 Endem 不需要 Synem。Dromen 是 attested Endem 或 Synem 通过重新验证、策略和能力授予后形成的已装载运行态；Tekmor 是绑定明确主体、声明范围、方法、环境、结果和限制的证据。Tekmor 只支持声明范围内的判断，不能自动升级为最终验收。
 
