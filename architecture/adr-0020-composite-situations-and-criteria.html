@@ -7,13 +7,13 @@ permalink: "/architecture/adr-0020-composite-situations-and-criteria.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0020</span></nav>
-  <header class="content-introduction"><h1>ADR-0020<br>复合事态<br>判据组合</h1><p>让一个根事态可以表达彼此不可分的多个关系，同时固定四结果传播、决定性短路和证据覆盖，避免用布尔脚本掩盖未知与故障。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">Composite Criteria</span><span class="badge">No Wire Schema Change</span><span class="badge">No Component Code</span></div></header>
+  <header class="content-introduction"><h1>ADR-0020<br>复合事态<br>判据组合</h1><p>让一个根事态可以表达彼此不可分的多个关系，同时固定四结果传播、决定性短路和证据覆盖，避免用布尔脚本掩盖未知与故障。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">Composite Criteria</span><span class="badge">No Wire Schema Change</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-band">
     <h2>直接结论</h2>
     <p class="lead">第一阶段只允许用 <code>all_of</code> 和 <code>any_of</code> 组合判据。它们组合的是已经独立得到的叶级 <code>met / unmet / agno / fault</code>，不是原始数值、自由文本或可执行表达式。</p>
     <p>只有共同描述同一个终态、共享同一目标方向和验收责任、不能被独立替换或接受的关系，才能进入一个 Endem 的复合根。能够独立实现、版本化、授权、接受或失败的目标必须拆成多个 Endem，再由 Synem 组合。</p>
-    <p>本决定冻结抽象语义，不给 END-P1 增加字段，也不表示 Ktisor、Theor、Drasor、CLI 或求值器已经实现。</p>
+    <p>当前策略确定抽象语义，不给 END-P1 增加字段，也不表示 Ktisor、Theor、Drasor、CLI 或求值器已经实现。</p>
   </section>
 
   <section class="content-band">
@@ -87,12 +87,12 @@ permalink: "/architecture/adr-0020-composite-situations-and-criteria.html"
       <li>END-CORE 新增 <code>END-CMP-001</code> 至 <code>END-CMP-004</code>。</li>
       <li>END-SCEN 新增四个案例；威胁模型新增复合判断洗白。</li>
       <li>十二个提案向量覆盖六个允许分类和六个确定拒绝；检查器只是规范一致性检查，不是求值器。</li>
-      <li>END-P1 不变；物理字段、规范字节和组件测试必须等待新 Profile 与用户明确开启代码阶段。</li>
+      <li>END-P1 不变；物理字段、规范字节和组件测试需要先建立新的 Profile。</li>
     </ul>
   </section>
 
   <section class="content-band">
-    <h2>仍未冻结的内容</h2>
+    <h2>待定内容</h2>
     <p>跨 Endem 条件激活已经由 ADR-0021 关闭抽象边界；排他析取、复合否定、跨叶变量绑定、时间和量化组合、规范化、物理字段、规范排序、深度预算与规范字节仍需真实消费者、威胁分析和新 Profile。</p>
   </section>
   <div class="next-prev"><a href="adr-0019-measurement-and-thresholds.html">← ADR-0019</a><a href="adr-0021-synem-closure-and-activation.html">ADR-0021 →</a></div>

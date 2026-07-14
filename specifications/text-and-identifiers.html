@@ -13,7 +13,7 @@ permalink: "/specifications/text-and-identifiers.html"
     <h2>它解决什么问题</h2>
     <p class="lead">看起来相同的文字不一定是相同字节、相同码点或相同意义。机器实际读取的内容也可能与审核者在屏幕上看到的内容不同。</p>
     <p>TEXT-IDENTIFIER-CORE 给现有字符串字段建立共同边界。它分开来源字节、解码文本、结构标识符、规范化结果、比较规则、文本范围、显示视图和模型输入。</p>
-    <p>当前已接受十二条跨制品文本边界。未来生产者和使用者必须明确自己处理哪一层，不得让显示、搜索、同形提示、语言标签或模型相似度替代精确机器内容与授权意义。</p>
+    <p><strong>当前策略：</strong>十二条规则分开处理不同层次的文本。未来生产者和使用者必须说明自己处理哪一层，不得让显示、搜索、同形提示、语言标签或模型相似度替代精确机器内容与授权意义。</p>
     <p class="callout"><strong>权威边界：</strong>实现义务以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md">TEXT-IDENTIFIER-CORE 条款源</a>为准。当前没有 Unicode 处理器、规范化器、同形检测器、模型输入网关或新的文本格式。</p>
   </section>
 
@@ -62,13 +62,13 @@ permalink: "/specifications/text-and-identifiers.html"
     <h2>符合性材料</h2>
     <div class="table-wrap"><table><thead><tr><th>材料</th><th>当前覆盖</th><th>不能证明</th></tr></thead><tbody>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-threat-model.md">TEXT-THREAT</a></td><td>12 类编码、规范化、范围、双向显示、隐藏字符和模型视图威胁</td><td>Unicode 处理库、界面或模型网关已经安全</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-scenarios.md">TEXT-SCEN</a></td><td>18 个支持、反例与未决场景</td><td>场景本身是稳定 Profile 或组件证据</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-scenarios.md">TEXT-SCEN</a></td><td>18 个支持、反例与待确认场景</td><td>场景本身是稳定 Profile 或组件证据</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/text-identifier">TEXT-IDENTIFIER-CORE 向量</a></td><td>24 个提案包含 12 个允许案例与 12 个确定拒绝</td><td>解码器、规范化器、同形检测器或模型输入网关已经实现</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>当前仍未冻结</h2>
+    <h2>待定内容</h2>
     <p>Unicode 国际化结构标识符、来源文本重写、语言检测、分词、字素级编辑、搜索排序、字体信任、tokenizer 协议、同形自动处置、双向编辑器和原始来源字节字段都保持开放。任何新增字段或 Profile 都必须先证明真实生产者、消费者、身份影响和正反向量。</p>
     <p>背景、权衡和权威资料见 <a href="../architecture/adr-0028-text-and-identifier-boundaries.html">ADR-0028 文本与标识符边界</a>。</p>
   </section>

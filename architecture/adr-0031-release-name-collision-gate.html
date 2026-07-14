@@ -1,19 +1,19 @@
 ---
 layout: default
-title: "ADR-0031 · 发布名称冲突门禁"
+title: "ADR-0031 · 发布名称冲突审查"
 page_role: "content"
 footer_text: "Noemion · ADR-0031"
 permalink: "/architecture/adr-0031-release-name-collision-gate.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0031</span></nav>
-  <header class="content-introduction"><h1>ADR-0031<br>发布名称冲突门禁</h1><p>用 Iknem 与 Drasor 消除相邻领域冲突，同时保持证据和受限执行职责不变。</p><div class="badges"><span class="badge">Accepted</span><span class="badge">2026-07-13</span><span class="badge">One-time migration</span><span class="badge">No compatibility</span></div></header>
+  <header class="content-introduction"><h1>ADR-0031<br>发布名称冲突审查</h1><p>用 Iknem 与 Drasor 消除相邻领域冲突，同时保持证据和受限执行职责不变。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">2026-07-13</span><span class="badge">One-time migration</span><span class="badge">No compatibility</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
     <p class="lead"><strong>Iknem</strong> 取代旧证据对象名，<strong>Drasor</strong> 取代旧受限执行域名，对应公开动作改为 <code>drase</code>。</p>
     <p>Iknem 仍表示绑定精确主体、有限主张、溯源、观察、方法、结果和限制的证据记录。Drasor 仍负责在一次会话中重验精确输入、收窄能力、控制副作用并封存 Dromen。更名不改变任何结果域、权限边界、身份规则或规范内容。</p>
-    <p class="callout"><strong>迁移规则：</strong>当前尚未进入组件代码阶段，也不承诺向后兼容。旧术语不再进入现行页面、规范 ID、诊断域、路由、向量或动作；不保留别名、重定向、双写或兼容垫片。</p>
+    <p class="callout"><strong>迁移规则：</strong>当前没有组件实现，也不承诺向后兼容。旧术语不再进入现行页面、规范 ID、诊断域、路由、向量或动作；不保留别名、重定向、双写或兼容垫片。</p>
   </section>
 
   <section class="content-wide">
@@ -28,7 +28,7 @@ permalink: "/architecture/adr-0031-release-name-collision-gate.html"
   <section class="content-wide">
     <h2>证据对象候选比较</h2>
     <div class="table-wrap"><table><thead><tr><th>候选</th><th>检索与可读性</th><th>决定</th></tr></thead><tbody>
-      <tr><td>Iknem</td><td>2026-07-13 工程初筛没有发现同名的活跃 AI、证明、协议或开发工具。公开结果中的课程缩写、航空航路点和零散人名不承担相邻工程职责；读音与听辨尚未验证。</td><td>采用其当前设计拼写与证据职责；含义只由 IKN-CORE 定义，不暗示记录真实、有效或充分。发行读音门禁见 ADR-0034。</td></tr>
+      <tr><td>Iknem</td><td>2026-07-13 工程初筛没有发现同名的活跃 AI、证明、协议或开发工具。公开结果中的课程缩写、航空航路点和零散人名不承担相邻工程职责；读音与听辨尚未验证。</td><td>采用其当前设计拼写与证据职责；含义只由 IKN-CORE 定义，不暗示记录真实、有效或充分。发行读音审查见 ADR-0034。</td></tr>
       <tr><td>Vekem</td><td>字形简短，但与面向 AI Agent 的记忆软件 <code>vemem</code> 仅差一个字母，口头和搜索区分度不足。</td><td>拒绝</td></tr>
       <tr><td>Pistem</td><td>容易与 PiSTEM 教育组织及使用 AI 的透明能源模型项目发生大小写和拆词混淆。</td><td>拒绝</td></tr>
       <tr><td><code>evidence-record</code></td><td>直白，但过于通用，适合解释职责，不适合作为需要稳定引用的对象名、规范 ID 和诊断域。</td><td>保留为释义，不作为术语</td></tr>
@@ -51,7 +51,7 @@ permalink: "/architecture/adr-0031-release-name-collision-gate.html"
       <li>证据标准改为 <code>IKN-CORE</code>，规范 ID 改为 <code>ikn-core</code>，诊断域和向量目录使用 <code>iknem.*</code> 与 <code>vectors/iknem/</code>。</li>
       <li>受限执行组件改为 Drasor，唯一 CLI 动作集合中的对应动作改为 <code>drase</code>。</li>
       <li>Dromen 继续是 Drasor 为一次 Drase 会话封存的只读执行契约；Iknem 继续只支持自身声明范围。</li>
-      <li>规范、ADR、场景、威胁模型、页面、导航、测试、项目提示词和登记项同步替换；旧入口直接消失。</li>
+      <li>规范、ADR、场景、威胁模型、页面、导航、测试和登记项同步替换；旧入口直接消失。</li>
       <li>历史冲突证据只保留在本 ADR 和名称审计中，不构成旧接口或兼容承诺。</li>
     </ul>
   </section>

@@ -7,11 +7,11 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、组合闭包、会话契约、证据、授权、身份与组件边界。</p><div class="badges"><span class="badge">ADR-0010—0035</span><span class="badge">Design Stage</span><span class="badge">No Component Code</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、组合闭包、会话契约、证据、授权、身份与组件边界。</p><div class="badges"><span class="badge">ADR-0010—0035</span><span class="badge">Design Stage</span><span class="badge">尚未实现</span><span class="badge">接口待定</span></div></header>
 
   <section class="content-stack">
     <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权与伴随边界；<a href="adr-0031-release-name-collision-gate.html">ADR-0031</a>至 <a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035</a>处理发布名称、读音与公开动作门禁。</p>
+    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权与伴随边界；<a href="adr-0031-release-name-collision-gate.html">ADR-0031</a>至 <a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035</a>处理发布名称、读音与公开动作审查。</p>
     <p>ADR-0008 与 ADR-0009 只保存公开迁移历史。更早、无入口且与现行决策源重复的内部 ADR 副本已经删除，不能反向约束实现、路由或 ABI。</p>
   </section>
 
@@ -20,37 +20,37 @@ permalink: "/architecture/decisions.html"
     <div class="table-wrap"><table><thead><tr><th>ADR</th><th>状态</th><th>当前解释</th></tr></thead><tbody>
       <tr><td><a href="adr-0008-endem-system.html">ADR-0008 Endem 制品与单一命令面</a></td><td>Superseded by ADR-0010</td><td>保留单一 CLI、权限分离与安全机制；制品、组件、动作和状态名称已取代。</td></tr>
       <tr><td><a href="adr-0009-propositional-kernel.html">ADR-0009 Endem 命题投影语义核</a></td><td>Superseded by ADR-0010</td><td>保留结构显示与未确定分层；五组字段和目标力量模型已取代。</td></tr>
-      <tr><td><a href="adr-0010-native-lexicon.html">ADR-0010 原生词汇与事态分层</a></td><td>Accepted</td><td>当前六个语义面、一个根 skena、phain 比较、原生制品/组件/动作与生命周期。</td></tr>
-      <tr><td><a href="adr-0011-endem-container.html">ADR-0011 Endem 实验性容器格式</a></td><td>Accepted Draft</td><td>采用固定前导、定宽目录、六记录、受限确定性 CBOR 与 END-P0；尚非稳定 ABI。</td></tr>
-      <tr><td><a href="adr-0012-rust-core-language.html">ADR-0012 未来安全核心的 Rust 基线</a></td><td>Accepted Design</td><td>若用户开启代码阶段，Ktisor 与生产读取核心以 Rust 1.97.0 和安全子集作为重新评审起点；当前没有实现工作区。</td></tr>
-      <tr><td><a href="adr-0013-end-p1-payload.html">ADR-0013 END-P1 封闭内容 Profile</a></td><td>Accepted Draft</td><td>END-P0 保留为结构实验；END-P1 作为首个设计 Profile 固定六记录字段、枚举、规范排序和引用闭包。</td></tr>
-      <tr><td><a href="adr-0014-source-manifest.html">ADR-0014 首个 Ktisor 来源清单</a></td><td>Accepted Draft</td><td>用有限来源清单连接自然语言来源与授权投影；模型不能直接生成规范对象，正式来源语言出现后删除该入口。</td></tr>
-      <tr><td><a href="adr-0015-result-domains.html">ADR-0015 判断与运行结果分层</a></td><td>Accepted Design</td><td>分开制品生命周期、满足判断、权威决定、会话终止、Iknem 有效性和证据覆盖度；不改变 END-P1 字节。</td></tr>
-      <tr><td><a href="adr-0016-mene-time-model.html">ADR-0016 mene 时间与连续性模型</a></td><td>Accepted Design</td><td>采用 fixed/elapsed 时间范围、strict/budgeted 连续性与显式覆盖缺口；END-P1 继续只支持 kine。</td></tr>
-      <tr><td><a href="adr-0017-negation-and-absence.html">ADR-0017 否定事态与缺席证据</a></td><td>Accepted Design</td><td>否定保留同一关系与角色；空结果默认是 agno，只有封闭观察范围内的完整缺席可以支持负目标。</td></tr>
-      <tr><td><a href="adr-0018-quantification-and-membership.html">ADR-0018 量化范围与集合成员资格</a></td><td>Accepted Design</td><td>先固定成员权威、截止点与身份规则，再按不同成员聚合；不允许有利子集、重复见证或默认空真值。</td></tr>
-      <tr><td><a href="adr-0019-measurement-and-thresholds.html">ADR-0019 测量谓词与阈值契约</a></td><td>Accepted Design</td><td>分开构念、固定或泛化总体、测量程序和阈值比较；不允许用代理分数、单位、舍入或隐藏不确定度洗白结果。</td></tr>
-      <tr><td><a href="adr-0020-composite-situations-and-criteria.html">ADR-0020 复合事态与判据组合</a></td><td>Accepted Design</td><td>只允许一个不可分终态使用 all_of/any_of；固定四结果传播、决定性短路和求值覆盖，不开放任意表达式。</td></tr>
-      <tr><td><a href="adr-0021-synem-closure-and-activation.html">ADR-0021 Synem 组合闭包与条件激活</a></td><td>Accepted Design</td><td>固定完整传递闭包、精确绑定、有限无环、权限交集、成员结果分离和会话激活四状态；不创建物理格式。</td></tr>
-      <tr><td><a href="adr-0022-iknem-evidence-and-appraisal.html">ADR-0022 Iknem 证据范围与评估边界</a></td><td>Accepted Design</td><td>固定主体范围、溯源、phain 对齐、证据类别、完整性、有效性、覆盖、决定分离与最小披露；不创建物理格式。</td></tr>
-      <tr><td><a href="adr-0023-endem-content-standard.html">ADR-0023 Endem 内容标准分层</a></td><td>Accepted Design</td><td>由 END-CORE 定义通用内容，END-P1 定义当前封闭内容 Profile，END-FMT 定义物理容器；三层分别验证。</td></tr>
-      <tr><td><a href="adr-0024-dromen-session-contract.html">ADR-0024 Dromen 会话契约</a></td><td>Accepted Design</td><td>由 DRO-CORE 固定一次会话的精确主体、政策、环境、能力、预算、观察责任、只读失效与销毁；永远不创建 Dromen 文件。</td></tr>
-      <tr><td><a href="adr-0025-structured-diagnostics.html">ADR-0025 结构化诊断边界</a></td><td>Accepted Design</td><td>由 DIA-CORE 固定跨对象诊断身份、语境、层次、位置、主错误、恢复和安全边界；诊断不成为结果、权限或自动修复命令。</td></tr>
-      <tr><td><a href="adr-0026-external-protocol-adapters.html">ADR-0026 外部协议适配边界</a></td><td>Accepted Draft</td><td>由 ADP-CORE 固定协议版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付和安全边界；具体协议 Profile 仍未冻结。</td></tr>
-      <tr><td><a href="adr-0027-exact-identity-and-attestation.html">ADR-0027 精确内容身份与签名边界</a></td><td>Accepted Draft</td><td>由 ID-CORE 固定跨制品精确身份、不可变引用、签名陈述、验证材料、撤销、可复现性与派生关系；算法和物理 Profile 仍未冻结。</td></tr>
-      <tr><td><a href="adr-0028-text-and-identifier-boundaries.html">ADR-0028 文本与标识符边界</a></td><td>Accepted Draft</td><td>由 TEXT-IDENTIFIER-CORE 固定文本槽、严格 UTF-8、来源溯源、ASCII 标识符、规范化、比较、范围、双向显示、隐藏字符、模型输入与显示边界；不增加物理字段。</td></tr>
-      <tr><td><a href="adr-0029-authority-and-authorization-decisions.html">ADR-0029 权威与授权决定边界</a></td><td>Accepted Draft</td><td>由 AUT-CORE 固定权威语境、主体资格、范围、自然语言授权、委托、同意、多人决定、撤销、重放、能力交集和结果分离；不创建新制品或政策引擎。</td></tr>
-      <tr><td><a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030 Endem 内容与授权伴随关系</a></td><td>Accepted Draft</td><td>修正内容身份与授权决定混合问题；P1 权威字段只作选择器，完整内容接受需要外部前置条件，授权变化不改写内容身份。</td></tr>
-      <tr><td><a href="adr-0031-release-name-collision-gate.html">ADR-0031 发布名称冲突门禁</a></td><td>Accepted</td><td>采用 Iknem 与 Drasor/drase，保持职责和不变量不变；当前阶段直接替换，不保留旧入口、别名或重定向。</td></tr>
-      <tr><td><a href="adr-0032-deterministic-maker-name-collision.html">ADR-0032 确定性制作名称冲突</a></td><td>Accepted</td><td>采用 Ktisor/ktise，修复对公开动作大小写无关筛查的遗漏；同时记录五个动作并不具有相同实现成熟度。</td></tr>
-      <tr><td><a href="adr-0033-text-identifier-specification-name.html">ADR-0033 文本与标识符标准命名</a></td><td>Accepted</td><td>采用 TEXT-IDENTIFIER-CORE，消除把跨制品文本边界误读为 <code>.txt</code> 文件或原始文件规范的歧义。</td></tr>
-      <tr><td><a href="adr-0034-pronunciation-and-oral-distinction.html">ADR-0034 术语读音与口头区分门禁</a></td><td>Accepted Gate</td><td>把目标语言读音和词表内听辨纳入发行审查；现行职责保持有效，具体读音与发行拼写尚未冻结。</td></tr>
-      <tr><td><a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035 公开动作与内部职责收敛</a></td><td>Accepted</td><td>公开动作收敛为五个；派生封装、外部签名和符合性验证保留责任边界，但不保留公开动作名。</td></tr>
+      <tr><td><a href="adr-0010-native-lexicon.html">ADR-0010 原生词汇与事态分层</a></td><td>当前策略</td><td>当前六个语义面、一个根 skena、phain 比较、原生制品/组件/动作与生命周期。</td></tr>
+      <tr><td><a href="adr-0011-endem-container.html">ADR-0011 Endem 实验性容器格式</a></td><td>当前草案</td><td>采用固定前导、定宽目录、六记录、受限确定性 CBOR 与 END-P0；尚非稳定 ABI。</td></tr>
+      <tr><td><a href="adr-0012-rust-core-language.html">ADR-0012 未来安全核心的 Rust 基线</a></td><td>当前策略</td><td>Ktisor 与生产读取核心以 Rust 1.97.0 和安全子集作为实现前重新评审起点；当前没有实现工作区。</td></tr>
+      <tr><td><a href="adr-0013-end-p1-payload.html">ADR-0013 END-P1 封闭内容 Profile</a></td><td>当前草案</td><td>END-P0 保留为结构实验；END-P1 作为首个设计 Profile 固定六记录字段、枚举、规范排序和引用闭包。</td></tr>
+      <tr><td><a href="adr-0014-source-manifest.html">ADR-0014 首个 Ktisor 来源清单</a></td><td>当前草案</td><td>用有限来源清单连接自然语言来源与授权投影；模型不能直接生成规范对象，正式来源语言出现后删除该入口。</td></tr>
+      <tr><td><a href="adr-0015-result-domains.html">ADR-0015 判断与运行结果分层</a></td><td>当前策略</td><td>分开制品生命周期、满足判断、权威决定、会话终止、Iknem 有效性和证据覆盖度；不改变 END-P1 字节。</td></tr>
+      <tr><td><a href="adr-0016-mene-time-model.html">ADR-0016 mene 时间与连续性模型</a></td><td>当前策略</td><td>采用 fixed/elapsed 时间范围、strict/budgeted 连续性与显式覆盖缺口；END-P1 继续只支持 kine。</td></tr>
+      <tr><td><a href="adr-0017-negation-and-absence.html">ADR-0017 否定事态与缺席证据</a></td><td>当前策略</td><td>否定保留同一关系与角色；空结果默认是 agno，只有封闭观察范围内的完整缺席可以支持负目标。</td></tr>
+      <tr><td><a href="adr-0018-quantification-and-membership.html">ADR-0018 量化范围与集合成员资格</a></td><td>当前策略</td><td>先固定成员权威、截止点与身份规则，再按不同成员聚合；不允许有利子集、重复见证或默认空真值。</td></tr>
+      <tr><td><a href="adr-0019-measurement-and-thresholds.html">ADR-0019 测量谓词与阈值契约</a></td><td>当前策略</td><td>分开构念、固定或泛化总体、测量程序和阈值比较；不允许用代理分数、单位、舍入或隐藏不确定度洗白结果。</td></tr>
+      <tr><td><a href="adr-0020-composite-situations-and-criteria.html">ADR-0020 复合事态与判据组合</a></td><td>当前策略</td><td>只允许一个不可分终态使用 all_of/any_of；固定四结果传播、决定性短路和求值覆盖，不开放任意表达式。</td></tr>
+      <tr><td><a href="adr-0021-synem-closure-and-activation.html">ADR-0021 Synem 组合闭包与条件激活</a></td><td>当前策略</td><td>固定完整传递闭包、精确绑定、有限无环、权限交集、成员结果分离和会话激活四状态；不创建物理格式。</td></tr>
+      <tr><td><a href="adr-0022-iknem-evidence-and-appraisal.html">ADR-0022 Iknem 证据范围与评估边界</a></td><td>当前策略</td><td>固定主体范围、溯源、phain 对齐、证据类别、完整性、有效性、覆盖、决定分离与最小披露；不创建物理格式。</td></tr>
+      <tr><td><a href="adr-0023-endem-content-standard.html">ADR-0023 Endem 内容标准分层</a></td><td>当前策略</td><td>由 END-CORE 定义通用内容，END-P1 定义当前封闭内容 Profile，END-FMT 定义物理容器；三层分别验证。</td></tr>
+      <tr><td><a href="adr-0024-dromen-session-contract.html">ADR-0024 Dromen 会话契约</a></td><td>当前策略</td><td>由 DRO-CORE 固定一次会话的精确主体、政策、环境、能力、预算、观察责任、只读失效与销毁；永远不创建 Dromen 文件。</td></tr>
+      <tr><td><a href="adr-0025-structured-diagnostics.html">ADR-0025 结构化诊断边界</a></td><td>当前策略</td><td>由 DIA-CORE 固定跨对象诊断身份、语境、层次、位置、主错误、恢复和安全边界；诊断不成为结果、权限或自动修复命令。</td></tr>
+      <tr><td><a href="adr-0026-external-protocol-adapters.html">ADR-0026 外部协议适配边界</a></td><td>当前草案</td><td>由 ADP-CORE 固定协议版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付和安全边界；具体协议 Profile 仍待确定。</td></tr>
+      <tr><td><a href="adr-0027-exact-identity-and-attestation.html">ADR-0027 精确内容身份与签名边界</a></td><td>当前草案</td><td>由 ID-CORE 固定跨制品精确身份、不可变引用、签名陈述、验证材料、撤销、可复现性与派生关系；算法和物理 Profile 仍待确定。</td></tr>
+      <tr><td><a href="adr-0028-text-and-identifier-boundaries.html">ADR-0028 文本与标识符边界</a></td><td>当前草案</td><td>由 TEXT-IDENTIFIER-CORE 固定文本槽、严格 UTF-8、来源溯源、ASCII 标识符、规范化、比较、范围、双向显示、隐藏字符、模型输入与显示边界；不增加物理字段。</td></tr>
+      <tr><td><a href="adr-0029-authority-and-authorization-decisions.html">ADR-0029 权威与授权决定边界</a></td><td>当前草案</td><td>由 AUT-CORE 固定权威语境、主体资格、范围、自然语言授权、委托、同意、多人决定、撤销、重放、能力交集和结果分离；不创建新制品或政策引擎。</td></tr>
+      <tr><td><a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030 Endem 内容与授权伴随关系</a></td><td>当前草案</td><td>修正内容身份与授权决定混合问题；P1 权威字段只作选择器，完整内容接受需要外部前置条件，授权变化不改写内容身份。</td></tr>
+      <tr><td><a href="adr-0031-release-name-collision-gate.html">ADR-0031 发布名称冲突审查</a></td><td>当前策略</td><td>采用 Iknem 与 Drasor/drase，保持职责和不变量不变；当前阶段直接替换，不保留旧入口、别名或重定向。</td></tr>
+      <tr><td><a href="adr-0032-deterministic-maker-name-collision.html">ADR-0032 确定性制作名称冲突</a></td><td>当前策略</td><td>采用 Ktisor/ktise，修复对公开动作大小写无关筛查的遗漏；同时记录五个动作并不具有相同实现状态。</td></tr>
+      <tr><td><a href="adr-0033-text-identifier-specification-name.html">ADR-0033 文本与标识符标准命名</a></td><td>当前策略</td><td>采用 TEXT-IDENTIFIER-CORE，消除把跨制品文本边界误读为 <code>.txt</code> 文件或原始文件规范的歧义。</td></tr>
+      <tr><td><a href="adr-0034-pronunciation-and-oral-distinction.html">ADR-0034 术语读音与口头区分审查</a></td><td>当前审查</td><td>把目标语言读音和词表内听辨纳入发行审查；现行职责保持有效，具体读音与发行拼写尚待确定。</td></tr>
+      <tr><td><a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035 公开动作与内部职责收敛</a></td><td>当前策略</td><td>公开动作收敛为五个；派生封装、外部签名和符合性验证保留责任边界，但不保留公开动作名。</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>当前冻结的内容</h2>
+    <h2>当前策略</h2>
     <div class="table-wrap"><table><thead><tr><th>决定</th><th>采用的边界</th><th>直接影响</th></tr></thead><tbody>
       <tr><td>六个语义面</td><td>一个 Endem 只有一个根 skena，并保存 rhem、semion、skena、telis、krin 与 apor。</td><td>来源格式、投影规则、Ktisor、规范向量和错误语义。</td></tr>
       <tr><td>事态与方向分离</td><td>skena 保持中性；telis 只使用 kine/mene；禁止由事态否定表达。</td><td>规范化、等价判断、时间字段与反例向量。</td></tr>
@@ -63,10 +63,10 @@ permalink: "/architecture/decisions.html"
       <tr><td>文本职责保持分层</td><td>TEXT-IDENTIFIER-CORE 分开来源字节、解码文本、机器标识符、人类显示与模型实际输入；当前结构标识符保持 ASCII 且不做隐式规范化。</td><td>Ktisor 来源、诊断位置、身份比较、安全审查、模型候选和未来界面。</td></tr>
       <tr><td>权威与授权保持有界</td><td>AUT-CORE 分开认证、角色资格、语义授权、能力授予与最终决定；grant/deny/defer 只回答精确请求是否获准。</td><td>自然语言候选复核、Dromen 建立、Agent 委托、同意、多人决定、撤销与重放。</td></tr>
       <tr><td>唯一 CLI</td><td><code>endem</code> 只提供 <code>ktise/elenk/pleko/theor/drase</code> 五个动作。</td><td>应用项目、手册、安装包和自动化接口。</td></tr>
-      <tr><td>名称发行门禁</td><td>职责、书写检索、目标语言读音和词表内口头区分分别审查；读音提示不是机器别名。</td><td>全部领域词、组件、动作、手册、未来语音交互和首次正式发行。</td></tr>
+      <tr><td>名称发行审查</td><td>职责、书写检索、目标语言读音和词表内口头区分分别审查；读音提示不是机器别名。</td><td>全部领域词、组件、动作、手册、未来语音交互和首次正式发行。</td></tr>
       <tr><td>独立与隔离</td><td>theor 不共享生产解析；drase 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>
       <tr><td>实验性容器</td><td>END-FMT 0.1 采用 64 字节前导、48 字节目录项、六种关键记录和 END-P0 有限上限。</td><td>规范字节、错误分类、Ktisor/Theor 语言实验；不构成稳定 ABI。</td></tr>
-      <tr><td>首版核心语言</td><td>代码阶段开启后计划评估 Rust 1.97.0；禁止 unsafe 与首条切片零第三方 crate 仍是未来实现约束。</td><td>未来实现的构建锁、受检算术、模糊测试和供应链边界。</td></tr>
+      <tr><td>首版核心语言</td><td>实现启动前计划评估 Rust 1.97.0；禁止 unsafe 与首条切片零第三方 crate 仍是未来实现约束。</td><td>未来实现的构建锁、受检算术、模糊测试和供应链边界。</td></tr>
       <tr><td>首个设计 Profile</td><td>END-P1 使用 profile 2，封闭六记录字段并只支持 nascent 与 kine。</td><td>未来 Ktisor/Theor 字段解析、交叉引用和当前载荷向量；不构成稳定 ABI。</td></tr>
       <tr><td>首个来源输入</td><td>END-SRCM 使用 UTF-8 逐行来源清单，显式分开来源、授权投影和 apor。</td><td>Ktisor 输入解析与失败定位；不是稳定源语言或对象身份。</td></tr>
       <tr><td>判断与运行结果分层</td><td>满足只使用 met/unmet/agno/fault；决定只使用 accepted/rejected/deferred；会话只使用 completed/failed/interrupted。</td><td>Drasor、Iknem、协议适配、人工验收和未来组合向量；不新增对象或 wire 字段。</td></tr>
@@ -105,11 +105,11 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="https://www.w3.org/TR/owl2-primer/#Open_World_Assumption">W3C OWL 2 开放世界说明</a><br><a href="https://www.w3.org/TR/shacl/#ClosedConstraintComponent">W3C SHACL 封闭约束</a><br><a href="https://www.gnu.org/software/grep/manual/grep.html#General-Output-Control">GNU grep 输出控制</a></td><td>分开未陈述、显式否定和有限封闭范围；无匹配结果始终绑定实际输入与查询。</td><td>开放数据、部分日志、一次拒绝或搜索无匹配都不证明现实世界不存在对应事态。</td></tr>
       <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a></td><td>借用 Task、Message、Artifact、多绑定和主次版本协商交换跨系统候选状态与结果；签名 Agent Card 只支持来源核对。</td><td>补丁号不进入协议协商；签名证明发布者关联，不证明能力描述真实，也不让外部 Task、Artifact 或 Agent Card 成为 Endem 身份、状态或验收决定。</td></tr>
       <tr><td><a href="https://github.com/open-telemetry/semantic-conventions-genai">OpenTelemetry GenAI 语义约定独立仓库</a></td><td>以后可由带版本、可脱敏的导出器映射运行观测。</td><td>独立仓库仍在演进且 Schema URL 待定；它不进入 Endem 编码、Iknem 身份或最终决定，敏感内容不得默认导出。</td></tr>
-      <tr><td><a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI RMF 与 GenAI Profile</a></td><td>采用风险登记、测试评估验证确认和具名责任人的治理框架，检查模型候选、远端工具和人工决定。</td><td>风险框架不定义 Endem 字段、合格阈值或软件符合性；AI RMF 1.0 正在修订，不能冻结为 ABI。</td></tr>
+      <tr><td><a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI RMF 与 GenAI Profile</a></td><td>采用风险登记、测试评估验证确认和具名责任人的治理框架，检查模型候选、远端工具和人工决定。</td><td>风险框架不定义 Endem 字段、合格阈值或软件符合性；AI RMF 1.0 正在修订，不能锁定为 ABI。</td></tr>
       <tr><td><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf">NIST AI 800-2 初始公开草案</a><br><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-3.pdf">NIST AI 800-3</a></td><td>分开评估目的、测量构念、固定基准与泛化 estimand、统计假设和不确定度。</td><td>初始公开草案不是稳定标准；任何特定基准、GLMM、分数或置信区间都不直接成为 Endem 字段或验收阈值。</td></tr>
       <tr><td><a href="https://prometheus.io/docs/practices/histograms/">Prometheus 直方图与摘要</a><br><a href="https://www.gnu.org/software/units/manual/units.html">GNU Units</a></td><td>借鉴分位数窗口、误差、聚合限制，以及线性、非线性和分段单位换算的验证边界。</td><td>仪表盘查询和单位工具不能选择业务构念、总体、聚合器、阈值或最终判断。</td></tr>
       <tr><td><a href="https://www.rfc-editor.org/rfc/rfc3629.html">RFC 3629 UTF-8</a><br><a href="https://www.unicode.org/reports/tr15/">Unicode UAX #15</a><br><a href="https://www.unicode.org/reports/tr31/">Unicode UAX #31</a><br><a href="https://www.gnu.org/software/libunistring/manual/libunistring.html">GNU libunistring</a></td><td>分开严格解码、文本槽、规范化、标识符、比较、范围、显示与模型实际输入。</td><td>不盲目规范化来源，不把同形、搜索或模型相似度当作身份或意义，也不在当前阶段引入实现库。</td></tr>
-      <tr><td><a href="https://openai.com/index/harness-engineering/">智能体控制平面工程实践</a></td><td>借鉴环境可读性、真实反馈和机械检查。</td><td>实践文章不定义项目格式、能力边界、成熟度或实现证据。</td></tr>
+      <tr><td><a href="https://openai.com/index/harness-engineering/">智能体控制平面工程实践</a></td><td>借鉴环境可读性、真实反馈和机械检查。</td><td>实践文章不定义项目格式、能力边界、状态或实现证据。</td></tr>
     </tbody></table></div>
     <p class="callout"><strong>复核日期：</strong>2026-07-13。任何外部基线都必须固定版本；升级时重新检查兼容、安全、身份、文本变换和权限边界。</p>
   </section>
@@ -129,7 +129,7 @@ permalink: "/architecture/decisions.html"
 
   <section class="content-band">
     <h2>变更规则</h2>
-    <p>改变以下任一边界的提案必须新增 ADR：六个语义面、根 <code>skena</code> 唯一性、事态与方向分离、<code>phain</code> 比较、状态机、Synem 组合、Dromen 会话边界、Iknem 有限主张或唯一命令面。采用决定后，还要同步规范、组件、生命周期、手册和测试向量。</p>
+    <p>若要改变六个语义面、根 <code>skena</code> 唯一性、事态与方向分离、<code>phain</code> 比较、状态机、Synem 组合、Dromen 会话范围、Iknem 有限主张或唯一命令面，必须新增 ADR。策略变更后，还要同步规范、组件、生命周期、手册和测试向量。</p>
   </section>
   <div class="next-prev"><a href="endem-lifecycle.html">← Endem 生命周期</a><a href="open-questions.html">开放问题 →</a></div>
 </main>

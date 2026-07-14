@@ -9,7 +9,7 @@ manual_group: "binding"
 manual_order: 2
 nav_title: "绑定与组合"
 page_heading: "绑定与组合"
-page_lead: "解析 Endem 的未决引用与跨目标关系，形成 coherent Endem 或 Synem。"
+page_lead: "解析 Endem 的待确认引用与跨目标关系，形成 coherent Endem 或 Synem。"
 summary: "pleko 输入、内容寻址、冲突、能力收敛、Synem 和 Pleko Iknem。"
 badges: ["pleko", "Synem"]
 ---

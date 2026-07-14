@@ -7,7 +7,7 @@ permalink: "/endem/index.html"
 ---
 <main id="main-content" class="tool-project" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>Endem</span></nav>
-  <header class="application-introduction"><h1>endem 目标制品应用</h1><p>设计中的单一命令入口将贯穿目标制品的形成、检查、组合、发布和受控实现。</p><div class="badges"><span class="badge">Application Design</span><span class="badge">Actions Specified</span><span class="badge">No Component Code</span><span class="badge">Unreleased</span></div></header>
+  <header class="application-introduction"><h1>endem 目标制品应用</h1><p>设计中的单一命令入口将贯穿目标制品的形成、检查、组合、发布和受控实现。</p><div class="badges"><span class="badge">Application Design</span><span class="badge">Actions Specified</span><span class="badge">尚未实现</span><span class="badge">尚未发布</span></div></header>
 
   <div class="tool-project-body">
     <section>
@@ -19,11 +19,11 @@ permalink: "/endem/index.html"
 
     <section class="tool-status-panel">
         <h2>当前状态</h2>
-        <p><strong>项目尚未进入代码开发阶段，也没有可执行组件。</strong>当前只定义未来 <code>endem</code> 应怎样读取来源、形成 END-P1、分离生产检查与独立 Theor。参数、退出状态、安装包和稳定 ABI 尚未冻结。</p>
+        <p><strong>当前没有可执行组件。</strong>现有材料定义未来 <code>endem</code> 应怎样读取来源、形成 END-P1、分离生产检查与独立 Theor。参数、退出状态、安装包和稳定 ABI 尚待确定。</p>
         <ul>
           <li>ADR-0012 只把 Rust 1.97.0、禁止 unsafe 和依赖边界记为未来实现约束。</li>
-          <li>END-P1 字节只作为规范向量，由资料检查器读取，不是 Ktisor 的产出证据。</li>
-          <li><code>elenk</code> 与独立 <code>theor</code> 目前只有职责、输入输出和验证要求；一致性检查属于内部门禁。</li>
+      <li>END-P1 字节只作为规范向量，不是 Ktisor 的产出证据。</li>
+      <li><code>elenk</code> 与独立 <code>theor</code> 目前只有职责、输入输出和验证要求。</li>
           <li>没有实现仓库、安装包、签名或跨平台构建，因此当前不是可下载版本。</li>
           <li><code>pleko</code> 等真实多 Endem 案例与最小格式通过双实现验证后开发。</li>
           <li><code>drase</code> 要等待运行消费者和隔离边界；派生封装与外部签名没有公开动作承诺。</li>
@@ -37,7 +37,7 @@ permalink: "/endem/index.html"
           <li><code>ktise</code> 是唯一规范写入入口；模型或外部前端只能提供候选。</li>
           <li><code>elenk</code> 使用 Ktisor 的生产读取路径，并按结构、语义、状态、完整性和策略分层报告。</li>
           <li><code>pleko</code> 使用内容身份和显式策略解析引用，不能读取环境隐式路径。</li>
-          <li>物理封装由对应生产动作在 Profile 冻结后承担；外部签名集成不持有 Ktisor 写入权。</li>
+          <li>物理封装由对应生产动作在 Profile 锁定后承担；外部签名集成不持有 Ktisor 写入权。</li>
           <li><code>theor</code> 使用不共享 Ktisor 解析代码的 Theor；<code>drase</code> 启动不拥有写入器的隔离 Drasor。</li>
         </ul>
     </section>

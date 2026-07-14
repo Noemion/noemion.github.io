@@ -7,14 +7,14 @@ permalink: "/specifications/authority.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>权威与授权决定</span></nav>
-  <header class="content-introduction"><h1>权威与授权决定边界</h1><p>定义谁可以在什么范围内确认自然语言意义、解决未决项、授予运行能力或作出决定，并让委托、同意、撤销和多人冲突都可核对。</p><div class="badges"><span class="badge">AUT-CORE 0.1.0-draft</span><span class="badge">12 Clauses</span><span class="badge">No Wire Format</span><span class="badge">No Policy Engine</span></div></header>
+  <header class="content-introduction"><h1>权威与授权决定边界</h1><p>定义谁可以在什么范围内确认自然语言意义、解决待确认项、授予运行能力或作出决定，并让委托、同意、撤销和多人冲突都可核对。</p><div class="badges"><span class="badge">AUT-CORE 0.1.0-draft</span><span class="badge">12 Clauses</span><span class="badge">No Wire Format</span><span class="badge">No Policy Engine</span></div></header>
 
   <section class="content-stack">
     <h2>它解决什么问题</h2>
     <p class="lead">模型可以提出候选，界面可以收集点击，签名可以认证陈述，但只有落在精确政策与范围内的具名权威才能形成授权。</p>
-    <p>项目已接受这项跨制品边界：认证、授权、满足和最终决定必须分别判断，任何一层不得替另一层作结论。</p>
+    <p>当前策略已确定这项跨制品边界：认证、授权、满足和最终决定必须分别判断，任何一层不得替另一层作结论。</p>
     <p>此前 Endem、Dromen、Iknem、身份和协议适配规范都要求“具名权威”或“当前政策”，却没有共同定义主体、作用范围、委托、多人冲突、同意、撤销和重放。AUT-CORE 收敛这些跨对象不变量，不创建新的制品、文件格式、令牌、角色系统或组件。</p>
-    <p class="note">当前仍在研究预览、dry-run 与批准之间的横切边界。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/preview-simulation-and-approval-proposal.md">非规范研究提案</a>要求把显示、模拟、授权、执行尝试、事后观察、满足和最终决定分开；在用户接受并修订现有规范前，它不构成新的 AUT-CORE 条款。</p>
+    <p class="note">当前仍在研究预览、dry-run 与批准之间的横切边界。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/preview-simulation-and-approval-proposal.md">非规范研究提案</a>要求把显示、模拟、授权、执行尝试、事后观察、满足和最终决定分开；该提案仍处于研究阶段，不构成新的 AUT-CORE 条款。</p>
     <p class="callout"><strong>权威边界：</strong>实现义务以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md">AUT-CORE 条款源</a>为准。当前只有规范、威胁、场景和提案向量，没有身份提供方、政策求值器、同意界面、能力代理或决定服务。</p>
   </section>
 
@@ -51,7 +51,7 @@ permalink: "/specifications/authority.html"
   <section class="content-wide">
     <h2>自然语言候选怎样获得授权</h2>
     <div class="flow"><div class="step">精确来源与解码文本</div><div class="step">不可信候选</div><div class="step">影响位置与风险</div><div class="step">安全显示视图</div><div class="step">具名权威与范围</div><div class="step">grant deny defer</div><div class="step">保留剩余 apor</div></div>
-    <p>一个候选即使结构合法、来自强模型并具有很高置信度，也只能停留在候选层。授权者必须看到候选相对来源改变了什么、影响哪些关系和角色、由谁产生、哪些未决项仍然存在。权限只覆盖已展示且落在主体职责内的部分。</p>
+    <p>一个候选即使结构合法、来自强模型并具有很高置信度，也只能停留在候选层。授权者必须看到候选相对来源改变了什么、影响哪些关系和角色、由谁产生、哪些待确认项仍然存在。权限只覆盖已展示且落在主体职责内的部分。</p>
     <p>确定性规则也不能获得无限权威。规则必须固定版本、输入域、输出位置和失败责任；超出规则声明域的输入仍进入 <code>apor</code> 或拒绝，不能用“自动规则”掩盖新的自然语言判断。</p>
   </section>
 
@@ -95,7 +95,7 @@ permalink: "/specifications/authority.html"
   </section>
 
   <section class="content-band">
-    <h2>当前仍未冻结</h2>
+    <h2>待定内容</h2>
     <p>权威目录、角色和政策语言、授权事件物理编码、同意 UI Profile、法定人数算法、凭据格式、外部协议映射、撤销分发、能力代理、审计存储和法律效力仍保持开放。</p>
   </section>
   <div class="next-prev"><a href="text-and-identifiers.html">← 文本与标识符边界</a><a href="../architecture/adr-0029-authority-and-authorization-decisions.html">ADR-0029 →</a></div>

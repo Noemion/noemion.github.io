@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0028-text-and-identifier-boundaries.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0028</span></nav>
-  <header class="content-introduction"><h1>ADR-0028<br>文本与标识符边界</h1><p>让来源字节、解码文字、机器标识符、显示视图和模型实际输入分别可核对，避免相同字形掩盖不同机器内容。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">TEXT-IDENTIFIER-CORE 0.1.0-draft</span><span class="badge">Unicode Boundaries</span><span class="badge">No Unicode Code</span></div></header>
+  <header class="content-introduction"><h1>ADR-0028<br>文本与标识符边界</h1><p>让来源字节、解码文字、机器标识符、显示视图和模型实际输入分别可核对，避免相同字形掩盖不同机器内容。</p><div class="badges"><span class="badge">当前草案</span><span class="badge">TEXT-IDENTIFIER-CORE 0.1.0-draft</span><span class="badge">Unicode Boundaries</span><span class="badge">No Unicode Code</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
@@ -48,7 +48,7 @@ permalink: "/architecture/adr-0028-text-and-identifier-boundaries.html"
 
   <section class="content-wide">
     <h2>模型时代新增的责任</h2>
-    <p>已有研究展示了不可见字符、同形替换和变体选择符怎样改变 NLP 或模型处理，同时逃过普通视觉审查。这些结果会随模型和 tokenizer 变化，因此只作为威胁证据，不冻结成某个攻击成功率或检测算法。</p>
+    <p>已有研究展示了不可见字符、同形替换和变体选择符怎样改变 NLP 或模型处理，同时逃过普通视觉审查。这些结果会随模型和 tokenizer 变化，因此只作为威胁证据，不确定为某个攻击成功率或检测算法。</p>
     <p>未来模型调用必须绑定实际输入身份、预处理链、不可见字符清单、模型与 tokenizer 身份和人类复核视图。即使这些材料齐全，输出仍是模型候选，不能取得规范写入、授权或最终验收权。</p>
   </section>
 

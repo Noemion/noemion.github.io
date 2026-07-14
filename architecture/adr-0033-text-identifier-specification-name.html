@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0033-text-identifier-specification-name.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0033</span></nav>
-  <header class="content-introduction"><h1>ADR-0033<br>文本与标识符标准命名</h1><p>用完整职责名称消除文件格式误读，同时保持文本、标识符、显示与模型输入边界不变。</p><div class="badges"><span class="badge">Accepted</span><span class="badge">2026-07-13</span><span class="badge">Direct replacement</span><span class="badge">No new format</span></div></header>
+  <header class="content-introduction"><h1>ADR-0033<br>文本与标识符标准命名</h1><p>用完整职责名称消除文件格式误读，同时保持文本、标识符、显示与模型输入边界不变。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">2026-07-13</span><span class="badge">Direct replacement</span><span class="badge">No new format</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
@@ -53,7 +53,7 @@ permalink: "/architecture/adr-0033-text-identifier-specification-name.html"
     <h2>一次性迁移范围</h2>
     <div class="table-wrap"><table><thead><tr><th>层</th><th>现行入口</th><th>保持不变</th></tr></thead><tbody>
       <tr><td>规范与配套资料</td><td><code>text-identifier-core.md</code>、<code>text-identifier-threat-model.md</code>、<code>text-identifier-scenarios.md</code></td><td>十二条职责、十五个场景和失败责任</td></tr>
-      <tr><td>机器登记</td><td><code>TEXT-IDENTIFIER-CORE</code>、<code>TEXT-*</code>、<code>TEXT-THREAT</code>、<code>TEXT-SCEN</code></td><td>版本、成熟度、诊断码和验证状态</td></tr>
+      <tr><td>机器登记</td><td><code>TEXT-IDENTIFIER-CORE</code>、<code>TEXT-*</code>、<code>TEXT-THREAT</code>、<code>TEXT-SCEN</code></td><td>版本、状态、诊断码和验证状态</td></tr>
       <tr><td>一致性材料</td><td><code>vectors/text-identifier/</code> 与 <code>text_identifier_vector_test.py</code></td><td>十二个允许案例与十二个确定拒绝</td></tr>
       <tr><td>公开入口</td><td><code>/specifications/text-and-identifiers.html</code></td><td>面向读者的“文本与标识符边界”名称</td></tr>
     </tbody></table></div>

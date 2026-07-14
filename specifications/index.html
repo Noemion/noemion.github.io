@@ -7,16 +7,16 @@ permalink: "/specifications/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>规范参考指南</span></nav>
-  <header class="section-introduction"><h1>规范参考指南</h1><p>从一项目标、多个目标的组合、一次会话的运行边界、验收证据、结构化失败和外部协议适配，到精确内容身份、文本解释与授权决定，查看当前采用的规则和仍未冻结的接口。</p><div class="badges"><span class="badge">END-CORE</span><span class="badge">SYN-CORE</span><span class="badge">DRO-CORE</span><span class="badge">IKN-CORE</span><span class="badge">DIA-CORE</span><span class="badge">ADP-CORE</span><span class="badge">ID-CORE</span><span class="badge">TEXT-IDENTIFIER-CORE</span><span class="badge">AUT-CORE</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="section-introduction"><h1>规范参考指南</h1><p>从单项目标、多目标组合和一次运行会话，到验收证据、结构化失败、外部协议、内容身份、文本解释与授权，查看当前策略和待定内容。</p><div class="badges"><span class="badge">END-CORE</span><span class="badge">SYN-CORE</span><span class="badge">DRO-CORE</span><span class="badge">IKN-CORE</span><span class="badge">DIA-CORE</span><span class="badge">ADP-CORE</span><span class="badge">ID-CORE</span><span class="badge">TEXT-IDENTIFIER-CORE</span><span class="badge">AUT-CORE</span><span class="badge">接口待定</span></div></header>
   <section>
     <h2>先看哪些规范</h2>
     <p class="lead">先读 Endem，理解一项目标怎样成为可检查制品。再读 Synem、Dromen 与 Iknem，理解组合、运行和证据。遇到“谁可以批准候选或授予能力”时读 AUT-CORE；它不会把授权混成事实、满足或最终接受。</p>
-    <p>项目已经采用术语职责、六个语义面、结果域、复合判断、组合闭包、会话契约、证据评估、结构化诊断、外部协议适配、精确身份、文本解释以及权威与授权决定边界。具体发行拼写和读音仍未通过名称门禁。END-P1 已关闭当前 Endem 设计载荷；各 CORE 草案分别关闭其抽象职责。当前只有资料检查器，没有组件实现。对象与事件的物理编码、运行 API、具体协议 Profile、摘要和签名算法、Unicode 标识符、权威目录、政策语言与稳定 ABI 仍未冻结。</p>
+    <p><strong>当前策略：</strong>项目分别定义术语职责、六个语义面、结果类型、复合判断、组合关系、会话契约、证据评估、结构化诊断、外部协议适配、精确身份、文本解释和授权。END-P1 给出当前 Endem 载荷设计，各 CORE 草案给出对应规则。</p><p><strong>待定内容：</strong>具体发行拼写和读音，对象与事件的物理编码、运行 API、协议 Profile、摘要和签名算法、Unicode 标识符、权威目录、政策语言与稳定 ABI。当前没有组件实现。</p>
   </section>
   <section>
     <h2>对象与横切规范指南</h2>
     <div class="page-links">
-      <a class="page-link" href="endem.html"><strong>Endem · 最小目标制品</strong><span>查看来源、意义、事态、目标方向、判据、未决边界和三个制品状态。</span></a>
+      <a class="page-link" href="endem.html"><strong>Endem · 最小目标制品</strong><span>查看来源、意义、事态、目标方向、判据、待确认事项和三个制品状态。</span></a>
       <a class="page-link" href="synem.html"><strong>Synem · 多目标解析闭包</strong><span>查看多个 Endem 怎样解析引用、收敛权限并报告冲突。</span></a>
       <a class="page-link" href="dromen.html"><strong>Dromen · 一次运行的只读契约</strong><span>查看精确制品怎样绑定政策、环境、能力、预算和证据责任。</span></a>
       <a class="page-link" href="iknem.html"><strong>Iknem · 可定位证据记录</strong><span>查看来源、构建、绑定、签名、运行和决定依据怎样保持身份链。</span></a>
@@ -32,7 +32,7 @@ permalink: "/specifications/index.html"
     <h2>规范源与可追溯性</h2>
     <p class="lead">END-CORE 0.1.0-draft、SYN-CORE 0.1.0-draft、DRO-CORE 0.1.0-draft、IKN-CORE 0.1.0-draft、DIA-CORE 0.1.0-draft、ADP-CORE 0.1.0-draft、ID-CORE 0.1.0-draft、TEXT-IDENTIFIER-CORE 0.1.0-draft 与 AUT-CORE 0.1.0-draft 分别固定对象和横切边界。END-P1 是当前封闭内容 Profile，END-FMT 定义实验性容器；每项义务都使用唯一条款 ID 并连接验证责任。</p>
     <div class="table-wrap"><table><thead><tr><th>工程源</th><th>用途</th><th>当前边界</th></tr></thead><tbody>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 内容标准</a></td><td>六个语义面、规范分层、Profile 符合性、抽象单变量量化、授权、状态、身份、安全与验证责任。</td><td>量化物理字段、嵌套或多变量量化、时间和求值语言仍未冻结。</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 内容标准</a></td><td>六个语义面、规范分层、Profile 符合性、抽象单变量量化、授权、状态、身份、安全与验证责任。</td><td>量化物理字段、嵌套或多变量量化、时间和求值语言仍待确定。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 格式条款</a></td><td>固定前导、记录目录、受限 CBOR、结构实验 END-P0 与设计 Profile END-P1。</td><td>END-FMT 0.1.0-draft 尚非稳定 ABI，也没有公开符合性声明。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 内容 Profile</a></td><td>六记录字段键、嵌套 map、枚举、规范数组顺序、引用、状态和资源限制。</td><td>只覆盖 nascent 与 kine，不预留尚无消费者的未来字段。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-source-manifest.md">END-SRCM 来源清单</a></td><td>首个 Ktisor 输入的指令、转义、基数、授权边界和 END-P1 映射。</td><td>是可替换的实验接口，不是稳定源语言或 Endem 身份。</td></tr>
@@ -45,7 +45,7 @@ permalink: "/specifications/index.html"
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md">TEXT-IDENTIFIER-CORE 文本与标识符条款</a></td><td>文本槽、严格 UTF-8、来源溯源、ASCII 标识符、规范化、比较、范围、双向显示、隐藏字符、模型输入与显示视图。</td><td>不是新制品、Unicode 标识符 Profile、文本处理库或模型输入网关。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md">AUT-CORE 权威与授权决定条款</a></td><td>权威语境、主体资格、封闭范围、语义授权、委托、同意、多人决定、时效、重放、能力交集与结果分离。</td><td>不是新制品、访问令牌、政策语言、身份系统或决定引擎。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 场景语料</a></td><td>三十个自然语言场景检查方向、否定、歧义、观察、故障、权威、多根、结果域、时间、缺席、量化、测量、复合判断及授权伴随关系。</td><td>是非规范设计审查材料，不是解析能力、符合性测试或实现证据。</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读登记</a></td><td>规范、术语、成熟度、实现状态与验证引用。</td><td><code>accepted</code> 不表示稳定发行；计划测试不能写成已覆盖。</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读登记</a></td><td>规范、术语、状态、实现状态与验证引用。</td><td><code>accepted</code> 不表示稳定发行；计划测试不能写成已覆盖。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md">威胁模型</a><br><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md">DIA-CAT 诊断目录</a></td><td>把不可信输入、资源放大和共同故障映射到条款与跨对象草案机器码。</td><td>END-P0 数值只支持第一轮实验，诊断编码与规模上限仍需证据。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-threat-model.md">Synem 威胁模型</a><br><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md">Synem 场景语料</a></td><td>检查依赖替换、闭包截断、权限放大、结果洗白和激活竞态。</td><td>场景是非规范设计审查材料，不是组件证据。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-threat-model.md">Iknem 威胁模型</a><br><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md">Iknem 场景语料</a></td><td>检查范围漂白、循环自证、观察升级、撤销失明、覆盖伪造、决定越权和泄密。</td><td>十四个场景是非规范设计审查材料，不是采集器或验证器证据。</td></tr>
@@ -76,7 +76,7 @@ permalink: "/specifications/index.html"
   <section>
     <h2>规范与实现的边界</h2>
     <div class="table-wrap"><table><thead><tr><th>层次</th><th>当前权威内容</th><th>尚未形成的证据</th></tr></thead><tbody>
-      <tr><td>语义、会话与横切边界</td><td>Endem 的一个根与六语义面；Synem 的完整闭包；Dromen 的一次会话契约；Iknem 的证据边界；DIA-CORE、ADP-CORE、ID-CORE、TEXT-IDENTIFIER-CORE 与 AUT-CORE 的诊断、适配、身份、文本和授权边界；共有 153 个非规范设计场景，并执行七组各 12 个专题向量、20 个 Dromen、18 个 Iknem、20 个诊断，以及各 24 个适配、身份、文本与授权提案向量</td><td>场景和提案向量还不是组件证据；对象与事件物理字段、签名 Profile、Unicode 标识符、权威目录、政策语言、Dromen 运行 API 和具体协议 Profile 仍未冻结</td></tr>
+      <tr><td>语义、会话与横切边界</td><td>Endem 的一个根与六语义面；Synem 的完整闭包；Dromen 的一次会话契约；Iknem 的证据边界；DIA-CORE、ADP-CORE、ID-CORE、TEXT-IDENTIFIER-CORE 与 AUT-CORE 的诊断、适配、身份、文本和授权边界；共有 153 个非规范设计场景，并执行七组各 12 个专题向量、20 个 Dromen、18 个 Iknem、20 个诊断，以及各 24 个适配、身份、文本与授权提案向量</td><td>场景和提案向量还不是组件证据；对象与事件物理字段、签名 Profile、Unicode 标识符、权威目录、政策语言、Dromen 运行 API 和具体协议 Profile 仍待确定</td></tr>
       <tr><td>组合</td><td>SYN-CORE 的完整闭包、精确绑定、权限交集、成员结果与会话激活</td><td>物理格式、大规模性能、受限循环和远程仓库协议</td></tr>
       <tr><td>运行边界</td><td>DRO-CORE 的精确主体、政策与环境绑定、能力和预算求交、只读失效及销毁</td><td>Drasor、沙箱、能力代理、事件编码、恢复策略和平台隔离证据</td></tr>
       <tr><td>证据</td><td>IKN-CORE 定义有范围记录、外部有效性评估、krin 覆盖度与决定分离</td><td>物理格式、稳定事件编码、跨实现验证、撤销分发和隐私策略语言</td></tr>

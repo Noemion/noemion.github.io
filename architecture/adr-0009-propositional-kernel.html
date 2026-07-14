@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0009-propositional-kernel.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0009</span></nav>
-  <header class="content-introduction"><h1>ADR-0009<br>Endem 命题投影语义核</h1><p>保存从需求分类转向命题结构的决策历史；五组名称与目标力量模型已由 ADR-0010 取代。</p><div class="badges"><span class="badge">Superseded by ADR-0010</span><span class="badge">2026-07-12</span><span class="badge">Historical Semantics</span><span class="badge">Encoding Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>ADR-0009<br>Endem 命题投影语义核</h1><p>保存从需求分类转向命题结构的决策历史；五组名称与目标力量模型已由 ADR-0010 取代。</p><div class="badges"><span class="badge">Superseded by ADR-0010</span><span class="badge">2026-07-12</span><span class="badge">Historical Semantics</span><span class="badge">编码待定</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
@@ -42,7 +42,7 @@ permalink: "/architecture/adr-0009-propositional-kernel.html"
     <h2>三种不能混淆的未确定</h2>
     <div class="table-wrap"><table><thead><tr><th>状态</th><th>含义</th><th>处理</th></tr></thead><tbody>
       <tr><td><code>no-sense</code></td><td>记号组合违反 Profile，或没有任何允许的投影。</td><td><code>form</code> 拒绝，不产生合法 Endem。</td></tr>
-      <tr><td><code>open</code></td><td>存在可表达候选，但规则与授权不足以选择。</td><td>保留候选、来源和解决权限；不能执行阻断性未决项。</td></tr>
+      <tr><td><code>open</code></td><td>存在可表达候选，但规则与授权不足以选择。</td><td>保留候选、来源和解决权限；不能执行阻断性待确认项。</td></tr>
       <tr><td><code>unknown</code></td><td>意义与满足条件已经确定，但外部观察不足。</td><td>Runner 保留未知，不把它改成 <code>unmet</code> 或 <code>met</code>。</td></tr>
     </tbody></table></div>
     <p>工程满足状态还区分 <code>met</code>、<code>unmet</code> 与 <code>error</code>。这些状态不是哲学真值；最终 <code>accepted</code> 还要求 Witness 完整、权威匹配并且没有阻断性 <code>open</code>。</p>
@@ -68,8 +68,8 @@ permalink: "/architecture/adr-0009-propositional-kernel.html"
   </section>
 
   <section class="content-band">
-    <h2>仍未冻结的内容</h2>
-    <p>这份历史记录没有冻结物理记录编号、文本语法、符号 ID、量化、时间、求值语言或稳定 ABI。当前未决范围以 ADR-0010 和开放问题页为准。</p>
+    <h2>待定内容</h2>
+    <p>这份历史记录尚未确定物理记录编号、文本语法、符号 ID、量化、时间、求值语言或稳定 ABI。当前待确认范围以 ADR-0010 和开放问题页为准。</p>
   </section>
   <div class="next-prev"><a href="adr-0008-endem-system.html">← ADR-0008</a><a href="open-questions.html">开放问题 →</a></div>
 </main>

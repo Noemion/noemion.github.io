@@ -7,11 +7,11 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0012</span></nav>
-  <header class="content-introduction"><h1>ADR-0012<br>未来安全核心的 Rust 基线</h1><p>若用户明确开启代码阶段，Ktisor 与生产读取核心以安全 Rust 作为实现基线；当前只保存设计约束和历史研究，不编写组件。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">Rust 1.97.0 Baseline</span><span class="badge">Historical Evidence</span><span class="badge">Implementation Not Started</span></div></header>
+  <header class="content-introduction"><h1>ADR-0012<br>未来安全核心的 Rust 基线</h1><p>Ktisor 与生产读取核心计划以安全 Rust 作为实现基线；当前保留设计约束和历史研究，组件实现尚未开始。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">Rust 1.97.0 Baseline</span><span class="badge">Historical Evidence</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-stack">
     <h2>决定</h2>
-    <p class="lead">如果代码阶段以后开启，第一条“ktise → elenk”纵向切片以 Rust 1.97.0 stable 作为重新评审起点。未来首版禁止 <code>unsafe</code>，不引入第三方 crate，所有不可信偏移、长度、计数和对齐使用显式受检算术，发行构建继续启用溢出检查。</p>
+    <p class="lead">第一条“ktise → elenk”实现切片以 Rust 1.97.0 stable 作为重新评审起点。未来首版禁止 <code>unsafe</code>，不引入第三方 crate，所有不可信偏移、长度、计数和对齐使用显式受检算术，发行构建继续启用溢出检查。</p>
     <p>这项决定不要求整个 Noemion 生态只使用 Rust。Drasor 适配器、界面、协议桥接和未来外部工具可以采用适合自身消费者的语言。Theor 必须另写解析结构和错误路径；即使以后也使用 Rust，也不得复用 Ktisor 解析代码、生成代码或错误分类实现。</p>
   </section>
 
@@ -25,7 +25,7 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
       <tr><td>重复构建</td><td>同一主机、同一源码和工具链，两个输出目录</td><td>C 与 Rust 的两次优化二进制摘要分别一致。</td><td>不是跨操作系统或跨编译器复现。</td></tr>
     </tbody></table></div>
     <p>复核入口：<a href="https://github.com/Noemion/noemion.github.io/tree/main/experiments/p0-language">实验源码与边界</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/experiments/p0-language/results.json">机器可读结果</a>、<a href="https://github.com/Noemion/noemion.github.io/actions/runs/29205071270">Linux 强制实验记录</a>。</p>
-    <p class="callout warning"><strong>成熟度：</strong>这些原型不是生产实现，也不产生规范 Endem；它们只为当前结构切片提供语言与失败边界证据。</p>
+    <p class="callout warning"><strong>状态：</strong>这些原型不是生产实现，也不产生规范 Endem；它们只为当前结构切片提供语言与失败边界证据。</p>
   </section>
 
   <section class="content-wide">
@@ -36,19 +36,19 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
       <tr><td>当前源码表面</td><td>168 个非空行。</td><td>266 个非空行。</td><td>只是当前切片的描述，不作为单独评分，但没有出现“安全必然更冗长”。</td></tr>
       <tr><td>当前优化二进制</td><td>488,488 字节。</td><td>34,040 字节。</td><td>C 显著更小；第一阶段优先审计安全，尺寸差异需要后续 strip 与部署目标再评估。</td></tr>
       <tr><td>动态依赖</td><td>实测只有系统库。</td><td>实测只有系统库。</td><td>两者都没有引入大型运行框架。</td></tr>
-      <tr><td>GNU/LLVM 验证</td><td>当前没有 P1 实现级 Rust fuzz；P0-LANG-001 只作为历史研究材料保留。</td><td>GCC/Clang Sanitizer 与 libFuzzer 提供未来验证机制先例。</td><td>进入代码阶段后，Ktisor 与 Theor 必须分别建立验证路径，历史 C 原型不能自动进入生产信任路径。</td></tr>
+      <tr><td>GNU/LLVM 验证</td><td>当前没有 P1 实现级 Rust fuzz；P0-LANG-001 只作为历史研究材料保留。</td><td>GCC/Clang Sanitizer 与 libFuzzer 提供未来验证机制先例。</td><td>Ktisor 与 Theor 的实现必须分别建立验证路径，历史 C 原型不能自动进入生产信任路径。</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>未来代码阶段的构建政策</h2>
+    <h2>未来实现的构建政策</h2>
     <ul>
-      <li>代码阶段开启时先以 Rust 1.97.0 为评审基线；若当时工具链已变化，必须记录升级 ADR 并重新评估规范向量、差分、模糊和重复构建方案。</li>
+      <li>实现启动时先以 Rust 1.97.0 为评审基线；若工具链已经变化，必须记录升级 ADR 并重新评估规范向量、差分、模糊和重复构建方案。</li>
       <li>仓库提交 <code>rust-toolchain.toml</code> 与 <code>Cargo.lock</code>，发布不能依赖网络“最新版本”。</li>
       <li>第一纵向切片使用 <code>#![forbid(unsafe_code)]</code>，CI 同时拒绝警告；任何未来 unsafe 提案必须单独 ADR、最小封装和 Miri/Sanitizer/模糊证据。</li>
       <li>第一纵向切片不使用第三方 crate。新增依赖必须说明不可替代消费者、许可证、维护状态、供应链边界和删除条件。</li>
       <li>release profile 保持整数溢出检查；不得用 wrapping 运算解释不可信结构字段。</li>
-      <li>C 原型当前冻结在 <code>experiments/</code> 作为历史材料，不自动运行或扩展；未来即使复用，也只能消费规范字节并给出差分结果，不能链接进 Ktisor、Theor 或 CLI。</li>
+      <li>C 原型当前保存在 <code>experiments/</code> 作为历史材料，不自动运行或扩展；未来即使复用，也只能消费规范字节并给出差分结果，不能链接进 Ktisor、Theor 或 CLI。</li>
     </ul>
   </section>
 
@@ -62,12 +62,12 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
   </section>
 
   <section class="content-wide">
-    <h2>没有采用的方案</h2>
+    <h2>其他候选方案</h2>
     <div class="table-wrap"><table><thead><tr><th>方案</th><th>当前结论</th><th>重新考虑条件</th></tr></thead><tbody>
       <tr><td>C 作为生产读取核心</td><td>原型正确且更小，但语言不提供所需的默认内存边界；当前风险收益不足。</td><td>Rust 无法满足已测目标平台、审计或互操作要求，且 C 获得更强形式化与持续模糊证据。</td></tr>
       <tr><td>Rust 与 C 同时作为生产解析器</td><td>会形成两套生产权威和更大的补丁面；C 只作非生产预言机。</td><td>存在必须由 C ABI 直接承载的真实消费者，并能保持权限和失败隔离。</td></tr>
       <tr><td>Swift、Go、C++ 或 Zig</td><td>没有针对当前字节切片形成等量证据，因此不作优劣结论，也不进入首版核心。</td><td>Rust 或 C 实验暴露无法解决的消费者要求，再用同一向量补做实验。</td></tr>
-      <tr><td>Python/JavaScript 生产核心</td><td>当前 Python 只负责规范资料检查；动态运行时不进入第一阶段可信二进制核心。</td><td>只用于非权威开发工具或外层适配器，并明确不产生规范字节。</td></tr>
+      <tr><td>Python/JavaScript 生产核心</td><td>动态运行时不进入第一阶段可信二进制核心。</td><td>只用于非权威开发工具或外层适配器，并明确不产生规范字节。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -77,7 +77,7 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
       <li>Rust Ktisor 与独立 Theor 必须分别实现完整确定性 CBOR 子集，不能共享解析代码。</li>
       <li>需要增加截断、非最短整数、乱序键、深度、字符串、节点、边和累计分配边界向量。</li>
       <li>需要 Linux 与 macOS 的规范对象字节复现，以及至少两个隔离构建环境的可执行文件比较。</li>
-      <li>代码阶段开启后，Ktisor 与 Theor 必须建立彼此独立的 fuzz 目标，并以 END-P1 正反向量为初始语料；当前没有实现级 fuzz 结果。</li>
+      <li>Ktisor 与 Theor 的实现必须建立彼此独立的 fuzz 目标，并以 END-P1 正反向量为初始语料；当前没有实现级 fuzz 结果。</li>
       <li>需要在出现真实 FFI、包管理器和发行消费者后再决定 C ABI、动态库或静态链接政策。</li>
     </ul>
   </section>

@@ -7,13 +7,13 @@ permalink: "/downloads/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>下载</span></nav>
-  <header class="section-introduction"><h1>下载与资源</h1><p>当前没有可安装的 endem；这里说明已经公开什么，以及正式发行前还缺什么。</p><div class="badges"><span class="badge">Unreleased</span><span class="badge">Integrity</span><span class="badge">Supply Chain</span></div></header>
-  <section><h2>为什么暂不提供下载</h2><p class="lead">项目尚未进入组件代码开发阶段，因此不存在 Ktisor、Theor、Drasor、<code>endem</code> CLI、安装包或二进制。当前公开的是架构、规范和验证方案；把这些资料包装成下载会错误暗示组件已经实现。</p></section>
+  <header class="section-introduction"><h1>下载与资源</h1><p>当前没有可安装的 endem；这里说明已经公开什么，以及正式发行前还缺什么。</p><div class="badges"><span class="badge">尚未发布</span><span class="badge">Integrity</span><span class="badge">Supply Chain</span></div></header>
+  <section><h2>为什么暂不提供下载</h2><p class="lead">当前没有 Ktisor、Theor、Drasor、<code>endem</code> CLI、安装包或二进制。已经公开的是架构、规范和验证方案；把这些资料包装成下载会错误暗示组件已经实现。</p></section>
   <section data-resource-state="unreleased"><h2>正式版本</h2><p>暂未发布；没有有效的安装命令、包名或版本号。</p></section>
   <section><h2>资源状态</h2><ul class="resource-list">
     <li><strong>网站与设计资料</strong><span class="resource-state">已公开</span><p>项目门户、ADR、架构、规范草案与验证路线；除文件另有说明外，本仓库源码与文档采用 Apache License 2.0。</p></li>
     <li><strong>核心、格式与规范向量</strong><span class="resource-state">实验草案已公开</span><p>已有 END-CORE、END-FMT、10 个 Endem 语义 JSON 向量、6 个 END-P0 结构字节和 14 个 END-P1 字节；稳定 ABI 仍待形成。</p></li>
-    <li><strong>P0-W4 语言实验</strong><span class="resource-state">证据已公开</span><p>C/Rust 结构读取原型、机器可读结果和 Linux 模糊测试工作流可供复核；它们不是可安装程序或生产解析器。</p></li>
+    <li><strong>历史语言实验</strong><span class="resource-state">证据已公开</span><p>C/Rust 结构读取原型、机器可读结果和 Linux 模糊测试记录可供复核；它们不是可安装程序或生产解析器。</p></li>
     <li><strong>Endem Ktisor 与独立 Theor</strong><span class="resource-state">尚未开发</span><p>当前只有职责、信任边界、候选语言和未来验证条件；没有实现仓库、生产源码或可执行程序。</p></li>
     <li><strong>发行制品</strong><span class="resource-state">等待验证</span><p>需要双环境复现、摘要、外部签名、SBOM、供应链声明与撤回机制。</p></li>
   </ul></section>
@@ -24,7 +24,7 @@ permalink: "/downloads/index.html"
     <tr><td>代码、参数与资料较完整</td><td>逐项列出架构、参数、推理/训练代码、数据说明、数据和文档</td><td>用一个“开放模型”标签替代对象清单</td></tr>
   </tbody></table></div><p>未来若引用 GNU 自由软件、OSI Open Source AI 或 Model Openness Framework，必须给出定义版本、覆盖对象、逐项证据和复核日期。详细边界见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-openness-and-software-freedom-boundaries-proposal.md">非规范模型开放性与软件自由研究提案</a>。</p><p>“托管 API 可用”也只说明访问关系；谁实际执行、哪些数据外发、服务端是否隐藏变换、状态能否导出、停服后能否继续和切换后损失什么，必须另行说明。详见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/hosted-ai-service-and-user-control-boundaries-proposal.md">非规范托管人工智能服务与用户控制研究提案</a>。</p></section>
   <section><h2>发布顺序</h2><div class="table-wrap"><table><thead><tr><th>阶段</th><th>可获取内容</th><th>最低门槛</th></tr></thead><tbody>
-    <tr><td>设计</td><td>范围、ADR、候选规范、开放问题</td><td>成熟度清楚，不把计划写成能力</td></tr>
+    <tr><td>设计</td><td>范围、ADR、候选规范、开放问题</td><td>状态清楚，不把计划写成能力</td></tr>
     <tr><td>实验</td><td>规范快照、向量、原型源码</td><td>可重复构建、安全测试、逐对象许可证清单</td></tr>
     <tr><td>候选</td><td>候选 CLI 与互操作材料</td><td>签名、SBOM、Ktisor/Theor 差分、模糊与复现报告</td></tr>
     <tr><td>稳定</td><td>软件、规范、示例与迁移说明</td><td>版本、漏洞响应、撤回、长期归档与正式命名/商标审查</td></tr>

@@ -7,12 +7,12 @@ permalink: "/architecture/adr-0017-negation-and-absence.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0017</span></nav>
-  <header class="content-introduction"><h1>ADR-0017<br>否定事态<br>缺席证据</h1><p>分开关系不成立、没有观察和观察系统故障，避免用空日志、部分搜索或模型未发现异常来证明禁止目标已经满足。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">Negative Evidence</span><span class="badge">No Wire Schema Change</span><span class="badge">No Component Code</span></div></header>
+  <header class="content-introduction"><h1>ADR-0017<br>否定事态<br>缺席证据</h1><p>分开关系不成立、没有观察和观察系统故障，避免用空日志、部分搜索或模型未发现异常来证明禁止目标已经满足。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">Negative Evidence</span><span class="badge">No Wire Schema Change</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
     <p class="lead">否定目标必须保留被否定的关系。没有关系节点不是否定，没有日志也不是负事实；只有显式负观察，或在具名封闭范围内得到完整支持的缺席，才能支持关系不成立。</p>
-    <p>本决定冻结抽象语义、禁止推导与现有 END-P1 负极性案例。它不增加 END-P1 字段；END-P1 已有 <code>positive / negative</code> 枚举，当前只补齐此前缺失的负极性语义与规范字节。</p>
+    <p>当前策略确定抽象语义、禁止推导与现有 END-P1 负极性案例。它不增加 END-P1 字段；END-P1 已有 <code>positive / negative</code> 枚举，当前只补齐此前缺失的负极性语义与规范字节。</p>
   </section>
 
   <section class="content-wide">
@@ -76,7 +76,7 @@ permalink: "/architecture/adr-0017-negation-and-absence.html"
   </section>
 
   <section class="content-band">
-    <h2>仍未冻结的内容</h2>
+    <h2>待定内容</h2>
     <p>复合与量化否定、双重否定规范化、封闭声明的物理字段、跨生产者完整性合并、迟到窗口、撤销传播、负观察签名和隐私保护仍需新 Profile、威胁分析与实现证据。</p>
   </section>
   <div class="next-prev"><a href="adr-0016-mene-time-model.html">← ADR-0016</a><a href="adr-0018-quantification-and-membership.html">ADR-0018 →</a></div>

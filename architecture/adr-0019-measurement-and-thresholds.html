@@ -7,12 +7,12 @@ permalink: "/architecture/adr-0019-measurement-and-thresholds.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0019</span></nav>
-  <header class="content-introduction"><h1>ADR-0019<br>测量谓词<br>阈值契约</h1><p>让每个分数和阈值都能回答测量什么、测量谁、怎样聚合、误差多大以及边界怎样比较，避免仪表盘或 AI 基准用不同口径制造确定性。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">Measurement Semantics</span><span class="badge">No Wire Schema Change</span><span class="badge">No Component Code</span></div></header>
+  <header class="content-introduction"><h1>ADR-0019<br>测量谓词<br>阈值契约</h1><p>让每个分数和阈值都能回答测量什么、测量谁、怎样聚合、误差多大以及边界怎样比较，避免仪表盘或 AI 基准用不同口径制造确定性。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">Measurement Semantics</span><span class="badge">No Wire Schema Change</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-band">
     <h2>直接结论</h2>
     <p class="lead">“响应时间合理”“准确率至少 80%”还不是可判断目标。一个测量谓词必须同时固定构念、可观察标准、总体、程序、窗口、单位、聚合器、最小样本、不确定度和比较器。</p>
-    <p>本决定只冻结抽象 <code>krin</code> 语义，不给 END-P1 增加字段，也不表示遥测采集器、基准运行器、统计引擎、Drasor 或求值器已经实现。统计模型登记、单位词典、跨叶测量约简和物理编码仍需后续 Profile。</p>
+    <p>当前策略只确定抽象 <code>krin</code> 语义，不给 END-P1 增加字段，也不表示遥测采集器、基准运行器、统计引擎、Drasor 或求值器已经实现。统计模型登记、单位词典、跨叶测量约简和物理编码仍需后续 Profile。</p>
   </section>
 
   <section class="content-band">
@@ -87,12 +87,12 @@ permalink: "/architecture/adr-0019-measurement-and-thresholds.html"
       <li>END-CORE 新增 <code>END-MSR-001</code> 至 <code>END-MSR-004</code>。</li>
       <li>END-SCEN 新增四个案例，覆盖 p95、AI 基准泛化、单位换算、样本不足和程序故障。</li>
       <li>威胁模型新增测量与阈值洗白；十二个提案向量覆盖六个允许分类和六个确定拒绝。</li>
-      <li>END-P1 不变；物理字段、统计执行和组件测试必须等待新 Profile 与用户明确开启代码阶段。</li>
+      <li>END-P1 不变；物理字段、统计执行和组件测试需要先建立新的 Profile。</li>
     </ul>
   </section>
 
   <section class="content-band">
-    <h2>仍未冻结的内容</h2>
+    <h2>待定内容</h2>
     <p>单位词典和版本、跨叶测量公式、多重比较、顺序检验、基线漂移、模型裁判校准、统计模型登记、隐私保护测量、物理字段和规范字节仍需真实消费者、威胁分析与新 Profile。</p>
   </section>
   <div class="next-prev"><a href="adr-0018-quantification-and-membership.html">← ADR-0018</a><a href="adr-0020-composite-situations-and-criteria.html">ADR-0020 →</a></div>

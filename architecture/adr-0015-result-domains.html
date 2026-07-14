@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0015-result-domains.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0015</span></nav>
-  <header class="content-introduction"><h1>ADR-0015<br>判断与运行结果分层</h1><p>把目标满足、权威决定、会话终止和证据状态分开，避免外部智能体或运行器用一个成功词覆盖全部判断。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">Result Domains</span><span class="badge">No Wire Change</span><span class="badge">No Component Code</span></div></header>
+  <header class="content-introduction"><h1>ADR-0015<br>判断与运行结果分层</h1><p>把目标满足、权威决定、会话终止和证据状态分开，避免外部智能体或运行器用一个成功词覆盖全部判断。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">Result Domains</span><span class="badge">No Wire Change</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
@@ -60,14 +60,14 @@ permalink: "/architecture/adr-0015-result-domains.html"
       <li>END-CORE 新增满足结果、权威决定和结果域分离条款；本决定不新增 END-P1 字段，现有字节保持不变。</li>
       <li>Drasor、生命周期和 Iknem 页面删除跨层状态混用；外部 MCP/A2A 状态只进入带来源的运行事件。</li>
       <li>十二个结果域提案向量执行六个允许组合与六个确定拒绝，只证明当前矩阵和条款一致。</li>
-      <li>未来内部符合性门禁必须覆盖“会话 completed 但结果 unmet”“求值 fault 但目标未知”“结果 met 但决定 deferred”等交叉组合。</li>
+      <li>未来一致性验证必须覆盖“会话 completed 但结果 unmet”“求值 fault 但目标未知”“结果 met 但决定 deferred”等交叉组合。</li>
       <li>当前只有规范、场景和计划验证，没有 Drasor、决定引擎、状态编码或组件测试。</li>
     </ul>
   </section>
 
   <section class="content-band">
-    <h2>仍未冻结的内容</h2>
-    <p>结果事件的物理编码、时间域、重放键、聚合规则、决定类 Iknem 格式、会话恢复和协议状态映射表仍需独立 Profile、威胁分析与正反向量。本决定只冻结语义分层和禁止推导。</p>
+    <h2>待定内容</h2>
+    <p>结果事件的物理编码、时间域、重放键、聚合规则、决定类 Iknem 格式、会话恢复和协议状态映射表仍需独立 Profile、威胁分析与正反向量。当前策略只确定语义分层和禁止推导。</p>
   </section>
   <div class="next-prev"><a href="adr-0014-source-manifest.html">← ADR-0014</a><a href="adr-0016-mene-time-model.html">ADR-0016 →</a></div>
 </main>

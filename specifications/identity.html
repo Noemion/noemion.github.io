@@ -7,7 +7,7 @@ permalink: "/specifications/identity.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>精确内容身份与签名</span></nav>
-  <header class="content-introduction"><h1>精确内容身份与签名</h1><p>定义跨 Endem、Synem、Iknem、发布陈述和伴随制品的精确字节身份、不可变引用、签名验证、撤销与可复现性边界。</p><div class="badges"><span class="badge">ID-CORE 0.1.0-draft</span><span class="badge">12 Clauses</span><span class="badge">Wire Unfrozen</span><span class="badge">No Crypto Code</span></div></header>
+  <header class="content-introduction"><h1>精确内容身份与签名</h1><p>定义跨 Endem、Synem、Iknem、发布陈述和伴随制品的精确字节身份、不可变引用、签名验证、撤销与可复现性边界。</p><div class="badges"><span class="badge">ID-CORE 0.1.0-draft</span><span class="badge">12 Clauses</span><span class="badge">物理格式待定</span><span class="badge">No Crypto Code</span></div></header>
 
   <section class="content-stack">
     <h2>它解决什么问题</h2>
@@ -17,8 +17,8 @@ permalink: "/specifications/identity.html"
   </section>
 
   <section class="content-stack">
-    <h2>已接受边界</h2>
-    <p>ID-CORE 已接受并固定精确身份、不可变引用、有类型签名陈述、外置验证包络、截止点有效性、独立复现和制品关系的抽象边界。未来实现必须遵守十二条核心规则。</p>
+    <h2>当前策略</h2>
+    <p>ID-CORE 用十二条核心规则定义精确身份、不可变引用、有类型签名陈述、外置验证包络、截止点有效性、独立复现和制品关系。未来实现必须遵守这些规则。</p>
     <p>摘要相同不得直接推出语义等价、事实为真、主体有权、制品已被接受或派生物继承来源身份。签名验证通过也不得越过既定权威、政策、撤销与结果域。</p>
   </section>
 
@@ -50,7 +50,7 @@ permalink: "/specifications/identity.html"
   </section>
 
   <section class="content-wide">
-    <h2>当前仍未冻结</h2>
+    <h2>待定内容</h2>
     <p>摘要和签名算法基线、算法登记表、摘要文本语法、签名陈述物理编码、COSE、DSSE 或 Sigstore Profile、证书体系、透明日志、时间戳与撤销分发、Semantic Key、跨版本等价和调试伴随格式均保持开放。</p>
     <p>外部训练数据、基础模型、适配器和派生权重也遵守同一身份边界。环境相同、种子相同、损失曲线相近或模型别名未变，都不能替代精确对象身份与派生关系；字节复现、行为评测和发布决定必须分开。完整反例见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究提案</a>。</p>
     <p>背景、权衡和权威资料见 <a href="../architecture/adr-0027-exact-identity-and-attestation.html">ADR-0027 精确内容身份与签名边界</a>。</p>

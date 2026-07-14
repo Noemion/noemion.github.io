@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0025-structured-diagnostics.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0025</span></nav>
-  <header class="content-introduction"><h1>ADR-0025<br>结构化诊断边界</h1><p>让人、自动化和模型看到同一失败事实，同时阻止消息文本、外部状态和恢复建议改变本地语义或权限。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">DIA-CORE 0.1.0-draft</span><span class="badge">Failure First</span><span class="badge">No Component Code</span></div></header>
+  <header class="content-introduction"><h1>ADR-0025<br>结构化诊断边界</h1><p>让人、自动化和模型看到同一失败事实，同时阻止消息文本、外部状态和恢复建议改变本地语义或权限。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">DIA-CORE 0.1.0-draft</span><span class="badge">Failure First</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
@@ -84,8 +84,8 @@ permalink: "/architecture/adr-0025-structured-diagnostics.html"
   </section>
 
   <section class="content-band">
-    <h2>仍未冻结的内容</h2>
-    <p>JSON、CBOR、SARIF、Problem Details、MCP、CLI 文本、退出状态、持久日志、遥测、跨进程关联、堆栈和修复补丁格式仍未冻结。当前没有诊断生产器、渲染器、日志服务、重试引擎、协议适配器或 CLI；项目仍未进入组件代码阶段。</p>
+    <h2>待定内容</h2>
+    <p>JSON、CBOR、SARIF、Problem Details、MCP、CLI 文本、退出状态、持久日志、遥测、跨进程关联、堆栈和修复补丁格式仍待确定。当前没有诊断生产器、渲染器、日志服务、重试引擎、协议适配器或 CLI。</p>
   </section>
   <div class="next-prev"><a href="adr-0024-dromen-session-contract.html">← ADR-0024</a><a href="adr-0026-external-protocol-adapters.html">ADR-0026 →</a></div>
 </main>

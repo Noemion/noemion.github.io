@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0024-dromen-session-contract.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0024</span></nav>
-  <header class="content-introduction"><h1>ADR-0024<br>Dromen 会话契约</h1><p>固定持久目标制品进入一次受控运行前必须绑定的主体、政策、环境、能力、预算、观察责任与销毁边界。</p><div class="badges"><span class="badge">Accepted Design</span><span class="badge">DRO-CORE 0.1.0-draft</span><span class="badge">Session Only</span><span class="badge">No Component Code</span></div></header>
+  <header class="content-introduction"><h1>ADR-0024<br>Dromen 会话契约</h1><p>固定持久目标制品进入一次受控运行前必须绑定的主体、政策、环境、能力、预算、观察责任与销毁边界。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">DRO-CORE 0.1.0-draft</span><span class="badge">Session Only</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
@@ -31,7 +31,7 @@ permalink: "/architecture/adr-0024-dromen-session-contract.html"
     <h2>建立时必须封闭的内容</h2>
     <div class="table-wrap"><table><thead><tr><th>绑定</th><th>最低内容</th><th>失败时怎样处理</th></tr></thead><tbody>
       <tr><td>主体</td><td>精确内容身份、Profile、attestation、闭包和当前撤销状态</td><td>歧义、变化、无效或撤销时拒绝建立</td></tr>
-      <tr><td>政策与权威</td><td>政策身份、决定与升级权威、截止点、有效期及适用 consent</td><td>默认最新、冲突或范围内 apor 未决时拒绝</td></tr>
+      <tr><td>政策与权威</td><td>政策身份、决定与升级权威、截止点、有效期及适用 consent</td><td>默认最新、冲突或范围内 apor 待确认时拒绝</td></tr>
       <tr><td>环境</td><td>平台、时钟、隔离配置、适配器、协议和模型或规则后端身份</td><td>只靠远端自述或缺少必需绑定时拒绝</td></tr>
       <tr><td>能力</td><td>动作、资源或受众、范围、约束、授予者、有效期和撤销检查</td><td>只允许取交集；缺少必需能力时不运行</td></tr>
       <tr><td>预算</td><td>时间、调用、重试、令牌、字节、存储、进程和成本的有限上限</td><td>单位不明、子任务逃逸或取消不可传播时拒绝</td></tr>
@@ -79,12 +79,12 @@ permalink: "/architecture/adr-0024-dromen-session-contract.html"
       <li>新增十项 Dromen 威胁和十五个非规范自然语言场景。</li>
       <li>二十个提案向量覆盖十个允许契约与十个确定拒绝；检查器只证明资料矩阵一致。</li>
       <li>END-CORE、END-FMT、END-P1、SYN-CORE、IKN-CORE 与任何规范字节保持不变。</li>
-      <li>项目仍未进入组件代码阶段；当前不存在 Drasor、装载器、沙箱、凭据域、预算器或 Dromen API。</li>
+      <li>当前不存在 Drasor、装载器、沙箱、凭据域、预算器或 Dromen API。</li>
     </ul>
   </section>
 
   <section class="content-band">
-    <h2>仍未冻结的内容</h2>
+    <h2>待定内容</h2>
     <p>运行 API、进程模型、沙箱组合、凭据存储、能力代理、事件编码、预算计数器、恢复策略和销毁机制仍保持开放。Dromen 永远不获得文件格式；若未来实现需要持久审计，只能定义 Iknem 或会话事件，而不能把 Dromen 转化为可恢复权限的对象。</p>
   </section>
   <div class="next-prev"><a href="adr-0023-endem-content-standard.html">← ADR-0023</a><a href="adr-0025-structured-diagnostics.html">ADR-0025 →</a></div>

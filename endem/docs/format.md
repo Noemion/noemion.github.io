@@ -10,7 +10,7 @@ manual_order: 1
 nav_title: "格式与成形"
 page_heading: "格式与成形"
 page_lead: "把受控来源表达分解为六个语义面，并形成只有一个根 skena 的 nascent Endem。"
-summary: "来源、意义、可能事态、目标方向、满足判据、未决边界与确定性 ktise。"
+summary: "来源、意义、可能事态、目标方向、满足判据、待确认事项与确定性 ktise。"
 badges: ["ktise", "One Root Skena"]
 ---
 
@@ -31,7 +31,7 @@ badges: ["ktise", "One Root Skena"]
 
 ## 非规范性示意
 
-下面只展示信息职责，不是已经冻结的输入语法：
+下面只展示信息职责，不是已经锁定的输入语法：
 
 ```yaml
 rhem: "为项目生成一份安全评审报告"
@@ -50,7 +50,7 @@ apor:
 
 [ADR-0014](../../architecture/adr-0014-source-manifest.html) 已为未来 Ktisor 设计逐行来源清单；上面的 YAML 仍只是职责示意，不是该语法。正式来源语言仍需解决注释、包含关系、版本演进和错误恢复。实验性 `.endem` 容器由 END-FMT 0.1 定义；END-P1 已固定未来首条实现路径评审所需的字段、枚举、排序和引用闭包，但它仍不是稳定 ABI。
 
-精确容器义务见 [END-FMT 条款源](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)。END-P0 只保留为结构实验；如果用户以后开启代码阶段，首条实现路径必须从 [END-P1 设计 Profile](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json) 开始评审，只允许 nascent、kine、六个关键记录和无压缩载荷。
+精确容器义务见 [END-FMT 条款源](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)。END-P0 只保留为结构实验；首条实现路径必须从 [END-P1 设计 Profile](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json) 开始评审，只允许 nascent、kine、六个关键记录和无压缩载荷。
 
 ## 候选不能直接成形
 
@@ -79,6 +79,6 @@ apor:
 
 确定性先要求输入闭合。形成操作必须固定实际进入 `rhem` 的解码文本与文本槽、严格解码 Profile、显式变换和损失，以及投影决定、配置、依赖、END-CORE、内容 Profile、END-FMT 与 Ktisor 版本。相同的封闭形成输入必须产生相同规范结果；在同一精确格式草案和 Profile 内，还必须产生逐字节相同的 nascent Endem。
 
-这项保证不使用“规范化来源”作为捷径。END-SRCM 会把 LF 与 CRLF 解释为同一行边界，也会展开转义；因此两个来源文件可能产生相同的解码输入，却仍有不同的原始字节身份。显示文本、调试导出或重新排版的来源都是派生视图，除非另有冻结的变换与保留关系，否则不能作为原文件的逆变换或语义等价证明。
+这项保证不使用“规范化来源”作为捷径。END-SRCM 会把 LF 与 CRLF 解释为同一行边界，也会展开转义；因此两个来源文件可能产生相同的解码输入，却仍有不同的原始字节身份。显示文本、调试导出或重新排版的来源都是派生视图，除非另有锁定的变换与保留关系，否则不能作为原文件的逆变换或语义等价证明。
 
 Noemion 当前也不提出通用 round-trip 要求。只有精确声明源域、目标域、变换、保留属性、损失和失败责任后，回转测试才能证明这些已声明属性；它不能证明所有字节、意义、授权、证据或接受状态都相同。

@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0026-external-protocol-adapters.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0026</span></nav>
-  <header class="content-introduction"><h1>ADR-0026<br>外部协议适配边界</h1><p>让 MCP、A2A、HTTP 与未来协议进入受限会话，同时不让外部状态、身份和权限改写 Noemion 的工程语义。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">ADP-CORE 0.1.0-draft</span><span class="badge">Protocol Independent</span><span class="badge">No Adapter Code</span></div></header>
+  <header class="content-introduction"><h1>ADR-0026<br>外部协议适配边界</h1><p>让 MCP、A2A、HTTP 与未来协议进入受限会话，同时不让外部状态、身份和权限改写 Noemion 的工程语义。</p><div class="badges"><span class="badge">当前草案</span><span class="badge">ADP-CORE 0.1.0-draft</span><span class="badge">Protocol Independent</span><span class="badge">No Adapter Code</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
@@ -16,9 +16,9 @@ permalink: "/architecture/adr-0026-external-protocol-adapters.html"
   </section>
 
   <section class="content-wide">
-    <h2>为什么现在只冻结抽象不变量</h2>
+    <h2>为什么现在只确定抽象不变量</h2>
     <p>截至 2026 年 7 月 13 日，MCP 官方版本说明仍把 2025-11-25 标为 Current。官方已于 5 月 21 日锁定并公开以计划最终发布日期命名的 2026-07-28 候选版；它尚未成为当前规范，最终版计划于 7 月 28 日发布。候选版把核心改为无状态并把 Tasks 移到扩展，说明握手、会话与任务字段仍在快速变化。A2A 最新发布规范已经进入 1.0，但它的 Task、Message、Artifact 和 Agent Card 仍属于外部协议对象。</p>
-    <p>因此 ADP-CORE 冻结版本、身份、能力、状态、取消、重试和交付边界，不冻结具体 JSON、Protocol Buffers、SSE 或 SDK 字段。未来每个协议 Profile 必须绑定精确稳定版本和真实消费者。</p>
+    <p>因此 ADP-CORE 锁定版本、身份、能力、状态、取消、重试和交付边界，不预先确定具体 JSON、Protocol Buffers、SSE 或 SDK 字段。未来每个协议 Profile 必须绑定精确稳定版本和真实消费者。</p>
   </section>
 
   <section class="content-wide">

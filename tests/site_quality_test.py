@@ -185,11 +185,10 @@ APPLICATION_PROJECT_SECTIONS = [
     "继续阅读",
 ]
 APPLICATION_STATUS_DISCLOSURES = (
-    "尚未进入代码开发阶段",
-    "没有可执行组件",
+    "当前没有可执行组件",
     "参数",
     "稳定 ABI",
-    "尚未冻结",
+    "尚待确定",
 )
 PUBLIC_META_PHRASES = (
     "本轮",
@@ -222,6 +221,29 @@ PUBLIC_META_PHRASES = (
     "Codex",
     "ChatGPT",
     "subagent",
+    "用户明确开启",
+    "只有用户开启",
+    "等待用户接受",
+    "用户决定接受",
+    "用户以后明确开启",
+    "尚未进入代码开发阶段",
+    "尚未进入组件代码阶段",
+    "代码阶段开启后",
+    "代码阶段开启时",
+    "内部符合性门禁",
+    "内部一致性门禁",
+    "资料检查器",
+    "页面负责解释",
+    "本手册只解释",
+    "当前公开仓库只维护",
+    "项目提示词",
+    "采用决定",
+    "未决边界",
+    "成熟度边界",
+    "等待决定",
+    "研究中的研究",
+    "当前仍未冻结",
+    "仍未冻结的内容",
 )
 UNCLEAR_CHINESE_UI_TERMS = re.compile(
     r"架构决定|文档中心|文档首页|架构指南|工具参考(?!指南)|"
@@ -412,7 +434,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "architecture/agent-system-boundaries.html": {
         "required": (
             "Non-normative Guide",
-            "三种成熟度不得混写",
+            "三种状态不得混写",
             "一次运行怎样穿过边界",
             "运行事实应该放在哪里",
             "十三条最危险的越级路径",
@@ -425,7 +447,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "反馈记录也不等于模型学习",
             "旧 Dromen、秘密或权限",
             "Task 完成，也不证明目标满足",
-            "等待决定",
+            "研究中",
             "不增加 ADR、CORE、Profile、对象、命令或组件",
         ),
         "forbidden_patterns": (
@@ -574,7 +596,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "ID-REP-001",
             "ID-REL-001",
             "不是新制品",
-            "当前仍未冻结",
+            "待定内容",
         ),
     },
     "specifications/text-and-identifiers.html": {
@@ -592,7 +614,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "TEXT-MET-001",
             "TEXT-AIM-001",
             "TEXT-OUT-001",
-            "当前仍未冻结",
+            "待定内容",
         ),
     },
     "specifications/authority.html": {
@@ -610,7 +632,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "AUT-RPL-001",
             "AUT-CAP-001",
             "AUT-SEP-001",
-            "当前仍未冻结",
+            "待定内容",
         ),
     },
     "architecture/adr-0030-endem-content-and-authorization-companions.html": {
@@ -620,7 +642,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "END-ID-002",
             "END-FMT-015",
             "单文件最高只能声称 Profile 接受",
-            "当前仍未冻结",
+            "待定内容",
         ),
     },
     "architecture/adr-0031-release-name-collision-gate.html": {
@@ -643,7 +665,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "大小写不能形成可靠区分",
             "不保留别名、重定向、双写或兼容垫片",
             "动作名称不等于实现优先级",
-            "内部符合性门禁",
+            "一致性与互操作验证",
         ),
     },
     "architecture/adr-0033-text-identifier-specification-name.html": {
@@ -660,8 +682,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "architecture/adr-0034-pronunciation-and-oral-distinction.html": {
         "required": (
-            "Accepted Gate",
-            "四项独立门禁",
+            "当前审查",
+            "四项独立审查",
             "BCP 47",
             "成对混淆矩阵",
             "首次朗读",
@@ -2217,7 +2239,7 @@ def validate_jekyll_sources():
     else:
         boundary_text = agent_boundaries.read_text()
         for token in (
-            "三种成熟度不得混写",
+            "三种状态不得混写",
             "运行事实应该放在哪里",
             "十三条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
@@ -2472,8 +2494,7 @@ def validate_jekyll_sources():
                 errors.append(f"{route}: retains internal or obsolete status wording {obsolete_phrase!r}")
         if re.search(r"供[^。；<\n]{0,40}消费", body):
             errors.append(f"{route}: uses mechanical '供...消费' wording instead of naming the reader")
-        if not is_manual_markdown:
-            errors.extend(validate_public_html(route, body))
+        errors.extend(validate_public_html(route, body))
         if forbidden_shell.search(body):
             errors.append(f"{route}: page shell must come from the Jekyll layout")
         if is_manual_markdown:
@@ -3360,6 +3381,11 @@ def validate_jekyll_sources():
         ):
             if forbidden in current_stage_text:
                 errors.append(f"current stage page exposes internal workflow copy: {forbidden}")
+    for phrase in PUBLIC_META_PHRASES:
+        if phrase in timeline_text:
+            errors.append(
+                f"project timeline exposes internal production phrase {phrase!r} in visible copy"
+            )
 
     image_contracts = {
         "assets/images/secure-endem-ktisor.svg": (20_000, 'src="../assets/images/secure-endem-ktisor.svg"'),
@@ -3509,7 +3535,7 @@ def main():
         )
     getting_started_text = (SOURCE_ROOT / "docs" / "getting-started.md").read_text()
     for token in (
-        "具体发行拼写和读音仍受 ADR-0034 门禁约束",
+        "具体发行拼写和读音仍需完成 ADR-0034 的人类验证",
         "不用临时读法冒充正式读法",
         "不会成为第二套命令、机器别名或语义权威",
     ):
@@ -3529,12 +3555,12 @@ def main():
             errors.append(f"terminology guide missing human-evidence boundary: {token}")
     name_maturity_contracts = {
         "about/background.html": (
-            "项目已接受 Endem 所指的最小制品职责",
-            "现行拼写和读音仍须通过发行名称门禁",
+            "当前策略已确定 Endem 所指的最小制品职责",
+            "现行拼写和读音仍须通过发行名称审查",
         ),
         "specifications/index.html": (
-            "项目已经采用术语职责",
-            "具体发行拼写和读音仍未通过名称门禁",
+            "当前策略",
+            "待定内容",
         ),
         "docs/installation-and-usage.md": (
             "Endem 只通过了有日期的精确工程名初筛",
@@ -3811,16 +3837,13 @@ def main():
         for term in ("必须", "不得"):
             if term not in visible_text:
                 errors.append(f"{route}: normative page must preserve {term}")
+        if "当前策略" not in visible_text:
+            errors.append(f"{route}: normative page must explain the current strategy")
         if not any(
             marker in visible_text
-            for marker in ("已经采用", "已接受", "已冻结")
+            for marker in ("仍需", "仍待确定", "尚待确定", "待定内容", "正在研究", "开放问题")
         ):
-            errors.append(f"{route}: normative page must state which boundary has been accepted")
-        if not any(
-            marker in visible_text
-            for marker in ("仍需", "仍未冻结", "尚未冻结", "待验证", "开放问题")
-        ):
-            errors.append(f"{route}: normative page must preserve unfrozen or unresolved boundaries")
+            errors.append(f"{route}: normative page must explain pending content")
 
     for row in route_rows:
         if row["kind"] != "app":

@@ -22,9 +22,9 @@ Noemion 为自然语言目标建立持久、可组合、可独立检查的工程
 
 ## 这些名字怎样读
 
-当前资料还没有冻结 Noemion、Endem 和其他领域词的发行读音。此前的名称审查主要排查软件、包、命令、标准和权利冲突，不能证明一个词在中文或英语交流中读得顺、听得清、写得回。
+当前资料还尚未确定 Noemion、Endem 和其他领域词的发行读音。此前的名称审查主要排查软件、包、命令、标准和权利冲突，不能证明一个词在中文或英语交流中读得顺、听得清、写得回。
 
-[ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html) 已把目标语言读音和词表内口头区分设为独立门禁。`kine/mene` 已未通过发行拼写桌面门禁，现行规范值暂时保留；`reach/maintain` 只是等待人类验证的候选。`Iknem` 与 `Ktisor/ktise` 仍是高风险项，Endem 与 Synem 还要做成对听辨。项目完成 IPA、普通拼读提示、首次朗读和听写证据前，不用临时读法冒充正式读法。
+[ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html) 已把目标语言读音和词表内口头区分设为独立审查。`kine/mene` 已未通过发行拼写桌面审查，现行规范值暂时保留；`reach/maintain` 只是等待人类验证的候选。`Iknem` 与 `Ktisor/ktise` 仍是高风险项，Endem 与 Synem 还要做成对听辨。项目完成 IPA、普通拼读提示、首次朗读和听写证据前，不用临时读法冒充正式读法。
 
 [术语与读音验证指南](terminology-and-pronunciation.html)说明怎样招募独立参与者、组织材料、统计关键混淆并记录隐私边界。当前只有方案，没有人类研究结果。
 
@@ -39,9 +39,9 @@ Noemion 为自然语言目标建立持久、可组合、可独立检查的工程
 | `skena` | 一个根对象—关系图，描述不带目标力量的中性可能事态 |
 | `telis` | 目标要求事态达到成立（kine）还是持续成立（mene） |
 | `krin` | 满足条件、观察类型、必需证据、未知处理和判断权威 |
-| `apor` | 未决投影、冲突、测量和解决权限 |
+| `apor` | 待确认投影、冲突、测量和解决权限 |
 
-一个 Endem 只有一个根 `skena`。只有没有未决项的 `apor` 可以为空；模型置信度不能把 `apor` 静默改成确定事实。结构无意义返回 `aseme`，观察不足返回 `agno`，二者不能混入 `apor`。
+一个 Endem 只有一个根 `skena`。只有没有待确认项的 `apor` 可以为空；模型置信度不能把 `apor` 静默改成确定事实。结构无意义返回 `aseme`，观察不足返回 `agno`，二者不能混入 `apor`。
 
 ## 四个名词
 
@@ -65,12 +65,12 @@ endem theor    endem drase
 
 1. [背景与边界](../about/background.html)：理解 Endem 与 Prompt、Skill 包、传统目标文件的区别。
 2. [架构设计指南](architecture-guide.html)：理解 Endem → Synem → Dromen → Iknem。
-3. [规范参考指南](specifications-reference.html)：区分已接受决定、待验证设计和开放问题。
+3. [规范参考指南](specifications-reference.html)：区分当前策略、正在研究和待定内容。
 4. [Endem 应用参考](endem-reference.html)：查看五个动作的消费者、失败责任和实施阶段。
 5. [开发指南](development-guide.html)：了解最小纵向切片、Ktisor/Theor 差分和验证条件。
 
 ## 当前状态
 
-> 词汇所指的职责与应用拓扑已经接受；具体发行拼写和读音仍受 ADR-0034 门禁约束。规范编码和实现尚未发布，也没有可安装的 `endem`、稳定扩展机制、ABI 或正式软件版本。
+> 当前策略已经确定各词汇的职责和应用结构；具体发行拼写和读音仍需完成 ADR-0034 的人类验证。规范编码和实现尚未发布，也没有可安装的 `endem`、稳定扩展机制、ABI 或正式软件版本。
 
-第一实现阶段只建设 `ktise`、`elenk`、独立 `theor` 和必需的内部符合性门禁。组合、发布、受控运行和模型适配必须等待前一阶段的安全与复现证据。
+第一实现阶段只建设 `ktise`、`elenk`、独立 `theor` 和必需的一致性验证。组合、发布、受控运行和模型适配必须等待前一阶段的安全与复现证据。

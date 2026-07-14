@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0008-endem-system.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0008</span></nav>
-  <header class="content-introduction"><h1>ADR-0008<br>Endem 制品与单一命令面</h1><p>保存 Endem 与单一 CLI 的形成历史；其余制品、组件、动作和状态名称已由 ADR-0010 取代。</p><div class="badges"><span class="badge">Superseded by ADR-0010</span><span class="badge">2026-07-12</span><span class="badge">Historical Vocabulary</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>ADR-0008<br>Endem 制品与单一命令面</h1><p>保存 Endem 与单一 CLI 的形成历史；其余制品、组件、动作和状态名称已由 ADR-0010 取代。</p><div class="badges"><span class="badge">Superseded by ADR-0010</span><span class="badge">2026-07-12</span><span class="badge">Historical Vocabulary</span><span class="badge">接口待定</span></div></header>
 
   <section class="content-stack">
     <h2>怎样阅读这份历史记录</h2>
@@ -35,14 +35,14 @@ permalink: "/architecture/adr-0008-endem-system.html"
       <tr><td><code>done</code></td><td>怎样判断目标已经满足？</td><td>验收条件、结果结构、必需 Witness、失败状态和决定权威。</td></tr>
       <tr><td><code>open</code></td><td>哪些语义还没有被确认？</td><td>替代解释、冲突、缺口、风险、允许的解决方式和有权确认的主体。</td></tr>
     </tbody></table></div>
-    <p>自然语言可以进入 <code>say</code>，但模型解释只能成为候选。只有可由版本化规则重新推导、经过明确授权绑定，或仍以未决状态保留的内容，才能进入同一 Endem 的其他字段组。Endem 不保存思维链、运行计划、模型权重、实时能力句柄、凭据或私钥。</p>
+    <p>自然语言可以进入 <code>say</code>，但模型解释只能成为候选。只有可由版本化规则重新推导、经过明确授权绑定，或仍以待确认状态保留的内容，才能进入同一 Endem 的其他字段组。Endem 不保存思维链、运行计划、模型权重、实时能力句柄、凭据或私钥。</p>
   </section>
 
   <section class="content-wide">
     <h2>同一制品的状态</h2>
-    <div class="flow"><div class="step">open · 仍含未决引用或语义</div><div class="step">bound · 引用和冲突已解析</div><div class="step">sealed · 发布载荷已冻结并绑定外部签名</div></div>
+    <div class="flow"><div class="step">open · 仍含待确认引用或语义</div><div class="step">bound · 引用和冲突已解析</div><div class="step">sealed · 发布载荷已锁定并绑定外部签名</div></div>
     <ul>
-      <li><strong>open</strong> 是合法但不可直接发布执行的状态；它必须准确保存未决事项，不能假装失败已经消失。</li>
+      <li><strong>open</strong> 是合法但不可直接发布执行的状态；它必须准确保存待确认事项，不能假装失败已经消失。</li>
       <li><strong>bound</strong> 表示必需语义、依赖与能力上限已经解析，不表示来源可信、环境授权或结果满足。</li>
       <li><strong>sealed</strong> 表示不可变发布载荷与外部签名响应一致，不表示语义正确，也不表示当前环境允许运行。</li>
     </ul>
@@ -55,7 +55,7 @@ permalink: "/architecture/adr-0008-endem-system.html"
       <tr><td><code>endem form</code></td><td>把受控目标卡或已授权候选确定性形成 open Endem。</td><td>来源无法定位、根 aim 不唯一、约束或验收不完整、候选越权升级。</td></tr>
       <tr><td><code>endem check</code></td><td>使用生产读取路径分层检查结构、语义、状态、完整性和策略。</td><td>越界、溢出、悬空引用、未知关键记录、状态与内容不一致。</td></tr>
       <tr><td><code>endem bind</code></td><td>解析 Endem 之间的引用和约束，形成 bound Endem 或 Weave。</td><td>缺失依赖、循环、冲突、权限扩大、依赖身份不稳定。</td></tr>
-      <tr><td><code>endem pack</code></td><td>冻结发布闭包、可选调试伴随资料和待签消息。</td><td>覆盖缺口、不可复现元数据、发布裁剪改变语义、闭包不完整。</td></tr>
+      <tr><td><code>endem pack</code></td><td>锁定发布闭包、可选调试伴随资料和待签消息。</td><td>覆盖缺口、不可复现元数据、发布裁剪改变语义、闭包不完整。</td></tr>
       <tr><td><code>endem seal</code></td><td>核对外部 Signature Response，并在被签载荷外附加签名封装。</td><td>请求、载荷、算法、签名者或策略版本不匹配。</td></tr>
       <tr><td><code>endem see</code></td><td>以独立直接读取器查看、比较和导出有界结构视图。</td><td>畸形输入、未知关键结构、资源超限；不得生成生产 Verified Handle。</td></tr>
       <tr><td><code>endem run</code></td><td>在隔离域重新验证 sealed Endem/Weave，建立 Frame，受控调用后端与能力并形成 Witness。</td><td>签名、策略、能力、后端、预算、状态漂移、证据缺失或需要人工判断。</td></tr>
@@ -66,7 +66,7 @@ permalink: "/architecture/adr-0008-endem-system.html"
 
   <section class="content-wide">
     <h2>命名检索与正式商标检查</h2>
-    <p>这份 ADR 当时冻结了 Endem、Weave、Frame、Witness 与 <code>endem</code>。ADR-0010 后来只保留 Endem、<code>.endem</code> 和单一命令入口；其余名称已退出。任何内部决定都不构成商标可注册、域名可取得或第三方权利无冲突的法律结论。</p>
+    <p>这份 ADR 当时锁定了 Endem、Weave、Frame、Witness 与 <code>endem</code>。ADR-0010 后来只保留 Endem、<code>.endem</code> 和单一命令入口；其余名称已退出。任何内部决定都不构成商标可注册、域名可取得或第三方权利无冲突的法律结论。</p>
     <ol>
       <li>开发阶段执行字面与近似检索：操作系统命令、主流包管理器、GitHub 仓库、语言生态包名、域名和同类开发工具。</li>
       <li>公开发布前完成正式审查：目标法域商标数据库、相同及近似类别、公司与产品名称、开源包身份和合格知识产权人员复核。</li>
@@ -81,7 +81,7 @@ permalink: "/architecture/adr-0008-endem-system.html"
       <li>BFD 的多格式 canonical form 可能丢失格式特有信息，因此不进入 Endem 第一阶段可信核心，依据见 <a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD 手册</a>。</li>
       <li>MCP 的工具与资源声明只作为 Runner 外缘适配输入，不构成权限或事实。这里固定参考 <a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 规范</a>。</li>
       <li>A2A 1.0 的 Task 与 Artifact 只承担跨系统交换，不定义 Endem、Frame 或最终验收。这里固定参考 <a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a>。</li>
-      <li>OpenAI 的 <a href="https://openai.com/index/harness-engineering/">Harness Engineering 实践文章</a>提供环境可读性、反馈循环和机械边界的工程案例，但不决定本项目格式或成熟度。</li>
+      <li>OpenAI 的 <a href="https://openai.com/index/harness-engineering/">Harness Engineering 实践文章</a>提供环境可读性、反馈循环和机械边界的工程案例，但不决定本项目格式或状态。</li>
     </ul>
   </section>
 
@@ -99,7 +99,7 @@ permalink: "/architecture/adr-0008-endem-system.html"
   </section>
 
   <section class="content-band">
-    <h2>仍未冻结的内容</h2>
+    <h2>待定内容</h2>
     <p>本 ADR 只留下 Endem、<code>.endem</code> 和单一 <code>endem</code> 入口。其余名称与结构均已由 ADR-0010 取代，不得从这份历史记录推导当前扩展名、字段、状态、动作或 ABI。</p>
   </section>
   <div class="next-prev"><a href="decisions.html">← 架构决策</a><a href="adr-0009-propositional-kernel.html">ADR-0009 →</a></div>

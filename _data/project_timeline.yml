@@ -21,7 +21,7 @@ current:
     - label: 正在进行
       value: 规范、威胁模型与验证方案
     - label: 后续工作
-      value: 用户明确开启代码阶段后再确定
+      value: 尚未确定
 
 items:
   - id: scope-and-trust
@@ -48,9 +48,9 @@ items:
     state: future
     label: 后续规划
     title: Synem 组合与外部签名发布
-    description: 只有出现真实的多 Endem 消费者后，才开发 pleko、冲突矩阵和固定依赖；派生封装由生产者承担，外部签名另行冻结集成边界。
+    description: 只有出现真实的多 Endem 消费者后，才开发 pleko、冲突矩阵和固定依赖；派生封装由生产者承担，外部签名的集成边界另行确定。
   - id: controlled-drase
     state: future
     label: 后续规划
     title: Dromen、Drasor 与 Iknem
-    description: DRO-CORE 已固定一次会话契约；进入代码阶段后再用规则型后端验证重新装载、能力求交、预算、漂移失效、真实观察、有范围证据和验收分层，随后评估模型及外部协议适配。
+    description: DRO-CORE 已固定一次会话契约；未来规则型后端必须验证重新装载、能力求交、预算、漂移失效、真实观察、有范围证据和验收分层，随后再评估模型及外部协议适配。

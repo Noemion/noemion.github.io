@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0029-authority-and-authorization-decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0029</span></nav>
-  <header class="content-introduction"><h1>ADR-0029<br>权威与授权决定边界</h1><p>让自然语言候选、委托 Agent、人类同意和运行能力都服从同一套可核对的主体、范围、政策、时效与结果分离规则。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">AUT-CORE 0.1.0-draft</span><span class="badge">Protocol Independent</span><span class="badge">No Policy Engine</span></div></header>
+  <header class="content-introduction"><h1>ADR-0029<br>权威与授权决定边界</h1><p>让自然语言候选、委托 Agent、人类同意和运行能力都服从同一套可核对的主体、范围、政策、时效与结果分离规则。</p><div class="badges"><span class="badge">当前草案</span><span class="badge">AUT-CORE 0.1.0-draft</span><span class="badge">Protocol Independent</span><span class="badge">No Policy Engine</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
@@ -37,7 +37,7 @@ permalink: "/architecture/adr-0029-authority-and-authorization-decisions.html"
   <section class="content-wide">
     <h2>自然语言意义为什么不能自我授权</h2>
     <p>结构合法的候选只说明它能被当前类型系统表达。模型置信度只描述模型输出；高相似度只描述某个比较 Profile。三者都不能说明候选符合来源主体意图，更不能决定谁有权关闭相关 <code>apor</code>。</p>
-    <p>授权者必须核对精确来源、解码文本、候选、影响的语义面和关系位置、候选生产方式、安全显示视图、决定理由和剩余未决项。批量批准只有在所有候选属于同一权威范围并完整展示差异时才可能有效。</p>
+    <p>授权者必须核对精确来源、解码文本、候选、影响的语义面和关系位置、候选生产方式、安全显示视图、决定理由和剩余待确认项。批量批准只有在所有候选属于同一权威范围并完整展示差异时才可能有效。</p>
   </section>
 
   <section class="content-wide">
@@ -93,7 +93,7 @@ permalink: "/architecture/adr-0029-authority-and-authorization-decisions.html"
   </section>
 
   <section class="content-band">
-    <h2>仍未冻结的内容</h2>
+    <h2>待定内容</h2>
     <p>主体与角色体系、政策语言、授权事件物理编码、同意 UI Profile、多人算法、凭据格式、协议映射、撤销分发、审计存储和法律效力仍需真实消费者、独立 Profile 与实现证据。</p>
   </section>
   <div class="next-prev"><a href="adr-0028-text-and-identifier-boundaries.html">← ADR-0028</a><a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030 →</a></div>

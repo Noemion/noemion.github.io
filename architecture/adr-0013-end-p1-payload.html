@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0013</span></nav>
-  <header class="content-introduction"><h1>ADR-0013<br>END-P1 封闭内容 Profile</h1><p>保留 END-P0 作为结构实验，新建 END-P1 作为首个设计 Profile，明确六个记录的字段键、枚举、排序和引用规则。</p><div class="badges"><span class="badge">Accepted Draft</span><span class="badge">END-P1</span><span class="badge">Profile 2</span><span class="badge">ABI Unfrozen</span></div></header>
+  <header class="content-introduction"><h1>ADR-0013<br>END-P1 封闭内容 Profile</h1><p>保留 END-P0 作为结构实验，新建 END-P1 作为首个设计 Profile，明确六个记录的字段键、枚举、排序和引用规则。</p><div class="badges"><span class="badge">当前草案</span><span class="badge">END-P1</span><span class="badge">Profile 2</span><span class="badge">接口待定</span></div></header>
 
   <section class="content-stack">
     <h2>直接决定</h2>
@@ -28,7 +28,7 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
     <h2>END-P1 关闭哪些接口</h2>
     <ul>
       <li>六个记录继续使用 kind 1–6；每个记录的根映射只允许登记键，未知键关闭失败。</li>
-      <li>符号、关系、角色、事态、观察要求和未决项使用显式标识与交叉引用，不复制自由文本图。</li>
+      <li>符号、关系、角色、事态、观察要求和待确认项使用显式标识与交叉引用，不复制自由文本图。</li>
       <li>数组按稳定身份或编码值排序，重复项拒绝；Ktisor 不采用输入顺序或哈希表遍历顺序。</li>
       <li>来源范围以 Unicode 标量计数，并在解释投影前检查；媒体类型与语言标签保留原始标准化文本。</li>
       <li>第一切片只编码 <code>kine</code>。ADR-0016 已固定 <code>mene</code> 的抽象时间语义，但 END-P1 没有相应字段；它必须等待新的 Profile 与正反字节向量。</li>
@@ -52,7 +52,7 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
 
   <section class="content-band">
     <h2>进入实现的条件</h2>
-    <p>END-P1 的接受、未知字段、悬空引用和来源范围向量已经形成，并由资料检查器读取；这只满足未来实现前的规范准备条件。项目尚未进入代码开发阶段，因此不得建立生产 Ktisor 工作区，也没有 Ktisor/Theor 实现或符合性声明。</p>
+    <p>END-P1 已覆盖接受、未知字段、悬空引用和来源范围案例。这些材料只满足实现前的规范准备条件；当前没有生产 Ktisor 工作区、Ktisor/Theor 实现或符合性声明。</p>
   </section>
   <div class="next-prev"><a href="adr-0012-rust-core-language.html">← ADR-0012</a><a href="adr-0014-source-manifest.html">ADR-0014 →</a></div>
 </main>

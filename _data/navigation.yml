@@ -38,7 +38,7 @@ global:
       - { href: /docs/getting-started.html, label: 入门指南, description: 从问题背景和核心对象开始, cover: getting-started, cover_label: "START PATH" }
       - { href: /docs/architecture-guide.html, label: 架构设计指南, description: 理解生命周期、边界与失败路径, cover: architecture-guide, cover_label: "BOUNDARY GUIDE" }
       - { href: /docs/endem-reference.html, label: Endem 应用参考, description: 查找 Endem 动作与组件职责, cover: application-reference, cover_label: "ACTION MAP" }
-      - { href: /docs/specifications-reference.html, label: 规范参考指南, description: 查找权威来源、成熟度和 ADR 阅读顺序, cover: spec-reference, cover_label: "SPEC AUTHORITY" }
+      - { href: /docs/specifications-reference.html, label: 规范参考指南, description: 查找权威来源、当前状态和 ADR 阅读顺序, cover: spec-reference, cover_label: "SPEC AUTHORITY" }
       - { href: /endem/docs/index.html, label: Endem 使用手册, description: 查找格式、绑定、安全、运行和参考主题, cover: endem-manual, cover_label: "ENDEM MANUAL" }
   - key: development
     href: /development/index.html
@@ -114,15 +114,15 @@ modules:
           - { href: /architecture/adr-0028-text-and-identifier-boundaries.html, label: "ADR-0028 · 文本与标识符边界" }
           - { href: /architecture/adr-0029-authority-and-authorization-decisions.html, label: "ADR-0029 · 权威与授权决定" }
           - { href: /architecture/adr-0030-endem-content-and-authorization-companions.html, label: "ADR-0030 · 内容与授权伴随关系" }
-          - { href: /architecture/adr-0031-release-name-collision-gate.html, label: "ADR-0031 · 发布名称冲突门禁" }
+          - { href: /architecture/adr-0031-release-name-collision-gate.html, label: "ADR-0031 · 发布名称冲突审查" }
           - { href: /architecture/adr-0032-deterministic-maker-name-collision.html, label: "ADR-0032 · 确定性制作名称冲突" }
           - { href: /architecture/adr-0033-text-identifier-specification-name.html, label: "ADR-0033 · 文本与标识符标准命名" }
-          - { href: /architecture/adr-0034-pronunciation-and-oral-distinction.html, label: "ADR-0034 · 读音与口头区分门禁" }
+          - { href: /architecture/adr-0034-pronunciation-and-oral-distinction.html, label: "ADR-0034 · 读音与口头区分审查" }
           - { href: /architecture/adr-0035-public-actions-and-internal-responsibilities.html, label: "ADR-0035 · 公开动作与内部职责" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:
-          - { href: /specifications/index.html, label: 规范与成熟度 }
+          - { href: /specifications/index.html, label: 规范与状态 }
           - { href: /specifications/endem.html, label: Endem }
           - { href: /specifications/synem.html, label: Synem }
           - { href: /specifications/dromen.html, label: Dromen }
