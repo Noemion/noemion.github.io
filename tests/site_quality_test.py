@@ -2643,10 +2643,10 @@ def validate_jekyll_sources():
         homepage_text = homepage_source.read_text()
         for token in (
             'title: "Noemion · 人工智能时代的自然语言目标规范"',
-            '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>定义人工智能时代的</span><span>自然语言目标规范</span><span class="portal-title-foundation">奠定可验证智能的工程基石</span></strong></h1>',
-            '<p class="portal-introduction-summary">Noemion 正在定义一套面向人工智能时代的目标制品、组合规则与验收边界，让自然语言目标能够被确定地表达、受控地实现并由有范围的证据检验。Endem 是这套体系中的最小目标制品。</p>',
+            '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>让自然语言目标</span><span class="portal-title-foundation">成为可验证的工程对象</span></strong></h1>',
+            '<p class="portal-introduction-summary">Noemion 为自然语言目标建立确定性成形、组合、受控实现与证据验收。Endem 是其中最小、可独立验证的目标制品。</p>',
             '<span>了解 Noemion</span>',
-            '<span>查看 Noemion 架构</span>',
+            '<span>查看 Endem 生命周期</span>',
             '<strong>Noemion</strong> 是整个项目、新领域与社区的名称',
         ):
             if token not in homepage_text:
@@ -3447,7 +3447,7 @@ def validate_jekyll_sources():
             errors.append("site entry must not build the mobile directory unconditionally")
         for token in (
             "@media(hover:none) and (pointer:coarse)",
-            ".endem-object-visual,.object-orbit-two,.portal-reveal{animation:none!important}",
+            ".portal-reveal{animation:none!important}",
         ):
             if token not in style.read_text():
                 errors.append(f"touch devices missing static portal animation contract: {token}")
@@ -4037,34 +4037,43 @@ def main():
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
         home_source = home.read_text()
-        if '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>定义人工智能时代的</span><span>自然语言目标规范</span><span class="portal-title-foundation">奠定可验证智能的工程基石</span></strong></h1>' not in home_source:
+        if '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>让自然语言目标</span><span class="portal-title-foundation">成为可验证的工程对象</span></strong></h1>' not in home_source:
             errors.append("index.html: rendered portal must identify Noemion before Endem")
         if home_source.count('class="portal-chapter-title"') != len(HOME_HEADINGS):
             errors.append("index.html: every homepage chapter heading must use the shared symbolic title treatment")
         for token in (
-            "ENDEM / NASCENT",
-            "dataflow-lane-rhem",
-            "dataflow-lane-semion",
-            "dataflow-lane-skena",
-            "dataflow-lane-telis",
-            "dataflow-lane-krin",
-            "dataflow-lane-apor",
-            'class="endem-object-visual"',
-            'class="endem-object-title"',
-            'class="endem-object-record"',
-            'class="endem-object-footer"',
-            "compiler-bridge",
+            'class="portal-introduction-visual"',
+            "noemion-verifiable-goal-field.svg",
+            "noemion-verifiable-goal-field-base.jpg",
+            'class="portal-art-base"',
+            'class="portal-art-motion"',
+            'fetchpriority="high"',
+            "自然语言目标经过六个语义面形成 Endem",
         ):
             if token not in home_source:
-                errors.append(f"index.html: homepage dataflow visual missing {token}")
+                errors.append(f"index.html: homepage animated brand visual missing {token}")
         home_style_path = ROOT / "assets" / "style.css"
         home_style = home_style_path.read_text() if home_style_path.exists() else ""
         for selector in (
-            ".endem-object-visual", ".endem-object-title",
-            ".endem-object-record", ".endem-object-footer",
+            ".portal-introduction::after", ".portal-introduction-visual", ".portal-introduction-visual img",
         ):
             if selector not in home_style:
                 errors.append(f"style.css missing homepage visual selector {selector}")
+        portal_art = ROOT / "assets/images/noemion-verifiable-goal-field.svg"
+        if not portal_art.exists():
+            errors.append("homepage animated brand visual is missing")
+        else:
+            portal_art_source = portal_art.read_text()
+            for token in (
+                'viewBox="0 0 1600 900"',
+                "SIX SEMANTIC FACETS",
+                "RHEM", "SEMION", "SKENA", "TELIS", "KRIN", "APOR",
+                "ENDEM", "IKNEM / EVIDENCE",
+                "@keyframes route-flow", "@keyframes scan-pass",
+                "@media(prefers-reduced-motion:reduce)",
+            ):
+                if token not in portal_art_source:
+                    errors.append(f"homepage animated brand visual missing contract: {token}")
 
     foundations = ROOT / "about/intellectual-foundations.html"
     if foundations.exists():
@@ -4780,15 +4789,14 @@ def main():
     style = (ROOT / "assets/style.css").read_text()
     for token in (
         "@keyframes page-reveal",
-        "@keyframes portal-datafield-shift",
-        "@keyframes portal-data-packet",
         "@property --spectrum-angle",
         "conic-gradient(from var(--spectrum-angle)",
         "@keyframes spectrum-trace{to{--spectrum-angle:360deg}}",
         ".portal-feature-row::before{padding:5px}",
         ".portal-chapter-title>span{min-width:0;text-align:center}",
         "transition-duration:550ms,160ms",
-        ".dataflow-field",
+        ".portal-introduction-visual img",
+        "aspect-ratio:16/9",
         ".site-header,main",
         "animation:page-reveal 110ms",
         "opacity:.96",

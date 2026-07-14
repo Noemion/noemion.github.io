@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Noemion 可验证目标闭环</title>
+  <desc id="desc">自然语言目标经过六个语义面形成 Endem，并由有范围的证据独立检验后回送判定结果。</desc>
+  <style>
+    .route{fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .semantic-flow{stroke-dasharray:8 20;animation:route-flow 4.8s linear infinite}
+    .semantic-flow:nth-of-type(2){animation-delay:-.8s}.semantic-flow:nth-of-type(3){animation-delay:-1.6s}
+    .semantic-flow:nth-of-type(4){animation-delay:-2.4s}.semantic-flow:nth-of-type(5){animation-delay:-3.2s}.semantic-flow:nth-of-type(6){animation-delay:-4s}
+    .evidence-flow{stroke-dasharray:5 18;animation:return-flow 7.2s linear infinite}
+    .core-halo{animation:core-breathe 4.8s ease-in-out infinite;transform-origin:812px 453px}
+    .core-mark{animation:mark-pulse 3.6s ease-in-out infinite;transform-origin:812px 453px}
+    .evidence-orbit{animation:orbit-turn 20s linear infinite;transform-origin:1195px 450px}
+    .scan{animation:scan-pass 7.8s cubic-bezier(.45,0,.2,1) infinite;transform-box:fill-box;transform-origin:center}
+    .status-dot{animation:status-pulse 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+    .ambient-a{animation:ambient-a 14s ease-in-out infinite alternate;transform-origin:760px 230px}
+    .ambient-b{animation:ambient-b 16s ease-in-out infinite alternate;transform-origin:1180px 650px}
+    .traveler{filter:url(#particle-glow)}
+    @keyframes route-flow{to{stroke-dashoffset:-112}}
+    @keyframes return-flow{to{stroke-dashoffset:138}}
+    @keyframes core-breathe{0%,100%{opacity:.34;transform:scale(.94)}50%{opacity:.9;transform:scale(1.045)}}
+    @keyframes mark-pulse{0%,100%{opacity:.72;transform:scale(.97)}50%{opacity:1;transform:scale(1.035)}}
+    @keyframes orbit-turn{to{transform:rotate(360deg)}}
+    @keyframes scan-pass{0%,12%{opacity:0;transform:translateX(-420px) skewX(-10deg)}24%,66%{opacity:.76}78%,100%{opacity:0;transform:translateX(420px) skewX(-10deg)}}
+    @keyframes status-pulse{0%,100%{opacity:.46;transform:scale(.78)}50%{opacity:1;transform:scale(1.18)}}
+    @keyframes ambient-a{to{opacity:.72;transform:translate3d(58px,24px,0) scale(1.12)}}
+    @keyframes ambient-b{to{opacity:.6;transform:translate3d(-48px,-22px,0) scale(1.1)}}
+    @media(prefers-reduced-motion:reduce){.semantic-flow,.evidence-flow,.core-halo,.core-mark,.evidence-orbit,.scan,.status-dot,.ambient-a,.ambient-b{animation:none}.traveler{display:none}}
+  </style>
+  <defs>
+    <linearGradient id="spectrum" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6be1b7"/><stop offset=".34" stop-color="#78b8ff"/><stop offset=".68" stop-color="#f26c4b"/><stop offset="1" stop-color="#f4c247"/></linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#03100c" stop-opacity=".2"/><stop offset=".62" stop-color="#03100c" stop-opacity="0"/><stop offset="1" stop-color="#03100c" stop-opacity=".55"/></linearGradient>
+    <linearGradient id="scan-gradient" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6be1b7" stop-opacity="0"/><stop offset=".48" stop-color="#dffff1" stop-opacity=".06"/><stop offset=".52" stop-color="#dffff1" stop-opacity=".5"/><stop offset=".56" stop-color="#78b8ff" stop-opacity=".08"/><stop offset="1" stop-color="#78b8ff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="ambient-green"><stop offset="0" stop-color="#6be1b7" stop-opacity=".18"/><stop offset="1" stop-color="#6be1b7" stop-opacity="0"/></radialGradient>
+    <radialGradient id="ambient-amber"><stop offset="0" stop-color="#f4c247" stop-opacity=".12"/><stop offset="1" stop-color="#f4c247" stop-opacity="0"/></radialGradient>
+    <filter id="particle-glow" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="fine-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <clipPath id="core-clip"><path d="M674 306 812 226l138 80v294l-138 80-138-80Z"/></clipPath>
+    <path id="source-motion" d="M20 448C230 448 390 454 674 454"/>
+    <path id="evidence-motion" d="M950 454C1080 454 1215 454 1510 454"/>
+    <path id="return-motion" d="M1286 214C1415 330 1408 630 1250 720C1090 812 858 762 812 680"/>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#shade)"/>
+  <ellipse class="ambient-a" cx="760" cy="220" rx="340" ry="210" fill="url(#ambient-green)" opacity=".48"/>
+  <ellipse class="ambient-b" cx="1190" cy="660" rx="380" ry="220" fill="url(#ambient-amber)" opacity=".38"/>
+
+  <g opacity=".72">
+    <path class="route semantic-flow" d="M0 170C238 146 430 170 674 338" stroke="#6be1b7" stroke-width="2.4"/>
+    <path class="route semantic-flow" d="M0 286C238 272 438 290 674 384" stroke="#78b8ff" stroke-width="2.4"/>
+    <path class="route semantic-flow" d="M0 398C248 388 454 402 674 430" stroke="#f26c4b" stroke-width="2.4"/>
+    <path class="route semantic-flow" d="M0 514C242 522 446 510 674 476" stroke="#f4c247" stroke-width="2.4"/>
+    <path class="route semantic-flow" d="M0 630C240 646 438 620 674 522" stroke="#6be1b7" stroke-width="2.4"/>
+    <path class="route semantic-flow" d="M0 746C230 778 420 730 674 568" stroke="#78b8ff" stroke-width="2.4"/>
+  </g>
+
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">
+    <g fill="#dff5eb">
+      <text x="58" y="98" font-size="14" font-weight="700" letter-spacing="3">NATURAL LANGUAGE GOAL</text>
+      <text x="598" y="98" font-size="14" font-weight="700" letter-spacing="3">SIX SEMANTIC FACETS</text>
+      <text x="1240" y="98" font-size="14" font-weight="700" letter-spacing="3">SCOPED EVIDENCE</text>
+    </g>
+    <g font-size="13" font-weight="700" letter-spacing="2">
+      <text x="554" y="324" fill="#87e3bf">RHEM</text><text x="554" y="374" fill="#82beff">SEMION</text>
+      <text x="554" y="424" fill="#87e3bf">SKENA</text><text x="554" y="494" fill="#f48a6f">TELIS</text>
+      <text x="554" y="544" fill="#f5cb63">KRIN</text><text x="554" y="594" fill="#f48a6f">APOR</text>
+    </g>
+
+    <g aria-label="Endem 目标对象">
+      <circle class="core-halo" cx="812" cy="453" r="228" fill="none" stroke="url(#spectrum)" stroke-width="2" opacity=".46"/>
+      <circle cx="812" cy="453" r="198" fill="none" stroke="#e0f3e9" stroke-opacity=".2" stroke-dasharray="3 16"/>
+      <g clip-path="url(#core-clip)"><rect class="scan" x="650" y="214" width="160" height="478" fill="url(#scan-gradient)"/></g>
+      <g class="core-mark">
+        <path d="M730 406 812 358l82 48v94l-82 48-82-48Z" fill="#06251b" fill-opacity=".52" stroke="#dbfff0" stroke-opacity=".78" stroke-width="2"/>
+        <text x="812" y="455" fill="#f1fff8" font-family="ui-sans-serif,system-ui,sans-serif" font-size="45" font-weight="720" text-anchor="middle" letter-spacing="-1">ENDEM</text>
+        <text x="812" y="484" fill="#9ed9bf" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="2.5">ONE ROOT SKENA</text>
+      </g>
+    </g>
+
+    <g aria-label="独立证据检验">
+      <path class="route evidence-flow" d="M950 453C1082 453 1220 453 1518 453" stroke="url(#spectrum)" stroke-width="2.5" opacity=".72"/>
+      <path class="route evidence-flow" d="M812 230C980 118 1250 92 1400 246C1540 392 1480 656 1280 748C1080 838 850 752 812 680" stroke="#b9f4db" stroke-opacity=".72" stroke-width="2.4"/>
+      <circle class="evidence-orbit" cx="1195" cy="453" r="166" fill="none" stroke="url(#spectrum)" stroke-opacity=".62" stroke-width="2" stroke-dasharray="2 14"/>
+      <g filter="url(#fine-glow)"><circle class="status-dot" cx="1195" cy="286" r="6" fill="#6be1b7"/><circle class="status-dot" cx="1362" cy="453" r="6" fill="#f4c247"/><circle class="status-dot" cx="1195" cy="620" r="6" fill="#78b8ff"/></g>
+      <text x="1220" y="690" fill="#e1f3ea" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="2.5">IKNEM / EVIDENCE</text>
+      <text x="1220" y="718" fill="#92b3a4" font-size="11" text-anchor="middle" letter-spacing="2">INDEPENDENTLY SCOPED</text>
+    </g>
+
+    <g aria-label="证据判定回流">
+      <path class="route evidence-flow" d="M1286 746C1120 846 858 786 812 680" stroke="url(#spectrum)" stroke-width="2.4" opacity=".7"/>
+      <text x="812" y="842" fill="#86a596" font-size="11" text-anchor="middle" letter-spacing="3">EVIDENCE RETURNS TO THE GOAL OBJECT</text>
+    </g>
+  </g>
+
+  <circle class="traveler" r="6" fill="#6be1b7"><animateMotion dur="4.8s" repeatCount="indefinite"><mpath href="#source-motion"/></animateMotion></circle>
+  <circle class="traveler" r="6" fill="#f4c247"><animateMotion dur="3.9s" begin="-1.8s" repeatCount="indefinite"><mpath href="#evidence-motion"/></animateMotion></circle>
+  <circle class="traveler" r="5" fill="#78b8ff"><animateMotion dur="7.2s" begin="-3.1s" repeatCount="indefinite"><mpath href="#return-motion"/></animateMotion></circle>
+</svg>
