@@ -1059,24 +1059,24 @@ def validate_readability_behavior_contracts(root):
         css_patterns = {
             "desktop documentation rail must share the header canvas basis": (
                 directory_text,
-                r"\.docs-rail\s*\{[^}]*left:max\(18px,calc\(\(100%\s*-\s*1200px\)/2\)\)"
+                r"\.docs-rail\s*\{[^}]*left:var\(--site-frame-left\)"
             ),
             "desktop documentation content must share the header canvas basis": (
                 style_text,
                 r"body\[data-docs-layout=\"true\"\]\s+main\s*\{[^}]*"
-                r"calc\(\(100%\s*-\s*1200px\)/2\)"
+                r"calc\(var\(--site-frame-left\)\s*\+\s*var\(--docs-rail-width\)\)"
             ),
             "open mobile directory must align with the shared eight pixel canvas": (
                 directory_text,
                 r"html\.mobile-directory-open\s+\.global-directory-panel\s+nav\s*\{"
-                r"[^}]*right:8px;[^}]*left:8px;width:auto"
+                r"[^}]*right:var\(--site-frame-edge\);[^}]*left:var\(--site-frame-edge\);width:auto"
             ),
             "docs content must become a centered single column from 1217px": (
                 style_text,
                 r"@media\(min-width:1000px\)\s+and\s+\(max-width:1217px\)\s*\{"
                 r"[^}]*body\[data-docs-layout=\"true\"\]\s+main,"
                 r"\s*body\[data-docs-layout=\"true\"\]\s+\.site-footer\s*\{"
-                r"[^}]*width:min\(1000px,calc\(100%\s*-\s*36px\)\)"
+                r"[^}]*width:min\(1000px,var\(--site-frame-width\)\)"
             ),
             "documentation rail must disappear at 1217px": (
                 directory_text,
@@ -2901,7 +2901,7 @@ def validate_jekyll_sources():
             "prefers-reduced-motion:reduce",
             "body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}",
             ".global-timeline-value{",
-            "width:100%;height:100%;min-width:96px;min-height:64px",
+            "width:100%;height:100%;min-width:96px;min-height:var(--site-header-height)",
             "background:transparent;border-left:1px solid var(--rule)",
             "background:color-mix(in srgb,var(--nav-bg) 78%,var(--accent-soft))",
             ".content-split{",
@@ -2913,6 +2913,16 @@ def validate_jekyll_sources():
             ".content-grid{",
             ".content-rows",
             'body:not([data-page-role="portal"]) .page-links{',
+            '--site-frame-max:1200px',
+            '--site-frame-edge:18px',
+            '--site-frame-inset:36px',
+            '--site-frame-width:min(var(--site-frame-max),calc(100% - var(--site-frame-inset)))',
+            '--site-frame-left:max(var(--site-frame-edge),calc((100% - var(--site-frame-max))/2))',
+            '--site-header-height:64px',
+            '--site-mobile-directory-row-height:48px',
+            '--docs-rail-width:320px',
+            '--docs-content-width:880px',
+            ':root{--site-frame-edge:8px;--site-frame-inset:16px}',
             '--responsive-grid-min:420px;gap:1px;margin:28px -56px -62px;background:var(--portal-line)',
             'a:visited:not(.portal-button)',
             ".portal-button-primary:visited",
@@ -2930,9 +2940,9 @@ def validate_jekyll_sources():
             'position:fixed;inset:0;z-index:1;display:block;background:transparent',
             'transition-property:opacity,transform,visibility',
             'will-change:opacity,transform;contain:layout paint;backface-visibility:hidden',
-            'height:auto;max-height:calc(var(--mobile-directory-viewport-height,100dvh) - 72px)',
+            'height:auto;max-height:calc(var(--mobile-directory-viewport-height,100dvh) - var(--site-header-height) - var(--site-frame-edge))',
             'html.mobile-directory-open body:not([data-page-role="portal"]) .global-directory-panel nav{',
-            'height:auto;max-height:calc(var(--mobile-directory-viewport-height,100dvh) - 120px)',
+            'height:auto;max-height:calc(var(--mobile-directory-viewport-height,100dvh) - var(--site-header-height) - var(--site-mobile-directory-row-height) - var(--site-frame-edge))',
             'touch-action:pinch-zoom',
             'isolation:isolate',
             'overflow-anchor:none;overscroll-behavior:none',
@@ -2979,6 +2989,15 @@ def validate_jekyll_sources():
                 errors.append(f"shared styles missing site-wide design contract: {token}")
         if re.search(r"transition\s*:\s*all\b", shared_css):
             errors.append("shared styles must not use transition: all")
+        for duplicated_frame_formula in (
+            "width:min(1200px,calc(100% - 36px))",
+            "width:calc(100% - 16px)",
+            "left:max(18px,calc((100% - 1200px)/2))",
+        ):
+            if duplicated_frame_formula in shared_css:
+                errors.append(
+                    f"shared styles must consume the global frame tokens instead of {duplicated_frame_formula}"
+                )
         if re.search(r"html\.mobile-directory-open\s+body\s*\{", shared_css):
             errors.append("mobile directory must not replace body layout while the overlay is open")
         if re.search(r"html\.mobile-directory-open\s*\{[^}]*overflow\s*:", shared_css):
