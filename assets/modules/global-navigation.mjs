@@ -7,19 +7,17 @@ export class GlobalNavigation {
   constructor(root, routeModel, groups, coverUrl) {
     this.root = root;
     this.routeModel = routeModel;
-    this.groups = groups;
+    this.groupsByKey = new Map(groups.map((group) => [group.key, group]));
     this.coverUrl = coverUrl;
     this.openTimers = new WeakMap();
     this.closeTimers = new WeakMap();
   }
 
   hydrate() {
-    const groupsByKey = new Map(this.groups.map((group) => [group.key, group]));
     this.root.querySelectorAll("[data-global-nav-item]").forEach((item) => {
-      const group = groupsByKey.get(item.dataset.globalNavItem);
+      const group = this.groupsByKey.get(item.dataset.globalNavItem);
       const trigger = item.querySelector(":scope > .global-nav-trigger");
       if (!group || !trigger) return;
-      item.append(this.#buildMenu(group));
       this.#connectItem(item, trigger);
     });
   }
@@ -27,6 +25,12 @@ export class GlobalNavigation {
   openByKey(key) {
     const item = this.root.querySelector(`[data-global-nav-item="${CSS.escape(key)}"]`);
     if (item) this.#setExpanded(item, true);
+  }
+
+  #ensureMenu(item) {
+    if (item.querySelector(":scope > .global-nav-menu")) return;
+    const group = this.groupsByKey.get(item.dataset.globalNavItem);
+    if (group) item.append(this.#buildMenu(group));
   }
 
   #buildMenu(group) {
@@ -101,7 +105,7 @@ export class GlobalNavigation {
   #scheduleOpen(item) {
     clearTimeout(this.closeTimers.get(item));
     clearTimeout(this.openTimers.get(item));
-    this.openTimers.set(item, setTimeout(() => this.#setExpanded(item, true), 40));
+    this.openTimers.set(item, setTimeout(() => this.#setExpanded(item, true), 20));
   }
 
   #scheduleClose(item) {
@@ -112,6 +116,7 @@ export class GlobalNavigation {
 
   #setExpanded(item, expanded) {
     if (expanded) {
+      this.#ensureMenu(item);
       this.root.querySelectorAll(".global-nav-item.is-menu-open").forEach((candidate) => {
         if (candidate === item) return;
         candidate.classList.remove("is-menu-open");

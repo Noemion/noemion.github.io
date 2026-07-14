@@ -2897,7 +2897,7 @@ def validate_jekyll_sources():
             'body[data-docs-layout="true"]',
             ".global-nav-menu",
             ".global-nav-visual",
-            "calc(var(--nav-order) * 45ms)",
+            "calc(var(--nav-order) * 15ms)",
             "prefers-reduced-motion:reduce",
             "body .global-brand .portal-brand-mark{color:#10261e;background:#f0f6f3}",
             ".global-timeline-value{",
@@ -3385,7 +3385,7 @@ def validate_jekyll_sources():
             'trigger.setAttribute("aria-expanded", "false")',
             'item.addEventListener("mouseenter"',
             'item.classList.toggle("is-menu-open", expanded)',
-            "setTimeout(() => this.#setExpanded(item, true), 40)",
+            "setTimeout(() => this.#setExpanded(item, true), 20)",
             "setTimeout(() => this.#setExpanded(item, false), 120)",
             'document.addEventListener("click"',
             'event.key === "Escape"',
@@ -3427,8 +3427,8 @@ def validate_jekyll_sources():
             "if (mobileLayout.matches) ensureDirectory()",
             "if (mobileLayout.matches) ensureMobileHeaderLayout()",
             'mobileLayout.addEventListener("change"',
-            "if (event.matches) ensureDirectory()",
-            "if (event.matches) ensureMobileHeaderLayout()",
+            "if (event.matches) {",
+            "} else if (precisePointer.matches) {",
             "if (!globalRoot || mobileLayout.matches) return",
             "if (precisePointer.matches) requestGlobalNavigation(event)",
             "if (precisePointer.matches || keyboardNavigation) requestGlobalNavigation(event)",
@@ -3437,6 +3437,10 @@ def validate_jekyll_sources():
             'item.classList.contains("is-menu-open")',
             "event.preventDefault()",
             'const coverUrl = new URL("nav-covers.svg", scriptUrl).href',
+            "const prepareGlobalNavigation = () =>",
+            "if (!mobileLayout.matches && precisePointer.matches) prepareGlobalNavigation()",
+            'precisePointer.addEventListener("change"',
+            'void fetch(coverUrl, { credentials: "same-origin" }).catch(() => {})',
         ):
             if token not in site_text:
                 errors.append(f"site entry missing device-specific navigation contract: {token}")
@@ -3495,6 +3499,20 @@ def validate_jekyll_sources():
                 errors.append(f"{module_name} must propagate its build version to shared dependencies")
         if "portal-nav-link" in module_text:
             errors.append("global navigation must not emit the obsolete portal-nav-link alias")
+        for token in (
+            "this.groupsByKey = new Map",
+            "#ensureMenu(item)",
+            'item.querySelector(":scope > .global-nav-menu")',
+            "if (group) item.append(this.#buildMenu(group))",
+        ):
+            if token not in module_text:
+                errors.append(f"global navigation missing per-group lazy rendering contract: {token}")
+        for obsolete_timing in (
+            "calc(var(--nav-order) * 45ms)",
+            "setTimeout(() => this.#setExpanded(item, true), 40)",
+        ):
+            if obsolete_timing in module_text or obsolete_timing in shared_css:
+                errors.append(f"global navigation retains obsolete delayed timing: {obsolete_timing}")
 
         expected_nav_covers = {
             "background", "architecture", "foundations", "faq",
@@ -4071,8 +4089,12 @@ def main():
             "background:var(--portal-cover-bottom-gradient)",
             "background:linear-gradient(to bottom,var(--portal-cover-edge) 0 80%,var(--paper) 100%)!important",
             ".portal-introduction-visual::after{",
-            ".portal-thesis-copy p{max-width:590px;margin:0 0 20px;color:var(--muted);font-size:16px;line-height:1.75;text-wrap:pretty}",
-            ".portal-thesis-copy{padding-inline:20px}",
+            ".portal-thesis{--portal-thesis-inline:clamp(20px,3.8vw,34px);grid-template-columns:1fr;min-height:0}",
+            ".portal-thesis-title{padding:72px var(--portal-thesis-inline) 48px",
+            ".portal-thesis-copy{padding:50px var(--portal-thesis-inline) 58px}",
+            ".portal-thesis-copy p{width:min(100%,590px);margin-inline:auto}",
+            ".portal-thesis{--portal-thesis-inline:20px}",
+            ".portal-thesis-copy p{text-wrap:wrap}",
             ".portal-thesis-copy .portal-lead{font-size:18px;line-height:1.65;font-weight:560;letter-spacing:-.01em}",
         ):
             if token not in home_style:

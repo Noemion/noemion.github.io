@@ -705,9 +705,10 @@ body[data-page-role="portal"] .site-footer{
     content:"";position:absolute;inset:0 0 auto;z-index:2;height:28%;pointer-events:none;
     background:linear-gradient(to bottom,var(--portal-cover-edge),transparent)
   }
-  .portal-thesis{grid-template-columns:1fr;min-height:0}
-  .portal-thesis-title{padding:72px 34px 48px;border-right:0;border-bottom:1px solid var(--portal-line)}
-  .portal-thesis-copy{padding:50px 34px 58px}
+  .portal-thesis{--portal-thesis-inline:clamp(20px,3.8vw,34px);grid-template-columns:1fr;min-height:0}
+  .portal-thesis-title{padding:72px var(--portal-thesis-inline) 48px;border-right:0;border-bottom:1px solid var(--portal-line)}
+  .portal-thesis-copy{padding:50px var(--portal-thesis-inline) 58px}
+  .portal-thesis-copy p{width:min(100%,590px);margin-inline:auto}
   .portal-section-heading{padding:76px 28px 58px}
   .portal-feature-row{grid-template-columns:180px minmax(0,1fr);gap:24px;padding:26px 28px}
   .portal-feature-row .portal-arrow{display:none}
@@ -736,8 +737,8 @@ body[data-page-role="portal"] .site-footer{
   .portal-actions{align-items:stretch;flex-direction:column}
   .portal-button{width:100%;justify-content:space-between}
   .portal-introduction-meta{align-items:flex-start;padding-top:32px}
-  .portal-thesis-title{padding-inline:24px}
-  .portal-thesis-copy{padding-inline:20px}
+  .portal-thesis{--portal-thesis-inline:20px}
+  .portal-thesis-copy p{text-wrap:wrap}
   .portal-thesis-copy .portal-lead{font-size:18px;line-height:1.65;font-weight:560;letter-spacing:-.01em}
   .portal-thesis h2{font-size:36px}
   .portal-section-heading{padding:68px 22px 50px}

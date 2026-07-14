@@ -32,23 +32,27 @@ const loadStore = () => {
 };
 
 const globalRoot = document.querySelector("[data-global-nav]");
+const coverUrl = new URL("nav-covers.svg", scriptUrl).href;
 let globalControllerPromise;
-const ensureGlobalNavigation = async (item) => {
+const prepareGlobalNavigation = () => {
   if (!globalRoot || mobileLayout.matches) return;
   if (!globalControllerPromise) {
+    void fetch(coverUrl, { credentials: "same-origin" }).catch(() => {});
     globalControllerPromise = Promise.all([
       import(moduleUrl("global-navigation")),
       loadRouteModel(),
       loadStore()
     ]).then(([{ GlobalNavigation }, routeModel, data]) => {
-      const coverUrl = new URL("nav-covers.svg", scriptUrl).href;
       const controller = new GlobalNavigation(globalRoot, routeModel, data.global, coverUrl);
       controller.hydrate();
       return controller;
     });
   }
+  return globalControllerPromise;
+};
+const ensureGlobalNavigation = async (item) => {
   try {
-    const controller = await globalControllerPromise;
+    const controller = await prepareGlobalNavigation();
     controller.openByKey(item?.dataset.globalNavItem || "");
   } catch (error) {
     console.warn("Enhanced global navigation is unavailable; primary links remain usable.", error);
@@ -72,6 +76,10 @@ globalRoot?.addEventListener("click", (event) => {
   if (!item || item.classList.contains("is-menu-open")) return;
   event.preventDefault();
   ensureGlobalNavigation(item);
+});
+if (!mobileLayout.matches && precisePointer.matches) prepareGlobalNavigation();
+precisePointer.addEventListener("change", (event) => {
+  if (event.matches && !mobileLayout.matches) prepareGlobalNavigation();
 });
 
 const directoryRoot = document.querySelector("[data-directory]");
@@ -127,8 +135,12 @@ const ensureDirectory = async () => {
 if (mobileLayout.matches) ensureDirectory();
 if (mobileLayout.matches) ensureMobileHeaderLayout();
 mobileLayout.addEventListener("change", (event) => {
-  if (event.matches) ensureDirectory();
-  if (event.matches) ensureMobileHeaderLayout();
+  if (event.matches) {
+    ensureDirectory();
+    ensureMobileHeaderLayout();
+  } else if (precisePointer.matches) {
+    prepareGlobalNavigation();
+  }
 });
 directoryPanel?.addEventListener("noemion:directoryrequest", ensureDirectory);
 if (directoryPanel?.hasAttribute("data-mobile-directory-pending-open")) ensureDirectory();
