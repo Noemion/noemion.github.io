@@ -78,7 +78,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Architecture guide](https://noemion.github.io/docs/architecture-guide.html) — system layers, lifecycle, and trust boundaries
 - [Development guide](https://noemion.github.io/docs/development-guide.html) — specification-first workflow, testing, and contribution guidance
 - [Endem application reference](https://noemion.github.io/docs/endem-reference.html) — Endem actions, components, trust boundaries, and current status
-- [Specifications reference](https://noemion.github.io/docs/specifications-reference.html) — authority, maturity, ADRs, and specification reading order
+- [Specifications reference](https://noemion.github.io/docs/specifications-reference.html) — task-based source lookup, authority order, research status, ADRs, and evidence boundaries
 
 ## Development and resources
 

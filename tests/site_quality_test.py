@@ -141,7 +141,7 @@ DOC_GUIDE_HEADINGS = {
         "应用总览", "Ktisor 子命令", "theor 的独立性", "drase 的隔离性", "不建设独立模型平台",
     ],
     "docs/specifications-reference.html": [
-        "权威顺序", "Endem", "Synem", "Dromen 与 Iknem", "ADR 与开放问题",
+        "按工程问题找资料", "权威顺序", "资料状态与使用边界", "Endem", "Synem", "Dromen、Iknem 与横切边界", "ADR 与开放问题",
     ],
 }
 HOME_HEADINGS = [
@@ -3681,6 +3681,19 @@ def main():
     ):
         if token not in architecture_guide_text:
             errors.append(f"architecture guide missing developer walkthrough: {token}")
+    specifications_reference_text = (
+        SOURCE_ROOT / "docs" / "specifications-reference.md"
+    ).read_text()
+    for token in (
+        "不必先记住全部项目术语",
+        "| 要回答的问题 | 先读 | 再核对 |",
+        "`completed` 只说明外部请求执行状态",
+        "研究资料不能作为现行字段、命令、状态或互操作接口的依据",
+        "向量通过也只说明已登记案例与草案一致",
+        "机器可读登记",
+    ):
+        if token not in specifications_reference_text:
+            errors.append(f"specifications reference missing task lookup boundary: {token}")
     terminology_guide_text = (
         SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md"
     ).read_text()

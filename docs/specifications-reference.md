@@ -9,21 +9,40 @@ manual_group: "reference"
 manual_order: 7
 nav_title: "规范参考指南"
 page_heading: "Noemion 规范参考指南"
-page_lead: "理解 Endem、Synem、Dromen、Iknem、跨制品边界、状态标记与 ADR 的权威顺序。"
-summary: "理解对象规范、横切标准、状态标记与 ADR 的权威顺序。"
-badges: ["Authority", "Maturity", "ADR"]
+page_lead: "遇到目标、组合、运行、证据、协议、身份、文本或授权问题时，先定位权威源，再区分现行要求与研究资料。"
+summary: "按工程问题定位规范源，并区分现行要求、解释材料、研究资料与验证证据。"
+badges: ["Authority", "Lookup", "Status"]
 ---
+
+## 按工程问题找资料
+
+不必先记住全部项目术语。先确认你要回答的问题，再进入对应规范。
+
+| 要回答的问题 | 先读 | 再核对 |
+| --- | --- | --- |
+| 一项目标怎样表达，哪些意义仍未解决 | [Endem 规范](../specifications/endem.html) | END-CORE、END-P1，以及 ADR-0015 至 ADR-0020 |
+| 多项目标怎样解析引用、权限和冲突 | [Synem 规范](../specifications/synem.html) | SYN-CORE 与 ADR-0021 |
+| 一次运行可以用哪些主体、环境、能力和预算 | [Dromen 会话契约](../specifications/dromen.html) | DRO-CORE 与 ADR-0024 |
+| 观察能支持什么判断，覆盖还缺什么 | [Iknem 规范](../specifications/iknem.html) | IKN-CORE 与 ADR-0022 |
+| 失败怎样取得稳定机器码和精确位置 | [结构化诊断规范](../specifications/diagnostics.html) | DIA-CORE、DIA-CAT 与 ADR-0025 |
+| MCP、A2A、HTTP 或 SDK 状态怎样进入本地边界 | [外部协议适配规范](../specifications/adapters.html) | ADP-CORE 与 ADR-0026 |
+| 摘要、签名和不可变引用究竟绑定什么 | [精确内容身份与签名规范](../specifications/identity.html) | ID-CORE 与 ADR-0027 |
+| UTF-8、标识符、显示文本和模型输入怎样区分 | [文本与标识符边界规范](../specifications/text-and-identifiers.html) | TEXT-IDENTIFIER-CORE 与 ADR-0028 |
+| 谁可以确认候选、解决歧义或授予动作权限 | [权威与授权决定规范](../specifications/authority.html) | AUT-CORE、ADR-0029 与 ADR-0030 |
+
+例如，外部 Agent Task 显示 `completed`，开发者仍不能据此发布结果。先用 ADP-CORE 保存协议状态和来源，再用 DRO-CORE 检查本次会话的能力上限。随后用 IKN-CORE 判断证据范围，并按 END-CORE 的 `krin` 形成满足结果。最后由 AUT-CORE 所描述的具名权威作出适用决定。`completed` 只说明外部请求执行状态，不直接等于 `met` 或 `accepted`。
 
 ## 权威顺序
 
-1. 版本化 Markdown 条款源定义“必须是什么”。
-2. 标为“当前策略”的 ADR 解释项目目前怎样处理这个问题，以及以后怎样变更。
-3. 架构页解释制品和组件关系。
-4. 指南提供阅读路径；FAQ 和示例不建立实现义务。
+1. 版本化 Markdown 条款源定义实现必须满足什么。
+2. 标为“当前策略”的 ADR 解释项目为什么采用这条边界，以及怎样变更。
+3. 威胁模型说明不可信输入、滥用方式和失败责任，但不另建义务。
+4. 架构页和规范 HTML 解释对象关系，便于开发者理解条款所在位置。
+5. 指南提供阅读路径；FAQ、场景、研究资料和示例不建立实现义务。
 
 > “当前策略”表示项目目前采用的做法；“正在研究”表示已有候选但尚未形成结论；“待定内容”表示目前没有唯一答案；“后续计划”表示尚不能依赖。
 
-每个规范“必须/不得/只有”都应关联机器测试或具名人工权威。实现、论文、专利、演示和模型输出不能反向替代规范。
+每个规范中的“必须”“不得”和“只有”都应关联机器测试或具名人工权威。实现、论文、专利、演示和模型输出不能反向替代规范。
 
 当前权威源包括作为通用内容标准的 [END-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md)、当前封闭内容 Profile [END-P1](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json)、实验性容器 [END-FMT 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)，以及组合、会话、证据、诊断、适配、身份、文本和授权边界的各 CORE 草案。权威与授权决定以 [AUT-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md)为准；全部条款与状态由[机器可读登记](https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json)连接。公开 HTML 只负责直白解释，不复制第二套条款。
 
@@ -32,6 +51,21 @@ badges: ["Authority", "Maturity", "ADR"]
 [END-SCEN 自然语言场景语料](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md)用三十个案例寻找规范缺口，但不属于上述规范义务。只有案例转化为唯一条款、登记验证方式并形成正反向量后，对应判断才可能进入符合性要求。
 
 [SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)、[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)、[IKN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md)与[AUT-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-scenarios.md)分别检查组合闭包、会话契约、证据及授权边界，同样不属于上述规范义务。
+
+## 资料状态与使用边界
+
+同一主题可能同时出现 CORE、Profile、ADR、威胁模型、场景和向量。它们回答的问题不同。
+
+| 资料 | 可以回答 | 不能回答 |
+| --- | --- | --- |
+| CORE、格式条款与已登记 Profile | 当前实现必须接受、拒绝或保持什么 | 尚未写入条款的未来接口 |
+| 标为“当前策略”的 ADR | 为什么采用现行边界，变更会影响什么 | 替代对应 CORE 的逐条要求 |
+| 威胁模型 | 哪些输入不可信，失败由谁处理 | 单独创造字段、结果或权限 |
+| 规范 HTML、架构页与指南 | 概念怎样关联，具体问题应查哪里 | 建立第二套规范义务 |
+| 场景与研究资料 | 暴露反例、备选方案和待验证责任 | 作为现行字段、命令、状态或互操作接口的依据 |
+| 向量与资料一致性检查 | 已登记案例是否符合当前草案 | 证明组件已经实现、安全或可互操作 |
+
+先看资料标题和状态，再引用内容。研究资料不能作为现行字段、命令、状态或互操作接口的依据。向量通过也只说明已登记案例与草案一致。需要实现义务时，应回到 CORE 条款、Profile 和机器可读登记。
 
 ## Endem
 
@@ -43,7 +77,7 @@ badges: ["Authority", "Maturity", "ADR"]
 
 [Synem 规范](../specifications/synem.html)解释完整闭包、精确绑定、有限无环、权限交集、成员结果分离和条件激活。规范源是 [SYN-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md)；[SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)不属于上述规范义务。当前没有物理 Synem 格式或组件实现。
 
-## Dromen 与 Iknem
+## Dromen、Iknem 与横切边界
 
 [Dromen 会话契约](../specifications/dromen.html)解释精确会话主体、政策封闭、环境绑定、能力与预算上限、观察责任、只读失效和销毁。规范源是 [DRO-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md)；[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)不属于上述规范义务。Dromen 永远不是磁盘格式、凭据包或可恢复会话，当前也没有 Drasor 或运行时实现。
 
