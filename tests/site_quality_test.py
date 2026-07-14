@@ -1846,6 +1846,58 @@ def validate_jekyll_sources():
                     errors.append(
                         f"{current_interface.relative_to(SOURCE_ROOT)} exposes non-normative lifecycle candidate {candidate_value}"
                     )
+        lifecycle_page_text = (SOURCE_ROOT / "architecture" / "endem-lifecycle.html").read_text()
+        for token in (
+            "先分开内容状态与外部关系",
+            "外部陈述可以增加、过期或撤销，而精确内容身份不因此改变",
+            "现行 END-CORE 草案仍把",
+            "这个单值模型不能精确保存多项签名、验证政策、截止点和撤销关系",
+            "精确制品与外部陈述 → drase",
+            "内容形成与发布陈述不能压成一个状态",
+            "不同依赖方可以对同一陈述作出不同判断",
+            "RFC 9334 RATS Architecture",
+            "in-toto Attestation Statement",
+            "SLSA 1.2 Verification Summary Attestation",
+            "GNU Guix substitute authentication",
+            "MCP 2025-11-25 Tasks",
+        ):
+            if token not in lifecycle_page_text:
+                errors.append(f"Endem lifecycle page missing two-axis attestation boundary: {token}")
+        for stale_lifecycle_claim in (
+            "Endem 在 nascent、coherent、attested 三个状态之间演进",
+            "<h2>coherent → attested</h2>",
+            "<h2>attested → Dromen → Iknem</h2>",
+            "<tr><td>attested → drase</td>",
+            "这五个结果域由",
+        ):
+            if stale_lifecycle_claim in lifecycle_page_text:
+                errors.append(
+                    f"Endem lifecycle page retains a linear attestation overclaim: {stale_lifecycle_claim}"
+                )
+        lifecycle_explainer_requirements = {
+            SOURCE_ROOT / "architecture" / "index.html": (
+                "来源表达、获授权意义、一个根可能事态、目标方向、满足判据和待确认意义",
+                "外部陈述绑定内容身份",
+                "签名、验证或撤销不会原地改写内容身份",
+            ),
+            SOURCE_ROOT / "components" / "drasor.html": (
+                "适用外部陈述",
+                "验证政策、截止点、撤销",
+                "不能把多项外部关系压成内容自身的布尔状态",
+            ),
+            SOURCE_ROOT / "specifications" / "dromen.html": (
+                "外部陈述与验证记录",
+                "当前 <code>attested</code> 主体条件",
+                "内容形成与外部陈述的两轴模型",
+            ),
+        }
+        for source, required_tokens in lifecycle_explainer_requirements.items():
+            source_text = source.read_text()
+            for token in required_tokens:
+                if token not in source_text:
+                    errors.append(
+                        f"{source.relative_to(SOURCE_ROOT)} missing developer-facing attestation boundary: {token}"
+                    )
 
     preview_proposal = SOURCE_ROOT / "spec" / "preview-simulation-and-approval-proposal.md"
     if not preview_proposal.exists():

@@ -12,13 +12,13 @@ permalink: "/components/drasor.html"
   <section class="content-stack">
     <h2>为什么 Drasor 不能并入模型</h2>
     <p class="lead">模型可以提出候选和能力请求，却不能证明请求已获授权、工具结果真实或任务已经完成。Drasor 因此把装载、能力、观察、预算和决定策略留在求解后端之外。</p>
-    <p>Drasor 是 <code>endem drase</code> 背后的隔离域。它可以调用 Ktisor 的制品形成侧检查接口，但不得链接 Ktisor 写入器，也不得修改 attested 制品。求解后端与能力适配器还应进一步隔离。</p>
+    <p>Drasor 是 <code>endem drase</code> 背后的隔离域。它可以调用 Ktisor 的制品形成侧检查接口，但不得链接 Ktisor 写入器，也不得修改精确制品或外部签名陈述。求解后端与能力适配器还应进一步隔离。</p>
   </section>
 
   <section class="content-wide">
     <h2>权威输入与输出</h2>
     <div class="table-wrap"><table><thead><tr><th>方向</th><th>内容</th><th>边界</th></tr></thead><tbody>
-      <tr><td>输入</td><td>attested Endem 字节与 Synem 精确成员闭包</td><td>重新验证签名、状态、绑定和实际摘要，不复用过期结论；Synem 物理格式尚未定义。</td></tr>
+      <tr><td>输入</td><td>Endem 精确字节或 Synem 精确成员闭包，以及适用外部陈述</td><td>重新验证内容身份、陈述主体、签名者、验证政策、截止点、撤销、闭包绑定和实际摘要，不复用过期结论；Synem 物理格式尚未定义。</td></tr>
       <tr><td>输入</td><td>运行策略与 <code>krin</code></td><td>固定能力上限、预算、停止、观察、证据、人工升级和决定权威；只能收紧制品要求。</td></tr>
       <tr><td>输入</td><td>后端绑定与能力目录</td><td>模型或求解器与可用能力的身份、版本和参数结构；描述仍是不可信声明。</td></tr>
       <tr><td>会话契约</td><td>Dromen</td><td>按 DRO-CORE 只读、一次性、不可序列化；不保存跨会话能力句柄。</td></tr>
@@ -41,7 +41,7 @@ permalink: "/components/drasor.html"
 
   <section class="content-wide">
     <h2>Dromen 是一次会话的只读契约</h2>
-    <p>Dromen 是 Drasor 按 <a href="../architecture/adr-0024-dromen-session-contract.html">ADR-0024</a> 从精确 attested 制品、政策、环境、能力、预算和证据责任求交后封存的会话契约。它只披露本次实现需要的非秘密语义与能力描述，不保存运行观察和最终结果。</p>
+    <p>Dromen 是 Drasor 按 <a href="../architecture/adr-0024-dromen-session-contract.html">ADR-0024</a> 从精确制品、适用外部陈述、当前验证结果、政策、环境、能力、预算和证据责任求交后封存的会话契约。现行 DRO-CORE 用 <code>attested</code> 概括其中一部分准入条件，但实现设计不能把多项外部关系压成内容自身的布尔状态。Dromen 只披露本次实现需要的非秘密语义与能力描述，不保存运行观察和最终结果。</p>
     <ul>
       <li>Dromen 不进入派生制品、外部签名包络、对象仓库或模型缓存。</li>
       <li>Dromen 不包含凭据、Bearer token、文件描述符、网络连接或其他实时句柄。</li>
@@ -53,7 +53,7 @@ permalink: "/components/drasor.html"
 
   <section class="content-wide">
     <h2>运行循环</h2>
-    <div class="flow"><div class="step">检查 attested 字节</div><div class="step">建立 Dromen</div><div class="step">后端提出候选或请求</div><div class="step">策略检查</div><div class="step">执行或拒绝</div><div class="step">phain → Iknem</div><div class="step">krin → 继续或升级</div></div>
+    <div class="flow"><div class="step">检查精确字节</div><div class="step">复核外部陈述与当前政策</div><div class="step">建立 Dromen</div><div class="step">后端提出候选或请求</div><div class="step">策略检查</div><div class="step">执行或拒绝</div><div class="step">phain → Iknem</div><div class="step">krin → 继续或升级</div></div>
     <ol>
       <li>Loader 验证实际输入并在失败时原子拒绝，不建立部分 Dromen。</li>
       <li>控制平面按最小披露和能力上限创建 Dromen。</li>
