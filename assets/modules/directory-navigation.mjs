@@ -138,9 +138,10 @@ export class MobileDirectoryController {
   }
 
   open() {
-    if (!this.interactive.matches || this.panel.open) return;
+    if (!this.interactive.matches) return;
     clearTimeout(this.closeTimer);
     this.panel.classList.remove("is-closing");
+    if (this.panel.open) return;
     this.panel.open = true;
     this.#setScrollLock(true);
   }
@@ -148,6 +149,7 @@ export class MobileDirectoryController {
   #toggle(event) {
     if (!this.interactive.matches) return;
     event.preventDefault();
+    if (this.panel.classList.contains("is-closing")) return this.open();
     if (this.panel.open) return this.close();
     this.open();
   }

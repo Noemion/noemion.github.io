@@ -26,10 +26,6 @@
   --shadow:none;
   --shadow-hover:none;
   --ease:cubic-bezier(.2,0,0,1);
-  --layout-max:1480px;
-  --layout-gutter:28px;
-  --sidebar-width:270px;
-  --sidebar-gap:18px;
   --content-max:1000px;
 }
 
@@ -1375,11 +1371,11 @@ body[data-page-role="tool-project"] .page-links{margin-bottom:-62px}
 
 /* Documentation family for every /docs/ route. */
 body[data-docs-layout="true"] main{
-  width:880px;margin:0 max(18px,calc((100vw - 1200px)/2)) 64px max(338px,calc((100vw - 1200px)/2 + 320px));
+  width:880px;margin:0 max(18px,calc((100% - 1200px)/2)) 64px max(338px,calc((100% - 1200px)/2 + 320px));
   border-left:0
 }
 body[data-docs-layout="true"] .site-footer{
-  width:880px;margin:-64px max(18px,calc((100vw - 1200px)/2)) 0 max(338px,calc((100vw - 1200px)/2 + 320px));border-left:0
+  width:880px;margin:-64px max(18px,calc((100% - 1200px)/2)) 0 max(338px,calc((100% - 1200px)/2 + 320px));border-left:0
 }
 body[data-docs-layout="true"] .breadcrumbs{padding-inline:38px}
 body[data-docs-layout="true"] .manual-introduction{min-height:250px;padding:48px 220px 42px 48px;background:var(--paper)}

@@ -1009,6 +1009,20 @@ def validate_readability_behavior_contracts(root):
         if 'body[data-docs-layout="true"] .manual-introduction::before{top:auto;right:auto;bottom:28px;left:50%;width:130px;height:104px;transform:translateX(-50%)}' not in style_text:
             errors.append("mobile manual introduction visual must be centered on its standalone row")
         css_patterns = {
+            "desktop documentation rail must share the header canvas basis": (
+                directory_text,
+                r"\.docs-rail\s*\{[^}]*left:max\(18px,calc\(\(100%\s*-\s*1200px\)/2\)\)"
+            ),
+            "desktop documentation content must share the header canvas basis": (
+                style_text,
+                r"body\[data-docs-layout=\"true\"\]\s+main\s*\{[^}]*"
+                r"calc\(\(100%\s*-\s*1200px\)/2\)"
+            ),
+            "open mobile directory must align with the shared eight pixel canvas": (
+                directory_text,
+                r"html\.mobile-directory-open\s+\.global-directory-panel\s+nav\s*\{"
+                r"[^}]*right:8px;[^}]*left:8px;width:auto"
+            ),
             "docs content must become a centered single column from 1217px": (
                 style_text,
                 r"@media\(min-width:1000px\)\s+and\s+\(max-width:1217px\)\s*\{"
@@ -1052,6 +1066,25 @@ def validate_readability_behavior_contracts(root):
         for label, (css_text, pattern) in css_patterns.items():
             if re.search(pattern, css_text, re.DOTALL) is None:
                 errors.append(f"shared styles missing readability contract: {label}")
+        if re.search(
+            r'(?:body\[data-docs-layout="true"\]\s+(?:main|\.site-footer)|\.docs-rail)\s*\{[^}]*100vw',
+            style_text + "\n" + directory_text,
+            re.DOTALL,
+        ):
+            errors.append("desktop documentation canvas must not use viewport width positioning")
+        if re.search(
+            r'\.global-directory-panel(?:\[open\])?\s+nav\s*\{[^}]*100vw',
+            directory_text,
+            re.DOTALL,
+        ):
+            errors.append("mobile directory must not use viewport width positioning")
+        if re.search(
+            r'html\.mobile-directory-open[^{}]*\.global-directory-panel\s+nav\s*\{'
+            r'[^}]*(?<!max-)height:calc\(var\(--mobile-directory-viewport-height',
+            directory_text,
+            re.DOTALL,
+        ):
+            errors.append("open mobile directory height must follow its content instead of filling the viewport")
     else:
         if not style.exists():
             errors.append("missing assets/style.css")
@@ -2707,6 +2740,7 @@ def validate_jekyll_sources():
             ".portal-button-secondary:visited",
             '@media(max-width:999px)',
             'body:not([data-page-role="portal"]) .global-directory-panel',
+            'transition-duration:180ms;transition-timing-function:cubic-bezier(.2,0,0,1);transition-delay:0s',
             '.site-header .directory-panel.is-closing nav',
             'html.mobile-directory-open{overflow:hidden;overscroll-behavior:none}',
             'html.mobile-directory-open body{',
@@ -2714,9 +2748,9 @@ def validate_jekyll_sources():
             'html.mobile-directory-open body .global-header{',
             'position:fixed;top:0;right:8px;left:8px;width:auto;margin:0',
             'backdrop-filter:none;-webkit-backdrop-filter:none',
-            'height:calc(var(--mobile-directory-viewport-height,100dvh) - 72px);max-height:none',
+            'height:auto;max-height:calc(var(--mobile-directory-viewport-height,100dvh) - 72px)',
             'html.mobile-directory-open body:not([data-page-role="portal"]) .global-directory-panel nav{',
-            'height:calc(var(--mobile-directory-viewport-height,100dvh) - 120px);max-height:none',
+            'height:auto;max-height:calc(var(--mobile-directory-viewport-height,100dvh) - 120px)',
             'touch-action:pinch-zoom',
             'isolation:isolate',
             'overflow-anchor:none;overscroll-behavior:none',
@@ -3128,7 +3162,6 @@ def validate_jekyll_sources():
             "setTimeout(() => this.#setExpanded(item, false), 120)",
             'document.addEventListener("click"',
             'event.key === "Escape"',
-            "setTimeout(() => this.#finishClose(), 180)",
             "window.noemionMobileDirectoryScroll",
             "scrollLock?.lock()",
             "scrollLock?.unlock()",
@@ -3140,6 +3173,21 @@ def validate_jekyll_sources():
         ):
             if token not in module_text:
                 errors.append(f"front-end modules missing interaction contract: {token}")
+        for token in (
+            "setTimeout(() => this.#finishClose(), 180)",
+            'classList.add("is-closing")',
+            'if (this.panel.classList.contains("is-closing")) return this.open()',
+        ):
+            if token not in module_text:
+                errors.append(f"mobile directory must synchronize its interruptible 180ms animation: {token}")
+        if "ensureDirectory();" not in site_text:
+            errors.append("site entry must prepare directory navigation before the first mobile click")
+        for deferred_trigger in (
+            'addEventListener("pointerdown", ensureDirectory',
+            'addEventListener("keydown", ensureDirectory',
+        ):
+            if deferred_trigger in site_text:
+                errors.append(f"site entry must not defer mobile directory loading: {deferred_trigger}")
         for forbidden in (
             "this.lockedScrollY",
             "scrollTo(0, this.lockedScrollY)",
@@ -3154,7 +3202,6 @@ def validate_jekyll_sources():
             'import(moduleUrl("global-navigation"))',
             'import(moduleUrl("directory-navigation"))',
             'import(moduleUrl("content-enhancements"))',
-            'if (desktopDirectory.matches) ensureDirectory()',
             "needsTableScroller || longContent",
             'directoryPanel.dataset.mobileDirectoryReady = "true"',
             'directoryPanel?.addEventListener("noemion:directoryrequest", ensureDirectory)',

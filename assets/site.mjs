@@ -81,13 +81,7 @@ const ensureDirectory = async () => {
   }
 };
 
-const desktopDirectory = matchMedia("(min-width: 1000px)");
-if (desktopDirectory.matches) ensureDirectory();
-desktopDirectory.addEventListener("change", (event) => {
-  if (event.matches) ensureDirectory();
-});
-directoryPanel?.querySelector(":scope > summary")?.addEventListener("pointerdown", ensureDirectory, { once: true });
-directoryPanel?.querySelector(":scope > summary")?.addEventListener("keydown", ensureDirectory, { once: true });
+ensureDirectory();
 directoryPanel?.addEventListener("noemion:directoryrequest", ensureDirectory);
 if (directoryPanel?.hasAttribute("data-mobile-directory-pending-open")) ensureDirectory();
 
