@@ -4059,6 +4059,13 @@ def main():
         ):
             if selector not in home_style:
                 errors.append(f"style.css missing homepage visual selector {selector}")
+        for token in (
+            ".portal-introduction::before{",
+            "background:linear-gradient(to bottom,transparent,#07100e)",
+            "background:linear-gradient(to bottom,#07100e 0 80%,var(--paper) 100%)!important",
+        ):
+            if token not in home_style:
+                errors.append(f"style.css missing homepage surface continuity contract: {token}")
         portal_art = ROOT / "assets/images/noemion-verifiable-goal-field.svg"
         if not portal_art.exists():
             errors.append("homepage animated brand visual is missing")

@@ -344,7 +344,11 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
 
 .portal-introduction{
   position:relative;display:block;min-height:590px;overflow:hidden;background:#07100e;
-  border-bottom:1px solid var(--portal-line);isolation:isolate
+  border-bottom:0;isolation:isolate
+}
+.portal-introduction::before{
+  content:"";position:absolute;inset:auto 0 0;z-index:1;height:150px;pointer-events:none;
+  background:linear-gradient(to bottom,transparent,#07100e)
 }
 .portal-introduction::after{
   content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -403,22 +407,24 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
 .portal-introduction-meta i{width:7px;height:7px;border-radius:50%;background:var(--portal-coral);box-shadow:0 0 0 4px color-mix(in srgb,var(--portal-coral) 14%,transparent)}
 
 .portal-introduction-visual{
-  position:absolute;inset:0;z-index:0;width:100%;height:100%;margin:0;overflow:hidden;background:#07100e;
-  outline:1px solid rgba(0,0,0,.1);outline-offset:-1px
+  position:absolute;inset:0;z-index:0;width:100%;height:100%;margin:0;overflow:hidden;background:#07100e
 }
 .portal-introduction-visual img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
 .portal-art-base{z-index:0}
 .portal-art-motion{z-index:1}
 
-.portal-thesis{display:grid;grid-template-columns:42% 58%;min-height:520px}
+.portal-thesis{
+  display:grid;grid-template-columns:42% 58%;min-height:520px;margin-top:-1px;
+  background:linear-gradient(to bottom,#07100e 0 80%,var(--paper) 100%)!important
+}
 .portal-thesis-title{
   display:flex;flex-direction:column;justify-content:center;padding:72px 56px;
-  border-right:1px solid var(--portal-line)
+  color:#f0f7f3;border-right:1px solid rgba(255,255,255,.1)
 }
-.portal-thesis h2{max-width:390px;margin:0;font-size:clamp(34px,3.4vw,46px);line-height:1.12;letter-spacing:-.035em}
+.portal-thesis h2{max-width:390px;margin:0;color:#f0f7f3;font-size:clamp(34px,3.4vw,46px);line-height:1.12;letter-spacing:-.035em}
 .portal-thesis-copy{display:flex;flex-direction:column;justify-content:center;padding:68px 70px}
-.portal-thesis-copy p{max-width:590px;margin:0 0 20px;color:var(--muted);font-size:16px;line-height:1.75}
-.portal-thesis-copy .portal-lead{color:var(--heading);font-size:20px;font-weight:650;line-height:1.55}
+.portal-thesis-copy p{max-width:590px;margin:0 0 20px;color:rgba(226,240,233,.7);font-size:16px;line-height:1.75}
+.portal-thesis-copy .portal-lead{color:#f0f7f3;font-size:20px;font-weight:650;line-height:1.55}
 
 .portal-section-heading{max-width:660px;margin:0 auto;padding:94px 40px 74px;text-align:center}
 .portal-section-heading h2{margin:0;font-size:clamp(34px,4vw,48px);line-height:1.13;letter-spacing:-.04em}
@@ -665,7 +671,6 @@ body[data-page-role="portal"] .site-footer{
 :root[data-resolved-theme="dark"] .feature-visual-expression,
 :root[data-resolved-theme="dark"] .feature-visual-strict{filter:brightness(.72) saturate(.9)}
 :root[data-resolved-theme="dark"] .focus-art{outline-color:rgba(255,255,255,.1)}
-:root[data-resolved-theme="dark"] .portal-introduction-visual{outline-color:rgba(255,255,255,.1)}
 :root[data-resolved-theme="dark"] .portal-arrow{box-shadow:0 0 0 1px rgba(255,255,255,.24),0 2px 9px rgba(0,0,0,.24)}
 :root[data-resolved-theme="dark"] .arrow-ring-track{stroke:rgba(255,255,255,.52)}
 
