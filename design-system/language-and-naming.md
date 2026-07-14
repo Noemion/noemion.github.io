@@ -58,6 +58,8 @@ https://www.etymonline.com/word/-eme
 
 语音合成、自动转写和语音模型可以用于发现风险，但不能替代人类证据。模型输出仍是不可信候选；未来若支持口述动作，系统必须显示识别出的精确机器请求并按授权边界确认，不能凭转写或置信度直接执行。
 
+合格读音表形成前，文档、Issue、代码评审、运行手册和会议必须先写或先说直白职责，再给出代码样式的现行标识。听者不能唯一写回时，应在共享文字频道粘贴精确标识或逐字母确认；临时读法、自动转写和个人口音都不能替代字段、命令、Profile、规范 ID 或授权对象。具体协作示例见[术语与读音验证指南](../docs/terminology-and-pronunciation.html)。
+
 当前桌面审查已经排除 `kine/mene` 作为首次正式发行拼写，但没有修改现行规范值；`reach/maintain` 只取得进入人类验证的资格。`Iknem` 与 `Ktisor/ktise` 仍是高风险复核项，Endem/Synem 仍是成对听辨重点。其余名称没有因此自动通过。发现阶段、独立听者、60 个判断、停止规则和证据记录见[术语与读音验证指南](../docs/terminology-and-pronunciation.html)；风险更新维护在 [`name-audit.md`](name-audit.md)，规范门禁见 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html)。
 
 ## 写作原则

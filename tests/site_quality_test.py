@@ -128,7 +128,7 @@ DOC_GUIDE_HEADINGS = {
         "当前可用性", "未来职责流程", "发布原则", "命名发布条件",
     ],
     "docs/terminology-and-pronunciation.html": [
-        "直接结论", "证据适用边界", "两阶段验证", "任务与材料", "通过与停止规则",
+        "直接结论", "读音待定时怎样协作", "证据适用边界", "两阶段验证", "任务与材料", "通过与停止规则",
         "证据记录", "人工智能只做辅助探针", "当前状态",
     ],
     "docs/architecture-guide.html": [
@@ -744,6 +744,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "误选成另一个现行名称",
             "参与者标识必须假名化",
             "尚未执行上述人类研究",
+            "读音待定时怎样协作",
+            "有范围的证据记录（现行设计名",
+            "自动转写只保存一次机器观察",
+            "只有声音或转写结果不能触发执行",
         ),
     },
     "endem/docs/safety.html": {
@@ -3665,6 +3669,7 @@ def main():
         "首次看到拼写的朗读结果",
         "成对混淆矩阵",
         "语音合成、自动转写和语音模型",
+        "共享文字频道粘贴精确标识或逐字母确认",
     ):
         if token not in naming_standard_text:
             errors.append(f"language and naming standard missing no-digit boundary: {token}")
@@ -3724,7 +3729,10 @@ def main():
         "不能进入人类样本数",
         "Noemion 尚未执行上述人类研究",
         "### 当前资料的阅读约定",
+        "## 读音待定时怎样协作",
         "直白解释不是机器别名",
+        "口述的近似声音不能选择命令",
+        "原始转写不能直接改写 schema、命令、授权范围或研究结果",
     ):
         if token not in terminology_guide_text:
             errors.append(f"terminology guide missing human-evidence boundary: {token}")

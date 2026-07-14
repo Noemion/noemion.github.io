@@ -22,7 +22,7 @@ permalink: "/architecture/adr-0034-pronunciation-and-oral-distinction.html"
       <tr><td><a href="https://www.iso.org/standard/79077.html">ISO 704:2022</a></td><td>术语工作必须把对象、概念、定义和指称联系起来，并对术语与专名的形成采用明确原则。</td><td>某个新造词天然清楚、可说或可独占。</td></tr>
       <tr><td><a href="https://www.gnu.org/prep/standards/html_node/Names.html">GNU Coding Standards：Names</a></td><td>名称应传达含义，不应为了短而使用晦涩缩写。</td><td>短词一定比直白职责名更易传播。</td></tr>
       <tr><td><a href="https://www.w3.org/TR/pronunciation-lexicon/">W3C Pronunciation Lexicon Specification 1.0</a></td><td>专名和业务名称常需要把书写形式显式映射到读音；IPA 是可交换的读音表示。</td><td>写法本身足以唯一决定跨语言读音。</td></tr>
-      <tr><td><a href="https://developers.openai.com/api/reference/resources/realtime">OpenAI Realtime API</a></td><td>当前人工智能接口已经把音频输入、输出和转写作为实际交互面；转写只提供指导，并不精确等于模型实际听到的内容。</td><td>一次语音模型转写成功可以替代人类听辨或成为语义授权。</td></tr>
+      <tr><td><a href="https://platform.openai.com/docs/api-reference/realtime-server-events/conversation/item/input_audio_transcription/completed?lang=node">OpenAI Realtime API：输入音频转写完成事件</a></td><td>当前人工智能接口已经把音频输入、输出和转写作为实际交互面；输入音频转写异步运行，只提供内容参考，并不精确等于模型实际听到的内容。</td><td>一次语音模型转写成功可以替代人类听辨或成为语义授权。</td></tr>
     </tbody></table></div>
     <p>因此，名称审查必须同时覆盖人类口述、听辨、转写和机器辅助场景。语音模型与自动转写只能补充发现风险，不能裁定术语含义、执行动作或证明名称已通过。</p>
   </section>
