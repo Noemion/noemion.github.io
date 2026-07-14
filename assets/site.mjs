@@ -3,26 +3,46 @@ const siteRoot = new URL("../", scriptUrl);
 const version = scriptUrl.search;
 const moduleUrl = (name) => new URL(`modules/${name}.mjs${version}`, scriptUrl);
 const dataUrl = new URL(`navigation-data.json${version}`, scriptUrl);
-const coverUrl = new URL("nav-covers.svg", scriptUrl).href;
-const routeModelModulePromise = import(moduleUrl("route-model"));
-const directoryModulePromise = import(moduleUrl("directory-navigation"));
-const navigationStoreModulePromise = import(moduleUrl("navigation-store"));
-const navigationDataPromise = navigationStoreModulePromise
-  .then(({ NavigationStore }) => new NavigationStore(dataUrl).load());
-const { RouteModel } = await routeModelModulePromise;
-const routeModel = new RouteModel(siteRoot, window.location.href);
+const mobileLayout = matchMedia("(max-width: 999px)");
+const desktopLayout = matchMedia("(min-width: 1000px)");
+const precisePointer = matchMedia("(hover: hover) and (pointer: fine)");
+let keyboardNavigation = false;
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Tab") keyboardNavigation = true;
+}, { capture: true });
+document.addEventListener("pointerdown", () => {
+  keyboardNavigation = false;
+}, { capture: true });
 
-const loadStore = () => navigationDataPromise;
+let routeModelPromise;
+const loadRouteModel = () => {
+  if (!routeModelPromise) {
+    routeModelPromise = import(moduleUrl("route-model"))
+      .then(({ RouteModel }) => new RouteModel(siteRoot, window.location.href));
+  }
+  return routeModelPromise;
+};
+
+let navigationDataPromise;
+const loadStore = () => {
+  if (!navigationDataPromise) {
+    navigationDataPromise = import(moduleUrl("navigation-store"))
+      .then(({ NavigationStore }) => new NavigationStore(dataUrl).load());
+  }
+  return navigationDataPromise;
+};
 
 const globalRoot = document.querySelector("[data-global-nav]");
 let globalControllerPromise;
 const ensureGlobalNavigation = async (item) => {
-  if (!globalRoot) return;
+  if (!globalRoot || !desktopLayout.matches) return;
   if (!globalControllerPromise) {
     globalControllerPromise = Promise.all([
       import(moduleUrl("global-navigation")),
+      loadRouteModel(),
       loadStore()
-    ]).then(([{ GlobalNavigation }, data]) => {
+    ]).then(([{ GlobalNavigation }, routeModel, data]) => {
+      const coverUrl = new URL("nav-covers.svg", scriptUrl).href;
       const controller = new GlobalNavigation(globalRoot, routeModel, data.global, coverUrl);
       controller.hydrate();
       return controller;
@@ -40,8 +60,20 @@ const requestGlobalNavigation = (event) => {
   const item = event.target.closest?.("[data-global-nav-item]");
   if (item && globalRoot?.contains(item)) ensureGlobalNavigation(item);
 };
-globalRoot?.addEventListener("pointerover", requestGlobalNavigation, { once: true });
-globalRoot?.addEventListener("focusin", requestGlobalNavigation, { once: true });
+globalRoot?.addEventListener("pointerover", (event) => {
+  if (precisePointer.matches) requestGlobalNavigation(event);
+});
+globalRoot?.addEventListener("focusin", (event) => {
+  if (precisePointer.matches || keyboardNavigation) requestGlobalNavigation(event);
+});
+globalRoot?.addEventListener("click", (event) => {
+  if (!desktopLayout.matches || precisePointer.matches) return;
+  const trigger = event.target.closest?.(".global-nav-trigger");
+  const item = trigger?.closest("[data-global-nav-item]");
+  if (!item || item.classList.contains("is-menu-open")) return;
+  event.preventDefault();
+  ensureGlobalNavigation(item);
+});
 
 const directoryRoot = document.querySelector("[data-directory]");
 const directoryPanel = directoryRoot?.closest(".directory-panel");
@@ -49,7 +81,10 @@ let directoryPromise;
 const ensureDirectory = async () => {
   if (!directoryRoot) return;
   if (!directoryPromise) {
-    directoryPromise = directoryModulePromise.then(async (module) => {
+    directoryPromise = Promise.all([
+      import(moduleUrl("directory-navigation")),
+      loadRouteModel()
+    ]).then(async ([module, routeModel]) => {
       const manual = module.directoryFromDocsRail(document.querySelector("[data-docs-rail]"));
       const moduleKey = manual?.moduleKey || routeModel.moduleKey();
       const directory = manual?.directory || (await loadStore()).modules[moduleKey];
@@ -79,7 +114,10 @@ const ensureDirectory = async () => {
   }
 };
 
-ensureDirectory();
+if (mobileLayout.matches) ensureDirectory();
+mobileLayout.addEventListener("change", (event) => {
+  if (event.matches) ensureDirectory();
+});
 directoryPanel?.addEventListener("noemion:directoryrequest", ensureDirectory);
 if (directoryPanel?.hasAttribute("data-mobile-directory-pending-open")) ensureDirectory();
 

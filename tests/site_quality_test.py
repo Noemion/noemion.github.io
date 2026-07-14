@@ -2601,11 +2601,6 @@ def validate_jekyll_sources():
             "{{ '/assets/theme.js' | relative_url }}",
             "{{ '/assets/mobile-directory-guard.js' | relative_url }}",
             "{{ '/assets/site.mjs' | relative_url }}",
-            'rel="modulepreload"',
-            "{{ '/assets/modules/directory-navigation.mjs' | relative_url }}",
-            "{{ '/assets/modules/navigation-store.mjs' | relative_url }}",
-            "{{ '/assets/navigation-data.json' | relative_url }}",
-            'as="fetch" crossorigin="anonymous"',
             'type="module"',
             "site.github.build_revision",
             "?v={{ asset_version | escape }}",
@@ -3273,17 +3268,38 @@ def validate_jekyll_sources():
         ):
             if token not in module_text:
                 errors.append(f"mobile directory must synchronize its interruptible 180ms animation: {token}")
-        if "ensureDirectory();" not in site_text:
-            errors.append("site entry must prepare directory navigation before the first mobile click")
         for token in (
-            "routeModelModulePromise",
-            "directoryModulePromise",
-            "navigationStoreModulePromise",
-            "navigationDataPromise",
-            "directoryPromise = directoryModulePromise.then",
+            'const mobileLayout = matchMedia("(max-width: 999px)")',
+            'const desktopLayout = matchMedia("(min-width: 1000px)")',
+            'const precisePointer = matchMedia("(hover: hover) and (pointer: fine)")',
+            'if (event.key === "Tab") keyboardNavigation = true',
+            "keyboardNavigation = false",
+            "if (mobileLayout.matches) ensureDirectory()",
+            'mobileLayout.addEventListener("change"',
+            "if (event.matches) ensureDirectory()",
+            "if (!globalRoot || !desktopLayout.matches) return",
+            "if (precisePointer.matches) requestGlobalNavigation(event)",
+            "if (precisePointer.matches || keyboardNavigation) requestGlobalNavigation(event)",
+            'if (!desktopLayout.matches || precisePointer.matches) return',
+            'event.target.closest?.(".global-nav-trigger")',
+            'item.classList.contains("is-menu-open")',
+            "event.preventDefault()",
+            'const coverUrl = new URL("nav-covers.svg", scriptUrl).href',
         ):
             if token not in site_text:
-                errors.append(f"site entry must start directory loading in the background: {token}")
+                errors.append(f"site entry missing device-specific navigation contract: {token}")
+        layout_text = layout.read_text() if layout.exists() else ""
+        for eager_resource in ('rel="modulepreload"', 'rel="preload" href="{{ \'/assets/navigation-data.json\''):
+            if eager_resource in layout_text:
+                errors.append(f"default layout must not eagerly load both navigation modes: {eager_resource}")
+        if re.search(r"^ensureDirectory\(\);$", site_text, re.MULTILINE):
+            errors.append("site entry must not build the mobile directory unconditionally")
+        for token in (
+            "@media(hover:none) and (pointer:coarse)",
+            ".endem-object-visual,.object-orbit-two,.portal-reveal{animation:none!important}",
+        ):
+            if token not in style.read_text():
+                errors.append(f"touch devices missing static portal animation contract: {token}")
         for deferred_trigger in (
             'addEventListener("pointerdown", ensureDirectory',
             'addEventListener("keydown", ensureDirectory',

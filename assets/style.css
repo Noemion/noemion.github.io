@@ -1734,6 +1734,9 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
 }
 
 @media(hover:none) and (pointer:coarse){
+  .portal-introduction-visual::before,.semantic-spectrum,.dataflow-field::before,.dataflow-status i,
+  .dataflow-lane::before,.dataflow-lane i,.dataflow-lane em,.compiler-bridge i,
+  .endem-object-visual,.object-orbit-two,.portal-reveal{animation:none!important}
   :is(.page-link,.portal-feature-row,.portal-focus-card,.portal-lifecycle-list>a,.gate-grid>a,.portal-next-grid>a,.news-record):active,
   body:not([data-page-role="portal"]) :is(.resource-list li,.next-prev a):active{transform:none}
   :is(.page-link,.portal-feature-row,.portal-focus-card,.portal-lifecycle-list>a,.gate-grid>a,.portal-next-grid>a,.news-record){
