@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0012</span></nav>
-  <header class="content-introduction"><h1>ADR-0012<br>未来安全核心的 Rust 基线</h1><p>Ktisor 与生产读取核心计划以安全 Rust 作为实现基线；当前保留设计约束和历史研究，组件实现尚未开始。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">Rust 1.97.0 Baseline</span><span class="badge">Historical Evidence</span><span class="badge">尚未实现</span></div></header>
+  <header class="content-introduction"><h1>ADR-0012<br>未来安全核心的 Rust 基线</h1><p>Ktisor 与制品形成侧读取核心计划以安全 Rust 作为实现基线；当前保留设计约束和历史研究，组件实现尚未开始。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">Rust 1.97.0 Baseline</span><span class="badge">Historical Evidence</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-stack">
     <h2>决定</h2>
@@ -36,7 +36,7 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
       <tr><td>当前源码表面</td><td>168 个非空行。</td><td>266 个非空行。</td><td>只是当前切片的描述，不作为单独评分，但没有出现“安全必然更冗长”。</td></tr>
       <tr><td>当前优化二进制</td><td>488,488 字节。</td><td>34,040 字节。</td><td>C 显著更小；第一阶段优先审计安全，尺寸差异需要后续 strip 与部署目标再评估。</td></tr>
       <tr><td>动态依赖</td><td>实测只有系统库。</td><td>实测只有系统库。</td><td>两者都没有引入大型运行框架。</td></tr>
-      <tr><td>GNU/LLVM 验证</td><td>当前没有 P1 实现级 Rust fuzz；P0-LANG-001 只作为历史研究材料保留。</td><td>GCC/Clang Sanitizer 与 libFuzzer 提供未来验证机制先例。</td><td>Ktisor 与 Theor 的实现必须分别建立验证路径，历史 C 原型不能自动进入生产信任路径。</td></tr>
+      <tr><td>GNU/LLVM 验证</td><td>当前没有 P1 实现级 Rust fuzz；P0-LANG-001 只作为历史研究材料保留。</td><td>GCC/Clang Sanitizer 与 libFuzzer 提供未来验证机制先例。</td><td>Ktisor 与 Theor 的实现必须分别建立验证路径，历史 C 原型不能自动进入未来组件信任路径。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -64,10 +64,10 @@ permalink: "/architecture/adr-0012-rust-core-language.html"
   <section class="content-wide">
     <h2>其他候选方案</h2>
     <div class="table-wrap"><table><thead><tr><th>方案</th><th>当前结论</th><th>重新考虑条件</th></tr></thead><tbody>
-      <tr><td>C 作为生产读取核心</td><td>原型正确且更小，但语言不提供所需的默认内存边界；当前风险收益不足。</td><td>Rust 无法满足已测目标平台、审计或互操作要求，且 C 获得更强形式化与持续模糊证据。</td></tr>
-      <tr><td>Rust 与 C 同时作为生产解析器</td><td>会形成两套生产权威和更大的补丁面；C 只作非生产预言机。</td><td>存在必须由 C ABI 直接承载的真实消费者，并能保持权限和失败隔离。</td></tr>
+      <tr><td>C 作为制品形成侧读取核心</td><td>原型正确且更小，但语言不提供所需的默认内存边界；当前风险收益不足。</td><td>Rust 无法满足已测目标平台、审计或互操作要求，且 C 获得更强形式化与持续模糊证据。</td></tr>
+      <tr><td>Rust 与 C 同时作为形成侧解析器</td><td>会形成两套写入侧权威和更大的补丁面；C 只作独立测试预言机，不进入发行组件。</td><td>存在必须由 C ABI 直接承载的真实消费者，并能保持权限和失败隔离。</td></tr>
       <tr><td>Swift、Go、C++ 或 Zig</td><td>没有针对当前字节切片形成等量证据，因此不作优劣结论，也不进入首版核心。</td><td>Rust 或 C 实验暴露无法解决的消费者要求，再用同一向量补做实验。</td></tr>
-      <tr><td>Python/JavaScript 生产核心</td><td>动态运行时不进入第一阶段可信二进制核心。</td><td>只用于非权威开发工具或外层适配器，并明确不产生规范字节。</td></tr>
+      <tr><td>Python/JavaScript 组件核心</td><td>动态运行时不进入第一阶段可信二进制核心。</td><td>只用于非权威开发工具或外层适配器，并明确不产生规范字节。</td></tr>
     </tbody></table></div>
   </section>
 

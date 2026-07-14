@@ -22,7 +22,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0009-propositional-kernel.html">ADR-0009 Endem 命题投影语义核</a></td><td>Superseded by ADR-0010</td><td>保留结构显示与未确定分层；五组字段和目标力量模型已取代。</td></tr>
       <tr><td><a href="adr-0010-native-lexicon.html">ADR-0010 原生词汇与事态分层</a></td><td>当前策略</td><td>当前六个语义面、一个根 skena、phain 比较、原生制品/组件/动作与生命周期。</td></tr>
       <tr><td><a href="adr-0011-endem-container.html">ADR-0011 Endem 实验性容器格式</a></td><td>当前草案</td><td>采用固定前导、定宽目录、六记录、受限确定性 CBOR 与 END-P0；尚非稳定 ABI。</td></tr>
-      <tr><td><a href="adr-0012-rust-core-language.html">ADR-0012 未来安全核心的 Rust 基线</a></td><td>当前策略</td><td>Ktisor 与生产读取核心以 Rust 1.97.0 和安全子集作为实现前重新评审起点；当前没有实现工作区。</td></tr>
+      <tr><td><a href="adr-0012-rust-core-language.html">ADR-0012 未来安全核心的 Rust 基线</a></td><td>当前策略</td><td>Ktisor 与制品形成侧读取核心以 Rust 1.97.0 和安全子集作为实现前重新评审起点；当前没有实现工作区。</td></tr>
       <tr><td><a href="adr-0013-end-p1-payload.html">ADR-0013 END-P1 封闭内容 Profile</a></td><td>当前草案</td><td>END-P0 保留为结构实验；END-P1 作为首个设计 Profile 固定六记录字段、枚举、规范排序和引用闭包。</td></tr>
       <tr><td><a href="adr-0014-source-manifest.html">ADR-0014 首个 Ktisor 来源清单</a></td><td>当前草案</td><td>用有限来源清单连接自然语言来源与授权投影；模型不能直接生成规范对象，正式来源语言出现后删除该入口。</td></tr>
       <tr><td><a href="adr-0015-result-domains.html">ADR-0015 判断与运行结果分层</a></td><td>当前策略</td><td>分开制品生命周期、满足判断、权威决定、会话终止、Iknem 有效性和证据覆盖度；不改变 END-P1 字节。</td></tr>
@@ -64,7 +64,7 @@ permalink: "/architecture/decisions.html"
       <tr><td>权威与授权保持有界</td><td>AUT-CORE 分开认证、角色资格、语义授权、能力授予与最终决定；grant/deny/defer 只回答精确请求是否获准。</td><td>自然语言候选复核、Dromen 建立、Agent 委托、同意、多人决定、撤销与重放。</td></tr>
       <tr><td>唯一 CLI</td><td><code>endem</code> 只提供 <code>ktise/elenk/pleko/theor/drase</code> 五个动作。</td><td>应用项目、手册、安装包和自动化接口。</td></tr>
       <tr><td>名称发行审查</td><td>职责、书写检索、目标语言读音和词表内口头区分分别审查；读音提示不是机器别名。</td><td>全部领域词、组件、动作、手册、未来语音交互和首次正式发行。</td></tr>
-      <tr><td>独立与隔离</td><td>theor 不共享生产解析；drase 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>
+      <tr><td>独立与隔离</td><td>theor 不共享 Ktisor 的形成侧解析；drase 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>
       <tr><td>实验性容器</td><td>END-FMT 0.1 采用 64 字节前导、48 字节目录项、六种关键记录和 END-P0 有限上限。</td><td>规范字节、错误分类、Ktisor/Theor 语言实验；不构成稳定 ABI。</td></tr>
       <tr><td>首版核心语言</td><td>实现启动前计划评估 Rust 1.97.0；禁止 unsafe 与首条切片零第三方 crate 仍是未来实现约束。</td><td>未来实现的构建锁、受检算术、模糊测试和供应链边界。</td></tr>
       <tr><td>首个设计 Profile</td><td>END-P1 使用 profile 2，封闭六记录字段并只支持 nascent 与 kine。</td><td>未来 Ktisor/Theor 字段解析、交叉引用和当前载荷向量；不构成稳定 ABI。</td></tr>

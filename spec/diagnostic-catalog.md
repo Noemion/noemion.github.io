@@ -11,7 +11,7 @@
 
 每个拒绝结果至少包含稳定 `code`、主 `clause`、验证 `layer`，以及 DIA-CORE 要求的生产语境。可用位置包括 `source_range`、`byte_range`、`record_id`、`semantic_path`、`graph_path`、`session_binding`、`evidence_ref` 与 `external_request`。人类消息可以改进或本地化，程序不得依赖消息文本。
 
-一个操作可以在安全和预算范围内附加后续诊断，但主阻断诊断必须按 DIA-PRI-001 稳定选择。任何诊断集合都不能携带部分可信对象、能力或验证句柄。
+一个操作可以在安全和预算范围内附加后续诊断，但主阻断诊断必须按 DIA-PRI-001 稳定选择。任何诊断集合都不能携带部分可信对象、能力，或可被下游当作检查已经通过的内部引用。
 
 ## 2. 诊断系统错误码
 

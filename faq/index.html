@@ -18,7 +18,7 @@ permalink: "/faq/index.html"
       <details><summary>Endem 包含什么？</summary><p>六个语义面：<code>rhem</code> 来源记号、<code>semion</code> 意义投影、<code>skena</code> 一个根中性可能事态、<code>telis</code> 目标方向、<code>krin</code> 结构比较契约、<code>apor</code> 待确认事项。它不是提示文本的二进制包装。</p></details>
       <details><summary>Synem、Dromen 和 Iknem 是什么？</summary><p>Synem 是多个 Endem 解析引用后形成的组合闭包。Dromen 是 Drasor 为一次 Drase 会话封存的只读执行契约，不是文件、凭据包或可恢复权限。Iknem 是绑定主体、环境和声明范围的证据，其中 <code>phain</code> 用与 <code>skena</code> 对齐的关系结构记录观察。</p></details>
       <details><summary>为什么只保留一个 CLI？</summary><p>现有职责没有 23 个独立用户、权威或生命周期。唯一入口 <code>endem</code> 用短子命令组织职责；只有 Theor 与 Drasor 因独立证据和权限边界保持独立实现/进程。</p></details>
-      <details><summary>一个 CLI 会不会破坏安全隔离？</summary><p>设计上不会，但当前还没有 CLI 或组件实现。未来 <code>endem theor</code> 必须由单独构建的 Theor 承担，<code>endem drase</code> 必须进入隔离的 Drasor 进程；统一的只能是用户入口，不能是解析代码、生产验证句柄或实时能力句柄。</p></details>
+      <details><summary>一个 CLI 会不会破坏安全隔离？</summary><p>统一入口本身不能证明隔离成立，而且当前还没有 CLI 或组件实现。未来 <code>endem theor</code> 必须由单独构建的 Theor 承担，<code>endem drase</code> 必须进入隔离的 Drasor 进程；解析代码、Ktisor 内部检查通过引用和实时能力句柄都不能跨越各自信任域。</p></details>
     </section>
     <section><h2>安全与模型</h2>
       <details><summary>模型能直接生成 Endem 吗？</summary><p>不能。模型只能生成带来源和待确认状态的候选；Ktisor 依据确定性规则或具名语义决定形成规范字节。</p></details>

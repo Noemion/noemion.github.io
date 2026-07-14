@@ -32,7 +32,7 @@ badges: ["Single CLI", "Experimental Core"]
 
 ## 最短主线
 
-受控来源表达先经过确定性投影规则或具名决定，再由 `ktise` 形成 nascent Endem。`elenk` 运行生产验证，`theor` 使用另一套实现观察同一字节。需要跨对象引用时，`pleko` 形成 coherent Endem 或 Synem。外部发布系统可以在精确 Profile 下签署确定性制品，但签名不是公开动作。最后，`drase` 在隔离域建立 Dromen，把环境观察规范化为 phain，并写入 Iknem。
+受控来源表达先经过确定性投影规则或具名决定，再由 `ktise` 形成 nascent Endem。`elenk` 在制品形成侧分层检查实际字节，`theor` 使用另一套实现观察同一字节。需要跨对象引用时，`pleko` 形成 coherent Endem 或 Synem。外部发布系统可以在精确 Profile 下签署确定性制品，但签名不是公开动作。最后，`drase` 在隔离域建立 Dromen，把环境观察规范化为 phain，并写入 Iknem。
 
 ## 当前实施范围
 

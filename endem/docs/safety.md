@@ -9,23 +9,23 @@ manual_group: "safety"
 manual_order: 3
 nav_title: "安全与独立检查"
 page_heading: "安全与独立检查"
-page_lead: "区分生产 elenk 与独立 theor，并对所有不可信制品执行有界读取。"
-summary: "生产验证、独立 Theor、checked arithmetic、分层结论和差分测试。"
+page_lead: "区分制品形成侧 elenk 与独立 theor，并对所有不可信制品执行有界读取。"
+summary: "形成侧分层检查、独立 Theor、checked arithmetic 和差分测试。"
 badges: ["elenk", "theor", "Fail Closed"]
 ---
 
 ## elenk 与 theor 回答不同问题
 
-| 入口 | 主要问题 | 能否进入生产信任链 |
+| 入口 | 主要问题 | 能否供制品形成与发布流程继续使用 |
 | --- | --- | --- |
-| `endem elenk` | 这份实际字节是否满足请求的结构、语义、状态、完整性与策略层？ | 可以；全部所需层通过后，Ktisor 内部可产生绑定字节和配置的生产验证句柄 |
+| `endem elenk` | 这份实际字节是否满足请求的结构、语义、状态、完整性与策略层？ | 可以；全部所需层通过后，Ktisor 内部可以保留绑定精确字节、规范/Profile、检查配置和已完成层次的引用 |
 | `endem theor` | 独立实现怎样读取和显示这份实际字节？ | 不可以；只提供观察、差分和诊断 |
 
-`theor` 可解析对象不表示 `elenk` 已通过；`elenk` 通过也不能替代 `theor` 在一致性测试中的第二种解释。
+`theor` 可解析对象不表示 `elenk` 已通过；`elenk` 通过也不能替代 `theor` 在一致性测试中的第二种解释。Ktisor 内部引用不是 CLI 输出、Iknem、签名、授权或最终决定，也不能跨入 Theor 的信任域。
 
 ## 独立 Theor 要求
 
-`theor` 不得复用 Ktisor 的生产解析器、写入器、组合器、生成代码或错误分类实现。它只共享公开规范和测试向量，并使用独立数据结构与资源限制。
+`theor` 不得复用 Ktisor 的形成侧解析器、写入器、组合器、生成代码或错误分类实现。它只共享公开规范和测试向量，并使用独立数据结构与资源限制。
 
 GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf.html)说明它独立于 BFD，为第二条直接读取路径提供了工程先例。
 

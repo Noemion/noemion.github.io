@@ -20,10 +20,10 @@ badges: ["参考", "CLI 待定"]
 | 子命令 | 主要输入 | 主要输出 | 权限边界 |
 | --- | --- | --- | --- |
 | `ktise` | 受控来源、投影候选与具名决定 | nascent Endem、Ktise Iknem | 唯一规范写入入口 |
-| `elenk` | 原始制品、层、限制和信任材料 | 分层结论、Elenk Iknem | 生产验证路径 |
+| `elenk` | 原始制品、层、限制和信任材料 | 分层结论、Elenk Iknem | Ktisor 的制品形成侧检查路径 |
 | `pleko` | Endem、组合策略和依赖锁 | coherent Endem/Synem、Pleko Iknem | 不读取环境隐式依赖 |
-| `theor` | 任意原始制品、视图和预算 | 只读视图、差分、诊断 | 独立 Theor，不生成生产验证句柄 |
-| `drase` | attested 制品、执行策略、后端与能力 | Dromen、运行记录、Iknem 和决定 | 隔离 Drasor，不拥有写入器 |
+| `theor` | 任意原始制品、视图和预算 | 只读视图、差分、诊断 | 独立 Theor，不生成 Ktisor 内部检查通过引用 |
+| `drase` | attested 制品、执行策略、后端与能力 | Dromen、会话结果和 Iknem | 隔离 Drasor，不拥有写入器；具名权威另行决定是否接受 |
 
 **当前策略：**Endem 文件使用 `.endem` 扩展名。**待定内容：**参数、选项、退出码、Synem/Iknem 扩展名和安装接口。因此目前不能编写依赖具体参数的脚本。
 

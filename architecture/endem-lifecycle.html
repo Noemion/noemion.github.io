@@ -31,11 +31,11 @@ permalink: "/architecture/endem-lifecycle.html"
     <h2>阶段、消费者与失败</h2>
     <div class="table-wrap"><table><thead><tr><th>阶段</th><th>权威输入</th><th>正式输出</th><th>失败责任</th><th>下游消费者</th></tr></thead><tbody>
       <tr><td>受控来源 → ktise</td><td>六个语义面，或带来源的投影候选与授权决定</td><td>nascent Endem、Ktise Iknem、诊断</td><td>来源不可重放、aseme、根 skena 不唯一、telis/krin 缺失、候选越权确认</td><td>elenk、theor、pleko 或人工确认</td></tr>
-      <tr><td>nascent Endem → elenk</td><td>原始对象字节、限制、规范版本和请求验证层</td><td>分层结论、Elenk Iknem；内部可产生生产验证句柄</td><td>结构、引用、语义、状态、完整性或资源限制失败</td><td>pleko、Drasor、外部发布系统</td></tr>
-      <tr><td>任意对象 → theor</td><td>原始 Endem/Synem/Iknem 字节和输出预算</td><td>只读视图、差分、诊断</td><td>畸形、未知关键记录、无法表示或资源超限</td><td>开发者、审计者和互操作验证；不进入生产信任链</td></tr>
+      <tr><td>nascent Endem → elenk</td><td>原始对象字节、限制、规范版本和请求验证层</td><td>分层结论、Elenk Iknem；Ktisor 内部可保留绑定精确输入与检查配置的引用</td><td>结构、引用、语义、状态、完整性或资源限制失败</td><td>pleko、Drasor、外部发布系统</td></tr>
+      <tr><td>任意对象 → theor</td><td>原始 Endem/Synem/Iknem 字节和输出预算</td><td>只读视图、差分、诊断</td><td>畸形、未知关键记录、无法表示或资源超限</td><td>开发者、审计者和互操作验证；不进入制品形成与发布信任链</td></tr>
       <tr><td>Endem 集合 → pleko</td><td>已检查对象、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Iknem</td><td>未解析引用、冲突、循环、权限扩大、身份不稳定</td><td>theor、Drasor、外部发布系统</td></tr>
       <tr><td>确定性制品 → 外部发布</td><td>精确制品、待签陈述、发布政策和信任材料</td><td>外置签名包络与有范围 Iknem</td><td>载荷、请求、算法、签名者、截止点或策略不匹配</td><td>theor、Drasor</td></tr>
-      <tr><td>attested → drase</td><td>实际 attested 字节、运行策略、后端和能力目录</td><td>Dromen、运行与决定类 Iknem、满足结果、权威决定和会话终止结果</td><td>签名或策略失败、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
+      <tr><td>attested → drase</td><td>实际 attested 字节、运行策略、后端和能力目录</td><td>Dromen、运行与决定类 Iknem、满足结果和会话终止结果；具名权威另行作出最终决定</td><td>签名或策略失败、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
     </tbody></table></div>
   </section>
 

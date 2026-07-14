@@ -1,6 +1,6 @@
 # Noemion 规范向量
 
-本目录保存可由 Ktisor、生产读取器、独立 Theor 和内部符合性门禁共同消费的规范向量。
+本目录保存可由 Ktisor、制品形成侧读取器、独立 Theor 和资料一致性检查共同消费的规范向量。
 
 `semantic/` 验证 Endem 语义结构、授权边界和失败定位。每个 JSON 文件都是 `end-core.semantic-vector.v2` 测试外壳，不是 `.endem`，也不能改名后交给运行时。`context.external_preconditions` 只给检查器提供文件外的测试前置条件，不属于 Endem 规范字节；改变授权、证据或决定语境不得改变同一输入的内容身份。向量外壳使用规范 ID，不使用 Noemion 品牌前缀。
 
@@ -24,4 +24,4 @@
 - 任何新增向量都必须被 `tests/spec_contract_test.py` 读取。
 - 线格式向量必须固定 END-FMT 与精确 Profile。END-P0 由 `tests/wire_vector_test.py` 读取；END-P1 由 `tests/p1_payload_test.py` 从语义源确定性编码、逐字段解码并比较预期。禁止只比较预生成摘要。
 
-向量只定义列出的预期行为，不证明任何组件已经实现。当前 Python 检查器只核对字节、字段、失败分类和登记关系；未来 Ktisor、生产读取器与独立 Theor 必须各自消费全部十四个 END-P1 向量，不能复用检查脚本冒充实现。
+向量只定义列出的预期行为，不证明任何组件已经实现。当前 Python 检查器只核对字节、字段、失败分类和登记关系；未来 Ktisor、制品形成侧读取器与独立 Theor 必须各自消费全部十四个 END-P1 向量，不能复用检查脚本冒充实现。

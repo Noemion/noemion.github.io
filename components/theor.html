@@ -11,8 +11,8 @@ permalink: "/components/theor.html"
 
   <section class="content-stack">
     <h2>为什么需要独立 Theor</h2>
-    <p class="lead">如果查看器复用 Ktisor 的生产解析器，两个入口会继承相同的字段误解、边界错误和生成代码缺陷。Theor 只依据公开规范直接读取原始字节，让开发者和一致性测试获得第二种解释路径。</p>
-    <p class="callout"><strong>独立不是换一个命令名：</strong>Theor 不得链接 Ktisor 的生产解析器、写入器、组合器或错误分类实现。它也不能用 BFD 的通用内部表示代替 Endem 逐字段解析。</p>
+    <p class="lead">如果查看器复用 Ktisor 的形成侧解析器，两个入口会继承相同的字段误解、边界错误和生成代码缺陷。Theor 只依据公开规范直接读取原始字节，让开发者和一致性测试获得第二种解释路径。</p>
+    <p class="callout"><strong>独立不是换一个命令名：</strong>Theor 不得链接 Ktisor 的形成侧解析器、写入器、组合器或错误分类实现。它也不能用 BFD 的通用内部表示代替 Endem 逐字段解析。</p>
   </section>
 
   <section class="content-wide">
@@ -32,7 +32,7 @@ permalink: "/components/theor.html"
       <li>Theor 使用独立数据结构、范围检查和错误路径；共享的只能是公开规范和测试向量。</li>
       <li>生产与独立实现由差分测试比较字段解释和失败分类，不能比较私有内存结构。</li>
       <li>故障注入必须证明 Theor 能发现 Ktisor 写入器和解析器的共同假设，而不是只重放相同代码。</li>
-      <li>Theor 不生成生产验证句柄，不改变状态，不修复对象，也不执行 Dromen。</li>
+      <li>Theor 不生成 Ktisor 内部检查通过引用，不改变状态，不修复对象，也不执行 Dromen。</li>
       <li>结构可解析、状态自称 attested 和签名字段存在都不构成信任结论。</li>
     </ul>
   </section>
@@ -67,7 +67,7 @@ permalink: "/components/theor.html"
 
   <section class="content-band">
     <h2>当前状态与待确定接口</h2>
-    <p>未来 Theor 必须独立实现 DIA-CORE 的定位、预算和主诊断规则。它可以给出不同的人类解释，但相同失败事实必须保留同一机器码和条款，不得把输出视图变成生产验证结果。</p>
+    <p>未来 Theor 必须独立实现 DIA-CORE 的定位、预算和主诊断规则。它可以给出不同的人类解释，但相同失败事实必须保留同一机器码和条款，不得把输出视图变成制品形成侧检查结果。</p>
     <p>独立代码路径、只读、资源有界和不产生生产可信句柄已经作为设计边界采用。当前没有 Rust Theor、CBOR 解码器或实现级预算检查；十四个 END-P1 向量只是未来 Ktisor 与 Theor 必须共同消费的规范资料。Synem 与 Iknem 目前只有抽象规范，没有可供 Theor 读取的物理字节格式。</p>
   </section>
   <div class="next-prev"><a href="ktisor.html">← Ktisor</a><a href="drasor.html">Drasor →</a></div>

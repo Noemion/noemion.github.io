@@ -59,8 +59,8 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 
 | 实现域 | 不可替代边界 | 禁止合并的内容 |
 | --- | --- | --- |
-| Ktisor | 唯一规范写入器、生产读取器、来源绑定、elenk 与 pleko | 模型不得写规范字节；Ktisor 不持有私钥或实时能力 |
-| Theor | 独立解析任意不可信字节，为差分和安全审查提供第二条证据链 | 不复用生产读取器，不产生生产验证句柄，不修复输入 |
+| Ktisor | 唯一规范写入器、制品形成侧读取器、来源绑定、elenk 与 pleko | 模型不得写规范字节；Ktisor 不持有私钥或实时能力 |
+| Theor | 独立解析任意不可信字节，为差分和安全审查提供第二条证据链 | 不复用形成侧读取器，不产生 Ktisor 内部检查通过引用，不修复输入 |
 | Drasor | 重新验证实际 Synem，建立 Dromen，控制能力与反馈，形成 Iknem | 模型不持有句柄、不扩大权限、不自我验收 |
 
 一个公开 CLI `endem` 只统一用户入口，不统一上述信任域。
@@ -182,7 +182,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | 架构与 ADR（33） | `/architecture/index.html`、`/architecture/endem-lifecycle.html`、`/architecture/decisions.html`、`/architecture/agent-system-boundaries.html`、`/architecture/adr-0008-endem-system.html` 至 `/architecture/adr-0035-public-actions-and-internal-responsibilities.html`、`/architecture/open-questions.html` | 生命周期解释每阶段回答什么；Agent 边界图把规范、研究和运行事实分层；历史 ADR 标明失效名称；现行 ADR 固定语义、格式、判断、信任、命名、口头区分与公开动作边界。 |
 | 组件（4） | `/components/index.html`、`/components/ktisor.html`、`/components/theor.html`、`/components/drasor.html` | 首段先解释三个组件为什么不能合并；把写入器、读取器、策略、句柄和请求等职责说清楚，只保留必要接口标识。 |
 | 规范（10） | `/specifications/index.html`、`/specifications/endem.html`、`/specifications/synem.html`、`/specifications/dromen.html`、`/specifications/iknem.html`、`/specifications/diagnostics.html`、`/specifications/adapters.html`、`/specifications/identity.html`、`/specifications/text-and-identifiers.html`、`/specifications/authority.html` | 先给直白定义，再给规范词；授权页明确登录、签名、Agent 状态与点击都不能自行产生语义或最终决定权。 |
-| 跨项目指南（8） | `/docs/index.html`、`/docs/getting-started.html`、`/docs/installation-and-usage.html`、`/docs/terminology-and-pronunciation.html`、`/docs/architecture-guide.html`、`/docs/development-guide.html`、`/docs/endem-reference.html`、`/docs/specifications-reference.html` | 删除未冻结却看似可执行的命令示例；统一解释候选、控制平面、验证句柄、签名材料和最终决定；新增真实人类读音证据的两阶段验证与停止规则。 |
+| 跨项目指南（8） | `/docs/index.html`、`/docs/getting-started.html`、`/docs/installation-and-usage.html`、`/docs/terminology-and-pronunciation.html`、`/docs/architecture-guide.html`、`/docs/development-guide.html`、`/docs/endem-reference.html`、`/docs/specifications-reference.html` | 删除未冻结却看似可执行的命令示例；解释候选、控制平面、Ktisor 内部检查通过引用、签名材料和最终决定；新增真实人类读音证据的两阶段验证与停止规则。 |
 | Endem 应用与手册（7） | `/endem/index.html`、`/endem/docs/index.html`、`/endem/docs/format.html`、`/endem/docs/binding.html`、`/endem/docs/safety.html`、`/endem/docs/running.html`、`/endem/docs/reference.html` | 应用页先说明唯一入口解决什么问题；手册按来源、形成、组合、独立读取、发布和受控实现展开，移除未解释的 Rhem Source、Profile、Manifest 等表达。 |
 | 开发（4） | `/development/index.html`、`/development/current-stage.html`、`/development/implementation-roadmap.html`、`/development/testing.html` | 阶段名称、验证条件和停止条件全部改为用户可读表达；当前只完善规范 Profile 与验证方案，不建立组件工作区。 |
 | 资源与支持（3） | `/downloads/index.html`、`/faq/index.html`、`/news/index.html` | 下载页直说为什么不能发布；FAQ 拆开 Synem、Dromen、Iknem 定义；项目动态只陈述可核对进展。 |

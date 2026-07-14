@@ -27,7 +27,7 @@ permalink: "/development/implementation-roadmap.html"
     <div class="table-wrap"><table><thead><tr><th>职责</th><th>正式输入与输出</th><th>完成标准</th></tr></thead><tbody>
       <tr><td><code>ktise</code></td><td>受控来源 + 投影决定 → 六个语义面 → Endem</td><td>同一封闭形成输入在精确规范、Profile 与格式域中产生同一结果；失败不留下部分制品。</td></tr>
       <tr><td><code>elenk</code></td><td>实际 Endem 字节 + 验证配置 → 分层结论</td><td>结构、引用、语义、资源与完整性逐层报告；未执行层不被描述为通过。</td></tr>
-      <tr><td><code>theor</code></td><td>任意不可信字节 → 有界只读视图</td><td>不复用 Ktisor 解析器、写入器或组合器；绝不产生生产验证句柄。</td></tr>
+      <tr><td><code>theor</code></td><td>任意不可信字节 → 有界只读视图</td><td>不复用 Ktisor 解析器、写入器或组合器；不产生 Ktisor 内部检查通过引用。</td></tr>
       <tr><td>一致性验证</td><td>规范向量 + 两条读取路径 + 两次隔离构建</td><td>解释和失败分类一致，分歧解决后才能发布。</td></tr>
     </tbody></table></div>
   </section>
@@ -36,7 +36,7 @@ permalink: "/development/implementation-roadmap.html"
     <h2>阶段、验证条件与停止条件</h2>
     <div class="table-wrap"><table><thead><tr><th>阶段</th><th>只交付什么</th><th>进入下一阶段的验证条件</th><th>停止或合并条件</th></tr></thead><tbody>
       <tr><td>第 0 阶段<br>词汇与规范骨架</td><td>Endem、Synem、Dromen、Iknem；六个语义面、一个根 skena、形式显示、三类未知、条款 ID 与正反向量</td><td>关系角色、投影、满足状态与错误有可复查定义；每项规范要求都有测试或明确人工权威</td><td>删除不能说明消费者或失败责任的名词</td></tr>
-      <tr><td>第 1 阶段<br>最小安全核心</td><td><code>ktise/elenk/theor</code>、规范写入器、生产解析器、独立 Theor 和一致性验证</td><td>Ktisor/Theor 差分一致、恶意语料关闭失败、资源有界、双环境逐字节复现</td><td>若最小字段仍不能表达真实任务，回到规范；一致性验证不增加公开动作</td></tr>
+      <tr><td>第 1 阶段<br>最小安全核心</td><td><code>ktise/elenk/theor</code>、规范写入器、形成侧解析器、独立 Theor 和一致性验证</td><td>Ktisor/Theor 差分一致、恶意语料关闭失败、资源有界、双环境逐字节复现</td><td>若最小字段仍不能表达真实任务，回到规范；一致性验证不增加公开动作</td></tr>
       <tr><td>第 2 阶段<br>组合</td><td><code>pleko</code>、引用解析、冲突矩阵、固定依赖与 Synem</td><td>至少两个真实多 Endem 案例；链接顺序不改变规范结果；权限只能收窄</td><td>没有真实复用消费者时不建设归档、动态链接或共享披露文件</td></tr>
       <tr><td>第 3 阶段<br>发布</td><td>生产者物理封装、调试伴随记录、外部签名请求与响应</td><td>版本化保留关系、闭包完整、签名主体精确、可复现发行与 SBOM</td><td>没有真实消费者或无法锁定保留属性、损失和反例时，不执行删除并停止建设通用变换</td></tr>
       <tr><td>第 4 阶段<br>受控运行</td><td><code>drase</code>、隔离 Drasor、Dromen、Iknem 和规则型后端</td><td>实际字节重验、能力最小化、事件完整、验收权威分离、恢复与升级路径</td><td>若单一 Iknem 无法覆盖不同权威，再按权限或生命周期拆分</td></tr>
@@ -53,14 +53,14 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td>历史语言研究</td><td>C/Rust 双原型、6 个规范向量、144 个差分变异、C Sanitizer、10,000 次 libFuzzer 和两次重复构建的历史记录；ADR-0012 据此记录 Rust 1.97.0 基线。</td><td>仅作为历史研究资料，不视为组件证据。</td></tr>
       <tr><td>安全核心</td><td>尚未开始；当前只有职责分离、候选语言、END-P1 规范向量和未来验证条件。</td><td>实现范围、依赖、持续集成与停止条件尚未确定。</td></tr>
     </tbody></table></div>
-    <p>C/Rust 语言材料只是历史研究证据，不是生产解析器、组件源码或发行物。当前没有 Rust 安全核心实现。</p>
+    <p>C/Rust 语言材料只是历史研究证据，不是项目组件解析器、组件源码或发行物。当前没有 Rust 安全核心实现。</p>
   </section>
 
   <section class="content-wide">
     <h2>从 GNU 工具链借什么</h2>
     <div class="table-wrap"><table><thead><tr><th>来源</th><th>采用</th><th>不照搬</th></tr></thead><tbody>
       <tr><td>ELF / 链接器</td><td>结构视图与装载视图分离、显式引用、类型化绑定、闭包、绑定映射和失败即拒绝</td><td>地址重定位、机器指令、弱符号默认选择、环境搜索和延迟绑定</td></tr>
-      <tr><td>GNU <code>readelf</code></td><td><code>theor</code> 必须独立于生产解析库，使一个实现的错误不会污染两条证据链</td><td>为每种查看方式创建一个稳定二进制</td></tr>
+      <tr><td>GNU <code>readelf</code></td><td><code>theor</code> 必须独立于 Ktisor 形成侧解析库，使一个实现的错误不会污染两条证据链</td><td>为每种查看方式创建一个稳定二进制</td></tr>
       <tr><td>GNU BFD</td><td>认识统一抽象的价值和信息损失风险</td><td>第一阶段不建立多格式通用表示层；先把唯一格式做对</td></tr>
       <tr><td>GNU GCC 诊断</td><td>稳定诊断内容与文本、SARIF 等输出出口分开，保留规则与位置</td><td>不复制编译器严重度、参数或把自由消息当作机器协议</td></tr>
       <tr><td>GNU 发行实践</td><td>固定区域设置、时区、路径与构建纪元；两环境复现；调试信息分离并绑定摘要</td><td>把构建工具本身当作复现证明</td></tr>
