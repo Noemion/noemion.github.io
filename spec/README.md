@@ -45,7 +45,7 @@
 
 [`semantic-facet-terminology-proposal.md`](semantic-facet-terminology-proposal.md) 把同一必要性门禁应用到 `rhem/semion/skena/telis/krin/apor/phain`。它建议保留全部语义与观察边界，同时用 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation` 进入人类验证。提案不进入 `registry.json`，不提前修改 END-CORE、END-FMT、END-P1、来源清单、诊断或向量；即使数字记录布局不变，未来迁移也必须显式处理新规范与 Profile 身份。
 
-[`lifecycle-and-result-terminology-proposal.md`](lifecycle-and-result-terminology-proposal.md) 审查 `nascent/coherent/attested` 与各结果词。它判定 `attested` 不应继续把外部签名或证明关系伪装成内容自身状态，并建议把内容形成分类、外部已签陈述、满足判断、会话终止、证据有效性和覆盖度分别表达。`formed/resolved/undetermined/no_allowed_projection/stopped` 只是人类验证候选；提案不进入 `registry.json`，也不提前改写 END-CORE、DRO-CORE 或向量。
+[`lifecycle-and-result-terminology-proposal.md`](lifecycle-and-result-terminology-proposal.md) 审查 `nascent/coherent/attested` 与各结果词。它判定 `attested` 不应继续把外部签名或证明关系伪装成内容自身状态，并把迁移拆成对象边界修正与发行命名验证两条轴。前者设计精确内容、外部陈述集合、逐项验证、截止点、撤销和依赖方政策的显式关系；后者才比较 `formed/resolved/undetermined/no_allowed_projection/stopped`，仍须人类证据。提案不进入 `registry.json`，也不提前改写 END-CORE、DRO-CORE 或向量。
 
 [`preview-simulation-and-approval-proposal.md`](preview-simulation-and-approval-proposal.md) 研究预览、dry-run、模拟、授权、执行尝试、事后观察、满足与最终决定怎样保持分离。它用 GNU Make、MCP 2025-11-25、A2A 1.0.0、OpenAI Agents SDK 与 NIST AI 600-1 检查当前 Agent 审批流程。它不创建预览制品、模拟格式、批准结果域、命令、组件或 CORE，也不进入 `registry.json`；当前首选是把显示、授权、会话漂移、外部调用、观察和满足义务归还现有 TEXT-IDENTIFIER、AUT、DRO、ADP、IKN、ID、END 与 DIA 责任。
 

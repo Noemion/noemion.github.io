@@ -11,7 +11,7 @@ permalink: "/architecture/open-questions.html"
 
   <section class="content-stack">
     <h2>哪些问题已经关闭</h2>
-    <p class="lead">当前规范使用 ADR-0010 与 ADR-0015 定义的制品、六个语义面、生命周期和结果域，也使用 ADR-0031 至 ADR-0033 更新后的名称与标准 ID。具体发行拼写仍在研究，<code>attested</code> 是否把外部签名与证明关系误写成内容状态也尚待确认；形成新 ADR 前，现有做法仍然有效。</p>
+    <p class="lead">当前规范使用 ADR-0010 与 ADR-0015 定义的制品、六个语义面、形成阶段和结果域，也使用 ADR-0031 至 ADR-0033 更新后的名称与标准 ID。具体发行拼写仍在研究；现有资料已经发现 <code>attested</code> 把外部签名与证明关系误写成内容状态，迁移方案仍待形成新 ADR，因此现行规范值暂不改变。</p>
     <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0030 固定 Synem、Iknem、内容标准分层、Dromen、结构化诊断、协议适配、身份、文本、授权以及内容与外部决定的伴随边界；ADR-0031 至 ADR-0035 固定名称迁移、口头区分与公开动作审查。</p>
     <p>当前没有 Theor、权威目录、政策求值器或其他组件实现。稳定 ABI、时间与组合物理字段、嵌套或多变量量化、Synem 与 Iknem 物理容器、正式来源语言、Unicode 标识符、原始来源字节绑定、摘要和签名物理 Profile、授权决定与最终决定事件编码仍待确定。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
@@ -37,6 +37,7 @@ permalink: "/architecture/open-questions.html"
     <details><summary>Synem 是否需要独立物理容器？</summary><p>在出现多 Endem、流式读取或离线分发的真实消费者前，内容寻址清单和现有确定性归档可能已经足够。不能只为形式完整提前创造格式。</p></details>
     <details><summary>派生制品可以删除哪些信息？</summary><p>ADR-0035 已拒绝预留通用裁剪动作。ID-REL-001 要求裁剪结果与调试伴随文件各有精确身份，并记录变换、保留内容和损失。当前没有裁剪等价规范；哪些属性允许删除、伴随关系采用什么物理格式，仍需真实消费者。</p></details>
     <details><summary>外部签名采用什么算法与撤销策略？</summary><p>ADR-0035 已把签名保留为外部集成责任，而不是公开动作。ID-CORE 固定有类型待签陈述、外置包络、权威分离、截止点和撤销解释；算法基线、多签政策、密钥体系、证书 Profile、时间来源、透明日志、撤销分发和离线包络物理编码仍需独立 ADR 与证据。</p></details>
+    <details><summary>为什么 <code>attested</code> 不能继续作为内容状态？</summary><p>精确内容可以同时关联多个签名、证明结果、验证政策、截止点和撤销结论；这些外部关系不会改变内容身份。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md">生命周期与结果词研究</a>已把迁移分成两条轴：先决定是否移除对象边界错误，同时暂时保留 <code>nascent/coherent</code>；再用独立人类证据比较 <code>formed/resolved</code> 等发行称呼。这样不会让未经验证的新名字拖延边界修正，也不会借边界修正提前改名。</p></details>
   </section>
 
   <section class="content-grid">

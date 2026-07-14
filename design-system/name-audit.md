@@ -17,7 +17,7 @@
 - `kine/mene` 已未通过发行拼写桌面门禁：前者有稳定而无关的英语词义，两个词也不能让首次读者恢复职责。现行规范值暂不改变；[非规范候选提案](../spec/telis-release-terms-proposal.md)把 `reach/maintain` 列为首选人类验证候选，不把它们提前写成现行枚举。
 - [发行术语去专名化研究提案](../spec/release-terminology-simplification-proposal.md)进一步发现：当前主要风险不是个别新造词缺少官方读音，而是相邻职责占用的专名过多。桌面结论暂时保留 Endem 进入人类验证，并建议 Synem、Dromen、Iknem、Ktisor、Theor、Drasor 及五个动作优先改用直白职责名；这不是现行改名、别名或规范决定。
 - [语义面与观察词去专名化提案](../spec/semantic-facet-terminology-proposal.md)发现同一问题也存在于 `rhem/semion/skena/telis/krin/apor/phain`：七项职责必须保留，但它们只是 Endem 内部语义面与结构化观察，不需要产品式专名。直白候选仍等待用户决定和人类职责匹配，不是现行字段或 Profile。
-- [生命周期与结果词边界提案](../spec/lifecycle-and-result-terminology-proposal.md)进一步发现 `attested` 不是单纯的命名风险，而是对象边界错误：外部签名、证明、政策、截止点和撤销关系不能压成 Endem 自身的单值终态。`nascent/coherent/agno/aseme/interrupted` 的直白候选仍等待用户决定和人类验证，当前规范与向量保持不变。
+- [生命周期与结果词边界提案](../spec/lifecycle-and-result-terminology-proposal.md)进一步发现 `attested` 不是单纯的命名风险，而是对象边界错误：外部签名、证明、政策、截止点和撤销关系不能压成 Endem 自身的单值终态。对象边界修正与发行命名必须分开；前者不需要提前采用新称呼，`nascent/coherent/agno/aseme/interrupted` 的直白候选仍等待人类验证，当前规范与向量保持不变。
 - `Iknem` 与 `Ktisor/ktise` 仍是现行词表的高风险复核项；Endem/Synem 是优先成对听辨项。历史动作 `sphra` 曾因词首难以稳定拼读被列为高风险，ADR-0035 已因职责价值不足将它连同 `tasse`、`peira` 撤下；这不是读音修补，也不使其余名称自动通过。
 - `Synem`、`Dromen` 与 `Theor` 存在大小写无关或近似的软件与应用使用，目前记录为发现混淆；尚未达到必须立即更名的程度。
 - PyPI、npm 与 crates.io 的 `endem` 精确包名在本次查询时均返回 404，Homebrew、Arch Linux、Fedora 和 Debian 也没有精确同名包。这个结果只说明查询时没有精确登记，不构成包名保留。

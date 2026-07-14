@@ -35,7 +35,7 @@ Noemion 当前已经确定术语职责和读音审查方法，但新造词的发
 
 [语义面与观察词去专名化提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-facet-terminology-proposal.md)把审查继续应用到 `rhem/semion/skena/telis/krin/apor/phain`。提案保留七项职责分层，并以七个直白字段名进入验证；它同样不修改现行 END-CORE、Profile 或来源清单。
 
-[生命周期与结果词边界提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md)把审查应用到 `nascent/coherent/attested`、`agno/aseme` 与会话终止词。它先纠正 `attested` 把外部关系写成内容状态的边界，再比较直白候选；读音流畅不能保住语义错误的名称，普通词也仍须在完整域限定短语中验证。
+[生命周期与结果词边界提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md)把审查应用到 `nascent/coherent/attested`、`agno/aseme` 与会话终止词。它把对象边界修正和发行命名分成两条迁移轴：前者可以暂时保留 `nascent/coherent`，只把外部陈述、验证与依赖方判断移出内容状态；后者才比较直白候选并等待人类证据。读音流畅不能保住语义错误的名称，普通词也仍须在完整域限定短语中验证。
 
 桌面证据已经足以排除 `kine/mene` 作为首次正式发行拼写，但没有改变现行规范值。[`telis` 发行词候选提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/telis-release-terms-proposal.md)推荐先验证 `reach/maintain`；这两个词仍是候选，不是官方术语、别名或规范化结果。
 
