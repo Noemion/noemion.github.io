@@ -6,14 +6,14 @@
 {% assign planned_stages = next_stages | concat: future_stages %}
 {% assign current_stage_matches = timeline.items | where: "id", timeline.current_stage_id %}
 {% assign current_stage = current_stage_matches | first %}
-<div class="project-progress-layout" data-timeline-id="{{ timeline.id | escape }}">
-  <aside class="project-progress-summary" aria-label="{{ timeline.overview.title | escape }}">
+<div class="summary-rail-layout project-progress-layout" data-summary-rail-layout data-summary-layout="stacked" data-timeline-id="{{ timeline.id | escape }}">
+  <aside class="summary-rail summary-rail--progress project-progress-summary" aria-label="{{ timeline.overview.title | escape }}">
     <div class="progress-summary-heading"><span>{{ timeline.overview.kicker | escape }}</span><strong>{{ timeline.overview.title | escape }}</strong></div>
     <dl class="progress-counts"><div><dt>{{ timeline.overview.completed_label | escape }}</dt><dd>{{ completed_stages.size }}</dd></div><div><dt>{{ timeline.overview.active_label | escape }}</dt><dd>{{ active_stages.size }}</dd></div><div><dt>{{ timeline.overview.planned_label | escape }}</dt><dd>{{ planned_stages.size }}</dd></div></dl>
     <div class="progress-current"><span>{{ timeline.overview.current_label | escape }}</span><strong>{{ current_stage.title | escape }}</strong></div>
     <a class="progress-roadmap-link" href="{{ timeline.overview.roadmap_href | relative_url }}">{{ timeline.overview.roadmap_label | escape }}<span aria-hidden="true">→</span></a>
   </aside>
-  <div class="project-timeline-block">
+  <div class="summary-rail-main project-timeline-block">
     <h2>{{ timeline.title | escape }}</h2>
     <ol class="project-timeline" aria-label="{{ timeline.aria_label | escape }}">
       {% for item in timeline.items %}

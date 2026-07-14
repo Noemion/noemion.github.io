@@ -141,3 +141,9 @@ if (needsTableScroller || longContent) {
     .then(({ enhanceContent }) => enhanceContent())
     .catch((error) => console.warn("Optional content enhancements are unavailable.", error));
 }
+
+if (document.querySelector("[data-summary-rail-layout]")) {
+  import(moduleUrl("summary-rail-layout"))
+    .then(({ connectSummaryRailLayouts }) => connectSummaryRailLayouts())
+    .catch((error) => console.warn("Responsive summary layout is unavailable.", error));
+}

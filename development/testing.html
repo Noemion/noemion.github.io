@@ -9,6 +9,14 @@ permalink: "/development/testing.html"
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>测试与验证</span></nav>
   <header class="content-introduction"><h1>测试与验证</h1><p>每项验证先声明变更主张、规范域、失败路径和声明上限；一组通过案例不能自动扩展为组件安全或互操作结论。</p><div class="badges"><span class="badge">Claim</span><span class="badge">Failure</span><span class="badge">Evidence</span></div></header>
 
+  <div class="summary-rail-layout summary-rail-layout--article" data-summary-rail-layout data-summary-layout="stacked">
+    <aside class="summary-rail summary-rail--article" aria-label="验证阅读概览">
+      <div class="summary-rail-heading"><span class="summary-rail-kicker">DEVELOPMENT / EVIDENCE</span><strong class="summary-rail-title">验证阅读概览</strong></div>
+      <dl class="summary-rail-facts"><div><dt>直接结论</dt><dd>先声明主张，再选择相称证据</dd></div><div><dt>当前证据</dt><dd>资料一致性与已登记提案向量</dd></div><div><dt>限制条件</dt><dd>不能证明组件已经实现</dd></div></dl>
+      <nav class="summary-rail-links" aria-label="测试与验证重点章节"><a href="#current-evidence">当前材料能证明什么</a><a href="#model-evaluation">模型评测边界</a><a href="#evidence-levels">证据等级</a></nav>
+    </aside>
+    <div class="summary-rail-main">
+
   <section class="content-wide"><h2>先把变更写成可验证主张</h2><p class="callout"><strong>直接结论：</strong>测试数量不是起点。开发者先说明要改变什么、哪份资料具有约束力、什么结果应被拒绝，以及证据最多支持哪一层结论。</p><div class="table-wrap"><table><thead><tr><th>变更类型</th><th>权威起点</th><th>最低证据</th><th>当前最多能声称</th></tr></thead><tbody>
     <tr><td>解释与公开文案</td><td>对应 CORE、Profile、现行 ADR 和页面角色</td><td>权威链接、状态边界、源码检查、构建结果和 Chrome 阅读检查</td><td>页面与现行资料一致；不能声称组件存在</td></tr>
     <tr><td>语义或结果边界</td><td>END-CORE 及对应判断 ADR</td><td>支持案例、反例、唯一条款、正反向量和结果域拒绝</td><td>草案对已登记案例给出一致分类</td></tr>
@@ -39,7 +47,7 @@ permalink: "/development/testing.html"
     <li>差异必须被视为实现或规范缺陷，不能用“多数实现一致”掩盖。</li>
   </ul></section>
 
-  <section class="content-wide"><h2>当前验证材料能证明什么</h2><p class="callout"><strong>当前证据：</strong>现有材料可以比较草案对已登记输入的接受和拒绝结果。它们不能证明 Ktisor、Theor、Drasor、求值器或决定引擎已经存在。</p><div class="table-wrap"><table><thead><tr><th>材料</th><th>当前用途</th><th>不能据此声称</th></tr></thead><tbody>
+  <section id="current-evidence" class="content-wide"><h2>当前验证材料能证明什么</h2><p class="callout"><strong>当前证据：</strong>现有材料可以比较草案对已登记输入的接受和拒绝结果。它们不能证明 Ktisor、Theor、Drasor、求值器或决定引擎已经存在。</p><div class="table-wrap"><table><thead><tr><th>材料</th><th>当前用途</th><th>不能据此声称</th></tr></thead><tbody>
     <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读条款登记</a></td><td>连接规范版本、条款、威胁、验证方式和向量集合</td><td>登记本身不是执行结果或组件符合性声明</td></tr>
     <tr><td>自然语言场景</td><td>检查支持案例、反例、歧义和责任遗漏</td><td>场景不是规范条款、解析能力或互操作证据</td></tr>
     <tr><td>语义、专题与字节向量</td><td>固定当前草案的允许包络、确定拒绝和失败位置</td><td>向量通过不证明运行组件、安全隔离或稳定 ABI</td></tr>
@@ -81,7 +89,7 @@ permalink: "/development/testing.html"
     <li>模型评价器只产生建议性评价；机器可判定的 accepted 来自确定性规则，需要价值判断时由具名外部权威签署。</li>
   </ul></section>
 
-  <section class="content-wide"><h2>模型参与评测必须限定用途</h2><p class="callout"><strong>直接结论：</strong>模型评分是有版本、有偏差且可能漂移的候选测量。它不是人工权威、统计区间、充分证据或最终决定。</p><div class="table-wrap"><table><thead><tr><th>检查</th><th>必须保存</th><th>失败时怎样处理</th></tr></thead><tbody>
+  <section id="model-evaluation" class="content-wide"><h2>模型参与评测必须限定用途</h2><p class="callout"><strong>直接结论：</strong>模型评分是有版本、有偏差且可能漂移的候选测量。它不是人工权威、统计区间、充分证据或最终决定。</p><div class="table-wrap"><table><thead><tr><th>检查</th><th>必须保存</th><th>失败时怎样处理</th></tr></thead><tbody>
     <tr><td>评测目的</td><td>构念、用途、总体、评分说明和决定者</td><td>缺少可观察标准时保留待确认，不用模型猜测</td></tr>
     <tr><td>实际协议</td><td>题目、候选顺序、提示、模型版本、设置、工具、重复和解析</td><td>身份或设置无法固定时不形成可比较结果</td></tr>
     <tr><td>偏差探针</td><td>位置、长度、格式、来源、提示注入、重复和时间漂移反例</td><td>探针失败使方法在对应范围失效</td></tr>
@@ -107,12 +115,14 @@ permalink: "/development/testing.html"
     <tr><td><a href="https://www.gnu.org/software/diffutils/manual/html_node/Invoking-diff.html">GNU Diffutils</a> 与 <a href="https://www.gnu.org/software/coreutils/manual/html_node/Random-sources.html">Coreutils 随机来源</a></td><td>分开“相同、不同、比较故障”，并记录候选顺序使用的随机来源。</td><td>差异不选择正确一方；固定随机源也不证明模型评审没有位置偏差。</td></tr>
   </tbody></table></div><p>这些机制共同支持“先声明比较域，再解释结果”。它们不支持一个跨文本、对象、模型和版本的通用等价结论。</p></section>
 
-  <section class="content-wide"><h2>证据等级</h2><div class="table-wrap"><table><thead><tr><th>等级</th><th>支持什么</th><th>最低材料</th></tr></thead><tbody>
+  <section id="evidence-levels" class="content-wide"><h2>证据等级</h2><div class="table-wrap"><table><thead><tr><th>等级</th><th>支持什么</th><th>最低材料</th></tr></thead><tbody>
     <tr><td>示例</td><td>解释候选语义</td><td>输入、预期输出、非规范声明</td></tr>
     <tr><td>回归</td><td>已知行为未被破坏</td><td>固定语料、版本、断言、失败诊断</td></tr>
     <tr><td>性质与安全</td><td>不变量与拒绝路径</td><td>属性测试、模糊测试、资源限制、对抗案例</td></tr>
     <tr><td>互操作</td><td>格式或配置主张</td><td>至少两个独立实现、共享向量、差异报告</td></tr>
     <tr><td>研究实验</td><td>模型或系统效果</td><td>假设、基线、数据许可、消融、统计不确定性、失败分析</td></tr>
   </tbody></table></div></section>
+    </div>
+  </div>
   <div class="next-prev"><a href="implementation-roadmap.html">← 开发路线图</a><a href="../architecture/open-questions.html">开放问题 →</a></div>
 </main>

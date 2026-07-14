@@ -9,7 +9,15 @@ permalink: "/architecture/decisions.html"
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
   <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、组合闭包、会话契约、证据、授权、身份与组件边界。</p><div class="badges"><span class="badge">ADR-0010—0035</span><span class="badge">Design Stage</span><span class="badge">尚未实现</span><span class="badge">接口待定</span></div></header>
 
-  <section class="content-stack">
+  <div class="summary-rail-layout summary-rail-layout--article" data-summary-rail-layout data-summary-layout="stacked">
+    <aside class="summary-rail summary-rail--article" aria-label="决策阅读概览">
+      <div class="summary-rail-heading"><span class="summary-rail-kicker">ARCHITECTURE / DECISIONS</span><strong class="summary-rail-title">决策阅读概览</strong></div>
+      <dl class="summary-rail-facts"><div><dt>当前重点</dt><dd>职责、权威与信任边界</dd></div><div><dt>规范来源</dt><dd>现行 ADR 与对应 CORE、Profile</dd></div><div><dt>阅读原则</dt><dd>先看现行决定，再核对采用边界</dd></div></dl>
+      <nav class="summary-rail-links" aria-label="架构决策重点章节"><a href="#current-decisions">当前权威决定</a><a href="#adoption-boundaries">外部机制的采用边界</a><a href="#change-rules">变更规则</a></nav>
+    </aside>
+    <div class="summary-rail-main">
+
+  <section id="current-decisions" class="content-stack">
     <h2>当前权威决定</h2>
     <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权与伴随边界；<a href="adr-0031-release-name-collision-gate.html">ADR-0031</a>至 <a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035</a>处理发布名称、读音与公开动作审查。</p>
     <p>ADR-0008 与 ADR-0009 只保存公开迁移历史。更早、无入口且与现行决策源重复的内部 ADR 副本已经删除，不能反向约束实现、路由或 ABI。</p>
@@ -93,7 +101,7 @@ permalink: "/architecture/decisions.html"
     </ul>
   </section>
 
-  <section class="content-wide">
+  <section id="adoption-boundaries" class="content-wide">
     <h2>外部机制的采用边界</h2>
     <p>以下资料只提供可复查的机制先例。每一项都同时写明采用部分和禁止推导，外部版本变化不能静默改变 Endem。</p>
     <div class="table-wrap"><table><thead><tr><th>资料与复核基线</th><th>Noemion 采用什么</th><th>不能据此推出什么</th></tr></thead><tbody>
@@ -127,9 +135,11 @@ permalink: "/architecture/decisions.html"
     </tbody></table></div>
   </section>
 
-  <section class="content-band">
+  <section id="change-rules" class="content-band">
     <h2>变更规则</h2>
     <p>若要改变六个语义面、根 <code>skena</code> 唯一性、事态与方向分离、<code>phain</code> 比较、状态机、Synem 组合、Dromen 会话范围、Iknem 有限主张或唯一命令面，必须新增 ADR。策略变更后，还要同步规范、组件、生命周期、手册和测试向量。</p>
   </section>
+    </div>
+  </div>
   <div class="next-prev"><a href="endem-lifecycle.html">← Endem 生命周期</a><a href="open-questions.html">开放问题 →</a></div>
 </main>

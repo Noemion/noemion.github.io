@@ -859,7 +859,13 @@ class PageParser(HTMLParser):
                 "text": [],
                 "classes": classes,
                 "direct_children": [],
-                "direct_main_child": bool(ancestor_tags and ancestor_tags[-1] == "main"),
+                "direct_main_child": bool(
+                    ancestor_tags
+                    and (
+                        ancestor_tags[-1] == "main"
+                        or "summary-rail-main" in self.stack[-1][1]
+                    )
+                ),
             }
             self.sections.append(self.active_section)
         if tag == "h2":
@@ -1076,18 +1082,25 @@ def validate_readability_behavior_contracts(root):
                 directory_text,
                 r"@media\(max-width:1217px\)\s*\{\s*\.docs-rail\s*\{\s*display:none"
             ),
-            "project progress summary must remain sticky on desktop": (
+            "summary rail must become sticky only after a measured split": (
                 style_text,
-                r"\.project-progress-summary\s*\{[^}]*position:sticky;[^}]*top:88px"
+                r'\.summary-rail-layout\[data-summary-layout="split"\]>\.summary-rail\s*\{'
+                r"[^}]*position:sticky;[^}]*top:var\(--summary-rail-top\)"
             ),
-            "project progress summary must scroll only for real vertical overflow": (
+            "split summary rail must scroll only for real vertical overflow": (
                 style_text,
-                r"\.project-progress-summary\s*\{[^}]*max-height:calc\(100dvh\s*-\s*112px\);"
+                r'\.summary-rail-layout\[data-summary-layout="split"\]>\.summary-rail\s*\{'
+                r"[^}]*max-height:calc\(100dvh\s*-\s*var\(--summary-rail-top\)\s*-\s*24px\);"
                 r"[^}]*overflow-x:hidden;overflow-y:auto"
             ),
             "project progress decoration must remain inside its scroll boundary": (
                 style_text,
-                r"\.project-progress-summary::before\s*\{[^}]*right:0;bottom:0;"
+                r"\.summary-rail--progress::before\s*\{[^}]*right:0;bottom:0;"
+            ),
+            "breadcrumbs must be compact while retaining a forty pixel link target": (
+                style_text,
+                r'body:not\(\[data-page-role="portal"\]\)\s+\.breadcrumbs\s*\{'
+                r"[^}]*min-height:40px;[^}]*font-size:9px;[^}]*line-height:1\.35"
             ),
             "current stage summary must use readable body text": (
                 style_text,
@@ -2891,7 +2904,7 @@ def validate_jekyll_sources():
             "background:color-mix(in srgb,var(--nav-bg) 78%,var(--accent-soft))",
             ".content-split{",
             ".content-split-reverse{",
-            'body[data-page-role="content"]:not([data-docs-layout="true"]) main:not(.current-stage-page)>section :is(p,li,blockquote)',
+            'body[data-page-role="content"]:not([data-docs-layout="true"]) :is(main:not(.current-stage-page),.summary-rail-main)>section :is(p,li,blockquote)',
             ".content-stack",
             ".content-band{",
             ".content-wide",
@@ -3363,6 +3376,9 @@ def validate_jekyll_sources():
             "DirectoryNavigation",
             "MobileDirectoryController",
             "MobileHeaderLayout",
+            "SummaryRailLayout",
+            "shouldSplitSummaryRail",
+            "connectSummaryRailLayouts",
             "shouldStackMobileDirectory",
             "ResizeObserver",
             'document.body.toggleAttribute("data-mobile-directory-stacked", stacked)',
@@ -3434,6 +3450,8 @@ def validate_jekyll_sources():
             'import(moduleUrl("directory-navigation"))',
             'import(moduleUrl("mobile-header-layout"))',
             'import(moduleUrl("content-enhancements"))',
+            'import(moduleUrl("summary-rail-layout"))',
+            'document.querySelector("[data-summary-rail-layout]")',
             "needsTableScroller || longContent",
             'directoryPanel.dataset.mobileDirectoryReady = "true"',
             'directoryPanel?.addEventListener("noemion:directoryrequest", ensureDirectory)',
@@ -3527,7 +3545,7 @@ def validate_jekyll_sources():
             "timeline.items",
             "completed_stages.size",
             "planned_stages.size",
-            'class="project-progress-summary"',
+            "project-progress-summary\"",
             'data-stage-id="{{ item.id | escape }}"',
             'data-stage-state="{{ item.state | escape }}"',
         ):
@@ -3553,6 +3571,16 @@ def validate_jekyll_sources():
         ):
             if token not in current_stage_text:
                 errors.append(f"current stage page missing contract: {token}")
+        timeline_include_text = (SOURCE_ROOT / "_includes/project-timeline.html").read_text()
+        for token in (
+            "data-summary-rail-layout",
+            'data-summary-layout="stacked"',
+            "summary-rail-layout project-progress-layout",
+            "summary-rail summary-rail--progress project-progress-summary",
+            "summary-rail-main project-timeline-block",
+        ):
+            if token not in timeline_include_text:
+                errors.append(f"project timeline must consume the shared summary rail: {token}")
         for forbidden in (
             "当前阶段的进入条件",
             "尚未满足的退出证据",
@@ -3567,6 +3595,32 @@ def validate_jekyll_sources():
             errors.append(
                 f"project timeline exposes internal production phrase {phrase!r} in visible copy"
             )
+
+    summary_rail_pages = {
+        "architecture/decisions.html": (
+            'aria-label="决策阅读概览"',
+            'href="#current-decisions"',
+            'href="#adoption-boundaries"',
+            'href="#change-rules"',
+        ),
+        "development/testing.html": (
+            'aria-label="验证阅读概览"',
+            'href="#current-evidence"',
+            'href="#model-evaluation"',
+            'href="#evidence-levels"',
+        ),
+    }
+    for route, page_tokens in summary_rail_pages.items():
+        page_text = (SOURCE_ROOT / route).read_text()
+        for token in (
+            "data-summary-rail-layout",
+            'data-summary-layout="stacked"',
+            'class="summary-rail summary-rail--article"',
+            'class="summary-rail-main"',
+            *page_tokens,
+        ):
+            if token not in page_text:
+                errors.append(f"{route}: missing shared summary rail contract: {token}")
 
     image_contracts = {
         "assets/images/secure-endem-ktisor.svg": (20_000, 'src="../assets/images/secure-endem-ktisor.svg"'),
@@ -4299,7 +4353,7 @@ def main():
             'aria-label="查看 Noemion 项目时间线"',
             'href="/development/current-stage.html"',
             f'<strong class="global-timeline-value">{configured_timeline_label}</strong>',
-            'class="project-progress-summary"',
+            "project-progress-summary\"",
             'class="progress-counts"',
             "项目状态概览",
             "正在进行",
@@ -4319,11 +4373,12 @@ def main():
     site_script = ROOT / "assets/site.mjs"
     route_module = ROOT / "assets/modules/route-model.mjs"
     directory_module = ROOT / "assets/modules/directory-navigation.mjs"
+    summary_layout_module = ROOT / "assets/modules/summary-rail-layout.mjs"
     navigation_data = ROOT / "assets/navigation-data.json"
     theme_script = ROOT / "assets/theme.js"
     directory_guard = ROOT / "assets/mobile-directory-guard.js"
     favicon = ROOT / "assets/favicon.svg"
-    for path in (site_script, route_module, directory_module, navigation_data, directory_guard):
+    for path in (site_script, route_module, directory_module, summary_layout_module, navigation_data, directory_guard):
         if not path.exists():
             errors.append(f"missing built front-end asset {path.relative_to(ROOT)}")
     if not theme_script.exists():
