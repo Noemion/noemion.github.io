@@ -9,22 +9,35 @@ manual_group: "start"
 manual_order: 1
 nav_title: "入门指南"
 page_heading: "Noemion 入门指南"
-page_lead: "先理解 Noemion 为什么存在，再认识 Endem 及目标的形成、组合、装载与验收。"
-summary: "先理解 Noemion 为什么存在，再认识 Endem 及目标的形成、组合、装载与验收。"
+page_lead: "用一个依赖升级案例，分清目标、协议状态、运行权限、证据和最终决定。"
+summary: "用一个依赖升级案例，理解 Noemion 与 Agent 协议、授权和服务控制的边界。"
 badges: ["Getting Started", "Noemion", "No Release Yet"]
 ---
 
 ## 从这里开始
 
-Noemion 为自然语言目标建立持久、可组合、可独立检查的工程基础。传统目标文件提供了重要类比，但项目不会照搬它的术语、机器指令语义或工具数量。
+Noemion 把自然语言目标变成可以持久保存、组合和独立检查的工程对象。它不替代 Prompt、Agent 工作流、MCP、A2A、身份系统或政策引擎；这些系统负责生成、编排、通信或授权，Noemion 负责固定“究竟要达到什么”和“依据什么接受结果”。
 
 项目创造的核心词是 **Endem**：由 *end* 与表示“最小区别单位”的 *-eme* 合成，定义为“最小、独立有效、可验证的期望终态单元”。它不是缩写，也不是 `OBJ` 的新前缀。
+
+Agent 正在从一次回答走向长时运行、工具调用和跨系统协作。2026 年启动的 [NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)把互操作、安全、身份和授权列为重点；这些问题已经进入公开标准化议程，但连接成功仍不等于目标定义正确。
+
+[A2A 1.0 规范](https://a2a-protocol.org/v1.0.0/specification/)已经分开 Task、Message、Artifact、流式更新和协议版本。[MCP 2025-11-25 Tasks](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks)仍是实验性能力；后续 [Tasks 扩展提案](https://modelcontextprotocol.io/seps/2663-tasks-extension)明确说明新设计与这套实验接口不具备线格式兼容性。协议可以演进，目标身份、验收判据和证据责任不能跟着某个外部状态模型漂移。
+
+| 开发者正在处理的层次 | 这一层回答什么 | 不能直接推出什么 |
+| --- | --- | --- |
+| Prompt 或工作流 | 模型接收什么上下文，下一步调用什么 | 目标已经消除歧义 |
+| MCP 或 A2A | 请求、Task、Message、Artifact 和协议状态怎样交换 | 外部 `completed` 等于目标满足 |
+| 身份与授权 | 谁可以代表谁，对哪个对象执行什么动作 | 被授权的动作一定产生正确结果 |
+| Noemion | 精确目标、约束、判据、证据范围和决定责任怎样保持稳定 | 运行权限、协议连接或服务控制已经具备 |
+
+GNU 对网络服务的分析还提供了另一条必要边界：[客户端软件是否自由，与服务由谁实际运行和控制是两个问题](https://www.gnu.org/philosophy/network-services-arent-free-or-nonfree.html)。Noemion 借用这个区分来要求开发者说明执行者、数据路径、可观察范围和退出条件，不把 GNU 的伦理结论、许可证选择或 `SaaSS` 变成项目字段。开源客户端、成功的 API 调用和可导出数据，都不能单独证明用户控制了那次实际计算。
 
 ## 先看一个 Agent 工作
 
 假设团队要求一个 Agent：“把服务依赖更新到安全版本，并确认它可以发布。”这句话适合开始协作，却还不是可验证目标。开发者至少要继续确定服务与仓库、目标版本、允许修改的范围、检查环境、发布判据和最终决定者。
 
-Agent 可以调用 MCP 工具，也可以把工作交给 A2A 对端。协议状态只能说明外部请求走到哪一步：[MCP 2025-11-25 Tasks](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks)把 Task 定义为所包装请求的执行状态；[A2A 1.0 规范](https://a2a-protocol.org/v1.0.0/specification/)也把 Task 状态、消息和 Artifact 分开。即使外部 Task 显示 `completed`，本地仍要检查目标对象、实际改动、测试范围、安全结果和发布权威。
+Agent 可以调用 MCP 工具，也可以把工作交给 A2A 对端。协议状态只说明外部请求走到哪一步。即使外部 Task 显示 `completed`，本地仍要检查目标对象、实际改动、测试范围、安全结果和发布权威。
 
 | 发生的事实 | Noemion 负责保留什么 | 还不能推出什么 |
 | --- | --- | --- |
