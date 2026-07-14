@@ -9,8 +9,8 @@ manual_group: "guides"
 manual_order: 4
 nav_title: "架构设计指南"
 page_heading: "Noemion 架构设计指南"
-page_lead: "从 Endem 到 Iknem，理解三个实现域、四个名词和每道信任边界。"
-summary: "从 Endem 到 Iknem，理解三个实现域、四个名词和每道信任边界。"
+page_lead: "沿一次 Agent 工作看清目标、会话、外部任务、证据和决定怎样穿过不同信任边界。"
+summary: "沿一次 Agent 工作看清目标、会话、外部任务、证据和决定怎样穿过不同信任边界。"
 badges: ["Architecture", "Endem", "Trust Boundaries"]
 ---
 
@@ -27,6 +27,21 @@ badges: ["Architecture", "Endem", "Trust Boundaries"]
 ```
 
 这四个名词有不同生命周期。Endem 是最小目标制品；Synem 是解析后的组合闭包；Dromen 是一次 Drase 会话的只读执行契约；Iknem 是有范围的证据记录。中间报告只有在权威、权限、保密或生命周期确实不同时，才成为独立伴随记录。
+
+## 用一次 Agent 工作读图
+
+仍以“更新服务依赖并确认可以发布”为例。架构图不是工具调用顺序，而是责任不能越过的边界：
+
+| 工作时刻 | 主责任 | 必须保留的边界 |
+| --- | --- | --- |
+| 解释团队要求 | 来源、文本和授权边界 | 模型只提出候选；未确认的服务、版本、范围和判据继续保留 |
+| 形成 Endem 或 Synem | Ktisor | 目标身份与实现计划分开；确定性规则或具名决定才进入规范内容 |
+| 准备一次运行 | Drasor 与 Dromen | 重新核对实际对象、政策、环境、能力、预算和证据责任 |
+| 调用工具或远端 Agent | 控制平面与协议适配 | MCP/A2A 状态保留外部来源；`completed` 不直接映射为满足结果 |
+| 收集测试与运行观察 | `phain` 与 Iknem | 记录主体、方法、环境、范围、截止点和限制，不把日志数量当充分性 |
+| 判断能否发布 | `krin` 与具名权威 | 先形成 `met / unmet / agno / fault`，再独立形成 `accepted / rejected / deferred` |
+
+这条路径说明为什么单一 Agent 对象、工作流状态或“成功”标志不能覆盖整个系统。需要评审外部协议、并行、记忆、模型评测或托管服务时，继续使用[Agent 系统边界图](../architecture/agent-system-boundaries.html)定位责任。
 
 ## 三个实现域
 

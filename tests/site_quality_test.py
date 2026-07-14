@@ -122,7 +122,7 @@ DOC_GUIDE_ORDER = [
 ]
 DOC_GUIDE_HEADINGS = {
     "docs/getting-started.html": [
-        "从这里开始", "这些名字怎样读", "六个语义面", "四个名词", "一个应用", "推荐阅读路径", "当前状态",
+        "从这里开始", "先看一个 Agent 工作", "六个语义面", "四个名词", "一个应用", "这些名字怎样读", "推荐阅读路径", "当前状态",
     ],
     "docs/installation-and-usage.html": [
         "当前可用性", "未来职责流程", "发布原则", "命名发布条件",
@@ -132,7 +132,7 @@ DOC_GUIDE_HEADINGS = {
         "证据记录", "人工智能只做辅助探针", "当前状态",
     ],
     "docs/architecture-guide.html": [
-        "最小系统图", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
+        "最小系统图", "用一次 Agent 工作读图", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
     ],
     "docs/development-guide.html": [
         "第一阶段范围", "规范与 ADR 先行", "实现工作流", "建议仓库边界", "审查清单", "模型与协议",
@@ -3660,12 +3660,27 @@ def main():
         "具体发行拼写和读音仍需完成 ADR-0034 的人类验证",
         "不用临时读法冒充正式读法",
         "不会成为第二套命令、机器别名或语义权威",
+        "先看一个 Agent 工作",
+        "MCP 2025-11-25 Tasks",
+        "A2A 1.0 规范",
+        "外部 Task 显示 `completed`",
+        "这个例子只解释职责顺序",
         "| 职责 | 现行字段 | 不得混入 |",
         "| 来源表达 | `rhem` | 授权后的意义投影 |",
         "| 待确认意义 | `apor` | 观察不足",
     ):
         if token not in getting_started_text:
             errors.append(f"getting started guide missing pronunciation status boundary: {token}")
+    architecture_guide_text = (SOURCE_ROOT / "docs" / "architecture-guide.md").read_text()
+    for token in (
+        "用一次 Agent 工作读图",
+        "MCP/A2A 状态保留外部来源",
+        "`completed` 不直接映射为满足结果",
+        "先形成 `met / unmet / agno / fault`",
+        "Agent 系统边界图",
+    ):
+        if token not in architecture_guide_text:
+            errors.append(f"architecture guide missing developer walkthrough: {token}")
     terminology_guide_text = (
         SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md"
     ).read_text()
