@@ -1238,11 +1238,11 @@ body[data-page-role="content"]:not([data-docs-layout="true"]) .next-prev{margin-
 }
 .project-progress-layout{display:grid;grid-template-columns:300px minmax(0,1fr);align-items:start;width:100%}
 .project-progress-summary{
-  position:sticky;top:88px;display:flex;flex-direction:column;align-self:start;min-width:0;max-height:calc(100vh - 112px);padding:62px 34px;overflow:auto;
+  position:sticky;top:88px;display:flex;flex-direction:column;align-self:start;min-width:0;max-height:calc(100dvh - 112px);padding:62px 34px;overflow-x:hidden;overflow-y:auto;
   background:var(--paper-subtle);border-right:1px solid var(--portal-line)
 }
 .project-progress-summary::before{
-  content:"";position:absolute;right:-70px;bottom:-90px;width:210px;height:210px;border-radius:50%;
+  content:"";position:absolute;right:0;bottom:0;width:140px;height:140px;border-radius:50%;
   background:conic-gradient(from 45deg,var(--portal-mint),var(--portal-blue),var(--portal-coral),var(--portal-amber),var(--portal-mint));
   opacity:.08;filter:blur(30px)
 }

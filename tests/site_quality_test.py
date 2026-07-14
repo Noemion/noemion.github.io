@@ -1080,6 +1080,15 @@ def validate_readability_behavior_contracts(root):
                 style_text,
                 r"\.project-progress-summary\s*\{[^}]*position:sticky;[^}]*top:88px"
             ),
+            "project progress summary must scroll only for real vertical overflow": (
+                style_text,
+                r"\.project-progress-summary\s*\{[^}]*max-height:calc\(100dvh\s*-\s*112px\);"
+                r"[^}]*overflow-x:hidden;overflow-y:auto"
+            ),
+            "project progress decoration must remain inside its scroll boundary": (
+                style_text,
+                r"\.project-progress-summary::before\s*\{[^}]*right:0;bottom:0;"
+            ),
             "current stage summary must use readable body text": (
                 style_text,
                 r"\.current-stage-panel>p\{[^}]*font-size:16px;[^}]*line-height:1\.75"
