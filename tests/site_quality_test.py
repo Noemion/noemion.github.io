@@ -2940,6 +2940,11 @@ def validate_jekyll_sources():
             '.directory-loading-status{display:none',
             'nav[aria-busy="true"] .directory-loading-status',
             ':root[data-resolved-theme="dark"]',
+            '--bg:#030a08',
+            '--paper:#060f0d',
+            '--paper-subtle:#091813',
+            '--paper-raised:#0d2019',
+            '--nav-bg:#071510',
             ".site-footer-grid",
             ".site-theme-trigger",
             '.site-theme-menu[data-state="open"]',
@@ -4061,8 +4066,11 @@ def main():
                 errors.append(f"style.css missing homepage visual selector {selector}")
         for token in (
             ".portal-introduction::before{",
-            "background:linear-gradient(to bottom,transparent,#07100e)",
-            "background:linear-gradient(to bottom,#07100e 0 80%,var(--paper) 100%)!important",
+            "--portal-cover-edge:var(--paper)",
+            "--portal-cover-edge:#060f0d",
+            "background:var(--portal-cover-bottom-gradient)",
+            "background:linear-gradient(to bottom,var(--portal-cover-edge) 0 80%,var(--paper) 100%)!important",
+            ".portal-introduction-visual::after{",
         ):
             if token not in home_style:
                 errors.append(f"style.css missing homepage surface continuity contract: {token}")
