@@ -77,6 +77,17 @@ globalRoot?.addEventListener("click", (event) => {
 
 const directoryRoot = document.querySelector("[data-directory]");
 const directoryPanel = directoryRoot?.closest(".directory-panel");
+const mobileHeader = document.querySelector(".global-header");
+let mobileHeaderLayoutPromise;
+const ensureMobileHeaderLayout = () => {
+  if (!mobileHeader) return;
+  if (!mobileHeaderLayoutPromise) {
+    mobileHeaderLayoutPromise = import(moduleUrl("mobile-header-layout"))
+      .then(({ MobileHeaderLayout }) => new MobileHeaderLayout(mobileHeader).connect())
+      .catch((error) => console.warn("Responsive header placement is unavailable.", error));
+  }
+  return mobileHeaderLayoutPromise;
+};
 let directoryPromise;
 const ensureDirectory = async () => {
   if (!directoryRoot) return;
@@ -115,8 +126,10 @@ const ensureDirectory = async () => {
 };
 
 if (mobileLayout.matches) ensureDirectory();
+if (mobileLayout.matches) ensureMobileHeaderLayout();
 mobileLayout.addEventListener("change", (event) => {
   if (event.matches) ensureDirectory();
+  if (event.matches) ensureMobileHeaderLayout();
 });
 directoryPanel?.addEventListener("noemion:directoryrequest", ensureDirectory);
 if (directoryPanel?.hasAttribute("data-mobile-directory-pending-open")) ensureDirectory();

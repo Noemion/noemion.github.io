@@ -2902,7 +2902,10 @@ def validate_jekyll_sources():
             ".portal-button-primary:visited",
             ".portal-button-secondary:visited",
             '@media(max-width:999px)',
-            'body:not([data-page-role="portal"]) .global-directory-panel',
+            'body .site-header .global-directory-panel{',
+            'body[data-mobile-directory-stacked]:not([data-page-role="portal"]) .global-header-inner',
+            'body[data-mobile-directory-stacked]:not([data-page-role="portal"]) .global-directory-panel',
+            'body[data-mobile-directory-stacked]:not([data-page-role="portal"]) .breadcrumbs{padding-right:102px}',
             'transition-duration:180ms;transition-timing-function:cubic-bezier(.2,0,0,1);transition-delay:0s',
             '.site-header .directory-panel.is-closing nav',
             'html.mobile-directory-open{overscroll-behavior:none}',
@@ -2959,6 +2962,8 @@ def validate_jekyll_sources():
             errors.append("mobile directory must not replace body layout while the overlay is open")
         if re.search(r"html\.mobile-directory-open\s*\{[^}]*overflow\s*:", shared_css):
             errors.append("mobile directory must not change root overflow while the overlay is open")
+        if 'body:not([data-page-role="portal"]) .global-header-inner{grid-template-columns:' in shared_css:
+            errors.append("non-portal mobile header must not force a fixed two-column layout")
         if re.search(
             r"\.site-header\s+\.directory-panel(?:\:not\(\[open\]\)|\.is-closing)?\s+nav\s*\{[^}]*filter:",
             shared_css,
@@ -3357,6 +3362,11 @@ def validate_jekyll_sources():
             "NavigationStore",
             "DirectoryNavigation",
             "MobileDirectoryController",
+            "MobileHeaderLayout",
+            "shouldStackMobileDirectory",
+            "ResizeObserver",
+            'document.body.toggleAttribute("data-mobile-directory-stacked", stacked)',
+            'document.fonts?.ready.then(schedule)',
         ):
             if token not in module_text:
                 errors.append(f"front-end modules missing interaction contract: {token}")
@@ -3376,8 +3386,10 @@ def validate_jekyll_sources():
             'if (event.key === "Tab") keyboardNavigation = true',
             "keyboardNavigation = false",
             "if (mobileLayout.matches) ensureDirectory()",
+            "if (mobileLayout.matches) ensureMobileHeaderLayout()",
             'mobileLayout.addEventListener("change"',
             "if (event.matches) ensureDirectory()",
+            "if (event.matches) ensureMobileHeaderLayout()",
             "if (!globalRoot || !desktopLayout.matches) return",
             "if (precisePointer.matches) requestGlobalNavigation(event)",
             "if (precisePointer.matches || keyboardNavigation) requestGlobalNavigation(event)",
@@ -3420,6 +3432,7 @@ def validate_jekyll_sources():
         for token in (
             'import(moduleUrl("global-navigation"))',
             'import(moduleUrl("directory-navigation"))',
+            'import(moduleUrl("mobile-header-layout"))',
             'import(moduleUrl("content-enhancements"))',
             "needsTableScroller || longContent",
             'directoryPanel.dataset.mobileDirectoryReady = "true"',
