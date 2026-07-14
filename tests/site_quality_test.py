@@ -4471,9 +4471,14 @@ def main():
         "opacity:.96",
         "@media(prefers-reduced-motion:reduce)",
         "animation:none!important",
+        ".portal-feature-row:hover .portal-arrow i{transform:rotate(-45deg)}",
+        ".portal-feature-row:focus-visible .portal-arrow i{transform:rotate(-45deg)}",
     ):
         if token not in style:
             errors.append(f"style.css missing animation contract: {token}")
+    portal_arrow_markup = '<span class="portal-arrow" aria-hidden="true"><i>→</i></span>'
+    if (ROOT / "index.html").read_text().count(portal_arrow_markup) != 4:
+        errors.append("index.html must render four right-pointing portal arrows before interaction")
     if "background-position:-220% 0" in style:
         errors.append("style.css must not reset the spectrum frame with a discontinuous background position")
 

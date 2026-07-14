@@ -572,14 +572,14 @@ body[data-page-role="portal"] .portal-main>section:last-of-type{padding:0;border
   stroke:#fff;stroke-width:3.25;stroke-linecap:round;stroke-dasharray:126;stroke-dashoffset:126;opacity:0;
   transition-property:stroke-dashoffset,opacity;transition-duration:550ms,160ms;transition-timing-function:linear,var(--ease)
 }
-.portal-arrow i{position:relative;z-index:1;grid-area:1/1;font-style:normal;transition-property:opacity,filter,transform;transition-duration:300ms;transition-timing-function:var(--ease)}
-.portal-arrow .arrow-base{opacity:1;filter:blur(0);transform:scale(1)}
-.portal-arrow .arrow-active{opacity:0;filter:blur(4px);transform:scale(.25)}
+.portal-arrow i{
+  position:relative;z-index:1;grid-area:1/1;font-style:normal;transform:rotate(0);
+  transition-property:transform;transition-duration:180ms;transition-timing-function:var(--ease)
+}
 .portal-feature-row:hover .portal-arrow{color:#fff;background:var(--portal-coral);box-shadow:0 0 0 1px var(--portal-coral);transform:translateX(4px)}
 .portal-feature-row:hover .arrow-ring-track{stroke:rgba(255,255,255,.34)}
 .portal-feature-row:hover .arrow-ring-progress{stroke-dashoffset:0;opacity:1}
-.portal-feature-row:hover .arrow-base{opacity:0;filter:blur(4px);transform:scale(.25)}
-.portal-feature-row:hover .arrow-active{opacity:1;filter:blur(0);transform:scale(1)}
+.portal-feature-row:hover .portal-arrow i{transform:rotate(-45deg)}
 .feature-visual-expression{flex-direction:column;align-items:flex-start;gap:7px;padding:18px;background:linear-gradient(135deg,#e9efe9,#f4e9db)}
 .feature-visual-expression i{padding:5px 8px;color:#54625b;background:rgba(255,255,255,.75);font-size:10px;font-style:normal}
 .feature-visual-expression i:nth-child(2){margin-left:28px}
@@ -1553,8 +1553,7 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
 .portal-feature-row:focus-visible .portal-arrow{color:#fff;background:var(--portal-coral);box-shadow:0 0 0 1px var(--portal-coral);transform:translateX(4px)}
 .portal-feature-row:focus-visible .arrow-ring-track{stroke:rgba(255,255,255,.34)}
 .portal-feature-row:focus-visible .arrow-ring-progress{stroke-dashoffset:0;opacity:1}
-.portal-feature-row:focus-visible .arrow-base{opacity:0;filter:blur(4px);transform:scale(.25)}
-.portal-feature-row:focus-visible .arrow-active{opacity:1;filter:blur(0);transform:scale(1)}
+.portal-feature-row:focus-visible .portal-arrow i{transform:rotate(-45deg)}
 
 @keyframes spectrum-trace{to{--spectrum-angle:360deg}}
 
