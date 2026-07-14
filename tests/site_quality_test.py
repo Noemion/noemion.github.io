@@ -4071,6 +4071,9 @@ def main():
             "background:var(--portal-cover-bottom-gradient)",
             "background:linear-gradient(to bottom,var(--portal-cover-edge) 0 80%,var(--paper) 100%)!important",
             ".portal-introduction-visual::after{",
+            ".portal-thesis-copy p{max-width:590px;margin:0 0 20px;color:var(--muted);font-size:16px;line-height:1.75;text-wrap:pretty}",
+            ".portal-thesis-copy{padding-inline:20px}",
+            ".portal-thesis-copy .portal-lead{font-size:18px;line-height:1.65;font-weight:560;letter-spacing:-.01em}",
         ):
             if token not in home_style:
                 errors.append(f"style.css missing homepage surface continuity contract: {token}")
