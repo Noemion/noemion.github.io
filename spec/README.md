@@ -49,7 +49,7 @@
 
 [`preview-simulation-and-approval-proposal.md`](preview-simulation-and-approval-proposal.md) 研究预览、dry-run、模拟、授权、执行尝试、事后观察、满足与最终决定怎样保持分离。它用 GNU Make、MCP 2025-11-25、A2A 1.0.0、OpenAI Agents SDK 与 NIST AI 600-1 检查当前 Agent 审批流程。它不创建预览制品、模拟格式、批准结果域、命令、组件或 CORE，也不进入 `registry.json`；当前首选是把显示、授权、会话漂移、外部调用、观察和满足义务归还现有 TEXT-IDENTIFIER、AUT、DRO、ADP、IKN、ID、END 与 DIA 责任。
 
-[`memory-checkpoint-and-resumption-proposal.md`](memory-checkpoint-and-resumption-proposal.md) 研究会话历史、上下文压缩、计划检查点、外部 Task 句柄、持久工作区、恢复、重放与回滚怎样保持分离。它用 OpenAI Agents SDK、MCP 当前版及发布候选、A2A 1.0、GNU Make 与 GNU Guix 核对现实持久状态机制。它不创建记忆制品、检查点格式、恢复命令、组件或 CORE，也不进入 `registry.json`；当前首选是把变换、身份、新会话、外部任务、授权消费、证据和诊断义务归还现有 TEXT-IDENTIFIER、ID、DRO、ADP、AUT、IKN、DIA、END 与 SYN 责任。
+[`memory-checkpoint-and-resumption-proposal.md`](memory-checkpoint-and-resumption-proposal.md) 研究九类状态怎样保持分离，包括会话历史、跨运行记忆或提炼指导、上下文压缩、计划检查点、外部 Task 句柄、持久工作区、恢复、重放与回滚。它用 OpenAI Agents SDK 对话状态策略、OpenAI Sandbox Agents 跨运行记忆、MCP 当前版及发布候选、A2A 1.0、GNU Make 与 GNU Guix 核对现实持久状态机制。它不创建记忆制品、检查点格式、恢复命令、组件或 CORE，也不进入 `registry.json`；当前首选是把变换、身份、新会话、外部任务、授权消费、证据和诊断义务归还现有 TEXT-IDENTIFIER、ID、DRO、ADP、AUT、IKN、DIA、END 与 SYN 责任。
 
 [`capability-discovery-and-negotiation-proposal.md`](capability-discovery-and-negotiation-proposal.md) 研究能力声明、协议协商、授权决定、Dromen 会话上限、即时可调用性与调用事实怎样保持分离。它用 MCP 2025-11-25、A2A 1.0、RFC 8707 与 GNU Autoconf 2.73 核对动态工具列表、受众、scope、schema 漂移和特性探测。它不创建 `CAP-CORE`、能力制品、目录格式、命令、组件或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 ADP、AUT、DRO、DIA、IKN、ID、TEXT-IDENTIFIER 与 END 责任。
 

@@ -132,7 +132,7 @@ DOC_GUIDE_HEADINGS = {
         "证据记录", "人工智能只做辅助探针", "当前状态",
     ],
     "docs/architecture-guide.html": [
-        "最小系统图", "用一次 Agent 工作读图", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
+        "最小系统图", "用一次 Agent 工作读图", "跨会话继续时先分清保存对象", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
     ],
     "docs/development-guide.html": [
         "先定义变更主张", "当前范围", "规范与 ADR 先行", "变更工作流", "建议仓库边界", "审查清单", "模型与协议",
@@ -438,7 +438,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "三种状态不得混写",
             "一次运行怎样穿过边界",
             "运行事实应该放在哪里",
-            "十三条最危险的越级路径",
+            "十四条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
             "GNU 技术与软件自由提供的十一个约束",
             "什么时候才值得增加新对象",
@@ -1878,8 +1878,10 @@ def validate_jekyll_sources():
             "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
             "不创建新制品、文件格式、扩展名、命令、组件、结果域、稳定接口或哲学专名",
             "不进入 `registry.json`",
-            "八类状态必须分开",
+            "九类状态必须分开",
             "OpenAI Agents SDK",
+            "OpenAI Sandbox Agents",
+            "跨运行记忆",
             "MCP 2025-11-25 Tasks",
             "2026-07-28 发布候选",
             "A2A 1.0",
@@ -1902,6 +1904,8 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "dromen.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "docs" / "architecture-guide.md",
             SOURCE_ROOT / "development" / "implementation-roadmap.html",
         ):
             if "memory-checkpoint-and-resumption-proposal.md" not in public_source.read_text():
@@ -2283,7 +2287,7 @@ def validate_jekyll_sources():
         for token in (
             "三种状态不得混写",
             "运行事实应该放在哪里",
-            "十三条最危险的越级路径",
+            "十四条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
             "GNU 技术与软件自由提供的十一个约束",
             "十三项研究怎样回到现有规范",
@@ -2293,6 +2297,7 @@ def validate_jekyll_sources():
             "OpenAI Agents SDK handoffs",
             "OpenAI Agents SDK human-in-the-loop",
             "OpenAI Agents SDK sessions",
+            "OpenAI Sandbox Agents 跨运行记忆",
             "OpenAI Agents SDK tracing",
             "Make target、prerequisite 与 recipe",
             "Guix profile generations",
@@ -2305,6 +2310,7 @@ def validate_jekyll_sources():
             "反馈替代训练资格与发布决定",
             "可下载替代自由与可修改性",
             "服务可用替代用户控制",
+            "记忆替代事实与政策",
             "NIST AI 800-2 初稿",
             "NIST AI 600-1",
             "NIST SP 800-218A",
@@ -3703,6 +3709,11 @@ def main():
         "`completed` 不直接映射为满足结果",
         "先形成 `met / unmet / agno / fault`",
         "Agent 系统边界图",
+        "跨会话继续时先分清保存对象",
+        "选择一种对话状态策略",
+        "跨运行记忆",
+        "恢复必须重新验证",
+        "记忆、检查点与恢复边界研究提案",
     ):
         if token not in architecture_guide_text:
             errors.append(f"architecture guide missing developer walkthrough: {token}")
