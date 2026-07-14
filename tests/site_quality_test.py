@@ -146,7 +146,7 @@ DOC_GUIDE_HEADINGS = {
 }
 HOME_HEADINGS = [
     "项目名与工程名各自负责",
-    "六个短词展开完整语义",
+    "六项职责保持语义边界",
     "只保留有独立生命周期的名词",
     "一个入口不等于一个信任域",
     "先证明最小纵向切片",
@@ -2563,6 +2563,7 @@ def validate_jekyll_sources():
             "Noemion 只是项目",
             "而成为 Endem",
             "认识 Endem",
+            "六个短词",
         ):
             if forbidden in homepage_text:
                 errors.append(f"index.html: Endem must not replace the Noemion project identity: {forbidden}")
@@ -3166,6 +3167,18 @@ def validate_jekyll_sources():
             errors.append(
                 f"{naming_path.relative_to(SOURCE_ROOT)} must defer current conflict evidence to name-audit.md"
             )
+    if naming_adr.exists():
+        naming_adr_text = naming_adr.read_text()
+        for token in (
+            "用六项职责分开来源表达",
+            "本决定确定六项语义职责",
+            "词源只作记忆辅助",
+            "ADR-0034",
+        ):
+            if token not in naming_adr_text:
+                errors.append(f"ADR-0010 missing responsibility-first naming boundary: {token}")
+        if "六个短词" in naming_adr_text:
+            errors.append("ADR-0010 must not present short field names as the value of the decision")
 
     manual_config = SOURCE_ROOT / "_data/manuals.yml"
     manual_layout = SOURCE_ROOT / "_layouts/manual.html"
@@ -3611,6 +3624,9 @@ def main():
         "具体发行拼写和读音仍需完成 ADR-0034 的人类验证",
         "不用临时读法冒充正式读法",
         "不会成为第二套命令、机器别名或语义权威",
+        "| 职责 | 现行字段 | 不得混入 |",
+        "| 来源表达 | `rhem` | 授权后的意义投影 |",
+        "| 待确认意义 | `apor` | 观察不足",
     ):
         if token not in getting_started_text:
             errors.append(f"getting started guide missing pronunciation status boundary: {token}")
@@ -3623,6 +3639,8 @@ def main():
         "不证明所有人、口音、设备和环境下都不会出错",
         "不能进入人类样本数",
         "Noemion 尚未执行上述人类研究",
+        "### 当前资料的阅读约定",
+        "直白解释不是机器别名",
     ):
         if token not in terminology_guide_text:
             errors.append(f"terminology guide missing human-evidence boundary: {token}")

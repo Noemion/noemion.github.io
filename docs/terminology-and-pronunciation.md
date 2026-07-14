@@ -18,6 +18,19 @@ badges: ["Naming Gate", "Human Evidence", "No Pronunciation Frozen"]
 
 Noemion 当前已经确定术语职责和读音审查方法，但新造词的发行读音仍是待定内容。名称必须经过真实人类朗读和听辨；项目自己写出的 IPA、拼读提示、语音合成或自动转写都不能证明名称已经通过。
 
+### 当前资料的阅读约定
+
+面向开发者的入口先写职责，再用代码样式标出现行设计字段。直白解释不是机器别名；研究提案中的英文候选也不能写入来源清单、Profile 或接口。
+
+| 先理解的职责 | 现行设计字段 | 必须保持的区分 |
+| --- | --- | --- |
+| 来源表达 | `rhem` | 来源实际出现的记号不同于授权后的意义 |
+| 已授权意义 | `semion` | 模型候选不同于规则或具名权威确认的投影 |
+| 可能事态 | `skena` | 中性事态不同于目标方向和实际观察 |
+| 目标方向 | `telis` | 达到或保持不同于事态本身和满足判断 |
+| 满足判据 | `krin` | 比较方法不同于观察、证据记录和最终决定 |
+| 待确认意义 | `apor` | 语义未决不同于观察不足、结构无意义或运行故障 |
+
 读音验证之前还必须先问“是否需要专名”。如果标准术语或简短职责短语已经能准确恢复对象、消费者和失败责任，继续创造新词只会增加记忆、听写和职责匹配负担。[发行术语去专名化研究提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/release-terminology-simplification-proposal.md)把这项审查应用到现行对象、角色和动作，但当前只形成候选，不修改规范。
 
 [语义面与观察词去专名化提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-facet-terminology-proposal.md)把审查继续应用到 `rhem/semion/skena/telis/krin/apor/phain`。提案保留七项职责分层，并以七个直白字段名进入验证；它同样不修改现行 END-CORE、Profile 或来源清单。
