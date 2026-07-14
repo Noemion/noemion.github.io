@@ -2744,7 +2744,57 @@ def validate_jekyll_sources():
     style = SOURCE_ROOT / "assets/style.css"
     directory_style = SOURCE_ROOT / "assets/directory.css"
     if style.exists() and directory_style.exists():
-        shared_css = style.read_text() + directory_style.read_text()
+        stylesheet_texts = {
+            "style.css": style.read_text(),
+            "directory.css": directory_style.read_text(),
+        }
+        shared_css = "".join(stylesheet_texts.values())
+
+        def media_block_ranges(css, marker):
+            ranges = []
+            search_from = 0
+            while True:
+                marker_start = css.find(marker, search_from)
+                if marker_start < 0:
+                    break
+                block_start = css.find("{", marker_start + len(marker))
+                if block_start < 0:
+                    break
+                depth = 1
+                cursor = block_start + 1
+                while cursor < len(css) and depth:
+                    if css[cursor] == "{":
+                        depth += 1
+                    elif css[cursor] == "}":
+                        depth -= 1
+                    cursor += 1
+                if depth:
+                    break
+                ranges.append((block_start + 1, cursor - 1))
+                search_from = cursor
+            return ranges
+
+        hover_media = "@media(hover:hover) and (pointer:fine)"
+        for stylesheet_name, stylesheet_text in stylesheet_texts.items():
+            hover_ranges = media_block_ranges(stylesheet_text, hover_media)
+            if not hover_ranges:
+                errors.append(f"{stylesheet_name} must define capability-scoped hover feedback")
+                continue
+            escaped_hover_positions = [
+                match.start()
+                for match in re.finditer(r"(?<![A-Za-z0-9_-]):hover\b", stylesheet_text)
+                if not any(start <= match.start() < end for start, end in hover_ranges)
+            ]
+            if escaped_hover_positions:
+                errors.append(f"{stylesheet_name} exposes hover feedback to touch scrolling")
+
+        for token in (
+            "@media(hover:none) and (pointer:coarse)",
+            "-webkit-tap-highlight-color:transparent",
+        ):
+            if token not in shared_css:
+                errors.append(f"shared styles missing touch-scroll feedback guard: {token}")
+
         for token in (
             'body[data-page-role="tool-project"]',
             'body[data-docs-layout="true"]',

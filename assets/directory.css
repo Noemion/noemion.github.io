@@ -25,7 +25,6 @@
 .site-header .directory-panel{
   margin:0;padding:0;background:transparent;border:0;border-radius:0
 }
-.site-header .directory-panel:hover,
 .site-header .directory-panel[open]{background:transparent;border-color:transparent}
 .site-header .directory-panel>summary{
   min-height:40px;padding:0;cursor:pointer;color:var(--nav-text);font-weight:700;list-style:none
@@ -49,12 +48,10 @@
   display:block;min-height:0;padding:0;color:var(--heading);font-size:16px;font-weight:760;line-height:1.4;text-decoration:none
 }
 .site-header .directory-panel .directory-title:visited{color:var(--heading)}
-.site-header .directory-panel .directory-title:hover{color:var(--link-hover);background:transparent}
 .site-header .directory-panel .directory-parent{
   display:flex;align-items:center;min-height:40px;margin-top:3px;padding:5px 0;color:var(--nav-muted);
   font-size:12px;text-decoration:none;transition-property:color,transform;transition-duration:150ms;transition-timing-function:var(--ease)
 }
-.site-header .directory-panel .directory-parent:hover{color:var(--nav-text)}
 .site-header .directory-panel .directory-parent:visited{color:var(--nav-muted)}
 .site-header .directory-panel .directory-parent:active{transform:scale(.96)}
 
@@ -68,7 +65,6 @@
   border-radius:0;font:inherit;text-align:left;cursor:pointer;
   transition-property:background-color,color;transition-duration:150ms;transition-timing-function:var(--ease)
 }
-.site-header .directory-panel .nav-section-toggle:hover{background:color-mix(in srgb,var(--paper-subtle) 72%,transparent)}
 .site-header .directory-panel .nav-section-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .site-header .directory-panel .nav-section-marker,
 .site-header .directory-panel .nav-section-count{
@@ -95,7 +91,6 @@
   transition-property:background-color,color,box-shadow,transform;
   transition-duration:150ms;transition-timing-function:var(--ease)
 }
-.site-header .directory-panel .nav-section-links a:hover{background:var(--paper-subtle);color:var(--nav-text)}
 .site-header .directory-panel .nav-section-links a:visited{color:var(--nav-muted)}
 .site-header .directory-panel .nav-section-links a.active{
   background:var(--nav-active);color:var(--nav-active-text);text-decoration:none;
@@ -105,7 +100,6 @@
 .site-header .directory-panel .nav-section-links a:active{transform:scale(.96)}
 .no-script-navigation{display:grid;gap:2px;margin-top:8px}
 .no-script-navigation a{display:flex;align-items:center;min-height:40px;padding:8px 10px;color:var(--nav-text);text-decoration:none}
-.no-script-navigation a:hover{background:var(--paper-subtle);color:var(--heading)}
 section[id]{scroll-margin-top:20px}
 
 @media(max-width:999px){
@@ -168,7 +162,6 @@ body .global-brand{
   border-right:1px solid var(--rule);font-family:inherit;font-size:18px;font-weight:750;letter-spacing:-.02em;
   transition-property:background-color,color;transition-duration:150ms;transition-timing-function:var(--ease)
 }
-body .global-brand:hover{color:var(--heading);background:var(--paper-subtle)}
 body .global-brand .portal-brand-mark{
   display:grid;place-items:center;width:30px;height:30px;color:#f7fbf9;background:var(--heading);
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;font-weight:800;
@@ -182,7 +175,6 @@ body .global-nav-trigger{
   transition-property:background-color,color;transition-duration:150ms;transition-timing-function:var(--ease)
 }
 body .global-nav-trigger:visited{color:var(--nav-text)}
-body .global-nav-trigger:hover,
 .global-nav-item:focus-within>.global-nav-trigger{color:var(--heading);background:var(--paper-subtle)}
 body .global-nav-trigger:active{transform:scale(.96)}
 .global-nav-caret{
@@ -232,15 +224,13 @@ body .global-nav-trigger:active{transform:scale(.96)}
   mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude
 }
 .global-nav-card:visited{color:var(--nav-text)}
-.global-nav-card:hover,.global-nav-card[aria-current="page"]{
+.global-nav-card[aria-current="page"]{
   color:var(--nav-text);background:color-mix(in srgb,var(--paper-subtle) 88%,var(--portal-mint,#68d7b2));
   box-shadow:0 12px 30px color-mix(in srgb,var(--text) 14%,transparent);transition-delay:0ms
 }
-.global-nav-item.is-menu-open .global-nav-card:hover,
 .global-nav-item.is-menu-open .global-nav-card[aria-current="page"],
-.global-nav-item:focus-within .global-nav-card:hover,
 .global-nav-item:focus-within .global-nav-card[aria-current="page"]{transform:translateX(4px)}
-.global-nav-card:hover::after,.global-nav-card[aria-current="page"]::after{opacity:1;transform:scale(1)}
+.global-nav-card[aria-current="page"]::after{opacity:1;transform:scale(1)}
 .global-nav-item.is-menu-open .global-nav-card:active,
 .global-nav-item:focus-within .global-nav-card:active{transform:scale(.96)}
 .global-nav-visual{
@@ -256,7 +246,6 @@ body .global-nav-trigger:active{transform:scale(.96)}
   background:rgba(10,15,13,.78);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   font-size:6px;font-style:normal;font-weight:740;letter-spacing:.08em;line-height:1.2;text-align:right
 }
-.global-nav-card:hover .global-nav-visual svg{filter:saturate(1.08) contrast(1.02);transform:scale(1.045) translateY(-1px)}
 .global-nav-card-copy{display:grid;gap:6px;min-width:0}
 .global-nav-card-copy strong{color:var(--heading);font-size:15px;line-height:1.3;text-wrap:balance}
 .global-nav-card-copy>span{color:var(--nav-muted);font-size:11px;line-height:1.45;text-wrap:pretty}
@@ -264,7 +253,6 @@ body .global-nav-trigger:active{transform:scale(.96)}
   align-self:center;color:var(--portal-coral,#f04b23);font-style:normal;opacity:.55;filter:blur(0);transform:translateX(0) scale(1);
   transition-property:opacity,filter,transform;transition-duration:180ms;transition-timing-function:var(--ease)
 }
-.global-nav-card:hover i{opacity:1;filter:blur(0);transform:translateX(4px) scale(1)}
 body .global-timeline-link{
   display:grid;place-items:center;min-width:124px;align-self:stretch;padding:0;color:var(--nav-text);
   background:transparent;border-left:1px solid var(--rule);
@@ -272,7 +260,6 @@ body .global-timeline-link{
   transition-property:background-color,color,transform;transition-duration:150ms;transition-timing-function:var(--ease)
 }
 body .global-timeline-link:visited{color:var(--nav-text)}
-body .global-timeline-link:hover{color:var(--heading);background:color-mix(in srgb,var(--nav-bg) 78%,var(--accent-soft))}
 body .global-timeline-link:active{transform:scale(.96)}
 .global-timeline-value{
   display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-width:96px;min-height:64px;
@@ -297,7 +284,7 @@ body .global-directory-panel{display:none}
 }
 .docs-rail-header a{color:var(--heading);font-size:20px;font-weight:760;text-decoration:none}
 .docs-rail-group{margin:0;padding:0;background:transparent;border:0;border-bottom:1px solid var(--rule)}
-.docs-rail-group:hover,.docs-rail-group[open]{background:transparent;border-color:var(--rule)}
+.docs-rail-group[open]{background:transparent;border-color:var(--rule)}
 .docs-rail-group>summary{
   display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:8px;
   min-height:50px;padding:8px 16px;list-style:none;color:var(--nav-text);cursor:pointer
@@ -314,7 +301,6 @@ body .global-directory-panel{display:none}
   transition-property:background-color,color,box-shadow,transform;transition-duration:150ms;transition-timing-function:var(--ease)
 }
 .docs-rail-links a:visited{color:var(--nav-muted)}
-.docs-rail-links a:hover{color:var(--nav-text);background:var(--paper)}
 .docs-rail-links a.active{
   color:var(--heading);background:var(--paper);font-weight:720;
   box-shadow:inset 4px 0 0 var(--portal-coral,#f04b23)
@@ -423,4 +409,33 @@ body .global-directory-panel{display:none}
   body .global-brand,body .global-nav-trigger,.global-nav-caret,.global-nav-menu,.global-nav-card,.global-nav-card::after,
   .global-nav-visual svg,.global-nav-card i,body .global-timeline-link,.global-timeline-value,
   .docs-rail-links a,.site-header .directory-panel nav{transition-duration:0s!important;transition-delay:0s!important}
+}
+
+/* Touch movement scrolls the page or menu; only precise pointers receive hover feedback. */
+@media(hover:hover) and (pointer:fine){
+  .site-header .directory-panel:hover{background:transparent;border-color:transparent}
+  .site-header .directory-panel .directory-title:hover{color:var(--link-hover);background:transparent}
+  .site-header .directory-panel .directory-parent:hover{color:var(--nav-text)}
+  .site-header .directory-panel .nav-section-toggle:hover{background:color-mix(in srgb,var(--paper-subtle) 72%,transparent)}
+  .site-header .directory-panel .nav-section-links a:hover{background:var(--paper-subtle);color:var(--nav-text)}
+  .no-script-navigation a:hover{background:var(--paper-subtle);color:var(--heading)}
+  body .global-brand:hover{color:var(--heading);background:var(--paper-subtle)}
+  body .global-nav-trigger:hover{color:var(--heading);background:var(--paper-subtle)}
+  .global-nav-card:hover{
+    color:var(--nav-text);background:color-mix(in srgb,var(--paper-subtle) 88%,var(--portal-mint,#68d7b2));
+    box-shadow:0 12px 30px color-mix(in srgb,var(--text) 14%,transparent);transition-delay:0ms
+  }
+  .global-nav-item.is-menu-open .global-nav-card:hover,
+  .global-nav-item:focus-within .global-nav-card:hover{transform:translateX(4px)}
+  .global-nav-card:hover::after{opacity:1;transform:scale(1)}
+  .global-nav-card:hover .global-nav-visual svg{filter:saturate(1.08) contrast(1.02);transform:scale(1.045) translateY(-1px)}
+  .global-nav-card:hover i{opacity:1;filter:blur(0);transform:translateX(4px) scale(1)}
+  body .global-timeline-link:hover{color:var(--heading);background:color-mix(in srgb,var(--nav-bg) 78%,var(--accent-soft))}
+  .docs-rail-group:hover{background:transparent;border-color:var(--rule)}
+  .docs-rail-links a:hover{color:var(--nav-text);background:var(--paper)}
+}
+
+@media(hover:none) and (pointer:coarse){
+  .site-header .directory-panel :is(.directory-parent,.nav-section-links a):active{transform:none}
+  .site-header .directory-panel :is(.directory-parent,.nav-section-links a){-webkit-tap-highlight-color:transparent}
 }
