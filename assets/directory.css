@@ -1,10 +1,3 @@
-.skip-link{
-  position:fixed;top:8px;left:8px;z-index:100;padding:8px 12px;
-  color:var(--nav-active-text);background:var(--nav-active);border:2px solid var(--paper);
-  transform:translateY(-160%);text-decoration:none
-}
-.skip-link:focus{transform:translateY(0)}
-
 .site-header{
   position:sticky;top:0;z-index:10;background:var(--nav-bg);
   border-bottom:1px solid var(--rule-strong);box-shadow:0 1px 0 color-mix(in srgb,var(--paper) 76%,transparent);
@@ -132,7 +125,7 @@ section[id]{scroll-margin-top:20px}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .skip-link,.site-header .directory-panel>summary::after,
+  .site-header .directory-panel>summary::after,
   .site-header .directory-panel .directory-parent,
   .site-header .directory-panel .nav-section-toggle,
   .site-header .directory-panel .nav-section-caret,
@@ -141,7 +134,7 @@ section[id]{scroll-margin-top:20px}
 }
 
 @media print{
-  .skip-link,.site-header{display:none}
+  .site-header{display:none}
 }
 
 /* Shared top navigation for every page role. */

@@ -2717,6 +2717,8 @@ def validate_jekyll_sources():
         ):
             if token not in layout_text:
                 errors.append(f"default layout missing contract: {token}")
+        if 'class="skip-link"' in layout_text or "跳到正文" in layout_text:
+            errors.append("default layout must not render the removed skip-to-content entry")
 
     if header.exists():
         header_text = header.read_text()
@@ -3897,6 +3899,8 @@ def main():
         if forbidden in (SOURCE_ROOT / relative_path).read_text():
             errors.append(f"{relative_path} retains overclaimed name maturity: {forbidden}")
     directory_css = DIRECTORY_CSS.read_text()
+    if ".skip-link" in directory_css:
+        errors.append("directory.css must not retain styles for the removed skip-to-content entry")
     for token in (
         "background:color-mix(in srgb,var(--paper) 90%,transparent)",
         "border:1px solid color-mix(in srgb,var(--rule) 64%,transparent)",
@@ -4453,8 +4457,8 @@ def main():
                 errors.append(
                     f"{rel}: section {section['heading']!r} is too thin for public documentation"
                 )
-        if parser.skip_links != 1 or parser.main_targets != 1:
-            errors.append(f"{rel}: missing unique skip link or main target")
+        if parser.skip_links != 0 or parser.main_targets != 1:
+            errors.append(f"{rel}: unexpected skip link or missing unique main target")
         stylesheet_paths = [urlsplit(stylesheet).path for stylesheet in parser.stylesheets]
         if len(parser.stylesheets) != 2 or not stylesheet_paths[0].endswith("assets/style.css") or not stylesheet_paths[1].endswith("assets/directory.css"):
             errors.append(f"{rel}: expected versioned style.css and directory.css stylesheets")
