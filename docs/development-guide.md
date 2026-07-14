@@ -34,7 +34,7 @@ badges: ["Claim First", "Spec First", "Evidence Boundaries"]
 
 ADR-0012 已把 Rust 1.97.0 选为未来 Ktisor 与制品形成侧读取核心的候选语言。当前没有组件实现；禁止 `unsafe`、第三方 crate、工具链锁、`Cargo.lock` 与 release 溢出检查都只是未来实现约束。C/Rust 语言材料只作历史研究依据，不进入生产代码。
 
-当前没有 Ktisor、Theor、CLI 工作区或实现级 fuzz。十四个 END-P1 字节向量描述预期行为，不能证明解析器、写入器或独立读取路径存在。未来实现遵循以下开发纪律：
+当前没有 Ktisor、Theor、CLI 工作区或实现级 fuzz。END-P1 的允许与拒绝字节向量描述预期行为，不能证明解析器、写入器或独立读取路径存在；精确集合以向量源和版本化验证结果为准。未来实现遵循以下开发纪律：
 
 - 锁定 `rhem/semion/skena/telis/krin/apor` 的最小语义、不变量、错误和资源限制。
 - 保持规范写入器、制品形成侧结构检查与 `endem ktise/elenk` 的确定性边界。

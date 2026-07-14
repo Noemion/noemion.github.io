@@ -13,7 +13,7 @@ permalink: "/specifications/iknem.html"
     <h2>直接结论</h2>
     <p class="lead">Iknem 不是把日志装进新格式，而是把证据主张限制在可复核的主体、方法、环境、时间和观察范围内。</p>
     <p>一项记录可以完整、带签名且来源明确，却仍然不适用于当前目标。证据集合也可以全部有效，却没有覆盖 <code>krin</code> 要求的全部关系、主体或时间。因此 Iknem 有效性、覆盖度、满足判断和最终决定必须分别计算。</p>
-    <p class="callout"><strong>当前状态：</strong>项目已经建立抽象 <code>IKN-CORE 0.1.0-draft</code>、九项威胁、十四个场景和十五个提案向量；Iknem 物理格式与组件接口仍待确定，也没有采集器、验证器、归并器、撤销服务或决定引擎。规范材料自洽不得描述为组件实现或稳定互操作。</p>
+    <p class="callout"><strong>当前状态：</strong>项目已经建立抽象 <code>IKN-CORE 0.1.0-draft</code>、威胁模型、非规范场景和允许/拒绝提案矩阵；Iknem 物理格式与组件接口仍待确定，也没有采集器、验证器、归并器、撤销服务或决定引擎。规范材料自洽不得描述为组件实现或稳定互操作。</p>
   </section>
 
   <section class="content-wide">
@@ -22,7 +22,7 @@ permalink: "/specifications/iknem.html"
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-core.md">IKN-CORE 规范源</a></td><td>主体、溯源、观察、类别、完整性、有效性、覆盖、决定与披露条款</td><td>0.1.0-draft</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-threat-model.md">Iknem 威胁模型</a></td><td>范围漂白、循环自证、证据升级、撤销失明、覆盖伪造和泄密</td><td>当前草案</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md">Iknem 自然语言场景</a></td><td>支持案例、反例和待确认事项；不是符合性条款</td><td>非规范场景</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/iknem/cases.json">Iknem 提案向量</a></td><td>九个允许分类与九个确定拒绝的资料一致性矩阵</td><td>仅检查资料一致性</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/iknem/cases.json">Iknem 提案向量</a></td><td>允许分类与确定拒绝的资料一致性矩阵</td><td>仅检查资料一致性；精确范围以向量源和版本化验证结果为准</td></tr>
       <tr><td><a href="../architecture/adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a></td><td>为什么采用这些边界，以及与 W3C、RATS、SLSA、GNU Guix 和 AI 遥测的关系</td><td>当前策略</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测研究</a></td><td>模型评审调用、偏差探针、统计汇总与使用决定的非规范边界</td><td>正在研究</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新研究</a></td><td>训练数据、反馈、派生模型、评测、发布与回滚的非规范边界</td><td>正在研究</td></tr>

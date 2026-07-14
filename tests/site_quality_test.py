@@ -2427,21 +2427,37 @@ def validate_jekyll_sources():
                     f"{source.relative_to(SOURCE_ROOT)} retains an overclaimed round-trip boundary: {phrase}"
                 )
 
-    semantic_vector_count = len(list((SOURCE_ROOT / "vectors" / "semantic").glob("*.json")))
-    p0_wire_count = len(
-        json.loads((SOURCE_ROOT / "vectors" / "wire" / "manifest.json").read_text())["vectors"]
-    )
-    p1_wire_count = len(
-        json.loads((SOURCE_ROOT / "vectors" / "wire" / "p1" / "manifest.json").read_text())["vectors"]
-    )
     downloads_text = (SOURCE_ROOT / "downloads" / "index.html").read_text()
     for token in (
-        f"{semantic_vector_count} 个 Endem 语义 JSON 向量",
-        f"{p0_wire_count} 个 END-P0 结构字节",
-        f"{p1_wire_count} 个 END-P1 字节",
+        "机器可读登记",
+        "向量源",
+        "版本化验证结果",
     ):
         if token not in downloads_text:
-            errors.append(f"downloads page has stale vector inventory: expected {token}")
+            errors.append(f"downloads page missing authoritative evidence inventory link: {token}")
+    volatile_inventory_pages = (
+        SOURCE_ROOT / "specifications" / "index.html",
+        SOURCE_ROOT / "specifications" / "iknem.html",
+        SOURCE_ROOT / "specifications" / "synem.html",
+        SOURCE_ROOT / "specifications" / "dromen.html",
+        SOURCE_ROOT / "specifications" / "authority.html",
+        SOURCE_ROOT / "development" / "implementation-roadmap.html",
+        SOURCE_ROOT / "downloads" / "index.html",
+        SOURCE_ROOT / "docs" / "development-guide.md",
+        SOURCE_ROOT / "docs" / "specifications-reference.md",
+    )
+    volatile_inventory_pattern = re.compile(
+        r"(?:[0-9]+|[一二三四五六七八九十百]+)\s*(?:个|类|项|组)\s*(?:"
+        r"[^。；，<\n]{0,16}(?:场景|威胁)|"
+        r"[^。；，<\n]{0,12}(?:提案|语义|字节|规范)向量"
+        r")|[0-9]+\s*个\s*(?:Iknem|Dromen|Endem|Synem|诊断|适配|身份|文本|授权)"
+    )
+    for source in volatile_inventory_pages:
+        match = volatile_inventory_pattern.search(source.read_text())
+        if match:
+            errors.append(
+                f"{source.relative_to(SOURCE_ROOT)} copies a drift-prone evidence inventory: {match.group(0)}"
+            )
     for token in (
         "先把变更写成可验证主张",
         "当前最多能声称",

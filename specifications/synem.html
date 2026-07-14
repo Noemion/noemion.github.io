@@ -57,15 +57,15 @@ permalink: "/specifications/synem.html"
     <h2>规范源与证据边界</h2>
     <ul>
       <li><code>spec/synem-core.md</code>：六条规范义务。</li>
-      <li><code>spec/synem-threat-model.md</code>：六类闭包与激活威胁。</li>
-      <li><code>spec/synem-scenarios.md</code>：十个非规范自然语言设计场景。</li>
-      <li><code>vectors/synem/cases.json</code>：十二个提案向量；只检查设计矩阵，不是解析器、Drasor 或运行时。</li>
+      <li><code>spec/synem-threat-model.md</code>：检查闭包替换、权限放大、结果洗白与激活竞态。</li>
+      <li><code>spec/synem-scenarios.md</code>：检查闭包、绑定、权限、成员结果与激活边界的非规范自然语言场景。</li>
+      <li><code>vectors/synem/cases.json</code>：允许分类与确定拒绝的提案矩阵；只检查资料一致性，不是解析器、Drasor 或运行时。</li>
     </ul>
   </section>
 
   <section class="content-band">
     <h2>当前状态</h2>
-    <p><strong>当前策略：</strong>SYN-CORE 0.1.0-draft 要求组合闭包完整、绑定精确、依赖有限无环、权限只能收窄，并把成员结果与会话激活分开。提案向量不得被描述为组件实现。</p><p><strong>待定内容：</strong>物理容器、版本约束语法、符号模型、执行顺序、受限循环、远程对象仓库与性能规模。独立归档格式需要先有实际使用需求。</p>
+    <p><strong>当前策略：</strong>SYN-CORE 0.1.0-draft 要求组合闭包完整、绑定精确、依赖有限无环、权限只能收窄，并把成员结果与会话激活分开。精确场景与向量范围以对应源文件和版本化验证结果为准；提案向量不得被描述为组件实现。</p><p><strong>待定内容：</strong>物理容器、版本约束语法、符号模型、执行顺序、受限循环、远程对象仓库与性能规模。独立归档格式需要先有实际使用需求。</p>
   </section>
   <div class="next-prev"><a href="endem.html">← Endem 规范</a><a href="dromen.html">Dromen 会话契约 →</a></div>
 </main>
