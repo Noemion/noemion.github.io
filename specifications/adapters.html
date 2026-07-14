@@ -37,10 +37,22 @@ permalink: "/specifications/adapters.html"
   <section class="content-wide">
     <h2>符合性材料</h2>
     <div class="table-wrap"><table><thead><tr><th>材料</th><th>当前覆盖</th><th>不能证明</th></tr></thead><tbody>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-threat-model.md">ADP-THREAT</a></td><td>12 类版本、身份、权限、副作用和安全威胁</td><td>真实网络和实现防护已经有效</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-scenarios.md">ADP-SCEN</a></td><td>18 个支持、反例与边界场景</td><td>场景本身是规范或协议测试</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/adapters">ADP-CORE 向量</a></td><td>24 个提案包含 12 个允许包络与 12 个确定拒绝</td><td>MCP、A2A、HTTP、SDK 或 Drasor 已经实现</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-threat-model.md">ADP-THREAT</a></td><td>覆盖版本、身份、权限、副作用和安全威胁</td><td>真实网络和实现防护已经有效</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-scenarios.md">ADP-SCEN</a></td><td>覆盖支持案例、反例与边界条件</td><td>场景本身是规范或协议测试</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/adapters">ADP-CORE 向量</a></td><td>覆盖允许包络与确定拒绝，并与当前条款保持对应</td><td>MCP、A2A、HTTP、SDK 或 Drasor 已经实现</td></tr>
     </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>协议基线怎样选择</h2>
+    <p class="lead">开发者不能从“最新”链接、SDK 包版本或服务器默认值推断适配版本。每个 Profile 都要固定协议修订、绑定、schema、传输和扩展，并把外部对象留在它原来的结果域。</p>
+    <div class="table-wrap"><table><thead><tr><th>资料</th><th>截至 2026-07-15 的位置</th><th>Noemion 中的用途</th></tr></thead><tbody>
+      <tr><td><a href="https://modelcontextprotocol.io/docs/learn/versioning">MCP 版本说明</a><br><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25</a></td><td><code>2025-11-25</code> 是官方当前修订（Current）；其中 Tasks 仍标为实验能力。</td><td>只作为当前研究与未来 Profile 的正式发布基线。工具说明、任务状态和返回值仍是不可信外部输入。</td></tr>
+      <tr><td><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">MCP 2026-07-28 发布候选</a></td><td>5 月 21 日锁定，计划 7 月 28 日发布最终版；无状态核心、扩展框架和新版 Tasks 含破坏性变化。</td><td>只用于提前发现迁移风险，不能冒充当前符合性基线，也不能与 2025-11-25 Tasks 混用。</td></tr>
+      <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a></td><td>官方已发布 1.0.0；协议协商使用主次版本 <code>1.0</code>，补丁号不参与兼容判断。</td><td>Task、Message、Artifact 和 Agent Card 保持外部来源；协议完成不等于本地满足、决定或证据充分。</td></tr>
+      <tr><td><a href="https://github.com/open-telemetry/semantic-conventions-genai">OpenTelemetry GenAI 语义约定</a></td><td>已迁入独立仓库；截至复核日，仓库 README 的 Schema URL 字段仍为 <code>TODO</code>。</td><td>当前没有可固定的 GenAI Schema URL。以后只能经明确版本、默认脱敏且可替换的导出映射单向发送观测；不能定义 Iknem 身份或验收规则。</td></tr>
+    </tbody></table></div>
+    <p class="callout"><strong>选择顺序：</strong>先写明互操作对象和信任边界，再选择正式发布版本；随后固定绑定与扩展，列出有损映射和关闭失败条件，最后用正反案例证明外部状态没有越权进入本地结果域。候选版只进入迁移研究，不进入生产或符合性声明。</p>
   </section>
 
   <section class="content-wide">

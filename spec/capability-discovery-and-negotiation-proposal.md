@@ -70,7 +70,7 @@
 
 ### A2A：声明支持也可能没有配置或没有权限
 
-[A2A 1.0 规范](https://github.com/a2aproject/A2A/blob/main/docs/specification.md)把 Agent Card 定义为身份、能力、技能、端点与认证要求的自描述资料。它要求客户端先按声明检查可选能力，但也定义了“声明支持扩展 Agent Card、实际却未配置”的独立错误；认证后的扩展 Card 还可能因主体不同而暴露不同技能。
+[A2A 1.0 版本化规范](https://a2a-protocol.org/v1.0.0/specification/)把 Agent Card 定义为身份、能力、技能、端点与认证要求的自描述资料。它要求客户端先按声明检查可选能力，但也定义了“声明支持扩展 Agent Card、实际却未配置”的独立错误；认证后的扩展 Card 还可能因主体不同而暴露不同技能。
 
 这说明 Agent Card 是可验证、可版本化的声明输入，不是完整运行事实。JWS 可以支持来源完整性，却不能证明技能真实可用、调用获权、输出正确或目标满足。A2A 的主次版本协商也不能代替具体技能、媒体类型和安全要求的逐项检查。
 
@@ -261,6 +261,6 @@ Noemion 借用的纪律是：选择外部工具不能只看产品名、路径、
 
 - [MCP 2025-11-25 生命周期](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle)：用于核对版本初始化、能力交换、协商与运行阶段分离；不作为本地业务授权模型。
 - [MCP 2025-11-25 工具规范](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)：用于核对工具列表、变更通知、schema、注解和调用结果；工具说明与注解不能取得本地权威。
-- [A2A 1.0 规范](https://github.com/a2aproject/A2A/blob/main/docs/specification.md)：用于核对 Agent Card、技能、协议版本、扩展 Card 和能力专属错误；Card 与签名不能替代授权、可用性或结果判断。
+- [A2A 1.0 版本化规范](https://a2a-protocol.org/v1.0.0/specification/)：用于核对 Agent Card、技能、协议版本、扩展 Card 和能力专属错误；Card 与签名不能替代授权、可用性或结果判断。
 - [RFC 8707 Resource Indicators for OAuth 2.0](https://www.rfc-editor.org/rfc/rfc8707.html)：用于分开 scope 与目标资源、限制令牌受众；不定义 Noemion 的语义权威或完整动作范围。
 - [GNU Autoconf 2.73 手册](https://www.gnu.org/software/autoconf/manual/autoconf.html)：用于借鉴特性检查优先于版本猜测，以及对候选程序执行具体 feature test；配置期探测和缓存不能成为运行期授权或持续可用证明。

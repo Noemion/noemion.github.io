@@ -21,7 +21,7 @@
 
 [`diagnostics-core.md`](diagnostics-core.md) 定义跨对象诊断内容边界，[`diagnostic-catalog.md`](diagnostic-catalog.md) 登记草案机器码。[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存 JSON 语义外壳；`../vectors/diagnostics/` 保存诊断资料一致性提案；`../vectors/wire/` 保存真实字节的十六进制表达。这些向量都不表示组件已经实现。
 
-[`adapter-threat-model.md`](adapter-threat-model.md) 与 [`adapter-scenarios.md`](adapter-scenarios.md) 分别保存外部协议适配威胁和十五个非规范设计场景。`../vectors/adapters/cases.json` 保存 ADP-CORE 的二十四个提案向量；`../tests/adapter_vector_test.py` 只检查十二条抽象规则，不实现 MCP、A2A、HTTP、SDK、凭据、重试、Webhook、Drasor 或运行时。
+[`adapter-threat-model.md`](adapter-threat-model.md) 与 [`adapter-scenarios.md`](adapter-scenarios.md) 分别保存外部协议适配威胁和非规范设计场景。`../vectors/adapters/cases.json` 保存 ADP-CORE 的提案向量；`../tests/adapter_vector_test.py` 只检查十二条抽象规则，不实现 MCP、A2A、HTTP、SDK、凭据、重试、Webhook、Drasor 或运行时。精确场景与向量范围以对应源文件和测试输出为准。
 
 [`identity-threat-model.md`](identity-threat-model.md) 与 [`identity-scenarios.md`](identity-scenarios.md) 分别保存精确身份与签名威胁和十五个非规范设计场景。`../vectors/identity/cases.json` 保存 ID-CORE 的二十四个提案向量；`../tests/identity_vector_test.py` 只检查十二条抽象规则，不实现摘要器、签名器、验证器、证书、透明日志、撤销分发、可复现构建或发布系统。
 

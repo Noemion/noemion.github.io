@@ -129,7 +129,7 @@ ID-CORE 已规定：内容身份绑定精确规范输入与字节；变换、裁
 当前 AI 协议也支持这项分离：
 
 - [MCP 2025-11-25 Tasks](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks)把 `completed / failed / cancelled` 定义为任务终态，并要求 `tasks/result` 另行返回底层请求的最终结果；任务完成本身不是业务判断。
-- [A2A 最新规范](https://github.com/a2aproject/A2A/blob/main/docs/specification.md)把 `completed / failed / canceled / rejected` 作为 Task 终态，同时把 `input_required / auth_required` 作为中断状态。外部 Agent 的任务状态不能直接成为 Noemion 的满足结果、权威决定或会话证据。
+- [A2A 1.0 版本化规范](https://a2a-protocol.org/v1.0.0/specification/)把 `completed / failed / canceled / rejected` 作为 Task 终态，同时把 `input_required / auth_required` 作为中断状态。外部 Agent 的任务状态不能直接成为 Noemion 的满足结果、权威决定或会话证据。
 
 因此五域结构继续成立，但名称应带域限定：
 

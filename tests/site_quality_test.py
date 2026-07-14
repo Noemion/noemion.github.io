@@ -590,6 +590,12 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "ADP-DEL-001",
             "ADP-SEC-001",
             "不可信候选",
+            "协议基线怎样选择",
+            "MCP 2025-11-25",
+            "MCP 2026-07-28 发布候选",
+            "A2A 1.0 版本化规范",
+            "Schema URL 字段仍为",
+            "候选版只进入迁移研究",
             "当前没有具体协议 Profile",
         ),
     },
@@ -720,8 +726,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "drase",
             "GNU Binutils",
             "GNU objcopy",
-            "MCP Tasks",
-            "A2A Specification",
+            "MCP 2025-11-25 Tasks",
+            "A2A 1.0 版本化规范",
             "OpenAI Agents SDK handoffs",
             "conformance:",
             "不是公开动作",
@@ -1780,7 +1786,7 @@ def validate_jekyll_sources():
             "in-toto Attestation Framework",
             "GNU Automake",
             "MCP 2025-11-25 Tasks",
-            "A2A 最新规范",
+            "A2A 1.0 版本化规范",
             "W3C SCXML",
             "NIST AI RMF Core",
             "候选词不是别名、兼容值或规范化结果",
@@ -2000,7 +2006,7 @@ def validate_jekyll_sources():
             "不进入 `registry.json`",
             "六类事实必须分开",
             "MCP 2025-11-25 生命周期",
-            "A2A 1.0 规范",
+            "A2A 1.0 版本化规范",
             "RFC 8707",
             "GNU Autoconf 2.73",
             "新能力不能扩写旧 Dromen",
@@ -2489,6 +2495,7 @@ def validate_jekyll_sources():
             errors.append(f"downloads page missing authoritative evidence inventory link: {token}")
     volatile_inventory_pages = (
         SOURCE_ROOT / "specifications" / "index.html",
+        SOURCE_ROOT / "specifications" / "adapters.html",
         SOURCE_ROOT / "specifications" / "iknem.html",
         SOURCE_ROOT / "specifications" / "synem.html",
         SOURCE_ROOT / "specifications" / "dromen.html",
@@ -3186,7 +3193,8 @@ def validate_jekyll_sources():
             "A2A 1.0 版本化规范",
             "补丁号不进入协议协商",
             "github.com/open-telemetry/semantic-conventions-genai",
-            "MCP 2025-11-25 稳定规范",
+            "MCP 2025-11-25 当前修订（Current）",
+            "Schema URL 字段仍为",
             "GNU Automake 测试结果语义",
             "后续版本在正式发布",
             "敏感内容不得默认导出",
@@ -3200,8 +3208,10 @@ def validate_jekyll_sources():
         ),
         "components/drasor.html": (
             "A2A 1.0 版本化规范",
+            "MCP 2025-11-25 当前修订（Current）",
             "令牌必须绑定目标资源",
             "github.com/open-telemetry/semantic-conventions-genai",
+            "Schema URL 字段仍为",
             "默认不导出正文",
             "completed / failed / interrupted",
             "不得推成",
@@ -3211,6 +3221,7 @@ def validate_jekyll_sources():
             "5 月 21 日",
             "不作为当前符合性基线",
             "任何后续正式版本",
+            "Schema URL 字段仍为",
             "默认脱敏的导出器",
             "不进入 Endem 编码、Iknem 身份或最终决定",
             "扩大范围前需要的证据",
@@ -3218,7 +3229,7 @@ def validate_jekyll_sources():
         ),
         "endem/docs/running.md": (
             "A2A 1.0 版本化规范",
-            "后续正式版本",
+            "只有正式发布并完成",
             "默认不导出正文",
             "不构成 Iknem 身份",
         ),
@@ -3289,6 +3300,20 @@ def validate_jekyll_sources():
             if token not in boundary_text:
                 errors.append(
                     f"{relative_path}: missing external technology boundary {token!r}"
+                )
+    stale_protocol_phrases = (
+        "MCP 2025-11-25 稳定规范",
+        "A2A 最新规范",
+        "github.com/a2aproject/A2A/blob/main/docs/specification.md",
+        "Schema URL 待定",
+        "Schema URL 仍待确定",
+    )
+    for protocol_reference_file in protocol_reference_files:
+        protocol_reference_text = protocol_reference_file.read_text()
+        for phrase in stale_protocol_phrases:
+            if phrase in protocol_reference_text:
+                errors.append(
+                    f"{protocol_reference_file.relative_to(SOURCE_ROOT)}: stale protocol baseline phrase {phrase!r}"
                 )
     design_index = design_root / "README.md"
     if not design_index.exists():

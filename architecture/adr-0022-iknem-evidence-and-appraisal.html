@@ -80,7 +80,7 @@ permalink: "/architecture/adr-0022-iknem-evidence-and-appraisal.html"
       <li><a href="https://www.rfc-editor.org/rfc/rfc9334.html">RFC 9334 RATS Architecture</a>分开 Evidence、验证者的 Attestation Results 和依赖方自己的评估政策。Iknem 同样不允许验证者替代应用权威作出最终决定。</li>
       <li><a href="https://slsa.dev/spec/v1.2/provenance">SLSA 1.2 Provenance</a>把外部参数视为不可信输入，并要求记录构建定义、运行细节、解析后的依赖与输出主体。Iknem 借鉴精确输入和生产者边界，不把构建证明当成通用事实证明。</li>
       <li><a href="https://guix.gnu.org/manual/en/html_node/Invoking-guix-challenge.html">GNU Guix 的 guix challenge</a>比较本地与替代服务器的独立构建结果。结果不同可以定位不可复现或潜在篡改，却不能单凭差异决定哪一方正确。</li>
-      <li><a href="https://github.com/open-telemetry/semantic-conventions-genai">OpenTelemetry GenAI 语义约定独立仓库</a>正在继续定义 GenAI、MCP、供应商跨度、指标和事件，当前 Schema URL 仍待确定。它只适合作为带版本、默认脱敏的导出映射，不进入 Iknem 身份。</li>
+      <li><a href="https://github.com/open-telemetry/semantic-conventions-genai">OpenTelemetry GenAI 语义约定独立仓库</a>正在继续定义 GenAI、MCP、供应商跨度、指标和事件；仓库 README 的 Schema URL 字段仍为 <code>TODO</code>。形成可固定基线后，它也只适合作为带版本、默认脱敏的导出映射，不进入 Iknem 身份。</li>
       <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/security_best_practices">MCP Security Best Practices</a>禁止 token passthrough，并强调受众、范围和最小权限。Iknem 可以记录不可逆凭据属性和调用范围，但不得保存令牌正文或实时能力句柄。</li>
     </ul>
   </section>
