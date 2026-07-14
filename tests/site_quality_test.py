@@ -135,7 +135,7 @@ DOC_GUIDE_HEADINGS = {
         "最小系统图", "用一次 Agent 工作读图", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
     ],
     "docs/development-guide.html": [
-        "第一阶段范围", "规范与 ADR 先行", "实现工作流", "建议仓库边界", "审查清单", "模型与协议",
+        "先定义变更主张", "当前范围", "规范与 ADR 先行", "变更工作流", "建议仓库边界", "审查清单", "模型与协议",
     ],
     "docs/endem-reference.html": [
         "应用总览", "Ktisor 子命令", "theor 的独立性", "drase 的隔离性", "不建设独立模型平台",
@@ -2410,8 +2410,28 @@ def validate_jekyll_sources():
     ):
         if token not in downloads_text:
             errors.append(f"downloads page has stale vector inventory: expected {token}")
-    if f"{semantic_vector_count} 个 Endem 语义向量" not in verification_text:
-        errors.append("testing guide semantic vector count must match vectors/semantic")
+    for token in (
+        "先把变更写成可验证主张",
+        "当前最多能声称",
+        "Chrome 阅读检查",
+        "外部成功不等于本地满足或接受",
+        "各向量集合的精确数量和执行结果以机器可读条款登记与对应测试输出为准",
+        "不在说明页重复容易漂移的计数",
+    ):
+        if token not in verification_text:
+            errors.append(f"testing guide missing change-to-evidence boundary: {token}")
+    for stale_count in ("十五个 Iknem", "十八个 Iknem"):
+        if stale_count in verification_text:
+            errors.append("testing guide must not copy drift-prone Iknem vector counts")
+    development_guide_text = (SOURCE_ROOT / "docs" / "development-guide.md").read_text()
+    for token in (
+        "先写一句可被反例推翻的主张",
+        "当前没有适配器实现",
+        "未执行不能写成通过",
+        "最多只能声称规范和案例保持一致",
+    ):
+        if token not in development_guide_text:
+            errors.append(f"development guide missing falsifiable change boundary: {token}")
     for source in (
         SOURCE_ROOT / "components" / "ktisor.html",
         SOURCE_ROOT / "development" / "testing.html",

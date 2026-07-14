@@ -76,7 +76,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Installation and usage](https://noemion.github.io/docs/installation-and-usage.html) — current availability and future release principles
 - [Terminology and pronunciation validation](https://noemion.github.io/docs/terminology-and-pronunciation.html) — human first-read, listen-back, responsibility matching, statistical boundary, and release-name stop rules
 - [Architecture guide](https://noemion.github.io/docs/architecture-guide.html) — system layers, lifecycle, and trust boundaries
-- [Development guide](https://noemion.github.io/docs/development-guide.html) — specification-first workflow, testing, and contribution guidance
+- [Development guide](https://noemion.github.io/docs/development-guide.html) — change claims, normative sources, failure ownership, minimum evidence, and claim limits
 - [Endem application reference](https://noemion.github.io/docs/endem-reference.html) — Endem actions, components, trust boundaries, and current status
 - [Specifications reference](https://noemion.github.io/docs/specifications-reference.html) — task-based source lookup, authority order, research status, ADRs, and evidence boundaries
 
@@ -85,7 +85,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Development](https://noemion.github.io/development/index.html) — current work, validation strategy, and future planning
 - [Current stage](https://noemion.github.io/development/current-stage.html) — completed work, active design, and planned work
 - [Implementation roadmap](https://noemion.github.io/development/implementation-roadmap.html) — phases, application responsibilities, and completion criteria
-- [Testing strategy](https://noemion.github.io/development/testing.html) — determinism, fuzzing, malformed inputs, and consistency testing
+- [Testing strategy](https://noemion.github.io/development/testing.html) — change-to-evidence matrix, failure paths, determinism, malformed inputs, and claim limits
 - [Downloads and resource status](https://noemion.github.io/downloads/index.html) — truthful availability, signing, and release-resource status
 - [News and progress](https://noemion.github.io/news/index.html) — dated, verifiable project updates
 

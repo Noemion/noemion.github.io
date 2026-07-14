@@ -7,7 +7,15 @@ permalink: "/development/testing.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>测试与验证</span></nav>
-  <header class="content-introduction"><h1>测试与验证</h1><p>Endem、Synem 与 Drasor 只有通过明确失败路径，才能获得对应范围的信任。</p><div class="badges"><span class="badge">Malformed Corpus</span><span class="badge">Cross-reader</span><span class="badge">Reproducible</span></div></header>
+  <header class="content-introduction"><h1>测试与验证</h1><p>每项验证先声明变更主张、规范域、失败路径和声明上限；一组通过案例不能自动扩展为组件安全或互操作结论。</p><div class="badges"><span class="badge">Claim</span><span class="badge">Failure</span><span class="badge">Evidence</span></div></header>
+
+  <section class="content-wide"><h2>先把变更写成可验证主张</h2><p class="callout"><strong>直接结论：</strong>测试数量不是起点。开发者先说明要改变什么、哪份资料具有约束力、什么结果应被拒绝，以及证据最多支持哪一层结论。</p><div class="table-wrap"><table><thead><tr><th>变更类型</th><th>权威起点</th><th>最低证据</th><th>当前最多能声称</th></tr></thead><tbody>
+    <tr><td>解释与公开文案</td><td>对应 CORE、Profile、现行 ADR 和页面角色</td><td>权威链接、状态边界、源码检查、构建结果和 Chrome 阅读检查</td><td>页面与现行资料一致；不能声称组件存在</td></tr>
+    <tr><td>语义或结果边界</td><td>END-CORE 及对应判断 ADR</td><td>支持案例、反例、唯一条款、正反向量和结果域拒绝</td><td>草案对已登记案例给出一致分类</td></tr>
+    <tr><td>Profile 或物理格式</td><td>END-CORE、END-FMT 与封闭 Profile</td><td>合法和畸形字节、资源上限、确定拒绝位置和版本绑定</td><td>实验格式符合已登记向量；不是稳定 ABI</td></tr>
+    <tr><td>外部协议或 Agent 状态</td><td>ADP-CORE、DRO-CORE、IKN-CORE、AUT-CORE 与固定外部版本</td><td>来源保留、版本冲突、越权、取消、重试、交付和结果域反例</td><td>映射规则保持边界；外部成功不等于本地满足或接受</td></tr>
+    <tr><td>未来组件实现</td><td>条款、威胁模型、诊断目录与实现范围</td><td>双读取器、畸形语料、性质测试、模糊测试、故障注入和独立复现</td><td>只支持实际执行过的组件、平台和配置</td></tr>
+  </tbody></table></div><p>不知道从哪份资料开始时，先用<a href="../docs/specifications-reference.html">规范参考指南的工程问题索引</a>定位权威源。若外部 Task 显示 <code>completed</code>，验证应先检查来源映射、会话能力、证据范围和决定权威，不能把成功状态直接写入 Endem 结果。</p></section>
 
   <section class="content-rows"><h2>解析与资源安全</h2><p class="callout"><strong>基本规则：</strong>“合法样例通过”只证明一条成功路径。畸形、冲突、越权、超限和不完整输入必须稳定、快速且不产生部分可信结果地失败。</p><ul>
     <li>覆盖非法偏移、长度、计数、索引、对齐、重叠、环、自引用、超深图、压缩炸弹和恶意大计数。</li>
@@ -31,13 +39,13 @@ permalink: "/development/testing.html"
     <li>差异必须被视为实现或规范缺陷，不能用“多数实现一致”掩盖。</li>
   </ul></section>
 
-  <section class="content-rows"><h2>当前验证材料能证明什么</h2><p class="callout"><strong>当前证据：</strong>登记、语义向量、专题提案向量、Iknem 证据向量、实验字节和来源样例可以比较预期接受或拒绝结果。这些材料只证明规范之间是否自洽，不代表 Ktisor、Theor、Drasor、求值器或决定引擎已经存在。</p><ul>
-    <li>现有验证覆盖已登记字段、引用、来源范围、排序、资源边界和结果域禁止转换案例。</li>
-    <li>10 个 Endem 语义向量包含三个接受、七个确定性拒绝和一组外部语境身份等价检查；测试语境不是 Endem 字节或授权物理格式。</li>
-    <li>规范向量描述未来实现必须共同处理的正反案例，但不证明任何组件已经满足这些要求。</li>
-    <li>当前没有组件依赖树、可执行文件复现、实现级模糊测试、故障注入、签名或 SBOM 证据。</li>
-      <li>Ktisor 与 Theor 的实现必须分别接受同一组测试。</li>
-  </ul></section>
+  <section class="content-wide"><h2>当前验证材料能证明什么</h2><p class="callout"><strong>当前证据：</strong>现有材料可以比较草案对已登记输入的接受和拒绝结果。它们不能证明 Ktisor、Theor、Drasor、求值器或决定引擎已经存在。</p><div class="table-wrap"><table><thead><tr><th>材料</th><th>当前用途</th><th>不能据此声称</th></tr></thead><tbody>
+    <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读条款登记</a></td><td>连接规范版本、条款、威胁、验证方式和向量集合</td><td>登记本身不是执行结果或组件符合性声明</td></tr>
+    <tr><td>自然语言场景</td><td>检查支持案例、反例、歧义和责任遗漏</td><td>场景不是规范条款、解析能力或互操作证据</td></tr>
+    <tr><td>语义、专题与字节向量</td><td>固定当前草案的允许包络、确定拒绝和失败位置</td><td>向量通过不证明运行组件、安全隔离或稳定 ABI</td></tr>
+    <tr><td>资料一致性测试</td><td>执行登记矩阵，并核对条款、页面与向量的连接</td><td>这些测试不是实现级模糊测试、故障注入或跨平台复现</td></tr>
+    <tr><td>当前缺失证据</td><td>记录尚不能验证的层次</td><td>当前没有组件依赖树、可执行文件复现、签名或 SBOM 证据</td></tr>
+  </tbody></table></div><p>各向量集合的精确数量和执行结果以机器可读条款登记与对应测试输出为准，不在说明页重复容易漂移的计数。未来 Ktisor 与 Theor 必须分别接受同一组适用向量。</p></section>
 
   <section class="content-rows"><h2>语义与歧义保留</h2><ul>
     <li>逐来源单元验证记号、符号、指称、关系角色、作用域、力量、满足条件和待确认分支得到保留。</li>
@@ -45,14 +53,9 @@ permalink: "/development/testing.html"
     <li>模型置信度不能关闭 <code>apor</code>；只有规则可重推导或具名语义决定才能确认语义。</li>
     <li>一个 Endem 只能有一个根 <code>skena</code>；多目标组合必须通过显式引用进入 Synem。</li>
     <li>违反 Profile 或无允许投影的输入必须稳定返回 <code>aseme</code>；观察不足必须返回 <code>agno</code>，不能混入 <code>apor</code>。</li>
-    <li>十二个结果域提案向量分别执行 <code>met/unmet/agno/fault</code>、<code>accepted/rejected/deferred</code>、Drase 会话和证据状态的允许组合与拒绝路径；它们不模拟运行组件。</li>
-    <li>十二个 <code>mene</code> 提案向量检查固定区间、经过时长、连续性预算、观测缺口和时钟故障的分类边界；它们不是计时器、监控器或求值组件。</li>
-    <li>十二个否定与缺席提案向量检查显式负观察、空结果、封闭范围、正反例和观察故障；它们不是日志收集器、Drasor 或求值组件。</li>
-    <li>十二个量化与成员资格提案向量检查集合范围、空集合、不同成员计数和决定性聚合；它们不是成员目录、Drasor 或求值组件。</li>
-    <li>十二个测量与阈值提案向量检查构念与总体、单位换算、窗口、聚合器、不确定区间和阈值分类；它们不是采集器、统计引擎、Drasor 或求值组件。</li>
-    <li>十二个复合事态与判据提案向量检查单根边界、有限无环拓扑、叶对齐、四结果传播和决定性短路；它们不是解析器、Drasor、运行时或求值组件。</li>
-    <li>十二个 Synem 提案向量检查完整闭包、精确绑定、有限无环、权限交集、成员结果和激活四状态；它们不是 Pleko、解析器、Drasor 或运行时。</li>
-    <li>十五个 Iknem 提案向量检查精确主体、有限范围、无环溯源、观察类别、完整性、外部有效性、相对 krin 的覆盖、决定权限和最小披露；它们不是采集器、验证器、归并器、撤销服务或决定引擎。</li>
+    <li>结果域、时间、否定、量化、测量与复合判断分别保留自己的允许组合和拒绝路径；这些向量不模拟运行组件。</li>
+    <li>Synem 向量检查完整闭包、精确绑定、有限无环、权限交集、成员结果和激活状态；它们不是 Pleko、解析器或运行时。</li>
+    <li>Iknem 向量检查精确主体、有限范围、无环溯源、观察类别、完整性、外部有效性、相对 <code>krin</code> 的覆盖、决定权限和最小披露；它们不是采集器、验证器、撤销服务或决定引擎。</li>
   </ul></section>
 
   <section class="content-rows"><h2>绑定、发布与签名</h2><ul>
