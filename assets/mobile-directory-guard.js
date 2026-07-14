@@ -3,8 +3,6 @@
 
   const mobileViewport = window.matchMedia("(max-width: 999px)");
   const root = document.documentElement;
-  const scrollPositionAttribute = "data-mobile-directory-scroll-y";
-  const scrollOffsetProperty = "--mobile-directory-scroll-offset";
   const viewportHeightProperty = "--mobile-directory-viewport-height";
   let touchY = null;
 
@@ -39,34 +37,16 @@
 
   const lockPageScroll = () => {
     if (root.classList.contains("mobile-directory-open")) return;
-    const scrollY = window.scrollY || root.scrollTop || 0;
     touchY = null;
-    root.setAttribute(scrollPositionAttribute, String(scrollY));
-    root.style.setProperty(scrollOffsetProperty, `${-scrollY}px`);
     root.classList.add("mobile-directory-open");
     syncViewportHeight();
   };
 
   const unlockPageScroll = () => {
     if (!root.classList.contains("mobile-directory-open")) return;
-    const scrollY = Number(root.getAttribute(scrollPositionAttribute)) || 0;
-    const previousScrollBehavior = root.style.scrollBehavior;
-    root.style.scrollBehavior = "auto";
     root.classList.remove("mobile-directory-open");
-    root.style.removeProperty(scrollOffsetProperty);
     root.style.removeProperty(viewportHeightProperty);
-    root.removeAttribute(scrollPositionAttribute);
-    root.scrollTop = scrollY;
-    document.body.scrollTop = scrollY;
-    window.scrollTo(0, scrollY);
-    root.style.scrollBehavior = previousScrollBehavior;
     touchY = null;
-  };
-
-  const holdLockedPagePosition = () => {
-    if (!root.classList.contains("mobile-directory-open")) return;
-    if (window.scrollX === 0 && window.scrollY === 0) return;
-    window.scrollTo(0, 0);
   };
 
   window.noemionMobileDirectoryScroll = Object.freeze({
@@ -119,6 +99,16 @@
     scrollMenuBy(scrollContainer, deltaY);
   };
 
+  const pageScrollKeys = new Set([
+    "PageUp", "PageDown", "Home", "End", "ArrowUp", "ArrowDown", " "
+  ]);
+
+  const containKeyboardScroll = (event) => {
+    if (!mobileViewport.matches || !openPanel() || !pageScrollKeys.has(event.key)) return;
+    const scrollContainer = openScrollContainer();
+    if (!scrollContainer?.contains(event.target)) event.preventDefault();
+  };
+
   const forgetTouch = () => {
     touchY = null;
   };
@@ -128,9 +118,9 @@
   document.addEventListener("touchmove", containTouch, { passive: false, capture: true });
   document.addEventListener("touchend", forgetTouch, { passive: true, capture: true });
   document.addEventListener("touchcancel", forgetTouch, { passive: true, capture: true });
+  document.addEventListener("keydown", containKeyboardScroll, { capture: true });
   window.visualViewport?.addEventListener("resize", syncViewportHeight, { passive: true });
   window.addEventListener("orientationchange", syncViewportHeight, { passive: true });
-  window.addEventListener("scroll", holdLockedPagePosition, { passive: true });
 
   document.addEventListener("click", (event) => {
     const summary = event.target.closest?.(".global-directory-panel > summary");

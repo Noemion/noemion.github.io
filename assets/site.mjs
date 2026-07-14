@@ -4,17 +4,15 @@ const version = scriptUrl.search;
 const moduleUrl = (name) => new URL(`modules/${name}.mjs${version}`, scriptUrl);
 const dataUrl = new URL(`navigation-data.json${version}`, scriptUrl);
 const coverUrl = new URL("nav-covers.svg", scriptUrl).href;
-const { RouteModel } = await import(moduleUrl("route-model"));
+const routeModelModulePromise = import(moduleUrl("route-model"));
+const directoryModulePromise = import(moduleUrl("directory-navigation"));
+const navigationStoreModulePromise = import(moduleUrl("navigation-store"));
+const navigationDataPromise = navigationStoreModulePromise
+  .then(({ NavigationStore }) => new NavigationStore(dataUrl).load());
+const { RouteModel } = await routeModelModulePromise;
 const routeModel = new RouteModel(siteRoot, window.location.href);
 
-let storePromise;
-const loadStore = async () => {
-  if (!storePromise) {
-    storePromise = import(moduleUrl("navigation-store"))
-      .then(({ NavigationStore }) => new NavigationStore(dataUrl).load());
-  }
-  return storePromise;
-};
+const loadStore = () => navigationDataPromise;
 
 const globalRoot = document.querySelector("[data-global-nav]");
 let globalControllerPromise;
@@ -51,7 +49,7 @@ let directoryPromise;
 const ensureDirectory = async () => {
   if (!directoryRoot) return;
   if (!directoryPromise) {
-    directoryPromise = import(moduleUrl("directory-navigation")).then(async (module) => {
+    directoryPromise = directoryModulePromise.then(async (module) => {
       const manual = module.directoryFromDocsRail(document.querySelector("[data-docs-rail]"));
       const moduleKey = manual?.moduleKey || routeModel.moduleKey();
       const directory = manual?.directory || (await loadStore()).modules[moduleKey];

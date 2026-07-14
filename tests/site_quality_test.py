@@ -2580,6 +2580,11 @@ def validate_jekyll_sources():
             "{{ '/assets/theme.js' | relative_url }}",
             "{{ '/assets/mobile-directory-guard.js' | relative_url }}",
             "{{ '/assets/site.mjs' | relative_url }}",
+            'rel="modulepreload"',
+            "{{ '/assets/modules/directory-navigation.mjs' | relative_url }}",
+            "{{ '/assets/modules/navigation-store.mjs' | relative_url }}",
+            "{{ '/assets/navigation-data.json' | relative_url }}",
+            'as="fetch" crossorigin="anonymous"',
             'type="module"',
             "site.github.build_revision",
             "?v={{ asset_version | escape }}",
@@ -2602,6 +2607,7 @@ def validate_jekyll_sources():
         for token in (
             "data-global-nav",
             "global-directory-panel",
+            "data-directory-backdrop",
             "data-site-timeline",
             "<span>导航</span>",
             'class="directory-loading-status" role="status"',
@@ -2686,7 +2692,8 @@ def validate_jekyll_sources():
             'document.addEventListener("touchmove", containTouch, { passive: false, capture: true })',
             'document.addEventListener("touchend", forgetTouch, { passive: true, capture: true })',
             'document.addEventListener("touchcancel", forgetTouch, { passive: true, capture: true })',
-            'window.addEventListener("scroll", holdLockedPagePosition, { passive: true })',
+            'document.addEventListener("keydown", containKeyboardScroll, { capture: true })',
+            'const pageScrollKeys = new Set([',
             'window.visualViewport?.addEventListener("resize", syncViewportHeight, { passive: true })',
             'window.addEventListener("orientationchange", syncViewportHeight, { passive: true })',
             'window.visualViewport?.height || window.innerHeight',
@@ -2694,21 +2701,24 @@ def validate_jekyll_sources():
             "if (touchY === null)",
             'panel.open = pendingOpen',
             'window.noemionMobileDirectoryScroll = Object.freeze',
-            'root.setAttribute(scrollPositionAttribute, String(scrollY))',
-            'root.style.setProperty(scrollOffsetProperty, `${-scrollY}px`)',
             'root.classList.add("mobile-directory-open")',
             'root.classList.remove("mobile-directory-open")',
             'root.style.removeProperty(viewportHeightProperty)',
-            'root.style.scrollBehavior = "auto"',
-            'root.scrollTop = scrollY',
-            'document.body.scrollTop = scrollY',
-            'window.scrollTo(0, scrollY)',
-            'root.style.scrollBehavior = previousScrollBehavior',
             'toggleAttribute("aria-busy", pendingOpen)',
             'panel.dispatchEvent(new CustomEvent("noemion:directoryrequest"))',
         ):
             if token not in guard_text:
                 errors.append(f"mobile directory first-open guard missing contract: {token}")
+        for forbidden in (
+            "scrollPositionAttribute",
+            "scrollOffsetProperty",
+            "holdLockedPagePosition",
+            "--mobile-directory-scroll-offset",
+            "window.scrollTo(0, scrollY)",
+            "document.body.scrollTop = scrollY",
+        ):
+            if forbidden in guard_text:
+                errors.append(f"mobile directory guard must not reposition page content: {forbidden}")
 
     style = SOURCE_ROOT / "assets/style.css"
     directory_style = SOURCE_ROOT / "assets/directory.css"
@@ -2742,12 +2752,12 @@ def validate_jekyll_sources():
             'body:not([data-page-role="portal"]) .global-directory-panel',
             'transition-duration:180ms;transition-timing-function:cubic-bezier(.2,0,0,1);transition-delay:0s',
             '.site-header .directory-panel.is-closing nav',
-            'html.mobile-directory-open{overflow:hidden;overscroll-behavior:none}',
-            'html.mobile-directory-open body{',
-            'position:fixed;top:var(--mobile-directory-scroll-offset,0)',
-            'html.mobile-directory-open body .global-header{',
-            'position:fixed;top:0;right:8px;left:8px;width:auto;margin:0',
-            'backdrop-filter:none;-webkit-backdrop-filter:none',
+            'html.mobile-directory-open{overscroll-behavior:none}',
+            'background:color-mix(in srgb,var(--paper) 98%,transparent);backdrop-filter:none;-webkit-backdrop-filter:none',
+            '.global-directory-panel[open]>.mobile-directory-backdrop{',
+            'position:fixed;inset:0;z-index:1;display:block;background:transparent',
+            'transition-property:opacity,transform,visibility',
+            'will-change:opacity,transform;contain:layout paint;backface-visibility:hidden',
             'height:auto;max-height:calc(var(--mobile-directory-viewport-height,100dvh) - 72px)',
             'html.mobile-directory-open body:not([data-page-role="portal"]) .global-directory-panel nav{',
             'height:auto;max-height:calc(var(--mobile-directory-viewport-height,100dvh) - 120px)',
@@ -2792,6 +2802,16 @@ def validate_jekyll_sources():
                 errors.append(f"shared styles missing site-wide design contract: {token}")
         if re.search(r"transition\s*:\s*all\b", shared_css):
             errors.append("shared styles must not use transition: all")
+        if re.search(r"html\.mobile-directory-open\s+body\s*\{", shared_css):
+            errors.append("mobile directory must not replace body layout while the overlay is open")
+        if re.search(r"html\.mobile-directory-open\s*\{[^}]*overflow\s*:", shared_css):
+            errors.append("mobile directory must not change root overflow while the overlay is open")
+        if re.search(
+            r"\.site-header\s+\.directory-panel(?:\:not\(\[open\]\)|\.is-closing)?\s+nav\s*\{[^}]*filter:",
+            shared_css,
+            re.DOTALL,
+        ):
+            errors.append("mobile directory overlay must not animate a full-panel blur filter")
         if "max-height:calc(100vh - 72px)" in shared_css:
             errors.append("mobile directory must use the dynamic viewport height on iOS")
         if "-webkit-overflow-scrolling:touch" in shared_css:
@@ -3177,11 +3197,22 @@ def validate_jekyll_sources():
             "setTimeout(() => this.#finishClose(), 180)",
             'classList.add("is-closing")',
             'if (this.panel.classList.contains("is-closing")) return this.open()',
+            'querySelector("[data-directory-backdrop]")',
+            'this.backdrop?.addEventListener("click", () => this.close())',
         ):
             if token not in module_text:
                 errors.append(f"mobile directory must synchronize its interruptible 180ms animation: {token}")
         if "ensureDirectory();" not in site_text:
             errors.append("site entry must prepare directory navigation before the first mobile click")
+        for token in (
+            "routeModelModulePromise",
+            "directoryModulePromise",
+            "navigationStoreModulePromise",
+            "navigationDataPromise",
+            "directoryPromise = directoryModulePromise.then",
+        ):
+            if token not in site_text:
+                errors.append(f"site entry must start directory loading in the background: {token}")
         for deferred_trigger in (
             'addEventListener("pointerdown", ensureDirectory',
             'addEventListener("keydown", ensureDirectory',
@@ -4310,11 +4341,11 @@ def main():
                 "preventDefault:()=>{prevented=true;}});return prevented;};"
                 "nav.scrollTop=250;const wheelInside=wheel(true,80);const wheelInsideTop=nav.scrollTop;"
                 "const wheelOutside=wheel(false,80);const wheelOutsideTop=nav.scrollTop;"
-                "api.lock();window.scrollX=9;window.scrollY=40;windowListeners.scroll();const held=[window.scrollX,window.scrollY];"
+                "const before=[window.scrollX,window.scrollY];api.lock();const locked=[window.scrollX,window.scrollY];"
                 "api.unlock();const restored=[window.scrollX,window.scrollY];"
                 "process.stdout.write(JSON.stringify({boundaries,touch:[untracked,middle,top,bottom,outside,pinch],"
                 "positions:[untrackedTop,middleTop,topValue,bottomValue],"
-                "wheel:[wheelInside,wheelOutside,wheelInsideTop,wheelOutsideTop],held,restored}));"
+                "wheel:[wheelInside,wheelOutside,wheelInsideTop,wheelOutsideTop],before,locked,restored}));"
             )
             scroll_completed = subprocess.run(
                 [
@@ -4357,10 +4388,12 @@ def main():
                         "mobile directory wheel containment mismatch: "
                         f"got {actual_scroll_results['wheel']}"
                     )
-                if actual_scroll_results["held"] != [0, 0]:
-                    errors.append("mobile directory must correct root scroll drift while open")
+                if actual_scroll_results["before"] != [0, 180]:
+                    errors.append("mobile directory behavior harness must start at the expected page position")
+                if actual_scroll_results["locked"] != [0, 180]:
+                    errors.append("mobile directory must not reposition the page when its overlay opens")
                 if actual_scroll_results["restored"] != [0, 180]:
-                    errors.append("mobile directory must restore the recorded page position when closed")
+                    errors.append("mobile directory must leave the page position unchanged when it closes")
 
     for manual_id, manual_routes in MANUAL_ROUTE_ORDERS.items():
         manual_index = ROOT / manual_routes[0]

@@ -121,15 +121,16 @@ section[id]{scroll-margin-top:20px}
     position:absolute;top:100%;right:0;left:0;display:block;
     max-height:calc(100vh - 57px);padding:14px 16px 18px;overflow-x:hidden;overflow-y:auto;
     background:var(--nav-bg);border-bottom:1px solid var(--rule-strong);box-shadow:0 4px 0 color-mix(in srgb,var(--text) 8%,transparent);
-    opacity:1;filter:blur(0);transform:translateY(0);visibility:visible;pointer-events:auto;
-    transition-property:opacity,filter,transform,visibility;transition-duration:180ms;transition-timing-function:cubic-bezier(.2,0,0,1);transition-delay:0s
+    opacity:1;transform:translate3d(0,0,0);visibility:visible;pointer-events:auto;
+    transition-property:opacity,transform,visibility;transition-duration:180ms;transition-timing-function:cubic-bezier(.2,0,0,1);transition-delay:0s;
+    will-change:opacity,transform;contain:layout paint;backface-visibility:hidden
   }
   .site-header .directory-panel:not([open]) nav{
-    display:block;opacity:0;filter:blur(4px);transform:translateY(-12px);visibility:hidden;pointer-events:none;
-    transition-delay:0s,0s,0s,180ms
+    display:block;opacity:0;transform:translate3d(0,-12px,0);visibility:hidden;pointer-events:none;
+    transition-delay:0s,0s,180ms
   }
   .site-header .directory-panel.is-closing nav{
-    opacity:0;filter:blur(4px);transform:translateY(-12px);visibility:visible;pointer-events:none;transition-delay:0s
+    opacity:0;transform:translate3d(0,-12px,0);visibility:visible;pointer-events:none;transition-delay:0s
   }
   .site-header .directory-panel .directory-context{margin-bottom:5px}
   section[id]{scroll-margin-top:72px}
@@ -280,6 +281,7 @@ body .global-timeline-link:active{transform:scale(.96)}
   transition-property:transform;transition-duration:150ms;transition-timing-function:var(--ease)
 }
 body .global-directory-panel{display:none}
+.mobile-directory-backdrop{display:none}
 
 /* Persistent manual documentation rail. */
 .docs-rail{
@@ -320,7 +322,10 @@ body .global-directory-panel{display:none}
 .docs-rail-links a:active{transform:scale(.96)}
 
 @media(max-width:999px){
-  body .global-header{width:calc(100% - 16px);height:64px;margin:0 8px}
+  body .global-header{
+    width:calc(100% - 16px);height:64px;margin:0 8px;
+    background:color-mix(in srgb,var(--paper) 98%,transparent);backdrop-filter:none;-webkit-backdrop-filter:none
+  }
   body .global-header-inner{grid-template-columns:minmax(0,1fr) auto auto;padding:0}
   body .global-brand{grid-column:1;min-width:0;overflow:hidden;padding:0 14px;border-right:0}
   body .global-brand .portal-brand-mark{flex:0 0 auto}
@@ -333,7 +338,7 @@ body .global-directory-panel{display:none}
     display:block;grid-column:3;align-self:stretch;margin:0;padding:0;border:0;background:transparent
   }
   body .global-directory-panel>summary{
-    display:flex;align-items:center;justify-content:center;gap:8px;width:84px;height:100%;min-height:0;padding:0 12px;
+    position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:8px;width:84px;height:100%;min-height:0;padding:0 12px;
     color:var(--heading);font-size:12px;font-weight:680
   }
   body .global-directory-panel>summary::after{display:none}
@@ -352,9 +357,13 @@ body .global-directory-panel{display:none}
   body .global-directory-panel[open] .portal-menu-icon::before{top:0;transform:rotate(45deg)}
   body .global-directory-panel[open] .portal-menu-icon::after{top:0;transform:rotate(-45deg)}
   body .global-directory-panel nav{
-    top:64px;right:8px;left:8px;width:auto;
+    top:64px;right:8px;left:8px;z-index:2;width:auto;
     max-height:calc(100dvh - 72px);padding:14px 16px 18px;background:var(--paper);
     border:1px solid var(--rule);border-top:0;box-shadow:0 18px 36px color-mix(in srgb,var(--text) 14%,transparent)
+  }
+  body .global-directory-panel[open]>.mobile-directory-backdrop{
+    position:fixed;inset:0;z-index:1;display:block;background:transparent;
+    overscroll-behavior:none;touch-action:none
   }
   body .global-directory-panel[open] nav{position:fixed}
   .docs-rail{display:none}
@@ -377,14 +386,7 @@ body .global-directory-panel{display:none}
   body:not([data-page-role="portal"]) .global-directory-panel nav{
     top:112px;right:8px;left:8px;width:auto;max-height:calc(100dvh - 120px)
   }
-  html.mobile-directory-open{overflow:hidden;overscroll-behavior:none}
-  html.mobile-directory-open body{
-    position:fixed;top:var(--mobile-directory-scroll-offset,0);right:0;left:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none
-  }
-  html.mobile-directory-open body .global-header{
-    position:fixed;top:0;right:8px;left:8px;width:auto;margin:0;
-    backdrop-filter:none;-webkit-backdrop-filter:none
-  }
+  html.mobile-directory-open{overscroll-behavior:none}
   html.mobile-directory-open .global-directory-panel nav{
     position:fixed;top:64px;right:8px;bottom:auto;left:8px;width:auto;
     height:auto;max-height:calc(var(--mobile-directory-viewport-height,100dvh) - 72px);

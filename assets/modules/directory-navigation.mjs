@@ -109,6 +109,7 @@ export class MobileDirectoryController {
     this.panel = panel;
     this.root = root;
     this.summary = panel?.querySelector(":scope > summary");
+    this.backdrop = panel?.querySelector("[data-directory-backdrop]");
     this.interactive = matchMedia("(max-width: 999px)");
     this.reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     this.closeTimer = 0;
@@ -117,6 +118,7 @@ export class MobileDirectoryController {
   connect() {
     if (!this.panel || !this.summary) return;
     this.summary.addEventListener("click", (event) => this.#toggle(event));
+    this.backdrop?.addEventListener("click", () => this.close());
     document.addEventListener("click", (event) => {
       if (this.interactive.matches && this.panel.open && !this.panel.contains(event.target)) this.close();
     });
