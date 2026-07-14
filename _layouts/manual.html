@@ -27,13 +27,7 @@ layout: default
     <span aria-current="page">{{ page.nav_title | default: page.page_heading }}</span>
   </nav>
 
-  <nav class="manual-nav manual-nav-top" aria-label="手册分页">
-    {% if previous_page %}<a data-manual-role="previous" href="{{ previous_page.url | relative_url }}">← 上一页</a>{% else %}<span aria-hidden="true"></span>{% endif %}
-    <a data-manual-role="up" href="{{ up_url | relative_url }}">{{ up_label }}</a>
-    <a href="{{ manual.root | relative_url }}">目录</a>
-    {% if next_page %}<a data-manual-role="next" href="{{ next_page.url | relative_url }}">下一页 →</a>{% else %}<span aria-hidden="true"></span>{% endif %}
-    <a data-manual-role="index" href="{{ index_page.url | default: manual.root | relative_url }}">{{ index_label }}</a>
-  </nav>
+  {% include manual-pagination.html position="top" %}
 
   <header class="manual-introduction">
     <h1>{{ page.page_heading | default: page.nav_title }}</h1>
@@ -65,11 +59,5 @@ layout: default
   </section>
   {% endif %}
 
-  <nav class="manual-nav manual-nav-bottom" aria-label="手册分页">
-    {% if previous_page %}<a data-manual-role="previous" href="{{ previous_page.url | relative_url }}">← 上一页</a>{% else %}<span aria-hidden="true"></span>{% endif %}
-    <a data-manual-role="up" href="{{ up_url | relative_url }}">{{ up_label }}</a>
-    <a href="{{ manual.root | relative_url }}">目录</a>
-    {% if next_page %}<a data-manual-role="next" href="{{ next_page.url | relative_url }}">下一页 →</a>{% else %}<span aria-hidden="true"></span>{% endif %}
-    <a data-manual-role="index" href="{{ index_page.url | default: manual.root | relative_url }}">{{ index_label }}</a>
-  </nav>
+  {% include manual-pagination.html position="bottom" %}
 </main>

@@ -2910,7 +2910,8 @@ def validate_jekyll_sources():
             ".content-wide",
             ".content-grid{",
             ".content-rows",
-            'body:not([data-page-role="portal"]) .page-link:nth-child(2n)',
+            'body:not([data-page-role="portal"]) .page-links{',
+            '--responsive-grid-min:420px;gap:1px;margin:28px -56px -62px;background:var(--portal-line)',
             'a:visited:not(.portal-button)',
             ".portal-button-primary:visited",
             ".portal-button-secondary:visited",
@@ -2993,8 +2994,8 @@ def validate_jekyll_sources():
             errors.append("homepage object visuals must not retain the obsolete unmatched focus-card-core selector")
         if re.search(r"\.global-timeline-link\s*\{[^}]*background\s*:\s*#fff", shared_css):
             errors.append("TIMELINE must use the theme navigation surface instead of pure white")
-        if re.search(r'\.page-links\s*\{[^}]*background\s*:\s*var\(--portal-line\)', shared_css):
-            errors.append("page-link grids must not expose the separator color in empty cells")
+        if re.search(r'body:not\(\[data-page-role="portal"\]\) \.page-link:nth-child', shared_css):
+            errors.append("page-link separators must not depend on a fixed column count")
         if not re.search(r'body\[data-page-role="tool-project"\]\s+main\s*\{[^}]*overflow\s*:\s*clip', shared_css):
             errors.append("tool project main must preserve the sticky status panel scroll range")
         if not re.search(r'body:not\(\[data-page-role="portal"\]\)\s+main\s*\{[^}]*overflow\s*:\s*clip', shared_css):
@@ -3282,6 +3283,7 @@ def validate_jekyll_sources():
     manual_config = SOURCE_ROOT / "_data/manuals.yml"
     manual_layout = SOURCE_ROOT / "_layouts/manual.html"
     docs_rail_include = SOURCE_ROOT / "_includes/docs-rail.html"
+    manual_pagination_include = SOURCE_ROOT / "_includes/manual-pagination.html"
     if not manual_config.exists():
         errors.append("missing _data/manuals.yml")
     if not manual_layout.exists():
@@ -3292,11 +3294,24 @@ def validate_jekyll_sources():
             'where: "manual_id", page.manual_id',
             'sort: "manual_order"',
             "manual-generated-index",
-            'data-manual-role="previous"',
-            'data-manual-role="next"',
+            'include manual-pagination.html position="top"',
+            'include manual-pagination.html position="bottom"',
         ):
             if token not in manual_layout_text:
                 errors.append(f"manual layout missing dynamic contract: {token}")
+    if not manual_pagination_include.exists():
+        errors.append("missing _includes/manual-pagination.html")
+    else:
+        manual_pagination_text = manual_pagination_include.read_text()
+        for token in (
+            'manual-nav-{{ include.position }}',
+            'data-manual-role="previous"',
+            'data-manual-role="up"',
+            'data-manual-role="next"',
+            'data-manual-role="index"',
+        ):
+            if token not in manual_pagination_text:
+                errors.append(f"shared manual pagination missing contract: {token}")
     if not docs_rail_include.exists():
         errors.append("missing _includes/docs-rail.html")
     else:
@@ -3380,9 +3395,11 @@ def validate_jekyll_sources():
             "shouldSplitSummaryRail",
             "connectSummaryRailLayouts",
             "shouldStackMobileDirectory",
+            "LayoutObserver",
+            "cssNumber",
             "ResizeObserver",
             'document.body.toggleAttribute("data-mobile-directory-stacked", stacked)',
-            'document.fonts?.ready.then(schedule)',
+            'document.fonts?.ready.then(this.schedule)',
         ):
             if token not in module_text:
                 errors.append(f"front-end modules missing interaction contract: {token}")
@@ -3397,7 +3414,6 @@ def validate_jekyll_sources():
                 errors.append(f"mobile directory must synchronize its interruptible 180ms animation: {token}")
         for token in (
             'const mobileLayout = matchMedia("(max-width: 999px)")',
-            'const desktopLayout = matchMedia("(min-width: 1000px)")',
             'const precisePointer = matchMedia("(hover: hover) and (pointer: fine)")',
             'if (event.key === "Tab") keyboardNavigation = true',
             "keyboardNavigation = false",
@@ -3406,10 +3422,10 @@ def validate_jekyll_sources():
             'mobileLayout.addEventListener("change"',
             "if (event.matches) ensureDirectory()",
             "if (event.matches) ensureMobileHeaderLayout()",
-            "if (!globalRoot || !desktopLayout.matches) return",
+            "if (!globalRoot || mobileLayout.matches) return",
             "if (precisePointer.matches) requestGlobalNavigation(event)",
             "if (precisePointer.matches || keyboardNavigation) requestGlobalNavigation(event)",
-            'if (!desktopLayout.matches || precisePointer.matches) return',
+            'if (mobileLayout.matches || precisePointer.matches) return',
             'event.target.closest?.(".global-nav-trigger")',
             'item.classList.contains("is-menu-open")',
             "event.preventDefault()",
@@ -3417,6 +3433,10 @@ def validate_jekyll_sources():
         ):
             if token not in site_text:
                 errors.append(f"site entry missing device-specific navigation contract: {token}")
+        if site_text.count('matchMedia("(max-width: 999px)")') != 1:
+            errors.append("site entry must expose exactly one shared compact-layout media state")
+        if 'matchMedia("(min-width: 1000px)")' in site_text:
+            errors.append("site entry must derive desktop navigation from the shared compact-layout state")
         layout_text = layout.read_text() if layout.exists() else ""
         for eager_resource in ('rel="modulepreload"', 'rel="preload" href="{{ \'/assets/navigation-data.json\''):
             if eager_resource in layout_text:
@@ -4374,11 +4394,12 @@ def main():
     route_module = ROOT / "assets/modules/route-model.mjs"
     directory_module = ROOT / "assets/modules/directory-navigation.mjs"
     summary_layout_module = ROOT / "assets/modules/summary-rail-layout.mjs"
+    layout_observer_module = ROOT / "assets/modules/layout-observer.mjs"
     navigation_data = ROOT / "assets/navigation-data.json"
     theme_script = ROOT / "assets/theme.js"
     directory_guard = ROOT / "assets/mobile-directory-guard.js"
     favicon = ROOT / "assets/favicon.svg"
-    for path in (site_script, route_module, directory_module, summary_layout_module, navigation_data, directory_guard):
+    for path in (site_script, route_module, directory_module, summary_layout_module, layout_observer_module, navigation_data, directory_guard):
         if not path.exists():
             errors.append(f"missing built front-end asset {path.relative_to(ROOT)}")
     if not theme_script.exists():

@@ -20,13 +20,14 @@
 - `_includes/site-header.html`：构建品牌入口、五个可直接访问的一级任务入口、按需增强的模块目录容器和项目时间线入口。
 - `_includes/project-timeline.html`：通用项目时间线渲染器，接收页面指定的数据对象并生成阶段列表。
 - `_includes/docs-rail.html`：构建时扫描当前 `manual_id` 的页面，直接输出可在无脚本环境阅读的文档栏，并作为移动目录的只读数据来源。
+- `_includes/manual-pagination.html`：根据手册顺序为顶部和底部复用同一套上一页、上级、目录、下一页与索引导航。
 - `_includes/site-footer.html`：根据页面 Front Matter 生成模块化页脚。
 - `_data/manuals.yml`：登记手册级名称、根路由、上级入口、面包屑和分组，不逐页复制目录链接。
 - `_data/navigation.yml`：登记顶部导航卡片与普通页面模块目录；Jekyll 同时生成一级入口和 `/assets/navigation-data.json`。
 - `_data/site_header.yml`：全站页头独立行动入口的唯一配置源，当前提供 `TIMELINE` 项目时间线入口。
 - `_data/project_timeline.yml`：项目阶段与当前状态摘要的唯一人工配置源，只服务承担进度说明职责的页面。
 - 普通正式 `.html` 使用 `layout: default` 并编写职责对应的 `<main>`；手册 `.md` 使用 `layout: manual` 并只编写 Markdown 正文，公开文件名由 `permalink` 确定。
-- `assets/site.mjs`：小型全站入口，只判断页面能力和设备布局后加载 `assets/modules/*.mjs`；路由模型、数据仓库、顶部导航、模块目录、移动端状态和正文增强分别维护独立接口。1000px 以下立即准备纯文字移动目录，1000px 及以上只在首次悬停、键盘聚焦或粗指针平板主动打开菜单时加载桌面二级导航及其 SVG 封面；桌面不会预建隐藏的移动目录，手机也不会请求或合成桌面封面。`assets/mobile-directory-guard.js` 通过独立透明遮罩冻结后方手势，并约束目录的滚轮、单指触摸和滚动边界，不改写正文定位或滚动坐标。`assets/theme.js` 在 CSS 加载前恢复全站 `Light / Dark / System` 选择，并负责持久化、系统主题监听和页脚菜单交互；`assets/images/` 保存经过裁切和压缩的站点图片。
+- `assets/site.mjs`：小型全站入口，只判断页面能力和设备布局后加载 `assets/modules/*.mjs`；路由模型、数据仓库、顶部导航、模块目录、移动端状态和正文增强分别维护独立接口。移动目录、移动页头和桌面导航复用同一个紧凑布局媒体状态，避免相邻判断产生空档；页头与摘要栏再通过共享布局观察器响应容器、字体和视口变化。1000px 以下立即准备纯文字移动目录，1000px 及以上只在首次悬停、键盘聚焦或粗指针平板主动打开菜单时加载桌面二级导航及其 SVG 封面；桌面不会预建隐藏的移动目录，手机也不会请求或合成桌面封面。`assets/mobile-directory-guard.js` 通过独立透明遮罩冻结后方手势，并约束目录的滚轮、单指触摸和滚动边界，不改写正文定位或滚动坐标。`assets/theme.js` 在 CSS 加载前恢复全站 `Light / Dark / System` 选择，并负责持久化、系统主题监听和页脚菜单交互；`assets/images/` 保存经过裁切和压缩的站点图片。
 - `sitemap.md`：不带 Front Matter 的公开 Markdown 发现索引，也是唯一正式路由注册表；它不进入 Markdown 转换，由 Pages 工作流在 Jekyll 构建后原样加入 `/sitemap.md`，供读者和自动化工具按内容家族读取全部正式 HTML 路由、顺序和职责。README 不再复制路由表，质量测试直接以该文件核对源码与构建产物。
 
 ### 手册内容源与生成

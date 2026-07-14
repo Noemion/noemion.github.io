@@ -4,7 +4,6 @@ const version = scriptUrl.search;
 const moduleUrl = (name) => new URL(`modules/${name}.mjs${version}`, scriptUrl);
 const dataUrl = new URL(`navigation-data.json${version}`, scriptUrl);
 const mobileLayout = matchMedia("(max-width: 999px)");
-const desktopLayout = matchMedia("(min-width: 1000px)");
 const precisePointer = matchMedia("(hover: hover) and (pointer: fine)");
 let keyboardNavigation = false;
 document.addEventListener("keydown", (event) => {
@@ -35,7 +34,7 @@ const loadStore = () => {
 const globalRoot = document.querySelector("[data-global-nav]");
 let globalControllerPromise;
 const ensureGlobalNavigation = async (item) => {
-  if (!globalRoot || !desktopLayout.matches) return;
+  if (!globalRoot || mobileLayout.matches) return;
   if (!globalControllerPromise) {
     globalControllerPromise = Promise.all([
       import(moduleUrl("global-navigation")),
@@ -67,7 +66,7 @@ globalRoot?.addEventListener("focusin", (event) => {
   if (precisePointer.matches || keyboardNavigation) requestGlobalNavigation(event);
 });
 globalRoot?.addEventListener("click", (event) => {
-  if (!desktopLayout.matches || precisePointer.matches) return;
+  if (mobileLayout.matches || precisePointer.matches) return;
   const trigger = event.target.closest?.(".global-nav-trigger");
   const item = trigger?.closest("[data-global-nav-item]");
   if (!item || item.classList.contains("is-menu-open")) return;
@@ -83,7 +82,7 @@ const ensureMobileHeaderLayout = () => {
   if (!mobileHeader) return;
   if (!mobileHeaderLayoutPromise) {
     mobileHeaderLayoutPromise = import(moduleUrl("mobile-header-layout"))
-      .then(({ MobileHeaderLayout }) => new MobileHeaderLayout(mobileHeader).connect())
+      .then(({ MobileHeaderLayout }) => new MobileHeaderLayout(mobileHeader, mobileLayout).connect())
       .catch((error) => console.warn("Responsive header placement is unavailable.", error));
   }
   return mobileHeaderLayoutPromise;
@@ -101,7 +100,7 @@ const ensureDirectory = async () => {
       const directory = manual?.directory || (await loadStore()).modules[moduleKey];
       if (!directory) throw new Error(`No directory model for ${moduleKey}.`);
       new module.DirectoryNavigation(directoryRoot, routeModel, moduleKey, directory).render();
-      const mobile = new module.MobileDirectoryController(directoryPanel, directoryRoot);
+      const mobile = new module.MobileDirectoryController(directoryPanel, directoryRoot, mobileLayout);
       mobile.connect();
       directoryPanel.dataset.mobileDirectoryReady = "true";
       const pendingOpen = directoryPanel.hasAttribute("data-mobile-directory-pending-open");

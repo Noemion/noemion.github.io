@@ -105,12 +105,12 @@ export class DirectoryNavigation {
 }
 
 export class MobileDirectoryController {
-  constructor(panel, root) {
+  constructor(panel, root, interactive = matchMedia("(max-width: 999px)")) {
     this.panel = panel;
     this.root = root;
     this.summary = panel?.querySelector(":scope > summary");
     this.backdrop = panel?.querySelector("[data-directory-backdrop]");
-    this.interactive = matchMedia("(max-width: 999px)");
+    this.interactive = interactive;
     this.reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     this.closeTimer = 0;
   }

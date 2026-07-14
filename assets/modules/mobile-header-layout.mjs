@@ -1,5 +1,10 @@
 const MOBILE_LAYOUT = "(max-width: 999px)";
 
+const version = new URL(import.meta.url).search;
+const { LayoutObserver } = await import(
+  new URL(`layout-observer.mjs${version}`, import.meta.url)
+);
+
 const numberValue = (value) => Number.parseFloat(value) || 0;
 
 const intrinsicChildrenWidth = (element) => {
@@ -28,35 +33,24 @@ export class MobileHeaderLayout {
     this.timeline = header?.querySelector(".global-timeline-link");
     this.directory = header?.querySelector(".global-directory-panel");
     this.summary = this.directory?.querySelector(":scope > summary");
-    this.frame = 0;
-    this.observer = null;
+    this.layoutObserver = null;
   }
 
   connect() {
     if (!this.inner || !this.brand || !this.timeline || !this.directory || !this.summary) return this;
-    const schedule = () => this.schedule();
-    if (typeof ResizeObserver === "function") {
-      this.observer = new ResizeObserver(schedule);
-      this.observer.observe(this.inner);
-      for (const child of this.brand.children) this.observer.observe(child);
-      this.observer.observe(this.timeline.firstElementChild || this.timeline);
-      this.observer.observe(this.summary);
-    } else {
-      addEventListener("resize", schedule, { passive: true });
-    }
-    this.media.addEventListener("change", schedule);
-    document.fonts?.ready.then(schedule);
-    this.update();
+    this.layoutObserver = new LayoutObserver(() => this.update(), {
+      elements: [
+        this.inner,
+        ...this.brand.children,
+        this.timeline.firstElementChild || this.timeline,
+        this.summary
+      ],
+      media: [this.media]
+    }).connect();
     return this;
   }
 
-  schedule() {
-    if (this.frame) return;
-    this.frame = requestAnimationFrame(() => this.update());
-  }
-
   update() {
-    this.frame = 0;
     const portal = document.body.dataset.pageRole === "portal";
     const eligible = this.media.matches && !portal;
     const stacked = eligible && shouldStackMobileDirectory({
@@ -69,5 +63,9 @@ export class MobileHeaderLayout {
     this.header.dataset.mobileDirectoryPlacement = !this.media.matches
       ? "desktop"
       : (portal ? "portal" : (stacked ? "stacked" : "inline"));
+  }
+
+  disconnect() {
+    this.layoutObserver?.disconnect();
   }
 }
