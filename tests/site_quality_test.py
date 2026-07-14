@@ -228,6 +228,7 @@ PUBLIC_META_PHRASES = (
     "用户以后明确开启",
     "尚未进入代码开发阶段",
     "尚未进入组件代码阶段",
+    "组件代码开发尚未开启",
     "代码阶段开启后",
     "代码阶段开启时",
     "内部符合性门禁",
@@ -536,6 +537,16 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "完整性",
             "sufficient / insufficient",
             "最终决定",
+            "当前草案",
+            "非规范场景",
+            "仅检查资料一致性",
+            "正在研究",
+        ),
+        "forbidden_patterns": (
+            r">draft</td>",
+            r">non-normative</td>",
+            r">vector-checker-only</td>",
+            r">awaiting-decision</td>",
         ),
     },
     "specifications/dromen.html": {
@@ -2496,6 +2507,8 @@ def validate_jekyll_sources():
             errors.append(f"{route}: contains broken spacing inside Chinese prose")
         if "****" in body:
             errors.append(f"{route}: contains an empty emphasis marker")
+        if re.search(r"(?:尚|仍)待(?:确认|确)定定", body):
+            errors.append(f"{route}: contains duplicated wording in a pending-status sentence")
         for obsolete_phrase in ("设计提案", "未来阶段", "阶段门", "证据门", "退出证据", "放行"):
             if obsolete_phrase in body:
                 errors.append(f"{route}: retains internal or obsolete status wording {obsolete_phrase!r}")
@@ -3021,6 +3034,8 @@ def validate_jekyll_sources():
             "任何后续正式版本",
             "默认脱敏的导出器",
             "不进入 Endem 编码、Iknem 身份或最终决定",
+            "扩大范围前需要的证据",
+            "不再扩大或需要合并的条件",
         ),
         "endem/docs/running.md": (
             "A2A 1.0 版本化规范",
@@ -3464,6 +3479,7 @@ def validate_jekyll_sources():
             "尚未满足的退出证据",
             "进入下一阶段的判断",
             "时间线不是完成百分比",
+            "组件代码开发尚未开启",
         ):
             if forbidden in current_stage_text:
                 errors.append(f"current stage page exposes internal workflow copy: {forbidden}")

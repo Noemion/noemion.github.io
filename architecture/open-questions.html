@@ -20,7 +20,7 @@ permalink: "/architecture/open-questions.html"
   <section class="content-grid">
     <h2>Endem 编码与语义</h2>
     <details open><summary>实验来源清单怎样升级为正式语言？</summary><p>ADR-0014 只关闭首个 <code>.ends</code> 输入。正式语言仍需解决注释、包含、版本演进、歧义、错误恢复和工具支持；在正反语料与真实消费者出现前，不扩展当前清单。</p></details>
-    <details><summary>END-P1 之后还缺哪些字段？</summary><p>ADR-0023 已关闭内容标准分层，但没有预先锁定未来内容。END-P1 已关闭未来首条实现路径评审所需字段，并已有正负极性字节；时间、缺席、单变量量化、测量、组合、条件适用性和统计登记仍需真实消费者、新 Profile 与正反字节向量。ID-CORE 已固定摘要与签名的抽象边界，但它们是否进入容器、采用何种物理 Profile 仍待确认定。</p></details>
+    <details><summary>END-P1 之后还缺哪些字段？</summary><p>ADR-0023 已关闭内容标准分层，但没有预先锁定未来内容。END-P1 已关闭未来首条实现路径评审所需字段，并已有正负极性字节；时间、缺席、单变量量化、测量、组合、条件适用性和统计登记仍需真实消费者、新 Profile 与正反字节向量。ID-CORE 已固定摘要与签名的抽象边界，但它们是否进入容器、采用何种物理 Profile 仍待确定。</p></details>
     <details><summary>条件与排他组合怎样表达？</summary><p>ADR-0020 只允许单个 Endem 使用 <code>all_of / any_of</code>；ADR-0021 已把跨 Endem 条件固定为 Synem 会话激活。<code>xor / xone</code>、形成时条件编码和复杂守卫语言仍待确定，不得嵌入自由脚本。</p></details>
     <details><summary>一个根 skena 的语义等价怎样判断？</summary><p>当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">非规范语义等价与迁移研究提案</a>已经否定跨 Profile 的通用等价布尔值，并把精确身份、封闭结构同构、有范围观察等价、迁移、强化/弱化与模型相似度分开。它提出十六个案例、十三类威胁和 Semantic Key 的进入条件，但仍处于研究阶段；当前只能比较显式符号、关系和条件，不能发明语义哈希。</p></details>
     <details><summary>Unicode 标识符与原始来源字节何时进入 Profile？</summary><p>TEXT-IDENTIFIER-CORE 已固定当前 ASCII 标识符和来源文本不做隐式规范化，也明确 END-SRCM 不能证明原始文件逐字节保真。只有国际化标识符或原始字节审计出现不可替代消费者，并能固定 Unicode 版本、比较、双向、同形、身份、变换和正反字节向量时，才建立新 Profile。</p></details>
