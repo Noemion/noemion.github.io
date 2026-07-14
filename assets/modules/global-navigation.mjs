@@ -60,7 +60,27 @@ export class GlobalNavigation {
         createElement("strong", { text: entry.label }),
         createElement("span", { text: entry.description })
       );
-      link.append(visual, copy, createElement("i", { text: "↗", attributes: { "aria-hidden": "true" } }));
+
+      const arrow = createElement("span", {
+        className: "global-nav-card-arrow",
+        attributes: { "aria-hidden": "true" }
+      });
+      const arrowRing = createSvgElement("svg", {
+        class: "global-nav-card-arrow-ring",
+        viewBox: "0 0 36 36",
+        focusable: "false"
+      });
+      arrowRing.append(
+        createSvgElement("circle", {
+          class: "global-nav-card-arrow-progress",
+          cx: "18",
+          cy: "18",
+          r: "15",
+          pathLength: "100"
+        })
+      );
+      arrow.append(arrowRing, createElement("i", { text: "→" }));
+      link.append(visual, copy, arrow);
       menu.append(link);
     });
     return menu;

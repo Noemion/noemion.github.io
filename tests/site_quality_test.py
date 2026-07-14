@@ -4549,6 +4549,16 @@ def main():
             errors.append("navigation covers must create nodes in the SVG namespace")
         if 'createSvgElement("svg"' not in global_navigation_source or 'createSvgElement("use"' not in global_navigation_source:
             errors.append("global navigation must render both SVG and use nodes through the SVG factory")
+        for token in (
+            'className: "global-nav-card-arrow"',
+            'class: "global-nav-card-arrow-ring"',
+            'class: "global-nav-card-arrow-progress"',
+            'createElement("i", { text: "→" })',
+        ):
+            if token not in global_navigation_source:
+                errors.append(f"global navigation missing right-arrow motion contract: {token}")
+        if 'text: "↗"' in global_navigation_source:
+            errors.append("global navigation cards must point right before interaction")
         if "routeModel.isCurrent(item.href)" not in directory_source:
             errors.append("directory current-page state must use exact URL matching")
         node = shutil.which("node")
@@ -4794,6 +4804,28 @@ def main():
         errors.append("index.html must render four right-pointing portal arrows before interaction")
     if "background-position:-220% 0" in style:
         errors.append("style.css must not reset the spectrum frame with a discontinuous background position")
+
+    directory_style = (ROOT / "assets/directory.css").read_text()
+    for token in (
+        ".global-nav-card-arrow-progress",
+        ".global-nav-card-arrow-ring{",
+        "pointer-events:none;transform:rotate(-90deg)",
+        "stroke-dasharray:100;stroke-dashoffset:100",
+        "transition-duration:560ms,180ms",
+        ".global-nav-card:hover .global-nav-card-copy{transform:translateX(4px)}",
+        ".global-nav-card:hover .global-nav-card-arrow-progress{stroke-dashoffset:0;opacity:1}",
+        ".global-nav-card:focus-visible .global-nav-card-arrow-progress{stroke-dashoffset:0;opacity:1}",
+        "conic-gradient(from var(--spectrum-angle)",
+    ):
+        if token not in directory_style:
+            errors.append(f"directory.css missing global navigation card motion contract: {token}")
+    for forbidden in (
+        ".global-nav-item.is-menu-open .global-nav-card:hover{transform:translateX(4px)}",
+        ".global-nav-item:focus-within .global-nav-card:hover{transform:translateX(4px)}",
+        ".global-nav-item.is-menu-open .global-nav-card[aria-current=\"page\"]{transform:translateX(4px)}",
+    ):
+        if forbidden in directory_style:
+            errors.append("global navigation card outer frame must not move horizontally")
 
     if errors:
         print("\n".join(errors))
