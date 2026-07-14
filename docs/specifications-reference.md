@@ -28,9 +28,12 @@ badges: ["Authority", "Lookup", "Status"]
 | MCP、A2A、HTTP 或 SDK 状态怎样进入本地边界 | [外部协议适配规范](../specifications/adapters.html) | ADP-CORE 与 ADR-0026 |
 | 摘要、签名和不可变引用究竟绑定什么 | [精确内容身份与签名规范](../specifications/identity.html) | ID-CORE 与 ADR-0027 |
 | UTF-8、标识符、显示文本和模型输入怎样区分 | [文本与标识符边界规范](../specifications/text-and-identifiers.html) | TEXT-IDENTIFIER-CORE 与 ADR-0028 |
+| 网页、工具返回、历史、摘要或附件进入模型时，哪些内容可以提供指令 | [文本与标识符边界规范](../specifications/text-and-identifiers.html)与[权威与授权决定规范](../specifications/authority.html) | TEXT-IDENTIFIER-CORE、AUT-CORE，以及[非规范上下文装配研究](https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md) |
 | 谁可以确认候选、解决歧义或授予动作权限 | [权威与授权决定规范](../specifications/authority.html) | AUT-CORE、ADR-0029 与 ADR-0030 |
 
 例如，外部 Agent Task 显示 `completed`，开发者仍不能据此发布结果。先用 ADP-CORE 保存协议状态和来源，再用 DRO-CORE 检查本次会话的能力上限。随后用 IKN-CORE 判断证据范围，并按 END-CORE 的 `krin` 形成满足结果。最后由 AUT-CORE 所描述的具名权威作出适用决定。`completed` 只说明外部请求执行状态，不直接等于 `met` 或 `accepted`。
+
+同样，网页或工具返回即使自称 `system` 或 `admin`，也仍是带来源的资料。TEXT-IDENTIFIER-CORE 约束模型实际输入和变换，AUT-CORE 决定谁能提供指令或授予动作。上下文装配研究只提供检查路径，不建立新的接口或实现义务。
 
 ## 权威顺序
 
