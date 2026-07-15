@@ -434,24 +434,27 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "architecture/agent-system-boundaries.html": {
         "required": (
-            "Non-normative Guide",
-            "三种状态不得混写",
-            "一次运行怎样穿过边界",
+            "非规范说明",
+            "先按一次调用回答五个问题",
+            "用依赖升级看清边界",
+            "先区分当前策略、研究与未来实现",
+            "从请求到决定的责任路径",
             "运行事实应该放在哪里",
-            "十六条最危险的越级路径",
+            "常见的越级错误",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术与软件自由提供的十二个约束",
+            "GNU 工具与软件自由带来的工程约束",
             "什么时候才值得增加新对象",
-            "十五项研究怎样回到现有规范",
+            "研究主题怎样回到现有规范",
             "模型身份不等于实际行动者",
             "工作负载身份",
             "运行实例",
             "软件 Agent 身份、委托与责任链",
             "模型输出是候选，不是规范内容",
-            "模型评审也只是有范围的候选测量",
-            "反馈记录也不等于模型学习",
-            "旧 Dromen、秘密或权限",
+            "模型评分是有范围的候选测量",
+            "反馈记录不是训练资格",
+            "旧 Dromen、秘密、能力和消费次数",
             "Task 完成，也不证明目标满足",
+            "包管理器退出码",
             "研究中",
             "不增加 ADR、CORE、Profile、对象、命令或组件",
         ),
@@ -2482,12 +2485,21 @@ def validate_jekyll_sources():
     else:
         boundary_text = agent_boundaries.read_text()
         for token in (
-            "三种状态不得混写",
+            "先按一次调用回答五个问题",
+            "用依赖升级看清边界",
+            "期望终态是什么？",
+            "谁代表谁执行什么动作？",
+            "本次运行最多能做什么？",
+            "外部系统实际报告了什么？",
+            "什么证据支持哪项结论？",
+            "包管理器退出码",
+            "先区分当前策略、研究与未来实现",
+            "从请求到决定的责任路径",
             "运行事实应该放在哪里",
-            "十六条最危险的越级路径",
+            "常见的越级错误",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术与软件自由提供的十二个约束",
-            "十五项研究怎样回到现有规范",
+            "GNU 工具与软件自由带来的工程约束",
+            "研究主题怎样回到现有规范",
             "2025-11-25",
             "2026-07-28",
             "A2A 1.0 版本化规范",
@@ -2502,14 +2514,11 @@ def validate_jekyll_sources():
             "Make parallel execution",
             "Guix shell",
             "Coreutils timeout",
-            "沙箱名称替代隔离证据",
-            "模型评分替代测量与决定",
-            "反馈替代训练资格与发布决定",
-            "可下载替代自由与可修改性",
-            "服务可用替代用户控制",
-            "删除响应替代清除证据",
-            "Agent 名称替代实际行动者",
-            "记忆替代事实与政策",
+            "隔离机制名称替代有效限制",
+            "模型评分或反馈替代评测与发布",
+            "单项可用性替代完整对象范围",
+            "显示名称或声明替代授权",
+            "记忆、检查点或轨迹替代当前事实",
             "NIST AI 800-2 初稿",
             "NIST AI 600-1",
             "NIST SP 800-218A",
@@ -2545,6 +2554,16 @@ def validate_jekyll_sources():
         ):
             if proposal_name not in boundary_text:
                 errors.append(f"Agent boundary guide must link research input: {proposal_name}")
+        for mechanical_heading in (
+            "十六条最危险的越级路径",
+            "GNU 技术与软件自由提供的十二个约束",
+            "十五项研究怎样回到现有规范",
+        ):
+            if mechanical_heading in boundary_text:
+                errors.append(
+                    "Agent boundary guide hard-codes a drifting inventory count in visible copy: "
+                    + mechanical_heading
+                )
         for public_source in (
             SOURCE_ROOT / "architecture" / "index.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
@@ -4046,6 +4065,10 @@ def main():
         "成对混淆矩阵",
         "语音合成、自动转写和语音模型",
         "共享文字频道粘贴精确标识或逐字母确认",
+        "综合指南先给一条可执行的判断顺序或具体案例",
+        "不能用连续的“不能、不得、不等于”段落代替正向数据流",
+        "标题只在数量本身属于规范约束或版本化结果时写死清单数量",
+        "质量契约检查责任覆盖",
     ):
         if token not in naming_standard_text:
             errors.append(f"language and naming standard missing no-digit boundary: {token}")
