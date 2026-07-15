@@ -3214,6 +3214,7 @@ def validate_jekyll_sources():
             homepage_text,
             re.DOTALL,
         )
+
         if expression_visual_match is None:
             errors.append("index.html: missing expression feature visual")
         else:
@@ -3232,6 +3233,18 @@ def validate_jekyll_sources():
                 errors.append(f"index.html: missing independent homepage object card: {token}")
         if homepage_text.count('class="portal-focus-card ') != 4:
             errors.append("index.html: FOUR NOUNS must render four independent object cards")
+
+    source_release_contracts = {
+        "architecture/index.html": ("来源保留的形成版", "最终发布版移除原文", "独立 Profile 重写来源绑定"),
+        "about/index.html": ("形成版保存一项期望终态的来源", "最终发布版移除原文"),
+        "faq/index.html": ("来源保留的形成版先分开六项职责", "最终发布版移除原始自然语言"),
+        "endem/docs/index.md": ("来源保留的形成版", "最终发布版按独立 Profile 移除原文", "精确发布内容签名"),
+    }
+    for relative_path, tokens in source_release_contracts.items():
+        page_text = (SOURCE_ROOT / relative_path).read_text()
+        for token in tokens:
+            if token not in page_text:
+                errors.append(f"{relative_path}: missing source-bearing and stripped-release boundary: {token}")
 
     layout = SOURCE_ROOT / "_layouts/default.html"
     header = SOURCE_ROOT / "_includes/site-header.html"
