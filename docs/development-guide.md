@@ -11,7 +11,7 @@ nav_title: "开发指南"
 page_heading: "Noemion 开发指南"
 page_lead: "从一项可验证的变更主张开始，定位权威条款、失败责任、最低证据和声明上限。"
 summary: "按变更主张定位规范、失败责任、验证材料和可公开声明的范围。"
-badges: ["Claim First", "Spec First", "Evidence Boundaries"]
+badges: ["先定义主张", "规范先行", "证据边界"]
 ---
 
 ## 先定义变更主张

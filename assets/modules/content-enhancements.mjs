@@ -22,7 +22,7 @@ export class PageOutline {
     outline.className = "page-outline";
     outline.setAttribute("aria-label", "章节导航");
     const label = document.createElement("strong");
-    label.textContent = "Sections";
+    label.textContent = "章节";
     outline.append(label);
     this.headings.forEach((heading, index) => {
       if (!heading.id) heading.id = `section-${String(index + 1).padStart(2, "0")}`;

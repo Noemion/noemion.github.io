@@ -13,7 +13,7 @@ page_heading: "endem 使用手册"
 page_lead: "说明一个命令怎样形成、检查、组合、发布并在最小权限下实现目标制品。"
 summary: "Endem 格式、组合、安全、运行和命令参考的连续手册。"
 manual_index_heading: "endem 手册目录"
-badges: ["Single CLI", "Experimental Core"]
+badges: ["单一命令入口", "实验核心"]
 ---
 
 ## 这套手册解决什么问题

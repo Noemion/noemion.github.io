@@ -24,7 +24,7 @@ nav_title: 导航短标题
 page_heading: 页面主标题
 page_lead: 一句话摘要
 summary: 目录卡片摘要
-badges: [Documentation]
+badges: [文档]
 ```
 
 手册首页增加 `manual_is_index: true`；需要作为术语索引入口的页面增加 `manual_index_entry: true`。

@@ -11,7 +11,7 @@ nav_title: "Endem 应用参考"
 page_heading: "Endem 应用参考"
 page_lead: "按一次目标工作理解设计中的 CLI 动作、调用方结果和信任边界。"
 summary: "按生命周期理解计划中的 endem 动作、消费者、失败责任和建设顺序。"
-badges: ["One CLI", "5 Verbs", "Unreleased"]
+badges: ["单一命令入口", "五个动作", "尚未发布"]
 ---
 
 ## 应用总览

@@ -58,7 +58,7 @@ nav_title: "新专题"
 page_heading: "新专题"
 page_lead: "面向读者的页面用途与直接结论。"
 summary: "显示在动态目录卡片中的摘要。"
-badges: ["Documentation"]
+badges: ["文档"]
 ---
 ```
 

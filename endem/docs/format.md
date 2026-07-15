@@ -11,7 +11,7 @@ nav_title: "格式与成形"
 page_heading: "格式与成形"
 page_lead: "把受控来源表达分解为六个语义面，并形成只有一个根 skena 的 nascent Endem。"
 summary: "来源、意义、可能事态、目标方向、满足判据、待确认事项与确定性 ktise。"
-badges: ["ktise", "One Root Skena"]
+badges: ["ktise", "单一根事态"]
 ---
 
 ## 最小来源表达

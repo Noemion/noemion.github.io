@@ -11,7 +11,7 @@ nav_title: "入门指南"
 page_heading: "Noemion 入门指南"
 page_lead: "用一个依赖升级案例，分清目标、协议状态、运行权限、证据和最终决定。"
 summary: "用一个依赖升级案例，理解 Noemion 与 Agent 协议、授权和服务控制的边界。"
-badges: ["Getting Started", "Noemion", "No Release Yet"]
+badges: ["入门", "Noemion", "尚未发布"]
 ---
 
 ## 从这里开始

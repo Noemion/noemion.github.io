@@ -11,7 +11,7 @@ nav_title: "指南与参考"
 page_heading: "指南与参考"
 page_lead: "从 Noemion 项目定位入门，按任务进入架构、开发、应用或规范参考。"
 summary: "从 Noemion 项目定位入门，按任务进入架构、开发、应用或规范参考。"
-badges: ["Guides", "Endem Manual", "Reference"]
+badges: ["指南", "Endem 手册", "参考"]
 manual_is_index: true
 manual_index_heading: "按任务与内容类型查找"
 ---

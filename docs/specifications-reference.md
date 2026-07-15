@@ -11,7 +11,7 @@ nav_title: "规范参考指南"
 page_heading: "Noemion 规范参考指南"
 page_lead: "遇到目标、组合、运行、证据、协议、身份、文本或授权问题时，先定位权威源，再区分现行要求与研究资料。"
 summary: "按工程问题定位规范源，并区分现行要求、解释材料、研究资料与验证证据。"
-badges: ["Authority", "Lookup", "Status"]
+badges: ["权威", "查询", "状态"]
 ---
 
 ## 按工程问题找资料

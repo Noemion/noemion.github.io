@@ -3,6 +3,7 @@
 
   const STORAGE_KEY = "noemion-theme";
   const MODES = ["light", "dark", "system"];
+  const MODE_LABELS = { light: "浅色", dark: "深色", system: "跟随系统" };
   const root = document.documentElement;
   const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -54,8 +55,8 @@
     let closeTimer = 0;
     const updateState = () => {
       const selected = root.dataset.theme || "system";
-      name.textContent = selected[0].toUpperCase() + selected.slice(1);
-      trigger.setAttribute("aria-label", `Theme: ${name.textContent}`);
+      name.textContent = MODE_LABELS[selected];
+      trigger.setAttribute("aria-label", `主题：${name.textContent}`);
       options.forEach((option) => {
         const active = option.dataset.themeOption === selected;
         option.setAttribute("aria-checked", String(active));

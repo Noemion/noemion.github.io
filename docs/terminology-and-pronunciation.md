@@ -11,7 +11,7 @@ nav_title: "术语与读音验证"
 page_heading: "术语与读音验证指南"
 page_lead: "说明 Noemion 怎样发现读音分歧、验证口头区分，并决定保留或重新命名术语。"
 summary: "执行首次朗读、听写回填、职责匹配和发行名称审查。"
-badges: ["Naming Review", "Human Evidence", "Pronunciation Pending"]
+badges: ["名称审查", "人类证据", "读音待定"]
 ---
 
 ## 直接结论

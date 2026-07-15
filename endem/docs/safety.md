@@ -11,7 +11,7 @@ nav_title: "安全与独立检查"
 page_heading: "安全与独立检查"
 page_lead: "区分制品形成侧 elenk 与独立 theor，并对所有不可信制品执行有界读取。"
 summary: "形成侧分层检查、独立 Theor、checked arithmetic 和差分测试。"
-badges: ["elenk", "theor", "Fail Closed"]
+badges: ["elenk", "theor", "封闭失败"]
 ---
 
 ## elenk 与 theor 回答不同问题

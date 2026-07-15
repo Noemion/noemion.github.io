@@ -11,7 +11,7 @@ nav_title: "发布与运行"
 page_heading: "发布与运行"
 page_lead: "分开制品生产、外部签名与隔离运行，并在 Drasor 中建立 Dromen 与 Iknem。"
 summary: "生产者封装、外部签名边界、Drasor、Dromen、能力循环与最终决定。"
-badges: ["External Signing", "drase", "No Runtime"]
+badges: ["外部签名", "drase", "尚无运行时"]
 ---
 
 ## 封装属于制品生产者

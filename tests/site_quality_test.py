@@ -171,13 +171,6 @@ INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "按工程问题继续研究",
     "思想进入规范前必须留下什么",
 ]
-ENTRY_PAGE_BADGE_ROUTES = [
-    "about/index.html", "about/background.html",
-    "architecture/index.html", "architecture/endem-lifecycle.html",
-    "development/index.html", "development/current-stage.html",
-    "development/implementation-roadmap.html", "development/testing.html",
-    "downloads/index.html", "endem/index.html", "faq/index.html", "news/index.html",
-]
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -185,6 +178,25 @@ GENERIC_ENGLISH_BADGES = {
     "Roadmap", "Testing", "Contribution", "Claim", "Failure", "Integrity",
     "Supply Chain", "Application Design", "Actions Specified", "Security",
     "Development", "No Release Yet",
+    "Superseded by ADR-0010", "Historical Vocabulary", "Historical Semantics",
+    "Native Lexicon", "Rust 1.97.0 Baseline", "Historical Evidence",
+    "Experimental Input", "Replaceable", "Result Domains", "No Wire Change",
+    "Mene Semantics", "Negative Evidence", "No Wire Schema Change",
+    "Quantified Goals", "Measurement Semantics", "Composite Criteria",
+    "No Wire Format", "Layered Conformance", "Session Only", "Failure First",
+    "Protocol Independent", "No Adapter Code", "Algorithm Agnostic",
+    "No Crypto Code", "Unicode Boundaries", "No Unicode Code",
+    "No Policy Engine", "END-CORE Clarification", "Identity Stable",
+    "No New Artifact", "One-time migration", "No compatibility",
+    "Direct replacement", "No new format", "No Voice Interface",
+    "Five Actions", "No Compatibility Alias",
+    "Unreleased", "Endem CLI", "Integrity First", "5 Verbs",
+    "Architecture", "Trust Boundaries", "Guides", "Endem Manual",
+    "Reference", "Getting Started", "Claim First", "Spec First",
+    "Evidence Boundaries", "Authority", "Lookup", "Status",
+    "Naming Review", "Human Evidence", "Pronunciation Pending",
+    "One Root Skena", "External Signing", "No Runtime", "Single CLI",
+    "Experimental Core",
 }
 ROLE_BY_KIND = {
     "portal": "portal",
@@ -847,12 +859,12 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "Iknem",
             "Ktisor",
             "kine",
-            "No Voice Interface",
+            "不建立语音接口",
         ),
     },
     "architecture/adr-0035-public-actions-and-internal-responsibilities.html": {
         "required": (
-            "Five Actions",
+            "五个公开动作",
             "ktise",
             "elenk",
             "pleko",
@@ -1178,6 +1190,7 @@ def validate_readability_behavior_contracts(root):
             'wrapper.className = "table-wrap manual-table-wrap"',
             'this.main.querySelector(":scope > .content-introduction")',
             'insertAdjacentElement("afterend", outline)',
+            'label.textContent = "章节"',
         ):
             if token not in behavior_text:
                 errors.append(
@@ -3238,13 +3251,28 @@ def validate_jekyll_sources():
             'data-theme-option="dark"',
             'data-theme-option="system"',
             "sitemap.md",
-            "Browse All",
-            "Documentation",
+            "全部页面",
+            "文档",
             "Endem",
-            "Development",
+            "开发",
+            "常见问题",
+            "许可证",
+            "跟随系统",
+            "浅色",
+            "深色",
         ):
             if token not in footer_text:
                 errors.append(f"site footer missing global discovery/theme contract: {token}")
+        for obsolete_label in (
+            "PROJECT", "READ", "BUILD", "DISCOVERY", "Browse All",
+            "Documentation", "Development", "License", ">Theme<",
+            ">Light<", ">Dark<", ">System<",
+        ):
+            if obsolete_label in footer_text:
+                errors.append(
+                    "site footer must not retain generic English interface label: "
+                    f"{obsolete_label}"
+                )
 
     theme_script = SOURCE_ROOT / "assets/theme.js"
     if not theme_script.exists():
@@ -3258,6 +3286,8 @@ def validate_jekyll_sources():
             'window.matchMedia("(prefers-color-scheme: dark)")',
             'root.dataset.resolvedTheme = resolved',
             'root.style.colorScheme = resolved',
+            'const MODE_LABELS = { light: "浅色", dark: "深色", system: "跟随系统" }',
+            'trigger.setAttribute("aria-label", `主题：${name.textContent}`)',
             'role="menuitemradio"',
             'event.key === "Escape"',
             'event.key === "ArrowDown"',
@@ -4683,6 +4713,28 @@ def main():
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
         home_source = home.read_text()
+        for obsolete_label in (
+            "VERIFIABLE GOALS FOR THE AGE OF AI",
+            "01 · THE PROBLEM",
+            "02 · SIX RESPONSIBILITIES",
+            "SOURCE &amp; MEANING",
+            "SITUATION &amp; DIRECTION",
+            "FULFILLMENT",
+            "AMBIGUITY",
+            "03 · FOUR ARTIFACT ROLES",
+            "04 · ONE COMMAND SURFACE",
+            "05 · CURRENT STAGE",
+            "06 · ENGINEERING DISCIPLINE",
+            "07 · CONTINUE",
+            ">KTISOR<",
+            ">READ<",
+            ">DRASE<",
+        ):
+            if obsolete_label in home_source:
+                errors.append(
+                    "index.html: homepage must not retain generic English interface "
+                    f"label {obsolete_label!r}"
+                )
         if '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>让自然语言目标</span><span class="portal-title-foundation">成为可验证的工程对象</span></strong></h1>' not in home_source:
             errors.append("index.html: rendered portal must identify Noemion before Endem")
         if home_source.count('class="portal-chapter-title"') != len(HOME_HEADINGS):
@@ -4763,16 +4815,6 @@ def main():
                     f"{obsolete_heading!r}"
                 )
 
-    for relative_path in ENTRY_PAGE_BADGE_ROUTES:
-        source = (ROOT / relative_path).read_text()
-        actual_badges = re.findall(r'<span class="badge">([^<]+)</span>', source)
-        generic_badges = [label for label in actual_badges if label in GENERIC_ENGLISH_BADGES]
-        if generic_badges:
-            errors.append(
-                f"{relative_path}: replace generic English template badges with "
-                f"reader-facing tasks, boundaries, or status: {generic_badges}"
-            )
-
     foundations = ROOT / "about/intellectual-foundations.html"
     if foundations.exists():
         parser = parse(foundations)
@@ -4816,6 +4858,14 @@ def main():
         if not path.exists():
             continue
         parser = parse(path)
+        source = path.read_text()
+        actual_badges = re.findall(r'<span class="badge">([^<]+)</span>', source)
+        generic_badges = [label for label in actual_badges if label in GENERIC_ENGLISH_BADGES]
+        if generic_badges:
+            errors.append(
+                f"{row['route']}: replace generic English template badges with "
+                f"reader-facing tasks, boundaries, or status: {generic_badges}"
+            )
         if parser.page_role != ROLE_BY_KIND[row["kind"]]:
             errors.append(f"{row['route']}: page role does not match registry kind")
         route_head = row["route"].split("/", 1)[0]

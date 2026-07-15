@@ -11,7 +11,7 @@ nav_title: "架构设计指南"
 page_heading: "Noemion 架构设计指南"
 page_lead: "沿一次 Agent 工作看清目标、会话、外部任务、证据和决定怎样穿过不同信任边界。"
 summary: "沿一次 Agent 工作看清目标、会话、外部任务、证据和决定怎样穿过不同信任边界。"
-badges: ["Architecture", "Endem", "Trust Boundaries"]
+badges: ["架构", "Endem", "信任边界"]
 ---
 
 ## 最小系统图
