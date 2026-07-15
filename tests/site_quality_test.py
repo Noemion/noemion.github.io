@@ -145,15 +145,16 @@ DOC_GUIDE_HEADINGS = {
     ],
 }
 HOME_HEADINGS = [
-    "执行完成不等于目标已经满足",
+    "人工智能系统开始行动人的目标仍困在对话里",
     "六项职责保持语义边界",
     "只保留有独立生命周期的名词",
     "一个入口不等于一个信任域",
     "当前先完成规范和安全边界",
-    "借鉴工具链思想不复制工具数量",
+    "从编译器与工具链借鉴工程纪律",
     "继续阅读",
 ]
 BACKGROUND_HEADINGS = [
+    "“编译目标”不是生成代码",
     "从一次依赖升级看清缺口",
     "Noemion 与相邻层怎样配合",
     "为什么需要一个持久目标对象",
@@ -3139,9 +3140,9 @@ def validate_jekyll_sources():
     if homepage_source.exists():
         homepage_text = homepage_source.read_text()
         for token in (
-            'title: "Noemion · 人工智能时代的自然语言目标规范"',
-            '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>让自然语言目标</span><span class="portal-title-foundation">成为可验证的工程对象</span></strong></h1>',
-            '<p class="portal-introduction-summary">Noemion 正在定义一种可持久保存、组合和独立验收的自然语言目标制品。Endem 是这套设计中的最小单元；当前只有规范与安全边界，没有可安装组件。</p>',
+            'title: "Noemion · 人工智能时代的人类目标编译研究"',
+            '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>把自然语言目标</span><span class="portal-title-foundation">编译成可检查的工程制品</span></strong></h1>',
+            '<p class="portal-introduction-summary">过去，编译器主要把程序员写的形式代码交给机器。Noemion 研究普通人怎样把自然语言表达的目标，形成供人工智能系统使用、可持久保存且可独立检查的制品。当前只有规范与安全边界，没有可用编译器或组件。</p>',
             '<span>从开发者案例开始</span>',
             '<span>查看 Endem 生命周期</span>',
             '<strong>Noemion</strong> 是项目与研究领域的名称',
@@ -4396,6 +4397,9 @@ def main():
         )
     getting_started_text = (SOURCE_ROOT / "docs" / "getting-started.md").read_text()
     for token in (
+        "软件工程长期把程序员写的形式代码编译给机器",
+        "这里的“编译”不是自然语言生成代码",
+        "没有可安装编译器或组件",
         "具体发行拼写和读音仍需完成 ADR-0034 的人类验证",
         "不用临时读法冒充正式读法",
         "不会成为第二套命令、机器别名或语义权威",
@@ -4415,8 +4419,10 @@ def main():
     developer_entry_contracts = {
         "index.html": (
             "从开发者案例开始",
-            "执行完成不等于目标已经满足",
-            "当前只有规范与安全边界，没有可安装组件",
+            "人工智能时代的人类目标编译研究",
+            "提出目标的人应当能够检查自己的表达怎样被解释",
+            "这里的“编译”不是自然语言生成代码",
+            "没有可用编译器或组件",
             "计划中的公开命令入口只有",
             "当前还没有可执行程序",
         ),
@@ -4429,6 +4435,8 @@ def main():
             "引用和状态",
         ),
         "faq/index.html": (
+            "为什么人工智能时代需要 Noemion",
+            "Noemion 是自然语言写代码工具吗",
             "第一次接触项目应该先读什么",
             "不必先记住全部项目术语",
             "Endem 是传统目标文件的新名字吗",
@@ -4752,7 +4760,7 @@ def main():
                     "index.html: homepage must not retain generic English interface "
                     f"label {obsolete_label!r}"
                 )
-        if '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>让自然语言目标</span><span class="portal-title-foundation">成为可验证的工程对象</span></strong></h1>' not in home_source:
+        if '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>把自然语言目标</span><span class="portal-title-foundation">编译成可检查的工程制品</span></strong></h1>' not in home_source:
             errors.append("index.html: rendered portal must identify Noemion before Endem")
         if home_source.count('class="portal-chapter-title"') != len(HOME_HEADINGS):
             errors.append("index.html: every homepage chapter heading must use the shared symbolic title treatment")

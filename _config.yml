@@ -1,6 +1,6 @@
 title: Noemion
 description: >-
-  Noemion 以 Endem 为最小原语，让自然语言目标能够被确定性形成、组合、检查与受控实现。
+  Noemion 研究普通人怎样把自然语言目标形成供人工智能系统使用、可持久且可检查的工程制品。
 url: https://noemion.github.io
 baseurl: ""
 repository: Noemion/noemion.github.io

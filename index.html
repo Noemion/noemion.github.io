@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Noemion · 人工智能时代的自然语言目标规范"
+title: "Noemion · 人工智能时代的人类目标编译研究"
 page_role: "portal"
 footer_text: "Noemion"
 permalink: "/index.html"
@@ -8,15 +8,15 @@ permalink: "/index.html"
 <main id="main-content" class="portal-main" tabindex="-1">
   <header class="portal-introduction" aria-labelledby="portal-title">
     <div class="portal-introduction-copy">
-      <p class="portal-eyebrow">面向人工智能时代的可验证目标</p>
-      <h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>让自然语言目标</span><span class="portal-title-foundation">成为可验证的工程对象</span></strong></h1>
-      <p class="portal-introduction-summary">Noemion 正在定义一种可持久保存、组合和独立验收的自然语言目标制品。Endem 是这套设计中的最小单元；当前只有规范与安全边界，没有可安装组件。</p>
+      <p class="portal-eyebrow">人工智能时代的人类目标编译研究</p>
+      <h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>把自然语言目标</span><span class="portal-title-foundation">编译成可检查的工程制品</span></strong></h1>
+      <p class="portal-introduction-summary">过去，编译器主要把程序员写的形式代码交给机器。Noemion 研究普通人怎样把自然语言表达的目标，形成供人工智能系统使用、可持久保存且可独立检查的制品。当前只有规范与安全边界，没有可用编译器或组件。</p>
       <div class="portal-actions">
         <a class="portal-button portal-button-primary" href="docs/getting-started.html"><span>从开发者案例开始</span><span aria-hidden="true">↗</span></a>
         <a class="portal-button portal-button-secondary" href="architecture/endem-lifecycle.html"><span>查看 Endem 生命周期</span><span aria-hidden="true">→</span></a>
       </div>
       <div class="portal-introduction-meta" aria-label="项目当前边界">
-        <span><i aria-hidden="true"></i>当前策略 · 规范与安全边界设计</span>
+        <span><i aria-hidden="true"></i>当前策略 · 研究、规范与安全边界设计</span>
       </div>
     </div>
 
@@ -29,11 +29,12 @@ permalink: "/index.html"
   <section class="portal-thesis">
     <div class="portal-thesis-title">
       <p class="portal-section-index">01 · 问题</p>
-      <h2 class="portal-chapter-title"><span>执行完成不等于目标已经满足</span></h2>
+      <h2 class="portal-chapter-title"><span>人工智能系统开始行动人的目标仍困在对话里</span></h2>
     </div>
     <div class="portal-thesis-copy">
-      <p class="portal-lead">Agent 可以返回 <code>completed</code>，工具也可以成功退出，但这些状态没有回答目标对象是否正确、约束是否满足、证据覆盖到哪里，以及谁有权接受结果。</p>
-      <p>Noemion 把目标定义从提示词、工作流和外部任务状态中分离出来，使同一目标可以跨模型、协议和多次运行保持可检查的身份。</p>
+      <p class="portal-lead">Agent 可以调用工具、修改系统并返回 <code>completed</code>。这些成功信号仍没有说明它是否保留了人的原意，也没有说明结果是否值得接受。</p>
+      <p>Noemion 想把目标从临时对话中取出来，形成能够跨模型、协议和多次运行继续核对的工程制品。提出目标的人应当能够检查自己的表达怎样被解释，而不是只能相信“模型大概理解了”。</p>
+      <p>这里的“编译”不是自然语言生成代码。它是一条可复核路径：保留人实际说过什么，显示已经确认的意义和仍未解决的问题，并预先写清期望结果与接受条件。</p>
       <p><strong>Endem</strong> 是项目为这项职责定义的最小目标制品：一个 Endem 只描述一个根期望终态及其来源、意义、方向、判据和待确认事项。复杂目标通过明确引用形成 Synem，不靠不断扩大的提示词维持关系。</p>
       <p><strong>Noemion</strong> 是项目与研究领域的名称；Endem 是其中的工程对象。名称只帮助交流，实际语义仍由规范、不变量和失败条件决定。</p>
     </div>
@@ -108,7 +109,7 @@ permalink: "/index.html"
 
   <section class="portal-evidence portal-reveal">
     <p class="portal-section-index">06 · 工程纪律</p>
-    <h2 class="portal-chapter-title"><span>借鉴工具链思想<br>不复制工具数量</span></h2>
+    <h2 class="portal-chapter-title"><span>从编译器与工具链<br>借鉴工程纪律</span></h2>
     <blockquote><p>“只有存在独立消费者、不同权威或不同失败责任，才值得成为单独应用或正式制品。”</p></blockquote>
     <a href="architecture/adr-0010-native-lexicon.html">阅读原生词汇与事态分层决定 <span aria-hidden="true">→</span></a>
   </section>
