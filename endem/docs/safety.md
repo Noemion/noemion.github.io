@@ -29,7 +29,7 @@ badges: ["elenk", "theor", "封闭失败"]
 
 GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf.html)说明它独立于 BFD，为第二条直接读取路径提供了工程先例。
 
-[GNU BFD 手册](https://sourceware.org/binutils/docs/bfd.html)说明它为多种格式提供通用内部表示。该表示可能隐藏格式特有信息，因此 Endem 第一阶段不链接 BFD。
+[GNU BFD 信息损失说明](https://sourceware.org/binutils/docs/bfd/BFD-information-loss.html)指出，不同对象格式进入共同表示后，目标格式无法承载的信息可能丢失。Endem 第一阶段因此使用格式专用路径，不让通用表示代替实际字节。
 
 这些资料只支持“独立直接读取”的方法，不决定 Endem 格式，也不使 `theor` 成为传统对象工具的复刻。
 
@@ -61,4 +61,4 @@ GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf
 
 ## 一致性验证怎样使用两条路径
 
-一致性验证对合法、边界和畸形向量分别运行 Ktisor 与 Theor，并比较字段解释、失败位置和分类。任何分歧都阻断发布，先调查规范是否含糊，再修复实现；不能简单选择某一实现作为事实来源。它不是 `endem` 动作。
+一致性验证对合法、边界和畸形向量分别运行生产侧 `elenk` 路径与独立 Theor，并比较字段解释、失败位置和分类。任何分歧都阻断发布，先调查规范是否含糊，再分别修正规范或出错实现并重跑两条路径；不能简单选择某一实现作为事实来源，也不能改写输入来制造一致。它不是 `endem` 动作。

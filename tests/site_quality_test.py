@@ -570,7 +570,12 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "components/theor.html": {
         "required": (
             "Theor",
+            "为什么第二条读取路径仍然必要",
             "用一次依赖更新理解 Theor",
+            "一次检查怎样保留主张范围",
+            "独立、只读和有界分别约束什么",
+            "分歧和失败后怎样继续",
+            "当前可以证明什么",
             "名称仍在研究",
             "theor",
             "独立",
@@ -578,6 +583,21 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "形成侧解析器",
             "不共享",
             "checked arithmetic",
+            "当前只有 Endem 具有实验性物理字节规范",
+            "不产生生产检查通过结论",
+            "模型摘要不能进入规范视图",
+            "GNU BFD 的信息损失说明",
+            "NIST AI 600-1",
+            "资料关系一致",
+        ),
+        "forbidden_patterns": (
+            r"<h2>为什么需要独立 Theor</h2>",
+            r"<h2>输入、输出与消费者</h2>",
+            r"<h2>实现独立性</h2>",
+            r"<h2>安全读取顺序</h2>",
+            r"<h2>GNU 机制的采用边界</h2>",
+            r"<h2>失败责任</h2>",
+            r"<h2>当前状态与待确定接口</h2>",
         ),
     },
     "components/drasor.html": {
@@ -3282,6 +3302,34 @@ def validate_jekyll_sources():
     }.items():
         if token not in ktisor_boundary_pages[page]:
             errors.append(f"{page} missing the precise Ktisor boundary: {token}")
+    theor_boundary_pages = {
+        "components/index.html": (SOURCE_ROOT / "components" / "index.html").read_text(),
+        "endem/index.html": (SOURCE_ROOT / "endem" / "index.html").read_text(),
+        "endem/docs/reference.md": (SOURCE_ROOT / "endem" / "docs" / "reference.md").read_text(),
+        "endem/docs/safety.md": (SOURCE_ROOT / "endem" / "docs" / "safety.md").read_text(),
+        "docs/architecture-guide.md": (SOURCE_ROOT / "docs" / "architecture-guide.md").read_text(),
+        "docs/endem-reference.md": (SOURCE_ROOT / "docs" / "endem-reference.md").read_text(),
+    }
+    for page, source_text in theor_boundary_pages.items():
+        for stale_phrase in (
+            "任意不可信 Endem、Synem 或 Iknem 字节",
+            "任意原始制品字节、视图和预算",
+            "| `theor` | 任意原始制品、视图和预算",
+            "一致性验证对合法、边界和畸形向量分别运行 Ktisor 与 Theor",
+            "独立只读检查器（Theor）",
+        ):
+            if stale_phrase in source_text:
+                errors.append(f"{page} retains a stale Theor boundary: {stale_phrase}")
+    for page, token in {
+        "components/index.html": "不产生生产检查通过结论",
+        "endem/index.html": "其他对象等待物理格式",
+        "endem/docs/reference.md": "不修复、不写回，也不生成生产检查通过结论",
+        "endem/docs/safety.md": "生产侧 `elenk` 路径与独立 Theor",
+        "docs/architecture-guide.md": "Synem、Iknem 与发布制品等待物理格式",
+        "docs/endem-reference.md": "这些字节在精确规则和预算下怎样显示、哪里不同或为何停止",
+    }.items():
+        if token not in theor_boundary_pages[page]:
+            errors.append(f"{page} missing the precise Theor boundary: {token}")
     open_questions_text = (SOURCE_ROOT / "architecture" / "open-questions.html").read_text()
     for token in (
         "先判断问题处于哪一层",

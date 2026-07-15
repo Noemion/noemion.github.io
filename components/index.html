@@ -7,7 +7,7 @@ permalink: "/components/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>系统组件</span></nav>
-  <header class="section-introduction"><h1>系统组件</h1><p>未来的软件为什么不能既解释人的目标、又检查自己的输出、还拿着权限直接执行，以及这三项工作怎样分开。</p><div class="badges"><span class="badge">唯一写入者</span><span class="badge">独立读取者</span><span class="badge">受限运行边界</span><span class="badge">均尚未实现</span></div></header>
+  <header class="section-introduction"><h1>系统组件</h1><p>未来的软件为什么不能既解释人的目标、又检查自己的输出、还拿着权限直接执行，以及这三项工作怎样分开。</p><div class="badges"><span class="badge">唯一写入者</span><span class="badge">独立检查边界</span><span class="badge">受限运行边界</span><span class="badge">均尚未实现</span></div></header>
   <section>
     <h2>为什么只有三个组件</h2>
     <p class="lead">如果同一段代码既写入目标、又证明自己写得正确，错误可能在两条路径中同时存在；如果写入器还能直接取得文件或网络权限，目标内容又会和运行能力混在一起。Noemion 因此规划三个组件：Ktisor 写入，Theor 独立读取，Drasor 只在一次会话中取得受限能力。</p>
@@ -16,7 +16,7 @@ permalink: "/components/index.html"
     <h2>组件入口</h2>
     <div class="page-links">
       <a class="page-link" href="ktisor.html"><strong>确定性目标制品生产边界（Ktisor）</strong><span>把已经确认的目标结构写成 Endem 或 Synem 规范字节，并检查生产路径；它不能替人选择意思、签名或取得运行权限。</span></a>
-      <a class="page-link" href="theor.html"><strong>独立只读检查器（Theor）</strong><span>使用第二条直接读取实现查看和比较制品，不生成生产可信句柄。</span></a>
+      <a class="page-link" href="theor.html"><strong>独立制品检查边界（Theor）</strong><span>从实际 Endem 字节重新恢复结构，并输出带范围的视图、差分和诊断；它不修复对象，也不产生生产检查通过结论。</span></a>
       <a class="page-link" href="drasor.html"><strong>受限运行边界（Drasor）</strong><span>每次运行前重新检查目标、授权和环境，只把本次需要的能力交给会话；它记录观察，但由另一个具名决定者判断结果是否可以接受。</span></a>
     </div>
   </section>
@@ -25,7 +25,7 @@ permalink: "/components/index.html"
     <div class="flow"><div class="step">受控来源 + 已确认意义投影</div><div class="step">Ktisor 核对语义授权绑定</div><div class="step">确定性形成 Endem / Synem</div><div class="step">Theor 独立检查</div><div class="step">Drasor 另行核对动作授权</div><div class="step">Iknem / 满足结果 / 最终决定</div></div>
     <div class="table-wrap"><table><thead><tr><th>组件</th><th>可以依赖</th><th>不得依赖</th></tr></thead><tbody>
       <tr><td>Ktisor</td><td>精确规范与 Profile、封闭形成输入、确定性算法和生产侧检查配置</td><td>模型开发包、外部签名响应、私钥、Drasor、实时能力和 Theor 输出</td></tr>
-      <tr><td>Theor</td><td>公开规范和自己的有界解析实现</td><td>Ktisor 的形成侧解析器、写入器、组合器、BFD 或错误分类实现</td></tr>
+      <tr><td>Theor</td><td>公开规范、精确 Profile、独立有界读取实现、调用方视图与预算</td><td>Ktisor 的形成侧解析器、写入器、组合器、生成代码、私有中间表示、错误分类实现或内部检查通过引用</td></tr>
       <tr><td>Drasor</td><td>Ktisor 的制品形成侧检查接口、隔离后端适配器、策略和能力提供者</td><td>Ktisor 写入器、对象改写接口、Theor 诊断作为授权依据</td></tr>
     </tbody></table></div>
   </section>

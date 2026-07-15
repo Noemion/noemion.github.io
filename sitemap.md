@@ -54,7 +54,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — routes unresolved semantic, format, runtime, naming, and evidence questions to current authority or scoped research
 - [Components](https://noemion.github.io/components/index.html) — Ktisor, Theor, and Drasor responsibility boundaries
 - [Ktisor](https://noemion.github.io/components/ktisor.html) — deterministic Endem/Synem production, production-side checking, release derivation, and external-signing separation
-- [Theor](https://noemion.github.io/components/theor.html) — independent, bounded, read-only interpretation and diagnostic boundary
+- [Theor](https://noemion.github.io/components/theor.html) — independent direct reading, scoped views, differential comparison, and non-production diagnostic boundary
 - [Drasor](https://noemion.github.io/components/drasor.html) — constrained loading, capability mediation, evidence collection, and execution boundary
 
 ## Specifications
