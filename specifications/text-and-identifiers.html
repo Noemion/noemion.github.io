@@ -7,84 +7,67 @@ permalink: "/specifications/text-and-identifiers.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>文本与标识符边界</span></nav>
-  <header class="content-introduction"><h1>文本与标识符边界</h1><p>定义系统怎样接收、比较、定位、显示和提交 Unicode 文本，并保证人类复核的内容与模型实际取得的内容可以核对。</p><div class="badges"><span class="badge">TEXT-IDENTIFIER-CORE 0.1.0-draft</span><span class="badge">当前策略</span><span class="badge">Unicode Profile 待定</span><span class="badge">尚无文本处理组件</span></div></header>
-
-  <section class="content-stack">
-    <h2>它解决什么问题</h2>
-    <p class="lead">看起来相同的文字不一定是相同字节、相同码点或相同意义。机器实际读取的内容也可能与审核者在屏幕上看到的内容不同。</p>
-    <p>TEXT-IDENTIFIER-CORE 给现有字符串字段建立共同边界。它分开来源字节、解码文本、结构标识符、规范化结果、比较规则、文本范围、显示视图和模型输入。</p>
-    <p><strong>当前策略：</strong>TEXT-IDENTIFIER-CORE 分开处理不同层次的文本。未来生产者和使用者必须说明自己处理哪一层，不得让显示、搜索、同形提示、语言标签或模型相似度替代精确机器内容与授权意义。</p>
-    <p class="callout"><strong>权威边界：</strong>实现义务以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md">TEXT-IDENTIFIER-CORE 条款源</a>为准。当前没有 Unicode 处理器、规范化器、同形检测器、模型输入网关或新的文本格式。</p>
-  </section>
+  <header class="content-introduction"><h1>文本与标识符边界</h1><p>规定自然语言和机器标识符从来源文件进入制品、界面与模型时，怎样解码、比较、定位和显示，并让人类复核内容与机器实际输入能够逐项核对。</p><div class="badges"><span class="badge">TEXT-IDENTIFIER-CORE 0.1.0-draft</span><span class="badge">当前策略</span><span class="badge">Unicode Profile 待定</span><span class="badge">尚无文本处理组件</span></div></header>
 
   <section class="content-wide">
-    <h2>用同一次发布理解文本边界</h2>
-    <p class="lead">服务发布从一份来源清单开始。开发者不能把“文件里原来的字节”“解码后的来源表达”“界面显示的安全视图”和“模型实际接收的码点”统称为同一段文本；每一步都要声明输入、变换、比较规则和身份影响。</p>
-    <div class="flow"><div class="step">原始来源字节</div><div class="step">严格 UTF-8 解码</div><div class="step">提交后的来源表达</div><div class="step">结构标识符与范围</div><div class="step">安全显示或模型输入</div><div class="step">授权意义另行形成</div></div>
-    <div class="table-wrap"><table><thead><tr><th>处理位置</th><th>本例怎样记录</th><th>不得省略的边界</th></tr></thead><tbody>
-      <tr><td>读取 <code>.ends</code></td><td>先严格解码 UTF-8；无效字节在形成对象前原子失败</td><td>不能用替换字符、本地编码猜测或静默规范化继续解析</td></tr>
-      <tr><td>写入 <code>rhem.content</code></td><td>保存转义与换行规则应用后的来源表达，并说明变换</td><td>它不是原始文件的逐字节副本，不能反推原始字节身份</td></tr>
-      <tr><td>比较关系 ID 和机器码</td><td>按现行 ASCII Profile 和原始字节区分大小写</td><td>搜索命中、locale、NFKC 或同形骨架不能选择安全对象</td></tr>
-      <tr><td>显示来源与范围</td><td>范围绑定精确文本主体和 Unicode 标量单位；视图披露转义、截断、方向与不可见字符</td><td>屏幕列、字素、UTF-16 单元和模型 token 不能冒充规范范围</td></tr>
-      <tr><td>提交模型或检索器</td><td>绑定实际输入身份、全部预处理、隐藏字符清单、模型与 tokenizer，以及复核视图</td><td>人看到的清洗文本不能掩盖模型取得的另一组码点；输出仍是不可信候选</td></tr>
+    <h2>先看一段文本怎样进入发布</h2>
+    <p class="lead">假设一份 <code>.ends</code> 清单包含服务说明、关系 ID 和供模型复核的自然语言。开发者不能把原文件字节、解码后的内容、安全显示视图和模型实际取得的码点统称为“同一段文本”。</p>
+    <div class="flow"><div class="step">原始来源字节</div><div class="step">严格 UTF-8 解码</div><div class="step">提交后的来源表达</div><div class="step">结构标识符与范围</div><div class="step">安全显示视图</div><div class="step">模型实际输入</div></div>
+    <div class="table-wrap"><table><thead><tr><th>处理位置</th><th>开发者要固定什么</th><th>失败时怎样处理</th></tr></thead><tbody>
+      <tr><td>读取来源</td><td>原始字节身份、字符编码和解码 Profile</td><td>无效 UTF-8 在形成对象前原子失败，不以替换字符或本地编码猜测继续解析</td></tr>
+      <tr><td>写入 <code>rhem.content</code></td><td>转义和换行规则应用后的来源表达，以及发生过的变换</td><td>不能把提交后的文本称为原始 <code>.ends</code> 文件的逐字节副本</td></tr>
+      <tr><td>比较关系 ID 与登记词</td><td>现行 ASCII Profile、原始字节和区分大小写的比较</td><td>搜索命中、locale、NFKC 或同形骨架不能选择安全对象</td></tr>
+      <tr><td>显示正文与范围</td><td>精确文本主体、Unicode 标量范围，以及转义、截断、方向和不可见字符清单</td><td>屏幕列、字素、UTF-16 单元或短显示不能冒充规范范围和安全引用</td></tr>
+      <tr><td>提交模型或检索器</td><td>实际输入身份、全部预处理、模型与 tokenizer 身份，以及人类复核视图</td><td>显示与实际输入不同必须明示；模型输出仍是不可信候选</td></tr>
     </tbody></table></div>
-    <p>如果审核者确认一项候选意义，AUT-CORE 还要绑定安全视图、精确机器请求、决定主体和范围。TEXT-IDENTIFIER-CORE 只能证明“人看见的内容怎样对应机器内容”，不能证明观看者有权确认，也不能把字形相似提升为语义相同。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>先分清五类文本职责</h2>
-    <div class="table-wrap"><table><thead><tr><th>文本槽</th><th>承担的职责</th><th>当前关键边界</th></tr></thead><tbody>
-      <tr><td><code>source-content</code></td><td>保存提交后解码得到的来源表达</td><td>允许 Unicode；不静默规范化；不冒充原始来源字节</td></tr>
-      <tr><td><code>structural-identifier</code></td><td>承担机器引用、闭包和结构比较</td><td>END-P1 继续只允许 ASCII；大小写敏感；与 locale 无关</td></tr>
-      <tr><td><code>registered-token</code></td><td>保存规范中登记的有限枚举和值域</td><td>只接受登记值；不能由本地化文本替代</td></tr>
-      <tr><td><code>descriptive-text</code></td><td>供人阅读的说明、限制和背景</td><td>可以本地化；不能进入身份或授权判断</td></tr>
-      <tr><td><code>display-message</code></td><td>呈现诊断、日志摘要和界面提示</td><td>可以转义或截断；必须披露变换；不能成为安全引用</td></tr>
-    </tbody></table></div>
+    <p>每个字符串还要先声明自己的文本槽：<code>source-content</code> 保存来源表达，<code>structural-identifier</code> 承担机器引用，<code>registered-token</code> 只接受登记值，<code>descriptive-text</code> 供人阅读，<code>display-message</code> 只负责呈现。复制字符串不会把一种职责带到另一种槽。</p>
+    <p><strong>当前策略：</strong>来源内容允许 Unicode 但不静默规范化，结构标识符继续使用封闭 ASCII Profile；显示、搜索、同形提示和模型相似度不得替代精确机器内容、授权意义或最终决定。</p>
   </section>
 
   <section class="content-wide">
     <h2>文本与标识符必须怎样处理</h2>
-    <div class="table-wrap"><table><thead><tr><th>规则</th><th>直白要求</th><th>必须拒绝</th></tr></thead><tbody>
-      <tr><td><code>TEXT-SLT-001</code></td><td>每个字符串字段先声明文本槽和失败责任</td><td>把来源正文、本地化消息和机器标识符混用</td></tr>
-      <tr><td><code>TEXT-ENC-001</code></td><td>输入先按 RFC 3629 严格解码 UTF-8</td><td>过长编码、代理项、非法标量和本地编码猜测</td></tr>
-      <tr><td><code>TEXT-SRC-001</code></td><td>分开来源字节、解码文本、变换和损失</td><td>把 END-SRCM 解码内容称为原文件逐字节副本</td></tr>
-      <tr><td><code>TEXT-IDN-001</code></td><td>当前结构标识符保持封闭 ASCII Profile</td><td>Unicode 同形、默认 locale 和静默大小写折叠</td></tr>
-      <tr><td><code>TEXT-NRM-001</code></td><td>规范化必须绑定文本槽、Unicode 版本和身份影响</td><td>盲目 NFC、NFKC 或覆盖原文</td></tr>
-      <tr><td><code>TEXT-CMP-001</code></td><td>每次比较明确字节、标量、规范化或排序域</td><td>搜索命中、同形骨架或模型相似度替代精确相等</td></tr>
-      <tr><td><code>TEXT-RNG-001</code></td><td>范围绑定精确主体、表示和 Unicode 标量单位</td><td>混用字节、UTF-16、字素、屏幕列和模型 token</td></tr>
-      <tr><td><code>TEXT-BID-001</code></td><td>逻辑存储顺序与双向显示顺序分开</td><td>视觉顺序参与身份或安全相关方向控制被隐藏</td></tr>
-      <tr><td><code>TEXT-HID-001</code></td><td>不可见字符与同形风险可被盘点和显式审查</td><td>静默删除、自动合并身份或仅凭警告判断恶意</td></tr>
-      <tr><td><code>TEXT-MET-001</code></td><td>语言、媒体、方向和 locale 元数据只承担声明</td><td>自报语言触发未登记变换或取得语义权威</td></tr>
-      <tr><td><code>TEXT-AIM-001</code></td><td>绑定模型实际输入、预处理、tokenizer 和复核视图</td><td>人看清洗文本而模型接收另一组码点</td></tr>
-      <tr><td><code>TEXT-OUT-001</code></td><td>显示、复制和导出披露转义、截断、脱敏与方向处理</td><td>短显示或经过清洗的界面文本充当安全引用</td></tr>
+    <p class="lead">按十二项责任检查每个文本槽；同一字符串进入不同槽时，必须重新核对用途和信任边界。</p>
+    <div class="table-wrap"><table><thead><tr><th>规则</th><th>开发者应做什么</th><th>必须拒绝什么</th></tr></thead><tbody>
+      <tr><td><code>TEXT-SLT-001</code></td><td>声明槽类别、允许字符、比较、变换、长度单位、显示和失败责任</td><td>来源正文、本地化消息和机器标识符混用</td></tr>
+      <tr><td><code>TEXT-ENC-001</code></td><td>先按 RFC 3629 严格解码 UTF-8，再进行字段解析或其他变换</td><td>过长编码、代理项、非法标量和平台编码猜测</td></tr>
+      <tr><td><code>TEXT-SRC-001</code></td><td>分开来源字节、解码文本、变换结果和信息损失</td><td>变换后沿用输入身份，或把解码内容称为原文件副本</td></tr>
+      <tr><td><code>TEXT-IDN-001</code></td><td>结构标识符使用各自登记的封闭 ASCII 语法</td><td>Unicode 同形、默认 locale、宽度映射和静默大小写折叠</td></tr>
+      <tr><td><code>TEXT-NRM-001</code></td><td>规范化绑定文本槽、Unicode 版本、具体形式和身份影响</td><td>盲目应用 NFC 或 NFKC、覆盖原文，或据此宣称语义相同</td></tr>
+      <tr><td><code>TEXT-CMP-001</code></td><td>明确按字节、标量、具名规范化结果、排序域还是风险骨架比较</td><td>搜索、排序、同形提示或模型相似度替代精确相等</td></tr>
+      <tr><td><code>TEXT-RNG-001</code></td><td>范围绑定精确主体、表示版本、半开区间和 Unicode 标量单位</td><td>混用字节、UTF-16、字素、屏幕列和模型 token</td></tr>
+      <tr><td><code>TEXT-BID-001</code></td><td>以逻辑顺序保存和定位；显示按绑定版本的 UAX #9 隔离方向</td><td>视觉顺序参与身份，或安全视图隐藏方向控制</td></tr>
+      <tr><td><code>TEXT-HID-001</code></td><td>列出不可见字符、变体选择符、混合脚本和同形风险</td><td>静默删除、自动合并身份，或仅凭警告判定恶意</td></tr>
+      <tr><td><code>TEXT-MET-001</code></td><td>分别验证语言、媒体、方向和 locale 声明</td><td>自报语言触发未登记变换，或取得语义权威</td></tr>
+      <tr><td><code>TEXT-AIM-001</code></td><td>绑定模型实际输入、预处理、风险清单、模型、tokenizer 和复核视图</td><td>审核者看清洗文本，模型却取得另一组码点</td></tr>
+      <tr><td><code>TEXT-OUT-001</code></td><td>显示、复制与导出披露转义、截断、脱敏和方向处理</td><td>短显示、日志摘要或经过清洗的文本充当安全引用</td></tr>
+    </tbody></table></div>
+    <p class="callout"><strong>权威边界：</strong><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md">TEXT-IDENTIFIER-CORE 条款源</a>定义规范义务。这份说明帮助开发者选择检查顺序，不建立第二套条款。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>遇到更强问题时再查对应资料</h2>
+    <div class="table-wrap"><table><thead><tr><th>开发问题</th><th>继续核对</th><th>当前停止条件</th></tr></thead><tbody>
+      <tr><td>需要证明原文件没有改变</td><td>精确内容身份、原始字节身份、解码 Profile 和完整变换链</td><td><code>rhem.content</code> 只保存提交后的来源表达，不能反推原文件字节</td></tr>
+      <tr><td>需要 Unicode 结构标识符</td><td><a href="https://www.unicode.org/reports/tr31/">UAX #31</a>、<a href="https://www.unicode.org/reports/tr39/">UTS #39</a>和独立内容 Profile</td><td>真实生产者、消费者、迁移规则和正反向量出现前继续使用 ASCII</td></tr>
+      <tr><td>需要规范化、搜索或语言排序</td><td><a href="https://www.unicode.org/reports/tr15/">UAX #15</a>与 <a href="https://www.rfc-editor.org/rfc/rfc8264.html">RFC 8264</a>，并为具体用途定义版本化比较 Profile</td><td>规范化、搜索命中和排序结果都不能替代内容身份或语义等价</td></tr>
+      <tr><td>需要双向编辑或同形风险处置</td><td><a href="https://www.unicode.org/reports/tr9/">UAX #9</a>、UTS #39、威胁模型与实际字体和界面测试</td><td>风险提示不能自动改写来源、合并对象或判定恶意</td></tr>
+      <tr><td>需要构造模型或检索上下文</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">模型上下文组装研究</a>，同时核对授权、预算、外部适配和诊断责任</td><td>当前没有模型输入网关；模型输出不能写入规范字节或扩大权限</td></tr>
+      <tr><td>需要把文本用于确认或授权</td><td>AUT-CORE 的安全显示视图、精确机器请求、决定主体和适用范围</td><td>TEXT-IDENTIFIER 只证明显示怎样对应机器内容，不证明观看者有决定权</td></tr>
+      <tr><td>需要判断名称是否适合公开传播</td><td><a href="../docs/terminology-and-pronunciation.html">术语与读音验证指南</a>的首次朗读、听写和成对混淆测试</td><td>字符合法、书写不同或自动转写成功都不能证明读音流畅且可区分</td></tr>
     </tbody></table></div>
   </section>
 
-  <section class="content-wide">
-    <h2>当前怎样处理来源表达</h2>
-    <p>END-SRCM 接受 UTF-8 来源清单，并把转义与换行规则应用后得到的文本写入 <code>rhem.content</code>。因此当前 Endem 保存的是提交后的解码表达，不是原始 <code>.ends</code> 文件的逐字节副本。</p>
-    <p>如果未来需要证明某份原始文件未经改变，必须另外绑定原始来源字节身份、解码 Profile、变换链和损失清单。不能用 <code>rhem.content</code> 反推原文件的字节序列。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>为什么模型输入需要单独约束</h2>
-    <p>不可见字符、同形替换和变体选择符可能改变 tokenizer 与模型行为，却不一定在普通界面中显现。未来任何模型或检索调用都必须绑定实际输入身份、全部预处理、隐藏字符清单、模型与 tokenizer 身份，以及供人核对的显示视图。</p>
-    <p>这项绑定只让候选过程可审查。模型输出仍然是 <code>model-candidate</code>，不能直接写入规范字节、删除 <code>apor</code>、扩大权限或宣告目标已经满足。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>符合性材料</h2>
-    <div class="table-wrap"><table><thead><tr><th>材料</th><th>当前覆盖</th><th>不能证明</th></tr></thead><tbody>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-threat-model.md">TEXT-THREAT</a></td><td>覆盖编码、规范化、范围、双向显示、隐藏字符和模型视图威胁</td><td>Unicode 处理库、界面或模型网关已经安全</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-scenarios.md">TEXT-SCEN</a></td><td>用支持案例、反例与待确认场景检查文本责任</td><td>场景本身是稳定 Profile 或组件证据</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/text-identifier">TEXT-IDENTIFIER-CORE 向量</a></td><td>覆盖允许包络与确定拒绝，并绑定对应条款</td><td>解码器、规范化器、同形检测器或模型输入网关已经实现</td></tr>
-    </tbody></table></div>
-  </section>
-
-  <section class="content-wide">
-    <h2>待定内容</h2>
-    <p>Unicode 国际化结构标识符、来源文本重写、语言检测、分词、字素级编辑、搜索排序、字体信任、tokenizer 协议、同形自动处置、双向编辑器和原始来源字节字段都保持开放。任何新增字段或 Profile 都必须先证明真实生产者、消费者、身份影响和正反向量。</p>
-    <p>背景、权衡和权威资料见 <a href="../architecture/adr-0028-text-and-identifier-boundaries.html">ADR-0028 文本与标识符边界</a>。</p>
+  <section class="content-stack">
+    <h2>规范来源与当前上限</h2>
+    <p>截至 2026 年 7 月 16 日，<a href="https://www.unicode.org/versions/Unicode17.0.0/">Unicode 17.0</a>仍是当前版本，UTS #39 的安全数据与它同步更新。UAX #31 要求实现说明采用的标识符要求或 Profile；UTS #39 也说明同形程度会随字体、书写系统和使用者变化，因此风险骨架不能成为精确身份。</p>
+    <p><a href="https://www.rfc-editor.org/rfc/rfc3629.html">RFC 3629</a>提供 UTF-8 的合法编码边界；<a href="https://www.gnu.org/software/libunistring/manual/libunistring.html">GNU libunistring</a>把编码表示、规范化、大小写、字素、词和行处理分成不同接口。Noemion 借鉴这种职责分离，不据此选择实现库或建立组件。</p>
+    <div class="page-links">
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-threat-model.md"><strong>文本与标识符威胁模型</strong><span>覆盖编码、规范化、范围、双向显示、隐藏字符和模型视图威胁。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-scenarios.md"><strong>设计场景</strong><span>用支持案例、反例与待确认场景检查责任边界；场景不是实现证据。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/text-identifier"><strong>文本与标识符提案向量</strong><span>检查允许包络与确定拒绝；向量不证明 Unicode 库、界面或模型网关已经实现。</span></a>
+      <a class="page-link" href="../architecture/adr-0028-text-and-identifier-boundaries.html"><strong>ADR-0028</strong><span>说明 ASCII 标识符、不统一规范化和模型输入绑定的权衡与采用限制。</span></a>
+    </div>
+    <p><strong>待定内容：</strong>Unicode 国际化结构标识符、来源文本重写、语言检测、分词、字素级编辑、搜索排序、字体信任、tokenizer 协议、同形自动处置、双向编辑器和原始来源字节字段都保持开放。当前没有 Unicode 处理器、规范化器、同形检测器、模型输入网关或新的文本格式。</p>
   </section>
   <div class="next-prev"><a href="identity.html">← 精确内容身份与签名</a><a href="../architecture/adr-0028-text-and-identifier-boundaries.html">ADR-0028 →</a></div>
 </main>
