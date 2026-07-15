@@ -642,7 +642,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             "Synem",
             "组合闭包（设计阶段名称 Synem）",
-            "用一次服务发布理解组合闭包",
+            "先判断它是不是两个目标",
+            "按四步形成固定闭包",
+            "成员结果与会话激活不能合并",
+            "外部机制不能替代闭包",
+            "规范来源与当前上限",
             "依赖制品 Endem",
             "服务健康 Endem",
             "名称仍在研究",
@@ -651,10 +655,33 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "导出",
             "必需依赖",
             "可选依赖",
+            "SYN-CLS-001",
+            "SYN-RES-001",
+            "SYN-GRF-001",
+            "SYN-AUT-001",
+            "SYN-STA-001",
+            "SYN-ACT-001",
+            "active / inactive / unresolved / error",
+            "尚无物理格式",
+            "尚未实现",
+            "资料一致性检查",
+            "复核日期：</strong>2026-07-16",
+            "GNU make",
+            "GNU Guix",
+            "MCP 2025-11-25",
+            "notifications&#47;tools&#47;list_changed",
+            "A2A 1.0 Agent Card",
         ),
         "forbidden_patterns": (
             r"按强定义、弱定义",
             r"弱引用无定义",
+            r"<h2>先给直白定义</h2>",
+            r"<h2>用一次服务发布理解组合闭包</h2>",
+            r"<h2>六条规范不变量</h2>",
+            r"<h2>绑定怎样形成</h2>",
+            r"<h2>条件激活回答另一个问题</h2>",
+            r"<h2>规范源与证据边界</h2>",
+            r"<h2>当前状态</h2>",
         ),
     },
     "specifications/iknem.html": {
@@ -3259,6 +3286,11 @@ def validate_jekyll_sources():
         if proposal_name not in open_questions_text:
             errors.append(f"open questions guide must route the research proposal: {proposal_name}")
     specification_reader_contracts = {
+        "specifications/synem.html": (
+            "按四步形成固定闭包",
+            "尚无物理格式",
+            "尚未实现",
+        ),
         "specifications/dromen.html": ("按五步建立本次边界",),
         "specifications/iknem.html": (
             "按四步形成并评估一项记录",
