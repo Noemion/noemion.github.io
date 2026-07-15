@@ -1311,6 +1311,7 @@ body[data-docs-layout="true"] .page-links{margin-inline:calc(-1 * var(--site-con
 .manual-article>:is(h3,h4,p,ul,ol,blockquote){max-width:760px;margin-right:auto;margin-left:0}
 .manual-article>table{display:block;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}
 .manual-article .manual-table-wrap table{display:table;min-width:680px}
+.manual-article .manual-table-wrap td code{overflow-wrap:normal;word-break:normal}
 .manual-article .manual-table-wrap::after{
   content:"Swipe table →";display:block;padding:5px 2px 0;color:var(--nav-muted);
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9px;letter-spacing:.08em;text-align:right

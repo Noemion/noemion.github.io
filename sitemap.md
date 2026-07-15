@@ -101,7 +101,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Binding](https://noemion.github.io/endem/docs/binding.html) — symbols, references, Synem closure, conflict handling, and packing
 - [Safety](https://noemion.github.io/endem/docs/safety.html) — bounded parsing, checked arithmetic, independent reading, integrity, and signing boundaries
 - [Running](https://noemion.github.io/endem/docs/running.html) — Dromen creation, constrained execution, observations, evidence closure, and acceptance
-- [Reference](https://noemion.github.io/endem/docs/reference.html) — actions, artifacts, diagnostics, states, and normative sources
+- [Reference](https://noemion.github.io/endem/docs/reference.html) — task lookup for actions, objects, result domains, goal constraints, diagnostics, and authoritative sources
 
 ## Availability and authority
 

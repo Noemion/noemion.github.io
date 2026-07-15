@@ -1439,6 +1439,8 @@ def validate_readability_behavior_contracts(root):
                 errors.append(
                     f"content enhancement module missing readability contract: {token}"
                 )
+        if ".manual-article .manual-table-wrap td code{overflow-wrap:normal;word-break:normal}" not in style.read_text():
+            errors.append("manual table code identifiers can collapse into character-by-character wrapping")
         for token in (
             "href: /architecture/index.html",
             "href: /architecture/decisions.html",
@@ -3350,6 +3352,39 @@ def validate_jekyll_sources():
     }.items():
         if token not in theor_boundary_pages[page]:
             errors.append(f"{page} missing the precise Theor boundary: {token}")
+    endem_reference_text = theor_boundary_pages["endem/docs/reference.md"]
+    for token in (
+        "## 按工作查动作",
+        "## 按对象查职责",
+        "## 按结果域查状态",
+        "## 按目标类型查约束",
+        "## 按失败层查诊断",
+        "## 按问题进入权威源",
+        "## 当前可以证明什么",
+        "集合身份、成员资格权威、截止点和身份规则",
+        "`END-QNT-001` 至 `END-QNT-003`",
+        "只有 [DIA-CAT]",
+        "人类消息可以改写或本地化，但程序不得依赖其文本",
+        "不是发行 ABI",
+        "尚无真实使用者读音、听辨和生态冲突证据",
+    ):
+        if token not in endem_reference_text:
+            errors.append(f"Endem reference missing task-oriented developer boundary: {token}")
+    for obsolete_token in (
+        "## 子命令索引",
+        "## mene 时间索引",
+        "## 测量与阈值索引",
+        "## 复合判断索引",
+        "## 否定与缺席索引",
+        "## 稳定失败类别",
+        "source invalid",
+        "contract incomplete",
+        "malformed object",
+        "implementation disagreement",
+        "reproducibility failed",
+    ):
+        if obsolete_token in endem_reference_text:
+            errors.append(f"Endem reference retains an obsolete inventory or free-form failure identity: {obsolete_token}")
     open_questions_text = (SOURCE_ROOT / "architecture" / "open-questions.html").read_text()
     for token in (
         "先判断问题处于哪一层",

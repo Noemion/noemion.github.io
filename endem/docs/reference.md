@@ -10,148 +10,92 @@ manual_order: 5
 manual_index_entry: true
 nav_title: "参考索引"
 page_heading: "参考索引"
-page_lead: "按用户要做的事情查找计划中的命令动作，并核对每一步读什么、产出什么、失败时返回什么。"
-summary: "查找五个动作、四类对象、状态、失败原因和对应规范来源。"
-badges: ["参考", "CLI 待定"]
+page_lead: "按开发任务查动作、对象、结果域、目标约束和诊断来源；该索引只说明现行设计，不提供尚未发布的命令参数。"
+summary: "按开发任务查找动作、对象、结果域、目标约束、诊断与权威来源。"
+badges: ["开发者索引", "CLI 待定"]
 ---
 
-## 子命令索引
+## 按工作查动作
 
-| 子命令 | 主要输入 | 主要输出 | 权限边界 |
+| 要做的工作 | 动作 | 读取什么 | 产出与停止边界 |
 | --- | --- | --- | --- |
-| `ktise` | 受控来源、投影候选与具名决定 | 来源保留的 nascent Endem；形成记录的 Iknem 物理格式待定 | Endem 规范字节的唯一生产入口 |
-| `elenk` | 原始制品、层、限制和信任材料 | 分层结论；未来 Elenk Iknem 的物理格式待定 | Ktisor 的制品形成侧检查路径 |
-| `pleko` | Endem、组合策略和依赖锁 | 完整组合闭包；Synem 规范字节和 Pleko Iknem 的物理格式待定 | 不读取环境隐式依赖 |
-| `theor` | 当前为实际 Endem 字节、精确规范/Profile、视图和预算；其他对象等待物理格式 | 带范围的只读视图、差分和诊断 | 独立 Theor；不修复、不写回，也不生成生产检查通过结论 |
-| `drase` | 精确发布制品、适用外部陈述、验证政策、执行策略、后端与能力 | Dromen、会话结果和 Iknem | 隔离 Drasor，不拥有写入器；依赖方与具名权威分别决定准入和接受 |
+| 从已确认解释形成目标制品 | `ktise` | 受控来源、投影候选与具名决定 | 形成来源保留的 nascent Endem；它是 Endem 规范字节的唯一生产入口；意义未确认时停止 |
+| 从生产侧检查制品 | `elenk` | 原始制品、检查层、限制和信任材料 | 返回分层结论；不替代独立读取，也不产生外部接受决定 |
+| 固定多个目标的组合闭包 | `pleko` | Endem、组合策略和依赖锁 | 形成完整组合闭包；引用未解析、存在冲突或权限扩大时停止 |
+| 独立查看实际字节 | `theor` | 当前为实际 Endem 字节、精确规范/Profile、视图和预算；其他对象等待物理格式 | 返回带范围的只读视图、差分和诊断；独立 Theor 不修复、不写回，也不生成生产检查通过结论 |
+| 建立一次受限会话 | `drase` | 精确发布制品、外部陈述、验证政策、执行策略、后端与能力 | 形成 Dromen、会话结果和 Iknem；Drasor 不拥有写入器，准入与接受由各自具名权威决定 |
 
-**当前策略：**Endem 文件使用 `.endem` 扩展名。**待定内容：**参数、选项、退出码、Synem/Iknem 扩展名和安装接口。因此目前不能编写依赖具体参数的脚本。
+`endem` 计划作为唯一公开命令入口，表中的五个名称是动作标识，不是已经发布的 CLI。当前只确定 Endem 使用 `.endem` 扩展名；参数、选项、退出状态、安装接口以及 Synem 和 Iknem 的物理格式仍待确定，开发者不能据此编写自动化脚本。
 
-## 制品与视图
+## 按对象查职责
 
-| 名称 | 定义 |
-| --- | --- |
-| Endem | 具有一个根 `skena` 和六个语义面的最小目标制品 |
-| Synem | 两个或更多 Endem 的已解析组合闭包 |
-| Dromen | Drasor 为一次 Drase 会话封存的只读执行契约，不是文件或可恢复权限 |
-| Iknem | 封装 phain、来源、范围、方法、限制或决定依据的证据记录 |
+| 对象 | 保存什么 | 不负责什么 | 当前物理状态 |
+| --- | --- | --- | --- |
+| Endem | 一个根 `skena` 及 `rhem/semion/skena/telis/krin/apor` 六个语义面 | 不保存会话能力、最终接受或运行观察 | END-FMT 已有实验容器；END-P1 已有来源保留 Profile |
+| Synem | 两个或更多 Endem 的已解析组合闭包 | 不在运行时补依赖或扩大成员权限 | 只有抽象语义，物理格式待定 |
+| Dromen | 一次 Drase 会话的只读执行契约 | 不是可转移文件，也不保存实时秘密或可恢复权限 | 只有抽象语义，序列化被明确禁止 |
+| Iknem | 有范围的观察、来源、方法、限制或决定依据 | 不自证有效，不替代满足判断与具名决定 | 只有抽象语义，物理格式待定 |
 
-Endem 的规范分为三层：END-CORE 定义通用内容标准，END-P1 定义来源保留的形成 Profile，END-FMT 定义实验性物理容器。容器接受、Profile 接受和内容接受必须分别报告；最终发布还需要 ADR-0036 所要求的独立 Profile。详见 [ADR-0023](../../architecture/adr-0023-endem-content-standard.html) 与 [ADR-0036](../../architecture/adr-0036-source-bearing-and-stripped-release.html)。
+Endem 的通用内容、来源保留 Profile 和实验容器分别由 END-CORE、END-P1 与 END-FMT 负责。容器接受、Profile 接受和内容接受必须分开报告；最终发布还需要 ADR-0036 所要求的独立 Profile。详见 [Endem 内容标准分层](../../architecture/adr-0023-endem-content-standard.html)与[来源保留和裁剪发布](../../architecture/adr-0036-source-bearing-and-stripped-release.html)。
 
-## 状态索引
+## 按结果域查状态
 
-| 对象 | 状态 | 含义 |
+| 开发者要回答的问题 | 状态 | 不能据此推出 |
 | --- | --- | --- |
-| Endem | `nascent` | 结构合法，但仍可能有 apor、引用或确认事项 |
-| Endem | `coherent` | 必需引用、冲突、能力和验收关系已解析 |
-| Endem | `attested`（现行草案） | 草案用一个值概括发布见证；实际签名陈述、主体摘要、验证政策、截止点、撤销和依赖方判断必须作为外部关系分别保存 |
-| 满足判断 | `met / unmet / agno / fault` | skena 相对 phain 和 krin 的满足判断 |
-| 权威决定 | `accepted` | krin 结果为 met、必需 Iknem 有效且覆盖充分，并且决定权威匹配 |
-| 权威决定 | `rejected` | 具名权威依据 unmet 或预先登记政策作出否定决定 |
-| 权威决定 | `deferred` | 尚无获授权的最终决定，或 agno、fault 与授权缺口仍未解决 |
-| Drase 会话 | `completed` | 按声明终止规则结束；不说明目标是否满足 |
-| Drase 会话 | `failed` | 系统、策略、对象、求值器或后端使会话无法继续 |
-| Drase 会话 | `interrupted` | 取消、预算、环境、输入或授权条件使会话中断 |
-| Iknem 有效性 | `valid / invalid / revoked` | 验证者在精确政策、参考值、环境和截止点下形成的外部评估 |
-| 证据覆盖度 | `sufficient / insufficient` | 一组有效 Iknem 是否覆盖指定 krin 与观察责任；不按记录数量计算 |
+| Endem 的结构和引用处理到哪一步 | `nascent / coherent`；`attested`（现行草案） | 目标已经满足、会话可以开始或权威已经接受 |
+| 目标相对观察与判据是否成立 | `met / unmet / agno / fault` | 权威接受、会话完成或证据有效 |
+| 具名权威作出了什么决定 | `accepted / rejected / deferred` | 目标真值、证据数量或运行成功 |
+| Drase 会话怎样终止 | `completed / failed / interrupted` | 目标已经满足或制品已经接受 |
+| 一项 Iknem 在精确政策和截止点下是否可用 | `valid / invalid / revoked` | 证据覆盖已经充分或主张为真 |
+| 一组有效 Iknem 是否覆盖指定判断责任 | `sufficient / insufficient` | 按记录数量投票或自动形成最终决定 |
 
 现行规范值尚未迁移，因此参考索引仍列出 `attested`。开发者不得据此实现内容内布尔标志，也不得让签名存在直接产生会话准入；完整限制见 [Endem 生命周期](../../architecture/endem-lifecycle.html)与[生命周期及结果词边界研究提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md)。
 
-## mene 时间索引
+## 按目标类型查约束
 
-| 类别 | 值 | 含义 |
+| 目标类型 | 形成前必须固定 | 何时保留不确定或故障 | 现行来源 |
+| --- | --- | --- | --- |
+| 固定时间或经过时间 | UTC 半开区间或具名事件与单调时钟，以及 `strict/budgeted` 连续性 | 覆盖不足为 `agno`；时钟、同步或求值契约失败为 `fault` | [ADR-0016](../../architecture/adr-0016-mene-time-model.html) |
+| 否定关系或缺席 | 原关系的角色与顺序；证明缺席时还需权威、全集、路径、时间和损失边界 | 普通查询未命中默认为 `agno`；观察契约失败为 `fault` | [ADR-0017](../../architecture/adr-0017-negation-and-absence.html) |
+| 量化与成员资格 | 关系模板、被量化角色、集合身份、成员资格权威、截止点和身份规则 | 范围不完整或成员观察不足为 `agno`；成员求值契约失败为 `fault` | `END-QNT-001` 至 `END-QNT-003`、[ADR-0018](../../architecture/adr-0018-quantification-and-membership.html) |
+| 测量与阈值 | 构念与总体、程序与版本、窗口、单位、聚合器、阈值和不确定区间 | 样本或覆盖不足为 `agno`；程序、生产者或统计契约失败为 `fault` | [ADR-0019](../../architecture/adr-0019-measurement-and-thresholds.html) |
+| 复合条件 | `all_of/any_of` 结构、每个叶的判据、决定性依据和求值覆盖 | 没有决定性结果时保留叶级 `fault`、`agno` 和未运行原因 | [ADR-0020](../../architecture/adr-0020-composite-situations-and-criteria.html) |
+
+量化只允许 `all`、`some`、`at_least`、`at_most` 和 `exactly`，并按不同成员身份计数。空集合必须由具名权威明确允许；量化 `mene`、嵌套量化和物理字段仍未确定。以上五类约束目前都是抽象语义，不是 END-P1 字段、CLI 参数或已实现求值器。
+
+## 按失败层查诊断
+
+| 先判断哪里失败 | 开发者应核对什么 | DIA-CAT 登记码示例 |
 | --- | --- | --- |
-| 时间范围 | `fixed` | 具名权威解析的 UTC 半开区间 `[start,end)` |
-| 时间范围 | `elapsed` | 从具名事件开始、由单调时钟测量的固定经过时长 |
-| 连续性 | `strict` | skena 在整个目标区间都必须成立 |
-| 连续性 | `budgeted` | 只允许在累计、单次和次数预算内违约 |
-| 覆盖缺口 | `agno` | 判据明确，但观测区间不完整或时间不确定度过大 |
-| 时钟故障 | `fault` | 时钟、同步、适配器或求值器没有按契约完成 |
+| 来源 `source` | 编码、来源清单、范围和有损变换 | `endem.source.utf8`、`text.source.provenance_incomplete` |
+| 结构与 Profile `structure/profile` | 固定前导、目录范围、记录形状、Profile 和预算 | `endem.wire.header.truncated`、`endem.wire.profile.limit` |
+| 语义与闭包 `semantic/closure` | 六个语义面、引用、结果域和完整依赖 | `endem.semantic.reference`、`synem.closure.incomplete` |
+| 会话与政策 `session/policy` | 主体、能力交集、预算、漂移、权威和截止点 | `dromen.environment.drift`、`authority.scope.amplified` |
+| 证据与协议 `evidence/protocol` | Iknem 范围、外部来源、协议版本、映射损失和取消语义 | `iknem.scope.unbound`、`adapter.error.provenance_lost` |
+| 诊断系统 `internal` | 机器身份、主错误选择、披露、预算和原子失败 | `diagnostic.identity.unregistered`、`diagnostic.atomicity.partial_success` |
 
-这些值由 ADR-0016 锁定为抽象语义，不是 END-P1 字段、CLI 参数或稳定 ABI。
+只有 [DIA-CAT](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md) 登记的机器码才能承担诊断身份。人类消息可以改写或本地化，但程序不得依赖其文本；外部错误也必须保留来源和协议版本，再映射到受限的本地诊断。阻断诊断只返回原子失败，后续层标为未运行；恢复分类不授予权限，也不执行副作用。
 
-## 测量与阈值索引
+DIA-CAT 当前版本是 `0.1.0-draft`，只在绑定的规范、目录和提案向量中保持草案稳定，不是发行 ABI。CLI 退出状态、结构化编码、文本格式和持久日志均未确定。完整内容边界见 [DIA-CORE](../../specifications/diagnostics.html)与[ADR-0025](../../architecture/adr-0025-structured-diagnostics.html)。
 
-| 契约部分 | 必须固定 | 不能替代它的内容 |
-| --- | --- | --- |
-| 构念与总体 | 被判断关系、值角色、用途、固定或推广总体 | 基准名、排行榜、模型裁判 |
-| 测量程序 | 生产者、版本、窗口、单位、纳入规则、最小样本、聚合器 | 仪表盘显示值、隐式单位、最新方法 |
-| 阈值判断 | 比较器、阈值、有效不确定区间 | 比较前舍入、点估计、置信度标签 |
-| 结果分类 | 区间一侧为 `met/unmet`，跨界为 `agno`，契约故障为 `fault` | 会话成功、证据数量、签名存在 |
+## 按问题进入权威源
 
-这些边界由 ADR-0019 固定为抽象语义，不是 END-P1 字段或已实现求值器。
+| 问题 | 先读哪里 |
+| --- | --- |
+| Endem 六个语义面、来源和实验字节 | [Endem 规范](../../specifications/endem.html)、[格式与成形](format.html) |
+| 组合闭包和成员激活 | [Synem 规范](../../specifications/synem.html)、[绑定与组合](binding.html) |
+| 独立读取、生产检查和签名边界 | [安全与独立检查](safety.html)、[Ktisor、Theor 与 Drasor](../../components/index.html) |
+| 会话建立、观察和受限运行 | [发布与运行](running.html)、[Dromen 会话契约](../../architecture/adr-0024-dromen-session-contract.html) |
+| 证据范围、有效性和覆盖度 | [Iknem 规范](../../specifications/iknem.html)、[ADR-0022](../../architecture/adr-0022-iknem-evidence-and-appraisal.html) |
+| 结果域和生命周期限制 | [ADR-0015](../../architecture/adr-0015-result-domains.html)、[Endem 生命周期](../../architecture/endem-lifecycle.html) |
+| 诊断内容、登记码和呈现边界 | [DIA-CORE](../../specifications/diagnostics.html)、[DIA-CAT](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md) |
 
-## 复合判断索引
+[GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)支持按开发者面对的问题组织参考资料，并要求专门术语在首次出现时得到说明；[GNU Errors](https://www.gnu.org/prep/standards/html_node/Errors.html)说明人类错误信息应提供程序、来源和位置语境。这些资料只提供文档与错误呈现原则，不定义 Noemion 的对象、结果域、机器码或 ABI。
 
-- `all_of`：任一有效 `unmet` 决定总体 `unmet`；否则依次保留 `fault`、`agno`，全部 `met` 才满足。
-- `any_of`：任一有效 `met` 决定总体 `met`；否则依次保留 `fault`、`agno`，全部 `unmet` 才反驳。
-- `decisive-basis`：足以决定结果的已求值叶。
-- `evaluation-coverage`：已求值叶、未求值叶、停止原因和所用 Iknem。
+## 当前可以证明什么
 
-这些边界由 ADR-0020 固定为抽象语义，不是 END-P1 字段或已实现求值器。
-
-## 否定与缺席索引
-
-| 证据情况 | 结果 | 含义 |
-| --- | --- | --- |
-| 显式负观察 | 可支持 `met` | 保留目标的关系、角色和顺序，只改变极性 |
-| 同构正反例 | `unmet` | 目标要求关系不成立，但观察表明关系成立 |
-| 查询未命中 | 默认 `agno` | 只说明给定输入和查询中没有匹配 |
-| 封闭范围内完整缺席 | 可支持 `met` | 权威、全集、路径、时间、枚举与损失边界全部有效 |
-| 观察契约故障 | `fault` | 观察器、适配器或日志链没有按契约完成 |
-
-这些分类由 ADR-0017 锁定为抽象语义。END-P1 只有原子负极性规范字节，没有封闭声明字段、CLI 参数或运行实现。
-
-## 稳定失败类别
-
-DIA-CAT 0.1 已登记跨对象诊断、END-P0 结构错误和首组 END-P1 语义错误；完整 CLI 诊断 ABI 尚待确定。未来实现还必须稳定区分以下更高层失败：
-
-每项诊断都必须遵守 [DIA-CORE](../../specifications/diagnostics.html)：消息不承担机器身份，外部错误不直接成为本地结果，恢复分类不授予权限，阻断诊断不伴随部分可信成功。
-
-- source invalid；
-- contract incomplete；
-- malformed object；
-- unsupported required feature；
-- resource limit exceeded；
-- pleko unresolved；
-- pleko conflict；
-- permission widening；
-- derivation preservation unproven；
-- signature mismatch；
-- load rejected；
-- capability denied；
-- backend failed；
-- state drift；
-- Iknem insufficient；
-- implementation disagreement；
-- reproducibility failed。
-
-## 权威页面
-
-- [Endem 规范](../../specifications/endem.html)
-- [Synem 规范](../../specifications/synem.html)
-- [Iknem 规范](../../specifications/iknem.html)
-- [Endem 生命周期](../../architecture/endem-lifecycle.html)
-- [ADR-0010](../../architecture/adr-0010-native-lexicon.html)
-- [ADR-0015 判断与运行结果分层](../../architecture/adr-0015-result-domains.html)
-- [ADR-0016 mene 时间与连续性模型](../../architecture/adr-0016-mene-time-model.html)
-- [ADR-0017 否定事态与缺席证据](../../architecture/adr-0017-negation-and-absence.html)
-- [ADR-0018 量化范围与集合成员资格](../../architecture/adr-0018-quantification-and-membership.html)
-- [ADR-0019 测量谓词与阈值契约](../../architecture/adr-0019-measurement-and-thresholds.html)
-- [ADR-0020 复合事态与判据组合](../../architecture/adr-0020-composite-situations-and-criteria.html)
-- [ADR-0022 Iknem 证据范围与评估边界](../../architecture/adr-0022-iknem-evidence-and-appraisal.html)
-- [ADR-0023 Endem 内容标准分层](../../architecture/adr-0023-endem-content-standard.html)
-- [ADR-0024 Dromen 会话契约](../../architecture/adr-0024-dromen-session-contract.html)
-- [Ktisor、Theor 与 Drasor](../../components/index.html)
-
-## 外部工程资料
-
-这些资料只提供机制先例，不定义 Endem ABI：
-
-- [GNU `readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf.html)
-- [GNU BFD 手册](https://sourceware.org/binutils/docs/bfd.html)
-- [MCP 2025-11-25 当前修订（Current）](https://modelcontextprotocol.io/specification/2025-11-25)
-- [A2A 1.0 版本化规范](https://a2a-protocol.org/v1.0.0/specification/)
-- [OpenTelemetry 语义约定 1.43.0](https://opentelemetry.io/docs/specs/semconv/)
-- [OpenTelemetry GenAI 语义约定独立仓库](https://github.com/open-telemetry/semantic-conventions-genai)
-- [智能体控制平面工程实践](https://openai.com/index/harness-engineering/)
+- 资料检查可以证明页面、规范、ADR、登记和提案向量没有已知引用冲突，不能证明组件已经实现。
+- 当前只有 Endem 有实验性物理字节；Synem 与 Iknem 仍不能交给 Theor 作实际字节读取。
+- 五个动作的参数、退出状态和安装接口尚未发布，诊断目录也未成为稳定 ABI。
+- `ktise`、`elenk`、`pleko`、`theor`、`drase` 仍是现行设计标识，尚无真实使用者读音、听辨和生态冲突证据。
+- 项目尚未进入组件开发阶段，没有 Ktisor、Theor、Drasor、求值器或可执行 `endem` 可供安装。

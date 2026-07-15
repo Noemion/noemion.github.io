@@ -28,7 +28,7 @@ badges: ["单一命令入口", "实验核心"]
 2. 阅读[绑定与组合](binding.html)，理解 nascent Endem 怎样成为 coherent Endem 或 Synem。
 3. 阅读[安全与独立检查](safety.html)，区分生产 `elenk` 与独立 `theor`。
 4. 阅读[发布与运行](running.html)，理解生产者封装、外部签名、Dromen 和 Iknem。
-5. 最后使用[参考索引](reference.html)查找五个入口、状态、制品和稳定失败类别。
+5. 最后使用[参考索引](reference.html)按工作查动作、对象、结果域、目标约束和诊断来源。
 
 ## 最短主线
 
