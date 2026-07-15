@@ -994,8 +994,8 @@ def validate_public_boundary(errors):
             "valid / invalid / revoked",
             "sufficient / insufficient",
             "model-candidate",
-            "不是记录对自己的声明",
-            "没有采集器、验证器、归并器、撤销服务或决定引擎",
+            "不是记录给自己的标签",
+            "没有相应的采集、验证、归并、撤销或决定实现",
         ),
         "specifications/dromen.html": (
             "DRO-CORE 0.1.0-draft",
