@@ -636,6 +636,16 @@ GNU Coreutils `timeout`、Make job slots 与 Guix 容器环境只保留为终止
 
 本轮只调整公开总览、质量契约和审计记录。ADR、CORE、Profile、登记、向量、名称、读音结论、格式和组件状态均未改变，也没有把外部标准或研究趋势提升为 Noemion 的实现证据。
 
+## 外部协议适配渐进式披露二次复核 · 2026-07-16
+
+外部协议适配页已经用同一次发布调用解释协议边界，但后续又分别用调用阶段、十二项责任、符合性材料、协议基线、断线恢复和待定研究重复版本、状态、取消、重试与安全责任。页面累计七个章节、五张表和二十九行表体；开发者需要跨多个矩阵恢复同一次调用，也容易把协议库存和研究提案误当成当前实现步骤。
+
+当前页面用四个阶段贯穿一次调用：固定协议与对端，绑定受限本地调用，保留外部状态与映射损失，在取消、断线或重试时保存未知副作用。十二条 ADP-CORE 责任集中为一张实现检查表；版本选择、GNU BFD 信息损失、HTTP 幂等、A2A 恢复、OpenTelemetry 遥测以及能力、并行和隔离研究只在开发者遇到对应问题时展开。页面因此收敛为四个章节、四张表和二十四行表体，浏览器可见正文从 3,785 字符降至 2,651 字符。
+
+外部状态按复核日重新确认：[MCP 版本说明](https://modelcontextprotocol.io/docs/learn/versioning)仍把 2025-11-25 标为 Current；[2026-07-28 候选版](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/)已经锁定，但计划在 7 月 28 日形成最终版，因此只能作为迁移风险。[A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/)允许服务端返回少于请求上限的任务历史，取消也只表示尝试取消。[RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods)限制非幂等自动重试；[GNU BFD](https://sourceware.org/binutils/docs/bfd/BFD-information-loss.html)明确说明 canonicalization 不能穷尽所有外部格式并可能丢失信息。[OpenTelemetry 语义约定 1.43.0](https://opentelemetry.io/docs/specs/semconv/)继续把 GenAI 约定路由到独立仓库。这些资料支持版本固定、来源保留和失败关闭，不定义 Noemion 的协议 Profile、状态映射或实现。
+
+本轮只重构公开解释、页面质量契约和审计记录。ADP-CORE、十二项条款、威胁模型、场景、登记与向量均未改变，也没有创建适配器、协议 Profile、凭据代理、重试引擎、事件存储或 Drasor 实现。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。

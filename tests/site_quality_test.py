@@ -753,7 +753,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "specifications/adapters.html": {
         "required": (
             "ADP-CORE 0.1.0-draft",
-            "用同一次发布理解一次外部调用",
+            "先看一次发布怎样调用外部系统",
             "固定协议与对端",
             "本地调用身份",
             "信息损失",
@@ -770,6 +770,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "ADP-DEL-001",
             "ADP-SEC-001",
             "不可信候选",
+            "协议状态不能越过本地判断",
+            "按十二项责任检查一次调用",
+            "遇到更强问题时再查外部资料",
+            "规范来源与当前上限",
             "协议基线怎样选择",
             "MCP 2025-11-25",
             "MCP 2026-07-28 发布候选",
@@ -778,7 +782,18 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "复核快照 93a59e4",
             "仓库提交、Schema URL 和各字段稳定性",
             "候选版只进入迁移研究",
+            "旧 Task 句柄只帮助重新定位",
+            "GNU BFD 信息损失说明",
             "当前没有具体协议 Profile",
+        ),
+        "forbidden_patterns": (
+            r"<h2>它解决什么问题</h2>",
+            r"<h2>用同一次发布理解一次外部调用</h2>",
+            r"<h2>适配器必须保持哪些边界</h2>",
+            r"<h2>符合性材料</h2>",
+            r"<h2>协议基线怎样选择</h2>",
+            r"<h2>断线后只恢复定位，不恢复权限</h2>",
+            r"<h2>待定内容</h2>",
         ),
     },
     "specifications/identity.html": {
@@ -2403,9 +2418,9 @@ def validate_jekyll_sources():
                 "不从检查点反序列化权限",
             ),
             SOURCE_ROOT / "specifications" / "adapters.html": (
-                "断线后只恢复定位，不恢复权限",
-                "结果未知区间",
-                "能重新定位”不等于“完整恢复",
+                "旧 Task 句柄只帮助重新定位",
+                "历史缺口和未知副作用",
+                "恢复时重新核对对端、租户、当前授权",
             ),
             SOURCE_ROOT / "specifications" / "iknem.html": (
                 "历史与检查点何时能支持证据？",
@@ -3164,7 +3179,7 @@ def validate_jekyll_sources():
             "尚无运行组件",
         ),
         "specifications/adapters.html": (
-            "适配器必须保持哪些边界",
+            "按十二项责任检查一次调用",
             "物理格式不适用",
             "尚无适配器",
         ),
