@@ -738,6 +738,16 @@ GNU Make 的 target、prerequisite、recipe、并行配额和中断状态，Guix
 
 本轮只重构公开背景页、站点地图、质量契约和审计记录。END-P1、ID-CORE、AUT-CORE、DRO-CORE、IKN-CORE、ADR、Profile、登记、向量、字段和名称状态均未改变，也没有创建发布 Profile、裁剪动作、编译器、组件、协议适配器或发行物。
 
+## Dromen 会话契约开发者路径二次复核 · 2026-07-16
+
+Dromen 页面此前从定义进入发布案例，随后分别用来源流向、十条规则、保存边界、环境变化、Agent 协议、资料入口和当前状态重复主体、能力、预算、漂移与恢复责任。页面共有九个章节、三张表和十九行表体；“已经发布的目标制品”还会暗示尚未冻结的发布 Profile，“密封”则容易被理解为可序列化容器。
+
+当前页面先说明何时需要一次会话契约，再按主体与外部关系、政策与时间、环境能力与秘密、预算与闭包激活、观察与生命周期五步建立边界。十条 DRO-CORE 规则保留原编号，并集中进入一张建立检查表；契约内容与外部状态分开列出，漂移、检查点、MCP、A2A 和中断后半成品则在同一恢复路径中说明。页面收敛为五个章节、三张表和十二行表体，可见正文从 2,894 个字符降至 2,880 个字符；主要改进来自减少重复跳转，而不是删除失败条件。
+
+权威资料按复核日重新确认：[RFC 9334 RATS](https://www.rfc-editor.org/rfc/rfc9334.html)把 Evidence、Verifier 产生的 Attestation Results 与依赖方按自身政策作出的决定分开；[MCP 2026-07-28 候选版](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/)把协议核心改为无状态，同时明确应用仍可通过显式句柄保持状态，并把 Tasks 移入独立扩展；[A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/)把 Task 定义为有状态对象，允许历史截短且不保证取消成功。[GNU make 中断说明](https://www.gnu.org/software/make/manual/html_node/Interrupts.html)会删除被部分改写的目标以避免半成品被误当成最新，同时说明清理仍可能失败。这些资料支持验证结果、应用准入、协议状态、恢复输入和部分产物分层，不定义 Noemion 的会话格式或运行机制。
+
+此次修订只重构公开解释、导航摘要、站点地图、质量契约和审计记录。DRO-CORE、十项条款、ADR、登记、威胁、场景、向量、字段、名称和读音结论均未改变，也没有创建 Dromen 文件、API、Profile、Drasor、装载器、沙箱、凭据代理、预算器或运行时。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。

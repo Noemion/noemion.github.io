@@ -718,7 +718,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             "Dromen",
             "一次会话的只读执行契约（设计阶段名称 Dromen）",
-            "用同一次发布理解会话契约",
+            "按五步建立本次边界",
             "名称仍在研究",
             "只读执行契约",
             "DRO-CORE 0.1.0-draft",
@@ -728,6 +728,17 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "不保存令牌",
             "实质漂移",
             "不能序列化",
+        ),
+        "forbidden_patterns": (
+            r"<h2>先给直白定义</h2>",
+            r"<h2>用同一次发布理解会话契约</h2>",
+            r"<h2>它从哪里来又流向哪里</h2>",
+            r"<h2>一次会话必须固定什么</h2>",
+            r"<h2>它保存什么又绝不保存什么</h2>",
+            r"<h2>环境变化怎样处理</h2>",
+            r"<h2>它与 Agent 协议的关系</h2>",
+            r"<h2>权威规范和验证资料</h2>",
+            r"<h2>当前状态</h2>",
         ),
     },
     "specifications/diagnostics.html": {
@@ -3244,7 +3255,7 @@ def validate_jekyll_sources():
         if proposal_name not in open_questions_text:
             errors.append(f"open questions guide must route the research proposal: {proposal_name}")
     specification_reader_contracts = {
-        "specifications/dromen.html": ("一次会话必须固定什么",),
+        "specifications/dromen.html": ("按五步建立本次边界",),
         "specifications/diagnostics.html": (
             "诊断必须保持哪些边界",
             "物理格式待定",
