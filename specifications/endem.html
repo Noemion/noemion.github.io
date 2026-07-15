@@ -7,7 +7,7 @@ permalink: "/specifications/endem.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>Endem</span></nav>
-  <header class="content-introduction"><h1>Endem</h1><p>一件 Endem 说明目标来自哪里、表示什么、期望什么，以及怎样判断是否满足。</p><div class="badges"><span class="badge">END-CORE 0.1.0-draft</span><span class="badge">END-FMT 0.1.0-draft</span><span class="badge">One Root Skena</span><span class="badge">接口待定</span></div></header>
+  <header class="content-introduction"><h1>Endem</h1><p>一件 Endem 说明目标来自哪里、表示什么、期望什么，以及怎样判断是否满足。</p><div class="badges"><span class="badge">END-CORE 0.1.0-draft</span><span class="badge">END-FMT 0.1.0-draft</span><span class="badge">单一根事态</span><span class="badge">术语读音仍在研究</span></div></header>
 
   <section class="content-stack">
     <h2>Endem 表示什么</h2>
@@ -15,6 +15,22 @@ permalink: "/specifications/endem.html"
     <p>这份契约保存来源表达、已确认意义、中性可能事态、目标方向、比较规则和待确认信息。它不规定模型采用哪条提示、计划或推理过程。</p>
     <p class="callout"><strong>权威边界：</strong>这是一份面向读者的解释。通用内容义务与条款 ID 以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 内容标准</a>为准；当前封闭字段集合以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 内容 Profile</a>为准；实验性容器以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 条款源</a>为准。三层分别验证，END-FMT 0.1.0-draft 尚非稳定 ABI。</p>
     <p class="callout"><strong>最小不变量：</strong>一个 Endem 必须且只能有一个根 <code>skena</code> 节点。根节点可以组合相互依赖的子命题；如果两个根可以独立实现、验收或失败，Ktisor 必须形成两个 Endem，再由 Synem 组合。</p>
+    <p class="note"><strong>名称状态：</strong>六项职责已经进入现行草案，具体发行拼写和读音仍在研究。技术讨论应先说“来源表达、意义投影、事态、目标方向、满足判据、未决意义”等直白职责，再给出代码字段；读音建议不能替代<a href="../docs/terminology-and-pronunciation.html">独立人类听辨证据</a>。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>用一个健康目标读懂 Endem</h2>
+    <p class="lead">以“让登记服务返回健康状态”为例，开发者先固定终态，而不是先写工具步骤。六个语义面分别保存形成和判断这项终态所需的不同事实。</p>
+    <div class="table-wrap"><table><thead><tr><th>直白职责</th><th>字段</th><th>这个例子需要回答什么</th></tr></thead><tbody>
+      <tr><td>来源表达</td><td><code>rhem</code></td><td>哪份需求、哪个版本和哪一段范围提出了这句话。</td></tr>
+      <tr><td>意义投影</td><td><code>semion</code></td><td>“登记服务”“健康状态”和“返回”分别指向哪个稳定对象、值和关系。</td></tr>
+      <tr><td>中性事态</td><td><code>skena</code></td><td>登记服务与健康状态之间应成立什么关系，不在这里混入计划或置信度。</td></tr>
+      <tr><td>目标方向</td><td><code>telis</code></td><td>当前要求该事态达到成立；持续目标还需要独立的时间与连续性规则。</td></tr>
+      <tr><td>满足判据</td><td><code>krin</code></td><td>接受哪类健康观察、怎样对齐关系、需要哪些 Iknem，以及谁作出最终决定。</td></tr>
+      <tr><td>未决意义</td><td><code>apor</code></td><td>服务实例、健康口径或决定权威仍不明确时，保存候选、冲突和解决责任。</td></tr>
+    </tbody></table></div>
+    <div class="flow"><div class="step">受控来源</div><div class="step">六项职责</div><div class="step">精确 Endem</div><div class="step">phain 观察</div><div class="step">Iknem 范围</div><div class="step">满足判断</div><div class="step">具名权威决定</div></div>
+    <p>如果“登记服务”仍能指向多个实例，形成过程应保留 <code>apor</code>；如果没有任何允许的投影，则以 <code>aseme</code> 拒绝。模型可以提出候选，却不能替开发者选择对象、删除歧义或决定规范字节。</p>
   </section>
 
   <section class="content-wide">
@@ -30,7 +46,7 @@ permalink: "/specifications/endem.html"
   </section>
 
   <section class="content-wide">
-    <h2>六个语义面</h2>
+    <h2>六个语义面的规范职责</h2>
     <div class="table-wrap"><table><thead><tr><th>语义面</th><th>最低职责</th><th>主要拒绝条件</th></tr></thead><tbody>
       <tr><td><code>rhem</code></td><td>来源记号、主体、精确表达或内容摘要、语言、媒体类型、范围与版本。</td><td>范围越界、内容摘要不匹配、编码无效、来源无法重放。</td></tr>
       <tr id="semion"><td><code>semion</code></td><td>记号到符号、指称、关系、作用域、极性、量化、时间和来源位置的已授权投影。</td><td>模型摘要被当作意义、指称无来源、作用域被默认或候选越权确认。</td></tr>
@@ -70,14 +86,15 @@ permalink: "/specifications/endem.html"
 
   <section class="content-wide">
     <h2>五个结果域分别回答什么</h2>
+    <p class="lead">同一次工作可以同时出现“会话完成、目标未满足、证据有效但覆盖不足”。结果必须带上所属问题，不能压成一个成功或失败状态。</p>
     <div class="table-wrap"><table><thead><tr><th>问题</th><th>结果</th><th>不能替代</th></tr></thead><tbody>
-      <tr><td>制品形成到哪一步</td><td><code>nascent / coherent / attested</code></td><td>不替代目标满足、环境授权或最终决定。</td></tr>
+      <tr><td>制品形成到哪一步</td><td><code>nascent / coherent / attested</code>（现行草案）</td><td>不替代目标满足、外部陈述验证、环境授权或最终决定。</td></tr>
       <tr><td>目标事态是否满足</td><td><code>met / unmet / agno / fault</code></td><td>不替代权威接受或会话终止。</td></tr>
       <tr><td>具名权威怎样决定</td><td><code>accepted / rejected / deferred</code></td><td>不改写原满足结果。</td></tr>
       <tr><td>一次会话怎样结束</td><td><code>completed / failed / interrupted</code></td><td><code>completed</code> 不等于 <code>met</code>；<code>failed</code> 不等于 <code>unmet</code>。</td></tr>
       <tr><td>证据是否有效且覆盖充分</td><td><code>valid / invalid / revoked</code><br><code>sufficient / insufficient</code></td><td>记录有效性与证据集合覆盖度不能合并。</td></tr>
     </tbody></table></div>
-    <p><a href="../architecture/adr-0015-result-domains.html">ADR-0015</a>锁定这些禁止推导，但不新增 END-P1 字段。结果事件编码、时间域、聚合和重放仍待确定。</p>
+    <p><a href="../architecture/adr-0015-result-domains.html">ADR-0015</a>锁定这些禁止推导，但不新增 END-P1 字段。现行 <code>attested</code> 还是内容形成词表中的草案值；开发者必须另外保存有类型的外部陈述、验证政策、截止点、撤销状态和依赖方判断，不能把它理解为内容获得永久可信状态。完整限制见<a href="../architecture/endem-lifecycle.html">内容形成与外部陈述的两轴说明</a>。</p>
   </section>
 
   <section class="content-wide">
@@ -141,47 +158,30 @@ permalink: "/specifications/endem.html"
 
   <section class="content-wide">
     <h2>自然语言场景怎样检验六个语义面</h2>
-    <p class="lead">同一套字段只有在能区分不同失败原因时才有意义。以下场景不是产品演示或可执行测试，而是用来暴露规范缺口的设计审查语料。</p>
-    <div class="table-wrap"><table><thead><tr><th>来源场景</th><th>必须表达的区别</th><th>不能偷换成什么</th></tr></thead><tbody>
-      <tr><td>让登记服务返回健康状态</td><td>正极性 <code>skena</code>、<code>kine</code> 与健康探测关系</td><td>进程存在不等于服务健康</td></tr>
-      <tr><td>在发布窗口内持续保持主站可用</td><td><code>mene</code>、时间区间、允许中断与可用口径</td><td>当前时间或监控默认值不能补齐待确认事项</td></tr>
-      <tr><td>不得让匿名用户读取私有报告</td><td>否定关系进入 <code>skena</code>，<code>mene</code> 只表示保持</td><td>不新增第三种禁止方向，也不把无日志当作满足</td></tr>
-      <tr><td>把它发布给管理层</td><td>“它”的来源范围、指称候选、解决权限与 <code>apor</code></td><td>模型最高概率候选不能成为确认指称</td></tr>
-      <tr><td>确认昨夜备份可以恢复</td><td>可恢复事态、恢复观察和必需 Iknem</td><td>备份文件存在不等于可恢复；观察不足是 <code>agno</code></td></tr>
-      <tr><td>恢复验证器因存储故障无法运行</td><td>求值过程失败为 <code>fault</code></td><td>工具故障不是 <code>unmet</code>，也不能隐藏为普通 <code>agno</code></td></tr>
-      <tr><td>把响应时间控制在合理范围</td><td>阈值、窗口、单位、分位数和具名决定主体</td><td>历史均值、行业惯例或模型建议都不是授权</td></tr>
-      <tr><td>生成安全评审报告并部署修复后的服务</td><td>按独立身份、权限、失败和验收责任拆成两个 Endem</td><td>不能只按连接词机械拆分，也不能用一个复合根掩盖两项责任</td></tr>
-      <tr><td>恢复试验正常结束但发现数据损坏</td><td>会话 <code>completed</code>、满足结果 <code>unmet</code>、权威决定 <code>rejected</code></td><td>运行成功不能冒充目标满足，验证器故障也不能冒充目标未满足</td></tr>
-      <tr><td>固定发布窗口持续可用</td><td><code>fixed</code> UTC 半开区间、具名时钟权威和 strict/budgeted 政策</td><td>本地默认时区或相对日期不能成为规范输入</td></tr>
-      <tr><td>只有三个健康采样点</td><td>有效 Iknem 仍存在覆盖空洞，结果为 <code>agno</code></td><td>离散样本、插值或没有告警不证明连续成立</td></tr>
-      <tr><td>部署完成后保持十分钟</td><td><code>elapsed</code> 绑定具名事件，以单调时钟测量固定时长</td><td>墙钟回拨、远端完成时间戳或未声明重启不能决定经过时长</td></tr>
-      <tr><td>撤销匿名用户读取私有报告的能力</td><td>同一 <code>can_read</code> 关系与角色保持不变，只把事态极性设为 <code>negative</code></td><td>不另造 <code>cannot_read</code>，也不删除关系节点</td></tr>
-      <tr><td>部分审计日志没有访问记录</td><td>范围未封闭，结果为 <code>agno</code></td><td>没有访问日志不等于没有访问</td></tr>
-      <tr><td>不可绕过入口完整枚举后没有访问记录</td><td>封闭声明有效且没有正反例时，缺席可以在该范围支持 <code>met</code></td><td>封闭的是有限观察范围，不是整个世界</td></tr>
-      <tr><td>所有生产节点都健康</td><td>发布权威锁定节点全集；一个反例决定 <code>unmet</code></td><td>一次搜索返回的节点不能自行成为全集</td></tr>
-      <tr><td>任一获准区域已经就绪</td><td>一个有效见证决定 <code>met</code>；没有见证仍需封闭范围</td><td>查询未命中不能证明不存在</td></tr>
-      <tr><td>至少三名不同评审人批准</td><td>按不同评审人身份计数</td><td>重复点击、日志或签名不能重复计数</td></tr>
-      <tr><td>空的当班名单全部确认</td><td>空集合必须明确授权，成员变化必须有时间政策</td><td>默认空真和目录故障不能产生 <code>met</code></td></tr>
-      <tr><td>p95 响应时间不高于 300ms</td><td>总体、窗口、单位、分位算法、样本、误差和包含边界</td><td>平均值、舍入显示或隐藏误差不能代替 p95 判断</td></tr>
-      <tr><td>基准准确率至少 80%</td><td>固定基准与泛化总体是不同 estimand</td><td>单一题集点估计不能自动证明普遍能力</td></tr>
-      <tr><td>0.3 秒阈值与毫秒观察</td><td>量纲兼容、换算方向、版本和误差</td><td>单位工具不能决定业务构念或统计方法</td></tr>
-      <tr><td>样本不足或分位程序失败</td><td>前者为 <code>agno</code>，后者为 <code>fault</code></td><td>不能填零、丢弃或猜测满足状态</td></tr>
-      <tr><td>接口可达且响应模式正确</td><td>同一终态用 <code>all_of</code> 组合两个对齐叶判据</td><td>只有全部 <code>met</code> 才是总体 <code>met</code></td></tr>
-      <tr><td>生成报告并部署服务</td><td>两个独立生命周期分别形成 Endem，再由 Synem 组合</td><td>自然语言连词不能掩盖独立失败与验收责任</td></tr>
-      <tr><td>主通道或备用通道可用</td><td>决定性 <code>met</code> 可以短路，但保存完整求值覆盖</td><td>未求值叶不是 <code>agno</code>，已遇故障不能消失</td></tr>
-      <tr><td>如果批准就部署</td><td>拆分目标与依赖，或把适用性保留在 <code>apor</code></td><td>当前不得嵌入条件脚本或伪造“不适用”结果</td></tr>
+    <p class="lead">同一套字段只有在能区分不同失败原因时才有意义。下面按开发者问题选择代表场景；完整案例、反例与预期分层留在版本化的 END-SCEN 语料中。</p>
+    <div class="table-wrap"><table><thead><tr><th>开发者问题</th><th>代表场景</th><th>先检查什么</th><th>精确来源</th></tr></thead><tbody>
+      <tr><td>怎样形成最小正向目标？</td><td>让登记服务返回健康状态</td><td>一个根事态、正极性、目标方向与健康观察的关系。</td><td><code>SCN-001</code></td></tr>
+      <tr><td>名称仍有多种指向怎么办？</td><td>把它发布给管理层</td><td>来源范围、允许候选、确认权限与 <code>apor</code>；没有允许投影时才是 <code>aseme</code>。</td><td><code>SCN-004</code></td></tr>
+      <tr><td>没有结论与检查故障怎样区分？</td><td>备份可恢复，但验证器未完成</td><td>观察不足是 <code>agno</code>；求值过程失败为 <code>fault</code>。</td><td><code>SCN-005–006</code></td></tr>
+      <tr><td>持续成立或没有记录怎样判断？</td><td>发布窗口持续可用；日志没有访问记录</td><td>时间、连续性、覆盖空洞、有限封闭范围与缺席证据。</td><td><code>SCN-010–015</code></td></tr>
+      <tr><td>“所有”和数量条件怎样固定？</td><td>所有节点健康；至少三名评审人批准</td><td>集合身份、成员权威、截止点、不同成员计数与空集合政策。</td><td><code>SCN-016–019</code></td></tr>
+      <tr><td>指标超过阈值是否足够？</td><td>p95 响应时间不高于 300ms</td><td>构念、总体、程序、单位、窗口、聚合器和不确定区间。</td><td><code>SCN-020–023</code></td></tr>
+      <tr><td>一句话应形成一个还是多个目标？</td><td>接口可达且模式正确；生成报告并部署服务</td><td>前者可用一个复合根，后者按独立生命周期形成两个 Endem。</td><td><code>SCN-024–027</code></td></tr>
+      <tr><td>文件内权威名称能否证明授权？</td><td>同一内容由两个负责人分别批准</td><td>内容身份、外部授权伴随关系、撤销与决定范围分别保存。</td><td><code>SCN-028–030</code></td></tr>
     </tbody></table></div>
-    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。三十个场景当前登记为非规范材料，不证明 Ktisor、Theor、Drasor 或任何自然语言解析、时间、缺席、量化、测量、组合求值或授权组件已经存在。</p>
+    <p>完整预期分层、跨场景不变量和当前缺口见 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。这些材料用于发现规范缺口，不是产品演示、可执行测试或组件实现证据。</p>
   </section>
 
   <section class="content-wide">
-    <h2>状态机</h2>
-    <div class="table-wrap"><table><thead><tr><th>状态</th><th>成立条件</th><th>允许的消费者</th><th>不能推导</th></tr></thead><tbody>
+    <h2>现行形成分类怎样阅读</h2>
+    <p class="lead">精确内容不是在原身份中不断升级的可变状态机。六个语义面发生变化时会产生新的内容身份；签名、证明和验证结论则作为外部关系绑定该身份。</p>
+    <div class="table-wrap"><table><thead><tr><th>现行草案值</th><th>当前含义</th><th>允许的消费者</th><th>主张上限</th></tr></thead><tbody>
       <tr><td><code>nascent</code></td><td>结构合法，但仍可能有 <code>apor</code>、引用或确认事项。</td><td><code>elenk</code>、<code>theor</code>、人工或授权解析流程。</td><td>不能执行发布；不能假设待确认项会在运行中自动消失。</td></tr>
       <tr><td><code>coherent</code></td><td>必需引用、约束冲突、能力上限和验收关系都取得确定结果。</td><td><code>theor</code>、组合为 Synem、外部发布。</td><td>不证明来源可信、当前环境授权或结果已完成。</td></tr>
-      <tr><td><code>attested</code></td><td>发布载荷锁定，签名请求与外部响应精确匹配。</td><td><code>theor</code>、隔离的 <code>drase</code>。</td><td>签名有效不证明语义正确，也不授予实时能力。</td></tr>
+      <tr><td><code>attested</code>（现行草案）</td><td>草案用单值概括发布见证；它不能完整保存多项陈述、验证政策、截止点和撤销。</td><td><code>theor</code>；<code>drase</code> 仍须逐项复核外部关系。</td><td>不能理解为内容自证、永久可信或自动取得会话准入。</td></tr>
     </tbody></table></div>
-    <p>状态变化保持 Endem 的语义身份和来源链，但每次都会产生新的精确文件摘要。不得把旧状态字节当作新状态对象，也不得在外部签名后原地改写被签载荷。</p>
+    <div class="flow"><div class="step">精确内容身份</div><div class="step">有类型外部陈述</div><div class="step">验证政策与截止点</div><div class="step">撤销状态</div><div class="step">依赖方准入判断</div><div class="step">新 Dromen</div></div>
+    <p>现行规范值尚未迁移，但开发者应按“内容形成 + 外部关系”理解它。外部陈述的增加、过期或撤销不改变同一内容身份；修改六个语义面则产生新身份和显式派生关系。</p>
   </section>
 
   <section class="content-wide">
@@ -207,7 +207,7 @@ permalink: "/specifications/endem.html"
 
   <section class="content-band">
     <h2>当前状态</h2>
-    <p><strong>当前策略：</strong>Endem 使用六个语义面和一个根 <code>skena</code>，并分开事态与方向、三类未知、否定与缺席、量化、测量和复合判断。当前还定义三个制品状态与 <code>.endem</code> 扩展名；END-P1 包含 3 个语义接受和 11 个预期拒绝字节向量。</p><p><strong>待定内容：</strong>时间、封闭、量化、测量与组合的物理字段，以及条件适用性、统计模型登记、压缩、摘要、签名和稳定 ABI。两个独立实现和对抗测试也尚未建立。</p>
+    <p><strong>当前策略：</strong>Endem 使用六个语义面和一个根 <code>skena</code>，并分开事态与方向、三类未知、否定与缺席、量化、测量和复合判断。END-P1 已登记成对的接受与拒绝字节向量；精确范围以 Profile、登记和版本化验证结果为准。</p><p><strong>正在研究：</strong>具体发行拼写与读音，以及把 <code>attested</code> 从内容形成分类迁移为显式外部关系的方案。</p><p><strong>待定内容：</strong>时间、封闭、量化、测量与组合的物理字段，以及条件适用性、统计模型登记、压缩、摘要、签名和稳定 ABI。两个独立实现和对抗测试也尚未建立。</p>
   </section>
   <div class="next-prev"><a href="index.html">← 规范参考指南</a><a href="synem.html">Synem 规范 →</a></div>
 </main>

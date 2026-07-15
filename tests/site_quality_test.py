@@ -505,6 +505,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "specifications/endem.html": {
         "required": (
             ".endem",
+            "用一个健康目标读懂 Endem",
+            "术语读音仍在研究",
+            "六个语义面的规范职责",
             "rhem",
             "semion",
             "skena",
@@ -517,6 +520,15 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "fault",
             "logical_form",
             "checked arithmetic",
+            "现行形成分类怎样阅读",
+            "内容形成 + 外部关系",
+            "SCN-028–030",
+        ),
+        "forbidden_patterns": (
+            r"<h2>状态机</h2>",
+            r"One Root Skena",
+            r"三十个场景当前登记",
+            r"END-P1 包含 3 个语义接受和 11 个预期拒绝",
         ),
     },
     "specifications/synem.html": {
@@ -1261,6 +1273,11 @@ def validate_public_html(route, text):
     for phrase in PUBLIC_META_PHRASES:
         if phrase in text:
             errors.append(f"{route}: public HTML exposes internal production phrase {phrase!r}")
+    internal_work_package = re.search(r"\bP\d+-W\d+\b", text)
+    if internal_work_package:
+        errors.append(
+            f"{route}: public HTML exposes internal work-package label {internal_work_package.group(0)!r}"
+        )
     unclear_match = UNCLEAR_CHINESE_UI_TERMS.search(text)
     if unclear_match:
         errors.append(
@@ -4069,6 +4086,8 @@ def main():
         "不能用连续的“不能、不得、不等于”段落代替正向数据流",
         "标题只在数量本身属于规范约束或版本化结果时写死清单数量",
         "质量契约检查责任覆盖",
+        "规范解释页先用一个贯穿案例建立对象、输入、判断和失败责任",
+        "完整场景、反例和向量留在版本化权威源中",
     ):
         if token not in naming_standard_text:
             errors.append(f"language and naming standard missing no-digit boundary: {token}")

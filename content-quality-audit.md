@@ -357,6 +357,16 @@ NIST AI Agent Standards Initiative 继续支持身份、授权、安全和互操
 
 语言规范同时增加两项质量约束：综合指南先给正向判断顺序或具体案例，再列禁止事项；研究、趋势和风险标题不写死会漂移的清单数量。测试改为核对职责覆盖和案例链，不再要求保留阶段性计数。
 
+## Endem 基础规范学习路径复核 · 2026-07-15
+
+Endem 规范说明是开发者理解整个项目的基础页面，却直接从定义进入标准分层、六字段表、五类结果和完整场景清单。页面逐行复制 END-SCEN 的非规范语料，既造成高密度否定句，也让代表性教学与版本化案例库承担相同职责。后段继续以“状态机”描述 <code>nascent / coherent / attested</code>，没有像生命周期页那样先说明精确内容与外部陈述是两条不同的轴。ADR-0011 还残留 <code>P0-W4</code> 内部工作包标签。
+
+当前页面先用“让登记服务返回健康状态”贯穿来源表达、意义投影、事态、目标方向、满足判据和未决意义，再进入精确定义。场景表改为按开发者问题选择代表案例，完整案例、反例与向量继续由 END-SCEN 保存。形成分类同时明确标出 <code>attested</code> 的现行草案限制，并用“精确内容身份 + 外部陈述 + 验证政策与截止点 + 撤销 + 依赖方判断”解释会话准入；这只是修正读法，不提前改变现行规范值。页面还明确说明字段职责已进入草案，而发行拼写和读音仍在研究。
+
+[GNU 文档规范](https://www.gnu.org/prep/standards/html_node/Documentation.html)要求完整文档同时承担教程与参考职责，[GNU 的手册写作说明](https://www.gnu.org/prep/standards/html_node/Doc-Strings-and-Manuals.html)也反对把孤立条目拼成重复手册。RFC 9334 分开 Evidence、Verifier 产生的 Attestation Results 与 Relying Party 政策；in-toto Statement v1 用摘要绑定不可变 subject；SLSA 1.2 VSA 继续显式保存 verifier、policy、input attestations 和 verification result。这些来源支持教学顺序与外部关系分层，不定义 Endem 字段，也不授权迁移 <code>attested</code>。
+
+全站质量规则因此补充一项约束：规范解释页先给贯穿案例，再选择能区分失败域的代表场景；非规范语料和向量留在版本化权威源。正式 HTML 同时禁止出现 <code>P0-W4</code> 一类内部工作包标识。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。
