@@ -1,0 +1,59 @@
+name: 研究与规范问题
+description: 提出术语、对象边界、规范义务、威胁或验证方法
+title: "[研究] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请把建议写成可以被案例或反例检验的主张。研究输入不会自动成为规范决定。
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题与影响范围
+      description: 哪个对象、消费者、信任边界或开发者任务受到影响？
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: 可证伪主张
+      description: 建议采用什么判断？什么观察会推翻它？
+    validations:
+      required: true
+  - type: textarea
+    id: authority
+    attributes:
+      label: 权威资料与现有技术
+      description: 提供规范、论文、标准、实现资料或真实案例，并说明它们能支持到哪一层。
+    validations:
+      required: true
+  - type: textarea
+    id: cases
+    attributes:
+      label: 支持案例与反例
+      description: 至少提供一个支持案例和一个反例或停止条件。
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: 对象、权限与失败责任
+      description: 写明输入、生产者、消费者、权限、结果域，以及失败由谁处理。
+    validations:
+      required: true
+  - type: textarea
+    id: terminology
+    attributes:
+      label: 术语与读音
+      description: 若新增或保留专名，说明普通词为何不足、相邻词冲突、目标语言读音和听写风险；否则写“无新增专名”。
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: 范围确认
+      options:
+        - label: 我理解当前仓库没有组件实现，研究提案不等于已实现能力或现行接口。
+          required: true
+        - label: 我没有在此公开凭据、密钥、个人数据或未公开漏洞细节。
+          required: true

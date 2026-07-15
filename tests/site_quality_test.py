@@ -1527,6 +1527,45 @@ def validate_jekyll_sources():
         if not dependabot.exists() or "package-ecosystem: github-actions" not in dependabot.read_text():
             errors.append("Dependabot must track immutable GitHub Actions pins")
 
+    contribution_contracts = {
+        SOURCE_ROOT / "CONTRIBUTING.md": (
+            "把意见写成可复核主张",
+            "术语提案还要说明",
+            "当前没有公开的私密安全报告渠道",
+            "python3 tests/site_quality_test.py --source-only",
+            "实际验证结果和声明上限",
+        ),
+        SOURCE_ROOT / ".github" / "ISSUE_TEMPLATE" / "01-documentation.yml": (
+            "资料与网站问题",
+            "事实或术语错误",
+            "公开范围确认",
+        ),
+        SOURCE_ROOT / ".github" / "ISSUE_TEMPLATE" / "02-research.yml": (
+            "研究与规范问题",
+            "可证伪主张",
+            "术语与读音",
+            "研究提案不等于已实现能力或现行接口",
+        ),
+        SOURCE_ROOT / ".github" / "pull_request_template.md": (
+            "案例、反例与失败责任",
+            "验证与声明上限",
+            "术语检查",
+        ),
+    }
+    for path, required_tokens in contribution_contracts.items():
+        if not path.exists():
+            errors.append(f"missing contributor contract: {path.relative_to(SOURCE_ROOT)}")
+            continue
+        contract_text = path.read_text()
+        for token in required_tokens:
+            if token not in contract_text:
+                errors.append(
+                    f"{path.relative_to(SOURCE_ROOT)} missing contributor boundary: {token}"
+                )
+    issue_config = SOURCE_ROOT / ".github" / "ISSUE_TEMPLATE" / "config.yml"
+    if not issue_config.exists() or "blank_issues_enabled: false" not in issue_config.read_text():
+        errors.append("structured issue forms must disable unscoped blank issues")
+
     context_proposal = SOURCE_ROOT / "spec" / "model-context-assembly-proposal.md"
     if not context_proposal.exists():
         errors.append("missing non-normative model context assembly research proposal")
@@ -1552,7 +1591,6 @@ def validate_jekyll_sources():
             errors.append("non-normative model context proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
         ):
             if "spec/model-context-assembly-proposal.md" not in public_source.read_text():
                 errors.append(
@@ -1586,7 +1624,6 @@ def validate_jekyll_sources():
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
         ):
             if "gnu-elf-applicability-proposal.md" not in public_source.read_text():
                 errors.append(
@@ -1623,7 +1660,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
         ):
             if "planning-and-replanning-proposal.md" not in public_source.read_text():
                 errors.append(
@@ -1662,7 +1698,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
         ):
             if "semantic-equivalence-and-migration-proposal.md" not in public_source.read_text():
                 errors.append(
@@ -1703,7 +1738,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "endem.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
         ):
             if "state-change-and-causal-attribution-proposal.md" not in public_source.read_text():
                 errors.append(
@@ -2057,7 +2091,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "authority.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
         ):
             if "preview-simulation-and-approval-proposal.md" not in public_source.read_text():
                 errors.append(
@@ -2102,7 +2135,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
         ):
             if "memory-checkpoint-and-resumption-proposal.md" not in public_source.read_text():
                 errors.append(
@@ -2146,7 +2178,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
             if "capability-discovery-and-negotiation-proposal.md" not in public_source.read_text():
@@ -2240,7 +2271,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
             if "parallel-and-speculative-execution-proposal.md" not in public_source.read_text():
@@ -2295,7 +2325,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
             if "model-adapter-isolation-proposal.md" not in public_source.read_text():
@@ -2348,7 +2377,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
             SOURCE_ROOT / "development" / "testing.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
@@ -2405,7 +2433,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
             SOURCE_ROOT / "development" / "testing.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
@@ -2458,7 +2485,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "docs" / "installation-and-usage.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
             if "model-openness-and-software-freedom-boundaries-proposal.md" not in public_source.read_text():
@@ -2513,7 +2539,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "docs" / "installation-and-usage.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
             if "hosted-ai-service-and-user-control-boundaries-proposal.md" not in public_source.read_text():
@@ -2664,7 +2689,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "index.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "development" / "implementation-roadmap.html",
             SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "sitemap.md",
             SOURCE_ROOT / "_data" / "navigation.yml",
@@ -2756,6 +2780,10 @@ def validate_jekyll_sources():
                 f"{source.relative_to(SOURCE_ROOT)} copies a drift-prone evidence inventory: {match.group(0)}"
             )
     for token in (
+        "用一次协议映射变更走完整条证据链",
+        "A2A Task 的 <code>completed</code>",
+        "一个会被反例推翻的句子",
+        "资料与已登记案例保持结果域分离",
         "先把变更写成可验证主张",
         "当前最多能声称",
         "Chrome 阅读检查",
@@ -3467,16 +3495,21 @@ def validate_jekyll_sources():
             "不能把工具故障改写为目标不满足",
         ),
         "development/implementation-roadmap.html": (
+            "先看依赖顺序",
+            "进入下一层前应有的证据",
+            "停止或合并条件",
+            "未来第一条组件路径",
+            "GNU 技术提供哪些工程纪律",
+            "外部 Agent 技术只决定适配边界",
+            "研究主题怎样回到开发决策",
             "补丁号不进入协议协商",
             "5 月 21 日",
             "不作为当前符合性基线",
-            "任何后续正式版本",
+            "后续正式版本仍需重新验证",
             "OpenTelemetry 语义约定 1.43.0",
             "Schema URL 字段仍为",
-            "默认脱敏的导出器",
+            "默认脱敏的单向导出器",
             "不进入 Endem 编码、Iknem 身份或最终决定",
-            "扩大范围前需要的证据",
-            "不再扩大或需要合并的条件",
         ),
         "endem/docs/running.md": (
             "A2A 1.0 版本化规范",

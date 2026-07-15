@@ -17,6 +17,14 @@ permalink: "/development/testing.html"
     </aside>
     <div class="summary-rail-main">
 
+  <section class="content-wide"><h2>用一次协议映射变更走完整条证据链</h2><p>假设开发者准备把 A2A Task 的 <code>completed</code> 映射为 Noemion 的 <code>met</code>。这项修改看似只是枚举转换，实际会把远端协议状态提升为本地满足判断。正确做法不是先补一条通过测试，而是先把主张、反例和声明上限写清楚。</p><div class="table-wrap"><table><thead><tr><th>顺序</th><th>开发者要留下什么</th><th>本例的可复核结果</th></tr></thead><tbody>
+    <tr><td>1. 写主张</td><td>一个会被反例推翻的句子</td><td>固定 A2A 版本和对端后，<code>completed</code> 只映射为外部 Task 终态，不直接产生 <code>met</code></td></tr>
+    <tr><td>2. 定权威</td><td>本地规范、外部版本和适配责任</td><td>ADP-CORE 保存外部状态；END-CORE 与 <code>krin</code> 决定满足判断；A2A 只定义自己的协议对象</td></tr>
+    <tr><td>3. 找反例</td><td>结构合法但会击穿越级映射的输入</td><td>远端 Task 已完成，但 Artifact 指向错误版本，或本地安全检查返回拒绝</td></tr>
+    <tr><td>4. 选择证据</td><td>成功、拒绝、故障和来源保留</td><td>向量分别覆盖状态保留、版本冲突、产物错绑、取消竞态和本地判据结果</td></tr>
+    <tr><td>5. 限定声明</td><td>测试通过后最多可以说什么</td><td>资料与已登记案例保持结果域分离；不能声称适配器已经实现或所有 A2A 对端都互操作</td></tr>
+  </tbody></table></div><p>同一顺序适用于术语、格式、授权、模型评测和网站解释：先证明“测试在回答哪个问题”，再讨论测试数量。</p></section>
+
   <section class="content-wide"><h2>先把变更写成可验证主张</h2><p class="callout"><strong>直接结论：</strong>测试数量不是起点。开发者先说明要改变什么、哪份资料具有约束力、什么结果应被拒绝，以及证据最多支持哪一层结论。</p><div class="table-wrap"><table><thead><tr><th>变更类型</th><th>权威起点</th><th>最低证据</th><th>当前最多能声称</th></tr></thead><tbody>
     <tr><td>解释与公开文案</td><td>对应 CORE、Profile、现行 ADR 和页面角色</td><td>权威链接、状态边界、源码检查、构建结果和 Chrome 阅读检查</td><td>页面与现行资料一致；不能声称组件存在</td></tr>
     <tr><td>语义或结果边界</td><td>END-CORE 及对应判断 ADR</td><td>支持案例、反例、唯一条款、正反向量和结果域拒绝</td><td>草案对已登记案例给出一致分类</td></tr>
@@ -55,39 +63,12 @@ permalink: "/development/testing.html"
     <tr><td>当前缺失证据</td><td>记录尚不能验证的层次</td><td>当前没有组件依赖树、可执行文件复现、签名或 SBOM 证据</td></tr>
   </tbody></table></div><p>各向量集合的精确数量和执行结果以机器可读条款登记与对应测试输出为准，不在说明页重复容易漂移的计数。未来 Ktisor 与 Theor 必须分别接受同一组适用向量。</p></section>
 
-  <section class="content-rows"><h2>语义与歧义保留</h2><ul>
-    <li>逐来源单元验证记号、符号、指称、关系角色、作用域、力量、满足条件和待确认分支得到保留。</li>
-    <li>语义变异测试分别交换关系角色、翻转极性、改变 kine/mene 或弱化一条 <code>krin</code>，确认身份或验证结论发生预期变化。</li>
-    <li>模型置信度不能关闭 <code>apor</code>；只有规则可重推导或具名语义决定才能确认语义。</li>
-    <li>一个 Endem 只能有一个根 <code>skena</code>；多目标组合必须通过显式引用进入 Synem。</li>
-    <li>违反 Profile 或无允许投影的输入必须稳定返回 <code>aseme</code>；观察不足必须返回 <code>agno</code>，不能混入 <code>apor</code>。</li>
-    <li>结果域、时间、否定、量化、测量与复合判断分别保留自己的允许组合和拒绝路径；这些向量不模拟运行组件。</li>
-    <li>Synem 向量检查完整闭包、精确绑定、有限无环、权限交集、成员结果和激活状态；它们不是 Pleko、解析器或运行时。</li>
-    <li>Iknem 向量检查精确主体、有限范围、无环溯源、观察类别、完整性、外部有效性、相对 <code>krin</code> 的覆盖、决定权限和最小披露；它们不是采集器、验证器、撤销服务或决定引擎。</li>
-  </ul></section>
-
-  <section class="content-rows"><h2>绑定、发布与签名</h2><ul>
-    <li>引用可见性、版本、必需/可选依赖、ID 重映射、约束可满足性、权限交集和冲突矩阵全部有正反向量。</li>
-    <li>链接顺序不改变规范结果；任何能力合并只能保持或收窄上限。</li>
-    <li>当前没有可用的裁剪等价关系。未来只有版本化保留关系明确允许时，对应制品生产者才可变换；无法证明保留时保留内容或失败。主对象、调试伴随记录和其他派生物各有精确身份、访问权限与生命周期。</li>
-    <li>私钥始终在外部签名系统；签名响应必须精确匹配请求、主体摘要、策略和发行身份。</li>
-    <li>END-P1 中的权威字段只定位候选权威；缺少或错绑外部授权决定时，独立文件不能越过 Profile 接受，也不能生成新的内容身份。</li>
-  </ul></section>
-
-  <section class="content-rows"><h2>Drasor、控制平面与 Iknem</h2><ul>
-    <li>Drasor 未来必须重新验证收到的实际 Endem 字节和 Synem 精确成员闭包，不信任路径名、查看输出或缓存结论；Synem 物理字节尚未定义。</li>
-    <li>控制平面持有实时能力句柄，并检查最小权限、读写分离、幂等、副作用、提示注入、污染返回和代理混淆风险。</li>
-    <li>模型只能产生候选和能力请求；AUT-CORE 约束语义确认和能力授权，真实观察返回会话，具名权威或确定性规则再按独立结果域决定验收。</li>
-    <li>Iknem 绑定精确主体、有限范围、无环溯源、环境、方法、观察和限制；有效性由外部政策评估，覆盖只相对当前 <code>krin</code> 计算。覆盖不足产生 <code>agno</code>，决定保持 <code>deferred</code> 或由具名关闭失败政策拒绝，不能直接 <code>accepted</code>。</li>
-    <li>恢复测试覆盖工具失败、环境漂移、重复失败、预算耗尽、取消竞态、状态冲突和人工判断分支。</li>
-  </ul></section>
-
-  <section class="content-rows"><h2>模型与协议适配</h2><ul>
-    <li>MCP/A2A 适配器覆盖版本不兼容、未知必需字段、恶意工具或 Agent 描述、参数结构欺骗、状态伪造与静默降级；外部 <code>completed</code> 不能映射为本地 <code>met</code> 或 <code>accepted</code>。</li>
-    <li>结构化输出测试必须包含结构合法但事实错误、引用悬空、跨字段冲突或权限越界的候选。</li>
-    <li>模型任务执行多次独立运行，报告成功率、置信区间、模型、工具、策略身份和失败切片；固定随机种子或零温度不是跨版本确定性证明。</li>
-    <li>模型评价器只产生建议性评价；机器可判定的 accepted 来自确定性规则，需要价值判断时由具名外部权威签署。</li>
-  </ul></section>
+  <section class="content-wide"><h2>按失败责任选择证据</h2><p>验证计划不需要复制全部条款。先定位失败发生在哪一层，再选择能击穿该层错误假设的代表材料；完整范围仍由登记、场景和向量源维护。</p><div class="table-wrap"><table><thead><tr><th>责任层</th><th>代表性反例</th><th>必须观察</th><th>仍需分开的结果</th></tr></thead><tbody>
+    <tr><td>来源与意义</td><td>关系角色交换、极性翻转、未决候选被模型置信度覆盖</td><td>来源位置、授权后的投影、剩余 <code>apor</code> 和稳定拒绝位置</td><td><code>aseme</code>、<code>apor</code> 与观察不足 <code>agno</code></td></tr>
+    <tr><td>组合与发布</td><td>引用错绑、循环、顺序依赖、权限并集、裁剪后继承来源签名</td><td>精确闭包、冲突、权限交集、保留关系、派生身份和签名请求响应</td><td>结构接受、Profile 接受、内容接受和发布决定</td></tr>
+    <tr><td>会话与证据</td><td>环境漂移、预算耗尽、取消竞态、孤儿副作用、覆盖缺口</td><td>实际字节重验、能力句柄、事件、观察范围、Iknem 限制和决定权威</td><td>会话终止、满足判断、证据有效性、覆盖度和最终决定</td></tr>
+    <tr><td>模型与协议</td><td>结构合法但事实错误、恶意工具说明、版本降级、状态伪造和相关模型投票</td><td>协议版本、来源映射、提示与模型身份、偏差探针、统计区间和人工校准</td><td>外部状态、模型候选、本地诊断、<code>met</code> 与 <code>accepted</code></td></tr>
+  </tbody></table></div></section>
 
   <section id="model-evaluation" class="content-wide"><h2>模型参与评测必须限定用途</h2><p class="callout"><strong>直接结论：</strong>模型评分是有版本、有偏差且可能漂移的候选测量。它不是人工权威、统计区间、充分证据或最终决定。</p><div class="table-wrap"><table><thead><tr><th>检查</th><th>必须保存</th><th>失败时怎样处理</th></tr></thead><tbody>
     <tr><td>评测目的</td><td>构念、用途、总体、评分说明和决定者</td><td>缺少可观察标准时保留待确认，不用模型猜测</td></tr>

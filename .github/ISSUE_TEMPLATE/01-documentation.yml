@@ -1,0 +1,54 @@
+name: 资料与网站问题
+description: 报告事实、链接、可读性、无障碍或响应式问题
+title: "[资料] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请给出可复现的问题和期望结果。不要提交凭据、密钥、个人数据或未公开漏洞细节。
+  - type: input
+    id: location
+    attributes:
+      label: 页面或文件
+      description: 提供页面 URL、仓库路径或两者。
+      placeholder: https://noemion.github.io/... 或 development/testing.html
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 问题类型
+      options:
+        - 事实或术语错误
+        - 阅读路径或表达不清
+        - 链接或导航错误
+        - 响应式或视觉问题
+        - 无障碍或键盘操作问题
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: 当前表现
+      description: 说明你看到的文字、布局或交互，以及复现条件。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果
+      description: 说明改正后读者应能理解或完成什么。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 依据
+      description: 提供规范、权威资料、截图描述、视口或可复现步骤；没有外部依据时说明原因。
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 公开范围确认
+      options:
+        - label: 我没有在此公开凭据、密钥、个人数据或未公开漏洞细节。
+          required: true

@@ -7,89 +7,76 @@ permalink: "/development/implementation-roadmap.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>开发路线图</span></nav>
-  <header class="content-introduction"><h1>开发路线图</h1><p>当前先完成术语、规范、威胁模型和验证方案；组件实现将按最小路径推进。</p><div class="badges"><span class="badge">Design Stage</span><span class="badge">Stop Conditions</span><span class="badge">尚未实现</span></div></header>
+  <header class="content-introduction"><h1>开发路线图</h1><p>路线图按依赖和证据组织：先让目标与失败语义可检查，再考虑组件、组合、运行和外部 Agent 协议。</p><div class="badges"><span class="badge">Design Stage</span><span class="badge">Evidence</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-grid">
-    <h2>开发原则</h2>
+    <h2>四条长期原则</h2>
     <div class="status-grid">
-      <article class="status-item"><h3>一个原语</h3><p>先证明一个 Endem 能稳定表示一个根终态，不为架构对称提前增加格式。</p></article>
-      <article class="status-item"><h3>一个入口</h3><p>公开应用只有 <code>endem</code>；子命令按消费者组织，信任域用独立实现和进程隔离。</p></article>
-      <article class="status-item"><h3>失败优先</h3><p>先定义畸形、冲突、越权、超限和待确认输入怎样关闭失败，再实现成功路径。</p></article>
-      <article class="status-item"><h3>模型最后</h3><p>模型只提交候选；无模型路径必须能够形成、检查、组合、装载和验收规则型案例。</p></article>
+      <article class="status-item"><h3>对象先于工具</h3><p>先证明对象有独立消费者和失败责任，再决定是否需要格式、组件或公开动作。</p></article>
+      <article class="status-item"><h3>失败先于成功</h3><p>先写畸形、冲突、越权、超限和未知怎样关闭失败，再实现成功路径。</p></article>
+      <article class="status-item"><h3>独立证据链</h3><p>制品形成与只读解释使用不同实现；分歧必须进入调查，不能靠多数结果掩盖。</p></article>
+      <article class="status-item"><h3>模型最后接入</h3><p>模型只提出候选。确定性路径、授权、实际观察和最终决定必须在没有模型时仍能成立。</p></article>
     </div>
   </section>
 
   <section class="content-wide">
-    <h2>当前基础与未来第一条路径</h2>
-    <p class="callout"><strong>直接结论：</strong>当前已经形成规范与验证方案，但没有组件实现。第一项实现只考虑 <code>ktise</code>、<code>elenk</code> 与独立 <code>theor</code>；一致性验证不扩大公开 CLI。</p>
-    <p>现有成果包括 END-CORE、END-FMT、END-P1、SYN-CORE、DRO-CORE、IKN-CORE、DIA-CORE、ADP-CORE、ID-CORE、TEXT-IDENTIFIER-CORE、AUT-CORE、威胁模型和规范向量。ADR-0012 把 Rust 记为未来首版候选语言；ADR-0021 至 ADR-0033 固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权决定、Endem 内容与授权伴随关系、发布名称审查及文本标准 ID。这些成果构成未来实现基础，不代表组件已经开始开发。</p>
-    <div class="flow"><div class="step">受控来源表达</div><div class="step">投影规则 / 具名决定</div><div class="step">endem ktise</div><div class="step">.endem</div><div class="step">endem elenk</div><div class="step">endem theor</div><div class="step">差分与复现验证</div></div>
-    <div class="table-wrap"><table><thead><tr><th>职责</th><th>正式输入与输出</th><th>完成标准</th></tr></thead><tbody>
-      <tr><td><code>ktise</code></td><td>受控来源 + 投影决定 → 六个语义面 → Endem</td><td>同一封闭形成输入在精确规范、Profile 与格式域中产生同一结果；失败不留下部分制品。</td></tr>
-      <tr><td><code>elenk</code></td><td>实际 Endem 字节 + 验证配置 → 分层结论</td><td>结构、引用、语义、资源与完整性逐层报告；未执行层不被描述为通过。</td></tr>
-      <tr><td><code>theor</code></td><td>任意不可信字节 → 有界只读视图</td><td>不复用 Ktisor 解析器、写入器或组合器；不产生 Ktisor 内部检查通过引用。</td></tr>
-      <tr><td>一致性验证</td><td>规范向量 + 两条读取路径 + 两次隔离构建</td><td>解释和失败分类一致，分歧解决后才能发布。</td></tr>
+    <h2>先看依赖顺序</h2>
+    <p class="callout"><strong>直接结论：</strong>当前只有规范和验证材料，没有组件实现。后续工作不会按页面数量或功能清单推进；每一层只有在前一层留下可复核证据、并出现真实消费者后才有建设理由。</p>
+    <div class="table-wrap"><table><thead><tr><th>工作层</th><th>要解决的问题</th><th>进入下一层前应有的证据</th><th>停止或合并条件</th></tr></thead><tbody>
+      <tr><td>术语与规范</td><td>目标对象、意义、事态、判据、未知和结果域是否能被不同读者一致定位</td><td>权威条款、支持案例、反例、威胁、正反向量，以及独立人类读音结果</td><td>普通工程词已经足够，或专名无法稳定朗读、听写和区分时，不保留专名</td></tr>
+      <tr><td>确定性形成与独立检查</td><td>同一封闭输入能否形成同一结果，畸形输入能否有界拒绝</td><td>两条独立读取路径、资源上限、故障注入、差分调查和双环境逐字节复现</td><td>若真实案例暴露对象边界错误，返回规范；一致性验证不增加公开动作</td></tr>
+      <tr><td>多目标组合与发布</td><td>多个可独立失败的目标怎样固定依赖、权限交集和发布范围</td><td>真实多目标消费者、顺序无关结果、冲突反例、保留关系、签名主体和可复现发行</td><td>单个 Endem 足够，或没有复用消费者时，省略组合与通用变换</td></tr>
+      <tr><td>受控运行与证据</td><td>一次会话怎样限制对象、政策、环境、能力、预算和观察责任</td><td>实际字节重验、能力最小化、终止与孤儿副作用测试、有范围证据和决定权威分离</td><td>控制不可强制或观察责任无法闭合时，对应能力关闭失败</td></tr>
+      <tr><td>模型与外部协议</td><td>候选、计划、工具调用和远端状态怎样接入而不取得本地语义与决定权</td><td>固定协议版本、降级与取消反例、提示注入测试、数据路径、无模型基线和可测净增益</td><td>成熟外部工具已经满足需求，或模型没有不可替代净增益时，不自建相应平台</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>阶段、验证条件与停止条件</h2>
-    <div class="table-wrap"><table><thead><tr><th>建设范围</th><th>当前只说明或交付什么</th><th>扩大范围前需要的证据</th><th>不再扩大或需要合并的条件</th></tr></thead><tbody>
-      <tr><td>第 0 阶段<br>词汇与规范骨架</td><td>Endem、Synem、Dromen、Iknem；六个语义面、一个根 skena、形式显示、三类未知、条款 ID 与正反向量</td><td>关系角色、投影、满足状态与错误有可复查定义；每项规范要求都有测试或明确人工权威</td><td>删除不能说明消费者或失败责任的名词</td></tr>
-      <tr><td>第 1 阶段<br>最小安全核心</td><td><code>ktise/elenk/theor</code>、规范写入器、形成侧解析器、独立 Theor 和一致性验证</td><td>Ktisor/Theor 差分一致、恶意语料关闭失败、资源有界、双环境逐字节复现</td><td>若最小字段仍不能表达真实任务，回到规范；一致性验证不增加公开动作</td></tr>
-      <tr><td>第 2 阶段<br>组合</td><td><code>pleko</code>、引用解析、冲突矩阵、固定依赖与 Synem</td><td>至少两个真实多 Endem 案例；链接顺序不改变规范结果；权限只能收窄</td><td>没有真实复用消费者时不建设归档、动态链接或共享披露文件</td></tr>
-      <tr><td>第 3 阶段<br>发布</td><td>生产者物理封装、调试伴随记录、外部签名请求与响应</td><td>版本化保留关系、闭包完整、签名主体精确、可复现发行与 SBOM</td><td>没有真实消费者或无法锁定保留属性、损失和反例时，不执行删除并停止建设通用变换</td></tr>
-      <tr><td>第 4 阶段<br>受控运行</td><td><code>drase</code>、隔离 Drasor、Dromen、Iknem 和规则型后端</td><td>实际字节重验、能力最小化、事件完整、验收权威分离、恢复与升级路径</td><td>若单一 Iknem 无法覆盖不同权威，再按权限或生命周期拆分</td></tr>
-      <tr><td>第 5 阶段<br>模型与协议适配</td><td>模型候选封装、MCP/A2A 适配器和版本化遥测导出器</td><td>相对无模型基线，在错误确定率、上下文成本或任务成功率上证明净增益</td><td>没有不可替代增益时停止模型训练平台建设，继续使用外部成熟工具</td></tr>
+    <h2>未来第一条组件路径</h2>
+    <p>如果项目进入组件实现，第一条路径只覆盖设计阶段称为 <code>ktise</code>、<code>elenk</code> 和 <code>theor</code> 的职责。名称仍需人类读音验证，参数也尚未成为接口。</p>
+    <div class="flow"><div class="step">受控来源</div><div class="step">已确认意义</div><div class="step">确定性形成</div><div class="step">实际制品字节</div><div class="step">分层检查</div><div class="step">独立只读解释</div><div class="step">差分与复现</div></div>
+    <div class="table-wrap"><table><thead><tr><th>职责</th><th>输入与结果</th><th>可发布前的最低证据</th></tr></thead><tbody>
+      <tr><td>确定性形成（<code>ktise</code>）</td><td>受控来源、已确认意义、规范、Profile、配置和依赖 → Endem</td><td>同一封闭输入产生同一规范结果；失败不留下部分制品</td></tr>
+      <tr><td>分层检查（<code>elenk</code>）</td><td>实际制品字节与验证配置 → 已执行层的结论和诊断</td><td>结构、引用、语义、资源与完整性分别报告；未执行层不写成通过</td></tr>
+      <tr><td>独立解释（<code>theor</code>）</td><td>任意不可信字节 → 有界只读视图</td><td>不复用形成侧解析器、写入器或内部检查引用；两条路径的分歧全部可定位</td></tr>
+    </tbody></table></div>
+    <p>ADR-0012 保存了 Rust 与 C 的历史研究依据，但不会替未来实现锁死当时的工具链版本。启动实现时需要重新评估 Rust 版本、依赖、禁止不安全代码的范围、受检算术、构建锁和供应链材料。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>GNU 技术提供哪些工程纪律</h2>
+    <div class="table-wrap"><table><thead><tr><th>来源</th><th>Noemion 借鉴的纪律</th><th>采用限制</th></tr></thead><tbody>
+      <tr><td><a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">GNU <code>readelf</code></a></td><td>让独立读取路径直接检查实际字节，避免形成侧解析器的同一缺陷污染两条证据链</td><td>不为每种视图创建一个公开程序，也不把查看结果写回制品</td></tr>
+      <tr><td><a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD</a></td><td>跨格式表示必须显式披露来源域、目标域和信息损失</td><td>当前不建立多格式通用表示，也不把 canonical form 当作语义等价</td></tr>
+      <tr><td><a href="https://guix.gnu.org/manual/en/guix.html#Invoking-guix-challenge">GNU Guix challenge</a></td><td>从独立来源取得产物并逐字节比较，同时保留差异供调查</td><td>相同字节不证明设计正确；不同字节也不自动选择可信一方</td></tr>
+      <tr><td><a href="https://www.gnu.org/prep/standards/html_node/Documentation.html">GNU 文档规范</a></td><td>让开发资料同时承担教程与参考职责，并按读者问题而不是实现文件组织</td><td>不复制 GNU 的命令、格式或项目治理结构</td></tr>
+    </tbody></table></div>
+    <p>Section、Segment、符号、重定位、裁剪和调试分离的逐项适用性见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/gnu-elf-applicability-proposal.md">GNU 与 ELF 适用性研究</a>。它是非规范研究，不定义 Noemion 格式或组件。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部 Agent 技术只决定适配边界</h2>
+    <p class="lead">NIST、MCP、A2A 和遥测规范说明 Agent 生态正在加强互操作、身份、授权和安全，但它们不替 Noemion 决定目标、证据范围或最终接受。完整映射集中在<a href="../architecture/agent-system-boundaries.html">Agent 系统边界指南</a>。</p>
+    <div class="table-wrap"><table><thead><tr><th>外部基线（截至 2026-07-15）</th><th>路线图怎样使用</th><th>不能直接进入什么</th></tr></thead><tbody>
+      <tr><td><a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent Standards Initiative</a></td><td>把互操作、身份、授权和安全评价作为不同的验证问题</td><td>不把倡议方向写成现行规范或实现证明</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 当前正式规范</a></td><td>固定当前适配研究的协议基线；工具说明、注解和返回仍是不可信外部输入</td><td>协议能力不扩大 Dromen，调用成功不产生 <code>met</code> 或 <code>accepted</code></td></tr>
+      <tr><td><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">MCP 2026-07-28 发布候选</a></td><td>候选版于 5 月 21 日锁定，计划 7 月 28 日定稿；当前只用于评估版本漂移</td><td>定稿前不作为当前符合性基线；后续正式版本仍需重新验证降级与权限</td></tr>
+      <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a></td><td>分别映射 Task、Message、Artifact、授权和版本；补丁号不进入协议协商</td><td>远端 Task 终态不替代 Endem 身份、Iknem 证据或本地结果域</td></tr>
+      <tr><td><a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a></td><td>只在形成可固定基线后考虑带版本、默认脱敏的单向导出器</td><td>GenAI 独立仓库尚无发布版，Schema URL 字段仍为 <code>TODO</code>；遥测不进入 Endem 编码、Iknem 身份或最终决定</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>当前设计成果</h2>
-    <div class="table-wrap"><table><thead><tr><th>范围</th><th>已经形成</th><th>仍需完成</th></tr></thead><tbody>
-      <tr><td>条款源</td><td>核心、格式、Profile 与状态登记已经建立，现行义务使用唯一条款 ID。</td><td>继续用真实自然语言案例和反例修订；独立实现验证尚未开始。</td></tr>
-      <tr><td>威胁与限制</td><td>已登记威胁覆盖对象、诊断、适配、身份、文本、授权决定与伴随绑定；END-P0 另有有限上限和跨对象诊断目录。</td><td>继续补齐边界语料与最坏复杂度分析；目标平台、密码、Unicode 与授权实验证据尚未形成。</td></tr>
-      <tr><td>规范向量</td><td>语义、格式、结果域、时间、否定、量化、测量、组合、会话、证据及横切边界都有允许与拒绝材料。精确集合以<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读登记</a>、<a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors">向量源</a>和版本化验证结果为准。</td><td>继续增加累计分配、偏移算术、组合引用、诊断规模、协议专属、签名物理 Profile、真实 Unicode 与授权事件边界向量。</td></tr>
-      <tr><td>历史语言研究</td><td>C/Rust 双原型、规范向量、差分变异、C Sanitizer、libFuzzer 和重复构建记录；精确实验条件与结果保留在 ADR-0012。</td><td>仅作为历史研究资料，不视为组件证据。</td></tr>
-      <tr><td>安全核心</td><td>尚未开始；当前只有职责分离、候选语言、END-P1 规范向量和未来验证条件。</td><td>实现范围、依赖、持续集成与停止条件尚未确定。</td></tr>
+    <h2>研究主题怎样回到开发决策</h2>
+    <div class="table-wrap"><table><thead><tr><th>开发者要决定什么</th><th>先回答的问题</th><th>研究入口</th></tr></thead><tbody>
+      <tr><td>候选与目标</td><td>上下文、计划、记忆和迁移是否改变目标身份或只产生候选</td><td><a href="../architecture/agent-system-boundaries.html#research-map">工作流与状态研究索引</a></td></tr>
+      <tr><td>身份与能力</td><td>谁实际行动、代表谁、当前获准什么，以及能力声明是否仍可调用</td><td><a href="../architecture/agent-system-boundaries.html#research-map">身份与权威研究索引</a></td></tr>
+      <tr><td>执行与副作用</td><td>并行、隔离、取消、重试和恢复怎样保存已发生或未知的外部效果</td><td><a href="../architecture/agent-system-boundaries.html#research-map">执行与副作用研究索引</a></td></tr>
+      <tr><td>模型与数据</td><td>评测、训练、开放性、托管执行、保留和删除分别能支持什么主张</td><td><a href="../architecture/agent-system-boundaries.html#research-map">模型与服务研究索引</a></td></tr>
     </tbody></table></div>
-    <p>C/Rust 语言材料只是历史研究证据，不是项目组件解析器、组件源码或发行物。当前没有 Rust 安全核心实现。</p>
+    <p>这些研究主题当前都不创建新 CORE、制品、命令或组件。某项责任已经能由现有规范承担时，路线图只把义务归还现有对象，不为研究主题再造专名。</p>
   </section>
 
-  <section class="content-wide">
-    <h2>从 GNU 工具链借什么</h2>
-    <div class="table-wrap"><table><thead><tr><th>来源</th><th>采用</th><th>不照搬</th></tr></thead><tbody>
-      <tr><td>ELF / 链接器</td><td>结构视图与装载视图分离、显式引用、类型化绑定、闭包、绑定映射和失败即拒绝</td><td>地址重定位、机器指令、弱符号默认选择、环境搜索和延迟绑定</td></tr>
-      <tr><td>GNU <code>readelf</code></td><td><code>theor</code> 必须独立于 Ktisor 形成侧解析库，使一个实现的错误不会污染两条证据链</td><td>为每种查看方式创建一个稳定二进制</td></tr>
-      <tr><td>GNU BFD</td><td>认识统一抽象的价值和信息损失风险</td><td>第一阶段不建立多格式通用表示层；先把唯一格式做对</td></tr>
-      <tr><td>GNU GCC 诊断</td><td>稳定诊断内容与文本、SARIF 等输出出口分开，保留规则与位置</td><td>不复制编译器严重度、参数或把自由消息当作机器协议</td></tr>
-      <tr><td>GNU 发行实践</td><td>固定区域设置、时区、路径与构建纪元；两环境复现；调试信息分离并绑定摘要</td><td>把构建工具本身当作复现证明</td></tr>
-    </tbody></table></div>
-    <p><a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">GNU readelf 手册</a>明确说明它独立于 BFD；<a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD 手册</a>同时说明跨格式 canonical 转换可能丢失信息。这里借鉴的是验证与职责思想，不是命令清单。Section/Segment、符号、重定位、形成映射、裁剪、调试分离和 Build ID 的逐项边界见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/gnu-elf-applicability-proposal.md">非规范 GNU 与 ELF 适用性研究提案</a>；规范化、裁剪和迁移为什么不能自动成为语义等价，见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">非规范语义等价与迁移研究提案</a>。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>面向 Agent 时代的适配边界</h2>
-    <p class="lead">完整的跨层映射集中在<a href="../architecture/agent-system-boundaries.html">Agent 系统边界图</a>。路线图只保留正在研究的内容入口和外部版本基线。</p>
-    <ul>
-      <li>候选输入与工作路径分别见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">上下文装配研究</a>和<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/planning-and-replanning-proposal.md">计划与重规划研究</a>。外部数据不能取得指令权，计划也不能替代 Endem/Synem 目标。</li>
-      <li>行动解释与人工决定分别见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">状态变化与因果研究</a>和<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/preview-simulation-and-approval-proposal.md">预览、模拟与批准研究</a>。工具成功不能证明因果、满足或最终接受。</li>
-      <li>跨会话状态与跨版本关系分别见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/memory-checkpoint-and-resumption-proposal.md">记忆、检查点与恢复研究</a>和<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">语义等价与迁移研究</a>。恢复不能复活权限，迁移不能继承身份与接受状态。</li>
-      <li>能力声明、协议协商、授权、会话上限与即时可调用性见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/capability-discovery-and-negotiation-proposal.md">能力发现与协商研究</a>。动态工具列表不能扩写旧 Dromen，端点可达和一次调用成功也不能成为权限、满足或接受。</li>
-      <li>并行分支、推测候选与外部副作用提交见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/parallel-and-speculative-execution-proposal.md">并行与推测提交研究</a>。子 Agent 共享同一能力和预算上限；非幂等写入默认串行，提交前重验强前提，取消不等于回滚，分支完成顺序不产生提交权。</li>
-      <li>模型、控制面、凭据、适配进程与外部副作用的部署责任见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">模型、适配器与能力域隔离研究</a>。未来实现必须分别证明文件、网络、秘密、进程、资源、终止和观察限制；容器、seccomp、超时或提示词不能单独成为隔离证据，强制控制不可用时对应能力关闭失败。</li>
-      <li>开放式输出的测量与模型评审见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测研究</a>。未来评测必须固定目的、构念、评分说明、协议、模型版本、偏差探针、统计区间和使用权威；模型评分保持候选，多个模型投票和排行榜不产生满足或接受。</li>
-      <li>模型训练、微调、反馈回路、派生权重、发布与回滚见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究</a>。未来只适配精确绑定数据、资格、基础模型、配方、环境、评测和发布决定的外部成熟工具；训练完成、损失下降、相同种子或回滚指针都不产生满足或接受，没有不可替代消费者与净增益时停止自建训练面。</li>
-      <li>托管 API、开放权重、自由软件、Open Source AI、发布完整性和可复现性见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-openness-and-software-freedom-boundaries-proposal.md">模型开放性与软件自由边界研究</a>。未来按参数、代码、数据说明、数据、文档和各自许可逐项发布；Apache-2.0、模型卡、签名、SBOM 或外部等级都不能替代对象清单、权利审查和独立复现。</li>
-      <li>第三方托管、自主管理、设备内执行和通信服务的控制边界见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/hosted-ai-service-and-user-control-boundaries-proposal.md">托管人工智能服务与用户控制研究</a>。未来采用必须逐项固定执行者、模型与配置、数据外发、保留、下游服务、状态、导出、切换与退出；AGPL、数据驻留、API 兼容或调用成功都不能替代服务实例控制、复现和重新授权。</li>
-      <li>MCP 工具说明、注解和远端返回都只是 Drasor 外缘的不可信输入；能力授权来自 Dromen 与会话策略。截至 2026 年 7 月 15 日，当前研究基线是官方仍标为 Current 的 <a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">2025-11-25 工具规范</a>。官方于 5 月 21 日锁定并公开、计划于 7 月 28 日转为最终版的 2026-07-28 候选版只用于评估版本漂移，不作为当前符合性基线。任何后续正式版本都必须重新完成兼容、安全、错误来源、降级和权限复核。</li>
-      <li>A2A 1.0 的 Task、Message 与 Artifact 适合跨 Agent 传输和记录生命周期，但不能替代 Endem 身份、Synem 闭包或 Iknem 验收。补丁号不进入协议协商；具体映射必须建立遵守 ADP-CORE 的独立 Profile。当前没有协议实现。</li>
-      <li>可靠 Agent 依赖清晰环境、可读工具、真实观察和反馈循环；这些由 Drasor 及其外侧控制平面负责，不通过增加薄命令包装解决。实践案例见<a href="https://openai.com/index/harness-engineering/">智能体控制平面工程实践</a>。</li>
-      <li><a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a>已经把 GenAI 与 MCP 约定指向<a href="https://github.com/open-telemetry/semantic-conventions-genai">独立官方仓库</a>；该仓库尚无发布版，README 的 Schema URL 字段仍为 <code>TODO</code>，其输入、输出和工具数据也可能含敏感信息。形成可固定基线后，它也只进入带版本、默认脱敏的导出器，不进入 Endem 编码、Iknem 身份或最终决定。</li>
-      <li>所有外部协议版本只约束适配器，升级必须重新验证兼容性、安全边界和降级行为。</li>
-    </ul>
-  </section>
-
-  <section class="content-band"><h2>未来实现基线</h2><p>当前没有 Rust 组件实现。第一项实现将按 ADR-0012 重新评估 Rust 1.97.0、Ktisor/Theor 独立实现、禁止 unsafe、依赖边界、工具链锁和 Cargo.lock。</p></section>
+  <section class="content-band"><h2>当前限制条件</h2><p>当前没有 Rust 组件、CLI、协议适配器、沙箱、签名 Profile、安装包或软件发行。开发者现在可以审查规范与验证设计，也可以按<a href="https://github.com/Noemion/noemion.github.io/blob/main/CONTRIBUTING.md">贡献指南</a>提交事实、术语、案例和边界修订；不能把路线图当作已承诺日期或已实现功能清单。</p></section>
   <div class="next-prev"><a href="index.html">← 开发与贡献</a><a href="testing.html">测试与验证 →</a></div>
 </main>

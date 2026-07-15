@@ -6,7 +6,7 @@ current_stage_id: specification-validation
 overview:
   kicker: PROJECT / PROGRESS
   title: 项目状态概览
-  completed_label: 已完成
+  completed_label: 已有成果
   active_label: 正在进行
   planned_label: 后续规划
   current_label: 当前工作
@@ -14,43 +14,43 @@ overview:
   roadmap_href: /development/implementation-roadmap.html
 
 current:
-  summary: 项目已建立 Endem 内容标准分层、Synem 组合闭包、Dromen 会话契约、Iknem 证据边界，以及诊断、适配、身份、文本和权威授权的跨对象规范。内容身份与外部授权伴随关系也已分开。当前继续用条款、威胁、场景和正反向量验证资料一致性，不开发组件。
+  summary: 项目已经建立可定位的规范草案、威胁模型、场景和正反向量。当前工作是继续检验对象边界、术语必要性和失败语义，并补齐真实使用者的读音证据；这些资料不表示组件已经实现。
   facts:
-    - label: 已完成
-      value: Endem 内容标准与对象边界
+    - label: 已有成果
+      value: 规范草案、对象职责与验证材料
     - label: 正在进行
-      value: 规范、威胁模型与验证方案
-    - label: 后续工作
-      value: 尚未确定
+      value: 术语、反例、威胁与证据边界复核
+    - label: 限制条件
+      value: 没有组件、安装包或发行读音
 
 items:
   - id: scope-and-trust
     state: confirmed
-    label: 已完成
-    title: 项目定位与信任原则设计
-    description: 已完成范围、非目标、无模型确定性、模型与对象输入不可信、歧义保留和证据验收原则。
+    label: 已有成果
+    title: 问题范围与信任原则
+    description: 已说明项目要固定期望终态与验收依据，并把模型候选、外部状态、授权、观察、满足判断和最终决定分开。
   - id: endem-vocabulary-topology
     state: confirmed
-    label: 已完成
-    title: Endem 词汇与单一应用拓扑
-    description: 已将旧对象与工具家族收敛为 Endem、Synem、Dromen、Iknem 和唯一公开 CLI endem；旧入口不保留兼容别名。
+    label: 已有成果
+    title: 对象职责与单一应用边界
+    description: Endem、组合闭包、会话契约和有范围证据承担不同职责，未来公开入口收敛为一个应用；具体发行拼写和读音仍在研究。
   - id: endem-specification-core-design
     state: confirmed
-    label: 已完成
-    title: 最小规范与安全核心设计
-    description: 已形成语义与容器条款、END-P0 结构实验、END-P1 封闭载荷，以及诊断、适配、身份、文本、权威授权和外部伴随边界；已有跨对象诊断目录与正反规范材料，并用 P0-LANG-001 选择未来候选语言。
+    label: 已有成果
+    title: 规范草案与验证材料
+    description: 已形成内容、容器、封闭 Profile、诊断、适配、身份、文本和授权边界，并用登记、场景与正反向量连接条款；这些材料只证明资料关系可检查。
   - id: specification-validation
     state: current
     label: 正在进行
-    title: 规范分层与证据边界验证
-    description: 当前只完善 END-CORE 内容标准、Profile、Synem、Dromen、Iknem、DIA-CORE、ADP-CORE、ID-CORE、TEXT-IDENTIFIER-CORE、AUT-CORE、威胁模型、自然语言场景与正反向量；这些检查不表示任何组件已经实现。
-  - id: synem-binding-release
+    title: 术语、反例与证据边界复核
+    description: 当前继续检查专名是否必要、相邻术语能否口头区分、案例是否存在反例，以及每项验证最多支持什么主张；发行读音尚无人类研究结果。
+  - id: deterministic-core
     state: future
     label: 后续规划
-    title: Synem 组合与外部签名发布
-    description: 只有出现真实的多 Endem 消费者后，才开发 pleko、冲突矩阵和固定依赖；派生封装由生产者承担，外部签名的集成边界另行确定。
+    title: 最小形成与独立检查路径
+    description: 若项目进入组件实现，先形成确定性写入、分层检查和独立只读解释路径，并用畸形输入、差分结果、资源上限和双环境复现限定主张。
   - id: controlled-drase
     state: future
     label: 后续规划
-    title: Dromen、Drasor 与 Iknem
-    description: DRO-CORE 已固定一次会话契约；未来规则型后端必须验证重新装载、能力求交、预算、漂移失效、真实观察、有范围证据和验收分层，随后再评估模型及外部协议适配。
+    title: 组合、受控运行与外部适配
+    description: 只有出现真实消费者并完成前置验证后，才评估多目标组合、外部签名、受限运行、模型和协议适配；没有不可替代价值时省略相应能力。
