@@ -1045,13 +1045,14 @@ def validate_public_boundary(errors):
             "仍保持开放",
         ),
         "development/implementation-roadmap.html": (
-            "当前只有规范和验证材料，没有组件实现",
-            "未来第一条组件路径",
-            "ADR-0012 保存了 Rust 与 C 的历史研究依据",
-            "启动实现时需要重新评估 Rust 版本",
+            "当前可以审查术语、规范、案例、威胁和验证设计",
+            "也不表示组件已经开始实现",
+            "现行设计标识，不是已发布接口",
+            "尚未完成正式发行前的读音",
+            "Rust 与 C 的既有研究也只提供未来比较材料",
             "当前没有 Rust 组件、CLI、协议适配器",
-            "5 月 21 日",
-            "不作为当前符合性基线",
+            "候选版在正式发布前只作为迁移风险",
+            "不进入 Endem 编码、Iknem 身份、授权决定或最终接受",
         ),
     }
     for relative_path, tokens in public_contracts.items():

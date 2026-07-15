@@ -718,6 +718,16 @@ GNU Make 的 target、prerequisite、recipe、并行配额和中断状态，Guix
 
 本轮只重构公开解释、站点地图、质量契约和审计记录。ADR、CORE、Profile、登记、向量、字段、名称和读音结论均未改变，也没有创建组件、接口、格式或运行证据。
 
+## 开发路线图的证据入口二次复核 · 2026-07-16
+
+路线图此前分别用长期原则、五层依赖、首条组件路径、GNU 纪律、外部协议快照和研究入口说明后续工作。对象优先、失败关闭与独立证据在前三节重复出现，Agent 基线和研究主题也形成两份相邻清单。页面共有七个章节、五张表和二十一行表体；开发者仍需自己把这些材料还原为“当前能做什么、进入下一层需要什么证据、何时停止”三个实际问题。
+
+当前页面以这三个问题作为唯一主线。五个工作层同时给出当前工作、进入证据和停止条件；第一条验证切片只覆盖受控来源、已确认意义、确定性形成、生产侧检查、独立只读解释与差分复现，不再暗示组件已经进入实施。<code>ktise</code>、<code>elenk</code> 与 <code>theor</code> 首次按直白职责说明，并明确它们只是现行设计标识，尚未通过发行前的读音、生态、包名和目标法域复核。外部协议基线与研究入口合并为协议版本、身份授权、任务副作用、模型数据和遥测五类适配问题。页面因此收敛为五个章节、四张表和十七行表体，可见正文从 3,040 个字符降至 2,732 个字符。
+
+权威资料按复核日重新确认：[GNU `readelf`](https://sourceware.org/binutils/docs/binutils/readelf.html)明确独立于 BFD 读取实际对象，[GNU BFD 信息损失说明](https://sourceware.org/binutils/docs/bfd/BFD-information-loss.html)指出外部格式进入内部规范形式时可能丢失无法表示的内容，[GNU 手册规范](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)要求按读者的问题而不是程序结构组织资料。[MCP 版本说明](https://modelcontextprotocol.io/docs/learn/versioning)仍把 2025-11-25 标为 Current；[2026-07-28 候选版](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/)仍包含破坏性变化并计划在 7 月 28 日形成正式版。[A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/)继续分开任务、消息、产物、取消、绑定和版本；[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)继续把开放协议、身份基础设施和安全评价作为不同支柱；[OpenTelemetry 语义约定 1.43.0](https://opentelemetry.io/docs/specs/semconv/gen-ai/)已把 GenAI 约定移至独立仓库。这些资料支持独立读取、损失披露、版本固定和职责分离，不定义 Noemion 的对象、接口或实现顺序。
+
+本轮只重构公开路线图、导航摘要、站点地图、质量契约和审计记录。规范、ADR、Profile、登记、向量、名称状态和读音结论均未改变，也没有创建组件、CLI、适配器、遥测导出器、运行时、签名 Profile 或发行物。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。

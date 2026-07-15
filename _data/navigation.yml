@@ -47,7 +47,7 @@ global:
     description: 查看当前进展、验证策略、后续规划和可下载资源状态。
     items:
       - { href: /development/current-stage.html, label: 当前项目阶段, description: 已完成工作、正在推进内容与后续规划, cover: current-stage, cover_label: "ACTIVE WORK" }
-      - { href: /development/implementation-roadmap.html, label: 开发路线图, description: 阶段安排、应用职责与完成标准, cover: roadmap, cover_label: "DELIVERY PATH" }
+      - { href: /development/implementation-roadmap.html, label: 开发路线图, description: 当前工作、推进条件与停止条件, cover: roadmap, cover_label: "DELIVERY PATH" }
       - { href: /development/testing.html, label: 测试与验证, description: 确定性、模糊测试、威胁与一致性验证, cover: testing, cover_label: "REJECT MATRIX" }
       - { href: /news/index.html, label: 项目动态, description: 只登记可核对的项目进展, cover: news, cover_label: "VERIFIED SIGNAL" }
       - { href: /downloads/index.html, label: 资源状态, description: 版本、签名和发布资源的真实状态, cover: downloads, cover_label: "SIGNED PACKAGE" }

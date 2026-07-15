@@ -4107,22 +4107,19 @@ def validate_jekyll_sources():
             "不能把工具故障改写为目标不满足",
         ),
         "development/implementation-roadmap.html": (
-            "先看依赖顺序",
-            "进入下一层前应有的证据",
-            "停止或合并条件",
-            "未来第一条组件路径",
+            "当前可以推进什么",
+            "进入下一层需要什么证据",
+            "何时停止或返回",
+            "进入实现前先证明一条验证切片",
+            "现行设计标识，不是已发布接口",
+            "尚未完成正式发行前的读音",
             "GNU 技术提供哪些工程纪律",
-            "外部 Agent 技术只决定适配边界",
-            "研究主题怎样回到开发决策",
-            "补丁号不进入协议协商",
-            "5 月 21 日",
-            "不作为当前符合性基线",
-            "后续正式版本仍需重新验证",
+            "外部 Agent 与模型何时接入",
+            "候选版在正式发布前只作为迁移风险",
             "OpenTelemetry 语义约定 1.43.0",
-            "GenAI Schema URL 1.42.0",
-            "仍无 release 或 tag",
-            "默认脱敏的单向导出器",
-            "不进入 Endem 编码、Iknem 身份或最终决定",
+            "已把 GenAI 约定移至独立仓库",
+            "默认脱敏的单向导出",
+            "不进入 Endem 编码、Iknem 身份、授权决定或最终接受",
         ),
         "endem/docs/running.md": (
             "A2A 1.0 版本化规范",
@@ -4202,6 +4199,17 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{relative_path}: missing external technology boundary {token!r}"
                 )
+    roadmap_text = (SOURCE_ROOT / "development" / "implementation-roadmap.html").read_text()
+    for stale_heading in (
+        "四条长期原则",
+        "未来第一条组件路径",
+        "外部 Agent 技术只决定适配边界",
+        "研究主题怎样回到开发决策",
+    ):
+        if stale_heading in roadmap_text:
+            errors.append(
+                f"development/implementation-roadmap.html: stale duplicate roadmap section {stale_heading!r}"
+            )
     stale_protocol_phrases = (
         "MCP 2025-11-25 稳定规范",
         "A2A 最新规范",

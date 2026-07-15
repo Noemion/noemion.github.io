@@ -85,7 +85,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 - [Development](https://noemion.github.io/development/index.html) — current work, validation strategy, and future planning
 - [Current stage](https://noemion.github.io/development/current-stage.html) — completed work, active design, and planned work
-- [Implementation roadmap](https://noemion.github.io/development/implementation-roadmap.html) — phases, application responsibilities, and completion criteria
+- [Implementation roadmap](https://noemion.github.io/development/implementation-roadmap.html) — current work, evidence required to advance, validation slices, and stop conditions
 - [Testing strategy](https://noemion.github.io/development/testing.html) — change-to-evidence matrix, failure paths, determinism, malformed inputs, and claim limits
 - [Downloads and resource status](https://noemion.github.io/downloads/index.html) — truthful availability, signing, and release-resource status
 - [News and progress](https://noemion.github.io/news/index.html) — dated, verifiable project updates
