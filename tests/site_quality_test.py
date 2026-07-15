@@ -3169,7 +3169,7 @@ def validate_jekyll_sources():
         for token in (
             'title: "Noemion · 让每个人编译自己的意图"',
             '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>人工智能时代</span><span class="portal-title-foundation">每个人都应该能编译自己的意图</span></strong></h1>',
-            '<p class="portal-introduction-summary">Noemion 研究如何让每个人以自然语言表达意图，并将其形成供 AI 系统使用、完整性可验证的目标制品。目标一旦确认，任何改动都可被识别，篡改后的内容不能继续作为原始目标使用。</p>',
+            '<p class="portal-introduction-summary">Noemion 研究如何让每个人以自然语言表达意图，并将其形成供 AI 系统安全使用的目标制品。制品保留可验证的来源、解释与授权边界，防止 AI 悄然改变人的原意或越权行动。</p>',
             '<span>从开发者案例开始</span>',
             '<span>查看 Endem 生命周期</span>',
             '<strong>Noemion</strong> 是项目与研究领域的名称',
