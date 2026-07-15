@@ -3395,7 +3395,7 @@ def validate_jekyll_sources():
     source_release_contracts = {
         "architecture/index.html": ("来源保留的形成版", "最终发布版移除原文", "独立 Profile 重写来源绑定"),
         "about/index.html": ("形成版保存一项期望终态的来源", "最终发布版移除原文"),
-        "faq/index.html": ("来源保留的形成版先分开六项职责", "最终发布版移除原始自然语言"),
+        "faq/index.html": ("来源保留的形成版分开六项职责", "发布时再按独立 Profile 移除原文和可逆重建材料"),
         "endem/docs/index.md": ("来源保留的形成版", "最终发布版按独立 Profile 移除原文", "精确发布内容签名"),
     }
     for relative_path, tokens in source_release_contracts.items():
@@ -3427,9 +3427,9 @@ def validate_jekyll_sources():
         "faq/index.html": (
             "文件本身已经获准执行",
             "发布版只保留经过确认的目标结构",
-            "运行后再依据有范围证据和具名权威决定是否接受结果",
-            "制品本身不能授予工具调用、修改、部署或跨会话权限",
-            "实际能力只能取授权、会话政策、环境和预算的交集",
+            "运行完成后还要分开证据有效性、对判据的覆盖度、满足结果与最终决定",
+            "它不会给自己签发工具调用、修改、部署或跨会话权限",
+            "本次能力只取授权决定、Dromen、环境与预算的交集",
         ),
         "architecture/index.html": (
             "计划中的 <code>endem</code> 入口包含五个公开动作",
@@ -4746,6 +4746,8 @@ def main():
             "引用和状态",
         ),
         "faq/index.html": (
+            "开始之前",
+            "现在可以安装或试用吗",
             "为什么人工智能时代需要 Noemion",
             "Noemion 是自然语言写代码工具吗",
             "第一次接触项目应该先读什么",
@@ -4753,7 +4755,13 @@ def main():
             "Endem 是传统目标文件的新名字吗",
             "为什么计划只提供一个命令入口",
             "供 AI 系统安全使用的目标制品，是否意味着文件本身已经获准执行",
-            "现在可以安装或试用吗",
+            "最终发布版会移除原始自然语言",
+            "Ktisor 只消费已经具备精确语义授权绑定的输入",
+            "它不替具名权威选择意义，也不授予动作权限",
+            "NIST AI Agent Standards Initiative",
+            "OpenAI Agent 编排说明",
+            "GNU 对他人服务替代用户计算的分析",
+            "名称何时适合正式发行",
             "计划中的首个可实现范围是什么",
         ),
         "specifications/index.html": (
@@ -4786,6 +4794,7 @@ def main():
             "某某 OBJ",
             "23 个独立用户",
             "为什么只保留一个 CLI",
+            "只有 Ktisor 能依据确定性规则或具名语义决定形成规范字节",
         ),
         "specifications/index.html": (
             '<span class="badge">END-CORE</span>',
