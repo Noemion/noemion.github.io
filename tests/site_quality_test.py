@@ -232,18 +232,28 @@ SITE_MODULES = {
     "endem", "docs", "development", "resources", "support",
 }
 APPLICATION_PROJECT_SECTIONS = [
-    "它解决什么问题",
-    "当前状态",
-    "它怎样工作",
-    "它读取什么，产生什么",
-    "它不会做什么",
+    "先确认当前可用性",
+    "用一次依赖升级理解应用边界",
+    "按工作选择设计入口",
+    "一条任务怎样经过不同信任边界",
+    "什么时候必须停止或交接",
+    "外部先例只提供局部纪律",
     "继续阅读",
 ]
 APPLICATION_STATUS_DISCLOSURES = (
-    "当前没有可执行组件",
+    "当前不能安装或运行",
+    "组件代码开发阶段",
     "参数",
     "稳定 ABI",
-    "尚待确定",
+    "必须确定",
+)
+APPLICATION_TASK_BOUNDARIES = (
+    "不让模型选择一个最可能的解释",
+    "其他对象等待物理格式",
+    "不产生生产检查通过结论",
+    "最终裁剪发布 Profile 尚未确定",
+    "协议成功不能代替本地意义确认、动作授权、目标满足或最终决定",
+    "读音流畅度和口头区分仍需独立人类证据",
 )
 PUBLIC_META_PHRASES = (
     "本轮",
@@ -1564,7 +1574,7 @@ def validate_readability_behavior_contracts(root):
                 style_text,
                 r"@media\(max-width:1217px\)\s*\{"
                 r"[^}]*body\[data-page-role=\"tool-project\"\]\s+\.tool-project-body"
-                r"\s*\{\s*display:block"
+                r"\s*\{\s*display:flex;flex-direction:column;align-items:stretch"
             ),
             "mobile manual navigation targets must be at least 44px square": (
                 style_text,
@@ -4161,7 +4171,7 @@ def validate_jekyll_sources():
             'body[data-site-module="resources"]',
             'body[data-site-module="support"]',
             '--module-introduction-clip:polygon(0 0,80% 0,100% 100%,20% 100%)',
-            '--module-card-clip:polygon(12% 0,100% 0,88% 100%,0 100%)',
+            '--module-card-clip:polygon(0 0,88% 0,100% 100%,12% 100%)',
             '--module-marker-clip:polygon(16% 0,100% 0,84% 100%,0 100%)',
             "clip-path:var(--module-introduction-clip)",
             "clip-path:var(--module-card-clip)",
@@ -4968,14 +4978,18 @@ def validate_jekyll_sources():
         endem_text = endem_source.read_text()
         if endem_text.count('class="tool-project-body"') != 1:
             errors.append("Endem application page must define one bounded sticky body")
-        elif re.search(
-            r'class="tool-project-body">\s*<section\b.*?'
-            r'<section class="tool-status-panel"',
-            endem_text,
-            re.DOTALL,
-        ) is None:
+        elif (
+            endem_text.count('class="tool-status-panel"') != 1
+            or endem_text.count('class="tool-project-main"') != 1
+            or re.search(
+                r'class="tool-project-body">\s*<section class="tool-status-panel".*?'
+                r'<div class="tool-project-main">',
+                endem_text,
+                re.DOTALL,
+            ) is None
+        ):
             errors.append(
-                "Endem application sections must participate directly in the responsive grid"
+                "Endem application must separate its semantic status panel from the task-reading column"
             )
     if 'body[data-site-module="endem"]' not in style_text:
         errors.append("missing shared Endem application visual signature")
@@ -5001,7 +5015,7 @@ def validate_application_project_contract(h2_texts, status_texts, manual_counts=
             errors.append(f"{class_name} is forbidden on tool project pages")
 
     if len(status_texts) != 1:
-        errors.append("expected one 当前状态 section")
+        errors.append("expected one semantic availability panel")
     else:
         status_text = normalize_visible_text(status_texts[0])
         missing = [token for token in APPLICATION_STATUS_DISCLOSURES if token not in status_text]
@@ -5884,7 +5898,10 @@ def main():
             errors.append(f"{row['route']}: must expose 项目 / Endem breadcrumbs")
         if parser.class_counts["tool-project-body"] != 1:
             errors.append(f"{row['route']}: must preserve one bounded sticky application body")
-        status_sections = [section for section in parser.sections if section["heading"] == "当前状态"]
+        status_sections = [
+            section for section in parser.sections
+            if "tool-status-panel" in section["classes"]
+        ]
         status_texts = ["".join(section["text"]) for section in status_sections]
         contract_errors = validate_application_project_contract(
             parser.h2_texts,
@@ -5892,6 +5909,27 @@ def main():
             parser.class_counts,
         )
         errors.extend(f"{row['route']}: {error}" for error in contract_errors)
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for token in APPLICATION_TASK_BOUNDARIES:
+            if token not in visible_text:
+                errors.append(f"{row['route']}: missing task boundary {token}")
+        if (
+            parser.class_counts["tool-project-main"] != 1
+            or parser.class_counts["tool-status-panel"] != 1
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["table-wrap"] != 4
+            or parser.class_counts["tool-status-list"] != 1
+            or parser.class_counts["tool-action-id"] != 5
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                f"{row['route']}: must keep one semantic status panel, one task column, "
+                "one responsibility flow, one availability list, four decision tables "
+                "with stable action IDs, "
+                "and four reading links"
+            )
         resource_sections = [
             section for section in parser.sections if section["heading"] == "继续阅读"
         ]

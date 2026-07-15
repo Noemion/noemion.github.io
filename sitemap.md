@@ -92,7 +92,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Endem application
 
-- [Endem](https://noemion.github.io/endem/index.html) — the single public command surface for ktise, elenk, pleko, theor, and drase
+- [Endem](https://noemion.github.io/endem/index.html) — a task-based guide to the planned single command surface, trust boundaries, stop conditions, and current availability
 
 ## Endem manual
 
