@@ -8,7 +8,7 @@
 {% elsif page_site_module == 'faq' %}
   {% assign page_site_module = 'support' %}
 {% endif %}
-{% if site.github.build_revision %}
+{% if jekyll.environment == 'production' and site.github.build_revision %}
   {% assign asset_version = site.github.build_revision %}
 {% else %}
   {% assign asset_version = site.time | date: '%s' %}
