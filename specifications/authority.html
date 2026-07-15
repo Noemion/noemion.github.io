@@ -7,7 +7,7 @@ permalink: "/specifications/authority.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>权威与授权决定</span></nav>
-  <header class="content-introduction"><h1>权威与授权决定边界</h1><p>定义谁可以在什么范围内确认自然语言意义、解决待确认项、授予运行能力或作出决定，并让委托、同意、撤销和多人冲突都可核对。</p><div class="badges"><span class="badge">AUT-CORE 0.1.0-draft</span><span class="badge">12 Clauses</span><span class="badge">No Wire Format</span><span class="badge">No Policy Engine</span></div></header>
+  <header class="content-introduction"><h1>权威与授权决定边界</h1><p>定义谁可以在什么范围内确认自然语言意义、解决待确认项、授予运行能力或作出决定，并让委托、同意、撤销和多人冲突都可核对。</p><div class="badges"><span class="badge">AUT-CORE 0.1.0-draft</span><span class="badge">当前策略</span><span class="badge">物理格式待定</span><span class="badge">尚无政策引擎</span></div></header>
 
   <section class="content-stack">
     <h2>它解决什么问题</h2>
@@ -46,7 +46,7 @@ permalink: "/specifications/authority.html"
   </section>
 
   <section class="content-wide">
-    <h2>十二条权威与授权规则</h2>
+    <h2>权威与授权必须怎样判断</h2>
     <div class="table-wrap"><table><thead><tr><th>规则</th><th>直白要求</th><th>必须拒绝</th></tr></thead><tbody>
       <tr><td><code>AUT-CTX-001</code></td><td>绑定政策、权威域、对象、动作、目的、租户、条件和截止点</td><td>latest 政策、环境角色或页面位置替代语境</td></tr>
       <tr><td><code>AUT-PRN-001</code></td><td>分开请求者、行动者、被代表主体、认证、角色与决定权</td><td>登录、签名、成员资格或 Agent 自述自动授权</td></tr>
@@ -93,7 +93,7 @@ permalink: "/specifications/authority.html"
     <h2>访问、使用、保留与删除为什么不是同一授权</h2>
     <p>允许 Agent 读取精确对象，只允许一次具名访问尝试。把内容发送给模型或工具、写入日志或记忆、建立索引或嵌入、用于训练、披露给下游、延长保留期限以及执行删除，都需要分别绑定对象、动作、目的、接收方、条件和截止点。</p>
     <p>删除请求也不等于删除授权或清除完成。审计保留、备份、派生物和下游对象可能具有不同控制者与约束；AUT 只记录谁允许哪个精确动作，实际执行、残留和清除效果继续由 ADP、ID、IKN 与 DIA 观察。</p>
-    <p class="note">当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">非规范软件 Agent 数据使用、保留与删除边界研究提案</a>把十八种生命周期事实归还现有责任。它不修改 AUT-CORE，不创建数据、隐私或删除 CORE，也不形成法律结论。</p>
+    <p class="note">当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">非规范软件 Agent 数据使用、保留与删除边界研究提案</a>把访问、使用、披露、保留、删除与清除等事实归还现有责任。它不修改 AUT-CORE，不创建数据、隐私或删除 CORE，也不形成法律结论。</p>
   </section>
 
   <section class="content-wide">

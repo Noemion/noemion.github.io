@@ -431,6 +431,14 @@ Ktisor 与语言规范还残留“已授权语义决定”“已授权 semion”
 
 [GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)要求手册围绕使用者的问题与概念组织，并在首次出现时解释专门术语；这支持先给材料等级和停止条件，而不是按内部资料库存铺陈。外部时效复核同时确认：[OpenTelemetry 语义约定主仓库 1.43.0](https://github.com/open-telemetry/semantic-conventions)已经把 GenAI 内容移至[独立官方仓库](https://github.com/open-telemetry/semantic-conventions-genai)，后者截至本次复核仍没有正式发布版且 Schema URL 仍为 `TODO`；[MCP 2025-11-25 Tasks](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks)仍明确标为实验性。这些状态只校验站内成熟度说明，不成为 Noemion 的接口或实现证据。
 
+## 规范参考入口与证据库存复核 · 2026-07-15
+
+外部协议适配、权威、诊断、精确身份、文本与标识符等规范解释页已经用发布案例说明规则，却仍在首屏显示 `12 Clauses`、`24 Vectors`、`No Runtime` 等英文库存标签。规则章节继续以“十条核心规则”“十二条适配规则”命名，身份、文本和诊断页还手工复制威胁、场景与向量数量。条款本身没有问题；问题在于公开解释层把容易漂移的资料规模放在开发者任务之前。
+
+当前规范页保留 CORE 版本和每个条款 ID，并把其他徽标改为“当前策略、物理格式待定、尚无适配器、尚无政策引擎”等读者可以直接理解的状态。规则章节改为回答“一次会话必须固定什么”“诊断必须保持哪些边界”“身份、签名与派生必须怎样分开”等问题。符合性材料继续说明覆盖主题和不能证明的结论，但精确数量只由条款源、登记和版本化测试结果给出。
+
+[GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)要求资料按使用者的概念与问题组织，并同时支持连续学习和按主题查询；[RFC 7322](https://www.rfc-editor.org/rfc/rfc7322.html)把清楚、一致、可读和消除重复表述列为技术编辑目标，同时明确编辑不能改变技术含义。本轮据此只调整公开解释、状态摘要和导航标题，不改变 CORE 条款、条款 ID、Profile、机器登记、场景或向量。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。

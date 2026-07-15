@@ -1019,9 +1019,9 @@ def validate_public_boundary(errors):
             "ID-CORE 0.1.0-draft",
             "ID-DOM-001",
             "ID-REL-001",
-            "12 类",
-            "18 个",
-            "24 个",
+            "覆盖身份混淆、降级、重放、撤销和信任继承威胁",
+            "用支持案例、反例与边界场景检查身份责任",
+            "覆盖允许包络与确定拒绝，并绑定对应条款",
             "均保持开放",
         ),
         "specifications/text-and-identifiers.html": (

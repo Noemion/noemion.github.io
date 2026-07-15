@@ -7,12 +7,12 @@ permalink: "/specifications/adapters.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>外部协议适配</span></nav>
-  <header class="content-introduction"><h1>外部协议适配</h1><p>定义外部工具、Agent、模型服务与任务协议进入一次受限会话时必须保持的身份、权限、状态和安全边界。</p><div class="badges"><span class="badge">ADP-CORE 0.1.0-draft</span><span class="badge">12 Clauses</span><span class="badge">Wire Not Applicable</span><span class="badge">No Adapter Code</span></div></header>
+  <header class="content-introduction"><h1>外部协议适配</h1><p>定义外部工具、Agent、模型服务与任务协议进入一次受限会话时必须保持的身份、权限、状态和安全边界。</p><div class="badges"><span class="badge">ADP-CORE 0.1.0-draft</span><span class="badge">当前策略</span><span class="badge">物理格式不适用</span><span class="badge">尚无适配器</span></div></header>
 
   <section class="content-stack">
     <h2>它解决什么问题</h2>
     <p class="lead">外部协议可以传递请求、任务、消息与产物，但不能决定 Noemion 的对象身份、能力范围、目标满足或最终接受。</p>
-    <p><strong>当前策略：</strong>ADP-CORE 用十二条协议无关规则约束外部适配，外部协议不得改写本地身份、权限或结果类型。</p>
+    <p><strong>当前策略：</strong>ADP-CORE 用协议无关规则约束外部适配，外部协议不得改写本地身份、权限或结果类型。</p>
     <p class="callout"><strong>权威边界：</strong>实现义务以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-core.md">ADP-CORE 条款源</a>为准。该规范没有物理编码，也没有创建适配器文件、媒体类型、网络协议或新组件。</p>
   </section>
 
@@ -31,7 +31,7 @@ permalink: "/specifications/adapters.html"
   </section>
 
   <section class="content-wide">
-    <h2>十二条适配规则</h2>
+    <h2>适配器必须保持哪些边界</h2>
     <div class="table-wrap"><table><thead><tr><th>规则</th><th>直白要求</th><th>必须拒绝</th></tr></thead><tbody>
       <tr><td><code>ADP-PIN-001</code></td><td>固定协议、规范、绑定、schema、传输与扩展版本</td><td><code>latest</code>、默认版本、未知扩展和兼容猜测</td></tr>
       <tr><td><code>ADP-PEE-001</code></td><td>分开发现、声明、端点、认证主体、受众、租户与政策</td><td>把 Agent Card 或工具清单当作身份与授权</td></tr>
@@ -72,9 +72,9 @@ permalink: "/specifications/adapters.html"
   <section class="content-wide">
     <h2>待定内容</h2>
     <p>当前没有具体协议 Profile。MCP、A2A、HTTP、模型 SDK 和操作系统调用的物理 Profile，JSON-RPC、Protocol Buffers、SSE 与 Webhook 字段映射，适配器 API、进程隔离、凭据代理、事件存储、重试实现和部署拓扑仍保持开放。</p>
-    <p>Agent Card、工具列表和 schema 只是能力声明，不能缩写成“Agent 已有能力”。声明、协商、授权、会话上限、即时可调用性与调用结果的完整分层见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/capability-discovery-and-negotiation-proposal.md">非规范能力发现与协商研究提案</a>；该提案不修改现行十二条适配规则，也不创建能力制品或新规范。</p>
-    <p>并行调用和外部 Task 不能自行决定哪个候选可以提交。分支必须共享同一 Dromen 上限，非幂等副作用默认串行提交，竞争写入在执行前核对强前提，取消则只表示停止请求而非回滚。完整审查见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/parallel-and-speculative-execution-proposal.md">非规范并行、推测执行与提交边界提案</a>；该提案不修改现行十二条适配规则，也不创建事务层或并行对象。</p>
-    <p>模型、控制面、凭据与实时句柄、适配进程、文件、网络、资源终止和观察也必须保持可审查的责任分离。完整审查见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">非规范模型、适配器与能力域隔离研究提案</a>；模型不能接收原始凭据，token 不能透传，取消和超时不能冒充回滚，容器或 seccomp 名称也不能替代实际限制证据。该提案不修改现行十二条适配规则，也不创建隔离规范或部署对象。</p>
+    <p>Agent Card、工具列表和 schema 只是能力声明，不能缩写成“Agent 已有能力”。声明、协商、授权、会话上限、即时可调用性与调用结果的完整分层见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/capability-discovery-and-negotiation-proposal.md">非规范能力发现与协商研究提案</a>；该提案不修改 ADP-CORE，也不创建能力制品或新规范。</p>
+    <p>并行调用和外部 Task 不能自行决定哪个候选可以提交。分支必须共享同一 Dromen 上限，非幂等副作用默认串行提交，竞争写入在执行前核对强前提，取消则只表示停止请求而非回滚。完整审查见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/parallel-and-speculative-execution-proposal.md">非规范并行、推测执行与提交边界提案</a>；该提案不修改 ADP-CORE，也不创建事务层或并行对象。</p>
+    <p>模型、控制面、凭据与实时句柄、适配进程、文件、网络、资源终止和观察也必须保持可审查的责任分离。完整审查见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">非规范模型、适配器与能力域隔离研究提案</a>；模型不能接收原始凭据，token 不能透传，取消和超时不能冒充回滚，容器或 seccomp 名称也不能替代实际限制证据。该提案不修改 ADP-CORE，也不创建隔离规范或部署对象。</p>
     <p>背景、权衡和权威资料见 <a href="../architecture/adr-0026-external-protocol-adapters.html">ADR-0026 外部协议适配边界</a>。</p>
   </section>
   <div class="next-prev"><a href="diagnostics.html">← 结构化诊断</a><a href="../architecture/adr-0026-external-protocol-adapters.html">ADR-0026 →</a></div>

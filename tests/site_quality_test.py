@@ -2860,6 +2860,66 @@ def validate_jekyll_sources():
     ):
         if token not in open_questions_text:
             errors.append(f"open questions guide missing developer decision boundary: {token}")
+    specification_reader_contracts = {
+        "specifications/dromen.html": ("一次会话必须固定什么",),
+        "specifications/diagnostics.html": (
+            "诊断必须保持哪些边界",
+            "物理格式待定",
+            "尚无运行组件",
+        ),
+        "specifications/adapters.html": (
+            "适配器必须保持哪些边界",
+            "物理格式不适用",
+            "尚无适配器",
+        ),
+        "specifications/identity.html": (
+            "身份、签名与派生必须怎样分开",
+            "尚无密码实现",
+        ),
+        "specifications/text-and-identifiers.html": (
+            "文本与标识符必须怎样处理",
+            "Unicode Profile 待定",
+            "尚无文本处理组件",
+        ),
+        "specifications/authority.html": (
+            "权威与授权必须怎样判断",
+            "尚无政策引擎",
+        ),
+    }
+    for route, required_tokens in specification_reader_contracts.items():
+        specification_text = (SOURCE_ROOT / route).read_text()
+        for token in required_tokens:
+            if token not in specification_text:
+                errors.append(f"{route} missing developer-oriented specification label: {token}")
+        for pattern in (
+            r'<span class="badge">(?:\d+ (?:Clauses|Vectors)|No [^<]+|Wire Not Applicable)</span>',
+            r"<h2>(?:十条核心规则|十二条适配规则|十二条身份与签名规则|十二条文本规则|十二条权威与授权规则)</h2>",
+        ):
+            if re.search(pattern, specification_text):
+                errors.append(f"{route} exposes a drifting specification inventory instead of a reader task")
+    for route, stale_inventory in {
+        "specifications/diagnostics.html": (
+            "十五个支持案例",
+            "二十个资料一致性提案",
+            "用十条核心规则定义诊断内容",
+        ),
+        "specifications/identity.html": (
+            "12 类身份混淆",
+            "18 个支持",
+            "24 个提案",
+            "用十二条核心规则定义",
+        ),
+        "specifications/text-and-identifiers.html": (
+            "12 类编码",
+            "18 个支持",
+            "24 个提案",
+            "十二条规则分开处理",
+        ),
+    }.items():
+        specification_text = (SOURCE_ROOT / route).read_text()
+        for phrase in stale_inventory:
+            if phrase in specification_text:
+                errors.append(f"{route} copies a drift-prone source count into public guidance: {phrase}")
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
     registered = sorted(set(registry) | set(read_manual_source_routes()))

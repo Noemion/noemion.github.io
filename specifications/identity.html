@@ -2,12 +2,12 @@
 layout: default
 title: "精确内容身份与签名规范"
 page_role: "content"
-footer_text: "Noemion · Exact Identity and Attestation"
+footer_text: "Noemion · 精确内容身份与签名"
 permalink: "/specifications/identity.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>精确内容身份与签名</span></nav>
-  <header class="content-introduction"><h1>精确内容身份与签名</h1><p>定义跨 Endem、Synem、Iknem、发布陈述和伴随制品的精确字节身份、不可变引用、签名验证、撤销与可复现性边界。</p><div class="badges"><span class="badge">ID-CORE 0.1.0-draft</span><span class="badge">12 Clauses</span><span class="badge">物理格式待定</span><span class="badge">No Crypto Code</span></div></header>
+  <header class="content-introduction"><h1>精确内容身份与签名</h1><p>定义跨 Endem、Synem、Iknem、发布陈述和伴随制品的精确字节身份、不可变引用、签名验证、撤销与可复现性边界。</p><div class="badges"><span class="badge">ID-CORE 0.1.0-draft</span><span class="badge">当前策略</span><span class="badge">物理格式待定</span><span class="badge">尚无密码实现</span></div></header>
 
   <section class="content-stack">
     <h2>它解决什么问题</h2>
@@ -32,12 +32,12 @@ permalink: "/specifications/identity.html"
 
   <section class="content-stack">
     <h2>当前策略</h2>
-    <p>ID-CORE 用十二条核心规则定义精确身份、不可变引用、有类型签名陈述、外置验证包络、截止点有效性、独立复现和制品关系。未来实现必须遵守这些规则。</p>
+    <p>ID-CORE 定义精确身份、不可变引用、有类型签名陈述、外置验证包络、截止点有效性、独立复现和制品关系。未来实现必须遵守对应条款。</p>
     <p>摘要相同不得直接推出语义等价、事实为真、主体有权、制品已被接受或派生物继承来源身份。签名验证通过也不得越过既定权威、政策、撤销与结果域。</p>
   </section>
 
   <section class="content-wide">
-    <h2>十二条身份与签名规则</h2>
+    <h2>身份、签名与派生必须怎样分开</h2>
     <div class="table-wrap"><table><thead><tr><th>规则</th><th>直白要求</th><th>必须拒绝</th></tr></thead><tbody>
       <tr><td><code>ID-DOM-001</code></td><td>身份绑定对象种类、规范、表示、Profile 和身份域</td><td>跨语境只比较摘要文本</td></tr>
       <tr><td><code>ID-BYT-001</code></td><td>摘要覆盖精确、版本化且非循环的字节范围</td><td>隐式规范化、可变输入和自包含摘要</td></tr>
@@ -57,9 +57,9 @@ permalink: "/specifications/identity.html"
   <section class="content-wide">
     <h2>符合性材料</h2>
     <div class="table-wrap"><table><thead><tr><th>材料</th><th>当前覆盖</th><th>不能证明</th></tr></thead><tbody>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-threat-model.md">ID-THREAT</a></td><td>12 类身份混淆、降级、重放、撤销和信任继承威胁</td><td>密码实现、密钥隔离或发布系统已经安全</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-scenarios.md">ID-SCEN</a></td><td>18 个支持、反例与边界场景</td><td>场景本身是签名标准或组件测试</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/identity">ID-CORE 向量</a></td><td>24 个提案包含 12 个允许案例与 12 个确定拒绝</td><td>摘要器、签名器、验证器、透明日志或可复现构建已经实现</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-threat-model.md">ID-THREAT</a></td><td>覆盖身份混淆、降级、重放、撤销和信任继承威胁</td><td>密码实现、密钥隔离或发布系统已经安全</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-scenarios.md">ID-SCEN</a></td><td>用支持案例、反例与边界场景检查身份责任</td><td>场景本身是签名标准或组件测试</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/identity">ID-CORE 向量</a></td><td>覆盖允许包络与确定拒绝，并绑定对应条款</td><td>摘要器、签名器、验证器、透明日志或可复现构建已经实现</td></tr>
     </tbody></table></div>
   </section>
 

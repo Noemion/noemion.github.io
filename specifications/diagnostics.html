@@ -7,7 +7,7 @@ permalink: "/specifications/diagnostics.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>结构化诊断</span></nav>
-  <header class="content-introduction"><h1>结构化诊断<br>让失败可以被人和机器共同理解</h1><p>统一 Endem、Synem、Dromen、Iknem 与外部协议错误的机器身份、位置、恢复和安全边界。</p><div class="badges"><span class="badge">DIA-CORE 0.1.0-draft</span><span class="badge">DIA-CAT</span><span class="badge">No Wire Format</span><span class="badge">No Runtime</span></div></header>
+  <header class="content-introduction"><h1>结构化诊断<br>让失败可以被人和机器共同理解</h1><p>统一 Endem、Synem、Dromen、Iknem 与外部协议错误的机器身份、位置、恢复和安全边界。</p><div class="badges"><span class="badge">DIA-CORE 0.1.0-draft</span><span class="badge">DIA-CAT</span><span class="badge">物理格式待定</span><span class="badge">尚无运行组件</span></div></header>
 
   <section class="content-stack">
     <h2>先给直白定义</h2>
@@ -29,7 +29,7 @@ permalink: "/specifications/diagnostics.html"
   </section>
 
   <section class="content-wide">
-    <h2>十条核心规则</h2>
+    <h2>诊断必须保持哪些边界</h2>
     <div class="table-wrap"><table><thead><tr><th>规则</th><th>直接含义</th></tr></thead><tbody>
       <tr><td><code>DIA-IDN-001</code></td><td>稳定机器码与人类消息分开；程序不得解析措辞取得语义。</td></tr>
       <tr><td><code>DIA-PIN-001</code></td><td>固定生产者、操作、实际输入、规范/Profile/目录版本和本次发生。</td></tr>
@@ -77,17 +77,17 @@ permalink: "/specifications/diagnostics.html"
   <section class="content-wide">
     <h2>权威规范和验证资料</h2>
     <div class="page-links">
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md"><strong>DIA-CORE 诊断内容条款</strong><span>十条关于身份、语境、层次、位置、主错误、恢复、外部来源、安全、预算和原子性的规范要求。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md"><strong>DIA-CORE 诊断内容条款</strong><span>规定身份、语境、层次、位置、主错误、恢复、外部来源、安全、预算和原子性。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md"><strong>DIA-CAT 诊断目录</strong><span>登记跨 Endem、Synem、Dromen、Iknem 与诊断系统自身的草案机器码。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-threat-model.md"><strong>诊断威胁模型</strong><span>检查消息解析、状态洗白、主错误竞态、自动提权、泄密、风暴和部分成功。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-scenarios.md"><strong>诊断自然语言场景</strong><span>十五个支持案例、反例和边界场景；它们不是实现或符合性声明。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/diagnostics/cases.json"><strong>诊断提案向量</strong><span>二十个资料一致性提案，覆盖十项允许包络与十项确定拒绝。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-scenarios.md"><strong>诊断自然语言场景</strong><span>用支持案例、反例和边界场景检查失败责任；它们不是实现或符合性声明。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/diagnostics/cases.json"><strong>诊断提案向量</strong><span>记录允许包络与确定拒绝，并绑定对应条款。</span></a>
     </div>
   </section>
 
   <section class="content-band">
     <h2>当前状态</h2>
-    <p><strong>当前策略：</strong>DIA-CORE 用十条核心规则定义诊断内容。未来实现必须遵守这些规则，不得把诊断当作证据、结果、权限或自动修复命令。</p>
+    <p><strong>当前策略：</strong>DIA-CORE 定义诊断内容与失败责任。未来实现必须遵守对应条款，不得把诊断当作证据、结果、权限或自动修复命令。</p>
     <p>物理编码、CLI 退出状态、SARIF/HTTP/MCP 映射、持久日志和遥测仍待确定，需要分别设计与验证。当前没有诊断生产器、渲染器、日志服务、重试引擎、协议适配器或 CLI；提案向量只描述规范预期。</p>
   </section>
   <div class="next-prev"><a href="iknem.html">← Iknem</a><a href="../architecture/adr-0025-structured-diagnostics.html">ADR-0025 →</a></div>
