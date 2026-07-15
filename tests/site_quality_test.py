@@ -483,7 +483,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "Ktisor",
             "用一次依赖更新理解 Ktisor",
             "名称仍在研究",
-            "已授权的投影决定",
+            "已确认且具有精确语义授权绑定的意义投影",
+            "不授予动作权限",
             "Endem",
             "确定性",
             "模型",
@@ -2840,6 +2841,25 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{source.relative_to(SOURCE_ROOT)} retains an undefined verification claim: {phrase}"
                 )
+    ktisor_text = (SOURCE_ROOT / "components" / "ktisor.html").read_text()
+    naming_text = (SOURCE_ROOT / "design-system" / "language-and-naming.md").read_text()
+    for stale_phrase in ("根据已授权语义决定形成", "已授权的投影决定", "已授权 `semion`"):
+        if stale_phrase in ktisor_text or stale_phrase in naming_text:
+            errors.append(f"public developer guidance retains ambiguous semantic authorization wording: {stale_phrase}")
+    open_questions_text = (SOURCE_ROOT / "architecture" / "open-questions.html").read_text()
+    for token in (
+        "先分清可依赖规则和待定接口",
+        "现有材料",
+        "开发者现在怎么做",
+        "不能据此声称",
+        "非规范研究提案",
+        "仍待确定的物理 Profile",
+        "未来实现与运行证据",
+        "本节链接的研究提案均为非规范资料",
+        "缺少物理 Profile 或实现证据时，停在明确的待定边界",
+    ):
+        if token not in open_questions_text:
+            errors.append(f"open questions guide missing developer decision boundary: {token}")
     route_rows = read_route_rows()
     registry = {row["route"]: row for row in route_rows}
     registered = sorted(set(registry) | set(read_manual_source_routes()))
