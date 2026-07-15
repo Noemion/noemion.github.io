@@ -1,6 +1,6 @@
 {
   "registry_version": 1,
-  "updated": "2026-07-13",
+  "updated": "2026-07-15",
   "documents": [
     {
       "spec_id": "END-CORE",
@@ -203,7 +203,7 @@
       "version": "0.1.0-draft",
       "status": "experimental-design-profile",
       "path": "spec/profiles/end-p1.json",
-      "scope": "First closed semantic payload design profile for future Ktisor, elenk, Theor and internal conformance"
+      "scope": "Source-bearing formation and review profile for future Ktisor, elenk, Theor and internal conformance; not a final publication profile"
     },
     {
       "id": "ADP-THREAT",
@@ -289,8 +289,11 @@
     {"term": "content-standard", "kind": "specification-layer", "decision_status": "accepted", "definition": "END-CORE 定义的通用 Endem 内容语义、不变量、授权与符合性边界"},
     {"term": "content-profile", "kind": "specification-layer", "decision_status": "accepted", "definition": "在精确 END-CORE 与 END-FMT 版本下封闭字段、类型、枚举、规范顺序、引用、状态和资源上限的内容能力集合"},
     {"term": "END-P0", "kind": "profile", "decision_status": "experimental", "definition": "只用于结构向量和跨语言实验的有限符合性 Profile"},
-    {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "用于未来首条实现路径评审的封闭六记录内容设计 Profile"},
+    {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "保留原始自然语言、仅用于未来形成与评审路径的封闭六记录 Profile；不得作为最终发布 Profile"},
     {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 Ktisor 使用的实验性逐行来源清单；不是稳定源语言"},
+    {"term": "source-bearing formation artifact", "kind": "artifact-role", "decision_status": "accepted", "definition": "保留原始自然语言及其可重定位范围、用于形成和受控评审的制品角色"},
+    {"term": "source-stripped release artifact", "kind": "artifact-role", "decision_status": "accepted", "definition": "移除原始自然语言及可逆重建材料、以独立身份发布并重新验证的制品角色"},
+    {"term": "source companion", "kind": "artifact-role", "decision_status": "accepted", "definition": "在受控边界内保存来源材料并与发布制品建立类型化关系的可选伴随资料；不是运行权限或公开包的必需部分"},
     {"term": "satisfaction-result", "kind": "result-domain", "decision_status": "accepted", "definition": "met、unmet、agno 或 fault；只描述 skena 相对 krin、phain 与 Iknem 的比较"},
     {"term": "decision-result", "kind": "result-domain", "decision_status": "accepted", "definition": "accepted、rejected 或 deferred；只描述具名权威的最终决定"},
     {"term": "session-result", "kind": "result-domain", "decision_status": "accepted", "definition": "completed、failed 或 interrupted；只描述一次 Drase 会话怎样终止"},
@@ -872,6 +875,18 @@
         {"status": "covered-by-repo", "ref": "vectors/semantic/source-range-reject.json"},
         {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
         {"status": "planned", "ref": "conformance:source-range-and-digest"}
+      ]
+    },
+    {
+      "id": "END-PUB-001",
+      "decision_status": "accepted",
+      "implementation_status": "unimplemented",
+      "evidence_status": "partial",
+      "failure_owner": "every future Endem producer and release-profile validator",
+      "verification": [
+        {"status": "covered-by-repo", "ref": "architecture/adr-0036-source-bearing-and-stripped-release.html"},
+        {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "planned", "ref": "conformance:source-stripped-release-closure"}
       ]
     },
     {
@@ -2008,6 +2023,7 @@
       "failure_owner": "every future transformer, strip operation and companion resolver",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
+        {"status": "covered-by-repo", "ref": "architecture/adr-0036-source-bearing-and-stripped-release.html"},
         {"status": "planned", "ref": "conformance:artifact-relation-binding"}
       ]
     },

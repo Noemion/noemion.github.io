@@ -488,6 +488,8 @@ def main():
     negative_source = json.loads((ROOT / manifest["negative_semantic_source"]).read_text())["input"]
     if profile.get("profile_id") != 2 or profile.get("name") != "END-P1":
         errors.append("END-P1 must use profile_id 2")
+    if profile.get("artifact_role") != "source-bearing-formation" or profile.get("publishable") is not False:
+        errors.append("END-P1 must remain a non-publishable source-bearing formation Profile")
     expected_records = {
         str(kind): {"name": name, "schema": name, "required_keys": keys}
         for kind, name, keys in (

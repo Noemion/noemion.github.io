@@ -48,7 +48,9 @@ apor:
   - "目标读者尚未确认"
 ```
 
-[ADR-0014](../../architecture/adr-0014-source-manifest.html) 已为未来 Ktisor 设计逐行来源清单；上面的 YAML 仍只是职责示意，不是该语法。正式来源语言仍需解决注释、包含关系、版本演进和错误恢复。实验性 `.endem` 容器由 END-FMT 0.1 定义；END-P1 已固定未来首条实现路径评审所需的字段、枚举、排序和引用闭包，但它仍不是稳定 ABI。
+[ADR-0014](../../architecture/adr-0014-source-manifest.html) 已为未来 Ktisor 设计逐行来源清单；上面的 YAML 仍只是职责示意，不是该语法。正式来源语言仍需解决注释、包含关系、版本演进和错误恢复。实验性 `.endem` 容器由 END-FMT 0.1 定义；END-P1 已固定来源保留的形成与评审字段、枚举、排序和引用闭包，但它既不是稳定 ABI，也不是最终发布 Profile。
+
+[ADR-0036](../../architecture/adr-0036-source-bearing-and-stripped-release.html) 要求最终发布版移除原始自然语言，并以新身份重新验证。发布 Profile 必须自行定义来源引用闭包；不能从 END-P1 直接删除 `rhem.content` 后继续沿用其 Profile 身份。
 
 精确容器义务见 [END-FMT 条款源](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)。END-P0 只保留为结构实验；首条实现路径必须从 [END-P1 设计 Profile](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json) 开始评审，只允许 nascent、kine、六个关键记录和无压缩载荷。
 

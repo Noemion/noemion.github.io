@@ -12,7 +12,7 @@ permalink: "/architecture/adr-0014-source-manifest.html"
   <section class="content-stack">
     <h2>直接结论</h2>
     <p class="lead">首个 <code>ktise</code> 接受 UTF-8、制表符分列的实验性来源清单。清单同时保存解码并处理转义后的自然语言表达和已经授权的结构投影；Ktisor 只做确定性解析、验证和写入，不调用模型补齐意义。</p>
-    <p>这项决定关闭“首个候选怎样进入 Ktisor”的实现接口，但不把 <code>.ends</code> 确定为长期源语言。未来正式语言出现时直接删除这一入口，不保留兼容垫片。</p>
+    <p>这项决定关闭“首个候选怎样进入 Ktisor 形成版”的设计接口，但不把 <code>.ends</code> 确定为长期源语言，也不定义最终发布版。未来正式语言出现时直接删除这一入口，不保留兼容垫片。</p>
   </section>
 
   <section class="content-wide">
@@ -52,7 +52,7 @@ permalink: "/architecture/adr-0014-source-manifest.html"
 
   <section class="content-band">
     <h2>当前状态</h2>
-    <p>ADR-0014 只采用首个实验输入。它不承诺通用自然语言编译、稳定 CLI、包格式或向后兼容；当前只有来源样例，没有 Rust 解析器或实现仓库。</p>
+    <p>ADR-0014 只采用首个实验输入，并只映射到来源保留的 END-P1。最终发布版按 ADR-0036 另行定义；本 ADR 不承诺通用自然语言编译、稳定 CLI、包格式或向后兼容。当前只有来源样例，没有 Rust 解析器或实现仓库。</p>
   </section>
   <div class="next-prev"><a href="adr-0013-end-p1-payload.html">← ADR-0013</a><a href="adr-0015-result-domains.html">ADR-0015 →</a></div>
 </main>

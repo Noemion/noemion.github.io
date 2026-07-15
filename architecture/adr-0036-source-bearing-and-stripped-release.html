@@ -1,0 +1,63 @@
+---
+layout: default
+title: "ADR-0036 · 来源保留与裁剪发布边界"
+page_role: "content"
+footer_text: "Noemion · ADR-0036"
+permalink: "/architecture/adr-0036-source-bearing-and-stripped-release.html"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0036</span></nav>
+  <header class="content-introduction"><h1>ADR-0036<br>来源保留与裁剪发布边界</h1><p>形成版保留原始自然语言，最终发布版移除原文；两者是身份、验证和披露边界不同的制品。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">2026-07-15</span><span class="badge">形成版含来源</span><span class="badge">发布版不含原文</span></div></header>
+
+  <section class="content-stack">
+    <h2>直接结论</h2>
+    <p class="lead">Endem 的形成版保留输入的原始自然语言和可重定位范围，供形成过程、人工复核与受控诊断使用。面向运行和分发的最终发布版经过来源裁剪，不携带原文，也不携带可无损重建原文的等价材料。</p>
+    <p>这与本地程序先产生包含调试信息的完整制品、再生成不含调试信息的发布制品具有相似的工程分层，但 Noemion 不继承 ELF、DWARF 或 GNU 工具的字段和链接语义。类比只用于说明“同一形成过程产生用途不同的独立制品”。</p>
+    <p class="callout"><strong>当前状态：</strong>END-P1 是来源保留的形成与评审 Profile，不是最终发布 Profile。发布 Profile 的物理字段、编码和来源伴随关联仍在研究；当前没有组件，也没有可执行的裁剪命令。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>三个用途边界</h2>
+    <div class="table-wrap"><table><thead><tr><th>对象</th><th>包含什么</th><th>用于什么</th><th>不能获得什么</th></tr></thead><tbody>
+      <tr><td>来源保留的形成制品</td><td>原始自然语言、来源范围、已确认语义结构与未决投影</td><td>确定性形成、人工复核、受控诊断</td><td>不能因含有原文而自动获得发布许可或运行权限</td></tr>
+      <tr><td>来源裁剪的发布制品</td><td>发布 Profile 允许的已确认目标结构、判据和授权边界</td><td>分发、加载、验证与受限运行</td><td>不能仅凭自身证明“发布结构忠实于原始表达”</td></tr>
+      <tr><td>受控来源伴随资料</td><td>按政策保留的形成制品或来源材料，以及与发布制品的类型化关系</td><td>审计、争议复核和高权限来源一致性检查</td><td>不是公开包的必需部分，也不是运行能力、接受决定或信任凭据</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>从 GNU 工具链采用的工程原则</h2>
+    <div class="table-wrap"><table><thead><tr><th>权威资料</th><th>采用的原则</th><th>不照搬的部分</th></tr></thead><tbody>
+      <tr><td><a href="https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Separate-Debug-Files.html">GNU GDB：Separate Debug Files</a></td><td>完整制品、裁剪制品和伴随资料可以分开保存，并通过明确关系重新关联。</td><td><code>.gnu_debuglink</code>、CRC、build ID 和文件搜索路径不自动成为 Endem 格式。</td></tr>
+      <tr><td><a href="https://sourceware.org/binutils/docs/binutils/strip.html">GNU strip</a></td><td>删除调试信息是有损变换；删除范围必须明确，错误裁剪可能使制品不可用。</td><td>不把“删除某些 section”直接映射为 Endem 字段删除规则。</td></tr>
+      <tr><td><a href="https://www.sourceware.org/binutils/docs/binutils/objcopy.html">GNU objcopy</a></td><td>先保留完整资料、再裁剪发布对象、最后建立显式伴随关系，是可检查的生产顺序。</td><td>不据此预留公开 <code>strip</code> 动作；未来由对应制品生产者按 Profile 承担。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-grid">
+    <h2>规范决定</h2>
+    <article><h3>Profile 分离</h3><p>END-P1 保留原文，只服务形成和评审。最终发布必须使用另一封闭 Profile，明确保留字段、删除或降级字段、资源上限与失败条件。</p></article>
+    <article><h3>引用闭包</h3><p>发布版不得简单删除 <code>rhem.content</code> 后保留悬空 <code>source_ref</code>。新 Profile 必须定义不泄露原文的来源绑定，或重写、移除依赖来源区间的引用，并证明引用闭包。</p></article>
+    <article><h3>新身份与新验证</h3><p>形成版、发布版和伴随资料分别拥有精确字节身份。发布版不得继承形成版的签名、Iknem、接受决定或能力；面向发布字节的声明必须重新生成和验证。</p></article>
+    <article><h3>有限证明</h3><p>没有受控伴随资料时，验证者只能证明发布字节符合发布 Profile 以及外部发布声明有效，不能独立证明它忠实投影了某段原始自然语言。</p></article>
+  </section>
+
+  <section class="content-wide">
+    <h2>安全威胁与停止条件</h2>
+    <div class="table-wrap"><table><thead><tr><th>威胁</th><th>必须阻止的退化</th></tr></thead><tbody>
+      <tr><td>来源泄露</td><td>发布对象、公开清单或错误信息携带原文、可逆编码、敏感范围或足以恢复原文的材料。</td></tr>
+      <tr><td>引用失效</td><td>裁剪后仍保留指向不存在来源内容的引用，读取器却把它当作已闭合结构。</td></tr>
+      <tr><td>身份漂白</td><td>裁剪结果复用形成版身份、签名、证据、接受状态或权限。</td></tr>
+      <tr><td>过度证明</td><td>只验证发布对象就宣称已验证原始表达与发布语义之间的忠实性。</td></tr>
+      <tr><td>摘要猜测</td><td>把低熵原始文本的裸摘要公开为“安全来源链接”，使攻击者可以离线枚举原文。</td></tr>
+      <tr><td>伴随资料越权</td><td>运行路径自动读取受控来源伴随资料，或把能够读取它解释为执行权限。</td></tr>
+    </tbody></table></div>
+    <p>在发布 Profile、引用重写规则、伴随关系、披露政策、正反向量和真实消费者锁定前，不得开发裁剪实现、稳定 ABI 或公开命令。删除原文这一用途边界已经确定；如何编码仍保持开放。</p>
+  </section>
+
+  <section class="content-band">
+    <h2>开发者应怎样理解“可验证”</h2>
+    <p>形成阶段可以直接对照原始表达检查语义投影；发布阶段检查的是发布字节、发布 Profile、授权边界与外部声明。若审计任务需要回答“发布结构是否忠实于原始表达”，验证者必须在获准后取得受控伴随资料。三种检查不能合并成一个模糊的“来源可验证”。</p>
+  </section>
+  <div class="next-prev"><a href="adr-0035-public-actions-and-internal-responsibilities.html">← ADR-0035</a><a href="open-questions.html">开放问题 →</a></div>
+</main>

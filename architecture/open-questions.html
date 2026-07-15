@@ -19,7 +19,7 @@ permalink: "/architecture/open-questions.html"
       <tr><td>未来实现与运行证据</td><td>记录平台、输入、工具链、政策、资源限制和实际结果。</td><td>文档构建或概念案例证明了安全、性能、可复现性或生产可用性。</td></tr>
     </tbody></table></div>
     <p>当前规范使用 ADR-0010 与 ADR-0015 定义的制品、六个语义面、形成阶段和结果域，也使用 ADR-0031 至 ADR-0033 更新后的名称与标准 ID。具体发行拼写仍在研究；现有资料已经发现 <code>attested</code> 把外部签名与证明关系误写成内容状态，迁移方案仍待形成新 ADR，因此现行规范值暂不改变。</p>
-    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0030 固定 Synem、Iknem、内容标准分层、Dromen、结构化诊断、协议适配、身份、文本、授权以及内容与外部决定的伴随边界；ADR-0031 至 ADR-0035 固定名称迁移、口头区分与公开动作审查。</p>
+    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0030 固定 Synem、Iknem、内容标准分层、Dromen、结构化诊断、协议适配、身份、文本、授权以及内容与外部决定的伴随边界；ADR-0031 至 ADR-0036 固定名称迁移、口头区分、公开动作审查以及来源保留与裁剪发布边界。</p>
     <p>当前没有 Theor、权威目录、政策求值器或其他组件实现。稳定 ABI、时间与组合物理字段、嵌套或多变量量化、Synem 与 Iknem 物理容器、正式来源语言、Unicode 标识符、原始来源字节绑定、摘要和签名物理 Profile、授权决定与最终决定事件编码仍待确定。</p>
     <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
@@ -42,7 +42,7 @@ permalink: "/architecture/open-questions.html"
     <details><summary>ELF 的符号与重定位思想怎样用于 Synem？</summary><p>当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/gnu-elf-applicability-proposal.md">非规范 GNU 与 ELF 适用性研究提案</a>只采用显式引用、精确绑定、形成映射和失败责任。它拒绝地址修补、弱符号、默认版本、环境搜索、顺序选择和运行期语义漂移。物理符号视图、绑定表或版本语法只有在出现真实 Synem 消费者、同名冲突反例和规范向量后才能提出 ADR。</p></details>
     <details><summary>什么时候允许依赖循环？</summary><p>SYN-GRF-001 已规定第一阶段拒绝依赖与激活循环。未来若支持，必须先定义固定点语义、披露与验收顺序、预算上限、失败原子性和跨实现向量。</p></details>
     <details><summary>Synem 是否需要独立物理容器？</summary><p>在出现多 Endem、流式读取或离线分发的真实消费者前，内容寻址清单和现有确定性归档可能已经足够。不能只为形式完整提前创造格式。</p></details>
-    <details><summary>派生制品可以删除哪些信息？</summary><p>ADR-0035 已拒绝预留通用裁剪动作。ID-REL-001 要求裁剪结果与调试伴随文件各有精确身份，并记录变换、保留内容和损失。当前没有裁剪等价规范；哪些属性允许删除、伴随关系采用什么物理格式，仍需真实消费者。</p></details>
+    <details><summary>裁剪发布 Profile 怎样编码来源分离？</summary><p>ADR-0036 已确定形成版保留原始自然语言，最终发布版移除原文和可逆重建材料，并以新身份重新验证。仍待确定的是发布 Profile 的字段、来源引用闭包、伴随资料关联、披露政策、失败原子性和正反字节向量；这些条件锁定前不实现裁剪，也不增加公开动作。</p></details>
     <details><summary>外部签名采用什么算法与撤销策略？</summary><p>ADR-0035 已把签名保留为外部集成责任，而不是公开动作。ID-CORE 固定有类型待签陈述、外置包络、权威分离、截止点和撤销解释；算法基线、多签政策、密钥体系、证书 Profile、时间来源、透明日志、撤销分发和离线包络物理编码仍需独立 ADR 与证据。</p></details>
     <details><summary>为什么 <code>attested</code> 不能继续作为内容状态？</summary><p>精确内容可以同时关联多个签名、证明结果、验证政策、截止点和撤销结论；这些外部关系不会改变内容身份。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md">生命周期与结果词研究</a>已把迁移分成两条轴：先决定是否移除对象边界错误，同时暂时保留 <code>nascent/coherent</code>；再用独立人类证据比较 <code>formed/resolved</code> 等发行称呼。这样不会让未经验证的新名字拖延边界修正，也不会借边界修正提前改名。</p></details>
   </section>
@@ -84,5 +84,5 @@ permalink: "/architecture/open-questions.html"
     <h2>问题关闭规则</h2>
     <p>设计问题可以由权威规范或 ADR、正反向量和明确失败语义关闭。涉及组件行为、性能或互操作的问题必须保持开放，直到出现相应实现证据；论文、模型指标、概念演示或单一实现行为不能单独锁定 ABI。</p>
   </section>
-  <div class="next-prev"><a href="adr-0035-public-actions-and-internal-responsibilities.html">← ADR-0035</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
+  <div class="next-prev"><a href="adr-0036-source-bearing-and-stripped-release.html">← ADR-0036</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
 </main>

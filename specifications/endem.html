@@ -11,9 +11,9 @@ permalink: "/specifications/endem.html"
 
   <section class="content-stack">
     <h2>Endem 表示什么</h2>
-    <p class="lead">一件 Endem 只保存一项能够独立理解和判断的目标。人可以回看自己原本怎样表达，系统采用了哪种解释，哪里仍有歧义，以及什么结果才算满足。</p>
+    <p class="lead">一件 Endem 只描述一项能够独立理解和判断的目标。来源保留的形成版让人回看原始表达、采用的解释、仍有的歧义和满足条件；最终发布版移除原文，只保留发布 Profile 允许的目标结构。</p>
     <p>规范把这些内容分成来源表达、已确认意义、中性可能事态、目标方向、比较规则和待确认信息。它不规定模型采用哪条提示、计划或推理过程。</p>
-    <p class="callout"><strong>权威边界：</strong>这是一份面向读者的解释。通用内容义务与条款 ID 以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 内容标准</a>为准；当前封闭字段集合以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 内容 Profile</a>为准；实验性容器以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 条款源</a>为准。三层分别验证，END-FMT 0.1.0-draft 尚非稳定 ABI。</p>
+    <p class="callout"><strong>权威边界：</strong>这是一份面向读者的解释。通用内容义务与条款 ID 以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 内容标准</a>为准；当前 END-P1 只定义来源保留的形成与评审字段；实验性容器以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 条款源</a>为准。最终发布 Profile 尚未定义。各层分别验证，END-FMT 0.1.0-draft 尚非稳定 ABI。</p>
     <p class="callout"><strong>最小不变量：</strong>一个 Endem 必须且只能有一个根 <code>skena</code> 节点。根节点可以组合相互依赖的子命题；如果两个根可以独立实现、验收或失败，Ktisor 必须形成两个 Endem，再由 Synem 组合。</p>
     <p class="note"><strong>名称状态：</strong>六项职责已经进入现行草案，具体发行拼写和读音仍在研究。技术讨论应先说“来源表达、意义投影、事态、目标方向、满足判据、未决意义”等直白职责，再给出代码字段；读音建议不能替代<a href="../docs/terminology-and-pronunciation.html">独立人类听辨证据</a>。</p>
   </section>
@@ -35,14 +35,15 @@ permalink: "/specifications/endem.html"
 
   <section class="content-wide">
     <h2>目标文件内容由哪份标准定义</h2>
-    <p class="lead">END-CORE 是 Endem 的通用内容标准，END-P1 是当前内容 Profile，END-FMT 是字节容器。它们共同定义一份实验性 <code>.endem</code>，但不能互相替代。</p>
+    <p class="lead">END-CORE 是 Endem 的通用内容标准，END-P1 是来源保留的形成 Profile，END-FMT 是字节容器。它们共同定义一份用于形成与评审的实验性 <code>.endem</code>，但不能互相替代，也不构成最终发布格式。</p>
     <div class="table-wrap"><table><thead><tr><th>层次</th><th>定义什么</th><th>通过后仍不能说明</th></tr></thead><tbody>
       <tr><td>END-FMT 容器</td><td>固定前导、记录目录、范围、确定性编码与有界读取</td><td>内容字段闭合或语义成立</td></tr>
-      <tr><td>END-P1 内容 Profile</td><td>六记录的字段、类型、枚举、顺序、引用、状态与资源上限</td><td>所有 END-CORE 内容义务均已满足</td></tr>
+      <tr><td>END-P1 形成 Profile</td><td>含原始自然语言的六记录字段、类型、枚举、顺序、引用、状态与资源上限</td><td>所有 END-CORE 内容义务均已满足，或该对象适合最终发布</td></tr>
       <tr><td>END-CORE 内容标准</td><td>六个语义面的职责、授权、关系不变量、状态、身份和符合性</td><td>目标已经满足、签名有效、会话可运行或权威已经接受</td></tr>
     </tbody></table></div>
     <p><a href="../architecture/adr-0023-endem-content-standard.html">ADR-0023</a>借鉴 ELF 通用规范与平台补充的分层思想，但不复制机器指令、处理器 ABI 或传统链接语义。任何符合性报告都必须分别写出容器接受、Profile 接受和内容接受。</p>
     <p><a href="../architecture/adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>进一步明确：END-P1 内的权威名称只是选择器。授权决定、签名和证据必须在外部精确绑定，并且不改变 Endem 内容身份。</p>
+    <p><a href="../architecture/adr-0036-source-bearing-and-stripped-release.html">ADR-0036</a>进一步区分形成版与发布版：发布版移除原始自然语言，取得新的精确身份，并重新验证引用闭包、签名与授权。没有受控来源伴随资料时，发布版不能独立证明其结构忠实于原始表达。</p>
   </section>
 
   <section class="content-wide">

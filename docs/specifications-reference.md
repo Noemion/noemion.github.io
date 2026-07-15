@@ -89,7 +89,7 @@ badges: ["权威", "查询", "状态"]
 
 ## Endem
 
-[Endem 规范](../specifications/endem.html)解释一个根 `skena`、六个语义面、形式显示、来源确认、显式未知、身份和安全边界。ADR-0023 明确 END-CORE 是通用内容标准、END-P1 是封闭内容 Profile、END-FMT 是物理容器；容器接受、Profile 接受和内容接受必须分别报告。ADR-0014 另以 [END-SRCM](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-source-manifest.md)固定首个来源清单。正式来源语言、求值语言、摘要算法、扩展注册表和稳定 ABI 尚待确定。
+[Endem 规范](../specifications/endem.html)解释一个根 `skena`、六个语义面、形式显示、来源确认、显式未知、身份和安全边界。ADR-0023 明确 END-CORE 是通用内容标准、END-P1 是来源保留的形成 Profile、END-FMT 是物理容器；容器接受、Profile 接受和内容接受必须分别报告。ADR-0036 进一步要求最终发布版移除原始自然语言、取得新身份并重新验证来源引用闭包。发布 Profile、正式来源语言、求值语言、摘要算法、扩展注册表和稳定 ABI 尚待确定。
 
 判断扩展按问题分别读取：[ADR-0015](../architecture/adr-0015-result-domains.html)分开结果域，[ADR-0016](../architecture/adr-0016-mene-time-model.html)定义持续时间，[ADR-0017](../architecture/adr-0017-negation-and-absence.html)定义否定与缺席，[ADR-0018](../architecture/adr-0018-quantification-and-membership.html)定义量化范围，[ADR-0019](../architecture/adr-0019-measurement-and-thresholds.html)定义测量与阈值，[ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)定义复合事态。它们当前都只确定抽象内容边界，没有增加 END-P1 物理字段。
 
@@ -107,7 +107,7 @@ badges: ["权威", "查询", "状态"]
 
 [外部协议适配规范](../specifications/adapters.html)解释协议版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付和安全边界。规范源是 [ADP-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-core.md)。MCP、A2A、HTTP 与 SDK 对象只保持外部来源；当前没有具体协议 Profile、适配器 API 或组件实现。
 
-[精确内容身份与签名规范](../specifications/identity.html)解释身份域、精确字节、不可变引用、算法政策、签名陈述、外置验证材料、权威分离、截止点、撤销、可复现性与伴随制品关系。规范源是 [ID-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-core.md)。当前尚未确定发行算法、签名包络或密码组件；SHA-256 只用于提案向量示例。
+[精确内容身份与签名规范](../specifications/identity.html)解释身份域、精确字节、不可变引用、算法政策、签名陈述和外置验证材料。它也分开权威、截止点、撤销、可复现性，以及形成版、来源裁剪发布版和受控伴随资料。规范源是 [ID-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-core.md)。当前尚未确定发行算法、签名包络、发布 Profile 或密码组件；SHA-256 只用于提案向量示例。
 
 [文本与标识符边界规范](../specifications/text-and-identifiers.html)解释文本槽、严格 UTF-8、来源字节与解码文本、ASCII 结构标识符、规范化、比较、范围、双向显示、隐藏字符、语言元数据、模型实际输入与显示视图。规范源是 [TEXT-IDENTIFIER-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md)。END-SRCM 当前只保存解码并处理转义后的 `rhem.content`，不证明原始 `.ends` 文件逐字节保真；当前也没有 Unicode 处理器或模型输入网关。
 

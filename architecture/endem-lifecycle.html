@@ -23,7 +23,7 @@ permalink: "/architecture/endem-lifecycle.html"
 
   <section class="content-wide">
     <h2>开发者应怎样读主流程</h2>
-    <div class="flow"><div class="step">受控来源与授权投影</div><div class="step">ktise → 精确 Endem</div><div class="step">elenk / theor 分层检查</div><div class="step">pleko → 解析闭包</div><div class="step">外部陈述绑定精确身份</div><div class="step">验证政策与截止点复核</div><div class="step">drase → Dromen</div><div class="step">Iknem → 判断与决定</div></div>
+    <div class="flow"><div class="step">受控来源与授权投影</div><div class="step">ktise → 来源保留的形成版</div><div class="step">elenk / theor 分层检查</div><div class="step">发布 Profile → 来源裁剪版</div><div class="step">外部陈述绑定发布身份</div><div class="step">验证政策与截止点复核</div><div class="step">drase → Dromen</div><div class="step">Iknem → 判断与决定</div></div>
     <p>这条图按工作顺序排列，不表示前一步把内容原地升级成更可信的版本。内容发生变化时产生新身份；外部陈述仍绑定原来的精确内容主体（subject），并由当前依赖方决定是否适用于这次会话。</p>
   </section>
 
@@ -34,7 +34,8 @@ permalink: "/architecture/endem-lifecycle.html"
       <tr><td>nascent Endem → elenk</td><td>原始对象字节、限制、规范版本和请求验证层</td><td>分层结论、Elenk Iknem；Ktisor 内部可保留绑定精确输入与检查配置的引用</td><td>结构、引用、语义、状态、完整性或资源限制失败</td><td>pleko、Drasor、外部发布系统</td></tr>
       <tr><td>任意对象 → theor</td><td>原始 Endem/Synem/Iknem 字节和输出预算</td><td>只读视图、差分、诊断</td><td>畸形、未知关键记录、无法表示或资源超限</td><td>开发者、审计者和互操作验证；不进入制品形成与发布信任链</td></tr>
       <tr><td>Endem 集合 → pleko</td><td>已检查对象、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Iknem</td><td>未解析引用、冲突、循环、权限扩大、身份不稳定</td><td>theor、Drasor、外部发布系统</td></tr>
-      <tr><td>确定性制品 → 外部发布</td><td>精确制品、待签陈述、发布政策和信任材料</td><td>外置签名包络与有范围 Iknem</td><td>载荷、请求、算法、签名者、截止点或策略不匹配</td><td>theor、Drasor</td></tr>
+      <tr><td>形成制品 → 裁剪发布</td><td>来源保留的精确制品、发布 Profile、裁剪政策与受控伴随关系</td><td>不含原文的新身份发布制品、损失清单与类型化派生关系</td><td>来源泄露、引用悬空、身份复用、保留关系或失败原子性未定义</td><td>外部发布系统、theor、Drasor</td></tr>
+      <tr><td>发布制品 → 外部发布陈述</td><td>来源裁剪的精确发布字节、待签陈述、发布政策和信任材料</td><td>外置签名包络与有范围 Iknem</td><td>载荷、请求、算法、签名者、截止点或策略不匹配</td><td>theor、Drasor</td></tr>
       <tr><td>精确制品与外部陈述 → drase</td><td>实际内容身份、签名或证明陈述、验证记录、适用政策、截止点、撤销信息、后端和能力目录</td><td>Dromen、运行类 Iknem、满足结果和会话终止结果；具名权威另行作出最终决定</td><td>主体不匹配、签名或政策失败、陈述过期或撤销、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
     </tbody></table></div>
   </section>
@@ -53,7 +54,8 @@ permalink: "/architecture/endem-lifecycle.html"
   <section class="content-rows">
     <h2>内容形成与发布陈述不能压成一个状态</h2>
     <ol>
-      <li>对应制品生产者形成确定性物理封装；若产生派生物，必须保存新身份、变换、保留内容与损失。</li>
+      <li>对应制品生产者先形成保留原始自然语言的制品；最终发布时按独立 Profile 移除原文，保存新身份、变换、引用重写、保留内容与损失。</li>
+      <li>受控来源伴随资料可以支持获准的来源一致性审计，但不是默认公开包、运行权限或接受决定。没有伴随资料时，验证者不能声称已经核对发布结构对原始表达的忠实性。</li>
       <li>待签陈述必须先绑定精确内容身份、陈述类型和预期签名者；私钥始终留在外部签名系统。</li>
       <li>一项内容可以同时拥有多项外部陈述。每项陈述分别保存签名者、包络、算法和适用范围，不能折叠为内容内的单一布尔值。</li>
       <li>验证记录另行绑定信任根、验证政策、参考值、截止点、撤销状态和实际结果；不同依赖方可以对同一陈述作出不同判断。</li>

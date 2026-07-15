@@ -36,7 +36,7 @@ badges: ["参考", "CLI 待定"]
 | Dromen | Drasor 为一次 Drase 会话封存的只读执行契约，不是文件或可恢复权限 |
 | Iknem | 封装 phain、来源、范围、方法、限制或决定依据的证据记录 |
 
-Endem 的规范分为三层：END-CORE 定义通用内容标准，END-P1 定义当前封闭内容 Profile，END-FMT 定义实验性物理容器。容器接受、Profile 接受和内容接受必须分别报告；详见 [ADR-0023](../../architecture/adr-0023-endem-content-standard.html)。
+Endem 的规范分为三层：END-CORE 定义通用内容标准，END-P1 定义来源保留的形成 Profile，END-FMT 定义实验性物理容器。容器接受、Profile 接受和内容接受必须分别报告；最终发布还需要 ADR-0036 所要求的独立 Profile。详见 [ADR-0023](../../architecture/adr-0023-endem-content-standard.html) 与 [ADR-0036](../../architecture/adr-0036-source-bearing-and-stripped-release.html)。
 
 ## 状态索引
 

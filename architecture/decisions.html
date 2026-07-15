@@ -27,8 +27,9 @@ permalink: "/architecture/decisions.html"
       <tr><td>多个目标、一次会话和有限证据怎样组合？</td><td><a href="adr-0021-synem-closure-and-activation.html">ADR-0021</a>、<a href="adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a>、<a href="adr-0024-dromen-session-contract.html">ADR-0024</a>、SYN-CORE、IKN-CORE、DRO-CORE</td><td>这些规范尚未定义物理容器或运行时；记录会话不能恢复实时权限。</td></tr>
       <tr><td>失败、外部协议、身份、文本和授权怎样穿过信任边界？</td><td><a href="adr-0025-structured-diagnostics.html">ADR-0025</a>至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>、DIA-CORE、ADP-CORE、ID-CORE、TEXT-IDENTIFIER-CORE、AUT-CORE</td><td>外部状态、签名或模型输出只能成为带来源输入，不能改写本地结果、身份或能力。</td></tr>
       <tr><td>术语和动作何时可以进入正式发行？</td><td><a href="adr-0031-release-name-collision-gate.html">ADR-0031</a>至 <a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035</a>及<a href="../docs/terminology-and-pronunciation.html">术语与读音指南</a></td><td>职责冲突、检索冲突、目标语言读音或词表内口头区分未通过人工证据时，发行拼写仍待确定。</td></tr>
+      <tr><td>为什么形成版含原文，发布版却不含原文？</td><td><a href="adr-0036-source-bearing-and-stripped-release.html">ADR-0036</a>、END-PUB-001 与 ID-REL-001</td><td>发布 Profile、来源引用闭包或伴随资料关联尚未定义时，只能确定分层，不得实现裁剪或承诺发布格式。</td></tr>
     </tbody></table></div>
-    <p>ADR-0008 与 ADR-0009 只保存迁移历史；ADR-0010 至 ADR-0035 构成当前可查的决定记录。历史页面可以解释来路，但不能反向约束未来接口或 ABI。</p>
+    <p>ADR-0008 与 ADR-0009 只保存迁移历史；ADR-0010 至 ADR-0036 构成当前可查的决定记录。历史页面可以解释来路，但不能反向约束未来接口或 ABI。</p>
   </section>
 
   <section class="content-wide">
@@ -39,7 +40,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0010-native-lexicon.html">ADR-0010 原生词汇与事态分层</a></td><td>当前策略</td><td>当前六个语义面、一个根 skena、phain 比较、原生制品/组件/动作与生命周期。</td></tr>
       <tr><td><a href="adr-0011-endem-container.html">ADR-0011 Endem 实验性容器格式</a></td><td>当前草案</td><td>采用固定前导、定宽目录、六记录、受限确定性 CBOR 与 END-P0；尚非稳定 ABI。</td></tr>
       <tr><td><a href="adr-0012-rust-core-language.html">ADR-0012 未来安全核心的 Rust 基线</a></td><td>当前策略</td><td>Ktisor 与制品形成侧读取核心以 Rust 1.97.0 和安全子集作为实现前重新评审起点；当前没有实现工作区。</td></tr>
-      <tr><td><a href="adr-0013-end-p1-payload.html">ADR-0013 END-P1 封闭内容 Profile</a></td><td>当前草案</td><td>END-P0 保留为结构实验；END-P1 作为首个设计 Profile 固定六记录字段、枚举、规范排序和引用闭包。</td></tr>
+      <tr><td><a href="adr-0013-end-p1-payload.html">ADR-0013 END-P1 封闭内容 Profile</a></td><td>当前草案</td><td>END-P0 保留为结构实验；END-P1 作为来源保留的形成 Profile，固定六记录字段、枚举、规范排序和引用闭包。</td></tr>
       <tr><td><a href="adr-0014-source-manifest.html">ADR-0014 首个 Ktisor 来源清单</a></td><td>当前草案</td><td>用有限来源清单连接自然语言来源与授权投影；模型不能直接生成规范对象，正式来源语言出现后删除该入口。</td></tr>
       <tr><td><a href="adr-0015-result-domains.html">ADR-0015 判断与运行结果分层</a></td><td>当前策略</td><td>分开制品生命周期、满足判断、权威决定、会话终止、Iknem 有效性和证据覆盖度；不改变 END-P1 字节。</td></tr>
       <tr><td><a href="adr-0016-mene-time-model.html">ADR-0016 mene 时间与连续性模型</a></td><td>当前策略</td><td>采用 fixed/elapsed 时间范围、strict/budgeted 连续性与显式覆盖缺口；END-P1 继续只支持 kine。</td></tr>
@@ -49,7 +50,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0020-composite-situations-and-criteria.html">ADR-0020 复合事态与判据组合</a></td><td>当前策略</td><td>只允许一个不可分终态使用 all_of/any_of；固定四结果传播、决定性短路和求值覆盖，不开放任意表达式。</td></tr>
       <tr><td><a href="adr-0021-synem-closure-and-activation.html">ADR-0021 Synem 组合闭包与条件激活</a></td><td>当前策略</td><td>固定完整传递闭包、精确绑定、有限无环、权限交集、成员结果分离和会话激活四状态；不创建物理格式。</td></tr>
       <tr><td><a href="adr-0022-iknem-evidence-and-appraisal.html">ADR-0022 Iknem 证据范围与评估边界</a></td><td>当前策略</td><td>固定主体范围、溯源、phain 对齐、证据类别、完整性、有效性、覆盖、决定分离与最小披露；不创建物理格式。</td></tr>
-      <tr><td><a href="adr-0023-endem-content-standard.html">ADR-0023 Endem 内容标准分层</a></td><td>当前策略</td><td>由 END-CORE 定义通用内容，END-P1 定义当前封闭内容 Profile，END-FMT 定义物理容器；三层分别验证。</td></tr>
+      <tr><td><a href="adr-0023-endem-content-standard.html">ADR-0023 Endem 内容标准分层</a></td><td>当前策略</td><td>由 END-CORE 定义通用内容，END-P1 定义来源保留的形成 Profile，END-FMT 定义物理容器；三层分别验证。</td></tr>
       <tr><td><a href="adr-0024-dromen-session-contract.html">ADR-0024 Dromen 会话契约</a></td><td>当前策略</td><td>由 DRO-CORE 固定一次会话的精确主体、政策、环境、能力、预算、观察责任、只读失效与销毁；永远不创建 Dromen 文件。</td></tr>
       <tr><td><a href="adr-0025-structured-diagnostics.html">ADR-0025 结构化诊断边界</a></td><td>当前策略</td><td>由 DIA-CORE 固定跨对象诊断身份、语境、层次、位置、主错误、恢复和安全边界；诊断不成为结果、权限或自动修复命令。</td></tr>
       <tr><td><a href="adr-0026-external-protocol-adapters.html">ADR-0026 外部协议适配边界</a></td><td>当前草案</td><td>由 ADP-CORE 固定协议版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付和安全边界；具体协议 Profile 仍待确定。</td></tr>
@@ -62,6 +63,7 @@ permalink: "/architecture/decisions.html"
       <tr><td><a href="adr-0033-text-identifier-specification-name.html">ADR-0033 文本与标识符标准命名</a></td><td>当前策略</td><td>采用 TEXT-IDENTIFIER-CORE，消除把跨制品文本边界误读为 <code>.txt</code> 文件或原始文件规范的歧义。</td></tr>
       <tr><td><a href="adr-0034-pronunciation-and-oral-distinction.html">ADR-0034 术语读音与口头区分审查</a></td><td>当前审查</td><td>把目标语言读音和词表内听辨纳入发行审查；现行职责保持有效，具体读音与发行拼写尚待确定。</td></tr>
       <tr><td><a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035 公开动作与内部职责收敛</a></td><td>当前策略</td><td>公开动作收敛为五个；派生封装、外部签名和符合性验证保留责任边界，但不保留公开动作名。</td></tr>
+      <tr><td><a href="adr-0036-source-bearing-and-stripped-release.html">ADR-0036 来源保留与裁剪发布边界</a></td><td>当前策略</td><td>形成版保留原始自然语言；最终发布版移除原文并使用新身份。发布 Profile 与伴随关联仍在研究。</td></tr>
     </tbody></table></div>
   </section>
 

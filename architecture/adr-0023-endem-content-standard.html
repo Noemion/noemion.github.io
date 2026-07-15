@@ -11,7 +11,7 @@ permalink: "/architecture/adr-0023-endem-content-standard.html"
 
   <section class="content-stack">
     <h2>直接结论</h2>
-    <p class="lead">项目需要一份目标文件内容标准，但不需要再造一个与 END-CORE 重复的规范。现有 <code>END-CORE</code> 正式承担通用内容标准，<code>END-P1</code> 承担当前封闭内容 Profile，<code>END-FMT</code> 只承担物理容器。</p>
+    <p class="lead">项目需要一份目标文件内容标准，但不需要再造一个与 END-CORE 重复的规范。现有 <code>END-CORE</code> 正式承担通用内容标准，<code>END-P1</code> 承担来源保留的形成 Profile，<code>END-FMT</code> 只承担物理容器。最终发布 Profile 由 ADR-0036 另行约束，当前尚未定义。</p>
     <p>这三层必须分别版本化、分别验证。能读出目录不表示内容合格，字段集合闭合不表示语义成立，内容成立也不表示目标已经实现或被权威接受。</p>
   </section>
 

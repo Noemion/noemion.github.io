@@ -25,7 +25,7 @@ permalink: "/specifications/identity.html"
       <tr><td>身份域、对象种类、规范、表示、Profile、算法、长度和完整摘要</td><td>在完全相同的身份语境内比较精确字节</td><td>内容为真、语义等价、目标满足或制品已接受</td></tr>
       <tr><td>覆盖对象、用途、受众和主体的发布签名陈述</td><td>验证签名与这份受保护陈述之间的关系</td><td>签名主体当前有发布权限，或陈述内容必然正确</td></tr>
       <tr><td>证书、撤销状态、时间材料与具名截止点</td><td>按固定信任根和政策评估本次签名适用性</td><td>把一次验证成功永久缓存，或跳过授权与最终决定</td></tr>
-      <tr><td>裁剪包、调试文件或重编码副本</td><td>建立新身份，并用显式变换关系指回来源</td><td>继承来源身份、签名、证据、权限或接受状态</td></tr>
+      <tr><td>来源裁剪的发布版或受控来源伴随资料</td><td>分别建立新身份，并用显式变换关系连接来源保留的形成版</td><td>继承形成版身份、签名、证据、权限、接受状态，或仅凭发布版证明来源忠实性</td></tr>
     </tbody></table></div>
     <p class="note">GNU <code>ld --build-id</code> 也把 build ID 描述为原始链接输出的关联标识，而不是当前文件内容校验和。ID-CORE 把这条工程纪律扩展到所有安全引用：定位线索与精确身份必须分开。</p>
   </section>
@@ -50,7 +50,7 @@ permalink: "/specifications/identity.html"
       <tr><td><code>ID-AUT-001</code></td><td>密码验证、主体认证、授权、适用性和决定分开</td><td>签名或日志包含直接证明真、授权或接受</td></tr>
       <tr><td><code>ID-VAL-001</code></td><td>有效性绑定截止点、信任根、政策、撤销和状态新鲜度</td><td>无限缓存成功或撤销后沿用旧授权</td></tr>
       <tr><td><code>ID-REP-001</code></td><td>可复现性需要独立产出和逐字节输出比较</td><td>相同日志、build ID、缓存副本或单次重跑冒充复现</td></tr>
-      <tr><td><code>ID-REL-001</code></td><td>裁剪、调试、压缩和迁移制品各有身份与显式关系</td><td>派生物继承来源身份、签名、证据、接受或能力</td></tr>
+      <tr><td><code>ID-REL-001</code></td><td>形成版、来源裁剪发布版和受控伴随资料各有身份、损失清单与显式关系</td><td>发布版保留原文、引用悬空、公开低熵来源摘要，或派生物继承身份、签名、证据、接受与能力</td></tr>
     </tbody></table></div>
   </section>
 
@@ -65,9 +65,9 @@ permalink: "/specifications/identity.html"
 
   <section class="content-wide">
     <h2>待定内容</h2>
-    <p>摘要和签名算法基线、算法登记表、摘要文本语法、签名陈述物理编码、COSE、DSSE 或 Sigstore Profile、证书体系、透明日志、时间戳与撤销分发、Semantic Key、跨版本等价和调试伴随格式均保持开放。</p>
+    <p>摘要和签名算法基线、算法登记表、摘要文本语法、签名陈述物理编码、COSE、DSSE 或 Sigstore Profile、证书体系、透明日志、时间戳与撤销分发、Semantic Key、跨版本等价、发布 Profile 和来源伴随物理格式均保持开放。<a href="../architecture/adr-0036-source-bearing-and-stripped-release.html">ADR-0036</a>只确定形成版含原文、最终发布版移除原文以及两者必须分配不同身份。</p>
     <p>外部训练数据、基础模型、适配器和派生权重也遵守同一身份边界。环境相同、种子相同、损失曲线相近或模型别名未变，都不能替代精确对象身份与派生关系；字节复现、行为评测和发布决定必须分开。完整反例见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究提案</a>。</p>
-    <p>背景、权衡和权威资料见 <a href="../architecture/adr-0027-exact-identity-and-attestation.html">ADR-0027 精确内容身份与签名边界</a>。</p>
+    <p>身份与签名背景见 <a href="../architecture/adr-0027-exact-identity-and-attestation.html">ADR-0027</a>；来源保留、裁剪发布和有限验证主张见 <a href="../architecture/adr-0036-source-bearing-and-stripped-release.html">ADR-0036</a>。</p>
   </section>
   <div class="next-prev"><a href="adapters.html">← 外部协议适配</a><a href="../architecture/adr-0027-exact-identity-and-attestation.html">ADR-0027 →</a></div>
 </main>

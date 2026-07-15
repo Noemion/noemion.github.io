@@ -11,8 +11,8 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
 
   <section class="content-stack">
     <h2>直接决定</h2>
-    <p class="lead">Ktisor 的首个纵向切片不写 END-P0。END-P0 只保留为固定头部、目录和受限 CBOR 的结构实验；生产候选改用 <code>profile_id=2</code> 的 END-P1，并且必须在六个记录内遵守封闭字段 schema。</p>
-    <p>这避免两种错误：一是把六个空映射误称为 Endem，二是让未来实现私自发明字段。END-P1 仍是实验性设计 Profile，不是稳定 ABI；发现反例时可以直接修订，但必须同步 ADR、Profile、正反字节向量和验证方案。</p>
+    <p class="lead">Ktisor 的首个纵向切片不写 END-P0。END-P0 只保留为固定头部、目录和受限 CBOR 的结构实验；来源保留的形成候选改用 <code>profile_id=2</code> 的 END-P1，并且必须在六个记录内遵守封闭字段 schema。</p>
+    <p>这避免两种错误：一是把六个空映射误称为 Endem，二是让未来实现私自发明字段。END-P1 仍是实验性形成与评审 Profile，不是稳定 ABI 或最终发布 Profile；发现反例时可以直接修订，但必须同步 ADR、Profile、正反字节向量和验证方案。</p>
   </section>
 
   <section class="content-wide">
@@ -46,8 +46,9 @@ permalink: "/architecture/adr-0013-end-p1-payload.html"
 
   <section class="content-wide">
     <h2>明确不关闭的接口</h2>
-    <p>END-P1 不定义量化、时间区间、单位换算、摘要、签名、Semantic Key、授权决定、Synem、coherent/attested、压缩、加密、远程披露或稳定 ABI。这些能力没有真实向量和消费者前，不占用字段键，也不以保留空字段假装完成。</p>
+    <p>END-P1 不定义量化、时间区间、单位换算、摘要、签名、Semantic Key、授权决定、Synem、coherent/attested、压缩、加密、来源裁剪、远程披露或稳定 ABI。这些能力没有真实向量和消费者前，不占用字段键，也不以保留空字段假装完成。</p>
     <p><code>projection.id</code>、<code>decision_authority</code> 与 <code>required_iknem</code> 只是待核对选择器。按照 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>，END-P1 单文件最高只能声称 Profile 接受，不能自证授权或完整内容接受。</p>
+    <p>按照 <a href="adr-0036-source-bearing-and-stripped-release.html">ADR-0036</a>，最终发布版必须移除原始自然语言、使用新的封闭 Profile 和精确身份，并重新证明来源引用闭包；不能从 END-P1 直接删字段后发布。</p>
   </section>
 
   <section class="content-band">
