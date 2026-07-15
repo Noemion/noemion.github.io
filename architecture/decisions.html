@@ -7,24 +7,32 @@ permalink: "/architecture/decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>说明当前采用的内容标准、原生语义、实验性容器、结果分层、组合闭包、会话契约、证据、授权、身份与组件边界。</p><div class="badges"><span class="badge">ADR-0010—0035</span><span class="badge">Design Stage</span><span class="badge">尚未实现</span><span class="badge">接口待定</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>遇到设计问题时，先定位被改变的责任，再查对应 ADR、CORE 与 Profile。编号是证据入口，不是阅读顺序。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">已有成果</span><span class="badge">正在研究</span><span class="badge">尚无组件</span></div></header>
 
   <div class="summary-rail-layout summary-rail-layout--article" data-summary-rail-layout data-summary-layout="stacked">
     <aside class="summary-rail summary-rail--article" aria-label="决策阅读概览">
       <div class="summary-rail-heading"><span class="summary-rail-kicker">ARCHITECTURE / DECISIONS</span><strong class="summary-rail-title">决策阅读概览</strong></div>
-      <dl class="summary-rail-facts"><div><dt>当前重点</dt><dd>职责、权威与信任边界</dd></div><div><dt>规范来源</dt><dd>现行 ADR 与对应 CORE、Profile</dd></div><div><dt>阅读原则</dt><dd>先看现行决定，再核对采用边界</dd></div></dl>
-      <nav class="summary-rail-links" aria-label="架构决策重点章节"><a href="#current-decisions">当前权威决定</a><a href="#adoption-boundaries">外部机制的采用边界</a><a href="#change-rules">变更规则</a></nav>
+      <dl class="summary-rail-facts"><div><dt>先问什么</dt><dd>这项变更由谁确认、观察和决定</dd></div><div><dt>到哪里核对</dt><dd>现行 ADR 与对应 CORE、Profile</dd></div><div><dt>何时停止</dt><dd>物理 Profile 或权威输入尚未定义时</dd></div></dl>
+      <nav class="summary-rail-links" aria-label="架构决策重点章节"><a href="#current-decisions">从一个变更定位责任</a><a href="#adoption-boundaries">外部资料怎样进入设计</a><a href="#change-rules">决定变化时同步什么</a></nav>
     </aside>
     <div class="summary-rail-main">
 
   <section id="current-decisions" class="content-stack">
-    <h2>当前权威决定</h2>
-    <p class="lead"><a href="adr-0010-native-lexicon.html">ADR-0010</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>固定 Endem 语义、格式与判断边界；ADR-0021 至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>固定组合、证据、内容分层、会话、诊断、适配、身份、文本、授权与伴随边界；<a href="adr-0031-release-name-collision-gate.html">ADR-0031</a>至 <a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035</a>处理发布名称、读音与公开动作审查。</p>
-    <p>ADR-0008 与 ADR-0009 只保存公开迁移历史。更早、无入口且与现行决策源重复的内部 ADR 副本已经删除，不能反向约束实现、路由或 ABI。</p>
+    <h2>先从一个变更定位责任</h2>
+    <p class="lead">例如，外部 A2A Task 或 MCP 工具报告“已完成”，开发者不能直接寻找一个同名本地状态。先用 ADP-CORE 保存外部版本、对端和来源事件，再用 ID-CORE 绑定精确内容，以 IKN-CORE 评估证据覆盖，按 END-CORE 判断目标，最后由 AUT-CORE 中的具名权威形成决定。</p>
+    <p>下面的入口按开发者要回答的问题组织。若对应物理 Profile、算法选择或权威输入仍在研究，文档只允许继续做规范与验证设计，不能把草案补成实现假设。</p>
+    <div class="table-wrap"><table><thead><tr><th>开发者问题</th><th>先查什么</th><th>停止条件</th></tr></thead><tbody>
+      <tr><td>来源怎样成为确认意义，目标怎样判断？</td><td><a href="adr-0010-native-lexicon.html">ADR-0010</a>、<a href="adr-0015-result-domains.html">ADR-0015</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>、END-CORE</td><td>语义投影、观察范围或判据不完整时，保留 <code>apor</code>、<code>agno</code> 或 <code>fault</code>，不生成肯定结论。</td></tr>
+      <tr><td>字节、Profile、来源清单和内容身份怎样分层？</td><td><a href="adr-0011-endem-container.html">ADR-0011</a>至 <a href="adr-0014-source-manifest.html">ADR-0014</a>、<a href="adr-0023-endem-content-standard.html">ADR-0023</a>、END-FMT、END-P1</td><td>当前格式仍是实验草案；不得据此承诺稳定 ABI、解析器兼容或正式发行。</td></tr>
+      <tr><td>多个目标、一次会话和有限证据怎样组合？</td><td><a href="adr-0021-synem-closure-and-activation.html">ADR-0021</a>、<a href="adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a>、<a href="adr-0024-dromen-session-contract.html">ADR-0024</a>、SYN-CORE、IKN-CORE、DRO-CORE</td><td>这些规范尚未定义物理容器或运行时；记录会话不能恢复实时权限。</td></tr>
+      <tr><td>失败、外部协议、身份、文本和授权怎样穿过信任边界？</td><td><a href="adr-0025-structured-diagnostics.html">ADR-0025</a>至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>、DIA-CORE、ADP-CORE、ID-CORE、TEXT-IDENTIFIER-CORE、AUT-CORE</td><td>外部状态、签名或模型输出只能成为带来源输入，不能改写本地结果、身份或能力。</td></tr>
+      <tr><td>术语和动作何时可以进入正式发行？</td><td><a href="adr-0031-release-name-collision-gate.html">ADR-0031</a>至 <a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035</a>及<a href="../docs/terminology-and-pronunciation.html">术语与读音指南</a></td><td>职责冲突、检索冲突、目标语言读音或词表内口头区分未通过人工证据时，发行拼写仍待确定。</td></tr>
+    </tbody></table></div>
+    <p>ADR-0008 与 ADR-0009 只保存迁移历史；ADR-0010 至 ADR-0035 构成当前可查的决定记录。历史页面可以解释来路，但不能反向约束未来接口或 ABI。</p>
   </section>
 
   <section class="content-wide">
-    <h2>决策状态</h2>
+    <h2>按编号核对决定状态</h2>
     <div class="table-wrap"><table><thead><tr><th>ADR</th><th>状态</th><th>当前解释</th></tr></thead><tbody>
       <tr><td><a href="adr-0008-endem-system.html">ADR-0008 Endem 制品与单一命令面</a></td><td>Superseded by ADR-0010</td><td>保留单一 CLI、权限分离与安全机制；制品、组件、动作和状态名称已取代。</td></tr>
       <tr><td><a href="adr-0009-propositional-kernel.html">ADR-0009 Endem 命题投影语义核</a></td><td>Superseded by ADR-0010</td><td>保留结构显示与未确定分层；五组字段和目标力量模型已取代。</td></tr>
@@ -58,52 +66,21 @@ permalink: "/architecture/decisions.html"
   </section>
 
   <section class="content-wide">
-    <h2>当前策略</h2>
-    <div class="table-wrap"><table><thead><tr><th>决定</th><th>采用的边界</th><th>直接影响</th></tr></thead><tbody>
-      <tr><td>六个语义面</td><td>一个 Endem 只有一个根 skena，并保存 rhem、semion、skena、telis、krin 与 apor。</td><td>来源格式、投影规则、Ktisor、规范向量和错误语义。</td></tr>
-      <tr><td>事态与方向分离</td><td>skena 保持中性；telis 只使用 kine/mene；禁止由事态否定表达。</td><td>规范化、等价判断、时间字段与反例向量。</td></tr>
-      <tr><td>形式显示</td><td>semion、skena 与 phain 共享符号和关系位置，不使用自证逻辑形式字段。</td><td>结构编码、Ktisor/Theor 差分和 aseme 诊断。</td></tr>
-      <tr><td>内容形成与外部陈述</td><td>现行草案仍列出 nascent / coherent / attested；当前研究指出签名、验证政策、截止点和撤销必须作为绑定精确内容的外部关系理解，不能压成永久可信状态。</td><td>身份、摘要、发布、签名、验证与会话准入。</td></tr>
-      <tr><td>组合闭包</td><td>Synem 只在多个 Endem 需要解析关系时出现；权限只能收紧。</td><td>pleko、依赖锁定、冲突和披露。</td></tr>
-      <tr><td>一次运行的只读契约</td><td>Dromen 按 DRO-CORE 只绑定一个 Drase 会话；实时秘密和句柄外置，实质漂移使旧契约失效，记录不能恢复权限。</td><td>Drasor、最小能力域、预算、观察责任、失效和销毁。</td></tr>
-      <tr><td>有限证据主张</td><td>Iknem 按 IKN-CORE 保存精确主体、范围、溯源、phain、主张和限制；有效性、覆盖度与决定外置。</td><td>来源、绑定、签名、运行、验收、撤销、隐私与审计。</td></tr>
-      <tr><td>失败可被稳定处理</td><td>DIA-CORE 让机器码与消息分开，固定生产语境并确定性选择主错误；外部错误和恢复建议不能越权改写本地结果或权限。</td><td>Ktisor、Theor、Drasor、协议适配器、自动化与人工审查。</td></tr>
-      <tr><td>文本职责保持分层</td><td>TEXT-IDENTIFIER-CORE 分开来源字节、解码文本、机器标识符、人类显示与模型实际输入；当前结构标识符保持 ASCII 且不做隐式规范化。</td><td>Ktisor 来源、诊断位置、身份比较、安全审查、模型候选和未来界面。</td></tr>
-      <tr><td>权威与授权保持有界</td><td>AUT-CORE 分开认证、角色资格、语义授权、能力授予与最终决定；grant/deny/defer 只回答精确请求是否获准。</td><td>自然语言候选复核、Dromen 建立、Agent 委托、同意、多人决定、撤销与重放。</td></tr>
-      <tr><td>唯一 CLI</td><td><code>endem</code> 只提供 <code>ktise/elenk/pleko/theor/drase</code> 五个动作。</td><td>应用项目、手册、安装包和自动化接口。</td></tr>
-      <tr><td>名称发行审查</td><td>职责、书写检索、目标语言读音和词表内口头区分分别审查；读音提示不是机器别名。</td><td>全部领域词、组件、动作、手册、未来语音交互和首次正式发行。</td></tr>
-      <tr><td>独立与隔离</td><td>theor 不共享 Ktisor 的形成侧解析；drase 不共享编译器权限域。</td><td>仓库依赖方向、测试和安全边界。</td></tr>
-      <tr><td>实验性容器</td><td>END-FMT 0.1 采用 64 字节前导、48 字节目录项、六种关键记录和 END-P0 有限上限。</td><td>规范字节、错误分类、Ktisor/Theor 语言实验；不构成稳定 ABI。</td></tr>
-      <tr><td>首版核心语言</td><td>实现启动前计划评估 Rust 1.97.0；禁止 unsafe 与首条切片零第三方 crate 仍是未来实现约束。</td><td>未来实现的构建锁、受检算术、模糊测试和供应链边界。</td></tr>
-      <tr><td>首个设计 Profile</td><td>END-P1 使用 profile 2，封闭六记录字段并只支持 nascent 与 kine。</td><td>未来 Ktisor/Theor 字段解析、交叉引用和当前载荷向量；不构成稳定 ABI。</td></tr>
-      <tr><td>首个来源输入</td><td>END-SRCM 使用 UTF-8 逐行来源清单，显式分开来源、授权投影和 apor。</td><td>Ktisor 输入解析与失败定位；不是稳定源语言或对象身份。</td></tr>
-      <tr><td>判断与运行结果分层</td><td>满足只使用 met/unmet/agno/fault；决定只使用 accepted/rejected/deferred；会话只使用 completed/failed/interrupted。</td><td>Drasor、Iknem、协议适配、人工验收和未来组合向量；不新增对象或 wire 字段。</td></tr>
-      <tr><td>mene 时间与连续性</td><td>时间范围只使用 fixed 确定区间或 elapsed 具名事件时长；连续性只使用 strict 或完整 budgeted。</td><td>Ktisor、Drasor、Iknem 和未来 mene Profile；遥测缺口不能成为允许违约。</td></tr>
-      <tr><td>否定与缺席证据</td><td>negative 作用于同一关系和角色；没有记录不等于负观察，缺席推断必须绑定封闭观察范围。</td><td>Ktisor、Drasor、Iknem、END-P1 负极性向量与未来完整性声明；空日志不能成为 met。</td></tr>
-      <tr><td>量化范围与成员资格</td><td>只支持单个被量化角色；集合、权威、截止点、身份和空集政策必须显式，基数只按不同成员计数。</td><td>Ktisor、Drasor、Iknem 与未来量化 Profile；当前不改变 END-P1，也不实现求值器。</td></tr>
-      <tr><td>测量谓词与阈值</td><td>构念、总体、数值、单位、程序、聚合器、样本、不确定度和比较器必须共同固定。</td><td>Ktisor、Drasor、Iknem、AI 评估与未来测量 Profile；当前不改变 END-P1，也不实现统计引擎。</td></tr>
-      <tr><td>复合事态与判据</td><td>一个不可分终态可用有限无环的 all_of/any_of；skena 与 krin 叶对齐，四结果确定传播，决定性短路保存覆盖。</td><td>Ktisor、Drasor、Iknem、Synem 拆分与未来组合 Profile；当前不改变 END-P1，也不实现求值器。</td></tr>
-      <tr><td>Synem 闭包与条件激活</td><td>至少两个精确 Endem 形成完整闭包；依赖唯一绑定，权限只收紧，成员结果独立，激活只选择固定成员。</td><td>Pleko、Drasor、Theor 与未来 Synem Profile；当前没有物理容器、解析器或运行时。</td></tr>
-      <tr><td>Iknem 证据与评估</td><td>记录种类与来源类别分开；有效性由外部政策评估，覆盖相对精确 krin 计算，决定只由具名权威形成。</td><td>Drasor、Theor、审计者、决定权威与未来 Iknem Profile；当前没有物理格式或组件。</td></tr>
-      <tr><td>Endem 内容标准分层</td><td>END-CORE、END-P* 与 END-FMT 分别定义通用内容、封闭能力集合与物理字节；接受结果不得跨层提升。</td><td>规范作者、Profile 维护者、Ktisor、Theor、符合性报告和未来互操作；当前仍非稳定 ABI。</td></tr>
+    <h2>常见输入怎样进入当前架构</h2>
+    <p class="lead">先给每类输入一个受限角色，再说明它还缺少哪项确认。这样可以直接指导实现者接线，也避免把风险边界写成一串互不相连的禁令。</p>
+    <div class="table-wrap"><table><thead><tr><th>常见输入</th><th>允许进入的角色</th><th>仍需补足什么</th></tr></thead><tbody>
+      <tr><td>自然语言、模型 JSON</td><td>带来源的候选材料</td><td>Ktisor 所需的授权投影、未确定项与人工确认；候选本身不是 Endem。</td></tr>
+      <tr><td>查看、归档、裁剪、签名、符合性检查</td><td>五个公开动作背后的内部职责</td><td>由 <code>ktise</code>、<code>elenk</code>、<code>pleko</code>、<code>theor</code>、<code>drase</code> 暴露一致的命令边界，不新增同义产品。</td></tr>
+      <tr><td>环境路径、当前目录、网络版本</td><td>开发期定位线索</td><td>正式依赖必须转换为精确身份、版本和 Profile；运行环境不能替代内容身份。</td></tr>
+      <tr><td>对象变换或迁移工具</td><td>显式、可审计的转换步骤</td><td>保存未知字段与来源，分别验证 <code>semion</code>、<code>skena</code>、<code>telis</code>、<code>krin</code>、<code>apor</code> 的语义不变量。</td></tr>
+      <tr><td>签名、证据数量、模型评分、Runtime 成功</td><td>绑定来源的陈述、证据或运行事件</td><td>按 Iknem 覆盖、Endem 满足和具名权威决定分别求值，任何单一信号都不代表任务完成。</td></tr>
+      <tr><td>保存的会话记录</td><td>审计和复盘材料</td><td>新运行必须创建新的 Dromen，并重新取得实时能力、秘密、预算和环境绑定。</td></tr>
     </tbody></table></div>
   </section>
 
-  <section class="content-split">
-    <h2>排除的捷径</h2>
-    <ul>
-      <li>不把任意自然语言或模型 JSON 直接视为 Endem。</li>
-      <li>不为查看、符号、大小、归档、裁剪、跟踪和评估各建一个产品。</li>
-      <li>不使用环境路径、当前目录或网络“最新版本”解析正式依赖。</li>
-      <li>不让通用对象变换器任意改写 semion、skena、telis、krin 或 apor。</li>
-      <li>不把签名、Iknem 数量、模型评分或 Runtime 自述当作任务完成。</li>
-      <li>不把 Dromen 序列化为可复制的权限对象。</li>
-    </ul>
-  </section>
-
   <section id="adoption-boundaries" class="content-wide">
-    <h2>外部机制的采用边界</h2>
-    <p>以下资料只提供可复查的机制先例。每一项都同时写明采用部分和禁止推导，外部版本变化不能静默改变 Endem。</p>
+    <h2>外部资料怎样进入设计</h2>
+    <p>外部资料先成为可复查的机制先例，再由 Noemion 的职责和信任边界筛选。版本变化会触发重新评估，但不会自动改变 Endem。</p>
     <div class="table-wrap"><table><thead><tr><th>资料与复核基线</th><th>Noemion 采用什么</th><th>不能据此推出什么</th></tr></thead><tbody>
       <tr><td><a href="https://gabi.xinuos.com/elf/">ELF 对象格式</a><br><a href="https://sourceware.org/binutils/">GNU Binutils 2.46.1</a></td><td>结构视图与装载视图分离、显式引用，以及独立于 BFD 的第二条读取路径。</td><td>不继承机器地址、指令、弱符号规则，也不让 BFD 的通用表示进入第一阶段可信核心。</td></tr>
       <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 当前修订（Current）</a></td><td>把协议错误与工具执行错误保留为不同来源事件，并将工具说明、注解和结果作为版本化适配输入。</td><td>2026-07-28 发布候选及后续版本在正式发布并完成兼容、安全与降级复核前不成为基线；工具 schema、服务器说明、OAuth 身份和 <code>isError</code> 都不等于本地能力授权或满足结果。</td></tr>
@@ -136,8 +113,8 @@ permalink: "/architecture/decisions.html"
   </section>
 
   <section id="change-rules" class="content-band">
-    <h2>变更规则</h2>
-    <p>若要改变六个语义面、根 <code>skena</code> 唯一性、事态与方向分离、<code>phain</code> 比较、状态机、Synem 组合、Dromen 会话范围、Iknem 有限主张或唯一命令面，必须新增 ADR。策略变更后，还要同步规范、组件、生命周期、手册和测试向量。</p>
+    <h2>决定变化时要同步什么</h2>
+    <p>改变六个语义面、根 <code>skena</code> 唯一性、事态与方向分离、<code>phain</code> 比较、状态机、Synem 组合、Dromen 会话范围、Iknem 有限主张或唯一命令面时，新增 ADR，并同步对应 CORE、Profile、生命周期、开发者手册、威胁模型和测试向量。若变更涉及公开名称，还要重新执行书写冲突、目标语言读音和词表内口头区分审查。</p>
   </section>
     </div>
   </div>

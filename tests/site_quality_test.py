@@ -438,12 +438,24 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "architecture/decisions.html": {
         "required": (
+            "先从一个变更定位责任",
+            "开发者问题",
+            "停止条件",
+            "常见输入怎样进入当前架构",
+            "外部资料怎样进入设计",
+            "决定变化时要同步什么",
+            "目标语言读音",
             "身份不等于权威",
             "外部状态不等于本地结果",
             "能力声明不等于实时句柄",
-            "Iknem 证据与评估",
+            "IKN-CORE 评估证据覆盖",
             "ADR-0015",
             "判断与运行结果分层",
+        ),
+        "forbidden_patterns": (
+            r"<h2>当前策略</h2>",
+            r"<h2>排除的捷径</h2>",
+            r"<span class=\"badge\">Design Stage</span>",
         ),
     },
     "architecture/agent-system-boundaries.html": {
