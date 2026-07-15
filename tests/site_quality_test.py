@@ -169,6 +169,14 @@ ARCHITECTURE_INDEX_HEADINGS = [
     "当前可以证明什么",
     "按问题继续",
 ]
+DEVELOPMENT_INDEX_HEADINGS = [
+    "先判断贡献是否在当前范围内",
+    "用一个边界修改检查贡献",
+    "按问题进入工作资料",
+    "提交前留下最小证据",
+    "怎样报告问题与敏感信息",
+    "当前可以证明什么",
+]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "从一次依赖升级看清问题",
     "把思想转换成可验证问题",
@@ -5605,6 +5613,52 @@ def main():
             if obsolete_heading in parser.h2_texts:
                 errors.append(
                     "architecture/index.html: must not restore inventory-style heading "
+                    f"{obsolete_heading!r}"
+                )
+
+    development_index = ROOT / "development/index.html"
+    if development_index.exists():
+        parser = parse(development_index)
+        if parser.h2_texts != DEVELOPMENT_INDEX_HEADINGS:
+            errors.append(
+                "development/index.html: contribution decision sequence must be "
+                f"{DEVELOPMENT_INDEX_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in (
+            "当前可以改进研究、术语、架构、规范、威胁模型、验证方案和公开网站",
+            "当前公开范围不包括组件代码",
+            "completed 只保存为外部任务终态，不直接产生 met",
+            "测试数量不能代替失败条件",
+            "真实 Chrome 的手机、平板和桌面验收",
+            "NIST SSDF 1.1",
+            "私密安全报告",
+            "尚未提供",
+            "主要使用语言中的流畅度",
+            "组件实现进入公开路线并确定范围后",
+        ):
+            if term not in visible_text:
+                errors.append(
+                    f"development/index.html: missing contribution boundary {term}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 3
+            or parser.class_counts["page-link"] != 3
+            or parser.class_counts["resource-list"] != 1
+        ):
+            errors.append(
+                "development/index.html: must keep three scoped tables, three routed "
+                "work links, and one reporting list"
+            )
+        for obsolete_heading in (
+            "开发原则", "实施与验证", "源代码与构建",
+            "贡献与报告", "开发流程", "研究、知识产权与标准化",
+        ):
+            if obsolete_heading in parser.h2_texts:
+                errors.append(
+                    "development/index.html: must not restore generic lifecycle heading "
                     f"{obsolete_heading!r}"
                 )
 
