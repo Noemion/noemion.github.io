@@ -50,7 +50,7 @@ permalink: "/specifications/adapters.html"
       <tr><td><a href="https://modelcontextprotocol.io/docs/learn/versioning">MCP 版本说明</a><br><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25</a></td><td><code>2025-11-25</code> 是官方当前修订（Current）；其中 Tasks 仍标为实验能力。</td><td>只作为当前研究与未来 Profile 的正式发布基线。工具说明、任务状态和返回值仍是不可信外部输入。</td></tr>
       <tr><td><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">MCP 2026-07-28 发布候选</a></td><td>5 月 21 日锁定，计划 7 月 28 日发布最终版；无状态核心、扩展框架和新版 Tasks 含破坏性变化。</td><td>只用于提前发现迁移风险，不能冒充当前符合性基线，也不能与 2025-11-25 Tasks 混用。</td></tr>
       <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a></td><td>官方已发布 1.0.0；协议协商使用主次版本 <code>1.0</code>，补丁号不参与兼容判断。</td><td>Task、Message、Artifact 和 Agent Card 保持外部来源；协议完成不等于本地满足、决定或证据充分。</td></tr>
-      <tr><td><a href="https://github.com/open-telemetry/semantic-conventions-genai">OpenTelemetry GenAI 语义约定</a></td><td>已迁入独立仓库；截至复核日，仓库 README 的 Schema URL 字段仍为 <code>TODO</code>。</td><td>当前没有可固定的 GenAI Schema URL。以后只能经明确版本、默认脱敏且可替换的导出映射单向发送观测；不能定义 Iknem 身份或验收规则。</td></tr>
+      <tr><td><a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a><br><a href="https://github.com/open-telemetry/semantic-conventions-genai">GenAI 语义约定独立仓库</a></td><td>1.43.0 总入口已经把 GenAI 与 MCP 约定指向独立官方仓库；该仓库尚无发布版，截至复核日 README 的 Schema URL 字段仍为 <code>TODO</code>。</td><td>当前没有可固定的 GenAI Schema URL。以后只能经明确版本、默认脱敏且可替换的导出映射单向发送观测；不能定义 Iknem 身份或验收规则。</td></tr>
     </tbody></table></div>
     <p class="callout"><strong>选择顺序：</strong>先写明互操作对象和信任边界，再选择正式发布版本；随后固定绑定与扩展，列出有损映射和关闭失败条件，最后用正反案例证明外部状态没有越权进入本地结果域。候选版只进入迁移研究，不进入生产或符合性声明。</p>
   </section>

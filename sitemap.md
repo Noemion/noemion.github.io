@@ -62,7 +62,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Endem](https://noemion.github.io/specifications/endem.html) — the smallest deterministic natural-language goal artifact and its canonical fields
 - [Synem](https://noemion.github.io/specifications/synem.html) — resolved, composable closure and binding rules
 - [Dromen](https://noemion.github.io/specifications/dromen.html) — sealed read-only execution contract for exactly one Drase session
-- [Iknem](https://noemion.github.io/specifications/iknem.html) — scoped evidence, provenance, integrity, and acceptance claims
+- [Iknem](https://noemion.github.io/specifications/iknem.html) — scoped evidence, provenance, validity, coverage, and decision-record boundaries
 - [Structured diagnostics](https://noemion.github.io/specifications/diagnostics.html) — cross-object machine identity, locations, recovery, safety, and result-domain separation
 - [External protocol adapters](https://noemion.github.io/specifications/adapters.html) — version pinning, peer trust, capability intersection, state separation, retry, delivery, and security boundaries
 - [Exact identity and attestation](https://noemion.github.io/specifications/identity.html) — cross-artifact byte identity, signed statements, validity cutoffs, reproducibility, and companion relations

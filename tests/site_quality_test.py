@@ -552,6 +552,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "specifications/synem.html": {
         "required": (
             "Synem",
+            "组合闭包（设计阶段名称 Synem）",
+            "用一次服务发布理解组合闭包",
+            "依赖制品 Endem",
+            "服务健康 Endem",
+            "名称仍在研究",
             "局部命名空间",
             "导入",
             "导出",
@@ -566,6 +571,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "specifications/iknem.html": {
         "required": (
             "Iknem",
+            "有范围证据记录（设计阶段名称 Iknem）",
+            "用同一次发布理解有范围证据",
+            "显式变换与损失记录",
+            "名称仍在研究",
             "phain",
             "精确证据主体",
             "主张",
@@ -584,11 +593,15 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             r">non-normative</td>",
             r">vector-checker-only</td>",
             r">awaiting-decision</td>",
+            r"规范化与有损变换",
         ),
     },
     "specifications/dromen.html": {
         "required": (
             "Dromen",
+            "一次会话的只读执行契约（设计阶段名称 Dromen）",
+            "用同一次发布理解会话契约",
+            "名称仍在研究",
             "只读执行契约",
             "DRO-CORE 0.1.0-draft",
             "精确制品",
@@ -3376,6 +3389,7 @@ def validate_jekyll_sources():
         "architecture/decisions.html": (
             "A2A 1.0 版本化规范",
             "补丁号不进入协议协商",
+            "OpenTelemetry 语义约定 1.43.0",
             "github.com/open-telemetry/semantic-conventions-genai",
             "MCP 2025-11-25 当前修订（Current）",
             "Schema URL 字段仍为",
@@ -3405,6 +3419,7 @@ def validate_jekyll_sources():
             "5 月 21 日",
             "不作为当前符合性基线",
             "任何后续正式版本",
+            "OpenTelemetry 语义约定 1.43.0",
             "Schema URL 字段仍为",
             "默认脱敏的导出器",
             "不进入 Endem 编码、Iknem 身份或最终决定",
@@ -3414,6 +3429,8 @@ def validate_jekyll_sources():
         "endem/docs/running.md": (
             "A2A 1.0 版本化规范",
             "只有正式发布并完成",
+            "OpenTelemetry 语义约定 1.43.0",
+            "尚无发布版",
             "默认不导出正文",
             "不构成 Iknem 身份",
         ),

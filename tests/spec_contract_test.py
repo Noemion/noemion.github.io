@@ -502,6 +502,7 @@ def validate_public_boundary(errors):
     config_text = (ROOT / "_config.yml").read_text()
     workflow_text = (ROOT / ".github" / "workflows" / "pages.yml").read_text()
     core_text = CORE_SPEC_PATH.read_text()
+    iknem_text = IKNEM_SPEC_PATH.read_text()
     for token in (
         "同一封闭输入产生同一规范结果",
         "实际进入 `rhem` 的解码文本及其文本槽",
@@ -513,6 +514,13 @@ def validate_public_boundary(errors):
             errors.append(f"END-DET-001 missing exact deterministic-input boundary: {token}")
     if "相同的规范化来源" in core_text:
         errors.append("END-DET-001 must not rely on an undefined normalized-source identity")
+    for token in (
+        "实际执行的解析与变换",
+        "算法或方法版本及其信息损失",
+        "未定义的“规范化”",
+    ):
+        if token not in iknem_text:
+            errors.append(f"IKN-OBS-001 missing explicit transformation boundary: {token}")
     if "python3 tests/semantic_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute semantic vectors, not only register them")
     if "python3 tests/result_domain_vector_test.py" not in workflow_text:

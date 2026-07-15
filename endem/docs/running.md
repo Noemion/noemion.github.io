@@ -94,7 +94,7 @@ MCP 和 A2A 只适合作为 Drasor 外缘的协议适配输入，所有具体映
 
 远端工具说明、Agent Card、任务状态、参数结构和返回内容均是不可信声明，不能直接成为能力授权、Endem 状态或最终决定。当前没有 MCP 或 A2A Profile 与适配器实现。
 
-运行观测以后可以通过带版本的 [OpenTelemetry GenAI 语义约定独立仓库](https://github.com/open-telemetry/semantic-conventions-genai)导出；当前仓库 README 的 Schema URL 字段仍为 `TODO`，所以尚不能建立固定的 GenAI schema 基线。输入、输出和工具数据可能含有敏感信息，因此默认不导出正文，外部字段也不构成 Iknem 身份。
+运行观测以后可以通过带版本的 [OpenTelemetry 语义约定 1.43.0](https://opentelemetry.io/docs/specs/semconv/)及其指向的 [GenAI 语义约定独立仓库](https://github.com/open-telemetry/semantic-conventions-genai)导出。独立仓库当前尚无发布版，README 的 Schema URL 字段仍为 `TODO`，所以尚不能建立固定的 GenAI schema 基线。输入、输出和工具数据可能含有敏感信息，因此默认不导出正文，外部字段也不构成 Iknem 身份。
 
 ## Iknem 与最终决定
 

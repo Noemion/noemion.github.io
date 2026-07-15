@@ -7,12 +7,25 @@ permalink: "/specifications/dromen.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>Dromen</span></nav>
-  <header class="content-introduction"><h1>Dromen<br>一次运行的只读契约</h1><p>理解一个已经发布的目标制品怎样在不携带永久权限的前提下进入一次受控会话。</p><div class="badges"><span class="badge">DRO-CORE 0.1.0-draft</span><span class="badge">Session Only</span><span class="badge">No Wire Format</span><span class="badge">No Runtime</span></div></header>
+  <header class="content-introduction"><h1>一次会话的只读契约<br>Dromen</h1><p>理解一个已经发布的目标制品怎样在不携带永久权限的前提下进入一次受控会话。</p><div class="badges"><span class="badge">DRO-CORE 0.1.0-draft</span><span class="badge">仅限一次会话</span><span class="badge">不是持久文件</span><span class="badge">尚无运行时</span></div></header>
 
   <section class="content-stack">
     <h2>先给直白定义</h2>
-    <p class="lead">Dromen 是 Drasor 为一次 Drase 会话从精确制品封存的只读执行契约。它说明“这个精确目标，在这一次会话里，可以依据哪些政策、环境、能力和预算运行”。</p>
+    <p class="lead">一次会话的只读执行契约（设计阶段名称 Dromen）由 Drasor 从精确制品封存。它说明“这个精确目标，在这一次会话里，可以依据哪些政策、环境、能力和预算运行”。</p>
     <p>Endem 或 Synem 保存持久目标；Dromen 只保存本次运行的边界。它不是文件、进程、模型上下文、凭据包、可恢复会话或最终结果。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>用同一次发布理解会话契约</h2>
+    <p>继续使用依赖制品与服务健康组成的 Synem。发布制品不会自行携带生产权限；Drasor 必须在会话开始前重新核对精确闭包、外部陈述、验证政策、撤销状态、目标环境、能力上限和预算，然后才建立本次 Dromen。</p>
+    <div class="table-wrap"><table><thead><tr><th>进入会话前</th><th>本次发布案例</th><th>不能混入 Dromen</th></tr></thead><tbody>
+      <tr><td>固定主体</td><td>绑定精确 Synem 内容身份，并逐项复核外部陈述</td><td>目录名、远端“最新”对象、可修改制品副本</td></tr>
+      <tr><td>固定环境</td><td>绑定部署区域、适配器、协议、模型后端和时钟来源</td><td>运行途中发现的新工具或隐式模型切换</td></tr>
+      <tr><td>收窄能力</td><td>只给包读取、目标部署和健康探测所需的最小范围</td><td>Bearer token、私钥、实时句柄或成员权限并集</td></tr>
+      <tr><td>封闭预算</td><td>声明调用、重试、时间、字节和成本上限</td><td>无单位的“适量重试”或模型自行追加预算</td></tr>
+      <tr><td>分配观察责任</td><td>预先说明谁观察制品摘要、部署响应和健康窗口</td><td>工具成功、会话完成或远端 Task 状态直接充当最终决定</td></tr>
+    </tbody></table></div>
+    <p>如果目标区域、适配器版本、政策、能力范围或具名权威发生实质变化，旧 Dromen 立即失效；系统必须结束或中断本次会话，再建立新契约，不能原地修补。</p>
   </section>
 
   <section class="content-wide">
@@ -74,6 +87,7 @@ permalink: "/specifications/dromen.html"
   <section class="content-band">
     <h2>当前状态</h2>
     <p><strong>当前策略：</strong>DRO-CORE 用核心规则定义一次会话的范围。未来实现不得把 Dromen 当作持久文件、凭据包或可恢复运行状态。</p>
+    <p><strong>名称仍在研究：</strong>Dromen 是设计阶段名称，发行拼写、读音流畅度和与 Endem、Synem、Iknem 的口头区分度尚未通过真实使用者验证。面向开发者的说明必须先写“一次会话的只读契约”。</p>
     <p><strong>限制条件：</strong>当前 <code>attested</code> 主体条件仍是草案中的单值表达，不能完整表示同一内容的多项签名、不同验证政策、截止点和撤销结论。开发者应按<a href="../architecture/endem-lifecycle.html">内容形成与外部陈述的两轴模型</a>阅读这一条件；正式字段迁移仍在研究，现行规范值尚未改变。</p>
     <p>Dromen API、平台隔离方式、事件格式和运行后端仍待确定，需要分别设计与验证。非规范<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">模型、适配器与能力域隔离研究提案</a>已经分开部署责任与未来证据阶梯，但尚未成为规范要求。当前没有 Drasor、装载器、沙箱、凭据代理、预算器或运行时；精确场景与向量范围以对应源文件和版本化验证结果为准，提案向量只描述规范预期。</p>
   </section>

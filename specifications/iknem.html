@@ -7,28 +7,26 @@ permalink: "/specifications/iknem.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>Iknem</span></nav>
-  <header class="content-introduction"><h1>Iknem<br>有范围证据</h1><p>记录谁针对哪个精确对象、通过什么方法观察到什么，并明确这项依据能够支持和不能支持的判断范围。</p><div class="badges"><span class="badge">IKN-CORE 0.1.0-draft</span><span class="badge">Scoped Evidence</span><span class="badge">No Wire Format</span><span class="badge">尚未实现</span></div></header>
+  <header class="content-introduction"><h1>有范围证据记录<br>Iknem</h1><p>记录谁针对哪个精确对象、通过什么方法观察到什么，并明确这项依据能够支持和不能支持的判断范围。</p><div class="badges"><span class="badge">IKN-CORE 0.1.0-draft</span><span class="badge">主张必须有范围</span><span class="badge">尚无物理格式</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-stack">
-    <h2>直接结论</h2>
-    <p class="lead">Iknem 不是把日志装进新格式，而是把证据主张限制在可复核的主体、方法、环境、时间和观察范围内。</p>
+    <h2>先给直白定义</h2>
+    <p class="lead">有范围证据记录（设计阶段名称 Iknem）把一项主张限制在可复核的主体、方法、环境、时间和观察范围内。它不是把日志换一个包装。</p>
     <p>一项记录可以完整、带签名且来源明确，却仍然不适用于当前目标。证据集合也可以全部有效，却没有覆盖 <code>krin</code> 要求的全部关系、主体或时间。因此 Iknem 有效性、覆盖度、满足判断和最终决定必须分别计算。</p>
     <p class="callout"><strong>当前状态：</strong>项目已经建立抽象 <code>IKN-CORE 0.1.0-draft</code>、威胁模型、非规范场景和允许/拒绝提案矩阵；Iknem 物理格式与组件接口仍待确定，也没有采集器、验证器、归并器、撤销服务或决定引擎。规范材料自洽不得描述为组件实现或稳定互操作。</p>
   </section>
 
   <section class="content-wide">
-    <h2>权威资料在哪里</h2>
-    <div class="table-wrap"><table><thead><tr><th>资料</th><th>职责</th><th>状态</th></tr></thead><tbody>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-core.md">IKN-CORE 规范源</a></td><td>主体、溯源、观察、类别、完整性、有效性、覆盖、决定与披露条款</td><td>0.1.0-draft</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-threat-model.md">Iknem 威胁模型</a></td><td>范围漂白、循环自证、证据升级、撤销失明、覆盖伪造和泄密</td><td>当前草案</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md">Iknem 自然语言场景</a></td><td>支持案例、反例和待确认事项；不是符合性条款</td><td>非规范场景</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/iknem/cases.json">Iknem 提案向量</a></td><td>允许分类与确定拒绝的资料一致性矩阵</td><td>仅检查资料一致性；精确范围以向量源和版本化验证结果为准</td></tr>
-      <tr><td><a href="../architecture/adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a></td><td>为什么采用这些边界，以及与 W3C、RATS、SLSA、GNU Guix 和 AI 遥测的关系</td><td>当前策略</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测研究</a></td><td>模型评审调用、偏差探针、统计汇总与使用决定的非规范边界</td><td>正在研究</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新研究</a></td><td>训练数据、反馈、派生模型、评测、发布与回滚的非规范边界</td><td>正在研究</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">数据使用、保留与删除研究</a></td><td>处理、删除、清除验证、清除确认、副本传播与未知范围的非规范边界</td><td>正在研究</td></tr>
+    <h2>用同一次发布理解有范围证据</h2>
+    <p>继续使用前两页的发布案例。包管理器退出 0、锁文件摘要、部署接口返回成功和健康探针响应是四类不同观察；它们不能互相替代，也不能因为来自同一次会话就合并成“发布成功”。</p>
+    <div class="flow"><div class="step">原始观察引用</div><div class="step">显式解析与变换</div><div class="step">phain 关系结构</div><div class="step">有限主张</div><div class="step">有效性评估</div><div class="step">krin 覆盖计算</div><div class="step">满足判断</div><div class="step">具名权威决定</div></div>
+    <div class="table-wrap"><table><thead><tr><th>观察</th><th>可以支持</th><th>不能支持</th></tr></thead><tbody>
+      <tr><td>锁文件中的版本与摘要</td><td>在精确文件、解析器版本和截止点下形成依赖身份关系</td><td>服务已经部署或持续健康</td></tr>
+      <tr><td>部署接口返回成功</td><td>具名接口在声明时间接受了这次请求</td><td>变更已经生效、目标实例正确或健康窗口已经覆盖</td></tr>
+      <tr><td>探针对精确实例的响应</td><td>在声明方法、环境和时刻形成健康关系 <code>phain</code></td><td>未观察时段也持续健康，或整个 Synem 已经接受</td></tr>
+      <tr><td>模型对日志的说明</td><td>作为 <code>model-candidate</code> 保存待核查解释</td><td>直接观察、满足结果或最终决定</td></tr>
     </tbody></table></div>
-    <p><code>spec/iknem-core.md</code> 是 Iknem 的唯一现行规范条款源；这里不建立第二套字段或符合性要求。</p>
+    <p>每项记录都要保存精确证据主体、生产者、方法、环境、时间、原始观察、实际变换、有限主张和限制。复制同一日志不会增加覆盖；观察窗口有空洞时只能得到 <code>insufficient</code>，不能用最后值或模型推断补齐。</p>
   </section>
 
   <section class="content-wide">
@@ -47,7 +45,8 @@ permalink: "/specifications/iknem.html"
   <section class="content-wide">
     <h2>观察必须能与目标关系比较</h2>
     <p><code>phain</code> 是 Iknem 中的结构化观察。它必须与适用 <code>skena</code> 共享符号身份、关系身份、角色位置、极性和作用域，才能由 <code>krin</code> 比较。</p>
-    <div class="flow"><div class="step">原始观察引用</div><div class="step">规范化与有损变换</div><div class="step">phain 关系结构</div><div class="step">有限主张</div><div class="step">有效性评估</div><div class="step">krin 覆盖计算</div><div class="step">满足判断</div><div class="step">权威决定</div></div>
+    <div class="flow"><div class="step">原始观察引用</div><div class="step">显式变换与损失记录</div><div class="step">phain 关系结构</div><div class="step">有限主张</div><div class="step">有效性评估</div><div class="step">krin 覆盖计算</div><div class="step">满足判断</div><div class="step">权威决定</div></div>
+    <p>“显式变换”必须写出实际动作，例如解析、选择、过滤、聚合、换算、舍入、脱敏或模型解释，并说明版本与信息损失。没有声明封闭对象域、算法和等价关系时，不能只写“规范化”来掩盖这些步骤。</p>
     <p>模型对日志的解释可以保存为 <code>model-candidate</code>，但不能伪装成 <code>direct-observation</code>。命令退出 0 只说明命令状态；没有预先登记的关系映射时，它不能直接说明目标服务健康。</p>
     <p>模型评审也遵守同一边界。多次评分、多个模型或高置信度不能改变来源类别。评分说明、实际提示、候选顺序、模型版本、偏差探针和统计区间必须另行绑定。</p>
     <p>人工偏好、用户反馈、模型奖励和训练日志也只是各自范围内的记录。它们进入训练集不会自动取得数据资格、代表性、事实真值或发布决定权；训练完成也不会让旧证据升级或覆盖新模型。</p>
@@ -98,9 +97,25 @@ permalink: "/specifications/iknem.html"
     <p class="note">完整边界见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">非规范软件 Agent 数据使用、保留与删除边界研究提案</a>。</p>
   </section>
 
+  <section class="content-wide">
+    <h2>规范条款与研究资料</h2>
+    <div class="table-wrap"><table><thead><tr><th>资料</th><th>职责</th><th>状态</th></tr></thead><tbody>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-core.md">IKN-CORE 规范源</a></td><td>主体、溯源、观察、类别、完整性、有效性、覆盖、决定与披露条款</td><td>0.1.0-draft</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-threat-model.md">Iknem 威胁模型</a></td><td>范围漂白、循环自证、证据升级、撤销失明、覆盖伪造和泄密</td><td>当前草案</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md">Iknem 自然语言场景</a></td><td>支持案例、反例和待确认事项；不是符合性条款</td><td>非规范场景</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/iknem/cases.json">Iknem 提案向量</a></td><td>允许分类与确定拒绝的资料一致性矩阵</td><td>仅检查资料一致性；精确范围以向量源和版本化验证结果为准</td></tr>
+      <tr><td><a href="../architecture/adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a></td><td>解释与 W3C、RATS、SLSA、GNU Guix 和 AI 遥测的边界</td><td>当前策略</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测研究</a></td><td>模型评审调用、偏差探针、统计汇总与使用决定</td><td>正在研究</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新研究</a></td><td>训练数据、反馈、派生模型、评测、发布与回滚</td><td>正在研究</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">数据使用、保留与删除研究</a></td><td>处理、删除、清除验证、副本传播与未知范围</td><td>正在研究</td></tr>
+    </tbody></table></div>
+    <p><code>spec/iknem-core.md</code> 是 Iknem 的唯一现行规范条款源；这份说明只提供阅读路径，不建立第二套字段或符合性要求。</p>
+  </section>
+
   <section class="content-band">
     <h2>当前状态</h2>
-    <p>IKN-CORE 已确定抽象证据与评估边界，但不锁定物理容器、扩展名、字段编号、摘要与签名算法、透明日志、撤销分发、远程查询、跨生产者时钟归并、隐私策略语言和长期归档。未来实现必须以新 Profile 和规范字节证明互操作。</p>
+    <p><strong>当前策略：</strong>IKN-CORE 已确定抽象证据与评估边界，但不锁定物理容器、扩展名、字段编号、摘要与签名算法、透明日志、撤销分发、远程查询、跨生产者时钟归并、隐私策略语言和长期归档。未来实现必须以新 Profile 和规范字节证明互操作。</p>
+    <p><strong>名称仍在研究：</strong>Iknem 是设计阶段名称，发行拼写、读音流畅度和与 Endem、Synem、Dromen 的口头区分度尚未通过真实使用者验证。开发者文档必须先写“有范围证据记录”，不能让名称替代可验证定义。</p>
   </section>
   <div class="next-prev"><a href="dromen.html">← Dromen 会话契约</a><a href="diagnostics.html">结构化诊断 →</a></div>
 </main>
