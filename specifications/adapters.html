@@ -17,6 +17,20 @@ permalink: "/specifications/adapters.html"
   </section>
 
   <section class="content-wide">
+    <h2>用同一次发布理解一次外部调用</h2>
+    <p class="lead">发布会话需要调用外部 Agent 或工具时，适配器只负责把一次已受限的本地调用连接到精确协议操作。它不能因为远端自报能力、任务完成或返回产物，就替本地系统决定身份、满足或接受。</p>
+    <div class="flow"><div class="step">固定协议与对端</div><div class="step">能力与 Dromen 求交</div><div class="step">绑定本地调用身份</div><div class="step">执行外部操作</div><div class="step">保留原状态与损失</div><div class="step">本地观察和决定</div></div>
+    <div class="table-wrap"><table><thead><tr><th>调用阶段</th><th>本例必须保留</th><th>不能采用的捷径</th></tr></thead><tbody>
+      <tr><td>发现与绑定</td><td>协议修订、绑定、传输、扩展、端点、认证主体、受众与租户</td><td>把 SDK 版本、<code>latest</code>、Agent Card 或工具清单当作身份和授权</td></tr>
+      <tr><td>发起调用</td><td>本地调用身份、精确发布输入、能力依据、预算、截止点、幂等分类与观察责任</td><td>让外部 request、task、message 或 trace ID 替代本地调用身份</td></tr>
+      <tr><td>取得结果</td><td>原协议状态、映射版本、损失清单、远端产物来源与内容身份</td><td>把 A2A <code>completed</code>、HTTP 200 或 MCP 工具成功直接映射为本地满足和接受</td></tr>
+      <tr><td>出现错误或断流</td><td>传输、协议、工具、任务和业务层次，以及结构化外部状态</td><td>解析错误文字决定提权、重试或目标结果</td></tr>
+      <tr><td>取消或重试</td><td>取消请求、对端确认、后续观察、去重或幂等证据和剩余预算</td><td>把断流当回滚，或在副作用不确定时换 ID 自动重试</td></tr>
+    </tbody></table></div>
+    <p>远端返回的 Artifact 先成为有来源、有边界的不可信候选。后续读取、精确身份、Iknem 证据、目标满足与最终决定仍由各自规范处理；适配器只保留外部事实及其进入本地视图时发生的信息损失。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>十二条适配规则</h2>
     <div class="table-wrap"><table><thead><tr><th>规则</th><th>直白要求</th><th>必须拒绝</th></tr></thead><tbody>
       <tr><td><code>ADP-PIN-001</code></td><td>固定协议、规范、绑定、schema、传输与扩展版本</td><td><code>latest</code>、默认版本、未知扩展和兼容猜测</td></tr>

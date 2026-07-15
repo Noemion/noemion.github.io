@@ -19,6 +19,20 @@ permalink: "/specifications/authority.html"
   </section>
 
   <section class="content-wide">
+    <h2>用同一次发布理解一次授权决定</h2>
+    <p class="lead">继续使用服务发布案例：一项 CI 工作负载请求把精确发布对象部署到生产环境。授权记录不能只写“发布负责人已批准”，而要把请求者、实际行动者、被代表主体、精确动作、范围、依据和有限结果逐项闭合。</p>
+    <div class="flow"><div class="step">固定请求与对象</div><div class="step">区分主体和行动者</div><div class="step">核对政策与范围</div><div class="step">形成 grant deny defer</div><div class="step">求交得到会话能力</div><div class="step">执行与验收另行判断</div></div>
+    <div class="table-wrap"><table><thead><tr><th>审查问题</th><th>本例需要记录</th><th>关闭失败条件</th></tr></thead><tbody>
+      <tr><td>谁提出、谁行动、代表谁</td><td>请求维护者、具体 CI 运行实例，以及它所代表的发布团队</td><td>只保存模型名、Agent 名、服务账户或签名密钥</td></tr>
+      <tr><td>请求什么</td><td>完整内容身份指向的发布对象、生产租户、部署动作、目的、受众、一次使用和截止点</td><td>使用 <code>latest</code>、名称前缀、测试环境角色或页面位置推断范围</td></tr>
+      <tr><td>谁能决定</td><td>当前政策指定的生产发布权威、角色来源、认证方法和决定依据</td><td>把已登录、签名有效、组织成员或 Agent 自报能力当作决定权</td></tr>
+      <tr><td>决定是什么</td><td><code>grant</code>、<code>deny</code> 或 <code>defer</code>，以及精确限制；部分授予形成缩小后的新范围</td><td>只写“已批准”，把未授部分静默删除，或把 <code>defer</code> 当允许</td></tr>
+      <tr><td>随后允许什么</td><td>授权与 Dromen、环境、适配器、制品上限和预算的交集</td><td>把 <code>grant</code> 直接写成 <code>met</code>、<code>accepted</code> 或 <code>completed</code></td></tr>
+    </tbody></table></div>
+    <p>如果外部工具随后要求新增写权限，旧会话不能原地扩权。控制平面只能提出新请求；只有新决定、新能力交集和新 Drase 会话都成立后，新增动作才可尝试。授权允许一次声明范围内的行动，不替行动结果、证据判断和最终验收作结论。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>必须分开的六个问题</h2>
     <div class="table-wrap"><table><thead><tr><th>问题</th><th>需要什么</th><th>不能直接推出</th></tr></thead><tbody>
       <tr><td>当前主体是谁</td><td>认证方法、身份与实际行动者</td><td>这个主体有权决定</td></tr>

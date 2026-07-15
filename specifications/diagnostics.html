@@ -16,6 +16,19 @@ permalink: "/specifications/diagnostics.html"
   </section>
 
   <section class="content-wide">
+    <h2>用同一次发布理解一次失败</h2>
+    <p class="lead">继续使用服务发布案例：外部调用已经发出，但连接在响应前中断，当前没有证据证明副作用是否发生。此时诊断负责说明“哪里失败、依据什么停止、下一步需要什么”，不能替系统猜测发布成功或自动再执行一次。</p>
+    <div class="table-wrap"><table><thead><tr><th>诊断字段</th><th>本例记录</th><th>开发者据此怎样处理</th></tr></thead><tbody>
+      <tr><td>机器身份</td><td><code>adapter.retry.not_authorized</code>，主条款 <code>ADP-RTY-001</code></td><td>自动化依赖登记码，不解析“超时”“请重试”等消息</td></tr>
+      <tr><td>生产语境</td><td>适配器版本、本地调用身份、精确发布输入、协议/Profile 与 DIA-CAT 版本</td><td>防止把本次诊断缓存到另一个发布对象或调用</td></tr>
+      <tr><td>层次与位置</td><td><code>policy</code> 层、外部请求关联；重试检查之后的步骤标为 <code>not-run</code></td><td>保留传输事实，同时说明本地为何没有继续尝试</td></tr>
+      <tr><td>恢复分类</td><td><code>operator-review</code>，复核前置条件是取得去重或事后核对证据</td><td>当前不自动重试；下一步仍受 Dromen 预算和具名授权约束</td></tr>
+      <tr><td>结果边界</td><td>公开消息脱敏，保留主诊断和有限相关项</td><td>不产生 <code>unmet</code>、<code>accepted</code>、回滚完成或新的权限</td></tr>
+    </tbody></table></div>
+    <p class="note">如果协议返回的是未知结构化错误，则保留协议版本、远端主体和原始码，再映射到受限通用诊断。无论消息怎样措辞，未知状态都不能降级为成功。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>十条核心规则</h2>
     <div class="table-wrap"><table><thead><tr><th>规则</th><th>直接含义</th></tr></thead><tbody>
       <tr><td><code>DIA-IDN-001</code></td><td>稳定机器码与人类消息分开；程序不得解析措辞取得语义。</td></tr>

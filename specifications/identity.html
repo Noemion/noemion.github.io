@@ -16,6 +16,20 @@ permalink: "/specifications/identity.html"
     <p class="callout"><strong>权威边界：</strong>实现义务以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-core.md">ID-CORE 条款源</a>为准。当前 SHA-256 只出现在提案向量中，不表示未来发行算法已经选定。</p>
   </section>
 
+  <section class="content-wide">
+    <h2>用同一次发布理解精确身份</h2>
+    <p class="lead">假设团队准备发布一个服务目标。开发者先要回答“引用的是哪一组精确字节”，再讨论“谁签过它”和“是否允许发布”。文件名、版本标签、URL、build ID 与短摘要只能帮助人找到候选，不能直接进入安全比较。</p>
+    <div class="flow"><div class="step">显示名与位置</div><div class="step">精确字节和 Profile</div><div class="step">完整身份元组</div><div class="step">有类型签名陈述</div><div class="step">按截止点验证</div><div class="step">另行授权与决定</div></div>
+    <div class="table-wrap"><table><thead><tr><th>发布材料</th><th>开发者可以据此得出什么</th><th>仍然不能得出什么</th></tr></thead><tbody>
+      <tr><td><code>service-release.endem</code>、仓库路径或版本标签</td><td>找到一个待核对的候选文件</td><td>当前字节就是批准过的发布对象</td></tr>
+      <tr><td>身份域、对象种类、规范、表示、Profile、算法、长度和完整摘要</td><td>在完全相同的身份语境内比较精确字节</td><td>内容为真、语义等价、目标满足或制品已接受</td></tr>
+      <tr><td>覆盖对象、用途、受众和主体的发布签名陈述</td><td>验证签名与这份受保护陈述之间的关系</td><td>签名主体当前有发布权限，或陈述内容必然正确</td></tr>
+      <tr><td>证书、撤销状态、时间材料与具名截止点</td><td>按固定信任根和政策评估本次签名适用性</td><td>把一次验证成功永久缓存，或跳过授权与最终决定</td></tr>
+      <tr><td>裁剪包、调试文件或重编码副本</td><td>建立新身份，并用显式变换关系指回来源</td><td>继承来源身份、签名、证据、权限或接受状态</td></tr>
+    </tbody></table></div>
+    <p class="note">GNU <code>ld --build-id</code> 也把 build ID 描述为原始链接输出的关联标识，而不是当前文件内容校验和。ID-CORE 把这条工程纪律扩展到所有安全引用：定位线索与精确身份必须分开。</p>
+  </section>
+
   <section class="content-stack">
     <h2>当前策略</h2>
     <p>ID-CORE 用十二条核心规则定义精确身份、不可变引用、有类型签名陈述、外置验证包络、截止点有效性、独立复现和制品关系。未来实现必须遵守这些规则。</p>

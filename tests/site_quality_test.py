@@ -615,6 +615,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "specifications/diagnostics.html": {
         "required": (
             "DIA-CORE 0.1.0-draft",
+            "用同一次发布理解一次失败",
+            "adapter.retry.not_authorized",
+            "operator-review",
+            "不产生 <code>unmet</code>",
             "稳定机器码",
             "生产语境",
             "主阻断诊断",
@@ -627,6 +631,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "specifications/adapters.html": {
         "required": (
             "ADP-CORE 0.1.0-draft",
+            "用同一次发布理解一次外部调用",
+            "固定协议与对端",
+            "本地调用身份",
+            "信息损失",
             "ADP-PIN-001",
             "ADP-PEE-001",
             "ADP-CAP-001",
@@ -652,6 +660,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "specifications/identity.html": {
         "required": (
             "ID-CORE 0.1.0-draft",
+            "用同一次发布理解精确身份",
+            "完整身份元组",
+            "有类型签名陈述",
+            "定位线索与精确身份必须分开",
             "ID-DOM-001",
             "ID-BYT-001",
             "ID-REF-001",
@@ -671,6 +683,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "specifications/text-and-identifiers.html": {
         "required": (
             "TEXT-IDENTIFIER-CORE 0.1.0-draft",
+            "用同一次发布理解文本边界",
+            "原始来源字节",
+            "提交后的来源表达",
+            "安全显示或模型输入",
+            "人看见的内容怎样对应机器内容",
             "TEXT-SLT-001",
             "TEXT-ENC-001",
             "TEXT-SRC-001",
@@ -689,6 +706,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "specifications/authority.html": {
         "required": (
             "AUT-CORE 0.1.0-draft",
+            "用同一次发布理解一次授权决定",
+            "请求维护者、具体 CI 运行实例",
+            "部分授予形成缩小后的新范围",
+            "授权允许一次声明范围内的行动",
             "AUT-CTX-001",
             "AUT-PRN-001",
             "AUT-SCP-001",
