@@ -3201,6 +3201,14 @@ def validate_jekyll_sources():
         ):
             if forbidden in homepage_text:
                 errors.append(f"index.html: Endem must not replace the Noemion project identity: {forbidden}")
+        style_text = (SOURCE_ROOT / "assets" / "style.css").read_text()
+        for token in (
+            ".portal-introduction h1 .portal-title-foundation",
+            "text-decoration-style:solid",
+            "text-decoration-thickness:.06em",
+        ):
+            if token not in style_text:
+                errors.append(f"assets/style.css: homepage title must retain the single underline contract: {token}")
         expression_visual_match = re.search(
             r'<span class="feature-visual feature-visual-expression".*?</span>',
             homepage_text,
