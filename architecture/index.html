@@ -14,7 +14,7 @@ permalink: "/architecture/index.html"
     <p class="lead">Noemion 先保存人实际提出的目标，再把解释、授权、执行和验收交给不同职责处理。模型可以建议怎样做，工具可以报告做了什么，但它们不能自行决定人原本想要什么，也不能只凭“运行成功”宣布目标已经达到。</p>
     <div class="status-grid">
       <article class="status-item"><h3>一件核心制品</h3><p>来源保留的形成版分开来源表达、已确认意义投影、一个根可能事态、目标方向、满足判据和待确认意义；对应现行字段为 <code>rhem / semion / skena / telis / krin / apor</code>。最终发布版移除原文，并按独立 Profile 重写来源绑定；意义确认不授予工具或运行权限。</p></article>
-      <article class="status-item"><h3>一个命令入口</h3><p><code>endem</code> 提供五个固定子命令，避免每项内部操作变成独立产品。</p></article>
+      <article class="status-item"><h3>一个命令入口</h3><p>计划中的 <code>endem</code> 入口包含五个公开动作，避免每项内部操作变成独立产品；当前还没有可执行 CLI。</p></article>
       <article class="status-item"><h3>两条读取路径</h3><p>制品形成侧检查和 <code>theor</code> 独立直接读取，不共享会掩盖共同错误的解析实现。</p></article>
       <article class="status-item"><h3>一个隔离运行域</h3><p><code>drase</code> 在 Ktisor 外建立 Dromen，能力句柄和模型后端不能进入制品或确定性生产域。</p></article>
     </div>
@@ -53,7 +53,7 @@ permalink: "/architecture/index.html"
       <li>Ktisor 只能证明确定性成形、结构、语义和状态不变量；它不能证明任务已经完成。</li>
       <li>Theor 只提供独立观察和差分证据；可显示不等于制品形成侧检查通过。</li>
       <li>Drasor 只在当前环境和策略内绑定能力；精确制品和外部陈述都不保存实时句柄，也不自动获得权限。</li>
-      <li>Iknem 只承担有限主张；验证政策形成有效性，<code>krin</code> 形成覆盖与满足判断，指定权威才形成最终决定。</li>
+      <li>Iknem 只承担有限主张；验证者按具名政策形成有效性，证据集合相对精确 <code>krin</code> 形成覆盖度，<code>krin</code> 再形成满足判断，具名权威才形成最终决定。</li>
       <li>AUT-CORE 只回答谁能在什么范围内授权；登录、签名、模型、Agent 状态和界面点击都不能越过具名政策取得决定权。</li>
     </ul>
   </section>

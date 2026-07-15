@@ -11,7 +11,7 @@ permalink: "/faq/index.html"
   <div class="faq-list">
     <section><h2>名称与定位</h2>
       <details><summary>Noemion 与 Endem 有什么区别？</summary><p>Noemion 是项目、新领域与社区的总名；Endem 是 Noemion 定义的工程术语，表示最小、独立有效且可验证的期望终态单元。工具和格式不需要批量携带 Noemion 前缀。</p></details>
-      <details><summary>为什么人工智能时代需要 Noemion？</summary><p>人工智能系统已经可以根据普通语言调用工具和改变外部系统，但人的目标往往只存在于临时对话、提示词和模型解释中。Noemion 研究怎样把目标形成持久、可检查的工程制品，让提出目标的人能够核对意义、约束和接受条件。</p></details>
+      <details><summary>为什么人工智能时代需要 Noemion？</summary><p>人工智能系统已经可以根据普通语言调用工具和改变外部系统，但人的目标往往只存在于临时对话、提示词和模型解释中。Noemion 研究怎样把自然语言目标形成供人工智能系统安全使用的工程制品。发布版只保留经过确认的目标结构；使用前另行核对授权边界；运行后再依据有范围证据和具名权威决定是否接受结果。</p></details>
       <details><summary>Noemion 是自然语言写代码工具吗？</summary><p>不是。自然语言生成代码关注产生什么代码；Noemion 关注目标本身怎样跨模型、协议和运行保持可检查。代码可以是实现目标的候选手段，但不能替代目标、证据或最终决定。当前也没有可用编译器或代码生成组件。</p></details>
       <details><summary>第一次接触项目应该先读什么？</summary><p>先读<a href="../docs/getting-started.html">入门指南的依赖升级案例</a>，分清目标、外部任务状态、运行权限、证据和最终决定。遇到具体工程问题时，再用<a href="../docs/specifications-reference.html">规范参考的问题索引</a>定位权威条款；不必先记住全部项目术语。</p></details>
       <details><summary>Endem 是传统目标文件的新名字吗？</summary><p>不是。传统目标文件主要承载机器代码、符号和链接信息；Endem 描述自然语言目标的来源、意义、期望事态、约束、判据和待确认事项。项目借鉴可链接制品的确定性、显式引用和独立读取纪律，但不继承机器指令本体。</p></details>
@@ -24,6 +24,7 @@ permalink: "/faq/index.html"
       <details><summary>一个 CLI 会不会破坏安全隔离？</summary><p>统一入口本身不能证明隔离成立，而且当前还没有 CLI 或组件实现。未来 <code>endem theor</code> 必须由单独构建的 Theor 承担，<code>endem drase</code> 必须进入隔离的 Drasor 进程；解析代码、Ktisor 内部检查通过引用和实时能力句柄都不能跨越各自信任域。</p></details>
     </section>
     <section><h2>安全与模型</h2>
+      <details><summary>供 AI 系统安全使用的目标制品，是否意味着文件本身已经获准执行？</summary><p>不意味着。发布制品只保留经过确认的目标结构，并用独立内容身份防止使用者把另一份文件冒充当前目标；制品本身不能授予工具调用、修改、部署或跨会话权限。使用前仍要核对精确主体、对象、动作、目的、范围和截止点，实际能力只能取授权、会话政策、环境和预算的交集。</p><p>运行之后还要分别检查证据有效性、对满足判据的覆盖度、满足结果和具名权威的最终决定。任何一层失败都保持自己的失败结果，不能由签名、模型置信度、工具成功或外部 <code>completed</code> 状态改写为“安全”。</p></details>
       <details><summary>模型能直接生成规范 Endem 吗？</summary><p>不能。设计允许模型提出带来源和待确认状态的候选，但只有 Ktisor 能依据确定性规则或具名语义决定形成规范字节。当前两者都还没有组件实现。</p></details>
       <details><summary>模型能调用工具或宣告完成吗？</summary><p>模型只能提出能力请求和候选结果。控制平面的确定性策略决定实际调用；<code>krin</code> 预先固定比较条件和决定权威；Iknem 以 <code>phain</code> 记录结构化观察。最终决定仍由指定权威作出。</p></details>
       <details><summary>自然语言候选由谁确认？</summary><p>只有落在 AUT-CORE 精确政策、对象、动作和范围内的具名权威或版本化确定性规则可以确认。模型置信度、结构合法、签名、登录和单次点击都不够；委托、多人批准、同意、撤销与重放也必须单独核对。</p></details>

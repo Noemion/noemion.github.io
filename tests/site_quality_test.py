@@ -123,7 +123,7 @@ DOC_GUIDE_ORDER = [
 ]
 DOC_GUIDE_HEADINGS = {
     "docs/getting-started.html": [
-        "从这里开始", "先看一个 Agent 工作", "六个语义面", "四个对象分别回答什么", "计划中的命令入口", "这些名字怎样读", "接下来按问题继续", "当前状态",
+        "从这里开始", "安全目标制品怎样检查", "先看一个 Agent 工作", "六个语义面", "四个对象分别回答什么", "计划中的命令入口", "这些名字怎样读", "接下来按问题继续", "当前状态",
     ],
     "docs/installation-and-usage.html": [
         "当前可用性", "未来职责流程", "发布原则", "命名发布条件",
@@ -3358,6 +3358,62 @@ def validate_jekyll_sources():
             if token not in page_text:
                 errors.append(f"{relative_path}: missing source-bearing and stripped-release boundary: {token}")
 
+    safe_artifact_contracts = {
+        "_config.yml": (
+            "形成供 AI 系统安全使用的目标制品",
+            "发布制品只保留经过确认的目标结构",
+            "在使用前核对授权边界",
+        ),
+        "design-system/portal.md": (
+            "形成供人工智能系统安全使用的目标制品",
+            "发布制品只保留经过确认的目标结构",
+            "在使用前核对授权边界",
+        ),
+        "docs/getting-started.md": (
+            "这里的“安全”不是文件自带的布尔属性",
+            "形成与发布",
+            "内容完整性",
+            "意义确认",
+            "动作授权",
+            "证据与满足",
+            "最终决定",
+        ),
+        "faq/index.html": (
+            "文件本身已经获准执行",
+            "发布版只保留经过确认的目标结构",
+            "运行后再依据有范围证据和具名权威决定是否接受结果",
+            "制品本身不能授予工具调用、修改、部署或跨会话权限",
+            "实际能力只能取授权、会话政策、环境和预算的交集",
+        ),
+        "architecture/index.html": (
+            "计划中的 <code>endem</code> 入口包含五个公开动作",
+            "当前还没有可执行 CLI",
+            "证据集合相对精确 <code>krin</code> 形成覆盖度",
+            "具名权威才形成最终决定",
+        ),
+    }
+    for relative_path, tokens in safe_artifact_contracts.items():
+        artifact_text = (SOURCE_ROOT / relative_path).read_text()
+        for token in tokens:
+            if token not in artifact_text:
+                errors.append(f"{relative_path}: missing developer safe-artifact boundary: {token}")
+
+    obsolete_safe_artifact_phrases = {
+        "_config.yml": ("目标结构与授权边界可验证",),
+        "design-system/portal.md": ("来源与授权边界可验证",),
+        "docs/getting-started.md": ("可持久保存、组合和独立检查的工程制品",),
+        "faq/index.html": ("持久、可检查的工程制品",),
+        "architecture/index.html": (
+            "<code>endem</code> 提供五个固定子命令",
+            "<code>krin</code> 形成覆盖与满足判断",
+        ),
+    }
+    for relative_path, phrases in obsolete_safe_artifact_phrases.items():
+        artifact_text = (SOURCE_ROOT / relative_path).read_text()
+        for phrase in phrases:
+            if phrase in artifact_text:
+                errors.append(f"{relative_path}: retains ambiguous safe-artifact wording: {phrase}")
+
     layout = SOURCE_ROOT / "_layouts/default.html"
     header = SOURCE_ROOT / "_includes/site-header.html"
     footer = SOURCE_ROOT / "_includes/site-footer.html"
@@ -4588,6 +4644,13 @@ def main():
         "MCP 2025-11-25 Tasks",
         "A2A 1.0 版本化规范",
         "外部 Task 显示 `completed`",
+        "安全目标制品怎样检查",
+        "后一步不能弥补前一步的失败",
+        "发布 Profile 是否移除原文、产生新内容身份",
+        "当前主体、对象、动作、目的、范围和截止点",
+        "覆盖不足返回 `agno`，观察故障返回 `fault`",
+        "SLSA 1.2 的制品验证",
+        "GNU Guix 的 `guix challenge`",
         "这个例子只解释职责顺序",
         "| 职责 | 现行字段 | 不得混入 |",
         "| 来源表达 | `rhem` | 经规则或具名权威确认的意义投影 |",
@@ -4623,6 +4686,7 @@ def main():
             "不必先记住全部项目术语",
             "Endem 是传统目标文件的新名字吗",
             "为什么计划只提供一个命令入口",
+            "供 AI 系统安全使用的目标制品，是否意味着文件本身已经获准执行",
             "现在可以安装或试用吗",
             "计划中的首个可实现范围是什么",
         ),

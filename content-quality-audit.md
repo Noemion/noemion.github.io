@@ -538,6 +538,16 @@ GNU Make 的 [Errors in Recipes](https://www.gnu.org/software/make/manual/html_n
 
 [状态变化与因果归因边界研究提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md)保存完整案例、威胁与进入规范前的条件。本次修订只改善开发者教学和非规范研究路由，没有改写 END-TEL-001、CORE、Profile、登记或向量，也没有创建因果制品、字段、组件或检查器。现行 Profile 无法表达的动作、转变或因果要求继续保留为未解决边界或明确拒绝。
 
+## 安全目标制品的开发者检查路径复核 · 2026-07-15
+
+首页已经把安全价值写成“发布制品只保留经过确认的目标结构，并在使用前核对授权边界”，站点元数据和门户设计规则却仍写“来源可验证”或“目标结构与授权边界可验证”。最终发布版会移除原始自然语言，这些描述既没有说明还能核对哪种来源关系，也容易让读者把文件完整性、意义确认和动作授权压成一个性质。入门指南又以“持久保存、组合和独立检查”概括项目价值，没有说明检查对象、检查者、失败结果和执行停止条件。
+
+当前入口统一采用同一安全主张。入门指南把形成与发布、内容完整性、意义确认、动作授权、证据与满足、最终决定排成一条失败可关闭的检查顺序；FAQ 直接说明目标文件不能给自己签发工具、部署或跨会话权限。架构入口同时修正当前成熟度和结果责任：五个公开动作属于计划中的单一入口，当前没有 CLI；验证者形成记录有效性，证据集合相对精确 `krin` 形成覆盖度，`krin` 再形成满足判断，具名权威最后作出决定。
+
+[SLSA 1.2 制品验证](https://slsa.dev/spec/v1.2/verifying-artifacts)要求逐项检查签名、陈述主体、信任根和调用方预期，说明内容或溯源完整性不能脱离依赖方政策。[RFC 9334](https://www.rfc-editor.org/rfc/rfc9334.html)把 Evidence、验证者的 Attestation Results 和依赖方决定分开。[W3C PROV-DM](https://www.w3.org/TR/prov-dm/)允许把形成版到裁剪发布版表达为两个实体之间的派生关系，但不让发布版重新包含已移除的原文。[GNU Guix 的 `guix challenge`](https://guix.gnu.org/manual/en/html_node/Invoking-guix-challenge.html)通过独立构建比较发现一致或差异，差异仍需判断来自不可复现、损坏还是恶意来源。这些机制支持责任拆分，不替 Noemion 证明语义正确、授权有效或结果应当接受。
+
+本轮只修订公开解释、元数据、设计规则和质量契约，不改变 CORE、Profile、字段、命令、组件、物理格式或实现状态。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。
