@@ -128,7 +128,7 @@ DOC_GUIDE_HEADINGS = {
         "当前可用性", "未来职责流程", "发布原则", "命名发布条件",
     ],
     "docs/terminology-and-pronunciation.html": [
-        "直接结论", "读音待定时怎样协作", "证据适用边界", "两阶段验证", "任务与材料", "通过与停止规则",
+        "直接结论", "读音待定时怎样协作", "证据适用边界", "招募前先固定研究数据边界", "两阶段验证", "任务与材料", "通过与停止规则",
         "证据记录", "人工智能只做辅助探针", "当前状态",
     ],
     "docs/architecture-guide.html": [
@@ -751,7 +751,15 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "W3C Pronunciation Lexicon Specification 1.0",
             "ITU-T P.800",
             "ITU-T P.808",
-            "NISTIR 8429",
+            "NISTIR 7778",
+            "NIST Privacy Framework 1.0",
+            "NIST Research Data Framework 2.0",
+            "NIST SP 800-88 Rev. 2",
+            "GNU Coreutils",
+            "招募前先固定研究数据边界",
+            "不会因为参与者同意听测就自动获准用于训练模型",
+            "供应商是否保留、训练、转交或生成派生数据",
+            "删除与保留记录",
             "至少 24 名",
             "至少收集 60 个",
             "rule of three",
@@ -4184,6 +4192,12 @@ def main():
     ):
         if token not in terminology_guide_text:
             errors.append(f"terminology guide missing human-evidence boundary: {token}")
+    for obsolete_source in ("NISTIR 8429", "NIST.IR.8429"):
+        if obsolete_source in terminology_guide_text:
+            errors.append(
+                "terminology guide must not cite the unfinalized NISTIR 8429 draft "
+                f"as an unlabeled statistical authority: {obsolete_source}"
+            )
     name_maturity_contracts = {
         "about/background.html": (
             "当前策略已确定 Endem 所指的最小制品职责",
