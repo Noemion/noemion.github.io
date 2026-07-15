@@ -73,7 +73,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 ## Guides and reference
 
 - [Documentation center](https://noemion.github.io/docs/index.html) — task-oriented reading paths
-- [Getting started](https://noemion.github.io/docs/getting-started.html) — problem background, core artifacts, and recommended reading order
+- [Getting started](https://noemion.github.io/docs/getting-started.html) — one dependency-upgrade case separates goals, authorization, protocol states, evidence, and final decisions
 - [Installation and usage](https://noemion.github.io/docs/installation-and-usage.html) — current availability and future release principles
 - [Terminology and pronunciation validation](https://noemion.github.io/docs/terminology-and-pronunciation.html) — human first-read, listen-back, responsibility matching, statistical boundary, and release-name stop rules
 - [Architecture guide](https://noemion.github.io/docs/architecture-guide.html) — one Agent task mapped to artifact, session, action, evidence, and decision boundaries

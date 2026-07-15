@@ -123,7 +123,7 @@ DOC_GUIDE_ORDER = [
 ]
 DOC_GUIDE_HEADINGS = {
     "docs/getting-started.html": [
-        "从这里开始", "安全目标制品怎样检查", "先看一个 Agent 工作", "六个语义面", "四个对象分别回答什么", "计划中的命令入口", "这些名字怎样读", "接下来按问题继续", "当前状态",
+        "先把一句要求写完整", "沿一条责任链工作", "“安全使用”必须逐层检查", "相邻系统继续负责什么", "按问题继续学习", "当前可以验证什么",
     ],
     "docs/installation-and-usage.html": [
         "当前可用性", "未来职责流程", "发布原则", "命名发布条件",
@@ -5071,32 +5071,49 @@ def main():
         )
     getting_started_text = (SOURCE_ROOT / "docs" / "getting-started.md").read_text()
     for token in (
+        "## 先把一句要求写完整",
+        "## 沿一条责任链工作",
+        "## “安全使用”必须逐层检查",
+        "## 相邻系统继续负责什么",
+        "## 按问题继续学习",
+        "## 当前可以验证什么",
         "软件工程长期把程序员写的形式代码编译给机器",
         "这里的“编译”不是自然语言生成代码",
         "没有可安装编译器或组件",
+        "最终发布版按独立 Profile 移除原始自然语言",
+        "截至 2026-07-16",
+        "NIST AI Agent Standards Initiative",
+        "MCP 2025-11-25 的实验 Tasks",
+        "官方 Tasks 扩展提案",
+        "不具备线格式兼容性",
+        "A2A 1.0",
+        "外部任务显示",
+        "Noemion 增加的是目标责任层",
+        "后一步不能弥补前一步的失败",
+        "当前主体、对象、动作、目的、范围和截止点",
+        "覆盖不足返回 `agno`，观察故障返回 `fault`",
+        "SLSA 1.2 制品验证",
+        "GNU Guix 的 `guix challenge`",
+        "资料检查可以发现引用、登记和预期分类之间的矛盾",
         "具体发行拼写和读音仍需完成 ADR-0034 的人类验证",
         "不用临时读法冒充正式读法",
         "不会成为第二套命令、机器别名或语义权威",
-        "先看一个 Agent 工作",
-        "MCP 2025-11-25 Tasks",
-        "A2A 1.0 版本化规范",
-        "外部 Task 显示 `completed`",
-        "安全目标制品怎样检查",
-        "后一步不能弥补前一步的失败",
-        "发布 Profile 是否移除原文、产生新内容身份",
-        "当前主体、对象、动作、目的、范围和截止点",
-        "覆盖不足返回 `agno`，观察故障返回 `fault`",
-        "SLSA 1.2 的制品验证",
-        "GNU Guix 的 `guix challenge`",
-        "这个例子只解释职责顺序",
-        "| 职责 | 现行字段 | 不得混入 |",
-        "| 来源表达 | `rhem` | 经规则或具名权威确认的意义投影 |",
-        "规范把 `semion` 的外部确认称为语义授权",
-        "不回答“谁可以调用工具、修改仓库或部署服务”",
-        "| 待确认意义 | `apor` | 观察不足",
     ):
         if token not in getting_started_text:
-            errors.append(f"getting started guide missing pronunciation status boundary: {token}")
+            errors.append(f"getting started guide missing task-oriented learning boundary: {token}")
+    for obsolete_heading in (
+        "## 从这里开始",
+        "## 安全目标制品怎样检查",
+        "## 先看一个 Agent 工作",
+        "## 六个语义面",
+        "## 四个对象分别回答什么",
+        "## 计划中的命令入口",
+        "## 这些名字怎样读",
+        "## 接下来按问题继续",
+        "## 当前状态",
+    ):
+        if obsolete_heading in getting_started_text:
+            errors.append(f"getting started guide retains a duplicated topic inventory: {obsolete_heading}")
     developer_entry_contracts = {
         "index.html": (
             "从开发者案例开始",
