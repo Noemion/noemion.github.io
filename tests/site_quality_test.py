@@ -191,6 +191,23 @@ INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "《逻辑哲学论》的有限采用",
     "名字、规范与证据各自承担什么",
 ]
+HISTORICAL_ADR_0008_HEADINGS = [
+    "先确认这份记录还能约束什么",
+    "它当时解决了什么问题",
+    "当前架构保留了哪些原则",
+    "旧名称为什么不能继续使用",
+    "外部资料怎样限定这份历史记录",
+]
+HISTORICAL_ADR_0008_BOUNDARIES = (
+    "只能从 ADR-0008 继承三项结果",
+    "历史名称只用于解释设计来路",
+    "一个应用入口不等于一个信任域",
+    "形成版保留自然语言",
+    "旧命令不构成别名",
+    "首次朗读、听写回填和词表内口头区分证据",
+    "2025-11-25 仍是 Current",
+    "协议工具、任务或能力声明",
+)
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -5809,6 +5826,41 @@ def main():
                     "about/intellectual-foundations.html: must not restore "
                     f"inventory-style heading {obsolete_heading!r}"
                 )
+
+    historical_adr_0008 = ROOT / "architecture/adr-0008-endem-system.html"
+    if historical_adr_0008.exists():
+        parser = parse(historical_adr_0008)
+        if parser.h2_texts != HISTORICAL_ADR_0008_HEADINGS:
+            errors.append(
+                "architecture/adr-0008-endem-system.html: historical reading sequence "
+                f"must be {HISTORICAL_ADR_0008_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in HISTORICAL_ADR_0008_BOUNDARIES:
+            if term not in visible_text:
+                errors.append(
+                    "architecture/adr-0008-endem-system.html: missing historical boundary "
+                    f"{term}"
+                )
+        for retired_command in (
+            "endem form", "endem check", "endem bind", "endem pack",
+            "endem seal", "endem see", "endem run", "endem test",
+        ):
+            if retired_command in visible_text:
+                errors.append(
+                    "architecture/adr-0008-endem-system.html: retired historical command "
+                    f"must not read like a current interface: {retired_command}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 5
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                "architecture/adr-0008-endem-system.html: must preserve five bounded "
+                "decision tables and four current reading links"
+            )
 
     for row in route_rows:
         path = ROOT / row["route"]

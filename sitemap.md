@@ -22,7 +22,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Endem lifecycle](https://noemion.github.io/architecture/endem-lifecycle.html) — source, deterministic formation, closure, evidence, loading, and execution boundaries
 - [Architecture decisions](https://noemion.github.io/architecture/decisions.html) — accepted responsibility boundaries and explicitly unfrozen interfaces
 - [Agent system boundaries](https://noemion.github.io/architecture/agent-system-boundaries.html) — one Agent call separates goals, actors, authorization, sessions, external facts, evidence, and decisions
-- [ADR-0008](https://noemion.github.io/architecture/adr-0008-endem-system.html) — superseded record of the earlier artifact and application topology
+- [ADR-0008](https://noemion.github.io/architecture/adr-0008-endem-system.html) — historical record retaining Endem, `.endem`, and one application entry while routing retired terms to current decisions
 - [ADR-0009](https://noemion.github.io/architecture/adr-0009-propositional-kernel.html) — superseded record of the earlier propositional projection
 - [ADR-0010](https://noemion.github.io/architecture/adr-0010-native-lexicon.html) — current native lexicon, six semantic facets, and situation/goal/evidence separation
 - [ADR-0011](https://noemion.github.io/architecture/adr-0011-endem-container.html) — experimental Endem header, record directory, deterministic payload subset, and P0 limits

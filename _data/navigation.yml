@@ -91,7 +91,7 @@ modules:
           - { href: /architecture/endem-lifecycle.html, label: Endem 生命周期 }
           - { href: /architecture/decisions.html, label: 架构决策 }
           - { href: /architecture/agent-system-boundaries.html, label: Agent 系统边界图 }
-          - { href: /architecture/adr-0008-endem-system.html, label: "ADR-0008 · Endem 体系" }
+          - { href: /architecture/adr-0008-endem-system.html, label: "ADR-0008 · Endem 与单一入口（历史）" }
           - { href: /architecture/adr-0009-propositional-kernel.html, label: "ADR-0009 · 命题投影" }
           - { href: /architecture/adr-0010-native-lexicon.html, label: "ADR-0010 · 原生词汇与事态" }
           - { href: /architecture/adr-0011-endem-container.html, label: "ADR-0011 · Endem 容器格式" }
