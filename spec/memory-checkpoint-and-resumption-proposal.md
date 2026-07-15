@@ -1,7 +1,7 @@
 # 记忆、检查点与恢复边界研究提案
 
 状态：非规范研究提案
-日期：2026-07-14
+日期：2026-07-15
 结论状态：正在研究；尚未进入规范
 研究范围：Agent 会话状态、跨运行记忆、上下文压缩、检查点、外部任务句柄、恢复、重放与回滚
 
@@ -69,7 +69,7 @@ ID-CORE、IKN-CORE 与 AUT-CORE 已分别约束身份、证据和授权。
 | 资料 | 可采用的事实 | 不能照搬的推论 |
 | --- | --- | --- |
 | [OpenAI Agents SDK：选择一种对话状态策略](https://developers.openai.com/api/docs/guides/agents/running-agents#choose-one-conversation-strategy) | 应用自管历史、SDK Session、`conversationId` 与 `previousResponseId` 是四种状态承载策略；混用本地重放与服务端状态可能重复上下文 | 任一策略自动提供事实真值、完整历史、Noemion 内容身份或授权上下文 |
-| [OpenAI Sandbox Agents：跨运行记忆](https://developers.openai.com/api/docs/guides/agents/sandboxes#persist-memory-across-runs) | Session 保存消息历史，Sandbox memory 把以往工作提炼为可复用文件，resume 与 snapshot 保存工作区状态；这些机制具有不同身份和生命周期 | 记忆文件天然正确或仍然适用；恢复工作区同时恢复旧 Dromen、秘密、授权或完整会话历史 |
+| [OpenAI Sandbox Agents：跨运行记忆](https://developers.openai.com/api/docs/guides/agents/sandboxes#persist-memory-across-runs) | Session 保存消息历史，Sandbox memory 把以往工作提炼为可复用文件，resume 与 snapshot 保留或重建工作区状态；这些机制具有不同身份和生命周期 | 记忆文件天然正确或仍然适用；恢复工作区同时恢复旧 Dromen、秘密、授权或完整会话历史 |
 | [MCP 2025-11-25 Tasks](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks) | 实验性 Task 有任务 ID、状态、TTL、轮询建议、结果与取消语义 | Task ID 是跨协议永久身份；`completed` 等于本地目标满足；Task 历史必然完整 |
 | [MCP 版本说明](https://modelcontextprotocol.io/docs/learn/versioning)与[2026-07-28 发布候选说明](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/) | 当前正式协议仍是 2025-11-25；候选版转向无状态核心，并把长时任务移到扩展 | 候选版可作为当前符合性基线；协议不再管理会话就表示应用无需显式状态边界 |
 | [A2A 1.0.0 规范](https://a2a-protocol.org/v1.0.0/specification/) | Task、历史、轮询、流式连接与推送各有生命周期；历史可能不完整，断线可能丢消息，推送可能重复 | 重连等于无损续传；单次通知足以证明终态；重复通知可以重复执行副作用 |
@@ -84,7 +84,7 @@ Noemion 可以借鉴这种分离，但不能复制任何供应商或工具的对
 
 ## MCP 版本与无状态核心的影响
 
-截至 2026 年 7 月 14 日，MCP 官方仍把 2025-11-25 标为当前正式版本。
+截至 2026 年 7 月 15 日，MCP 官方仍把 2025-11-25 标为当前正式版本。
 2026-07-28 发布候选版已经公开，但计划在 7 月 28 日才成为最终版；本提案只把它用于版本漂移研究。
 
 候选版移除协议级 `initialize/initialized` 会话，并把 Tasks 作为扩展处理。
@@ -116,7 +116,7 @@ Noemion 只借鉴具名版本、事务边界和显式回滚关系。
 检查点可以帮助控制平面重建候选上下文，但不能重建旧 Dromen。
 恢复时至少必须重新核对：
 
-1. 精确 Endem 或 Synem 及其 attest 状态；
+1. 精确 Endem 或 Synem 内容，以及按其摘要绑定的适用外部陈述、验证记录、政策、截止点、撤销状态和依赖方准入判断；
 2. 请求主体、实际行动者、被代表主体、租户与权威；
 3. 政策、截止点、撤销与同意仍然适用；
 4. 协议、对端、适配器、工具 schema、模型与环境没有越界漂移；

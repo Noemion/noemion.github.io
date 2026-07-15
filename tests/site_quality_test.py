@@ -2277,6 +2277,7 @@ def validate_jekyll_sources():
             "A2A 1.0",
             "GNU Make",
             "GNU Guix",
+            "截至 2026 年 7 月 15 日",
             "恢复必须是重新验证，不是复活",
             "继续、重放、重试与回滚必须分开",
             "威胁到失败责任的映射",
@@ -2289,9 +2290,14 @@ def validate_jekyll_sources():
         registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
         if "memory-checkpoint-and-resumption" in registry_text:
             errors.append("non-normative memory and resumption proposal must not enter the specification registry")
+        if "精确 Endem 或 Synem 及其 attest 状态" in proposal_text:
+            errors.append("memory and resumption proposal must not collapse attestation relations into content state")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "dromen.html",
+            SOURCE_ROOT / "specifications" / "adapters.html",
+            SOURCE_ROOT / "specifications" / "iknem.html",
+            SOURCE_ROOT / "components" / "drasor.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
@@ -2300,6 +2306,34 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the memory and resumption research proposal"
                 )
+        memory_teaching_requirements = {
+            SOURCE_ROOT / "docs" / "architecture-guide.md": (
+                "逐项重验适用的外部陈述、验证记录和依赖方准入判断",
+                "不从检查点反序列化权限",
+            ),
+            SOURCE_ROOT / "specifications" / "adapters.html": (
+                "断线后只恢复定位，不恢复权限",
+                "结果未知区间",
+                "能重新定位”不等于“完整恢复",
+            ),
+            SOURCE_ROOT / "specifications" / "iknem.html": (
+                "历史与检查点何时能支持证据",
+                "保存下来的状态首先说明",
+                "该提案不创建 Iknem 字段、检查点格式或恢复实现",
+            ),
+            SOURCE_ROOT / "components" / "drasor.html": (
+                "从检查点继续必须建立新会话",
+                "重新完成会话准入",
+                "不能合并成“Agent 已恢复”",
+            ),
+        }
+        for source, required_tokens in memory_teaching_requirements.items():
+            source_text = source.read_text()
+            for token in required_tokens:
+                if token not in source_text:
+                    errors.append(
+                        f"{source.relative_to(SOURCE_ROOT)} missing developer-facing memory boundary: {token}"
+                    )
 
     capability_proposal = SOURCE_ROOT / "spec" / "capability-discovery-and-negotiation-proposal.md"
     if not capability_proposal.exists():

@@ -70,6 +70,19 @@ permalink: "/specifications/adapters.html"
   </section>
 
   <section class="content-wide">
+    <h2>断线后只恢复定位，不恢复权限</h2>
+    <p class="lead">外部任务句柄只提供协议域内的重新定位信息。恢复流程仍要重新确认对端、租户、任务、授权和副作用；旧句柄既不延长旧会话，也不恢复原有权限。</p>
+    <div class="table-wrap"><table><thead><tr><th>恢复步骤</th><th>必须核对</th><th>仍然不能假定</th></tr></thead><tbody>
+      <tr><td>重新定位任务</td><td>协议与修订、对端、租户、任务 ID、创建语境和 TTL</td><td>同名 ID 仍指向同一对象，或旧凭据仍然有效</td></tr>
+      <tr><td>读取当前状态</td><td>查询方法、截止点、返回状态、历史上限、缺口和产物身份</td><td>重连无损、历史完整，或通知顺序等于真实因果顺序</td></tr>
+      <tr><td>建立本地会话</td><td>当前 Dromen、动作授权、能力交集、预算、秘密和观察责任</td><td>旧 Dromen、批准、调用次数或实时句柄可以从检查点恢复</td></tr>
+      <tr><td>决定是否再次动作</td><td>既有副作用、结果未知区间、幂等键、去重记录和人工处置条件</td><td>断流等于失败，换一个请求 ID 就可以安全重试</td></tr>
+      <tr><td>解释远端终态</td><td>原协议事实、可验证产物和本地 Iknem 覆盖</td><td><code>completed</code>、流关闭或通知到达直接等于 <code>met</code> 或 <code>accepted</code></td></tr>
+    </tbody></table></div>
+    <p>A2A 1.0 明确允许服务端返回少于请求上限的任务历史，并说明断线重连可能漏掉状态消息；MCP 2026-07-28 候选版移除协议级会话后，则展示了由应用显式传递句柄继续关联对象的方式。两者都说明“能重新定位”不等于“完整恢复”。完整威胁、回滚与重新验证责任见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/memory-checkpoint-and-resumption-proposal.md">非规范记忆、检查点与恢复边界研究提案</a>。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>待定内容</h2>
     <p>当前没有具体协议 Profile。MCP、A2A、HTTP、模型 SDK 和操作系统调用的物理 Profile，JSON-RPC、Protocol Buffers、SSE 与 Webhook 字段映射，适配器 API、进程隔离、凭据代理、事件存储、重试实现和部署拓扑仍保持开放。</p>
     <p>Agent Card、工具列表和 schema 只是能力声明，不能缩写成“Agent 已有能力”。声明、协商、授权、会话上限、即时可调用性与调用结果的完整分层见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/capability-discovery-and-negotiation-proposal.md">非规范能力发现与协商研究提案</a>；该提案不修改 ADP-CORE，也不创建能力制品或新规范。</p>

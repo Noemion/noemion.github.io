@@ -55,6 +55,13 @@ permalink: "/components/drasor.html"
   </section>
 
   <section class="content-wide">
+    <h2>从检查点继续必须建立新会话</h2>
+    <p class="lead">检查点可以保存候选上下文和控制位置，却不能保存一次会话的权限。继续执行时，Drasor 必须把保存状态当作新输入，并重新完成会话准入。</p>
+    <div class="flow"><div class="step">核对检查点来源与损失</div><div class="step">重验精确内容与外部陈述</div><div class="step">重做授权、能力与预算交集</div><div class="step">建立新的 Dromen</div><div class="step">查询未知副作用后再决定是否动作</div></div>
+    <p>旧会话的秘密、实时句柄、批准、预算余额和一次性授权消费都不能反序列化。若断线前的外部调用结果未知，控制面先按精确任务句柄查询现状；没有幂等、去重或人工处置依据时保持阻断。历史、快照与新观察分别保留来源，不能合并成“Agent 已恢复”。完整案例见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/memory-checkpoint-and-resumption-proposal.md">非规范记忆、检查点与恢复边界研究提案</a>。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>外部 Agent 协议只提供带来源的事实</h2>
     <p>当前 Agent 生态正把互操作、身份、授权和可观测性作为独立标准化问题处理。这支持 Drasor 把协议放在受控适配边缘，而不是让协议对象取得本地语义或决定权威。</p>
     <div class="table-wrap"><table><thead><tr><th>外部接口</th><th>可以带入什么</th><th>仍由本地负责什么</th></tr></thead><tbody>

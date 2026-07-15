@@ -518,6 +518,16 @@ Ktisor 与语言规范还残留“已授权语义决定”“已授权 semion”
 
 这一修订延续 [RFC 9334](https://www.rfc-editor.org/rfc/rfc9334.html) 的 Evidence、Verifier 结果与依赖方决定分层，[in-toto Statement v1](https://github.com/in-toto/attestation/blob/main/spec/v1/statement.md) 的不可变主体摘要和陈述类型边界，以及 [SLSA 1.2 制品验证](https://slsa.dev/spec/v1.2/verifying-artifacts) 对包络签名、主体、信任根和调用方期望的逐项检查。它只修正教学和解释，不修改规范、登记、Profile 或向量；正式迁移仍需用户决定、人类命名证据和独立 ADR。
 
+## 记忆、检查点与恢复教学边界复核 · 2026-07-15
+
+架构指南已经区分对话历史、跨运行记忆、检查点、工作区快照和外部任务句柄，但适配器、Iknem 与 Drasor 页面仍要求开发者自行拼接恢复责任。非规范提案还残留“Endem 或 Synem 的 attest 状态”，会把刚刚拆开的精确内容、外部陈述、验证记录和依赖方准入重新压成内容状态。
+
+当前页面统一采用“只恢复声明范围内的状态”这一阅读顺序。适配器先重绑协议、对端、租户、任务与 TTL，再查询历史缺口和未知副作用；Iknem 只让历史、检查点、外部任务记录和快照支持各自有限主张；Drasor 把保存状态当作新输入，重新验证内容、外部陈述、授权、能力和预算，并建立新的 Dromen。旧秘密、实时句柄、批准和一次性授权消费都不能从检查点恢复。
+
+[OpenAI Agents SDK](https://developers.openai.com/api/docs/guides/agents/running-agents#choose-one-conversation-strategy)明确区分应用历史、SDK Session、`conversationId` 与 `previousResponseId`；[OpenAI Sandbox Agents](https://developers.openai.com/api/docs/guides/agents/sandboxes#persist-memory-across-runs)进一步分开消息历史、提炼指导以及 resume 与 snapshot 的工作区状态。[MCP 版本说明](https://modelcontextprotocol.io/docs/learn/versioning)仍把 2025-11-25 标为当前版，而[2026-07-28 候选版](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/)说明协议无状态不等于应用无状态；[A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/)则明确允许任务历史截断，并警告断线重连可能漏掉消息。这些事实支持状态分层，不定义 Noemion 的检查点格式或恢复接口。
+
+GNU Make 的 [Errors in Recipes](https://www.gnu.org/software/make/manual/html_node/Errors.html) 与 [Interrupts](https://www.gnu.org/software/make/manual/html_node/Interrupts.html)共同说明：失败或中断后保留的目标可能已经损坏，保留策略本身不能证明状态有效。GNU Guix 的 generation 回滚只选择声明范围内的既有配置，不会让外部服务、网络调用或授权状态倒退。本轮只把这些反例用于教学边界，没有改变 CORE、Profile、登记、向量、组件或实现状态。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。
