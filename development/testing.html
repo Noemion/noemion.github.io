@@ -7,90 +7,54 @@ permalink: "/development/testing.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>测试与验证</span></nav>
-  <header class="content-introduction"><h1>测试与验证</h1><p>每项验证先声明变更主张、规范域、失败路径和声明上限；一组通过案例不能自动扩展为组件安全或互操作结论。</p><div class="badges"><span class="badge">主张范围</span><span class="badge">失败路径</span><span class="badge">证据上限</span></div></header>
+  <header class="content-introduction"><h1>测试与验证</h1><p>先限定主张，再选择证据。测试只有在对象、失败条件和适用范围明确时，才能支持可复核的工程结论。</p><div class="badges"><span class="badge">主张范围</span><span class="badge">失败条件</span><span class="badge">证据类型</span></div></header>
 
-  <div class="summary-rail-layout summary-rail-layout--article" data-summary-rail-layout data-summary-layout="stacked">
-    <aside class="summary-rail summary-rail--article" aria-label="验证阅读概览">
-      <div class="summary-rail-heading"><span class="summary-rail-kicker">DEVELOPMENT / EVIDENCE</span><strong class="summary-rail-title">验证阅读概览</strong></div>
-      <dl class="summary-rail-facts"><div><dt>直接结论</dt><dd>先声明主张，再选择相称证据</dd></div><div><dt>当前证据</dt><dd>资料一致性与已登记提案向量</dd></div><div><dt>限制条件</dt><dd>不能证明组件已经实现</dd></div></dl>
-      <nav class="summary-rail-links" aria-label="测试与验证重点章节"><a href="#current-evidence">当前材料能证明什么</a><a href="#model-evaluation">模型评测边界</a><a href="#evidence-levels">证据等级</a></nav>
-    </aside>
-    <div class="summary-rail-main">
-
-  <section class="content-wide"><h2>用一次协议映射变更走完整条证据链</h2><p>假设开发者准备把 A2A Task 的 <code>completed</code> 映射为 Noemion 的 <code>met</code>。这项修改看似只是枚举转换，实际会把远端协议状态提升为本地满足判断。正确做法不是先补一条通过测试，而是先把主张、反例和声明上限写清楚。</p><div class="table-wrap"><table><thead><tr><th>顺序</th><th>开发者要留下什么</th><th>本例的可复核结果</th></tr></thead><tbody>
+  <section class="content-wide"><h2>用一次协议映射变更走完整条证据链</h2><p>假设开发者准备把 A2A Task 的 <code>completed</code> 映射为 Noemion 的 <code>met</code>。这项修改看似只是枚举转换，实际会把远端协议状态提升为本地满足判断。正确做法不是先增加一条通过案例，而是依次固定主张、权威、反例、证据和声明范围。</p><div class="table-wrap"><table><thead><tr><th>顺序</th><th>开发者要留下什么</th><th>本例的可复核结果</th></tr></thead><tbody>
     <tr><td>1. 写主张</td><td>一个会被反例推翻的句子</td><td>固定 A2A 版本和对端后，<code>completed</code> 只映射为外部 Task 终态，不直接产生 <code>met</code></td></tr>
     <tr><td>2. 定权威</td><td>本地规范、外部版本和适配责任</td><td>ADP-CORE 保存外部状态；END-CORE 与 <code>krin</code> 决定满足判断；A2A 只定义自己的协议对象</td></tr>
     <tr><td>3. 找反例</td><td>结构合法但会击穿越级映射的输入</td><td>远端 Task 已完成，但 Artifact 指向错误版本，或本地安全检查返回拒绝</td></tr>
-    <tr><td>4. 选择证据</td><td>成功、拒绝、故障和来源保留</td><td>向量分别覆盖状态保留、版本冲突、产物错绑、取消竞态和本地判据结果</td></tr>
-    <tr><td>5. 限定声明</td><td>测试通过后最多可以说什么</td><td>资料与已登记案例保持结果域分离；不能声称适配器已经实现或所有 A2A 对端都互操作</td></tr>
-  </tbody></table></div><p>同一顺序适用于术语、格式、授权、模型评测和网站解释：先证明“测试在回答哪个问题”，再讨论测试数量。</p></section>
+    <tr><td>4. 选证据</td><td>能够区分成功、拒绝、故障和来源的材料</td><td>分别覆盖状态保留、版本冲突、产物错绑、取消竞态和本地判据结果</td></tr>
+    <tr><td>5. 限声明</td><td>测试通过后最多可以说什么</td><td>资料与已登记案例保持结果域分离；不能声称适配器已经实现或所有 A2A 对端均可互操作</td></tr>
+  </tbody></table></div><p>术语、格式、授权、模型评测和网站解释也遵循这一顺序：先说明测试在回答哪个问题，再讨论测试数量。</p></section>
 
-  <section class="content-wide"><h2>先把变更写成可验证主张</h2><p class="callout"><strong>直接结论：</strong>测试数量不是起点。开发者先说明要改变什么、哪份资料具有约束力、什么结果应被拒绝，以及证据最多支持哪一层结论。</p><div class="table-wrap"><table><thead><tr><th>变更类型</th><th>权威起点</th><th>最低证据</th><th>当前最多能声称</th></tr></thead><tbody>
-    <tr><td>解释与公开文案</td><td>对应 CORE、Profile、现行 ADR 和页面角色</td><td>权威链接、状态边界、源码检查、构建结果和 Chrome 阅读检查</td><td>页面与现行资料一致；不能声称组件存在</td></tr>
-    <tr><td>语义或结果边界</td><td>END-CORE 及对应判断 ADR</td><td>支持案例、反例、唯一条款、正反向量和结果域拒绝</td><td>草案对已登记案例给出一致分类</td></tr>
-    <tr><td>Profile 或物理格式</td><td>END-CORE、END-FMT 与封闭 Profile</td><td>合法和畸形字节、资源上限、确定拒绝位置和版本绑定</td><td>实验格式符合已登记向量；不是稳定 ABI</td></tr>
-    <tr><td>外部协议或 Agent 状态</td><td>ADP-CORE、DRO-CORE、IKN-CORE、AUT-CORE 与固定外部版本</td><td>来源保留、版本冲突、越权、取消、重试、交付和结果域反例</td><td>映射规则保持边界；外部成功不等于本地满足或接受</td></tr>
-    <tr><td>未来组件实现</td><td>条款、威胁模型、诊断目录与实现范围</td><td>双读取器、畸形语料、性质测试、模糊测试、故障注入和独立复现</td><td>只支持实际执行过的组件、平台和配置</td></tr>
-  </tbody></table></div><p>不知道从哪份资料开始时，先用<a href="../docs/specifications-reference.html">规范参考指南的工程问题索引</a>定位权威源。若外部 Task 显示 <code>completed</code>，验证应先检查来源映射、会话能力、证据范围和决定权威，不能把成功状态直接写入 Endem 结果。</p></section>
+  <section class="content-wide"><h2>变更类型决定证据组合</h2><p class="callout"><strong>选择原则：</strong>从可能出错的责任层开始。每类变更都需要支持案例和失败案例，但具体证据由对象决定，不能用另一类测试替代。</p><div class="table-wrap"><table><thead><tr><th>变更对象</th><th>需要回答的问题</th><th>最低证据组合</th><th>结论上限</th></tr></thead><tbody>
+    <tr><td>公开资料与网站</td><td>解释是否符合现行规范，页面是否可读、可达并保持状态边界</td><td>权威链接、资料一致性检查、生产构建、真实浏览器的多视口与交互检查</td><td>资料和页面在已检查范围内一致；不能证明组件已经实现</td></tr>
+    <tr><td>语义与结果边界</td><td>同一输入是否得到规定分类，结果域是否被错误合并</td><td>规范条款、支持案例、反例、正反向量、稳定失败位置和结果域拒绝</td><td>当前草案对已登记输入给出一致解释</td></tr>
+    <tr><td>Profile 与物理格式</td><td>合法字节能否读取，畸形或超限输入能否确定失败</td><td>合法与畸形语料、checked arithmetic、字节/节点/深度/内存/时间上限、版本绑定</td><td>指定 Profile 在已执行实现和配置中符合已测要求；不是普遍安全或稳定 ABI 证明</td></tr>
+    <tr><td>确定性形成与读取器</td><td>封闭输入能否复现，独立实现是否给出相同解释</td><td>精确输入闭包、隔离环境、逐字节比较、两个不共享解析代码的读取器和差异报告</td><td>已固定范围内的字节复现或互操作；相同输出不证明设计正确</td></tr>
+    <tr><td>运行器与协议适配器</td><td>取消、重试、超时、越权和部分副作用是否停在责任边界</td><td>状态机向量、能力收缩、故障注入、竞态、资源耗尽、未知结果和隔离检查</td><td>只支持实际执行过的组件、协议版本、平台和故障模型</td></tr>
+    <tr><td>模型参与的研究</td><td>测量是否适合目标总体，更新是否可追溯，上线后是否漂移</td><td>用途与总体、协议、基线、数据资格、不确定性、失败分析、派生身份和运行监测</td><td>限定实验或监测窗口中的结果；不能替代规范符合性或具名权威决定</td></tr>
+  </tbody></table></div><p>不知道从哪份资料开始时，可用<a href="../docs/specifications-reference.html">规范参考指南的工程问题索引</a>定位权威起点。当前尚未进入组件代码开发阶段，表中的实现级证据是未来组件工作的最低约束，不是已有实现声明。</p></section>
 
-  <section class="content-rows"><h2>解析与资源安全</h2><p class="callout"><strong>基本规则：</strong>“合法样例通过”只证明一条成功路径。畸形、冲突、越权、超限和不完整输入必须稳定、快速且不产生部分可信结果地失败。</p><ul>
-    <li>覆盖非法偏移、长度、计数、索引、对齐、重叠、环、自引用、超深图、压缩炸弹和恶意大计数。</li>
-    <li>所有加法、乘法、对齐与区间端点使用 checked arithmetic；超限与溢出是规范错误，不是崩溃。</li>
-    <li>未知关键结构必须拒绝；未知可选结构按规范跳过并保留诊断。读取受字节、节点、深度、内存和时间预算约束。</li>
-    <li>错误必须定位到条款 ID 与字节、记录或语义路径；任何未执行层都不能被描述为通过。</li>
-  </ul></section>
+  <section id="current-evidence" class="content-wide"><h2>当前材料与未来证据分开</h2><p class="callout"><strong>当前状态：</strong>Noemion 目前可以验证规范资料、登记、场景、向量和公开网站之间的一致性。尚无 Ktisor、Theor、Drasor、求值器或决定引擎可供实现级测试。</p><div class="table-wrap"><table><thead><tr><th>材料</th><th>现在能够验证</th><th>仍然缺少</th></tr></thead><tbody>
+    <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读条款登记</a>与规范检查</td><td>规范版本、条款、威胁、验证方式和向量集合的连接关系</td><td>解析器、运行器或决定引擎的执行结果</td></tr>
+    <tr><td>自然语言场景</td><td>支持案例、反例、歧义和责任遗漏</td><td>规范符合性、性能、安全隔离或互操作结论</td></tr>
+    <tr><td>语义、专题与字节向量</td><td>当前草案对已登记输入的允许包络、拒绝结果和失败位置</td><td>未来组件是否真正消费这些向量并稳定执行</td></tr>
+    <tr><td>资料一致性、构建与浏览器检查</td><td>条款、页面、链接、生成站点及目标视口中的阅读和交互表现</td><td>组件级模糊测试、故障注入、跨平台复现、签名或 SBOM 证据</td></tr>
+    <tr><td>未来实现符合性材料</td><td>尚不可验证</td><td>独立读取器、畸形语料、性质测试、资源边界、隔离环境和发布制品</td></tr>
+  </tbody></table></div><p>各向量集合的数量和执行结果以机器可读登记与对应测试输出为准，不在说明页复制容易漂移的计数。资料构建成功只能证明其检查范围，不能被写成组件实现进展。</p></section>
 
-  <section class="content-wide"><h2>形成、变换与复现必须分开</h2><p class="callout"><strong>直接结论：</strong>相同输出只在已经声明的比较域中有意义。字节相同、回转成功、结构符合 schema 和两次结果一致，都不能自动证明来源相同、语义等价或目标正确。</p><div class="table-wrap"><table><thead><tr><th>验证主张</th><th>必须固定什么</th><th>最多能证明什么</th><th>不能越过的边界</th></tr></thead><tbody>
-    <tr><td>来源与文本变换</td><td>原始字节身份、文本槽、严格解码 Profile、每次显式变换和损失</td><td>指定输出确实由指定输入按记录步骤产生</td><td>解码文本或显示视图不是原始文件；变换成功不证明可逆或意义相同</td></tr>
-    <tr><td>确定性形成</td><td>解码输入、授权决定、配置、依赖、规范、Profile、格式和 Ktisor 版本的完整闭包</td><td>同一封闭输入产生同一规范结果；在精确格式域中逐字节相同</td><td>不得用隐式规范化构造“相同输入”，也不证明输入主张为真</td></tr>
-    <tr><td>显示与导出</td><td>输入对象、渲染器或导出器版本、选项、删减和显示环境</td><td>生成一份可追溯的派生视图</td><td>派生视图不能反向重建原始来源、签名、权限或全部制品字节</td></tr>
-    <tr><td>回转与迁移</td><td>源域、目标域、双向映射、保留属性、损失、版本和失败责任</td><td>已声明属性在已声明路径中保持</td><td>当前没有通用 round-trip 或跨 Profile 语义等价要求</td></tr>
-    <tr><td>独立复现</td><td>精确输入闭包、两个独立产出路径、工具与环境约束</td><td>两份输出逐字节相同或不同</td><td>字节相同不证明设计正确；字节不同也不能自行判断哪份正确</td></tr>
-  </tbody></table></div><p>分别报告 Endem 字节复现、工具二进制复现和发布签名真实性。至少使用两个工作目录和两个隔离环境；区域设置、时区、临时路径、归档顺序和时间戳不得污染结果。</p></section>
+  <section id="evidence-types" class="content-wide"><h2>证据不是一条从弱到强的阶梯</h2><p>证据类型回答不同问题。数量更多或成本更高的测试，不会自动覆盖另一种证据所处理的风险。</p><div class="table-wrap"><table><thead><tr><th>证据类型</th><th>它回答什么</th><th>不能替代什么</th></tr></thead><tbody>
+    <tr><td>示例与场景</td><td>候选含义和责任分工是否可以被具体输入说明</td><td>不能替代规范条款、反例或实现测试</td></tr>
+    <tr><td>回归测试</td><td>已知行为是否被当前变更破坏</td><td>不能发现所有未知输入，也不能证明安全不变量</td></tr>
+    <tr><td>性质、安全与对抗测试</td><td>不变量、资源边界和拒绝路径能否经受生成或恶意输入</td><td>不能证明两个独立实现采用同一解释</td></tr>
+    <tr><td>互操作与独立复现</td><td>固定格式、版本和配置后，独立路径是否产生一致解释或字节</td><td>不能证明规范目标正确、输入主张为真或系统安全</td></tr>
+    <tr><td>研究实验与运行监测</td><td>模型或系统在限定总体、协议和时间窗口中的表现及变化</td><td>不能替代格式符合性、动作授权或发布决定</td></tr>
+  </tbody></table></div><p>一项完整变更可以同时需要多种证据，但报告必须分别写出每种证据的对象、失败条件、未覆盖范围和结论上限。</p></section>
 
-  <section class="content-rows"><h2>双读取器契约</h2><ul>
-    <li>Ktisor 的形成侧解析器直接读取实际字节；全部检查通过后，只能在 Ktisor 内部保留绑定精确字节、规范/Profile、检查配置和已完成层次的引用。</li>
-    <li><code>endem theor</code> 使用不共享解析代码的独立 Theor，只输出有界视图、差异、引用、大小与跟踪信息。</li>
-    <li>两者对共享向量逐字段比较解释、上限和失败分类；查看器输出、符号列表或格式化文本永不回流制品形成与发布信任链。</li>
-    <li>差异必须被视为实现或规范缺陷，不能用“多数实现一致”掩盖。</li>
-  </ul></section>
+  <section id="model-evaluation" class="content-wide"><h2>模型评测、模型更新与上线监测分开</h2><p>三类活动分别测量能力、改变模型和观察真实运行。共用一组分数或日志会掩盖数据、身份、总体和决定权威的变化。</p><div class="table-wrap"><table><thead><tr><th>活动</th><th>必须固定</th><th>失败时停止的主张</th><th>研究入口</th></tr></thead><tbody>
+    <tr><td>模型或 Agent 评测</td><td>用途、目标总体、任务与采样、提示、模型身份、评分协议、基线和统计不确定性</td><td>基准分数不能外推为普遍能力、可靠性或发布资格</td><td><a href="https://doi.org/10.6028/NIST.AI.800-3">NIST AI 800-3</a>（2026 年 2 月发布）与 <a href="https://www.nist.gov/news-events/news/2026/01/towards-best-practices-automated-benchmark-evaluations">NIST AI 800-2 初始公开草案</a></td></tr>
+    <tr><td>训练与模型更新</td><td>数据和反馈资格、基础模型、处理与训练活动、随机状态、派生身份、复现和行为比较</td><td>训练完成、损失下降或固定种子不能证明改进、安全、可复现或获准发布</td><td><a href="https://doi.org/10.6028/NIST.SP.800-218A">NIST SP 800-218A</a>（最终版）与<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究提案</a></td></tr>
+    <tr><td>上线后的运行监测</td><td>部署版本、实际总体、时间窗口、漂移指标、事件、处置政策和观察缺口</td><td>离线基准不能覆盖环境变化、交互反馈和低频事故</td><td><a href="https://www.nist.gov/news-events/news/2026/03/new-report-challenges-monitoring-deployed-ai-systems">NIST 部署后 AI 监测研究</a></td></tr>
+    <tr><td>发布或接受决定</td><td>适用政策、证据范围、风险容限、具名决定者和决定时间</td><td>评测者、训练流水线或监测系统不能自行产生 <code>accepted</code></td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测与裁判边界研究提案</a></td></tr>
+  </tbody></table></div><p>两份 Noemion 提案当前均为非规范研究，不创建评测、裁判、训练或模型 CORE，也不证明训练平台、模型组件或运行监测系统已经存在。</p></section>
 
-  <section id="current-evidence" class="content-wide"><h2>当前验证材料能证明什么</h2><p class="callout"><strong>当前证据：</strong>现有材料可以比较草案对已登记输入的接受和拒绝结果。它们不能证明 Ktisor、Theor、Drasor、求值器或决定引擎已经存在。</p><div class="table-wrap"><table><thead><tr><th>材料</th><th>当前用途</th><th>不能据此声称</th></tr></thead><tbody>
-    <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读条款登记</a></td><td>连接规范版本、条款、威胁、验证方式和向量集合</td><td>登记本身不是执行结果或组件符合性声明</td></tr>
-    <tr><td>自然语言场景</td><td>检查支持案例、反例、歧义和责任遗漏</td><td>场景不是规范条款、解析能力或互操作证据</td></tr>
-    <tr><td>语义、专题与字节向量</td><td>固定当前草案的允许包络、确定拒绝和失败位置</td><td>向量通过不证明运行组件、安全隔离或稳定 ABI</td></tr>
-    <tr><td>资料一致性测试</td><td>执行登记矩阵，并核对条款、页面与向量的连接</td><td>这些测试不是实现级模糊测试、故障注入或跨平台复现</td></tr>
-    <tr><td>当前缺失证据</td><td>记录尚不能验证的层次</td><td>当前没有组件依赖树、可执行文件复现、签名或 SBOM 证据</td></tr>
-  </tbody></table></div><p>各向量集合的精确数量和执行结果以机器可读条款登记与对应测试输出为准，不在说明页重复容易漂移的计数。未来 Ktisor 与 Theor 必须分别接受同一组适用向量。</p></section>
+  <section class="content-wide"><h2>比较之前先固定比较域</h2><div class="table-wrap"><table><thead><tr><th>比较问题</th><th>可采用的工程纪律</th><th>结论边界</th></tr></thead><tbody>
+    <tr><td>程序的自测与安装后检查是否通过？</td><td><a href="https://www.gnu.org/prep/standards/html_node/Standard-Targets.html">GNU 标准目标</a>用 <code>check</code> 检查已构建但未安装的程序，用 <code>installcheck</code> 检查安装状态。</td><td>两类检查针对不同状态；通过不等于覆盖所有平台、输入和安全风险。</td></tr>
+    <tr><td>两份独立构建是否逐字节相同？</td><td><a href="https://guix.gnu.org/manual/en/html_node/Invoking-guix-challenge.html">GNU Guix challenge</a>比较独立来源的构建结果；<a href="https://www.gnu.org/software/diffutils/manual/html_node/Invoking-diff.html">GNU Diffutils</a>区分相同、不同和比较故障。</td><td>相同字节不证明设计正确；出现差异也不能自行选择可信一方。</td></tr>
+    <tr><td>规范形式是否保留所需信息？</td><td><a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD canonical form</a>提示显式处理源格式、目标格式和不可表示信息；<a href="https://www.rfc-editor.org/rfc/rfc8785.html">RFC 8785</a>为限定 JSON 输入域定义确定表示。</td><td>规范化或可哈希表示不证明来源、业务语义、权威或跨 Profile 等价。</td></tr>
+    <tr><td>形成结果能否独立复现？</td><td>固定解码输入、授权决定、配置、依赖、规范、Profile、工具版本和环境，再分开报告 Endem 字节、工具二进制与发布签名。</td><td>必须说明比较的是原始字节、规范对象还是派生视图；当前没有通用 round-trip 或跨 Profile 语义等价要求。</td></tr>
+  </tbody></table></div><p>这些外部机制只提供测试与比较纪律，不定义 Noemion 的字段、结果域、Profile 或实现状态。任何未执行的层次都必须明确标为尚未验证。</p></section>
 
-  <section class="content-wide"><h2>按失败责任选择证据</h2><p>验证计划不需要复制全部条款。先定位失败发生在哪一层，再选择能击穿该层错误假设的代表材料；完整范围仍由登记、场景和向量源维护。</p><div class="table-wrap"><table><thead><tr><th>责任层</th><th>代表性反例</th><th>必须观察</th><th>仍需分开的结果</th></tr></thead><tbody>
-    <tr><td>来源与意义</td><td>关系角色交换、极性翻转、未决候选被模型置信度覆盖，或把意义确认误写成动作权限</td><td>来源位置、已确认投影、精确语义授权绑定、剩余 <code>apor</code> 和稳定拒绝位置</td><td><code>aseme</code>、<code>apor</code>、观察不足 <code>agno</code> 与动作授权结果</td></tr>
-    <tr><td>组合与发布</td><td>引用错绑、循环、顺序依赖、权限并集、裁剪后继承来源签名</td><td>精确闭包、冲突、权限交集、保留关系、派生身份和签名请求响应</td><td>结构接受、Profile 接受、内容接受和发布决定</td></tr>
-    <tr><td>会话与证据</td><td>环境漂移、预算耗尽、取消竞态、孤儿副作用、覆盖缺口</td><td>实际字节重验、能力句柄、事件、观察范围、Iknem 限制和决定权威</td><td>会话终止、满足判断、证据有效性、覆盖度和最终决定</td></tr>
-    <tr><td>模型与协议</td><td>结构合法但事实错误、恶意工具说明、版本降级、状态伪造和相关模型投票</td><td>协议版本、来源映射、提示与模型身份、偏差探针、统计区间和人工校准</td><td>外部状态、模型候选、本地诊断、<code>met</code> 与 <code>accepted</code></td></tr>
-  </tbody></table></div></section>
-
-  <section id="model-evaluation" class="content-grid"><h2>模型参与时先分清评测与更新</h2>
-    <article class="status-item"><h3>模型参与评测</h3><p>模型评分是有版本、有偏差且可能漂移的候选测量。先固定构念、用途、总体、评分说明、题目与候选顺序、提示、模型版本、解析和决定者，再用位置、长度、格式、来源、提示注入、重复与时间漂移构成偏差探针。身份或协议不能固定、探针失败、人工校准不足或区间跨越阈值时，方法只保留在已证明范围，不能生成 <code>sufficient</code> 或 <code>accepted</code>。</p><p>完整案例见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测与裁判边界研究提案</a>。</p></article>
-    <article class="status-item"><h3>模型发生更新</h3><p>训练完成、损失下降、固定种子或部署回滚都不是模型更好、可复现、可发布或目标满足的证明。先分别固定数据与反馈资格、基础模型、处理与训练活动、随机状态、派生模型身份、独立复现、行为评测、发布权威和运行监测；任一层无法闭合时，只停止对应主张，不用流水线成功补齐。</p><p>完整边界见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究提案</a>。</p></article>
-    <p class="note">两份提案当前均为非规范研究，不创建评测、裁判、训练或模型 CORE，也不证明已经存在训练平台或模型组件。</p>
-  </section>
-
-  <section class="content-wide"><h2>外部机制怎样限定比较主张</h2><div class="table-wrap"><table><thead><tr><th>比较问题</th><th>可以采用的纪律</th><th>声明上限</th></tr></thead><tbody>
-    <tr><td>两份构建结果是否相同？</td><td><a href="https://guix.gnu.org/manual/en/guix.html#Invoking-guix-challenge">GNU Guix challenge</a>从独立来源取得结果；<a href="https://www.gnu.org/software/diffutils/manual/html_node/Invoking-diff.html">GNU Diffutils</a>分开相同、不同和比较故障。</td><td>相同字节不证明设计正确；差异也不选择可信一方。</td></tr>
-    <tr><td>规范形式是否保留所需信息？</td><td><a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD canonical form</a>要求披露源格式、目标格式和不可表示信息；<a href="https://www.rfc-editor.org/rfc/rfc8785.html">RFC 8785 JSON Canonicalization Scheme</a>限定输入域、数值、字符串和数组顺序。</td><td>canonical form 或可哈希 JSON 不证明来源、业务语义、权威或跨 Profile 等价。</td></tr>
-    <tr><td>模型输出与评测能支持什么？</td><td><a href="https://openai.com/index/introducing-structured-outputs-in-the-api/">OpenAI Structured Outputs</a>提供结构约束；<a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf">NIST AI 800-2 初稿</a>与 <a href="https://doi.org/10.6028/NIST.AI.800-3">NIST AI 800-3</a>分开目的、协议、统计假设和限定用途。</td><td>schema 合规只证明形状；基准、模型裁判与点估计不能成为普遍能力或发布决定。</td></tr>
-    <tr><td>训练环境和随机性是否足以复现？</td><td><a href="https://doi.org/10.6028/NIST.AI.600-1">NIST AI 600-1</a>、<a href="https://doi.org/10.6028/NIST.SP.800-218A">NIST SP 800-218A</a>与 <a href="https://guix.gnu.org/manual/en/guix.pdf">GNU Guix</a>追踪数据、派生物、流程和环境；<a href="https://www.gnu.org/software/coreutils/manual/html_node/Random-sources.html">Coreutils 随机来源</a>提醒开发者固定候选顺序的随机输入。</td><td>SBOM、provenance、相同环境、固定种子或训练成功不能自动证明权重复现、行为安全或发布获批。</td></tr>
-  </tbody></table></div><p>这些机制共同要求先声明比较域，再解释结果；不存在跨文本、对象、模型和版本的通用等价结论。</p></section>
-
-  <section id="evidence-levels" class="content-stack"><h2>证据强度决定声明上限</h2><ol>
-    <li><strong>示例：</strong>用输入、预期输出和非规范声明解释候选语义。</li>
-    <li><strong>回归：</strong>用固定语料、版本、断言和失败诊断说明已知行为没有被当前变更破坏。</li>
-    <li><strong>性质与安全：</strong>用属性测试、模糊测试、资源限制和对抗案例检查不变量与拒绝路径。</li>
-    <li><strong>互操作：</strong>用至少两个独立实现、共享向量和差异报告支持精确格式或配置主张。</li>
-    <li><strong>研究实验：</strong>用假设、基线、数据资格、消融、统计不确定性和失败分析说明模型或系统效果。</li>
-  </ol><p>较强证据可以包含较弱证据，但不会自动扩大对象、平台、版本、总体或决定权威。测试报告必须明确自己停在哪一级。</p></section>
-    </div>
-  </div>
   <div class="next-prev"><a href="implementation-roadmap.html">← 开发路线图</a><a href="../architecture/open-questions.html">开放问题 →</a></div>
 </main>

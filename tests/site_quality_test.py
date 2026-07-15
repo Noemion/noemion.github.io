@@ -3060,36 +3060,51 @@ def validate_jekyll_sources():
     verification_page = SOURCE_ROOT / "development" / "testing.html"
     verification_text = verification_page.read_text()
     for token in (
-        "形成、变换与复现必须分开",
-        "来源与文本变换",
-        "确定性形成",
-        "显示与导出",
-        "回转与迁移",
-        "独立复现",
+        "先限定主张，再选择证据",
+        "用一次协议映射变更走完整条证据链",
+        "变更类型决定证据组合",
+        "当前材料与未来证据分开",
+        "证据不是一条从弱到强的阶梯",
+        "证据类型回答不同问题",
+        "模型评测、模型更新与上线监测分开",
+        "模型或 Agent 评测",
+        "上线后的运行监测",
+        "发布或接受决定",
+        "当前尚未进入组件代码开发阶段",
+        "尚无 Ktisor、Theor、Drasor、求值器或决定引擎可供实现级测试",
         "当前没有通用 round-trip 或跨 Profile 语义等价要求",
         "GNU Guix challenge",
         "GNU BFD canonical form",
-        "RFC 8785 JSON Canonicalization Scheme",
-        "OpenAI Structured Outputs",
-        "schema 合规只证明形状",
-        "模型参与时先分清评测与更新",
-        "模型参与评测",
-        "模型评分是有版本、有偏差且可能漂移的候选测量",
-        "偏差探针",
+        "GNU 标准目标",
+        "RFC 8785",
         "model-assisted-evaluation-proposal.md",
-        "NIST AI 800-2 初稿",
+        "NIST AI 800-2 初始公开草案",
+        "NIST AI 800-3",
+        "NIST 部署后 AI 监测研究",
         "GNU Diffutils",
-        "模型发生更新",
-        "训练完成、损失下降、固定种子或部署回滚",
+        "训练完成、损失下降或固定种子",
         "model-training-and-update-boundaries-proposal.md",
-        "NIST AI 600-1",
         "NIST SP 800-218A",
-        "GNU Guix",
-        "外部机制怎样限定比较主张",
-        "证据强度决定声明上限",
     ):
         if token not in verification_text:
             errors.append(f"testing guide missing bounded verification claim: {token}")
+    for obsolete_claim in (
+        "<h2>先把变更写成可验证主张</h2>",
+        "<h2>解析与资源安全</h2>",
+        "<h2>形成、变换与复现必须分开</h2>",
+        "<h2>双读取器契约</h2>",
+        "<h2>当前验证材料能证明什么</h2>",
+        "<h2>按失败责任选择证据</h2>",
+        "<h2>模型参与时先分清评测与更新</h2>",
+        "<h2>外部机制怎样限定比较主张</h2>",
+        "<h2>证据强度决定声明上限</h2>",
+        "较强证据可以包含较弱证据",
+    ):
+        if obsolete_claim in verification_text:
+            errors.append(
+                "testing guide retains an obsolete evidence hierarchy or duplicated section: "
+                + obsolete_claim
+            )
     forbidden_round_trip_claims = {
         SOURCE_ROOT / "development" / "testing.html": (
             "规范文本 → Endem → 规范文本往返保持规范化等价",
@@ -3146,12 +3161,12 @@ def validate_jekyll_sources():
         "A2A Task 的 <code>completed</code>",
         "一个会被反例推翻的句子",
         "资料与已登记案例保持结果域分离",
-        "先把变更写成可验证主张",
-        "当前最多能声称",
-        "Chrome 阅读检查",
-        "外部成功不等于本地满足或接受",
-        "各向量集合的精确数量和执行结果以机器可读条款登记与对应测试输出为准",
-        "不在说明页重复容易漂移的计数",
+        "先限定主张，再选择证据",
+        "结论上限",
+        "真实浏览器的多视口与交互检查",
+        "远端协议状态提升为本地满足判断",
+        "各向量集合的数量和执行结果以机器可读登记与对应测试输出为准",
+        "不在说明页复制容易漂移的计数",
     ):
         if token not in verification_text:
             errors.append(f"testing guide missing change-to-evidence boundary: {token}")
@@ -4666,12 +4681,6 @@ def validate_jekyll_sources():
             'href="#current-decisions"',
             'href="#adoption-boundaries"',
             'href="#change-rules"',
-        ),
-        "development/testing.html": (
-            'aria-label="验证阅读概览"',
-            'href="#current-evidence"',
-            'href="#model-evaluation"',
-            'href="#evidence-levels"',
         ),
     }
     for route, page_tokens in summary_rail_pages.items():

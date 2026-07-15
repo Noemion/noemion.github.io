@@ -686,6 +686,16 @@ GNU Coreutils `timeout`、Make job slots 与 Guix 容器环境只保留为终止
 
 本轮只重构公开解释、页面质量契约和审计记录。END-CORE、END-P1、ID-CORE、AUT-CORE、DRO-CORE、IKN-CORE、ADR、登记、向量、形成状态和结果域均未改变，也没有创建发布 Profile、裁剪命令、伴随资料格式、签名系统、授权服务、装载器、会话构造器、证据记录器或组件实现。
 
+## 测试证据类型与开发者验证路径二次复核 · 2026-07-16
+
+前次复核把示例、回归、性质与安全、互操作和研究实验排列成从弱到强的渐进序列。这种表达虽然试图限制声明，却把回答不同问题的证据误写成可相互包含的等级：互操作不能覆盖安全性质，研究实验不能覆盖格式符合性，更多回归案例也不能替代畸形输入和资源边界。页面其余章节又按主张、解析、形成、读取器、当前材料、失败责任、模型和外部机制重复同一批验证要求，开发者仍需跨十个章节恢复一次变更的完整论证。
+
+当前页面改为先限定主张，再由变更对象选择证据组合。一次 A2A 状态映射贯穿主张、权威、反例、证据和声明范围；公开资料、语义、格式、确定性形成、运行适配与模型研究分别说明必须回答的问题和结论上限。当前规范资料、登记、场景、向量、构建与浏览器检查同未来组件的读取器、模糊测试、故障注入、复现和发布证据明确分开。页面收敛为六个章节、六张表和二十九行表体；没有通用证据等级，也不再暗示高成本测试能够替代正确的证据类型。
+
+外部资料按其实际问题重新定位：[GNU 标准目标](https://www.gnu.org/prep/standards/html_node/Standard-Targets.html)把构建后自测与安装后检查分开；[GNU Guix challenge](https://guix.gnu.org/manual/en/html_node/Invoking-guix-challenge.html)比较独立构建结果，但不判断哪份结果正确；[GNU Diffutils](https://www.gnu.org/software/diffutils/manual/html_node/Invoking-diff.html)区分相同、不同和比较故障。[NIST AI 800-3](https://doi.org/10.6028/NIST.AI.800-3)要求明确评测目标、总体、假设与不确定性；NIST AI 800-2 截至复核日仍是自动基准评测的初始公开草案；[NIST SP 800-218A](https://doi.org/10.6028/NIST.SP.800-218A)是生成式 AI 与双用途基础模型开发的最终版安全开发实践；[NIST 部署后 AI 监测研究](https://www.nist.gov/news-events/news/2026/03/new-report-challenges-monitoring-deployed-ai-systems)则处理真实环境变化。它们分别支持测试状态、构建比较、模型评测、开发生命周期与上线监测，不定义 Noemion 条款或组件符合性。
+
+本轮只重构公开测试指南、质量契约和审计记录。规范、Profile、登记、向量、字段、命令和组件状态均未改变，也没有创建测试框架、读取器、运行器、适配器、模型平台或监测系统。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。
