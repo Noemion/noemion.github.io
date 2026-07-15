@@ -3169,7 +3169,7 @@ def validate_jekyll_sources():
         for token in (
             'title: "Noemion · 让每个人编译自己的意图"',
             '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>人工智能时代</span><span class="portal-title-foundation">每个人都应该能编译自己的意图</span></strong></h1>',
-            '<p class="portal-introduction-summary">过去，软件把程序员编写的代码交给机器。Noemion 研究一种新的软件边界：让每个人都能把自己的自然语言目标形成供人工智能系统使用、可以长期保存和独立检查的制品。这不是自然语言生成代码；当前也没有可用编译器或组件。</p>',
+            '<p class="portal-introduction-summary">Noemion 正在研究如何让每个人用自然语言告诉 AI 自己想要什么，并把这些话变成 AI 能使用、却不能悄悄改写的明确目标。只要内容发生变化，系统就能发现。</p>',
             '<span>从开发者案例开始</span>',
             '<span>查看 Endem 生命周期</span>',
             '<strong>Noemion</strong> 是项目与研究领域的名称',
@@ -4453,7 +4453,7 @@ def main():
             "每个人都应该能编译自己的意图",
             "提出目标的人应当能够检查自己的表达怎样被解释",
             "这里的“编译”不是自然语言生成代码",
-            "没有可用编译器或组件",
+            "没有可执行组件或安装包",
             "计划中的公开命令入口只有",
             "当前还没有可执行程序",
         ),
