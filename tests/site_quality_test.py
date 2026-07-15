@@ -133,7 +133,7 @@ DOC_GUIDE_HEADINGS = {
         "证据记录", "人工智能只做辅助探针", "当前状态",
     ],
     "docs/architecture-guide.html": [
-        "最小系统图", "用一次 Agent 工作读图", "看到终态后按主张强度继续核对", "委托另一个 Agent 时保留身份与上限", "跨会话继续时先分清保存对象", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
+        "先用一张责任图定位问题", "用一次 Agent 工作读图", "看到终态后按主张强度继续核对", "委托或恢复时重新建立边界", "三个实现域不能合并", "按问题进入进阶资料", "当前可以证明什么",
     ],
     "docs/development-guide.html": [
         "先定义变更主张", "当前范围", "规范与 ADR 先行", "变更工作流", "把外部资料送进模型前保留来源与职责", "建议仓库边界", "审查清单", "模型与协议",
@@ -5157,6 +5157,20 @@ def main():
     ):
         if token not in architecture_guide_text:
             errors.append(f"architecture guide missing developer walkthrough: {token}")
+    for obsolete_heading in (
+        "## 最小系统图",
+        "## 委托另一个 Agent 时保留身份与上限",
+        "## 跨会话继续时先分清保存对象",
+        "## 形成与语义确认",
+        "## 组合与发布",
+        "## 装载与运行",
+        "## 信任不是单一分数",
+    ):
+        if obsolete_heading in architecture_guide_text:
+            errors.append(
+                "architecture guide retains a duplicated implementation or research section: "
+                + obsolete_heading
+            )
     specifications_reference_text = (
         SOURCE_ROOT / "docs" / "specifications-reference.md"
     ).read_text()
