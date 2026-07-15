@@ -696,6 +696,16 @@ GNU Coreutils `timeout`、Make job slots 与 Guix 容器环境只保留为终止
 
 本轮只重构公开测试指南、质量契约和审计记录。规范、Profile、登记、向量、字段、命令和组件状态均未改变，也没有创建测试框架、读取器、运行器、适配器、模型平台或监测系统。
 
+## Agent 系统边界开发者路径二次复核 · 2026-07-16
+
+第一次学习路径修订已经从一次调用提出六个问题，但页面随后又分别展开责任路径、八类运行事实、六类越级、行业变化、GNU 先例、研究路由和最终评审步骤。同一项依赖升级需要在九个章节之间往返，现行规范责任、外部机制快照和非规范研究也处在同一披露层级。页面因此成为核心入口中正文最长的一页，开发者容易把“了解全部相邻主题”误认为完成一次普通调用的前置条件。
+
+当前页面直接从依赖升级开始，按目标内容、行动者与授权、会话上限、外部调用、观察与证据、满足判断和最终决定推进。六类开发者问题只负责把事实送回 END、SYN、DRO、IKN、DIA、ADP、ID、TEXT-IDENTIFIER 与 AUT；越级表则只在状态跨越责任域时帮助定位缺失事实。外部趋势、GNU 先例与十五项研究提案分别进入后续三层，普通调用不再先穿过完整研究库存。正文从 6,574 个可见字符收敛为 4,501 个，章节从九个减为六个；六张表的三十三行各自承担调用顺序、责任归属、越级诊断、外部变化、GNU 约束或研究路由，不再复制同一状态清单。
+
+外部状态按复核日重新确认：[OpenAI Agents SDK 编排说明](https://developers.openai.com/api/docs/guides/agents/orchestration)继续分开 handoff 与由管理者调用受限 Agent 工具，[人工参与机制](https://openai.github.io/openai-agents-python/human_in_the_loop/)处理工具审批前的暂停和恢复；这些机制不自行提供逐动作授权。[MCP 版本说明](https://modelcontextprotocol.io/docs/learn/versioning)仍把 2025-11-25 标为 Current，[2026-07-28 候选版](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/)仍计划于 7 月 28 日定稿并包含破坏性变化；[A2A 1.0.0](https://a2a-protocol.org/v1.0.0/specification/)仍是最新发布规范。[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)继续把产业标准、开放协议、身份和安全评测分开；[NIST AI 800-5](https://www.nist.gov/publications/summary-analysis-responses-request-information-regarding-security-considerations-ai)是安全征询意见的汇总，不是 Agent 实现标准。
+
+GNU Make 的 target、prerequisite、recipe、并行配额和中断状态，Guix 的环境与代际恢复，以及 Diffutils、Coreutils 和 GNU 软件自由资料继续只作为目标/步骤、预算/授权、环境/权限、比较/决定与软件权利/服务控制的反例来源。它们不定义 Noemion 字段、结果域或实现。此次修订没有改变 ADR、CORE、Profile、登记、向量、名称或读音结论，也没有创建 Agent 对象、控制平面、适配器、隔离机制、存储或运行组件。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。

@@ -4,136 +4,104 @@ title: "Agent 系统边界图 · Noemion"
 page_role: "content"
 footer_text: "Noemion · Agent 系统边界图"
 permalink: "/architecture/agent-system-boundaries.html"
-summary: "用一次工具调用说明目标、行动者、授权、会话、外部状态、证据与最终决定为什么必须分别判断。"
+summary: "沿一次工具调用分开目标、行动者、授权、会话、外部事实、证据与最终决定。"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>Agent 系统边界图</span></nav>
-  <header class="content-introduction"><h1>Agent 系统边界图</h1><p>从一次工具调用出发，分开目标、行动者、授权、会话、外部状态、证据与最终决定。</p><p>开发者可以据此判断一个框架事件应进入哪个责任域，以及还缺少哪项证据。</p><div class="badges"><span class="badge">非规范说明</span><span class="badge">不增加对象</span><span class="badge">尚无运行组件</span><span class="badge">复核于 2026-07-15</span></div></header>
+  <header class="content-introduction"><h1>Agent 系统边界图</h1><p>一次 Agent 调用会同时产生目标、身份、授权、会话、协议状态、观察和决定。开发者必须分别保存这些事实，不能用一个“成功”状态概括整条责任链。</p><div class="badges"><span class="badge">非规范说明</span><span class="badge">开发者路径</span><span class="badge">尚无运行组件</span><span class="badge">复核于 2026-07-16</span></div></header>
 
-  <section class="content-stack">
-    <h2>先按一次调用分开判断</h2>
-    <p class="lead">Agent 框架会报告模型生成、工具调用、委托、暂停和恢复等事件。Noemion 不把它们压成一个“成功”状态。开发者先回答下面六个问题，再决定事件应进入哪个责任域。</p>
-    <div class="table-wrap"><table><thead><tr><th>开发者问题</th><th>责任域</th><th>需要保留的事实</th></tr></thead><tbody>
-      <tr><td>期望终态是什么？</td><td>Endem / Synem</td><td>目标身份、依赖闭包、判据和仍未解决的意义；计划与步骤留在控制平面。</td></tr>
-      <tr><td>目标只要求当前结果，还是要求动作、转变或因果？</td><td>END / IKN</td><td>结果型目标只判断后态；更强主张还要保存动作、同一对象的前后态、竞争活动、方法与限制。</td></tr>
-      <tr><td>谁代表谁执行什么动作？</td><td>ID / AUT</td><td>模型、Agent 定义、工作负载、运行实例、实际行动者、被代表主体、对象、动作、目的和截止点。</td></tr>
-      <tr><td>本次运行最多能做什么？</td><td>DRO / ADP</td><td>已核对的协议、对端、环境、能力交集、预算、凭据域和证据责任；能力声明只作为输入。</td></tr>
-      <tr><td>外部系统实际报告了什么？</td><td>ADP / DIA</td><td>精确调用、Task 状态、返回、错误、取消、交付和已知副作用，不提前改写本地结果。</td></tr>
-      <tr><td>什么证据支持哪项结论？</td><td>IKN / END / AUT</td><td>观察范围、方法、限制、满足判断和具名权威决定；每项结论保留自己的输入。</td></tr>
+  <section class="content-wide">
+    <h2>用一次依赖升级完成边界判断</h2>
+    <p>假设一个 Agent 要把仓库依赖升级到经过允许的新版本。目标是兼容且可验证的仓库状态，编辑文件、调用包管理器和运行测试只是实现路径。开发者按下面的顺序记录一次调用，任何一步缺失都只停止对应结论。</p>
+    <div class="flow"><div class="step">目标内容</div><div class="step">行动者与授权</div><div class="step">会话上限</div><div class="step">外部调用</div><div class="step">观察与证据</div><div class="step">满足判断</div><div class="step">最终决定</div></div>
+    <div class="table-wrap"><table><thead><tr><th>阶段</th><th>本例需要固定什么</th><th>失败时怎样处理</th></tr></thead><tbody>
+      <tr><td>1. 目标内容（Endem / Synem）</td><td>期望版本、兼容条件、验证判据、依赖闭包和仍未解决的意义</td><td>目标含义未确认时停止形成；计划和可变步骤不进入目标身份</td></tr>
+      <tr><td>2. 行动者与授权（ID / AUT）</td><td>请求主体、实际行动者、被代表主体、仓库、分支、依赖、允许版本、目的和截止点</td><td>登录、Agent 名称、工具清单或 scope 不能补齐逐动作授权</td></tr>
+      <tr><td>3. 会话上限（DRO）</td><td>实际目标制品、政策、环境、文件、网络目标、工具、能力交集、预算和证据责任</td><td>环境或授权实质变化时开始新会话；后来发现的能力不扩写旧 Dromen</td></tr>
+      <tr><td>4. 外部调用（ADP / DIA）</td><td>协议与对端版本、包管理器请求、退出码、远端 Task、错误、取消、重试和已知副作用</td><td>保留外部状态和未知副作用；退出码为零或 Task 完成只说明该次外部调用</td></tr>
+      <tr><td>5. 观察与证据（phain / Iknem）</td><td>锁文件差异、构建结果、测试范围、来源限制、方法、环境和未观察区域</td><td>证据只支持声明范围；日志数量、Span Ok 或模型评分不能补齐覆盖缺口</td></tr>
+      <tr><td>6. 满足判断（krin）</td><td>精确目标、适用观察、判据和四值结果</td><td>外部成功不直接成为 <code>met</code>，观察不足继续保留为 <code>agno</code></td></tr>
+      <tr><td>7. 最终决定（具名权威）</td><td>适用政策、证据范围、风险容限、决定者和决定时间</td><td>评测者、协议对端、工具或模型都不能自行产生 <code>accepted</code></td></tr>
     </tbody></table></div>
-    <p>模型身份不等于实际行动者，认证也不等于逐动作授权。模型输出是候选，不是规范内容。工具成功或远端 Task 完成，也不证明目标满足。</p>
-    <p class="note">这份说明不增加 ADR、CORE、Profile、对象、命令或组件。现行要求仍以对应 ADR、CORE 和登记为准；相邻主题只作为正在研究的输入。</p>
+    <p>并行尝试多个版本时，各分支只产生候选。提交路径仍要重新核对当前分支、授权、预算和副作用；取消慢分支不证明远端工作已经回滚。</p>
   </section>
 
-  <section class="content-stack">
-    <h2>用依赖升级看清边界</h2>
-    <p>假设一个 Agent 要把仓库依赖升级到经过允许的新版本。这个例子不需要新的 Noemion 对象，却能展示每一层怎样提供不同答案。</p>
+  <section class="content-wide">
+    <h2>六类问题由不同责任域回答</h2>
+    <p>开发者不需要为每个 SDK 名词建立新对象。先问事实回答什么，再把它交给现行责任域。</p>
+    <div class="table-wrap"><table><thead><tr><th>开发者问题</th><th>现行责任域</th><th>需要保留的事实</th><th>结论边界</th></tr></thead><tbody>
+      <tr><td>期望终态是什么？</td><td>END / SYN</td><td>目标身份、依赖闭包、方向、判据和待确认意义</td><td>目标不保存工作流、提示词或执行计划</td></tr>
+      <tr><td>目标只要求结果，还是还要求动作、转变或因果？</td><td>END / IKN</td><td>结果型目标只判断后态；更强主张还要绑定动作、同一对象的前后态、竞争活动、方法和限制</td><td>时间先后与单一轨迹不自动形成因果结论</td></tr>
+      <tr><td>谁代表谁执行什么动作？</td><td>ID / AUT</td><td>模型、Agent 定义、工作负载、运行实例、实际行动者、被代表主体、对象、动作和目的</td><td>名称、认证、签名和能力声明只是授权输入</td></tr>
+      <tr><td>本次运行最多能做什么？</td><td>DRO / ADP</td><td>协议、对端、环境、能力交集、预算、凭据域和证据责任</td><td>发现、协商与可调用性不扩大已封闭会话</td></tr>
+      <tr><td>外部系统实际报告了什么？</td><td>ADP / DIA</td><td>精确调用、Task、Message、Artifact、返回、错误、取消、交付和副作用</td><td>外部状态保持在外部域，不提前改写本地结果</td></tr>
+      <tr><td>什么证据支持哪项结论？</td><td>IKN / END / AUT</td><td>观察范围、方法、限制、有效性、覆盖度、满足判断和具名决定</td><td>证据记录、满足判断与最终决定分别保留输入和权威</td></tr>
+    </tbody></table></div>
+    <p class="note">当前策略由 END、SYN、DRO、IKN、DIA、ADP、ID、TEXT-IDENTIFIER 与 AUT 分担这些责任。控制平面、适配器、存储、隔离和运行组件尚未实现。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>先识别越级，再定位缺失事实</h2>
+    <div class="table-wrap"><table><thead><tr><th>越级路径</th><th>常见输入</th><th>应当补查什么</th></tr></thead><tbody>
+      <tr><td>候选上下文取得指令权</td><td>检索片段、网页、工具返回、历史对话或模型摘要进入上下文后被当作命令</td><td>来源、文本变换、目标意义确认、动作授权和实际模型输入</td></tr>
+      <tr><td>显示名称或能力声明替代授权</td><td>Agent 名称、Agent Card、工具列表、schema、scope、签名或工作负载身份</td><td>实际行动者、代表关系、精确对象、动作、目的、期限和决定权威</td></tr>
+      <tr><td>运行状态替代目标判断</td><td>HTTP 成功、handoff、MCP/A2A Task 完成、退出码为零或 SDK completed</td><td>状态来源、映射损失、适用观察、目标判据和本地结果域</td></tr>
+      <tr><td>记忆、检查点或轨迹替代当前事实</td><td>过期指导、恢复句柄、工作区快照、Span Ok 或日志数量</td><td>当前政策、重新准入、能力有效性、历史完整性、因果方法和覆盖缺口</td></tr>
+      <tr><td>隔离机制名称替代有效限制</td><td>容器、沙箱、seccomp、超时或“本地运行”标签</td><td>文件、网络、秘密、资源、终止、子进程、远端效果和信息流的实际覆盖</td></tr>
+      <tr><td>单项信号替代完整结论</td><td>模型评分、训练损失、开放权重、AGPL、导出成功或删除收据</td><td>评测总体、数据资格、对象范围、实例控制、数据路径、备份和派生物</td></tr>
+    </tbody></table></div>
+    <p>无法取得某项事实时，记录未知范围并停止依赖它的结论。产品名称、协议状态和机制标签不能替开发者推定缺失信息。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部生态改变输入，不改变责任</h2>
+    <p>截至 2026-07-16，Agent 框架和协议继续把委托、审批、状态、任务、身份和观察显式化。这些机制提高了可追踪性，但不会自动取得 Noemion 中的语义、授权或决定权威。</p>
+    <div class="table-wrap"><table><thead><tr><th>外部变化</th><th>官方资料说明什么</th><th>Noemion 怎样接入</th></tr></thead><tbody>
+      <tr><td>控制权转移与人工批准</td><td><a href="https://developers.openai.com/api/docs/guides/agents/orchestration">OpenAI Agents SDK 编排说明</a>分开 handoff 和由管理者把 Agent 作为工具调用；<a href="https://openai.github.io/openai-agents-python/human_in_the_loop/">人工参与机制</a>允许在工具审批前暂停并恢复运行。</td><td>答复所有权、运行暂停和动作授权分别记录；批准必须绑定安全显示后的精确请求。</td></tr>
+      <tr><td>会话、记忆与轨迹</td><td><a href="https://developers.openai.com/api/docs/guides/agents/running-agents#choose-one-conversation-strategy">Agents SDK 会话策略</a>、<a href="https://developers.openai.com/api/docs/guides/agents/sandboxes#persist-memory-across-runs">跨运行记忆</a>和<a href="https://openai.github.io/openai-agents-python/tracing/">运行轨迹</a>分别保存不同状态。</td><td>每类状态绑定身份、期限和来源；记忆与快照不恢复旧 Dromen，trace 只作为有范围观察。</td></tr>
+      <tr><td>协议任务与动态能力</td><td><a href="https://modelcontextprotocol.io/docs/learn/versioning">MCP 版本说明</a>仍把 2025-11-25 标为 Current；<a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">2026-07-28 候选版</a>含破坏性变化且计划于 7 月 28 日定稿。<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0.0</a>仍是最新发布规范。</td><td>适配 Profile 固定正式版本、绑定和对端。能力声明只参与交集；Task、Message 和 Artifact 保持外部身份。</td></tr>
+      <tr><td>Agent 身份、安全与互操作研究</td><td><a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent Standards Initiative</a>分别推进产业标准、开放协议、身份和安全评测；<a href="https://www.nist.gov/publications/summary-analysis-responses-request-information-regarding-security-considerations-ai">NIST AI 800-5</a>汇总 Agent 安全征询意见，不是实现规范。</td><td>身份、授权、协议符合性和安全证据继续分开；研究共识不能替代项目条款或组件测试。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>GNU 先例只提供工程约束</h2>
+    <div class="table-wrap"><table><thead><tr><th>工程问题</th><th>GNU 先例</th><th>使用上限</th></tr></thead><tbody>
+      <tr><td>目标、依赖、步骤和预检怎样分开？</td><td><a href="https://www.gnu.org/software/make/manual/html_node/Rule-Syntax.html">Make target、prerequisite 与 recipe</a>，以及<a href="https://www.gnu.org/software/make/manual/html_node/Instead-of-Execution.html">dry-run</a>和<a href="https://www.gnu.org/software/autoconf/manual/autoconf.html">Autoconf 特性检查</a></td><td>目标不保存可变步骤，外部工具在使用前核对特性；文件时间、预览和配置探测不定义 Endem 或授权。</td></tr>
+      <tr><td>并行、中断和有限预算怎样处理？</td><td><a href="https://www.gnu.org/software/make/manual/html_node/Parallel.html">Make 并行与 jobserver</a>、<a href="https://www.gnu.org/software/make/manual/html_node/Errors.html">错误处理</a>和<a href="https://www.gnu.org/software/make/manual/html_node/Interrupts.html">中断处理</a></td><td>嵌套工作共享有限配额，中断后的目标按可能不完整处理；job slot 不是授权，取消也不是副作用回滚。</td></tr>
+      <tr><td>环境、版本和恢复对象怎样具名？</td><td><a href="https://guix.gnu.org/manual/en/html_node/Invoking-guix-package.html">Guix profile generations</a>、<a href="https://guix.gnu.org/manual/devel/en/guix.pdf">Guix shell、channel、manifest 与 time-machine</a></td><td>软件闭包和恢复目标可以复核；配置回滚不恢复凭据、外部状态或旧 Dromen，相同环境也不证明模型行为等价。</td></tr>
+      <tr><td>差异、随机性和终止怎样观察？</td><td><a href="https://www.gnu.org/software/diffutils/manual/html_node/Invoking-diff.html">GNU Diffutils</a>、<a href="https://www.gnu.org/software/coreutils/manual/html_node/Random-sources.html">随机来源</a>、<a href="https://www.gnu.org/software/coreutils/manual/html_node/sort-invocation.html">sort</a>与<a href="https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html">Coreutils timeout</a></td><td>分别保留相同、不同、比较故障、随机输入和终止结果；固定种子或主进程退出不能选择正确结果。</td></tr>
+      <tr><td>软件自由、服务控制和数据清除怎样分开？</td><td><a href="https://www.gnu.org/philosophy/free-sw.en.html">GNU 自由软件定义</a>、<a href="https://www.gnu.org/philosophy/who-does-that-server-really-serve.html">服务替代用户计算的分析</a>、<a href="https://www.gnu.org/licenses/why-affero-gpl.html.en">AGPL 边界</a>与<a href="https://www.gnu.org/software/coreutils/manual/html_node/shred-invocation.html">Coreutils <code>shred</code></a></td><td>逐对象检查权利、执行者、实例控制、数据路径和存储介质；源码、许可或清除命令都不能概括整个托管系统。</td></tr>
+    </tbody></table></div>
+    <p class="note">这些资料帮助构造工程反例，不定义 Noemion 字段、结果域、协议 Profile 或伦理结论。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2 id="research-map">遇到更强问题时再进入研究</h2>
+    <p>现行责任足以处理一次普通工具调用。只有问题要求更强主张时，才进入对应非规范提案。</p>
+    <div class="table-wrap"><table><thead><tr><th>更强问题</th><th>继续阅读</th><th>当前停止条件</th></tr></thead><tbody>
+      <tr><td>哪些来源进入模型，目标与计划怎样分开，迁移后是否仍是同一语义？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">模型上下文装配</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/planning-and-replanning-proposal.md">目标、计划与重规划</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">语义等价与迁移</a></td><td>候选输入、计划和等价主张继续由现有文本、身份、目标、会话与证据责任处理。</td></tr>
+      <tr><td>谁在行动、当前能做什么、并行分支怎样提交、隔离失效时谁负责？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/capability-discovery-and-negotiation-proposal.md">能力发现、协商与调用</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-identity-and-accountability-boundaries-proposal.md">软件 Agent 身份与责任链</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/parallel-and-speculative-execution-proposal.md">并行与推测执行</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">模型、适配器与能力域隔离</a></td><td>能力、身份、授权、会话和协议保持分开，不创建通用 Agent 权限对象。</td></tr>
+      <tr><td>动作是否发生、预览是否可信、恢复了什么、模型评审能支持什么？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">状态变化与因果归因</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/preview-simulation-and-approval-proposal.md">预览、模拟与批准</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/memory-checkpoint-and-resumption-proposal.md">记忆、检查点与恢复</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测</a></td><td>动作、后态、因果、恢复状态、候选测量和最终决定分别保留证据。</td></tr>
+      <tr><td>反馈能否训练，更新后的模型怎样发布，数据何时真正删除？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">数据使用、保留与删除边界</a></td><td>反馈、用途授权、模型派生、评测、发布、保留和清除不压成一条状态线。</td></tr>
+      <tr><td>模型开放到什么程度，用户能否控制实际服务与数据路径？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-openness-and-software-freedom-boundaries-proposal.md">模型开放性与软件自由边界</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/hosted-ai-service-and-user-control-boundaries-proposal.md">托管人工智能服务与用户控制边界</a></td><td>对象权利、复现范围、实例控制、数据路径和退出能力分别陈述。</td></tr>
+    </tbody></table></div>
+    <h3>完成一次边界评审</h3>
     <ol>
-      <li><strong>目标：</strong>Endem 描述期望版本、兼容条件和验证判据；它不保存“编辑文件、安装依赖、运行测试”等可变步骤。</li>
-      <li><strong>行动者与授权：</strong>AUT 绑定当前仓库、分支、依赖、允许的版本范围、实际行动者和截止点。登录成功或 Agent 名称不能代替这项决定。</li>
-      <li><strong>会话上限：</strong>Dromen 只允许本次会话使用已经核对的文件、网络目标、工具和预算。工具列表后来新增的能力不进入旧会话。</li>
-      <li><strong>外部事实：</strong>包管理器退出码、远端 Task 状态和生成的锁文件分别记录。退出码为零只说明该次调用怎样结束。</li>
-      <li><strong>证据与决定：</strong>锁文件差异、构建结果、测试覆盖和来源限制进入有范围的 Iknem；<code>krin</code> 形成满足判断，具名权威再决定是否接受。</li>
+      <li>写下期望终态，并说明是否还要求动作、状态转变或因果。</li>
+      <li>固定请求主体、实际行动者、被代表主体、对象、动作、目的和截止点。</li>
+      <li>封闭会话的环境、能力交集、预算、凭据域和证据责任。</li>
+      <li>保留工具、handoff、Task、取消、重试、交付和副作用的外部身份。</li>
+      <li>让证据只支持声明范围，再分别形成满足结果与最终决定。</li>
+      <li>看不见的事实记录为未知，不用机制名称或产品声明补齐。</li>
     </ol>
-    <p>如果并行尝试多个版本，分支只产生候选。提交路径仍要重新核对当前分支、授权、预算与外部副作用；取消慢分支也不证明它没有留下远端状态。</p>
-  </section>
-
-  <section class="content-stack">
-    <h2>先建立从请求到决定的责任路径</h2>
-    <div class="flow"><div class="step">来源与候选上下文</div><div class="step">Endem / Synem 目标</div><div class="step">显示与授权</div><div class="step">Dromen 会话上限</div><div class="step">模型 / 工具 / handoff / Task</div><div class="step">phain / Iknem</div><div class="step">krin 满足判断</div><div class="step">具名权威决定</div></div>
-    <p>来源、检索结果、对话和模型摘要先作为有来源的候选输入。只有确定性形成过程与具名语义权威可以形成符合现行 Profile 的 Endem 或 Synem。</p>
-    <p>Drasor 重新核对实际制品、政策、环境、能力、预算和证据责任，再建立只属于一次 Drase 会话的 Dromen。handoff 或外部 Task 只能在这个上限内推进工作。</p>
-    <p>实际观察形成 <code>phain</code>，有范围记录可以进入 Iknem。<code>krin</code> 比较目标与适用观察，具名权威最后形成 <code>accepted / rejected / deferred</code>。</p>
-    <ul>
-      <li><strong>当前策略：</strong>END、SYN、DRO、IKN、DIA、ADP、ID、TEXT-IDENTIFIER 与 AUT 已分别承担目标、会话、证据、诊断、协议、身份、文本和授权责任。</li>
-      <li><strong>正在研究：</strong>身份、上下文、计划、并行、隔离、因果、恢复、评测、训练、开放性、服务控制和数据生命周期仍是非规范研究。</li>
-      <li><strong>未来实现：</strong>控制平面、适配器、存储和隔离机制尚未实现；SDK 事件、协议对象和资料向量都不是组件证据。</li>
-    </ul>
-  </section>
-
-  <section class="content-wide">
-    <h2>运行事实先按责任归类</h2>
-    <p>开发者不需要为每个 SDK 名词建立新对象。先按事实的职责归类，再检查它能支持什么结论。</p>
-    <div class="table-wrap"><table><thead><tr><th>事实类别</th><th>主责任</th><th>可以支持</th><th>不能自动推出</th></tr></thead><tbody>
-      <tr><td>来源、检索、模型输入、模型输出、目标与计划</td><td>TEXT-IDENTIFIER、END、SYN、DRO</td><td>有来源的候选上下文、目标和会话内步骤</td><td>外部数据取得指令权；计划完成成为 <code>met</code></td></tr>
-      <tr><td>模型身份、Agent 定义、工作负载身份、运行实例、凭据、委托与能力声明</td><td>ID、AUT、DRO、ADP</td><td>定位参与者、代表关系和当前能力输入</td><td>同名即同一行动者；认证或工具列表直接授权、扩写旧 Dromen</td></tr>
-      <tr><td>工具调用、handoff、MCP 或 A2A Task、外部副作用、取消与重试</td><td>DRO、ADP、DIA、AUT</td><td>外部调用、协议状态、错误、交付和已知副作用</td><td>Task 完成成为目标满足或最终接受；取消等于回滚</td></tr>
-      <tr><td>动作事件、前后态与因果主张，trace、span、日志、<code>phain</code> 与 Iknem</td><td>DIA、IKN、END、AUT</td><td>有范围的运行观察、状态变化和有限因果评估</td><td>时间先后、Span Ok、日志数量或模型评分自动成为充分证据与责任结论</td></tr>
-      <tr><td>对话历史、摘要、缓存、跨运行记忆、检查点和工作区快照</td><td>TEXT-IDENTIFIER、ID、DRO、AUT、ADP</td><td>新会话重新核对时的候选输入和派生关系</td><td>恢复旧 Dromen、秘密、能力、消费次数、完整历史或持续权限</td></tr>
-      <tr><td>训练数据、反馈、基础模型、派生权重、评测与发布</td><td>TEXT-IDENTIFIER、ID、AUT、IKN、ADP</td><td>有来源、有资格且精确绑定的模型更新记录</td><td>反馈自动获准；训练完成、损失下降或模型名称证明更好和可发布</td></tr>
-      <tr><td>代码、参数、API、许可、托管执行、数据路径、导出与退出</td><td>ID、ADP、AUT、DRO、IKN、TEXT-IDENTIFIER、DIA</td><td>逐对象说明软件权利、实际执行控制、已知处理和迁移条件</td><td>源码或 AGPL 等于实例控制；API 兼容等于无损迁移；参数可下载等于全栈开放</td></tr>
-      <tr><td>访问、使用、披露、保留、删除、备份与派生物</td><td>ID、TEXT-IDENTIFIER、AUT、ADP、DRO、IKN、DIA</td><td>逐对象说明目的、接收方、期限、删除阶段、证据与未知范围</td><td>访问获准等于全部用途获准；删除响应等于全部副本不可恢复</td></tr>
-    </tbody></table></div>
-    <p class="note">找不到精确归属时先记录未知范围。产品名称、协议状态和机制标签都不能替开发者补齐缺失事实。</p>
-  </section>
-
-  <section class="content-grid">
-    <h2>先判断是哪一种越级</h2>
-    <article class="status-item"><h3>候选输入取得指令权</h3><p>检索片段、工具返回或远端描述只因为进入上下文，就被模型当作授权指令。</p></article>
-    <article class="status-item"><h3>显示名称或声明替代授权</h3><p>Agent 名称、工作负载身份、Agent Card、工具列表、schema、scope 或签名覆盖实际行动者、代表关系和逐动作决定。</p></article>
-    <article class="status-item"><h3>运行状态替代目标判断</h3><p>步骤、handoff、HTTP、MCP、A2A 或 SDK 的 completed 被直接写成 <code>met</code>、证据充分或最终接受。</p></article>
-    <article class="status-item"><h3>记忆、检查点或轨迹替代当前事实</h3><p>过期指导、恢复状态、Span Ok 或日志数量被当作现行政策、持续权限、完整因果链或充分证据。</p></article>
-    <article class="status-item"><h3>隔离机制名称替代有效限制</h3><p>容器、seccomp、超时或“本地服务”标签被用来概括文件、网络、秘密、资源、终止和信息流控制。</p></article>
-    <article class="status-item"><h3>单项信号替代完整结论</h3><p>模型评分或反馈替代评测与发布；参数可下载、AGPL、导出或删除响应替代完整对象范围。</p></article>
-  </section>
-
-  <section class="content-wide">
-    <h2>行业变化只改变外部机制</h2>
-    <p>截至 2026-07-15，主流 Agent 框架和协议正在把委托、审批、状态、任务和观察显式化。显式机制便于追踪，但仍不能跨越本地目标、授权、证据和决定边界。</p>
-    <div class="table-wrap"><table><thead><tr><th>开发者面对的变化</th><th>官方资料说明什么</th><th>Noemion 保留的边界</th></tr></thead><tbody>
-      <tr><td>委托与人工批准</td><td><a href="https://developers.openai.com/api/docs/guides/agents/orchestration">OpenAI Agents SDK handoffs</a>把控制权转交和“作为工具调用”分开；<a href="https://openai.github.io/openai-agents-python/human_in_the_loop/">OpenAI Agents SDK human-in-the-loop</a>允许暂停、序列化并在审批后恢复运行。</td><td>答复所有权不等于动作授权。审批必须绑定精确请求；handoff 不能隐藏实际行动者或扩大 Dromen。</td></tr>
-      <tr><td>会话、记忆、工作区与轨迹</td><td><a href="https://developers.openai.com/api/docs/guides/agents/running-agents#choose-one-conversation-strategy">OpenAI Agents SDK sessions</a>区分多种对话状态策略；<a href="https://developers.openai.com/api/docs/guides/agents/sandboxes#persist-memory-across-runs">OpenAI Sandbox Agents 跨运行记忆</a>又与消息历史、resume 和 snapshot 分开；<a href="https://openai.github.io/openai-agents-python/tracing/">OpenAI Agents SDK tracing</a>记录生成、工具、handoff 和 guardrail 事件。</td><td>这些状态各有身份和生命周期。记忆与快照不恢复旧权限；trace 是有范围观察，不自证完整性、因果或证据覆盖。</td></tr>
-      <tr><td>协议任务与动态能力</td><td><a href="https://modelcontextprotocol.io/docs/learn/versioning">MCP 2025-11-25</a>仍是 Current；<a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">MCP 2026-07-28 候选版</a>计划于 7 月 28 日定稿并含破坏性变化。<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a>分别定义 Task、Message、Artifact、取消和交付。</td><td>Profile 必须固定正式版本。能力变化不扩写旧 Dromen；Task、Message 和 Artifact 继续留在外部域。</td></tr>
-      <tr><td>Agent 身份与授权基础设施</td><td><a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent Standards Initiative</a>把安全、身份和互操作列为重点；<a href="https://www.nccoe.nist.gov/sites/default/files/2026-02/accelerating-the-adoption-of-software-and-ai-agent-identity-and-authorization-concept-paper.pdf">NIST 软件与 AI Agent 身份授权概念工作</a>继续研究非人主体与逐动作权限。</td><td>模型、Agent 定义、工作负载、运行实例、凭据、实际行动者和被代表主体必须分开。认证只形成授权输入。</td></tr>
-      <tr><td>自动评测与模型更新</td><td><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf">NIST AI 800-2 初稿</a>把测量目标、执行、分析和报告分开；<a href="https://doi.org/10.6028/NIST.AI.600-1">NIST AI 600-1</a>与<a href="https://doi.org/10.6028/NIST.SP.800-218A">NIST SP 800-218A</a>要求把模型生命周期、数据与安全开发责任显式化。</td><td>模型评分是有范围的候选测量，反馈记录不是训练资格。训练完成、多个模型一致或点估计不能替代独立评测与发布决定。</td></tr>
-      <tr><td>模型开放性与托管服务控制</td><td><a href="https://opensource.org/ai/open-source-ai-definition">OSI Open Source AI Definition 1.0</a>与<a href="https://lfaidata.foundation/resources/whitepapers/">Model Openness Framework</a>按对象说明开放范围；<a href="https://www.gnu.org/philosophy/who-does-that-server-really-serve.html">GNU 对他人服务替代用户计算的分析</a>则把软件权利与正在运行的服务控制分开。</td><td>开放权重、公开代码、许可标签、API 可用和自主管理部署是不同事实。任何单项都不能概括整个系统或托管实例。</td></tr>
-      <tr><td>数据使用、保留与删除</td><td><a href="https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.01162020.pdf">NIST Privacy Framework 1.0</a>与<a href="https://csrc.nist.gov/pubs/sp/800/88/r2/final">NIST SP 800-88 Rev. 2</a>支持把处理活动、删除请求和介质清除分别记录。</td><td>工程分类不产生法律结论。策略到期、逻辑删除、工具完成或供应商收据不能证明备份、快照和派生物已经不可恢复。</td></tr>
-    </tbody></table></div>
-  </section>
-
-  <section class="content-wide">
-    <h2>GNU 先例怎样约束工程判断</h2>
-    <div class="table-wrap"><table><thead><tr><th>工程纪律</th><th>GNU 先例</th><th>在 Agent 系统中的使用上限</th></tr></thead><tbody>
-      <tr><td>终态、依赖、步骤和预检分开</td><td><a href="https://www.gnu.org/software/make/manual/html_node/Rule-Syntax.html">Make target、prerequisite 与 recipe</a>、<a href="https://www.gnu.org/software/make/manual/html_node/Instead-of-Execution.html">Make dry-run</a>和<a href="https://www.gnu.org/software/autoconf/manual/autoconf.html">Autoconf feature checks</a></td><td>目标不保存可变步骤；选用外部工具时核对所需特性。文件时间、dry-run 名称和配置期探测都不能定义 Endem、授权或满足结果。</td></tr>
-      <tr><td>并行共享配额，失败留下不确定状态</td><td><a href="https://www.gnu.org/software/make/manual/html_node/Parallel.html">Make parallel execution</a>、jobserver、<a href="https://www.gnu.org/software/make/manual/html_node/Errors.html">错误处理</a>与<a href="https://www.gnu.org/software/make/manual/html_node/Interrupts.html">中断处理</a></td><td>先表达完整依赖，嵌套工作共享有限预算；中断后的目标按可能不完整处理。job slot 不是授权，清理临时文件也不是外部副作用回滚。</td></tr>
-      <tr><td>环境、版本和恢复对象具名</td><td><a href="https://guix.gnu.org/manual/en/html_node/Invoking-guix-package.html">Guix profile generations</a>、<a href="https://guix.gnu.org/manual/devel/en/guix.pdf">Guix shell</a>以及 Guix channel、manifest 与 time-machine</td><td>记录软件闭包和恢复目标，并从受限环境逐项开放资源。配置回滚不恢复凭据、外部状态或旧 Dromen；相同环境也不证明模型行为等价。</td></tr>
-      <tr><td>差异、故障、随机性与终止分别观察</td><td><a href="https://www.gnu.org/software/diffutils/manual/html_node/Invoking-diff.html">Diffutils</a>、<a href="https://www.gnu.org/software/coreutils/manual/html_node/Random-sources.html">随机来源</a>、<a href="https://www.gnu.org/software/coreutils/manual/html_node/sort-invocation.html">sort</a>与<a href="https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html">Coreutils timeout</a></td><td>比较结果保留“相同、不同、故障”，复现实验固定随机与排序输入，超时继续观察后代和远端效果。差异、固定种子和主进程退出都不能选择正确结果。</td></tr>
-      <tr><td>软件权利、服务控制和数据清除分开</td><td><a href="https://www.gnu.org/philosophy/free-sw.en.html">GNU 自由软件四项自由</a>、<a href="https://www.gnu.org/philosophy/who-does-that-server-really-serve.html">他人服务替代用户计算</a>、<a href="https://www.gnu.org/licenses/why-affero-gpl.html.en">AGPL 边界</a>与<a href="https://www.gnu.org/software/coreutils/manual/html_node/shred-invocation.html">Coreutils <code>shred</code></a></td><td>逐对象核对权利、执行者、控制面、数据路径和清除介质。源码可得或 AGPL 不证明用户控制实例；<code>shred</code> 成功也不能概括快照、SSD、备份和派生物。</td></tr>
-    </tbody></table></div>
-    <p class="note">GNU 资料提供工程类比和用户控制问题，不定义 Noemion 字段、协议结果或伦理结论。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2 id="research-map">研究问题按开发者问题路由</h2>
-    <p>相邻研究只在改变当前评审问题时进入这份指南。完整案例、反例、威胁和现有规范归属保留在各自提案中。</p>
-    <div class="table-wrap"><table><thead><tr><th>开发者需要回答的问题</th><th>继续阅读</th><th>当前结论上限</th></tr></thead><tbody>
-      <tr><td>哪些来源进入模型，目标与计划怎样分开，迁移后是否仍是同一语义？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">模型上下文装配</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/planning-and-replanning-proposal.md">目标、计划与重规划</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">语义等价与迁移</a></td><td>研究中；候选输入、计划和等价主张继续由现有身份、文本、目标、会话与证据责任处理。</td></tr>
-      <tr><td>谁在行动、当前能做什么、并行分支怎样提交、隔离失效时谁负责？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/capability-discovery-and-negotiation-proposal.md">能力发现、协商与调用</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-identity-and-accountability-boundaries-proposal.md">软件 Agent 身份、委托与责任链</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/parallel-and-speculative-execution-proposal.md">并行、推测执行与提交</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">模型、适配器与能力域隔离</a></td><td>研究中；能力、身份、授权、会话和外部协议仍保持分开，不创建通用 Agent 权限对象。</td></tr>
-      <tr><td>动作是否发生、预览是否可信、恢复了什么、模型评审能支持什么？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">状态变化与因果归因</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/preview-simulation-and-approval-proposal.md">预览、模拟与批准</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/memory-checkpoint-and-resumption-proposal.md">记忆、检查点与恢复</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测与裁判边界</a></td><td>研究中；动作、后态、因果、恢复状态、候选测量和最终决定继续使用各自证据。</td></tr>
-      <tr><td>反馈能否训练，更新后的模型怎样发布，数据何时真正删除？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">软件 Agent 数据使用、保留与删除边界</a></td><td>研究中；反馈、用途授权、模型派生、独立评测、发布、保留和清除不能压成一条状态线。</td></tr>
-      <tr><td>模型开放到什么程度，用户能否控制实际服务与数据路径？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-openness-and-software-freedom-boundaries-proposal.md">模型开放性与软件自由边界</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/hosted-ai-service-and-user-control-boundaries-proposal.md">托管人工智能服务与用户控制边界</a></td><td>研究中；逐对象权利、复现范围、实例控制、数据路径和退出能力分别陈述。</td></tr>
-    </tbody></table></div>
-    <p>这些研究共用一个停止条件：现有责任能够形成唯一主条款时，不创建新的 CORE。只有真实消费者证明责任无法由现有规范承担，才重新讨论独立标准。</p>
-  </section>
-
-  <section class="content-stack">
-    <h2>怎样完成一次边界评审</h2>
-    <ol>
-      <li>写下期望终态，并说明它只要求结果，还是还要求动作、状态转变或因果。</li>
-      <li>固定请求主体、实际行动者、被代表主体、对象、动作、目的、受众和截止点。</li>
-      <li>封闭本次 Dromen 的环境、能力交集、预算、凭据域和证据责任。</li>
-      <li>把工具、handoff、Task、取消、重试、交付和副作用保存为外部事实，不先翻译成本地成功。</li>
-      <li>让 Iknem 只支持声明范围内的结论，再由 <code>krin</code> 和具名权威分别形成满足结果与最终决定。</li>
-      <li>某项事实不可见时记录未知范围；机制名称、模型评分和产品声明都不能补齐它。</li>
-    </ol>
-    <h3>什么时候才值得增加新对象</h3>
-    <p>只有一项责任同时具备现有对象无法表达的身份与不变量、独立生命周期、真实生产者和消费者，以及可重现的失败责任，才进入新对象讨论。支持案例、反例、威胁、资源上限和正反向量还必须能够验证它。当前列出的 Agent 研究主题都没有达到这项条件。</p>
+    <p>只有一项责任同时具备现有对象无法表达的身份与不变量、独立生命周期、真实生产者和消费者，以及可重现的失败责任，才值得讨论新对象。当前研究主题均未达到这一条件。</p>
     <div class="page-links">
-      <a class="page-link" href="decisions.html"><strong>架构决策</strong><span>查看当前策略和待定接口。</span></a>
-      <a class="page-link" href="open-questions.html"><strong>开放问题</strong><span>查看研究提案仍需关闭的决定与证据。</span></a>
-      <a class="page-link" href="../specifications/adapters.html"><strong>外部协议适配</strong><span>查看版本、对端、能力、任务、重试和交付边界。</span></a>
+      <a class="page-link" href="decisions.html"><strong>架构决策</strong><span>查看现行责任和待定接口。</span></a>
+      <a class="page-link" href="open-questions.html"><strong>开放问题</strong><span>查看研究提案仍需关闭的证据。</span></a>
+      <a class="page-link" href="../specifications/adapters.html"><strong>外部协议适配</strong><span>查看版本、能力、任务、重试和交付边界。</span></a>
       <a class="page-link" href="../specifications/authority.html"><strong>权威与授权决定</strong><span>查看主体、委托、同意、撤销和能力交集。</span></a>
-      <a class="page-link" href="../specifications/dromen.html"><strong>Dromen 会话契约</strong><span>查看一次运行怎样封闭环境、能力、预算和证据责任。</span></a>
+      <a class="page-link" href="../specifications/dromen.html"><strong>会话契约（Dromen）</strong><span>查看一次运行怎样封闭环境、能力、预算和证据责任。</span></a>
     </div>
   </section>
   <div class="next-prev"><a href="decisions.html">← 架构决策</a><a href="open-questions.html">开放问题 →</a></div>
