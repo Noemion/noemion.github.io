@@ -33,14 +33,15 @@ permalink: "/specifications/authority.html"
   </section>
 
   <section class="content-wide">
-    <h2>必须分开的六个问题</h2>
-    <div class="table-wrap"><table><thead><tr><th>问题</th><th>需要什么</th><th>不能直接推出</th></tr></thead><tbody>
-      <tr><td>当前主体是谁</td><td>认证方法、身份与实际行动者</td><td>这个主体有权决定</td></tr>
-      <tr><td>主体能决定什么</td><td>政策、角色来源、对象、动作、目的和范围</td><td>其他字段、租户或用途也获权</td></tr>
-      <tr><td>候选意义是否获准</td><td>精确来源、候选、语义位置、安全视图和具名权威</td><td>候选为真或目标已经满足</td></tr>
-      <tr><td>运行能力是否获授</td><td>授权范围与制品、政策、环境、Dromen、适配器和预算求交</td><td>环境可访问或协议提供的全部能力</td></tr>
-      <tr><td>证据是否足够</td><td>适用 Iknem 的有效性和覆盖度</td><td>授权主体已最终接受</td></tr>
-      <tr><td>最终是否接受</td><td>原满足结果、证据、决定规则和最终权威</td><td>由认证、授权、签名或会话完成替代</td></tr>
+    <h2>遇到“已授权”先问对象是什么</h2>
+    <p class="lead">开发者不能只保存一个 <code>authorized: true</code>。同一个中文词可能指意义确认、动作授权或会话能力；如果不写出对象和结果域，后续代码会把内容接受、工具权限和最终验收错误合并。</p>
+    <div class="table-wrap"><table><thead><tr><th>开发者要回答的问题</th><th>需要什么</th><th>只能支持</th><th>不能直接推出</th></tr></thead><tbody>
+      <tr><td>当前主体是谁</td><td>认证方法、身份与实际行动者</td><td>当前认证主张</td><td>这个主体有权决定</td></tr>
+      <tr><td>谁可以确认这个意义候选</td><td>精确来源、候选、语义位置、安全视图、规则或具名权威；AUT-CORE 称其为语义授权</td><td>候选进入确认的 <code>semion</code></td><td>主体取得工具权限，或候选为真</td></tr>
+      <tr><td>谁可以尝试这个动作</td><td>政策、主体、对象、动作、目的、受众、范围、条件和截止点</td><td><code>grant / deny / defer</code> 当前精确请求</td><td>其他字段、租户或用途也获权</td></tr>
+      <tr><td>当前会话拥有什么能力</td><td>动作授权与制品、政策、环境、Dromen、适配器和预算求交</td><td>当前 Drase 会话的能力上限</td><td>长期权限或协议提供的全部能力</td></tr>
+      <tr><td>证据是否足够</td><td>适用 Iknem 的有效性和覆盖度</td><td>声明范围内的证据判断</td><td>授权主体已经最终接受</td></tr>
+      <tr><td>最终是否接受</td><td>原满足结果、证据、决定规则和最终权威</td><td><code>accepted / rejected / deferred</code></td><td>由认证、授权、签名或会话完成替代</td></tr>
     </tbody></table></div>
   </section>
 
@@ -63,9 +64,9 @@ permalink: "/specifications/authority.html"
   </section>
 
   <section class="content-wide">
-    <h2>自然语言候选怎样获得授权</h2>
+    <h2>自然语言候选怎样获得意义确认</h2>
     <div class="flow"><div class="step">精确来源与解码文本</div><div class="step">不可信候选</div><div class="step">影响位置与风险</div><div class="step">安全显示视图</div><div class="step">具名权威与范围</div><div class="step">grant deny defer</div><div class="step">保留剩余 apor</div></div>
-    <p>一个候选即使结构合法、来自强模型并具有很高置信度，也只能停留在候选层。授权者必须看到候选相对来源改变了什么、影响哪些关系和角色、由谁产生、哪些待确认项仍然存在。权限只覆盖已展示且落在主体职责内的部分。</p>
+    <p>一个候选即使结构合法、来自强模型并具有很高置信度，也只能停留在候选层。确认者必须看到候选相对来源改变了什么、影响哪些关系和角色、由谁产生、哪些待确认项仍然存在。意义确认只覆盖已展示且落在主体职责内的部分；它不授予调用工具、修改对象或部署服务的动作权限。</p>
     <p>确定性规则也不能获得无限权威。规则必须固定版本、输入域、输出位置和失败责任；超出规则声明域的输入仍进入 <code>apor</code> 或拒绝，不能用“自动规则”掩盖新的自然语言判断。</p>
   </section>
 
@@ -109,7 +110,7 @@ permalink: "/specifications/authority.html"
       <li><a href="https://www.rfc-editor.org/rfc/rfc9470.html">RFC 9470 Step-up Authentication</a>只解决认证强度不足，不定义资源授权政策；重新认证成功不会自动授权动作。</li>
       <li><a href="https://www.rfc-editor.org/rfc/rfc9700.html">RFC 9700 OAuth 安全实践</a>要求令牌限制发送者、受众、资源与动作；项目把令牌视为能力上限而非权威本身。</li>
       <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization">MCP 2025-11-25 授权规范</a>与<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 规范</a>提供外部授权和委托机制；本地语义与最终决定仍由 AUT-CORE 管理。</li>
-      <li><a href="https://www.nccoe.nist.gov/publications/other/accelerating-adoption-software-and-ai-agent-identity-and-authorization-concept">NIST 软件与 AI Agent 身份授权概念论文</a>提出人类与 Agent 区分、委托、日志透明和身份元数据问题；它仍是概念工作，不是 Agent 身份标准。</li>
+      <li><a href="https://www.nccoe.nist.gov/sites/default/files/2026-02/accelerating-the-adoption-of-software-and-ai-agent-identity-and-authorization-concept-paper.pdf">NIST 软件与 AI Agent 身份授权概念论文</a>分别询问最小权限、具体动作、代表关系和人机授权绑定；它仍是概念工作，不定义自然语言意义确认或 Agent 身份标准。</li>
       <li><a href="https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/">SPIFFE 工作负载身份</a>让软件主体在信任域中认证，但一个工作负载可以覆盖多个副本，SVID 也不授予应用动作权限。</li>
       <li><a href="https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization">MCP 企业管理授权</a>集中处理组织级服务器接入；每次工具动作仍须保留实际行动者、被代表主体、资源、受众和本地授权决定。</li>
       <li><a href="https://guix.gnu.org/manual/devel/en/guix.pdf">GNU Guix 授权实践</a>要求本地显式授权替代服务器的签名密钥；<a href="https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration-Options.html">GnuPG 信任模型</a>也把密码验证与本地信任判断分开。</li>

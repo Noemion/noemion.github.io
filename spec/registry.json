@@ -280,7 +280,7 @@
     {"term": "Dromen", "kind": "session-contract", "decision_status": "accepted", "definition": "Drasor 为一次 Drase 会话从精确制品、政策、环境、能力、预算和证据责任建立的密封只读执行契约"},
     {"term": "Iknem", "kind": "evidence", "decision_status": "accepted", "definition": "绑定主体、范围、方法、环境、结果和限制的证据记录"},
     {"term": "rhem", "kind": "semantic-facet", "decision_status": "accepted", "definition": "来源记号与可重定位范围"},
-    {"term": "semion", "kind": "semantic-facet", "decision_status": "accepted", "definition": "已授权的符号、指称、关系和角色投影"},
+    {"term": "semion", "kind": "semantic-facet", "decision_status": "accepted", "definition": "由确定性规则或范围有限具名权威确认的符号、指称、关系和角色投影；语义授权不授予动作权限"},
     {"term": "skena", "kind": "semantic-facet", "decision_status": "accepted", "definition": "一个根、中性且可比较的可能事态"},
     {"term": "telis", "kind": "semantic-facet", "decision_status": "accepted", "definition": "达到或保持事态的目标方向"},
     {"term": "krin", "kind": "semantic-facet", "decision_status": "accepted", "definition": "结构比较、证据、未知处理和决定权威契约"},

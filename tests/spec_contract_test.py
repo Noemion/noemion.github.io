@@ -240,6 +240,16 @@ def validate_registry(registry, spec_text, threat_text, errors):
         wire_term = next((term for term in terms if term.get("term") == "wire-format"), None)
         if wire_term and wire_term.get("decision_status") != "accepted-draft":
             errors.append("spec/registry.json: wire-format must be accepted-draft")
+        semion_term = next((term for term in terms if term.get("term") == "semion"), None)
+        semion_definition = semion_term.get("definition", "") if semion_term else ""
+        for boundary in (
+            "确定性规则或范围有限具名权威确认",
+            "语义授权不授予动作权限",
+        ):
+            if boundary not in semion_definition:
+                errors.append(
+                    f"spec/registry.json: semion definition must separate meaning confirmation from action authorization: {boundary}"
+                )
 
     experiments = registry.get("experiments")
     if not isinstance(experiments, list) or len(experiments) != 1:

@@ -157,7 +157,7 @@ tbody tr:nth-child(even){background:color-mix(in srgb,var(--paper-subtle) 62%,tr
 
 code{
   padding:1px 5px;color:var(--accent-ink);background:var(--code-bg);border:1px solid color-mix(in srgb,var(--rule) 72%,transparent);
-  border-radius:3px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em
+  border-radius:3px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;overflow-wrap:anywhere
 }
 pre{
   overflow:auto;margin:14px 0;padding:16px;color:var(--pre-text);background:var(--pre-bg);

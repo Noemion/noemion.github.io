@@ -15,14 +15,14 @@ permalink: "/components/index.html"
   <section>
     <h2>组件入口</h2>
     <div class="page-links">
-      <a class="page-link" href="ktisor.html"><strong>确定性制品形成器（Ktisor）</strong><span>依据已授权投影形成、检查、组合和锁定 Endem/Synem，唯一能够写规范制品。</span></a>
+      <a class="page-link" href="ktisor.html"><strong>确定性制品形成器（Ktisor）</strong><span>依据已确认且具有精确语义授权绑定的投影形成、检查、组合和锁定 Endem/Synem；它是唯一能够写规范制品的职责域，但不因此取得运行权限。</span></a>
       <a class="page-link" href="theor.html"><strong>独立只读检查器（Theor）</strong><span>使用第二条直接读取实现查看和比较制品，不生成生产可信句柄。</span></a>
       <a class="page-link" href="drasor.html"><strong>受限运行边界（Drasor）</strong><span>重新验证精确制品、适用外部陈述和当前政策，建立 Dromen，控制能力并形成有范围的 Iknem；具名权威另行决定是否接受。</span></a>
     </div>
   </section>
   <section>
     <h2>职责与依赖方向</h2>
-    <div class="flow"><div class="step">受控来源 + 已授权投影</div><div class="step">Ktisor 确定性形成 Endem / Synem</div><div class="step">Theor 独立检查</div><div class="step">外部陈述绑定精确内容</div><div class="step">Drasor 复核 → Dromen</div><div class="step">Iknem / 满足结果 / 权威决定</div></div>
+    <div class="flow"><div class="step">受控来源 + 已确认意义投影</div><div class="step">Ktisor 核对语义授权绑定</div><div class="step">确定性形成 Endem / Synem</div><div class="step">Theor 独立检查</div><div class="step">Drasor 另行核对动作授权</div><div class="step">Iknem / 满足结果 / 最终决定</div></div>
     <div class="table-wrap"><table><thead><tr><th>组件</th><th>可以依赖</th><th>不得依赖</th></tr></thead><tbody>
       <tr><td>Ktisor</td><td>规范注册表、确定性算法、外部签名响应验证接口</td><td>模型开发包、Drasor、实时能力、Theor 输出</td></tr>
       <tr><td>Theor</td><td>公开规范和自己的有界解析实现</td><td>Ktisor 的形成侧解析器、写入器、组合器、BFD 或错误分类实现</td></tr>

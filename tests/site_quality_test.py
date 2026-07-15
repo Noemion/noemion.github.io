@@ -724,6 +724,14 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "请求维护者、具体 CI 运行实例",
             "部分授予形成缩小后的新范围",
             "授权允许一次声明范围内的行动",
+            "遇到“已授权”先问对象是什么",
+            "不能只保存一个 <code>authorized: true</code>",
+            "谁可以确认这个意义候选",
+            "候选进入确认的 <code>semion</code>",
+            "谁可以尝试这个动作",
+            "当前 Drase 会话的能力上限",
+            "自然语言候选怎样获得意义确认",
+            "它不授予调用工具、修改对象或部署服务的动作权限",
             "AUT-CTX-001",
             "AUT-PRN-001",
             "AUT-SCP-001",
@@ -1229,6 +1237,10 @@ def validate_readability_behavior_contracts(root):
                 style_text,
                 r"\.manual-nav\s+a\s*\{[^}]*min-width:44px;"
                 r"[^}]*min-height:44px"
+            ),
+            "long inline code must wrap inside the reading column": (
+                style_text,
+                r"code\s*\{[^}]*overflow-wrap:anywhere"
             ),
         }
         for label, (css_text, pattern) in css_patterns.items():
@@ -2032,7 +2044,8 @@ def validate_jekyll_sources():
                 )
         lifecycle_explainer_requirements = {
             SOURCE_ROOT / "architecture" / "index.html": (
-                "来源表达、获授权意义、一个根可能事态、目标方向、满足判据和待确认意义",
+                "来源表达、已确认意义投影、一个根可能事态、目标方向、满足判据和待确认意义",
+                "意义确认不授予工具或运行权限",
                 "外部陈述绑定内容身份",
                 "签名、验证或撤销不会原地改写内容身份",
             ),
@@ -3679,6 +3692,8 @@ def validate_jekyll_sources():
             "本决定确定六项语义职责",
             "词源只作记忆辅助",
             "ADR-0034",
+            "已确认意义投影",
+            "规范称其为语义授权，但它不授予动作权限",
         ):
             if token not in naming_adr_text:
                 errors.append(f"ADR-0010 missing responsibility-first naming boundary: {token}")
@@ -4208,6 +4223,9 @@ def main():
         "质量契约检查责任覆盖",
         "规范解释页先用一个贯穿案例建立对象、输入、判断和失败责任",
         "完整场景、反例和向量留在版本化权威源中",
+        "### 意义确认、动作授权与最终决定",
+        "语义授权不授予动作权限",
+        "不得只写“已授权意义”",
     ):
         if token not in naming_standard_text:
             errors.append(f"language and naming standard missing no-digit boundary: {token}")
@@ -4229,7 +4247,9 @@ def main():
         "外部 Task 显示 `completed`",
         "这个例子只解释职责顺序",
         "| 职责 | 现行字段 | 不得混入 |",
-        "| 来源表达 | `rhem` | 授权后的意义投影 |",
+        "| 来源表达 | `rhem` | 经规则或具名权威确认的意义投影 |",
+        "规范把 `semion` 的外部确认称为语义授权",
+        "不回答“谁可以调用工具、修改仓库或部署服务”",
         "| 待确认意义 | `apor` | 观察不足",
     ):
         if token not in getting_started_text:

@@ -47,9 +47,9 @@ permalink: "/architecture/adr-0029-authority-and-authorization-decisions.html"
   </section>
 
   <section class="content-wide">
-    <h2>MCP 与 A2A 为什么不能成为授权权威</h2>
-    <p>MCP 2025-11-25 要求访问令牌绑定目标资源，并允许 scope 不足后发起增量授权。A2A 允许 Agent 把 <code>AUTH_REQUIRED</code> 继续交给客户端或上游 Agent。两者都提供传输机制，却不会替部署者定义自然语言语义、组织角色和最终验收权限。</p>
-    <p>因此，外部 scope、凭据、任务状态和 Agent Card 只能成为适配输入。Drasor 必须把它们与 AUT-CORE 权威语境、Dromen、制品限制、适配器能力和预算求交。任何 step-up 都建立新授权决定与新 Drase 会话。</p>
+    <h2>MCP 与 A2A 的授权只覆盖各自协议请求</h2>
+    <p>MCP 2025-11-25 让受保护资源服务器依据资源、scope 和访问令牌处理请求。A2A 1.0 要求服务端依据已认证身份与本地政策逐请求授权，并允许 Task 用 <code>AUTH_REQUIRED</code> 请求额外凭据。它们确实承载动作访问控制，不只是传输状态；但它们不会替 Noemion 确认自然语言意义、定义组织中的最终决定权威，或证明目标已经满足。</p>
+    <p>因此，外部 scope、凭据、授权结果、任务状态和 Agent Card 都是带来源的适配输入。Drasor 必须固定协议与对端，把外部动作许可同 AUT-CORE 语境、Dromen、制品限制、适配器能力和预算求交。新增权限需要新的本地授权决定和新的 Drase 会话；它不能回写 <code>semion</code> 或改变已有制品身份。</p>
   </section>
 
   <section class="content-wide">
@@ -78,6 +78,7 @@ permalink: "/architecture/adr-0029-authority-and-authorization-decisions.html"
       <li><a href="https://www.rfc-editor.org/rfc/rfc9470.html">RFC 9470 Step-up Authentication</a>说明重新认证不等于资源授权政策。</li>
       <li><a href="https://www.rfc-editor.org/rfc/rfc9700.html">RFC 9700 OAuth Security BCP</a>用于受众、资源、动作和发送者限制参照。</li>
       <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization">MCP 2025-11-25 Authorization</a>与<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 规范</a>用于 Agent 时代的授权传输与链式请求反例。</li>
+      <li><a href="https://www.nccoe.nist.gov/sites/default/files/2026-02/accelerating-the-adoption-of-software-and-ai-agent-identity-and-authorization-concept-paper.pdf">NIST 软件与 AI Agent 身份授权概念论文</a>用于最小权限、具体动作、代表关系和人机授权绑定的问题参照；该资料是草案概念工作，不是本地语义或身份标准。</li>
       <li><a href="https://guix.gnu.org/manual/devel/en/guix.pdf">GNU Guix Reference Manual</a>与<a href="https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration-Options.html">GnuPG Configuration Options</a>用于本地显式信任政策参照。</li>
     </ul>
   </section>
