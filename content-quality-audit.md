@@ -180,7 +180,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | 页面家族 | 已逐页复核的正式路由 | 本轮处理 |
 | --- | --- | --- |
 | 门户（1） | `/index.html` | 保持 Noemion 为项目主语；把控制平面和下一步入口改为无需内部术语即可理解的表达。 |
-| 项目背景（3） | `/about/index.html`、`/about/background.html`、`/about/intellectual-foundations.html` | 把核心问题拆成形成、组合、实现、验收四步；集中加入《逻辑哲学论》五条短引文，并逐条说明工程启发与不采用部分。 |
+| 项目背景（3） | `/about/index.html`、`/about/background.html`、`/about/intellectual-foundations.html` | 把核心问题拆成形成、组合、实现、验收四步；思想基础页从依赖升级案例进入，并按开发者问题分开思想启发、当前规范、研究资料与采用限制。 |
 | 架构与 ADR（33） | `/architecture/index.html`、`/architecture/endem-lifecycle.html`、`/architecture/decisions.html`、`/architecture/agent-system-boundaries.html`、`/architecture/adr-0008-endem-system.html` 至 `/architecture/adr-0035-public-actions-and-internal-responsibilities.html`、`/architecture/open-questions.html` | 生命周期解释每阶段回答什么；Agent 边界图把规范、研究和运行事实分层；历史 ADR 标明失效名称；现行 ADR 固定语义、格式、判断、信任、命名、口头区分与公开动作边界。 |
 | 组件（4） | `/components/index.html`、`/components/ktisor.html`、`/components/theor.html`、`/components/drasor.html` | 首段先解释三个组件为什么不能合并；把写入器、读取器、策略、句柄和请求等职责说清楚，只保留必要接口标识。 |
 | 规范（10） | `/specifications/index.html`、`/specifications/endem.html`、`/specifications/synem.html`、`/specifications/dromen.html`、`/specifications/iknem.html`、`/specifications/diagnostics.html`、`/specifications/adapters.html`、`/specifications/identity.html`、`/specifications/text-and-identifiers.html`、`/specifications/authority.html` | 先给直白定义，再给规范词；授权页明确登录、签名、Agent 状态与点击都不能自行产生语义或最终决定权。 |
@@ -448,6 +448,18 @@ Ktisor 与语言规范还残留“已授权语义决定”“已授权 semion”
 [GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)要求按读者的问题与概念组织手册，并在首次出现时解释专门术语；[RFC 7322](https://www.rfc-editor.org/rfc/rfc7322.html)要求技术文档清楚、一致、可读并消除重复表述。外部事实同时按独立来源复核：OpenTelemetry 主语义约定当前发布版为 1.43.0，而 GenAI 独立仓库仍无正式发布版且 README 的 Schema URL 仍为 `TODO`；NIST 官网明确说明 AI RMF 1.0 正在修订。两类状态都只限制外部机制的采用方式，不定义 Noemion 的字段、结果或 ABI。
 
 这项修订没有新增组件、命令、Profile、物理格式或实现证据。质量契约现在要求问题入口、具体案例、停止条件、正向输入路径和读音复核，并阻止重新引入重复的策略长表、连续否定式捷径章节或英文阶段徽标。
+
+## 思想来源到工程规范的开发者路径复核 · 2026-07-15
+
+思想与方法基础页此前先列九组哲学传统，再列十四条书目及“待精读”状态。两张库存表能够证明资料范围，却不能帮助开发者回答一个模型候选、工具完成状态或外部观察应落在哪层责任。页面还把时间、量化、测量和求值语言写成后续缺口，与 ADR-0015 至 ADR-0020 已经形成的抽象边界不一致。
+
+当前页面从依赖升级案例进入：来源表达、意义确认、期望事态、动作授权、会话能力、证据范围、满足判断和最终决定逐层分开。哲学资料改为按开发者问题选择，并始终同时给出工程落点和不得推出的结论。书目不再展示内部阅读库存，而是按对象同一、结构表示、言语行为、语境不确定性和 AI Agent 责任提供继续研究入口。
+
+页面同步修正规范状态：ADR-0016 至 ADR-0020 已分别定义时间、否定、量化、测量和复合判断的抽象边界；当前缺少的是对应物理字段与组件实现，不是这些问题完全没有规范回答。Noemion、Endem 与其他设计阶段标识也不再因词源或词族形式取得发行正当性；专名必要性、停止条件、目标语言读音和口头区分仍需独立人类证据。
+
+[GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)要求资料按读者的问题和概念组织、首次定义专门术语并使用主动语态；[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)把 Agent 互操作、身份、授权、安全研究和评价作为不同方向；[Stanford Encyclopedia of Philosophy 的 Speech Acts 词条](https://plato.stanford.edu/entries/speech-acts/)则明确分开内容、言外之力、权威和成功条件。这些资料支持问题分层，不直接定义 Noemion 字段、算法或结果域。
+
+这项修订没有改变 CORE 条款、Profile、向量、字段、组件或接口。质量契约现在要求具体开发案例、当前 AI Agent 责任、读音状态和问题驱动章节，并阻止恢复哲学家清单或书目库存式标题。
 
 ## 重新审计条件
 

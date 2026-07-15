@@ -154,14 +154,14 @@ HOME_HEADINGS = [
     "继续阅读",
 ]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
-    "为什么阅读这些著作",
-    "研究方法与采用边界",
-    "核心思想与工程问题",
-    "Noemion 名称怎样形成",
-    "《逻辑哲学论》与工程设计相关的命题",
-    "Endem 语义核与后续验证",
-    "核心书目与资源状态",
-    "思想采用的验证要求",
+    "从一次依赖升级看清问题",
+    "哲学怎样进入工程设计",
+    "按开发者问题选择思想工具",
+    "名字不能替代定义和证据",
+    "《逻辑哲学论》提供哪些结构问题",
+    "当前规范怎样回答这些问题",
+    "按工程问题继续研究",
+    "思想进入规范前必须留下什么",
 ]
 ROLE_BY_KIND = {
     "portal": "portal",
@@ -4736,11 +4736,22 @@ def main():
             " ".join("".join(section["text"]) for section in parser.sections)
         )
         for term in (
-            "不得直接推出", "思想采用的验证要求", "六个语义面",
+            "不得直接推出", "思想进入规范前必须留下什么", "六个语义面",
+            "NIST AI Agent Standards Initiative", "读音",
             "事态", "目标方向", "phain", "aseme", "agno", "fault",
         ):
             if term not in visible_text:
                 errors.append(f"about/intellectual-foundations.html: must preserve {term}")
+        for obsolete_heading in (
+            "核心思想与工程问题",
+            "Endem 语义核与后续验证",
+            "核心书目与资源状态",
+        ):
+            if obsolete_heading in parser.h2_texts:
+                errors.append(
+                    "about/intellectual-foundations.html: must not restore "
+                    f"inventory-style heading {obsolete_heading!r}"
+                )
 
     for row in route_rows:
         path = ROOT / row["route"]
