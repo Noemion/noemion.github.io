@@ -4,85 +4,95 @@ title: "开放问题 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 开放问题"
 permalink: "/architecture/open-questions.html"
+summary: "帮助开发者判断一项问题可以依据现行规范继续设计，还是必须等待物理格式、运行证据或公开名称研究。"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>开放问题</span></nav>
-  <header class="content-introduction"><h1>开放问题</h1><p>区分哪些规则已经足以继续设计，哪些问题仍会改变文件、接口、安全结论或公开名称。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">已有成果</span><span class="badge">正在研究</span><span class="badge">待定内容</span></div></header>
+  <header class="content-introduction"><h1>开放问题</h1><p>判断一项设计可以依据什么继续，以及缺少哪类证据时必须停止。</p><p>这里记录会改变文件、接口、安全结论或公开名称的问题，不把研究设想写成已经存在的能力。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">已有成果</span><span class="badge">正在研究</span><span class="badge">待定内容</span></div></header>
+
+  <section class="content-wide">
+    <h2>先判断问题处于哪一层</h2>
+    <p class="lead">开发者先确定自己要改变的是抽象语义、物理格式、运行机制、公开名称还是实现主张。不同层次需要不同证据，不能用下一层的便利反向改写上一层。</p>
+    <div class="table-wrap"><table><thead><tr><th>现有材料</th><th>开发者现在怎么做</th><th>不能据此声称</th></tr></thead><tbody>
+      <tr><td>CORE、Profile 或当前策略 ADR</td><td>固定精确版本，按条款保留失败与未知；变更先定位主责任和受影响的正反向量。</td><td>规范资料已经成为组件，或不同实现已经互操作。</td></tr>
+      <tr><td>非规范研究提案</td><td>提取反例、威胁和候选责任，再回到现有规范寻找唯一归属。</td><td>提案已经增加字段、命令、制品、接口或结果值。</td></tr>
+      <tr><td>仍待确定的物理 Profile</td><td>停在抽象边界，先说明真实消费者、字节身份、失败责任、版本和正反向量。</td><td>本地 schema 可以代表 Noemion，或外部协议对象可以直接替代本地语义。</td></tr>
+      <tr><td>未来实现与运行证据</td><td>分别记录平台、输入、工具链、政策、资源限制、对抗条件和实际结果。</td><td>文档构建、概念案例或一次演示证明安全、性能、可复现性或生产可用性。</td></tr>
+    </tbody></table></div>
+    <p>当前可以依赖的抽象边界已经覆盖 Endem、Synem、Dromen、Iknem、诊断、协议适配、身份、文本与标识符、权威与授权，以及来源保留和裁剪发布。END-P1 只承担已经登记的实验性内容表示；Synem、Iknem、授权事件、来源伴随资料和裁剪发布仍缺少各自的物理 Profile。</p>
+    <p>当前没有 Theor、权威目录、政策求值器或其他运行组件。缺少物理 Profile 或实现证据时，停在明确的待定边界；不要用 SDK 类型、JSON 草图、退出码或构建成功补齐它。</p>
+  </section>
 
   <section class="content-stack">
-    <h2>先分清可依赖规则和待定接口</h2>
-    <p class="lead">开发者可以用现行 CORE、Profile 和 ADR 检查资料是否一致，但不能据此声称组件已经运行。研究提案只提供待检验的问题和候选方案；如果某个字段、接口或行为还没有进入规范，这一页会把它明确留在待定范围。</p>
-    <div class="table-wrap"><table><thead><tr><th>现有材料</th><th>开发者现在怎么做</th><th>不能据此声称</th></tr></thead><tbody>
-      <tr><td>CORE、Profile 或当前策略 ADR</td><td>固定精确版本，按条款保存失败与未知，不用便捷默认值改写规则。</td><td>组件已经实现，或不同实现已经互操作。</td></tr>
-      <tr><td>非规范研究提案</td><td>用作威胁、反例和候选责任的输入；回到现有规范定位唯一归属。</td><td>已经出现新接口、字段、命令、制品或规范决定。</td></tr>
-      <tr><td>仍待确定的物理 Profile</td><td>停在抽象边界，记录消费者、字节向量、失败责任和版本需求。</td><td>本地自建 schema 可以代表 Noemion，或外部协议对象可以直接替代本地语义。</td></tr>
-      <tr><td>未来实现与运行证据</td><td>记录平台、输入、工具链、政策、资源限制和实际结果。</td><td>文档构建或概念案例证明了安全、性能、可复现性或生产可用性。</td></tr>
+    <h2>用一次字段变更检查是否可以继续</h2>
+    <p>假设开发者准备给 END-P1 增加 <code>signing_algorithm</code>，理由是未来发布物需要签名。正确路径不是先分配字段号，而是依次回答：</p>
+    <ol>
+      <li><strong>这是谁的责任？</strong>Endem 保存确定内容；ID-CORE 和 ADR-0035 把待签陈述、外置包络、验证政策、截止点和撤销解释留在内容身份之外。</li>
+      <li><strong>现有格式是否必须改变？</strong>签名算法没有改变 Endem 的六个语义面，也不是 END-P1 解码所必需，因此不能进入现有内容容器。</li>
+      <li><strong>真正缺少什么？</strong>缺少的是有真实消费者的外部签名 Profile，包括待签字节、算法基线、多签政策、密钥体系、时间来源、撤销和离线包络。</li>
+      <li><strong>什么证据才能继续？</strong>至少需要消费者、威胁模型、规范字节、错误分层、版本策略和独立验证路径。</li>
+      <li><strong>当前结论是什么？</strong>保留抽象责任和研究问题，不修改 END-P1，也不自建兼容字段。</li>
+    </ol>
+    <p class="note">同一检查适用于时间、Unicode、摘要、授权事件、协议任务和运行日志：先证明独立消费者与失败责任，再讨论物理字段。</p>
+  </section>
+
+  <section class="content-grid">
+    <h2>内容与物理格式</h2>
+    <details open><summary>正式来源语言还缺什么？</summary><p>ADR-0014 只确定首个 <code>.ends</code> 实验输入。正式语言仍需定义注释、包含、版本演进、歧义、错误恢复和工具支持；在正反语料与真实消费者出现前，不扩展当前清单。</p></details>
+    <details><summary>END-P1 之后怎样增加内容？</summary><p>先判断新信息是否改变 Endem 的内容身份。时间、否定、量化、测量和复合事态已有抽象条款，但物理字段仍需新的消费者、Profile 和正反字节向量。摘要、签名、授权和最终决定属于外部关系，不能为了打包方便进入内容容器。</p></details>
+    <details><summary>条件、排他与循环怎样表达？</summary><p>单个 Endem 只使用 <code>all_of / any_of</code>，跨 Endem 条件由 Synem 会话激活承担。<code>xor / xone</code>、复杂守卫和依赖循环只有在固定语义、预算、失败原子性与跨实现向量之后才可讨论；自由脚本不能成为语义格式。</p></details>
+    <details><summary>语义等价能否压成一个哈希？</summary><p>不能。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">语义等价与迁移研究</a>把精确身份、结构同构、有范围观察等价、迁移、强化或弱化与模型相似度分开。当前只能比较已经显式表达的符号、关系和条件；跨 Profile 的通用等价布尔值没有足够定义。</p></details>
+    <details><summary>Unicode 标识符与原始来源字节何时进入 Profile？</summary><p>TEXT-IDENTIFIER-CORE 当前要求 ASCII 结构标识符，并禁止对来源文本做隐式规范化。只有国际化标识符或原始字节审计出现不可替代消费者，而且 Unicode 版本、比较、双向文本、同形风险、身份和变换都有正反向量时，才建立相应 Profile。</p></details>
+    <details><summary>模型能否评审连续、模糊或风格要求？</summary><p>模型可以产生有范围的候选测量，不能补写精确阈值。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测研究</a>要求分开评测目的、构念、协议、一次调用、原始输出、统计汇总和使用决定；来源、顺序、格式、提示注入、评审者依赖和模型漂移都要接受反例检查。</p></details>
+  </section>
+
+  <section class="content-grid">
+    <h2>组合、发布与外部决定</h2>
+    <details open><summary>Synem 的绑定语法怎样确定？</summary><p>SYN-CORE 已要求最终绑定唯一精确内容身份，ID-CORE 禁止环境搜索和网络最新版本。可读名称、版本范围、摘要算法、绑定记录和独立容器仍需真实消费者与新 Profile；没有消费者时，内容寻址清单与确定性归档可能已经足够。</p></details>
+    <details><summary>GNU 与 ELF 的机制可以借鉴到什么程度？</summary><p><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/gnu-elf-applicability-proposal.md">GNU 与 ELF 适用性研究</a>只采用显式引用、精确绑定、形成映射、独立读取和失败责任。弱符号、默认版本、环境搜索、地址修补和运行期语义漂移都不能成为 Synem 语义。物理符号视图或绑定表仍需消费者、冲突反例和规范向量。</p></details>
+    <details><summary>裁剪发布怎样保留来源关系？</summary><p>ADR-0036 已确定形成版保留原始自然语言，最终发布版移除原文与可逆重建材料，并形成新的内容身份。发布 Profile 仍需定义来源引用闭包、伴随资料、披露政策、失败原子性和正反字节向量；这些条件明确前不实现裁剪。</p></details>
+    <details><summary>签名、授权与最终决定为什么不能共用一个状态？</summary><p>签名验证说明外部包络与待签陈述的关系；授权决定说明精确主体能否尝试精确动作；最终决定依据满足结果、证据和具名权威形成。三者的对象、截止点、撤销方式和结果域不同，物理编码也应分别设计。</p></details>
+    <details><summary><code>attested</code> 为什么仍是待修正名称？</summary><p>同一确定内容可以同时关联多个签名、证明结果、政策、截止点和撤销结论，外部关系不会改变内容身份。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md">生命周期与结果词研究</a>因此先评估移除对象边界错误，再用独立人类证据比较形成阶段与结果称呼；边界修正和发行改名不能互相冒充证据。</p></details>
+  </section>
+
+  <section class="content-wide">
+    <h2>Agent 与运行研究怎样继续</h2>
+    <p>这些横切问题的判断顺序、责任分类和外部资料边界集中在<a href="agent-system-boundaries.html">Agent 系统边界图</a>。本节链接的研究提案均为非规范资料：它们帮助定位反例与候选责任，不创建新的 CORE、Profile、制品、命令或组件。</p>
+    <div class="table-wrap"><table><thead><tr><th>开发者问题</th><th>继续阅读</th><th>当前可以依赖的边界</th></tr></thead><tbody>
+      <tr><td>模型看到什么，目标和计划怎样保持分离？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">上下文装配</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/planning-and-replanning-proposal.md">计划与重规划</a></td><td>外部数据没有指令权；Endem/Synem 固定目标，计划只属于受 Dromen 约束的控制平面。</td></tr>
+      <tr><td>谁在行动，声明的能力何时可用，谁能提交副作用？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-identity-and-accountability-boundaries-proposal.md">身份与责任链</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/capability-discovery-and-negotiation-proposal.md">能力发现与协商</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/parallel-and-speculative-execution-proposal.md">并行与提交</a></td><td>模型、Agent 定义、工作负载、运行实例、实际行动者、授权、会话能力和即时可调用性分别判断；候选分支没有提交权。</td></tr>
+      <tr><td>预览、动作、因果、记忆和恢复能支持什么结论？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/preview-simulation-and-approval-proposal.md">预览与批准</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">状态变化与因果</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/memory-checkpoint-and-resumption-proposal.md">记忆与恢复</a></td><td>预览不是执行，终态不是因果，检查点不恢复旧 Dromen、秘密或权限；恢复必须重新核对并建立新会话。</td></tr>
+      <tr><td>隔离、训练、评测和发布怎样形成证据？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">模型与适配隔离</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">训练与更新</a></td><td>机制名称不能替代有效限制；反馈先是记录，训练形成新的派生模型身份，发布仍需独立评测和具名决定。</td></tr>
+      <tr><td>开放模型、托管服务和数据删除怎样陈述？</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-openness-and-software-freedom-boundaries-proposal.md">模型开放性与软件自由</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/hosted-ai-service-and-user-control-boundaries-proposal.md">托管服务与用户控制</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">数据使用、保留与删除</a></td><td>逐对象说明软件权利、服务实例控制、数据路径、导出、保留和清除；单个许可、API、删除响应或供应商声明不能概括全栈。</td></tr>
     </tbody></table></div>
-    <p>当前规范使用 ADR-0010 与 ADR-0015 定义的制品、六个语义面、形成阶段和结果域，也使用 ADR-0031 至 ADR-0033 更新后的名称与标准 ID。具体发行拼写仍在研究；现有资料已经发现 <code>attested</code> 把外部签名与证明关系误写成内容状态，迁移方案仍待形成新 ADR，因此现行规范值暂不改变。</p>
-    <p>END-CORE 与 END-FMT 已建立 Endem 内容和实验性容器设计。ADR-0015 至 ADR-0020 固定结果域、时间、否定、量化、测量和复合判断；ADR-0021 至 ADR-0030 固定 Synem、Iknem、内容标准分层、Dromen、结构化诊断、协议适配、身份、文本、授权以及内容与外部决定的伴随边界；ADR-0031 至 ADR-0036 固定名称迁移、口头区分、公开动作审查以及来源保留与裁剪发布边界。</p>
-    <p>当前没有 Theor、权威目录、政策求值器或其他组件实现。稳定 ABI、时间与组合物理字段、嵌套或多变量量化、Synem 与 Iknem 物理容器、正式来源语言、Unicode 标识符、原始来源字节绑定、摘要和签名物理 Profile、授权决定与最终决定事件编码仍待确定。</p>
-    <p>以下问题只讨论编码、互操作、性能、安全与正式发布条件，不能借实现便利重新引入旧对象或 23 个命令家族。</p>
   </section>
 
   <section class="content-grid">
-    <h2>Endem 编码与语义</h2>
-    <details open><summary>实验来源清单怎样升级为正式语言？</summary><p>ADR-0014 只关闭首个 <code>.ends</code> 输入。正式语言仍需解决注释、包含、版本演进、歧义、错误恢复和工具支持；在正反语料与真实消费者出现前，不扩展当前清单。</p></details>
-    <details><summary>END-P1 之后还缺哪些字段？</summary><p>ADR-0023 已关闭内容标准分层，但没有预先锁定未来内容。END-P1 已关闭未来首条实现路径评审所需字段，并已有正负极性字节；时间、缺席、单变量量化、测量、组合、条件适用性和统计登记仍需真实消费者、新 Profile 与正反字节向量。ID-CORE 已固定摘要与签名的抽象边界，但它们是否进入容器、采用何种物理 Profile 仍待确定。</p></details>
-    <details><summary>条件与排他组合怎样表达？</summary><p>ADR-0020 只允许单个 Endem 使用 <code>all_of / any_of</code>；ADR-0021 已把跨 Endem 条件固定为 Synem 会话激活。<code>xor / xone</code>、形成时条件编码和复杂守卫语言仍待确定，不得嵌入自由脚本。</p></details>
-    <details><summary>一个根 skena 的语义等价怎样判断？</summary><p>当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-equivalence-and-migration-proposal.md">非规范语义等价与迁移研究提案</a>已经否定跨 Profile 的通用等价布尔值，并把精确身份、封闭结构同构、有范围观察等价、迁移、强化/弱化与模型相似度分开。它提出十六个案例、十三类威胁和 Semantic Key 的进入条件，但仍处于研究阶段；当前只能比较显式符号、关系和条件，不能发明语义哈希。</p></details>
-    <details><summary>Unicode 标识符与原始来源字节何时进入 Profile？</summary><p>TEXT-IDENTIFIER-CORE 已固定当前 ASCII 标识符和来源文本不做隐式规范化，也明确 END-SRCM 不能证明原始文件逐字节保真。只有国际化标识符或原始字节审计出现不可替代消费者，并能固定 Unicode 版本、比较、双向、同形、身份、变换和正反字节向量时，才建立新 Profile。</p></details>
-    <details><summary>权威目录与政策语言怎样获得物理 Profile？</summary><p>AUT-CORE 已固定主体、范围、委托、同意、多人冲突、撤销、重放与结果分离。ADR-0030 又规定 END-P1 的权威字段只是选择器，不能自证授权。权威目录、角色与政策语言、授权伴随关系、事件编码、同意 UI Profile 和外部协议映射仍需真实消费者、独立威胁分析、规范字节与实现阶段授权。</p></details>
-    <details><summary>连续或模糊要求怎样进入六个语义面？</summary><p>ADR-0019 已关闭可量化构念、总体、单位、聚合器、不确定度和阈值的抽象边界。软偏好、感知质量和风格仍不能为了机器处理伪造精确阈值。</p><p><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测研究提案</a>进一步分开评测目的、评分说明、模型调用、原始输出、统计汇总和使用决定。模型评审输出保持 <code>model-candidate</code>；位置、长度、格式、来源、提示注入、评审者依赖和模型漂移都要接受反例检查。</p></details>
-    <details><summary><code>kine/mene</code> 会成为正式发行拼写吗？</summary><p>不会按现状直接发行。<code>kine</code> 已有稳定而无关的英语读音和词义，两个词也不能让首次读者恢复目标方向职责，因此已经未通过桌面审查。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/telis-release-terms-proposal.md">非规范 <code>telis</code> 发行词候选提案</a>建议先用独立人类证据验证 <code>reach/maintain</code>。候选不是现行枚举；END-TEL-001、END-P1 和向量暂不修改，也不建立别名。候选通过验证并形成单独 ADR 后才会一次性迁移。</p></details>
+    <h2>术语与实现发布</h2>
+    <details open><summary><code>kine/mene</code> 会按现状成为发行拼写吗？</summary><p>不会。<code>kine</code> 已有稳定而无关的英语读音和词义，两个词也不能让首次读者恢复目标方向职责。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/telis-release-terms-proposal.md"><code>telis</code> 发行词研究</a>提出比较 <code>reach/maintain</code>，但候选尚未通过独立人类证据，也不是现行枚举。</p></details>
+    <details><summary>哪些专名值得保留？</summary><p><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/release-terminology-simplification-proposal.md">发行术语去专名化研究</a>比较对象、角色与动作的直白称呼；<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-facet-terminology-proposal.md">语义面与观察词研究</a>继续检查各职责是否需要专名。专名只有在比普通术语更清楚、口头可区分且不会误导职责时才值得发行。</p></details>
+    <details><summary>名称怎样证明适合传播？</summary><p>名称先通过语义、冲突和读音初筛，再用首次朗读、听写回填与成对混淆验证词表内口头区分。任务、样本边界和停止规则见<a href="../docs/terminology-and-pronunciation.html">术语与读音验证指南</a>。候选还要核对相邻人工智能与开发工具、包管理器、命令、域名和目标法域商标；未完成时只称候选。</p></details>
+    <details><summary>独立 Theor 需要什么实现证据？</summary><p>未来 Theor 必须拥有自己的数据结构、解码器、验证器和错误路径，只与形成路径共享公开规范与字节向量。当前只有规范和验证条件；真实实现还需依赖审计、差分测试、长时模糊测试、故障注入和跨平台运行证据。</p></details>
+    <details><summary>怎样证明构建可复现？</summary><p>ID-REP-001 要求精确输入闭包、工具与参数、环境约束、至少两条独立产出路径和逐字节输出比较。构建标识、签名或一次重跑不能替代隔离构建、缓存独立性和差异归因。</p></details>
   </section>
 
-  <section class="content-grid">
-    <h2>Synem 与发布</h2>
-    <details open><summary>绑定标识和版本约束采用什么语法？</summary><p>SYN-CORE 已要求最终绑定唯一精确内容身份，ID-CORE 又固定完整引用的必需语境，并禁止环境搜索和网络最新版本。TEXT-IDENTIFIER-CORE 进一步规定当前结构标识符保持 ASCII、大小写敏感且与 locale 无关。可读名称、版本范围的候选语法、摘要算法基线、国际化标识符和绑定记录物理格式仍需新 Profile。</p></details>
-    <details><summary>ELF 的符号与重定位思想怎样用于 Synem？</summary><p>当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/gnu-elf-applicability-proposal.md">非规范 GNU 与 ELF 适用性研究提案</a>只采用显式引用、精确绑定、形成映射和失败责任。它拒绝地址修补、弱符号、默认版本、环境搜索、顺序选择和运行期语义漂移。物理符号视图、绑定表或版本语法只有在出现真实 Synem 消费者、同名冲突反例和规范向量后才能提出 ADR。</p></details>
-    <details><summary>什么时候允许依赖循环？</summary><p>SYN-GRF-001 已规定第一阶段拒绝依赖与激活循环。未来若支持，必须先定义固定点语义、披露与验收顺序、预算上限、失败原子性和跨实现向量。</p></details>
-    <details><summary>Synem 是否需要独立物理容器？</summary><p>在出现多 Endem、流式读取或离线分发的真实消费者前，内容寻址清单和现有确定性归档可能已经足够。不能只为形式完整提前创造格式。</p></details>
-    <details><summary>裁剪发布 Profile 怎样编码来源分离？</summary><p>ADR-0036 已确定形成版保留原始自然语言，最终发布版移除原文和可逆重建材料，并以新身份重新验证。仍待确定的是发布 Profile 的字段、来源引用闭包、伴随资料关联、披露政策、失败原子性和正反字节向量；这些条件锁定前不实现裁剪，也不增加公开动作。</p></details>
-    <details><summary>外部签名采用什么算法与撤销策略？</summary><p>ADR-0035 已把签名保留为外部集成责任，而不是公开动作。ID-CORE 固定有类型待签陈述、外置包络、权威分离、截止点和撤销解释；算法基线、多签政策、密钥体系、证书 Profile、时间来源、透明日志、撤销分发和离线包络物理编码仍需独立 ADR 与证据。</p></details>
-    <details><summary>为什么 <code>attested</code> 不能继续作为内容状态？</summary><p>精确内容可以同时关联多个签名、证明结果、验证政策、截止点和撤销结论；这些外部关系不会改变内容身份。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md">生命周期与结果词研究</a>已把迁移分成两条轴：先决定是否移除对象边界错误，同时暂时保留 <code>nascent/coherent</code>；再用独立人类证据比较 <code>formed/resolved</code> 等发行称呼。这样不会让未经验证的新名字拖延边界修正，也不会借边界修正提前改名。</p></details>
-  </section>
-
-  <section class="content-grid">
-    <h2>Dromen、Drasor 与 Iknem</h2>
-    <p>这些横切问题的当前策略、正在研究的内容和外部运行事实集中在<a href="agent-system-boundaries.html">Agent 系统边界图</a>。本节链接的研究提案均为非规范资料：它们用来拆分问题、反例和责任，不创建新的 CORE、Profile、制品、命令或组件。开发者只执行已经进入现行规范的规则；缺少物理 Profile 或实现证据时，停在明确的待定边界。</p>
-    <details open><summary>Dromen 的运行 API 和平台隔离怎样实现？</summary><p>DRO-CORE 已固定主体、政策、环境、能力、秘密、预算、激活、观察、只读与销毁边界。未来实现仍需选择进程模型、沙箱组合、凭据代理、事件编码、预算计数器与销毁机制，并用平台级对抗证据证明，而不是把 Linux、容器或模型 SDK 名称当作隔离结论。</p></details>
-    <details><summary>模型、Agent 定义、工作负载和运行实例怎样保持分离？</summary><p>它们回答不同问题：模型参与候选生成，Agent 定义定位软件与政策闭包，工作负载身份支持信任域中的认证，运行实例定位精确副本；会话、凭据、实际行动者、被代表主体与一次调用还要分别关联。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-identity-and-accountability-boundaries-proposal.md">软件 Agent 身份、委托与责任链研究提案</a>检查这些关系，并把现阶段的唯一义务归还 ID、AUT、DRO、ADP、IKN、DIA 与 TEXT-IDENTIFIER。</p></details>
-    <details><summary>模型上下文怎样装配而不让数据取得指令权？</summary><p>TEXT-IDENTIFIER、AUT、ADP 与 DRO 已分别约束模型实际输入、授权、外部来源和会话上限，但尚未统一输入选择、角色、顺序、截断、缓存和损失。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">模型上下文装配研究提案</a>主张由控制平面形成可审计装配说明，并把未来条款归还现有规范。</p></details>
-    <details><summary>Agent 声明的能力何时才真正可调用？</summary><p>Agent Card、工具列表、schema 与签名只能形成有来源的能力声明；协议初始化只确定双方支持的机制，AUT 决定精确动作是否获权，Dromen 固定本会话上限，调用前还要核对端点、预算、配额、输入和依赖。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/capability-discovery-and-negotiation-proposal.md">能力发现与协商研究提案</a>进一步说明：列表新增不能扩大旧 Dromen，移除或实质 schema 漂移必须阻止陈旧调用，一次成功也不能成为长期权限、<code>met</code> 或 <code>accepted</code>。</p></details>
-    <details><summary>多个 Agent 或工具分支并行时，谁可以提交外部副作用？</summary><p>并行只改变尝试顺序，不复制 Dromen 的能力和预算。每个分支必须绑定实际行动者、输入快照、能力子集、预算份额、调用和候选；默认只有候选，提交路径还要重新核对当前对象身份、授权、会话、协议、幂等或去重和观察责任。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/parallel-and-speculative-execution-proposal.md">并行、推测执行与提交边界提案</a>说明最快完成、模型评分和 Task completed 都不产生提交权；取消也不能洗掉已经发生或未知的副作用。</p></details>
-    <details><summary>目标、计划和重规划怎样分开？</summary><p>Endem/Synem 固定终态，Dromen 固定会话上限，计划只是在上限内可变的控制平面状态。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/planning-and-replanning-proposal.md">目标、计划与重规划研究提案</a>说明步骤、handoff、MCP/A2A Task 和工具完成都不能直接成为目标满足或最终接受。</p></details>
-    <details><summary>终态成立是否表示某个行动者实现了目标？</summary><p>不能。现有 <code>krin</code> 能比较终态，却没有固定前态、动作发生、竞争行为者或因果方法。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">状态变化与因果归因研究提案</a>把终态满足、动作发生、状态转变、因果归因、授权责任和最终决定分开；其中对 <code>kine</code> 的目标方向解释尚未修改 END-TEL-001。</p></details>
-    <details><summary>预览或 dry-run 通过后能否直接批准并认定完成？</summary><p>不能。预览只说明决定者看到了什么，模拟只说明声明条件下预计什么，授权只允许精确请求尝试。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/preview-simulation-and-approval-proposal.md">预览、模拟与批准研究提案</a>结合 GNU Make 的 dry-run 例外、MCP/A2A、OpenAI Agent 审批和 NIST 人机风险说明：执行前仍须核对漂移，执行后仍须独立观察。</p></details>
-    <details><summary>保存检查点后能否恢复原会话、权限和完整记忆？</summary><p>不能。会话历史只是候选输入；跨运行提炼指导必须绑定来源、适用项目、变换、版本和截止点，陈旧、冲突、跨项目或跨租户记忆不能成为当前事实、政策或权威。压缩摘要必须披露变换与损失，检查点只描述一个截止点，工作区快照只保存声明范围内的文件与环境状态，外部 Task 句柄只定位协议状态。</p><p><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/memory-checkpoint-and-resumption-proposal.md">记忆、检查点与恢复研究提案</a>借助 OpenAI Agents SDK、OpenAI Sandbox Agents、MCP、A2A、GNU Make 与 GNU Guix 分开对话状态、跨运行记忆、工作区恢复、继续、重试、重放、回滚和补偿。旧 Dromen、秘密与权限不能复活；恢复必须重新验证并建立新会话。</p></details>
-    <details><summary>Drasor 怎样隔离模型和能力适配器？</summary><p>隔离不能缩写成“放进容器”或“启用 seccomp”。<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">模型、适配器与能力域隔离研究提案</a>分别检查模型输入、控制面、授权、凭据与实时句柄、协议适配、文件、网络、资源终止、观察和外部目标。模型永不接收原始凭据和实时句柄，控制失效时对应能力关闭失败；取消、超时和主进程退出也不等于后代、远端任务或副作用已经停止。</p></details>
-    <details><summary>系统怎样从反馈学习而不混淆记忆、训练和发布？</summary><p>会话历史和检索只改变候选输入；训练或微调会产生新的外部派生模型身份；部署回滚只改变当前选择，不能撤销已经发生的数据使用、输出或副作用。</p><p><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究提案</a>分开数据快照与资格、反馈记录、处理、基础模型、更新方法、执行语境、派生模型、评测、发布和运行观察。人工或模型反馈都不能未经授权、污染检查、独立评测和具名决定直接进入生产更新。</p></details>
-    <details><summary>模型权重可下载时能否称为开源模型？</summary><p>不能只凭参数可下载作出这个结论。托管服务、模型参数、架构、推理与训练代码、训练数据说明、数据、文档、每项许可和首选修改形式必须分别核对。</p><p><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-openness-and-software-freedom-boundaries-proposal.md">模型开放性与软件自由研究提案</a>把 GNU 软件自由、OSI Open Source AI Definition 1.0、Model Openness Framework 发布完整性、法律审查和技术复现分开。Apache-2.0 仓库、模型卡、SBOM、签名或供应商自称都不能自动覆盖模型全栈。</p></details>
-    <details><summary>托管模型什么时候能进入 Noemion 运行路径？</summary><p>只有具名政策接受实际执行者、模型与配置、数据外发、保留、下游服务、凭据、状态、导出、切换和停服边界时，才可在一次新 Dromen 中启用。设备内界面、源码公开、AGPL、数据驻留、API 兼容或服务状态正常都不能单独证明用户控制真实服务实例。</p><p><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/hosted-ai-service-and-user-control-boundaries-proposal.md">托管人工智能服务与用户控制边界研究提案</a>用 GNU、MCP 与 NIST 资料分开第三方托管、自主管理、设备内执行和通信服务。调用方只能主张能够观察的请求、服务语境、返回和限制；切换执行路径必须重新核对身份、评测、权限和决定。</p></details>
-    <details><summary>删除请求成功后，怎样判断副本、派生物与审计记录？</summary><p>先分开访问、目的授权、实际处理、披露、保留、删除请求、删除授权、删除操作、清除验证与清除确认。主记录逻辑删除、TTL 到期、命令成功或供应商收据，只能支持对应阶段；缓存、备份、快照、索引、嵌入、下游副本和派生模型影响必须逐项报告状态与未知范围。</p><p><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">软件 Agent 数据使用、保留与删除边界研究提案</a>用 NIST Privacy Framework、NIST SP 800-88 Rev. 2、RFC 6973、DPV、MCP 与 GNU 资料组织反例；法律依据、法定保留、具体期限和技术实现仍取决于真实政策与消费者。</p></details>
-    <details><summary>Iknem 怎样获得物理编码？</summary><p>IKN-CORE 已固定 phain 对齐、有限无环溯源、证据类别、有效性、覆盖、决定分离和最小披露。字段编号、容器、摘要与签名算法、透明日志、撤销分发、跨生产者时钟归并、隐私策略和规范字节仍需真实消费者与新 Profile。</p></details>
-    <details><summary>mene 时间怎样进入未来 Profile？</summary><p>ADR-0016 已决定 fixed/elapsed、strict/budgeted 与覆盖结果；字段编号、数值宽度、亚秒精度、闰秒、循环日历、时区数据库封装、跨重启关联和多生产者归并仍保持开放。</p></details>
-    <details><summary>授权与最终决定事件怎样编码与撤销？</summary><p>AUT-CORE 已定义 grant/deny/defer 的授权决定内容、重放、时效和多人规则；ADR-0015 与 IKN-DEC-001 则规定 accepted/rejected/deferred 必须保存原满足结果与具名权威。两类事件仍保持正交，其字段、物理编码、撤销传播和外部协议映射仍需独立 Profile 与规范字节。</p></details>
-    <details><summary>MCP 与 A2A 的具体 Profile 怎样锁定？</summary><p>ADP-CORE 已固定版本、对端、能力、调用、状态、产物、取消、重试、交付和安全不变量。具体字段映射仍需等待精确稳定版本、真实消费者、协议专属威胁、正反协议向量和实现阶段授权；不得用通用 SDK 对象替代 Profile。</p></details>
-    <details><summary>结构化诊断怎样获得物理编码与协议映射？</summary><p>DIA-CORE 已固定机器身份、生产语境、层次、位置、主错误、恢复和安全边界。JSON、CBOR、SARIF、Problem Details、MCP、CLI 退出状态、日志与遥测字段仍需真实消费者、版本规则、披露政策、规范字节和跨实现证据；任何映射都不能改写本地结果域或授权。</p></details>
-  </section>
-
-  <section class="content-grid">
-    <h2>实施与发布条件</h2>
-    <details open><summary>独立 Theor 使用什么实现边界？</summary><p>未来 Theor 必须拥有自己的数据结构、解码器、验证器和错误路径，只与 Ktisor 共享公开规范和字节向量。当前没有实现；Rust 或第二种语言仍需根据共同故障风险和维护成本重新确认。</p></details>
-    <details><summary>独立 Theor 还缺什么证据？</summary><p>当前只有规范向量和未来验证条件。实现阶段需要建立依赖审计、差分测试、长时 fuzz、故障注入和跨平台运行，用来寻找两条独立路径的共同输入假设。</p></details>
-    <details><summary>哪些现行名称还值得成为发行专名？</summary><p>尚待确定。当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/release-terminology-simplification-proposal.md">非规范发行术语去专名化提案</a>建议只保留 Endem 进入人类验证，并比较对象、角色与动作的直白候选；后续<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-facet-terminology-proposal.md">语义面与观察词提案</a>又保留七项职责，但建议以直白字段比较现行短词。最新<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md">生命周期与结果词提案</a>还发现 <code>attested</code> 把外部多值签名和证明关系误写成内容单值状态，并比较 <code>formed/resolved/undetermined/no_allowed_projection/stopped</code>。三组候选都不是现行规范值、字段、CLI、别名或重定向；独立人类验证通过并形成迁移 ADR 后，才会一次性替换旧入口。</p></details>
-    <details><summary>名称何时满足正式发布条件？</summary><p>ADR-0031 至 ADR-0033 只完成工程初筛、当前名称选择与标准 ID 可读性治理；ADR-0034 进一步要求为目标语言登记读音，并用首次朗读、听写回填和成对混淆记录证明词表内口头区分。具体任务、样本边界和停止规则见<a href="../docs/terminology-and-pronunciation.html">术语与读音验证指南</a>，当前尚未执行。<code>kine/mene</code> 已在此前先未通过桌面审查，<code>reach/maintain</code> 也只处于候选状态。公开发行前仍需重新检查相邻 AI 与开发工具、目标法域商标、近似类别、包管理器、命令和域名，并完成法律复核。任一审查失败都必须重新命名或给出经验证的新候选，审查完成前不得声称名称已具备发行条件。</p></details>
-    <details><summary>怎样证明构建可复现？</summary><p>ID-REP-001 已要求精确输入闭包、工具与参数、环境约束、至少两条独立产出路径和逐字节输出比较。未来实现仍需建立真实隔离构建、缓存独立性、差异归因和发布证据；build ID、签名和一次重跑都不能替代这些证据。</p></details>
-  </section>
-
-  <section class="content-band">
-    <h2>问题关闭规则</h2>
-    <p>设计问题可以由权威规范或 ADR、正反向量和明确失败语义关闭。涉及组件行为、性能或互操作的问题必须保持开放，直到出现相应实现证据；论文、模型指标、概念演示或单一实现行为不能单独锁定 ABI。</p>
+  <section class="content-stack">
+    <h2>怎样关闭一个开放问题</h2>
+    <ol>
+      <li>写清会被改变的对象、使用者、主张和失败后果。</li>
+      <li>定位现有 CORE、Profile 与 ADR 的唯一主责任，说明为什么现有表示不足。</li>
+      <li>给出支持案例、反例、威胁、资源上限和不会采用的替代方案。</li>
+      <li>若涉及物理格式，提供版本、规范字节、正反向量、错误分层和迁移身份。</li>
+      <li>若涉及组件行为、安全、性能或互操作，提供对应平台与跨实现运行证据。</li>
+      <li>若涉及公开名称，完成目标语言读音、口头区分、相邻术语和冲突复核。</li>
+      <li>由权威规范或 ADR 明确结论、适用范围、替代内容和仍然未知的部分。</li>
+    </ol>
+    <p>论文、模型指标、概念演示、单一实现行为和文档一致性检查都可以提供输入，但不能单独关闭物理接口或运行主张。</p>
+    <div class="page-links">
+      <a class="page-link" href="decisions.html"><strong>架构决策</strong><span>按开发者问题查找现行 ADR、CORE 与停止条件。</span></a>
+      <a class="page-link" href="agent-system-boundaries.html"><strong>Agent 系统边界图</strong><span>从一次工具调用检查身份、授权、会话、证据与决定。</span></a>
+      <a class="page-link" href="../development/implementation-roadmap.html"><strong>开发路线图</strong><span>查看进入实现前仍需满足的证据条件。</span></a>
+    </div>
   </section>
   <div class="next-prev"><a href="adr-0036-source-bearing-and-stripped-release.html">← ADR-0036</a><a href="../development/implementation-roadmap.html">开发路线图 →</a></div>
 </main>

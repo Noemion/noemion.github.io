@@ -3053,18 +3053,48 @@ def validate_jekyll_sources():
             errors.append(f"public developer guidance retains ambiguous semantic authorization wording: {stale_phrase}")
     open_questions_text = (SOURCE_ROOT / "architecture" / "open-questions.html").read_text()
     for token in (
-        "先分清可依赖规则和待定接口",
+        "先判断问题处于哪一层",
         "现有材料",
         "开发者现在怎么做",
         "不能据此声称",
         "非规范研究提案",
         "仍待确定的物理 Profile",
         "未来实现与运行证据",
+        "用一次字段变更检查是否可以继续",
+        "signing_algorithm",
+        "真正缺少什么？",
+        "Agent 与运行研究怎样继续",
         "本节链接的研究提案均为非规范资料",
         "缺少物理 Profile 或实现证据时，停在明确的待定边界",
+        "名称怎样证明适合传播？",
+        "怎样关闭一个开放问题",
     ):
         if token not in open_questions_text:
             errors.append(f"open questions guide missing developer decision boundary: {token}")
+    for proposal_name in (
+        "semantic-equivalence-and-migration-proposal.md",
+        "model-assisted-evaluation-proposal.md",
+        "telis-release-terms-proposal.md",
+        "gnu-elf-applicability-proposal.md",
+        "lifecycle-and-result-terminology-proposal.md",
+        "software-agent-identity-and-accountability-boundaries-proposal.md",
+        "model-context-assembly-proposal.md",
+        "capability-discovery-and-negotiation-proposal.md",
+        "parallel-and-speculative-execution-proposal.md",
+        "planning-and-replanning-proposal.md",
+        "state-change-and-causal-attribution-proposal.md",
+        "preview-simulation-and-approval-proposal.md",
+        "memory-checkpoint-and-resumption-proposal.md",
+        "model-adapter-isolation-proposal.md",
+        "model-training-and-update-boundaries-proposal.md",
+        "model-openness-and-software-freedom-boundaries-proposal.md",
+        "hosted-ai-service-and-user-control-boundaries-proposal.md",
+        "software-agent-data-use-retention-and-deletion-boundaries-proposal.md",
+        "release-terminology-simplification-proposal.md",
+        "semantic-facet-terminology-proposal.md",
+    ):
+        if proposal_name not in open_questions_text:
+            errors.append(f"open questions guide must route the research proposal: {proposal_name}")
     specification_reader_contracts = {
         "specifications/dromen.html": ("一次会话必须固定什么",),
         "specifications/diagnostics.html": (
