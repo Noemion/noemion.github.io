@@ -616,6 +616,16 @@ GNU Coreutils `timeout`、Make job slots 与 Guix 容器环境只保留为终止
 
 [GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)要求手册先照顾初学者、首次使用时定义术语，并按用户概念和问题组织资料，而不是按实现内部结构组织。[RFC 7322](https://www.rfc-editor.org/rfc/rfc7322.html)要求技术文档保持清楚、一致并消除重复或冲突文字；它在这里仅作为写作指南，不是 Noemion 的技术规范。截至复核日，[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)仍把产业标准、社区协议以及身份认证与安全评测研究作为不同工作轴。本轮据此调整公开解释与质量契约，没有改变 CORE、Profile、登记、向量、字段、组件或实现状态。
 
+## Endem 基础规范渐进式披露二次复核 · 2026-07-15
+
+第一次学习路径修订已经用健康目标解释六项职责，并把完整场景留回 END-SCEN；页面后半部分仍分别展开时间、否定、量化、测量、复合判断、结果域、形成分类、身份与安全读取。十八个章节、十二张表和五十四行矩阵使基础页重新承担了全部专题参考职责，开发者很难在首次阅读时区分“必须现在理解的核心”与“遇到特定目标才进入的专题”。
+
+当前页面用同一个健康目标贯穿来源、意义、事态、方向、判据、观察、证据和决定。容器、Profile、内容接受以及形成版、裁剪发布版、受控伴随资料在同一学习阶段说明；<code>aseme / apor / agno / fault</code> 和五个结果域分别回答不同失败问题。时间、缺席、集合、测量、组合、因果与外部授权改成按开发者问题路由的七行表，保留每项停止条件和精确来源。页面因此收敛为九个章节、六张表和二十八行矩阵，同时保留六项职责、单根不变量、结构显示、现行形成分类、读音状态和安全读取边界。
+
+[GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)要求文档既能顺序教学又能按主题查阅，并按用户问题而不是实现结构组织。[RFC 9334](https://www.rfc-editor.org/rfc/rfc9334.html)把 Evidence、Verifier 结果和 Relying Party 决定分开；[in-toto Statement v1](https://github.com/in-toto/attestation/blob/main/spec/v1/statement.md)把陈述类型绑定到不可变摘要主体。截至复核日，[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)仍分别推进产业标准、开放协议、身份认证与安全评测研究。这些资料支持把内容、证据、协议和决定分层，但不定义 Endem 字段、状态、Profile 或实现。
+
+本轮只重构公开解释、页面质量契约与审计记录。END-CORE、END-FMT、END-P1、登记、场景、向量、读音候选和组件状态均未改变。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。
