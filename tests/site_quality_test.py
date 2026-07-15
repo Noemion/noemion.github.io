@@ -136,7 +136,7 @@ DOC_GUIDE_HEADINGS = {
         "先用一张责任图定位问题", "用一次 Agent 工作读图", "看到终态后按主张强度继续核对", "委托或恢复时重新建立边界", "三个实现域不能合并", "按问题进入进阶资料", "当前可以证明什么",
     ],
     "docs/development-guide.html": [
-        "先定义变更主张", "当前范围", "规范与 ADR 先行", "变更工作流", "把外部资料送进模型前保留来源与职责", "建议仓库边界", "审查清单", "模型与协议",
+        "先写一个可被反例推翻的主张", "用一条变更记录贯穿责任", "按权威顺序修改", "按变更类型选择证据", "模型参与时先固定实际输入", "当前阶段怎样停止",
     ],
     "docs/endem-reference.html": [
         "应用总览", "Ktisor 子命令", "theor 的独立性", "drase 的隔离性", "不建设独立模型平台",
@@ -3263,6 +3263,26 @@ def validate_jekyll_sources():
     ):
         if token not in development_guide_text:
             errors.append(f"development guide missing falsifiable change boundary: {token}")
+    for obsolete_heading in (
+        "## 当前范围",
+        "## 规范与 ADR 先行",
+        "## 变更工作流",
+        "## 把外部资料送进模型前保留来源与职责",
+        "## 建议仓库边界",
+        "## 审查清单",
+        "## 模型与协议",
+    ):
+        if obsolete_heading in development_guide_text:
+            errors.append(
+                "development guide retains a duplicated implementation or checklist section: "
+                + obsolete_heading
+            )
+    for premature_path in ("ktisor/      Rust 写入器", "theor/      独立只读 Theor", "cli/        endem 调度"):
+        if premature_path in development_guide_text:
+            errors.append(
+                "development guide presents an unfrozen implementation tree as current guidance: "
+                + premature_path
+            )
     for source in (
         SOURCE_ROOT / "components" / "ktisor.html",
         SOURCE_ROOT / "development" / "testing.html",

@@ -77,7 +77,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Installation and usage](https://noemion.github.io/docs/installation-and-usage.html) — current availability and future release principles
 - [Terminology and pronunciation validation](https://noemion.github.io/docs/terminology-and-pronunciation.html) — human first-read, listen-back, responsibility matching, statistical boundary, and release-name stop rules
 - [Architecture guide](https://noemion.github.io/docs/architecture-guide.html) — one Agent task mapped to artifact, session, action, evidence, and decision boundaries
-- [Development guide](https://noemion.github.io/docs/development-guide.html) — change claims, normative sources, failure ownership, minimum evidence, and claim limits
+- [Development guide](https://noemion.github.io/docs/development-guide.html) — a falsifiable change claim carried through authority, failure ownership, evidence, and claim limits
 - [Endem application reference](https://noemion.github.io/docs/endem-reference.html) — Endem actions, components, trust boundaries, and current status
 - [Specifications reference](https://noemion.github.io/docs/specifications-reference.html) — task-based source lookup, authority order, research status, ADRs, and evidence boundaries
 
