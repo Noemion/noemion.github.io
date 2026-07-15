@@ -3256,7 +3256,19 @@ def validate_jekyll_sources():
         "Agent 与运行研究怎样继续",
         "本节链接的研究提案均为非规范资料",
         "缺少物理 Profile 或实现证据时，停在明确的待定边界",
+        "按四个问题域继续研究",
+        "展开与当前问题直接相关的一组即可",
+        "内容、格式与迁移缺少什么？",
+        "组合、发布与外部决定怎样分开？",
+        "术语与实现怎样进入发行？",
         "名称怎样证明适合传播？",
+        "外部资料只决定证据类型",
+        "GNU Manuals",
+        "GNU BFD 信息损失",
+        "NIST AI Agent Standards Initiative",
+        "NIST AI 800-3",
+        "物理 Profile 待定",
+        "组件未实现",
         "怎样关闭一个开放问题",
     ):
         if token not in open_questions_text:
@@ -3285,6 +3297,14 @@ def validate_jekyll_sources():
     ):
         if proposal_name not in open_questions_text:
             errors.append(f"open questions guide must route the research proposal: {proposal_name}")
+    for old_heading in (
+        "<h2>内容与物理格式</h2>",
+        "<h2>组合、发布与外部决定</h2>",
+        "<h2>Agent 与运行研究怎样继续</h2>",
+        "<h2>术语与实现发布</h2>",
+    ):
+        if old_heading in open_questions_text:
+            errors.append(f"open questions guide retains a flat research inventory: {old_heading}")
     specification_reader_contracts = {
         "specifications/synem.html": (
             "按四步形成固定闭包",
