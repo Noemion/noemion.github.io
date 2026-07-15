@@ -661,12 +661,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             "Iknem",
             "有范围证据记录（设计阶段名称 Iknem）",
-            "先用一次发布判断理解它",
-            "按九项责任建立一项记录",
-            "固定对象与问题",
-            "四个结果必须分别保存",
-            "外部输入只按原身份进入",
-            "相邻问题按需要继续展开",
+            "先判断一项信息能支持什么",
+            "按四步形成并评估一项记录",
+            "固定对象与主张",
+            "四个结果不能合并",
+            "外部机制只提供有范围输入",
             "规范来源与当前上限",
             "名称仍在研究",
             "phain",
@@ -703,6 +702,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             r">vector-checker-only</td>",
             r">awaiting-decision</td>",
             r"规范化与有损变换",
+            r"<h2>先用一次发布判断理解它</h2>",
+            r"<h2>按九项责任建立一项记录</h2>",
+            r"<h2>四个结果必须分别保存</h2>",
+            r"<h2>外部输入只按原身份进入</h2>",
+            r"<h2>相邻问题按需要继续展开</h2>",
             r"<h2>轨迹怎样支持动作、转变与因果主张</h2>",
             r"<h2>历史与检查点何时能支持证据</h2>",
             r"<h2>删除操作成功不等于清除证据充分</h2>",
@@ -3256,6 +3260,11 @@ def validate_jekyll_sources():
             errors.append(f"open questions guide must route the research proposal: {proposal_name}")
     specification_reader_contracts = {
         "specifications/dromen.html": ("按五步建立本次边界",),
+        "specifications/iknem.html": (
+            "按四步形成并评估一项记录",
+            "尚无物理格式",
+            "尚未实现",
+        ),
         "specifications/diagnostics.html": (
             "诊断必须保持哪些边界",
             "物理格式待定",

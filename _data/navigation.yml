@@ -18,7 +18,7 @@ global:
       - { href: /specifications/endem.html, label: Endem, description: 最小自然语言目标制品与六个语义面, cover: endem-spec, cover_label: "SIGN → SITUATION" }
       - { href: /specifications/synem.html, label: Synem, description: 已解析、可封装的组合闭包, cover: synem, cover_label: "RESOLVED CLOSURE" }
       - { href: /specifications/dromen.html, label: Dromen, description: 一次运行的只读会话契约, cover: dromen, cover_label: "SESSION CONTRACT" }
-      - { href: /specifications/iknem.html, label: Iknem, description: 含 phain 的有范围证据, cover: iknem, cover_label: "SCOPED EVIDENCE" }
+      - { href: /specifications/iknem.html, label: Iknem, description: 限定对象、方法与结论范围的证据记录, cover: iknem, cover_label: "SCOPED EVIDENCE" }
   - key: endem
     href: /endem/index.html
     label: 应用
