@@ -155,12 +155,10 @@ HOME_HEADINGS = [
     "继续阅读",
 ]
 BACKGROUND_HEADINGS = [
-    "“编译目标”不是生成代码",
-    "从一次依赖升级看清缺口",
-    "Noemion 与相邻层怎样配合",
-    "为什么需要一个持久目标对象",
-    "从 GNU 工具链借鉴什么",
-    "责任怎样分配",
+    "先分清项目研究什么",
+    "用一次依赖升级定位缺失事实",
+    "为什么目标必须成为独立对象",
+    "相邻系统各自回答什么",
     "当前开发者可以依赖什么",
 ]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
@@ -5329,7 +5327,18 @@ def main():
         ):
             if term not in visible_text:
                 errors.append(f"about/background.html: missing adjacent-layer boundary {term}")
-        for obsolete_heading in ("为什么需要 Endem", "与相邻形式的区别", "信任边界", "当前边界"):
+        for term in (
+            "发布 Profile、字段映射和正反向量尚未定义",
+            "含来源形成制品与未来裁剪发布制品具有不同精确身份",
+            "独立对象的价值不在于比普通文本、提示词文件或 AI Skill 保存得更久",
+            "协议能力、调用成功和任务终态不能证明业务授权、目标满足或最终接受",
+        ):
+            if term not in visible_text:
+                errors.append(f"about/background.html: missing goal-object boundary {term}")
+        for obsolete_heading in (
+            "为什么需要 Endem", "与相邻形式的区别", "信任边界", "当前边界",
+            "为什么需要一个持久目标对象", "从 GNU 工具链借鉴什么", "责任怎样分配",
+        ):
             if obsolete_heading in parser.h2_texts:
                 errors.append(
                     "about/background.html: must not restore inventory-style heading "
