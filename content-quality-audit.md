@@ -180,7 +180,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | 页面家族 | 已逐页复核的正式路由 | 本轮处理 |
 | --- | --- | --- |
 | 门户（1） | `/index.html` | 保持 Noemion 为项目主语；把控制平面和下一步入口改为无需内部术语即可理解的表达。 |
-| 项目背景（3） | `/about/index.html`、`/about/background.html`、`/about/intellectual-foundations.html` | 把核心问题拆成形成、组合、实现、验收四步；思想基础页从依赖升级案例进入，并按开发者问题分开思想启发、当前规范、研究资料与采用限制。 |
+| 项目背景（3） | `/about/index.html`、`/about/background.html`、`/about/intellectual-foundations.html` | 从依赖升级案例分开来源、协议任务、工具调用、授权、观察与满足判断；再按开发者问题说明工程责任、相邻层、思想启发、当前规范与采用限制。 |
 | 架构与 ADR（33） | `/architecture/index.html`、`/architecture/endem-lifecycle.html`、`/architecture/decisions.html`、`/architecture/agent-system-boundaries.html`、`/architecture/adr-0008-endem-system.html` 至 `/architecture/adr-0035-public-actions-and-internal-responsibilities.html`、`/architecture/open-questions.html` | 生命周期解释每阶段回答什么；Agent 边界图把规范、研究和运行事实分层；历史 ADR 标明失效名称；现行 ADR 固定语义、格式、判断、信任、命名、口头区分与公开动作边界。 |
 | 组件（4） | `/components/index.html`、`/components/ktisor.html`、`/components/theor.html`、`/components/drasor.html` | 首段先解释三个组件为什么不能合并；把写入器、读取器、策略、句柄和请求等职责说清楚，只保留必要接口标识。 |
 | 规范（10） | `/specifications/index.html`、`/specifications/endem.html`、`/specifications/synem.html`、`/specifications/dromen.html`、`/specifications/iknem.html`、`/specifications/diagnostics.html`、`/specifications/adapters.html`、`/specifications/identity.html`、`/specifications/text-and-identifiers.html`、`/specifications/authority.html` | 先给直白定义，再给规范词；授权页明确登录、签名、Agent 状态与点击都不能自行产生语义或最终决定权。 |
@@ -460,6 +460,16 @@ Ktisor 与语言规范还残留“已授权语义决定”“已授权 semion”
 [GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)要求资料按读者的问题和概念组织、首次定义专门术语并使用主动语态；[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)把 Agent 互操作、身份、授权、安全研究和评价作为不同方向；[Stanford Encyclopedia of Philosophy 的 Speech Acts 词条](https://plato.stanford.edu/entries/speech-acts/)则明确分开内容、言外之力、权威和成功条件。这些资料支持问题分层，不直接定义 Noemion 字段、算法或结果域。
 
 这项修订没有改变 CORE 条款、Profile、向量、字段、组件或接口。质量契约现在要求具体开发案例、当前 AI Agent 责任、读音状态和问题驱动章节，并阻止恢复哲学家清单或书目库存式标题。
+
+## Agent 协议状态与目标满足边界复核 · 2026-07-15
+
+背景页此前从六个语义短词开始，再用 Prompt、Skill、数据容器和传统目标文件四张卡片说明差异。开发者仍需自行推断 MCP 工具成功、A2A Task 完成、CI 通过和遥测记录为什么不能单独证明用户目标已经满足。首屏的 `Motivation / Scope / Non-goals` 也只暴露页面模板，不能说明项目状态或读者任务。
+
+当前页面从一次依赖升级进入，逐项说明 Prompt、MCP 调用、A2A `TASK_STATE_COMPLETED`、包管理器、CI 和遥测分别能够证明什么、没有回答什么。随后把上下文与工具协议、Agent 间任务协议、工作流、身份政策、遥测、目标契约和具名决定者分配到不同责任层。六个现行字段退到直白开发者问题之后，字段名不再充当理解前提。
+
+[MCP 架构说明](https://modelcontextprotocol.io/docs/learn/architecture)明确把范围限定在上下文交换及工具、资源、提示、通知等协议原语；[A2A 1.0 版本化规范](https://a2a-protocol.org/v1.0.0/specification/)定义远端 Task、消息、产物与生命周期状态；[OpenTelemetry 语义约定](https://opentelemetry.io/docs/specs/semconv/)定义遥测属性与信号的共同命名；[GNU make Goals](https://www.gnu.org/software/make/manual/html_node/Goals.html)把 goal 定义为需要更新的 target。这些资料支持职责分层，不意味着相邻协议或构建目标已经提供 Noemion 的意义确认、满足判据或最终接受语义。[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)同样把协议互操作、身份授权研究和安全评价分开推进，但不构成对项目设计或实现的认可。
+
+项目背景、架构、开发、资源、应用、FAQ 和动态入口同时把通用英文模板徽标改成直白的读者任务、工程边界和项目状态。CORE、Profile、协议名与版本等正式标识继续保留；这项修订没有改变规范值、物理格式、组件、命令或协议 Profile。质量契约现在固定背景页的开发者判断路径、相邻层边界和入口徽标，防止恢复对象库存或模板式首屏。
 
 ## 重新审计条件
 

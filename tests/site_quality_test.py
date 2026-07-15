@@ -153,6 +153,14 @@ HOME_HEADINGS = [
     "借鉴工具链思想不复制工具数量",
     "继续阅读",
 ]
+BACKGROUND_HEADINGS = [
+    "从一次依赖升级看清缺口",
+    "Noemion 与相邻层怎样配合",
+    "为什么需要一个持久目标对象",
+    "从 GNU 工具链借鉴什么",
+    "责任怎样分配",
+    "当前开发者可以依赖什么",
+]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "从一次依赖升级看清问题",
     "哲学怎样进入工程设计",
@@ -163,6 +171,21 @@ INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "按工程问题继续研究",
     "思想进入规范前必须留下什么",
 ]
+ENTRY_PAGE_BADGE_ROUTES = [
+    "about/index.html", "about/background.html",
+    "architecture/index.html", "architecture/endem-lifecycle.html",
+    "development/index.html", "development/current-stage.html",
+    "development/implementation-roadmap.html", "development/testing.html",
+    "downloads/index.html", "endem/index.html", "faq/index.html", "news/index.html",
+]
+GENERIC_ENGLISH_BADGES = {
+    "Motivation", "Scope", "Non-goals", "Why", "Evidence",
+    "Content State", "External Statements", "Endem First", "One CLI",
+    "Three Components", "Fail Closed", "Design Stage", "Specification",
+    "Roadmap", "Testing", "Contribution", "Claim", "Failure", "Integrity",
+    "Supply Chain", "Application Design", "Actions Specified", "Security",
+    "Development", "No Release Yet",
+}
 ROLE_BY_KIND = {
     "portal": "portal",
     "section": "section",
@@ -4714,6 +4737,41 @@ def main():
             ):
                 if token not in portal_art_source:
                     errors.append(f"homepage animated brand visual missing contract: {token}")
+
+    background = ROOT / "about/background.html"
+    if background.exists():
+        parser = parse(background)
+        if parser.h2_texts != BACKGROUND_HEADINGS:
+            errors.append(
+                "about/background.html: developer reasoning sequence must be "
+                f"{BACKGROUND_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in (
+            "TASK_STATE_COMPLETED", "MCP", "OpenTelemetry",
+            "NIST AI Agent Standards Initiative", "GNU make", "不能证明",
+            "具名权威", "读音", "rhem", "semion", "skena", "telis", "krin", "apor",
+        ):
+            if term not in visible_text:
+                errors.append(f"about/background.html: missing adjacent-layer boundary {term}")
+        for obsolete_heading in ("为什么需要 Endem", "与相邻形式的区别", "信任边界", "当前边界"):
+            if obsolete_heading in parser.h2_texts:
+                errors.append(
+                    "about/background.html: must not restore inventory-style heading "
+                    f"{obsolete_heading!r}"
+                )
+
+    for relative_path in ENTRY_PAGE_BADGE_ROUTES:
+        source = (ROOT / relative_path).read_text()
+        actual_badges = re.findall(r'<span class="badge">([^<]+)</span>', source)
+        generic_badges = [label for label in actual_badges if label in GENERIC_ENGLISH_BADGES]
+        if generic_badges:
+            errors.append(
+                f"{relative_path}: replace generic English template badges with "
+                f"reader-facing tasks, boundaries, or status: {generic_badges}"
+            )
 
     foundations = ROOT / "about/intellectual-foundations.html"
     if foundations.exists():

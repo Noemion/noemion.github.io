@@ -7,7 +7,7 @@ permalink: "/about/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>项目背景</span></nav>
-  <header class="section-introduction"><h1>项目背景</h1><p>为什么自然语言目标需要自己的最小工程制品，以及 Noemion 明确不建设什么。</p><div class="badges"><span class="badge">Why</span><span class="badge">Scope</span><span class="badge">Evidence</span></div></header>
+  <header class="section-introduction"><h1>项目背景</h1><p>为什么自然语言目标需要自己的最小工程制品，以及哪些责任继续由相邻系统承担。</p><div class="badges"><span class="badge">开发者问题</span><span class="badge">工程边界</span><span class="badge">当前策略</span></div></header>
   <section>
     <h2>问题</h2>
     <p class="lead">生成式系统接收的是文字，却必须兑现目标、遵守硬约束、控制能力并用证据验收。把这些内容留在一次性上下文中，会让每个模型和每次运行重新猜测同一契约。</p>
@@ -20,21 +20,22 @@ permalink: "/about/index.html"
     </ul>
   </section>
   <section>
-    <h2>项目创造什么</h2>
+    <h2>项目定义哪些工程责任</h2>
     <div class="status-grid">
-      <article class="status-item"><h3>Endem</h3><p>最小、独立有效且可验证的期望终态单元。六个语义面围绕一个根 <code>skena</code> 形成完整契约。</p></article>
-      <article class="status-item"><h3>Synem</h3><p>两个或更多 Endem 解析引用和冲突后形成的组合闭包。单个自包含 Endem 不需要 Synem。</p></article>
-      <article class="status-item"><h3>Dromen</h3><p>Drasor 为一次 Drase 会话封存的只读执行契约。它不是文件、凭据包或可恢复权限。</p></article>
-      <article class="status-item"><h3>Iknem</h3><p>绑定主体、范围和结构化观察 <code>phain</code> 的证据记录。模型陈述不能单独证明目标已经完成。</p></article>
+      <article class="status-item"><h3>最小目标制品 · Endem</h3><p>保存一项期望终态的来源、意义、事态、方向、判据和待确认事项。</p></article>
+      <article class="status-item"><h3>组合闭包 · Synem</h3><p>两个或更多 Endem 解析引用和冲突后形成的完整关系图。单个自包含 Endem 不需要组合对象。</p></article>
+      <article class="status-item"><h3>一次会话契约 · Dromen</h3><p>为一次受限运行固定对象、主体、政策、环境、能力、预算和观察责任；它不是持久文件或凭据包。</p></article>
+      <article class="status-item"><h3>有范围证据记录 · Iknem</h3><p>绑定精确主体、对象、方法、观察和可支持结论；模型陈述不能单独证明目标已经完成。</p></article>
     </div>
+    <p>这些专名都是现行设计标识。开发者资料先使用直白职责；发行拼写、读音流畅度及相邻名称的口头区分仍需独立人类验证。</p>
   </section>
   <section>
-    <h2>项目不创造什么</h2>
+    <h2>哪些责任由外部系统承担</h2>
     <ul>
-      <li>不把提示词、Skill 包、JSON 或 Token 序列改名为目标制品。</li>
-      <li>不把 GNU Binutils 的工具数量、命令命名或机器指令本体照搬到新领域。</li>
-      <li>不建立另一套通用模型训练平台；只有出现不可替代的研究需求才适配现有生态。</li>
-      <li>不让模型决定规范字节、扩大权限、修改签名制品或宣告验收通过。</li>
+      <li>Prompt、Skill 包和 Agent 消息继续承担来源表达与运行输入；它们不会因被保存为 JSON 或 Token 序列而成为目标制品。</li>
+      <li>MCP、A2A、HTTP 与工作流系统继续承担协议交换、任务状态和调度；Noemion 只要求映射不得改写本地意义、权限或结果。</li>
+      <li>身份、政策、凭据和同意系统继续授予实际动作能力；意义确认不会自动产生运行权限。</li>
+      <li>成熟外部工具继续承担模型训练、遥测、扫描、构建和发布；项目只在出现不可替代需求时定义受限适配边界。</li>
     </ul>
   </section>
   <section>
