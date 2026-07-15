@@ -62,7 +62,7 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 当前正式规范</a></td><td>固定当前适配研究的协议基线；工具说明、注解和返回仍是不可信外部输入</td><td>协议能力不扩大 Dromen，调用成功不产生 <code>met</code> 或 <code>accepted</code></td></tr>
       <tr><td><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">MCP 2026-07-28 发布候选</a></td><td>候选版于 5 月 21 日锁定，计划 7 月 28 日定稿；当前只用于评估版本漂移</td><td>定稿前不作为当前符合性基线；后续正式版本仍需重新验证降级与权限</td></tr>
       <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a></td><td>分别映射 Task、Message、Artifact、授权和版本；补丁号不进入协议协商</td><td>远端 Task 终态不替代 Endem 身份、Iknem 证据或本地结果域</td></tr>
-      <tr><td><a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a></td><td>只在形成可固定基线后考虑带版本、默认脱敏的单向导出器</td><td>GenAI 独立仓库尚无发布版，Schema URL 字段仍为 <code>TODO</code>；遥测不进入 Endem 编码、Iknem 身份或最终决定</td></tr>
+      <tr><td><a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a><br><a href="https://opentelemetry.io/schemas/gen-ai/1.42.0">GenAI Schema URL 1.42.0</a></td><td>固定仓库提交、Schema URL 和字段稳定性后，才考虑默认脱敏的单向导出器</td><td>GenAI 独立仓库截至 2026-07-15 仍无 release 或 tag；Schema URL 不等于稳定发布，遥测也不进入 Endem 编码、Iknem 身份或最终决定</td></tr>
     </tbody></table></div>
   </section>
 

@@ -81,7 +81,7 @@ permalink: "/components/drasor.html"
     <div class="table-wrap"><table><thead><tr><th>外部接口</th><th>可以带入什么</th><th>仍由本地负责什么</th></tr></thead><tbody>
       <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 当前修订</a></td><td>工具说明、资源、参数与返回内容</td><td>能力登记、调用者授权和目标资源绑定；令牌透传被禁止。<a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">2026-07-28 候选版本</a>在正式发布并完成兼容与安全复核前不改变当前适配基线。</td></tr>
       <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0</a></td><td>Task、Message、Artifact 与远端终态</td><td>每次请求的授权、本地判据和最终决定；Task completed 不等于本地 <code>met</code>，取消请求也不保证任务已取消。</td></tr>
-      <tr><td><a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a></td><td>GenAI 与 MCP 的可观测字段和稳定性标记</td><td>敏感正文披露、字段到 Iknem 的映射和导出政策；多项 GenAI 属性仍处于 Development，因此当前不固定导出 Profile。</td></tr>
+      <tr><td><a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a><br><a href="https://opentelemetry.io/schemas/gen-ai/1.42.0">GenAI Schema URL 1.42.0</a></td><td>GenAI 与 MCP 的可观测字段和稳定性标记</td><td>敏感正文披露、字段到 Iknem 的映射和导出政策；Schema URL 不等于稳定发布，多项 GenAI 属性仍处于 Development，因此当前不固定导出 Profile。</td></tr>
       <tr><td><a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent Standards Initiative</a></td><td>互操作协议、Agent 身份、认证与安全评估的标准化方向</td><td>Noemion 自身的对象语义、会话契约、证据范围和决定责任</td></tr>
     </tbody></table></div>
     <p>外部描述首先是不可信声明；外部返回首先是带来源记录。适配边界还须遵守 <a href="../specifications/adapters.html">ADP-CORE</a> 与 <a href="../specifications/authority.html">AUT-CORE</a>，不得把远端身份、任务状态或 token 直接升级为本地权限。</p>

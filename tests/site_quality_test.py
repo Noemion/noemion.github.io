@@ -725,7 +725,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "MCP 2025-11-25",
             "MCP 2026-07-28 发布候选",
             "A2A 1.0 版本化规范",
-            "Schema URL 字段仍为",
+            "GenAI Schema URL 1.42.0",
+            "复核快照 93a59e4",
+            "仓库提交、Schema URL 和各字段稳定性",
             "候选版只进入迁移研究",
             "当前没有具体协议 Profile",
         ),
@@ -3877,7 +3879,8 @@ def validate_jekyll_sources():
             "OpenTelemetry 语义约定 1.43.0",
             "github.com/open-telemetry/semantic-conventions-genai",
             "MCP 2025-11-25 当前修订（Current）",
-            "Schema URL 字段仍为",
+            "GenAI Schema URL 1.42.0",
+            "Schema URL 或仓库活动都不等于稳定发布",
             "GNU Automake 测试结果语义",
             "后续版本在正式发布",
             "敏感内容不得默认导出",
@@ -3894,6 +3897,8 @@ def validate_jekyll_sources():
             "MCP 2025-11-25 当前修订",
             "目标资源绑定",
             "OpenTelemetry 语义约定 1.43.0",
+            "GenAI Schema URL 1.42.0",
+            "Schema URL 不等于稳定发布",
             "Development",
             "默认不导出敏感正文",
             "completed / failed / interrupted",
@@ -3912,7 +3917,8 @@ def validate_jekyll_sources():
             "不作为当前符合性基线",
             "后续正式版本仍需重新验证",
             "OpenTelemetry 语义约定 1.43.0",
-            "Schema URL 字段仍为",
+            "GenAI Schema URL 1.42.0",
+            "仍无 release 或 tag",
             "默认脱敏的单向导出器",
             "不进入 Endem 编码、Iknem 身份或最终决定",
         ),
@@ -3920,7 +3926,9 @@ def validate_jekyll_sources():
             "A2A 1.0 版本化规范",
             "只有正式发布并完成",
             "OpenTelemetry 语义约定 1.43.0",
-            "尚无发布版",
+            "GenAI Schema URL 1.42.0",
+            "仍无 GitHub release 或 tag",
+            "Schema URL 不等于稳定发布",
             "默认不导出正文",
             "不构成 Iknem 身份",
         ),
@@ -3998,6 +4006,7 @@ def validate_jekyll_sources():
         "github.com/a2aproject/A2A/blob/main/docs/specification.md",
         "Schema URL 待定",
         "Schema URL 仍待确定",
+        "Schema URL 字段仍为",
     )
     for protocol_reference_file in protocol_reference_files:
         protocol_reference_text = protocol_reference_file.read_text()
@@ -4006,6 +4015,16 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{protocol_reference_file.relative_to(SOURCE_ROOT)}: stale protocol baseline phrase {phrase!r}"
                 )
+    naming_standard_text = (design_root / "language-and-naming.md").read_text()
+    for token in (
+        "复核日期、版本化官方入口和成熟度",
+        "协议协商版本、规范补丁号、仓库 release 或 tag、Schema URL、依赖版本",
+        "不得用“当前”“最新”或仓库活跃度替代",
+    ):
+        if token not in naming_standard_text:
+            errors.append(
+                f"design-system/language-and-naming.md: missing time-sensitive external status rule {token!r}"
+            )
     design_index = design_root / "README.md"
     if not design_index.exists():
         errors.append("missing design-system/README.md routing index")
