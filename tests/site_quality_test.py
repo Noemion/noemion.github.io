@@ -438,11 +438,15 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "三种状态不得混写",
             "一次运行怎样穿过边界",
             "运行事实应该放在哪里",
-            "十四条最危险的越级路径",
+            "十五条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
             "GNU 技术与软件自由提供的十一个约束",
             "什么时候才值得增加新对象",
-            "十三项研究怎样回到现有规范",
+            "十四项研究怎样回到现有规范",
+            "模型身份不等于实际行动者",
+            "工作负载身份",
+            "运行实例",
+            "软件 Agent 身份、委托与责任链",
             "模型输出是候选，不是规范内容",
             "模型评审也只是有范围的候选测量",
             "反馈记录也不等于模型学习",
@@ -651,6 +655,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "AUT-RPL-001",
             "AUT-CAP-001",
             "AUT-SEP-001",
+            "Agent 名称为什么不能代替实际行动者",
+            "模型身份",
+            "工作负载身份",
+            "运行实例与调用身份",
+            "software-agent-identity-and-accountability-boundaries-proposal.md",
             "待定内容",
         ),
     },
@@ -2038,6 +2047,52 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the capability discovery research proposal"
                 )
 
+    agent_identity_proposal = SOURCE_ROOT / "spec" / "software-agent-identity-and-accountability-boundaries-proposal.md"
+    if not agent_identity_proposal.exists():
+        errors.append("missing non-normative software Agent identity and accountability research proposal")
+    else:
+        proposal_text = agent_identity_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "结论状态：桌面审查完成；等待用户决定",
+            "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
+            "不创建 Agent 身份制品",
+            "不进入 `registry.json`",
+            "九个身份与关系层次必须分开",
+            "身份、认证、授权与责任不是一条等级线",
+            "NIST 2026 概念工作",
+            "SPIFFE",
+            "RFC 8693",
+            "W3C PROV",
+            "MCP Enterprise-Managed Authorization",
+            "GNU Coreutils",
+            "十二个支持案例与反例",
+            "候选义务的唯一主归属",
+            "失败域与结果隔离",
+            "不创建 `AGENT-IDENTITY-CORE`",
+        ):
+            if token not in proposal_text:
+                errors.append(f"software Agent identity proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if (
+            "software-agent-identity-and-accountability-boundaries" in registry_text
+            or '"AGENT-IDENTITY-CORE"' in registry_text
+        ):
+            errors.append("non-normative software Agent identity proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "specifications" / "authority.html",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "design-system" / "language-and-naming.md",
+            SOURCE_ROOT / "content-quality-audit.md",
+        ):
+            if "software-agent-identity-and-accountability-boundaries-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the software Agent identity research proposal"
+                )
+
     parallel_proposal = SOURCE_ROOT / "spec" / "parallel-and-speculative-execution-proposal.md"
     if not parallel_proposal.exists():
         errors.append("missing non-normative parallel and speculative execution research proposal")
@@ -2367,10 +2422,10 @@ def validate_jekyll_sources():
         for token in (
             "三种状态不得混写",
             "运行事实应该放在哪里",
-            "十四条最危险的越级路径",
+            "十五条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
             "GNU 技术与软件自由提供的十一个约束",
-            "十三项研究怎样回到现有规范",
+            "十四项研究怎样回到现有规范",
             "2025-11-25",
             "2026-07-28",
             "A2A 1.0 版本化规范",
@@ -2390,6 +2445,7 @@ def validate_jekyll_sources():
             "反馈替代训练资格与发布决定",
             "可下载替代自由与可修改性",
             "服务可用替代用户控制",
+            "Agent 名称替代实际行动者",
             "记忆替代事实与政策",
             "NIST AI 800-2 初稿",
             "NIST AI 600-1",
@@ -2412,6 +2468,7 @@ def validate_jekyll_sources():
             "preview-simulation-and-approval-proposal.md",
             "memory-checkpoint-and-resumption-proposal.md",
             "capability-discovery-and-negotiation-proposal.md",
+            "software-agent-identity-and-accountability-boundaries-proposal.md",
             "parallel-and-speculative-execution-proposal.md",
             "model-adapter-isolation-proposal.md",
             "model-assisted-evaluation-proposal.md",
@@ -2987,6 +3044,13 @@ def validate_jekyll_sources():
             ".content-wide",
             ".content-grid{",
             ".content-rows",
+            ".content-stack>*,",
+            ".content-wide>:is(h2,p,ul,ol,blockquote,.lead,.note,.callout)",
+            ".content-grid>:is(h2,p,ul:not(.grid):not(.status-grid):not(.resource-list),ol,blockquote)",
+            'body[data-page-role="section"]:not([data-page-role="portal"]) main>section>:is(h2,p,ul,ol,blockquote)',
+            ".manual-article>:is(h3,h4,p,ul,ol,blockquote)",
+            ".faq-list details>p{max-width:760px;margin-right:auto;margin-left:auto",
+            "margin-right:auto;margin-left:auto",
             'body:not([data-page-role="portal"]) .page-links{',
             '--site-frame-max:1200px',
             '--site-frame-edge:18px',

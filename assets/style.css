@@ -215,7 +215,7 @@ details p{padding-bottom:11px}
 .faq-list{display:grid;gap:0}
 .faq-list section{padding-bottom:18px}
 .faq-list details{margin-block:8px}
-.faq-list details>p{max-width:760px;font-size:17px;line-height:1.75}
+.faq-list details>p{max-width:760px;margin-right:auto;margin-left:auto;font-size:17px;line-height:1.75}
 
 .next-prev{
   display:flex;justify-content:space-between;gap:16px;margin-top:26px;padding-top:16px;
@@ -1303,7 +1303,7 @@ body[data-docs-layout="true"] .page-links{margin-inline:-54px}
   background:var(--portal-coral);clip-path:var(--module-marker-clip)
 }
 .manual-article>h3{margin-top:32px;font-size:21px;letter-spacing:-.02em}
-.manual-article>p,.manual-article>ul,.manual-article>ol,.manual-article>blockquote{max-width:760px}
+.manual-article>:is(h3,h4,p,ul,ol,blockquote){max-width:760px;margin-right:auto;margin-left:auto}
 .manual-article>table{display:block;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}
 .manual-article .manual-table-wrap table{display:table;min-width:680px}
 .manual-article .manual-table-wrap::after{
@@ -1370,7 +1370,22 @@ body[data-page-role="content"]:not([data-docs-layout="true"]) :is(main:not(.curr
   font-size:18px;line-height:1.78
 }
 body[data-page-role="content"]:not([data-docs-layout="true"]) .content-stack>:not(h2){max-width:760px}
-body[data-page-role="content"]:not([data-docs-layout="true"]) .content-rows>:is(ul,ol){max-width:900px}
+body[data-page-role="content"]:not([data-docs-layout="true"]) .content-stack>*,
+body[data-page-role="content"]:not([data-docs-layout="true"]) .content-wide>:is(h2,p,ul,ol,blockquote,.lead,.note,.callout){
+  margin-right:auto;margin-left:auto
+}
+body[data-page-role="content"]:not([data-docs-layout="true"]) .content-grid>:is(h2,p,ul:not(.grid):not(.status-grid):not(.resource-list),ol,blockquote){
+  width:100%;max-width:760px;margin-right:auto;margin-left:auto
+}
+body[data-page-role="content"]:not([data-docs-layout="true"]) .content-rows>h2{
+  margin-right:auto;margin-left:auto
+}
+body[data-page-role="content"]:not([data-docs-layout="true"]) .content-rows>:is(ul,ol){
+  max-width:900px;margin-right:auto;margin-left:auto
+}
+body[data-page-role="section"]:not([data-page-role="portal"]) main>section>:is(h2,p,ul,ol,blockquote){
+  width:100%;max-width:760px;margin-right:auto;margin-left:auto
+}
 body[data-page-role="tool-project"] .application-introduction{
   padding-right:calc(33.333% + 56px)
 }

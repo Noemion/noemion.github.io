@@ -62,6 +62,19 @@ permalink: "/specifications/authority.html"
   </section>
 
   <section class="content-wide">
+    <h2>Agent 名称为什么不能代替实际行动者</h2>
+    <p>“用了哪个模型”“部署了哪套 Agent 定义”“哪个工作负载通过认证”“哪个运行实例调用工具”和“代表谁行动”是不同事实。AUT-CORE 已经分开请求主体、实际行动者与被代表主体；当前研究进一步要求实际行动者能够关联精确工作负载、运行实例、会话和一次调用，而不是只保存产品名或服务账户。</p>
+    <div class="table-wrap"><table><thead><tr><th>记录内容</th><th>能够说明</th><th>不能说明</th></tr></thead><tbody>
+      <tr><td>模型身份</td><td>哪个模型、版本或端点参与候选生成</td><td>哪套 Agent 软件实际行动或已经获权</td></tr>
+      <tr><td>Agent 定义身份</td><td>哪套软件、配置、提示、工具声明与政策闭包可部署</td><td>哪个副本正在运行或持有什么凭据</td></tr>
+      <tr><td>工作负载身份</td><td>哪个受管理软件主体在信任域中通过认证</td><td>单个运行实例、被代表的人类或业务动作授权</td></tr>
+      <tr><td>运行实例与调用身份</td><td>哪个副本在什么会话中发起哪一次尝试</td><td>该尝试满足目标、证据充分或最终接受</td></tr>
+      <tr><td>实际行动者与被代表主体</td><td>谁执行动作、代表谁、依据哪条委托关系</td><td>认证成功自动产生角色资格或法律责任</td></tr>
+    </tbody></table></div>
+    <p class="note">当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-identity-and-accountability-boundaries-proposal.md">非规范软件 Agent 身份、委托与责任链研究提案</a>用九个层次检查这组边界。它不修改 AUT-CORE，不创建 Agent 身份制品、目录、服务、组件或新专名；现阶段只把问题归还 ID、AUT、DRO、ADP、IKN、DIA 与 TEXT-IDENTIFIER。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>同意和多人批准怎样避免形式化陷阱</h2>
     <p>人类点击只有在安全视图与精确机器请求一致、目的和接收方清楚、拒绝路径可达、期限和撤销后果明确时，才可能成为同意依据。点击者仍需通过当前角色和范围核对；同意不是身份认证或权威证明的替代品。</p>
     <p>多人决定必须在看到结果前固定合格主体、不同身份规则、所需角色或数量、否决和冲突处理。同一控制主体的多个账户、重复签名和重放事件只能计一次；未解决冲突保持 <code>defer</code>，不能由最后到达的事件决定。</p>
@@ -75,7 +88,11 @@ permalink: "/specifications/authority.html"
       <li><a href="https://www.rfc-editor.org/rfc/rfc9470.html">RFC 9470 Step-up Authentication</a>只解决认证强度不足，不定义资源授权政策；重新认证成功不会自动授权动作。</li>
       <li><a href="https://www.rfc-editor.org/rfc/rfc9700.html">RFC 9700 OAuth 安全实践</a>要求令牌限制发送者、受众、资源与动作；项目把令牌视为能力上限而非权威本身。</li>
       <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization">MCP 2025-11-25 授权规范</a>与<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 规范</a>提供外部授权和委托机制；本地语义与最终决定仍由 AUT-CORE 管理。</li>
+      <li><a href="https://www.nccoe.nist.gov/publications/other/accelerating-adoption-software-and-ai-agent-identity-and-authorization-concept">NIST 软件与 AI Agent 身份授权概念论文</a>提出人类与 Agent 区分、委托、日志透明和身份元数据问题；它仍是概念工作，不是 Agent 身份标准。</li>
+      <li><a href="https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/">SPIFFE 工作负载身份</a>让软件主体在信任域中认证，但一个工作负载可以覆盖多个副本，SVID 也不授予应用动作权限。</li>
+      <li><a href="https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization">MCP 企业管理授权</a>集中处理组织级服务器接入；每次工具动作仍须保留实际行动者、被代表主体、资源、受众和本地授权决定。</li>
       <li><a href="https://guix.gnu.org/manual/devel/en/guix.pdf">GNU Guix 授权实践</a>要求本地显式授权替代服务器的签名密钥；<a href="https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration-Options.html">GnuPG 信任模型</a>也把密码验证与本地信任判断分开。</li>
+      <li><a href="https://www.gnu.org/software/coreutils/manual/html_node/id-invocation.html">GNU Coreutils <code>id</code></a>分别显示真实身份、有效身份、组和安全上下文；项目只采用这种分开表达的纪律，不把 Unix 进程模型直接当作 Agent 身份标准。</li>
     </ul>
   </section>
 
@@ -97,7 +114,7 @@ permalink: "/specifications/authority.html"
 
   <section class="content-band">
     <h2>待定内容</h2>
-    <p>权威目录、角色和政策语言、授权事件物理编码、同意 UI Profile、法定人数算法、凭据格式、外部协议映射、撤销分发、能力代理、审计存储和法律效力仍保持开放。</p>
+    <p>权威目录、角色和政策语言、授权事件物理编码、同意 UI Profile、法定人数算法、凭据格式、外部协议映射、撤销分发、能力代理、审计存储和法律效力仍保持开放。Agent 定义、工作负载、运行实例、会话、凭据与一次调用怎样形成可互操作绑定，也必须等待真实消费者、协议 Profile、威胁模型和规范字节，不能由当前研究提案提前固定。</p>
   </section>
   <div class="next-prev"><a href="text-and-identifiers.html">← 文本与标识符边界</a><a href="../architecture/adr-0029-authority-and-authorization-decisions.html">ADR-0029 →</a></div>
 </main>
