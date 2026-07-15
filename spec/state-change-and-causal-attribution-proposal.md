@@ -1,7 +1,7 @@
 # Noemion 状态变化与因果归因边界研究提案
 
 状态：非规范研究提案  
-日期：2026-07-13  
+日期：2026-07-15<br>
 结论状态：正在研究；尚未进入规范
 适用范围：Endem 的 `kine`、状态满足、动作发生、状态转变、因果归因、Drase 会话、Iknem 溯源、外部协议和最终决定
 
@@ -38,10 +38,10 @@
 | [Kubernetes Controllers](https://kubernetes.io/docs/concepts/architecture/controller/) | 控制器观察当前状态并尝试使其接近期望状态；控制器可能只向其他组件发出请求 | 期望状态、当前状态、调节动作和状态报告必须分开 | 一次 reconcile 或控制器成功不能证明它是终态的唯一或充分原因 |
 | [W3C PROV-DM](https://www.w3.org/TR/prov-dm/) | 分开实体、活动、生成、使用、派生、关联、归因与委托；使用和生成链对派生是必要但不充分的 | Iknem 应分别保存活动、实体、主体、作用和有范围的关系声明 | 时间先后、同一活动中使用与生成、主体关联都不能自动证明派生或充分因果 |
 | [CloudEvents](https://github.com/cloudevents/spec/blob/ce@stable/cloudevents/spec.md) | Event 是表达一次 occurrence 及其上下文的数据记录；一次 occurrence 可以产生多个 event | 事件记录、事件来源和现实发生应保持可区分并能去重 | 收到事件不能自行证明事件内容真实、消费者造成后续事件或业务目标满足 |
-| [OpenTelemetry Tracing API](https://opentelemetry.io/docs/specs/otel/trace/api/) | Span 表示一次操作，带开始、结束、事件和由应用设置的状态 | 操作轨迹可作为有范围的运行观察进入 Iknem | Span 结束或 `Ok` 只描述该操作语境，不能自动证明外部业务终态或因果责任 |
+| [OpenTelemetry Tracing API](https://opentelemetry.io/docs/specs/otel/trace/api/) | Span 表示一次操作；插桩库、应用开发者或运维按各自约定设置状态，默认状态是 `Unset` | 操作轨迹可作为有范围的运行观察进入 Iknem | Span 结束或 `Ok` 只描述该操作语境，不能自动证明外部业务终态或因果责任 |
 | [RFC 9110 Idempotent Methods](https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods) | 幂等描述重复相同请求的预期效果，并约束何时适合自动重试 | 重试需要协议语义、去重或事后核对及共同预算 | 幂等不证明第一次请求未发生、第二次产生了变化或终态由该请求造成 |
 | [ReAct](https://arxiv.org/abs/2210.03629) | 模型交替生成推理、行动和观察，并据此更新计划 | 计划、动作、观察和重规划应分别记录 | 模型行动轨迹或自述不能成为因果、满足或最终接受的唯一证据 |
-| [A2A 规范](https://a2a-protocol.org/latest/specification/) | Task 有独立状态、消息、产物与历史 | 外部任务生命周期保持在适配域 | `completed` 不能直接成为 Endem `met`、Drase `completed` 或最终 `accepted` |
+| [A2A 1.0 版本化规范](https://a2a-protocol.org/v1.0.0/specification/) | Task 是 A2A 的动作单元，分别保存当前状态、产物与交互历史；`completed` 是 Task 的成功终态 | 外部任务生命周期保持在适配域，并固定所依据的协议版本 | `completed` 不能直接成为 Endem `met`、Drase `completed` 或最终 `accepted` |
 
 共同结论不是“永远不能证明因果”，而是每种主张必须先声明对象、范围、反事实或竞争解释、证据方法与权威。终态观察本身只支持终态判断。
 

@@ -55,6 +55,20 @@ permalink: "/components/drasor.html"
   </section>
 
   <section class="content-wide">
+    <h2>终态出现后不要立即归给本次动作</h2>
+    <p class="lead">Drasor 未来需要保留“调用发生了什么”和“目标现在怎样”两条记录。只有可信前态、同一对象的后态、竞争活动和适用方法都能复核时，才继续形成有范围的因果主张。</p>
+    <div class="flow"><div class="step">判断当前终态</div><div class="step">核对精确动作身份</div><div class="step">比较同一对象前后态</div><div class="step">保留并发主体与未知副作用</div><div class="step">按具名方法限定归因</div><div class="step">另行判断授权与接受</div></div>
+    <div class="table-wrap"><table><thead><tr><th>运行情况</th><th>应保留的结论</th><th>不得生成的叙述</th></tr></thead><tbody>
+      <tr><td>会话开始前目标已经成立</td><td>结果型目标可以按实际观察判断；若来源没有要求动作，则无需制造调用</td><td>“本次会话修复或升级了目标”</td></tr>
+      <tr><td>工具结束，但目标关系没有成立</td><td>保存动作返回与已知副作用；满足结果按判据为 <code>unmet</code>、<code>agno</code> 或 <code>fault</code></td><td>“工具成功，所以目标完成”</td></tr>
+      <tr><td>本次调用失败，另一个控制器改变了对象</td><td>后态、失败调用和外部活动分别记录；因果归属保持在证据支持的范围</td><td>把外部修复归给失败调用</td></tr>
+      <tr><td>动作确实造成变化，但没有有效授权</td><td>保留因果主张、授权拒绝和最终决定各自的事实</td><td>用结果有用或目标成立倒推行动获准</td></tr>
+    </tbody></table></div>
+    <p>GNU Make 的 <a href="https://www.gnu.org/software/make/manual/html_node/Instead-of-Execution.html"><code>-q</code> 查询</a>可以在不执行 recipe 的情况下判断目标是否需要更新；<a href="https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html">phony target</a>则明确表示一次动作入口，而不表示真实文件状态。Drasor 借鉴的是把目标状态、是否需要动作和动作发生分开，不照搬文件时间语义。</p>
+    <p class="note">更完整的基线缺失、并发控制器、幂等 no-op、延迟效果和取消未回滚案例见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">非规范状态变化与因果归因边界研究提案</a>。当前没有因果检查器、运行时或新增结果域。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>从检查点继续必须建立新会话</h2>
     <p class="lead">检查点可以保存候选上下文和控制位置，却不能保存一次会话的权限。继续执行时，Drasor 必须把保存状态当作新输入，并重新完成会话准入。</p>
     <div class="flow"><div class="step">核对检查点来源与损失</div><div class="step">重验精确内容与外部陈述</div><div class="step">重做授权、能力与预算交集</div><div class="step">建立新的 Dromen</div><div class="step">查询未知副作用后再决定是否动作</div></div>

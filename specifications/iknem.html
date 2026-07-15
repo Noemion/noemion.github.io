@@ -53,6 +53,20 @@ permalink: "/specifications/iknem.html"
   </section>
 
   <section class="content-wide">
+    <h2>轨迹怎样支持动作、转变与因果主张</h2>
+    <p class="lead">轨迹首先说明记录了哪些操作。只有把同一对象的前态、后态、竞争活动和判断方法补齐后，记录才可能支持更强的状态变化或因果主张。</p>
+    <div class="flow"><div class="step">固定精确对象与前态</div><div class="step">记录有身份的动作</div><div class="step">观察同一对象的后态</div><div class="step">保留并发活动与缺口</div><div class="step">应用具名方法</div><div class="step">限定归因范围与责任</div></div>
+    <div class="table-wrap"><table><thead><tr><th>主张</th><th>至少需要什么</th><th>材料不足时怎样处理</th></tr></thead><tbody>
+      <tr><td>动作发生</td><td>有身份的调用、实际行动者、输入、时间、返回和已知副作用</td><td>只能说明请求、开始、结束或失败；不补写外部效果</td></tr>
+      <tr><td>状态转变</td><td>同一对象与关系的可信前态、后态、顺序、窗口和观察闭合</td><td>后态仍可支持结果型判断；转变保持未知</td></tr>
+      <tr><td>因果归因</td><td>动作与转变的精确关联、影响窗口、竞争解释、适用方法及其限制</td><td>保留时间关联和可见活动，不把先后顺序提升为因果</td></tr>
+      <tr><td>责任与决定</td><td>具名政策、委托、逐动作授权、决定规则和权威</td><td>记录尚未授权或尚未决定；不让轨迹所有者自行取得责任结论</td></tr>
+    </tbody></table></div>
+    <p><a href="https://www.w3.org/TR/prov-dm/">W3C PROV-DM</a>明确指出，活动中的使用与生成链对派生是必要但不充分的；两项实体同时出现在一条活动轨迹中，不表示前者实际影响了后者。<a href="https://opentelemetry.io/docs/specs/otel/trace/api/">OpenTelemetry Tracing API</a>中的 Span <code>Ok</code> 也只表示该操作在应用或运维采用的约定内成功，不能替代业务终态、转变或责任判断。</p>
+    <p class="note">完整反例见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">非规范状态变化与因果归因边界研究提案</a>。该提案不增加 Iknem 字段或物理格式；现行记录只能在已声明的主体、方法、环境、时间和限制内支持结论。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>记录种类与来源类别</h2>
     <div class="table-wrap"><table><thead><tr><th>维度</th><th>允许值</th><th>边界</th></tr></thead><tbody>
       <tr><td>记录种类</td><td><code>observation / derivation / attestation / appraisal / decision-record</code></td><td>说明记录执行了观察、派生、外部声明、政策评估还是记录决定事件</td></tr>
@@ -120,6 +134,7 @@ permalink: "/specifications/iknem.html"
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测研究</a></td><td>模型评审调用、偏差探针、统计汇总与使用决定</td><td>正在研究</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新研究</a></td><td>训练数据、反馈、派生模型、评测、发布与回滚</td><td>正在研究</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">数据使用、保留与删除研究</a></td><td>处理、删除、清除验证、副本传播与未知范围</td><td>正在研究</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">状态变化与因果归因研究</a></td><td>动作发生、前后态、竞争解释、有范围因果方法与责任分离</td><td>正在研究</td></tr>
     </tbody></table></div>
     <p><code>spec/iknem-core.md</code> 是 Iknem 的唯一现行规范条款源；这份说明只提供阅读路径，不建立第二套字段或符合性要求。</p>
   </section>

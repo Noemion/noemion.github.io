@@ -133,7 +133,7 @@ DOC_GUIDE_HEADINGS = {
         "证据记录", "人工智能只做辅助探针", "当前状态",
     ],
     "docs/architecture-guide.html": [
-        "最小系统图", "用一次 Agent 工作读图", "委托另一个 Agent 时保留身份与上限", "跨会话继续时先分清保存对象", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
+        "最小系统图", "用一次 Agent 工作读图", "看到终态后按主张强度继续核对", "委托另一个 Agent 时保留身份与上限", "跨会话继续时先分清保存对象", "三个实现域", "形成与语义确认", "组合与发布", "装载与运行", "信任不是单一分数",
     ],
     "docs/development-guide.html": [
         "先定义变更主张", "当前范围", "规范与 ADR 先行", "变更工作流", "把外部资料送进模型前保留来源与职责", "建议仓库边界", "审查清单", "模型与协议",
@@ -499,7 +499,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "architecture/agent-system-boundaries.html": {
         "required": (
             "非规范说明",
-            "先按一次调用回答五个问题",
+            "先按一次调用分开判断",
+            "目标只要求当前结果，还是要求动作、转变或因果？",
             "用依赖升级看清边界",
             "先区分当前策略、研究与未来实现",
             "从请求到决定的责任路径",
@@ -518,6 +519,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "反馈记录不是训练资格",
             "旧 Dromen、秘密、能力和消费次数",
             "Task 完成，也不证明目标满足",
+            "动作事件、前后态与因果主张",
             "包管理器退出码",
             "研究中",
             "不增加 ADR、CORE、Profile、对象、命令或组件",
@@ -561,6 +563,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "用一次依赖更新理解 Drasor",
             "名称仍在研究",
             "一次能力请求怎样穿过边界",
+            "终态出现后不要立即归给本次动作",
+            "会话开始前目标已经成立",
+            "动作确实造成变化，但没有有效授权",
             "隔离必须证明什么",
             "外部 Agent 协议只提供带来源的事实",
             "Dromen",
@@ -639,6 +644,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "有范围证据记录（设计阶段名称 Iknem）",
             "用同一次发布理解有范围证据",
             "显式变换与损失记录",
+            "轨迹怎样支持动作、转变与因果主张",
+            "固定精确对象与前态",
+            "竞争解释",
             "名称仍在研究",
             "phain",
             "精确证据主体",
@@ -1818,6 +1826,7 @@ def validate_jekyll_sources():
         proposal_text = causation_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
+            "日期：2026-07-15",
             "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
             "不创建新制品、文件格式、扩展名、命令、组件、结果域、稳定接口或哲学专名",
             "不进入 `registry.json`",
@@ -1826,6 +1835,7 @@ def validate_jekyll_sources():
             "W3C PROV-DM",
             "CloudEvents",
             "OpenTelemetry",
+            "https://a2a-protocol.org/v1.0.0/specification/",
             "终态满足",
             "动作发生",
             "状态转变",
@@ -1837,13 +1847,20 @@ def validate_jekyll_sources():
         ):
             if token not in proposal_text:
                 errors.append(f"causation proposal missing governance boundary: {token}")
+        if "a2a-protocol.org/latest/" in proposal_text:
+            errors.append("causation proposal must use the versioned A2A specification URL")
         registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
         if "state-change-and-causal-attribution" in registry_text:
             errors.append("non-normative causation proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "endem.html",
+            SOURCE_ROOT / "specifications" / "iknem.html",
+            SOURCE_ROOT / "components" / "drasor.html",
+            SOURCE_ROOT / "docs" / "architecture-guide.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "content-quality-audit.md",
         ):
             if "state-change-and-causal-attribution-proposal.md" not in public_source.read_text():
                 errors.append(
@@ -2791,9 +2808,10 @@ def validate_jekyll_sources():
     else:
         boundary_text = agent_boundaries.read_text()
         for token in (
-            "先按一次调用回答五个问题",
+            "先按一次调用分开判断",
             "用依赖升级看清边界",
             "期望终态是什么？",
+            "目标只要求当前结果，还是要求动作、转变或因果？",
             "谁代表谁执行什么动作？",
             "本次运行最多能做什么？",
             "外部系统实际报告了什么？",
@@ -2802,6 +2820,7 @@ def validate_jekyll_sources():
             "先区分当前策略、研究与未来实现",
             "从请求到决定的责任路径",
             "运行事实应该放在哪里",
+            "动作事件、前后态与因果主张",
             "常见的越级错误",
             "当前 Agent 技术趋势改变了什么",
             "GNU 工具与软件自由带来的工程约束",
@@ -4654,6 +4673,10 @@ def main():
         "MCP/A2A 状态保留外部来源",
         "`completed` 不直接映射为满足结果",
         "先形成 `met / unmet / agno / fault`",
+        "看到终态后按主张强度继续核对",
+        "本次动作是否造成变化？",
+        "会话开始前已经使用目标版本",
+        "状态变化与因果归因边界研究提案",
         "Agent 系统边界图",
         "委托另一个 Agent 时保留身份与上限",
         "请求主体",

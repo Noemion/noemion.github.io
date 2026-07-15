@@ -528,6 +528,16 @@ Ktisor 与语言规范还残留“已授权语义决定”“已授权 semion”
 
 GNU Make 的 [Errors in Recipes](https://www.gnu.org/software/make/manual/html_node/Errors.html) 与 [Interrupts](https://www.gnu.org/software/make/manual/html_node/Interrupts.html)共同说明：失败或中断后保留的目标可能已经损坏，保留策略本身不能证明状态有效。GNU Guix 的 generation 回滚只选择声明范围内的既有配置，不会让外部服务、网络调用或授权状态倒退。本轮只把这些反例用于教学边界，没有改变 CORE、Profile、登记、向量、组件或实现状态。
 
+## 终态、动作与因果教学边界复核 · 2026-07-15
+
+状态变化研究提案已经区分终态满足、动作发生、状态转变、因果归因和责任决定，但架构指南、Iknem 与 Drasor 页面仍主要告诉读者“它们不相等”，没有给出从一次真实调用逐步增加主张强度的操作顺序。开发者容易在工具返回、后态观察和责任结论之间自行补上因果关系。
+
+当前解释统一从“目标现在是否成立”开始，再依次核对有身份的动作、同一对象的前后态、竞争活动与观察缺口、有范围的因果方法，以及逐动作授权和具名决定。页面用依赖升级、目标原本成立、失败调用遇到外部修复、未经授权但确实产生变化等案例说明：这些结论可以同时存在，并且不能互相覆盖。
+
+[GNU Make 的查询模式](https://www.gnu.org/software/make/manual/html_node/Instead-of-Execution.html)与 [phony target](https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html)分开目标状态和动作入口；[Kubernetes 控制器](https://kubernetes.io/docs/concepts/architecture/controller/)分开期望状态、当前状态、调节请求和状态报告；[W3C PROV-DM](https://www.w3.org/TR/prov-dm/)明确指出使用与生成链对派生是必要但不充分的；[OpenTelemetry Tracing API](https://opentelemetry.io/docs/specs/otel/trace/api/)把 Span 状态限定在一次操作语境；[A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/)把 `completed` 定义为 Task 的成功终态。这些资料共同支持分层检查，但不替 Noemion 选择因果方法或责任规则。
+
+[状态变化与因果归因边界研究提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md)保存完整案例、威胁与进入规范前的条件。本次修订只改善开发者教学和非规范研究路由，没有改写 END-TEL-001、CORE、Profile、登记或向量，也没有创建因果制品、字段、组件或检查器。现行 Profile 无法表达的动作、转变或因果要求继续保留为未解决边界或明确拒绝。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。
