@@ -1274,7 +1274,23 @@ def validate_readability_behavior_contracts(root):
             "FAQ answers must preserve the readable line length": (
                 style_text,
                 r"\.faq-list\s+details>p\s*\{[^}]*max-width:760px;"
+                r"[^}]*margin-right:auto;margin-left:0;"
                 r"[^}]*font-size:17px;[^}]*line-height:1\.75"
+            ),
+            "manual reading columns must remain left anchored": (
+                style_text,
+                r"\.manual-article>:is\(h3,h4,p,ul,ol,blockquote\)\s*\{"
+                r"[^}]*max-width:760px;[^}]*margin-right:auto;margin-left:0"
+            ),
+            "section reading columns must remain left anchored": (
+                style_text,
+                r'body\[data-page-role="section"\]:not\(\[data-page-role="portal"\]\)\s+'
+                r'main>section>:is\(h2,p,ul,ol,blockquote\)\s*\{'
+                r"[^}]*max-width:760px;[^}]*margin-right:auto;margin-left:0"
+            ),
+            "compact page padding must follow available width": (
+                style_text,
+                r"--site-content-inline:clamp\(14px,4vw,56px\)"
             ),
             "tool project must collapse before a tablet canvas clips its status panel": (
                 style_text,
@@ -3417,8 +3433,8 @@ def validate_jekyll_sources():
             ".content-grid>:is(h2,p,ul:not(.grid):not(.status-grid):not(.resource-list),ol,blockquote)",
             'body[data-page-role="section"]:not([data-page-role="portal"]) main>section>:is(h2,p,ul,ol,blockquote)',
             ".manual-article>:is(h3,h4,p,ul,ol,blockquote)",
-            ".faq-list details>p{max-width:760px;margin-right:auto;margin-left:auto",
-            "margin-right:auto;margin-left:auto",
+            ".faq-list details>p{max-width:760px;margin-right:auto;margin-left:0",
+            "margin-right:auto;margin-left:0",
             'body:not([data-page-role="portal"]) .page-links{',
             '--site-frame-max:1200px',
             '--site-frame-edge:18px',
@@ -3430,7 +3446,7 @@ def validate_jekyll_sources():
             '--docs-rail-width:320px',
             '--docs-content-width:880px',
             ':root{--site-frame-edge:8px;--site-frame-inset:16px}',
-            '--responsive-grid-min:420px;gap:1px;margin:28px -56px -62px;background:var(--portal-line)',
+            '--responsive-grid-min:420px;gap:1px;margin:28px calc(-1 * var(--site-content-inline)) -62px;background:var(--portal-line)',
             'a:visited:not(.portal-button)',
             ".portal-button-primary:visited",
             ".portal-button-secondary:visited",
@@ -4710,6 +4726,10 @@ def main():
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
         home_source = home.read_text()
+        if '<section class="portal-thesis portal-reveal">' in home_source:
+            errors.append(
+                "index.html: first chapter must not animate its framed surface away from the cover"
+            )
         for obsolete_label in (
             "VERIFIABLE GOALS FOR THE AGE OF AI",
             "01 · THE PROBLEM",
@@ -4756,6 +4776,7 @@ def main():
                 errors.append(f"style.css missing homepage visual selector {selector}")
         for token in (
             ".portal-introduction::before{",
+            "text-decoration-style:double",
             "--portal-cover-edge:var(--paper)",
             "--portal-cover-edge:#060f0d",
             "background:var(--portal-cover-bottom-gradient)",
@@ -4764,8 +4785,12 @@ def main():
             ".portal-thesis{--portal-thesis-inline:clamp(20px,3.8vw,34px);grid-template-columns:1fr;min-height:0}",
             ".portal-thesis-title{padding:72px var(--portal-thesis-inline) 48px",
             ".portal-thesis-copy{padding:50px var(--portal-thesis-inline) 58px}",
-            ".portal-thesis-copy p{width:min(100%,590px);margin-inline:auto}",
-            ".portal-thesis{--portal-thesis-inline:20px}",
+            ".portal-thesis-copy p{width:min(100%,590px);margin-right:auto;margin-left:0}",
+            ".portal-thesis{--portal-thesis-inline:var(--site-content-inline)}",
+            'body[data-page-role="portal"] .portal-main>.portal-thesis{border-top:1px solid var(--portal-line)}',
+            "--site-content-inline:clamp(14px,4vw,56px)",
+            ':is(main,.summary-rail-main)>section{padding:44px var(--site-content-inline)}',
+            '.manual-article{padding:0 var(--site-content-inline) 40px}',
             ".portal-thesis-copy p{text-wrap:wrap}",
             ".portal-thesis-copy .portal-lead{font-size:18px;line-height:1.65;font-weight:560;letter-spacing:-.01em}",
         ):
