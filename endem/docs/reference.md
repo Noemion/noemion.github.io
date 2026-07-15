@@ -19,9 +19,9 @@ badges: ["参考", "CLI 待定"]
 
 | 子命令 | 主要输入 | 主要输出 | 权限边界 |
 | --- | --- | --- | --- |
-| `ktise` | 受控来源、投影候选与具名决定 | nascent Endem、Ktise Iknem | 唯一规范写入入口 |
-| `elenk` | 原始制品、层、限制和信任材料 | 分层结论、Elenk Iknem | Ktisor 的制品形成侧检查路径 |
-| `pleko` | Endem、组合策略和依赖锁 | coherent Endem/Synem、Pleko Iknem | 不读取环境隐式依赖 |
+| `ktise` | 受控来源、投影候选与具名决定 | 来源保留的 nascent Endem；形成记录的 Iknem 物理格式待定 | Endem 规范字节的唯一生产入口 |
+| `elenk` | 原始制品、层、限制和信任材料 | 分层结论；未来 Elenk Iknem 的物理格式待定 | Ktisor 的制品形成侧检查路径 |
+| `pleko` | Endem、组合策略和依赖锁 | 完整组合闭包；Synem 规范字节和 Pleko Iknem 的物理格式待定 | 不读取环境隐式依赖 |
 | `theor` | 任意原始制品、视图和预算 | 只读视图、差分、诊断 | 独立 Theor，不生成 Ktisor 内部检查通过引用 |
 | `drase` | 精确发布制品、适用外部陈述、验证政策、执行策略、后端与能力 | Dromen、会话结果和 Iknem | 隔离 Drasor，不拥有写入器；依赖方与具名权威分别决定准入和接受 |
 

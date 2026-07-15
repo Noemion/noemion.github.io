@@ -34,7 +34,7 @@ permalink: "/endem/index.html"
         <h2>它怎样工作</h2>
         <div class="flow"><div class="step">ktise · 形成 nascent Endem</div><div class="step">elenk · 形成侧检查</div><div class="step">pleko · 形成 coherent / Synem</div><div class="step">theor · 独立只读观察</div><div class="step">外部签名 · 独立集成</div><div class="step">drase · 隔离实现</div><div class="step">Iknem · 有界证据</div><div class="step">权威 · 最终决定</div></div>
         <ul>
-          <li><code>ktise</code> 是唯一规范写入入口；模型或外部前端只能提供候选。</li>
+          <li><code>ktise</code> 是 Endem 规范字节的唯一生产入口；模型或外部前端只能提供候选。</li>
           <li><code>elenk</code> 使用 Ktisor 的制品形成侧读取路径，并按结构、语义、状态、完整性和策略分层报告。</li>
           <li><code>pleko</code> 使用内容身份和显式策略解析引用，不能读取环境隐式路径。</li>
           <li>物理封装由对应生产动作在 Profile 锁定后承担；外部签名集成不持有 Ktisor 写入权。</li>
@@ -45,9 +45,9 @@ permalink: "/endem/index.html"
     <section>
         <h2>它读取什么，产生什么</h2>
         <div class="table-wrap"><table><thead><tr><th>入口</th><th>主要输入</th><th>主要输出</th></tr></thead><tbody>
-          <tr><td><code>ktise</code></td><td>受控来源、投影候选、语义决定和规范版本</td><td>nascent Endem、Ktise Iknem、诊断</td></tr>
-          <tr><td><code>elenk</code></td><td>Endem/Synem、检查层、限制和信任材料</td><td>分层结论和 Elenk Iknem；绑定精确输入与检查配置的引用只留在 Ktisor 内部</td></tr>
-          <tr><td><code>pleko</code></td><td>Endem 集合、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Iknem</td></tr>
+          <tr><td><code>ktise</code></td><td>受控来源、投影候选、语义决定和规范版本</td><td>来源保留的 nascent Endem；形成记录的 Iknem 物理格式待定</td></tr>
+          <tr><td><code>elenk</code></td><td>Endem/Synem、检查层、限制和信任材料</td><td>分层结论；未来 Elenk Iknem 的物理格式待定，绑定精确输入与检查配置的内部引用不跨入 Theor</td></tr>
+          <tr><td><code>pleko</code></td><td>Endem 集合、组合策略和依赖锁</td><td>完整组合闭包；Synem 规范字节和 Pleko Iknem 的物理格式待定</td></tr>
           <tr><td><code>theor</code></td><td>任意原始制品字节、视图和预算</td><td>只读文本/结构视图、差分和诊断</td></tr>
           <tr><td><code>drase</code></td><td>精确发布制品、适用外部陈述与验证记录、运行策略、后端和能力目录</td><td>Dromen、运行记录、运行与决定类 Iknem</td></tr>
         </tbody></table></div>
@@ -60,7 +60,7 @@ permalink: "/endem/index.html"
           <li>不让 <code>theor</code> 的可读视图替代生产 <code>elenk</code> 或生成可信句柄。</li>
           <li>不提供可以任意删除、改名或重写 semion、skena、telis、krin、apor 的通用变换命令。</li>
           <li>不通过环境变量、当前目录或网络“最新版本”解析正式依赖。</li>
-          <li>不持有发布私钥；没有外部签名响应时只能保留未签候选。</li>
+          <li>不持有发布私钥；外部签名响应由独立集成核对，不作为 Ktisor 输入。</li>
           <li>不让 <code>drase</code> 后端持有实时能力句柄、改写精确发布制品或外部验证记录，也不允许它自行宣布 accepted。</li>
           <li>不把 Iknem、签名、模型评分或工具数量描述为数学证明或成熟实现证据。</li>
         </ul>

@@ -538,7 +538,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "components/ktisor.html": {
         "required": (
             "Ktisor",
+            "为什么需要独立生产边界",
             "用一次依赖更新理解 Ktisor",
+            "三个生产动作各自交付什么",
+            "发布、签名和证据为什么不能混入",
+            "只生产 Endem / Synem",
             "名称仍在研究",
             "具有精确范围的语义授权",
             "不授予动作权限",
@@ -547,6 +551,20 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "模型",
             "不可信",
             "checked arithmetic",
+            "外部签名响应不是 Ktisor 输入",
+            "形成记录的 Iknem 物理格式仍未定义",
+            "Synem 规范字节必须等待真实消费者与物理 Profile",
+            "文档、向量和构建检查只能证明资料关系一致",
+            "GNU <code>objcopy</code>",
+            "SLSA 1.2 Provenance",
+        ),
+        "forbidden_patterns": (
+            r"<td>发布配置</td>",
+            r"<td>外部签名响应</td>",
+            r"<h2>权威输入与生产者</h2>",
+            r"<h2>输出与消费者</h2>",
+            r"<h2>关键不变量</h2>",
+            r"<h2>失败与拒绝责任</h2>",
         ),
     },
     "components/theor.html": {
@@ -3241,6 +3259,29 @@ def validate_jekyll_sources():
     for stale_phrase in ("根据已授权语义决定形成", "已授权的投影决定", "已授权 `semion`"):
         if stale_phrase in ktisor_text or stale_phrase in naming_text:
             errors.append(f"public developer guidance retains ambiguous semantic authorization wording: {stale_phrase}")
+    ktisor_boundary_pages = {
+        "components/index.html": (SOURCE_ROOT / "components" / "index.html").read_text(),
+        "endem/index.html": (SOURCE_ROOT / "endem" / "index.html").read_text(),
+        "endem/docs/reference.md": (SOURCE_ROOT / "endem" / "docs" / "reference.md").read_text(),
+        "docs/architecture-guide.md": (SOURCE_ROOT / "docs" / "architecture-guide.md").read_text(),
+    }
+    for page, source_text in ktisor_boundary_pages.items():
+        for stale_phrase in (
+            "所有规范制品都必须通过 Ktisor",
+            "外部签名响应验证接口",
+            "签名请求、分层诊断",
+            "没有外部签名响应时只能保留未签候选",
+        ):
+            if stale_phrase in source_text:
+                errors.append(f"{page} retains a stale Ktisor boundary: {stale_phrase}")
+    for page, token in {
+        "components/index.html": "Dromen、Iknem、外部签名与最终决定仍由各自责任域产生",
+        "endem/index.html": "外部签名响应由独立集成核对，不作为 Ktisor 输入",
+        "endem/docs/reference.md": "Endem 规范字节的唯一生产入口",
+        "docs/architecture-guide.md": "未来物理 Profile 确定后的 Synem 与发布派生",
+    }.items():
+        if token not in ktisor_boundary_pages[page]:
+            errors.append(f"{page} missing the precise Ktisor boundary: {token}")
     open_questions_text = (SOURCE_ROOT / "architecture" / "open-questions.html").read_text()
     for token in (
         "先判断问题处于哪一层",
