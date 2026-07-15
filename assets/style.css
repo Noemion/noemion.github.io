@@ -201,6 +201,8 @@ details p{padding-bottom:11px}
 .page-link span{color:var(--muted);font-size:14px}
 
 .status-grid{--responsive-grid-min:280px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--responsive-grid-min)),1fr));gap:12px}
+.status-columns{column-width:340px;column-gap:18px}
+.status-columns>.status-item{break-inside:avoid;margin:0 0 18px}
 .status-item{
   padding:14px;background:var(--paper-raised);border:1px solid var(--rule);border-left:3px solid var(--accent)
 }
@@ -995,6 +997,7 @@ body:not([data-page-role="portal"]) .status-item{
   min-height:180px;padding:25px;background:var(--paper);border:0;border-radius:0;
   transition-property:background-color,box-shadow,transform;transition-duration:180ms;transition-timing-function:var(--ease)
 }
+body:not([data-page-role="portal"]) .status-columns>.status-item{box-shadow:inset 0 0 0 1px var(--portal-line)}
 body:not([data-page-role="portal"]) .card h3,
 body:not([data-page-role="portal"]) .status-item h3{font-size:21px;letter-spacing:-.025em;transition-property:color;transition-duration:150ms}
 body:not([data-page-role="portal"]) .resource-list{gap:1px;background:var(--portal-line)}

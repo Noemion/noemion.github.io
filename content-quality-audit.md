@@ -626,6 +626,16 @@ GNU Coreutils `timeout`、Make job slots 与 Guix 容器环境只保留为终止
 
 本轮只重构公开解释、页面质量契约与审计记录。END-CORE、END-FMT、END-P1、登记、场景、向量、读音候选和组件状态均未改变。
 
+## 架构决定索引渐进式披露二次复核 · 2026-07-16
+
+架构决定总览已经能够从开发者问题定位责任，但随后仍用二十九行表格复制每条 ADR 的状态和解释。每个 ADR 页面才是背景、结论、限制与取代关系的权威入口；总览继续维护第二份解释，会让同一决定产生两个需要同步的公开版本。外部资料部分又以十三行清单逐项排列格式、时间、协议、遥测、文本和评测资料，机制关系被版本库存切断。
+
+当前页面保留 ADR-0008 至 ADR-0036 的全部直接链接，并按历史迁移、Endem 语义格式与判断、组合会话证据与信任、名称读音与公开动作、来源保留与裁剪发布五组进入。开发者先从任务表定位责任，再在分组索引中选择具体决定；完整状态和论证只在对应 ADR 展开。分组按可用宽度自动分栏，每张卡片保持内容自然高度，避免短组被同排长组拉出无效空白；手机和平板在空间不足时自然回到单列。外部资料则按格式读取、结果与缺席、时间与测量、Agent 协议、遥测与文本、AI 风险与评测六类机制合并。页面表格由五张减为四张，表格正文由六十行减为二十四行，同时保留二十九个决定入口、六类常见输入和六条协议适配不变量。
+
+外部状态按复核日重新确认：[GNU Binutils 首页](https://sourceware.org/binutils/)把 2.46.1 标为当前发布，而随 2.46 源码生成的[工具手册](https://sourceware.org/binutils/docs/)标为 2.46，页面因此分开发布版本与手册版本。[MCP 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25)仍是当前正式修订，[2026-07-28 候选版](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/)要到计划发布日期后才能重新判断；[A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/)继续用主次版本协商，补丁号不改变协议兼容。[OpenTelemetry 语义约定 1.43.0](https://opentelemetry.io/docs/specs/semconv/)仍把 GenAI 路由到独立仓库；[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)仍在修订，[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)则把产业标准、社区协议、身份认证和安全评测作为不同工作轴。
+
+本轮只调整公开总览、质量契约和审计记录。ADR、CORE、Profile、登记、向量、名称、读音结论、格式和组件状态均未改变，也没有把外部标准或研究趋势提升为 Noemion 的实现证据。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。

@@ -479,6 +479,13 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "先从一个变更定位责任",
             "开发者问题",
             "停止条件",
+            "按职责核对全部决定",
+            "status-columns",
+            "历史迁移",
+            "Endem 语义、格式与判断",
+            "组合、会话、证据与信任",
+            "名称、读音与公开动作",
+            "来源保留与裁剪发布",
             "常见输入怎样进入当前架构",
             "外部资料怎样进入设计",
             "决定变化时要同步什么",
@@ -491,6 +498,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "判断与运行结果分层",
         ),
         "forbidden_patterns": (
+            r"<h2>按编号核对决定状态</h2>",
+            r"<th>状态</th><th>当前解释</th>",
             r"<h2>当前策略</h2>",
             r"<h2>排除的捷径</h2>",
             r"<span class=\"badge\">Design Stage</span>",
@@ -1236,6 +1245,20 @@ def validate_required_text_contracts(root):
             if re.search(pattern, text):
                 errors.append(
                     f"{route}: contradicts system-closure contract with {pattern!r}"
+                )
+        if route == "architecture/decisions.html":
+            linked_adrs = {
+                int(value)
+                for value in re.findall(r'href="adr-(\d{4})-[^"]+\.html"', text)
+            }
+            expected_adrs = set(range(8, 37))
+            if linked_adrs != expected_adrs:
+                missing = sorted(expected_adrs - linked_adrs)
+                unexpected = sorted(linked_adrs - expected_adrs)
+                errors.append(
+                    "architecture/decisions.html: grouped decision index must link "
+                    f"ADR-0008 through ADR-0036 exactly; missing={missing}, "
+                    f"unexpected={unexpected}"
                 )
     return errors
 
@@ -3813,6 +3836,8 @@ def validate_jekyll_sources():
             'body[data-page-role="portal"] .global-timeline-link{width:100%;min-width:0;padding:0}',
             'body[data-page-role="portal"] .global-timeline-value{width:100%;min-width:0;padding-inline:7px;font-size:10px;letter-spacing:.04em}',
             '.portal-focus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))',
+            '.status-columns{column-width:340px;column-gap:18px}',
+            '.status-columns>.status-item{break-inside:avoid;margin:0 0 18px}',
             '.focus-card-dromen .focus-art',
             '.focus-card-iknem .focus-art',
             'text-decoration-color:color-mix(in srgb,var(--portal-coral) 54%,var(--portal-amber))',
@@ -3948,6 +3973,7 @@ def validate_jekyll_sources():
 
     external_boundary_contracts = {
         "architecture/decisions.html": (
+            "GNU Binutils 2.46.1",
             "A2A 1.0 版本化规范",
             "补丁号不进入协议协商",
             "OpenTelemetry 语义约定 1.43.0",
@@ -3959,6 +3985,7 @@ def validate_jekyll_sources():
             "后续版本在正式发布",
             "敏感内容不得默认导出",
             "NIST AI RMF 与 GenAI Profile",
+            "NIST AI Agent 标准化工作",
             "外部协议适配不变量",
             "身份不等于权威",
             "外部状态不等于本地结果",
