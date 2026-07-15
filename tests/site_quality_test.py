@@ -3728,6 +3728,8 @@ def validate_jekyll_sources():
             'body[data-site-module="development"]',
             'body[data-site-module="resources"]',
             'body[data-site-module="support"]',
+            '--module-introduction-clip:polygon(0 0,80% 0,100% 100%,20% 100%)',
+            '--module-card-clip:polygon(12% 0,100% 0,88% 100%,0 100%)',
             "clip-path:var(--module-introduction-clip)",
             "clip-path:var(--module-card-clip)",
             "radial-gradient(circle at var(--module-node-1)",
