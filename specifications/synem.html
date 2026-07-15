@@ -7,11 +7,11 @@ permalink: "/specifications/synem.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>Synem</span></nav>
-  <header class="content-introduction"><h1>组合闭包<br>Synem</h1><p>把多个可独立实现和验收的 Endem 固定成完整、可重放且权限不扩大的关系图。</p><div class="badges"><span class="badge">SYN-CORE 0.1.0-draft</span><span class="badge">至少两个目标</span><span class="badge">禁止环境搜索</span><span class="badge">尚无物理格式</span></div></header>
+  <header class="content-introduction"><h1>组合闭包<br>Synem</h1><p>当一项目标依赖另一项目标时，明确列出所有必需成员和关系，让后续运行不能临时换文件、补依赖或扩大权限。</p><div class="badges"><span class="badge">SYN-CORE 0.1.0-draft</span><span class="badge">至少两个目标</span><span class="badge">禁止环境搜索</span><span class="badge">尚无物理格式</span></div></header>
 
   <section class="content-stack">
     <h2>先给直白定义</h2>
-    <p class="lead">组合闭包（设计阶段名称 Synem）必须包含两个或更多不同 Endem，以及经必需关系可达的全部传递成员。成员和关系共同构成闭包；只有一份文件列表或一次目录扫描，不是 Synem。</p>
+    <p class="lead">例如，发布服务既要得到正确的构建产物，也要让部署后的服务通过健康检查。两项目标可以分别失败，因此各自形成 Endem；组合闭包（设计阶段名称 Synem）再把它们以及必需依赖固定下来。普通文件列表或目录扫描没有这种保证。</p>
     <p class="callout"><strong>什么时候使用：</strong>多个目标能够独立版本化、实现、授权、接受或失败，但需要共享依赖、策略或激活关系时使用 Synem。共同描述一个不可分终态的关系仍留在一个 Endem 的复合根中。</p>
     <p class="callout"><strong>规范边界：</strong><a href="../architecture/adr-0021-synem-closure-and-activation.html">ADR-0021</a>与 <code>spec/synem-core.md</code> 已固定抽象闭包和条件激活；这不是物理格式，也没有 Synem 文件扩展名、魔数或稳定 ABI。</p>
   </section>

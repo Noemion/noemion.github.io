@@ -9,8 +9,8 @@ manual_group: "safety"
 manual_order: 3
 nav_title: "安全与独立检查"
 page_heading: "安全与独立检查"
-page_lead: "区分制品形成侧 elenk 与独立 theor，并对所有不可信制品执行有界读取。"
-summary: "形成侧分层检查、独立 Theor、checked arithmetic 和差分测试。"
+page_lead: "说明为什么写文件的程序不能独自证明文件正确，以及两条读取路径怎样安全处理损坏、恶意或超大输入。"
+summary: "比较 elenk 与独立 theor，并查看越界、溢出和共同错误怎样被发现。"
 badges: ["elenk", "theor", "封闭失败"]
 ---
 

@@ -7,11 +7,11 @@ permalink: "/architecture/adr-0026-external-protocol-adapters.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0026</span></nav>
-  <header class="content-introduction"><h1>ADR-0026<br>外部协议适配边界</h1><p>让 MCP、A2A、HTTP 与未来协议进入受限会话，同时不让外部状态、身份和权限改写 Noemion 的工程语义。</p><div class="badges"><span class="badge">当前草案</span><span class="badge">ADP-CORE 0.1.0-draft</span><span class="badge">协议无关</span><span class="badge">尚无适配器</span></div></header>
+  <header class="content-introduction"><h1>ADR-0026<br>外部协议适配边界</h1><p>MCP、A2A 或 HTTP 可以传递调用和状态，但远端说“完成”、自报身份或列出能力时，本地系统仍要独立核对目标、权限和结果。</p><div class="badges"><span class="badge">当前草案</span><span class="badge">ADP-CORE 0.1.0-draft</span><span class="badge">协议无关</span><span class="badge">尚无适配器</span></div></header>
 
   <section class="content-stack">
     <h2>直接结论</h2>
-    <p class="lead">Noemion 不需要一个万能 Agent 对象，也不应把 MCP 或 A2A 变成内部语义。每个外部协议只通过受 Dromen 限制的适配绑定连接到一次精确调用。</p>
+    <p class="lead">适配器只负责把一次已经限定范围的本地调用翻译给外部协议，再把回应连同来源带回来。它不能因为远端使用 Agent、Task 或 Tool 这些名称，就把远端对象直接当成 Noemion 的目标、证据或决定。</p>
     <p>适配必须保留协议原始事实、收窄能力、声明信息损失并控制副作用。外部任务完成、工具成功、HTTP 状态和模型停止原因都不能直接成为目标满足、最终接受、会话终止或证据有效。</p>
   </section>
 

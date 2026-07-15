@@ -7,11 +7,11 @@ permalink: "/architecture/open-questions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>开放问题</span></nav>
-  <header class="content-introduction"><h1>开放问题</h1><p>先说明开发者现在可以依赖哪些规则，再列出仍缺物理 Profile、实现证据或发行证据的问题。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">已有成果</span><span class="badge">正在研究</span><span class="badge">待定内容</span></div></header>
+  <header class="content-introduction"><h1>开放问题</h1><p>区分哪些规则已经足以继续设计，哪些问题仍会改变文件、接口、安全结论或公开名称。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">已有成果</span><span class="badge">正在研究</span><span class="badge">待定内容</span></div></header>
 
   <section class="content-stack">
     <h2>先分清可依赖规则和待定接口</h2>
-    <p class="lead">CORE、Profile 和标为当前策略的 ADR 可以约束资料设计；非规范研究提案只能提供问题、反例和候选责任。缺少物理 Profile 时不要发明本地字段，缺少实现证据时不要声称已有组件行为。</p>
+    <p class="lead">开发者可以用现行 CORE、Profile 和 ADR 检查资料是否一致，但不能据此声称组件已经运行。研究提案只提供待检验的问题和候选方案；如果某个字段、接口或行为还没有进入规范，这一页会把它明确留在待定范围。</p>
     <div class="table-wrap"><table><thead><tr><th>现有材料</th><th>开发者现在怎么做</th><th>不能据此声称</th></tr></thead><tbody>
       <tr><td>CORE、Profile 或当前策略 ADR</td><td>固定精确版本，按条款保存失败与未知，不用便捷默认值改写规则。</td><td>组件已经实现，或不同实现已经互操作。</td></tr>
       <tr><td>非规范研究提案</td><td>用作威胁、反例和候选责任的输入；回到现有规范定位唯一归属。</td><td>已经出现新接口、字段、命令、制品或规范决定。</td></tr>

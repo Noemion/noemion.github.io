@@ -10,8 +10,8 @@ manual_order: 5
 manual_index_entry: true
 nav_title: "参考索引"
 page_heading: "参考索引"
-page_lead: "集中查找 endem 子命令、制品、状态、组件和稳定失败类别。"
-summary: "五个动作、Endem/Synem/Dromen/Iknem、状态、失败和权威参考。"
+page_lead: "按用户要做的事情查找计划中的命令动作，并核对每一步读什么、产出什么、失败时返回什么。"
+summary: "查找五个动作、四类对象、状态、失败原因和对应规范来源。"
 badges: ["参考", "CLI 待定"]
 ---
 

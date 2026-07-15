@@ -9,8 +9,8 @@ manual_group: "guides"
 manual_order: 4
 nav_title: "架构设计指南"
 page_heading: "Noemion 架构设计指南"
-page_lead: "沿一次 Agent 工作看清目标、会话、外部任务、证据和决定怎样穿过不同信任边界。"
-summary: "沿一次 Agent 工作看清目标、会话、外部任务、证据和决定怎样穿过不同信任边界。"
+page_lead: "用一次依赖升级说明：人提出的目标、模型建议、工具调用、运行权限、观察记录和最终接受为什么必须由不同职责处理。"
+summary: "沿一次 Agent 工作判断每类信息由谁产生、谁能修改，以及谁有权作出最后决定。"
 badges: ["架构", "Endem", "信任边界"]
 ---
 

@@ -7,11 +7,11 @@ permalink: "/architecture/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>架构设计</span></nav>
-  <header class="section-introduction"><h1>架构设计</h1><p>一项自然语言目标怎样形成制品、组合依赖、受控实现，并留下可验收的证据。</p><div class="badges"><span class="badge">Endem 优先</span><span class="badge">单一命令入口</span><span class="badge">三项信任职责</span><span class="badge">失败时关闭</span></div></header>
+  <header class="section-introduction"><h1>架构设计</h1><p>当人工智能系统开始调用工具时，人的目标怎样不被一次模型解释、一次运行状态或一条成功消息悄悄改写。</p><div class="badges"><span class="badge">Endem 优先</span><span class="badge">单一命令入口</span><span class="badge">三项信任职责</span><span class="badge">失败时关闭</span></div></header>
 
   <section>
     <h2>架构的直接结论</h2>
-    <p class="lead">Noemion 不是一组仿照传统二进制工具命名的命令。它要建立的基础是：一项自然语言目标可以成为持久、可组合、可受控运行、可由证据验收的制品。</p>
+    <p class="lead">Noemion 先保存人实际提出的目标，再把解释、授权、执行和验收交给不同职责处理。模型可以建议怎样做，工具可以报告做了什么，但它们不能自行决定人原本想要什么，也不能只凭“运行成功”宣布目标已经达到。</p>
     <div class="status-grid">
       <article class="status-item"><h3>一件核心制品</h3><p>Endem 保存来源表达、已确认意义投影、一个根可能事态、目标方向、满足判据和待确认意义；对应现行字段为 <code>rhem / semion / skena / telis / krin / apor</code>。意义确认不授予工具或运行权限。</p></article>
       <article class="status-item"><h3>一个命令入口</h3><p><code>endem</code> 提供五个固定子命令，避免每项内部操作变成独立产品。</p></article>
@@ -66,7 +66,7 @@ permalink: "/architecture/index.html"
       <a class="page-link" href="agent-system-boundaries.html"><strong>Agent 系统边界图</strong><span>把上下文、计划、批准、工具、任务、记忆、轨迹与决定放回各自责任域。</span></a>
       <a class="page-link" href="open-questions.html"><strong>开放问题</strong><span>查看编码、绑定、运行、证据和发布前仍需回答的问题。</span></a>
       <a class="page-link" href="adr-0029-authority-and-authorization-decisions.html"><strong>权威与授权决定</strong><span>查看主体、范围、委托、同意、撤销、重放与结果分离怎样统一约束。</span></a>
-      <a class="page-link" href="adr-0030-endem-content-and-authorization-companions.html"><strong>内容与授权伴随关系</strong><span>查看内容身份、权威选择器、外部授权和符合性结论怎样保持分离。</span></a>
+      <a class="page-link" href="adr-0030-endem-content-and-authorization-companions.html"><strong>目标内容与使用许可</strong><span>查看目标文件为什么不能自证“已经获准使用”，以及外部决定怎样指向一份没有被改写的精确内容。</span></a>
       <a class="page-link" href="adr-0031-release-name-collision-gate.html"><strong>发布名称冲突审查</strong><span>查看 Iknem 与 Drasor/drase 的候选比较、当前策略和无兼容迁移规则。</span></a>
       <a class="page-link" href="../specifications/"><strong>规范参考指南</strong><span>查看对象、会话、证据、诊断与外部协议适配要求。</span></a>
     </div>

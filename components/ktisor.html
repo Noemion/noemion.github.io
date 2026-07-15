@@ -7,11 +7,12 @@ permalink: "/components/ktisor.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">系统组件</a><span aria-hidden="true">/</span><span>Ktisor</span></nav>
-  <header class="content-introduction"><h1>确定性制品形成器</h1><p>Ktisor 未来根据已确认且具有精确语义授权绑定的意义投影，形成、检查、组合和锁定 Endem 与 Synem，是唯一可以写规范制品的组件。</p><div class="badges"><span class="badge">确定性形成</span><span class="badge">唯一写入者</span><span class="badge">关闭失败</span><span class="badge">尚未实现</span></div></header>
+  <header class="content-introduction"><h1>确定性制品形成器</h1><p>Ktisor 未来把已经由人或具名规则确认的目标解释写成 Endem；它不能替人猜意思，也不能在信息不足时让模型自动补全。</p><div class="badges"><span class="badge">确定性形成</span><span class="badge">唯一写入者</span><span class="badge">关闭失败</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-stack">
     <h2>为什么 Ktisor 不能省略</h2>
-    <p class="lead">如果自然语言前端、模型、组合器和发布工具各自形成一套对象语义，Endem 将无法复现，也无法判断六个语义面是否在转换中保持。Ktisor 只把已经确认的意义投影确定性地形成制品，并集中执行引用闭包、格式和写入不变量；它不能替有权主体选择意义，也不授予动作权限。</p>
+    <p class="lead">同一句自然语言可能有多种解释。如果界面、模型和发布工具都能各写一份“自己理解的目标”，开发者就无法确认两次运行使用的是不是同一件东西。Ktisor 只接收已经确认的解释，按同一规则写出相同字节，并在引用、格式或必填信息不完整时停止。</p>
+    <p>这里的“已经确认”是指具有精确范围的语义授权：它允许某项候选解释进入目标内容，但不授予动作权限，也不允许 Ktisor 自行调用工具。</p>
     <p>Ktisor 可以是一组库而不是独立服务，但模型、Drasor、Theor 和外部签名系统不能绕过它写入规范字节或提升 Endem 状态。未声明的文本规范化不得参与身份或相等比较。</p>
     <p class="callout"><strong>名称仍在研究：</strong>Ktisor 是设计阶段名称，读音流畅度、口头区分度与发布拼写尚未经过使用者验证。讨论接口时应先说“确定性制品形成器”，再用 Ktisor 指向这里的定义。</p>
   </section>

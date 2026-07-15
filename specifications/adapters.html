@@ -7,11 +7,11 @@ permalink: "/specifications/adapters.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>外部协议适配</span></nav>
-  <header class="content-introduction"><h1>外部协议适配</h1><p>定义外部工具、Agent、模型服务与任务协议进入一次受限会话时必须保持的身份、权限、状态和安全边界。</p><div class="badges"><span class="badge">ADP-CORE 0.1.0-draft</span><span class="badge">当前策略</span><span class="badge">物理格式不适用</span><span class="badge">尚无适配器</span></div></header>
+  <header class="content-introduction"><h1>外部协议适配</h1><p>当 Noemion 通过 MCP、A2A、HTTP 或模型服务调用外部系统时，说明哪些信息可以带入，哪些远端说法必须留作待核对输入。</p><div class="badges"><span class="badge">ADP-CORE 0.1.0-draft</span><span class="badge">当前策略</span><span class="badge">物理格式不适用</span><span class="badge">尚无适配器</span></div></header>
 
   <section class="content-stack">
     <h2>它解决什么问题</h2>
-    <p class="lead">外部协议可以传递请求、任务、消息与产物，但不能决定 Noemion 的对象身份、能力范围、目标满足或最终接受。</p>
+    <p class="lead">远端返回 <code>completed</code>、一件产物或一组可用工具，只能说明远端报告了什么。适配器还要保留协议版本、对端身份和来源状态；本地系统再独立核对目标、权限、证据和接受条件。</p>
     <p><strong>当前策略：</strong>ADP-CORE 用协议无关规则约束外部适配，外部协议不得改写本地身份、权限或结果类型。</p>
     <p class="callout"><strong>权威边界：</strong>实现义务以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-core.md">ADP-CORE 条款源</a>为准。该规范没有物理编码，也没有创建适配器文件、媒体类型、网络协议或新组件。</p>
   </section>

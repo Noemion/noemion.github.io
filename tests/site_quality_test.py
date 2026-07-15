@@ -484,7 +484,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "身份不等于权威",
             "外部状态不等于本地结果",
             "能力声明不等于实时句柄",
-            "IKN-CORE 评估证据覆盖",
+            "现有证据覆盖了哪些条件",
             "ADR-0015",
             "判断与运行结果分层",
         ),
@@ -531,7 +531,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "Ktisor",
             "用一次依赖更新理解 Ktisor",
             "名称仍在研究",
-            "已确认且具有精确语义授权绑定的意义投影",
+            "具有精确范围的语义授权",
             "不授予动作权限",
             "Endem",
             "确定性",
@@ -2090,7 +2090,7 @@ def validate_jekyll_sources():
         lifecycle_page_text = (SOURCE_ROOT / "architecture" / "endem-lifecycle.html").read_text()
         for token in (
             "先分开内容状态与外部关系",
-            "外部陈述可以增加、过期或撤销，而精确内容身份不因此改变",
+            "新增签名、撤销授权或更新验证结果不会改写原文件",
             "现行 END-CORE 草案仍把",
             "这个单值模型不能精确保存多项签名、验证政策、截止点和撤销关系",
             "精确制品与外部陈述 → drase",
@@ -3077,6 +3077,33 @@ def validate_jekyll_sources():
             if not front_matter_value(metadata, key):
                 errors.append(f"{route}: front matter requires {key}")
         body = text[match.end():]
+        if is_manual_markdown:
+            entry_text = front_matter_value(metadata, "page_lead") or ""
+        elif route == "index.html":
+            entry_text = ""
+        else:
+            introduction_match = re.search(
+                r'<header\s+class="(?:section|content|application)-introduction"[^>]*>.*?<p>(.*?)</p>',
+                body,
+                re.DOTALL,
+            )
+            entry_text = (
+                normalize_visible_text(HTML_TAG.sub(" ", introduction_match.group(1)))
+                if introduction_match
+                else ""
+            )
+        abstract_entry_terms = (
+            "制品", "闭包", "投影", "权威", "边界", "结果域", "信任域", "语义",
+            "授权", "身份", "Profile", "伴随", "符合性", "不变量",
+        )
+        entry_abstract_hits = sorted({
+            term for term in abstract_entry_terms if term in entry_text
+        })
+        if len(entry_abstract_hits) >= 4:
+            errors.append(
+                f"{route}: introduction stacks abstract terms before a plain-language problem: "
+                + ", ".join(entry_abstract_hits)
+            )
         legacy_match = LEGACY_PUBLIC_TERMS.search(body)
         if legacy_match:
             errors.append(f"{route}: retains obsolete public name {legacy_match.group(0)!r}")
@@ -3140,9 +3167,9 @@ def validate_jekyll_sources():
     if homepage_source.exists():
         homepage_text = homepage_source.read_text()
         for token in (
-            'title: "Noemion · 人工智能时代的人类目标编译研究"',
-            '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>把自然语言目标</span><span class="portal-title-foundation">编译成可检查的工程制品</span></strong></h1>',
-            '<p class="portal-introduction-summary">过去，编译器主要把程序员写的形式代码交给机器。Noemion 研究普通人怎样把自然语言表达的目标，形成供人工智能系统使用、可持久保存且可独立检查的制品。当前只有规范与安全边界，没有可用编译器或组件。</p>',
+            'title: "Noemion · 让每个人编译自己的意图"',
+            '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>人工智能时代</span><span class="portal-title-foundation">每个人都应该能编译自己的意图</span></strong></h1>',
+            '<p class="portal-introduction-summary">过去，软件把程序员编写的代码交给机器。Noemion 研究一种新的软件边界：让每个人都能把自己的自然语言目标形成供人工智能系统使用、可以长期保存和独立检查的制品。这不是自然语言生成代码；当前也没有可用编译器或组件。</p>',
             '<span>从开发者案例开始</span>',
             '<span>查看 Endem 生命周期</span>',
             '<strong>Noemion</strong> 是项目与研究领域的名称',
@@ -3507,7 +3534,7 @@ def validate_jekyll_sources():
             '.focus-card-dromen .focus-art',
             '.focus-card-iknem .focus-art',
             'text-decoration-color:color-mix(in srgb,var(--portal-coral) 54%,var(--portal-amber))',
-            'text-decoration-thickness:.1em;text-underline-offset:.12em;text-decoration-skip-ink:none',
+            'text-decoration-thickness:.06em;text-underline-offset:.13em;text-decoration-skip-ink:none',
         ):
             if token not in shared_css:
                 errors.append(f"shared styles missing site-wide design contract: {token}")
@@ -3847,11 +3874,11 @@ def validate_jekyll_sources():
     if naming_adr.exists():
         naming_adr_text = naming_adr.read_text()
         for token in (
-            "用六项职责分开来源表达",
+            "把人实际说过的话、系统采用的解释",
             "本决定确定六项语义职责",
             "词源只作记忆辅助",
             "ADR-0034",
-            "已确认意义投影",
+            "范围有限具名权威确认",
             "规范称其为语义授权，但它不授予动作权限",
         ):
             if token not in naming_adr_text:
@@ -4382,6 +4409,10 @@ def main():
         "质量契约检查责任覆盖",
         "规范解释页先用一个贯穿案例建立对象、输入、判断和失败责任",
         "完整场景、反例和向量留在版本化权威源中",
+        "页面导语是第一理解层",
+        "同一句导语出现四个或更多内部抽象名词",
+        "抽象术语不能互相解释",
+        "写到闭包时回答“包含哪些成员，缺谁就失败”",
         "### 意义确认、动作授权与最终决定",
         "语义授权不授予动作权限",
         "不得只写“已授权意义”",
@@ -4419,7 +4450,7 @@ def main():
     developer_entry_contracts = {
         "index.html": (
             "从开发者案例开始",
-            "人工智能时代的人类目标编译研究",
+            "每个人都应该能编译自己的意图",
             "提出目标的人应当能够检查自己的表达怎样被解释",
             "这里的“编译”不是自然语言生成代码",
             "没有可用编译器或组件",
@@ -4529,7 +4560,7 @@ def main():
             errors.append(f"specifications reference missing task lookup boundary: {token}")
     endem_reference_text = (SOURCE_ROOT / "docs" / "endem-reference.md").read_text()
     for token in (
-        "按一次目标工作理解设计中的 CLI 动作",
+        "从用户要完成的五项工作出发",
         "绑定来源与已确认意义，按固定 Profile 确定性写入",
     ):
         if token not in endem_reference_text:
@@ -4760,7 +4791,7 @@ def main():
                     "index.html: homepage must not retain generic English interface "
                     f"label {obsolete_label!r}"
                 )
-        if '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>把自然语言目标</span><span class="portal-title-foundation">编译成可检查的工程制品</span></strong></h1>' not in home_source:
+        if '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>人工智能时代</span><span class="portal-title-foundation">每个人都应该能编译自己的意图</span></strong></h1>' not in home_source:
             errors.append("index.html: rendered portal must identify Noemion before Endem")
         if home_source.count('class="portal-chapter-title"') != len(HOME_HEADINGS):
             errors.append("index.html: every homepage chapter heading must use the shared symbolic title treatment")
@@ -4784,7 +4815,7 @@ def main():
                 errors.append(f"style.css missing homepage visual selector {selector}")
         for token in (
             ".portal-introduction::before{",
-            "text-decoration-style:double",
+            "text-decoration-style:solid;text-decoration-thickness:.06em",
             "--portal-cover-edge:var(--paper)",
             "--portal-cover-edge:#060f0d",
             "background:var(--portal-cover-bottom-gradient)",

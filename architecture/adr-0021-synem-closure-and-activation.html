@@ -7,11 +7,11 @@ permalink: "/architecture/adr-0021-synem-closure-and-activation.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0021</span></nav>
-  <header class="content-introduction"><h1>ADR-0021<br>组合闭包<br>条件激活</h1><p>固定 Synem 的完整闭包、精确绑定、权限收敛、成员结果与会话激活边界，让多目标关系可以重放而不依赖环境和模型猜测。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">SYN-CORE 0.1.0-draft</span><span class="badge">尚无线格式</span><span class="badge">尚未实现</span></div></header>
+  <header class="content-introduction"><h1>ADR-0021<br>组合闭包<br>条件激活</h1><p>当一个目标依赖其他目标时，先固定所有必需成员和引用，再计算共同允许的权限；运行时不能偷偷补依赖或扩大能力。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">SYN-CORE 0.1.0-draft</span><span class="badge">尚无线格式</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-band">
     <h2>直接结论</h2>
-    <p class="lead">Synem 是两个或更多 Endem 的完整、有限、精确解析闭包。它不是文件包、搜索结果、模型上下文或运行时发现的工具集合。</p>
+    <p class="lead">例如，发布服务既要得到正确的构建产物，也要让部署后的服务通过健康检查。两项目标可以分别失败，因此各自形成 Endem；Synem 再把它们及其必需依赖固定为一组可重复检查的关系。它不是普通文件包、搜索结果或模型上下文。</p>
     <p>每个必需引用必须绑定唯一内容身份；权限只能取交集或继续收紧；成员判断与决定保持独立。条件激活属于 Synem 的会话关系，不进入单个 Endem 的 <code>all_of / any_of</code> 根。</p>
     <p>本决定建立 <code>SYN-CORE 0.1.0-draft</code>，但不创建 Synem 文件扩展名、魔数、物理字段、版本范围语法或实现。本次工作不表示 Ktisor、Theor、Drasor、CLI、解析器或运行时已经实现。</p>
   </section>

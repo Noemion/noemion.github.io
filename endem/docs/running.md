@@ -9,8 +9,8 @@ manual_group: "running"
 manual_order: 4
 nav_title: "发布与运行"
 page_heading: "发布与运行"
-page_lead: "分开制品生产、外部签名与隔离运行，并在 Drasor 中建立 Dromen 与 Iknem。"
-summary: "生产者封装、外部签名边界、Drasor、Dromen、能力循环与最终决定。"
+page_lead: "说明目标文件准备好以后，谁负责封装和签名，运行时怎样只取得本次需要的权限，以及观察为何不能直接等同于接受。"
+summary: "从文件发布、外部签名和一次受限会话，走到观察记录与最终决定。"
 badges: ["外部签名", "drase", "尚无运行时"]
 ---
 

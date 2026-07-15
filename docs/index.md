@@ -9,8 +9,8 @@ manual_group: "start"
 manual_order: 0
 nav_title: "指南与参考"
 page_heading: "指南与参考"
-page_lead: "从 Noemion 项目定位入门，按任务进入架构、开发、应用或规范参考。"
-summary: "从 Noemion 项目定位入门，按任务进入架构、开发、应用或规范参考。"
+page_lead: "先说明 Noemion 为什么研究人类目标编译，再按你要解决的问题进入案例、架构、开发、应用或规范资料。"
+summary: "从项目目的和具体问题出发，选择适合当前任务的阅读路径。"
 badges: ["指南", "Endem 手册", "参考"]
 manual_is_index: true
 manual_index_heading: "按任务与内容类型查找"

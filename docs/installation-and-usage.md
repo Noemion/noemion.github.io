@@ -9,8 +9,8 @@ manual_group: "start"
 manual_order: 2
 nav_title: "获取与使用指南"
 page_heading: "获取与使用指南"
-page_lead: "说明当前可用资源、计划中的 Endem 流程和正式发布的完整性要求。"
-summary: "查看当前可用资源、计划中的 Endem 流程和正式发布要求。"
+page_lead: "先确认当前没有可安装软件，再说明哪些公开资料可以使用，以及未来发行必须提供哪些来源、许可和完整性证据。"
+summary: "区分现在可读的资料与尚不存在的软件，并了解未来发行的验证要求。"
 badges: ["尚未发布", "Endem 命令行", "完整性优先"]
 ---
 

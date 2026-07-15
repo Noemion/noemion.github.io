@@ -7,11 +7,11 @@ permalink: "/architecture/endem-lifecycle.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>Endem 生命周期</span></nav>
-  <header class="content-introduction"><h1>Endem 生命周期</h1><p>分开理解内容怎样形成、外部陈述怎样绑定，以及一次受控会话怎样取得自己的判断依据。</p><div class="badges"><span class="badge">内容形成</span><span class="badge">外部陈述</span><span class="badge">一次会话</span><span class="badge">有范围证据</span></div></header>
+  <header class="content-introduction"><h1>Endem 生命周期</h1><p>从人写下目标开始，逐步说明系统何时可以形成文件、谁可以签署或授权，以及一次运行怎样留下可核对的依据。</p><div class="badges"><span class="badge">内容形成</span><span class="badge">外部陈述</span><span class="badge">一次会话</span><span class="badge">有范围证据</span></div></header>
 
   <section class="content-stack">
     <h2>先分开内容状态与外部关系</h2>
-    <p class="lead">Endem 内容怎样形成，与谁对它作出签名、验证或使用判断，是两条不同的轴。外部陈述可以增加、过期或撤销，而精确内容身份不因此改变。</p>
+    <p class="lead">改动目标内容会产生一件新的 Endem；新增签名、撤销授权或更新验证结果不会改写原文件。这种分离让开发者能够判断“目标变了”还是“别人对同一目标作出的声明变了”。</p>
     <ul>
       <li><strong>内容形成：</strong><code>ktise</code> 说明目标契约已经确定性编码；<code>pleko</code> 说明引用和冲突已经解析。</li>
       <li><strong>外部陈述：</strong>签名者针对精确内容和陈述类型产生独立记录，验证者再依据算法、信任根、政策和截止点判断其是否适用。</li>

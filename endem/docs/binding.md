@@ -9,14 +9,14 @@ manual_group: "binding"
 manual_order: 2
 nav_title: "绑定与组合"
 page_heading: "绑定与组合"
-page_lead: "解析 Endem 的待确认引用与跨目标关系，形成 coherent Endem 或 Synem。"
-summary: "pleko 输入、内容寻址、冲突、能力收敛、Synem 和 Pleko Iknem。"
+page_lead: "当一项目标依赖其他目标或产物时，说明怎样固定所有必需成员、报告冲突，并防止运行时临时换入新内容。"
+summary: "查看 pleko 怎样固定依赖、处理冲突、收窄共同权限并形成 Synem。"
 badges: ["pleko", "Synem"]
 ---
 
 ## 什么时候需要 pleko
 
-单个 Endem 可以在不依赖其他制品时独立进入 coherent 状态。只有出现跨 Endem 定义、产物、能力、约束或验收引用时，`pleko` 才建立 Synem。
+一项目标如果不依赖其他目标，可以独立完成引用检查。只有当它确实引用其他 Endem 的定义、产物、能力、约束或验收条件时，`pleko` 才把所有必需成员固定为 Synem。
 
 > Synem 是至少两个精确 Endem 的完整传递闭包，不是普通文件归档，也不是为模型自动扩展上下文的知识包。规范边界见 [SYN-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md) 与 [ADR-0021](../../architecture/adr-0021-synem-closure-and-activation.html)。
 
