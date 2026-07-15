@@ -254,7 +254,7 @@ body .global-nav-trigger:active{transform:scale(.96)}
 .global-nav-card-arrow-ring circle{fill:none;vector-effect:non-scaling-stroke}
 .global-nav-card-arrow-progress{
   stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100;opacity:0;
-  transition-property:stroke-dashoffset,opacity;transition-duration:560ms,180ms;transition-timing-function:linear,var(--ease)
+  transition-property:stroke-dashoffset,opacity;transition-duration:280ms,180ms;transition-timing-function:linear,var(--ease)
 }
 .global-nav-card-arrow i{
   position:relative;z-index:1;grid-area:1/1;font-style:normal;line-height:1;transform:translateX(0);

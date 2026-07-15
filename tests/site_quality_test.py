@@ -5036,7 +5036,7 @@ def main():
         ".global-nav-card-arrow-ring{",
         "pointer-events:none;transform:rotate(-90deg)",
         "stroke-dasharray:100;stroke-dashoffset:100",
-        "transition-duration:560ms,180ms",
+        "transition-duration:280ms,180ms",
         ".global-nav-card:hover .global-nav-card-copy{transform:translateX(4px)}",
         ".global-nav-card:hover .global-nav-card-arrow-progress{stroke-dashoffset:0;opacity:1}",
         ".global-nav-card:focus-visible .global-nav-card-arrow-progress{stroke-dashoffset:0;opacity:1}",
