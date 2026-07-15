@@ -7,43 +7,53 @@ permalink: "/about/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>项目背景</span></nav>
-  <header class="section-introduction"><h1>项目背景</h1><p>为什么人工智能时代需要把人的目标从临时对话中取出来，以及 Noemion 所说的“编译”究竟指什么。</p><div class="badges"><span class="badge">项目目的</span><span class="badge">工程边界</span><span class="badge">当前策略</span></div></header>
+  <header class="section-introduction"><h1>项目背景</h1><p>Noemion 研究怎样让每个人用自然语言表达目标，确认其意义，并形成供人工智能系统安全使用的工程制品。</p><div class="badges"><span class="badge">项目目的</span><span class="badge">研究边界</span><span class="badge">当前阶段</span></div></header>
   <section>
-    <h2>一个新的软件边界</h2>
-    <p class="lead">传统编译器让程序员用形式语言精确地告诉机器怎样工作。今天，普通人也开始用自然语言指挥能够调用工具和改变系统的人工智能。</p>
-    <p>自然语言容易开始交流，却不天然携带稳定的解释、硬约束、验收条件和责任边界。把这些内容留在一次对话里，会让每个模型和每次运行重新猜测同一个目标。</p>
-    <p>Noemion 研究怎样把人表达的目标形成可检查的工程制品。这是一条从自然语言通向目标结构、并且能够逐步复核的路径。</p>
-    <ul>
-      <li>形成目标时，在受控形成版中保留原始表达、已经确认的意义和待确认信息。</li>
-      <li>发布目标时，移除原始表达，只交付经过确认并重新验证的目标结构。</li>
-      <li>组合目标时，显式发现引用、约束和权限冲突。</li>
-      <li>实现目标前，固定能力上限、观察要求和验收权威。</li>
-      <li>实现目标后，用可定位证据说明发生了什么、结论适用于哪里。</li>
-    </ul>
+    <h2>先从一个现实问题开始</h2>
+    <p class="lead">一个人说“把服务依赖更新到安全版本，保持测试通过，经批准后发布”。人工智能系统可以规划步骤、调用工具并协调其他 Agent，但这句话还不足以安全执行。</p>
+    <div class="table-wrap"><table><thead><tr><th>开发者必须补齐</th><th>需要形成的明确事实</th><th>信息不足时怎样停止</th></tr></thead><tbody>
+      <tr><td>目标</td><td>更新哪个服务、采用哪个版本、保持哪些行为、用什么条件判断可以发布</td><td>保留待确认问题，不让模型选择一个“最可能”的解释</td></tr>
+      <tr><td>行动范围</td><td>谁可以改依赖、运行哪些工具、访问哪些环境、谁有权批准发布</td><td>缺少精确主体、动作、对象或范围时不执行</td></tr>
+      <tr><td>证据与决定</td><td>观察哪些构建和运行结果、证据覆盖哪里、谁根据这些事实作出最终决定</td><td>工具或远端任务结束只能留下运行事实，不能自动写成目标已经满足</td></tr>
+    </tbody></table></div>
+    <p>这正是 Noemion 研究的软件边界：自然语言继续由人表达，模型继续帮助理解和行动；目标的意义、行动权限、观察证据和最终决定则必须具有可复核的责任关系。</p>
+    <p class="note">截至 2026-07-16，<a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent Standards Initiative</a>把产业标准、社区协议、身份基础设施和安全评价分开推进。它说明人工智能系统正在代表用户采取行动，也说明互操作、身份和评价不能合并成一个“Agent 已完成”的结论。这项趋势只说明责任分离的现实需求，不证明 Noemion 的设计正确，也不构成实现证据。</p>
   </section>
   <section>
-    <h2>项目定义哪些工程责任</h2>
-    <div class="status-grid">
-      <article class="status-item"><h3>最小目标制品 · Endem</h3><p>形成版保存一项期望终态的来源与解释过程；最终发布版移除原文，只保留经过确认的目标结构、方向、判据和必要来源绑定。</p></article>
-      <article class="status-item"><h3>组合闭包 · Synem</h3><p>两个或更多 Endem 解析引用和冲突后形成的完整关系图。单个自包含 Endem 不需要组合对象。</p></article>
-      <article class="status-item"><h3>一次会话契约 · Dromen</h3><p>为一次受限运行固定对象、主体、政策、环境、能力、预算和观察责任；它不是持久文件或凭据包。</p></article>
-      <article class="status-item"><h3>有范围证据记录 · Iknem</h3><p>绑定精确主体、对象、方法、观察和可支持结论；模型陈述不能单独证明目标已经完成。</p></article>
+    <h2>Noemion 研究什么</h2>
+    <p class="lead">过去的软件主要把程序员书写的形式代码编译给机器。Noemion 把“编译”限定为另一项研究：从普通人的自然语言出发，经过明确确认和可重复转换，形成供人工智能系统使用的目标制品。它不是自然语言生成代码。</p>
+    <div class="flow"><div class="step">保存实际来源</div><div class="step">确认意义与未决问题</div><div class="step">形成可复核目标结构</div><div class="step">派生裁剪发布制品</div><div class="step">使用前核对授权</div></div>
+    <p>项目把一个能够独立理解和验证的期望终态称为最小目标制品（现行设计名称为 Endem）。模型可以提出解释候选；具有明确责任的人或规则负责确认意义，Noemion 把这个决定者称为具名权威。没有解决的问题继续保留，不能由概率、默认值或搜索顺序静默消除。</p>
+    <p><strong>形成版保存一项期望终态的来源</strong>、已经确认的意义和仍未解决的问题，供检查、诊断与重新形成使用。<strong>最终发布版移除原文</strong>和可逆重建材料，只保留经过确认的目标结构，以及发布 Profile 明确定义的来源绑定。两种制品具有不同的精确身份；发布版本身不能恢复原始自然语言。</p>
+    <p>GNU <a href="https://sourceware.org/binutils/docs/binutils/objcopy.html"><code>objcopy</code> 的裁剪机制</a>与<a href="https://sourceware.org/gdb/current/onlinedocs/gdb.html/Separate-Debug-Files.html">GDB 独立调试资料</a>展示了一项可借鉴的工程纪律：完整制品、裁剪制品和独立伴随资料是不同输出，关系必须能够核对。这个类比不定义 Noemion 的字段、身份或安全结论。</p>
+  </section>
+  <section>
+    <h2>它不替代哪些系统</h2>
+    <p class="lead">Noemion 不重新实现模型、Agent 协议、身份系统、构建工具或遥测平台。它只研究这些系统之间仍然缺失的目标、证据与决定责任。</p>
+    <div class="table-wrap"><table><thead><tr><th>相邻系统</th><th>继续负责什么</th><th>Noemion 另外要求什么</th></tr></thead><tbody>
+      <tr><td>自然语言、Prompt、Skill 与模型消息</td><td>保存表达、上下文、操作说明和候选解释；它们也可以长期存储</td><td>把实际来源、确认后的意义、待确认问题和目标判据分开，不以保存时间长短证明对象价值</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/docs/learn/architecture">MCP</a></td><td>交换上下文，发现并调用工具、资源和提示，协商协议能力</td><td>协议成功不能改写人的目标，也不能自动授予动作权限或产生满足结论</td></tr>
+      <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0</a></td><td>交换 Task、Message、Artifact 和任务生命周期状态</td><td><code>TASK_STATE_COMPLETED</code>保持为外部协议事实，本地系统仍要核对目标、证据和最终决定</td></tr>
+      <tr><td>身份、政策、凭据与同意系统</td><td>认证主体并决定一项实际动作是否得到授权</td><td>意义确认不产生工具权限；动作授权也不能证明目标满足或结果被接受</td></tr>
+      <tr><td>构建、工作流与遥测工具</td><td>执行操作、更新目标、运行检查并记录可观察信号</td><td><a href="https://www.gnu.org/software/make/manual/html_node/Goals.html">GNU <code>make</code> 的 goal</a>只选择需要更新的 target；构建成功和日志完整仍需进入有范围的业务判断</td></tr>
+    </tbody></table></div>
+  </section>
+  <section>
+    <h2>按问题继续</h2>
+    <div class="page-links">
+      <a class="page-link" href="background.html"><strong>为什么目标需要独立身份</strong><span>用一次依赖升级区分来源、协议状态、工具结果、授权、证据与满足判断。</span></a>
+      <a class="page-link" href="intellectual-foundations.html"><strong>哲学怎样变成工程问题</strong><span>查看思想来源怎样帮助提出区分，以及为什么它不能替代规范和验证。</span></a>
+      <a class="page-link" href="../docs/getting-started.html"><strong>开发者怎样开始学习</strong><span>沿一条目标形成、受限行动、证据核对和最终决定的责任链阅读。</span></a>
     </div>
-    <p>这些专名都是现行设计标识。开发者资料先使用直白职责；发行拼写、读音流畅度及相邻名称的口头区分仍需独立人类验证。</p>
   </section>
   <section>
-    <h2>哪些责任由外部系统承担</h2>
-    <ul>
-      <li>Prompt、Skill 包和 Agent 消息继续承担来源表达与运行输入；它们不会因被保存为 JSON 或 Token 序列而成为目标制品。</li>
-      <li>MCP、A2A、HTTP 与工作流系统继续承担协议交换、任务状态和调度；Noemion 只要求映射不得改写本地意义、权限或结果。</li>
-      <li>身份、政策、凭据和同意系统继续授予实际动作能力；意义确认不会自动产生运行权限。</li>
-      <li>成熟外部工具继续承担模型训练、遥测、扫描、构建和发布；项目只在出现不可替代需求时定义受限适配边界。</li>
-    </ul>
-  </section>
-  <section>
-    <h2>如何推进</h2>
-    <p>当前先把“目标编译”写成可以反驳、检查和实现的规范问题。项目还没有编译器；未来首个范围只验证确定性形成、分层检查和独立读取是否成立。</p>
-    <p>双读取器、恶意输入、逐字节复现和资源上限获得证据后，项目才会评估组合、封装和受限运行。</p>
-    <p><a href="background.html">阅读完整背景与边界</a>，或查看<a href="../development/implementation-roadmap.html">分阶段实施路线</a>。</p>
+    <h2>当前做到哪里</h2>
+    <div class="status-grid">
+      <article class="status-item"><h3>已有成果</h3><p>项目已经公开自然语言来源、目标结构、意义确认、行动授权、观察证据与最终决定的责任边界，以及相应的威胁模型、规范草案、场景和验证资料。</p></article>
+      <article class="status-item"><h3>正在研究</h3><p>当前继续核对来源保留与裁剪发布、组合闭包、会话约束、范围证据、外部协议适配和独立读取责任。</p></article>
+      <article class="status-item"><h3>待定内容</h3><p>最终发布 Profile、多个对象的物理编码、运行接口、协议 Profile、发行名称和主要语言中的读音仍未确定。</p></article>
+      <article class="status-item"><h3>限制条件</h3><p>当前没有编译器、CLI、解析器、协议适配器或运行时。资料检查只能证明已覆盖的文档关系一致，不能证明组件、安全隔离或互操作已经实现。</p></article>
+    </div>
+    <p>现行专名只用于精确引用设计职责。它们的必要性、发行拼写、读音流畅度和相邻名称的口头区分仍需独立人类证据。</p>
   </section>
 </main>

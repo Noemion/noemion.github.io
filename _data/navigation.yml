@@ -3,7 +3,7 @@ global:
     href: /about/index.html
     label: 项目
     kicker: 建立共同语境
-    description: 从项目背景、架构设计和方法边界理解 Noemion 为什么存在。
+    description: 从人的自然语言目标、人工智能行动和工程责任边界理解 Noemion 为什么存在。
     items:
       - { href: /about/background.html, label: 背景与边界, description: 为什么目标语义需要成为工程对象, cover: background, cover_label: "EXPRESSION ≠ IDENTITY" }
       - { href: /architecture/index.html, label: 架构设计, description: 从确定性成形、组合到受控实现的职责分层, cover: architecture, cover_label: "TRUST BOUNDARIES" }

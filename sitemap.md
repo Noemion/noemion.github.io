@@ -11,7 +11,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Project and background
 
-- [Project background](https://noemion.github.io/about/index.html) — motivation, scope, non-goals, and intellectual foundations
+- [Project background](https://noemion.github.io/about/index.html) — why natural-language intent needs a reviewable goal artifact, what Noemion studies, adjacent-system boundaries, and current limits
 - [Background and boundaries](https://noemion.github.io/about/background.html) — why natural-language goals need a separate identity and trust boundary
 - [Intellectual foundations](https://noemion.github.io/about/intellectual-foundations.html) — turning philosophical distinctions into testable developer questions without treating philosophy as a software specification
 - [Frequently asked questions](https://noemion.github.io/faq/index.html) — direct answers about scope, status, and non-goals

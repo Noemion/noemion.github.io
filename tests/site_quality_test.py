@@ -154,6 +154,13 @@ HOME_HEADINGS = [
     "从编译器与工具链借鉴工程纪律",
     "继续阅读",
 ]
+ABOUT_INDEX_HEADINGS = [
+    "先从一个现实问题开始",
+    "Noemion 研究什么",
+    "它不替代哪些系统",
+    "按问题继续",
+    "当前做到哪里",
+]
 BACKGROUND_HEADINGS = [
     "先分清项目研究什么",
     "用一次依赖升级定位缺失事实",
@@ -5571,6 +5578,54 @@ def main():
             ):
                 if token not in portal_art_source:
                     errors.append(f"homepage animated brand visual missing contract: {token}")
+
+    about_index = ROOT / "about/index.html"
+    if about_index.exists():
+        parser = parse(about_index)
+        if parser.h2_texts != ABOUT_INDEX_HEADINGS:
+            errors.append(
+                "about/index.html: project-purpose sequence must be "
+                f"{ABOUT_INDEX_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in (
+            "人工智能系统可以规划步骤、调用工具并协调其他 Agent",
+            "它不是自然语言生成代码",
+            "形成版保存一项期望终态的来源",
+            "最终发布版移除原文",
+            "两种制品具有不同的精确身份",
+            "它们也可以长期存储",
+            "TASK_STATE_COMPLETED",
+            "GNU make 的 goal",
+            "NIST AI Agent Standards Initiative",
+            "当前没有编译器、CLI、解析器、协议适配器或运行时",
+            "读音流畅度",
+            "资料检查只能证明已覆盖的文档关系一致",
+        ):
+            if term not in visible_text:
+                errors.append(f"about/index.html: missing project-purpose boundary {term}")
+        if (
+            parser.page_role != "section"
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["table-wrap"] != 2
+            or parser.class_counts["page-link"] != 3
+            or parser.class_counts["status-item"] != 4
+        ):
+            errors.append(
+                "about/index.html: must keep one formation flow, two boundary tables, "
+                "three routed links, and four current-status items"
+            )
+        for obsolete_heading in (
+            "一个新的软件边界", "项目定义哪些工程责任",
+            "哪些责任由外部系统承担", "如何推进",
+        ):
+            if obsolete_heading in parser.h2_texts:
+                errors.append(
+                    "about/index.html: must not restore inventory-style heading "
+                    f"{obsolete_heading!r}"
+                )
 
     architecture_index = ROOT / "architecture/index.html"
     if architecture_index.exists():
