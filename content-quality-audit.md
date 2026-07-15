@@ -706,6 +706,18 @@ GNU Coreutils `timeout`、Make job slots 与 Guix 容器环境只保留为终止
 
 GNU Make 的 target、prerequisite、recipe、并行配额和中断状态，Guix 的环境与代际恢复，以及 Diffutils、Coreutils 和 GNU 软件自由资料继续只作为目标/步骤、预算/授权、环境/权限、比较/决定与软件权利/服务控制的反例来源。它们不定义 Noemion 字段、结果域或实现。此次修订没有改变 ADR、CORE、Profile、登记、向量、名称或读音结论，也没有创建 Agent 对象、控制平面、适配器、隔离机制、存储或运行组件。
 
+## 思想来源与工程权威边界二次复核 · 2026-07-16
+
+思想与方法基础页已经从依赖升级案例进入，但随后用“工程设计步骤”“思想工具”“当前规范”“继续研究”和“进入规范前的材料”重复同一条转换路径。页面累计八个章节和五张表；思想家、书目、现行规范与准入要求分别出现，开发者需要在多处恢复“哲学只能提出问题，规范与证据才改变工程行为”的边界。
+
+当前页面收敛为五个章节。依赖升级先区分来源、意义、事态、授权、证据和决定；随后用“还原问题、提炼区分、改写问题、寻找反例、建立工程权威”形成唯一转换路径。思想来源按开发者问题就地给出，不再另建书目库存。Noemion、Endem 与其他阶段标识仍先解释职责，并保留目标语言读音和口头区分的人类验证要求。
+
+本轮同时修正两项哲学越界。第一，后期维特根斯坦确实批评早期分析框架，但学界对阶段划分和思想连续性仍有争议，因此不再简写为“放弃逻辑原子主义”。第二，《逻辑哲学论》5.6 与 7 讨论哲学意义上的语言边界，不能直接定义 <code>aseme</code>、<code>apor</code> 或其他软件结果；这些状态只能由 Noemion 自己的可观察条件和规范成立。
+
+[SEP 的 Husserl 词条](https://plato.stanford.edu/entries/husserl/)记录了意向活动相关项的竞争解释，说明现象学类比不能直接变成软件类型。[SEP 的 Speech Acts 词条](https://plato.stanford.edu/entries/speech-acts/)说明句子内容不足以单独决定言外之力，语境和成功条件仍需成立。[Wittgenstein Project 编号文本](https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29)用于核对命题范围；[SEP 的 Wittgenstein 词条](https://plato.stanford.edu/entries/wittgenstein/)提供后期批评与解释争议。[GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)要求按用户问题而非实现或功能库存组织资料；[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)则把协议、身份基础设施和安全评价分开推进。这些来源支持问题分层和写作路径，不定义 Noemion 的字段、结果域或实现。
+
+本轮只重构公开解释、站点地图、质量契约和审计记录。ADR、CORE、Profile、登记、向量、字段、名称和读音结论均未改变，也没有创建组件、接口、格式或运行证据。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。

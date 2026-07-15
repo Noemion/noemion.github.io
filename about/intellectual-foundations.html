@@ -7,100 +7,69 @@ permalink: "/about/intellectual-foundations.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">项目背景</a><span aria-hidden="true">/</span><span>思想与方法基础</span></nav>
-  <header class="content-introduction"><h1>思想与方法基础</h1><p>哲学帮助开发者发现语义问题；ADR、规范、反例和验证结果才决定工程行为。</p><div class="badges"><span class="badge">思想启发</span><span class="badge">当前策略</span><span class="badge">规范另行定义</span><span class="badge">术语读音待验证</span></div></header>
+  <header class="content-introduction"><h1>思想与方法基础</h1><p>哲学提出可检验的区分；只有 ADR、规范、反例和验证结果能够改变工程行为。</p><div class="badges"><span class="badge">思想用于提问</span><span class="badge">当前策略</span><span class="badge">规范另行定义</span><span class="badge">读音仍需人类验证</span></div></header>
 
   <section class="content-stack">
     <h2>从一次依赖升级看清问题</h2>
     <p class="lead">假设开发者要求 Agent“把支付服务依赖升级到经过批准且没有已知高危漏洞的版本”。模型提出版本，包管理器也报告成功，但这些事实还不能证明目标已经满足。</p>
     <div class="table-wrap"><table><thead><tr><th>开发者必须回答</th><th>工程责任</th><th>缺失时怎样处理</th></tr></thead><tbody>
       <tr><td>用户实际写了什么？</td><td>保存来源表达及其语言、主体、版本和位置。</td><td>无法定位来源时，不得声称后续结构忠实于原请求。</td></tr>
-      <tr><td>“经过批准”和“已知高危漏洞”具体指什么？</td><td>确认候选意义、批准权威、漏洞资料版本、查询截止点和剩余歧义。</td><td>多个解释仍然成立时，把问题保留为待确认意义，不让模型自行选择。</td></tr>
-      <tr><td>目标描述哪种事态，又怎样判断？</td><td>分开期望事态、目标方向、满足判据、观察范围和结果域。</td><td>包管理器成功只能说明一次工具调用结束，不能直接产生满足结果。</td></tr>
-      <tr><td>谁允许 Agent 修改仓库和访问网络？</td><td>动作授权、会话能力、凭据和协议适配分别核对。</td><td>意义已经确认也不授予写入或网络权限。</td></tr>
-      <tr><td>哪些观察足以支持接受？</td><td>绑定锁文件身份、扫描方法、测试环境、证据范围和具名决定者。</td><td>证据不足返回 <code>agno</code>，求值契约故障返回 <code>fault</code>；证据有效、会话完成、目标满足和最终接受仍分别报告。</td></tr>
+      <tr><td>“经过批准”和“已知高危漏洞”具体指什么？</td><td>确认候选意义、批准权威、漏洞资料版本、查询截止点和剩余歧义。</td><td>多个解释仍然成立时，保留待确认意义，不让模型代替用户选择。</td></tr>
+      <tr><td>目标描述哪种事态，又怎样判断？</td><td>分开期望事态、目标方向、满足判据、观察范围和结果域。</td><td>包管理器成功只说明工具调用结束，不能直接产生满足结果。</td></tr>
+      <tr><td>谁允许 Agent 修改仓库和访问网络？</td><td>分别核对动作授权、会话能力、凭据和协议适配。</td><td>意义已经确认也不授予写入或网络权限。</td></tr>
+      <tr><td>哪些观察足以支持接受？</td><td>绑定锁文件身份、扫描方法、测试环境、证据范围和具名决定者。</td><td>证据不足返回 <code>agno</code>，契约故障返回 <code>fault</code>；目标满足与最终接受仍分别报告。</td></tr>
     </tbody></table></div>
-    <p>当 AI Agent 可以代表用户跨系统行动时，这些区分会直接影响身份、授权、安全和互操作。<a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent Standards Initiative</a>也把这些问题作为不同研究与标准化方向。该趋势说明问题更迫切，但不证明 Noemion 的设计已经正确或具有实现证据。</p>
+    <p>AI Agent 可以代表用户跨系统行动，这些区分因此直接影响身份、授权和安全。<a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent Standards Initiative</a>也把协议、身份基础设施和安全评价分开推进。该趋势说明问题更迫切，但不证明 Noemion 的设计已经正确。</p>
   </section>
 
   <section class="content-rows">
-    <h2>哲学怎样进入工程设计</h2>
+    <h2>把思想转换成可验证问题</h2>
     <ol>
-      <li><strong>还原原问题：</strong>先说明作者试图解释或反驳什么，不先寻找与项目词汇相似的句子。</li>
-      <li><strong>提炼可复用区分：</strong>记录表达与所指、内容与行动力量、对象语言与元语言等差异。</li>
-      <li><strong>改写为开发者问题：</strong>让区分能够由数据结构、类型、诊断、威胁或测试回答。</li>
-      <li><strong>保留竞争解释：</strong>记录该理论不能覆盖什么，以及后续理论怎样挑战它。</li>
-      <li><strong>进入工程验证：</strong>只有 ADR、规范条款、支持案例、反例和验证映射可以改变现行设计。</li>
+      <li><strong>还原问题：</strong>说明作者试图解释或反驳什么，并标出文本版本和争议语境。只找到与项目术语相似的句子时停止。</li>
+      <li><strong>提炼区分：</strong>用普通工程语言复述表达与对象、内容与行动力量、对象语言与元语言等差异。不能脱离哲学术语复述时停止。</li>
+      <li><strong>改写问题：</strong>让区分能够由数据结构、类型、诊断、威胁或测试回答。没有可观察失败条件时，不进入设计。</li>
+      <li><strong>寻找反例：</strong>至少记录一个支持案例、一个反例、一个未覆盖场景和一个竞争解释。只支持单一类比时保持研究状态。</li>
+      <li><strong>建立工程权威：</strong>用 ADR 记录理由，以 <code>spec/*.md</code> 定义规范，再由场景、向量和独立验证限制声明。资料相似性本身不能改变现行设计。</li>
     </ol>
+    <p><a href="https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html">GNU Manuals</a>要求资料按读者的问题组织，并在首次出现时解释术语。后续内容因此沿开发者问题展开，不按思想家、书目或项目字段列库存。</p>
   </section>
 
   <section class="content-wide">
-    <h2>按开发者问题选择思想工具</h2>
-    <div class="table-wrap"><table><thead><tr><th>开发者问题</th><th>有用的思想区分</th><th>当前工程落点</th><th>不得直接推出</th></tr></thead><tbody>
-      <tr><td>不同表达是否仍指向同一个目标？</td><td>胡塞尔讨论意向活动与相关对象；弗雷格、罗素和克里普克区分表达、意义、指称与描述。</td><td>来源表达、意义投影、内容身份和外部对象分别绑定。</td><td>哲学上的对象同一性不能替代摘要域、Profile、版本和授权规则。</td></tr>
-      <tr><td>一句话是在描述、请求、承诺还是授权？</td><td>Austin、Searle 与 Grice 区分内容、言外之力、成功条件和语境推论。</td><td>意义确认、动作授权、会话能力与最终决定分别判断。</td><td>句式、模型意图分类或“用户已登录”都不能自动形成授权。</td></tr>
-      <tr><td>关系结构怎样支持判断？</td><td>早期维特根斯坦、罗素与 Tarski 提醒开发者区分表面记号、关系形式、对象语言和满足定义。</td><td>期望事态与结构化观察使用可比较的符号和关系位置。</td><td>一种逻辑分析不能成为现实世界的完整本体，也不能覆盖开放生成任务。</td></tr>
-      <tr><td>无法唯一翻译或解释时怎么办？</td><td>后期维特根斯坦、Quine 与 Grice 强调使用、规则实践、语境和翻译不确定性。</td><td>系统保存候选、来源和待确认意义，并明确谁有权解决。</td><td>不确定性不能成为放弃形式化或让模型静默选择最高概率解释的理由。</td></tr>
-      <tr><td>观察、推论和承诺怎样支持结论？</td><td>Tarski 与 Brandom 分别提示满足关系、推理角色、承诺和不相容不能混成一个真值标签。</td><td>观察、证据有效性、覆盖度、满足判断和权威决定分层。</td><td>推论网络、签名、证据数量或模型评分都不能单独证明最终接受。</td></tr>
+    <h2>按开发者问题查思想来源</h2>
+    <div class="table-wrap"><table><thead><tr><th>开发者问题</th><th>有用的来源与区分</th><th>当前工程用途</th><th>停止条件</th></tr></thead><tbody>
+      <tr><td>不同表达是否仍指向同一个目标？</td><td><a href="https://plato.stanford.edu/entries/intentionality/">SEP：Intentionality</a>说明同一对象可以有不同给予或表述方式。<a href="https://plato.stanford.edu/entries/husserl/">SEP：Husserl</a>同时记录了对意向活动相关项的竞争解释。</td><td>追问来源表达、已确认意义和对象身份是否被错误合并。</td><td>不得把意识活动、意义相关项或“意向对象”直接翻译成软件类型。</td></tr>
+      <tr><td>一句话是在描述、请求、承诺还是授权？</td><td><a href="https://plato.stanford.edu/entries/speech-acts/">SEP：Speech Acts</a>区分内容、言外之力、语境条件和权威地位。</td><td>分别检查意义确认、动作授权、会话能力和最终决定。</td><td>句式、模型分类或登录状态不得直接推出授权。</td></tr>
+      <tr><td>关系结构怎样支持判断？</td><td><a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29">《逻辑哲学论》编号文本</a>提出对象、关系与命题结构问题。<a href="https://plato.stanford.edu/entries/truth/">SEP：Truth</a>说明 Tarski 式满足定义以固定、已解释语言为前提。</td><td>检查期望事态、结构化观察 <code>phain</code> 和判断条件能否比较。</td><td>形式语言的满足定义不得冒充自然语言意义确认或现实观察。</td></tr>
+      <tr><td>规则在新语境中仍怎样适用？</td><td><a href="https://plato.stanford.edu/entries/wittgenstein/">SEP：Wittgenstein</a>说明后期工作转向使用、语言游戏和规则实践，并反过来批评早期框架。</td><td>要求 Profile、语境来源、正反例和具名解释权威。</td><td>不确定性不得成为放弃形式责任或让模型静默选择的理由。</td></tr>
+      <tr><td>为什么现在必须把这些责任分开？</td><td><a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST Agent 标准计划</a>分别推进协议、身份认证和安全评价；GNU 写作规范要求从开发者问题出发。</td><td>把互操作、身份、授权、安全和可读性作为不同审查轴。</td><td>行业趋势和写作规范都不能成为字段、算法或实现证据。</td></tr>
     </tbody></table></div>
-  </section>
-
-  <section class="content-split">
-    <h2>名字不能替代定义和证据</h2>
-    <div>
-      <p><strong>Noemion</strong> 的品牌名受到现象学中意向活动与相关对象讨论的启发。这里的联系只提出一个工程问题：来源表达可以变化，目标对象的身份、约束和验收条件仍需独立表示。它不是对胡塞尔理论的实现，也不进入格式名、对象类型或命令前缀。</p>
-      <p><strong>Endem</strong> 由英语 <em>end</em> 与表示最小区别单位的 <em>-eme</em> 融合，用来指称最小、独立有效且可验证的期望终态单元。词源只解释命名动机，不能证明对象边界、格式正确或名称适合发行。</p>
-    </div>
-    <div>
-      <p>Synem、Dromen、Iknem、Ktisor、Theor、Drasor 及动作名都是现行设计阶段标识。开发者文档先写直白职责，再给精确标识；普通职责短语足够时，不为了词族整齐保留专名。</p>
-      <p>正式发行还需要名称必要性、书写冲突、目标语言读音、首次朗读和词表内口头区分证据。当前没有任何词源、模型读音或自动转写结果可以替代独立人类验证。</p>
-    </div>
   </section>
 
   <section class="content-stack">
-    <h2>《逻辑哲学论》提供哪些结构问题</h2>
-    <p>以下短句按命题编号核对路德维希·维特根斯坦著、贺绍甲译《逻辑哲学论》。它们只说明 Noemion 需要回答的结构问题，不构成全书解释，也不直接决定软件规范。编号可对照 <a href="https://www.wittgensteinproject.org/w/index.php/Tractatus_Logico-Philosophicus_%28English%29">Wittgenstein Project 开放编号文本</a>。</p>
-    <div class="table-wrap"><table><thead><tr><th>命题范围</th><th>经核对的问题结构</th><th>当前工程映射</th><th>采用限制</th></tr></thead><tbody>
-      <tr><td>2.01</td><td>事态由对象的结合构成。</td><td>期望事态必须保存对象、关系、角色和组合，不能只是实体清单。</td><td>逻辑原子主义不是项目采用的完整世界模型。</td></tr>
-      <tr><td>2.1–2.172</td><td>图像通过要素与对象的对应来描述可能情况；图示者与被图示者必须共享可对应形式。</td><td>意义投影、期望事态和结构化观察共享可比较的符号与关系位置。</td><td>自然语言、软件状态和社会事实不必与单一图像简单同构。</td></tr>
-      <tr><td>3.203–3.21</td><td>名称指向对象，记号配置对应对象在情况中的配置。</td><td>来源记号、稳定符号、指称来源和关系位置分别记录。</td><td>稳定标识符不证明现实指称正确，也不消除语境不确定性。</td></tr>
-      <tr><td>4.024 与 4.062–4.064</td><td>“理解一个命题意味着知道若命题为真事情该是怎样的。”肯定与否定针对同一关系。</td><td>目标结构、方向和判断条件分开；否定保留同一关系与角色。</td><td>内容结构不能决定组织权威、同意、委托或多人冲突。</td></tr>
-      <tr><td>5.6 与 7</td><td>语言能够表达的边界限制可陈述内容。</td><td>来源不支持、指称未确认或条件无法表达时，保留 <code>aseme</code> 或 <code>apor</code>。</td><td>Noemion 不编码“不可说之物”，只记录可定位的表达缺口和责任边界。</td></tr>
+    <h2>《逻辑哲学论》的有限采用</h2>
+    <p>下列命题按路德维希·维特根斯坦著、贺绍甲译《逻辑哲学论》核对，并与开放英文编号文本交叉检查。它们只提出结构假设，不构成全书解释，也不直接决定软件规范。</p>
+    <div class="table-wrap"><table><thead><tr><th>命题范围</th><th>可检验的结构假设</th><th>工程问题</th><th>不得直接推出</th></tr></thead><tbody>
+      <tr><td>2.01 与 2.1–2.172</td><td>事态包含对象的结合；图像以要素关系表示可能情况。</td><td>期望事态是否保存对象、角色和关系，而不是只有实体清单？</td><td>逻辑原子主义不是 Noemion 的完整本体，自然语言也不必与单一结构同构。</td></tr>
+      <tr><td>3.203–3.21</td><td>名称与对象、记号配置与对象配置需要分开讨论。</td><td>来源记号、稳定符号、指称依据和关系位置是否分别记录？</td><td>稳定标识符不证明现实指称正确，也不消除语境不确定性。</td></tr>
+      <tr><td>4.024 与 4.062–4.064</td><td>理解命题不等于知道它为真；肯定和否定仍针对同一关系。</td><td>目标结构、目标方向和判断条件是否分开？</td><td>内容结构不能决定同意、委托、组织权威或动作权限。</td></tr>
+      <tr><td>5.6 与 7</td><td>这些命题讨论语言、世界和可说内容的哲学边界。</td><td>Noemion 只能记录可定位的来源缺口、表示缺口和责任边界。</td><td>它们不是软件错误分类，不能直接定义 <code>aseme</code>、<code>apor</code> 或任何结果域。</td></tr>
     </tbody></table></div>
-    <p class="callout warning"><strong>竞争解释：</strong>维特根斯坦后来放弃了逻辑原子主义的核心设想，并警惕先验猜测唯一逻辑形式。Noemion 因而只把结构区分作为可反驳的工程假设；Profile、反例和独立读取结果决定某项结构是否可用。</p>
+    <p class="callout warning"><strong>竞争解释：</strong>后期著作反过来批评早期分析框架，但研究者对阶段划分和思想连续性仍有争议。Noemion 只把上述区分当作可反驳假设；Profile、反例和独立读取结果决定它们是否适用。</p>
   </section>
 
-  <section class="content-wide">
-    <h2>当前规范怎样回答这些问题</h2>
-    <div class="table-wrap"><table><thead><tr><th>问题域</th><th>已有成果</th><th>限制条件</th></tr></thead><tbody>
-      <tr><td>来源与意义</td><td>END-CORE 与 AUT-CORE 分开来源表达、已确认意义投影和仍待确认的 <code>apor</code>。</td><td>自然语言到规范结构的确认仍依赖精确来源、规则或范围有限的具名权威。</td></tr>
-      <tr><td>事态、方向与判据</td><td>ADR-0010 固定六个语义面；ADR-0016 至 ADR-0020 已分别定义时间、否定、量化、测量与复合判断的抽象边界。</td><td>END-P1 尚未承载这些扩展的物理字段，当前也没有求值组件。</td></tr>
-      <tr><td>组合、会话与授权</td><td>SYN-CORE、DRO-CORE、ADP-CORE 与 AUT-CORE 分开目标闭包、一次会话、外部协议和动作授权。</td><td>物理 Synem、授权伴随 Profile、协议 Profile 和运行时仍待确定。</td></tr>
-      <tr><td>观察、证据与结果</td><td>IKN-CORE、END-CORE 与 ADR-0015 分开结构化观察 <code>phain</code>、证据范围、满足结果、会话结果和最终决定。</td><td>资料验证只证明条款、登记和向量一致，不能证明组件安全或真实互操作。</td></tr>
-      <tr><td>术语与传播</td><td>ADR-0034 与术语研究已经把专名必要性、读音流畅度和口头区分列为发行条件。</td><td>现行标识保持有效，但发行拼写和读音仍缺少独立人类证据。</td></tr>
-    </tbody></table></div>
-  </section>
-
-  <section class="content-wide">
-    <h2>按工程问题继续研究</h2>
-    <div class="table-wrap"><table><thead><tr><th>研究问题</th><th>优先资料</th><th>对 Noemion 的用途</th></tr></thead><tbody>
-      <tr><td>对象怎样在不同给予方式中保持可识别？</td><td><a href="https://plato.stanford.edu/entries/husserl/">Stanford Encyclopedia of Philosophy：Husserl</a><br><a href="https://www.routledge.com/Ideas-General-Introduction-to-Pure-Phenomenology/Husserl/p/book/9780415519038">Husserl《Ideas I》书目</a></td><td>审查来源、表示活动与对象身份的类比；不把意识结构移植为软件类型。</td></tr>
-      <tr><td>表面语法与可判断结构怎样分开？</td><td><a href="https://plato.stanford.edu/entries/wittgenstein-atomism/">Stanford Encyclopedia of Philosophy：Wittgenstein 的逻辑原子主义</a><br><a href="https://academic.oup.com/mind/article-abstract/XIV/4/479/964157">Russell《On Denoting》文献页</a><br><a href="https://hackettpublishing.com/logic-semantics-metamathematics">Tarski 语义学论文集书目</a></td><td>寻找结构、作用域和满足定义的反例；不预设唯一逻辑形式。</td></tr>
-      <tr><td>内容、行动力量、权威与成功条件怎样分开？</td><td><a href="https://plato.stanford.edu/entries/speech-acts/">Stanford Encyclopedia of Philosophy：Speech Acts</a><br><a href="https://academic.oup.com/book/5162">Austin《How to Do Things with Words》书目</a></td><td>审查意义确认、请求、承诺、授权和制度条件；不把言语行为直接实现成命令。</td></tr>
-      <tr><td>使用、语境和翻译不确定性怎样进入失败语义？</td><td><a href="https://www.wiley.com/en-us/Wittgenstein-c-PL45">Wittgenstein《Philosophical Investigations》书目</a><br><a href="https://mitpress.mit.edu/9780262518314/word-and-object/">Quine《Word and Object》书目</a><br><a href="https://search.worldcat.org/title/644374880">Grice《Studies in the Way of Words》书目</a></td><td>设计候选、语境来源和未确定项；不以不确定性取消形式责任。</td></tr>
-      <tr><td>当前 AI Agent 为什么放大这些问题？</td><td><a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent Standards Initiative</a><br><a href="https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html">GNU Manuals 写作规范</a></td><td>把身份、授权、安全、互操作和开发者阅读路径作为独立责任；不把趋势文章或写作规范当作项目实现证据。</td></tr>
-    </tbody></table></div>
-  </section>
-
-  <section class="content-rows">
-    <h2>思想进入规范前必须留下什么</h2>
-    <ul>
-      <li>一项不依赖哲学术语也能理解的工程问题。</li>
-      <li>至少一个支持案例、一个反例、一个未覆盖场景和一个竞争设计。</li>
-      <li>思想来源、工程类比、正式条款和验证证据之间的明确分界。</li>
-      <li>若改变现行语义、身份、权限或结果域，对应的 ADR、条款与迁移影响。</li>
-      <li>能够执行并比较预期结果的正反向量；资料检查只能声称资料一致。</li>
-      <li>新增或保留专名的必要性、停止条件、目标语言读音和口头区分证据。</li>
-    </ul>
+  <section class="content-split">
+    <h2>名字、规范与证据各自承担什么</h2>
+    <div>
+      <p><strong>Noemion</strong> 的品牌名受到现象学问题的启发：表达方式变化时，目标对象、约束和验收条件是否仍可识别。它不是对胡塞尔理论的实现，也不定义对象类型。</p>
+      <p><strong>Endem</strong> 由英语 <em>end</em> 与表示最小区别单位的 <em>-eme</em> 融合。词源只解释命名动机，不能证明对象边界或格式正确。</p>
+      <p>Synem、Dromen、Iknem、Ktisor、Theor 和 Drasor 都是现行设计阶段标识。开发者文档先写直白职责，再给精确标识；普通职责短语足够时，不为了词族整齐保留专名。</p>
+      <p>名称进入发行前仍需证明必要性、书写区分、中文和英文读音、首次朗读成功率及词表内口头区分。词源、模型发音和自动转写不能替代独立人类验证。</p>
+    </div>
+    <div>
+      <p>哲学来源负责提出问题，ADR 负责记录理由和竞争方案。只有 <code>spec/*.md</code> 是规范源；登记、场景和向量必须与它对应，不能反向改写规范。</p>
+      <p>现行规范已经区分来源与意义、六个语义面、组合、会话、观察、外部协议、身份、文本和授权。<code>phain</code>、<code>aseme</code>、<code>agno</code> 与 <code>fault</code> 的含义来自这些规范，不来自哲学命题。</p>
+      <p>场景、向量、资料构建和浏览器检查只能证明各自覆盖的资料一致性。它们不能证明组件存在、安全控制有效或真实系统已经互操作。当前仍没有运行组件。</p>
+    </div>
   </section>
 
   <div class="next-prev"><a href="background.html">← 背景与边界</a><a href="../architecture/endem-lifecycle.html">Endem 生命周期 →</a></div>

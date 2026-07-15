@@ -165,13 +165,10 @@ BACKGROUND_HEADINGS = [
 ]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "从一次依赖升级看清问题",
-    "哲学怎样进入工程设计",
-    "按开发者问题选择思想工具",
-    "名字不能替代定义和证据",
-    "《逻辑哲学论》提供哪些结构问题",
-    "当前规范怎样回答这些问题",
-    "按工程问题继续研究",
-    "思想进入规范前必须留下什么",
+    "把思想转换成可验证问题",
+    "按开发者问题查思想来源",
+    "《逻辑哲学论》的有限采用",
+    "名字、规范与证据各自承担什么",
 ]
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
@@ -1564,14 +1561,13 @@ def validate_prose_readability_contracts():
 
     foundations = (SOURCE_ROOT / "about" / "intellectual-foundations.html").read_text()
     for token in (
-        "事态由对象的结合构成。",
-        "图像通过要素与对象的对应",
-        "图示者与被图示者必须共享可对应形式",
-        "名称指向对象",
-        "理解一个命题意味着知道若命题为真事情该是怎样的。",
-        "4.062–4.064",
+        "2.01 与 2.1–2.172",
+        "3.203–3.21",
+        "4.024 与 4.062–4.064",
         "5.6 与 7",
         "贺绍甲译《逻辑哲学论》",
+        "它们不是软件错误分类",
+        "后期著作反过来批评早期分析框架",
         "不直接决定软件规范",
     ):
         if token not in foundations:
@@ -5353,7 +5349,7 @@ def main():
             " ".join("".join(section["text"]) for section in parser.sections)
         )
         for term in (
-            "不得直接推出", "思想进入规范前必须留下什么", "六个语义面",
+            "不得直接推出", "把思想转换成可验证问题", "六个语义面",
             "NIST AI Agent Standards Initiative", "读音",
             "事态", "目标方向", "phain", "aseme", "agno", "fault",
         ):
@@ -5363,6 +5359,11 @@ def main():
             "核心思想与工程问题",
             "Endem 语义核与后续验证",
             "核心书目与资源状态",
+            "哲学怎样进入工程设计",
+            "按开发者问题选择思想工具",
+            "当前规范怎样回答这些问题",
+            "按工程问题继续研究",
+            "思想进入规范前必须留下什么",
         ):
             if obsolete_heading in parser.h2_texts:
                 errors.append(

@@ -13,7 +13,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 - [Project background](https://noemion.github.io/about/index.html) — motivation, scope, non-goals, and intellectual foundations
 - [Background and boundaries](https://noemion.github.io/about/background.html) — why expression and goal identity need a separate engineering artifact
-- [Intellectual foundations](https://noemion.github.io/about/intellectual-foundations.html) — philosophical sources, engineering analogies, and adoption boundaries
+- [Intellectual foundations](https://noemion.github.io/about/intellectual-foundations.html) — turning philosophical distinctions into testable developer questions without treating philosophy as a software specification
 - [Frequently asked questions](https://noemion.github.io/faq/index.html) — direct answers about scope, status, and non-goals
 
 ## Architecture and components
