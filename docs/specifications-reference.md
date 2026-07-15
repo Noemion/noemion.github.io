@@ -16,7 +16,21 @@ badges: ["Authority", "Lookup", "Status"]
 
 ## 按工程问题找资料
 
-不必先记住全部项目术语。先确认你要回答的问题，再进入对应规范。
+不必先记住全部项目术语。先写下你正在判断的事实，以及它来自哪一层。
+
+例如，外部 Agent Task 显示 `completed`，但团队要决定服务能否发布。开发者应按下面的顺序查询：
+
+| 先回答 | 查什么 | 读哪份权威源 | 何时停止 |
+| --- | --- | --- | --- |
+| 外部系统实际报告了什么 | 协议版本、对端、Task、状态和候选产物 | ADP-CORE | 来源或版本不明时，不做本地映射 |
+| 这次运行原本允许什么 | 主体、环境、能力、预算和证据责任 | DRO-CORE | 外部动作超出会话上限时，拒绝继续 |
+| 观察能支持多大范围的结论 | 主体、方法、环境、截止点、覆盖和限制 | IKN-CORE | 覆盖不足时保持未知，不补写成功 |
+| 目标判据得到什么结果 | `krin` 与 `met / unmet / agno / fault` | END-CORE | 判据未固定或证据不适用时，不形成满足结论 |
+| 谁能决定发布 | 决定者、对象、范围、依据和截止点 | AUT-CORE | 没有适用的具名权威时，保持 `defer` |
+
+`completed` 只说明外部请求执行状态，不直接等于 `met` 或 `accepted`。这条查询链也不要求把五份规范合并成一个对象；每份规范继续只约束自己的责任。
+
+其他问题可以直接从下表进入：
 
 | 要回答的问题 | 先读 | 再核对 |
 | --- | --- | --- |
@@ -31,29 +45,32 @@ badges: ["Authority", "Lookup", "Status"]
 | 网页、工具返回、历史、摘要或附件进入模型时，哪些内容可以提供指令 | [文本与标识符边界规范](../specifications/text-and-identifiers.html)与[权威与授权决定规范](../specifications/authority.html) | TEXT-IDENTIFIER-CORE、AUT-CORE，以及[非规范上下文装配研究](https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md) |
 | 谁可以确认候选、解决歧义或授予动作权限 | [权威与授权决定规范](../specifications/authority.html) | AUT-CORE、ADR-0029 与 ADR-0030 |
 
-例如，外部 Agent Task 显示 `completed`，开发者仍不能据此发布结果。先用 ADP-CORE 保存协议状态和来源，再用 DRO-CORE 检查本次会话的能力上限。随后用 IKN-CORE 判断证据范围，并按 END-CORE 的 `krin` 形成满足结果。最后由 AUT-CORE 所描述的具名权威作出适用决定。`completed` 只说明外部请求执行状态，不直接等于 `met` 或 `accepted`。
-
 同样，网页或工具返回即使自称 `system` 或 `admin`，也仍是带来源的资料。TEXT-IDENTIFIER-CORE 约束模型实际输入和变换，AUT-CORE 决定谁能提供指令或授予动作。上下文装配研究只提供检查路径，不建立新的接口或实现义务。
 
 ## 权威顺序
 
-1. 版本化 Markdown 条款源定义实现必须满足什么。
-2. 标为“当前策略”的 ADR 解释项目为什么采用这条边界，以及怎样变更。
-3. 威胁模型说明不可信输入、滥用方式和失败责任，但不另建义务。
-4. 架构页和规范 HTML 解释对象关系，便于开发者理解条款所在位置。
-5. 指南提供阅读路径；FAQ、场景、研究资料和示例不建立实现义务。
+1. 先用版本化 CORE、格式条款和 Profile 确认实现义务。
+2. 再用标为“当前策略”的 ADR 查明边界理由和变更影响。
+3. 用威胁模型、场景和向量寻找反例、滥用方式与验证缺口。
+4. 用规范 HTML、架构页和指南建立阅读路径，不从解释页创造新义务。
 
 > “当前策略”表示项目目前采用的做法；“正在研究”表示已有候选但尚未形成结论；“待定内容”表示目前没有唯一答案；“后续计划”表示尚不能依赖。
 
 每个规范中的“必须”“不得”和“只有”都应关联机器测试或具名人工权威。实现、论文、专利、演示和模型输出不能反向替代规范。
 
-当前权威源包括作为通用内容标准的 [END-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md)、当前封闭内容 Profile [END-P1](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json)、实验性容器 [END-FMT 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)，以及组合、会话、证据、诊断、适配、身份、文本和授权边界的各 CORE 草案。权威与授权决定以 [AUT-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md)为准；全部条款与状态由[机器可读登记](https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json)连接。公开 HTML 只负责直白解释，不复制第二套条款。
+| 需要的材料 | 当前入口 | 用法 |
+| --- | --- | --- |
+| 目标内容与容器 | [END-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md)、[END-P1](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json)、[END-FMT 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md) | 分别核对通用内容、封闭 Profile 和实验性容器 |
+| 组合、会话与证据 | [SYN-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md)、[DRO-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md)、[IKN-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-core.md) | 分别核对闭包、一次运行上限和证据范围 |
+| 横切工程边界 | [DIA-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md)、[ADP-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-core.md)、[ID-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-core.md)、[TEXT-IDENTIFIER-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md) | 核对诊断、外部协议、精确身份和文本解释 |
+| 权威与授权 | [AUT-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md) | 核对谁能确认意义、解决歧义或授予动作 |
+| 条款与状态索引 | [机器可读登记](https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json) | 连接条款、成熟度、威胁、场景与验证材料 |
 
-不可信输入和失败责任由对应模型说明，包括 [Endem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md)与[授权威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-threat-model.md)。威胁模型不创造新的规范义务。
+威胁模型说明不可信输入和失败责任。例如，[Endem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md)与[授权威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-threat-model.md)帮助审查滥用路径，但不创造新的规范义务。
 
-[END-SCEN 自然语言场景语料](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md)用支持案例、反例和边界场景寻找规范缺口，但不属于上述规范义务。只有案例转化为唯一条款、登记验证方式并形成正反向量后，对应判断才可能进入符合性要求。场景和向量的精确范围以源文件、[机器可读登记](https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json)和版本化验证结果为准。
+场景源用于发现规范缺口：[END-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md)检查单项目标；[SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)、[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)、[IKN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md)与[AUT-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-scenarios.md)分别检查组合、会话、证据与授权。这些场景不属于上述规范义务。
 
-[SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)、[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)、[IKN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md)与[AUT-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-scenarios.md)分别检查组合闭包、会话契约、证据及授权边界，同样不属于上述规范义务。
+只有案例转化为唯一条款、登记验证方式并形成正反向量后，对应判断才可能进入符合性要求。向量通过也只说明已登记案例与草案一致；精确范围以源文件、机器可读登记和版本化验证结果为准。
 
 ## 资料状态与使用边界
 
@@ -100,6 +117,15 @@ badges: ["Authority", "Lookup", "Status"]
 
 ## ADR 与开放问题
 
-[ADR-0010](../architecture/adr-0010-native-lexicon.html)至 [ADR-0014](../architecture/adr-0014-source-manifest.html)固定术语职责、Endem 格式、Profile 与来源清单；[ADR-0015](../architecture/adr-0015-result-domains.html)至 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html)固定判断、时间、否定、量化、测量与复合边界；[ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html)至 [ADR-0030](../architecture/adr-0030-endem-content-and-authorization-companions.html)固定组合、证据、内容分层、会话、诊断、适配、精确身份、文本解释、授权决定以及 Endem 内容与授权伴随关系。[ADR-0031](../architecture/adr-0031-release-name-collision-gate.html)至 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html)固定名称迁移和发行审查，但没有证明现行拼写或读音已经通过。END-P1 内的权威字段只是待解析选择器，独立文件最多达到 Profile 接受；完整内容接受还需要精确绑定的外部授权决定。ADR-0008 和 ADR-0009 只保存被取代的公开设计历史。具体 Profile、物理编码与发行治理集中在[开放问题](../architecture/open-questions.html)，人类名称证据按[术语与读音验证指南](terminology-and-pronunciation.html)形成。
+| 先查哪组决定 | 主要回答什么 | 阅读边界 |
+| --- | --- | --- |
+| [ADR-0010](../architecture/adr-0010-native-lexicon.html) 至 [ADR-0014](../architecture/adr-0014-source-manifest.html) | 固定术语职责、Endem 格式、Profile 与来源清单 | 字段职责已进入草案；发行拼写和读音仍须另行验证 |
+| [ADR-0015](../architecture/adr-0015-result-domains.html) 至 [ADR-0020](../architecture/adr-0020-composite-situations-and-criteria.html) | 结果、时间、否定、量化、测量与复合事态 | 当前只确定抽象内容边界，不增加 END-P1 物理字段 |
+| [ADR-0021](../architecture/adr-0021-synem-closure-and-activation.html) 至 [ADR-0030](../architecture/adr-0030-endem-content-and-authorization-companions.html) | 组合、证据、会话、诊断、适配、身份、文本、授权与伴随关系 | 每个对象继续保持独立身份、生命周期与失败责任 |
+| [ADR-0031](../architecture/adr-0031-release-name-collision-gate.html) 至 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html) | 名称迁移、冲突审查和口头区分 | 没有证明现行拼写或读音已经通过 |
+
+END-P1 内的权威字段只是待解析选择器。独立文件最多达到 Profile 接受；完整内容接受还需要精确绑定的外部授权决定。ADR-0008 和 ADR-0009 只保存被取代的公开设计历史。
+
+具体 Profile、物理编码与发行治理集中在[开放问题](../architecture/open-questions.html)。人类名称证据按[术语与读音验证指南](terminology-and-pronunciation.html)形成。
 
 面向标准化时，规范还需关联互操作配置、正反向量、一致性测试、安全分析和版本演进。面向研究与知识产权时，还应关联假设、现有技术、实验、贡献与公开披露记录。

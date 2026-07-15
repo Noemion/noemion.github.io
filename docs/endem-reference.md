@@ -9,7 +9,7 @@ manual_group: "reference"
 manual_order: 6
 nav_title: "Endem 应用参考"
 page_heading: "Endem 应用参考"
-page_lead: "一个设计中的 CLI、五项职责、三个不能合并的信任域。"
+page_lead: "按一次目标工作理解设计中的 CLI 动作、调用方结果和信任边界。"
 summary: "按生命周期理解计划中的 endem 动作、消费者、失败责任和建设顺序。"
 badges: ["One CLI", "5 Verbs", "Unreleased"]
 ---
@@ -22,7 +22,7 @@ badges: ["One CLI", "5 Verbs", "Unreleased"]
 
 | 设计动作 | 直接职责 | 对调用方可见的结果 | 何时建设 |
 | --- | --- | --- | --- |
-| `ktise` | 来源绑定、规范化、确定性写入 | Endem、诊断 | 第一阶段 |
+| `ktise` | 绑定来源与已确认意义，按固定 Profile 确定性写入 | Endem、诊断 | 第一阶段 |
 | `elenk` | 分层检查实际制品字节 | 各层结论、诊断和有范围的检查记录 | 第一阶段 |
 | `theor` | 独立只读解析、查看与比较 | 有界视图与差异 | 第一阶段 |
 | `pleko` | 解析引用、冲突与依赖闭包 | Synem、绑定映射 | 第二阶段；有真实组合案例后 |

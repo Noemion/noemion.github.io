@@ -2747,6 +2747,10 @@ def validate_jekyll_sources():
         "当前没有适配器实现",
         "未执行不能写成通过",
         "最多只能声称规范和案例保持一致",
+        "| 记录项 | 本例写法 |",
+        "可证伪主张 | 固定 A2A 版本与映射后",
+        "| 顺序 | 开发者要做什么 | 完成时应留下什么 |",
+        "声明上限 | 可以说明资料保持一致",
         "把外部资料送进模型前保留来源与职责",
         "用途与指令权",
         "变换与损失",
@@ -4262,17 +4266,30 @@ def main():
     ).read_text()
     for token in (
         "不必先记住全部项目术语",
+        "| 先回答 | 查什么 | 读哪份权威源 | 何时停止 |",
+        "每份规范继续只约束自己的责任",
         "| 要回答的问题 | 先读 | 再核对 |",
         "`completed` 只说明外部请求执行状态",
+        "| 需要的材料 | 当前入口 | 用法 |",
         "网页、工具返回、历史、摘要或附件进入模型时",
         "非规范上下文装配研究",
         "自称 `system` 或 `admin`",
         "研究资料不能作为现行字段、命令、状态或互操作接口的依据",
         "向量通过也只说明已登记案例与草案一致",
+        "| 先查哪组决定 | 主要回答什么 | 阅读边界 |",
         "机器可读登记",
     ):
         if token not in specifications_reference_text:
             errors.append(f"specifications reference missing task lookup boundary: {token}")
+    endem_reference_text = (SOURCE_ROOT / "docs" / "endem-reference.md").read_text()
+    for token in (
+        "按一次目标工作理解设计中的 CLI 动作",
+        "绑定来源与已确认意义，按固定 Profile 确定性写入",
+    ):
+        if token not in endem_reference_text:
+            errors.append(f"Endem application reference missing precise formation wording: {token}")
+    if "来源绑定、规范化、确定性写入" in endem_reference_text:
+        errors.append("Endem application reference retains undefined normalization wording")
     terminology_guide_text = (
         SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md"
     ).read_text()
