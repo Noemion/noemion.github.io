@@ -7,88 +7,63 @@ permalink: "/specifications/diagnostics.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>结构化诊断</span></nav>
-  <header class="content-introduction"><h1>结构化诊断<br>让失败可以被人和机器共同理解</h1><p>当处理目标的某一步失败时，同时告诉开发者和调用程序：检查了什么、在哪里停止、依据哪条规则，以及下一步能否安全重试。</p><div class="badges"><span class="badge">DIA-CORE 0.1.0-draft</span><span class="badge">DIA-CAT</span><span class="badge">物理格式待定</span><span class="badge">尚无运行组件</span></div></header>
-
-  <section class="content-stack">
-    <h2>先给直白定义</h2>
-    <p class="lead">结构化诊断是一份有限、可定位、机器可读的失败说明。它告诉调用者哪个操作依据哪条规则，在检查哪个精确输入时，因什么原因停止或需要注意。</p>
-    <p>诊断不是目标结果、证据、最终决定、权限或自动修复命令。一个诊断可以帮助人和 Agent 选择下一步，但必须经过原有政策、预算和授权边界。</p>
-  </section>
+  <header class="content-introduction"><h1>结构化诊断<br>让人和机器理解同一失败</h1><p>当处理目标的某一步停止时，分别告诉开发者和调用程序：检查了什么、失败发生在哪里、依据哪条规则，以及满足什么条件后才能继续。</p><div class="badges"><span class="badge">DIA-CORE 0.1.0-draft</span><span class="badge">DIA-CAT</span><span class="badge">物理格式待定</span><span class="badge">尚无运行组件</span></div></header>
 
   <section class="content-wide">
-    <h2>用同一次发布理解一次失败</h2>
-    <p class="lead">继续使用服务发布案例：外部调用已经发出，但连接在响应前中断，当前没有证据证明副作用是否发生。此时诊断负责说明“哪里失败、依据什么停止、下一步需要什么”，不能替系统猜测发布成功或自动再执行一次。</p>
-    <div class="table-wrap"><table><thead><tr><th>诊断字段</th><th>本例记录</th><th>开发者据此怎样处理</th></tr></thead><tbody>
-      <tr><td>机器身份</td><td><code>adapter.retry.not_authorized</code>，主条款 <code>ADP-RTY-001</code></td><td>自动化依赖登记码，不解析“超时”“请重试”等消息</td></tr>
-      <tr><td>生产语境</td><td>适配器版本、本地调用身份、精确发布输入、协议/Profile 与 DIA-CAT 版本</td><td>防止把本次诊断缓存到另一个发布对象或调用</td></tr>
-      <tr><td>层次与位置</td><td><code>policy</code> 层、外部请求关联；重试检查之后的步骤标为 <code>not-run</code></td><td>保留传输事实，同时说明本地为何没有继续尝试</td></tr>
-      <tr><td>恢复分类</td><td><code>operator-review</code>，复核前置条件是取得去重或事后核对证据</td><td>当前不自动重试；下一步仍受 Dromen 预算和具名授权约束</td></tr>
-      <tr><td>结果边界</td><td>公开消息脱敏，保留主诊断和有限相关项</td><td>不产生 <code>unmet</code>、<code>accepted</code>、回滚完成或新的权限</td></tr>
+    <h2>先看一次发布为什么停止</h2>
+    <p class="lead">服务发布请求已经送到外部系统，但连接在响应前中断。此时无法证明副作用是否发生；诊断只能说明本地为何停止、还缺什么材料，不能猜测发布成功，也不能自行再执行一次。</p>
+    <div class="flow"><div class="step">固定实际调用</div><div class="step">记录失败来源</div><div class="step">选择主阻断诊断</div><div class="step">标记后续未执行</div><div class="step">限制披露与数量</div><div class="step">另行决定恢复</div></div>
+    <div class="table-wrap"><table><thead><tr><th>诊断内容</th><th>本例记录</th><th>开发者怎样使用</th></tr></thead><tbody>
+      <tr><td>稳定机器码与消息</td><td><code>adapter.retry.not_authorized</code>、主条款 <code>ADP-RTY-001</code>，另附可本地化说明</td><td>自动化依赖登记码和条款，不解析“超时”或“请重试”等措辞</td></tr>
+      <tr><td>生产语境</td><td>生产者、适配器版本、操作、精确发布输入、协议/Profile、DIA-CAT 版本和本次调用身份</td><td>防止把这次诊断缓存或套用到另一个输入和调用</td></tr>
+      <tr><td>层次、位置与执行范围</td><td><code>policy</code> 层、外部请求关联；重试检查后的步骤标为 <code>not-run</code></td><td>保留传输事实，同时区分“检查失败”和“尚未检查”</td></tr>
+      <tr><td>主诊断与恢复分类</td><td>唯一主阻断诊断；<code>operator-review</code>，前置条件是取得去重或事后核对证据</td><td>当前不自动重试；恢复继续受 Dromen 预算和具名授权约束</td></tr>
+      <tr><td>披露、预算与结果边界</td><td>公开消息脱敏，只保留有限相关项，不返回部分可信对象</td><td>诊断不产生 <code>unmet</code>、<code>accepted</code>、回滚完成或新的权限</td></tr>
     </tbody></table></div>
-    <p class="note">如果协议返回的是未知结构化错误，则保留协议版本、远端主体和原始码，再映射到受限通用诊断。无论消息怎样措辞，未知状态都不能降级为成功。</p>
+    <p><strong>当前策略：</strong>结构化诊断是一份有限、可定位、机器可读的失败说明。它可以帮助人和人工智能系统选择下一步，但不得替代目标结果、证据判断、最终决定、权限或自动修复命令。</p>
   </section>
 
   <section class="content-wide">
     <h2>诊断必须保持哪些边界</h2>
-    <div class="table-wrap"><table><thead><tr><th>规则</th><th>直接含义</th></tr></thead><tbody>
-      <tr><td><code>DIA-IDN-001</code></td><td>稳定机器码与人类消息分开；程序不得解析措辞取得语义。</td></tr>
-      <tr><td><code>DIA-PIN-001</code></td><td>固定生产者、操作、实际输入、规范/Profile/目录版本和本次发生。</td></tr>
-      <tr><td><code>DIA-LAY-001</code></td><td>来源、结构、语义、会话、证据、协议和后端错误不得互相洗白，也不得替代结果域。</td></tr>
-      <tr><td><code>DIA-LOC-001</code></td><td>来源范围、字节范围、语义路径和会话绑定必须类型化、有界并安全显示。</td></tr>
-      <tr><td><code>DIA-PRI-001</code></td><td>主阻断诊断按规则和规范位置确定，不能取决于并发返回顺序。</td></tr>
-      <tr><td><code>DIA-REC-001</code></td><td>恢复建议必须声明前置条件；不得授予权限、无限重试或直接执行副作用。</td></tr>
-      <tr><td><code>DIA-EXT-001</code></td><td>外部错误保留协议版本、远端主体与原始结构化状态，再映射到本地码。</td></tr>
-      <tr><td><code>DIA-SEC-001</code></td><td>默认最小披露，不保存令牌、私钥、cookie、能力句柄或未授权正文。</td></tr>
-      <tr><td><code>DIA-BND-001</code></td><td>数量、深度、位置、消息和总输出都使用先检查的有限预算。</td></tr>
-      <tr><td><code>DIA-ATM-001</code></td><td>阻断错误使操作原子失败，不能同时返回部分可信对象或成功状态。</td></tr>
+    <div class="table-wrap"><table><thead><tr><th>规则</th><th>开发者应做什么</th><th>必须拒绝什么</th></tr></thead><tbody>
+      <tr><td><code>DIA-IDN-001</code></td><td>把登记机器码、稳定标题和人类消息分开</td><td>程序解析消息、颜色或本地化措辞取得机器语义</td></tr>
+      <tr><td><code>DIA-PIN-001</code></td><td>固定生产者、操作、实际输入、规范/Profile/目录版本和本次发生</td><td>用文件名、当前目录、“latest”或模型会话名代替精确语境</td></tr>
+      <tr><td><code>DIA-LAY-001</code></td><td>保留来源、结构、语义、会话、证据、政策、协议和后端层次</td><td>把任一错误强制转换为目标、会话、证据或决定结果</td></tr>
+      <tr><td><code>DIA-LOC-001</code></td><td>使用有类型、有限且可安全显示的位置</td><td>越界范围、无限路径或未转义的外部文本进入终端和日志</td></tr>
+      <tr><td><code>DIA-PRI-001</code></td><td>按失败层、规则优先级、规范位置和机器码选择唯一主诊断</td><td>并发完成顺序、外部返回顺序、语言或模型判断改变主诊断</td></tr>
+      <tr><td><code>DIA-REC-001</code></td><td>恢复分类声明前置条件、影响范围并继续受会话预算约束</td><td>诊断不得授予权限、触发无限重试或直接执行具有副作用的修复</td></tr>
+      <tr><td><code>DIA-EXT-001</code></td><td>保留协议版本、远端主体、原始结构化状态和受限本地映射</td><td>未知外部码降级为成功，或消息文本改变本地结果</td></tr>
+      <tr><td><code>DIA-SEC-001</code></td><td>默认最小披露，并说明脱敏对定位和复现的影响</td><td>不保存令牌、私钥、cookie、能力句柄、未授权正文或跨租户数据</td></tr>
+      <tr><td><code>DIA-BND-001</code></td><td>用有限预算在分配前限制数量、深度、位置、消息、建议和总输出</td><td>诊断风暴、递归自报错误，或截断时丢失主诊断</td></tr>
+      <tr><td><code>DIA-ATM-001</code></td><td>阻断错误使本次操作原子失败，并把后续层标为 <code>not-run</code></td><td>同时返回部分可信对象、成功状态或可继续使用的内部引用</td></tr>
     </tbody></table></div>
+    <p class="callout"><strong>权威边界：</strong><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md">DIA-CORE 条款源</a>定义规范义务。公开说明只提供开发者检查顺序，不建立第二套诊断字段或失败语义。</p>
   </section>
 
   <section class="content-wide">
-    <h2>一项完整诊断包含什么</h2>
-    <div class="table-wrap"><table><thead><tr><th>内容</th><th>例子</th><th>为何需要</th></tr></thead><tbody>
-      <tr><td>机器码与标题</td><td><code>dromen.environment.drift</code></td><td>让自动化依赖稳定身份，而不是消息文本。</td></tr>
-      <tr><td>生产语境</td><td>生产者、<code>drase</code>、精确制品身份、DRO-CORE 与 DIA-CAT 版本</td><td>阻止诊断被错误复用到另一个输入或规则版本。</td></tr>
-      <tr><td>层次与执行范围</td><td><code>session</code>，执行到 session，后续为 <code>not-run</code></td><td>避免“没有检查”被写成“已经通过”。</td></tr>
-      <tr><td>类型化位置</td><td><code>session_binding: environment/adapter</code></td><td>让人定位问题，同时限制攻击者控制的字符串。</td></tr>
-      <tr><td>恢复分类</td><td><code>refresh-binding</code>，需要重新观察环境</td><td>给出下一步，但不自行修改 Dromen 或扩大权限。</td></tr>
-      <tr><td>披露与预算</td><td>公共脱敏政策、最多 32 项、总输出 64 KiB</td><td>防止秘密泄露和诊断风暴。</td></tr>
+    <h2>不同输出怎样保留同一失败事实</h2>
+    <div class="table-wrap"><table><thead><tr><th>输出或协议</th><th>可以承载什么</th><th>不能改变什么</th></tr></thead><tbody>
+      <tr><td>CLI 与人类消息</td><td>按终端能力显示标题、位置、相关事件、转义内容和修复提示</td><td>颜色、语言、换行和措辞不能成为机器码、严重度或恢复权限</td></tr>
+      <tr><td><a href="https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html">SARIF 2.1.0</a></td><td>导出规则身份、物理或逻辑位置、相关位置和代码流</td><td>导出器不得重新分类主诊断，也不能表达 Noemion 的目标、能力或最终决定</td></tr>
+      <tr><td><a href="https://www.rfc-editor.org/rfc/rfc9457.html">RFC 9457 Problem Details</a></td><td>在 HTTP 中分开问题类型、具体发生、状态提示、标题和详情</td><td><code>status</code> 只是 HTTP 信息；程序不得解析 <code>detail</code>，错误正文也不得泄露实现和隐私</td></tr>
+      <tr><td>MCP 与 A2A</td><td>保留协议版本、错误结构、远端主体，以及协议、工具执行、任务和业务来源</td><td>模型可用反馈修正候选参数，但消息、<code>isError</code> 或远端状态不能授权重试和改写本地结果</td></tr>
+      <tr><td>日志、遥测与持久记录</td><td>在具名 Profile 下保存允许披露的机器内容、关联身份、截断事实和损失</td><td>记录出口不得扩大正文披露、资源预算、保存期限或稳定 ABI</td></tr>
     </tbody></table></div>
+    <p><a href="https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Message-Formatting-Options.html">GNU GCC 诊断输出</a>允许同一诊断进入文本与 SARIF 等不同出口，说明呈现可以变化而核心问题保持关联。Noemion 只采用这种职责分离，不复制 GCC 选项、严重度或编译器数据模型。</p>
   </section>
 
-  <section class="content-wide">
-    <h2>为什么不能只返回一段错误文字</h2>
-    <p>文字适合解释，不适合承担机器协议。语言、本地化和措辞会变化；错误正文还可能来自攻击者、模型或远端服务。若 Agent 通过字符串匹配决定“重试”“提权”或“任务失败”，消息就变成了未授权控制接口。</p>
-    <p>DIA-CORE 因此要求机器码、条款、层次、位置和恢复分类独立存在。人类消息可以更清楚，但自动化只能消费登记字段，并继续服从 Dromen 的能力与预算。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>外部 Agent 错误怎样进入本地边界</h2>
-    <div class="flow"><div class="step">外部结构化错误</div><div class="step">保留协议与远端来源</div><div class="step">选择受限本地诊断码</div><div class="step">应用披露与预算</div><div class="step">独立决定恢复</div><div class="step">保持结果域不变</div></div>
-    <p>MCP 的 JSON-RPC 协议错误、工具执行错误，A2A 状态，HTTP Problem Details，操作系统错误和模型 SDK 异常必须保留各自来源。适配器不能因为消息中出现“success”“failed”或“permission”就改写目标满足、最终决定或当前会话权限。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>诊断目录怎样组织</h2>
-    <p><code>DIA-CAT</code> 使用对象或诊断系统本身作为首段，例如 <code>endem.*</code>、<code>synem.*</code>、<code>dromen.*</code>、<code>iknem.*</code> 与 <code>diagnostic.*</code>。Noemion 是项目品牌，不进入机器码。</p>
-    <p>目录保留已有 Endem 结构与内容草案码，并为 SYN-CORE、DRO-CORE、IKN-CORE 和 DIA-CORE 的每条核心拒绝责任登记初始码。目录版本必须与诊断一起固定；当前机器码仍是草案接口，不是稳定 ABI。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>权威规范和验证资料</h2>
+  <section class="content-stack">
+    <h2>规范来源与当前上限</h2>
+    <p>截至 2026 年 7 月 16 日，MCP 仍把 <a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">2025-11-25 工具规范</a>列入当前修订，并分开 JSON-RPC 协议错误与带 <code>isError</code> 的工具执行错误。<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0.0</a>仍是最新正式版，要求 JSON-RPC、gRPC 与 HTTP 绑定保留同一错误语义。这些协议规定外部错误怎样表达，不决定 Noemion 的失败层次、主诊断、恢复权限或结果域。</p>
+    <p><code>DIA-CAT</code> 使用受影响对象或诊断系统作为机器码首段，例如 <code>endem.*</code>、<code>dromen.*</code> 与 <code>diagnostic.*</code>；Noemion 是项目品牌，不进入机器码。目录版本必须随诊断固定，当前机器码仍是草案接口，不是稳定 ABI。</p>
     <div class="page-links">
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md"><strong>DIA-CORE 诊断内容条款</strong><span>规定身份、语境、层次、位置、主错误、恢复、外部来源、安全、预算和原子性。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md"><strong>DIA-CAT 诊断目录</strong><span>登记跨 Endem、Synem、Dromen、Iknem 与诊断系统自身的草案机器码。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-threat-model.md"><strong>诊断威胁模型</strong><span>检查消息解析、状态洗白、主错误竞态、自动提权、泄密、风暴和部分成功。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-scenarios.md"><strong>诊断自然语言场景</strong><span>用支持案例、反例和边界场景检查失败责任；它们不是实现或符合性声明。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/diagnostics/cases.json"><strong>诊断提案向量</strong><span>记录允许包络与确定拒绝，并绑定对应条款。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-scenarios.md"><strong>设计场景</strong><span>用支持案例、反例和边界场景检查失败责任；场景不是实现或符合性声明。</span></a>
+      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/diagnostics"><strong>结构化诊断提案向量</strong><span>检查允许包络与确定拒绝；向量不证明诊断系统已经实现。</span></a>
+      <a class="page-link" href="../architecture/adr-0025-structured-diagnostics.html"><strong>ADR-0025</strong><span>说明跨对象诊断、确定主错误和最小披露的背景与采用限制。</span></a>
     </div>
-  </section>
-
-  <section class="content-band">
-    <h2>当前状态</h2>
-    <p><strong>当前策略：</strong>DIA-CORE 定义诊断内容与失败责任。未来实现必须遵守对应条款，不得把诊断当作证据、结果、权限或自动修复命令。</p>
-    <p>物理编码、CLI 退出状态、SARIF/HTTP/MCP 映射、持久日志和遥测仍待确定，需要分别设计与验证。当前没有诊断生产器、渲染器、日志服务、重试引擎、协议适配器或 CLI；提案向量只描述规范预期。</p>
+    <p><strong>待定内容：</strong>诊断 JSON、CBOR、SARIF、Problem Details、JSON-RPC、MCP、CLI 文本和退出状态映射，以及持久日志、遥测、跨进程关联、堆栈和修复补丁格式都保持开放。当前没有诊断生产器、渲染器、日志服务、重试引擎、协议适配器或 CLI。</p>
   </section>
   <div class="next-prev"><a href="iknem.html">← Iknem</a><a href="../architecture/adr-0025-structured-diagnostics.html">ADR-0025 →</a></div>
 </main>

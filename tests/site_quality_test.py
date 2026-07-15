@@ -737,7 +737,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "specifications/diagnostics.html": {
         "required": (
             "DIA-CORE 0.1.0-draft",
-            "用同一次发布理解一次失败",
+            "先看一次发布为什么停止",
             "adapter.retry.not_authorized",
             "operator-review",
             "不产生 <code>unmet</code>",
@@ -748,6 +748,23 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "不保存令牌",
             "有限预算",
             "部分可信对象",
+            "不同输出怎样保留同一失败事实",
+            "RFC 9457 Problem Details",
+            "GNU GCC 诊断输出",
+            "MCP 仍把",
+            "A2A 1.0.0",
+            "结构化诊断提案向量",
+            "规范来源与当前上限",
+        ),
+        "forbidden_patterns": (
+            r"<h2>先给直白定义</h2>",
+            r"<h2>用同一次发布理解一次失败</h2>",
+            r"<h2>一项完整诊断包含什么</h2>",
+            r"<h2>为什么不能只返回一段错误文字</h2>",
+            r"<h2>外部 Agent 错误怎样进入本地边界</h2>",
+            r"<h2>诊断目录怎样组织</h2>",
+            r"<h2>权威规范和验证资料</h2>",
+            r"<h2>当前状态</h2>",
         ),
     },
     "specifications/adapters.html": {

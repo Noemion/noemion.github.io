@@ -656,6 +656,16 @@ GNU Coreutils `timeout`、Make job slots 与 Guix 容器环境只保留为终止
 
 本轮只重构公开解释、页面质量契约和审计记录。TEXT-IDENTIFIER-CORE、ASCII 标识符策略、十二项条款、登记、威胁模型、场景、向量、Endem 字段和读音结论均未改变，也没有创建 Unicode Profile、原始来源字段、文本格式、处理库、模型输入网关或组件实现。
 
+## 结构化诊断开发者判断路径二次复核 · 2026-07-16
+
+结构化诊断页此前已经用发布中断案例说明机器码、生产语境、层次、恢复与结果边界，后续却又分别用“完整诊断”“错误文字”“外部 Agent 错误”“诊断目录”和“权威资料”重复这些责任。页面累计九个章节、三张表和二十一行表体；开发者需要在同一字段说明和多种输出机制之间往返，才能判断一次失败为什么停止以及是否可以继续。
+
+当前页面从一次副作用未知的发布中断开始，依次固定实际调用、失败来源、唯一主阻断诊断、未执行层、披露预算和恢复决定。十条 DIA-CORE 责任集中为一张开发者检查表；CLI、SARIF、HTTP Problem Details、MCP/A2A 与日志遥测则按输出出口说明可以承载的内容和不能改变的本地边界。页面因此收敛为四个章节、三张表和二十行表体，同时保留稳定机器码、生产语境、主诊断、恢复前置条件、最小披露、有限预算、原子失败、DIA-CAT 草案状态和无组件边界。
+
+外部状态按复核日重新确认：<a href="https://www.rfc-editor.org/rfc/rfc9457.html">RFC 9457</a>把问题类型、具体发生、HTTP 状态提示、标题和详情分开，明确要求消费者不要解析人类 <code>detail</code>，并警告错误正文可能泄露实现和隐私；<a href="https://modelcontextprotocol.io/docs/learn/versioning">MCP 版本说明</a>仍把 2025-11-25 列为 Current，该版<a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">工具规范</a>继续区分 JSON-RPC 协议错误和 <code>isError</code> 工具执行错误；<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0.0</a>仍是最新正式版，并要求不同绑定保留同一错误语义。<a href="https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Message-Formatting-Options.html">GNU GCC 诊断输出</a>允许同一诊断进入文本和 SARIF 等不同出口。这些资料支持把失败事实、呈现、协议状态和恢复权限分开，不定义 Noemion 的物理诊断格式、主错误算法或结果域。
+
+本轮只重构公开解释、页面质量契约和审计记录。DIA-CORE、DIA-CAT、十项条款、登记、威胁模型、场景、向量、恢复分类和机器码均未改变，也没有创建诊断格式、Profile、生产器、渲染器、日志服务、遥测导出器、重试引擎、协议适配器或 CLI。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。
