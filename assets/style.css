@@ -856,7 +856,7 @@ body[data-site-module="specifications"]{
   --module-angle:120deg;--module-cell:34px;--module-label:"PROPOSITION / CONDITION";
   --module-node-1:24% 26%;--module-node-2:72% 38%;--module-node-3:34% 76%;--module-line-a:14deg;--module-line-b:104deg;
   --module-introduction-clip:polygon(0 0,80% 0,100% 100%,20% 100%);
-  --module-card-clip:polygon(0 0,88% 0,100% 100%,12% 100%);
+  --module-card-clip:polygon(12% 0,100% 0,88% 100%,0 100%);
   --module-marker-clip:polygon(16% 0,100% 0,84% 100%,0 100%)
 }
 body[data-site-module="components"]{
