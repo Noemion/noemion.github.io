@@ -26,6 +26,7 @@ permalink: "/specifications/iknem.html"
       <tr><td><a href="../architecture/adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a></td><td>为什么采用这些边界，以及与 W3C、RATS、SLSA、GNU Guix 和 AI 遥测的关系</td><td>当前策略</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测研究</a></td><td>模型评审调用、偏差探针、统计汇总与使用决定的非规范边界</td><td>正在研究</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新研究</a></td><td>训练数据、反馈、派生模型、评测、发布与回滚的非规范边界</td><td>正在研究</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">数据使用、保留与删除研究</a></td><td>处理、删除、清除验证、清除确认、副本传播与未知范围的非规范边界</td><td>正在研究</td></tr>
     </tbody></table></div>
     <p><code>spec/iknem-core.md</code> 是 Iknem 的唯一现行规范条款源；这里不建立第二套字段或符合性要求。</p>
   </section>
@@ -88,6 +89,13 @@ permalink: "/specifications/iknem.html"
     <h2>最小披露不是信息丢失免责条款</h2>
     <p>Iknem 不保存 Bearer token、刷新令牌、私钥、会话 cookie、文件描述符、实时能力句柄或未获授权的提示与工具正文。它可以保存不可逆摘要、发行者、受众、范围、调用身份和外置引用。</p>
     <p>摘要、脱敏或外置必须说明原对象身份、变换规则、可见和不可见范围，以及这些省略怎样影响主张与覆盖度。若审计者无法取得外置对象，或脱敏删除了主体和关系位置，相关依据只能视为不可验证或覆盖不足。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>删除操作成功不等于清除证据充分</h2>
+    <p>删除请求收据、逻辑删除、TTL 到期、命令退出 0 和供应商成功状态都是有范围观察，只能说明对应协议或操作阶段。主对象、缓存、备份、快照、索引、嵌入、下游副本和派生物必须分别绑定身份、方法、时间与未知范围。</p>
+    <p>NIST SP 800-88 Rev. 2 进一步分开清除验证与清除确认：前者检查预定技术是否完成，后者判断技术对实际介质和风险是否有效。Iknem 可以记录两类观察及其限制，但不能自行授权删除、决定法定保留或把工具成功升级成“全部不可恢复”。</p>
+    <p class="note">完整边界见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">非规范软件 Agent 数据使用、保留与删除边界研究提案</a>。</p>
   </section>
 
   <section class="content-band">

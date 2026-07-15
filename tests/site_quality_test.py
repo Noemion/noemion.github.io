@@ -438,11 +438,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "三种状态不得混写",
             "一次运行怎样穿过边界",
             "运行事实应该放在哪里",
-            "十五条最危险的越级路径",
+            "十六条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术与软件自由提供的十一个约束",
+            "GNU 技术与软件自由提供的十二个约束",
             "什么时候才值得增加新对象",
-            "十四项研究怎样回到现有规范",
+            "十五项研究怎样回到现有规范",
             "模型身份不等于实际行动者",
             "工作负载身份",
             "运行实例",
@@ -2414,6 +2414,60 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the hosted AI service research proposal"
                 )
 
+    data_lifecycle_proposal = (
+        SOURCE_ROOT / "spec" / "software-agent-data-use-retention-and-deletion-boundaries-proposal.md"
+    )
+    if not data_lifecycle_proposal.exists():
+        errors.append("missing non-normative software Agent data lifecycle research proposal")
+    else:
+        proposal_text = data_lifecycle_proposal.read_text()
+        for token in (
+            "状态：非规范研究提案",
+            "结论状态：桌面审查完成；等待用户决定",
+            "至少十八种事实必须分开",
+            "不构成 ADR、CORE 规范、Profile、登记项、法律结论或实现要求",
+            "不建立 `DATA-CORE`、`PRIVACY-CORE` 或 `DELETION-CORE`",
+            "不进入 `registry.json`",
+            "访问、使用、保留与删除不是一条状态线",
+            "NIST Privacy Framework 1.0",
+            "NIST SP 800-88 Rev. 2",
+            "RFC 6973",
+            "DPV 2.1",
+            "MCP 2025-11-25 Elicitation",
+            "GNU Coreutils `shred`",
+            "至少十六个支持案例与反例",
+            "威胁到失败责任的映射",
+            "失败域与结果隔离",
+            "候选责任的唯一主归属",
+            "开发者最小检查清单",
+            "术语与读音边界",
+            "不创建新专名",
+        ):
+            if token not in proposal_text:
+                errors.append(f"software Agent data lifecycle proposal missing governance boundary: {token}")
+        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
+        if (
+            "software-agent-data-use-retention-and-deletion-boundaries" in registry_text
+            or '"DATA-CORE"' in registry_text
+            or '"PRIVACY-CORE"' in registry_text
+            or '"DELETION-CORE"' in registry_text
+        ):
+            errors.append("non-normative data lifecycle proposal must not enter the specification registry")
+        for public_source in (
+            SOURCE_ROOT / "README.md",
+            SOURCE_ROOT / "spec" / "README.md",
+            SOURCE_ROOT / "specifications" / "authority.html",
+            SOURCE_ROOT / "specifications" / "iknem.html",
+            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "design-system" / "language-and-naming.md",
+            SOURCE_ROOT / "content-quality-audit.md",
+        ):
+            if "software-agent-data-use-retention-and-deletion-boundaries-proposal.md" not in public_source.read_text():
+                errors.append(
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the data lifecycle research proposal"
+                )
+
     agent_boundaries = SOURCE_ROOT / "architecture" / "agent-system-boundaries.html"
     if not agent_boundaries.exists():
         errors.append("missing public Agent system boundary guide")
@@ -2422,10 +2476,10 @@ def validate_jekyll_sources():
         for token in (
             "三种状态不得混写",
             "运行事实应该放在哪里",
-            "十五条最危险的越级路径",
+            "十六条最危险的越级路径",
             "当前 Agent 技术趋势改变了什么",
-            "GNU 技术与软件自由提供的十一个约束",
-            "十四项研究怎样回到现有规范",
+            "GNU 技术与软件自由提供的十二个约束",
+            "十五项研究怎样回到现有规范",
             "2025-11-25",
             "2026-07-28",
             "A2A 1.0 版本化规范",
@@ -2445,11 +2499,13 @@ def validate_jekyll_sources():
             "反馈替代训练资格与发布决定",
             "可下载替代自由与可修改性",
             "服务可用替代用户控制",
+            "删除响应替代清除证据",
             "Agent 名称替代实际行动者",
             "记忆替代事实与政策",
             "NIST AI 800-2 初稿",
             "NIST AI 600-1",
             "NIST SP 800-218A",
+            "NIST SP 800-88 Rev. 2",
             "Guix channel、manifest 与 time-machine",
             "Diffutils",
             "随机来源",
@@ -2458,6 +2514,7 @@ def validate_jekyll_sources():
             "Model Openness Framework",
             "他人服务替代用户计算",
             "AGPL 边界",
+            "Coreutils <code>shred</code>",
         ):
             if token not in boundary_text:
                 errors.append(f"Agent boundary guide missing cross-domain contract: {token}")
@@ -2475,6 +2532,7 @@ def validate_jekyll_sources():
             "model-training-and-update-boundaries-proposal.md",
             "model-openness-and-software-freedom-boundaries-proposal.md",
             "hosted-ai-service-and-user-control-boundaries-proposal.md",
+            "software-agent-data-use-retention-and-deletion-boundaries-proposal.md",
             "semantic-equivalence-and-migration-proposal.md",
         ):
             if proposal_name not in boundary_text:

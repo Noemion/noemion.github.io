@@ -75,6 +75,13 @@ permalink: "/specifications/authority.html"
   </section>
 
   <section class="content-wide">
+    <h2>访问、使用、保留与删除为什么不是同一授权</h2>
+    <p>允许 Agent 读取精确对象，只允许一次具名访问尝试。把内容发送给模型或工具、写入日志或记忆、建立索引或嵌入、用于训练、披露给下游、延长保留期限以及执行删除，都需要分别绑定对象、动作、目的、接收方、条件和截止点。</p>
+    <p>删除请求也不等于删除授权或清除完成。审计保留、备份、派生物和下游对象可能具有不同控制者与约束；AUT 只记录谁允许哪个精确动作，实际执行、残留和清除效果继续由 ADP、ID、IKN 与 DIA 观察。</p>
+    <p class="note">当前<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">非规范软件 Agent 数据使用、保留与删除边界研究提案</a>把十八种生命周期事实归还现有责任。它不修改 AUT-CORE，不创建数据、隐私或删除 CORE，也不形成法律结论。</p>
+  </section>
+
+  <section class="content-wide">
     <h2>同意和多人批准怎样避免形式化陷阱</h2>
     <p>人类点击只有在安全视图与精确机器请求一致、目的和接收方清楚、拒绝路径可达、期限和撤销后果明确时，才可能成为同意依据。点击者仍需通过当前角色和范围核对；同意不是身份认证或权威证明的替代品。</p>
     <p>多人决定必须在看到结果前固定合格主体、不同身份规则、所需角色或数量、否决和冲突处理。同一控制主体的多个账户、重复签名和重放事件只能计一次；未解决冲突保持 <code>defer</code>，不能由最后到达的事件决定。</p>
