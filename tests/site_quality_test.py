@@ -1513,6 +1513,20 @@ def read_manual_source_entries(manual_id):
 def validate_jekyll_sources():
     errors = []
     errors.extend(validate_legacy_source_vocabulary())
+    readme_text = README.read_text()
+    if len(readme_text.splitlines()) > 100:
+        errors.append("README.md must remain a concise developer entry under 100 lines")
+    for token in (
+        "sitemap.md",
+        "CONTRIBUTING.md",
+        "design-system/README.md",
+        "tests/site_quality_test.py",
+    ):
+        if token not in readme_text:
+            errors.append(f"README.md missing essential developer entry: {token}")
+    for token in ("## Jekyll 源码模型", "-proposal.md", "ADR-0010"):
+        if token in readme_text:
+            errors.append(f"README.md duplicates detailed maintenance material: {token}")
     public_research_files = [
         SOURCE_ROOT / "README.md",
         SOURCE_ROOT / "content-quality-audit.md",
@@ -1718,7 +1732,6 @@ def validate_jekyll_sources():
         if "planning-and-replanning" in registry_text:
             errors.append("non-normative planning proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
         ):
@@ -1756,7 +1769,6 @@ def validate_jekyll_sources():
         if "semantic-equivalence-and-migration" in registry_text:
             errors.append("non-normative semantic equivalence proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
         ):
@@ -1795,7 +1807,6 @@ def validate_jekyll_sources():
         if "state-change-and-causal-attribution" in registry_text:
             errors.append("non-normative causation proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "endem.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
@@ -1830,7 +1841,6 @@ def validate_jekyll_sources():
         if "telis-release-terms" in registry_text:
             errors.append("non-normative telis release terms proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "design-system" / "name-audit.md",
             SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md",
@@ -1877,7 +1887,6 @@ def validate_jekyll_sources():
         if "release-terminology-simplification" in registry_text:
             errors.append("non-normative release terminology proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "design-system" / "name-audit.md",
             SOURCE_ROOT / "design-system" / "language-and-naming.md",
@@ -1945,7 +1954,6 @@ def validate_jekyll_sources():
         if "semantic-facet-terminology" in registry_text:
             errors.append("non-normative semantic facet terminology proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "design-system" / "name-audit.md",
             SOURCE_ROOT / "design-system" / "language-and-naming.md",
@@ -2031,7 +2039,6 @@ def validate_jekyll_sources():
         if "lifecycle-and-result-terminology" in registry_text:
             errors.append("non-normative lifecycle terminology proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "design-system" / "name-audit.md",
             SOURCE_ROOT / "design-system" / "language-and-naming.md",
@@ -2149,7 +2156,6 @@ def validate_jekyll_sources():
         if "preview-simulation-and-approval" in registry_text:
             errors.append("non-normative preview and approval proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "authority.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
@@ -2191,7 +2197,6 @@ def validate_jekyll_sources():
         if "memory-checkpoint-and-resumption" in registry_text:
             errors.append("non-normative memory and resumption proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "dromen.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
@@ -2234,7 +2239,6 @@ def validate_jekyll_sources():
         if "capability-discovery-and-negotiation" in registry_text or '"CAP-CORE"' in registry_text:
             errors.append("non-normative capability discovery proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "adapters.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
@@ -2280,7 +2284,6 @@ def validate_jekyll_sources():
         ):
             errors.append("non-normative software Agent identity proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "authority.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
@@ -2327,7 +2330,6 @@ def validate_jekyll_sources():
         if "parallel-and-speculative-execution" in registry_text or '"PAR-CORE"' in registry_text:
             errors.append("non-normative parallel execution proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "adapters.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
@@ -2379,7 +2381,6 @@ def validate_jekyll_sources():
         ):
             errors.append("non-normative isolation proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "dromen.html",
             SOURCE_ROOT / "specifications" / "adapters.html",
@@ -2433,7 +2434,6 @@ def validate_jekyll_sources():
         ):
             errors.append("non-normative model-assisted evaluation proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "iknem.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
@@ -2488,7 +2488,6 @@ def validate_jekyll_sources():
         ):
             errors.append("non-normative model training proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "identity.html",
             SOURCE_ROOT / "specifications" / "iknem.html",
@@ -2540,7 +2539,6 @@ def validate_jekyll_sources():
         ):
             errors.append("non-normative model openness proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "downloads" / "index.html",
             SOURCE_ROOT / "faq" / "index.html",
@@ -2593,7 +2591,6 @@ def validate_jekyll_sources():
         ):
             errors.append("non-normative hosted AI service proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "spec" / "model-openness-and-software-freedom-boundaries-proposal.md",
             SOURCE_ROOT / "downloads" / "index.html",
@@ -2648,7 +2645,6 @@ def validate_jekyll_sources():
         ):
             errors.append("non-normative data lifecycle proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "authority.html",
             SOURCE_ROOT / "specifications" / "iknem.html",
@@ -2751,7 +2747,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "index.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "README.md",
             SOURCE_ROOT / "sitemap.md",
             SOURCE_ROOT / "_data" / "navigation.yml",
         ):
