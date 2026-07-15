@@ -12,7 +12,8 @@ permalink: "/architecture/adr-0024-dromen-session-contract.html"
   <section class="content-stack">
     <h2>直接结论</h2>
     <p class="lead">Dromen 不是可执行目标文件，也不是运行中的全部可变状态。它是 Drasor 在一次 Drase 会话开始前封存的只读执行契约。</p>
-    <p>这份契约把精确 attested Endem 或 Synem，与当时有效的政策、权威、环境、能力上限、预算和证据责任绑定在一起。运行观察进入 Iknem；能力句柄留在独立最小权限域；满足结果、最终决定和会话终止继续使用各自结果域。</p>
+    <p>现行 DRO-CORE 把主体写成精确 <code>attested</code> Endem 或 Synem。按后续发现的对象边界，这项条件必须展开为精确内容、适用外部陈述及逐项验证记录，再同当时有效的政策、权威、环境、能力上限、预算和证据责任绑定。运行观察进入 Iknem；能力句柄留在独立最小权限域；满足结果、最终决定和会话终止继续使用各自结果域。</p>
+    <p class="callout"><strong>草案限制：</strong>上述展开不提前修改 DRO-CORE 的现行值。正式迁移必须另行更新规范、登记、威胁、场景和正反向量；在此之前，开发者不得把 <code>attested=true</code> 当作内容自证或会话准入事实。</p>
     <p>本决定建立 <code>DRO-CORE 0.1.0-draft</code>。它不建立 Dromen 文件、序列化格式、运行时 API、沙箱实现或凭据代理，也不表示 Drasor 已经实现。</p>
   </section>
 
@@ -30,7 +31,7 @@ permalink: "/architecture/adr-0024-dromen-session-contract.html"
   <section class="content-wide">
     <h2>建立时必须封闭的内容</h2>
     <div class="table-wrap"><table><thead><tr><th>绑定</th><th>最低内容</th><th>失败时怎样处理</th></tr></thead><tbody>
-      <tr><td>主体</td><td>精确内容身份、Profile、attestation、闭包和当前撤销状态</td><td>歧义、变化、无效或撤销时拒绝建立</td></tr>
+      <tr><td>主体</td><td>精确内容身份、Profile、闭包、外部陈述集合、主体摘要、验证记录、政策截止点和当前撤销状态</td><td>歧义、变化、类型或主体不匹配、无效或撤销时拒绝建立</td></tr>
       <tr><td>政策与权威</td><td>政策身份、决定与升级权威、截止点、有效期及适用 consent</td><td>默认最新、冲突或范围内 apor 待确认时拒绝</td></tr>
       <tr><td>环境</td><td>平台、时钟、隔离配置、适配器、协议和模型或规则后端身份</td><td>只靠远端自述或缺少必需绑定时拒绝</td></tr>
       <tr><td>能力</td><td>动作、资源或受众、范围、约束、授予者、有效期和撤销检查</td><td>只允许取交集；缺少必需能力时不运行</td></tr>

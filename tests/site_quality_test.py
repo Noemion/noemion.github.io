@@ -2152,6 +2152,38 @@ def validate_jekyll_sources():
                 "当前 <code>attested</code> 主体条件",
                 "内容形成与外部陈述的两轴模型",
             ),
+            SOURCE_ROOT / "design-system" / "language-and-naming.md": (
+                "`attested` 是正在修正的草案限制",
+                "外部陈述、验证政策、截止点、撤销与依赖方判断不得写成内容自身状态",
+            ),
+            SOURCE_ROOT / "endem" / "index.html": (
+                "精确发布制品、适用外部陈述与验证记录",
+                "内容形成、外部陈述、会话准入和最终决定怎样保持分离",
+            ),
+            SOURCE_ROOT / "endem" / "docs" / "running.md": (
+                "绑定精确主体的外部陈述与验证记录",
+                "现行 DRO-CORE 的 `attested` 主体条件只能按这一展开形式阅读",
+            ),
+            SOURCE_ROOT / "endem" / "docs" / "reference.md": (
+                "`attested`（现行草案）",
+                "开发者不得据此实现内容内布尔标志",
+            ),
+            SOURCE_ROOT / "endem" / "docs" / "safety.md": (
+                "现行 `attested` 草案值不能推出的结论",
+                "外部陈述的主体摘要、类型、签名范围、验证政策与撤销材料",
+            ),
+            SOURCE_ROOT / "architecture" / "adr-0010-native-lexicon.html": (
+                "外部签名与证明不能成为内容自身状态",
+                "正式值迁移仍需单独 ADR",
+            ),
+            SOURCE_ROOT / "architecture" / "adr-0015-result-domains.html": (
+                "生命周期行中的 <code>attested</code> 仍是待迁移的草案值",
+                "这些关系不会改变精确内容身份",
+            ),
+            SOURCE_ROOT / "architecture" / "adr-0024-dromen-session-contract.html": (
+                "精确内容、适用外部陈述及逐项验证记录",
+                "不得把 <code>attested=true</code> 当作内容自证或会话准入事实",
+            ),
         }
         for source, required_tokens in lifecycle_explainer_requirements.items():
             source_text = source.read_text()
@@ -2159,6 +2191,30 @@ def validate_jekyll_sources():
                 if token not in source_text:
                     errors.append(
                         f"{source.relative_to(SOURCE_ROOT)} missing developer-facing attestation boundary: {token}"
+                    )
+        stale_attestation_teaching = {
+            SOURCE_ROOT / "endem" / "index.html": (
+                "attested 制品、运行策略",
+                "改写 attested 制品",
+                "六个语义面和状态机",
+            ),
+            SOURCE_ROOT / "endem" / "docs" / "running.md": (
+                "形成 attested Endem/Synem",
+                "重新验证实际 attested 字节",
+                "精确 attested Endem 或 Synem",
+                "修改 attested 制品",
+            ),
+            SOURCE_ROOT / "design-system" / "language-and-naming.md": (
+                "精确 attested Endem 或 Synem",
+                "只描述制品形成与发布见证",
+            ),
+        }
+        for source, stale_tokens in stale_attestation_teaching.items():
+            source_text = source.read_text()
+            for token in stale_tokens:
+                if token in source_text:
+                    errors.append(
+                        f"{source.relative_to(SOURCE_ROOT)} retains stale attestation teaching: {token}"
                     )
 
     preview_proposal = SOURCE_ROOT / "spec" / "preview-simulation-and-approval-proposal.md"

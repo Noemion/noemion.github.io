@@ -47,6 +47,7 @@ permalink: "/architecture/adr-0010-native-lexicon.html"
       <tr><td>动作</td><td>依次负责形成、制品形成侧检查、组合、独立只读观察和受控实现；ADR-0035 撤下没有独立用户任务的动作占位。</td><td><code>ktise / elenk / pleko / theor / drase</code></td></tr>
       <tr><td>生命周期</td><td>结构已形成、依赖已收敛、发布载荷已外部见证。</td><td><code>nascent / coherent / attested</code></td></tr>
     </tbody></table></div>
+    <p class="callout"><strong>后续限制：</strong>表中的 <code>attested</code> 保留现行草案记录，但后续研究已经确认外部签名与证明不能成为内容自身状态。开发者应分别保存陈述、主体绑定、验证政策、截止点、撤销和依赖方判断；正式值迁移仍需单独 ADR，当前字段与向量没有改变。</p>
     <p>每个专名旁都必须保留直白工程副标题。词源只提供记忆路径，真正含义仍由数据结构、不变量、权限和测试决定。</p>
   </section>
 

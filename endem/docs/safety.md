@@ -53,8 +53,8 @@ GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf
 
 1. 物理结构和边界；
 2. 六个语义面与引用；
-3. nascent/coherent/attested 状态不变量；
-4. 内容摘要、签名范围与撤销材料；
+3. `nascent / coherent` 内容形成责任，以及现行 `attested` 草案值不能推出的结论；
+4. 外部陈述的主体摘要、类型、签名范围、验证政策与撤销材料；
 5. 当前策略、能力上限和目标环境兼容性。
 
 未执行层不得显示为通过。签名存在不等于信任层通过，内部摘要匹配也不等于发布者身份有效。

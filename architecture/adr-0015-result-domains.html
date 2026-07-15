@@ -24,6 +24,7 @@ permalink: "/architecture/adr-0015-result-domains.html"
       <tr><td>会话终止</td><td><code>completed / failed / interrupted</code></td><td>一次 Drase 会话按终止规则结束、因运行故障失败或被外部条件中断。</td><td><code>completed</code> 不等于 <code>met</code> 或 <code>accepted</code>；<code>failed</code> 不等于 <code>unmet</code>。</td></tr>
       <tr><td>证据状态</td><td><code>valid / invalid / revoked</code><br><code>sufficient / insufficient</code></td><td>Iknem 的身份与适用性是否有效，以及证据集合是否覆盖当前 <code>krin</code>。</td><td>单份有效记录不自动形成充分覆盖或最终接受。</td></tr>
     </tbody></table></div>
+    <p class="callout"><strong>当前限制：</strong>结果域分离继续有效，但生命周期行中的 <code>attested</code> 仍是待迁移的草案值。它不能把同一内容的多项外部陈述、验证政策、截止点、撤销和依赖方判断压成内容状态；这些关系不会改变精确内容身份。</p>
   </section>
 
   <section class="content-wide">
