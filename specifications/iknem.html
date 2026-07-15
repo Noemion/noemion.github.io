@@ -12,84 +12,55 @@ permalink: "/specifications/iknem.html"
   <section class="content-stack">
     <h2>先用一次发布判断理解它</h2>
     <p class="lead">有范围证据记录（设计阶段名称 Iknem）只回答一件事：某个生产者通过已说明的方法，对一个精确对象观察到了什么，这项观察最多支持哪一句结论。</p>
-    <p>假设目标是“更新服务依赖，并确认当前版本可以发布”。锁文件、部署接口、健康探针和模型说明都能提供信息，但它们回答的问题不同。开发者应先保留各自的对象、方法和时间，再判断这些记录是否适用于当前目标。</p>
+    <p>假设目标是“更新服务依赖，并确认当前版本可以发布”。锁文件、部署接口、健康探针和模型说明都能提供信息，但它们回答的问题不同。开发者先保留各自的对象、方法和时间，再判断这些记录是否适用于当前目标。</p>
     <div class="table-wrap"><table><thead><tr><th>取得的信息</th><th>这项记录可以声称什么</th><th>仍需补充什么</th></tr></thead><tbody>
       <tr><td>锁文件中的版本与摘要</td><td>指定解析器从该文件中读到了这组依赖版本和摘要</td><td>实际部署对象和运行状态</td></tr>
       <tr><td>部署接口返回成功</td><td>指定接口在该时刻接受了请求</td><td>变更是否生效、目标实例是否正确</td></tr>
       <tr><td>精确实例的健康探针响应</td><td>该实例在声明方法和时刻满足了探针条件</td><td>判据要求的完整观察窗口</td></tr>
       <tr><td>模型对日志的解释</td><td>保存为待核查的 <code>model-candidate</code></td><td>原始观察、变换过程和独立评估</td></tr>
     </tbody></table></div>
-    <p>这四项信息不能压成一个“发布成功”。Iknem 保存的是可以复核的有限主张；<code>krin</code> 再说明当前目标需要哪些观察，具名权威最后决定是否接受结果。</p>
-    <p class="callout"><strong>当前状态：</strong><code>IKN-CORE 0.1.0-draft</code> 已定义抽象职责。物理格式和组件接口尚未形成，也没有相应的采集、验证、归并、撤销或决定实现。因此这份说明只提供规范阅读路径，不能作为可用组件或稳定互操作格式。</p>
+    <p>这四项信息不能压成一个“发布成功”。Iknem 保存可以复核的有限主张；<code>krin</code> 说明当前目标需要哪些观察，具名权威最后决定是否接受结果。</p>
+    <p class="callout"><strong>当前状态：</strong><code>IKN-CORE 0.1.0-draft</code> 已定义抽象职责。物理格式和组件接口尚未形成，也没有相应的采集、验证、归并、撤销或决定实现。这份说明只提供规范阅读路径，不能作为可用组件或稳定互操作格式。</p>
   </section>
 
   <section class="content-wide">
-    <h2>开发者按这条顺序处理证据</h2>
+    <h2>按九项责任建立一项记录</h2>
+    <p class="lead">处理顺序仍是固定对象、保留观察、评估有效性、计算覆盖度、判断满足，最后由权威作出决定。九项条款分别固定每一步必须保存的事实和失败责任。</p>
     <div class="flow"><div class="step">固定对象与问题</div><div class="step">保留观察与变换</div><div class="step">评估记录有效性</div><div class="step">计算判据覆盖度</div><div class="step">判断目标是否满足</div><div class="step">由权威作出决定</div></div>
-    <div class="table-wrap"><table><thead><tr><th>顺序</th><th>需要完成的判断</th><th>材料不足时的结果</th><th>规范入口</th></tr></thead><tbody>
-      <tr><td>1</td><td>固定精确对象、主张、生产者、方法、环境和截止点</td><td>缩小主张，或拒绝这项记录</td><td><code>IKN-SCP-001</code></td></tr>
-      <tr><td>2</td><td>分开原始观察、解析、过滤、聚合、脱敏、模型解释和结构化 <code>phain</code></td><td>把未知变换写入限制</td><td><code>IKN-PRV-001</code>、<code>IKN-OBS-001</code></td></tr>
-      <tr><td>3</td><td>验证者按具名政策、参考值、环境和截止点评估记录</td><td><code>invalid</code> 或保持不可验证</td><td><code>IKN-INT-001</code>、<code>IKN-VAL-001</code></td></tr>
-      <tr><td>4</td><td>针对精确 <code>krin</code> 检查关系、主体、成员和时间是否都被覆盖</td><td><code>insufficient</code></td><td><code>IKN-COV-001</code></td></tr>
-      <tr><td>5</td><td>把适用 <code>phain</code> 与 <code>skena</code> 比较，判断目标是否满足</td><td><code>agno</code>、<code>fault</code> 或可证实的 <code>unmet</code></td><td>END-CORE 与适用 Profile</td></tr>
-      <tr><td>6</td><td>具名权威依据结果和决定规则作出接受、拒绝或延后决定</td><td><code>deferred</code></td><td><code>IKN-DEC-001</code>、AUT-CORE</td></tr>
+    <div class="table-wrap"><table><thead><tr><th>规范责任</th><th>开发者必须固定</th><th>失败时怎样处理</th></tr></thead><tbody>
+      <tr><td><code>IKN-SCP-001</code><br>主体与范围</td><td>精确对象、有限主张、生产者、方法、环境、适用时间和截止点</td><td>主体或方法含糊时缩小主张，越界部分不能使用</td></tr>
+      <tr><td><code>IKN-PRV-001</code><br>有限溯源</td><td>活动、精确输入、父记录、派生关系和责任主体；关系必须有限且无环</td><td>未知输入进入限制，循环自证或悬空依赖使溯源无效</td></tr>
+      <tr><td><code>IKN-OBS-001</code><br>观察与变换</td><td>原始观察、解析、过滤、聚合、脱敏、模型解释、信息损失和结构化 <code>phain</code></td><td>推断冒充观察或变换无法定位时，相关主张无效</td></tr>
+      <tr><td><code>IKN-CLS-001</code><br>记录种类与来源类别</td><td><code>observation / derivation / attestation / appraisal / decision-record</code> 与 <code>direct-observation / deterministic-derivation / external-assertion / human-judgment / model-candidate</code></td><td>签名、分数、重复次数或生产者自述不能提升类别</td></tr>
+      <tr><td><code>IKN-INT-001</code><br>完整性分离</td><td>内容身份、顺序、生产者认证、签名、时间戳和透明日志关系</td><td>完整性只能说明来源与未检测到的修改，不能代替事实正确和授权</td></tr>
+      <tr><td><code>IKN-VAL-001</code><br>外部有效性评估</td><td>验证者、政策、参考值、信任根、环境、截止点和撤销状态</td><td>评估依据变化后重新求值；记录不能给自己填写 <code>valid</code></td></tr>
+      <tr><td><code>IKN-COV-001</code><br>判据覆盖度</td><td>精确 <code>krin</code>、关系位置、主体集合、时间范围和不同观察责任</td><td>存在缺失路径、未知损失、开放集合或时间空洞时输出 <code>insufficient</code></td></tr>
+      <tr><td><code>IKN-DEC-001</code><br>决定分离</td><td>输入记录、有效性、覆盖度、满足结果、决定规则和具名权威</td><td><code>decision-record</code> 只记录已发生的决定，不创造决定权限</td></tr>
+      <tr><td><code>IKN-PRI-001</code><br>最小披露</td><td>外置对象、摘要、脱敏规则、可见范围、不可见范围及其对主张的影响</td><td>Bearer token、私钥、会话 cookie、文件描述符和实时能力句柄不得进入记录；关键材料不可得时相关依据不可验证</td></tr>
     </tbody></table></div>
-  </section>
-
-  <section class="content-wide">
-    <h2>一项记录至少说明这些事实</h2>
-    <div class="table-wrap"><table><thead><tr><th>记录项</th><th>开发者要能回答</th><th>失败风险</th></tr></thead><tbody>
-      <tr><td>主体与范围</td><td>哪个精确对象、事件、总体和时间段接受这项主张</td><td>路径或显示名称指向了另一个对象</td></tr>
-      <tr><td>生产者</td><td>谁以什么版本和权限产生记录</td><td>工具或签名者取得了没有授予的判断权</td></tr>
-      <tr><td>方法与环境</td><td>采用什么方法、参数、时钟、环境和参考值</td><td>固定样本被外推到未知总体</td></tr>
-      <tr><td>溯源</td><td>使用了哪些输入、活动、父记录和派生关系</td><td>动态依赖被藏在环境名称中，或记录循环自证</td></tr>
-      <tr><td>观察与变换</td><td>原始观察在哪里，经过哪些显式变换，损失了什么</td><td>自由文本、工具退出状态或模型解释被当作直接观察</td></tr>
-      <tr><td>主张与限制</td><td>记录实际声称什么，哪些路径、时段和信息仍然缺失</td><td>结论越过方法和生产者能够支持的范围</td></tr>
-      <tr><td>完整性与披露</td><td>怎样检查字节、顺序、认证或签名，哪些敏感内容被外置</td><td>完整性被误写成事实正确，或脱敏删除了判断所需关系</td></tr>
-    </tbody></table></div>
-    <p><code>IKN-PRI-001</code> 要求 Iknem 不保存 Bearer token、私钥、会话 cookie、文件描述符或实时能力句柄。外置、摘要和脱敏都要记录原对象、变换规则、可见范围和对结论的影响；审计者取不到关键外置材料时，相关观察不能计入充分覆盖。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>记录种类和来源类别解决不同问题</h2>
-    <div class="table-wrap"><table><thead><tr><th>维度</th><th>允许值</th><th>回答的问题</th></tr></thead><tbody>
-      <tr><td>记录种类</td><td><code>observation / derivation / attestation / appraisal / decision-record</code></td><td>这项记录执行了观察、派生、外部声明、评估还是决定事件记录</td></tr>
-      <tr><td>来源类别</td><td><code>direct-observation / deterministic-derivation / external-assertion / human-judgment / model-candidate</code></td><td>记录中的依据怎样产生</td></tr>
-    </tbody></table></div>
-    <p><code>IKN-CLS-001</code> 固定这两个分类维度。签名可以帮助认证外部声明的来源，但不会把它改成直接观察。模型分数、重复次数和自报置信度也不会提升来源类别。另一个获授权过程可以核查模型候选，并产生一项具有自身身份和范围的新记录。</p>
   </section>
 
   <section class="content-wide">
     <h2>四个结果必须分别保存</h2>
     <div class="table-wrap"><table><thead><tr><th>结果域</th><th>允许值</th><th>回答的问题</th></tr></thead><tbody>
-      <tr><td>Iknem 有效性</td><td><code>valid / invalid / revoked</code></td><td>指定验证者是否在当前政策、环境和截止点下接受这项记录</td></tr>
-      <tr><td>证据覆盖度</td><td><code>sufficient / insufficient</code></td><td>适用记录是否覆盖精确 <code>krin</code> 要求的全部观察责任</td></tr>
-      <tr><td>满足判断</td><td><code>met / unmet / agno / fault</code></td><td>把目标要求与结构化观察比较后得到什么结果</td></tr>
+      <tr><td>Iknem 有效性</td><td><code>valid / invalid / revoked</code></td><td>验证者是否在指定政策、环境和截止点下接受这项记录</td></tr>
+      <tr><td>证据覆盖度</td><td><code>sufficient / insufficient</code></td><td>适用记录是否覆盖精确 <code>krin</code> 的全部观察责任</td></tr>
+      <tr><td>满足判断</td><td><code>met / unmet / agno / fault</code></td><td>目标要求与结构化观察比较后得到什么结果</td></tr>
       <tr><td>权威决定</td><td><code>accepted / rejected / deferred</code></td><td>具名权威依据结果和决定规则作出什么决定</td></tr>
     </tbody></table></div>
-    <p><code>valid</code> 是外部评估，不是记录给自己的标签。覆盖度按不同观察责任计算，不按日志、签名或重试次数计算。<code>decision-record</code> 只记录已经发生的决定，不得创造决定权限。政策、密钥、方法、对象或截止点发生变化后，验证者需要重新评估。</p>
+    <p><code>valid</code> 是外部评估，不是记录给自己的标签。覆盖度按不同观察责任计算，不按日志、签名或重试次数计算。政策、密钥、方法、对象或截止点变化后，验证者必须重新评估。</p>
   </section>
 
   <section class="content-wide">
-    <h2>模型、Agent 协议和遥测先保持原来的身份</h2>
-    <div class="table-wrap"><table><thead><tr><th>外部输入</th><th>进入证据路径时保存什么</th><th>不能直接推出什么</th></tr></thead><tbody>
-      <tr><td>模型说明或模型裁判结果</td><td>实际输入、模型与版本、输出、顺序、偏差探针和 <code>model-candidate</code> 来源类别</td><td>直接观察、统计区间、事实真值或最终决定</td></tr>
-      <tr><td>MCP 或 A2A 任务状态</td><td>精确协议版本、对端、任务身份、状态和取得时间</td><td>本地目标满足、授权有效或结果接受</td></tr>
-      <tr><td>OpenTelemetry Span、事件或指标</td><td>采用的 schema、字段稳定性、资源身份、时间与脱敏边界</td><td>未观测时段、业务终态、因果责任或完整证据覆盖</td></tr>
-      <tr><td>签名、构建证明或透明日志记录</td><td>精确主体、签名内容、验证政策、信任根、截止点和撤销状态</td><td>主张正确、方法适用、运行获权或依赖方必然接受</td></tr>
+    <h2>外部输入只按原身份进入</h2>
+    <p class="lead">模型、Agent 协议、遥测和签名材料都可以进入证据路径，但它们只能支持与自身来源、方法和范围一致的主张。</p>
+    <div class="table-wrap"><table><thead><tr><th>外部输入与机制先例</th><th>进入记录时保存什么</th><th>不能直接推出什么</th></tr></thead><tbody>
+      <tr><td>模型说明或模型裁判结果<br><a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent 标准化工作</a></td><td>实际输入、模型与版本、输出、顺序、偏差探针和 <code>model-candidate</code> 来源类别</td><td>直接观察、统计区间、事实真值或最终决定</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25</a>或 <a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0</a> 状态</td><td>精确协议版本、对端、任务身份、原状态和取得时间</td><td>本地目标满足、授权有效、证据充分或结果接受</td></tr>
+      <tr><td><a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a>、<a href="https://github.com/open-telemetry/semantic-conventions-genai">GenAI 独立仓库</a>与 <a href="https://opentelemetry.io/schemas/gen-ai/1.42.0">Schema URL 1.42.0</a></td><td>仓库提交、Schema URL、字段稳定性、资源身份、时间和脱敏边界</td><td>未观测时段、业务终态、因果责任或完整证据覆盖；Schema URL 也不等于稳定发布</td></tr>
+      <tr><td><a href="https://www.w3.org/TR/prov-dm/">W3C PROV-DM</a>、<a href="https://www.rfc-editor.org/rfc/rfc9334.html">RFC 9334 RATS</a>、<a href="https://slsa.dev/spec/v1.2/">SLSA 1.2</a>与 <a href="https://guix.gnu.org/manual/en/html_node/Invoking-guix-challenge.html">GNU Guix <code>challenge</code></a></td><td>精确实体、活动、责任、主体、签名内容、验证政策、独立构建结果、截止点和撤销状态</td><td>溯源不自行证明因果，验证者不替代依赖方，构建差异也不自动指定正确一方</td></tr>
     </tbody></table></div>
-    <p>截至 2026 年 7 月 15 日，<a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent Standards Initiative</a>仍把互操作协议、Agent 身份与授权、安全评测分成并行工作。Noemion 采用同样的职责分离：外部系统提供带版本的输入，本地规范决定它能支持哪一项主张。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>开放标准和 GNU 工具说明了哪些边界</h2>
-    <div class="table-wrap"><table><thead><tr><th>资料</th><th>可复用的工程结论</th><th>Noemion 不继承的部分</th></tr></thead><tbody>
-      <tr><td><a href="https://www.w3.org/TR/prov-dm/">W3C PROV-DM</a></td><td>实体、活动、使用、生成、派生和责任需要显式关联；使用与生成链本身仍不足以证明派生</td><td>不采用 PROV 物理编码，也不让溯源关系自行证明事实或因果</td></tr>
-      <tr><td><a href="https://www.rfc-editor.org/rfc/rfc9334.html">RFC 9334 RATS Architecture</a></td><td>Evidence、验证者的 Attestation Results 和依赖方政策属于不同步骤</td><td>不把远程证明角色直接改名为 Iknem 角色，也不让验证者替代最终权威</td></tr>
-      <tr><td><a href="https://slsa.dev/spec/v1.2/verifying-artifacts">SLSA 1.2 制品验证</a></td><td>消费者按既定预期核对制品身份、来源和构建事实，失败处理由使用方政策决定</td><td>不把供应链证明扩展为通用意义、授权或任务满足证明</td></tr>
-      <tr><td><a href="https://guix.gnu.org/manual/en/html_node/Invoking-guix-challenge.html">GNU Guix 的 <code>guix challenge</code></a></td><td>独立构建的逐字节比较能够发现一致或差异</td><td>差异仍需判断来自不可复现、损坏还是恶意来源；工具结果不自动指定正确一方</td></tr>
-      <tr><td><a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a>与<a href="https://github.com/open-telemetry/semantic-conventions-genai">GenAI 独立仓库</a></td><td>Agent、模型、工具和协议遥测需要版本化词汇、资源身份和隐私边界</td><td>外部字段只作为映射输入，不进入 Iknem 身份、有效性或最终决定</td></tr>
-    </tbody></table></div>
+    <p><strong>复核日期：</strong>2026-07-16。外部标准只说明为什么要分开证据、评估和使用方决定；它们不定义 Iknem 的物理编码、身份或最终权威。</p>
   </section>
 
   <section class="content-wide">
@@ -104,21 +75,15 @@ permalink: "/specifications/iknem.html"
   </section>
 
   <section class="content-wide">
-    <h2>规范条款与研究资料</h2>
-    <div class="table-wrap"><table><thead><tr><th>资料</th><th>职责</th><th>状态</th></tr></thead><tbody>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-core.md">IKN-CORE 规范源</a></td><td>主体、溯源、观察、类别、完整性、有效性、覆盖、决定与披露条款</td><td>0.1.0-draft</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-threat-model.md">Iknem 威胁模型</a></td><td>范围漂白、循环自证、证据升级、撤销失明、覆盖伪造和泄密</td><td>当前草案</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md">Iknem 自然语言场景</a></td><td>支持案例、反例和待确认事项；不是符合性条款</td><td>非规范场景</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/iknem/cases.json">Iknem 提案向量</a></td><td>允许分类与确定拒绝的资料一致性矩阵</td><td>仅检查资料一致性；精确范围以向量源和版本化验证结果为准</td></tr>
-      <tr><td><a href="../architecture/adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a></td><td>解释与 W3C、RATS、SLSA、GNU Guix 和 AI 遥测的边界</td><td>当前策略</td></tr>
+    <h2>规范来源与当前上限</h2>
+    <div class="table-wrap"><table><thead><tr><th>资料层级</th><th>权威入口</th><th>能够证明什么</th></tr></thead><tbody>
+      <tr><td>现行规范</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-core.md">IKN-CORE 规范源</a></td><td>主体、溯源、观察、类别、完整性、有效性、覆盖、决定与披露的唯一条款源</td></tr>
+      <tr><td>设计与一致性材料</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-threat-model.md">当前草案威胁模型</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md">非规范场景</a>与<a href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/iknem/cases.json">提案向量</a></td><td>只支持设计复核和资料关系；向量仅检查资料一致性，不能证明组件实现或稳定格式</td></tr>
+      <tr><td>背景与边界</td><td><a href="../architecture/adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a></td><td>解释采用理由、外部先例、限制和待定内容，不建立第二套条款</td></tr>
     </tbody></table></div>
-    <p><code>spec/iknem-core.md</code> 是 Iknem 的唯一现行规范条款源；这份说明只提供阅读路径，不建立第二套字段或符合性要求。</p>
-  </section>
-
-  <section class="content-band">
-    <h2>当前状态</h2>
     <p><strong>当前策略：</strong>IKN-CORE 已确定抽象证据与评估边界，但不锁定物理容器、扩展名、字段编号、摘要与签名算法、透明日志、撤销分发、远程查询、跨生产者时钟归并、隐私策略语言和长期归档。未来实现必须以新 Profile 和规范字节证明互操作。</p>
     <p><strong>名称仍在研究：</strong>Iknem 是设计阶段名称，发行拼写、读音流畅度和与 Endem、Synem、Dromen 的口头区分度尚未通过真实使用者验证。开发者文档必须先写“有范围证据记录”，不能让名称替代可验证定义。</p>
+    <p><code>spec/iknem-core.md</code> 是唯一现行规范条款源；这份说明只提供阅读路径，不建立第二套字段或符合性要求。</p>
   </section>
   <div class="next-prev"><a href="dromen.html">← Dromen 会话契约</a><a href="diagnostics.html">结构化诊断 →</a></div>
 </main>
