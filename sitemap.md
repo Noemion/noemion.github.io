@@ -18,7 +18,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Architecture and components
 
-- [Architecture](https://noemion.github.io/architecture/index.html) — system layers, artifact lifecycle, and trust boundaries
+- [Architecture](https://noemion.github.io/architecture/index.html) — trace one developer task through responsibility owners, stop conditions, artifacts, sessions, evidence, and decisions
 - [Endem lifecycle](https://noemion.github.io/architecture/endem-lifecycle.html) — source, deterministic formation, closure, evidence, loading, and execution boundaries
 - [Architecture decisions](https://noemion.github.io/architecture/decisions.html) — accepted responsibility boundaries and explicitly unfrozen interfaces
 - [Agent system boundaries](https://noemion.github.io/architecture/agent-system-boundaries.html) — one Agent call separates goals, actors, authorization, sessions, external facts, evidence, and decisions

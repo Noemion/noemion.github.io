@@ -7,68 +7,78 @@ permalink: "/architecture/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>架构设计</span></nav>
-  <header class="section-introduction"><h1>架构设计</h1><p>当人工智能系统开始调用工具时，人的目标怎样不被一次模型解释、一次运行状态或一条成功消息悄悄改写。</p><div class="badges"><span class="badge">Endem 优先</span><span class="badge">单一命令入口</span><span class="badge">三项信任职责</span><span class="badge">失败时关闭</span></div></header>
+  <header class="section-introduction"><h1>架构设计</h1><p>用一次依赖升级定位目标、形成、运行、证据和决定的责任，并在信息不足时停止。</p><div class="badges"><span class="badge">一次任务主线</span><span class="badge">三项信任职责</span><span class="badge">成功仍需核对</span><span class="badge">当前尚无组件</span></div></header>
 
-  <section>
-    <h2>架构的直接结论</h2>
-    <p class="lead">Noemion 先保存人实际提出的目标，再把解释、授权、执行和验收交给不同职责处理。模型可以建议怎样做，工具可以报告做了什么，但它们不能自行决定人原本想要什么，也不能只凭“运行成功”宣布目标已经达到。</p>
-    <div class="status-grid">
-      <article class="status-item"><h3>一件核心制品</h3><p>来源保留的形成版分开来源表达、已确认意义投影、一个根可能事态、目标方向、满足判据和待确认意义；对应现行字段为 <code>rhem / semion / skena / telis / krin / apor</code>。最终发布版移除原文，并按独立 Profile 重写来源绑定；意义确认不授予工具或运行权限。</p></article>
-      <article class="status-item"><h3>一个命令入口</h3><p>计划中的 <code>endem</code> 入口包含五个公开动作，避免每项内部操作变成独立产品；当前还没有可执行 CLI。</p></article>
-      <article class="status-item"><h3>两条读取路径</h3><p>制品形成侧检查和 <code>theor</code> 独立直接读取，不共享会掩盖共同错误的解析实现。</p></article>
-      <article class="status-item"><h3>一个隔离运行域</h3><p><code>drase</code> 在 Ktisor 外建立 Dromen，能力句柄和模型后端不能进入制品或确定性生产域。</p></article>
-    </div>
+  <section class="content-wide">
+    <h2>从一次依赖升级定位架构</h2>
+    <p class="lead">“把服务依赖更新到安全版本，保持测试通过，经批准后发布。”这句话包含终态、允许的变化、验收判据和决定权。任何一层都不能借上一层的成功扩大责任。</p>
+    <div class="flow"><div class="step">自然语言要求</div><div class="step">来源保留的 Endem</div><div class="step">确定性形成与独立读取</div><div class="step">一次 Dromen</div><div class="step">受限外部动作</div><div class="step">Iknem 与满足判断</div><div class="step">具名权威决定</div></div>
+    <div class="table-wrap"><table><thead><tr><th>责任阶段</th><th>这一层回答什么</th><th>必须停止的情况</th></tr></thead><tbody>
+      <tr><td>来源与意义确认</td><td>保存实际来源，由有权主体确认精确解释。</td><td>版本、兼容要求、允许动作或验收判据仍含糊；模型补全不能代替确认。</td></tr>
+      <tr><td>Ktisor 形成</td><td>按已确认且具有语义授权绑定的投影确定性形成 Endem，并执行形成侧检查。</td><td>输入未封闭、Profile 不明确、字段不合规或输出不确定。</td></tr>
+      <tr><td>Theor 独立读取</td><td>用不共享解析实现的只读路径直接读取同一 Endem 字节。</td><td>两条读取路径分歧、资源不足或输入格式尚未定义。</td></tr>
+      <tr><td>Drasor 建立会话</td><td>核对精确内容、外部陈述、政策、能力、预算和截止点，再建立一次 Dromen。</td><td>授权、会话上限和实际能力没有交集，或外部陈述绑定内容身份失败。</td></tr>
+      <tr><td>外部执行</td><td>把受限本地调用映射到精确协议操作，保存远端状态、产物、错误和损失。</td><td>协议、对端、幂等条件或副作用不明确；远端建议不能扩大权限。</td></tr>
+      <tr><td>证据与满足</td><td>Iknem 保存有限主张和观察；验证者判断有效性，证据形成覆盖度，<code>krin</code> 形成满足结果。</td><td>观察缺少来源、主张越界、覆盖不足或判据要求的负观察缺失。</td></tr>
+      <tr><td>最终决定</td><td>具名权威按政策决定接受、发布、继续或撤回。</td><td>主体、作用域、委托、同意或撤销状态不明确。</td></tr>
+    </tbody></table></div>
+    <p>来源保留的形成版分开来源表达、已确认意义投影、一个根可能事态、目标方向、满足判据和待确认意义，对应 <code>rhem / semion / skena / telis / krin / apor</code>。意义确认不授予工具或运行权限。最终发布版移除原文，并由独立 Profile 重写来源绑定；两种版本具有不同精确身份，签名、验证或撤销不会原地改写内容身份。</p>
   </section>
 
-  <section>
-    <h2>系统关系</h2>
-    <div class="flow"><div class="step">受控来源表达</div><div class="step">投影 / ktise</div><div class="step">精确 Endem</div><div class="step">elenk / theor</div><div class="step">pleko → 解析闭包</div><div class="step">外部陈述绑定内容身份</div><div class="step">drase → Dromen</div><div class="step">Iknem / 最终决定</div></div>
-    <p><code>ktise</code> 是唯一语义成形入口；<code>elenk</code> 是制品形成侧检查路径；<code>theor</code> 是不共享解析代码的只读观察路径；<code>pleko</code> 只在存在多个 Endem 或外部引用时启用。<code>drase</code> 重新验证实际内容、适用外部陈述、当前政策和截止点，再在隔离域建立会话。签名、验证或撤销不会原地改写内容身份。</p>
+  <section class="content-wide">
+    <h2>看到成功后继续检查</h2>
+    <p class="lead">协议终态、工具退出、测试通过、签名有效和模型结论回答不同问题，都不是“目标已经满足”的缩写。</p>
+    <div class="table-wrap"><table><thead><tr><th>看到的信号</th><th>它最多证明</th><th>下一项检查</th></tr></thead><tbody>
+      <tr><td>A2A <code>TASK_STATE_COMPLETED</code> 或 MCP <code>completed</code></td><td>相应协议任务到达成功终态。</td><td>核对精确调用、返回产物、错误层和副作用；协议终态不能直接成为 <code>met</code>。</td></tr>
+      <tr><td>HTTP 2xx、工具成功、退出码为零或测试通过</td><td>调用或测试按自身成功规则结束。</td><td>核对预期文件、依赖锁、测试身份、遗漏分支和未授权变化。</td></tr>
+      <tr><td>签名或外部陈述验证有效</td><td>具名验证政策接受了精确主体上的外部陈述。</td><td>核对内容摘要、作用域、时间、撤销和使用授权；有效签名不产生行动权限。</td></tr>
+      <tr><td>Iknem 已记录证据</td><td>一项有限主张与观察、主体、来源和限制建立了关系。</td><td>证据集合相对精确 <code>krin</code> 形成覆盖度，<code>krin</code> 再形成满足判断，具名权威才形成最终决定。</td></tr>
+      <tr><td>模型或 Agent 说“已经完成”</td><td>模型候选提供了一项待核对陈述。</td><td>继续把它视为不可信输入；保存来源并用上面对应责任独立核对。</td></tr>
+    </tbody></table></div>
+    <p class="note">截至 2026-07-16，<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0</a>分别建模 Task、Message、Artifact 和状态；<a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks">MCP 2025-11-25 Tasks</a>仍标为实验机制。<a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST</a>也把标准、协议、身份和安全评价分开推进。它们不定义 Noemion 的目标、证据或决定。</p>
   </section>
 
-  <section>
-    <h2>三个组件</h2>
+  <section class="content-wide">
+    <h2>三个信任域为什么不能合并</h2>
+    <p class="lead">一个发行包可以提供三类入口，但形成、读取和运行不能共享足以掩盖同一错误的代码、权限或失败处理。</p>
     <div class="page-links">
-      <a class="page-link" href="../components/ktisor.html"><strong>Ktisor · 确定性制品制作域</strong><span>负责 ktise、生产 elenk 与 pleko；不持有私钥，也不承担外部签名。</span></a>
-      <a class="page-link" href="../components/theor.html"><strong>Theor · 独立只读检查器</strong><span>为 theor 提供第二条有界解析与比较路径，不生成生产可信句柄。</span></a>
-      <a class="page-link" href="../components/drasor.html"><strong>Drasor · 隔离实现运行器</strong><span>重新验证精确制品与适用外部陈述，建立 Dromen，控制能力并形成 Iknem。</span></a>
+      <a class="page-link" href="../components/ktisor.html"><strong>Ktisor · 确定性形成</strong><span>只根据封闭输入形成和检查制品；不解释来源，不持有模型、私钥或实时能力。</span></a>
+      <a class="page-link" href="../components/theor.html"><strong>Theor · 独立只读观察</strong><span>直接读取当前已有实验性物理格式的 Endem；不写回输入，也不生成生产可信句柄。</span></a>
+      <a class="page-link" href="../components/drasor.html"><strong>Drasor · 隔离运行</strong><span>建立一次会话、约束能力并保存观察；不改写目标，也不自行形成满足结果或最终决定。</span></a>
     </div>
-    <p>三者可以由同一发行包提供，但代码依赖、权限和失败责任必须保持可验证分离。没有模型、外部能力或多步反馈的任务可以使用最小 Drasor；求解后端仍不得持有实时句柄或自行验收。</p>
+    <p>形成侧检查和 <code>theor</code> 独立直接读取不共享解析实现；否则同一缺陷可能同时写出并“验证”错误内容。Drasor 必须重新验证实际字节和外部陈述，不能把生产侧状态当作运行授权。</p>
+    <p class="callout"><strong>当前策略：</strong>计划中的 <code>endem</code> 入口包含五个公开动作，用一个产品界面路由不同信任职责；当前还没有可执行 CLI，也没有 Ktisor、Theor 或 Drasor 组件。</p>
   </section>
 
-  <section>
-    <h2>制品与非制品</h2>
-    <div class="table-wrap"><table><thead><tr><th>名称</th><th>类别</th><th>责任</th></tr></thead><tbody>
-      <tr><td>Endem</td><td>持久制品</td><td>一个根可能事态和六个语义面。现行草案仍使用 <code>nascent / coherent / attested</code>，但外部签名、验证和撤销不能压成内容自身的单值状态。</td></tr>
-      <tr><td>Synem</td><td>持久组合闭包</td><td>按 SYN-CORE 固定完整成员、精确绑定、依赖、权限交集与激活关系；物理容器尚未定义。</td></tr>
-      <tr><td><a href="../specifications/dromen.html">Dromen</a></td><td>一次会话的只读执行契约</td><td>绑定精确制品、政策、环境、能力、预算和证据责任；不序列化或恢复权限。</td></tr>
-      <tr><td>Iknem</td><td>有范围证据记录</td><td>按 IKN-CORE 绑定主体、溯源、phain、主张和限制；有效性、覆盖与决定保持外置。</td></tr>
+  <section class="content-wide">
+    <h2>对象只在需要的阶段出现</h2>
+    <div class="table-wrap"><table><thead><tr><th>对象</th><th>生命周期与当前物理状态</th><th>不能据此声称</th></tr></thead><tbody>
+      <tr><td>Endem</td><td>持久目标制品；当前只有来源保留的 END-P1 实验性形成格式，裁剪发布 Profile 尚未定义。</td><td>形成侧检查通过不等于已经授权执行、目标满足或发布获准。</td></tr>
+      <tr><td>Synem</td><td>持久组合闭包；SYN-CORE 已规定完整成员、精确绑定和权限收窄，物理容器仍待确定。</td><td>动态工具清单、构建依赖或一次会话选择不能改写既有闭包身份。</td></tr>
+      <tr><td><a href="../specifications/dromen.html">Dromen</a></td><td>一次会话的只读执行契约；它在准入时建立，失效或结束后销毁，永不作为持久格式序列化或恢复。</td><td>检查点、记忆、Agent 会话或凭据包不能恢复旧权限。</td></tr>
+      <tr><td>Iknem</td><td>按 IKN-CORE 定义的有范围证据记录；物理编码、采集和归并接口仍待确定。</td><td>证据存在、数量增加或外部评估有效都不自动产生覆盖、满足或接受。</td></tr>
     </tbody></table></div>
   </section>
 
   <section>
-    <h2>信任边界</h2>
-    <ul>
-      <li>自然语言来源、模型候选、对象字节、依赖、签名包、工具返回和环境观察都从不可信状态进入。</li>
-      <li>Ktisor 只能证明确定性成形、结构、语义和状态不变量；它不能证明任务已经完成。</li>
-      <li>Theor 只提供独立观察和差分证据；可显示不等于制品形成侧检查通过。</li>
-      <li>Drasor 只在当前环境和策略内绑定能力；精确制品和外部陈述都不保存实时句柄，也不自动获得权限。</li>
-      <li>Iknem 只承担有限主张；验证者按具名政策形成有效性，证据集合相对精确 <code>krin</code> 形成覆盖度，<code>krin</code> 再形成满足判断，具名权威才形成最终决定。</li>
-      <li>AUT-CORE 只回答谁能在什么范围内授权；登录、签名、模型、Agent 状态和界面点击都不能越过具名政策取得决定权。</li>
-    </ul>
+    <h2>当前可以证明什么</h2>
+    <div class="status-grid">
+      <article class="status-item"><h3>已有成果</h3><p>CORE、ADR、登记、威胁模型、场景和向量已经连接对象、结果域与失败责任。资料检查只能证明已覆盖关系保持一致。</p></article>
+      <article class="status-item"><h3>限制条件</h3><p>当前没有编译器、CLI、解析器、沙箱、政策引擎、适配器或运行时；页面不能作为实现、互操作或隔离证据。</p></article>
+      <article class="status-item"><h3>待定内容</h3><p>最终裁剪发布 Profile、Synem 与 Iknem 物理编码、Dromen 运行 API、协议 Profile、摘要与签名算法、稳定 ABI 和迁移条件仍待确定。</p></article>
+      <article class="status-item"><h3>名称与读音</h3><p>Endem、Synem、Dromen、Iknem、Ktisor、Theor 和 Drasor 当前只是精确设计标识。首次朗读、口头区分和主要使用语言中的流畅度尚无人类证据，不能形成发行结论。</p></article>
+    </div>
+    <p class="note"><a href="https://www.gnu.org/software/make/manual/html_node/Goals.html">GNU make</a>把 goal 定义为需要更新的 target，并沿前置条件处理其他 target；这支持显式依赖，却不把构建成功等同于业务满足。<a href="https://www.sourceware.org/binutils/docs/binutils/readelf.html">GNU readelf</a>独立于 BFD，以免共同库缺陷同时影响生产与检查；这支持第二条读取路径，但不证明 Theor 已经实现。</p>
   </section>
 
   <section>
-    <h2>继续阅读</h2>
+    <h2>按问题继续</h2>
     <div class="page-links">
-      <a class="page-link" href="endem-lifecycle.html"><strong>Endem 生命周期</strong><span>查看内容形成、外部陈述、会话准入、Dromen、Iknem 和最终决定为什么必须分开。</span></a>
-      <a class="page-link" href="decisions.html"><strong>架构决策</strong><span>查看 Endem 语义与格式、结果分层、Synem 闭包、Iknem 证据、诊断与协议适配边界。</span></a>
-      <a class="page-link" href="agent-system-boundaries.html"><strong>Agent 系统边界图</strong><span>把上下文、计划、批准、工具、任务、记忆、轨迹与决定放回各自责任域。</span></a>
-      <a class="page-link" href="open-questions.html"><strong>开放问题</strong><span>查看编码、绑定、运行、证据和发布前仍需回答的问题。</span></a>
-      <a class="page-link" href="adr-0029-authority-and-authorization-decisions.html"><strong>权威与授权决定</strong><span>查看主体、范围、委托、同意、撤销、重放与结果分离怎样统一约束。</span></a>
-      <a class="page-link" href="adr-0030-endem-content-and-authorization-companions.html"><strong>目标内容与使用许可</strong><span>查看目标文件为什么不能自证“已经获准使用”，以及外部决定怎样指向一份没有被改写的精确内容。</span></a>
-      <a class="page-link" href="adr-0031-release-name-collision-gate.html"><strong>发布名称冲突审查</strong><span>查看 Iknem 与 Drasor/drase 的候选比较、当前策略和无兼容迁移规则。</span></a>
-      <a class="page-link" href="../specifications/"><strong>规范参考指南</strong><span>查看对象、会话、证据、诊断与外部协议适配要求。</span></a>
+      <a class="page-link" href="endem-lifecycle.html"><strong>一项目标怎样经过完整生命周期</strong><span>继续查看来源、形成、组合、会话、证据和决定在什么条件下前进或停止。</span></a>
+      <a class="page-link" href="decisions.html"><strong>一条责任为什么这样划分</strong><span>按开发者问题查看现行 ADR、替代方案、反例和变更责任。</span></a>
+      <a class="page-link" href="agent-system-boundaries.html"><strong>Agent、工具和协议状态放在哪里</strong><span>把上下文、计划、批准、外部调用、记忆、观察和决定放回各自责任域。</span></a>
+      <a class="page-link" href="open-questions.html"><strong>哪些边界仍需研究</strong><span>按格式、组合发布、Agent 运行、术语和实现问题进入相应资料。</span></a>
     </div>
+    <p>精确字段、条款、Profile 和验证关系从<a href="../specifications/">规范参考指南</a>继续查询。</p>
   </section>
 </main>

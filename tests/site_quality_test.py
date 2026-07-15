@@ -161,6 +161,14 @@ BACKGROUND_HEADINGS = [
     "相邻系统各自回答什么",
     "当前开发者可以依赖什么",
 ]
+ARCHITECTURE_INDEX_HEADINGS = [
+    "从一次依赖升级定位架构",
+    "看到成功后继续检查",
+    "三个信任域为什么不能合并",
+    "对象只在需要的阶段出现",
+    "当前可以证明什么",
+    "按问题继续",
+]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "从一次依赖升级看清问题",
     "把思想转换成可验证问题",
@@ -5555,6 +5563,50 @@ def main():
             ):
                 if token not in portal_art_source:
                     errors.append(f"homepage animated brand visual missing contract: {token}")
+
+    architecture_index = ROOT / "architecture/index.html"
+    if architecture_index.exists():
+        parser = parse(architecture_index)
+        if parser.h2_texts != ARCHITECTURE_INDEX_HEADINGS:
+            errors.append(
+                "architecture/index.html: developer responsibility sequence must be "
+                f"{ARCHITECTURE_INDEX_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in (
+            "这一层回答什么",
+            "必须停止的情况",
+            "协议终态不能直接成为 met",
+            "当前只有来源保留的 END-P1 实验性形成格式",
+            "一次会话的只读执行契约",
+            "流畅度尚无人类证据",
+            "MCP 2025-11-25 Tasks",
+            "GNU readelf",
+        ):
+            if term not in visible_text:
+                errors.append(
+                    f"architecture/index.html: missing developer architecture boundary {term}"
+                )
+        if (
+            parser.class_counts["flow"] != 1
+            or parser.class_counts["table-wrap"] != 3
+            or parser.class_counts["page-link"] != 7
+        ):
+            errors.append(
+                "architecture/index.html: must keep one task flow, three scoped tables, "
+                "and seven routed links"
+            )
+        for obsolete_heading in (
+            "架构的直接结论", "系统关系", "三个组件",
+            "制品与非制品", "信任边界", "继续阅读",
+        ):
+            if obsolete_heading in parser.h2_texts:
+                errors.append(
+                    "architecture/index.html: must not restore inventory-style heading "
+                    f"{obsolete_heading!r}"
+                )
 
     background = ROOT / "about/background.html"
     if background.exists():
