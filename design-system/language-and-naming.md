@@ -12,7 +12,7 @@
 
 项目级标题、简介、门户主张、入门入口和一级导航必须先以 Noemion 指代整个项目与领域。Endem 不得成为项目名、生态总名或替代品牌；它只在最小制品、对应规范、生命周期、应用和 CLI 语境中使用。Synem、Dromen、Iknem、Ktisor、Theor、Drasor 与动作名同样只承担各自工程职责。
 
-这些标识的现行状态不证明它们都值得成为发行专名。[发行术语去专名化研究提案](../spec/release-terminology-simplification-proposal.md)已经完成后续桌面审查：Endem 暂时保留进入人类验证；Synem、Dromen、Iknem、Ktisor、Theor、Drasor 与五个动作优先改用直白职责名进入验证。该结论仍等待用户决定和人类证据，当前不是别名、现行接口或迁移决定。
+这些标识的现行状态不证明它们都值得成为发行专名。[发行术语去专名化研究提案](../spec/release-terminology-simplification-proposal.md)已经完成后续桌面审查：Endem 暂时保留进入人类验证；Synem、Dromen、Iknem、Ktisor、Theor、Drasor 与五个动作优先改用直白职责名进入验证。该结论尚待人类证据，当前不是别名、现行接口或迁移决定。
 
 六个语义面与结构化观察也不能因为 ADR-0010 已接受职责就跳过名称审查。[语义面与观察词去专名化提案](../spec/semantic-facet-terminology-proposal.md)保留七项边界，却建议以 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation` 比较现行希腊化短词。该结论同样只是人类验证候选，不修改现行字段或 Profile。
 

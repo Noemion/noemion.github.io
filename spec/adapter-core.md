@@ -129,4 +129,4 @@
 
 ## 5. 当前未定义
 
-本规范不冻结 MCP、A2A、HTTP、模型 SDK 或操作系统 Profile，不定义 adapter API、进程模型、JSON/CBOR/Protocol Buffers 字段、网络端口、凭据代理、重试实现、事件存储、Webhook 服务、沙箱、遥测 schema 或部署拓扑。具体协议映射必须在稳定版本、真实消费者、独立威胁分析、正反向量和用户明确开启代码阶段后的实现证据共同支持时另行建立。
+本规范不冻结 MCP、A2A、HTTP、模型 SDK 或操作系统 Profile，不定义 adapter API、进程模型、JSON/CBOR/Protocol Buffers 字段、网络端口、凭据代理、重试实现、事件存储、Webhook 服务、沙箱、遥测 schema 或部署拓扑。具体协议映射必须在稳定版本、真实消费者、独立威胁分析、正反向量，以及进入代码开发阶段并明确实现范围后取得的实现证据共同支持时另行建立。

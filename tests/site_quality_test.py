@@ -246,6 +246,20 @@ PUBLIC_META_PHRASES = (
     "当前仍未冻结",
     "仍未冻结的内容",
 )
+PUBLIC_RESEARCH_PROCESS_PHRASES = (
+    "等待用户决定",
+    "等待用户接受",
+    "用户接受本提案",
+    "若用户接受",
+    "在用户接受",
+    "用户接受责任分配",
+    "用户明确开启代码",
+    "等待用户明确开启",
+    "用户开启代码阶段",
+    "用户没有明确开启",
+    "若接受后的",
+    "等待决定",
+)
 UNCLEAR_CHINESE_UI_TERMS = re.compile(
     r"架构决定|文档中心|文档首页|架构指南|工具参考(?!指南)|"
     r"规范登记(?:页)?|架构入口|使用与获取|新闻与进展|实施路线图|"
@@ -1438,6 +1452,19 @@ def read_manual_source_entries(manual_id):
 def validate_jekyll_sources():
     errors = []
     errors.extend(validate_legacy_source_vocabulary())
+    public_research_files = [
+        SOURCE_ROOT / "README.md",
+        SOURCE_ROOT / "content-quality-audit.md",
+        *sorted((SOURCE_ROOT / "spec").glob("*.md")),
+        *sorted((SOURCE_ROOT / "design-system").glob("*.md")),
+    ]
+    for path in public_research_files:
+        text = path.read_text()
+        for phrase in PUBLIC_RESEARCH_PROCESS_PHRASES:
+            if phrase in text:
+                errors.append(
+                    f"{path.relative_to(SOURCE_ROOT)} exposes internal project process phrase {phrase!r}"
+                )
     ruby_version = SOURCE_ROOT / ".ruby-version"
     gem_lock = SOURCE_ROOT / "Gemfile.lock"
     gitignore = SOURCE_ROOT / ".gitignore"
@@ -1515,7 +1542,7 @@ def validate_jekyll_sources():
             "供应商不可观察变换案例",
             "威胁到责任的映射",
             "失败域与结果隔离",
-            "等待决定",
+            "待定内容",
             "model-context-assembly-proposal.md",
         ):
             if token not in proposal_text and token not in (SOURCE_ROOT / "spec" / "README.md").read_text():
@@ -1549,7 +1576,7 @@ def validate_jekyll_sources():
             "带错继续和部分输出",
             "未来采用的证据门",
             "不进入 `registry.json`",
-            "等待决定",
+            "进入规范前的条件",
         ):
             if token not in proposal_text:
                 errors.append(f"GNU and ELF applicability proposal missing governance boundary: {token}")
@@ -1585,7 +1612,7 @@ def validate_jekyll_sources():
             "重规划触发矩阵",
             "威胁到失败责任的映射",
             "失败域与结果隔离",
-            "等待决定",
+            "进入规范前的条件",
         ):
             if token not in proposal_text:
                 errors.append(f"planning proposal missing governance boundary: {token}")
@@ -1624,7 +1651,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "候选责任的唯一主归属",
             "Semantic Key 的进入条件",
-            "等待决定",
+            "结论状态：正在研究；尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"semantic equivalence proposal missing governance boundary: {token}")
@@ -1664,7 +1691,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "候选责任的唯一主归属",
-            "等待决定",
+            "结论状态：正在研究；尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"causation proposal missing governance boundary: {token}")
@@ -1726,7 +1753,7 @@ def validate_jekyll_sources():
         proposal_text = release_terms_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；等待用户决定与人类验证",
+            "结论状态：桌面审查完成；尚待人类验证",
             "不构成 ADR、CORE 规范、内容 Profile、登记项或实现要求",
             "不进入 `registry.json`",
             "只有确实需要独立公共身份、且普通术语无法准确承担职责时，才创造专名",
@@ -1793,7 +1820,7 @@ def validate_jekyll_sources():
         proposal_text = facet_terms_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；等待用户决定与人类验证",
+            "结论状态：桌面审查完成；尚待人类验证",
             "不构成 ADR、CORE 规范、内容 Profile、登记项或实现要求",
             "不进入 `registry.json`",
             "六个语义面与结构化观察的职责继续成立，不能合并",
@@ -1862,7 +1889,7 @@ def validate_jekyll_sources():
         proposal_text = lifecycle_terms_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：对象边界桌面审查完成；语义迁移与发行命名分别等待决定",
+            "结论状态：对象边界桌面审查完成；语义迁移与发行命名尚未进入规范",
             "不构成 ADR、CORE 规范、内容 Profile、登记项、迁移决定或实现要求",
             "不进入 `registry.json`",
             "停止把 `attested` 作为 Endem 生命周期状态",
@@ -1900,8 +1927,8 @@ def validate_jekyll_sources():
             "### 可验证的完成条件",
             "现行接口不再出现 Endem `attested` 或 Dromen `subject.attested`",
             "原有 `0.1` 内容静默改成另一套语义",
-            "用户可以单独接受 A 轴",
-            "这些结论不会在本轮改变任何现行规范值",
+            "A 轴可以单独形成对象边界迁移 ADR",
+            "这些结论不会改变任何现行规范值",
         ):
             if token not in proposal_text:
                 errors.append(f"lifecycle terminology proposal missing governance boundary: {token}")
@@ -2018,7 +2045,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "候选责任的唯一主归属",
-            "等待决定",
+            "结论状态：正在研究；尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"preview and approval proposal missing governance boundary: {token}")
@@ -2061,7 +2088,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "候选责任的唯一主归属",
-            "等待决定",
+            "结论状态：正在研究；尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"memory and resumption proposal missing governance boundary: {token}")
@@ -2089,7 +2116,7 @@ def validate_jekyll_sources():
         proposal_text = capability_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；等待用户决定",
+            "结论状态：桌面审查完成；尚未进入规范",
             "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
             "不创建新制品、文件格式、扩展名、命令、组件、结果域、稳定接口或哲学专名",
             "不进入 `registry.json`",
@@ -2134,7 +2161,7 @@ def validate_jekyll_sources():
         proposal_text = agent_identity_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；等待用户决定",
+            "结论状态：桌面审查完成；尚未进入规范",
             "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
             "不创建 Agent 身份制品",
             "不进入 `registry.json`",
@@ -2180,7 +2207,7 @@ def validate_jekyll_sources():
         proposal_text = parallel_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；等待用户决定",
+            "结论状态：桌面审查完成；尚未进入规范",
             "并行调度、分支完成、候选结果、提交授权、外部副作用和目标满足是六种不同事实",
             "不构成 ADR、CORE 规范、Profile 或实现要求",
             "不创建并行制品、事务格式、分支对象、命令、组件、结果域、稳定接口或哲学专名",
@@ -2199,7 +2226,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "不建立 `PAR-CORE`、分支制品或事务格式",
-            "等待用户决定",
+            "尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"parallel execution proposal missing governance boundary: {token}")
@@ -2228,7 +2255,7 @@ def validate_jekyll_sources():
         proposal_text = isolation_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；等待用户决定",
+            "结论状态：桌面审查完成；尚未进入规范",
             "隔离不是单一开关、进程或产品名称",
             "不构成 ADR、CORE 规范、Profile 或实现要求",
             "不创建隔离制品、沙箱格式、部署对象、命令、组件、结果域、稳定接口或哲学专名",
@@ -2248,7 +2275,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "候选责任的唯一主归属",
-            "等待用户决定",
+            "尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"model adapter isolation proposal missing governance boundary: {token}")
@@ -2283,7 +2310,7 @@ def validate_jekyll_sources():
         proposal_text = model_evaluation_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；等待用户决定",
+            "结论状态：桌面审查完成；尚未进入规范",
             "评测至少包含九种不同事实",
             "不构成 ADR、CORE 规范、Profile、登记项或实现要求",
             "不创建评测制品、裁判对象、评分格式、基准格式、命令、组件、结果域、稳定接口或哲学专名",
@@ -2303,7 +2330,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "候选责任的唯一主归属",
-            "等待用户决定",
+            "尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"model-assisted evaluation proposal missing governance boundary: {token}")
@@ -2337,7 +2364,7 @@ def validate_jekyll_sources():
         proposal_text = model_training_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；等待用户决定",
+            "结论状态：桌面审查完成；尚未进入规范",
             "至少十一种事实必须分开",
             "不构成 ADR、CORE 规范、Profile、登记项或实现要求",
             "不创建模型制品、数据集格式、训练清单格式、反馈格式、模型仓库、训练平台、命令、组件、结果域、稳定接口或哲学专名",
@@ -2358,7 +2385,7 @@ def validate_jekyll_sources():
             "失败域与结果隔离",
             "候选责任的唯一主归属",
             "术语和读音边界",
-            "等待用户决定",
+            "尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"model training proposal missing governance boundary: {token}")
@@ -2394,7 +2421,7 @@ def validate_jekyll_sources():
         proposal_text = model_openness_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；等待用户决定",
+            "结论状态：桌面审查完成；尚未进入规范",
             "至少十二种事实必须分开",
             "不构成 ADR、CORE 规范、Profile、登记项、法律意见或实现要求",
             "不建立 `OPEN-MODEL-CORE`、`LICENSE-CORE`",
@@ -2412,7 +2439,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "候选责任的唯一主归属",
             "术语和读音边界",
-            "等待用户决定",
+            "尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"model openness proposal missing governance boundary: {token}")
@@ -2446,7 +2473,7 @@ def validate_jekyll_sources():
         proposal_text = hosted_service_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；等待用户决定",
+            "结论状态：桌面审查完成；尚未进入规范",
             "至少十六种事实必须分开",
             "不构成 ADR、CORE 规范、Profile、登记项、许可选择、部署决定或实现要求",
             "不建立 `SERVICE-CORE`、`CLOUD-CORE`、`PORTABILITY-CORE`",
@@ -2465,7 +2492,7 @@ def validate_jekyll_sources():
             "候选责任的唯一主归属",
             "采用托管路径前的最小问题清单",
             "术语和读音边界",
-            "等待用户决定",
+            "尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"hosted AI service proposal missing governance boundary: {token}")
@@ -2503,7 +2530,7 @@ def validate_jekyll_sources():
         proposal_text = data_lifecycle_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；等待用户决定",
+            "结论状态：桌面审查完成；尚未进入规范",
             "至少十八种事实必须分开",
             "不构成 ADR、CORE 规范、Profile、登记项、法律结论或实现要求",
             "不建立 `DATA-CORE`、`PRIVACY-CORE` 或 `DELETION-CORE`",
