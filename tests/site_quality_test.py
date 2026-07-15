@@ -2267,18 +2267,24 @@ def validate_jekyll_sources():
                     )
         lifecycle_page_text = (SOURCE_ROOT / "architecture" / "endem-lifecycle.html").read_text()
         for token in (
-            "先分开内容状态与外部关系",
-            "新增签名、撤销授权或更新验证结果不会改写原文件",
-            "现行 END-CORE 草案仍把",
-            "这个单值模型不能精确保存多项签名、验证政策、截止点和撤销关系",
-            "精确制品与外部陈述 → drase",
-            "内容形成与发布陈述不能压成一个状态",
-            "不同依赖方可以对同一陈述作出不同判断",
-            "RFC 9334 RATS Architecture",
-            "in-toto Attestation Statement",
-            "SLSA 1.2 Verification Summary Attestation",
-            "GNU Guix substitute authentication",
+            "四类对象各自有界",
+            "先用一次发布看懂四类对象",
+            "含来源形成版",
+            "没有受控伴随资料时，不能证明它忠实对应原始表达",
+            "开发者按七步处理",
+            "后一步不能弥补前一步的失败",
+            "裁剪不是删除一个字段",
+            "发布 Profile 必须定义不泄露原文的来源绑定",
+            "GNU GDB 的独立调试文件",
+            "装载前重新决定能否执行",
+            "现行 END-CORE 的 <code>nascent / coherent / attested</code>",
+            "规范来源与当前上限",
+            "RFC 9334 RATS",
+            "in-toto Statement",
+            "SLSA 1.2",
             "MCP 2025-11-25 Tasks",
+            "截至 2026-07-16 仍为实验能力",
+            "当前没有 Ktisor、Theor、Drasor、裁剪发布器",
         ):
             if token not in lifecycle_page_text:
                 errors.append(f"Endem lifecycle page missing two-axis attestation boundary: {token}")
@@ -2288,6 +2294,15 @@ def validate_jekyll_sources():
             "<h2>attested → Dromen → Iknem</h2>",
             "<tr><td>attested → drase</td>",
             "这五个结果域由",
+            "<h2>先分开内容状态与外部关系</h2>",
+            "<h2>开发者应怎样读主流程</h2>",
+            "<h2>阶段、消费者与失败</h2>",
+            "<h2>nascent → coherent</h2>",
+            "<h2>内容形成与发布陈述不能压成一个状态</h2>",
+            "<h2>外部陈述复核 → Dromen → Iknem</h2>",
+            "<h2>现行结果域与草案限制</h2>",
+            "<h2>为什么采用两条轴</h2>",
+            "<h2>未来实现顺序</h2>",
         ):
             if stale_lifecycle_claim in lifecycle_page_text:
                 errors.append(

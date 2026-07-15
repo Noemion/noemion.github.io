@@ -7,108 +7,70 @@ permalink: "/architecture/endem-lifecycle.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>Endem 生命周期</span></nav>
-  <header class="content-introduction"><h1>Endem 生命周期</h1><p>从人写下目标开始，逐步说明系统何时可以形成文件、谁可以签署或授权，以及一次运行怎样留下可核对的依据。</p><div class="badges"><span class="badge">内容形成</span><span class="badge">外部陈述</span><span class="badge">一次会话</span><span class="badge">有范围证据</span></div></header>
-
-  <section class="content-stack">
-    <h2>先分开内容状态与外部关系</h2>
-    <p class="lead">改动目标内容会产生一件新的 Endem；新增签名、撤销授权或更新验证结果不会改写原文件。这种分离让开发者能够判断“目标变了”还是“别人对同一目标作出的声明变了”。</p>
-    <ul>
-      <li><strong>内容形成：</strong><code>ktise</code> 说明目标契约已经确定性编码；<code>pleko</code> 说明引用和冲突已经解析。</li>
-      <li><strong>外部陈述：</strong>签名者针对精确内容和陈述类型产生独立记录，验证者再依据算法、信任根、政策和截止点判断其是否适用。</li>
-      <li><strong>会话准入：</strong><code>drase</code> 重新核对实际内容、适用外部陈述、当前政策、环境、能力和预算，随后才建立一次 Dromen。</li>
-      <li><strong>运行判断：</strong>Iknem 保存有范围的观察与依据；满足结果、证据覆盖和最终决定继续由各自规则形成。</li>
-    </ul>
-    <p class="callout"><strong>当前限制：</strong>现行 END-CORE 草案仍把 <code>nascent / coherent / attested</code> 列为内容形成分类，DRO-CORE 也使用 <code>attested</code> 表达会话主体准入。这个单值模型不能精确保存多项签名、验证政策、截止点和撤销关系；<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md">生命周期与结果词边界研究</a>正在设计迁移，开发者不能把它理解为内容获得了永久可信状态。</p>
-  </section>
+  <header class="content-introduction"><h1>Endem 生命周期<br>四类对象各自有界</h1><p>把含来源形成版、裁剪发布版、外部验证关系和一次执行会话分开，说明每一步能够证明什么，以及失败时应在哪里停止。</p><div class="badges"><span class="badge">形成版保留来源</span><span class="badge">发布版移除原文</span><span class="badge">外部关系不改身份</span><span class="badge">运行重新授权</span></div></header>
 
   <section class="content-wide">
-    <h2>开发者应怎样读主流程</h2>
-    <div class="flow"><div class="step">受控来源与授权投影</div><div class="step">ktise → 来源保留的形成版</div><div class="step">elenk / theor 分层检查</div><div class="step">发布 Profile → 来源裁剪版</div><div class="step">外部陈述绑定发布身份</div><div class="step">验证政策与截止点复核</div><div class="step">drase → Dromen</div><div class="step">Iknem → 判断与决定</div></div>
-    <p>这条图按工作顺序排列，不表示前一步把内容原地升级成更可信的版本。内容发生变化时产生新身份；外部陈述仍绑定原来的精确内容主体（subject），并由当前依赖方决定是否适用于这次会话。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>阶段、消费者与失败</h2>
-    <div class="table-wrap"><table><thead><tr><th>阶段</th><th>权威输入</th><th>正式输出</th><th>失败责任</th><th>下游消费者</th></tr></thead><tbody>
-      <tr><td>受控来源 → ktise</td><td>六个语义面，或带来源的投影候选与授权决定</td><td>nascent Endem、Ktise Iknem、诊断</td><td>来源不可重放、aseme、根 skena 不唯一、telis/krin 缺失、候选越权确认</td><td>elenk、theor、pleko 或人工确认</td></tr>
-      <tr><td>nascent Endem → elenk</td><td>原始对象字节、限制、规范版本和请求验证层</td><td>分层结论、Elenk Iknem；Ktisor 内部可保留绑定精确输入与检查配置的引用</td><td>结构、引用、语义、状态、完整性或资源限制失败</td><td>pleko、Drasor、外部发布系统</td></tr>
-      <tr><td>任意对象 → theor</td><td>原始 Endem/Synem/Iknem 字节和输出预算</td><td>只读视图、差分、诊断</td><td>畸形、未知关键记录、无法表示或资源超限</td><td>开发者、审计者和互操作验证；不进入制品形成与发布信任链</td></tr>
-      <tr><td>Endem 集合 → pleko</td><td>已检查对象、组合策略和依赖锁</td><td>coherent Endem 或 Synem、Pleko Iknem</td><td>未解析引用、冲突、循环、权限扩大、身份不稳定</td><td>theor、Drasor、外部发布系统</td></tr>
-      <tr><td>形成制品 → 裁剪发布</td><td>来源保留的精确制品、发布 Profile、裁剪政策与受控伴随关系</td><td>不含原文的新身份发布制品、损失清单与类型化派生关系</td><td>来源泄露、引用悬空、身份复用、保留关系或失败原子性未定义</td><td>外部发布系统、theor、Drasor</td></tr>
-      <tr><td>发布制品 → 外部发布陈述</td><td>来源裁剪的精确发布字节、待签陈述、发布政策和信任材料</td><td>外置签名包络与有范围 Iknem</td><td>载荷、请求、算法、签名者、截止点或策略不匹配</td><td>theor、Drasor</td></tr>
-      <tr><td>精确制品与外部陈述 → drase</td><td>实际内容身份、签名或证明陈述、验证记录、适用政策、截止点、撤销信息、后端和能力目录</td><td>Dromen、运行类 Iknem、满足结果和会话终止结果；具名权威另行作出最终决定</td><td>主体不匹配、签名或政策失败、陈述过期或撤销、能力拒绝、后端错误、预算耗尽、状态漂移、证据不足</td><td>用户、CI、审计或外部权威</td></tr>
+    <h2>先用一次发布看懂四类对象</h2>
+    <p class="lead">假设开发者写下“把服务依赖升级到指定版本，只有测试通过并确认生产范围后才能发布”。这段自然语言不会沿一条流水线不断升级成“更可信的同一个文件”；系统需要形成四类边界不同的对象。</p>
+    <div class="table-wrap"><table><thead><tr><th>对象</th><th>保存什么</th><th>身份怎样处理</th><th>结论上限</th></tr></thead><tbody>
+      <tr><td>含来源形成版</td><td>实际进入形成过程的自然语言、来源范围、已确认目标结构和待确认意义</td><td>按形成 Profile 的精确字节建立内容身份</td><td>可以复核来源怎样映射为目标；不能据此获得发布许可或运行权限</td></tr>
+      <tr><td>裁剪发布版</td><td>未来发布 Profile 允许的已确认目标结构和来源绑定；不保留原文或可逆重建材料</td><td>裁剪产生新的精确内容身份，并记录与形成版的类型化派生关系</td><td>可以检查发布字节与发布 Profile；没有受控伴随资料时，不能证明它忠实对应原始表达</td></tr>
+      <tr><td>外部陈述与验证记录</td><td>被声明的精确对象、陈述类型、签名者、包络、信任根、政策、截止点和撤销状态</td><td>作为外部关系连接发布身份，不进入 Endem 内容身份</td><td>只能说明某项陈述在指定验证语境中的结果；不自动授予动作权限或证明目标满足</td></tr>
+      <tr><td>一次会话与运行记录</td><td>只读会话契约（现行名称 Dromen）绑定的主体、环境、能力、预算和证据责任，以及有范围证据记录（现行名称 Iknem）</td><td>会话和记录分别拥有自己的身份，不回写发布对象</td><td>只服务本次受限运行、观察和判断；会话结束后不能恢复旧权限</td></tr>
     </tbody></table></div>
-  </section>
-
-  <section class="content-rows">
-    <h2>nascent → coherent</h2>
-    <ol>
-      <li><code>elenk</code> 验证 nascent Endem 的结构和语义，不因存在 apor 项就称对象损坏。</li>
-      <li><code>pleko</code> 只从显式依赖锁定、授权决定和绑定策略取得候选。</li>
-      <li>每个 apor 项必须变成已解析、获授权决定或失败；观察不足只能在运行时产生 agno，不能用 agno 保留语义歧义。</li>
-      <li>跨 Endem 引用形成 Synem；没有跨对象消费者时保持单一 coherent Endem。</li>
-      <li>skena 的极性、telis 的 kine/mene 边界和权限只能保持或收紧，krin 不能因组合变得更容易满足。</li>
-    </ol>
-  </section>
-
-  <section class="content-rows">
-    <h2>内容形成与发布陈述不能压成一个状态</h2>
-    <ol>
-      <li>对应制品生产者先形成保留原始自然语言的制品；最终发布时按独立 Profile 移除原文，保存新身份、变换、引用重写、保留内容与损失。</li>
-      <li>受控来源伴随资料可以支持获准的来源一致性审计，但不是默认公开包、运行权限或接受决定。没有伴随资料时，验证者不能声称已经核对发布结构对原始表达的忠实性。</li>
-      <li>待签陈述必须先绑定精确内容身份、陈述类型和预期签名者；私钥始终留在外部签名系统。</li>
-      <li>一项内容可以同时拥有多项外部陈述。每项陈述分别保存签名者、包络、算法和适用范围，不能折叠为内容内的单一布尔值。</li>
-      <li>验证记录另行绑定信任根、验证政策、参考值、截止点、撤销状态和实际结果；不同依赖方可以对同一陈述作出不同判断。</li>
-      <li>签名封装不得改写被签内容；任何内容变化都产生新身份，并要求外部陈述重新绑定。</li>
-      <li>现行草案中的 <code>attested</code> 只能按上述限制阅读，不证明内容真实、当前可运行、目标已满足或权威已经接受。</li>
-    </ol>
-  </section>
-
-  <section class="content-rows">
-    <h2>外部陈述复核 → Dromen → Iknem</h2>
-    <ol>
-      <li>Drasor 对实际输入字节重新执行所需 <code>elenk</code>，不复用过期结论。</li>
-      <li>Drasor 确认每项外部陈述都绑定当前精确内容，并重新评估签名、证明类型、信任根、政策、截止点、撤销和适用范围。</li>
-      <li>Drasor 按 <a href="adr-0024-dromen-session-contract.html">ADR-0024</a> 把通过当前依赖方政策的结果，同环境、能力、预算和证据责任求交后封存 Dromen；实时句柄只保留在独立最小能力域。</li>
-      <li>后端读取 Dromen 的非秘密只读描述，返回候选或类型化能力请求，不能直接取得外部能力。</li>
-      <li>Drasor 验证请求、执行或拒绝，再把真实观察、规范化变换与 phain 分开记录为符合 IKN-CORE 抽象边界的 Drase 证据。</li>
-      <li>若 <code>telis</code> 为 <code>mene</code>，Drasor 还必须按 ADR-0016 绑定 fixed 或 elapsed 范围，记录时钟域、覆盖区间、缺口和违约预算。</li>
-      <li>求值器按照执行前固定的 <code>krin</code> 比较 <code>skena</code> 与 <code>phain</code>，形成 <code>met / unmet / agno / fault</code> 中的一个满足结果。</li>
-      <li>验证者先在精确政策、参考值、环境与截止点下评估 Iknem 有效性，再相对当前 <code>krin</code> 计算覆盖度；具名权威最后形成 <code>accepted / rejected / deferred</code> 中的一个决定。会话另行记录 <code>completed / failed / interrupted</code>。</li>
-      <li>会话结束、失败、中断或实质漂移后，Dromen 与绑定实时能力都不可再用；允许保留的运行记录只进入有范围的 Iknem 或会话事件，不能恢复权限。</li>
-    </ol>
+    <p class="callout"><strong>当前状态：</strong>以上是规范与验证方案，不是已经可用的发布系统。END-P1 只服务形成和评审；发布 Profile、裁剪编码、伴随资料格式、签名 Profile、装载器和运行组件尚未形成。</p>
   </section>
 
   <section class="content-wide">
-    <h2>现行结果域与草案限制</h2>
-    <div class="table-wrap"><table><thead><tr><th>类别</th><th>允许状态</th><th>含义</th></tr></thead><tbody>
-      <tr><td>Endem 内容形成</td><td><code>nascent / coherent / attested</code>（现行草案）</td><td><code>attested</code> 是正在修正的临时分类；真实签名、证明、验证政策、截止点和撤销必须按外部关系理解。</td></tr>
-      <tr><td>满足判断</td><td>met / unmet / agno / fault</td><td>skena 相对 phain、krin 与求值规则的工程满足结果。</td></tr>
-      <tr><td>权威决定</td><td>accepted / rejected / deferred</td><td>具名规则或主体依据满足结果、Iknem 和覆盖度作出的最终决定。</td></tr>
-      <tr><td>Drase 会话</td><td>completed / failed / interrupted</td><td>只描述一次运行怎样终止，不说明目标是否满足或已被接受。</td></tr>
-      <tr><td>Elenk</td><td>pass / fail / not-evaluated</td><td>每个请求验证层的独立结论；不能压成含义不明的成功布尔值。</td></tr>
-      <tr><td>Iknem 有效性</td><td>valid / invalid / revoked</td><td>验证者针对精确政策、参考值、环境和截止点形成的外部评估；不等同于 claim 为真。</td></tr>
-      <tr><td>证据覆盖度</td><td>sufficient / insufficient</td><td>一组有效 Iknem 是否覆盖当前 krin；不与单份记录有效性合并。</td></tr>
+    <h2>开发者按七步处理</h2>
+    <div class="flow"><div class="step">确认来源与意义</div><div class="step">形成含来源对象</div><div class="step">分层独立检查</div><div class="step">派生裁剪发布版</div><div class="step">验证外部陈述</div><div class="step">重新决定运行授权</div><div class="step">观察、判断与决定</div></div>
+    <div class="table-wrap"><table><thead><tr><th>步骤</th><th>未来责任</th><th>必须固定</th><th>停止条件</th></tr></thead><tbody>
+      <tr><td>1 · 确认来源与意义</td><td>具名规则或权威确认自然语言候选；意义确认不授予工具或运行权限</td><td>来源身份、候选结构、安全显示、语义位置、主体、范围、截止点和剩余待确认项</td><td>决定缺失、错绑、拒绝、延后、过期或撤销时，不得关闭待确认意义</td></tr>
+      <tr><td>2 · 形成</td><td>确定性生产者（现行名称 Ktisor）的 <code>ktise</code> 责任按 END-P1 形成含来源对象</td><td>实际来源文本、显式变换与损失、授权绑定、规范、Profile、配置和依赖闭包</td><td>来源不可重放、结构不闭合、目标事态不唯一或形成输入不确定时原子失败</td></tr>
+      <tr><td>3 · 检查</td><td><code>elenk</code> 执行分层检查；独立检查者（现行名称 Theor）从另一读取路径解释相同字节</td><td>原始字节、规范/Profile、请求层次、资源预算和诊断位置</td><td>容器、Profile、引用、语义、资源或独立解释失败时，不得继续发布</td></tr>
+      <tr><td>4 · 裁剪发布</td><td>未来生产者按尚未冻结的发布 Profile 派生新对象，不新增公开 <code>strip</code> 动作</td><td>保留与删除项、来源引用重写、泄露边界、损失清单、新身份和派生关系</td><td>原文泄露、引用悬空、身份复用、关系不完整或失败非原子时，不得发布</td></tr>
+      <tr><td>5 · 验证外部陈述</td><td>验证者把签名或证明重新绑定到实际发布字节</td><td>陈述类型、签名者、算法、信任根、政策、参考值、截止点和撤销状态</td><td>主体不匹配、材料不可用、策略失败、过期或撤销时，不得把陈述用于准入</td></tr>
+      <tr><td>6 · 建立会话</td><td>受限运行域（现行名称 Drasor）另行核对授权，并把允许范围封存为一次 Dromen</td><td>请求主体、实际行动者、对象、动作、目的、范围、环境、能力交集、预算和证据责任</td><td>授权未授予、能力不能求交、环境漂移、预算无界或证据责任不闭合时，不得运行</td></tr>
+      <tr><td>7 · 观察与决定</td><td>运行产生带来源的观察和 Iknem；求值器与具名权威分别形成满足结果和最终决定</td><td>结构化观察、变换、目标判据、有效性、覆盖度、会话终止和决定依据</td><td>覆盖不足返回 <code>agno</code>，观察或适配故障返回 <code>fault</code>；两者都不能提升为接受</td></tr>
     </tbody></table></div>
-    <p>这些结果域由 <a href="adr-0015-result-domains.html">ADR-0015</a> 分开。外部 Task 的 <code>completed</code>、工具返回成功或会话正常结束都不能跨域改写满足结果与最终决定。</p>
-    <p><code>mene</code> 的时间范围、连续性政策与覆盖分类由 <a href="adr-0016-mene-time-model.html">ADR-0016</a> 定义。当前没有 mene 线格式、时钟适配器或持续求值实现。</p>
-    <p>Iknem 的主体、范围、溯源、观察类别、有效性、覆盖度、决定和最小披露由 <a href="adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a> 与 IKN-CORE 定义。当前没有物理 Iknem 格式、验证器、归并器、撤销服务或决定引擎。</p>
+    <p>后一步不能弥补前一步的失败。签名不能修复错误目标，授权不能修复不完整身份，会话成功也不能替代现实证据和最终决定。</p>
   </section>
 
   <section class="content-wide">
-    <h2>为什么采用两条轴</h2>
-    <div class="table-wrap"><table><thead><tr><th>权威资料</th><th>可复用的边界</th><th>Noemion 不据此声称</th></tr></thead><tbody>
-      <tr><td><a href="https://www.rfc-editor.org/rfc/rfc9334.html">RFC 9334 RATS Architecture</a></td><td>分开 Evidence、Verifier 产生的 Attestation Result、依赖方自己的评估政策和应用决定，并要求考虑 freshness。</td><td>Endem 等同设备 Evidence，或 RATS 直接定义本项目的内容状态。</td></tr>
-      <tr><td><a href="https://github.com/in-toto/attestation/blob/main/spec/v1/statement.md">in-toto Attestation Statement</a></td><td>外部 Statement 以摘要绑定不可变 subject，并用 predicate type 说明陈述类型。</td><td>存在 Statement 就自动满足本地政策，或签名改变 subject 内容身份。</td></tr>
-      <tr><td><a href="https://slsa.dev/spec/v1.2/verification_summary">SLSA 1.2 Verification Summary Attestation</a></td><td>验证摘要显式记录 verifier、policy、输入 attestations 和 verification result；消费者仍按自己的目标验证。</td><td>SLSA 等级等同目标满足、运行授权或最终接受。</td></tr>
-      <tr><td><a href="https://guix.gnu.org/manual/en/html_node/Substitute-Authentication.html">GNU Guix substitute authentication</a><br><a href="https://guix.gnu.org/manual/en/html_node/Invoking-guix-challenge.html">GNU Guix challenge</a></td><td>把制品内容、签名认证和独立构建结果比较分开；差异可以揭示不可复现或潜在篡改。</td><td>签名有效就证明构建正确，或差异本身决定哪一方可信。</td></tr>
-      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks">MCP 2025-11-25 Tasks</a></td><td>外部任务状态描述被包装请求的执行生命周期，且当前仍是实验能力。</td><td>远端 <code>completed</code> 能成为 Endem 内容状态、满足结果或本地接受决定。</td></tr>
+    <h2>裁剪不是删除一个字段</h2>
+    <p class="lead">形成版到发布版是有损、可定位且产生新身份的派生过程。直接删除 <code>rhem.content</code> 会留下来源引用、诊断范围、签名和验证责任不清的问题。</p>
+    <div class="table-wrap"><table><thead><tr><th>常见错误</th><th>为什么不安全</th><th>正确边界</th></tr></thead><tbody>
+      <tr><td>发布版复用形成版身份</td><td>两个不同字节对象被当作同一主体，签名、缓存和政策可能错绑</td><td>分别计算完整身份，并保存明确的裁剪派生关系</td></tr>
+      <tr><td>只删除原文，保留来源区间</td><td>引用可能悬空，读取器却误以为结构仍然闭合</td><td>发布 Profile 必须定义不泄露原文的来源绑定，或重写、移除相关引用</td></tr>
+      <tr><td>公开低熵原文的裸摘要</td><td>攻击者可以离线枚举短句，摘要并不自动提供来源保密性</td><td>来源关联必须经过披露威胁分析，受控伴随资料默认不进入公开包</td></tr>
+      <tr><td>发布版继承形成版签名或权限</td><td>旧陈述绑定的是另一个精确对象，旧授权也可能不覆盖发布用途</td><td>面向发布字节重新生成陈述、验证记录和使用授权</td></tr>
+      <tr><td>运行路径自动读取伴随资料</td><td>审计材料可能包含原文或敏感范围，读取资格也不等于执行权限</td><td>来源一致性审计通过独立受控路径完成，运行路径只取得必需最小信息</td></tr>
     </tbody></table></div>
+    <p><a href="https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Separate-Debug-Files.html">GNU GDB 的独立调试文件</a>与 <a href="https://sourceware.org/binutils/docs/binutils/objcopy.html">GNU Binutils <code>objcopy</code></a>展示了完整对象、裁剪对象和伴随资料可以分开保存并显式关联。Noemion 只采用这种制品分层，不照搬 ELF、DWARF、<code>.gnu_debuglink</code>、CRC、build ID 或字段删除语义。</p>
   </section>
 
-  <section class="content-band">
-    <h2>未来实现顺序</h2>
-    <p>当前没有组件实现。第一条切片限制为“受控来源表达 → 确定性投影 → <code>ktise</code> → nascent Endem → <code>elenk/theor</code> → 差分与复现验证”。最小格式、两条读取路径、恶意语料和字节复现稳定后，项目才评估组合、发布与受控运行。</p>
+  <section class="content-wide">
+    <h2>装载前重新决定能否执行</h2>
+    <div class="table-wrap"><table><thead><tr><th>核对域</th><th>必须回答的问题</th><th>不能代替它的信号</th></tr></thead><tbody>
+      <tr><td>精确对象</td><td>实际输入是否与允许的身份域、对象种类、规范、物理表示、Profile 和完整摘要完全一致</td><td>文件名、路径、URL、版本标签、短摘要或 build ID</td></tr>
+      <tr><td>陈述与验证</td><td>哪些陈述绑定当前对象，验证者依据什么信任根、政策、截止点和撤销状态接受它们</td><td>签名存在、密钥 ID、透明日志条目或生产者自述</td></tr>
+      <tr><td>动作授权</td><td>谁允许哪个行动者，以什么目的、范围、条件和期限对当前对象执行什么动作</td><td>意义确认、登录成功、角色名称、Agent Card 或界面点击</td></tr>
+      <tr><td>环境与能力</td><td>当前环境是否仍匹配，协议、对端、适配器、政策与 Dromen 的能力交集是否非空且有界</td><td>远端能力声明、历史会话或外部 Task 状态</td></tr>
+      <tr><td>证据责任</td><td>运行后需要观察什么、由谁产生、如何覆盖目标判据，哪些秘密和实时句柄必须外置</td><td>日志数量、工具退出码、模型置信度或会话正常结束</td></tr>
+    </tbody></table></div>
+    <p>只有这些问题同时得到允许答案，Drasor 才能建立一次只读 Dromen。内容形成状态、外部陈述有效性、动作授权、<code>met / unmet / agno / fault</code> 满足结果、<code>completed / failed / interrupted</code> 会话终止、Iknem 有效性与覆盖度必须分别保存。</p>
+    <p class="callout"><strong>草案限制：</strong>现行 END-CORE 的 <code>nascent / coherent / attested</code> 和 DRO-CORE 的 <code>subject.attested</code> 仍保留在规范中。<code>attested</code> 只能按“存在另行核对的外部关系”理解，不能表示内容永久可信、当前获准运行或已经满足目标。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>规范来源与当前上限</h2>
+    <div class="table-wrap"><table><thead><tr><th>资料</th><th>用于核对什么</th><th>不能推出什么</th></tr></thead><tbody>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE</a>、<a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a> 与 <a href="adr-0036-source-bearing-and-stripped-release.html">ADR-0036</a></td><td>内容形成、外部授权伴随关系、形成版与裁剪发布版边界</td><td>发布 Profile、裁剪工具或签名系统已经实现</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-core.md">ID-CORE</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md">AUT-CORE</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md">DRO-CORE</a> 与 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-core.md">IKN-CORE</a></td><td>精确身份、陈述、授权、会话契约、观察、覆盖度与决定的责任边界</td><td>密码算法、政策语言、会话格式、证据容器或运行组件已经确定</td></tr>
+      <tr><td><a href="https://www.rfc-editor.org/rfc/rfc9334.html">RFC 9334 RATS</a>、<a href="https://github.com/in-toto/attestation/blob/main/spec/v1/statement.md">in-toto Statement</a> 与 <a href="https://slsa.dev/spec/v1.2/">SLSA 1.2</a></td><td>分开不可变主体、外部陈述、验证者政策、验证结果和依赖方使用决定</td><td>这些标准直接定义 Endem、来源忠实性、目标满足或运行授权</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks">MCP 2025-11-25 Tasks</a></td><td>外部任务状态只描述被包装请求的执行生命周期；截至 2026-07-16 仍为实验能力</td><td>远端 <code>completed</code> 成为 Endem 内容状态、本地满足结果或最终接受决定</td></tr>
+    </tbody></table></div>
+    <p><strong>限制条件：</strong>当前没有 Ktisor、Theor、Drasor、裁剪发布器、签名器、验证器、授权服务、Dromen 构造器或 Iknem 记录器。页面描述的是开发者应遵守的对象边界和验证顺序，不是安装或运行说明。</p>
   </section>
   <div class="next-prev"><a href="index.html">← 架构设计</a><a href="decisions.html">架构决策 →</a></div>
 </main>

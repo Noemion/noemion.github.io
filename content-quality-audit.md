@@ -676,6 +676,16 @@ GNU Coreutils `timeout`、Make job slots 与 Guix 容器环境只保留为终止
 
 本轮只重构公开解释、页面质量契约和审计记录。ID-CORE、十二项条款、登记、威胁模型、场景、向量、身份域、摘要示例和现行结果边界均未改变，也没有创建摘要器、签名器、验证器、证书 Profile、透明日志客户端、可复现构建系统、发布组件或 Semantic Key。
 
+## Endem 生命周期开发者路径二次复核 · 2026-07-16
+
+生命周期页已经把内容形成与外部陈述分成两条轴，但仍以九个章节依次展开状态、主流程、消费者、形成、签名、运行、结果域、外部资料和实现顺序。尚未冻结的发布 Profile 与尚未实现的动作混在完整流程中，容易让开发者误以为形成版会经过现有流水线升级为可运行发布物；形成版、裁剪发布版、外部验证关系和一次会话的身份差异也需要跨多节才能恢复。
+
+当前页面从一次依赖升级发布开始，先区分含来源形成版、裁剪发布版、外部陈述与验证记录、一次会话与运行记录四类对象，再按意义确认、形成、独立检查、裁剪派生、陈述验证、运行授权和观察决定七步说明停止条件。裁剪发布单独说明身份复用、来源引用悬空、低熵摘要枚举、签名权限继承和伴随资料越权风险；装载阶段则按精确对象、陈述验证、动作授权、环境能力和证据责任重新准入。页面收敛为五个章节、五张表和二十五行表体，并明确 END-P1 只服务形成与评审、发布 Profile 尚未冻结、所有动作和组件仍未实现。
+
+权威资料按复核日重新确认：[GNU GDB 的独立调试文件](https://www.sourceware.org/gdb/current/onlinedocs/gdb.html/Separate-Debug-Files.html)与 [GNU Binutils `objcopy`](https://sourceware.org/binutils/docs/binutils/objcopy.html)支持完整对象、裁剪对象和伴随资料分开保存并显式关联，但不定义 Endem 字段、身份或来源证明。[RFC 9334 RATS](https://www.rfc-editor.org/rfc/rfc9334.html)、[in-toto Statement](https://github.com/in-toto/attestation/blob/main/spec/v1/statement.md)与 [SLSA 1.2](https://slsa.dev/spec/v1.2/)把不可变主体、外部陈述、验证政策、验证结果和依赖方决定分开；这些资料不证明原始表达到目标结构的忠实性，也不授予运行权限。[MCP 2025-11-25 Tasks](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks)截至复核日仍为实验能力，其 <code>completed</code> 只描述被包装请求的外部执行状态。
+
+本轮只重构公开解释、页面质量契约和审计记录。END-CORE、END-P1、ID-CORE、AUT-CORE、DRO-CORE、IKN-CORE、ADR、登记、向量、形成状态和结果域均未改变，也没有创建发布 Profile、裁剪命令、伴随资料格式、签名系统、授权服务、装载器、会话构造器、证据记录器或组件实现。
+
 ## 重新审计条件
 
 - 新增正式制品、子命令、进程或仓库。
