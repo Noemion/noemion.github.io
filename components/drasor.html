@@ -1,158 +1,100 @@
 ---
 layout: default
-title: "Drasor · 隔离实现运行器"
+title: "Drasor · 受限运行边界"
 page_role: "content"
 footer_text: "Noemion · Drasor"
 permalink: "/components/drasor.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">系统组件</a><span aria-hidden="true">/</span><span>Drasor</span></nav>
-  <header class="content-introduction"><h1>Drasor</h1><p>在隔离权限域重新检查待运行制品，只授予本次实现需要的能力，并记录有范围的证据。</p><div class="badges"><span class="badge">Isolated Domain</span><span class="badge">Dromen</span><span class="badge">Least Capability</span><span class="badge">Iknem</span></div></header>
+  <header class="content-introduction"><h1>受限运行边界</h1><p>Drasor 未来负责把一个已检查的目标放进一次性会话，限制模型能请求的能力，并把实际观察与最终决定分开记录。</p><div class="badges"><span class="badge">受限运行边界</span><span class="badge">一次性会话</span><span class="badge">最小能力</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-stack">
-    <h2>为什么 Drasor 不能并入模型</h2>
-    <p class="lead">模型可以提出候选和能力请求，却不能证明请求已获授权、工具结果真实或任务已经完成。Drasor 因此把装载、能力、观察、预算和决定策略留在求解后端之外。</p>
-    <p>Drasor 是 <code>endem drase</code> 背后的隔离域。它可以调用 Ktisor 的制品形成侧检查接口，但不得链接 Ktisor 写入器，也不得修改精确制品或外部签名陈述。求解后端与能力适配器还应进一步隔离。</p>
+    <h2>用一次依赖更新理解 Drasor</h2>
+    <p class="lead">假设目标是“更新服务依赖，并确认当前版本可以发布”。模型可以建议改动、请求读取清单或运行测试，但它既没有默认文件权限，也不能把“命令退出成功”直接写成“目标已经满足”。</p>
+    <div class="flow"><div class="step">精确 Endem / Synem 与外部陈述</div><div class="step">政策、环境、能力与预算求交</div><div class="step">封存一次 Dromen</div><div class="step">模型提出补丁或类型化能力请求</div><div class="step">控制面授权并调用适配器</div><div class="step">实际观察形成 Iknem</div><div class="step">krin 判断满足情况</div><div class="step">具名权威另行决定</div></div>
+    <p>测试服务报告完成，只能证明一次外部任务到达其终态；本地仍要核对锁文件、目标平台、安全政策和判据要求。Drasor 记录这条责任链，却不能给自己的记录填写“真实”“覆盖充分”或“最终接受”。</p>
+    <p class="callout"><strong>名称仍在研究：</strong>Drasor 是设计阶段名称，读音流畅度、口头区分度与发布拼写尚未经过使用者验证。讨论接口时应先说“受限运行边界”，再用 Drasor 指向这里的定义。</p>
   </section>
 
   <section class="content-wide">
-    <h2>权威输入与输出</h2>
-    <div class="table-wrap"><table><thead><tr><th>方向</th><th>内容</th><th>边界</th></tr></thead><tbody>
-      <tr><td>输入</td><td>Endem 精确字节或 Synem 精确成员闭包，以及适用外部陈述</td><td>重新验证内容身份、陈述主体、签名者、验证政策、截止点、撤销、闭包绑定和实际摘要，不复用过期结论；Synem 物理格式尚未定义。</td></tr>
-      <tr><td>输入</td><td>运行策略与 <code>krin</code></td><td>固定能力上限、预算、停止、观察、证据、人工升级和决定权威；只能收紧制品要求。</td></tr>
-      <tr><td>输入</td><td>后端绑定与能力目录</td><td>模型或求解器与可用能力的身份、版本和参数结构；描述仍是不可信声明。</td></tr>
-      <tr><td>会话契约</td><td>Dromen</td><td>按 DRO-CORE 只读、一次性、不可序列化；不保存跨会话能力句柄。</td></tr>
-      <tr><td>输出</td><td>运行记录</td><td>符合 IKN-CORE 抽象边界的候选、能力请求、观察、预算、错误、运行与决定记录，以及彼此分离的满足、决定和会话结果；物理 Iknem 格式尚未定义。</td></tr>
-      <tr><td>消费者</td><td>用户、CI、审计和指定外部权威</td><td>模型或 Drasor 自述不能成为唯一决定依据。</td></tr>
+    <h2>为什么运行边界不能并入模型</h2>
+    <p>模型输出是候选，不是权限、观察或决定。若模型进程同时持有凭据、执行工具、解释结果并宣布完成，一次提示注入、工具描述污染或后端故障就可能跨过所有防线。Drasor 因此把装载、授权、能力句柄、预算、观察和停止策略留在求解后端之外。</p>
+    <div class="table-wrap"><table><thead><tr><th>参与者</th><th>可以做什么</th><th>不能自行决定什么</th></tr></thead><tbody>
+      <tr><td>模型或求解器</td><td>提出候选改动、解释和类型化能力请求</td><td>实际权限、工具结果真实性、目标满足或最终接受</td></tr>
+      <tr><td>Drasor 控制面</td><td>检查请求、政策、预算与当前状态，执行或拒绝已登记能力</td><td>改写 Endem、扩大授权来源或代替具名决定权威</td></tr>
+      <tr><td>能力适配器</td><td>在单一能力边界内访问文件、网络、进程或外部协议</td><td>把远端描述当成本地授权，把返回文本当成已验证事实</td></tr>
+      <tr><td>判断与决定责任</td><td>依据 <code>krin</code> 和有范围的 Iknem 形成满足结果；由具名权威形成决定</td><td>由模型评分、会话成功或证据数量替代政策</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>Iknem 记录与评估边界</h2>
-    <p class="lead">Drasor 可以生产有范围的记录，但不能给自己的记录填写“真实”“有效”“覆盖充分”或“最终接受”。</p>
-    <ul>
-      <li>记录种类分为 observation、derivation、attestation、appraisal 与 decision-record；来源类别另分为直接观察、确定性派生、外部断言、人工判断与模型候选。</li>
-      <li>原始返回、规范化变换、phain 与主张分别保存；模型解释始终保持 model-candidate，不能升级为直接观察。</li>
-      <li>签名和摘要只支持完整性与来源认证。验证者依据精确政策、参考值、环境和截止点形成 valid、invalid 或 revoked。</li>
-      <li>证据集合只相对当前 <code>krin</code> 与观察责任形成 sufficient 或 insufficient；重复日志、更多签名或模型评分不能补齐缺失范围。</li>
-      <li>decision-record 只记录具名权威已经作出的决定，不会让 Drasor 获得决定权限。完整边界见 <a href="../architecture/adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a>。</li>
-    </ul>
+    <h2>运行前必须封闭什么</h2>
+    <p class="lead">Drasor 不是把制品和凭据一起塞进提示词。它先重新验证实际输入，再把本次会话允许看见和使用的部分求交为只读 Dromen。</p>
+    <div class="table-wrap"><table><thead><tr><th>封闭内容</th><th>来源</th><th>变化后的处理</th></tr></thead><tbody>
+      <tr><td>精确目标与依赖闭包</td><td>Endem 精确字节；如适用，则为已固定且重新检查的 Synem 成员闭包</td><td>身份或闭包变化使旧会话失效，不能在会话中偷偷下载新成员</td></tr>
+      <tr><td>适用外部陈述</td><td>绑定精确主体的签名、来源、验证政策、截止点、撤销和验证结果</td><td>到期、撤销或政策变化后重新验证，不复用旧结论</td></tr>
+      <tr><td>能力与环境</td><td>具名政策、能力目录、目标资源、后端和适配器身份</td><td>新增权限或 step-up 授权建立新会话，不原地扩大 Dromen</td></tr>
+      <tr><td>预算与停止条件</td><td>时间、调用数、输出量、重试、副作用和终止策略</td><td>预算耗尽按预注册策略中断，不能让模型无限重试</td></tr>
+      <tr><td>观察与决定责任</td><td><code>krin</code>、所需 Iknem 范围和具名决定权威</td><td>判据、观察范围或决定者变化时重新建立会话</td></tr>
+    </tbody></table></div>
+    <p>Dromen 只保存本次运行需要的非秘密语义与能力描述，不包含 Bearer token、文件描述符、网络连接或其他实时句柄，也不进入派生制品、签名包络、对象仓库或模型缓存。现行 DRO-CORE 仍使用 <code>attested</code> 概括一部分准入条件，但实现不能把多项外部关系压成内容自身的布尔状态。完整抽象契约见 <a href="../specifications/dromen.html">DRO-CORE</a> 与 <a href="../architecture/adr-0024-dromen-session-contract.html">ADR-0024</a>。</p>
   </section>
 
   <section class="content-wide">
-    <h2>Dromen 是一次会话的只读契约</h2>
-    <p>Dromen 是 Drasor 按 <a href="../architecture/adr-0024-dromen-session-contract.html">ADR-0024</a> 从精确制品、适用外部陈述、当前验证结果、政策、环境、能力、预算和证据责任求交后封存的会话契约。现行 DRO-CORE 用 <code>attested</code> 概括其中一部分准入条件，但实现设计不能把多项外部关系压成内容自身的布尔状态。Dromen 只披露本次实现需要的非秘密语义与能力描述，不保存运行观察和最终结果。</p>
-    <ul>
-      <li>Dromen 不进入派生制品、外部签名包络、对象仓库或模型缓存。</li>
-      <li>Dromen 不包含凭据、Bearer token、文件描述符、网络连接或其他实时句柄。</li>
-      <li>后端只能读取 Dromen 提供的只读值并返回类型化请求；step-up 授权必须建立新会话。</li>
-      <li>环境、政策、对象、权威、能力、预算或证据责任发生实质变化时，旧 Dromen 失效而不是原地更新。</li>
-      <li>会话结束后 Dromen 与绑定实时能力都不可再用；允许保留的信息进入有范围和脱敏规则的 Iknem 或会话事件，但不能恢复旧权限。</li>
-    </ul>
-  </section>
-
-  <section class="content-wide">
-    <h2>运行循环</h2>
-    <div class="flow"><div class="step">检查精确字节</div><div class="step">复核外部陈述与当前政策</div><div class="step">建立 Dromen</div><div class="step">后端提出候选或请求</div><div class="step">策略检查</div><div class="step">执行或拒绝</div><div class="step">phain → Iknem</div><div class="step">krin → 继续或升级</div></div>
+    <h2>一次能力请求怎样穿过边界</h2>
     <ol>
-      <li>Loader 验证实际输入并在失败时原子拒绝，不建立部分 Dromen。</li>
-      <li>控制平面按最小披露和能力上限创建 Dromen。</li>
-      <li>后端产生候选或类型化能力请求；它不能直接访问环境。</li>
-      <li>Drasor 校验参数、权限、预算、副作用、幂等和当前状态，再执行或拒绝。</li>
-      <li>真实结果先规范化为可与 skena 比较的 phain，再作为能力观察和 Drase Iknem 返回下一轮。</li>
-      <li>预注册策略读取 <code>krin</code> 和必需 Iknem，先形成 <code>met / unmet / agno / fault</code>。具名权威再形成 <code>accepted / rejected / deferred</code>；会话终止另记为 <code>completed / failed / interrupted</code>。</li>
+      <li>装载器检查实际对象、外部陈述、当前政策和环境；任一关键条件失败时原子拒绝，不留下部分 Dromen。</li>
+      <li>控制面只向后端披露完成当前步骤所需的语义和能力说明。后端返回候选或结构化请求，不能直接取得实时句柄。</li>
+      <li>控制面检查参数、调用者授权、目标资源、预算、副作用、幂等与会话状态，再把请求交给单一职责适配器或拒绝。</li>
+      <li>适配器保留原始返回和来源；确定性变换把它转换为可与 <code>skena</code> 比较的 <code>phain</code>，模型解释仍标为 model-candidate。</li>
+      <li>有范围的 observation、derivation、attestation、appraisal 与 decision-record 进入 Iknem。签名只证明来源和完整性，不能自动证明覆盖充分。</li>
+      <li>预注册策略读取 <code>krin</code> 和必需 Iknem，形成 <code>met / unmet / agno / fault</code>。具名权威再形成 <code>accepted / rejected / deferred</code>；会话终止另记为 <code>completed / failed / interrupted</code>。</li>
     </ol>
+    <p>时间覆盖、负观察、量化集合、测量不确定度和复合判断的细则属于 <a href="../specifications/endem.html">Endem 规范</a>及其 ADR；Drasor 只承担未来执行边界，不在组件说明中复制另一套判断规则。Iknem 的记录、来源与评估分层见 <a href="../specifications/iknem.html">IKN-CORE</a>。</p>
   </section>
 
   <section class="content-wide">
-    <h2>mene 的时钟与覆盖责任</h2>
-    <ul>
-      <li>Drasor 对 <code>fixed</code> 读取已经授权的 UTC 区间，不用当前机器时区重新解释来源表达。</li>
-      <li>Drasor 对 <code>elapsed</code> 绑定具名起始事件，并使用声明的单调时钟测量经过时长；墙钟回拨不能缩短目标区间。</li>
-      <li>观察适配器把覆盖区间、已知空洞、时钟分辨率、不确定度、同步和重启事件写入 Iknem。</li>
-      <li>离散采样只能支持采样时刻；覆盖空洞产生 <code>agno</code>，时钟契约故障产生 <code>fault</code>，不能默认为 <code>met</code>。</li>
-      <li>A2A Task、MCP 工具和远端遥测的时间戳只作为带来源事件，不能取得本地时钟权威。</li>
-    </ul>
-  </section>
-
-  <section class="content-wide">
-    <h2>外部协议适配</h2>
-    <p>MCP、A2A、遥测系统和供应商工具只连接 Drasor 外缘。所有远端描述和返回内容都要先经过本地版本、权限、结构和来源检查，并遵守 <a href="../specifications/adapters.html">ADP-CORE 外部协议适配边界</a>。</p>
-    <div class="table-wrap"><table><thead><tr><th>外部接口</th><th>进入 Drasor 的方式</th><th>本地边界</th></tr></thead><tbody>
-      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 当前修订（Current）</a></td><td>工具说明、参数和结果映射为本地能力请求与观察。</td><td>声明不授予权限；令牌必须绑定目标资源，不能转交给下游服务。2026-07-28 发布候选及后续版本只有正式发布并完成兼容、安全与降级复核后才进入新适配基线。</td></tr>
-      <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a></td><td>Task、Message 与 Artifact 映射为外部任务记录和候选结果。</td><td>外部状态不改变 Endem；Artifact 不是 Iknem，也不能形成最终决定。</td></tr>
-      <tr><td><a href="https://github.com/open-telemetry/semantic-conventions-genai">OpenTelemetry GenAI 语义约定独立仓库</a></td><td>仓库 README 的 Schema URL 字段仍为 <code>TODO</code>；形成可固定基线前不建立导出 Profile。</td><td>独立仓库仍在演进；输入、输出、工具参数和结果可能含敏感信息，默认不导出正文，也不把外部字段作为本地身份。</td></tr>
+    <h2>外部 Agent 协议只提供带来源的事实</h2>
+    <p>当前 Agent 生态正把互操作、身份、授权和可观测性作为独立标准化问题处理。这支持 Drasor 把协议放在受控适配边缘，而不是让协议对象取得本地语义或决定权威。</p>
+    <div class="table-wrap"><table><thead><tr><th>外部接口</th><th>可以带入什么</th><th>仍由本地负责什么</th></tr></thead><tbody>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 当前修订</a></td><td>工具说明、资源、参数与返回内容</td><td>能力登记、调用者授权和目标资源绑定；令牌透传被禁止。<a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">2026-07-28 候选版本</a>在正式发布并完成兼容与安全复核前不改变当前适配基线。</td></tr>
+      <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0</a></td><td>Task、Message、Artifact 与远端终态</td><td>每次请求的授权、本地判据和最终决定；Task completed 不等于本地 <code>met</code>，取消请求也不保证任务已取消。</td></tr>
+      <tr><td><a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a></td><td>GenAI 与 MCP 的可观测字段和稳定性标记</td><td>敏感正文披露、字段到 Iknem 的映射和导出政策；多项 GenAI 属性仍处于 Development，因此当前不固定导出 Profile。</td></tr>
+      <tr><td><a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent Standards Initiative</a></td><td>互操作协议、Agent 身份、认证与安全评估的标准化方向</td><td>Noemion 自身的对象语义、会话契约、证据范围和决定责任</td></tr>
     </tbody></table></div>
-    <p>这些资料支持互操作和可观测性，却不定义 Endem、Dromen、Iknem、权限或验收。第一阶段不接入外部智能体协议、遥测约定或模型 SDK。</p>
+    <p>外部描述首先是不可信声明；外部返回首先是带来源记录。适配边界还须遵守 <a href="../specifications/adapters.html">ADP-CORE</a> 与 <a href="../specifications/authority.html">AUT-CORE</a>，不得把远端身份、任务状态或 token 直接升级为本地权限。</p>
   </section>
 
   <section class="content-wide">
-    <h2>负观察与封闭范围责任</h2>
-    <ul>
-      <li>Drasor 必须把显式负观察、查询未命中和观察器故障记录为三种不同事实。</li>
-      <li>空日志、工具“未发现”或模型结论默认产生 <code>agno</code>，不能自动生成负极性 <code>phain</code>。</li>
-      <li>从缺席推断前，控制平面必须核对具名权威、全集、全部角色路径、时间截止、完整枚举、迟到窗口和损失边界。</li>
-      <li>同构正极性反例产生 <code>unmet</code>；观察器未按契约完成产生 <code>fault</code>。</li>
-    </ul>
-    <p>这些是 ADR-0017 的未来运行责任。当前没有 Drasor、日志收集器、完整性证明器或求值器。</p>
+    <h2>隔离必须证明什么</h2>
+    <p class="lead">“使用了容器、超时或 seccomp”只是机制名称。未来实现必须用威胁模型和测试证明能力不能越界、资源能够回收、失败不会伪装成目标结果。</p>
+    <div class="table-wrap"><table><thead><tr><th>边界</th><th>最低工程责任</th><th>需要的验证证据</th></tr></thead><tbody>
+      <tr><td>文件与网络</td><td>默认不可见，按目标资源和操作分别授权</td><td>越权路径、符号链接、重定向、DNS 与目标替换的拒绝测试</td></tr>
+      <tr><td>凭据与实时句柄</td><td>不进入提示、Dromen、日志或可序列化事件；适配器按调用使用</td><td>泄漏扫描、目标绑定、撤销和会话结束后不可复用</td></tr>
+      <tr><td>进程与资源</td><td>限制子进程、CPU、内存、输出、调用次数和嵌套并发</td><td>耗尽、派生进程、阻塞 I/O 和终止后的回收测试</td></tr>
+      <tr><td>副作用与重试</td><td>每项能力声明副作用、幂等键和重试政策</td><td>重复提交、部分成功、超时后状态未知与补偿路径测试</td></tr>
+      <tr><td>观察与披露</td><td>原始返回、确定性变换和模型解释分层；默认不导出敏感正文</td><td>来源保留、脱敏、缺失覆盖和观察器故障的反例</td></tr>
+    </tbody></table></div>
+    <p>GNU <a href="https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html"><code>timeout</code></a> 说明信号终止和前台子进程仍有边界条件；GNU Make 的 <a href="https://www.gnu.org/software/make/manual/html_node/Job-Slots.html">job slots</a> 展示嵌套工作共享有限并发额度的做法；GNU Guix 的 <a href="https://guix.gnu.org/manual/en/guix.html#Invoking-guix-shell"><code>guix shell --container</code></a> 展示先隔离、再显式开放环境资源的纪律。这些先例能指导预算和能力设计，但都不能单独证明 Drasor 已实现安全隔离。</p>
   </section>
 
   <section class="content-wide">
-    <h2>量化聚合责任</h2>
-    <ul>
-      <li>装载时重新核对集合身份、成员权威、截止点、身份规则和唯一量化角色，不能由运行查询替换规范范围。</li>
-      <li>把每个不同成员的观察分别形成结果与 Iknem 链接，再按 ADR-0018 的决定性规则聚合。</li>
-      <li>重复事件、重试和多份证据不得增加成员数；范围不完整为 <code>agno</code>，成员求值契约故障为 <code>fault</code>。</li>
-      <li>当前没有成员目录、聚合器或量化求值器；这些只是未来 Drasor 的责任边界。</li>
-    </ul>
-  </section>
-
-  <section class="content-wide">
-    <h2>测量判断责任</h2>
-    <ul>
-      <li>装载时重新核对构念、总体、方法与版本、窗口、单位、换算、纳入规则、最小样本、聚合器、阈值和不确定度政策。</li>
-      <li>保留原始观察到规范单位、聚合结果和阈值分类的完整 Iknem 链；不得用显示舍入值、排名或模型置信度替换判断依据。</li>
-      <li>固定基准只能支持固定项目；推广结论必须使用预注册统计模型。区间跨越阈值为 <code>agno</code>，测量契约故障为 <code>fault</code>。</li>
-      <li>当前没有采集器、统计引擎或测量求值器；这些只是 ADR-0019 规定的未来 Drasor 责任边界。</li>
-    </ul>
-  </section>
-
-  <section class="content-wide">
-    <h2>复合判断责任</h2>
-    <ul>
-      <li>装载时核对复合结构有限无环、只使用 <code>all_of / any_of</code>，并确认每个事态叶与一个判据叶对齐。</li>
-      <li>先形成叶级 <code>met / unmet / agno / fault</code>，再按 ADR-0020 的固定矩阵组合；不得直接组合原始值或运行自由表达式。</li>
-      <li>只有决定性反例或见证才允许短路，并保存决定依据、已求值叶、未求值叶、全部 Iknem 与停止原因。</li>
-      <li>当前没有组合求值器；这些只是 ADR-0020 规定的未来 Drasor 责任边界。</li>
-    </ul>
-  </section>
-
-  <section class="content-wide">
-    <h2>Synem 激活责任</h2>
-    <ul>
-      <li>只对固定、已重新验证的 Synem 闭包求值激活守卫，不在会话中发现或下载新成员。</li>
-      <li>守卫绑定精确成员结果事件、结果域、期望值、截止点和授权策略；裸状态字符串不能决定激活。</li>
-      <li>只记录 <code>active / inactive / unresolved / error</code>；未激活成员没有满足结果，激活也不创建能力句柄。</li>
-      <li>依据变化、撤销或过期时重新检查或使会话失效，并保留追加事件。完整边界见 <a href="../architecture/adr-0021-synem-closure-and-activation.html">ADR-0021</a>。</li>
-    </ul>
-  </section>
-
-  <section class="content-wide">
-    <h2>失败与拒绝责任</h2>
-    <div class="table-wrap"><table><thead><tr><th>失败</th><th>Drasor 必须记录</th><th>后续状态</th></tr></thead><tbody>
-      <tr><td>Load rejected</td><td>对象身份、失败层、规则和位置</td><td>会话 <code>failed</code>；不创建 Dromen，也不伪造满足结果。</td></tr>
-      <tr><td>Capability denied</td><td>请求摘要、策略版本、拒绝规则和当前状态</td><td>按预注册策略继续或 <code>interrupted</code>；若必需观察无法形成则为 <code>agno</code>，决定保持 <code>deferred</code> 或由具名政策拒绝。</td></tr>
-      <tr><td>Backend failed</td><td>后端身份、稳定错误类别、预算和安全诊断</td><td>会话 <code>failed</code> 或 <code>interrupted</code>；求值无法完成时为 <code>fault</code>，不得推成 <code>unmet</code>。</td></tr>
-      <tr><td>Budget exhausted</td><td>预算单位、限值、已用量和停止位置</td><td>会话 <code>interrupted</code>；满足结果按已有观察为 <code>agno</code> 或 <code>fault</code>。</td></tr>
-      <tr><td>State drift</td><td>期望与实际对象、环境、依赖或能力身份</td><td>旧 Dromen 失效，会话中断或失败；不从漂移推断目标为假。</td></tr>
-      <tr><td>Iknem insufficient</td><td>缺失的 krin 条件、证据强度和决定权威</td><td>满足结果为 <code>agno</code>，决定为 <code>deferred</code> 或由具名关闭失败政策 <code>rejected</code>；不得 <code>accepted</code>。</td></tr>
+    <h2>代表性失败怎样分类</h2>
+    <div class="table-wrap"><table><thead><tr><th>失败</th><th>必须保留的事实</th><th>不能得出的结论</th></tr></thead><tbody>
+      <tr><td>装载拒绝</td><td>实际对象身份、失败层、规则与位置</td><td>不能创建部分 Dromen，也不能伪造 <code>unmet</code></td></tr>
+      <tr><td>能力被拒绝</td><td>请求摘要、调用者、目标资源、政策版本和拒绝规则</td><td>不能自动扩大权限；缺少必需观察通常留下 <code>agno</code></td></tr>
+      <tr><td>后端或适配器故障</td><td>组件身份、稳定错误类别、预算与已知副作用</td><td>不能把工具故障改写为目标不满足</td></tr>
+      <tr><td>预算耗尽</td><td>预算单位、限值、已用量和停止位置</td><td>不能把会话 <code>interrupted</code> 写成任务完成</td></tr>
+      <tr><td>环境或政策漂移</td><td>期望与实际身份、版本、权限和生效时间</td><td>不能继续复用旧 Dromen 或旧验证结论</td></tr>
+      <tr><td>Iknem 范围不足</td><td>缺失判据、覆盖范围、证据强度和决定权威</td><td>不能仅因日志多、签名多或模型评分高而 <code>accepted</code></td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-band">
-    <h2>当前状态与待确定接口</h2>
-    <p>未来 Drasor 必须按 <a href="../specifications/diagnostics.html">DIA-CORE</a> 保留协议错误与工具执行错误的来源差异。恢复分类只能帮助选择下一步，不能自动提权、扩大 Dromen、无限重试或把后端失败改写成目标不满足。</p>
-    <p>当前策略要求隔离权限域、把后端视为不可信、隔离能力句柄，并分开会话契约、证据、结果、时间、否定、量化、测量与复合判断。模型、控制面、凭据、适配进程、文件、网络、资源终止和观察怎样部署与验证，仍在<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">非规范隔离研究提案</a>中研究；容器、seccomp 或超时名称不构成实现证据。Drasor API、能力请求与观察事件、运行记录、沙箱、时间与预算计数器、封闭、测量与组合声明字段、事件编码和 Iknem 物理格式都是待定内容。</p>
+    <h2>当前状态与限制条件</h2>
+    <p>当前已有成果是 <code>endem drase</code> 背后的 Drasor 职责边界、Dromen 会话契约、Iknem 记录分层、满足结果与决定结果的分离，以及模型后端和实时能力不得混为一体的架构约束。它可以调用 Ktisor 的制品形成侧检查接口，但不得链接 Ktisor 写入器，也不得修改精确制品或外部签名陈述。</p>
+    <p>当前没有 Drasor 实现、运行 API、沙箱、能力适配器、预算计数器或 Iknem 物理格式。模型、控制面、凭据、适配进程、文件、网络、终止与观察的部署方式仍在<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">非规范隔离研究提案</a>中研究；未来实现必须通过相应威胁测试后，才能陈述具体隔离能力。</p>
   </section>
   <div class="next-prev"><a href="theor.html">← Theor</a><a href="../architecture/endem-lifecycle.html">Endem 生命周期 →</a></div>
 </main>

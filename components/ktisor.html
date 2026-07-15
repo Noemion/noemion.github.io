@@ -7,12 +7,20 @@ permalink: "/components/ktisor.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">系统组件</a><span aria-hidden="true">/</span><span>Ktisor</span></nav>
-  <header class="content-introduction"><h1>Ktisor</h1><p>未来负责确定性形成、验证、组合和锁定 Endem 与 Synem，是唯一可以写规范制品的组件。</p><div class="badges"><span class="badge">Deterministic Maker</span><span class="badge">Sole Writer</span><span class="badge">Fail Closed</span></div></header>
+  <header class="content-introduction"><h1>确定性制品形成器</h1><p>Ktisor 未来负责根据已授权语义决定形成、检查、组合和锁定 Endem 与 Synem，是唯一可以写规范制品的组件。</p><div class="badges"><span class="badge">确定性形成</span><span class="badge">唯一写入者</span><span class="badge">关闭失败</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-stack">
     <h2>为什么 Ktisor 不能省略</h2>
-    <p class="lead">如果自然语言前端、模型、组合器和发布工具各自决定一套对象语义，Endem 将无法复现，也无法判断六个语义面是否在转换中保持。Ktisor 集中执行投影、规范化、状态机和写入不变量，所有合格 Endem/Synem 都必须经过它。</p>
-    <p>Ktisor 可以是一组库而不是独立服务，但模型、Drasor、Theor 和外部签名系统不能绕过它写入规范字节或提升 Endem 状态。</p>
+    <p class="lead">如果自然语言前端、模型、组合器和发布工具各自形成一套对象语义，Endem 将无法复现，也无法判断六个语义面是否在转换中保持。Ktisor 只把已授权的投影决定确定性地形成制品，并集中执行引用闭包、格式和写入不变量；它不能替授权者选择意义。</p>
+    <p>Ktisor 可以是一组库而不是独立服务，但模型、Drasor、Theor 和外部签名系统不能绕过它写入规范字节或提升 Endem 状态。未声明的文本规范化不得参与身份或相等比较。</p>
+    <p class="callout"><strong>名称仍在研究：</strong>Ktisor 是设计阶段名称，读音流畅度、口头区分度与发布拼写尚未经过使用者验证。讨论接口时应先说“确定性制品形成器”，再用 Ktisor 指向这里的定义。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>用一次依赖更新理解 Ktisor</h2>
+    <p>仍以“更新服务依赖，并确认当前版本可以发布”为例：受控来源给出服务、目标版本、允许的变化、发布判据和待确认项；模型可以提出包名或版本候选，但有权主体必须确认这些候选怎样投影到六个语义面。Ktisor 随后按固定 Profile 形成精确 Endem，检查依赖引用与 <code>apor</code>，并返回绑定实际字节的形成记录。</p>
+    <div class="flow"><div class="step">受控来源</div><div class="step">模型只提候选</div><div class="step">有权主体确认投影</div><div class="step">Ktisor 确定性形成</div><div class="step">Endem + Ktise Iknem</div><div class="step">Theor / pleko / Drasor 消费</div></div>
+    <p>若“发布判据”仍有两种解释，Ktisor 必须保留明确 <code>apor</code> 或拒绝形成，不能用默认提示、文本猜测或最后一个模型答案消除歧义。</p>
   </section>
 
   <section class="content-wide">
@@ -62,7 +70,7 @@ permalink: "/components/ktisor.html"
   <section class="content-band">
     <h2>当前状态与待确定接口</h2>
     <p>未来 Ktisor 的每个拒绝都必须遵守 <a href="../specifications/diagnostics.html">DIA-CORE</a>：固定实际输入和规则版本，按结构先于语义的顺序选择唯一主诊断，并在阻断失败时不留下部分可信制品。</p>
-    <p>Ktisor 的唯一写入责任、确定性、状态机和失败边界已经作为架构约束采用。当前没有 Ktisor 实现、END-P1 写入器或可执行组件；SYN-CORE 目前只有抽象闭包规则，没有 Synem 物理写入格式。组合策略、发布配置和稳定诊断 ABI 也仍待确定。</p>
+    <p>Ktisor 的唯一写入责任、确定性形成和失败边界已经作为架构约束采用。当前没有 Ktisor 实现、END-P1 写入器或可执行组件；SYN-CORE 目前只有抽象闭包规则，没有 Synem 物理写入格式。组合策略、发布配置和稳定诊断 ABI 也仍待确定。</p>
   </section>
   <div class="next-prev"><a href="index.html">← 系统组件</a><a href="theor.html">Theor →</a></div>
 </main>

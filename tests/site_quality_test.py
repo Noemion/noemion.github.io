@@ -467,6 +467,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "components/ktisor.html": {
         "required": (
             "Ktisor",
+            "用一次依赖更新理解 Ktisor",
+            "名称仍在研究",
+            "已授权的投影决定",
             "Endem",
             "确定性",
             "模型",
@@ -477,6 +480,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "components/theor.html": {
         "required": (
             "Theor",
+            "用一次依赖更新理解 Theor",
+            "名称仍在研究",
             "theor",
             "独立",
             "只读",
@@ -488,6 +493,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "components/drasor.html": {
         "required": (
             "Drasor",
+            "用一次依赖更新理解 Drasor",
+            "名称仍在研究",
+            "一次能力请求怎样穿过边界",
+            "隔离必须证明什么",
+            "外部 Agent 协议只提供带来源的事实",
             "Dromen",
             "drase",
             "类型化能力请求",
@@ -500,6 +510,14 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "具名权威再形成",
             "模型",
             "不可信",
+        ),
+        "forbidden_patterns": (
+            r"mene 的时钟与覆盖责任",
+            r"负观察与封闭范围责任",
+            r"量化聚合责任",
+            r"测量判断责任",
+            r"复合判断责任",
+            r"Synem 激活责任",
         ),
     },
     "specifications/endem.html": {
@@ -3373,14 +3391,14 @@ def validate_jekyll_sources():
             "撤销与重放显式",
         ),
         "components/drasor.html": (
-            "A2A 1.0 版本化规范",
-            "MCP 2025-11-25 当前修订（Current）",
-            "令牌必须绑定目标资源",
-            "github.com/open-telemetry/semantic-conventions-genai",
-            "Schema URL 字段仍为",
-            "默认不导出正文",
+            "A2A 1.0",
+            "MCP 2025-11-25 当前修订",
+            "目标资源绑定",
+            "OpenTelemetry 语义约定 1.43.0",
+            "Development",
+            "默认不导出敏感正文",
             "completed / failed / interrupted",
-            "不得推成",
+            "不能把工具故障改写为目标不满足",
         ),
         "development/implementation-roadmap.html": (
             "补丁号不进入协议协商",

@@ -7,12 +7,20 @@ permalink: "/components/theor.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">系统组件</a><span aria-hidden="true">/</span><span>Theor</span></nav>
-  <header class="content-introduction"><h1>Theor</h1><p>为 <code>endem theor</code> 提供不共享 Ktisor 解析代码的有界只读实现，用于观察、比较和交叉检查。</p><div class="badges"><span class="badge">Independent</span><span class="badge">Read Only</span><span class="badge">No Trust Upgrade</span></div></header>
+  <header class="content-introduction"><h1>独立只读检查器</h1><p>Theor 未来为 <code>endem theor</code> 提供不共享 Ktisor 解析代码的有界只读实现，用于观察、比较和交叉检查。</p><div class="badges"><span class="badge">独立实现</span><span class="badge">只读</span><span class="badge">不提升信任</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-stack">
     <h2>为什么需要独立 Theor</h2>
     <p class="lead">如果查看器复用 Ktisor 的形成侧解析器，两个入口会继承相同的字段误解、边界错误和生成代码缺陷。Theor 只依据公开规范直接读取原始字节，让开发者和一致性测试获得第二种解释路径。</p>
     <p class="callout"><strong>独立不是换一个命令名：</strong>Theor 不得链接 Ktisor 的形成侧解析器、写入器、组合器或错误分类实现。它也不能用 BFD 的通用内部表示代替 Endem 逐字段解析。</p>
+    <p><strong>名称仍在研究：</strong>Theor 是设计阶段名称，读音流畅度、口头区分度与发布拼写尚未经过使用者验证。讨论接口时应先说“独立只读检查器”，再用 Theor 指向这里的定义。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>用一次依赖更新理解 Theor</h2>
+    <p>开发者收到“更新服务依赖”的 <code>.endem</code> 后，可以先用 Theor 查看原始记录怎样对应服务、目标版本、允许变化、发布判据和 <code>apor</code>，再把结果与 Ktisor 的形成侧检查记录比较。如果两个实现对引用范围或字段边界给出不同解释，发布应停止并回到规范调查。</p>
+    <div class="flow"><div class="step">不可信 .endem 字节</div><div class="step">Theor 独立有界解析</div><div class="step">原始记录与语义视图</div><div class="step">和形成侧结果比较</div><div class="step">一致或阻断调查</div></div>
+    <p>Theor 的作用是提供第二条可审查解释路径，不是证明制品正确。它不修复对象、不改变状态、不创建运行能力，也不向 Drasor 提供授权结论。</p>
   </section>
 
   <section class="content-wide">
