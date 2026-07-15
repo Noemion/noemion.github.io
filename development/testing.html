@@ -70,39 +70,26 @@ permalink: "/development/testing.html"
     <tr><td>模型与协议</td><td>结构合法但事实错误、恶意工具说明、版本降级、状态伪造和相关模型投票</td><td>协议版本、来源映射、提示与模型身份、偏差探针、统计区间和人工校准</td><td>外部状态、模型候选、本地诊断、<code>met</code> 与 <code>accepted</code></td></tr>
   </tbody></table></div></section>
 
-  <section id="model-evaluation" class="content-wide"><h2>模型参与评测必须限定用途</h2><p class="callout"><strong>直接结论：</strong>模型评分是有版本、有偏差且可能漂移的候选测量。它不是人工权威、统计区间、充分证据或最终决定。</p><div class="table-wrap"><table><thead><tr><th>检查</th><th>必须保存</th><th>失败时怎样处理</th></tr></thead><tbody>
-    <tr><td>评测目的</td><td>构念、用途、总体、评分说明和决定者</td><td>缺少可观察标准时保留待确认，不用模型猜测</td></tr>
-    <tr><td>实际协议</td><td>题目、候选顺序、提示、模型版本、设置、工具、重复和解析</td><td>身份或设置无法固定时不形成可比较结果</td></tr>
-    <tr><td>偏差探针</td><td>位置、长度、格式、来源、提示注入、重复和时间漂移反例</td><td>探针失败使方法在对应范围失效</td></tr>
-    <tr><td>统计汇总</td><td>estimand、评审者依赖、缺失、停止规则、区间和同分政策</td><td>区间跨越阈值时保持 <code>agno</code></td></tr>
-    <tr><td>证据与决定</td><td>原始输出、<code>model-candidate</code>、人工校准、覆盖和具名权威</td><td>多个模型投票不能自动产生 <code>sufficient</code> 或 <code>accepted</code></td></tr>
-  </tbody></table></div><p>完整的支持案例、反例、威胁与停止条件见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测与裁判边界研究提案</a>。它当前非规范，不创建评测 CORE、裁判对象、命令或组件。</p></section>
+  <section id="model-evaluation" class="content-grid"><h2>模型参与时先分清评测与更新</h2>
+    <article class="status-item"><h3>模型参与评测</h3><p>模型评分是有版本、有偏差且可能漂移的候选测量。先固定构念、用途、总体、评分说明、题目与候选顺序、提示、模型版本、解析和决定者，再用位置、长度、格式、来源、提示注入、重复与时间漂移构成偏差探针。身份或协议不能固定、探针失败、人工校准不足或区间跨越阈值时，方法只保留在已证明范围，不能生成 <code>sufficient</code> 或 <code>accepted</code>。</p><p>完整案例见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测与裁判边界研究提案</a>。</p></article>
+    <article class="status-item"><h3>模型发生更新</h3><p>训练完成、损失下降、固定种子或部署回滚都不是模型更好、可复现、可发布或目标满足的证明。先分别固定数据与反馈资格、基础模型、处理与训练活动、随机状态、派生模型身份、独立复现、行为评测、发布权威和运行监测；任一层无法闭合时，只停止对应主张，不用流水线成功补齐。</p><p>完整边界见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究提案</a>。</p></article>
+    <p class="note">两份提案当前均为非规范研究，不创建评测、裁判、训练或模型 CORE，也不证明已经存在训练平台或模型组件。</p>
+  </section>
 
-  <section class="content-wide"><h2>模型更新必须重新建立证据链</h2><p class="callout"><strong>直接结论：</strong>训练完成、损失下降、固定种子或部署回滚都不是模型更好、可复现、可发布或目标满足的证明。</p><div class="table-wrap"><table><thead><tr><th>检查</th><th>必须保存</th><th>失败时怎样处理</th></tr></thead><tbody>
-    <tr><td>数据与反馈资格</td><td>精确快照、来源、用途、权利、同意、切片、合成来源和排除</td><td>身份或资格不明时拒绝进入对应训练目的</td></tr>
-    <tr><td>训练活动</td><td>基础模型、适配器、处理、代码、参数、环境、随机状态、停止条件和输出身份</td><td>配置或实际执行无法闭合时不形成复现主张</td></tr>
-    <tr><td>独立复现</td><td>软件闭包、数据顺序、硬件、数值路径、独立产出和逐字节比较</td><td>只固定环境或种子时明确限定证据等级</td></tr>
-    <tr><td>行为评测</td><td>新旧精确模型、用途、总体、污染检查、偏差反例、统计区间和退化切片</td><td>固定基准提高不能掩盖子群或真实用途退化</td></tr>
-    <tr><td>发布与回滚</td><td>具名权威、政策、受众、部署配置、截止点、撤回和运行监测</td><td>训练或流水线成功不能自动产生 <code>accepted</code></td></tr>
-  </tbody></table></div><p>完整边界见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究提案</a>。它当前非规范，只使用直白职责短语，不创建训练 CORE、模型制品、训练平台、命令、组件或新专名。</p></section>
+  <section class="content-wide"><h2>外部机制怎样限定比较主张</h2><div class="table-wrap"><table><thead><tr><th>比较问题</th><th>可以采用的纪律</th><th>声明上限</th></tr></thead><tbody>
+    <tr><td>两份构建结果是否相同？</td><td><a href="https://guix.gnu.org/manual/en/guix.html#Invoking-guix-challenge">GNU Guix challenge</a>从独立来源取得结果；<a href="https://www.gnu.org/software/diffutils/manual/html_node/Invoking-diff.html">GNU Diffutils</a>分开相同、不同和比较故障。</td><td>相同字节不证明设计正确；差异也不选择可信一方。</td></tr>
+    <tr><td>规范形式是否保留所需信息？</td><td><a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD canonical form</a>要求披露源格式、目标格式和不可表示信息；<a href="https://www.rfc-editor.org/rfc/rfc8785.html">RFC 8785 JSON Canonicalization Scheme</a>限定输入域、数值、字符串和数组顺序。</td><td>canonical form 或可哈希 JSON 不证明来源、业务语义、权威或跨 Profile 等价。</td></tr>
+    <tr><td>模型输出与评测能支持什么？</td><td><a href="https://openai.com/index/introducing-structured-outputs-in-the-api/">OpenAI Structured Outputs</a>提供结构约束；<a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf">NIST AI 800-2 初稿</a>与 <a href="https://doi.org/10.6028/NIST.AI.800-3">NIST AI 800-3</a>分开目的、协议、统计假设和限定用途。</td><td>schema 合规只证明形状；基准、模型裁判与点估计不能成为普遍能力或发布决定。</td></tr>
+    <tr><td>训练环境和随机性是否足以复现？</td><td><a href="https://doi.org/10.6028/NIST.AI.600-1">NIST AI 600-1</a>、<a href="https://doi.org/10.6028/NIST.SP.800-218A">NIST SP 800-218A</a>与 <a href="https://guix.gnu.org/manual/en/guix.pdf">GNU Guix</a>追踪数据、派生物、流程和环境；<a href="https://www.gnu.org/software/coreutils/manual/html_node/Random-sources.html">Coreutils 随机来源</a>提醒开发者固定候选顺序的随机输入。</td><td>SBOM、provenance、相同环境、固定种子或训练成功不能自动证明权重复现、行为安全或发布获批。</td></tr>
+  </tbody></table></div><p>这些机制共同要求先声明比较域，再解释结果；不存在跨文本、对象、模型和版本的通用等价结论。</p></section>
 
-  <section class="content-wide"><h2>外部机制只支持有限主张</h2><div class="table-wrap"><table><thead><tr><th>权威机制</th><th>可采用的验证纪律</th><th>不能直接推出</th></tr></thead><tbody>
-    <tr><td><a href="https://guix.gnu.org/manual/en/guix.html#Invoking-guix-challenge">GNU Guix challenge</a></td><td>从独立来源取得构建结果并逐字节比较，同时保留差异供调查。</td><td>相同字节不能证明源设计正确；不同字节不能自行判定哪一份可信。</td></tr>
-    <tr><td><a href="https://sourceware.org/binutils/docs/bfd.html">GNU BFD canonical form</a></td><td>通用内部表示必须披露源格式、目标格式和无法表示的信息。</td><td>进入同一 canonical form 不能证明格式特有内容、来源和语义都被保留。</td></tr>
-    <tr><td><a href="https://www.rfc-editor.org/rfc/rfc8785.html">RFC 8785 JSON Canonicalization Scheme</a></td><td>规范形式必须限定输入域、数值和字符串处理，并保留数组顺序。</td><td>可哈希 JSON 不证明业务语义、权威或跨 Profile 等价。</td></tr>
-    <tr><td><a href="https://openai.com/index/introducing-structured-outputs-in-the-api/">OpenAI Structured Outputs</a></td><td>把模型输出约束到精确 schema，减少结构不匹配并允许确定性结构检查。</td><td>schema 合规只证明形状；字段中的事实、引用、授权和满足判断仍是不可信候选。</td></tr>
-    <tr><td><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf">NIST AI 800-2 初稿</a>与 <a href="https://doi.org/10.6028/NIST.AI.800-3">NIST AI 800-3</a></td><td>先固定评测目的、协议、模型版本、统计假设和限定用途，并分开固定基准与推广结论。</td><td>基准名、模型裁判、一致率或点估计不能自动成为普遍能力和发布决定。</td></tr>
-    <tr><td><a href="https://doi.org/10.6028/NIST.AI.600-1">NIST AI 600-1</a>、<a href="https://doi.org/10.6028/NIST.SP.800-218A">NIST SP 800-218A</a>与 <a href="https://guix.gnu.org/manual/en/guix.pdf">GNU Guix</a></td><td>追踪训练与微调数据、模型派生物、训练流程和反馈；固定完整软件环境并单独比较输出。</td><td>SBOM、provenance、相同环境、固定种子或训练成功都不能自动证明权重复现、行为安全或发布获批。</td></tr>
-    <tr><td><a href="https://www.gnu.org/software/diffutils/manual/html_node/Invoking-diff.html">GNU Diffutils</a> 与 <a href="https://www.gnu.org/software/coreutils/manual/html_node/Random-sources.html">Coreutils 随机来源</a></td><td>分开“相同、不同、比较故障”，并记录候选顺序使用的随机来源。</td><td>差异不选择正确一方；固定随机源也不证明模型评审没有位置偏差。</td></tr>
-  </tbody></table></div><p>这些机制共同支持“先声明比较域，再解释结果”。它们不支持一个跨文本、对象、模型和版本的通用等价结论。</p></section>
-
-  <section id="evidence-levels" class="content-wide"><h2>证据等级</h2><div class="table-wrap"><table><thead><tr><th>等级</th><th>支持什么</th><th>最低材料</th></tr></thead><tbody>
-    <tr><td>示例</td><td>解释候选语义</td><td>输入、预期输出、非规范声明</td></tr>
-    <tr><td>回归</td><td>已知行为未被破坏</td><td>固定语料、版本、断言、失败诊断</td></tr>
-    <tr><td>性质与安全</td><td>不变量与拒绝路径</td><td>属性测试、模糊测试、资源限制、对抗案例</td></tr>
-    <tr><td>互操作</td><td>格式或配置主张</td><td>至少两个独立实现、共享向量、差异报告</td></tr>
-    <tr><td>研究实验</td><td>模型或系统效果</td><td>假设、基线、数据许可、消融、统计不确定性、失败分析</td></tr>
-  </tbody></table></div></section>
+  <section id="evidence-levels" class="content-stack"><h2>证据强度决定声明上限</h2><ol>
+    <li><strong>示例：</strong>用输入、预期输出和非规范声明解释候选语义。</li>
+    <li><strong>回归：</strong>用固定语料、版本、断言和失败诊断说明已知行为没有被当前变更破坏。</li>
+    <li><strong>性质与安全：</strong>用属性测试、模糊测试、资源限制和对抗案例检查不变量与拒绝路径。</li>
+    <li><strong>互操作：</strong>用至少两个独立实现、共享向量和差异报告支持精确格式或配置主张。</li>
+    <li><strong>研究实验：</strong>用假设、基线、数据资格、消融、统计不确定性和失败分析说明模型或系统效果。</li>
+  </ol><p>较强证据可以包含较弱证据，但不会自动扩大对象、平台、版本、总体或决定权威。测试报告必须明确自己停在哪一级。</p></section>
     </div>
   </div>
   <div class="next-prev"><a href="implementation-roadmap.html">← 开发路线图</a><a href="../architecture/open-questions.html">开放问题 →</a></div>
