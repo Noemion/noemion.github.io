@@ -3252,6 +3252,8 @@ def validate_jekyll_sources():
             "开发",
             "常见问题",
             "许可证",
+            'href="https://github.com/Noemion"',
+            ">GitHub·Pages<",
             "跟随系统",
             "浅色",
             "深色",
