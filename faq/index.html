@@ -7,31 +7,32 @@ permalink: "/faq/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>常见问题</span></nav>
-  <header class="section-introduction"><h1>常见问题</h1><p>直接回答 Noemion 的项目定位、Endem 等工程名词、应用拓扑、安全边界和当前状态。</p><div class="badges"><span class="badge">Noemion</span><span class="badge">Endem</span><span class="badge">Security</span></div></header>
+  <header class="section-introduction"><h1>常见问题</h1><p>从开发者最常遇到的疑问出发，说明 Noemion 解决什么、现在有什么，以及哪些边界仍在设计中。</p><div class="badges"><span class="badge">Noemion</span><span class="badge">Endem</span><span class="badge">Security</span></div></header>
   <div class="faq-list">
     <section><h2>名称与定位</h2>
       <details><summary>Noemion 与 Endem 有什么区别？</summary><p>Noemion 是项目、新领域与社区的总名；Endem 是 Noemion 定义的工程术语，表示最小、独立有效且可验证的期望终态单元。工具和格式不需要批量携带 Noemion 前缀。</p></details>
-      <details><summary>为什么不用“某某 OBJ”？</summary><p>因为目标、约束、歧义和验收不是机器指令对象的另一种载荷。Endem 借鉴可链接制品思想，但用新名词建立新本体，避免名称反过来把设计限制在传统目标文件模型里。</p></details>
+      <details><summary>第一次接触项目应该先读什么？</summary><p>先读<a href="../docs/getting-started.html">入门指南的依赖升级案例</a>，分清目标、外部任务状态、运行权限、证据和最终决定。遇到具体工程问题时，再用<a href="../docs/specifications-reference.html">规范参考的问题索引</a>定位权威条款；不必先记住全部项目术语。</p></details>
+      <details><summary>Endem 是传统目标文件的新名字吗？</summary><p>不是。传统目标文件主要承载机器代码、符号和链接信息；Endem 描述自然语言目标的来源、意义、期望事态、约束、判据和待确认事项。项目借鉴可链接制品的确定性、显式引用和独立读取纪律，但不继承机器指令本体。</p></details>
       <details><summary>Endem 这个词怎样形成？</summary><p>它由 <em>end</em> 与表示最小区别单位的构词成分 <em>-eme</em> 合成，工程定义为最小期望终态单元。正式软件发行前仍需完成专业商标检索。</p></details>
     </section>
     <section><h2>制品与应用</h2>
-      <details><summary>Endem 包含什么？</summary><p>六个语义面：<code>rhem</code> 来源记号、<code>semion</code> 意义投影、<code>skena</code> 一个根中性可能事态、<code>telis</code> 目标方向、<code>krin</code> 结构比较契约、<code>apor</code> 待确认事项。它不是提示文本的二进制包装。</p></details>
-      <details><summary>Synem、Dromen 和 Iknem 是什么？</summary><p>Synem 是多个 Endem 解析引用后形成的组合闭包。Dromen 是 Drasor 为一次 Drase 会话封存的只读执行契约，不是文件、凭据包或可恢复权限。Iknem 是绑定主体、环境和声明范围的证据，其中 <code>phain</code> 用与 <code>skena</code> 对齐的关系结构记录观察。</p></details>
-      <details><summary>为什么只保留一个 CLI？</summary><p>现有职责没有 23 个独立用户、权威或生命周期。唯一入口 <code>endem</code> 用短子命令组织职责；只有 Theor 与 Drasor 因独立证据和权限边界保持独立实现/进程。</p></details>
+      <details><summary>Endem 包含什么？</summary><p>它先分开六项职责：来源表达、已确认意义、一个根可能事态、目标方向、满足判据和待确认事项。现行字段依次是 <code>rhem</code>、<code>semion</code>、<code>skena</code>、<code>telis</code>、<code>krin</code> 与 <code>apor</code>；这些设计阶段名称仍在接受读音和发行审查。Endem 不是提示文本的二进制包装。</p></details>
+      <details><summary>什么时候需要 Synem、Dromen 和 Iknem？</summary><p>多个 Endem 需要共同解析依赖、权限或发布范围时才形成 Synem。一次受限运行需要固定对象、政策、环境、能力和预算时建立 Dromen。需要说明什么观察支持哪项结论时形成 Iknem。三者分别处理组合、会话和证据，不能互相替代。</p></details>
+      <details><summary>为什么计划只提供一个命令入口？</summary><p>形成、检查、组合、查看和运行属于同一开发者工作流，计划由 <code>endem</code> 的不同动作承载，避免把内部职责包装成多个产品。统一入口不合并信任域：Theor 仍需独立读取实现，Drasor 仍需隔离进程。当前还没有 CLI。</p></details>
       <details><summary>一个 CLI 会不会破坏安全隔离？</summary><p>统一入口本身不能证明隔离成立，而且当前还没有 CLI 或组件实现。未来 <code>endem theor</code> 必须由单独构建的 Theor 承担，<code>endem drase</code> 必须进入隔离的 Drasor 进程；解析代码、Ktisor 内部检查通过引用和实时能力句柄都不能跨越各自信任域。</p></details>
     </section>
     <section><h2>安全与模型</h2>
-      <details><summary>模型能直接生成 Endem 吗？</summary><p>不能。模型只能生成带来源和待确认状态的候选；Ktisor 依据确定性规则或具名语义决定形成规范字节。</p></details>
+      <details><summary>模型能直接生成规范 Endem 吗？</summary><p>不能。设计允许模型提出带来源和待确认状态的候选，但只有 Ktisor 能依据确定性规则或具名语义决定形成规范字节。当前两者都还没有组件实现。</p></details>
       <details><summary>模型能调用工具或宣告完成吗？</summary><p>模型只能提出能力请求和候选结果。控制平面的确定性策略决定实际调用；<code>krin</code> 预先固定比较条件和决定权威；Iknem 以 <code>phain</code> 记录结构化观察。最终决定仍由指定权威作出。</p></details>
       <details><summary>自然语言候选由谁确认？</summary><p>只有落在 AUT-CORE 精确政策、对象、动作和范围内的具名权威或版本化确定性规则可以确认。模型置信度、结构合法、签名、登录和单次点击都不够；委托、多人批准、同意、撤销与重放也必须单独核对。</p></details>
       <details><summary>文件里写了权威名称为什么还不能证明授权？</summary><p>因为名称只能定位待核对的权威，不能证明该权威针对这份精确内容作出了有效决定。独立 <code>.endem</code> 最多通过容器和 Profile 检查；完整内容接受还要核对外部授权决定的政策、主体、对象、范围、时效与精确绑定。这个外部决定也不会改变 Endem 的内容身份。</p></details>
-      <details><summary>确定性路径会调用模型吗？</summary><p>不会。形成、验证、绑定、布局、摘要、签名范围和规则型验收都必须可在无模型环境复现。</p></details>
+      <details><summary>确定性路径会调用模型吗？</summary><p>不会。规范要求未来的形成、验证、绑定、布局、摘要、签名范围和规则型验收可以在无模型环境复现；目前还没有对应实现。</p></details>
       <details><summary>开放权重、开源模型和自由软件是一回事吗？</summary><p>不是。开放权重只说明模型参数可以取得，还要单独核对许可和限制。GNU 的自由软件关注用户运行、研究、修改和再分发软件的自由；OSI Open Source AI Definition 1.0 还要求修改模型所需的数据说明、训练与运行代码及参数。托管 API、公开仓库、模型卡或 Apache-2.0 标签都不能独自证明模型全栈符合这些定义。</p><p>当前 Noemion 没有模型权重、训练数据或模型服务。未来发布时会逐项列出代码、参数、数据说明、数据、文档和各自条款，不用一个“开放模型”标签替代证据。边界依据见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-openness-and-software-freedom-boundaries-proposal.md">非规范研究提案</a>。</p></details>
       <details><summary>托管模型、设备内模型和自主管理服务怎样区分？</summary><p>按实际执行者、控制平面和数据路径区分。设备内执行只说明某个组件在当前设备运行；自主管理执行说明用户或组织能控制软件负载、模型、配置、密钥、数据路径和停启；第三方托管执行则把实际计算交给服务运营者。界面在本机、源码公开、采用 AGPL、数据驻留或 API 可导出，都不能单独证明整条服务路径受用户控制。</p><p>未来若接入托管模型，Noemion 只记录调用方能够观察的请求、服务语境、返回和限制；隐藏提示、模型替换、路由、保留和下游服务必须写成已知声明或未知边界。切换供应商或自管路径要重新核对身份、权限、评测和决定。详细依据见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/hosted-ai-service-and-user-control-boundaries-proposal.md">非规范托管人工智能服务与用户控制研究提案</a>。</p></details>
     </section>
     <section><h2>状态与实施</h2>
-      <details><summary>现在可以安装吗？</summary><p>不可以。当前处于规范与安全核心设计阶段，没有正式版本或有效安装命令。</p></details>
-    <details><summary>第一阶段计划实现什么？</summary><p>第一阶段尚未开始。首条实现路径限制在 <code>ktise</code>、<code>elenk</code>、独立 <code>theor</code> 和必需的一致性验证。</p></details>
+      <details><summary>现在可以安装或试用吗？</summary><p>不可以。当前公开成果包括规范草案、实验格式、威胁模型、架构决策和验证方案，没有正式版本、有效安装命令或在线运行服务。</p></details>
+      <details><summary>计划中的首个可实现范围是什么？</summary><p>如果项目进入实现，首个范围只包含 <code>ktise</code>、<code>elenk</code>、独立 <code>theor</code> 和必需的一致性验证。组合、签名集成和受限运行需要前一范围提供安全与复现证据后再评估。</p></details>
       <details><summary>会自建模型训练平台吗？</summary><p>默认不会。数据、训练、评估和量化优先适配成熟外部栈；只有出现 Noemion 特有且不可替代的需求，并通过增益实验，才新增研究适配面。</p></details>
     </section>
   </div>

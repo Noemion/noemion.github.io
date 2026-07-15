@@ -7,31 +7,31 @@ permalink: "/specifications/index.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>规范参考指南</span></nav>
-  <header class="section-introduction"><h1>规范参考指南</h1><p>按目标、组合、运行、证据、协议、身份、文本和授权问题进入现行规范，并核对当前策略与待定内容。</p><div class="badges"><span class="badge">END-CORE</span><span class="badge">SYN-CORE</span><span class="badge">DRO-CORE</span><span class="badge">IKN-CORE</span><span class="badge">DIA-CORE</span><span class="badge">ADP-CORE</span><span class="badge">ID-CORE</span><span class="badge">TEXT-IDENTIFIER-CORE</span><span class="badge">AUT-CORE</span><span class="badge">接口待定</span></div></header>
+  <header class="section-introduction"><h1>规范参考指南</h1><p>从开发者要回答的问题进入权威规范，再核对适用版本、成熟度和仍未定义的接口。</p><div class="badges"><span class="badge">规范草案</span><span class="badge">权威源</span><span class="badge">无组件实现</span></div></header>
   <section>
-    <h2>先看哪些规范</h2>
-    <p class="lead">如果你已经知道对象名，可以直接进入下方规范。若你从故障、协议状态、签名或授权问题出发，先用<a href="../docs/specifications-reference.html">规范参考指南的工程问题索引</a>定位权威源，再回到这里阅读完整边界。</p>
+    <h2>怎样找到需要的规范</h2>
+    <p class="lead">不必先记住全部对象名。若你从协议完成、签名失效、文本混淆、权限不足或证据缺口出发，先用<a href="../docs/specifications-reference.html">按工程问题组织的规范索引</a>定位权威源；已经知道对象名时，再从下方直接进入完整边界。</p>
     <p><strong>阅读约定：</strong>各规范先用直白职责解释概念，再用代码样式标出现行设计字段。<code>rhem</code>、<code>semion</code>、<code>skena</code>、<code>telis</code>、<code>krin</code> 与 <code>apor</code> 仍是精确的现行值，但尚未通过发行名称和读音审查；研究候选不是别名，也不能作为来源清单或 Profile 输入。</p>
-    <p><strong>当前策略：</strong>项目分别定义术语职责、六个语义面、结果类型、复合判断、组合关系、会话契约、证据评估、结构化诊断、外部协议适配、精确身份、文本解释和授权。END-P1 给出当前 Endem 载荷设计，各 CORE 草案给出对应规则。</p><p><strong>待定内容：</strong>具体发行拼写和读音，对象与事件的物理编码、运行 API、协议 Profile、摘要和签名算法、Unicode 标识符、权威目录、政策语言与稳定 ABI。当前没有组件实现。</p>
+    <p><strong>当前策略：</strong>对象规范负责目标、组合、会话和证据；横切规范负责诊断、协议适配、精确身份、文本解释和授权。END-P1 给出当前 Endem 载荷设计，各 CORE 草案给出对应规则。</p><p><strong>待定内容：</strong>具体发行拼写和读音，对象与事件的物理编码、运行 API、协议 Profile、摘要和签名算法、Unicode 标识符、权威目录、政策语言与稳定 ABI。当前没有组件实现。</p>
   </section>
   <section>
-    <h2>对象与横切规范指南</h2>
+    <h2>按对象和工程问题进入</h2>
     <div class="page-links">
-      <a class="page-link" href="endem.html"><strong>Endem · 最小目标制品</strong><span>查看来源、意义、事态、目标方向、判据、待确认事项和三个制品状态。</span></a>
-      <a class="page-link" href="synem.html"><strong>Synem · 多目标解析闭包</strong><span>查看多个 Endem 怎样解析引用、收敛权限并报告冲突。</span></a>
-      <a class="page-link" href="dromen.html"><strong>Dromen · 一次运行的只读契约</strong><span>查看精确制品怎样绑定政策、环境、能力、预算和证据责任。</span></a>
-      <a class="page-link" href="iknem.html"><strong>Iknem · 可定位证据记录</strong><span>查看来源、构建、绑定、签名、运行和决定依据怎样保持身份链。</span></a>
-      <a class="page-link" href="diagnostics.html"><strong>结构化诊断 · 可定位失败</strong><span>查看机器码、生产语境、失败层次、位置、恢复和安全边界。</span></a>
-      <a class="page-link" href="adapters.html"><strong>外部协议适配 · 受限连接</strong><span>查看版本、对端、能力、状态、重试、交付与安全边界。</span></a>
-      <a class="page-link" href="identity.html"><strong>精确内容身份与签名 · 不可变绑定</strong><span>查看完整摘要、签名陈述、撤销、可复现性与伴随制品关系。</span></a>
-      <a class="page-link" href="text-and-identifiers.html"><strong>文本与标识符边界 · 可核对输入</strong><span>查看 UTF-8、来源字节、规范化、比较、范围、双向显示、隐藏字符与模型实际输入。</span></a>
-      <a class="page-link" href="authority.html"><strong>权威与授权决定 · 有界批准</strong><span>查看主体、范围、自然语言授权、委托、同意、多人决定、撤销、重放与能力交集。</span></a>
+      <a class="page-link" href="endem.html"><strong>Endem · 最小目标制品</strong><span>END-CORE 0.1.0-draft。查看来源、意义、事态、目标方向、判据、待确认事项和三个制品状态。</span></a>
+      <a class="page-link" href="synem.html"><strong>Synem · 多目标解析闭包</strong><span>SYN-CORE 0.1.0-draft。查看多个 Endem 怎样解析引用、收敛权限并报告冲突。</span></a>
+      <a class="page-link" href="dromen.html"><strong>Dromen · 一次运行的只读契约</strong><span>DRO-CORE 0.1.0-draft。查看精确制品怎样绑定政策、环境、能力、预算和证据责任。</span></a>
+      <a class="page-link" href="iknem.html"><strong>Iknem · 可定位证据记录</strong><span>IKN-CORE 0.1.0-draft。查看来源、构建、绑定、签名、运行和决定依据怎样保持身份链。</span></a>
+      <a class="page-link" href="diagnostics.html"><strong>结构化诊断 · 可定位失败</strong><span>DIA-CORE 0.1.0-draft。查看机器码、生产语境、失败层次、位置、恢复和安全边界。</span></a>
+      <a class="page-link" href="adapters.html"><strong>外部协议适配 · 受限连接</strong><span>ADP-CORE 0.1.0-draft。查看版本、对端、能力、状态、重试、交付与安全边界。</span></a>
+      <a class="page-link" href="identity.html"><strong>精确内容身份与签名 · 不可变绑定</strong><span>ID-CORE 0.1.0-draft。查看完整摘要、签名陈述、撤销、可复现性与伴随制品关系。</span></a>
+      <a class="page-link" href="text-and-identifiers.html"><strong>文本与标识符边界 · 可核对输入</strong><span>TEXT-IDENTIFIER-CORE 0.1.0-draft。查看 UTF-8、来源字节、规范化、比较、范围、双向显示、隐藏字符与模型实际输入。</span></a>
+      <a class="page-link" href="authority.html"><strong>权威与授权决定 · 有界批准</strong><span>AUT-CORE 0.1.0-draft。查看主体、范围、自然语言授权、委托、同意、多人决定、撤销、重放与能力交集。</span></a>
       <a class="page-link" href="../architecture/adr-0030-endem-content-and-authorization-companions.html"><strong>Endem 内容与授权伴随关系</strong><span>查看 P1 单文件声明上限、外部前置条件和内容身份稳定性。</span></a>
     </div>
   </section>
   <section>
     <h2>规范源与可追溯性</h2>
-    <p class="lead">END-CORE 0.1.0-draft、SYN-CORE 0.1.0-draft、DRO-CORE 0.1.0-draft、IKN-CORE 0.1.0-draft、DIA-CORE 0.1.0-draft、ADP-CORE 0.1.0-draft、ID-CORE 0.1.0-draft、TEXT-IDENTIFIER-CORE 0.1.0-draft 与 AUT-CORE 0.1.0-draft 分别固定对象和横切边界。END-P1 是当前封闭内容 Profile，END-FMT 定义实验性容器；每项义务都使用唯一条款 ID 并连接验证责任。</p>
+    <p class="lead">每份 CORE 草案分别固定一种对象或横切责任，END-P1 固定当前封闭内容 Profile，END-FMT 定义实验性容器。实现者应以规范源与机器可读登记中的精确版本、成熟度、条款 ID 和验证责任为准，并用下表定位相应材料。</p>
     <div class="table-wrap"><table><thead><tr><th>工程源</th><th>用途</th><th>当前边界</th></tr></thead><tbody>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 内容标准</a></td><td>六个语义面、规范分层、Profile 符合性、抽象单变量量化、授权、状态、身份、安全与验证责任。</td><td>量化物理字段、嵌套或多变量量化、时间和求值语言仍待确定。</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 格式条款</a></td><td>固定前导、记录目录、受限 CBOR、结构实验 END-P0 与设计 Profile END-P1。</td><td>END-FMT 0.1.0-draft 尚非稳定 ABI，也没有公开符合性声明。</td></tr>

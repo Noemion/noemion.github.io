@@ -122,7 +122,7 @@ DOC_GUIDE_ORDER = [
 ]
 DOC_GUIDE_HEADINGS = {
     "docs/getting-started.html": [
-        "从这里开始", "先看一个 Agent 工作", "六个语义面", "四个名词", "一个应用", "这些名字怎样读", "推荐阅读路径", "当前状态",
+        "从这里开始", "先看一个 Agent 工作", "六个语义面", "四个对象分别回答什么", "计划中的命令入口", "这些名字怎样读", "接下来按问题继续", "当前状态",
     ],
     "docs/installation-and-usage.html": [
         "当前可用性", "未来职责流程", "发布原则", "命名发布条件",
@@ -145,11 +145,11 @@ DOC_GUIDE_HEADINGS = {
     ],
 }
 HOME_HEADINGS = [
-    "项目名与工程名各自负责",
+    "执行完成不等于目标已经满足",
     "六项职责保持语义边界",
     "只保留有独立生命周期的名词",
     "一个入口不等于一个信任域",
-    "先证明最小纵向切片",
+    "当前先完成规范和安全边界",
     "借鉴工具链思想不复制工具数量",
     "继续阅读",
 ]
@@ -2719,10 +2719,10 @@ def validate_jekyll_sources():
         for token in (
             'title: "Noemion · 人工智能时代的自然语言目标规范"',
             '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>让自然语言目标</span><span class="portal-title-foundation">成为可验证的工程对象</span></strong></h1>',
-            '<p class="portal-introduction-summary">Noemion 为自然语言目标建立确定性成形、组合、受控实现与证据验收。Endem 是其中最小、可独立验证的目标制品。</p>',
-            '<span>了解 Noemion</span>',
+            '<p class="portal-introduction-summary">Noemion 正在定义一种可持久保存、组合和独立验收的自然语言目标制品。Endem 是这套设计中的最小单元；当前只有规范与安全边界，没有可安装组件。</p>',
+            '<span>从开发者案例开始</span>',
             '<span>查看 Endem 生命周期</span>',
-            '<strong>Noemion</strong> 是整个项目、新领域与社区的名称',
+            '<strong>Noemion</strong> 是项目与研究领域的名称',
         ):
             if token not in homepage_text:
                 errors.append(f"index.html: missing Noemion project ownership contract: {token}")
@@ -3933,7 +3933,7 @@ def main():
         "不会成为第二套命令、机器别名或语义权威",
         "先看一个 Agent 工作",
         "MCP 2025-11-25 Tasks",
-        "A2A 1.0 规范",
+        "A2A 1.0 版本化规范",
         "外部 Task 显示 `completed`",
         "这个例子只解释职责顺序",
         "| 职责 | 现行字段 | 不得混入 |",
@@ -3942,6 +3942,71 @@ def main():
     ):
         if token not in getting_started_text:
             errors.append(f"getting started guide missing pronunciation status boundary: {token}")
+    developer_entry_contracts = {
+        "index.html": (
+            "从开发者案例开始",
+            "执行完成不等于目标已经满足",
+            "当前只有规范与安全边界，没有可安装组件",
+            "计划中的公开命令入口只有",
+            "当前还没有可执行程序",
+        ),
+        "docs/index.md": (
+            "先按问题选择入口",
+            "GNU-Manuals.html",
+            "| 你现在要回答什么 | 先读 | 读完以后 |",
+            "Noemion 解决什么问题，与 Agent 协议有什么区别",
+            "某个工程问题由哪份条款约束",
+            "引用和状态",
+        ),
+        "faq/index.html": (
+            "第一次接触项目应该先读什么",
+            "不必先记住全部项目术语",
+            "Endem 是传统目标文件的新名字吗",
+            "为什么计划只提供一个命令入口",
+            "现在可以安装或试用吗",
+            "计划中的首个可实现范围是什么",
+        ),
+        "specifications/index.html": (
+            "怎样找到需要的规范",
+            "不必先记住全部对象名",
+            "规范草案",
+            "权威源",
+            "无组件实现",
+            "按对象和工程问题进入",
+            "实现者应以规范源与机器可读登记",
+        ),
+    }
+    for relative_path, required_tokens in developer_entry_contracts.items():
+        entry_text = (SOURCE_ROOT / relative_path).read_text()
+        for token in required_tokens:
+            if token not in entry_text:
+                errors.append(f"{relative_path} missing developer-first entry boundary: {token}")
+    obsolete_entry_phrases = {
+        "index.html": (
+            "项目名与工程名各自负责",
+            "公开应用只有",
+            "先证明最小纵向切片",
+        ),
+        "docs/getting-started.md": (
+            "Noemion 把自然语言目标变成",
+            "第一实现阶段只建设",
+            "最小纵向切片",
+        ),
+        "faq/index.html": (
+            "某某 OBJ",
+            "23 个独立用户",
+            "为什么只保留一个 CLI",
+        ),
+        "specifications/index.html": (
+            '<span class="badge">END-CORE</span>',
+            '<span class="badge">AUT-CORE</span>',
+        ),
+    }
+    for relative_path, forbidden_phrases in obsolete_entry_phrases.items():
+        entry_text = (SOURCE_ROOT / relative_path).read_text()
+        for phrase in forbidden_phrases:
+            if phrase in entry_text:
+                errors.append(f"{relative_path} retains implementation-first entry phrase: {phrase}")
     architecture_guide_text = (SOURCE_ROOT / "docs" / "architecture-guide.md").read_text()
     for token in (
         "用一次 Agent 工作读图",

@@ -10,9 +10,9 @@ permalink: "/index.html"
     <div class="portal-introduction-copy">
       <p class="portal-eyebrow">VERIFIABLE GOALS FOR THE AGE OF AI</p>
       <h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>让自然语言目标</span><span class="portal-title-foundation">成为可验证的工程对象</span></strong></h1>
-      <p class="portal-introduction-summary">Noemion 为自然语言目标建立确定性成形、组合、受控实现与证据验收。Endem 是其中最小、可独立验证的目标制品。</p>
+      <p class="portal-introduction-summary">Noemion 正在定义一种可持久保存、组合和独立验收的自然语言目标制品。Endem 是这套设计中的最小单元；当前只有规范与安全边界，没有可安装组件。</p>
       <div class="portal-actions">
-        <a class="portal-button portal-button-primary" href="docs/getting-started.html"><span>了解 Noemion</span><span aria-hidden="true">↗</span></a>
+        <a class="portal-button portal-button-primary" href="docs/getting-started.html"><span>从开发者案例开始</span><span aria-hidden="true">↗</span></a>
         <a class="portal-button portal-button-secondary" href="architecture/endem-lifecycle.html"><span>查看 Endem 生命周期</span><span aria-hidden="true">→</span></a>
       </div>
       <div class="portal-introduction-meta" aria-label="项目当前边界">
@@ -28,20 +28,20 @@ permalink: "/index.html"
 
   <section class="portal-thesis portal-reveal">
     <div class="portal-thesis-title">
-      <p class="portal-section-index">01 · THE PRIMITIVE</p>
-      <h2 class="portal-chapter-title"><span>项目名与工程名各自负责</span></h2>
+      <p class="portal-section-index">01 · THE PROBLEM</p>
+      <h2 class="portal-chapter-title"><span>执行完成不等于目标已经满足</span></h2>
     </div>
     <div class="portal-thesis-copy">
-      <p class="portal-lead"><strong>Endem</strong> 由 <em>end</em> 与表示“最小区别单位”的构词成分 <em>-eme</em> 合成，工程定义是“最小、独立有效、可验证的期望终态单元”。</p>
-      <p><strong>Noemion</strong> 是整个项目、新领域与社区的名称；Endem 是项目定义的第一项核心制品。制品、动作和组件不批量携带品牌前缀，也不让任何局部工程名取代项目名。</p>
-      <p>一个 Endem 只有一个根 <code>skena</code>。复杂任务通过明确引用和组合形成 Synem，而不是把所有上下文塞进巨型提示词。</p>
-      <p>名称提供共同语言；真正语义仍由规范、不变量、失败路径和测试决定。</p>
+      <p class="portal-lead">Agent 可以返回 <code>completed</code>，工具也可以成功退出，但这些状态没有回答目标对象是否正确、约束是否满足、证据覆盖到哪里，以及谁有权接受结果。</p>
+      <p>Noemion 把目标定义从提示词、工作流和外部任务状态中分离出来，使同一目标可以跨模型、协议和多次运行保持可检查的身份。</p>
+      <p><strong>Endem</strong> 是项目为这项职责定义的最小目标制品：一个 Endem 只描述一个根期望终态及其来源、意义、方向、判据和待确认事项。复杂目标通过明确引用形成 Synem，不靠不断扩大的提示词维持关系。</p>
+      <p><strong>Noemion</strong> 是项目与研究领域的名称；Endem 是其中的工程对象。名称只帮助交流，实际语义仍由规范、不变量和失败条件决定。</p>
     </div>
   </section>
 
   <section class="portal-paths portal-reveal">
     <div class="portal-section-heading">
-      <p class="portal-section-index">02 · SIX FACETS</p>
+      <p class="portal-section-index">02 · SIX RESPONSIBILITIES</p>
       <h2 class="portal-chapter-title"><span>六项职责<br>保持语义边界</span></h2>
       <p>来源表达、已授权意义、可能事态、目标方向、满足判据和待确认意义彼此分开；现行短词只是设计阶段字段，不替代职责定义。</p>
     </div>
@@ -71,7 +71,7 @@ permalink: "/index.html"
 
   <section class="portal-focus portal-reveal">
     <div class="portal-section-heading">
-      <p class="portal-section-index">03 · FOUR NOUNS</p>
+      <p class="portal-section-index">03 · FOUR ARTIFACT ROLES</p>
       <h2 class="portal-chapter-title"><span>只保留有独立生命周期的名词</span></h2>
       <p>权限、权威、生命周期或保密级别没有不同，就不应被拆成新的正式制品。</p>
     </div>
@@ -85,9 +85,9 @@ permalink: "/index.html"
 
   <section class="portal-lifecycle portal-reveal">
     <div class="portal-section-heading">
-      <p class="portal-section-index">04 · ONE APPLICATION</p>
+      <p class="portal-section-index">04 · ONE COMMAND SURFACE</p>
       <h2 class="portal-chapter-title"><span>一个入口<br>不等于一个信任域</span></h2>
-      <p>公开应用只有 <code>endem</code>。子命令按职责组织，安全边界通过独立实现和进程隔离保持。</p>
+      <p>计划中的公开命令入口只有 <code>endem</code>。命令入口统一阅读和操作路径，独立实现与进程边界仍分别承担形成、检查和受限运行的信任责任；当前还没有可执行程序。</p>
     </div>
     <div class="portal-lifecycle-list">
       <a href="endem/"><span class="lifecycle-number">01</span><span class="lifecycle-copy"><strong><code>ktise · elenk · pleko</code></strong><span>确定性形成、验证和组合；只有规范写入器能够产生规范字节。</span></span><span class="lifecycle-state">KTISOR</span></a>
@@ -98,7 +98,7 @@ permalink: "/index.html"
 
   <section class="portal-start portal-reveal">
     <p class="portal-section-index">05 · CURRENT STAGE</p>
-    <h2 class="portal-chapter-title"><span>先证明最小纵向切片</span></h2>
+    <h2 class="portal-chapter-title"><span>当前先完成规范和安全边界</span></h2>
     <p>当前已形成 Endem 语义、实验格式、威胁模型、错误边界和未来验证条件；<code>ktise</code>、<code>elenk</code>、<code>theor</code> 以及 Ktisor、Theor、Drasor 都只是设计职责，没有可执行组件或安装包。</p>
     <div class="portal-actions portal-actions-center">
       <a class="portal-button portal-button-primary" href="development/implementation-roadmap.html"><span>查看实施路线</span><span aria-hidden="true">↗</span></a>
@@ -107,7 +107,7 @@ permalink: "/index.html"
   </section>
 
   <section class="portal-evidence portal-reveal">
-    <p class="portal-section-index">06 · EVIDENCE OVER CLAIMS</p>
+    <p class="portal-section-index">06 · ENGINEERING DISCIPLINE</p>
     <h2 class="portal-chapter-title"><span>借鉴工具链思想<br>不复制工具数量</span></h2>
     <blockquote><p>“只有存在独立消费者、不同权威或不同失败责任，才值得成为单独应用或正式制品。”</p></blockquote>
     <a href="architecture/adr-0010-native-lexicon.html">阅读原生词汇与事态分层决定 <span aria-hidden="true">→</span></a>
