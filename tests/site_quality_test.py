@@ -339,6 +339,26 @@ ADR_0016_TIME_BOUNDARIES = (
     "本决定不增加 END-P1 字段",
     "没有计时器、监控器或求值组件",
 )
+ADR_0017_NEGATION_HEADINGS = [
+    "用一次越权检查区分四种情况",
+    "否定仍保留同一关系与角色",
+    "无匹配为什么默认是未知",
+    "缺席证据必须先封闭什么",
+    "外部查询与日志机制只证明什么",
+    "当前还不能实现哪些缺席判断",
+]
+ADR_0017_NEGATION_BOUNDARIES = (
+    "审计日志里没有匹配行，只能说明当前查询没有找到记录",
+    "不能自动证明没有实际读取事件",
+    "关系成立与不成立都谈论同一组对象",
+    "更多空查询不能抵消反例",
+    "外部 Agent、MCP 工具、检索器或模型的“未发现”只是一项带来源的运行声明",
+    "封闭的是一项有限观察任务，不是现实世界",
+    "1 表示无选中行，2 表示错误",
+    "工具成功、空结果或模型总结不产生负事实、完整性或动作授权",
+    "本决定不增加 END-P1 字段",
+    "没有日志收集器、策略引擎或求值器",
+)
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -4540,7 +4560,7 @@ def validate_jekyll_sources():
             "W3C OWL 2 Primer",
             "W3C SHACL 封闭约束",
             "SPARQL 1.1 NOT EXISTS",
-            "GNU grep 输出控制",
+            "GNU grep 退出状态",
             "OpenTelemetry Logs 数据模型",
             "不把 OWL 个体、SHACL Shape 或 RDF 数据集直接变成 Endem 字段",
             "查询没有匹配只说明该查询范围",
@@ -6200,6 +6220,33 @@ def main():
         ):
             errors.append(
                 "architecture/adr-0016-mene-time-model.html: must preserve five "
+                "boundary tables, one task flow and four developer reading links"
+            )
+
+    adr_0017 = ROOT / "architecture/adr-0017-negation-and-absence.html"
+    if adr_0017.exists():
+        parser = parse(adr_0017)
+        if parser.h2_texts != ADR_0017_NEGATION_HEADINGS:
+            errors.append(
+                "architecture/adr-0017-negation-and-absence.html: negation reading sequence "
+                f"must be {ADR_0017_NEGATION_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in ADR_0017_NEGATION_BOUNDARIES:
+            if term not in visible_text:
+                errors.append(
+                    "architecture/adr-0017-negation-and-absence.html: missing negation, "
+                    f"absence, or external-tool boundary {term}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 5
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                "architecture/adr-0017-negation-and-absence.html: must preserve five "
                 "boundary tables, one task flow and four developer reading links"
             )
 

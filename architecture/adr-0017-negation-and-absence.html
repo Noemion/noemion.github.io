@@ -1,83 +1,83 @@
 ---
 layout: default
-title: "ADR-0017 否定事态与缺席证据"
+title: "ADR-0017 · 没有记录不等于没有发生"
 page_role: "content"
 footer_text: "Noemion · ADR-0017"
 permalink: "/architecture/adr-0017-negation-and-absence.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0017</span></nav>
-  <header class="content-introduction"><h1>ADR-0017<br>否定事态<br>缺席证据</h1><p>分开关系不成立、没有观察和观察系统故障，避免用空日志、部分搜索或模型未发现异常来证明禁止目标已经满足。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">否定证据</span><span class="badge">不改变线格式</span><span class="badge">尚未实现</span></div></header>
-
-  <section class="content-stack">
-    <h2>直接结论</h2>
-    <p class="lead">否定目标必须保留被否定的关系。没有关系节点不是否定，没有日志也不是负事实；只有显式负观察，或在具名封闭范围内得到完整支持的缺席，才能支持关系不成立。</p>
-    <p>当前策略确定抽象语义、禁止推导与现有 END-P1 负极性案例。它不增加 END-P1 字段；END-P1 已有 <code>positive / negative</code> 枚举，当前只补齐此前缺失的负极性语义与规范字节。</p>
-  </section>
+  <header class="content-introduction"><h1>ADR-0017<br>没有记录<br>不等于没有发生</h1><p>否定事实、查询无匹配、日志缺口和观察故障回答不同问题；只有显式负观察或有权威、可证明完整的封闭范围，才能支持“没有发生”。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">范围先于缺席推断</span><span class="badge">不改变线格式</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-wide">
-    <h2>哲学启发与采用限制</h2>
-    <p>维特根斯坦在《逻辑哲学论》命题 2.06 中写道：“事态的存在和不存在即是实在。”贺绍甲译本紧接着把两者称为肯定事实与否定事实；命题 2.062 又提醒，不能从一个事态的存在或不存在推出另一个事态。</p>
-    <p>Noemion 只采用其中的问题区分：同一关系可以成立或不成立，否定不能靠另一个无关关系暗示。软件系统却永远不能假装拥有命题 2.05 所说的全部世界事实；因此局部数据中没有记录，不能直接推出世界中没有相应事态。</p>
-    <p>命题 4.0621 进一步说明，否定记号不对应实在中的一个独立对象。工程上据此拒绝为每个谓词再创造 <code>not_*</code> 谓词，但正式规则仍由 END-CORE、Profile 与向量定义，不由哲学命题直接推出。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>三个问题必须分开</h2>
-    <div class="table-wrap"><table><thead><tr><th>情况</th><th>表示</th><th>默认结果</th><th>不能偷换</th></tr></thead><tbody>
-      <tr><td>关系被明确观察为不成立</td><td>同一关系、同一角色、显式 <code>negative</code> 的 <code>phain</code></td><td>在权威与范围有效时可以支持 <code>met</code></td><td>不能用自由文本“没有”或模型结论替代结构化观察。</td></tr>
-      <tr><td>数据中没有匹配记录</td><td>查询范围、数据集身份与空结果 Iknem</td><td><code>agno</code></td><td>不能默认成为负极性 <code>phain</code>。</td></tr>
-      <tr><td>观察器、日志链或适配器失效</td><td>故障主体、契约、影响范围与原因</td><td><code>fault</code></td><td>不能写成目标为假或未发生事件。</td></tr>
-      <tr><td>发现同角色的正极性反例</td><td>显式 <code>positive</code> 的同构 <code>phain</code></td><td><code>unmet</code></td><td>不能被更多空结果或拒绝事件抵消。</td></tr>
+    <h2>用一次越权检查区分四种情况</h2>
+    <p class="lead">目标“匿名主体没有读取私有报告”否定的是 <code>read(actor, resource)</code> 关系。审计日志里没有匹配行，只能说明当前查询没有找到记录。</p>
+    <div class="flow"><div class="step">保留原句<br>确认被否定关系</div><div class="step">固定主体、角色<br>时间与观察范围</div><div class="step">区分直接观察<br>缺席或故障</div><div class="step">检查封闭声明<br>寻找正极性反例</div><div class="step">形成 met / unmet<br>agno / fault</div></div>
+    <div class="table-wrap"><table><thead><tr><th>实际得到的事实</th><th>可支持的结果</th><th>理由</th></tr></thead><tbody>
+      <tr><td>具名权威直接确认同一主体没有读取权限。</td><td>对负极性 <code>can_read</code> 目标可为 <code>met</code>。</td><td>这是显式负观察，但不能自动证明没有实际读取事件。</td></tr>
+      <tr><td>可用审计日志中没有匹配读取记录。</td><td><code>agno</code></td><td>日志范围、旁路、迟到和丢失仍未封闭。</td></tr>
+      <tr><td>全部适用路径被完整枚举，且截止点后仍无匹配。</td><td>在声明范围内可为 <code>met</code>。</td><td>缺席由有界、充分的完整性证据支持。</td></tr>
+      <tr><td>发现同一 actor/resource 的有效读取记录。</td><td><code>unmet</code></td><td>正极性反例直接反驳负目标。</td></tr>
+      <tr><td>采集器、日志链或适配器没有按契约完成。</td><td><code>fault</code></td><td>求值失败不能改写成目标为假或事件未发生。</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>否定保留同一关系结构</h2>
-    <ul>
-      <li><code>semion</code> 只登记一次谓词身份、角色名、角色顺序与指称，例如 <code>can_read(actor, resource)</code>。</li>
-      <li><code>skena</code> 引用该关系，并用 <code>positive</code> 或 <code>negative</code> 表示可能事态的极性。</li>
-      <li><code>telis</code> 仍只表示 <code>kine</code> 或 <code>mene</code>，不能再增加 <code>avoid</code> 或 <code>forbid</code> 重复否定。</li>
-      <li>删除关系、另造 <code>cannot_read</code>、交换 actor/resource 或把空列表当作否定，都会破坏与 <code>phain</code> 的同构比较。</li>
-      <li>END-P1 当前只支持原子关系的极性。复合否定、量化否定、双重否定消去和德摩根变换继续保持开放。</li>
-    </ul>
+    <h2>否定仍保留同一关系与角色</h2>
+    <div class="table-wrap"><table><thead><tr><th>职责</th><th>允许表达</th><th>禁止替代</th></tr></thead><tbody>
+      <tr><td>关系身份</td><td><code>semion</code> 只登记一次 <code>read(actor, resource)</code>。</td><td>另造 <code>not_read</code>、<code>cannot_read</code> 或删除关系节点。</td></tr>
+      <tr><td>事态极性</td><td><code>skena</code> 引用同一关系，以 <code>positive / negative</code> 明确极性。</td><td>交换 actor/resource、用空列表或自然语言“没有”暗示否定。</td></tr>
+      <tr><td>目标方向</td><td><code>telis</code> 仍只使用现行 <code>kine / mene</code> 草案值。</td><td>再增加 <code>avoid / forbid</code>，把否定编码两次。</td></tr>
+      <tr><td>当前编码上限</td><td>END-P1 只支持原子关系的显式极性。</td><td>自行执行复合否定、双重否定或德摩根变换。</td></tr>
+    </tbody></table></div>
+    <p>这一设计保留了哲学上的最小区分：关系成立与不成立都谈论同一组对象，而否定不是一个新对象。工程规则仍由 END-CORE、Profile 和向量决定；局部资料不可能据此冒充“全部世界事实”。</p>
   </section>
 
   <section class="content-wide">
-    <h2>何时可以从缺席推断</h2>
-    <p class="lead">封闭的是一个有限观察范围，不是世界。具名权威必须先证明当前数据覆盖了目标要求的全部主体、关系、角色路径和时间。</p>
-    <div class="table-wrap"><table><thead><tr><th>封闭声明</th><th>必须回答</th><th>缺失后的结果</th></tr></thead><tbody>
+    <h2>无匹配为什么默认是未知</h2>
+    <div class="table-wrap"><table><thead><tr><th>输入状态</th><th>结果</th><th>必须保留</th></tr></thead><tbody>
+      <tr><td>同一关系、同一角色的有效显式负观察。</td><td>可支持 <code>met</code></td><td>生产者权威、主体范围、方法和截止点。</td></tr>
+      <tr><td>开放数据、部分索引、缓存或模型检索没有返回匹配。</td><td><code>agno</code></td><td>实际查询、数据集身份、分页、过滤和已知缺口。</td></tr>
+      <tr><td>观察或适配契约失败。</td><td><code>fault</code></td><td>故障主体、影响范围、原因和未完成步骤。</td></tr>
+      <tr><td>同构的有效正极性反例。</td><td><code>unmet</code></td><td>原事件与比较依据；更多空查询不能抵消反例。</td></tr>
+    </tbody></table></div>
+    <p>外部 Agent、MCP 工具、检索器或模型的“未发现”只是一项带来源的运行声明。它不能单独成为负极性 <code>phain</code>，也不能取得语义确认、证据充分性或最终决定权。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>缺席证据必须先封闭什么</h2>
+    <p class="lead">所谓封闭观察范围，封闭的是一项有限观察任务，不是现实世界。缺少正极性反例只有在下列条件同时成立时，才可支持负目标。</p>
+    <div class="table-wrap"><table><thead><tr><th>封闭项</th><th>必须证明</th><th>缺失时</th></tr></thead><tbody>
       <tr><td>权威与全集</td><td>谁有权声明封闭；枚举哪些主体、关系、对象和环境。</td><td><code>agno</code></td></tr>
-      <tr><td>角色路径</td><td>所有访问入口、代理、缓存、批处理和旁路是否都被覆盖。</td><td><code>agno</code></td></tr>
-      <tr><td>时间与截止点</td><td>观察采用哪个区间；迟到记录何时不再可能出现。</td><td><code>agno</code></td></tr>
-      <tr><td>完整枚举方法</td><td>怎样证明数据不是采样、部分索引或分页截断。</td><td><code>agno</code></td></tr>
-      <tr><td>损失与排除</td><td>丢失、过滤、去重、撤销、未知值和明确排除项分别是多少。</td><td>未知为 <code>agno</code>；契约失效为 <code>fault</code></td></tr>
+      <tr><td>全部角色路径</td><td>直接访问、代理、缓存、批处理和旁路都已覆盖。</td><td><code>agno</code></td></tr>
+      <tr><td>时间与截止点</td><td>观察区间明确，迟到记录在何时不再可能出现。</td><td><code>agno</code></td></tr>
+      <tr><td>完整枚举方法</td><td>数据不是采样、部分索引、分页截断或提前结束。</td><td><code>agno</code></td></tr>
+      <tr><td>损失与排除</td><td>丢失、过滤、去重、撤销、未知值和明确排除项均可核对。</td><td>未知为 <code>agno</code>；契约失效为 <code>fault</code>。</td></tr>
     </tbody></table></div>
-    <p>只有上述声明有效、证据覆盖充分且没有正极性反例时，缺席才能在声明范围内支持 <code>met</code>。完整性随后被撤销或发现旁路时，旧结论必须可定位并失效。</p>
+    <p>完整性被撤销、发现旁路或出现迟到反例时，只能追加新评价并使旧结论失效；不得原地删除证据或保留已经不成立的 <code>met</code>。</p>
   </section>
 
   <section class="content-wide">
-    <h2>外部标准与 GNU 工具提供的对照</h2>
-    <p><a href="https://www.w3.org/TR/owl2-primer/#Open_World_Assumption">W3C OWL 2 Primer 的开放世界说明</a>区分“没有陈述”和“陈述为假”；<a href="https://www.w3.org/TR/shacl/#ClosedConstraintComponent">W3C SHACL 封闭约束</a>则只在显式形状范围内限制允许属性。Noemion 采用同样的范围纪律，但不把 OWL 个体、SHACL Shape 或 RDF 数据集直接变成 Endem 字段。</p>
-    <p><a href="https://www.w3.org/TR/sparql11-query/#neg-notexists">SPARQL 1.1 NOT EXISTS</a>判断给定数据集和当前解映射中是否存在匹配图模式。查询没有匹配只说明该查询范围；它不会自动证明外部世界不存在对应事态。</p>
-    <p><a href="https://www.gnu.org/software/grep/manual/grep.html#General-Output-Control">GNU grep 输出控制</a>可以列出指定输入中没有选中行的文件。这个行为是很好的工程类比：结果始终受输入文件、匹配表达式和读取错误约束；一次无匹配不能越过搜索范围成为普遍否定。</p>
-    <p><a href="https://opentelemetry.io/docs/specs/otel/logs/data-model/">OpenTelemetry Logs 数据模型</a>区分事件发生时间与收集系统观察时间，并记录来源和属性。Noemion 据此作出一项明确推论：遥测记录可以成为观察，但这份数据模型本身不证明日志流完整；完整性仍须由独立的封闭声明和损失边界证明。</p>
+    <h2>外部查询与日志机制只证明什么</h2>
+    <div class="table-wrap"><table><thead><tr><th>外部资料</th><th>可采用的边界</th><th>不能推出</th></tr></thead><tbody>
+      <tr><td><a href="https://www.w3.org/TR/owl-primer/#Open_World_Assumption">W3C OWL 2 Primer</a></td><td>开放世界中未陈述的事实可能只是缺失，而非为假。</td><td>不把 OWL 个体、SHACL Shape 或 RDF 数据集直接变成 Endem 字段。</td></tr>
+      <tr><td><a href="https://www.w3.org/TR/shacl/#ClosedConstraintComponent">W3C SHACL 封闭约束</a>与 <a href="https://www.w3.org/TR/sparql11-query/#neg-notexists">SPARQL 1.1 NOT EXISTS</a></td><td>SHACL 只对焦点节点允许的属性作封闭限制；查询没有匹配只说明该查询范围。</td><td>形状 closed 或图模式无匹配都不证明日志源和现实世界完整。</td></tr>
+      <tr><td><a href="https://www.gnu.org/s/grep/manual/html_node/Exit-Status.html">GNU grep 退出状态</a></td><td>0 表示有选中行，1 表示无选中行，2 表示错误；输入和选项决定结果含义。</td><td>一次无匹配不能越过搜索范围成为普遍否定；静默模式也不能替代错误检查。</td></tr>
+      <tr><td><a href="https://opentelemetry.io/docs/specs/otel/logs/data-model/">OpenTelemetry Logs 数据模型</a></td><td>事件发生时间、观察时间、来源和属性可以分别保存。</td><td>这份数据模型本身不证明日志流完整。</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP 2025-11-25 Tools</a></td><td>协议错误、工具执行错误和工具结果保持可区分。</td><td>工具成功、空结果或模型总结不产生负事实、完整性或动作授权。</td></tr>
+    </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>后果与验证路线</h2>
-    <ul>
-      <li>END-CORE 新增显式关系极性、负观察依据和封闭观察范围三条义务。</li>
-      <li>自然语言设计语料保留三个否定案例，并新增十二个否定提案向量。</li>
-      <li>END-P1 增加一个负极性语义接受字节向量，不修改记录、字段键、枚举值或 Profile ID。</li>
-      <li>未来 Drasor 与 Iknem 必须保存空查询的实际范围、完整性声明和损失信息；当前没有日志收集器、策略引擎或求值器。</li>
-      <li>外部 Agent、MCP 工具、检索器或模型的“未发现”只是一项带来源声明，不能自动成为负极性观察。</li>
-    </ul>
-  </section>
-
-  <section class="content-band">
-    <h2>待定内容</h2>
-    <p>复合与量化否定、双重否定规范化、封闭声明的物理字段、跨生产者完整性合并、迟到窗口、撤销传播、负观察签名和隐私保护仍需新 Profile、威胁分析与实现证据。</p>
+    <h2>当前还不能实现哪些缺席判断</h2>
+    <p>END-P1 已有 <code>positive / negative</code> 枚举和一个负极性规范字节向量；本决定不增加 END-P1 字段。十二个否定提案向量只验证六个允许分类与六个确定拒绝，没有日志收集器、策略引擎或求值器。</p>
+    <p>复合与量化否定、双重否定规范化、封闭声明物理字段、跨生产者完整性合并、迟到窗口、撤销传播、负观察签名和隐私保护仍需新 Profile、威胁分析与实现证据。</p>
+    <div class="page-links">
+      <a class="page-link" href="../specifications/endem.html"><strong>查看事态与结果</strong><span>定位关系、极性、观察与四值判断。</span></a>
+      <a class="page-link" href="../specifications/iknem.html"><strong>查看证据边界</strong><span>理解有效性、覆盖度和撤销怎样分开。</span></a>
+      <a class="page-link" href="adr-0016-mene-time-model.html"><strong>查看时间证据</strong><span>为观察区间和迟到截止点建立边界。</span></a>
+      <a class="page-link" href="agent-system-boundaries.html"><strong>查看 Agent 边界</strong><span>避免把工具返回提升为本地事实。</span></a>
+    </div>
   </section>
   <div class="next-prev"><a href="adr-0016-mene-time-model.html">← ADR-0016</a><a href="adr-0018-quantification-and-membership.html">ADR-0018 →</a></div>
 </main>
