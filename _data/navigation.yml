@@ -119,7 +119,7 @@ modules:
           - { href: /architecture/adr-0033-text-identifier-specification-name.html, label: "ADR-0033 · 标准 ID 不能伪装成文件格式" }
           - { href: /architecture/adr-0034-pronunciation-and-oral-distinction.html, label: "ADR-0034 · 读得出，不等于听得清、写得回" }
           - { href: /architecture/adr-0035-public-actions-and-internal-responsibilities.html, label: "ADR-0035 · 用户任务不是内部职责清单" }
-          - { href: /architecture/adr-0036-source-bearing-and-stripped-release.html, label: "ADR-0036 · 来源保留与裁剪发布" }
+          - { href: /architecture/adr-0036-source-bearing-and-stripped-release.html, label: "ADR-0036 · 移除原文，就得到另一份制品" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:
