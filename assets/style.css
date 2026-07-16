@@ -1472,7 +1472,7 @@ body:not([data-page-role="portal"]) .page-link::before{
 .portal-feature-row::before{padding:5px}
 .portal-feature-row:focus-visible::before,
 body:not([data-page-role="portal"]) .page-link:focus-visible::before{
-  opacity:1;animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) 1 forwards
+  opacity:1;animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) infinite
 }
 .portal-feature-row:focus-visible,
 body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px}
@@ -1700,7 +1700,7 @@ body:not([data-page-role="portal"]) .page-link:focus-visible{outline-offset:-4px
   body[data-docs-layout="true"][data-site-module="endem"] .manual-article a:hover{color:var(--tool-accent)}
   .page-outline a:hover{color:var(--heading);box-shadow:0 0 0 1px var(--portal-coral)}
   .portal-feature-row:hover::before,
-  body:not([data-page-role="portal"]) .page-link:hover::before{opacity:1;animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) 1 forwards}
+  body:not([data-page-role="portal"]) .page-link:hover::before{opacity:1;animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) infinite}
   .portal-feature-row:hover .feature-copy strong{color:var(--portal-coral);transform:translateX(4px)}
   .portal-feature-row:hover .feature-visual{filter:brightness(1.045) contrast(1.02);transform:scale(1.025)}
   .portal-feature-row:hover .portal-arrow{color:#fff;background:var(--portal-coral-fill);box-shadow:0 0 0 1px var(--portal-coral-fill);transform:translateX(4px)}
