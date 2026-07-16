@@ -6,19 +6,19 @@
   "negative_semantic_source": "vectors/semantic/negative-relation-valid.json",
   "vectors": [
     {
-      "id": "WV-P1-SEMANTIC-ACCEPT-001",
+      "id": "WV-P1-PROFILE-ACCEPT-001",
       "hex": "vectors/wire/p1/minimal-semantic.hex",
-      "expect": {"result": "semantic-accept", "profile": "END-P1"}
+      "expect": {"result": "profile-accept", "profile": "END-P1", "content": "external-prerequisites-not-evaluated"}
     },
     {
-      "id": "WV-P1-APOR-ACCEPT-001",
+      "id": "WV-P1-APOR-PROFILE-ACCEPT-001",
       "hex": "vectors/wire/p1/minimal-apor.hex",
-      "expect": {"result": "semantic-accept", "profile": "END-P1"}
+      "expect": {"result": "profile-accept", "profile": "END-P1", "content": "external-prerequisites-not-evaluated"}
     },
     {
-      "id": "WV-P1-NEGATIVE-ACCEPT-001",
+      "id": "WV-P1-NEGATIVE-PROFILE-ACCEPT-001",
       "hex": "vectors/wire/p1/negative-relation.hex",
-      "expect": {"result": "semantic-accept", "profile": "END-P1"}
+      "expect": {"result": "profile-accept", "profile": "END-P1", "content": "external-prerequisites-not-evaluated"}
     },
     {
       "id": "WV-P1-REJECT-UNKNOWN-FIELD-001",

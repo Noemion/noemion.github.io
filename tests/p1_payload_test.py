@@ -422,7 +422,11 @@ def validate_records(records):
         if item[6] != sorted(item[6]) or len(item[6]) != len(set(item[6])):
             fail("endem.semantic.field.order", "END-FMT-013", f"{path}/allowed_resolutions")
         identifier(item[7], f"{path}/decision_authority")
-    return {"result": "semantic-accept", "profile": "END-P1"}
+    return {
+        "result": "profile-accept",
+        "profile": "END-P1",
+        "content": "external-prerequisites-not-evaluated",
+    }
 
 
 def mutate_records(records, vector_id):
@@ -526,7 +530,7 @@ def main():
     for vector in manifest.get("vectors", []):
         vector_id = vector["id"]
         seen.add(vector_id)
-        source_records = negative_records if vector_id == "WV-P1-NEGATIVE-ACCEPT-001" else base_records
+        source_records = negative_records if vector_id == "WV-P1-NEGATIVE-PROFILE-ACCEPT-001" else base_records
         expected_bytes = build_vector(source_records, vector_id)
         actual_bytes = load_hex(ROOT / vector["hex"])
         if actual_bytes != expected_bytes:
@@ -541,18 +545,18 @@ def main():
             errors.append(f"{vector_id}: diagnostic catalog missing {expected['code']}")
         if actual != expected:
             errors.append(f"{vector_id}: expected {expected}, got {actual}")
-        if expected["result"] == "semantic-accept":
+        if expected["result"] == "profile-accept":
             accept_count += 1
         else:
             reject_count += 1
     if len(seen) != len(manifest.get("vectors", [])):
         errors.append("END-P1 vector IDs must be unique")
     if accept_count != 3 or reject_count != 11:
-        errors.append("END-P1 requires three semantic accepts and eleven deterministic rejects")
+        errors.append("END-P1 requires three Profile accepts and eleven deterministic rejects")
     if errors:
         print("\n".join(errors))
         return 1
-    print("PASS: END-P1 encoded and decoded 14 wire vectors (3 semantic accepts, 11 deterministic rejects)")
+    print("PASS: END-P1 encoded and decoded 14 wire vectors (3 Profile accepts with external content prerequisites not evaluated, 11 deterministic rejects)")
     return 0
 
 

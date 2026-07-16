@@ -1,83 +1,89 @@
 ---
 layout: default
-title: "ADR-0023 Endem 内容标准分层"
+title: "ADR-0023 · 文件能读，不等于内容成立"
 page_role: "content"
 footer_text: "Noemion · ADR-0023"
 permalink: "/architecture/adr-0023-endem-content-standard.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0023</span></nav>
-  <header class="content-introduction"><h1>ADR-0023<br>Endem 内容标准</h1><p>把“所有 Endem 都要表达什么”“某一版本允许哪些字段”和“这些内容怎样装进字节文件”分开，避免一处变化牵动全部工具。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">END-CORE 0.1.0-draft</span><span class="badge">分层符合性</span><span class="badge">尚未实现</span></div></header>
+  <header class="content-introduction"><h1>ADR-0023<br>文件能读<br>不等于内容成立</h1><p>物理容器负责安全解释字节，内容 Profile 负责关闭字段和能力，通用内容标准负责约束目标语义。三层分别版本化、分别报告，任何一层都不能替下一层作出结论。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">END-CORE 0.1.0-draft</span><span class="badge">END-P1 0.1.0-draft</span><span class="badge">尚未实现</span></div></header>
 
-  <section class="content-stack">
-    <h2>直接结论</h2>
-    <p class="lead">项目需要一份目标文件内容标准，但不需要再造一个与 END-CORE 重复的规范。现有 <code>END-CORE</code> 正式承担通用内容标准，<code>END-P1</code> 承担来源保留的形成 Profile，<code>END-FMT</code> 只承担物理容器。最终发布 Profile 由 ADR-0036 另行约束，当前尚未定义。</p>
-    <p>这三层必须分别版本化、分别验证。能读出目录不表示内容合格，字段集合闭合不表示语义成立，内容成立也不表示目标已经实现或被权威接受。</p>
+  <section class="content-wide">
+    <h2>用一次读取流程理解三层符合性</h2>
+    <p class="lead">读取器收到一份声明为 END-P1 的实验性 <code>.endem</code> 文件。它可以安全读出六个记录，也可以确认字段和引用闭合；但在外部授权决定尚未核对时，仍不能声称 END-CORE 内容已经成立。</p>
+    <div class="flow"><div class="step">固定格式与<br>Profile 版本</div><div class="step">检查头部目录<br>范围与编码</div><div class="step">检查字段枚举<br>引用与预算</div><div class="step">核对外部授权<br>与伴随资料</div><div class="step">判断 END-CORE<br>内容是否成立</div><div class="step">另行判断目标<br>与最终接受</div></div>
+    <div class="table-wrap"><table><thead><tr><th>处理阶段</th><th>当前文件可以证明</th><th>必须停止的情况</th></tr></thead><tbody>
+      <tr><td>固定解释规则</td><td>头部声明 <code>END-FMT 0.1</code> 和 <code>profile_id=2</code>，调用方也明确支持相应草案。</td><td>按“最新版本”、文件扩展名、环境搜索或猜测解释。</td></tr>
+      <tr><td>容器检查</td><td>固定前导、目录、偏移、长度、对齐和确定性 CBOR 可以安全解释。</td><td>越界、重叠、非最短编码、未知关键记录或预算超限。</td></tr>
+      <tr><td>Profile 检查</td><td>六个记录满足 END-P1 的封闭字段、类型、枚举、排序、来源范围和引用规则。</td><td>未知字段、悬空引用、未经登记的状态或能力。</td></tr>
+      <tr><td>内容检查</td><td>只有外部 AUT-CORE 授权等前置条件也精确绑定并通过后，才可能声明 END-CORE 内容接受。</td><td>把权威名称、签名外观、本地 ACL 或缓存成功当成外部义务已经完成。</td></tr>
+      <tr><td>后续判断</td><td>内容可进入证据、会话和目标判断流程。</td><td>把内容接受直接提升为目标满足、可执行、已签署或最终获准。</td></tr>
+    </tbody></table></div>
+    <p>因此，通用 CBOR 解码成功、六个记录齐全或 END-P1 检查通过，都不能简写为“有效 Endem”。</p>
   </section>
 
   <section class="content-wide">
-    <h2>ELF 提供的真正借鉴</h2>
-    <p>ELF 不是由 IETF RFC 定义。它主要由 System V ABI 中的通用 ELF 规范，以及面向具体处理器的 psABI 补充共同定义。通用规范说明头部、节、符号、重定位和装载视图；处理器补充再约束机器相关内容。</p>
-    <div class="table-wrap"><table><thead><tr><th>ELF 分层</th><th>Endem 对应职责</th><th>不能照搬</th></tr></thead><tbody>
-      <tr><td>通用对象规则</td><td><code>END-CORE</code> 定义所有 Endem 共享的内容语义、不变量与符合性边界</td><td>机器指令、地址、处理器寄存器和传统链接语义</td></tr>
-      <tr><td>处理器或平台补充</td><td><code>END-P*</code> 固定某一能力集合的字段、枚举、规范顺序、引用和资源上限</td><td>把运行平台、模型供应商或操作系统变成自然语言语义</td></tr>
-      <tr><td>文件结构与数据表示</td><td><code>END-FMT</code> 定义字节路线图、记录目录、确定性编码和有界读取</td><td>用容器结构替代语义验证</td></tr>
-      <tr><td>工具与实现</td><td>未来 Ktisor 与独立 Theor 共享规范和向量，不共享解析实现</td><td>把某个实现的内部结构当成标准</td></tr>
+    <h2>通用内容、内容 Profile 与物理容器各自负责什么</h2>
+    <div class="table-wrap"><table><thead><tr><th>规范层次</th><th>回答的问题</th><th>当前权威源</th><th>不得越界</th></tr></thead><tbody>
+      <tr><td>通用内容</td><td>什么是一个 Endem；六个语义面、关系、状态、身份和信任边界怎样成立。</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 0.1.0-draft</a></td><td>不规定魔数、字段宽度、记录编号或具体编码。</td></tr>
+      <tr><td>内容能力集（Profile）</td><td>这一版本实际允许哪些字段、枚举、组合、顺序、状态和资源上限。</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 0.1.0-draft</a></td><td>只能收窄能力或补齐字段，不能改写六个语义面的职责。</td></tr>
+      <tr><td>物理容器</td><td>读取器怎样定位记录、解释字节并拒绝越界、歧义和非规范编码。</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 0.1.0-draft</a></td><td>结构合法不等于字段闭合，更不等于内容成立。</td></tr>
+      <tr><td>版本与验证索引</td><td>精确版本、条款、威胁、场景和正反向量是否能够追溯。</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">规范与验证索引</a>及向量目录</td><td>测试结果不能建立第二套语义，也不能证明组件已经实现。</td></tr>
+    </tbody></table></div>
+    <p>项目需要一份 Endem 内容标准，但不新增重复规范 ID：现有 END-CORE 正式承担通用内容标准，ADR 只解释采用理由，登记与向量只提供可审查证据。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>P0、P1 与未来发布 Profile 不是连续信任等级</h2>
+    <div class="table-wrap"><table><thead><tr><th>Profile</th><th>用途与内容</th><th>单文件最高结论</th><th>不能怎样使用</th></tr></thead><tbody>
+      <tr><td>END-P0<br>结构实验</td><td>验证固定头部、目录、六种记录和受限 CBOR；载荷可以是空映射。</td><td><code>structural-accept</code><br>Profile 尚未求值</td><td>不能称为最小有效 Endem，也不能承载真实目标内容。</td></tr>
+      <tr><td>END-P1<br>含来源形成 Profile</td><td>保存实际进入形成过程的自然语言、六个非空语义记录、来源范围和封闭引用。</td><td><code>profile-accept</code><br><code>content=external-prerequisites-not-evaluated</code></td><td>不能发布为最终裁剪制品，也不能凭权威名称补齐外部授权。</td></tr>
+      <tr><td>未来裁剪发布 Profile</td><td>移除原始自然语言和可逆副本，保留运行必需的语义结构，并重新定义来源绑定和披露边界。</td><td>尚未定义</td><td>不能直接删除 <code>rhem.content</code> 后沿用 END-P1、旧身份、签名或接受状态。</td></tr>
+    </tbody></table></div>
+    <p>形成版与发布版必须是两个精确对象。它们在生命周期上类似“含调试资料的构建产物”和 GNU <code>strip</code> 处理后的发行产物，但 Noemion 不照搬 ELF 节、符号或 <code>.gnu_debuglink</code>；未来 Profile 必须逐项定义保留、删除、降精度、重写和失败责任。</p>
+    <p>新增 Profile 或字段前，必须有不可替代的消费者、生产者、规范化规则、未知能力行为、资源上限、威胁、支持案例、反例和正反向量。模型提示、推理轨迹、实时凭据、遥测导出、签名、证据和最终决定不进入 Endem 内容身份。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>每一层都要用自己的结果名称</h2>
+    <div class="table-wrap"><table><thead><tr><th>结果层</th><th>当前报告方式</th><th>它明确没有证明什么</th></tr></thead><tbody>
+      <tr><td>容器接受</td><td><code>structural-accept</code>，或带 <code>layer=structure</code> 的拒绝诊断。</td><td>没有证明字段集合符合任何内容 Profile。</td></tr>
+      <tr><td>Profile 接受</td><td><code>profile-accept</code>，并记录精确 Profile 身份。</td><td>没有证明外部授权、签名、证据或撤销前置条件已经核对。</td></tr>
+      <tr><td>内容接受</td><td>未来符合性报告必须绑定 END-CORE、Profile 和全部外部前置条件的结果。</td><td>没有证明现实目标已经满足、会话可以运行或最终权威已经接受。</td></tr>
+      <tr><td>目标满足</td><td><code>met / unmet / agno / fault</code>。</td><td>没有作出发布、部署或其他权威决定。</td></tr>
+      <tr><td>权威决定</td><td><code>accepted / rejected / deferred</code>，并绑定决定者、范围和依据。</td><td>不会反向改变 Endem 内容身份或历史检查结果。</td></tr>
+    </tbody></table></div>
+    <p>三个 END-P1 接受向量现已从含义过宽的 <code>semantic-accept</code> 改为 <code>profile-accept / external-prerequisites-not-evaluated</code>。这一结果准确反映机器检查已经完成的范围，并与 END-P1 的声明上限一致。</p>
+    <p class="callout"><strong>名称与口头边界：</strong>Profile 在中文交流中可能指用户画像、性能剖析或配置文件，首次出现应写“内容能力集（Profile）”。不要只说“P 零”“P 一”或“通过了”，应说“END-P0 结构实验”“END-P1 含来源形成 Profile”“容器接受”或“Profile 接受”。日志也不得用裸露的 <code>valid=true</code> 合并层次。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>系统格式与 AI 格式只能提供哪些借鉴</h2>
+    <p><strong>复核日期：</strong>2026-07-16。ELF 不是由 IETF RFC 定义；当前 gABI 页面本身标为 4.3 Draft，因此这里只采用可验证的结构机制，不把它当作 Endem 的语义权威。</p>
+    <div class="table-wrap"><table><thead><tr><th>外部资料</th><th>可采用的机制</th><th>Noemion 不继承</th></tr></thead><tbody>
+      <tr><td><a href="https://gabi.xinuos.com/elf/01-intro.html">ELF gABI 对象格式</a></td><td>固定头部提供文件路线图，节与程序头面向不同读取任务；处理器补充另行约束机器细节。</td><td>不采用地址、指令、装载段、处理器 ABI 或链接语义。</td></tr>
+      <tr><td><a href="https://www.rfc-editor.org/rfc/rfc8949.html">RFC 8949 CBOR</a></td><td>提供确定长度、最短编码和映射键排序等确定性编码基础。</td><td>具体协议仍须冻结允许类型、字段语义和拒绝规则；通用解码成功不是符合性。</td></tr>
+      <tr><td><a href="https://sourceware.org/binutils/docs/binutils/readelf.html">GNU readelf</a></td><td>独立于 BFD 解析 ELF，支持未来形成器与独立检查器采用不同代码路径。</td><td>工具独立不自动证明两套实现都正确。</td></tr>
+      <tr><td><a href="https://sourceware.org/binutils/docs/binutils/ar-cmdline.html">GNU ar 确定性模式</a></td><td><code>-D</code> 清除 UID、GID、时间戳差异并固定文件模式，减少环境噪声。</td><td>确定字节不等于内容语义正确或来源可信。</td></tr>
+      <tr><td><a href="https://sourceware.org/binutils/docs/binutils/strip.html">GNU strip 与独立调试资料</a></td><td><code>--strip-debug</code>、<code>--only-keep-debug</code> 和 <code>.gnu_debuglink</code> 展示形成资料与发行制品分离的生命周期。</td><td>删除错误节可能让文件不可用；Noemion 必须用新 Profile 和新身份定义裁剪。</td></tr>
+      <tr><td><a href="https://onnx.ai/onnx/repo-docs/IR.html">ONNX 1.23.0 IR</a></td><td>分别版本化 IR、模型和算子集；模型必须声明所依赖算子集，运行时不支持就拒绝。</td><td>不采用计算图、算子语义或运行时执行能力；模型格式可读也不证明模型安全可靠。</td></tr>
+      <tr><td><a href="https://spdx.github.io/spdx-spec/v3.0.1/serializations/">SPDX 3.0.1 模型与序列化</a></td><td>分开逻辑数据模型、物理序列化，并分别进行结构与语义验证。</td><td>不采用 RDF、JSON-LD 或 SPDX Profile；序列化一致不等于 Endem 内容接受。</td></tr>
+      <tr><td><a href="https://specs.opencontainers.org/image-spec/descriptor/">OCI Content Descriptor</a></td><td>以媒体类型、摘要和字节大小精确引用外部内容，并在读取前核对。</td><td>摘要只标识字节，不证明被引用内容满足 Endem 语义或获得授权。</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>采用的规范层次</h2>
-    <div class="table-wrap"><table><thead><tr><th>层次</th><th>必须回答</th><th>当前权威源</th></tr></thead><tbody>
-      <tr><td>通用内容</td><td>什么是一个 Endem，六个语义面怎样分工，引用和授权怎样闭合，哪些状态与结果不得混用</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 0.1.0-draft</a></td></tr>
-      <tr><td>内容 Profile</td><td>这一版本允许哪些字段、类型、枚举、关系结构、排序、状态与预算</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 0.1.0-draft</a></td></tr>
-      <tr><td>物理容器</td><td>怎样找到记录、解释字节、拒绝越界与非规范编码</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 0.1.0-draft</a></td></tr>
-      <tr><td>登记与证据</td><td>精确版本、条款、威胁、场景和正反向量是否一一对应</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">规范与验证登记</a>及向量目录</td></tr>
-    </tbody></table></div>
-  </section>
-
-  <section class="content-wide">
-    <h2>三种接受必须分别报告</h2>
-    <div class="flow"><div class="step">容器接受</div><div class="step">Profile 接受</div><div class="step">内容接受</div><div class="step">生命周期与证据</div><div class="step">满足判断</div><div class="step">权威决定</div></div>
-    <ul>
-      <li>容器接受只说明头部、目录、范围与编码可以安全解释。</li>
-      <li>Profile 接受只说明字段、枚举、排序、引用和资源约束符合指定版本。</li>
-      <li>内容接受说明对象满足 END-CORE 的语义与授权义务，但不证明现实中的目标事态成立。</li>
-      <li>END-P1 不承载授权决定；只有精确外部前置条件已核对时，内容接受才能继续。</li>
-      <li>签名、Iknem、运行会话、满足判断和最终决定继续保持各自独立的结果域。</li>
-    </ul>
-  </section>
-
-  <section class="content-wide">
-    <h2>扩展规则</h2>
-    <p>第一版稳定标准之前不承诺向后兼容。新增 Profile 或字段时直接替换旧设计，不保留含义漂移的别名；但每次改变都必须显式绑定新版本并提供威胁、支持案例、反例和正反向量。</p>
-    <ul>
-      <li>Profile 可以收窄能力或补齐物理字段，不能改写六个语义面的职责。</li>
-      <li>未知必需能力关闭失败；当前没有供应商私有语义区或运行时动态补字段。</li>
-      <li>没有具名生产者、消费者和失败责任的字段不进入内容标准。</li>
-      <li>模型候选、提示、计划、推理轨迹、实时凭据和遥测导出字段不进入 Endem 内容身份。</li>
-      <li>授权、签名、证据、撤销和最终决定也不进入内容身份；它们使用外部伴随关系。</li>
-    </ul>
-  </section>
-
-  <section class="content-wide">
-    <h2>权威资料与采用限制</h2>
-    <ul>
-      <li><a href="https://gabi.xinuos.com/elf/01-intro.html">ELF Object File Format 的文件结构说明</a>分开链接视图与执行视图，并让固定头部成为解释文件的路线图。Endem 借鉴分层和可独立解释性，不采用机器程序语义。</li>
-      <li><a href="https://gabi.xinuos.com/elf/03-sheader.html">ELF Sections</a>定义节目录、类型、链接信息与扩展范围。Endem 借鉴显式目录和封闭类型，不把语义面降格成任意节名。</li>
-      <li><a href="https://refspecs.linuxfoundation.org/ELF/ppc64/PPC-elf64abi-1.8.html">PowerPC 64 位 ELF ABI 补充</a>明确区分通用 ABI 与处理器补充。Endem 的 Profile 类比这种职责分层，但不对应处理器。</li>
-      <li><a href="https://www.rfc-editor.org/rfc/rfc2119.html">RFC 2119</a>与 <a href="https://www.rfc-editor.org/rfc/rfc8174.html">RFC 8174</a>只提供规范要求用语，不定义 Endem 内容。</li>
-    </ul>
-  </section>
-
-  <section class="content-stack">
-    <h2>后果与当前状态</h2>
-    <ul>
-      <li>END-CORE 的标题、范围与符合性条款明确成为内容标准，不新增重复规范 ID。</li>
-      <li>END-P1 继续是实验性设计 Profile；它只支持 nascent、kine 和当前封闭字段，不代表稳定 ABI。</li>
-      <li>ADR-0030 已修正内容身份与授权伴随关系；END-P1 单文件最高只支持 Profile 接受。</li>
-      <li>当前规范、登记与向量的一致性结果不能证明任何写入器、读取器、CLI 或运行时已经实现。</li>
-    </ul>
+    <h2>当前还不能承诺哪些实现与兼容性</h2>
+    <p>END-FMT、END-P0 与 END-P1 都是实验草案，不是稳定 ABI。量化、时间、测量、裁剪发布、内容摘要、签名包络、Semantic Key、Iknem 绑定、压缩、加密、流式传输、MIME 类型和跨版本升级仍未冻结。</p>
+    <p>当前规范、登记、三个 END-P1 Profile 接受向量和十一项确定拒绝，只证明资料与实验字节在现行检查器中一致，不能证明任何写入器、读取器、CLI 或运行时已经实现。项目也没有可执行的裁剪命令、生产格式兼容承诺或供应商私有语义区。</p>
+    <p>第一版稳定标准之前，改变字段、编号或结果域就直接产生新草案版本，不保留含义漂移的别名。未知必需能力关闭失败；没有真实消费者和失败责任的字段不进入内容标准。</p>
+    <div class="page-links">
+      <a class="page-link" href="../specifications/endem.html"><strong>查看 Endem 开发者规范</strong><span>从六项职责进入通用内容标准。</span></a>
+      <a class="page-link" href="../endem/docs/format.html"><strong>查看容器格式手册</strong><span>核对固定头部、目录、Profile 和拒绝顺序。</span></a>
+      <a class="page-link" href="adr-0011-endem-container.html"><strong>查看字节读取边界</strong><span>理解为何必须先做有界结构检查。</span></a>
+      <a class="page-link" href="adr-0036-source-bearing-and-stripped-release.html"><strong>查看形成版与发布版</strong><span>了解来源保留和未来裁剪 Profile 的边界。</span></a>
+    </div>
   </section>
   <div class="next-prev"><a href="adr-0022-iknem-evidence-and-appraisal.html">← ADR-0022</a><a href="adr-0024-dromen-session-contract.html">ADR-0024 →</a></div>
 </main>
