@@ -922,6 +922,7 @@ def validate_public_boundary(errors):
             "文本与标识符核心规范",
         ),
         "architecture/adr-0034-pronunciation-and-oral-distinction.html": (
+            "读得出，不等于听得清、写得回",
             "当前审查",
             "四项独立审查",
             "ISO 704:2022",
@@ -933,6 +934,8 @@ def validate_public_boundary(errors):
             "成对混淆矩阵",
             "首次朗读",
             "听写回填",
+            "零关键混淆是 Noemion 的发行风险政策",
+            "转写是有来源的异步系统输出",
             "不建立语音接口",
             "不创建语音界面",
         ),
