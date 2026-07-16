@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Exact Content Identity and Attestation Core Specification · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/identity-core.html"
+summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+---
 # Exact Content Identity and Attestation Core Specification
 
 - 规范 ID：`ID-CORE`

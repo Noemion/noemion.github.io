@@ -38,7 +38,7 @@ permalink: "/specifications/identity.html"
       <tr><td><code>ID-REP-001</code></td><td>固定输入闭包、工具和参数，并比较独立路径产出的完整字节</td><td>相同日志、build ID、缓存副本或单次重跑冒充可复现性</td></tr>
       <tr><td><code>ID-REL-001</code></td><td>让形成版、裁剪发布版和伴随资料各有身份、损失清单与显式关系</td><td>派生物继承来源身份、签名、证据、接受状态或能力</td></tr>
     </tbody></table></div>
-    <p class="callout"><strong>权威边界：</strong><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-core.md">ID-CORE 条款源</a>定义实现义务。页面只提供检查顺序，不建立第二套身份格式、算法登记或签名 Profile。</p>
+    <p class="callout"><strong>权威边界：</strong><a href="https://noemion.github.io/spec/identity-core.html">ID-CORE 条款源</a>定义实现义务。页面只提供检查顺序，不建立第二套身份格式、算法登记或签名 Profile。</p>
   </section>
 
   <section class="content-wide">
@@ -57,12 +57,12 @@ permalink: "/specifications/identity.html"
     <p><a href="https://www.rfc-editor.org/rfc/rfc6920.html">RFC 6920</a>用算法、长度和完整摘要建立名称与数据的完整性绑定，但具体摘要输入仍由使用它的规范定义。<a href="https://www.rfc-editor.org/rfc/rfc9052.html">RFC 9052 COSE</a>明确把 <code>kid</code> 作为不保证唯一的密钥查找提示；<a href="https://github.com/secure-systems-lab/dsse/blob/master/envelope.md">DSSE 1.0.2</a>则把载荷类型与载荷共同纳入签名协议。它们支持身份语境和类型分离，不替 Noemion 选择物理包络。</p>
     <p>截至 2026 年 7 月 16 日，<a href="https://docs.sigstore.dev/about/bundle/">Sigstore Bundle 0.3.2</a>仍把签名内容与证书、时间戳和透明日志等验证材料组合保存；<a href="https://slsa.dev/spec/v1.2/verifying-artifacts">SLSA 1.2 制品验证</a>要求先匹配陈述主体摘要，再按验证者配置的信任根、构建者和参数判断来源。<a href="https://sourceware.org/binutils/docs/ld/Options.html#index-_002d_002dbuild_002did_003dstyle">GNU <code>ld</code> build ID</a>只标识原始链接输出，不是当前文件校验和；<a href="https://guix.gnu.org/manual/en/guix.pdf">GNU Guix challenge</a>把可复现性落到独立产出的逐字节比较。</p>
     <div class="page-links">
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-threat-model.md"><strong>身份与签名威胁模型</strong><span>覆盖身份混淆、降级、重放、撤销和信任继承威胁。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-scenarios.md"><strong>设计场景</strong><span>用支持案例、反例与边界场景检查身份责任；场景不是签名格式或组件证据。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/identity-threat-model.html"><strong>身份与签名威胁模型</strong><span>覆盖身份混淆、降级、重放、撤销和信任继承威胁。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/identity-scenarios.html"><strong>设计场景</strong><span>用支持案例、反例与边界场景检查身份责任；场景不是签名格式或组件证据。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/identity"><strong>精确身份提案向量</strong><span>覆盖允许包络与确定拒绝，并绑定对应条款；向量不证明摘要器、签名器或验证器已经实现。</span></a>
       <a class="page-link" href="../architecture/adr-0027-exact-identity-and-attestation.html"><strong>ADR-0027 · 签名有效，不等于制品获准</strong><span>说明共同身份标准、有类型签名和验证材料边界。</span></a>
       <a class="page-link" href="../architecture/adr-0036-source-bearing-and-stripped-release.html"><strong>ADR-0036</strong><span>说明含来源形成版、裁剪发布版与受控伴随资料的关系。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md"><strong>模型训练与更新边界研究</strong><span>把训练数据、基础模型、适配器和派生权重的身份问题留在非规范研究中。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/model-training-and-update-boundaries-proposal.html"><strong>模型训练与更新边界研究</strong><span>把训练数据、基础模型、适配器和派生权重的身份问题留在非规范研究中。</span></a>
     </div>
     <p><strong>待定内容：</strong>发行摘要与签名算法、算法登记表、摘要文本语法、COSE、DSSE 或 Sigstore Profile、证书体系、透明日志、时间戳、撤销分发、Semantic Key、跨版本等价和来源伴随物理格式均保持开放。</p>
     <p><strong>限制条件：</strong>ID-CORE 不是新制品、命令、密码算法或 Semantic Key。当前没有摘要器、签名器、验证器、透明日志客户端、可复现构建系统或发布组件。</p>

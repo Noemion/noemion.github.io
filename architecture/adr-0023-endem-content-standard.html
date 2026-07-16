@@ -26,9 +26,9 @@ permalink: "/architecture/adr-0023-endem-content-standard.html"
   <section class="content-wide">
     <h2>通用内容、内容 Profile 与物理容器各自负责什么</h2>
     <div class="table-wrap"><table><thead><tr><th>规范层次</th><th>回答的问题</th><th>当前权威源</th><th>不得越界</th></tr></thead><tbody>
-      <tr><td>通用内容</td><td>什么是一个 Endem；六个语义面、关系、状态、身份和信任边界怎样成立。</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 0.1.0-draft</a></td><td>不规定魔数、字段宽度、记录编号或具体编码。</td></tr>
+      <tr><td>通用内容</td><td>什么是一个 Endem；六个语义面、关系、状态、身份和信任边界怎样成立。</td><td><a href="https://noemion.github.io/spec/endem-core.html">END-CORE 0.1.0-draft</a></td><td>不规定魔数、字段宽度、记录编号或具体编码。</td></tr>
       <tr><td>内容能力集（Profile）</td><td>这一版本实际允许哪些字段、枚举、组合、顺序、状态和资源上限。</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">END-P1 0.1.0-draft</a></td><td>只能收窄能力或补齐字段，不能改写六个语义面的职责。</td></tr>
-      <tr><td>物理容器</td><td>读取器怎样定位记录、解释字节并拒绝越界、歧义和非规范编码。</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 0.1.0-draft</a></td><td>结构合法不等于字段闭合，更不等于内容成立。</td></tr>
+      <tr><td>物理容器</td><td>读取器怎样定位记录、解释字节并拒绝越界、歧义和非规范编码。</td><td><a href="https://noemion.github.io/spec/endem-format.html">END-FMT 0.1.0-draft</a></td><td>结构合法不等于字段闭合，更不等于内容成立。</td></tr>
       <tr><td>版本与验证索引</td><td>精确版本、条款、威胁、场景和正反向量是否能够追溯。</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">规范与验证索引</a>及向量目录</td><td>测试结果不能建立第二套语义，也不能证明组件已经实现。</td></tr>
     </tbody></table></div>
     <p>项目需要一份 Endem 内容标准，但不新增重复规范 ID：现有 END-CORE 正式承担通用内容标准，ADR 只解释采用理由，登记与向量只提供可审查证据。</p>

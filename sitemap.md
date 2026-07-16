@@ -70,6 +70,62 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Text and identifier boundaries](https://noemion.github.io/specifications/text-and-identifiers.html) — strict UTF-8, source provenance, ASCII identifiers, comparison, ranges, bidi, hidden characters, model input, and display views
 - [Authority and authorization decisions](https://noemion.github.io/specifications/authority.html) — named authority, exact scope, semantic authorization, delegation, consent, revocation, replay, and capability intersection
 
+## Versioned specification sources
+
+<!-- BEGIN GENERATED SPEC ROUTES -->
+- [Noemion 规范源](https://noemion.github.io/spec/index.html) — versioned clauses, threat models, scenarios, and research proposals generated from their Markdown sources
+- [External Protocol Adapter Core Specification](https://noemion.github.io/spec/adapter-core.html) — versioned specification source with maturity and verification boundaries
+- [External Protocol Adapter Natural-Language Design Scenarios](https://noemion.github.io/spec/adapter-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [External Protocol Adapter Threat Model](https://noemion.github.io/spec/adapter-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+- [Authority and Authorization Decision Core Specification](https://noemion.github.io/spec/authority-core.html) — versioned specification source with maturity and verification boundaries
+- [Authority and Authorization Decision Natural-Language Design Scenarios](https://noemion.github.io/spec/authority-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [Authority and Authorization Decision Threat Model](https://noemion.github.io/spec/authority-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+- [能力发现、协商与调用边界研究提案](https://noemion.github.io/spec/capability-discovery-and-negotiation-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Diagnostic Catalog](https://noemion.github.io/spec/diagnostic-catalog.html) — versioned specification source with maturity and verification boundaries
+- [Diagnostic Natural-Language Design Scenarios](https://noemion.github.io/spec/diagnostic-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [Diagnostic Threat Model](https://noemion.github.io/spec/diagnostic-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+- [Diagnostic Core Specification](https://noemion.github.io/spec/diagnostics-core.html) — versioned specification source with maturity and verification boundaries
+- [Dromen Core Session Contract](https://noemion.github.io/spec/dromen-core.html) — versioned specification source with maturity and verification boundaries
+- [Dromen 自然语言设计场景](https://noemion.github.io/spec/dromen-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [Dromen Threat Model](https://noemion.github.io/spec/dromen-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+- [Endem Core Content Standard](https://noemion.github.io/spec/endem-core.html) — versioned specification source with maturity and verification boundaries
+- [Endem Container Format](https://noemion.github.io/spec/endem-format.html) — versioned specification source with maturity and verification boundaries
+- [Endem Natural-Language Scenario Corpus](https://noemion.github.io/spec/endem-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [Endem Source Manifest](https://noemion.github.io/spec/endem-source-manifest.html) — versioned specification source with maturity and verification boundaries
+- [Endem Core Threat Model](https://noemion.github.io/spec/endem-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+- [GNU 与 ELF 机制适用性研究提案](https://noemion.github.io/spec/gnu-elf-applicability-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Noemion 托管人工智能服务与用户控制边界研究提案](https://noemion.github.io/spec/hosted-ai-service-and-user-control-boundaries-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Exact Content Identity and Attestation Core Specification](https://noemion.github.io/spec/identity-core.html) — versioned specification source with maturity and verification boundaries
+- [Exact Content Identity and Attestation Natural-Language Design Scenarios](https://noemion.github.io/spec/identity-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [Exact Content Identity and Attestation Threat Model](https://noemion.github.io/spec/identity-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+- [Iknem Core Specification](https://noemion.github.io/spec/iknem-core.html) — versioned specification source with maturity and verification boundaries
+- [Iknem Natural-Language Design Scenarios](https://noemion.github.io/spec/iknem-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [Iknem Threat Model](https://noemion.github.io/spec/iknem-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+- [Noemion 生命周期与结果词边界研究提案](https://noemion.github.io/spec/lifecycle-and-result-terminology-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [记忆、检查点与恢复边界研究提案](https://noemion.github.io/spec/memory-checkpoint-and-resumption-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [模型、适配器与能力域隔离研究提案](https://noemion.github.io/spec/model-adapter-isolation-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Noemion 模型参与评测与裁判边界研究提案](https://noemion.github.io/spec/model-assisted-evaluation-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [模型上下文装配边界研究提案](https://noemion.github.io/spec/model-context-assembly-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Noemion 模型开放性与软件自由边界研究提案](https://noemion.github.io/spec/model-openness-and-software-freedom-boundaries-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Noemion 模型训练与更新边界研究提案](https://noemion.github.io/spec/model-training-and-update-boundaries-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [并行、推测执行与提交边界研究提案](https://noemion.github.io/spec/parallel-and-speculative-execution-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [目标、计划与重规划边界研究提案](https://noemion.github.io/spec/planning-and-replanning-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [预览、模拟与批准边界研究提案](https://noemion.github.io/spec/preview-simulation-and-approval-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Noemion 发行术语去专名化研究提案](https://noemion.github.io/spec/release-terminology-simplification-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Noemion 语义等价与迁移边界研究提案](https://noemion.github.io/spec/semantic-equivalence-and-migration-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Noemion 语义面与观察词去专名化研究提案](https://noemion.github.io/spec/semantic-facet-terminology-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Noemion 软件 Agent 数据使用、保留与删除边界研究提案](https://noemion.github.io/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [软件 Agent 身份、委托与责任链研究提案](https://noemion.github.io/spec/software-agent-identity-and-accountability-boundaries-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Noemion 状态变化与因果归因边界研究提案](https://noemion.github.io/spec/state-change-and-causal-attribution-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Synem Core Specification](https://noemion.github.io/spec/synem-core.html) — versioned specification source with maturity and verification boundaries
+- [Synem Natural-Language Design Scenarios](https://noemion.github.io/spec/synem-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [Synem Core Threat Model](https://noemion.github.io/spec/synem-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+- [Noemion `telis` 发行词候选研究提案](https://noemion.github.io/spec/telis-release-terms-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
+- [Text and Identifier Core Specification](https://noemion.github.io/spec/text-identifier-core.html) — versioned specification source with maturity and verification boundaries
+- [Text and Identifier Natural-Language Design Scenarios](https://noemion.github.io/spec/text-identifier-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [Text and Identifier Threat Model](https://noemion.github.io/spec/text-identifier-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+<!-- END GENERATED SPEC ROUTES -->
+
 ## Guides and reference
 
 - [Documentation center](https://noemion.github.io/docs/index.html) — task-oriented reading paths
@@ -105,7 +161,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Availability and authority
 
-- Canonical website explanations are HTML. Versioned implementation obligations live in the linked `spec/*.md` sources, while `spec/registry.json` and `vectors/` provide machine-readable maturity and test traceability; they are not duplicate Pages routes.
+- Public technical documents use Markdown as their only editable body source and Jekyll generates the registered HTML routes above. Versioned implementation obligations remain in `spec/*.md`; `spec/registry.json` and `vectors/` provide machine-readable maturity and test traceability.
 - Project status, proposed designs, normative specifications, and verified evidence remain distinct. Follow each page's maturity and authority labels.
 - END-CORE 0.1.0-draft and its first semantic vectors are public engineering drafts, not a stable specification or wire-format release.
 - No public executable release is currently available. The downloads page is the authoritative source for release availability.

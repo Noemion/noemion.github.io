@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Dromen Threat Model · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/dromen-threat-model.html"
+summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+---
 # Dromen Threat Model
 
 - Document ID: `DRO-THREAT`

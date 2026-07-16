@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Noemion 软件 Agent 数据使用、保留与删除边界研究提案 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.html"
+summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+---
 # Noemion 软件 Agent 数据使用、保留与删除边界研究提案
 
 状态：非规范研究提案

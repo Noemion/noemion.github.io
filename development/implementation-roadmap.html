@@ -42,7 +42,7 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td><a href="https://guix.gnu.org/manual/en/guix.html#Invoking-guix-challenge">GNU Guix challenge</a></td><td>从独立来源取得产物并逐字节比较，同时保留差异供调查</td><td>相同字节不证明设计正确；不同字节也不自动选择可信一方</td></tr>
       <tr><td><a href="https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html">GNU 手册规范</a></td><td>先定义术语，再按开发者要完成的工作和问题组织教程与参考</td><td>不按内部组件清单组织公开学习路径，也不复制 GNU 的命令或格式</td></tr>
     </tbody></table></div>
-    <p>Section、Segment、符号、重定位、裁剪和调试分离的逐项适用性见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/gnu-elf-applicability-proposal.md">GNU 与 ELF 适用性研究</a>。该研究只提供比较材料，不定义 Noemion 格式或组件。</p>
+    <p>Section、Segment、符号、重定位、裁剪和调试分离的逐项适用性见<a href="https://noemion.github.io/spec/gnu-elf-applicability-proposal.html">GNU 与 ELF 适用性研究</a>。该研究只提供比较材料，不定义 Noemion 格式或组件。</p>
   </section>
 
   <section class="content-wide">
@@ -55,7 +55,7 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td>模型与数据：规划、记忆、检索、训练和托管执行属于不同数据路径</td><td>记录实际模型输入、预处理、模型与版本、保留和删除条件、无模型基线、评测总体与不确定性</td><td>模型流畅度、基准得分、开放权重或可调用 API 不能证明目标忠实、服务控制或安全净增益</td></tr>
       <tr><td>遥测：<a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a>已把 GenAI 约定移至独立仓库</td><td>固定仓库提交与 Schema URL，限定最小字段、披露预算和接收方，再评估默认脱敏的单向导出</td><td>Schema URL 与遥测记录不进入 Endem 编码、Iknem 身份、授权决定或最终接受</td></tr>
     </tbody></table></div>
-    <p><strong>当前模型策略：</strong>设备内阶段只验证纯文本小模型从数据到 CPU 量化推理的完整路径；外部算力阶段才比较全参数微调、长上下文强化和教师蒸馏。详见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究</a>。只提供封闭 API 且不能导出完整派生权重的服务，不能产生计划中的设备内发行候选。</p>
+    <p><strong>当前模型策略：</strong>设备内阶段只验证纯文本小模型从数据到 CPU 量化推理的完整路径；外部算力阶段才比较全参数微调、长上下文强化和教师蒸馏。详见<a href="https://noemion.github.io/spec/model-training-and-update-boundaries-proposal.html">模型训练与更新边界研究</a>。只提供封闭 API 且不能导出完整派生权重的服务，不能产生计划中的设备内发行候选。</p>
   </section>
 
   <section class="content-band"><h2>当前限制条件</h2><p>当前没有 Rust 组件、CLI、协议适配器、沙箱、签名 Profile、安装包或软件发行。开发者现在可以审查规范与验证设计，也可以按<a href="https://github.com/Noemion/noemion.github.io/blob/main/CONTRIBUTING.md">贡献指南</a>提交事实、术语、案例和边界修订；路线图不承诺日期，也不把研究主题写成待实现功能清单。</p></section>

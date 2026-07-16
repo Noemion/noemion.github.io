@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "模型上下文装配边界研究提案 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/model-context-assembly-proposal.html"
+summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+---
 # 模型上下文装配边界研究提案
 
 - 状态：非规范研究提案

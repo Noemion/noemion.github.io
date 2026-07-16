@@ -565,12 +565,18 @@ def validate_public_boundary(errors):
         errors.append("Pages workflow must execute text and identifier vectors")
     if "python3 tests/authority_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute authority and authorization vectors")
-    for exact_exclusion in ("  - experiments/", "  - spec/", "  - vectors/"):
+    for exact_exclusion in ("  - experiments/", "  - vectors/"):
         if exact_exclusion not in config_text:
             errors.append(f"_config.yml: missing exact exclusion {exact_exclusion.strip()!r}")
-    if re.search(r"^\s*-\s+(?:experiments|spec|vectors)\s*$", config_text, re.MULTILINE):
+    if "  - spec/" in config_text or re.search(
+        r"^\s*-\s+spec/?\s*$", config_text, re.MULTILINE
+    ):
         errors.append(
-            "_config.yml: bare spec/vectors exclusions can also hide prefix-matching public routes"
+            "_config.yml: spec Markdown must be rendered into public HTML, not excluded"
+        )
+    if re.search(r"^\s*-\s+(?:experiments|vectors)\s*$", config_text, re.MULTILINE):
+        errors.append(
+            "_config.yml: bare experiments/vectors exclusions can also hide prefix-matching public routes"
         )
 
     public_contracts = {
@@ -605,9 +611,9 @@ def validate_public_boundary(errors):
             "有类型外部陈述",
             "验证政策与截止点",
             "依赖方准入判断",
-            "spec/endem-core.md",
-            "spec/endem-format.md",
-            "spec/endem-scenarios.md",
+            "spec/endem-core.html",
+            "spec/endem-format.html",
+            "spec/endem-scenarios.html",
             "复杂目标从哪个问题进入",
             "五个结果域分别回答什么",
             "ADR-0015",
@@ -629,11 +635,11 @@ def validate_public_boundary(errors):
         "docs/specifications-reference.md": (
             "END-CORE 0.1.0-draft",
             "END-FMT 0.1.0-draft",
-            "spec/endem-core.md",
-            "spec/endem-format.md",
+            "spec/endem-core.html",
+            "spec/endem-format.html",
             "机器可读登记",
-            "spec/endem-threat-model.md",
-            "spec/endem-scenarios.md",
+            "spec/endem-threat-model.html",
+            "spec/endem-scenarios.html",
             "不属于上述规范义务",
             "ADR-0015",
             "ADR-0016",
@@ -990,18 +996,18 @@ def validate_public_boundary(errors):
         ),
         "specifications/synem.html": (
             "SYN-CORE 0.1.0-draft",
-            "spec/synem-core.md",
-            "spec/synem-threat-model.md",
-            "spec/synem-scenarios.md",
+            "spec/synem-core.html",
+            "spec/synem-threat-model.html",
+            "spec/synem-scenarios.html",
             "active / inactive / unresolved / error",
             "ADR-0021",
             "不是物理格式",
         ),
         "specifications/iknem.html": (
             "IKN-CORE 0.1.0-draft",
-            "spec/iknem-core.md",
-            "spec/iknem-threat-model.md",
-            "spec/iknem-scenarios.md",
+            "spec/iknem-core.html",
+            "spec/iknem-threat-model.html",
+            "spec/iknem-scenarios.html",
             "valid / invalid / revoked",
             "sufficient / insufficient",
             "model-candidate",
@@ -1010,9 +1016,9 @@ def validate_public_boundary(errors):
         ),
         "specifications/dromen.html": (
             "DRO-CORE 0.1.0-draft",
-            "spec/dromen-core.md",
-            "spec/dromen-threat-model.md",
-            "spec/dromen-scenarios.md",
+            "spec/dromen-core.html",
+            "spec/dromen-threat-model.html",
+            "spec/dromen-scenarios.html",
             "DRO-SUB-001",
             "DRO-LIF-001",
             "不是文件、进程、模型上下文、凭据包、可恢复会话或最终结果",

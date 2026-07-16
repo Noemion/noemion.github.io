@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "能力发现、协商与调用边界研究提案 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/capability-discovery-and-negotiation-proposal.html"
+summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+---
 # 能力发现、协商与调用边界研究提案
 
 状态：非规范研究提案  
@@ -247,13 +255,13 @@ Noemion 借用的纪律是：选择外部工具不能只看产品名、路径、
 
 ## 决定边界
 
-本轮可以形成的结论是：
+当前研究可以形成的结论是：
 
 1. 对端声明、协议协商、授权、Dromen 上限、即时可调用和调用结果必须分开。
 2. 新能力不能扩写旧 Dromen；能力移除、撤销或实质漂移必须阻止陈旧调用。
 3. scope、Agent Card、工具 schema、签名、健康检查和一次成功调用都不能单独成为完整能力结论。
 4. 现有 ADP、AUT、DRO、DIA、IKN、ID、TEXT-IDENTIFIER 与 END 足以承载候选义务；当前不创建 `CAP-CORE`、能力制品或新专名。
-5. 这些结论不会在本轮改变任何现行规范条款、登记、向量、Dromen 字段或结果值。
+5. 这些结论当前不会改变任何现行规范条款、登记、向量、Dromen 字段或结果值。
 
 若责任分配经正式 ADR 接受，下一步应先用迁移 ADR 或现有规范修订逐项吸收唯一义务，再设计协议专属场景与正反向量。只有真实消费者证明这些责任无法由现有规范唯一承担时，才重新讨论独立标准。
 

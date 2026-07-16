@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Noemion 发行术语去专名化研究提案 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/release-terminology-simplification-proposal.html"
+summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+---
 # Noemion 发行术语去专名化研究提案
 
 状态：非规范研究提案
@@ -33,7 +41,7 @@ Noemion 当前的主要传播问题不是缺少一份“官方读音表”，而
 当前 Agent 协议进一步证明“一个神秘短名承担全部语义”不是必要设计：
 
 - [MCP 2025-11-25 工具定义](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)分开唯一 `name`、可读 `title`、职责 `description`、输入输出 schema、行为提示和任务支持声明；提示仍是不可信信息，不能替代授权或隔离。
-- [A2A AgentSkill](https://a2a-protocol.org/latest/definitions/)分开唯一 `id`、人类可读 `name`、详细 `description`、标签、示例和输入输出模态。
+- [A2A 1.0.0 AgentSkill](https://a2a-protocol.org/v1.0.0/specification/)分开唯一 `id`、人类可读 `name`、详细 `description`、标签、示例和输入输出模态。
 
 Noemion 可以采用这种分离：普通词负责可读性，规范 ID 负责稳定引用，条款和 schema 负责精确语义，权限边界负责强制。专名不能同时替代这四层。
 

@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "模型、适配器与能力域隔离研究提案 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/model-adapter-isolation-proposal.html"
+summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+---
 # 模型、适配器与能力域隔离研究提案
 
 - 状态：非规范研究提案
@@ -24,7 +32,7 @@
 9. 观察和日志只是带方法、范围、损失与披露限制的候选记录；它们不能成为隐藏写通道、授权通道或充分 Iknem。
 10. 会话结束、Dromen 失效或租户切换后，秘密、句柄、工作区、缓存、网络连接和适配状态不得跨边界复用。
 
-本提案不构成 ADR、CORE 规范、Profile 或实现要求。它不创建隔离制品、沙箱格式、部署对象、命令、组件、结果域、稳定接口或哲学专名；不创建 `ISO-CORE`、`SANDBOX-CORE`；不进入 `registry.json`。这些结论不会在本轮改变现行 DRO、AUT、ADP、ID、TEXT-IDENTIFIER、DIA、IKN、END 或 SYN 条款、登记、向量、Dromen 字段和结果值。
+本提案不构成 ADR、CORE 规范、Profile 或实现要求。它不创建隔离制品、沙箱格式、部署对象、命令、组件、结果域、稳定接口或哲学专名；不创建 `ISO-CORE`、`SANDBOX-CORE`；不进入 `registry.json`。这些结论当前不会改变现行 DRO、AUT、ADP、ID、TEXT-IDENTIFIER、DIA、IKN、END 或 SYN 条款、登记、向量、Dromen 字段和结果值。
 
 ## 为什么现有抽象边界仍需要这份提案
 

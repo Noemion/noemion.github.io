@@ -1360,6 +1360,12 @@ body[data-docs-layout="true"] .page-links{margin-inline:calc(-1 * var(--site-con
 }
 .manual-article>blockquote>p{margin:0}
 .manual-article blockquote.callout{margin:18px 0;padding:18px 20px}
+.spec-source-article>h1{display:none}
+.spec-source-article>:is(p,ul,ol,blockquote){max-width:900px}
+.spec-source-article>table{min-width:760px}
+.spec-source-actions{display:flex;flex-wrap:wrap;gap:12px;padding:28px var(--site-content-inline) 52px;border-top:1px solid var(--portal-line)}
+.spec-source-actions a{display:inline-flex;align-items:center;min-height:44px;padding:10px 14px;color:var(--heading);background:var(--paper-subtle);border:1px solid var(--rule);text-decoration:none}
+.spec-source-actions a:hover{border-color:var(--accent);background:var(--paper-raised)}
 .manual-generated-index{padding-bottom:54px!important}
 .manual-index-group{margin-top:34px}
 .manual-index-group>h3{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:18px}

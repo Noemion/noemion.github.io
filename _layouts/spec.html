@@ -1,0 +1,27 @@
+---
+layout: default
+---
+{% assign spec_heading = page.title | replace: ' · Noemion', '' %}
+<main id="main-content" class="spec-source-page" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑">
+    <a href="{{ '/index.html' | relative_url }}">项目</a><span aria-hidden="true">/</span>
+    <a href="{{ '/specifications/index.html' | relative_url }}">规范</a><span aria-hidden="true">/</span>
+    {% unless page.permalink == '/spec/index.html' %}<a href="{{ '/spec/index.html' | relative_url }}">规范源</a><span aria-hidden="true">/</span>{% endunless %}
+    <span aria-current="page">{{ spec_heading }}</span>
+  </nav>
+
+  <header class="content-introduction spec-source-introduction">
+    <h1>{{ spec_heading }}</h1>
+    <p>{{ page.summary }}</p>
+    <div class="badges"><span class="badge">Markdown 唯一正文源</span><span class="badge">自动生成 HTML</span></div>
+  </header>
+
+  <article class="manual-article spec-source-article">
+    {{ content }}
+  </article>
+
+  <div class="spec-source-actions">
+    <a href="https://github.com/Noemion/noemion.github.io/blob/main/{{ page.path }}">查看 Markdown 源</a>
+    {% unless page.permalink == '/spec/index.html' %}<a href="{{ '/spec/index.html' | relative_url }}">返回规范源目录</a>{% endunless %}
+  </div>
+</main>

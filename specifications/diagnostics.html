@@ -37,7 +37,7 @@ permalink: "/specifications/diagnostics.html"
       <tr><td><code>DIA-BND-001</code></td><td>用有限预算在分配前限制数量、深度、位置、消息、建议和总输出</td><td>诊断风暴、递归自报错误，或截断时丢失主诊断</td></tr>
       <tr><td><code>DIA-ATM-001</code></td><td>阻断错误使本次操作原子失败，并把后续层标为 <code>not-run</code></td><td>同时返回部分可信对象、成功状态或可继续使用的内部引用</td></tr>
     </tbody></table></div>
-    <p class="callout"><strong>权威边界：</strong><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md">DIA-CORE 条款源</a>定义规范义务。公开说明只提供开发者检查顺序，不建立第二套诊断字段或失败语义。</p>
+    <p class="callout"><strong>权威边界：</strong><a href="https://noemion.github.io/spec/diagnostics-core.html">DIA-CORE 条款源</a>定义规范义务。公开说明只提供开发者检查顺序，不建立第二套诊断字段或失败语义。</p>
   </section>
 
   <section class="content-wide">
@@ -57,9 +57,9 @@ permalink: "/specifications/diagnostics.html"
     <p>截至 2026 年 7 月 16 日，MCP 仍把 <a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">2025-11-25 工具规范</a>列入当前修订，并分开 JSON-RPC 协议错误与带 <code>isError</code> 的工具执行错误。<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0.0</a>仍是最新正式版，要求 JSON-RPC、gRPC 与 HTTP 绑定保留同一错误语义。这些协议规定外部错误怎样表达，不决定 Noemion 的失败层次、主诊断、恢复权限或结果域。</p>
     <p><code>DIA-CAT</code> 使用受影响对象或诊断系统作为机器码首段，例如 <code>endem.*</code>、<code>dromen.*</code> 与 <code>diagnostic.*</code>；Noemion 是项目品牌，不进入机器码。目录版本必须随诊断固定，当前机器码仍是草案接口，不是稳定 ABI。</p>
     <div class="page-links">
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md"><strong>DIA-CAT 诊断目录</strong><span>登记跨 Endem、Synem、Dromen、Iknem 与诊断系统自身的草案机器码。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-threat-model.md"><strong>诊断威胁模型</strong><span>检查消息解析、状态洗白、主错误竞态、自动提权、泄密、风暴和部分成功。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-scenarios.md"><strong>设计场景</strong><span>用支持案例、反例和边界场景检查失败责任；场景不是实现或符合性声明。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/diagnostic-catalog.html"><strong>DIA-CAT 诊断目录</strong><span>登记跨 Endem、Synem、Dromen、Iknem 与诊断系统自身的草案机器码。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/diagnostic-threat-model.html"><strong>诊断威胁模型</strong><span>检查消息解析、状态洗白、主错误竞态、自动提权、泄密、风暴和部分成功。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/diagnostic-scenarios.html"><strong>设计场景</strong><span>用支持案例、反例和边界场景检查失败责任；场景不是实现或符合性声明。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/diagnostics"><strong>结构化诊断提案向量</strong><span>检查允许包络与确定拒绝；向量不证明诊断系统已经实现。</span></a>
       <a class="page-link" href="../architecture/adr-0025-structured-diagnostics.html"><strong>ADR-0025</strong><span>说明跨对象诊断、确定主错误和最小披露的背景与采用限制。</span></a>
     </div>

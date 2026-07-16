@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Noemion 生命周期与结果词边界研究提案 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/lifecycle-and-result-terminology-proposal.html"
+summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+---
 # Noemion 生命周期与结果词边界研究提案
 
 状态：非规范研究提案

@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Diagnostic Catalog · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/diagnostic-catalog.html"
+summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+---
 # Diagnostic Catalog
 
 - 登记 ID：`DIA-CAT`
@@ -211,4 +219,4 @@
 4. 文本、SARIF、HTTP、MCP 与遥测适配前后保持机器语义；
 5. CLI 退出状态与结构化物理编码由单独 ADR 和规范字节冻结。
 
-当前目录只由资料检查器核对。Ktisor、Theor、Drasor、诊断生产器、渲染器和协议适配器均未实现。
+当前目录只由一致性检查工具核对。Ktisor、Theor、Drasor、诊断生产器、渲染器和协议适配器均未实现。

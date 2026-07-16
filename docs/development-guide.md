@@ -84,7 +84,7 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 
 供应商未公开的内部变换保持未知，不能写成“完整上下文已经保留”。模型返回工具请求后，控制平面仍按 AUT-CORE 与当前 Dromen 重新检查；工具成功只形成带来源的观察，不产生新权限、`met` 或 `accepted`。
 
-[NIST 智能体劫持研究](https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations)支持把可信内部指令与不可信外部数据分开；[MCP 工具规范](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)也要求客户端把工具注解视为不可信。完整案例与失败归属见[模型上下文装配边界研究提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md)。这些资料不定义 Noemion 的消息角色、字段或授权结果。
+[NIST 智能体劫持研究](https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations)支持把可信内部指令与不可信外部数据分开；[MCP 工具规范](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)也要求客户端把工具注解视为不可信。完整案例与失败归属见[模型上下文装配边界研究提案](https://noemion.github.io/spec/model-context-assembly-proposal.html)。这些资料不定义 Noemion 的消息角色、字段或授权结果。
 
 ## 当前阶段怎样停止
 

@@ -48,15 +48,15 @@ permalink: "/specifications/dromen.html"
       <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 Task</a></td><td>Task 是有状态协议对象，历史可以被截短，取消只是尝试，状态和产物属于远端任务</td><td>Task、history、artifact 与 <code>completed</code> 保留外部来源；它们不能恢复旧会话，也不能直接成为本地满足结果或最终接受</td></tr>
       <tr><td><a href="https://www.gnu.org/software/make/manual/html_node/Interrupts.html">GNU make 中断处理</a></td><td>中断时可能删除部分改写的目标，防止下次把半成品误当成最新；清理仍可能失败</td><td>部分产物和未知副作用保持为待核对事实；清理、重试或新契约都不能恢复旧权限</td></tr>
     </tbody></table></div>
-    <p>更强的状态恢复责任见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/memory-checkpoint-and-resumption-proposal.md">记忆、检查点与恢复研究提案</a>；模型、控制面、凭据、适配器和观察通道怎样隔离，见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-adapter-isolation-proposal.md">模型、适配器与能力域隔离研究提案</a>。两者仍是非规范研究，不修改 DRO-CORE。</p>
+    <p>更强的状态恢复责任见<a href="https://noemion.github.io/spec/memory-checkpoint-and-resumption-proposal.html">记忆、检查点与恢复研究提案</a>；模型、控制面、凭据、适配器和观察通道怎样隔离，见<a href="https://noemion.github.io/spec/model-adapter-isolation-proposal.html">模型、适配器与能力域隔离研究提案</a>。两者仍是非规范研究，不修改 DRO-CORE。</p>
   </section>
 
   <section class="content-band">
     <h2>规范来源与当前上限</h2>
     <div class="page-links">
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md"><strong>DRO-CORE 会话条款</strong><span>规定主体、政策、环境、能力、秘密、预算、激活、观察、只读和生命周期。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-threat-model.md"><strong>Dromen 威胁模型</strong><span>检查主体替换、权限放大、凭据泄漏、预算逃逸、契约漂移和会话复活。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md"><strong>Dromen 自然语言场景</strong><span>用支持案例、反例和边界场景检查会话职责；它们不是实现或符合性声明。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/dromen-core.html"><strong>DRO-CORE 会话条款</strong><span>规定主体、政策、环境、能力、秘密、预算、激活、观察、只读和生命周期。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/dromen-threat-model.html"><strong>Dromen 威胁模型</strong><span>检查主体替换、权限放大、凭据泄漏、预算逃逸、契约漂移和会话复活。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/dromen-scenarios.html"><strong>Dromen 自然语言场景</strong><span>用支持案例、反例和边界场景检查会话职责；它们不是实现或符合性声明。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/dromen/cases.json"><strong>Dromen 提案向量</strong><span>记录允许契约与确定拒绝的资料一致性矩阵。</span></a>
     </div>
     <p><strong>当前策略：</strong>DRO-CORE 0.1.0-draft 只定义一次会话的抽象只读执行契约。页面、场景和提案向量可以检查资料一致性，不能证明会话隔离、安全或互操作已经实现。</p>

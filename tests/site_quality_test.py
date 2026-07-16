@@ -25,7 +25,8 @@ SOURCE_HTML_FILES = sorted(
 MANUAL_MARKDOWN_FILES = sorted(
     [*SOURCE_ROOT.glob("docs/*.md"), *SOURCE_ROOT.glob("endem/docs/*.md")]
 )
-SOURCE_PAGE_FILES = sorted([*SOURCE_HTML_FILES, *MANUAL_MARKDOWN_FILES])
+SPEC_MARKDOWN_FILES = sorted(SOURCE_ROOT.glob("spec/*.md"))
+SOURCE_PAGE_FILES = sorted([*SOURCE_HTML_FILES, *MANUAL_MARKDOWN_FILES, *SPEC_MARKDOWN_FILES])
 HTML_FILES = SOURCE_HTML_FILES if SOURCE_ONLY else sorted(ROOT.rglob("*.html"))
 RAW_AMP = re.compile(r"&(?![A-Za-z][A-Za-z0-9]+;|#[0-9]+;|#x[0-9A-Fa-f]+;)")
 NAVIGATION_HREF = re.compile(r"\bhref:\s*[\"']?(/[^,}\s\"']+)")
@@ -1253,7 +1254,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "更强问题应当进入哪份研究",
             "当前状态与限制条件",
             "截至 2026-07-15",
-            "software-agent-identity-and-accountability-boundaries-proposal.md",
+            "software-agent-identity-and-accountability-boundaries-proposal.html",
             "待定内容",
         ),
     },
@@ -1557,6 +1558,11 @@ def read_route_rows():
             kind = "docs"
             parent = "endem/index.html"
             order = 0
+        elif route == "spec/index.html":
+            kind = "content"
+            parent = "specifications/index.html"
+            sibling_orders[parent] += 1
+            order = sibling_orders[parent]
         elif re.fullmatch(r"endem/docs/[^/]+\.html", route):
             kind = "topic"
             parent = "endem/docs/index.html"
@@ -1887,6 +1893,8 @@ def validate_prose_readability_contracts():
                     "6. ", "7. ", "8. ", "9. ", "|", "```", ">",
                 ))
             ]
+        if path in SPEC_MARKDOWN_FILES:
+            continue
         for block in prose_blocks:
             visible = re.sub(r"https?://[^\s<)]+", "", block)
             visible = re.sub(r"{%.*?%}|{{.*?}}", " ", visible, flags=re.DOTALL)
@@ -2187,7 +2195,7 @@ def validate_jekyll_sources():
         for public_source in (
             SOURCE_ROOT / "architecture" / "open-questions.html",
         ):
-            if "spec/model-context-assembly-proposal.md" not in public_source.read_text():
+            if "spec/model-context-assembly-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the model context research proposal"
                 )
@@ -2207,7 +2215,7 @@ def validate_jekyll_sources():
             "Symbol versioning",
             "`objcopy` / `strip` / debug link",
             "带错继续和部分输出",
-            "未来采用的证据门",
+            "未来采用的证据要求",
             "不进入 `registry.json`",
             "进入规范前的条件",
         ):
@@ -2220,7 +2228,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
         ):
-            if "gnu-elf-applicability-proposal.md" not in public_source.read_text():
+            if "gnu-elf-applicability-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the GNU and ELF research proposal"
                 )
@@ -2255,7 +2263,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
         ):
-            if "planning-and-replanning-proposal.md" not in public_source.read_text():
+            if "planning-and-replanning-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the planning research proposal"
                 )
@@ -2292,7 +2300,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
         ):
-            if "semantic-equivalence-and-migration-proposal.md" not in public_source.read_text():
+            if "semantic-equivalence-and-migration-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the semantic equivalence research proposal"
                 )
@@ -2340,7 +2348,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "state-change-and-causal-attribution-proposal.md" not in public_source.read_text():
+            if "state-change-and-causal-attribution-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the causation research proposal"
                 )
@@ -2375,7 +2383,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
         ):
-            if "telis-release-terms-proposal.md" not in public_source.read_text():
+            if "telis-release-terms-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the telis release terms proposal"
                 )
@@ -2402,7 +2410,7 @@ def validate_jekyll_sources():
             "ISO 704:2022",
             "GNU Coding Standards 的 Names 规则",
             "MCP 2025-11-25 工具定义",
-            "A2A AgentSkill",
+            "A2A 1.0.0 AgentSkill",
             "NIST Dictionary of Algorithms and Data Structures",
             "W3C PROV-DM",
             "RFC 9334 RATS Architecture",
@@ -2423,7 +2431,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "release-terminology-simplification-proposal.md" not in public_source.read_text():
+            if "release-terminology-simplification-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the release terminology proposal"
                 )
@@ -2469,7 +2477,7 @@ def validate_jekyll_sources():
             "GNU Coding Standards 的 Names 规则",
             "ISO/IEC/IEEE 29148:2018",
             "MCP 2025-11-25 Schema",
-            "A2A Agent Discovery",
+            "A2A 1.0.0 版本化规范",
             "NIST AI RMF Core",
             "W3C PROV-DM",
             "W3C SOSA/SSN",
@@ -2490,7 +2498,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "semantic-facet-terminology-proposal.md" not in public_source.read_text():
+            if "semantic-facet-terminology-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the semantic facet terminology proposal"
                 )
@@ -2578,7 +2586,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "lifecycle-and-result-terminology-proposal.md" not in public_source.read_text():
+            if "lifecycle-and-result-terminology-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the lifecycle terminology proposal"
                 )
@@ -2763,7 +2771,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "specifications" / "authority.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
         ):
-            if "preview-simulation-and-approval-proposal.md" not in public_source.read_text():
+            if "preview-simulation-and-approval-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the preview and approval research proposal"
                 )
@@ -2812,7 +2820,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
         ):
-            if "memory-checkpoint-and-resumption-proposal.md" not in public_source.read_text():
+            if "memory-checkpoint-and-resumption-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the memory and resumption research proposal"
                 )
@@ -2868,7 +2876,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "不创建 `CAP-CORE`、能力制品或新专名",
-            "这些结论不会在本轮改变任何现行规范条款、登记、向量、Dromen 字段或结果值",
+            "这些结论当前不会改变任何现行规范条款、登记、向量、Dromen 字段或结果值",
         ):
             if token not in proposal_text:
                 errors.append(f"capability discovery proposal missing governance boundary: {token}")
@@ -2883,7 +2891,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "docs" / "architecture-guide.md",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "capability-discovery-and-negotiation-proposal.md" not in public_source.read_text():
+            if "capability-discovery-and-negotiation-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the capability discovery research proposal"
                 )
@@ -2928,7 +2936,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "design-system" / "language-and-naming.md",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "software-agent-identity-and-accountability-boundaries-proposal.md" not in public_source.read_text():
+            if "software-agent-identity-and-accountability-boundaries-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the software Agent identity research proposal"
                 )
@@ -2974,7 +2982,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "docs" / "architecture-guide.md",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "parallel-and-speculative-execution-proposal.md" not in public_source.read_text():
+            if "parallel-and-speculative-execution-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the parallel execution research proposal"
                 )
@@ -3027,7 +3035,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "docs" / "architecture-guide.md",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "model-adapter-isolation-proposal.md" not in public_source.read_text():
+            if "model-adapter-isolation-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the model adapter isolation research proposal"
                 )
@@ -3079,7 +3087,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "development" / "testing.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "model-assisted-evaluation-proposal.md" not in public_source.read_text():
+            if "model-assisted-evaluation-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the model-assisted evaluation research proposal"
                 )
@@ -3134,7 +3142,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "development" / "testing.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "model-training-and-update-boundaries-proposal.md" not in public_source.read_text():
+            if "model-training-and-update-boundaries-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the model training and update research proposal"
                 )
@@ -3184,7 +3192,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "model-openness-and-software-freedom-boundaries-proposal.md" not in public_source.read_text():
+            if "model-openness-and-software-freedom-boundaries-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the model openness research proposal"
                 )
@@ -3237,7 +3245,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "hosted-ai-service-and-user-control-boundaries-proposal.md" not in public_source.read_text():
+            if "hosted-ai-service-and-user-control-boundaries-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the hosted AI service research proposal"
                 )
@@ -3290,7 +3298,7 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "design-system" / "language-and-naming.md",
             SOURCE_ROOT / "content-quality-audit.md",
         ):
-            if "software-agent-data-use-retention-and-deletion-boundaries-proposal.md" not in public_source.read_text():
+            if "software-agent-data-use-retention-and-deletion-boundaries-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the data lifecycle research proposal"
                 )
@@ -3362,7 +3370,7 @@ def validate_jekyll_sources():
             "software-agent-data-use-retention-and-deletion-boundaries-proposal.md",
             "semantic-equivalence-and-migration-proposal.md",
         ):
-            if proposal_name not in boundary_text:
+            if proposal_name.replace(".md", ".html") not in boundary_text:
                 errors.append(f"Agent boundary guide must link research input: {proposal_name}")
         for mechanical_heading in (
             "十六条最危险的越级路径",
@@ -3409,13 +3417,13 @@ def validate_jekyll_sources():
         "GNU BFD canonical form",
         "GNU 标准目标",
         "RFC 8785",
-        "model-assisted-evaluation-proposal.md",
+        "model-assisted-evaluation-proposal.html",
         "NIST AI 800-2 初始公开草案",
         "NIST AI 800-3",
         "NIST 部署后 AI 监测研究",
         "GNU Diffutils",
         "训练完成、损失下降或固定种子",
-        "model-training-and-update-boundaries-proposal.md",
+        "model-training-and-update-boundaries-proposal.html",
         "NIST SP 800-218A",
     ):
         if token not in verification_text:
@@ -3699,7 +3707,7 @@ def validate_jekyll_sources():
         "release-terminology-simplification-proposal.md",
         "semantic-facet-terminology-proposal.md",
     ):
-        if proposal_name not in open_questions_text:
+        if proposal_name.replace(".md", ".html") not in open_questions_text:
             errors.append(f"open questions guide must route the research proposal: {proposal_name}")
     for old_heading in (
         "<h2>内容与物理格式</h2>",
@@ -3862,9 +3870,10 @@ def validate_jekyll_sources():
             if row
             else front_matter_value(metadata, "page_role")
         )
-        is_manual_markdown = path.suffix == ".md"
+        is_manual_markdown = path in MANUAL_MARKDOWN_FILES
+        is_spec_markdown = path in SPEC_MARKDOWN_FILES
         expected = {
-            "layout": "manual" if is_manual_markdown else "default",
+            "layout": "manual" if is_manual_markdown else ("spec" if is_spec_markdown else "default"),
             "page_role": expected_role,
             "permalink": "/" + route,
         }
@@ -3878,6 +3887,10 @@ def validate_jekyll_sources():
         body = text[match.end():]
         if is_manual_markdown:
             entry_text = front_matter_value(metadata, "page_lead") or ""
+        elif is_spec_markdown:
+            entry_text = front_matter_value(metadata, "summary") or ""
+            if not entry_text:
+                errors.append(f"{route}: spec Markdown front matter requires summary")
         elif route == "index.html":
             entry_text = ""
         else:
@@ -3924,6 +3937,7 @@ def validate_jekyll_sources():
             for key in ("manual_id", "manual_group", "manual_order", "nav_title", "page_heading", "page_lead"):
                 if front_matter_value(metadata, key) is None:
                     errors.append(f"{route}: Markdown manual requires {key}")
+        if path.suffix == ".md":
             body_without_autolinks = re.sub(
                 r"<(?:https?://|mailto:)[^>]+>", "", body, flags=re.IGNORECASE
             )
@@ -3931,12 +3945,13 @@ def validate_jekyll_sources():
                 errors.append(f"{route}: Markdown body must not contain raw HTML")
             if re.search(r"^\s*\{:", body, re.MULTILINE):
                 errors.append(f"{route}: Markdown body must not use Kramdown attributes")
-            headings = re.findall(r"^##\s+(.+?)\s*$", body, re.MULTILINE)
-            normalized_headings = [heading.replace("`", "") for heading in headings]
-            if route in DOC_GUIDE_HEADINGS and normalized_headings != DOC_GUIDE_HEADINGS[route]:
-                errors.append(
-                    f"{route}: Markdown h2 sequence must be {DOC_GUIDE_HEADINGS[route]}, got {headings}"
-                )
+            if is_manual_markdown:
+                headings = re.findall(r"^##\s+(.+?)\s*$", body, re.MULTILINE)
+                normalized_headings = [heading.replace("`", "") for heading in headings]
+                if route in DOC_GUIDE_HEADINGS and normalized_headings != DOC_GUIDE_HEADINGS[route]:
+                    errors.append(
+                        f"{route}: Markdown h2 sequence must be {DOC_GUIDE_HEADINGS[route]}, got {headings}"
+                    )
         else:
             parser = parse(path)
             if parser.main_targets != 1:
@@ -6422,6 +6437,7 @@ def main():
             "project" if row["route"] == "index.html"
             else "resources" if route_head in {"downloads", "news"}
             else "support" if route_head == "faq"
+            else "architecture" if route_head == "spec"
             else route_head
         )
         if expected_module not in SITE_MODULES:
@@ -6871,13 +6887,15 @@ def main():
         )
         declared.discard("")
         registered_set = set(registered)
-        manual_routes = {
+        generated_markdown_routes = {
             route for route in registered
-            if route.startswith("docs/") or route.startswith("endem/docs/")
+            if route.startswith("docs/")
+            or route.startswith("endem/docs/")
+            or route.startswith("spec/")
         }
         if not declared <= registered_set:
             errors.append("built navigation data contains links outside the formal route registry")
-        missing_static = sorted((registered_set - manual_routes) - declared)
+        missing_static = sorted((registered_set - generated_markdown_routes) - declared)
         if missing_static:
             errors.append(f"built navigation data does not cover non-manual routes: {missing_static}")
         directory_source = directory_module.read_text()

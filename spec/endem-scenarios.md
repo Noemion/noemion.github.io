@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Endem Natural-Language Scenario Corpus · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/endem-scenarios.html"
+summary: "非规范设计场景，记录支持案例、反例与待确认边界。"
+---
 # Endem Natural-Language Scenario Corpus
 
 - 语料 ID：`END-SCEN`
@@ -26,7 +34,7 @@
 
 - **来源表达：**“在发布窗口内持续保持主站可用。”
 - **预期分层：**`skena` 表达 `available(primary_site)`；`telis` 使用 `mene`，并引用已确定的发布窗口。
-- **未决边界：**时区、窗口起止、允许中断和“可用”的测量口径若未确定，必须进入 `apor`，不能由当前时间或监控默认值补齐。
+- **待定内容：**时区、窗口起止、允许中断和“可用”的测量口径若未确定，必须进入 `apor`，不能由当前时间或监控默认值补齐。
 - **审查结论：**现行核心能说明方向分离，但 END-P1 尚未冻结时间区间与连续测量语义。
 
 ### SCN-003 — 禁止事项由否定事态表达

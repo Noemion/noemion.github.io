@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Endem Core Content Standard · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/endem-core.html"
+summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+---
 # Endem Core Content Standard
 
 - 规范 ID：`END-CORE`

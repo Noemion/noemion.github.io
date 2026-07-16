@@ -18,7 +18,7 @@ badges: ["pleko", "Synem"]
 
 一项目标如果不依赖其他目标，可以独立完成引用检查。只有当它确实引用其他 Endem 的定义、产物、能力、约束或验收条件时，`pleko` 才把所有必需成员固定为 Synem。
 
-> Synem 是至少两个精确 Endem 的完整传递闭包，不是普通文件归档，也不是为模型自动扩展上下文的知识包。规范边界见 [SYN-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md) 与 [ADR-0021](../../architecture/adr-0021-synem-closure-and-activation.html)。
+> Synem 是至少两个精确 Endem 的完整传递闭包，不是普通文件归档，也不是为模型自动扩展上下文的知识包。规范边界见 [SYN-CORE](https://noemion.github.io/spec/synem-core.html) 与 [ADR-0021](../../architecture/adr-0021-synem-closure-and-activation.html)。
 
 ## 正式输入
 

@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Endem Core Threat Model · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/endem-threat-model.html"
+summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+---
 # Endem Core Threat Model
 
 - 适用规范：`END-CORE 0.1.0-draft`

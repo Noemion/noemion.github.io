@@ -50,13 +50,13 @@ Noemion 当前已经确定术语职责和读音审查方法，但新造词的发
 
 Noemion 当前没有语音界面。未来若研究口述动作，界面仍必须显示将要使用的精确机器动作、对象、参数和权限范围，并由适用权威确认；只有声音或转写结果不能触发执行。
 
-读音验证之前还必须先问“是否需要专名”。如果标准术语或简短职责短语已经能准确恢复对象、消费者和失败责任，继续创造新词只会增加记忆、听写和职责匹配负担。[发行术语去专名化研究提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/release-terminology-simplification-proposal.md)把这项审查应用到现行对象、角色和动作，但当前只形成候选，不修改规范。
+读音验证之前还必须先问“是否需要专名”。如果标准术语或简短职责短语已经能准确恢复对象、消费者和失败责任，继续创造新词只会增加记忆、听写和职责匹配负担。[发行术语去专名化研究提案](https://noemion.github.io/spec/release-terminology-simplification-proposal.html)把这项审查应用到现行对象、角色和动作，但当前只形成候选，不修改规范。
 
-[语义面与观察词去专名化提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/semantic-facet-terminology-proposal.md)把审查继续应用到 `rhem/semion/skena/telis/krin/apor/phain`。提案保留七项职责分层，并以七个直白字段名进入验证；它同样不修改现行 END-CORE、Profile 或来源清单。
+[语义面与观察词去专名化提案](https://noemion.github.io/spec/semantic-facet-terminology-proposal.html)把审查继续应用到 `rhem/semion/skena/telis/krin/apor/phain`。提案保留七项职责分层，并以七个直白字段名进入验证；它同样不修改现行 END-CORE、Profile 或来源清单。
 
-[生命周期与结果词边界提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/lifecycle-and-result-terminology-proposal.md)把审查应用到 `nascent/coherent/attested`、`agno/aseme` 与会话终止词。它把对象边界修正和发行命名分成两条迁移轴：前者可以暂时保留 `nascent/coherent`，只把外部陈述、验证与依赖方判断移出内容状态；后者才比较直白候选并等待人类证据。读音流畅不能保住语义错误的名称，普通词也仍须在完整域限定短语中验证。
+[生命周期与结果词边界提案](https://noemion.github.io/spec/lifecycle-and-result-terminology-proposal.html)把审查应用到 `nascent/coherent/attested`、`agno/aseme` 与会话终止词。它把对象边界修正和发行命名分成两条迁移轴：前者可以暂时保留 `nascent/coherent`，只把外部陈述、验证与依赖方判断移出内容状态；后者才比较直白候选并等待人类证据。读音流畅不能保住语义错误的名称，普通词也仍须在完整域限定短语中验证。
 
-桌面证据已经足以排除 `kine/mene` 作为首次正式发行拼写，但没有改变现行规范值。[`telis` 发行词候选提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/telis-release-terms-proposal.md)推荐先验证 `reach/maintain`；这两个词仍是候选，不是官方术语、别名或规范化结果。
+桌面证据已经足以排除 `kine/mene` 作为首次正式发行拼写，但没有改变现行规范值。[`telis` 发行词候选提案](https://noemion.github.io/spec/telis-release-terms-proposal.html)推荐先验证 `reach/maintain`；这两个词仍是候选，不是官方术语、别名或规范化结果。
 
 验证分成两个阶段：先让未接触项目的参与者暴露自然读法，再用另一批参与者检验候选读音能否在完整词表中被唯一听出、写回并匹配正确职责。两个阶段不能使用同一批人。
 
@@ -89,7 +89,7 @@ Noemion 当前没有语音界面。未来若研究口述动作，界面仍必须
 
 把录音送入外部 ASR、云存储或众包平台会增加新的实际处理者。研究负责人必须分别核对传输、区域、日志、人工访问、训练使用、保留、删除接口、下游服务和不可观察范围。供应商写“零保留”或返回删除成功，只能支持其声明范围内的事实，不能证明备份、镜像和派生物已经不可恢复。
 
-删除计划还要区分逻辑删除、平台删除请求、介质清除和可披露的删除确认。删除方法必须匹配实际存储；本地命令成功不能覆盖云端副本，平台收据也不能覆盖研究者导出的文件。完整判断方法见[软件 Agent 数据使用、保留与删除边界研究提案](https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md)。
+删除计划还要区分逻辑删除、平台删除请求、介质清除和可披露的删除确认。删除方法必须匹配实际存储；本地命令成功不能覆盖云端副本，平台收据也不能覆盖研究者导出的文件。完整判断方法见[软件 Agent 数据使用、保留与删除边界研究提案](https://noemion.github.io/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.html)。
 
 研究数据计划不是新的 Noemion 制品或接口。它只让负责人在采集前知道需要什么、为什么需要、谁能处理，以及研究结束后怎样证明已完成适用处置。
 

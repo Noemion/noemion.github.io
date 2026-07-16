@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Endem Source Manifest · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/endem-source-manifest.html"
+summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+---
 # Endem Source Manifest
 
 - 规范 ID：`END-SRCM`
@@ -5,7 +13,7 @@
 - 日期：2026-07-13
 - 状态：实验性 Ktisor 输入草案；由 ADR-0014 采用
 - 对象关系：只映射到 `END-P1`；不是 `.endem` 线格式，也不是稳定源语言
-- 实现状态：仅有来源样例与资料检查器；没有 Ktisor 解析实现
+- 实现状态：仅有来源样例与一致性检查工具；没有 Ktisor 解析实现
 
 ## 1. 范围
 
@@ -19,7 +27,7 @@
 
 **失败：**编码无效、文件或单行超限时，Ktisor 必须在解析指令前拒绝，不能产生部分 Endem。
 
-**验证：**`tests/source_manifest_test.py`；未来 Ktisor 与 Theor 的边界测试需在代码阶段开启后建立。
+**验证：**`tests/source_manifest_test.py`；未来若实现 Ktisor 与 Theor，还需建立相应边界测试。
 
 **来源保真边界：**LF 与 CRLF 被解释为相同行边界，字段转义会被解码。因此 END-SRCM 只承诺把提交后的解码表达映射到 `rhem.content`，不能声称逐字节保留原始 `.ends` 文件。若未来需要核对原始来源字节，必须另行绑定原始文件身份、解码 Profile、变换链和损失清单；当前 END-P1 不新增这些字段。
 
@@ -50,7 +58,7 @@
 
 **失败：**未知或不完整转义、role 缺少等号、CSV 元素不符合 END-P1 类型时必须拒绝。
 
-**验证：**`tests/source_manifest_test.py`；未来来源解析器单元测试需在代码阶段开启后建立。
+**验证：**`tests/source_manifest_test.py`；未来若实现来源解析器，还需建立相应单元测试。
 
 ### END-SRCM-004 — 输入顺序不决定对象字节
 
@@ -58,7 +66,7 @@
 
 **失败：**相同规范集合因输入顺序产生不同 `.endem` 字节，或重复身份被静默接受，均不符合本规范。
 
-**验证：**`tests/source_manifest_test.py` 把最小清单映射到 `SV-VALID-MINIMAL-001`，并由资料检查器逐字节比较 `WV-P1-SEMANTIC-ACCEPT-001`。
+**验证：**`tests/source_manifest_test.py` 把最小清单映射到 `SV-VALID-MINIMAL-001`，并由一致性检查工具逐字节比较 `WV-P1-SEMANTIC-ACCEPT-001`。
 
 ### END-SRCM-005 — 来源、候选与授权不能混合
 
@@ -74,7 +82,7 @@
 
 **失败：**任一阶段失败时只返回诊断，不返回部分可信模型或字节。
 
-**验证：**当前使用 END-P1 正反向量与资料检查器；未来 Ktisor 与 Theor 的实现测试需在代码阶段开启后建立。
+**验证：**当前使用 END-P1 正反向量与一致性检查工具；未来若实现 Ktisor 与 Theor，还需建立相应实现测试。
 
 ### END-SRCM-007 — 实验入口不得冒充正式语言
 

@@ -1,7 +1,7 @@
 const DIRECTORY_RULES = Object.freeze([
   [/^endem\//, "endem"],
   [/^docs\//, "docs"],
-  [/^(architecture|specifications|components)\//, "architecture"],
+  [/^(architecture|specifications|spec|components)\//, "architecture"],
   [/^(downloads|faq)\//, "resources"],
   [/^(development|news)\//, "development"]
 ]);

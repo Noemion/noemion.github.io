@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Diagnostic Core Specification · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/diagnostics-core.html"
+summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+---
 # Diagnostic Core Specification
 
 - 规范 ID：`DIA-CORE`
@@ -58,7 +66,7 @@
 
 ### DIA-PRI-001 — 主诊断选择必须确定且可解释
 
-**要求：**一个失败操作 `MUST` 产生且只产生一个主阻断诊断。主诊断按“最早安全失败层 → 该规范登记的优先级 → 规范位置顺序 → 稳定机器码”确定；线程完成顺序、哈希遍历、外部返回顺序、消息语言和模型判断 `MUST NOT` 参与选择。相关诊断 `MAY` 附加，但必须保持父子关系、稳定顺序和有限数量。
+**要求：**一个失败操作 `MUST` 产生且只产生一个主阻断诊断。主诊断按“最早安全失败层 → 对应规范列出的优先级 → 规范位置顺序 → 稳定机器码”确定；线程完成顺序、哈希遍历、外部返回顺序、消息语言和模型判断 `MUST NOT` 参与选择。相关诊断 `MAY` 附加，但必须保持父子关系、稳定顺序和有限数量。
 
 **失败：**同一输入在重复运行中得到不同主码、最后到达的 Agent 错误覆盖更早结构失败，或诊断数量改变主诊断时，结果不确定。
 

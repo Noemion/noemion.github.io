@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "记忆、检查点与恢复边界研究提案 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/memory-checkpoint-and-resumption-proposal.html"
+summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+---
 # 记忆、检查点与恢复边界研究提案
 
 状态：非规范研究提案
@@ -9,7 +17,7 @@
 
 本提案不构成 ADR、CORE 规范、内容 Profile 或实现要求，不进入 `registry.json`。
 它不创建新制品、文件格式、扩展名、命令、组件、结果域、稳定接口或哲学专名。
-当前项目尚未进入代码开发阶段；本文只检查现有责任能否承载未来 Agent 的持久状态与恢复流程。
+本文只检查现有责任能否承载未来 Agent 的持久状态与恢复流程，不声明相应组件已经实现。
 
 若后续证据支持并形成正式 ADR，唯一义务仍应优先归还 TEXT-IDENTIFIER、ID、DRO、ADP、AUT、IKN、DIA、END 与 SYN。
 只有真实消费者和验证证明这些责任无法分担时，才重新讨论独立规范。

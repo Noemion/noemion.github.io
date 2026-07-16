@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Noemion `telis` 发行词候选研究提案 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/telis-release-terms-proposal.html"
+summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+---
 # Noemion `telis` 发行词候选研究提案
 
 状态：非规范研究提案
@@ -66,7 +74,7 @@
 
 ## 人类验证方案
 
-测试遵守[术语与读音验证指南](../docs/terminology-and-pronunciation.html)，但本轮只比较 `reach / maintain` 与完整现行词表，不把 `kine / mene` 当作兼容选项。
+测试遵守[术语与读音验证指南](../docs/terminology-and-pronunciation.html)，但当前验证只比较 `reach / maintain` 与完整现行词表，不把 `kine / mene` 当作兼容选项。
 
 ### 发现阶段
 

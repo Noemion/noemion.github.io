@@ -41,7 +41,7 @@ permalink: "/specifications/text-and-identifiers.html"
       <tr><td><code>TEXT-AIM-001</code></td><td>绑定模型实际输入、预处理、风险清单、模型、tokenizer 和复核视图</td><td>审核者看清洗文本，模型却取得另一组码点</td></tr>
       <tr><td><code>TEXT-OUT-001</code></td><td>显示、复制与导出披露转义、截断、脱敏和方向处理</td><td>短显示、日志摘要或经过清洗的文本充当安全引用</td></tr>
     </tbody></table></div>
-    <p class="callout"><strong>权威边界：</strong><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md">TEXT-IDENTIFIER-CORE 条款源</a>定义规范义务。这份说明帮助开发者选择检查顺序，不建立第二套条款。</p>
+    <p class="callout"><strong>权威边界：</strong><a href="https://noemion.github.io/spec/text-identifier-core.html">TEXT-IDENTIFIER-CORE 条款源</a>定义规范义务。这份说明帮助开发者选择检查顺序，不建立第二套条款。</p>
   </section>
 
   <section class="content-wide">
@@ -51,7 +51,7 @@ permalink: "/specifications/text-and-identifiers.html"
       <tr><td>需要 Unicode 结构标识符</td><td><a href="https://www.unicode.org/reports/tr31/">UAX #31</a>、<a href="https://www.unicode.org/reports/tr39/">UTS #39</a>和独立内容 Profile</td><td>真实生产者、消费者、迁移规则和正反向量出现前继续使用 ASCII</td></tr>
       <tr><td>需要规范化、搜索或语言排序</td><td><a href="https://www.unicode.org/reports/tr15/">UAX #15</a>与 <a href="https://www.rfc-editor.org/rfc/rfc8264.html">RFC 8264</a>，并为具体用途定义版本化比较 Profile</td><td>规范化、搜索命中和排序结果都不能替代内容身份或语义等价</td></tr>
       <tr><td>需要双向编辑或同形风险处置</td><td><a href="https://www.unicode.org/reports/tr9/">UAX #9</a>、UTS #39、威胁模型与实际字体和界面测试</td><td>风险提示不能自动改写来源、合并对象或判定恶意</td></tr>
-      <tr><td>需要构造模型或检索上下文</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md">模型上下文组装研究</a>，同时核对授权、预算、外部适配和诊断责任</td><td>当前没有模型输入网关；模型输出不能写入规范字节或扩大权限</td></tr>
+      <tr><td>需要构造模型或检索上下文</td><td><a href="https://noemion.github.io/spec/model-context-assembly-proposal.html">模型上下文组装研究</a>，同时核对授权、预算、外部适配和诊断责任</td><td>当前没有模型输入网关；模型输出不能写入规范字节或扩大权限</td></tr>
       <tr><td>需要把文本用于确认或授权</td><td>AUT-CORE 的安全显示视图、精确机器请求、决定主体和适用范围</td><td>TEXT-IDENTIFIER 只证明显示怎样对应机器内容，不证明观看者有决定权</td></tr>
       <tr><td>需要判断名称是否适合公开传播</td><td><a href="../docs/terminology-and-pronunciation.html">术语与读音验证指南</a>的首次朗读、听写和成对混淆测试</td><td>字符合法、书写不同或自动转写成功都不能证明读音流畅且可区分</td></tr>
     </tbody></table></div>
@@ -62,8 +62,8 @@ permalink: "/specifications/text-and-identifiers.html"
     <p>截至 2026 年 7 月 16 日，<a href="https://www.unicode.org/versions/Unicode17.0.0/">Unicode 17.0</a>仍是当前版本，UTS #39 的安全数据与它同步更新。UAX #31 要求实现说明采用的标识符要求或 Profile；UTS #39 也说明同形程度会随字体、书写系统和使用者变化，因此风险骨架不能成为精确身份。</p>
     <p><a href="https://www.rfc-editor.org/rfc/rfc3629.html">RFC 3629</a>提供 UTF-8 的合法编码边界；<a href="https://www.gnu.org/software/libunistring/manual/libunistring.html">GNU libunistring</a>把编码表示、规范化、大小写、字素、词和行处理分成不同接口。Noemion 借鉴这种职责分离，不据此选择实现库或建立组件。</p>
     <div class="page-links">
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-threat-model.md"><strong>文本与标识符威胁模型</strong><span>覆盖编码、规范化、范围、双向显示、隐藏字符和模型视图威胁。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-scenarios.md"><strong>设计场景</strong><span>用支持案例、反例与待确认场景检查责任边界；场景不是实现证据。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/text-identifier-threat-model.html"><strong>文本与标识符威胁模型</strong><span>覆盖编码、规范化、范围、双向显示、隐藏字符和模型视图威胁。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/text-identifier-scenarios.html"><strong>设计场景</strong><span>用支持案例、反例与待确认场景检查责任边界；场景不是实现证据。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/text-identifier"><strong>文本与标识符提案向量</strong><span>检查允许包络与确定拒绝；向量不证明 Unicode 库、界面或模型网关已经实现。</span></a>
       <a class="page-link" href="../architecture/adr-0028-text-and-identifier-boundaries.html"><strong>ADR-0028 · 显示相同，不等于输入相同</strong><span>说明 ASCII 标识符、不统一规范化和模型输入绑定的权衡与采用限制。</span></a>
     </div>

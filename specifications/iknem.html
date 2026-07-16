@@ -52,15 +52,15 @@ permalink: "/specifications/iknem.html"
       <tr><td><a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 1.43.0</a> 与 <a href="https://github.com/open-telemetry/semantic-conventions-genai">GenAI 独立仓库</a></td><td>仓库提交、Schema URL、字段稳定性、资源身份、时间和脱敏边界</td><td>遥测不能补齐未观测时段、因果责任或完整覆盖；Schema URL 也不等于稳定发布</td></tr>
       <tr><td><a href="https://www.w3.org/TR/prov-dm/">W3C PROV-DM</a>、<a href="https://www.rfc-editor.org/rfc/rfc9334.html">RFC 9334 RATS</a>、<a href="https://slsa.dev/spec/v1.2/verifying-artifacts">SLSA 1.2</a>与 <a href="https://guix.gnu.org/manual/en/html_node/Invoking-guix-challenge.html">GNU Guix <code>challenge</code></a></td><td>精确实体、活动、责任、主体摘要、验证者、政策、信任根、独立构建结果、截止点和撤销</td><td>溯源不自行证明因果；验证者不替代依赖方；构建差异不能自动指定哪一方正确</td></tr>
     </tbody></table></div>
-    <p><strong>复核日期：</strong>2026-07-16。模型评测、训练反馈、因果归因、检查点恢复和删除证明正在研究，分别见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型评测</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">训练与更新</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">因果归因</a>、<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/memory-checkpoint-and-resumption-proposal.md">检查点恢复</a>和<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.md">数据删除</a>。关于“历史与检查点何时能支持证据？”这一问题，保存状态只说明生产者保留了什么，不恢复旧权限或补齐未知副作用。这些资料不修改 IKN-CORE。</p>
+    <p><strong>复核日期：</strong>2026-07-16。模型评测、训练反馈、因果归因、检查点恢复和删除证明正在研究，分别见<a href="https://noemion.github.io/spec/model-assisted-evaluation-proposal.html">模型评测</a>、<a href="https://noemion.github.io/spec/model-training-and-update-boundaries-proposal.html">训练与更新</a>、<a href="https://noemion.github.io/spec/state-change-and-causal-attribution-proposal.html">因果归因</a>、<a href="https://noemion.github.io/spec/memory-checkpoint-and-resumption-proposal.html">检查点恢复</a>和<a href="https://noemion.github.io/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.html">数据删除</a>。关于“历史与检查点何时能支持证据？”这一问题，保存状态只说明生产者保留了什么，不恢复旧权限或补齐未知副作用。这些资料不修改 IKN-CORE。</p>
   </section>
 
   <section class="content-band">
     <h2>规范来源与当前上限</h2>
     <div class="page-links">
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-core.md"><strong>IKN-CORE 规范源</strong><span>主体、溯源、观察、类别、完整性、有效性、覆盖、决定与披露的唯一现行条款源。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-threat-model.md"><strong>当前草案威胁模型</strong><span>检查范围漂白、循环自证、类别升级、撤销失明、数量冒充覆盖和证据泄密。</span></a>
-      <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md"><strong>非规范场景</strong><span>用支持案例、反例和边界场景检查九项责任；场景不是规范条款或实现证据。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/iknem-core.html"><strong>IKN-CORE 规范源</strong><span>主体、溯源、观察、类别、完整性、有效性、覆盖、决定与披露的唯一现行条款源。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/iknem-threat-model.html"><strong>当前草案威胁模型</strong><span>检查范围漂白、循环自证、类别升级、撤销失明、数量冒充覆盖和证据泄密。</span></a>
+      <a class="page-link" href="https://noemion.github.io/spec/iknem-scenarios.html"><strong>非规范场景</strong><span>用支持案例、反例和边界场景检查九项责任；场景不是规范条款或实现证据。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/vectors/iknem/cases.json"><strong>提案向量</strong><span>仅检查资料一致性，不能证明组件、安全性或稳定格式。</span></a>
       <a class="page-link" href="../architecture/adr-0022-iknem-evidence-and-appraisal.html"><strong>ADR-0022</strong><span>解释采用理由、外部先例、限制和待定内容，不建立第二套条款。</span></a>
     </div>

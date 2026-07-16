@@ -57,8 +57,8 @@ permalink: "/specifications/synem.html"
   <section class="content-wide">
     <h2>规范来源与当前上限</h2>
     <div class="table-wrap"><table><thead><tr><th>资料层级</th><th>当前作用</th><th>不能证明</th></tr></thead><tbody>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md">SYN-CORE</a>与<a href="../architecture/adr-0021-synem-closure-and-activation.html">ADR-0021</a></td><td>定义完整闭包、精确绑定、有限图、权限交集、成员结果和激活边界</td><td>物理格式、调度器或运行组件已经存在</td></tr>
-      <tr><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-threat-model.md">威胁模型</a>与<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md">非规范场景</a></td><td>检查环境替换、闭包截断、权限放大、结果洗白和激活竞态</td><td>案例本身成为规范条款或安全证明</td></tr>
+      <tr><td><a href="https://noemion.github.io/spec/synem-core.html">SYN-CORE</a>与<a href="../architecture/adr-0021-synem-closure-and-activation.html">ADR-0021</a></td><td>定义完整闭包、精确绑定、有限图、权限交集、成员结果和激活边界</td><td>物理格式、调度器或运行组件已经存在</td></tr>
+      <tr><td><a href="https://noemion.github.io/spec/synem-threat-model.html">威胁模型</a>与<a href="https://noemion.github.io/spec/synem-scenarios.html">非规范场景</a></td><td>检查环境替换、闭包截断、权限放大、结果洗白和激活竞态</td><td>案例本身成为规范条款或安全证明</td></tr>
       <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/synem">Synem 提案向量</a></td><td>执行允许分类与确定拒绝的资料一致性检查</td><td>解析器、形成器、Theor、Drasor、远程仓库或组件符合性</td></tr>
     </tbody></table></div>
     <p><strong>当前策略：</strong>SYN-CORE 只定义抽象组合闭包和条件激活。动态清单不得改写闭包，成员结果不得合并，激活状态不得扩大权限。</p>

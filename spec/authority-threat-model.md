@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Authority and Authorization Decision Threat Model · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/authority-threat-model.html"
+summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+---
 # Authority and Authorization Decision Threat Model
 
 - 文档 ID：`AUT-THREAT`

@@ -13,7 +13,7 @@ permalink: "/specifications/endem.html"
     <h2>Endem 表示什么</h2>
     <p class="lead">一件 Endem 只描述一项能够独立理解和判断的目标。形成版保留实际输入的自然语言，供人检查意义投影与待确认项；最终发布版移除原文，只保留发布 Profile 允许的已确认目标结构。</p>
     <p>Endem 不保存模型提示、推理过程或执行计划。它把来源表达、已确认意义、中性可能事态、目标方向、满足判据和未决意义分开，使形成者、检查者、运行系统和决定者能够各自核对自己的责任。</p>
-    <p class="callout"><strong>权威边界：</strong>通用内容义务与条款 ID 以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md">END-CORE 内容标准</a>为准；来源保留字段由 END-P1 定义；实验性容器以 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md">END-FMT 条款源</a>为准。最终发布 Profile 尚未定义，END-FMT 0.1.0-draft 也尚非稳定 ABI。</p>
+    <p class="callout"><strong>权威边界：</strong>通用内容义务与条款 ID 以 <a href="https://noemion.github.io/spec/endem-core.html">END-CORE 内容标准</a>为准；来源保留字段由 END-P1 定义；实验性容器以 <a href="https://noemion.github.io/spec/endem-format.html">END-FMT 条款源</a>为准。最终发布 Profile 尚未定义，END-FMT 0.1.0-draft 也尚非稳定 ABI。</p>
     <p class="note"><strong>名称状态：</strong>六项职责已进入现行草案，具体发行拼写和读音仍在研究。技术讨论应先说直白职责，再给出代码字段；读音建议不能替代<a href="../docs/terminology-and-pronunciation.html">独立人类听辨证据</a>。</p>
   </section>
 
@@ -94,10 +94,10 @@ permalink: "/specifications/endem.html"
       <tr><td>“所有”或数量条件怎样判断</td><td>集合身份、成员资格权威、截止点、不同成员身份、量词与空集合政策</td><td>开放集合不能证明全称、上界或精确数量已经满足</td><td><a href="../architecture/adr-0018-quantification-and-membership.html">ADR-0018</a></td></tr>
       <tr><td>一个指标超过阈值是否足够</td><td>构念、总体、单位、方法版本、窗口、样本、聚合器、阈值与不确定度</td><td>区间跨越阈值为 <code>agno</code>；测量程序违约为 <code>fault</code></td><td><a href="../architecture/adr-0019-measurement-and-thresholds.html">ADR-0019</a></td></tr>
       <tr><td>一句话形成一个还是多个目标</td><td>是否共享不可分终态、目标方向、权威、验收和失败责任</td><td>能够独立版本化、实现或接受的部分必须形成两个 Endem</td><td><a href="../architecture/adr-0020-composite-situations-and-criteria.html">ADR-0020</a></td></tr>
-      <tr><td>终态成立能否证明某动作造成变化</td><td>有身份的动作、同一对象的前后态、竞争活动、观察缺口和有范围的因果方法</td><td><code>met</code> 只回答终态满足；后态不能单独证明动作发生、状态转变或因果归属</td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/state-change-and-causal-attribution-proposal.md">非规范因果归因研究</a></td></tr>
+      <tr><td>终态成立能否证明某动作造成变化</td><td>有身份的动作、同一对象的前后态、竞争活动、观察缺口和有范围的因果方法</td><td><code>met</code> 只回答终态满足；后态不能单独证明动作发生、状态转变或因果归属</td><td><a href="https://noemion.github.io/spec/state-change-and-causal-attribution-proposal.html">非规范因果归因研究</a></td></tr>
       <tr><td>文件内写了权威名称能否证明授权</td><td>精确内容身份、外部授权伴随关系、委托、撤销和决定范围</td><td>文件内选择器、签名存在或本地 ACL 命中都不能补齐外部前置条件</td><td><a href="../architecture/adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a><br><code>SCN-028–030</code></td></tr>
     </tbody></table></div>
-    <p>完整案例、反例与跨场景不变量保存在 <a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md">END-SCEN 自然语言设计审查语料</a>。这些语料用于发现规范缺口，不是产品演示、可执行测试或组件实现证据。</p>
+    <p>完整案例、反例与跨场景不变量保存在 <a href="https://noemion.github.io/spec/endem-scenarios.html">END-SCEN 自然语言设计审查语料</a>。这些语料用于发现规范缺口，不是产品演示、可执行测试或组件实现证据。</p>
   </section>
 
   <section class="content-wide">

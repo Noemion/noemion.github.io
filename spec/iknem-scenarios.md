@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Iknem Natural-Language Design Scenarios · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/iknem-scenarios.html"
+summary: "非规范设计场景，记录支持案例、反例与待确认边界。"
+---
 # Iknem Natural-Language Design Scenarios
 
 - 文档 ID：`IKN-SCEN`

@@ -44,9 +44,9 @@ permalink: "/development/testing.html"
 
   <section id="model-evaluation" class="content-wide"><h2>模型评测、模型更新与上线监测分开</h2><p>三类活动分别测量能力、改变模型和观察真实运行。共用一组分数或日志会掩盖数据、身份、总体和决定权威的变化。</p><div class="table-wrap"><table><thead><tr><th>活动</th><th>必须固定</th><th>失败时停止的主张</th><th>研究入口</th></tr></thead><tbody>
     <tr><td>模型或 Agent 评测</td><td>用途、目标总体、任务与采样、提示、模型身份、评分协议、基线和统计不确定性</td><td>基准分数不能外推为普遍能力、可靠性或发布资格</td><td><a href="https://doi.org/10.6028/NIST.AI.800-3">NIST AI 800-3</a>（2026 年 2 月发布）与 <a href="https://www.nist.gov/news-events/news/2026/01/towards-best-practices-automated-benchmark-evaluations">NIST AI 800-2 初始公开草案</a></td></tr>
-    <tr><td>训练与模型更新</td><td>数据和反馈资格、基础模型、处理与训练活动、随机状态、派生身份、复现和行为比较</td><td>训练完成、损失下降或固定种子不能证明改进、安全、可复现或获准发布</td><td><a href="https://doi.org/10.6028/NIST.SP.800-218A">NIST SP 800-218A</a>（最终版）与<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究提案</a></td></tr>
+    <tr><td>训练与模型更新</td><td>数据和反馈资格、基础模型、处理与训练活动、随机状态、派生身份、复现和行为比较</td><td>训练完成、损失下降或固定种子不能证明改进、安全、可复现或获准发布</td><td><a href="https://doi.org/10.6028/NIST.SP.800-218A">NIST SP 800-218A</a>（最终版）与<a href="https://noemion.github.io/spec/model-training-and-update-boundaries-proposal.html">模型训练与更新边界研究提案</a></td></tr>
     <tr><td>上线后的运行监测</td><td>部署版本、实际总体、时间窗口、漂移指标、事件、处置政策和观察缺口</td><td>离线基准不能覆盖环境变化、交互反馈和低频事故</td><td><a href="https://www.nist.gov/news-events/news/2026/03/new-report-challenges-monitoring-deployed-ai-systems">NIST 部署后 AI 监测研究</a></td></tr>
-    <tr><td>发布或接受决定</td><td>适用政策、证据范围、风险容限、具名决定者和决定时间</td><td>评测者、训练流水线或监测系统不能自行产生 <code>accepted</code></td><td><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-assisted-evaluation-proposal.md">模型参与评测与裁判边界研究提案</a></td></tr>
+    <tr><td>发布或接受决定</td><td>适用政策、证据范围、风险容限、具名决定者和决定时间</td><td>评测者、训练流水线或监测系统不能自行产生 <code>accepted</code></td><td><a href="https://noemion.github.io/spec/model-assisted-evaluation-proposal.html">模型参与评测与裁判边界研究提案</a></td></tr>
   </tbody></table></div><p>两份 Noemion 提案当前均为非规范研究，不创建评测、裁判、训练或模型 CORE，也不证明训练平台、模型组件或运行监测系统已经存在。</p></section>
 
   <section class="content-wide"><h2>比较之前先固定比较域</h2><div class="table-wrap"><table><thead><tr><th>比较问题</th><th>可采用的工程纪律</th><th>结论边界</th></tr></thead><tbody>

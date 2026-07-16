@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "软件 Agent 身份、委托与责任链研究提案 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/software-agent-identity-and-accountability-boundaries-proposal.html"
+summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+---
 # 软件 Agent 身份、委托与责任链研究提案
 
 状态：非规范研究提案

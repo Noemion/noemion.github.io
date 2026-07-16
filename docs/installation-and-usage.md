@@ -29,7 +29,7 @@ badges: ["尚未发布", "Endem 命令行", "完整性优先"]
 | 用户是否控制实际执行？ | 明确执行位置、操作者、模型与配置、数据外发、保留、下游服务、状态导出和退出路径；GNU 也将[程序副本与网络服务活动](https://www.gnu.org/philosophy/network-services-arent-free-or-nonfree.html)分开讨论 | 源码公开、AGPL、数据驻留或 API 兼容等于服务实例控制 |
 | 结果能否复现？ | 锁定版本、输入、环境和随机性，并由独立方重建和比较结果 | 模型卡、签名、SBOM 或许可证本身证明行为可复现 |
 
-当前仓库的 Apache License 2.0 只覆盖实际置于该许可下的源码与文档，不自动覆盖未来模型参数、训练数据、第三方依赖、托管服务或商标。更完整的对象边界见[模型开放性与软件自由研究](https://github.com/Noemion/noemion.github.io/blob/main/spec/model-openness-and-software-freedom-boundaries-proposal.md)，执行与迁移边界见[托管人工智能服务与用户控制研究](https://github.com/Noemion/noemion.github.io/blob/main/spec/hosted-ai-service-and-user-control-boundaries-proposal.md)。两份材料均为非规范研究，不代表已有模型或服务。
+当前仓库的 Apache License 2.0 只覆盖实际置于该许可下的源码与文档，不自动覆盖未来模型参数、训练数据、第三方依赖、托管服务或商标。更完整的对象边界见[模型开放性与软件自由研究](https://noemion.github.io/spec/model-openness-and-software-freedom-boundaries-proposal.html)，执行与迁移边界见[托管人工智能服务与用户控制研究](https://noemion.github.io/spec/hosted-ai-service-and-user-control-boundaries-proposal.html)。两份材料均为非规范研究，不代表已有模型或服务。
 
 ## 未来职责流程
 

@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Authority and Authorization Decision Core Specification · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/authority-core.html"
+summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+---
 # Authority and Authorization Decision Core Specification
 
 - 规范 ID：`AUT-CORE`

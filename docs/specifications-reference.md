@@ -42,7 +42,7 @@ badges: ["权威", "查询", "状态"]
 | MCP、A2A、HTTP 或 SDK 状态怎样进入本地边界 | [外部协议适配规范](../specifications/adapters.html) | ADP-CORE 与 ADR-0026 |
 | 摘要、签名和不可变引用究竟绑定什么 | [精确内容身份与签名规范](../specifications/identity.html) | ID-CORE 与 ADR-0027 |
 | UTF-8、标识符、显示文本和模型输入怎样区分 | [文本与标识符边界规范](../specifications/text-and-identifiers.html) | TEXT-IDENTIFIER-CORE 与 ADR-0028 |
-| 网页、工具返回、历史、摘要或附件进入模型时，哪些内容可以提供指令 | [文本与标识符边界规范](../specifications/text-and-identifiers.html)与[权威与授权决定规范](../specifications/authority.html) | TEXT-IDENTIFIER-CORE、AUT-CORE，以及[非规范上下文装配研究](https://github.com/Noemion/noemion.github.io/blob/main/spec/model-context-assembly-proposal.md) |
+| 网页、工具返回、历史、摘要或附件进入模型时，哪些内容可以提供指令 | [文本与标识符边界规范](../specifications/text-and-identifiers.html)与[权威与授权决定规范](../specifications/authority.html) | TEXT-IDENTIFIER-CORE、AUT-CORE，以及[非规范上下文装配研究](https://noemion.github.io/spec/model-context-assembly-proposal.html) |
 | 谁可以确认候选、解决歧义或授予动作权限 | [权威与授权决定规范](../specifications/authority.html) | AUT-CORE、ADR-0029 与 ADR-0030 |
 
 同样，网页或工具返回即使自称 `system` 或 `admin`，也仍是带来源的资料。TEXT-IDENTIFIER-CORE 约束模型实际输入和变换，AUT-CORE 决定谁能提供指令或授予动作。上下文装配研究只提供检查路径，不建立新的接口或实现义务。
@@ -60,15 +60,15 @@ badges: ["权威", "查询", "状态"]
 
 | 需要的材料 | 当前入口 | 用法 |
 | --- | --- | --- |
-| 目标内容与容器 | [END-CORE 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-core.md)、[END-P1](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json)、[END-FMT 0.1.0-draft](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md) | 分别核对通用内容、封闭 Profile 和实验性容器 |
-| 组合、会话与证据 | [SYN-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md)、[DRO-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md)、[IKN-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-core.md) | 分别核对闭包、一次运行上限和证据范围 |
-| 横切工程边界 | [DIA-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md)、[ADP-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-core.md)、[ID-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-core.md)、[TEXT-IDENTIFIER-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md) | 核对诊断、外部协议、精确身份和文本解释 |
-| 权威与授权 | [AUT-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md) | 核对谁能确认意义、解决歧义或授予动作 |
+| 目标内容与容器 | [END-CORE 0.1.0-draft](https://noemion.github.io/spec/endem-core.html)、[END-P1](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json)、[END-FMT 0.1.0-draft](https://noemion.github.io/spec/endem-format.html) | 分别核对通用内容、封闭 Profile 和实验性容器 |
+| 组合、会话与证据 | [SYN-CORE](https://noemion.github.io/spec/synem-core.html)、[DRO-CORE](https://noemion.github.io/spec/dromen-core.html)、[IKN-CORE](https://noemion.github.io/spec/iknem-core.html) | 分别核对闭包、一次运行上限和证据范围 |
+| 横切工程边界 | [DIA-CORE](https://noemion.github.io/spec/diagnostics-core.html)、[ADP-CORE](https://noemion.github.io/spec/adapter-core.html)、[ID-CORE](https://noemion.github.io/spec/identity-core.html)、[TEXT-IDENTIFIER-CORE](https://noemion.github.io/spec/text-identifier-core.html) | 核对诊断、外部协议、精确身份和文本解释 |
+| 权威与授权 | [AUT-CORE](https://noemion.github.io/spec/authority-core.html) | 核对谁能确认意义、解决歧义或授予动作 |
 | 条款与状态索引 | [机器可读登记](https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json) | 连接条款、成熟度、威胁、场景与验证材料 |
 
-威胁模型说明不可信输入和失败责任。例如，[Endem 威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-threat-model.md)与[授权威胁模型](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-threat-model.md)帮助审查滥用路径，但不创造新的规范义务。
+威胁模型说明不可信输入和失败责任。例如，[Endem 威胁模型](https://noemion.github.io/spec/endem-threat-model.html)与[授权威胁模型](https://noemion.github.io/spec/authority-threat-model.html)帮助审查滥用路径，但不创造新的规范义务。
 
-场景源用于发现规范缺口：[END-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-scenarios.md)检查单项目标；[SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)、[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)、[IKN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-scenarios.md)与[AUT-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-scenarios.md)分别检查组合、会话、证据与授权。这些场景不属于上述规范义务。
+场景源用于发现规范缺口：[END-SCEN](https://noemion.github.io/spec/endem-scenarios.html)检查单项目标；[SYN-SCEN](https://noemion.github.io/spec/synem-scenarios.html)、[DRO-SCEN](https://noemion.github.io/spec/dromen-scenarios.html)、[IKN-SCEN](https://noemion.github.io/spec/iknem-scenarios.html)与[AUT-SCEN](https://noemion.github.io/spec/authority-scenarios.html)分别检查组合、会话、证据与授权。这些场景不属于上述规范义务。
 
 只有案例转化为唯一条款、登记验证方式并形成正反向量后，对应判断才可能进入符合性要求。向量通过也只说明已登记案例与草案一致；精确范围以源文件、机器可读登记和版本化验证结果为准。
 
@@ -95,23 +95,23 @@ badges: ["权威", "查询", "状态"]
 
 ## Synem
 
-[Synem 规范](../specifications/synem.html)解释完整闭包、精确绑定、有限无环、权限交集、成员结果分离和条件激活。规范源是 [SYN-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-core.md)；[SYN-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/synem-scenarios.md)不属于上述规范义务。当前没有物理 Synem 格式或组件实现。
+[Synem 规范](../specifications/synem.html)解释完整闭包、精确绑定、有限无环、权限交集、成员结果分离和条件激活。规范源是 [SYN-CORE](https://noemion.github.io/spec/synem-core.html)；[SYN-SCEN](https://noemion.github.io/spec/synem-scenarios.html)不属于上述规范义务。当前没有物理 Synem 格式或组件实现。
 
 ## Dromen、Iknem 与横切边界
 
-[Dromen 会话契约](../specifications/dromen.html)解释精确会话主体、政策封闭、环境绑定、能力与预算上限、观察责任、只读失效和销毁。规范源是 [DRO-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-core.md)；[DRO-SCEN](https://github.com/Noemion/noemion.github.io/blob/main/spec/dromen-scenarios.md)不属于上述规范义务。Dromen 永远不是磁盘格式、凭据包或可恢复会话，当前也没有 Drasor 或运行时实现。
+[Dromen 会话契约](../specifications/dromen.html)解释精确会话主体、政策封闭、环境绑定、能力与预算上限、观察责任、只读失效和销毁。规范源是 [DRO-CORE](https://noemion.github.io/spec/dromen-core.html)；[DRO-SCEN](https://noemion.github.io/spec/dromen-scenarios.html)不属于上述规范义务。Dromen 永远不是磁盘格式、凭据包或可恢复会话，当前也没有 Drasor 或运行时实现。
 
-[Iknem 规范](../specifications/iknem.html)解释主体范围、有限无环溯源、结构化观察、证据类别、完整性、外部有效性评估、相对 `krin` 的覆盖度、决定分离与最小披露。规范源是 [IKN-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/iknem-core.md)；模型评价只能保持 `model-candidate`。当前没有物理 Iknem 格式或组件实现。
+[Iknem 规范](../specifications/iknem.html)解释主体范围、有限无环溯源、结构化观察、证据类别、完整性、外部有效性评估、相对 `krin` 的覆盖度、决定分离与最小披露。规范源是 [IKN-CORE](https://noemion.github.io/spec/iknem-core.html)；模型评价只能保持 `model-candidate`。当前没有物理 Iknem 格式或组件实现。
 
-[结构化诊断规范](../specifications/diagnostics.html)解释稳定机器码、生产语境、失败层次、类型化位置、确定性主错误、受限恢复、外部来源、最小披露、资源预算与原子失败。规范源是 [DIA-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostics-core.md)，草案机器码见 [DIA-CAT](https://github.com/Noemion/noemion.github.io/blob/main/spec/diagnostic-catalog.md)。诊断不是目标结果、证据、权限或自动修复命令；当前没有物理编码或组件实现。
+[结构化诊断规范](../specifications/diagnostics.html)解释稳定机器码、生产语境、失败层次、类型化位置、确定性主错误、受限恢复、外部来源、最小披露、资源预算与原子失败。规范源是 [DIA-CORE](https://noemion.github.io/spec/diagnostics-core.html)，草案机器码见 [DIA-CAT](https://noemion.github.io/spec/diagnostic-catalog.html)。诊断不是目标结果、证据、权限或自动修复命令；当前没有物理编码或组件实现。
 
-[外部协议适配规范](../specifications/adapters.html)解释协议版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付和安全边界。规范源是 [ADP-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-core.md)。MCP、A2A、HTTP 与 SDK 对象只保持外部来源；当前没有具体协议 Profile、适配器 API 或组件实现。
+[外部协议适配规范](../specifications/adapters.html)解释协议版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付和安全边界。规范源是 [ADP-CORE](https://noemion.github.io/spec/adapter-core.html)。MCP、A2A、HTTP 与 SDK 对象只保持外部来源；当前没有具体协议 Profile、适配器 API 或组件实现。
 
-[精确内容身份与签名规范](../specifications/identity.html)解释身份域、精确字节、不可变引用、算法政策、签名陈述和外置验证材料。它也分开权威、截止点、撤销、可复现性，以及形成版、来源裁剪发布版和受控伴随资料。规范源是 [ID-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/identity-core.md)。当前尚未确定发行算法、签名包络、发布 Profile 或密码组件；SHA-256 只用于提案向量示例。
+[精确内容身份与签名规范](../specifications/identity.html)解释身份域、精确字节、不可变引用、算法政策、签名陈述和外置验证材料。它也分开权威、截止点、撤销、可复现性，以及形成版、来源裁剪发布版和受控伴随资料。规范源是 [ID-CORE](https://noemion.github.io/spec/identity-core.html)。当前尚未确定发行算法、签名包络、发布 Profile 或密码组件；SHA-256 只用于提案向量示例。
 
-[文本与标识符边界规范](../specifications/text-and-identifiers.html)解释文本槽、严格 UTF-8、来源字节与解码文本、ASCII 结构标识符、规范化、比较、范围、双向显示、隐藏字符、语言元数据、模型实际输入与显示视图。规范源是 [TEXT-IDENTIFIER-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/text-identifier-core.md)。END-SRCM 当前只保存解码并处理转义后的 `rhem.content`，不证明原始 `.ends` 文件逐字节保真；当前也没有 Unicode 处理器或模型输入网关。
+[文本与标识符边界规范](../specifications/text-and-identifiers.html)解释文本槽、严格 UTF-8、来源字节与解码文本、ASCII 结构标识符、规范化、比较、范围、双向显示、隐藏字符、语言元数据、模型实际输入与显示视图。规范源是 [TEXT-IDENTIFIER-CORE](https://noemion.github.io/spec/text-identifier-core.html)。END-SRCM 当前只保存解码并处理转义后的 `rhem.content`，不证明原始 `.ends` 文件逐字节保真；当前也没有 Unicode 处理器或模型输入网关。
 
-[权威与授权决定规范](../specifications/authority.html)解释谁可以在什么语境和范围内确认自然语言候选、解决 `apor`、委托 Agent、授予能力或作出授权决定。规范源是 [AUT-CORE](https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md)。`grant / deny / defer` 只回答当前请求是否获准，不替代真值、满足、证据、最终接受或会话终止；当前没有权威目录、政策求值器、同意界面或决定服务。
+[权威与授权决定规范](../specifications/authority.html)解释谁可以在什么语境和范围内确认自然语言候选、解决 `apor`、委托 Agent、授予能力或作出授权决定。规范源是 [AUT-CORE](https://noemion.github.io/spec/authority-core.html)。`grant / deny / defer` 只回答当前请求是否获准，不替代真值、满足、证据、最终接受或会话终止；当前没有权威目录、政策求值器、同意界面或决定服务。
 
 允许保留的运行观察、失效原因和决定关系进入 Iknem 或带范围的会话事件。它们不能重新创建 Dromen 或恢复旧权限。
 

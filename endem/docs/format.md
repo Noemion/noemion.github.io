@@ -52,7 +52,7 @@ apor:
 
 [ADR-0036](../../architecture/adr-0036-source-bearing-and-stripped-release.html) 要求最终发布版移除原始自然语言，并以新身份重新验证。发布 Profile 必须自行定义来源引用闭包；不能从 END-P1 直接删除 `rhem.content` 后继续沿用其 Profile 身份。
 
-精确容器义务见 [END-FMT 条款源](https://github.com/Noemion/noemion.github.io/blob/main/spec/endem-format.md)。END-P0 只保留为结构实验；首条实现路径必须从 [END-P1 设计 Profile](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json) 开始评审，只允许 nascent、kine、六个关键记录和无压缩载荷。
+精确容器义务见 [END-FMT 条款源](https://noemion.github.io/spec/endem-format.html)。END-P0 只保留为结构实验；首条实现路径必须从 [END-P1 设计 Profile](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json) 开始评审，只允许 nascent、kine、六个关键记录和无压缩载荷。
 
 ## 候选不能直接成形
 

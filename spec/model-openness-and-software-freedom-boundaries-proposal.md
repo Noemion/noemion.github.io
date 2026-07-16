@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Noemion 模型开放性与软件自由边界研究提案 · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/model-openness-and-software-freedom-boundaries-proposal.html"
+summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+---
 # Noemion 模型开放性与软件自由边界研究提案
 
 状态：非规范研究提案
@@ -24,7 +32,7 @@ Noemion 当前仓库的源码和文档在文件未另行说明时采用 Apache L
 - 只有逐项满足 GNU 自由软件或 OSI Open Source AI 定义时，才引用相应定义和版本；
 - 只有独立重建证据支持时，才写“可复现”，并说明复现的是环境、字节、行为还是研究结论。
 
-托管访问还必须继续区分软件权利与实际服务控制。谁运行计算、哪些数据离开控制域、服务端隐藏什么、状态能否导出以及停服或切换时损失什么，见[托管人工智能服务与用户控制边界研究提案](hosted-ai-service-and-user-control-boundaries-proposal.md)。
+托管访问还必须继续区分软件权利与实际服务控制。谁运行计算、哪些数据离开控制域、服务端隐藏什么、状态能否导出以及停服或切换时损失什么，见[托管人工智能服务与用户控制边界研究提案](https://noemion.github.io/spec/hosted-ai-service-and-user-control-boundaries-proposal.html)。
 
 ## 至少十二种事实必须分开
 
@@ -90,7 +98,7 @@ OSI 还明确指出，“Open Source models”和“Open Source weights”必须
 
 [Linux Foundation Model Openness Framework Specification](https://lfaidata.foundation/resources/whitepapers/)用 Open Model、Open Tooling Model 和 Open Science Model 三层检查模型架构、参数、代码、数据和文档的发布完整性及相应开放许可。它适合回答“发布包还缺哪些组成”，不能替代 OSI 或 GNU 的定义，也不能替代逐项法律与权利审查。
 
-截至 2026 年 7 月，模型许可仍在演进；Linux Foundation 已发布 OpenMDW 1.1 等面向模型分发的许可方案。Noemion 把这视为“单个软件许可证不足以描述整个模型分发”的趋势证据，而不是自动采用决定。任何未来选择都必须比较适用对象、版权、专利、数据库权、输出、附加材料、兼容性、司法范围和撤回条件，并接受专业法律复核。
+截至 2026 年 7 月，模型许可仍在演进；Linux Foundation 已发布 OpenMDW 1.1 等面向模型分发的许可方案。Noemion 把这视为“单个软件许可证不足以描述整个模型分发”的趋势证据，而不是自动形成项目选择。任何未来选择都必须比较适用对象、版权、专利、数据库权、输出、附加材料、兼容性、司法范围和撤回条件，并接受专业法律复核。
 
 开放完整性、许可与复现分别回答：
 

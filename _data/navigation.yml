@@ -124,6 +124,7 @@ modules:
       - label: 对象规范
         items:
           - { href: /specifications/index.html, label: 规范与状态 }
+          - { href: /spec/index.html, label: 版本化规范源 }
           - { href: /specifications/endem.html, label: Endem }
           - { href: /specifications/synem.html, label: Synem }
           - { href: /specifications/dromen.html, label: Dromen }

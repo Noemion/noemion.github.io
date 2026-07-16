@@ -1,3 +1,11 @@
+---
+layout: spec
+title: "Synem Core Threat Model · Noemion"
+page_role: "content"
+footer_text: "Noemion · 规范源"
+permalink: "/spec/synem-threat-model.html"
+summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+---
 # Synem Core Threat Model
 
 - 适用规范：`SYN-CORE 0.1.0-draft`
