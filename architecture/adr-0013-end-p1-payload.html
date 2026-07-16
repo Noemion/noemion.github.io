@@ -1,59 +1,82 @@
 ---
 layout: default
-title: "ADR-0013 END-P1 封闭内容 Profile"
+title: "ADR-0013 · 来源保留 END-P1 Profile"
 page_role: "content"
 footer_text: "Noemion · ADR-0013"
 permalink: "/architecture/adr-0013-end-p1-payload.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0013</span></nav>
-  <header class="content-introduction"><h1>ADR-0013<br>END-P1 封闭内容 Profile</h1><p>明确首个内容设计允许写哪些字段、使用哪些值、按什么顺序排列和怎样引用，避免不同工具各自猜测同一目标。</p><div class="badges"><span class="badge">当前草案</span><span class="badge">END-P1</span><span class="badge">Profile 2</span><span class="badge">接口待定</span></div></header>
-
-  <section class="content-stack">
-    <h2>直接决定</h2>
-    <p class="lead">Ktisor 的首个纵向切片不写 END-P0。END-P0 只保留为固定头部、目录和受限 CBOR 的结构实验；来源保留的形成候选改用 <code>profile_id=2</code> 的 END-P1，并且必须在六个记录内遵守封闭字段 schema。</p>
-    <p>这避免两种错误：一是把六个空映射误称为 Endem，二是让未来实现私自发明字段。END-P1 仍是实验性形成与评审 Profile，不是稳定 ABI 或最终发布 Profile；发现反例时可以直接修订，但必须同步 ADR、Profile、正反字节向量和验证方案。</p>
-  </section>
+  <header class="content-introduction"><h1>ADR-0013<br>来源保留<br>END-P1 Profile</h1><p>END-P1 把原始自然语言、六个语义面和封闭引用写入同一形成制品，供评审与实验验证；它不可直接发布，也不能单独证明内容已经接受。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">END-P1 0.1.0-draft</span><span class="badge">Profile 2</span><span class="badge">不可发布</span></div></header>
 
   <section class="content-wide">
-    <h2>为什么不能继续复用 END-P0</h2>
-    <div class="table-wrap"><table><thead><tr><th>现有证据</th><th>能够证明</th><th>不能证明</th></tr></thead><tbody>
-      <tr><td>END-P0 六个结构记录</td><td>读取器能安全定位六个关键载荷。</td><td>载荷内有哪些字段、引用和语义约束。</td></tr>
-      <tr><td>七个语义 JSON 向量</td><td>正负极性的两个可接受模型和五种拒绝原因能被实际执行。</td><td>JSON 是规范字节，或任意 JSON 可以直接写入 Endem。</td></tr>
-      <tr><td>C/Rust 结构实验</td><td>两种语言能对同一结构错误给出一致首错。</td><td>任何原型已经实现 Ktisor、Theor 或 END-CORE。</td></tr>
+    <h2>先确定 END-P1 是什么</h2>
+    <p class="lead"><code>profile_id=2</code> 精确绑定 END-P1。它是来源保留的形成与评审 Profile，不是最终发布 Profile，也不是稳定 ABI。</p>
+    <div class="table-wrap"><table><thead><tr><th>问题</th><th>当前答案</th><th>声明上限</th></tr></thead><tbody>
+      <tr><td>为什么不再使用 END-P0</td><td>END-P0 只有六个空映射，只能验证容器结构。</td><td>不能把结构接受称为有效 Endem。</td></tr>
+      <tr><td>END-P1 保存什么</td><td>保存原始自然语言、来源范围、语义关系、目标方向、判据和待确认项。</td><td>单文件最高只能声称 Profile 接受。</td></tr>
+      <tr><td>谁使用它</td><td>未来 Ktisor 形成和回读，独立 Theor 另行解释相同字节。</td><td>当前没有 Ktisor、Theor 或 CLI 实现。</td></tr>
+      <tr><td>能否作为发布物</td><td>不能；<code>publishable=false</code> 是 Profile 的明确属性。</td><td>不能直接删除原文后继续声称 END-P1。</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>END-P1 关闭哪些接口</h2>
-    <ul>
-      <li>六个记录继续使用 kind 1–6；每个记录的根映射只允许登记键，未知键关闭失败。</li>
-      <li>符号、关系、角色、事态、观察要求和待确认项使用显式标识与交叉引用，不复制自由文本图。</li>
-      <li>数组按稳定身份或编码值排序，重复项拒绝；Ktisor 不采用输入顺序或哈希表遍历顺序。</li>
-      <li>来源范围以 Unicode 标量计数，并在解释投影前检查；媒体类型与语言标签保留原始标准化文本。</li>
-      <li>第一切片只编码 <code>kine</code>。ADR-0016 已固定 <code>mene</code> 的抽象时间语义，但 END-P1 没有相应字段；它必须等待新的 Profile 与正反字节向量。</li>
-      <li><code>apor</code> 即使为空也编码为含显式 items 数组的记录；非空项保存候选、冲突、影响范围、允许的解决方式和决定主体。</li>
-    </ul>
-    <p>字段、枚举与上限见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">机器可读 END-P1 Profile</a>。</p>
+    <h2>开发者应按什么顺序检查</h2>
+    <div class="flow"><div class="step">END-FMT<br>字节结构</div><div class="step">Profile 2<br>能力上限</div><div class="step">六个记录<br>精确字段</div><div class="step">排序与引用<br>封闭</div><div class="step">外部前提<br>内容接受</div><div class="step">未来发布<br>另行派生</div></div>
+    <div class="table-wrap"><table><thead><tr><th>停止位置</th><th>必须检查</th><th>失败后不得继续声称</th></tr></thead><tbody>
+      <tr><td>容器</td><td>头部、目录、范围、资源上限和确定性 CBOR。</td><td>Profile 接受。</td></tr>
+      <tr><td>Profile</td><td>记录种类、状态、标志、字段集合和功能禁用项。</td><td>字段或引用有效。</td></tr>
+      <tr><td>内容结构</td><td>类型、规范排序、重复项、来源范围和交叉引用。</td><td>内容已经由权威接受。</td></tr>
+      <tr><td>外部前提</td><td>意义确认、权威绑定和适用的内容规则。</td><td>目标满足、动作授权或最终接受。</td></tr>
+      <tr><td>发布派生</td><td>新 Profile、引用重写、损失、泄露边界、新身份和重新验证。</td><td>形成制品已经变成可发布制品。</td></tr>
+    </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>外部格式只提供机制</h2>
-    <p><a href="https://www.rfc-editor.org/rfc/rfc8949.html">RFC 8949</a> 区分 well-formed、valid 与 application-expected 三层接受，并允许应用定义自己的具体数据模型。END-P1 采用这种分层和确定性编码，不采用通用 CBOR 的全部类型或开放扩展。</p>
-    <p>语言字段遵守 <a href="https://www.rfc-editor.org/rfc/rfc5646.html">BCP 47</a>，媒体字段遵守 <a href="https://www.rfc-editor.org/rfc/rfc6838.html">RFC 6838 媒体类型结构</a>。两者只描述来源，不证明投影正确。</p>
-    <p>来源位置使用 Unicode 标量范围，不能把字节、UTF-16 code unit 和用户可见字素混为同一单位。单位定义见 <a href="https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-2/">Unicode 17 核心规范第 2 章</a>。</p>
+    <h2>六个记录分别回答什么</h2>
+    <div class="table-wrap"><table><thead><tr><th>记录</th><th>开发者问题</th><th>END-P1 边界</th></tr></thead><tbody>
+      <tr><td><code>rhem</code></td><td>原始表达来自哪里，哪一段进入解释？</td><td>保存内容、语言、媒体类型、版本和 Unicode 标量范围。</td></tr>
+      <tr><td><code>semion</code></td><td>哪些符号、关系与角色得到怎样的意义投影？</td><td>投影选择器仍是不可信标识，不自证语义授权。</td></tr>
+      <tr><td><code>skena</code></td><td>唯一根事态由哪些正负关系构成？</td><td>只表达结构，不记录观察或满足结果。</td></tr>
+      <tr><td><code>telis</code></td><td>目标要求达到还是保持该事态？</td><td>当前只编码 <code>kine</code>；<code>mene</code> 等待新 Profile。</td></tr>
+      <tr><td><code>krin</code></td><td>需要哪些观察，缺失和求值错误怎样返回？</td><td>选择器不等于证据存在，也不等于决定权威有效。</td></tr>
+      <tr><td><code>apor</code></td><td>哪些歧义、候选和决定责任仍未关闭？</td><td>空记录也必须显式编码，不能用缺失冒充没有问题。</td></tr>
+    </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>明确不关闭的接口</h2>
-    <p>END-P1 不定义量化、时间区间、单位换算、摘要、签名、Semantic Key、授权决定、Synem、coherent/attested、压缩、加密、来源裁剪、远程披露或稳定 ABI。这些能力没有真实向量和消费者前，不占用字段键，也不以保留空字段假装完成。</p>
-    <p><code>projection.id</code>、<code>decision_authority</code> 与 <code>required_iknem</code> 只是待核对选择器。按照 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>，END-P1 单文件最高只能声称 Profile 接受，不能自证授权或完整内容接受。</p>
-    <p>按照 <a href="adr-0036-source-bearing-and-stripped-release.html">ADR-0036</a>，最终发布版必须移除原始自然语言、使用新的封闭 Profile 和精确身份，并重新证明来源引用闭包；不能从 END-P1 直接删字段后发布。</p>
+    <h2>封闭 schema 怎样失败</h2>
+    <div class="table-wrap"><table><thead><tr><th>检查</th><th>接受条件</th><th>拒绝条件</th></tr></thead><tbody>
+      <tr><td>映射键</td><td>只出现登记键，并包含全部必需键。</td><td>未知、缺失、重复或错误类型的键。</td></tr>
+      <tr><td>数组</td><td>按登记的身份或确定性编码值排序。</td><td>输入顺序、哈希遍历顺序或重复身份。</td></tr>
+      <tr><td>来源范围</td><td>以 Unicode 标量计数，且落在实际 <code>rhem.content</code> 内。</td><td>混用字节、UTF-16 code unit、字素或越界范围。</td></tr>
+      <tr><td>交叉引用</td><td>符号、关系、角色、事态和来源引用都能在对象内解析。</td><td>悬空引用、错绑角色或跨来源伪装。</td></tr>
+      <tr><td>功能范围</td><td>只使用 END-P1 已登记的 <code>kine</code> 与功能集合。</td><td>把时间、量化、测量、签名或加密塞入未登记字段。</td></tr>
+    </tbody></table></div>
+    <p>完整键号、枚举、排序和资源上限见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json">机器可读 END-P1 Profile</a>。它与 END-FMT 共同构成字段权威源，页面摘要不能替代它们。</p>
   </section>
 
-  <section class="content-band">
-    <h2>进入实现的条件</h2>
-    <p>END-P1 已覆盖接受、未知字段、悬空引用和来源范围案例。这些材料只满足实现前的规范准备条件；当前没有生产 Ktisor 工作区、Ktisor/Theor 实现或符合性声明。</p>
+  <section class="content-wide">
+    <h2>外部标准只约束哪些机制</h2>
+    <div class="table-wrap"><table><thead><tr><th>资料</th><th>END-P1 采用</th><th>不采用为</th></tr></thead><tbody>
+      <tr><td><a href="https://www.rfc-editor.org/rfc/rfc8949.html">RFC 8949</a></td><td>分层接受、受限数据模型与确定性编码。</td><td>通用 CBOR 解码成功等于 END-P1 接受。</td></tr>
+      <tr><td><a href="https://www.rfc-editor.org/rfc/rfc5646.html">BCP 47</a></td><td>语言标签的 ASCII 结构与语义。</td><td>语言标签证明来源真实，或已完成登记查询与规范化。</td></tr>
+      <tr><td><a href="https://www.rfc-editor.org/rfc/rfc6838.html">RFC 6838</a></td><td>媒体类型的基本结构。</td><td>媒体类型证明内容安全或投影正确。</td></tr>
+      <tr><td><a href="https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-2/">Unicode 17</a></td><td>区分编码单元、标量值和字素；范围使用标量值。</td><td>自动获得稳定显示、规范等价或安全标识符。</td></tr>
+    </tbody></table></div>
+    <p>现行字节向量只执行语言标签与媒体类型的基本语法检查。完整登记有效性、首选值替换和规范化算法仍未固定，不能写成已经“标准化”。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>当前不能发布或实现什么</h2>
+    <p>END-P1 不定义量化、时间字段、单位换算、摘要、签名、授权决定、Synem、压缩、加密、来源裁剪或稳定 ABI。抽象语义已有决定时，也必须等待新的物理 Profile 和正反字节向量。</p>
+    <p>最终发布版必须使用新的封闭 Profile，重写来源引用，披露损失并取得新身份。END-P1 当前只有规范、Profile 和字节向量；这些资料不是生产组件或符合性声明。</p>
+    <div class="page-links">
+      <a class="page-link" href="adr-0011-endem-container.html"><strong>查看读取顺序</strong><span>先区分容器、Profile、内容和外部判断。</span></a>
+      <a class="page-link" href="adr-0030-endem-content-and-authorization-companions.html"><strong>查看内容接受</strong><span>了解为什么权威选择器不能自证授权。</span></a>
+      <a class="page-link" href="adr-0036-source-bearing-and-stripped-release.html"><strong>查看裁剪发布</strong><span>确认新 Profile、新身份和引用重写要求。</span></a>
+      <a class="page-link" href="../development/testing.html"><strong>查看验证职责</strong><span>区分字节向量、实现证据和符合性声明。</span></a>
+    </div>
   </section>
   <div class="next-prev"><a href="adr-0012-rust-core-language.html">← ADR-0012</a><a href="adr-0014-source-manifest.html">ADR-0014 →</a></div>
 </main>

@@ -264,6 +264,24 @@ ADR_0012_REVIEW_BOUNDARIES = (
     "版本新旧本身不构成安全结论",
     "这里没有 Ktisor、Theor、CLI、稳定命令、构建配置或实现级符合性结论",
 )
+ADR_0013_PROFILE_HEADINGS = [
+    "先确定 END-P1 是什么",
+    "开发者应按什么顺序检查",
+    "六个记录分别回答什么",
+    "封闭 schema 怎样失败",
+    "外部标准只约束哪些机制",
+    "当前不能发布或实现什么",
+]
+ADR_0013_PROFILE_BOUNDARIES = (
+    "来源保留的形成与评审 Profile",
+    "单文件最高只能声称 Profile 接受",
+    "publishable=false",
+    "相同字节",
+    "投影选择器仍是不可信标识",
+    "空记录也必须显式编码",
+    "完整登记有效性、首选值替换和规范化算法仍未固定",
+    "最终发布版必须使用新的封闭 Profile",
+)
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -6018,6 +6036,33 @@ def main():
             errors.append(
                 "architecture/adr-0012-rust-core-language.html: must preserve six "
                 "review tables, one trust flow and four developer reading links"
+            )
+
+    adr_0013 = ROOT / "architecture/adr-0013-end-p1-payload.html"
+    if adr_0013.exists():
+        parser = parse(adr_0013)
+        if parser.h2_texts != ADR_0013_PROFILE_HEADINGS:
+            errors.append(
+                "architecture/adr-0013-end-p1-payload.html: Profile reading sequence "
+                f"must be {ADR_0013_PROFILE_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in ADR_0013_PROFILE_BOUNDARIES:
+            if term not in visible_text:
+                errors.append(
+                    "architecture/adr-0013-end-p1-payload.html: missing source-bearing "
+                    f"Profile boundary {term}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 5
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                "architecture/adr-0013-end-p1-payload.html: must preserve five "
+                "boundary tables, one reading flow and four developer reading links"
             )
 
     for row in route_rows:

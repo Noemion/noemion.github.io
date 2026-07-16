@@ -27,7 +27,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0010](https://noemion.github.io/architecture/adr-0010-native-lexicon.html) — current native lexicon, six semantic facets, and situation/goal/evidence separation
 - [ADR-0011](https://noemion.github.io/architecture/adr-0011-endem-container.html) — experimental byte boundary and ordered reading path across END-FMT, structural P0, source-bearing P1, and the undefined release Profile
 - [ADR-0012](https://noemion.github.io/architecture/adr-0012-rust-core-language.html) — bounded historical language evidence and the conditional Rust review baseline for a future Ktisor structural core
-- [ADR-0013](https://noemion.github.io/architecture/adr-0013-end-p1-payload.html) — closed END-P1 semantic payload fields, ordering, references, and implementation gate
+- [ADR-0013](https://noemion.github.io/architecture/adr-0013-end-p1-payload.html) — source-bearing formation Profile, ordered validation path, closed references, and non-publishable boundary
 - [ADR-0014](https://noemion.github.io/architecture/adr-0014-source-manifest.html) — experimental Ktisor source manifest, authority boundary, and replacement conditions
 - [ADR-0015](https://noemion.github.io/architecture/adr-0015-result-domains.html) — separate artifact, satisfaction, decision, session, and evidence result domains
 - [ADR-0016](https://noemion.github.io/architecture/adr-0016-mene-time-model.html) — fixed and elapsed time scopes, continuity policies, coverage gaps, and clock authority
