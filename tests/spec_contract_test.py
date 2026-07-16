@@ -886,6 +886,7 @@ def validate_public_boundary(errors):
             "当前改动只修正规范边界",
         ),
         "architecture/adr-0031-release-name-collision-gate.html": (
+            "搜索没有冲突，不等于名称可以发行",
             "当前策略",
             "Iknem",
             "Drasor",

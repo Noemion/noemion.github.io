@@ -114,7 +114,7 @@ modules:
           - { href: /architecture/adr-0028-text-and-identifier-boundaries.html, label: "ADR-0028 · 显示相同，不等于输入相同" }
           - { href: /architecture/adr-0029-authority-and-authorization-decisions.html, label: "ADR-0029 · 身份已确认，不等于操作已获准" }
           - { href: /architecture/adr-0030-endem-content-and-authorization-companions.html, label: "ADR-0030 · 内容身份不变，不等于授权仍然有效" }
-          - { href: /architecture/adr-0031-release-name-collision-gate.html, label: "ADR-0031 · 发布名称冲突审查" }
+          - { href: /architecture/adr-0031-release-name-collision-gate.html, label: "ADR-0031 · 搜索没有冲突，不等于名称可以发行" }
           - { href: /architecture/adr-0032-deterministic-maker-name-collision.html, label: "ADR-0032 · 确定性制作名称冲突" }
           - { href: /architecture/adr-0033-text-identifier-specification-name.html, label: "ADR-0033 · 文本与标识符标准命名" }
           - { href: /architecture/adr-0034-pronunciation-and-oral-distinction.html, label: "ADR-0034 · 读音与口头区分审查" }
