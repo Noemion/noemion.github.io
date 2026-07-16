@@ -4198,8 +4198,6 @@ def validate_jekyll_sources():
             'data-theme-option="light"',
             'data-theme-option="dark"',
             'data-theme-option="system"',
-            "sitemap.md",
-            "全部页面",
             "文档",
             "Endem",
             "开发",
@@ -4222,6 +4220,15 @@ def validate_jekyll_sources():
                 errors.append(
                     "site footer must not retain generic English interface label: "
                     f"{obsolete_label}"
+                )
+        for forbidden_footer_entry in (
+            "sitemap.md",
+            "全部页面",
+        ):
+            if forbidden_footer_entry in footer_text:
+                errors.append(
+                    "site footer must link reader-facing HTML pages instead of exposing "
+                    f"{forbidden_footer_entry!r}"
                 )
 
     theme_script = SOURCE_ROOT / "assets/theme.js"
@@ -6822,8 +6829,10 @@ def main():
         if text.count('data-global-nav-item=') != 5:
             errors.append(f"{rel}: server-rendered primary navigation must expose five task links")
         no_script_match = re.search(r"<noscript>(.*?)</noscript>", text, re.DOTALL)
-        if no_script_match is None or "/sitemap.md" not in no_script_match.group(1):
-            errors.append(f"{rel}: no-script navigation must expose the complete route registry")
+        if no_script_match is None or "/docs/index.html" not in no_script_match.group(1):
+            errors.append(f"{rel}: no-script navigation must expose a reader-facing HTML directory")
+        elif "/sitemap.md" in no_script_match.group(1):
+            errors.append(f"{rel}: no-script navigation must not expose the Markdown route registry")
         if parser.directory_containers != 1:
             errors.append(f"{rel}: expected one data-directory nav")
         for section in parser.sections:
