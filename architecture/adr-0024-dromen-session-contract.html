@@ -1,92 +1,92 @@
 ---
 layout: default
-title: "ADR-0024 Dromen 会话契约"
+title: "ADR-0024 · 权限只属于这一次会话"
 page_role: "content"
 footer_text: "Noemion · ADR-0024"
 permalink: "/architecture/adr-0024-dromen-session-contract.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0024</span></nav>
-  <header class="content-introduction"><h1>ADR-0024<br>Dromen 会话契约</h1><p>目标文件不能自带永久权限。每次运行都要重新说明使用哪份目标、允许访问什么、可以花多少资源、由谁观察，以及会话结束后销毁什么。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">DRO-CORE 0.1.0-draft</span><span class="badge">仅限一次会话</span><span class="badge">尚未实现</span></div></header>
-
-  <section class="content-stack">
-    <h2>直接结论</h2>
-    <p class="lead">Dromen 不是可执行目标文件，也不是运行中的全部可变状态。它是 Drasor 在一次 Drase 会话开始前封存的只读执行契约。</p>
-    <p>现行 DRO-CORE 把主体写成精确 <code>attested</code> Endem 或 Synem。按后续发现的对象边界，这项条件必须展开为精确内容、适用外部陈述及逐项验证记录，再同当时有效的政策、权威、环境、能力上限、预算和证据责任绑定。运行观察进入 Iknem；能力句柄留在独立最小权限域；满足结果、最终决定和会话终止继续使用各自结果域。</p>
-    <p class="callout"><strong>草案限制：</strong>上述展开不提前修改 DRO-CORE 的现行值。正式迁移必须另行更新规范、登记、威胁、场景和正反向量；在此之前，开发者不得把 <code>attested=true</code> 当作内容自证或会话准入事实。</p>
-    <p>本决定建立 <code>DRO-CORE 0.1.0-draft</code>。它不建立 Dromen 文件、序列化格式、运行时 API、沙箱实现或凭据代理，也不表示 Drasor 已经实现。</p>
-  </section>
+  <header class="content-introduction"><h1>ADR-0024<br>权限只属于<br>这一次会话</h1><p>可长期保存的目标不携带永久权限。每次尝试都要重新固定精确目标、当前政策与环境，再把能力、预算和观察责任收窄到本次会话。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">DRO-CORE 0.1.0-draft</span><span class="badge">仅限一次会话</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-wide">
-    <h2>为什么需要独立边界</h2>
-    <div class="table-wrap"><table><thead><tr><th>对象</th><th>回答的问题</th><th>不能承担的职责</th></tr></thead><tbody>
-      <tr><td>Endem 或 Synem</td><td>期望什么终态，多个目标怎样形成固定闭包</td><td>不能携带当前机器、实时凭据或一次会话权限</td></tr>
-      <tr><td>Dromen</td><td>这个精确制品在这一次会话中依据什么边界可以运行</td><td>不能记录持续变化的观察、工具返回或最终结果</td></tr>
-      <tr><td>Drasor</td><td>谁重新验证、建立契约、隔离能力并执行会话</td><td>不能改写制品、扩大授权或替代验收权威</td></tr>
-      <tr><td>Iknem</td><td>实际发生了什么，证据在什么范围内适用</td><td>不能保存实时秘密或仅凭存在就恢复会话</td></tr>
+    <h2>用一次受限发布会话理解 Dromen</h2>
+    <p class="lead">某个 Synem 固定了构建制品与服务健康目标的完整闭包，但它没有授予部署权，也没有指定本次运行可以访问哪个环境。Drasor 只有重新核对全部会话条件，才能建立一次会话的只读执行契约（设计阶段名称 Dromen）。</p>
+    <div class="flow"><div class="step">固定精确目标<br>及完整闭包</div><div class="step">重验外部陈述<br>与撤销状态</div><div class="step">固定政策、环境<br>和决定权威</div><div class="step">求能力交集<br>分配有限预算</div><div class="step">建立本次<br>Dromen</div><div class="step">运行、观察<br>终止并销毁</div></div>
+    <div class="table-wrap"><table><thead><tr><th>发布步骤</th><th>本次会话明确固定</th><th>不能依赖的隐含信息</th></tr></thead><tbody>
+      <tr><td>选择目标</td><td>精确 Synem 身份、Profile 和全部成员闭包</td><td>文件名、分支名、缓存记录或远端 <code>latest</code></td></tr>
+      <tr><td>核对前置条件</td><td>适用外部陈述、验证记录、政策截止点与撤销状态</td><td><code>attested=true</code>、签名外观或上次通过</td></tr>
+      <tr><td>关闭运行边界</td><td>仅限预发布环境、具名适配器、协议版本、时钟和后端</td><td>当前目录、机器默认值或工具自行发现的环境</td></tr>
+      <tr><td>分配权限与预算</td><td>仓库只读、预发布环境写入、十分钟、二十次调用、两次重试和一个子任务</td><td>操作者的全部权限、每个子任务一份新配额或模型提出的扩权</td></tr>
+      <tr><td>运行与观察</td><td>每项 <code>krin</code> 的观察者、方法、时间、披露和决定责任</td><td>工具成功、Task 完成或日志数量直接代表目标满足</td></tr>
+      <tr><td>结束会话</td><td>保留有范围事件和 Iknem，销毁实时能力与秘密</td><td>用检查点复活旧权限，或把旧 Dromen 用于下一次运行</td></tr>
     </tbody></table></div>
-    <p>若省略 Dromen，Drasor 只能把运行环境和能力保存在隐式配置里。这样既无法说明某次运行实际采用了哪组边界，也无法判断中途变化应当继续、重验还是关闭会话。</p>
+    <p>Dromen 的“只读”表示建立后不能原地修改，并不表示会话没有计划、事件、重试或终止状态。任何需要扩大权限或改变实质绑定的继续运行，都必须重新建立会话。</p>
   </section>
 
   <section class="content-wide">
-    <h2>建立时必须封闭的内容</h2>
-    <div class="table-wrap"><table><thead><tr><th>绑定</th><th>最低内容</th><th>失败时怎样处理</th></tr></thead><tbody>
-      <tr><td>主体</td><td>精确内容身份、Profile、闭包、外部陈述集合、主体摘要、验证记录、政策截止点和当前撤销状态</td><td>歧义、变化、类型或主体不匹配、无效或撤销时拒绝建立</td></tr>
-      <tr><td>政策与权威</td><td>政策身份、决定与升级权威、截止点、有效期及适用 consent</td><td>默认最新、冲突或范围内 apor 待确认时拒绝</td></tr>
-      <tr><td>环境</td><td>平台、时钟、隔离配置、适配器、协议和模型或规则后端身份</td><td>只靠远端自述或缺少必需绑定时拒绝</td></tr>
-      <tr><td>能力</td><td>动作、资源或受众、范围、约束、授予者、有效期和撤销检查</td><td>只允许取交集；缺少必需能力时不运行</td></tr>
-      <tr><td>预算</td><td>时间、调用、重试、令牌、字节、存储、进程和成本的有限上限</td><td>单位不明、子任务逃逸或取消不可传播时拒绝</td></tr>
-      <tr><td>证据责任</td><td>每项 krin 的观察生产者、方法、phain 位置、Iknem 类别、披露和决定权威</td><td>责任缺口不能留给运行后猜测</td></tr>
+    <h2>目标、会话契约、运行者和证据各自负责什么</h2>
+    <div class="table-wrap"><table><thead><tr><th>对象</th><th>开发者用它回答什么</th><th>不得承担什么</th></tr></thead><tbody>
+      <tr><td>Endem 或 Synem</td><td>期望哪种终态，单个目标或多个目标怎样形成固定闭包</td><td>不携带当前机器、实时凭据或一次会话权限</td></tr>
+      <tr><td>Dromen</td><td>这个精确目标在本次尝试中受哪些政策、环境、能力、预算和观察责任约束</td><td>不保存可变计划、工具返回、实时秘密、最终结果或可恢复权限</td></tr>
+      <tr><td>Drasor</td><td>谁重新验证输入、建立契约、控制能力并执行一次会话</td><td>不改写目标、不自行扩权，也不替验收权威作出决定</td></tr>
+      <tr><td>Iknem 与决定记录</td><td>实际观察支持什么有限主张，以及具名权威作出什么决定</td><td>存在记录不表示会话可恢复，也不能反向改变目标或契约</td></tr>
     </tbody></table></div>
+    <p>这个边界使持久目标与临时权力分离：Endem 和 Synem 可以长期保存，Dromen 只属于一次授权上下文中的尝试。运行历史可以成为下一次会话的输入，却不是下一次会话的准入证明。</p>
   </section>
 
   <section class="content-wide">
-    <h2>只读不等于没有生命周期</h2>
-    <div class="flow"><div class="step">会话提案</div><div class="step">重新验证</div><div class="step">边界求交</div><div class="step">封存 Dromen</div><div class="step">受控运行</div><div class="step">完成或失效</div><div class="step">销毁实时能力</div></div>
-    <p>只有完成全部检查并封存后的对象才叫 Dromen。政策、模型、适配器、能力范围或其他实质绑定变化时，旧 Dromen 失效；Drasor追加漂移事件并按预先声明的规则中断或失败。扩大权限必须形成新的 Drase 会话，而不是修改原契约。</p>
-    <p>日志可以保存经脱敏的绑定摘要和失效原因，但这些记录只能作为 Iknem 或会话事件。它们不能重新创建 Dromen、恢复凭据或继续旧会话。</p>
+    <h2>建立前必须封闭哪些边界</h2>
+    <div class="table-wrap"><table><thead><tr><th>条款组</th><th>必须精确绑定</th><th>拒绝建立的情况</th></tr></thead><tbody>
+      <tr><td>主体<br><code>DRO-SUB-001</code></td><td>精确内容、Profile、闭包、适用外部陈述、验证记录、政策截止点和撤销状态</td><td>主体含糊、内容变化、类型不符、陈述失效或记录无法关联</td></tr>
+      <tr><td>政策与权威<br><code>DRO-POL-001</code></td><td>政策身份、决定与升级权威、适用 consent、截止点和有效期</td><td>默认采用最新政策、权威未具名，或范围内仍有待确认项</td></tr>
+      <tr><td>环境<br><code>DRO-ENV-001</code></td><td>平台、时钟、隔离配置、适配器、协议以及模型或规则后端身份</td><td>缺少必需绑定、只依赖远端自述，或实际环境与声明不一致</td></tr>
+      <tr><td>观察责任<br><code>DRO-OBS-001</code></td><td>每项判据的观察生产者、方法、时间、Iknem 类别、披露和决定权威</td><td>关键观察无人负责，或准备在运行结束后再猜测证据范围</td></tr>
+      <tr><td>不可变与生命周期<br><code>DRO-IMM-001</code> · <code>DRO-LIF-001</code></td><td>失效条件、中断策略、事件保存范围、实时能力销毁和新会话规则</td><td>允许原地修补、跨会话转移、恢复旧秘密或复用一次性授权</td></tr>
+    </tbody></table></div>
+    <p>现行 DRO-CORE 使用精确 <code>attested</code> Endem 或 Synem 描述主体。这里的 <code>attested</code> 必须理解为“精确内容、适用外部陈述及逐项验证记录”，而不是内容自带的可信布尔值。开发者不得把 <code>attested=true</code> 当作内容自证或会话准入事实；它不能单独证明签名者有权、陈述仍有效、撤销已经检查或本次会话获准。</p>
+    <p class="callout"><strong>现行草案限制：</strong>本 ADR 不静默改写 DRO-CORE 的现有取值。若后续把上述展开写入规范，必须同步条款、登记、威胁、场景和正反向量，并明确旧草案的迁移规则。</p>
   </section>
 
   <section class="content-wide">
-    <h2>能力描述与实时能力必须分开</h2>
-    <p>Dromen 只记录非秘密能力描述，例如允许读取哪个资源、令牌面向哪个受众、调用上限是多少。Bearer token、刷新令牌、私钥、文件描述符、socket 和供应商原生句柄留在独立最小能力域，并绑定这一会话。</p>
-    <p><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization">MCP 2025-11-25 授权规范</a>要求令牌绑定目标资源，并强调按需请求范围；<a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks">MCP Task 安全条款</a>要求任务绑定授权上下文。Dromen 采用相同问题边界，但不复制 OAuth、Task ID 或协议对象。协议凭据与远端任务始终位于 Drasor 外缘。</p>
+    <h2>能力、预算和秘密只能收窄</h2>
+    <div class="table-wrap"><table><thead><tr><th>边界</th><th>Dromen 可以记录</th><th>必须留在外部能力域</th></tr></thead><tbody>
+      <tr><td>能力<br><code>DRO-CAP-001</code></td><td>动作、资源或受众、范围、约束、授予者、有效期与撤销检查；只取目标、政策、环境和调用者上限的交集</td><td>操作者的完整权限、协议服务器公开的全部工具，以及运行中新增的 scope</td></tr>
+      <tr><td>秘密<br><code>DRO-SEC-001</code></td><td>非秘密描述、受众和句柄类别</td><td>Bearer token、刷新令牌、私钥、cookie、文件描述符、socket 和供应商原生句柄</td></tr>
+      <tr><td>预算<br><code>DRO-BUD-001</code></td><td>时间、调用、重试、令牌、字节、存储、进程和成本的有限、带单位上限</td><td>无限默认值、子任务重新计数或无法传播的取消</td></tr>
+      <tr><td>闭包激活<br><code>DRO-ACT-001</code></td><td>固定 Synem 成员的会话期激活规则</td><td>运行中发现的新成员、扩大后的成员能力，或把激活状态当成满足结果</td></tr>
+    </tbody></table></div>
+    <p><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization">MCP 2025-11-25 授权规范</a>要求令牌面向目标资源并按需请求权限；其<a href="https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices">安全实践</a>进一步说明会话标识不是认证，令牌也不得穿透转发。Noemion 采用资源、受众和最小权限的边界，但不把 OAuth 令牌、MCP Session ID 或 Task ID 放进 Dromen。</p>
+    <p>预算耗尽只说明本次尝试不能在现有上限内继续，不自动产生目标 <code>unmet</code>。资源限制、会话终止、证据充分性、目标满足和最终接受仍使用各自的结果域。</p>
   </section>
 
   <section class="content-wide">
-    <h2>从 ELF 与 GNU Linux 借鉴什么</h2>
-    <ul>
-      <li><a href="https://gabi.xinuos.com/elf/07-pheader.html">ELF gABI 的程序装载章节</a>明确区分静态文件和系统据此建立的动态进程映像。Noemion 借鉴“持久制品不等于运行表示”，但 Dromen 不是 Segment、内存映像或可执行格式。</li>
-      <li><a href="https://man7.org/linux/man-pages/man7/capabilities.7.html">Linux capabilities</a>把传统超级用户权限拆成可独立限制的能力集合，并以 bounding set 限制执行后可获得的上界。Dromen 同样只允许能力求交和收窄，但规范不预先指定 Linux 实现。</li>
-      <li><a href="https://www.kernel.org/doc/html/latest/userspace-api/no_new_privs.html">Linux no_new_privs</a>提供执行后不能获得新增权限的单向约束；<a href="https://docs.kernel.org/userspace-api/landlock.html">Landlock</a>允许进程继续限制自己的环境权限。这些机制是未来候选证据，不是“使用 Linux 就已经安全”的证明。</li>
-    </ul>
+    <h2>漂移、取消和恢复为什么必须开始新会话</h2>
+    <p>模型版本、适配器、协议、政策、能力、决定权威或隔离配置发生实质变化时，旧 Dromen 失效。Drasor 保存已经发生的事件和有范围证据，再按预先固定的策略中断或失败；不能把新值覆盖到旧契约上。</p>
+    <p>检查点、外部任务句柄和脱敏报告可以成为新会话的候选输入，但恢复仍要重新核对主体、外部陈述、政策、环境、能力和剩余预算。取消请求也只是一项事件：在远端状态或副作用无法确认时，系统必须保留未知，而不是声称工作从未发生。</p>
+    <div class="table-wrap"><table><thead><tr><th>外部机制</th><th>可以借鉴什么</th><th>不能据此推出什么</th></tr></thead><tbody>
+      <tr><td><a href="https://gabi.xinuos.com/elf/07-pheader.html">ELF gABI 程序装载</a></td><td>区分持久文件与系统据此建立的进程映像</td><td>Dromen 不是段、内存映像、进程或可执行格式</td></tr>
+      <tr><td><a href="https://man7.org/linux/man-pages/man7/capabilities.7.html">Linux capabilities</a></td><td>拆分特权并以能力上界限制执行后可获得的权限</td><td>Linux 能力不可移植，单一能力也不能证明完整隔离；过宽的 <code>CAP_SYS_ADMIN</code> 尤其不能作为最小权限证明</td></tr>
+      <tr><td><a href="https://www.kernel.org/doc/html/latest/userspace-api/no_new_privs.html">Linux no_new_privs</a> 与 <a href="https://docs.kernel.org/userspace-api/landlock.html">Landlock</a></td><td>提供执行后不新增权限和进程自我收窄的候选机制</td><td>两者都不是完整沙箱，也不覆盖网络、模型、协议和外部服务权限</td></tr>
+      <tr><td><a href="https://www.gnu.org/software/libc/manual/html_node/Limits-on-Resources.html">GNU C Library 资源限制</a></td><td>区分软上限与硬上限，并说明进程怎样继承和收窄限制</td><td>进程限制不覆盖工具调用、模型令牌、供应商成本或分布式任务预算</td></tr>
+      <tr><td><a href="https://www.gnu.org/software/make/manual/html_node/Interrupts.html">GNU make 中断处理</a></td><td>中断后删除可能只完成一部分的目标，避免把半成品误当成最新结果</td><td>清理动作本身可能失败；发出取消或销毁请求不证明副作用已经消失</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks">MCP 2025-11-25 Tasks</a></td><td>持久任务必须绑定授权上下文，并受期限、并发和清理规则约束</td><td>外部 Task 可恢复，不表示 Noemion 会话或实时权限可以恢复</td></tr>
+      <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0</a></td><td>Task、Message、Artifact、状态与取消语义保持分离</td><td>Task 终态、取消结果或上下文标识不能直接成为本地满足、证据充分或授权决定</td></tr>
+    </tbody></table></div>
+    <p><strong>复核日期：</strong>2026-07-16。外部协议和操作系统机制只提供设计证据；正式实现仍需固定平台、版本、威胁假设、降级行为和可重复测试。</p>
   </section>
 
   <section class="content-wide">
-    <h2>面向 Agent 时代的直接影响</h2>
-    <ul>
-      <li>模型、MCP 工具和 A2A Agent 可以提出计划、能力请求和候选观察，但不能修改 Dromen。</li>
-      <li>模型切换、协议降级、工具列表变化和远端权限提升都是环境或能力变化，必须由绑定规则判断是否使会话失效。</li>
-      <li>子 Agent、重试和长时任务不能获得新的预算；它们只能消费会话上限的严格子集。</li>
-      <li>外部 Task 的成功、失败和取消保留为带来源事件，不直接成为目标满足、Iknem 充分或权威接受。</li>
-      <li>当前 Agent 协议越来越强调协商、授权上下文和长任务生命周期，这使显式会话契约成为底层需要，而不是附加日志功能。</li>
-    </ul>
-  </section>
-
-  <section class="content-wide">
-    <h2>规范影响与验证</h2>
-    <ul>
-      <li>新增 <code>DRO-CORE 0.1.0-draft</code> 十条规范条款。</li>
-      <li>新增十项 Dromen 威胁和十五个非规范自然语言场景。</li>
-      <li>二十个提案向量覆盖十个允许契约与十个确定拒绝；检查器只证明资料矩阵一致。</li>
-      <li>END-CORE、END-FMT、END-P1、SYN-CORE、IKN-CORE 与任何规范字节保持不变。</li>
-      <li>当前不存在 Drasor、装载器、沙箱、凭据域、预算器或 Dromen API。</li>
-    </ul>
-  </section>
-
-  <section class="content-band">
-    <h2>待定内容</h2>
-    <p>运行 API、进程模型、沙箱组合、凭据存储、能力代理、事件编码、预算计数器、恢复策略和销毁机制仍保持开放。Dromen 永远不获得文件格式；若未来实现需要持久审计，只能定义 Iknem 或会话事件，而不能把 Dromen 转化为可恢复权限的对象。</p>
+    <h2>当前还不能承诺哪种运行时或沙箱</h2>
+    <p>本决定建立 <code>DRO-CORE 0.1.0-draft</code> 的解释边界，但不建立 Dromen 文件、序列化格式、API、运行时、进程模型、沙箱、凭据代理、预算器、事件编码、恢复格式或销毁实现，也不表示 Drasor 已经实现。</p>
+    <p>现有十条条款、十项威胁、十五个自然语言场景以及十个允许和十个确定拒绝向量，只检查规范资料的一致性。它们不能证明隔离有效、秘密已经销毁、取消成功、协议互操作或任何平台达到生产安全要求。</p>
+    <p class="callout"><strong>名称与口头边界：</strong>Dromen、Drase 与 Drasor 在连续讲解时近似，而且“只读”容易被误解为“没有运行状态”。首次出现应先写“一次会话的只读契约”“本次会话”或“会话执行器”，再给出设计阶段名称；日志不得用裸露的 <code>active=true</code> 合并目标激活、会话存活和权限有效。发行拼写与读音仍须通过真实使用者朗读、听写和职责匹配验证。</p>
+    <div class="page-links">
+      <a class="page-link" href="../specifications/dromen.html"><strong>查看 Dromen 开发者规范</strong><span>按五步核对 DRO-CORE 的会话建立责任。</span></a>
+      <a class="page-link" href="../specifications/authority.html"><strong>查看权威与授权决定</strong><span>区分长期授权、一次能力和最终决定。</span></a>
+      <a class="page-link" href="adr-0022-iknem-evidence-and-appraisal.html"><strong>查看有范围证据边界</strong><span>理解运行事件怎样进入证据与判断。</span></a>
+      <a class="page-link" href="adr-0026-external-protocol-adapters.html"><strong>查看外部协议适配</strong><span>固定 MCP、A2A 与远端任务的输入边界。</span></a>
+    </div>
   </section>
   <div class="next-prev"><a href="adr-0023-endem-content-standard.html">← ADR-0023</a><a href="adr-0025-structured-diagnostics.html">ADR-0025 →</a></div>
 </main>

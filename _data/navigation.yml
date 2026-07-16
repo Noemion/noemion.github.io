@@ -107,7 +107,7 @@ modules:
           - { href: /architecture/adr-0021-synem-closure-and-activation.html, label: "ADR-0021 · 依赖必须先固定，权限只能收窄" }
           - { href: /architecture/adr-0022-iknem-evidence-and-appraisal.html, label: "ADR-0022 · 先问证据能证明什么" }
           - { href: /architecture/adr-0023-endem-content-standard.html, label: "ADR-0023 · 文件能读，不等于内容成立" }
-          - { href: /architecture/adr-0024-dromen-session-contract.html, label: "ADR-0024 · Dromen 会话契约" }
+          - { href: /architecture/adr-0024-dromen-session-contract.html, label: "ADR-0024 · 权限只属于这一次会话" }
           - { href: /architecture/adr-0025-structured-diagnostics.html, label: "ADR-0025 · 结构化诊断边界" }
           - { href: /architecture/adr-0026-external-protocol-adapters.html, label: "ADR-0026 · 外部协议适配" }
           - { href: /architecture/adr-0027-exact-identity-and-attestation.html, label: "ADR-0027 · 精确内容身份与签名" }

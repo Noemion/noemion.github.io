@@ -801,6 +801,7 @@ def validate_public_boundary(errors):
             "不能证明任何写入器、读取器、CLI 或运行时已经实现",
         ),
         "architecture/adr-0024-dromen-session-contract.html": (
+            "权限只属于这一次会话",
             "DRO-CORE 0.1.0-draft",
             "只读执行契约",
             "MCP 2025-11-25 授权规范",
