@@ -3,6 +3,25 @@ const siteRoot = new URL("../", scriptUrl);
 const version = scriptUrl.search;
 const moduleUrl = (name) => new URL(`modules/${name}.mjs${version}`, scriptUrl);
 const dataUrl = new URL(`navigation-data.json${version}`, scriptUrl);
+const progressiveImageRoots = Array.from(document.querySelectorAll("[data-progressive-image]"));
+progressiveImageRoots.forEach((root) => {
+  root.querySelectorAll("[data-progressive-image-stage]").forEach((stage) => {
+    const image = stage.querySelector("[data-progressive-image-source]");
+    if (image && !(image.complete && image.naturalWidth > 0)) stage.dataset.imageState = "loading";
+  });
+});
+if (progressiveImageRoots.length) {
+  import(moduleUrl("progressive-image"))
+    .then(({ connectProgressiveImages }) => connectProgressiveImages(progressiveImageRoots))
+    .catch((error) => {
+      progressiveImageRoots.forEach((root) => {
+        root.querySelectorAll("[data-progressive-image-stage]").forEach((stage) => {
+          delete stage.dataset.imageState;
+        });
+      });
+      console.warn("Progressive image enhancement is unavailable.", error);
+    });
+}
 const mobileLayout = matchMedia("(max-width: 999px)");
 const precisePointer = matchMedia("(hover: hover) and (pointer: fine)");
 let keyboardNavigation = false;

@@ -5767,8 +5767,19 @@ def main():
             errors.append("index.html: every homepage chapter heading must use the shared symbolic title treatment")
         for token in (
             'class="portal-introduction-visual"',
+            "data-progressive-image",
+            "data-progressive-image-stage",
+            "data-progressive-image-source",
             "noemion-verifiable-goal-field.svg",
             "noemion-verifiable-goal-field-base.jpg",
+            "noemion-verifiable-goal-field-base-preview.avif",
+            "noemion-verifiable-goal-field-base-preview.webp",
+            "noemion-verifiable-goal-field-base-preview.jpg",
+            "noemion-verifiable-goal-field-base-balanced.avif",
+            "noemion-verifiable-goal-field-base-balanced.webp",
+            "noemion-verifiable-goal-field-base-balanced.jpg",
+            "noemion-verifiable-goal-field-base-detail.avif",
+            "noemion-verifiable-goal-field-base-detail.webp",
             'class="portal-art-base"',
             'class="portal-art-motion"',
             'fetchpriority="high"',
@@ -5780,6 +5791,7 @@ def main():
         home_style = home_style_path.read_text() if home_style_path.exists() else ""
         for selector in (
             ".portal-introduction::after", ".portal-introduction-visual", ".portal-introduction-visual img",
+            ".portal-art-preview", ".portal-art-stage", '.portal-art-stage[data-image-state="loading"]',
         ):
             if selector not in home_style:
                 errors.append(f"style.css missing homepage visual selector {selector}")
@@ -5802,6 +5814,8 @@ def main():
             '.manual-article{padding:0 var(--site-content-inline) 40px}',
             ".portal-thesis-copy p{text-wrap:wrap}",
             ".portal-thesis-copy .portal-lead{font-size:18px;line-height:1.65;font-weight:560;letter-spacing:-.01em}",
+            "transition:opacity 420ms var(--ease)",
+            "animation:portal-visual-enter 320ms 40ms var(--ease) both",
         ):
             if token not in home_style:
                 errors.append(f"style.css missing homepage surface continuity contract: {token}")
@@ -5820,6 +5834,30 @@ def main():
             ):
                 if token not in portal_art_source:
                     errors.append(f"homepage animated brand visual missing contract: {token}")
+        progressive_image_contracts = {
+            "noemion-verifiable-goal-field-base-preview.avif": 20_000,
+            "noemion-verifiable-goal-field-base-preview.webp": 35_000,
+            "noemion-verifiable-goal-field-base-preview.jpg": 60_000,
+            "noemion-verifiable-goal-field-base-balanced.avif": 35_000,
+            "noemion-verifiable-goal-field-base-balanced.webp": 55_000,
+            "noemion-verifiable-goal-field-base-balanced.jpg": 100_000,
+            "noemion-verifiable-goal-field-base-detail.avif": 85_000,
+            "noemion-verifiable-goal-field-base-detail.webp": 110_000,
+        }
+        for filename, maximum_bytes in progressive_image_contracts.items():
+            image_path = ROOT / "assets" / "images" / filename
+            if not image_path.exists():
+                errors.append(f"missing progressive homepage image: {filename}")
+            elif image_path.stat().st_size > maximum_bytes:
+                errors.append(f"progressive homepage image exceeds {maximum_bytes} bytes: {filename}")
+        progressive_module = ROOT / "assets" / "modules" / "progressive-image.mjs"
+        if not progressive_module.exists():
+            errors.append("progressive homepage image controller is missing")
+        else:
+            progressive_source = progressive_module.read_text()
+            for token in ("ProgressiveImageStage", "requestAnimationFrame", 'dataset.imageState = "loaded"'):
+                if token not in progressive_source:
+                    errors.append(f"progressive homepage image controller missing contract: {token}")
 
     about_index = ROOT / "about/index.html"
     if about_index.exists():
