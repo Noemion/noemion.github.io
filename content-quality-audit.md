@@ -127,7 +127,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | `architecture/adr-0011-endem-container.html` | 实验性容器格式 | 通过 |
 | `architecture/adr-0012-rust-core-language.html` | 未来语言评审基线 | 通过 |
 | `architecture/adr-0013-end-p1-payload.html` | END-P1 封闭载荷 | 通过 |
-| `architecture/adr-0014-source-manifest.html` | 首个 Ktisor 来源清单 | 通过 |
+| `architecture/adr-0014-source-manifest.html` | 实验来源输入与权威边界 | 通过 |
 | `architecture/adr-0015-result-domains.html` | 判断与运行结果分层 | 通过 |
 | `architecture/adr-0016-mene-time-model.html` | mene 时间与连续性 | 通过 |
 | `architecture/adr-0017-negation-and-absence.html` | 否定与缺席证据 | 通过 |
@@ -935,6 +935,16 @@ ADR-0013 此前从“直接决定”进入字段规则，只用一张表区分 E
 [RFC 8949](https://www.rfc-editor.org/rfc/rfc8949.html)支持分层接受与具体数据模型；[BCP 47](https://www.rfc-editor.org/rfc/rfc5646.html)区分标签语法、大小写呈现、登记值和规范化；[RFC 6838](https://www.rfc-editor.org/rfc/rfc6838.html)只定义媒体类型结构与登记规则；[Unicode 17 第 2 章](https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-2/)区分编码单元、标量值和字素。这些资料不证明来源真实、意义正确、内容接受或发布安全，也不替 Noemion 定义字段和身份。
 
 本轮只重构公开 END-P1 说明、导航、架构索引、站点地图、审计记录和质量契约。END-P1、profile_id、字段键、枚举、排序、资源上限、字节向量、结果域和发布边界均未改变，也没有创建发布 Profile、解析器、Ktisor、Theor、CLI、ABI 或符合性声明。
+
+## ADR-0014 来源输入与语义授权边界二次复核 · 2026-07-16
+
+ADR-0014 此前正确拒绝 Prompt、模型 JSON、手写 CBOR 和大型通用 IR 直接进入规范对象，但首节又把来源清单描述为同时保存“已经授权的结构投影”。该说法没有区分意义确认与动作授权，也容易让尚未实现的 Ktisor 看似已经接收输入。十种指令、来源保真、确定性、验证和替换条件分散在五个后续章节，开发者仍需自行恢复一项候选怎样安全进入 END-P1。
+
+当前页面先限定来源清单只能提供解码来源、已确认投影、判断契约和封闭形成输入，再沿自然语言候选、意义确认、未决保留、END-SRCM、END-P1 和独立读取解释路径。语义确认改为确定性规则或范围有限的语义授权绑定，并明确不授予工具、发布或运行权限；<code>decision_authority</code> 仍是不可信选择器。页面从六个章节、一张表和 1,391 个章节可见字符，重构为六个章节、五张边界表、一条形成流程、四个开发入口和 2,123 个章节可见字符。
+
+[MCP 2025-11-25 Sampling](https://modelcontextprotocol.io/specification/2025-11-25/client/sampling)允许服务器请求模型采样和工具循环，同时要求保留人工审查能力；它不授予模型规范写入权。[NIST AI 600-1](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)把自信但错误的生成内容列为风险，支持保留候选、确认者和失败责任。[GNU make Rule Introduction](https://www.gnu.org/software/make/manual/html_node/Rule-Introduction.html)把 prerequisite、target 和 recipe 分开，支持输入、产出和动作的职责分离。这些机制不定义 Noemion 的语义授权、动作授权、字段或满足结果。
+
+本轮同时修正 END-SRCM 规范源中的授权措辞，只改变责任解释，不改变七条条款、十种指令、语法、诊断、样例、映射、END-P1 字段或字节向量。没有创建来源解析器、Ktisor、Theor、CLI、正式源语言、发布 Profile 或兼容入口。
 
 ## 重新审计条件
 

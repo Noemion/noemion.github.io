@@ -282,6 +282,24 @@ ADR_0013_PROFILE_BOUNDARIES = (
     "完整登记有效性、首选值替换和规范化算法仍未固定",
     "最终发布版必须使用新的封闭 Profile",
 )
+ADR_0014_SOURCE_HEADINGS = [
+    "先判断来源清单能够证明什么",
+    "一项输入怎样进入 END-P1",
+    "十种指令为什么保持封闭",
+    "语义确认与动作授权怎样分开",
+    "确定性、来源保真和失败怎样验证",
+    "何时删除这一实验入口",
+]
+ADR_0014_SOURCE_BOUNDARIES = (
+    "它把解码后的自然语言和已确认结构放进封闭映射",
+    "范围有限的语义授权绑定",
+    "禁止模型直接生成规范对象",
+    "不是 Endem 身份、正式源语言或已经通过读音验证的发行名称",
+    "语义确认扩张为一般动作授权",
+    "不得声称保存原始来源字节",
+    "不保留别名、兼容解析或自动迁移",
+    "没有 Ktisor 解析器、实现仓库、稳定命令",
+)
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -6063,6 +6081,33 @@ def main():
             errors.append(
                 "architecture/adr-0013-end-p1-payload.html: must preserve five "
                 "boundary tables, one reading flow and four developer reading links"
+            )
+
+    adr_0014 = ROOT / "architecture/adr-0014-source-manifest.html"
+    if adr_0014.exists():
+        parser = parse(adr_0014)
+        if parser.h2_texts != ADR_0014_SOURCE_HEADINGS:
+            errors.append(
+                "architecture/adr-0014-source-manifest.html: source reading sequence "
+                f"must be {ADR_0014_SOURCE_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in ADR_0014_SOURCE_BOUNDARIES:
+            if term not in visible_text:
+                errors.append(
+                    "architecture/adr-0014-source-manifest.html: missing source or "
+                    f"authority boundary {term}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 5
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                "architecture/adr-0014-source-manifest.html: must preserve five "
+                "boundary tables, one formation flow and four developer reading links"
             )
 
     for row in route_rows:
