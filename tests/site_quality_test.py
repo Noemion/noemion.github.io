@@ -225,6 +225,25 @@ HISTORICAL_ADR_0009_BOUNDARIES = (
     "NIST AI 600-1",
     "MCP 2025-11-25 仍是 Current",
 )
+ADR_0011_READING_HEADINGS = [
+    "先分清格式能够证明什么",
+    "开发者应按什么顺序读取",
+    "END-P0、END-P1 与发布版分别做什么",
+    "为什么采用固定目录与受限 CBOR",
+    "权威机制怎样限定本决定",
+    "当前限制与开发入口",
+]
+ADR_0011_READING_BOUNDARIES = (
+    "不能证明目标已经满足、制品已经获准运行或最终发布",
+    "用一个 valid=true 合并这些层次",
+    "结构接受、语义未执行",
+    "六个空映射不是最小有效 Endem",
+    "最终发布不能只删除 rhem.content",
+    "当前规范与已执行向量不是 Ktisor、Theor 或正式独立读取组件",
+    "well-formed、valid 和 application-expected",
+    "删除一个记录或字段就能得到安全、闭合、可发布的 Endem",
+    "当前不能生成",
+)
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -5913,6 +5932,39 @@ def main():
             errors.append(
                 "architecture/adr-0009-propositional-kernel.html: must preserve five "
                 "boundary tables, one responsibility flow and four current reading links"
+            )
+
+    adr_0011 = ROOT / "architecture/adr-0011-endem-container.html"
+    if adr_0011.exists():
+        parser = parse(adr_0011)
+        if parser.h2_texts != ADR_0011_READING_HEADINGS:
+            errors.append(
+                "architecture/adr-0011-endem-container.html: developer reading sequence "
+                f"must be {ADR_0011_READING_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in ADR_0011_READING_BOUNDARIES:
+            if term not in visible_text:
+                errors.append(
+                    "architecture/adr-0011-endem-container.html: missing format reading "
+                    f"boundary {term}"
+                )
+        for internal_label in ("P0-LANG-001", "work package", "工作包"):
+            if internal_label in visible_text:
+                errors.append(
+                    "architecture/adr-0011-endem-container.html: public format decision "
+                    f"must not expose internal workflow label {internal_label}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 5
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                "architecture/adr-0011-endem-container.html: must preserve five boundary "
+                "tables, one ordered reading flow and four developer reading links"
             )
 
     for row in route_rows:
