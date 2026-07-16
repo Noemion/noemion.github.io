@@ -141,7 +141,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | `architecture/adr-0025-structured-diagnostics.html` | 错误消息不能替系统作决定 | 通过 |
 | `architecture/adr-0026-external-protocol-adapters.html` | 远端完成，不等于本地完成 | 通过 |
 | `architecture/adr-0027-exact-identity-and-attestation.html` | 签名有效，不等于制品获准 | 通过 |
-| `architecture/adr-0028-text-and-identifier-boundaries.html` | 文本与标识符边界 | 通过 |
+| `architecture/adr-0028-text-and-identifier-boundaries.html` | 显示相同，不等于输入相同 | 通过 |
 | `architecture/adr-0029-authority-and-authorization-decisions.html` | 权威与授权决定边界 | 通过 |
 | `architecture/adr-0030-endem-content-and-authorization-companions.html` | 内容与授权伴随关系 | 通过 |
 | `architecture/adr-0031-release-name-collision-gate.html` | 发布名称冲突门禁 | 通过 |
@@ -655,6 +655,16 @@ GNU Coreutils `timeout`、Make job slots 与 Guix 容器环境只保留为终止
 外部状态按复核日重新确认：<a href="https://www.unicode.org/versions/Unicode17.0.0/">Unicode 17.0</a>仍是当前版本，UTS #39 的安全数据与它同步更新；<a href="https://www.unicode.org/reports/tr31/">UAX #31</a>要求实现声明采用的标识符规则或 Profile，并提醒默认标识符仍可能受不可见字符、同形字符和双向重排影响；<a href="https://www.unicode.org/reports/tr39/">UTS #39</a>明确说明同形程度会随字体、书写系统和使用者变化。<a href="https://www.gnu.org/software/libunistring/manual/libunistring.html">GNU libunistring</a>继续把 UTF-8/16/32 表示、规范化、大小写、字素、词和行处理分开。这些资料支持版本固定和职责分离，不把同形风险、规范化或库接口提升为 Noemion 的身份、语义或实现证据。
 
 本轮只重构公开解释、页面质量契约和审计记录。TEXT-IDENTIFIER-CORE、ASCII 标识符策略、十二项条款、登记、威胁模型、场景、向量、Endem 字段和读音结论均未改变，也没有创建 Unicode Profile、原始来源字段、文本格式、处理库、模型输入网关或组件实现。
+
+## ADR-0028 文本表示与模型输入边界二次复核 · 2026-07-16
+
+ADR-0028 此前从抽象结论和哲学引文进入，随后分别说明六个对象、ASCII 标识符、规范化、双向文字、隐藏字符与模型责任。九个章节、零张责任表、一个抽象流程、零个按问题入口和 2,320 个可见字符能够陈述结论，却没有让开发者沿一段真实文本核对每层输入、输出、身份与停止位置；哲学引文还先于具体工程问题，占用了首次阅读路径。
+
+当前页面从一份同时包含自然语言、关系标识符和模型复核上下文的 <code>.ends</code> 清单进入，按原始字节、严格解码、显式变换、结构字段与范围、安全显示、模型实际输入展开。五类文本槽、解码与范围、ASCII 扩展条件以及双向文字与模型审查分别进入边界表；中文说明始终使用“来源内容”“结构标识符”“安全显示视图”“模型实际输入”，避免用“字符串”或“ID”掩盖职责。页面现有六个章节、五张表、二十六行表体、一条处理流程、四个按问题入口和 3,344 个可见字符；增加的内容用于补齐可执行检查、失败责任和版本边界，不增加对象或实现能力。
+
+[RFC 3629](https://www.rfc-editor.org/rfc/rfc3629.html)要求 UTF-8 解码防止非法序列造成安全后果；[UAX #15](https://www.unicode.org/reports/tr15/)说明规范化会修改文本且并非在所有场景都合适；[UAX #31](https://www.unicode.org/reports/tr31/)要求标识符语法采用明确要求或 Profile。[Unicode 17.0](https://www.unicode.org/versions/Unicode17.0.0/)调整了部分字符的 <code>Identifier_Type</code> 与 <code>Identifier_Status</code>，进一步支持固定 Unicode 与安全数据版本。[UTS #39](https://www.unicode.org/reports/tr39/)说明混淆检测可能过度包含合法字符串，[UTS #55](https://www.unicode.org/reports/tr55/)则展示双向重排即使位于字符串或注释中也会妨碍源码审查。[GNU libunistring](https://www.gnu.org/software/libunistring/manual/libunistring.html)把编码、规范化、比较与更高层文本处理分开。这些资料支持职责分离和风险上限，不定义 Noemion 的对象身份、文本 Profile、恶意判决或组件选型。
+
+本轮只重构公开 ADR、导航名称、站点发现摘要、规范页回链、质量契约和审计记录。TEXT-IDENTIFIER-CORE、十二项条款、ASCII 标识符策略、登记、威胁模型、设计场景、24 个向量、字段、结果域与读音结论均未改变，也没有创建 Unicode Profile、文本处理器、双向编辑器、安全字体、同形检测器、模型输入网关或其他组件。
 
 ## 结构化诊断开发者判断路径二次复核 · 2026-07-16
 

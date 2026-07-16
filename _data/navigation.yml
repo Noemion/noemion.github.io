@@ -111,7 +111,7 @@ modules:
           - { href: /architecture/adr-0025-structured-diagnostics.html, label: "ADR-0025 · 错误消息不能替系统作决定" }
           - { href: /architecture/adr-0026-external-protocol-adapters.html, label: "ADR-0026 · 远端完成，不等于本地完成" }
           - { href: /architecture/adr-0027-exact-identity-and-attestation.html, label: "ADR-0027 · 签名有效，不等于制品获准" }
-          - { href: /architecture/adr-0028-text-and-identifier-boundaries.html, label: "ADR-0028 · 文本与标识符边界" }
+          - { href: /architecture/adr-0028-text-and-identifier-boundaries.html, label: "ADR-0028 · 显示相同，不等于输入相同" }
           - { href: /architecture/adr-0029-authority-and-authorization-decisions.html, label: "ADR-0029 · 权威与授权决定" }
           - { href: /architecture/adr-0030-endem-content-and-authorization-companions.html, label: "ADR-0030 · 内容与授权伴随关系" }
           - { href: /architecture/adr-0031-release-name-collision-gate.html, label: "ADR-0031 · 发布名称冲突审查" }

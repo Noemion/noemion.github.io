@@ -849,6 +849,7 @@ def validate_public_boundary(errors):
             "当前没有摘要器",
         ),
         "architecture/adr-0028-text-and-identifier-boundaries.html": (
+            "显示相同，不等于输入相同",
             "TEXT-IDENTIFIER-CORE 0.1.0-draft",
             "RFC 3629",
             "UAX #15",
