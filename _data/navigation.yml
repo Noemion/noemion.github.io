@@ -98,7 +98,7 @@ modules:
           - { href: /architecture/adr-0012-rust-core-language.html, label: "ADR-0012 · 未来 Rust 评审基线" }
           - { href: /architecture/adr-0013-end-p1-payload.html, label: "ADR-0013 · 来源保留 END-P1" }
           - { href: /architecture/adr-0014-source-manifest.html, label: "ADR-0014 · 实验来源清单边界" }
-          - { href: /architecture/adr-0015-result-domains.html, label: "ADR-0015 · 判断与运行结果" }
+          - { href: /architecture/adr-0015-result-domains.html, label: "ADR-0015 · 五类结果不可互换" }
           - { href: /architecture/adr-0016-mene-time-model.html, label: "ADR-0016 · mene 时间模型" }
           - { href: /architecture/adr-0017-negation-and-absence.html, label: "ADR-0017 · 否定与缺席证据" }
           - { href: /architecture/adr-0018-quantification-and-membership.html, label: "ADR-0018 · 量化范围与成员资格" }

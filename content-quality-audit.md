@@ -128,7 +128,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | `architecture/adr-0012-rust-core-language.html` | 未来语言评审基线 | 通过 |
 | `architecture/adr-0013-end-p1-payload.html` | END-P1 封闭载荷 | 通过 |
 | `architecture/adr-0014-source-manifest.html` | 实验来源输入与权威边界 | 通过 |
-| `architecture/adr-0015-result-domains.html` | 判断与运行结果分层 | 通过 |
+| `architecture/adr-0015-result-domains.html` | 五类结果不可互换 | 通过 |
 | `architecture/adr-0016-mene-time-model.html` | mene 时间与连续性 | 通过 |
 | `architecture/adr-0017-negation-and-absence.html` | 否定与缺席证据 | 通过 |
 | `architecture/adr-0018-quantification-and-membership.html` | 量化范围与成员资格 | 通过 |
@@ -945,6 +945,16 @@ ADR-0014 此前正确拒绝 Prompt、模型 JSON、手写 CBOR 和大型通用 I
 [MCP 2025-11-25 Sampling](https://modelcontextprotocol.io/specification/2025-11-25/client/sampling)允许服务器请求模型采样和工具循环，同时要求保留人工审查能力；它不授予模型规范写入权。[NIST AI 600-1](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)把自信但错误的生成内容列为风险，支持保留候选、确认者和失败责任。[GNU make Rule Introduction](https://www.gnu.org/software/make/manual/html_node/Rule-Introduction.html)把 prerequisite、target 和 recipe 分开，支持输入、产出和动作的职责分离。这些机制不定义 Noemion 的语义授权、动作授权、字段或满足结果。
 
 本轮同时修正 END-SRCM 规范源中的授权措辞，只改变责任解释，不改变七条条款、十种指令、语法、诊断、样例、映射、END-P1 字段或字节向量。没有创建来源解析器、Ktisor、Theor、CLI、正式源语言、发布 Profile 或兼容入口。
+
+## ADR-0015 五类结果与外部状态映射二次复核 · 2026-07-16
+
+ADR-0015 此前正确区分制品生命周期、目标满足、权威决定、会话终止和证据状态，但先给出五组枚举，再分别解释满足、决定和外部反例。开发者需要自行组合一次实际任务中的生产者、输入与禁止提升；<code>attested</code> 的草案限制也只在表后补充。页面原有七个章节、三张表、没有任务流程和继续阅读入口，共 2,489 个可见字符。
+
+当前页面用一次依赖升级贯穿结构检查、Agent 会话、测试证据、判据比较和发布决定，再逐项给出五个结果域的生产责任、允许值与禁止提升。<code>completed</code> 不等于 <code>met</code> 或 <code>accepted</code>，单份 <code>valid</code> 不等于整体 <code>sufficient</code>；新观察、规则、协议版本或外部状态只能产生带来源的新映射或新结果，不能覆盖原事实。<code>agno</code>、<code>attested</code> 等机器标识仍缺少真实使用者朗读、听写和成组口头区分证据，不能直接成为最终 CLI 或人类界面文案。页面现有六个章节、五张边界表、一条任务流程、四个开发入口和 2,528 个可见字符。
+
+[GNU Automake 测试语义](https://www.gnu.org/software/automake/manual/html_node/Generalities-about-Testing.html)区分测试通过、断言失败、跳过和测试环境硬错误，支持把未满足、未知与求值故障分开，但其名称和退出码不进入 Endem ABI。[MCP 工具规范](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)区分协议错误与工具执行错误，[MCP 版本说明](https://modelcontextprotocol.io/docs/learn/versioning)则给出协议修订状态；[A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/)把 Task 生命周期与 Message、Artifact 分开；[W3C PROV-O](https://www.w3.org/TR/prov-o/)把实体、活动、主体及其关系保持可追溯。这些机制只能提供外部事实和来源，不产生 Noemion 的目标满足、证据覆盖、动作授权或最终决定。
+
+本轮只重构公开 ADR、导航摘要、站点地图、质量契约和审计记录。END-CORE、五组现行草案值、END-P1、Profile、登记、十二个结果域向量、动作名称与读音结论均未改变，也没有创建 Drasor、决定引擎、结果事件编码、协议适配器、组件或兼容入口。
 
 ## 重新审计条件
 

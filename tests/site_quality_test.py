@@ -300,6 +300,25 @@ ADR_0014_SOURCE_BOUNDARIES = (
     "不保留别名、兼容解析或自动迁移",
     "没有 Ktisor 解析器、实现仓库、稳定命令",
 )
+ADR_0015_RESULT_HEADINGS = [
+    "用一次依赖升级看五类结果",
+    "五个结果域分别由谁产生",
+    "满足结果为什么必须是四值",
+    "最终决定怎样消费而不改写满足结果",
+    "外部机制只能提供哪一层事实",
+    "当前仍缺哪些可执行接口",
+]
+ADR_0015_RESULT_BOUNDARIES = (
+    "它们可以同时成立，也可以各自失败",
+    "completed 不等于 met 或 accepted",
+    "单份 valid 不等于整体 sufficient",
+    "尚未通过真实使用者的朗读、听写和成组口头区分",
+    "外部签名、验证政策、截止点、撤销和依赖方判断必须保持为内容之外的多项关系",
+    "新观察或规则只能产生新结果",
+    "不得回写或覆盖输入事实",
+    "协议版本或外部状态变化只要求适配器重新记录映射",
+    "没有 Drasor、决定引擎、结果事件编码或组件测试",
+)
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -632,7 +651,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "能力声明不等于实时句柄",
             "现有证据覆盖了哪些条件",
             "ADR-0015",
-            "判断与运行结果分层",
+            "五类结果不可互换",
         ),
         "forbidden_patterns": (
             r"<h2>按编号核对决定状态</h2>",
@@ -2569,8 +2588,8 @@ def validate_jekyll_sources():
                 "正式值迁移仍需单独 ADR",
             ),
             SOURCE_ROOT / "architecture" / "adr-0015-result-domains.html": (
-                "生命周期行中的 <code>attested</code> 仍是待迁移的草案值",
-                "这些关系不会改变精确内容身份",
+                "<code>attested</code> 还是待迁移的生命周期占位",
+                "不能压成一个内容状态",
             ),
             SOURCE_ROOT / "architecture" / "adr-0024-dromen-session-contract.html": (
                 "精确内容、适用外部陈述及逐项验证记录",
@@ -6108,6 +6127,33 @@ def main():
             errors.append(
                 "architecture/adr-0014-source-manifest.html: must preserve five "
                 "boundary tables, one formation flow and four developer reading links"
+            )
+
+    adr_0015 = ROOT / "architecture/adr-0015-result-domains.html"
+    if adr_0015.exists():
+        parser = parse(adr_0015)
+        if parser.h2_texts != ADR_0015_RESULT_HEADINGS:
+            errors.append(
+                "architecture/adr-0015-result-domains.html: result-domain reading sequence "
+                f"must be {ADR_0015_RESULT_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in ADR_0015_RESULT_BOUNDARIES:
+            if term not in visible_text:
+                errors.append(
+                    "architecture/adr-0015-result-domains.html: missing result-domain "
+                    f"boundary {term}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 5
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                "architecture/adr-0015-result-domains.html: must preserve five "
+                "boundary tables, one task flow and four developer reading links"
             )
 
     for row in route_rows:

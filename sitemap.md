@@ -29,7 +29,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0012](https://noemion.github.io/architecture/adr-0012-rust-core-language.html) — bounded historical language evidence and the conditional Rust review baseline for a future Ktisor structural core
 - [ADR-0013](https://noemion.github.io/architecture/adr-0013-end-p1-payload.html) — source-bearing formation Profile, ordered validation path, closed references, and non-publishable boundary
 - [ADR-0014](https://noemion.github.io/architecture/adr-0014-source-manifest.html) — experimental source manifest, semantic-confirmation boundary, deterministic mapping, and removal conditions
-- [ADR-0015](https://noemion.github.io/architecture/adr-0015-result-domains.html) — separate artifact, satisfaction, decision, session, and evidence result domains
+- [ADR-0015](https://noemion.github.io/architecture/adr-0015-result-domains.html) — five non-interchangeable result domains, producer boundaries, allowed decisions, and external-state mappings
 - [ADR-0016](https://noemion.github.io/architecture/adr-0016-mene-time-model.html) — fixed and elapsed time scopes, continuity policies, coverage gaps, and clock authority
 - [ADR-0017](https://noemion.github.io/architecture/adr-0017-negation-and-absence.html) — explicit negative relations, absence evidence, closed observation scopes, and failure classification
 - [ADR-0018](https://noemion.github.io/architecture/adr-0018-quantification-and-membership.html) — quantified collection scopes, distinct membership, cardinality, and decisive evidence
