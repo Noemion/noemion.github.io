@@ -896,6 +896,7 @@ def validate_public_boundary(errors):
             "正式发行前必须再次查询",
         ),
         "architecture/adr-0032-deterministic-maker-name-collision.html": (
+            "命令只改大小写，仍然是名称冲突",
             "当前策略",
             "Ktisor",
             "ktise",
@@ -903,6 +904,8 @@ def validate_public_boundary(errors):
             "大小写不能形成可靠区分",
             "不保留别名、重定向、双写或兼容垫片",
             "动作名称不等于实现优先级",
+            "已确认且具有精确语义授权绑定的意义投影",
+            "不能沿用旧页面的“crate 不存在”结论",
             "不扩大公开 CLI",
         ),
         "architecture/adr-0033-text-identifier-specification-name.html": (

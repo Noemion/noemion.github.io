@@ -1281,12 +1281,15 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "architecture/adr-0032-deterministic-maker-name-collision.html": {
         "required": (
+            "命令只改大小写，仍然是名称冲突",
             "Ktisor",
             "ktise",
             "PFA Open Inference Engine",
             "大小写不能形成可靠区分",
             "不保留别名、重定向、双写或兼容垫片",
             "动作名称不等于实现优先级",
+            "已确认且具有精确语义授权绑定的意义投影",
+            "不能沿用旧页面的“crate 不存在”结论",
             "一致性与互操作验证",
         ),
     },
