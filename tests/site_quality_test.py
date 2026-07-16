@@ -244,6 +244,26 @@ ADR_0011_READING_BOUNDARIES = (
     "删除一个记录或字段就能得到安全、闭合、可发布的 Endem",
     "当前不能生成",
 )
+ADR_0012_REVIEW_HEADINGS = [
+    "先分清已经决定与尚未决定",
+    "历史实验实际回答了什么",
+    "为什么只把 Rust 作为 Ktisor 起点",
+    "安全 Rust 仍然不能证明什么",
+    "进入代码阶段前怎样重新评审",
+    "什么情况会改变这一基线",
+]
+ADR_0012_REVIEW_BOUNDARIES = (
+    "只有项目另行进入代码阶段时",
+    "实现语言继续待定",
+    "语言选择不冻结它们的发行拼写",
+    "这些原型不是生产实现，也不产生规范 Endem",
+    "同样使用 Rust 就自然获得实现独立性",
+    "不把“安全 Rust”写成“解析器安全”",
+    "Cargo 的 release 默认关闭该检查",
+    "仅提交 Cargo.lock 不会自动建立这项保证",
+    "版本新旧本身不构成安全结论",
+    "这里没有 Ktisor、Theor、CLI、稳定命令、构建配置或实现级符合性结论",
+)
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -5965,6 +5985,39 @@ def main():
             errors.append(
                 "architecture/adr-0011-endem-container.html: must preserve five boundary "
                 "tables, one ordered reading flow and four developer reading links"
+            )
+
+    adr_0012 = ROOT / "architecture/adr-0012-rust-core-language.html"
+    if adr_0012.exists():
+        parser = parse(adr_0012)
+        if parser.h2_texts != ADR_0012_REVIEW_HEADINGS:
+            errors.append(
+                "architecture/adr-0012-rust-core-language.html: developer review "
+                f"sequence must be {ADR_0012_REVIEW_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in ADR_0012_REVIEW_BOUNDARIES:
+            if term not in visible_text:
+                errors.append(
+                    "architecture/adr-0012-rust-core-language.html: missing language "
+                    f"review boundary {term}"
+                )
+        for internal_label in ("P0-LANG-001", "work package", "工作包"):
+            if internal_label in visible_text:
+                errors.append(
+                    "architecture/adr-0012-rust-core-language.html: public language "
+                    f"decision must not expose internal workflow label {internal_label}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 6
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                "architecture/adr-0012-rust-core-language.html: must preserve six "
+                "review tables, one trust flow and four developer reading links"
             )
 
     for row in route_rows:

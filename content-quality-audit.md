@@ -125,7 +125,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | `architecture/adr-0009-propositional-kernel.html` | 历史语义迁移记录 | 通过，首屏分开仍有效职责与已取代字段 |
 | `architecture/adr-0010-native-lexicon.html` | 现行词汇与事态模型 | 通过 |
 | `architecture/adr-0011-endem-container.html` | 实验性容器格式 | 通过 |
-| `architecture/adr-0012-rust-core-language.html` | 安全核心语言选择 | 通过 |
+| `architecture/adr-0012-rust-core-language.html` | 未来语言评审基线 | 通过 |
 | `architecture/adr-0013-end-p1-payload.html` | END-P1 封闭载荷 | 通过 |
 | `architecture/adr-0014-source-manifest.html` | 首个 Ktisor 来源清单 | 通过 |
 | `architecture/adr-0015-result-domains.html` | 判断与运行结果分层 | 通过 |
@@ -915,6 +915,16 @@ ADR-0011 此前以 END-P0 为中心介绍九个主题、三张表和一条容器
 [RFC 8949](https://www.rfc-editor.org/rfc/rfc8949.html)明确区分 well-formed、valid 与 application-expected，并要求具体协议定义自己的数据模型与确定性选择；它支持分层接受，不让通用 CBOR 解码替代 END-P1。[ELF 文件结构](https://gabi.xinuos.com/elf/01-intro.html)与 [ELF Header](https://gabi.xinuos.com/elf/02-eheader.html)支持固定路线图和显式条目边界；[GNU readelf](https://www.sourceware.org/binutils/docs/binutils/readelf.html)与 [GNU ar](https://sourceware.org/binutils/docs/binutils/ar-cmdline.html)分别提供独立读取路径和消除环境差异的先例。[GNU strip](https://sourceware.org/binutils/docs/binutils/strip.html)只支持“完整形成制品与有损发布制品用途不同”的工程类比，不定义 Endem 的裁剪字段、Profile 或身份关系。
 
 本轮只重构公开格式说明、导航、站点地图、审计记录和质量契约。END-FMT、END-P0、END-P1、END-CORE、字段编号、记录种类、资源上限、字节向量、动作、读音结论和发行边界均未改变，也没有创建写入器、读取器、CLI、裁剪器、组件、ABI 或兼容入口。
+
+## ADR-0012 语言证据与代码阶段边界二次复核 · 2026-07-16
+
+ADR-0012 此前把历史 P0 小实验、未来 Rust 选择和构建政策连续写成八个章节。页面虽然标明组件尚未开始，仍把安全 Rust 的数组边界写得接近静态保证，把提交 <code>Cargo.lock</code>写得接近自动锁定，并让未来 Ktisor、独立 Theor 与整个生态的语言边界分散在多处。三张比较表还突出原型行数和未裁剪二进制大小，开发者容易把描述性测量误当成语言评分。
+
+当前页面先区分历史实验、未来 Ktisor 的条件式评审基线、语言待定的独立 Theor 和不受该决定约束的外部系统。六个 END-P0 向量、144 个确定性变异、Sanitizer、10,000 次 libFuzzer 与同机重复构建继续保留精确声明上限；源码和二进制尺寸只作为历史观察。页面另把所有权、unsafe lint、边界访问、受检算术和发行溢出检查拆开，明确安全 Rust 仍可能 panic，也不能保证逻辑、资源、确定性或语义正确。页面从八个章节、三张表和 3,564 个章节可见字符，收敛为六个章节、六张边界表、一条信任流程、四个开发入口和 2,892 个章节可见字符。
+
+[Rust 1.97.0 发布说明](https://blog.rust-lang.org/releases/1.97.0/)确认该版本于 2026 年 7 月 9 日成为 stable，只支持版本事实。[Rustonomicon 的 panic 说明](https://doc.rust-lang.org/nomicon/exception-safety.html)明确越界索引等安全代码仍可终止路径；[Cargo 工作区 lint](https://doc.rust-lang.org/stable/cargo/reference/workspaces.html#the-lints-table)需要成员显式继承，[Cargo profile](https://doc.rust-lang.org/cargo/reference/profiles.html)则显示 release 默认关闭溢出检查。[Cargo <code>--locked</code>](https://doc.rust-lang.org/cargo/commands/cargo.html#manifest-options)在锁文件缺失或解析变化时失败，因此只提交锁文件并不足够。[GNU GCC 插桩](https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html)与 [LLVM libFuzzer](https://llvm.org/docs/LibFuzzer.html)提供动态检查机制，但不证明缺陷不存在。这些机制不替 Noemion 决定组件职责、实现语言、ABI 或代码阶段。
+
+本轮只重构公开语言决定、导航、架构索引、站点地图、审计记录和质量契约。历史实验、结果文件、Rust 1.97.0 记录、END-FMT、END-P0、END-P1、Ktisor 与 Theor 职责、现行动作和读音结论均未改变，也没有创建代码仓库、Cargo 配置、组件、CLI、ABI、依赖或发行制品。
 
 ## 重新审计条件
 

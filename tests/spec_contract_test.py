@@ -646,7 +646,8 @@ def validate_public_boundary(errors):
             "forbid(unsafe_code)",
             "10,000 次 libFuzzer",
             "experiments/p0-language/results.json",
-            "Theor 必须另写解析结构和错误路径",
+            "必须另写解析结构和错误路径",
+            "实现语言继续待定",
             "不是生产实现",
         ),
         "architecture/adr-0013-end-p1-payload.html": (

@@ -97,7 +97,7 @@
 
 `../vectors/diagnostics/cases.json` 保存 ADR-0025 的二十个结构化诊断提案向量；`../tests/diagnostic_vector_test.py` 只检查十条 DIA-CORE 规则，不实现诊断生产器、渲染器、协议适配器、重试引擎或 CLI。
 
-`registry.json` 还登记非规范实验及其决定链。P0-LANG-001 的协议与结果位于 `../experiments/p0-language/`；它支持 ADR-0012 的首版核心语言决定，但不会改变 END-CORE 或 END-FMT 的条款含义，也不把原型登记为生产实现。
+`registry.json` 还登记非规范实验及其决定链。P0-LANG-001 的协议与结果位于 `../experiments/p0-language/`；它支持 ADR-0012 为未来 Ktisor 保留条件式 Rust 评审基线，但不会改变 END-CORE 或 END-FMT 的条款含义，也不把原型登记为生产实现。
 
 ## 规范强度
 
