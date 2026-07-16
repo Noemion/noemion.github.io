@@ -766,6 +766,11 @@ def validate_public_boundary(errors):
         ),
         "architecture/adr-0022-iknem-evidence-and-appraisal.html": (
             "IKN-CORE 0.1.0-draft",
+            "有范围证据记录（Iknem）",
+            "validity=valid",
+            "coverage=sufficient",
+            "model-candidate",
+            "decision-record",
             "W3C PROV Data Model",
             "RFC 9334 RATS Architecture",
             "SLSA 1.2 Provenance",
