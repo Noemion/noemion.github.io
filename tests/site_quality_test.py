@@ -208,6 +208,23 @@ HISTORICAL_ADR_0008_BOUNDARIES = (
     "2025-11-25 仍是 Current",
     "协议工具、任务或能力声明",
 )
+HISTORICAL_ADR_0009_HEADINGS = [
+    "先确认这份记录还能说明什么",
+    "它当时纠正了什么问题",
+    "当前开发者应怎样拆开一个目标",
+    "旧字段和状态为什么不能继续使用",
+    "哲学与外部资料怎样限定这份记录",
+]
+HISTORICAL_ADR_0009_BOUNDARIES = (
+    "只能从 ADR-0009 继承职责分离",
+    "语义未决也不等于观察不足",
+    "模型即使生成结构完整的 JSON",
+    "形成版保留实际进入形成过程的自然语言",
+    "历史动作不构成别名",
+    "成对口头区分的人类证据",
+    "NIST AI 600-1",
+    "MCP 2025-11-25 仍是 Current",
+)
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -5860,6 +5877,42 @@ def main():
             errors.append(
                 "architecture/adr-0008-endem-system.html: must preserve five bounded "
                 "decision tables and four current reading links"
+            )
+
+    historical_adr_0009 = ROOT / "architecture/adr-0009-propositional-kernel.html"
+    if historical_adr_0009.exists():
+        parser = parse(historical_adr_0009)
+        if parser.h2_texts != HISTORICAL_ADR_0009_HEADINGS:
+            errors.append(
+                "architecture/adr-0009-propositional-kernel.html: historical reading "
+                f"sequence must be {HISTORICAL_ADR_0009_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in HISTORICAL_ADR_0009_BOUNDARIES:
+            if term not in visible_text:
+                errors.append(
+                    "architecture/adr-0009-propositional-kernel.html: missing historical "
+                    f"semantic boundary {term}"
+                )
+        for retired_command in (
+            "endem form", "endem check", "endem bind", "endem pack",
+            "endem seal", "endem see", "endem run", "endem test",
+        ):
+            if retired_command in visible_text:
+                errors.append(
+                    "architecture/adr-0009-propositional-kernel.html: retired command "
+                    f"must not read like a current interface: {retired_command}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 5
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                "architecture/adr-0009-propositional-kernel.html: must preserve five "
+                "boundary tables, one responsibility flow and four current reading links"
             )
 
     for row in route_rows:

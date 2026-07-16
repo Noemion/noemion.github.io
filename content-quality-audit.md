@@ -122,7 +122,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | `architecture/decisions.html` | 决策权威顺序 | 通过 |
 | `architecture/agent-system-boundaries.html` | Agent 运行事实与 Noemion 责任映射 | 通过，显式区分规范、研究与未来实现 |
 | `architecture/adr-0008-endem-system.html` | 历史迁移记录 | 通过，首屏分开仍有效原则与已取代接口 |
-| `architecture/adr-0009-propositional-kernel.html` | 已取代的历史语义 | 通过，显式标记 Superseded |
+| `architecture/adr-0009-propositional-kernel.html` | 历史语义迁移记录 | 通过，首屏分开仍有效职责与已取代字段 |
 | `architecture/adr-0010-native-lexicon.html` | 现行词汇与事态模型 | 通过 |
 | `architecture/adr-0011-endem-container.html` | 实验性容器格式 | 通过 |
 | `architecture/adr-0012-rust-core-language.html` | 安全核心语言选择 | 通过 |
@@ -895,6 +895,16 @@ ADR-0008 此前虽然在首屏标明已经被取代，正文仍依次讲授 Weav
 [GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)要求资料围绕用户问题组织，而不是复制程序结构和功能库存。[GNU <code>readelf</code>](https://www.sourceware.org/binutils/docs/binutils/readelf.html)独立于 BFD，[GNU BFD 信息损失说明](https://sourceware.org/binutils/docs/ld/BFD-information-loss.html)则要求正视共同表示无法保留的格式特有信息；这些资料支持独立读取和损失披露，不定义 Noemion 的对象或命令。[MCP 版本说明](https://modelcontextprotocol.io/docs/learn/versioning)及其 [2026-07-28 发布候选说明](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/)继续区分正式协议、候选修订、扩展和应用状态；[A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/)分别建模 Task、Message 与 Artifact；[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)把协议、身份基础设施和安全评价作为不同工作轴。这些边界只能用于检验职责分离，不能替 Noemion 决定字段、动作、授权或结果。
 
 本轮只重构公开历史说明、导航摘要、站点地图、质量契约和审计记录。CORE、现行 ADR、Profile、登记、向量、字段、对象、动作名称和读音结论均未改变，也没有创建组件、CLI、解析器、形成器、独立读取器、运行时或兼容入口。
+
+## ADR-0009 历史语义与现行职责二次复核 · 2026-07-16
+
+ADR-0009 此前虽然标明五组名称和目标力量已经被 ADR-0010 取代，正文仍完整讲授 <code>say / mean / case / when / open</code>、<code>no-sense / open / unknown</code>、Witness、Runner、旧满足状态和旧实现切片。七个章节、三张表、一条流程和 1,841 个章节可见字符使历史字段成为主要阅读对象；开发者需要自行判断哪些结构原则仍有效，哪些字段、状态和动作必须丢弃。
+
+当前页面先声明只能继承职责分离，不能继承字段拼写，再用依赖升级案例说明来源、意义、事态、目标方向、满足判据、未决问题和观察为什么不能压进几个文本栏目。现行开发路径先写直白问题，再在第二列给出 <code>rhem / semion / skena / telis / krin / apor / phain</code>；形成版保留实际自然语言，未来发布版按独立 Profile 裁剪并取得新身份。旧字段、状态、目标力量、对象名和动作明确退出，不形成别名。页面收敛为五个章节、五张表、一条职责流程、四个现行入口和 2,673 个章节可见字符；新增内容用于给出停止条件、现行责任方和外部系统边界，而不是扩大语义面。
+
+《逻辑哲学论》2.172、4.022 与 4.12–4.1212 支持追问表达结构怎样显示，不支持自然语言天然映射现实、载荷自证为真或哲学命题直接决定字段。[GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html)要求资料服务首次阅读者并按用户问题组织，[GNU Names](https://www.gnu.org/prep/standards/html_node/Names.html)要求名称提供有用意义；这些规则支持把专名放在直白职责之后，不选择 Noemion 字段。[NIST AI 600-1](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)把自信但错误、偏离输入或内部矛盾的生成内容列为虚构风险，因此模型解释只能成为候选。[MCP 版本说明](https://modelcontextprotocol.io/docs/learn/versioning)和 [A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/)分别限定协议修订、Message、Task、Artifact 与任务状态；它们不产生本地意义确认、目标满足或最终接受。
+
+本轮只重构公开历史说明、导航摘要、站点地图、质量契约和审计记录。END-CORE、ADR-0010、ADR-0015、Profile、登记、向量、字段、结果域、动作名称和读音结论均未改变，也没有创建解析器、意义确认服务、求值器、模型接口、协议适配器、组件或兼容入口。
 
 ## 重新审计条件
 
