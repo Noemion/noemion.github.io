@@ -9,7 +9,7 @@ manual_group: "start"
 manual_order: 1
 nav_title: "入门指南"
 page_heading: "Noemion 入门指南"
-page_lead: "用一次依赖升级，分清自然语言目标、运行权限、外部任务状态、证据和最终决定。"
+page_lead: "用一次依赖升级，分清人的自然语言要求、目标制品、运行权限、外部任务状态、证据和最终决定。"
 summary: "从一个开发任务理解 Noemion 负责什么，以及它为什么不替代 Agent 协议、授权和执行系统。"
 badges: ["入门", "开发者案例", "尚未发布"]
 ---

@@ -5484,7 +5484,7 @@ def main():
             "先证明最小纵向切片",
         ),
         "docs/getting-started.md": (
-            "Noemion 把自然语言目标变成",
+            "自然语言目标",
             "第一实现阶段只建设",
             "最小纵向切片",
         ),
@@ -5504,6 +5504,26 @@ def main():
         for phrase in forbidden_phrases:
             if phrase in entry_text:
                 errors.append(f"{relative_path} retains implementation-first entry phrase: {phrase}")
+    for relative_path in (
+        "index.html",
+        "about/background.html",
+        "faq/index.html",
+        "docs/getting-started.md",
+        "specifications/index.html",
+        "_data/navigation.yml",
+        "assets/images/noemion-verifiable-goal-field.svg",
+        "homepage-design.md",
+        "design-system/images.md",
+        "design-system/name-audit.md",
+        "spec/gnu-elf-applicability-proposal.md",
+        "spec/planning-and-replanning-proposal.md",
+        "content-quality-audit.md",
+    ):
+        if "自然语言目标" in (SOURCE_ROOT / relative_path).read_text():
+            errors.append(
+                f"{relative_path} must distinguish the human natural-language expression "
+                "from the resulting goal artifact"
+            )
     architecture_guide_text = (SOURCE_ROOT / "docs" / "architecture-guide.md").read_text()
     for token in (
         "用一次 Agent 工作读图",
@@ -5819,7 +5839,7 @@ def main():
             'class="portal-art-base"',
             'class="portal-art-motion"',
             'fetchpriority="high"',
-            "自然语言目标经过六个语义面形成 Endem",
+            "人的自然语言表达经过六个语义面形成 Endem",
         ):
             if token not in home_source:
                 errors.append(f"index.html: homepage animated brand visual missing {token}")

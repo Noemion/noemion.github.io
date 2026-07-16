@@ -115,7 +115,7 @@ ktise elenk pleko theor drase
 | [`github.com/endem`](https://github.com/endem) | 2016-02-27 更新；无公开仓库 | 第三方个人账户 | 精确登录名已被占用；Noemion 不能取得该全局账户名 |
 | [`Noemion/Noemion`](https://github.com/Noemion/Noemion) | 2026-07-12 推送 | 本项目组织简介仓库 | 属于本项目，不是第三方冲突 |
 
-GitHub 允许不同账户使用相同仓库名，因此第三方 `endem` 仓库不会阻止创建 `Noemion/endem`。它们仍然证明 `Endem` 不是全网唯一名称，公开说明、仓库描述和软件包元数据必须始终先写清 Noemion 项目与自然语言目标工程职责。
+GitHub 允许不同账户使用相同仓库名，因此第三方 `endem` 仓库不会阻止创建 `Noemion/endem`。它们仍然证明 `Endem` 不是全网唯一名称，公开说明、仓库描述和软件包元数据必须始终先写清 Noemion 项目从自然语言形成目标制品的工程职责。
 
 ## 第二轮产品与相邻领域检索
 

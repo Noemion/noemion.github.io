@@ -3,7 +3,7 @@ global:
     href: /about/index.html
     label: 项目
     kicker: 建立共同语境
-    description: 从人的自然语言目标、人工智能行动和工程责任边界理解 Noemion 为什么存在。
+    description: 从人的自然语言表达、人工智能行动和工程责任边界理解 Noemion 为什么存在。
     items:
       - { href: /about/background.html, label: 背景与边界, description: 为什么目标语义需要成为工程对象, cover: background, cover_label: "EXPRESSION ≠ IDENTITY" }
       - { href: /architecture/index.html, label: 架构设计, description: 从确定性成形、组合到受控实现的职责分层, cover: architecture, cover_label: "TRUST BOUNDARIES" }
@@ -15,7 +15,7 @@ global:
     kicker: 定义权威边界
     description: 查看 Endem、组合闭包、会话契约、范围证据与授权边界。
     items:
-      - { href: /specifications/endem.html, label: Endem, description: 最小自然语言目标制品与六个语义面, cover: endem-spec, cover_label: "SIGN → SITUATION" }
+      - { href: /specifications/endem.html, label: Endem, description: 由自然语言形成的最小目标制品与六个语义面, cover: endem-spec, cover_label: "SIGN → SITUATION" }
       - { href: /specifications/synem.html, label: Synem, description: 固定多个目标及其全部必需依赖, cover: synem, cover_label: "RESOLVED CLOSURE" }
       - { href: /specifications/dromen.html, label: Dromen, description: 一次运行的只读会话契约, cover: dromen, cover_label: "SESSION CONTRACT" }
       - { href: /specifications/iknem.html, label: Iknem, description: 限定对象、方法与结论范围的证据记录, cover: iknem, cover_label: "SCOPED EVIDENCE" }
