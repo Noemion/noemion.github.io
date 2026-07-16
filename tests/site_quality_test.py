@@ -646,14 +646,13 @@ CONTENT_LAYOUT_CLASSES = {
     "content-grid",
     "content-rows",
 }
-INTRODUCTION_CLASSES = {
+HERO_SECTION_CLASSES = {
     "portal-introduction",
     "section-introduction",
     "content-introduction",
     "application-introduction",
     "manual-introduction",
 }
-DEPRECATED_LAYOUT_TERM = "he" + "ro"
 
 CURRENT_DOMAIN_IDENTIFIERS = {
     "endem", "rhem", "semion", "skena", "telis", "krin", "apor", "phain",
@@ -2013,8 +2012,6 @@ def validate_legacy_source_vocabulary():
                     f"{relative}: retired public action remains outside ADR-0035 and the name audit "
                     f"{retired_action_match.group(0)!r}"
                 )
-        if DEPRECATED_LAYOUT_TERM in text.lower():
-            errors.append(f"{relative}: retains the deprecated generic lead-layout term")
     return errors
 
 
@@ -6485,14 +6482,55 @@ def main():
         )
         introduction_counts = {
             name: parser.class_counts[name]
-            for name in INTRODUCTION_CLASSES
+            for name in HERO_SECTION_CLASSES
             if parser.class_counts[name]
         }
         if introduction_counts != {expected_introduction: 1}:
             errors.append(
-                f"{row['route']}: expected one {expected_introduction}, "
+                f"{row['route']}: expected one role-appropriate Hero Section "
+                f"using {expected_introduction}, "
                 f"got {introduction_counts}"
             )
+        hero_match = re.search(
+            rf'<header\b[^>]*class="[^"]*\b{re.escape(expected_introduction)}\b[^"]*"[^>]*>(.*?)</header>',
+            source,
+            re.DOTALL,
+        )
+        if hero_match is None:
+            errors.append(
+                f"{row['route']}: Hero Section must use a semantic header element"
+            )
+        else:
+            hero_body = hero_match.group(1)
+            hero_text = normalize_visible_text(HTML_TAG.sub(" ", hero_body))
+            if len(re.findall(r"<h1\b", hero_body)) != 1:
+                errors.append(f"{row['route']}: Hero Section must contain exactly one h1")
+            if not re.search(r"<p\b[^>]*>.*?\S.*?</p>", hero_body, re.DOTALL):
+                errors.append(f"{row['route']}: Hero Section must contain a non-empty lead")
+            expected_status_class = (
+                "portal-introduction-meta"
+                if row["kind"] == "portal"
+                else "badges"
+            )
+            if not re.search(
+                rf'class="[^"]*\b{re.escape(expected_status_class)}\b[^"]*"',
+                hero_body,
+            ):
+                errors.append(
+                    f"{row['route']}: Hero Section must expose a real status group"
+                )
+            if not hero_text:
+                errors.append(f"{row['route']}: Hero Section must contain visible orientation text")
+        if parser.docs_layout:
+            hero_position = source.find(f'class="{expected_introduction}')
+            top_pagination_position = source.find('class="manual-nav manual-nav-top"')
+            if (
+                top_pagination_position >= 0
+                and (hero_position < 0 or hero_position > top_pagination_position)
+            ):
+                errors.append(
+                    f"{row['route']}: manual Hero Section must precede top pagination"
+                )
 
     for route in NORMATIVE_ROUTES:
         path = ROOT / route

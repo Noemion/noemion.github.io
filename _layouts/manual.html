@@ -27,13 +27,13 @@ layout: default
     <span aria-current="page">{{ page.nav_title | default: page.page_heading }}</span>
   </nav>
 
-  {% include manual-pagination.html position="top" %}
-
   <header class="manual-introduction">
     <h1>{{ page.page_heading | default: page.nav_title }}</h1>
     <p>{{ page.page_lead }}</p>
     {% if page.badges %}<div class="badges">{% for badge in page.badges %}<span class="badge">{{ badge }}</span>{% endfor %}</div>{% endif %}
   </header>
+
+  {% include manual-pagination.html position="top" %}
 
   <article class="manual-article">
     {{ content }}

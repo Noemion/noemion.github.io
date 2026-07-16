@@ -30,6 +30,7 @@
 
 | 修改范围 | 识别条件 | 必读设计文档 |
 | --- | --- | --- |
+| 页面 Hero Section、标题、导语、状态徽标、首屏行动与主视觉 | 任一正式页面的首要内容导向区 | [`hero-sections.md`](hero-sections.md)，并继续读取所属页面角色文档 |
 | 全站外壳、顶部导航、页脚、目录 | `_layouts/default.html`、`_includes/site-header.html`、`_includes/site-footer.html`、`assets/directory.*` | [`global-shell.md`](global-shell.md) |
 | 前端模块、接口、数据源与按需加载 | `assets/site.mjs`、`assets/modules/*.mjs`、`_data/navigation.yml` | [`frontend-architecture.md`](frontend-architecture.md)、[`global-shell.md`](global-shell.md) |
 | 首页门户 | `page_role: portal`、`index.html` | [`portal.md`](portal.md)、[`../homepage-design.md`](../homepage-design.md) |
