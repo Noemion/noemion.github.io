@@ -17,7 +17,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 
 [模型参与评测与裁判边界提案](spec/model-assisted-evaluation-proposal.md)补齐模型评分与人工智能基准的证据缺口。它把评测目的、构念、可观察标准、题目与候选、协议、模型调用、原始输出、统计汇总和使用决定分开，并要求位置、冗长、格式、来源、注入、相关评审者与漂移反例。模型评审输出继续是 `model-candidate`；多个模型投票、排行榜和自报置信度不能成为独立证据、统计区间、`met` 或 `accepted`。这仍是尚未进入规范的研究，不创建 `EVAL-CORE`、`JUDGE-CORE`、评测制品、裁判服务、组件或新专名。
 
-[模型训练与更新边界提案](spec/model-training-and-update-boundaries-proposal.md)补齐训练数据、反馈、微调、适配权重、派生模型、复现、发布和回滚之间的责任缺口。它拒绝把会话记忆写成模型学习，也拒绝让用户点击、模型裁判、训练完成、固定种子、相同环境或回滚指针直接成为数据资格、权重复现、用途适合、`met` 或 `accepted`。这仍是尚未进入规范的研究，只使用直白职责短语，不创建 `TRAIN-CORE`、`MODEL-CORE`、`FEEDBACK-CORE`、模型制品、训练平台、组件或新专名。
+[模型训练与更新边界提案](spec/model-training-and-update-boundaries-proposal.md)补齐训练数据、反馈、微调、适配权重、派生模型、复现、发布和回滚之间的责任缺口，并把当前语义抽取模型限定为纯文本 0.8B 候选、本机 LoRA 流程验证与外部算力最终训练两阶段路线。它拒绝把会话记忆写成模型学习，也拒绝让用户点击、模型裁判、训练完成、固定种子、相同环境或回滚指针直接成为数据资格、权重复现、用途适合、`met` 或 `accepted`。这仍是尚未进入规范的研究，只使用直白职责短语，不创建 `TRAIN-CORE`、`MODEL-CORE`、`FEEDBACK-CORE`、模型制品、训练平台、组件或新专名。
 
 [模型开放性与软件自由边界提案](spec/model-openness-and-software-freedom-boundaries-proposal.md)补齐托管 API、开放权重、源码可见、开源软件、自由软件、Open Source AI、发布完整性与可复现模型之间的术语缺口。它依据 GNU 四项自由、OSI Open Source AI Definition 1.0、Linux Foundation Model Openness Framework 与 NIST 供应链资料，要求逐项列出参数、代码、数据说明、数据、文档、许可和首选修改形式。Apache-2.0、模型卡、SBOM、签名和外部开放等级都不能替代对象清单或互相升级。这仍是尚未进入规范的研究，不创建 `OPEN-MODEL-CORE`、`LICENSE-CORE`、模型发行格式、合规服务、组件或新专名。
 

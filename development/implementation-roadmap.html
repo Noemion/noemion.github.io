@@ -18,6 +18,7 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td>多目标组合与发布</td><td>说明依赖闭包、权限交集、裁剪关系、派生身份和签名主体</td><td>真实多目标消费者、冲突反例、顺序无关结果、来源保留关系和可复现发行方案</td><td>单个 Endem 已经足够，或没有复用消费者时，省略通用组合与变换</td></tr>
       <tr><td>受控运行与证据</td><td>限定一次会话可使用的对象、政策、环境、能力、预算和观察责任</td><td>实际字节重验、最小能力、终止与孤儿副作用测试，以及证据记录与决定权威分离</td><td>控制无法强制、外部效果无法辨明或观察责任无法闭合时，关闭对应能力</td></tr>
       <tr><td>模型与外部协议</td><td>研究候选、计划、工具调用、远端状态和遥测怎样进入本地边界</td><td>固定协议版本、降级与取消反例、提示注入测试、数据路径、无模型基线和可测净增益</td><td>成熟外部工具已满足需求，或模型没有不可替代净增益时，不自建相应平台</td></tr>
+      <tr><td>设备内语义抽取模型</td><td>以纯文本 Qwen3.5-0.8B-Base 为当前候选，保留原始词表和长上下文结构；本机只设计 LoRA/QLoRA、合并、量化与 CPU 评测闭环，最终训练计划迁移到可导出完整权重的外部算力环境</td><td>精确数据与权重身份、隔离测试集、无模型和未微调基线、字段级抽取指标、长文档合并反例、量化回归、CPU 资源测量和外部训练权重导出验证</td><td>微调没有可测净增益、量化后不满足资源上限、长文档覆盖不可接受，或外部服务不能导出可设备内运行的完整权重时，返回数据、模型或服务选择</td></tr>
     </tbody></table></div>
   </section>
 
@@ -54,6 +55,7 @@ permalink: "/development/implementation-roadmap.html"
       <tr><td>模型与数据：规划、记忆、检索、训练和托管执行属于不同数据路径</td><td>记录实际模型输入、预处理、模型与版本、保留和删除条件、无模型基线、评测总体与不确定性</td><td>模型流畅度、基准得分、开放权重或可调用 API 不能证明目标忠实、服务控制或安全净增益</td></tr>
       <tr><td>遥测：<a href="https://opentelemetry.io/docs/specs/semconv/">OpenTelemetry 语义约定 1.43.0</a>已把 GenAI 约定移至独立仓库</td><td>固定仓库提交与 Schema URL，限定最小字段、披露预算和接收方，再评估默认脱敏的单向导出</td><td>Schema URL 与遥测记录不进入 Endem 编码、Iknem 身份、授权决定或最终接受</td></tr>
     </tbody></table></div>
+    <p><strong>当前模型策略：</strong>设备内阶段只验证纯文本小模型从数据到 CPU 量化推理的完整路径；外部算力阶段才比较全参数微调、长上下文强化和教师蒸馏。详见<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/model-training-and-update-boundaries-proposal.md">模型训练与更新边界研究</a>。只提供封闭 API 且不能导出完整派生权重的服务，不能产生计划中的设备内发行候选。</p>
   </section>
 
   <section class="content-band"><h2>当前限制条件</h2><p>当前没有 Rust 组件、CLI、协议适配器、沙箱、签名 Profile、安装包或软件发行。开发者现在可以审查规范与验证设计，也可以按<a href="https://github.com/Noemion/noemion.github.io/blob/main/CONTRIBUTING.md">贡献指南</a>提交事实、术语、案例和边界修订；路线图不承诺日期，也不把研究主题写成待实现功能清单。</p></section>

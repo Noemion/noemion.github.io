@@ -61,7 +61,7 @@
 
 [`model-assisted-evaluation-proposal.md`](model-assisted-evaluation-proposal.md) 研究评测目的、构念、可观察标准、题目与候选、协议、模型评审调用、原始输出、统计汇总和使用决定怎样保持分离。它用 NIST AI 800-2 初稿、NIST AI 800-3、NeurIPS 与 ICLR 的模型裁判研究，以及 GNU Diffutils、Coreutils 随机来源和排序规则核对偏差、随机性、依赖、漂移与限定主张。它不创建 `EVAL-CORE`、`JUDGE-CORE`、评测制品、裁判对象、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 END、TEXT-IDENTIFIER、ID、ADP、DRO、IKN、AUT 与 DIA 责任。
 
-[`model-training-and-update-boundaries-proposal.md`](model-training-and-update-boundaries-proposal.md) 研究训练数据、反馈记录、基础模型、适配权重、训练活动、环境复现、行为评测、发布、回滚与运行观察怎样保持分离。它用 NIST AI 600-1、NIST SP 800-218A、RLHF、DPO、递归生成数据研究、GNU Guix 与 Diffutils 核对来源、资格、投毒、反馈回路、派生身份和复现边界。它不创建 `TRAIN-CORE`、`MODEL-CORE`、`FEEDBACK-CORE`、模型制品、训练清单格式、训练平台、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 TEXT-IDENTIFIER、ID、AUT、IKN、ADP、DRO、DIA 与 END 责任。
+[`model-training-and-update-boundaries-proposal.md`](model-training-and-update-boundaries-proposal.md) 研究训练数据、反馈记录、基础模型、适配权重、训练活动、环境复现、行为评测、发布、回滚与运行观察怎样保持分离，并记录当前纯文本 Qwen3.5-0.8B-Base、本机 LoRA 流程验证、CPU 量化评测与外部算力最终训练路线。它用 NIST AI 600-1、NIST SP 800-218A、RLHF、DPO、递归生成数据研究、GNU Guix 与 Diffutils 核对来源、资格、投毒、反馈回路、派生身份和复现边界。它不创建 `TRAIN-CORE`、`MODEL-CORE`、`FEEDBACK-CORE`、模型制品、训练清单格式、训练平台、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 TEXT-IDENTIFIER、ID、AUT、IKN、ADP、DRO、DIA 与 END 责任。
 
 [`model-openness-and-software-freedom-boundaries-proposal.md`](model-openness-and-software-freedom-boundaries-proposal.md) 研究托管服务、参数、架构、推理与训练代码、训练数据说明、数据、文档、许可、首选修改形式、复现和外部开放分类怎样保持分离。它用 GNU 自由软件定义、OSI Open Source AI Definition 1.0、Linux Foundation Model Openness Framework、NIST AI 600-1 与 NIST SP 800-218A 核对用户自由、发布完整性、供应链和证据边界。它不创建 `OPEN-MODEL-CORE`、`LICENSE-CORE`、模型发行格式、合规服务、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 ID、AUT、IKN、ADP、TEXT-IDENTIFIER 与 DIA 责任。
 
