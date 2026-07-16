@@ -823,6 +823,7 @@ def validate_public_boundary(errors):
             "当前没有诊断生产器",
         ),
         "architecture/adr-0026-external-protocol-adapters.html": (
+            "远端完成，不等于本地完成",
             "ADP-CORE 0.1.0-draft",
             "MCP 2025-11-25",
             "2026-07-28",

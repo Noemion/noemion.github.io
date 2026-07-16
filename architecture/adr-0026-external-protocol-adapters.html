@@ -1,81 +1,89 @@
 ---
 layout: default
-title: "ADR-0026 外部协议适配边界"
+title: "ADR-0026 · 远端完成，不等于本地完成"
 page_role: "content"
 footer_text: "Noemion · ADR-0026"
 permalink: "/architecture/adr-0026-external-protocol-adapters.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0026</span></nav>
-  <header class="content-introduction"><h1>ADR-0026<br>外部协议适配边界</h1><p>MCP、A2A 或 HTTP 可以传递调用和状态，但远端说“完成”、自报身份或列出能力时，本地系统仍要独立核对目标、权限和结果。</p><div class="badges"><span class="badge">当前草案</span><span class="badge">ADP-CORE 0.1.0-draft</span><span class="badge">协议无关</span><span class="badge">尚无适配器</span></div></header>
-
-  <section class="content-stack">
-    <h2>直接结论</h2>
-    <p class="lead">适配器只负责把一次已经限定范围的本地调用翻译给外部协议，再把回应连同来源带回来。它不能因为远端使用 Agent、Task 或 Tool 这些名称，就把远端对象直接当成 Noemion 的目标、证据或决定。</p>
-    <p>适配必须保留协议原始事实、收窄能力、声明信息损失并控制副作用。外部任务完成、工具成功、HTTP 状态和模型停止原因都不能直接成为目标满足、最终接受、会话终止或证据有效。</p>
-  </section>
+  <header class="content-introduction"><h1>ADR-0026<br>远端完成<br>不等于本地完成</h1><p>MCP、A2A、HTTP 和模型服务只报告自身发生的调用、状态与产物。适配器必须保留这些事实的来源，再由 Noemion 独立核对身份、权限、证据、目标结果和最终决定。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">ADP-CORE 0.1.0-draft</span><span class="badge">协议无关</span><span class="badge">尚无适配器</span></div></header>
 
   <section class="content-wide">
-    <h2>为什么现在只确定抽象不变量</h2>
-    <p>截至 2026 年 7 月 13 日，MCP 官方版本说明仍把 2025-11-25 标为 Current。官方已于 5 月 21 日锁定并公开以计划最终发布日期命名的 2026-07-28 候选版；它尚未成为当前规范，最终版计划于 7 月 28 日发布。候选版把核心改为无状态并把 Tasks 移到扩展，说明握手、会话与任务字段仍在快速变化。A2A 最新发布规范已经进入 1.0，但它的 Task、Message、Artifact 和 Agent Card 仍属于外部协议对象。</p>
-    <p>因此 ADP-CORE 锁定版本、身份、能力、状态、取消、重试和交付边界，不预先确定具体 JSON、Protocol Buffers、SSE 或 SDK 字段。未来每个协议 Profile 必须绑定精确稳定版本和真实消费者。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>外部调用怎样进入 Drasor</h2>
-    <div class="flow"><div class="step">精确 Dromen</div><div class="step">协议与对端绑定</div><div class="step">能力交集</div><div class="step">一次调用身份</div><div class="step">外部操作</div><div class="step">候选产物与观察</div><div class="step">Iknem 与本地判断</div></div>
-    <ul>
-      <li>发现信息、Agent Card 和工具清单只描述对端，不授予信任或能力。</li>
-      <li>有效能力取协议、对端、本地适配器、Dromen 与政策的交集。</li>
-      <li>每次调用绑定精确主体、输入、预算、截止点、幂等分类和观察责任。</li>
-      <li>外部消息与产物先保持不可信候选，再由独立验证和证据路径处理。</li>
-    </ul>
-  </section>
-
-  <section class="content-wide">
-    <h2>必须分开的状态</h2>
-    <div class="table-wrap"><table><thead><tr><th>外部事实</th><th>可以说明</th><th>不能直接说明</th></tr></thead><tbody>
-      <tr><td>A2A Task <code>completed</code></td><td>对端把该任务置为外部终态</td><td><code>met</code>、<code>accepted</code> 或 Drase <code>completed</code></td></tr>
-      <tr><td>MCP ToolResult 或协议错误</td><td>一次外部工具或协议操作的结果</td><td><code>unmet</code>、Iknem <code>invalid</code> 或永久不可重试</td></tr>
-      <tr><td>HTTP 2xx 或 SDK stop reason</td><td>传输或供应商接口已经按自身规则结束</td><td>内容正确、证据有效或目标已经实现</td></tr>
-      <tr><td>取消确认或连接关闭</td><td>取消请求被接收或传输已结束</td><td>远端副作用已经停止、回滚或不可见</td></tr>
+    <h2>用一次外部发布调用理解适配边界</h2>
+    <p class="lead">一次受限发布会话需要调用外部 Agent。适配器负责把已经受 Dromen 限制的本地操作映射成精确协议调用，并把远端回应、状态变化和候选产物连同来源带回来；它不替本地系统解释“发布是否完成”。</p>
+    <div class="flow"><div class="step">固定协议版本<br>绑定与扩展</div><div class="step">核对对端身份<br>受众和租户</div><div class="step">求能力交集<br>绑定本地调用</div><div class="step">执行外部<br>协议操作</div><div class="step">保留原状态<br>产物与损失</div><div class="step">形成观察<br>再作本地判断</div></div>
+    <div class="table-wrap"><table><thead><tr><th>调用阶段</th><th>开发者必须固定</th><th>信息不足时怎样停止</th></tr></thead><tbody>
+      <tr><td>发现与绑定</td><td>协议修订、绑定、传输、schema、扩展、端点、声明主体、认证主体、受众和租户</td><td>版本、对端、受众或租户含糊时不开始调用；Agent Card 和工具清单只作为声明</td></tr>
+      <tr><td>限定能力</td><td>协议、对端、适配器、Dromen 和政策共同允许的能力交集</td><td>未知能力关闭失败；协商结果和错误建议不得扩大当前会话</td></tr>
+      <tr><td>绑定调用</td><td>本地调用身份、精确输入、预算、截止点、幂等分类和观察责任</td><td>外部 request、task、message 或 trace ID 不能替代本地身份</td></tr>
+      <tr><td>接收回应</td><td>原协议状态、错误来源、映射版本、信息损失、候选产物身份和生产调用</td><td>远端名称、签名、成功消息或完成状态不能直接形成可信对象</td></tr>
+      <tr><td>本地判断</td><td>Iknem 覆盖、目标满足、会话状态和具名权威决定</td><td>任何外部状态都不能越过这些独立结果域</td></tr>
     </tbody></table></div>
+    <p>适配器因此是一个受限翻译边界，不是 Endem、Synem、Dromen、Iknem、凭据包、模型上下文或新的结果域。</p>
   </section>
 
   <section class="content-wide">
-    <h2>映射和重试的硬边界</h2>
-    <p>GNU BFD 说明不同对象格式进入统一 canonical form 时可能丢失原格式信息。外部协议适配面临同样问题，因此每次映射必须保留原始协议身份、映射版本和有限损失清单，不能用一个通用 success 布尔值掩盖差异。</p>
-    <p>自动重试只适用于只读、协议级幂等或具备去重证据的调用。连接中断和没有响应不能证明副作用没有发生；所有重试共享原调用身份、Dromen 预算、截止点和取消状态。</p>
+    <h2>协议版本、对端和能力必须同时固定</h2>
+    <div class="table-wrap"><table><thead><tr><th>绑定</th><th>最低要求</th><th>为什么不能省略</th></tr></thead><tbody>
+      <tr><td>协议与扩展<br><code>ADP-PIN-001</code></td><td>协议 ID、精确修订、稳定性、绑定、schema、传输和扩展集合</td><td><code>latest</code>、默认 SDK 行为和未知扩展会静默改变消息与生命周期语义</td></tr>
+      <tr><td>对端与信任<br><code>ADP-PEE-001</code></td><td>发现来源、声明主体、认证主体、端点、受众、租户和适用政策</td><td>TLS 连接、自报名称、Agent Card 或工具列表都不自动取得本地身份和权威</td></tr>
+      <tr><td>能力交集<br><code>ADP-CAP-001</code></td><td>协议、对端、适配器、Dromen 和政策能力的严格交集</td><td>能力取并集会把发现、支持和授权混成同一件事</td></tr>
+      <tr><td>调用语境<br><code>ADP-INV-001</code></td><td>本地主体、精确输入、操作、预算、截止点、幂等分类和观察责任</td><td>远端 ID 只能关联外部发生，不能成为本地调用或证据身份</td></tr>
+    </tbody></table></div>
+    <p>截至 <strong>2026-07-16</strong>，<a href="https://modelcontextprotocol.io/docs/learn/versioning">MCP 版本说明</a>仍把 <a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25</a>列为 Current。官方在 <strong>5 月 21 日</strong>公开并锁定了以计划最终日期命名的 <a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">2026-07-28 候选版</a>；它改变了握手、会话、扩展和 Tasks 边界，但尚未成为当前规范，因此不作为当前符合性基线。</p>
+    <p>候选版证明协议层会发生实质变化，却不要求 Noemion 提前实现候选字段。未来每个协议 Profile 都必须绑定稳定修订、传输、扩展和真实消费者；迁移研究与现行符合性必须分开。</p>
   </section>
 
   <section class="content-wide">
-    <h2>安全边界</h2>
-    <ul>
-      <li>凭据留在独立能力域，并绑定主体、受众、scope、期限和本次会话。</li>
-      <li>禁止把上游令牌透传给下游，也禁止把静态秘密写入 Agent Card、工具 schema、消息或诊断。</li>
-      <li>网络目标必须经过 SSRF、重定向、Origin、DNS 重绑定和私有地址政策。</li>
-      <li>流式、Webhook、推送和轮询必须保存授权、序列、去重、乱序、缺口、终结与资源证据。</li>
-    </ul>
+    <h2>远端对象和本地结果怎样保持分离</h2>
+    <div class="table-wrap"><table><thead><tr><th>外部事实</th><th>本地可以保存</th><th>不能直接提升为</th></tr></thead><tbody>
+      <tr><td>A2A Task <code>completed</code></td><td>精确 A2A 版本、Task 身份、终态、历史范围和远端主体</td><td>目标 <code>met</code>、最终 <code>accepted</code> 或 Drase <code>completed</code></td></tr>
+      <tr><td>MCP ToolResult</td><td>工具身份、调用关联、内容、结构化状态和对端来源</td><td>可信 Iknem、正确 Endem 或已获授权的外部副作用</td></tr>
+      <tr><td>MCP 协议错误或工具执行错误</td><td>各自原始层次、机器码、结构化内容和受限本地映射</td><td>目标 <code>unmet</code>、证据 <code>invalid</code> 或永久不可重试</td></tr>
+      <tr><td>HTTP 2xx 或模型 stop reason</td><td>传输状态或供应商按自身规则结束生成的事实</td><td>内容正确、观察充分、目标实现或权威接受</td></tr>
+      <tr><td>远端 Artifact、Message 或资源</td><td>生产调用、对端、媒体类型、内容身份、大小和披露限制</td><td>Endem、Iknem、签名证明或本地身份</td></tr>
+    </tbody></table></div>
+    <p><a href="https://sourceware.org/binutils/docs/bfd/BFD-information-loss.html">GNU BFD 信息损失说明</a>指出，共同内部形式无法穷尽所有外部对象格式，转换时可能没有位置保存原信息。协议适配必须保留原协议事实、映射版本和有限损失清单；通用 <code>success=true</code> 或统一状态枚举不能冒充无损等价。</p>
+    <p>远端候选产物只有经过内容身份核对、独立验证和证据范围评估后，才可能进入后续流程。适配器保存来源，不负责把候选升级为可信对象。</p>
   </section>
 
   <section class="content-wide">
-    <h2>权威资料与采用限制</h2>
-    <ul>
-      <li><a href="https://modelcontextprotocol.io/docs/learn/versioning">MCP 版本说明</a>与<a href="https://modelcontextprotocol.io/specification/2025-11-25">MCP 2025-11-25 规范</a>确认当前规范状态与日期版本规则。</li>
-      <li><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/">MCP 2026-07-28 候选版说明（2026-05-21 发布）</a>说明该候选版已经锁定、最终版计划于 7 月 28 日发布，并展示无状态核心、扩展与授权变化；项目只把它作为版本漂移证据，不作为当前符合性基线。</li>
-      <li><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 版本化规范</a>定义 Agent Card、Task、Message 与 Artifact；这些对象保持在外部状态域。</li>
-      <li><a href="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110 HTTP Semantics</a>提供幂等与自动重试边界；Noemion 进一步要求共享会话预算和调用身份。</li>
-      <li><a href="https://sourceware.org/binutils/docs/bfd/Canonical-format.html">GNU BFD canonical format 说明</a>揭示统一映射可能丢失信息；Noemion 因而要求显式损失清单。</li>
-    </ul>
+    <h2>取消、断线和重试为什么不能洗掉副作用</h2>
+    <p>发送取消、收到取消确认、观察到远端停止和证明副作用已经回滚，是四个不同事实。连接关闭或轮询超时也只表示本地暂时失去观察，不证明远端操作没有发生。</p>
+    <div class="table-wrap"><table><thead><tr><th>情况与条款</th><th>允许继续的证据</th><th>必须停止自动处理的情况</th></tr></thead><tbody>
+      <tr><td>取消与终态<br><code>ADP-CAN-001</code></td><td>分别保存取消请求、对端确认、后续观察和不可变终态</td><td>只有断流、超时或确认文本，却声称远端已经停止、回滚或不可见</td></tr>
+      <tr><td>只读重试<br><code>ADP-RTY-001</code></td><td>操作经具名规则判为安全只读，且截止点、取消状态和共享预算仍有效</td><td>分类权威缺失，或重试会读取不同语境而未重新绑定</td></tr>
+      <tr><td>幂等重试<br><code>ADP-RTY-001</code></td><td>协议语义、精确输入和调用身份共同证明重复应用效果不变</td><td>仅因 HTTP 方法名、SDK 默认或模型建议就认定幂等</td></tr>
+      <tr><td>去重重试<br><code>ADP-RTY-001</code></td><td>稳定去重键、对端承诺和原调用应用状态核对</td><td>无法确认原调用是否已经应用，或新尝试逃逸原预算</td></tr>
+      <tr><td>流、Webhook 与轮询<br><code>ADP-DEL-001</code></td><td>授权上下文、序列权威、去重、乱序窗口、缺口策略、终结证据和资源上限</td><td>流关闭、通知缺失、历史截短或一次轮询超时被写成完成</td></tr>
+    </tbody></table></div>
+    <p><a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods">RFC 9110</a>只允许客户端在知道请求语义幂等，或能够检测原请求从未应用时自动重试非幂等请求。Noemion 还要求所有尝试共享原本地调用身份、Dromen 预算、截止点和取消状态；递归重试不能重置任何上限。</p>
   </section>
 
-  <section class="content-stack">
-    <h2>后果与当前状态</h2>
-    <ul>
-      <li><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/adapter-core.md">ADP-CORE 0.1.0-draft</a>定义 12 条协议无关适配义务。</li>
-      <li>12 类威胁、18 个设计场景和 24 个正反向量覆盖当前抽象边界。</li>
-      <li>当前没有协议 Profile、适配器 API、网络服务、凭据代理、重试引擎、Webhook 服务或 Drasor 实现。</li>
-    </ul>
+  <section class="content-wide">
+    <h2>网络与凭据安全必须在映射之外关闭</h2>
+    <div class="table-wrap"><table><thead><tr><th>攻击面</th><th>未来实现必须固定</th><th>关闭失败条件</th></tr></thead><tbody>
+      <tr><td>凭据与受众</td><td>凭据留在独立能力域，绑定主体、资源受众、scope、期限和本次会话</td><td>上游令牌透传下游，或静态秘密进入 Agent Card、工具 schema、消息、日志和诊断</td></tr>
+      <tr><td>端点与重定向</td><td>每次连接和重定向重新核对 scheme、host、port、Origin、DNS 结果与私有地址政策</td><td>用户可控 URL、重定向或 DNS 重绑定绕过网络目标限制</td></tr>
+      <tr><td>多租户与发现</td><td>发现结果、列表、缓存和回调都绑定认证主体、租户、受众与披露政策</td><td>跨租户枚举、共享缓存泄漏或未授权的工具与资源元数据</td></tr>
+      <tr><td>输入与资源</td><td>schema 深度、消息大小、流长度、历史、重排、并发、回调和保留期限上限</td><td>外部 schema、消息、流或递归 Agent 调用产生无界解析、存储和费用</td></tr>
+      <tr><td>外部状态与诊断</td><td>结构化来源、最小披露和未知码保留</td><td>字符串匹配改变授权、结果或重试，或原始响应泄露秘密与提示正文</td></tr>
+    </tbody></table></div>
+    <p><a href="https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices">MCP 安全实践</a>明确禁止令牌透传，并要求会话标识不能替代认证。Noemion 采用这些风险边界，但不把 OAuth、MCP Session ID、A2A Task ID 或 TLS 连接本身视为本地身份和权限证明。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>当前还不能承诺哪个协议 Profile 或适配器</h2>
+    <p>本决定建立 <code>ADP-CORE 0.1.0-draft</code> 的协议无关边界。十二项条款、十二类威胁、十八个设计场景，以及十二个允许包络和十二个确定拒绝向量只检查资料一致性；当前没有协议 Profile、适配器 API、网络服务、凭据代理、重试引擎、Webhook 服务、事件存储或 Drasor 实现。</p>
+    <p>MCP、A2A 1.0、HTTP、模型 SDK 和操作系统调用仍需各自的物理 Profile，明确字段映射、稳定版本、认证、能力、错误、取消、重试、交付、损失和降级行为。没有真实消费者、威胁证据和互操作测试时，不冻结 JSON-RPC、Protocol Buffers、SSE、Webhook 或 SDK 数据结构。</p>
+    <p class="callout"><strong>名称与口头边界：</strong>面向开发者先说“外部协议适配器”，再给出 <code>ADP-CORE</code> 条款编号。口头交流必须带协议域，例如“A2A Task”“MCP 工具结果”“HTTP 传输状态”和“Noemion 目标结果”；不要只说“任务完成”“工具成功”或“适配成功”。<code>ADP</code> 是机器规范 ID，不承担发行读音名称。</p>
+    <div class="page-links">
+      <a class="page-link" href="../specifications/adapters.html"><strong>查看外部协议适配开发者规范</strong><span>按十二项责任检查一次受限调用。</span></a>
+      <a class="page-link" href="adr-0024-dromen-session-contract.html"><strong>查看一次会话权限边界</strong><span>理解调用能力、预算和实时凭据怎样收窄。</span></a>
+      <a class="page-link" href="adr-0025-structured-diagnostics.html"><strong>查看结构化诊断边界</strong><span>区分协议错误、工具错误与本地结果。</span></a>
+      <a class="page-link" href="adr-0029-authority-and-authorization-decisions.html"><strong>查看权威与授权决定</strong><span>核对对端身份、能力声明和本地授权。</span></a>
+    </div>
   </section>
   <div class="next-prev"><a href="adr-0025-structured-diagnostics.html">← ADR-0025</a><a href="adr-0027-exact-identity-and-attestation.html">ADR-0027 →</a></div>
 </main>
