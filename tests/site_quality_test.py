@@ -3665,6 +3665,7 @@ def validate_jekyll_sources():
             errors.append(f"Endem reference retains an obsolete inventory or free-form failure identity: {obsolete_token}")
     open_questions_text = (SOURCE_ROOT / "architecture" / "open-questions.html").read_text()
     for token in (
+        "现在还缺什么证据",
         "先判断问题处于哪一层",
         "现有材料",
         "开发者现在怎么做",
@@ -3672,6 +3673,9 @@ def validate_jekyll_sources():
         "非规范研究提案",
         "仍待确定的物理 Profile",
         "未来实现与运行证据",
+        "核心责任已确定",
+        "END-P1 是含来源的形成与评审 Profile",
+        "END-FMT 0.1.0-draft 才是实验性物理容器",
         "用一次字段变更检查是否可以继续",
         "signing_algorithm",
         "真正缺少什么？",
@@ -3682,6 +3686,8 @@ def validate_jekyll_sources():
         "展开与当前问题直接相关的一组即可",
         "内容、格式与迁移缺少什么？",
         "组合、发布与外部决定怎样分开？",
+        "ADR-0036 与 <code>END-PUB-001</code>",
+        "删除、重写、保留与外置内容",
         "术语与实现怎样进入发行？",
         "名称怎样证明适合传播？",
         "外部资料只决定证据类型",
@@ -5948,7 +5954,8 @@ def main():
             "这一层回答什么",
             "必须停止的情况",
             "协议终态不能直接成为 met",
-            "当前只有来源保留的 END-P1 实验性形成格式",
+            "END-P1 是来源保留的形成与评审 Profile",
+            "END-FMT 0.1.0-draft 是实验性物理容器",
             "一次会话的只读执行契约",
             "流畅度尚无人类证据",
             "MCP 2025-11-25 Tasks",
