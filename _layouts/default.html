@@ -3,6 +3,8 @@
 {% assign page_site_module = permalink_parts[1] %}
 {% if page.permalink == '/index.html' %}
   {% assign page_site_module = 'project' %}
+{% elsif page_site_module == 'pages' %}
+  {% assign page_site_module = 'project' %}
 {% elsif page_site_module == 'downloads' or page_site_module == 'news' %}
   {% assign page_site_module = 'resources' %}
 {% elsif page_site_module == 'faq' %}

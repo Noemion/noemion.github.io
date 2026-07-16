@@ -7,7 +7,8 @@ Noemion 目前处于研究、规范与验证方案设计阶段，尚未发布 Kt
 ## 从哪里开始
 
 - 想了解项目：访问[网站首页](https://noemion.github.io/)。
-- 想查找公开页面：查看 [`sitemap.md`](sitemap.md)。这是正式路由的唯一清单。
+- 读者想查找公开页面：使用[全部页面](https://noemion.github.io/pages/index.html) HTML 目录。
+- 维护者想核对正式路由：查看 [`sitemap.md`](sitemap.md)。这是正式路由的唯一清单。
 - 想参与内容、研究或规范工作：先阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 - 想了解许可证：查看 [Apache License 2.0](LICENSE)。Noemion 名称和标识不随源码许可证一并授权。
 

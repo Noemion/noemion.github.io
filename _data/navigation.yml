@@ -75,6 +75,7 @@ modules:
           - { href: /docs/index.html, label: 指南与参考 }
           - { href: /downloads/index.html, label: 下载与资源 }
           - { href: /faq/index.html, label: 常见问题 }
+          - { href: /pages/index.html, label: 全部页面 }
       - label: 开发
         items:
           - { href: /development/index.html, label: 开发与贡献 }

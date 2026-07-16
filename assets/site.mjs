@@ -178,3 +178,10 @@ if (document.querySelector("[data-summary-rail-layout]")) {
     .then(({ connectSummaryRailLayouts }) => connectSummaryRailLayouts())
     .catch((error) => console.warn("Responsive summary layout is unavailable.", error));
 }
+
+const pageDirectory = document.querySelector("[data-page-directory]");
+if (pageDirectory) {
+  import(moduleUrl("page-directory"))
+    .then(({ connectPageDirectory }) => connectPageDirectory(pageDirectory))
+    .catch((error) => console.warn("Page directory search is unavailable.", error));
+}

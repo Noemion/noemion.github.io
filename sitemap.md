@@ -2,11 +2,12 @@
 
 Version: 3
 
-Noemion publishes its current project portal, architecture, specifications, component boundaries, development status, the Endem application, and manuals as canonical HTML pages. This Markdown index provides a compact discovery surface for readers and automated tools.
+Noemion publishes its current project portal, architecture, specifications, component boundaries, development status, the Endem application, and manuals as canonical HTML pages. This Markdown index is the compact route registry for maintainers and automated tools; readers can use the generated HTML directory.
 
 ## Discovery surfaces
 
 - [Project portal](https://noemion.github.io/index.html) — project purpose, boundaries, current status, and reading paths
+- [All public pages](https://noemion.github.io/pages/index.html) — reader-facing HTML directory generated from formal page metadata, with search and section filters
 - [Markdown discovery index](https://noemion.github.io/sitemap.md) — this document
 
 ## Project and background

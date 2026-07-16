@@ -26,7 +26,13 @@ MANUAL_MARKDOWN_FILES = sorted(
     [*SOURCE_ROOT.glob("docs/*.md"), *SOURCE_ROOT.glob("endem/docs/*.md")]
 )
 SPEC_MARKDOWN_FILES = sorted(SOURCE_ROOT.glob("spec/*.md"))
-SOURCE_PAGE_FILES = sorted([*SOURCE_HTML_FILES, *MANUAL_MARKDOWN_FILES, *SPEC_MARKDOWN_FILES])
+PAGE_DIRECTORY_MARKDOWN_FILES = sorted(SOURCE_ROOT.glob("pages/*.md"))
+SOURCE_PAGE_FILES = sorted([
+    *SOURCE_HTML_FILES,
+    *MANUAL_MARKDOWN_FILES,
+    *SPEC_MARKDOWN_FILES,
+    *PAGE_DIRECTORY_MARKDOWN_FILES,
+])
 HTML_FILES = SOURCE_HTML_FILES if SOURCE_ONLY else sorted(ROOT.rglob("*.html"))
 RAW_AMP = re.compile(r"&(?![A-Za-z][A-Za-z0-9]+;|#[0-9]+;|#x[0-9A-Fa-f]+;)")
 NAVIGATION_HREF = re.compile(r"\bhref:\s*[\"']?(/[^,}\s\"']+)")
@@ -57,6 +63,7 @@ PORTAL_ROUTES = [
     "faq/index.html",
     "development/index.html",
     "news/index.html",
+    "pages/index.html",
 ]
 APPLICATION_ROUTES = ["endem/index.html"]
 MANUAL_ROUTE_ORDERS = {
@@ -3885,8 +3892,14 @@ def validate_jekyll_sources():
         )
         is_manual_markdown = path in MANUAL_MARKDOWN_FILES
         is_spec_markdown = path in SPEC_MARKDOWN_FILES
+        is_page_directory_markdown = path in PAGE_DIRECTORY_MARKDOWN_FILES
         expected = {
-            "layout": "manual" if is_manual_markdown else ("spec" if is_spec_markdown else "default"),
+            "layout": (
+                "manual" if is_manual_markdown
+                else "spec" if is_spec_markdown
+                else "page-directory" if is_page_directory_markdown
+                else "default"
+            ),
             "page_role": expected_role,
             "permalink": "/" + route,
         }
@@ -4195,6 +4208,9 @@ def validate_jekyll_sources():
             'data-theme-option="light"',
             'data-theme-option="dark"',
             'data-theme-option="system"',
+            "site-footer-directory-button",
+            "'/pages/index.html'",
+            "全部页面",
             "文档",
             "Endem",
             "开发",
@@ -4218,14 +4234,68 @@ def validate_jekyll_sources():
                     "site footer must not retain generic English interface label: "
                     f"{obsolete_label}"
                 )
-        for forbidden_footer_entry in (
-            "sitemap.md",
-            "全部页面",
-        ):
+        for forbidden_footer_entry in ("sitemap.md",):
             if forbidden_footer_entry in footer_text:
                 errors.append(
                     "site footer must link reader-facing HTML pages instead of exposing "
                     f"{forbidden_footer_entry!r}"
+                )
+
+    page_directory_source = SOURCE_ROOT / "pages" / "index.md"
+    page_directory_layout = SOURCE_ROOT / "_layouts" / "page-directory.html"
+    page_directory_module = SOURCE_ROOT / "assets" / "modules" / "page-directory.mjs"
+    for path, tokens in {
+        page_directory_source: (
+            'layout: page-directory',
+            'permalink: "/pages/index.html"',
+            'page_heading: "全部页面"',
+        ),
+        page_directory_layout: (
+            '<table class="page-directory-table">',
+            '<th scope="col">页面</th>',
+            '<label class="page-directory-column-filter"><span>栏目</span>',
+            '<th scope="col">路径</th>',
+            '<th scope="col">说明</th>',
+            "data-page-directory-query",
+            "data-page-directory-group-select",
+            "data-page-directory-item",
+        ),
+        page_directory_module: (
+            "connectPageDirectory",
+            "item.dataset.pageDirectorySearch",
+            'item.hidden = !matches',
+            'count.textContent = String(visible)',
+            'groupSelect.addEventListener("change", update)',
+        ),
+    }.items():
+        if not path.exists():
+            errors.append(f"missing reader page directory source: {path.relative_to(SOURCE_ROOT)}")
+            continue
+        page_directory_text = path.read_text()
+        for token in tokens:
+            if token not in page_directory_text:
+                errors.append(
+                    f"{path.relative_to(SOURCE_ROOT)} missing reader directory contract: {token}"
+                )
+    page_directory_style_text = (SOURCE_ROOT / "assets" / "style.css").read_text()
+    for token in (
+        ".page-directory-controls{\n  display:block",
+        ".page-directory-table",
+        ".page-directory-column-filter",
+        ".page-directory-main .page-directory-table tbody tr",
+        "grid-template-columns:minmax(0,1fr) auto",
+    ):
+        if token not in page_directory_style_text:
+            errors.append(f"shared styles missing responsive page directory contract: {token}")
+    for forbidden_token in (
+        "data-page-directory-filter",
+        ".page-directory-filter",
+    ):
+        for path in (page_directory_layout, page_directory_module, SOURCE_ROOT / "assets" / "style.css"):
+            if path.exists() and forbidden_token in path.read_text():
+                errors.append(
+                    f"{path.relative_to(SOURCE_ROOT)} must not restore standalone directory filter buttons: "
+                    f"{forbidden_token}"
                 )
 
     theme_script = SOURCE_ROOT / "assets/theme.js"
@@ -5026,7 +5096,9 @@ def validate_jekyll_sources():
             'import(moduleUrl("mobile-header-layout"))',
             'import(moduleUrl("content-enhancements"))',
             'import(moduleUrl("summary-rail-layout"))',
+            'import(moduleUrl("page-directory"))',
             'document.querySelector("[data-summary-rail-layout]")',
+            'document.querySelector("[data-page-directory]")',
             'const needsScrollFocus = Boolean(document.querySelector(".table-wrap, pre"))',
             "needsTableScroller || needsScrollFocus || longContent",
             'directoryPanel.dataset.mobileDirectoryReady = "true"',
@@ -6477,6 +6549,7 @@ def main():
         route_head = row["route"].split("/", 1)[0]
         expected_module = (
             "project" if row["route"] == "index.html"
+            else "project" if route_head == "pages"
             else "resources" if route_head in {"downloads", "news"}
             else "support" if route_head == "faq"
             else "architecture" if route_head == "spec"

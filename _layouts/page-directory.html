@@ -1,0 +1,65 @@
+---
+layout: default
+---
+{% assign formal_pages = site.pages | where_exp: "item", "item.permalink contains '.html'" | sort: "title" %}
+<main class="page-directory-main" id="main-content" tabindex="-1" data-page-directory>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="{{ '/index.html' | relative_url }}">项目</a><span aria-hidden="true">/</span><span>全部页面</span></nav>
+  <header class="section-introduction">
+    <h1>{{ page.page_heading | escape }}</h1>
+    <p>{{ page.page_lead | escape }}</p>
+    <div class="badges"><span class="badge">读者目录</span><span class="badge"><span data-page-directory-total>{{ formal_pages.size }}</span> 个正式页面</span><span class="badge">自动生成</span></div>
+  </header>
+
+  <section class="page-directory-section">
+    <h2>查找公开页面</h2>
+    <div class="lead">{{ content }}</div>
+    <div class="page-directory-controls" data-page-directory-controls hidden>
+      <label class="page-directory-search" for="page-directory-query">
+        <span>搜索页面</span>
+        <input id="page-directory-query" type="search" inputmode="search" autocomplete="off" placeholder="输入页面名称、栏目或路径" data-page-directory-query>
+      </label>
+    </div>
+    <p class="page-directory-results" aria-live="polite"><strong data-page-directory-count>{{ formal_pages.size }}</strong> 个页面</p>
+    <div class="table-wrap page-directory-table-wrap" tabindex="0" aria-label="全部页面目录表格">
+      <table class="page-directory-table">
+        <thead><tr><th scope="col">页面</th><th scope="col"><label class="page-directory-column-filter"><span>栏目</span><select data-page-directory-group-select aria-label="筛选栏目" hidden><option value="all">全部栏目</option></select></label></th><th scope="col">路径</th><th scope="col">说明</th></tr></thead>
+        <tbody data-page-directory-list>
+        {% for route_page in formal_pages %}
+          {% assign route_parts = route_page.permalink | split: '/' %}
+          {% assign route_segment = route_parts[1] %}
+          {% assign route_group = route_segment %}
+          {% assign route_group_label = route_segment %}
+          {% assign route_group_order = 99 %}
+          {% if route_page.permalink == '/index.html' or route_segment == 'about' %}
+            {% assign route_group = 'project' %}{% assign route_group_label = '项目' %}{% assign route_group_order = 1 %}
+          {% elsif route_segment == 'architecture' %}
+            {% assign route_group_label = '架构' %}{% assign route_group_order = 2 %}
+          {% elsif route_segment == 'specifications' or route_segment == 'spec' %}
+            {% assign route_group = 'specifications' %}{% assign route_group_label = '规范' %}{% assign route_group_order = 3 %}
+          {% elsif route_segment == 'components' %}
+            {% assign route_group_label = '组件' %}{% assign route_group_order = 4 %}
+          {% elsif route_segment == 'endem' %}
+            {% assign route_group_label = 'Endem' %}{% assign route_group_order = 5 %}
+          {% elsif route_segment == 'docs' %}
+            {% assign route_group_label = '指南' %}{% assign route_group_order = 6 %}
+          {% elsif route_segment == 'development' or route_segment == 'news' %}
+            {% assign route_group = 'development' %}{% assign route_group_label = '开发与动态' %}{% assign route_group_order = 7 %}
+          {% elsif route_segment == 'downloads' or route_segment == 'faq' %}
+            {% assign route_group = 'resources' %}{% assign route_group_label = '资源与支持' %}{% assign route_group_order = 8 %}
+          {% elsif route_segment == 'pages' %}
+            {% assign route_group = 'directory' %}{% assign route_group_label = '站点目录' %}{% assign route_group_order = 9 %}
+          {% endif %}
+          {% assign route_title = route_page.title | default: route_page.page_heading | split: ' · ' | first %}
+          <tr data-page-directory-item data-route-group="{{ route_group | escape }}" data-route-group-label="{{ route_group_label | escape }}" data-route-group-order="{{ route_group_order }}">
+            <td><a class="page-directory-title" href="{{ route_page.permalink | relative_url }}">{{ route_title | escape }}</a></td>
+            <td><span class="page-directory-group">{{ route_group_label }}</span></td>
+            <td><code class="page-directory-path">{{ route_page.permalink }}</code></td>
+            <td class="page-directory-summary">{% if route_page.summary %}{{ route_page.summary | strip_html | strip_newlines | escape }}{% else %}<span aria-label="无单独说明">—</span>{% endif %}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="page-directory-empty" data-page-directory-empty hidden>没有找到匹配页面。请缩短关键词或切换栏目。</p>
+  </section>
+</main>
