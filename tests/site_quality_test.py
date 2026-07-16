@@ -1797,6 +1797,14 @@ def validate_readability_behavior_contracts(root):
                 r"\.manual-nav\s+a\s*\{[^}]*min-width:44px;"
                 r"[^}]*min-height:44px"
             ),
+            "mobile footer and theme menu targets must be at least 44px tall": (
+                style_text,
+                r"@media\(max-width:999px\)\s*\{[^}]*"
+                r"\.site-footer-grid\s+a,\.site-footer-links\s+a\s*\{"
+                r"[^}]*min-width:44px;[^}]*min-height:44px\}[^}]*"
+                r"\.site-theme-trigger\s*\{[^}]*min-height:44px\}[^}]*"
+                r"\.site-theme-menu>button\s*\{[^}]*min-height:44px"
+            ),
             "long inline code must wrap inside the reading column": (
                 style_text,
                 r"code\s*\{[^}]*overflow-wrap:anywhere"

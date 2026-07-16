@@ -321,6 +321,9 @@ details p{padding-bottom:11px}
 .small{font-size:13px;color:var(--muted)}
 
 @media(max-width:999px){
+  .site-footer-grid a,.site-footer-links a{display:flex;align-items:center;min-width:44px;min-height:44px}
+  .site-theme-trigger{min-height:44px}
+  .site-theme-menu>button{min-height:44px}
   main{margin:18px 10px 48px;padding:28px 22px 34px;border-radius:3px}
   .grid,.page-links,.status-grid{grid-template-columns:1fr}
   .flow{flex-direction:column;overflow:visible;padding-bottom:0;scroll-snap-type:none}
