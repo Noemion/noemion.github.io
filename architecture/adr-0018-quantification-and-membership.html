@@ -1,44 +1,86 @@
 ---
 layout: default
-title: "ADR-0018 量化范围与集合成员资格"
+title: "ADR-0018 · 先固定成员，再判断数量"
 page_role: "content"
 footer_text: "Noemion · ADR-0018"
 permalink: "/architecture/adr-0018-quantification-and-membership.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0018</span></nav>
-  <header class="content-introduction"><h1>ADR-0018<br>量化范围<br>集合成员资格</h1><p>先固定谁属于集合，再判断全部、任一或数量条件，避免模型、查询或工具通过挑选子集和重复见证制造满足结果。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">量化目标</span><span class="badge">不改变线格式</span><span class="badge">尚未实现</span></div></header>
-  <section class="content-band"><h2>直接结论</h2><p class="lead">一个量化目标不是“对搜索结果做计数”。它必须先固定关系模板、被量化角色、成员资格权威、集合截止点和成员身份规则，然后才能使用 <code>all</code>、<code>some</code>、<code>at_least</code>、<code>at_most</code> 或 <code>exactly</code>。</p><p>当前策略确定抽象语义，不给 END-P1 增加字段，也不表示 Ktisor、Drasor、求值器或 CLI 已经实现。第一阶段只支持一个关系模板中的一个被量化角色；嵌套量化、多变量组合和动态成员上的 <code>mene</code> 保持开放。</p></section>
-  <section class="content-band"><h2>语言哲学提供问题结构</h2><blockquote><p>“概括记号的特点在于，第一，它指示一个逻辑原型；第二，它突出了常项。”</p><cite>路德维希·维特根斯坦《逻辑哲学论》5.522</cite></blockquote><p>4.127 把变量的值与落入形式概念的对象联系起来；5.52—5.521 区分概括与真值函数；5.5261 提醒概括命题仍是复合结构；5.53 又把同一性放回记号之间的关系。对工程的启发是：量词必须显示它约束哪个位置、允许哪些值以及怎样判断同一成员。</p><p>这些命题不直接推出软件字段，也不替项目决定开放世界、空集合或错误优先级。Noemion 采用的是可审计的安全边界：成员范围和空集合必须由具名权威明确给出。</p></section>
-  <section class="content-wide"><h2>一个完整例子</h2><p>“所有本次发布涉及的生产节点都健康”必须先绑定发布权威在截止点给出的节点清单，再把 <code>node</code> 固定为 <code>healthy(node)</code> 的唯一量化角色。一个有效的不健康节点可以立即决定 <code>unmet</code>；但要决定 <code>met</code>，必须证明清单已经封闭且每个不同节点都得到有效的 <code>met</code>。</p></section>
-  <section class="content-wide"><h2>集合范围契约</h2><div class="table-wrap"><table><thead><tr><th>字段</th><th>必须说明什么</th><th>禁止的捷径</th></tr></thead><tbody>
-    <tr><td>关系模板与角色</td><td>固定关系身份、角色顺序和唯一被量化角色</td><td>把不同谓词或角色错位结果混在一起</td></tr>
-    <tr><td>集合身份与权威</td><td>谁有权决定成员属于该集合</td><td>让模型或查询返回值自行定义全集</td></tr>
-    <tr><td>成员模式</td><td><code>enumerated</code> 清单或 <code>rule-bound</code> 确定规则</td><td>依赖当前目录、搜索路径或未记录默认值</td></tr>
-    <tr><td>截止点</td><td>成员资格在哪个确定时点锁定</td><td>在求值过程中静默加入或删除成员</td></tr>
-    <tr><td>身份规则</td><td>怎样规范化并比较两个成员是否相同</td><td>按名称外观、日志行或证据数量计数</td></tr>
-    <tr><td>空集合政策</td><td>具名权威是否明确允许空集合参与判断</td><td>利用默认空集和空真值自动得到满足</td></tr>
-  </tbody></table></div></section>
-  <section class="content-wide"><h2>五种量词怎样决定结果</h2><div class="table-wrap"><table><thead><tr><th>量词</th><th>决定性结果</th><th>需要完整封闭范围的结果</th></tr></thead><tbody>
-    <tr><td><code>all</code></td><td>一个不同成员的有效 <code>unmet</code> 决定总体 <code>unmet</code></td><td>只有全部成员为 <code>met</code> 才能决定总体 <code>met</code></td></tr>
-    <tr><td><code>some</code></td><td>一个不同成员的有效 <code>met</code> 决定总体 <code>met</code></td><td>只有全部成员为 <code>unmet</code> 才能决定总体 <code>unmet</code></td></tr>
-    <tr><td><code>at_least k</code></td><td><code>k</code> 个不同成员的 <code>met</code> 决定总体 <code>met</code></td><td>少于 <code>k</code> 只能在完整求值后决定 <code>unmet</code></td></tr>
-    <tr><td><code>at_most k</code></td><td><code>k+1</code> 个不同成员的 <code>met</code> 决定总体 <code>unmet</code></td><td>不超过 <code>k</code> 只能在完整求值后决定 <code>met</code></td></tr>
-    <tr><td><code>exactly k</code></td><td>超过 <code>k</code> 个不同成员的 <code>met</code> 决定总体 <code>unmet</code></td><td>恰好、少于 <code>k</code> 都必须等完整求值后决定</td></tr>
-  </tbody></table></div><p>若尚无决定性结果，范围不完整或成员观察不足产生 <code>agno</code>，成员求值契约故障产生 <code>fault</code>。聚合必须保留每个成员的结果和 Iknem 链接；同一主体的重复日志、重试、签名或模型提及只能计一次。</p></section>
-  <section class="content-band"><h2>空集合与动态成员</h2><p>经典逻辑可以把空域上的全称命题视为真，但自然语言目标中的空集合常常来自目录故障、过滤错误或尚未同步的数据。Noemion 因此不静默采用空真值：空集合必须由成员资格权威明确授权，否则形成或判断保持待确认。</p><p>持续目标还会遇到成员加入、退出和责任交接。量化 <code>mene</code> 必须先定义成员有效区间、变化截止点和每个成员的覆盖要求；这些尚待确定，因此当前不受支持。</p></section>
-  <section class="content-wide"><h2>外部技术提供的边界证据</h2><ul>
-    <li><a href="https://www.w3.org/TR/2017/REC-shacl-20170720/">SHACL 2017 Recommendation</a> 用最小和最大计数约束值节点；<a href="https://www.w3.org/TR/shacl12-core/">SHACL 1.2</a> 在 2026 Working Draft 中继续讨论 <code>someValue</code>、唯一成员和决定性见证，但草案不是现行标准。</li>
-    <li><a href="https://www.w3.org/TR/owl-syntax/">OWL 2 Structural Specification</a> 的精确基数依赖个体同一性；<a href="https://www.w3.org/TR/owl2-primer/#Open_World_Assumption">OWL 2 Primer 的开放世界说明</a>也表明“没有声明”不能直接当作“不存在”。</li>
-    <li><a href="https://www.w3.org/TR/sparql11-query/#aggregates">SPARQL 1.1 聚合规范</a>中的 <code>COUNT(DISTINCT ...)</code> 计数的是查询解中的不同值，不是自动封闭的现实成员全集。</li>
-    <li><a href="https://www.gnu.org/software/findutils/manual/html_mono/find.html">GNU Findutils 手册</a>说明 <code>find</code> 的起点、裁剪、提前退出、重复起点与搜索期间变化都会影响覆盖。因此一次文件搜索不能自行证明“所有对象已经检查”。</li>
-  </ul><p>这些标准和工具证明范围、唯一性与完整性必须显式，但 Noemion 的结果域、空集合政策和信任边界仍由 END-CORE 自己规定。</p></section>
-  <section class="content-band"><h2>规范影响与验证</h2><ul>
-    <li>END-CORE 新增 <code>END-QNT-001</code> 至 <code>END-QNT-003</code>。</li>
-    <li>END-SCEN 新增四个案例，覆盖全称、存在、不同成员基数、空集合和成员漂移。</li>
-    <li>威胁模型新增量化范围与计数洗白；十二个提案向量覆盖六个允许分类和六个确定拒绝。</li>
-    <li>END-P1 不变；物理字段、规范字节与组件实现需要先建立新的 Profile。</li>
-  </ul></section>
-  <section class="content-band"><h2>待定内容</h2><p>嵌套量化、多变量绑定、量词与复合否定的规范化、量化 <code>mene</code> 的滚动成员、超大集合证明、跨生产者成员合并、物理字段和规范字节仍需真实消费者、威胁分析与新 Profile。</p></section>
+  <header class="content-introduction"><h1>ADR-0018<br>先固定成员<br>再判断数量</h1><p>“全部”“至少”“最多”和“刚好”只能对有权威、有截止点、身份唯一的成员集合求值；搜索结果、分页响应和重复记录都不能自行定义全集。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">成员范围先于计数</span><span class="badge">不改变线格式</span><span class="badge">尚未实现</span></div></header>
+
+  <section class="content-wide">
+    <h2>用一次发布检查读懂量化</h2>
+    <p class="lead">一个量化目标不是“对监控查询结果做计数”。“所有本次发布涉及的生产节点都健康”要求开发者先知道哪些节点属于“本次发布”。</p>
+    <div class="flow"><div class="step">保留原句<br>确认关系模板</div><div class="step">固定被量化角色<br>成员资格权威</div><div class="step">锁定截止点<br>建立唯一身份</div><div class="step">逐成员求值<br>保留证据链接</div><div class="step">按量词聚合<br>形成四值结果</div></div>
+    <div class="table-wrap"><table><thead><tr><th>开发者要固定的事实</th><th>本例</th><th>不能怎样补写</th></tr></thead><tbody>
+      <tr><td>关系与被量化角色</td><td><code>healthy(node)</code> 中只量化 <code>node</code>。</td><td>混入另一关系、环境或角色位置。</td></tr>
+      <tr><td>集合身份与权威</td><td>发布负责人确认的 <code>production-nodes</code>。</td><td>让监控查询、模型或 Agent 返回值定义集合。</td></tr>
+      <tr><td>模式与截止点</td><td>发布开始时锁定的 <code>enumerated</code> 清单。</td><td>求值期间静默加入或删除节点。</td></tr>
+      <tr><td>成员身份</td><td>按稳定 <code>node-id</code> 比较不同成员。</td><td>按日志行、显示名称或证据数量计数。</td></tr>
+      <tr><td>空集合政策</td><td>默认拒绝；只有具名权威可明确允许。</td><td>利用空真值自动得到 <code>met</code>。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>成员集合必须先回答六个问题</h2>
+    <div class="table-wrap"><table><thead><tr><th>范围契约</th><th>必须回答</th><th>失败方式</th></tr></thead><tbody>
+      <tr><td>关系模板与角色</td><td>判断哪个关系，且仅哪一个角色被量化。</td><td>谓词混合、角色错位或多变量绑定。</td></tr>
+      <tr><td>集合身份与权威</td><td>谁有权决定成员属于哪个集合。</td><td>查询结果或运行工具成为事实权威。</td></tr>
+      <tr><td>成员模式</td><td><code>enumerated</code> 完整清单，或 <code>rule-bound</code> 确定规则。</td><td>同时使用两种模式，或规则依赖未记录环境。</td></tr>
+      <tr><td>截止点</td><td>成员资格在哪个确定时点锁定。</td><td>分页过程中集合漂移，仍声称同一轮求值。</td></tr>
+      <tr><td>身份规则</td><td>怎样规范化并比较两个成员是否相同。</td><td>重复成员被静默去重，掩盖输入错误。</td></tr>
+      <tr><td>空集合政策</td><td>具名权威是否明确允许空集合参与判断。</td><td>缺少政策时沿用形式逻辑默认值。</td></tr>
+    </tbody></table></div>
+    <p><code>enumerated / rule-bound</code> 是现行草案的机器标签，不是新的哲学专名。人类界面应先显示“完整清单”或“确定规则”等职责说明；任何发行名称仍须通过独立的读音与口头区分验证。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>五种量词怎样提前或延后决定</h2>
+    <div class="table-wrap"><table><thead><tr><th>量词</th><th>可以提前决定</th><th>必须等待封闭范围</th></tr></thead><tbody>
+      <tr><td>全部 <code>all</code></td><td>一个不同成员的有效 <code>unmet</code> 决定总体 <code>unmet</code>。</td><td>全部成员为 <code>met</code> 才能决定总体 <code>met</code>。</td></tr>
+      <tr><td>任一 <code>some</code></td><td>一个不同成员的有效 <code>met</code> 决定总体 <code>met</code>。</td><td>全部成员为 <code>unmet</code> 才能决定总体 <code>unmet</code>。</td></tr>
+      <tr><td>至少 <code>at_least k</code></td><td><code>k</code> 个不同成员为 <code>met</code> 时决定总体 <code>met</code>。</td><td>少于 <code>k</code> 只有在完整求值后才能决定 <code>unmet</code>。</td></tr>
+      <tr><td>最多 <code>at_most k</code></td><td><code>k+1</code> 个不同成员为 <code>met</code> 时决定总体 <code>unmet</code>。</td><td>不超过 <code>k</code> 只有在完整求值后才能决定 <code>met</code>。</td></tr>
+      <tr><td>刚好 <code>exactly k</code></td><td>超过 <code>k</code> 个不同成员为 <code>met</code> 时决定总体 <code>unmet</code>。</td><td>恰好或少于 <code>k</code> 都必须等待完整求值。</td></tr>
+    </tbody></table></div>
+    <p>后三种量词的 <code>k</code> 必须是非负整数。提前决定只减少不必要的求值，不降低证据要求；聚合结果仍须保存每个实际成员结果和对应 Iknem。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>不完整、重复与空集合怎样失败</h2>
+    <div class="table-wrap"><table><thead><tr><th>输入或过程</th><th>处理</th><th>理由</th></tr></thead><tbody>
+      <tr><td>成员清单重复出现同一规范身份。</td><td>形成操作拒绝。</td><td>不得静默去重后把错误输入伪装成合法集合。</td></tr>
+      <tr><td>同一成员有多条日志、重试、签名或模型提及。</td><td>聚合时只按一个成员身份计数。</td><td>证据数量不是成员数量。</td></tr>
+      <tr><td>开放范围尚无决定性见证。</td><td><code>agno</code></td><td>未知成员不能被当作 <code>unmet</code>，也不能证明全称或上界。</td></tr>
+      <tr><td>成员求值发生故障，且尚无决定性结果。</td><td><code>fault</code></td><td>故障不是反例；已有决定性见证时仍保留故障成员记录。</td></tr>
+      <tr><td>空集合没有具名 <code>allow</code> 政策。</td><td>拒绝确定结论。</td><td>空集可能来自目录故障、过滤错误或同步延迟。</td></tr>
+      <tr><td>动态成员用于持续目标。</td><td>当前不受支持。</td><td>成员有效区间、变更政策与滚动闭包尚未固定。</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部查询和 Agent 列表只提供什么</h2>
+    <div class="table-wrap"><table><thead><tr><th>外部资料</th><th>可采用的机制</th><th>Noemion 不继承</th></tr></thead><tbody>
+      <tr><td><a href="https://www.w3.org/TR/2017/REC-shacl-20170720/">SHACL 2017 Recommendation</a> 与 <a href="https://www.w3.org/TR/shacl12-core/">SHACL 1.2 Core</a></td><td>最小、最大和形状约束提供局部基数机制；后者截至复核日仍是 2026 Working Draft。</td><td>草案特性不进入现行接口，RDF 值节点也不成为 Endem 成员。</td></tr>
+      <tr><td><a href="https://www.w3.org/TR/owl-syntax/">OWL 2 Structural Specification</a> 与 <a href="https://www.w3.org/TR/owl2-primer/#Open_World_Assumption">OWL 2 Primer</a></td><td>精确基数依赖个体同一性，开放世界中的未陈述不等于不存在。</td><td>本体身份和开放世界推理不替代本地成员资格权威。</td></tr>
+      <tr><td><a href="https://www.w3.org/TR/sparql11-query/#aggregates">SPARQL 1.1 聚合</a></td><td><code>COUNT(DISTINCT ...)</code> 计算查询解中的不同值。</td><td>查询解不是自动封闭的现实成员全集。</td></tr>
+      <tr><td><a href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Starting-points.html">GNU Findutils 起点规则</a></td><td>起点、递归、重复输入、提前退出和搜索期间变更都会影响结果。</td><td>一次文件搜索不能自行证明“所有对象已经检查”。</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks">MCP 2025-11-25 Tasks</a></td><td><code>tasks/list</code> 使用不透明游标分页，并受请求方授权上下文限制；该能力仍属实验性。</td><td>翻完分页只得到外部接收方可见列表，不产生本地全集、成员身份或权威。</td></tr>
+    </tbody></table></div>
+    <p>这些标准和工具证明范围、唯一性、分页与完整性必须显式，但 Noemion 的结果域、空集合政策和信任边界仍由 END-CORE 自己规定。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>当前还不能编码或执行什么</h2>
+    <p>现行十二个量化提案向量覆盖六个允许分类和六个确定拒绝，只验证 END-QNT 三条抽象条款。本决定不增加 END-P1 字段，也不表示 Ktisor、Drasor、求值器或 CLI 已经实现。</p>
+    <p>嵌套量化、多变量绑定、量词与复合否定规范化、动态成员持续目标、超大集合证明、跨生产者成员合并、物理字段和规范字节仍需新 Profile、威胁分析与实现证据。</p>
+    <div class="page-links">
+      <a class="page-link" href="../specifications/endem.html"><strong>查看事态与量词</strong><span>定位关系模板、角色和四值结果。</span></a>
+      <a class="page-link" href="adr-0017-negation-and-absence.html"><strong>查看缺席证据</strong><span>理解未找到成员或事件为何不等于不存在。</span></a>
+      <a class="page-link" href="adr-0016-mene-time-model.html"><strong>查看截止点与持续目标</strong><span>固定成员资格时间并识别动态范围限制。</span></a>
+      <a class="page-link" href="../specifications/synem.html"><strong>查看组合边界</strong><span>区分成员计数与制品闭包组合。</span></a>
+    </div>
+  </section>
   <div class="next-prev"><a href="adr-0017-negation-and-absence.html">← ADR-0017</a><a href="adr-0019-measurement-and-thresholds.html">ADR-0019 →</a></div>
 </main>

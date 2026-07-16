@@ -359,6 +359,26 @@ ADR_0017_NEGATION_BOUNDARIES = (
     "本决定不增加 END-P1 字段",
     "没有日志收集器、策略引擎或求值器",
 )
+ADR_0018_QUANTIFICATION_HEADINGS = [
+    "用一次发布检查读懂量化",
+    "成员集合必须先回答六个问题",
+    "五种量词怎样提前或延后决定",
+    "不完整、重复与空集合怎样失败",
+    "外部查询和 Agent 列表只提供什么",
+    "当前还不能编码或执行什么",
+]
+ADR_0018_QUANTIFICATION_BOUNDARIES = (
+    "一个量化目标不是“对监控查询结果做计数”",
+    "开发者先知道哪些节点属于“本次发布”",
+    "enumerated / rule-bound 是现行草案的机器标签，不是新的哲学专名",
+    "任何发行名称仍须通过独立的读音与口头区分验证",
+    "提前决定只减少不必要的求值，不降低证据要求",
+    "不得静默去重后把错误输入伪装成合法集合",
+    "证据数量不是成员数量",
+    "翻完分页只得到外部接收方可见列表",
+    "本决定不增加 END-P1 字段",
+    "不表示 Ktisor、Drasor、求值器或 CLI 已经实现",
+)
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -6248,6 +6268,33 @@ def main():
             errors.append(
                 "architecture/adr-0017-negation-and-absence.html: must preserve five "
                 "boundary tables, one task flow and four developer reading links"
+            )
+
+    adr_0018 = ROOT / "architecture/adr-0018-quantification-and-membership.html"
+    if adr_0018.exists():
+        parser = parse(adr_0018)
+        if parser.h2_texts != ADR_0018_QUANTIFICATION_HEADINGS:
+            errors.append(
+                "architecture/adr-0018-quantification-and-membership.html: quantification "
+                f"reading sequence must be {ADR_0018_QUANTIFICATION_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in ADR_0018_QUANTIFICATION_BOUNDARIES:
+            if term not in visible_text:
+                errors.append(
+                    "architecture/adr-0018-quantification-and-membership.html: missing "
+                    f"membership, counting, naming, or Agent-list boundary {term}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 5
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                "architecture/adr-0018-quantification-and-membership.html: must preserve "
+                "five boundary tables, one task flow and four developer reading links"
             )
 
     for row in route_rows:
