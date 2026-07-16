@@ -33,7 +33,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0016](https://noemion.github.io/architecture/adr-0016-mene-time-model.html) — time evidence for sustained goals, explicit continuity budgets, coverage gaps, and external task boundaries
 - [ADR-0017](https://noemion.github.io/architecture/adr-0017-negation-and-absence.html) — explicit negative relations, query-relative absence, closed observation evidence, and external tool boundaries
 - [ADR-0018](https://noemion.github.io/architecture/adr-0018-quantification-and-membership.html) — authoritative member scopes, distinct identities, decisive cardinality evidence, and paginated Agent-list boundaries
-- [ADR-0019](https://noemion.github.io/architecture/adr-0019-measurement-and-thresholds.html) — measurement constructs, estimands, units, aggregation, uncertainty, and threshold comparison
+- [ADR-0019](https://noemion.github.io/architecture/adr-0019-measurement-and-thresholds.html) — measurement constructs and populations, replayable procedures, scoped terminology, uncertainty, and threshold comparison
 - [ADR-0020](https://noemion.github.io/architecture/adr-0020-composite-situations-and-criteria.html) — composite situations, aligned criteria, four-result propagation, and decisive short-circuit evidence
 - [ADR-0021](https://noemion.github.io/architecture/adr-0021-synem-closure-and-activation.html) — exact Synem closure, permission convergence, member result separation, and session activation
 - [ADR-0022](https://noemion.github.io/architecture/adr-0022-iknem-evidence-and-appraisal.html) — scoped Iknem evidence, provenance, validity, coverage, appraisal, decision, and disclosure boundaries

@@ -102,7 +102,7 @@ modules:
           - { href: /architecture/adr-0016-mene-time-model.html, label: "ADR-0016 · 持续目标的时间证据" }
           - { href: /architecture/adr-0017-negation-and-absence.html, label: "ADR-0017 · 没有记录不等于没有发生" }
           - { href: /architecture/adr-0018-quantification-and-membership.html, label: "ADR-0018 · 先固定成员，再判断数量" }
-          - { href: /architecture/adr-0019-measurement-and-thresholds.html, label: "ADR-0019 · 测量谓词与阈值" }
+          - { href: /architecture/adr-0019-measurement-and-thresholds.html, label: "ADR-0019 · 先定义测量，再比较阈值" }
           - { href: /architecture/adr-0020-composite-situations-and-criteria.html, label: "ADR-0020 · 复合事态与判据" }
           - { href: /architecture/adr-0021-synem-closure-and-activation.html, label: "ADR-0021 · Synem 闭包与激活" }
           - { href: /architecture/adr-0022-iknem-evidence-and-appraisal.html, label: "ADR-0022 · Iknem 证据与评估" }

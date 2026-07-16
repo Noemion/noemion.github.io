@@ -379,6 +379,28 @@ ADR_0018_QUANTIFICATION_BOUNDARIES = (
     "本决定不增加 END-P1 字段",
     "不表示 Ktisor、Drasor、求值器或 CLI 已经实现",
 )
+ADR_0019_MEASUREMENT_HEADINGS = [
+    "用一次延迟检查读懂测量链",
+    "先定义测量什么和适用于谁",
+    "再固定程序、单位与聚合器",
+    "阈值必须连同不确定区间比较",
+    "AI 基准和遥测工具只提供什么",
+    "当前还不能编码或执行什么",
+]
+ADR_0019_MEASUREMENT_BOUNDARIES = (
+    "不是一条仪表盘查询",
+    "测量谓词必须同时固定构念、适用总体、可观察标准、预期用途和具名权威",
+    "population=fixed 或 time_scope=fixed",
+    "目标统计量（estimand）",
+    "不把难读的英文单独作为人类界面标签",
+    "测量记录是关于事态的证据，不是事态本身",
+    "不会自动产生最终接受或动作授权",
+    "舍入只能发生在比较完成后的显示阶段",
+    "295–305ms，不能决定位于哪一侧",
+    "初始公开草案不是字段标准",
+    "单点逆函数检查不保证换算全域正确",
+    "不表示遥测采集器、基准运行器、统计引擎、Drasor 或求值器已经实现",
+)
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -6294,6 +6316,33 @@ def main():
         ):
             errors.append(
                 "architecture/adr-0018-quantification-and-membership.html: must preserve "
+                "five boundary tables, one task flow and four developer reading links"
+            )
+
+    adr_0019 = ROOT / "architecture/adr-0019-measurement-and-thresholds.html"
+    if adr_0019.exists():
+        parser = parse(adr_0019)
+        if parser.h2_texts != ADR_0019_MEASUREMENT_HEADINGS:
+            errors.append(
+                "architecture/adr-0019-measurement-and-thresholds.html: measurement "
+                f"reading sequence must be {ADR_0019_MEASUREMENT_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in ADR_0019_MEASUREMENT_BOUNDARIES:
+            if term not in visible_text:
+                errors.append(
+                    "architecture/adr-0019-measurement-and-thresholds.html: missing "
+                    f"measurement, uncertainty, terminology, or tool boundary {term}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 5
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                "architecture/adr-0019-measurement-and-thresholds.html: must preserve "
                 "five boundary tables, one task flow and four developer reading links"
             )
 
