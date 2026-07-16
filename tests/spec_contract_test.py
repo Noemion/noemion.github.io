@@ -909,6 +909,7 @@ def validate_public_boundary(errors):
             "不扩大公开 CLI",
         ),
         "architecture/adr-0033-text-identifier-specification-name.html": (
+            "标准 ID 不能伪装成文件格式",
             "当前策略",
             "TEXT-IDENTIFIER-CORE",
             "TXT-CORE",
@@ -917,6 +918,8 @@ def validate_public_boundary(errors):
             "不是 <code>.txt</code> 文件格式",
             "不保留旧路径、别名、重定向、双写或兼容垫片",
             "vectors/text-identifier/",
+            "不能声称同名 crate 不存在",
+            "文本与标识符核心规范",
         ),
         "architecture/adr-0034-pronunciation-and-oral-distinction.html": (
             "当前审查",
