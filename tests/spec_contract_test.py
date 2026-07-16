@@ -753,6 +753,10 @@ def validate_public_boundary(errors):
         "architecture/adr-0021-synem-closure-and-activation.html": (
             "SYN-CORE 0.1.0-draft",
             "active / inactive / unresolved / error",
+            "Endem 组合闭包",
+            "activation=active",
+            "activation=inactive",
+            "成员结果保持各自身份",
             "GNU ld",
             "GNU Guix",
             "GNU make",

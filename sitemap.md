@@ -35,7 +35,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0018](https://noemion.github.io/architecture/adr-0018-quantification-and-membership.html) — authoritative member scopes, distinct identities, decisive cardinality evidence, and paginated Agent-list boundaries
 - [ADR-0019](https://noemion.github.io/architecture/adr-0019-measurement-and-thresholds.html) — measurement constructs and populations, replayable procedures, scoped terminology, uncertainty, and threshold comparison
 - [ADR-0020](https://noemion.github.io/architecture/adr-0020-composite-situations-and-criteria.html) — same-terminal boundary, aligned criteria, four-result composition, scoped terminology, and short-circuit evidence
-- [ADR-0021](https://noemion.github.io/architecture/adr-0021-synem-closure-and-activation.html) — exact Synem closure, permission convergence, member result separation, and session activation
+- [ADR-0021](https://noemion.github.io/architecture/adr-0021-synem-closure-and-activation.html) — independent-goal boundary, exact transitive closure, permission intersection, scoped activation states, and dynamic Agent-list limits
 - [ADR-0022](https://noemion.github.io/architecture/adr-0022-iknem-evidence-and-appraisal.html) — scoped Iknem evidence, provenance, validity, coverage, appraisal, decision, and disclosure boundaries
 - [ADR-0023](https://noemion.github.io/architecture/adr-0023-endem-content-standard.html) — layered Endem content standard, closed content Profiles, container rules, and conformance boundaries
 - [ADR-0024](https://noemion.github.io/architecture/adr-0024-dromen-session-contract.html) — one-session subject, policy, environment, capability, budget, observation, immutability, and disposal contract

@@ -1,95 +1,92 @@
 ---
 layout: default
-title: "ADR-0021 Synem 组合闭包与条件激活"
+title: "ADR-0021 · 依赖必须先固定，权限只能收窄"
 page_role: "content"
 footer_text: "Noemion · ADR-0021"
 permalink: "/architecture/adr-0021-synem-closure-and-activation.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0021</span></nav>
-  <header class="content-introduction"><h1>ADR-0021<br>组合闭包<br>条件激活</h1><p>当一个目标依赖其他目标时，先固定所有必需成员和引用，再计算共同允许的权限；运行时不能偷偷补依赖或扩大能力。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">SYN-CORE 0.1.0-draft</span><span class="badge">尚无线格式</span><span class="badge">尚未实现</span></div></header>
+  <header class="content-introduction"><h1>ADR-0021<br>依赖必须先固定<br>权限只能收窄</h1><p>多个目标共同交付时，先固定全部成员、传递依赖和精确身份，再计算共同允许的权限。运行时发现不能换入新目标，也不能扩大能力。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">SYN-CORE 0.1.0-draft</span><span class="badge">尚无物理格式</span><span class="badge">尚未实现</span></div></header>
 
-  <section class="content-band">
-    <h2>直接结论</h2>
-    <p class="lead">例如，发布服务既要得到正确的构建产物，也要让部署后的服务通过健康检查。两项目标可以分别失败，因此各自形成 Endem；Synem 再把它们及其必需依赖固定为一组可重复检查的关系。它不是普通文件包、搜索结果或模型上下文。</p>
-    <p>每个必需引用必须绑定唯一内容身份；权限只能取交集或继续收紧；成员判断与决定保持独立。条件激活属于 Synem 的会话关系，不进入单个 Endem 的 <code>all_of / any_of</code> 根。</p>
-    <p>本决定建立 <code>SYN-CORE 0.1.0-draft</code>，但不创建 Synem 文件扩展名、魔数、物理字段、版本范围语法或实现。本次工作不表示 Ktisor、Theor、Drasor、CLI、解析器或运行时已经实现。</p>
-  </section>
-
-  <section class="content-band">
-    <h2>哲学启发与采用限制</h2>
-    <blockquote><p>“每一个关于复合物的陈述可以分解为关于其各组成部分的陈述”</p><cite>路德维希·维特根斯坦《逻辑哲学论》2.0201</cite></blockquote>
-    <p>命题 2.0201 和 5.5423 都把复合物的可理解性放在组成部分及其关联方式上。Synem 因此必须同时显示成员和关系；只列名字或文件，不能完整说明组合对象。</p>
-    <p>这里采用的是设计问题，不是把哲学命题直接变成软件定理。成员身份、无环限制、权限交集、激活状态和失败责任仍由威胁模型、规范条款与正反向量定义。</p>
+  <section class="content-wide">
+    <h2>用一次发布流程读懂组合闭包</h2>
+    <p class="lead">发布服务既要得到符合要求的构建产物，也要让部署后的服务通过健康检查。两个终态可以独立失败，因此分别形成 Endem，再进入同一个 Endem 组合闭包。</p>
+    <div class="flow"><div class="step">识别两个<br>独立终态</div><div class="step">选择种子<br>Endem</div><div class="step">展开全部<br>必需依赖</div><div class="step">唯一绑定<br>精确身份</div><div class="step">对成员权限<br>继续求交</div><div class="step">会话只激活<br>固定成员</div></div>
+    <div class="table-wrap"><table><thead><tr><th>处理阶段</th><th>发布示例</th><th>必须停止的情况</th></tr></thead><tbody>
+      <tr><td>划分目标</td><td>构建产物和服务健康各有自己的判据与决定。</td><td>把两个可独立失败的终态塞进一个 Endem。</td></tr>
+      <tr><td>展开依赖</td><td>从两个种子成员递归加入全部必需 Endem。</td><td>还有闭包外必需引用，或只收集当前目录中的文件。</td></tr>
+      <tr><td>绑定身份</td><td>每个引用唯一绑定规范、Profile 与完整内容身份。</td><td>使用名称、路径、版本范围、搜索顺序或 <code>latest</code>。</td></tr>
+      <tr><td>收窄权限</td><td>成员上限、组合策略与会话政策只取交集。</td><td>某成员需要网络，就让所有成员取得网络能力。</td></tr>
+      <tr><td>进入会话</td><td>守卫只决定固定成员本次是否生效。</td><td>运行时下载新成员、改写闭包身份或直接授予权限。</td></tr>
+    </tbody></table></div>
+    <p>组合闭包的现行设计名称是 Synem。它不是文件包、搜索结果、模型上下文、对话记忆或动态工具列表。</p>
   </section>
 
   <section class="content-wide">
-    <h2>Synem 与 Endem 复合根的边界</h2>
-    <div class="table-wrap"><table><thead><tr><th>问题</th><th>Endem 复合根</th><th>Synem</th></tr></thead><tbody>
-      <tr><td>终态</td><td>同一个不可分终态</td><td>两个或更多可独立实现和失败的终态</td></tr>
-      <tr><td>方向与验收</td><td>共享一个 telis 与验收责任</td><td>成员保持各自方向、判断和决定</td></tr>
-      <tr><td>关系</td><td>叶判据使用 <code>all_of / any_of</code></td><td>显式依赖、绑定和会话激活边</td></tr>
-      <tr><td>身份</td><td>一个 Endem 内容身份</td><td>完整成员集与关系共同决定闭包身份</td></tr>
+    <h2>先判断同一终态还是多个目标</h2>
+    <div class="table-wrap"><table><thead><tr><th>边界问题</th><th>Endem 复合根</th><th>Endem 组合闭包（Synem）</th></tr></thead><tbody>
+      <tr><td>终态身份</td><td>多个关系共同描述一个不可分终态。</td><td>至少两个终态能够独立实现和失败。</td></tr>
+      <tr><td>判断与决定</td><td>共享一个目标方向和验收责任。</td><td>每个成员保留自己的满足结果与最终决定。</td></tr>
+      <tr><td>组合关系</td><td>叶结果使用 <code>all_of / any_of</code>。</td><td>显示必需依赖、精确绑定和会话激活关系。</td></tr>
+      <tr><td>内容身份</td><td>一个 Endem 拥有一个内容身份。</td><td>完整成员集与关系共同决定闭包身份。</td></tr>
+      <tr><td>缺失处理</td><td>按该 Endem 的形成或判断规则失败。</td><td>必需成员缺失时原子拒绝，不能以后补入。</td></tr>
+    </tbody></table></div>
+    <p>自然语言中的“还要”“依赖”或“如果”不能自行决定对象边界。开发者必须检查终态、消费者、生命周期、权威和失败责任。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>成员、引用和权限怎样形成闭包</h2>
+    <div class="table-wrap"><table><thead><tr><th>规范责任</th><th>必须固定</th><th>确定拒绝</th></tr></thead><tbody>
+      <tr><td><code>SYN-CLS-001</code><br>完整成员</td><td>至少两个不同 Endem，以及从种子可达的全部必需传递成员。</td><td>单成员、截断闭包、重复身份或闭包外必需引用。</td></tr>
+      <tr><td><code>SYN-RES-001</code><br>唯一绑定</td><td>引用方、被引用方、规范、Profile、精确内容身份与解析依据。</td><td>歧义、冲突、环境搜索或输入顺序改变解析结果。</td></tr>
+      <tr><td><code>SYN-GRF-001</code><br>有限关系</td><td>有限无环图、资源预算，以及可选项缺失时的可观察行为。</td><td>循环、无界遍历，或可选项缺失会降低语义和判据。</td></tr>
+      <tr><td><code>SYN-AUT-001</code><br>权限交集</td><td>成员上限、组合策略和会话政策的共同允许范围。</td><td>权限并集、继承最宽成员能力或由依赖产生授权。</td></tr>
+      <tr><td><code>SYN-STA-001</code><br>成员结果</td><td>成员结果保持各自身份；闭包级决定另行绑定策略、范围与权威。</td><td>把成员结果折叠为布尔值或隐式总体结果。</td></tr>
+    </tbody></table></div>
+    <p>同一正式输入必须产生同一成员集、关系与绑定。成员顺序、当前目录、区域设置、模型推荐和网络最新版本都不能改变结果。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>形成时选择与会话激活必须分开</h2>
+    <p class="lead">形成条件决定谁属于制品，会话守卫只决定固定成员本次是否生效。两者的身份、失败后果和结果域不同。</p>
+    <div class="table-wrap"><table><thead><tr><th>状态或阶段</th><th>回答的问题</th><th>不得推出</th></tr></thead><tbody>
+      <tr><td>形成时选择</td><td>某个 Endem 是否进入成员集合；必须在闭包身份形成前解析。</td><td>把未解析条件留到运行时，或保持原闭包身份。</td></tr>
+      <tr><td>本次生效<br><code>activation=active</code></td><td>固定守卫已经匹配，本成员进入后续政策检查。</td><td><code>met</code>、最终接受或能力授权。</td></tr>
+      <tr><td>本次不生效<br><code>activation=inactive</code></td><td>守卫已经确定不匹配，本次不判断该成员。</td><td><code>met / unmet / agno</code>。</td></tr>
+      <tr><td>激活依据未就绪<br><code>activation=unresolved</code></td><td>所需精确结果事件或其他依据尚不可用。</td><td>满足结果 <code>agno</code>。</td></tr>
+      <tr><td>激活检查失败<br><code>activation=error</code></td><td>守卫解析、截止点或检查契约发生故障。</td><td>满足结果 <code>fault</code>。</td></tr>
+      <tr><td>依据变化</td><td>追加新激活事件，并重新检查或使当前会话失效。</td><td>覆盖旧事件、加入新成员或扩大权限。</td></tr>
+    </tbody></table></div>
+    <p>机器结果域仍是 <code>active / inactive / unresolved / error</code>。裸状态词在日志和口头交流中容易脱离结果域，必须写明 <code>activation=</code>；人类界面先使用表中的中文职责。</p>
+    <p class="callout"><strong>名称边界：</strong>“闭包”可能被理解为程序闭包或流程结束，首次说明应写“Endem 组合闭包”。Synem 仍是设计阶段名称，发行读音及其与 Endem、Dromen、Iknem 的听辨尚未通过独立人类验证。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部依赖与 Agent 清单只能提供什么</h2>
+    <p><strong>复核日期：</strong>2026-07-16。外部机制可以提供解析、构建或发现事实，但正式绑定必须记录精确身份，并遵守 Noemion 自己的权限与结果边界。</p>
+    <div class="table-wrap"><table><thead><tr><th>外部资料</th><th>可采用的机制</th><th>Noemion 不继承</th></tr></thead><tbody>
+      <tr><td><a href="https://xlinux.nist.gov/dads/HTML/transitiveClosure.html">NIST 传递闭包定义</a></td><td>若关系包含 <code>(a,b)</code> 与 <code>(b,c)</code>，传递扩展也包含 <code>(a,c)</code>。</td><td>数学定义不提供内容身份、无环政策、权限或接受语义。</td></tr>
+      <tr><td><a href="https://sourceware.org/binutils/docs/ld/File-Commands.html">GNU ld 文件命令</a></td><td>展示当前目录、<code>-L</code> 和 <code>SEARCH_DIR</code> 怎样影响链接时搜索。</td><td>环境搜索结果不能成为正式闭包绑定。</td></tr>
+      <tr><td><a href="https://guix.gnu.org/manual/en/guix.pdf">GNU Guix 参考手册</a></td><td>递归导出可以包含 store item 的依赖闭包、引用和派生元数据。</td><td>不采用 Guix Store 路径、包权限或归档格式。</td></tr>
+      <tr><td><a href="https://www.gnu.org/software/make/manual/html_node/Conditionals.html">GNU make 条件指令</a></td><td>条件在读取 makefile 时决定哪些文本可见，不控制 recipe 执行时状态。</td><td>形成时成员选择不能冒充会话期激活。</td></tr>
+      <tr><td><a href="https://www.w3.org/TR/shacl/#deactivated">W3C SHACL</a></td><td>停用的 Shape 不产生验证结果。</td><td>空结果不等于符合、满足或权限授予。</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP 2025-11-25 工具规范</a></td><td><code>tools/list</code> 与变更通知表明运行时工具集合可以变化。</td><td>动态清单不能改变 Synem 闭包或直接授予权限。</td></tr>
+      <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 Agent Card</a></td><td>声明 Agent 能力、技能、接口和安全要求。</td><td>远端声明不能决定本地成员、精确身份或闭包级接受。</td></tr>
     </tbody></table></div>
   </section>
 
   <section class="content-wide">
-    <h2>闭包形成的六条规则</h2>
-    <ol>
-      <li><code>SYN-CLS-001</code>：至少两个不同 Endem，并包含全部必需传递依赖。</li>
-      <li><code>SYN-RES-001</code>：每个必需引用绑定恰好一个精确内容身份，且与输入顺序无关。</li>
-      <li><code>SYN-GRF-001</code>：第一阶段依赖图有限无环；可选项缺失不能削弱语义和判据。</li>
-      <li><code>SYN-AUT-001</code>：能力上限只由成员、组合策略和会话政策的交集形成。</li>
-      <li><code>SYN-STA-001</code>：成员结果保持成员身份，不自动产生一个总体满足或接受结果。</li>
-      <li><code>SYN-ACT-001</code>：会话条件只激活固定闭包成员，不改变身份或授权。</li>
-    </ol>
-  </section>
-
-  <section class="content-wide">
-    <h2>形成时选择与会话期激活必须分开</h2>
-    <div class="table-wrap"><table><thead><tr><th>阶段</th><th>作用</th><th>身份影响</th><th>失败处理</th></tr></thead><tbody>
-      <tr><td>形成时选择</td><td>决定某 Endem 是否进入成员闭包</td><td>改变 Synem 闭包身份</td><td>必须在形成身份前解析；不确定则拒绝形成</td></tr>
-      <tr><td>会话期激活</td><td>决定固定闭包中的成员本次是否生效</td><td>不改变制品身份</td><td>记录独立激活状态；依据变化则重新检查或使会话失效</td></tr>
-    </tbody></table></div>
-    <p>这一区分阻止“运行到一半再下载最新目标”改变正式闭包，也阻止把一次会话分支误写成新的制品事实。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>激活不是第六种满足结果</h2>
-    <p>激活结果域固定为 <code>active / inactive / unresolved / error</code>，四个值只回答成员在本次会话是否生效。</p>
-    <div class="table-wrap"><table><thead><tr><th>激活状态</th><th>含义</th><th>不得映射为</th></tr></thead><tbody>
-      <tr><td><code>active</code></td><td>固定守卫已匹配，本成员本次进入后续政策检查</td><td><code>met</code> 或能力授权</td></tr>
-      <tr><td><code>inactive</code></td><td>守卫已确定不匹配，本次不求值该成员</td><td><code>met / unmet / agno</code></td></tr>
-      <tr><td><code>unresolved</code></td><td>守卫依据尚不可用</td><td>满足结果 <code>agno</code></td></tr>
-      <tr><td><code>error</code></td><td>守卫检查契约失败</td><td>满足结果 <code>fault</code></td></tr>
-    </tbody></table></div>
-    <p>独立名称不是为了增加词汇，而是为了阻止不同问题被同一个状态词洗平。激活状态必须携带自己的结果域，不能脱离上下文只传一个裸字符串。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>GNU 与开放规范提供的对照</h2>
-    <ul>
-      <li><a href="https://sourceware.org/binutils/docs/ld/File-Commands.html">GNU ld 文件命令</a>允许当前目录、<code>-L</code> 和 <code>SEARCH_DIR</code> 参与搜索，且归档位置会影响解析。Synem 反向采用这一经验：正式绑定必须记录精确身份，不能把环境搜索结果当闭包。</li>
-      <li><a href="https://guix.gnu.org/manual/en/guix.pdf">GNU Guix 参考手册</a>把引用图作为显式构建输入，并可用 allowed-references 拒绝输出引用清单外对象。Synem 借鉴可审计的传递闭包和允许引用边界，不继承 Guix Store 路径或包管理模型。</li>
-      <li><a href="https://www.gnu.org/software/make/manual/html_node/Conditionals.html">GNU make 条件指令</a>决定 make 在读取时看到哪些文本，不能控制执行时 recipe。Synem 同样分开形成时成员选择和会话期激活。</li>
-      <li><a href="https://www.w3.org/TR/shacl/#deactivated">W3C SHACL</a>规定停用的 Shape 产生空验证结果。Synem 采用“未激活成员不产生满足判断”，但不把空结果解释为符合或满足。</li>
-      <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP 2025-11-25 工具规范</a>允许服务器通知工具列表变化。这说明动态能力发现是现实需要，但它必须留在控制平面，不能改变 Synem 闭包或直接授予权限。</li>
-    </ul>
-  </section>
-
-  <section class="content-band">
-    <h2>规范影响与验证</h2>
-    <ul>
-      <li>新增 <code>SYN-CORE 0.1.0-draft</code> 六条规范条款。</li>
-      <li>新增六项 Synem 威胁和十个非规范自然语言场景。</li>
-      <li>十二个提案向量覆盖六个允许分类与六个确定拒绝；检查器只证明资料矩阵一致。</li>
-      <li>END-CORE、END-FMT、END-P1 与 <code>.endem</code> 字节保持不变。</li>
-    </ul>
-  </section>
-
-  <section class="content-band">
-    <h2>待定内容</h2>
-    <p>物理 Synem 容器、文件扩展名、版本约束语法、符号与重定位、执行顺序、并行调度、受限循环、远程对象仓库和规范字节仍保持开放。没有真实消费者和新 Profile 前，不为了形式对称创建格式。</p>
+    <h2>当前还不能编码或执行什么</h2>
+    <p>现行十二个 Synem 提案向量覆盖六个允许分类和六个确定拒绝，只检查 SYN-CORE 六条抽象规则。END-CORE、END-FMT 和 END-P1 保持不变。</p>
+    <p>这项决定不表示 Ktisor、Theor、Drasor、CLI、解析器或运行时已经实现。Synem 也没有物理容器、文件扩展名、魔数、稳定 ABI 或版本范围语法。</p>
+    <p>符号与重定位、执行顺序、并行调度、受限循环、远程对象仓库、跨会话缓存和规范字节仍需真实消费者、新 Profile、威胁分析与组件证据。</p>
+    <div class="page-links">
+      <a class="page-link" href="../specifications/synem.html"><strong>查看组合闭包规范</strong><span>按开发者任务查询 SYN-CORE 六项责任。</span></a>
+      <a class="page-link" href="adr-0020-composite-situations-and-criteria.html"><strong>查看单目标复合判据</strong><span>先判断一个终态还是多个独立目标。</span></a>
+      <a class="page-link" href="../specifications/dromen.html"><strong>查看一次会话契约</strong><span>理解固定闭包怎样进入受限运行。</span></a>
+      <a class="page-link" href="../specifications/authority.html"><strong>查看权限决定边界</strong><span>区分成员需求、能力上限与实际授权。</span></a>
+    </div>
   </section>
   <div class="next-prev"><a href="adr-0020-composite-situations-and-criteria.html">← ADR-0020</a><a href="adr-0022-iknem-evidence-and-appraisal.html">ADR-0022 →</a></div>
 </main>
