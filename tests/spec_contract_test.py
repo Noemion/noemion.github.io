@@ -862,6 +862,7 @@ def validate_public_boundary(errors):
             "当前没有 Unicode 处理器",
         ),
         "architecture/adr-0029-authority-and-authorization-decisions.html": (
+            "身份已确认，不等于操作已获准",
             "AUT-CORE 0.1.0-draft",
             "grant deny defer",
             "RFC 9396",

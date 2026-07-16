@@ -1,101 +1,87 @@
 ---
 layout: default
-title: "ADR-0029 权威与授权决定边界"
+title: "ADR-0029 · 身份已确认，不等于操作已获准"
 page_role: "content"
 footer_text: "Noemion · ADR-0029"
 permalink: "/architecture/adr-0029-authority-and-authorization-decisions.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0029</span></nav>
-  <header class="content-introduction"><h1>ADR-0029<br>权威与授权决定边界</h1><p>让自然语言候选、委托 Agent、人类同意和运行能力都服从同一套可核对的主体、范围、政策、时效与结果分离规则。</p><div class="badges"><span class="badge">当前草案</span><span class="badge">AUT-CORE 0.1.0-draft</span><span class="badge">协议无关</span><span class="badge">尚无政策引擎</span></div></header>
-
-  <section class="content-stack">
-    <h2>直接结论</h2>
-    <p class="lead">Noemion 采用 AUT-CORE 作为跨制品权威与授权决定标准。模型、签名、登录、界面点击、外部 Agent 状态和凭据都不能自行取得语义或最终决定权。</p>
-    <p>AUT-CORE 固定十二条抽象规则，关闭“谁有权确认自然语言候选”这一开放问题。它不创建新制品、授权令牌、政策语言或组件，也不增加 END-P1 字段。</p>
-  </section>
+  <header class="content-introduction"><h1>ADR-0029<br>身份已确认<br>不等于操作已获准</h1><p>让每次意义确认和 Agent 操作都绑定实际行动者、被代表主体、精确对象、有限范围、政策版本与截止点；登录、签名或界面点击不能自行扩大权限。</p><div class="badges"><span class="badge">当前草案</span><span class="badge">AUT-CORE 0.1.0-draft</span><span class="badge">协议无关</span><span class="badge">尚无政策引擎</span></div></header>
 
   <section class="content-wide">
-    <h2>为什么现有规范还不够</h2>
-    <div class="table-wrap"><table><thead><tr><th>现有规范</th><th>已经要求</th><th>仍缺少的共同定义</th></tr></thead><tbody>
-      <tr><td>END-CORE</td><td><code>semion</code> 必须由确定性规则或具名权威确认</td><td>主体怎样取得权威、范围怎样固定、候选怎样被安全展示</td></tr>
-      <tr><td>DRO-CORE</td><td>政策、权威、同意和能力必须在会话前封闭</td><td>委托、step-up、撤销和能力交集的共同授权语义</td></tr>
-      <tr><td>IKN-CORE</td><td>决定记录不能自行创造决定权限</td><td>决定请求、多人门槛、冲突和重放怎样约束</td></tr>
-      <tr><td>ID-CORE</td><td>签名验证与主体授权必须分开</td><td>角色适用性和当前决定范围由什么证明</td></tr>
-      <tr><td>ADP-CORE</td><td>外部协议状态和 scope 不能扩大本地能力</td><td>链式 Agent 授权怎样回到本地具名权威</td></tr>
-      <tr><td>TEXT-IDENTIFIER-CORE</td><td>授权界面要绑定精确机器值和安全显示视图</td><td>显示一致何时足以成为有效同意的一项依据</td></tr>
+    <h2>用一次生产发布理解授权路径</h2>
+    <p class="lead">一项 CI 工作负载请求把精确发布对象部署到生产环境。“发布负责人已批准”无法支持执行；系统必须能够恢复谁请求、谁行动、代表谁、对哪个对象做什么，以及这份决定何时失效。</p>
+    <div class="flow"><div class="step">固定请求与对象</div><div class="step">区分三类主体</div><div class="step">核对权威与政策</div><div class="step">形成有限决定</div><div class="step">与本地上限求交</div><div class="step">另行判断执行与验收</div></div>
+    <div class="table-wrap"><table><thead><tr><th>检查步骤</th><th>本例必须固定的事实</th><th>关闭失败条件</th></tr></thead><tbody>
+      <tr><td>固定请求</td><td>发布对象的精确身份、生产租户、部署动作、目的、受众、次数和截止点</td><td>对象仍是 <code>latest</code>、名称前缀或可变化集合时停止授权</td></tr>
+      <tr><td>区分主体</td><td>提出请求的人或系统、实际运行的 CI 实例，以及它所代表的发布团队</td><td>只有 Agent 名、服务账户、模型名或密钥时，不能恢复实际行动者</td></tr>
+      <tr><td>核对权威</td><td>政策版本、权威范围、角色来源、认证方法及该角色对此对象与动作的决定权</td><td>登录成功、组织成员资格或签名有效不能补足决定权</td></tr>
+      <tr><td>形成决定</td><td><code>grant</code>、<code>deny</code> 或 <code>defer</code>，以及理由、范围与时效</td><td>模糊的“已批准”、静默裁剪或 <code>defer</code> 都不能当成允许</td></tr>
+      <tr><td>派生会话能力</td><td>决定范围与 Dromen、制品、环境、适配器、预算等全部本地上限的交集</td><td>任何上限缺失或漂移时关闭对应能力；扩权必须重新请求</td></tr>
     </tbody></table></div>
+    <p><strong>当前策略：</strong>AUT-CORE 0.1.0-draft 为意义确认与动作授权提供共同检查边界，不增加 END-P1 字段，也不创建政策语言、令牌或执行组件。</p>
   </section>
 
   <section class="content-wide">
-    <h2>采用的权威模型</h2>
-    <div class="flow"><div class="step">精确请求</div><div class="step">权威语境</div><div class="step">主体与角色</div><div class="step">封闭范围</div><div class="step">依据与安全视图</div><div class="step">grant deny defer</div><div class="step">时效与撤销</div></div>
-    <p>授权不是一个布尔字段。请求必须说明谁请求、谁实际行动、代表谁、针对什么对象执行什么动作、出于什么目的、面向哪个受众、使用哪份政策以及在什么截止点判断。</p>
-    <p><code>grant</code> 只授予记录中的有限范围；<code>deny</code> 只拒绝当前请求；<code>defer</code> 表示没有获授权答案。它们构成授权决定域，不替代最终 <code>accepted / rejected / deferred</code>、满足结果或会话终止。</p>
+    <h2>五类决定为什么不能共用一个 approved</h2>
+    <div class="table-wrap"><table><thead><tr><th>实际问题</th><th>本层结果</th><th>不能越级推出什么</th></tr></thead><tbody>
+      <tr><td>谁可以确认自然语言候选的意义</td><td>已展示且落在职责范围内的 <code>semion</code>；其余内容保留为 <code>apor</code></td><td>候选为真，或确认者取得工具权限</td></tr>
+      <tr><td>谁可以尝试一个操作</td><td><code>grant deny defer</code> 当前精确请求</td><td>其他对象、字段、租户、用途或后续版本也获权</td></tr>
+      <tr><td>当前 Drase 会话能调用什么</td><td>授权决定与全部本地上限的交集</td><td>长期权限，或外部协议公开的全部能力</td></tr>
+      <tr><td>证据是否足以支持目标判断</td><td>Iknem 在声明范围内的有效性与覆盖度判断</td><td>授权主体已经接受结果</td></tr>
+      <tr><td>最终是否接受</td><td><code>accepted / rejected / deferred</code></td><td>由认证、授权、签名、工具成功或会话完成替代</td></tr>
+    </tbody></table></div>
+    <p>语言哲学可以帮助区分“一句话表达什么”与“它是否成立”，却不能产生组织角色、法律同意或动作权限。模型置信度、结构合法性和自然语言措辞也都不能自我授权。</p>
   </section>
 
   <section class="content-wide">
-    <h2>自然语言意义为什么不能自我授权</h2>
-    <p>结构合法的候选只说明它能被当前类型系统表达。模型置信度只描述模型输出；高相似度只描述某个比较 Profile。三者都不能说明候选符合来源主体意图，更不能决定谁有权关闭相关 <code>apor</code>。</p>
-    <p>授权者必须核对精确来源、解码文本、候选、影响的语义面和关系位置、候选生产方式、安全显示视图、决定理由和剩余待确认项。批量批准只有在所有候选属于同一权威范围并完整展示差异时才可能有效。</p>
+    <h2>一次可复核授权必须保存哪些边界</h2>
+    <div class="table-wrap"><table><thead><tr><th>边界</th><th>开发者必须得到的答案</th><th>常见错误</th></tr></thead><tbody>
+      <tr><td>语境与主体</td><td>谁请求、谁实际行动、代表谁，采用哪份政策和权威目录快照</td><td>把工作负载身份、Agent 定义或密钥持有者当成被代表主体</td></tr>
+      <tr><td>对象与范围</td><td>精确对象、动作、字段、目的、受众、环境、次数、预算和禁止事项</td><td>使用通配对象、开放字段、权限并集或未声明扩展</td></tr>
+      <tr><td>决定与部分授予</td><td>结果、理由和精确限制；部分授予形成明确缩小后的新范围</td><td>只保存布尔值，或在执行端静默删除未获准部分</td></tr>
+      <tr><td>时效与撤销</td><td>生效条件、截止点、政策版本、撤销来源和重新判断条件</td><td>永久缓存一次批准，或在政策、对象、环境变化后继续复用</td></tr>
+      <tr><td>重放绑定</td><td>请求、对象、目的、会话、次数和去重键共同绑定</td><td>换一个 request ID 重放旧点击、旧签名或旧令牌</td></tr>
+    </tbody></table></div>
+    <p><code>grant</code> 只允许声明范围内的一次或一组受限尝试；<code>deny</code> 只拒绝当前请求；<code>defer</code> 表示条件不足，不能默认允许。三者都不证明操作已经发生、目标已经满足或结果已经接受。</p>
   </section>
 
   <section class="content-wide">
-    <h2>委托与冒充怎样处理</h2>
-    <p>RFC 8693 明确区分 delegation 与 impersonation。Noemion 默认采用委托：每一级保留原授权主体、授予者、实际行动者、被代表主体、范围、目的、受众、期限、深度和撤销来源。</p>
-    <p>每一级范围、预算和期限只能保持或继续收窄，链必须有限无环。外部协议即使允许冒充，本地仍保存真实行动者；没有独立政策明确允许时，冒充不能进入授权闭包。</p>
+    <h2>委托、多人同意和权限升级怎样停止越权</h2>
+    <div class="table-wrap"><table><thead><tr><th>情形</th><th>必须保留的关系</th><th>必须停止的位置</th></tr></thead><tbody>
+      <tr><td>Agent 委托</td><td>每级授予者、实际行动者、被代表主体、范围、目的、受众、期限、预算和剩余深度</td><td>链不再有限无环，或任一级扩大对象、权限、期限与预算时</td></tr>
+      <tr><td>协议允许冒充</td><td>本地仍保存真实行动者，并由独立政策明确是否允许代表关系</td><td>无法恢复实际行动者，或把冒充身份写成原始主体时</td></tr>
+      <tr><td>人类同意</td><td>安全显示视图与精确机器请求一致，目的、接收方、期限、撤销和拒绝路径清楚</td><td>默认勾选、捆绑无关权限、隐藏差异或拒绝路径不可达时</td></tr>
+      <tr><td>多人决定</td><td>合格主体、不同身份、角色或数量、否决、冲突、缺席和截止规则预先固定</td><td>重复账户计票、决定后修改门槛或把缺席当赞成时</td></tr>
+      <tr><td>step-up 或新增 scope</td><td>新请求、新决定、新能力交集和新 Drase 会话</td><td>在旧会话中原地增加写权限、资源、预算或凭据时</td></tr>
+    </tbody></table></div>
+    <p><a href="https://www.rfc-editor.org/rfc/rfc8693.html">RFC 8693</a>区分 delegation 与 impersonation；<a href="https://www.rfc-editor.org/rfc/rfc9470.html">RFC 9470</a>的 step-up 只补充认证强度，不替资源服务器作出授权决定。Noemion 采用这些区分，不采用 OAuth 令牌结构作为本地权威模型。</p>
   </section>
 
   <section class="content-wide">
-    <h2>MCP 与 A2A 的授权只覆盖各自协议请求</h2>
-    <p>MCP 2025-11-25 让受保护资源服务器依据资源、scope 和访问令牌处理请求。A2A 1.0 要求服务端依据已认证身份与本地政策逐请求授权，并允许 Task 用 <code>AUTH_REQUIRED</code> 请求额外凭据。它们确实承载动作访问控制，不只是传输状态；但它们不会替 Noemion 确认自然语言意义、定义组织中的最终决定权威，或证明目标已经满足。</p>
-    <p>因此，外部 scope、凭据、授权结果、任务状态和 Agent Card 都是带来源的适配输入。Drasor 必须固定协议与对端，把外部动作许可同 AUT-CORE 语境、Dromen、制品限制、适配器能力和预算求交。新增权限需要新的本地授权决定和新的 Drase 会话；它不能回写 <code>semion</code> 或改变已有制品身份。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>同意、多人决定和重放</h2>
-    <p>RFC 9396 表明细粒度授权需要动作、资源和交易条件，并允许只授予请求子集。AUT-CORE 进一步要求同意界面绑定精确机器请求，披露目的、接收方、期限、撤销和文本变换；默认选中、无关权限捆绑和不可达拒绝路径都不能形成有效同意。</p>
-    <p>多人决定在请求前固定合格主体、不同身份、所需角色或数量、否决、冲突与缺席规则。一次决定还绑定请求、对象、目的、会话、次数和去重键，防止旧点击、重复签名和新 request ID 重放。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>GNU 技术提供的边界参照</h2>
-    <p>GNU Guix 不会仅因替代物带有签名就接受任意服务器。管理员必须把允许的公钥显式加入本地 ACL；这说明密码证明与本地授权政策属于不同判断。</p>
-    <p>GnuPG 同样区分密钥或签名验证与用户选择的 trust model。Noemion 借鉴“本地显式配置谁被信任”的原则，但不采用 Guix ACL、公钥、GnuPG ownertrust 或 Web of Trust 作为自然语言语义权威。</p>
+    <h2>外部协议、身份和 GNU 信任机制能证明什么</h2>
+    <div class="table-wrap"><table><thead><tr><th>外部机制</th><th>可以提供</th><th>不能替 Noemion 决定</th></tr></thead><tbody>
+      <tr><td>RFC 9396 / RFC 9700</td><td>细粒度授权详情、部分授予、资源与受众限制及 OAuth 安全边界</td><td>谁能确认自然语言意义、组织角色与最终接受</td></tr>
+      <tr><td>MCP 2025-11-25</td><td>受保护资源、scope、访问令牌与资源受众绑定</td><td>本地对象身份、Dromen 能力上限、目标满足或最终决定</td></tr>
+      <tr><td>A2A 1.0</td><td>认证方案、逐请求授权和需要额外认证的协议状态</td><td>Agent Card 自报能力的真实性或跨系统权威</td></tr>
+      <tr><td>工作负载与 Agent 身份</td><td>定位软件、配置、运行实例或一次调用中的部分主体</td><td>被代表主体、具体动作授权和业务决定权</td></tr>
+      <tr><td>GNU Guix / GnuPG</td><td>把签名验证与本地允许的密钥或 trust model 分开</td><td>把公钥、ownertrust 或 Web of Trust 直接当成语义权威</td></tr>
+    </tbody></table></div>
+    <p><a href="https://www.rfc-editor.org/rfc/rfc9396.html">RFC 9396</a>还要求未知授权类型或字段关闭失败，并允许用户只授予请求子集；<a href="https://www.rfc-editor.org/rfc/rfc9700.html">RFC 9700</a>要求访问令牌受众与权限收窄。GNU Guix 与 GnuPG 提供的只是“密码证明不等于本地授权政策”的工程参照。</p>
   </section>
 
   <section class="content-stack">
-    <h2>语言哲学采用边界</h2>
-    <p>《逻辑哲学论》4.022 说：“命题显示其意义。命题显示当它为真时事情是怎样的，而且宣称事情就是这样的。”这支持 Noemion 把候选命题的意义结构与其真假分开。</p>
-    <p>逻辑形式不会显示组织授权、法律同意或委托链。谁可以确认一种投影、批准一种能力或作出最终决定，必须通过外部政策和主体关系建立。项目不从哲学命题直接推出认证方法、角色体系或授权算法。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>权威资料与采用限制</h2>
-    <ul>
-      <li><a href="https://www.rfc-editor.org/rfc/rfc9396.html">RFC 9396 Rich Authorization Requests</a>用于细粒度范围与部分授予参照。</li>
-      <li><a href="https://www.rfc-editor.org/rfc/rfc8693.html">RFC 8693 Token Exchange</a>用于委托、冒充、subject 与 actor 分离参照。</li>
-      <li><a href="https://www.rfc-editor.org/rfc/rfc9470.html">RFC 9470 Step-up Authentication</a>说明重新认证不等于资源授权政策。</li>
-      <li><a href="https://www.rfc-editor.org/rfc/rfc9700.html">RFC 9700 OAuth Security BCP</a>用于受众、资源、动作和发送者限制参照。</li>
-      <li><a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization">MCP 2025-11-25 Authorization</a>与<a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 规范</a>用于 Agent 时代的授权传输与链式请求反例。</li>
-      <li><a href="https://www.nccoe.nist.gov/sites/default/files/2026-02/accelerating-the-adoption-of-software-and-ai-agent-identity-and-authorization-concept-paper.pdf">NIST 软件与 AI Agent 身份授权概念论文</a>用于最小权限、具体动作、代表关系和人机授权绑定的问题参照；该资料是草案概念工作，不是本地语义或身份标准。</li>
-      <li><a href="https://guix.gnu.org/manual/devel/en/guix.pdf">GNU Guix Reference Manual</a>与<a href="https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration-Options.html">GnuPG Configuration Options</a>用于本地显式信任政策参照。</li>
-    </ul>
-  </section>
-
-  <section class="content-stack">
-    <h2>后果与当前状态</h2>
-    <ul>
-      <li><a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/authority-core.md">AUT-CORE 0.1.0-draft</a>定义 12 条跨制品义务。</li>
-      <li>12 类威胁、18 个设计场景和 24 个正反向量覆盖当前抽象边界。</li>
-      <li>END-CORE 的投影授权、DRO-CORE 的政策与能力闭包、IKN-CORE 的决定权威、ID-CORE 的授权分离和 ADP-CORE 的 step-up 统一引用本边界。</li>
-      <li>当前没有权威目录、身份提供方、政策求值器、同意界面、法定人数服务、撤销服务、能力代理、决定服务或协议授权实现。</li>
-    </ul>
-  </section>
-
-  <section class="content-band">
-    <h2>待定内容</h2>
-    <p>主体与角色体系、政策语言、授权事件物理编码、同意 UI Profile、多人算法、凭据格式、协议映射、撤销分发、审计存储和法律效力仍需真实消费者、独立 Profile 与实现证据。</p>
+    <h2>当前还不能承诺哪些授权组件</h2>
+    <p>现有规范源记录 12 类威胁、18 个设计场景和 24 个正反向量。它们验证的是抽象允许与拒绝边界，不证明身份、政策、同意、撤销或能力代理已经实现。</p>
+    <p><strong>待定内容：</strong>主体与角色体系、政策语言、授权事件物理编码、同意 UI Profile、多人算法、凭据格式、协议映射、撤销分发、审计存储和法律效力均保持开放。当前没有权威目录、身份提供方、政策求值器、同意界面、法定人数服务、撤销服务、能力代理、决定服务或协议授权实现。</p>
+    <div class="page-links">
+      <a class="page-link" href="../specifications/authority.html"><strong>权威与授权决定规范</strong><span>按十二项责任检查主体、范围、委托、同意、时效、重放和结果分离。</span></a>
+      <a class="page-link" href="adr-0024-dromen-session-contract.html"><strong>ADR-0024 · 权限只属于这一次会话</strong><span>继续核对授权怎样与环境、预算和能力上限求交。</span></a>
+      <a class="page-link" href="adr-0027-exact-identity-and-attestation.html"><strong>ADR-0027 · 签名有效，不等于制品获准</strong><span>继续核对签名主体、验证材料和本地依赖方决定。</span></a>
+      <a class="page-link" href="adr-0030-endem-content-and-authorization-companions.html"><strong>ADR-0030 · 内容与授权伴随关系</strong><span>继续核对稳定内容身份与外置授权记录怎样关联。</span></a>
+    </div>
+    <p class="callout"><strong>术语与读音：</strong>“身份确认”“意义确认”“动作授权”“会话能力”“最终决定”在职责和口头表达上均可区分；<code>AUT-CORE</code> 是机器文档标识，不作为面向传播的发行名称。任何新角色或公开名称仍需经过朗读、听写回填和成对混淆测试。</p>
   </section>
   <div class="next-prev"><a href="adr-0028-text-and-identifier-boundaries.html">← ADR-0028</a><a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030 →</a></div>
 </main>

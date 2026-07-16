@@ -142,7 +142,7 @@ Noemion 已经接受以 Endem 为核心制品的职责、单一应用拓扑和 E
 | `architecture/adr-0026-external-protocol-adapters.html` | 远端完成，不等于本地完成 | 通过 |
 | `architecture/adr-0027-exact-identity-and-attestation.html` | 签名有效，不等于制品获准 | 通过 |
 | `architecture/adr-0028-text-and-identifier-boundaries.html` | 显示相同，不等于输入相同 | 通过 |
-| `architecture/adr-0029-authority-and-authorization-decisions.html` | 权威与授权决定边界 | 通过 |
+| `architecture/adr-0029-authority-and-authorization-decisions.html` | 身份已确认，不等于操作已获准 | 通过 |
 | `architecture/adr-0030-endem-content-and-authorization-companions.html` | 内容与授权伴随关系 | 通过 |
 | `architecture/adr-0031-release-name-collision-gate.html` | 发布名称冲突门禁 | 通过 |
 | `architecture/adr-0032-deterministic-maker-name-collision.html` | 确定性制作名称冲突 | 通过 |
@@ -607,6 +607,16 @@ GNU Coreutils `timeout`、Make job slots 与 Guix 容器环境只保留为终止
 外部状态按复核日固定：[RFC 9396](https://www.rfc-editor.org/rfc/rfc9396.html)只提供精细授权字段和部分授予边界；[RFC 8693](https://www.rfc-editor.org/rfc/rfc8693.html)分开 delegation、impersonation、subject 与 actor；[MCP 2025-11-25 授权规范](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)要求资源受众绑定并禁止令牌透传；[A2A 1.0.0](https://a2a-protocol.org/v1.0.0/specification/)仍是最新正式版；[NIST 软件与 AI Agent 身份授权概念论文](https://www.nccoe.nist.gov/sites/default/files/2026-02/accelerating-the-adoption-of-software-and-ai-agent-identity-and-authorization-concept-paper.pdf)仍把最小权限、具体动作、代表关系和人机授权绑定列为研究问题。GNU Guix 的本地替代服务器授权与 GnuPG 的 trust model 只支持“签名检查不等于本地信任决定”这一工程纪律，不成为 Noemion 的密钥、身份或语义授权模型。
 
 本次修改没有改变 AUT-CORE、条款 ID、结果值、登记、向量、Endem 字段或 Drase 会话规则，也没有创建政策语言、授权事件格式、身份提供方、同意界面、能力代理、协议 Profile 或组件实现。
+
+## ADR-0029 身份、权威与操作授权边界二次复核 · 2026-07-16
+
+ADR-0029 此前依次讲授现有规范缺口、权威模型、自然语言意义、委托、MCP 与 A2A、同意、GNU 参照、哲学、资料、状态和待定内容。十二个章节、仅一张六行表、一个抽象流程、零个按问题入口和 2,791 个可见字符能够覆盖概念，却要求开发者跨多处恢复同一次请求；哲学和外部机制也先于完整的实现检查路径。
+
+当前页面从 CI 工作负载请求部署精确发布对象进入，依次固定请求、三类主体、权威与政策、有限决定和会话能力交集。意义确认、动作授权、会话能力、证据判断与最终接受分别回答不同问题；委托、冒充、人类同意、多人决定和权限升级明确给出停止位置。页面现有六个章节、五张表、二十五行表体、一条授权流程、四个按问题入口和 2,825 个可见字符。标题“身份已确认，不等于操作已获准”先给开发者结论；“身份确认、意义确认、动作授权、会话能力、最终决定”保持职责与读音可区分，不新增专名。
+
+[RFC 9396](https://www.rfc-editor.org/rfc/rfc9396.html)支持细粒度授权详情、部分授予和未知字段关闭失败；[RFC 8693](https://www.rfc-editor.org/rfc/rfc8693.html)区分 delegation、impersonation、subject 与 actor；[RFC 9470](https://www.rfc-editor.org/rfc/rfc9470.html)只补充 step-up 认证，不替资源服务器决定权限；[RFC 9700](https://www.rfc-editor.org/rfc/rfc9700.html)要求访问令牌绑定资源受众并收窄权限。MCP 2025-11-25 与 A2A 1.0 继续只提供各自协议内的认证和授权输入。GNU Guix 与 GnuPG 只支持“签名检查与本地信任政策分开”的工程纪律，不成为 Noemion 的密钥、角色或语义授权模型。
+
+本轮只重构公开 ADR、导航名称、架构索引、站点发现摘要、规范页回链、质量契约和审计记录。AUT-CORE、十二项条款、<code>grant / deny / defer</code> 结果域、登记、威胁模型、场景、24 个向量、Endem 字段、Drase 规则和现有读音结论均未改变，也没有创建权威目录、身份提供方、政策求值器、同意界面、能力代理、撤销服务或协议授权实现。
 
 ## 规范入口渐进式披露二次复核 · 2026-07-15
 
