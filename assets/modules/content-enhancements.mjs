@@ -10,6 +10,61 @@ export class TableScroller {
   }
 }
 
+export class ScrollFocusRegion {
+  static enhance(root = document) {
+    const regions = Array.from(root.querySelectorAll(".table-wrap, pre"));
+    if (!regions.length) return;
+
+    const contextLabel = (region) => {
+      const caption = region.querySelector(":scope > table > caption")?.textContent.trim();
+      const heading = region.closest("section")?.querySelector("h2, h3")?.textContent.trim();
+      const kind = region.matches("pre") ? "代码" : "表格";
+      return `${kind}横向滚动区域${caption || heading ? `：${caption || heading}` : ""}`;
+    };
+
+    const update = (region) => {
+      const overflows = region.scrollWidth > region.clientWidth + 1;
+      if (overflows) {
+        if (!region.hasAttribute("tabindex")) {
+          region.tabIndex = 0;
+          region.dataset.scrollFocusTabindex = "managed";
+        }
+        if (!region.hasAttribute("role")) {
+          region.setAttribute("role", "region");
+          region.dataset.scrollFocusRole = "managed";
+        }
+        if (!region.hasAttribute("aria-label")) {
+          region.setAttribute("aria-label", contextLabel(region));
+          region.dataset.scrollFocusLabel = "managed";
+        }
+        return;
+      }
+
+      if (region.dataset.scrollFocusTabindex === "managed") {
+        region.removeAttribute("tabindex");
+        delete region.dataset.scrollFocusTabindex;
+      }
+      if (region.dataset.scrollFocusRole === "managed") {
+        region.removeAttribute("role");
+        delete region.dataset.scrollFocusRole;
+      }
+      if (region.dataset.scrollFocusLabel === "managed") {
+        region.removeAttribute("aria-label");
+        delete region.dataset.scrollFocusLabel;
+      }
+    };
+
+    const updateAll = () => regions.forEach(update);
+    updateAll();
+    window.addEventListener("resize", updateAll, { passive: true });
+    document.fonts?.ready.then(updateAll);
+    if ("ResizeObserver" in window) {
+      const observer = new ResizeObserver(updateAll);
+      regions.forEach((region) => observer.observe(region));
+    }
+  }
+}
+
 export class PageOutline {
   constructor(main) {
     this.main = main;
@@ -37,6 +92,7 @@ export class PageOutline {
 
 export const enhanceContent = () => {
   TableScroller.enhance();
+  ScrollFocusRegion.enhance();
   const main = document.querySelector('body[data-page-role="content"]:not([data-docs-layout="true"]) main');
   if (main) new PageOutline(main).render();
 };

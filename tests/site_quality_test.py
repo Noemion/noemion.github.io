@@ -1674,6 +1674,12 @@ def validate_readability_behavior_contracts(root):
         for token in (
             'querySelectorAll(".manual-article table")',
             'wrapper.className = "table-wrap manual-table-wrap"',
+            'querySelectorAll(".table-wrap, pre")',
+            'region.scrollWidth > region.clientWidth + 1',
+            'region.tabIndex = 0',
+            'region.setAttribute("role", "region")',
+            'document.fonts?.ready.then(updateAll)',
+            'window.addEventListener("resize", updateAll',
             'this.main.querySelector(":scope > .content-introduction")',
             'insertAdjacentElement("afterend", outline)',
             'label.textContent = "章节"',
@@ -1749,7 +1755,7 @@ def validate_readability_behavior_contracts(root):
             "breadcrumbs must be compact while retaining a forty pixel link target": (
                 style_text,
                 r'body:not\(\[data-page-role="portal"\]\)\s+\.breadcrumbs\s*\{'
-                r"[^}]*min-height:40px;[^}]*font-size:9px;[^}]*line-height:1\.35"
+                r"[^}]*min-height:40px;[^}]*font-size:11px;[^}]*line-height:1\.35"
             ),
             "current stage summary must use readable body text": (
                 style_text,
@@ -4392,7 +4398,7 @@ def validate_jekyll_sources():
             'body .global-brand>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
             'body[data-page-role="portal"] .global-header-inner{grid-template-columns:minmax(0,1fr) clamp(102px,30vw,124px) 84px}',
             'body[data-page-role="portal"] .global-timeline-link{width:100%;min-width:0;padding:0}',
-            'body[data-page-role="portal"] .global-timeline-value{width:100%;min-width:0;padding-inline:7px;font-size:10px;letter-spacing:.04em}',
+            'body[data-page-role="portal"] .global-timeline-value{width:100%;min-width:0;padding-inline:7px;font-size:11px;letter-spacing:.04em}',
             '.portal-focus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))',
             '.status-columns{column-width:340px;column-gap:18px}',
             '.status-columns>.status-item{break-inside:avoid;margin:0 0 18px}',
@@ -4974,7 +4980,8 @@ def validate_jekyll_sources():
             'import(moduleUrl("content-enhancements"))',
             'import(moduleUrl("summary-rail-layout"))',
             'document.querySelector("[data-summary-rail-layout]")',
-            "needsTableScroller || longContent",
+            'const needsScrollFocus = Boolean(document.querySelector(".table-wrap, pre"))',
+            "needsTableScroller || needsScrollFocus || longContent",
             'directoryPanel.dataset.mobileDirectoryReady = "true"',
             'directoryPanel?.addEventListener("noemion:directoryrequest", ensureDirectory)',
             'if (pendingOpen) mobile.open()',
@@ -7068,6 +7075,11 @@ def main():
         "@property --spectrum-angle",
         "conic-gradient(from var(--spectrum-angle)",
         "@keyframes spectrum-trace{to{--spectrum-angle:360deg}}",
+        "animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) 1 forwards",
+        "--portal-coral:#c43b1b",
+        "--portal-coral:#ff805c",
+        "--number-muted:#61766c",
+        ':is(.table-wrap,pre):focus-visible{outline:3px solid var(--focus-ring);outline-offset:-3px}',
         ".portal-feature-row::before{padding:5px}",
         ".portal-chapter-title>span{min-width:0;text-align:center}",
         "transition-duration:550ms,160ms",
@@ -7088,6 +7100,8 @@ def main():
         errors.append("index.html must render four right-pointing portal arrows before interaction")
     if "background-position:-220% 0" in style:
         errors.append("style.css must not reset the spectrum frame with a discontinuous background position")
+    if re.search(r"spectrum-trace[^;}]*infinite", style):
+        errors.append("spectrum trace must finish after one interaction cycle instead of looping")
 
     directory_style = (ROOT / "assets/directory.css").read_text()
     for token in (
@@ -7100,9 +7114,12 @@ def main():
         ".global-nav-card:hover .global-nav-card-arrow-progress{stroke-dashoffset:0;opacity:1}",
         ".global-nav-card:focus-visible .global-nav-card-arrow-progress{stroke-dashoffset:0;opacity:1}",
         "conic-gradient(from var(--spectrum-angle)",
+        "animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) 1 forwards",
     ):
         if token not in directory_style:
             errors.append(f"directory.css missing global navigation card motion contract: {token}")
+    if re.search(r"spectrum-trace[^;}]*infinite", directory_style):
+        errors.append("global navigation spectrum trace must not loop indefinitely")
     for forbidden in (
         ".global-nav-item.is-menu-open .global-nav-card:hover{transform:translateX(4px)}",
         ".global-nav-item:focus-within .global-nav-card:hover{transform:translateX(4px)}",

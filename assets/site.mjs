@@ -146,8 +146,9 @@ directoryPanel?.addEventListener("noemion:directoryrequest", ensureDirectory);
 if (directoryPanel?.hasAttribute("data-mobile-directory-pending-open")) ensureDirectory();
 
 const needsTableScroller = Boolean(document.querySelector(".manual-article table"));
+const needsScrollFocus = Boolean(document.querySelector(".table-wrap, pre"));
 const longContent = document.querySelectorAll('body[data-page-role="content"]:not([data-docs-layout="true"]) main > section > h2').length >= 6;
-if (needsTableScroller || longContent) {
+if (needsTableScroller || needsScrollFocus || longContent) {
   import(moduleUrl("content-enhancements"))
     .then(({ enhanceContent }) => enhanceContent())
     .catch((error) => console.warn("Optional content enhancements are unavailable.", error));
