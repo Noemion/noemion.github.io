@@ -7153,7 +7153,7 @@ def main():
         "@property --spectrum-angle",
         "conic-gradient(from var(--spectrum-angle)",
         "@keyframes spectrum-trace{to{--spectrum-angle:360deg}}",
-        "animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) infinite",
+        "animation:spectrum-trace 4.8s linear infinite",
         "--portal-coral:#c43b1b",
         "--portal-coral:#ff805c",
         "--number-muted:#61766c",
@@ -7178,9 +7178,9 @@ def main():
         errors.append("index.html must render four right-pointing portal arrows before interaction")
     if "background-position:-220% 0" in style:
         errors.append("style.css must not reset the spectrum frame with a discontinuous background position")
-    if "spectrum-trace 720ms cubic-bezier(.2,0,0,1) 1 forwards" in style:
+    if "spectrum-trace 4.8s linear 1 forwards" in style:
         errors.append("spectrum traces must loop instead of stopping after one cycle")
-    if style.count("animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) infinite") != 2:
+    if style.count("animation:spectrum-trace 4.8s linear infinite") != 2:
         errors.append("portal and page-link spectrum traces must both retain the looping contract")
 
     directory_style = (ROOT / "assets/directory.css").read_text()
@@ -7194,13 +7194,13 @@ def main():
         ".global-nav-card:hover .global-nav-card-arrow-progress{stroke-dashoffset:0;opacity:1}",
         ".global-nav-card:focus-visible .global-nav-card-arrow-progress{stroke-dashoffset:0;opacity:1}",
         "conic-gradient(from var(--spectrum-angle)",
-        "animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) infinite",
+        "animation:spectrum-trace 4.8s linear infinite",
     ):
         if token not in directory_style:
             errors.append(f"directory.css missing global navigation card motion contract: {token}")
-    if "spectrum-trace 720ms cubic-bezier(.2,0,0,1) 1 forwards" in directory_style:
+    if "spectrum-trace 4.8s linear 1 forwards" in directory_style:
         errors.append("global navigation spectrum traces must loop instead of stopping after one cycle")
-    if directory_style.count("animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) infinite") != 3:
+    if directory_style.count("animation:spectrum-trace 4.8s linear infinite") != 3:
         errors.append("current, focused and hovered navigation spectrum traces must all loop")
     for forbidden in (
         ".global-nav-item.is-menu-open .global-nav-card:hover{transform:translateX(4px)}",

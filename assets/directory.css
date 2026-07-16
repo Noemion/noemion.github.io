@@ -222,7 +222,7 @@ body .global-nav-trigger:active{transform:scale(.96)}
   color:var(--nav-text);background:color-mix(in srgb,var(--paper-subtle) 88%,var(--portal-mint,#68d7b2));
   box-shadow:0 12px 30px color-mix(in srgb,var(--text) 14%,transparent);transition-delay:0ms
 }
-.global-nav-card[aria-current="page"]::after{opacity:1;transform:scale(1);animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) infinite}
+.global-nav-card[aria-current="page"]::after{opacity:1;transform:scale(1);animation:spectrum-trace 4.8s linear infinite}
 .global-nav-item.is-menu-open .global-nav-card:active,
 .global-nav-item:focus-within .global-nav-card:active{transform:scale(.96)}
 .global-nav-visual{
@@ -272,7 +272,7 @@ body .global-nav-trigger:active{transform:scale(.96)}
   box-shadow:0 12px 30px color-mix(in srgb,var(--text) 14%,transparent);outline-offset:-4px;transition-delay:0ms
 }
 .global-nav-card:focus-visible::after{
-  opacity:1;transform:scale(1);animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) infinite
+  opacity:1;transform:scale(1);animation:spectrum-trace 4.8s linear infinite
 }
 body .global-timeline-link{
   display:grid;place-items:center;min-width:124px;align-self:stretch;padding:0;color:var(--nav-text);
@@ -451,7 +451,7 @@ body .global-directory-panel{display:none}
     color:var(--nav-text);background:color-mix(in srgb,var(--paper-subtle) 88%,var(--portal-mint,#68d7b2));
     box-shadow:0 12px 30px color-mix(in srgb,var(--text) 14%,transparent);transition-delay:0ms
   }
-  .global-nav-card:hover::after{opacity:1;transform:scale(1);animation:spectrum-trace 720ms cubic-bezier(.2,0,0,1) infinite}
+  .global-nav-card:hover::after{opacity:1;transform:scale(1);animation:spectrum-trace 4.8s linear infinite}
   .global-nav-card:hover .global-nav-visual svg{filter:saturate(1.08) contrast(1.02);transform:scale(1.045) translateY(-1px)}
   .global-nav-card:hover .global-nav-card-copy{transform:translateX(4px)}
   .global-nav-card:hover .global-nav-card-arrow{opacity:1;filter:blur(0);transform:translateX(4px) scale(1)}
@@ -468,29 +468,12 @@ body .global-directory-panel{display:none}
 
 /* The navigation is a translucent control layer above the continuous document canvas. */
 body .global-header{
-  --site-header-radius:6px;
   background:var(--surface-glass);border-color:var(--surface-outline);border-top:1px solid var(--surface-outline);
-  isolation:isolate;border-radius:var(--site-header-radius) var(--site-header-radius) 0 0;
+  border-radius:0;
   box-shadow:0 1px 0 color-mix(in srgb,var(--paper) 58%,transparent),0 10px 30px color-mix(in srgb,var(--text) 8%,transparent);
   backdrop-filter:blur(18px) saturate(118%);-webkit-backdrop-filter:blur(18px) saturate(118%)
 }
-body .global-header::before,body .global-header::after{
-  content:"";display:block;position:absolute;top:-1px;z-index:5;
-  width:calc(var(--site-header-radius) + 1px);height:calc(var(--site-header-radius) + 1px);
-  background:var(--bg);pointer-events:none
-}
-body .global-header::before{
-  left:-1px;
-  -webkit-mask:radial-gradient(circle at 100% 100%,transparent 0 calc(var(--site-header-radius) - 1px),#000 var(--site-header-radius));
-  mask:radial-gradient(circle at 100% 100%,transparent 0 calc(var(--site-header-radius) - 1px),#000 var(--site-header-radius))
-}
-body .global-header::after{
-  right:-1px;
-  -webkit-mask:radial-gradient(circle at 0 100%,transparent 0 calc(var(--site-header-radius) - 1px),#000 var(--site-header-radius));
-  mask:radial-gradient(circle at 0 100%,transparent 0 calc(var(--site-header-radius) - 1px),#000 var(--site-header-radius))
-}
-body .global-brand{border-radius:var(--site-header-radius) 0 0 0}
-body .global-timeline-link{border-radius:0 var(--site-header-radius) 0 0}
+body .global-brand,body .global-timeline-link{border-radius:0}
 .global-nav-menu{
   overflow:hidden;border-radius:0 0 var(--radius-card) var(--radius-card);
   box-shadow:0 0 0 1px var(--surface-outline),0 24px 60px color-mix(in srgb,var(--text) 22%,transparent)
@@ -501,11 +484,10 @@ body .global-timeline-link{border-radius:0 var(--site-header-radius) 0 0}
 
 @media(max-width:999px){
   body .global-header{
-    --site-header-radius:5px;
-    border-radius:var(--site-header-radius) var(--site-header-radius) 0 0;background:color-mix(in srgb,var(--paper) 98%,transparent);
+    border-radius:0;background:color-mix(in srgb,var(--paper) 98%,transparent);
     box-shadow:0 1px 0 color-mix(in srgb,var(--paper) 68%,transparent)
   }
-  body .global-brand{border-radius:var(--site-header-radius) 0 0 0}
+  body .global-brand{border-radius:0}
   body .global-timeline-link{border-radius:0}
   body .global-directory-panel nav{
     border-radius:0 0 var(--radius-card) var(--radius-card);
