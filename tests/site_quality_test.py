@@ -319,6 +319,26 @@ ADR_0015_RESULT_BOUNDARIES = (
     "协议版本或外部状态变化只要求适配器重新记录映射",
     "没有 Drasor、决定引擎、结果事件编码或组件测试",
 )
+ADR_0016_TIME_HEADINGS = [
+    "用一次部署检查读懂持续目标",
+    "先决定固定时刻还是经过时长",
+    "再声明连续性与违约预算",
+    "证据覆盖怎样产生四类结果",
+    "外部时钟与 Agent 状态只提供什么",
+    "当前还不能编码或运行什么",
+]
+ADR_0016_TIME_BOUNDARIES = (
+    "不是一个定时器参数",
+    "mene 是现行规范草案值，但已未通过首次发行拼写的桌面审查",
+    "reach / maintain 仍只是等待人类朗读、听写和成组口头区分的候选",
+    "单调时钟只能测量同一声明域内的经过时间",
+    "所有目标范围统一采用项目定义的半开区间 [start, end)",
+    "“采样”只说明证据怎样取得，不是第三种连续性政策",
+    "其聚合区间端点规则不同，Gauge 只表示采样值",
+    "远端时间戳和 completed 都不是本地时钟权威",
+    "本决定不增加 END-P1 字段",
+    "没有计时器、监控器或求值组件",
+)
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
     "Content State", "External Statements", "Endem First", "One CLI",
@@ -6153,6 +6173,33 @@ def main():
         ):
             errors.append(
                 "architecture/adr-0015-result-domains.html: must preserve five "
+                "boundary tables, one task flow and four developer reading links"
+            )
+
+    adr_0016 = ROOT / "architecture/adr-0016-mene-time-model.html"
+    if adr_0016.exists():
+        parser = parse(adr_0016)
+        if parser.h2_texts != ADR_0016_TIME_HEADINGS:
+            errors.append(
+                "architecture/adr-0016-mene-time-model.html: time-evidence reading sequence "
+                f"must be {ADR_0016_TIME_HEADINGS}, got {parser.h2_texts}"
+            )
+        visible_text = normalize_visible_text(
+            " ".join("".join(section["text"]) for section in parser.sections)
+        )
+        for term in ADR_0016_TIME_BOUNDARIES:
+            if term not in visible_text:
+                errors.append(
+                    "architecture/adr-0016-mene-time-model.html: missing time, evidence, "
+                    f"or naming boundary {term}"
+                )
+        if (
+            parser.class_counts["table-wrap"] != 5
+            or parser.class_counts["flow"] != 1
+            or parser.class_counts["page-link"] != 4
+        ):
+            errors.append(
+                "architecture/adr-0016-mene-time-model.html: must preserve five "
                 "boundary tables, one task flow and four developer reading links"
             )
 
