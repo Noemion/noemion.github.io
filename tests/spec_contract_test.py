@@ -813,6 +813,7 @@ def validate_public_boundary(errors):
             "不表示 Drasor 已经实现",
         ),
         "architecture/adr-0025-structured-diagnostics.html": (
+            "错误消息不能替系统作决定",
             "DIA-CORE 0.1.0-draft",
             "GNU GCC",
             "RFC 9457",
