@@ -62,7 +62,7 @@ permalink: "/architecture/adr-0032-deterministic-maker-name-collision.html"
 
   <section class="content-wide">
     <h2>名称决定不能替代实现排序</h2>
-    <p><strong>动作名称不等于实现优先级。</strong>五个公开动作是现行应用职责，不是五个已经证明必要的独立程序；名称治理只能保持接口清楚，不能制造实现授权。</p>
+    <p><strong>动作名称不等于实现优先级。</strong>五项公开职责不是五个已经证明必要的独立程序，现行标识也不是已发布子命令；名称治理只能保持接口清楚，不能制造实现授权。</p>
     <div class="table-wrap"><table><thead><tr><th>职责</th><th>当前成熟度</th><th>首次发行前还需要什么</th></tr></thead><tbody>
       <tr><td><code>ktise</code>、<code>elenk</code>、<code>theor</code></td><td>首条候选实现切片有直接消费者，现阶段仍只有规范和向量</td><td>单独授权组件开发，并证明确定性形成、分层检查和独立读取</td></tr>
       <tr><td><code>pleko</code></td><td>职责已定义，依赖真实的多 Endem 组合消费者</td><td>先证明闭包、引用解析和失败责任需要实现边界</td></tr>
@@ -80,7 +80,7 @@ permalink: "/architecture/adr-0032-deterministic-maker-name-collision.html"
       <a class="page-link" href="../components/ktisor.html"><strong>Ktisor · 确定性生产边界</strong><span>查看从已确认意义投影到规范字节的开发者路径，以及唯一写入职责的限制。</span></a>
       <a class="page-link" href="../docs/terminology-and-pronunciation.html"><strong>术语与读音验证指南</strong><span>查看专名必要性、首次朗读、听写回填、成对混淆和发行复核方法。</span></a>
       <a class="page-link" href="https://github.com/Noemion/noemion.github.io/blob/main/design-system/name-audit.md"><strong>名称冲突与读音审计</strong><span>查看包入口、相邻产品、口头风险和设计标识的当前证据上限。</span></a>
-      <a class="page-link" href="adr-0035-public-actions-and-internal-responsibilities.html"><strong>ADR-0035 · 公开动作与内部职责</strong><span>查看五个公开动作为什么不等于五个独立组件或全部内部质量责任。</span></a>
+      <a class="page-link" href="adr-0035-public-actions-and-internal-responsibilities.html"><strong>ADR-0035 · 用户任务不是内部职责清单</strong><span>查看五项公开职责为什么不等于五个独立组件或全部内部质量责任。</span></a>
     </div>
     <p class="callout"><strong>读音状态：</strong>当前没有 Ktisor 或 <code>ktise</code> 的合格发行读音。现阶段口头说明应先说“确定性生产边界”或“形成动作”，再给出精确书面标识；任何语音输入都不得仅凭近似读音选择动作、参数或权限。</p>
   </section>

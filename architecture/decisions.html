@@ -70,7 +70,7 @@ permalink: "/architecture/decisions.html"
         <li><a href="adr-0032-deterministic-maker-name-collision.html">ADR-0032 · 命令只改大小写，仍然是名称冲突</a></li>
         <li><a href="adr-0033-text-identifier-specification-name.html">ADR-0033 · 标准 ID 不能伪装成文件格式</a></li>
         <li><a href="adr-0034-pronunciation-and-oral-distinction.html">ADR-0034 · 读得出，不等于听得清、写得回</a></li>
-        <li><a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035 · 公开动作与内部职责收敛</a></li>
+        <li><a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035 · 用户任务不是内部职责清单</a></li>
       </ul></article>
       <article class="status-item"><h3>来源保留与裁剪发布</h3><p>形成版保留自然语言，发布版移除原文并取得新身份；发布 Profile 仍在研究。</p><ul>
         <li><a href="adr-0036-source-bearing-and-stripped-release.html">ADR-0036 · 来源保留与裁剪发布边界</a></li>
@@ -83,7 +83,8 @@ permalink: "/architecture/decisions.html"
     <p class="lead">先给每类输入一个受限角色，再说明它还缺少哪项确认。这样可以直接指导实现者接线，也避免把风险边界写成一串互不相连的禁令。</p>
     <div class="table-wrap"><table><thead><tr><th>常见输入</th><th>允许进入的角色</th><th>仍需补足什么</th></tr></thead><tbody>
       <tr><td>自然语言、模型 JSON</td><td>带来源的候选材料</td><td>Ktisor 所需的授权投影、未确定项与人工确认；候选本身不是 Endem。</td></tr>
-      <tr><td>查看、归档、裁剪、签名、符合性检查</td><td>五个公开动作背后的内部职责</td><td>由 <code>ktise</code>、<code>elenk</code>、<code>pleko</code>、<code>theor</code>、<code>drase</code> 暴露一致的命令边界，不新增同义产品。</td></tr>
+      <tr><td>独立查看实际制品字节</td><td>独立只读检查职责</td><td>由现行设计标识 <code>theor</code> 表示；它不修复、不写回，也不产生生产检查通过结论。</td></tr>
+      <tr><td>发布派生、签名与符合性检查</td><td>生产者、外部密钥权限域与发行验证分别负责</td><td>当前都不是公开动作；在物理契约和真实消费者确定前，不用名字预占 CLI。</td></tr>
       <tr><td>环境路径、当前目录、网络版本</td><td>开发期定位线索</td><td>正式依赖必须转换为精确身份、版本和 Profile；运行环境不能替代内容身份。</td></tr>
       <tr><td>对象变换或迁移工具</td><td>显式、可审计的转换步骤</td><td>保存未知字段与来源，分别验证 <code>semion</code>、<code>skena</code>、<code>telis</code>、<code>krin</code>、<code>apor</code> 的语义不变量。</td></tr>
       <tr><td>签名、证据数量、模型评分、Runtime 成功</td><td>绑定来源的陈述、证据或运行事件</td><td>按 Iknem 覆盖、Endem 满足和具名权威决定分别求值，任何单一信号都不代表任务完成。</td></tr>
