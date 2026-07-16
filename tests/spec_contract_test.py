@@ -837,6 +837,7 @@ def validate_public_boundary(errors):
             "当前没有协议 Profile",
         ),
         "architecture/adr-0027-exact-identity-and-attestation.html": (
+            "签名有效，不等于制品获准",
             "ID-CORE 0.1.0-draft",
             "RFC 6920",
             "RFC 9052",
