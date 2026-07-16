@@ -1,99 +1,88 @@
 ---
 layout: default
-title: "ADR-0020 复合事态与判据组合"
+title: "ADR-0020 · 组合条件不能吞掉未知与故障"
 page_role: "content"
 footer_text: "Noemion · ADR-0020"
 permalink: "/architecture/adr-0020-composite-situations-and-criteria.html"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0020</span></nav>
-  <header class="content-introduction"><h1>ADR-0020<br>复合事态<br>判据组合</h1><p>当一个目标必须同时满足多项条件，或满足其中任一条件时，保留“满足、不满足、未知、故障”四种结果，不让普通布尔值吞掉证据缺口。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">复合判据</span><span class="badge">不改变线格式</span><span class="badge">尚未实现</span></div></header>
-
-  <section class="content-band">
-    <h2>直接结论</h2>
-    <p class="lead">第一阶段只允许用 <code>all_of</code> 和 <code>any_of</code> 组合判据。它们组合的是已经独立得到的叶级 <code>met / unmet / agno / fault</code>，不是原始数值、自由文本或可执行表达式。</p>
-    <p>只有共同描述同一个终态、共享同一目标方向和验收责任、不能被独立替换或接受的关系，才能进入一个 Endem 的复合根。能够独立实现、版本化、授权、接受或失败的目标必须拆成多个 Endem，再由 Synem 组合。</p>
-    <p>当前策略确定抽象语义，不给 END-P1 增加字段，也不表示 Ktisor、Theor、Drasor、CLI 或求值器已经实现。</p>
-  </section>
-
-  <section class="content-band">
-    <h2>哲学启发与采用限制</h2>
-    <blockquote><p>“所有命题都是基本命题的真值运算结果。”</p><cite>路德维希·维特根斯坦《逻辑哲学论》5.3</cite></blockquote>
-    <p>命题 5 及 5.3 提供了一个重要问题结构：复合陈述的形式必须能够从其组成部分和组合方式中显示出来。Noemion 因此拒绝把“同时满足这些条件”藏在备注、脚本或模型推理中。</p>
-    <p>这里不直接采用《逻辑哲学论》的二值真值函数。现实系统还会遇到观察不足和求值故障，所以 Noemion 必须保留四种判断结果；安全优先级、短路记录和 Endem 边界也都由工程规范决定。</p>
-  </section>
+  <header class="content-introduction"><h1>ADR-0020<br>组合条件不能吞掉<br>未知与故障</h1><p>复合判据只组合已经独立形成的叶结果。它可以减少不必要的检查，但不能把未知、故障或未检查的条件改写成普通真假。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">四值组合</span><span class="badge">不改变线格式</span><span class="badge">尚未实现</span></div></header>
 
   <section class="content-wide">
-    <h2>先判断一个 Endem 还是多个 Endem</h2>
-    <div class="table-wrap"><table><thead><tr><th>问题</th><th>一个复合 Endem</th><th>多个 Endem 与 Synem</th></tr></thead><tbody>
-      <tr><td>终态身份</td><td>所有叶共同描述同一个终态</td><td>每一部分都有自己的终态</td></tr>
-      <tr><td>目标方向</td><td>共享一个 <code>kine</code> 或 <code>mene</code></td><td>方向或时间责任可以不同</td></tr>
-      <tr><td>生命周期</td><td>只能共同实现、替换和验收</td><td>可以独立版本化、替换或停止</td></tr>
-      <tr><td>权威与失败责任</td><td>共享同一最终决定边界</td><td>可以由不同主体独立接受或失败</td></tr>
+    <h2>用一次发布检查读懂复合判据</h2>
+    <p class="lead">“接口可达、响应结构正确且 p95 延迟不高于 300 毫秒”可以描述同一个服务发布终态，但三项条件必须先分别得到结果。</p>
+    <div class="flow"><div class="step">确认同一终态<br>与验收责任</div><div class="step">固定三个关系叶<br>及独立判据</div><div class="step">分别形成<br>四值叶结果</div><div class="step">按 <code>all_of</code><br>组合结果</div><div class="step">记录决定依据<br>与检查覆盖</div></div>
+    <div class="table-wrap"><table><thead><tr><th>检查阶段</th><th>本例必须保存</th><th>禁止简化</th></tr></thead><tbody>
+      <tr><td>目标边界</td><td>一个服务发布终态、同一方向、同一验收责任。</td><td>只因原句出现“并且”就合成一个 Endem。</td></tr>
+      <tr><td>叶定义</td><td>可达性、响应结构和延迟各自的关系、判据与证据范围。</td><td>把自由文本、脚本或模型总分直接放进组合节点。</td></tr>
+      <tr><td>叶结果</td><td>每个条件独立产生 <code>met / unmet / agno / fault</code>。</td><td>在组合前把未知和故障折叠成 <code>false</code>。</td></tr>
+      <tr><td>总体结果</td><td><code>all_of</code> 按固定优先级组合叶结果。</td><td>由执行顺序、界面颜色或退出码决定。</td></tr>
+      <tr><td>检查覆盖</td><td>已检查叶、未检查叶、所用 Iknem、决定依据和停止原因。</td><td>把没有检查的叶写成 <code>agno</code> 或删除已见故障。</td></tr>
     </tbody></table></div>
-    <p>自然语言中出现“并且”或“或者”不能机械决定边界。例如“接口可达并且响应模式正确”可以是同一个服务终态；“发布报告完成并且服务已经部署”则是两个可独立失败的目标。</p>
   </section>
 
   <section class="content-wide">
-    <h2>结构必须同时出现在事态与判据中</h2>
-    <ol>
-      <li><code>skena</code> 使用有限、无环的关系叶和组合节点显示一个根事态。</li>
-      <li>每个组合节点只能是 <code>all_of</code> 或 <code>any_of</code>，且至少包含两个不同子节点。</li>
-      <li><code>krin</code> 为每个关系叶给出一个叶判据，并以同样的组合拓扑组合叶结果。</li>
-      <li><code>phain</code> 仍与叶关系和角色位置对齐；原始观察先按叶判据判断，再组合结果。</li>
-    </ol>
-    <p>子节点顺序不承载语义，重复引用和环都必须拒绝。未来物理 Profile 必须另行定义规范排序、引用和深度预算；当前 END-P1 不编码复合结构。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>四结果组合矩阵</h2>
-    <div class="table-wrap"><table><thead><tr><th>操作</th><th>决定性结果</th><th>没有决定性结果时</th></tr></thead><tbody>
-      <tr><td><code>all_of</code></td><td>任一叶为 <code>unmet</code>，总体为 <code>unmet</code></td><td>有 <code>fault</code> 则 <code>fault</code>；否则有 <code>agno</code> 则 <code>agno</code>；全部为 <code>met</code> 才是 <code>met</code></td></tr>
-      <tr><td><code>any_of</code></td><td>任一叶为 <code>met</code>，总体为 <code>met</code></td><td>有 <code>fault</code> 则 <code>fault</code>；否则有 <code>agno</code> 则 <code>agno</code>；全部为 <code>unmet</code> 才是 <code>unmet</code></td></tr>
+    <h2>先判断一个终态还是多个目标</h2>
+    <p class="lead">组合节点只适用于不能独立实现、替换或接受的同一终态。能够独立失败的目标必须成为多个 Endem，再由 Synem 说明关系。</p>
+    <div class="table-wrap"><table><thead><tr><th>边界问题</th><th>一个复合 Endem</th><th>多个 Endem 与 Synem</th></tr></thead><tbody>
+      <tr><td>终态身份</td><td>所有叶共同描述同一个终态。</td><td>每一部分都有自己的终态。</td></tr>
+      <tr><td>目标方向</td><td>共享一个到达或持续方向。</td><td>方向或时间责任可以不同。</td></tr>
+      <tr><td>生命周期</td><td>只能共同实现、替换和验收。</td><td>可以独立版本化、替换或停止。</td></tr>
+      <tr><td>权威与失败</td><td>共享同一最终决定边界。</td><td>可以由不同主体独立接受或失败。</td></tr>
+      <tr><td>发布示例</td><td>接口可达且响应结构正确。</td><td>发布报告完成且服务已经部署。</td></tr>
     </tbody></table></div>
-    <p><code>fault</code> 只在没有决定性满足或反驳时优先于 <code>agno</code>。这个优先级不允许删除叶结果：一次故障即使没有控制总体结果，也必须留在求值记录中。</p>
+    <p>自然语言中的“并且”和“或者”只是线索，不是边界算法。判断必须落到终态身份、消费者、权威、生命周期和失败责任。</p>
   </section>
 
   <section class="content-wide">
-    <h2>短路只能减少工作不能改写事实</h2>
-    <p><code>all_of</code> 发现有效 <code>unmet</code>，或 <code>any_of</code> 发现有效 <code>met</code> 后，可以停止求值其余叶。结果必须保存决定依据 <code>decisive-basis</code>，以及由已求值叶、所用 Iknem、未求值叶清单和停止原因组成的 <code>evaluation-coverage</code>。</p>
-    <p>未求值叶不是 <code>agno</code>，因为它没有得到判断。不同求值顺序可以改变覆盖范围，但不能改变已经出现决定性结果后的总体分类；已遇到的故障也不能被短路记录抹掉。</p>
+    <h2>事态结构与判据拓扑必须一致</h2>
+    <p class="lead">第一阶段只允许用 <code>all_of</code> 和 <code>any_of</code> 组合判据。组合的是叶结果，不是原始数值、自然语言或可执行表达式。</p>
+    <div class="table-wrap"><table><thead><tr><th>结构</th><th>必须满足</th><th>确定拒绝</th></tr></thead><tbody>
+      <tr><td>事态根</td><td><code>skena</code> 显示有限、无环的关系叶和组合节点。</td><td>循环引用、重复叶或多个无共同终态的目标。</td></tr>
+      <tr><td>组合节点</td><td>只能使用 <code>all_of</code> 或 <code>any_of</code>，并至少有两个不同子节点。</td><td><code>not / if / iff / xor / xone</code> 或任意表达式。</td></tr>
+      <tr><td>叶判据</td><td><code>krin</code> 为每个关系叶给出独立判据。</td><td>缺叶、额外叶或用一个总分代替多个判断。</td></tr>
+      <tr><td>拓扑对齐</td><td><code>krin</code> 使用与 <code>skena</code> 相同的组合拓扑。</td><td>在判断阶段悄悄改变分组或操作符。</td></tr>
+      <tr><td>观察绑定</td><td><code>phain</code> 与关系叶、角色位置和实际 Iknem 对齐。</td><td>把外部状态、脚本成功或模型回答直接当作总体结果。</td></tr>
+    </tbody></table></div>
+    <p class="callout"><strong>术语边界：</strong><code>quantifier=all</code> 表示 ADR-0018 的“全部成员”，<code>combiner=all_of</code> 表示复合判据的“全部条件”。代码和日志必须带域名；口头说明先说中文，不得只说易混淆的 <code>all</code>。</p>
+    <p><code>any_of</code> 在人类界面先写“任一条件”。下划线机器标识不承担发行名称，也仍需真实使用者的朗读和听写验证。</p>
   </section>
 
   <section class="content-wide">
-    <h2>为什么不开放任意表达式</h2>
-    <ul>
-      <li><code>not</code> 不作为组合操作；否定仍由关系叶的显式极性表达，避免与 ADR-0017 重复。</li>
-      <li><code>if / iff</code> 不进入单个 Endem 的组合根。跨 Endem 的条件适用性由 <a href="adr-0021-synem-closure-and-activation.html">ADR-0021</a> 的会话激活关系表达，不能用 <code>agno</code> 冒充。</li>
-      <li><code>xor / xone</code> 暂不支持。它们需要额外的计数、故障与未知传播规则。</li>
-      <li>不得嵌入 shell、CEL、Rego、SPARQL、任意算术或模型代码。ADR-0019 的已登记测量程序只在单个叶内产生结果。</li>
-    </ul>
+    <h2>四种叶结果怎样组合</h2>
+    <div class="table-wrap"><table><thead><tr><th>组合方式</th><th>决定性结果</th><th>没有决定性结果时</th></tr></thead><tbody>
+      <tr><td>全部条件 <code>all_of</code></td><td>任一有效叶为 <code>unmet</code>，总体即为 <code>unmet</code>。</td><td>有 <code>fault</code> 则为 <code>fault</code>；否则有 <code>agno</code> 则为 <code>agno</code>；全部为 <code>met</code> 才是 <code>met</code>。</td></tr>
+      <tr><td>任一条件 <code>any_of</code></td><td>任一有效叶为 <code>met</code>，总体即为 <code>met</code>。</td><td>有 <code>fault</code> 则为 <code>fault</code>；否则有 <code>agno</code> 则为 <code>agno</code>；全部为 <code>unmet</code> 才是 <code>unmet</code>。</td></tr>
+    </tbody></table></div>
+    <p><code>fault</code> 只在没有决定性满足或反驳时优先于 <code>agno</code>。这条总体优先级不能删除叶结果，也不能把故障解释成条件不成立。</p>
+    <p><code>not</code> 继续由关系叶的显式极性承担。跨 Endem 的条件适用性由会话激活关系表达，不得用 <code>agno</code> 冒充。</p>
   </section>
 
   <section class="content-wide">
-    <h2>外部技术提供的对照</h2>
-    <ul>
-      <li><a href="https://www.w3.org/TR/shacl/">W3C SHACL Recommendation</a>定义 <code>and</code>、<code>or</code>、<code>not</code> 和 <code>xone</code> 约束，并把数据不符合与验证过程失败分开。Noemion 采用显式组合与失败分离，不采用 RDF Shape 或二值符合性作为制品语义。</li>
-      <li><a href="https://www.w3.org/TR/shacl12-core/">SHACL 1.2 Core</a>截至 2026 年仍是 Working Draft；其中 <code>intent</code> 与 <code>agentInstruction</code> 不得影响验证结果。这一发展方向支持把 AI 指令和形式判据分开，但不能作为稳定依赖。</li>
-      <li><a href="https://www.gnu.org/software/coreutils/manual/html_node/test-invocation.html">GNU Coreutils test</a>用不同退出状态区分假与错误，说明“条件不成立”和“检查失败”不应合并。</li>
-      <li><a href="https://www.gnu.org/software/bash/manual/html_node/Lists.html">GNU Bash Lists</a>展示 <code>&amp;&amp;</code> 与 <code>||</code> 的决定性短路。Noemion 只借鉴减少不必要工作的机制，不采用 shell 退出码、求值副作用或左结合语义。</li>
-      <li><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf">NIST AI 800-2 Initial Public Draft</a>要求先说明评估目的与可直接观察的测量标准。组合判据因此只能连接已经明确的叶判断，不能用总分掩盖叶定义。</li>
-    </ul>
+    <h2>短路与外部规则只能做什么</h2>
+    <p><code>all_of</code> 遇到有效 <code>unmet</code>，或 <code>any_of</code> 遇到有效 <code>met</code> 后，可以停止检查其余叶。记录必须保存决定依据 <code>decisive-basis</code> 和检查覆盖 <code>evaluation-coverage</code>。</p>
+    <p>检查覆盖包括已求值叶、实际 Iknem、未求值叶身份和停止原因。未求值叶不是 <code>agno</code>；它还没有得到判断。短路前已经出现的故障也必须保留。</p>
+    <div class="table-wrap"><table><thead><tr><th>外部资料</th><th>可采用的机制</th><th>Noemion 不继承</th></tr></thead><tbody>
+      <tr><td><a href="https://www.w3.org/TR/shacl/">W3C SHACL Recommendation</a></td><td>显式表达逻辑约束，并分开数据不符合与验证过程失败。</td><td>不采用 RDF Shape 或二值符合性作为制品语义。</td></tr>
+      <tr><td><a href="https://www.w3.org/TR/shacl12-core/">SHACL 1.2 Core</a> Working Draft</td><td>把 <code>intent</code> 与 <code>agentInstruction</code> 列为不影响验证的特征。</td><td>草案不是稳定依赖，也不让 AI 指令进入形式判据。</td></tr>
+      <tr><td><a href="https://www.gnu.org/software/coreutils/manual/html_node/test-invocation.html">GNU Coreutils test</a></td><td>退出状态 0、1、2 分别表达真、假和错误。</td><td>不采用 shell 表达式、进程退出码或二值结果域。</td></tr>
+      <tr><td><a href="https://www.gnu.org/software/bash/manual/html_node/Lists.html">GNU Bash Lists</a></td><td><code>&amp;&amp;</code> 与 <code>||</code> 展示决定性短路。</td><td>只借鉴减少不必要工作的机制，不采用副作用或左结合语义。</td></tr>
+      <tr><td><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf">NIST AI 800-2 Initial Public Draft</a></td><td>先说明评估目的与可直接观察的测量标准。</td><td>模型总分不能替代叶定义，也不能隐藏证据缺口。</td></tr>
+    </tbody></table></div>
   </section>
 
-  <section class="content-band">
-    <h2>规范影响与验证</h2>
-    <ul>
-      <li>END-CORE 新增 <code>END-CMP-001</code> 至 <code>END-CMP-004</code>。</li>
-      <li>END-SCEN 新增四个案例；威胁模型新增复合判断洗白。</li>
-      <li>十二个提案向量覆盖六个允许分类和六个确定拒绝；检查器只是规范一致性检查，不是求值器。</li>
-      <li>END-P1 不变；物理字段、规范字节和组件测试需要先建立新的 Profile。</li>
-    </ul>
-  </section>
-
-  <section class="content-band">
-    <h2>待定内容</h2>
-    <p>跨 Endem 条件激活已经由 ADR-0021 关闭抽象边界；排他析取、复合否定、跨叶变量绑定、时间和量化组合、规范化、物理字段、规范排序、深度预算与规范字节仍需真实消费者、威胁分析和新 Profile。</p>
+  <section class="content-wide">
+    <h2>当前还不能编码或执行什么</h2>
+    <p>现行十二个复合判据提案向量覆盖六个允许分类和六个确定拒绝，只检查 END-CMP 四条抽象规则。当前策略不增加 END-P1 字段。</p>
+    <p>这项决定不表示 Ktisor、Theor、Drasor、CLI 或求值器已经实现。物理字段、规范排序、引用、深度预算、排他析取、跨叶变量绑定和规范字节仍需新 Profile。</p>
+    <p>条件适用性、时间组合和量化组合还必须分别服从已有边界。外部规则语言或模型代码不能借复合节点取得执行权限。</p>
+    <div class="page-links">
+      <a class="page-link" href="../specifications/endem.html"><strong>查看目标与判据</strong><span>定位关系叶、观察和四值结果。</span></a>
+      <a class="page-link" href="../specifications/synem.html"><strong>查看多目标组合</strong><span>判断何时必须拆成多个 Endem。</span></a>
+      <a class="page-link" href="adr-0018-quantification-and-membership.html"><strong>查看成员量化</strong><span>区分全部成员与全部条件。</span></a>
+      <a class="page-link" href="adr-0019-measurement-and-thresholds.html"><strong>查看叶级测量</strong><span>先固定测量程序，再产生可组合结果。</span></a>
+    </div>
   </section>
   <div class="next-prev"><a href="adr-0019-measurement-and-thresholds.html">← ADR-0019</a><a href="adr-0021-synem-closure-and-activation.html">ADR-0021 →</a></div>
 </main>

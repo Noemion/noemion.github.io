@@ -740,6 +740,8 @@ def validate_public_boundary(errors):
             "第一阶段只允许用",
             "all_of",
             "any_of",
+            "quantifier=all",
+            "combiner=all_of",
             "decisive-basis",
             "evaluation-coverage",
             "未求值叶不是",
