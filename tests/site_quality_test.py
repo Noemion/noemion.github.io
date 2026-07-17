@@ -4208,7 +4208,6 @@ def validate_jekyll_sources():
             'data-theme-option="light"',
             'data-theme-option="dark"',
             'data-theme-option="system"',
-            "site-footer-directory-button",
             "'/pages/index.html'",
             "全部页面",
             "文档",
@@ -4240,6 +4239,22 @@ def validate_jekyll_sources():
                     "site footer must link reader-facing HTML pages instead of exposing "
                     f"{forbidden_footer_entry!r}"
                 )
+        browse_section = re.search(
+            r"<section>\s*<h3>浏览</h3>(.*?)</section>",
+            footer_text,
+            re.DOTALL,
+        )
+        if not browse_section or "'/pages/index.html'" not in browse_section.group(1) or "全部页面" not in browse_section.group(1):
+            errors.append("site footer must place the reader page directory in the Browse column")
+        footer_bottom = re.search(
+            r'<div class="site-footer-bottom">(.*)<div class="site-theme-picker"',
+            footer_text,
+            re.DOTALL,
+        )
+        if footer_bottom and ("'/pages/index.html'" in footer_bottom.group(1) or "全部页面" in footer_bottom.group(1)):
+            errors.append("site footer must not present the reader page directory as a bottom-bar action")
+        if "site-footer-directory-button" in footer_text:
+            errors.append("site footer must not restore a standalone page-directory button")
 
     page_directory_source = SOURCE_ROOT / "pages" / "index.md"
     page_directory_layout = SOURCE_ROOT / "_layouts" / "page-directory.html"
@@ -4278,6 +4293,8 @@ def validate_jekyll_sources():
                     f"{path.relative_to(SOURCE_ROOT)} missing reader directory contract: {token}"
                 )
     page_directory_style_text = (SOURCE_ROOT / "assets" / "style.css").read_text()
+    if "site-footer-directory-button" in page_directory_style_text:
+        errors.append("shared styles must not retain the removed standalone footer directory button")
     for token in (
         ".page-directory-controls{\n  display:block",
         ".page-directory-table",

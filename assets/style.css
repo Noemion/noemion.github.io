@@ -261,13 +261,6 @@ details p{padding-bottom:11px}
 .site-footer-links{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .site-footer-links a{display:inline-flex;align-items:center;min-height:40px}
 .site-footer-links a:not(:last-child)::after{content:"·";margin-left:10px;color:var(--rule-strong);pointer-events:none}
-.site-footer-links .site-footer-directory-button,.site-footer-links .site-footer-directory-button:visited{
-  justify-content:center;gap:8px;min-width:118px;padding:0 14px;color:var(--text);background:var(--paper-raised);
-  border-radius:999px;box-shadow:0 0 0 1px rgba(0,0,0,.16),0 1px 2px rgba(0,0,0,.06)
-}
-:root[data-resolved-theme="dark"] .site-footer-links .site-footer-directory-button{
-  box-shadow:0 0 0 1px rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.28)
-}
 .site-theme-picker{position:relative;flex:0 0 auto}
 .site-theme-trigger{
   position:relative;display:flex;align-items:center;justify-content:center;gap:8px;min-width:142px;height:40px;padding:0 14px 0 16px;
@@ -320,7 +313,6 @@ details p{padding-bottom:11px}
   .site-footer-bottom{padding:18px var(--site-content-inline) 20px}
   .site-footer-links{gap:6px 9px}
   .site-footer-links a:not(:last-child)::after{margin-left:9px}
-  .site-footer-links .site-footer-directory-button{flex-basis:100%;min-height:44px;margin-top:4px}
   .site-theme-picker{width:100%}
   .site-theme-trigger{width:100%;min-height:44px}
   .site-theme-menu{width:100%;bottom:calc(100% + 10px)}
@@ -360,7 +352,6 @@ details p{padding-bottom:11px}
 .page-directory-empty{margin:20px 0 0;padding:18px;color:var(--muted);background:var(--paper-subtle);border-radius:var(--radius-control)}
 
 @media(hover:hover) and (pointer:fine){
-  .site-footer-links .site-footer-directory-button:hover{color:var(--heading);background:var(--paper-subtle);box-shadow:0 0 0 1px var(--portal-coral),0 5px 14px color-mix(in srgb,var(--text) 7%,transparent)}
   .page-directory-table tbody tr:hover{background:var(--paper-subtle)}
   .page-directory-table tbody tr:hover .page-directory-title{color:var(--portal-coral)}
 }
