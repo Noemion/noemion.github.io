@@ -14,12 +14,8 @@ optional_front_matter:
   enabled: false
 
 exclude:
-  - design-system
   - experiments/
   - README.md
-  - content-quality-audit.md
-  - homepage-design.md
-  - sitewide-design-system.md
   - tests
   - vectors/
   - Gemfile

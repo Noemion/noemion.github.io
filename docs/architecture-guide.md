@@ -6,7 +6,7 @@ footer_text: "Noemion · 架构设计指南"
 permalink: "/docs/architecture-guide.html"
 manual_id: "docs"
 manual_group: "guides"
-manual_order: 4
+manual_order: 2
 nav_title: "架构设计指南"
 page_heading: "Noemion 架构设计指南"
 page_lead: "用一次依赖升级定位目标、制品、会话、外部动作、观察和决定；每一步只承担自己能够证明的主张。"

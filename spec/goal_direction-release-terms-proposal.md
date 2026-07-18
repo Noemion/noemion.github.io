@@ -77,7 +77,7 @@ ADR-0037 已修改 END-DIRECTION-001 与 END-P2，且没有增加别名。人类
 
 ## 人类验证方案
 
-测试遵守[术语与读音验证指南](../docs/terminology-and-pronunciation.html)，但当前验证只比较 `reach / maintain` 与完整现行词表，不把 `kine / mene` 当作兼容选项。
+测试遵守 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html)，但当前验证只比较 `reach / maintain` 与完整现行词表，不把 `kine / mene` 当作兼容选项。
 
 ### 发现阶段
 

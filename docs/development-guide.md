@@ -6,7 +6,7 @@ footer_text: "Noemion · 开发指南"
 permalink: "/docs/development-guide.html"
 manual_id: "docs"
 manual_group: "guides"
-manual_order: 5
+manual_order: 3
 nav_title: "开发指南"
 page_heading: "Noemion 开发指南"
 page_lead: "把一项修改写成可被反例检验的主张，再依次固定权威依据、失败责任、验证材料和声明上限。"
@@ -43,7 +43,7 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 | 6 | 只修改承担该责任的资料 | 规范、ADR、Profile、威胁、场景或公开解释中的必要变化 |
 | 7 | 同步状态并写清声明上限 | 证据支持的最窄结论；未执行不能写成通过 |
 
-被取代的入口在同一修改中删除，不保留旧别名、重定向或兼容垫片。案例只有进入唯一条款、登记验证方式并形成正反向量后，才可能支持符合性要求；示例数量或页面测试通过不产生组件证据。
+被取代的入口在同一修改中删除，不保留旧别名、重定向或兼容垫片。案例只有进入唯一条款、登记验证方式并形成正反向量后，才可能支持符合性要求；示例数量或资料关系一致不产生组件证据。
 
 ## 按权威顺序修改
 
@@ -58,11 +58,19 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 
 格式、语义、执行或信任边界变化需要 ADR；文字澄清若不改变义务，只修改解释和对应质量契约。无法判断改动是否改变规范时，先给出会区分两种解释的反例，再决定是否需要 ADR。
 
+## 使用现行名称
+
+项目当前只保留两个自造名称：**Noemion** 和 **Endem**。候选读法分别是 `No-e-mi-on`（/noʊˈiː.mi.ən/，可按 `noh-EE-mee-uhn` 拼读）与 `En-dem`（/ˈɛn.dɛm/，可按 `EN-dem` 拼读）。两种候选读法都覆盖书写中的每个字母，没有静音字母；独立使用者的首次朗读与听辨结果尚未形成，因此这些提示不是已经确认的正式读音。
+
+代码、Issue 和技术讨论使用现行直白职责名：Endem closure、session contract、evidence entry、deterministic producer、independent inspector、bounded runner，以及 `form / lint / compose / inspect / run`。字段使用 `source_expression / meaning_projection / situation / goal_direction / satisfaction_criteria / unresolved_meaning`，观察使用 `structured_observation`。普通英语工程词沿用通常拼写，不为了消除英语固有的静音字母另造拼法。
+
+读音提示只帮助人类交流，不是命令别名、机器标识或语义权威。需要精确引用时，直接粘贴书面名称或代码标识；不要根据口述近似音自动选择命令、字段或授权对象。现行命名决定与被替换名称见 [ADR-0037](../architecture/adr-0037-terminology-simplification.html)，发行前的人类证据要求见 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html)。
+
 ## 按变更类型选择证据
 
 | 要支持的主张 | 当前最低证据 | 结论上限 |
 | --- | --- | --- |
-| 页面更清楚且可用 | 源码检查、构建产物、真实浏览器的相关页面与多视口交互 | 指定页面和视口通过；不说明规范或组件正确 |
+| 开发者解释准确且可用 | 权威条款、支持案例、反例和明确的结论上限 | 解释覆盖已登记问题；不说明规范或组件正确 |
 | 规范关系一致 | 条款、登记、威胁、案例和正反向量对应检查 | 已登记资料一致；不说明实现存在 |
 | 格式或 Profile 可实现 | 封闭字段、规范字节、拒绝向量、资源预算和独立读取计划 | 草案可进入未来实现评审；不说明稳定 ABI |
 | 外部协议映射成立 | 固定协议版本、来源状态、映射损失、重试与授权反例 | 设计覆盖已登记案例；不说明跨实现互操作 |

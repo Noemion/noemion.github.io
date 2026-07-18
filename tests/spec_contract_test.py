@@ -568,9 +568,7 @@ def validate_public_boundary(errors):
     for exact_exclusion in ("  - experiments/", "  - vectors/"):
         if exact_exclusion not in config_text:
             errors.append(f"_config.yml: missing exact exclusion {exact_exclusion.strip()!r}")
-    if "  - spec/" in config_text or re.search(
-        r"^\s*-\s+spec/?\s*$", config_text, re.MULTILINE
-    ):
+    if re.search(r"^\s*-\s+spec/?\s*$", config_text, re.MULTILINE):
         errors.append(
             "_config.yml: spec Markdown must be rendered into public HTML, not excluded"
         )
@@ -924,7 +922,8 @@ def validate_public_boundary(errors):
         "architecture/adr-0034-pronunciation-and-oral-distinction.html": (
             "读得出，不等于听得清、写得回",
             "当前审查",
-            "四项独立审查",
+            "五项独立审查",
+            "拼写—声音完整",
             "ISO 704:2022",
             "W3C Pronunciation Lexicon Specification 1.0",
             "GNU Coding Standards：Names",
@@ -978,26 +977,6 @@ def validate_public_boundary(errors):
             "删除、重写、保留和外置不是一回事",
             "裁剪只能移除一类输入和披露风险",
             "没有可执行的裁剪命令",
-        ),
-        "docs/terminology-and-pronunciation.md": (
-            "ISO 704:2022",
-            "ISO 9241-11:2018",
-            "RFC 5646 / BCP 47",
-            "W3C Pronunciation Lexicon Specification 1.0",
-            "ITU-T P.800",
-            "ITU-T P.808",
-            "NISTIR 7778",
-            "NIST Privacy Framework 1.0",
-            "NIST Research Data Framework 2.0",
-            "NIST SP 800-88 Rev. 2",
-            "招募前先固定研究数据边界",
-            "删除与保留记录",
-            "至少 24 名",
-            "至少收集 60 个",
-            "rule of three",
-            "误选成另一个现行名称",
-            "不能进入人类样本数",
-            "尚未执行上述人类研究",
         ),
         "specifications/endem-closure.html": (
             "CLOSURE-CORE 0.1.0-draft",

@@ -6,8 +6,21 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "spec" / "registry.json"
-AUDIT_PATH = ROOT / "spec" / "terminology-audit.json"
 CORPUS_PATH = ROOT / "spec" / "keyword-corpus.json"
+PUBLIC_GUIDE_PATH = ROOT / "docs" / "development-guide.md"
+
+COINED_PRONUNCIATIONS = {
+    "Noemion": {
+        "segments": ("No", "e", "mi", "on"),
+        "ipa": "/noʊˈiː.mi.ən/",
+        "plain_hint": "noh-EE-mee-uhn",
+    },
+    "Endem": {
+        "segments": ("En", "dem"),
+        "ipa": "/ˈɛn.dɛm/",
+        "plain_hint": "EN-dem",
+    },
+}
 
 MACHINE_IDENTIFIER = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")
 RETIRED_TERM = re.compile(
@@ -23,9 +36,6 @@ HISTORICAL_OR_RESEARCH = (
     re.compile(r"^architecture/adr-[0-9]{4}-.+\.html$"),
     re.compile(r"^architecture/adr-0037-terminology-simplification\.md$"),
     re.compile(r"^spec/.+-proposal\.md$"),
-    re.compile(r"^design-system/name-audit\.md$"),
-    re.compile(r"^content-quality-audit\.md$"),
-    re.compile(r"^spec/terminology-audit\.json$"),
 )
 
 CURRENT_ROUTES = {
@@ -69,7 +79,6 @@ def is_historical_or_research(relative):
 def main():
     errors = []
     registry = load(REGISTRY_PATH, errors)
-    audit = load(AUDIT_PATH, errors)
     corpus = load(CORPUS_PATH, errors)
 
     if registry.get("updated") != "2026-07-18":
@@ -92,14 +101,35 @@ def main():
     if len(folded) != len(set(folded)):
         errors.append("spec/registry.json: terminology entries must be unique case-insensitively")
 
-    if audit.get("registry") != "spec/registry.json" or audit.get("keyword_corpus") != "spec/keyword-corpus.json":
-        errors.append("spec/terminology-audit.json: audit must bind the registry and keyword corpus")
-    proper_names = audit.get("retained_proper_names", [])
-    if {item.get("term") for item in proper_names} != {"Noemion", "Endem"}:
-        errors.append("spec/terminology-audit.json: Noemion and Endem must be the only retained coined proper names")
-    for item in proper_names:
-        if item.get("status") != "human-pronunciation-validation-required":
-            errors.append(f"{item.get('term')}: retained coined name must require human pronunciation validation")
+    if not set(COINED_PRONUNCIATIONS).issubset(names):
+        errors.append("spec/registry.json: Noemion and Endem must remain registered")
+    for term, pronunciation in COINED_PRONUNCIATIONS.items():
+        if "".join(pronunciation["segments"]).casefold() != term.casefold():
+            errors.append(f"{term}: candidate pronunciation must preserve every written letter")
+        for field in ("ipa", "plain_hint"):
+            if not pronunciation[field]:
+                errors.append(f"{term}: candidate pronunciation missing {field}")
+
+    for removed_source in (
+        ROOT / "docs" / "terminology-audit.md",
+        ROOT / "docs" / "terminology-and-pronunciation.md",
+    ):
+        if removed_source.exists():
+            errors.append(f"{removed_source.relative_to(ROOT)}: maintenance material must not generate a public page")
+
+    public_guide_text = PUBLIC_GUIDE_PATH.read_text()
+    for token in (
+        "只保留两个自造名称",
+        "`No-e-mi-on`",
+        "`En-dem`",
+        "/noʊˈiː.mi.ən/",
+        "/ˈɛn.dɛm/",
+        "每个字母，没有静音字母",
+        "普通英语工程词沿用通常拼写",
+        "首次朗读与听辨结果尚未形成",
+    ):
+        if token not in public_guide_text:
+            errors.append(f"docs/development-guide.md: missing developer naming boundary {token!r}")
 
     sources = corpus.get("sources")
     expected_languages = {"C", "C++", "Rust", "Go", "Python", "Java", "ECMAScript", "Swift", "Kotlin", "C#", "PostgreSQL SQL"}
@@ -117,33 +147,15 @@ def main():
         if required_collision not in keyword_set:
             errors.append(f"spec/keyword-corpus.json: missing demonstrated collision {required_collision}")
 
-    machine_terms = audit.get("current_machine_identifiers")
-    if not isinstance(machine_terms, list) or not machine_terms:
-        errors.append("spec/terminology-audit.json: current_machine_identifiers must be a non-empty list")
-        machine_terms = []
-    normalized_registry = {normalize(name) for name in names}
-    for identifier in machine_terms:
-        if not isinstance(identifier, str) or MACHINE_IDENTIFIER.fullmatch(identifier) is None:
-            errors.append(f"invalid current machine identifier: {identifier!r}")
-            continue
-        if identifier.casefold() in keyword_set:
-            errors.append(f"current machine identifier collides with the versioned keyword corpus: {identifier}")
-        if identifier not in normalized_registry:
-            errors.append(f"current machine identifier is not represented by spec/registry.json: {identifier}")
-    retained = {normalize(item["term"]) for item in proper_names if isinstance(item.get("term"), str)}
+    normalized_registry = [normalize(name) for name in names]
+    if len(normalized_registry) != len(set(normalized_registry)):
+        errors.append("spec/registry.json: normalized machine forms must remain unique")
     for name in names:
         identifier = normalize(name)
-        if identifier and identifier not in retained and identifier in keyword_set:
+        if not identifier or MACHINE_IDENTIFIER.fullmatch(identifier) is None:
+            errors.append(f"registered term has no valid normalized machine form: {name}")
+        elif identifier in keyword_set:
             errors.append(f"registered term collides with the versioned keyword corpus after normalization: {name}")
-
-    migrations = audit.get("migrations")
-    if not isinstance(migrations, list) or len(migrations) < 20:
-        errors.append("spec/terminology-audit.json: project-wide migration evidence is incomplete")
-    else:
-        migrated_from = " ".join(item.get("from", "") for item in migrations)
-        for required in ("Synem", "Dromen", "Iknem", "Ktisor", "Theor", "Drasor", "rhem", "semion", "skena", "telis", "krin", "apor", "phain"):
-            if required not in migrated_from:
-                errors.append(f"spec/terminology-audit.json: missing migration for {required}")
 
     skipped = {".git", "_site", "vendor", ".bundle"}
     for path in ROOT.rglob("*"):
@@ -179,8 +191,9 @@ def main():
         print("\n".join(errors))
         return 1
     print(
-        f"PASS: audited {len(names)} registered terms and {len(machine_terms)} current machine identifiers "
-        f"against {len(keyword_set)} versioned keywords; retained coined names still require human validation"
+        f"PASS: audited {len(names)} registered terms against {len(keyword_set)} versioned keywords; "
+        "2 retained coined names map every written letter into their candidate pronunciations "
+        "and still require human validation"
     )
     return 0
 

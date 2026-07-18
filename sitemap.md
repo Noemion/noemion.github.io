@@ -131,8 +131,6 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 - [Documentation center](https://noemion.github.io/docs/index.html) — task-oriented reading paths
 - [Getting started](https://noemion.github.io/docs/getting-started.html) — one dependency-upgrade case separates goals, authorization, protocol states, evidence, and final decisions
-- [Terminology and pronunciation validation](https://noemion.github.io/docs/terminology-and-pronunciation.html) — human first-read, listen-back, responsibility matching, statistical boundary, and release-name stop rules
-- [Terminology audit](https://noemion.github.io/docs/terminology-audit.html) — current object, role, action, field and enum names, retired terms, versioned programming-language keyword coverage, and remaining human-validation limits
 - [Architecture guide](https://noemion.github.io/docs/architecture-guide.html) — one Agent task mapped to artifact, session, action, evidence, and decision boundaries
 - [Development guide](https://noemion.github.io/docs/development-guide.html) — a falsifiable change claim carried through authority, failure ownership, evidence, and claim limits
 
@@ -159,7 +157,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Availability and authority
 
-- Public technical documents use Markdown as their only editable body source and Jekyll generates the registered HTML routes above. Versioned implementation obligations remain in `spec/*.md`; `spec/registry.json` and `vectors/` provide machine-readable maturity and test traceability.
+- Public technical documents use Markdown as their only editable body source. Versioned implementation obligations remain in `spec/*.md`; `spec/registry.json` and `vectors/` provide machine-readable specification and example data.
 - Project status, proposed designs, normative specifications, and verified evidence remain distinct. Follow each page's maturity and authority labels.
 - END-CORE 0.1.0-draft and its first semantic vectors are public engineering drafts, not a stable specification or wire-format release.
 - No public executable release is currently available. The downloads page is the authoritative source for release availability.

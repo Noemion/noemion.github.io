@@ -9,7 +9,7 @@ Noemion 目前处于研究、规范与验证方案设计阶段，尚未发布 de
 - 想了解项目：访问[网站首页](https://noemion.github.io/)。
 - 读者想查找公开页面：使用[全部页面](https://noemion.github.io/pages/index.html) HTML 目录。
 - 维护者想核对正式路由：查看 [`sitemap.md`](sitemap.md)。这是正式路由的唯一清单。
-- 想参与内容、研究或规范工作：先阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
+- 想参与内容、研究或规范工作：从[开发与贡献](https://noemion.github.io/development/)选择对应入口。
 - 想了解许可证：查看 [Apache License 2.0](LICENSE)。Noemion 名称和标识不随源码许可证一并授权。
 
 ## 仓库内容
@@ -19,7 +19,6 @@ Noemion 目前处于研究、规范与验证方案设计阶段，尚未发布 de
 - `endem/`：Endem 应用介绍和使用手册。
 - `spec/`：版本化的规范条款与设计提案；Markdown 是唯一正文源，Jekyll 自动生成同路径 HTML 正式页面。
 - `vectors/`：与规范条款对应的测试资料和实验性字节样例。
-- `design-system/`：页面、文字、命名、视觉和交互的设计规则。
 - `assets/`、`_layouts/`、`_includes/`、`_data/`：全站共享的样式、行为、页面外壳和导航数据。
 - `tests/`：检查规范登记、测试资料、页面源码和构建结果。
 
@@ -33,7 +32,7 @@ Noemion 目前处于研究、规范与验证方案设计阶段，尚未发布 de
 - 指南和 Endem 手册编辑对应的 Markdown 文件，不编辑生成后的 HTML。
 - 页面、路径或名称变化时，同步 `sitemap.md`、相关导航、入口和交叉链接。
 - 页面样式与交互使用共享文件，不在单个页面中复制全站外壳、导航或样式。
-- 修改页面设计前，从 [`design-system/README.md`](design-system/README.md) 找到对应规则。
+- 页面设计通过共享样式、布局、导航数据和自动检查保持一致。
 
 公开内容只陈述项目的真实现状、能力、限制和计划。提案、实验、测试通过或未来目标不能写成已经发布的产品能力。
 
