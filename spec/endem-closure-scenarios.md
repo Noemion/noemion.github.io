@@ -1,22 +1,22 @@
 ---
 layout: spec
-title: "Endem closure Natural-Language Design Scenarios · Noemion"
+title: "closure Natural-Language Design Scenarios · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/endem-closure-scenarios.html"
 summary: "用报告发布、服务部署和传递依赖案例，检查成员、完整集合、权限和运行期激活是否保持分开。"
 document_status: "非规范设计场景"
 ---
-# Endem closure Natural-Language Design Scenarios
+# closure Natural-Language Design Scenarios
 
 - 文档 ID：`CLOSURE-SCEN`
 - 版本：`0.1.0-draft`
-- 状态：非规范设计审查语料
-- 边界：不是清单语法、解析器、bounded runner、求值器或组件实现
+- 状态：非规范设计语料
+- 边界：不是清单语法、解析器、runner、求值器或组件实现
 
 ### CLOSURE-SCN-001 — 两个独立目标形成闭包
 
-报告发布与服务部署能独立版本化、接受和失败，因此分别形成 Endem。Endem closure 显式连接二者，而不是把两个根塞进一个 Endem。
+报告发布与服务部署能独立版本化、接受和失败，因此分别形成 Endem。closure 显式连接二者，而不是把两个根塞进一个 Endem。
 
 ### CLOSURE-SCN-002 — 传递依赖不能遗漏
 
@@ -40,7 +40,7 @@ document_status: "非规范设计场景"
 
 ### CLOSURE-SCN-007 — 成员完成不等于闭包接受
 
-报告会话 completed、报告目标 met，都不能使部署目标或整个 Endem closure 自动 accepted。每个成员保留自己的判断与决定记录。
+报告会话 completed、报告目标 met，都不能使部署目标或整个 closure 自动 accepted。每个成员保留自己的判断与决定记录。
 
 ### CLOSURE-SCN-008 — 审批决定会话期激活
 

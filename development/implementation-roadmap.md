@@ -74,9 +74,9 @@ Section、Segment、符号、重定位、裁剪和调试分离的逐项适用性
 | --- | --- | --- |
 | 协议版本与状态：[MCP 2025-11-25](https://modelcontextprotocol.io/docs/learn/versioning)仍是官方 Current 版本；[2026-07-28 候选版](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/)包含破坏性变化 | 固定版本、能力与扩展，验证协商失败、降级、缓存、取消和未知状态；候选版在正式发布前只作为迁移风险 | 工具返回、远端任务终态或协议成功不能产生本地 `met`、`accepted` 或权限扩大 |
 | 身份与授权：[NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)分别推进协议、身份基础设施和安全评价 | 绑定实际行动者、被代表主体、对象、动作、目的、受众、截止点和具名政策，并验证逐级收窄的委托 | Agent Card、登录、scope、签名或人工确认界面不能自行成为语义授权 |
-| 任务与副作用：[A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/)分别定义 Task、Message、Artifact、取消、绑定和版本 | 保存请求、实际调用、已发生或未知的外部效果；只有具备幂等或去重证据时才允许自动重试 | 远端 Task 状态不能替代 Endem 身份、evidence entry 证据、session contract 会话上限或本地结果域 |
+| 任务与副作用：[A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/)分别定义 Task、Message、Artifact、取消、绑定和版本 | 保存请求、实际调用、已发生或未知的外部效果；只有具备幂等或去重证据时才允许自动重试 | 远端 Task 状态不能替代 Endem 身份、evidence 证据、contract 会话上限或本地结果域 |
 | 模型与数据：规划、记忆、检索、训练和托管执行属于不同数据路径 | 记录实际模型输入、预处理、模型与版本、保留和删除条件、无模型基线、评测总体与不确定性 | 模型流畅度、基准得分、开放权重或可调用 API 不能证明目标忠实、服务控制或安全净增益 |
-| 遥测：[OpenTelemetry 语义约定 1.43.0](https://opentelemetry.io/docs/specs/semconv/)已把 GenAI 约定移至独立仓库 | 固定仓库提交与 Schema URL，限定最小字段、披露预算和接收方，再评估默认脱敏的单向导出 | Schema URL 与遥测记录不进入 Endem 编码、evidence entry 身份、授权决定或最终接受 |
+| 遥测：[OpenTelemetry 语义约定 1.43.0](https://opentelemetry.io/docs/specs/semconv/)已把 GenAI 约定移至独立仓库 | 固定仓库提交与 Schema URL，限定最小字段、披露预算和接收方，再评估默认脱敏的单向导出 | Schema URL 与遥测记录不进入 Endem 编码、evidence 身份、授权决定或最终接受 |
 
 **当前模型策略：**设备内阶段只验证纯文本小模型从数据到 CPU 量化推理的完整路径；外部算力阶段才比较全参数微调、长上下文强化和教师蒸馏。详见[模型训练与更新边界研究](https://noemion.github.io/spec/model-training-and-update-boundaries-proposal.html)。只提供封闭 API 且不能导出完整派生权重的服务，不能产生计划中的设备内发行候选。
 

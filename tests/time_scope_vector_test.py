@@ -171,7 +171,7 @@ def main():
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("maintain vectors must pin END-CORE 0.1.0-draft")
     description = document.get("description", "")
-    if "not a clock, monitor, bounded runner, or evaluator implementation" not in description:
+    if "not a clock, monitor, runner, or evaluator implementation" not in description:
         errors.append("maintain vectors must state their non-implementation boundary")
 
     cases = document.get("cases")

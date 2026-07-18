@@ -1,7 +1,7 @@
 {
   "vector_format": "end-core.time-scope-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
-  "description": "Normative maintain proposal vectors for ADR-0016; not a clock, monitor, bounded runner, or evaluator implementation",
+  "description": "Normative maintain proposal vectors for ADR-0016; not a clock, monitor, runner, or evaluator implementation",
   "cases": [
     {
       "id": "TIME-VALID-UTC-WINDOW-STRICT-MET-001",

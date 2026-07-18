@@ -1,8 +1,8 @@
 ---
 layout: content
-title: session contract 会话契约 · Noemion
+title: contract 会话契约 · Noemion
 page_role: content
-footer_text: Noemion · session contract 会话契约
+footer_text: Noemion · contract 会话契约
 permalink: "/specifications/session-contract.html"
 summary: 说明一个精确目标怎样在不携带永久权限的前提下，进入只有本次尝试有效的受控会话。
 breadcrumbs:
@@ -10,7 +10,7 @@ breadcrumbs:
   url: "../index.html"
 - label: 规范参考指南
   url: index.html
-page_heading: 一次会话的只读契约 · session contract
+page_heading: 一次会话的只读契约 · contract
 page_lead: 理解精确目标制品怎样在不携带永久权限的前提下进入一次受控会话。
 badges:
 - SESSION-CORE 0.1.0-draft
@@ -18,56 +18,56 @@ badges:
 - 不是持久文件
 - 尚无运行时
 previous_url: endem-closure.html
-previous_label: Endem closure
+previous_label: closure
 next_url: evidence-entry.html
-next_label: evidence entry
+next_label: evidence
 ---
 
 ## 先判断何时需要一次会话契约
 
-一次会话的只读执行契约（设计阶段名称 session contract）把精确目标内容、适用外部陈述、当前政策、环境、能力、预算和观察责任固定在同一次运行边界内。
+一次会话的只读执行契约（设计阶段名称 contract）把精确目标内容、适用外部陈述、当前政策、环境、能力、预算和观察责任固定在同一次运行边界内。
 
-例如，一个 Endem closure 同时要求发布依赖制品并观察服务健康。精确闭包固定目标，却不授予部署权限，也不选择区域、适配器、模型后端或健康窗口。bounded runner 重新核对这个精确制品及当前条件后，才能建立 session contract。
+例如，一个 closure 同时要求发布依赖制品并观察服务健康。精确闭包固定目标，却不授予部署权限，也不选择区域、适配器、模型后端或健康窗口。runner 重新核对这个精确制品及当前条件后，才能建立 contract。
 
-session contract 不是文件、进程、模型上下文、凭据包、可恢复会话或最终结果。Endem 与 Endem closure 可以持久保存；session contract 只约束一次授权上下文中的尝试。
+contract 不是文件、进程、模型上下文、凭据包、可恢复会话或最终结果。Endem 与 closure 可以持久保存；contract 只约束一次授权上下文中的尝试。
 
 ## 按五步建立本次边界
 
-1. 精确 Endem 或 Endem closure
+1. 精确 Endem 或 closure
 2. 外部陈述与验证记录
 3. 政策、环境与能力求交
-4. 建立 session contract
+4. 建立 contract
 5. run 运行
-6. evidence entry、判断与决定
+6. evidence、判断与决定
 
 | 建立步骤与条款 | 开发者必须固定 | 信息不足或变化时怎样停止 |
 | --- | --- | --- |
-| 1. 主体与外部关系<br>`SESSION-SUB-001` | 精确 Endem 或 Endem closure 的身份、Profile、闭包，以及适用陈述、签名者、验证政策、截止点和撤销状态 | 路径、显示名、远端 `latest`、缓存成功或 Task ID 不能替代主体；缺失、含糊、失效或已撤销时拒绝建立 |
+| 1. 主体与外部关系<br>`SESSION-SUB-001` | 精确 Endem 或 closure 的身份、Profile、闭包，以及适用陈述、签名者、验证政策、截止点和撤销状态 | 路径、显示名、远端 `latest`、缓存成功或 Task ID 不能替代主体；缺失、含糊、失效或已撤销时拒绝建立 |
 | 2. 政策与时间<br>`SESSION-POL-001` | 政策集合、具名决定与升级权威、适用 consent、准入截止点和到期时间 | 默认政策、未解决冲突、未具名权威或模型建议都不能补齐授权 |
-| 3. 环境、能力与秘密<br>`SESSION-ENV-001` · `SESSION-CAP-001` · `SESSION-SEC-001` | 平台、隔离、协议、适配器、时钟和后端的声明与观察；动作、资源、受众、范围和期限的最小能力交集 | 能力只能收窄，不能取并集、环境默认值或周边权限；session contract 不保存令牌、私钥、cookie、文件描述符、socket 或实时句柄 |
-| 4. 预算与闭包激活<br>`SESSION-BUD-001` · `SESSION-ACT-001` | 时间、调用、重试、令牌、字节、进程和成本的有限且带单位的预算，以及固定 Endem closure 成员的激活规则 | 子任务、重试和适配器不得逃逸总预算；运行中不得发现新成员、扩大权限或把激活状态改写为满足结果 |
-| 5. 观察与生命周期<br>`SESSION-OBS-001` · `SESSION-IMM-001` · `SESSION-LIF-001` | 每项 `satisfaction_criteria` 的观察者、方法、时间、evidence entry 类别、披露、评估和决定责任，以及失效与销毁规则 | 建立后只读；实质漂移使旧契约失效。它不能序列化、转移、恢复或复活，扩大授权必须开始新会话 |
+| 3. 环境、能力与秘密<br>`SESSION-ENV-001` · `SESSION-CAP-001` · `SESSION-SEC-001` | 平台、隔离、协议、适配器、时钟和后端的声明与观察；动作、资源、受众、范围和期限的最小能力交集 | 能力只能收窄，不能取并集、环境默认值或周边权限；contract 不保存令牌、私钥、cookie、文件描述符、socket 或实时句柄 |
+| 4. 预算与闭包激活<br>`SESSION-BUD-001` · `SESSION-ACT-001` | 时间、调用、重试、令牌、字节、进程和成本的有限且带单位的预算，以及固定 closure 成员的激活规则 | 子任务、重试和适配器不得逃逸总预算；运行中不得发现新成员、扩大权限或把激活状态改写为满足结果 |
+| 5. 观察与生命周期<br>`SESSION-OBS-001` · `SESSION-IMM-001` · `SESSION-LIF-001` | 每项 `satisfaction_criteria` 的观察者、方法、时间、evidence 类别、披露、评估和决定责任，以及失效与销毁规则 | 建立后只读；实质漂移使旧契约失效。它不能序列化、转移、恢复或复活，扩大授权必须开始新会话 |
 
 **主体条件已经拆开：**内容只使用 `formed / resolved` 状态。会话建立时另行核对外部陈述、验证政策、截止点、撤销状态与依赖方适用性；签名存在或单个布尔值都不能替代这些关系。[RFC 9334 RATS](https://www.rfc-editor.org/rfc/rfc9334.html)也把 Evidence、Attestation Results 和依赖方决定分开。完整顺序见[内容形成与外部关系的两轴模型](../architecture/endem-lifecycle.html)。
 
 ## 分清契约内容与外部状态
 
-| 可以进入 session contract | 必须留在别处 | 原因 |
+| 可以进入 contract | 必须留在别处 | 原因 |
 | --- | --- | --- |
 | 精确内容与闭包身份，以及适用外部陈述与验证记录的绑定 | 可修改目标副本、目录名、隐式记忆或“当前最新”对象 | 契约固定主体，不保存可变目标 |
 | 政策、权威、环境、协议、适配器、时钟和后端的精确绑定 | 远端自述、动态工具清单或未经观察的环境属性 | 声明的标识和实际观察必须分开 |
 | 非秘密能力描述、资源或受众、范围、约束和上限 | Bearer token、私钥、cookie、socket、文件描述符和实时句柄 | 实时材料由独立最小能力域持有，轮换也不能扩大当前授权 |
-| 预算、取消规则、观察责任、披露政策和失效条件 | 运行观察、工具返回、外部 Task、evidence entry、满足结果、最终决定和恢复状态 | 契约约束一次尝试，不预写事实、证据或决定 |
+| 预算、取消规则、观察责任、披露政策和失效条件 | 运行观察、工具返回、外部 Task、evidence、满足结果、最终决定和恢复状态 | 契约约束一次尝试，不预写事实、证据或决定 |
 
 ## 漂移、恢复与 Agent 协议怎样处理
 
-模型版本、适配器、协议、政策、能力、决定权威或隔离配置发生实质变化时，bounded runner 必须使旧 session contract 失效，并按既定规则中断或失败。短期凭据只有在资源、受众、范围和授权不变时才能在独立能力域内轮换。
+模型版本、适配器、协议、政策、能力、决定权威或隔离配置发生实质变化时，runner 必须使旧 contract 失效，并按既定规则中断或失败。短期凭据只有在资源、受众、范围和授权不变时才能在独立能力域内轮换。
 
-历史、检查点、外部任务句柄和脱敏报告可以成为新输入，但不能重新创建 session contract、恢复旧秘密、已消费批准或一次性权限。恢复必须重新核对主体、外部陈述、政策、环境、能力和预算。
+历史、检查点、外部任务句柄和脱敏报告可以成为新输入，但不能重新创建 contract、恢复旧秘密、已消费批准或一次性权限。恢复必须重新核对主体、外部陈述、政策、环境、能力和预算。
 
 | 相邻机制 | 它实际提供什么 | 进入 Noemion 时的边界 |
 | --- | --- | --- |
-| [MCP 2026-07-28 候选版](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/) | 协议核心改为无状态，应用仍可用显式句柄保持状态；Tasks 移入扩展并改变生命周期 | 版本、扩展和句柄仍是外部绑定，不能替代 session contract 或授权；候选版也不能冒充正式基线 |
+| [MCP 2026-07-28 候选版](https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/) | 协议核心改为无状态，应用仍可用显式句柄保持状态；Tasks 移入扩展并改变生命周期 | 版本、扩展和句柄仍是外部绑定，不能替代 contract 或授权；候选版也不能冒充正式基线 |
 | [A2A 1.0 Task](https://a2a-protocol.org/v1.0.0/specification/) | Task 是有状态协议对象，历史可以被截短，取消只是尝试，状态和产物属于远端任务 | Task、history、artifact 与 `completed` 保留外部来源；它们不能恢复旧会话，也不能直接成为本地满足结果或最终接受 |
 | [GNU make 中断处理](https://www.gnu.org/software/make/manual/html_node/Interrupts.html) | 中断时可能删除部分改写的目标，防止下次把半成品误当成最新；清理仍可能失败 | 部分产物和未知副作用保持为待核对事实；清理、重试或新契约都不能恢复旧权限 |
 
@@ -76,14 +76,14 @@ session contract 不是文件、进程、模型上下文、凭据包、可恢复
 ## 规范来源与当前上限
 
 - [SESSION-CORE 会话条款](https://noemion.github.io/spec/session-contract-core.html) — 规定主体、政策、环境、能力、秘密、预算、激活、观察、只读和生命周期。
-- [session contract 威胁模型](https://noemion.github.io/spec/session-contract-threat-model.html) — 检查主体替换、权限放大、凭据泄漏、预算逃逸、契约漂移和会话复活。
-- [session contract 自然语言场景](https://noemion.github.io/spec/session-contract-scenarios.html) — 用支持案例、反例和边界场景检查会话职责；它们不是实现或符合性声明。
-- [session contract 提案向量](https://github.com/Noemion/noemion.github.io/blob/main/vectors/session-contract/cases.json) — 记录允许契约与确定拒绝的资料一致性矩阵。
+- [contract 威胁模型](https://noemion.github.io/spec/session-contract-threat-model.html) — 检查主体替换、权限放大、凭据泄漏、预算逃逸、契约漂移和会话复活。
+- [contract 自然语言场景](https://noemion.github.io/spec/session-contract-scenarios.html) — 用支持案例、反例和边界场景检查会话职责；它们不是实现或符合性声明。
+- [contract 提案向量](https://github.com/Noemion/noemion.github.io/blob/main/vectors/session-contract/cases.json) — 记录允许契约与确定拒绝的资料一致性矩阵。
 
 **当前策略：**SESSION-CORE 0.1.0-draft 只定义一次会话的抽象只读执行契约。页面、场景和提案向量可以检查资料一致性，不能证明会话隔离、安全或互操作已经实现。
 
-**名称状态：**session contract 是由两个普通英语词组成的设计阶段职责名称，已经按逐词词首、职责和关键字语料接受。它仍不表示运行组件已经实现；开发者首次说明时先写“一次会话的只读契约”。
+**名称状态：**contract 是单个普通英语词，已经按词首、职责和关键字语料接受。它仍不表示运行组件已经实现；开发者首次说明时先写“一次会话的只读契约”。
 
-**待定内容：**session contract API、平台隔离方式、事件格式和运行后端仍待确定。销毁、凭据存储、协议适配和预算计数也需要单独设计与验证。
+**待定内容：**contract API、平台隔离方式、事件格式和运行后端仍待确定。销毁、凭据存储、协议适配和预算计数也需要单独设计与验证。
 
-**限制条件：**当前没有 bounded runner、装载器、沙箱、凭据代理、预算器或运行时，也没有 session contract 文件、恢复格式或协议 Profile。页面说明不改变条款、登记、威胁、场景、向量或现行结果域。
+**限制条件：**当前没有 runner、装载器、沙箱、凭据代理、预算器或运行时，也没有 contract 文件、恢复格式或协议 Profile。页面说明不改变条款、登记、威胁、场景、向量或现行结果域。

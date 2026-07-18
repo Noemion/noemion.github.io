@@ -38,7 +38,7 @@ next_label: ADR-0023
 | 模型评估摘要 | 指定模型、提示、样本和评估方法得到候选结论。 | 模型说明是直接观察，或统计结果自动取得决定权。 |
 | 发布决定记录 | 具名权威在给定依据和政策下作出了决定。 | 决定本身证明所有依据真实，或授予新的权限。 |
 
-这种有明确范围的证据记录，现行设计名称是 evidence entry。它不是日志包装、可信分数、数学证明或最终验收决定。
+这种有明确范围的证据记录，现行设计名称是 evidence。它不是日志包装、可信分数、数学证明或最终验收决定。
 
 ## 一项记录先要限定主体和主张
 
@@ -72,14 +72,14 @@ next_label: ADR-0023
 | 判断层次 | 机器结果域 | 回答的问题 | 必须绑定 |
 | --- | --- | --- | --- |
 | 完整性与来源认证 | 由所选机制表达 | 内容是否改变，声明是否来自所称生产者？ | 内容身份、密钥、签名范围和认证政策。 |
-| evidence entry 有效性 | `validity=valid / invalid / revoked` | 验证者当前是否允许这项记录进入后续判断？ | 验证政策、信任根、参考值、环境与截止点。 |
+| evidence 有效性 | `validity=valid / invalid / revoked` | 验证者当前是否允许这项记录进入后续判断？ | 验证政策、信任根、参考值、环境与截止点。 |
 | 证据覆盖度 | `coverage=sufficient / insufficient` | 有效记录集合是否覆盖精确 `satisfaction_criteria` 的全部观察责任？ | 目标判据、不同责任、缺口、重复项和截止点。 |
 | 目标满足 | `met / unmet / undetermined / fault` | `situation` 相对结构化观察得到什么结果？ | 比较契约、方向、范围和失败分类。 |
 | 权威决定 | `accepted / rejected / deferred` | 具名权威是否接受、拒绝或推迟当前事项？ | 决定者身份、权限、依据、政策和决定范围。 |
 
 `valid` 不是记录给自己的标签，而是外部评估结果；重复相同记录也不会增加覆盖责任。覆盖不足必须得到 `coverage=insufficient`，不能为了形成确定答案而降格为目标不满足。
 
-> **名称与口头边界：**首次面向开发者应写“有范围证据记录（evidence entry）”。`valid / invalid` 与 `sufficient / insufficient` 只在前缀处有细小差异，日志必须带 `validity=` 或 `coverage=`，中文界面先使用“当前评估可用 / 评估无效 / 已撤回”和“覆盖完整 / 覆盖不足”。这些普通词已经按词首规则接受，精确日志仍需完整字段名避免职责混淆。
+> **名称与口头边界：**首次面向开发者应写“有范围证据记录（evidence）”。`valid / invalid` 与 `sufficient / insufficient` 只在前缀处有细小差异，日志必须带 `validity=` 或 `coverage=`，中文界面先使用“当前评估可用 / 评估无效 / 已撤回”和“覆盖完整 / 覆盖不足”。这些普通词已经按词首规则接受，精确日志仍需完整字段名避免职责混淆。
 
 ## 外部证明、遥测和模型评估只能提供什么
 
@@ -93,13 +93,13 @@ next_label: ADR-0023
 | [SLSA 1.2 Provenance](https://slsa.dev/spec/v1.2/provenance) | 记录构建定义、外部参数、解析后的依赖、运行细节和输出主体。 | 构建来源不能充当软件安全、行为正确或发布授权的通用证明。 |
 | [GNU Guix 的 guix challenge](https://guix.gnu.org/manual/en/html_node/Invoking-guix-challenge.html) | 比较独立构建是否得到逐位相同的输出，可暴露不可复现或替代服务器风险。 | 结果不同不能单独判定哪一方正确。 |
 | [OpenTelemetry 语义约定 1.43.0](https://opentelemetry.io/docs/specs/semconv/) 与 [OpenTelemetry GenAI 语义约定独立仓库](https://github.com/open-telemetry/semantic-conventions-genai) | 提供 Agent、模型、工具与 MCP 遥测字段，并提示参数和结果可能包含敏感信息。 | 遥测字段不定义证据身份、因果真实性或覆盖充分性。 |
-| [MCP Security Best Practices](https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices) | 禁止 token passthrough，并要求受众校验、范围限制和最小权限。 | evidence entry 不保存令牌正文或实时能力句柄，调用成功也不产生授权。 |
+| [MCP Security Best Practices](https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices) | 禁止 token passthrough，并要求受众校验、范围限制和最小权限。 | evidence 不保存令牌正文或实时能力句柄，调用成功也不产生授权。 |
 
 ## 当前还不能编码或执行什么
 
-现行十八个 evidence entry 提案向量覆盖九个允许分类与九个确定拒绝，只检查 EVIDENCE-CORE 九条抽象责任。它们不验证真实签名、遥测完整性、生产者可靠性或决定质量。
+现行十八个 evidence 提案向量覆盖九个允许分类与九个确定拒绝，只检查 EVIDENCE-CORE 九条抽象责任。它们不验证真实签名、遥测完整性、生产者可靠性或决定质量。
 
-这项决定不表示采集器、验证器、归并器、决定引擎、independent inspector 或 bounded runner 已经实现。evidence entry 也没有物理容器、文件扩展名、字段编号、摘要与签名算法、撤销分发或透明日志协议。
+这项决定不表示采集器、验证器、归并器、决定引擎、inspector 或 runner 已经实现。evidence 也没有物理容器、文件扩展名、字段编号、摘要与签名算法、撤销分发或透明日志协议。
 
 远程查询、跨生产者时钟归并、隐私政策语言、长期归档和实际消费者仍待研究。没有新 Profile、威胁证据与互操作实验前，不为了形式对称而创建格式。
 

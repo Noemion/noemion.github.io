@@ -54,7 +54,7 @@ next_label: 开放问题
 ## 当前材料与未来证据分开
 {: #current-evidence}
 
-> **当前状态：**Noemion 目前可以验证规范资料、登记、场景与向量之间的一致性。尚无 deterministic producer、independent inspector、bounded runner、求值器或决定引擎可供实现级测试。
+> **当前状态：**Noemion 目前可以验证规范资料、登记、场景与向量之间的一致性。尚无 producer、inspector、runner、求值器或决定引擎可供实现级测试。
 
 | 材料 | 现在能够验证 | 仍然缺少 |
 | --- | --- | --- |

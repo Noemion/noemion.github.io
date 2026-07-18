@@ -26,7 +26,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0009](https://noemion.github.io/architecture/adr-0009-propositional-kernel.html) — historical record retaining expression, meaning, situation, goal, criteria, and uncertainty separation while retiring the earlier field names and states
 - [ADR-0010](https://noemion.github.io/architecture/adr-0010-native-lexicon.html) — current native lexicon, six semantic facets, and situation/goal/evidence separation
 - [ADR-0011](https://noemion.github.io/architecture/adr-0011-endem-container.html) — experimental byte boundary and ordered reading path across END-FMT, structural P0, source-bearing P2, and the undefined release Profile
-- [ADR-0012](https://noemion.github.io/architecture/adr-0012-rust-core-language.html) — bounded historical language evidence and the conditional Rust review baseline for a future deterministic producer structural core
+- [ADR-0012](https://noemion.github.io/architecture/adr-0012-rust-core-language.html) — bounded historical language evidence and the conditional Rust review baseline for a future producer structural core
 - [ADR-0013](https://noemion.github.io/architecture/adr-0013-end-p1-payload.html) — source-bearing formation Profile, ordered validation path, closed references, and non-publishable boundary
 - [ADR-0014](https://noemion.github.io/architecture/adr-0014-source-manifest.html) — experimental source manifest, semantic-confirmation boundary, deterministic mapping, and removal conditions
 - [ADR-0015](https://noemion.github.io/architecture/adr-0015-result-domains.html) — five non-interchangeable result domains, producer boundaries, allowed decisions, and external-state mappings
@@ -49,18 +49,18 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [ADR-0036](https://noemion.github.io/architecture/adr-0036-source-bearing-and-stripped-release.html) — why removing source language creates a different release artifact, with deterministic derivation, new identity, rewritten references, controlled companion material, and verifier-specific claim limits
 - [ADR-0037](https://noemion.github.io/architecture/adr-0037-terminology-simplification.html) — why ordinary responsibility names replace unnecessary coined terms, how machine identifiers avoid a versioned keyword corpus, and why Noemion and Endem still require human pronunciation evidence
 - [Open questions](https://noemion.github.io/architecture/open-questions.html) — shows whether current material supports the next design step, separates END-P2 from END-FMT, and routes missing profiles, runtime evidence, release derivation, or naming research
-- [Components](https://noemion.github.io/components/index.html) — deterministic producer, independent inspector, and bounded runner responsibility boundaries
-- [deterministic producer](https://noemion.github.io/components/producer.html) — deterministic Endem/Endem closure production, production-side checking, release derivation, and external-signing separation
-- [independent inspector](https://noemion.github.io/components/inspector.html) — independent direct reading, scoped views, differential comparison, and non-production diagnostic boundary
-- [bounded runner](https://noemion.github.io/components/runner.html) — constrained loading, capability mediation, evidence collection, and execution boundary
+- [Components](https://noemion.github.io/components/index.html) — producer, inspector, and runner responsibility boundaries
+- [producer](https://noemion.github.io/components/producer.html) — deterministic Endem/closure production, production-side checking, release derivation, and external-signing separation
+- [inspector](https://noemion.github.io/components/inspector.html) — independent direct reading, scoped views, differential comparison, and non-production diagnostic boundary
+- [runner](https://noemion.github.io/components/runner.html) — constrained loading, capability mediation, evidence collection, and execution boundary
 
 ## Specifications
 
 - [Specifications and lookup](https://noemion.github.io/specifications/index.html) — task-based source lookup, authority order, maturity, and normative-source map
 - [Endem](https://noemion.github.io/specifications/endem.html) — the smallest deterministic natural-language goal artifact and its canonical fields
-- [Endem closure](https://noemion.github.io/specifications/endem-closure.html) — exact closure binding multiple goals, transitive dependencies, authority intersection, and session activation
-- [session contract](https://noemion.github.io/specifications/session-contract.html) — read-only contract binding an exact subject, current authority, environment, capabilities, budgets, and observation duties for one session
-- [evidence entry](https://noemion.github.io/specifications/evidence-entry.html) — scoped evidence binding an exact subject, method, provenance, validity, coverage, and decision boundary
+- [closure](https://noemion.github.io/specifications/endem-closure.html) — exact closure binding multiple goals, transitive dependencies, authority intersection, and session activation
+- [contract](https://noemion.github.io/specifications/session-contract.html) — read-only contract binding an exact subject, current authority, environment, capabilities, budgets, and observation duties for one session
+- [evidence](https://noemion.github.io/specifications/evidence-entry.html) — scoped evidence binding an exact subject, method, provenance, validity, coverage, and decision boundary
 - [Structured diagnostics](https://noemion.github.io/specifications/diagnostics.html) — cross-object machine identity, locations, recovery, safety, and result-domain separation
 - [External protocol adapters](https://noemion.github.io/specifications/adapters.html) — version pinning, peer trust, capability intersection, state separation, retry, delivery, and security boundaries
 - [Exact identity and attestation](https://noemion.github.io/specifications/identity.html) — cross-artifact byte identity, signed statements, validity cutoffs, reproducibility, and companion relations
@@ -82,9 +82,9 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Diagnostic Natural-Language Design Scenarios](https://noemion.github.io/spec/diagnostic-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
 - [Diagnostic Threat Model](https://noemion.github.io/spec/diagnostic-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
 - [Diagnostic Core Specification](https://noemion.github.io/spec/diagnostics-core.html) — versioned specification source with maturity and verification boundaries
-- [session contract Core Session Contract](https://noemion.github.io/spec/session-contract-core.html) — versioned specification source with maturity and verification boundaries
-- [session contract 自然语言设计场景](https://noemion.github.io/spec/session-contract-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
-- [session contract Threat Model](https://noemion.github.io/spec/session-contract-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+- [contract Core Session Contract](https://noemion.github.io/spec/session-contract-core.html) — versioned specification source with maturity and verification boundaries
+- [contract 自然语言设计场景](https://noemion.github.io/spec/session-contract-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [contract Threat Model](https://noemion.github.io/spec/session-contract-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
 - [Endem Core Content Standard](https://noemion.github.io/spec/endem-core.html) — versioned specification source with maturity and verification boundaries
 - [Endem Container Format](https://noemion.github.io/spec/endem-format.html) — versioned specification source with maturity and verification boundaries
 - [Endem Natural-Language Scenario Corpus](https://noemion.github.io/spec/endem-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
@@ -95,9 +95,9 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Exact Content Identity and Attestation Core Specification](https://noemion.github.io/spec/identity-core.html) — versioned specification source with maturity and verification boundaries
 - [Exact Content Identity and Attestation Natural-Language Design Scenarios](https://noemion.github.io/spec/identity-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
 - [Exact Content Identity and Attestation Threat Model](https://noemion.github.io/spec/identity-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
-- [evidence entry Core Specification](https://noemion.github.io/spec/evidence-entry-core.html) — versioned specification source with maturity and verification boundaries
-- [evidence entry Natural-Language Design Scenarios](https://noemion.github.io/spec/evidence-entry-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
-- [evidence entry Threat Model](https://noemion.github.io/spec/evidence-entry-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+- [evidence Core Specification](https://noemion.github.io/spec/evidence-entry-core.html) — versioned specification source with maturity and verification boundaries
+- [evidence Natural-Language Design Scenarios](https://noemion.github.io/spec/evidence-entry-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [evidence Threat Model](https://noemion.github.io/spec/evidence-entry-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
 - [记忆、检查点与恢复边界研究提案](https://noemion.github.io/spec/memory-checkpoint-and-resumption-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
 - [模型、适配器与能力域隔离研究提案](https://noemion.github.io/spec/model-adapter-isolation-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
 - [Noemion 模型参与评测与裁判边界研究提案](https://noemion.github.io/spec/model-assisted-evaluation-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
@@ -111,9 +111,9 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Noemion 软件 Agent 数据使用、保留与删除边界研究提案](https://noemion.github.io/spec/software-agent-data-use-retention-and-deletion-boundaries-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
 - [软件 Agent 身份、委托与责任链研究提案](https://noemion.github.io/spec/software-agent-identity-and-accountability-boundaries-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
 - [Noemion 状态变化与因果归因边界研究提案](https://noemion.github.io/spec/state-change-and-causal-attribution-proposal.html) — non-normative research proposal with evidence, counterexamples, and stop conditions
-- [Endem closure Core Specification](https://noemion.github.io/spec/endem-closure-core.html) — versioned specification source with maturity and verification boundaries
-- [Endem closure Natural-Language Design Scenarios](https://noemion.github.io/spec/endem-closure-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
-- [Endem closure Core Threat Model](https://noemion.github.io/spec/endem-closure-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
+- [closure Core Specification](https://noemion.github.io/spec/endem-closure-core.html) — versioned specification source with maturity and verification boundaries
+- [closure Natural-Language Design Scenarios](https://noemion.github.io/spec/endem-closure-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
+- [closure Core Threat Model](https://noemion.github.io/spec/endem-closure-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
 - [Text and Identifier Core Specification](https://noemion.github.io/spec/text-identifier-core.html) — versioned specification source with maturity and verification boundaries
 - [Text and Identifier Natural-Language Design Scenarios](https://noemion.github.io/spec/text-identifier-scenarios.html) — non-normative design scenarios, counterexamples, and unresolved boundaries
 - [Text and Identifier Threat Model](https://noemion.github.io/spec/text-identifier-threat-model.html) — threat model with attack surfaces, failure ownership, and adoption limits
@@ -142,9 +142,9 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 - [Manual index](https://noemion.github.io/endem/docs/index.html) — responsibilities, actions, trust boundaries, and reading order
 - [Format](https://noemion.github.io/endem/docs/format.html) — canonical Endem fields, explicit source transformations, deterministic formation, and round-trip limits
-- [Binding](https://noemion.github.io/endem/docs/binding.html) — symbols, references, Endem closure, conflict handling, and packing
+- [Binding](https://noemion.github.io/endem/docs/binding.html) — symbols, references, closure, conflict handling, and packing
 - [Safety](https://noemion.github.io/endem/docs/safety.html) — bounded parsing, checked arithmetic, independent reading, integrity, and signing boundaries
-- [Running](https://noemion.github.io/endem/docs/running.html) — session contract creation, constrained execution, observations, evidence closure, and acceptance
+- [Running](https://noemion.github.io/endem/docs/running.html) — contract creation, constrained execution, observations, evidence closure, and acceptance
 - [Reference](https://noemion.github.io/endem/docs/reference.html) — task lookup for actions, objects, trust boundaries, result domains, goal constraints, diagnostics, and authoritative sources
 
 ## Availability and authority

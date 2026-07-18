@@ -1,7 +1,7 @@
 {
   "vector_format": "end-core.negation-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
-  "description": "Negation and absence proposal vectors for ADR-0017; not a policy engine, log collector, bounded runner, or evaluator implementation",
+  "description": "Negation and absence proposal vectors for ADR-0017; not a policy engine, log collector, runner, or evaluator implementation",
   "cases": [
     {
       "id": "NV-VALID-DIRECT-NEGATIVE-MET-001",

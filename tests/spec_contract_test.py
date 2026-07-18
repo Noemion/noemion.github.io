@@ -217,7 +217,24 @@ def validate_registry(registry, spec_text, threat_text, errors):
         if len(term_names) != len(set(term_names)):
             errors.append("spec/registry.json: term names must be unique")
         for required_term in (
-            "Noemion", "Endem", "Endem closure", "session contract", "evidence entry",
+            "Noemion", "Endem", "closure", "contract", "evidence",
+            "producer", "inspector", "runner", "form", "lint", "compose", "inspect", "run",
+            "source", "meaning", "situation", "direction", "criteria", "unresolved", "observation",
+            "reach", "maintain", "formed", "resolved", "unavailable", "undetermined", "stopped",
+            "allowed", "denied", "pending", "profile", "time", "scope", "coverage", "guard", "signed", "view",
+        ):
+            if required_term not in term_names:
+                errors.append(f"spec/registry.json: missing human term {required_term}")
+
+    identifiers = registry.get("identifiers")
+    if not isinstance(identifiers, list) or not identifiers:
+        errors.append("spec/registry.json: identifiers must be a non-empty list")
+    else:
+        identifier_names = [item.get("identifier") for item in identifiers]
+        if len(identifier_names) != len(set(identifier_names)):
+            errors.append("spec/registry.json: identifier names must be unique")
+        for required_identifier in (
+            "Noemion", "Endem", "closure", "contract", "evidence",
             *REQUIRED_FACETS, "wire-format", "content-standard", "content-profile", "END-P0", "END-P2", "source-manifest",
             "satisfaction-result", "decision-result", "session-result", "evidence-status",
             "time-scope", "continuity-policy", "time-coverage",
@@ -243,18 +260,18 @@ def validate_registry(registry, spec_text, threat_text, errors):
             "authorization-decision", "delegation-chain", "multi-authority-policy",
             "consent-binding", "authorization-validity", "decision-replay-binding",
         ):
-            if required_term not in term_names:
-                errors.append(f"spec/registry.json: missing term {required_term}")
-        wire_term = next((term for term in terms if term.get("term") == "wire-format"), None)
-        if wire_term and wire_term.get("decision_status") != "accepted-draft":
+            if required_identifier not in identifier_names:
+                errors.append(f"spec/registry.json: missing identifier {required_identifier}")
+        wire_identifier = next((item for item in identifiers if item.get("identifier") == "wire-format"), None)
+        if wire_identifier and wire_identifier.get("decision_status") != "accepted-draft":
             errors.append("spec/registry.json: wire-format must be accepted-draft")
-        semion_term = next((term for term in terms if term.get("term") == "meaning_projection"), None)
-        semion_definition = semion_term.get("definition", "") if semion_term else ""
+        meaning_identifier = next((item for item in identifiers if item.get("identifier") == "meaning_projection"), None)
+        meaning_definition = meaning_identifier.get("definition", "") if meaning_identifier else ""
         for boundary in (
             "确定性规则或范围有限具名权威确认",
             "语义授权不授予动作权限",
         ):
-            if boundary not in semion_definition:
+            if boundary not in meaning_definition:
                 errors.append(
                     f"spec/registry.json: meaning_projection definition must separate meaning confirmation from action authorization: {boundary}"
                 )
@@ -554,11 +571,11 @@ def validate_public_boundary(errors):
     if "python3 tests/composition_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute composite situation and criteria vectors")
     if "python3 tests/endem_closure_vector_test.py" not in workflow_text:
-        errors.append("Pages workflow must execute Endem closure and activation vectors")
+        errors.append("Pages workflow must execute closure and activation vectors")
     if "python3 tests/evidence_entry_vector_test.py" not in workflow_text:
-        errors.append("Pages workflow must execute evidence entry evidence and appraisal vectors")
+        errors.append("Pages workflow must execute evidence appraisal vectors")
     if "python3 tests/session_contract_vector_test.py" not in workflow_text:
-        errors.append("Pages workflow must execute session contract vectors")
+        errors.append("Pages workflow must execute contract vectors")
     if "python3 tests/p2_payload_test.py" not in workflow_text:
         errors.append("Pages workflow must execute complete END-P2 payload vectors")
     if "python3 tests/source_manifest_test.py" not in workflow_text:
@@ -606,7 +623,7 @@ def validate_public_boundary(errors):
             "验证资料",
             "实现证据",
             "哪些边界还不能从规范推出",
-            "当前没有 deterministic producer、independent inspector、bounded runner",
+            "当前没有 producer、inspector、runner",
         ),
         "specifications/endem.html": (
             "END-CORE 0.1.0-draft",
@@ -677,7 +694,7 @@ def validate_public_boundary(errors):
             "valid / invalid / revoked",
             "sufficient / insufficient",
             "不新增 END-P2 字段",
-            "没有 bounded runner",
+            "没有 runner",
         ),
         "architecture/adr-0016-mene-time-model.html": (
             "utc_window",
@@ -724,7 +741,7 @@ def validate_public_boundary(errors):
             "OWL 2",
             "COUNT(DISTINCT",
             "GNU",
-            "不表示 deterministic producer、bounded runner、求值器或 CLI 已经实现",
+            "不表示 producer、runner、求值器或 CLI 已经实现",
         ),
         "architecture/adr-0019-measurement-and-thresholds.html": (
             "测量谓词必须同时固定构念",
@@ -740,7 +757,7 @@ def validate_public_boundary(errors):
             "OpenTelemetry Metrics",
             "Prometheus",
             "GNU Units",
-            "不表示遥测采集器、基准运行器、统计引擎、bounded runner 或求值器已经实现",
+            "不表示遥测采集器、基准运行器、统计引擎、runner 或求值器已经实现",
         ),
         "architecture/adr-0020-composite-situations-and-criteria.html": (
             "第一阶段只允许用",
@@ -754,7 +771,7 @@ def validate_public_boundary(errors):
             "GNU Coreutils test",
             "GNU Bash Lists",
             "SHACL 1.2 Core",
-            "不表示 deterministic producer、independent inspector、bounded runner、CLI 或求值器已经实现",
+            "不表示 producer、inspector、runner、CLI 或求值器已经实现",
         ),
         "architecture/adr-0021-synem-closure-and-activation.html": (
             "CLOSURE-CORE 0.1.0-draft",
@@ -768,11 +785,11 @@ def validate_public_boundary(errors):
             "GNU make",
             "W3C SHACL",
             "MCP 2025-11-25",
-            "不表示 deterministic producer、independent inspector、bounded runner、CLI、解析器或运行时已经实现",
+            "不表示 producer、inspector、runner、CLI、解析器或运行时已经实现",
         ),
         "architecture/adr-0022-iknem-evidence-and-appraisal.html": (
             "EVIDENCE-CORE 0.1.0-draft",
-            "有范围证据记录（evidence entry）",
+            "有范围证据记录（evidence）",
             "validity=valid",
             "coverage=sufficient",
             "model-candidate",
@@ -783,7 +800,7 @@ def validate_public_boundary(errors):
             "GNU Guix 的 guix challenge",
             "OpenTelemetry GenAI 语义约定独立仓库",
             "MCP Security Best Practices",
-            "不表示采集器、验证器、归并器、决定引擎、independent inspector 或 bounded runner 已经实现",
+            "不表示采集器、验证器、归并器、决定引擎、inspector 或 runner 已经实现",
         ),
         "architecture/adr-0023-endem-content-standard.html": (
             "END-CORE 0.1.0-draft",
@@ -815,8 +832,8 @@ def validate_public_boundary(errors):
             "Linux capabilities",
             "Linux no_new_privs",
             "Landlock",
-            "不建立 session contract 文件",
-            "不表示 bounded runner 已经实现",
+            "不建立 contract 文件",
+            "不表示 runner 已经实现",
         ),
         "architecture/adr-0025-structured-diagnostics.html": (
             "错误消息不能替系统作决定",
@@ -959,8 +976,8 @@ def validate_public_boundary(errors):
             "SESSION-SUB-001",
             "SESSION-LIF-001",
             "不是文件、进程、模型上下文、凭据包、可恢复会话或最终结果",
-            "session contract API、平台隔离方式、事件格式和运行后端仍待确定",
-            "当前没有 bounded runner、装载器、沙箱、凭据代理、预算器或运行时",
+            "contract API、平台隔离方式、事件格式和运行后端仍待确定",
+            "当前没有 runner、装载器、沙箱、凭据代理、预算器或运行时",
         ),
         "specifications/diagnostics.html": (
             "DIA-CORE 0.1.0-draft",
@@ -1031,7 +1048,7 @@ def validate_public_boundary(errors):
             "Rust 与 C 的既有研究也只提供未来比较材料",
             "当前没有 Rust 组件、CLI、协议适配器",
             "候选版在正式发布前只作为迁移风险",
-            "不进入 Endem 编码、evidence entry 身份、授权决定或最终接受",
+            "不进入 Endem 编码、evidence 身份、授权决定或最终接受",
         ),
     }
     for relative_path, tokens in public_contracts.items():
@@ -1222,9 +1239,9 @@ def main():
         "12 quantification and membership vectors, "
         "12 measurement and threshold vectors, "
         "12 composite situation and criteria vectors, "
-        "12 Endem closure and activation vectors, "
-        "20 session contract vectors, "
-        "18 evidence entry evidence and appraisal vectors, "
+        "12 closure and activation vectors, "
+        "20 contract vectors, "
+        "18 evidence appraisal vectors, "
         "20 structured diagnostic vectors, "
         "24 external protocol adapter vectors, "
         "24 exact identity and attestation vectors, "

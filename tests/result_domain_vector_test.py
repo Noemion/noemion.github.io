@@ -69,7 +69,7 @@ def main():
         errors.append("result-domain vectors must use end-core.result-domain-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("result-domain vectors must pin END-CORE 0.1.0-draft")
-    if "not bounded runner or decision-engine implementation data" not in document.get("description", ""):
+    if "not runner or decision-engine implementation data" not in document.get("description", ""):
         errors.append("result-domain vectors must state their non-implementation boundary")
 
     cases = document.get("cases")

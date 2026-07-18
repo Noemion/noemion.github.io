@@ -18,14 +18,14 @@ badges: ["lint", "inspect", "封闭失败"]
 
 | 入口 | 主要问题 | 能否供制品形成与发布流程继续使用 |
 | --- | --- | --- |
-| `endem lint` | 这份实际字节是否满足请求的结构、语义、状态、完整性与策略层？ | 可以；全部所需层通过后，deterministic producer 内部可以保留绑定精确字节、规范/Profile、检查配置和已完成层次的引用 |
+| `endem lint` | 这份实际字节是否满足请求的结构、语义、状态、完整性与策略层？ | 可以；全部所需层通过后，producer 内部可以保留绑定精确字节、规范/Profile、检查配置和已完成层次的引用 |
 | `endem inspect` | 独立实现怎样读取和显示这份实际字节？ | 不可以；只提供观察、差分和诊断 |
 
-`inspect` 可解析对象不表示 `lint` 已通过；`lint` 通过也不能替代 `inspect` 在一致性测试中的第二种解释。deterministic producer 内部引用不是 CLI 输出、evidence entry、签名、授权或最终决定，也不能跨入 independent inspector 的信任域。
+`inspect` 可解析对象不表示 `lint` 已通过；`lint` 通过也不能替代 `inspect` 在一致性测试中的第二种解释。producer 内部引用不是 CLI 输出、evidence、签名、授权或最终决定，也不能跨入 inspector 的信任域。
 
-## independent inspector 要求
+## inspector 要求
 
-`inspect` 不得复用 deterministic producer 的形成侧解析器、写入器、组合器、生成代码或错误分类实现。它只共享公开规范和测试向量，并使用独立数据结构与资源限制。
+`inspect` 不得复用 producer 的形成侧解析器、写入器、组合器、生成代码或错误分类实现。它只共享公开规范和测试向量，并使用独立数据结构与资源限制。
 
 GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf.html)说明它独立于 BFD，为第二条直接读取路径提供了工程先例。
 
@@ -40,7 +40,7 @@ GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf
 - `offset + length`；
 - `count × entry_size`；
 - 对齐上取整和累计大小；
-- 字符串、节点、边、成员和 evidence entry 数量；
+- 字符串、节点、边、成员和 evidence 数量；
 - 解压后的逻辑大小；
 - 递归、循环和图遍历深度；
 - 单次输出和总内存预算。
@@ -61,4 +61,4 @@ GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf
 
 ## 一致性验证怎样使用两条路径
 
-一致性验证对合法、边界和畸形向量分别运行生产侧 `lint` 路径与independent inspector，并比较字段解释、失败位置和分类。任何分歧都阻断发布，先调查规范是否含糊，再分别修正规范或出错实现并重跑两条路径；不能简单选择某一实现作为事实来源，也不能改写输入来制造一致。它不是 `endem` 动作。
+一致性验证对合法、边界和畸形向量分别运行生产侧 `lint` 路径与 inspector，并比较字段解释、失败位置和分类。任何分歧都阻断发布，先调查规范是否含糊，再分别修正规范或出错实现并重跑两条路径；不能简单选择某一实现作为事实来源，也不能改写输入来制造一致。它不是 `endem` 动作。

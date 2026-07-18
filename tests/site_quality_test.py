@@ -241,7 +241,7 @@ ADR_0011_READING_BOUNDARIES = (
     "结构接受、语义未执行",
     "六个空映射不是最小有效 Endem",
     "最终发布不能只删除 source_expression.content",
-    "当前规范与已执行向量不是 deterministic producer、independent inspector 或正式独立读取组件",
+    "当前规范与已执行向量不是 producer、inspector 或正式独立读取组件",
     "well-formed、valid 和 application-expected",
     "删除一个记录或字段就能得到安全、闭合、可发布的 Endem",
     "当前不能生成",
@@ -249,7 +249,7 @@ ADR_0011_READING_BOUNDARIES = (
 ADR_0012_REVIEW_HEADINGS = [
     "先分清已经决定与尚未决定",
     "历史实验实际回答了什么",
-    "为什么只把 Rust 作为 deterministic producer 起点",
+    "为什么只把 Rust 作为 producer 起点",
     "安全 Rust 仍然不能证明什么",
     "进入代码阶段前怎样重新评审",
     "什么情况会改变这一基线",
@@ -264,7 +264,7 @@ ADR_0012_REVIEW_BOUNDARIES = (
     "Cargo 的 release 默认关闭该检查",
     "仅提交 Cargo.lock 不会自动建立这项保证",
     "版本新旧本身不构成安全结论",
-    "这里没有 deterministic producer、independent inspector、CLI、稳定命令、构建配置或实现级符合性结论",
+    "这里没有 producer、inspector、CLI、稳定命令、构建配置或实现级符合性结论",
 )
 ADR_0013_PROFILE_HEADINGS = [
     "先确定 END-P2 是什么",
@@ -300,7 +300,7 @@ ADR_0014_SOURCE_BOUNDARIES = (
     "语义确认扩张为一般动作授权",
     "不得声称保存原始来源字节",
     "不保留别名、兼容解析或自动迁移",
-    "没有 deterministic producer 解析器、实现仓库、稳定命令",
+    "没有 producer 解析器、实现仓库、稳定命令",
 )
 ADR_0015_RESULT_HEADINGS = [
     "用一次依赖升级看五类结果",
@@ -319,7 +319,7 @@ ADR_0015_RESULT_BOUNDARIES = (
     "新观察或规则只能产生新结果",
     "不得回写或覆盖输入事实",
     "协议版本或外部状态变化只要求适配器重新记录映射",
-    "没有 bounded runner、决定引擎、结果事件编码或组件测试",
+    "没有 runner、决定引擎、结果事件编码或组件测试",
 )
 ADR_0016_TIME_HEADINGS = [
     "用一次部署检查读懂持续目标",
@@ -379,7 +379,7 @@ ADR_0018_QUANTIFICATION_BOUNDARIES = (
     "证据数量不是成员数量",
     "翻完分页只得到外部接收方可见列表",
     "本决定不增加 END-P2 字段",
-    "不表示 deterministic producer、bounded runner、求值器或 CLI 已经实现",
+    "不表示 producer、runner、求值器或 CLI 已经实现",
 )
 ADR_0019_MEASUREMENT_HEADINGS = [
     "用一次延迟检查读懂测量链",
@@ -401,7 +401,7 @@ ADR_0019_MEASUREMENT_BOUNDARIES = (
     "295–305ms，不能决定位于哪一侧",
     "初始公开草案不是字段标准",
     "单点逆函数检查不保证换算全域正确",
-    "不表示遥测采集器、基准运行器、统计引擎、bounded runner 或求值器已经实现",
+    "不表示遥测采集器、基准运行器、统计引擎、runner 或求值器已经实现",
 )
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
@@ -503,6 +503,11 @@ PUBLIC_META_PHRASES = (
     "等待用户接受",
     "用户决定接受",
     "用户以后明确开启",
+    "桌面审查",
+    "桌面资料审查",
+    "结论状态",
+    "门禁",
+    "冻结",
     "尚未进入代码开发阶段",
     "尚未进入组件代码阶段",
     "组件代码开发尚未开启",
@@ -696,12 +701,12 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "architecture/index.html": {
         "required": (
             "Endem",
-            "Endem closure",
-            "evidence entry",
-            "session contract",
-            "deterministic producer",
-            "independent inspector",
-            "bounded runner",
+            "closure",
+            "evidence",
+            "contract",
+            "producer",
+            "inspector",
+            "runner",
             "形成侧检查和",
             "不共享",
             "模型候选",
@@ -748,11 +753,11 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             "非规范说明",
             "用一次依赖升级完成边界判断",
-            "目标内容（Endem / Endem closure）",
+            "目标内容（Endem / closure）",
             "行动者与授权",
             "一次会话的上限",
             "外部调用与错误",
-            "观察与证据（structured_observation / evidence entry）",
+            "观察与证据（structured_observation / evidence）",
             "满足判断（satisfaction_criteria）",
             "最终决定（具名权威）",
             "六类问题由不同责任域回答",
@@ -765,13 +770,13 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "工作负载身份",
             "运行实例",
             "外部成功不直接成为 <code>met</code>",
-            "记忆与快照不恢复旧 session contract",
+            "记忆与快照不恢复旧 contract",
             "尚未实现",
         ),
         "forbidden_patterns": (
             r"handoff.*自动.*(?:授权|权限)",
             r"Task.*completed.*(?:等于|成为).*met",
-            r"检查点(?:能够|可以|会)恢复旧 session contract",
+            r"检查点(?:能够|可以|会)恢复旧 contract",
             r"<h2>运行事实先按责任归类</h2>",
             r"<h2>先判断是哪一种越级</h2>",
             r"<h2>行业变化只改变外部机制</h2>",
@@ -781,12 +786,12 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "components/producer.html": {
         "required": (
-            "deterministic producer",
+            "producer",
             "为什么需要独立生产边界",
-            "用一次依赖更新理解 deterministic producer",
+            "用一次依赖更新理解 producer",
             "三个生产动作各自交付什么",
             "发布、签名和证据为什么不能混入",
-            "只生产 Endem / Endem closure",
+            "只生产 Endem / closure",
             "名称状态",
             "具有精确范围的语义授权",
             "不授予动作权限",
@@ -795,9 +800,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "模型",
             "不可信",
             "checked arithmetic",
-            "外部签名响应不是 deterministic producer 输入",
-            "形成记录的 evidence entry 物理格式仍未定义",
-            "Endem closure 规范字节必须等待真实消费者与物理 Profile",
+            "外部签名响应不是 producer 输入",
+            "形成记录的 evidence 物理格式仍未定义",
+            "closure 规范字节必须等待真实消费者与物理 Profile",
             "现有规范与向量只能证明已登记关系一致",
             "GNU <code>objcopy</code>",
             "SLSA 1.2 Provenance",
@@ -813,9 +818,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "components/inspector.html": {
         "required": (
-            "independent inspector",
+            "inspector",
             "为什么第二条读取路径仍然必要",
-            "用一次依赖更新理解 independent inspector",
+            "用一次依赖更新理解 inspector",
             "一次检查怎样保留主张范围",
             "独立、只读和有界分别约束什么",
             "分歧和失败后怎样继续",
@@ -835,7 +840,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "已登记关系一致",
         ),
         "forbidden_patterns": (
-            r"<h2>为什么需要independent inspector</h2>",
+            r"<h2>为什么需要inspector</h2>",
             r"<h2>输入、输出与消费者</h2>",
             r"<h2>实现独立性</h2>",
             r"<h2>安全读取顺序</h2>",
@@ -846,8 +851,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "components/runner.html": {
         "required": (
-            "bounded runner",
-            "用一次依赖更新理解 bounded runner",
+            "runner",
+            "用一次依赖更新理解 runner",
             "名称状态",
             "先把模型、控制面、适配器和决定者分开",
             "运行前形成一次只读会话契约",
@@ -859,10 +864,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "动作确实造成变化，但没有有效授权",
             "隔离必须证明什么",
             "外部 Agent 协议只提供带来源的事实",
-            "session contract",
+            "contract",
             "run",
             "类型化能力请求",
-            "evidence entry",
+            "evidence",
             "accepted",
             "deferred",
             "completed / failed / stopped",
@@ -879,7 +884,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             r"量化聚合责任",
             r"测量判断责任",
             r"复合判断责任",
-            r"Endem closure 激活责任",
+            r"closure 激活责任",
         ),
     },
     "specifications/endem.html": {
@@ -922,8 +927,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "specifications/endem-closure.html": {
         "required": (
-            "Endem closure",
-            "组合闭包（设计阶段名称 Endem closure）",
+            "closure",
+            "组合闭包（设计阶段名称 closure）",
             "先判断它是不是两个目标",
             "按四步形成固定闭包",
             "成员结果与会话激活不能合并",
@@ -968,8 +973,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "specifications/evidence-entry.html": {
         "required": (
-            "evidence entry",
-            "有范围证据记录（设计阶段名称 evidence entry）",
+            "evidence",
+            "有范围证据记录（设计阶段名称 evidence）",
             "先判断一项信息能支持什么",
             "按四步形成并评估一项记录",
             "固定对象与主张",
@@ -1029,8 +1034,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "specifications/session-contract.html": {
         "required": (
-            "session contract",
-            "一次会话的只读执行契约（设计阶段名称 session contract）",
+            "contract",
+            "一次会话的只读执行契约（设计阶段名称 contract）",
             "按五步建立本次边界",
             "名称状态",
             "只读执行契约",
@@ -1315,21 +1320,21 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             "checked arithmetic",
             "inspect",
-            "independent inspector",
+            "inspector",
             "形成侧解析器",
             "绑定精确字节",
             "不是 CLI 输出",
-            "不能跨入 independent inspector",
+            "不能跨入 inspector",
             "不可信",
         ),
     },
     "endem/docs/running.html": {
         "required": (
-            "session contract",
+            "contract",
             "外部签名",
             "私钥始终留在外部签名系统",
             "签名包络",
-            "evidence entry",
+            "evidence",
             "structured_observation",
             "accepted",
             "deferred",
@@ -1822,18 +1827,26 @@ def validate_prose_readability_contracts():
                     errors.append(f"{route}: current prose retains unexplained or obsolete wording {pattern!r}")
 
         if path.suffix == ".html":
-            prose_blocks = re.findall(r"<p\b[^>]*>(.*?)</p>", body, re.DOTALL | re.IGNORECASE)
+            prose_blocks = re.findall(
+                r"<(?:p|li|td)\b[^>]*>(.*?)</(?:p|li|td)>",
+                body,
+                re.DOTALL | re.IGNORECASE,
+            )
         else:
-            prose_blocks = [
-                block
-                for block in re.split(r"\n\s*\n", body)
-                if not block.lstrip().startswith((
-                    "#", "- ", "1. ", "2. ", "3. ", "4. ", "5. ",
-                    "6. ", "7. ", "8. ", "9. ", "|", "```", ">",
-                ))
-            ]
-        if path in SPEC_MARKDOWN_FILES:
-            continue
+            prose_blocks = []
+            in_fence = False
+            for line in body.splitlines():
+                if line.lstrip().startswith("```"):
+                    in_fence = not in_fence
+                    continue
+                if in_fence or not line.strip():
+                    continue
+                if line.lstrip().startswith("|"):
+                    prose_blocks.extend(cell for cell in line.split("|") if cell.strip())
+                else:
+                    prose_blocks.append(
+                        re.sub(r"^\s*(?:#{1,6}|>|[-*+] |\d+\. )\s*", "", line)
+                    )
         for block in prose_blocks:
             visible = re.sub(r"https?://[^\s<)]+", "", block)
             visible = re.sub(r"{%.*?%}|{{.*?}}", " ", visible, flags=re.DOTALL)
@@ -2172,7 +2185,7 @@ def validate_jekyll_sources():
             "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
             "不创建新制品、文件格式、扩展名、命令、组件或稳定接口",
             "Endem 是 ELF object",
-            "session contract 是 segment 或 process image",
+            "contract 是 segment 或 process image",
             "职责适用性矩阵",
             "Symbol versioning",
             "`objcopy` / `strip` / debug link",
@@ -2251,7 +2264,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "候选责任的唯一主归属",
             "Semantic Key 的进入条件",
-            "结论状态：正在研究；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"semantic equivalence proposal missing governance boundary: {token}")
@@ -2291,7 +2304,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "候选责任的唯一主归属",
-            "结论状态：正在研究；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"causation proposal missing governance boundary: {token}")
@@ -2346,14 +2359,14 @@ def validate_jekyll_sources():
             "SLSA 1.2",
             "MCP 2025-11-25 Tasks",
             "截至 2026-07-16 仍为实验能力",
-            "当前没有 deterministic producer、independent inspector、bounded runner、裁剪发布器",
+            "当前没有 producer、inspector、runner、裁剪发布器",
         ):
             if token not in lifecycle_page_text:
                 errors.append(f"Endem lifecycle page missing two-axis attestation boundary: {token}")
         for stale_lifecycle_claim in (
             "Endem 在 formed、resolved、attested 三个状态之间演进",
             "<h2>resolved → attested</h2>",
-            "<h2>attested → session contract → evidence entry</h2>",
+            "<h2>attested → contract → evidence</h2>",
             "<tr><td>attested → run</td>",
             "这五个结果域由",
             "<h2>先分开内容状态与外部关系</h2>",
@@ -2361,7 +2374,7 @@ def validate_jekyll_sources():
             "<h2>阶段、消费者与失败</h2>",
             "<h2>formed → resolved</h2>",
             "<h2>内容形成与发布陈述不能压成一个状态</h2>",
-            "<h2>外部陈述复核 → session contract → evidence entry</h2>",
+            "<h2>外部陈述复核 → contract → evidence</h2>",
             "<h2>现行结果域与草案限制</h2>",
             "<h2>为什么采用两条轴</h2>",
             "<h2>未来实现顺序</h2>",
@@ -2412,7 +2425,7 @@ def validate_jekyll_sources():
                 "不能压成第三个内容状态",
             ),
             source_path_for_route("architecture/adr-0024-dromen-session-contract.html"): (
-                "只接受精确的 `resolved` Endem 或 Endem closure",
+                "只接受精确的 `resolved` Endem 或 closure",
                 "内容状态不能证明会话准入",
             ),
         }
@@ -2430,9 +2443,9 @@ def validate_jekyll_sources():
                 "六个语义面和状态机",
             ),
             SOURCE_ROOT / "endem" / "docs" / "running.md": (
-                "形成 attested Endem/Endem closure",
+                "形成 attested Endem/closure",
                 "重新验证实际 attested 字节",
-                "精确 attested Endem 或 Endem closure",
+                "精确 attested Endem 或 closure",
                 "修改 attested 制品",
             ),
         }
@@ -2468,7 +2481,7 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "候选责任的唯一主归属",
-            "结论状态：正在研究；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"preview and approval proposal missing governance boundary: {token}")
@@ -2510,14 +2523,14 @@ def validate_jekyll_sources():
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "候选责任的唯一主归属",
-            "结论状态：正在研究；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
         ):
             if token not in proposal_text:
                 errors.append(f"memory and resumption proposal missing governance boundary: {token}")
         registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
         if "memory-checkpoint-and-resumption" in registry_text:
             errors.append("non-normative memory and resumption proposal must not enter the specification registry")
-        if "精确 Endem 或 Endem closure 及其 attest 状态" in proposal_text:
+        if "精确 Endem 或 closure 及其 attest 状态" in proposal_text:
             errors.append("memory and resumption proposal must not collapse attestation relations into content state")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
@@ -2569,7 +2582,7 @@ def validate_jekyll_sources():
         proposal_text = capability_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
             "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
             "不创建新制品、文件格式、扩展名、命令、组件、结果域、稳定接口或哲学专名",
             "不进入 `registry.json`",
@@ -2578,14 +2591,14 @@ def validate_jekyll_sources():
             "A2A 1.0 版本化规范",
             "RFC 8707",
             "GNU Autoconf 2.73",
-            "新能力不能扩写旧 session contract",
+            "新能力不能扩写旧 contract",
             "候选责任的唯一主归属",
             "十二个案例",
             "变化处理矩阵",
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "不创建 `CAP-CORE`、能力制品或新专名",
-            "这些结论当前不会改变任何现行规范条款、登记、向量、session contract 字段或结果值",
+            "这些结论当前不会改变任何现行规范条款、登记、向量、contract 字段或结果值",
         ):
             if token not in proposal_text:
                 errors.append(f"capability discovery proposal missing governance boundary: {token}")
@@ -2611,7 +2624,7 @@ def validate_jekyll_sources():
         proposal_text = agent_identity_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
             "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
             "不创建 Agent 身份制品",
             "不进入 `registry.json`",
@@ -2654,7 +2667,7 @@ def validate_jekyll_sources():
         proposal_text = parallel_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
             "并行调度、分支完成、候选结果、提交授权、外部副作用和目标满足是六种不同事实",
             "不构成 ADR、CORE 规范、Profile 或实现要求",
             "不创建并行制品、事务格式、分支对象、命令、组件、结果域、稳定接口或哲学专名",
@@ -2699,7 +2712,7 @@ def validate_jekyll_sources():
         proposal_text = isolation_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
             "隔离不是单一开关、进程或产品名称",
             "不构成 ADR、CORE 规范、Profile 或实现要求",
             "不创建隔离制品、沙箱格式、部署对象、命令、组件、结果域、稳定接口或哲学专名",
@@ -2751,7 +2764,7 @@ def validate_jekyll_sources():
         proposal_text = model_evaluation_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
             "评测至少包含九种不同事实",
             "不构成 ADR、CORE 规范、Profile、登记项或实现要求",
             "不创建评测制品、裁判对象、评分格式、基准格式、命令、组件、结果域、稳定接口或哲学专名",
@@ -2802,7 +2815,7 @@ def validate_jekyll_sources():
         proposal_text = model_training_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
             "至少十一种事实必须分开",
             "不构成 ADR、CORE 规范、Profile、登记项或实现要求",
             "不创建模型制品、数据集格式、训练清单格式、反馈格式、模型仓库、训练平台、命令、组件、结果域、稳定接口或哲学专名",
@@ -2856,7 +2869,7 @@ def validate_jekyll_sources():
         proposal_text = model_openness_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
             "至少十二种事实必须分开",
             "不构成 ADR、CORE 规范、Profile、登记项、法律意见或实现要求",
             "不建立 `OPEN-MODEL-CORE`、`LICENSE-CORE`",
@@ -2904,7 +2917,7 @@ def validate_jekyll_sources():
         proposal_text = hosted_service_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
             "至少十六种事实必须分开",
             "不构成 ADR、CORE 规范、Profile、登记项、许可选择、部署决定或实现要求",
             "不建立 `SERVICE-CORE`、`CLOUD-CORE`、`PORTABILITY-CORE`",
@@ -2957,7 +2970,7 @@ def validate_jekyll_sources():
         proposal_text = data_lifecycle_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：桌面审查完成；尚未进入规范",
+            "当前策略：正在研究；尚未进入规范",
             "至少十八种事实必须分开",
             "不构成 ADR、CORE 规范、Profile、登记项、法律结论或实现要求",
             "不建立 `DATA-CORE`、`PRIVACY-CORE` 或 `DELETION-CORE`",
@@ -3107,7 +3120,7 @@ def validate_jekyll_sources():
         "上线后的运行监测",
         "发布或接受决定",
         "当前尚未进入组件代码开发阶段",
-        "尚无 deterministic producer、independent inspector、bounded runner、求值器或决定引擎可供实现级测试",
+        "尚无 producer、inspector、runner、求值器或决定引擎可供实现级测试",
         "当前没有通用 round-trip 或跨 Profile 语义等价要求",
         "GNU Guix challenge",
         "GNU BFD canonical form",
@@ -3183,7 +3196,7 @@ def validate_jekyll_sources():
         r"(?:[0-9]+|[一二三四五六七八九十百]+)\s*(?:个|类|项|组)\s*(?:"
         r"[^。；，<\n]{0,16}(?:场景|威胁)|"
         r"[^。；，<\n]{0,12}(?:提案|语义|字节|规范)向量"
-        r")|[0-9]+\s*个\s*(?:evidence entry|session contract|Endem|Endem closure|诊断|适配|身份|文本|授权)"
+        r")|[0-9]+\s*个\s*(?:evidence|contract|Endem|closure|诊断|适配|身份|文本|授权)"
     )
     for source in volatile_inventory_pages:
         match = volatile_inventory_pattern.search(source.read_text())
@@ -3205,9 +3218,9 @@ def validate_jekyll_sources():
     ):
         if token not in verification_text:
             errors.append(f"testing guide missing change-to-evidence boundary: {token}")
-    for stale_count in ("十五个 evidence entry", "十八个 evidence entry"):
+    for stale_count in ("十五个 evidence", "十八个 evidence"):
         if stale_count in verification_text:
-            errors.append("testing guide must not copy drift-prone evidence entry vector counts")
+            errors.append("testing guide must not copy drift-prone evidence vector counts")
     development_guide_text = (SOURCE_ROOT / "docs" / "development-guide.md").read_text()
     for token in (
         "先写一句可被反例推翻的主张",
@@ -3242,7 +3255,7 @@ def validate_jekyll_sources():
                 "development guide retains a duplicated implementation or checklist section: "
                 + obsolete_heading
             )
-    for premature_path in ("producer/      Rust 写入器", "inspect/      独立只读 independent inspector", "cli/        endem 调度"):
+    for premature_path in ("producer/      Rust 写入器", "inspect/      独立只读 inspector", "cli/        endem 调度"):
         if premature_path in development_guide_text:
             errors.append(
                 "development guide presents an unfrozen implementation tree as current guidance: "
@@ -3271,21 +3284,21 @@ def validate_jekyll_sources():
     }
     for page, source_text in ktisor_boundary_pages.items():
         for stale_phrase in (
-            "所有规范制品都必须通过 deterministic producer",
+            "所有规范制品都必须通过 producer",
             "外部签名响应验证接口",
             "签名请求、分层诊断",
             "没有外部签名响应时只能保留未签候选",
         ):
             if stale_phrase in source_text:
-                errors.append(f"{page} retains a stale deterministic producer boundary: {stale_phrase}")
+                errors.append(f"{page} retains a stale producer boundary: {stale_phrase}")
     for page, token in {
-        "components/index.html": "session contract、evidence entry、外部签名与最终决定仍由各自责任域产生",
-        "endem/index.html": "外部签名响应由独立集成核对，不作为 deterministic producer 输入",
+        "components/index.html": "contract、evidence、外部签名与最终决定仍由各自责任域产生",
+        "endem/index.html": "外部签名响应由独立集成核对，不作为 producer 输入",
         "endem/docs/reference.md": "Endem 规范字节的唯一生产入口",
-        "docs/architecture-guide.md": "未来物理 Profile 确定后的 Endem closure 与发布派生",
+        "docs/architecture-guide.md": "未来物理 Profile 确定后的 closure 与发布派生",
     }.items():
         if token not in ktisor_boundary_pages[page]:
-            errors.append(f"{page} missing the precise deterministic producer boundary: {token}")
+            errors.append(f"{page} missing the precise producer boundary: {token}")
     theor_boundary_pages = {
         "components/index.html": (SOURCE_ROOT / "components" / "index.html").read_text(),
         "endem/index.html": (SOURCE_ROOT / "endem" / "index.html").read_text(),
@@ -3295,23 +3308,23 @@ def validate_jekyll_sources():
     }
     for page, source_text in theor_boundary_pages.items():
         for stale_phrase in (
-            "任意不可信 Endem、Endem closure 或 evidence entry 字节",
+            "任意不可信 Endem、closure 或 evidence 字节",
             "任意原始制品字节、视图和预算",
             "| `inspect` | 任意原始制品、视图和预算",
-            "一致性验证对合法、边界和畸形向量分别运行 deterministic producer 与 independent inspector",
-            "独立只读检查器（independent inspector）",
+            "一致性验证对合法、边界和畸形向量分别运行 producer 与 inspector",
+            "独立只读检查器（inspector）",
         ):
             if stale_phrase in source_text:
-                errors.append(f"{page} retains a stale independent inspector boundary: {stale_phrase}")
+                errors.append(f"{page} retains a stale inspector boundary: {stale_phrase}")
     for page, token in {
         "components/index.html": "不产生生产检查通过结论",
         "endem/index.html": "其他对象等待物理格式",
         "endem/docs/reference.md": "不修复、不写回，也不生成生产检查通过结论",
-        "endem/docs/safety.md": "生产侧 `lint` 路径与independent inspector",
-        "docs/architecture-guide.md": "Endem closure、evidence entry 与发布制品等待物理格式",
+        "endem/docs/safety.md": "生产侧 `lint` 路径与 inspector",
+        "docs/architecture-guide.md": "closure、evidence 与发布制品等待物理格式",
     }.items():
         if token not in theor_boundary_pages[page]:
-            errors.append(f"{page} missing the precise independent inspector boundary: {token}")
+            errors.append(f"{page} missing the precise inspector boundary: {token}")
     endem_reference_text = theor_boundary_pages["endem/docs/reference.md"]
     for token in (
         "## 按工作查动作",
@@ -3805,7 +3818,7 @@ def validate_jekyll_sources():
             "发布版只保留经过确认的目标结构",
             "运行完成后还要分开证据有效性、对判据的覆盖度、满足结果与最终决定",
             "它不会给自己签发工具调用、修改、部署或跨会话权限",
-            "本次能力只取授权决定、session contract、环境与预算的交集",
+            "本次能力只取授权决定、contract、环境与预算的交集",
         ),
         "architecture/index.html": (
             "计划中的 <code>endem</code> 入口承载五项公开职责",
@@ -4411,7 +4424,7 @@ def validate_jekyll_sources():
             "OpenTelemetry 语义约定 1.43.0",
             "已把 GenAI 约定移至独立仓库",
             "默认脱敏的单向导出",
-            "不进入 Endem 编码、evidence entry 身份、授权决定或最终接受",
+            "不进入 Endem 编码、evidence 身份、授权决定或最终接受",
         ),
         "endem/docs/running.md": (
             "A2A 1.0 版本化规范",
@@ -4421,7 +4434,7 @@ def validate_jekyll_sources():
             "仍无 GitHub release 或 tag",
             "Schema URL 不等于稳定发布",
             "默认不导出正文",
-            "不构成 evidence entry 身份",
+            "不构成 evidence 身份",
         ),
         "architecture/adr-0016-mene-time-model.html": (
             "RFC 3339",
@@ -4481,7 +4494,7 @@ def validate_jekyll_sources():
             "W3C SHACL",
             "MCP 2025-11-25 工具规范",
             "正式绑定必须记录精确身份",
-            "不能改变 Endem closure 闭包或直接授予权限",
+            "不能改变 closure 闭包或直接授予权限",
         ),
     }
     for relative_path, required_tokens in external_boundary_contracts.items():
@@ -5065,8 +5078,9 @@ def main():
     ).read_text()
     for token in (
         "不同名称使用不同检查",
-        "逐词检查词首",
-        "普通英语词及其职责短语已经按词首起音规则接受",
+        "每个人类术语都是一个完整单词",
+        "不把职责短语重新包装成名称",
+        "普通英语单词已经按词首起音规则接受",
         "Noemion",
         "Endem",
     ):
@@ -5098,7 +5112,7 @@ def main():
         "SLSA 1.2 制品验证",
         "GNU Guix 的 `guix challenge`",
         "资料检查可以发现引用、登记和预期分类之间的矛盾",
-        "普通职责词逐词检查词首、职责和机器冲突后即可使用",
+        "普通名称先确认是一个完整单词，再检查词首、职责和机器冲突",
         "两个自造名称仍需发行前的人类朗读、听写和职责匹配证据",
         "不会成为第二套命令、机器别名或语义权威",
     ):
@@ -5147,7 +5161,7 @@ def main():
             "为什么计划只提供一个命令入口",
             "供人工智能系统安全使用的目标制品，是否意味着文件本身已经获准执行",
             "最终发布版会移除原始自然语言",
-            "deterministic producer 只消费已经具备精确语义授权绑定的输入",
+            "producer 只消费已经具备精确语义授权绑定的输入",
             "它不替具名权威选择意义，也不授予动作权限",
             "NIST AI Agent Standards Initiative",
             "OpenAI Agent 编排说明",
@@ -5194,7 +5208,7 @@ def main():
             "某某 OBJ",
             "23 个独立用户",
             "为什么只保留一个 CLI",
-            "只有 deterministic producer 能依据确定性规则或具名语义决定形成规范字节",
+            "只有 producer 能依据确定性规则或具名语义决定形成规范字节",
         ),
         "specifications/index.html": (
             '<span class="badge">END-CORE</span>',
@@ -5473,7 +5487,7 @@ def main():
             )
         visible_text = content_visible_text(parser)
         for term in (
-            "Noemion", "Endem", "Endem closure", "session contract", "evidence entry", "source_expression", "meaning_projection", "situation", "goal_direction",
+            "Noemion", "Endem", "closure", "contract", "evidence", "source_expression", "meaning_projection", "situation", "goal_direction",
             "satisfaction_criteria", "unresolved_meaning", "模型", "原始表达", "实际观察", "没有可执行程序",
         ):
             if term not in visible_text:
@@ -5572,7 +5586,7 @@ def main():
                 'viewBox="0 0 1600 900"',
                 "SIX SEMANTIC FACETS",
                 "SOURCE", "MEANING", "SITUATION", "DIRECTION", "CRITERIA", "UNRESOLVED",
-                "ENDEM", "EVIDENCE ENTRY",
+                "ENDEM", "EVIDENCE",
                 "@keyframes route-flow", "@keyframes scan-pass",
                 "@media(prefers-reduced-motion:reduce)",
             ):

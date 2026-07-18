@@ -73,21 +73,21 @@ next_label: ADR-0020
 | 区间跨越边界、样本不足或数据不完整。 | `undetermined` | 295–305ms，不能决定位于哪一侧。 |
 | 采集、换算、统计或比较程序违反契约。 | `fault` | 单位或分位数算法不可定位。 |
 
-比较器必须明确为 `lt / le / gt / ge / eq`，并绑定阈值、单位、原始观察、换算、聚合器、区间与实际 evidence entry。把 0.76 先显示舍入为 0.8，再与 0.8 比较，必须拒绝。
+比较器必须明确为 `lt / le / gt / ge / eq`，并绑定阈值、单位、原始观察、换算、聚合器、区间与实际 evidence。把 0.76 先显示舍入为 0.8，再与 0.8 比较，必须拒绝。
 
 ## AI 基准和遥测工具只提供什么
 
 | 外部资料 | 可采用的机制 | Noemion 不继承 |
 | --- | --- | --- |
 | [NIST AI 800-2 Initial Public Draft](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.800-2.ipd.pdf) | 按评估目标、基准选择、执行、分析和报告组织自动化模型与 Agent 评测。 | 初始公开草案不是字段标准，也不提供项目合格阈值。 |
-| [NIST AI 800-3](https://doi.org/10.6028/NIST.AI.800-3) | 区分固定基准准确率与泛化准确率，并显式选择 estimand、统计假设和不确定度。 | 不把 GLMM 冻结为唯一算法，推广总体也不等于所有现实用途。 |
+| [NIST AI 800-3](https://doi.org/10.6028/NIST.AI.800-3) | 区分固定基准准确率与泛化准确率，并显式选择 estimand、统计假设和不确定度。 | 不把 GLMM 确定为唯一算法，推广总体也不等于所有现实用途。 |
 | [OpenTelemetry Metrics 数据模型](https://opentelemetry.io/docs/specs/otel/metrics/data-model/) | 保存单位、数据点类型、时间窗、temporality、分桶边界、重置和无记录值。 | 同一事件可形成不同 View；遥测流本身不选择 `satisfaction_criteria`、总体或阈值。 |
 | [Prometheus 直方图与摘要指南](https://prometheus.io/docs/practices/histograms/) | 展示分桶、分位数算法、时间窗和聚合位置怎样改变误差与可合并性。 | 仪表盘查询不能事后替换已授权方法。 |
 | [GNU Units 手册](https://www.gnu.org/software/units/manual/units.html) | 检查量纲、定义域、非线性换算和非唯一逆；`units --check` 可发现部分定义错误。 | 单点逆函数检查不保证换算全域正确，也不能决定业务总体、聚合器或阈值。 |
 
 ## 当前还不能编码或执行什么
 
-现行十二个测量提案向量覆盖六个允许分类和六个确定拒绝，只验证 END-MSR 四条抽象条款。本决定不增加 END-P2 字段，也不表示遥测采集器、基准运行器、统计引擎、bounded runner 或求值器已经实现。
+现行十二个测量提案向量覆盖六个允许分类和六个确定拒绝，只验证 END-MSR 四条抽象条款。本决定不增加 END-P2 字段，也不表示遥测采集器、基准运行器、统计引擎、runner 或求值器已经实现。
 
 单位词典及版本、跨叶测量公式、多重比较、顺序检验、基线漂移、模型裁判校准、统计模型登记、隐私保护测量、物理字段和规范字节仍需新 Profile、威胁分析与实现证据。
 

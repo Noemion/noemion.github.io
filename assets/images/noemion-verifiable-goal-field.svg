@@ -81,7 +81,7 @@
       <path class="route evidence-flow" d="M812 230C980 118 1250 92 1400 246C1540 392 1480 656 1280 748C1080 838 850 752 812 680" stroke="#b9f4db" stroke-opacity=".72" stroke-width="2.4"/>
       <circle class="evidence-orbit" cx="1195" cy="453" r="166" fill="none" stroke="url(#spectrum)" stroke-opacity=".62" stroke-width="2" stroke-dasharray="2 14"/>
       <g filter="url(#fine-glow)"><circle class="status-dot" cx="1195" cy="286" r="6" fill="#6be1b7"/><circle class="status-dot" cx="1362" cy="453" r="6" fill="#f4c247"/><circle class="status-dot" cx="1195" cy="620" r="6" fill="#78b8ff"/></g>
-      <text x="1220" y="690" fill="#e1f3ea" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="2.5">EVIDENCE ENTRY</text>
+      <text x="1220" y="690" fill="#e1f3ea" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="2.5">EVIDENCE</text>
       <text x="1220" y="718" fill="#92b3a4" font-size="11" text-anchor="middle" letter-spacing="2">INDEPENDENTLY SCOPED</text>
     </g>
 

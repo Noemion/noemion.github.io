@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "Endem closure Core Threat Model · Noemion"
+title: "closure Core Threat Model · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/endem-closure-threat-model.html"
 summary: "分析成员替换、依赖遗漏、权限放大、循环和运行时换入新目标等风险，保护组合集合的完整性。"
 document_status: "威胁模型"
 ---
-# Endem closure Core Threat Model
+# closure Core Threat Model
 
 - 适用规范：`CLOSURE-CORE 0.1.0-draft`
 - 版本：`0.1.0-draft`
@@ -38,7 +38,7 @@ document_status: "威胁模型"
 
 ### THR-CLOSURE-005 — 成员结果洗白
 
-攻击者把一个成员的完成、满足、接受、签名或证据数量推广为整个 Endem closure 的结论。`CLOSURE-STA-001` 保留成员结果域，并要求任何闭包级决定具名策略、范围和权威。
+攻击者把一个成员的完成、满足、接受、签名或证据数量推广为整个 closure 的结论。`CLOSURE-STA-001` 保留成员结果域，并要求任何闭包级决定具名策略、范围和权威。
 
 ### THR-CLOSURE-006 — 激活竞态与状态混同
 
@@ -46,9 +46,9 @@ document_status: "威胁模型"
 
 ## 3. 当前不解决
 
-- Endem closure 物理容器和大规模性能上限；
+- closure 物理容器和大规模性能上限；
 - 远程对象仓库身份、镜像透明日志和供应链入侵；
-- bounded runner 沙箱逃逸、凭据泄漏和跨租户侧信道；
+- runner 沙箱逃逸、凭据泄漏和跨租户侧信道；
 - 受限循环、分布式事务和动态调度。
 
 这些边界保持开放，不能用本威胁清单声称实现已经安全。

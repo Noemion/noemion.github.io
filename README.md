@@ -2,7 +2,7 @@
 
 本仓库维护 [Noemion 官方网站](https://noemion.github.io/)及其公开技术资料，包括项目介绍、架构设计、规范、指南、Endem 使用手册和开发进展。
 
-Noemion 目前处于研究、规范与验证方案设计阶段，尚未发布 deterministic producer、independent inspector、bounded runner 或 `endem` 命令行工具的实现。仓库中的测试用于检查资料、路由和草案之间的一致性，不代表组件已经实现。
+Noemion 目前处于研究、规范与验证方案设计阶段，尚未发布 producer、inspector、runner 或 `endem` 命令行工具的实现。仓库中的测试用于检查资料、路由和草案之间的一致性，不代表组件已经实现。
 
 ## 从哪里开始
 

@@ -18,7 +18,7 @@ document_status: "规范草案"
 
 ## 1. 范围
 
-本规范定义一项自然语言投影、未决项解决、能力授予或最终决定在什么条件下可以被称为“已获授权”。它统一约束 Endem 的 `meaning_projection` 与 `unresolved_meaning`、Endem closure 的权限收窄、session contract 的政策与能力闭包、evidence entry 的决定记录、签名主体适用性以及外部 Agent 协议的授权请求。
+本规范定义一项自然语言投影、未决项解决、能力授予或最终决定在什么条件下可以被称为“已获授权”。它统一约束 Endem 的 `meaning_projection` 与 `unresolved_meaning`、closure 的权限收窄、contract 的政策与能力闭包、evidence 的决定记录、签名主体适用性以及外部 Agent 协议的授权请求。
 
 `AUT-CORE` 不是新的工程制品、身份系统、访问令牌、角色数据库、政策脚本或决定引擎。认证只能回答当前主体怎样被识别；签名只能绑定受保护陈述；授权决定只能在精确语境和范围内允许或拒绝特定事项。它们都不能自行证明一句话为真、目标已经满足、证据已经充分或制品最终应被接受。
 
@@ -59,7 +59,7 @@ document_status: "规范草案"
 
 ### AUT-SEM-001 — 自然语言候选只能由确定性规则或范围有限的具名权威确认
 
-**要求：**确认 `meaning_projection`、解决 `unresolved_meaning` 或固定构念、阈值、集合、时间和决定主体时，授权 `MUST` 绑定精确来源身份、提交后的解码文本、候选内容身份、影响的语义面与关系位置、候选生产方式、显示视图、授权主体、决定理由和未被解决的剩余项。确定性规则必须版本化并只处理声明域；人工决定必须落在当前主体范围内。模型输出、相似度、置信度、结构合法、默认值、批量按钮或未展示差异的单次点击 `MUST NOT` 确认候选。
+**要求：**确认 `meaning_projection`、解决 `unresolved_meaning` 或固定构念、阈值、集合、时间和决定主体时，授权 `MUST` 绑定精确来源身份、提交后的解码文本和候选内容身份。授权还 `MUST` 绑定受影响的语义面与关系位置、候选生产方式、显示视图、授权主体、决定理由和剩余未决项。确定性规则必须版本化并只处理声明域；人工决定必须落在当前主体范围内。模型输出、相似度、置信度、结构合法、默认值、批量按钮或未展示差异的单次点击 `MUST NOT` 确认候选。
 
 **失败：**模型最高概率候选直接进入 `meaning_projection`、授权者看到截断文本却批准完整对象、一次“全部接受”消除不同风险的 `unresolved_meaning`，或批准对象与显示对象身份不一致时，候选仍未获授权。
 
@@ -103,7 +103,7 @@ document_status: "规范草案"
 
 ### AUT-TIM-001 — 授权有效性必须绑定时间、状态与撤销
 
-**要求：**授权使用 `MUST` 核对决定时刻、适用起止、截止点、状态来源、新鲜度、撤销与主体或政策变更。过期、撤销、状态未知或实质语境漂移不得沿用缓存成功。撤销和过期只改变后续适用性，不改写历史决定、来源字节、Endem 身份或已记录 evidence entry；需要持续授权的会话必须预先声明复核频率和失败动作。
+**要求：**授权使用 `MUST` 核对决定时刻、适用起止、截止点、状态来源、新鲜度、撤销与主体或政策变更。过期、撤销、状态未知或实质语境漂移不得沿用缓存成功。撤销和过期只改变后续适用性，不改写历史决定、来源字节、Endem 身份或已记录 evidence；需要持续授权的会话必须预先声明复核频率和失败动作。
 
 **失败：**永久复用一次批准、离线缓存忽略撤销、角色离职后继续授权、当前时间替代声明截止点，或删除历史决定掩盖撤销时，适用性无效。
 
@@ -119,7 +119,7 @@ document_status: "规范草案"
 
 ### AUT-CAP-001 — 能力只能由已授范围与所有本地上限求交得到
 
-**要求：**运行能力 `MUST` 是授权决定、制品或 Endem closure 上限、当前政策、环境支持、session contract、适配器与资源预算的交集。授权请求、工具说明、协议 scope 挑战、Agent 技能、凭据存在和环境可访问性只是候选或上限，不是额外授予。能力描述与实时秘密必须分开；扩大动作、对象、受众、期限或预算 `MUST` 产生新授权决定和新 run 会话，不能修补现有 session contract。
+**要求：**运行能力 `MUST` 是授权决定、制品或 closure 上限、当前政策、环境支持、contract、适配器与资源预算的交集。授权请求、工具说明、协议 scope 挑战、Agent 技能、凭据存在和环境可访问性只是候选或上限，不是额外授予。能力描述与实时秘密必须分开；扩大动作、对象、受众、期限或预算 `MUST` 产生新授权决定和新 run 会话，不能修补现有 contract。
 
 **失败：**权限使用并集、沿用环境 root、把 token 透传给下游、MCP step-up 原地扩大旧会话，或模型创建子 Agent 后倍增预算时，能力派生无效。
 
@@ -127,7 +127,7 @@ document_status: "规范草案"
 
 ### AUT-SEP-001 — 授权不得洗白其他结果域
 
-**要求：**主体认证、签名验证、角色资格、语义授权、能力授予、证据有效性与覆盖、满足判断、授权决定、最终 `accepted / rejected / deferred` 和 run 会话终止 `MUST` 保持独立主体与结果。`allowed` 只允许执行或确认其声明事项，不证明候选为真、目标 `met`、evidence entry `valid` 或 `sufficient`、制品 `accepted`、会话 `completed`。模型、bounded runner、外部 Agent、工具或适配器 `MUST NOT` 因执行成功、自报身份或取得令牌而成为语义或最终决定权威。
+**要求：**主体认证、签名验证、角色资格、语义授权、能力授予、证据有效性与覆盖、满足判断、授权决定、最终 `accepted / rejected / deferred` 和 run 会话终止 `MUST` 保持独立主体与结果。`allowed` 只允许执行或确认其声明事项，不证明候选为真、目标 `met`、evidence `valid` 或 `sufficient`、制品 `accepted`、会话 `completed`。模型、runner、外部 Agent、工具或适配器 `MUST NOT` 因执行成功、自报身份或取得令牌而成为语义或最终决定权威。
 
 **失败：**访问授权被解释为事实正确、人工确认投影后直接 `accepted`、A2A `AUTH_REQUIRED` 解决后任务被写成 `met`，或有效签名和授权主体共同替代证据判断时，跨域推导无效。
 
@@ -138,11 +138,11 @@ document_status: "规范草案"
 - [RFC 9396](https://www.rfc-editor.org/rfc/rfc9396.html) 说明粗粒度 scope 不足以表达动作、资源和交易条件，并允许资源所有者只授予请求子集。Noemion 借鉴精细范围和部分授予显式化，不采用 OAuth JSON 作为本地授权格式。
 - [RFC 8693](https://www.rfc-editor.org/rfc/rfc8693.html) 区分 delegation 与 impersonation，并保留 subject、actor 和委托链。Noemion 默认只接受可追踪、逐级收窄的委托，不因外部 token 隐去实际行动者。
 - [RFC 9470](https://www.rfc-editor.org/rfc/rfc9470.html) 只规定认证强度不足时的 step-up 挑战；它明确不定义资源的授权要求。Noemion 因此不把“重新认证成功”当作“已经获准当前动作”。
-- [RFC 9700](https://www.rfc-editor.org/rfc/rfc9700.html) 要求访问令牌尽量绑定发送者、受众、资源和动作。Noemion 把这些视为外部能力上限，实际能力仍须与本地 session contract 和政策求交。
+- [RFC 9700](https://www.rfc-editor.org/rfc/rfc9700.html) 要求访问令牌尽量绑定发送者、受众、资源和动作。Noemion 把这些视为外部能力上限，实际能力仍须与本地 contract 和政策求交。
 - [MCP 2025-11-25 授权规范](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)要求资源受众绑定并支持增量 scope；[A2A 1.0 规范](https://a2a-protocol.org/v1.0.0/specification/)允许 `AUTH_REQUIRED` 沿 Agent 链继续委托，却把授权模型留给实现。Noemion 固定本地权威、委托和结果分离，不让协议状态成为本地授权。
 - [GNU Guix 替代服务器授权](https://guix.gnu.org/manual/devel/en/guix.pdf)要求把允许的签名公钥显式加入本地 ACL，说明“签名存在”与“本地决定信任哪个主体”是两件事。[GnuPG 信任模型](https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration-Options.html)也把密钥有效性与用户配置的信任模型分开。Noemion 借鉴本地显式信任，不采用其密钥或 Web of Trust 作为语义授权模型。
 - 维特根斯坦在《逻辑哲学论》4.022 写道：“命题显示其意义。命题显示当它为真时事情是怎样的，而且宣称事情就是这样的。”工程上，这支持把候选命题的意义结构与其真假分开；它不能决定谁拥有授权、同意是否有效或多人冲突怎样解决。这些制度与安全关系必须由本规范、政策和证据另行定义。
 
 ## 7. 当前未定义
 
-本规范不冻结权威目录、主体身份体系、角色语言、政策语言、授权事件物理编码、同意 UI Profile、法定人数算法、凭据格式、OAuth/MCP/A2A 映射、撤销分发、能力代理、审计存储、组织治理或法律效力。它们必须由真实生产者和消费者、独立 Profile、威胁分析、正反向量，以及进入代码开发阶段并明确实现范围后取得的实现证据共同支持。
+本规范不确定权威目录、主体身份体系、角色语言、政策语言、授权事件物理编码、同意 UI Profile、法定人数算法、凭据格式、OAuth/MCP/A2A 映射、撤销分发、能力代理、审计存储、组织治理或法律效力。它们必须由真实生产者和消费者、独立 Profile、威胁分析、正反向量，以及进入代码开发阶段并明确实现范围后取得的实现证据共同支持。

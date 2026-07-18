@@ -28,7 +28,7 @@ next_label: ADR-0015
 | 来源表达 | UTF-8 文本、来源身份、版本和解码后的范围。 | 逐字节保留原始 `.ends` 文件。 |
 | 意义投影 | 确定性规则确认的投影，或范围有限的语义授权绑定。 | 形成器有权替主体选择意义。 |
 | 判断契约 | 观察要求、缺失政策、错误政策和决定权威选择器。 | 证据已经存在、目标已经满足或决定已经接受。 |
-| 形成输入 | 确定映射到来源保留 END-P2 所需的封闭字段。 | 已经存在 deterministic producer、稳定 CLI 或最终发布物。 |
+| 形成输入 | 确定映射到来源保留 END-P2 所需的封闭字段。 | 已经存在 producer、稳定 CLI 或最终发布物。 |
 
 ## 一项输入怎样进入 END-P2
 
@@ -68,7 +68,7 @@ next_label: ADR-0015
 | 确定性投影 | 登记且适用的规则。 | 不能据此调用工具或发布制品。 |
 | 需要判断的意义 | 对该来源、范围和截止点有权的具名主体。 | 不能把语义确认扩张为一般动作授权。 |
 | 多个可表达候选 | 来源清单不选择；必须写入 `unresolved_meaning`。 | 模型、形成器和默认值都不能替主体关闭问题。 |
-| 动作执行 | 未来 AUT-CORE 决定结合 session contract、政策和环境重新判断。 | 来源清单中的 `decision_authority` 选择器不能充当授权证明。 |
+| 动作执行 | 未来 AUT-CORE 决定结合 contract、政策和环境重新判断。 | 来源清单中的 `decision_authority` 选择器不能充当授权证明。 |
 
 [NIST AI 600-1](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)把自信但错误的生成内容列为生成式人工智能风险。该风险支持保留候选、确认者和失败责任，不定义 Noemion 的字段或授权结果。
 
@@ -90,7 +90,7 @@ next_label: ADR-0015
 
 若新任务无法由当前十种指令表达，应先回到 END-CORE 与新 Profile 判断职责；不得用隐式默认、自由脚本或模型补全扩大来源清单。
 
-> **当前限制：**这里只有 END-SRCM 规范、两个来源样例和映射向量。没有 deterministic producer 解析器、实现仓库、稳定命令、通用自然语言编译或最终发布 Profile。
+> **当前限制：**这里只有 END-SRCM 规范、两个来源样例和映射向量。没有 producer 解析器、实现仓库、稳定命令、通用自然语言编译或最终发布 Profile。
 
 - [查看 END-P2 边界](adr-0013-end-p1-payload.html) — 确认来源清单实际能够映射哪些字段。
 - [查看动作授权](adr-0029-authority-and-authorization-decisions.html) — 区分意义确认、能力与动作决定。

@@ -23,7 +23,7 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 | 记录项 | 本例写法 |
 | --- | --- |
 | 可证伪主张 | 固定 A2A 版本与映射后，`completed` 保持外部来源；系统不得只凭该状态形成 `met` 或 `accepted` |
-| 真实消费者 | 协议适配设计、bounded runner 会话准入、证据评估与发布决定者 |
+| 真实消费者 | 协议适配设计、runner 会话准入、证据评估与发布决定者 |
 | 权威依据 | ADP-CORE 约束外部状态，SESSION-CORE 约束会话上限，EVIDENCE-CORE 约束证据范围，AUT-CORE 约束决定权威 |
 | 支持与拒绝案例 | 完整保存来源后继续判断；缺少协议版本、对象身份或适用权威时停止 |
 | 当前证据 | 规范条款、场景和向量的一致性检查 |
@@ -53,7 +53,7 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 | 语义、结果或信任边界 | CORE 与必要 ADR | 因为示例或实现方便而增加默认语义 |
 | 物理格式或 Profile | 格式规范、封闭 Profile、威胁和正反向量 | 把通用解码成功写成内容接受或互操作 |
 | 研究问题 | 非规范提案、案例、反例、替代方案和停止条件 | 把候选字段、命令或服务写成现行接口 |
-| 术语或发行名称 | 职责必要性、冲突证据与逐词词首；自造名称再补读音和口头区分方案 | 用词源、个人偏好或模型评分代替自造名称的人类证据 |
+| 术语或发行名称 | 单个完整单词、职责必要性、冲突证据与词首；自造名称再补读音和口头区分方案 | 用词源、个人偏好或模型评分代替自造名称的人类证据 |
 | 未来组件行为 | 现行规范与[开发阶段及证据路线](../development/implementation-roadmap.html) | 在代码阶段开启前创建工作区、接口或实现目录 |
 
 格式、语义、执行或信任边界变化需要 ADR；文字澄清若不改变义务，只修改解释和对应质量契约。无法判断改动是否改变规范时，先给出会区分两种解释的反例，再决定是否需要 ADR。
@@ -62,11 +62,11 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 
 项目当前只保留两个自造名称：**Noemion** 和 **Endem**。候选读法分别是 `No-e-mi-on`（/noʊˈiː.mi.ən/，可按 `noh-EE-mee-uhn` 拼读）与 `En-dem`（/ˈɛn.dɛm/，可按 `EN-dem` 拼读）。两种候选读法都覆盖书写中的每个字母，没有静音字母；独立使用者的首次朗读与听辨结果尚未形成，因此这些提示不是已经确认的正式读音。
 
-代码、Issue 和技术讨论使用现行直白职责名：Endem closure、session contract、evidence entry、deterministic producer、independent inspector、bounded runner，以及 `form / lint / compose / inspect / run`。字段使用 `source_expression / meaning_projection / situation / goal_direction / satisfaction_criteria / unresolved_meaning`，观察使用 `structured_observation`。现行登记词表的每个英文构词单元都从词首直接起音，没有词首静音字母或必须另行指定的起始辅音组合。
+代码、Issue 和技术讨论使用现行直白名称：closure、contract、evidence、producer、inspector、runner，以及 `form / lint / compose / inspect / run`。六项语义职责分别称为 source、meaning、situation、direction、criteria 和 unresolved，观察输入称为 observation。每个人类名称都是一个完整单词，并且从词首直接起音；名称不得包含空格、连字符或下划线，也不得把多个现成词粘成一个新词。
 
-普通英语工程词沿用通常拼写，不为了消除英语固有的词中或词尾静音字母另造拼法。`closure`、`evidence`、`compose`、`source`、`profile`、`time`、`scope`、`coverage`、`guard`、`signed` 与 `view` 均按通行读法使用；它们只检查词首起音与职责是否准确，不因缺少独立听辨实验而标为未通过。由普通词组成的职责短语也逐词执行同一规则。
+普通英语工程词沿用通常拼写，不为了消除英语固有的词中或词尾静音字母另造拼法。`closure`、`evidence`、`compose`、`source`、`profile`、`time`、`scope`、`coverage`、`guard`、`signed` 与 `view` 均按通行读法使用；它们只检查词首起音与职责是否准确，不因缺少独立听辨实验而标为未通过。职责短语只能用于说明，不能登记、加首字母大写或充当正式名称。
 
-名称若因词首起音不合格，替换项必须是一个完整单词，不能新造连字符词、下划线词或拼接词。普通单词能够准确承担职责时直接使用；确无合适单词时可以造词，但新词仍须满足拼写可恢复、起音直观、职责明确和口头易分辨四项要求。
+名称若因词首起音不合格，替换项必须是一个完整单词，不能新造连字符词、下划线词或拼接词。普通单词能够准确承担职责时直接使用；确无合适单词时可以造词，但新词仍须满足拼写可恢复、起音直观、职责明确和口头易分辨四项要求。字段、枚举、路由、文件路径和规范编号是机器标识；它们可以遵守各自声明的组合语法，但不能作为人类术语展示，组成标识的每个单词仍须通过词首检查。
 
 读音提示只帮助人类交流，不是命令别名、机器标识或语义权威。需要精确引用时，直接粘贴书面名称或代码标识；不要根据口述近似音自动选择命令、字段或授权对象。现行名称、被替换名称、普通词规则和两个自造名称的发行证据边界统一见 [ADR-0037](../architecture/adr-0037-terminology-simplification.html)。
 
@@ -94,7 +94,7 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 | 冲突与缓存边界 | 同一权威层的冲突规则，以及主体、租户、政策、会话、模型和截止点 | 按到达顺序选择，或跨边界复用旧结果 |
 | 动作复核 | 模型输出的候选身份，以及动作前的对象、目的、参数、预算和授权 | 模型看到高权威文字就获得工具能力 |
 
-供应商未公开的内部变换保持未知，不能写成“完整上下文已经保留”。模型返回工具请求后，控制平面仍按 AUT-CORE 与当前 session contract 重新检查；工具成功只形成带来源的观察，不产生新权限、`met` 或 `accepted`。
+供应商未公开的内部变换保持未知，不能写成“完整上下文已经保留”。模型返回工具请求后，控制平面仍按 AUT-CORE 与当前 contract 重新检查；工具成功只形成带来源的观察，不产生新权限、`met` 或 `accepted`。
 
 [NIST 智能体劫持研究](https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations)支持把可信内部指令与不可信外部数据分开；[MCP 工具规范](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)也要求客户端把工具注解视为不可信。完整案例与失败归属见[模型上下文装配边界研究提案](https://noemion.github.io/spec/model-context-assembly-proposal.html)。这些资料不定义 Noemion 的消息角色、字段或授权结果。
 
@@ -102,9 +102,9 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 
 **当前策略：**项目只维护研究、规范、威胁、验证方案和公开资料。第一条未来实现切片只考虑 `form`、`lint`、独立 `inspect` 与必要的一致性检查；`compose` 和 `run` 等待真实消费者与相应安全边界。
 
-**已有成果：**END-CORE、END-FMT、END-P2、DIA-CORE 与现行向量已经限定未来形成、分层检查、独立读取和失败原子性。ADR-0012 记录 Rust 1.97.0 作为未来 deterministic producer 与制品形成侧读取核心的候选语言；零 `unsafe`、首条切片零第三方 crate、受检算术和independent inspector 都是未来约束，不是现有实现。
+**已有成果：**END-CORE、END-FMT、END-P2、DIA-CORE 与现行向量已经限定未来形成、分层检查、独立读取和失败原子性。ADR-0012 记录 Rust 1.97.0 作为未来 producer 与制品形成侧读取核心的候选语言；零 `unsafe`、首条切片零第三方 crate、受检算术和 inspector 都是未来约束，不是现有实现。
 
-**限制条件：**当前没有 deterministic producer、independent inspector、bounded runner、`endem` CLI、适配器、运行时、实现级模糊测试或发布包。尚未定义的实现目录、仓库拆分、稳定 ABI 和协议 Profile 不属于当前接口。`Noemion` 与 `Endem` 两个自造名称仍未完成发行前的人类读音验证；普通职责词已经按词首起音规则接受。
+**限制条件：**当前没有 producer、inspector、runner、`endem` CLI、适配器、运行时、实现级模糊测试或发布包。尚未定义的实现目录、仓库拆分、稳定 ABI 和协议 Profile 不属于当前接口。`Noemion` 与 `Endem` 两个自造名称仍未完成发行前的人类读音验证；普通职责词已经按词首起音规则接受。
 
 [GNU Coding Standards](https://www.gnu.org/prep/standards/standards.html)强调健壮、可靠的软件行为，并要求主动语态明确句子主体；[NIST SSDF 1.1](https://csrc.nist.gov/pubs/sp/800/218/final)提供可整合进不同生命周期的安全开发实践。[NIST AI 800-5](https://www.nist.gov/publications/summary-analysis-responses-request-information-regarding-security-considerations-ai)汇总的公开意见普遍认为，基础网络安全实践对 Agent 仍然有效，但需要针对模型输出连接工具和环境的风险继续调整。这些资料支持保留软件安全基线并增加 Agent 专项反例，不证明 Noemion 已经实现安全组件。
 

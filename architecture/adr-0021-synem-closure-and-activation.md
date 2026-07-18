@@ -38,11 +38,11 @@ next_label: ADR-0022
 | 收窄权限 | 成员上限、组合策略与会话政策只取交集。 | 某成员需要网络，就让所有成员取得网络能力。 |
 | 进入会话 | 守卫只决定固定成员本次是否生效。 | 运行时下载新成员、改写闭包身份或直接授予权限。 |
 
-组合闭包的现行设计名称是 Endem closure。它不是文件包、搜索结果、模型上下文、对话记忆或动态工具列表。
+组合闭包的现行设计名称是 closure。它不是文件包、搜索结果、模型上下文、对话记忆或动态工具列表。
 
 ## 先判断同一终态还是多个目标
 
-| 边界问题 | Endem 复合根 | Endem 组合闭包（Endem closure） |
+| 边界问题 | Endem 复合根 | Endem 组合闭包（closure） |
 | --- | --- | --- |
 | 终态身份 | 多个关系共同描述一个不可分终态。 | 至少两个终态能够独立实现和失败。 |
 | 判断与决定 | 共享一个目标方向和验收责任。 | 每个成员保留自己的满足结果与最终决定。 |
@@ -79,7 +79,7 @@ next_label: ADR-0022
 
 机器结果域仍是 `active / inactive / unresolved / error`。裸状态词在日志和口头交流中容易脱离结果域，必须写明 `activation=`；人类界面先使用表中的中文职责。
 
-> **名称边界：**“闭包”可能被理解为程序闭包或流程结束，首次说明应写“Endem 组合闭包”。Endem closure 已按普通词的词首和职责规则接受；它仍是设计阶段名称，不表示物理格式或组件已经存在。
+> **名称边界：**“闭包”可能被理解为程序闭包或流程结束，首次说明应写“Endem 组合闭包”。closure 已按普通词的词首和职责规则接受；它仍是设计阶段名称，不表示物理格式或组件已经存在。
 
 ## 外部依赖与 Agent 清单只能提供什么
 
@@ -92,14 +92,14 @@ next_label: ADR-0022
 | [GNU Guix 参考手册](https://guix.gnu.org/manual/en/guix.pdf) | 递归导出可以包含 store item 的依赖闭包、引用和派生元数据。 | 不采用 Guix Store 路径、包权限或归档格式。 |
 | [GNU make 条件指令](https://www.gnu.org/software/make/manual/html_node/Conditionals.html) | 条件在读取 makefile 时决定哪些文本可见，不控制 recipe 执行时状态。 | 形成时成员选择不能冒充会话期激活。 |
 | [W3C SHACL](https://www.w3.org/TR/shacl/#deactivated) | 停用的 Shape 不产生验证结果。 | 空结果不等于符合、满足或权限授予。 |
-| [MCP 2025-11-25 工具规范](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) | `tools/list` 与变更通知表明运行时工具集合可以变化。 | 动态清单不能改变 Endem closure 闭包或直接授予权限。 |
+| [MCP 2025-11-25 工具规范](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) | `tools/list` 与变更通知表明运行时工具集合可以变化。 | 动态清单不能改变 closure 闭包或直接授予权限。 |
 | [A2A 1.0 Agent Card](https://a2a-protocol.org/v1.0.0/specification/) | 声明 Agent 能力、技能、接口和安全要求。 | 远端声明不能决定本地成员、精确身份或闭包级接受。 |
 
 ## 当前还不能编码或执行什么
 
-现行十二个 Endem closure 提案向量覆盖六个允许分类和六个确定拒绝，只检查 CLOSURE-CORE 六条抽象规则。END-CORE、END-FMT 和 END-P2 保持不变。
+现行十二个 closure 提案向量覆盖六个允许分类和六个确定拒绝，只检查 CLOSURE-CORE 六条抽象规则。END-CORE、END-FMT 和 END-P2 保持不变。
 
-这项决定不表示 deterministic producer、independent inspector、bounded runner、CLI、解析器或运行时已经实现。Endem closure 也没有物理容器、文件扩展名、魔数、稳定 ABI 或版本范围语法。
+这项决定不表示 producer、inspector、runner、CLI、解析器或运行时已经实现。closure 也没有物理容器、文件扩展名、魔数、稳定 ABI 或版本范围语法。
 
 符号与重定位、执行顺序、并行调度、受限循环、远程对象仓库、跨会话缓存和规范字节仍需真实消费者、新 Profile、威胁分析与组件证据。
 

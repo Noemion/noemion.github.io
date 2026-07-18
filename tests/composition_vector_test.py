@@ -138,7 +138,7 @@ def main():
         errors.append("composition vectors must use end-core.composition-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("composition vectors must pin END-CORE 0.1.0-draft")
-    if "not a parser, bounded runner, evaluator, runtime, or component implementation" not in document.get("description", ""):
+    if "not a parser, runner, evaluator, runtime, or component implementation" not in document.get("description", ""):
         errors.append("composition vectors must state their non-implementation boundary")
     cases = document.get("cases")
     if not isinstance(cases, list) or len(cases) != 12:

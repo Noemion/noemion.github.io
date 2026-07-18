@@ -45,7 +45,7 @@ next_label: ADR-0010
 | 原文和解释混在一起 | 要求保存来源记号，并单独记录经过确认的意义 | 来源表达与意义投影分别承担 |
 | 目标只是实体或标签清单 | 要求用对象、关系和角色组成一个根事态 | 中性事态保存关系结构 |
 | 事态同时携带“想要什么” | 发现描述现实可能性与表达目标方向是不同责任 | 中性事态和目标方向分离 |
-| 判断规则、观察和接受混在一起 | 要求先固定满足条件，再取得外部观察 | 满足判据、evidence entry、满足结果和最终决定分别处理 |
+| 判断规则、观察和接受混在一起 | 要求先固定满足条件，再取得外部观察 | 满足判据、evidence、满足结果和最终决定分别处理 |
 | 所有未知共用一个状态 | 发现解释未决、观察不足和执行故障必须区分 | 未决问题、`undetermined` 与 `fault` 分属不同层次 |
 
 ## 当前开发者应怎样拆开一个目标
@@ -66,7 +66,7 @@ next_label: ADR-0010
 | 要使事态成立还是保持成立 | 目标方向（`goal_direction`） | 方向缺失或与事态极性重复时拒绝 |
 | 什么观察足以支持或反驳目标 | 满足判据（`satisfaction_criteria`） | 方法、范围、截止点或决定权威不明确时不得求值 |
 | 哪些解释仍不能确定 | 未决问题（`unresolved_meaning`） | 阻断性问题未解决时不得进入受限运行 |
-| 实际发生了什么 | 结构化观察（`structured_observation`）与 evidence entry | 来源、方法或覆盖不足时产生有限结果，不补写事实 |
+| 实际发生了什么 | 结构化观察（`structured_observation`）与 evidence | 来源、方法或覆盖不足时产生有限结果，不补写事实 |
 
 形成版保留实际进入形成过程的自然语言；未来发布版按独立 Profile 移除原文并取得新身份。裁剪不改变已经确认的目标结构，也不能把模型候选、协议状态或显示文本提升为权威语义。
 
@@ -77,7 +77,7 @@ next_label: ADR-0010
 | `say / mean / case / when / open` | 把目标方向压进事态，把判据、观察和决定压进一个栏目 | 由六个语义面、结构化观察和独立结果域取代 |
 | `no-sense / open / unknown` | 把非法结构、语义未决和观察不足写成同一对象的并列状态 | `no_allowed_projection` 拒绝、语义未决与 `undetermined` 分别处理 |
 | `seek / keep / avoid` | 目标力量与关系极性重叠，且旧词不能映射现行时间和否定语义 | 目标方向与事态极性分离；现行普通词已按词首和职责接受 |
-| Witness、Runner 与大写 Decision | 名称混合证据记录、会话运行和最终权威，且已由后续对象边界取代 | evidence entry、session contract、受限运行边界与具名权威决定分别承担 |
+| Witness、Runner 与大写 Decision | 名称混合证据记录、会话运行和最终权威，且已由后续对象边界取代 | evidence、contract、受限运行边界与具名权威决定分别承担 |
 | `form` 及旧实现切片 | 内部形成步骤不等于现行公开动作，也没有组件实现 | 当前只使用五个设计动作；历史动作不构成别名 |
 
 `source_expression / meaning_projection / situation / goal_direction / satisfaction_criteria / unresolved_meaning / structured_observation` 是现行设计字段，已经按普通词的词首、职责和关键字语料规则接受。它们不是已实现接口，也不产生别名或第二套字段；Noemion 与 Endem 两个自造名称另行保留发行读音验证。

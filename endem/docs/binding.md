@@ -10,15 +10,15 @@ manual_order: 2
 nav_title: "绑定与组合"
 page_heading: "绑定与组合"
 page_lead: "当一项目标依赖其他目标或产物时，说明怎样固定所有必需成员、报告冲突，并防止运行时临时换入新内容。"
-summary: "查看组合动作 compose 怎样固定全部依赖、处理冲突、收窄共同权限并形成 Endem closure。"
-badges: ["compose", "Endem closure"]
+summary: "查看组合动作 compose 怎样固定全部依赖、处理冲突、收窄共同权限并形成 closure。"
+badges: ["compose", "closure"]
 ---
 
 ## 什么时候需要 compose
 
-一项目标如果不依赖其他目标，可以独立完成引用检查。只有当它确实引用其他 Endem 的定义、产物、能力、约束或验收条件时，`compose` 才把所有必需成员固定为 Endem closure。
+一项目标如果不依赖其他目标，可以独立完成引用检查。只有当它确实引用其他 Endem 的定义、产物、能力、约束或验收条件时，`compose` 才把所有必需成员固定为 closure。
 
-> Endem closure 是至少两个精确 Endem 的完整传递闭包，不是普通文件归档，也不是为模型自动扩展上下文的知识包。规范边界见 [CLOSURE-CORE](https://noemion.github.io/spec/endem-closure-core.html) 与 [ADR-0021](../../architecture/adr-0021-synem-closure-and-activation.html)。
+> closure 是至少两个精确 Endem 的完整传递闭包，不是普通文件归档，也不是为模型自动扩展上下文的知识包。规范边界见 [CLOSURE-CORE](https://noemion.github.io/spec/endem-closure-core.html) 与 [ADR-0021](../../architecture/adr-0021-synem-closure-and-activation.html)。
 
 ## 正式输入
 
@@ -37,7 +37,7 @@ badges: ["compose", "Endem closure"]
 2. 展开全部必需传递依赖，收集跨对象引用、产物、能力与验收依赖。
 3. 只从锁定候选中解析唯一精确内容身份；名称和范围不能替代最终绑定。
 4. 检查硬约束冲突、能力上限、缺失行为和循环。
-5. 为每项选择或拒绝产生 compose evidence entry。
+5. 为每项选择或拒绝产生 compose evidence。
 6. 稳定排序成员与解析记录，重新运行生产 `lint`。
 
 ## 不变量
@@ -61,8 +61,8 @@ badges: ["compose", "Endem closure"]
 
 ## 条件激活
 
-形成时条件若决定成员是否进入闭包，必须在 Endem closure 身份形成前解析。会话期条件只能选择固定闭包中的成员，并使用 `active / inactive / unresolved / error` 独立状态；未激活成员没有本次满足结果，激活也不授予能力。当前没有可执行守卫语法或 bounded runner 实现。
+形成时条件若决定成员是否进入闭包，必须在 closure 身份形成前解析。会话期条件只能选择固定闭包中的成员，并使用 `active / inactive / unresolved / error` 独立状态；未激活成员没有本次满足结果，激活也不授予能力。当前没有可执行守卫语法或 runner 实现。
 
-## compose evidence entry
+## compose evidence
 
-compose evidence entry 记录输入成员、候选集合、选择规则、冲突、拒绝和结果摘要。它使组合过程可重放，但不证明依赖将永久可用，也不证明组合任务已经完成。
+compose evidence 记录输入成员、候选集合、选择规则、冲突、拒绝和结果摘要。它使组合过程可重放，但不证明依赖将永久可用，也不证明组合任务已经完成。

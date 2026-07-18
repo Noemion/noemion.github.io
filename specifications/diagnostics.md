@@ -18,7 +18,7 @@ badges:
 - 物理格式待定
 - 尚无运行组件
 previous_url: evidence-entry.html
-previous_label: evidence entry
+previous_label: evidence
 next_url: "../architecture/adr-0025-structured-diagnostics.html"
 next_label: ADR-0025
 ---
@@ -39,7 +39,7 @@ next_label: ADR-0025
 | 稳定机器码与消息 | `adapter.retry.not_authorized`、主条款 `ADP-RTY-001`，另附可本地化说明 | 自动化依赖登记码和条款，不解析“超时”或“请重试”等措辞 |
 | 生产语境 | 生产者、适配器版本、操作、精确发布输入、协议/Profile、DIA-CAT 版本和本次调用身份 | 防止把这次诊断缓存或套用到另一个输入和调用 |
 | 层次、位置与执行范围 | `policy` 层、外部请求关联；重试检查后的步骤标为 `not-run` | 保留传输事实，同时区分“检查失败”和“尚未检查” |
-| 主诊断与恢复分类 | 唯一主阻断诊断；`operator-review`，前置条件是取得去重或事后核对证据 | 当前不自动重试；恢复继续受 session contract 预算和具名授权约束 |
+| 主诊断与恢复分类 | 唯一主阻断诊断；`operator-review`，前置条件是取得去重或事后核对证据 | 当前不自动重试；恢复继续受 contract 预算和具名授权约束 |
 | 披露、预算与结果边界 | 公开消息脱敏，只保留有限相关项，不返回部分可信对象 | 诊断不产生 `unmet`、`accepted`、回滚完成或新的权限 |
 
 **当前策略：**结构化诊断是一份有限、可定位、机器可读的失败说明。它可以帮助人和人工智能系统选择下一步，但不得替代目标结果、证据判断、最终决定、权限或自动修复命令。
@@ -79,7 +79,7 @@ next_label: ADR-0025
 
 `DIA-CAT` 使用受影响对象或诊断系统作为机器码首段，例如 `endem.*`、`session.*` 与 `diagnostic.*`；Noemion 是项目品牌，不进入机器码。目录版本必须随诊断固定，当前机器码仍是草案接口，不是稳定 ABI。
 
-- [DIA-CAT 诊断目录](https://noemion.github.io/spec/diagnostic-catalog.html) — 登记跨 Endem、Endem closure、session contract、evidence entry 与诊断系统自身的草案机器码。
+- [DIA-CAT 诊断目录](https://noemion.github.io/spec/diagnostic-catalog.html) — 登记跨 Endem、closure、contract、evidence 与诊断系统自身的草案机器码。
 - [诊断威胁模型](https://noemion.github.io/spec/diagnostic-threat-model.html) — 检查消息解析、状态洗白、主错误竞态、自动提权、泄密、风暴和部分成功。
 - [设计场景](https://noemion.github.io/spec/diagnostic-scenarios.html) — 用支持案例、反例和边界场景检查失败责任；场景不是实现或符合性声明。
 - [结构化诊断提案向量](https://github.com/Noemion/noemion.github.io/tree/main/vectors/diagnostics) — 检查允许包络与确定拒绝；向量不证明诊断系统已经实现。

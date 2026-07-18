@@ -51,18 +51,18 @@ next_label: ADR-0009
 | 一个目标先形成一个 Endem | 先保存来源，再确认意义投影、一个根事态、目标方向、判断方法和未决问题 | 自然语言或模型 JSON 本身不是 Endem |
 | 一个应用入口不等于一个信任域 | `endem` 只负责分派当前五个设计动作；确定性生产、独立读取和受限运行继续隔离 | 共享命令名不能证明共享解析器、写权限或运行权限是安全的 |
 | 模型只提出候选 | 具名主体确认意义，确定性生产边界形成规范字节，运行前重新核对动作授权 | 模型不能决定字段、删除未决问题、扩大能力或作出最终接受 |
-| 独立读取用于发现共同故障 | independent inspector 直接读取实际字节，不复用 deterministic producer 的形成侧解析代码，也不写回制品 | 一次检查通过不能证明目标满足、证据充分或发布获准 |
+| 独立读取用于发现共同故障 | inspector 直接读取实际字节，不复用 producer 的形成侧解析代码，也不写回制品 | 一次检查通过不能证明目标满足、证据充分或发布获准 |
 | 形成、发布和外部陈述保持分离 | 形成版保留自然语言；未来发布版按独立 Profile 移除原文并取得新身份；签名留在外部关系 | 裁剪、签名或协议完成不能继承原对象的证据、授权和接受状态 |
 
 ## 旧名称为什么不能继续使用
 
 | 历史表达 | 被取代的原因 | 当前阅读入口 |
 | --- | --- | --- |
-| Weave、Frame、Witness | 名称无法让首次读者恢复闭包、会话和证据责任，也容易把运行视图误写成持久对象 | [Endem closure 组合闭包](adr-0021-synem-closure-and-activation.html)、[session contract 会话契约](adr-0024-dromen-session-contract.html)、[evidence entry 有范围证据](adr-0022-iknem-evidence-and-appraisal.html) |
+| Weave、Frame、Witness | 名称无法让首次读者恢复闭包、会话和证据责任，也容易把运行视图误写成持久对象 | [closure 组合闭包](adr-0021-synem-closure-and-activation.html)、[contract 会话契约](adr-0024-dromen-session-contract.html)、[evidence 有范围证据](adr-0022-iknem-evidence-and-appraisal.html) |
 | `say / aim / must / done / open` | 五组字段把来源、事态、目标方向、判断和未知压在一起，不能逐项映射到现行结构 | ADR-0010 的 `source_expression / meaning_projection / situation / goal_direction / satisfaction_criteria / unresolved_meaning` |
 | `open / bound / sealed` | 旧状态把引用解析、发布锁定和外部签名放在同一条内容状态线上 | 内容形成、精确身份、外部陈述、验证、满足判断和最终决定分别处理 |
 | `form / check / bind / pack / seal / see / run / test` | 动作数量跟随内部步骤，不都具有独立用户任务；普通词本身不需要完整人类读音实验 | 现行公开动作由 ADR-0035 定义；旧命令不构成别名 |
-| Runner | 一个通用运行者无法说明会话契约、能力交集、秘密隔离和失败责任 | 受限运行边界（bounded runner）与一次会话契约（session contract） |
+| Runner | 一个通用运行者无法说明会话契约、能力交集、秘密隔离和失败责任 | 受限运行边界（runner）与一次会话契约（contract） |
 
 名称退出不是职责治理的替代品。现行普通职责词已经按词首、职责和关键字语料接受；Noemion 与 Endem 两个自造名称仍须取得目标语言的首次朗读、听写回填和词表内口头区分证据。历史词较顺口或较常见，不能使它重新成为接口。
 

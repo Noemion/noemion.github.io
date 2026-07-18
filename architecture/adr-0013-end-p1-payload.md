@@ -27,7 +27,7 @@ next_label: ADR-0014
 | --- | --- | --- |
 | 为什么不再使用 END-P0 | END-P0 只有六个空映射，只能验证容器结构。 | 不能把结构接受称为有效 Endem。 |
 | END-P2 保存什么 | 保存原始自然语言、来源范围、语义关系、目标方向、判据和待确认项。 | 单文件最高只能声称 Profile 接受。 |
-| 谁使用它 | 未来由 deterministic producer 形成和回读，再由 independent inspector 沿独立路径解释相同字节。 | 当前没有 deterministic producer、independent inspector 或 CLI 实现。 |
+| 谁使用它 | 未来由 producer 形成和回读，再由 inspector 沿独立路径解释相同字节。 | 当前没有 producer、inspector 或 CLI 实现。 |
 | 能否作为发布物 | 不能；`publishable=false` 是 Profile 的明确属性。 | 不能直接删除原文后继续声称 END-P2。 |
 
 ## 开发者应按什么顺序检查
@@ -83,7 +83,7 @@ next_label: ADR-0014
 
 ## 当前不能发布或实现什么
 
-END-P2 不定义量化、时间字段、单位换算、摘要、签名、授权决定、Endem closure、压缩、加密、来源裁剪或稳定 ABI。抽象语义已有决定时，也必须等待新的物理 Profile 和正反字节向量。
+END-P2 不定义量化、时间字段、单位换算、摘要、签名、授权决定、closure、压缩、加密、来源裁剪或稳定 ABI。抽象语义已有决定时，也必须等待新的物理 Profile 和正反字节向量。
 
 最终发布版必须使用新的封闭 Profile，重写来源引用，披露损失并取得新身份。END-P2 当前只有规范、Profile 和字节向量；这些资料不是生产组件或符合性声明。
 

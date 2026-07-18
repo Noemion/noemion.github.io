@@ -16,7 +16,7 @@ badges: ["form", "单一根事态"]
 
 ## 最小来源表达
 
-受控来源表达就是人能够阅读和核对的原始输入。deterministic producer 不能直接把整段文字当成已经理解的目标；形成 Endem 前，系统必须分别回答下面六类问题，并保留无法回答的部分：
+受控来源表达就是人能够阅读和核对的原始输入。producer 不能直接把整段文字当成已经理解的目标；形成 Endem 前，系统必须分别回答下面六类问题，并保留无法回答的部分：
 
 | 语义面 | 读者要回答的问题 | 不能省略的边界 |
 | --- | --- | --- |
@@ -24,10 +24,10 @@ badges: ["form", "单一根事态"]
 | `meaning_projection` | 这些记号怎样取得意义？ | 符号、指称、关系、作用域、极性、时间和来源映射 |
 | `situation` | 哪一种中性可能事态构成目标内容？ | 一个根对象—关系图、组合与极性 |
 | `goal_direction` | 目标要求事态变化还是持续？ | reach 或 maintain；maintain 还需 fixed/elapsed 范围与 strict/budgeted 连续性；不重复表达否定 |
-| `satisfaction_criteria` | 怎样把 structured_observation 与 situation 比较？ | 结构比较、evidence entry 类型、undetermined/fault 处理和决定权威 |
+| `satisfaction_criteria` | 怎样把 structured_observation 与 situation 比较？ | 结构比较、evidence 类型、undetermined/fault 处理和决定权威 |
 | `unresolved_meaning` | 哪些投影还没确定？ | 替代解释、冲突、测量、风险和允许的解决方式 |
 
-一个 Endem 必须且只能有一个根 `situation`。两个可独立完成和验收的目标应分别形成 Endem，再通过 Endem closure 表达关系。
+一个 Endem 必须且只能有一个根 `situation`。两个可独立完成和验收的目标应分别形成 Endem，再通过 closure 表达关系。
 
 ## 非规范性示意
 
@@ -43,12 +43,12 @@ situation:
 goal_direction:
   mode: "reach"
 satisfaction_criteria:
-  - "met if required structured_observation relations have scoped evidence entry records"
+  - "met if required structured_observation relations have scoped evidence records"
 unresolved_meaning:
   - "目标读者尚未确认"
 ```
 
-[ADR-0014](../../architecture/adr-0014-source-manifest.html) 已为未来 deterministic producer 设计逐行来源清单；上面的 YAML 仍只是职责示意，不是该语法。正式来源语言仍需解决注释、包含关系、版本演进和错误恢复。实验性 `.endem` 容器由 END-FMT 0.1 定义；END-P2 已固定来源保留的形成与评审字段、枚举、排序和引用闭包，但它既不是稳定 ABI，也不是最终发布 Profile。
+[ADR-0014](../../architecture/adr-0014-source-manifest.html) 已为未来 producer 设计逐行来源清单；上面的 YAML 仍只是职责示意，不是该语法。正式来源语言仍需解决注释、包含关系、版本演进和错误恢复。实验性 `.endem` 容器由 END-FMT 0.1 定义；END-P2 已固定来源保留的形成与评审字段、枚举、排序和引用闭包，但它既不是稳定 ABI，也不是最终发布 Profile。
 
 [ADR-0036](../../architecture/adr-0036-source-bearing-and-stripped-release.html) 要求最终发布版移除原始自然语言，并以新身份重新验证。发布 Profile 必须自行定义来源引用闭包；不能从 END-P2 直接删除 `source_expression.content` 后继续沿用其 Profile 身份。
 
@@ -79,7 +79,7 @@ unresolved_meaning:
 
 ## 确定性
 
-确定性先要求输入闭合。形成操作必须固定实际进入 `source_expression` 的解码文本与文本槽、严格解码 Profile、显式变换和损失，以及投影决定、配置、依赖、END-CORE、内容 Profile、END-FMT 与 deterministic producer 版本。相同的封闭形成输入必须产生相同规范结果；在同一精确格式草案和 Profile 内，还必须产生逐字节相同的 formed Endem。
+确定性先要求输入闭合。形成操作必须固定实际进入 `source_expression` 的解码文本与文本槽、严格解码 Profile、显式变换和损失，以及投影决定、配置、依赖、END-CORE、内容 Profile、END-FMT 与 producer 版本。相同的封闭形成输入必须产生相同规范结果；在同一精确格式草案和 Profile 内，还必须产生逐字节相同的 formed Endem。
 
 这项保证不使用“规范化来源”作为捷径。END-SRCM 会把 LF 与 CRLF 解释为同一行边界，也会展开转义；因此两个来源文件可能产生相同的解码输入，却仍有不同的原始字节身份。显示文本、调试导出或重新排版的来源都是派生视图，除非另有锁定的变换与保留关系，否则不能作为原文件的逆变换或语义等价证明。
 

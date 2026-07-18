@@ -24,6 +24,7 @@ COINED_PRONUNCIATIONS = {
 
 MACHINE_IDENTIFIER = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")
 MACHINE_TOKEN = re.compile(r"^[A-Za-z][A-Za-z0-9]*(?:[-_:][A-Za-z0-9]+)*$")
+HUMAN_TERM = re.compile(r"^[A-Za-z]+$")
 TERM_WORD = re.compile(r"[A-Za-z]+")
 DISALLOWED_INITIAL_CLUSTERS = ("gn", "kn", "mn", "pn", "ps", "pt", "rh", "wr")
 SILENT_INITIAL_WORDS = {
@@ -38,9 +39,8 @@ RETIRED_TERM = re.compile(
     re.IGNORECASE,
 )
 
-HISTORICAL_OR_RESEARCH = (
+HISTORICAL_DOCUMENT = (
     re.compile(r"^architecture/adr-[0-9]{4}-.+\.md$"),
-    re.compile(r"^spec/.+-proposal\.md$"),
 )
 
 CURRENT_ROUTES = {
@@ -77,8 +77,8 @@ def normalize(term):
     return re.sub(r"_+", "_", re.sub(r"[^a-z0-9]+", "_", term.casefold())).strip("_")
 
 
-def is_historical_or_research(relative):
-    return any(pattern.fullmatch(relative) for pattern in HISTORICAL_OR_RESEARCH)
+def is_historical_document(relative):
+    return any(pattern.fullmatch(relative) for pattern in HISTORICAL_DOCUMENT)
 
 
 def iter_structured_tokens(value):
@@ -114,9 +114,27 @@ def main():
                 errors.append(f"spec/registry.json: term[{index}] missing {field}")
         if isinstance(entry.get("term"), str):
             names.append(entry["term"])
+            if HUMAN_TERM.fullmatch(entry["term"]) is None:
+                errors.append(
+                    f"spec/registry.json: human term must be one complete word: {entry['term']}"
+                )
     folded = [name.casefold() for name in names]
     if len(folded) != len(set(folded)):
         errors.append("spec/registry.json: terminology entries must be unique case-insensitively")
+
+    identifiers = registry.get("identifiers")
+    if not isinstance(identifiers, list) or not identifiers:
+        errors.append("spec/registry.json: identifiers must be a non-empty list")
+        identifiers = []
+    for index, entry in enumerate(identifiers):
+        if not isinstance(entry, dict) or not isinstance(entry.get("identifier"), str):
+            errors.append(f"spec/registry.json: identifier[{index}] must preserve an exact machine token")
+            continue
+        if MACHINE_TOKEN.fullmatch(entry["identifier"]) is None:
+            errors.append(
+                f"spec/registry.json: identifier[{index}] does not follow declared token syntax: "
+                f"{entry['identifier']}"
+            )
 
     current_words = {
         word.casefold()
@@ -177,7 +195,9 @@ def main():
         "/ˈɛn.dɛm/",
         "每个字母，没有静音字母",
         "普通英语工程词沿用通常拼写",
-        "每个英文构词单元都从词首直接起音",
+        "每个人类名称都是一个完整单词",
+        "职责短语只能用于说明",
+        "字段、枚举、路由、文件路径和规范编号是机器标识",
         "替换项必须是一个完整单词",
         "首次朗读与听辨结果尚未形成",
     ):
@@ -202,20 +222,27 @@ def main():
 
     normalized_registry = [normalize(name) for name in names]
     if len(normalized_registry) != len(set(normalized_registry)):
-        errors.append("spec/registry.json: normalized machine forms must remain unique")
+        errors.append("spec/registry.json: normalized human terms must remain unique")
     for name in names:
-        identifier = normalize(name)
-        if not identifier or MACHINE_IDENTIFIER.fullmatch(identifier) is None:
-            errors.append(f"registered term has no valid normalized machine form: {name}")
-        elif identifier in keyword_set:
-            errors.append(f"registered term collides with the versioned keyword corpus after normalization: {name}")
+        normalized = normalize(name)
+        if not normalized or MACHINE_IDENTIFIER.fullmatch(normalized) is None:
+            errors.append(f"registered term has no valid normalized reference: {name}")
+    for entry in identifiers:
+        identifier = entry.get("identifier") if isinstance(entry, dict) else None
+        if not isinstance(identifier, str):
+            continue
+        normalized = normalize(identifier)
+        if normalized in keyword_set:
+            errors.append(
+                f"registered machine identifier collides with the versioned keyword corpus: {identifier}"
+            )
 
     skipped = {".git", "_site", "vendor", ".bundle"}
     for path in ROOT.rglob("*"):
         if not path.is_file() or skipped.intersection(path.parts):
             continue
         relative = path.relative_to(ROOT).as_posix()
-        if relative.startswith("tests/") or is_historical_or_research(relative):
+        if relative.startswith("tests/") or is_historical_document(relative):
             continue
         try:
             text = path.read_text()

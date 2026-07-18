@@ -25,14 +25,14 @@ badges: ["单一命令入口", "实验核心"]
 ## 推荐阅读顺序
 
 1. 阅读[格式与成形](format.html)，理解一个根 `situation` 和 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning`。
-2. 阅读[绑定与组合](binding.html)，理解 formed Endem 怎样成为 resolved Endem 或 Endem closure。
+2. 阅读[绑定与组合](binding.html)，理解 formed Endem 怎样成为 resolved Endem 或 closure。
 3. 阅读[安全与独立检查](safety.html)，区分生产 `lint` 与独立 `inspect`。
-4. 阅读[发布与运行](running.html)，理解生产者封装、外部签名、session contract 和 evidence entry。
+4. 阅读[发布与运行](running.html)，理解生产者封装、外部签名、contract 和 evidence。
 5. 最后使用[参考索引](reference.html)按工作查动作、对象、结果域、目标约束和诊断来源。
 
 ## 最短主线
 
-人写下的目标先进入来源保留的形成版。只有解释已经按规则确认，`form` 才把它写成初始 Endem；含义不清时必须停止并报告问题。最终发布版按独立 Profile 移除原文，并以新身份重新验证来源绑定。`lint` 从写入一侧检查实际字节，`inspect` 再用独立代码读取同一文件。目标需要引用其他目标时，`compose` 固定全部依赖。外部系统可以对精确发布内容签名；真正运行前，`run` 还要重新核对环境、能力和预算，并把观察写入 evidence entry。
+人写下的目标先进入来源保留的形成版。只有解释已经按规则确认，`form` 才把它写成初始 Endem；含义不清时必须停止并报告问题。最终发布版按独立 Profile 移除原文，并以新身份重新验证来源绑定。`lint` 从写入一侧检查实际字节，`inspect` 再用独立代码读取同一文件。目标需要引用其他目标时，`compose` 固定全部依赖。外部系统可以对精确发布内容签名；真正运行前，`run` 还要重新核对环境、能力和预算，并把观察写入 evidence。
 
 ## 当前实施范围
 

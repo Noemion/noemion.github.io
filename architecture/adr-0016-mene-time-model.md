@@ -66,7 +66,7 @@ next_label: ADR-0017
 | 存在覆盖空洞、只有离散采样，或不确定度跨越关键边界。 | `undetermined` | 不能插值为正常，也不能降成 `unmet`。 |
 | 时钟、同步、适配器或求值器没有履行声明契约。 | `fault` | 不能把求值故障写成目标为假。 |
 
-覆盖区间依照同一端点规则形成规范并集。可证明不改变含义的重叠、乱序和重复可以规范化；每个空洞都必须保留。时钟域、分辨率、不确定度、同步、重启、观察方法和覆盖保证属于 evidence entry 评价上下文，不是 Endem 自证字段。
+覆盖区间依照同一端点规则形成规范并集。可证明不改变含义的重叠、乱序和重复可以规范化；每个空洞都必须保留。时钟域、分辨率、不确定度、同步、重启、观察方法和覆盖保证属于 evidence 评价上下文，不是 Endem 自证字段。
 
 ## 外部时钟与 Agent 状态只提供什么
 
@@ -76,7 +76,7 @@ next_label: ADR-0017
 | [GNU C Library 时钟说明](https://www.gnu.org/software/libc/manual/html_node/Getting-the-Time.html)与[GNU Coreutils 相对日期说明](https://www.gnu.org/software/coreutils/manual/html_node/Relative-items-in-date-strings.html) | 单调时钟适合经过时长；相对日期受夏令时和日历语义影响。 | 单调时钟不能表示绝对时间，`now / today / tomorrow` 不能成为规范输入。 |
 | [W3C OWL-Time](https://www.w3.org/TR/owl-time/) | 区分瞬间、区间、时长与时间参考系统。 | OWL 类和关系不会直接进入 Endem。 |
 | [OpenTelemetry Metrics 数据模型](https://opentelemetry.io/docs/specs/otel/metrics/data-model/) | 数据点时间窗、重置、缺口和明确无记录状态。 | 其聚合区间端点规则不同，Gauge 只表示采样值；二者都不能直接证明本地连续覆盖。 |
-| [MCP 2025-11-25 Tasks](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks) 与 [A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/) | 任务创建、更新时间与外部生命周期状态。 | 远端时间戳和 completed 都不是本地时钟权威、evidence entry 覆盖或 `maintain` 满足结果。 |
+| [MCP 2025-11-25 Tasks](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks) 与 [A2A 1.0](https://a2a-protocol.org/v1.0.0/specification/) | 任务创建、更新时间与外部生命周期状态。 | 远端时间戳和 completed 都不是本地时钟权威、evidence 覆盖或 `maintain` 满足结果。 |
 
 ## 当前还不能编码或运行什么
 

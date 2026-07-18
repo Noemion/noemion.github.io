@@ -84,7 +84,7 @@ next_label: ADR-0024
 | 外部资料 | 可采用的机制 | Noemion 不继承 |
 | --- | --- | --- |
 | [ELF gABI 对象格式](https://gabi.xinuos.com/elf/01-intro.html) | 固定头部提供文件路线图，节与程序头面向不同读取任务；处理器补充另行约束机器细节。 | 不采用地址、指令、装载段、处理器 ABI 或链接语义。 |
-| [RFC 8949 CBOR](https://www.rfc-editor.org/rfc/rfc8949.html) | 提供确定长度、最短编码和映射键排序等确定性编码基础。 | 具体协议仍须冻结允许类型、字段语义和拒绝规则；通用解码成功不是符合性。 |
+| [RFC 8949 CBOR](https://www.rfc-editor.org/rfc/rfc8949.html) | 提供确定长度、最短编码和映射键排序等确定性编码基础。 | 具体协议仍须明确允许类型、字段语义和拒绝规则；通用解码成功不是符合性。 |
 | [GNU readelf](https://sourceware.org/binutils/docs/binutils/readelf.html) | 独立于 BFD 解析 ELF，支持未来形成器与独立检查器采用不同代码路径。 | 工具独立不自动证明两套实现都正确。 |
 | [GNU ar 确定性模式](https://sourceware.org/binutils/docs/binutils/ar-cmdline.html) | `-D` 清除 UID、GID、时间戳差异并固定文件模式，减少环境噪声。 | 确定字节不等于内容语义正确或来源可信。 |
 | [GNU strip 与独立调试资料](https://sourceware.org/binutils/docs/binutils/strip.html) | `--strip-debug`、`--only-keep-debug` 和 `.gnu_debuglink` 展示形成资料与发行制品分离的生命周期。 | 删除错误节可能让文件不可用；Noemion 必须用新 Profile 和新身份定义裁剪。 |
@@ -94,7 +94,7 @@ next_label: ADR-0024
 
 ## 当前还不能承诺哪些实现与兼容性
 
-END-FMT、END-P0 与 END-P2 都是实验草案，不是稳定 ABI。量化、时间、测量、裁剪发布、内容摘要、签名包络、Semantic Key、evidence entry 绑定、压缩、加密、流式传输、MIME 类型和跨版本升级仍未冻结。
+END-FMT、END-P0 与 END-P2 都是实验草案，不是稳定 ABI。量化、时间、测量、裁剪发布、内容摘要、签名包络、Semantic Key、evidence 绑定、压缩、加密、流式传输、MIME 类型和跨版本升级尚未确定。
 
 当前规范、登记、三个 END-P2 Profile 接受向量和十一项确定拒绝，只证明资料与实验字节在现行检查器中一致，不能证明任何写入器、读取器、CLI 或运行时已经实现。项目也没有可执行的裁剪命令、生产格式兼容承诺或供应商私有语义区。
 

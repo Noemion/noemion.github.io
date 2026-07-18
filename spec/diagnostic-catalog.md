@@ -102,7 +102,7 @@ document_status: "规范目录草案"
 | `endem.source.escape` | `END-SRCM-003` | source | 使用了未登记或不完整的转义 |
 | `endem.source.role` | `END-SRCM-003` | source | `relation` 角色缺少名称、等号或 symbol 标识符 |
 
-## 6. Endem closure 错误码
+## 6. closure 错误码
 
 | 错误码 | 主条款 | 层次 | 触发条件 |
 | --- | --- | --- | --- |
@@ -113,7 +113,7 @@ document_status: "规范目录草案"
 | `closure.result.coerced` | `CLOSURE-RES-001` | semantic | 成员结果被洗白、折叠或跨结果域转换 |
 | `closure.activation.invalid` | `CLOSURE-ACT-001` | session | 激活添加成员、授予能力或映射为满足结果 |
 
-## 7. session contract 错误码
+## 7. contract 错误码
 
 | 错误码 | 主条款 | 层次 | 触发条件 |
 | --- | --- | --- | --- |
@@ -128,7 +128,7 @@ document_status: "规范目录草案"
 | `session.contract.mutated` | `SESSION-IMM-001` | session | 封存后被修改或漂移后原地修补 |
 | `session.lifecycle.reused` | `SESSION-LIF-001` | session | 契约被序列化、转移、恢复或跨会话复用 |
 
-## 8. evidence entry 错误码
+## 8. evidence 错误码
 
 | 错误码 | 主条款 | 层次 | 触发条件 |
 | --- | --- | --- | --- |
@@ -139,7 +139,7 @@ document_status: "规范目录草案"
 | `evidence.integrity.overclaimed` | `EVIDENCE-INT-001` | evidence | 完整性、签名或时间戳被解释为事实正确或授权 |
 | `evidence.validity.self_asserted` | `EVIDENCE-VAL-001` | evidence | 记录自填有效性或评估缺少政策、参考值与截止点 |
 | `evidence.coverage.invalid` | `EVIDENCE-COV-001` | evidence | 覆盖脱离精确 satisfaction_criteria、重复计数或隐藏空洞 |
-| `evidence.decision.unauthorized` | `EVIDENCE-DEC-001` | policy | 评估、模型、bounded runner 或记录本身替代具名决定权威 |
+| `evidence.decision.unauthorized` | `EVIDENCE-DEC-001` | policy | 评估、模型、runner 或记录本身替代具名决定权威 |
 | `evidence.disclosure.secret` | `EVIDENCE-PRI-001` | evidence | 记录包含实时秘密，或脱敏损失没有披露 |
 
 ## 9. 外部协议适配错误码
@@ -148,7 +148,7 @@ document_status: "规范目录草案"
 | --- | --- | --- | --- |
 | `adapter.protocol.version_unpinned` | `ADP-PIN-001` | protocol | 协议、规范、绑定、schema、传输或扩展版本浮动或未知 |
 | `adapter.peer.binding_invalid` | `ADP-PEE-001` | protocol | 发现声明替代认证主体、受众、租户或政策绑定 |
-| `adapter.capability.outside_intersection` | `ADP-CAP-001` | policy | 外部调用能力不在协议、对端、适配器、session contract 与政策交集内 |
+| `adapter.capability.outside_intersection` | `ADP-CAP-001` | policy | 外部调用能力不在协议、对端、适配器、contract 与政策交集内 |
 | `adapter.invocation.context_incomplete` | `ADP-INV-001` | session | 调用缺少精确主体、输入、预算、截止点、幂等或观察责任 |
 | `adapter.mapping.loss_undeclared` | `ADP-MAP-001` | protocol | 映射没有保留原始身份、版本或显式信息损失 |
 | `adapter.state.domain_confused` | `ADP-STA-001` | semantic | 外部请求、任务、消息、产物或 HTTP 状态被提升为本地结果 |
@@ -214,10 +214,10 @@ document_status: "规范目录草案"
 
 上述机器码只在当前规范、目录和提案向量中保持草案稳定，尚不构成发行 ABI。提升为稳定接口前必须完成：
 
-1. deterministic producer、independent inspector 与 bounded runner 对共同失败给出相同的主层次与适用机器码；
+1. producer、inspector 与 runner 对共同失败给出相同的主层次与适用机器码；
 2. 并发、截断、乱序、重复、资源耗尽、外部协议降级和秘密注入向量齐全；
-3. 诊断 Profile 冻结数量、深度、位置、消息和总输出预算；
+3. 诊断 Profile 确定数量、深度、位置、消息和总输出预算；
 4. 文本、SARIF、HTTP、MCP 与遥测适配前后保持机器语义；
-5. CLI 退出状态与结构化物理编码由单独 ADR 和规范字节冻结。
+5. CLI 退出状态与结构化物理编码由单独 ADR 和规范字节确定。
 
-当前目录只由一致性检查工具核对。deterministic producer、independent inspector、bounded runner、诊断生产器、渲染器和协议适配器均未实现。
+当前目录只由一致性检查工具核对。producer、inspector、runner、诊断生产器、渲染器和协议适配器均未实现。

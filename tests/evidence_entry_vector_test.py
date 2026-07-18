@@ -107,17 +107,17 @@ def main():
     try:
         document = json.loads(VECTOR_PATH.read_text())
     except (OSError, json.JSONDecodeError) as exc:
-        print(f"cannot read evidence entry vectors: {exc}")
+        print(f"cannot read evidence vectors: {exc}")
         return 1
     if document.get("vector_format") != "evidence-core.vector.v1":
-        errors.append("evidence entry vectors must use evidence-core.vector.v1")
+        errors.append("evidence vectors must use evidence-core.vector.v1")
     if document.get("spec") != {"id": "EVIDENCE-CORE", "version": "0.1.0-draft"}:
-        errors.append("evidence entry vectors must pin EVIDENCE-CORE 0.1.0-draft")
+        errors.append("evidence vectors must pin EVIDENCE-CORE 0.1.0-draft")
     if "not a collector, verifier, merger, revocation service, decision engine, runtime, or component implementation" not in document.get("description", ""):
-        errors.append("evidence entry vectors must state their non-implementation boundary")
+        errors.append("evidence vectors must state their non-implementation boundary")
     cases = document.get("cases")
     if not isinstance(cases, list) or len(cases) != 18:
-        errors.append("evidence entry vectors require exactly 18 proposal cases")
+        errors.append("evidence vectors require exactly 18 proposal cases")
         cases = []
     seen = set()
     counts = {"accept": 0, "reject": 0}
@@ -140,13 +140,13 @@ def main():
         if actual != expect["result"] or (violation and violation != expect["clause"]):
             errors.append(f"{case_id}: expected {expect}, evaluated {actual}/{violation}")
     if counts != {"accept": 9, "reject": 9}:
-        errors.append(f"evidence entry vectors require 9 accepts and 9 rejects, got {counts}")
+        errors.append(f"evidence vectors require 9 accepts and 9 rejects, got {counts}")
     if rejected != CLAUSES:
-        errors.append(f"evidence entry reject coverage must include {sorted(CLAUSES)}, got {sorted(rejected)}")
+        errors.append(f"evidence reject coverage must include {sorted(CLAUSES)}, got {sorted(rejected)}")
     if errors:
         print("\n".join(errors))
         return 1
-    print("PASS: executed 18 evidence entry vectors (9 accepted classifications, 9 deterministic rejects across 9 clauses)")
+    print("PASS: executed 18 evidence vectors (9 accepted classifications, 9 deterministic rejects across 9 clauses)")
     return 0
 
 

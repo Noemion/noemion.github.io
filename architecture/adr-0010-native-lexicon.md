@@ -46,19 +46,19 @@ next_label: ADR-0011
 4. goal_direction · 目标方向
 5. satisfaction_criteria · 比较契约
 6. structured_observation · 结构化观察
-7. evidence entry · 有范围证据
+7. evidence · 有范围证据
 
 - `situation` 只描述对象怎样关联，不携带“希望、保持、禁止”等力量。
 - `goal_direction` 第一阶段只区分 `reach` （使事态达到成立）和 `maintain` （使事态持续成立）。
 - 禁止事项由 `situation` 的显式否定表达，不再与独立 `avoid` 值重复编码。
-- `structured_observation` 是 evidence entry 内的结构化观察；无法与 `situation` 比较的自由文本或模型评分不能独自支持满足判断。
+- `structured_observation` 是 evidence 内的结构化观察；无法与 `situation` 比较的自由文本或模型评分不能独自支持满足判断。
 
 ## 制品、组件与动作
 
 | 类别 | 直白职责 | 现行设计名称 |
 | --- | --- | --- |
-| 系统名词 | 最小目标制品、组合闭包、一次会话的非文件只读执行契约、有范围证据。 | Endem / Endem closure / session contract / evidence entry |
-| 组件 | 确定性制作、独立观察、隔离实行。 | deterministic producer / independent inspector / bounded runner |
+| 系统名词 | 最小目标制品、组合闭包、一次会话的非文件只读执行契约、有范围证据。 | Endem / closure / contract / evidence |
+| 组件 | 确定性制作、独立观察、隔离实行。 | producer / inspector / runner |
 | 动作 | 依次负责形成、制品形成侧检查、组合、独立只读观察和受控实现；ADR-0035 撤下没有独立用户任务的动作占位。 | `ktise / elenk / pleko / theor / drase` |
 | 生命周期 | 结构已形成、依赖已收敛、发布载荷已外部见证。 | `nascent / coherent / attested` |
 

@@ -1,7 +1,7 @@
 {
   "vector_format": "end-core.result-domain-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
-  "description": "Normative proposal vectors for ADR-0015 result-domain separation; not bounded runner or decision-engine implementation data",
+  "description": "Normative proposal vectors for ADR-0015 result-domain separation; not runner or decision-engine implementation data",
   "cases": [
     {
       "id": "RESULT-VALID-MET-ACCEPT-001",

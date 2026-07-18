@@ -30,7 +30,7 @@
       "implementation_status": "vector-checker-only",
       "wire_status": "not-applicable",
       "path": "spec/endem-source-manifest.md",
-      "scope": "Experimental deterministic producer source manifest mapped to END-P2"
+      "scope": "Experimental producer source manifest mapped to END-P2"
     },
     {
       "spec_id": "CLOSURE-CORE",
@@ -40,7 +40,7 @@
       "implementation_status": "vector-checker-only",
       "wire_status": "unfrozen",
       "path": "spec/endem-closure-core.md",
-      "scope": "Abstract multi-Endem closure, exact binding, authority convergence, member result separation and session activation"
+      "scope": "Abstract multi-closure, exact binding, authority convergence, member result separation and session activation"
     },
     {
       "spec_id": "SESSION-CORE",
@@ -80,7 +80,7 @@
       "implementation_status": "vector-checker-only",
       "wire_status": "not-applicable",
       "path": "spec/adapter-core.md",
-      "scope": "Protocol-independent bounded runner external adapter version, peer, capability, invocation, mapping, state, artifact, error, cancellation, retry, delivery and security boundaries"
+      "scope": "Protocol-independent runner external adapter version, peer, capability, invocation, mapping, state, artifact, error, cancellation, retry, delivery and security boundaries"
     },
     {
       "spec_id": "ID-CORE",
@@ -126,7 +126,7 @@
       "version": "0.1.0-draft",
       "status": "draft",
       "path": "spec/diagnostic-catalog.md",
-      "scope": "Experimental cross-object diagnostic codes for diagnostic envelopes, Endem, Endem closure, session contract and evidence entry rejection"
+      "scope": "Experimental cross-object diagnostic codes for diagnostic envelopes, Endem, closure, contract and evidence rejection"
     },
     {
       "id": "DIA-THREAT",
@@ -147,21 +147,21 @@
       "version": "0.1.0-draft",
       "status": "draft",
       "path": "spec/endem-closure-threat-model.md",
-      "scope": "Endem closure binding, graph, authority, result and activation threats"
+      "scope": "closure binding, graph, authority, result and activation threats"
     },
     {
       "id": "EVIDENCE-THREAT",
       "version": "0.1.0-draft",
       "status": "draft",
       "path": "spec/evidence-entry-threat-model.md",
-      "scope": "evidence entry scope, provenance, observation, classification, integrity, validity, coverage, decision and disclosure threats"
+      "scope": "evidence scope, provenance, observation, classification, integrity, validity, coverage, decision and disclosure threats"
     },
     {
       "id": "SESSION-THREAT",
       "version": "0.1.0-draft",
       "status": "draft",
       "path": "spec/session-contract-threat-model.md",
-      "scope": "session contract subject substitution, stale policy, environment drift, capability amplification, secret persistence, budget escape and session resurrection threats"
+      "scope": "contract subject substitution, stale policy, environment drift, capability amplification, secret persistence, budget escape and session resurrection threats"
     },
     {
       "id": "END-SCEN",
@@ -203,7 +203,7 @@
       "version": "0.1.0-draft",
       "status": "experimental-design-profile",
       "path": "spec/profiles/end-p2.json",
-      "scope": "Source-bearing formation and review profile for future deterministic producer, lint, independent inspector and internal conformance; not a final publication profile"
+      "scope": "Source-bearing formation and review profile for future producer, lint, inspector and internal conformance; not a final publication profile"
     },
     {
       "id": "ADP-THREAT",
@@ -276,127 +276,166 @@
   "terms": [
     {"term": "Noemion", "kind": "project", "decision_status": "accepted", "definition": "项目、新领域与社区总名"},
     {"term": "Endem", "kind": "artifact", "decision_status": "accepted", "definition": "最小、独立有效且可验证的期望终态单元"},
-    {"term": "Endem closure", "kind": "artifact", "decision_status": "accepted", "definition": "两个或更多 Endem 的已解析组合闭包"},
-    {"term": "session contract", "kind": "session-contract", "decision_status": "accepted", "definition": "bounded runner 为一次 run 会话从精确制品、政策、环境、能力、预算和证据责任建立的密封只读执行契约"},
-    {"term": "evidence entry", "kind": "evidence", "decision_status": "accepted", "definition": "绑定主体、范围、方法、环境、结果和限制的证据记录"},
-    {"term": "deterministic producer", "kind": "role", "decision_status": "accepted", "definition": "只从已获准输入确定性地产生 Endem 或 Endem closure 的写入责任"},
-    {"term": "independent inspector", "kind": "role", "decision_status": "accepted", "definition": "以独立、只读且有界的读取路径检查实际制品的责任"},
-    {"term": "bounded runner", "kind": "role", "decision_status": "accepted", "definition": "只在一次 session contract 允许的能力、预算、环境和期限内尝试动作的运行责任"},
-    {"term": "form", "kind": "action", "decision_status": "accepted", "definition": "从获准来源形成一个 Endem 的公开动作标识"},
-    {"term": "lint", "kind": "action", "decision_status": "accepted", "definition": "在生产路径内检查来源、字段和 Profile 一致性的公开动作标识"},
-    {"term": "compose", "kind": "action", "decision_status": "accepted", "definition": "从多个 Endem 形成已解析 Endem closure 的公开动作标识"},
-    {"term": "inspect", "kind": "action", "decision_status": "accepted", "definition": "使用 independent inspector 只读检查实际制品的公开动作标识"},
-    {"term": "run", "kind": "action", "decision_status": "accepted", "definition": "在 session contract 内由 bounded runner 尝试动作的公开动作标识"},
-    {"term": "source_expression", "kind": "semantic-facet", "decision_status": "accepted", "definition": "来源记号与可重定位范围"},
-    {"term": "meaning_projection", "kind": "semantic-facet", "decision_status": "accepted", "definition": "由确定性规则或范围有限具名权威确认的符号、指称、关系和角色投影；语义授权不授予动作权限"},
-    {"term": "situation", "kind": "semantic-facet", "decision_status": "accepted", "definition": "一个根、中性且可比较的可能事态"},
-    {"term": "goal_direction", "kind": "semantic-facet", "decision_status": "accepted", "definition": "达到或保持事态的目标方向"},
-    {"term": "satisfaction_criteria", "kind": "semantic-facet", "decision_status": "accepted", "definition": "结构比较、证据、未知处理和决定权威契约"},
-    {"term": "unresolved_meaning", "kind": "semantic-facet", "decision_status": "accepted", "definition": "可表达但尚未获授权决定的投影缺口"},
-    {"term": "structured_observation", "kind": "evidence-input", "decision_status": "accepted", "definition": "按已声明位置和方法保存的结构化观察；它本身不等于证据充分或目标满足"},
-    {"term": "reach", "kind": "goal-direction", "decision_status": "accepted", "definition": "要求 situation 在适用判断点成立，不额外声称本次动作造成了状态转变"},
-    {"term": "maintain", "kind": "goal-direction", "decision_status": "accepted", "definition": "要求 situation 在声明的时间范围与连续性政策下持续成立"},
-    {"term": "formed", "kind": "content-state", "decision_status": "accepted", "definition": "六项内容职责已经形成且结构可检查；不表示外部陈述、授权或满足已经成立"},
-    {"term": "resolved", "kind": "content-state", "decision_status": "accepted", "definition": "内容中的 unresolved_meaning 已按适用规则处理；不表示签名、授权、运行或满足已经成立"},
-    {"term": "no_allowed_projection", "kind": "meaning-result", "decision_status": "accepted", "definition": "没有候选 meaning_projection 能在适用语义授权下进入确认内容"},
-    {"term": "undetermined", "kind": "satisfaction-result", "decision_status": "accepted", "definition": "现有观察或证据不足以得出 met 或 unmet"},
-    {"term": "wire-format", "kind": "interface", "decision_status": "accepted-draft", "definition": "END-FMT 定义的实验性物理字节编码；尚非稳定 ABI"},
-    {"term": "content-standard", "kind": "specification-layer", "decision_status": "accepted", "definition": "END-CORE 定义的通用 Endem 内容语义、不变量、授权与符合性边界"},
-    {"term": "content-profile", "kind": "specification-layer", "decision_status": "accepted", "definition": "在精确 END-CORE 与 END-FMT 版本下封闭字段、类型、枚举、规范顺序、引用、状态和资源上限的内容能力集合"},
-    {"term": "END-P0", "kind": "profile", "decision_status": "experimental", "definition": "只用于结构向量和跨语言实验的有限符合性 Profile"},
-    {"term": "END-P2", "kind": "profile", "decision_status": "accepted-draft", "definition": "保留原始自然语言、仅用于未来形成与评审路径的封闭六记录 Profile；不得作为最终发布 Profile"},
-    {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 deterministic producer 使用的实验性逐行来源清单；不是稳定源语言"},
-    {"term": "source-bearing formation artifact", "kind": "artifact-role", "decision_status": "accepted", "definition": "保留原始自然语言及其可重定位范围、用于形成和受控评审的制品角色"},
-    {"term": "source-stripped release artifact", "kind": "artifact-role", "decision_status": "accepted", "definition": "移除原始自然语言及可逆重建材料、以独立身份发布并重新验证的制品角色"},
-    {"term": "source companion", "kind": "artifact-role", "decision_status": "accepted", "definition": "在受控边界内保存来源材料并与发布制品建立类型化关系的可选伴随资料；不是运行权限或公开包的必需部分"},
-    {"term": "satisfaction-result", "kind": "result-domain", "decision_status": "accepted", "definition": "met、unmet、undetermined 或 fault；只描述 situation 相对 satisfaction_criteria、structured_observation 与 evidence entry 的比较"},
-    {"term": "decision-result", "kind": "result-domain", "decision_status": "accepted", "definition": "accepted、rejected 或 deferred；只描述具名权威的最终决定"},
-    {"term": "session-result", "kind": "result-domain", "decision_status": "accepted", "definition": "completed、failed 或 stopped；只描述一次 run 会话怎样终止"},
-    {"term": "evidence-status", "kind": "result-domain", "decision_status": "accepted", "definition": "evidence entry 的 valid、invalid 或 revoked 与证据集合的 sufficient 或 insufficient 两个正交维度"},
-    {"term": "stopped", "kind": "session-result", "decision_status": "accepted", "definition": "会话因有界停止条件终止，且不等同于 completed、failed、met 或最终决定"},
-    {"term": "allowed", "kind": "authorization-decision", "decision_status": "accepted", "definition": "精确请求在当前 authority context 中获得有限授权"},
-    {"term": "denied", "kind": "authorization-decision", "decision_status": "accepted", "definition": "精确请求在当前 authority context 中被明确拒绝"},
-    {"term": "pending", "kind": "authorization-decision", "decision_status": "accepted", "definition": "授权所需权威、同意或事实尚不完整，不得按允许处理"},
-    {"term": "time-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "maintain 使用的 utc_window 绝对区间或 elapsed_window 具名事件经过时长"},
-    {"term": "utc_window", "kind": "time-scope", "decision_status": "accepted", "definition": "用明确 UTC 边界表示的半开绝对时间区间"},
-    {"term": "elapsed_window", "kind": "time-scope", "decision_status": "accepted", "definition": "从具名事件起算的经过时长范围"},
-    {"term": "continuity-policy", "kind": "semantic-interface", "decision_status": "accepted", "definition": "maintain 的 strict 全区间保持或带完整违约预算的 budgeted 保持"},
-    {"term": "time-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "evidence entry 声明的半开观测区间并集、方法、时钟、不确定度与缺口"},
-    {"term": "relation-polarity", "kind": "semantic-interface", "decision_status": "accepted", "definition": "同一关系身份与角色位置上的 positive 或 negative 事态极性"},
-    {"term": "negative-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "显式负极性观察，或在封闭观察范围内由完整缺席依据支持的负主张"},
-    {"term": "observation-closure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定权威、有限全集、角色路径、时间、方法、截止点、丢失计数与排除项的封闭观察声明"},
-    {"term": "quantifier", "kind": "semantic-interface", "decision_status": "accepted", "definition": "every、at_least_one、at_least、at_most 或 exactly 对一个固定关系角色的量化方式"},
-    {"term": "every", "kind": "quantifier", "decision_status": "accepted", "definition": "集合范围内每个成员都必须满足同一关系条件"},
-    {"term": "at_least_one", "kind": "quantifier", "decision_status": "accepted", "definition": "集合范围内至少一个成员必须满足同一关系条件"},
-    {"term": "collection-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "绑定集合身份、成员资格权威、模式、截止点、身份规则和成员或规则的量化范围"},
-    {"term": "cardinality-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "按不同规范成员身份聚合并保留成员级结果与 evidence entry 链接的基数证据"},
-    {"term": "measurement-construct", "kind": "semantic-interface", "decision_status": "accepted", "definition": "测量希望表达的抽象概念及其已授权直接可观察标准、总体和用途"},
-    {"term": "estimand", "kind": "semantic-interface", "decision_status": "accepted", "definition": "测量程序意图估计的固定总体或泛化总体数量"},
-    {"term": "fixed_population", "kind": "measurement-population", "decision_status": "accepted", "definition": "成员资格在截止点可完整确定的测量总体"},
-    {"term": "generalized_population", "kind": "measurement-population", "decision_status": "accepted", "definition": "需要显式统计模型和假设才能从样本推广的测量总体"},
-    {"term": "measurement-procedure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定生产者、版本、窗口、纳入排除、单位、聚合器、样本和缺失政策的可重放程序"},
-    {"term": "threshold-contract", "kind": "semantic-interface", "decision_status": "accepted", "definition": "绑定比较器、阈值、单位、舍入边界和不确定度政策的判断契约"},
-    {"term": "criterion-leaf", "kind": "semantic-interface", "decision_status": "accepted", "definition": "与一个 situation 关系叶和适用 structured_observation 位置对齐并独立产生四种满足结果之一的最小判据"},
-    {"term": "criterion-composition", "kind": "semantic-interface", "decision_status": "accepted", "definition": "用 all_of 或 any_of 确定性组合叶判断结果的有限无环结构"},
-    {"term": "decisive-basis", "kind": "evidence-interface", "decision_status": "accepted", "definition": "足以决定 all_of 为 unmet 或 any_of 为 met 的已求值叶集合"},
-    {"term": "evaluation-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "一次组合判断中已求值叶、未求值叶、停止原因和所用 evidence entry 的完整记录"}
-    ,{"term": "closure-member", "kind": "closure-interface", "decision_status": "accepted", "definition": "以精确内容身份进入 Endem closure 闭包的 Endem"}
-    ,{"term": "binding-record", "kind": "closure-interface", "decision_status": "accepted", "definition": "把引用方、被引用方、精确身份、规范与解析依据固定在一起的记录"}
-    ,{"term": "dependency-relation", "kind": "closure-interface", "decision_status": "accepted", "definition": "Endem closure 成员之间显式登记的必需或可选依赖关系"}
-    ,{"term": "activation-guard", "kind": "closure-interface", "decision_status": "accepted", "definition": "引用精确结果事件、结果域、期望值、截止点与授权策略的会话激活条件"}
-    ,{"term": "activation-status", "kind": "result-domain", "decision_status": "accepted", "definition": "active、inactive、unresolved 或 error；只描述固定闭包成员在一次会话中是否生效"}
-    ,{"term": "session-subject", "kind": "session-interface", "decision_status": "accepted", "definition": "session contract 在建立截止点重新验证并绑定的一个精确 resolved Endem 或 Endem closure，以及适用的外部陈述、验证政策、撤销状态和依赖方准入关系"}
-    ,{"term": "policy-closure", "kind": "session-interface", "decision_status": "accepted", "definition": "一次会话采用的精确政策、权威、consent、截止点、有效期和范围内 unresolved_meaning 处理的封闭集合"}
-    ,{"term": "environment-binding", "kind": "session-interface", "decision_status": "accepted", "definition": "把平台、时钟、隔离、适配器、协议和后端声明连接到具名观察的会话绑定"}
-    ,{"term": "capability-envelope", "kind": "session-interface", "decision_status": "accepted", "definition": "由制品、政策、操作主体、环境和适配器上限求交得到的非秘密会话能力描述"}
-    ,{"term": "budget-envelope", "kind": "session-interface", "decision_status": "accepted", "definition": "按资源类别绑定有限上限、单位、计数权威、重置规则和耗尽动作的会话预算"}
-    ,{"term": "observation-plan", "kind": "session-interface", "decision_status": "accepted", "definition": "把每项 satisfaction_criteria 责任连接到观察生产者、方法、structured_observation 位置、evidence entry 类别、披露、评估和决定权威的映射"}
-    ,{"term": "material-drift", "kind": "session-interface", "decision_status": "accepted", "definition": "主体、政策、权威、必需环境、能力、预算、激活守卫或证据责任发生使原会话契约不再成立的变化"}
-    ,{"term": "evidence-subject", "kind": "evidence-interface", "decision_status": "accepted", "definition": "evidence entry 主张所绑定的精确对象、会话、调用、观察集合或决定事件身份"}
-    ,{"term": "evidence-scope", "kind": "evidence-interface", "decision_status": "accepted", "definition": "限制 evidence entry 主张适用主体、总体、关系、方法、环境、时间和截止点的边界"}
-    ,{"term": "provenance-edge", "kind": "evidence-interface", "decision_status": "accepted", "definition": "连接输入、活动、派生输出与责任主体的有限无环溯源关系"}
-    ,{"term": "evidence-class", "kind": "evidence-interface", "decision_status": "accepted", "definition": "direct-observation、deterministic-derivation、external-assertion、human-judgment 或 model-candidate 来源类别"}
-    ,{"term": "validity-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "验证者在精确政策、参考值、环境与截止点下形成的 valid、invalid 或 revoked 评估"}
-    ,{"term": "coverage-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "相对精确 satisfaction_criteria 与观察责任形成的 sufficient 或 insufficient 评估"}
-    ,{"term": "disclosure-manifest", "kind": "evidence-interface", "decision_status": "accepted", "definition": "记录摘要、脱敏、分段披露和外置引用的可见范围、不可见范围及其证据影响"}
-    ,{"term": "diagnostic-code", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "与本地化消息和呈现格式分离的稳定机器诊断身份"}
-    ,{"term": "diagnostic-layer", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "说明失败发生于协议、结构、Profile、语义、政策、能力、运行、证据或决定边界的分类"}
-    ,{"term": "diagnostic-location", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "绑定位置种类、精确主体和有限范围的安全定位信息"}
-    ,{"term": "primary-diagnostic", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "按规范优先级确定的唯一主阻断诊断"}
-    ,{"term": "recovery-class", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "不授予权限也不携带副作用命令的有限恢复类别"}
-    ,{"term": "adapter-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "固定协议、规范、schema、传输、扩展、对端与政策版本的一次外部适配约束"}
-    ,{"term": "peer-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "分开发现声明、端点、认证主体、受众、租户与政策决定的对端身份约束"}
-    ,{"term": "invocation-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "把一次外部操作连接到精确 session contract、主体、输入、能力、预算、截止点与观察责任的调用约束"}
-    ,{"term": "loss-manifest", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "逐项记录协议映射中省略、合并、降精度与未知处理及其影响的有限清单"}
-    ,{"term": "external-state", "kind": "external-result-domain", "decision_status": "accepted-draft", "definition": "外部协议请求、任务、消息、产物、HTTP 或 SDK 的原生状态；不得提升为 Noemion 结果域"}
-    ,{"term": "delivery-evidence", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "绑定授权、序列、去重、乱序、缺口、终结与资源边界的流式或异步交付依据"}
-    ,{"term": "idempotency-class", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "read-only、idempotent、deduplicated 或 non-idempotent 的调用重试分类"}
-    ,{"term": "exact-content-identity", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "由身份域、对象语境和完整摘要元组共同解释的精确字节身份"}
-    ,{"term": "identity-domain", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "版本化定义对象种类、规范语境与摘要输入边界的身份比较空间"}
-    ,{"term": "digest-reference", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "携带完整身份域、对象语境、算法、长度和摘要值的不可变安全引用"}
-    ,{"term": "signed-statement", "kind": "attestation-interface", "decision_status": "accepted-draft", "definition": "把精确对象身份、陈述类型、用途、受众、主体和政策纳入受保护内容的签名陈述"}
-    ,{"term": "attestation-envelope", "kind": "attestation-interface", "decision_status": "accepted-draft", "definition": "外置保存签名和有限验证材料且不改变被指对象身份的包络"}
-    ,{"term": "validity-cutoff", "kind": "attestation-interface", "decision_status": "accepted-draft", "definition": "签名有效性评估所绑定的具名时间截止点"}
-    ,{"term": "artifact-relation", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "以双方精确身份、变换规则、保留内容、损失和验证条件描述派生或伴随关系"}
-    ,{"term": "text-slot", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "为字符串字段绑定编码、字符集合、比较、变换、长度、显示和失败责任的版本化职责类别"}
-    ,{"term": "source-text-binding", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "把原始来源字节、解码文本、字符集、变换链、损失和制品内内容身份明确分开的溯源关系"}
-    ,{"term": "structural-identifier", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "按封闭字符 Profile、长度、大小写和比较规则参与结构引用的机器标识符"}
-    ,{"term": "text-transform", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "绑定输入槽、Unicode 版本、算法、输出用途、身份影响和损失的文本变换"}
-    ,{"term": "comparison-profile", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "规定操作数槽、比较域、Unicode 与变换版本以及结果适用范围的机器比较规则"}
-    ,{"term": "scalar-range", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "绑定精确文本主体和表示版本、以 Unicode 标量为单位的半开区间"}
-    ,{"term": "hidden-character-inventory", "kind": "text-security-interface", "decision_status": "accepted-draft", "definition": "按 Unicode 版本记录不可见、默认可忽略、变体、连接、空白、混合脚本与同形风险位置的审查清单"}
-    ,{"term": "model-text-binding", "kind": "model-boundary-interface", "decision_status": "accepted-draft", "definition": "把模型实际输入身份、预处理、隐藏字符清单、模型与 tokenizer 身份和人类显示视图连接起来的候选约束"}
-    ,{"term": "display-view", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "绑定来源身份并披露转义、截断、脱敏、方向隔离和控制字符可视化的非权威呈现"}
-    ,{"term": "authority-context", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "把政策、权威域、对象、动作、目的、受众、租户、条件、截止点与失败责任固定在一次授权检查中的语境"}
-    ,{"term": "authority-principal", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "在精确权威语境中经认证、角色核对并获准作出有限决定的主体"}
-    ,{"term": "authorization-scope", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "按对象、动作、语义位置、目的、受众、资源、时间和条件封闭的默认不授予范围"}
-    ,{"term": "semantic-authorization", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "确定性规则或具名权威针对精确来源、候选和语义位置作出的有限确认"}
-    ,{"term": "authorization-decision", "kind": "authority-result-domain", "decision_status": "accepted-draft", "definition": "allowed、denied 或 pending；只回答精确请求在当前权威语境中是否获得有限授权"}
-    ,{"term": "delegation-chain", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "保留原始主体、逐级授予者、实际行动者、范围、期限、深度和撤销来源的有限无环委托关系"}
-    ,{"term": "multi-authority-policy", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "预先固定合格主体、不同身份、数量或角色、否决、冲突、缺席和截止点的多人决定规则"}
-    ,{"term": "consent-binding", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "把人类安全视图、精确机器请求、动作、资源、目的、接收方、期限、撤销和后果连接起来的同意关系"}
-    ,{"term": "authorization-validity", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "授权决定在具名截止点相对适用期、主体、政策、状态和撤销仍可使用的判断"}
-    ,{"term": "decision-replay-binding", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "把授权决定限制到唯一请求、对象、动作、目的、受众、会话、截止点、使用次数和去重规则的绑定"}
+    {"term": "closure", "kind": "artifact", "decision_status": "accepted", "definition": "包含至少两个 Endem 及其全部必需依赖的完整组合"},
+    {"term": "contract", "kind": "session", "decision_status": "accepted", "definition": "一次运行的主体、政策、环境、能力、预算与证据责任"},
+    {"term": "evidence", "kind": "record", "decision_status": "accepted", "definition": "绑定主体、范围、方法、环境、结果与限制的记录"},
+    {"term": "producer", "kind": "role", "decision_status": "accepted", "definition": "只从获准输入确定性写入制品的责任"},
+    {"term": "inspector", "kind": "role", "decision_status": "accepted", "definition": "通过独立只读路径检查实际制品的责任"},
+    {"term": "runner", "kind": "role", "decision_status": "accepted", "definition": "只在一次运行获准范围内尝试动作的责任"},
+    {"term": "form", "kind": "action", "decision_status": "accepted", "definition": "从获准来源形成一个 Endem"},
+    {"term": "lint", "kind": "action", "decision_status": "accepted", "definition": "在生产路径内检查来源、字段和 Profile 一致性"},
+    {"term": "compose", "kind": "action", "decision_status": "accepted", "definition": "从多个 Endem 形成 closure"},
+    {"term": "inspect", "kind": "action", "decision_status": "accepted", "definition": "使用 inspector 只读检查实际制品"},
+    {"term": "run", "kind": "action", "decision_status": "accepted", "definition": "由 runner 在 contract 内尝试动作"},
+    {"term": "source", "kind": "semantic", "decision_status": "accepted", "definition": "来源记号与可重定位范围"},
+    {"term": "meaning", "kind": "semantic", "decision_status": "accepted", "definition": "由确定性规则或有限具名权威确认的意义投影"},
+    {"term": "situation", "kind": "semantic", "decision_status": "accepted", "definition": "一个根、中性且可比较的可能事态"},
+    {"term": "direction", "kind": "semantic", "decision_status": "accepted", "definition": "达到或保持事态的目标方向"},
+    {"term": "criteria", "kind": "semantic", "decision_status": "accepted", "definition": "结构比较、证据、未知处理与决定权威规则"},
+    {"term": "unresolved", "kind": "semantic", "decision_status": "accepted", "definition": "可表达但尚未获得授权决定的意义缺口"},
+    {"term": "observation", "kind": "evidence", "decision_status": "accepted", "definition": "按声明位置与方法保存的结构化观察"},
+    {"term": "reach", "kind": "direction", "decision_status": "accepted", "definition": "要求事态在适用判断点成立"},
+    {"term": "maintain", "kind": "direction", "decision_status": "accepted", "definition": "要求事态在声明时间范围内持续成立"},
+    {"term": "formed", "kind": "state", "decision_status": "accepted", "definition": "内容职责已经形成且结构可检查"},
+    {"term": "resolved", "kind": "state", "decision_status": "accepted", "definition": "内容中的待确认意义已经按规则处理"},
+    {"term": "unavailable", "kind": "result", "decision_status": "accepted", "definition": "没有候选意义能在适用授权下进入确认内容"},
+    {"term": "undetermined", "kind": "result", "decision_status": "accepted", "definition": "现有观察或证据不足以得出肯定或否定判断"},
+    {"term": "stopped", "kind": "result", "decision_status": "accepted", "definition": "运行按适用规则停止且没有继续扩大作用"},
+    {"term": "allowed", "kind": "decision", "decision_status": "accepted", "definition": "适用权威允许声明范围内的动作"},
+    {"term": "denied", "kind": "decision", "decision_status": "accepted", "definition": "适用权威拒绝声明范围内的动作"},
+    {"term": "pending", "kind": "decision", "decision_status": "accepted", "definition": "适用权威尚未给出允许或拒绝结果"},
+    {"term": "profile", "kind": "interface", "decision_status": "accepted", "definition": "在精确规范版本下确定能力与限制的集合"},
+    {"term": "time", "kind": "interface", "decision_status": "accepted", "definition": "事件、区间与截止点所使用的时间信息"},
+    {"term": "scope", "kind": "interface", "decision_status": "accepted", "definition": "声明、授权或判断明确覆盖的范围"},
+    {"term": "coverage", "kind": "interface", "decision_status": "accepted", "definition": "现有资料对声明范围的支持程度"},
+    {"term": "guard", "kind": "interface", "decision_status": "accepted", "definition": "控制固定成员是否激活的条件"},
+    {"term": "signed", "kind": "interface", "decision_status": "accepted", "definition": "声明附带可独立核验的签名关系"},
+    {"term": "view", "kind": "interface", "decision_status": "accepted", "definition": "不改变来源身份的显示形式"}
+  ],
+  "identifiers": [
+    {"identifier": "Noemion", "kind": "project", "decision_status": "accepted", "definition": "项目、新领域与社区总名"},
+    {"identifier": "Endem", "kind": "artifact", "decision_status": "accepted", "definition": "最小、独立有效且可验证的期望终态单元"},
+    {"identifier": "closure", "kind": "artifact", "decision_status": "accepted", "definition": "两个或更多 Endem 的已解析组合闭包"},
+    {"identifier": "contract", "kind": "session-contract", "decision_status": "accepted", "definition": "runner 为一次 run 会话从精确制品、政策、环境、能力、预算和证据责任建立的密封只读执行契约"},
+    {"identifier": "evidence", "kind": "evidence", "decision_status": "accepted", "definition": "绑定主体、范围、方法、环境、结果和限制的证据记录"},
+    {"identifier": "producer", "kind": "role", "decision_status": "accepted", "definition": "只从已获准输入确定性地产生 Endem 或 closure 的写入责任"},
+    {"identifier": "inspector", "kind": "role", "decision_status": "accepted", "definition": "以独立、只读且有界的读取路径检查实际制品的责任"},
+    {"identifier": "runner", "kind": "role", "decision_status": "accepted", "definition": "只在一次 contract 允许的能力、预算、环境和期限内尝试动作的运行责任"},
+    {"identifier": "form", "kind": "action", "decision_status": "accepted", "definition": "从获准来源形成一个 Endem 的公开动作标识"},
+    {"identifier": "lint", "kind": "action", "decision_status": "accepted", "definition": "在生产路径内检查来源、字段和 Profile 一致性的公开动作标识"},
+    {"identifier": "compose", "kind": "action", "decision_status": "accepted", "definition": "从多个 Endem 形成已解析 closure 的公开动作标识"},
+    {"identifier": "inspect", "kind": "action", "decision_status": "accepted", "definition": "使用 inspector 只读检查实际制品的公开动作标识"},
+    {"identifier": "run", "kind": "action", "decision_status": "accepted", "definition": "在 contract 内由 runner 尝试动作的公开动作标识"},
+    {"identifier": "source_expression", "kind": "semantic-facet", "decision_status": "accepted", "definition": "来源记号与可重定位范围"},
+    {"identifier": "meaning_projection", "kind": "semantic-facet", "decision_status": "accepted", "definition": "由确定性规则或范围有限具名权威确认的符号、指称、关系和角色投影；语义授权不授予动作权限"},
+    {"identifier": "situation", "kind": "semantic-facet", "decision_status": "accepted", "definition": "一个根、中性且可比较的可能事态"},
+    {"identifier": "goal_direction", "kind": "semantic-facet", "decision_status": "accepted", "definition": "达到或保持事态的目标方向"},
+    {"identifier": "satisfaction_criteria", "kind": "semantic-facet", "decision_status": "accepted", "definition": "结构比较、证据、未知处理和决定权威契约"},
+    {"identifier": "unresolved_meaning", "kind": "semantic-facet", "decision_status": "accepted", "definition": "可表达但尚未获授权决定的投影缺口"},
+    {"identifier": "structured_observation", "kind": "evidence-input", "decision_status": "accepted", "definition": "按已声明位置和方法保存的结构化观察；它本身不等于证据充分或目标满足"},
+    {"identifier": "reach", "kind": "goal-direction", "decision_status": "accepted", "definition": "要求 situation 在适用判断点成立，不额外声称本次动作造成了状态转变"},
+    {"identifier": "maintain", "kind": "goal-direction", "decision_status": "accepted", "definition": "要求 situation 在声明的时间范围与连续性政策下持续成立"},
+    {"identifier": "formed", "kind": "content-state", "decision_status": "accepted", "definition": "六项内容职责已经形成且结构可检查；不表示外部陈述、授权或满足已经成立"},
+    {"identifier": "resolved", "kind": "content-state", "decision_status": "accepted", "definition": "内容中的 unresolved_meaning 已按适用规则处理；不表示签名、授权、运行或满足已经成立"},
+    {"identifier": "no_allowed_projection", "kind": "meaning-result", "decision_status": "accepted", "definition": "没有候选 meaning_projection 能在适用语义授权下进入确认内容"},
+    {"identifier": "undetermined", "kind": "satisfaction-result", "decision_status": "accepted", "definition": "现有观察或证据不足以得出 met 或 unmet"},
+    {"identifier": "wire-format", "kind": "interface", "decision_status": "accepted-draft", "definition": "END-FMT 定义的实验性物理字节编码；尚非稳定 ABI"},
+    {"identifier": "content-standard", "kind": "specification-layer", "decision_status": "accepted", "definition": "END-CORE 定义的通用 Endem 内容语义、不变量、授权与符合性边界"},
+    {"identifier": "content-profile", "kind": "specification-layer", "decision_status": "accepted", "definition": "在精确 END-CORE 与 END-FMT 版本下封闭字段、类型、枚举、规范顺序、引用、状态和资源上限的内容能力集合"},
+    {"identifier": "END-P0", "kind": "profile", "decision_status": "experimental", "definition": "只用于结构向量和跨语言实验的有限符合性 Profile"},
+    {"identifier": "END-P2", "kind": "profile", "decision_status": "accepted-draft", "definition": "保留原始自然语言、仅用于未来形成与评审路径的封闭六记录 Profile；不得作为最终发布 Profile"},
+    {"identifier": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 producer 使用的实验性逐行来源清单；不是稳定源语言"},
+    {"identifier": "source-bearing-artifact", "kind": "artifact-role", "decision_status": "accepted", "definition": "保留原始自然语言及其可重定位范围、用于形成和受控评审的制品角色"},
+    {"identifier": "source-stripped-artifact", "kind": "artifact-role", "decision_status": "accepted", "definition": "移除原始自然语言及可逆重建材料、以独立身份发布并重新验证的制品角色"},
+    {"identifier": "source-companion", "kind": "artifact-role", "decision_status": "accepted", "definition": "在受控边界内保存来源材料并与发布制品建立类型化关系的可选伴随资料；不是运行权限或公开包的必需部分"},
+    {"identifier": "satisfaction-result", "kind": "result-domain", "decision_status": "accepted", "definition": "met、unmet、undetermined 或 fault；只描述 situation 相对 satisfaction_criteria、structured_observation 与 evidence 的比较"},
+    {"identifier": "decision-result", "kind": "result-domain", "decision_status": "accepted", "definition": "accepted、rejected 或 deferred；只描述具名权威的最终决定"},
+    {"identifier": "session-result", "kind": "result-domain", "decision_status": "accepted", "definition": "completed、failed 或 stopped；只描述一次 run 会话怎样终止"},
+    {"identifier": "evidence-status", "kind": "result-domain", "decision_status": "accepted", "definition": "evidence 的 valid、invalid 或 revoked 与证据集合的 sufficient 或 insufficient 两个正交维度"},
+    {"identifier": "stopped", "kind": "session-result", "decision_status": "accepted", "definition": "会话因有界停止条件终止，且不等同于 completed、failed、met 或最终决定"},
+    {"identifier": "allowed", "kind": "authorization-decision", "decision_status": "accepted", "definition": "精确请求在当前 authority context 中获得有限授权"},
+    {"identifier": "denied", "kind": "authorization-decision", "decision_status": "accepted", "definition": "精确请求在当前 authority context 中被明确拒绝"},
+    {"identifier": "pending", "kind": "authorization-decision", "decision_status": "accepted", "definition": "授权所需权威、同意或事实尚不完整，不得按允许处理"},
+    {"identifier": "time-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "maintain 使用的 utc_window 绝对区间或 elapsed_window 具名事件经过时长"},
+    {"identifier": "utc_window", "kind": "time-scope", "decision_status": "accepted", "definition": "用明确 UTC 边界表示的半开绝对时间区间"},
+    {"identifier": "elapsed_window", "kind": "time-scope", "decision_status": "accepted", "definition": "从具名事件起算的经过时长范围"},
+    {"identifier": "continuity-policy", "kind": "semantic-interface", "decision_status": "accepted", "definition": "maintain 的 strict 全区间保持或带完整违约预算的 budgeted 保持"},
+    {"identifier": "time-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "evidence 声明的半开观测区间并集、方法、时钟、不确定度与缺口"},
+    {"identifier": "relation-polarity", "kind": "semantic-interface", "decision_status": "accepted", "definition": "同一关系身份与角色位置上的 positive 或 negative 事态极性"},
+    {"identifier": "negative-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "显式负极性观察，或在封闭观察范围内由完整缺席依据支持的负主张"},
+    {"identifier": "observation-closure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定权威、有限全集、角色路径、时间、方法、截止点、丢失计数与排除项的封闭观察声明"},
+    {"identifier": "quantifier", "kind": "semantic-interface", "decision_status": "accepted", "definition": "every、at_least_one、at_least、at_most 或 exactly 对一个固定关系角色的量化方式"},
+    {"identifier": "every", "kind": "quantifier", "decision_status": "accepted", "definition": "集合范围内每个成员都必须满足同一关系条件"},
+    {"identifier": "at_least_one", "kind": "quantifier", "decision_status": "accepted", "definition": "集合范围内至少一个成员必须满足同一关系条件"},
+    {"identifier": "collection-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "绑定集合身份、成员资格权威、模式、截止点、身份规则和成员或规则的量化范围"},
+    {"identifier": "cardinality-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "按不同规范成员身份聚合并保留成员级结果与 evidence 链接的基数证据"},
+    {"identifier": "measurement-construct", "kind": "semantic-interface", "decision_status": "accepted", "definition": "测量希望表达的抽象概念及其已授权直接可观察标准、总体和用途"},
+    {"identifier": "estimand", "kind": "semantic-interface", "decision_status": "accepted", "definition": "测量程序意图估计的固定总体或泛化总体数量"},
+    {"identifier": "fixed_population", "kind": "measurement-population", "decision_status": "accepted", "definition": "成员资格在截止点可完整确定的测量总体"},
+    {"identifier": "generalized_population", "kind": "measurement-population", "decision_status": "accepted", "definition": "需要显式统计模型和假设才能从样本推广的测量总体"},
+    {"identifier": "measurement-procedure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定生产者、版本、窗口、纳入排除、单位、聚合器、样本和缺失政策的可重放程序"},
+    {"identifier": "threshold-contract", "kind": "semantic-interface", "decision_status": "accepted", "definition": "绑定比较器、阈值、单位、舍入边界和不确定度政策的判断契约"},
+    {"identifier": "criterion-leaf", "kind": "semantic-interface", "decision_status": "accepted", "definition": "与一个 situation 关系叶和适用 structured_observation 位置对齐并独立产生四种满足结果之一的最小判据"},
+    {"identifier": "criterion-composition", "kind": "semantic-interface", "decision_status": "accepted", "definition": "用 all_of 或 any_of 确定性组合叶判断结果的有限无环结构"},
+    {"identifier": "decisive-basis", "kind": "evidence-interface", "decision_status": "accepted", "definition": "足以决定 all_of 为 unmet 或 any_of 为 met 的已求值叶集合"},
+    {"identifier": "evaluation-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "一次组合判断中已求值叶、未求值叶、停止原因和所用 evidence 的完整记录"}
+    ,{"identifier": "closure-member", "kind": "closure-interface", "decision_status": "accepted", "definition": "以精确内容身份进入 closure 闭包的 Endem"}
+    ,{"identifier": "binding-record", "kind": "closure-interface", "decision_status": "accepted", "definition": "把引用方、被引用方、精确身份、规范与解析依据固定在一起的记录"}
+    ,{"identifier": "dependency-relation", "kind": "closure-interface", "decision_status": "accepted", "definition": "closure 成员之间显式登记的必需或可选依赖关系"}
+    ,{"identifier": "activation-guard", "kind": "closure-interface", "decision_status": "accepted", "definition": "引用精确结果事件、结果域、期望值、截止点与授权策略的会话激活条件"}
+    ,{"identifier": "activation-status", "kind": "result-domain", "decision_status": "accepted", "definition": "active、inactive、unresolved 或 error；只描述固定闭包成员在一次会话中是否生效"}
+    ,{"identifier": "session-subject", "kind": "session-interface", "decision_status": "accepted", "definition": "contract 在建立截止点重新验证并绑定的一个精确 resolved Endem 或 closure，以及适用的外部陈述、验证政策、撤销状态和依赖方准入关系"}
+    ,{"identifier": "policy-closure", "kind": "session-interface", "decision_status": "accepted", "definition": "一次会话采用的精确政策、权威、consent、截止点、有效期和范围内 unresolved_meaning 处理的封闭集合"}
+    ,{"identifier": "environment-binding", "kind": "session-interface", "decision_status": "accepted", "definition": "把平台、时钟、隔离、适配器、协议和后端声明连接到具名观察的会话绑定"}
+    ,{"identifier": "capability-envelope", "kind": "session-interface", "decision_status": "accepted", "definition": "由制品、政策、操作主体、环境和适配器上限求交得到的非秘密会话能力描述"}
+    ,{"identifier": "budget-envelope", "kind": "session-interface", "decision_status": "accepted", "definition": "按资源类别绑定有限上限、单位、计数权威、重置规则和耗尽动作的会话预算"}
+    ,{"identifier": "observation-plan", "kind": "session-interface", "decision_status": "accepted", "definition": "把每项 satisfaction_criteria 责任连接到观察生产者、方法、structured_observation 位置、evidence 类别、披露、评估和决定权威的映射"}
+    ,{"identifier": "material-drift", "kind": "session-interface", "decision_status": "accepted", "definition": "主体、政策、权威、必需环境、能力、预算、激活守卫或证据责任发生使原会话契约不再成立的变化"}
+    ,{"identifier": "evidence-subject", "kind": "evidence-interface", "decision_status": "accepted", "definition": "evidence 主张所绑定的精确对象、会话、调用、观察集合或决定事件身份"}
+    ,{"identifier": "evidence-scope", "kind": "evidence-interface", "decision_status": "accepted", "definition": "限制 evidence 主张适用主体、总体、关系、方法、环境、时间和截止点的边界"}
+    ,{"identifier": "provenance-edge", "kind": "evidence-interface", "decision_status": "accepted", "definition": "连接输入、活动、派生输出与责任主体的有限无环溯源关系"}
+    ,{"identifier": "evidence-class", "kind": "evidence-interface", "decision_status": "accepted", "definition": "direct-observation、deterministic-derivation、external-assertion、human-judgment 或 model-candidate 来源类别"}
+    ,{"identifier": "validity-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "验证者在精确政策、参考值、环境与截止点下形成的 valid、invalid 或 revoked 评估"}
+    ,{"identifier": "coverage-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "相对精确 satisfaction_criteria 与观察责任形成的 sufficient 或 insufficient 评估"}
+    ,{"identifier": "disclosure-manifest", "kind": "evidence-interface", "decision_status": "accepted", "definition": "记录摘要、脱敏、分段披露和外置引用的可见范围、不可见范围及其证据影响"}
+    ,{"identifier": "diagnostic-code", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "与本地化消息和呈现格式分离的稳定机器诊断身份"}
+    ,{"identifier": "diagnostic-layer", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "说明失败发生于协议、结构、Profile、语义、政策、能力、运行、证据或决定边界的分类"}
+    ,{"identifier": "diagnostic-location", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "绑定位置种类、精确主体和有限范围的安全定位信息"}
+    ,{"identifier": "primary-diagnostic", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "按规范优先级确定的唯一主阻断诊断"}
+    ,{"identifier": "recovery-class", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "不授予权限也不携带副作用命令的有限恢复类别"}
+    ,{"identifier": "adapter-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "固定协议、规范、schema、传输、扩展、对端与政策版本的一次外部适配约束"}
+    ,{"identifier": "peer-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "分开发现声明、端点、认证主体、受众、租户与政策决定的对端身份约束"}
+    ,{"identifier": "invocation-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "把一次外部操作连接到精确 contract、主体、输入、能力、预算、截止点与观察责任的调用约束"}
+    ,{"identifier": "loss-manifest", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "逐项记录协议映射中省略、合并、降精度与未知处理及其影响的有限清单"}
+    ,{"identifier": "external-state", "kind": "external-result-domain", "decision_status": "accepted-draft", "definition": "外部协议请求、任务、消息、产物、HTTP 或 SDK 的原生状态；不得提升为 Noemion 结果域"}
+    ,{"identifier": "delivery-evidence", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "绑定授权、序列、去重、乱序、缺口、终结与资源边界的流式或异步交付依据"}
+    ,{"identifier": "idempotency-class", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "read-only、idempotent、deduplicated 或 non-idempotent 的调用重试分类"}
+    ,{"identifier": "exact-content-identity", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "由身份域、对象语境和完整摘要元组共同解释的精确字节身份"}
+    ,{"identifier": "identity-domain", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "版本化定义对象种类、规范语境与摘要输入边界的身份比较空间"}
+    ,{"identifier": "digest-reference", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "携带完整身份域、对象语境、算法、长度和摘要值的不可变安全引用"}
+    ,{"identifier": "signed-statement", "kind": "attestation-interface", "decision_status": "accepted-draft", "definition": "把精确对象身份、陈述类型、用途、受众、主体和政策纳入受保护内容的签名陈述"}
+    ,{"identifier": "attestation-envelope", "kind": "attestation-interface", "decision_status": "accepted-draft", "definition": "外置保存签名和有限验证材料且不改变被指对象身份的包络"}
+    ,{"identifier": "validity-cutoff", "kind": "attestation-interface", "decision_status": "accepted-draft", "definition": "签名有效性评估所绑定的具名时间截止点"}
+    ,{"identifier": "artifact-relation", "kind": "identity-interface", "decision_status": "accepted-draft", "definition": "以双方精确身份、变换规则、保留内容、损失和验证条件描述派生或伴随关系"}
+    ,{"identifier": "text-slot", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "为字符串字段绑定编码、字符集合、比较、变换、长度、显示和失败责任的版本化职责类别"}
+    ,{"identifier": "source-text-binding", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "把原始来源字节、解码文本、字符集、变换链、损失和制品内内容身份明确分开的溯源关系"}
+    ,{"identifier": "structural-identifier", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "按封闭字符 Profile、长度、大小写和比较规则参与结构引用的机器标识符"}
+    ,{"identifier": "text-transform", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "绑定输入槽、Unicode 版本、算法、输出用途、身份影响和损失的文本变换"}
+    ,{"identifier": "comparison-profile", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "规定操作数槽、比较域、Unicode 与变换版本以及结果适用范围的机器比较规则"}
+    ,{"identifier": "scalar-range", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "绑定精确文本主体和表示版本、以 Unicode 标量为单位的半开区间"}
+    ,{"identifier": "hidden-character-inventory", "kind": "text-security-interface", "decision_status": "accepted-draft", "definition": "按 Unicode 版本记录不可见、默认可忽略、变体、连接、空白、混合脚本与同形风险位置的审查清单"}
+    ,{"identifier": "model-text-binding", "kind": "model-boundary-interface", "decision_status": "accepted-draft", "definition": "把模型实际输入身份、预处理、隐藏字符清单、模型与 tokenizer 身份和人类显示视图连接起来的候选约束"}
+    ,{"identifier": "display-view", "kind": "text-interface", "decision_status": "accepted-draft", "definition": "绑定来源身份并披露转义、截断、脱敏、方向隔离和控制字符可视化的非权威呈现"}
+    ,{"identifier": "authority-context", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "把政策、权威域、对象、动作、目的、受众、租户、条件、截止点与失败责任固定在一次授权检查中的语境"}
+    ,{"identifier": "authority-principal", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "在精确权威语境中经认证、角色核对并获准作出有限决定的主体"}
+    ,{"identifier": "authorization-scope", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "按对象、动作、语义位置、目的、受众、资源、时间和条件封闭的默认不授予范围"}
+    ,{"identifier": "semantic-authorization", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "确定性规则或具名权威针对精确来源、候选和语义位置作出的有限确认"}
+    ,{"identifier": "authorization-decision", "kind": "authority-result-domain", "decision_status": "accepted-draft", "definition": "allowed、denied 或 pending；只回答精确请求在当前权威语境中是否获得有限授权"}
+    ,{"identifier": "delegation-chain", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "保留原始主体、逐级授予者、实际行动者、范围、期限、深度和撤销来源的有限无环委托关系"}
+    ,{"identifier": "multi-authority-policy", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "预先固定合格主体、不同身份、数量或角色、否决、冲突、缺席和截止点的多人决定规则"}
+    ,{"identifier": "consent-binding", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "把人类安全视图、精确机器请求、动作、资源、目的、接收方、期限、撤销和后果连接起来的同意关系"}
+    ,{"identifier": "authorization-validity", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "授权决定在具名截止点相对适用期、主体、政策、状态和撤销仍可使用的判断"}
+    ,{"identifier": "decision-replay-binding", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "把授权决定限制到唯一请求、对象、动作、目的、受众、会话、截止点、使用次数和去重规则的绑定"}
   ],
   "threats": [
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
@@ -505,7 +544,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner loader and every session establishment path",
+      "failure_owner": "future runner loader and every session establishment path",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
@@ -517,7 +556,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner policy resolver and named session authority",
+      "failure_owner": "future runner policy resolver and named session authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
@@ -529,7 +568,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner environment verifier and every adapter",
+      "failure_owner": "future runner environment verifier and every adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
@@ -541,7 +580,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner capability resolver and minimal capability domain",
+      "failure_owner": "future runner capability resolver and minimal capability domain",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
@@ -553,7 +592,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future minimal capability domain, bounded runner and every log or evidence producer",
+      "failure_owner": "future minimal capability domain, runner and every log or evidence producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
@@ -565,7 +604,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner scheduler, adapters and delegated task controller",
+      "failure_owner": "future runner scheduler, adapters and delegated task controller",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
@@ -577,7 +616,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner activation evaluator and every Endem closure session consumer",
+      "failure_owner": "future runner activation evaluator and every closure session consumer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
@@ -589,7 +628,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner, observation adapters, evidence entry producers and decision authorities",
+      "failure_owner": "future runner, observation adapters, evidence producers and decision authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
@@ -601,7 +640,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner session controller and every mutable environment adapter",
+      "failure_owner": "future runner session controller and every mutable environment adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
@@ -613,7 +652,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner session controller, capability domain and evidence/log producers",
+      "failure_owner": "future runner session controller, capability domain and evidence/log producers",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
@@ -625,7 +664,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "every evidence entry producer, verifier and consumer",
+      "failure_owner": "every evidence producer, verifier and consumer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
@@ -637,7 +676,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "evidence entry producers, mergers and every verifier",
+      "failure_owner": "evidence producers, mergers and every verifier",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
@@ -649,7 +688,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "observation adapters, evidence entry producers and evaluators",
+      "failure_owner": "observation adapters, evidence producers and evaluators",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
@@ -661,7 +700,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "evidence entry producers and every evidence consumer",
+      "failure_owner": "evidence producers and every evidence consumer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
@@ -685,7 +724,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "evidence entry verifiers, revocation authorities and policy owners",
+      "failure_owner": "evidence verifiers, revocation authorities and policy owners",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
@@ -721,7 +760,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "evidence entry producers, disclosure policy owners and storage operators",
+      "failure_owner": "evidence producers, disclosure policy owners and storage operators",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
@@ -733,7 +772,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, compose and every Endem closure reader",
+      "failure_owner": "producer, compose and every closure reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
@@ -745,7 +784,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, compose and every Endem closure reader",
+      "failure_owner": "producer, compose and every closure reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
@@ -757,7 +796,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "compose, Endem closure readers and resource policy owners",
+      "failure_owner": "compose, closure readers and resource policy owners",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
@@ -769,7 +808,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "compose, bounded runner and capability policy owners",
+      "failure_owner": "compose, runner and capability policy owners",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
@@ -781,7 +820,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "bounded runner, decision authorities and every result consumer",
+      "failure_owner": "runner, decision authorities and every result consumer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
@@ -793,7 +832,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "bounded runner, event producers and activation policy owners",
+      "failure_owner": "runner, event producers and activation policy owners",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
@@ -805,7 +844,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "deterministic producer and every reader",
+      "failure_owner": "producer and every reader",
       "verification": [{"status": "planned", "ref": "conformance:conformance-identity"}]
     },
     {
@@ -835,7 +874,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Profile maintainers, deterministic producer and every reader",
+      "failure_owner": "Profile maintainers, producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
         {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
@@ -872,7 +911,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer",
+      "failure_owner": "producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/two-roots-reject.json"}
@@ -883,7 +922,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and every reader",
+      "failure_owner": "producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "conformance:facet-presence"}
@@ -894,7 +933,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer",
+      "failure_owner": "producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/source-range-reject.json"},
@@ -919,7 +958,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer",
+      "failure_owner": "producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"}
@@ -930,7 +969,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer",
+      "failure_owner": "producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/force-in-situation-reject.json"}
@@ -941,7 +980,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer",
+      "failure_owner": "producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "conformance:goal_direction-mode"}
@@ -952,7 +991,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, semantic authorities and Endem closure maintainers",
+      "failure_owner": "producer, semantic authorities and closure maintainers",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -965,7 +1004,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, independent inspector and every semantic reader",
+      "failure_owner": "producer, inspector and every semantic reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -978,7 +1017,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "bounded runner and every evaluator",
+      "failure_owner": "runner and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -991,7 +1030,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "bounded runner, observation adapters and every evaluator",
+      "failure_owner": "runner, observation adapters and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -1004,7 +1043,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, membership authorities and every semantic reader",
+      "failure_owner": "producer, membership authorities and every semantic reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
@@ -1017,7 +1056,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, membership authorities and every evaluator",
+      "failure_owner": "producer, membership authorities and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
@@ -1030,7 +1069,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "bounded runner, observation adapters and every evaluator",
+      "failure_owner": "runner, observation adapters and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
@@ -1043,7 +1082,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "semantic authorities, evaluation owners and deterministic producer",
+      "failure_owner": "semantic authorities, evaluation owners and producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1056,7 +1095,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, measurement producers and every evaluator",
+      "failure_owner": "producer, measurement producers and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1069,7 +1108,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "measurement producers, bounded runner and every evaluator",
+      "failure_owner": "measurement producers, runner and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1082,7 +1121,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "bounded runner, measurement authorities and every evaluator",
+      "failure_owner": "runner, measurement authorities and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1095,7 +1134,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and every semantic reader",
+      "failure_owner": "producer and every semantic reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/negative-relation-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
@@ -1109,7 +1148,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "bounded runner, observation adapters and every evaluator",
+      "failure_owner": "runner, observation adapters and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
@@ -1122,7 +1161,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "observation authorities, bounded runner and every evaluator",
+      "failure_owner": "observation authorities, runner and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
@@ -1135,7 +1174,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, bounded runner and time authorities",
+      "failure_owner": "producer, runner and time authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/time-scope/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/time_scope_vector_test.py"},
@@ -1148,7 +1187,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, bounded runner and policy authorities",
+      "failure_owner": "producer, runner and policy authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/time-scope/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/time_scope_vector_test.py"},
@@ -1161,7 +1200,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "bounded runner, observation adapters and every evaluator",
+      "failure_owner": "runner, observation adapters and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/time-scope/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/time_scope_vector_test.py"},
@@ -1174,7 +1213,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and bounded runner",
+      "failure_owner": "producer and runner",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "conformance:satisfaction_criteria-no-self-proof"}
@@ -1185,7 +1224,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "bounded runner and every evaluator",
+      "failure_owner": "runner and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
@@ -1198,7 +1237,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer",
+      "failure_owner": "producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-unresolved-meaning-reject.json"},
         {"status": "planned", "ref": "conformance:unresolved_meaning-preservation"}
@@ -1209,7 +1248,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, bounded runner and every evaluator",
+      "failure_owner": "producer, runner and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-unresolved-meaning-reject.json"},
         {"status": "planned", "ref": "conformance:unknown-state-separation"}
@@ -1220,7 +1259,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and independent inspector",
+      "failure_owner": "producer and inspector",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "conformance:relation-position-differential"}
@@ -1231,7 +1270,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and bounded runner",
+      "failure_owner": "producer and runner",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
         {"status": "planned", "ref": "conformance:model-candidate-boundary"}
@@ -1242,7 +1281,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, every content validator and authorization companion resolver",
+      "failure_owner": "producer, every content validator and authorization companion resolver",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-missing-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-mismatch-reject.json"},
@@ -1255,7 +1294,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "bounded runner and named decision authorities",
+      "failure_owner": "runner and named decision authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
@@ -1268,7 +1307,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "deterministic producer",
+      "failure_owner": "producer",
       "verification": [
         {"status": "planned", "ref": "conformance:determinism-same-input"},
         {"status": "planned", "ref": "conformance:reproducible-two-environments"}
@@ -1279,7 +1318,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "deterministic producer, external signing integration and bounded runner",
+      "failure_owner": "producer, external signing integration and runner",
       "verification": [{"status": "planned", "ref": "conformance:state-non-implication"}]
     },
     {
@@ -1287,7 +1326,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "bounded runner, protocol adapters and evidence consumers",
+      "failure_owner": "runner, protocol adapters and evidence consumers",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
@@ -1300,7 +1339,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and release validation",
+      "failure_owner": "producer and release validation",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/identity-core.md"},
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
@@ -1313,7 +1352,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, identity producers and authorization companion consumers",
+      "failure_owner": "producer, identity producers and authorization companion consumers",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/negative-relation-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/external-context-identity-valid.json"},
@@ -1368,7 +1407,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer, independent inspector and every reader",
+      "failure_owner": "producer, inspector and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/two-roots-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/force-in-situation-reject.json"},
@@ -1384,7 +1423,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "independent inspector and repository dependency checks",
+      "failure_owner": "inspector and repository dependency checks",
       "verification": [
         {"status": "planned", "ref": "conformance:reader-dependency-independence"},
         {"status": "planned", "ref": "conformance:mutation-and-fault-injection"}
@@ -1406,7 +1445,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "deterministic producer and every reader",
+      "failure_owner": "producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/minimal-structural.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/bad-magic.hex"},
@@ -1420,7 +1459,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "deterministic producer and every reader",
+      "failure_owner": "producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "planned", "ref": "conformance:wire-layout-variants"}
@@ -1431,7 +1470,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and every reader",
+      "failure_owner": "producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "planned", "ref": "conformance:wire-size-and-reserved"}
@@ -1453,7 +1492,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "deterministic producer and every reader",
+      "failure_owner": "producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p2/directory-order.hex"},
@@ -1487,7 +1526,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and every reader",
+      "failure_owner": "producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/minimal-structural.hex"},
         {"status": "planned", "ref": "conformance:wire-facet-cardinality"}
@@ -1498,7 +1537,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "deterministic producer and every reader",
+      "failure_owner": "producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/payload-not-map.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p2/non-minimal-cbor.hex"},
@@ -1529,7 +1568,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and every reader",
+      "failure_owner": "producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p0.json"},
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
@@ -1554,7 +1593,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and every END-P2 reader",
+      "failure_owner": "producer and every END-P2 reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
         {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
@@ -1569,7 +1608,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and every END-P2 reader",
+      "failure_owner": "producer and every END-P2 reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
         {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
@@ -1599,7 +1638,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer source reader",
+      "failure_owner": "producer source reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/endem-source-manifest.md"},
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
@@ -1611,7 +1650,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "deterministic producer source reader",
+      "failure_owner": "producer source reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/source/minimal.ends"},
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"}
@@ -1622,7 +1661,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer source reader",
+      "failure_owner": "producer source reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
         {"status": "planned", "ref": "conformance:source-escape-boundaries"}
@@ -1633,7 +1672,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer",
+      "failure_owner": "producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/source/minimal.ends"},
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
@@ -1646,7 +1685,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer and upstream authoring authority",
+      "failure_owner": "producer and upstream authoring authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-unresolved-meaning-reject.json"},
@@ -1658,7 +1697,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "deterministic producer",
+      "failure_owner": "producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
         {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
@@ -1737,7 +1776,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner control plane and named authority",
+      "failure_owner": "future runner control plane and named authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
         {"status": "planned", "ref": "conformance:diagnostic-recovery-authority"}
@@ -1814,7 +1853,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner capability resolver and every external adapter",
+      "failure_owner": "future runner capability resolver and every external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "conformance:adapter-capability-intersection"}
@@ -1825,7 +1864,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner session controller and every external adapter",
+      "failure_owner": "future runner session controller and every external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "conformance:adapter-invocation-binding"}
@@ -1880,7 +1919,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future bounded runner session controller and every asynchronous adapter",
+      "failure_owner": "future runner session controller and every asynchronous adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "conformance:adapter-cancellation-finality"}
@@ -1891,7 +1930,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future retry policy, bounded runner budget controller and every adapter",
+      "failure_owner": "future retry policy, runner budget controller and every adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "conformance:adapter-idempotent-retry"}
@@ -2237,7 +2276,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "every future semantic review authority, candidate producer and deterministic producer input boundary",
+      "failure_owner": "every future semantic review authority, candidate producer and producer input boundary",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
@@ -2321,7 +2360,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "every future bounded runner capability resolver, session contract establisher and external adapter",
+      "failure_owner": "every future runner capability resolver, contract establisher and external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
@@ -2333,7 +2372,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "every future authority consumer, result mapper, bounded runner and decision authority",
+      "failure_owner": "every future authority consumer, result mapper, runner and decision authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},

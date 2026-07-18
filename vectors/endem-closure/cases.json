@@ -1,7 +1,7 @@
 {
   "vector_format": "closure-core.vector.v1",
   "spec": {"id": "CLOSURE-CORE", "version": "0.1.0-draft"},
-  "description": "Endem closure and activation proposal matrix; a specification consistency matrix, not a resolver, parser, bounded runner, evaluator, runtime, or component implementation",
+  "description": "closure and activation proposal matrix; a specification consistency matrix, not a resolver, parser, runner, evaluator, runtime, or component implementation",
   "cases": [
     {"id":"CLOSURE-VALID-COMPLETE-CLOSURE-001","proposal":{"members":["a@01","b@02","c@03"],"required":[["a@01","b@02"],["b@02","c@03"]],"bindings":"exact","ambient":false,"cycle":false,"permission":"intersection","aggregate_result":false},"expect":{"result":"accept","clause":"CLOSURE-CLS-001"}},
     {"id":"CLOSURE-VALID-ORDER-INDEPENDENT-001","proposal":{"members":["b@02","a@01"],"required":[["a@01","b@02"]],"bindings":"exact","ambient":false,"order_independent":true,"cycle":false,"permission":"intersection","aggregate_result":false},"expect":{"result":"accept","clause":"CLOSURE-RES-001"}},

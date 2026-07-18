@@ -44,7 +44,7 @@ summary: "帮助开发者先定位被改变的责任，再找到对应 ADR、规
       <article class="status-item"><h3>Endem 语义、格式与判断</h3><ul>
         <li><a href="adr-0010-native-lexicon.html">ADR-0010 · 原生词汇与事态分层</a></li>
         <li><a href="adr-0011-endem-container.html">ADR-0011 · Endem 实验性容器格式</a></li>
-        <li><a href="adr-0012-rust-core-language.html">ADR-0012 · 未来 deterministic producer 的 Rust 评审基线</a></li>
+        <li><a href="adr-0012-rust-core-language.html">ADR-0012 · 未来 producer 的 Rust 评审基线</a></li>
         <li><a href="adr-0013-end-p1-payload.html">ADR-0013 · 来源保留 END-P2 Profile</a></li>
         <li><a href="adr-0014-source-manifest.html">ADR-0014 · 实验来源清单边界</a></li>
         <li><a href="adr-0015-result-domains.html">ADR-0015 · 五类结果不可互换</a></li>
@@ -80,13 +80,13 @@ summary: "帮助开发者先定位被改变的责任，再找到对应 ADR、规
     <h2>常见输入怎样进入当前架构</h2>
     <p class="lead">先给每类输入一个受限角色，再说明它还缺少哪项确认。这样可以直接指导实现者接线，也避免把风险边界写成一串互不相连的禁令。</p>
     <div class="table-wrap"><table><thead><tr><th>常见输入</th><th>允许进入的角色</th><th>仍需补足什么</th></tr></thead><tbody>
-      <tr><td>自然语言、模型 JSON</td><td>带来源的候选材料</td><td>deterministic producer 所需的授权投影、未确定项与人工确认；候选本身不是 Endem。</td></tr>
+      <tr><td>自然语言、模型 JSON</td><td>带来源的候选材料</td><td>producer 所需的授权投影、未确定项与人工确认；候选本身不是 Endem。</td></tr>
       <tr><td>独立查看实际制品字节</td><td>独立只读检查职责</td><td>由现行设计标识 <code>inspect</code> 表示；它不修复、不写回，也不产生生产检查通过结论。</td></tr>
       <tr><td>发布派生、签名与符合性检查</td><td>生产者、外部密钥权限域与发行验证分别负责</td><td>当前都不是公开动作；在物理契约和真实消费者确定前，不用名字预占 CLI。</td></tr>
       <tr><td>环境路径、当前目录、网络版本</td><td>开发期定位线索</td><td>正式依赖必须转换为精确身份、版本和 Profile；运行环境不能替代内容身份。</td></tr>
       <tr><td>对象变换或迁移工具</td><td>显式、可审计的转换步骤</td><td>保存未知字段与来源，分别验证 <code>meaning_projection</code>、<code>situation</code>、<code>goal_direction</code>、<code>satisfaction_criteria</code>、<code>unresolved_meaning</code> 的语义不变量。</td></tr>
-      <tr><td>签名、证据数量、模型评分、Runtime 成功</td><td>绑定来源的陈述、证据或运行事件</td><td>按 evidence entry 覆盖、Endem 满足和具名权威决定分别求值，任何单一信号都不代表任务完成。</td></tr>
-      <tr><td>保存的会话记录</td><td>审计和复盘材料</td><td>新运行必须创建新的 session contract，并重新取得实时能力、秘密、预算和环境绑定。</td></tr>
+      <tr><td>签名、证据数量、模型评分、Runtime 成功</td><td>绑定来源的陈述、证据或运行事件</td><td>按 evidence 覆盖、Endem 满足和具名权威决定分别求值，任何单一信号都不代表任务完成。</td></tr>
+      <tr><td>保存的会话记录</td><td>审计和复盘材料</td><td>新运行必须创建新的 contract，并重新取得实时能力、秘密、预算和环境绑定。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -109,17 +109,17 @@ summary: "帮助开发者先定位被改变的责任，再找到对应 ADR、规
     <p class="lead">AI 协议只扩大可交换信息，不扩大 Noemion 的信任。未来任何 MCP、A2A、模型供应商或遥测适配器都必须遵守以下边界。</p>
     <div class="table-wrap"><table><thead><tr><th>不变量</th><th>必须保留</th><th>违反时怎样处理</th></tr></thead><tbody>
       <tr><td>版本固定</td><td>协议主次版本、schema 摘要、扩展集合、传输与授权配置必须成为显式输入。</td><td>版本未知、候选版未复核或降级不明确时拒绝适配，不按“最新版本”猜测。</td></tr>
-      <tr><td>身份不等于权威</td><td>OAuth 主体、Agent Card 签名和服务器证书只证明声明来源；语义决定与能力授予仍由本地具名权威负责。</td><td>不得因为签名有效而确认 <code>meaning_projection</code>、删除 <code>unresolved_meaning</code> 或授予 bounded runner 句柄。</td></tr>
-      <tr><td>外部状态不等于本地结果</td><td>Task、Message、Artifact、MCP Task 或工具结果只能成为带来源的运行事件、候选或 <code>structured_observation</code> 输入。</td><td>不得直接映射成 Endem 的生命周期、met/unmet、accepted/rejected、evidence entry 有效性或证据覆盖度。</td></tr>
-      <tr><td>能力声明不等于实时句柄</td><td>远端工具 schema 与 Agent Card 能力先进入控制平面，经策略、受众、范围、预算和人工升级检查。</td><td>模型与远端 Agent 永远不能自行扩大能力、改写策略或绕过 bounded runner。</td></tr>
-      <tr><td>遥测单向外送</td><td>OpenTelemetry 映射位于运行与证据系统外缘，默认脱敏并绑定语义约定版本。</td><td>遥测字段不得回流决定 Endem 内容身份、evidence entry 身份或验收规则。</td></tr>
+      <tr><td>身份不等于权威</td><td>OAuth 主体、Agent Card 签名和服务器证书只证明声明来源；语义决定与能力授予仍由本地具名权威负责。</td><td>不得因为签名有效而确认 <code>meaning_projection</code>、删除 <code>unresolved_meaning</code> 或授予 runner 句柄。</td></tr>
+      <tr><td>外部状态不等于本地结果</td><td>Task、Message、Artifact、MCP Task 或工具结果只能成为带来源的运行事件、候选或 <code>structured_observation</code> 输入。</td><td>不得直接映射成 Endem 的生命周期、met/unmet、accepted/rejected、evidence 有效性或证据覆盖度。</td></tr>
+      <tr><td>能力声明不等于实时句柄</td><td>远端工具 schema 与 Agent Card 能力先进入控制平面，经策略、受众、范围、预算和人工升级检查。</td><td>模型与远端 Agent 永远不能自行扩大能力、改写策略或绕过 runner。</td></tr>
+      <tr><td>遥测单向外送</td><td>OpenTelemetry 映射位于运行与证据系统外缘，默认脱敏并绑定语义约定版本。</td><td>遥测字段不得回流决定 Endem 内容身份、evidence 身份或验收规则。</td></tr>
       <tr><td>撤销与重放显式</td><td>令牌撤销、Agent Card 轮换、任务取消、重试、幂等和重放窗口必须留下可定位事件。</td><td>状态不明时进入 <code>undetermined</code>、<code>unresolved_meaning</code> 或失败，不得用远端“成功”覆盖本地未知。</td></tr>
     </tbody></table></div>
   </section>
 
   <section id="change-rules" class="content-band">
     <h2>决定变化时要同步什么</h2>
-    <p>改变六个语义面、根 <code>situation</code> 唯一性、事态与方向分离、<code>structured_observation</code> 比较、状态机、Endem closure 组合、session contract 会话范围、evidence entry 有限主张或唯一命令面时，新增 ADR，并同步对应 CORE、Profile、生命周期、开发者手册、威胁模型和测试向量。若变更涉及普通公开名称，重新检查逐词词首、职责和冲突；只有自造名称还要执行目标语言读音和词表内口头区分验证。</p>
+    <p>改变六个语义面、根 <code>situation</code> 唯一性、事态与方向分离、<code>structured_observation</code> 比较、状态机、closure 组合、contract 会话范围、evidence 有限主张或唯一命令面时，新增 ADR，并同步对应 CORE、Profile、生命周期、开发者手册、威胁模型和测试向量。若变更涉及普通公开名称，先确认它是单个完整单词，再检查词首、职责和冲突；只有自造名称还要执行目标语言读音和词表内口头区分验证。</p>
   </section>
     </div>
   </div>

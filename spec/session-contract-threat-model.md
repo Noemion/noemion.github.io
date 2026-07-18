@@ -1,23 +1,23 @@
 ---
 layout: spec
-title: "session contract Threat Model · Noemion"
+title: "contract Threat Model · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/session-contract-threat-model.html"
 summary: "分析目标替换、权限扩大、秘密泄露、预算逃逸和会话复活等风险，确保旧会话不能被悄悄改写。"
 document_status: "威胁模型"
 ---
-# session contract Threat Model
+# contract Threat Model
 
 - Document ID: `SESSION-THREAT`
 - Version: `0.1.0-draft`
 - Date: 2026-07-13
-- Status: draft; paired with SESSION-CORE for future bounded runner and capability-domain design
+- Status: draft; paired with SESSION-CORE for future runner and capability-domain design
 - Implementation status: proposal-vector checker only; this document is not a sandbox, loader, broker or runtime
 
 ## 1. Protection objective
 
-A session contract protects the boundary between a persistent, resolved goal artifact with separately verified external statements and one mutable execution session. The protected property is not that the session will succeed. It is that the session can use only the exact subject, statements, policies, environment bindings, capabilities, budgets, observation duties and authorities checked before operation, and that any material change closes the old authority rather than rewriting it.
+A contract protects the boundary between a persistent, resolved goal artifact with separately verified external statements and one mutable execution session. The protected property is not that the session will succeed. It is that the session can use only the exact subject, statements, policies, environment bindings, capabilities, budgets, observation duties and authorities checked before operation, and that any material change closes the old authority rather than rewriting it.
 
 An attacker may control model output, remote tool and Agent descriptions, task identifiers, environment variables, adapter metadata, cached validation, network responses, cancellation, retry paths, log fields and credential material. None of them becomes authority merely by appearing in a session context.
 
@@ -25,7 +25,7 @@ An attacker may control model output, remote tool and Agent descriptions, task i
 
 ### THR-SESSION-001 — Subject substitution after validation
 
-An attacker validates one Endem or Endem closure and then loads another object through a mutable path, display name, latest tag or changed closure. `SESSION-SUB-001` binds the exact resolved content identity and every required external statement, and requires fresh layered validation at the establishment cutoff.
+An attacker validates one Endem or closure and then loads another object through a mutable path, display name, latest tag or changed closure. `SESSION-SUB-001` binds the exact resolved content identity and every required external statement, and requires fresh layered validation at the establishment cutoff.
 
 ### THR-SESSION-002 — Stale policy, authority or revocation state
 
@@ -41,7 +41,7 @@ An attacker unions grants, uses ambient privilege, swaps token audience, passes 
 
 ### THR-SESSION-005 — Secret persistence and cross-session handle reuse
 
-Tokens, cookies, descriptors or provider handles enter the session contract, evidence entry or logs and later reanimate authority. `SESSION-SEC-001` forbids live material in these objects; `SESSION-LIF-001` requires disposal and prohibits rehydration.
+Tokens, cookies, descriptors or provider handles enter the contract, evidence or logs and later reanimate authority. `SESSION-SEC-001` forbids live material in these objects; `SESSION-LIF-001` requires disposal and prohibits rehydration.
 
 ### THR-SESSION-006 — Budget escape through retries or delegation
 
@@ -49,7 +49,7 @@ A model, adapter or child task resets counters, changes units, ignores cancellat
 
 ### THR-SESSION-007 — Dynamic dependency and activation laundering
 
-Runtime discovery adds a new Endem closure member, or an activation result is treated as target satisfaction or permission. `SESSION-ACT-001` binds activation to the fixed closure and its own result domain.
+Runtime discovery adds a new closure member, or an activation result is treated as target satisfaction or permission. `SESSION-ACT-001` binds activation to the fixed closure and its own result domain.
 
 ### THR-SESSION-008 — Observation or decision authority omission
 
@@ -57,11 +57,11 @@ The session can act but no actor is responsible for required observations, evide
 
 ### THR-SESSION-009 — Mutable contract and erased drift
 
-A session silently patches policy, environment, capability or budget fields and overwrites old evidence to appear continuously valid. `SESSION-IMM-001` seals the session contract and makes material change an invalidation event.
+A session silently patches policy, environment, capability or budget fields and overwrites old evidence to appear continuously valid. `SESSION-IMM-001` seals the contract and makes material change an invalidation event.
 
 ### THR-SESSION-010 — Session resurrection and identifier-as-authority
 
-An attacker serializes a session contract, copies a session ID, restores logs or resumes stale handles in another authorization context. `SESSION-LIF-001` makes session contract non-persistent, non-transferable and non-resumable.
+An attacker serializes a contract, copies a session ID, restores logs or resumes stale handles in another authorization context. `SESSION-LIF-001` makes contract non-persistent, non-transferable and non-resumable.
 
 ## 3. Risks not solved by this model
 

@@ -43,17 +43,17 @@ def main():
     try:
         document = json.loads(VECTOR_PATH.read_text())
     except (OSError, json.JSONDecodeError) as exc:
-        print(f"cannot read Endem closure vectors: {exc}")
+        print(f"cannot read closure vectors: {exc}")
         return 1
     if document.get("vector_format") != "closure-core.vector.v1":
-        errors.append("Endem closure vectors must use closure-core.vector.v1")
+        errors.append("closure vectors must use closure-core.vector.v1")
     if document.get("spec") != {"id": "CLOSURE-CORE", "version": "0.1.0-draft"}:
-        errors.append("Endem closure vectors must pin CLOSURE-CORE 0.1.0-draft")
-    if "not a resolver, parser, bounded runner, evaluator, runtime, or component implementation" not in document.get("description", ""):
-        errors.append("Endem closure vectors must state their non-implementation boundary")
+        errors.append("closure vectors must pin CLOSURE-CORE 0.1.0-draft")
+    if "not a resolver, parser, runner, evaluator, runtime, or component implementation" not in document.get("description", ""):
+        errors.append("closure vectors must state their non-implementation boundary")
     cases = document.get("cases")
     if not isinstance(cases, list) or len(cases) != 12:
-        errors.append("Endem closure vectors require exactly 12 proposal cases")
+        errors.append("closure vectors require exactly 12 proposal cases")
         cases = []
     seen = set()
     counts = {"accept": 0, "reject": 0}
@@ -76,13 +76,13 @@ def main():
         if actual != expect["result"] or (violation and violation != expect["clause"]):
             errors.append(f"{case_id}: expected {expect}, evaluated {actual}/{violation}")
     if counts != {"accept": 6, "reject": 6}:
-        errors.append(f"Endem closure vectors require 6 accepts and 6 rejects, got {counts}")
+        errors.append(f"closure vectors require 6 accepts and 6 rejects, got {counts}")
     if rejected != CLAUSES:
-        errors.append(f"Endem closure reject coverage must include {sorted(CLAUSES)}, got {sorted(rejected)}")
+        errors.append(f"closure reject coverage must include {sorted(CLAUSES)}, got {sorted(rejected)}")
     if errors:
         print("\n".join(errors))
         return 1
-    print("PASS: executed 12 Endem closure vectors (6 accepted classifications, 6 deterministic rejects across 6 clauses)")
+    print("PASS: executed 12 closure vectors (6 accepted classifications, 6 deterministic rejects across 6 clauses)")
     return 0
 
 

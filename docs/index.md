@@ -25,7 +25,7 @@ manual_index_heading: "按任务与内容类型查找"
 | Noemion 解决什么问题，与 Agent 协议有什么区别 | [入门指南](getting-started.html) | 能分开目标、外部任务状态、权限、证据和最终决定 |
 | 现在能否安装，未来怎样发布 | [资源与获取](../downloads/) | 能分清当前公开资料、尚不存在的软件和未来发行必须提供的证据 |
 | 当前名称怎样读写，哪些只是设计标识 | [开发指南](development-guide.html#使用现行名称) | 能找到现行名称、候选读法、精确机器标识和仍待验证的限制 |
-| 制品怎样形成、组合和进入一次受限运行 | [架构设计](architecture-guide.html) | 能定位 deterministic producer、independent inspector、bounded runner 及其信任边界 |
+| 制品怎样形成、组合和进入一次受限运行 | [架构设计](architecture-guide.html) | 能定位 producer、inspector、runner 及其信任边界 |
 | 一项修改需要哪些规范和证据 | [开发指南](development-guide.html) | 能写出可证伪主张并找到失败责任与声明上限 |
 | 计划中的命令动作分别服务谁 | [Endem 动作与职责索引](../endem/docs/reference.html) | 能判断某项动作应保留、合并还是交给外部工具 |
 | 某个工程问题由哪份条款约束 | [规范查询入口](../specifications/) | 能从问题定位 CORE、Profile、ADR 和验证材料 |

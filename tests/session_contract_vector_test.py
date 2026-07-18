@@ -134,17 +134,17 @@ def main():
     try:
         document = json.loads(VECTOR_PATH.read_text())
     except (OSError, json.JSONDecodeError) as exc:
-        print(f"cannot read session contract vectors: {exc}")
+        print(f"cannot read contract vectors: {exc}")
         return 1
     if document.get("vector_format") != "session-core.vector.v1":
-        errors.append("session contract vectors must use session-core.vector.v1")
+        errors.append("contract vectors must use session-core.vector.v1")
     if document.get("spec") != {"id": "SESSION-CORE", "version": "0.1.0-draft"}:
-        errors.append("session contract vectors must pin SESSION-CORE 0.1.0-draft")
+        errors.append("contract vectors must pin SESSION-CORE 0.1.0-draft")
     if "not a loader, sandbox, capability broker, credential store, runtime, event system, or component implementation" not in document.get("description", ""):
-        errors.append("session contract vectors must state their non-implementation boundary")
+        errors.append("contract vectors must state their non-implementation boundary")
     cases = document.get("cases")
     if not isinstance(cases, list) or len(cases) != 20:
-        errors.append("session contract vectors require exactly 20 proposal cases")
+        errors.append("contract vectors require exactly 20 proposal cases")
         cases = []
     seen = set()
     counts = {"accept": 0, "reject": 0}
@@ -167,13 +167,13 @@ def main():
         if actual != expect["result"] or (violation and violation != expect["clause"]):
             errors.append(f"{case_id}: expected {expect}, evaluated {actual}/{violation}")
     if counts != {"accept": 10, "reject": 10}:
-        errors.append(f"session contract vectors require 10 accepts and 10 rejects, got {counts}")
+        errors.append(f"contract vectors require 10 accepts and 10 rejects, got {counts}")
     if rejected != CLAUSES:
-        errors.append(f"session contract reject coverage must include {sorted(CLAUSES)}, got {sorted(rejected)}")
+        errors.append(f"contract reject coverage must include {sorted(CLAUSES)}, got {sorted(rejected)}")
     if errors:
         print("\n".join(errors))
         return 1
-    print("PASS: executed 20 session contract vectors (10 accepted contracts, 10 deterministic rejects across 10 clauses)")
+    print("PASS: executed 20 contract vectors (10 accepted contracts, 10 deterministic rejects across 10 clauses)")
     return 0
 
 

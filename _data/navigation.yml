@@ -16,9 +16,9 @@ global:
     description: 查看目标、组合、一次运行、实际观察和授权分别遵循什么规则。
     items:
       - { href: /specifications/endem.html, label: Endem, description: 一个目标怎样保存来源、意思、期望结果和验收条件, cover: endem-spec, cover_label: "SIGN → SITUATION" }
-      - { href: /specifications/endem-closure.html, label: Endem closure, description: 怎样把多个相互依赖的目标固定成完整集合, cover: closure, cover_label: "RESOLVED CLOSURE" }
-      - { href: /specifications/session-contract.html, label: session contract, description: 怎样限定一次运行可以使用的对象、能力和预算, cover: session, cover_label: "SESSION CONTRACT" }
-      - { href: /specifications/evidence-entry.html, label: evidence entry, description: 怎样记录实际观察、方法、覆盖范围和限制, cover: evidence, cover_label: "SCOPED EVIDENCE" }
+      - { href: /specifications/endem-closure.html, label: closure, description: 怎样把多个相互依赖的目标固定成完整集合, cover: closure, cover_label: "RESOLVED CLOSURE" }
+      - { href: /specifications/session-contract.html, label: contract, description: 怎样限定一次运行可以使用的对象、能力和预算, cover: session, cover_label: "SESSION CONTRACT" }
+      - { href: /specifications/evidence-entry.html, label: evidence, description: 怎样记录实际观察、方法、覆盖范围和限制, cover: evidence, cover_label: "SCOPED EVIDENCE" }
   - key: endem
     href: /endem/index.html
     label: 应用
@@ -122,9 +122,9 @@ modules:
           - { href: /specifications/index.html, label: 规范与状态 }
           - { href: /spec/index.html, label: 版本化规范源 }
           - { href: /specifications/endem.html, label: Endem }
-          - { href: /specifications/endem-closure.html, label: Endem closure }
-          - { href: /specifications/session-contract.html, label: session contract }
-          - { href: /specifications/evidence-entry.html, label: evidence entry }
+          - { href: /specifications/endem-closure.html, label: closure }
+          - { href: /specifications/session-contract.html, label: contract }
+          - { href: /specifications/evidence-entry.html, label: evidence }
           - { href: /specifications/diagnostics.html, label: 结构化诊断 }
           - { href: /specifications/adapters.html, label: 外部协议适配 }
           - { href: /specifications/identity.html, label: 精确内容身份与签名 }
@@ -133,9 +133,9 @@ modules:
       - label: 系统组件
         items:
           - { href: /components/index.html, label: 组件总览 }
-          - { href: /components/producer.html, label: deterministic producer }
-          - { href: /components/inspector.html, label: independent inspector }
-          - { href: /components/runner.html, label: bounded runner }
+          - { href: /components/producer.html, label: producer }
+          - { href: /components/inspector.html, label: inspector }
+          - { href: /components/runner.html, label: runner }
   resources:
     kicker: Resources
     title: 资源与支持
@@ -186,6 +186,6 @@ modules:
           - { href: /endem/docs/reference.html, label: 动作与诊断参考 }
       - label: 职责边界
         items:
-          - { href: /components/producer.html, label: deterministic producer }
-          - { href: /components/inspector.html, label: independent inspector }
-          - { href: /components/runner.html, label: bounded runner }
+          - { href: /components/producer.html, label: producer }
+          - { href: /components/inspector.html, label: inspector }
+          - { href: /components/runner.html, label: runner }

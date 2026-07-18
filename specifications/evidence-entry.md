@@ -1,8 +1,8 @@
 ---
 layout: content
-title: evidence entry 有范围证据规范
+title: evidence 有范围证据规范
 page_role: content
-footer_text: Noemion · evidence entry
+footer_text: Noemion · evidence
 permalink: "/specifications/evidence-entry.html"
 summary: 说明一项有范围证据必须记录谁在何时、用什么方法观察了哪个对象，以及最多能支持什么结论。
 breadcrumbs:
@@ -10,7 +10,7 @@ breadcrumbs:
   url: "../index.html"
 - label: 规范参考指南
   url: index.html
-page_heading: 有范围证据记录 · evidence entry
+page_heading: 有范围证据记录 · evidence
 page_lead: 记录谁在何时、用什么方法观察了哪个精确对象，并限定这项观察最多支持什么结论。
 badges:
 - EVIDENCE-CORE 0.1.0-draft
@@ -18,14 +18,14 @@ badges:
 - 尚无物理格式
 - 尚未实现
 previous_url: session-contract.html
-previous_label: session contract 会话契约
+previous_label: contract 会话契约
 next_url: diagnostics.html
 next_label: 结构化诊断
 ---
 
 ## 先判断一项信息能支持什么
 
-有范围证据记录（设计阶段名称 evidence entry）说明生产者通过已声明的方法，对一个精确对象观察到了什么，以及这项记录最多支持哪一句主张。
+有范围证据记录（设计阶段名称 evidence）说明生产者通过已声明的方法，对一个精确对象观察到了什么，以及这项记录最多支持哪一句主张。
 
 假设目标是“更新服务依赖，并确认当前版本可以发布”。锁文件、部署接口、健康探针和模型说明都能提供信息，但它们的对象、方法和时间不同，不能压成一个“发布成功”。
 
@@ -36,7 +36,7 @@ next_label: 结构化诊断
 | 精确实例的健康探针响应 | 该实例在声明方法和时刻满足探针条件 | 完整观察窗口或全部发布判据已经覆盖 |
 | 模型对日志的解释 | 保存为待核查的 `model-candidate` | 直接观察、事实真值、满足结果或最终决定 |
 
-`satisfaction_criteria` 说明目标需要哪些观察；evidence entry 保留有限主张；验证者判断记录是否有效；具名权威最后决定是否接受。任何一层都不能替代下一层。
+`satisfaction_criteria` 说明目标需要哪些观察；evidence 保留有限主张；验证者判断记录是否有效；具名权威最后决定是否接受。任何一层都不能替代下一层。
 
 ## 按四步形成并评估一项记录
 
@@ -58,7 +58,7 @@ next_label: 结构化诊断
 
 | 结果域 | 允许值 | 回答的问题 |
 | --- | --- | --- |
-| evidence entry 有效性 | `valid / invalid / revoked` | 验证者是否在指定政策、环境和截止点下接受这项记录 |
+| evidence 有效性 | `valid / invalid / revoked` | 验证者是否在指定政策、环境和截止点下接受这项记录 |
 | 证据覆盖度 | `sufficient / insufficient` | 适用记录是否覆盖精确 `satisfaction_criteria` 的全部观察责任 |
 | 满足判断 | `met / unmet / undetermined / fault` | 目标要求与结构化观察比较后得到什么结果 |
 | 权威决定 | `accepted / rejected / deferred` | 具名权威依据结果和决定规则作出什么决定 |
@@ -84,8 +84,8 @@ next_label: 结构化诊断
 - [提案向量](https://github.com/Noemion/noemion.github.io/blob/main/vectors/evidence-entry/cases.json) — 仅检查资料一致性，不能证明组件、安全性或稳定格式。
 - [ADR-0022](../architecture/adr-0022-iknem-evidence-and-appraisal.html) — 解释采用理由、外部先例、限制和待定内容，不建立第二套条款。
 
-**当前策略：**EVIDENCE-CORE 0.1.0-draft 只定义抽象证据与评估边界。物理容器、字段编号、摘要与签名算法、透明日志、撤销分发、远程查询、时钟归并、隐私语言和长期归档均未冻结。
+**当前策略：**EVIDENCE-CORE 0.1.0-draft 只定义抽象证据与评估边界。物理容器、字段编号、摘要与签名算法、透明日志、撤销分发、远程查询、时钟归并、隐私语言和长期归档均未确定。
 
-**名称状态：**evidence entry 是由两个普通英语词组成的设计阶段职责名称，已经按逐词词首、职责和关键字语料接受。它仍不表示组件或物理格式已经实现；开发者首次说明时先写“有范围证据记录”，帮助读者直接理解责任。
+**名称状态：**evidence 是单个普通英语词，已经按词首、职责和关键字语料接受。它仍不表示组件或物理格式已经实现；开发者首次说明时先写“有范围证据记录”，帮助读者直接理解责任。
 
-**限制条件：**当前没有 evidence entry Profile，也没有相应的采集、验证、归并、撤销或决定实现。`spec/evidence-entry-core.md` 是唯一现行条款源；页面、场景和向量不能作为稳定互操作格式或组件符合性声明。
+**限制条件：**当前没有 evidence Profile，也没有相应的采集、验证、归并、撤销或决定实现。`spec/evidence-entry-core.md` 是唯一现行条款源；页面、场景和向量不能作为稳定互操作格式或组件符合性声明。

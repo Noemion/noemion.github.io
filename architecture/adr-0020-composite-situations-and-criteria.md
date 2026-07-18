@@ -35,13 +35,13 @@ next_label: ADR-0021
 | 叶定义 | 可达性、响应结构和延迟各自的关系、判据与证据范围。 | 把自由文本、脚本或模型总分直接放进组合节点。 |
 | 叶结果 | 每个条件独立产生 `met / unmet / undetermined / fault`。 | 在组合前把未知和故障折叠成 `false`。 |
 | 总体结果 | `all_of` 按固定优先级组合叶结果。 | 由执行顺序、界面颜色或退出码决定。 |
-| 检查覆盖 | 已检查叶、未检查叶、所用 evidence entry、决定依据和停止原因。 | 把没有检查的叶写成 `undetermined` 或删除已见故障。 |
+| 检查覆盖 | 已检查叶、未检查叶、所用 evidence、决定依据和停止原因。 | 把没有检查的叶写成 `undetermined` 或删除已见故障。 |
 
 ## 先判断一个终态还是多个目标
 
-组合节点只适用于不能独立实现、替换或接受的同一终态。能够独立失败的目标必须成为多个 Endem，再由 Endem closure 说明关系。
+组合节点只适用于不能独立实现、替换或接受的同一终态。能够独立失败的目标必须成为多个 Endem，再由 closure 说明关系。
 
-| 边界问题 | 一个复合 Endem | 多个 Endem 与 Endem closure |
+| 边界问题 | 一个复合 Endem | 多个 Endem 与 closure |
 | --- | --- | --- |
 | 终态身份 | 所有叶共同描述同一个终态。 | 每一部分都有自己的终态。 |
 | 目标方向 | 共享一个到达或持续方向。 | 方向或时间责任可以不同。 |
@@ -61,7 +61,7 @@ next_label: ADR-0021
 | 组合节点 | 只能使用 `all_of` 或 `any_of`，并至少有两个不同子节点。 | `not / if / iff / xor / xone` 或任意表达式。 |
 | 叶判据 | `satisfaction_criteria` 为每个关系叶给出独立判据。 | 缺叶、额外叶或用一个总分代替多个判断。 |
 | 拓扑对齐 | `satisfaction_criteria` 使用与 `situation` 相同的组合拓扑。 | 在判断阶段悄悄改变分组或操作符。 |
-| 观察绑定 | `structured_observation` 与关系叶、角色位置和实际 evidence entry 对齐。 | 把外部状态、脚本成功或模型回答直接当作总体结果。 |
+| 观察绑定 | `structured_observation` 与关系叶、角色位置和实际 evidence 对齐。 | 把外部状态、脚本成功或模型回答直接当作总体结果。 |
 
 > **术语边界：**`quantifier=every` 表示 ADR-0018 的“全部成员”，`combiner=all_of` 表示复合判据的“全部条件”。代码和日志必须带域名；口头说明先说中文，不得只说易混淆的 `all`。
 
@@ -82,7 +82,7 @@ next_label: ADR-0021
 
 `all_of` 遇到有效 `unmet`，或 `any_of` 遇到有效 `met` 后，可以停止检查其余叶。记录必须保存决定依据 `decisive-basis` 和检查覆盖 `evaluation-coverage`。
 
-检查覆盖包括已求值叶、实际 evidence entry、未求值叶身份和停止原因。未求值叶不是 `undetermined`；它还没有得到判断。短路前已经出现的故障也必须保留。
+检查覆盖包括已求值叶、实际 evidence、未求值叶身份和停止原因。未求值叶不是 `undetermined`；它还没有得到判断。短路前已经出现的故障也必须保留。
 
 | 外部资料 | 可采用的机制 | Noemion 不继承 |
 | --- | --- | --- |
@@ -96,7 +96,7 @@ next_label: ADR-0021
 
 现行十二个复合判据提案向量覆盖六个允许分类和六个确定拒绝，只检查 END-CMP 四条抽象规则。当前策略不增加 END-P2 字段。
 
-这项决定不表示 deterministic producer、independent inspector、bounded runner、CLI 或求值器已经实现。物理字段、规范排序、引用、深度预算、排他析取、跨叶变量绑定和规范字节仍需新 Profile。
+这项决定不表示 producer、inspector、runner、CLI 或求值器已经实现。物理字段、规范排序、引用、深度预算、排他析取、跨叶变量绑定和规范字节仍需新 Profile。
 
 条件适用性、时间组合和量化组合还必须分别服从已有边界。外部规则语言或模型代码不能借复合节点取得执行权限。
 
