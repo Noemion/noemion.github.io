@@ -48,14 +48,6 @@ document_status: "规范源目录"
 
 [`state-change-and-causal-attribution-proposal.md`](https://noemion.github.io/spec/state-change-and-causal-attribution-proposal.html) 研究 `reach`、终态满足、动作发生、状态转变、因果归因、授权责任与最终决定怎样分开。它用 GNU Make、Kubernetes 控制器、W3C PROV、CloudEvents、OpenTelemetry、RFC 9110、ReAct 与 A2A 检查现实执行边界。它不改写 END-DIRECTION-001，不创建因果制品、动作格式、命令、组件或 CORE，也不进入 `registry.json`；当前建议把 `reach` 理解为目标方向，强行动或因果主张必须由结构和有范围证据显示。
 
-[`goal_direction-release-terms-proposal.md`](https://noemion.github.io/spec/goal_direction-release-terms-proposal.html) 分开 `goal_direction` 已接受的两个目标方向与尚未通过的发行拼写。权威词典、GNU Names 原则和职责透明度已经足以排除 `reach/maintain` 作为首次正式发行拼写；现行规范值暂不改变，`reach/maintain` 只取得进入独立人类朗读、听写、职责匹配和反例验证的资格。提案不是 ADR、CORE、Profile 或登记项，不建立别名，也不提前改写 END-DIRECTION-001。
-
-[`release-terminology-simplification-proposal.md`](https://noemion.github.io/spec/release-terminology-simplification-proposal.html) 先审查对象、角色和动作是否真的需要专名，再比较 Endem closure、session contract、scoped evidence record、deterministic producer、independent inspector、bounded runner 与 `form/check/compose/inspect/run`。它保留现行职责、结果域、权限和测试边界，不进入 `registry.json`，也不提前修改 CLOSURE-CORE、SESSION-CORE、EVIDENCE-CORE、字段、路由或 CLI；接受方向后仍须经过独立人类验证和单独迁移 ADR。
-
-[`semantic-facet-terminology-proposal.md`](https://noemion.github.io/spec/semantic-facet-terminology-proposal.html) 把同一必要性门禁应用到 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation`。它建议保留全部语义与观察边界，同时用 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation` 进入人类验证。提案不进入 `registry.json`，不提前修改 END-CORE、END-FMT、END-P2、来源清单、诊断或向量；即使数字记录布局不变，未来迁移也必须显式处理新规范与 Profile 身份。
-
-[`lifecycle-and-result-terminology-proposal.md`](https://noemion.github.io/spec/lifecycle-and-result-terminology-proposal.html) 审查 `formed/resolved/attested` 与各结果词。它判定 `attested` 不应继续把外部签名或证明关系伪装成内容自身状态，并把迁移拆成对象边界修正与发行命名验证两条轴。前者设计精确内容、外部陈述集合、逐项验证、截止点、撤销和依赖方政策的显式关系；后者才比较 `formed/resolved/undetermined/no_allowed_projection/stopped`，仍须人类证据。提案不进入 `registry.json`，也不提前改写 END-CORE、SESSION-CORE 或向量。
-
 [`preview-simulation-and-approval-proposal.md`](https://noemion.github.io/spec/preview-simulation-and-approval-proposal.html) 研究预览、dry-run、模拟、授权、执行尝试、事后观察、满足与最终决定怎样保持分离。它用 GNU Make、MCP 2025-11-25、A2A 1.0.0、OpenAI Agents SDK 与 NIST AI 600-1 检查当前 Agent 审批流程。它不创建预览制品、模拟格式、批准结果域、命令、组件或 CORE，也不进入 `registry.json`；当前首选是把显示、授权、会话漂移、外部调用、观察和满足义务归还现有 TEXT-IDENTIFIER、AUT、DRO、ADP、IKN、ID、END 与 DIA 责任。
 
 [`memory-checkpoint-and-resumption-proposal.md`](https://noemion.github.io/spec/memory-checkpoint-and-resumption-proposal.html) 研究九类状态怎样保持分离，包括会话历史、跨运行记忆或提炼指导、上下文压缩、计划检查点、外部 Task 句柄、持久工作区、恢复、重放与回滚。它用 OpenAI Agents SDK 对话状态策略、OpenAI Sandbox Agents 跨运行记忆、MCP 当前版及发布候选、A2A 1.0、GNU Make 与 GNU Guix 核对现实持久状态机制。它不创建记忆制品、检查点格式、恢复命令、组件或 CORE，也不进入 `registry.json`；当前首选是把变换、身份、新会话、外部任务、授权消费、证据和诊断义务归还现有 TEXT-IDENTIFIER、ID、DRO、ADP、AUT、IKN、DIA、END 与 SYN 责任。

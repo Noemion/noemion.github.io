@@ -27,7 +27,7 @@ summary: "帮助开发者先定位被改变的责任，再找到对应 ADR、规
       <tr><td>字节、Profile、来源清单和内容身份怎样分层？</td><td><a href="adr-0011-endem-container.html">ADR-0011</a>至 <a href="adr-0014-source-manifest.html">ADR-0014</a>、<a href="adr-0023-endem-content-standard.html">ADR-0023</a>、END-FMT、END-P2</td><td>当前格式仍是实验草案；不得据此承诺稳定 ABI、解析器兼容或正式发行。</td></tr>
       <tr><td>多个目标、一次会话和有限证据怎样组合？</td><td><a href="adr-0021-synem-closure-and-activation.html">ADR-0021</a>、<a href="adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a>、<a href="adr-0024-dromen-session-contract.html">ADR-0024</a>、CLOSURE-CORE、EVIDENCE-CORE、SESSION-CORE</td><td>这些规范尚未定义物理容器或运行时；记录会话不能恢复实时权限。</td></tr>
       <tr><td>失败、外部协议、身份、文本和授权怎样穿过信任边界？</td><td><a href="adr-0025-structured-diagnostics.html">ADR-0025</a>至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>、DIA-CORE、ADP-CORE、ID-CORE、TEXT-IDENTIFIER-CORE、AUT-CORE</td><td>外部状态、签名或模型输出只能成为带来源输入，不能改写本地结果、身份或能力。</td></tr>
-      <tr><td>术语为什么改用直白职责名称？</td><td><a href="adr-0031-release-name-collision-gate.html">ADR-0031</a>至 <a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035</a>及<a href="adr-0037-terminology-simplification.html">ADR-0037</a></td><td>当前机器标识已通过声明版本的关键字检查；Noemion 与 Endem 的发行读音仍待真实人类验证。</td></tr>
+      <tr><td>术语为什么改用直白职责名称？</td><td><a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035</a>与<a href="adr-0037-terminology-simplification.html">ADR-0037</a></td><td>普通词按词首、职责和关键字语料检查；Noemion 与 Endem 的发行读音仍待真实人类验证。</td></tr>
       <tr><td>为什么形成版含原文，发布版却不含原文？</td><td><a href="adr-0036-source-bearing-and-stripped-release.html">ADR-0036</a>、END-PUB-001 与 ID-REL-001</td><td>发布 Profile、来源引用闭包或伴随资料关联尚未定义时，只能确定分层，不得实现裁剪或承诺发布格式。</td></tr>
     </tbody></table></div>
     <p>ADR-0008 与 ADR-0009 只保存迁移历史；ADR-0010 至 ADR-0037 构成当前可查的决定记录。历史页面可以解释来路，但不能反向约束未来接口或 ABI。</p>
@@ -67,10 +67,6 @@ summary: "帮助开发者先定位被改变的责任，再找到对应 ADR、规
         <li><a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030 · 内容身份不变，不等于授权仍然有效</a></li>
       </ul></article>
       <article class="status-item"><h3>名称、读音与公开动作</h3><ul>
-        <li><a href="adr-0031-release-name-collision-gate.html">ADR-0031 · 搜索没有冲突，不等于名称可以发行</a></li>
-        <li><a href="adr-0032-deterministic-maker-name-collision.html">ADR-0032 · 命令只改大小写，仍然是名称冲突</a></li>
-        <li><a href="adr-0033-text-identifier-specification-name.html">ADR-0033 · 标准 ID 不能伪装成文件格式</a></li>
-        <li><a href="adr-0034-pronunciation-and-oral-distinction.html">ADR-0034 · 读得出，不等于听得清、写得回</a></li>
         <li><a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035 · 用户任务不是内部职责清单</a></li>
         <li><a href="adr-0037-terminology-simplification.html">ADR-0037 · 用职责名称替代不必要的造词</a></li>
       </ul></article>
@@ -123,7 +119,7 @@ summary: "帮助开发者先定位被改变的责任，再找到对应 ADR、规
 
   <section id="change-rules" class="content-band">
     <h2>决定变化时要同步什么</h2>
-    <p>改变六个语义面、根 <code>situation</code> 唯一性、事态与方向分离、<code>structured_observation</code> 比较、状态机、Endem closure 组合、session contract 会话范围、evidence entry 有限主张或唯一命令面时，新增 ADR，并同步对应 CORE、Profile、生命周期、开发者手册、威胁模型和测试向量。若变更涉及公开名称，还要重新执行书写冲突、目标语言读音和词表内口头区分审查。</p>
+    <p>改变六个语义面、根 <code>situation</code> 唯一性、事态与方向分离、<code>structured_observation</code> 比较、状态机、Endem closure 组合、session contract 会话范围、evidence entry 有限主张或唯一命令面时，新增 ADR，并同步对应 CORE、Profile、生命周期、开发者手册、威胁模型和测试向量。若变更涉及普通公开名称，重新检查逐词词首、职责和冲突；只有自造名称还要执行目标语言读音和词表内口头区分验证。</p>
   </section>
     </div>
   </div>

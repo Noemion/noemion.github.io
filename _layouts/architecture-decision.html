@@ -11,9 +11,13 @@ layout: default
   </nav>
 
   <header class="content-introduction">
-    <h1>{{ decision_heading }}</h1>
-    <p>{{ page.summary }}</p>
-    <div class="badges"><span class="badge">当前策略</span><span class="badge">{{ page.decision_date }}</span></div>
+    <h1>{{ page.page_heading | default: decision_heading }}</h1>
+    <p>{{ page.page_lead | default: page.summary }}</p>
+    {% if page.badges %}
+    <div class="badges">{% for badge in page.badges %}<span class="badge">{{ badge }}</span>{% endfor %}</div>
+    {% else %}
+    <div class="badges"><span class="badge">当前策略</span>{% if page.decision_date %}<span class="badge">{{ page.decision_date }}</span>{% endif %}</div>
+    {% endif %}
   </header>
 
   <article class="manual-article architecture-decision-article">
@@ -21,7 +25,8 @@ layout: default
   </article>
 
   <div class="next-prev">
-    <a href="{{ page.previous_url | relative_url }}">← {{ page.previous_label }}</a>
+    {% if page.previous_url %}<a href="{{ page.previous_url }}">← {{ page.previous_label }}</a>{% endif %}
     <a href="{{ '/architecture/decisions.html' | relative_url }}">返回架构决策</a>
+    {% if page.next_url %}<a href="{{ page.next_url }}">{{ page.next_label }} →</a>{% endif %}
   </div>
 </main>

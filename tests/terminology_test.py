@@ -39,18 +39,17 @@ RETIRED_TERM = re.compile(
 )
 
 HISTORICAL_OR_RESEARCH = (
-    re.compile(r"^architecture/adr-[0-9]{4}-.+\.html$"),
-    re.compile(r"^architecture/adr-0037-terminology-simplification\.md$"),
+    re.compile(r"^architecture/adr-[0-9]{4}-.+\.md$"),
     re.compile(r"^spec/.+-proposal\.md$"),
 )
 
 CURRENT_ROUTES = {
-    "specifications/endem-closure.html": "specifications/endem-closure.html",
-    "specifications/session-contract.html": "specifications/session-contract.html",
-    "specifications/evidence-entry.html": "specifications/evidence-entry.html",
-    "components/producer.html": "components/producer.html",
-    "components/inspector.html": "components/inspector.html",
-    "components/runner.html": "components/runner.html",
+    "specifications/endem-closure.html": "specifications/endem-closure.md",
+    "specifications/session-contract.html": "specifications/session-contract.md",
+    "specifications/evidence-entry.html": "specifications/evidence-entry.md",
+    "components/producer.html": "components/producer.md",
+    "components/inspector.html": "components/inspector.md",
+    "components/runner.html": "components/runner.md",
     "spec/endem-closure-core.html": "spec/endem-closure-core.md",
     "spec/session-contract-core.html": "spec/session-contract-core.md",
     "spec/evidence-entry-core.html": "spec/evidence-entry-core.md",
@@ -161,6 +160,10 @@ def main():
     for removed_source in (
         ROOT / "docs" / "terminology-audit.md",
         ROOT / "docs" / "terminology-and-pronunciation.md",
+        ROOT / "spec" / "goal_direction-release-terms-proposal.md",
+        ROOT / "spec" / "lifecycle-and-result-terminology-proposal.md",
+        ROOT / "spec" / "release-terminology-simplification-proposal.md",
+        ROOT / "spec" / "semantic-facet-terminology-proposal.md",
     ):
         if removed_source.exists():
             errors.append(f"{removed_source.relative_to(ROOT)}: maintenance material must not generate a public page")

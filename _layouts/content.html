@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑">
+    {% for breadcrumb in page.breadcrumbs %}
+      <a href="{{ breadcrumb.url }}">{{ breadcrumb.label }}</a><span aria-hidden="true">/</span>
+    {% endfor %}
+    <span aria-current="page">{{ page.breadcrumb_label | default: page.page_heading }}</span>
+  </nav>
+
+  <header class="{{ page.introduction_class | default: 'content-introduction' }}">
+    <h1>{{ page.page_heading }}</h1>
+    <p>{{ page.page_lead }}</p>
+    {% if page.badges %}<div class="badges">{% for badge in page.badges %}<span class="badge">{{ badge }}</span>{% endfor %}</div>{% endif %}
+  </header>
+
+  <article class="manual-article content-source-article">
+    {{ content }}
+  </article>
+
+  {% if page.previous_url or page.next_url %}
+  <div class="next-prev">
+    {% if page.previous_url %}<a href="{{ page.previous_url }}">← {{ page.previous_label }}</a>{% endif %}
+    {% if page.next_url %}<a href="{{ page.next_url }}">{{ page.next_label }} →</a>{% endif %}
+  </div>
+  {% endif %}
+</main>

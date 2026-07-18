@@ -2,6 +2,7 @@ from collections import defaultdict
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
+import html
 import json
 import re
 import shutil
@@ -27,12 +28,19 @@ MANUAL_MARKDOWN_FILES = sorted(
 )
 SPEC_MARKDOWN_FILES = sorted(SOURCE_ROOT.glob("spec/*.md"))
 ARCHITECTURE_MARKDOWN_FILES = sorted(SOURCE_ROOT.glob("architecture/*.md"))
+CONTENT_MARKDOWN_FILES = sorted([
+    *SOURCE_ROOT.glob("about/*.md"),
+    *SOURCE_ROOT.glob("components/*.md"),
+    *SOURCE_ROOT.glob("development/*.md"),
+    *SOURCE_ROOT.glob("specifications/*.md"),
+])
 PAGE_DIRECTORY_MARKDOWN_FILES = sorted(SOURCE_ROOT.glob("pages/*.md"))
 SOURCE_PAGE_FILES = sorted([
     *SOURCE_HTML_FILES,
     *MANUAL_MARKDOWN_FILES,
     *SPEC_MARKDOWN_FILES,
     *ARCHITECTURE_MARKDOWN_FILES,
+    *CONTENT_MARKDOWN_FILES,
     *PAGE_DIRECTORY_MARKDOWN_FILES,
 ])
 HTML_FILES = SOURCE_HTML_FILES if SOURCE_ONLY else sorted(ROOT.rglob("*.html"))
@@ -67,6 +75,19 @@ PORTAL_ROUTES = [
     "pages/index.html",
 ]
 APPLICATION_ROUTES = ["endem/index.html"]
+ALLOWED_HANDWRITTEN_HTML_ROUTES = {
+    "index.html",
+    "about/index.html",
+    "architecture/index.html",
+    "architecture/decisions.html",
+    "components/index.html",
+    "development/index.html",
+    "development/current-stage.html",
+    "downloads/index.html",
+    "endem/index.html",
+    "faq/index.html",
+    "specifications/index.html",
+}
 MANUAL_ROUTE_ORDERS = {
     "endem": [
         "endem/docs/index.html",
@@ -111,10 +132,6 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0028-text-and-identifier-boundaries.html",
     "architecture/adr-0029-authority-and-authorization-decisions.html",
     "architecture/adr-0030-endem-content-and-authorization-companions.html",
-    "architecture/adr-0031-release-name-collision-gate.html",
-    "architecture/adr-0032-deterministic-maker-name-collision.html",
-    "architecture/adr-0033-text-identifier-specification-name.html",
-    "architecture/adr-0034-pronunciation-and-oral-distinction.html",
     "architecture/adr-0035-public-actions-and-internal-responsibilities.html",
     "architecture/adr-0036-source-bearing-and-stripped-release.html",
     "components/producer.html",
@@ -206,7 +223,7 @@ HISTORICAL_ADR_0009_BOUNDARIES = (
     "模型即使生成结构完整的 JSON",
     "形成版保留实际进入形成过程的自然语言",
     "历史动作不构成别名",
-    "成对口头区分的人类证据",
+    "两个自造名称另行保留发行读音验证",
     "NIST AI 600-1",
     "MCP 2025-11-25 仍是 Current",
 )
@@ -240,7 +257,7 @@ ADR_0012_REVIEW_HEADINGS = [
 ADR_0012_REVIEW_BOUNDARIES = (
     "只有项目另行进入代码阶段时",
     "实现语言继续待定",
-    "语言选择不冻结它们的发行拼写",
+    "历史自造词 ktise 与 elenk 已被替换",
     "这些原型不是生产实现，也不产生规范 Endem",
     "同样使用 Rust 就自然获得实现独立性",
     "不把“安全 Rust”写成“解析器安全”",
@@ -297,7 +314,7 @@ ADR_0015_RESULT_BOUNDARIES = (
     "它们可以同时成立，也可以各自失败",
     "completed 不等于 met 或 accepted",
     "单份 valid 不等于整体 sufficient",
-    "首次发行前仍须经过真实使用者的朗读、听写和成组口头区分",
+    "不再设置完整人类读音门槛",
     "外部签名陈述、验证政策、截止点、撤销状态和依赖方判断必须分别记录",
     "新观察或规则只能产生新结果",
     "不得回写或覆盖输入事实",
@@ -314,8 +331,8 @@ ADR_0016_TIME_HEADINGS = [
 ]
 ADR_0016_TIME_BOUNDARIES = (
     "不是一个定时器参数",
-    "reach / maintain 已作为直白、可恢复职责的现行枚举采用",
-    "首次发行前接受真实使用者的朗读、听写和成组口头区分验证",
+    "reach / maintain 已作为直白、可恢复职责的普通英语枚举采用",
+    "不再设置完整人类读音门槛",
     "单调时钟只能测量同一声明域内的经过时间",
     "所有目标范围统一采用项目定义的半开区间 [start, end)",
     "“采样”只说明证据怎样取得，不是第三种连续性政策",
@@ -356,7 +373,7 @@ ADR_0018_QUANTIFICATION_BOUNDARIES = (
     "一个量化目标不是“对监控查询结果做计数”",
     "开发者先知道哪些节点属于“本次发布”",
     "enumerated / rule-bound 是现行草案的机器标签，不是新的哲学专名",
-    "任何发行名称仍须通过独立的读音与口头区分验证",
+    "只有新增自造名称才需要完整读音与口头区分验证",
     "提前决定只减少不必要的求值，不降低证据要求",
     "不得静默去重后把错误输入伪装成合法集合",
     "证据数量不是成员数量",
@@ -448,7 +465,7 @@ APPLICATION_TASK_BOUNDARIES = (
     "不产生生产检查通过结论",
     "最终裁剪发布 Profile 尚未确定",
     "协议成功不能代替本地意义确认、动作授权、目标满足或最终决定",
-    "读音流畅度和口头区分仍需独立人类证据",
+    "Noemion 与 Endem 的完整读音和口头区分仍需独立人类证据",
 )
 PUBLIC_META_PHRASES = (
     "本轮",
@@ -535,27 +552,20 @@ LEGACY_PUBLIC_TERMS = re.compile(
     r"\bnoem(?!ion\b)[a-z]+\b|\b(?:morph(?:e)|inspect(?:ia)|synth(?:esis))\b|"
     r"(?:compiler-core|linker-loader|nsfe|gsir|gobj|sso|noem(?:a)-ir|"
     r"noem(?:a)-object|horizon-object|noesis-core|noem(?:a)-object-system|"
-    r"horizon-engine|agent-harness|fulfillment-runtime|noem(?:a)-lifecycle)\.html|"
-    r"(?:^|[/\"'])tools/"
+    r"horizon-engine|agent-harness|fulfillment-runtime|noem(?:a)-lifecycle)\.html"
 )
 RETIRED_RELEASE_TERMS = re.compile(
     r"\b(?:praxor|praxe|tekmor|poiet|poie)\b|\bTEK(?:-[A-Z0-9]+)+\b|\bTK-[A-Z0-9-]+\b|\btek-core\b",
     re.IGNORECASE,
 )
-RETIRED_RELEASE_EVIDENCE_PATHS = {
-    "architecture/adr-0031-release-name-collision-gate.html",
-    "architecture/adr-0032-deterministic-maker-name-collision.html",
-}
+RETIRED_RELEASE_EVIDENCE_PATHS = set()
 RETIRED_TEXT_SPEC_TERMS = re.compile(
     r"\bTXT(?:-[A-Z]+)*\b|"
     r"spec/(?:text-core|text-threat-model|text-scenarios)\.md|"
     r"vectors/text(?!-identifier)|tests/text_vector_test\.py|"
     r"specifications/text\.html"
 )
-RETIRED_TEXT_SPEC_EVIDENCE_PATHS = {
-    "architecture/adr-0033-text-identifier-specification-name.html",
-    "architecture/adr-0034-pronunciation-and-oral-distinction.html",
-}
+RETIRED_TEXT_SPEC_EVIDENCE_PATHS = set()
 RETIRED_ACTION_TERMS = re.compile(r"\b(?:tasse|sphra|peira)\b", re.IGNORECASE)
 RETIRED_ACTION_EVIDENCE_PATHS = {
     "architecture/adr-0035-public-actions-and-internal-responsibilities.html",
@@ -599,10 +609,6 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0028-text-and-identifier-boundaries.html",
     "architecture/adr-0029-authority-and-authorization-decisions.html",
     "architecture/adr-0030-endem-content-and-authorization-companions.html",
-    "architecture/adr-0031-release-name-collision-gate.html",
-    "architecture/adr-0032-deterministic-maker-name-collision.html",
-    "architecture/adr-0033-text-identifier-specification-name.html",
-    "architecture/adr-0034-pronunciation-and-oral-distinction.html",
     "architecture/adr-0035-public-actions-and-internal-responsibilities.html",
     "architecture/adr-0036-source-bearing-and-stripped-release.html",
     "architecture/open-questions.html",
@@ -670,6 +676,14 @@ REMOVED_PUBLIC_ROUTES = {
     "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
     "docs/terminology-and-pronunciation.html",
     "docs/terminology-audit.html",
+    "architecture/adr-0031-release-name-collision-gate.html",
+    "architecture/adr-0032-deterministic-maker-name-collision.html",
+    "architecture/adr-0033-text-identifier-specification-name.html",
+    "architecture/adr-0034-pronunciation-and-oral-distinction.html",
+    "spec/goal_direction-release-terms-proposal.html",
+    "spec/lifecycle-and-result-terminology-proposal.html",
+    "spec/release-terminology-simplification-proposal.html",
+    "spec/semantic-facet-terminology-proposal.html",
 }
 
 REQUIRED_ARCHITECTURE_ROUTES = {
@@ -773,7 +787,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "三个生产动作各自交付什么",
             "发布、签名和证据为什么不能混入",
             "只生产 Endem / Endem closure",
-            "名称仍在研究",
+            "名称状态",
             "具有精确范围的语义授权",
             "不授予动作权限",
             "Endem",
@@ -806,7 +820,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "独立、只读和有界分别约束什么",
             "分歧和失败后怎样继续",
             "当前可以证明什么",
-            "名称仍在研究",
+            "名称状态",
             "inspect",
             "独立",
             "只读",
@@ -834,7 +848,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             "bounded runner",
             "用一次依赖更新理解 bounded runner",
-            "名称仍在研究",
+            "名称状态",
             "先把模型、控制面、适配器和决定者分开",
             "运行前形成一次只读会话契约",
             "一次能力请求怎样穿过边界",
@@ -872,7 +886,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             ".endem",
             "用一个健康目标读懂 Endem",
-            "术语读音仍在研究",
+            "普通职责词已接受",
             "先分清内容、Profile 与容器",
             "六项职责共同维持什么不变量",
             "先区分形成失败、待确认与判断失败",
@@ -917,7 +931,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "规范来源与当前上限",
             "依赖制品 Endem",
             "服务健康 Endem",
-            "名称仍在研究",
+            "名称状态",
             "局部命名空间",
             "导入",
             "导出",
@@ -962,7 +976,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "四个结果不能合并",
             "外部机制只提供有范围输入",
             "规范来源与当前上限",
-            "名称仍在研究",
+            "名称状态",
             "structured_observation",
             "精确对象",
             "主张",
@@ -1018,7 +1032,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "session contract",
             "一次会话的只读执行契约（设计阶段名称 session contract）",
             "按五步建立本次边界",
-            "名称仍在研究",
+            "名称状态",
             "只读执行契约",
             "SESSION-CORE 0.1.0-draft",
             "精确制品",
@@ -1184,7 +1198,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "TEXT-AIM-001",
             "TEXT-OUT-001",
             "遇到更强问题时再查对应资料",
-            "ADR-0034",
+            "ADR-0037",
             "Unicode 17.0",
             "GNU libunistring",
             "文本与标识符提案向量",
@@ -1254,62 +1268,6 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "待定内容",
         ),
     },
-    "architecture/adr-0031-release-name-collision-gate.html": {
-        "required": (
-            "evidence entry",
-            "bounded runner",
-            "run",
-            "EVIDENCE-CORE",
-            "一次性迁移",
-            "不保留别名、重定向、双写或兼容垫片",
-            "Praxor Lab",
-            "tekmor.xyz",
-        ),
-    },
-    "architecture/adr-0032-deterministic-maker-name-collision.html": {
-        "required": (
-            "命令只改大小写，仍然是名称冲突",
-            "deterministic producer",
-            "form",
-            "PFA Open Inference Engine",
-            "大小写不能形成可靠区分",
-            "不保留别名、重定向、双写或兼容垫片",
-            "动作名称不等于实现优先级",
-            "已确认且具有精确语义授权绑定的意义投影",
-            "不能沿用旧页面的“crate 不存在”结论",
-            "一致性与互操作验证",
-        ),
-    },
-    "architecture/adr-0033-text-identifier-specification-name.html": {
-        "required": (
-            "TEXT-IDENTIFIER-CORE",
-            "TXT-CORE",
-            "不是 <code>.txt</code> 文件格式",
-            "TEXT-CORE",
-            "TIB-CORE",
-            "不保留旧路径、别名、重定向、双写或兼容垫片",
-            "text-identifier-core.md",
-            "vectors/text-identifier/",
-        ),
-    },
-    "architecture/adr-0034-pronunciation-and-oral-distinction.html": {
-        "required": (
-            "当前审查",
-            "五项独立审查",
-            "拼写—声音完整",
-            "BCP 47",
-            "成对混淆矩阵",
-            "首次朗读",
-            "听写回填",
-            "W3C Pronunciation Lexicon Specification 1.0",
-            "GNU Coding Standards：Names",
-            "OpenAI Realtime API",
-            "evidence entry",
-            "deterministic producer",
-            "reach",
-            "不建立语音接口",
-        ),
-    },
     "architecture/adr-0035-public-actions-and-internal-responsibilities.html": {
         "required": (
             "用户任务不是内部职责清单",
@@ -1326,7 +1284,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "A2A 1.0 版本化规范",
             "OpenAI Agents SDK Tools",
             "conformance:",
-            "发行拼写待定",
+            "普通动作词已接受",
             "动作名称不等于实现优先级",
             "没有可执行 <code>endem</code>",
             "不保留旧入口、别名、重定向、双写或兼容垫片",
@@ -1420,6 +1378,10 @@ class PageParser(HTMLParser):
             self.active_section["direct_children"].append((tag, classes))
         for name in classes:
             self.class_counts[name] += 1
+        if "manual-article" in ancestor_classes and tag == "table":
+            self.class_counts["table-wrap"] += 1
+        if "manual-article" in ancestor_classes and tag == "ol":
+            self.class_counts["flow"] += 1
         if "id" in data:
             self.ids.append(data["id"])
         if tag == "body" and data.get("data-page-role"):
@@ -1508,6 +1470,14 @@ def parse(path):
     return parser
 
 
+def content_visible_text(parser):
+    if parser.manual_article_text:
+        return normalize_visible_text("".join(parser.manual_article_text))
+    return normalize_visible_text(
+        " ".join("".join(section["text"]) for section in parser.sections)
+    )
+
+
 def read_route_rows():
     rows = []
     sibling_orders = defaultdict(int)
@@ -1590,25 +1560,27 @@ def normalize_visible_text(text):
     return " ".join(text.split())
 
 
+def contains_source_token(text, token):
+    normalized_text = re.sub(r"<code\b[^>]*>", "`", text)
+    normalized_text = normalized_text.replace("</code>", "`")
+    variants = {token, html.unescape(token)}
+    for variant in tuple(variants):
+        markdown = re.sub(r"<code>(.*?)</code>", r"`\1`", variant)
+        markdown = markdown.replace("<strong>", "**").replace("</strong>", "**")
+        variants.add(markdown)
+    return any(variant in text or variant in normalized_text for variant in variants)
+
+
 def validate_required_text_contracts(root):
     errors = []
     for route, contract in SYSTEM_BOUNDARY_CONTRACTS.items():
-        path = root / route
-        if not path.exists() and root == SOURCE_ROOT:
-            for manual_source in MANUAL_MARKDOWN_FILES:
-                source_match = FRONT_MATTER.match(manual_source.read_text())
-                if source_match is None:
-                    continue
-                permalink = front_matter_value(source_match.group(1), "permalink")
-                if permalink and permalink.lstrip("/") == route:
-                    path = manual_source
-                    break
+        path = source_path_for_route(route) if root == SOURCE_ROOT else root / route
         if not path.exists():
             errors.append(f"missing system-closure page {route}")
             continue
         text = path.read_text()
         for token in contract.get("required", ()):
-            if token not in text:
+            if not contains_source_token(text, token):
                 errors.append(f"{route}: missing system-closure contract {token!r}")
         for pattern in contract.get("required_patterns", ()):
             if re.search(pattern, text) is None:
@@ -1625,13 +1597,13 @@ def validate_required_text_contracts(root):
                 int(value)
                 for value in re.findall(r'href="adr-(\d{4})-[^"]+\.html"', text)
             }
-            expected_adrs = set(range(8, 38))
+            expected_adrs = {*range(8, 31), 35, 36, 37}
             if linked_adrs != expected_adrs:
                 missing = sorted(expected_adrs - linked_adrs)
                 unexpected = sorted(linked_adrs - expected_adrs)
                 errors.append(
                     "architecture/decisions.html: grouped decision index must link "
-                    f"ADR-0008 through ADR-0037 exactly; missing={missing}, "
+                    f"the retained ADR set exactly; missing={missing}, "
                     f"unexpected={unexpected}"
                 )
     return errors
@@ -1874,7 +1846,7 @@ def validate_prose_readability_contracts():
                         f"{route}: prose sentence exceeds 70 Chinese characters and should be split: {sentence[:80]!r}"
                     )
 
-    foundations = (SOURCE_ROOT / "about" / "intellectual-foundations.html").read_text()
+    foundations = source_path_for_route("about/intellectual-foundations.html").read_text()
     for token in (
         "2.01 与 2.1–2.172",
         "3.203–3.21",
@@ -1925,6 +1897,20 @@ def front_matter_value(block, key):
     return value
 
 
+def source_path_for_route(route):
+    direct = SOURCE_ROOT / route
+    if direct.exists():
+        return direct
+    for source_path in SOURCE_PAGE_FILES:
+        source_match = FRONT_MATTER.match(source_path.read_text())
+        if source_match is None:
+            continue
+        permalink = front_matter_value(source_match.group(1), "permalink")
+        if permalink and permalink.lstrip("/") == route:
+            return source_path
+    return direct
+
+
 def validate_legacy_source_vocabulary():
     errors = []
     skipped_parts = {".git", "_site", "vendor", ".bundle"}
@@ -1960,7 +1946,7 @@ def validate_legacy_source_vocabulary():
             retired_text_match = RETIRED_TEXT_SPEC_TERMS.search(text)
             if retired_text_match:
                 errors.append(
-                    f"{relative}: retired text specification terminology remains outside ADR-0033 and the name audit "
+                    f"{relative}: retired text specification terminology remains outside retained historical evidence "
                     f"{retired_text_match.group(0)!r}"
                 )
         if not relative.startswith("tests/") and relative not in RETIRED_ACTION_EVIDENCE_PATHS:
@@ -2026,6 +2012,14 @@ def validate_jekyll_sources():
         SOURCE_ROOT / "homepage-design.md",
         SOURCE_ROOT / "sitewide-design-system.md",
         SOURCE_ROOT / "spec" / "terminology-audit.json",
+        SOURCE_ROOT / "spec" / "goal_direction-release-terms-proposal.md",
+        SOURCE_ROOT / "spec" / "lifecycle-and-result-terminology-proposal.md",
+        SOURCE_ROOT / "spec" / "release-terminology-simplification-proposal.md",
+        SOURCE_ROOT / "spec" / "semantic-facet-terminology-proposal.md",
+        SOURCE_ROOT / "architecture" / "adr-0031-release-name-collision-gate.md",
+        SOURCE_ROOT / "architecture" / "adr-0032-deterministic-maker-name-collision.md",
+        SOURCE_ROOT / "architecture" / "adr-0033-text-identifier-specification-name.md",
+        SOURCE_ROOT / "architecture" / "adr-0034-pronunciation-and-oral-distinction.md",
         SOURCE_ROOT / "design-system",
     ):
         if removed_source.exists():
@@ -2161,7 +2155,7 @@ def validate_jekyll_sources():
         if "model-context-assembly" in registry_text:
             errors.append("non-normative model context proposal must not enter the specification registry")
         for public_source in (
-            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
         ):
             if "spec/model-context-assembly-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -2194,7 +2188,7 @@ def validate_jekyll_sources():
             errors.append("non-normative GNU and ELF proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
         ):
             if "gnu-elf-applicability-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -2229,7 +2223,7 @@ def validate_jekyll_sources():
             errors.append("non-normative planning proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
         ):
             if "planning-and-replanning-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -2266,7 +2260,7 @@ def validate_jekyll_sources():
             errors.append("non-normative semantic equivalence proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
         ):
             if "semantic-equivalence-and-migration-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -2308,207 +2302,32 @@ def validate_jekyll_sources():
             errors.append("non-normative causation proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "endem.html",
-            SOURCE_ROOT / "specifications" / "evidence-entry.html",
-            SOURCE_ROOT / "components" / "runner.html",
+            SOURCE_ROOT / "specifications" / "endem.md",
+            SOURCE_ROOT / "specifications" / "evidence-entry.md",
+            SOURCE_ROOT / "components" / "runner.md",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
         ):
             if "state-change-and-causal-attribution-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the causation research proposal"
                 )
 
-    telis_terms_proposal = SOURCE_ROOT / "spec" / "goal_direction-release-terms-proposal.md"
-    if not telis_terms_proposal.exists():
-        errors.append("missing non-normative goal_direction release terms research proposal")
-    else:
-        proposal_text = telis_terms_proposal.read_text()
-        for token in (
-            "状态：非规范研究提案",
-            "结论状态：职责与桌面审查已由 ADR-0037 采用；人类读音仍待验证",
-            "不构成 ADR、CORE 规范、内容 Profile、登记项或实现要求",
-            "不进入 `registry.json`",
-            "当前词表使用 `reach / maintain`",
-            "人类读音仍待验证",
-            "语义先于拼写",
-            "桌面门禁只能排除明显不合格候选",
-            "END-DIRECTION-001",
-            "不增加别名、双写、自动规范化、重定向或兼容读音",
-            "evidence entry",
-            "deterministic producer",
-            "Endem closure",
-        ):
-            if token not in proposal_text:
-                errors.append(f"goal_direction release terms proposal missing governance boundary: {token}")
-        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
-        if "goal_direction-release-terms" in registry_text:
-            errors.append("non-normative goal_direction release terms proposal must not enter the specification registry")
-        for public_source in (
-            SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-        ):
-            if "goal_direction-release-terms-proposal.html" not in public_source.read_text():
-                errors.append(
-                    f"{public_source.relative_to(SOURCE_ROOT)} must link the goal_direction release terms proposal"
-                )
+    retired_terminology_sources = (
+        "goal_direction-release-terms-proposal.md",
+        "lifecycle-and-result-terminology-proposal.md",
+        "release-terminology-simplification-proposal.md",
+        "semantic-facet-terminology-proposal.md",
+    )
+    for source_name in retired_terminology_sources:
+        if (SOURCE_ROOT / "spec" / source_name).exists():
+            errors.append(
+                f"spec/{source_name} must not retain a separate terminology-review page"
+            )
 
-    release_terms_proposal = SOURCE_ROOT / "spec" / "release-terminology-simplification-proposal.md"
-    if not release_terms_proposal.exists():
-        errors.append("missing non-normative release terminology simplification proposal")
-    else:
-        proposal_text = release_terms_proposal.read_text()
-        for token in (
-            "状态：非规范研究提案",
-            "结论状态：桌面审查完成；尚待人类验证",
-            "不构成 ADR、CORE 规范、内容 Profile、登记项或实现要求",
-            "不进入 `registry.json`",
-            "只有确实需要独立公共身份、且普通术语无法准确承担职责时，才创造专名",
-            "保留 Endem 进入人类读音验证",
-            "Endem closure（Endem 闭包）",
-            "session contract（会话契约）",
-            "scoped evidence record（有范围证据记录）",
-            "deterministic producer（确定性生产边界）",
-            "independent inspector（独立检查边界）",
-            "bounded runner（有界运行边界）",
-            "`form`、`check`、`compose`、`inspect` 与 `run`",
-            "ISO 704:2022",
-            "GNU Coding Standards 的 Names 规则",
-            "MCP 2025-11-25 工具定义",
-            "A2A 1.0.0 AgentSkill",
-            "NIST Dictionary of Algorithms and Data Structures",
-            "W3C PROV-DM",
-            "RFC 9334 RATS Architecture",
-            "候选普通词不是别名、重定向或兼容入口",
-            "标准 ID 的具体新拼写、条款前缀和机器对象种类不能由本提案提前冻结",
-            "仍需单独按语义面逐项审查",
-        ):
-            if token not in proposal_text:
-                errors.append(f"release terminology proposal missing governance boundary: {token}")
-        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
-        if "release-terminology-simplification" in registry_text:
-            errors.append("non-normative release terminology proposal must not enter the specification registry")
-        for public_source in (
-            SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-        ):
-            if "release-terminology-simplification-proposal.html" not in public_source.read_text():
-                errors.append(
-                    f"{public_source.relative_to(SOURCE_ROOT)} must link the release terminology proposal"
-                )
-
-    facet_terms_proposal = SOURCE_ROOT / "spec" / "semantic-facet-terminology-proposal.md"
-    if not facet_terms_proposal.exists():
-        errors.append("missing non-normative semantic facet terminology proposal")
-    else:
-        proposal_text = facet_terms_proposal.read_text()
-        for token in (
-            "状态：非规范研究提案",
-            "结论状态：桌面审查完成；尚待人类验证",
-            "不构成 ADR、CORE 规范、内容 Profile、登记项或实现要求",
-            "不进入 `registry.json`",
-            "六个语义面与结构化观察的职责继续成立，不能合并",
-            "没有通过专名必要性桌面门禁",
-            "`source_expression`",
-            "`meaning_projection`",
-            "`situation`",
-            "`goal_direction`",
-            "`satisfaction_criteria`",
-            "`unresolved_meaning`",
-            "`structured_observation`",
-            "ISO 704:2022",
-            "GNU Coding Standards 的 Names 规则",
-            "ISO/IEC/IEEE 29148:2018",
-            "MCP 2025-11-25 Schema",
-            "A2A 1.0.0 版本化规范",
-            "NIST AI RMF Core",
-            "W3C PROV-DM",
-            "W3C SOSA/SSN",
-            "候选普通词不是字段别名、兼容键、自动规范化结果或现行接口",
-            "数字记录布局",
-            "新的规范与 Profile 身份",
-        ):
-            if token not in proposal_text:
-                errors.append(f"semantic facet terminology proposal missing governance boundary: {token}")
-        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
-        if "semantic-facet-terminology" in registry_text:
-            errors.append("non-normative semantic facet terminology proposal must not enter the specification registry")
-        for public_source in (
-            SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-        ):
-            if "semantic-facet-terminology-proposal.html" not in public_source.read_text():
-                errors.append(
-                    f"{public_source.relative_to(SOURCE_ROOT)} must link the semantic facet terminology proposal"
-                )
-
-    lifecycle_terms_proposal = SOURCE_ROOT / "spec" / "lifecycle-and-result-terminology-proposal.md"
-    if not lifecycle_terms_proposal.exists():
-        errors.append("missing non-normative lifecycle and result terminology proposal")
-    else:
-        proposal_text = lifecycle_terms_proposal.read_text()
-        for token in (
-            "状态：非规范研究提案",
-            "结论状态：对象边界与现行名称已由 ADR-0037 采用；人类读音仍待验证",
-            "不构成 ADR、CORE 规范、内容 Profile、登记项、迁移决定或实现要求",
-            "不进入 `registry.json`",
-            "停止把 `attested` 作为 Endem 生命周期状态",
-            "`content state: formed / resolved`",
-            "signed-statement binding",
-            "`satisfaction: met / unmet / undetermined / fault`",
-            "`no_allowed_projection`",
-            "`session: completed / failed / stopped`",
-            "RFC 9334 RATS Architecture",
-            "in-toto Attestation Framework",
-            "in-toto Statement v1",
-            "SLSA v1.2 的制品验证规范",
-            "GNU Automake",
-            "MCP 2025-11-25 Tasks",
-            "A2A 1.0 版本化规范",
-            "W3C SCXML",
-            "NIST AI RMF Core",
-            "不是现行接口、别名、兼容值或规范化结果",
-            "subject.attested",
-            "每次内容变化产生新身份",
-            "## 两条迁移轴必须分开",
-            "A · 对象边界",
-            "B · 发行命名",
-            "A 轴不引入 `formed`、`resolved` 或其他候选词",
-            "### Dromen 主体准入需要显式关系集",
-            "外部陈述集合",
-            "验证记录",
-            "验证者政策分歧",
-            "依赖方判断",
-            "至少一项由具名政策要求且在截止点适用的外部陈述",
-            "### 主体准入反例矩阵",
-            "### A 轴威胁清单",
-            "多签截断",
-            "内容自证",
-            "### A 轴：对象边界修正",
-            "暂时保留 `nascent / coherent`",
-            "### B 轴：发行命名",
-            "### 可验证的完成条件",
-            "现行接口不再出现 Endem `attested` 或 Dromen `subject.attested`",
-            "原有 `0.1` 内容静默改成另一套语义",
-            "A 轴可以单独形成对象边界迁移 ADR",
-            "这些结论不会改变任何现行规范值",
-            "ADR-0037",
-        ):
-            if token not in proposal_text:
-                errors.append(f"lifecycle terminology proposal missing governance boundary: {token}")
-        registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
-        if "lifecycle-and-result-terminology" in registry_text:
-            errors.append("non-normative lifecycle terminology proposal must not enter the specification registry")
-        for public_source in (
-            SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-        ):
-            if "lifecycle-and-result-terminology-proposal.html" not in public_source.read_text():
-                errors.append(
-                    f"{public_source.relative_to(SOURCE_ROOT)} must link the lifecycle terminology proposal"
-                )
-        lifecycle_page_text = (SOURCE_ROOT / "architecture" / "endem-lifecycle.html").read_text()
+    lifecycle_page_text = source_path_for_route("architecture/endem-lifecycle.html").read_text()
+    if lifecycle_page_text:
         for token in (
             "四类对象各自有界",
             "先用一次发布看懂四类对象",
@@ -2520,7 +2339,7 @@ def validate_jekyll_sources():
             "发布 Profile 必须定义不泄露原文的来源绑定",
             "GNU GDB 的独立调试文件",
             "装载前重新决定能否执行",
-            "END-CORE 的内容状态只保留 <code>formed / resolved</code>",
+            "END-CORE 的内容状态只保留 `formed / resolved`",
             "规范来源与当前上限",
             "RFC 9334 RATS",
             "in-toto Statement",
@@ -2558,14 +2377,14 @@ def validate_jekyll_sources():
                 "外部陈述绑定内容身份",
                 "签名、验证或撤销不会原地改写内容身份",
             ),
-            SOURCE_ROOT / "components" / "runner.html": (
+            source_path_for_route("components/runner.html"): (
                 "适用外部陈述",
                 "验证政策、截止点、撤销",
                 "不把这些关系压成内容自身的布尔状态",
             ),
-            SOURCE_ROOT / "specifications" / "session-contract.html": (
+            source_path_for_route("specifications/session-contract.html"): (
                 "外部陈述与验证记录",
-                "内容只使用 <code>formed / resolved</code> 状态",
+                "内容只使用 `formed / resolved` 状态",
                 "内容形成与外部关系的两轴模型",
             ),
             SOURCE_ROOT / "endem" / "index.html": (
@@ -2584,16 +2403,16 @@ def validate_jekyll_sources():
                 "`formed / resolved` 内容形成责任",
                 "外部陈述的主体摘要、类型、签名范围、验证政策与撤销材料",
             ),
-            SOURCE_ROOT / "architecture" / "adr-0010-native-lexicon.html": (
+            source_path_for_route("architecture/adr-0010-native-lexicon.html"): (
                 "外部签名与证明不能成为内容自身状态",
                 "正式值迁移仍需单独 ADR",
             ),
-            SOURCE_ROOT / "architecture" / "adr-0015-result-domains.html": (
-                "<code>formed / resolved</code> 只描述内容",
+            source_path_for_route("architecture/adr-0015-result-domains.html"): (
+                "`formed / resolved` 只描述内容",
                 "不能压成第三个内容状态",
             ),
-            SOURCE_ROOT / "architecture" / "adr-0024-dromen-session-contract.html": (
-                "只接受精确的 <code>resolved</code> Endem 或 Endem closure",
+            source_path_for_route("architecture/adr-0024-dromen-session-contract.html"): (
+                "只接受精确的 `resolved` Endem 或 Endem closure",
                 "内容状态不能证明会话准入",
             ),
         }
@@ -2658,8 +2477,8 @@ def validate_jekyll_sources():
             errors.append("non-normative preview and approval proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "authority.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "specifications" / "authority.md",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
         ):
             if "preview-simulation-and-approval-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -2702,12 +2521,12 @@ def validate_jekyll_sources():
             errors.append("memory and resumption proposal must not collapse attestation relations into content state")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "session-contract.html",
-            SOURCE_ROOT / "specifications" / "adapters.html",
-            SOURCE_ROOT / "specifications" / "evidence-entry.html",
-            SOURCE_ROOT / "components" / "runner.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "specifications" / "session-contract.md",
+            SOURCE_ROOT / "specifications" / "adapters.md",
+            SOURCE_ROOT / "specifications" / "evidence-entry.md",
+            SOURCE_ROOT / "components" / "runner.md",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
         ):
             if "memory-checkpoint-and-resumption-proposal.html" not in public_source.read_text():
@@ -2719,17 +2538,17 @@ def validate_jekyll_sources():
                 "逐项重验适用的外部陈述、验证记录和依赖方准入判断",
                 "不从检查点反序列化权限",
             ),
-            SOURCE_ROOT / "specifications" / "adapters.html": (
+            SOURCE_ROOT / "specifications" / "adapters.md": (
                 "旧 Task 句柄只帮助重新定位",
                 "历史缺口和未知副作用",
                 "恢复时重新核对对端、租户、当前授权",
             ),
-            SOURCE_ROOT / "specifications" / "evidence-entry.html": (
+            SOURCE_ROOT / "specifications" / "evidence-entry.md": (
                 "历史与检查点何时能支持证据？",
                 "保存状态只说明生产者保留了什么",
                 "不恢复旧权限或补齐未知副作用",
             ),
-            SOURCE_ROOT / "components" / "runner.html": (
+            SOURCE_ROOT / "components" / "runner.md": (
                 "从检查点继续必须建立新会话",
                 "重新完成会话准入",
                 "不能合并成“Agent 已恢复”",
@@ -2775,9 +2594,9 @@ def validate_jekyll_sources():
             errors.append("non-normative capability discovery proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "adapters.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "specifications" / "adapters.md",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
         ):
             if "capability-discovery-and-negotiation-proposal.html" not in public_source.read_text():
@@ -2819,9 +2638,9 @@ def validate_jekyll_sources():
             errors.append("non-normative software Agent identity proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "authority.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "specifications" / "authority.md",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
         ):
             if "software-agent-identity-and-accountability-boundaries-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -2863,9 +2682,9 @@ def validate_jekyll_sources():
             errors.append("non-normative parallel execution proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "adapters.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "specifications" / "adapters.md",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
         ):
             if "parallel-and-speculative-execution-proposal.html" not in public_source.read_text():
@@ -2913,11 +2732,11 @@ def validate_jekyll_sources():
             errors.append("non-normative isolation proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "session-contract.html",
-            SOURCE_ROOT / "specifications" / "adapters.html",
-            SOURCE_ROOT / "components" / "runner.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "specifications" / "session-contract.md",
+            SOURCE_ROOT / "specifications" / "adapters.md",
+            SOURCE_ROOT / "components" / "runner.md",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
         ):
             if "model-adapter-isolation-proposal.html" not in public_source.read_text():
@@ -2965,11 +2784,11 @@ def validate_jekyll_sources():
             errors.append("non-normative model-assisted evaluation proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "evidence-entry.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "specifications" / "evidence-entry.md",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "development" / "testing.html",
+            SOURCE_ROOT / "development" / "testing.md",
         ):
             if "model-assisted-evaluation-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -3018,12 +2837,12 @@ def validate_jekyll_sources():
             errors.append("non-normative model training proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "identity.html",
-            SOURCE_ROOT / "specifications" / "evidence-entry.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "specifications" / "identity.md",
+            SOURCE_ROOT / "specifications" / "evidence-entry.md",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "development" / "testing.html",
+            SOURCE_ROOT / "development" / "testing.md",
         ):
             if "model-training-and-update-boundaries-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -3070,8 +2889,8 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "downloads" / "index.html",
             SOURCE_ROOT / "faq" / "index.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
         ):
             if "model-openness-and-software-freedom-boundaries-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -3121,8 +2940,8 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "spec" / "model-openness-and-software-freedom-boundaries-proposal.md",
             SOURCE_ROOT / "downloads" / "index.html",
             SOURCE_ROOT / "faq" / "index.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
         ):
             if "hosted-ai-service-and-user-control-boundaries-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -3170,17 +2989,17 @@ def validate_jekyll_sources():
             errors.append("non-normative data lifecycle proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "authority.html",
-            SOURCE_ROOT / "specifications" / "evidence-entry.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
-            SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
+            SOURCE_ROOT / "specifications" / "authority.md",
+            SOURCE_ROOT / "specifications" / "evidence-entry.md",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
+            SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
         ):
             if "software-agent-data-use-retention-and-deletion-boundaries-proposal.html" not in public_source.read_text():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the data lifecycle research proposal"
                 )
 
-    agent_boundaries = SOURCE_ROOT / "architecture" / "agent-system-boundaries.html"
+    agent_boundaries = SOURCE_ROOT / "architecture" / "agent-system-boundaries.md"
     if not agent_boundaries.exists():
         errors.append("missing public Agent system boundary guide")
     else:
@@ -3226,7 +3045,7 @@ def validate_jekyll_sources():
             "GNU 自由软件定义",
             "服务替代用户计算的分析",
             "AGPL 边界",
-            "Coreutils <code>shred</code>",
+            "Coreutils `shred`",
         ):
             if token not in boundary_text:
                 errors.append(f"Agent boundary guide missing cross-domain contract: {token}")
@@ -3264,7 +3083,7 @@ def validate_jekyll_sources():
                 )
         for public_source in (
             SOURCE_ROOT / "architecture" / "index.html",
-            SOURCE_ROOT / "architecture" / "open-questions.html",
+            SOURCE_ROOT / "architecture" / "open-questions.md",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
             SOURCE_ROOT / "sitemap.md",
             SOURCE_ROOT / "_data" / "navigation.yml",
@@ -3274,7 +3093,7 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the Agent system boundary guide"
                 )
 
-    verification_page = SOURCE_ROOT / "development" / "testing.html"
+    verification_page = SOURCE_ROOT / "development" / "testing.md"
     verification_text = verification_page.read_text()
     for token in (
         "先限定主张，再选择证据",
@@ -3323,7 +3142,7 @@ def validate_jekyll_sources():
                 + obsolete_claim
             )
     forbidden_round_trip_claims = {
-        SOURCE_ROOT / "development" / "testing.html": (
+        SOURCE_ROOT / "development" / "testing.md": (
             "规范文本 → Endem → 规范文本往返保持规范化等价",
         ),
         SOURCE_ROOT / "spec" / "endem-core.md": (
@@ -3351,12 +3170,12 @@ def validate_jekyll_sources():
             errors.append(f"downloads page missing authoritative evidence inventory link: {token}")
     volatile_inventory_pages = (
         SOURCE_ROOT / "specifications" / "index.html",
-        SOURCE_ROOT / "specifications" / "adapters.html",
-        SOURCE_ROOT / "specifications" / "evidence-entry.html",
-        SOURCE_ROOT / "specifications" / "endem-closure.html",
-        SOURCE_ROOT / "specifications" / "session-contract.html",
-        SOURCE_ROOT / "specifications" / "authority.html",
-        SOURCE_ROOT / "development" / "implementation-roadmap.html",
+        SOURCE_ROOT / "specifications" / "adapters.md",
+        SOURCE_ROOT / "specifications" / "evidence-entry.md",
+        SOURCE_ROOT / "specifications" / "endem-closure.md",
+        SOURCE_ROOT / "specifications" / "session-contract.md",
+        SOURCE_ROOT / "specifications" / "authority.md",
+        SOURCE_ROOT / "development" / "implementation-roadmap.md",
         SOURCE_ROOT / "downloads" / "index.html",
         SOURCE_ROOT / "docs" / "development-guide.md",
     )
@@ -3374,7 +3193,7 @@ def validate_jekyll_sources():
             )
     for token in (
         "用一次协议映射变更走完整条证据链",
-        "A2A Task 的 <code>completed</code>",
+        "A2A Task 的 `completed`",
         "一个会被反例推翻的句子",
         "资料与已登记案例保持结果域分离",
         "先限定主张，再选择证据",
@@ -3430,9 +3249,9 @@ def validate_jekyll_sources():
                 + premature_path
             )
     for source in (
-        SOURCE_ROOT / "components" / "producer.html",
-        SOURCE_ROOT / "development" / "testing.html",
-        SOURCE_ROOT / "development" / "implementation-roadmap.html",
+        SOURCE_ROOT / "components" / "producer.md",
+        SOURCE_ROOT / "development" / "testing.md",
+        SOURCE_ROOT / "development" / "implementation-roadmap.md",
     ):
         source_text = source.read_text()
         for phrase in ("相同规范化输入", "前后六个语义面、依赖与披露行为保持规范等价"):
@@ -3440,7 +3259,7 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{source.relative_to(SOURCE_ROOT)} retains an undefined verification claim: {phrase}"
                 )
-    ktisor_text = (SOURCE_ROOT / "components" / "producer.html").read_text()
+    ktisor_text = (SOURCE_ROOT / "components" / "producer.md").read_text()
     for stale_phrase in ("根据已授权语义决定形成", "已授权的投影决定", "已授权 `meaning_projection`"):
         if stale_phrase in ktisor_text:
             errors.append(f"public developer guidance retains ambiguous semantic authorization wording: {stale_phrase}")
@@ -3507,7 +3326,7 @@ def validate_jekyll_sources():
         "只有 [DIA-CAT]",
         "人类消息可以改写或本地化，但程序不得依赖其文本",
         "不是发行 ABI",
-        "尚无真实使用者读音、听辨和生态冲突证据",
+        "尚未发布为真实命令",
     ):
         if token not in endem_reference_text:
             errors.append(f"Endem reference missing task-oriented developer boundary: {token}")
@@ -3526,7 +3345,7 @@ def validate_jekyll_sources():
     ):
         if obsolete_token in endem_reference_text:
             errors.append(f"Endem reference retains an obsolete inventory or free-form failure identity: {obsolete_token}")
-    open_questions_text = (SOURCE_ROOT / "architecture" / "open-questions.html").read_text()
+    open_questions_text = source_path_for_route("architecture/open-questions.html").read_text()
     for token in (
         "现在还缺什么证据",
         "先判断问题处于哪一层",
@@ -3549,10 +3368,10 @@ def validate_jekyll_sources():
         "展开与当前问题直接相关的一组即可",
         "内容、格式与迁移缺少什么？",
         "组合、发布与外部决定怎样分开？",
-        "ADR-0036 与 <code>END-PUB-001</code>",
+        "ADR-0036 与 `END-PUB-001`",
         "删除、重写、保留与外置内容",
-        "术语与实现怎样进入发行？",
-        "名称怎样证明适合传播？",
+        "名称与实现怎样进入发行？",
+        "已经得出结论的术语比较不再作为独立研究页面保留",
         "外部资料只决定证据类型",
         "GNU Manuals",
         "GNU BFD 信息损失",
@@ -3567,9 +3386,7 @@ def validate_jekyll_sources():
     for proposal_name in (
         "semantic-equivalence-and-migration-proposal.md",
         "model-assisted-evaluation-proposal.md",
-        "goal_direction-release-terms-proposal.md",
         "gnu-elf-applicability-proposal.md",
-        "lifecycle-and-result-terminology-proposal.md",
         "software-agent-identity-and-accountability-boundaries-proposal.md",
         "model-context-assembly-proposal.md",
         "capability-discovery-and-negotiation-proposal.md",
@@ -3583,8 +3400,6 @@ def validate_jekyll_sources():
         "model-openness-and-software-freedom-boundaries-proposal.md",
         "hosted-ai-service-and-user-control-boundaries-proposal.md",
         "software-agent-data-use-retention-and-deletion-boundaries-proposal.md",
-        "release-terminology-simplification-proposal.md",
-        "semantic-facet-terminology-proposal.md",
     ):
         if proposal_name.replace(".md", ".html") not in open_questions_text:
             errors.append(f"open questions guide must route the research proposal: {proposal_name}")
@@ -3633,7 +3448,7 @@ def validate_jekyll_sources():
         ),
     }
     for route, required_tokens in specification_reader_contracts.items():
-        specification_text = (SOURCE_ROOT / route).read_text()
+        specification_text = source_path_for_route(route).read_text()
         for token in required_tokens:
             if token not in specification_text:
                 errors.append(f"{route} missing developer-oriented specification label: {token}")
@@ -3662,7 +3477,7 @@ def validate_jekyll_sources():
             "十二条规则分开处理",
         ),
     }.items():
-        specification_text = (SOURCE_ROOT / route).read_text()
+        specification_text = source_path_for_route(route).read_text()
         for phrase in stale_inventory:
             if phrase in specification_text:
                 errors.append(f"{route} copies a drift-prone source count into public guidance: {phrase}")
@@ -3682,6 +3497,15 @@ def validate_jekyll_sources():
             route = path.relative_to(SOURCE_ROOT).as_posix()
         source_entries.append((route, path))
     source_routes = sorted(route for route, _ in source_entries)
+    handwritten_html_routes = {
+        path.relative_to(SOURCE_ROOT).as_posix() for path in SOURCE_HTML_FILES
+    }
+    if handwritten_html_routes != ALLOWED_HANDWRITTEN_HTML_ROUTES:
+        errors.append(
+            "hand-written HTML must be limited to approved interface pages; "
+            f"missing={sorted(ALLOWED_HANDWRITTEN_HTML_ROUTES - handwritten_html_routes)}, "
+            f"unexpected={sorted(handwritten_html_routes - ALLOWED_HANDWRITTEN_HTML_ROUTES)}"
+        )
 
     if len(route_rows) != len(registry):
         errors.append("sitemap.md contains duplicate HTML routes")
@@ -3730,14 +3554,17 @@ def validate_jekyll_sources():
         )
         is_manual_markdown = path in MANUAL_MARKDOWN_FILES
         is_spec_markdown = path in SPEC_MARKDOWN_FILES
-        is_architecture_markdown = path in ARCHITECTURE_MARKDOWN_FILES
+        is_architecture_decision = (
+            path in ARCHITECTURE_MARKDOWN_FILES and path.name.startswith("adr-")
+        )
         is_page_directory_markdown = path in PAGE_DIRECTORY_MARKDOWN_FILES
         expected = {
             "layout": (
                 "manual" if is_manual_markdown
                 else "spec" if is_spec_markdown
-                else "architecture-decision" if is_architecture_markdown
+                else "architecture-decision" if is_architecture_decision
                 else "page-directory" if is_page_directory_markdown
+                else "content" if path in CONTENT_MARKDOWN_FILES or path in ARCHITECTURE_MARKDOWN_FILES
                 else "default"
             ),
             "page_role": expected_role,
@@ -3813,10 +3640,21 @@ def validate_jekyll_sources():
             body_without_autolinks = re.sub(
                 r"<(?:https?://|mailto:)[^>]+>", "", body, flags=re.IGNORECASE
             )
+            body_without_autolinks = re.sub(
+                r'<span id="[A-Za-z][A-Za-z0-9_-]*"></span>',
+                "",
+                body_without_autolinks,
+            )
+            body_without_autolinks = re.sub(
+                r"<br\s*/?>", "", body_without_autolinks, flags=re.IGNORECASE
+            )
             if re.search(r"</?[A-Za-z][^>]*>", body_without_autolinks):
                 errors.append(f"{route}: Markdown body must not contain raw HTML")
-            if re.search(r"^\s*\{:", body, re.MULTILINE):
-                errors.append(f"{route}: Markdown body must not use Kramdown attributes")
+            for attribute_line in re.findall(r"^\s*\{:[^\n]+$", body, re.MULTILINE):
+                if re.fullmatch(r"\s*\{:\s*#[A-Za-z][A-Za-z0-9_-]*\s*}", attribute_line) is None:
+                    errors.append(
+                        f"{route}: Markdown body uses an unsupported Kramdown attribute {attribute_line!r}"
+                    )
             if is_manual_markdown:
                 headings = re.findall(r"^##\s+(.+?)\s*$", body, re.MULTILINE)
                 normalized_headings = [heading.replace("`", "") for heading in headings]
@@ -3942,7 +3780,7 @@ def validate_jekyll_sources():
         "endem/docs/index.md": ("来源保留的形成版", "最终发布版按独立 Profile 移除原文", "精确发布内容签名"),
     }
     for relative_path, tokens in source_release_contracts.items():
-        page_text = (SOURCE_ROOT / relative_path).read_text()
+        page_text = source_path_for_route(relative_path).read_text()
         for token in tokens:
             if token not in page_text:
                 errors.append(f"{relative_path}: missing source-bearing and stripped-release boundary: {token}")
@@ -3978,7 +3816,7 @@ def validate_jekyll_sources():
         ),
     }
     for relative_path, tokens in safe_artifact_contracts.items():
-        artifact_text = (SOURCE_ROOT / relative_path).read_text()
+        artifact_text = source_path_for_route(relative_path).read_text()
         for token in tokens:
             if token not in artifact_text:
                 errors.append(f"{relative_path}: missing developer safe-artifact boundary: {token}")
@@ -3993,7 +3831,7 @@ def validate_jekyll_sources():
         ),
     }
     for relative_path, phrases in obsolete_safe_artifact_phrases.items():
-        artifact_text = (SOURCE_ROOT / relative_path).read_text()
+        artifact_text = source_path_for_route(relative_path).read_text()
         for phrase in phrases:
             if phrase in artifact_text:
                 errors.append(f"{relative_path}: retains ambiguous safe-artifact wording: {phrase}")
@@ -4566,7 +4404,7 @@ def validate_jekyll_sources():
             "何时停止或返回",
             "进入实现前先证明一条验证切片",
             "现行设计标识，不是已发布接口",
-            "尚未完成正式发行前的读音",
+            "普通英语词已经通过词首、职责和关键字检查",
             "GNU 技术提供哪些工程纪律",
             "外部 Agent 与模型何时接入",
             "候选版在正式发布前只作为迁移风险",
@@ -4647,13 +4485,13 @@ def validate_jekyll_sources():
         ),
     }
     for relative_path, required_tokens in external_boundary_contracts.items():
-        boundary_text = (SOURCE_ROOT / relative_path).read_text()
+        boundary_text = source_path_for_route(relative_path).read_text()
         for token in required_tokens:
             if token not in boundary_text:
                 errors.append(
                     f"{relative_path}: missing external technology boundary {token!r}"
                 )
-    roadmap_text = (SOURCE_ROOT / "development" / "implementation-roadmap.html").read_text()
+    roadmap_text = (SOURCE_ROOT / "development" / "implementation-roadmap.md").read_text()
     for stale_heading in (
         "四条长期原则",
         "未来第一条组件路径",
@@ -4679,14 +4517,14 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{protocol_reference_file.relative_to(SOURCE_ROOT)}: stale protocol baseline phrase {phrase!r}"
                 )
-    naming_adr = SOURCE_ROOT / "architecture" / "adr-0010-native-lexicon.html"
+    naming_adr = source_path_for_route("architecture/adr-0010-native-lexicon.html")
     if naming_adr.exists():
         naming_adr_text = naming_adr.read_text()
         for token in (
             "把人实际说过的话、系统采用的解释",
             "本决定确定六项语义职责",
             "词源只作记忆辅助",
-            "ADR-0034",
+            "ADR-0037",
             "范围有限具名权威确认",
             "规范称其为语义授权，但它不授予动作权限",
         ):
@@ -5082,7 +4920,7 @@ def validate_jekyll_sources():
         ),
     }
     for route, page_tokens in summary_rail_pages.items():
-        page_text = (SOURCE_ROOT / route).read_text()
+        page_text = source_path_for_route(route).read_text()
         for token in (
             "data-summary-rail-layout",
             'data-summary-layout="stacked"',
@@ -5222,13 +5060,18 @@ def main():
             "coined domain identifiers must not contain digits: "
             + ", ".join(numbered_domain_identifiers)
         )
-    release_name_adr_text = (
-        SOURCE_ROOT / "architecture" / "adr-0031-release-name-collision-gate.html"
+    terminology_adr_text = source_path_for_route(
+        "architecture/adr-0037-terminology-simplification.html"
     ).read_text()
-    if "短、可发音" in release_name_adr_text:
-        errors.append(
-            "ADR-0031 must not describe a name as pronounceable without ADR-0034 human evidence"
-        )
+    for token in (
+        "不同名称使用不同检查",
+        "逐词检查词首",
+        "普通英语词及其职责短语已经按词首起音规则接受",
+        "Noemion",
+        "Endem",
+    ):
+        if token not in terminology_adr_text:
+            errors.append(f"ADR-0037 missing consolidated terminology rule: {token}")
     getting_started_text = (SOURCE_ROOT / "docs" / "getting-started.md").read_text()
     for token in (
         "## 先把一句要求写完整",
@@ -5255,8 +5098,8 @@ def main():
         "SLSA 1.2 制品验证",
         "GNU Guix 的 `guix challenge`",
         "资料检查可以发现引用、登记和预期分类之间的矛盾",
-        "具体发行拼写和读音仍需完成 ADR-0034 的人类验证",
-        "不用临时读法冒充正式读法",
+        "普通职责词逐词检查词首、职责和机器冲突后即可使用",
+        "两个自造名称仍需发行前的人类朗读、听写和职责匹配证据",
         "不会成为第二套命令、机器别名或语义权威",
     ):
         if token not in getting_started_text:
@@ -5332,7 +5175,7 @@ def main():
         ),
     }
     for relative_path, required_tokens in developer_entry_contracts.items():
-        entry_text = (SOURCE_ROOT / relative_path).read_text()
+        entry_text = source_path_for_route(relative_path).read_text()
         for token in required_tokens:
             if token not in entry_text:
                 errors.append(f"{relative_path} missing developer-first entry boundary: {token}")
@@ -5359,7 +5202,7 @@ def main():
         ),
     }
     for relative_path, forbidden_phrases in obsolete_entry_phrases.items():
-        entry_text = (SOURCE_ROOT / relative_path).read_text()
+        entry_text = source_path_for_route(relative_path).read_text()
         for phrase in forbidden_phrases:
             if phrase in entry_text:
                 errors.append(f"{relative_path} retains implementation-first entry phrase: {phrase}")
@@ -5374,7 +5217,7 @@ def main():
         "spec/gnu-elf-applicability-proposal.md",
         "spec/planning-and-replanning-proposal.md",
     ):
-        if "自然语言目标" in (SOURCE_ROOT / relative_path).read_text():
+        if "自然语言目标" in source_path_for_route(relative_path).read_text():
             errors.append(
                 f"{relative_path} must distinguish the human natural-language expression "
                 "from the resulting goal artifact"
@@ -5463,23 +5306,21 @@ def main():
     name_maturity_contracts = {
         "about/index.html": (
             "现行设计名称是 Endem",
-            "发行拼写和读音仍需真实使用者验证",
+            "这些普通英语字段已经按词首、职责和关键字语料接受",
         ),
         "specifications/index.html": (
             "当前策略",
             "待定内容",
+            "普通职责词已按词首、职责和关键字语料接受",
+            "Noemion 与 Endem 两个自造名称仍需发行前的人类读音证据",
         ),
         "downloads/index.html": (
             "Endem 目前只是设计阶段名称",
             "开发指南",
         ),
-        "specifications/index.html": (
-            "固定术语职责",
-            "没有证明现行拼写或读音已经通过",
-        ),
     }
     for relative_path, required_tokens in name_maturity_contracts.items():
-        contract_text = (SOURCE_ROOT / relative_path).read_text()
+        contract_text = source_path_for_route(relative_path).read_text()
         for token in required_tokens:
             if token not in contract_text:
                 errors.append(f"{relative_path} missing name-maturity boundary: {token}")
@@ -5489,7 +5330,7 @@ def main():
         "downloads/index.html": "Endem 已通过互联网",
         "specifications/index.html": "固定现行词汇",
     }.items():
-        if forbidden in (SOURCE_ROOT / relative_path).read_text():
+        if forbidden in source_path_for_route(relative_path).read_text():
             errors.append(f"{relative_path} retains overclaimed name maturity: {forbidden}")
     directory_css = DIRECTORY_CSS.read_text()
     if ".skip-link" in directory_css:
@@ -5630,9 +5471,7 @@ def main():
                 f"index.html: homepage reasoning sequence must be {HOME_HEADINGS}, "
                 f"got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in (
             "Noemion", "Endem", "Endem closure", "session contract", "evidence entry", "source_expression", "meaning_projection", "situation", "goal_direction",
             "satisfaction_criteria", "unresolved_meaning", "模型", "原始表达", "实际观察", "没有可执行程序",
@@ -5772,9 +5611,7 @@ def main():
                 "about/index.html: project-purpose sequence must be "
                 f"{ABOUT_INDEX_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in (
             "人工智能系统可以规划步骤和调用工具",
             "研究的不是自然语言生成代码",
@@ -5820,9 +5657,7 @@ def main():
                 "architecture/index.html: developer responsibility sequence must be "
                 f"{ARCHITECTURE_INDEX_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in (
             "这一层回答什么",
             "必须停止的情况",
@@ -5830,7 +5665,7 @@ def main():
             "END-P2 是来源保留的形成与评审 Profile",
             "END-FMT 0.1.0-draft 是实验性物理容器",
             "一次会话的只读执行契约",
-            "流畅度尚无人类证据",
+            "Noemion 与 Endem 两个自造名称尚缺发行前的人类读音证据",
             "MCP 2025-11-25 Tasks",
             "GNU readelf",
         ):
@@ -5865,9 +5700,7 @@ def main():
                 "development/index.html: contribution decision sequence must be "
                 f"{DEVELOPMENT_INDEX_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in (
             "当前可以改进研究、术语、架构、规范、威胁模型、验证方案和面向开发者的技术解释",
             "当前公开范围不包括组件代码",
@@ -5877,7 +5710,7 @@ def main():
             "NIST SSDF 1.1",
             "私密安全报告",
             "尚未提供",
-            "主要使用语言中的流畅度",
+            "只有自造名称继续检查中文和英语中的首次朗读与听辨风险",
             "组件实现进入公开路线并确定范围后",
         ):
             if term not in visible_text:
@@ -5920,9 +5753,7 @@ def main():
                 "about/intellectual-foundations.html: reasoning sequence must be "
                 f"{INTELLECTUAL_FOUNDATIONS_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in (
             "不得直接推出", "把思想转换成可验证问题", "六个语义面",
             "NIST AI Agent Standards Initiative", "读音",
@@ -5954,9 +5785,7 @@ def main():
                 "architecture/adr-0008-endem-system.html: historical reading sequence "
                 f"must be {HISTORICAL_ADR_0008_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in HISTORICAL_ADR_0008_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
@@ -5974,7 +5803,6 @@ def main():
                 )
         if (
             parser.class_counts["table-wrap"] != 5
-            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
                 "architecture/adr-0008-endem-system.html: must preserve five bounded "
@@ -5989,9 +5817,7 @@ def main():
                 "architecture/adr-0009-propositional-kernel.html: historical reading "
                 f"sequence must be {HISTORICAL_ADR_0009_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in HISTORICAL_ADR_0009_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
@@ -6010,7 +5836,6 @@ def main():
         if (
             parser.class_counts["table-wrap"] != 5
             or parser.class_counts["flow"] != 1
-            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
                 "architecture/adr-0009-propositional-kernel.html: must preserve five "
@@ -6025,9 +5850,7 @@ def main():
                 "architecture/adr-0011-endem-container.html: developer reading sequence "
                 f"must be {ADR_0011_READING_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in ADR_0011_READING_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
@@ -6043,7 +5866,6 @@ def main():
         if (
             parser.class_counts["table-wrap"] != 5
             or parser.class_counts["flow"] != 1
-            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
                 "architecture/adr-0011-endem-container.html: must preserve five boundary "
@@ -6058,9 +5880,7 @@ def main():
                 "architecture/adr-0012-rust-core-language.html: developer review "
                 f"sequence must be {ADR_0012_REVIEW_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in ADR_0012_REVIEW_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
@@ -6076,7 +5896,6 @@ def main():
         if (
             parser.class_counts["table-wrap"] != 6
             or parser.class_counts["flow"] != 1
-            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
                 "architecture/adr-0012-rust-core-language.html: must preserve six "
@@ -6091,9 +5910,7 @@ def main():
                 "architecture/adr-0013-end-p1-payload.html: Profile reading sequence "
                 f"must be {ADR_0013_PROFILE_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in ADR_0013_PROFILE_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
@@ -6103,7 +5920,6 @@ def main():
         if (
             parser.class_counts["table-wrap"] != 5
             or parser.class_counts["flow"] != 1
-            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
                 "architecture/adr-0013-end-p1-payload.html: must preserve five "
@@ -6118,9 +5934,7 @@ def main():
                 "architecture/adr-0014-source-manifest.html: source reading sequence "
                 f"must be {ADR_0014_SOURCE_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in ADR_0014_SOURCE_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
@@ -6130,7 +5944,6 @@ def main():
         if (
             parser.class_counts["table-wrap"] != 5
             or parser.class_counts["flow"] != 1
-            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
                 "architecture/adr-0014-source-manifest.html: must preserve five "
@@ -6145,9 +5958,7 @@ def main():
                 "architecture/adr-0015-result-domains.html: result-domain reading sequence "
                 f"must be {ADR_0015_RESULT_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in ADR_0015_RESULT_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
@@ -6157,7 +5968,6 @@ def main():
         if (
             parser.class_counts["table-wrap"] != 5
             or parser.class_counts["flow"] != 1
-            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
                 "architecture/adr-0015-result-domains.html: must preserve five "
@@ -6172,9 +5982,7 @@ def main():
                 "architecture/adr-0016-mene-time-model.html: time-evidence reading sequence "
                 f"must be {ADR_0016_TIME_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in ADR_0016_TIME_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
@@ -6184,7 +5992,6 @@ def main():
         if (
             parser.class_counts["table-wrap"] != 5
             or parser.class_counts["flow"] != 1
-            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
                 "architecture/adr-0016-mene-time-model.html: must preserve five "
@@ -6199,9 +6006,7 @@ def main():
                 "architecture/adr-0017-negation-and-absence.html: negation reading sequence "
                 f"must be {ADR_0017_NEGATION_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in ADR_0017_NEGATION_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
@@ -6211,7 +6016,6 @@ def main():
         if (
             parser.class_counts["table-wrap"] != 5
             or parser.class_counts["flow"] != 1
-            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
                 "architecture/adr-0017-negation-and-absence.html: must preserve five "
@@ -6226,9 +6030,7 @@ def main():
                 "architecture/adr-0018-quantification-and-membership.html: quantification "
                 f"reading sequence must be {ADR_0018_QUANTIFICATION_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in ADR_0018_QUANTIFICATION_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
@@ -6238,7 +6040,6 @@ def main():
         if (
             parser.class_counts["table-wrap"] != 5
             or parser.class_counts["flow"] != 1
-            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
                 "architecture/adr-0018-quantification-and-membership.html: must preserve "
@@ -6253,9 +6054,7 @@ def main():
                 "architecture/adr-0019-measurement-and-thresholds.html: measurement "
                 f"reading sequence must be {ADR_0019_MEASUREMENT_HEADINGS}, got {parser.h2_texts}"
             )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in ADR_0019_MEASUREMENT_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
@@ -6265,7 +6064,6 @@ def main():
         if (
             parser.class_counts["table-wrap"] != 5
             or parser.class_counts["flow"] != 1
-            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
                 "architecture/adr-0019-measurement-and-thresholds.html: must preserve "
@@ -6372,9 +6170,7 @@ def main():
             errors.append(f"missing normative page {route}")
             continue
         parser = parse(path)
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for term in ("必须", "不得"):
             if term not in visible_text:
                 errors.append(f"{route}: normative page must preserve {term}")
@@ -6414,9 +6210,7 @@ def main():
             parser.class_counts,
         )
         errors.extend(f"{row['route']}: {error}" for error in contract_errors)
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
+        visible_text = content_visible_text(parser)
         for token in APPLICATION_TASK_BOUNDARIES:
             if token not in visible_text:
                 errors.append(f"{row['route']}: missing task boundary {token}")

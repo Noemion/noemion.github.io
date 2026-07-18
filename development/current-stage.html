@@ -32,7 +32,7 @@ timeline_data: "project_timeline"
       <tr><td>研究提案可以用于发现边界缺口</td><td>提案保存来源、支持案例、反例、限制和停止条件</td><td>提案已经成为规范、接口、命令或发布承诺</td></tr>
       <tr><td>设备内语义抽取模型已有分阶段研究路线</td><td><a href="../spec/model-training-and-update-boundaries-proposal.html">模型训练与更新研究</a>区分本机流程验证、外部算力训练和设备内推理</td><td>模型已经下载或训练，量化效果已经达标，或已有可发布权重</td></tr>
     </tbody></table></div>
-    <p>当前最缺少的是名称必要性与真实人类读音结果、组件实现证据、外部协议 Profile 和可安装发行材料。查看<a href="implementation-roadmap.html">开发路线图</a>可以了解进入下一层需要什么；查看<a href="testing.html">测试与验证</a>可以判断一项主张需要哪些证据。</p>
+    <p>当前最缺少的是两个自造名称的发行读音证据、组件实现证据、外部协议 Profile 和可安装发行材料。普通职责词已经按词首、职责和关键字语料接受。查看<a href="implementation-roadmap.html">开发路线图</a>可以了解进入下一层需要什么；查看<a href="testing.html">测试与验证</a>可以判断一项主张需要哪些证据。</p>
   </section>
   <section class="project-progress-section">
     {% include project-timeline.html timeline=timeline %}
@@ -44,7 +44,7 @@ timeline_data: "project_timeline"
       <a class="news-record" href="../architecture/adr-0036-source-bearing-and-stripped-release.html"><span class="news-record-art" aria-hidden="true"><b>SOURCE / RELEASE</b></span><span class="news-record-copy"><small>2026-07-17 · 设计决定</small><strong>含原文的形成版与最终发布版成为两份不同制品</strong><span>形成版用于复核人的表达；发布版移除原文并取得新身份。最终发布 Profile 和裁剪实现仍待定义。</span></span><span class="news-record-arrow" aria-hidden="true">↗</span></a>
       <a class="news-record" href="../architecture/adr-0035-public-actions-and-internal-responsibilities.html"><span class="news-record-art" aria-hidden="true"><b>ONE CLI / FIVE TASKS</b></span><span class="news-record-copy"><small>2026-07-16 · 设计决定</small><strong>一个应用只保留五项面向开发者的工作</strong><span>形成、检查、独立读取、组合和受限运行保留公开入口；签名与发布等内部责任不再伪装成并列命令。</span></span><span class="news-record-arrow" aria-hidden="true">↗</span></a>
       <a class="news-record" href="../spec/model-training-and-update-boundaries-proposal.html"><span class="news-record-art" aria-hidden="true"><b>MODEL / EVIDENCE</b></span><span class="news-record-copy"><small>2026-07-16 · 研究提案</small><strong>语义抽取模型采用分阶段验证路线</strong><span>本机只计划验证数据、微调、量化、CPU 推理和评测闭环；最终训练与权重发布仍需要独立证据和决定。</span></span><span class="news-record-arrow" aria-hidden="true">↗</span></a>
-      <a class="news-record" href="../architecture/adr-0034-pronunciation-and-oral-distinction.html"><span class="news-record-art" aria-hidden="true"><b>HUMAN / NAMING</b></span><span class="news-record-copy"><small>2026-07-16 · 设计边界</small><strong>名称必须经过真实使用者的朗读与听辨</strong><span>首次朗读和独立听辨由不同参与者完成；当前还没有足以支持发行名称的结果。</span></span><span class="news-record-arrow" aria-hidden="true">↗</span></a>
+      <a class="news-record" href="../architecture/adr-0037-terminology-simplification.html"><span class="news-record-art" aria-hidden="true"><b>NAMING / TERMS</b></span><span class="news-record-copy"><small>2026-07-18 · 当前策略</small><strong>普通职责词已经统一，自造名称继续验证</strong><span>普通词按词首、职责和关键字语料检查；Noemion 与 Endem 仍需发行前的人类读音证据。</span></span><span class="news-record-arrow" aria-hidden="true">↗</span></a>
     </div>
   </section>
   <section class="content-band">

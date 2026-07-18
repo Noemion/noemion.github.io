@@ -53,7 +53,7 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 | 语义、结果或信任边界 | CORE 与必要 ADR | 因为示例或实现方便而增加默认语义 |
 | 物理格式或 Profile | 格式规范、封闭 Profile、威胁和正反向量 | 把通用解码成功写成内容接受或互操作 |
 | 研究问题 | 非规范提案、案例、反例、替代方案和停止条件 | 把候选字段、命令或服务写成现行接口 |
-| 术语或发行名称 | 职责必要性、冲突证据、读音与口头区分方案 | 用词源、个人偏好或模型评分代替人类证据 |
+| 术语或发行名称 | 职责必要性、冲突证据与逐词词首；自造名称再补读音和口头区分方案 | 用词源、个人偏好或模型评分代替自造名称的人类证据 |
 | 未来组件行为 | 现行规范与[开发阶段及证据路线](../development/implementation-roadmap.html) | 在代码阶段开启前创建工作区、接口或实现目录 |
 
 格式、语义、执行或信任边界变化需要 ADR；文字澄清若不改变义务，只修改解释和对应质量契约。无法判断改动是否改变规范时，先给出会区分两种解释的反例，再决定是否需要 ADR。
@@ -64,11 +64,11 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 
 代码、Issue 和技术讨论使用现行直白职责名：Endem closure、session contract、evidence entry、deterministic producer、independent inspector、bounded runner，以及 `form / lint / compose / inspect / run`。字段使用 `source_expression / meaning_projection / situation / goal_direction / satisfaction_criteria / unresolved_meaning`，观察使用 `structured_observation`。现行登记词表的每个英文构词单元都从词首直接起音，没有词首静音字母或必须另行指定的起始辅音组合。
 
-普通英语工程词沿用通常拼写，不为了消除英语固有的词中或词尾静音字母另造拼法。`closure`、`evidence`、`compose`、`source`、`profile`、`time`、`scope`、`coverage`、`guard`、`signed` 与 `view` 均按通行读法使用；这类惯例不豁免词首起音、职责匹配和完整词表听辨检查。
+普通英语工程词沿用通常拼写，不为了消除英语固有的词中或词尾静音字母另造拼法。`closure`、`evidence`、`compose`、`source`、`profile`、`time`、`scope`、`coverage`、`guard`、`signed` 与 `view` 均按通行读法使用；它们只检查词首起音与职责是否准确，不因缺少独立听辨实验而标为未通过。由普通词组成的职责短语也逐词执行同一规则。
 
 名称若因词首起音不合格，替换项必须是一个完整单词，不能新造连字符词、下划线词或拼接词。普通单词能够准确承担职责时直接使用；确无合适单词时可以造词，但新词仍须满足拼写可恢复、起音直观、职责明确和口头易分辨四项要求。
 
-读音提示只帮助人类交流，不是命令别名、机器标识或语义权威。需要精确引用时，直接粘贴书面名称或代码标识；不要根据口述近似音自动选择命令、字段或授权对象。现行命名决定与被替换名称见 [ADR-0037](../architecture/adr-0037-terminology-simplification.html)，发行前的人类证据要求见 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html)。
+读音提示只帮助人类交流，不是命令别名、机器标识或语义权威。需要精确引用时，直接粘贴书面名称或代码标识；不要根据口述近似音自动选择命令、字段或授权对象。现行名称、被替换名称、普通词规则和两个自造名称的发行证据边界统一见 [ADR-0037](../architecture/adr-0037-terminology-simplification.html)。
 
 ## 按变更类型选择证据
 
@@ -104,7 +104,7 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 
 **已有成果：**END-CORE、END-FMT、END-P2、DIA-CORE 与现行向量已经限定未来形成、分层检查、独立读取和失败原子性。ADR-0012 记录 Rust 1.97.0 作为未来 deterministic producer 与制品形成侧读取核心的候选语言；零 `unsafe`、首条切片零第三方 crate、受检算术和independent inspector 都是未来约束，不是现有实现。
 
-**限制条件：**当前没有 deterministic producer、independent inspector、bounded runner、`endem` CLI、适配器、运行时、实现级模糊测试或发布包。尚未定义的实现目录、仓库拆分、稳定 ABI 和协议 Profile 不属于当前接口。组件与动作名称的读音流畅度和口头区分度也没有完成人类验证。
+**限制条件：**当前没有 deterministic producer、independent inspector、bounded runner、`endem` CLI、适配器、运行时、实现级模糊测试或发布包。尚未定义的实现目录、仓库拆分、稳定 ABI 和协议 Profile 不属于当前接口。`Noemion` 与 `Endem` 两个自造名称仍未完成发行前的人类读音验证；普通职责词已经按词首起音规则接受。
 
 [GNU Coding Standards](https://www.gnu.org/prep/standards/standards.html)强调健壮、可靠的软件行为，并要求主动语态明确句子主体；[NIST SSDF 1.1](https://csrc.nist.gov/pubs/sp/800/218/final)提供可整合进不同生命周期的安全开发实践。[NIST AI 800-5](https://www.nist.gov/publications/summary-analysis-responses-request-information-regarding-security-considerations-ai)汇总的公开意见普遍认为，基础网络安全实践对 Agent 仍然有效，但需要针对模型输出连接工具和环境的风险继续调整。这些资料支持保留软件安全基线并增加 Agent 专项反例，不证明 Noemion 已经实现安全组件。
 

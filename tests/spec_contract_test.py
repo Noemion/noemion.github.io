@@ -52,6 +52,14 @@ ALLOWED_VERIFICATION_STATUS = {"covered-by-repo", "planned", "manual-authority"}
 ALLOWED_EVIDENCE_STATUS = {"planned", "partial", "covered"}
 
 
+def source_path_for_route(relative_path):
+    direct = ROOT / relative_path
+    if direct.exists():
+        return direct
+    markdown = direct.with_suffix(".md")
+    return markdown if markdown.exists() else direct
+
+
 def load_json(path, errors):
     try:
         return json.loads(path.read_text())
@@ -268,7 +276,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             if experiment.get(key) != value:
                 errors.append(f"P0-LANG-001 {key} must be {value!r}")
         for path_field in ("protocol", "results", "decision"):
-            if not (ROOT / experiment.get(path_field, "")).is_file():
+            if not source_path_for_route(experiment.get(path_field, "")).is_file():
                 errors.append(f"P0-LANG-001 missing {path_field} file")
         results = load_json(ROOT / experiment.get("results", ""), errors)
         if results:
@@ -389,7 +397,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 errors.append(f"{clause_id}: manual-authority requires authority")
             if status == "covered-by-repo":
                 ref = item["ref"]
-                ref_path = ROOT / ref
+                ref_path = source_path_for_route(ref)
                 if not ref_path.is_file():
                     errors.append(f"{clause_id}: covered evidence does not exist: {ref}")
                 covered_repo_refs.add(ref)
@@ -883,61 +891,6 @@ def validate_public_boundary(errors):
             "MCP 2025-11-25",
             "当前改动只修正规范边界",
         ),
-        "architecture/adr-0031-release-name-collision-gate.html": (
-            "搜索没有冲突，不等于名称可以发行",
-            "当前策略",
-            "evidence entry",
-            "bounded runner",
-            "run",
-            "EVIDENCE-CORE",
-            "不保留别名、重定向、双写或兼容垫片",
-            "正式发行前必须再次查询",
-        ),
-        "architecture/adr-0032-deterministic-maker-name-collision.html": (
-            "命令只改大小写，仍然是名称冲突",
-            "当前策略",
-            "deterministic producer",
-            "form",
-            "PFA Open Inference Engine",
-            "大小写不能形成可靠区分",
-            "不保留别名、重定向、双写或兼容垫片",
-            "动作名称不等于实现优先级",
-            "已确认且具有精确语义授权绑定的意义投影",
-            "不能沿用旧页面的“crate 不存在”结论",
-            "不扩大公开 CLI",
-        ),
-        "architecture/adr-0033-text-identifier-specification-name.html": (
-            "标准 ID 不能伪装成文件格式",
-            "当前策略",
-            "TEXT-IDENTIFIER-CORE",
-            "TXT-CORE",
-            "TEXT-CORE",
-            "TIB-CORE",
-            "不是 <code>.txt</code> 文件格式",
-            "不保留旧路径、别名、重定向、双写或兼容垫片",
-            "vectors/text-identifier/",
-            "不能声称同名 crate 不存在",
-            "文本与标识符核心规范",
-        ),
-        "architecture/adr-0034-pronunciation-and-oral-distinction.html": (
-            "读得出，不等于听得清、写得回",
-            "当前审查",
-            "五项独立审查",
-            "拼写—声音完整",
-            "ISO 704:2022",
-            "W3C Pronunciation Lexicon Specification 1.0",
-            "GNU Coding Standards：Names",
-            "OpenAI Realtime API",
-            "BCP 47",
-            "IPA",
-            "成对混淆矩阵",
-            "首次朗读",
-            "听写回填",
-            "零关键混淆是 Noemion 的发行风险政策",
-            "转写是有来源的异步系统输出",
-            "不建立语音接口",
-            "不创建语音界面",
-        ),
         "architecture/adr-0035-public-actions-and-internal-responsibilities.html": (
             "当前策略",
             "用户任务不是内部职责清单",
@@ -954,7 +907,7 @@ def validate_public_boundary(errors):
             "A2A 1.0 版本化规范",
             "OpenAI Agents SDK Tools",
             "conformance:",
-            "发行拼写待定",
+            "普通动作词已接受",
             "动作名称不等于实现优先级",
             "没有可执行 <code>endem</code>",
         ),
@@ -1074,7 +1027,7 @@ def validate_public_boundary(errors):
             "当前可以审查术语、规范、案例、威胁和验证设计",
             "也不表示组件已经开始实现",
             "现行设计标识，不是已发布接口",
-            "尚未完成正式发行前的读音",
+            "普通英语词已经通过词首、职责和关键字检查",
             "Rust 与 C 的既有研究也只提供未来比较材料",
             "当前没有 Rust 组件、CLI、协议适配器",
             "候选版在正式发布前只作为迁移风险",
@@ -1082,9 +1035,10 @@ def validate_public_boundary(errors):
         ),
     }
     for relative_path, tokens in public_contracts.items():
-        text = (ROOT / relative_path).read_text()
+        text = source_path_for_route(relative_path).read_text()
         for token in tokens:
-            if token not in text:
+            markdown_token = re.sub(r"<code>(.*?)</code>", r"`\1`", token)
+            if token not in text and markdown_token not in text:
                 errors.append(f"{relative_path}: missing normative-source boundary {token!r}")
 
 

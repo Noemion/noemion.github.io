@@ -21,7 +21,7 @@ current:
     - label: 正在进行
       value: 术语、反例、威胁与证据边界复核
     - label: 限制条件
-      value: 没有组件、安装包或发行读音
+      value: 没有组件、安装包或自造名称发行读音
 
 items:
   - id: scope-and-trust
@@ -33,7 +33,7 @@ items:
     state: confirmed
     label: 已有成果
     title: 对象职责与单一应用边界
-    description: Endem、组合闭包、会话契约和有范围证据承担不同职责，未来公开入口收敛为一个应用；具体发行拼写和读音仍在研究。
+    description: Endem、组合闭包、会话契约和有范围证据承担不同职责，未来公开入口收敛为一个应用；普通职责词已经接受，Endem 的发行读音仍待人类验证。
   - id: endem-specification-core-design
     state: confirmed
     label: 已有成果
@@ -43,7 +43,7 @@ items:
     state: current
     label: 正在进行
     title: 术语、反例与证据边界复核
-    description: 当前继续检查专名是否必要、相邻术语能否口头区分、案例是否存在反例，以及每项验证最多支持什么主张；发行读音尚无人类研究结果。
+    description: 当前继续检查专名是否必要、相邻术语能否口头区分、案例是否存在反例，以及每项验证最多支持什么主张；Noemion 与 Endem 的发行读音尚无人类研究结果。
   - id: deterministic-core
     state: future
     label: 后续规划

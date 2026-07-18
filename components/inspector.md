@@ -1,0 +1,88 @@
+---
+layout: content
+title: independent inspector · 独立制品检查边界
+page_role: content
+footer_text: Noemion · independent inspector
+permalink: "/components/inspector.html"
+summary: 介绍未来的独立检查器怎样用不同于生产路径的代码读取实际字节，并输出视图、差异和诊断。
+breadcrumbs:
+- label: 项目
+  url: "../index.html"
+- label: 系统组件
+  url: index.html
+page_heading: 独立制品检查边界
+page_lead: independent inspector 未来通过不共享制品形成侧解析代码的有界路径读取实际 Endem 字节，并输出带范围的视图、差分和诊断；它不修改制品，也不决定制品能否发布或运行。
+badges:
+- 独立直接读取
+- 只读输出
+- 不产生生产检查通过结论
+- 尚未实现
+previous_url: producer.html
+previous_label: deterministic producer
+next_url: runner.html
+next_label: bounded runner
+---
+
+## 为什么第二条读取路径仍然必要
+
+如果生产检查和只读查看复用同一解析器，一个字段边界错误可能在两处得到完全一致但仍然错误的解释。independent inspector 因此从实际字节重新恢复结构，只把公开规范、Profile 和规范向量当作共同依据。
+
+这里的“独立”不是换一个命令名。independent inspector 不共享或链接 deterministic producer 的形成侧解析器、写入器、组合器、生成代码、私有中间表示或错误分类实现；未来还必须分别构建、模糊测试和注入故障。两条路径即使得到相同结果，也只能说明它们在当前输入和规则下没有发现分歧，不能证明规范本身没有歧义。
+
+**名称状态：**independent inspector 是由普通英语词组成的设计阶段职责名称，已经按逐词词首、职责和关键字语料接受。它不表示检查组件已经实现；首次说明时先写“独立制品检查边界”，再用 independent inspector 指向这里的定义。
+
+## 用一次依赖更新理解 independent inspector
+
+开发者收到“更新服务依赖”的 `.endem` 后，先固定实际字节、END-FMT、END-P2、所需视图和资源预算。independent inspector 随后直接检查记录范围，显示服务、目标版本、允许变化、发布判据和显式 `unresolved_meaning`，并标出没有读取、无法解释或因预算停止的部分。
+
+1. 实际 .endem 字节
+2. 精确规范 / Profile
+3. 视图与资源预算
+4. independent inspector 独立有界读取
+5. 带范围视图 / 诊断
+6. 与 lint 结果比较
+7. 一致或停止调查
+
+如果 independent inspector 与生产侧 `lint` 对字段边界、引用或失败层次给出不同解释，发布流程必须停止。开发者先判断规范是否含糊，再分别修正规范或出错实现，最后重新运行两条路径；不能让其中一方自动覆盖另一方，也不能通过改写输入消除分歧。
+
+## 一次检查怎样保留主张范围
+
+| 检查层 | independent inspector 可以输出 | 不能据此声称 |
+| --- | --- | --- |
+| 物理结构 | 前导、目录、记录范围、实际字节、未知关键记录，以及未读取或截断位置 | 结构可解析不等于 END-P2 或 END-CORE 接受 |
+| Profile 视图 | 字段类型、规范顺序、引用闭合和 Profile 偏差 | 字段声明不自证来源、意义确认、签名或发布资格 |
+| 内容视图 | 六个语义面、显式 `unresolved_meaning`、文件声明与 independent inspector 推导的区分 | 可显示不等于目标 `met`、动作获准或结果 `accepted` |
+| 伴随资料 | 只有物理格式和关系 Profile 已定义时，才显示外部签名、来源或 evidence entry 中实际存在的有限字段 | 显示签名或证据字段不等于验证有效、覆盖充分或权威匹配 |
+| 差分 | 两个精确输入在同一视图规则下的字段、字节和引用差异 | 没有差异不等于语义等价、正确或可以互换 |
+
+当前只有 Endem 具有实验性物理字节规范。Endem closure、evidence entry 和来源裁剪的发布制品都必须等待各自物理 Profile；independent inspector 不为尚未定义的格式猜测字段、扩展名或通用对象模型。
+
+## 独立、只读和有界分别约束什么
+
+| 性质 | 实现责任 | 失败时怎样处理 |
+| --- | --- | --- |
+| 独立 | 另写数据结构、解码器、范围检查、错误路径和依赖；与生产路径只共享公开规范和向量 | 依赖或代码重新汇合时，停止宣称第二条故障路径 |
+| 只读 | 只输出文本、结构化视图、差分和诊断；不写回、不修复、不改变状态，也不生成 deterministic producer 内部检查通过引用 | 需要修改时返回调用方，由具名生产责任重新形成新制品 |
+| 有界 | 先读取最小前导，再用 `checked arithmetic` 检查偏移、长度、计数、对齐和累计预算；按需展开记录与引用 | 溢出、越界、重叠、循环或资源上限使当前读取关闭失败，并标明未执行部分 |
+| 确定输出 | 相同字节、规范/Profile、视图和预算产生相同排序、截断位置与主诊断 | 未声明时间、区域设置、模型采样或容器遍历顺序影响结果时，停止一致性比较 |
+
+[GNU `readelf`](https://www.sourceware.org/binutils/docs/binutils/readelf.html)与 BFD 独立，因此 BFD 缺陷不会自动影响它；手册还为递归和输出提供显式限制。[GNU BFD 的信息损失说明](https://sourceware.org/binutils/docs/bfd/BFD-information-loss.html)表明，不同格式进入共同表示时可能丢失目标格式无法承载的信息。Noemion 采用独立直接读取、资源限制和损失显式化的工程纪律，但不复制 ELF、BFD、`readelf` 或 `objdump` 的对象模型。
+
+生成式模型可以在 independent inspector 之外为人类解释已经形成的只读视图，但模型摘要不能进入规范视图、诊断身份或差分依据。[NIST AI 600-1](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)把自信但错误的内容及其解释列为生成式人工智能的虚构风险；这支持把模型说明保留为不可信展示候选，但不定义 Noemion 字段或检查结果。
+
+## 分歧和失败后怎样继续
+
+| 观察 | independent inspector 保留什么 | 下一步 |
+| --- | --- | --- |
+| 输入畸形 | 首个安全失败、精确位置和可安全取得的有限观察 | 拒绝完整解释；由生产者修正来源或重新形成对象 |
+| 必需能力不支持 | 格式/Profile 版本、记录种类和缺少能力 | 升级独立读取器或拒绝；不能静默跳过关键内容 |
+| 资源预算耗尽 | 限制、已用量、停止位置和未执行范围 | 调用方显式收窄视图或批准新预算；当前结果不升级为对象有效 |
+| `lint` 与 independent inspector 分歧 | 最小复现字节、精确规则、双方输出和首次分歧位置 | 阻断一致性与发布主张，区分规范歧义和实现缺陷后分别修正并重跑 |
+
+## 当前可以证明什么
+
+**已有成果：**END-FMT、DIA-CORE 和现行 ADR 已经限定 independent inspector 的直接读取、只读输出、资源预算、失败原子性与生产路径分离；相同失败事实仍须定位到稳定机器码和适用条款。
+
+**待定内容：**当前没有 independent inspector、CBOR 解码器、独立构建、实现级预算检查、模糊测试或跨平台差分证据。Endem closure、evidence entry 和最终发布制品也没有可供读取的物理格式。
+
+**限制条件：**现有规范和向量只能证明已登记关系一致，不能证明第二条实现真正独立、能够安全读取恶意输入、与生产路径互操作或适合作为发行组件。
