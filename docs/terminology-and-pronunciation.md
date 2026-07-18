@@ -6,7 +6,7 @@ footer_text: "Noemion · 术语与读音验证指南"
 permalink: "/docs/terminology-and-pronunciation.html"
 manual_id: "docs"
 manual_group: "guides"
-manual_order: 3
+manual_order: 2
 nav_title: "术语与读音验证"
 page_heading: "术语与读音验证指南"
 page_lead: "说明 Noemion 怎样发现读音分歧、验证口头区分，并决定保留或重新命名术语。"

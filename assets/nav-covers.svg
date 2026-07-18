@@ -91,10 +91,6 @@
       <g fill="#161e1a" stroke="#789388"><rect x="11" y="12" width="27" height="27"/><rect x="44" y="12" width="27" height="27"/><rect x="77" y="12" width="27" height="27"/><rect x="11" y="45" width="27" height="27"/><rect x="44" y="45" width="27" height="27"/><rect x="77" y="45" width="27" height="27"/></g>
       <path d="m18 25 5 5 9-12m19 7 5 5 9-12m-47 40 5 5 9-12m26 0 9 12m0-12-9 12" stroke="#68d7b2" stroke-width="3" fill="none"/><path d="m84 19 13 13m0-13L84 32" stroke="#f04b23" stroke-width="3"/><circle cx="90" cy="58" r="8" fill="#f4be35"/>
     </symbol>
-    <symbol id="nav-cover-news" viewBox="0 0 116 82">
-      <path d="M12 57h17l9-21 13 31 13-45 12 35h28" fill="none" stroke="#68d7b2" stroke-width="4" stroke-linejoin="round"/>
-      <circle cx="64" cy="22" r="6" fill="#f04b23"/><path d="M87 18h17M87 27h12M87 36h17" stroke="#f4be35" stroke-width="3"/>
-    </symbol>
     <symbol id="nav-cover-downloads" viewBox="0 0 116 82">
       <path d="M21 23 58 9l37 14-37 15Z" fill="#68d7b2"/><path d="m21 23 37 15v35L21 57Z" fill="#3158ff"/><path d="m95 23-37 15v35l37-16Z" fill="#f04b23"/>
       <path d="M58 18v33m-9-9 9 9 9-9" stroke="#f0f6f3" stroke-width="4" fill="none"/><circle cx="87" cy="61" r="8" fill="#f4be35"/>

@@ -12,8 +12,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Project and background
 
-- [Project background](https://noemion.github.io/about/index.html) — why natural-language intent needs a reviewable goal artifact, what Noemion studies, adjacent-system boundaries, and current limits
-- [Background and boundaries](https://noemion.github.io/about/background.html) — why natural-language goals need a separate identity and trust boundary
+- [Project and boundaries](https://noemion.github.io/about/index.html) — why natural-language intent needs a reviewable goal artifact, what Noemion studies, adjacent-system boundaries, and current limits
 - [Intellectual foundations](https://noemion.github.io/about/intellectual-foundations.html) — turning philosophical distinctions into testable developer questions without treating philosophy as a software specification
 - [Frequently asked questions](https://noemion.github.io/faq/index.html) — direct answers about scope, status, and non-goals
 
@@ -131,7 +130,6 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 - [Documentation center](https://noemion.github.io/docs/index.html) — task-oriented reading paths
 - [Getting started](https://noemion.github.io/docs/getting-started.html) — one dependency-upgrade case separates goals, authorization, protocol states, evidence, and final decisions
-- [Installation and usage](https://noemion.github.io/docs/installation-and-usage.html) — current availability and future release principles
 - [Terminology and pronunciation validation](https://noemion.github.io/docs/terminology-and-pronunciation.html) — human first-read, listen-back, responsibility matching, statistical boundary, and release-name stop rules
 - [Architecture guide](https://noemion.github.io/docs/architecture-guide.html) — one Agent task mapped to artifact, session, action, evidence, and decision boundaries
 - [Development guide](https://noemion.github.io/docs/development-guide.html) — a falsifiable change claim carried through authority, failure ownership, evidence, and claim limits
@@ -141,11 +139,10 @@ Noemion publishes its current project portal, architecture, specifications, comp
 ## Development and resources
 
 - [Development](https://noemion.github.io/development/index.html) — current contribution scope, falsifiable change claims, minimum evidence, stop conditions, and reporting routes
-- [Current stage](https://noemion.github.io/development/current-stage.html) — completed work, active design, and planned work
+- [Project progress](https://noemion.github.io/development/current-stage.html) — completed work, active research, planned work, and dated verifiable milestones
 - [Implementation roadmap](https://noemion.github.io/development/implementation-roadmap.html) — current work, evidence required to advance, validation slices, and stop conditions
 - [Testing strategy](https://noemion.github.io/development/testing.html) — change-to-evidence matrix, failure paths, determinism, malformed inputs, and claim limits
-- [Downloads and resource status](https://noemion.github.io/downloads/index.html) — truthful availability, signing, and release-resource status
-- [News and progress](https://noemion.github.io/news/index.html) — dated, verifiable project updates
+- [Resources and availability](https://noemion.github.io/downloads/index.html) — current public materials, truthful software availability, release evidence, and future installation conditions
 
 ## Endem application
 

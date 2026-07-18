@@ -6,7 +6,7 @@ footer_text: "Noemion · 规范参考指南"
 permalink: "/docs/specifications-reference.html"
 manual_id: "docs"
 manual_group: "reference"
-manual_order: 7
+manual_order: 6
 nav_title: "规范参考指南"
 page_heading: "Noemion 规范参考指南"
 page_lead: "遇到目标、组合、运行、证据、协议、身份、文本或授权问题时，先定位权威源，再区分现行要求与研究资料。"

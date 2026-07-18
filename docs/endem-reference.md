@@ -6,7 +6,7 @@ footer_text: "Noemion · Endem 应用参考"
 permalink: "/docs/endem-reference.html"
 manual_id: "docs"
 manual_group: "reference"
-manual_order: 6
+manual_order: 5
 nav_title: "Endem 应用参考"
 page_heading: "Endem 应用参考"
 page_lead: "从用户要完成的五项工作出发，查看计划中的 endem 动作各自读取什么、返回什么，以及为什么不能合并权限。"

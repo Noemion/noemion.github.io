@@ -62,7 +62,6 @@ PORTAL_ROUTES = [
     "downloads/index.html",
     "faq/index.html",
     "development/index.html",
-    "news/index.html",
     "pages/index.html",
 ]
 APPLICATION_ROUTES = ["endem/index.html"]
@@ -122,7 +121,6 @@ REQUIRED_CORE_ROUTES = {
 }
 DOC_GUIDE_ORDER = [
     "docs/getting-started.html",
-    "docs/installation-and-usage.html",
     "docs/terminology-and-pronunciation.html",
     "docs/architecture-guide.html",
     "docs/development-guide.html",
@@ -132,9 +130,6 @@ DOC_GUIDE_ORDER = [
 DOC_GUIDE_HEADINGS = {
     "docs/getting-started.html": [
         "先把一句要求写完整", "沿一条责任链工作", "“安全使用”必须逐层检查", "相邻系统继续负责什么", "按问题继续学习", "当前可以验证什么",
-    ],
-    "docs/installation-and-usage.html": [
-        "当前可用性", "未来职责流程", "发布原则", "命名发布条件",
     ],
     "docs/terminology-and-pronunciation.html": [
         "直接结论", "读音待定时怎样协作", "证据适用边界", "招募前先固定研究数据边界", "两阶段验证", "任务与材料", "通过与停止规则",
@@ -155,26 +150,19 @@ DOC_GUIDE_HEADINGS = {
 }
 HOME_HEADINGS = [
     "人工智能系统开始行动人的目标仍困在对话里",
-    "六项职责保持语义边界",
-    "只保留有独立生命周期的名词",
-    "一个入口不等于一个信任域",
+    "六项职责让目标保持原意",
+    "四类对象各自回答一个问题",
+    "一个命令入口三项责任必须分开",
     "当前先完成规范和安全边界",
-    "从编译器与工具链借鉴工程纪律",
+    "借鉴成熟工具让结果可以复核",
     "继续阅读",
 ]
 ABOUT_INDEX_HEADINGS = [
-    "先从一个现实问题开始",
-    "Noemion 研究什么",
-    "它不替代哪些系统",
-    "按问题继续",
+    "先看一个真实任务",
+    "Noemion 研究的不是自然语言生成代码",
+    "为什么目标要成为独立对象",
+    "相邻系统继续负责什么",
     "当前做到哪里",
-]
-BACKGROUND_HEADINGS = [
-    "先分清项目研究什么",
-    "用一次依赖升级定位缺失事实",
-    "为什么目标必须成为独立对象",
-    "相邻系统各自回答什么",
-    "当前开发者可以依赖什么",
 ]
 ARCHITECTURE_INDEX_HEADINGS = [
     "从一次依赖升级定位架构",
@@ -595,7 +583,6 @@ NORMATIVE_ROUTES = (
     "specifications/authority.html",
 )
 CONTENT_LAYOUT_ROUTES = (
-    "about/background.html",
     "about/intellectual-foundations.html",
     "architecture/endem-lifecycle.html",
     "architecture/decisions.html",
@@ -686,6 +673,8 @@ MAINSTREAM_LANGUAGE_KEYWORDS = {
     "virtual", "void", "volatile", "wchar_t", "when", "where", "while", "with", "yield",
 }
 REMOVED_PUBLIC_ROUTES = {
+    "about/background.html", "news/index.html",
+    "docs/installation-and-usage.html",
     "specifications/weave.html", "specifications/witness.html",
     "components/core.html", "components/reader.html", "components/runner.html",
     "specifications/tekmor.html", "components/praxor.html",
@@ -1722,7 +1711,7 @@ def validate_readability_behavior_contracts(root):
             "href: /docs/architecture-guide.html",
             "href: /docs/endem-reference.html",
             "href: /docs/specifications-reference.html",
-            "href: /news/index.html",
+            "href: /development/current-stage.html",
             "href: /faq/index.html",
             "href: /development/implementation-roadmap.html",
         ):
@@ -3201,7 +3190,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "downloads" / "index.html",
             SOURCE_ROOT / "faq" / "index.html",
-            SOURCE_ROOT / "docs" / "installation-and-usage.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "content-quality-audit.md",
@@ -3254,7 +3242,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "spec" / "model-openness-and-software-freedom-boundaries-proposal.md",
             SOURCE_ROOT / "downloads" / "index.html",
             SOURCE_ROOT / "faq" / "index.html",
-            SOURCE_ROOT / "docs" / "installation-and-usage.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "content-quality-audit.md",
@@ -4056,10 +4043,35 @@ def validate_jekyll_sources():
                 errors.append(f"index.html: missing independent homepage object card: {token}")
         if homepage_text.count('class="portal-focus-card ') != 4:
             errors.append("index.html: FOUR NOUNS must render four independent object cards")
+        homepage_card_routes = (
+            'class="portal-feature-row" href="specifications/endem.html"',
+            'class="portal-feature-row" href="specifications/endem.html#skena"',
+            'class="portal-feature-row" href="specifications/endem.html#krin"',
+            'class="portal-feature-row" href="specifications/endem.html#apor"',
+            'class="portal-focus-card focus-card-endem" href="specifications/endem.html"',
+            'class="portal-focus-card focus-card-synem" href="specifications/synem.html"',
+            'class="portal-focus-card focus-card-dromen" href="specifications/dromen.html"',
+            'class="portal-focus-card focus-card-iknem" href="specifications/iknem.html"',
+            '<a href="endem/"><span class="lifecycle-number">01</span>',
+            '<a href="components/theor.html"><span class="lifecycle-number">02</span>',
+            '<a href="components/drasor.html"><span class="lifecycle-number">03</span>',
+            '<a href="endem/"><small>01</small><strong>Endem 应用</strong>',
+            '<a href="specifications/"><small>02</small><strong>规范</strong>',
+            '<a href="architecture/"><small>03</small><strong>架构</strong>',
+            '<a href="components/"><small>04</small><strong>组件</strong>',
+            '<a href="development/current-stage.html"><small>05</small><strong>项目进展</strong>',
+            '<a href="docs/"><small>06</small><strong>指南与参考</strong>',
+        )
+        for contract in homepage_card_routes:
+            if homepage_text.count(contract) != 1:
+                errors.append(
+                    "index.html: each homepage card must keep one explicit target: "
+                    f"{contract}"
+                )
 
     source_release_contracts = {
         "architecture/index.html": ("来源保留的形成版", "最终发布版移除原文", "独立 Profile 重写来源绑定"),
-        "about/index.html": ("形成版保存一项期望终态的来源", "最终发布版移除原文"),
+        "about/index.html": ("形成版保存一项目标的来源", "最终发布版移除原文"),
         "faq/index.html": ("来源保留的形成版分开六项职责", "发布时再按独立 Profile 移除原文和可逆重建材料"),
         "endem/docs/index.md": ("来源保留的形成版", "最终发布版按独立 Profile 移除原文", "精确发布内容签名"),
     }
@@ -5154,7 +5166,7 @@ def validate_jekyll_sources():
             "endem", "theor", "format", "drase",
             "getting-started", "architecture-guide", "application-reference",
             "spec-reference", "endem-manual", "current-stage", "roadmap", "testing",
-            "news", "downloads",
+            "downloads",
         }
         nav_cover_asset = SOURCE_ROOT / "assets/nav-covers.svg"
         if not nav_cover_asset.exists():
@@ -5164,10 +5176,10 @@ def validate_jekyll_sources():
                 r'id="nav-cover-([^"]+)"', nav_cover_asset.read_text()
             ))
             if cover_ids != expected_nav_covers:
-                errors.append("navigation cover sprite must define 22 unique project covers")
+                errors.append("navigation cover sprite must define 21 unique project covers")
         configured_cover_entries = re.findall(r'\bcover:\s*([^,}\s]+)', navigation_text)
         configured_covers = set(configured_cover_entries)
-        if len(configured_cover_entries) != 22 or configured_covers != expected_nav_covers:
+        if len(configured_cover_entries) != 21 or configured_covers != expected_nav_covers:
             errors.append("global navigation entries must route to unique project covers")
 
     timeline_config = SOURCE_ROOT / "_data/project_timeline.yml"
@@ -5179,7 +5191,7 @@ def validate_jekyll_sources():
         site_header_text = site_header_config.read_text()
         for token in (
             "timeline:",
-            "label: TIMELINE",
+            "label: 进展",
             "href: /development/current-stage.html",
             "aria_label: 查看 Noemion 项目时间线",
             "title: 查看项目进度时间线",
@@ -5511,8 +5523,8 @@ def main():
             "提出目标的人应当能够检查自己的表达怎样被解释",
             "这里的“编译”是一条可复核的形成路径",
             "最终发布版移除原文",
-            "没有可执行组件或安装包",
-            "计划中的公开命令入口只有",
+            "没有可执行程序或安装包",
+            "计划中的 endem 命令",
             "当前还没有可执行程序",
         ),
         "docs/index.md": (
@@ -5595,7 +5607,7 @@ def main():
                 errors.append(f"{relative_path} retains implementation-first entry phrase: {phrase}")
     for relative_path in (
         "index.html",
-        "about/background.html",
+        "about/index.html",
         "faq/index.html",
         "docs/getting-started.md",
         "specifications/index.html",
@@ -5706,16 +5718,16 @@ def main():
                 f"as an unlabeled statistical authority: {obsolete_source}"
             )
     name_maturity_contracts = {
-        "about/background.html": (
-            "当前策略已确定 Endem 所指的最小制品职责",
-            "现行拼写和读音仍须通过发行名称审查",
+        "about/index.html": (
+            "现行设计名称是 Endem",
+            "发行拼写和读音仍需真实使用者验证",
         ),
         "specifications/index.html": (
             "当前策略",
             "待定内容",
         ),
-        "docs/installation-and-usage.md": (
-            "Endem 只通过了有日期的精确工程名初筛",
+        "downloads/index.html": (
+            "Endem 目前只是设计阶段名称",
             "术语与读音验证指南",
         ),
         "docs/specifications-reference.md": (
@@ -5733,9 +5745,9 @@ def main():
             if token not in contract_text:
                 errors.append(f"{relative_path} missing name-maturity boundary: {token}")
     for relative_path, forbidden in {
-        "about/background.html": "已接受 Endem 词汇",
+        "about/index.html": "已接受 Endem 词汇",
         "specifications/index.html": "名称、职责、六个语义面",
-        "docs/installation-and-usage.md": "Endem 已通过互联网",
+        "downloads/index.html": "Endem 已通过互联网",
         "docs/specifications-reference.md": "固定现行词汇",
         "design-system/tool-project.md": "子命令名是已接受词汇",
     }.items():
@@ -5875,7 +5887,7 @@ def main():
         )
         for term in (
             "Noemion", "Endem", "Synem", "Dromen", "Iknem", "rhem", "semion", "skena", "telis",
-            "krin", "apor", "phain", "一个根", "模型", "不可信",
+            "krin", "apor", "模型", "原始表达", "实际观察", "没有可执行程序",
         ):
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
@@ -6016,17 +6028,17 @@ def main():
             " ".join("".join(section["text"]) for section in parser.sections)
         )
         for term in (
-            "人工智能系统可以规划步骤、调用工具并协调其他 Agent",
-            "它不是自然语言生成代码",
-            "形成版保存一项期望终态的来源",
+            "人工智能系统可以规划步骤和调用工具",
+            "研究的不是自然语言生成代码",
+            "形成版保存一项目标的来源",
             "最终发布版移除原文",
             "两种制品具有不同的精确身份",
             "它们也可以长期存储",
             "TASK_STATE_COMPLETED",
-            "GNU make 的 goal",
+            "make 的 goal",
             "NIST AI Agent Standards Initiative",
             "当前没有编译器、CLI、解析器、协议适配器或运行时",
-            "读音流畅度",
+            "读音能否区分",
             "资料检查只能证明已覆盖的文档关系一致",
         ):
             if term not in visible_text:
@@ -6034,12 +6046,12 @@ def main():
         if (
             parser.page_role != "section"
             or parser.class_counts["flow"] != 1
-            or parser.class_counts["table-wrap"] != 2
+            or parser.class_counts["table-wrap"] != 3
             or parser.class_counts["page-link"] != 3
             or parser.class_counts["status-item"] != 4
         ):
             errors.append(
-                "about/index.html: must keep one formation flow, two boundary tables, "
+                "about/index.html: must keep one formation flow, three boundary tables, "
                 "three routed links, and four current-status items"
             )
         for obsolete_heading in (
@@ -6143,42 +6155,6 @@ def main():
                     f"{obsolete_heading!r}"
                 )
 
-    background = ROOT / "about/background.html"
-    if background.exists():
-        parser = parse(background)
-        if parser.h2_texts != BACKGROUND_HEADINGS:
-            errors.append(
-                "about/background.html: developer reasoning sequence must be "
-                f"{BACKGROUND_HEADINGS}, got {parser.h2_texts}"
-            )
-        visible_text = normalize_visible_text(
-            " ".join("".join(section["text"]) for section in parser.sections)
-        )
-        for term in (
-            "TASK_STATE_COMPLETED", "MCP", "OpenTelemetry",
-            "NIST AI Agent Standards Initiative", "GNU make", "不能证明",
-            "具名权威", "读音", "rhem", "semion", "skena", "telis", "krin", "apor",
-        ):
-            if term not in visible_text:
-                errors.append(f"about/background.html: missing adjacent-layer boundary {term}")
-        for term in (
-            "发布 Profile、字段映射和正反向量尚未定义",
-            "含来源形成制品与未来裁剪发布制品具有不同精确身份",
-            "独立对象的价值不在于比普通文本、提示词文件或 AI Skill 保存得更久",
-            "协议能力、调用成功和任务终态不能证明业务授权、目标满足或最终接受",
-        ):
-            if term not in visible_text:
-                errors.append(f"about/background.html: missing goal-object boundary {term}")
-        for obsolete_heading in (
-            "为什么需要 Endem", "与相邻形式的区别", "信任边界", "当前边界",
-            "为什么需要一个持久目标对象", "从 GNU 工具链借鉴什么", "责任怎样分配",
-        ):
-            if obsolete_heading in parser.h2_texts:
-                errors.append(
-                    "about/background.html: must not restore inventory-style heading "
-                    f"{obsolete_heading!r}"
-                )
-
     foundations = ROOT / "about/intellectual-foundations.html"
     if foundations.exists():
         parser = parse(foundations)
@@ -6188,7 +6164,7 @@ def main():
             parser.page_role != "content"
             or parser.class_counts["breadcrumbs"] != 1
             or breadcrumb_routes != ["index.html", "about/index.html"]
-            or not all(label in breadcrumb for label in ("项目", "项目背景", "思想与方法基础"))
+            or not all(label in breadcrumb for label in ("项目", "项目与边界", "思想与方法基础"))
         ):
             errors.append("about/intellectual-foundations.html: invalid project / about / current breadcrumbs")
         if parser.h2_texts != INTELLECTUAL_FOUNDATIONS_HEADINGS:
@@ -7109,7 +7085,7 @@ def main():
             ]
             module_cases = [
                 ["index.html", "project"],
-                ["about/background.html", "project"],
+                ["about/index.html", "project"],
                 ["about/intellectual-foundations.html", "project"],
                 ["architecture/endem-lifecycle.html", "architecture"],
                 ["architecture/decisions.html", "architecture"],
@@ -7122,7 +7098,7 @@ def main():
                 ["downloads/index.html", "resources"],
                 ["faq/index.html", "resources"],
                 ["development/testing.html", "development"],
-                ["news/index.html", "development"],
+                ["development/current-stage.html", "development"],
                 ["endem/index.html", "endem"],
                 ["endem/docs/safety.html", "endem"],
             ]

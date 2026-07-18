@@ -6,7 +6,7 @@ footer_text: "Noemion · 开发指南"
 permalink: "/docs/development-guide.html"
 manual_id: "docs"
 manual_group: "guides"
-manual_order: 5
+manual_order: 4
 nav_title: "开发指南"
 page_heading: "Noemion 开发指南"
 page_lead: "把一项修改写成可被反例检验的主张，再依次固定权威依据、失败责任、验证材料和声明上限。"

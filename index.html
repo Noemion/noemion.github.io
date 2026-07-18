@@ -57,28 +57,28 @@ permalink: "/index.html"
   <section class="portal-paths portal-reveal">
     <div class="portal-section-heading">
       <p class="portal-section-index">02 · 六项职责</p>
-      <h2 class="portal-chapter-title"><span>六项职责<br>保持语义边界</span></h2>
-      <p>来源表达、已确认意义投影、可能事态、目标方向、满足判据和待确认意义彼此分开；现行短词只是设计阶段字段，不替代职责定义。</p>
+      <h2 class="portal-chapter-title"><span>六项职责<br>让目标保持原意</span></h2>
+      <p>系统先保存人实际说过的话，再把确认后的意思、期望状态、目标方向、验收方法和未解决问题分开。这样每一步都能单独检查。</p>
     </div>
     <div class="portal-feature-list">
       <a class="portal-feature-row" href="specifications/endem.html">
         <span class="feature-visual feature-visual-expression" aria-hidden="true"><i>RHEM</i><i>SEMION</i><b>SIGN → SENSE</b></span>
-        <span class="feature-copy"><small>来源与意义</small><strong>来源表达与已确认意义投影必须分开</strong><span>来源保留的形成版用 <code>rhem</code> 保存实际记号，<code>semion</code> 只保存由确定性规则或范围有限具名权威确认的符号、指称、关系和作用域。最终发布版使用独立 Profile 移除原文；意义确认仍不授予工具或运行权限。</span></span>
+        <span class="feature-copy"><small>原话与解释</small><strong>先保存人说了什么，再记录系统采用了什么解释</strong><span>形成版用 <code>rhem</code> 保存原始表达。只有经过明确规则或有责任的决定者确认后，解释才能进入 <code>semion</code>。确认意思不等于允许系统调用工具。</span></span>
         <span class="portal-arrow" aria-hidden="true"><i>→</i></span>
       </a>
       <a class="portal-feature-row" href="specifications/endem.html#skena">
         <span class="feature-visual feature-visual-strict" aria-hidden="true"><span><i>SKENA</i><b>RELATION</b></span><span><i>TELIS</i><b>KINE · MENE</b></span></span>
-        <span class="feature-copy"><small>事态与方向</small><strong>可能事态与目标方向必须分开</strong><span>现行字段 <code>skena</code> 描述中性事态，<code>telis</code> 只区分达到成立和持续成立；禁止事项由事态中的显式否定表达。</span></span>
+        <span class="feature-copy"><small>状态与方向</small><strong>把“发生什么”与“希望它怎样变化”分开</strong><span><code>skena</code> 描述可以检查的状态，<code>telis</code> 说明要让它达到成立，还是持续保持成立。禁止事项必须明确写出，不能藏在模糊语气里。</span></span>
         <span class="portal-arrow" aria-hidden="true"><i>→</i></span>
       </a>
       <a class="portal-feature-row" href="specifications/endem.html#krin">
         <span class="feature-visual feature-visual-object" aria-hidden="true"><i>SKENA</i><b>↔</b><i>PHAIN</i><span>MET · AGNO · FAULT</span></span>
-        <span class="feature-copy"><small>满足判断</small><strong>满足判据先固定比较方法</strong><span>现行字段 <code>krin</code> 规定 phain、必需 Iknem、观察不足处理和决定权威；模型不能让命题自证。</span></span>
+        <span class="feature-copy"><small>验收方法</small><strong>先规定怎样验收，再判断目标是否完成</strong><span><code>krin</code> 说明要观察什么、需要哪些证据、信息不足时怎样处理，以及谁有权作出结论。模型不能同时执行任务并自行宣布验收通过。</span></span>
         <span class="portal-arrow" aria-hidden="true"><i>→</i></span>
       </a>
       <a class="portal-feature-row" href="specifications/endem.html#apor">
         <span class="feature-visual feature-visual-lifecycle" aria-hidden="true"><i>APOR</i><i>MENE</i><i>ASK</i><i>RESOLVE</i></span>
-        <span class="feature-copy"><small>待确认意义</small><strong>待确认意义必须显式保留</strong><span>现行字段 <code>apor</code> 记录候选解释、冲突和解决权限；没有授权时，系统宁可停下，也不制造错误确定性。</span></span>
+        <span class="feature-copy"><small>未解决问题</small><strong>有歧义就明确留下，并让系统停下来询问</strong><span><code>apor</code> 记录还没有确认的解释、相互冲突的理解和可以回答问题的人。没有足够信息时，系统停止，而不是选择概率最高的猜测。</span></span>
         <span class="portal-arrow" aria-hidden="true"><i>→</i></span>
       </a>
     </div>
@@ -87,34 +87,34 @@ permalink: "/index.html"
   <section class="portal-focus portal-reveal">
     <div class="portal-section-heading">
       <p class="portal-section-index">03 · 四类制品职责</p>
-      <h2 class="portal-chapter-title"><span>只保留有独立生命周期的名词</span></h2>
-      <p>权限、权威、生命周期或保密级别没有不同，就不应被拆成新的正式制品。</p>
+      <h2 class="portal-chapter-title"><span>四类对象各自回答一个问题</span></h2>
+      <p>只有当内容、使用者、生命周期或权限确实不同，信息才值得成为单独对象；否则应当留在原有结构中。</p>
     </div>
     <div class="portal-focus-grid">
-      <a class="portal-focus-card focus-card-endem" href="specifications/endem.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>ENDEM</b></span><span class="focus-card-copy"><small>最小制品</small><strong>Endem</strong><span>一个根 skena 与六个语义面。</span></span></a>
-      <a class="portal-focus-card focus-card-synem" href="specifications/synem.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>SYNEM</b></span><span class="focus-card-copy"><small>组合闭包</small><strong>Synem</strong><span>已解析的 Endem、固定依赖与发布范围。</span></span></a>
-      <a class="portal-focus-card focus-card-dromen" href="specifications/dromen.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>DROMEN</b></span><span class="focus-card-copy"><small>会话契约</small><strong>Dromen</strong><span>为一次 Drase 会话封存只读执行边界。</span></span></a>
-      <a class="portal-focus-card focus-card-iknem" href="specifications/iknem.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>IKNEM</b></span><span class="focus-card-copy"><small>范围证据</small><strong>Iknem</strong><span>记录具名主体、观察、范围与决定依据。</span></span></a>
+      <a class="portal-focus-card focus-card-endem" href="specifications/endem.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>ENDEM</b></span><span class="focus-card-copy"><small>一个目标</small><strong>Endem</strong><span>保存目标的来源、确认后的意思、期望结果与验收条件。</span></span></a>
+      <a class="portal-focus-card focus-card-synem" href="specifications/synem.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>SYNEM</b></span><span class="focus-card-copy"><small>一组目标</small><strong>Synem</strong><span>把多个相互依赖的目标固定成一个完整集合。</span></span></a>
+      <a class="portal-focus-card focus-card-dromen" href="specifications/dromen.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>DROMEN</b></span><span class="focus-card-copy"><small>一次运行</small><strong>Dromen</strong><span>限定这次运行可以使用的目标、环境、能力与预算。</span></span></a>
+      <a class="portal-focus-card focus-card-iknem" href="specifications/iknem.html"><span class="focus-art" aria-hidden="true"><i></i><i></i><i></i><b>IKNEM</b></span><span class="focus-card-copy"><small>一次观察</small><strong>Iknem</strong><span>记录实际观察、使用的方法、覆盖范围和已知限制。</span></span></a>
     </div>
   </section>
 
   <section class="portal-lifecycle portal-reveal">
     <div class="portal-section-heading">
       <p class="portal-section-index">04 · 单一命令入口</p>
-      <h2 class="portal-chapter-title"><span>一个入口<br>不等于一个信任域</span></h2>
-      <p>计划中的公开命令入口只有 <code>endem</code>。命令入口统一阅读和操作路径，独立实现与进程边界仍分别承担形成、检查和受限运行的信任责任；当前还没有可执行程序。</p>
+      <h2 class="portal-chapter-title"><span>一个命令入口<br>三项责任必须分开</span></h2>
+      <p>计划中的 endem 命令让开发者从同一个入口完成目标形成、独立检查和受限运行准备。三项工作仍由不同的代码与权限边界负责；当前还没有可执行程序。</p>
     </div>
     <div class="portal-lifecycle-list">
-      <a href="endem/"><span class="lifecycle-number">01</span><span class="lifecycle-copy"><strong><code>ktise · elenk · pleko</code></strong><span>确定性形成、验证和组合；只有规范写入器能够产生规范字节。</span></span><span class="lifecycle-state">确定性形成</span></a>
-      <a href="components/theor.html"><span class="lifecycle-number">02</span><span class="lifecycle-copy"><strong><code>theor</code></strong><span>单独构建的只读解析器，不复用制品形成侧读取器，也不产生 Ktisor 内部检查通过引用。</span></span><span class="lifecycle-state">只读检查</span></a>
-      <a href="components/drasor.html"><span class="lifecycle-number">03</span><span class="lifecycle-copy"><strong><code>drase</code></strong><span>隔离进程重新验证实际字节；控制平面持有能力句柄，模型始终位于不可信域。</span></span><span class="lifecycle-state">受限运行</span></a>
+      <a href="endem/"><span class="lifecycle-number">01</span><span class="lifecycle-copy"><strong>形成、检查与组合</strong><span>只有确定性写入路径能够生成正式制品；信息不足或依赖不完整时停止。</span></span><span class="lifecycle-state"><code>ktise · elenk · pleko</code></span></a>
+      <a href="components/theor.html"><span class="lifecycle-number">02</span><span class="lifecycle-copy"><strong>用另一套代码独立读取</strong><span>检查者直接读取实际文件，不复用写入侧解析代码，也不修改目标。</span></span><span class="lifecycle-state"><code>theor</code></span></a>
+      <a href="components/drasor.html"><span class="lifecycle-number">03</span><span class="lifecycle-copy"><strong>只授予本次运行需要的能力</strong><span>运行前重新检查目标、环境和授权；模型不能直接持有文件、网络或凭据权限。</span></span><span class="lifecycle-state"><code>drase</code></span></a>
     </div>
   </section>
 
   <section class="portal-start portal-reveal">
     <p class="portal-section-index">05 · 当前阶段</p>
     <h2 class="portal-chapter-title"><span>当前先完成规范和安全边界</span></h2>
-    <p>当前已形成 Endem 语义、实验格式、威胁模型、错误边界和未来验证条件；<code>ktise</code>、<code>elenk</code>、<code>theor</code> 以及 Ktisor、Theor、Drasor 都只是设计职责，没有可执行组件或安装包。</p>
+    <p>项目已经形成目标语义、实验格式、威胁模型、失败边界和后续验证条件。所有命令名和组件名目前只指设计职责；没有可执行程序或安装包。</p>
     <div class="portal-actions portal-actions-center">
       <a class="portal-button portal-button-primary" href="development/implementation-roadmap.html"><span>查看实施路线</span><span aria-hidden="true">↗</span></a>
       <a class="portal-button portal-button-secondary" href="endem/"><span>查看应用设计</span><span aria-hidden="true">→</span></a>
@@ -123,20 +123,20 @@ permalink: "/index.html"
 
   <section class="portal-evidence portal-reveal">
     <p class="portal-section-index">06 · 工程纪律</p>
-    <h2 class="portal-chapter-title"><span>从编译器与工具链<br>借鉴工程纪律</span></h2>
-    <blockquote><p>“只有存在独立消费者、不同权威或不同失败责任，才值得成为单独应用或正式制品。”</p></blockquote>
+    <h2 class="portal-chapter-title"><span>借鉴成熟工具<br>让结果可以复核</span></h2>
+    <blockquote><p>“只有使用者、权限或失败责任确实不同，信息才值得成为单独的应用或制品。”</p></blockquote>
     <a href="architecture/adr-0010-native-lexicon.html">阅读原生词汇与事态分层决定 <span aria-hidden="true">→</span></a>
   </section>
 
   <section class="portal-next portal-reveal">
     <div class="portal-section-heading"><p class="portal-section-index">07 · 继续阅读</p><h2 class="portal-chapter-title"><span>继续阅读</span></h2></div>
     <div class="portal-next-grid">
-      <a href="endem/"><small>01</small><strong>Endem 应用</strong><span>命令与信任边界</span></a>
-      <a href="specifications/"><small>02</small><strong>规范</strong><span>对象、证据与授权边界</span></a>
-      <a href="architecture/"><small>03</small><strong>架构</strong><span>制品如何形成、组合与运行</span></a>
-      <a href="components/"><small>04</small><strong>组件</strong><span>Ktisor、Theor 与 Drasor</span></a>
-      <a href="development/"><small>05</small><strong>实施</strong><span>验证条件与停止条件</span></a>
-      <a href="docs/"><small>06</small><strong>指南与参考</strong><span>按任务进入项目内容</span></a>
+      <a href="endem/"><small>01</small><strong>Endem 应用</strong><span>计划中的命令怎样形成、检查和运行目标</span></a>
+      <a href="specifications/"><small>02</small><strong>规范</strong><span>目标、会话、证据和授权分别遵循什么规则</span></a>
+      <a href="architecture/"><small>03</small><strong>架构</strong><span>一项目标怎样经过形成、运行和验收</span></a>
+      <a href="components/"><small>04</small><strong>组件</strong><span>为什么写入、独立检查和运行不能合并</span></a>
+      <a href="development/current-stage.html"><small>05</small><strong>项目进展</strong><span>已经完成什么，当前研究什么，还缺什么证据</span></a>
+      <a href="docs/"><small>06</small><strong>指南与参考</strong><span>按照你要解决的问题选择阅读入口</span></a>
     </div>
   </section>
 </main>

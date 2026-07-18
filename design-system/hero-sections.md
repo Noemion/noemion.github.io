@@ -48,6 +48,6 @@ Hero 不等于营销横幅。它不要求背景图片、满屏高度、居中文
 
 ## 2026-07-17 全站检查
 
-当前 `sitemap.md` 登记 126 个正式页面。按路由职责统计为 1 个门户页、10 个目录页、1 个 Endem 应用页、108 个专题或规范页，以及 6 个 Endem 手册页面；其中指南目录和 7 个指南专题复用手册布局。按最终 Hero 实现统计为 1 个 `.portal-introduction`、9 个 `.section-introduction`、1 个 `.application-introduction`、101 个 `.content-introduction` 和 14 个 `.manual-introduction`，总计 126 个且没有缺失或重复。因此不需要把所有页面改造成首页式大封面。
+当前 `sitemap.md` 登记 123 个正式页面。按路由职责统计为 1 个门户页、9 个目录页、1 个 Endem 应用页、106 个专题或规范页，以及 6 个 Endem 手册页面；其中指南目录和 6 个指南专题复用手册布局。按最终 Hero 实现统计为 1 个 `.portal-introduction`、8 个 `.section-introduction`、1 个 `.application-introduction`、100 个 `.content-introduction` 和 13 个 `.manual-introduction`，总计 123 个且没有缺失或重复。因此不需要把所有页面改造成首页式大封面。
 
-检查发现的结构性偏差只有一项：`layout: manual` 原先把顶部翻页入口放在手册 Hero 之前。该顺序已经调整为“面包屑 → Hero → 顶部分页 → 正文”，让指南和手册先建立当前页面身份，再提供连续阅读操作。后续由全站质量检查持续验证全部 126 条路由。
+检查发现的结构性偏差只有一项：`layout: manual` 原先把顶部翻页入口放在手册 Hero 之前。该顺序已经调整为“面包屑 → Hero → 顶部分页 → 正文”，让指南和手册先建立当前页面身份，再提供连续阅读操作。后续由全站质量检查持续验证全部 123 条路由。

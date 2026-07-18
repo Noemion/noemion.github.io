@@ -1,33 +1,66 @@
 ---
 layout: default
-title: "下载与资源 · Noemion"
+title: "资源与获取 · Noemion"
 page_role: "section"
-footer_text: "Noemion · 下载与资源"
+footer_text: "Noemion · 资源与获取"
 permalink: "/downloads/index.html"
 ---
 <main id="main-content" tabindex="-1">
-  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>下载</span></nav>
-  <header class="section-introduction"><h1>下载与资源</h1><p>当前没有可安装的 endem；这里说明已经公开什么，以及正式发行前还缺什么。</p><div class="badges"><span class="badge">尚未发布</span><span class="badge">完整性</span><span class="badge">供应链</span></div></header>
-  <section><h2>为什么暂不提供下载</h2><p class="lead">当前没有 Ktisor、Theor、Drasor、<code>endem</code> CLI、安装包或二进制。已经公开的是架构、规范和验证方案；把这些资料包装成下载会错误暗示组件已经实现。</p></section>
-  <section data-resource-state="unreleased"><h2>正式版本</h2><p>暂未发布；没有有效的安装命令、包名或版本号。</p></section>
-  <section><h2>资源状态</h2><ul class="resource-list">
-    <li><strong>网站与设计资料</strong><span class="resource-state">已公开</span><p>项目门户、ADR、架构、规范草案与验证路线；除文件另有说明外，本仓库源码与文档采用 Apache License 2.0。</p></li>
-    <li><strong>核心、格式与规范向量</strong><span class="resource-state">实验草案已公开</span><p>已有 END-CORE、END-FMT、Endem 语义案例以及 END-P0、END-P1 规范字节。精确集合以<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读登记</a>、<a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors">向量源</a>和版本化验证结果为准；稳定 ABI 仍待形成。</p></li>
-    <li><strong>历史语言实验</strong><span class="resource-state">证据已公开</span><p>C/Rust 结构读取原型、机器可读结果和 Linux 模糊测试记录可供复核；它们不是可安装程序或项目组件解析器。</p></li>
-    <li><strong>Endem Ktisor 与独立 Theor</strong><span class="resource-state">尚未开发</span><p>当前只有职责、信任边界、候选语言和未来验证条件；没有实现仓库、生产源码或可执行程序。</p></li>
-    <li><strong>发行制品</strong><span class="resource-state">等待验证</span><p>需要双环境复现、摘要、外部签名、SBOM、供应链声明与撤回机制。</p></li>
-  </ul></section>
-  <section><h2>“公开”不等于同一种权利</h2><p class="lead">当前公开仓库不包含模型参数、训练数据或托管模型服务。Apache-2.0 只覆盖实际置于该许可证下的仓库材料，不自动覆盖未来模型权重、数据、第三方依赖、外部服务或商标。</p><div class="table-wrap"><table><thead><tr><th>资源事实</th><th>准确说法</th><th>不能自动声称</th></tr></thead><tbody>
-    <tr><td>只能远端调用</td><td>托管 API 可用，并列出服务条款</td><td>用户拥有软件、参数或修改权</td></tr>
-    <tr><td>参数可以取得</td><td>模型参数可下载，并列出精确许可与限制</td><td>Open Source AI、自由软件或可复现模型</td></tr>
-    <tr><td>源文件可以阅读</td><td>源码可见；再核对许可证授予的动作</td><td>允许任何用途、修改和再分发</td></tr>
-    <tr><td>代码、参数与资料较完整</td><td>逐项列出架构、参数、推理/训练代码、数据说明、数据和文档</td><td>用一个“开放模型”标签替代对象清单</td></tr>
-  </tbody></table></div><p>未来若引用 GNU 自由软件、OSI Open Source AI 或 Model Openness Framework，必须给出定义版本、覆盖对象、逐项证据和复核日期。详细边界见<a href="https://noemion.github.io/spec/model-openness-and-software-freedom-boundaries-proposal.html">非规范模型开放性与软件自由研究提案</a>。</p><p>“托管 API 可用”也只说明访问关系；谁实际执行、哪些数据外发、服务端是否隐藏变换、状态能否导出、停服后能否继续和切换后损失什么，必须另行说明。详见<a href="https://noemion.github.io/spec/hosted-ai-service-and-user-control-boundaries-proposal.html">非规范托管人工智能服务与用户控制研究提案</a>。</p></section>
-  <section><h2>发布顺序</h2><div class="table-wrap"><table><thead><tr><th>阶段</th><th>可获取内容</th><th>最低门槛</th></tr></thead><tbody>
-    <tr><td>设计</td><td>范围、ADR、候选规范、开放问题</td><td>状态清楚，不把计划写成能力</td></tr>
-    <tr><td>实验</td><td>规范快照、向量、原型源码</td><td>可重复构建、安全测试、逐对象许可证清单</td></tr>
-    <tr><td>候选</td><td>候选 CLI 与互操作材料</td><td>签名、SBOM、Ktisor/Theor 差分、模糊与复现报告</td></tr>
-    <tr><td>稳定</td><td>软件、规范、示例与迁移说明</td><td>版本、漏洞响应、撤回、长期归档与正式命名/商标审查</td></tr>
-  </tbody></table></div></section>
-  <p>未来真实资源出现后，<a href="../docs/installation-and-usage.html">获取与使用指南</a>将提供可核验的安装与验证步骤。</p>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>资源与获取</span></nav>
+  <header class="section-introduction"><h1>资源与获取</h1><p>当前没有 Noemion 软件可以下载。你现在可以阅读规范、研究与验证资料；正式发行后，这里才会提供经过完整性和供应链检查的安装资源。</p><div class="badges"><span class="badge">尚无软件发行</span><span class="badge">公开研究资料</span><span class="badge">未来发行需验证</span></div></header>
+
+  <section data-resource-state="unreleased">
+    <h2>现在可以获取什么</h2>
+    <p class="lead">当前公开的是项目设计和验证材料，不是可运行产品。不要执行网上出现的同名 <code>endem</code> 命令，也不要根据设计文档编写安装脚本。</p>
+    <ul class="resource-list">
+      <li><strong>网站、设计记录与研究资料</strong><span class="resource-state">已公开</span><p>用于理解项目目的、责任边界、当前策略和待定问题；除文件另有说明外，本仓库源码与文档采用 Apache License 2.0。</p></li>
+      <li><strong>核心规范、实验格式与验证向量</strong><span class="resource-state">草案已公开</span><p>用于检查条款、案例和预期结果之间的关系。精确集合以<a href="https://github.com/Noemion/noemion.github.io/blob/main/spec/registry.json">机器可读登记</a>、<a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors">向量源</a>和版本化验证结果为准；它们不是稳定 ABI。</p></li>
+      <li><strong>历史语言实验</strong><span class="resource-state">研究证据</span><p>C/Rust 结构读取原型和有限测试记录只用于比较未来实现约束，不是 Noemion 组件或可安装解析器。</p></li>
+      <li><strong>Ktisor、Theor、Drasor 与 <code>endem</code></strong><span class="resource-state">尚未开发</span><p>当前只有职责、信任边界和未来验证条件，没有生产源码、可执行程序、包名、版本号或安装命令。</p></li>
+    </ul>
+  </section>
+
+  <section class="content-wide">
+    <h2>未来下载出现时怎样判断它可以使用</h2>
+    <p class="lead">一个文件出现在下载页上并不等于它适合安装。正式版本必须让开发者逐项核对对象、来源、许可、完整性和支持范围。</p>
+    <div class="table-wrap"><table><thead><tr><th>必须提供的信息</th><th>开发者应能完成的检查</th><th>单独出现时不能证明</th></tr></thead><tbody>
+      <tr><td>版本、平台、文件大小、摘要和签名</td><td>确认下载对象与发布记录完全一致，再开始解析或安装</td><td>签名有效不能证明软件安全、适用或获得运行授权</td></tr>
+      <tr><td>SBOM、逐对象许可证和来源锁定</td><td>查明代码、依赖、模型相关对象和资料分别来自哪里，允许怎样使用</td><td>仓库使用 Apache-2.0 不能自动覆盖第三方依赖、模型权重、数据或商标</td></tr>
+      <tr><td>固定构建环境和可复现步骤</td><td>在两个独立环境重建并比较实际输出</td><td>相同字节不能证明设计正确，不同字节也不能自动选择可信一方</td></tr>
+      <tr><td>安全、模糊、资源限制和独立读取结果</td><td>区分结构有效、两条读取路径一致、策略允许和业务接受</td><td>测试通过不能扩大证据覆盖，也不能替代真实部署观察</td></tr>
+      <tr><td>支持范围、撤回、漏洞响应、密钥轮换和归档</td><td>判断升级、停用和长期验证路径是否完整</td><td>“最新版”不能同时代表稳定版、开发快照、协议版本和依赖状态</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>“公开”需要说明公开了什么</h2>
+    <p class="lead">软件自由、模型材料可得、服务接口可用和用户控制实际执行是不同问题。页面必须逐项说明，不能用“开放”“本地”或“可导出”概括全部权利。</p>
+    <div class="table-wrap"><table><thead><tr><th>资源事实</th><th>准确说法</th><th>不能自动声称</th></tr></thead><tbody>
+      <tr><td>只能远端调用</td><td>托管 API 可用，并列出服务条款、数据路径和退出条件</td><td>用户拥有软件、模型参数或那一次服务执行的控制权</td></tr>
+      <tr><td>模型参数可以取得</td><td>参数可下载，并列出精确许可、配套代码与数据说明</td><td>它已经满足 Open Source AI、自由软件或可复现模型的全部条件</td></tr>
+      <tr><td>源文件可以阅读</td><td>源码可见；还要核对许可证允许运行、修改和再分发中的哪些动作</td><td>允许任何用途，或服务端实际运行的就是这份源码</td></tr>
+      <tr><td>代码、参数与资料较完整</td><td>逐项列出架构、参数、推理代码、训练代码、数据说明、数据和文档</td><td>一个“开放模型”标签可以替代对象清单和逐项许可</td></tr>
+    </tbody></table></div>
+    <p>更完整的对象边界见<a href="../spec/model-openness-and-software-freedom-boundaries-proposal.html">模型开放性与软件自由研究</a>，执行、数据和迁移边界见<a href="../spec/hosted-ai-service-and-user-control-boundaries-proposal.html">托管人工智能服务与用户控制研究</a>。两份材料都是非规范研究，不代表项目已经拥有模型或服务。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>从设计资料到正式发行</h2>
+    <div class="table-wrap"><table><thead><tr><th>状态</th><th>读者可以取得</th><th>进入下一状态前必须补齐</th></tr></thead><tbody>
+      <tr><td>当前设计</td><td>项目范围、ADR、规范草案、开放问题和验证方案</td><td>继续明确责任、反例、失败条件和声明上限</td></tr>
+      <tr><td>未来实验</td><td>规范快照、向量和获准的原型源码</td><td>可重复构建、安全测试、许可证清单和明确的实验限制</td></tr>
+      <tr><td>未来候选版</td><td>候选软件与互操作材料</td><td>摘要、签名、SBOM、独立读取、模糊测试和复现报告</td></tr>
+      <tr><td>未来稳定版</td><td>软件、规范、示例与迁移说明</td><td>漏洞响应、撤回、长期归档，以及正式名称、读音和权利复核</td></tr>
+    </tbody></table></div>
+    <p><strong>名称发布条件：</strong>Endem 目前只是设计阶段名称。它尚未完成商标、近音、首次朗读和口头区分审查。任何审查失败都应在接口和 ABI 固定前通过 ADR 一次性改名，不保留旧命令、格式别名或兼容发音。具体方法见<a href="../docs/terminology-and-pronunciation.html">术语与读音验证指南</a>。</p>
+  </section>
+
+  <section>
+    <h2>现在从哪里开始</h2>
+    <div class="page-links">
+      <a class="page-link" href="../docs/getting-started.html"><strong>先理解项目解决什么问题</strong><span>用一次依赖升级分开目标、权限、外部任务、证据和最终决定。</span></a>
+      <a class="page-link" href="../endem/docs/index.html"><strong>查看计划中的 Endem 工作流程</strong><span>按形成、组合、独立检查和受限运行的顺序阅读手册；其中没有虚构的安装命令。</span></a>
+      <a class="page-link" href="../development/current-stage.html"><strong>查看项目当前进展</strong><span>了解已经形成的资料、正在研究的边界和进入实现前仍需补齐的证据。</span></a>
+    </div>
+  </section>
 </main>
