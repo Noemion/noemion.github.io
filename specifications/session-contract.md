@@ -4,7 +4,7 @@ title: contract 会话契约 · Noemion
 page_role: content
 footer_text: Noemion · contract 会话契约
 permalink: "/specifications/session-contract.html"
-summary: 说明一个精确目标怎样在不携带永久权限的前提下，进入只有本次尝试有效的受控会话。
+summary: 说明一个已经确认且身份固定的目标怎样在不携带永久权限的前提下，进入只对本次尝试有效的受控会话。
 breadcrumbs:
 - label: 项目
   url: "../index.html"

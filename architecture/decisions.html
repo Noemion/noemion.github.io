@@ -4,16 +4,16 @@ title: "架构决策 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 架构决策"
 permalink: "/architecture/decisions.html"
-summary: "帮助开发者先定位被改变的责任，再找到对应 ADR、规范和 Profile；编号只用于查证，不是推荐阅读顺序。"
+summary: "发生设计问题时，帮助开发者先找到被改变的对象或操作，再进入对应决定和规范；编号只用于查证。"
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><span>架构决策</span></nav>
-  <header class="content-introduction"><h1>架构决策</h1><p>遇到设计问题时，先定位被改变的责任，再查对应 ADR、CORE 与 Profile。编号是证据入口，不是阅读顺序。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">已有成果</span><span class="badge">正在研究</span><span class="badge">尚无组件</span></div></header>
+  <header class="content-introduction"><h1>架构决策</h1><p>发生设计问题时，先说明被改变的是哪个对象、操作或决定，再进入对应的设计决定和规范。编号只用于查证。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">已有成果</span><span class="badge">正在研究</span><span class="badge">尚无组件</span></div></header>
 
   <div class="summary-rail-layout summary-rail-layout--article" data-summary-rail-layout data-summary-layout="stacked">
     <aside class="summary-rail summary-rail--article" aria-label="决策阅读概览">
       <div class="summary-rail-heading"><span class="summary-rail-kicker">ARCHITECTURE / DECISIONS</span><strong class="summary-rail-title">决策阅读概览</strong></div>
-      <dl class="summary-rail-facts"><div><dt>先问什么</dt><dd>这项变更由谁确认、观察和决定</dd></div><div><dt>到哪里核对</dt><dd>现行 ADR 与对应 CORE、Profile</dd></div><div><dt>何时停止</dt><dd>物理 Profile 或权威输入尚未定义时</dd></div></dl>
+      <dl class="summary-rail-facts"><div><dt>先问什么</dt><dd>哪个对象、操作或决定发生了变化</dd></div><div><dt>到哪里核对</dt><dd>对应的设计决定与版本化规范</dd></div><div><dt>何时停止</dt><dd>文件格式、决定者或真实输入尚未确定时</dd></div></dl>
       <nav class="summary-rail-links" aria-label="架构决策重点章节"><a href="#current-decisions">从一个变更定位责任</a><a href="#adoption-boundaries">外部资料怎样进入设计</a><a href="#change-rules">决定变化时同步什么</a></nav>
     </aside>
     <div class="summary-rail-main">

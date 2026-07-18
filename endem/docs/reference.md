@@ -11,7 +11,7 @@ manual_index_entry: true
 nav_title: "参考索引"
 page_heading: "参考索引"
 page_lead: "从开发者要完成的工作出发，查找计划中的 endem 动作、它们读取和返回什么、失败由谁处理，以及哪些职责必须保持独立。"
-summary: "按开发任务查找计划中的 Endem 动作、对象、结果、失败边界和权威来源；当前没有可执行命令。"
+summary: "按开发任务查找计划中的 Endem 动作及其输入、输出、停止条件和规范依据；当前没有可执行命令。"
 badges: ["开发者索引", "CLI 待定"]
 ---
 

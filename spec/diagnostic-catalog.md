@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "Diagnostic Catalog · Noemion"
+title: "诊断码目录 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/diagnostic-catalog.html"
 summary: "列出稳定机器诊断码及其适用层次，让程序依据代码而不是本地化消息识别失败。"
 document_status: "规范目录草案"
 ---
-# Diagnostic Catalog
+# 诊断码目录
 
 - 登记 ID：`DIA-CAT`
 - 版本：`0.1.0-draft`
@@ -125,7 +125,7 @@ document_status: "规范目录草案"
 | `session.budget.invalid` | `SESSION-BUD-001` | session | 预算无界、无单位、子任务逃逸或取消不传播 |
 | `session.activation.outside_closure` | `SESSION-ACT-001` | session | 激活发现新成员、授予能力或改写结果域 |
 | `session.observation.incomplete` | `SESSION-OBS-001` | evidence | satisfaction_criteria 观察、证据、披露或决定责任缺失 |
-| `session.contract.mutated` | `SESSION-IMM-001` | session | 封存后被修改或漂移后原地修补 |
+| `session.contract.mutated` | `SESSION-IMM-001` | session | 建立后被修改，或关键条件变化后仍原地修补 |
 | `session.lifecycle.reused` | `SESSION-LIF-001` | session | 契约被序列化、转移、恢复或跨会话复用 |
 
 ## 8. evidence 错误码

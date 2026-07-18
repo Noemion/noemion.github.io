@@ -1,20 +1,20 @@
 ---
 layout: spec
-title: "Authority and Authorization Decision Threat Model · Noemion"
+title: "决定者与授权威胁模型 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/authority-threat-model.html"
-summary: "分析“已登录”“点过允许”或外部成功怎样掩盖越权，并列出未来授权系统必须关闭的风险。"
+summary: "分析“已登录”“点过允许”或外部成功为什么仍可能越权，并列出未来授权系统必须拒绝的请求和失效状态。"
 document_status: "威胁模型"
 ---
-# Authority and Authorization Decision Threat Model
+# 决定者与授权威胁模型
 
 - 文档 ID：`AUT-THREAT`
 - 版本：`0.1.0-draft`
 - 日期：2026-07-13
 - 状态：权威、授权决定、委托、同意和能力边界威胁草案
 
-自然语言投影、Agent 委托和工具权限都可能在“已经登录”“用户点过允许”或“外部协议返回成功”的表象下越权。本模型只定义未来实现必须关闭的威胁，不表示权威目录、政策求值器、同意界面、能力代理或决定服务已经实现。
+攻击者可能用“已经登录”“用户点过允许”或“外部协议返回成功”冒充当前解释或操作已经获准。下面逐项说明未来授权系统必须拒绝的请求和必须失效的旧权限。不表示决定者目录、政策求值器、同意界面、能力代理或决定服务已经实现。
 
 ### THR-AUT-001 — 可变政策与语境漂移改写旧授权
 

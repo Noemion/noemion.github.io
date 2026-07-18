@@ -11,7 +11,7 @@ breadcrumbs:
 - label: 系统组件
   url: index.html
 page_heading: 受限运行边界
-page_lead: runner 未来负责把一个已检查的目标放进一次性会话，限制模型能请求的能力，并把实际观察与最终决定分开记录。
+page_lead: 未来负责受限运行的职责称为 runner。它把一个已检查的目标放进一次性会话，限制模型能请求的能力，并把实际观察与最终决定分开记录。
 badges:
 - 受限运行边界
 - 一次性会话
@@ -29,7 +29,7 @@ next_label: Endem 生命周期
 
 1. 精确 Endem / closure 与外部陈述
 2. 政策、环境、能力与预算求交
-3. 封存一次 contract
+3. 建立一次只读 contract
 4. 模型提出补丁或类型化能力请求
 5. 控制面授权并调用适配器
 6. 实际观察形成 evidence
@@ -104,7 +104,7 @@ GNU Make 的 [`-q` 查询](https://www.gnu.org/software/make/manual/html_node/In
 
 ### 隔离必须证明什么
 
-容器、超时或 seccomp 只是机制名称。未来实现要用拒绝测试证明文件与网络默认不可见、秘密和实时句柄不进入提示或 contract、资源能够回收、重复提交与结果未知能够关闭失败。GNU [`timeout`](https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html)、Make [job slots](https://www.gnu.org/software/make/manual/html_node/Job-Slots.html) 与 Guix [`shell --container`](https://guix.gnu.org/manual/en/guix.html#Invoking-guix-shell)分别提供终止、共享并发预算和先隔离后开放资源的工程纪律；它们都不能单独证明 runner 安全。
+容器、超时或 seccomp 只是机制名称。未来实现要用拒绝测试证明文件与网络默认不可见、秘密和实时句柄不进入提示或 contract、资源能够回收，并在重复提交或结果未知时停止处理。GNU [`timeout`](https://www.gnu.org/software/coreutils/manual/html_node/timeout-invocation.html)、Make [job slots](https://www.gnu.org/software/make/manual/html_node/Job-Slots.html) 与 Guix [`shell --container`](https://guix.gnu.org/manual/en/guix.html#Invoking-guix-shell)分别提供终止、共享并发预算和先隔离后开放资源的工程纪律；它们都不能单独证明 runner 安全。
 
 ### 观察字段不能自行成为证据
 

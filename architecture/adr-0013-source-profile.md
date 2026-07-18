@@ -4,10 +4,10 @@ title: ADR-0013 · 来源保留 END-P2 Profile
 page_role: content
 footer_text: Noemion · ADR-0013
 permalink: "/architecture/adr-0013-source-profile.html"
-summary: 说明 END-P2 怎样保存原始语言和已确认目标结构，以及为什么这种形成制品不能直接作为发布制品。
+summary: 说明含来源的实验格式怎样同时保存人的原始表达和已确认目标结构，以及为什么这种文件不能直接发布。
 decision_id: ADR-0013
 page_heading: ADR-0013 · 来源保留 · END-P2 Profile
-page_lead: END-P2 把原始自然语言、六个语义面和封闭引用写入同一形成制品，供评审与实验验证；它不可直接发布，也不能单独证明内容已经接受。
+page_lead: 含来源的实验格式把人的原始表达、已确认目标结构和完整引用写入同一份文件，供评审与实验验证；该格式标识为 END-P2，不可直接发布。
 badges:
 - 当前策略
 - END-P2 0.1.0-draft

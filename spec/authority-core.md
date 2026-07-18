@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "Authority and Authorization Decision Core Specification · Noemion"
+title: "决定者与授权核心规范 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/authority-core.html"
 summary: "规定自然语言意义确认、Agent 动作和最终决定在什么范围、政策和截止点下才能称为已授权。"
 document_status: "规范草案"
 ---
-# Authority and Authorization Decision Core Specification
+# 决定者与授权核心规范
 
 - 规范 ID：`AUT-CORE`
 - 版本：`0.1.0-draft`
@@ -18,7 +18,9 @@ document_status: "规范草案"
 
 ## 1. 范围
 
-本规范定义一项自然语言投影、未决项解决、能力授予或最终决定在什么条件下可以被称为“已获授权”。它统一约束 Endem 的 `meaning_projection` 与 `unresolved_meaning`、closure 的权限收窄、contract 的政策与能力闭包、evidence 的决定记录、签名主体适用性以及外部 Agent 协议的授权请求。
+一条自然语言解释、一次工具调用或一个最终结论，不能只因有人登录、签名或点击同意就称为已授权。本规范要求系统记录谁提出、谁行动、代表谁、针对哪个对象、允许什么、依据哪项政策以及何时失效。
+
+这些规则同时适用于 Endem 的 `meaning_projection` 与 `unresolved_meaning`、closure 的权限收窄、contract 的政策和能力、evidence 的决定记录、签名主体适用性以及外部 Agent 协议的授权请求。
 
 `AUT-CORE` 不是新的工程制品、身份系统、访问令牌、角色数据库、政策脚本或决定引擎。认证只能回答当前主体怎样被识别；签名只能绑定受保护陈述；授权决定只能在精确语境和范围内允许或拒绝特定事项。它们都不能自行证明一句话为真、目标已经满足、证据已经充分或制品最终应被接受。
 
@@ -43,7 +45,7 @@ document_status: "规范草案"
 
 ### AUT-PRN-001 — 主体认证、角色资格与决定权必须分开
 
-**要求：**授权过程 `MUST` 分别记录请求主体、实际行动者、被代表主体、认证方法与强度、声明角色、角色来源、角色在当前语境中的决定权限和核对依据。认证成功、持有签名密钥、组织成员资格、Agent Card、模型名称或服务账户身份 `MUST NOT` 自动产生决定权。主体身份不确定、角色不可验证或权限不适用时必须关闭失败或 `pending`。
+**要求：**授权过程 `MUST` 分别记录请求主体、实际行动者、被代表主体、认证方法与强度、声明角色、角色来源、角色在当前语境中的决定权限和核对依据。认证成功、持有签名密钥、组织成员资格、Agent Card、模型名称或服务账户身份 `MUST NOT` 自动产生决定权。主体身份不确定、角色不可验证或权限不适用时必须拒绝请求或标记为 `pending`。
 
 **失败：**任何已登录用户都能批准发布、签名者被当作语义权威、服务账户代表资源所有者却不保留实际行动者，或远端 Agent 自报技能后取得授权时，主体边界无效。
 

@@ -4,7 +4,7 @@ title: evidence 有范围证据规范
 page_role: content
 footer_text: Noemion · evidence
 permalink: "/specifications/evidence-entry.html"
-summary: 说明一项有范围证据必须记录谁在何时、用什么方法观察了哪个对象，以及最多能支持什么结论。
+summary: 说明一项证据必须记录谁在何时、用什么方法观察了哪个对象，以及这项记录最多能支持什么结论。
 breadcrumbs:
 - label: 项目
   url: "../index.html"

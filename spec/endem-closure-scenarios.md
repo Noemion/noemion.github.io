@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "closure Natural-Language Design Scenarios · Noemion"
+title: "closure 设计场景 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/endem-closure-scenarios.html"
-summary: "用报告发布、服务部署和传递依赖案例，检查成员、完整集合、权限和运行期激活是否保持分开。"
+summary: "用报告发布、服务部署和传递依赖案例，检查成员是否完整、权限是否扩大，以及运行时是否换入了未登记目标。"
 document_status: "非规范设计场景"
 ---
-# closure Natural-Language Design Scenarios
+# closure 设计场景
 
 - 文档 ID：`CLOSURE-SCEN`
 - 版本：`0.1.0-draft`

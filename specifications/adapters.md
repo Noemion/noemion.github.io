@@ -4,7 +4,7 @@ title: 外部协议适配规范
 page_role: content
 footer_text: Noemion · External Protocol Adapters
 permalink: "/specifications/adapters.html"
-summary: 说明 Noemion 调用 MCP、A2A、HTTP 或模型服务时，哪些外部事实可以带入，哪些说法必须继续核对。
+summary: 说明 Noemion 调用 MCP、A2A、HTTP 或模型服务时，哪些返回值可以记录，哪些身份、授权和目标结论仍须重新核对。
 breadcrumbs:
 - label: 项目
   url: "../index.html"
@@ -51,7 +51,7 @@ next_label: ADR-0026
 | --- | --- | --- |
 | `ADP-PIN-001`<br>版本与绑定 | 协议、规范、绑定、schema、传输和扩展版本 | 拒绝 `latest`、默认版本、未知扩展和兼容猜测 |
 | `ADP-PEE-001`<br>对端与信任 | 发现来源、声明主体、端点、认证主体、受众、租户和政策 | Agent Card、工具清单或 TLS 连接不能自行授予身份和权限 |
-| `ADP-CAP-001`<br>能力交集 | 协议、对端、适配器、contract 和政策的共同能力 | 未知能力关闭失败，协商和错误建议不得扩大当前会话 |
+| `ADP-CAP-001`<br>能力交集 | 协议、对端、适配器、contract 和政策的共同能力 | 遇到未知能力时拒绝继续，协商和错误建议不得扩大当前会话 |
 | `ADP-INV-001`<br>调用语境 | 主体、输入、操作、预算、截止点、幂等分类和观察责任 | 外部 task 或 trace ID 不得替代本地调用身份 |
 | `ADP-MAP-001`<br>映射损失 | 原协议事实、映射版本和有限损失清单 | 静默丢字段、降精度或伪造通用等价时映射无效 |
 | `ADP-STA-001`<br>状态分离 | request、tool、task、message、artifact、HTTP 和 SDK 的原状态 | 外部状态不得直接提升为本地五类结果 |
@@ -60,7 +60,7 @@ next_label: ADR-0026
 | `ADP-CAN-001`<br>取消与终态 | 取消请求、对端确认和后续观察三个事实 | 取消、超时或断流不能冒充副作用已经停止或回滚 |
 | `ADP-RTY-001`<br>重试 | 幂等或去重证据、分类权威、预算、截止点和取消状态 | 结果不确定时不得自动重复非幂等副作用 |
 | `ADP-DEL-001`<br>异步交付 | 授权、序列、去重、乱序窗口、缺口、终结条件和资源预算 | 流关闭、通知缺失或轮询超时不能冒充完成 |
-| `ADP-SEC-001`<br>安全包络 | 凭据受众、网络目标、披露范围和资源上限 | 令牌透传、SSRF、跨租户枚举和无界保留必须关闭失败 |
+| `ADP-SEC-001`<br>安全包络 | 凭据受众、网络目标、披露范围和资源上限 | 发现令牌透传、SSRF、跨租户枚举或无界保留时必须拒绝继续 |
 
 ## 遇到更强问题时再查外部资料
 

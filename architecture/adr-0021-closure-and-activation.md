@@ -4,7 +4,7 @@ title: ADR-0021 · 依赖必须先固定，权限只能收窄
 page_role: content
 footer_text: Noemion · ADR-0021
 permalink: "/architecture/adr-0021-closure-and-activation.html"
-summary: 说明多个目标共同交付时怎样先固定全部成员与依赖，并确保运行时只能收窄、不能扩大共同权限。
+summary: 说明多个目标共同交付时怎样先列出全部成员与依赖，并确保运行时不能换入新目标或增加共同权限。
 decision_id: ADR-0021
 page_heading: ADR-0021 · 依赖必须先固定 · 权限只能收窄
 page_lead: 多个目标共同交付时，先固定全部成员、传递依赖和精确身份，再计算共同允许的权限。运行时发现不能换入新目标，也不能扩大能力。

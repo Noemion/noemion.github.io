@@ -1,20 +1,20 @@
 ---
 layout: spec
-title: "Diagnostic Threat Model · Noemion"
+title: "诊断威胁模型 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/diagnostic-threat-model.html"
-summary: "分析错误文本、模型建议和日志披露怎样诱发错误重试、越权或信息泄露，并给出关闭条件。"
+summary: "分析错误文本、模型建议和日志披露怎样诱发错误重试、越权或泄露，并说明系统遇到这些情况时必须停止什么、保留什么。"
 document_status: "威胁模型"
 ---
-# Diagnostic Threat Model
+# 诊断威胁模型
 
 - 文档 ID：`DIA-THREAT`
 - 版本：`0.1.0-draft`
 - 日期：2026-07-13
 - 状态：跨 Endem、closure、contract、evidence 与外部协议诊断威胁草案
 
-诊断同时面向人、自动化和模型，因此也是输入面、权限面与信息披露面。本模型只定义未来实现必须关闭的威胁，不表示诊断生产器、渲染器、协议适配器或 CLI 已经存在。
+攻击者可能把外部文本伪装成修复指令、诱导自动重试或提权，也可能借错误消息泄露秘密。下面逐项说明未来诊断系统必须拒绝或隐藏什么。不表示诊断生产器、渲染器、协议适配器或 CLI 已经存在。
 
 ### THR-DIA-001 — 解析人类消息取得机器语义
 

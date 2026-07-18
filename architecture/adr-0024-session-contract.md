@@ -4,7 +4,7 @@ title: ADR-0024 · 权限只属于这一次会话
 page_role: content
 footer_text: Noemion · ADR-0024
 permalink: "/architecture/adr-0024-session-contract.html"
-summary: 说明持久目标为什么不携带永久权限，以及每次尝试怎样重新固定目标、环境、能力、预算和观察责任。
+summary: 说明目标为什么不能自带永久权限，以及每次运行前怎样重新核对目标、环境、可用能力、预算和观察任务。
 decision_id: ADR-0024
 page_heading: ADR-0024 · 权限只属于 · 这一次会话
 page_lead: 可长期保存的目标不携带永久权限。每次尝试都要重新固定精确目标、当前政策与环境，再把能力、预算和观察责任收窄到本次会话。

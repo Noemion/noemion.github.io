@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "Endem Source Manifest · Noemion"
+title: "Endem 实验来源清单 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/endem-source-manifest.html"
-summary: "规定实验来源清单怎样把已确认的原文、意义和判断条件映射到 END-P2，同时阻止模型补写字段。"
+summary: "规定实验来源清单怎样记录人确认过的原文、解释和判断条件，再供未来 producer 形成含来源的 Endem；模型不能自行补字段。"
 document_status: "实验性来源设计"
 ---
-# Endem Source Manifest
+# Endem 实验来源清单
 
 - 规范 ID：`END-SRCM`
 - 版本：`0.1.0-draft`
@@ -18,7 +18,11 @@ document_status: "实验性来源设计"
 
 ## 1. 范围
 
-来源清单把已经确认且带精确语义授权绑定的来源、投影和判断契约映射到未来 producer 的输入边界。它同时保存解码并处理转义后的自然语言表达和结构化决定，但不负责自然语言理解。语义授权只确认意义，不授予动作权限。清单只产生含来源的 END-P2 形成制品，不定义最终发布 Profile 或裁剪结果。模型、界面或人工流程只能位于清单上游；producer 不调用模型补字段，也不把候选自动升级为确认语义。
+来源清单记录未来 producer 需要的三类输入：解码并处理转义后的人的自然语言表达、已经确认的意义和判断条件，以及作出确认的主体与适用范围。它只保存已经形成的决定，不负责理解自然语言。
+
+具名主体确认候选意义时，记录必须绑定来源、候选内容、语义位置、适用范围和截止点。AUT-CORE 把这项外部记录称为语义授权绑定；它只确认意义，不授予动作权限。
+
+清单只产生含来源的 END-P2 形成制品，不定义最终发布 Profile 或裁剪结果。模型、界面和人工流程只能提出或确认上游输入；producer 不调用模型补字段，也不把候选自动升级为已确认意义。
 
 清单采用 UTF-8、逐行、制表符分列的有限语法。它只服务首个 END-P2 纵向切片；以后若建立正式来源语言，应删除这一入口，不保留兼容垫片。
 
@@ -71,7 +75,7 @@ document_status: "实验性来源设计"
 
 ### END-SRCM-005 — 来源、候选与授权不能混合
 
-**要求：**含来源的 END-P2 形成制品中，`source_expression` 保存来源文本；`symbol/relation/situation/root/goal_direction/satisfaction_criteria` 只保存确定性规则确认的投影，或带范围有限语义授权绑定的具名主体决定。存在多个可表达候选但尚无权选择时，输入者必须写入 `unresolved_meaning`。语义确认不得充当动作授权；模型输出不能直接充当 projection、decision_authority 或通过结论。未来裁剪发布 Profile 必须另行定义来源分离、引用重写和允许损失，不能把本清单的 `source_expression` 记录直接删去后沿用 END-P2 身份。
+**要求：**含来源的 END-P2 形成制品中，`source_expression` 保存来源文本；`symbol/relation/situation/root/goal_direction/satisfaction_criteria` 只保存确定性规则确认的投影，或具名主体已经确认候选意义、语义位置、适用范围和截止点的决定。AUT-CORE 把后一种记录称为语义授权绑定。存在多个可表达候选但尚无权选择时，输入者必须写入 `unresolved_meaning`。语义确认不得充当动作授权；模型输出不能直接充当 projection、decision_authority 或通过结论。未来裁剪发布 Profile 必须另行定义来源分离、引用重写和允许损失，不能把本清单的 `source_expression` 记录直接删去后沿用 END-P2 身份。
 
 **失败：**没有允许投影时返回 `no_allowed_projection`；存在选择但未记录 `unresolved_meaning` 时按 `END-UNRESOLVED-001` 拒绝；producer 不尝试猜测。
 

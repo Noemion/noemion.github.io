@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0015-result-domains.html"
 summary: 区分制品状态、目标满足、权威决定、会话终止和证据状态，避免把工具或 Agent 的成功当成最终结论。
 decision_id: ADR-0015
 page_heading: ADR-0015 · 五类结果 · 不可互换
-page_lead: 制品状态、目标满足、权威决定、会话终止和证据状态回答不同问题；外部智能体或运行器的“成功”不能跨层替代任何判断。
+page_lead: 一份文件是否有效、目标是否满足、决定者是否接受、会话是否结束和证据是否充分是五个不同问题；外部 Agent 或运行器的“成功”不能替代其中任何判断。
 badges:
 - 当前策略
 - 结果域分离
@@ -70,7 +70,7 @@ next_label: ADR-0016
 | 拒绝 `rejected` | 具名权威依据 `unmet` 或预先登记政策作出否定决定。 | 拒绝依据；证据不足不能自动写成目标为假。 |
 | 延后 `deferred` | 尚无获授权决定，或未知、故障、人工判断和授权缺口未解决。 | 未决原因和恢复责任；不得当成隐式接受。 |
 
-`met` 可以因额外政策被 `rejected` 或 `deferred`。`undetermined` 也可以按预先登记的关闭失败政策被拒绝；这仍不把未知观察改写成 `unmet`。
+`met` 可以因额外政策被 `rejected` 或 `deferred`。`undetermined` 也可以按预先登记的拒绝政策停止处理；这仍不把未知观察改写成 `unmet`。
 
 ## 外部机制只能提供哪一层事实
 

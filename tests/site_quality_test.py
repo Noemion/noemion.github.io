@@ -231,8 +231,10 @@ ADR_0014_SOURCE_HEADINGS = [
     "何时删除这一实验入口",
 ]
 ADR_0014_SOURCE_BOUNDARIES = (
-    "它把解码后的自然语言和已确认结构放进封闭映射",
-    "范围有限的语义授权绑定",
+    "它把解码后的自然语言和已确认结构写入固定映射",
+    "只允许已经登记的字段",
+    "由具名主体确认候选意义、语义位置、适用范围和截止点",
+    "规范把后一种记录称为语义授权绑定",
     "禁止模型直接生成规范对象",
     "不是 Endem 身份、正式源语言或已经通过读音验证的发行名称",
     "语义确认扩张为一般动作授权",
@@ -488,6 +490,29 @@ UNCLEAR_CHINESE_UI_TERMS = re.compile(
     r"路线图语境|黄金圈定位|第一批检查点|当前设计：|"
     r"尚待确定：|概要设计："
 )
+ABSTRACT_PUBLIC_PHRASES = (
+    "关闭失败",
+    "关闭的风险",
+    "关闭的失败",
+    "给出关闭条件",
+    "外部事实层",
+    "放回现有边界",
+    "保留完整责任链",
+    "保护组合集合的完整性",
+    "保护每项证据的真实范围",
+    "有范围、有权威且可验证",
+    "一组动作名称对应多条信任路径",
+    "评测闭环",
+    "精确语义授权绑定",
+    "具有语义授权绑定",
+    "范围有限的语义授权绑定",
+    "after the user opens the component-code stage",
+)
+MACHINE_FIRST_INTRO = re.compile(
+    r"^(?:说明|解释|介绍|列出|记录|定义)?\s*[`“\"']?"
+    r"(?:END-P2|[A-Z][A-Z-]+-CORE|Profile)"
+    r"(?=\s|[，。；、：:）)])"
+)
 NORMATIVE_ROUTES = (
     "specifications/endem.html",
     "specifications/endem-closure.html",
@@ -615,7 +640,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "停止条件",
             "按职责核对全部决定",
             "status-columns",
-            "现行 ADR 与对应 CORE、Profile",
+            "对应的设计决定与版本化规范",
             "Endem 语义、格式与判断",
             "组合、会话、证据与信任",
             "名称、读音与公开动作",
@@ -683,7 +708,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "发布、签名和证据为什么不能混入",
             "只生产 Endem / closure",
             "名称状态",
-            "具有精确范围的语义授权",
+            "具名主体已经说明哪项候选意义可以进入目标内容",
+            "把决定绑定到来源、候选内容、语义位置、适用范围和截止点",
             "不授予动作权限",
             "Endem",
             "确定性",
@@ -1767,6 +1793,11 @@ def validate_public_html(route, text):
     for phrase in PUBLIC_META_PHRASES:
         if phrase in text:
             errors.append(f"{route}: public HTML exposes internal production phrase {phrase!r}")
+    for phrase in ABSTRACT_PUBLIC_PHRASES:
+        if phrase in text:
+            errors.append(
+                f"{route}: public HTML retains abstract developer wording {phrase!r}"
+            )
     internal_work_package = re.search(r"\bP\d+-W\d+\b", text)
     if internal_work_package:
         errors.append(
@@ -3350,7 +3381,26 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{route}: page summary must name its concrete reader problem"
                 )
+            machine_term = MACHINE_FIRST_INTRO.search(page_summary)
+            if machine_term:
+                errors.append(
+                    f"{route}: page summary must explain the reader problem before "
+                    f"machine identifier {machine_term.group(0)!r}"
+                )
+            for phrase in ABSTRACT_PUBLIC_PHRASES:
+                if phrase in page_summary:
+                    errors.append(
+                        f"{route}: page summary uses abstract wording {phrase!r} "
+                        "instead of naming an object, action and result"
+                    )
         body = text[match.end():]
+        if is_spec_markdown:
+            spec_h1 = re.search(r"^#\s+(.+)$", body, re.MULTILINE)
+            if spec_h1 is None or re.search(r"[\u4e00-\u9fff]", spec_h1.group(1)) is None:
+                errors.append(
+                    f"{route}: specification H1 must state the reader-facing "
+                    "Chinese responsibility before or alongside retained terms"
+                )
         entry_text = page_summary
         abstract_entry_terms = (
             "制品", "闭包", "投影", "权威", "边界", "结果域", "信任域", "语义",
@@ -4294,7 +4344,7 @@ def validate_jekyll_sources():
         naming_adr_text = naming_adr.read_text()
         for token in (
             "把人实际说过的话、系统采用的解释",
-            "本决定确定六项语义职责",
+            "本决定要求把人实际说过的话、系统采用的解释",
             "ADR-0037",
             "范围有限具名权威确认",
             "规范称其为语义授权，但它不授予动作权限",
@@ -4913,8 +4963,9 @@ def main():
             "为什么当前使用一个命令命名空间",
             "供人工智能系统安全使用的目标制品，是否意味着文件本身已经获准执行",
             "最终发布版会移除原始自然语言",
-            "producer 只消费已经具备精确语义授权绑定的输入",
-            "它不替具名权威选择意义，也不授予动作权限",
+            "producer 只接受具名主体已经确认的意义",
+            "确认记录必须说明来源、候选内容、语义位置、适用范围和截止点",
+            "不会替人选择意义或授予动作权限",
             "NIST AI Agent Standards Initiative",
             "OpenAI Agent 编排说明",
             "GNU 对他人服务替代用户计算的分析",
@@ -5445,7 +5496,7 @@ def main():
             "解析器、运行时、安全隔离或协议互操作已经存在",
             "设备内语义抽取模型已有分阶段研究路线",
             "最终工具数量",
-            "一组动作名称对应多条信任路径",
+            "动作名称相同，生产、检查和运行权限仍须分开",
             "开发路线图",
             "开放问题",
             "目前没有正式软件版本、稳定规范版本、安装包或发行日期",
@@ -5774,8 +5825,35 @@ def main():
             hero_text = normalize_visible_text(HTML_TAG.sub(" ", hero_body))
             if len(re.findall(r"<h1\b", hero_body)) != 1:
                 errors.append(f"{row['route']}: Hero Section must contain exactly one h1")
-            if not re.search(r"<p\b[^>]*>.*?\S.*?</p>", hero_body, re.DOTALL):
+            hero_lead_match = re.search(
+                r"<p\b[^>]*>(.*?)</p>", hero_body, re.DOTALL
+            )
+            if hero_lead_match is None or not normalize_visible_text(
+                HTML_TAG.sub(" ", hero_lead_match.group(1))
+            ):
                 errors.append(f"{row['route']}: Hero Section must contain a non-empty lead")
+            else:
+                hero_lead = normalize_visible_text(
+                    HTML_TAG.sub(" ", hero_lead_match.group(1))
+                )
+                machine_term = MACHINE_FIRST_INTRO.search(hero_lead)
+                if machine_term:
+                    errors.append(
+                        f"{row['route']}: Hero lead must explain the reader problem "
+                        f"before machine identifier {machine_term.group(0)!r}"
+                    )
+                abstract_terms = {
+                    term for term in (
+                        "制品", "闭包", "投影", "权威", "边界", "结果域",
+                        "信任域", "语义", "授权", "身份", "Profile", "伴随",
+                        "符合性", "不变量",
+                    ) if term in hero_lead
+                }
+                if len(abstract_terms) >= 4:
+                    errors.append(
+                        f"{row['route']}: Hero lead stacks abstract terms before "
+                        "a plain-language problem: " + ", ".join(sorted(abstract_terms))
+                    )
             expected_status_class = (
                 "portal-introduction-meta"
                 if row["kind"] == "portal"

@@ -1,68 +1,70 @@
 ---
 layout: spec
-title: "contract Threat Model · Noemion"
+title: "contract 威胁模型 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/session-contract-threat-model.html"
-summary: "分析目标替换、权限扩大、秘密泄露、预算逃逸和会话复活等风险，确保旧会话不能被悄悄改写。"
+summary: "分析目标替换、权限扩大、秘密泄露、预算逃逸和会话复活，说明未来 runner 遇到这些情况时必须拒绝或停止什么。"
 document_status: "威胁模型"
 ---
-# contract Threat Model
+# contract 威胁模型
 
-- Document ID: `SESSION-THREAT`
-- Version: `0.1.0-draft`
-- Date: 2026-07-13
-- Status: draft; paired with SESSION-CORE for future runner and capability-domain design
-- Implementation status: unimplemented; proposal vectors exist, but this document is not a sandbox, loader, broker or runtime
+- 文档 ID：`SESSION-THREAT`
+- 版本：`0.1.0-draft`
+- 日期：2026-07-13
+- 当前状态：与 `SESSION-CORE` 配套的威胁模型；用于约束未来 runner 和最小能力域
+- 实现状态：只有提案向量；本文不是沙箱、装载器、能力代理或运行时
 
-## 1. Protection objective
+## 1. 未来 runner 必须防止什么
 
-A contract protects the boundary between a persistent, resolved goal artifact with separately verified external statements and one mutable execution session. The protected property is not that the session will succeed. It is that the session can use only the exact subject, statements, policies, environment bindings, capabilities, budgets, observation duties and authorities checked before operation, and that any material change closes the old authority rather than rewriting it.
+contract 把持久目标与一次可变运行会话分开。会话开始前，系统必须核对精确目标、外部陈述、政策、环境、能力、预算、观察任务和决定者。运行中任一关键条件变化时，旧权限必须失效，系统不能修改 contract 来掩盖变化。
 
-An attacker may control model output, remote tool and Agent descriptions, task identifiers, environment variables, adapter metadata, cached validation, network responses, cancellation, retry paths, log fields and credential material. None of them becomes authority merely by appearing in a session context.
+contract 不能保证会话成功。它只保证本次会话使用的对象和权限没有超出开始前核对的范围。
 
-## 2. Threats and mandatory mitigations
+攻击者可能控制模型输出、远端工具和 Agent 描述、任务标识、环境变量、适配器元数据、缓存验证、网络响应、取消与重试路径、日志字段和凭据材料。这些内容即使出现在会话上下文中，也不能自行成为授权依据。
 
-### THR-SESSION-001 — Subject substitution after validation
+## 2. 威胁与必须采取的措施
 
-An attacker validates one Endem or closure and then loads another object through a mutable path, display name, latest tag or changed closure. `SESSION-SUB-001` binds the exact resolved content identity and every required external statement, and requires fresh layered validation at the establishment cutoff.
+### THR-SESSION-001 — 验证后替换目标
 
-### THR-SESSION-002 — Stale policy, authority or revocation state
+攻击者先让系统验证一件 Endem 或 closure，再通过可变路径、显示名称、latest 标签或变化后的 closure 装载另一对象。`SESSION-SUB-001` 要求绑定已经解决的精确内容身份和每项必需外部陈述，并在建立会话的截止点重新进行分层验证。
 
-An attacker reuses a cached successful policy check after the signer, method, decision authority or authorization decision has changed. `SESSION-POL-001` and `SESSION-SUB-001` bind exact policies, authorities, cutoff, expiry and revocation checks.
+### THR-SESSION-002 — 复用过期政策、决定者或撤销状态
 
-### THR-SESSION-003 — Environment self-description and adapter drift
+签名者、验证方法、决定者或授权决定已经变化后，攻击者仍复用缓存的成功检查。`SESSION-POL-001` 和 `SESSION-SUB-001` 要求绑定精确政策、决定者、截止点、到期时间和撤销检查。
 
-A backend claims a safe version or environment, or changes model, protocol, locale, clock or isolation behavior after establishment. `SESSION-ENV-001` requires observed bindings; `SESSION-IMM-001` invalidates material drift.
+### THR-SESSION-003 — 相信环境自述或忽略适配器漂移
 
-### THR-SESSION-004 — Capability amplification and confused deputy
+后端自行声明使用安全版本或环境，或者在会话建立后改变模型、协议、地区设置、时钟或隔离行为。`SESSION-ENV-001` 要求用实际观察确认环境绑定；`SESSION-IMM-001` 要求关键条件漂移后立即使旧 contract 失效。
 
-An attacker unions grants, uses ambient privilege, swaps token audience, passes credentials downstream or requests step-up authority inside the old session. `SESSION-CAP-001` requires intersection and a new session for broader authority; `SESSION-SEC-001` separates live credentials and handles.
+### THR-SESSION-004 — 扩大能力或利用 confused deputy
 
-### THR-SESSION-005 — Secret persistence and cross-session handle reuse
+攻击者合并多份授权、使用环境默认权限、替换令牌受众、向下游传递凭据，或在旧会话中请求更大权限。`SESSION-CAP-001` 要求权限取交集，并为更大权限建立新会话；`SESSION-SEC-001` 要求实时凭据和句柄留在 contract 之外。
 
-Tokens, cookies, descriptors or provider handles enter the contract, evidence or logs and later reanimate authority. `SESSION-SEC-001` forbids live material in these objects; `SESSION-LIF-001` requires disposal and prohibits rehydration.
+### THR-SESSION-005 — 持久保存秘密并跨会话复用句柄
 
-### THR-SESSION-006 — Budget escape through retries or delegation
+token、cookie、文件描述符或提供方句柄进入 contract、evidence 或日志，之后重新取得权限。`SESSION-SEC-001` 禁止这些对象保存实时材料；`SESSION-LIF-001` 要求清理材料并禁止根据记录恢复会话。
 
-A model, adapter or child task resets counters, changes units, ignores cancellation or delegates work outside the parent limit. `SESSION-BUD-001` requires typed finite envelopes and strict subdivision.
+### THR-SESSION-006 — 通过重试或委托逃逸预算
 
-### THR-SESSION-007 — Dynamic dependency and activation laundering
+模型、适配器或子任务重置计数器、改变单位、忽略取消，或把工作委托到父预算之外。`SESSION-BUD-001` 要求预算注明类型、保持有限，并让子任务只使用父预算的严格子集。
 
-Runtime discovery adds a new closure member, or an activation result is treated as target satisfaction or permission. `SESSION-ACT-001` binds activation to the fixed closure and its own result domain.
+### THR-SESSION-007 — 运行时加入新依赖或混淆激活结果
 
-### THR-SESSION-008 — Observation or decision authority omission
+运行时发现新 closure 成员，或者系统把激活结果直接当成目标满足或权限授予。`SESSION-ACT-001` 把激活限制在已经固定的 closure 内，并让激活状态与满足结果分别判断。
 
-The session can act but no actor is responsible for required observations, evidence coverage, appraisal or final decision. `SESSION-OBS-001` requires a complete responsibility map and preserves all result domains.
+### THR-SESSION-008 — 没有人负责观察或最终决定
 
-### THR-SESSION-009 — Mutable contract and erased drift
+会话能够行动，却没有主体负责必需观察、evidence 覆盖、评估或最终决定。`SESSION-OBS-001` 要求建立完整责任映射，并分别保存每类结果。
 
-A session silently patches policy, environment, capability or budget fields and overwrites old evidence to appear continuously valid. `SESSION-IMM-001` seals the contract and makes material change an invalidation event.
+### THR-SESSION-009 — 修改 contract 并删除漂移记录
 
-### THR-SESSION-010 — Session resurrection and identifier-as-authority
+会话静默修改政策、环境、能力或预算字段，再覆盖旧 evidence，使会话看起来一直有效。`SESSION-IMM-001` 要求 contract 建立后只读，并把关键变化记录为使会话失效的事件。
 
-An attacker serializes a contract, copies a session ID, restores logs or resumes stale handles in another authorization context. `SESSION-LIF-001` makes contract non-persistent, non-transferable and non-resumable.
+### THR-SESSION-010 — 复活会话或把会话标识当成权限
 
-## 3. Risks not solved by this model
+攻击者序列化 contract、复制会话 ID、恢复日志，或在另一授权语境中重新使用过期句柄。`SESSION-LIF-001` 规定 contract 不持久化、不转移，也不能恢复。
 
-This model does not prove an operating-system sandbox, credential store, capability broker, scheduler, network policy, process boundary, model isolation, event log or disposal mechanism. Platform-specific bypasses, side channels, denial of service, covert channels and implementation bugs require separate threat models and component evidence after the code stage is explicitly authorized.
+## 3. 本模型没有解决的风险
+
+本模型不能证明操作系统沙箱、凭据存储、能力代理、调度器、网络政策、进程隔离、模型隔离、事件日志或清理机制已经安全。平台绕过、侧信道、拒绝服务、隐蔽信道和实现缺陷仍需要各组件的威胁模型与真实实现证据。

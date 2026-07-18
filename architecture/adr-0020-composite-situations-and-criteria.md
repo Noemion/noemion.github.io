@@ -7,7 +7,7 @@ permalink: "/architecture/adr-0020-composite-situations-and-criteria.html"
 summary: 说明多个条件怎样组合已有结果，以及为什么组合和提前停止都不能把未知、故障或未检查条件改成真假。
 decision_id: ADR-0020
 page_heading: ADR-0020 · 组合条件不能吞掉 · 未知与故障
-page_lead: 复合判据只组合已经独立形成的叶结果。它可以减少不必要的检查，但不能把未知、故障或未检查的条件改写成普通真假。
+page_lead: 多个条件组合判断时，每个条件必须先得到自己的结果。提前停止可以减少不必要的检查，但不能把未知、故障或未检查条件改成普通真假。
 badges:
 - 当前策略
 - 四值组合

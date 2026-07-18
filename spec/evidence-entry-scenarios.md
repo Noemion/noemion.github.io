@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "evidence Natural-Language Design Scenarios · Noemion"
+title: "evidence 设计场景 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/evidence-entry-scenarios.html"
-summary: "用日志、人工记录、外部事件和派生观察案例，检查证据范围、有效性、覆盖度和最终决定是否分开。"
+summary: "用日志、人工记录、外部事件和派生观察案例，检查每项记录最多能说明什么，以及谁能据此作出最终决定。"
 document_status: "非规范设计场景"
 ---
-# evidence Natural-Language Design Scenarios
+# evidence 设计场景
 
 - 文档 ID：`EVIDENCE-SCEN`
 - 版本：`0.1.0-draft`
@@ -15,7 +15,7 @@ document_status: "非规范设计场景"
 - 状态：非规范设计语料
 - 适用范围：evidence 主体、范围、溯源、观察、类别、完整性、有效性、覆盖度、决定与披露边界
 
-这些场景不是 evidence 文件、采集器、验证器、求值器或运行时。它们用支持案例、反例和边界场景检查 EVIDENCE-CORE 是否能够解释现实证据问题；只有条款、登记验证和正反向量共同覆盖的内容才可能成为符合性要求。
+这些案例只用于检查 EVIDENCE-CORE 能否解释真实的证据问题，不是 evidence 文件、采集器、验证器、求值器或运行时。某项案例只有在对应规范条款和正反向量都明确验证方法后，才能成为实现必须满足的要求。
 
 ### EVIDENCE-SCN-001 — 固定测试集不能代表未知总体
 

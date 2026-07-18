@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "Diagnostic Core Specification · Noemion"
+title: "诊断核心规范 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/diagnostics-core.html"
 summary: "规定诊断至少要说明哪个操作检查哪个输入、为何失败、发生在哪里，以及满足什么条件后才能继续。"
 document_status: "规范草案"
 ---
-# Diagnostic Core Specification
+# 诊断核心规范
 
 - 规范 ID：`DIA-CORE`
 - 版本：`0.1.0-draft`
@@ -18,7 +18,7 @@ document_status: "规范草案"
 
 ## 1. 范围
 
-本规范定义 producer、inspector、runner、`endem` 动作以及未来协议适配器产生的诊断至少必须保留哪些机器可读内容。它覆盖 Endem、closure、contract、evidence、来源清单、物理容器、政策、后端和外部协议，但不改变这些对象自己的规范与结果域。
+producer、inspector、runner、`endem` 动作和未来协议适配器报告失败时，必须让程序读到检查了哪个输入、使用哪条规则、在哪里失败以及哪些步骤尚未执行。本规范规定这些最低内容。它适用于 Endem、closure、contract、evidence、来源清单、物理容器、政策、后端和外部协议，但不改变这些对象自己的规则或结果。
 
 诊断回答“哪个操作在检查哪个精确输入时，因哪条规范、哪个位置和什么可恢复条件停止或提示”。诊断不是 Endem、evidence、满足结果、最终决定、run 会话结果、权限、重试命令或实现堆栈。诊断可以被后续 evidence 引用，但它的存在、数量或严重度不能证明目标满足、证据充分或决定已经获得授权。
 
@@ -61,7 +61,7 @@ document_status: "规范草案"
 
 **要求：**诊断位置 `MUST` 使用适合其层次的类型化位置：来源范围、字节范围、记录身份、语义路径、图路径、会话绑定、证据引用或外部请求关联。范围端点、路径深度和字符串长度 `MUST` 在读取与分配前受限；攻击者控制的文件名、终端控制字符、URL、提示正文和外部消息 `MUST` 转义或省略。缺少安全位置时 `MAY` 只报告精确主体和条款，不得伪造位置。
 
-**失败：**位置越界、路径遍历或控制字符进入终端、未检查范围触发大分配，或任意外部文本被当作语义路径时，诊断生成必须关闭失败。
+**失败：**位置越界、路径遍历或控制字符进入终端、未检查范围触发大分配，或任意外部文本被当作语义路径时，必须停止生成诊断并拒绝当前结果。
 
 **验证：**`DIA-SCN-006`；`vectors/diagnostics/cases.json`；未来 `conformance:diagnostic-location-bounds` 组件测试。
 

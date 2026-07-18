@@ -19,7 +19,7 @@ next_label: ADR-0011
 
 ## 直接结论
 
-本决定确定六项语义职责，并采用 `source_expression / meaning_projection / situation / goal_direction / satisfaction_criteria / unresolved_meaning` 作为现行设计字段。职责分层继续有效；这些普通英语字段已经按词首、职责和关键字语料接受，新增自造名称才需要完整读音审查。
+本决定要求把人实际说过的话、系统采用的解释、期望状态、目标方向、判断方法和仍未解决的问题分别保存。对应的现行字段是 `source_expression / meaning_projection / situation / goal_direction / satisfaction_criteria / unresolved_meaning`。这些普通英语字段已经按词首、职责和关键字语料接受；新增自造名称才需要完整读音审查。
 
 > **结构底线：**一个 Endem 只有一个根 `situation`。`meaning_projection`、`situation` 与观察中的 `structured_observation` 使用可比较的符号和关系位置；形式由结构显示，制品不能用自填标签证明自己有效。
 

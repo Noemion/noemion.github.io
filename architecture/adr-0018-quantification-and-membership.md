@@ -4,10 +4,10 @@ title: ADR-0018 · 先固定成员，再判断数量
 page_role: content
 footer_text: Noemion · ADR-0018
 permalink: "/architecture/adr-0018-quantification-and-membership.html"
-summary: 说明判断“全部”“至少”或“刚好”之前，为什么必须先固定成员范围、身份、权威和截止点。
+summary: 说明判断“全部”“至少”或“刚好”之前，为什么必须先列出完整成员、确认成员身份、指定决定者和截止时间。
 decision_id: ADR-0018
 page_heading: ADR-0018 · 先固定成员 · 再判断数量
-page_lead: "“全部”“至少”“最多”和“刚好”只能对有权威、有截止点、身份唯一的成员集合求值；搜索结果、分页响应和重复记录都不能自行定义全集。"
+page_lead: "判断“全部”“至少”“最多”或“刚好”之前，必须先说明谁确定成员、何时停止收集，并保证每个成员身份唯一；搜索结果、分页响应和重复记录不能自行定义全集。"
 badges:
 - 当前策略
 - 成员范围先于计数

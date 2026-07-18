@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "External Protocol Adapter Natural-Language Design Scenarios · Noemion"
+title: "外部协议适配设计场景 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/adapter-scenarios.html"
-summary: "用 MCP、A2A、HTTP 等案例检查外部调用怎样固定版本、收窄权限，并把远端结果留在外部事实层。"
+summary: "用 MCP、A2A、HTTP 等案例检查调用版本和权限是否固定，并确保远端返回只作为外部结果记录，不能直接写成目标已经完成。"
 document_status: "非规范设计场景"
 ---
-# External Protocol Adapter Natural-Language Design Scenarios
+# 外部协议适配设计场景
 
 - 文档 ID：`ADP-SCEN`
 - 版本：`0.1.0-draft`
@@ -15,14 +15,14 @@ document_status: "非规范设计场景"
 - 状态：非规范设计语料
 - 适用范围：协议版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付与安全边界
 
-这些场景不是协议 Profile、适配器、网络服务、运行时或组件测试。它们用支持案例、反例和边界场景检查 ADP-CORE 能否解释现实适配问题；只有条款、登记验证和正反向量共同覆盖的内容才可能成为符合性要求。
+这些案例只用于检查 ADP-CORE 能否解释真实的协议适配问题，不是协议格式、适配器、网络服务、运行时或组件测试。某项案例只有在对应规范条款和正反向量都明确验证方法后，才能成为实现必须满足的要求。
 
 ### ADP-SCN-001 — 稳定版与候选版不能共用绑定
 
 - **场景：**截至 2026 年 7 月 13 日，一个对端使用官方仍标为 Current 的 MCP 2025-11-25，另一个测试官方已于 5 月 21 日锁定并公开、计划于 7 月 28 日转为最终版的 2026-07-28 候选版。
 - **场景结论：**两者必须采用不同版本绑定和扩展集合。候选版不是当前符合性基线；它的无状态核心或 Tasks 扩展不能静默改变 Current 版本绑定。
 
-### ADP-SCN-002 — 未知扩展与默认版本关闭失败
+### ADP-SCN-002 — 遇到未知扩展或默认版本时拒绝继续
 
 - **场景：**服务端没有返回精确协议版本，并声明本地没有登记的新扩展。
 - **场景结论：**适配不得开始调用；SDK 能够反序列化不表示扩展已经获准。

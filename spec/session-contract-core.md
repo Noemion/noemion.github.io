@@ -1,132 +1,134 @@
 ---
 layout: spec
-title: "Session Contract Core · Noemion"
+title: "contract 核心规范 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/session-contract-core.html"
-summary: "规定一次受控会话怎样重新核对精确目标、政策、环境、能力和预算，并在实质条件变化后关闭旧权限。"
+summary: "规定一次受控会话怎样重新核对目标、政策、环境、能力和预算，并在任一关键条件变化后立即停止使用旧权限。"
 document_status: "规范草案"
 ---
-# Session Contract Core
+# contract 核心规范
 
-- Specification ID: `SESSION-CORE`
-- Version: `0.1.0-draft`
-- Status: draft; accepted abstract session-boundary design
-- Implementation status: unimplemented; only proposal vectors exist, with no runner, loader, sandbox, capability broker or runtime
-- Wire status: not applicable; contract is not a persistent object and has no file format
+- 规范 ID：`SESSION-CORE`
+- 版本：`0.1.0-draft`
+- 当前状态：规范草案；已经写明会话职责与条款，尚无组件实现
+- 实现状态：只有提案向量；没有 runner、装载器、沙箱、能力代理或运行时
+- 线格式状态：不适用；contract 不是持久对象，也没有文件格式
 
-## 1. Purpose
+## 1. 目的
 
-A contract is the sealed, read-only execution contract for exactly one run session. A runner may establish it only after revalidating an exact, `resolved` Endem or closure; checking the required external statements against a named policy, cutoff and revocation state; and intersecting the artifact limits with current policy, environment, authority, capability and budget limits.
+contract 只在一次运行中有效，建立后不能修改。runner 建立 contract 前，必须重新验证身份固定且内容已经确认的 Endem 或 closure，并核对必需的外部陈述、政策、截止点和撤销状态。
 
-A contract separates a persistent goal artifact from the mutable world in which a session attempts to realize it. It does not contain live credentials, open handles, mutable observations, model memory or final results. Runtime events and observations become scoped evidence entries; satisfaction, authority decisions and session termination remain separate result domains.
+runner 还必须取得目标限制、当前政策、环境支持、授权、可用能力和预算的交集。任一必需条件缺失时，本次会话不能开始。
 
-Any claimed authority, consent, delegation, authorization decision or capability grant `MUST` also pin and conform to the exact applicable `AUT-CORE` version. `SESSION-CORE` defines the sealed session intersection; it does not redefine who may authorize its inputs.
+contract 把持久目标与会话运行时的可变环境分开。它不保存实时凭据、打开的句柄、可变观察、模型记忆或最终结果。运行事件和观察可以形成 evidence；目标是否满足、权威决定和会话为何终止仍分别判断。
 
-The keywords `MUST`, `MUST NOT`, `SHOULD`, `SHOULD NOT` and `MAY` are normative as described by BCP 14 when written in uppercase.
+任何权威、同意、委托、授权决定或能力授予都 `MUST` 绑定并符合适用的精确 `AUT-CORE` 版本。`SESSION-CORE` 只规定怎样求出本次会话允许使用的交集，不重新定义谁有权授权这些输入。
 
-## 2. Position in the lifecycle
+`MUST`、`MUST NOT`、`SHOULD`、`SHOULD NOT` 与 `MAY` 使用大写时，具有 BCP 14 规定的规范强度。
+
+## 2. 在生命周期中的位置
 
 ```text
-resolved Endem or closure
-        + required external statements
-        + statement policy, cutoff, validity and revocation state
-        + named policies and authorities
-        + environment and adapter bindings
-        + bounded capability and budget grants
-        + observation and disclosure duties
+已解决的 Endem 或 closure
+        + 必需的外部陈述
+        + 陈述政策、截止点、有效性和撤销状态
+        + 具名政策与决定者
+        + 环境与适配器绑定
+        + 有上限的能力和预算
+        + 观察与披露任务
                          |
                          v
-              sealed contract for one run
+             只服务本次运行的只读 contract
                          |
                          v
-        runtime events and structured observations -> evidence entries -> appraisal -> decision
+     运行事件与结构化观察 -> evidence -> 评估 -> 决定
 ```
 
-An input proposal is not a contract. It becomes a contract only after all required bindings are checked and sealed. Any material change creates a new session proposal; it never mutates or resumes the old contract.
+尚未核对的输入提案不是 contract。只有全部必需绑定通过检查并固定为只读后，提案才成为 contract。任何关键条件变化都必须产生新的会话提案；系统不能修改或恢复旧 contract。
 
-## 3. Normative clauses
+## 3. 规范条款
 
-### SESSION-SUB-001 — The session subject and external statements must be exact and freshly revalidated
+### SESSION-SUB-001 — 会话主体和外部陈述必须精确且经过本次重新验证
 
-**Requirement:** A contract `MUST` bind exactly one `resolved` Endem or closure by exact content identity and Profile. It `MUST` separately bind every required external statement, statement type, subject digest, verification policy, verification result, named cutoff, revocation state and relying-party applicability decision. A runner `MUST` recheck the container, Profile, content, closure and every external relation before establishment. A display name, search result, mutable path, latest version, cached success, signature-presence flag or external Task identifier `MUST NOT` substitute for these checks.
+**要求：**contract `MUST` 用精确内容身份和 Profile 绑定且仅绑定一个 `resolved` Endem 或 closure。它 `MUST` 分别绑定每项必需外部陈述的类型、主体摘要、验证政策、验证结果、具名截止点、撤销状态和依赖方适用决定。runner 建立 contract 前 `MUST` 重新检查容器、Profile、内容、闭包和每项外部关系。显示名称、搜索结果、可变路径、最新版本、缓存成功、签名存在标记或外部 Task 标识 `MUST NOT` 代替这些检查。
 
-**Failure:** An unresolved, missing, ambiguous or changed subject, or a missing, invalid, revoked, out-of-scope or policy-inapplicable required statement, rejects establishment. No contract or satisfaction result is created.
+**失败：**主体尚未解决、缺失、含糊或已经变化，或者必需陈述缺失、无效、已撤销、超出范围或不适用当前政策时，建立失败。系统不能创建 contract 或满足结果。
 
-**Verification:** `SESSION-SCN-001`, `SESSION-SCN-002`; `vectors/session-contract/cases.json`; future `conformance:session_contract-subject-revalidation` component tests.
+**验证：**`SESSION-SCN-001`、`SESSION-SCN-002`；`vectors/session-contract/cases.json`；未来 `conformance:session_contract-subject-revalidation` 组件检查。
 
-### SESSION-POL-001 — Policies, authorities and cutoff must be closed before establishment
+### SESSION-POL-001 — 建立会话前必须固定政策、决定者和截止点
 
-**Requirement:** A contract `MUST` bind the exact policy set, policy versions or identities, decision authorities, escalation authorities, applicable consent, cutoff and expiry used to establish the session. Conflicts and unresolved authority-bearing `unresolved_meaning` items `MUST` reject establishment unless a named policy proves they are outside the selected session scope. A model, adapter, tool description or remote Agent `MUST NOT` become a policy or authority merely by appearing in context.
+**要求：**contract `MUST` 绑定用于建立本次会话的精确政策集合、政策版本或身份、决定者、升级处理者、适用同意、截止点和到期时间。影响授权且仍未解决的冲突或 `unresolved_meaning` 项 `MUST` 使建立失败，除非具名政策证明它不属于本次会话范围。模型、适配器、工具描述或远端 Agent `MUST NOT` 仅因出现在上下文中就成为政策或决定者。
 
-**Failure:** An implicit default, mutable latest policy, missing authority, unresolved in-scope ambiguity or policy conflict rejects establishment.
+**失败：**隐式默认值、可变的最新政策、缺少决定者、范围内仍有歧义或政策冲突时，建立失败。
 
-**Verification:** `SESSION-SCN-003`, `SESSION-SCN-004`; `vectors/session-contract/cases.json`; future `conformance:session_contract-policy-closure` component tests.
+**验证：**`SESSION-SCN-003`、`SESSION-SCN-004`；`vectors/session-contract/cases.json`；未来 `conformance:session_contract-policy-closure` 组件检查。
 
-### SESSION-ENV-001 — Environment and backend assumptions must be explicit bindings
+### SESSION-ENV-001 — 环境和后端假设必须成为显式绑定
 
-**Requirement:** A contract `MUST` declare the environment facts required by the subject and policy, including applicable platform, locale, time authority, isolation profile, adapters, protocol versions and model or rule backend identities. Each binding `MUST` distinguish a declared identifier from an observed property and name the observation used to confirm it. Undeclared environment state and remote self-description `MUST NOT` be treated as verified.
+**要求：**contract `MUST` 声明目标和政策所需的环境事实，包括适用平台、地区设置、时间权威、隔离 Profile、适配器、协议版本，以及模型或规则后端身份。每项绑定 `MUST` 区分声明的标识和实际观察到的属性，并指出用于确认属性的观察。未声明的环境状态和远端自述 `MUST NOT` 被视为已经验证。
 
-**Failure:** A missing required binding, unsupported protocol, unverified environment claim or material mismatch rejects establishment. Material drift after establishment invalidates the contract under `SESSION-IMM-001`.
+**失败：**缺少必需绑定、协议不受支持、环境声明未经验证或存在关键不一致时，建立失败。建立后的关键环境漂移按 `SESSION-IMM-001` 使 contract 失效。
 
-**Verification:** `SESSION-SCN-005`, `SESSION-SCN-006`; `vectors/session-contract/cases.json`; future `conformance:session_contract-environment-binding` component tests.
+**验证：**`SESSION-SCN-005`、`SESSION-SCN-006`；`vectors/session-contract/cases.json`；未来 `conformance:session_contract-environment-binding` 组件检查。
 
-### SESSION-CAP-001 — The capability envelope may only intersect and reduce authority
+### SESSION-CAP-001 — 会话能力只能取交集或继续减少
 
-**Requirement:** The contract capability envelope `MUST` be the intersection of artifact and closure limits, current policy, operator authorization, environment support and adapter bounds. Every allowed capability `MUST` bind an action, resource or audience, scope, constraints, issuing authority, expiry and revocation check. Missing required capability rejects establishment; optional capability loss may only deactivate a fixed closure member through its declared guard. Step-up or broader authority `MUST` create a new run-session proposal and `MUST NOT` mutate the current contract.
+**要求：**contract 的能力集合 `MUST` 取目标与 closure 限制、当前政策、操作者授权、环境支持和适配器上限的交集。每项允许能力 `MUST` 绑定动作、资源或受众、范围、约束、授予者、到期时间和撤销检查。缺少必需能力时建立失败；可选能力消失时，只能依据已经声明的 guard 停用固定的 closure 成员。提升或扩大权限 `MUST` 创建新的运行会话提案，`MUST NOT` 修改当前 contract。
 
-**Failure:** Union, fallback to ambient authority, wildcard expansion, token passthrough, audience substitution or runtime self-escalation invalidates the proposal or interrupts the established session.
+**失败：**合并权限、退回环境默认权限、展开通配符、透传令牌、替换受众或运行时自行提权时，提案无效；已经建立的会话必须中断。
 
-**Verification:** `SESSION-SCN-007`, `SESSION-SCN-008`; `vectors/session-contract/cases.json`; future `conformance:session_contract-capability-intersection` component tests.
+**验证：**`SESSION-SCN-007`、`SESSION-SCN-008`；`vectors/session-contract/cases.json`；未来 `conformance:session_contract-capability-intersection` 组件检查。
 
-### SESSION-SEC-001 — Live secrets and handles must remain outside the contract
+### SESSION-SEC-001 — 实时秘密和句柄必须留在 contract 之外
 
-**Requirement:** A contract `MUST` contain only non-secret capability descriptors and irreversible references needed for audit. Bearer tokens, refresh tokens, private keys, session cookies, file descriptors, sockets, process handles and provider-native capability handles `MUST NOT` enter the contract, evidence or persistent logs. A separate minimal capability domain may hold live material and `MUST` bind it to the exact run session, intended resource or audience, scope and expiry. Rotation that preserves the descriptor MAY occur outside the contract; any scope, audience or authority change requires a new session.
+**要求：**contract `MUST` 只保存非秘密的能力描述和审计所需的不可逆引用。Bearer token、refresh token、私钥、会话 cookie、文件描述符、socket、进程句柄和提供方原生能力句柄 `MUST NOT` 进入 contract、evidence 或持久日志。独立的最小能力域可以保存实时材料，但 `MUST` 把材料绑定到精确运行会话、预期资源或受众、范围和到期时间。保持描述不变的轮换 `MAY` 在 contract 外发生；范围、受众或授权变化必须创建新会话。
 
-**Failure:** Secret material in the proposal, an unbound handle, reusable cross-session reference or passthrough token rejects establishment or invalidates the session.
+**失败：**提案含有秘密、句柄没有绑定、引用能够跨会话复用或令牌被透传时，建立失败或会话失效。
 
-**Verification:** `SESSION-SCN-009`; `vectors/session-contract/cases.json`; future `conformance:session_contract-secret-separation` component tests.
+**验证：**`SESSION-SCN-009`；`vectors/session-contract/cases.json`；未来 `conformance:session_contract-secret-separation` 组件检查。
 
-### SESSION-BUD-001 — Budgets, time and cancellation must be finite and typed
+### SESSION-BUD-001 — 预算、时间和取消必须有限且注明类型
 
-**Requirement:** A contract `MUST` bind finite limits for every resource class the session may consume, including applicable elapsed time, calls, retries, tokens, bytes, storage, processes and cost. Each limit `MUST` name its unit, counter authority, reset rule and exhaustion action. Retries, child tasks, model delegation and protocol adapters `MUST` consume the same enclosing limits or a strict subdivision. Cancellation and deadline propagation `MUST` be defined before operation.
+**要求：**contract `MUST` 为会话可能消耗的每类资源绑定有限上限，包括适用的经过时间、调用、重试、token、字节、存储、进程和成本。每项上限 `MUST` 说明单位、计数者、重置规则和耗尽后的动作。重试、子任务、模型委托和协议适配器 `MUST` 消耗同一外层预算或其严格子集。运行前 `MUST` 确定取消和截止时间怎样传递。
 
-**Failure:** An unbounded required resource, incompatible units, hidden reset, child-budget escape or ignored cancellation rejects establishment or interrupts the session. Exhaustion does not imply `unmet`.
+**失败：**必需资源没有上限、单位不兼容、计数被隐藏重置、子任务逃逸预算或取消被忽略时，建立失败或会话中断。预算耗尽不表示目标 `unmet`。
 
-**Verification:** `SESSION-SCN-010`; `vectors/session-contract/cases.json`; future `conformance:session_contract-budget-envelope` component tests.
+**验证：**`SESSION-SCN-010`；`vectors/session-contract/cases.json`；未来 `conformance:session_contract-budget-envelope` 组件检查。
 
-### SESSION-ACT-001 — closure activation must remain inside the fixed closure and outside satisfaction
+### SESSION-ACT-001 — closure 激活只能发生在固定成员内，且不能代替满足判断
 
-**Requirement:** For a closure subject, a contract `MUST` bind the exact closed member set, activation guards, input event identities, cutoff and initial `active / inactive / unresolved / error` classifications. Runtime re-evaluation MAY change activation events only under the already bound guard and evidence rules; it `MUST NOT` add members, alter closure identity, grant capability or mutate the contract. Activation status `MUST NOT` map directly to `met / unmet / undetermined / fault`.
+**要求：**主体为 closure 时，contract `MUST` 绑定精确的封闭成员集合、激活 guard、输入事件身份、截止点，以及初始 `active / inactive / unresolved / error` 分类。运行时 `MAY` 只按已绑定的 guard 和 evidence 规则重新判断激活事件；它 `MUST NOT` 增加成员、改变 closure 身份、授予能力或修改 contract。激活状态 `MUST NOT` 直接映射为 `met / unmet / undetermined / fault`。
 
-**Failure:** Runtime dependency discovery, latest-version lookup, activation-driven permission gain, missing guard basis or result-domain conversion invalidates establishment or the affected session path.
+**失败：**运行时发现新依赖、查找最新版本、通过激活增加权限、缺少 guard 依据或把激活状态转换成满足结果时，建立失败或受影响的会话路径失效。
 
-**Verification:** `SESSION-SCN-011`; `vectors/session-contract/cases.json`; future `conformance:session_contract-activation-boundary` component tests.
+**验证：**`SESSION-SCN-011`；`vectors/session-contract/cases.json`；未来 `conformance:session_contract-activation-boundary` 组件检查。
 
-### SESSION-OBS-001 — Observation, appraisal, disclosure and decision duties must be assigned
+### SESSION-OBS-001 — 必须指定观察、评估、披露和决定责任
 
-**Requirement:** A contract `MUST` map each applicable `satisfaction_criteria` responsibility to authorized observation producers, methods, environment and time bounds, expected `structured_observation` relation positions, required evidence classes, disclosure rules, appraisal policy and named decision authority. The map `MUST` preserve the separation of observation, satisfaction, evidence validity, coverage, final decision and session termination. Model outputs and external protocol states remain typed candidates or sourced events.
+**要求：**contract `MUST` 为每项适用的 `satisfaction_criteria` 指定获准的观察生产者、方法、环境和时间范围、预期 `structured_observation` 关系位置、所需 evidence 类别、披露规则、评估政策和具名决定者。映射 `MUST` 分开实际观察、目标满足、evidence 有效性、覆盖度、最终决定和会话终止。模型输出和外部协议状态只能作为有类型的候选或带来源事件。
 
-**Failure:** An unassigned required observation, missing decision authority, hidden disclosure loss, or direct mapping from tool or Agent success to `met` or `accepted` rejects establishment.
+**失败：**必需观察无人负责、缺少决定者、披露损失被隐藏，或者工具或 Agent 成功被直接写成 `met` 或 `accepted` 时，建立失败。
 
-**Verification:** `SESSION-SCN-012`, `SESSION-SCN-013`; `vectors/session-contract/cases.json`; future `conformance:session_contract-observation-plan` component tests.
+**验证：**`SESSION-SCN-012`、`SESSION-SCN-013`；`vectors/session-contract/cases.json`；未来 `conformance:session_contract-observation-plan` 组件检查。
 
-### SESSION-IMM-001 — Establishment seals the contract and material drift invalidates it
+### SESSION-IMM-001 — 建立后 contract 只读，关键条件漂移使其失效
 
-**Requirement:** After establishment, the contract `MUST` be read-only. Changes to subject identity, external statements, verification results, revocation state, policy, authority, required environment, capability descriptor, budget, activation guard, observation duty or disclosure policy `MUST` invalidate the contract and stop or fail the run according to its predeclared rule. The implementation `MUST` append a scoped event and preserve prior evidence entries; it `MUST NOT` patch the old contract or erase the drift.
+**要求：**contract 建立后 `MUST` 保持只读。主体身份、外部陈述、验证结果、撤销状态、政策、决定者、必需环境、能力描述、预算、激活 guard、观察任务或披露政策发生变化时，`MUST` 使 contract 失效，并按预先声明的规则停止或终止运行。实现 `MUST` 追加一项说明影响范围的事件并保留已有 evidence；它 `MUST NOT` 修改旧 contract 或删除漂移记录。
 
-**Failure:** In-place mutation, silent refresh to broader authority, continued operation after material drift or overwriting prior evidence violates the session boundary.
+**失败：**原位修改、静默刷新为更大权限、关键条件漂移后继续运行，或覆盖旧 evidence，都违反会话要求。
 
-**Verification:** `SESSION-SCN-014`; `vectors/session-contract/cases.json`; future `conformance:session_contract-drift-invalidation` component tests.
+**验证：**`SESSION-SCN-014`；`vectors/session-contract/cases.json`；未来 `conformance:session_contract-drift-invalidation` 组件检查。
 
-### SESSION-LIF-001 — A contract is non-persistent, non-transferable and non-resumable
+### SESSION-LIF-001 — contract 不持久化、不转移，也不恢复
 
-**Requirement:** A contract `MUST` belong to exactly one run and one authorization context. It `MUST NOT` have a file extension, portable wire format, global content identity, package coordinate or cross-session reuse mechanism. Diagnostic snapshots MAY record redacted descriptors as evidence entries or session events, but `MUST NOT` rehydrate, transfer or resurrect the contract. Completion, failure, stop or invalidation `MUST` make all bound live capability material unreachable and trigger the declared disposal procedure.
+**要求：**contract `MUST` 只属于一次运行和一个授权语境。它 `MUST NOT` 拥有扩展名、可移植线格式、全局内容身份、包坐标或跨会话复用机制。诊断快照 `MAY` 把脱敏后的描述记录为 evidence 或会话事件，但 `MUST NOT` 据此重建、转移或复活 contract。完成、失败、停止或失效后，全部实时能力材料 `MUST` 变得不可访问，并触发已经声明的清理程序。
 
-**Failure:** Serializing a reusable contract, accepting a copied session identifier as authority, resuming with stale handles, or reconstructing a session from logs violates the lifecycle and requires rejection.
+**失败：**把 contract 序列化为可复用对象、把复制的会话标识当作权限、使用过期句柄恢复会话，或根据日志重建会话时，系统必须拒绝。
 
-**Verification:** `SESSION-SCN-015`; `vectors/session-contract/cases.json`; future `conformance:session_contract-session-disposal` component tests.
+**验证：**`SESSION-SCN-015`；`vectors/session-contract/cases.json`；未来 `conformance:session_contract-session-disposal` 组件检查。
 
-## 4. Current non-goals
+## 4. 当前不定义的内容
 
-This specification does not define a contract file, extension, magic number, serialization, stable ABI, runtime API, capability broker, sandbox, event encoding, process model, recovery protocol or implementation language. It also does not select Linux namespaces, seccomp, Landlock, containers, virtual machines or a model SDK. Those mechanisms may satisfy future implementation obligations only after the user opens the component-code stage and independent evidence demonstrates their actual isolation properties.
+本规范不定义 contract 文件、扩展名、魔数、序列化、稳定 ABI、运行 API、能力代理、沙箱、事件编码、进程模型、恢复协议或实现语言。它也不选择 Linux namespace、seccomp、Landlock、容器、虚拟机或模型 SDK。未来组件只有在独立证据证明这些机制提供了所需隔离和失效行为后，才能用它们满足相应实现义务。

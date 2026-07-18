@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "evidence Core Specification · Noemion"
+title: "evidence 核心规范 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/evidence-entry-core.html"
-summary: "规定一项证据必须怎样绑定对象、生产者、方法、环境、时间、观察和限制，才能支持有范围的主张。"
+summary: "规定一项证据必须记录观察对象、记录者、方法、环境、时间、实际发现和限制，防止结论扩大到未观察部分。"
 document_status: "规范草案"
 ---
-# evidence Core Specification
+# evidence 核心规范
 
 - 规范 ID：`EVIDENCE-CORE`
 - 版本：`0.1.0-draft`
@@ -18,7 +18,7 @@ document_status: "规范草案"
 
 ## 1. 范围
 
-本规范要求每项 evidence 说明提出者、精确对象、方法、环境和时间边界。它还必须记录取得了哪些结构化观察、实际提出什么有限主张，以及哪些限制阻止主张继续外推。溯源、证据类别、完整性、有效性、覆盖度、评估、决定和最小披露之间必须保持明确边界。
+每项 evidence 必须说明谁记录、观察哪个对象、采用什么方法、在何种环境和时间发生。记录还要写明实际观察、最多支持的结论，以及不能继续外推的限制。完整性、有效性、覆盖度、评估、最终决定和最小披露分别判断，不能用其中一项替代另一项。
 
 evidence 不是日志行、追踪跨度、模型解释、签名包、数学证明或最终验收决定。外部遥测、MCP/A2A 事件、供应链证明和人工记录只有在完成本规范要求的身份、范围、方法、限制与关系对齐后，才可能成为 evidence 的输入；外部字段名和状态不能直接成为 evidence 身份或 Noemion 结果。
 

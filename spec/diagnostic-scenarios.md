@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "Diagnostic Natural-Language Design Scenarios · Noemion"
+title: "诊断设计场景 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/diagnostic-scenarios.html"
 summary: "用格式错误、外部故障和可恢复失败等案例，检查诊断能否准确说明位置、原因和继续条件。"
 document_status: "非规范设计场景"
 ---
-# Diagnostic Natural-Language Design Scenarios
+# 诊断设计场景
 
 - 文档 ID：`DIA-SCEN`
 - 版本：`0.1.0-draft`
@@ -15,7 +15,7 @@ document_status: "非规范设计场景"
 - 状态：非规范设计语料
 - 适用范围：诊断身份、语境、层次、位置、主错误、恢复、外部映射、披露、预算与原子失败
 
-这些场景不是诊断运行时、日志系统、协议适配器或 CLI。它们用支持案例、反例和边界场景检查 DIA-CORE 是否能够解释现实错误；只有条款、登记验证和正反向量共同覆盖的内容才可能成为符合性要求。
+这些案例只用于检查 DIA-CORE 能否解释真实错误，不是诊断运行时、日志系统、协议适配器或 CLI。某项案例只有在对应规范条款和正反向量都明确验证方法后，才能成为实现必须满足的要求。
 
 ### DIA-SCN-001 — 中文与英文消息共享同一机器码
 

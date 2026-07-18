@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "evidence Threat Model · Noemion"
+title: "evidence 威胁模型 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/evidence-entry-threat-model.html"
-summary: "分析日志、模型输出、时间戳、重复记录和部分验证怎样制造虚假可信感，保护每项证据的真实范围。"
+summary: "分析日志、模型输出、时间戳、重复记录和部分验证怎样造成误判，并说明每项证据必须明确记录哪些对象、方法和限制。"
 document_status: "威胁模型"
 ---
-# evidence Threat Model
+# evidence 威胁模型
 
 - 文档 ID：`EVIDENCE-THREAT`
 - 版本：`0.1.0-draft`
@@ -15,9 +15,9 @@ document_status: "威胁模型"
 - 状态：草案；与 EVIDENCE-CORE 共同约束未来 evidence 生产者、验证者、归并器、runner、inspector 与决定权威
 - 实现状态：本文只是威胁模型，不是安全组件、采集器或验证服务
 
-## 1. 保护目标
+## 1. 证据记录必须防止什么
 
-evidence 的保护目标不是让记录看起来可信，而是让每项有限主张可以追到精确主体、生产者、方法、环境、时间、观察、变换、限制与上游依据。验证者必须能够区分记录完整、生产者真实、方法适用、覆盖充分、目标满足和权威接受。
+攻击者可能拿真实但不完整的日志、模型总结或重复记录，冒充已经覆盖全部目标。每项 evidence 因此必须写明谁产生、观察哪个对象、使用什么方法、在何种环境和时间发生、做过哪些变换以及存在哪些限制。验证者还要分别判断记录是否完整、来源是否真实、方法是否适用、覆盖是否充分、目标是否满足和决定者是否接受。
 
 攻击者可以控制日志、模型输出、外部 Agent/工具返回、遥测字段、文件名、顺序、时间戳、网络依赖、重复记录、签名包络和部分验证环境。任何输入都不能因格式正确、数量多或带签名自动升级信任。
 

@@ -4,7 +4,7 @@ title: ADR-0036 · 移除原文，就得到另一份制品
 page_role: content
 footer_text: Noemion · ADR-0036
 permalink: "/architecture/adr-0036-source-bearing-and-stripped-release.html"
-summary: 说明形成版为什么保留自然语言，而发布版为什么移除原文、取得新身份并建立新的验证关系。
+summary: 说明形成版为什么保留自然语言、发布版为什么删除原文并取得新身份，以及签名和验证为什么必须重新建立。
 decision_id: ADR-0036
 page_heading: ADR-0036 · 移除原文 · 就得到另一份制品
 page_lead: 形成版保留自然语言和确认路径；最终发布版移除原文，只保留经过确认的目标结构，并取得新的身份和验证关系。

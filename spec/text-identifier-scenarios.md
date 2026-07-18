@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "Text and Identifier Natural-Language Design Scenarios · Noemion"
+title: "文本与标识符设计场景 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/text-identifier-scenarios.html"
-summary: "用规范化、不可见字符、双向文本、同形字和模型输入案例，检查文本解释与安全显示边界。"
+summary: "用规范化、不可见字符、双向文本、同形字和模型输入案例，检查系统能否一致比较文字并向开发者显示真实字符。"
 document_status: "非规范设计场景"
 ---
-# Text and Identifier Natural-Language Design Scenarios
+# 文本与标识符设计场景
 
 - 文档 ID：`TEXT-SCEN`
 - 版本：`0.1.0-draft`
@@ -15,7 +15,7 @@ document_status: "非规范设计场景"
 - 状态：非规范设计语料
 - 适用范围：文本槽、UTF-8、来源变换、标识符、规范化、比较、范围、双向显示、不可见字符与模型输入
 
-这些场景不是 Unicode 处理实现、编辑器测试或模型安全基准。它们用支持案例、反例和边界场景检查 TEXT-IDENTIFIER-CORE 能否解释现实文本问题；只有条款、登记验证和正反向量共同覆盖的内容才可能成为符合性要求。
+这些案例只用于检查 TEXT-IDENTIFIER-CORE 能否解释真实的文本问题，不是 Unicode 处理实现、编辑器测试或模型安全基准。某项案例只有在对应规范条款和正反向量都明确验证方法后，才能成为实现必须满足的要求。
 
 ### TEXT-SCN-001 — 同一字符串位于不同文本槽
 

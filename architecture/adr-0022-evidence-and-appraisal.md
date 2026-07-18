@@ -4,7 +4,7 @@ title: ADR-0022 · 先问证据能证明什么
 page_role: content
 footer_text: Noemion · ADR-0022
 permalink: "/architecture/adr-0022-evidence-and-appraisal.html"
-summary: 说明一项记录必须绑定对象、方法、环境、时间和限制，才能支持有范围的结论，而不能直接代表最终接受。
+summary: 说明一项记录必须写明观察对象、方法、环境、时间和限制；缺少这些信息时，记录不能成为最终接受的依据。
 decision_id: ADR-0022
 page_heading: ADR-0022 · 先问证据 · 能证明什么
 page_lead: 一项记录只有绑定精确对象、产生方法、运行环境、观察时间和已知限制，才能支持有限主张。来源可信、内容完整、验证有效、覆盖充分、目标满足和最终接受必须分别判断。

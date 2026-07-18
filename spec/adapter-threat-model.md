@@ -1,20 +1,20 @@
 ---
 layout: spec
-title: "External Protocol Adapter Threat Model · Noemion"
+title: "外部协议适配威胁模型 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/adapter-threat-model.html"
-summary: "分析外部协议怎样造成版本漂移、权限扩大、重试副作用和信息泄露，并列出未来适配器必须关闭的风险。"
+summary: "分析版本漂移、越权、重复执行和信息泄露，列出未来适配器必须拒绝或阻止的具体行为。"
 document_status: "威胁模型"
 ---
-# External Protocol Adapter Threat Model
+# 外部协议适配威胁模型
 
 - 文档 ID：`ADP-THREAT`
 - 版本：`0.1.0-draft`
 - 日期：2026-07-13
 - 状态：runner 外部协议适配威胁草案
 
-外部协议把不可信对端、网络、任务、消息与产物连接到一次受限会话，因此同时跨越身份、权限、副作用、证据和披露边界。本模型只定义未来实现必须关闭的威胁，不表示 MCP、A2A、HTTP、模型 SDK 或任何适配器已经实现。
+外部对端可能谎报身份或能力、重放任务、扩大权限、隐藏副作用，或者通过返回内容泄露数据。下面逐项说明未来适配器遇到这些行为时必须拒绝什么、保留什么。不表示 MCP、A2A、HTTP、模型 SDK 或任何适配器已经实现。
 
 ### THR-ADP-001 — 浮动版本改变同一绑定的含义
 

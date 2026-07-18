@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "Exact Content Identity and Attestation Natural-Language Design Scenarios · Noemion"
+title: "精确内容身份与签名设计场景 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/identity-scenarios.html"
 summary: "用发布、裁剪、撤销和调试制品案例，检查精确身份、签名陈述、有效性和授权是否保持分开。"
 document_status: "非规范设计场景"
 ---
-# Exact Content Identity and Attestation Natural-Language Design Scenarios
+# 精确内容身份与签名设计场景
 
 - 文档 ID：`ID-SCEN`
 - 版本：`0.1.0-draft`
@@ -15,7 +15,7 @@ document_status: "非规范设计场景"
 - 状态：非规范设计语料
 - 适用范围：精确身份、不可变引用、签名陈述、验证材料、撤销、可复现性与伴随制品关系
 
-这些场景不是签名格式、证书 Profile、密码实现、透明日志或组件测试。它们用支持案例、反例和边界场景检查 ID-CORE 能否解释现实发布问题；只有条款、登记验证和正反向量共同覆盖的内容才可能成为符合性要求。
+这些案例只用于检查 ID-CORE 能否解释真实的内容身份与签名问题，不是签名格式、证书格式、密码实现、透明日志或组件测试。某项案例只有在对应规范条款和正反向量都明确验证方法后，才能成为实现必须满足的要求。
 
 ### ID-SCN-001 — 同一摘要文本位于不同对象域
 

@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "Authority and Authorization Decision Natural-Language Design Scenarios · Noemion"
+title: "决定者与授权设计场景 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/authority-scenarios.html"
 summary: "用登录、委托、同意、撤销和外部协议案例检查谁能代表谁，以及能在什么范围内决定或行动。"
 document_status: "非规范设计场景"
 ---
-# Authority and Authorization Decision Natural-Language Design Scenarios
+# 决定者与授权设计场景
 
 - 文档 ID：`AUT-SCEN`
 - 版本：`0.1.0-draft`
@@ -15,7 +15,7 @@ document_status: "非规范设计场景"
 - 状态：非规范设计语料
 - 适用范围：自然语言投影授权、权威语境、作用范围、决定、委托、多人规则、同意、撤销、重放、能力与结果分离
 
-这些场景不是政策语言、访问令牌、同意界面、权威目录或组件测试。它们用支持案例、反例和边界场景检查 AUT-CORE 能否解释现实授权问题；只有唯一条款、登记验证和正反向量共同覆盖的内容才可能成为符合性义务。
+这些案例只用于检查 AUT-CORE 能否解释真实的授权问题，不是政策语言、访问令牌、同意界面、决定者目录或组件测试。某项案例只有在对应规范条款和正反向量都明确验证方法后，才能成为实现必须满足的要求。
 
 ### AUT-SCN-001 — 授权绑定精确政策而不是最新政策
 

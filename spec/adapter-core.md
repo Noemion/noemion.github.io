@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "External Protocol Adapter Core Specification · Noemion"
+title: "外部协议适配核心规范 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/adapter-core.html"
-summary: "规定外部工具、Agent、模型服务和网络协议怎样进入一次受限会话，并保留外部事实、权限和副作用边界。"
+summary: "规定外部工具、Agent、模型服务和网络协议接入一次受控会话时，必须记录谁被调用、允许做什么、返回什么以及是否产生副作用。"
 document_status: "规范草案"
 ---
-# External Protocol Adapter Core Specification
+# 外部协议适配核心规范
 
 - 规范 ID：`ADP-CORE`
 - 版本：`0.1.0-draft`
@@ -18,7 +18,7 @@ document_status: "规范草案"
 
 ## 1. 范围
 
-本规范定义外部工具、Agent、模型服务、任务系统和网络协议进入 runner 边界时必须保持的不变量。它适用于 MCP、A2A、HTTP API、操作系统调用、模型 SDK 与未来协议，但不复制任何协议的数据模型，也不把某个协议设为 Noemion 的身份或权限来源。
+runner 调用外部工具、Agent、模型服务或网络接口时，必须记录实际对端、协议版本、允许的能力、发送的请求、收到的结果和可能发生的副作用。本规范规定这些信息怎样保存和核对。它适用于 MCP、A2A、HTTP API、操作系统调用、模型 SDK 与未来协议，但不复制这些协议的数据模型，也不把任何协议当作 Noemion 的身份或权限来源。
 
 协议适配只把一次已经受 contract 限制的调用连接到一个精确外部操作。它必须保留外部事实、声明映射损失、收窄能力、控制副作用，并把观察交给 evidence 与本地判断规则。适配层不是 Endem、closure、contract、evidence、决定权威、凭据包、模型上下文或新的结果域。
 
@@ -61,7 +61,7 @@ document_status: "规范草案"
 
 **要求：**每次调用 `MUST` 绑定 contract 会话、调用身份、精确主体、对端绑定、操作、规范化输入身份、能力依据、预算、截止点、幂等分类和预期观察责任。外部 request、task、message、context 或 trace ID `MAY` 作为附加关联，但 `MUST NOT` 替代本地调用身份。调用身份 `MUST` 在重试、流式事件、回调和最终结果中保持可追溯。
 
-**失败：**只用模型对话 ID 关联副作用、多个 contract 共用一个远端 task、重试产生无法区分的重复操作，或调用无法追溯到精确输入时，适配必须关闭失败。
+**失败：**只用模型对话 ID 关联副作用、多个 contract 共用一个远端 task、重试产生无法区分的重复操作，或调用无法追溯到精确输入时，适配器必须拒绝继续处理。
 
 **验证：**`ADP-SCN-006`；`vectors/adapters/cases.json`；未来 `conformance:adapter-invocation-binding` 组件测试。
 
@@ -125,7 +125,7 @@ document_status: "规范草案"
 
 **要求：**凭据 `MUST` 留在独立能力域，绑定明确受众、主体、scope、期限和本次会话；token passthrough、静态秘密嵌入 Agent Card/工具 schema/消息和跨对端复用 `MUST NOT` 允许。网络目标 `MUST` 经过 SSRF、重定向、Origin、DNS 变化和私有地址政策；输入、输出、历史、任务列表、回调和诊断 `MUST` 使用最小披露与有限大小、数量、并发、TTL、轮询和重试预算。
 
-**失败：**上游令牌透传给下游、Webhook 指向本地元数据服务、列任务泄露其他租户、无限 TTL 保留敏感输出，或模型看到实时能力句柄时，适配必须关闭失败并按 DIA-CORE 报告。
+**失败：**上游令牌透传给下游、Webhook 指向本地元数据服务、列任务泄露其他租户、无限 TTL 保留敏感输出，或模型看到实时能力句柄时，适配器必须拒绝继续并按 DIA-CORE 报告。
 
 **验证：**`ADP-SCN-004`、`ADP-SCN-018`；`vectors/adapters/cases.json`；未来 `conformance:adapter-security-envelope` 组件测试。
 

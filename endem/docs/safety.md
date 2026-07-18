@@ -45,7 +45,7 @@ GNU [`readelf` 手册](https://www.sourceware.org/binutils/docs/binutils/readelf
 - 递归、循环和图遍历深度；
 - 单次输出和总内存预算。
 
-计算使用 checked arithmetic。任何溢出、越界、重叠、非法对齐或资源放大都关闭失败，不能产生部分可信对象。
+计算使用 checked arithmetic。遇到溢出、越界、重叠、非法对齐或资源放大时必须拒绝整个输入，不能产生部分可信对象。
 
 ## 分层结论
 

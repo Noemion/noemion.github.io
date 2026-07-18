@@ -1,20 +1,20 @@
 ---
 layout: spec
-title: "Text and Identifier Threat Model · Noemion"
+title: "文本与标识符威胁模型 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/text-identifier-threat-model.html"
-summary: "分析看似相同的文字怎样改变码点、标识符绑定、来源范围或模型输入，并列出未来文本处理必须关闭的风险。"
+summary: "分析外观相同的文字怎样改变机器读取结果，并列出未来文本处理必须拒绝的编码、标识符和显示欺骗。"
 document_status: "威胁模型"
 ---
-# Text and Identifier Threat Model
+# 文本与标识符威胁模型
 
 - 文档 ID：`TEXT-THREAT`
 - 版本：`0.1.0-draft`
 - 日期：2026-07-13
 - 状态：跨制品文本与标识符边界威胁草案
 
-攻击者不必改变人眼看到的字形，也可能改变机器读取的码点、标识符绑定、来源范围、模型 token 或审核结论。本模型只定义未来实现必须关闭的威胁，不表示 Unicode 处理器、编辑器、同形检测器或模型输入网关已经实现。
+攻击者可以让文字看起来不变，却改变机器读取的码点、标识符、来源位置或模型 token，从而误导审核结论。下面逐项说明未来文本处理必须拒绝或明确显示什么。不表示 Unicode 处理器、编辑器、同形检测器或模型输入网关已经实现。
 
 ### THR-TEXT-001 — 文本槽职责混淆
 

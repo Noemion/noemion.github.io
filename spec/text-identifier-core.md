@@ -1,13 +1,13 @@
 ---
 layout: spec
-title: "Text and Identifier Core Specification · Noemion"
+title: "文本与标识符核心规范 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/text-identifier-core.html"
 summary: "规定原始文本、结构标识符、描述文本、显示视图和模型输入怎样区分，让人和机器能够核对同一内容。"
 document_status: "规范草案"
 ---
-# Text and Identifier Core Specification
+# 文本与标识符核心规范
 
 - 规范 ID：`TEXT-IDENTIFIER-CORE`
 - 版本：`0.1.0-draft`
@@ -129,7 +129,7 @@ document_status: "规范草案"
 
 ## 3. 思想来源与采用限制
 
-维特根斯坦在《逻辑哲学论》3.32 写道：“记号是一个符号中可以被感官感知到的东西。”3.321 又指出，同一个记号可以被不同符号共有。这里的工程启发是：可见文字、编码序列和已确认意义投影必须分层，使用位置与关系结构不能被字形替代。精确内容接受仍须核对 AUT-CORE 的语义授权绑定；该绑定不授予动作权限。哲学命题不能直接决定 UTF-8、NFC、标识符语法或安全策略；这些仍由本规范、Profile、威胁和向量定义。
+维特根斯坦在《逻辑哲学论》3.32 写道：“记号是一个符号中可以被感官感知到的东西。”3.321 又指出，同一个记号可以被不同符号共有。这里的工程启发是：可见文字、编码序列和已确认意义投影必须分层，使用位置与关系结构不能被字形替代。接受精确内容前，系统仍须核对谁在什么范围和截止点确认了哪项意义；AUT-CORE 把这项外部记录称为语义授权绑定，且明确它不授予动作权限。哲学命题不能直接决定 UTF-8、NFC、标识符语法或安全策略；这些仍由本规范、Profile、威胁和向量定义。
 
 ## 4. 权威依据与采用边界
 
