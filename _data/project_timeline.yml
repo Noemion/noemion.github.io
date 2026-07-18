@@ -1,6 +1,6 @@
 id: noemion-project-progress
-title: 项目进度时间线
-aria_label: Noemion 项目进度时间线
+title: 从现有成果到后续条件
+aria_label: Noemion 当前状态与后续条件
 current_stage_id: specification-validation
 
 overview:
@@ -32,8 +32,8 @@ items:
   - id: endem-vocabulary-topology
     state: confirmed
     label: 已有成果
-    title: 对象职责与单一应用边界
-    description: Endem、组合闭包、会话契约和有范围证据承担不同职责，未来公开入口收敛为一个应用；普通职责词已经接受，Endem 的发行读音仍待人类验证。
+    title: 对象职责与动作命名空间
+    description: Endem、closure、contract 和 evidence 承担不同职责；小写 endem 只统一公开动作名称，最终工具和发行包数量仍待实现证据。
   - id: endem-specification-core-design
     state: confirmed
     label: 已有成果

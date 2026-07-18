@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "endem · 目标制品应用"
+title: "endem · 规划动作"
 page_role: "tool-project"
 footer_text: "Noemion · endem"
 permalink: "/endem/index.html"
@@ -8,7 +8,7 @@ summary: "介绍计划中的 endem 动作怎样围绕同一目标完成形成、
 ---
 <main id="main-content" class="tool-project" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>Endem</span></nav>
-  <header class="application-introduction"><h1>endem 目标制品应用</h1><p><code>endem</code> 是当前规划的公开命令命名空间。开发者围绕同一目标完成形成、检查、组合和受限运行准备；最终需要几个工具、可执行文件或发行包仍待实现验证，当前没有可安装软件。</p><div class="badges"><span class="badge">应用设计</span><span class="badge">按任务阅读</span><span class="badge">自造名称待验证</span><span class="badge">尚未发布</span></div></header>
+  <header class="application-introduction"><h1>endem 规划动作</h1><p><code>endem</code> 是当前规划的公开命令命名空间。开发者围绕同一目标完成形成、检查、组合和受限运行准备；最终需要几个工具、可执行文件或发行包仍待实现验证，当前没有可安装软件。</p><div class="badges"><span class="badge">动作设计</span><span class="badge">按任务阅读</span><span class="badge">自造名称待验证</span><span class="badge">尚未发布</span></div></header>
 
   <div class="tool-project-body">
     <section class="tool-status-panel">
@@ -25,9 +25,9 @@ summary: "介绍计划中的 endem 动作怎样围绕同一目标完成形成、
 
     <div class="tool-project-main">
     <section>
-      <h2>用一次依赖升级理解应用边界</h2>
+      <h2>用一次依赖升级理解动作边界</h2>
       <p class="lead">假设开发者要求“把服务依赖更新到批准的安全版本，保持测试通过，经批准后发布”。<code>endem</code> 的设计目标不是替 Agent 完成这项工作，而是让目标、实际文件、运行权限、观察证据和最终决定各有明确责任。</p>
-      <div class="table-wrap"><table><thead><tr><th>开发者要回答的问题</th><th>应用边界内的工作</th><th>信息不足时怎样处理</th></tr></thead><tbody>
+      <div class="table-wrap"><table><thead><tr><th>开发者要回答的问题</th><th>对应责任</th><th>信息不足时怎样处理</th></tr></thead><tbody>
         <tr><td>目标实际表示什么？</td><td>保存来源，把已经确认的意义和待确认事项分开，再形成来源保留的目标制品</td><td>意义没有确认时停止形成，不让模型选择一个最可能的解释</td></tr>
         <tr><td>实际文件是否符合精确规则？</td><td>生产路径检查真实字节；独立路径重新读取并给出有范围的视图与差异</td><td>任一路径失败或两条解释不一致时停止发布，保留最小复现并调查规则或实现</td></tr>
         <tr><td>是否需要多个目标共同交付？</td><td>只有真实消费者需要多个可独立失败的目标时，才固定成员、引用、冲突与共同权限</td><td>引用缺失、闭包不完整或权限扩大时拒绝组合</td></tr>
@@ -41,8 +41,8 @@ summary: "介绍计划中的 endem 动作怎样围绕同一目标完成形成、
       <div class="table-wrap"><table><thead><tr><th>开发者工作</th><th>现行设计标识</th><th>读取什么</th><th>交付什么</th></tr></thead><tbody>
         <tr><td>从已确认意义形成目标制品</td><td class="tool-action-id"><code>form</code></td><td>受控来源、候选投影、具名意义决定和精确 Profile</td><td>来源保留的初始 Endem；意义未确认或 Profile 不匹配时不写出对象</td></tr>
         <tr><td>从生产侧检查实际字节</td><td class="tool-action-id"><code>lint</code></td><td>实际制品、请求层次、限制和信任材料</td><td>分层结论与诊断；内部检查引用不跨入独立读取域</td></tr>
-        <tr><td>独立读取和比较实际字节</td><td class="tool-action-id"><code>inspect</code></td><td>当前为实际 Endem 字节、精确规范/Profile、视图和预算；其他对象等待物理格式</td><td>带范围的只读视图、差分和诊断；不产生生产检查通过结论</td></tr>
         <tr><td>固定多个目标与依赖</td><td class="tool-action-id"><code>compose</code></td><td>两个或更多 Endem、组合策略和依赖锁</td><td>抽象 closure 闭包；物理格式尚未确定</td></tr>
+        <tr><td>独立读取和比较实际字节</td><td class="tool-action-id"><code>inspect</code></td><td>当前为实际 Endem 字节、精确规范/Profile、视图和预算；其他对象等待物理格式</td><td>带范围的只读视图、差分和诊断；不产生生产检查通过结论</td></tr>
         <tr><td>建立一次受限运行会话</td><td class="tool-action-id"><code>run</code></td><td>精确发布制品、适用外部陈述与验证记录、运行策略、环境和能力目录</td><td>contract、运行记录和有范围证据；最终决定由具名权威另行作出</td></tr>
       </tbody></table></div>
       <p class="callout"><strong>名称状态：</strong><code>form</code>、<code>lint</code>、<code>compose</code>、<code>inspect</code> 与 <code>run</code> 已按普通词的词首、职责和关键字语料规则接受，但仍只是设计标识，不是已经发布的命令参数。</p>

@@ -1417,7 +1417,7 @@ body[data-docs-layout="true"] .manual-index-group .page-links{margin:0;border:1p
   body[data-docs-layout="true"] .site-footer{width:min(1000px,var(--site-frame-width));margin-right:auto;margin-left:auto}
 }
 
-/* Endem application signature. The application page and its manual share one identity. */
+/* Endem action-page signature. The action page and its manual share one identity. */
 body[data-site-module="endem"]{
   --portal-coral:var(--tool-accent,#c43b1b);
   --tool-accent:#2557be;--tool-a:#4d87ff;--tool-b:#263d91;--tool-c:#68d7b2;

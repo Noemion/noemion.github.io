@@ -82,7 +82,6 @@ ALLOWED_HANDWRITTEN_HTML_ROUTES = {
     "architecture/decisions.html",
     "components/index.html",
     "development/index.html",
-    "development/current-stage.html",
     "downloads/index.html",
     "endem/index.html",
     "faq/index.html",
@@ -174,8 +173,10 @@ ARCHITECTURE_INDEX_HEADINGS = [
     "按问题继续",
 ]
 DEVELOPMENT_INDEX_HEADINGS = [
-    "当前先完成可以被独立核对的设计",
-    "按问题继续阅读",
+    "现在可以依赖什么",
+    "从现有成果到后续条件",
+    "已有成果与研究入口",
+    "当前限制条件",
 ]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "从一次依赖升级看清问题",
@@ -380,7 +381,7 @@ SITE_MODULES = {
 }
 APPLICATION_PROJECT_SECTIONS = [
     "先确认当前可用性",
-    "用一次依赖升级理解应用边界",
+    "用一次依赖升级理解动作边界",
     "按工作选择设计入口",
     "一条任务怎样经过不同信任边界",
     "什么时候必须停止或交接",
@@ -1245,6 +1246,7 @@ class PageParser(HTMLParser):
         self.skip_links = 0
         self.main_targets = 0
         self.class_counts = defaultdict(int)
+        self.class_texts = defaultdict(list)
         self.scoped_links = defaultdict(list)
         self.manual_roles = defaultdict(dict)
         self.breadcrumb_links = []
@@ -1351,6 +1353,8 @@ class PageParser(HTMLParser):
         if self.active_section is not None:
             self.active_section["text"].append(data)
         ancestor_classes = set().union(*(item[1] for item in self.stack), set())
+        for name in ancestor_classes:
+            self.class_texts[name].append(data)
         if "manual-article" in ancestor_classes:
             self.manual_article_text.append(data)
         if "breadcrumbs" in ancestor_classes:
@@ -1538,7 +1542,7 @@ def validate_readability_behavior_contracts(root):
             "href: /docs/architecture-guide.html",
             "href: /endem/docs/reference.html",
             "href: /specifications/index.html",
-            "href: /development/current-stage.html",
+            "href: /development/index.html",
             "href: /faq/index.html",
             "href: /development/implementation-roadmap.html",
         ):
@@ -1773,7 +1777,7 @@ def validate_public_html(route, text):
         r"(?:资料一致性检查|资料检查|仓库内容检查|公开内容检查|具名规范维护者复核|测试输出|版本化验证结果)": "maintenance process",
         r"(?:规范提案向量检查器|规范向量检查器|一致性检查工具)": "repository checker",
         r"(?:治理边界|采用门槛|当前决定边界|关闭决定|决策门|正式 ADR|进入代码开发阶段|当前仍未进入代码开发阶段|proposal-vector checker only|for maintainers|current contribution scope|reporting routes|unfrozen)": "internal governance wording",
-        r"(?:唯一公开 CLI|唯一公开命令|单一命令入口|只提供一个命令入口|计划只提供一个顶层入口|只有三个组件|规划三个组件|统一 CLI|一个入口不能|统一入口|同一个入口|同一个命令入口|统一的人类入口)": "premature tool packaging claim",
+        r"(?:唯一公开 CLI|唯一公开命令|单一命令入口|只提供一个命令入口|计划只提供一个顶层入口|只有三个组件|规划三个组件|统一 CLI|一个入口不能|统一入口|同一个入口|同一个命令入口|统一的人类入口|ONE CLI|一个应用只保留|未来公开入口收敛为一个应用|Endem 应用|endem 目标制品应用|应用设计|一个公开 CLI 可以简化|一个发行包可以提供三类入口)": "premature tool packaging claim",
         r"(?:开发与贡献|测试与验证)": "maintenance page wording",
     }
     for pattern, label in maintenance_patterns.items():
@@ -1862,6 +1866,11 @@ def validate_jekyll_sources():
                 "public maintenance page must remain removed: "
                 + str(removed_maintenance_source.relative_to(SOURCE_ROOT))
             )
+    removed_merged_progress = SOURCE_ROOT / "development" / "current-stage.html"
+    if removed_merged_progress.exists():
+        errors.append(
+            "merged project-progress page must not retain development/current-stage.html"
+        )
     readme_text = README.read_text()
     if len(readme_text.splitlines()) > 100:
         errors.append("README.md must remain a concise developer entry under 100 lines")
@@ -3021,7 +3030,7 @@ def validate_jekyll_sources():
     for page, token in {
         "components/index.html": "contract、evidence、外部签名与最终决定仍由各自责任域产生",
         "endem/index.html": "外部签名响应由独立集成核对，不作为 producer 输入",
-        "endem/docs/reference.md": "Endem 规范字节的唯一生产入口",
+        "endem/docs/reference.md": "只有 producer 可以承担规范字节生产责任",
         "docs/architecture-guide.md": "未来物理 Profile 确定后的 closure 与发布派生",
     }.items():
         if token not in producer_boundary_pages[page]:
@@ -3496,11 +3505,11 @@ def validate_jekyll_sources():
             '<a href="endem/#action-map"><span class="lifecycle-number">01</span>',
             '<a href="components/inspector.html"><span class="lifecycle-number">02</span>',
             '<a href="components/runner.html"><span class="lifecycle-number">03</span>',
-            '<a href="endem/"><small>01</small><strong>Endem 应用</strong>',
+            '<a href="endem/"><small>01</small><strong>Endem 动作</strong>',
             '<a href="specifications/"><small>02</small><strong>规范</strong>',
             '<a href="architecture/"><small>03</small><strong>架构</strong>',
             '<a href="components/"><small>04</small><strong>组件</strong>',
-            '<a href="development/current-stage.html"><small>05</small><strong>项目进展</strong>',
+            '<a href="development/"><small>05</small><strong>项目进展</strong>',
             '<a href="docs/"><small>06</small><strong>指南与参考</strong>',
         )
         for contract in homepage_card_routes:
@@ -3660,7 +3669,7 @@ def validate_jekyll_sources():
             "文档",
             "Endem",
             "进展",
-            "当前状态",
+            "开放问题",
             "开发路线图",
             "常见问题",
             "许可证",
@@ -4400,9 +4409,9 @@ def validate_jekyll_sources():
         global_navigation_labels = re.findall(
             r"^    label:\s*(.+?)\s*$", global_navigation_text, re.MULTILINE
         )
-        if global_navigation_labels != ["项目", "规范", "应用", "指南", "进展"]:
+        if global_navigation_labels != ["项目", "规范", "Endem", "指南", "进展"]:
             errors.append(
-                "global navigation must use project task labels and keep Endem inside the application group"
+                "global navigation must use project task labels and name the Endem action group directly"
             )
         for phrase in PUBLIC_META_PHRASES:
             if phrase in navigation_text:
@@ -4578,9 +4587,9 @@ def validate_jekyll_sources():
         for token in (
             "timeline:",
             "label: 进展",
-            "href: /development/current-stage.html",
-            "aria_label: 查看 Noemion 项目时间线",
-            "title: 查看项目进度时间线",
+            "href: /development/index.html",
+            "aria_label: 查看 Noemion 项目进展",
+            "title: 查看项目当前状态",
         ):
             if token not in site_header_text:
                 errors.append(f"site header timeline configuration missing: {token}")
@@ -4629,9 +4638,9 @@ def validate_jekyll_sources():
             if token not in timeline_include_text:
                 errors.append(f"project timeline include missing contract: {token}")
 
-    current_stage = SOURCE_ROOT / "development/current-stage.html"
+    current_stage = SOURCE_ROOT / "development/index.html"
     if not current_stage.exists():
-        errors.append("missing development/current-stage.html")
+        errors.append("missing merged development/index.html")
     else:
         current_stage_text = current_stage.read_text()
         for token in (
@@ -4647,7 +4656,7 @@ def validate_jekyll_sources():
             "include project-timeline.html timeline=timeline",
         ):
             if token not in current_stage_text:
-                errors.append(f"current stage page missing contract: {token}")
+                errors.append(f"project progress page missing contract: {token}")
         timeline_include_text = (SOURCE_ROOT / "_includes/project-timeline.html").read_text()
         for token in (
             "data-summary-rail-layout",
@@ -4666,7 +4675,7 @@ def validate_jekyll_sources():
             "组件代码开发尚未开启",
         ):
             if forbidden in current_stage_text:
-                errors.append(f"current stage page exposes internal workflow copy: {forbidden}")
+                errors.append(f"project progress page exposes internal workflow copy: {forbidden}")
     for phrase in PUBLIC_META_PHRASES:
         if phrase in timeline_text:
             errors.append(
@@ -4696,7 +4705,7 @@ def validate_jekyll_sources():
     image_contracts = {
         "assets/images/secure-endem-producer.svg": (20_000, 'src="../assets/images/secure-endem-producer.svg"'),
     }
-    image_consumers = (SOURCE_ROOT / "index.html").read_text() + (SOURCE_ROOT / "development/current-stage.html").read_text()
+    image_consumers = (SOURCE_ROOT / "index.html").read_text() + (SOURCE_ROOT / "development/index.html").read_text()
     for image_route, (maximum_bytes, source_token) in image_contracts.items():
         image_path = SOURCE_ROOT / image_route
         if not image_path.exists():
@@ -4718,11 +4727,11 @@ def validate_jekyll_sources():
     style_text = style.read_text() if style.exists() else ""
     endem_source = SOURCE_ROOT / "endem" / "index.html"
     if not endem_source.exists():
-        errors.append("missing Endem application page")
+        errors.append("missing Endem action page")
     else:
         endem_text = endem_source.read_text()
         if endem_text.count('class="tool-project-body"') != 1:
-            errors.append("Endem application page must define one bounded sticky body")
+            errors.append("Endem action page must define one bounded sticky body")
         elif (
             endem_text.count('class="tool-status-panel"') != 1
             or endem_text.count('class="tool-project-main"') != 1
@@ -4734,10 +4743,10 @@ def validate_jekyll_sources():
             ) is None
         ):
             errors.append(
-                "Endem application must separate its semantic status panel from the task-reading column"
+                "Endem action page must separate its semantic status panel from the task-reading column"
             )
     if 'body[data-site-module="endem"]' not in style_text:
-        errors.append("missing shared Endem application visual signature")
+        errors.append("missing shared Endem action-page visual signature")
 
     if errors:
         print("\n".join(errors))
@@ -4780,7 +4789,7 @@ def application_project_validator_self_test():
 
     negative_cases = {
         "invalid order": [
-            ["当前状态", "应用简介", *APPLICATION_PROJECT_SECTIONS[2:]],
+            ["当前状态", "动作简介", *APPLICATION_PROJECT_SECTIONS[2:]],
             valid_status,
         ],
         "duplicate section": [
@@ -5043,9 +5052,9 @@ def main():
         "这些字节在精确规则和预算下怎样显示、哪里不同或为何停止",
     ):
         if token not in endem_reference_text:
-            errors.append(f"Endem application reference missing precise formation wording: {token}")
+            errors.append(f"Endem action reference missing precise formation wording: {token}")
     if "来源绑定、规范化、确定性写入" in endem_reference_text:
-        errors.append("Endem application reference retains undefined normalization wording")
+        errors.append("Endem action reference retains undefined normalization wording")
     terminology_guide_text = (SOURCE_ROOT / "architecture" / "adr-0037-terminology-simplification.md").read_text()
     for token in (
         "项目名 `Noemion` 和核心制品名 `Endem`",
@@ -5432,26 +5441,28 @@ def main():
             )
         visible_text = content_visible_text(parser)
         for term in (
-            "Noemion 目前处于规范与架构设计阶段",
-            "不表示编译器、检查工具、运行器或安装包已经存在",
-            "自然语言语义抽取",
+            "目标、会话、证据、授权和结果分别承担不同责任",
+            "解析器、运行时、安全隔离或协议互操作已经存在",
+            "设备内语义抽取模型已有分阶段研究路线",
             "最终工具数量",
-            "当前没有 producer、inspector、runner、可执行 CLI、软件包或生产互操作声明",
-            "项目现在进展到哪里",
-            "后续准备验证什么",
-            "哪些问题尚无结论",
-            "现在可以获得什么",
+            "一组动作名称对应多条信任路径",
+            "开发路线图",
+            "开放问题",
+            "目前没有正式软件版本、稳定规范版本、安装包或发行日期",
         ):
             if term not in visible_text:
                 errors.append(
                     f"development/index.html: missing project progress boundary {term}"
                 )
         if (
-            parser.class_counts["status-item"] != 4
-            or parser.class_counts["page-link"] != 4
+            parser.class_counts["current-stage-feature"] != 1
+            or parser.class_counts["project-progress-section"] != 1
+            or parser.class_counts["news-record"] != 4
+            or parser.class_counts["status-item"] != 0
+            or parser.class_counts["page-link"] != 0
         ):
             errors.append(
-                "development/index.html: must keep four reader-facing status items and four routed links"
+                "development/index.html: must keep one merged status path and no duplicate overview cards"
             )
         for obsolete_heading in (
             "开发原则", "实施与验证", "源代码与构建",
@@ -5855,6 +5866,16 @@ def main():
                 "with stable action IDs, "
                 "and four reading links"
             )
+        action_ids = [
+            normalize_visible_text(value)
+            for value in parser.class_texts["tool-action-id"]
+            if normalize_visible_text(value)
+        ]
+        if action_ids != ["form", "lint", "compose", "inspect", "run"]:
+            errors.append(
+                f"{row['route']}: action IDs must keep the canonical order "
+                "form / lint / compose / inspect / run"
+            )
         resource_sections = [
             section for section in parser.sections if section["heading"] == "继续阅读"
         ]
@@ -6012,7 +6033,10 @@ def main():
         if page_directory_output_text.count("data-page-directory-item") != len(registered):
             errors.append("page directory must render every registered route exactly once")
 
-    current_stage_output = ROOT / "development/current-stage.html"
+    obsolete_progress_output = ROOT / "development/current-stage.html"
+    if obsolete_progress_output.exists():
+        errors.append("merged project progress must not publish development/current-stage.html")
+    current_stage_output = ROOT / "development/index.html"
     if current_stage_output.exists():
         current_stage_output_text = current_stage_output.read_text()
         rendered_stages = re.findall(
@@ -6027,7 +6051,7 @@ def main():
             re.MULTILINE,
         )
         if rendered_stages != configured_stages:
-            errors.append("current stage output must match configured timeline order, states, and titles")
+            errors.append("project progress output must match configured timeline order, states, and titles")
         rendered_counts_match = re.search(
             r'<dl class="progress-counts">(.*?)</dl>',
             current_stage_output_text,
@@ -6044,7 +6068,7 @@ def main():
             sum(state in {"next", "future"} for _, state, _ in configured_stages),
         ]
         if rendered_counts != expected_counts:
-            errors.append("current stage overview counts must match configured timeline states")
+            errors.append("project progress overview counts must match configured timeline states")
         site_header_source_text = (SOURCE_ROOT / "_data/site_header.yml").read_text()
         configured_timeline_label_match = re.search(
             r"^  label:\s*(.+?)\s*$", site_header_source_text, re.MULTILINE
@@ -6056,8 +6080,8 @@ def main():
         )
         for token in (
             'data-timeline-id="noemion-project-progress"',
-            'aria-label="查看 Noemion 项目时间线"',
-            'href="/development/current-stage.html"',
+            'aria-label="查看 Noemion 项目进展"',
+            'href="/development/index.html"',
             f'<strong class="global-timeline-value">{configured_timeline_label}</strong>',
             "project-progress-summary\"",
             'class="progress-counts"',
@@ -6066,7 +6090,7 @@ def main():
             "后续规划",
         ):
             if token not in current_stage_output_text:
-                errors.append(f"current stage output missing configured value: {token}")
+                errors.append(f"project progress output missing configured value: {token}")
         for forbidden in (
             "当前阶段的进入条件",
             "尚未满足的退出证据",
@@ -6074,7 +6098,7 @@ def main():
             "时间线不是完成百分比",
         ):
             if forbidden in current_stage_output_text:
-                errors.append(f"current stage output exposes internal workflow copy: {forbidden}")
+                errors.append(f"project progress output exposes internal workflow copy: {forbidden}")
 
     site_script = ROOT / "assets/site.mjs"
     route_module = ROOT / "assets/modules/route-model.mjs"
@@ -6279,7 +6303,6 @@ def main():
                 ["downloads/index.html", "resources"],
                 ["faq/index.html", "resources"],
                 ["development/index.html", "development"],
-                ["development/current-stage.html", "development"],
                 ["endem/index.html", "endem"],
                 ["endem/docs/safety.html", "endem"],
             ]

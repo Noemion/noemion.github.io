@@ -1,5 +1,5 @@
 timeline:
   label: 进展
-  href: /development/current-stage.html
-  aria_label: 查看 Noemion 项目时间线
-  title: 查看项目进度时间线
+  href: /development/index.html
+  aria_label: 查看 Noemion 项目进展
+  title: 查看项目当前状态

@@ -2,7 +2,7 @@
 
 Version: 3
 
-Noemion publishes its current project portal, architecture, specifications, component boundaries, development status, the Endem application, and manuals as canonical HTML pages. This Markdown index is the compact route registry for machine discovery; readers can use the generated HTML directory.
+Noemion publishes its current project portal, architecture, specifications, component boundaries, development status, planned Endem actions, and manuals as canonical HTML pages. This Markdown index is the compact route registry for machine discovery; readers can use the generated HTML directory.
 
 ## Discovery surfaces
 
@@ -124,12 +124,11 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Project progress and resources
 
-- [Project progress](https://noemion.github.io/development/index.html) — existing results, active research, pending questions, limitations, and the next evidence needed
-- [Project progress](https://noemion.github.io/development/current-stage.html) — completed work, active research, planned work, and dated verifiable milestones
+- [Project progress](https://noemion.github.io/development/index.html) — existing results, active research, planned work, limitations, and the next evidence needed
 - [Implementation roadmap](https://noemion.github.io/development/implementation-roadmap.html) — current work, evidence required to advance, validation slices, and stop conditions
 - [Resources and availability](https://noemion.github.io/downloads/index.html) — current public materials, truthful software availability, release evidence, and future installation conditions
 
-## Endem application
+## Endem actions
 
 - [Endem](https://noemion.github.io/endem/index.html) — a task-based guide to the planned public action namespace, separated trust responsibilities, stop conditions, and current availability; the final tool count remains undetermined
 

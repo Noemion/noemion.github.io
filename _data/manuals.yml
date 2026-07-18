@@ -21,11 +21,11 @@ docs:
       order: 3
 
 endem:
-  kicker: Application Manual
+  kicker: Action Manual
   title: Endem 使用手册
   root: /endem/docs/index.html
   parent_url: /endem/index.html
-  parent_label: 返回 Endem 应用页
+  parent_label: 返回 Endem 动作页
   up_label: 返回手册首页
   index_label: 参考
   breadcrumbs:
