@@ -5,7 +5,7 @@ page_role: "section"
 footer_text: "Noemion · 全部页面"
 permalink: "/pages/index.html"
 page_heading: "全部页面"
-page_lead: "按名称、栏目或路径查找 Noemion 当前公开的正式页面；这里展示的是读者页面，不包含内部设计与测试资料。"
+page_lead: "按名称、栏目或路径查找 Noemion 当前面向开发者的全部正式页面。"
 summary: "Noemion 全部公开页面目录，支持按名称、栏目和路径查找。"
 ---
 

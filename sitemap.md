@@ -122,7 +122,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Getting started](https://noemion.github.io/docs/getting-started.html) — one dependency-upgrade case separates goals, authorization, protocol states, evidence, and final decisions
 - [Architecture guide](https://noemion.github.io/docs/architecture-guide.html) — one Agent task mapped to artifact, session, action, evidence, and decision boundaries
 
-## Development and resources
+## Project progress and resources
 
 - [Project progress](https://noemion.github.io/development/index.html) — existing results, active research, pending questions, limitations, and the next evidence needed
 - [Project progress](https://noemion.github.io/development/current-stage.html) — completed work, active research, planned work, and dated verifiable milestones
@@ -131,7 +131,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Endem application
 
-- [Endem](https://noemion.github.io/endem/index.html) — a task-based guide to the planned single command surface, trust boundaries, stop conditions, and current availability
+- [Endem](https://noemion.github.io/endem/index.html) — a task-based guide to the planned public action namespace, separated trust responsibilities, stop conditions, and current availability; the final tool count remains undetermined
 
 ## Endem manual
 

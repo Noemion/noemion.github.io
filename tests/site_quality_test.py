@@ -465,6 +465,7 @@ PUBLIC_META_PHRASES = (
     "研究中的研究",
     "当前仍未冻结",
     "仍未冻结的内容",
+    "内部设计与测试资料",
 )
 PUBLIC_RESEARCH_PROCESS_PHRASES = (
     "等待用户决定",
@@ -1772,7 +1773,7 @@ def validate_public_html(route, text):
         r"(?:资料一致性检查|资料检查|仓库内容检查|公开内容检查|具名规范维护者复核|测试输出|版本化验证结果)": "maintenance process",
         r"(?:规范提案向量检查器|规范向量检查器|一致性检查工具)": "repository checker",
         r"(?:治理边界|采用门槛|当前决定边界|关闭决定|决策门|正式 ADR|进入代码开发阶段|当前仍未进入代码开发阶段|proposal-vector checker only|for maintainers|current contribution scope|reporting routes|unfrozen)": "internal governance wording",
-        r"(?:唯一公开 CLI|唯一公开命令|单一命令入口|只提供一个命令入口|只有三个组件|规划三个组件|统一 CLI)": "premature tool packaging claim",
+        r"(?:唯一公开 CLI|唯一公开命令|单一命令入口|只提供一个命令入口|计划只提供一个顶层入口|只有三个组件|规划三个组件|统一 CLI|一个入口不能|统一入口|同一个入口|同一个命令入口)": "premature tool packaging claim",
         r"(?:开发与贡献|测试与验证)": "maintenance page wording",
     }
     for pattern, label in maintenance_patterns.items():
@@ -1870,9 +1871,26 @@ def validate_jekyll_sources():
     ):
         if token not in readme_text:
             errors.append(f"README.md missing essential developer entry: {token}")
+    for stale_readme_phrase in (
+        "`endem` 命令行工具的实现",
+        "入门、架构和开发等任务型指南",
+    ):
+        if stale_readme_phrase in readme_text:
+            errors.append(
+                f"README.md retains stale project fact: {stale_readme_phrase!r}"
+            )
     for token in ("## Jekyll 源码模型", "-proposal.md", "ADR-0010"):
         if token in readme_text:
             errors.append(f"README.md duplicates detailed maintenance material: {token}")
+    sitemap_source_text = SOURCE_SITEMAP.read_text()
+    for stale_sitemap_phrase in (
+        "planned single command surface",
+        "## Development and resources",
+    ):
+        if stale_sitemap_phrase in sitemap_source_text:
+            errors.append(
+                f"sitemap.md retains stale route description: {stale_sitemap_phrase!r}"
+            )
     public_research_files = [
         SOURCE_ROOT / "README.md",
         *sorted((SOURCE_ROOT / "spec").glob("*.md")),
@@ -3641,7 +3659,9 @@ def validate_jekyll_sources():
             "全部页面",
             "文档",
             "Endem",
-            "开发",
+            "进展",
+            "当前状态",
+            "开发路线图",
             "常见问题",
             "许可证",
             'href="https://github.com/Noemion"',
@@ -3675,6 +3695,28 @@ def validate_jekyll_sources():
         )
         if not browse_section or "'/pages/index.html'" not in browse_section.group(1) or "全部页面" not in browse_section.group(1):
             errors.append("site footer must place the reader page directory in the Browse column")
+        for footer_section in re.findall(r"<section>(.*?)</section>", footer_text, re.DOTALL):
+            section_hrefs = re.findall(
+                r'href="\{\{ \'([^\']+)\' \| relative_url \}\}"',
+                footer_section,
+            )
+            duplicate_hrefs = sorted(
+                href for href in set(section_hrefs) if section_hrefs.count(href) > 1
+            )
+            if duplicate_hrefs:
+                errors.append(
+                    "site footer section repeats the same route: "
+                    + ", ".join(duplicate_hrefs)
+                )
+            section_labels = re.findall(r">\s*([^<]+?)\s*</a>", footer_section)
+            duplicate_labels = sorted(
+                label for label in set(section_labels) if section_labels.count(label) > 1
+            )
+            if duplicate_labels:
+                errors.append(
+                    "site footer section repeats the same label: "
+                    + ", ".join(duplicate_labels)
+                )
         footer_bottom = re.search(
             r'<div class="site-footer-bottom">(.*)<div class="site-theme-picker"',
             footer_text,
@@ -3693,6 +3735,7 @@ def validate_jekyll_sources():
             'layout: page-directory',
             'permalink: "/pages/index.html"',
             'page_heading: "全部页面"',
+            'page_lead: "按名称、栏目或路径查找 Noemion 当前面向开发者的全部正式页面。"',
         ),
         page_directory_layout: (
             '<table class="page-directory-table">',

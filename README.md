@@ -2,7 +2,7 @@
 
 本仓库维护 [Noemion 官方网站](https://noemion.github.io/)及其公开技术资料，包括项目介绍、架构设计、规范、指南、Endem 使用手册和开发进展。
 
-Noemion 目前处于研究、规范与验证方案设计阶段，尚未发布 producer、inspector、runner 或 `endem` 命令行工具的实现。仓库中的测试用于检查资料、路由和草案之间的一致性，不代表组件已经实现。
+Noemion 目前处于研究、规范与验证方案设计阶段，尚未发布 producer、inspector、runner，或由规划中的 `endem` 命令命名空间提供的任何工具。该命名空间不确定最终可执行文件、进程或发行包数量。仓库中的测试用于检查资料、路由和草案之间的一致性，不代表组件已经实现。
 
 ## 从哪里开始
 
@@ -15,7 +15,7 @@ Noemion 目前处于研究、规范与验证方案设计阶段，尚未发布 pr
 ## 仓库内容
 
 - `about/`、`architecture/`、`components/`、`specifications/`：面向开发者的项目、架构与规范说明；其中技术正文以 Markdown 作为唯一可编辑来源。
-- `docs/`：入门、架构和开发等任务型指南。
+- `docs/`：入门与架构任务型指南。
 - `endem/`：Endem 应用介绍和使用手册。
 - `spec/`：版本化的规范条款与设计提案；Markdown 是唯一正文源，Jekyll 自动生成同路径 HTML 正式页面。
 - `vectors/`：与规范条款对应的测试资料和实验性字节样例。
