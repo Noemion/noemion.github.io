@@ -1,6 +1,6 @@
 title: Noemion
 description: >-
-  Noemion 研究如何让每个人以自然语言表达意图，形成供 AI 系统安全使用的目标制品；发布制品只保留经过确认的目标结构，并在使用前核对授权边界。
+  Noemion 研究如何让每个人以自然语言表达意图，形成供人工智能系统安全使用的目标制品；发布制品只保留经过确认的目标结构，并在使用前核对授权边界。
 url: https://noemion.github.io
 baseurl: ""
 repository: Noemion/noemion.github.io

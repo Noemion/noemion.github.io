@@ -127,8 +127,6 @@ DOC_GUIDE_ORDER = [
     "docs/terminology-audit.html",
     "docs/architecture-guide.html",
     "docs/development-guide.html",
-    "docs/endem-reference.html",
-    "docs/specifications-reference.html",
 ]
 DOC_GUIDE_HEADINGS = {
     "docs/getting-started.html": [
@@ -147,18 +145,12 @@ DOC_GUIDE_HEADINGS = {
     "docs/development-guide.html": [
         "先写一个可被反例推翻的主张", "用一条变更记录贯穿责任", "按权威顺序修改", "按变更类型选择证据", "模型参与时先固定实际输入", "当前阶段怎样停止",
     ],
-    "docs/endem-reference.html": [
-        "应用总览", "deterministic producer 子命令", "inspect 的独立性", "run 的隔离性", "不建设独立模型平台",
-    ],
-    "docs/specifications-reference.html": [
-        "按工程问题找资料", "权威顺序", "资料状态与使用边界", "Endem", "Endem closure", "session contract、evidence entry 与横切边界", "ADR 与开放问题",
-    ],
 }
 HOME_HEADINGS = [
-    "人工智能系统开始行动人的目标仍困在对话里",
-    "六项职责让目标保持原意",
+    "人工智能系统开始行动，人的目标仍困在对话里",
+    "把目标拆成六类可检查的信息",
     "四类对象各自回答一个问题",
-    "一个命令入口三项责任必须分开",
+    "一个命令入口三项安全责任仍须分开",
     "当前先完成规范和安全边界",
     "借鉴成熟工具让结果可以复核",
     "继续阅读",
@@ -753,9 +745,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "非规范说明",
             "用一次依赖升级完成边界判断",
             "目标内容（Endem / Endem closure）",
-            "行动者与授权（ID / AUT）",
-            "会话上限（DRO）",
-            "外部调用（ADP / DIA）",
+            "行动者与授权",
+            "一次会话的上限",
+            "外部调用与错误",
             "观察与证据（structured_observation / evidence entry）",
             "满足判断（satisfaction_criteria）",
             "最终决定（具名权威）",
@@ -1718,8 +1710,8 @@ def validate_readability_behavior_contracts(root):
             "href: /architecture/decisions.html",
             "label: 指南",
             "href: /docs/architecture-guide.html",
-            "href: /docs/endem-reference.html",
-            "href: /docs/specifications-reference.html",
+            "href: /endem/docs/reference.html",
+            "href: /specifications/index.html",
             "href: /development/current-stage.html",
             "href: /faq/index.html",
             "href: /development/implementation-roadmap.html",
@@ -3437,7 +3429,6 @@ def validate_jekyll_sources():
         SOURCE_ROOT / "development" / "implementation-roadmap.html",
         SOURCE_ROOT / "downloads" / "index.html",
         SOURCE_ROOT / "docs" / "development-guide.md",
-        SOURCE_ROOT / "docs" / "specifications-reference.md",
     )
     volatile_inventory_pattern = re.compile(
         r"(?:[0-9]+|[一二三四五六七八九十百]+)\s*(?:个|类|项|组)\s*(?:"
@@ -3553,7 +3544,6 @@ def validate_jekyll_sources():
         "endem/docs/reference.md": (SOURCE_ROOT / "endem" / "docs" / "reference.md").read_text(),
         "endem/docs/safety.md": (SOURCE_ROOT / "endem" / "docs" / "safety.md").read_text(),
         "docs/architecture-guide.md": (SOURCE_ROOT / "docs" / "architecture-guide.md").read_text(),
-        "docs/endem-reference.md": (SOURCE_ROOT / "docs" / "endem-reference.md").read_text(),
     }
     for page, source_text in theor_boundary_pages.items():
         for stale_phrase in (
@@ -3571,7 +3561,6 @@ def validate_jekyll_sources():
         "endem/docs/reference.md": "不修复、不写回，也不生成生产检查通过结论",
         "endem/docs/safety.md": "生产侧 `lint` 路径与independent inspector",
         "docs/architecture-guide.md": "Endem closure、evidence entry 与发布制品等待物理格式",
-        "docs/endem-reference.md": "这些字节在精确规则和预算下怎样显示、哪里不同或为何停止",
     }.items():
         if token not in theor_boundary_pages[page]:
             errors.append(f"{page} missing the precise independent inspector boundary: {token}")
@@ -3972,7 +3961,7 @@ def validate_jekyll_sources():
         for token in (
             'title: "Noemion · 让每个人编译自己的意图"',
             '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>人工智能时代</span><span class="portal-title-foundation">每个人都应该能编译自己的意图</span></strong></h1>',
-            '<p class="portal-introduction-summary">Noemion 研究如何让每个人以自然语言表达意图，并将其形成供 AI 系统安全使用的目标制品。发布制品只保留经过确认的目标结构，并在使用前核对授权边界，防止 AI 改变目标含义，或执行未经授权的越权行为。</p>',
+            '<p class="portal-introduction-summary">Noemion 研究如何让每个人以自然语言表达意图，并将其形成供人工智能系统安全使用的目标制品。发布制品只保留经过确认的目标结构，并在使用前核对授权边界，防止人工智能系统改变目标含义，或执行未经授权的越权行为。</p>',
             '<span>从开发者案例开始</span>',
             '<span>查看 Endem 生命周期</span>',
             '<strong>Noemion</strong> 是项目与研究领域的名称',
@@ -4020,7 +4009,7 @@ def validate_jekyll_sources():
         if homepage_text.count('class="portal-focus-card ') != 4:
             errors.append("index.html: FOUR NOUNS must render four independent object cards")
         homepage_card_routes = (
-            'class="portal-feature-row" href="specifications/endem.html"',
+            'class="portal-feature-row" href="specifications/endem.html#source_expression"',
             'class="portal-feature-row" href="specifications/endem.html#situation"',
             'class="portal-feature-row" href="specifications/endem.html#satisfaction_criteria"',
             'class="portal-feature-row" href="specifications/endem.html#unresolved_meaning"',
@@ -4028,7 +4017,7 @@ def validate_jekyll_sources():
             'class="portal-focus-card focus-card-closure" href="specifications/endem-closure.html"',
             'class="portal-focus-card focus-card-session" href="specifications/session-contract.html"',
             'class="portal-focus-card focus-card-evidence" href="specifications/evidence-entry.html"',
-            '<a href="endem/"><span class="lifecycle-number">01</span>',
+            '<a href="endem/#action-map"><span class="lifecycle-number">01</span>',
             '<a href="components/inspector.html"><span class="lifecycle-number">02</span>',
             '<a href="components/runner.html"><span class="lifecycle-number">03</span>',
             '<a href="endem/"><small>01</small><strong>Endem 应用</strong>',
@@ -4059,7 +4048,7 @@ def validate_jekyll_sources():
 
     safe_artifact_contracts = {
         "_config.yml": (
-            "形成供 AI 系统安全使用的目标制品",
+            "形成供人工智能系统安全使用的目标制品",
             "发布制品只保留经过确认的目标结构",
             "在使用前核对授权边界",
         ),
@@ -5541,7 +5530,7 @@ def main():
             "不必先记住全部项目术语",
             "Endem 是传统目标文件的新名字吗",
             "为什么计划只提供一个命令入口",
-            "供 AI 系统安全使用的目标制品，是否意味着文件本身已经获准执行",
+            "供人工智能系统安全使用的目标制品，是否意味着文件本身已经获准执行",
             "最终发布版会移除原始自然语言",
             "deterministic producer 只消费已经具备精确语义授权绑定的输入",
             "它不替具名权威选择意义，也不授予动作权限",
@@ -5663,29 +5652,27 @@ def main():
                 + obsolete_heading
             )
     specifications_reference_text = (
-        SOURCE_ROOT / "docs" / "specifications-reference.md"
+        SOURCE_ROOT / "specifications" / "index.html"
     ).read_text()
     for token in (
-        "不必先记住全部项目术语",
-        "| 先回答 | 查什么 | 读哪份权威源 | 何时停止 |",
+        "先写下你要判断的事实",
+        "用一个外部“已完成”状态走完整条查询链",
         "每份规范继续只约束自己的责任",
-        "| 要回答的问题 | 先读 | 再核对 |",
-        "`completed` 只说明外部请求执行状态",
-        "| 需要的材料 | 当前入口 | 用法 |",
+        "completed</code> 只说明外部请求走到了某个执行状态",
         "网页、工具返回、历史、摘要或附件进入模型时",
-        "非规范上下文装配研究",
-        "自称 `system` 或 `admin`",
+        "自称 <code>system</code> 或 <code>admin</code>",
         "研究资料不能作为现行字段、命令、状态或互操作接口的依据",
         "向量通过也只说明已登记案例与草案一致",
-        "| 先查哪组决定 | 主要回答什么 | 阅读边界 |",
+        "按什么顺序判断资料的权威性",
         "机器可读登记",
     ):
         if token not in specifications_reference_text:
             errors.append(f"specifications reference missing task lookup boundary: {token}")
-    endem_reference_text = (SOURCE_ROOT / "docs" / "endem-reference.md").read_text()
+    endem_reference_text = (SOURCE_ROOT / "endem" / "docs" / "reference.md").read_text()
     for token in (
-        "从用户要完成的五项工作出发",
-        "绑定来源与已确认意义，按固定 Profile 确定性写入",
+        "从开发者要完成的工作出发",
+        "三个能够分别失败、分别验证的实现边界",
+        "这些字节在精确规则和预算下怎样显示、哪里不同或为何停止",
     ):
         if token not in endem_reference_text:
             errors.append(f"Endem application reference missing precise formation wording: {token}")
@@ -5727,7 +5714,7 @@ def main():
             "Endem 目前只是设计阶段名称",
             "术语与读音验证指南",
         ),
-        "docs/specifications-reference.md": (
+        "specifications/index.html": (
             "固定术语职责",
             "没有证明现行拼写或读音已经通过",
         ),
@@ -5745,7 +5732,7 @@ def main():
         "about/index.html": "已接受 Endem 词汇",
         "specifications/index.html": "名称、职责、六个语义面",
         "downloads/index.html": "Endem 已通过互联网",
-        "docs/specifications-reference.md": "固定现行词汇",
+        "specifications/index.html": "固定现行词汇",
         "design-system/tool-project.md": "子命令名是已接受词汇",
     }.items():
         if forbidden in (SOURCE_ROOT / relative_path).read_text():

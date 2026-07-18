@@ -20,7 +20,7 @@ summary: "帮助开发者先定位被改变的责任，再找到对应 ADR、规
 
   <section id="current-decisions" class="content-stack">
     <h2>先从一个变更定位责任</h2>
-    <p class="lead">例如，A2A Task 或 MCP 工具报告“已完成”，只说明远端任务或工具走到了某个状态。开发者还要分别保存远端实际报告了什么、它指向哪一份目标、现有证据覆盖了哪些条件，以及谁有权接受结果。ADP、ID、IKN、END 与 AUT 五组规范分别约束这些步骤。</p>
+    <p class="lead">例如，A2A Task 或 MCP 工具报告“已完成”，只说明远端任务或工具走到了某个状态。开发者还要分别保存远端实际报告了什么、它指向哪一份目标、现有证据覆盖了哪些条件，以及谁有权接受结果。外部协议、精确身份、证据、目标与授权规范分别约束这些步骤。</p>
     <p>下面的入口按开发者要回答的问题组织。若对应物理 Profile、算法选择或权威输入仍在研究，文档只允许继续做规范与验证设计，不能把草案补成实现假设。</p>
     <div class="table-wrap"><table><thead><tr><th>开发者问题</th><th>先查什么</th><th>停止条件</th></tr></thead><tbody>
       <tr><td>来源怎样成为确认意义，目标怎样判断？</td><td><a href="adr-0010-native-lexicon.html">ADR-0010</a>、<a href="adr-0015-result-domains.html">ADR-0015</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>、END-CORE</td><td>语义投影、观察范围或判据不完整时，保留 <code>unresolved_meaning</code>、<code>undetermined</code> 或 <code>fault</code>，不生成肯定结论。</td></tr>

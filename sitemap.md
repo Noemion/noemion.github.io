@@ -60,7 +60,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 ## Specifications
 
-- [Specifications](https://noemion.github.io/specifications/index.html) — authority, maturity, and normative-source map
+- [Specifications and lookup](https://noemion.github.io/specifications/index.html) — task-based source lookup, authority order, maturity, and normative-source map
 - [Endem](https://noemion.github.io/specifications/endem.html) — the smallest deterministic natural-language goal artifact and its canonical fields
 - [Endem closure](https://noemion.github.io/specifications/endem-closure.html) — exact closure binding multiple goals, transitive dependencies, authority intersection, and session activation
 - [session contract](https://noemion.github.io/specifications/session-contract.html) — read-only contract binding an exact subject, current authority, environment, capabilities, budgets, and observation duties for one session
@@ -135,8 +135,6 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Terminology audit](https://noemion.github.io/docs/terminology-audit.html) — current object, role, action, field and enum names, retired terms, versioned programming-language keyword coverage, and remaining human-validation limits
 - [Architecture guide](https://noemion.github.io/docs/architecture-guide.html) — one Agent task mapped to artifact, session, action, evidence, and decision boundaries
 - [Development guide](https://noemion.github.io/docs/development-guide.html) — a falsifiable change claim carried through authority, failure ownership, evidence, and claim limits
-- [Endem application reference](https://noemion.github.io/docs/endem-reference.html) — Endem actions, components, trust boundaries, and current status
-- [Specifications reference](https://noemion.github.io/docs/specifications-reference.html) — task-based source lookup, authority order, research status, ADRs, and evidence boundaries
 
 ## Development and resources
 
@@ -157,7 +155,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Binding](https://noemion.github.io/endem/docs/binding.html) — symbols, references, Endem closure, conflict handling, and packing
 - [Safety](https://noemion.github.io/endem/docs/safety.html) — bounded parsing, checked arithmetic, independent reading, integrity, and signing boundaries
 - [Running](https://noemion.github.io/endem/docs/running.html) — session contract creation, constrained execution, observations, evidence closure, and acceptance
-- [Reference](https://noemion.github.io/endem/docs/reference.html) — task lookup for actions, objects, result domains, goal constraints, diagnostics, and authoritative sources
+- [Reference](https://noemion.github.io/endem/docs/reference.html) — task lookup for actions, objects, trust boundaries, result domains, goal constraints, diagnostics, and authoritative sources
 
 ## Availability and authority
 

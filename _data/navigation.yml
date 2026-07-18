@@ -37,8 +37,8 @@ global:
     items:
       - { href: /docs/getting-started.html, label: 入门指南, description: 从问题背景和核心对象开始, cover: getting-started, cover_label: "START PATH" }
       - { href: /docs/architecture-guide.html, label: 架构设计指南, description: 理解生命周期、边界与失败路径, cover: architecture-guide, cover_label: "BOUNDARY GUIDE" }
-      - { href: /docs/endem-reference.html, label: Endem 应用参考, description: 查找 Endem 动作与组件职责, cover: application-reference, cover_label: "ACTION MAP" }
-      - { href: /docs/specifications-reference.html, label: 规范参考指南, description: 查找权威来源、当前状态和 ADR 阅读顺序, cover: spec-reference, cover_label: "SPEC AUTHORITY" }
+      - { href: /endem/docs/reference.html, label: Endem 动作索引, description: 按开发任务查动作、对象、结果和失败责任, cover: application-reference, cover_label: "ACTION MAP" }
+      - { href: /specifications/index.html, label: 规范与查询, description: 从工程问题查权威来源、当前状态和阅读顺序, cover: spec-reference, cover_label: "SPEC AUTHORITY" }
       - { href: /endem/docs/index.html, label: Endem 使用手册, description: 查找格式、绑定、安全、运行和参考主题, cover: endem-manual, cover_label: "ENDEM MANUAL" }
   - key: development
     href: /development/index.html

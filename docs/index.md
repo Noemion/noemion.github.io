@@ -28,8 +28,8 @@ manual_index_heading: "按任务与内容类型查找"
 | 当前究竟采用哪些名称，哪些关键字冲突已经消除 | [术语审查结果](terminology-audit.html) | 能找到对象、角色、动作、字段和高风险枚举的当前拼写与迁移依据 |
 | 制品怎样形成、组合和进入一次受限运行 | [架构设计](architecture-guide.html) | 能定位 deterministic producer、independent inspector、bounded runner 及其信任边界 |
 | 一项修改需要哪些规范和证据 | [开发指南](development-guide.html) | 能写出可证伪主张并找到失败责任与声明上限 |
-| 计划中的命令动作分别服务谁 | [Endem 应用参考](endem-reference.html) | 能判断某项动作应保留、合并还是交给外部工具 |
-| 某个工程问题由哪份条款约束 | [规范参考](specifications-reference.html) | 能从问题定位 CORE、Profile、ADR 和验证材料 |
+| 计划中的命令动作分别服务谁 | [Endem 动作与职责索引](../endem/docs/reference.html) | 能判断某项动作应保留、合并还是交给外部工具 |
+| 某个工程问题由哪份条款约束 | [规范查询入口](../specifications/) | 能从问题定位 CORE、Profile、ADR 和验证材料 |
 
 指南负责建立概念和阅读路径，不复制第二套技术定义。标为“待验证设计”“尚待确定”或“后续计划”的内容都不是稳定接口。
 
