@@ -1773,7 +1773,7 @@ def validate_public_html(route, text):
         r"(?:资料一致性检查|资料检查|仓库内容检查|公开内容检查|具名规范维护者复核|测试输出|版本化验证结果)": "maintenance process",
         r"(?:规范提案向量检查器|规范向量检查器|一致性检查工具)": "repository checker",
         r"(?:治理边界|采用门槛|当前决定边界|关闭决定|决策门|正式 ADR|进入代码开发阶段|当前仍未进入代码开发阶段|proposal-vector checker only|for maintainers|current contribution scope|reporting routes|unfrozen)": "internal governance wording",
-        r"(?:唯一公开 CLI|唯一公开命令|单一命令入口|只提供一个命令入口|计划只提供一个顶层入口|只有三个组件|规划三个组件|统一 CLI|一个入口不能|统一入口|同一个入口|同一个命令入口)": "premature tool packaging claim",
+        r"(?:唯一公开 CLI|唯一公开命令|单一命令入口|只提供一个命令入口|计划只提供一个顶层入口|只有三个组件|规划三个组件|统一 CLI|一个入口不能|统一入口|同一个入口|同一个命令入口|统一的人类入口)": "premature tool packaging claim",
         r"(?:开发与贡献|测试与验证)": "maintenance page wording",
     }
     for pattern, label in maintenance_patterns.items():
