@@ -93,5 +93,5 @@ next_label: ADR-0019
 
 - [查看事态与量词](../specifications/endem.html) — 定位关系模板、角色和四值结果。
 - [查看缺席证据](adr-0017-negation-and-absence.html) — 理解未找到成员或事件为何不等于不存在。
-- [查看截止点与持续目标](adr-0016-mene-time-model.html) — 固定成员资格时间并识别动态范围限制。
+- [查看截止点与持续目标](adr-0016-time-evidence.html) — 固定成员资格时间并识别动态范围限制。
 - [查看组合边界](../specifications/endem-closure.html) — 区分成员计数与制品闭包组合。

@@ -3,7 +3,7 @@ layout: architecture-decision
 title: ADR-0013 · 来源保留 END-P2 Profile
 page_role: content
 footer_text: Noemion · ADR-0013
-permalink: "/architecture/adr-0013-end-p1-payload.html"
+permalink: "/architecture/adr-0013-source-profile.html"
 summary: 说明 END-P2 怎样保存原始语言和已确认目标结构，以及为什么这种形成制品不能直接作为发布制品。
 decision_id: ADR-0013
 page_heading: ADR-0013 · 来源保留 · END-P2 Profile
@@ -13,8 +13,8 @@ badges:
 - END-P2 0.1.0-draft
 - Profile 3
 - 不可发布
-previous_url: adr-0012-rust-core-language.html
-previous_label: ADR-0012
+previous_url: adr-0011-endem-container.html
+previous_label: ADR-0011
 next_url: adr-0014-source-manifest.html
 next_label: ADR-0014
 ---
@@ -25,7 +25,7 @@ next_label: ADR-0014
 
 | 问题 | 当前答案 | 声明上限 |
 | --- | --- | --- |
-| 为什么不再使用 END-P0 | END-P0 只有六个空映射，只能验证容器结构。 | 不能把结构接受称为有效 Endem。 |
+| END-P2 与容器层怎样分工 | 容器层先验证字节结构，END-P2 再验证六个非空记录。 | 不能把结构接受称为有效 Endem。 |
 | END-P2 保存什么 | 保存原始自然语言、来源范围、语义关系、目标方向、判据和待确认项。 | 单文件最高只能声称 Profile 接受。 |
 | 谁使用它 | 未来由 producer 形成和回读，再由 inspector 沿独立路径解释相同字节。 | 当前没有 producer、inspector 或 CLI 实现。 |
 | 能否作为发布物 | 不能；`publishable=false` 是 Profile 的明确属性。 | 不能直接删除原文后继续声称 END-P2。 |

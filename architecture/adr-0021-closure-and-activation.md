@@ -3,7 +3,7 @@ layout: architecture-decision
 title: ADR-0021 · 依赖必须先固定，权限只能收窄
 page_role: content
 footer_text: Noemion · ADR-0021
-permalink: "/architecture/adr-0021-synem-closure-and-activation.html"
+permalink: "/architecture/adr-0021-closure-and-activation.html"
 summary: 说明多个目标共同交付时怎样先固定全部成员与依赖，并确保运行时只能收窄、不能扩大共同权限。
 decision_id: ADR-0021
 page_heading: ADR-0021 · 依赖必须先固定 · 权限只能收窄
@@ -15,7 +15,7 @@ badges:
 - 尚未实现
 previous_url: adr-0020-composite-situations-and-criteria.html
 previous_label: ADR-0020
-next_url: adr-0022-iknem-evidence-and-appraisal.html
+next_url: adr-0022-evidence-and-appraisal.html
 next_label: ADR-0022
 ---
 

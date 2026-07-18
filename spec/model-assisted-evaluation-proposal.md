@@ -176,7 +176,7 @@ document_status: "非规范研究提案"
 | 排名洗白 | 排序替代区间与效应量 | END-MSR、EVIDENCE | 显著差异与满足 |
 | 评价回路优化 | 被评系统针对裁判表面偏好训练 | 评测治理、EVIDENCE | 真实用途表现 |
 | 敏感内容泄漏 | 完整提示、题目或日志进入外部模型 | SESSION、AUT、TEXT-IDENTIFIER | 可复现性免责 |
-| 决定越权 | 模型评分触发发布、采购或接受 | AUT、EVIDENCE | `grant`、`met`、`accepted` |
+| 决定越权 | 模型评分触发发布、采购或接受 | AUT、EVIDENCE | `allowed`、`met`、`accepted` |
 
 ## 失败域与结果隔离
 

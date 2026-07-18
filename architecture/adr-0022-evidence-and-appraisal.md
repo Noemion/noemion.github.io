@@ -3,7 +3,7 @@ layout: architecture-decision
 title: ADR-0022 · 先问证据能证明什么
 page_role: content
 footer_text: Noemion · ADR-0022
-permalink: "/architecture/adr-0022-iknem-evidence-and-appraisal.html"
+permalink: "/architecture/adr-0022-evidence-and-appraisal.html"
 summary: 说明一项记录必须绑定对象、方法、环境、时间和限制，才能支持有范围的结论，而不能直接代表最终接受。
 decision_id: ADR-0022
 page_heading: ADR-0022 · 先问证据 · 能证明什么
@@ -13,7 +13,7 @@ badges:
 - EVIDENCE-CORE 0.1.0-draft
 - 尚无物理格式
 - 尚未实现
-previous_url: adr-0021-synem-closure-and-activation.html
+previous_url: adr-0021-closure-and-activation.html
 previous_label: ADR-0021
 next_url: adr-0023-endem-content-standard.html
 next_label: ADR-0023
@@ -105,5 +105,5 @@ next_label: ADR-0023
 
 - [查看证据规范](../specifications/evidence-entry.html) — 按开发者任务查询 EVIDENCE-CORE 九项责任。
 - [查看测量与阈值](adr-0019-measurement-and-thresholds.html) — 先固定总体、方法、单位和不确定度。
-- [查看组合闭包](adr-0021-synem-closure-and-activation.html) — 理解证据所对应的精确目标和成员身份。
+- [查看组合闭包](adr-0021-closure-and-activation.html) — 理解证据所对应的精确目标和成员身份。
 - [查看权威边界](../specifications/authority.html) — 区分证据评估、目标满足和最终决定。

@@ -90,23 +90,20 @@ modules:
           - { href: /architecture/endem-lifecycle.html, label: Endem 生命周期 }
           - { href: /architecture/decisions.html, label: 架构决策 }
           - { href: /architecture/agent-system-boundaries.html, label: Agent 系统边界图 }
-          - { href: /architecture/adr-0008-endem-system.html, label: "ADR-0008 · Endem 与单一入口（历史）" }
-          - { href: /architecture/adr-0009-propositional-kernel.html, label: "ADR-0009 · 表达与事态分离（历史）" }
           - { href: /architecture/adr-0010-native-lexicon.html, label: "ADR-0010 · 原生词汇与事态" }
           - { href: /architecture/adr-0011-endem-container.html, label: "ADR-0011 · 字节边界与读取顺序" }
-          - { href: /architecture/adr-0012-rust-core-language.html, label: "ADR-0012 · 未来 Rust 评审基线" }
-          - { href: /architecture/adr-0013-end-p1-payload.html, label: "ADR-0013 · 来源保留 END-P2" }
+          - { href: /architecture/adr-0013-source-profile.html, label: "ADR-0013 · 来源保留 END-P2" }
           - { href: /architecture/adr-0014-source-manifest.html, label: "ADR-0014 · 实验来源清单边界" }
           - { href: /architecture/adr-0015-result-domains.html, label: "ADR-0015 · 五类结果不可互换" }
-          - { href: /architecture/adr-0016-mene-time-model.html, label: "ADR-0016 · 持续目标的时间证据" }
+          - { href: /architecture/adr-0016-time-evidence.html, label: "ADR-0016 · 持续目标的时间证据" }
           - { href: /architecture/adr-0017-negation-and-absence.html, label: "ADR-0017 · 没有记录不等于没有发生" }
           - { href: /architecture/adr-0018-quantification-and-membership.html, label: "ADR-0018 · 先固定成员，再判断数量" }
           - { href: /architecture/adr-0019-measurement-and-thresholds.html, label: "ADR-0019 · 先定义测量，再比较阈值" }
           - { href: /architecture/adr-0020-composite-situations-and-criteria.html, label: "ADR-0020 · 组合条件不能吞掉未知与故障" }
-          - { href: /architecture/adr-0021-synem-closure-and-activation.html, label: "ADR-0021 · 依赖必须先固定，权限只能收窄" }
-          - { href: /architecture/adr-0022-iknem-evidence-and-appraisal.html, label: "ADR-0022 · 先问证据能证明什么" }
+          - { href: /architecture/adr-0021-closure-and-activation.html, label: "ADR-0021 · 依赖必须先固定，权限只能收窄" }
+          - { href: /architecture/adr-0022-evidence-and-appraisal.html, label: "ADR-0022 · 先问证据能证明什么" }
           - { href: /architecture/adr-0023-endem-content-standard.html, label: "ADR-0023 · 文件能读，不等于内容成立" }
-          - { href: /architecture/adr-0024-dromen-session-contract.html, label: "ADR-0024 · 权限只属于这一次会话" }
+          - { href: /architecture/adr-0024-session-contract.html, label: "ADR-0024 · 权限只属于这一次会话" }
           - { href: /architecture/adr-0025-structured-diagnostics.html, label: "ADR-0025 · 错误消息不能替系统作决定" }
           - { href: /architecture/adr-0026-external-protocol-adapters.html, label: "ADR-0026 · 远端完成，不等于本地完成" }
           - { href: /architecture/adr-0027-exact-identity-and-attestation.html, label: "ADR-0027 · 签名有效，不等于制品获准" }
@@ -115,7 +112,7 @@ modules:
           - { href: /architecture/adr-0030-endem-content-and-authorization-companions.html, label: "ADR-0030 · 内容身份不变，不等于授权仍然有效" }
           - { href: /architecture/adr-0035-public-actions-and-internal-responsibilities.html, label: "ADR-0035 · 用户任务不是内部职责清单" }
           - { href: /architecture/adr-0036-source-bearing-and-stripped-release.html, label: "ADR-0036 · 移除原文，就得到另一份制品" }
-          - { href: /architecture/adr-0037-terminology-simplification.html, label: "ADR-0037 · 用职责名称替代不必要的造词" }
+          - { href: /architecture/adr-0037-terminology-simplification.html, label: "ADR-0037 · 名称必须直白、可读、可核对" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:

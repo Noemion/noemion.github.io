@@ -29,7 +29,7 @@ An attacker validates one Endem or closure and then loads another object through
 
 ### THR-SESSION-002 — Stale policy, authority or revocation state
 
-An attacker reuses a cached successful policy check after the signer, method, decision authority or grant has changed. `SESSION-POL-001` and `SESSION-SUB-001` bind exact policies, authorities, cutoff, expiry and revocation checks.
+An attacker reuses a cached successful policy check after the signer, method, decision authority or authorization decision has changed. `SESSION-POL-001` and `SESSION-SUB-001` bind exact policies, authorities, cutoff, expiry and revocation checks.
 
 ### THR-SESSION-003 — Environment self-description and adapter drift
 

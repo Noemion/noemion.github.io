@@ -1962,6 +1962,7 @@ body:not([data-page-role="portal"]) .page-directory-main .lead{padding:14px 16px
   .page-directory-main .page-directory-table tbody tr{
     display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;padding:9px 11px;border-bottom:1px solid var(--rule)
   }
+  .page-directory-main .page-directory-table tbody tr[hidden]{display:none}
   .page-directory-main .page-directory-table tbody tr:last-child{border-bottom:0}
   .page-directory-main .page-directory-table td{display:block;padding:0;border:0}
   .page-directory-main .page-directory-table td:nth-child(1){grid-column:1;grid-row:1}

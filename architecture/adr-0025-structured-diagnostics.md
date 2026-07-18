@@ -13,7 +13,7 @@ badges:
 - DIA-CORE 0.1.0-draft
 - 失败优先
 - 尚未实现
-previous_url: adr-0024-dromen-session-contract.html
+previous_url: adr-0024-session-contract.html
 previous_label: ADR-0024
 next_url: adr-0026-external-protocol-adapters.html
 next_label: ADR-0026
@@ -106,5 +106,5 @@ DIA-CORE 只允许六种恢复分类：`fix-input`、`refresh-binding`、`obtain
 
 - [查看结构化诊断开发者规范](../specifications/diagnostics.html) — 按十条责任检查诊断内容与输出出口。
 - [查看 DIA-CAT 诊断目录](https://noemion.github.io/spec/diagnostic-catalog.html) — 核对草案机器码、层次和适用对象。
-- [查看一次会话权限边界](adr-0024-dromen-session-contract.html) — 理解重试、扩权和恢复为何不由诊断授权。
+- [查看一次会话权限边界](adr-0024-session-contract.html) — 理解重试、扩权和恢复为何不由诊断授权。
 - [查看外部协议适配边界](adr-0026-external-protocol-adapters.html) — 保留 MCP、A2A 与远端错误的来源差异。

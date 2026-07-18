@@ -3,7 +3,7 @@ layout: architecture-decision
 title: ADR-0016 · 持续目标必须绑定时间证据
 page_role: content
 footer_text: Noemion · ADR-0016
-permalink: "/architecture/adr-0016-mene-time-model.html"
+permalink: "/architecture/adr-0016-time-evidence.html"
 summary: 说明持续目标必须同时明确时间范围、时钟来源、连续性规则和观察覆盖，零散时间戳不能代替这些条件。
 decision_id: ADR-0016
 page_heading: ADR-0016 · 持续目标必须绑定 · 时间证据

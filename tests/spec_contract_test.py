@@ -38,7 +38,6 @@ ADAPTER_SCENARIO_PATH = ROOT / "spec" / "adapter-scenarios.md"
 IDENTITY_SCENARIO_PATH = ROOT / "spec" / "identity-scenarios.md"
 TEXT_SCENARIO_PATH = ROOT / "spec" / "text-identifier-scenarios.md"
 AUTHORITY_SCENARIO_PATH = ROOT / "spec" / "authority-scenarios.md"
-PROFILE_PATH = ROOT / "spec" / "profiles" / "end-p0.json"
 VECTOR_ROOT = ROOT / "vectors" / "semantic"
 SCHEMA_PATH = ROOT / "vectors" / "vector.schema.json"
 
@@ -147,8 +146,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 errors.append(f"spec/registry.json: {spec_id} document path does not exist")
 
     supporting_documents = registry.get("supporting_documents")
-    if not isinstance(supporting_documents, list) or len(supporting_documents) != 21:
-        errors.append("spec/registry.json: object and diagnostic threat/scenario documents, diagnostic catalog, P0 and P2 Profiles are required")
+    if not isinstance(supporting_documents, list) or len(supporting_documents) != 20:
+        errors.append("spec/registry.json: current threat, scenario, diagnostic and END-P2 Profile documents are required")
     else:
         supporting_by_id = {document.get("id"): document for document in supporting_documents}
         threat_document = supporting_by_id.get("END-THREAT", {})
@@ -171,7 +170,6 @@ def validate_registry(registry, spec_text, threat_text, errors):
             "CLOSURE-SCEN": "spec/endem-closure-scenarios.md",
             "EVIDENCE-SCEN": "spec/evidence-entry-scenarios.md",
             "SESSION-SCEN": "spec/session-contract-scenarios.md",
-            "END-P0": "spec/profiles/end-p0.json",
             "END-P2": "spec/profiles/end-p2.json",
             "ADP-THREAT": "spec/adapter-threat-model.md",
             "ADP-SCEN": "spec/adapter-scenarios.md",
@@ -235,7 +233,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             errors.append("spec/registry.json: identifier names must be unique")
         for required_identifier in (
             "Noemion", "Endem", "closure", "contract", "evidence",
-            *REQUIRED_FACETS, "wire-format", "content-standard", "content-profile", "END-P0", "END-P2", "source-manifest",
+            *REQUIRED_FACETS, "wire-format", "content-standard", "content-profile", "END-P2", "source-manifest",
             "satisfaction-result", "decision-result", "session-result", "evidence-status",
             "time-scope", "continuity-policy", "time-coverage",
             "relation-polarity", "negative-evidence", "observation-closure",
@@ -275,51 +273,6 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 errors.append(
                     f"spec/registry.json: meaning_projection definition must separate meaning confirmation from action authorization: {boundary}"
                 )
-
-    experiments = registry.get("experiments")
-    if not isinstance(experiments, list) or len(experiments) != 1:
-        errors.append("spec/registry.json: exactly one P0 language experiment is required")
-    else:
-        experiment = experiments[0]
-        expected_experiment = {
-            "id": "P0-LANG-001",
-            "status": "historical-research-evidence",
-            "protocol": "experiments/p0-language/README.md",
-            "results": "experiments/p0-language/results.json",
-            "decision": "architecture/adr-0012-rust-core-language.html",
-            "production_implementation": False,
-        }
-        for key, value in expected_experiment.items():
-            if experiment.get(key) != value:
-                errors.append(f"P0-LANG-001 {key} must be {value!r}")
-        for path_field in ("protocol", "results", "decision"):
-            if not source_path_for_route(experiment.get(path_field, "")).is_file():
-                errors.append(f"P0-LANG-001 missing {path_field} file")
-        results = load_json(ROOT / experiment.get("results", ""), errors)
-        if results:
-            if results.get("decision", {}).get("ktisor_structural_core") != "Rust 1.97.0 stable":
-                errors.append("P0-LANG-001 must record the bounded Rust core decision")
-            if results.get("linux_ci", {}).get("conclusion") != "success":
-                errors.append("P0-LANG-001 must retain successful Linux CI evidence")
-            if results.get("macos", {}).get("differential_mutation_count") != 144:
-                errors.append("P0-LANG-001 must retain the 144-case differential result")
-            macos = results.get("macos", {})
-            if macos.get("vector_count") != 6 or macos.get("all_vectors_match") is not True:
-                errors.append("P0-LANG-001 must retain the 6-vector macOS result")
-            if macos.get("differential_mutations_match") is not True or macos.get("c_sanitizers_pass") is not True:
-                errors.append("P0-LANG-001 must retain differential and sanitizer success")
-            for language, source in (
-                ("c", ROOT / "experiments/p0-language/c/validator.c"),
-                ("rust", ROOT / "experiments/p0-language/rust/main.rs"),
-            ):
-                artifact = macos.get("artifacts", {}).get(language, {})
-                actual_lines = sum(1 for line in source.read_text().splitlines() if line.strip())
-                if artifact.get("source_nonblank_lines") != actual_lines:
-                    errors.append(f"P0-LANG-001 {language} source line evidence drifted")
-                if artifact.get("repeated_binary_sha256_match") is not True:
-                    errors.append(f"P0-LANG-001 {language} repeated build evidence must be true")
-            if results.get("linux_ci", {}).get("required_libfuzzer_runs") != 10000:
-                errors.append("P0-LANG-001 Linux evidence must require 10000 libFuzzer runs")
 
     spec_clause_ids = SPEC_HEADING.findall(spec_text)
     if not spec_clause_ids:
@@ -590,16 +543,16 @@ def validate_public_boundary(errors):
         errors.append("Pages workflow must execute text and identifier vectors")
     if "python3 tests/authority_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute authority and authorization vectors")
-    for exact_exclusion in ("  - experiments/", "  - vectors/"):
+    for exact_exclusion in ("  - vectors/",):
         if exact_exclusion not in config_text:
             errors.append(f"_config.yml: missing exact exclusion {exact_exclusion.strip()!r}")
     if re.search(r"^\s*-\s+spec/?\s*$", config_text, re.MULTILINE):
         errors.append(
             "_config.yml: spec Markdown must be rendered into public HTML, not excluded"
         )
-    if re.search(r"^\s*-\s+(?:experiments|vectors)\s*$", config_text, re.MULTILINE):
+    if re.search(r"^\s*-\s+vectors\s*$", config_text, re.MULTILINE):
         errors.append(
-            "_config.yml: bare experiments/vectors exclusions can also hide prefix-matching public routes"
+            "_config.yml: a bare vectors exclusion can also hide prefix-matching public routes"
         )
 
     public_contracts = {
@@ -664,16 +617,7 @@ def validate_public_boundary(errors):
             "研究资料不能作为现行字段、命令、状态或互操作接口的依据",
             "向量通过也只说明已登记案例与草案一致",
         ),
-        "architecture/adr-0012-rust-core-language.html": (
-            "Rust 1.97.0",
-            "forbid(unsafe_code)",
-            "10,000 次 libFuzzer",
-            "experiments/p0-language/results.json",
-            "必须另写解析结构和错误路径",
-            "实现语言继续待定",
-            "不是生产实现",
-        ),
-        "architecture/adr-0013-end-p1-payload.html": (
+        "architecture/adr-0013-source-profile.html": (
             "END-P2",
             "profile_id=3",
             "spec/profiles/end-p2.json",
@@ -696,7 +640,7 @@ def validate_public_boundary(errors):
             "不新增 END-P2 字段",
             "没有 runner",
         ),
-        "architecture/adr-0016-mene-time-model.html": (
+        "architecture/adr-0016-time-evidence.html": (
             "utc_window",
             "elapsed_window",
             "[start, end)",
@@ -773,7 +717,7 @@ def validate_public_boundary(errors):
             "SHACL 1.2 Core",
             "不表示 producer、inspector、runner、CLI 或求值器已经实现",
         ),
-        "architecture/adr-0021-synem-closure-and-activation.html": (
+        "architecture/adr-0021-closure-and-activation.html": (
             "CLOSURE-CORE 0.1.0-draft",
             "active / inactive / unresolved / error",
             "Endem 组合闭包",
@@ -787,7 +731,7 @@ def validate_public_boundary(errors):
             "MCP 2025-11-25",
             "不表示 producer、inspector、runner、CLI、解析器或运行时已经实现",
         ),
-        "architecture/adr-0022-iknem-evidence-and-appraisal.html": (
+        "architecture/adr-0022-evidence-and-appraisal.html": (
             "EVIDENCE-CORE 0.1.0-draft",
             "有范围证据记录（evidence）",
             "validity=valid",
@@ -823,7 +767,7 @@ def validate_public_boundary(errors):
             "不新增重复规范 ID",
             "不能证明任何写入器、读取器、CLI 或运行时已经实现",
         ),
-        "architecture/adr-0024-dromen-session-contract.html": (
+        "architecture/adr-0024-session-contract.html": (
             "权限只属于这一次会话",
             "SESSION-CORE 0.1.0-draft",
             "只读执行契约",
@@ -887,7 +831,7 @@ def validate_public_boundary(errors):
         "architecture/adr-0029-authority-and-authorization-decisions.html": (
             "身份已确认，不等于操作已获准",
             "AUT-CORE 0.1.0-draft",
-            "grant deny defer",
+            "allowed denied pending",
             "RFC 9396",
             "RFC 8693",
             "RFC 9470",
@@ -1248,7 +1192,7 @@ def main():
         "24 text and identifier vectors, "
         "24 authority and authorization vectors, "
         "END-P2 payload/source vectors, "
-        "and P0-LANG-001 historical language evidence"
+        "and current END-P2 wire and source evidence"
     )
     return 0
 

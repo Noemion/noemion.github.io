@@ -5,84 +5,84 @@
   "cases": [
     {
       "id": "CV-VALID-ALL-OF-MET-001",
-      "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["reachable", "schema"]}, "reachable": {"kind": "leaf", "criterion_id": "reachable"}, "schema": {"kind": "leaf", "criterion_id": "schema"}}, "krin_leaves": ["reachable", "schema"]},
+      "target": {"same_terminal": true, "shared_direction": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["reachable", "schema"]}, "reachable": {"kind": "leaf", "criterion_id": "reachable"}, "schema": {"kind": "leaf", "criterion_id": "schema"}}, "criteria_leaves": ["reachable", "schema"]},
       "evaluation": {"leaf_results": {"reachable": "met", "schema": "met"}, "order": ["reachable", "schema"], "short_circuit": false},
       "proposal": {"result": "met", "evaluated": ["reachable", "schema"], "unevaluated": [], "decisive_basis": []},
       "expect": {"result": "accept", "clause": "END-CMP-003"}
     },
     {
       "id": "CV-VALID-ALL-OF-DECISIVE-UNMET-001",
-      "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["reachable", "schema"]}, "reachable": {"kind": "leaf", "criterion_id": "reachable"}, "schema": {"kind": "leaf", "criterion_id": "schema"}}, "krin_leaves": ["reachable", "schema"]},
+      "target": {"same_terminal": true, "shared_direction": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["reachable", "schema"]}, "reachable": {"kind": "leaf", "criterion_id": "reachable"}, "schema": {"kind": "leaf", "criterion_id": "schema"}}, "criteria_leaves": ["reachable", "schema"]},
       "evaluation": {"leaf_results": {"reachable": "unmet", "schema": "fault"}, "order": ["reachable", "schema"], "short_circuit": true},
       "proposal": {"result": "unmet", "evaluated": ["reachable"], "unevaluated": ["schema"], "decisive_basis": ["reachable"]},
       "expect": {"result": "accept", "clause": "END-CMP-004"}
     },
     {
       "id": "CV-VALID-ALL-OF-UNDETERMINED-001",
-      "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "krin_leaves": ["a", "b"]},
+      "target": {"same_terminal": true, "shared_direction": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "criteria_leaves": ["a", "b"]},
       "evaluation": {"leaf_results": {"a": "met", "b": "undetermined"}, "order": ["a", "b"], "short_circuit": false},
       "proposal": {"result": "undetermined", "evaluated": ["a", "b"], "unevaluated": [], "decisive_basis": []},
       "expect": {"result": "accept", "clause": "END-CMP-003"}
     },
     {
       "id": "CV-VALID-ANY-OF-DECISIVE-MET-001",
-      "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["primary", "backup"]}, "primary": {"kind": "leaf", "criterion_id": "primary"}, "backup": {"kind": "leaf", "criterion_id": "backup"}}, "krin_leaves": ["primary", "backup"]},
+      "target": {"same_terminal": true, "shared_direction": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["primary", "backup"]}, "primary": {"kind": "leaf", "criterion_id": "primary"}, "backup": {"kind": "leaf", "criterion_id": "backup"}}, "criteria_leaves": ["primary", "backup"]},
       "evaluation": {"leaf_results": {"primary": "met", "backup": "undetermined"}, "order": ["primary", "backup"], "short_circuit": true},
       "proposal": {"result": "met", "evaluated": ["primary"], "unevaluated": ["backup"], "decisive_basis": ["primary"]},
       "expect": {"result": "accept", "clause": "END-CMP-004"}
     },
     {
       "id": "CV-VALID-ANY-OF-UNMET-001",
-      "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "krin_leaves": ["a", "b"]},
+      "target": {"same_terminal": true, "shared_direction": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "criteria_leaves": ["a", "b"]},
       "evaluation": {"leaf_results": {"a": "unmet", "b": "unmet"}, "order": ["b", "a"], "short_circuit": false},
       "proposal": {"result": "unmet", "evaluated": ["b", "a"], "unevaluated": [], "decisive_basis": []},
       "expect": {"result": "accept", "clause": "END-CMP-003"}
     },
     {
       "id": "CV-VALID-ANY-OF-FAULT-001",
-      "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "krin_leaves": ["a", "b"]},
+      "target": {"same_terminal": true, "shared_direction": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "criteria_leaves": ["a", "b"]},
       "evaluation": {"leaf_results": {"a": "unmet", "b": "fault"}, "order": ["a", "b"], "short_circuit": false},
       "proposal": {"result": "fault", "evaluated": ["a", "b"], "unevaluated": [], "decisive_basis": []},
       "expect": {"result": "accept", "clause": "END-CMP-003"}
     },
     {
       "id": "CV-REJECT-INDEPENDENT-LIFECYCLE-001",
-      "target": {"same_terminal": false, "shared_telis": true, "shared_authority": false, "independent_lifecycle": true, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["report", "deploy"]}, "report": {"kind": "leaf", "criterion_id": "report"}, "deploy": {"kind": "leaf", "criterion_id": "deploy"}}, "krin_leaves": ["report", "deploy"]},
+      "target": {"same_terminal": false, "shared_direction": true, "shared_authority": false, "independent_lifecycle": true, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["report", "deploy"]}, "report": {"kind": "leaf", "criterion_id": "report"}, "deploy": {"kind": "leaf", "criterion_id": "deploy"}}, "criteria_leaves": ["report", "deploy"]},
       "evaluation": {"leaf_results": {"report": "met", "deploy": "met"}, "order": ["report", "deploy"], "short_circuit": false},
       "proposal": {"result": "met", "evaluated": ["report", "deploy"], "unevaluated": [], "decisive_basis": []},
       "expect": {"result": "reject", "clause": "END-CMP-001"}
     },
     {
       "id": "CV-REJECT-UNSUPPORTED-CONDITIONAL-001",
-      "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "if", "children": ["approved", "deploy"]}, "approved": {"kind": "leaf", "criterion_id": "approved"}, "deploy": {"kind": "leaf", "criterion_id": "deploy"}}, "krin_leaves": ["approved", "deploy"]},
+      "target": {"same_terminal": true, "shared_direction": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "if", "children": ["approved", "deploy"]}, "approved": {"kind": "leaf", "criterion_id": "approved"}, "deploy": {"kind": "leaf", "criterion_id": "deploy"}}, "criteria_leaves": ["approved", "deploy"]},
       "evaluation": {"leaf_results": {"approved": "met", "deploy": "met"}, "order": ["approved", "deploy"], "short_circuit": false},
       "proposal": {"result": "met", "evaluated": ["approved", "deploy"], "unevaluated": [], "decisive_basis": []},
       "expect": {"result": "reject", "clause": "END-CMP-002"}
     },
     {
       "id": "CV-REJECT-CYCLE-001",
-      "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["a", "loop"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "loop": {"kind": "any_of", "children": ["b", "root"]}, "b": {"kind": "leaf", "criterion_id": "b"}}, "krin_leaves": ["a", "b"]},
+      "target": {"same_terminal": true, "shared_direction": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["a", "loop"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "loop": {"kind": "any_of", "children": ["b", "root"]}, "b": {"kind": "leaf", "criterion_id": "b"}}, "criteria_leaves": ["a", "b"]},
       "evaluation": {"leaf_results": {"a": "met", "b": "met"}, "order": ["a", "b"], "short_circuit": false},
       "proposal": {"result": "met", "evaluated": ["a", "b"], "unevaluated": [], "decisive_basis": []},
       "expect": {"result": "reject", "clause": "END-CMP-002"}
     },
     {
       "id": "CV-REJECT-DUPLICATE-LEAF-001",
-      "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["a", "a"]}, "a": {"kind": "leaf", "criterion_id": "a"}}, "krin_leaves": ["a"]},
+      "target": {"same_terminal": true, "shared_direction": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["a", "a"]}, "a": {"kind": "leaf", "criterion_id": "a"}}, "criteria_leaves": ["a"]},
       "evaluation": {"leaf_results": {"a": "met"}, "order": ["a"], "short_circuit": false},
       "proposal": {"result": "met", "evaluated": ["a"], "unevaluated": [], "decisive_basis": []},
       "expect": {"result": "reject", "clause": "END-CMP-002"}
     },
     {
       "id": "CV-REJECT-INVALID-FOUR-RESULT-001",
-      "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "krin_leaves": ["a", "b"]},
+      "target": {"same_terminal": true, "shared_direction": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "criteria_leaves": ["a", "b"]},
       "evaluation": {"leaf_results": {"a": "met", "b": "fault"}, "order": ["a", "b"], "short_circuit": false},
       "proposal": {"result": "fault", "evaluated": ["a", "b"], "unevaluated": [], "decisive_basis": []},
       "expect": {"result": "reject", "clause": "END-CMP-003"}
     },
     {
       "id": "CV-REJECT-NONDECISIVE-SHORT-CIRCUIT-001",
-      "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "krin_leaves": ["a", "b"]},
+      "target": {"same_terminal": true, "shared_direction": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "criteria_leaves": ["a", "b"]},
       "evaluation": {"leaf_results": {"a": "unmet", "b": "met"}, "order": ["a", "b"], "short_circuit": true},
       "proposal": {"result": "unmet", "evaluated": ["a"], "unevaluated": ["b"], "decisive_basis": ["a"]},
       "expect": {"result": "reject", "clause": "END-CMP-004"}

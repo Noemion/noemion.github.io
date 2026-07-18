@@ -20,7 +20,7 @@
       "implementation_status": "vector-checker-only",
       "wire_status": "experimental-draft",
       "path": "spec/endem-format.md",
-      "scope": "Endem fixed header, record directory, deterministic payload subset, P0 structural acceptance and P2 closed semantic payload"
+      "scope": "Endem fixed header, record directory, deterministic payload subset and P2 closed semantic payload"
     },
     {
       "spec_id": "END-SRCM",
@@ -192,13 +192,6 @@
       "scope": "Natural-language design-review scenarios for one-session subject, policy, environment, authority, capability, budget, observation and lifecycle boundaries"
     },
     {
-      "id": "END-P0",
-      "version": "0.1.0-draft",
-      "status": "experimental-conformance",
-      "path": "spec/profiles/end-p0.json",
-      "scope": "Finite Phase 0 conformance limits and allowed END-FMT capabilities"
-    },
-    {
       "id": "END-P2",
       "version": "0.1.0-draft",
       "status": "experimental-design-profile",
@@ -260,17 +253,6 @@
       "status": "non-normative-design-corpus",
       "path": "spec/authority-scenarios.md",
       "scope": "Natural-language design-review scenarios for semantic authorization, delegation, consent, multi-authority decisions, revocation, replay and capability boundaries"
-    }
-  ],
-  "experiments": [
-    {
-      "id": "P0-LANG-001",
-      "status": "historical-research-evidence",
-      "scope": "C17 and safe Rust comparison for the END-P0 structural reader slice",
-      "protocol": "experiments/p0-language/README.md",
-      "results": "experiments/p0-language/results.json",
-      "decision": "architecture/adr-0012-rust-core-language.html",
-      "production_implementation": false
     }
   ],
   "terms": [
@@ -342,7 +324,6 @@
     {"identifier": "wire-format", "kind": "interface", "decision_status": "accepted-draft", "definition": "END-FMT 定义的实验性物理字节编码；尚非稳定 ABI"},
     {"identifier": "content-standard", "kind": "specification-layer", "decision_status": "accepted", "definition": "END-CORE 定义的通用 Endem 内容语义、不变量、授权与符合性边界"},
     {"identifier": "content-profile", "kind": "specification-layer", "decision_status": "accepted", "definition": "在精确 END-CORE 与 END-FMT 版本下封闭字段、类型、枚举、规范顺序、引用、状态和资源上限的内容能力集合"},
-    {"identifier": "END-P0", "kind": "profile", "decision_status": "experimental", "definition": "只用于结构向量和跨语言实验的有限符合性 Profile"},
     {"identifier": "END-P2", "kind": "profile", "decision_status": "accepted-draft", "definition": "保留原始自然语言、仅用于未来形成与评审路径的封闭六记录 Profile；不得作为最终发布 Profile"},
     {"identifier": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 producer 使用的实验性逐行来源清单；不是稳定源语言"},
     {"identifier": "source-bearing-artifact", "kind": "artifact-role", "decision_status": "accepted", "definition": "保留原始自然语言及其可重定位范围、用于形成和受控评审的制品角色"},
@@ -1367,9 +1348,8 @@
       "evidence_status": "partial",
       "failure_owner": "every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/wire/directory-out-of-bounds.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/record-overlap.hex"},
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/truncated-header.hex"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "planned", "ref": "conformance:checked-arithmetic"},
         {"status": "planned", "ref": "conformance:parser-fuzzing"}
       ]
@@ -1381,8 +1361,7 @@
       "evidence_status": "partial",
       "failure_owner": "every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "spec/profiles/end-p0.json"},
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p2/edge-limit.hex"},
         {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "planned", "ref": "conformance:resource-limit-before-allocation"},
@@ -1393,11 +1372,9 @@
       "id": "END-SAF-003",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
-      "evidence_status": "partial",
+      "evidence_status": "planned",
       "failure_owner": "every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/wire/unknown-kind.hex"},
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "planned", "ref": "conformance:unknown-critical-record"},
         {"status": "manual-authority", "authority": "future format registry reviewers"}
       ]
@@ -1444,14 +1421,12 @@
       "id": "END-FMT-001",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
-      "evidence_status": "covered",
+      "evidence_status": "partial",
       "failure_owner": "producer and every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/wire/minimal-structural.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/bad-magic.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p2/truncated-header.hex"},
         {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"}
+        {"status": "planned", "ref": "conformance:wire-magic"}
       ]
     },
     {
@@ -1461,7 +1436,7 @@
       "evidence_status": "covered",
       "failure_owner": "producer and every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "planned", "ref": "conformance:wire-layout-variants"}
       ]
     },
@@ -1472,7 +1447,7 @@
       "evidence_status": "partial",
       "failure_owner": "producer and every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "planned", "ref": "conformance:wire-size-and-reserved"}
       ]
     },
@@ -1480,11 +1455,10 @@
       "id": "END-FMT-004",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
-      "evidence_status": "covered",
+      "evidence_status": "planned",
       "failure_owner": "every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/wire/directory-out-of-bounds.hex"},
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"}
+        {"status": "planned", "ref": "conformance:wire-directory-bounds"}
       ]
     },
     {
@@ -1494,7 +1468,6 @@
       "evidence_status": "covered",
       "failure_owner": "producer and every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p2/directory-order.hex"},
         {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"}
       ]
@@ -1503,22 +1476,20 @@
       "id": "END-FMT-006",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
-      "evidence_status": "covered",
+      "evidence_status": "planned",
       "failure_owner": "every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/wire/record-overlap.hex"},
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"}
+        {"status": "planned", "ref": "conformance:wire-record-ranges"}
       ]
     },
     {
       "id": "END-FMT-007",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
-      "evidence_status": "covered",
+      "evidence_status": "planned",
       "failure_owner": "every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/wire/unknown-kind.hex"},
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"}
+        {"status": "planned", "ref": "conformance:wire-record-kinds"}
       ]
     },
     {
@@ -1528,7 +1499,8 @@
       "evidence_status": "partial",
       "failure_owner": "producer and every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/wire/minimal-structural.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/minimal-semantic.hex"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "planned", "ref": "conformance:wire-facet-cardinality"}
       ]
     },
@@ -1539,10 +1511,8 @@
       "evidence_status": "covered",
       "failure_owner": "producer and every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/wire/payload-not-map.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p2/non-minimal-cbor.hex"},
         {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "planned", "ref": "conformance:wire-cbor-determinism"}
       ]
     },
@@ -1553,14 +1523,12 @@
       "evidence_status": "partial",
       "failure_owner": "every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "spec/profiles/end-p0.json"},
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p2/edge-limit.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p2/depth-limit.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/p2/string-limit.hex"},
-        {"status": "planned", "ref": "conformance:p0-limit-boundaries"}
+        {"status": "planned", "ref": "conformance:p2-limit-boundaries"}
       ]
     },
     {
@@ -1570,11 +1538,9 @@
       "evidence_status": "partial",
       "failure_owner": "producer and every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "spec/profiles/end-p0.json"},
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
-        {"status": "planned", "ref": "conformance:p0-feature-closure"}
+        {"status": "planned", "ref": "conformance:p2-feature-closure"}
       ]
     },
     {
@@ -1584,8 +1550,8 @@
       "evidence_status": "covered",
       "failure_owner": "every reader and release validation",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/wire/manifest.json"},
-        {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"}
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/manifest.json"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"}
       ]
     },
     {

@@ -15,7 +15,7 @@ OPERATORS = {"all_of", "any_of"}
 def validate_target(target):
     if not isinstance(target, dict):
         return None, None, "END-CMP-001"
-    if target.get("same_terminal") is not True or target.get("shared_telis") is not True or target.get("shared_authority") is not True or target.get("independent_lifecycle") is not False:
+    if target.get("same_terminal") is not True or target.get("shared_direction") is not True or target.get("shared_authority") is not True or target.get("independent_lifecycle") is not False:
         return None, None, "END-CMP-001"
     nodes = target.get("nodes")
     root = target.get("root")
@@ -55,8 +55,8 @@ def validate_target(target):
 
     if not walk(root) or visited != set(nodes) or len(leaves) != len(set(leaves)):
         return None, None, "END-CMP-002"
-    krin_leaves = target.get("krin_leaves")
-    if not isinstance(krin_leaves, list) or len(krin_leaves) != len(set(krin_leaves)) or set(krin_leaves) != set(leaves):
+    criteria_leaves = target.get("criteria_leaves")
+    if not isinstance(criteria_leaves, list) or len(criteria_leaves) != len(set(criteria_leaves)) or set(criteria_leaves) != set(leaves):
         return None, None, "END-CMP-002"
     return nodes, leaves, None
 

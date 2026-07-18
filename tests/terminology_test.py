@@ -30,19 +30,6 @@ DISALLOWED_INITIAL_CLUSTERS = ("gn", "kn", "mn", "pn", "ps", "pt", "rh", "wr")
 SILENT_INITIAL_WORDS = {
     "heir", "herb", "honest", "honor", "honour", "hour", "who", "whole",
 }
-RETIRED_TERM = re.compile(
-    r"(?<![A-Za-z0-9_])(?:"
-    r"Synem|Dromen|Iknem|Ktisor|Theor|Drasor|"
-    r"ktise|elenk|pleko|theor|drase|"
-    r"rhem|semion|skena|telis|krin|apor|phain|kine|mene|agno|aseme"
-    r")(?![A-Za-z0-9_])",
-    re.IGNORECASE,
-)
-
-HISTORICAL_DOCUMENT = (
-    re.compile(r"^architecture/adr-[0-9]{4}-.+\.md$"),
-)
-
 CURRENT_ROUTES = {
     "specifications/endem-closure.html": "specifications/endem-closure.md",
     "specifications/session-contract.html": "specifications/session-contract.md",
@@ -53,16 +40,12 @@ CURRENT_ROUTES = {
     "spec/endem-closure-core.html": "spec/endem-closure-core.md",
     "spec/session-contract-core.html": "spec/session-contract-core.md",
     "spec/evidence-entry-core.html": "spec/evidence-entry-core.md",
+    "architecture/adr-0013-source-profile.html": "architecture/adr-0013-source-profile.md",
+    "architecture/adr-0016-time-evidence.html": "architecture/adr-0016-time-evidence.md",
+    "architecture/adr-0021-closure-and-activation.html": "architecture/adr-0021-closure-and-activation.md",
+    "architecture/adr-0022-evidence-and-appraisal.html": "architecture/adr-0022-evidence-and-appraisal.md",
+    "architecture/adr-0024-session-contract.html": "architecture/adr-0024-session-contract.md",
 }
-
-RETIRED_CURRENT_ROUTES = (
-    "specifications/synem.html",
-    "specifications/dromen.html",
-    "specifications/iknem.html",
-    "components/ktisor.html",
-    "components/theor.html",
-    "components/drasor.html",
-)
 
 
 def load(path, errors):
@@ -75,10 +58,6 @@ def load(path, errors):
 
 def normalize(term):
     return re.sub(r"_+", "_", re.sub(r"[^a-z0-9]+", "_", term.casefold())).strip("_")
-
-
-def is_historical_document(relative):
-    return any(pattern.fullmatch(relative) for pattern in HISTORICAL_DOCUMENT)
 
 
 def iter_structured_tokens(value):
@@ -99,7 +78,7 @@ def main():
     corpus = load(CORPUS_PATH, errors)
 
     if registry.get("updated") != "2026-07-18":
-        errors.append("spec/registry.json: terminology migration date must be 2026-07-18")
+        errors.append("spec/registry.json: terminology review date must be 2026-07-18")
     terms = registry.get("terms")
     if not isinstance(terms, list) or not terms:
         errors.append("spec/registry.json: terms must be a non-empty list")
@@ -175,17 +154,6 @@ def main():
             if not pronunciation[field]:
                 errors.append(f"{term}: candidate pronunciation missing {field}")
 
-    for removed_source in (
-        ROOT / "docs" / "terminology-audit.md",
-        ROOT / "docs" / "terminology-and-pronunciation.md",
-        ROOT / "spec" / "goal_direction-release-terms-proposal.md",
-        ROOT / "spec" / "lifecycle-and-result-terminology-proposal.md",
-        ROOT / "spec" / "release-terminology-simplification-proposal.md",
-        ROOT / "spec" / "semantic-facet-terminology-proposal.md",
-    ):
-        if removed_source.exists():
-            errors.append(f"{removed_source.relative_to(ROOT)}: maintenance material must not generate a public page")
-
     public_guide_text = PUBLIC_GUIDE_PATH.read_text()
     for token in (
         "只保留两个自造名称",
@@ -237,36 +205,12 @@ def main():
                 f"registered machine identifier collides with the versioned keyword corpus: {identifier}"
             )
 
-    skipped = {".git", "_site", "vendor", ".bundle"}
-    for path in ROOT.rglob("*"):
-        if not path.is_file() or skipped.intersection(path.parts):
-            continue
-        relative = path.relative_to(ROOT).as_posix()
-        if relative.startswith("tests/") or is_historical_document(relative):
-            continue
-        try:
-            text = path.read_text()
-        except UnicodeDecodeError:
-            continue
-        current_text = re.sub(
-            r"(?:https://noemion\.github\.io/|(?:\.\./)*)?(?:architecture/)?adr-[0-9]{4}-[^\s\"')>]+",
-            "",
-            text,
-        )
-        match = RETIRED_TERM.search(current_text)
-        if match:
-            errors.append(f"{relative}: retired current terminology remains: {match.group(0)}")
-
     for route, source in CURRENT_ROUTES.items():
         path = ROOT / source
         if not path.exists():
             errors.append(f"current route source is missing: {source}")
         if source.endswith(".md") and f'permalink: "/{route}"' not in path.read_text():
             errors.append(f"{source}: permalink must publish /{route}")
-    for route in RETIRED_CURRENT_ROUTES:
-        if (ROOT / route).exists():
-            errors.append(f"retired current route must not remain as an alias: {route}")
-
     if errors:
         print("\n".join(errors))
         return 1

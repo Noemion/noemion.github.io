@@ -101,4 +101,4 @@ SHA-256 目前只出现在提案向量示例中，不是发行算法决定。精
 - [查看精确身份与签名开发者规范](../specifications/identity.html) — 按十二项责任核对对象、签名和派生关系。
 - [查看形成版与裁剪发布版](adr-0036-source-bearing-and-stripped-release.html) — 理解移除原文后为什么必须取得新身份。
 - [查看权威与授权决定](adr-0029-authority-and-authorization-decisions.html) — 区分签名主体、角色资格和动作授权。
-- [查看有范围证据边界](adr-0022-iknem-evidence-and-appraisal.html) — 理解验证结果怎样进入证据与最终判断。
+- [查看有范围证据边界](adr-0022-evidence-and-appraisal.html) — 理解验证结果怎样进入证据与最终判断。

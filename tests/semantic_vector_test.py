@@ -107,7 +107,7 @@ def validate_primary_rejections(model):
             )
 
 
-def validate_rhem(source_expression):
+def validate_source(source_expression):
     source_id = require_text(source_expression.get("source_id"), "END-SRC-001", "/input/source_expression/source_id", token=True)
     for field in ("subject", "media_type", "language"):
         require_text(source_expression.get(field), "END-SRC-001", f"/input/source_expression/{field}", token=True)
@@ -155,7 +155,7 @@ def validate_external_authorization(context, projection, location):
     require_text(binding.get("evidence_ref"), "END-AUT-002", f"{location}/@authorization/evidence_ref", token=True)
 
 
-def validate_semion(meaning_projection, source_id, context):
+def validate_meaning(meaning_projection, source_id, context):
     symbols = require_list(meaning_projection.get("symbols"), "/input/meaning_projection/symbols")
     relations = require_list(meaning_projection.get("relations"), "/input/meaning_projection/relations")
     if not symbols or not relations:
@@ -202,7 +202,7 @@ def validate_semion(meaning_projection, source_id, context):
     return relation_ids
 
 
-def validate_skena(situation, relation_ids):
+def validate_situation(situation, relation_ids):
     roots = require_list(situation.get("roots"), "/input/situation/roots")
     if len(roots) != 1:
         fail("endem.root.not_unique", "END-CORE-001", "/input/situation/roots")
@@ -226,7 +226,7 @@ def validate_skena(situation, relation_ids):
         fail("endem.root.missing_situation", "END-CORE-001", "/input/situation/roots/0")
 
 
-def validate_telis(goal_direction):
+def validate_direction(goal_direction):
     mode = goal_direction.get("mode")
     if mode not in {"reach", "maintain"}:
         fail("endem.goal_direction.mode", "END-DIRECTION-001", "/input/goal_direction/mode")
@@ -234,7 +234,7 @@ def validate_telis(goal_direction):
         fail("endem.goal_direction.interval", "END-DIRECTION-001", "/input/goal_direction/interval")
 
 
-def validate_krin(satisfaction_criteria, relation_ids):
+def validate_criteria(satisfaction_criteria, relation_ids):
     required_observations = require_list(satisfaction_criteria.get("required_observations"), "/input/satisfaction_criteria/required_observations")
     if not required_observations:
         fail("endem.satisfaction_criteria.empty_observation", "END-CRITERIA-001", "/input/satisfaction_criteria/required_observations")
@@ -257,7 +257,7 @@ def validate_krin(satisfaction_criteria, relation_ids):
     require_text(satisfaction_criteria.get("decision_authority"), "END-CRITERIA-001", "/input/satisfaction_criteria/decision_authority", token=True)
 
 
-def validate_apor(unresolved_meaning):
+def validate_unresolved(unresolved_meaning):
     for index, item in enumerate(unresolved_meaning):
         item = require_mapping(item, f"/input/unresolved_meaning/{index}")
         for field in ("id", "source_ref", "conflict", "decision_authority"):
@@ -276,12 +276,12 @@ def validate_model(model, context):
     if not isinstance(model, dict) or set(model) != set(FACETS):
         fail("endem.semantic.facets", "END-CORE-002", "/input")
     validate_primary_rejections(model)
-    source_id = validate_rhem(require_mapping(model["source_expression"], "/input/source_expression"))
-    relation_ids = validate_semion(require_mapping(model["meaning_projection"], "/input/meaning_projection"), source_id, context)
-    validate_skena(require_mapping(model["situation"], "/input/situation"), relation_ids)
-    validate_telis(require_mapping(model["goal_direction"], "/input/goal_direction"))
-    validate_krin(require_mapping(model["satisfaction_criteria"], "/input/satisfaction_criteria"), relation_ids)
-    validate_apor(require_list(model["unresolved_meaning"], "/input/unresolved_meaning"))
+    source_id = validate_source(require_mapping(model["source_expression"], "/input/source_expression"))
+    relation_ids = validate_meaning(require_mapping(model["meaning_projection"], "/input/meaning_projection"), source_id, context)
+    validate_situation(require_mapping(model["situation"], "/input/situation"), relation_ids)
+    validate_direction(require_mapping(model["goal_direction"], "/input/goal_direction"))
+    validate_criteria(require_mapping(model["satisfaction_criteria"], "/input/satisfaction_criteria"), relation_ids)
+    validate_unresolved(require_list(model["unresolved_meaning"], "/input/unresolved_meaning"))
 
 
 def main():

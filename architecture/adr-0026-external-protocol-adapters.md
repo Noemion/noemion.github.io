@@ -57,7 +57,7 @@ next_label: ADR-0027
 
 | 外部事实 | 本地可以保存 | 不能直接提升为 |
 | --- | --- | --- |
-| A2A Task `completed` | 精确 A2A 版本、Task 身份、终态、历史范围和远端主体 | 目标 `met`、最终 `accepted` 或 Drase `completed` |
+| A2A Task `completed` | 精确 A2A 版本、Task 身份、终态、历史范围和远端主体 | 目标 `met`、最终 `accepted` 或 run 会话 `completed` |
 | MCP ToolResult | 工具身份、调用关联、内容、结构化状态和对端来源 | 可信 evidence、正确 Endem 或已获授权的外部副作用 |
 | MCP 协议错误或工具执行错误 | 各自原始层次、机器码、结构化内容和受限本地映射 | 目标 `unmet`、证据 `invalid` 或永久不可重试 |
 | HTTP 2xx 或模型 stop reason | 传输状态或供应商按自身规则结束生成的事实 | 内容正确、观察充分、目标实现或权威接受 |
@@ -102,6 +102,6 @@ MCP、A2A 1.0、HTTP、模型 SDK 和操作系统调用仍需各自的物理 Pro
 > **名称与口头边界：**面向开发者先说“外部协议适配器”，再给出 `ADP-CORE` 条款编号。口头交流必须带协议域，例如“A2A Task”“MCP 工具结果”“HTTP 传输状态”和“Noemion 目标结果”；不要只说“任务完成”“工具成功”或“适配成功”。`ADP` 是机器规范 ID，不承担发行读音名称。
 
 - [查看外部协议适配开发者规范](../specifications/adapters.html) — 按十二项责任检查一次受限调用。
-- [查看一次会话权限边界](adr-0024-dromen-session-contract.html) — 理解调用能力、预算和实时凭据怎样收窄。
+- [查看一次会话权限边界](adr-0024-session-contract.html) — 理解调用能力、预算和实时凭据怎样收窄。
 - [查看结构化诊断边界](adr-0025-structured-diagnostics.html) — 区分协议错误、工具错误与本地结果。
 - [查看权威与授权决定](adr-0029-authority-and-authorization-decisions.html) — 核对对端身份、能力声明和本地授权。

@@ -82,7 +82,7 @@ next_label: 结构化诊断
 - [当前草案威胁模型](https://noemion.github.io/spec/evidence-entry-threat-model.html) — 检查范围漂白、循环自证、类别升级、撤销失明、数量冒充覆盖和证据泄密。
 - [非规范场景](https://noemion.github.io/spec/evidence-entry-scenarios.html) — 用支持案例、反例和边界场景检查九项责任；场景不是规范条款或实现证据。
 - [提案向量](https://github.com/Noemion/noemion.github.io/blob/main/vectors/evidence-entry/cases.json) — 仅检查资料一致性，不能证明组件、安全性或稳定格式。
-- [ADR-0022](../architecture/adr-0022-iknem-evidence-and-appraisal.html) — 解释采用理由、外部先例、限制和待定内容，不建立第二套条款。
+- [ADR-0022](../architecture/adr-0022-evidence-and-appraisal.html) — 解释采用理由、外部先例、限制和待定内容，不建立第二套条款。
 
 **当前策略：**EVIDENCE-CORE 0.1.0-draft 只定义抽象证据与评估边界。物理容器、字段编号、摘要与签名算法、透明日志、撤销分发、远程查询、时钟归并、隐私语言和长期归档均未确定。
 

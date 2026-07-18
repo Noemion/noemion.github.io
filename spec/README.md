@@ -16,7 +16,7 @@ document_status: "规范源目录"
 | 规范 | 版本 | 状态 | 已覆盖 | 明确未覆盖 |
 | --- | --- | --- | --- | --- |
 | [`endem-core.md`](https://noemion.github.io/spec/endem-core.html) | `0.1.0-draft` | 通用内容标准草案；已接受语义与规范分层的条款化表达 | Endem 最小性、六个语义面、内容 Profile、分层符合性、事态与方向分离、单变量量化、测量阈值、复合判据、未知状态、确定性、安全读取、身份分层与验证责任 | 量化、测量与组合物理字段、嵌套或多变量量化、条件适用性、时间、求值、摘要与签名物理 Profile |
-| [`endem-format.md`](https://noemion.github.io/spec/endem-format.html) | `0.1.0-draft` | 已采用的实验性容器草案；尚非稳定 ABI | 固定前导、定宽目录、确定性 CBOR、END-P0 结构实验与 END-P2 封闭内容 Profile | resolved/attested、签名、压缩、closure 和跨版本承诺 |
+| [`endem-format.md`](https://noemion.github.io/spec/endem-format.html) | `0.1.0-draft` | 已采用的实验性容器草案；尚非稳定 ABI | 固定前导、定宽目录、确定性 CBOR 与 END-P2 封闭内容 Profile | resolved 编码、签名、压缩、closure 和跨版本承诺 |
 | [`endem-source-manifest.md`](https://noemion.github.io/spec/endem-source-manifest.html) | `0.1.0-draft` | 实验性 producer 输入；正式来源语言出现后删除 | UTF-8 逐行指令、转义、基数、授权边界和 END-P2 映射 | 注释元数据、包含、模块、量化、时间、求值语言和兼容承诺 |
 | [`endem-closure-core.md`](https://noemion.github.io/spec/endem-closure-core.html) | `0.1.0-draft` | 草案；已接受组合闭包边界的第一份条款化表达 | 完整闭包、精确绑定、有限无环、权限交集、成员结果分离与会话激活 | 物理容器、版本范围语法、符号、调度、远程仓库和稳定 ABI |
 | [`session-contract-core.md`](https://noemion.github.io/spec/session-contract-core.html) | `0.1.0-draft` | 草案；已接受一次会话契约的第一份条款化表达 | 精确主体、政策与环境绑定、能力和预算求交、秘密外置、观察责任、只读失效与销毁 | 运行 API、沙箱、凭据代理、事件编码、恢复策略和组件实现；永远不建立 contract 文件 |
@@ -26,7 +26,7 @@ document_status: "规范源目录"
 | [`text-identifier-core.md`](https://noemion.github.io/spec/text-identifier-core.html) | `0.1.0-draft` | 草案；已接受跨制品文本与标识符边界的第一份条款化表达 | 文本槽、严格 UTF-8、来源溯源、ASCII 标识符、规范化、比较、范围、双向显示、隐藏字符、元数据、模型输入与输出视图 | Unicode 标识符、来源重写、分词、搜索排序、tokenizer 协议、原始字节字段和组件实现 |
 | [`authority-core.md`](https://noemion.github.io/spec/authority-core.html) | `0.1.0-draft` | 草案；已接受跨制品权威与授权决定边界的第一份条款化表达 | 权威语境、主体资格、封闭范围、语义授权、委托、同意、多人决定、时效、重放、能力交集与结果分离 | 权威目录、角色与政策语言、物理编码、同意 UI Profile、凭据、撤销分发和组件实现 |
 
-[`endem-threat-model.md`](https://noemion.github.io/spec/endem-threat-model.html) 把单个 Endem 的不可信输入与失败责任映射到规范条款；[`endem-closure-threat-model.md`](https://noemion.github.io/spec/endem-closure-threat-model.html) 单独处理依赖替换、闭包截断、循环、权限放大、结果洗白与激活竞态；[`session-contract-threat-model.md`](https://noemion.github.io/spec/session-contract-threat-model.html) 处理主体替换、陈旧政策、环境漂移、能力放大、秘密持久化、预算逃逸和会话复活；[`evidence-entry-threat-model.md`](https://noemion.github.io/spec/evidence-entry-threat-model.html) 处理范围漂白、循环自证、观察升级、撤销失明、覆盖伪造、决定越权和泄密。[`profiles/end-p0.json`](profiles/end-p0.json) 给出第一组跨实现实验的有限上限；这些数值不是生产规模证明，提高时必须采用新的 Profile 身份。
+[`endem-threat-model.md`](https://noemion.github.io/spec/endem-threat-model.html) 把单个 Endem 的不可信输入与失败责任映射到规范条款；[`endem-closure-threat-model.md`](https://noemion.github.io/spec/endem-closure-threat-model.html) 单独处理依赖替换、闭包截断、循环、权限放大、结果洗白与激活竞态；[`session-contract-threat-model.md`](https://noemion.github.io/spec/session-contract-threat-model.html) 处理主体替换、陈旧政策、环境漂移、能力放大、秘密持久化、预算逃逸和会话复活；[`evidence-entry-threat-model.md`](https://noemion.github.io/spec/evidence-entry-threat-model.html) 处理范围漂白、循环自证、观察升级、撤销失明、覆盖伪造、决定越权和泄密。[`profiles/end-p2.json`](profiles/end-p2.json) 给出当前 Profile 的有限上限；这些数值不是生产规模证明，提高时必须采用新的 Profile 身份。
 
 [`diagnostics-core.md`](https://noemion.github.io/spec/diagnostics-core.html) 定义跨对象诊断内容边界，[`diagnostic-catalog.md`](https://noemion.github.io/spec/diagnostic-catalog.html) 登记草案机器码。[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存 JSON 语义外壳；`../vectors/diagnostics/` 保存诊断资料一致性提案；`../vectors/wire/` 保存真实字节的十六进制表达。这些向量都不表示组件已经实现。
 
@@ -97,8 +97,6 @@ document_status: "规范源目录"
 `../vectors/session-contract/cases.json` 保存 ADR-0024 的二十个会话契约提案向量；`../tests/session_contract_vector_test.py` 只检查十条 SESSION-CORE 规则，不实现装载器、沙箱、凭据代理、runner、事件系统或运行时。
 
 `../vectors/diagnostics/cases.json` 保存 ADR-0025 的二十个结构化诊断提案向量；`../tests/diagnostic_vector_test.py` 只检查十条 DIA-CORE 规则，不实现诊断生产器、渲染器、协议适配器、重试引擎或 CLI。
-
-`registry.json` 还登记非规范实验及其决定链。P0-LANG-001 的协议与结果位于 `../experiments/p0-language/`；它支持 ADR-0012 为未来 producer 保留条件式 Rust 评审基线，但不会改变 END-CORE 或 END-FMT 的条款含义，也不把原型登记为生产实现。
 
 ## 规范强度
 

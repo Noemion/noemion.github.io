@@ -113,19 +113,18 @@ REQUIRED_CORE_ROUTES = {
     "architecture/endem-lifecycle.html",
     "architecture/adr-0010-native-lexicon.html",
     "architecture/adr-0011-endem-container.html",
-    "architecture/adr-0012-rust-core-language.html",
-    "architecture/adr-0013-end-p1-payload.html",
+    "architecture/adr-0013-source-profile.html",
     "architecture/adr-0014-source-manifest.html",
     "architecture/adr-0015-result-domains.html",
-    "architecture/adr-0016-mene-time-model.html",
+    "architecture/adr-0016-time-evidence.html",
     "architecture/adr-0017-negation-and-absence.html",
     "architecture/adr-0018-quantification-and-membership.html",
     "architecture/adr-0019-measurement-and-thresholds.html",
     "architecture/adr-0020-composite-situations-and-criteria.html",
-    "architecture/adr-0021-synem-closure-and-activation.html",
-    "architecture/adr-0022-iknem-evidence-and-appraisal.html",
+    "architecture/adr-0021-closure-and-activation.html",
+    "architecture/adr-0022-evidence-and-appraisal.html",
     "architecture/adr-0023-endem-content-standard.html",
-    "architecture/adr-0024-dromen-session-contract.html",
+    "architecture/adr-0024-session-contract.html",
     "architecture/adr-0025-structured-diagnostics.html",
     "architecture/adr-0026-external-protocol-adapters.html",
     "architecture/adr-0027-exact-identity-and-attestation.html",
@@ -193,44 +192,10 @@ INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "《逻辑哲学论》的有限采用",
     "名字、规范与证据各自承担什么",
 ]
-HISTORICAL_ADR_0008_HEADINGS = [
-    "先确认这份记录还能约束什么",
-    "它当时解决了什么问题",
-    "当前架构保留了哪些原则",
-    "旧名称为什么不能继续使用",
-    "外部资料怎样限定这份历史记录",
-]
-HISTORICAL_ADR_0008_BOUNDARIES = (
-    "只能从 ADR-0008 继承三项结果",
-    "历史名称只用于解释设计来路",
-    "一个应用入口不等于一个信任域",
-    "形成版保留自然语言",
-    "旧命令不构成别名",
-    "首次朗读、听写回填和词表内口头区分证据",
-    "2025-11-25 仍是 Current",
-    "协议工具、任务或能力声明",
-)
-HISTORICAL_ADR_0009_HEADINGS = [
-    "先确认这份记录还能说明什么",
-    "它当时纠正了什么问题",
-    "当前开发者应怎样拆开一个目标",
-    "旧字段和状态为什么不能继续使用",
-    "哲学与外部资料怎样限定这份记录",
-]
-HISTORICAL_ADR_0009_BOUNDARIES = (
-    "只能从 ADR-0009 继承职责分离",
-    "语义未决也不等于观察不足",
-    "模型即使生成结构完整的 JSON",
-    "形成版保留实际进入形成过程的自然语言",
-    "历史动作不构成别名",
-    "两个自造名称另行保留发行读音验证",
-    "NIST AI 600-1",
-    "MCP 2025-11-25 仍是 Current",
-)
 ADR_0011_READING_HEADINGS = [
     "先分清格式能够证明什么",
     "开发者应按什么顺序读取",
-    "END-P0、END-P2 与发布版分别做什么",
+    "END-P2 与发布版分别做什么",
     "为什么采用固定目录与受限 CBOR",
     "权威机制怎样限定本决定",
     "当前限制与开发入口",
@@ -238,33 +203,13 @@ ADR_0011_READING_HEADINGS = [
 ADR_0011_READING_BOUNDARIES = (
     "不能证明目标已经满足、制品已经获准运行或最终发布",
     "用一个 valid=true 合并这些层次",
-    "结构接受、语义未执行",
-    "六个空映射不是最小有效 Endem",
+    "容器层可以完成字节检查，但 END-P2 必须因必需字段缺失而拒绝",
+    "读取器不能把空载荷补成默认目标",
     "最终发布不能只删除 source_expression.content",
     "当前规范与已执行向量不是 producer、inspector 或正式独立读取组件",
     "well-formed、valid 和 application-expected",
     "删除一个记录或字段就能得到安全、闭合、可发布的 Endem",
     "当前不能生成",
-)
-ADR_0012_REVIEW_HEADINGS = [
-    "先分清已经决定与尚未决定",
-    "历史实验实际回答了什么",
-    "为什么只把 Rust 作为 producer 起点",
-    "安全 Rust 仍然不能证明什么",
-    "进入代码阶段前怎样重新评审",
-    "什么情况会改变这一基线",
-]
-ADR_0012_REVIEW_BOUNDARIES = (
-    "只有项目另行进入代码阶段时",
-    "实现语言继续待定",
-    "历史自造词 ktise 与 elenk 已被替换",
-    "这些原型不是生产实现，也不产生规范 Endem",
-    "同样使用 Rust 就自然获得实现独立性",
-    "不把“安全 Rust”写成“解析器安全”",
-    "Cargo 的 release 默认关闭该检查",
-    "仅提交 Cargo.lock 不会自动建立这项保证",
-    "版本新旧本身不构成安全结论",
-    "这里没有 producer、inspector、CLI、稳定命令、构建配置或实现级符合性结论",
 )
 ADR_0013_PROFILE_HEADINGS = [
     "先确定 END-P2 是什么",
@@ -410,24 +355,22 @@ GENERIC_ENGLISH_BADGES = {
     "Roadmap", "Testing", "Contribution", "Claim", "Failure", "Integrity",
     "Supply Chain", "Application Design", "Actions Specified", "Security",
     "Development", "No Release Yet",
-    "Superseded by ADR-0010", "Historical Vocabulary", "Historical Semantics",
-    "Native Lexicon", "Rust 1.97.0 Baseline", "Historical Evidence",
+    "Native Lexicon",
     "Experimental Input", "Replaceable", "Result Domains", "No Wire Change",
-    "Mene Semantics", "Negative Evidence", "No Wire Schema Change",
+    "Negative Evidence", "No Wire Schema Change",
     "Quantified Goals", "Measurement Semantics", "Composite Criteria",
     "No Wire Format", "Layered Conformance", "Session Only", "Failure First",
     "Protocol Independent", "No Adapter Code", "Algorithm Agnostic",
     "No Crypto Code", "Unicode Boundaries", "No Unicode Code",
     "No Policy Engine", "END-CORE Clarification", "Identity Stable",
-    "No New Artifact", "One-time migration", "No compatibility",
-    "Direct replacement", "No new format", "No Voice Interface",
-    "Five Actions", "No Compatibility Alias",
+    "No New Artifact", "No new format", "No Voice Interface",
+    "Five Actions",
     "Unreleased", "Endem CLI", "Integrity First", "5 Verbs",
     "Architecture", "Trust Boundaries", "Guides", "Endem Manual",
     "Reference", "Getting Started", "Claim First", "Spec First",
     "Evidence Boundaries", "Authority", "Lookup", "Status",
     "Naming Review", "Human Evidence", "Pronunciation Pending",
-    "One Root Skena", "External Signing", "No Runtime", "Single CLI",
+    "External Signing", "No Runtime", "Single CLI",
     "Experimental Core",
 }
 ROLE_BY_KIND = {
@@ -551,30 +494,6 @@ UNCLEAR_CHINESE_UI_TERMS = re.compile(
     r"路线图语境|黄金圈定位|第一批检查点|当前设计：|"
     r"尚待确定：|概要设计："
 )
-LEGACY_PUBLIC_TERMS = re.compile(
-    r"\b(?:G(?:SIR|OBJ|SL)|S(?:SO)|N(?:SFE|IR|OBJ|SL)|H(?:OBJ))\b|"
-    r"\bNo(?:esis|ema)\b|\b(?:Hori(?:zon)|Fulfill(?:ment))\b|"
-    r"\bnoem(?!ion\b)[a-z]+\b|\b(?:morph(?:e)|inspect(?:ia)|synth(?:esis))\b|"
-    r"(?:compiler-core|linker-loader|nsfe|gsir|gobj|sso|noem(?:a)-ir|"
-    r"noem(?:a)-object|horizon-object|noesis-core|noem(?:a)-object-system|"
-    r"horizon-engine|agent-harness|fulfillment-runtime|noem(?:a)-lifecycle)\.html"
-)
-RETIRED_RELEASE_TERMS = re.compile(
-    r"\b(?:praxor|praxe|tekmor|poiet|poie)\b|\bTEK(?:-[A-Z0-9]+)+\b|\bTK-[A-Z0-9-]+\b|\btek-core\b",
-    re.IGNORECASE,
-)
-RETIRED_RELEASE_EVIDENCE_PATHS = set()
-RETIRED_TEXT_SPEC_TERMS = re.compile(
-    r"\bTXT(?:-[A-Z]+)*\b|"
-    r"spec/(?:text-core|text-threat-model|text-scenarios)\.md|"
-    r"vectors/text(?!-identifier)|tests/text_vector_test\.py|"
-    r"specifications/text\.html"
-)
-RETIRED_TEXT_SPEC_EVIDENCE_PATHS = set()
-RETIRED_ACTION_TERMS = re.compile(r"\b(?:tasse|sphra|peira)\b", re.IGNORECASE)
-RETIRED_ACTION_EVIDENCE_PATHS = {
-    "architecture/adr-0035-public-actions-and-internal-responsibilities.html",
-}
 NORMATIVE_ROUTES = (
     "specifications/endem.html",
     "specifications/endem-closure.html",
@@ -591,23 +510,20 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/endem-lifecycle.html",
     "architecture/decisions.html",
     "architecture/agent-system-boundaries.html",
-    "architecture/adr-0008-endem-system.html",
-    "architecture/adr-0009-propositional-kernel.html",
     "architecture/adr-0010-native-lexicon.html",
     "architecture/adr-0011-endem-container.html",
-    "architecture/adr-0012-rust-core-language.html",
-    "architecture/adr-0013-end-p1-payload.html",
+    "architecture/adr-0013-source-profile.html",
     "architecture/adr-0014-source-manifest.html",
     "architecture/adr-0015-result-domains.html",
-    "architecture/adr-0016-mene-time-model.html",
+    "architecture/adr-0016-time-evidence.html",
     "architecture/adr-0017-negation-and-absence.html",
     "architecture/adr-0018-quantification-and-membership.html",
     "architecture/adr-0019-measurement-and-thresholds.html",
     "architecture/adr-0020-composite-situations-and-criteria.html",
-    "architecture/adr-0021-synem-closure-and-activation.html",
-    "architecture/adr-0022-iknem-evidence-and-appraisal.html",
+    "architecture/adr-0021-closure-and-activation.html",
+    "architecture/adr-0022-evidence-and-appraisal.html",
     "architecture/adr-0023-endem-content-standard.html",
-    "architecture/adr-0024-dromen-session-contract.html",
+    "architecture/adr-0024-session-contract.html",
     "architecture/adr-0025-structured-diagnostics.html",
     "architecture/adr-0026-external-protocol-adapters.html",
     "architecture/adr-0027-exact-identity-and-attestation.html",
@@ -672,25 +588,6 @@ MAINSTREAM_LANGUAGE_KEYWORDS = {
     "typeid", "typename", "typeof", "union", "unsafe", "unsigned", "use", "using", "var",
     "virtual", "void", "volatile", "wchar_t", "when", "where", "while", "with", "yield",
 }
-REMOVED_PUBLIC_ROUTES = {
-    "about/background.html", "news/index.html",
-    "docs/installation-and-usage.html",
-    "specifications/weave.html", "specifications/witness.html",
-    "components/core.html", "components/reader.html",
-    "specifications/tekmor.html", "components/praxor.html",
-    "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
-    "docs/terminology-and-pronunciation.html",
-    "docs/terminology-audit.html",
-    "architecture/adr-0031-release-name-collision-gate.html",
-    "architecture/adr-0032-deterministic-maker-name-collision.html",
-    "architecture/adr-0033-text-identifier-specification-name.html",
-    "architecture/adr-0034-pronunciation-and-oral-distinction.html",
-    "spec/goal_direction-release-terms-proposal.html",
-    "spec/lifecycle-and-result-terminology-proposal.html",
-    "spec/release-terminology-simplification-proposal.html",
-    "spec/semantic-facet-terminology-proposal.html",
-}
-
 REQUIRED_ARCHITECTURE_ROUTES = {
     "architecture/decisions.html": "architecture/index.html",
     "architecture/agent-system-boundaries.html": "architecture/index.html",
@@ -725,7 +622,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "停止条件",
             "按职责核对全部决定",
             "status-columns",
-            "历史迁移",
+            "现行 ADR 与对应 CORE、Profile",
             "Endem 语义、格式与判断",
             "组合、会话、证据与信任",
             "名称、读音与公开动作",
@@ -920,7 +817,6 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         ),
         "forbidden_patterns": (
             r"<h2>状态机</h2>",
-            r"One Root Skena",
             r"三十个场景当前登记",
             r"END-P2 包含 3 个语义接受和 11 个预期拒绝",
         ),
@@ -1292,7 +1188,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "普通动作词已接受",
             "动作名称不等于实现优先级",
             "没有可执行 <code>endem</code>",
-            "不保留旧入口、别名、重定向、双写或兼容垫片",
+            "接口不提供多套名称或兼容入口",
         ),
     },
     "architecture/adr-0036-source-bearing-and-stripped-release.html": {
@@ -1602,7 +1498,7 @@ def validate_required_text_contracts(root):
                 int(value)
                 for value in re.findall(r'href="adr-(\d{4})-[^"]+\.html"', text)
             }
-            expected_adrs = {*range(8, 31), 35, 36, 37}
+            expected_adrs = {10, 11, *range(13, 31), 35, 36, 37}
             if linked_adrs != expected_adrs:
                 missing = sorted(expected_adrs - linked_adrs)
                 unexpected = sorted(linked_adrs - expected_adrs)
@@ -1795,10 +1691,6 @@ def validate_readability_behavior_contracts(root):
 
 def validate_prose_readability_contracts():
     errors = []
-    historical_routes = {
-        "architecture/adr-0008-endem-system.html",
-        "architecture/adr-0009-propositional-kernel.html",
-    }
     current_prose_forbidden = (
         r"\.weave\b",
         r"\bRhem Source\b",
@@ -1821,10 +1713,9 @@ def validate_prose_readability_contracts():
         route = permalink.lstrip("/") if permalink else path.relative_to(SOURCE_ROOT).as_posix()
         body = source_text[source_match.end():]
 
-        if route not in historical_routes:
-            for pattern in current_prose_forbidden:
-                if re.search(pattern, body):
-                    errors.append(f"{route}: current prose retains unexplained or obsolete wording {pattern!r}")
+        for pattern in current_prose_forbidden:
+            if re.search(pattern, body):
+                errors.append(f"{route}: current prose retains unexplained wording {pattern!r}")
 
         if path.suffix == ".html":
             prose_blocks = re.findall(
@@ -1924,54 +1815,6 @@ def source_path_for_route(route):
     return direct
 
 
-def validate_legacy_source_vocabulary():
-    errors = []
-    skipped_parts = {".git", "_site", "vendor", ".bundle"}
-    for path in SOURCE_ROOT.rglob("*"):
-        if not path.is_file() or skipped_parts.intersection(path.parts):
-            continue
-        relative = path.relative_to(SOURCE_ROOT).as_posix()
-        legacy_path_match = LEGACY_PUBLIC_TERMS.search(relative)
-        if legacy_path_match:
-            errors.append(
-                f"{relative}: legacy vocabulary remains in path "
-                f"{legacy_path_match.group(0)!r}"
-            )
-            continue
-        try:
-            text = path.read_text()
-        except UnicodeDecodeError:
-            continue
-        legacy_text_match = LEGACY_PUBLIC_TERMS.search(text)
-        if legacy_text_match:
-            errors.append(
-                f"{relative}: legacy vocabulary remains outside superseded ADRs "
-                f"{legacy_text_match.group(0)!r}"
-            )
-        if not relative.startswith("tests/") and relative not in RETIRED_RELEASE_EVIDENCE_PATHS:
-            retired_match = RETIRED_RELEASE_TERMS.search(text)
-            if retired_match:
-                errors.append(
-                    f"{relative}: retired release terminology remains outside accepted naming evidence "
-                    f"{retired_match.group(0)!r}"
-                )
-        if not relative.startswith("tests/") and relative not in RETIRED_TEXT_SPEC_EVIDENCE_PATHS:
-            retired_text_match = RETIRED_TEXT_SPEC_TERMS.search(text)
-            if retired_text_match:
-                errors.append(
-                    f"{relative}: retired text specification terminology remains outside retained historical evidence "
-                    f"{retired_text_match.group(0)!r}"
-                )
-        if not relative.startswith("tests/") and relative not in RETIRED_ACTION_EVIDENCE_PATHS:
-            retired_action_match = RETIRED_ACTION_TERMS.search(text)
-            if retired_action_match:
-                errors.append(
-                    f"{relative}: retired public action remains outside ADR-0035 and the name audit "
-                    f"{retired_action_match.group(0)!r}"
-                )
-    return errors
-
-
 def read_manual_source_routes():
     routes = []
     for path in MANUAL_MARKDOWN_FILES:
@@ -2004,7 +1847,6 @@ def read_manual_source_entries(manual_id):
 
 def validate_jekyll_sources():
     errors = []
-    errors.extend(validate_legacy_source_vocabulary())
     readme_text = README.read_text()
     if len(readme_text.splitlines()) > 100:
         errors.append("README.md must remain a concise developer entry under 100 lines")
@@ -2017,28 +1859,6 @@ def validate_jekyll_sources():
     for token in ("## Jekyll 源码模型", "-proposal.md", "ADR-0010"):
         if token in readme_text:
             errors.append(f"README.md duplicates detailed maintenance material: {token}")
-    for removed_source in (
-        SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md",
-        SOURCE_ROOT / "docs" / "terminology-audit.md",
-        SOURCE_ROOT / "CONTRIBUTING.md",
-        SOURCE_ROOT / "content-quality-audit.md",
-        SOURCE_ROOT / "homepage-design.md",
-        SOURCE_ROOT / "sitewide-design-system.md",
-        SOURCE_ROOT / "spec" / "terminology-audit.json",
-        SOURCE_ROOT / "spec" / "goal_direction-release-terms-proposal.md",
-        SOURCE_ROOT / "spec" / "lifecycle-and-result-terminology-proposal.md",
-        SOURCE_ROOT / "spec" / "release-terminology-simplification-proposal.md",
-        SOURCE_ROOT / "spec" / "semantic-facet-terminology-proposal.md",
-        SOURCE_ROOT / "architecture" / "adr-0031-release-name-collision-gate.md",
-        SOURCE_ROOT / "architecture" / "adr-0032-deterministic-maker-name-collision.md",
-        SOURCE_ROOT / "architecture" / "adr-0033-text-identifier-specification-name.md",
-        SOURCE_ROOT / "architecture" / "adr-0034-pronunciation-and-oral-distinction.md",
-        SOURCE_ROOT / "design-system",
-    ):
-        if removed_source.exists():
-            errors.append(
-                f"{removed_source.relative_to(SOURCE_ROOT)} must not retain intermediate website-maintenance material"
-            )
     public_research_files = [
         SOURCE_ROOT / "README.md",
         *sorted((SOURCE_ROOT / "spec").glob("*.md")),
@@ -2099,7 +1919,7 @@ def validate_jekyll_sources():
         for workflow_contract in (
             "bundler-cache: true",
             "python3 tests/spec_contract_test.py",
-            "python3 tests/wire_vector_test.py",
+            "python3 tests/p2_payload_test.py",
             "python3 tests/site_quality_test.py",
             'bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"',
             "JEKYLL_ENV: production",
@@ -2327,18 +2147,6 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the causation research proposal"
                 )
 
-    retired_terminology_sources = (
-        "goal_direction-release-terms-proposal.md",
-        "lifecycle-and-result-terminology-proposal.md",
-        "release-terminology-simplification-proposal.md",
-        "semantic-facet-terminology-proposal.md",
-    )
-    for source_name in retired_terminology_sources:
-        if (SOURCE_ROOT / "spec" / source_name).exists():
-            errors.append(
-                f"spec/{source_name} must not retain a separate terminology-review page"
-            )
-
     lifecycle_page_text = source_path_for_route("architecture/endem-lifecycle.html").read_text()
     if lifecycle_page_text:
         for token in (
@@ -2418,13 +2226,12 @@ def validate_jekyll_sources():
             ),
             source_path_for_route("architecture/adr-0010-native-lexicon.html"): (
                 "外部签名与证明不能成为内容自身状态",
-                "正式值迁移仍需单独 ADR",
             ),
             source_path_for_route("architecture/adr-0015-result-domains.html"): (
                 "`formed / resolved` 只描述内容",
                 "不能压成第三个内容状态",
             ),
-            source_path_for_route("architecture/adr-0024-dromen-session-contract.html"): (
+            source_path_for_route("architecture/adr-0024-session-contract.html"): (
                 "只接受精确的 `resolved` Endem 或 closure",
                 "内容状态不能证明会话准入",
             ),
@@ -3272,17 +3079,17 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{source.relative_to(SOURCE_ROOT)} retains an undefined verification claim: {phrase}"
                 )
-    ktisor_text = (SOURCE_ROOT / "components" / "producer.md").read_text()
+    producer_text = (SOURCE_ROOT / "components" / "producer.md").read_text()
     for stale_phrase in ("根据已授权语义决定形成", "已授权的投影决定", "已授权 `meaning_projection`"):
-        if stale_phrase in ktisor_text:
+        if stale_phrase in producer_text:
             errors.append(f"public developer guidance retains ambiguous semantic authorization wording: {stale_phrase}")
-    ktisor_boundary_pages = {
+    producer_boundary_pages = {
         "components/index.html": (SOURCE_ROOT / "components" / "index.html").read_text(),
         "endem/index.html": (SOURCE_ROOT / "endem" / "index.html").read_text(),
         "endem/docs/reference.md": (SOURCE_ROOT / "endem" / "docs" / "reference.md").read_text(),
         "docs/architecture-guide.md": (SOURCE_ROOT / "docs" / "architecture-guide.md").read_text(),
     }
-    for page, source_text in ktisor_boundary_pages.items():
+    for page, source_text in producer_boundary_pages.items():
         for stale_phrase in (
             "所有规范制品都必须通过 producer",
             "外部签名响应验证接口",
@@ -3297,16 +3104,16 @@ def validate_jekyll_sources():
         "endem/docs/reference.md": "Endem 规范字节的唯一生产入口",
         "docs/architecture-guide.md": "未来物理 Profile 确定后的 closure 与发布派生",
     }.items():
-        if token not in ktisor_boundary_pages[page]:
+        if token not in producer_boundary_pages[page]:
             errors.append(f"{page} missing the precise producer boundary: {token}")
-    theor_boundary_pages = {
+    inspector_boundary_pages = {
         "components/index.html": (SOURCE_ROOT / "components" / "index.html").read_text(),
         "endem/index.html": (SOURCE_ROOT / "endem" / "index.html").read_text(),
         "endem/docs/reference.md": (SOURCE_ROOT / "endem" / "docs" / "reference.md").read_text(),
         "endem/docs/safety.md": (SOURCE_ROOT / "endem" / "docs" / "safety.md").read_text(),
         "docs/architecture-guide.md": (SOURCE_ROOT / "docs" / "architecture-guide.md").read_text(),
     }
-    for page, source_text in theor_boundary_pages.items():
+    for page, source_text in inspector_boundary_pages.items():
         for stale_phrase in (
             "任意不可信 Endem、closure 或 evidence 字节",
             "任意原始制品字节、视图和预算",
@@ -3323,9 +3130,9 @@ def validate_jekyll_sources():
         "endem/docs/safety.md": "生产侧 `lint` 路径与 inspector",
         "docs/architecture-guide.md": "closure、evidence 与发布制品等待物理格式",
     }.items():
-        if token not in theor_boundary_pages[page]:
+        if token not in inspector_boundary_pages[page]:
             errors.append(f"{page} missing the precise inspector boundary: {token}")
-    endem_reference_text = theor_boundary_pages["endem/docs/reference.md"]
+    endem_reference_text = inspector_boundary_pages["endem/docs/reference.md"]
     for token in (
         "## 按工作查动作",
         "## 按对象查职责",
@@ -3384,7 +3191,7 @@ def validate_jekyll_sources():
         "ADR-0036 与 `END-PUB-001`",
         "删除、重写、保留与外置内容",
         "名称与实现怎样进入发行？",
-        "已经得出结论的术语比较不再作为独立研究页面保留",
+        "统一规定现行名称、普通词规则、自造名称证据和机器关键字边界",
         "外部资料只决定证据类型",
         "GNU Manuals",
         "GNU BFD 信息损失",
@@ -3628,9 +3435,6 @@ def validate_jekyll_sources():
                 f"{route}: introduction stacks abstract terms before a plain-language problem: "
                 + ", ".join(entry_abstract_hits)
             )
-        legacy_match = LEGACY_PUBLIC_TERMS.search(body)
-        if legacy_match:
-            errors.append(f"{route}: retains obsolete public name {legacy_match.group(0)!r}")
         if re.search(r"[\u4e00-\u9fff] +[\u4e00-\u9fff]", body):
             errors.append(f"{route}: contains broken spacing inside Chinese prose")
         if "****" in body:
@@ -4023,6 +3827,7 @@ def validate_jekyll_sources():
         ".page-directory-table",
         ".page-directory-column-filter",
         ".page-directory-main .page-directory-table tbody tr",
+        ".page-directory-main .page-directory-table tbody tr[hidden]{display:none}",
         "grid-template-columns:minmax(0,1fr) auto",
     ):
         if token not in page_directory_style_text:
@@ -4436,7 +4241,7 @@ def validate_jekyll_sources():
             "默认不导出正文",
             "不构成 evidence 身份",
         ),
-        "architecture/adr-0016-mene-time-model.html": (
+        "architecture/adr-0016-time-evidence.html": (
             "RFC 3339",
             "RFC 9557",
             "GNU C Library 时钟说明",
@@ -4487,7 +4292,7 @@ def validate_jekyll_sources():
             "不采用 RDF Shape 或二值符合性",
             "只借鉴减少不必要工作的机制",
         ),
-        "architecture/adr-0021-synem-closure-and-activation.html": (
+        "architecture/adr-0021-closure-and-activation.html": (
             "GNU ld 文件命令",
             "GNU Guix 参考手册",
             "GNU make 条件指令",
@@ -4536,7 +4341,6 @@ def validate_jekyll_sources():
         for token in (
             "把人实际说过的话、系统采用的解释",
             "本决定确定六项语义职责",
-            "词源只作记忆辅助",
             "ADR-0037",
             "范围有限具名权威确认",
             "规范称其为语义授权，但它不授予动作权限",
@@ -4966,13 +4770,7 @@ def validate_jekyll_sources():
                 re.IGNORECASE,
             ):
                 errors.append(f"site SVG must not contain executable or external content: {image_route}")
-    obsolete_image = ROOT / "assets" / "images" / "secure-object-core.jpg"
-    if obsolete_image.exists():
-        errors.append("obsolete secure-object-core.jpg must not remain in source or built output")
-
     style_text = style.read_text() if style.exists() else ""
-    if (SOURCE_ROOT / "tools").exists():
-        errors.append("the retired multi-tool source tree must not remain")
     endem_source = SOURCE_ROOT / "endem" / "index.html"
     if not endem_source.exists():
         errors.append("missing Endem application page")
@@ -5384,9 +5182,6 @@ def main():
     )
     actual_routes = [path.relative_to(ROOT).as_posix() for path in HTML_FILES]
 
-    stale_routes = sorted(REMOVED_PUBLIC_ROUTES & set(actual_routes))
-    if stale_routes:
-        errors.append(f"removed public routes must not survive as aliases or redirects: {stale_routes}")
     for internal_output in (
         "CONTRIBUTING.md",
         "content-quality-audit.md",
@@ -5397,9 +5192,6 @@ def main():
     ):
         if (ROOT / internal_output).exists():
             errors.append(f"built output must not publish internal maintenance source: {internal_output}")
-
-    if (ROOT / "assets" / "images" / "secure-object-core.jpg").exists():
-        errors.append("built output must not retain obsolete secure-object-core.jpg")
 
     if not route_rows:
         errors.append("sitemap.md has no formal HTML route entries")
@@ -5497,28 +5289,6 @@ def main():
             errors.append(
                 "index.html: first chapter must not animate its framed surface away from the cover"
             )
-        for obsolete_label in (
-            "VERIFIABLE GOALS FOR THE AGE OF AI",
-            "01 · THE PROBLEM",
-            "02 · SIX RESPONSIBILITIES",
-            "SOURCE &amp; MEANING",
-            "SITUATION &amp; DIRECTION",
-            "FULFILLMENT",
-            "AMBIGUITY",
-            "03 · FOUR ARTIFACT ROLES",
-            "04 · ONE COMMAND SURFACE",
-            "05 · CURRENT STAGE",
-            "06 · ENGINEERING DISCIPLINE",
-            "07 · CONTINUE",
-            ">KTISOR<",
-            ">READ<",
-            ">DRASE<",
-        ):
-            if obsolete_label in home_source:
-                errors.append(
-                    "index.html: homepage must not retain generic English interface "
-                    f"label {obsolete_label!r}"
-                )
         if '<h1 id="portal-title"><span class="portal-title-brand">Noemion</span><strong><span>人工智能时代</span><span class="portal-title-foundation">每个人都应该能编译自己的意图</span></strong></h1>' not in home_source:
             errors.append("index.html: rendered portal must identify Noemion before Endem")
         if home_source.count('class="portal-chapter-title"') != len(HOME_HEADINGS):
@@ -5791,71 +5561,6 @@ def main():
                     f"inventory-style heading {obsolete_heading!r}"
                 )
 
-    historical_adr_0008 = ROOT / "architecture/adr-0008-endem-system.html"
-    if historical_adr_0008.exists():
-        parser = parse(historical_adr_0008)
-        if parser.h2_texts != HISTORICAL_ADR_0008_HEADINGS:
-            errors.append(
-                "architecture/adr-0008-endem-system.html: historical reading sequence "
-                f"must be {HISTORICAL_ADR_0008_HEADINGS}, got {parser.h2_texts}"
-            )
-        visible_text = content_visible_text(parser)
-        for term in HISTORICAL_ADR_0008_BOUNDARIES:
-            if term not in visible_text:
-                errors.append(
-                    "architecture/adr-0008-endem-system.html: missing historical boundary "
-                    f"{term}"
-                )
-        for retired_command in (
-            "endem form", "endem check", "endem bind", "endem pack",
-            "endem seal", "endem see", "endem run", "endem test",
-        ):
-            if retired_command in visible_text:
-                errors.append(
-                    "architecture/adr-0008-endem-system.html: retired historical command "
-                    f"must not read like a current interface: {retired_command}"
-                )
-        if (
-            parser.class_counts["table-wrap"] != 5
-        ):
-            errors.append(
-                "architecture/adr-0008-endem-system.html: must preserve five bounded "
-                "decision tables and four current reading links"
-            )
-
-    historical_adr_0009 = ROOT / "architecture/adr-0009-propositional-kernel.html"
-    if historical_adr_0009.exists():
-        parser = parse(historical_adr_0009)
-        if parser.h2_texts != HISTORICAL_ADR_0009_HEADINGS:
-            errors.append(
-                "architecture/adr-0009-propositional-kernel.html: historical reading "
-                f"sequence must be {HISTORICAL_ADR_0009_HEADINGS}, got {parser.h2_texts}"
-            )
-        visible_text = content_visible_text(parser)
-        for term in HISTORICAL_ADR_0009_BOUNDARIES:
-            if term not in visible_text:
-                errors.append(
-                    "architecture/adr-0009-propositional-kernel.html: missing historical "
-                    f"semantic boundary {term}"
-                )
-        for retired_command in (
-            "endem form", "endem check", "endem bind", "endem pack",
-            "endem seal", "endem see", "endem run", "endem test",
-        ):
-            if retired_command in visible_text:
-                errors.append(
-                    "architecture/adr-0009-propositional-kernel.html: retired command "
-                    f"must not read like a current interface: {retired_command}"
-                )
-        if (
-            parser.class_counts["table-wrap"] != 5
-            or parser.class_counts["flow"] != 1
-        ):
-            errors.append(
-                "architecture/adr-0009-propositional-kernel.html: must preserve five "
-                "boundary tables, one responsibility flow and four current reading links"
-            )
-
     adr_0011 = ROOT / "architecture/adr-0011-endem-container.html"
     if adr_0011.exists():
         parser = parse(adr_0011)
@@ -5871,12 +5576,6 @@ def main():
                     "architecture/adr-0011-endem-container.html: missing format reading "
                     f"boundary {term}"
                 )
-        for internal_label in ("P0-LANG-001", "work package", "工作包"):
-            if internal_label in visible_text:
-                errors.append(
-                    "architecture/adr-0011-endem-container.html: public format decision "
-                    f"must not expose internal workflow label {internal_label}"
-                )
         if (
             parser.class_counts["table-wrap"] != 5
             or parser.class_counts["flow"] != 1
@@ -5886,49 +5585,19 @@ def main():
                 "tables, one ordered reading flow and four developer reading links"
             )
 
-    adr_0012 = ROOT / "architecture/adr-0012-rust-core-language.html"
-    if adr_0012.exists():
-        parser = parse(adr_0012)
-        if parser.h2_texts != ADR_0012_REVIEW_HEADINGS:
-            errors.append(
-                "architecture/adr-0012-rust-core-language.html: developer review "
-                f"sequence must be {ADR_0012_REVIEW_HEADINGS}, got {parser.h2_texts}"
-            )
-        visible_text = content_visible_text(parser)
-        for term in ADR_0012_REVIEW_BOUNDARIES:
-            if term not in visible_text:
-                errors.append(
-                    "architecture/adr-0012-rust-core-language.html: missing language "
-                    f"review boundary {term}"
-                )
-        for internal_label in ("P0-LANG-001", "work package", "工作包"):
-            if internal_label in visible_text:
-                errors.append(
-                    "architecture/adr-0012-rust-core-language.html: public language "
-                    f"decision must not expose internal workflow label {internal_label}"
-                )
-        if (
-            parser.class_counts["table-wrap"] != 6
-            or parser.class_counts["flow"] != 1
-        ):
-            errors.append(
-                "architecture/adr-0012-rust-core-language.html: must preserve six "
-                "review tables, one trust flow and four developer reading links"
-            )
-
-    adr_0013 = ROOT / "architecture/adr-0013-end-p1-payload.html"
+    adr_0013 = ROOT / "architecture/adr-0013-source-profile.html"
     if adr_0013.exists():
         parser = parse(adr_0013)
         if parser.h2_texts != ADR_0013_PROFILE_HEADINGS:
             errors.append(
-                "architecture/adr-0013-end-p1-payload.html: Profile reading sequence "
+                "architecture/adr-0013-source-profile.html: Profile reading sequence "
                 f"must be {ADR_0013_PROFILE_HEADINGS}, got {parser.h2_texts}"
             )
         visible_text = content_visible_text(parser)
         for term in ADR_0013_PROFILE_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
-                    "architecture/adr-0013-end-p1-payload.html: missing source-bearing "
+                    "architecture/adr-0013-source-profile.html: missing source-bearing "
                     f"Profile boundary {term}"
                 )
         if (
@@ -5936,7 +5605,7 @@ def main():
             or parser.class_counts["flow"] != 1
         ):
             errors.append(
-                "architecture/adr-0013-end-p1-payload.html: must preserve five "
+                "architecture/adr-0013-source-profile.html: must preserve five "
                 "boundary tables, one reading flow and four developer reading links"
             )
 
@@ -5988,19 +5657,19 @@ def main():
                 "boundary tables, one task flow and four developer reading links"
             )
 
-    adr_0016 = ROOT / "architecture/adr-0016-mene-time-model.html"
+    adr_0016 = ROOT / "architecture/adr-0016-time-evidence.html"
     if adr_0016.exists():
         parser = parse(adr_0016)
         if parser.h2_texts != ADR_0016_TIME_HEADINGS:
             errors.append(
-                "architecture/adr-0016-mene-time-model.html: time-evidence reading sequence "
+                "architecture/adr-0016-time-evidence.html: time-evidence reading sequence "
                 f"must be {ADR_0016_TIME_HEADINGS}, got {parser.h2_texts}"
             )
         visible_text = content_visible_text(parser)
         for term in ADR_0016_TIME_BOUNDARIES:
             if term not in visible_text:
                 errors.append(
-                    "architecture/adr-0016-mene-time-model.html: missing time, evidence, "
+                    "architecture/adr-0016-time-evidence.html: missing time, evidence, "
                     f"or naming boundary {term}"
                 )
         if (
@@ -6008,7 +5677,7 @@ def main():
             or parser.class_counts["flow"] != 1
         ):
             errors.append(
-                "architecture/adr-0016-mene-time-model.html: must preserve five "
+                "architecture/adr-0016-time-evidence.html: must preserve five "
                 "boundary tables, one task flow and four developer reading links"
             )
 

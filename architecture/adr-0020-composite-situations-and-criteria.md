@@ -15,7 +15,7 @@ badges:
 - 尚未实现
 previous_url: adr-0019-measurement-and-thresholds.html
 previous_label: ADR-0019
-next_url: adr-0021-synem-closure-and-activation.html
+next_url: adr-0021-closure-and-activation.html
 next_label: ADR-0021
 ---
 

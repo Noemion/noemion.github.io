@@ -13,9 +13,9 @@ badges:
 - END-CORE 0.1.0-draft
 - END-P2 0.1.0-draft
 - 尚未实现
-previous_url: adr-0022-iknem-evidence-and-appraisal.html
+previous_url: adr-0022-evidence-and-appraisal.html
 previous_label: ADR-0022
-next_url: adr-0024-dromen-session-contract.html
+next_url: adr-0024-session-contract.html
 next_label: ADR-0024
 ---
 
@@ -51,11 +51,10 @@ next_label: ADR-0024
 
 项目需要一份 Endem 内容标准，但不新增重复规范 ID：现有 END-CORE 正式承担通用内容标准，ADR 只解释采用理由，登记与向量只提供可审查证据。
 
-## P0、P1 与未来发布 Profile 不是连续信任等级
+## END-P2 与未来发布 Profile 不是连续信任等级
 
 | Profile | 用途与内容 | 单文件最高结论 | 不能怎样使用 |
 | --- | --- | --- | --- |
-| END-P0<br>结构实验 | 验证固定头部、目录、六种记录和受限 CBOR；载荷可以是空映射。 | `structural-accept`<br>Profile 尚未求值 | 不能称为最小有效 Endem，也不能承载真实目标内容。 |
 | END-P2<br>含来源形成 Profile | 保存实际进入形成过程的自然语言、六个非空语义记录、来源范围和封闭引用。 | `profile-accept`<br>`content=external-prerequisites-not-evaluated` | 不能发布为最终裁剪制品，也不能凭权威名称补齐外部授权。 |
 | 未来裁剪发布 Profile | 移除原始自然语言和可逆副本，保留运行必需的语义结构，并重新定义来源绑定和披露边界。 | 尚未定义 | 不能直接删除 `source_expression.content` 后沿用 END-P2、旧身份、签名或接受状态。 |
 
@@ -67,15 +66,15 @@ next_label: ADR-0024
 
 | 结果层 | 当前报告方式 | 它明确没有证明什么 |
 | --- | --- | --- |
-| 容器接受 | `structural-accept`，或带 `layer=structure` 的拒绝诊断。 | 没有证明字段集合符合任何内容 Profile。 |
+| 容器接受 | `container-accept`，或带 `layer=structure` 的拒绝诊断。 | 没有证明字段集合符合任何内容 Profile。 |
 | Profile 接受 | `profile-accept`，并记录精确 Profile 身份。 | 没有证明外部授权、签名、证据或撤销前置条件已经核对。 |
 | 内容接受 | 未来符合性报告必须绑定 END-CORE、Profile 和全部外部前置条件的结果。 | 没有证明现实目标已经满足、会话可以运行或最终权威已经接受。 |
 | 目标满足 | `met / unmet / undetermined / fault`。 | 没有作出发布、部署或其他权威决定。 |
 | 权威决定 | `accepted / rejected / deferred`，并绑定决定者、范围和依据。 | 不会反向改变 Endem 内容身份或历史检查结果。 |
 
-三个 END-P2 接受向量现已从含义过宽的 `semantic-accept` 改为 `profile-accept / external-prerequisites-not-evaluated`。这一结果准确反映机器检查已经完成的范围，并与 END-P2 的声明上限一致。
+三个 END-P2 接受向量使用 `profile-accept / external-prerequisites-not-evaluated`。这一结果准确反映机器检查完成的范围，并与 END-P2 的声明上限一致。
 
-> **名称与口头边界：**Profile 在中文交流中可能指用户画像、性能剖析或配置文件，首次出现应写“内容能力集（Profile）”。不要只说“P 零”“P 一”或“通过了”，应说“END-P0 结构实验”“END-P2 含来源形成 Profile”“容器接受”或“Profile 接受”。日志也不得用裸露的 `valid=true` 合并层次。
+> **名称与口头边界：**Profile 在中文交流中可能指用户画像、性能剖析或配置文件，首次出现应写“内容能力集（Profile）”。不要只说“通过了”，应说“END-P2 含来源形成 Profile”“容器接受”或“Profile 接受”。日志也不得用裸露的 `valid=true` 合并层次。
 
 ## 系统格式与 AI 格式只能提供哪些借鉴
 
@@ -94,7 +93,7 @@ next_label: ADR-0024
 
 ## 当前还不能承诺哪些实现与兼容性
 
-END-FMT、END-P0 与 END-P2 都是实验草案，不是稳定 ABI。量化、时间、测量、裁剪发布、内容摘要、签名包络、Semantic Key、evidence 绑定、压缩、加密、流式传输、MIME 类型和跨版本升级尚未确定。
+END-FMT 与 END-P2 都是实验草案，不是稳定 ABI。量化、时间、测量、裁剪发布、内容摘要、签名包络、Semantic Key、evidence 绑定、压缩、加密、流式传输、MIME 类型和跨版本升级尚未确定。
 
 当前规范、登记、三个 END-P2 Profile 接受向量和十一项确定拒绝，只证明资料与实验字节在现行检查器中一致，不能证明任何写入器、读取器、CLI 或运行时已经实现。项目也没有可执行的裁剪命令、生产格式兼容承诺或供应商私有语义区。
 

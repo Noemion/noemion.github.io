@@ -60,7 +60,7 @@ def proposal_violation(proposal):
     intersection = set.intersection(*sets) if sets else set()
     if (set(capabilities.get("effective", [])) != intersection
             or capabilities.get("unknown_default_denied") is not True
-            or capabilities.get("mutates_current_dromen") is not False):
+            or capabilities.get("mutates_current_contract") is not False):
         return "ADP-CAP-001"
 
     invocation = proposal.get("invocation", {})
@@ -103,7 +103,7 @@ def proposal_violation(proposal):
     if (lifecycle.get("rollback_claimed") is not False
             or lifecycle.get("terminal_immutable") is not True
             or lifecycle.get("followup_new_call") is not True
-            or lifecycle.get("resurrects_dromen") is not False):
+            or lifecycle.get("resurrects_contract") is not False):
         return "ADP-CAN-001"
 
     retry = proposal.get("retry", {})

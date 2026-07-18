@@ -54,14 +54,14 @@ document_status: "规范目录草案"
 | `endem.wire.record.alignment` | `END-FMT-006` | structure | 记录偏移不满足对齐或对齐值不受支持 |
 | `endem.wire.record.overlap` | `END-FMT-006` | structure | 两个非空记录范围重叠 |
 | `endem.wire.record.padding` | `END-FMT-006` | structure | 记录间填充含非零字节，或最后记录后仍有尾随填充 |
-| `endem.wire.record.unknown_kind` | `END-FMT-007` | profile | P0 出现未登记记录种类 |
-| `endem.wire.record.flags` | `END-FMT-007` | profile | P0 记录没有精确关键标志 `1` |
+| `endem.wire.record.unknown_kind` | `END-FMT-007` | profile | END-P2 出现未登记记录种类 |
+| `endem.wire.record.flags` | `END-FMT-007` | profile | END-P2 记录没有精确关键标志 `1` |
 | `endem.wire.facet.cardinality` | `END-FMT-008` | profile | 六种记录缺失、重复或出现额外记录 |
 | `endem.wire.payload.cbor` | `END-FMT-009` | structure | CBOR 不良构、非确定或使用禁用类型 |
 | `endem.wire.payload.not_map` | `END-FMT-009` | structure | 记录载荷根不是确定长度映射 |
 | `endem.wire.profile.unknown` | `END-FMT-010` | profile | Profile 编号未知或没有精确登记 |
 | `endem.wire.profile.limit` | `END-FMT-010` | profile | 任一资源超过当前有效上限 |
-| `endem.wire.profile.feature` | `END-FMT-011` | profile | P0 出现压缩、加密、更高状态或其他未登记能力 |
+| `endem.wire.profile.feature` | `END-FMT-011` | profile | END-P2 出现压缩、加密、更高状态或其他未登记能力 |
 
 ## 4. Endem 内容错误码
 

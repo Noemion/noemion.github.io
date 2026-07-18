@@ -13,7 +13,7 @@ badges:
 - END-SRCM 0.1.0-draft
 - 实验输入
 - 无解析组件
-previous_url: adr-0013-end-p1-payload.html
+previous_url: adr-0013-source-profile.html
 previous_label: ADR-0013
 next_url: adr-0015-result-domains.html
 next_label: ADR-0015
@@ -54,7 +54,7 @@ next_label: ADR-0015
 | --- | --- | --- |
 | 来源与符号 | `source_expression / symbol` | 一个来源记录；符号必须绑定来源范围。 |
 | 关系与事态 | `relation / situation / root` | 关系至少有一个角色；事态与唯一根引用必须闭合。 |
-| 目标与判据 | `goal_direction / structured_observation / iknem / satisfaction_criteria` | 当前只允许 END-P2 已登记的 `reach`、匹配方式和政策。 |
+| 目标与判据 | `goal_direction / structured_observation / evidence / satisfaction_criteria` | 当前只允许 END-P2 已登记的 `reach`、匹配方式和政策。 |
 | 未决意义 | `unresolved_meaning` | 候选、冲突、影响范围、允许解决方式和决定主体必须显式。 |
 
 每个非注释行使用制表符分列。字段只解释 `\n`、`\r`、`\t` 和 `\\`；未知指令、参数数量错误、重复单例或未知转义都必须拒绝。
@@ -92,7 +92,7 @@ next_label: ADR-0015
 
 > **当前限制：**这里只有 END-SRCM 规范、两个来源样例和映射向量。没有 producer 解析器、实现仓库、稳定命令、通用自然语言编译或最终发布 Profile。
 
-- [查看 END-P2 边界](adr-0013-end-p1-payload.html) — 确认来源清单实际能够映射哪些字段。
+- [查看 END-P2 边界](adr-0013-source-profile.html) — 确认来源清单实际能够映射哪些字段。
 - [查看动作授权](adr-0029-authority-and-authorization-decisions.html) — 区分意义确认、能力与动作决定。
 - [查看发布派生](adr-0036-source-bearing-and-stripped-release.html) — 理解为什么不能直接删除来源后发布。
 - [查看验证职责](../development/testing.html) — 区分向量一致、实现证据与符合性声明。

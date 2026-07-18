@@ -25,30 +25,24 @@ summary: "帮助开发者先定位被改变的责任，再找到对应 ADR、规
     <div class="table-wrap"><table><thead><tr><th>开发者问题</th><th>先查什么</th><th>停止条件</th></tr></thead><tbody>
       <tr><td>来源怎样成为确认意义，目标怎样判断？</td><td><a href="adr-0010-native-lexicon.html">ADR-0010</a>、<a href="adr-0015-result-domains.html">ADR-0015</a>至 <a href="adr-0020-composite-situations-and-criteria.html">ADR-0020</a>、END-CORE</td><td>语义投影、观察范围或判据不完整时，保留 <code>unresolved_meaning</code>、<code>undetermined</code> 或 <code>fault</code>，不生成肯定结论。</td></tr>
       <tr><td>字节、Profile、来源清单和内容身份怎样分层？</td><td><a href="adr-0011-endem-container.html">ADR-0011</a>至 <a href="adr-0014-source-manifest.html">ADR-0014</a>、<a href="adr-0023-endem-content-standard.html">ADR-0023</a>、END-FMT、END-P2</td><td>当前格式仍是实验草案；不得据此承诺稳定 ABI、解析器兼容或正式发行。</td></tr>
-      <tr><td>多个目标、一次会话和有限证据怎样组合？</td><td><a href="adr-0021-synem-closure-and-activation.html">ADR-0021</a>、<a href="adr-0022-iknem-evidence-and-appraisal.html">ADR-0022</a>、<a href="adr-0024-dromen-session-contract.html">ADR-0024</a>、CLOSURE-CORE、EVIDENCE-CORE、SESSION-CORE</td><td>这些规范尚未定义物理容器或运行时；记录会话不能恢复实时权限。</td></tr>
+      <tr><td>多个目标、一次会话和有限证据怎样组合？</td><td><a href="adr-0021-closure-and-activation.html">ADR-0021</a>、<a href="adr-0022-evidence-and-appraisal.html">ADR-0022</a>、<a href="adr-0024-session-contract.html">ADR-0024</a>、CLOSURE-CORE、EVIDENCE-CORE、SESSION-CORE</td><td>这些规范尚未定义物理容器或运行时；记录会话不能恢复实时权限。</td></tr>
       <tr><td>失败、外部协议、身份、文本和授权怎样穿过信任边界？</td><td><a href="adr-0025-structured-diagnostics.html">ADR-0025</a>至 <a href="adr-0030-endem-content-and-authorization-companions.html">ADR-0030</a>、DIA-CORE、ADP-CORE、ID-CORE、TEXT-IDENTIFIER-CORE、AUT-CORE</td><td>外部状态、签名或模型输出只能成为带来源输入，不能改写本地结果、身份或能力。</td></tr>
-      <tr><td>术语为什么改用直白职责名称？</td><td><a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035</a>与<a href="adr-0037-terminology-simplification.html">ADR-0037</a></td><td>普通词按词首、职责和关键字语料检查；Noemion 与 Endem 的发行读音仍待真实人类验证。</td></tr>
+      <tr><td>术语怎样保持直白、可读和可核对？</td><td><a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035</a>与<a href="adr-0037-terminology-simplification.html">ADR-0037</a></td><td>普通词按词首、职责和关键字语料检查；Noemion 与 Endem 的发行读音仍待真实人类验证。</td></tr>
       <tr><td>为什么形成版含原文，发布版却不含原文？</td><td><a href="adr-0036-source-bearing-and-stripped-release.html">ADR-0036</a>、END-PUB-001 与 ID-REL-001</td><td>发布 Profile、来源引用闭包或伴随资料关联尚未定义时，只能确定分层，不得实现裁剪或承诺发布格式。</td></tr>
     </tbody></table></div>
-    <p>ADR-0008 与 ADR-0009 只保存迁移历史；ADR-0010 至 ADR-0037 构成当前可查的决定记录。历史页面可以解释来路，但不能反向约束未来接口或 ABI。</p>
   </section>
 
   <section class="content-wide">
     <h2>按职责核对全部决定</h2>
-    <p class="lead">这里保留全部 ADR 的直接入口，但不复制每个页面中的状态和论证。先按变更影响的责任选择一组，再进入具体决定核对背景、结论、限制与取代关系。</p>
+    <p class="lead">这里列出全部现行 ADR，但不复制每个页面中的状态和论证。先按变更影响的责任选择一组，再进入具体决定核对结论、限制与停止条件。</p>
     <div class="status-columns">
-      <article class="status-item"><h3>历史迁移</h3><p>仅用于解释现行结构从何而来，不再约束接口或 ABI。</p><ul>
-        <li><a href="adr-0008-endem-system.html">ADR-0008 · Endem 制品与单一命令面</a></li>
-        <li><a href="adr-0009-propositional-kernel.html">ADR-0009 · Endem 命题投影语义核</a></li>
-      </ul></article>
       <article class="status-item"><h3>Endem 语义、格式与判断</h3><ul>
         <li><a href="adr-0010-native-lexicon.html">ADR-0010 · 原生词汇与事态分层</a></li>
         <li><a href="adr-0011-endem-container.html">ADR-0011 · Endem 实验性容器格式</a></li>
-        <li><a href="adr-0012-rust-core-language.html">ADR-0012 · 未来 producer 的 Rust 评审基线</a></li>
-        <li><a href="adr-0013-end-p1-payload.html">ADR-0013 · 来源保留 END-P2 Profile</a></li>
+        <li><a href="adr-0013-source-profile.html">ADR-0013 · 来源保留 END-P2 Profile</a></li>
         <li><a href="adr-0014-source-manifest.html">ADR-0014 · 实验来源清单边界</a></li>
         <li><a href="adr-0015-result-domains.html">ADR-0015 · 五类结果不可互换</a></li>
-        <li><a href="adr-0016-mene-time-model.html">ADR-0016 · 持续目标必须绑定时间证据</a></li>
+        <li><a href="adr-0016-time-evidence.html">ADR-0016 · 持续目标必须绑定时间证据</a></li>
         <li><a href="adr-0017-negation-and-absence.html">ADR-0017 · 没有记录不等于没有发生</a></li>
         <li><a href="adr-0018-quantification-and-membership.html">ADR-0018 · 先固定成员，再判断数量</a></li>
         <li><a href="adr-0019-measurement-and-thresholds.html">ADR-0019 · 先定义测量，再比较阈值</a></li>
@@ -56,9 +50,9 @@ summary: "帮助开发者先定位被改变的责任，再找到对应 ADR、规
         <li><a href="adr-0023-endem-content-standard.html">ADR-0023 · 文件能读，不等于内容成立</a></li>
       </ul></article>
       <article class="status-item"><h3>组合、会话、证据与信任</h3><ul>
-        <li><a href="adr-0021-synem-closure-and-activation.html">ADR-0021 · 依赖必须先固定，权限只能收窄</a></li>
-        <li><a href="adr-0022-iknem-evidence-and-appraisal.html">ADR-0022 · 先问证据能证明什么</a></li>
-        <li><a href="adr-0024-dromen-session-contract.html">ADR-0024 · 权限只属于这一次会话</a></li>
+        <li><a href="adr-0021-closure-and-activation.html">ADR-0021 · 依赖必须先固定，权限只能收窄</a></li>
+        <li><a href="adr-0022-evidence-and-appraisal.html">ADR-0022 · 先问证据能证明什么</a></li>
+        <li><a href="adr-0024-session-contract.html">ADR-0024 · 权限只属于这一次会话</a></li>
         <li><a href="adr-0025-structured-diagnostics.html">ADR-0025 · 错误消息不能替系统作决定</a></li>
         <li><a href="adr-0026-external-protocol-adapters.html">ADR-0026 · 远端完成，不等于本地完成</a></li>
         <li><a href="adr-0027-exact-identity-and-attestation.html">ADR-0027 · 签名有效，不等于制品获准</a></li>
@@ -68,7 +62,7 @@ summary: "帮助开发者先定位被改变的责任，再找到对应 ADR、规
       </ul></article>
       <article class="status-item"><h3>名称、读音与公开动作</h3><ul>
         <li><a href="adr-0035-public-actions-and-internal-responsibilities.html">ADR-0035 · 用户任务不是内部职责清单</a></li>
-        <li><a href="adr-0037-terminology-simplification.html">ADR-0037 · 用职责名称替代不必要的造词</a></li>
+        <li><a href="adr-0037-terminology-simplification.html">ADR-0037 · 名称必须直白、可读、可核对</a></li>
       </ul></article>
       <article class="status-item"><h3>形成版与发布派生</h3><p>形成版保留自然语言与确认路径；移除原文后得到新的发布制品，必须重新建立身份和验证关系。</p><ul>
         <li><a href="adr-0036-source-bearing-and-stripped-release.html">ADR-0036 · 移除原文，就得到另一份制品</a></li>
