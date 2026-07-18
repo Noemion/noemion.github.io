@@ -40,7 +40,7 @@ document_status: "非规范设计场景"
 ### AUT-SCN-005 — 字符串前缀不能扩大字段授权
 
 - **场景：**政策允许修改 `meaning_projection.relation.read`，界面据此尝试批准所有以 `meaning_projection.relation` 开头的字段。
-- **审查结论：**范围展开必须由封闭政策定义；字符串前缀不能隐含 `write`、角色或量化位置。
+- **审查结论：**范围展开必须由封闭政策定义；字符串前缀不能隐含 `edit`、角色或量化位置。
 
 ### AUT-SCN-006 — 模型候选保持未授权
 

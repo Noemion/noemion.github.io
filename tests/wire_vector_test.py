@@ -14,7 +14,7 @@ MAGIC = b"ENDEM\x00\r\n"
 HEADER_SIZE = 64
 ENTRY_SIZE = 48
 U64_MAX = (1 << 64) - 1
-KNOWN_KINDS = frozenset(range(1, 7))
+KINDS = frozenset(range(1, 7))
 EXPECTED_LIMITS = {
     "max_artifact_bytes": 16777216,
     "max_record_count": 64,
@@ -226,7 +226,7 @@ def validate_wire(data, profile_document):
         seen_ids.add(record_id)
         if record_flags not in profile_document["allowed_record_flags"]:
             fail("endem.wire.record.flags", entry_offset + 2, entry_offset + 4)
-        if kind not in KNOWN_KINDS:
+        if kind not in KINDS:
             fail("endem.wire.record.unknown_kind", entry_offset, entry_offset + 2)
         if alignment != 8 or offset % alignment:
             fail("endem.wire.record.alignment", entry_offset + 8, entry_offset + 36)

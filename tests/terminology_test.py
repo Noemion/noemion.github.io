@@ -23,6 +23,12 @@ COINED_PRONUNCIATIONS = {
 }
 
 MACHINE_IDENTIFIER = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")
+MACHINE_TOKEN = re.compile(r"^[A-Za-z][A-Za-z0-9]*(?:[-_:][A-Za-z0-9]+)*$")
+TERM_WORD = re.compile(r"[A-Za-z]+")
+DISALLOWED_INITIAL_CLUSTERS = ("gn", "kn", "mn", "pn", "ps", "pt", "rh", "wr")
+SILENT_INITIAL_WORDS = {
+    "heir", "herb", "honest", "honor", "honour", "hour", "who", "whole",
+}
 RETIRED_TERM = re.compile(
     r"(?<![A-Za-z0-9_])(?:"
     r"Synem|Dromen|Iknem|Ktisor|Theor|Drasor|"
@@ -76,6 +82,18 @@ def is_historical_or_research(relative):
     return any(pattern.fullmatch(relative) for pattern in HISTORICAL_OR_RESEARCH)
 
 
+def iter_structured_tokens(value):
+    if isinstance(value, dict):
+        for key, item in value.items():
+            yield key
+            yield from iter_structured_tokens(item)
+    elif isinstance(value, list):
+        for item in value:
+            yield from iter_structured_tokens(item)
+    elif isinstance(value, str):
+        yield value
+
+
 def main():
     errors = []
     registry = load(REGISTRY_PATH, errors)
@@ -100,6 +118,36 @@ def main():
     folded = [name.casefold() for name in names]
     if len(folded) != len(set(folded)):
         errors.append("spec/registry.json: terminology entries must be unique case-insensitively")
+
+    current_words = {
+        word.casefold()
+        for name in names
+        for word in TERM_WORD.findall(name)
+    }
+    for word in sorted(current_words):
+        if word in SILENT_INITIAL_WORDS or word.startswith(DISALLOWED_INITIAL_CLUSTERS):
+            errors.append(
+                f"registered terminology has a silent or unstable word start: {word}"
+            )
+
+    formal_tokens = set()
+    for directory in (ROOT / "spec", ROOT / "vectors"):
+        for path in sorted(directory.rglob("*.json")):
+            if path == CORPUS_PATH:
+                continue
+            data = load(path, errors)
+            for token in iter_structured_tokens(data):
+                if MACHINE_TOKEN.fullmatch(token) is None:
+                    continue
+                formal_tokens.add(token)
+                for word in TERM_WORD.findall(token):
+                    folded_word = word.casefold()
+                    if (folded_word in SILENT_INITIAL_WORDS
+                            or folded_word.startswith(DISALLOWED_INITIAL_CLUSTERS)):
+                        errors.append(
+                            f"{path.relative_to(ROOT)}: formal token has a silent or unstable "
+                            f"word start: {token}"
+                        )
 
     if not set(COINED_PRONUNCIATIONS).issubset(names):
         errors.append("spec/registry.json: Noemion and Endem must remain registered")
@@ -126,6 +174,8 @@ def main():
         "/ˈɛn.dɛm/",
         "每个字母，没有静音字母",
         "普通英语工程词沿用通常拼写",
+        "每个英文构词单元都从词首直接起音",
+        "替换项必须是一个完整单词",
         "首次朗读与听辨结果尚未形成",
     ):
         if token not in public_guide_text:
@@ -191,9 +241,11 @@ def main():
         print("\n".join(errors))
         return 1
     print(
-        f"PASS: audited {len(names)} registered terms against {len(keyword_set)} versioned keywords; "
-        "2 retained coined names map every written letter into their candidate pronunciations "
-        "and still require human validation"
+        f"PASS: audited {len(names)} registered terms, {len(current_words)} word components and "
+        f"{len(formal_tokens)} structured tokens "
+        f"against {len(keyword_set)} versioned keywords; every current word has a direct start, "
+        "and 2 retained coined names map every written letter into candidate pronunciations "
+        "that still require human validation"
     )
     return 0
 

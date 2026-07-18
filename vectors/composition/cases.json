@@ -74,7 +74,7 @@
       "expect": {"result": "reject", "clause": "END-CMP-002"}
     },
     {
-      "id": "CV-REJECT-WRONG-FOUR-RESULT-001",
+      "id": "CV-REJECT-INVALID-FOUR-RESULT-001",
       "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "krin_leaves": ["a", "b"]},
       "evaluation": {"leaf_results": {"a": "met", "b": "fault"}, "order": ["a", "b"], "short_circuit": false},
       "proposal": {"result": "fault", "evaluated": ["a", "b"], "unevaluated": [], "decisive_basis": []},

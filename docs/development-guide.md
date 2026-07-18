@@ -62,7 +62,11 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 
 项目当前只保留两个自造名称：**Noemion** 和 **Endem**。候选读法分别是 `No-e-mi-on`（/noʊˈiː.mi.ən/，可按 `noh-EE-mee-uhn` 拼读）与 `En-dem`（/ˈɛn.dɛm/，可按 `EN-dem` 拼读）。两种候选读法都覆盖书写中的每个字母，没有静音字母；独立使用者的首次朗读与听辨结果尚未形成，因此这些提示不是已经确认的正式读音。
 
-代码、Issue 和技术讨论使用现行直白职责名：Endem closure、session contract、evidence entry、deterministic producer、independent inspector、bounded runner，以及 `form / lint / compose / inspect / run`。字段使用 `source_expression / meaning_projection / situation / goal_direction / satisfaction_criteria / unresolved_meaning`，观察使用 `structured_observation`。普通英语工程词沿用通常拼写，不为了消除英语固有的静音字母另造拼法。
+代码、Issue 和技术讨论使用现行直白职责名：Endem closure、session contract、evidence entry、deterministic producer、independent inspector、bounded runner，以及 `form / lint / compose / inspect / run`。字段使用 `source_expression / meaning_projection / situation / goal_direction / satisfaction_criteria / unresolved_meaning`，观察使用 `structured_observation`。现行登记词表的每个英文构词单元都从词首直接起音，没有词首静音字母或必须另行指定的起始辅音组合。
+
+普通英语工程词沿用通常拼写，不为了消除英语固有的词中或词尾静音字母另造拼法。`closure`、`evidence`、`compose`、`source`、`profile`、`time`、`scope`、`coverage`、`guard`、`signed` 与 `view` 均按通行读法使用；这类惯例不豁免词首起音、职责匹配和完整词表听辨检查。
+
+名称若因词首起音不合格，替换项必须是一个完整单词，不能新造连字符词、下划线词或拼接词。普通单词能够准确承担职责时直接使用；确无合适单词时可以造词，但新词仍须满足拼写可恢复、起音直观、职责明确和口头易分辨四项要求。
 
 读音提示只帮助人类交流，不是命令别名、机器标识或语义权威。需要精确引用时，直接粘贴书面名称或代码标识；不要根据口述近似音自动选择命令、字段或授权对象。现行命名决定与被替换名称见 [ADR-0037](../architecture/adr-0037-terminology-simplification.html)，发行前的人类证据要求见 [ADR-0034](../architecture/adr-0034-pronunciation-and-oral-distinction.html)。
 

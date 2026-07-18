@@ -1935,7 +1935,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "every future canonical writer, hasher and verifier",
+      "failure_owner": "every future canonical producer, hasher and verifier",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
         {"status": "planned", "ref": "conformance:identity-byte-domain"}

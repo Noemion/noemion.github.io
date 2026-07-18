@@ -140,7 +140,7 @@ def proposal_violation(proposal):
             or not isinstance(model.get("transform_chain"), list) or not model.get("transform_chain")
             or model.get("view_difference_declared") is not True
             or model.get("output_class") != "model-candidate"
-            or any(model.get(key) is not False for key in ("may_authorize", "may_write_normative", "may_drop_hidden"))):
+            or any(model.get(key) is not False for key in ("may_authorize", "normative", "may_drop_hidden"))):
         return "TEXT-AIM-001"
 
     output = proposal.get("output", {})

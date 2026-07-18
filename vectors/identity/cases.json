@@ -14,7 +14,7 @@
       "all_context_compared": true
     },
     "bytes": {
-      "input_kind": "whole-object",
+      "input_kind": "totality",
       "range": {"start": 0, "length": 512},
       "ordering": "stored-byte-order",
       "normalization": "none",

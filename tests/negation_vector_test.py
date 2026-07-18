@@ -38,7 +38,7 @@ def validate_closure(closure):
         return False
     required = {
         "authority", "universe", "interval", "method", "cutoff",
-        "dropped_count", "known_exclusions", "all_paths",
+        "dropped_count", "exceptions", "all_paths",
     }
     if set(closure) != required:
         return False
@@ -50,8 +50,8 @@ def validate_closure(closure):
         not isinstance(closure["dropped_count"], int)
         or isinstance(closure["dropped_count"], bool)
         or closure["dropped_count"] != 0
-        or not isinstance(closure["known_exclusions"], list)
-        or closure["known_exclusions"]
+        or not isinstance(closure["exceptions"], list)
+        or closure["exceptions"]
         or closure["all_paths"] is not True
     ):
         return False

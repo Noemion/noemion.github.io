@@ -34,14 +34,14 @@
     {
       "id": "NV-VALID-CLOSED-ABSENCE-MET-001",
       "target": {"relation": "read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
-      "observation": {"status": "valid", "mode": "closed-enumeration", "matching_positive_count": 0, "closure": {"authority": "audit-owner", "universe": "all-read-decisions", "interval": "release-window", "method": "complete-enumeration", "cutoff": "window-end", "dropped_count": 0, "known_exclusions": [], "all_paths": true}},
+      "observation": {"status": "valid", "mode": "closed-enumeration", "matching_positive_count": 0, "closure": {"authority": "audit-owner", "universe": "all-read-decisions", "interval": "release-window", "method": "complete-enumeration", "cutoff": "window-end", "dropped_count": 0, "exceptions": [], "all_paths": true}},
       "proposed_result": "met",
       "expect": {"result": "accept", "clause": "END-NEG-003"}
     },
     {
       "id": "NV-VALID-CLOSED-COUNTEREXAMPLE-UNMET-001",
       "target": {"relation": "read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
-      "observation": {"status": "valid", "mode": "closed-enumeration", "matching_positive_count": 1, "closure": {"authority": "audit-owner", "universe": "all-read-decisions", "interval": "release-window", "method": "complete-enumeration", "cutoff": "window-end", "dropped_count": 0, "known_exclusions": [], "all_paths": true}},
+      "observation": {"status": "valid", "mode": "closed-enumeration", "matching_positive_count": 1, "closure": {"authority": "audit-owner", "universe": "all-read-decisions", "interval": "release-window", "method": "complete-enumeration", "cutoff": "window-end", "dropped_count": 0, "exceptions": [], "all_paths": true}},
       "proposed_result": "unmet",
       "expect": {"result": "accept", "clause": "END-NEG-003"}
     },
@@ -76,7 +76,7 @@
     {
       "id": "NV-REJECT-INCOMPLETE-CLOSURE-AS-MET-001",
       "target": {"relation": "read", "roles": {"actor": "anonymous", "resource": "private-report"}, "polarity": "negative"},
-      "observation": {"status": "valid", "mode": "closed-enumeration", "matching_positive_count": 0, "closure": {"authority": "audit-owner", "universe": "all-read-decisions", "interval": "release-window", "method": "complete-enumeration", "cutoff": "window-end", "known_exclusions": [], "all_paths": true}},
+      "observation": {"status": "valid", "mode": "closed-enumeration", "matching_positive_count": 0, "closure": {"authority": "audit-owner", "universe": "all-read-decisions", "interval": "release-window", "method": "complete-enumeration", "cutoff": "window-end", "exceptions": [], "all_paths": true}},
       "proposed_result": "met",
       "expect": {"result": "reject", "clause": "END-NEG-003"}
     },

@@ -34,7 +34,7 @@ def unescape(value):
 
 def exact(parts, count):
     if len(parts) != count:
-        raise SourceError("wrong directive arity")
+        raise SourceError("invalid directive arity")
 
 
 def csv(value):
@@ -173,7 +173,7 @@ def main():
     must_reject(source + "\nunknown\tvalue\n", "unknown directive")
     must_reject(source + next(line for line in source.splitlines() if line.startswith("source_expression")) + "\n", "duplicate singleton")
     must_reject(source.replace("reach", "bad\\q", 1), "unknown escape")
-    must_reject(source.replace("root\tsituation:report-produced", "root", 1), "wrong arity")
+    must_reject(source.replace("root\tsituation:report-produced", "root", 1), "invalid arity")
     spec = SPEC_PATH.read_text()
     for token in ("16 MiB", "1 MiB", "LF 或 CRLF", "END-SRCM-007", "不是 `.endem` 线格式"):
         if token not in spec:

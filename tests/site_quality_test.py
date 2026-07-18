@@ -5185,7 +5185,7 @@ def application_project_validator_self_test():
         errors.append("application-project validator rejects the valid reference contract")
 
     negative_cases = {
-        "wrong order": [
+        "invalid order": [
             ["当前状态", "应用简介", *APPLICATION_PROJECT_SECTIONS[2:]],
             valid_status,
         ],

@@ -49,7 +49,7 @@ def proposal_violation(proposal):
 
     byte_input = proposal.get("bytes", {})
     byte_range = byte_input.get("range")
-    if (byte_input.get("input_kind") not in {"whole-object", "normative-byte-range"}
+    if (byte_input.get("input_kind") not in {"totality", "normative-byte-range"}
             or not isinstance(byte_range, dict)
             or not isinstance(byte_range.get("start"), int) or byte_range.get("start") < 0
             or not isinstance(byte_range.get("length"), int) or byte_range.get("length") <= 0
