@@ -220,4 +220,4 @@ document_status: "规范目录草案"
 4. 文本、SARIF、HTTP、MCP 与遥测适配前后保持机器语义；
 5. CLI 退出状态与结构化物理编码由单独 ADR 和规范字节确定。
 
-当前目录只由一致性检查工具核对。producer、inspector、runner、诊断生产器、渲染器和协议适配器均未实现。
+当前目录只定义草案机器码及其职责。producer、inspector、runner、诊断生产器、渲染器和协议适配器均未实现。

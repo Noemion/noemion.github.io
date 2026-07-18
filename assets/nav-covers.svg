@@ -87,10 +87,6 @@
       <path d="M12 66h92" stroke="#789388" stroke-width="2"/><rect x="16" y="52" width="19" height="14" fill="#68d7b2"/><rect x="40" y="40" width="19" height="26" fill="#3158ff"/><rect x="64" y="28" width="19" height="38" fill="#f4be35"/><rect x="88" y="16" width="16" height="50" fill="#f04b23"/>
       <path d="m92 11 12 5-12 5Z" fill="#f0f6f3"/>
     </symbol>
-    <symbol id="nav-cover-testing" viewBox="0 0 116 82">
-      <g fill="#161e1a" stroke="#789388"><rect x="11" y="12" width="27" height="27"/><rect x="44" y="12" width="27" height="27"/><rect x="77" y="12" width="27" height="27"/><rect x="11" y="45" width="27" height="27"/><rect x="44" y="45" width="27" height="27"/><rect x="77" y="45" width="27" height="27"/></g>
-      <path d="m18 25 5 5 9-12m19 7 5 5 9-12m-47 40 5 5 9-12m26 0 9 12m0-12-9 12" stroke="#68d7b2" stroke-width="3" fill="none"/><path d="m84 19 13 13m0-13L84 32" stroke="#f04b23" stroke-width="3"/><circle cx="90" cy="58" r="8" fill="#f4be35"/>
-    </symbol>
     <symbol id="nav-cover-downloads" viewBox="0 0 116 82">
       <path d="M21 23 58 9l37 14-37 15Z" fill="#68d7b2"/><path d="m21 23 37 15v35L21 57Z" fill="#3158ff"/><path d="m95 23-37 15v35l37-16Z" fill="#f04b23"/>
       <path d="M58 18v33m-9-9 9 9 9-9" stroke="#f0f6f3" stroke-width="4" fill="none"/><circle cx="87" cy="61" r="8" fill="#f4be35"/>

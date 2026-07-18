@@ -985,7 +985,7 @@ def validate_public_boundary(errors):
             "仍保持开放",
         ),
         "development/implementation-roadmap.html": (
-            "当前可以审查术语、规范、案例、威胁和验证设计",
+            "当前已有术语、规范、案例、威胁和验证设计",
             "也不表示组件已经开始实现",
             "现行设计标识，不是已发布接口",
             "普通英语词已经通过词首、职责和关键字检查",

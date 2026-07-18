@@ -1,77 +1,33 @@
 ---
 layout: default
-title: "开发与贡献 · Noemion"
+title: "项目进展 · Noemion"
 page_role: "section"
-footer_text: "Noemion · 开发与贡献"
+footer_text: "Noemion · 项目进展"
 permalink: "/development/index.html"
-summary: "帮助贡献者判断资料、术语、规范或验证修改是否在当前范围内，并为每项主张选择相称的证据。"
+summary: "查看 Noemion 已有成果、正在研究的问题、后续路线和当前不能声称的能力。"
 ---
 <main id="main-content" tabindex="-1">
-  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>开发与贡献</span></nav>
-  <header class="section-introduction"><h1>开发与贡献</h1><p>判断一项资料、术语、规范或验证修改是否在当前范围内，并在提交前留下能够支持主张的证据。</p><div class="badges"><span class="badge">规范工作</span><span class="badge">证据先行</span><span class="badge">读音审查</span><span class="badge">暂无组件代码</span></div></header>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><span>项目进展</span></nav>
+  <header class="section-introduction"><h1>项目进展</h1><p>区分已经形成的规范成果、正在研究的问题、后续路线和当前仍不存在的软件能力。</p><div class="badges"><span class="badge">规范设计</span><span class="badge">研究进行中</span><span class="badge">暂无组件实现</span></div></header>
 
   <section class="content-wide">
-    <h2>先判断贡献是否在当前范围内</h2>
-    <p class="lead">当前可以改进研究、术语、架构、规范、威胁模型、验证方案和面向开发者的技术解释。当前公开范围不包括组件代码，不接受把未来接口、运行时或适配器写成实现任务。</p>
-    <div class="table-wrap"><table><thead><tr><th>准备修改什么</th><th>当前需要留下什么</th><th>何时停止</th></tr></thead><tbody>
-      <tr><td>事实或技术解释</td><td>具体主张、可复现问题、权威来源和受影响的开发者任务。</td><td>修改会复制第二套规范、加入与项目结果无关的幕后描述，或只改变措辞却没有改善理解时。</td></tr>
-      <tr><td>术语、对象或发行名称</td><td>普通工程词为何不足、独立职责、真实消费者、相邻词冲突；只有自造名称继续检查中文和英语中的首次朗读与听辨风险。</td><td>普通词已经足够，专名没有独立生命周期，或自造名称持续难读、近音和易听错时。</td></tr>
-      <tr><td>规范义务或信任边界</td><td>可被反例推翻的主张、适用对象、权威来源、支持案例、拒绝案例、威胁和失败责任。</td><td>无法指出谁承担失败，或修改会把协议状态、签名、模型陈述、授权、满足和最终决定合并时。</td></tr>
-      <tr><td>场景、向量或验证设计</td><td>对应条款、预期分类、稳定失败位置和测试通过后的声明上限。</td><td>材料只增加数量，不能区分正确、拒绝、故障、未知或来源时。</td></tr>
-      <tr><td>组件、API、CLI 或运行原型</td><td>当前不在公开工作范围；先用规范和验证方案说明不可替代需求、真实消费者与进入条件。</td><td>组件实现尚未成为公开工作，或前一层证据仍不足时，不开始实现。</td></tr>
-    </tbody></table></div>
-  </section>
-
-  <section class="content-wide">
-    <h2>用一个边界修改检查贡献</h2>
-    <p class="lead">假设准备把 A2A Task 的 <code>completed</code> 映射为 Noemion 的 <code>met</code>。这不是枚举改名，而是把外部协议状态提升为本地目标满足。</p>
-    <div class="table-wrap"><table><thead><tr><th>检查顺序</th><th>本例应留下的结果</th></tr></thead><tbody>
-      <tr><td>写出可证伪主张</td><td><code>completed</code> 只保存为外部任务终态，不直接产生 <code>met</code>。</td></tr>
-      <tr><td>确定权威顺序</td><td>A2A 定义自己的 Task；ADP-CORE 保存外部状态；END-CORE 与精确 <code>satisfaction_criteria</code> 决定满足结果。</td></tr>
-      <tr><td>寻找反例</td><td>远端任务已经完成，但 Artifact 指向错误版本，或本地安全检查拒绝发布。</td></tr>
-      <tr><td>同步唯一权威源</td><td>先修改适用条款、登记、场景和向量，再更新解释页；研究提案不能直接成为规范。</td></tr>
-      <tr><td>限制公开声明</td><td>最多说明已登记材料保持结果域分离；不能声称适配器已经实现或所有 A2A 对端均可互操作。</td></tr>
-    </tbody></table></div>
-    <p>同一顺序也适用于名称、格式、权限、模型评测和开发者说明：先限定主张，再选择证据。测试数量不能代替失败条件。</p>
-  </section>
-
-  <section>
-    <h2>按问题进入工作资料</h2>
-    <div class="page-links">
-      <a class="page-link" href="current-stage.html"><strong>项目现在进展到哪里</strong><span>查看已有成果、当前研究、近期可核对进展和仍然缺少的证据。</span></a>
-      <a class="page-link" href="implementation-roadmap.html"><strong>什么证据允许进入下一层</strong><span>查看术语、形成、组合、运行与外部协议研究的推进条件和停止条件。</span></a>
-      <a class="page-link" href="testing.html"><strong>一项修改需要哪些验证</strong><span>按变更对象选择支持案例、失败案例或未来实现级证据。</span></a>
-    </div>
-    <p>提交具体问题时，使用下方对应入口并说明对象、权威依据、失败条件、已验证范围和仍未验证的部分。</p>
-  </section>
-
-  <section class="content-wide">
-    <h2>提交前留下最小证据</h2>
-    <div class="table-wrap"><table><thead><tr><th>变更类型</th><th>最低证据</th><th>不能据此声称</th></tr></thead><tbody>
-      <tr><td>面向开发者的解释</td><td>现行权威链接、能够回答开发者问题的案例，以及与规范边界一致的结论。</td><td>解释清楚不证明组件、隔离或互操作已经实现。</td></tr>
-      <tr><td>术语与命名</td><td>职责和冲突分析、普通词替代方案、词首检查与关键字语料；自造名称再增加目标语言样本和真实人类记录。</td><td>词源、搜索结果少、模型偏好或个人觉得顺口不能形成自造名称的发行结论。</td></tr>
-      <tr><td>规范、登记与向量</td><td>条款、成熟度、威胁、场景、支持与拒绝向量同步，并运行与责任相匹配的检查。</td><td>草案关系一致不等于格式、ABI、安全性或全部输入已经稳定。</td></tr>
-      <tr><td>外部技术与人工智能研究</td><td>固定正式版本、原始来源、采用边界、反例、数据路径和本地无该机制时的基线。</td><td>外部标准、开放协议或模型能力不能替 Noemion 生成语义、权限和实现证据。</td></tr>
-    </tbody></table></div>
-    <p class="note"><a href="https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html">GNU Manuals</a>要求按读者问题组织资料、首次出现时定义专门术语，并使用主动语态明确责任主体。<a href="https://csrc.nist.gov/pubs/sp/800/218/final">NIST SSDF 1.1</a>提供可嵌入不同生命周期的高层安全实践；它不是 Noemion 已有实现的证明。<a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative">NIST AI Agent Standards Initiative</a>分别推进标准、协议、身份基础设施和安全评价，因此当前研究也继续分开这些证据。</p>
-  </section>
-
-  <section>
-    <h2>怎样报告问题与敏感信息</h2>
-    <ul class="resource-list">
-      <li><strong>开发者资料问题</strong><span class="resource-state">可用</span><p>通过<a href="https://github.com/Noemion/noemion.github.io/issues/new?template=01-documentation.yml">资料问题表单</a>报告事实、链接、术语或说明不清的问题。</p></li>
-      <li><strong>研究与规范问题</strong><span class="resource-state">可用</span><p>通过<a href="https://github.com/Noemion/noemion.github.io/issues/new?template=02-research.yml">研究与规范表单</a>提交术语、对象边界、规范义务、威胁和验证方法。</p></li>
-      <li><strong>私密安全报告</strong><span class="resource-state">尚未提供</span><p>不要在公开 Issue 中提交未公开漏洞、凭据、密钥、个人数据或可被滥用的样本；需要私密材料的问题应等待专用渠道。</p></li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>当前可以证明什么</h2>
+    <h2>当前先完成可以被独立核对的设计</h2>
+    <p class="lead">Noemion 目前处于规范与架构设计阶段。现有成果说明目标、组合、一次运行、证据、授权和结果怎样分开，但不表示编译器、检查工具、运行器或安装包已经存在。</p>
     <div class="status-grid">
-      <article class="status-item"><h3>已有成果</h3><p>当前仓库包含规范草案、ADR、登记、威胁模型、场景、向量、研究提案和面向开发者的公开资料，可检查它们在已覆盖关系上是否一致。</p></article>
-      <article class="status-item"><h3>限制条件</h3><p>producer、inspector、runner 与 <code>endem</code> CLI 都没有实现源码、可执行程序、安装包或发行入口。</p></article>
-      <article class="status-item"><h3>名称与读音</h3><p>普通职责词已经按词首、职责和关键字语料接受。Noemion 与 Endem 两个自造名称仍是待发行验证的设计标识。</p></article>
-      <article class="status-item"><h3>进入下一阶段</h3><p>组件实现进入公开路线并确定范围后，相关代码才成为可接受工作；规范和验证材料不能替代实现证据。</p></article>
+      <article class="status-item"><h3>已有成果</h3><p>目标语义、实验性 Endem 字节格式、威胁模型、失败边界、研究提案和开发者解释已经公开。</p></article>
+      <article class="status-item"><h3>正在研究</h3><p>自然语言语义抽取、closure 与 evidence 的物理格式、工具部署拆分、外部协议适配和受限运行仍需进一步验证。</p></article>
+      <article class="status-item"><h3>待定内容</h3><p>最终工具数量、命令参数、安装接口、稳定 ABI、签名方案、组件实现语言和发行包装均未确定。</p></article>
+      <article class="status-item"><h3>限制条件</h3><p>当前没有 producer、inspector、runner、可执行 CLI、软件包或生产互操作声明。</p></article>
+    </div>
+  </section>
+
+  <section>
+    <h2>按问题继续阅读</h2>
+    <div class="page-links">
+      <a class="page-link" href="current-stage.html"><strong>项目现在进展到哪里</strong><span>查看现有成果、近期研究和仍然缺少的证据。</span></a>
+      <a class="page-link" href="implementation-roadmap.html"><strong>后续准备验证什么</strong><span>查看语义、形成、组合、运行和协议适配的先后关系。</span></a>
+      <a class="page-link" href="../architecture/open-questions.html"><strong>哪些问题尚无结论</strong><span>查看仍会影响对象、格式、信任边界和实现方式的开放问题。</span></a>
+      <a class="page-link" href="../downloads/"><strong>现在可以获得什么</strong><span>查看当前公开资料和未来软件发行必须满足的条件。</span></a>
     </div>
   </section>
 </main>

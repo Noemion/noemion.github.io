@@ -95,4 +95,4 @@ next_label: ADR-0015
 - [查看 END-P2 边界](adr-0013-source-profile.html) — 确认来源清单实际能够映射哪些字段。
 - [查看动作授权](adr-0029-authority-and-authorization-decisions.html) — 区分意义确认、能力与动作决定。
 - [查看发布派生](adr-0036-source-bearing-and-stripped-release.html) — 理解为什么不能直接删除来源后发布。
-- [查看验证职责](../development/testing.html) — 区分向量一致、实现证据与符合性声明。
+- [查看规范状态](../specifications/index.html) — 区分当前草案、尚未实现的能力与待定格式。

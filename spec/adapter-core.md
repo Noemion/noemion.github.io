@@ -14,7 +14,7 @@ document_status: "规范草案"
 - 日期：2026-07-13
 - 状态：草案；条款化表达 ADR-0026 已接受的 runner 外部协议适配边界
 - 物理编码：未定义；本规范不创建适配器文件、扩展名、媒体类型、网络协议或稳定 ABI
-- 实现状态：仅有规范提案向量检查器；MCP、A2A、HTTP、模型 SDK、工具和 Agent 适配器均未实现
+- 实现状态：MCP、A2A、HTTP、模型 SDK、工具和 Agent 适配器均未实现；当前只有规范草案和非可执行示例
 
 ## 1. 范围
 
@@ -138,4 +138,4 @@ document_status: "规范草案"
 
 ## 5. 当前未定义
 
-本规范不确定 MCP、A2A、HTTP、模型 SDK 或操作系统 Profile，不定义 adapter API、进程模型、JSON/CBOR/Protocol Buffers 字段、网络端口、凭据代理、重试实现、事件存储、Webhook 服务、沙箱、遥测 schema 或部署拓扑。具体协议映射必须在稳定版本、真实消费者、独立威胁分析、正反向量，以及进入代码开发阶段并明确实现范围后取得的实现证据共同支持时另行建立。
+本规范不确定 MCP、A2A、HTTP、模型 SDK 或操作系统 Profile，不定义 adapter API、进程模型、JSON/CBOR/Protocol Buffers 字段、网络端口、凭据代理、重试实现、事件存储、Webhook 服务、沙箱、遥测 schema 或部署拓扑。具体协议映射必须在稳定版本、真实消费者、独立威胁分析、正反向量，以及针对具体实现的证据共同支持时另行建立。

@@ -140,7 +140,6 @@ REQUIRED_CORE_ROUTES = {
 DOC_GUIDE_ORDER = [
     "docs/getting-started.html",
     "docs/architecture-guide.html",
-    "docs/development-guide.html",
 ]
 DOC_GUIDE_HEADINGS = {
     "docs/getting-started.html": [
@@ -149,15 +148,12 @@ DOC_GUIDE_HEADINGS = {
     "docs/architecture-guide.html": [
         "先用一张责任图定位问题", "用一次 Agent 工作读图", "看到终态后按主张强度继续核对", "委托或恢复时重新建立边界", "三个实现域不能合并", "按问题进入进阶资料", "当前可以证明什么",
     ],
-    "docs/development-guide.html": [
-        "先写一个可被反例推翻的主张", "用一条变更记录贯穿责任", "按权威顺序修改", "使用现行名称", "按变更类型选择证据", "模型参与时先固定实际输入", "当前阶段怎样停止",
-    ],
 }
 HOME_HEADINGS = [
     "人工智能系统开始行动，人的目标仍困在对话里",
     "把目标拆成六类可检查的信息",
     "四类对象各自回答一个问题",
-    "一个命令入口三项安全责任仍须分开",
+    "一组动作名称三项安全责任仍须分开",
     "当前先完成规范和安全边界",
     "借鉴成熟工具让结果可以复核",
     "继续阅读",
@@ -178,12 +174,8 @@ ARCHITECTURE_INDEX_HEADINGS = [
     "按问题继续",
 ]
 DEVELOPMENT_INDEX_HEADINGS = [
-    "先判断贡献是否在当前范围内",
-    "用一个边界修改检查贡献",
-    "按问题进入工作资料",
-    "提交前留下最小证据",
-    "怎样报告问题与敏感信息",
-    "当前可以证明什么",
+    "当前先完成可以被独立核对的设计",
+    "按问题继续阅读",
 ]
 INTELLECTUAL_FOUNDATIONS_HEADINGS = [
     "从一次依赖升级看清问题",
@@ -397,7 +389,7 @@ APPLICATION_PROJECT_SECTIONS = [
 ]
 APPLICATION_STATUS_DISCLOSURES = (
     "当前不能安装或运行",
-    "组件代码开发阶段",
+    "最终工具数量",
     "参数",
     "稳定 ABI",
     "必须确定",
@@ -537,7 +529,6 @@ CONTENT_LAYOUT_ROUTES = (
     "components/inspector.html",
     "components/runner.html",
     "development/implementation-roadmap.html",
-    "development/testing.html",
     "specifications/endem.html",
     "specifications/endem-closure.html",
     "specifications/session-contract.html",
@@ -847,7 +838,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "active / inactive / unresolved / error",
             "尚无物理格式",
             "尚未实现",
-            "资料一致性检查",
+            "草案允许与拒绝的组合案例",
             "复核日期：</strong>2026-07-16",
             "GNU make",
             "GNU Guix",
@@ -1119,7 +1110,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             "AUT-CORE 0.1.0-draft",
             "用同一次发布理解一次授权决定",
-            "请求维护者、具体 CI 运行实例",
+            "发布请求者、具体 CI 运行实例",
             "部分授予形成缩小后的新范围",
             "授权允许一次声明范围内的行动",
             "遇到“已授权”先问对象是什么",
@@ -1776,6 +1767,20 @@ def validate_public_html(route, text):
         errors.append(
             f"{route}: public HTML exposes internal work-package label {internal_work_package.group(0)!r}"
         )
+    maintenance_patterns = {
+        r"tests/[A-Za-z0-9_./-]+\.py": "internal test path",
+        r"(?:资料一致性检查|资料检查|仓库内容检查|公开内容检查|具名规范维护者复核|测试输出|版本化验证结果)": "maintenance process",
+        r"(?:规范提案向量检查器|规范向量检查器|一致性检查工具)": "repository checker",
+        r"(?:治理边界|采用门槛|当前决定边界|关闭决定|决策门|正式 ADR|进入代码开发阶段|当前仍未进入代码开发阶段|proposal-vector checker only|for maintainers|current contribution scope|reporting routes|unfrozen)": "internal governance wording",
+        r"(?:唯一公开 CLI|唯一公开命令|单一命令入口|只提供一个命令入口|只有三个组件|规划三个组件|统一 CLI)": "premature tool packaging claim",
+        r"(?:开发与贡献|测试与验证)": "maintenance page wording",
+    }
+    for pattern, label in maintenance_patterns.items():
+        match = re.search(pattern, text)
+        if match:
+            errors.append(
+                f"{route}: public HTML exposes {label} {match.group(0)!r}"
+            )
     unclear_match = UNCLEAR_CHINESE_UI_TERMS.search(text)
     if unclear_match:
         errors.append(
@@ -1847,6 +1852,15 @@ def read_manual_source_entries(manual_id):
 
 def validate_jekyll_sources():
     errors = []
+    for removed_maintenance_source in (
+        SOURCE_ROOT / "development" / "testing.md",
+        SOURCE_ROOT / "docs" / "development-guide.md",
+    ):
+        if removed_maintenance_source.exists():
+            errors.append(
+                "public maintenance page must remain removed: "
+                + str(removed_maintenance_source.relative_to(SOURCE_ROOT))
+            )
     readme_text = README.read_text()
     if len(readme_text.splitlines()) > 100:
         errors.append("README.md must remain a concise developer entry under 100 lines")
@@ -2608,7 +2622,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "open-questions.md",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "development" / "testing.md",
         ):
             if "model-assisted-evaluation-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -2662,7 +2675,6 @@ def validate_jekyll_sources():
             SOURCE_ROOT / "architecture" / "open-questions.md",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.md",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
-            SOURCE_ROOT / "development" / "testing.md",
         ):
             if "model-training-and-update-boundaries-proposal.html" not in public_source.read_text():
                 errors.append(
@@ -2913,58 +2925,7 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the Agent system boundary guide"
                 )
 
-    verification_page = SOURCE_ROOT / "development" / "testing.md"
-    verification_text = verification_page.read_text()
-    for token in (
-        "先限定主张，再选择证据",
-        "用一次协议映射变更走完整条证据链",
-        "变更类型决定证据组合",
-        "当前材料与未来证据分开",
-        "证据不是一条从弱到强的阶梯",
-        "证据类型回答不同问题",
-        "模型评测、模型更新与上线监测分开",
-        "模型或 Agent 评测",
-        "上线后的运行监测",
-        "发布或接受决定",
-        "当前尚未进入组件代码开发阶段",
-        "尚无 producer、inspector、runner、求值器或决定引擎可供实现级测试",
-        "当前没有通用 round-trip 或跨 Profile 语义等价要求",
-        "GNU Guix challenge",
-        "GNU BFD canonical form",
-        "GNU 标准目标",
-        "RFC 8785",
-        "model-assisted-evaluation-proposal.html",
-        "NIST AI 800-2 初始公开草案",
-        "NIST AI 800-3",
-        "NIST 部署后 AI 监测研究",
-        "GNU Diffutils",
-        "训练完成、损失下降或固定种子",
-        "model-training-and-update-boundaries-proposal.html",
-        "NIST SP 800-218A",
-    ):
-        if token not in verification_text:
-            errors.append(f"testing guide missing bounded verification claim: {token}")
-    for obsolete_claim in (
-        "<h2>先把变更写成可验证主张</h2>",
-        "<h2>解析与资源安全</h2>",
-        "<h2>形成、变换与复现必须分开</h2>",
-        "<h2>双读取器契约</h2>",
-        "<h2>当前验证材料能证明什么</h2>",
-        "<h2>按失败责任选择证据</h2>",
-        "<h2>模型参与时先分清评测与更新</h2>",
-        "<h2>外部机制怎样限定比较主张</h2>",
-        "<h2>证据强度决定声明上限</h2>",
-        "较强证据可以包含较弱证据",
-    ):
-        if obsolete_claim in verification_text:
-            errors.append(
-                "testing guide retains an obsolete evidence hierarchy or duplicated section: "
-                + obsolete_claim
-            )
     forbidden_round_trip_claims = {
-        SOURCE_ROOT / "development" / "testing.md": (
-            "规范文本 → Endem → 规范文本往返保持规范化等价",
-        ),
         SOURCE_ROOT / "spec" / "endem-core.md": (
             "相同的规范化来源",
         ),
@@ -2984,7 +2945,7 @@ def validate_jekyll_sources():
     for token in (
         "机器可读登记",
         "向量源",
-        "版本化验证结果",
+        "不是稳定 ABI 或组件运行结果",
     ):
         if token not in downloads_text:
             errors.append(f"downloads page missing authoritative evidence inventory link: {token}")
@@ -2997,7 +2958,6 @@ def validate_jekyll_sources():
         SOURCE_ROOT / "specifications" / "authority.md",
         SOURCE_ROOT / "development" / "implementation-roadmap.md",
         SOURCE_ROOT / "downloads" / "index.html",
-        SOURCE_ROOT / "docs" / "development-guide.md",
     )
     volatile_inventory_pattern = re.compile(
         r"(?:[0-9]+|[一二三四五六七八九十百]+)\s*(?:个|类|项|组)\s*(?:"
@@ -3011,66 +2971,8 @@ def validate_jekyll_sources():
             errors.append(
                 f"{source.relative_to(SOURCE_ROOT)} copies a drift-prone evidence inventory: {match.group(0)}"
             )
-    for token in (
-        "用一次协议映射变更走完整条证据链",
-        "A2A Task 的 `completed`",
-        "一个会被反例推翻的句子",
-        "资料与已登记案例保持结果域分离",
-        "先限定主张，再选择证据",
-        "结论上限",
-        "权威条款、状态边界、支持案例、反例和明确的结论上限",
-        "远端协议状态提升为本地满足判断",
-        "各向量集合的数量和执行结果以机器可读登记与对应测试输出为准",
-        "不在说明页复制容易漂移的计数",
-    ):
-        if token not in verification_text:
-            errors.append(f"testing guide missing change-to-evidence boundary: {token}")
-    for stale_count in ("十五个 evidence", "十八个 evidence"):
-        if stale_count in verification_text:
-            errors.append("testing guide must not copy drift-prone evidence vector counts")
-    development_guide_text = (SOURCE_ROOT / "docs" / "development-guide.md").read_text()
-    for token in (
-        "先写一句可被反例推翻的主张",
-        "当前没有适配器实现",
-        "未执行不能写成通过",
-        "最多只能声称规范和案例保持一致",
-        "| 记录项 | 本例写法 |",
-        "可证伪主张 | 固定 A2A 版本与映射后",
-        "| 顺序 | 开发者要做什么 | 完成时应留下什么 |",
-        "声明上限 | 可以说明资料保持一致",
-        "把外部资料送进模型前保留来源与职责",
-        "用途与指令权",
-        "变换与损失",
-        "同一权威层",
-        "缓存边界",
-        "模型看到高权威文字就获得工具能力",
-        "模型上下文装配边界研究提案",
-    ):
-        if token not in development_guide_text:
-            errors.append(f"development guide missing falsifiable change boundary: {token}")
-    for obsolete_heading in (
-        "## 当前范围",
-        "## 规范与 ADR 先行",
-        "## 变更工作流",
-        "## 把外部资料送进模型前保留来源与职责",
-        "## 建议仓库边界",
-        "## 审查清单",
-        "## 模型与协议",
-    ):
-        if obsolete_heading in development_guide_text:
-            errors.append(
-                "development guide retains a duplicated implementation or checklist section: "
-                + obsolete_heading
-            )
-    for premature_path in ("producer/      Rust 写入器", "inspect/      独立只读 inspector", "cli/        endem 调度"):
-        if premature_path in development_guide_text:
-            errors.append(
-                "development guide presents an unfrozen implementation tree as current guidance: "
-                + premature_path
-            )
     for source in (
         SOURCE_ROOT / "components" / "producer.md",
-        SOURCE_ROOT / "development" / "testing.md",
         SOURCE_ROOT / "development" / "implementation-roadmap.md",
     ):
         source_text = source.read_text()
@@ -4455,7 +4357,7 @@ def validate_jekyll_sources():
         global_navigation_labels = re.findall(
             r"^    label:\s*(.+?)\s*$", global_navigation_text, re.MULTILINE
         )
-        if global_navigation_labels != ["项目", "规范", "应用", "指南", "开发"]:
+        if global_navigation_labels != ["项目", "规范", "应用", "指南", "进展"]:
             errors.append(
                 "global navigation must use project task labels and keep Endem inside the application group"
             )
@@ -4606,7 +4508,7 @@ def validate_jekyll_sources():
             "endem-spec", "closure", "session", "evidence",
             "endem", "inspector", "format", "runner",
             "getting-started", "architecture-guide", "application-reference",
-            "spec-reference", "endem-manual", "current-stage", "roadmap", "testing",
+            "spec-reference", "endem-manual", "current-stage", "roadmap",
             "downloads",
         }
         nav_cover_asset = SOURCE_ROOT / "assets/nav-covers.svg"
@@ -4617,10 +4519,10 @@ def validate_jekyll_sources():
                 r'id="nav-cover-([^"]+)"', nav_cover_asset.read_text()
             ))
             if cover_ids != expected_nav_covers:
-                errors.append("navigation cover sprite must define 21 unique project covers")
+                errors.append("navigation cover sprite must define 20 unique project covers")
         configured_cover_entries = re.findall(r'\bcover:\s*([^,}\s]+)', navigation_text)
         configured_covers = set(configured_cover_entries)
-        if len(configured_cover_entries) != 21 or configured_covers != expected_nav_covers:
+        if len(configured_cover_entries) != 20 or configured_covers != expected_nav_covers:
             errors.append("global navigation entries must route to unique project covers")
 
     timeline_config = SOURCE_ROOT / "_data/project_timeline.yml"
@@ -4876,7 +4778,7 @@ def main():
     ).read_text()
     for token in (
         "不同名称使用不同检查",
-        "每个人类术语都是一个完整单词",
+        "每个人类名称都是一个完整单词",
         "不把职责短语重新包装成名称",
         "普通英语单词已经按词首起音规则接受",
         "Noemion",
@@ -4909,7 +4811,7 @@ def main():
         "覆盖不足返回 `undetermined`，观察故障返回 `fault`",
         "SLSA 1.2 制品验证",
         "GNU Guix 的 `guix challenge`",
-        "资料检查可以发现引用、登记和预期分类之间的矛盾",
+        "项目已经发布架构说明、规范草案、实验性 Endem 字节格式和机器可读示例",
         "普通名称先确认是一个完整单词，再检查词首、职责和机器冲突",
         "两个自造名称仍需发行前的人类朗读、听写和职责匹配证据",
         "不会成为第二套命令、机器别名或语义权威",
@@ -4937,7 +4839,7 @@ def main():
             "这里的“编译”是一条可复核的形成路径",
             "最终发布版移除原文",
             "没有可执行程序或安装包",
-            "计划中的 endem 命令",
+            "当前用 <code>endem</code> 组织计划中的公开动作",
             "当前还没有可执行程序",
         ),
         "docs/index.md": (
@@ -4956,7 +4858,7 @@ def main():
             "第一次接触项目应该先读什么",
             "不必先记住全部项目术语",
             "Endem 是传统目标文件的新名字吗",
-            "为什么计划只提供一个命令入口",
+            "为什么当前使用一个命令命名空间",
             "供人工智能系统安全使用的目标制品，是否意味着文件本身已经获准执行",
             "最终发布版会移除原始自然语言",
             "producer 只消费已经具备精确语义授权绑定的输入",
@@ -5101,20 +5003,19 @@ def main():
             errors.append(f"Endem application reference missing precise formation wording: {token}")
     if "来源绑定、规范化、确定性写入" in endem_reference_text:
         errors.append("Endem application reference retains undefined normalization wording")
-    terminology_guide_text = (SOURCE_ROOT / "docs" / "development-guide.md").read_text()
+    terminology_guide_text = (SOURCE_ROOT / "architecture" / "adr-0037-terminology-simplification.md").read_text()
     for token in (
-        "项目当前只保留两个自造名称",
-        "No-e-mi-on",
-        "En-dem",
-        "没有静音字母",
-        "首次朗读与听辨结果尚未形成",
-        "普通英语工程词沿用通常拼写",
-        "读音提示只帮助人类交流",
-        "不是命令别名、机器标识或语义权威",
-        "直接粘贴书面名称或代码标识",
+        "项目名 `Noemion` 和核心制品名 `Endem`",
+        "其余没有独立品牌职责的对象、角色和动作使用直白名称",
+        "普通职责词也不能只因为“看起来熟悉”就采用",
+        "普通英语词",
+        "词首是否能按通常英语自然起音",
+        "不把职责短语重新包装成名称",
+        "当前名称与职责",
+        "仍须在首次发行前完成真实人类朗读、听写和职责匹配测试",
     ):
         if token not in terminology_guide_text:
-            errors.append(f"development guide missing current-name boundary: {token}")
+            errors.append(f"terminology decision missing current-name boundary: {token}")
     name_maturity_contracts = {
         "about/index.html": (
             "现行设计名称是 Endem",
@@ -5128,7 +5029,7 @@ def main():
         ),
         "downloads/index.html": (
             "Endem 目前只是设计阶段名称",
-            "开发指南",
+            "术语简化决定",
         ),
     }
     for relative_path, required_tokens in name_maturity_contracts.items():
@@ -5188,6 +5089,8 @@ def main():
         "homepage-design.md",
         "sitewide-design-system.md",
         "spec/terminology-audit.json",
+        "development/testing.html",
+        "docs/development-guide.html",
         "design-system",
     ):
         if (ROOT / internal_output).exists():
@@ -5408,7 +5311,7 @@ def main():
             "NIST AI Agent Standards Initiative",
             "当前没有编译器、CLI、解析器、协议适配器或运行时",
             "读音能否区分",
-            "资料检查只能证明已覆盖的文档关系一致",
+            "现有规范与示例只能说明已覆盖的设计关系",
         ):
             if term not in visible_text:
                 errors.append(f"about/index.html: missing project-purpose boundary {term}")
@@ -5481,34 +5384,31 @@ def main():
         parser = parse(development_index)
         if parser.h2_texts != DEVELOPMENT_INDEX_HEADINGS:
             errors.append(
-                "development/index.html: contribution decision sequence must be "
+                "development/index.html: project progress sequence must be "
                 f"{DEVELOPMENT_INDEX_HEADINGS}, got {parser.h2_texts}"
             )
         visible_text = content_visible_text(parser)
         for term in (
-            "当前可以改进研究、术语、架构、规范、威胁模型、验证方案和面向开发者的技术解释",
-            "当前公开范围不包括组件代码",
-            "completed 只保存为外部任务终态，不直接产生 met",
-            "测试数量不能代替失败条件",
-            "现行权威链接、能够回答开发者问题的案例",
-            "NIST SSDF 1.1",
-            "私密安全报告",
-            "尚未提供",
-            "只有自造名称继续检查中文和英语中的首次朗读与听辨风险",
-            "组件实现进入公开路线并确定范围后",
+            "Noemion 目前处于规范与架构设计阶段",
+            "不表示编译器、检查工具、运行器或安装包已经存在",
+            "自然语言语义抽取",
+            "最终工具数量",
+            "当前没有 producer、inspector、runner、可执行 CLI、软件包或生产互操作声明",
+            "项目现在进展到哪里",
+            "后续准备验证什么",
+            "哪些问题尚无结论",
+            "现在可以获得什么",
         ):
             if term not in visible_text:
                 errors.append(
-                    f"development/index.html: missing contribution boundary {term}"
+                    f"development/index.html: missing project progress boundary {term}"
                 )
         if (
-            parser.class_counts["table-wrap"] != 3
-            or parser.class_counts["page-link"] != 3
-            or parser.class_counts["resource-list"] != 1
+            parser.class_counts["status-item"] != 4
+            or parser.class_counts["page-link"] != 4
         ):
             errors.append(
-                "development/index.html: must keep three scoped tables, three routed "
-                "work links, and one reporting list"
+                "development/index.html: must keep four reader-facing status items and four routed links"
             )
         for obsolete_heading in (
             "开发原则", "实施与验证", "源代码与构建",
@@ -6335,7 +6235,7 @@ def main():
                 ["docs/getting-started.html", "docs"],
                 ["downloads/index.html", "resources"],
                 ["faq/index.html", "resources"],
-                ["development/testing.html", "development"],
+                ["development/index.html", "development"],
                 ["development/current-stage.html", "development"],
                 ["endem/index.html", "endem"],
                 ["endem/docs/safety.html", "endem"],

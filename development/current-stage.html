@@ -11,8 +11,8 @@ timeline_data: "project_timeline"
 {% assign current_stage_matches = timeline.items | where: "id", timeline.current_stage_id %}
 {% assign current_stage = current_stage_matches | first %}
 <main id="main-content" class="current-stage-page" tabindex="-1">
-  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">开发与贡献</a><span aria-hidden="true">/</span><span>项目进展</span></nav>
-  <header class="content-introduction"><h1>项目进展</h1><p>这里汇总 Noemion 已经形成的研究成果、当前工作和后续条件。开发者现在可以审查规范与验证资料，但还不能安装或运行 Noemion 软件。</p><div class="badges"><span class="badge">已有规范草案</span><span class="badge">正在核对边界</span><span class="badge">尚无软件实现</span></div></header>
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">项目进展</a><span aria-hidden="true">/</span><span>当前状态</span></nav>
+  <header class="content-introduction"><h1>当前状态</h1><p>这里汇总 Noemion 已经形成的研究成果、当前工作和后续条件。开发者现在可以阅读规范、案例与限制，但还不能安装或运行 Noemion 软件。</p><div class="badges"><span class="badge">已有规范草案</span><span class="badge">正在研究边界</span><span class="badge">尚无软件实现</span></div></header>
   <div class="current-stage-feature">
     <figure class="current-stage-visual">
       <img src="../assets/images/secure-endem-producer.svg" alt="由六个语义面、检查点和受限连接路径组成的 Endem 与 producer 概念图" width="1440" height="960" loading="eager" decoding="async" fetchpriority="high">
@@ -30,9 +30,9 @@ timeline_data: "project_timeline"
       <tr><td>目标、会话、证据、授权和结果分别承担不同责任</td><td>现行 ADR、CORE 草案、威胁模型与公开解释相互引用</td><td>对象名称已经适合发行，或任何对象已经有组件实现</td></tr>
       <tr><td>登记案例具有明确的预期分类</td><td>机器可读登记连接条款、场景、威胁与正反向量</td><td>解析器、运行时、安全隔离或协议互操作已经存在</td></tr>
       <tr><td>研究提案可以用于发现边界缺口</td><td>提案保存来源、支持案例、反例、限制和停止条件</td><td>提案已经成为规范、接口、命令或发布承诺</td></tr>
-      <tr><td>设备内语义抽取模型已有分阶段研究路线</td><td><a href="../spec/model-training-and-update-boundaries-proposal.html">模型训练与更新研究</a>区分本机流程验证、外部算力训练和设备内推理</td><td>模型已经下载或训练，量化效果已经达标，或已有可发布权重</td></tr>
+      <tr><td>设备内语义抽取模型已有分阶段研究路线</td><td><a href="../spec/model-training-and-update-boundaries-proposal.html">模型训练与更新研究</a>区分计划中的本机流程验证、外部算力训练和设备内推理</td><td>模型已经下载或训练，量化效果已经达标，或已有可发布权重</td></tr>
     </tbody></table></div>
-    <p>当前最缺少的是两个自造名称的发行读音证据、组件实现证据、外部协议 Profile 和可安装发行材料。普通职责词已经按词首、职责和关键字语料接受。查看<a href="implementation-roadmap.html">开发路线图</a>可以了解进入下一层需要什么；查看<a href="testing.html">测试与验证</a>可以判断一项主张需要哪些证据。</p>
+    <p>当前最缺少的是两个自造名称的发行读音证据、组件实现证据、外部协议 Profile 和可安装发行材料。普通职责词已经按词首、职责和关键字语料接受。查看<a href="implementation-roadmap.html">开发路线图</a>可以了解后续准备验证什么；查看<a href="../architecture/open-questions.html">开放问题</a>可以了解哪些边界尚无结论。</p>
   </section>
   <section class="project-progress-section">
     {% include project-timeline.html timeline=timeline %}
@@ -51,5 +51,5 @@ timeline_data: "project_timeline"
     <h2>当前限制条件</h2>
     <p>目前没有正式软件版本、稳定规范版本、安装包或发行日期。论文、专利、软著或标准提案只有在具备对应实验、贡献、许可、权属和现有技术分析后才会单独陈述；当前没有已经发表、授权、登记或被标准组织采纳的成果。</p>
   </section>
-  <div class="next-prev"><a href="index.html">← 开发与贡献</a><a href="implementation-roadmap.html">开发路线图 →</a></div>
+  <div class="next-prev"><a href="index.html">← 进展总览</a><a href="implementation-roadmap.html">开发路线图 →</a></div>
 </main>

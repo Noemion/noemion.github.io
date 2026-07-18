@@ -7,7 +7,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "spec" / "registry.json"
 CORPUS_PATH = ROOT / "spec" / "keyword-corpus.json"
-PUBLIC_GUIDE_PATH = ROOT / "docs" / "development-guide.md"
+PUBLIC_GUIDE_PATH = ROOT / "architecture" / "adr-0037-terminology-simplification.md"
 
 COINED_PRONUNCIATIONS = {
     "Noemion": {
@@ -170,7 +170,7 @@ def main():
         "首次朗读与听辨结果尚未形成",
     ):
         if token not in public_guide_text:
-            errors.append(f"docs/development-guide.md: missing developer naming boundary {token!r}")
+            errors.append(f"architecture/adr-0037-terminology-simplification.md: missing naming boundary {token!r}")
 
     sources = corpus.get("sources")
     expected_languages = {"C", "C++", "Rust", "Go", "Python", "Java", "ECMAScript", "Swift", "Kotlin", "C#", "PostgreSQL SQL"}

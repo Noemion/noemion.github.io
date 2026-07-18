@@ -12,7 +12,7 @@ document_status: "规范草案"
 - Specification ID: `SESSION-CORE`
 - Version: `0.1.0-draft`
 - Status: draft; accepted abstract session-boundary design
-- Implementation status: proposal-vector checker only; no runner, loader, sandbox, capability broker or runtime exists
+- Implementation status: unimplemented; only proposal vectors exist, with no runner, loader, sandbox, capability broker or runtime
 - Wire status: not applicable; contract is not a persistent object and has no file format
 
 ## 1. Purpose

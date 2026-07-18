@@ -94,4 +94,4 @@ next_label: ADR-0020
 - [查看目标与判据](../specifications/endem.html) — 定位构念、观察、比较和四值结果。
 - [查看证据评价](../specifications/evidence-entry.html) — 区分记录有效性、覆盖度和不确定度。
 - [查看结果域](adr-0015-result-domains.html) — 避免把分数、满足结果和最终接受混为一体。
-- [查看验证策略](../development/testing.html) — 按主张强度选择案例、向量和后续组件测试。
+- [查看规范状态](../specifications/index.html) — 区分当前草案、已覆盖案例与未来实现证据。

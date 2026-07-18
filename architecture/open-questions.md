@@ -90,7 +90,7 @@ next_label: 开发路线图
 
 | 资料 | 可以支持 | 不能替代 |
 | --- | --- | --- |
-| [GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html) | 按用户的概念与问题组织教程和参考，不把功能库存当作阅读结构 | Noemion 的规范权威、对象定义或关闭决定 |
+| [GNU Manuals](https://www.gnu.org/prep/standards/html_node/GNU-Manuals.html) | 按用户的概念与问题组织教程和参考，不把功能库存当作阅读结构 | Noemion 的规范权威、对象定义或已形成结论 |
 | [GNU BFD 信息损失](https://sourceware.org/binutils/docs/bfd/BFD-information-loss.html) | 格式转换需要说明源格式、目标格式、不能表示的信息和损失处理 | 跨 Profile 语义等价、无损承诺或物理 Profile |
 | [NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative) | 把产业标准、开放协议、身份基础设施与安全评价作为不同工作轴 | Noemion 的 Agent 对象、授权模型、协议 Profile 或安全结论 |
 | [NIST AI 800-3](https://www.nist.gov/publications/expanding-ai-evaluation-toolbox-statistical-models) | 要求模型评测明确目标、适用总体、统计假设和不确定性 | 一次分数自动成为目标满足、证据充分或最终接受 |

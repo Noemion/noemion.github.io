@@ -80,7 +80,7 @@ next_label: contract 会话契约
 | --- | --- | --- |
 | [CLOSURE-CORE](https://noemion.github.io/spec/endem-closure-core.html)与[ADR-0021](../architecture/adr-0021-closure-and-activation.html) | 定义完整闭包、精确绑定、有限图、权限交集、成员结果和激活边界 | 物理格式、调度器或运行组件已经存在 |
 | [威胁模型](https://noemion.github.io/spec/endem-closure-threat-model.html)与[非规范场景](https://noemion.github.io/spec/endem-closure-scenarios.html) | 检查环境替换、闭包截断、权限放大、结果洗白和激活竞态 | 案例本身成为规范条款或安全证明 |
-| [closure 提案向量](https://github.com/Noemion/noemion.github.io/tree/main/vectors/endem-closure) | 执行允许分类与确定拒绝的资料一致性检查 | 解析器、形成器、inspector、runner、远程仓库或组件符合性 |
+| [closure 提案向量](https://github.com/Noemion/noemion.github.io/tree/main/vectors/endem-closure) | 说明草案允许与拒绝的组合案例 | 解析器、形成器、inspector、runner、远程仓库或组件符合性 |
 
 **当前策略：**CLOSURE-CORE 只定义抽象组合闭包和条件激活。动态清单不得改写闭包，成员结果不得合并，激活状态不得扩大权限。
 

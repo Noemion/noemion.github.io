@@ -25,7 +25,7 @@ global:
     kicker: 形成、检查与运行
     description: 查看计划中的 Endem 命令怎样形成、检查、组合和受限运行目标。
     items:
-      - { href: /endem/index.html, label: Endem 应用, description: 从一个入口理解形成、检查、组合和运行准备, cover: endem, cover_label: "ONE COMMAND" }
+      - { href: /endem/index.html, label: Endem 应用, description: 从一组动作理解形成、检查、组合和运行准备, cover: endem, cover_label: "ACTION NAMESPACE" }
       - { href: /endem/docs/format.html, label: 格式与形成, description: 人的目标要保留哪些信息，怎样形成初始制品, cover: format, cover_label: "FORM / LINT" }
       - { href: /endem/docs/safety.html, label: 安全与证据, description: 为什么写入程序不能独自证明自己的输出正确, cover: inspector, cover_label: "LINT / INSPECT" }
       - { href: /endem/docs/running.html, label: 装载与运行, description: 运行前怎样重新核对目标、权限、环境和证据责任, cover: runner, cover_label: "SIGN / RUN" }
@@ -33,7 +33,7 @@ global:
     href: /docs/index.html
     label: 指南
     kicker: 选择阅读路径
-    description: 按入门、架构设计、开发、应用和规范主题选择指南或参考资料。
+    description: 按入门、架构设计、应用和规范主题选择指南或参考资料。
     items:
       - { href: /docs/getting-started.html, label: 入门指南, description: 从问题背景和核心对象开始, cover: getting-started, cover_label: "START PATH" }
       - { href: /docs/architecture-guide.html, label: 架构设计指南, description: 理解生命周期、边界与失败路径, cover: architecture-guide, cover_label: "BOUNDARY GUIDE" }
@@ -42,13 +42,12 @@ global:
       - { href: /endem/docs/index.html, label: Endem 使用手册, description: 查找格式、绑定、安全、运行和参考主题, cover: endem-manual, cover_label: "ENDEM MANUAL" }
   - key: development
     href: /development/index.html
-    label: 开发
-    kicker: 以证据推进
-    description: 查看已经完成什么、当前研究什么，以及一项贡献需要留下哪些证据。
+    label: 进展
+    kicker: 查看当前状态
+    description: 查看已经完成什么、当前研究什么，以及后续准备验证哪些问题。
     items:
       - { href: /development/current-stage.html, label: 项目进展, description: 已有成果、当前工作、后续条件和近期可核对进展, cover: current-stage, cover_label: "ACTIVE WORK" }
       - { href: /development/implementation-roadmap.html, label: 开发路线图, description: 进入下一层需要什么证据，什么情况下应停止, cover: roadmap, cover_label: "DELIVERY PATH" }
-      - { href: /development/testing.html, label: 测试与验证, description: 不同主张分别需要哪些支持案例、失败案例和验证, cover: testing, cover_label: "REJECT MATRIX" }
       - { href: /downloads/index.html, label: 资源与获取, description: 当前可以阅读什么，未来发行物必须提供什么证据, cover: downloads, cover_label: "SIGNED PACKAGE" }
 
 modules:
@@ -76,7 +75,7 @@ modules:
           - { href: /pages/index.html, label: 全部页面 }
       - label: 开发
         items:
-          - { href: /development/index.html, label: 开发与贡献 }
+          - { href: /development/index.html, label: 项目进展 }
           - { href: /development/current-stage.html, label: 项目进展 }
   architecture:
     kicker: Architecture
@@ -146,19 +145,18 @@ modules:
       - label: 支持
         items:
           - { href: /faq/index.html, label: 常见问题 }
-          - { href: /development/index.html, label: 开发与贡献 }
+          - { href: /development/index.html, label: 项目进展 }
   development:
-    kicker: Development
-    title: 开发与贡献
-    root: { href: /development/index.html, label: 开发与贡献 }
+    kicker: Progress
+    title: 项目进展
+    root: { href: /development/index.html, label: 项目进展 }
     parent: { href: /index.html, label: 返回项目首页 }
     groups:
-      - label: 开发
+      - label: 进展
         items:
-          - { href: /development/index.html, label: 开发概览 }
+          - { href: /development/index.html, label: 进展总览 }
           - { href: /development/current-stage.html, label: 项目进展 }
           - { href: /development/implementation-roadmap.html, label: 开发路线图 }
-          - { href: /development/testing.html, label: 测试与验证 }
       - label: 项目状态
         items:
           - { href: /architecture/open-questions.html, label: 开放问题 }

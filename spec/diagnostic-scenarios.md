@@ -97,4 +97,4 @@ document_status: "非规范设计场景"
 
 ## 当前未决
 
-诊断 JSON/CBOR、SARIF、Problem Details、MCP、CLI 文本和退出状态映射，持久日志、遥测 schema、跨进程关联、堆栈与修复补丁格式尚未确定。代码阶段开启前，项目只维护条款、威胁、场景、目录和提案向量。
+诊断 JSON/CBOR、SARIF、Problem Details、MCP、CLI 文本和退出状态映射，持久日志、遥测 schema、跨进程关联、堆栈与修复补丁格式尚未确定。当前只有条款、威胁、场景、目录和提案向量，没有诊断实现。

@@ -14,7 +14,7 @@ document_status: "规范草案"
 - 日期：2026-07-13
 - 状态：草案；条款化表达 ADR-0021 已接受的组合闭包与条件激活边界
 - 物理编码：未定义；本规范不创建 closure 文件格式、扩展名、魔数或稳定 ABI
-- 实现状态：仅有规范提案向量检查器；producer、inspector、runner 与 CLI 均未实现
+- 实现状态：producer、inspector、runner 与 CLI 均未实现；当前只有规范草案和非可执行示例
 
 ## 1. 范围
 

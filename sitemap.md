@@ -2,7 +2,7 @@
 
 Version: 3
 
-Noemion publishes its current project portal, architecture, specifications, component boundaries, development status, the Endem application, and manuals as canonical HTML pages. This Markdown index is the compact route registry for maintainers and automated tools; readers can use the generated HTML directory.
+Noemion publishes its current project portal, architecture, specifications, component boundaries, development status, the Endem application, and manuals as canonical HTML pages. This Markdown index is the compact route registry for machine discovery; readers can use the generated HTML directory.
 
 ## Discovery surfaces
 
@@ -20,7 +20,7 @@ Noemion publishes its current project portal, architecture, specifications, comp
 
 - [Architecture](https://noemion.github.io/architecture/index.html) — trace one developer task through responsibility owners, stop conditions, artifacts, sessions, evidence, and decisions
 - [Endem lifecycle](https://noemion.github.io/architecture/endem-lifecycle.html) — source, deterministic formation, closure, evidence, loading, and execution boundaries
-- [Architecture decisions](https://noemion.github.io/architecture/decisions.html) — accepted responsibility boundaries and explicitly unfrozen interfaces
+- [Architecture decisions](https://noemion.github.io/architecture/decisions.html) — current responsibility boundaries and implementation questions still under research
 - [Agent system boundaries](https://noemion.github.io/architecture/agent-system-boundaries.html) — one Agent call separates goals, actors, authorization, sessions, external facts, evidence, and decisions
 - [ADR-0010](https://noemion.github.io/architecture/adr-0010-native-lexicon.html) — current native lexicon, six semantic facets, and situation/goal/evidence separation
 - [ADR-0011](https://noemion.github.io/architecture/adr-0011-endem-container.html) — experimental byte boundary and ordered reading path across END-FMT, source-bearing P2, and the undefined release Profile
@@ -121,14 +121,12 @@ Noemion publishes its current project portal, architecture, specifications, comp
 - [Documentation center](https://noemion.github.io/docs/index.html) — task-oriented reading paths
 - [Getting started](https://noemion.github.io/docs/getting-started.html) — one dependency-upgrade case separates goals, authorization, protocol states, evidence, and final decisions
 - [Architecture guide](https://noemion.github.io/docs/architecture-guide.html) — one Agent task mapped to artifact, session, action, evidence, and decision boundaries
-- [Development guide](https://noemion.github.io/docs/development-guide.html) — a falsifiable change claim carried through authority, failure ownership, evidence, and claim limits
 
 ## Development and resources
 
-- [Development](https://noemion.github.io/development/index.html) — current contribution scope, falsifiable change claims, minimum evidence, stop conditions, and reporting routes
+- [Project progress](https://noemion.github.io/development/index.html) — existing results, active research, pending questions, limitations, and the next evidence needed
 - [Project progress](https://noemion.github.io/development/current-stage.html) — completed work, active research, planned work, and dated verifiable milestones
 - [Implementation roadmap](https://noemion.github.io/development/implementation-roadmap.html) — current work, evidence required to advance, validation slices, and stop conditions
-- [Testing strategy](https://noemion.github.io/development/testing.html) — change-to-evidence matrix, failure paths, determinism, malformed inputs, and claim limits
 - [Resources and availability](https://noemion.github.io/downloads/index.html) — current public materials, truthful software availability, release evidence, and future installation conditions
 
 ## Endem application

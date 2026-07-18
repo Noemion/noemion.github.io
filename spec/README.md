@@ -30,13 +30,13 @@ document_status: "规范源目录"
 
 [`diagnostics-core.md`](https://noemion.github.io/spec/diagnostics-core.html) 定义跨对象诊断内容边界，[`diagnostic-catalog.md`](https://noemion.github.io/spec/diagnostic-catalog.html) 登记草案机器码。[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存 JSON 语义外壳；`../vectors/diagnostics/` 保存诊断资料一致性提案；`../vectors/wire/` 保存真实字节的十六进制表达。这些向量都不表示组件已经实现。
 
-[`adapter-threat-model.md`](https://noemion.github.io/spec/adapter-threat-model.html) 与 [`adapter-scenarios.md`](https://noemion.github.io/spec/adapter-scenarios.html) 分别保存外部协议适配威胁和非规范设计场景。`../vectors/adapters/cases.json` 保存 ADP-CORE 的提案向量；`../tests/adapter_vector_test.py` 只检查十二条抽象规则，不实现 MCP、A2A、HTTP、SDK、凭据、重试、Webhook、runner 或运行时。精确场景与向量范围以对应源文件和测试输出为准。
+[`adapter-threat-model.md`](https://noemion.github.io/spec/adapter-threat-model.html) 与 [`adapter-scenarios.md`](https://noemion.github.io/spec/adapter-scenarios.html) 分别说明外部协议适配的威胁和非规范设计场景。配套向量只表达当前 ADP-CORE 草案允许或拒绝的输入，不表示 MCP、A2A、HTTP、SDK、凭据、重试、Webhook、runner 或运行时已经实现。
 
-[`identity-threat-model.md`](https://noemion.github.io/spec/identity-threat-model.html) 与 [`identity-scenarios.md`](https://noemion.github.io/spec/identity-scenarios.html) 分别保存精确身份与签名威胁和十五个非规范设计场景。`../vectors/identity/cases.json` 保存 ID-CORE 的二十四个提案向量；`../tests/identity_vector_test.py` 只检查十二条抽象规则，不实现摘要器、签名器、验证器、证书、透明日志、撤销分发、可复现构建或发布系统。
+[`identity-threat-model.md`](https://noemion.github.io/spec/identity-threat-model.html) 与 [`identity-scenarios.md`](https://noemion.github.io/spec/identity-scenarios.html) 分别说明精确身份与签名威胁和非规范设计场景。配套向量只表达当前 ID-CORE 草案的身份、签名和派生关系，不表示摘要器、签名器、验证器、证书、透明日志、撤销分发、可复现构建或发布系统已经实现。
 
-[`text-identifier-threat-model.md`](https://noemion.github.io/spec/text-identifier-threat-model.html) 与 [`text-identifier-scenarios.md`](https://noemion.github.io/spec/text-identifier-scenarios.html) 分别保存文本与标识符威胁和十五个非规范设计场景。`../vectors/text-identifier/cases.json` 保存 TEXT-IDENTIFIER-CORE 的二十四个提案向量；`../tests/text_identifier_vector_test.py` 只检查十二条抽象规则，不实现 UTF-8 解码器、规范化器、双向显示器、同形检测器、文本编辑器或模型输入网关。
+[`text-identifier-threat-model.md`](https://noemion.github.io/spec/text-identifier-threat-model.html) 与 [`text-identifier-scenarios.md`](https://noemion.github.io/spec/text-identifier-scenarios.html) 分别说明文本与标识符威胁和非规范设计场景。配套向量只表达当前 TEXT-IDENTIFIER-CORE 草案的文本槽、比较和拒绝边界，不表示 UTF-8 解码器、规范化器、双向显示器、同形检测器、文本编辑器或模型输入网关已经实现。
 
-[`authority-threat-model.md`](https://noemion.github.io/spec/authority-threat-model.html) 与 [`authority-scenarios.md`](https://noemion.github.io/spec/authority-scenarios.html) 分别保存权威与授权决定威胁和十五个非规范设计场景。`../vectors/authority/cases.json` 保存 AUT-CORE 的二十四个提案向量；`../tests/authority_vector_test.py` 只检查十二条抽象规则，不实现身份提供方、权威目录、政策求值器、同意界面、能力代理或决定服务。
+[`authority-threat-model.md`](https://noemion.github.io/spec/authority-threat-model.html) 与 [`authority-scenarios.md`](https://noemion.github.io/spec/authority-scenarios.html) 分别说明权威与授权决定威胁和非规范设计场景。配套向量只表达当前 AUT-CORE 草案的主体、范围、委托、同意和结果分离，不表示身份提供方、权威目录、政策求值器、同意界面、能力代理或决定服务已经实现。
 
 [`model-context-assembly-proposal.md`](https://noemion.github.io/spec/model-context-assembly-proposal.html) 研究模型调用前的输入选择、角色、权威、顺序、变换、截断、缓存和损失边界。它只比较 TEXT-IDENTIFIER、AUT、ADP、SESSION、EVIDENCE 与 DIA 的现有责任是否留下横切缺口，不是 ADR、CORE 规范、Profile、制品、命令或组件，也不进入 `registry.json`。当前首选是把未来唯一条款归还现有规范；只有真实消费者和验证证明职责无法清晰分担时，才重新讨论独立规范。
 
@@ -62,7 +62,7 @@ document_status: "规范源目录"
 
 [`model-assisted-evaluation-proposal.md`](https://noemion.github.io/spec/model-assisted-evaluation-proposal.html) 研究评测目的、构念、可观察标准、题目与候选、协议、模型评审调用、原始输出、统计汇总和使用决定怎样保持分离。它用 NIST AI 800-2 初稿、NIST AI 800-3、NeurIPS 与 ICLR 的模型裁判研究，以及 GNU Diffutils、Coreutils 随机来源和排序规则核对偏差、随机性、依赖、漂移与限定主张。它不创建 `EVAL-CORE`、`JUDGE-CORE`、评测制品、裁判对象、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 END、TEXT-IDENTIFIER、ID、ADP、SESSION、EVIDENCE、AUT 与 DIA 责任。
 
-[`model-training-and-update-boundaries-proposal.md`](https://noemion.github.io/spec/model-training-and-update-boundaries-proposal.html) 研究训练数据、反馈记录、基础模型、适配权重和训练活动怎样保持分离。它也区分环境复现、行为评测、发布、回滚与运行观察，并记录当前纯文本 Qwen3.5-0.8B-Base、本机 LoRA 流程验证、CPU 量化评测与外部算力最终训练路线。它用 NIST AI 600-1、NIST SP 800-218A、RLHF、DPO、递归生成数据研究、GNU Guix 与 Diffutils 核对来源、资格、投毒、反馈回路、派生身份和复现边界。它不创建 `TRAIN-CORE`、`MODEL-CORE`、`FEEDBACK-CORE`、模型制品、训练清单格式、训练平台、命令、组件、结果域或新专名，也不进入 `registry.json`。当前首选是把唯一义务归还现有 TEXT-IDENTIFIER、ID、AUT、EVIDENCE、ADP、SESSION、DIA 与 END 责任。
+[`model-training-and-update-boundaries-proposal.md`](https://noemion.github.io/spec/model-training-and-update-boundaries-proposal.html) 研究训练数据、反馈记录、基础模型、适配权重和训练活动怎样保持分离。它把 Qwen3.5-0.8B-Base 记录为候选基础模型，并提出尚未执行的文本路径裁剪、LoRA 或 QLoRA、本机 CPU 量化评测与外部算力训练方案；这些都是待验证路线，不是已经产生的纯文本模型或训练结果。它用 NIST AI 600-1、NIST SP 800-218A、RLHF、DPO、递归生成数据研究、GNU Guix 与 Diffutils 核对来源、资格、投毒、反馈回路、派生身份和复现边界。它不创建 `TRAIN-CORE`、`MODEL-CORE`、`FEEDBACK-CORE`、模型制品、训练清单格式、训练平台、命令、组件、结果域或新专名，也不进入 `registry.json`。当前首选是把唯一义务归还现有 TEXT-IDENTIFIER、ID、AUT、EVIDENCE、ADP、SESSION、DIA 与 END 责任。
 
 [`model-openness-and-software-freedom-boundaries-proposal.md`](https://noemion.github.io/spec/model-openness-and-software-freedom-boundaries-proposal.html) 研究托管服务、参数、架构、推理与训练代码、训练数据说明、数据、文档、许可、首选修改形式、复现和外部开放分类怎样保持分离。它用 GNU 自由软件定义、OSI Open Source AI Definition 1.0、Linux Foundation Model Openness Framework、NIST AI 600-1 与 NIST SP 800-218A 核对用户自由、发布完整性、供应链和证据边界。它不创建 `OPEN-MODEL-CORE`、`LICENSE-CORE`、模型发行格式、合规服务、命令、组件、结果域或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 ID、AUT、EVIDENCE、ADP、TEXT-IDENTIFIER 与 DIA 责任。
 
@@ -78,25 +78,7 @@ document_status: "规范源目录"
 
 [`session-contract-scenarios.md`](https://noemion.github.io/spec/session-contract-scenarios.html) 用十五个非规范场景检查会话主体、政策、环境、能力、秘密、预算、激活、观察、只读失效和销毁。它不是 contract 格式、装载器、沙箱、凭据代理或运行时。
 
-`../vectors/result-domains/cases.json` 保存 ADR-0015 的十二个正反提案向量；`../tests/result_domain_vector_test.py` 只执行结果域约束，不实现 runner、求值器或决定引擎。向量通过只能证明当前矩阵和条款一致，不能证明运行组件存在。
-
-`../vectors/time-scope/cases.json` 保存 ADR-0016 的十二个时间与连续性提案向量；`../tests/time_scope_vector_test.py` 只执行 fixed/elapsed 范围、strict/budgeted 政策和覆盖分类，不实现时钟、监控器、runner 或求值器。
-
-`../vectors/negation/cases.json` 保存 ADR-0017 的十二个否定与缺席提案向量；`../tests/negation_vector_test.py` 只执行显式负观察、空结果、封闭范围、正反例和观察故障分类，不实现日志收集器、runner 或求值器。
-
-`../vectors/quantification/cases.json` 保存 ADR-0018 的十二个量化与成员资格提案向量；`../tests/quantification_vector_test.py` 只检查成员范围、空集合、不同成员计数和决定性聚合，不实现 producer、runner、成员目录或求值器。
-
-`../vectors/measurement/cases.json` 保存 ADR-0019 的十二个测量与阈值提案向量；`../tests/measurement_vector_test.py` 只检查构念、总体、单位、程序、聚合器、不确定区间与阈值分类，不实现采集器、统计引擎、runner 或求值器。
-
-`../vectors/composition/cases.json` 保存 ADR-0020 的十二个复合事态与判据提案向量；`../tests/composition_vector_test.py` 只检查单根边界、有限无环拓扑、叶对齐、四结果传播和决定性短路，不实现解析器、runner、运行时或求值器。
-
-`../vectors/endem-closure/cases.json` 保存 ADR-0021 的十二个闭包与条件激活提案向量；`../tests/endem_closure_vector_test.py` 只检查六条 CLOSURE-CORE 规则，不实现解析器、compose、runner、运行时或求值器。
-
-`../vectors/evidence-entry/cases.json` 保存 ADR-0022 的十五个证据与评估提案向量；`../tests/evidence_entry_vector_test.py` 只检查九条 EVIDENCE-CORE 规则，不实现采集器、验证器、归并器、撤销服务、决定引擎或运行时。
-
-`../vectors/session-contract/cases.json` 保存 ADR-0024 的二十个会话契约提案向量；`../tests/session_contract_vector_test.py` 只检查十条 SESSION-CORE 规则，不实现装载器、沙箱、凭据代理、runner、事件系统或运行时。
-
-`../vectors/diagnostics/cases.json` 保存 ADR-0025 的二十个结构化诊断提案向量；`../tests/diagnostic_vector_test.py` 只检查十条 DIA-CORE 规则，不实现诊断生产器、渲染器、协议适配器、重试引擎或 CLI。
+结果域、时间范围、否定、量化、测量、复合事态、closure、evidence、contract 与诊断都提供配套正反向量。它们把当前草案允许的输入、拒绝结果和失败位置写成机器可读案例，帮助实现者理解条款边界；它们不是 runner、求值器、解析器、采集器、诊断系统或其他组件的运行结果。
 
 ## 规范强度
 
@@ -107,23 +89,6 @@ document_status: "规范源目录"
 
 普通中文“必须、不得、可以”用于解释时仍应忠实于相邻条款，但不能替代条款 ID。每条实现义务只能由一个主条款定义；其他文档只能引用，不能复制第二套要求。
 
-## 成熟度维度
+## 怎样理解当前状态
 
-规范状态、实现状态与证据状态分开登记：
-
-- `decision_status`：设计边界是否已经由当前 ADR 接受；
-- `implementation_status`：是否存在声称符合该条款的实现；
-- `evidence_status`：仓库内是否已有覆盖向量或测试；
-- `wire_status`：物理编码是否确定。
-
-`implementation_status` 当前只允许 `unimplemented` 与 `vector-checker-only`。后者表示仓库存在只服务规范资料的检查脚本，不表示项目组件已经实现。`decision_status: accepted` 不表示实现存在，也不表示证据充分；`wire_status: experimental-draft` 只允许草案向量，任何程序都不得声称产生可互操作的稳定 `.endem` 字节。
-
-## 变更规则
-
-1. 改变现有条款含义时，先新增或更新 ADR，再提升规范版本。
-2. 新条款必须登记唯一 ID、成熟度、失败责任与验证方式。
-3. 删除条款必须保留版本历史，并说明替代条款或删除理由。
-4. `covered-by-repo` 只能用于仓库中实际存在且由自动检查读取的证据。
-5. `planned` 表示验证尚未实现，不能在公开页面写成已经通过。
-6. 格式草案变化必须同步 ADR、END-FMT、Profile、错误目录、登记和正反字节向量；不得把语义向量 JSON 直接改名为 `.endem`。
-7. 场景语料变化必须保持非规范状态；只有转化为唯一条款、登记验证方式并形成正反向量后，案例中的判断才可能成为符合性要求。
+规范草案、组件实现和物理格式是三件不同的事。当前条款已经可以被引用，Endem 也有实验性字节 Profile；这不表示 producer、inspector、runner 或稳定 ABI 已经存在。每个页面的“状态”和“明确未覆盖”列给出读者可以使用的结论上限，机器登记提供精确版本和条款 ID。

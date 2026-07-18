@@ -13,7 +13,7 @@ document_status: "威胁模型"
 - Version: `0.1.0-draft`
 - Date: 2026-07-13
 - Status: draft; paired with SESSION-CORE for future runner and capability-domain design
-- Implementation status: proposal-vector checker only; this document is not a sandbox, loader, broker or runtime
+- Implementation status: unimplemented; proposal vectors exist, but this document is not a sandbox, loader, broker or runtime
 
 ## 1. Protection objective
 
