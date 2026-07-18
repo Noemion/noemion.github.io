@@ -4,7 +4,8 @@ title: "Authority and Authorization Decision Threat Model · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/authority-threat-model.html"
-summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+summary: "分析“已登录”“点过允许”或外部成功怎样掩盖越权，并列出未来授权系统必须关闭的风险。"
+document_status: "威胁模型"
 ---
 # Authority and Authorization Decision Threat Model
 

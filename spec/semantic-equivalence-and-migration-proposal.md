@@ -4,7 +4,8 @@ title: "Noemion 语义等价与迁移边界研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/semantic-equivalence-and-migration-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "说明不同字节、Profile 或版本之间的等价必须有范围、有权威且可验证，不能用一个通用布尔值概括。"
+document_status: "非规范研究提案"
 ---
 # Noemion 语义等价与迁移边界研究提案
 

@@ -4,7 +4,8 @@ title: "Noemion 状态变化与因果归因边界研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/state-change-and-causal-attribution-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "区分目标终态、动作发生、状态变化和因果归因，避免把会话事件或相关性直接写成目标已经满足。"
+document_status: "非规范研究提案"
 ---
 # Noemion 状态变化与因果归因边界研究提案
 

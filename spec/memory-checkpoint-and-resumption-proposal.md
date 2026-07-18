@@ -4,7 +4,8 @@ title: "记忆、检查点与恢复边界研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/memory-checkpoint-and-resumption-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "区分对话历史、长期记忆、检查点、外部任务句柄和工作区快照，说明恢复为何必须重新核对权限与副作用。"
+document_status: "非规范研究提案"
 ---
 # 记忆、检查点与恢复边界研究提案
 

@@ -4,7 +4,8 @@ title: "Exact Content Identity and Attestation Natural-Language Design Scenarios
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/identity-scenarios.html"
-summary: "非规范设计场景，记录支持案例、反例与待确认边界。"
+summary: "用发布、裁剪、撤销和调试制品案例，检查精确身份、签名陈述、有效性和授权是否保持分开。"
+document_status: "非规范设计场景"
 ---
 # Exact Content Identity and Attestation Natural-Language Design Scenarios
 

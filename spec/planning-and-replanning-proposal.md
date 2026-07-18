@@ -4,7 +4,8 @@ title: "目标、计划与重规划边界研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/planning-and-replanning-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "区分目标、计划、外部任务和满足判断；计划可以重排步骤，但不能改变目标、授权或结果。"
+document_status: "非规范研究提案"
 ---
 # 目标、计划与重规划边界研究提案
 

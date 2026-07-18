@@ -4,7 +4,8 @@ title: "Noemion 模型训练与更新边界研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/model-training-and-update-boundaries-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "区分训练数据、反馈、基础模型、适配权重、评测、发布和回滚，说明模型更新后哪些条件必须重新核对。"
+document_status: "非规范研究提案"
 ---
 # Noemion 模型训练与更新边界研究提案
 

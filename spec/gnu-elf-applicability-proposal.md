@@ -4,7 +4,8 @@ title: "GNU 与 ELF 机制适用性研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/gnu-elf-applicability-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "说明 Noemion 可以借鉴 ELF 与 GNU 工具的哪些职责分离方法，以及为什么目标制品不是另一种机器目标文件。"
+document_status: "非规范研究提案"
 ---
 # GNU 与 ELF 机制适用性研究提案
 

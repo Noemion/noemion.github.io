@@ -4,7 +4,8 @@ title: "Endem Core Threat Model · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/endem-threat-model.html"
-summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+summary: "分析来源替换、越界引用、畸形结构、资源耗尽和结果混淆等风险，列出未来读写路径必须关闭的失败。"
+document_status: "威胁模型"
 ---
 # Endem Core Threat Model
 

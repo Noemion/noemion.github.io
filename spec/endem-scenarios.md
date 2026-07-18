@@ -4,7 +4,8 @@ title: "Endem Natural-Language Scenario Corpus · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/endem-scenarios.html"
-summary: "非规范设计场景，记录支持案例、反例与待确认边界。"
+summary: "用自然语言支持案例、反例和待定场景检查现行规范能否明确表达目标，而不让模型猜测缺失含义。"
+document_status: "非规范设计场景"
 ---
 # Endem Natural-Language Scenario Corpus
 

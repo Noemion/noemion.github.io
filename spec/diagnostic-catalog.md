@@ -4,7 +4,8 @@ title: "Diagnostic Catalog · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/diagnostic-catalog.html"
-summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+summary: "列出稳定机器诊断码及其适用层次，让程序依据代码而不是本地化消息识别失败。"
+document_status: "规范目录草案"
 ---
 # Diagnostic Catalog
 

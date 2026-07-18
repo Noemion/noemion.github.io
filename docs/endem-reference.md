@@ -10,7 +10,7 @@ manual_order: 5
 nav_title: "Endem 应用参考"
 page_heading: "Endem 应用参考"
 page_lead: "从用户要完成的五项工作出发，查看计划中的 endem 动作各自读取什么、返回什么，以及为什么不能合并权限。"
-summary: "按用户任务查找计划中的 endem 动作、调用方结果、失败责任和开发顺序。"
+summary: "按用户任务查找计划中的 endem 动作、它们读取和返回什么、失败由谁处理，以及先实现哪些职责。"
 badges: ["单一命令入口", "五个动作", "尚未发布"]
 ---
 

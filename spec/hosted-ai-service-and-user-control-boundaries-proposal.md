@@ -4,7 +4,8 @@ title: "Noemion 托管人工智能服务与用户控制边界研究提案 · Noe
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/hosted-ai-service-and-user-control-boundaries-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "区分软件是否自由、用户能否控制实际服务、数据是否外发以及模型是否漂移，避免用“开源”概括全部控制权。"
+document_status: "非规范研究提案"
 ---
 # Noemion 托管人工智能服务与用户控制边界研究提案
 

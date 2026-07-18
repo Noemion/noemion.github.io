@@ -4,7 +4,8 @@ title: "Endem Source Manifest · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/endem-source-manifest.html"
-summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+summary: "规定实验来源清单怎样把已确认的原文、意义和判断条件映射到 END-P1，同时阻止模型补写字段。"
+document_status: "实验性来源设计"
 ---
 # Endem Source Manifest
 

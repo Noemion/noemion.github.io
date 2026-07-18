@@ -4,7 +4,8 @@ title: "External Protocol Adapter Core Specification · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/adapter-core.html"
-summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+summary: "规定外部工具、Agent、模型服务和网络协议怎样进入一次受限会话，并保留外部事实、权限和副作用边界。"
+document_status: "规范草案"
 ---
 # External Protocol Adapter Core Specification
 

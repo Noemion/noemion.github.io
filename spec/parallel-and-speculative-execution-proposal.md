@@ -4,7 +4,8 @@ title: "并行、推测执行与提交边界研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/parallel-and-speculative-execution-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "区分并行尝试、分支结果、提交授权和外部副作用，防止最快完成的分支自动取得写入权。"
+document_status: "非规范研究提案"
 ---
 # 并行、推测执行与提交边界研究提案
 

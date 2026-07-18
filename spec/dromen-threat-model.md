@@ -4,7 +4,8 @@ title: "Dromen Threat Model · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/dromen-threat-model.html"
-summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+summary: "分析目标替换、权限扩大、秘密泄露、预算逃逸和会话复活等风险，确保旧会话不能被悄悄改写。"
+document_status: "威胁模型"
 ---
 # Dromen Threat Model
 
@@ -65,4 +66,3 @@ An attacker serializes a Dromen, copies a session ID, restores logs or resumes s
 ## 3. Risks not solved by this model
 
 This model does not prove an operating-system sandbox, credential store, capability broker, scheduler, network policy, process boundary, model isolation, event log or disposal mechanism. Platform-specific bypasses, side channels, denial of service, covert channels and implementation bugs require separate threat models and component evidence after the code stage is explicitly authorized.
-

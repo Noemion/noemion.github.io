@@ -4,7 +4,8 @@ title: "能力发现、协商与调用边界研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/capability-discovery-and-negotiation-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "区分对端声明会做、协议支持、本地允许、本会话可用、此刻可调用和调用成功，防止能力声明变成授权。"
+document_status: "非规范研究提案"
 ---
 # 能力发现、协商与调用边界研究提案
 

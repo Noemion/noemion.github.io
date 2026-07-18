@@ -4,7 +4,8 @@ title: "Endem Container Format · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/endem-format.html"
-summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+summary: "规定 .endem 字节怎样安全分段和有界读取；格式通过只说明结构可解释，不代表目标有效或可运行。"
+document_status: "实验性格式草案"
 ---
 # Endem Container Format
 

@@ -4,7 +4,8 @@ title: "Endem Core Content Standard · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/endem-core.html"
-summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+summary: "规定一件 Endem 在编码前必须满足的内容结构、意义确认、状态、身份和安全读取要求，并限制 Profile 能表达什么。"
+document_status: "规范草案"
 ---
 # Endem Core Content Standard
 

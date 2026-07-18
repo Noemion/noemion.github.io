@@ -4,7 +4,8 @@ title: "Diagnostic Threat Model · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/diagnostic-threat-model.html"
-summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+summary: "分析错误文本、模型建议和日志披露怎样诱发错误重试、越权或信息泄露，并给出关闭条件。"
+document_status: "威胁模型"
 ---
 # Diagnostic Threat Model
 

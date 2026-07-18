@@ -4,7 +4,8 @@ title: "Noemion 语义面与观察词去专名化研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/semantic-facet-terminology-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "检查 Endem 六个语义面和观察词是否需要专名，并用更直白的字段候选降低首次阅读负担。"
+document_status: "非规范研究提案"
 ---
 # Noemion 语义面与观察词去专名化研究提案
 

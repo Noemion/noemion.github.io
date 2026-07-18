@@ -4,11 +4,12 @@ title: "Noemion 规范源 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/index.html"
-summary: "版本化规范、威胁模型、场景与研究提案的公开目录。"
+summary: "按目标、组合、会话、证据、协议、身份、文本和授权问题，查找版本化条款、场景、威胁与研究提案。"
+document_status: "规范源目录"
 ---
 # Noemion 规范源
 
-本目录保存实现可以逐条引用的 Markdown 规范源。Jekyll 从这些文件自动生成同路径 HTML 正式页面；生成页和 Markdown 是同一正文，不构成两套条款。`specifications/` 中的解释页可以提供教学和摘要，但冲突时以这里的版本、条款 ID、规范强度与验证映射为准，并通过 ADR 修正文档，不能由当前代码行为反向改写规范。
+本目录汇总实现可以逐条引用的版本化规范、场景、威胁模型和研究提案。`specifications/` 中的解释页帮助读者理解这些资料；如果解释与条款冲突，以这里标明的版本、条款 ID、规范强度和验证关系为准。规范只能通过对应的 ADR 与条款修订，不能由当前代码行为反向改写。
 
 ## 当前规范
 

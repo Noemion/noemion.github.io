@@ -4,7 +4,8 @@ title: "预览、模拟与批准边界研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/preview-simulation-and-approval-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "区分预览、模拟、批准和实际执行，说明看到预测或点击批准为什么不等于动作已发生或目标已满足。"
+document_status: "非规范研究提案"
 ---
 # 预览、模拟与批准边界研究提案
 

@@ -4,7 +4,8 @@ title: "External Protocol Adapter Threat Model · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/adapter-threat-model.html"
-summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+summary: "分析外部协议怎样造成版本漂移、权限扩大、重试副作用和信息泄露，并列出未来适配器必须关闭的风险。"
+document_status: "威胁模型"
 ---
 # External Protocol Adapter Threat Model
 

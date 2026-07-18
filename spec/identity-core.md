@@ -4,7 +4,8 @@ title: "Exact Content Identity and Attestation Core Specification · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/identity-core.html"
-summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+summary: "规定系统怎样用精确字节确认对象、签名内容和截止点有效性，并把身份、签名、授权和接受分开。"
+document_status: "规范草案"
 ---
 # Exact Content Identity and Attestation Core Specification
 

@@ -13,15 +13,12 @@ layout: default
   <header class="content-introduction spec-source-introduction">
     <h1>{{ spec_heading }}</h1>
     <p>{{ page.summary }}</p>
-    <div class="badges"><span class="badge">Markdown 唯一正文源</span><span class="badge">自动生成 HTML</span></div>
+    <div class="badges"><span class="badge">{{ page.document_status }}</span></div>
   </header>
 
   <article class="manual-article spec-source-article">
     {{ content }}
   </article>
 
-  <div class="spec-source-actions">
-    <a href="https://github.com/Noemion/noemion.github.io/blob/main/{{ page.path }}">查看 Markdown 源</a>
-    {% unless page.permalink == '/spec/index.html' %}<a href="{{ '/spec/index.html' | relative_url }}">返回规范源目录</a>{% endunless %}
-  </div>
+  {% unless page.permalink == '/spec/index.html' %}<div class="spec-source-actions"><a href="{{ '/spec/index.html' | relative_url }}">返回规范源目录</a></div>{% endunless %}
 </main>

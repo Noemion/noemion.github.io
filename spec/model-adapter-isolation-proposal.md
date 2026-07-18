@@ -4,7 +4,8 @@ title: "模型、适配器与能力域隔离研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/model-adapter-isolation-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "说明容器或超时为什么不足以证明隔离，并拆开模型、控制面、凭据、网络、副作用和观察责任。"
+document_status: "非规范研究提案"
 ---
 # 模型、适配器与能力域隔离研究提案
 

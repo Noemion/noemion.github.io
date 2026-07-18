@@ -4,7 +4,8 @@ title: "Dromen Core Session Contract · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/dromen-core.html"
-summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+summary: "规定一次受控会话怎样重新核对精确目标、政策、环境、能力和预算，并在实质条件变化后关闭旧权限。"
+document_status: "规范草案"
 ---
 # Dromen Core Session Contract
 

@@ -4,7 +4,8 @@ title: "Noemion 发行术语去专名化研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/release-terminology-simplification-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "检查现有专名是否真的不可替代，并优先比较读者能直接恢复职责的普通词，减少记忆和口头混淆。"
+document_status: "非规范研究提案"
 ---
 # Noemion 发行术语去专名化研究提案
 

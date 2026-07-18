@@ -4,7 +4,8 @@ title: "Synem Natural-Language Design Scenarios · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/synem-scenarios.html"
-summary: "非规范设计场景，记录支持案例、反例与待确认边界。"
+summary: "用报告发布、服务部署和传递依赖案例，检查成员、完整集合、权限和运行期激活是否保持分开。"
+document_status: "非规范设计场景"
 ---
 # Synem Natural-Language Design Scenarios
 

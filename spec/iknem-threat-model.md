@@ -4,7 +4,8 @@ title: "Iknem Threat Model · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/iknem-threat-model.html"
-summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+summary: "分析日志、模型输出、时间戳、重复记录和部分验证怎样制造虚假可信感，保护每项证据的真实范围。"
+document_status: "威胁模型"
 ---
 # Iknem Threat Model
 

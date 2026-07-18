@@ -4,7 +4,8 @@ title: "Iknem Core Specification · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/iknem-core.html"
-summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+summary: "规定一项证据必须怎样绑定对象、生产者、方法、环境、时间、观察和限制，才能支持有范围的主张。"
+document_status: "规范草案"
 ---
 # Iknem Core Specification
 

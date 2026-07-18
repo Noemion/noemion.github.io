@@ -4,7 +4,8 @@ title: "External Protocol Adapter Natural-Language Design Scenarios · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/adapter-scenarios.html"
-summary: "非规范设计场景，记录支持案例、反例与待确认边界。"
+summary: "用 MCP、A2A、HTTP 等案例检查外部调用怎样固定版本、收窄权限，并把远端结果留在外部事实层。"
+document_status: "非规范设计场景"
 ---
 # External Protocol Adapter Natural-Language Design Scenarios
 

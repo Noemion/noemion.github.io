@@ -4,7 +4,8 @@ title: "Noemion 模型开放性与软件自由边界研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/model-openness-and-software-freedom-boundaries-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "区分源码、模型架构、权重、训练数据、许可、可修改性和服务控制，避免把不同开放事实合成“开源模型”。"
+document_status: "非规范研究提案"
 ---
 # Noemion 模型开放性与软件自由边界研究提案
 

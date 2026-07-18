@@ -4,7 +4,8 @@ title: "Noemion `telis` 发行词候选研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/telis-release-terms-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "说明现行 kine 与 mene 为什么不适合作为发行名称，并比较能直接表达“达到”和“保持”的普通词候选。"
+document_status: "非规范研究提案"
 ---
 # Noemion `telis` 发行词候选研究提案
 

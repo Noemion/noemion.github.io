@@ -505,6 +505,9 @@ PUBLIC_META_PHRASES = (
     "内部符合性门禁",
     "内部一致性门禁",
     "资料检查器",
+    "Markdown 唯一正文源",
+    "自动生成 HTML",
+    "查看 Markdown 源",
     "页面负责解释",
     "本手册只解释",
     "当前公开仓库只维护",
@@ -3864,6 +3867,13 @@ def validate_jekyll_sources():
     if len(source_routes) != len(set(source_routes)):
         errors.append("multiple source files generate the same formal route")
 
+    summary_owners = defaultdict(list)
+    generic_page_summaries = {
+        "版本化规范源，记录条款、责任、成熟度与验证边界。",
+        "非规范设计场景，记录支持案例、反例与待确认边界。",
+        "威胁模型，记录攻击面、失败责任与采用限制。",
+        "非规范研究提案，记录问题边界、证据、反例与停止条件。",
+    }
     for route, path in source_entries:
         text = path.read_text()
         match = FRONT_MATTER.match(text)
@@ -3897,26 +3907,32 @@ def validate_jekyll_sources():
         for key in ("title", "footer_text"):
             if not front_matter_value(metadata, key):
                 errors.append(f"{route}: front matter requires {key}")
-        body = text[match.end():]
-        if is_manual_markdown:
-            entry_text = front_matter_value(metadata, "page_lead") or ""
-        elif is_spec_markdown:
-            entry_text = front_matter_value(metadata, "summary") or ""
-            if not entry_text:
-                errors.append(f"{route}: spec Markdown front matter requires summary")
-        elif route == "index.html":
-            entry_text = ""
+        if is_spec_markdown:
+            document_status = front_matter_value(metadata, "document_status")
+            allowed_document_statuses = {
+                "规范源目录", "规范草案", "规范目录草案",
+                "实验性格式草案", "实验性来源设计",
+                "非规范设计场景", "威胁模型", "非规范研究提案",
+            }
+            if document_status not in allowed_document_statuses:
+                errors.append(
+                    f"{route}: spec Markdown requires a reader-facing document_status"
+                )
+        page_summary = front_matter_value(metadata, "summary") or ""
+        if not page_summary:
+            errors.append(f"{route}: every formal page requires a reader-facing summary")
         else:
-            introduction_match = re.search(
-                r'<header\s+class="(?:section|content|application)-introduction"[^>]*>.*?<p>(.*?)</p>',
-                body,
-                re.DOTALL,
-            )
-            entry_text = (
-                normalize_visible_text(HTML_TAG.sub(" ", introduction_match.group(1)))
-                if introduction_match
-                else ""
-            )
+            summary_owners[page_summary].append(route)
+            if len(page_summary) < 20 or len(page_summary) > 120:
+                errors.append(
+                    f"{route}: page summary must stay between 20 and 120 characters"
+                )
+            if page_summary in generic_page_summaries:
+                errors.append(
+                    f"{route}: page summary must name its concrete reader problem"
+                )
+        body = text[match.end():]
+        entry_text = page_summary
         abstract_entry_terms = (
             "制品", "闭包", "投影", "权威", "边界", "结果域", "信任域", "语义",
             "授权", "身份", "Profile", "伴随", "符合性", "不变量",
@@ -3989,6 +4005,13 @@ def validate_jekyll_sources():
                         errors.append(
                             f"{route}: section {index} uses content-split-reverse without content-split"
                         )
+
+    for summary, owners in summary_owners.items():
+        if len(owners) > 1:
+            errors.append(
+                "formal pages must not share a generic summary: "
+                f"{summary!r} used by {sorted(owners)}"
+            )
 
     homepage_source = SOURCE_ROOT / "index.html"
     if homepage_source.exists():
@@ -4929,6 +4952,27 @@ def validate_jekyll_sources():
                 errors.append(f"ADR-0010 missing responsibility-first naming boundary: {token}")
         if "六个短词" in naming_adr_text:
             errors.append("ADR-0010 must not present short field names as the value of the decision")
+
+    spec_layout = SOURCE_ROOT / "_layouts/spec.html"
+    if not spec_layout.exists():
+        errors.append("missing _layouts/spec.html")
+    else:
+        spec_layout_text = spec_layout.read_text()
+        for token in (
+            "{{ page.summary }}",
+            "{{ page.document_status }}",
+            "返回规范源目录",
+        ):
+            if token not in spec_layout_text:
+                errors.append(f"spec layout missing reader-facing contract: {token}")
+        for forbidden in (
+            "Markdown 唯一正文源", "自动生成 HTML", "查看 Markdown 源",
+            "github.com/Noemion/noemion.github.io/blob/main",
+        ):
+            if forbidden in spec_layout_text:
+                errors.append(
+                    f"spec layout exposes publication process instead of content status: {forbidden}"
+                )
 
     manual_config = SOURCE_ROOT / "_data/manuals.yml"
     manual_layout = SOURCE_ROOT / "_layouts/manual.html"
@@ -6836,6 +6880,14 @@ def main():
         if 'data-resource-state="unreleased"' not in text:
             errors.append("downloads page must expose an explicit unreleased state")
 
+    page_directory_output = ROOT / "pages/index.html"
+    if page_directory_output.exists():
+        page_directory_output_text = page_directory_output.read_text()
+        if 'aria-label="无单独说明"' in page_directory_output_text:
+            errors.append("page directory must show a concrete summary for every route")
+        if page_directory_output_text.count("data-page-directory-item") != len(registered):
+            errors.append("page directory must render every registered route exactly once")
+
     current_stage_output = ROOT / "development/current-stage.html"
     if current_stage_output.exists():
         current_stage_output_text = current_stage_output.read_text()
@@ -6921,6 +6973,7 @@ def main():
         errors.append("style.css press feedback must use the design-system scale(0.96) contract")
 
     rendered_canonical_urls = []
+    rendered_descriptions = []
     for path in HTML_FILES:
         text = path.read_text()
         parser = parse(path)
@@ -6946,6 +6999,8 @@ def main():
                 rendered_canonical_urls.extend(canonical_matches)
             if len(description_matches) != 1 or not description_matches[0].strip():
                 errors.append(f"{rel}: rendered description metadata must be unique and non-empty")
+            else:
+                rendered_descriptions.extend(description_matches)
             if og_url_matches != [expected_public_url]:
                 errors.append(f"{rel}: Open Graph URL must exactly match its formal route")
         if RAW_AMP.search(text):
@@ -7014,6 +7069,8 @@ def main():
 
     if len(rendered_canonical_urls) != len(set(rendered_canonical_urls)):
         errors.append("rendered canonical URLs must be unique across formal routes")
+    if len(rendered_descriptions) != len(set(rendered_descriptions)):
+        errors.append("rendered page descriptions must be unique across formal routes")
 
     if navigation_data.exists() and route_module.exists() and directory_module.exists() and route_rows:
         try:

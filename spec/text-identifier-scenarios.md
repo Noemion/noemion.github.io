@@ -4,7 +4,8 @@ title: "Text and Identifier Natural-Language Design Scenarios · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/text-identifier-scenarios.html"
-summary: "非规范设计场景，记录支持案例、反例与待确认边界。"
+summary: "用规范化、不可见字符、双向文本、同形字和模型输入案例，检查文本解释与安全显示边界。"
+document_status: "非规范设计场景"
 ---
 # Text and Identifier Natural-Language Design Scenarios
 

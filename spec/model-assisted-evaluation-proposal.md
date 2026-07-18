@@ -4,7 +4,8 @@ title: "Noemion 模型参与评测与裁判边界研究提案 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/model-assisted-evaluation-proposal.html"
-summary: "非规范研究提案，记录问题边界、证据、反例与停止条件。"
+summary: "说明模型可以辅助评审开放式输出，但模型评分不能自行成为测量事实、证据充分、目标满足或最终接受。"
+document_status: "非规范研究提案"
 ---
 # Noemion 模型参与评测与裁判边界研究提案
 

@@ -4,7 +4,8 @@ title: "Synem Core Threat Model · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/synem-threat-model.html"
-summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+summary: "分析成员替换、依赖遗漏、权限放大、循环和运行时换入新目标等风险，保护组合集合的完整性。"
+document_status: "威胁模型"
 ---
 # Synem Core Threat Model
 

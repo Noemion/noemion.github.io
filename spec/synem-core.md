@@ -4,7 +4,8 @@ title: "Synem Core Specification · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/synem-core.html"
-summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+summary: "规定两个或更多目标怎样形成固定、完整且可重放的依赖集合，并确保组合后权限只能收窄。"
+document_status: "规范草案"
 ---
 # Synem Core Specification
 

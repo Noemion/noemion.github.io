@@ -4,7 +4,8 @@ title: "Exact Content Identity and Attestation Threat Model · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/identity-threat-model.html"
-summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+summary: "分析换错身份域、缩短摘要、替换签名语境和复用旧验证状态等风险，防止不同对象被误认为同一制品。"
+document_status: "威胁模型"
 ---
 # Exact Content Identity and Attestation Threat Model
 

@@ -4,7 +4,8 @@ title: "Authority and Authorization Decision Core Specification · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/authority-core.html"
-summary: "版本化规范源，记录条款、责任、成熟度与验证边界。"
+summary: "规定自然语言意义确认、Agent 动作和最终决定在什么范围、政策和截止点下才能称为已授权。"
+document_status: "规范草案"
 ---
 # Authority and Authorization Decision Core Specification
 

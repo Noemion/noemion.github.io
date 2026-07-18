@@ -4,7 +4,8 @@ title: "Diagnostic Natural-Language Design Scenarios · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/diagnostic-scenarios.html"
-summary: "非规范设计场景，记录支持案例、反例与待确认边界。"
+summary: "用格式错误、外部故障和可恢复失败等案例，检查诊断能否准确说明位置、原因和继续条件。"
+document_status: "非规范设计场景"
 ---
 # Diagnostic Natural-Language Design Scenarios
 

@@ -4,7 +4,8 @@ title: "Text and Identifier Threat Model · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/text-identifier-threat-model.html"
-summary: "威胁模型，记录攻击面、失败责任与采用限制。"
+summary: "分析看似相同的文字怎样改变码点、标识符绑定、来源范围或模型输入，并列出未来文本处理必须关闭的风险。"
+document_status: "威胁模型"
 ---
 # Text and Identifier Threat Model
 

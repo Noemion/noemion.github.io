@@ -10,7 +10,7 @@ manual_order: 2
 nav_title: "绑定与组合"
 page_heading: "绑定与组合"
 page_lead: "当一项目标依赖其他目标或产物时，说明怎样固定所有必需成员、报告冲突，并防止运行时临时换入新内容。"
-summary: "查看 pleko 怎样固定依赖、处理冲突、收窄共同权限并形成 Synem。"
+summary: "查看组合动作 pleko 怎样固定全部依赖、处理冲突、收窄共同权限并形成 Synem。"
 badges: ["pleko", "Synem"]
 ---
 

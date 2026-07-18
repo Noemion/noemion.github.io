@@ -4,7 +4,8 @@ title: "Dromen 自然语言设计场景 · Noemion"
 page_role: "content"
 footer_text: "Noemion · 规范源"
 permalink: "/spec/dromen-scenarios.html"
-summary: "非规范设计场景，记录支持案例、反例与待确认边界。"
+summary: "用部署、凭据轮换、取消和恢复等案例，检查一次会话的权限、预算、观察和失效边界。"
+document_status: "非规范设计场景"
 ---
 # Dromen 自然语言设计场景
 
