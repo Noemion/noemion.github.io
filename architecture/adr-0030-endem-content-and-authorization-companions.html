@@ -12,16 +12,16 @@ summary: "让 Endem 文件回答对象是什么，让外部记录回答谁在什
 
   <section class="content-wide">
     <h2>用同一份 Endem 理解两种变化</h2>
-    <p class="lead">假设一份 END-P1 形成制品在周一获得发布团队确认，周三该授权被撤销。文件字节没有变化，因此内容身份保持不变；周三的“是否仍可用于发布”必须重新评估。</p>
+    <p class="lead">假设一份 END-P2 形成制品在周一获得发布团队确认，周三该授权被撤销。文件字节没有变化，因此内容身份保持不变；周三的“是否仍可用于发布”必须重新评估。</p>
     <div class="flow"><div class="step">规范字节</div><div class="step">内容身份</div><div class="step">外部授权绑定</div><div class="step">截止点评估</div><div class="step">满足结果</div><div class="step">最终决定</div></div>
     <div class="table-wrap"><table><thead><tr><th>发生的变化</th><th>内容身份</th><th>需要产生的新结果</th></tr></thead><tbody>
       <tr><td>同一 Profile、同一规范字节，由另一名合格主体确认</td><td>不变</td><td>新的授权伴随关系及其独立评估</td></tr>
       <tr><td>授权过期、撤销或政策版本失效</td><td>不变</td><td>相对新截止点的未满足或未求值结论</td></tr>
-      <tr><td>新增签名、Iknem 或最终决定</td><td>不变</td><td>新的签名、证据或决定关系；各自保留结果域</td></tr>
+      <tr><td>新增签名、evidence entry 或最终决定</td><td>不变</td><td>新的签名、证据或决定关系；各自保留结果域</td></tr>
       <tr><td>修改任一语义记录或规范字节</td><td>改变</td><td>新的 Endem 内容身份，并重新绑定全部伴随关系</td></tr>
       <tr><td>未来从形成版派生裁剪发布版</td><td>改变</td><td>新 Profile、新身份、来源关系和重新验证结果</td></tr>
     </tbody></table></div>
-    <p><strong>当前策略：</strong>END-P1 仍只保存六个语义记录。文件可以独立通过容器与 Profile 检查，但文件内权威名称不能证明授权已经发生。</p>
+    <p><strong>当前策略：</strong>END-P2 仍只保存六个语义记录。文件可以独立通过容器与 Profile 检查，但文件内权威名称不能证明授权已经发生。</p>
   </section>
 
   <section class="content-wide">
@@ -30,7 +30,7 @@ summary: "让 Endem 文件回答对象是什么，让外部记录回答谁在什
       <tr><td><code>projection.kind</code></td><td>候选来自哪类确定性规则或具名权威</td><td>规则版本、声明输入域、输出位置与实际执行结果</td></tr>
       <tr><td><code>projection.id</code></td><td>指向一个待核对规则、角色或主体名称</td><td>当前主体资格、精确候选、语义位置、范围和截止点</td></tr>
       <tr><td><code>decision_authority</code></td><td>指出谁应当作出判断</td><td>该主体是否看过当前安全视图并形成有效决定</td></tr>
-      <tr><td><code>required_iknem</code></td><td>指出内容要求的证据选择器</td><td>实际 Iknem、有效性、覆盖度、撤销状态和适用判据</td></tr>
+      <tr><td><code>required_iknem</code></td><td>指出内容要求的证据选择器</td><td>实际 evidence entry、有效性、覆盖度、撤销状态和适用判据</td></tr>
       <tr><td>签名者或本地 ACL 名称</td><td>为外部验证或本地政策提供查找线索</td><td>签名陈述、信任政策、授权范围和依赖方决定</td></tr>
     </tbody></table></div>
     <p>读取器不得通过当前环境、网络查询、默认目录或缓存命中，把这些名称升级成授权或证据已经存在。名称用于定位待核对对象，不承担认证、授权或最终判断。</p>
@@ -40,8 +40,8 @@ summary: "让 Endem 文件回答对象是什么，让外部记录回答谁在什
     <h2>文件内结论与外部前置条件怎样报告</h2>
     <div class="table-wrap"><table><thead><tr><th>检查层</th><th>当前字节可以直接证明什么</th><th>必须单独报告什么</th></tr></thead><tbody>
       <tr><td>容器接受</td><td>前导、目录、范围、资源上限和确定性载荷满足 END-FMT</td><td>不解释六个语义记录是否构成可接受内容</td></tr>
-      <tr><td>Profile 接受</td><td>记录种类、字段、枚举、排序和引用满足 END-P1</td><td>END-P1 单文件最高只能声称 Profile 接受</td></tr>
-      <tr><td>内容接受</td><td>文件内结构提供待核对候选与选择器</td><td>外部规则、授权、身份、签名和 Iknem 是否取得且精确绑定</td></tr>
+      <tr><td>Profile 接受</td><td>记录种类、字段、枚举、排序和引用满足 END-P2</td><td>END-P2 单文件最高只能声称 Profile 接受</td></tr>
+      <tr><td>内容接受</td><td>文件内结构提供待核对候选与选择器</td><td>外部规则、授权、身份、签名和 evidence entry 是否取得且精确绑定</td></tr>
       <tr><td>满足判断</td><td>目标、判据和要求可以被读取</td><td>现实观察、有效证据、覆盖度和结果计算</td></tr>
       <tr><td>最终决定</td><td>可以定位具名决定主体</td><td>有效决定权、输入结果、范围和 <code>accepted / rejected / deferred</code></td></tr>
     </tbody></table></div>
@@ -53,8 +53,8 @@ summary: "让 Endem 文件回答对象是什么，让外部记录回答谁在什
     <div class="table-wrap"><table><thead><tr><th>条款</th><th>开发者必须遵守</th><th>失败后果</th></tr></thead><tbody>
       <tr><td><code>END-CON-006</code></td><td>分开报告文件内结论与外部前置条件，并声明单文件最高可声称层次</td><td>缺失或未求值层次不能隐式通过</td></tr>
       <tr><td><code>END-AUT-002</code></td><td>权威、规则和证据名称都只作为待核对选择器</td><td>缺失、错绑、拒绝、延后、过期或撤销不能产生已授权投影</td></tr>
-      <tr><td><code>END-ID-002</code></td><td>授权、签名、Iknem、满足与最终决定不进入 Endem 内容身份</td><td>字节改变必须形成新身份；授权变化只产生新伴随评估</td></tr>
-      <tr><td><code>END-FMT-015</code></td><td>END-P1 不内联政策、目录、决定、签名、证据或验证材料</td><td>读取器不能从环境或网络搜索补齐文件含义</td></tr>
+      <tr><td><code>END-ID-002</code></td><td>授权、签名、evidence entry、满足与最终决定不进入 Endem 内容身份</td><td>字节改变必须形成新身份；授权变化只产生新伴随评估</td></tr>
+      <tr><td><code>END-FMT-015</code></td><td>END-P2 不内联政策、目录、决定、签名、证据或验证材料</td><td>读取器不能从环境或网络搜索补齐文件含义</td></tr>
     </tbody></table></div>
     <p>两个字节完全相同、外部授权证据不同的 Endem 必须进入同一内容身份等价组。相反，只要六个语义面或规范字节改变，就必须建立新身份，不能把语义修订伪装成授权状态更新。</p>
   </section>

@@ -280,7 +280,7 @@ def main():
     if profile.get("required_record_kinds") != [1, 2, 3, 4, 5, 6]:
         errors.append("END-P0 must require the six semantic record kinds in order")
     if profile.get("allowed_states") != [0] or profile.get("allowed_record_flags") != [1]:
-        errors.append("END-P0 must allow only nascent and critical records")
+        errors.append("END-P0 must allow only formed and critical records")
     if profile.get("compression") is not False or profile.get("encryption") is not False:
         errors.append("END-P0 must forbid compression and encryption")
 

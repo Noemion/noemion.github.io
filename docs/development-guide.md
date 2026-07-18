@@ -6,7 +6,7 @@ footer_text: "Noemion · 开发指南"
 permalink: "/docs/development-guide.html"
 manual_id: "docs"
 manual_group: "guides"
-manual_order: 4
+manual_order: 5
 nav_title: "开发指南"
 page_heading: "Noemion 开发指南"
 page_lead: "把一项修改写成可被反例检验的主张，再依次固定权威依据、失败责任、验证材料和声明上限。"
@@ -23,8 +23,8 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 | 记录项 | 本例写法 |
 | --- | --- |
 | 可证伪主张 | 固定 A2A 版本与映射后，`completed` 保持外部来源；系统不得只凭该状态形成 `met` 或 `accepted` |
-| 真实消费者 | 协议适配设计、Drasor 会话准入、证据评估与发布决定者 |
-| 权威依据 | ADP-CORE 约束外部状态，DRO-CORE 约束会话上限，IKN-CORE 约束证据范围，AUT-CORE 约束决定权威 |
+| 真实消费者 | 协议适配设计、bounded runner 会话准入、证据评估与发布决定者 |
+| 权威依据 | ADP-CORE 约束外部状态，SESSION-CORE 约束会话上限，EVIDENCE-CORE 约束证据范围，AUT-CORE 约束决定权威 |
 | 支持与拒绝案例 | 完整保存来源后继续判断；缺少协议版本、对象身份或适用权威时停止 |
 | 当前证据 | 规范条款、场景和向量的一致性检查 |
 | 声明上限 | 可以说明资料保持一致；不能说明适配器、互操作或安全实现已经完成 |
@@ -82,17 +82,17 @@ badges: ["可证伪主张", "失败责任", "证据边界"]
 | 冲突与缓存边界 | 同一权威层的冲突规则，以及主体、租户、政策、会话、模型和截止点 | 按到达顺序选择，或跨边界复用旧结果 |
 | 动作复核 | 模型输出的候选身份，以及动作前的对象、目的、参数、预算和授权 | 模型看到高权威文字就获得工具能力 |
 
-供应商未公开的内部变换保持未知，不能写成“完整上下文已经保留”。模型返回工具请求后，控制平面仍按 AUT-CORE 与当前 Dromen 重新检查；工具成功只形成带来源的观察，不产生新权限、`met` 或 `accepted`。
+供应商未公开的内部变换保持未知，不能写成“完整上下文已经保留”。模型返回工具请求后，控制平面仍按 AUT-CORE 与当前 session contract 重新检查；工具成功只形成带来源的观察，不产生新权限、`met` 或 `accepted`。
 
 [NIST 智能体劫持研究](https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations)支持把可信内部指令与不可信外部数据分开；[MCP 工具规范](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)也要求客户端把工具注解视为不可信。完整案例与失败归属见[模型上下文装配边界研究提案](https://noemion.github.io/spec/model-context-assembly-proposal.html)。这些资料不定义 Noemion 的消息角色、字段或授权结果。
 
 ## 当前阶段怎样停止
 
-**当前策略：**项目只维护研究、规范、威胁、验证方案和公开资料。第一条未来实现切片只考虑 `ktise`、`elenk`、独立 `theor` 与必要的一致性检查；`pleko` 和 `drase` 等待真实消费者与相应安全边界。
+**当前策略：**项目只维护研究、规范、威胁、验证方案和公开资料。第一条未来实现切片只考虑 `form`、`lint`、独立 `inspect` 与必要的一致性检查；`compose` 和 `run` 等待真实消费者与相应安全边界。
 
-**已有成果：**END-CORE、END-FMT、END-P1、DIA-CORE 与现行向量已经限定未来形成、分层检查、独立读取和失败原子性。ADR-0012 记录 Rust 1.97.0 作为未来 Ktisor 与制品形成侧读取核心的候选语言；零 `unsafe`、首条切片零第三方 crate、受检算术和独立 Theor 都是未来约束，不是现有实现。
+**已有成果：**END-CORE、END-FMT、END-P2、DIA-CORE 与现行向量已经限定未来形成、分层检查、独立读取和失败原子性。ADR-0012 记录 Rust 1.97.0 作为未来 deterministic producer 与制品形成侧读取核心的候选语言；零 `unsafe`、首条切片零第三方 crate、受检算术和independent inspector 都是未来约束，不是现有实现。
 
-**限制条件：**当前没有 Ktisor、Theor、Drasor、`endem` CLI、适配器、运行时、实现级模糊测试或发布包。尚未定义的实现目录、仓库拆分、稳定 ABI 和协议 Profile 不属于当前接口。组件与动作名称的读音流畅度和口头区分度也没有完成人类验证。
+**限制条件：**当前没有 deterministic producer、independent inspector、bounded runner、`endem` CLI、适配器、运行时、实现级模糊测试或发布包。尚未定义的实现目录、仓库拆分、稳定 ABI 和协议 Profile 不属于当前接口。组件与动作名称的读音流畅度和口头区分度也没有完成人类验证。
 
 [GNU Coding Standards](https://www.gnu.org/prep/standards/standards.html)强调健壮、可靠的软件行为，并要求主动语态明确句子主体；[NIST SSDF 1.1](https://csrc.nist.gov/pubs/sp/800/218/final)提供可整合进不同生命周期的安全开发实践。[NIST AI 800-5](https://www.nist.gov/publications/summary-analysis-responses-request-information-regarding-security-considerations-ai)汇总的公开意见普遍认为，基础网络安全实践对 Agent 仍然有效，但需要针对模型输出连接工具和环境的风险继续调整。这些资料支持保留软件安全基线并增加 Agent 专项反例，不证明 Noemion 已经实现安全组件。
 

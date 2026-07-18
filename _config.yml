@@ -10,6 +10,9 @@ encoding: utf-8
 markdown: kramdown
 highlighter: rouge
 
+optional_front_matter:
+  enabled: false
+
 exclude:
   - design-system
   - experiments/
@@ -17,7 +20,6 @@ exclude:
   - content-quality-audit.md
   - homepage-design.md
   - sitewide-design-system.md
-  - sitemap.md
   - tests
   - vectors/
   - Gemfile

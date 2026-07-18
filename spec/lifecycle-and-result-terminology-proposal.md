@@ -13,11 +13,13 @@ document_status: "非规范研究提案"
 
 日期：2026-07-15
 
-结论状态：对象边界桌面审查完成；语义迁移与发行命名尚未进入规范
+结论状态：对象边界与现行名称已由 ADR-0037 采用；人类读音仍待验证
 
 适用范围：Endem 形成阶段、外部签名与证明关系、满足结果、形成失败、会话终止、证据有效性与覆盖度
 
-本提案不构成 ADR、CORE 规范、内容 Profile、登记项、迁移决定或实现要求，不进入 `registry.json`。它不修改现行 `nascent / coherent / attested`、`met / unmet / agno / fault`、`aseme`、`accepted / rejected / deferred`、`completed / failed / interrupted`、`valid / invalid / revoked`、`sufficient / insufficient`，也不提前改写 Dromen 提案向量中的 `subject.attested`。候选词不是别名、兼容值或规范化结果。
+> 当前词表使用 `formed / resolved`、`undetermined`、`no_allowed_projection` 与 `stopped`，并把外部陈述和验证关系移出内容状态。以下内容保存采用前的对象边界分析；现行定义以 [ADR-0037](../architecture/adr-0037-terminology-simplification.html) 为准。
+
+本提案不构成 ADR、CORE 规范、内容 Profile、登记项、迁移决定或实现要求，不进入 `registry.json`。文中的旧状态与 `subject.attested` 只用于说明迁移前的问题，不是现行接口、别名、兼容值或规范化结果。
 
 ## 直接结论
 

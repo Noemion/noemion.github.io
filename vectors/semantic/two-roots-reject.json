@@ -8,21 +8,21 @@
     "result": "reject",
     "clauses": ["END-CORE-001", "END-ERR-001"],
     "diagnostics": [
-      {"code": "endem.root.not_unique", "clause": "END-CORE-001", "location": "/input/skena/roots/1"}
+      {"code": "endem.root.not_unique", "clause": "END-CORE-001", "location": "/input/situation/roots/1"}
     ]
   },
   "input": {
-    "rhem": {"source_id": "source:request-002", "content": "生成报告并部署服务"},
-    "semion": {"symbols": [], "relations": []},
-    "skena": {
+    "source_expression": {"source_id": "source:request-002", "content": "生成报告并部署服务"},
+    "meaning_projection": {"symbols": [], "relations": []},
+    "situation": {
       "roots": ["situation:report-produced", "situation:service-deployed"],
       "situations": [
         {"id": "situation:report-produced", "relation": "rel:produced", "polarity": "positive"},
         {"id": "situation:service-deployed", "relation": "rel:deployed", "polarity": "positive"}
       ]
     },
-    "telis": {"mode": "kine"},
-    "krin": {"decision_authority": "authority:requester"},
-    "apor": []
+    "goal_direction": {"mode": "reach"},
+    "satisfaction_criteria": {"decision_authority": "authority:requester"},
+    "unresolved_meaning": []
   }
 }

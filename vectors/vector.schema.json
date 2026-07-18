@@ -34,7 +34,7 @@
               "spec_id": {"const": "AUT-CORE"},
               "version": {"const": "0.1.0-draft"},
               "clause": {"const": "AUT-SEM-001"},
-              "subject": {"type": "string", "pattern": "^/input/semion/relations/[0-9]+/projection$"},
+              "subject": {"type": "string", "pattern": "^/input/meaning_projection/relations/[0-9]+/projection$"},
               "projection_id": {"type": "string", "minLength": 1},
               "status": {"const": "satisfied"},
               "evidence_ref": {"type": "string", "minLength": 1}

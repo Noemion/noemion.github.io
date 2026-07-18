@@ -1,0 +1,27 @@
+---
+layout: default
+---
+{% assign decision_heading = page.title | replace: ' · Noemion', '' %}
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑">
+    <a href="{{ '/index.html' | relative_url }}">项目</a><span aria-hidden="true">/</span>
+    <a href="{{ '/architecture/index.html' | relative_url }}">架构设计</a><span aria-hidden="true">/</span>
+    <a href="{{ '/architecture/decisions.html' | relative_url }}">架构决策</a><span aria-hidden="true">/</span>
+    <span aria-current="page">{{ page.decision_id }}</span>
+  </nav>
+
+  <header class="content-introduction">
+    <h1>{{ decision_heading }}</h1>
+    <p>{{ page.summary }}</p>
+    <div class="badges"><span class="badge">当前策略</span><span class="badge">{{ page.decision_date }}</span></div>
+  </header>
+
+  <article class="manual-article architecture-decision-article">
+    {{ content }}
+  </article>
+
+  <div class="next-prev">
+    <a href="{{ page.previous_url | relative_url }}">← {{ page.previous_label }}</a>
+    <a href="{{ '/architecture/decisions.html' | relative_url }}">返回架构决策</a>
+  </div>
+</main>

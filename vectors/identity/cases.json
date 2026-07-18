@@ -9,7 +9,7 @@
       "object_kind": "endem",
       "object_spec": "END-CORE@0.1.0-draft",
       "representation": "END-FMT@0.1.0-draft",
-      "profile": "END-P1@0.1.0-draft",
+      "profile": "END-P2@0.1.0-draft",
       "input_boundary_defined": true,
       "all_context_compared": true
     },
@@ -29,7 +29,7 @@
       "object_kind": "endem",
       "object_spec": "END-CORE@0.1.0-draft",
       "representation": "END-FMT@0.1.0-draft",
-      "profile": "END-P1@0.1.0-draft",
+      "profile": "END-P2@0.1.0-draft",
       "algorithm": "sha-256",
       "output_bits": 256,
       "digest": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -74,13 +74,13 @@
       "object_reference": "baseline.reference",
       "object_kind": "endem",
       "object_spec": "END-CORE@0.1.0-draft",
-      "object_profile": "END-P1@0.1.0-draft",
+      "object_profile": "END-P2@0.1.0-draft",
       "claim_kind": "publication-attestation",
       "purpose": "public-release-review",
       "audience": "release-reviewers",
       "subject": "maintainer@example.invalid",
       "policy": "release-policy@0.1.0-draft",
-      "evidence_refs": ["iknem@example-digest"],
+      "evidence_refs": ["evidence_entry@example-digest"],
       "critical_fields_protected": true,
       "algorithm_protected": true,
       "cross_context_replay_allowed": false
@@ -105,7 +105,7 @@
       "policy_satisfied": true,
       "final_decision": "deferred",
       "signature_proves_truth": false,
-      "signature_grants_capability": false,
+      "signature_allows_capability": false,
       "log_inclusion_is_acceptance": false,
       "domains_separate": true
     },
@@ -153,14 +153,14 @@
       "source_fidelity_claim_without_companion": false,
       "inherits_source_identity": false,
       "inherits_signature": false,
-      "inherits_iknem": false,
+      "inherits_evidence": false,
       "inherits_acceptance": false,
       "inherits_capability": false,
       "semantic_equivalence_claim": false
     }
   },
   "cases": [
-    {"id":"ID-VALID-DOMAIN-CONTEXT-001","proposal":{"domain":{"id":"synem.exact-bytes","object_kind":"synem","object_spec":"SYN-CORE@0.1.0-draft","representation":"SYN-FMT@future","profile":"SYN-P@future"},"reference":{"domain":"synem.exact-bytes@1","object_kind":"synem","object_spec":"SYN-CORE@0.1.0-draft","representation":"SYN-FMT@future","profile":"SYN-P@future"}},"expect":{"result":"accept","clause":"ID-DOM-001"}},
+    {"id":"ID-VALID-DOMAIN-CONTEXT-001","proposal":{"domain":{"id":"closure.exact-bytes","object_kind":"endem_closure","object_spec":"CLOSURE-CORE@0.1.0-draft","representation":"CLOSURE-FMT@future","profile":"CLOSURE-P@future"},"reference":{"domain":"closure.exact-bytes@1","object_kind":"endem_closure","object_spec":"CLOSURE-CORE@0.1.0-draft","representation":"CLOSURE-FMT@future","profile":"CLOSURE-P@future"}},"expect":{"result":"accept","clause":"ID-DOM-001"}},
     {"id":"ID-VALID-EXACT-BYTE-RANGE-001","proposal":{"bytes":{"range":{"start":0,"length":1024}}},"expect":{"result":"accept","clause":"ID-BYT-001"}},
     {"id":"ID-VALID-IMMUTABLE-REFERENCE-001","proposal":{"reference":{"digest":"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"}},"expect":{"result":"accept","clause":"ID-REF-001"}},
     {"id":"ID-VALID-ALGORITHM-POLICY-001","proposal":{"algorithm_policy":{"minimum_security_bits":192}},"expect":{"result":"accept","clause":"ID-ALG-001"}},
@@ -181,9 +181,9 @@
     {"id":"ID-REJECT-SEMANTIC-PROMOTION-001","proposal":{"equivalence":{"exact_identity_only":false,"semantic_key":"publisher-defined","same_means_true":true,"different_means_semantically_different":true,"derived_inherits_identity":true,"equivalence_claim":"automatic"}},"expect":{"result":"reject","clause":"ID-EQV-001","diagnostic":"identity.equivalence.overclaimed"}},
     {"id":"ID-REJECT-UNTYPED-STATEMENT-001","proposal":{"statement":{"profile":null,"context":null,"payload_type":null,"purpose":null,"audience":null,"critical_fields_protected":false,"algorithm_protected":false,"cross_context_replay_allowed":true}},"expect":{"result":"reject","clause":"ID-STM-001","diagnostic":"identity.statement.context_incomplete"}},
     {"id":"ID-REJECT-KID-ONLY-ENVELOPE-001","proposal":{"envelope":{"outside_object_identity":false,"statement_bound":false,"verification_material":["kid"],"material_origins_versioned":false,"missing_effects_declared":false,"key_id_is_hint_only":false,"own_identity":null,"inherits_subject_identity":true}},"expect":{"result":"reject","clause":"ID-ENV-001","diagnostic":"identity.envelope.material_incomplete"}},
-    {"id":"ID-REJECT-SIGNATURE-AS-TRUTH-001","proposal":{"authority":{"signer_authenticated":false,"role_authorized":false,"statement_applicable":false,"policy_satisfied":false,"final_decision":"accepted","signature_proves_truth":true,"signature_grants_capability":true,"log_inclusion_is_acceptance":true,"domains_separate":false}},"expect":{"result":"reject","clause":"ID-AUT-001","diagnostic":"identity.authority.overclaimed"}},
+    {"id":"ID-REJECT-SIGNATURE-AS-TRUTH-001","proposal":{"authority":{"signer_authenticated":false,"role_authorized":false,"statement_applicable":false,"policy_satisfied":false,"final_decision":"accepted","signature_proves_truth":true,"signature_allows_capability":true,"log_inclusion_is_acceptance":true,"domains_separate":false}},"expect":{"result":"reject","clause":"ID-AUT-001","diagnostic":"identity.authority.overclaimed"}},
     {"id":"ID-REJECT-STALE-VALIDITY-001","proposal":{"validity":{"cutoff":null,"trust_roots":null,"policy":null,"signing_time_basis":null,"key_period_checked":false,"revocation_checked":false,"transparency_role_limited":false,"status_fresh":false,"offline_material_bounded":false,"cache_unbounded":true,"rotation_changes_content_identity":true,"revocation_changes_content_identity":true}},"expect":{"result":"reject","clause":"ID-VAL-001","diagnostic":"identity.validity.context_incomplete"}},
     {"id":"ID-REJECT-BUILD-ID-REPRODUCIBILITY-001","proposal":{"reproducibility":{"inputs_pinned":false,"dependency_closure_pinned":false,"tools_pinned":false,"parameters_pinned":false,"environment_constrained":false,"independent_paths":1,"output_identities":[],"byte_comparison":"not-run","shared_cache":true,"build_id_only":true,"difference_cause_claimed":"unknown-but-equal"}},"expect":{"result":"reject","clause":"ID-REP-001","diagnostic":"identity.reproducibility.unproven"}},
-    {"id":"ID-REJECT-INHERITED-TRUST-001","proposal":{"relation":{"source_identity":null,"derived_identity":null,"transformation":null,"producer":null,"loss_manifest":[],"verification_conditions":[],"raw_source_in_derived":true,"source_references_closed":false,"companion_public":true,"source_fidelity_claim_without_companion":true,"inherits_source_identity":true,"inherits_signature":true,"inherits_iknem":true,"inherits_acceptance":true,"inherits_capability":true,"semantic_equivalence_claim":true}},"expect":{"result":"reject","clause":"ID-REL-001","diagnostic":"identity.relation.inherited"}}
+    {"id":"ID-REJECT-INHERITED-TRUST-001","proposal":{"relation":{"source_identity":null,"derived_identity":null,"transformation":null,"producer":null,"loss_manifest":[],"verification_conditions":[],"raw_source_in_derived":true,"source_references_closed":false,"companion_public":true,"source_fidelity_claim_without_companion":true,"inherits_source_identity":true,"inherits_signature":true,"inherits_evidence":true,"inherits_acceptance":true,"inherits_capability":true,"semantic_equivalence_claim":true}},"expect":{"result":"reject","clause":"ID-REL-001","diagnostic":"identity.relation.inherited"}}
   ]
 }

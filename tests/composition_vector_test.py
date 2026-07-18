@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 VECTOR_PATH = ROOT / "vectors" / "composition" / "cases.json"
 CASE_ID = re.compile(r"^CV-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
 CLAUSES = {"END-CMP-001", "END-CMP-002", "END-CMP-003", "END-CMP-004"}
-RESULTS = {"met", "unmet", "agno", "fault"}
+RESULTS = {"met", "unmet", "undetermined", "fault"}
 OPERATORS = {"all_of", "any_of"}
 
 
@@ -74,15 +74,15 @@ def evaluate_node(node_id, nodes, leaf_results):
             return "unmet"
         if "fault" in results:
             return "fault"
-        if "agno" in results:
-            return "agno"
+        if "undetermined" in results:
+            return "undetermined"
         return "met"
     if "met" in results:
         return "met"
     if "fault" in results:
         return "fault"
-    if "agno" in results:
-        return "agno"
+    if "undetermined" in results:
+        return "undetermined"
     return "unmet"
 
 
@@ -138,7 +138,7 @@ def main():
         errors.append("composition vectors must use end-core.composition-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("composition vectors must pin END-CORE 0.1.0-draft")
-    if "not a parser, Drasor, evaluator, runtime, or component implementation" not in document.get("description", ""):
+    if "not a parser, bounded runner, evaluator, runtime, or component implementation" not in document.get("description", ""):
         errors.append("composition vectors must state their non-implementation boundary")
     cases = document.get("cases")
     if not isinstance(cases, list) or len(cases) != 12:

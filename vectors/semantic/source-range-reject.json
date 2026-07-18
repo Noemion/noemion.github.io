@@ -8,11 +8,11 @@
     "result": "reject",
     "clauses": ["END-SRC-001", "END-ERR-001"],
     "diagnostics": [
-      {"code": "endem.rhem.range_out_of_bounds", "clause": "END-SRC-001", "location": "/input/rhem/range"}
+      {"code": "endem.source_expression.range_out_of_bounds", "clause": "END-SRC-001", "location": "/input/source_expression/range"}
     ]
   },
   "input": {
-    "rhem": {
+    "source_expression": {
       "source_id": "source:request-006",
       "subject": "authority:requester",
       "media_type": "text/plain",
@@ -21,10 +21,10 @@
       "content": "为已登记项目生成安全评审报告",
       "range": {"unit": "unicode-scalar", "start": 0, "length": 16}
     },
-    "semion": {"symbols": [], "relations": []},
-    "skena": {"roots": ["situation:report-produced"], "situations": []},
-    "telis": {"mode": "kine"},
-    "krin": {"decision_authority": "authority:requester"},
-    "apor": []
+    "meaning_projection": {"symbols": [], "relations": []},
+    "situation": {"roots": ["situation:report-produced"], "situations": []},
+    "goal_direction": {"mode": "reach"},
+    "satisfaction_criteria": {"decision_authority": "authority:requester"},
+    "unresolved_meaning": []
   }
 }

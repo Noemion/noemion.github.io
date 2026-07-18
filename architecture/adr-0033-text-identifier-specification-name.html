@@ -14,7 +14,7 @@ summary: "解释 TEXT-IDENTIFIER-CORE 为什么是一组文本解释规则，而
     <h2>先确定这个 ID 命名什么</h2>
     <p class="lead">同一段自然语言会同时经过来源文件、解码文本、结构字段、安全显示和模型输入。标准的职责是让每一层声明自己实际处理的码点、变换和比较规则，而不是把这些层统称为“文本”。</p>
     <div class="table-wrap"><table><thead><tr><th>名称位置</th><th>现行身份</th><th>不能推断什么</th></tr></thead><tbody>
-      <tr><td>规范 ID</td><td><code>TEXT-IDENTIFIER-CORE</code>，跨 Endem、Synem、Dromen、Iknem、诊断、适配和模型候选约束文本解释</td><td>不是文件媒体类型、容器、字段或实现组件</td></tr>
+      <tr><td>规范 ID</td><td><code>TEXT-IDENTIFIER-CORE</code>，跨 Endem、Endem closure、session contract、evidence entry、诊断、适配和模型候选约束文本解释</td><td>不是文件媒体类型、容器、字段或实现组件</td></tr>
       <tr><td>条款前缀</td><td><code>TEXT-*</code>，标识十二项可独立引用的规范责任</td><td>不是允许任意 Unicode 标识符，也不声明文本语义等价</td></tr>
       <tr><td>规范源文件</td><td><code>text-identifier-core.md</code>，承载版本化条款</td><td>Markdown 文件名不成为运行时对象或稳定 API</td></tr>
       <tr><td>现有制品格式</td><td>仍由 END-FMT 与具体 Profile 决定字节和槽位</td><td>本决定不创建 <code>.txt</code>、<code>.text</code> 或其他新格式</td></tr>
@@ -28,7 +28,7 @@ summary: "解释 TEXT-IDENTIFIER-CORE 为什么是一组文本解释规则，而
     <h2>为什么 TXT-CORE 必须一次性退出</h2>
     <div class="table-wrap"><table><thead><tr><th>实际误读</th><th>会导致什么实现错误</th><th>现行边界</th></tr></thead><tbody>
       <tr><td>把 <code>TXT-CORE</code> 读成 <code>.txt</code></td><td>为并不存在的通用文本文件设计解析器、扩展名或媒体类型</td><td>它不是 <code>.txt</code> 文件格式；现有格式和 Profile 不变</td></tr>
-      <tr><td>把规范源当作来源文件层</td><td>假定解码后的 <code>rhem.content</code> 等于原始来源字节，丢失编码与变换证据</td><td>原始字节、解码文本、提交后的来源表达和派生视图分别绑定</td></tr>
+      <tr><td>把规范源当作来源文件层</td><td>假定解码后的 <code>source_expression.content</code> 等于原始来源字节，丢失编码与变换证据</td><td>原始字节、解码文本、提交后的来源表达和派生视图分别绑定</td></tr>
       <tr><td>把“文本”理解为单一字符串类型</td><td>让描述文本、结构标识符、登记词和显示标签共享规范化与比较规则</td><td>每个槽先声明职责，再选择允许码点、比较域和显示策略</td></tr>
       <tr><td>只在注释中解释旧缩写</td><td>代码、导航、Issue 和口述仍持续强化错误对象</td><td>名称本身已误导职责，注释不能修复机器登记和发现入口</td></tr>
     </tbody></table></div>
@@ -71,7 +71,7 @@ summary: "解释 TEXT-IDENTIFIER-CORE 为什么是一组文本解释规则，而
       <tr><td>一致性证据</td><td><code>vectors/text-identifier/</code> 与 <code>text_identifier_vector_test.py</code></td><td>十二个允许案例、十二个确定拒绝和诊断责任</td></tr>
       <tr><td>公开解释</td><td><code>/specifications/text-and-identifiers.html</code></td><td>先按开发任务解释，再链接唯一规范源，不复制第二套条款</td></tr>
     </tbody></table></div>
-    <p>标准 ID 变化没有改变 END-FMT 字节、END-P1 字段、ASCII 结构标识符、Unicode 文本允许范围、内容身份或授权模型。未来若规范职责变化，必须重新审查名称；不能靠继续扩充“TEXT”一词吞并新对象。</p>
+    <p>标准 ID 变化没有改变 END-FMT 字节、END-P2 字段、ASCII 结构标识符、Unicode 文本允许范围、内容身份或授权模型。未来若规范职责变化，必须重新审查名称；不能靠继续扩充“TEXT”一词吞并新对象。</p>
   </section>
 
   <section class="content-stack">

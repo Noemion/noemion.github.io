@@ -1,0 +1,142 @@
+{
+  "profile_format": "endem.profile.v1",
+  "profile_id": 3,
+  "name": "END-P2",
+  "version": "0.1.0-draft",
+  "status": "experimental-design-profile",
+  "artifact_role": "source-bearing-formation",
+  "publishable": false,
+  "core": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "format": {"id": "END-FMT", "version": "0.1.0-draft"},
+  "conformance": {
+    "standalone_claim_ceiling": "profile-accepted",
+    "content_acceptance_external_prerequisites": [
+      {
+        "spec_id": "AUT-CORE",
+        "version": "0.1.0-draft",
+        "clause": "AUT-SEM-001",
+        "physical_binding": "unfrozen"
+      }
+    ]
+  },
+  "limits": {
+    "max_artifact_bytes": 16777216,
+    "max_record_count": 6,
+    "max_graph_nodes": 65536,
+    "max_graph_edges": 262144,
+    "max_nesting_depth": 16,
+    "max_string_bytes": 1048576,
+    "max_decompressed_bytes": 16777216,
+    "max_total_allocation_bytes": 67108864
+  },
+  "required_record_kinds": [1, 2, 3, 4, 5, 6],
+  "allowed_states": [0],
+  "allowed_record_flags": [1],
+  "compression": false,
+  "encryption": false,
+  "identifier_pattern": "^[A-Za-z][A-Za-z0-9._:/#-]{0,254}$",
+  "records": {
+    "1": {"name": "source_expression", "schema": "source_expression", "required_keys": [1, 2, 3, 4, 5, 6, 7]},
+    "2": {"name": "meaning_projection", "schema": "meaning_projection", "required_keys": [1, 2]},
+    "3": {"name": "situation", "schema": "situation", "required_keys": [1, 2]},
+    "4": {"name": "goal_direction", "schema": "goal_direction", "required_keys": [1]},
+    "5": {"name": "satisfaction_criteria", "schema": "satisfaction_criteria", "required_keys": [1, 2, 3, 4, 5]},
+    "6": {"name": "unresolved_meaning", "schema": "unresolved_meaning", "required_keys": [1]}
+  },
+  "maps": {
+    "source_expression": {
+      "1": {"name": "source_id", "type": "identifier"},
+      "2": {"name": "subject", "type": "identifier"},
+      "3": {"name": "media_type", "type": "media-type"},
+      "4": {"name": "language", "type": "language-tag"},
+      "5": {"name": "version", "type": "text"},
+      "6": {"name": "content", "type": "text"},
+      "7": {"name": "range", "type": "source_range"}
+    },
+    "source_range": {
+      "1": {"name": "unit", "type": "enum:range_unit"},
+      "2": {"name": "start", "type": "uint"},
+      "3": {"name": "length", "type": "uint"}
+    },
+    "meaning_projection": {
+      "1": {"name": "symbols", "type": "array<symbol>"},
+      "2": {"name": "relations", "type": "array<relation>"}
+    },
+    "symbol": {
+      "1": {"name": "id", "type": "identifier"},
+      "2": {"name": "kind", "type": "identifier"},
+      "3": {"name": "source_ref", "type": "identifier"}
+    },
+    "relation": {
+      "1": {"name": "id", "type": "identifier"},
+      "2": {"name": "predicate", "type": "identifier"},
+      "3": {"name": "roles", "type": "array<role>"},
+      "4": {"name": "projection", "type": "projection"}
+    },
+    "role": {
+      "1": {"name": "name", "type": "identifier"},
+      "2": {"name": "symbol", "type": "identifier"}
+    },
+    "projection": {
+      "1": {"name": "kind", "type": "enum:projection_kind"},
+      "2": {"name": "id", "type": "identifier"}
+    },
+    "situation": {
+      "1": {"name": "root", "type": "identifier"},
+      "2": {"name": "situations", "type": "array<situation>"}
+    },
+    "situation": {
+      "1": {"name": "id", "type": "identifier"},
+      "2": {"name": "relation", "type": "identifier"},
+      "3": {"name": "polarity", "type": "enum:polarity"}
+    },
+    "goal_direction": {
+      "1": {"name": "mode", "type": "enum:goal_direction_mode"}
+    },
+    "satisfaction_criteria": {
+      "1": {"name": "required_observations", "type": "array<observation_requirement>"},
+      "2": {"name": "required_evidence", "type": "array<identifier>"},
+      "3": {"name": "on_missing_observation", "type": "enum:missing_policy"},
+      "4": {"name": "on_evaluation_error", "type": "enum:error_policy"},
+      "5": {"name": "decision_authority", "type": "identifier"}
+    },
+    "observation_requirement": {
+      "1": {"name": "relation", "type": "identifier"},
+      "2": {"name": "match", "type": "enum:relation_match"}
+    },
+    "unresolved_meaning": {
+      "1": {"name": "items", "type": "array<unresolved_item>"}
+    },
+    "unresolved_item": {
+      "1": {"name": "id", "type": "identifier"},
+      "2": {"name": "source_ref", "type": "identifier"},
+      "3": {"name": "candidates", "type": "array<identifier>"},
+      "4": {"name": "conflict", "type": "text"},
+      "5": {"name": "impact_scope", "type": "array<identifier>"},
+      "6": {"name": "allowed_resolutions", "type": "array<enum:projection_kind>"},
+      "7": {"name": "decision_authority", "type": "identifier"}
+    }
+  },
+  "enums": {
+    "range_unit": {"0": "unicode-scalar"},
+    "projection_kind": {"0": "rule", "1": "named-authority"},
+    "polarity": {"0": "positive", "1": "negative"},
+    "goal_direction_mode": {"0": "reach"},
+    "relation_match": {"0": "same-roles"},
+    "missing_policy": {"0": "undetermined"},
+    "error_policy": {"0": "fault"}
+  },
+  "canonical_array_order": {
+    "symbols": "id",
+    "relations": "id",
+    "roles": "name",
+    "situations": "id",
+    "required_observations": "relation",
+    "required_evidence": "encoded-text",
+    "unresolved_items": "id",
+    "candidates": "encoded-text",
+    "impact_scope": "encoded-text",
+    "allowed_resolutions": "uint"
+  },
+  "notes": "First closed source-bearing formation Profile under END-CORE, as formalized by ADR-0023, clarified by ADR-0030, and bounded for source stripping by ADR-0036. P0 remains structural experiment evidence. P2 contains decoded natural-language source content, supports formed Endem and reach only, and is not the final release Profile. A future source-stripped release Profile must define retained semantics, source-reference rewriting, loss, disclosure and new identity. Authority-looking identifiers are untrusted selectors rather than authorization proofs, so the standalone file cannot exceed Profile acceptance. ADR-0016 defines abstract maintain time semantics, ADR-0018 defines abstract single-role quantification, ADR-0019 defines abstract measurement and threshold semantics, and ADR-0020 defines abstract all_of/any_of composition semantics, but new Profiles must define their physical fields. Unknown map keys are rejected."
+}

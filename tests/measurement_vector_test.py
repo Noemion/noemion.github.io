@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 VECTOR_PATH = ROOT / "vectors" / "measurement" / "cases.json"
 CASE_ID = re.compile(r"^MV-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
 CLAUSES = {"END-MSR-001", "END-MSR-002", "END-MSR-003", "END-MSR-004"}
-RESULTS = {"met", "unmet", "agno", "fault"}
+RESULTS = {"met", "unmet", "undetermined", "fault"}
 REDUCERS = {"point", "count", "sum", "min", "max", "arithmetic_mean", "fraction", "quantile", "model_estimate"}
 COMPARATORS = {"lt", "le", "gt", "ge", "eq"}
 UNIT_DIMENSIONS = {"ms": "time", "s": "time", "1": "dimensionless", "%": "dimensionless", "byte": "information"}
@@ -33,16 +33,16 @@ def validate_target(target):
     procedure = target.get("procedure")
     if not isinstance(procedure, dict) or any(not text(procedure.get(k)) for k in ("id", "producer", "version", "window", "inclusion", "exclusion", "unit", "dimension")):
         return "END-MSR-001"
-    if procedure.get("population") not in {"fixed", "generalized"}:
+    if procedure.get("population") not in {"fixed_population", "generalized_population"}:
         return "END-MSR-001"
-    if procedure["population"] == "generalized" and (not text(procedure.get("statistical_model")) or not text(procedure.get("assumptions"))):
+    if procedure["population"] == "generalized_population" and (not text(procedure.get("statistical_model")) or not text(procedure.get("assumptions"))):
         return "END-MSR-001"
     unit = procedure["unit"]
     if UNIT_DIMENSIONS.get(unit) != procedure["dimension"]:
         return "END-MSR-002"
     if not isinstance(procedure.get("min_count"), int) or isinstance(procedure.get("min_count"), bool) or procedure["min_count"] <= 0:
         return "END-MSR-003"
-    if procedure.get("missing") != "agno":
+    if procedure.get("missing") != "undetermined":
         return "END-MSR-003"
     reducer = procedure.get("reducer")
     if not isinstance(reducer, dict) or reducer.get("mode") not in REDUCERS:
@@ -87,7 +87,7 @@ def classify(target, observation):
     if not isinstance(count, int) or isinstance(count, bool) or count < 0:
         return None, "END-MSR-003"
     if observation["status"] == "incomplete" or count < target["procedure"]["min_count"]:
-        return "agno", None
+        return "undetermined", None
     if not finite_number(observation.get("value")) or not text(observation.get("unit")):
         return None, "END-MSR-002"
     if UNIT_DIMENSIONS.get(observation["unit"]) != target["procedure"]["dimension"]:
@@ -100,18 +100,18 @@ def classify(target, observation):
     boundary = normalize(threshold["value"], threshold["unit"])
     op = target["comparison"]["op"]
     if op == "le":
-        return ("met" if high <= boundary else "unmet" if low > boundary else "agno"), None
+        return ("met" if high <= boundary else "unmet" if low > boundary else "undetermined"), None
     if op == "lt":
-        return ("met" if high < boundary else "unmet" if low >= boundary else "agno"), None
+        return ("met" if high < boundary else "unmet" if low >= boundary else "undetermined"), None
     if op == "ge":
-        return ("met" if low >= boundary else "unmet" if high < boundary else "agno"), None
+        return ("met" if low >= boundary else "unmet" if high < boundary else "undetermined"), None
     if op == "gt":
-        return ("met" if low > boundary else "unmet" if high <= boundary else "agno"), None
+        return ("met" if low > boundary else "unmet" if high <= boundary else "undetermined"), None
     if low == high == boundary:
         return "met", None
     if high < boundary or low > boundary:
         return "unmet", None
-    return "agno", None
+    return "undetermined", None
 
 
 def proposal_violation(case):
@@ -137,7 +137,7 @@ def main():
         errors.append("measurement vectors must use end-core.measurement-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("measurement vectors must pin END-CORE 0.1.0-draft")
-    if "not a telemetry collector, benchmark runner, statistical engine, Drasor, evaluator, or component implementation" not in document.get("description", ""):
+    if "not a telemetry collector, benchmark runner, statistical engine, bounded runner, evaluator, or component implementation" not in document.get("description", ""):
         errors.append("measurement vectors must state their non-implementation boundary")
     cases = document.get("cases")
     if not isinstance(cases, list) or len(cases) != 12:

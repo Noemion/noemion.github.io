@@ -26,11 +26,13 @@ MANUAL_MARKDOWN_FILES = sorted(
     [*SOURCE_ROOT.glob("docs/*.md"), *SOURCE_ROOT.glob("endem/docs/*.md")]
 )
 SPEC_MARKDOWN_FILES = sorted(SOURCE_ROOT.glob("spec/*.md"))
+ARCHITECTURE_MARKDOWN_FILES = sorted(SOURCE_ROOT.glob("architecture/*.md"))
 PAGE_DIRECTORY_MARKDOWN_FILES = sorted(SOURCE_ROOT.glob("pages/*.md"))
 SOURCE_PAGE_FILES = sorted([
     *SOURCE_HTML_FILES,
     *MANUAL_MARKDOWN_FILES,
     *SPEC_MARKDOWN_FILES,
+    *ARCHITECTURE_MARKDOWN_FILES,
     *PAGE_DIRECTORY_MARKDOWN_FILES,
 ])
 HTML_FILES = SOURCE_HTML_FILES if SOURCE_ONLY else sorted(ROOT.rglob("*.html"))
@@ -79,9 +81,9 @@ REQUIRED_CORE_ROUTES = {
     "endem/index.html",
     *MANUAL_ROUTE_ORDERS["endem"],
     "specifications/endem.html",
-    "specifications/synem.html",
-    "specifications/dromen.html",
-    "specifications/iknem.html",
+    "specifications/endem-closure.html",
+    "specifications/session-contract.html",
+    "specifications/evidence-entry.html",
     "specifications/diagnostics.html",
     "specifications/adapters.html",
     "specifications/identity.html",
@@ -115,13 +117,14 @@ REQUIRED_CORE_ROUTES = {
     "architecture/adr-0034-pronunciation-and-oral-distinction.html",
     "architecture/adr-0035-public-actions-and-internal-responsibilities.html",
     "architecture/adr-0036-source-bearing-and-stripped-release.html",
-    "components/ktisor.html",
-    "components/theor.html",
-    "components/drasor.html",
+    "components/producer.html",
+    "components/inspector.html",
+    "components/runner.html",
 }
 DOC_GUIDE_ORDER = [
     "docs/getting-started.html",
     "docs/terminology-and-pronunciation.html",
+    "docs/terminology-audit.html",
     "docs/architecture-guide.html",
     "docs/development-guide.html",
     "docs/endem-reference.html",
@@ -135,6 +138,9 @@ DOC_GUIDE_HEADINGS = {
         "直接结论", "读音待定时怎样协作", "证据适用边界", "招募前先固定研究数据边界", "两阶段验证", "任务与材料", "通过与停止规则",
         "证据记录", "人工智能只做辅助探针", "当前状态",
     ],
+    "docs/terminology-audit.html": [
+        "直接结论", "现在应该怎样称呼", "六个字段不再要求读者记词源", "哪些冲突已经被消除", "检查覆盖到哪里", "旧名称怎样处理", "仍待真实人类验证",
+    ],
     "docs/architecture-guide.html": [
         "先用一张责任图定位问题", "用一次 Agent 工作读图", "看到终态后按主张强度继续核对", "委托或恢复时重新建立边界", "三个实现域不能合并", "按问题进入进阶资料", "当前可以证明什么",
     ],
@@ -142,10 +148,10 @@ DOC_GUIDE_HEADINGS = {
         "先写一个可被反例推翻的主张", "用一条变更记录贯穿责任", "按权威顺序修改", "按变更类型选择证据", "模型参与时先固定实际输入", "当前阶段怎样停止",
     ],
     "docs/endem-reference.html": [
-        "应用总览", "Ktisor 子命令", "theor 的独立性", "drase 的隔离性", "不建设独立模型平台",
+        "应用总览", "deterministic producer 子命令", "inspect 的独立性", "run 的隔离性", "不建设独立模型平台",
     ],
     "docs/specifications-reference.html": [
-        "按工程问题找资料", "权威顺序", "资料状态与使用边界", "Endem", "Synem", "Dromen、Iknem 与横切边界", "ADR 与开放问题",
+        "按工程问题找资料", "权威顺序", "资料状态与使用边界", "Endem", "Endem closure", "session contract、evidence entry 与横切边界", "ADR 与开放问题",
     ],
 }
 HOME_HEADINGS = [
@@ -224,7 +230,7 @@ HISTORICAL_ADR_0009_BOUNDARIES = (
 ADR_0011_READING_HEADINGS = [
     "先分清格式能够证明什么",
     "开发者应按什么顺序读取",
-    "END-P0、END-P1 与发布版分别做什么",
+    "END-P0、END-P2 与发布版分别做什么",
     "为什么采用固定目录与受限 CBOR",
     "权威机制怎样限定本决定",
     "当前限制与开发入口",
@@ -234,8 +240,8 @@ ADR_0011_READING_BOUNDARIES = (
     "用一个 valid=true 合并这些层次",
     "结构接受、语义未执行",
     "六个空映射不是最小有效 Endem",
-    "最终发布不能只删除 rhem.content",
-    "当前规范与已执行向量不是 Ktisor、Theor 或正式独立读取组件",
+    "最终发布不能只删除 source_expression.content",
+    "当前规范与已执行向量不是 deterministic producer、independent inspector 或正式独立读取组件",
     "well-formed、valid 和 application-expected",
     "删除一个记录或字段就能得到安全、闭合、可发布的 Endem",
     "当前不能生成",
@@ -243,7 +249,7 @@ ADR_0011_READING_BOUNDARIES = (
 ADR_0012_REVIEW_HEADINGS = [
     "先分清已经决定与尚未决定",
     "历史实验实际回答了什么",
-    "为什么只把 Rust 作为 Ktisor 起点",
+    "为什么只把 Rust 作为 deterministic producer 起点",
     "安全 Rust 仍然不能证明什么",
     "进入代码阶段前怎样重新评审",
     "什么情况会改变这一基线",
@@ -258,10 +264,10 @@ ADR_0012_REVIEW_BOUNDARIES = (
     "Cargo 的 release 默认关闭该检查",
     "仅提交 Cargo.lock 不会自动建立这项保证",
     "版本新旧本身不构成安全结论",
-    "这里没有 Ktisor、Theor、CLI、稳定命令、构建配置或实现级符合性结论",
+    "这里没有 deterministic producer、independent inspector、CLI、稳定命令、构建配置或实现级符合性结论",
 )
 ADR_0013_PROFILE_HEADINGS = [
-    "先确定 END-P1 是什么",
+    "先确定 END-P2 是什么",
     "开发者应按什么顺序检查",
     "六个记录分别回答什么",
     "封闭 schema 怎样失败",
@@ -280,7 +286,7 @@ ADR_0013_PROFILE_BOUNDARIES = (
 )
 ADR_0014_SOURCE_HEADINGS = [
     "先判断来源清单能够证明什么",
-    "一项输入怎样进入 END-P1",
+    "一项输入怎样进入 END-P2",
     "十种指令为什么保持封闭",
     "语义确认与动作授权怎样分开",
     "确定性、来源保真和失败怎样验证",
@@ -294,7 +300,7 @@ ADR_0014_SOURCE_BOUNDARIES = (
     "语义确认扩张为一般动作授权",
     "不得声称保存原始来源字节",
     "不保留别名、兼容解析或自动迁移",
-    "没有 Ktisor 解析器、实现仓库、稳定命令",
+    "没有 deterministic producer 解析器、实现仓库、稳定命令",
 )
 ADR_0015_RESULT_HEADINGS = [
     "用一次依赖升级看五类结果",
@@ -308,12 +314,12 @@ ADR_0015_RESULT_BOUNDARIES = (
     "它们可以同时成立，也可以各自失败",
     "completed 不等于 met 或 accepted",
     "单份 valid 不等于整体 sufficient",
-    "尚未通过真实使用者的朗读、听写和成组口头区分",
-    "外部签名、验证政策、截止点、撤销和依赖方判断必须保持为内容之外的多项关系",
+    "首次发行前仍须经过真实使用者的朗读、听写和成组口头区分",
+    "外部签名陈述、验证政策、截止点、撤销状态和依赖方判断必须分别记录",
     "新观察或规则只能产生新结果",
     "不得回写或覆盖输入事实",
     "协议版本或外部状态变化只要求适配器重新记录映射",
-    "没有 Drasor、决定引擎、结果事件编码或组件测试",
+    "没有 bounded runner、决定引擎、结果事件编码或组件测试",
 )
 ADR_0016_TIME_HEADINGS = [
     "用一次部署检查读懂持续目标",
@@ -325,14 +331,14 @@ ADR_0016_TIME_HEADINGS = [
 ]
 ADR_0016_TIME_BOUNDARIES = (
     "不是一个定时器参数",
-    "mene 是现行规范草案值，但已未通过首次发行拼写的桌面审查",
-    "reach / maintain 仍只是等待人类朗读、听写和成组口头区分的候选",
+    "reach / maintain 已作为直白、可恢复职责的现行枚举采用",
+    "首次发行前接受真实使用者的朗读、听写和成组口头区分验证",
     "单调时钟只能测量同一声明域内的经过时间",
     "所有目标范围统一采用项目定义的半开区间 [start, end)",
     "“采样”只说明证据怎样取得，不是第三种连续性政策",
     "其聚合区间端点规则不同，Gauge 只表示采样值",
     "远端时间戳和 completed 都不是本地时钟权威",
-    "本决定不增加 END-P1 字段",
+    "本决定不增加 END-P2 字段",
     "没有计时器、监控器或求值组件",
 )
 ADR_0017_NEGATION_HEADINGS = [
@@ -352,7 +358,7 @@ ADR_0017_NEGATION_BOUNDARIES = (
     "封闭的是一项有限观察任务，不是现实世界",
     "1 表示无选中行，2 表示错误",
     "工具成功、空结果或模型总结不产生负事实、完整性或动作授权",
-    "本决定不增加 END-P1 字段",
+    "本决定不增加 END-P2 字段",
     "没有日志收集器、策略引擎或求值器",
 )
 ADR_0018_QUANTIFICATION_HEADINGS = [
@@ -372,8 +378,8 @@ ADR_0018_QUANTIFICATION_BOUNDARIES = (
     "不得静默去重后把错误输入伪装成合法集合",
     "证据数量不是成员数量",
     "翻完分页只得到外部接收方可见列表",
-    "本决定不增加 END-P1 字段",
-    "不表示 Ktisor、Drasor、求值器或 CLI 已经实现",
+    "本决定不增加 END-P2 字段",
+    "不表示 deterministic producer、bounded runner、求值器或 CLI 已经实现",
 )
 ADR_0019_MEASUREMENT_HEADINGS = [
     "用一次延迟检查读懂测量链",
@@ -386,7 +392,7 @@ ADR_0019_MEASUREMENT_HEADINGS = [
 ADR_0019_MEASUREMENT_BOUNDARIES = (
     "不是一条仪表盘查询",
     "测量谓词必须同时固定构念、适用总体、可观察标准、预期用途和具名权威",
-    "population=fixed 或 time_scope=fixed",
+    "population=fixed_population 或 time_scope=utc_window",
     "目标统计量（estimand）",
     "不把难读的英文单独作为人类界面标签",
     "测量记录是关于事态的证据，不是事态本身",
@@ -395,7 +401,7 @@ ADR_0019_MEASUREMENT_BOUNDARIES = (
     "295–305ms，不能决定位于哪一侧",
     "初始公开草案不是字段标准",
     "单点逆函数检查不保证换算全域正确",
-    "不表示遥测采集器、基准运行器、统计引擎、Drasor 或求值器已经实现",
+    "不表示遥测采集器、基准运行器、统计引擎、bounded runner 或求值器已经实现",
 )
 GENERIC_ENGLISH_BADGES = {
     "Motivation", "Scope", "Non-goals", "Why", "Evidence",
@@ -543,7 +549,7 @@ UNCLEAR_CHINESE_UI_TERMS = re.compile(
 LEGACY_PUBLIC_TERMS = re.compile(
     r"\b(?:G(?:SIR|OBJ|SL)|S(?:SO)|N(?:SFE|IR|OBJ|SL)|H(?:OBJ))\b|"
     r"\bNo(?:esis|ema)\b|\b(?:Hori(?:zon)|Fulfill(?:ment))\b|"
-    r"\bnoem(?!ion\b)[a-z]+\b|\b(?:morph(?:e)|theor(?:ia)|synth(?:esis))\b|"
+    r"\bnoem(?!ion\b)[a-z]+\b|\b(?:morph(?:e)|inspect(?:ia)|synth(?:esis))\b|"
     r"(?:compiler-core|linker-loader|nsfe|gsir|gobj|sso|noem(?:a)-ir|"
     r"noem(?:a)-object|horizon-object|noesis-core|noem(?:a)-object-system|"
     r"horizon-engine|agent-harness|fulfillment-runtime|noem(?:a)-lifecycle)\.html|"
@@ -576,9 +582,9 @@ RETIRED_ACTION_EVIDENCE_PATHS = {
 }
 NORMATIVE_ROUTES = (
     "specifications/endem.html",
-    "specifications/synem.html",
-    "specifications/dromen.html",
-    "specifications/iknem.html",
+    "specifications/endem-closure.html",
+    "specifications/session-contract.html",
+    "specifications/evidence-entry.html",
     "specifications/diagnostics.html",
     "specifications/adapters.html",
     "specifications/identity.html",
@@ -620,15 +626,15 @@ CONTENT_LAYOUT_ROUTES = (
     "architecture/adr-0035-public-actions-and-internal-responsibilities.html",
     "architecture/adr-0036-source-bearing-and-stripped-release.html",
     "architecture/open-questions.html",
-    "components/ktisor.html",
-    "components/theor.html",
-    "components/drasor.html",
+    "components/producer.html",
+    "components/inspector.html",
+    "components/runner.html",
     "development/implementation-roadmap.html",
     "development/testing.html",
     "specifications/endem.html",
-    "specifications/synem.html",
-    "specifications/dromen.html",
-    "specifications/iknem.html",
+    "specifications/endem-closure.html",
+    "specifications/session-contract.html",
+    "specifications/evidence-entry.html",
     "specifications/diagnostics.html",
     "specifications/adapters.html",
     "specifications/identity.html",
@@ -652,9 +658,9 @@ HERO_SECTION_CLASSES = {
 }
 
 CURRENT_DOMAIN_IDENTIFIERS = {
-    "endem", "rhem", "semion", "skena", "telis", "krin", "apor", "phain",
-    "synem", "dromen", "iknem", "ktisor", "theor", "drasor",
-    "ktise", "elenk", "pleko", "theor", "drase",
+    "endem", "source_expression", "meaning_projection", "situation", "goal_direction", "satisfaction_criteria", "unresolved_meaning", "structured_observation",
+    "endem_closure", "session_contract", "evidence_entry", "producer", "inspect", "runner",
+    "form", "lint", "compose", "inspect", "run",
 }
 MAINSTREAM_LANGUAGE_KEYWORDS = {
     # C, C++, Java, ECMAScript, Go, Rust, Swift, Kotlin and Python keyword union.
@@ -679,7 +685,7 @@ REMOVED_PUBLIC_ROUTES = {
     "about/background.html", "news/index.html",
     "docs/installation-and-usage.html",
     "specifications/weave.html", "specifications/witness.html",
-    "components/core.html", "components/reader.html", "components/runner.html",
+    "components/core.html", "components/reader.html",
     "specifications/tekmor.html", "components/praxor.html",
     "architecture/adr-0022-tekmor-evidence-and-appraisal.html",
 }
@@ -687,19 +693,19 @@ REMOVED_PUBLIC_ROUTES = {
 REQUIRED_ARCHITECTURE_ROUTES = {
     "architecture/decisions.html": "architecture/index.html",
     "architecture/agent-system-boundaries.html": "architecture/index.html",
-    "components/drasor.html": "components/index.html",
+    "components/runner.html": "components/index.html",
 }
 
 SYSTEM_BOUNDARY_CONTRACTS = {
     "architecture/index.html": {
         "required": (
             "Endem",
-            "Synem",
-            "Iknem",
-            "Dromen",
-            "Ktisor",
-            "Theor",
-            "Drasor",
+            "Endem closure",
+            "evidence entry",
+            "session contract",
+            "deterministic producer",
+            "independent inspector",
+            "bounded runner",
             "形成侧检查和",
             "不共享",
             "模型候选",
@@ -746,12 +752,12 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             "非规范说明",
             "用一次依赖升级完成边界判断",
-            "目标内容（Endem / Synem）",
+            "目标内容（Endem / Endem closure）",
             "行动者与授权（ID / AUT）",
             "会话上限（DRO）",
             "外部调用（ADP / DIA）",
-            "观察与证据（phain / Iknem）",
-            "满足判断（krin）",
+            "观察与证据（structured_observation / evidence entry）",
+            "满足判断（satisfaction_criteria）",
             "最终决定（具名权威）",
             "六类问题由不同责任域回答",
             "目标只要求结果，还是还要求动作、转变或因果？",
@@ -763,13 +769,13 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "工作负载身份",
             "运行实例",
             "外部成功不直接成为 <code>met</code>",
-            "记忆与快照不恢复旧 Dromen",
+            "记忆与快照不恢复旧 session contract",
             "尚未实现",
         ),
         "forbidden_patterns": (
             r"handoff.*自动.*(?:授权|权限)",
             r"Task.*completed.*(?:等于|成为).*met",
-            r"检查点(?:能够|可以|会)恢复旧 Dromen",
+            r"检查点(?:能够|可以|会)恢复旧 session contract",
             r"<h2>运行事实先按责任归类</h2>",
             r"<h2>先判断是哪一种越级</h2>",
             r"<h2>行业变化只改变外部机制</h2>",
@@ -777,14 +783,14 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             r"<h2[^>]*>研究问题按开发者问题路由</h2>",
         ),
     },
-    "components/ktisor.html": {
+    "components/producer.html": {
         "required": (
-            "Ktisor",
+            "deterministic producer",
             "为什么需要独立生产边界",
-            "用一次依赖更新理解 Ktisor",
+            "用一次依赖更新理解 deterministic producer",
             "三个生产动作各自交付什么",
             "发布、签名和证据为什么不能混入",
-            "只生产 Endem / Synem",
+            "只生产 Endem / Endem closure",
             "名称仍在研究",
             "具有精确范围的语义授权",
             "不授予动作权限",
@@ -793,9 +799,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "模型",
             "不可信",
             "checked arithmetic",
-            "外部签名响应不是 Ktisor 输入",
-            "形成记录的 Iknem 物理格式仍未定义",
-            "Synem 规范字节必须等待真实消费者与物理 Profile",
+            "外部签名响应不是 deterministic producer 输入",
+            "形成记录的 evidence entry 物理格式仍未定义",
+            "Endem closure 规范字节必须等待真实消费者与物理 Profile",
             "文档、向量和构建检查只能证明资料关系一致",
             "GNU <code>objcopy</code>",
             "SLSA 1.2 Provenance",
@@ -809,17 +815,17 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             r"<h2>失败与拒绝责任</h2>",
         ),
     },
-    "components/theor.html": {
+    "components/inspector.html": {
         "required": (
-            "Theor",
+            "independent inspector",
             "为什么第二条读取路径仍然必要",
-            "用一次依赖更新理解 Theor",
+            "用一次依赖更新理解 independent inspector",
             "一次检查怎样保留主张范围",
             "独立、只读和有界分别约束什么",
             "分歧和失败后怎样继续",
             "当前可以证明什么",
             "名称仍在研究",
-            "theor",
+            "inspect",
             "独立",
             "只读",
             "形成侧解析器",
@@ -833,7 +839,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "资料关系一致",
         ),
         "forbidden_patterns": (
-            r"<h2>为什么需要独立 Theor</h2>",
+            r"<h2>为什么需要independent inspector</h2>",
             r"<h2>输入、输出与消费者</h2>",
             r"<h2>实现独立性</h2>",
             r"<h2>安全读取顺序</h2>",
@@ -842,10 +848,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             r"<h2>当前状态与待确定接口</h2>",
         ),
     },
-    "components/drasor.html": {
+    "components/runner.html": {
         "required": (
-            "Drasor",
-            "用一次依赖更新理解 Drasor",
+            "bounded runner",
+            "用一次依赖更新理解 bounded runner",
             "名称仍在研究",
             "先把模型、控制面、适配器和决定者分开",
             "运行前形成一次只读会话契约",
@@ -857,13 +863,13 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "动作确实造成变化，但没有有效授权",
             "隔离必须证明什么",
             "外部 Agent 协议只提供带来源的事实",
-            "Dromen",
-            "drase",
+            "session contract",
+            "run",
             "类型化能力请求",
-            "Iknem",
+            "evidence entry",
             "accepted",
             "deferred",
-            "completed / failed / interrupted",
+            "completed / failed / stopped",
             "决定权威",
             "不能给自己的记录",
             "具名权威再形成",
@@ -872,12 +878,12 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "失败位置",
         ),
         "forbidden_patterns": (
-            r"mene 的时钟与覆盖责任",
+            r"maintain 的时钟与覆盖责任",
             r"负观察与封闭范围责任",
             r"量化聚合责任",
             r"测量判断责任",
             r"复合判断责任",
-            r"Synem 激活责任",
+            r"Endem closure 激活责任",
         ),
     },
     "specifications/endem.html": {
@@ -891,15 +897,15 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "五个结果域分别回答什么",
             "复杂目标从哪个问题进入",
             "安全读取与当前状态",
-            "rhem",
-            "semion",
-            "skena",
-            "telis",
-            "krin",
-            "apor",
-            "phain",
-            "aseme",
-            "agno",
+            "source_expression",
+            "meaning_projection",
+            "situation",
+            "goal_direction",
+            "satisfaction_criteria",
+            "unresolved_meaning",
+            "structured_observation",
+            "no_allowed_projection",
+            "undetermined",
             "fault",
             "logical_form",
             "checked arithmetic",
@@ -915,13 +921,13 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             r"<h2>状态机</h2>",
             r"One Root Skena",
             r"三十个场景当前登记",
-            r"END-P1 包含 3 个语义接受和 11 个预期拒绝",
+            r"END-P2 包含 3 个语义接受和 11 个预期拒绝",
         ),
     },
-    "specifications/synem.html": {
+    "specifications/endem-closure.html": {
         "required": (
-            "Synem",
-            "组合闭包（设计阶段名称 Synem）",
+            "Endem closure",
+            "组合闭包（设计阶段名称 Endem closure）",
             "先判断它是不是两个目标",
             "按四步形成固定闭包",
             "成员结果与会话激活不能合并",
@@ -935,12 +941,12 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "导出",
             "必需依赖",
             "可选依赖",
-            "SYN-CLS-001",
-            "SYN-RES-001",
-            "SYN-GRF-001",
-            "SYN-AUT-001",
-            "SYN-STA-001",
-            "SYN-ACT-001",
+            "CLOSURE-CLS-001",
+            "CLOSURE-RES-001",
+            "CLOSURE-GRF-001",
+            "CLOSURE-AUT-001",
+            "CLOSURE-STA-001",
+            "CLOSURE-ACT-001",
             "active / inactive / unresolved / error",
             "尚无物理格式",
             "尚未实现",
@@ -964,10 +970,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             r"<h2>当前状态</h2>",
         ),
     },
-    "specifications/iknem.html": {
+    "specifications/evidence-entry.html": {
         "required": (
-            "Iknem",
-            "有范围证据记录（设计阶段名称 Iknem）",
+            "evidence entry",
+            "有范围证据记录（设计阶段名称 evidence entry）",
             "先判断一项信息能支持什么",
             "按四步形成并评估一项记录",
             "固定对象与主张",
@@ -975,7 +981,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "外部机制只提供有范围输入",
             "规范来源与当前上限",
             "名称仍在研究",
-            "phain",
+            "structured_observation",
             "精确对象",
             "主张",
             "原始观察",
@@ -983,15 +989,15 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "完整性",
             "sufficient / insufficient",
             "最终决定",
-            "IKN-SCP-001",
-            "IKN-PRV-001",
-            "IKN-OBS-001",
-            "IKN-CLS-001",
-            "IKN-INT-001",
-            "IKN-VAL-001",
-            "IKN-COV-001",
-            "IKN-DEC-001",
-            "IKN-PRI-001",
+            "EVIDENCE-SCP-001",
+            "EVIDENCE-PRV-001",
+            "EVIDENCE-OBS-001",
+            "EVIDENCE-CLS-001",
+            "EVIDENCE-INT-001",
+            "EVIDENCE-VAL-001",
+            "EVIDENCE-COV-001",
+            "EVIDENCE-DEC-001",
+            "EVIDENCE-PRI-001",
             "当前草案",
             "非规范场景",
             "仅检查资料一致性",
@@ -1025,14 +1031,14 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             r"<h2>规范条款与研究资料</h2>",
         ),
     },
-    "specifications/dromen.html": {
+    "specifications/session-contract.html": {
         "required": (
-            "Dromen",
-            "一次会话的只读执行契约（设计阶段名称 Dromen）",
+            "session contract",
+            "一次会话的只读执行契约（设计阶段名称 session contract）",
             "按五步建立本次边界",
             "名称仍在研究",
             "只读执行契约",
-            "DRO-CORE 0.1.0-draft",
+            "SESSION-CORE 0.1.0-draft",
             "精确制品",
             "能力只能",
             "有限且带单位的预算",
@@ -1222,9 +1228,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "遇到“已授权”先问对象是什么",
             "不能只保存一个 <code>authorized: true</code>",
             "谁可以确认这个意义候选",
-            "候选进入确认的 <code>semion</code>",
+            "候选进入确认的 <code>meaning_projection</code>",
             "谁可以尝试这个动作",
-            "当前 Drase 会话的能力上限",
+            "当前 run 会话的能力上限",
             "自然语言候选怎样获得意义确认",
             "它不授予调用工具、修改对象或部署服务的动作权限",
             "AUT-CTX-001",
@@ -1268,10 +1274,10 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     },
     "architecture/adr-0031-release-name-collision-gate.html": {
         "required": (
-            "Iknem",
-            "Drasor",
-            "drase",
-            "IKN-CORE",
+            "evidence entry",
+            "bounded runner",
+            "run",
+            "EVIDENCE-CORE",
             "一次性迁移",
             "不保留别名、重定向、双写或兼容垫片",
             "Praxor Lab",
@@ -1281,8 +1287,8 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "architecture/adr-0032-deterministic-maker-name-collision.html": {
         "required": (
             "命令只改大小写，仍然是名称冲突",
-            "Ktisor",
-            "ktise",
+            "deterministic producer",
+            "form",
             "PFA Open Inference Engine",
             "大小写不能形成可靠区分",
             "不保留别名、重定向、双写或兼容垫片",
@@ -1315,9 +1321,9 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "W3C Pronunciation Lexicon Specification 1.0",
             "GNU Coding Standards：Names",
             "OpenAI Realtime API",
-            "Iknem",
-            "Ktisor",
-            "kine",
+            "evidence entry",
+            "deterministic producer",
+            "reach",
             "不建立语音接口",
         ),
     },
@@ -1325,12 +1331,12 @@ SYSTEM_BOUNDARY_CONTRACTS = {
         "required": (
             "用户任务不是内部职责清单",
             "五项公开职责",
-            "ktise",
-            "elenk",
-            "pleko",
-            "theor",
-            "drase",
-            "form / check / compose / inspect / run",
+            "form",
+            "lint",
+            "compose",
+            "inspect",
+            "run",
+            "form / lint / compose / inspect / run",
             "GNU Command-Line Interfaces",
             "Git glossary：porcelain 与 plumbing",
             "MCP 2025-11-25 Tools",
@@ -1354,7 +1360,7 @@ SYSTEM_BOUNDARY_CONTRACTS = {
             "GNU objcopy",
             "SLSA 1.2 Provenance",
             "NIST AI 600-1",
-            "END-P1",
+            "END-P2",
             "END-PUB-001",
             "新身份与新验证",
             "摘要猜测",
@@ -1397,23 +1403,23 @@ SYSTEM_BOUNDARY_CONTRACTS = {
     "endem/docs/safety.html": {
         "required": (
             "checked arithmetic",
-            "theor",
-            "独立 Theor",
+            "inspect",
+            "independent inspector",
             "形成侧解析器",
             "绑定精确字节",
             "不是 CLI 输出",
-            "不能跨入 Theor",
+            "不能跨入 independent inspector",
             "不可信",
         ),
     },
     "endem/docs/running.html": {
         "required": (
-            "Dromen",
+            "session contract",
             "外部签名",
             "私钥始终留在外部签名系统",
             "签名包络",
-            "Iknem",
-            "phain",
+            "evidence entry",
+            "structured_observation",
             "accepted",
             "deferred",
             "completed",
@@ -1666,13 +1672,13 @@ def validate_required_text_contracts(root):
                 int(value)
                 for value in re.findall(r'href="adr-(\d{4})-[^"]+\.html"', text)
             }
-            expected_adrs = set(range(8, 37))
+            expected_adrs = set(range(8, 38))
             if linked_adrs != expected_adrs:
                 missing = sorted(expected_adrs - linked_adrs)
                 unexpected = sorted(linked_adrs - expected_adrs)
                 errors.append(
                     "architecture/decisions.html: grouped decision index must link "
-                    f"ADR-0008 through ADR-0036 exactly; missing={missing}, "
+                    f"ADR-0008 through ADR-0037 exactly; missing={missing}, "
                     f"unexpected={unexpected}"
                 )
     return errors
@@ -2216,7 +2222,7 @@ def validate_jekyll_sources():
             "不构成 ADR、CORE 规范、内容 Profile 或实现要求",
             "不创建新制品、文件格式、扩展名、命令、组件或稳定接口",
             "Endem 是 ELF object",
-            "Dromen 是 segment 或 process image",
+            "session contract 是 segment 或 process image",
             "职责适用性矩阵",
             "Symbol versioning",
             "`objcopy` / `strip` / debug link",
@@ -2347,8 +2353,8 @@ def validate_jekyll_sources():
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "endem.html",
-            SOURCE_ROOT / "specifications" / "iknem.html",
-            SOURCE_ROOT / "components" / "drasor.html",
+            SOURCE_ROOT / "specifications" / "evidence-entry.html",
+            SOURCE_ROOT / "components" / "runner.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
@@ -2359,39 +2365,40 @@ def validate_jekyll_sources():
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the causation research proposal"
                 )
 
-    telis_terms_proposal = SOURCE_ROOT / "spec" / "telis-release-terms-proposal.md"
+    telis_terms_proposal = SOURCE_ROOT / "spec" / "goal_direction-release-terms-proposal.md"
     if not telis_terms_proposal.exists():
-        errors.append("missing non-normative telis release terms research proposal")
+        errors.append("missing non-normative goal_direction release terms research proposal")
     else:
         proposal_text = telis_terms_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
+            "结论状态：职责与桌面审查已由 ADR-0037 采用；人类读音仍待验证",
             "不构成 ADR、CORE 规范、内容 Profile、登记项或实现要求",
             "不进入 `registry.json`",
-            "`kine / mene` 不适合作为首次正式发行的拼写",
-            "`reach / maintain` 作为第一组人类验证候选",
+            "当前词表使用 `reach / maintain`",
+            "人类读音仍待验证",
             "语义先于拼写",
             "桌面门禁只能排除明显不合格候选",
-            "不改 END-TEL-001",
+            "END-DIRECTION-001",
             "不增加别名、双写、自动规范化、重定向或兼容读音",
-            "Iknem",
-            "Ktisor/ktise",
-            "Endem/Synem",
+            "evidence entry",
+            "deterministic producer",
+            "Endem closure",
         ):
             if token not in proposal_text:
-                errors.append(f"telis release terms proposal missing governance boundary: {token}")
+                errors.append(f"goal_direction release terms proposal missing governance boundary: {token}")
         registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
-        if "telis-release-terms" in registry_text:
-            errors.append("non-normative telis release terms proposal must not enter the specification registry")
+        if "goal_direction-release-terms" in registry_text:
+            errors.append("non-normative goal_direction release terms proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "design-system" / "name-audit.md",
             SOURCE_ROOT / "docs" / "terminology-and-pronunciation.md",
             SOURCE_ROOT / "architecture" / "open-questions.html",
         ):
-            if "telis-release-terms-proposal.html" not in public_source.read_text():
+            if "goal_direction-release-terms-proposal.html" not in public_source.read_text():
                 errors.append(
-                    f"{public_source.relative_to(SOURCE_ROOT)} must link the telis release terms proposal"
+                    f"{public_source.relative_to(SOURCE_ROOT)} must link the goal_direction release terms proposal"
                 )
 
     release_terms_proposal = SOURCE_ROOT / "spec" / "release-terminology-simplification-proposal.md"
@@ -2441,24 +2448,6 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the release terminology proposal"
                 )
-        for current_interface in (
-            SOURCE_ROOT / "endem" / "index.html",
-            SOURCE_ROOT / "endem" / "docs" / "reference.md",
-            SOURCE_ROOT / "endem" / "docs" / "format.md",
-            SOURCE_ROOT / "endem" / "docs" / "running.md",
-        ):
-            interface_text = current_interface.read_text()
-            for candidate_command in (
-                "`endem form`",
-                "`endem check`",
-                "`endem compose`",
-                "`endem inspect`",
-                "`endem run`",
-            ):
-                if candidate_command in interface_text:
-                    errors.append(
-                        f"{current_interface.relative_to(SOURCE_ROOT)} exposes non-normative command candidate {candidate_command}"
-                    )
 
     facet_terms_proposal = SOURCE_ROOT / "spec" / "semantic-facet-terminology-proposal.md"
     if not facet_terms_proposal.exists():
@@ -2508,25 +2497,6 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the semantic facet terminology proposal"
                 )
-        for current_interface in (
-            SOURCE_ROOT / "spec" / "endem-core.md",
-            SOURCE_ROOT / "spec" / "endem-format.md",
-            SOURCE_ROOT / "spec" / "profiles" / "end-p1.json",
-            SOURCE_ROOT / "endem" / "docs" / "format.md",
-        ):
-            interface_text = current_interface.read_text()
-            for candidate_field in (
-                "source_expression",
-                "meaning_projection",
-                "goal_direction",
-                "satisfaction_criteria",
-                "unresolved_meaning",
-                "structured_observation",
-            ):
-                if candidate_field in interface_text:
-                    errors.append(
-                        f"{current_interface.relative_to(SOURCE_ROOT)} exposes non-normative facet candidate {candidate_field}"
-                    )
 
     lifecycle_terms_proposal = SOURCE_ROOT / "spec" / "lifecycle-and-result-terminology-proposal.md"
     if not lifecycle_terms_proposal.exists():
@@ -2535,7 +2505,7 @@ def validate_jekyll_sources():
         proposal_text = lifecycle_terms_proposal.read_text()
         for token in (
             "状态：非规范研究提案",
-            "结论状态：对象边界桌面审查完成；语义迁移与发行命名尚未进入规范",
+            "结论状态：对象边界与现行名称已由 ADR-0037 采用；人类读音仍待验证",
             "不构成 ADR、CORE 规范、内容 Profile、登记项、迁移决定或实现要求",
             "不进入 `registry.json`",
             "停止把 `attested` 作为 Endem 生命周期状态",
@@ -2553,7 +2523,7 @@ def validate_jekyll_sources():
             "A2A 1.0 版本化规范",
             "W3C SCXML",
             "NIST AI RMF Core",
-            "候选词不是别名、兼容值或规范化结果",
+            "不是现行接口、别名、兼容值或规范化结果",
             "subject.attested",
             "每次内容变化产生新身份",
             "## 两条迁移轴必须分开",
@@ -2578,6 +2548,7 @@ def validate_jekyll_sources():
             "原有 `0.1` 内容静默改成另一套语义",
             "A 轴可以单独形成对象边界迁移 ADR",
             "这些结论不会改变任何现行规范值",
+            "ADR-0037",
         ):
             if token not in proposal_text:
                 errors.append(f"lifecycle terminology proposal missing governance boundary: {token}")
@@ -2596,26 +2567,6 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{public_source.relative_to(SOURCE_ROOT)} must link the lifecycle terminology proposal"
                 )
-        for current_interface in (
-            SOURCE_ROOT / "spec" / "endem-core.md",
-            SOURCE_ROOT / "spec" / "dromen-core.md",
-            SOURCE_ROOT / "spec" / "profiles" / "end-p1.json",
-            SOURCE_ROOT / "vectors" / "dromen" / "cases.json",
-            SOURCE_ROOT / "architecture" / "endem-lifecycle.html",
-        ):
-            interface_text = current_interface.read_text()
-            for candidate_value in (
-                "content state: formed",
-                "content state: resolved",
-                "satisfaction: undetermined",
-                "no_allowed_projection",
-                "session: stopped",
-                "signed-statement binding",
-            ):
-                if candidate_value in interface_text:
-                    errors.append(
-                        f"{current_interface.relative_to(SOURCE_ROOT)} exposes non-normative lifecycle candidate {candidate_value}"
-                    )
         lifecycle_page_text = (SOURCE_ROOT / "architecture" / "endem-lifecycle.html").read_text()
         for token in (
             "四类对象各自有界",
@@ -2628,29 +2579,29 @@ def validate_jekyll_sources():
             "发布 Profile 必须定义不泄露原文的来源绑定",
             "GNU GDB 的独立调试文件",
             "装载前重新决定能否执行",
-            "现行 END-CORE 的 <code>nascent / coherent / attested</code>",
+            "END-CORE 的内容状态只保留 <code>formed / resolved</code>",
             "规范来源与当前上限",
             "RFC 9334 RATS",
             "in-toto Statement",
             "SLSA 1.2",
             "MCP 2025-11-25 Tasks",
             "截至 2026-07-16 仍为实验能力",
-            "当前没有 Ktisor、Theor、Drasor、裁剪发布器",
+            "当前没有 deterministic producer、independent inspector、bounded runner、裁剪发布器",
         ):
             if token not in lifecycle_page_text:
                 errors.append(f"Endem lifecycle page missing two-axis attestation boundary: {token}")
         for stale_lifecycle_claim in (
-            "Endem 在 nascent、coherent、attested 三个状态之间演进",
-            "<h2>coherent → attested</h2>",
-            "<h2>attested → Dromen → Iknem</h2>",
-            "<tr><td>attested → drase</td>",
+            "Endem 在 formed、resolved、attested 三个状态之间演进",
+            "<h2>resolved → attested</h2>",
+            "<h2>attested → session contract → evidence entry</h2>",
+            "<tr><td>attested → run</td>",
             "这五个结果域由",
             "<h2>先分开内容状态与外部关系</h2>",
             "<h2>开发者应怎样读主流程</h2>",
             "<h2>阶段、消费者与失败</h2>",
-            "<h2>nascent → coherent</h2>",
+            "<h2>formed → resolved</h2>",
             "<h2>内容形成与发布陈述不能压成一个状态</h2>",
-            "<h2>外部陈述复核 → Dromen → Iknem</h2>",
+            "<h2>外部陈述复核 → session contract → evidence entry</h2>",
             "<h2>现行结果域与草案限制</h2>",
             "<h2>为什么采用两条轴</h2>",
             "<h2>未来实现顺序</h2>",
@@ -2666,18 +2617,18 @@ def validate_jekyll_sources():
                 "外部陈述绑定内容身份",
                 "签名、验证或撤销不会原地改写内容身份",
             ),
-            SOURCE_ROOT / "components" / "drasor.html": (
+            SOURCE_ROOT / "components" / "runner.html": (
                 "适用外部陈述",
                 "验证政策、截止点、撤销",
-                "不能把多项外部关系压成内容自身的布尔状态",
+                "不把这些关系压成内容自身的布尔状态",
             ),
-            SOURCE_ROOT / "specifications" / "dromen.html": (
+            SOURCE_ROOT / "specifications" / "session-contract.html": (
                 "外部陈述与验证记录",
-                "当前 <code>attested</code> 主体条件",
-                "内容形成与外部陈述的两轴模型",
+                "内容只使用 <code>formed / resolved</code> 状态",
+                "内容形成与外部关系的两轴模型",
             ),
             SOURCE_ROOT / "design-system" / "language-and-naming.md": (
-                "`attested` 是正在修正的草案限制",
+                "当前词表因此只保留 `formed / resolved` 内容状态",
                 "外部陈述、验证政策、截止点、撤销与依赖方判断不得写成内容自身状态",
             ),
             SOURCE_ROOT / "endem" / "index.html": (
@@ -2686,14 +2637,14 @@ def validate_jekyll_sources():
             ),
             SOURCE_ROOT / "endem" / "docs" / "running.md": (
                 "绑定精确主体的外部陈述与验证记录",
-                "现行 DRO-CORE 的 `attested` 主体条件只能按这一展开形式阅读",
+                "任何一项都不能让内容获得永久可信状态",
             ),
             SOURCE_ROOT / "endem" / "docs" / "reference.md": (
-                "`attested`（现行草案）",
-                "开发者不得据此实现内容内布尔标志",
+                "外部陈述、验证政策、截止点、撤销状态与依赖方判断已移出内容状态",
+                "不得实现内容内的签名通过布尔标志",
             ),
             SOURCE_ROOT / "endem" / "docs" / "safety.md": (
-                "现行 `attested` 草案值不能推出的结论",
+                "`formed / resolved` 内容形成责任",
                 "外部陈述的主体摘要、类型、签名范围、验证政策与撤销材料",
             ),
             SOURCE_ROOT / "architecture" / "adr-0010-native-lexicon.html": (
@@ -2701,12 +2652,12 @@ def validate_jekyll_sources():
                 "正式值迁移仍需单独 ADR",
             ),
             SOURCE_ROOT / "architecture" / "adr-0015-result-domains.html": (
-                "<code>attested</code> 还是待迁移的生命周期占位",
-                "不能压成一个内容状态",
+                "<code>formed / resolved</code> 只描述内容",
+                "不能压成第三个内容状态",
             ),
             SOURCE_ROOT / "architecture" / "adr-0024-dromen-session-contract.html": (
-                "精确内容、适用外部陈述及逐项验证记录",
-                "不得把 <code>attested=true</code> 当作内容自证或会话准入事实",
+                "只接受精确的 <code>resolved</code> Endem 或 Endem closure",
+                "内容状态不能证明会话准入",
             ),
         }
         for source, required_tokens in lifecycle_explainer_requirements.items():
@@ -2723,13 +2674,13 @@ def validate_jekyll_sources():
                 "六个语义面和状态机",
             ),
             SOURCE_ROOT / "endem" / "docs" / "running.md": (
-                "形成 attested Endem/Synem",
+                "形成 attested Endem/Endem closure",
                 "重新验证实际 attested 字节",
-                "精确 attested Endem 或 Synem",
+                "精确 attested Endem 或 Endem closure",
                 "修改 attested 制品",
             ),
             SOURCE_ROOT / "design-system" / "language-and-naming.md": (
-                "精确 attested Endem 或 Synem",
+                "精确 attested Endem 或 Endem closure",
                 "只描述制品形成与发布见证",
             ),
         }
@@ -2814,14 +2765,14 @@ def validate_jekyll_sources():
         registry_text = (SOURCE_ROOT / "spec" / "registry.json").read_text()
         if "memory-checkpoint-and-resumption" in registry_text:
             errors.append("non-normative memory and resumption proposal must not enter the specification registry")
-        if "精确 Endem 或 Synem 及其 attest 状态" in proposal_text:
+        if "精确 Endem 或 Endem closure 及其 attest 状态" in proposal_text:
             errors.append("memory and resumption proposal must not collapse attestation relations into content state")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "dromen.html",
+            SOURCE_ROOT / "specifications" / "session-contract.html",
             SOURCE_ROOT / "specifications" / "adapters.html",
-            SOURCE_ROOT / "specifications" / "iknem.html",
-            SOURCE_ROOT / "components" / "drasor.html",
+            SOURCE_ROOT / "specifications" / "evidence-entry.html",
+            SOURCE_ROOT / "components" / "runner.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
@@ -2840,12 +2791,12 @@ def validate_jekyll_sources():
                 "历史缺口和未知副作用",
                 "恢复时重新核对对端、租户、当前授权",
             ),
-            SOURCE_ROOT / "specifications" / "iknem.html": (
+            SOURCE_ROOT / "specifications" / "evidence-entry.html": (
                 "历史与检查点何时能支持证据？",
                 "保存状态只说明生产者保留了什么",
                 "不恢复旧权限或补齐未知副作用",
             ),
-            SOURCE_ROOT / "components" / "drasor.html": (
+            SOURCE_ROOT / "components" / "runner.html": (
                 "从检查点继续必须建立新会话",
                 "重新完成会话准入",
                 "不能合并成“Agent 已恢复”",
@@ -2875,14 +2826,14 @@ def validate_jekyll_sources():
             "A2A 1.0 版本化规范",
             "RFC 8707",
             "GNU Autoconf 2.73",
-            "新能力不能扩写旧 Dromen",
+            "新能力不能扩写旧 session contract",
             "候选责任的唯一主归属",
             "十二个案例",
             "变化处理矩阵",
             "威胁到失败责任的映射",
             "失败域与结果隔离",
             "不创建 `CAP-CORE`、能力制品或新专名",
-            "这些结论当前不会改变任何现行规范条款、登记、向量、Dromen 字段或结果值",
+            "这些结论当前不会改变任何现行规范条款、登记、向量、session contract 字段或结果值",
         ):
             if token not in proposal_text:
                 errors.append(f"capability discovery proposal missing governance boundary: {token}")
@@ -3033,9 +2984,9 @@ def validate_jekyll_sources():
             errors.append("non-normative isolation proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "dromen.html",
+            SOURCE_ROOT / "specifications" / "session-contract.html",
             SOURCE_ROOT / "specifications" / "adapters.html",
-            SOURCE_ROOT / "components" / "drasor.html",
+            SOURCE_ROOT / "components" / "runner.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
@@ -3086,7 +3037,7 @@ def validate_jekyll_sources():
             errors.append("non-normative model-assisted evaluation proposal must not enter the specification registry")
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
-            SOURCE_ROOT / "specifications" / "iknem.html",
+            SOURCE_ROOT / "specifications" / "evidence-entry.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
@@ -3141,7 +3092,7 @@ def validate_jekyll_sources():
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "identity.html",
-            SOURCE_ROOT / "specifications" / "iknem.html",
+            SOURCE_ROOT / "specifications" / "evidence-entry.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "docs" / "architecture-guide.md",
@@ -3296,7 +3247,7 @@ def validate_jekyll_sources():
         for public_source in (
             SOURCE_ROOT / "spec" / "README.md",
             SOURCE_ROOT / "specifications" / "authority.html",
-            SOURCE_ROOT / "specifications" / "iknem.html",
+            SOURCE_ROOT / "specifications" / "evidence-entry.html",
             SOURCE_ROOT / "architecture" / "open-questions.html",
             SOURCE_ROOT / "architecture" / "agent-system-boundaries.html",
             SOURCE_ROOT / "design-system" / "language-and-naming.md",
@@ -3415,7 +3366,7 @@ def validate_jekyll_sources():
         "上线后的运行监测",
         "发布或接受决定",
         "当前尚未进入组件代码开发阶段",
-        "尚无 Ktisor、Theor、Drasor、求值器或决定引擎可供实现级测试",
+        "尚无 deterministic producer、independent inspector、bounded runner、求值器或决定引擎可供实现级测试",
         "当前没有通用 round-trip 或跨 Profile 语义等价要求",
         "GNU Guix challenge",
         "GNU BFD canonical form",
@@ -3479,9 +3430,9 @@ def validate_jekyll_sources():
     volatile_inventory_pages = (
         SOURCE_ROOT / "specifications" / "index.html",
         SOURCE_ROOT / "specifications" / "adapters.html",
-        SOURCE_ROOT / "specifications" / "iknem.html",
-        SOURCE_ROOT / "specifications" / "synem.html",
-        SOURCE_ROOT / "specifications" / "dromen.html",
+        SOURCE_ROOT / "specifications" / "evidence-entry.html",
+        SOURCE_ROOT / "specifications" / "endem-closure.html",
+        SOURCE_ROOT / "specifications" / "session-contract.html",
         SOURCE_ROOT / "specifications" / "authority.html",
         SOURCE_ROOT / "development" / "implementation-roadmap.html",
         SOURCE_ROOT / "downloads" / "index.html",
@@ -3492,7 +3443,7 @@ def validate_jekyll_sources():
         r"(?:[0-9]+|[一二三四五六七八九十百]+)\s*(?:个|类|项|组)\s*(?:"
         r"[^。；，<\n]{0,16}(?:场景|威胁)|"
         r"[^。；，<\n]{0,12}(?:提案|语义|字节|规范)向量"
-        r")|[0-9]+\s*个\s*(?:Iknem|Dromen|Endem|Synem|诊断|适配|身份|文本|授权)"
+        r")|[0-9]+\s*个\s*(?:evidence entry|session contract|Endem|Endem closure|诊断|适配|身份|文本|授权)"
     )
     for source in volatile_inventory_pages:
         match = volatile_inventory_pattern.search(source.read_text())
@@ -3514,9 +3465,9 @@ def validate_jekyll_sources():
     ):
         if token not in verification_text:
             errors.append(f"testing guide missing change-to-evidence boundary: {token}")
-    for stale_count in ("十五个 Iknem", "十八个 Iknem"):
+    for stale_count in ("十五个 evidence entry", "十八个 evidence entry"):
         if stale_count in verification_text:
-            errors.append("testing guide must not copy drift-prone Iknem vector counts")
+            errors.append("testing guide must not copy drift-prone evidence entry vector counts")
     development_guide_text = (SOURCE_ROOT / "docs" / "development-guide.md").read_text()
     for token in (
         "先写一句可被反例推翻的主张",
@@ -3551,14 +3502,14 @@ def validate_jekyll_sources():
                 "development guide retains a duplicated implementation or checklist section: "
                 + obsolete_heading
             )
-    for premature_path in ("ktisor/      Rust 写入器", "theor/      独立只读 Theor", "cli/        endem 调度"):
+    for premature_path in ("producer/      Rust 写入器", "inspect/      独立只读 independent inspector", "cli/        endem 调度"):
         if premature_path in development_guide_text:
             errors.append(
                 "development guide presents an unfrozen implementation tree as current guidance: "
                 + premature_path
             )
     for source in (
-        SOURCE_ROOT / "components" / "ktisor.html",
+        SOURCE_ROOT / "components" / "producer.html",
         SOURCE_ROOT / "development" / "testing.html",
         SOURCE_ROOT / "development" / "implementation-roadmap.html",
     ):
@@ -3568,9 +3519,9 @@ def validate_jekyll_sources():
                 errors.append(
                     f"{source.relative_to(SOURCE_ROOT)} retains an undefined verification claim: {phrase}"
                 )
-    ktisor_text = (SOURCE_ROOT / "components" / "ktisor.html").read_text()
+    ktisor_text = (SOURCE_ROOT / "components" / "producer.html").read_text()
     naming_text = (SOURCE_ROOT / "design-system" / "language-and-naming.md").read_text()
-    for stale_phrase in ("根据已授权语义决定形成", "已授权的投影决定", "已授权 `semion`"):
+    for stale_phrase in ("根据已授权语义决定形成", "已授权的投影决定", "已授权 `meaning_projection`"):
         if stale_phrase in ktisor_text or stale_phrase in naming_text:
             errors.append(f"public developer guidance retains ambiguous semantic authorization wording: {stale_phrase}")
     ktisor_boundary_pages = {
@@ -3581,21 +3532,21 @@ def validate_jekyll_sources():
     }
     for page, source_text in ktisor_boundary_pages.items():
         for stale_phrase in (
-            "所有规范制品都必须通过 Ktisor",
+            "所有规范制品都必须通过 deterministic producer",
             "外部签名响应验证接口",
             "签名请求、分层诊断",
             "没有外部签名响应时只能保留未签候选",
         ):
             if stale_phrase in source_text:
-                errors.append(f"{page} retains a stale Ktisor boundary: {stale_phrase}")
+                errors.append(f"{page} retains a stale deterministic producer boundary: {stale_phrase}")
     for page, token in {
-        "components/index.html": "Dromen、Iknem、外部签名与最终决定仍由各自责任域产生",
-        "endem/index.html": "外部签名响应由独立集成核对，不作为 Ktisor 输入",
+        "components/index.html": "session contract、evidence entry、外部签名与最终决定仍由各自责任域产生",
+        "endem/index.html": "外部签名响应由独立集成核对，不作为 deterministic producer 输入",
         "endem/docs/reference.md": "Endem 规范字节的唯一生产入口",
-        "docs/architecture-guide.md": "未来物理 Profile 确定后的 Synem 与发布派生",
+        "docs/architecture-guide.md": "未来物理 Profile 确定后的 Endem closure 与发布派生",
     }.items():
         if token not in ktisor_boundary_pages[page]:
-            errors.append(f"{page} missing the precise Ktisor boundary: {token}")
+            errors.append(f"{page} missing the precise deterministic producer boundary: {token}")
     theor_boundary_pages = {
         "components/index.html": (SOURCE_ROOT / "components" / "index.html").read_text(),
         "endem/index.html": (SOURCE_ROOT / "endem" / "index.html").read_text(),
@@ -3606,24 +3557,24 @@ def validate_jekyll_sources():
     }
     for page, source_text in theor_boundary_pages.items():
         for stale_phrase in (
-            "任意不可信 Endem、Synem 或 Iknem 字节",
+            "任意不可信 Endem、Endem closure 或 evidence entry 字节",
             "任意原始制品字节、视图和预算",
-            "| `theor` | 任意原始制品、视图和预算",
-            "一致性验证对合法、边界和畸形向量分别运行 Ktisor 与 Theor",
-            "独立只读检查器（Theor）",
+            "| `inspect` | 任意原始制品、视图和预算",
+            "一致性验证对合法、边界和畸形向量分别运行 deterministic producer 与 independent inspector",
+            "独立只读检查器（independent inspector）",
         ):
             if stale_phrase in source_text:
-                errors.append(f"{page} retains a stale Theor boundary: {stale_phrase}")
+                errors.append(f"{page} retains a stale independent inspector boundary: {stale_phrase}")
     for page, token in {
         "components/index.html": "不产生生产检查通过结论",
         "endem/index.html": "其他对象等待物理格式",
         "endem/docs/reference.md": "不修复、不写回，也不生成生产检查通过结论",
-        "endem/docs/safety.md": "生产侧 `elenk` 路径与独立 Theor",
-        "docs/architecture-guide.md": "Synem、Iknem 与发布制品等待物理格式",
+        "endem/docs/safety.md": "生产侧 `lint` 路径与independent inspector",
+        "docs/architecture-guide.md": "Endem closure、evidence entry 与发布制品等待物理格式",
         "docs/endem-reference.md": "这些字节在精确规则和预算下怎样显示、哪里不同或为何停止",
     }.items():
         if token not in theor_boundary_pages[page]:
-            errors.append(f"{page} missing the precise Theor boundary: {token}")
+            errors.append(f"{page} missing the precise independent inspector boundary: {token}")
     endem_reference_text = theor_boundary_pages["endem/docs/reference.md"]
     for token in (
         "## 按工作查动作",
@@ -3644,7 +3595,7 @@ def validate_jekyll_sources():
             errors.append(f"Endem reference missing task-oriented developer boundary: {token}")
     for obsolete_token in (
         "## 子命令索引",
-        "## mene 时间索引",
+        "## maintain 时间索引",
         "## 测量与阈值索引",
         "## 复合判断索引",
         "## 否定与缺席索引",
@@ -3668,7 +3619,7 @@ def validate_jekyll_sources():
         "仍待确定的物理 Profile",
         "未来实现与运行证据",
         "核心责任已确定",
-        "END-P1 是含来源的形成与评审 Profile",
+        "END-P2 是含来源的形成与评审 Profile",
         "END-FMT 0.1.0-draft 才是实验性物理容器",
         "用一次字段变更检查是否可以继续",
         "signing_algorithm",
@@ -3698,7 +3649,7 @@ def validate_jekyll_sources():
     for proposal_name in (
         "semantic-equivalence-and-migration-proposal.md",
         "model-assisted-evaluation-proposal.md",
-        "telis-release-terms-proposal.md",
+        "goal_direction-release-terms-proposal.md",
         "gnu-elf-applicability-proposal.md",
         "lifecycle-and-result-terminology-proposal.md",
         "software-agent-identity-and-accountability-boundaries-proposal.md",
@@ -3728,13 +3679,13 @@ def validate_jekyll_sources():
         if old_heading in open_questions_text:
             errors.append(f"open questions guide retains a flat research inventory: {old_heading}")
     specification_reader_contracts = {
-        "specifications/synem.html": (
+        "specifications/endem-closure.html": (
             "按四步形成固定闭包",
             "尚无物理格式",
             "尚未实现",
         ),
-        "specifications/dromen.html": ("按五步建立本次边界",),
-        "specifications/iknem.html": (
+        "specifications/session-contract.html": ("按五步建立本次边界",),
+        "specifications/evidence-entry.html": (
             "按四步形成并评估一项记录",
             "尚无物理格式",
             "尚未实现",
@@ -3889,11 +3840,13 @@ def validate_jekyll_sources():
         )
         is_manual_markdown = path in MANUAL_MARKDOWN_FILES
         is_spec_markdown = path in SPEC_MARKDOWN_FILES
+        is_architecture_markdown = path in ARCHITECTURE_MARKDOWN_FILES
         is_page_directory_markdown = path in PAGE_DIRECTORY_MARKDOWN_FILES
         expected = {
             "layout": (
                 "manual" if is_manual_markdown
                 else "spec" if is_spec_markdown
+                else "architecture-decision" if is_architecture_markdown
                 else "page-directory" if is_page_directory_markdown
                 else "default"
             ),
@@ -4058,9 +4011,9 @@ def validate_jekyll_sources():
                 )
         for token in (
             'class="portal-focus-card focus-card-endem" href="specifications/endem.html"',
-            'class="portal-focus-card focus-card-synem" href="specifications/synem.html"',
-            'class="portal-focus-card focus-card-dromen" href="specifications/dromen.html"',
-            'class="portal-focus-card focus-card-iknem" href="specifications/iknem.html"',
+            'class="portal-focus-card focus-card-closure" href="specifications/endem-closure.html"',
+            'class="portal-focus-card focus-card-session" href="specifications/session-contract.html"',
+            'class="portal-focus-card focus-card-evidence" href="specifications/evidence-entry.html"',
         ):
             if token not in homepage_text:
                 errors.append(f"index.html: missing independent homepage object card: {token}")
@@ -4068,16 +4021,16 @@ def validate_jekyll_sources():
             errors.append("index.html: FOUR NOUNS must render four independent object cards")
         homepage_card_routes = (
             'class="portal-feature-row" href="specifications/endem.html"',
-            'class="portal-feature-row" href="specifications/endem.html#skena"',
-            'class="portal-feature-row" href="specifications/endem.html#krin"',
-            'class="portal-feature-row" href="specifications/endem.html#apor"',
+            'class="portal-feature-row" href="specifications/endem.html#situation"',
+            'class="portal-feature-row" href="specifications/endem.html#satisfaction_criteria"',
+            'class="portal-feature-row" href="specifications/endem.html#unresolved_meaning"',
             'class="portal-focus-card focus-card-endem" href="specifications/endem.html"',
-            'class="portal-focus-card focus-card-synem" href="specifications/synem.html"',
-            'class="portal-focus-card focus-card-dromen" href="specifications/dromen.html"',
-            'class="portal-focus-card focus-card-iknem" href="specifications/iknem.html"',
+            'class="portal-focus-card focus-card-closure" href="specifications/endem-closure.html"',
+            'class="portal-focus-card focus-card-session" href="specifications/session-contract.html"',
+            'class="portal-focus-card focus-card-evidence" href="specifications/evidence-entry.html"',
             '<a href="endem/"><span class="lifecycle-number">01</span>',
-            '<a href="components/theor.html"><span class="lifecycle-number">02</span>',
-            '<a href="components/drasor.html"><span class="lifecycle-number">03</span>',
+            '<a href="components/inspector.html"><span class="lifecycle-number">02</span>',
+            '<a href="components/runner.html"><span class="lifecycle-number">03</span>',
             '<a href="endem/"><small>01</small><strong>Endem 应用</strong>',
             '<a href="specifications/"><small>02</small><strong>规范</strong>',
             '<a href="architecture/"><small>03</small><strong>架构</strong>',
@@ -4129,13 +4082,13 @@ def validate_jekyll_sources():
             "发布版只保留经过确认的目标结构",
             "运行完成后还要分开证据有效性、对判据的覆盖度、满足结果与最终决定",
             "它不会给自己签发工具调用、修改、部署或跨会话权限",
-            "本次能力只取授权决定、Dromen、环境与预算的交集",
+            "本次能力只取授权决定、session contract、环境与预算的交集",
         ),
         "architecture/index.html": (
             "计划中的 <code>endem</code> 入口承载五项公开职责",
             "五个现行标识不是已经发布的子命令",
             "当前还没有可执行 CLI",
-            "证据集合相对精确 <code>krin</code> 形成覆盖度",
+            "证据集合相对精确 <code>satisfaction_criteria</code> 形成覆盖度",
             "具名权威才形成最终决定",
         ),
     }
@@ -4152,7 +4105,7 @@ def validate_jekyll_sources():
         "faq/index.html": ("持久、可检查的工程制品",),
         "architecture/index.html": (
             "<code>endem</code> 提供五个固定子命令",
-            "<code>krin</code> 形成覆盖与满足判断",
+            "<code>satisfaction_criteria</code> 形成覆盖与满足判断",
         ),
     }
     for relative_path, phrases in obsolete_safe_artifact_phrases.items():
@@ -4571,8 +4524,8 @@ def validate_jekyll_sources():
             '.portal-focus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))',
             '.status-columns{column-width:340px;column-gap:18px}',
             '.status-columns>.status-item{break-inside:avoid;margin:0 0 18px}',
-            '.focus-card-dromen .focus-art',
-            '.focus-card-iknem .focus-art',
+            '.focus-card-session .focus-art',
+            '.focus-card-evidence .focus-art',
             'text-decoration-color:color-mix(in srgb,var(--portal-coral) 54%,var(--portal-amber))',
             'text-decoration-thickness:.06em;text-underline-offset:.13em;text-decoration-skip-ink:none',
         ):
@@ -4726,7 +4679,7 @@ def validate_jekyll_sources():
             "遥测单向外送",
             "撤销与重放显式",
         ),
-        "components/drasor.html": (
+        "components/runner.html": (
             "A2A 1.0",
             "MCP 2025-11-25 当前修订",
             "目标资源绑定",
@@ -4735,7 +4688,7 @@ def validate_jekyll_sources():
             "Schema URL 不等于稳定发布",
             "Development",
             "默认不导出敏感正文",
-            "completed / failed / interrupted",
+            "completed / failed / stopped",
             "不能把工具故障改写为目标不满足",
         ),
         "development/implementation-roadmap.html": (
@@ -4751,7 +4704,7 @@ def validate_jekyll_sources():
             "OpenTelemetry 语义约定 1.43.0",
             "已把 GenAI 约定移至独立仓库",
             "默认脱敏的单向导出",
-            "不进入 Endem 编码、Iknem 身份、授权决定或最终接受",
+            "不进入 Endem 编码、evidence entry 身份、授权决定或最终接受",
         ),
         "endem/docs/running.md": (
             "A2A 1.0 版本化规范",
@@ -4761,7 +4714,7 @@ def validate_jekyll_sources():
             "仍无 GitHub release 或 tag",
             "Schema URL 不等于稳定发布",
             "默认不导出正文",
-            "不构成 Iknem 身份",
+            "不构成 evidence entry 身份",
         ),
         "architecture/adr-0016-mene-time-model.html": (
             "RFC 3339",
@@ -4821,7 +4774,7 @@ def validate_jekyll_sources():
             "W3C SHACL",
             "MCP 2025-11-25 工具规范",
             "正式绑定必须记录精确身份",
-            "不能改变 Synem 闭包或直接授予权限",
+            "不能改变 Endem closure 闭包或直接授予权限",
         ),
     }
     for relative_path, required_tokens in external_boundary_contracts.items():
@@ -4905,16 +4858,16 @@ def validate_jekyll_sources():
             "IANA 媒体类型登记表",
             "正式商标门禁仍未完成",
             "必须停止或改名的条件",
-            "Iknem",
-            "Drasor",
-            "drase",
+            "evidence entry",
+            "bounded runner",
+            "run",
             "旧名 Praxor",
             "旧名 Tekmor",
             "ADR-0031",
             "旧名 Poiet",
             "PFA Open Inference Engine",
-            "Ktisor",
-            "ktise",
+            "deterministic producer",
+            "form",
             "ADR-0032",
             "TEXT-IDENTIFIER-CORE",
             "TXT-CORE",
@@ -5206,8 +5159,8 @@ def validate_jekyll_sources():
 
         expected_nav_covers = {
             "background", "architecture", "foundations", "faq",
-            "endem-spec", "synem", "dromen", "iknem",
-            "endem", "theor", "format", "drase",
+            "endem-spec", "closure", "session", "evidence",
+            "endem", "inspector", "format", "runner",
             "getting-started", "architecture-guide", "application-reference",
             "spec-reference", "endem-manual", "current-stage", "roadmap", "testing",
             "downloads",
@@ -5298,7 +5251,7 @@ def validate_jekyll_sources():
             "current_stage.title",
             'class="current-stage-feature"',
             'class="current-stage-visual"',
-            'src="../assets/images/secure-endem-ktisor.svg"',
+            'src="../assets/images/secure-endem-producer.svg"',
             'width="1440" height="960"',
             'class="current-stage-panel"',
             'class="project-progress-section"',
@@ -5352,7 +5305,7 @@ def validate_jekyll_sources():
                 errors.append(f"{route}: missing shared summary rail contract: {token}")
 
     image_contracts = {
-        "assets/images/secure-endem-ktisor.svg": (20_000, 'src="../assets/images/secure-endem-ktisor.svg"'),
+        "assets/images/secure-endem-producer.svg": (20_000, 'src="../assets/images/secure-endem-producer.svg"'),
     }
     image_consumers = (SOURCE_ROOT / "index.html").read_text() + (SOURCE_ROOT / "development/current-stage.html").read_text()
     for image_route, (maximum_bytes, source_token) in image_contracts.items():
@@ -5537,7 +5490,7 @@ def main():
         "Noemion 增加的是目标责任层",
         "后一步不能弥补前一步的失败",
         "当前主体、对象、动作、目的、范围和截止点",
-        "覆盖不足返回 `agno`，观察故障返回 `fault`",
+        "覆盖不足返回 `undetermined`，观察故障返回 `fault`",
         "SLSA 1.2 制品验证",
         "GNU Guix 的 `guix challenge`",
         "资料检查可以发现引用、登记和预期分类之间的矛盾",
@@ -5590,7 +5543,7 @@ def main():
             "为什么计划只提供一个命令入口",
             "供 AI 系统安全使用的目标制品，是否意味着文件本身已经获准执行",
             "最终发布版会移除原始自然语言",
-            "Ktisor 只消费已经具备精确语义授权绑定的输入",
+            "deterministic producer 只消费已经具备精确语义授权绑定的输入",
             "它不替具名权威选择意义，也不授予动作权限",
             "NIST AI Agent Standards Initiative",
             "OpenAI Agent 编排说明",
@@ -5637,7 +5590,7 @@ def main():
             "某某 OBJ",
             "23 个独立用户",
             "为什么只保留一个 CLI",
-            "只有 Ktisor 能依据确定性规则或具名语义决定形成规范字节",
+            "只有 deterministic producer 能依据确定性规则或具名语义决定形成规范字节",
         ),
         "specifications/index.html": (
             '<span class="badge">END-CORE</span>',
@@ -5674,7 +5627,7 @@ def main():
         "用一次 Agent 工作读图",
         "MCP/A2A 状态保留外部来源",
         "`completed` 不直接映射为满足结果",
-        "先形成 `met / unmet / agno / fault`",
+        "先形成 `met / unmet / undetermined / fault`",
         "看到终态后按主张强度继续核对",
         "本次动作是否造成变化？",
         "会话开始前已经使用目标版本",
@@ -5930,8 +5883,8 @@ def main():
             " ".join("".join(section["text"]) for section in parser.sections)
         )
         for term in (
-            "Noemion", "Endem", "Synem", "Dromen", "Iknem", "rhem", "semion", "skena", "telis",
-            "krin", "apor", "模型", "原始表达", "实际观察", "没有可执行程序",
+            "Noemion", "Endem", "Endem closure", "session contract", "evidence entry", "source_expression", "meaning_projection", "situation", "goal_direction",
+            "satisfaction_criteria", "unresolved_meaning", "模型", "原始表达", "实际观察", "没有可执行程序",
         ):
             if term not in visible_text:
                 errors.append(f"index.html: homepage must explain {term}")
@@ -6028,8 +5981,8 @@ def main():
             for token in (
                 'viewBox="0 0 1600 900"',
                 "SIX SEMANTIC FACETS",
-                "RHEM", "SEMION", "SKENA", "TELIS", "KRIN", "APOR",
-                "ENDEM", "IKNEM / EVIDENCE",
+                "SOURCE", "MEANING", "SITUATION", "DIRECTION", "CRITERIA", "UNRESOLVED",
+                "ENDEM", "EVIDENCE ENTRY",
                 "@keyframes route-flow", "@keyframes scan-pass",
                 "@media(prefers-reduced-motion:reduce)",
             ):
@@ -6123,7 +6076,7 @@ def main():
             "这一层回答什么",
             "必须停止的情况",
             "协议终态不能直接成为 met",
-            "END-P1 是来源保留的形成与评审 Profile",
+            "END-P2 是来源保留的形成与评审 Profile",
             "END-FMT 0.1.0-draft 是实验性物理容器",
             "一次会话的只读执行契约",
             "流畅度尚无人类证据",
@@ -6222,7 +6175,7 @@ def main():
         for term in (
             "不得直接推出", "把思想转换成可验证问题", "六个语义面",
             "NIST AI Agent Standards Initiative", "读音",
-            "事态", "目标方向", "phain", "aseme", "agno", "fault",
+            "事态", "目标方向", "structured_observation", "no_allowed_projection", "undetermined", "fault",
         ):
             if term not in visible_text:
                 errors.append(f"about/intellectual-foundations.html: must preserve {term}")
@@ -7148,9 +7101,9 @@ def main():
                 ["architecture/decisions.html", "architecture"],
                 ["architecture/agent-system-boundaries.html", "architecture"],
                 ["specifications/endem.html", "architecture"],
-                ["components/ktisor.html", "architecture"],
-                ["components/theor.html", "architecture"],
-                ["components/drasor.html", "architecture"],
+                ["components/producer.html", "architecture"],
+                ["components/inspector.html", "architecture"],
+                ["components/runner.html", "architecture"],
                 ["docs/getting-started.html", "docs"],
                 ["downloads/index.html", "resources"],
                 ["faq/index.html", "resources"],

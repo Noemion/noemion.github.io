@@ -9,9 +9,9 @@ REGISTRY_PATH = ROOT / "spec" / "registry.json"
 CORE_SPEC_PATH = ROOT / "spec" / "endem-core.md"
 FORMAT_SPEC_PATH = ROOT / "spec" / "endem-format.md"
 SOURCE_MANIFEST_SPEC_PATH = ROOT / "spec" / "endem-source-manifest.md"
-SYNEM_SPEC_PATH = ROOT / "spec" / "synem-core.md"
-DROMEN_SPEC_PATH = ROOT / "spec" / "dromen-core.md"
-IKNEM_SPEC_PATH = ROOT / "spec" / "iknem-core.md"
+CLOSURE_SPEC_PATH = ROOT / "spec" / "endem-closure-core.md"
+SESSION_SPEC_PATH = ROOT / "spec" / "session-contract-core.md"
+EVIDENCE_SPEC_PATH = ROOT / "spec" / "evidence-entry-core.md"
 DIAGNOSTIC_SPEC_PATH = ROOT / "spec" / "diagnostics-core.md"
 ADAPTER_SPEC_PATH = ROOT / "spec" / "adapter-core.md"
 IDENTITY_SPEC_PATH = ROOT / "spec" / "identity-core.md"
@@ -19,9 +19,9 @@ TEXT_SPEC_PATH = ROOT / "spec" / "text-identifier-core.md"
 AUTHORITY_SPEC_PATH = ROOT / "spec" / "authority-core.md"
 THREAT_PATHS = (
     ROOT / "spec" / "endem-threat-model.md",
-    ROOT / "spec" / "synem-threat-model.md",
-    ROOT / "spec" / "dromen-threat-model.md",
-    ROOT / "spec" / "iknem-threat-model.md",
+    ROOT / "spec" / "endem-closure-threat-model.md",
+    ROOT / "spec" / "session-contract-threat-model.md",
+    ROOT / "spec" / "evidence-entry-threat-model.md",
     ROOT / "spec" / "diagnostic-threat-model.md",
     ROOT / "spec" / "adapter-threat-model.md",
     ROOT / "spec" / "identity-threat-model.md",
@@ -30,9 +30,9 @@ THREAT_PATHS = (
 )
 ERROR_CATALOG_PATH = ROOT / "spec" / "diagnostic-catalog.md"
 SCENARIO_CORPUS_PATH = ROOT / "spec" / "endem-scenarios.md"
-SYNEM_SCENARIO_PATH = ROOT / "spec" / "synem-scenarios.md"
-DROMEN_SCENARIO_PATH = ROOT / "spec" / "dromen-scenarios.md"
-IKNEM_SCENARIO_PATH = ROOT / "spec" / "iknem-scenarios.md"
+CLOSURE_SCENARIO_PATH = ROOT / "spec" / "endem-closure-scenarios.md"
+SESSION_SCENARIO_PATH = ROOT / "spec" / "session-contract-scenarios.md"
+EVIDENCE_SCENARIO_PATH = ROOT / "spec" / "evidence-entry-scenarios.md"
 DIAGNOSTIC_SCENARIO_PATH = ROOT / "spec" / "diagnostic-scenarios.md"
 ADAPTER_SCENARIO_PATH = ROOT / "spec" / "adapter-scenarios.md"
 IDENTITY_SCENARIO_PATH = ROOT / "spec" / "identity-scenarios.md"
@@ -42,12 +42,12 @@ PROFILE_PATH = ROOT / "spec" / "profiles" / "end-p0.json"
 VECTOR_ROOT = ROOT / "vectors" / "semantic"
 SCHEMA_PATH = ROOT / "vectors" / "vector.schema.json"
 
-CLAUSE_ID = re.compile(r"^(?:END|SYN|DRO|IKN|DIA|ADP|ID|TEXT|AUT)-[A-Z]+-[0-9]{3}$")
+CLAUSE_ID = re.compile(r"^(?:END|CLOSURE|SESSION|EVIDENCE|DIA|ADP|ID|TEXT|AUT)-[A-Z]+-[0-9]{3}$")
 VECTOR_ID = re.compile(r"^SV-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
-SPEC_HEADING = re.compile(r"^### ((?:END|SYN|DRO|IKN|DIA|ADP|ID|TEXT|AUT)-[A-Z]+-[0-9]{3})\s+—", re.MULTILINE)
-THREAT_HEADING = re.compile(r"^### (THR-(?:END|SYN|DRO|IKN|DIA|ADP|ID|TEXT|AUT)-[0-9]{3})\s+—", re.MULTILINE)
+SPEC_HEADING = re.compile(r"^### ((?:END|CLOSURE|SESSION|EVIDENCE|DIA|ADP|ID|TEXT|AUT)-[A-Z]+-[0-9]{3})\s+—", re.MULTILINE)
+THREAT_HEADING = re.compile(r"^### (THR-(?:END|CLOSURE|SESSION|EVIDENCE|DIA|ADP|ID|TEXT|AUT)-[0-9]{3})\s+—", re.MULTILINE)
 SCENARIO_HEADING = re.compile(r"^### (SCN-[0-9]{3})\s+—", re.MULTILINE)
-REQUIRED_FACETS = ("rhem", "semion", "skena", "telis", "krin", "apor")
+REQUIRED_FACETS = ("source_expression", "meaning_projection", "situation", "goal_direction", "satisfaction_criteria", "unresolved_meaning")
 ALLOWED_VERIFICATION_STATUS = {"covered-by-repo", "planned", "manual-authority"}
 ALLOWED_EVIDENCE_STATUS = {"planned", "partial", "covered"}
 
@@ -85,20 +85,20 @@ def validate_registry(registry, spec_text, threat_text, errors):
                 "implementation_status": "vector-checker-only",
                 "wire_status": "not-applicable", "path": "spec/endem-source-manifest.md",
             },
-            "SYN-CORE": {
+            "CLOSURE-CORE": {
                 "version": "0.1.0-draft", "status": "draft",
                 "implementation_status": "vector-checker-only", "wire_status": "unfrozen",
-                "path": "spec/synem-core.md",
+                "path": "spec/endem-closure-core.md",
             },
-            "DRO-CORE": {
+            "SESSION-CORE": {
                 "version": "0.1.0-draft", "status": "draft",
                 "implementation_status": "vector-checker-only", "wire_status": "not-applicable",
-                "path": "spec/dromen-core.md",
+                "path": "spec/session-contract-core.md",
             },
-            "IKN-CORE": {
+            "EVIDENCE-CORE": {
                 "version": "0.1.0-draft", "status": "draft",
                 "implementation_status": "vector-checker-only", "wire_status": "unfrozen",
-                "path": "spec/iknem-core.md",
+                "path": "spec/evidence-entry-core.md",
             },
             "DIA-CORE": {
                 "version": "0.1.0-draft", "status": "draft",
@@ -127,7 +127,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             },
         }
         if set(documents_by_id) != set(expected_documents):
-            errors.append("spec/registry.json: document IDs must include END, SYN, DRO, IKN, DIA, ADP, ID, TEXT-IDENTIFIER and AUT current specifications")
+            errors.append("spec/registry.json: document IDs must include END, CLOSURE, SESSION, EVIDENCE, DIA, ADP, ID, TEXT-IDENTIFIER and AUT current specifications")
         for spec_id, expected_document in expected_documents.items():
             document = documents_by_id.get(spec_id, {})
             for key, value in expected_document.items():
@@ -140,7 +140,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
 
     supporting_documents = registry.get("supporting_documents")
     if not isinstance(supporting_documents, list) or len(supporting_documents) != 21:
-        errors.append("spec/registry.json: object and diagnostic threat/scenario documents, diagnostic catalog, P0 and P1 Profiles are required")
+        errors.append("spec/registry.json: object and diagnostic threat/scenario documents, diagnostic catalog, P0 and P2 Profiles are required")
     else:
         supporting_by_id = {document.get("id"): document for document in supporting_documents}
         threat_document = supporting_by_id.get("END-THREAT", {})
@@ -153,18 +153,18 @@ def validate_registry(registry, spec_text, threat_text, errors):
         if not (ROOT / threat_document.get("path", "")).is_file():
             errors.append("spec/registry.json: threat model path does not exist")
         expected_supporting = {
-            "SYN-THREAT": "spec/synem-threat-model.md",
-            "IKN-THREAT": "spec/iknem-threat-model.md",
-            "DRO-THREAT": "spec/dromen-threat-model.md",
+            "CLOSURE-THREAT": "spec/endem-closure-threat-model.md",
+            "EVIDENCE-THREAT": "spec/evidence-entry-threat-model.md",
+            "SESSION-THREAT": "spec/session-contract-threat-model.md",
             "DIA-CAT": "spec/diagnostic-catalog.md",
             "DIA-THREAT": "spec/diagnostic-threat-model.md",
             "DIA-SCEN": "spec/diagnostic-scenarios.md",
             "END-SCEN": "spec/endem-scenarios.md",
-            "SYN-SCEN": "spec/synem-scenarios.md",
-            "IKN-SCEN": "spec/iknem-scenarios.md",
-            "DRO-SCEN": "spec/dromen-scenarios.md",
+            "CLOSURE-SCEN": "spec/endem-closure-scenarios.md",
+            "EVIDENCE-SCEN": "spec/evidence-entry-scenarios.md",
+            "SESSION-SCEN": "spec/session-contract-scenarios.md",
             "END-P0": "spec/profiles/end-p0.json",
-            "END-P1": "spec/profiles/end-p1.json",
+            "END-P2": "spec/profiles/end-p2.json",
             "ADP-THREAT": "spec/adapter-threat-model.md",
             "ADP-SCEN": "spec/adapter-scenarios.md",
             "ID-THREAT": "spec/identity-threat-model.md",
@@ -184,12 +184,12 @@ def validate_registry(registry, spec_text, threat_text, errors):
         scenario_document = supporting_by_id.get("END-SCEN", {})
         if scenario_document.get("status") != "non-normative-design-corpus":
             errors.append("spec/registry.json: END-SCEN must remain a non-normative design corpus")
-        if supporting_by_id.get("SYN-SCEN", {}).get("status") != "non-normative-design-corpus":
-            errors.append("spec/registry.json: SYN-SCEN must remain a non-normative design corpus")
-        if supporting_by_id.get("IKN-SCEN", {}).get("status") != "non-normative-design-corpus":
-            errors.append("spec/registry.json: IKN-SCEN must remain a non-normative design corpus")
-        if supporting_by_id.get("DRO-SCEN", {}).get("status") != "non-normative-design-corpus":
-            errors.append("spec/registry.json: DRO-SCEN must remain a non-normative design corpus")
+        if supporting_by_id.get("CLOSURE-SCEN", {}).get("status") != "non-normative-design-corpus":
+            errors.append("spec/registry.json: CLOSURE-SCEN must remain a non-normative design corpus")
+        if supporting_by_id.get("EVIDENCE-SCEN", {}).get("status") != "non-normative-design-corpus":
+            errors.append("spec/registry.json: EVIDENCE-SCEN must remain a non-normative design corpus")
+        if supporting_by_id.get("SESSION-SCEN", {}).get("status") != "non-normative-design-corpus":
+            errors.append("spec/registry.json: SESSION-SCEN must remain a non-normative design corpus")
         if supporting_by_id.get("DIA-SCEN", {}).get("status") != "non-normative-design-corpus":
             errors.append("spec/registry.json: DIA-SCEN must remain a non-normative design corpus")
         if supporting_by_id.get("ADP-SCEN", {}).get("status") != "non-normative-design-corpus":
@@ -209,8 +209,8 @@ def validate_registry(registry, spec_text, threat_text, errors):
         if len(term_names) != len(set(term_names)):
             errors.append("spec/registry.json: term names must be unique")
         for required_term in (
-            "Noemion", "Endem", "Synem", "Dromen", "Iknem",
-            *REQUIRED_FACETS, "wire-format", "content-standard", "content-profile", "END-P0", "END-P1", "source-manifest",
+            "Noemion", "Endem", "Endem closure", "session contract", "evidence entry",
+            *REQUIRED_FACETS, "wire-format", "content-standard", "content-profile", "END-P0", "END-P2", "source-manifest",
             "satisfaction-result", "decision-result", "session-result", "evidence-status",
             "time-scope", "continuity-policy", "time-coverage",
             "relation-polarity", "negative-evidence", "observation-closure",
@@ -240,7 +240,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
         wire_term = next((term for term in terms if term.get("term") == "wire-format"), None)
         if wire_term and wire_term.get("decision_status") != "accepted-draft":
             errors.append("spec/registry.json: wire-format must be accepted-draft")
-        semion_term = next((term for term in terms if term.get("term") == "semion"), None)
+        semion_term = next((term for term in terms if term.get("term") == "meaning_projection"), None)
         semion_definition = semion_term.get("definition", "") if semion_term else ""
         for boundary in (
             "确定性规则或范围有限具名权威确认",
@@ -248,7 +248,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
         ):
             if boundary not in semion_definition:
                 errors.append(
-                    f"spec/registry.json: semion definition must separate meaning confirmation from action authorization: {boundary}"
+                    f"spec/registry.json: meaning_projection definition must separate meaning confirmation from action authorization: {boundary}"
                 )
 
     experiments = registry.get("experiments")
@@ -338,7 +338,7 @@ def validate_registry(registry, spec_text, threat_text, errors):
             )
         for threat in threats:
             threat_id = threat.get("id", "<unknown>")
-            if not re.fullmatch(r"THR-(?:END|SYN|DRO|IKN|DIA|ADP|ID|TEXT|AUT)-[0-9]{3}", threat_id):
+            if not re.fullmatch(r"THR-(?:END|CLOSURE|SESSION|EVIDENCE|DIA|ADP|ID|TEXT|AUT)-[0-9]{3}", threat_id):
                 errors.append(f"spec/registry.json: invalid threat ID {threat_id!r}")
             mapped_clauses = threat.get("clauses")
             if not isinstance(mapped_clauses, list) or not mapped_clauses:
@@ -502,7 +502,7 @@ def validate_vectors(clause_ids, covered_vector_refs, errors):
     if accept_count < 1 or reject_count < 4:
         errors.append("semantic vectors require at least one accept and four reject cases")
     for required_reject_clause in (
-        "END-CORE-001", "END-SRC-001", "END-SIT-001", "END-APR-001", "END-AUT-001",
+        "END-CORE-001", "END-SRC-001", "END-SIT-001", "END-UNRESOLVED-001", "END-AUT-001",
     ):
         if required_reject_clause not in rejected_clause_ids:
             errors.append(f"missing direct rejection vector for {required_reject_clause}")
@@ -512,10 +512,10 @@ def validate_public_boundary(errors):
     config_text = (ROOT / "_config.yml").read_text()
     workflow_text = (ROOT / ".github" / "workflows" / "pages.yml").read_text()
     core_text = CORE_SPEC_PATH.read_text()
-    iknem_text = IKNEM_SPEC_PATH.read_text()
+    evidence_text = EVIDENCE_SPEC_PATH.read_text()
     for token in (
         "同一封闭输入产生同一规范结果",
-        "实际进入 `rhem` 的解码文本及其文本槽",
+        "实际进入 `source_expression` 的解码文本及其文本槽",
         "严格解码 Profile",
         "显式变换结果与损失",
         "MUST NOT` 通过未声明的 Unicode 规范化",
@@ -529,14 +529,14 @@ def validate_public_boundary(errors):
         "算法或方法版本及其信息损失",
         "未定义的“规范化”",
     ):
-        if token not in iknem_text:
-            errors.append(f"IKN-OBS-001 missing explicit transformation boundary: {token}")
+        if token not in evidence_text:
+            errors.append(f"EVIDENCE-OBS-001 missing explicit transformation boundary: {token}")
     if "python3 tests/semantic_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute semantic vectors, not only register them")
     if "python3 tests/result_domain_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute result-domain vectors")
-    if "python3 tests/mene_vector_test.py" not in workflow_text:
-        errors.append("Pages workflow must execute mene time and continuity vectors")
+    if "python3 tests/time_scope_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute maintain time and continuity vectors")
     if "python3 tests/negation_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute negation and absence vectors")
     if "python3 tests/quantification_vector_test.py" not in workflow_text:
@@ -545,14 +545,14 @@ def validate_public_boundary(errors):
         errors.append("Pages workflow must execute measurement and threshold vectors")
     if "python3 tests/composition_vector_test.py" not in workflow_text:
         errors.append("Pages workflow must execute composite situation and criteria vectors")
-    if "python3 tests/synem_vector_test.py" not in workflow_text:
-        errors.append("Pages workflow must execute Synem closure and activation vectors")
-    if "python3 tests/iknem_vector_test.py" not in workflow_text:
-        errors.append("Pages workflow must execute Iknem evidence and appraisal vectors")
-    if "python3 tests/dromen_vector_test.py" not in workflow_text:
-        errors.append("Pages workflow must execute Dromen session-contract vectors")
-    if "python3 tests/p1_payload_test.py" not in workflow_text:
-        errors.append("Pages workflow must execute complete END-P1 payload vectors")
+    if "python3 tests/endem_closure_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute Endem closure and activation vectors")
+    if "python3 tests/evidence_entry_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute evidence entry evidence and appraisal vectors")
+    if "python3 tests/session_contract_vector_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute session contract vectors")
+    if "python3 tests/p2_payload_test.py" not in workflow_text:
+        errors.append("Pages workflow must execute complete END-P2 payload vectors")
     if "python3 tests/source_manifest_test.py" not in workflow_text:
         errors.append("Pages workflow must execute END-SRCM source manifest vectors")
     if "python3 tests/diagnostic_vector_test.py" not in workflow_text:
@@ -583,11 +583,11 @@ def validate_public_boundary(errors):
         "specifications/index.html": (
             "END-CORE 0.1.0-draft",
             "END-FMT 0.1.0-draft",
-            "END-P1",
+            "END-P2",
             "spec/registry.json",
-            "SYN-CORE 0.1.0-draft",
-            "DRO-CORE 0.1.0-draft",
-            "IKN-CORE 0.1.0-draft",
+            "CLOSURE-CORE 0.1.0-draft",
+            "SESSION-CORE 0.1.0-draft",
+            "EVIDENCE-CORE 0.1.0-draft",
             "DIA-CORE 0.1.0-draft",
             "ADP-CORE 0.1.0-draft",
             "ID-CORE 0.1.0-draft",
@@ -600,12 +600,12 @@ def validate_public_boundary(errors):
             "验证资料",
             "实现证据",
             "哪些边界还不能从规范推出",
-            "当前没有 Ktisor、Theor、Drasor",
+            "当前没有 deterministic producer、independent inspector、bounded runner",
         ),
         "specifications/endem.html": (
             "END-CORE 0.1.0-draft",
             "END-FMT 0.1.0-draft",
-            "END-P1",
+            "END-P2",
             "用一个健康目标读懂 Endem",
             "现行形成分类怎样阅读",
             "有类型外部陈述",
@@ -657,9 +657,9 @@ def validate_public_boundary(errors):
             "不是生产实现",
         ),
         "architecture/adr-0013-end-p1-payload.html": (
-            "END-P1",
-            "profile_id=2",
-            "spec/profiles/end-p1.json",
+            "END-P2",
+            "profile_id=3",
+            "spec/profiles/end-p2.json",
             "RFC 8949",
             "不是稳定 ABI",
         ),
@@ -671,22 +671,22 @@ def validate_public_boundary(errors):
         ),
         "architecture/adr-0015-result-domains.html": (
             "五个结果域",
-            "met / unmet / agno / fault",
+            "met / unmet / undetermined / fault",
             "accepted / rejected / deferred",
-            "completed / failed / interrupted",
+            "completed / failed / stopped",
             "valid / invalid / revoked",
             "sufficient / insufficient",
-            "不新增 END-P1 字段",
-            "没有 Drasor",
+            "不新增 END-P2 字段",
+            "没有 bounded runner",
         ),
         "architecture/adr-0016-mene-time-model.html": (
-            "fixed",
-            "elapsed",
+            "utc_window",
+            "elapsed_window",
             "[start, end)",
             "strict",
             "budgeted",
             "采样",
-            "agno",
+            "undetermined",
             "fault",
             "RFC 3339",
             "RFC 9557",
@@ -694,13 +694,13 @@ def validate_public_boundary(errors):
             "GNU Coreutils",
             "W3C OWL-Time",
             "OpenTelemetry Metrics",
-            "不增加 END-P1 字段",
+            "不增加 END-P2 字段",
             "没有计时器、监控器或求值组件",
         ),
         "architecture/adr-0017-negation-and-absence.html": (
             "同一关系、同一角色",
             "negative",
-            "agno",
+            "undetermined",
             "fault",
             "封闭观察范围",
             "W3C OWL 2 Primer",
@@ -708,7 +708,7 @@ def validate_public_boundary(errors):
             "SPARQL 1.1 NOT EXISTS",
             "GNU grep",
             "OpenTelemetry Logs",
-            "不增加 END-P1 字段",
+            "不增加 END-P2 字段",
             "没有日志收集器、策略引擎或求值器",
         ),
         "architecture/adr-0018-quantification-and-membership.html": (
@@ -724,12 +724,12 @@ def validate_public_boundary(errors):
             "OWL 2",
             "COUNT(DISTINCT",
             "GNU",
-            "不表示 Ktisor、Drasor、求值器或 CLI 已经实现",
+            "不表示 deterministic producer、bounded runner、求值器或 CLI 已经实现",
         ),
         "architecture/adr-0019-measurement-and-thresholds.html": (
             "测量谓词必须同时固定构念",
-            "fixed",
-            "generalized",
+            "fixed_population",
+            "generalized_population",
             "estimand",
             "arithmetic_mean",
             "quantile",
@@ -740,13 +740,13 @@ def validate_public_boundary(errors):
             "OpenTelemetry Metrics",
             "Prometheus",
             "GNU Units",
-            "不表示遥测采集器、基准运行器、统计引擎、Drasor 或求值器已经实现",
+            "不表示遥测采集器、基准运行器、统计引擎、bounded runner 或求值器已经实现",
         ),
         "architecture/adr-0020-composite-situations-and-criteria.html": (
             "第一阶段只允许用",
             "all_of",
             "any_of",
-            "quantifier=all",
+            "quantifier=every",
             "combiner=all_of",
             "decisive-basis",
             "evaluation-coverage",
@@ -754,10 +754,10 @@ def validate_public_boundary(errors):
             "GNU Coreutils test",
             "GNU Bash Lists",
             "SHACL 1.2 Core",
-            "不表示 Ktisor、Theor、Drasor、CLI 或求值器已经实现",
+            "不表示 deterministic producer、independent inspector、bounded runner、CLI 或求值器已经实现",
         ),
         "architecture/adr-0021-synem-closure-and-activation.html": (
-            "SYN-CORE 0.1.0-draft",
+            "CLOSURE-CORE 0.1.0-draft",
             "active / inactive / unresolved / error",
             "Endem 组合闭包",
             "activation=active",
@@ -768,11 +768,11 @@ def validate_public_boundary(errors):
             "GNU make",
             "W3C SHACL",
             "MCP 2025-11-25",
-            "不表示 Ktisor、Theor、Drasor、CLI、解析器或运行时已经实现",
+            "不表示 deterministic producer、independent inspector、bounded runner、CLI、解析器或运行时已经实现",
         ),
         "architecture/adr-0022-iknem-evidence-and-appraisal.html": (
-            "IKN-CORE 0.1.0-draft",
-            "有范围证据记录（Iknem）",
+            "EVIDENCE-CORE 0.1.0-draft",
+            "有范围证据记录（evidence entry）",
             "validity=valid",
             "coverage=sufficient",
             "model-candidate",
@@ -783,16 +783,16 @@ def validate_public_boundary(errors):
             "GNU Guix 的 guix challenge",
             "OpenTelemetry GenAI 语义约定独立仓库",
             "MCP Security Best Practices",
-            "不表示采集器、验证器、归并器、决定引擎、Theor 或 Drasor 已经实现",
+            "不表示采集器、验证器、归并器、决定引擎、independent inspector 或 bounded runner 已经实现",
         ),
         "architecture/adr-0023-endem-content-standard.html": (
             "END-CORE 0.1.0-draft",
-            "END-P1 0.1.0-draft",
+            "END-P2 0.1.0-draft",
             "END-FMT 0.1.0-draft",
             "profile-accept",
             "external-prerequisites-not-evaluated",
             "内容能力集（Profile）",
-            "END-P1 含来源形成 Profile",
+            "END-P2 含来源形成 Profile",
             "GNU strip",
             "ONNX 1.23.0 IR",
             "SPDX 3.0.1",
@@ -808,15 +808,15 @@ def validate_public_boundary(errors):
         ),
         "architecture/adr-0024-dromen-session-contract.html": (
             "权限只属于这一次会话",
-            "DRO-CORE 0.1.0-draft",
+            "SESSION-CORE 0.1.0-draft",
             "只读执行契约",
             "MCP 2025-11-25 授权规范",
             "ELF gABI",
             "Linux capabilities",
             "Linux no_new_privs",
             "Landlock",
-            "不建立 Dromen 文件",
-            "不表示 Drasor 已经实现",
+            "不建立 session contract 文件",
+            "不表示 bounded runner 已经实现",
         ),
         "architecture/adr-0025-structured-diagnostics.html": (
             "错误消息不能替系统作决定",
@@ -894,18 +894,18 @@ def validate_public_boundary(errors):
         "architecture/adr-0031-release-name-collision-gate.html": (
             "搜索没有冲突，不等于名称可以发行",
             "当前策略",
-            "Iknem",
-            "Drasor",
-            "drase",
-            "IKN-CORE",
+            "evidence entry",
+            "bounded runner",
+            "run",
+            "EVIDENCE-CORE",
             "不保留别名、重定向、双写或兼容垫片",
             "正式发行前必须再次查询",
         ),
         "architecture/adr-0032-deterministic-maker-name-collision.html": (
             "命令只改大小写，仍然是名称冲突",
             "当前策略",
-            "Ktisor",
-            "ktise",
+            "deterministic producer",
+            "form",
             "PFA Open Inference Engine",
             "大小写不能形成可靠区分",
             "不保留别名、重定向、双写或兼容垫片",
@@ -949,12 +949,12 @@ def validate_public_boundary(errors):
             "当前策略",
             "用户任务不是内部职责清单",
             "五项公开职责",
-            "ktise",
-            "elenk",
-            "pleko",
-            "theor",
-            "drase",
-            "form / check / compose / inspect / run",
+            "form",
+            "lint",
+            "compose",
+            "inspect",
+            "run",
+            "form / lint / compose / inspect / run",
             "GNU Command-Line Interfaces",
             "Git glossary：porcelain 与 plumbing",
             "MCP 2025-11-25 Tools",
@@ -975,7 +975,7 @@ def validate_public_boundary(errors):
             "GNU objcopy",
             "SLSA 1.2 Provenance",
             "NIST AI 600-1",
-            "END-P1",
+            "END-P2",
             "END-PUB-001",
             "source_ref",
             "新身份与新验证",
@@ -1005,36 +1005,36 @@ def validate_public_boundary(errors):
             "不能进入人类样本数",
             "尚未执行上述人类研究",
         ),
-        "specifications/synem.html": (
-            "SYN-CORE 0.1.0-draft",
-            "spec/synem-core.html",
-            "spec/synem-threat-model.html",
-            "spec/synem-scenarios.html",
+        "specifications/endem-closure.html": (
+            "CLOSURE-CORE 0.1.0-draft",
+            "spec/endem-closure-core.html",
+            "spec/endem-closure-threat-model.html",
+            "spec/endem-closure-scenarios.html",
             "active / inactive / unresolved / error",
             "ADR-0021",
             "不是物理格式",
         ),
-        "specifications/iknem.html": (
-            "IKN-CORE 0.1.0-draft",
-            "spec/iknem-core.html",
-            "spec/iknem-threat-model.html",
-            "spec/iknem-scenarios.html",
+        "specifications/evidence-entry.html": (
+            "EVIDENCE-CORE 0.1.0-draft",
+            "spec/evidence-entry-core.html",
+            "spec/evidence-entry-threat-model.html",
+            "spec/evidence-entry-scenarios.html",
             "valid / invalid / revoked",
             "sufficient / insufficient",
             "model-candidate",
             "不是记录给自己的标签",
             "没有相应的采集、验证、归并、撤销或决定实现",
         ),
-        "specifications/dromen.html": (
-            "DRO-CORE 0.1.0-draft",
-            "spec/dromen-core.html",
-            "spec/dromen-threat-model.html",
-            "spec/dromen-scenarios.html",
-            "DRO-SUB-001",
-            "DRO-LIF-001",
+        "specifications/session-contract.html": (
+            "SESSION-CORE 0.1.0-draft",
+            "spec/session-contract-core.html",
+            "spec/session-contract-threat-model.html",
+            "spec/session-contract-scenarios.html",
+            "SESSION-SUB-001",
+            "SESSION-LIF-001",
             "不是文件、进程、模型上下文、凭据包、可恢复会话或最终结果",
-            "Dromen API、平台隔离方式、事件格式和运行后端仍待确定",
-            "当前没有 Drasor、装载器、沙箱、凭据代理、预算器或运行时",
+            "session contract API、平台隔离方式、事件格式和运行后端仍待确定",
+            "当前没有 bounded runner、装载器、沙箱、凭据代理、预算器或运行时",
         ),
         "specifications/diagnostics.html": (
             "DIA-CORE 0.1.0-draft",
@@ -1105,7 +1105,7 @@ def validate_public_boundary(errors):
             "Rust 与 C 的既有研究也只提供未来比较材料",
             "当前没有 Rust 组件、CLI、协议适配器",
             "候选版在正式发布前只作为迁移风险",
-            "不进入 Endem 编码、Iknem 身份、授权决定或最终接受",
+            "不进入 Endem 编码、evidence entry 身份、授权决定或最终接受",
         ),
     }
     for relative_path, tokens in public_contracts.items():
@@ -1122,9 +1122,9 @@ def main():
         spec_text = (
             CORE_SPEC_PATH.read_text() + "\n" + FORMAT_SPEC_PATH.read_text()
             + "\n" + SOURCE_MANIFEST_SPEC_PATH.read_text()
-            + "\n" + SYNEM_SPEC_PATH.read_text()
-            + "\n" + DROMEN_SPEC_PATH.read_text()
-            + "\n" + IKNEM_SPEC_PATH.read_text()
+            + "\n" + CLOSURE_SPEC_PATH.read_text()
+            + "\n" + SESSION_SPEC_PATH.read_text()
+            + "\n" + EVIDENCE_SPEC_PATH.read_text()
             + "\n" + DIAGNOSTIC_SPEC_PATH.read_text()
             + "\n" + ADAPTER_SPEC_PATH.read_text()
             + "\n" + IDENTITY_SPEC_PATH.read_text()
@@ -1145,20 +1145,20 @@ def main():
         errors.append(f"spec/endem-scenarios.md: cannot read: {exc}")
         scenario_text = ""
     try:
-        synem_scenario_text = SYNEM_SCENARIO_PATH.read_text()
+        closure_scenario_text = CLOSURE_SCENARIO_PATH.read_text()
     except OSError as exc:
-        errors.append(f"spec/synem-scenarios.md: cannot read: {exc}")
-        synem_scenario_text = ""
+        errors.append(f"spec/endem-closure-scenarios.md: cannot read: {exc}")
+        closure_scenario_text = ""
     try:
-        iknem_scenario_text = IKNEM_SCENARIO_PATH.read_text()
+        evidence_scenario_text = EVIDENCE_SCENARIO_PATH.read_text()
     except OSError as exc:
-        errors.append(f"spec/iknem-scenarios.md: cannot read: {exc}")
-        iknem_scenario_text = ""
+        errors.append(f"spec/evidence-entry-scenarios.md: cannot read: {exc}")
+        evidence_scenario_text = ""
     try:
-        dromen_scenario_text = DROMEN_SCENARIO_PATH.read_text()
+        session_scenario_text = SESSION_SCENARIO_PATH.read_text()
     except OSError as exc:
-        errors.append(f"spec/dromen-scenarios.md: cannot read: {exc}")
-        dromen_scenario_text = ""
+        errors.append(f"spec/session-contract-scenarios.md: cannot read: {exc}")
+        session_scenario_text = ""
     try:
         diagnostic_scenario_text = DIAGNOSTIC_SCENARIO_PATH.read_text()
     except OSError as exc:
@@ -1221,26 +1221,26 @@ def main():
         if token not in scenario_text:
             errors.append(f"spec/endem-scenarios.md: missing design-review boundary {token!r}")
 
-    synem_scenario_ids = re.findall(r"^### (SYN-SCN-[0-9]{3})\s+—", synem_scenario_text, re.MULTILINE)
-    if synem_scenario_ids != [f"SYN-SCN-{index:03d}" for index in range(1, 11)]:
-        errors.append("spec/synem-scenarios.md: scenario IDs must be unique and ordered SYN-SCN-001 through SYN-SCN-010")
+    closure_scenario_ids = re.findall(r"^### (CLOSURE-SCN-[0-9]{3})\s+—", closure_scenario_text, re.MULTILINE)
+    if closure_scenario_ids != [f"CLOSURE-SCN-{index:03d}" for index in range(1, 11)]:
+        errors.append("spec/endem-closure-scenarios.md: scenario IDs must be unique and ordered CLOSURE-SCN-001 through CLOSURE-SCN-010")
     for token in ("完整闭包", "搜索顺序", "权限取交集", "成员完成不等于闭包接受", "未激活不是未知满足", "不是清单语法"):
-        if token not in synem_scenario_text:
-            errors.append(f"spec/synem-scenarios.md: missing design-review boundary {token!r}")
+        if token not in closure_scenario_text:
+            errors.append(f"spec/endem-closure-scenarios.md: missing design-review boundary {token!r}")
 
-    iknem_scenario_ids = re.findall(r"^### (IKN-SCN-[0-9]{3})\s+—", iknem_scenario_text, re.MULTILINE)
-    if iknem_scenario_ids != [f"IKN-SCN-{index:03d}" for index in range(1, 15)]:
-        errors.append("spec/iknem-scenarios.md: scenario IDs must be unique and ordered IKN-SCN-001 through IKN-SCN-014")
+    evidence_scenario_ids = re.findall(r"^### (EVIDENCE-SCN-[0-9]{3})\s+—", evidence_scenario_text, re.MULTILINE)
+    if evidence_scenario_ids != [f"EVIDENCE-SCN-{index:03d}" for index in range(1, 15)]:
+        errors.append("spec/evidence-entry-scenarios.md: scenario IDs must be unique and ordered EVIDENCE-SCN-001 through EVIDENCE-SCN-014")
     for token in ("固定测试集不能代表未知总体", "循环自证", "模型解释保持候选", "有效签名遇到撤销", "重复日志仍不能补齐覆盖", "不得保存实时凭据"):
-        if token not in iknem_scenario_text:
-            errors.append(f"spec/iknem-scenarios.md: missing design-review boundary {token!r}")
+        if token not in evidence_scenario_text:
+            errors.append(f"spec/evidence-entry-scenarios.md: missing design-review boundary {token!r}")
 
-    dromen_scenario_ids = re.findall(r"^### (DRO-SCN-[0-9]{3})\s+—", dromen_scenario_text, re.MULTILINE)
-    if dromen_scenario_ids != [f"DRO-SCN-{index:03d}" for index in range(1, 16)]:
-        errors.append("spec/dromen-scenarios.md: scenario IDs must be unique and ordered DRO-SCN-001 through DRO-SCN-015")
+    session_scenario_ids = re.findall(r"^### (SESSION-SCN-[0-9]{3})\s+—", session_scenario_text, re.MULTILINE)
+    if session_scenario_ids != [f"SESSION-SCN-{index:03d}" for index in range(1, 16)]:
+        errors.append("spec/session-contract-scenarios.md: scenario IDs must be unique and ordered SESSION-SCN-001 through SESSION-SCN-015")
     for token in ("显示名不能选择会话主体", "最新政策不是稳定输入", "能力取交集", "Step-up 授权不能修改运行契约", "委托任务共享外层预算", "诊断快照不能恢复权限"):
-        if token not in dromen_scenario_text:
-            errors.append(f"spec/dromen-scenarios.md: missing design-review boundary {token!r}")
+        if token not in session_scenario_text:
+            errors.append(f"spec/session-contract-scenarios.md: missing design-review boundary {token!r}")
 
     diagnostic_scenario_ids = re.findall(r"^### (DIA-SCN-[0-9]{3})\s+—", diagnostic_scenario_text, re.MULTILINE)
     if diagnostic_scenario_ids != [f"DIA-SCN-{index:03d}" for index in range(1, 16)]:
@@ -1266,7 +1266,7 @@ def main():
     text_scenario_ids = re.findall(r"^### (TEXT-SCN-[0-9]{3})\s+—", text_scenario_text, re.MULTILINE)
     if text_scenario_ids != [f"TEXT-SCN-{index:03d}" for index in range(1, 19)]:
         errors.append("spec/text-identifier-scenarios.md: scenario IDs must be unique and ordered TEXT-SCN-001 through TEXT-SCN-018")
-    for token in ("同一字符串位于不同文本槽", "解码必须原子失败", "不等于保存来源清单的原始字节", "当前 ASCII 语法直接拒绝", "不得盲目做 NFKC", "END-P1 范围按标量计数", "安全审查视图显示控制符名称和位置", "模型输入身份、预处理链、隐藏字符清单和显示视图必须共同记录"):
+    for token in ("同一字符串位于不同文本槽", "解码必须原子失败", "不等于保存来源清单的原始字节", "当前 ASCII 语法直接拒绝", "不得盲目做 NFKC", "END-P2 范围按标量计数", "安全审查视图显示控制符名称和位置", "模型输入身份、预处理链、隐藏字符清单和显示视图必须共同记录"):
         if token not in text_scenario_text:
             errors.append(f"spec/text-identifier-scenarios.md: missing design-review boundary {token!r}")
 
@@ -1288,22 +1288,22 @@ def main():
         print("\n".join(errors))
         return 1
     print(
-        "PASS: END-CORE, END-FMT, END-SRCM, SYN-CORE, DRO-CORE, IKN-CORE, DIA-CORE, ADP-CORE, ID-CORE, TEXT-IDENTIFIER-CORE and AUT-CORE 0.1.0-draft have unique clauses, explicit "
+        "PASS: END-CORE, END-FMT, END-SRCM, CLOSURE-CORE, SESSION-CORE, EVIDENCE-CORE, DIA-CORE, ADP-CORE, ID-CORE, TEXT-IDENTIFIER-CORE and AUT-CORE 0.1.0-draft have unique clauses, explicit "
         "maturity, traceable evidence, 99 registered threats, executed semantic "
         "vectors, 30 natural-language design scenarios, 12 result-domain vectors, "
-        "12 mene time and continuity vectors, 12 negation and absence vectors, "
+        "12 maintain time and continuity vectors, 12 negation and absence vectors, "
         "12 quantification and membership vectors, "
         "12 measurement and threshold vectors, "
         "12 composite situation and criteria vectors, "
-        "12 Synem closure and activation vectors, "
-        "20 Dromen session-contract vectors, "
-        "18 Iknem evidence and appraisal vectors, "
+        "12 Endem closure and activation vectors, "
+        "20 session contract vectors, "
+        "18 evidence entry evidence and appraisal vectors, "
         "20 structured diagnostic vectors, "
         "24 external protocol adapter vectors, "
         "24 exact identity and attestation vectors, "
         "24 text and identifier vectors, "
         "24 authority and authorization vectors, "
-        "END-P1 payload/source vectors, "
+        "END-P2 payload/source vectors, "
         "and P0-LANG-001 historical language evidence"
     )
     return 0

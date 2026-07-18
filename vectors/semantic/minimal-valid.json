@@ -3,14 +3,14 @@
   "id": "SV-VALID-MINIMAL-001",
   "description": "一个根事态、六个语义面和可追溯投影组成的最小可接受语义模型。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
-  "context": {"external_preconditions": [{"spec_id": "AUT-CORE", "version": "0.1.0-draft", "clause": "AUT-SEM-001", "subject": "/input/semion/relations/0/projection", "projection_id": "projection:zh-goal-v1", "status": "satisfied", "evidence_ref": "fixture:authorization:minimal-a"}]},
+  "context": {"external_preconditions": [{"spec_id": "AUT-CORE", "version": "0.1.0-draft", "clause": "AUT-SEM-001", "subject": "/input/meaning_projection/relations/0/projection", "projection_id": "projection:zh-goal-v1", "status": "satisfied", "evidence_ref": "fixture:authorization:minimal-a"}]},
   "expect": {
     "result": "accept",
-    "clauses": ["END-CON-006", "END-CORE-001", "END-CORE-002", "END-SRC-001", "END-SEM-001", "END-SIT-001", "END-TEL-001", "END-KRN-001", "END-STR-001", "END-AUT-002"],
+    "clauses": ["END-CON-006", "END-CORE-001", "END-CORE-002", "END-SRC-001", "END-MEANING-001", "END-SIT-001", "END-DIRECTION-001", "END-CRITERIA-001", "END-STR-001", "END-AUT-002"],
     "diagnostics": []
   },
   "input": {
-    "rhem": {
+    "source_expression": {
       "source_id": "source:request-001",
       "subject": "authority:requester",
       "media_type": "text/plain",
@@ -19,7 +19,7 @@
       "content": "为已登记项目生成安全评审报告",
       "range": {"unit": "unicode-scalar", "start": 0, "length": 14}
     },
-    "semion": {
+    "meaning_projection": {
       "symbols": [
         {"id": "sym:project", "kind": "entity", "source_ref": "source:request-001#/range"},
         {"id": "sym:report", "kind": "artifact", "source_ref": "source:request-001#/range"}
@@ -36,20 +36,20 @@
         }
       ]
     },
-    "skena": {
+    "situation": {
       "roots": ["situation:report-produced"],
       "situations": [
         {"id": "situation:report-produced", "relation": "rel:produced", "polarity": "positive"}
       ]
     },
-    "telis": {"mode": "kine"},
-    "krin": {
-      "required_phain": [{"relation": "rel:produced", "match": "same-roles"}],
-      "required_iknem": ["artifact-content-observation"],
-      "on_missing_observation": "agno",
+    "goal_direction": {"mode": "reach"},
+    "satisfaction_criteria": {
+      "required_observations": [{"relation": "rel:produced", "match": "same-roles"}],
+      "required_evidence": ["artifact-content-observation"],
+      "on_missing_observation": "undetermined",
       "on_evaluation_error": "fault",
       "decision_authority": "authority:requester"
     },
-    "apor": []
+    "unresolved_meaning": []
   }
 }

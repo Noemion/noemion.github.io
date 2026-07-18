@@ -1,0 +1,26 @@
+{
+  "vector_format": "end-core.semantic-vector.v2",
+  "id": "SV-REJECT-UNRESOLVED-MEANING-001",
+  "description": "存在两个允许投影但 unresolved_meaning 为空时，系统伪造了不存在的确定性。",
+  "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
+  "context": {"external_preconditions": []},
+  "expect": {
+    "result": "reject",
+    "clauses": ["END-UNRESOLVED-001", "END-UNK-001", "END-ERR-001"],
+    "diagnostics": [
+      {"code": "endem.unresolved_meaning.unrecorded_projection_choice", "clause": "END-UNRESOLVED-001", "location": "/input/unresolved_meaning"}
+    ]
+  },
+  "input": {
+    "source_expression": {"source_id": "source:request-004", "content": "生成项目报告"},
+    "meaning_projection": {
+      "symbols": [{"id": "sym:report", "kind": "candidate", "source_ref": "source:request-004"}],
+      "relations": [],
+      "projection_candidates": ["meaning:status-report", "meaning:security-report"]
+    },
+    "situation": {"roots": ["situation:report-produced"], "situations": []},
+    "goal_direction": {"mode": "reach"},
+    "satisfaction_criteria": {"decision_authority": "authority:requester"},
+    "unresolved_meaning": []
+  }
+}

@@ -80,7 +80,7 @@ def proposal_violation(proposal):
             "authority_principal", "authority_basis", "reason"))
             or not isinstance(semantic.get("affected_positions"), list)
             or not semantic.get("affected_positions")
-            or not isinstance(semantic.get("remaining_apor"), list)
+            or not isinstance(semantic.get("remaining_unresolved_meaning"), list)
             or semantic.get("exact_view_reviewed") is not True
             or semantic.get("model_self_authorizes") is not False
             or semantic.get("confidence_authorizes") is not False
@@ -95,11 +95,11 @@ def proposal_violation(proposal):
             "decider", "cutoff", "reason"))
             or not isinstance(decision.get("evidence"), list) or not decision.get("evidence")
             or not isinstance(decision.get("limitations"), list)
-            or decision.get("outcome") not in {"grant", "deny", "defer"}
+            or decision.get("outcome") not in {"allowed", "denied", "pending"}
             or decision.get("effective_scope_is_explicit_subset") is not True
             or decision.get("request_acknowledges_partial") is not True
-            or decision.get("defer_is_grant") is not False
-            or decision.get("missing_defaults_to_grant") is not False):
+            or decision.get("pending_is_allowed") is not False
+            or decision.get("missing_defaults_to_allowed") is not False):
         return "AUT-DEC-001"
 
     delegation = proposal.get("delegation", {})
@@ -183,7 +183,7 @@ def proposal_violation(proposal):
     capability = proposal.get("capability", {})
     required_limits = (
         "authorization_limit", "artifact_limit", "policy_limit", "environment_limit",
-        "dromen_limit", "adapter_limit")
+        "session_limit", "adapter_limit")
     if (not all(isinstance(capability.get(key), list) and capability.get(key)
                 for key in required_limits)
             or not isinstance(capability.get("budget_limit"), dict)
@@ -193,8 +193,8 @@ def proposal_violation(proposal):
                    for key in required_limits)
             or capability.get("ambient_authority_used") is not False
             or capability.get("token_passthrough") is not False
-            or capability.get("tool_description_is_grant") is not False
-            or capability.get("protocol_challenge_is_grant") is not False
+            or capability.get("tool_description_is_authority") is not False
+            or capability.get("protocol_challenge_is_authority") is not False
             or capability.get("step_up_creates_new_session") is not True
             or capability.get("live_secret_outside_contract") is not True):
         return "AUT-CAP-001"
@@ -207,7 +207,7 @@ def proposal_violation(proposal):
             or any(separation.get(key) is not False for key in (
                 "authorization_implies_truth", "authorization_implies_satisfaction",
                 "authorization_implies_acceptance", "authorization_implies_completion",
-                "model_is_authority", "drasor_is_final_authority", "protocol_state_is_authority"))):
+                "model_is_authority", "runner_is_final_authority", "protocol_state_is_authority"))):
         return "AUT-SEP-001"
     return None
 

@@ -16,7 +16,7 @@ badges: ["名称审查", "人类证据", "读音待定"]
 
 ## 直接结论
 
-Noemion 当前已经确定术语职责和读音审查方法，但新造词的发行读音仍是待定内容。名称必须经过真实人类朗读和听辨；项目自己写出的 IPA、拼读提示、语音合成或自动转写都不能证明名称已经通过。
+Noemion 已经用直白职责名称替代了大部分不必要的造词，并建立版本化关键字检查。项目只保留 `Noemion` 与 `Endem` 两个造词；它们的发行读音仍是待定内容。名称必须经过真实人类朗读和听辨；项目自己写出的 IPA、拼读提示、语音合成或自动转写都不能证明名称已经通过。
 
 ### 当前资料的阅读约定
 
@@ -24,39 +24,39 @@ Noemion 当前已经确定术语职责和读音审查方法，但新造词的发
 
 | 先理解的职责 | 现行设计字段 | 必须保持的区分 |
 | --- | --- | --- |
-| 来源表达 | `rhem` | 来源实际出现的记号不同于经确认的意义投影 |
-| 已确认意义投影 | `semion` | 模型候选不同于规则或范围有限具名权威确认的投影；意义确认不授予运行权限 |
-| 可能事态 | `skena` | 中性事态不同于目标方向和实际观察 |
-| 目标方向 | `telis` | 达到或保持不同于事态本身和满足判断 |
-| 满足判据 | `krin` | 比较方法不同于观察、证据记录和最终决定 |
-| 待确认意义 | `apor` | 语义未决不同于观察不足、结构无意义或运行故障 |
+| 来源表达 | `source_expression` | 来源实际出现的记号不同于经确认的意义投影 |
+| 已确认意义投影 | `meaning_projection` | 模型候选不同于规则或范围有限具名权威确认的投影；意义确认不授予运行权限 |
+| 可能事态 | `situation` | 中性事态不同于目标方向和实际观察 |
+| 目标方向 | `goal_direction` | 达到或保持不同于事态本身和满足判断 |
+| 满足判据 | `satisfaction_criteria` | 比较方法不同于观察、证据记录和最终决定 |
+| 待确认意义 | `unresolved_meaning` | 语义未决不同于观察不足、结构无意义或运行故障 |
 
-这里先用“意义确认”帮助开发者区分职责；AUT-CORE 把精确的外部关系称为语义授权。它和动作授权不是同一件事：前者只允许候选进入确认的 `semion`，后者才决定某个主体能否针对某个对象尝试某个动作。读音研究必须让参与者能够分别恢复这两项职责，不能把同一个“已授权”标签当作答案提示。
+这里先用“意义确认”帮助开发者区分职责；AUT-CORE 把精确的外部关系称为语义授权。它和动作授权不是同一件事：前者只允许候选进入确认的 `meaning_projection`，后者才决定某个主体能否针对某个对象尝试某个动作。读音研究必须让参与者能够分别恢复这两项职责，不能把同一个“已授权”标签当作答案提示。
 
 ## 读音待定时怎样协作
 
 没有合格读音表时，口头表达只能帮助参与者找到书面标识，不能充当标识本身。开发者在会议、Issue、代码评审和运行手册中遵守以下约定：
 
-1. 先说直白职责，再给出代码样式的精确标识。例如写“有范围的证据记录（现行设计名 `Iknem`）”，不要只写一个尚未验证读音的专名。
+1. 先说直白职责，再给出代码样式的精确标识。例如写“有范围的证据记录（现行设计名 `evidence entry`）”，不要只写一个尚未验证读音的专名。
 2. 会议中若听者不能立即写回标识，就把精确拼写发到共享文字频道；必要时逐字母确认。团队不得把临时读法、个人口音或一次顺利听写登记成官方读音。
 3. 命令、字段、Profile 和规范 ID 必须从书面材料复制或核对。口述的近似声音不能选择命令、修改参数、扩大权限或成为评审记录中的唯一引用。
 4. 自动转写只保存一次机器观察。记录者必须对照书面标识确认后再引用；原始转写不能直接改写 schema、命令、授权范围或研究结果。
 
 | 协作任务 | 推荐表达 | 不足以执行或引用的表达 |
 | --- | --- | --- |
-| 讨论证据对象 | 有范围的证据记录（现行设计名 `Iknem`） | “那个听起来像 Iknem 的东西” |
-| 讨论会话边界 | 一次会话的只读执行契约（现行设计名 `Dromen`） | 只说未经验证的读音 |
-| 核对检查动作 | 在文字频道给出精确命令 `endem theor` | 依靠会议录音猜测动作名或参数 |
+| 讨论证据对象 | 有范围的证据记录（现行设计名 `evidence entry`） | “那个听起来像 evidence entry 的东西” |
+| 讨论会话边界 | 一次会话的只读执行契约（现行设计名 `session contract`） | 只说未经验证的读音 |
+| 核对检查动作 | 在文字频道给出精确命令 `endem inspect` | 依靠会议录音猜测动作名或参数 |
 
 Noemion 当前没有语音界面。未来若研究口述动作，界面仍必须显示将要使用的精确机器动作、对象、参数和权限范围，并由适用权威确认；只有声音或转写结果不能触发执行。
 
-读音验证之前还必须先问“是否需要专名”。如果标准术语或简短职责短语已经能准确恢复对象、消费者和失败责任，继续创造新词只会增加记忆、听写和职责匹配负担。[发行术语去专名化研究提案](https://noemion.github.io/spec/release-terminology-simplification-proposal.html)把这项审查应用到现行对象、角色和动作，但当前只形成候选，不修改规范。
+读音验证之前还必须先问“是否需要专名”。如果标准术语或简短职责短语已经能准确恢复对象、消费者和失败责任，继续创造新词只会增加记忆、听写和职责匹配负担。[发行术语去专名化研究提案](https://noemion.github.io/spec/release-terminology-simplification-proposal.html)提供了对象、角色和动作的反例；[ADR-0037](../architecture/adr-0037-terminology-simplification.html)已经据此采用直白职责名。
 
-[语义面与观察词去专名化提案](https://noemion.github.io/spec/semantic-facet-terminology-proposal.html)把审查继续应用到 `rhem/semion/skena/telis/krin/apor/phain`。提案保留七项职责分层，并以七个直白字段名进入验证；它同样不修改现行 END-CORE、Profile 或来源清单。
+[语义面与观察词去专名化提案](https://noemion.github.io/spec/semantic-facet-terminology-proposal.html)把审查继续应用到 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation`。这七项名称已经进入 END-CORE、END-P2、来源清单、向量和测试；提案继续作为迁移证据，不再代表现行词表。
 
-[生命周期与结果词边界提案](https://noemion.github.io/spec/lifecycle-and-result-terminology-proposal.html)把审查应用到 `nascent/coherent/attested`、`agno/aseme` 与会话终止词。它把对象边界修正和发行命名分成两条迁移轴：前者可以暂时保留 `nascent/coherent`，只把外部陈述、验证与依赖方判断移出内容状态；后者才比较直白候选并等待人类证据。读音流畅不能保住语义错误的名称，普通词也仍须在完整域限定短语中验证。
+[生命周期与结果词边界提案](https://noemion.github.io/spec/lifecycle-and-result-terminology-proposal.html)把对象边界修正和命名审查分开。当前规范已采用 `formed / resolved`、`undetermined / no_allowed_projection` 与会话终止词 `stopped`，并把外部陈述、验证与依赖方判断移出内容状态。读音流畅不能保住语义错误的名称，普通词也仍须在完整域限定短语中验证。
 
-桌面证据已经足以排除 `kine/mene` 作为首次正式发行拼写，但没有改变现行规范值。[`telis` 发行词候选提案](https://noemion.github.io/spec/telis-release-terms-proposal.html)推荐先验证 `reach/maintain`；这两个词仍是候选，不是官方术语、别名或规范化结果。
+桌面语义审查和关键字检查已经支持把 `reach/maintain` 作为当前 `goal_direction` 枚举；它们分别表示在判断点成立和在声明时间范围内持续成立，不额外声称本次动作造成了转变。[`goal_direction` 发行词研究](https://noemion.github.io/spec/goal_direction-release-terms-proposal.html)保存了候选比较。两项拼写仍须完成人类口头验证，不能据此宣称发行读音已经通过。
 
 验证分成两个阶段：先让未接触项目的参与者暴露自然读法，再用另一批参与者检验候选读音能否在完整词表中被唯一听出、写回并匹配正确职责。两个阶段不能使用同一批人。
 
@@ -99,7 +99,7 @@ Noemion 当前没有语音界面。未来若研究口述动作，界面仍必须
 
 权威词典中的既有无关词义、无法从名称恢复职责、明显的工程概念冲突或高风险近音，可以在招募参与者前排除候选。排除只说明该拼写不值得进入发行听测；替代词仍必须完成以下两阶段验证。
 
-当前 `telis` 候选还要额外检查语义诱导：听者不能把 `reach` 理解成必须证明一次状态转变，也不能把 `maintain` 理解成一次采样或“没有看到失败”即可证明持续满足。
+当前 `goal_direction` 候选还要额外检查语义诱导：听者不能把 `reach` 理解成必须证明一次状态转变，也不能把 `maintain` 理解成一次采样或“没有看到失败”即可证明持续满足。
 
 ### 发现阶段
 
@@ -124,7 +124,7 @@ Noemion 当前没有语音界面。未来若研究口述动作，界面仍必须
 
 ## 任务与材料
 
-材料不能只比较新造词之间的发音。每组测试都应同时包含“保留专名”和“改用直白职责名”的版本，并让参与者在不知道项目偏好的情况下完成对象选择、职责匹配和反例判断。当前优先比较 Endem 与 Endem closure，scoped evidence record、session contract、deterministic producer、independent inspector、bounded runner 和 `endem form/check/compose/inspect/run`，以及 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation` 的完整语句。语义面组还必须使用来源与投影、事态与观察、方向与判据、待确认意义与观察不足的成对反例。
+材料不能只比较新造词之间的发音。每组测试都应让参与者在不知道项目偏好的情况下完成对象选择、职责匹配和反例判断。当前优先比较 Noemion、Endem 与 Endem closure，并验证 session contract、evidence entry、deterministic producer、independent inspector、bounded runner 和 `endem form/lint/compose/inspect/run`，以及 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation` 的完整语句。语义面组还必须使用来源与投影、事态与观察、方向与判据、待确认意义与观察不足的成对反例。
 
 每个听者先听完整语句，再完成三项相互独立的回答：
 
@@ -174,6 +174,6 @@ Noemion 当前没有语音界面。未来若研究口述动作，界面仍必须
 
 ## 当前状态
 
-截至 2026-07-16，Noemion 尚未执行上述人类研究，也没有合格的发行读音表。`kine/mene` 未通过发行拼写的初步审查，`reach/maintain` 是等待验证的首选候选。后续研究建议只保留 Endem 继续验证，把其余对象、角色、动作以及七个语义面/观察词同直白职责候选比较；这些建议仍在研究中，也没有人类证据。现行拼写不能因职责已经确定或未列为高风险就自动通过。
+截至 2026-07-18，Noemion 尚未执行上述人类研究，也没有合格的发行读音表。当前迁移已经把对象、角色、动作和七个语义面/观察词改为直白职责名称，并用版本化语料排除了已知关键字冲突；完整结果见[术语审查结果](terminology-audit.html)。`Noemion` 与 `Endem` 仍没有人类读音证据，其他普通词在新增主要使用语言或语音交互条件时也必须重新检查口头区分。
 
 在真实结果形成前，公开资料继续先写直白职责，再使用设计阶段名称；不得发布“官方发音”、音频词典或名称已经适合全球传播的结论。

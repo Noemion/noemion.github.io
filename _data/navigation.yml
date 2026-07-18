@@ -16,9 +16,9 @@ global:
     description: 查看目标、组合、一次运行、实际观察和授权分别遵循什么规则。
     items:
       - { href: /specifications/endem.html, label: Endem, description: 一个目标怎样保存来源、意思、期望结果和验收条件, cover: endem-spec, cover_label: "SIGN → SITUATION" }
-      - { href: /specifications/synem.html, label: Synem, description: 怎样把多个相互依赖的目标固定成完整集合, cover: synem, cover_label: "RESOLVED CLOSURE" }
-      - { href: /specifications/dromen.html, label: Dromen, description: 怎样限定一次运行可以使用的对象、能力和预算, cover: dromen, cover_label: "SESSION CONTRACT" }
-      - { href: /specifications/iknem.html, label: Iknem, description: 怎样记录实际观察、方法、覆盖范围和限制, cover: iknem, cover_label: "SCOPED EVIDENCE" }
+      - { href: /specifications/endem-closure.html, label: Endem closure, description: 怎样把多个相互依赖的目标固定成完整集合, cover: closure, cover_label: "RESOLVED CLOSURE" }
+      - { href: /specifications/session-contract.html, label: session contract, description: 怎样限定一次运行可以使用的对象、能力和预算, cover: session, cover_label: "SESSION CONTRACT" }
+      - { href: /specifications/evidence-entry.html, label: evidence entry, description: 怎样记录实际观察、方法、覆盖范围和限制, cover: evidence, cover_label: "SCOPED EVIDENCE" }
   - key: endem
     href: /endem/index.html
     label: 应用
@@ -26,9 +26,9 @@ global:
     description: 查看计划中的 Endem 命令怎样形成、检查、组合和受限运行目标。
     items:
       - { href: /endem/index.html, label: Endem 应用, description: 从一个入口理解形成、检查、组合和运行准备, cover: endem, cover_label: "ONE COMMAND" }
-      - { href: /endem/docs/format.html, label: 格式与形成, description: 人的目标要保留哪些信息，怎样形成初始制品, cover: format, cover_label: "KTISE / ELENK" }
-      - { href: /endem/docs/safety.html, label: 安全与证据, description: 为什么写入程序不能独自证明自己的输出正确, cover: theor, cover_label: "ELENK / THEOR" }
-      - { href: /endem/docs/running.html, label: 装载与运行, description: 运行前怎样重新核对目标、权限、环境和证据责任, cover: drase, cover_label: "SIGN / DRASE" }
+      - { href: /endem/docs/format.html, label: 格式与形成, description: 人的目标要保留哪些信息，怎样形成初始制品, cover: format, cover_label: "FORM / LINT" }
+      - { href: /endem/docs/safety.html, label: 安全与证据, description: 为什么写入程序不能独自证明自己的输出正确, cover: inspector, cover_label: "LINT / INSPECT" }
+      - { href: /endem/docs/running.html, label: 装载与运行, description: 运行前怎样重新核对目标、权限、环境和证据责任, cover: runner, cover_label: "SIGN / RUN" }
   - key: docs
     href: /docs/index.html
     label: 指南
@@ -95,7 +95,7 @@ modules:
           - { href: /architecture/adr-0010-native-lexicon.html, label: "ADR-0010 · 原生词汇与事态" }
           - { href: /architecture/adr-0011-endem-container.html, label: "ADR-0011 · 字节边界与读取顺序" }
           - { href: /architecture/adr-0012-rust-core-language.html, label: "ADR-0012 · 未来 Rust 评审基线" }
-          - { href: /architecture/adr-0013-end-p1-payload.html, label: "ADR-0013 · 来源保留 END-P1" }
+          - { href: /architecture/adr-0013-end-p1-payload.html, label: "ADR-0013 · 来源保留 END-P2" }
           - { href: /architecture/adr-0014-source-manifest.html, label: "ADR-0014 · 实验来源清单边界" }
           - { href: /architecture/adr-0015-result-domains.html, label: "ADR-0015 · 五类结果不可互换" }
           - { href: /architecture/adr-0016-mene-time-model.html, label: "ADR-0016 · 持续目标的时间证据" }
@@ -119,15 +119,16 @@ modules:
           - { href: /architecture/adr-0034-pronunciation-and-oral-distinction.html, label: "ADR-0034 · 读得出，不等于听得清、写得回" }
           - { href: /architecture/adr-0035-public-actions-and-internal-responsibilities.html, label: "ADR-0035 · 用户任务不是内部职责清单" }
           - { href: /architecture/adr-0036-source-bearing-and-stripped-release.html, label: "ADR-0036 · 移除原文，就得到另一份制品" }
+          - { href: /architecture/adr-0037-terminology-simplification.html, label: "ADR-0037 · 用职责名称替代不必要的造词" }
           - { href: /architecture/open-questions.html, label: 开放问题 }
       - label: 对象规范
         items:
           - { href: /specifications/index.html, label: 规范与状态 }
           - { href: /spec/index.html, label: 版本化规范源 }
           - { href: /specifications/endem.html, label: Endem }
-          - { href: /specifications/synem.html, label: Synem }
-          - { href: /specifications/dromen.html, label: Dromen }
-          - { href: /specifications/iknem.html, label: Iknem }
+          - { href: /specifications/endem-closure.html, label: Endem closure }
+          - { href: /specifications/session-contract.html, label: session contract }
+          - { href: /specifications/evidence-entry.html, label: evidence entry }
           - { href: /specifications/diagnostics.html, label: 结构化诊断 }
           - { href: /specifications/adapters.html, label: 外部协议适配 }
           - { href: /specifications/identity.html, label: 精确内容身份与签名 }
@@ -136,9 +137,9 @@ modules:
       - label: 系统组件
         items:
           - { href: /components/index.html, label: 组件总览 }
-          - { href: /components/ktisor.html, label: Ktisor }
-          - { href: /components/theor.html, label: Theor }
-          - { href: /components/drasor.html, label: Drasor }
+          - { href: /components/producer.html, label: deterministic producer }
+          - { href: /components/inspector.html, label: independent inspector }
+          - { href: /components/runner.html, label: bounded runner }
   resources:
     kicker: Resources
     title: 资源与支持
@@ -189,6 +190,6 @@ modules:
           - { href: /endem/docs/reference.html, label: 动作与诊断参考 }
       - label: 职责边界
         items:
-          - { href: /components/ktisor.html, label: Ktisor }
-          - { href: /components/theor.html, label: Theor }
-          - { href: /components/drasor.html, label: Drasor }
+          - { href: /components/producer.html, label: deterministic producer }
+          - { href: /components/inspector.html, label: independent inspector }
+          - { href: /components/runner.html, label: bounded runner }

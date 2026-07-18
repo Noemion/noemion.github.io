@@ -18,9 +18,9 @@ document_status: "规范草案"
 
 ## 1. 范围
 
-本规范定义 Ktisor、独立 Theor、Drasor、`endem` 动作以及未来协议适配器产生的诊断至少必须保留哪些机器可读内容。它覆盖 Endem、Synem、Dromen、Iknem、来源清单、物理容器、政策、后端和外部协议，但不改变这些对象自己的规范与结果域。
+本规范定义 deterministic producer、independent inspector、bounded runner、`endem` 动作以及未来协议适配器产生的诊断至少必须保留哪些机器可读内容。它覆盖 Endem、Endem closure、session contract、evidence entry、来源清单、物理容器、政策、后端和外部协议，但不改变这些对象自己的规范与结果域。
 
-诊断回答“哪个操作在检查哪个精确输入时，因哪条规范、哪个位置和什么可恢复条件停止或提示”。诊断不是 Endem、Iknem、满足结果、最终决定、Drase 会话结果、权限、重试命令或实现堆栈。诊断可以被后续 Iknem 引用，但它的存在、数量或严重度不能证明目标满足、证据充分或决定已经获得授权。
+诊断回答“哪个操作在检查哪个精确输入时，因哪条规范、哪个位置和什么可恢复条件停止或提示”。诊断不是 Endem、evidence entry、满足结果、最终决定、run 会话结果、权限、重试命令或实现堆栈。诊断可以被后续 evidence entry 引用，但它的存在、数量或严重度不能证明目标满足、证据充分或决定已经获得授权。
 
 ## 2. 要求用语与符合性
 
@@ -51,7 +51,7 @@ document_status: "规范草案"
 
 ### DIA-LAY-001 — 失败层次与结果域必须正交
 
-**要求：**诊断 `MUST` 明确属于 `source`、`structure`、`profile`、`semantic`、`closure`、`session`、`evidence`、`policy`、`protocol`、`backend` 或 `internal` 之一，并记录实际执行到哪一层。协议错误、工具执行错误、后端失败、政策拒绝和规范拒绝 `MUST` 保持来源层次。诊断 `MUST NOT` 自动映射为 `met/unmet/agno/fault`、`accepted/rejected/deferred`、`completed/failed/interrupted`、Iknem 有效性或覆盖度。
+**要求：**诊断 `MUST` 明确属于 `source`、`structure`、`profile`、`semantic`、`closure`、`session`、`evidence`、`policy`、`protocol`、`backend` 或 `internal` 之一，并记录实际执行到哪一层。协议错误、工具执行错误、后端失败、政策拒绝和规范拒绝 `MUST` 保持来源层次。诊断 `MUST NOT` 自动映射为 `met/unmet/undetermined/fault`、`accepted/rejected/deferred`、`completed/failed/stopped`、evidence entry 有效性或覆盖度。
 
 **失败：**MCP `isError` 被解释为目标 `unmet`，HTTP 状态被解释为权威拒绝，解析失败被解释为 `fault` 求值结果，或会话失败覆盖原满足判断时，映射必须拒绝。
 
@@ -75,7 +75,7 @@ document_status: "规范草案"
 
 ### DIA-REC-001 — 恢复建议不能成为权限或无限重试
 
-**要求：**恢复分类只允许 `fix-input`、`refresh-binding`、`obtain-authority`、`retry-transient`、`operator-review` 或 `do-not-retry`。建议 `MUST` 声明前置条件和影响范围；重试必须受 Dromen 预算与取消约束。诊断及其建议 `MUST NOT` 授予能力、关闭 `apor`、修改已签制品、自动批准 step-up、跳过未执行层或命令模型执行具有外部副作用的修复。
+**要求：**恢复分类只允许 `fix-input`、`refresh-binding`、`obtain-authority`、`retry-transient`、`operator-review` 或 `do-not-retry`。建议 `MUST` 声明前置条件和影响范围；重试必须受 session contract 预算与取消约束。诊断及其建议 `MUST NOT` 授予能力、关闭 `unresolved_meaning`、修改已签制品、自动批准 step-up、跳过未执行层或命令模型执行具有外部副作用的修复。
 
 **失败：**权限拒绝触发自动提权、相同确定性输入被无限重试、模型依据自由文本执行删除或发布，或“可重试”被解释为会话可以继续时，恢复关系无效。
 
@@ -107,9 +107,9 @@ document_status: "规范草案"
 
 ### DIA-ATM-001 — 阻断诊断不得伴随部分可信成功
 
-**要求：**阻断诊断出现时，相关操作 `MUST NOT` 产生部分可信 Endem、Synem、Dromen、Iknem、签名请求、权限、可被下游当作检查已经通过的内部引用或成功状态。未执行层 `MUST` 明确为 `not-run`；可安全取得的只读观察只能作为非权威附属信息。警告和注记也 `MUST NOT` 提升对象状态或掩盖阻断错误。
+**要求：**阻断诊断出现时，相关操作 `MUST NOT` 产生部分可信 Endem、Endem closure、session contract、evidence entry、签名请求、权限、可被下游当作检查已经通过的内部引用或成功状态。未执行层 `MUST` 明确为 `not-run`；可安全取得的只读观察只能作为非权威附属信息。警告和注记也 `MUST NOT` 提升对象状态或掩盖阻断错误。
 
-**失败：**读取器在报错后返回可继续使用的对象、Drasor 在政策错误后保留能力、部分 Synem 被标为完整，或“同时有成功和错误”被自动化解释为成功时，操作必须拒绝。
+**失败：**读取器在报错后返回可继续使用的对象、bounded runner 在政策错误后保留能力、部分 Endem closure 被标为完整，或“同时有成功和错误”被自动化解释为成功时，操作必须拒绝。
 
 **验证：**`DIA-SCN-015`；`vectors/diagnostics/cases.json`；未来 `conformance:diagnostic-atomic-failure` 组件测试。
 
@@ -118,7 +118,7 @@ document_status: "规范草案"
 - GNU GCC 的文本与 SARIF 输出说明同一诊断可以拥有多个呈现出口；Noemion 采用“机器内容与呈现分离”，不复制 GCC 选项或把 SARIF 作为核心格式。
 - SARIF 的规则身份、位置和相关位置适合未来静态检查导出；它不能表达 Noemion 的权限、满足或决定语义。
 - RFC 9457 的问题类型、具体发生与人类详情分离适合未来 HTTP 适配；其 HTTP `status` 不能代替本地层次和主码。
-- MCP 区分 JSON-RPC 协议错误与 `isError: true` 的工具执行错误；Drasor 外缘必须保留这一区分，再映射到本地诊断，而不是让模型依据消息文本改写目标结果。
+- MCP 区分 JSON-RPC 协议错误与 `isError: true` 的工具执行错误；bounded runner 外缘必须保留这一区分，再映射到本地诊断，而不是让模型依据消息文本改写目标结果。
 
 ## 5. 当前未定义
 

@@ -2,27 +2,27 @@
 
 本目录是修改站点页面、共享布局、目录和交互动效时的设计路由入口。开始改动前，先根据目标文件或 `page_role` 读取下表指定文档；涉及多个角色时读取所有对应文档。
 
-修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、六个语义面、Synem、Dromen、Iknem、Ktisor、Theor、Drasor、五个动作和唯一 CLI 是当前设计阶段命名基线，设计文档不得引入旧名称或兼容入口。它们的职责已经确定，不表示具体拼写和读音已经满足发行条件。修改品牌、制品名、命令、扩展名、读音或分发坐标时还必须读取并更新 [`name-audit.md`](name-audit.md)，不能用旧查询结果或主观拼读证明当前可用性。
+修改任何公开文案、组件名称、制品术语、动作、文件名或路由时，还必须完整读取 [`language-and-naming.md`](language-and-naming.md)。Noemion 只作为品牌；Endem、六个语义面、Endem closure、session contract、evidence entry、deterministic producer、independent inspector、bounded runner、五个动作和唯一 CLI 是当前设计阶段命名基线，设计文档不得引入旧名称或兼容入口。它们的职责已经确定，不表示具体拼写和读音已经满足发行条件。修改品牌、制品名、命令、扩展名、读音或分发坐标时还必须读取并更新 [`name-audit.md`](name-audit.md)，不能用旧查询结果或主观拼读证明当前可用性。
 
-修改 `.endem`、`rhem/semion/skena/telis/krin/apor`、`phain`、事态投影、引用、内容身份、规范排序、封装布局或证据排布时，先读取当前 Endem、Synem 和 Iknem 规范，再读取 [`ADR-0010`](../architecture/adr-0010-native-lexicon.html) 与相关活跃 ADR。架构决策只在 `architecture/` 维护；本目录不保存历史 ADR 副本，也不得重新引入旧词或兼容接口。
+修改 `.endem`、`source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning`、`structured_observation`、事态投影、引用、内容身份、规范排序、封装布局或证据排布时，先读取当前 Endem、Endem closure 和 evidence entry 规范，再读取 [`ADR-0010`](../architecture/adr-0010-native-lexicon.html) 与相关活跃 ADR。架构决策只在 `architecture/` 维护；本目录不保存历史 ADR 副本，也不得重新引入旧词或兼容接口。
 
-修改 Endem 生命周期、Ktisor/Theor/Drasor 隔离、独立读取路径、GNU 工具链采用范围或外部 AI 协议落点时，先读取 `/architecture/endem-lifecycle.html`、对应组件页面和它们链接的活跃 ADR。
+修改 Endem 生命周期、deterministic producer/independent inspector/bounded runner 隔离、独立读取路径、GNU 工具链采用范围或外部 AI 协议落点时，先读取 `/architecture/endem-lifecycle.html`、对应组件页面和它们链接的活跃 ADR。
 
-修改 `ktise/elenk/pleko/theor/drase` 的输入输出、失败语义或跨组件消费者关系，以及修改派生封装、外部签名和符合性门禁时，先读取 [`internal-tools.md`](internal-tools.md)、Endem 手册与活跃产物流 ADR。
+修改 `form/lint/compose/inspect/run` 的输入输出、失败语义或跨组件消费者关系，以及修改派生封装、外部签名和符合性门禁时，先读取 [`internal-tools.md`](internal-tools.md)、Endem 手册与活跃产物流 ADR。
 
-修改模型候选、上下文装配、能力接口、反馈循环、Dromen、Iknem 或人工升级边界时，必须同时读取 Theor、Drasor 与 Iknem 规范以及相关活跃 ADR。任何设计都不得让模型决定规范字节、删除 `apor`、扩大能力或宣告最终验收。
+修改模型候选、上下文装配、能力接口、反馈循环、session contract、evidence entry 或人工升级边界时，必须同时读取 independent inspector、bounded runner 与 evidence entry 规范以及相关活跃 ADR。任何设计都不得让模型决定规范字节、删除 `unresolved_meaning`、扩大能力或宣告最终验收。
 
-修改满足判断、权威决定、Drase 会话终止、Iknem 有效性或证据覆盖度时，必须读取 ADR-0015、Endem 生命周期、Drasor 与 Iknem 规范。不得把外部 Task、工具调用或会话的完成状态直接映射为 `met` 或 `accepted`。
+修改满足判断、权威决定、run 会话终止、evidence entry 有效性或证据覆盖度时，必须读取 ADR-0015、Endem 生命周期、bounded runner 与 evidence entry 规范。不得把外部 Task、工具调用或会话的完成状态直接映射为 `met` 或 `accepted`。
 
-修改 `mene`、时间范围、经过时长、连续性政策、违约预算或观测覆盖时，必须读取 ADR-0016、Endem 与 Iknem 规范以及 Drasor 页面。不得用当前机器时区、墙钟经过时长、相对日期或稀疏采样补齐未声明语义。
+修改 `maintain`、时间范围、经过时长、连续性政策、违约预算或观测覆盖时，必须读取 ADR-0016、Endem 与 evidence entry 规范以及 bounded runner 页面。不得用当前机器时区、墙钟经过时长、相对日期或稀疏采样补齐未声明语义。
 
-修改否定极性、负观察、空日志、查询未命中、观察故障或封闭范围时，必须读取 ADR-0017、Endem 与 Iknem 规范以及 Drasor 页面。不得删除关系节点、另造否定谓词，或把未找到记录直接写成负事实。
+修改否定极性、负观察、空日志、查询未命中、观察故障或封闭范围时，必须读取 ADR-0017、Endem 与 evidence entry 规范以及 bounded runner 页面。不得删除关系节点、另造否定谓词，或把未找到记录直接写成负事实。
 
-修改“所有”“任一”、数量条件、成员范围、空集合或量化聚合时，必须读取 ADR-0018、Endem 与 Iknem 规范以及 Drasor 页面。页面必须先解释集合怎样冻结，再解释量词；不得把搜索结果冒充全集、把重复事件当不同成员或用默认空真产生满足。
+修改“所有”“任一”、数量条件、成员范围、空集合或量化聚合时，必须读取 ADR-0018、Endem 与 evidence entry 规范以及 bounded runner 页面。页面必须先解释集合怎样冻结，再解释量词；不得把搜索结果冒充全集、把重复事件当不同成员或用默认空真产生满足。
 
-修改分数、指标、单位、窗口、均值、分位数、固定基准、推广结论、不确定度或阈值时，必须读取 ADR-0019、Endem 与 Iknem 规范以及 Drasor 页面。页面必须先解释究竟测量什么和适用于谁，再解释程序与阈值；不得让排行榜、显示舍入值、点估计或模型置信度代替测量契约。
+修改分数、指标、单位、窗口、均值、分位数、固定基准、推广结论、不确定度或阈值时，必须读取 ADR-0019、Endem 与 evidence entry 规范以及 bounded runner 页面。页面必须先解释究竟测量什么和适用于谁，再解释程序与阈值；不得让排行榜、显示舍入值、点估计或模型置信度代替测量契约。
 
-修改“并且”“或者”、复合条件、多个判据、短路或 Endem/Synem 拆分时，必须读取 ADR-0020、Endem、Synem 与 Iknem 规范以及 Drasor 页面。页面必须先解释这是一个不可分终态还是多个独立目标，再解释 `all_of / any_of`；不得把未求值写成 `agno`，也不得让布尔表达式隐藏故障。
+修改“并且”“或者”、复合条件、多个判据、短路或 Endem/Endem closure 拆分时，必须读取 ADR-0020、Endem、Endem closure 与 evidence entry 规范以及 bounded runner 页面。页面必须先解释这是一个不可分终态还是多个独立目标，再解释 `all_of / any_of`；不得把未求值写成 `undetermined`，也不得让布尔表达式隐藏故障。
 
 全局原则、品牌语言、断点和验收基线见 [`../sitewide-design-system.md`](../sitewide-design-system.md)。本目录文档负责把这些原则落实到具体页面类型，不能改变 Noemion 的成熟度、权威性或证据边界。
 

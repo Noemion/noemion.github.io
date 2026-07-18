@@ -5,7 +5,7 @@
 
 ## 设计目标
 
-全站以约 1200px 连续画布、清晰阅读列和低噪声交互呈现 Noemion 的工程边界。视觉语言围绕 Endem 命题投影、引用绑定、独立检查、能力控制和 Iknem 证据，不再把传统对象文件面板作为品牌中心。
+全站以约 1200px 连续画布、清晰阅读列和低噪声交互呈现 Noemion 的工程边界。视觉语言围绕 Endem 命题投影、引用绑定、独立检查、能力控制和 evidence entry 证据，不再把传统对象文件面板作为品牌中心。
 
 ## 页面角色
 
@@ -37,9 +37,9 @@
 - 页面背景、连续文档画布、抬升内容面和半透明控制层构成稳定的四级表面层级；透明度只用于导航、菜单和中性控制，不用于带语义色的状态表面。
 - 桌面外框使用 18px 收口圆角，内容卡片使用约 14px，按钮与较小控制使用约 12px；嵌套控件按内层圆角加间距计算外层圆角，不让父子表面使用相同半径。
 - 抬升内容面以低透明轮廓和两层柔和阴影共同区分深度；提高对比度时轮廓增强，减少透明度时控制层退回实色纸面。
-- 等宽短词用于 `rhem/semion/skena/telis/krin/apor`、子命令、版本、偏移和状态；长正文保持系统无衬线。
-- Endem 使用六语义面板；Synem 使用成员与依赖闭包；Dromen 使用封闭加载边界；Iknem 使用事件与范围链。
-- 视觉不能把 Dromen 画成文件，不能把 Iknem 画成无条件证明，也不能把模型路径连到规范 Writer。
+- 等宽短词用于 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning`、子命令、版本、偏移和状态；长正文保持系统无衬线。
+- Endem 使用六语义面板；Endem closure 使用成员与依赖闭包；session contract 使用封闭加载边界；evidence entry 使用事件与范围链。
+- 视觉不能把 session contract 画成文件，不能把 evidence entry 画成无条件证明，也不能把模型路径连到规范 Writer。
 
 ## 排版
 

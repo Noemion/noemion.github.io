@@ -610,26 +610,26 @@ body[data-page-role="portal"] .portal-main>.portal-thesis{border-top:1px solid v
 .focus-card-endem .focus-art i:nth-child(1){top:42px;left:50px}
 .focus-card-endem .focus-art i:nth-child(2){top:116px;right:62px}
 .focus-card-endem .focus-art i:nth-child(3){bottom:45px;left:92px}
-.focus-card-synem .focus-art{background:linear-gradient(135deg,#121a17 0 35%,#3158ff 100%)}
-.focus-card-synem .focus-art::before{top:42px;right:42px;bottom:42px;left:42px;border:1px solid rgba(255,255,255,.38)}
-.focus-card-synem .focus-art i{right:60px;left:60px;height:16px;border:1px solid rgba(255,255,255,.46)}
-.focus-card-synem .focus-art i:nth-child(1){top:66px}
-.focus-card-synem .focus-art i:nth-child(2){top:100px}
-.focus-card-synem .focus-art i:nth-child(3){top:134px}
-.focus-card-dromen .focus-art{background:linear-gradient(135deg,#e35a2d,#f5bf36)}
-.focus-card-dromen .focus-art::before{inset:46px;background:repeating-linear-gradient(90deg,rgba(19,24,21,.76) 0 10px,transparent 10px 20px)}
-.focus-card-dromen .focus-art::after{inset:70px;background:#111714;box-shadow:0 0 0 10px rgba(255,255,255,.25)}
-.focus-card-dromen .focus-art i{z-index:1;width:7px;height:7px;background:var(--portal-mint);border-radius:50%}
-.focus-card-dromen .focus-art i:nth-child(1){top:88px;left:45%}
-.focus-card-dromen .focus-art i:nth-child(2){top:116px;left:52%}
-.focus-card-dromen .focus-art i:nth-child(3){top:144px;left:42%}
-.focus-card-iknem .focus-art{background:linear-gradient(135deg,#111714 0 58%,#31584a 100%)}
-.focus-card-iknem .focus-art::before{inset:40px 44px;background:repeating-linear-gradient(0deg,rgba(244,190,53,.6) 0 1px,transparent 1px 24px);border:1px solid rgba(255,255,255,.28)}
-.focus-card-iknem .focus-art::after{top:70px;right:68px;bottom:70px;left:68px;border-left:1px solid rgba(255,255,255,.56);border-right:1px solid rgba(255,255,255,.32);transform:skew(-10deg)}
-.focus-card-iknem .focus-art i{z-index:1;width:9px;height:9px;background:var(--portal-amber);border:2px solid #fff;border-radius:50%}
-.focus-card-iknem .focus-art i:nth-child(1){top:70px;left:28%}
-.focus-card-iknem .focus-art i:nth-child(2){top:126px;left:56%}
-.focus-card-iknem .focus-art i:nth-child(3){top:178px;left:40%}
+.focus-card-closure .focus-art{background:linear-gradient(135deg,#121a17 0 35%,#3158ff 100%)}
+.focus-card-closure .focus-art::before{top:42px;right:42px;bottom:42px;left:42px;border:1px solid rgba(255,255,255,.38)}
+.focus-card-closure .focus-art i{right:60px;left:60px;height:16px;border:1px solid rgba(255,255,255,.46)}
+.focus-card-closure .focus-art i:nth-child(1){top:66px}
+.focus-card-closure .focus-art i:nth-child(2){top:100px}
+.focus-card-closure .focus-art i:nth-child(3){top:134px}
+.focus-card-session .focus-art{background:linear-gradient(135deg,#e35a2d,#f5bf36)}
+.focus-card-session .focus-art::before{inset:46px;background:repeating-linear-gradient(90deg,rgba(19,24,21,.76) 0 10px,transparent 10px 20px)}
+.focus-card-session .focus-art::after{inset:70px;background:#111714;box-shadow:0 0 0 10px rgba(255,255,255,.25)}
+.focus-card-session .focus-art i{z-index:1;width:7px;height:7px;background:var(--portal-mint);border-radius:50%}
+.focus-card-session .focus-art i:nth-child(1){top:88px;left:45%}
+.focus-card-session .focus-art i:nth-child(2){top:116px;left:52%}
+.focus-card-session .focus-art i:nth-child(3){top:144px;left:42%}
+.focus-card-evidence .focus-art{background:linear-gradient(135deg,#111714 0 58%,#31584a 100%)}
+.focus-card-evidence .focus-art::before{inset:40px 44px;background:repeating-linear-gradient(0deg,rgba(244,190,53,.6) 0 1px,transparent 1px 24px);border:1px solid rgba(255,255,255,.28)}
+.focus-card-evidence .focus-art::after{top:70px;right:68px;bottom:70px;left:68px;border-left:1px solid rgba(255,255,255,.56);border-right:1px solid rgba(255,255,255,.32);transform:skew(-10deg)}
+.focus-card-evidence .focus-art i{z-index:1;width:9px;height:9px;background:var(--portal-amber);border:2px solid #fff;border-radius:50%}
+.focus-card-evidence .focus-art i:nth-child(1){top:70px;left:28%}
+.focus-card-evidence .focus-art i:nth-child(2){top:126px;left:56%}
+.focus-card-evidence .focus-art i:nth-child(3){top:178px;left:40%}
 .focus-card-copy{display:block;min-height:190px;padding:25px 27px 30px}
 .focus-card-copy small{
   display:inline-block;margin-bottom:16px;padding:4px 7px;color:var(--portal-coral);background:var(--portal-coral-soft);

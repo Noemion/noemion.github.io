@@ -12,7 +12,7 @@ document_status: "威胁模型"
 - 文档 ID：`ADP-THREAT`
 - 版本：`0.1.0-draft`
 - 日期：2026-07-13
-- 状态：Drasor 外部协议适配威胁草案
+- 状态：bounded runner 外部协议适配威胁草案
 
 外部协议把不可信对端、网络、任务、消息与产物连接到一次受限会话，因此同时跨越身份、权限、副作用、证据和披露边界。本模型只定义未来实现必须关闭的威胁，不表示 MCP、A2A、HTTP、模型 SDK 或任何适配器已经实现。
 
@@ -24,9 +24,9 @@ document_status: "威胁模型"
 
 恶意 Agent Card、工具清单、模型名称或注册信息把自报技能伪装成已认证主体和已授权能力。`ADP-PEE-001` 要求分开发现、声明、端点、认证主体、受众、租户和政策决定。
 
-### THR-ADP-003 — 协议协商绕过 Dromen 能力上限
+### THR-ADP-003 — 协议协商绕过 session contract 能力上限
 
-远端新增工具、任务、回调或采样能力后，当前会话在没有新授权的情况下使用它。`ADP-CAP-001` 要求协议、对端、适配器、Dromen 与政策能力取交集。
+远端新增工具、任务、回调或采样能力后，当前会话在没有新授权的情况下使用它。`ADP-CAP-001` 要求协议、对端、适配器、session contract 与政策能力取交集。
 
 ### THR-ADP-004 — 外部任务身份混淆本地调用
 
@@ -38,11 +38,11 @@ document_status: "威胁模型"
 
 ### THR-ADP-006 — 外部完成状态洗白为本地结果
 
-A2A `completed`、MCP 工具成功、HTTP 200 或 SDK stop reason 被直接解释成 `met`、`accepted`、Drase `completed` 或 Iknem `valid`。`ADP-STA-001` 要求外部状态域与本地结果域正交。
+A2A `completed`、MCP 工具成功、HTTP 200 或 SDK stop reason 被直接解释成 `met`、`accepted`、run `completed` 或 evidence entry `valid`。`ADP-STA-001` 要求外部状态域与本地结果域正交。
 
 ### THR-ADP-007 — 远端产物越权成为规范制品或证据
 
-消息、Artifact、ToolResult、模型文本、文件名或远端签名直接替换 Endem、Synem、Iknem 或已接受输出。`ADP-ART-001` 要求外部产物保持有来源、有界的不可信候选。
+消息、Artifact、ToolResult、模型文本、文件名或远端签名直接替换 Endem、Endem closure、evidence entry 或已接受输出。`ADP-ART-001` 要求外部产物保持有来源、有界的不可信候选。
 
 ### THR-ADP-008 — 错误文本驱动权限或业务判断
 

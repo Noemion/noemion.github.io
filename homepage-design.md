@@ -11,7 +11,7 @@
 2. 封面摘要用“发布制品只保留经过确认的目标结构”“在使用前核对授权边界”“防止 AI 改变目标含义，或执行未经授权的越权行为”解释安全价值，不把最终发布版写成仍携带原始自然语言。
 3. 自然语言生成代码等反例放在紧随封面的正文中；研究阶段和没有可用组件的限制由封面状态区直接说明，不把免责声明堆进摘要。
 
-主行动进入入门指南，次行动进入 Endem 生命周期。首屏使用一张完整的 16:9 代码原生动画图：人的自然语言表达经 `ktise` 与 `rhem/semion/skena/telis/krin/apor` 六个语义面形成 Endem，再由有范围的 Iknem 证据独立检验并回送判定结果。图中不显示虚构监控数据、模型拟人形象或未冻结字段编号。
+主行动进入入门指南，次行动进入 Endem 生命周期。首屏使用一张完整的 16:9 代码原生动画图：人的自然语言表达经 `form` 与 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning` 六个语义面形成 Endem，再由有范围的 evidence entry 证据独立检验并回送判定结果。图中不显示虚构监控数据、模型拟人形象或未冻结字段编号。
 
 ## 信息顺序
 
@@ -20,7 +20,7 @@
 | 门户引言 | Noemion 为什么研究人类目标编译，Endem 在其中承担什么职责 | 入门、生命周期 |
 | 问题 | 为什么临时对话、工具成功和外部完成状态不能保存人的目标 | 背景、Agent 边界 |
 | Six Facets | 六个语义面怎样形成最小契约 | Endem 规范 |
-| Four Nouns | 哪些状态值得拥有正式名词 | Endem、Synem、Iknem 规范 |
+| Four Nouns | 哪些状态值得拥有正式名词 | Endem、Endem closure、evidence entry 规范 |
 | One Application | 为什么一个入口仍保持三个信任域 | Endem 应用、组件 |
 | Current Stage | 第一纵向切片及证据门 | 实施路线、测试 |
 | Continue | 按读者任务继续 | 一级稳定入口 |
@@ -28,8 +28,8 @@
 ## 图形语义
 
 - 一张连续宽图同时承载来源目标、六个语义面、Endem、独立证据与判定回流，不再用多个 HTML 标签、面板和轨道拼成主视觉。
-- 数据流标签固定使用 `RHEM / SEMION / SKENA / TELIS / KRIN / APOR`、`KTISE`、`ENDEM` 与 `IKNEM / EVIDENCE`。
-- Endem、Synem、Dromen、Iknem 的关系使用状态/闭包/运行证据区分，不画成四个同构文件盒。
+- 数据流标签固定使用 `SOURCE / MEANING / SITUATION / DIRECTION / CRITERIA / UNRESOLVED`、`FORM`、`ENDEM` 与 `EVIDENCE / EVIDENCE`。
+- Endem、Endem closure、session contract、evidence entry 的关系使用状态/闭包/运行证据区分，不画成四个同构文件盒。
 - 颜色只区分来源、边界、未决、验收和状态；光流、扫描、节点脉冲与证据闭环只表达语义关系，不暗示真实吞吐、成功率或发布状态。
 
 ## 版式与动效

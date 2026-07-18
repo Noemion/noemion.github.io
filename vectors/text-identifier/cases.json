@@ -3,7 +3,7 @@
   "spec": {"id": "TEXT-IDENTIFIER-CORE", "version": "0.1.0-draft"},
   "description": "Text and identifier proposal matrix; a specification consistency matrix, not a Unicode processor, normalizer, identifier implementation, editor, confusable detector, tokenizer, model gateway, or component implementation.",
   "baseline": {
-    "slot": {"kind":"source-content","profile":"txt-source-content@0.1.0-draft","normative_use":"rhem-content","encoding_rules_bound":true,"comparison_rules_bound":true,"display_rules_bound":true,"failure_effect":"reject-field"},
+    "slot": {"kind":"source-content","profile":"txt-source-content@0.1.0-draft","normative_use":"source_expression-content","encoding_rules_bound":true,"comparison_rules_bound":true,"display_rules_bound":true,"failure_effect":"reject-field"},
     "encoding": {"name":"UTF-8","rfc3629":true,"valid":true,"shortest_form":true,"scalar_values_only":true,"decoded_before_transform":true,"invalid_fails_atomic":true,"implicit_local_encoding":false},
     "source": {"source_byte_identity":"source@example-digest","decoded_text_identity":"decoded@example-digest","charset":"UTF-8","decode_profile":"rfc3629-strict@1","transforms":["ends-escape-decode@0.1.0-draft"],"loss_manifest":["source-line-representation-not-carried"],"relation_explicit":true,"decoded_content_preserved":true,"claims_raw_byte_preservation":false,"silent_deletion":false},
     "identifier": {"class":"ascii-current-profile","pattern":"^[A-Za-z][A-Za-z0-9._:/#-]{0,254}$","byte_length":12,"normalization":"none","case_sensitive":true,"locale_independent":true,"unicode_extension":false,"confusable_matching":false},

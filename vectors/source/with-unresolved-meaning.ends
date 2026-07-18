@@ -1,0 +1,12 @@
+# 一个保留读者歧义的 END-P2 清单
+source_expression	source:request-001	authority:requester	text/plain	zh-CN	1	为已登记项目生成安全评审报告	0	14
+symbol	sym:project	entity	source:request-001#/range
+symbol	sym:report	artifact	source:request-001#/range
+relation	rel:produced	produced	rule	projection:zh-goal-v1	result=sym:report	for=sym:project
+situation	situation:report-produced	rel:produced	positive
+root	situation:report-produced
+goal_direction	reach
+structured_observation	rel:produced	same-roles
+evidence_entry	artifact-content-observation
+satisfaction_criteria	undetermined	fault	authority:requester
+unresolved_meaning	unresolved_meaning:audience	source:request-001#/range	目标读者尚未确认	authority:requester	audience:security,audience:executive	rel:produced	rule,named-authority

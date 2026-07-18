@@ -1,19 +1,19 @@
 {
   "vector_format": "end-core.semantic-vector.v2",
   "id": "SV-REJECT-AUTHORITY-001",
-  "description": "模型自述不能成为确认 semion 投影的授权来源。",
+  "description": "模型自述不能成为确认 meaning_projection 投影的授权来源。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
   "context": {"external_preconditions": []},
   "expect": {
     "result": "reject",
-    "clauses": ["END-SEM-001", "END-AUT-001", "END-ERR-001"],
+    "clauses": ["END-MEANING-001", "END-AUT-001", "END-ERR-001"],
     "diagnostics": [
-      {"code": "endem.projection.authority_untrusted", "clause": "END-AUT-001", "location": "/input/semion/relations/0/projection"}
+      {"code": "endem.projection.authority_untrusted", "clause": "END-AUT-001", "location": "/input/meaning_projection/relations/0/projection"}
     ]
   },
   "input": {
-    "rhem": {"source_id": "source:request-005", "content": "生成安全评审报告"},
-    "semion": {
+    "source_expression": {"source_id": "source:request-005", "content": "生成安全评审报告"},
+    "meaning_projection": {
       "symbols": [],
       "relations": [
         {
@@ -24,9 +24,9 @@
         }
       ]
     },
-    "skena": {"roots": ["situation:report-produced"], "situations": []},
-    "telis": {"mode": "kine"},
-    "krin": {"decision_authority": "authority:requester"},
-    "apor": []
+    "situation": {"roots": ["situation:report-produced"], "situations": []},
+    "goal_direction": {"mode": "reach"},
+    "satisfaction_criteria": {"decision_authority": "authority:requester"},
+    "unresolved_meaning": []
   }
 }

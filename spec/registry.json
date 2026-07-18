@@ -1,6 +1,6 @@
 {
   "registry_version": 1,
-  "updated": "2026-07-15",
+  "updated": "2026-07-18",
   "documents": [
     {
       "spec_id": "END-CORE",
@@ -20,7 +20,7 @@
       "implementation_status": "vector-checker-only",
       "wire_status": "experimental-draft",
       "path": "spec/endem-format.md",
-      "scope": "Endem fixed header, record directory, deterministic payload subset, P0 structural acceptance and P1 closed semantic payload"
+      "scope": "Endem fixed header, record directory, deterministic payload subset, P0 structural acceptance and P2 closed semantic payload"
     },
     {
       "spec_id": "END-SRCM",
@@ -30,36 +30,36 @@
       "implementation_status": "vector-checker-only",
       "wire_status": "not-applicable",
       "path": "spec/endem-source-manifest.md",
-      "scope": "Experimental deterministic Ktisor source manifest mapped to END-P1"
+      "scope": "Experimental deterministic producer source manifest mapped to END-P2"
     },
     {
-      "spec_id": "SYN-CORE",
+      "spec_id": "CLOSURE-CORE",
       "version": "0.1.0-draft",
       "status": "draft",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "wire_status": "unfrozen",
-      "path": "spec/synem-core.md",
+      "path": "spec/endem-closure-core.md",
       "scope": "Abstract multi-Endem closure, exact binding, authority convergence, member result separation and session activation"
     },
     {
-      "spec_id": "DRO-CORE",
+      "spec_id": "SESSION-CORE",
       "version": "0.1.0-draft",
       "status": "draft",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "wire_status": "not-applicable",
-      "path": "spec/dromen-core.md",
+      "path": "spec/session-contract-core.md",
       "scope": "Abstract one-session subject, policy, environment, capability, budget, observation, immutability and disposal contract"
     },
     {
-      "spec_id": "IKN-CORE",
+      "spec_id": "EVIDENCE-CORE",
       "version": "0.1.0-draft",
       "status": "draft",
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "wire_status": "unfrozen",
-      "path": "spec/iknem-core.md",
+      "path": "spec/evidence-entry-core.md",
       "scope": "Abstract scoped evidence, provenance, observation, integrity, validity, coverage, appraisal, decision and disclosure boundaries"
     },
     {
@@ -80,7 +80,7 @@
       "implementation_status": "vector-checker-only",
       "wire_status": "not-applicable",
       "path": "spec/adapter-core.md",
-      "scope": "Protocol-independent Drasor external adapter version, peer, capability, invocation, mapping, state, artifact, error, cancellation, retry, delivery and security boundaries"
+      "scope": "Protocol-independent bounded runner external adapter version, peer, capability, invocation, mapping, state, artifact, error, cancellation, retry, delivery and security boundaries"
     },
     {
       "spec_id": "ID-CORE",
@@ -126,7 +126,7 @@
       "version": "0.1.0-draft",
       "status": "draft",
       "path": "spec/diagnostic-catalog.md",
-      "scope": "Experimental cross-object diagnostic codes for diagnostic envelopes, Endem, Synem, Dromen and Iknem rejection"
+      "scope": "Experimental cross-object diagnostic codes for diagnostic envelopes, Endem, Endem closure, session contract and evidence entry rejection"
     },
     {
       "id": "DIA-THREAT",
@@ -143,25 +143,25 @@
       "scope": "Natural-language design-review scenarios for structured diagnostic boundaries"
     },
     {
-      "id": "SYN-THREAT",
+      "id": "CLOSURE-THREAT",
       "version": "0.1.0-draft",
       "status": "draft",
-      "path": "spec/synem-threat-model.md",
-      "scope": "Synem closure, binding, graph, authority, result and activation threats"
+      "path": "spec/endem-closure-threat-model.md",
+      "scope": "Endem closure binding, graph, authority, result and activation threats"
     },
     {
-      "id": "IKN-THREAT",
+      "id": "EVIDENCE-THREAT",
       "version": "0.1.0-draft",
       "status": "draft",
-      "path": "spec/iknem-threat-model.md",
-      "scope": "Iknem scope, provenance, observation, classification, integrity, validity, coverage, decision and disclosure threats"
+      "path": "spec/evidence-entry-threat-model.md",
+      "scope": "evidence entry scope, provenance, observation, classification, integrity, validity, coverage, decision and disclosure threats"
     },
     {
-      "id": "DRO-THREAT",
+      "id": "SESSION-THREAT",
       "version": "0.1.0-draft",
       "status": "draft",
-      "path": "spec/dromen-threat-model.md",
-      "scope": "Dromen subject substitution, stale policy, environment drift, capability amplification, secret persistence, budget escape and session resurrection threats"
+      "path": "spec/session-contract-threat-model.md",
+      "scope": "session contract subject substitution, stale policy, environment drift, capability amplification, secret persistence, budget escape and session resurrection threats"
     },
     {
       "id": "END-SCEN",
@@ -171,24 +171,24 @@
       "scope": "Natural-language design-review scenarios for facet, ambiguity, judgment and root-boundary coverage"
     },
     {
-      "id": "SYN-SCEN",
+      "id": "CLOSURE-SCEN",
       "version": "0.1.0-draft",
       "status": "non-normative-design-corpus",
-      "path": "spec/synem-scenarios.md",
+      "path": "spec/endem-closure-scenarios.md",
       "scope": "Natural-language design-review scenarios for closure, binding, permissions, member results and activation"
     },
     {
-      "id": "IKN-SCEN",
+      "id": "EVIDENCE-SCEN",
       "version": "0.1.0-draft",
       "status": "non-normative-design-corpus",
-      "path": "spec/iknem-scenarios.md",
+      "path": "spec/evidence-entry-scenarios.md",
       "scope": "Natural-language design-review scenarios for evidence scope, provenance, appraisal, coverage, decisions and disclosure"
     },
     {
-      "id": "DRO-SCEN",
+      "id": "SESSION-SCEN",
       "version": "0.1.0-draft",
       "status": "non-normative-design-corpus",
-      "path": "spec/dromen-scenarios.md",
+      "path": "spec/session-contract-scenarios.md",
       "scope": "Natural-language design-review scenarios for one-session subject, policy, environment, authority, capability, budget, observation and lifecycle boundaries"
     },
     {
@@ -199,11 +199,11 @@
       "scope": "Finite Phase 0 conformance limits and allowed END-FMT capabilities"
     },
     {
-      "id": "END-P1",
+      "id": "END-P2",
       "version": "0.1.0-draft",
       "status": "experimental-design-profile",
-      "path": "spec/profiles/end-p1.json",
-      "scope": "Source-bearing formation and review profile for future Ktisor, elenk, Theor and internal conformance; not a final publication profile"
+      "path": "spec/profiles/end-p2.json",
+      "scope": "Source-bearing formation and review profile for future deterministic producer, lint, independent inspector and internal conformance; not a final publication profile"
     },
     {
       "id": "ADP-THREAT",
@@ -276,64 +276,89 @@
   "terms": [
     {"term": "Noemion", "kind": "project", "decision_status": "accepted", "definition": "项目、新领域与社区总名"},
     {"term": "Endem", "kind": "artifact", "decision_status": "accepted", "definition": "最小、独立有效且可验证的期望终态单元"},
-    {"term": "Synem", "kind": "artifact", "decision_status": "accepted", "definition": "两个或更多 Endem 的已解析组合闭包"},
-    {"term": "Dromen", "kind": "session-contract", "decision_status": "accepted", "definition": "Drasor 为一次 Drase 会话从精确制品、政策、环境、能力、预算和证据责任建立的密封只读执行契约"},
-    {"term": "Iknem", "kind": "evidence", "decision_status": "accepted", "definition": "绑定主体、范围、方法、环境、结果和限制的证据记录"},
-    {"term": "rhem", "kind": "semantic-facet", "decision_status": "accepted", "definition": "来源记号与可重定位范围"},
-    {"term": "semion", "kind": "semantic-facet", "decision_status": "accepted", "definition": "由确定性规则或范围有限具名权威确认的符号、指称、关系和角色投影；语义授权不授予动作权限"},
-    {"term": "skena", "kind": "semantic-facet", "decision_status": "accepted", "definition": "一个根、中性且可比较的可能事态"},
-    {"term": "telis", "kind": "semantic-facet", "decision_status": "accepted", "definition": "达到或保持事态的目标方向"},
-    {"term": "krin", "kind": "semantic-facet", "decision_status": "accepted", "definition": "结构比较、证据、未知处理和决定权威契约"},
-    {"term": "apor", "kind": "semantic-facet", "decision_status": "accepted", "definition": "可表达但尚未获授权决定的投影缺口"},
+    {"term": "Endem closure", "kind": "artifact", "decision_status": "accepted", "definition": "两个或更多 Endem 的已解析组合闭包"},
+    {"term": "session contract", "kind": "session-contract", "decision_status": "accepted", "definition": "bounded runner 为一次 run 会话从精确制品、政策、环境、能力、预算和证据责任建立的密封只读执行契约"},
+    {"term": "evidence entry", "kind": "evidence", "decision_status": "accepted", "definition": "绑定主体、范围、方法、环境、结果和限制的证据记录"},
+    {"term": "deterministic producer", "kind": "role", "decision_status": "accepted", "definition": "只从已获准输入确定性地产生 Endem 或 Endem closure 的写入责任"},
+    {"term": "independent inspector", "kind": "role", "decision_status": "accepted", "definition": "以独立、只读且有界的读取路径检查实际制品的责任"},
+    {"term": "bounded runner", "kind": "role", "decision_status": "accepted", "definition": "只在一次 session contract 允许的能力、预算、环境和期限内尝试动作的运行责任"},
+    {"term": "form", "kind": "action", "decision_status": "accepted", "definition": "从获准来源形成一个 Endem 的公开动作标识"},
+    {"term": "lint", "kind": "action", "decision_status": "accepted", "definition": "在生产路径内检查来源、字段和 Profile 一致性的公开动作标识"},
+    {"term": "compose", "kind": "action", "decision_status": "accepted", "definition": "从多个 Endem 形成已解析 Endem closure 的公开动作标识"},
+    {"term": "inspect", "kind": "action", "decision_status": "accepted", "definition": "使用 independent inspector 只读检查实际制品的公开动作标识"},
+    {"term": "run", "kind": "action", "decision_status": "accepted", "definition": "在 session contract 内由 bounded runner 尝试动作的公开动作标识"},
+    {"term": "source_expression", "kind": "semantic-facet", "decision_status": "accepted", "definition": "来源记号与可重定位范围"},
+    {"term": "meaning_projection", "kind": "semantic-facet", "decision_status": "accepted", "definition": "由确定性规则或范围有限具名权威确认的符号、指称、关系和角色投影；语义授权不授予动作权限"},
+    {"term": "situation", "kind": "semantic-facet", "decision_status": "accepted", "definition": "一个根、中性且可比较的可能事态"},
+    {"term": "goal_direction", "kind": "semantic-facet", "decision_status": "accepted", "definition": "达到或保持事态的目标方向"},
+    {"term": "satisfaction_criteria", "kind": "semantic-facet", "decision_status": "accepted", "definition": "结构比较、证据、未知处理和决定权威契约"},
+    {"term": "unresolved_meaning", "kind": "semantic-facet", "decision_status": "accepted", "definition": "可表达但尚未获授权决定的投影缺口"},
+    {"term": "structured_observation", "kind": "evidence-input", "decision_status": "accepted", "definition": "按已声明位置和方法保存的结构化观察；它本身不等于证据充分或目标满足"},
+    {"term": "reach", "kind": "goal-direction", "decision_status": "accepted", "definition": "要求 situation 在适用判断点成立，不额外声称本次动作造成了状态转变"},
+    {"term": "maintain", "kind": "goal-direction", "decision_status": "accepted", "definition": "要求 situation 在声明的时间范围与连续性政策下持续成立"},
+    {"term": "formed", "kind": "content-state", "decision_status": "accepted", "definition": "六项内容职责已经形成且结构可检查；不表示外部陈述、授权或满足已经成立"},
+    {"term": "resolved", "kind": "content-state", "decision_status": "accepted", "definition": "内容中的 unresolved_meaning 已按适用规则处理；不表示签名、授权、运行或满足已经成立"},
+    {"term": "no_allowed_projection", "kind": "meaning-result", "decision_status": "accepted", "definition": "没有候选 meaning_projection 能在适用语义授权下进入确认内容"},
+    {"term": "undetermined", "kind": "satisfaction-result", "decision_status": "accepted", "definition": "现有观察或证据不足以得出 met 或 unmet"},
     {"term": "wire-format", "kind": "interface", "decision_status": "accepted-draft", "definition": "END-FMT 定义的实验性物理字节编码；尚非稳定 ABI"},
     {"term": "content-standard", "kind": "specification-layer", "decision_status": "accepted", "definition": "END-CORE 定义的通用 Endem 内容语义、不变量、授权与符合性边界"},
     {"term": "content-profile", "kind": "specification-layer", "decision_status": "accepted", "definition": "在精确 END-CORE 与 END-FMT 版本下封闭字段、类型、枚举、规范顺序、引用、状态和资源上限的内容能力集合"},
     {"term": "END-P0", "kind": "profile", "decision_status": "experimental", "definition": "只用于结构向量和跨语言实验的有限符合性 Profile"},
-    {"term": "END-P1", "kind": "profile", "decision_status": "accepted-draft", "definition": "保留原始自然语言、仅用于未来形成与评审路径的封闭六记录 Profile；不得作为最终发布 Profile"},
-    {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 Ktisor 使用的实验性逐行来源清单；不是稳定源语言"},
+    {"term": "END-P2", "kind": "profile", "decision_status": "accepted-draft", "definition": "保留原始自然语言、仅用于未来形成与评审路径的封闭六记录 Profile；不得作为最终发布 Profile"},
+    {"term": "source-manifest", "kind": "interface", "decision_status": "accepted-draft", "definition": "首个 deterministic producer 使用的实验性逐行来源清单；不是稳定源语言"},
     {"term": "source-bearing formation artifact", "kind": "artifact-role", "decision_status": "accepted", "definition": "保留原始自然语言及其可重定位范围、用于形成和受控评审的制品角色"},
     {"term": "source-stripped release artifact", "kind": "artifact-role", "decision_status": "accepted", "definition": "移除原始自然语言及可逆重建材料、以独立身份发布并重新验证的制品角色"},
     {"term": "source companion", "kind": "artifact-role", "decision_status": "accepted", "definition": "在受控边界内保存来源材料并与发布制品建立类型化关系的可选伴随资料；不是运行权限或公开包的必需部分"},
-    {"term": "satisfaction-result", "kind": "result-domain", "decision_status": "accepted", "definition": "met、unmet、agno 或 fault；只描述 skena 相对 krin、phain 与 Iknem 的比较"},
+    {"term": "satisfaction-result", "kind": "result-domain", "decision_status": "accepted", "definition": "met、unmet、undetermined 或 fault；只描述 situation 相对 satisfaction_criteria、structured_observation 与 evidence entry 的比较"},
     {"term": "decision-result", "kind": "result-domain", "decision_status": "accepted", "definition": "accepted、rejected 或 deferred；只描述具名权威的最终决定"},
-    {"term": "session-result", "kind": "result-domain", "decision_status": "accepted", "definition": "completed、failed 或 interrupted；只描述一次 Drase 会话怎样终止"},
-    {"term": "evidence-status", "kind": "result-domain", "decision_status": "accepted", "definition": "Iknem 的 valid、invalid 或 revoked 与证据集合的 sufficient 或 insufficient 两个正交维度"},
-    {"term": "time-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "mene 使用的 fixed UTC 区间或 elapsed 具名事件经过时长"},
-    {"term": "continuity-policy", "kind": "semantic-interface", "decision_status": "accepted", "definition": "mene 的 strict 全区间保持或带完整违约预算的 budgeted 保持"},
-    {"term": "time-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "Iknem 声明的半开观测区间并集、方法、时钟、不确定度与缺口"},
+    {"term": "session-result", "kind": "result-domain", "decision_status": "accepted", "definition": "completed、failed 或 stopped；只描述一次 run 会话怎样终止"},
+    {"term": "evidence-status", "kind": "result-domain", "decision_status": "accepted", "definition": "evidence entry 的 valid、invalid 或 revoked 与证据集合的 sufficient 或 insufficient 两个正交维度"},
+    {"term": "stopped", "kind": "session-result", "decision_status": "accepted", "definition": "会话因有界停止条件终止，且不等同于 completed、failed、met 或最终决定"},
+    {"term": "allowed", "kind": "authorization-decision", "decision_status": "accepted", "definition": "精确请求在当前 authority context 中获得有限授权"},
+    {"term": "denied", "kind": "authorization-decision", "decision_status": "accepted", "definition": "精确请求在当前 authority context 中被明确拒绝"},
+    {"term": "pending", "kind": "authorization-decision", "decision_status": "accepted", "definition": "授权所需权威、同意或事实尚不完整，不得按允许处理"},
+    {"term": "time-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "maintain 使用的 utc_window 绝对区间或 elapsed_window 具名事件经过时长"},
+    {"term": "utc_window", "kind": "time-scope", "decision_status": "accepted", "definition": "用明确 UTC 边界表示的半开绝对时间区间"},
+    {"term": "elapsed_window", "kind": "time-scope", "decision_status": "accepted", "definition": "从具名事件起算的经过时长范围"},
+    {"term": "continuity-policy", "kind": "semantic-interface", "decision_status": "accepted", "definition": "maintain 的 strict 全区间保持或带完整违约预算的 budgeted 保持"},
+    {"term": "time-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "evidence entry 声明的半开观测区间并集、方法、时钟、不确定度与缺口"},
     {"term": "relation-polarity", "kind": "semantic-interface", "decision_status": "accepted", "definition": "同一关系身份与角色位置上的 positive 或 negative 事态极性"},
     {"term": "negative-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "显式负极性观察，或在封闭观察范围内由完整缺席依据支持的负主张"},
     {"term": "observation-closure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定权威、有限全集、角色路径、时间、方法、截止点、丢失计数与排除项的封闭观察声明"},
-    {"term": "quantifier", "kind": "semantic-interface", "decision_status": "accepted", "definition": "all、some、at_least、at_most 或 exactly 对一个固定关系角色的量化方式"},
+    {"term": "quantifier", "kind": "semantic-interface", "decision_status": "accepted", "definition": "every、at_least_one、at_least、at_most 或 exactly 对一个固定关系角色的量化方式"},
+    {"term": "every", "kind": "quantifier", "decision_status": "accepted", "definition": "集合范围内每个成员都必须满足同一关系条件"},
+    {"term": "at_least_one", "kind": "quantifier", "decision_status": "accepted", "definition": "集合范围内至少一个成员必须满足同一关系条件"},
     {"term": "collection-scope", "kind": "semantic-interface", "decision_status": "accepted", "definition": "绑定集合身份、成员资格权威、模式、截止点、身份规则和成员或规则的量化范围"},
-    {"term": "cardinality-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "按不同规范成员身份聚合并保留成员级结果与 Iknem 链接的基数证据"},
+    {"term": "cardinality-evidence", "kind": "evidence-interface", "decision_status": "accepted", "definition": "按不同规范成员身份聚合并保留成员级结果与 evidence entry 链接的基数证据"},
     {"term": "measurement-construct", "kind": "semantic-interface", "decision_status": "accepted", "definition": "测量希望表达的抽象概念及其已授权直接可观察标准、总体和用途"},
     {"term": "estimand", "kind": "semantic-interface", "decision_status": "accepted", "definition": "测量程序意图估计的固定总体或泛化总体数量"},
+    {"term": "fixed_population", "kind": "measurement-population", "decision_status": "accepted", "definition": "成员资格在截止点可完整确定的测量总体"},
+    {"term": "generalized_population", "kind": "measurement-population", "decision_status": "accepted", "definition": "需要显式统计模型和假设才能从样本推广的测量总体"},
     {"term": "measurement-procedure", "kind": "evidence-interface", "decision_status": "accepted", "definition": "绑定生产者、版本、窗口、纳入排除、单位、聚合器、样本和缺失政策的可重放程序"},
     {"term": "threshold-contract", "kind": "semantic-interface", "decision_status": "accepted", "definition": "绑定比较器、阈值、单位、舍入边界和不确定度政策的判断契约"},
-    {"term": "criterion-leaf", "kind": "semantic-interface", "decision_status": "accepted", "definition": "与一个 skena 关系叶和适用 phain 位置对齐并独立产生四种满足结果之一的最小判据"},
+    {"term": "criterion-leaf", "kind": "semantic-interface", "decision_status": "accepted", "definition": "与一个 situation 关系叶和适用 structured_observation 位置对齐并独立产生四种满足结果之一的最小判据"},
     {"term": "criterion-composition", "kind": "semantic-interface", "decision_status": "accepted", "definition": "用 all_of 或 any_of 确定性组合叶判断结果的有限无环结构"},
     {"term": "decisive-basis", "kind": "evidence-interface", "decision_status": "accepted", "definition": "足以决定 all_of 为 unmet 或 any_of 为 met 的已求值叶集合"},
-    {"term": "evaluation-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "一次组合判断中已求值叶、未求值叶、停止原因和所用 Iknem 的完整记录"}
-    ,{"term": "closure-member", "kind": "synem-interface", "decision_status": "accepted", "definition": "以精确内容身份进入 Synem 闭包的 Endem"}
-    ,{"term": "binding-record", "kind": "synem-interface", "decision_status": "accepted", "definition": "把引用方、被引用方、精确身份、规范与解析依据固定在一起的记录"}
-    ,{"term": "dependency-relation", "kind": "synem-interface", "decision_status": "accepted", "definition": "Synem 成员之间显式登记的必需或可选依赖关系"}
-    ,{"term": "activation-guard", "kind": "synem-interface", "decision_status": "accepted", "definition": "引用精确结果事件、结果域、期望值、截止点与授权策略的会话激活条件"}
+    {"term": "evaluation-coverage", "kind": "evidence-interface", "decision_status": "accepted", "definition": "一次组合判断中已求值叶、未求值叶、停止原因和所用 evidence entry 的完整记录"}
+    ,{"term": "closure-member", "kind": "closure-interface", "decision_status": "accepted", "definition": "以精确内容身份进入 Endem closure 闭包的 Endem"}
+    ,{"term": "binding-record", "kind": "closure-interface", "decision_status": "accepted", "definition": "把引用方、被引用方、精确身份、规范与解析依据固定在一起的记录"}
+    ,{"term": "dependency-relation", "kind": "closure-interface", "decision_status": "accepted", "definition": "Endem closure 成员之间显式登记的必需或可选依赖关系"}
+    ,{"term": "activation-guard", "kind": "closure-interface", "decision_status": "accepted", "definition": "引用精确结果事件、结果域、期望值、截止点与授权策略的会话激活条件"}
     ,{"term": "activation-status", "kind": "result-domain", "decision_status": "accepted", "definition": "active、inactive、unresolved 或 error；只描述固定闭包成员在一次会话中是否生效"}
-    ,{"term": "session-subject", "kind": "dromen-interface", "decision_status": "accepted", "definition": "Dromen 在建立截止点重新验证并绑定的一个精确 attested Endem 或 Synem"}
-    ,{"term": "policy-closure", "kind": "dromen-interface", "decision_status": "accepted", "definition": "一次会话采用的精确政策、权威、consent、截止点、有效期和范围内 apor 处理的封闭集合"}
-    ,{"term": "environment-binding", "kind": "dromen-interface", "decision_status": "accepted", "definition": "把平台、时钟、隔离、适配器、协议和后端声明连接到具名观察的会话绑定"}
-    ,{"term": "capability-envelope", "kind": "dromen-interface", "decision_status": "accepted", "definition": "由制品、政策、操作主体、环境和适配器上限求交得到的非秘密会话能力描述"}
-    ,{"term": "budget-envelope", "kind": "dromen-interface", "decision_status": "accepted", "definition": "按资源类别绑定有限上限、单位、计数权威、重置规则和耗尽动作的会话预算"}
-    ,{"term": "observation-plan", "kind": "dromen-interface", "decision_status": "accepted", "definition": "把每项 krin 责任连接到观察生产者、方法、phain 位置、Iknem 类别、披露、评估和决定权威的映射"}
-    ,{"term": "material-drift", "kind": "dromen-interface", "decision_status": "accepted", "definition": "主体、政策、权威、必需环境、能力、预算、激活守卫或证据责任发生使原会话契约不再成立的变化"}
-    ,{"term": "evidence-subject", "kind": "iknem-interface", "decision_status": "accepted", "definition": "Iknem 主张所绑定的精确对象、会话、调用、观察集合或决定事件身份"}
-    ,{"term": "evidence-scope", "kind": "iknem-interface", "decision_status": "accepted", "definition": "限制 Iknem 主张适用主体、总体、关系、方法、环境、时间和截止点的边界"}
-    ,{"term": "provenance-edge", "kind": "iknem-interface", "decision_status": "accepted", "definition": "连接输入、活动、派生输出与责任主体的有限无环溯源关系"}
-    ,{"term": "evidence-class", "kind": "iknem-interface", "decision_status": "accepted", "definition": "direct-observation、deterministic-derivation、external-assertion、human-judgment 或 model-candidate 来源类别"}
+    ,{"term": "session-subject", "kind": "session-interface", "decision_status": "accepted", "definition": "session contract 在建立截止点重新验证并绑定的一个精确 resolved Endem 或 Endem closure，以及适用的外部陈述、验证政策、撤销状态和依赖方准入关系"}
+    ,{"term": "policy-closure", "kind": "session-interface", "decision_status": "accepted", "definition": "一次会话采用的精确政策、权威、consent、截止点、有效期和范围内 unresolved_meaning 处理的封闭集合"}
+    ,{"term": "environment-binding", "kind": "session-interface", "decision_status": "accepted", "definition": "把平台、时钟、隔离、适配器、协议和后端声明连接到具名观察的会话绑定"}
+    ,{"term": "capability-envelope", "kind": "session-interface", "decision_status": "accepted", "definition": "由制品、政策、操作主体、环境和适配器上限求交得到的非秘密会话能力描述"}
+    ,{"term": "budget-envelope", "kind": "session-interface", "decision_status": "accepted", "definition": "按资源类别绑定有限上限、单位、计数权威、重置规则和耗尽动作的会话预算"}
+    ,{"term": "observation-plan", "kind": "session-interface", "decision_status": "accepted", "definition": "把每项 satisfaction_criteria 责任连接到观察生产者、方法、structured_observation 位置、evidence entry 类别、披露、评估和决定权威的映射"}
+    ,{"term": "material-drift", "kind": "session-interface", "decision_status": "accepted", "definition": "主体、政策、权威、必需环境、能力、预算、激活守卫或证据责任发生使原会话契约不再成立的变化"}
+    ,{"term": "evidence-subject", "kind": "evidence-interface", "decision_status": "accepted", "definition": "evidence entry 主张所绑定的精确对象、会话、调用、观察集合或决定事件身份"}
+    ,{"term": "evidence-scope", "kind": "evidence-interface", "decision_status": "accepted", "definition": "限制 evidence entry 主张适用主体、总体、关系、方法、环境、时间和截止点的边界"}
+    ,{"term": "provenance-edge", "kind": "evidence-interface", "decision_status": "accepted", "definition": "连接输入、活动、派生输出与责任主体的有限无环溯源关系"}
+    ,{"term": "evidence-class", "kind": "evidence-interface", "decision_status": "accepted", "definition": "direct-observation、deterministic-derivation、external-assertion、human-judgment 或 model-candidate 来源类别"}
     ,{"term": "validity-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "验证者在精确政策、参考值、环境与截止点下形成的 valid、invalid 或 revoked 评估"}
-    ,{"term": "coverage-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "相对精确 krin 与观察责任形成的 sufficient 或 insufficient 评估"}
-    ,{"term": "disclosure-manifest", "kind": "iknem-interface", "decision_status": "accepted", "definition": "记录摘要、脱敏、分段披露和外置引用的可见范围、不可见范围及其证据影响"}
+    ,{"term": "coverage-assessment", "kind": "result-domain", "decision_status": "accepted", "definition": "相对精确 satisfaction_criteria 与观察责任形成的 sufficient 或 insufficient 评估"}
+    ,{"term": "disclosure-manifest", "kind": "evidence-interface", "decision_status": "accepted", "definition": "记录摘要、脱敏、分段披露和外置引用的可见范围、不可见范围及其证据影响"}
     ,{"term": "diagnostic-code", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "与本地化消息和呈现格式分离的稳定机器诊断身份"}
     ,{"term": "diagnostic-layer", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "说明失败发生于协议、结构、Profile、语义、政策、能力、运行、证据或决定边界的分类"}
     ,{"term": "diagnostic-location", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "绑定位置种类、精确主体和有限范围的安全定位信息"}
@@ -341,7 +366,7 @@
     ,{"term": "recovery-class", "kind": "diagnostic-interface", "decision_status": "accepted-draft", "definition": "不授予权限也不携带副作用命令的有限恢复类别"}
     ,{"term": "adapter-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "固定协议、规范、schema、传输、扩展、对端与政策版本的一次外部适配约束"}
     ,{"term": "peer-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "分开发现声明、端点、认证主体、受众、租户与政策决定的对端身份约束"}
-    ,{"term": "invocation-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "把一次外部操作连接到精确 Dromen、主体、输入、能力、预算、截止点与观察责任的调用约束"}
+    ,{"term": "invocation-binding", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "把一次外部操作连接到精确 session contract、主体、输入、能力、预算、截止点与观察责任的调用约束"}
     ,{"term": "loss-manifest", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "逐项记录协议映射中省略、合并、降精度与未知处理及其影响的有限清单"}
     ,{"term": "external-state", "kind": "external-result-domain", "decision_status": "accepted-draft", "definition": "外部协议请求、任务、消息、产物、HTTP 或 SDK 的原生状态；不得提升为 Noemion 结果域"}
     ,{"term": "delivery-evidence", "kind": "adapter-interface", "decision_status": "accepted-draft", "definition": "绑定授权、序列、去重、乱序、缺口、终结与资源边界的流式或异步交付依据"}
@@ -366,7 +391,7 @@
     ,{"term": "authority-principal", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "在精确权威语境中经认证、角色核对并获准作出有限决定的主体"}
     ,{"term": "authorization-scope", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "按对象、动作、语义位置、目的、受众、资源、时间和条件封闭的默认不授予范围"}
     ,{"term": "semantic-authorization", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "确定性规则或具名权威针对精确来源、候选和语义位置作出的有限确认"}
-    ,{"term": "authorization-decision", "kind": "authority-result-domain", "decision_status": "accepted-draft", "definition": "grant、deny 或 defer；只回答精确请求在当前权威语境中是否获得有限授权"}
+    ,{"term": "authorization-decision", "kind": "authority-result-domain", "decision_status": "accepted-draft", "definition": "allowed、denied 或 pending；只回答精确请求在当前权威语境中是否获得有限授权"}
     ,{"term": "delegation-chain", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "保留原始主体、逐级授予者、实际行动者、范围、期限、深度和撤销来源的有限无环委托关系"}
     ,{"term": "multi-authority-policy", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "预先固定合格主体、不同身份、数量或角色、否决、冲突、缺席和截止点的多人决定规则"}
     ,{"term": "consent-binding", "kind": "authority-interface", "decision_status": "accepted-draft", "definition": "把人类安全视图、精确机器请求、动作、资源、目的、接收方、期限、撤销和后果连接起来的同意关系"}
@@ -377,8 +402,8 @@
     {"id": "THR-END-001", "clauses": ["END-SAF-001", "END-ERR-001", "END-FMT-004", "END-FMT-006"], "evidence_status": "partial"},
     {"id": "THR-END-002", "clauses": ["END-SAF-002", "END-FMT-010"], "evidence_status": "partial"},
     {"id": "THR-END-003", "clauses": ["END-SAF-003", "END-FMT-007"], "evidence_status": "partial"},
-    {"id": "THR-END-004", "clauses": ["END-APR-001", "END-UNK-001", "END-AUT-001"], "evidence_status": "partial"},
-    {"id": "THR-END-005", "clauses": ["END-KRN-001", "END-KRN-002", "END-STR-001"], "evidence_status": "partial"},
+    {"id": "THR-END-004", "clauses": ["END-UNRESOLVED-001", "END-UNK-001", "END-AUT-001"], "evidence_status": "partial"},
+    {"id": "THR-END-005", "clauses": ["END-CRITERIA-001", "END-CRITERIA-002", "END-STR-001"], "evidence_status": "partial"},
     {"id": "THR-END-006", "clauses": ["END-ID-001", "ID-DOM-001", "ID-DSP-001", "ID-EQV-001"], "evidence_status": "partial"},
     {"id": "THR-END-007", "clauses": ["END-VER-001"], "evidence_status": "planned"},
     {"id": "THR-END-008", "clauses": ["END-STA-001", "END-STA-002", "END-DEC-001"], "evidence_status": "planned"},
@@ -390,31 +415,31 @@
     {"id": "THR-END-014", "clauses": ["END-MSR-001", "END-MSR-002", "END-MSR-003", "END-MSR-004"], "evidence_status": "partial"},
     {"id": "THR-END-015", "clauses": ["END-CMP-001", "END-CMP-002", "END-CMP-003", "END-CMP-004"], "evidence_status": "partial"},
     {"id": "THR-END-016", "clauses": ["END-CON-006", "END-AUT-002", "END-ID-002", "END-FMT-015", "AUT-SEM-001"], "evidence_status": "partial"},
-    {"id": "THR-SYN-001", "clauses": ["SYN-RES-001"], "evidence_status": "partial"},
-    {"id": "THR-SYN-002", "clauses": ["SYN-CLS-001"], "evidence_status": "partial"},
-    {"id": "THR-SYN-003", "clauses": ["SYN-GRF-001"], "evidence_status": "partial"},
-    {"id": "THR-SYN-004", "clauses": ["SYN-AUT-001"], "evidence_status": "partial"},
-    {"id": "THR-SYN-005", "clauses": ["SYN-STA-001"], "evidence_status": "partial"},
-    {"id": "THR-SYN-006", "clauses": ["SYN-ACT-001"], "evidence_status": "partial"},
-    {"id": "THR-IKN-001", "clauses": ["IKN-SCP-001"], "evidence_status": "partial"},
-    {"id": "THR-IKN-002", "clauses": ["IKN-PRV-001"], "evidence_status": "partial"},
-    {"id": "THR-IKN-003", "clauses": ["IKN-OBS-001"], "evidence_status": "partial"},
-    {"id": "THR-IKN-004", "clauses": ["IKN-CLS-001"], "evidence_status": "partial"},
-    {"id": "THR-IKN-005", "clauses": ["IKN-INT-001"], "evidence_status": "partial"},
-    {"id": "THR-IKN-006", "clauses": ["IKN-VAL-001"], "evidence_status": "partial"},
-    {"id": "THR-IKN-007", "clauses": ["IKN-COV-001"], "evidence_status": "partial"},
-    {"id": "THR-IKN-008", "clauses": ["IKN-DEC-001"], "evidence_status": "partial"},
-    {"id": "THR-IKN-009", "clauses": ["IKN-PRI-001"], "evidence_status": "partial"},
-    {"id": "THR-DRO-001", "clauses": ["DRO-SUB-001"], "evidence_status": "partial"},
-    {"id": "THR-DRO-002", "clauses": ["DRO-SUB-001", "DRO-POL-001"], "evidence_status": "partial"},
-    {"id": "THR-DRO-003", "clauses": ["DRO-ENV-001", "DRO-IMM-001"], "evidence_status": "partial"},
-    {"id": "THR-DRO-004", "clauses": ["DRO-CAP-001", "DRO-SEC-001"], "evidence_status": "partial"},
-    {"id": "THR-DRO-005", "clauses": ["DRO-SEC-001", "DRO-LIF-001"], "evidence_status": "partial"},
-    {"id": "THR-DRO-006", "clauses": ["DRO-BUD-001"], "evidence_status": "partial"},
-    {"id": "THR-DRO-007", "clauses": ["DRO-ACT-001"], "evidence_status": "partial"},
-    {"id": "THR-DRO-008", "clauses": ["DRO-OBS-001"], "evidence_status": "partial"},
-    {"id": "THR-DRO-009", "clauses": ["DRO-IMM-001"], "evidence_status": "partial"},
-    {"id": "THR-DRO-010", "clauses": ["DRO-LIF-001"], "evidence_status": "partial"},
+    {"id": "THR-CLOSURE-001", "clauses": ["CLOSURE-RES-001"], "evidence_status": "partial"},
+    {"id": "THR-CLOSURE-002", "clauses": ["CLOSURE-CLS-001"], "evidence_status": "partial"},
+    {"id": "THR-CLOSURE-003", "clauses": ["CLOSURE-GRF-001"], "evidence_status": "partial"},
+    {"id": "THR-CLOSURE-004", "clauses": ["CLOSURE-AUT-001"], "evidence_status": "partial"},
+    {"id": "THR-CLOSURE-005", "clauses": ["CLOSURE-STA-001"], "evidence_status": "partial"},
+    {"id": "THR-CLOSURE-006", "clauses": ["CLOSURE-ACT-001"], "evidence_status": "partial"},
+    {"id": "THR-EVIDENCE-001", "clauses": ["EVIDENCE-SCP-001"], "evidence_status": "partial"},
+    {"id": "THR-EVIDENCE-002", "clauses": ["EVIDENCE-PRV-001"], "evidence_status": "partial"},
+    {"id": "THR-EVIDENCE-003", "clauses": ["EVIDENCE-OBS-001"], "evidence_status": "partial"},
+    {"id": "THR-EVIDENCE-004", "clauses": ["EVIDENCE-CLS-001"], "evidence_status": "partial"},
+    {"id": "THR-EVIDENCE-005", "clauses": ["EVIDENCE-INT-001"], "evidence_status": "partial"},
+    {"id": "THR-EVIDENCE-006", "clauses": ["EVIDENCE-VAL-001"], "evidence_status": "partial"},
+    {"id": "THR-EVIDENCE-007", "clauses": ["EVIDENCE-COV-001"], "evidence_status": "partial"},
+    {"id": "THR-EVIDENCE-008", "clauses": ["EVIDENCE-DEC-001"], "evidence_status": "partial"},
+    {"id": "THR-EVIDENCE-009", "clauses": ["EVIDENCE-PRI-001"], "evidence_status": "partial"},
+    {"id": "THR-SESSION-001", "clauses": ["SESSION-SUB-001"], "evidence_status": "partial"},
+    {"id": "THR-SESSION-002", "clauses": ["SESSION-SUB-001", "SESSION-POL-001"], "evidence_status": "partial"},
+    {"id": "THR-SESSION-003", "clauses": ["SESSION-ENV-001", "SESSION-IMM-001"], "evidence_status": "partial"},
+    {"id": "THR-SESSION-004", "clauses": ["SESSION-CAP-001", "SESSION-SEC-001"], "evidence_status": "partial"},
+    {"id": "THR-SESSION-005", "clauses": ["SESSION-SEC-001", "SESSION-LIF-001"], "evidence_status": "partial"},
+    {"id": "THR-SESSION-006", "clauses": ["SESSION-BUD-001"], "evidence_status": "partial"},
+    {"id": "THR-SESSION-007", "clauses": ["SESSION-ACT-001"], "evidence_status": "partial"},
+    {"id": "THR-SESSION-008", "clauses": ["SESSION-OBS-001"], "evidence_status": "partial"},
+    {"id": "THR-SESSION-009", "clauses": ["SESSION-IMM-001"], "evidence_status": "partial"},
+    {"id": "THR-SESSION-010", "clauses": ["SESSION-LIF-001"], "evidence_status": "partial"},
     {"id": "THR-DIA-001", "clauses": ["DIA-IDN-001"], "evidence_status": "partial"},
     {"id": "THR-DIA-002", "clauses": ["DIA-PIN-001"], "evidence_status": "partial"},
     {"id": "THR-DIA-003", "clauses": ["DIA-EXT-001", "DIA-LAY-001"], "evidence_status": "partial"},
@@ -476,303 +501,303 @@
   ],
   "clauses": [
     {
-      "id": "DRO-SUB-001",
+      "id": "SESSION-SUB-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor loader and every session establishment path",
+      "failure_owner": "future bounded runner loader and every session establishment path",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "conformance:dromen-subject-revalidation"}
+        {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
+        {"status": "planned", "ref": "conformance:session_contract-subject-revalidation"}
       ]
     },
     {
-      "id": "DRO-POL-001",
+      "id": "SESSION-POL-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor policy resolver and named session authority",
+      "failure_owner": "future bounded runner policy resolver and named session authority",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "conformance:dromen-policy-closure"}
+        {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
+        {"status": "planned", "ref": "conformance:session_contract-policy-closure"}
       ]
     },
     {
-      "id": "DRO-ENV-001",
+      "id": "SESSION-ENV-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor environment verifier and every adapter",
+      "failure_owner": "future bounded runner environment verifier and every adapter",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "conformance:dromen-environment-binding"}
+        {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
+        {"status": "planned", "ref": "conformance:session_contract-environment-binding"}
       ]
     },
     {
-      "id": "DRO-CAP-001",
+      "id": "SESSION-CAP-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor capability resolver and minimal capability domain",
+      "failure_owner": "future bounded runner capability resolver and minimal capability domain",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "conformance:dromen-capability-intersection"}
+        {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
+        {"status": "planned", "ref": "conformance:session_contract-capability-intersection"}
       ]
     },
     {
-      "id": "DRO-SEC-001",
+      "id": "SESSION-SEC-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future minimal capability domain, Drasor and every log or evidence producer",
+      "failure_owner": "future minimal capability domain, bounded runner and every log or evidence producer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "conformance:dromen-secret-separation"}
+        {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
+        {"status": "planned", "ref": "conformance:session_contract-secret-separation"}
       ]
     },
     {
-      "id": "DRO-BUD-001",
+      "id": "SESSION-BUD-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor scheduler, adapters and delegated task controller",
+      "failure_owner": "future bounded runner scheduler, adapters and delegated task controller",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "conformance:dromen-budget-envelope"}
+        {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
+        {"status": "planned", "ref": "conformance:session_contract-budget-envelope"}
       ]
     },
     {
-      "id": "DRO-ACT-001",
+      "id": "SESSION-ACT-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor activation evaluator and every Synem session consumer",
+      "failure_owner": "future bounded runner activation evaluator and every Endem closure session consumer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "conformance:dromen-activation-boundary"}
+        {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
+        {"status": "planned", "ref": "conformance:session_contract-activation-boundary"}
       ]
     },
     {
-      "id": "DRO-OBS-001",
+      "id": "SESSION-OBS-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor, observation adapters, Iknem producers and decision authorities",
+      "failure_owner": "future bounded runner, observation adapters, evidence entry producers and decision authorities",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "conformance:dromen-observation-plan"}
+        {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
+        {"status": "planned", "ref": "conformance:session_contract-observation-plan"}
       ]
     },
     {
-      "id": "DRO-IMM-001",
+      "id": "SESSION-IMM-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor session controller and every mutable environment adapter",
+      "failure_owner": "future bounded runner session controller and every mutable environment adapter",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "conformance:dromen-drift-invalidation"}
+        {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
+        {"status": "planned", "ref": "conformance:session_contract-drift-invalidation"}
       ]
     },
     {
-      "id": "DRO-LIF-001",
+      "id": "SESSION-LIF-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor session controller, capability domain and evidence/log producers",
+      "failure_owner": "future bounded runner session controller, capability domain and evidence/log producers",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/dromen/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/dromen_vector_test.py"},
-        {"status": "planned", "ref": "conformance:dromen-session-disposal"}
+        {"status": "covered-by-repo", "ref": "vectors/session-contract/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/session_contract_vector_test.py"},
+        {"status": "planned", "ref": "conformance:session_contract-session-disposal"}
       ]
     },
     {
-      "id": "IKN-SCP-001",
+      "id": "EVIDENCE-SCP-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "every Iknem producer, verifier and consumer",
+      "failure_owner": "every evidence entry producer, verifier and consumer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:iknem-scope-binding"}
+        {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
+        {"status": "planned", "ref": "conformance:evidence_entry-scope-binding"}
       ]
     },
     {
-      "id": "IKN-PRV-001",
+      "id": "EVIDENCE-PRV-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Iknem producers, mergers and every verifier",
+      "failure_owner": "evidence entry producers, mergers and every verifier",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:iknem-provenance-closure"}
+        {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
+        {"status": "planned", "ref": "conformance:evidence_entry-provenance-closure"}
       ]
     },
     {
-      "id": "IKN-OBS-001",
+      "id": "EVIDENCE-OBS-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "observation adapters, Iknem producers and evaluators",
+      "failure_owner": "observation adapters, evidence entry producers and evaluators",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:iknem-observation-alignment"}
+        {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
+        {"status": "planned", "ref": "conformance:evidence_entry-observation-alignment"}
       ]
     },
     {
-      "id": "IKN-CLS-001",
+      "id": "EVIDENCE-CLS-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Iknem producers and every evidence consumer",
+      "failure_owner": "evidence entry producers and every evidence consumer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:iknem-evidence-class"}
+        {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
+        {"status": "planned", "ref": "conformance:evidence_entry-evidence-class"}
       ]
     },
     {
-      "id": "IKN-INT-001",
+      "id": "EVIDENCE-INT-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
       "failure_owner": "integrity verifiers, policy owners and every consumer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:iknem-integrity-separation"}
+        {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
+        {"status": "planned", "ref": "conformance:evidence_entry-integrity-separation"}
       ]
     },
     {
-      "id": "IKN-VAL-001",
+      "id": "EVIDENCE-VAL-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Iknem verifiers, revocation authorities and policy owners",
+      "failure_owner": "evidence entry verifiers, revocation authorities and policy owners",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:iknem-validity-appraisal"}
+        {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
+        {"status": "planned", "ref": "conformance:evidence_entry-validity-appraisal"}
       ]
     },
     {
-      "id": "IKN-COV-001",
+      "id": "EVIDENCE-COV-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "coverage evaluators, krin owners and decision authorities",
+      "failure_owner": "coverage evaluators, satisfaction_criteria owners and decision authorities",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:iknem-coverage"}
+        {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
+        {"status": "planned", "ref": "conformance:evidence_entry-coverage"}
       ]
     },
     {
-      "id": "IKN-DEC-001",
+      "id": "EVIDENCE-DEC-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
       "failure_owner": "appraisal producers, decision authorities and result consumers",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:iknem-decision-separation"}
+        {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
+        {"status": "planned", "ref": "conformance:evidence_entry-decision-separation"}
       ]
     },
     {
-      "id": "IKN-PRI-001",
+      "id": "EVIDENCE-PRI-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Iknem producers, disclosure policy owners and storage operators",
+      "failure_owner": "evidence entry producers, disclosure policy owners and storage operators",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/iknem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/iknem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:iknem-minimal-disclosure"}
+        {"status": "covered-by-repo", "ref": "vectors/evidence-entry/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/evidence_entry_vector_test.py"},
+        {"status": "planned", "ref": "conformance:evidence_entry-minimal-disclosure"}
       ]
     },
     {
-      "id": "SYN-CLS-001",
+      "id": "CLOSURE-CLS-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, Pleko and every Synem reader",
+      "failure_owner": "deterministic producer, compose and every Endem closure reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:synem-complete-closure"}
+        {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
+        {"status": "planned", "ref": "conformance:endem_closure-complete-closure"}
       ]
     },
     {
-      "id": "SYN-RES-001",
+      "id": "CLOSURE-RES-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, Pleko and every Synem reader",
+      "failure_owner": "deterministic producer, compose and every Endem closure reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:synem-exact-binding"}
+        {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
+        {"status": "planned", "ref": "conformance:endem_closure-exact-binding"}
       ]
     },
     {
-      "id": "SYN-GRF-001",
+      "id": "CLOSURE-GRF-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Pleko, Synem readers and resource policy owners",
+      "failure_owner": "compose, Endem closure readers and resource policy owners",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:synem-bounded-graph"}
+        {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
+        {"status": "planned", "ref": "conformance:endem_closure-bounded-graph"}
       ]
     },
     {
-      "id": "SYN-AUT-001",
+      "id": "CLOSURE-AUT-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Pleko, Drasor and capability policy owners",
+      "failure_owner": "compose, bounded runner and capability policy owners",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:synem-authority-intersection"}
+        {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
+        {"status": "planned", "ref": "conformance:endem_closure-authority-intersection"}
       ]
     },
     {
-      "id": "SYN-STA-001",
+      "id": "CLOSURE-STA-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Drasor, decision authorities and every result consumer",
+      "failure_owner": "bounded runner, decision authorities and every result consumer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:synem-member-result-separation"}
+        {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
+        {"status": "planned", "ref": "conformance:endem_closure-member-result-separation"}
       ]
     },
     {
-      "id": "SYN-ACT-001",
+      "id": "CLOSURE-ACT-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Drasor, event producers and activation policy owners",
+      "failure_owner": "bounded runner, event producers and activation policy owners",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/synem/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/synem_vector_test.py"},
-        {"status": "planned", "ref": "conformance:synem-session-activation"}
+        {"status": "covered-by-repo", "ref": "vectors/endem-closure/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/endem_closure_vector_test.py"},
+        {"status": "planned", "ref": "conformance:endem_closure-session-activation"}
       ]
     },
     {
@@ -780,7 +805,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "Ktisor and every reader",
+      "failure_owner": "deterministic producer and every reader",
       "verification": [{"status": "planned", "ref": "conformance:conformance-identity"}]
     },
     {
@@ -810,10 +835,10 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Profile maintainers, Ktisor and every reader",
+      "failure_owner": "Profile maintainers, deterministic producer and every reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
-        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
+        {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "covered-by-repo", "ref": "tests/spec_contract_test.py"},
         {"status": "planned", "ref": "conformance:profile-semantic-closure"}
       ]
@@ -836,7 +861,7 @@
       "evidence_status": "partial",
       "failure_owner": "every conformance reporter and external prerequisite resolver",
       "verification": [
-        {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
+        {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-missing-reject.json"},
         {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
         {"status": "planned", "ref": "conformance:external-conformance-prerequisites"}
@@ -847,7 +872,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor",
+      "failure_owner": "deterministic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/two-roots-reject.json"}
@@ -858,7 +883,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and every reader",
+      "failure_owner": "deterministic producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "conformance:facet-presence"}
@@ -869,7 +894,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor",
+      "failure_owner": "deterministic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/source-range-reject.json"},
@@ -890,11 +915,11 @@
       ]
     },
     {
-      "id": "END-SEM-001",
+      "id": "END-MEANING-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor",
+      "failure_owner": "deterministic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"}
@@ -905,21 +930,21 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor",
+      "failure_owner": "deterministic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
-        {"status": "covered-by-repo", "ref": "vectors/semantic/force-in-skena-reject.json"}
+        {"status": "covered-by-repo", "ref": "vectors/semantic/force-in-situation-reject.json"}
       ]
     },
     {
-      "id": "END-TEL-001",
+      "id": "END-DIRECTION-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor",
+      "failure_owner": "deterministic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
-        {"status": "planned", "ref": "conformance:telis-mode"}
+        {"status": "planned", "ref": "conformance:goal_direction-mode"}
       ]
     },
     {
@@ -927,7 +952,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, semantic authorities and Synem maintainers",
+      "failure_owner": "deterministic producer, semantic authorities and Endem closure maintainers",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -940,7 +965,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, Theor and every semantic reader",
+      "failure_owner": "deterministic producer, independent inspector and every semantic reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -953,7 +978,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Drasor and every evaluator",
+      "failure_owner": "bounded runner and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -966,7 +991,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Drasor, observation adapters and every evaluator",
+      "failure_owner": "bounded runner, observation adapters and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/composition/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/composition_vector_test.py"},
@@ -979,7 +1004,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, membership authorities and every semantic reader",
+      "failure_owner": "deterministic producer, membership authorities and every semantic reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
@@ -992,7 +1017,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, membership authorities and every evaluator",
+      "failure_owner": "deterministic producer, membership authorities and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
@@ -1005,7 +1030,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Drasor, observation adapters and every evaluator",
+      "failure_owner": "bounded runner, observation adapters and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/quantification/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/quantification_vector_test.py"},
@@ -1018,7 +1043,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "semantic authorities, evaluation owners and Ktisor",
+      "failure_owner": "semantic authorities, evaluation owners and deterministic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1031,7 +1056,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, measurement producers and every evaluator",
+      "failure_owner": "deterministic producer, measurement producers and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1044,7 +1069,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "measurement producers, Drasor and every evaluator",
+      "failure_owner": "measurement producers, bounded runner and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1057,7 +1082,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Drasor, measurement authorities and every evaluator",
+      "failure_owner": "bounded runner, measurement authorities and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/measurement/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/measurement_vector_test.py"},
@@ -1070,7 +1095,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and every semantic reader",
+      "failure_owner": "deterministic producer and every semantic reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/negative-relation-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
@@ -1084,7 +1109,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Drasor, observation adapters and every evaluator",
+      "failure_owner": "bounded runner, observation adapters and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
@@ -1097,7 +1122,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "observation authorities, Drasor and every evaluator",
+      "failure_owner": "observation authorities, bounded runner and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/negation/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/negation_vector_test.py"},
@@ -1110,11 +1135,11 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, Drasor and time authorities",
+      "failure_owner": "deterministic producer, bounded runner and time authorities",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
-        {"status": "planned", "ref": "conformance:mene-time-scope"},
+        {"status": "covered-by-repo", "ref": "vectors/time-scope/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/time_scope_vector_test.py"},
+        {"status": "planned", "ref": "conformance:maintain-time-scope"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1123,11 +1148,11 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, Drasor and policy authorities",
+      "failure_owner": "deterministic producer, bounded runner and policy authorities",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
-        {"status": "planned", "ref": "conformance:mene-continuity-policy"},
+        {"status": "covered-by-repo", "ref": "vectors/time-scope/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/time_scope_vector_test.py"},
+        {"status": "planned", "ref": "conformance:maintain-continuity-policy"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1136,31 +1161,31 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Drasor, observation adapters and every evaluator",
+      "failure_owner": "bounded runner, observation adapters and every evaluator",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/mene/cases.json"},
-        {"status": "covered-by-repo", "ref": "tests/mene_vector_test.py"},
-        {"status": "planned", "ref": "conformance:mene-coverage-classification"},
+        {"status": "covered-by-repo", "ref": "vectors/time-scope/cases.json"},
+        {"status": "covered-by-repo", "ref": "tests/time_scope_vector_test.py"},
+        {"status": "planned", "ref": "conformance:maintain-coverage-classification"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
     {
-      "id": "END-KRN-001",
+      "id": "END-CRITERIA-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and Drasor",
+      "failure_owner": "deterministic producer and bounded runner",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
-        {"status": "planned", "ref": "conformance:krin-no-self-proof"}
+        {"status": "planned", "ref": "conformance:satisfaction_criteria-no-self-proof"}
       ]
     },
     {
-      "id": "END-KRN-002",
+      "id": "END-CRITERIA-002",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Drasor and every evaluator",
+      "failure_owner": "bounded runner and every evaluator",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
@@ -1169,14 +1194,14 @@
       ]
     },
     {
-      "id": "END-APR-001",
+      "id": "END-UNRESOLVED-001",
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor",
+      "failure_owner": "deterministic producer",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
-        {"status": "planned", "ref": "conformance:apor-preservation"}
+        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-unresolved-meaning-reject.json"},
+        {"status": "planned", "ref": "conformance:unresolved_meaning-preservation"}
       ]
     },
     {
@@ -1184,9 +1209,9 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, Drasor and every evaluator",
+      "failure_owner": "deterministic producer, bounded runner and every evaluator",
       "verification": [
-        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-unresolved-meaning-reject.json"},
         {"status": "planned", "ref": "conformance:unknown-state-separation"}
       ]
     },
@@ -1195,7 +1220,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and Theor",
+      "failure_owner": "deterministic producer and independent inspector",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/minimal-valid.json"},
         {"status": "planned", "ref": "conformance:relation-position-differential"}
@@ -1206,7 +1231,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and Drasor",
+      "failure_owner": "deterministic producer and bounded runner",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
         {"status": "planned", "ref": "conformance:model-candidate-boundary"}
@@ -1217,7 +1242,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, every content validator and authorization companion resolver",
+      "failure_owner": "deterministic producer, every content validator and authorization companion resolver",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-missing-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-mismatch-reject.json"},
@@ -1230,7 +1255,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Drasor and named decision authorities",
+      "failure_owner": "bounded runner and named decision authorities",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
@@ -1243,7 +1268,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "Ktisor",
+      "failure_owner": "deterministic producer",
       "verification": [
         {"status": "planned", "ref": "conformance:determinism-same-input"},
         {"status": "planned", "ref": "conformance:reproducible-two-environments"}
@@ -1254,7 +1279,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "Ktisor, external signing integration and Drasor",
+      "failure_owner": "deterministic producer, external signing integration and bounded runner",
       "verification": [{"status": "planned", "ref": "conformance:state-non-implication"}]
     },
     {
@@ -1262,7 +1287,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Drasor, protocol adapters and evidence consumers",
+      "failure_owner": "bounded runner, protocol adapters and evidence consumers",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/result-domains/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/result_domain_vector_test.py"},
@@ -1275,7 +1300,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and release validation",
+      "failure_owner": "deterministic producer and release validation",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/identity-core.md"},
         {"status": "covered-by-repo", "ref": "vectors/identity/cases.json"},
@@ -1288,7 +1313,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, identity producers and authorization companion consumers",
+      "failure_owner": "deterministic producer, identity producers and authorization companion consumers",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/negative-relation-valid.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/external-context-identity-valid.json"},
@@ -1319,8 +1344,8 @@
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p0.json"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/edge-limit.hex"},
-        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/edge-limit.hex"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "planned", "ref": "conformance:resource-limit-before-allocation"},
         {"status": "manual-authority", "authority": "future Profile ADR reviewers"}
       ]
@@ -1343,11 +1368,11 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor, Theor and every reader",
+      "failure_owner": "deterministic producer, independent inspector and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/two-roots-reject.json"},
-        {"status": "covered-by-repo", "ref": "vectors/semantic/force-in-skena-reject.json"},
-        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/force-in-situation-reject.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-unresolved-meaning-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/source-range-reject.json"},
         {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
@@ -1359,7 +1384,7 @@
       "decision_status": "accepted",
       "implementation_status": "unimplemented",
       "evidence_status": "planned",
-      "failure_owner": "Theor and repository dependency checks",
+      "failure_owner": "independent inspector and repository dependency checks",
       "verification": [
         {"status": "planned", "ref": "conformance:reader-dependency-independence"},
         {"status": "planned", "ref": "conformance:mutation-and-fault-injection"}
@@ -1381,12 +1406,12 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "Ktisor and every reader",
+      "failure_owner": "deterministic producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/minimal-structural.hex"},
         {"status": "covered-by-repo", "ref": "vectors/wire/bad-magic.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/truncated-header.hex"},
-        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/truncated-header.hex"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"}
       ]
     },
@@ -1395,7 +1420,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "Ktisor and every reader",
+      "failure_owner": "deterministic producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "planned", "ref": "conformance:wire-layout-variants"}
@@ -1406,7 +1431,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and every reader",
+      "failure_owner": "deterministic producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "planned", "ref": "conformance:wire-size-and-reserved"}
@@ -1428,11 +1453,11 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "Ktisor and every reader",
+      "failure_owner": "deterministic producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/directory-order.hex"},
-        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"}
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/directory-order.hex"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"}
       ]
     },
     {
@@ -1462,7 +1487,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and every reader",
+      "failure_owner": "deterministic producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/minimal-structural.hex"},
         {"status": "planned", "ref": "conformance:wire-facet-cardinality"}
@@ -1473,11 +1498,11 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "Ktisor and every reader",
+      "failure_owner": "deterministic producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/wire/payload-not-map.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/non-minimal-cbor.hex"},
-        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/non-minimal-cbor.hex"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
         {"status": "planned", "ref": "conformance:wire-cbor-determinism"}
       ]
@@ -1490,12 +1515,12 @@
       "failure_owner": "every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p0.json"},
-        {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
+        {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
-        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/edge-limit.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/depth-limit.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/string-limit.hex"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/edge-limit.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/depth-limit.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/string-limit.hex"},
         {"status": "planned", "ref": "conformance:p0-limit-boundaries"}
       ]
     },
@@ -1504,12 +1529,12 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and every reader",
+      "failure_owner": "deterministic producer and every reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/profiles/end-p0.json"},
-        {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
+        {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
         {"status": "covered-by-repo", "ref": "tests/wire_vector_test.py"},
-        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "planned", "ref": "conformance:p0-feature-closure"}
       ]
     },
@@ -1529,14 +1554,14 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and every END-P1 reader",
+      "failure_owner": "deterministic producer and every END-P2 reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
-        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/manifest.json"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/minimal-semantic.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/unknown-field.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/duplicate-resolution.hex"}
+        {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/manifest.json"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/minimal-semantic.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/unknown-field.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/duplicate-resolution.hex"}
       ]
     },
     {
@@ -1544,15 +1569,15 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and every END-P1 reader",
+      "failure_owner": "deterministic producer and every END-P2 reader",
       "verification": [
-        {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
-        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/manifest.json"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/minimal-semantic.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/dangling-reference.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/source-range.hex"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/apor-source-reference.hex"}
+        {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/manifest.json"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/minimal-semantic.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/dangling-reference.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/source-range.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/unresolved-meaning-source-reference.hex"}
       ]
     },
     {
@@ -1560,9 +1585,9 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "every END-P1 reader and content conformance reporter",
+      "failure_owner": "every END-P2 reader and content conformance reporter",
       "verification": [
-        {"status": "covered-by-repo", "ref": "spec/profiles/end-p1.json"},
+        {"status": "covered-by-repo", "ref": "spec/profiles/end-p2.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-missing-reject.json"},
         {"status": "covered-by-repo", "ref": "vectors/semantic/authorization-binding-mismatch-reject.json"},
         {"status": "covered-by-repo", "ref": "tests/semantic_vector_test.py"},
@@ -1574,7 +1599,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor source reader",
+      "failure_owner": "deterministic producer source reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "spec/endem-source-manifest.md"},
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
@@ -1586,7 +1611,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "covered",
-      "failure_owner": "Ktisor source reader",
+      "failure_owner": "deterministic producer source reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/source/minimal.ends"},
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"}
@@ -1597,7 +1622,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor source reader",
+      "failure_owner": "deterministic producer source reader",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
         {"status": "planned", "ref": "conformance:source-escape-boundaries"}
@@ -1608,11 +1633,11 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor",
+      "failure_owner": "deterministic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/source/minimal.ends"},
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
-        {"status": "covered-by-repo", "ref": "vectors/wire/p1/minimal-semantic.hex"},
+        {"status": "covered-by-repo", "ref": "vectors/wire/p2/minimal-semantic.hex"},
         {"status": "planned", "ref": "conformance:source-order-independence"}
       ]
     },
@@ -1621,10 +1646,10 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor and upstream authoring authority",
+      "failure_owner": "deterministic producer and upstream authoring authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/semantic/model-authority-reject.json"},
-        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-apor-reject.json"},
+        {"status": "covered-by-repo", "ref": "vectors/semantic/unrecorded-unresolved-meaning-reject.json"},
         {"status": "manual-authority", "authority": "Noemion specification maintainers"}
       ]
     },
@@ -1633,10 +1658,10 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "Ktisor",
+      "failure_owner": "deterministic producer",
       "verification": [
         {"status": "covered-by-repo", "ref": "tests/source_manifest_test.py"},
-        {"status": "covered-by-repo", "ref": "tests/p1_payload_test.py"},
+        {"status": "covered-by-repo", "ref": "tests/p2_payload_test.py"},
         {"status": "planned", "ref": "conformance:source-atomic-failure"}
       ]
     },
@@ -1712,7 +1737,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor control plane and named authority",
+      "failure_owner": "future bounded runner control plane and named authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/diagnostics/cases.json"},
         {"status": "planned", "ref": "conformance:diagnostic-recovery-authority"}
@@ -1789,7 +1814,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor capability resolver and every external adapter",
+      "failure_owner": "future bounded runner capability resolver and every external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "conformance:adapter-capability-intersection"}
@@ -1800,7 +1825,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor session controller and every external adapter",
+      "failure_owner": "future bounded runner session controller and every external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "conformance:adapter-invocation-binding"}
@@ -1855,7 +1880,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future Drasor session controller and every asynchronous adapter",
+      "failure_owner": "future bounded runner session controller and every asynchronous adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "conformance:adapter-cancellation-finality"}
@@ -1866,7 +1891,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "future retry policy, Drasor budget controller and every adapter",
+      "failure_owner": "future retry policy, bounded runner budget controller and every adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/adapters/cases.json"},
         {"status": "planned", "ref": "conformance:adapter-idempotent-retry"}
@@ -2212,7 +2237,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "every future semantic review authority, candidate producer and Ktisor input boundary",
+      "failure_owner": "every future semantic review authority, candidate producer and deterministic producer input boundary",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
@@ -2296,7 +2321,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "every future Drasor capability resolver, Dromen establisher and external adapter",
+      "failure_owner": "every future bounded runner capability resolver, session contract establisher and external adapter",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},
@@ -2308,7 +2333,7 @@
       "decision_status": "accepted-draft",
       "implementation_status": "vector-checker-only",
       "evidence_status": "partial",
-      "failure_owner": "every future authority consumer, result mapper, Drasor and decision authority",
+      "failure_owner": "every future authority consumer, result mapper, bounded runner and decision authority",
       "verification": [
         {"status": "covered-by-repo", "ref": "vectors/authority/cases.json"},
         {"status": "covered-by-repo", "ref": "tests/authority_vector_test.py"},

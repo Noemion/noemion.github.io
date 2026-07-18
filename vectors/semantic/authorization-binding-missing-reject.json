@@ -8,12 +8,12 @@
     "result": "reject",
     "clauses": ["END-CON-006", "END-AUT-002", "END-FMT-015"],
     "diagnostics": [
-      {"code": "endem.projection.authorization_binding_missing", "clause": "END-AUT-002", "location": "/input/semion/relations/0/projection"}
+      {"code": "endem.projection.authorization_binding_missing", "clause": "END-AUT-002", "location": "/input/meaning_projection/relations/0/projection"}
     ]
   },
   "input": {
-    "rhem": {"source_id": "source:binding-001", "subject": "authority:requester", "media_type": "text/plain", "language": "zh-CN", "version": "1", "content": "生成报告", "range": {"unit": "unicode-scalar", "start": 0, "length": 4}},
-    "semion": {
+    "source_expression": {"source_id": "source:binding-001", "subject": "authority:requester", "media_type": "text/plain", "language": "zh-CN", "version": "1", "content": "生成报告", "range": {"unit": "unicode-scalar", "start": 0, "length": 4}},
+    "meaning_projection": {
       "symbols": [
         {"id": "sym:project", "kind": "entity", "source_ref": "source:binding-001#/range"},
         {"id": "sym:report", "kind": "artifact", "source_ref": "source:binding-001#/range"}
@@ -22,9 +22,9 @@
         {"id": "rel:produced", "predicate": "produced", "roles": [{"name": "for", "symbol": "sym:project"}, {"name": "result", "symbol": "sym:report"}], "projection": {"kind": "rule", "id": "projection:zh-goal-v1"}}
       ]
     },
-    "skena": {"roots": ["situation:report-produced"], "situations": [{"id": "situation:report-produced", "relation": "rel:produced", "polarity": "positive"}]},
-    "telis": {"mode": "kine"},
-    "krin": {"required_phain": [{"relation": "rel:produced", "match": "same-roles"}], "required_iknem": ["artifact-content-observation"], "on_missing_observation": "agno", "on_evaluation_error": "fault", "decision_authority": "authority:requester"},
-    "apor": []
+    "situation": {"roots": ["situation:report-produced"], "situations": [{"id": "situation:report-produced", "relation": "rel:produced", "polarity": "positive"}]},
+    "goal_direction": {"mode": "reach"},
+    "satisfaction_criteria": {"required_observations": [{"relation": "rel:produced", "match": "same-roles"}], "required_evidence": ["artifact-content-observation"], "on_missing_observation": "undetermined", "on_evaluation_error": "fault", "decision_authority": "authority:requester"},
+    "unresolved_meaning": []
   }
 }

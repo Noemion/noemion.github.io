@@ -6,16 +6,16 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 VECTOR_PATH = ROOT / "vectors" / "result-domains" / "cases.json"
-CASE_ID = re.compile(r"^RV-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
-SATISFACTION = {"met", "unmet", "agno", "fault", None}
-SATISFACTION_SOURCE = {"krin", "session", "external-task", "none"}
-SESSION = {"completed", "failed", "interrupted"}
+CASE_ID = re.compile(r"^RESULT-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
+SATISFACTION = {"met", "unmet", "undetermined", "fault", None}
+SATISFACTION_SOURCE = {"satisfaction_criteria", "session", "external-task", "none"}
+SESSION = {"completed", "failed", "stopped"}
 VALIDITY = {"valid", "invalid", "revoked"}
 COVERAGE = {"sufficient", "insufficient"}
 AUTHORITY = {"authorized", "unavailable"}
-AUTHORITY_ACTION = {"accept", "reject", "reject-inconclusive", "defer"}
+AUTHORITY_ACTION = {"accept", "reject", "reject-inconclusive", "deferred"}
 DECISION = {"accepted", "rejected", "deferred"}
-CLAUSES = {"END-KRN-002", "END-DEC-001", "END-STA-002"}
+CLAUSES = {"END-CRITERIA-002", "END-DEC-001", "END-STA-002"}
 
 
 def proposal_violation(case):
@@ -24,7 +24,7 @@ def proposal_violation(case):
     decision = case["proposed_decision"]
     action = case["authority_action"]
 
-    if satisfaction is not None and source != "krin":
+    if satisfaction is not None and source != "satisfaction_criteria":
         return "END-STA-002"
     if satisfaction is None and source != "none":
         return "END-STA-002"
@@ -33,9 +33,9 @@ def proposal_violation(case):
         if satisfaction is None:
             return "END-STA-002"
         if satisfaction != "met":
-            return "END-KRN-002"
+            return "END-CRITERIA-002"
         if (
-            case["iknem_validity"] != "valid"
+            case["evidence_validity"] != "valid"
             or case["coverage"] != "sufficient"
             or case["authority"] != "authorized"
             or action != "accept"
@@ -48,11 +48,11 @@ def proposal_violation(case):
             return "END-DEC-001"
         if action == "reject" and satisfaction == "unmet":
             return None
-        if action == "reject-inconclusive" and satisfaction in {"agno", "fault"}:
+        if action == "reject-inconclusive" and satisfaction in {"undetermined", "fault"}:
             return None
         return "END-DEC-001"
 
-    if action != "defer":
+    if action != "deferred":
         return "END-DEC-001"
     return None
 
@@ -69,7 +69,7 @@ def main():
         errors.append("result-domain vectors must use end-core.result-domain-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("result-domain vectors must pin END-CORE 0.1.0-draft")
-    if "not Drasor or decision-engine implementation data" not in document.get("description", ""):
+    if "not bounded runner or decision-engine implementation data" not in document.get("description", ""):
         errors.append("result-domain vectors must state their non-implementation boundary")
 
     cases = document.get("cases")
@@ -97,7 +97,7 @@ def main():
             ("satisfaction", SATISFACTION),
             ("satisfaction_source", SATISFACTION_SOURCE),
             ("session", SESSION),
-            ("iknem_validity", VALIDITY),
+            ("evidence_validity", VALIDITY),
             ("coverage", COVERAGE),
             ("authority", AUTHORITY),
             ("authority_action", AUTHORITY_ACTION),

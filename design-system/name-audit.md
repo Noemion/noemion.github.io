@@ -3,25 +3,18 @@
 证据时间：2026-07-14T00:56:59+08:00
 工程责任：首次发行负责人
 法律责任：目标法域的合格知识产权专业人员
-状态：开发阶段工程初筛；ADR-0031 至 ADR-0033 已接受直接迁移；ADR-0034 已接受口头门禁；ADR-0035 已收敛公开动作；后续去专名化方案仍属非规范候选；不是法律意见
+状态：ADR-0037 已采用直白职责词并完成版本化关键字检查；Noemion 与 Endem 仍待人类读音验证；不是法律意见
 
 ## 先给结论
 
-- `Noemion` 可以继续作为项目、新领域与社区的候选品牌。当前精确查询没有发现同名软件包、GNU 包或 IANA 媒体类型；GitHub 上的精确组织名和仓库名属于本项目。正式商标检索仍未完成。
-- `Endem`、`endem` 与 `.endem` 可以继续用于内部规范和开发，但不能再写成“没有强冲突”。三个第三方 GitHub 仓库和一个 GitHub 用户使用精确名 `endem`，`endem.com` 也已登记。
-- 旧执行域名 Praxor 与旧证据对象名 Tekmor 已触发项目自己的停止条件。前者被多个活跃软件、人工智能和大模型研究主体使用；后者被相邻的可证明身份、零知识证明、TEE 与 attestation 项目使用。
-- ADR-0031 已采用 `Drasor`、`drase` 与 `Iknem`。它们在本轮没有发现活跃的相邻 AI、执行、证明、协议或开发工具同名项目，但正式商标和权利复核仍未完成。
-- 旧组件名 `Poiet` 与公开动作 `poie` 必须共同退出。`POIE` 已被 PFA Open Inference Engine 用于预测与分析模型评分，大小写不能形成可靠工程区分；ADR-0032 已采用 `Ktisor` 与 `ktise` 作为现行设计标识，不表示发行名称已经通过。
-- `TXT-CORE` 容易被读成 `.txt` 文件或原始文本文件，已触发实际对象边界误解。ADR-0033 采用 `TEXT-IDENTIFIER-CORE`；它是标准 ID，不是新文件格式、制品或组件名。
-- 先前审查没有保存目标语言、IPA、首次朗读、听写回填或成对混淆证据，因此不能证明任何新造词已经通过口头传播门禁。ADR-0034 已补上这项治理要求，但具体发行读音尚未冻结。
-- `kine/mene` 已未通过发行拼写桌面门禁：前者有稳定而无关的英语词义，两个词也不能让首次读者恢复职责。现行规范值暂不改变；[非规范候选提案](https://noemion.github.io/spec/telis-release-terms-proposal.html)把 `reach/maintain` 列为首选人类验证候选，不把它们提前写成现行枚举。
-- [发行术语去专名化研究提案](https://noemion.github.io/spec/release-terminology-simplification-proposal.html)进一步发现：当前主要风险不是个别新造词缺少官方读音，而是相邻职责占用的专名过多。桌面结论暂时保留 Endem 进入人类验证，并建议 Synem、Dromen、Iknem、Ktisor、Theor、Drasor 及五个动作优先改用直白职责名；这不是现行改名、别名或规范决定。
-- [语义面与观察词去专名化提案](https://noemion.github.io/spec/semantic-facet-terminology-proposal.html)发现同一问题也存在于 `rhem/semion/skena/telis/krin/apor/phain`：七项职责必须保留，但它们只是 Endem 内部语义面与结构化观察，不需要产品式专名。直白候选尚待人类职责匹配，不是现行字段或 Profile。
-- [生命周期与结果词边界提案](https://noemion.github.io/spec/lifecycle-and-result-terminology-proposal.html)进一步发现 `attested` 不是单纯的命名风险，而是对象边界错误：外部签名、证明、政策、截止点和撤销关系不能压成 Endem 自身的单值终态。对象边界修正与发行命名必须分开；前者不需要提前采用新称呼，`nascent/coherent/agno/aseme/interrupted` 的直白候选仍等待人类验证，当前规范与向量保持不变。
-- `Iknem` 与 `Ktisor/ktise` 仍是现行词表的高风险复核项；Endem/Synem 是优先成对听辨项。历史动作 `sphra` 曾因词首难以稳定拼读被列为高风险，ADR-0035 已因职责价值不足将它连同 `tasse`、`peira` 撤下；这不是读音修补，也不使其余名称自动通过。
-- `Synem`、`Dromen` 与 `Theor` 存在大小写无关或近似的软件与应用使用，目前记录为发现混淆；尚未达到必须立即更名的程度。
-- PyPI、npm 与 crates.io 的 `endem` 精确包名在本次查询时均返回 404，Homebrew、Arch Linux、Fedora 和 Debian 也没有精确同名包。这个结果只说明查询时没有精确登记，不构成包名保留。
-- 当前工程结论不再是统一的中等风险。Endem 保持中等风险；旧名称的高风险已经通过直接替换处理；Drasor、drase、Iknem、Ktisor 与 ktise 只通过开发阶段初筛，首次正式发行仍由法律和实际包名取得门禁阻断。
+- 当前只保留 `Noemion` 与 `Endem` 两个确有品牌或核心制品职责的造词。它们仍缺少真实使用者的朗读、听写与成对区分证据，不能宣称发行读音已经通过。
+- 其他对象改用 `Endem closure`、`session contract` 与 `evidence entry`；信任职责改用 `deterministic producer`、`independent inspector` 与 `bounded runner`。
+- 五项动作改用 `form / lint / compose / inspect / run`。语义字段改用 `source_expression / meaning_projection / situation / goal_direction / satisfaction_criteria / unresolved_meaning / structured_observation`。
+- 内容状态只保留 `formed / resolved`。外部陈述、验证政策、截止点、撤销与依赖方判断分别保存，不再压成第三个内容状态。
+- 当前机器标识已与声明版本的 C、C++、Rust、Go、Python、Java、ECMAScript、Swift、Kotlin、C# 与 PostgreSQL SQL 关键字作精确比较。`grant`、`defer`、`fixed`、`all`、`some` 与 `check` 等冲突已通过改名避开；这不保证未来语言版本永不新增冲突。
+- 当前书写与生态筛查仍把 Endem 记为中等风险；首次发行还必须补齐目标语言、首次朗读、听写回填和成对混淆证据。
+- [ADR-0037](../architecture/adr-0037-terminology-simplification.html)记录采用决定，[术语审查结果](../docs/terminology-audit.html)记录完整替换与关键字证据，[`goal_direction` 发行词研究](https://noemion.github.io/spec/goal_direction-release-terms-proposal.html)保存 `reach / maintain` 的候选比较。
+- 以下旧审查表只作为迁移证据。旧名称不再是现行字段、动作、路由、别名或兼容入口。
 
 ## 筛查对象与判定方法
 

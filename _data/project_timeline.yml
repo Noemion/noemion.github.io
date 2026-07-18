@@ -49,7 +49,7 @@ items:
     label: 后续规划
     title: 最小形成与独立检查路径
     description: 若项目进入组件实现，先形成确定性写入、分层检查和独立只读解释路径，并用畸形输入、差分结果、资源上限和双环境复现限定主张。
-  - id: controlled-drase
+  - id: controlled-run
     state: future
     label: 后续规划
     title: 组合、受控运行与外部适配

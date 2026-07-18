@@ -7,7 +7,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 VECTOR_PATH = ROOT / "vectors" / "negation" / "cases.json"
 CASE_ID = re.compile(r"^NV-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
-RESULTS = {"met", "unmet", "agno", "fault"}
+RESULTS = {"met", "unmet", "undetermined", "fault"}
 CLAUSES = {"END-NEG-001", "END-NEG-002", "END-NEG-003"}
 
 
@@ -85,7 +85,7 @@ def classify(target, observation):
     if count > 0:
         return "unmet", None
     if mode == "event-log":
-        return "agno", None
+        return "undetermined", None
     if not validate_closure(observation.get("closure")):
         return None, "END-NEG-003"
     return "met", None
@@ -120,7 +120,7 @@ def main():
         errors.append("negation vectors must use end-core.negation-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("negation vectors must pin END-CORE 0.1.0-draft")
-    if "not a policy engine, log collector, Drasor, or evaluator implementation" not in document.get("description", ""):
+    if "not a policy engine, log collector, bounded runner, or evaluator implementation" not in document.get("description", ""):
         errors.append("negation vectors must state their non-implementation boundary")
 
     cases = document.get("cases")

@@ -4,7 +4,7 @@
   "date": "2026-07-13",
   "format": "END-FMT 0.1.0-draft",
   "profile": "END-P0 0.1.0-draft",
-  "decision_scope": "first Ktisor and production-reader structural core only",
+  "decision_scope": "first deterministic producer and production-reader structural core only",
   "macos": {
     "platform": "macOS-26.5.1-arm64-arm-64bit",
     "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
@@ -89,12 +89,12 @@
       "enable overflow checks in release builds"
     ],
     "c_prototype": "retain only as a non-production differential oracle and fuzz target",
-    "theor": "must use an independently written parser and error path; final implementation language remains subject to the independence audit",
+    "inspect": "must use an independently written parser and error path; final implementation language remains subject to the independence audit",
     "not_decided": [
       "full deterministic CBOR implementation",
       "complete END-CORE semantic schema",
       "cross-platform byte-for-byte executable reproducibility",
-      "production Theor language",
+      "production independent inspector language",
       "FFI and packaging ABI"
     ]
   },

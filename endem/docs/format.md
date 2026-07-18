@@ -11,75 +11,75 @@ nav_title: "格式与成形"
 page_heading: "格式与成形"
 page_lead: "说明人写下的目标要保留哪些信息，系统怎样显式标出采用的解释与未解决问题，再形成一件初始 Endem。"
 summary: "从原始表达、采用的解释和待确认事项，走到只有一个根目标的初始 Endem。"
-badges: ["ktise", "单一根事态"]
+badges: ["form", "单一根事态"]
 ---
 
 ## 最小来源表达
 
-受控来源表达就是人能够阅读和核对的原始输入。Ktisor 不能直接把整段文字当成已经理解的目标；形成 Endem 前，系统必须分别回答下面六类问题，并保留无法回答的部分：
+受控来源表达就是人能够阅读和核对的原始输入。deterministic producer 不能直接把整段文字当成已经理解的目标；形成 Endem 前，系统必须分别回答下面六类问题，并保留无法回答的部分：
 
 | 语义面 | 读者要回答的问题 | 不能省略的边界 |
 | --- | --- | --- |
-| `rhem` | 来源出现了哪些记号？ | 原文或摘要、语言、主体、来源和精确范围 |
-| `semion` | 这些记号怎样取得意义？ | 符号、指称、关系、作用域、极性、时间和来源映射 |
-| `skena` | 哪一种中性可能事态构成目标内容？ | 一个根对象—关系图、组合与极性 |
-| `telis` | 目标要求事态变化还是持续？ | kine 或 mene；mene 还需 fixed/elapsed 范围与 strict/budgeted 连续性；不重复表达否定 |
-| `krin` | 怎样把 phain 与 skena 比较？ | 结构比较、Iknem 类型、agno/fault 处理和决定权威 |
-| `apor` | 哪些投影还没确定？ | 替代解释、冲突、测量、风险和允许的解决方式 |
+| `source_expression` | 来源出现了哪些记号？ | 原文或摘要、语言、主体、来源和精确范围 |
+| `meaning_projection` | 这些记号怎样取得意义？ | 符号、指称、关系、作用域、极性、时间和来源映射 |
+| `situation` | 哪一种中性可能事态构成目标内容？ | 一个根对象—关系图、组合与极性 |
+| `goal_direction` | 目标要求事态变化还是持续？ | reach 或 maintain；maintain 还需 fixed/elapsed 范围与 strict/budgeted 连续性；不重复表达否定 |
+| `satisfaction_criteria` | 怎样把 structured_observation 与 situation 比较？ | 结构比较、evidence entry 类型、undetermined/fault 处理和决定权威 |
+| `unresolved_meaning` | 哪些投影还没确定？ | 替代解释、冲突、测量、风险和允许的解决方式 |
 
-一个 Endem 必须且只能有一个根 `skena`。两个可独立完成和验收的目标应分别形成 Endem，再通过 Synem 表达关系。
+一个 Endem 必须且只能有一个根 `situation`。两个可独立完成和验收的目标应分别形成 Endem，再通过 Endem closure 表达关系。
 
 ## 非规范性示意
 
 下面只展示信息职责，不是已经锁定的输入语法：
 
 ```yaml
-rhem: "为项目生成一份安全评审报告"
-semion:
+source_expression: "为项目生成一份安全评审报告"
+meaning_projection:
   - "project := 已登记项目主体"
   - "security-review := 具备威胁、影响和依据关系的报告"
-skena:
+situation:
   root: "produced(security-review, project)"
-telis:
-  mode: "kine"
-krin:
-  - "met if required phain relations have scoped Iknem records"
-apor:
+goal_direction:
+  mode: "reach"
+satisfaction_criteria:
+  - "met if required structured_observation relations have scoped evidence entry records"
+unresolved_meaning:
   - "目标读者尚未确认"
 ```
 
-[ADR-0014](../../architecture/adr-0014-source-manifest.html) 已为未来 Ktisor 设计逐行来源清单；上面的 YAML 仍只是职责示意，不是该语法。正式来源语言仍需解决注释、包含关系、版本演进和错误恢复。实验性 `.endem` 容器由 END-FMT 0.1 定义；END-P1 已固定来源保留的形成与评审字段、枚举、排序和引用闭包，但它既不是稳定 ABI，也不是最终发布 Profile。
+[ADR-0014](../../architecture/adr-0014-source-manifest.html) 已为未来 deterministic producer 设计逐行来源清单；上面的 YAML 仍只是职责示意，不是该语法。正式来源语言仍需解决注释、包含关系、版本演进和错误恢复。实验性 `.endem` 容器由 END-FMT 0.1 定义；END-P2 已固定来源保留的形成与评审字段、枚举、排序和引用闭包，但它既不是稳定 ABI，也不是最终发布 Profile。
 
-[ADR-0036](../../architecture/adr-0036-source-bearing-and-stripped-release.html) 要求最终发布版移除原始自然语言，并以新身份重新验证。发布 Profile 必须自行定义来源引用闭包；不能从 END-P1 直接删除 `rhem.content` 后继续沿用其 Profile 身份。
+[ADR-0036](../../architecture/adr-0036-source-bearing-and-stripped-release.html) 要求最终发布版移除原始自然语言，并以新身份重新验证。发布 Profile 必须自行定义来源引用闭包；不能从 END-P2 直接删除 `source_expression.content` 后继续沿用其 Profile 身份。
 
-精确容器义务见 [END-FMT 条款源](https://noemion.github.io/spec/endem-format.html)。END-P0 只保留为结构实验；首条实现路径必须从 [END-P1 设计 Profile](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p1.json) 开始评审，只允许 nascent、kine、六个关键记录和无压缩载荷。
+精确容器义务见 [END-FMT 条款源](https://noemion.github.io/spec/endem-format.html)。END-P0 只保留为结构实验；首条实现路径必须从 [END-P2 设计 Profile](https://github.com/Noemion/noemion.github.io/blob/main/spec/profiles/end-p2.json) 开始评审，只允许 formed、reach、六个关键记录和无压缩载荷。
 
 ## 候选不能直接成形
 
-自然语言模型或外部系统可以提出意义、关系、目标方向、满足条件和替代解释，但这些内容始终是不可信候选。`ktise` 只接受以下三种处理结果：
+自然语言模型或外部系统可以提出意义、关系、目标方向、满足条件和替代解释，但这些内容始终是不可信候选。`form` 只接受以下三种处理结果：
 
 1. 由版本化确定性规则从来源重新推导；
 2. 绑定到明确授权、范围有限且可撤销的决定；
-3. 继续保留在 `apor`，不伪装成确认语义。
+3. 继续保留在 `unresolved_meaning`，不伪装成确认语义。
 
-违反 Profile 或没有任何允许投影时，`ktise` 必须以 `aseme` 失败并定位来源范围；存在多个可表达候选但无法选择时才进入 `apor`。
+违反 Profile 或没有任何允许投影时，`form` 必须以 `no_allowed_projection` 失败并定位来源范围；存在多个可表达候选但无法选择时才进入 `unresolved_meaning`。
 
-## ktise 的失败原子性
+## form 的失败原子性
 
-`ktise` 在完成全部来源、结构、类型、约束和资源检查前，不写出部分可信 Endem。失败至少区分：
+`form` 在完成全部来源、结构、类型、约束和资源检查前，不写出部分可信 Endem。失败至少区分：
 
 - 来源无效或摘要不符；
-- 根 `skena` 缺失或不唯一；
-- `semion` 与 `skena` 的符号或关系位置不一致；
-- `telis` 缺失、重复表达否定或时间边界无效；
-- `skena` 与 `krin` 冲突，或 phain 没有可比较映射；
-- 候选无权关闭 `apor`；
+- 根 `situation` 缺失或不唯一；
+- `meaning_projection` 与 `situation` 的符号或关系位置不一致；
+- `goal_direction` 缺失、重复表达否定或时间边界无效；
+- `situation` 与 `satisfaction_criteria` 冲突，或 structured_observation 没有可比较映射；
+- 候选无权关闭 `unresolved_meaning`；
 - 引用、计数、大小或深度超限；
 - 规范版本或关键特性未知。
 
 ## 确定性
 
-确定性先要求输入闭合。形成操作必须固定实际进入 `rhem` 的解码文本与文本槽、严格解码 Profile、显式变换和损失，以及投影决定、配置、依赖、END-CORE、内容 Profile、END-FMT 与 Ktisor 版本。相同的封闭形成输入必须产生相同规范结果；在同一精确格式草案和 Profile 内，还必须产生逐字节相同的 nascent Endem。
+确定性先要求输入闭合。形成操作必须固定实际进入 `source_expression` 的解码文本与文本槽、严格解码 Profile、显式变换和损失，以及投影决定、配置、依赖、END-CORE、内容 Profile、END-FMT 与 deterministic producer 版本。相同的封闭形成输入必须产生相同规范结果；在同一精确格式草案和 Profile 内，还必须产生逐字节相同的 formed Endem。
 
 这项保证不使用“规范化来源”作为捷径。END-SRCM 会把 LF 与 CRLF 解释为同一行边界，也会展开转义；因此两个来源文件可能产生相同的解码输入，却仍有不同的原始字节身份。显示文本、调试导出或重新排版的来源都是派生视图，除非另有锁定的变换与保留关系，否则不能作为原文件的逆变换或语义等价证明。
 

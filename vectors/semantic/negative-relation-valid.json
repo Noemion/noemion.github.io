@@ -3,15 +3,15 @@
   "id": "SV-VALID-NEGATIVE-RELATION-001",
   "description": "负极性只作用于已授权关系与同一角色位置，不通过缺失关系或第三种目标方向表达。",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
-  "context": {"external_preconditions": [{"spec_id": "AUT-CORE", "version": "0.1.0-draft", "clause": "AUT-SEM-001", "subject": "/input/semion/relations/0/projection", "projection_id": "authority:security-owner", "status": "satisfied", "evidence_ref": "fixture:authorization:security-a"}]},
+  "context": {"external_preconditions": [{"spec_id": "AUT-CORE", "version": "0.1.0-draft", "clause": "AUT-SEM-001", "subject": "/input/meaning_projection/relations/0/projection", "projection_id": "authority:security-owner", "status": "satisfied", "evidence_ref": "fixture:authorization:security-a"}]},
   "identity_equivalence_group": "IE-AUTH-CONTEXT-001",
   "expect": {
     "result": "accept",
-    "clauses": ["END-CON-006", "END-CORE-001", "END-CORE-002", "END-SRC-001", "END-SEM-001", "END-SIT-001", "END-TEL-001", "END-NEG-001", "END-KRN-001", "END-STR-001", "END-AUT-002", "END-ID-002"],
+    "clauses": ["END-CON-006", "END-CORE-001", "END-CORE-002", "END-SRC-001", "END-MEANING-001", "END-SIT-001", "END-DIRECTION-001", "END-NEG-001", "END-CRITERIA-001", "END-STR-001", "END-AUT-002", "END-ID-002"],
     "diagnostics": []
   },
   "input": {
-    "rhem": {
+    "source_expression": {
       "source_id": "source:request-negative-001",
       "subject": "authority:security-owner",
       "media_type": "text/plain",
@@ -20,7 +20,7 @@
       "content": "撤销匿名用户读取私有报告的能力",
       "range": {"unit": "unicode-scalar", "start": 0, "length": 15}
     },
-    "semion": {
+    "meaning_projection": {
       "symbols": [
         {"id": "sym:anonymous-user", "kind": "principal", "source_ref": "source:request-negative-001#/range"},
         {"id": "sym:private-report", "kind": "artifact", "source_ref": "source:request-negative-001#/range"}
@@ -37,20 +37,20 @@
         }
       ]
     },
-    "skena": {
+    "situation": {
       "roots": ["situation:anonymous-cannot-read-report"],
       "situations": [
         {"id": "situation:anonymous-cannot-read-report", "relation": "rel:can-read", "polarity": "negative"}
       ]
     },
-    "telis": {"mode": "kine"},
-    "krin": {
-      "required_phain": [{"relation": "rel:can-read", "match": "same-roles"}],
-      "required_iknem": ["authorization-policy-observation"],
-      "on_missing_observation": "agno",
+    "goal_direction": {"mode": "reach"},
+    "satisfaction_criteria": {
+      "required_observations": [{"relation": "rel:can-read", "match": "same-roles"}],
+      "required_evidence": ["authorization-policy-observation"],
+      "on_missing_observation": "undetermined",
       "on_evaluation_error": "fault",
       "decision_authority": "authority:security-owner"
     },
-    "apor": []
+    "unresolved_meaning": []
   }
 }

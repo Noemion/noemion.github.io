@@ -68,24 +68,24 @@ document_status: "规范目录草案"
 | 错误码 | 主条款 | 层次 | 触发条件 |
 | --- | --- | --- | --- |
 | `endem.root.not_unique` | `END-CORE-001` | semantic | 根事态缺失或多于一个 |
-| `endem.rhem.range_out_of_bounds` | `END-SRC-001` | semantic | 来源 Unicode 标量范围超过实际内容 |
-| `endem.skena.contains_goal_force` | `END-SIT-001` | semantic | 中性事态混入目标方向或力量 |
-| `endem.apor.unrecorded_projection_choice` | `END-APR-001` | semantic | 存在多个允许投影但未记录未决选择 |
+| `endem.source_expression.range_out_of_bounds` | `END-SRC-001` | semantic | 来源 Unicode 标量范围超过实际内容 |
+| `endem.situation.contains_goal_force` | `END-SIT-001` | semantic | 中性事态混入目标方向或力量 |
+| `endem.unresolved_meaning.unrecorded_projection_choice` | `END-UNRESOLVED-001` | semantic | 存在多个允许投影但未记录未决选择 |
 | `endem.projection.authority_untrusted` | `END-AUT-001` | semantic | 模型自述或其他不可信来源试图确认投影 |
 | `endem.projection.authorization_binding_missing` | `END-AUT-002` | semantic | 投影没有对应的外部授权前置条件，不能继续声明内容接受 |
 | `endem.projection.authorization_binding_mismatch` | `END-AUT-002` | semantic | 外部授权前置条件没有精确绑定当前投影位置或候选 |
-| `endem.semantic.field.type` | `END-FMT-013` | semantic | END-P1 字段值不是登记的数据类型 |
-| `endem.semantic.field.missing` | `END-FMT-013` | semantic | END-P1 映射缺少必需字段 |
+| `endem.semantic.field.type` | `END-FMT-013` | semantic | END-P2 字段值不是登记的数据类型 |
+| `endem.semantic.field.missing` | `END-FMT-013` | semantic | END-P2 映射缺少必需字段 |
 | `endem.semantic.field.identifier` | `END-FMT-013` | semantic | 标识符为空、过长或含禁用字符 |
 | `endem.semantic.field.media_type` | `END-FMT-013` | semantic | 来源媒体类型不符合受限格式 |
 | `endem.semantic.field.language` | `END-FMT-013` | semantic | 来源语言标签不符合受限格式 |
 | `endem.semantic.field.order` | `END-FMT-013` | semantic | 需要规范排序且不重复的集合发生乱序或重复 |
-| `endem.semantic.field.unknown` | `END-FMT-013` | semantic | END-P1 映射出现未登记字段键 |
-| `endem.semantic.reference` | `END-FMT-014` | semantic | END-P1 出现悬空 symbol、relation、situation 或 source 引用 |
-| `endem.skena.polarity` | `END-SIT-001` | semantic | 事态极性不是已登记值 |
-| `endem.telis.mode` | `END-TEL-001` | semantic | 目标模式不是当前 Profile 唯一允许的 `kine` |
-| `endem.krin.policy` | `END-KRN-001` | semantic | 缺失观察或评估错误政策不是当前 Profile 的固定值 |
-| `endem.krin.match` | `END-KRN-001` | semantic | 观察关系匹配方式不是当前 Profile 的固定值 |
+| `endem.semantic.field.unknown` | `END-FMT-013` | semantic | END-P2 映射出现未登记字段键 |
+| `endem.semantic.reference` | `END-FMT-014` | semantic | END-P2 出现悬空 symbol、relation、situation 或 source 引用 |
+| `endem.situation.polarity` | `END-SIT-001` | semantic | 事态极性不是已登记值 |
+| `endem.goal_direction.mode` | `END-DIRECTION-001` | semantic | 目标模式不是当前 Profile 唯一允许的 `reach` |
+| `endem.satisfaction_criteria.policy` | `END-CRITERIA-001` | semantic | 缺失观察或评估错误政策不是当前 Profile 的固定值 |
+| `endem.satisfaction_criteria.match` | `END-CRITERIA-001` | semantic | 观察关系匹配方式不是当前 Profile 的固定值 |
 
 ## 5. 实验来源清单错误码
 
@@ -102,45 +102,45 @@ document_status: "规范目录草案"
 | `endem.source.escape` | `END-SRCM-003` | source | 使用了未登记或不完整的转义 |
 | `endem.source.role` | `END-SRCM-003` | source | `relation` 角色缺少名称、等号或 symbol 标识符 |
 
-## 6. Synem 错误码
+## 6. Endem closure 错误码
 
 | 错误码 | 主条款 | 层次 | 触发条件 |
 | --- | --- | --- | --- |
-| `synem.closure.incomplete` | `SYN-CLO-001` | closure | 成员不足、传递依赖遗漏或运行时才补全闭包 |
-| `synem.binding.unresolved` | `SYN-BND-001` | closure | 引用缺失、歧义、冲突或使用可变选择器 |
-| `synem.graph.invalid` | `SYN-GRF-001` | closure | 图不有限、存在循环或可选缺失削弱要求 |
-| `synem.authority.amplified` | `SYN-AUT-001` | policy | 组合权限使用并集或成员不能收窄 |
-| `synem.result.coerced` | `SYN-RES-001` | semantic | 成员结果被洗白、折叠或跨结果域转换 |
-| `synem.activation.invalid` | `SYN-ACT-001` | session | 激活添加成员、授予能力或映射为满足结果 |
+| `closure.closure.incomplete` | `CLOSURE-CLO-001` | closure | 成员不足、传递依赖遗漏或运行时才补全闭包 |
+| `closure.binding.unresolved` | `CLOSURE-BND-001` | closure | 引用缺失、歧义、冲突或使用可变选择器 |
+| `closure.graph.invalid` | `CLOSURE-GRF-001` | closure | 图不有限、存在循环或可选缺失削弱要求 |
+| `closure.authority.amplified` | `CLOSURE-AUT-001` | policy | 组合权限使用并集或成员不能收窄 |
+| `closure.result.coerced` | `CLOSURE-RES-001` | semantic | 成员结果被洗白、折叠或跨结果域转换 |
+| `closure.activation.invalid` | `CLOSURE-ACT-001` | session | 激活添加成员、授予能力或映射为满足结果 |
 
-## 7. Dromen 错误码
-
-| 错误码 | 主条款 | 层次 | 触发条件 |
-| --- | --- | --- | --- |
-| `dromen.subject.unbound` | `DRO-SUB-001` | session | 主体不是精确、attested 且刚刚重新验证的制品 |
-| `dromen.policy.unclosed` | `DRO-POL-001` | policy | 政策、权威、截止点或有效期未封闭 |
-| `dromen.environment.drift` | `DRO-ENV-001` | session | 环境只靠自述、缺少绑定或发生实质漂移 |
-| `dromen.capability.amplified` | `DRO-CAP-001` | policy | 能力使用并集、环境权限或原地 step-up |
-| `dromen.secret.embedded` | `DRO-SEC-001` | session | 契约包含实时秘密或能力句柄 |
-| `dromen.budget.invalid` | `DRO-BUD-001` | session | 预算无界、无单位、子任务逃逸或取消不传播 |
-| `dromen.activation.outside_closure` | `DRO-ACT-001` | session | 激活发现新成员、授予能力或改写结果域 |
-| `dromen.observation.incomplete` | `DRO-OBS-001` | evidence | krin 观察、证据、披露或决定责任缺失 |
-| `dromen.contract.mutated` | `DRO-IMM-001` | session | 封存后被修改或漂移后原地修补 |
-| `dromen.lifecycle.reused` | `DRO-LIF-001` | session | 契约被序列化、转移、恢复或跨会话复用 |
-
-## 8. Iknem 错误码
+## 7. session contract 错误码
 
 | 错误码 | 主条款 | 层次 | 触发条件 |
 | --- | --- | --- | --- |
-| `iknem.scope.unbound` | `IKN-SCP-001` | evidence | 主体、生产者、方法、环境、时间、主张或限制未固定 |
-| `iknem.provenance.invalid` | `IKN-PRV-001` | evidence | 溯源悬空、循环、自证或隐藏动态输入 |
-| `iknem.observation.unaligned` | `IKN-OBS-001` | evidence | phain 无法对齐关系位置或有损变换未披露 |
-| `iknem.classification.upgraded` | `IKN-CLS-001` | evidence | 记录种类或来源类别被自评、签名、数量或分数提升 |
-| `iknem.integrity.overclaimed` | `IKN-INT-001` | evidence | 完整性、签名或时间戳被解释为事实正确或授权 |
-| `iknem.validity.self_asserted` | `IKN-VAL-001` | evidence | 记录自填有效性或评估缺少政策、参考值与截止点 |
-| `iknem.coverage.invalid` | `IKN-COV-001` | evidence | 覆盖脱离精确 krin、重复计数或隐藏空洞 |
-| `iknem.decision.unauthorized` | `IKN-DEC-001` | policy | 评估、模型、Drasor 或记录本身替代具名决定权威 |
-| `iknem.disclosure.secret` | `IKN-PRI-001` | evidence | 记录包含实时秘密，或脱敏损失没有披露 |
+| `session.subject.unbound` | `SESSION-SUB-001` | session | 主体不是精确且已解析的制品，或必需外部陈述没有按当前政策和截止点重新验证 |
+| `session.policy.unclosed` | `SESSION-POL-001` | policy | 政策、权威、截止点或有效期未封闭 |
+| `session.environment.drift` | `SESSION-ENV-001` | session | 环境只靠自述、缺少绑定或发生实质漂移 |
+| `session.capability.amplified` | `SESSION-CAP-001` | policy | 能力使用并集、环境权限或原地 step-up |
+| `session.secret.embedded` | `SESSION-SEC-001` | session | 契约包含实时秘密或能力句柄 |
+| `session.budget.invalid` | `SESSION-BUD-001` | session | 预算无界、无单位、子任务逃逸或取消不传播 |
+| `session.activation.outside_closure` | `SESSION-ACT-001` | session | 激活发现新成员、授予能力或改写结果域 |
+| `session.observation.incomplete` | `SESSION-OBS-001` | evidence | satisfaction_criteria 观察、证据、披露或决定责任缺失 |
+| `session.contract.mutated` | `SESSION-IMM-001` | session | 封存后被修改或漂移后原地修补 |
+| `session.lifecycle.reused` | `SESSION-LIF-001` | session | 契约被序列化、转移、恢复或跨会话复用 |
+
+## 8. evidence entry 错误码
+
+| 错误码 | 主条款 | 层次 | 触发条件 |
+| --- | --- | --- | --- |
+| `evidence.scope.unbound` | `EVIDENCE-SCP-001` | evidence | 主体、生产者、方法、环境、时间、主张或限制未固定 |
+| `evidence.provenance.invalid` | `EVIDENCE-PRV-001` | evidence | 溯源悬空、循环、自证或隐藏动态输入 |
+| `evidence.observation.unaligned` | `EVIDENCE-OBS-001` | evidence | structured_observation 无法对齐关系位置或有损变换未披露 |
+| `evidence.classification.upgraded` | `EVIDENCE-CLS-001` | evidence | 记录种类或来源类别被自评、签名、数量或分数提升 |
+| `evidence.integrity.overclaimed` | `EVIDENCE-INT-001` | evidence | 完整性、签名或时间戳被解释为事实正确或授权 |
+| `evidence.validity.self_asserted` | `EVIDENCE-VAL-001` | evidence | 记录自填有效性或评估缺少政策、参考值与截止点 |
+| `evidence.coverage.invalid` | `EVIDENCE-COV-001` | evidence | 覆盖脱离精确 satisfaction_criteria、重复计数或隐藏空洞 |
+| `evidence.decision.unauthorized` | `EVIDENCE-DEC-001` | policy | 评估、模型、bounded runner 或记录本身替代具名决定权威 |
+| `evidence.disclosure.secret` | `EVIDENCE-PRI-001` | evidence | 记录包含实时秘密，或脱敏损失没有披露 |
 
 ## 9. 外部协议适配错误码
 
@@ -148,7 +148,7 @@ document_status: "规范目录草案"
 | --- | --- | --- | --- |
 | `adapter.protocol.version_unpinned` | `ADP-PIN-001` | protocol | 协议、规范、绑定、schema、传输或扩展版本浮动或未知 |
 | `adapter.peer.binding_invalid` | `ADP-PEE-001` | protocol | 发现声明替代认证主体、受众、租户或政策绑定 |
-| `adapter.capability.outside_intersection` | `ADP-CAP-001` | policy | 外部调用能力不在协议、对端、适配器、Dromen 与政策交集内 |
+| `adapter.capability.outside_intersection` | `ADP-CAP-001` | policy | 外部调用能力不在协议、对端、适配器、session contract 与政策交集内 |
 | `adapter.invocation.context_incomplete` | `ADP-INV-001` | session | 调用缺少精确主体、输入、预算、截止点、幂等或观察责任 |
 | `adapter.mapping.loss_undeclared` | `ADP-MAP-001` | protocol | 映射没有保留原始身份、版本或显式信息损失 |
 | `adapter.state.domain_confused` | `ADP-STA-001` | semantic | 外部请求、任务、消息、产物或 HTTP 状态被提升为本地结果 |
@@ -214,10 +214,10 @@ document_status: "规范目录草案"
 
 上述机器码只在当前规范、目录和提案向量中保持草案稳定，尚不构成发行 ABI。提升为稳定接口前必须完成：
 
-1. Ktisor、独立 Theor 与 Drasor 对共同失败给出相同的主层次与适用机器码；
+1. deterministic producer、independent inspector 与 bounded runner 对共同失败给出相同的主层次与适用机器码；
 2. 并发、截断、乱序、重复、资源耗尽、外部协议降级和秘密注入向量齐全；
 3. 诊断 Profile 冻结数量、深度、位置、消息和总输出预算；
 4. 文本、SARIF、HTTP、MCP 与遥测适配前后保持机器语义；
 5. CLI 退出状态与结构化物理编码由单独 ADR 和规范字节冻结。
 
-当前目录只由一致性检查工具核对。Ktisor、Theor、Drasor、诊断生产器、渲染器和协议适配器均未实现。
+当前目录只由一致性检查工具核对。deterministic producer、independent inspector、bounded runner、诊断生产器、渲染器和协议适配器均未实现。

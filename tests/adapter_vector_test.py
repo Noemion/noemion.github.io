@@ -56,7 +56,7 @@ def proposal_violation(proposal):
         return "ADP-PEE-001"
 
     capabilities = proposal.get("capabilities", {})
-    sets = [set(capabilities.get(key, [])) for key in ("protocol", "peer", "adapter", "dromen", "policy")]
+    sets = [set(capabilities.get(key, [])) for key in ("protocol", "peer", "adapter", "session_contract", "policy")]
     intersection = set.intersection(*sets) if sets else set()
     if (set(capabilities.get("effective", [])) != intersection
             or capabilities.get("unknown_default_denied") is not True

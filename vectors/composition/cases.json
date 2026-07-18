@@ -1,7 +1,7 @@
 {
   "vector_format": "end-core.composition-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
-  "description": "Composite-situation proposal vectors for ADR-0020; a specification consistency matrix, not a parser, Drasor, evaluator, runtime, or component implementation",
+  "description": "Composite-situation proposal vectors for ADR-0020; a specification consistency matrix, not a parser, bounded runner, evaluator, runtime, or component implementation",
   "cases": [
     {
       "id": "CV-VALID-ALL-OF-MET-001",
@@ -18,16 +18,16 @@
       "expect": {"result": "accept", "clause": "END-CMP-004"}
     },
     {
-      "id": "CV-VALID-ALL-OF-AGNO-001",
+      "id": "CV-VALID-ALL-OF-UNDETERMINED-001",
       "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "all_of", "children": ["a", "b"]}, "a": {"kind": "leaf", "criterion_id": "a"}, "b": {"kind": "leaf", "criterion_id": "b"}}, "krin_leaves": ["a", "b"]},
-      "evaluation": {"leaf_results": {"a": "met", "b": "agno"}, "order": ["a", "b"], "short_circuit": false},
-      "proposal": {"result": "agno", "evaluated": ["a", "b"], "unevaluated": [], "decisive_basis": []},
+      "evaluation": {"leaf_results": {"a": "met", "b": "undetermined"}, "order": ["a", "b"], "short_circuit": false},
+      "proposal": {"result": "undetermined", "evaluated": ["a", "b"], "unevaluated": [], "decisive_basis": []},
       "expect": {"result": "accept", "clause": "END-CMP-003"}
     },
     {
       "id": "CV-VALID-ANY-OF-DECISIVE-MET-001",
       "target": {"same_terminal": true, "shared_telis": true, "shared_authority": true, "independent_lifecycle": false, "root": "root", "nodes": {"root": {"kind": "any_of", "children": ["primary", "backup"]}, "primary": {"kind": "leaf", "criterion_id": "primary"}, "backup": {"kind": "leaf", "criterion_id": "backup"}}, "krin_leaves": ["primary", "backup"]},
-      "evaluation": {"leaf_results": {"primary": "met", "backup": "agno"}, "order": ["primary", "backup"], "short_circuit": true},
+      "evaluation": {"leaf_results": {"primary": "met", "backup": "undetermined"}, "order": ["primary", "backup"], "short_circuit": true},
       "proposal": {"result": "met", "evaluated": ["primary"], "unevaluated": ["backup"], "decisive_basis": ["primary"]},
       "expect": {"result": "accept", "clause": "END-CMP-004"}
     },

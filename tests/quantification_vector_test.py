@@ -7,8 +7,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 VECTOR_PATH = ROOT / "vectors" / "quantification" / "cases.json"
 CASE_ID = re.compile(r"^QV-(?:VALID|REJECT)-[A-Z0-9-]+-[0-9]{3}$")
-RESULTS = {"met", "unmet", "agno", "fault"}
-QUANTIFIERS = {"all", "some", "at_least", "at_most", "exactly"}
+RESULTS = {"met", "unmet", "undetermined", "fault"}
+QUANTIFIERS = {"every", "at_least_one", "at_least", "at_most", "exactly"}
 CLAUSES = {"END-QNT-001", "END-QNT-002", "END-QNT-003"}
 
 
@@ -82,26 +82,26 @@ def classify(target, member_results):
     qmode = target["quantifier"]["mode"]
     threshold = target["quantifier"].get("threshold")
 
-    if qmode == "all":
+    if qmode == "every":
         if by_result["unmet"]:
             return "unmet", None
         if collection["mode"] != "enumerated":
-            return "agno", None
+            return "undetermined", None
         if not closed:
-            return "agno", None
+            return "undetermined", None
         if by_result["fault"]:
             return "fault", None
-        if by_result["agno"]:
-            return "agno", None
+        if by_result["undetermined"]:
+            return "undetermined", None
         return "met", None
 
-    if qmode == "some":
+    if qmode == "at_least_one":
         if by_result["met"]:
             return "met", None
         if by_result["fault"]:
             return "fault", None
-        if collection["mode"] != "enumerated" or not closed or by_result["agno"]:
-            return "agno", None
+        if collection["mode"] != "enumerated" or not closed or by_result["undetermined"]:
+            return "undetermined", None
         return "unmet", None
 
     if qmode == "at_least":
@@ -109,8 +109,8 @@ def classify(target, member_results):
             return "met", None
         if by_result["fault"]:
             return "fault", None
-        if collection["mode"] != "enumerated" or not closed or by_result["agno"]:
-            return "agno", None
+        if collection["mode"] != "enumerated" or not closed or by_result["undetermined"]:
+            return "undetermined", None
         return "unmet", None
 
     if qmode == "at_most":
@@ -118,16 +118,16 @@ def classify(target, member_results):
             return "unmet", None
         if by_result["fault"]:
             return "fault", None
-        if collection["mode"] != "enumerated" or not closed or by_result["agno"]:
-            return "agno", None
+        if collection["mode"] != "enumerated" or not closed or by_result["undetermined"]:
+            return "undetermined", None
         return "met", None
 
     if by_result["met"] > threshold:
         return "unmet", None
     if by_result["fault"]:
         return "fault", None
-    if collection["mode"] != "enumerated" or not closed or by_result["agno"]:
-        return "agno", None
+    if collection["mode"] != "enumerated" or not closed or by_result["undetermined"]:
+        return "undetermined", None
     return ("met" if by_result["met"] == threshold else "unmet"), None
 
 
@@ -141,7 +141,7 @@ def proposal_violation(case):
     proposed = case.get("proposed_result")
     if proposed not in RESULTS or proposed != actual:
         target = case["target"]
-        if target["quantifier"]["mode"] == "all" and target["collection"]["mode"] != "enumerated":
+        if target["quantifier"]["mode"] == "every" and target["collection"]["mode"] != "enumerated":
             return "END-QNT-002"
         return "END-QNT-003"
     return None
@@ -159,7 +159,7 @@ def main():
         errors.append("quantification vectors must use end-core.quantification-vector.v1")
     if document.get("spec") != {"id": "END-CORE", "version": "0.1.0-draft"}:
         errors.append("quantification vectors must pin END-CORE 0.1.0-draft")
-    if "not a collection resolver, Drasor, evaluator, or component implementation" not in document.get("description", ""):
+    if "not a collection resolver, bounded runner, evaluator, or component implementation" not in document.get("description", ""):
         errors.append("quantification vectors must state their non-implementation boundary")
 
     cases = document.get("cases")

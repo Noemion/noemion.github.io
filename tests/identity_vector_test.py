@@ -122,7 +122,7 @@ def proposal_violation(proposal):
     if (authority.get("cryptographic_verification") is not True
             or any(authority.get(key) is not True for key in ("signer_authenticated", "role_authorized", "statement_applicable", "policy_satisfied", "domains_separate"))
             or authority.get("final_decision") not in {"accepted", "rejected", "deferred"}
-            or any(authority.get(key) is not False for key in ("signature_proves_truth", "signature_grants_capability", "log_inclusion_is_acceptance"))):
+            or any(authority.get(key) is not False for key in ("signature_proves_truth", "signature_allows_capability", "log_inclusion_is_acceptance"))):
         return "ID-AUT-001"
 
     validity = proposal.get("validity", {})
@@ -155,7 +155,7 @@ def proposal_violation(proposal):
             or relation.get("source_references_closed") is not True
             or relation.get("companion_public") is not False
             or relation.get("source_fidelity_claim_without_companion") is not False
-            or any(relation.get(key) is not False for key in ("inherits_source_identity", "inherits_signature", "inherits_iknem", "inherits_acceptance", "inherits_capability", "semantic_equivalence_claim"))):
+            or any(relation.get(key) is not False for key in ("inherits_source_identity", "inherits_signature", "inherits_evidence", "inherits_acceptance", "inherits_capability", "semantic_equivalence_claim"))):
         return "ID-REL-001"
     return None
 

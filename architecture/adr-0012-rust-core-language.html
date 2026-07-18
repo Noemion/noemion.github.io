@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "ADR-0012 · 未来 Ktisor 的 Rust 评审基线"
+title: "ADR-0012 · 未来 deterministic producer 的 Rust 评审基线"
 page_role: "content"
 footer_text: "Noemion · ADR-0012"
 permalink: "/architecture/adr-0012-rust-core-language.html"
@@ -8,18 +8,18 @@ summary: "说明为什么 Rust 1.97.0 只是未来结构核心的评审起点，
 ---
 <main id="main-content" tabindex="-1">
   <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">架构设计</a><span aria-hidden="true">/</span><a href="decisions.html">架构决策</a><span aria-hidden="true">/</span><span>ADR-0012</span></nav>
-  <header class="content-introduction"><h1>ADR-0012<br>未来 Ktisor<br>Rust 评审基线</h1><p>历史字节实验支持把 Rust 1.97.0 作为未来 Ktisor 首个结构核心的重新评审起点；它没有建立生产组件，也没有替独立 Theor 决定语言。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">Rust 1.97.0</span><span class="badge">历史实验</span><span class="badge">尚未进入代码阶段</span></div></header>
+  <header class="content-introduction"><h1>ADR-0012<br>未来 deterministic producer<br>Rust 评审基线</h1><p>历史字节实验支持把 Rust 1.97.0 作为未来 deterministic producer 首个结构核心的重新评审起点；它没有建立生产组件，也没有替independent inspector 决定语言。</p><div class="badges"><span class="badge">当前策略</span><span class="badge">Rust 1.97.0</span><span class="badge">历史实验</span><span class="badge">尚未进入代码阶段</span></div></header>
 
   <section class="content-wide">
     <h2>先分清已经决定与尚未决定</h2>
-    <p class="lead">ADR-0012 记录一项有前提的实现策略：只有项目另行进入代码阶段时，未来 Ktisor 的首个结构核心才从 Rust 1.97.0 开始复核。</p>
+    <p class="lead">ADR-0012 记录一项有前提的实现策略：只有项目另行进入代码阶段时，未来 deterministic producer 的首个结构核心才从 Rust 1.97.0 开始复核。</p>
     <div class="table-wrap"><table><thead><tr><th>层次</th><th>当前结论</th><th>不能据此声称</th></tr></thead><tbody>
-      <tr><td>历史实验</td><td>C17 与安全 Rust 读取同一组 END-P0 结构字节，并保留可复核结果。</td><td>实验原型已经实现 END-P1、Ktisor、Theor 或正式 CLI。</td></tr>
-      <tr><td>未来 Ktisor</td><td><code>ktise</code> 与制品形成侧 <code>elenk</code> 的结构核心以 Rust 1.97.0 为评审起点。</td><td>已经存在生产工具链、源码仓库、稳定 ABI 或发行承诺。</td></tr>
-      <tr><td>独立 Theor</td><td>必须另写解析结构和错误路径，并建立独立验证目标；实现语言继续待定。</td><td>同样使用 Rust 就自然获得实现独立性。</td></tr>
+      <tr><td>历史实验</td><td>C17 与安全 Rust 读取同一组 END-P0 结构字节，并保留可复核结果。</td><td>实验原型已经实现 END-P2、deterministic producer、independent inspector 或正式 CLI。</td></tr>
+      <tr><td>未来 deterministic producer</td><td><code>ktise</code> 与制品形成侧 <code>elenk</code> 的结构核心以 Rust 1.97.0 为评审起点。</td><td>已经存在生产工具链、源码仓库、稳定 ABI 或发行承诺。</td></tr>
+      <tr><td>independent inspector</td><td>必须另写解析结构和错误路径，并建立独立验证目标；实现语言继续待定。</td><td>同样使用 Rust 就自然获得实现独立性。</td></tr>
       <tr><td>其他边界</td><td>协议适配器、界面、外部工具和未来运行系统按各自消费者重新选择语言。</td><td>Noemion 全部软件只能使用 Rust。</td></tr>
     </tbody></table></div>
-    <p><code>Ktisor</code>、<code>ktise</code> 与 <code>elenk</code> 仍是设计标识，不是已发布命令。语言选择不冻结它们的发行拼写，也不能替代读音与口头区分验证。</p>
+    <p><code>deterministic producer</code>、<code>ktise</code> 与 <code>elenk</code> 仍是设计标识，不是已发布命令。语言选择不冻结它们的发行拼写，也不能替代读音与口头区分验证。</p>
   </section>
 
   <section class="content-wide">
@@ -36,14 +36,14 @@ summary: "说明为什么 Rust 1.97.0 只是未来结构核心的评审起点，
   </section>
 
   <section class="content-stack">
-    <h2>为什么只把 Rust 作为 Ktisor 起点</h2>
-    <p>Ktisor 掌握唯一规范写入路径，因此首个读取与写入核心应先缩小内存破坏面。Theor 承担独立读取，价值来自不同代码和错误路径，而不是共享实现后再运行一次。</p>
-    <div class="flow"><div class="step">受控来源</div><div class="step">Ktisor<br><code>ktise</code> 形成</div><div class="step">Ktisor<br><code>elenk</code> 检查</div><div class="step">END-P1 字节</div><div class="step">Theor<br>独立读取</div><div class="step">外部判断</div></div>
+    <h2>为什么只把 Rust 作为 deterministic producer 起点</h2>
+    <p>deterministic producer 掌握唯一规范写入路径，因此首个读取与写入核心应先缩小内存破坏面。independent inspector 承担独立读取，价值来自不同代码和错误路径，而不是共享实现后再运行一次。</p>
+    <div class="flow"><div class="step">受控来源</div><div class="step">deterministic producer<br><code>ktise</code> 形成</div><div class="step">deterministic producer<br><code>elenk</code> 检查</div><div class="step">END-P2 字节</div><div class="step">independent inspector<br>独立读取</div><div class="step">外部判断</div></div>
     <div class="table-wrap"><table><thead><tr><th>责任方</th><th>语言结论</th><th>必须保持的隔离</th></tr></thead><tbody>
-      <tr><td>Ktisor 结构核心</td><td>以安全 Rust 作为未来评审起点。</td><td>写入、回读、受检算术和失败原子性仍须由规范与测试约束。</td></tr>
-      <tr><td>Theor</td><td>语言尚未决定。</td><td>不得复用 Ktisor 的解析代码、生成代码或错误分类实现。</td></tr>
-      <tr><td>C 历史原型</td><td>只保留为非生产差分材料。</td><td>不得链接进 Ktisor、Theor 或 CLI，也不获得发行权限。</td></tr>
-      <tr><td>协议与运行侧</td><td>由真实消费者和部署边界另行决定。</td><td>不能因为 Ktisor 使用 Rust，就继承其信任或满足结论。</td></tr>
+      <tr><td>deterministic producer 结构核心</td><td>以安全 Rust 作为未来评审起点。</td><td>写入、回读、受检算术和失败原子性仍须由规范与测试约束。</td></tr>
+      <tr><td>independent inspector</td><td>语言尚未决定。</td><td>不得复用 deterministic producer 的解析代码、生成代码或错误分类实现。</td></tr>
+      <tr><td>C 历史原型</td><td>只保留为非生产差分材料。</td><td>不得链接进 deterministic producer、independent inspector 或 CLI，也不获得发行权限。</td></tr>
+      <tr><td>协议与运行侧</td><td>由真实消费者和部署边界另行决定。</td><td>不能因为 deterministic producer 使用 Rust，就继承其信任或满足结论。</td></tr>
     </tbody></table></div>
   </section>
 
@@ -68,7 +68,7 @@ summary: "说明为什么 Rust 1.97.0 只是未来结构核心的评审起点，
       <tr><td>2 · 工具链</td><td>重新核对 1.97.0、目标平台、已知安全问题和最低支持版本。</td><td>版本已不合适时先更新 ADR 和实验，不静默使用 latest。</td></tr>
       <tr><td>3 · 依赖与配置</td><td>固定工具链，提交 <code>Cargo.lock</code>，CI 使用 <code>--locked</code>；工作区成员继承 unsafe 禁止。</td><td>锁文件缺失、解析变化或 lint 未覆盖时构建失败。</td></tr>
       <tr><td>4 · 不可信输入</td><td>所有范围和算术可失败，无 panic 路径，并执行资源上限与稳定诊断。</td><td>任一畸形输入只能得到原子拒绝，不能输出部分可信对象。</td></tr>
-      <tr><td>5 · 独立证据</td><td>Ktisor 与 Theor 分别通过 END-P1 向量、畸形语料、模糊目标和跨平台检查。</td><td>共同成功不能掩盖共享假设；需要增加异构预言机或重新选语言。</td></tr>
+      <tr><td>5 · 独立证据</td><td>deterministic producer 与 independent inspector 分别通过 END-P2 向量、畸形语料、模糊目标和跨平台检查。</td><td>共同成功不能掩盖共享假设；需要增加异构预言机或重新选语言。</td></tr>
     </tbody></table></div>
     <p><a href="https://doc.rust-lang.org/cargo/commands/cargo.html#manifest-options">Cargo <code>--locked</code></a> 会在锁文件缺失或依赖解析变化时失败；仅提交 <code>Cargo.lock</code> 不会自动建立这项保证。离线构建、源码供应与可执行文件复现仍是另外的验证问题。</p>
     <p><a href="https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html">GNU GCC 插桩</a>与<a href="https://llvm.org/docs/LibFuzzer.html">LLVM libFuzzer</a>继续提供 C 差分和畸形输入验证机制。它们只能增加观测证据，不能证明缺陷不存在。</p>
@@ -79,13 +79,13 @@ summary: "说明为什么 Rust 1.97.0 只是未来结构核心的评审起点，
     <div class="table-wrap"><table><thead><tr><th>触发条件</th><th>需要重新比较什么</th></tr></thead><tbody>
       <tr><td>Rust 无法覆盖真实目标平台、审计或部署边界</td><td>用同一规范、语料、资源上限和失败分类比较 C 或其他候选语言。</td></tr>
       <tr><td>无第三方 crate 无法满足确定性 CBOR 或平台要求</td><td>先证明依赖的必要消费者、维护状态、许可证、供应链和删除条件。</td></tr>
-      <tr><td>Theor 的独立性审计发现共同编译器或库假设过强</td><td>评估不同语言、不同解析结构或更强的外部测试预言机。</td></tr>
+      <tr><td>independent inspector 的独立性审计发现共同编译器或库假设过强</td><td>评估不同语言、不同解析结构或更强的外部测试预言机。</td></tr>
       <tr><td>未来实现无法保持无 panic、受检算术或稳定拒绝</td><td>不得降低 END-FMT 与 END-CORE；重新打开语言和组件边界。</td></tr>
     </tbody></table></div>
-    <p class="callout"><strong>当前限制：</strong>项目尚未进入代码阶段。这里没有 Ktisor、Theor、CLI、稳定命令、构建配置或实现级符合性结论。</p>
+    <p class="callout"><strong>当前限制：</strong>项目尚未进入代码阶段。这里没有 deterministic producer、independent inspector、CLI、稳定命令、构建配置或实现级符合性结论。</p>
     <div class="page-links">
       <a class="page-link" href="adr-0011-endem-container.html"><strong>先看字节读取边界</strong><span>区分格式、Profile、内容与外部判断。</span></a>
-      <a class="page-link" href="adr-0013-end-p1-payload.html"><strong>继续看 END-P1</strong><span>了解未来结构核心实际需要读取的字段与引用。</span></a>
+      <a class="page-link" href="adr-0013-end-p1-payload.html"><strong>继续看 END-P2</strong><span>了解未来结构核心实际需要读取的字段与引用。</span></a>
       <a class="page-link" href="../development/implementation-roadmap.html"><strong>查看实现路线</strong><span>确认何种证据允许项目进入下一层。</span></a>
       <a class="page-link" href="../development/testing.html"><strong>查看验证职责</strong><span>区分格式符合性、安全性质、互操作和研究实验。</span></a>
     </div>

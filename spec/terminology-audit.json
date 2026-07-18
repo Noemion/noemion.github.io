@@ -1,0 +1,56 @@
+{
+  "audit_version": 1,
+  "updated": "2026-07-18",
+  "registry": "spec/registry.json",
+  "keyword_corpus": "spec/keyword-corpus.json",
+  "scope": "Every term registered in spec/registry.json plus every current public object, role, action, semantic field, state, result and high-risk enum identifier.",
+  "normalization": "Human phrases are converted to lowercase snake_case only for keyword comparison. Normative spellings remain the values declared by their owning specification.",
+  "retained_proper_names": [
+    {
+      "term": "Noemion",
+      "status": "human-pronunciation-validation-required",
+      "reason": "Project brand; not a machine field, command, enum or unqualified package coordinate."
+    },
+    {
+      "term": "Endem",
+      "status": "human-pronunciation-validation-required",
+      "reason": "Core artifact name and endem command candidate; final oral distinction and distribution checks remain required before release."
+    }
+  ],
+  "current_machine_identifiers": [
+    "endem", "endem_closure", "session_contract", "evidence_entry",
+    "deterministic_producer", "independent_inspector", "bounded_runner",
+    "form", "lint", "compose", "inspect", "run",
+    "source_expression", "meaning_projection", "situation", "goal_direction", "satisfaction_criteria", "unresolved_meaning", "structured_observation",
+    "reach", "maintain", "formed", "resolved", "no_allowed_projection", "undetermined", "stopped",
+    "allowed", "denied", "pending", "utc_window", "elapsed_window", "every", "at_least_one", "fixed_population", "generalized_population"
+  ],
+  "migrations": [
+    {"from": "Synem", "to": "Endem closure", "machine_to": "endem_closure", "reason": "Remove an unnecessary coined name and expose the closure responsibility."},
+    {"from": "Dromen", "to": "session contract", "machine_to": "session_contract", "reason": "Use the established engineering object name and expose the one-session boundary."},
+    {"from": "Iknem", "to": "evidence entry", "machine_to": "evidence_entry", "reason": "Use a readable record name without implying truth or sufficiency."},
+    {"from": "Ktisor", "to": "deterministic producer", "machine_to": "deterministic_producer", "reason": "Remove the initial kt cluster and state the write responsibility directly."},
+    {"from": "Theor", "to": "independent inspector", "machine_to": "independent_inspector", "reason": "Avoid a brand-like spelling and state the independent read responsibility."},
+    {"from": "Drasor", "to": "bounded runner", "machine_to": "bounded_runner", "reason": "Use an ordinary role phrase that exposes the execution limit."},
+    {"from": "ktise", "to": "form", "reason": "Remove an unpredictable coined action spelling."},
+    {"from": "elenk", "to": "lint", "reason": "Use the familiar production-side check term without colliding with SQL CHECK."},
+    {"from": "pleko", "to": "compose", "reason": "Use an ordinary verb for closure construction."},
+    {"from": "theor", "to": "inspect", "reason": "Use the ordinary read-only inspection action."},
+    {"from": "drase", "to": "run", "reason": "Use the ordinary bounded execution action."},
+    {"from": "rhem", "to": "source_expression", "reason": "Expose the original-expression responsibility."},
+    {"from": "semion", "to": "meaning_projection", "reason": "Expose that the field stores an authorized projection, not raw source."},
+    {"from": "skena", "to": "situation", "reason": "Use the established neutral possible-state term."},
+    {"from": "telis", "to": "goal_direction", "reason": "Separate the direction from the situation and the result."},
+    {"from": "krin", "to": "satisfaction_criteria", "reason": "Expose the verification contract."},
+    {"from": "apor", "to": "unresolved_meaning", "reason": "Expose the semantic gap without a coined spelling."},
+    {"from": "phain", "to": "structured_observation", "reason": "Separate an observation from evidence and satisfaction."},
+    {"from": "kine", "to": "reach", "reason": "Use a short ordinary direction word."},
+    {"from": "mene", "to": "maintain", "reason": "Use a conventional continuity verb."},
+    {"from": "agno", "to": "undetermined", "reason": "Use the ordinary result word for insufficient evidence."},
+    {"from": "aseme", "to": "no_allowed_projection", "reason": "State the precise semantic failure instead of another coined label."},
+    {"from": "interrupted", "to": "stopped", "reason": "Avoid implying an external interrupt when any bounded stop condition may apply."},
+    {"from": "grant/deny/defer", "to": "allowed/denied/pending", "reason": "Avoid SQL GRANT and Go/Swift defer keyword collisions and distinguish an unresolved authorization from a final deferred decision."},
+    {"from": "fixed/elapsed", "to": "utc_window/elapsed_window", "reason": "Avoid the C# fixed keyword and expose the time representation."},
+    {"from": "all/some", "to": "every/at_least_one", "reason": "Avoid SQL and Swift keyword collisions and make collection semantics explicit."}
+  ]
+}

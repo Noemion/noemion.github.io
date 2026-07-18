@@ -16,21 +16,21 @@ document_status: "规范源目录"
 | 规范 | 版本 | 状态 | 已覆盖 | 明确未覆盖 |
 | --- | --- | --- | --- | --- |
 | [`endem-core.md`](https://noemion.github.io/spec/endem-core.html) | `0.1.0-draft` | 通用内容标准草案；已接受语义与规范分层的条款化表达 | Endem 最小性、六个语义面、内容 Profile、分层符合性、事态与方向分离、单变量量化、测量阈值、复合判据、未知状态、确定性、安全读取、身份分层与验证责任 | 量化、测量与组合物理字段、嵌套或多变量量化、条件适用性、时间、求值、摘要与签名物理 Profile |
-| [`endem-format.md`](https://noemion.github.io/spec/endem-format.html) | `0.1.0-draft` | 已采用的实验性容器草案；尚非稳定 ABI | 固定前导、定宽目录、确定性 CBOR、END-P0 结构实验与 END-P1 封闭内容 Profile | coherent/attested、签名、压缩、Synem 和跨版本承诺 |
-| [`endem-source-manifest.md`](https://noemion.github.io/spec/endem-source-manifest.html) | `0.1.0-draft` | 实验性 Ktisor 输入；正式来源语言出现后删除 | UTF-8 逐行指令、转义、基数、授权边界和 END-P1 映射 | 注释元数据、包含、模块、量化、时间、求值语言和兼容承诺 |
-| [`synem-core.md`](https://noemion.github.io/spec/synem-core.html) | `0.1.0-draft` | 草案；已接受组合闭包边界的第一份条款化表达 | 完整闭包、精确绑定、有限无环、权限交集、成员结果分离与会话激活 | 物理容器、版本范围语法、符号、调度、远程仓库和稳定 ABI |
-| [`dromen-core.md`](https://noemion.github.io/spec/dromen-core.html) | `0.1.0-draft` | 草案；已接受一次会话契约的第一份条款化表达 | 精确主体、政策与环境绑定、能力和预算求交、秘密外置、观察责任、只读失效与销毁 | 运行 API、沙箱、凭据代理、事件编码、恢复策略和组件实现；永远不建立 Dromen 文件 |
-| [`iknem-core.md`](https://noemion.github.io/spec/iknem-core.html) | `0.1.0-draft` | 草案；已接受证据与评估边界的第一份条款化表达 | 主体范围、溯源、phain 对齐、证据类别、完整性、有效性、覆盖、决定分离与最小披露 | 物理容器、签名算法、透明日志、撤销分发、时钟归并、隐私策略和稳定 ABI |
+| [`endem-format.md`](https://noemion.github.io/spec/endem-format.html) | `0.1.0-draft` | 已采用的实验性容器草案；尚非稳定 ABI | 固定前导、定宽目录、确定性 CBOR、END-P0 结构实验与 END-P2 封闭内容 Profile | resolved/attested、签名、压缩、Endem closure 和跨版本承诺 |
+| [`endem-source-manifest.md`](https://noemion.github.io/spec/endem-source-manifest.html) | `0.1.0-draft` | 实验性 deterministic producer 输入；正式来源语言出现后删除 | UTF-8 逐行指令、转义、基数、授权边界和 END-P2 映射 | 注释元数据、包含、模块、量化、时间、求值语言和兼容承诺 |
+| [`endem-closure-core.md`](https://noemion.github.io/spec/endem-closure-core.html) | `0.1.0-draft` | 草案；已接受组合闭包边界的第一份条款化表达 | 完整闭包、精确绑定、有限无环、权限交集、成员结果分离与会话激活 | 物理容器、版本范围语法、符号、调度、远程仓库和稳定 ABI |
+| [`session-contract-core.md`](https://noemion.github.io/spec/session-contract-core.html) | `0.1.0-draft` | 草案；已接受一次会话契约的第一份条款化表达 | 精确主体、政策与环境绑定、能力和预算求交、秘密外置、观察责任、只读失效与销毁 | 运行 API、沙箱、凭据代理、事件编码、恢复策略和组件实现；永远不建立 session contract 文件 |
+| [`evidence-entry-core.md`](https://noemion.github.io/spec/evidence-entry-core.html) | `0.1.0-draft` | 草案；已接受证据与评估边界的第一份条款化表达 | 主体范围、溯源、structured_observation 对齐、证据类别、完整性、有效性、覆盖、决定分离与最小披露 | 物理容器、签名算法、透明日志、撤销分发、时钟归并、隐私策略和稳定 ABI |
 | [`adapter-core.md`](https://noemion.github.io/spec/adapter-core.html) | `0.1.0-draft` | 草案；已接受外部协议适配边界的第一份条款化表达 | 版本、对端、能力、调用、映射、状态、产物、错误、取消、重试、交付与安全边界 | 具体协议 Profile、适配器 API、物理字段、凭据代理、事件存储和组件实现 |
 | [`identity-core.md`](https://noemion.github.io/spec/identity-core.html) | `0.1.0-draft` | 草案；已接受跨制品精确身份与签名边界的第一份条款化表达 | 身份域、精确字节、不可变引用、算法政策、短显示、签名陈述、验证包络、权威、截止点、可复现性与派生关系 | 发行算法、摘要语法、签名物理 Profile、证书、透明日志、撤销分发、Semantic Key 和组件实现 |
 | [`text-identifier-core.md`](https://noemion.github.io/spec/text-identifier-core.html) | `0.1.0-draft` | 草案；已接受跨制品文本与标识符边界的第一份条款化表达 | 文本槽、严格 UTF-8、来源溯源、ASCII 标识符、规范化、比较、范围、双向显示、隐藏字符、元数据、模型输入与输出视图 | Unicode 标识符、来源重写、分词、搜索排序、tokenizer 协议、原始字节字段和组件实现 |
 | [`authority-core.md`](https://noemion.github.io/spec/authority-core.html) | `0.1.0-draft` | 草案；已接受跨制品权威与授权决定边界的第一份条款化表达 | 权威语境、主体资格、封闭范围、语义授权、委托、同意、多人决定、时效、重放、能力交集与结果分离 | 权威目录、角色与政策语言、物理编码、同意 UI Profile、凭据、撤销分发和组件实现 |
 
-[`endem-threat-model.md`](https://noemion.github.io/spec/endem-threat-model.html) 把单个 Endem 的不可信输入与失败责任映射到规范条款；[`synem-threat-model.md`](https://noemion.github.io/spec/synem-threat-model.html) 单独处理依赖替换、闭包截断、循环、权限放大、结果洗白与激活竞态；[`dromen-threat-model.md`](https://noemion.github.io/spec/dromen-threat-model.html) 处理主体替换、陈旧政策、环境漂移、能力放大、秘密持久化、预算逃逸和会话复活；[`iknem-threat-model.md`](https://noemion.github.io/spec/iknem-threat-model.html) 处理范围漂白、循环自证、观察升级、撤销失明、覆盖伪造、决定越权和泄密。[`profiles/end-p0.json`](profiles/end-p0.json) 给出第一组跨实现实验的有限上限；这些数值不是生产规模证明，提高时必须采用新的 Profile 身份。
+[`endem-threat-model.md`](https://noemion.github.io/spec/endem-threat-model.html) 把单个 Endem 的不可信输入与失败责任映射到规范条款；[`endem-closure-threat-model.md`](https://noemion.github.io/spec/endem-closure-threat-model.html) 单独处理依赖替换、闭包截断、循环、权限放大、结果洗白与激活竞态；[`session-contract-threat-model.md`](https://noemion.github.io/spec/session-contract-threat-model.html) 处理主体替换、陈旧政策、环境漂移、能力放大、秘密持久化、预算逃逸和会话复活；[`evidence-entry-threat-model.md`](https://noemion.github.io/spec/evidence-entry-threat-model.html) 处理范围漂白、循环自证、观察升级、撤销失明、覆盖伪造、决定越权和泄密。[`profiles/end-p0.json`](profiles/end-p0.json) 给出第一组跨实现实验的有限上限；这些数值不是生产规模证明，提高时必须采用新的 Profile 身份。
 
 [`diagnostics-core.md`](https://noemion.github.io/spec/diagnostics-core.html) 定义跨对象诊断内容边界，[`diagnostic-catalog.md`](https://noemion.github.io/spec/diagnostic-catalog.html) 登记草案机器码。[`registry.json`](registry.json) 是机器可读的规范、术语、条款、威胁、成熟度与验证登记。`../vectors/semantic/` 保存 JSON 语义外壳；`../vectors/diagnostics/` 保存诊断资料一致性提案；`../vectors/wire/` 保存真实字节的十六进制表达。这些向量都不表示组件已经实现。
 
-[`adapter-threat-model.md`](https://noemion.github.io/spec/adapter-threat-model.html) 与 [`adapter-scenarios.md`](https://noemion.github.io/spec/adapter-scenarios.html) 分别保存外部协议适配威胁和非规范设计场景。`../vectors/adapters/cases.json` 保存 ADP-CORE 的提案向量；`../tests/adapter_vector_test.py` 只检查十二条抽象规则，不实现 MCP、A2A、HTTP、SDK、凭据、重试、Webhook、Drasor 或运行时。精确场景与向量范围以对应源文件和测试输出为准。
+[`adapter-threat-model.md`](https://noemion.github.io/spec/adapter-threat-model.html) 与 [`adapter-scenarios.md`](https://noemion.github.io/spec/adapter-scenarios.html) 分别保存外部协议适配威胁和非规范设计场景。`../vectors/adapters/cases.json` 保存 ADP-CORE 的提案向量；`../tests/adapter_vector_test.py` 只检查十二条抽象规则，不实现 MCP、A2A、HTTP、SDK、凭据、重试、Webhook、bounded runner 或运行时。精确场景与向量范围以对应源文件和测试输出为准。
 
 [`identity-threat-model.md`](https://noemion.github.io/spec/identity-threat-model.html) 与 [`identity-scenarios.md`](https://noemion.github.io/spec/identity-scenarios.html) 分别保存精确身份与签名威胁和十五个非规范设计场景。`../vectors/identity/cases.json` 保存 ID-CORE 的二十四个提案向量；`../tests/identity_vector_test.py` 只检查十二条抽象规则，不实现摘要器、签名器、验证器、证书、透明日志、撤销分发、可复现构建或发布系统。
 
@@ -42,25 +42,25 @@ document_status: "规范源目录"
 
 [`gnu-elf-applicability-proposal.md`](https://noemion.github.io/spec/gnu-elf-applicability-proposal.html) 把 ELF 与 GNU Binutils 的 Section/Segment、符号、重定位、链接脚本、形成映射、裁剪、调试分离、Build ID、独立读取和 BFD 信息损失逐项映射到现有 Noemion 责任。它是非规范研究资料，不创建“自然语言 ELF”、新制品、格式、命令或组件，也不进入 `registry.json`。未来只有在真实生产者、消费者、失败责任、反例和正反向量齐备后，相关机制才可以提出 ADR。
 
-[`planning-and-replanning-proposal.md`](https://noemion.github.io/spec/planning-and-replanning-proposal.html) 研究 Endem/Synem 目标、Dromen 会话边界、可变计划、外部 Task、行动轨迹、Iknem 与最终决定怎样保持分离。它用 GNU Make 的 target/prerequisite/recipe 分离、ReAct、A2A 1.0.0、MCP experimental Tasks 和 OpenAI Agents SDK 核对现实 Agent 工作流，但不创建计划制品、计划格式、计划命令、计划组件或 `PLAN-CORE`，也不进入 `registry.json`。当前首选是把未来唯一义务归还现有 END、SYN、DRO、IKN、AUT、ADP、DIA 与 TEXT-IDENTIFIER 责任。
+[`planning-and-replanning-proposal.md`](https://noemion.github.io/spec/planning-and-replanning-proposal.html) 研究 Endem/Endem closure 目标、session contract 会话边界、可变计划、外部 Task、行动轨迹、evidence entry 与最终决定怎样保持分离。它用 GNU Make 的 target/prerequisite/recipe 分离、ReAct、A2A 1.0.0、MCP experimental Tasks 和 OpenAI Agents SDK 核对现实 Agent 工作流，但不创建计划制品、计划格式、计划命令、计划组件或 `PLAN-CORE`，也不进入 `registry.json`。当前首选是把未来唯一义务归还现有 END、SYN、DRO、IKN、AUT、ADP、DIA 与 TEXT-IDENTIFIER 责任。
 
 [`semantic-equivalence-and-migration-proposal.md`](https://noemion.github.io/spec/semantic-equivalence-and-migration-proposal.html) 研究精确身份、封闭结构同构、有范围观察等价、版本化迁移、强化/弱化和模型相似度怎样分开。它用 W3C RDFC-1.0、RFC 8785、Unicode UAX #15、YANG 更新规则、GNU BFD/objcopy、Sentence-BERT、LLM-as-a-Judge 与 NIST AI 800-3 检查规范化和模型判断的适用域。它不创建等价制品、迁移格式、Semantic Key、命令、组件或 CORE，也不进入 `registry.json`；当前首选是把未来唯一义务归还现有 ID、END、SYN、TEXT-IDENTIFIER、AUT、IKN、ADP、DIA 与 DRO 责任。
 
-[`state-change-and-causal-attribution-proposal.md`](https://noemion.github.io/spec/state-change-and-causal-attribution-proposal.html) 研究 `kine`、终态满足、动作发生、状态转变、因果归因、授权责任与最终决定怎样分开。它用 GNU Make、Kubernetes 控制器、W3C PROV、CloudEvents、OpenTelemetry、RFC 9110、ReAct 与 A2A 检查现实执行边界。它不改写 END-TEL-001，不创建因果制品、动作格式、命令、组件或 CORE，也不进入 `registry.json`；当前建议把 `kine` 理解为目标方向，强行动或因果主张必须由结构和有范围证据显示。
+[`state-change-and-causal-attribution-proposal.md`](https://noemion.github.io/spec/state-change-and-causal-attribution-proposal.html) 研究 `reach`、终态满足、动作发生、状态转变、因果归因、授权责任与最终决定怎样分开。它用 GNU Make、Kubernetes 控制器、W3C PROV、CloudEvents、OpenTelemetry、RFC 9110、ReAct 与 A2A 检查现实执行边界。它不改写 END-DIRECTION-001，不创建因果制品、动作格式、命令、组件或 CORE，也不进入 `registry.json`；当前建议把 `reach` 理解为目标方向，强行动或因果主张必须由结构和有范围证据显示。
 
-[`telis-release-terms-proposal.md`](https://noemion.github.io/spec/telis-release-terms-proposal.html) 分开 `telis` 已接受的两个目标方向与尚未通过的发行拼写。权威词典、GNU Names 原则和职责透明度已经足以排除 `kine/mene` 作为首次正式发行拼写；现行规范值暂不改变，`reach/maintain` 只取得进入独立人类朗读、听写、职责匹配和反例验证的资格。提案不是 ADR、CORE、Profile 或登记项，不建立别名，也不提前改写 END-TEL-001。
+[`goal_direction-release-terms-proposal.md`](https://noemion.github.io/spec/goal_direction-release-terms-proposal.html) 分开 `goal_direction` 已接受的两个目标方向与尚未通过的发行拼写。权威词典、GNU Names 原则和职责透明度已经足以排除 `reach/maintain` 作为首次正式发行拼写；现行规范值暂不改变，`reach/maintain` 只取得进入独立人类朗读、听写、职责匹配和反例验证的资格。提案不是 ADR、CORE、Profile 或登记项，不建立别名，也不提前改写 END-DIRECTION-001。
 
-[`release-terminology-simplification-proposal.md`](https://noemion.github.io/spec/release-terminology-simplification-proposal.html) 先审查对象、角色和动作是否真的需要专名，再比较 Endem closure、session contract、scoped evidence record、deterministic producer、independent inspector、bounded runner 与 `form/check/compose/inspect/run`。它保留现行职责、结果域、权限和测试边界，不进入 `registry.json`，也不提前修改 SYN-CORE、DRO-CORE、IKN-CORE、字段、路由或 CLI；接受方向后仍须经过独立人类验证和单独迁移 ADR。
+[`release-terminology-simplification-proposal.md`](https://noemion.github.io/spec/release-terminology-simplification-proposal.html) 先审查对象、角色和动作是否真的需要专名，再比较 Endem closure、session contract、scoped evidence record、deterministic producer、independent inspector、bounded runner 与 `form/check/compose/inspect/run`。它保留现行职责、结果域、权限和测试边界，不进入 `registry.json`，也不提前修改 CLOSURE-CORE、SESSION-CORE、EVIDENCE-CORE、字段、路由或 CLI；接受方向后仍须经过独立人类验证和单独迁移 ADR。
 
-[`semantic-facet-terminology-proposal.md`](https://noemion.github.io/spec/semantic-facet-terminology-proposal.html) 把同一必要性门禁应用到 `rhem/semion/skena/telis/krin/apor/phain`。它建议保留全部语义与观察边界，同时用 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation` 进入人类验证。提案不进入 `registry.json`，不提前修改 END-CORE、END-FMT、END-P1、来源清单、诊断或向量；即使数字记录布局不变，未来迁移也必须显式处理新规范与 Profile 身份。
+[`semantic-facet-terminology-proposal.md`](https://noemion.github.io/spec/semantic-facet-terminology-proposal.html) 把同一必要性门禁应用到 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation`。它建议保留全部语义与观察边界，同时用 `source_expression/meaning_projection/situation/goal_direction/satisfaction_criteria/unresolved_meaning/structured_observation` 进入人类验证。提案不进入 `registry.json`，不提前修改 END-CORE、END-FMT、END-P2、来源清单、诊断或向量；即使数字记录布局不变，未来迁移也必须显式处理新规范与 Profile 身份。
 
-[`lifecycle-and-result-terminology-proposal.md`](https://noemion.github.io/spec/lifecycle-and-result-terminology-proposal.html) 审查 `nascent/coherent/attested` 与各结果词。它判定 `attested` 不应继续把外部签名或证明关系伪装成内容自身状态，并把迁移拆成对象边界修正与发行命名验证两条轴。前者设计精确内容、外部陈述集合、逐项验证、截止点、撤销和依赖方政策的显式关系；后者才比较 `formed/resolved/undetermined/no_allowed_projection/stopped`，仍须人类证据。提案不进入 `registry.json`，也不提前改写 END-CORE、DRO-CORE 或向量。
+[`lifecycle-and-result-terminology-proposal.md`](https://noemion.github.io/spec/lifecycle-and-result-terminology-proposal.html) 审查 `formed/resolved/attested` 与各结果词。它判定 `attested` 不应继续把外部签名或证明关系伪装成内容自身状态，并把迁移拆成对象边界修正与发行命名验证两条轴。前者设计精确内容、外部陈述集合、逐项验证、截止点、撤销和依赖方政策的显式关系；后者才比较 `formed/resolved/undetermined/no_allowed_projection/stopped`，仍须人类证据。提案不进入 `registry.json`，也不提前改写 END-CORE、SESSION-CORE 或向量。
 
 [`preview-simulation-and-approval-proposal.md`](https://noemion.github.io/spec/preview-simulation-and-approval-proposal.html) 研究预览、dry-run、模拟、授权、执行尝试、事后观察、满足与最终决定怎样保持分离。它用 GNU Make、MCP 2025-11-25、A2A 1.0.0、OpenAI Agents SDK 与 NIST AI 600-1 检查当前 Agent 审批流程。它不创建预览制品、模拟格式、批准结果域、命令、组件或 CORE，也不进入 `registry.json`；当前首选是把显示、授权、会话漂移、外部调用、观察和满足义务归还现有 TEXT-IDENTIFIER、AUT、DRO、ADP、IKN、ID、END 与 DIA 责任。
 
 [`memory-checkpoint-and-resumption-proposal.md`](https://noemion.github.io/spec/memory-checkpoint-and-resumption-proposal.html) 研究九类状态怎样保持分离，包括会话历史、跨运行记忆或提炼指导、上下文压缩、计划检查点、外部 Task 句柄、持久工作区、恢复、重放与回滚。它用 OpenAI Agents SDK 对话状态策略、OpenAI Sandbox Agents 跨运行记忆、MCP 当前版及发布候选、A2A 1.0、GNU Make 与 GNU Guix 核对现实持久状态机制。它不创建记忆制品、检查点格式、恢复命令、组件或 CORE，也不进入 `registry.json`；当前首选是把变换、身份、新会话、外部任务、授权消费、证据和诊断义务归还现有 TEXT-IDENTIFIER、ID、DRO、ADP、AUT、IKN、DIA、END 与 SYN 责任。
 
-[`capability-discovery-and-negotiation-proposal.md`](https://noemion.github.io/spec/capability-discovery-and-negotiation-proposal.html) 研究能力声明、协议协商、授权决定、Dromen 会话上限、即时可调用性与调用事实怎样保持分离。它用 MCP 2025-11-25、A2A 1.0、RFC 8707 与 GNU Autoconf 2.73 核对动态工具列表、受众、scope、schema 漂移和特性探测。它不创建 `CAP-CORE`、能力制品、目录格式、命令、组件或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 ADP、AUT、DRO、DIA、IKN、ID、TEXT-IDENTIFIER 与 END 责任。
+[`capability-discovery-and-negotiation-proposal.md`](https://noemion.github.io/spec/capability-discovery-and-negotiation-proposal.html) 研究能力声明、协议协商、授权决定、session contract 会话上限、即时可调用性与调用事实怎样保持分离。它用 MCP 2025-11-25、A2A 1.0、RFC 8707 与 GNU Autoconf 2.73 核对动态工具列表、受众、scope、schema 漂移和特性探测。它不创建 `CAP-CORE`、能力制品、目录格式、命令、组件或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 ADP、AUT、DRO、DIA、IKN、ID、TEXT-IDENTIFIER 与 END 责任。
 
 [`software-agent-identity-and-accountability-boundaries-proposal.md`](https://noemion.github.io/spec/software-agent-identity-and-accountability-boundaries-proposal.html) 研究模型、Agent 定义、部署、工作负载、运行实例、会话、凭据、主体委托与一次动作怎样保持分离。它用 NIST 2026 Agent 身份授权概念工作、SPIFFE、RFC 8693、W3C PROV、MCP 企业管理授权与 GNU Coreutils `id` 核对身份、认证、授权和责任链。它不创建 Agent 身份 CORE、制品、目录、服务、命令、组件或新专名，也不进入 `registry.json`；当前首选是把唯一义务归还现有 ID、AUT、DRO、ADP、IKN、DIA 与 TEXT-IDENTIFIER 责任。
 
@@ -80,33 +80,33 @@ document_status: "规范源目录"
 
 [`endem-scenarios.md`](https://noemion.github.io/spec/endem-scenarios.html) 是非规范性的自然语言设计审查语料。它用三十个场景检查达到成立、持续保持、否定事态、指称歧义、观察不足、求值故障、授权不足、多根拆分、结果域、时间范围、缺席推断、量化范围、测量阈值、复合判断以及内容与授权伴随关系是否能被现行体系解释。它不规定语法或字节，也不是可执行测试；案例暴露的缺口必须回到 ADR、规范条款或开放问题。
 
-[`synem-scenarios.md`](https://noemion.github.io/spec/synem-scenarios.html) 用十个非规范场景检查闭包、绑定、可选依赖、权限、成员结果和激活边界。它同样不是语法、解析器或组件证据。
+[`endem-closure-scenarios.md`](https://noemion.github.io/spec/endem-closure-scenarios.html) 用十个非规范场景检查闭包、绑定、可选依赖、权限、成员结果和激活边界。它同样不是语法、解析器或组件证据。
 
-[`iknem-scenarios.md`](https://noemion.github.io/spec/iknem-scenarios.html) 用十四个非规范场景检查证据范围、溯源、观察、类别、有效性、覆盖、决定和最小披露。它不是 Iknem 格式、采集器、验证器或决定引擎。
+[`evidence-entry-scenarios.md`](https://noemion.github.io/spec/evidence-entry-scenarios.html) 用十四个非规范场景检查证据范围、溯源、观察、类别、有效性、覆盖、决定和最小披露。它不是 evidence entry 格式、采集器、验证器或决定引擎。
 
-[`dromen-scenarios.md`](https://noemion.github.io/spec/dromen-scenarios.html) 用十五个非规范场景检查会话主体、政策、环境、能力、秘密、预算、激活、观察、只读失效和销毁。它不是 Dromen 格式、装载器、沙箱、凭据代理或运行时。
+[`session-contract-scenarios.md`](https://noemion.github.io/spec/session-contract-scenarios.html) 用十五个非规范场景检查会话主体、政策、环境、能力、秘密、预算、激活、观察、只读失效和销毁。它不是 session contract 格式、装载器、沙箱、凭据代理或运行时。
 
-`../vectors/result-domains/cases.json` 保存 ADR-0015 的十二个正反提案向量；`../tests/result_domain_vector_test.py` 只执行结果域约束，不实现 Drasor、求值器或决定引擎。向量通过只能证明当前矩阵和条款一致，不能证明运行组件存在。
+`../vectors/result-domains/cases.json` 保存 ADR-0015 的十二个正反提案向量；`../tests/result_domain_vector_test.py` 只执行结果域约束，不实现 bounded runner、求值器或决定引擎。向量通过只能证明当前矩阵和条款一致，不能证明运行组件存在。
 
-`../vectors/mene/cases.json` 保存 ADR-0016 的十二个时间与连续性提案向量；`../tests/mene_vector_test.py` 只执行 fixed/elapsed 范围、strict/budgeted 政策和覆盖分类，不实现时钟、监控器、Drasor 或求值器。
+`../vectors/time-scope/cases.json` 保存 ADR-0016 的十二个时间与连续性提案向量；`../tests/time_scope_vector_test.py` 只执行 fixed/elapsed 范围、strict/budgeted 政策和覆盖分类，不实现时钟、监控器、bounded runner 或求值器。
 
-`../vectors/negation/cases.json` 保存 ADR-0017 的十二个否定与缺席提案向量；`../tests/negation_vector_test.py` 只执行显式负观察、空结果、封闭范围、正反例和观察故障分类，不实现日志收集器、Drasor 或求值器。
+`../vectors/negation/cases.json` 保存 ADR-0017 的十二个否定与缺席提案向量；`../tests/negation_vector_test.py` 只执行显式负观察、空结果、封闭范围、正反例和观察故障分类，不实现日志收集器、bounded runner 或求值器。
 
-`../vectors/quantification/cases.json` 保存 ADR-0018 的十二个量化与成员资格提案向量；`../tests/quantification_vector_test.py` 只检查成员范围、空集合、不同成员计数和决定性聚合，不实现 Ktisor、Drasor、成员目录或求值器。
+`../vectors/quantification/cases.json` 保存 ADR-0018 的十二个量化与成员资格提案向量；`../tests/quantification_vector_test.py` 只检查成员范围、空集合、不同成员计数和决定性聚合，不实现 deterministic producer、bounded runner、成员目录或求值器。
 
-`../vectors/measurement/cases.json` 保存 ADR-0019 的十二个测量与阈值提案向量；`../tests/measurement_vector_test.py` 只检查构念、总体、单位、程序、聚合器、不确定区间与阈值分类，不实现采集器、统计引擎、Drasor 或求值器。
+`../vectors/measurement/cases.json` 保存 ADR-0019 的十二个测量与阈值提案向量；`../tests/measurement_vector_test.py` 只检查构念、总体、单位、程序、聚合器、不确定区间与阈值分类，不实现采集器、统计引擎、bounded runner 或求值器。
 
-`../vectors/composition/cases.json` 保存 ADR-0020 的十二个复合事态与判据提案向量；`../tests/composition_vector_test.py` 只检查单根边界、有限无环拓扑、叶对齐、四结果传播和决定性短路，不实现解析器、Drasor、运行时或求值器。
+`../vectors/composition/cases.json` 保存 ADR-0020 的十二个复合事态与判据提案向量；`../tests/composition_vector_test.py` 只检查单根边界、有限无环拓扑、叶对齐、四结果传播和决定性短路，不实现解析器、bounded runner、运行时或求值器。
 
-`../vectors/synem/cases.json` 保存 ADR-0021 的十二个闭包与条件激活提案向量；`../tests/synem_vector_test.py` 只检查六条 SYN-CORE 规则，不实现解析器、Pleko、Drasor、运行时或求值器。
+`../vectors/endem-closure/cases.json` 保存 ADR-0021 的十二个闭包与条件激活提案向量；`../tests/endem_closure_vector_test.py` 只检查六条 CLOSURE-CORE 规则，不实现解析器、compose、bounded runner、运行时或求值器。
 
-`../vectors/iknem/cases.json` 保存 ADR-0022 的十五个证据与评估提案向量；`../tests/iknem_vector_test.py` 只检查九条 IKN-CORE 规则，不实现采集器、验证器、归并器、撤销服务、决定引擎或运行时。
+`../vectors/evidence-entry/cases.json` 保存 ADR-0022 的十五个证据与评估提案向量；`../tests/evidence_entry_vector_test.py` 只检查九条 EVIDENCE-CORE 规则，不实现采集器、验证器、归并器、撤销服务、决定引擎或运行时。
 
-`../vectors/dromen/cases.json` 保存 ADR-0024 的二十个会话契约提案向量；`../tests/dromen_vector_test.py` 只检查十条 DRO-CORE 规则，不实现装载器、沙箱、凭据代理、Drasor、事件系统或运行时。
+`../vectors/session-contract/cases.json` 保存 ADR-0024 的二十个会话契约提案向量；`../tests/session_contract_vector_test.py` 只检查十条 SESSION-CORE 规则，不实现装载器、沙箱、凭据代理、bounded runner、事件系统或运行时。
 
 `../vectors/diagnostics/cases.json` 保存 ADR-0025 的二十个结构化诊断提案向量；`../tests/diagnostic_vector_test.py` 只检查十条 DIA-CORE 规则，不实现诊断生产器、渲染器、协议适配器、重试引擎或 CLI。
 
-`registry.json` 还登记非规范实验及其决定链。P0-LANG-001 的协议与结果位于 `../experiments/p0-language/`；它支持 ADR-0012 为未来 Ktisor 保留条件式 Rust 评审基线，但不会改变 END-CORE 或 END-FMT 的条款含义，也不把原型登记为生产实现。
+`registry.json` 还登记非规范实验及其决定链。P0-LANG-001 的协议与结果位于 `../experiments/p0-language/`；它支持 ADR-0012 为未来 deterministic producer 保留条件式 Rust 评审基线，但不会改变 END-CORE 或 END-FMT 的条款含义，也不把原型登记为生产实现。
 
 ## 规范强度
 

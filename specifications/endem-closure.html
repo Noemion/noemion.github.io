@@ -1,0 +1,70 @@
+---
+layout: default
+title: "Endem closure · 组合闭包规范"
+page_role: "content"
+footer_text: "Noemion · Endem closure"
+permalink: "/specifications/endem-closure.html"
+summary: "说明多个能够独立失败的目标怎样固定为完整依赖集合，并确保运行时不能换入其他对象或扩大权限。"
+---
+<main id="main-content" tabindex="-1">
+  <nav class="breadcrumbs" aria-label="面包屑"><a href="../index.html">项目</a><span aria-hidden="true">/</span><a href="index.html">规范参考指南</a><span aria-hidden="true">/</span><span>Endem closure</span></nav>
+  <header class="content-introduction"><h1>组合闭包<br>Endem closure</h1><p>当多个目标能够独立失败，却必须作为同一个完整集合交付时，固定全部成员、依赖和权限边界，防止运行时换入其他对象。</p><div class="badges"><span class="badge">CLOSURE-CORE 0.1.0-draft</span><span class="badge">至少两个目标</span><span class="badge">尚无物理格式</span><span class="badge">尚未实现</span></div></header>
+
+  <section class="content-wide">
+    <h2>先判断它是不是两个目标</h2>
+    <p class="lead">一次依赖升级既要产生使用获准依赖的发布制品，也要让部署后的服务通过健康检查。两者能够分别满足、拒绝和重试，因此各自形成 Endem；组合闭包（设计阶段名称 Endem closure）再把它们和全部必需依赖固定为一个交付范围。</p>
+    <div class="flow"><div class="step">依赖制品 Endem</div><div class="step">服务健康 Endem</div><div class="step">展开必需依赖</div><div class="step">固定成员与关系</div><div class="step">形成 Endem closure</div></div>
+    <div class="table-wrap"><table><thead><tr><th>先问什么</th><th>使用 Endem closure</th><th>继续使用一个 Endem</th></tr></thead><tbody>
+      <tr><td>两个终态能否独立失败或接受</td><td>能；每个终态保留自己的主体、判据和决定</td><td>不能；它们只是同一不可分终态中的多个关系</td></tr>
+      <tr><td>下游是否需要一个固定交付集合</td><td>需要；消费者必须知道完整成员和依赖关系</td><td>不需要；单一目标已经自包含</td></tr>
+      <tr><td>缺少一个成员时会发生什么</td><td>整个闭包停止形成，不能运行时补入</td><td>按 Endem 自己的形成或判断规则失败</td></tr>
+    </tbody></table></div>
+    <p class="callout"><strong>职责边界：</strong>Endem closure 负责组合多个目标，不把文件列表、目录扫描、模型记忆、对话上下文或动态工具清单改称目标闭包。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>按四步形成固定闭包</h2>
+    <div class="table-wrap"><table><thead><tr><th>步骤与条款</th><th>开发者必须固定</th><th>停止条件</th></tr></thead><tbody>
+      <tr><td>1. 展开闭包<br><code>CLOSURE-CLS-001</code></td><td>至少两个精确 Endem，以及从种子成员可达的全部必需依赖</td><td>单成员、截断闭包、重复伪装或闭包外仍有必需引用时原子拒绝</td></tr>
+      <tr><td>2. 解析引用<br><code>CLOSURE-RES-001</code></td><td>在局部命名空间登记导入、导出、必需依赖和可选依赖；每个必需引用唯一绑定内容身份、规范、Profile 与解析依据</td><td>名称、路径、版本范围、“最新版本”、搜索顺序或模型推荐不能唯一决定对象时拒绝</td></tr>
+      <tr><td>3. 检查关系<br><code>CLOSURE-GRF-001</code></td><td>有限无环的依赖图、显式资源预算，以及每个可选项缺失时的可观察行为</td><td>循环、无界遍历，或可选项缺失会删减判据、语义或权限限制时拒绝</td></tr>
+      <tr><td>4. 收窄权限<br><code>CLOSURE-AUT-001</code></td><td>成员上限、组合策略与会话政策的交集；成员需求只作为请求</td><td>采用权限并集、继承最宽成员权限或由激活直接创建能力时拒绝</td></tr>
+    </tbody></table></div>
+    <p>形成结果保存成员集、关系图、精确绑定和解析依据。这不是物理格式；CLOSURE-CORE 当前没有定义清单语法、文件扩展名、魔数、稳定 ABI、执行顺序或编码。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>成员结果与会话激活不能合并</h2>
+    <div class="table-wrap"><table><thead><tr><th>问题</th><th>应当保存什么</th><th>不能推出什么</th></tr></thead><tbody>
+      <tr><td>一个成员得到结果<br><code>CLOSURE-STA-001</code></td><td>该 Endem 自己的 <code>met / unmet / undetermined / fault</code>、决定和依据</td><td>另一个成员或整个 Endem closure 自动 <code>met</code>、<code>accepted</code> 或 <code>completed</code></td></tr>
+      <tr><td>需要闭包级决定</td><td>另行具名的策略、成员范围、截止点、决定权威和全部成员依据</td><td>签名数量、证据数量或会话成功可以替代决定</td></tr>
+      <tr><td>形成条件决定成员是否存在</td><td>在闭包身份形成前解析条件；成员变化产生不同闭包身份</td><td>会话开始后再把新成员加入原闭包</td></tr>
+      <tr><td>会话条件决定成员是否生效<br><code>CLOSURE-ACT-001</code></td><td>固定成员、精确结果事件、结果域、期望值、截止点和授权策略；状态仅为 <code>active / inactive / unresolved / error</code></td><td><code>inactive</code> 不是满足结果，<code>unresolved</code> 不是 <code>undetermined</code>，<code>error</code> 不是 <code>fault</code></td></tr>
+    </tbody></table></div>
+    <p class="callout"><strong>权限仍需单独核对：</strong>成员被激活只说明它在本次会话生效，不授予能力，也不免除策略、环境、预算和决定权威检查。激活依据撤销、过期或变化时，本次会话必须重新检查或失效。</p>
+  </section>
+
+  <section class="content-wide">
+    <h2>外部机制不能替代闭包</h2>
+    <p><strong>复核日期：</strong>2026-07-16。下列机制可以解释某一项工程纪律，但都不能直接成为 Endem closure 成员、权限或结果。</p>
+    <div class="table-wrap"><table><thead><tr><th>外部机制</th><th>可以借鉴</th><th>Noemion 仍需自己定义</th></tr></thead><tbody>
+      <tr><td><a href="https://www.gnu.org/software/make/manual/html_node/Prerequisite-Types.html">GNU make 前置条件类型</a></td><td>普通前置条件同时表达执行顺序和更新依赖；order-only 前置条件只约束顺序</td><td>目标语义、精确内容身份、授权和接受决定，不能从构建依赖推出</td></tr>
+      <tr><td><a href="https://guix.gnu.org/manual/en/guix.pdf">GNU Guix 递归归档</a></td><td><code>guix archive --export --recursive</code>把引用的传递闭包连同 store item 元数据一起导出</td><td>Endem 语义、成员权限、结果域和 Endem closure 的未来物理格式</td></tr>
+      <tr><td><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP 2025-11-25 工具发现</a></td><td><code>tools/list</code>和 <code>notifications&#47;tools&#47;list_changed</code>明确说明运行时工具集合可以变化</td><td>动态工具清单只能成为会话输入，不能改写已经形成的闭包或扩大权限</td></tr>
+      <tr><td><a href="https://a2a-protocol.org/v1.0.0/specification/">A2A 1.0 Agent Card</a></td><td>Agent Card 声明能力、技能、接口和安全要求，并可能按认证上下文提供扩展信息</td><td>远端声明不能决定本地目标成员、精确身份、行动授权或闭包级接受</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="content-wide">
+    <h2>规范来源与当前上限</h2>
+    <div class="table-wrap"><table><thead><tr><th>资料层级</th><th>当前作用</th><th>不能证明</th></tr></thead><tbody>
+      <tr><td><a href="https://noemion.github.io/spec/endem-closure-core.html">CLOSURE-CORE</a>与<a href="../architecture/adr-0021-synem-closure-and-activation.html">ADR-0021</a></td><td>定义完整闭包、精确绑定、有限图、权限交集、成员结果和激活边界</td><td>物理格式、调度器或运行组件已经存在</td></tr>
+      <tr><td><a href="https://noemion.github.io/spec/endem-closure-threat-model.html">威胁模型</a>与<a href="https://noemion.github.io/spec/endem-closure-scenarios.html">非规范场景</a></td><td>检查环境替换、闭包截断、权限放大、结果洗白和激活竞态</td><td>案例本身成为规范条款或安全证明</td></tr>
+      <tr><td><a href="https://github.com/Noemion/noemion.github.io/tree/main/vectors/endem-closure">Endem closure 提案向量</a></td><td>执行允许分类与确定拒绝的资料一致性检查</td><td>解析器、形成器、independent inspector、bounded runner、远程仓库或组件符合性</td></tr>
+    </tbody></table></div>
+    <p><strong>当前策略：</strong>CLOSURE-CORE 只定义抽象组合闭包和条件激活。动态清单不得改写闭包，成员结果不得合并，激活状态不得扩大权限。</p>
+    <p><strong>名称仍在研究：</strong>Endem closure 是当前设计名称。发行拼写、读音流畅度以及与 Endem、session contract、evidence entry 的口头区分尚未经过独立人类验证；文档继续先写“组合闭包”职责。</p>
+    <p><strong>待定内容：</strong>物理容器、版本约束语法、符号与重定位模型、可选分支编码、执行顺序、并行调度、受限循环、远程对象仓库和跨会话缓存。当前尚未实现 deterministic producer、independent inspector、bounded runner、Endem closure 读取器或 CLI。</p>
+  </section>
+  <div class="next-prev"><a href="endem.html">← Endem 规范</a><a href="session-contract.html">session contract 会话契约 →</a></div>
+</main>

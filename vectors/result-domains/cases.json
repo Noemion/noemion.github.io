@@ -1,14 +1,14 @@
 {
   "vector_format": "end-core.result-domain-vector.v1",
   "spec": {"id": "END-CORE", "version": "0.1.0-draft"},
-  "description": "Normative proposal vectors for ADR-0015 result-domain separation; not Drasor or decision-engine implementation data",
+  "description": "Normative proposal vectors for ADR-0015 result-domain separation; not bounded runner or decision-engine implementation data",
   "cases": [
     {
-      "id": "RV-VALID-MET-ACCEPT-001",
+      "id": "RESULT-VALID-MET-ACCEPT-001",
       "satisfaction": "met",
-      "satisfaction_source": "krin",
+      "satisfaction_source": "satisfaction_criteria",
       "session": "completed",
-      "iknem_validity": "valid",
+      "evidence_validity": "valid",
       "coverage": "sufficient",
       "authority": "authorized",
       "authority_action": "accept",
@@ -16,11 +16,11 @@
       "expect": {"result": "accept", "clause": "END-DEC-001"}
     },
     {
-      "id": "RV-VALID-UNMET-REJECT-001",
+      "id": "RESULT-VALID-UNMET-REJECT-001",
       "satisfaction": "unmet",
-      "satisfaction_source": "krin",
+      "satisfaction_source": "satisfaction_criteria",
       "session": "completed",
-      "iknem_validity": "valid",
+      "evidence_validity": "valid",
       "coverage": "sufficient",
       "authority": "authorized",
       "authority_action": "reject",
@@ -28,35 +28,35 @@
       "expect": {"result": "accept", "clause": "END-DEC-001"}
     },
     {
-      "id": "RV-VALID-AGNO-DEFER-001",
-      "satisfaction": "agno",
-      "satisfaction_source": "krin",
+      "id": "RESULT-VALID-UNDETERMINED-DEFER-001",
+      "satisfaction": "undetermined",
+      "satisfaction_source": "satisfaction_criteria",
       "session": "completed",
-      "iknem_validity": "valid",
+      "evidence_validity": "valid",
       "coverage": "insufficient",
       "authority": "unavailable",
-      "authority_action": "defer",
+      "authority_action": "deferred",
       "proposed_decision": "deferred",
-      "expect": {"result": "accept", "clause": "END-KRN-002"}
+      "expect": {"result": "accept", "clause": "END-CRITERIA-002"}
     },
     {
-      "id": "RV-VALID-FAULT-DEFER-001",
+      "id": "RESULT-VALID-FAULT-DEFER-001",
       "satisfaction": "fault",
-      "satisfaction_source": "krin",
+      "satisfaction_source": "satisfaction_criteria",
       "session": "failed",
-      "iknem_validity": "invalid",
+      "evidence_validity": "invalid",
       "coverage": "insufficient",
       "authority": "unavailable",
-      "authority_action": "defer",
+      "authority_action": "deferred",
       "proposed_decision": "deferred",
-      "expect": {"result": "accept", "clause": "END-KRN-002"}
+      "expect": {"result": "accept", "clause": "END-CRITERIA-002"}
     },
     {
-      "id": "RV-VALID-AGNO-POLICY-REJECT-001",
-      "satisfaction": "agno",
-      "satisfaction_source": "krin",
+      "id": "RESULT-VALID-UNDETERMINED-POLICY-REJECT-001",
+      "satisfaction": "undetermined",
+      "satisfaction_source": "satisfaction_criteria",
       "session": "completed",
-      "iknem_validity": "valid",
+      "evidence_validity": "valid",
       "coverage": "insufficient",
       "authority": "authorized",
       "authority_action": "reject-inconclusive",
@@ -64,23 +64,23 @@
       "expect": {"result": "accept", "clause": "END-DEC-001"}
     },
     {
-      "id": "RV-VALID-MET-DEFER-001",
+      "id": "RESULT-VALID-MET-DEFER-001",
       "satisfaction": "met",
-      "satisfaction_source": "krin",
+      "satisfaction_source": "satisfaction_criteria",
       "session": "completed",
-      "iknem_validity": "valid",
+      "evidence_validity": "valid",
       "coverage": "sufficient",
       "authority": "authorized",
-      "authority_action": "defer",
+      "authority_action": "deferred",
       "proposed_decision": "deferred",
       "expect": {"result": "accept", "clause": "END-DEC-001"}
     },
     {
-      "id": "RV-REJECT-COMPLETED-AS-ACCEPTED-001",
+      "id": "RESULT-REJECT-COMPLETED-AS-ACCEPTED-001",
       "satisfaction": null,
       "satisfaction_source": "none",
       "session": "completed",
-      "iknem_validity": "valid",
+      "evidence_validity": "valid",
       "coverage": "sufficient",
       "authority": "authorized",
       "authority_action": "accept",
@@ -88,11 +88,11 @@
       "expect": {"result": "reject", "clause": "END-STA-002"}
     },
     {
-      "id": "RV-REJECT-SESSION-AS-SATISFACTION-001",
+      "id": "RESULT-REJECT-SESSION-AS-SATISFACTION-001",
       "satisfaction": "unmet",
       "satisfaction_source": "session",
       "session": "failed",
-      "iknem_validity": "valid",
+      "evidence_validity": "valid",
       "coverage": "sufficient",
       "authority": "authorized",
       "authority_action": "reject",
@@ -100,11 +100,11 @@
       "expect": {"result": "reject", "clause": "END-STA-002"}
     },
     {
-      "id": "RV-REJECT-EXTERNAL-AS-SATISFACTION-001",
+      "id": "RESULT-REJECT-EXTERNAL-AS-SATISFACTION-001",
       "satisfaction": "met",
       "satisfaction_source": "external-task",
       "session": "completed",
-      "iknem_validity": "valid",
+      "evidence_validity": "valid",
       "coverage": "sufficient",
       "authority": "authorized",
       "authority_action": "accept",
@@ -112,11 +112,11 @@
       "expect": {"result": "reject", "clause": "END-STA-002"}
     },
     {
-      "id": "RV-REJECT-INSUFFICIENT-AS-ACCEPTED-001",
+      "id": "RESULT-REJECT-INSUFFICIENT-AS-ACCEPTED-001",
       "satisfaction": "met",
-      "satisfaction_source": "krin",
+      "satisfaction_source": "satisfaction_criteria",
       "session": "completed",
-      "iknem_validity": "valid",
+      "evidence_validity": "valid",
       "coverage": "insufficient",
       "authority": "authorized",
       "authority_action": "accept",
@@ -124,11 +124,11 @@
       "expect": {"result": "reject", "clause": "END-DEC-001"}
     },
     {
-      "id": "RV-REJECT-REVOKED-AS-ACCEPTED-001",
+      "id": "RESULT-REJECT-REVOKED-AS-ACCEPTED-001",
       "satisfaction": "met",
-      "satisfaction_source": "krin",
+      "satisfaction_source": "satisfaction_criteria",
       "session": "completed",
-      "iknem_validity": "revoked",
+      "evidence_validity": "revoked",
       "coverage": "sufficient",
       "authority": "authorized",
       "authority_action": "accept",
@@ -136,16 +136,16 @@
       "expect": {"result": "reject", "clause": "END-DEC-001"}
     },
     {
-      "id": "RV-REJECT-AGNO-AS-ACCEPTED-001",
-      "satisfaction": "agno",
-      "satisfaction_source": "krin",
+      "id": "RESULT-REJECT-UNDETERMINED-AS-ACCEPTED-001",
+      "satisfaction": "undetermined",
+      "satisfaction_source": "satisfaction_criteria",
       "session": "completed",
-      "iknem_validity": "valid",
+      "evidence_validity": "valid",
       "coverage": "insufficient",
       "authority": "authorized",
       "authority_action": "accept",
       "proposed_decision": "accepted",
-      "expect": {"result": "reject", "clause": "END-KRN-002"}
+      "expect": {"result": "reject", "clause": "END-CRITERIA-002"}
     }
   ]
 }
